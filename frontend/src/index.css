@@ -1,0 +1,38 @@
+
+/* In your global CSS (e.g., globals.css) */
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* how its work css  */
+/* how its work css  */
+
+.custom-border {
+  border-left: 3px solid #3b82f6; /* Solid left border */
+  position: relative;
+}
+
+.custom-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 85%; 
+  height: 3px;
+  background: linear-gradient(to right, #3b82f6, transparent);
+}
+
+.custom-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20%; 
+  height: 3px;
+  background: linear-gradient(to right, #3b82f6, transparent);
+}
