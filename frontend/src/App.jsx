@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
-import about from "./pages/about";
+import About from "./pages/about";
 import Signup from "./pages/signup";
 import Login from "./pages/Signin";
 import ForgotPasswor from "./pages/ForgotPasswor";
@@ -27,7 +27,7 @@ function App() {
         <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<about/>} />
+            <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/signin" element={<Login/>} />
             <Route path="/forgot-password" element={<ForgotPasswor/>} />
