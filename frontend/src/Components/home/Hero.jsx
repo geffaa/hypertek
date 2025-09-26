@@ -18,6 +18,7 @@ export default function Hero() {
 
   return (
     <section className="w-full h-screen relative flex overflow-hidden">
+      
       {/* Background Image */}
       <div
         className="absolute inset-0 pointer-events-none bg-no-repeat bg-cover bg-top scale-x-[-1] brightness-100"
@@ -42,11 +43,17 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-[90%]">
-          <CustomButton
+         <button>
+           <CustomButton 
             text="MarketPlace"
             bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
-          />
+           
+                      />
+         </button>
+         <button>
+
           <CustomButton2 text="Download Game" bgcolor="" />
+         </button>
         </div>
       </div>
 

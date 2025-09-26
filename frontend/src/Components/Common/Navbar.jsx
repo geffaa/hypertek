@@ -5,6 +5,9 @@ import logo from "../../assets/images/logo.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
+import { FaUser } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
@@ -12,11 +15,11 @@ import XImg from "../../assets/images/skipe.png";
 import TelegramImg from "../../assets/images/telegram.png";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLogin] = useState(true);
+  const [isLoggedIn, setIsLogin] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   const shopRef = useRef(null);
   const socialRef = useRef(null);
 
@@ -31,9 +34,9 @@ export default function Navbar() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -42,7 +45,9 @@ export default function Navbar() {
       {/* Top Section */}
       <div
         className={`w-full px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between
-        ${mobileMenuOpen ? "bg-[#001554D9]" : "bg-[#001554D9] md:bg-transparent"}`}
+        ${
+          mobileMenuOpen ? "bg-[#001554D9]" : "bg-[#001554D9] md:bg-transparent"
+        }`}
       >
         {/* Left: Logo + Desktop Menu */}
         <div className="flex items-center space-x-6">
@@ -53,7 +58,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6 font-semibold relative ml-8 text-white">
             {/* Shop Dropdown - Fixed with single container */}
-            <div 
+            <div
               ref={shopRef}
               className="relative"
               onMouseEnter={() => setShopOpen(true)}
@@ -68,16 +73,16 @@ export default function Navbar() {
               <button className="flex items-center hover:text-blue-300 md:ml-16">
                 Shop <ChevronDown className="ml-1 h-4 w-4" />
               </button>
-              
+
               {/* Dropdown positioned with no gap */}
-              <div 
+              <div
                 className={`absolute top-full left-0 transition-all duration-200 ${
-                  shopOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  shopOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
-                style={{ marginTop: '0px' }} // Remove any gap
+                style={{ marginTop: "0px" }} // Remove any gap
               >
                 {shopOpen && (
-                  <div 
+                  <div
                     className="w-[746px] h-[229px] rounded-[10px] shadow-lg bg-[#001554D9] mt-2"
                     onMouseEnter={() => setShopOpen(true)}
                     onMouseLeave={() => setShopOpen(false)}
@@ -135,7 +140,7 @@ export default function Navbar() {
             </a>
 
             {/* Social Dropdown - Fixed with single container */}
-            <div 
+            <div
               ref={socialRef}
               className="relative"
               onMouseEnter={() => setSocialOpen(true)}
@@ -149,15 +154,15 @@ export default function Navbar() {
               <button className="flex items-center hover:text-blue-300">
                 Social <ChevronDown className="h-4 w-4" />
               </button>
-              
-              <div 
+
+              <div
                 className={`absolute top-full left-0 transition-all duration-200 ${
-                  socialOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  socialOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
-                style={{ marginTop: '0px' }}
+                style={{ marginTop: "0px" }}
               >
                 {socialOpen && (
-                  <div 
+                  <div
                     className="w-[115px] h-[135px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg mt-2"
                     onMouseEnter={() => setSocialOpen(true)}
                     onMouseLeave={() => setSocialOpen(false)}
@@ -183,7 +188,11 @@ export default function Navbar() {
                       rel="noreferrer"
                       className="flex items-center gap-2 px-1 w-full h-[38.18px] rounded hover:bg-white/20 cursor-pointer transition-colors"
                     >
-                      <img src={XImg} alt="X.com" className="w-[18px] h-[18px]" />
+                      <img
+                        src={XImg}
+                        alt="X.com"
+                        className="w-[18px] h-[18px]"
+                      />
                       <span className="text-white text-sm font-semibold">
                         X.com
                       </span>
@@ -241,12 +250,9 @@ export default function Navbar() {
                   className="bg-transparent outline-none text-white placeholder-white pl-2"
                 />
               </div>
-              <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[rgba(53,10,242,0.2)]">
-                <img
-                  src={ProfileImg}
-                  alt="Profile"
-                  className="w-full h-full rounded-md"
-                />
+              <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8]">
+               <FontAwesomeIcon icon={faUser} className="text-white w-6 h-6" />
+    
               </div>
             </div>
           ) : (
@@ -261,10 +267,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu - Keep your existing mobile code */}
       {mobileMenuOpen && (
-       
-
-
- <div className="md:hidden bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3">
+        <div className="md:hidden bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3">
           {/* Shop Dropdown */}
           <button
             onClick={() => setShopOpen(!shopOpen)}
@@ -308,7 +311,11 @@ export default function Navbar() {
           {isLoggedIn ? (
             <div className="flex items-center space-x-2 mt-4 w-full">
               <div className="flex items-center bg-[#8C9ED8] rounded-[10px] p-1 w-full">
-                <img src={SearchImg} alt="Search" className="w-10 h-10 rounded-md" />
+                <img
+                  src={SearchImg}
+                  alt="Search"
+                  className="w-10 h-10 rounded-md"
+                />
                 <input
                   type="text"
                   placeholder="Search..."
@@ -329,8 +336,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-
-
-
-

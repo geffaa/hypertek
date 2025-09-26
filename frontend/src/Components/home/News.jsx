@@ -3,12 +3,14 @@ import NewsImage1 from "../../assets/images/News/new1.png";
 import NewsImage2 from "../../assets/images/News/new2.png";
 import NewsImage3 from "../../assets/images/News/new3.png";
 import NewRightImage from "../../assets/images/News/newRight.jpg";
-import moreNews from "../../assets/images/News/moreNews.png";
 import CustomButton from "../Buttons/Button1";
+import PageBackground from "../Common/BgEffect";
+
 
 export default function News() {
   return (
     <section className="w-full flex justify-center items-start px-4 md:px-6 py-10 md:py-12">
+      <PageBackground/>
       <div className="flex flex-col md:flex-row gap-10 w-full max-w-[1247px]">
         {/* ================= Left Column ================= */}
         <div className="flex flex-col gap-8 w-full md:w-[680px]">

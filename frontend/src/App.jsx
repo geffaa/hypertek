@@ -9,6 +9,7 @@ import Login from "./pages/Signin";
 import ForgotPasswor from "./pages/ForgotPasswor";
 import ResetPassword from "./pages/ResetPassword";
 import Loading from "./Components/Common/Loading";
+import { GrOverview } from "react-icons/gr";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -33,6 +34,7 @@ function AppWrapper() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
+          <Route path="/overview" element={<GrOverview />} />
           <Route path="/forgot-password" element={<ForgotPasswor />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>

@@ -1,11 +1,11 @@
+// src/Components/Common/PageBackground.jsx
 import React from "react";
-import Logo from "../../assets/images/logo.png";
 
-export default function Loading() {
+export default function PageBackground({ className = "" }) {
   return (
-    <div className="relative flex items-center justify-center h-screen w-full overflow-hidden bg-gray-800">
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
       
-      {/* Top-left gradient glow (soft white) */}
+      {/* Top-left gradient glow */}
       <div
         className="absolute top-10 left-10 w-[340px] h-[340px] rounded-full blur-3xl"
         style={{
@@ -13,9 +13,9 @@ export default function Loading() {
         }}
       ></div>
 
-      {/* Bottom-right gradient glow (soft white, more subtle) */}
+      {/* Bottom-right gradient glow */}
       <div
-        className="absolute bottom-10 right-10 w-[340px] h-[340px] rounded-full blur-3xl"
+        className="absolute bottom-0 right-5 w-[340px] h-[340px] rounded-full blur-3xl"
         style={{
           background: "radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(0,42,168,0.25) 70%, rgba(0,0,0,0) 100%)",
         }}
@@ -48,15 +48,6 @@ export default function Loading() {
           filter: "blur(150px)",
         }}
       ></div>
-
-      {/* Center Logo */}
-      <div className="flex flex-col items-center gap-4 text-white z-10">
-        <img
-          src={Logo}
-          alt="Logo"
-          className="h-20 w-auto animate-pulse"
-        />
-      </div>
     </div>
   );
 }

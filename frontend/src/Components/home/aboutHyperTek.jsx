@@ -2,10 +2,13 @@ import React from "react";
 import LeftImage from "../../assets/images/about/about.jpg";
 import RightImage1 from "../../assets/images/about/left.jpg";
 import RightImage2 from "../../assets/images/about/right.jpg";
+import PageBackground from "../Common/BgEffect";
 
 export default function HyperTekDesign() {
   return (
     <section className="relative my-16 w-full">
+      <PageBackground/>
+      
       <div className="flex flex-col lg:flex-row">
         {/* Left Box */}
         <div className="relative bg-[#B0BDE4] flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]">

@@ -2,10 +2,13 @@ import React from "react";
 import popularCollections from "../../assets/images/popular/popolar.png";
 import TVector from "../../assets/images/popular/vector.png";
 import CustomButton from "../Buttons/Button1";
+import PageBackground from "../Common/BgEffect";
+
 
 function PopularCollections() {
   return (
     <section className="flex flex-col gap-8 w-full px-4 sm:px-8 md:px-16 pt-5 ">
+    {/* <PageBackground/> */}
       {/* Heading */}
       <div className="flex flex-col gap-2 items-start max-w-full px-4 md:px-0  ">
         <h1 className="text-white uppercase text-2xl sm:text-3xl ml-8 lg:text-[30px] font-goldman font-bold leading-[100%]">
@@ -29,13 +32,19 @@ function PopularCollections() {
             className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex-shrink-0 w-[280px] max-w-[305px] h-[400px] flex flex-col justify-between"
           >
             {/* Image container */}
-            <div className="w-full h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-r from-[#9b926d] via-yellow-200 to-yellow-400">
-              <img
-                src={popularCollections}
-                alt="Collection"
-                className="w-full h-full object-cover object-top scale-x-[-1]"
-              />
-            </div>
+            <div
+  className="w-full h-[160px] overflow-hidden rounded-[19px]"
+  style={{
+    background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+  }}
+>
+  <img
+    src={popularCollections}
+    alt="Collection"
+    className="w-full h-full object-cover object-top scale-x-[-1]"
+  />
+</div>
+
 
             {/* Title */}
             <h2 className="text-lg font-bold mt-4">Monkey Ape</h2>

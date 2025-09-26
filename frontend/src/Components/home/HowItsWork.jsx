@@ -4,6 +4,7 @@ import wallet from "../../assets/images/howItsWork/wallet.png";
 import card from "../../assets/images/howItsWork/card.png";
 import earn from "../../assets/images/howItsWork/earn.png";
 import "../../index.css";
+import PageBackground from "../Common/BgEffect";
 
 function HowItsWork() {
   const steps = [
@@ -35,6 +36,7 @@ function HowItsWork() {
 
   return (
     <section className="flex flex-col lg:flex-row gap-12 px-4 sm:px-8 md:px-16 py-12 lg:py-16 items-start justify-center">
+     {/* <PageBackground/> */}
       {/* Left side */}
       <div className="w-full lg:w-[340px] flex flex-col my-auto gap-6 text-white">
         <h2
