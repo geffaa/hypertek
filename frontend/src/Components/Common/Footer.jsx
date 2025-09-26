@@ -6,10 +6,18 @@ import DiscordImg from "../../assets/images/discard.png";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#080E26] text-white mt-12 h-[149px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-between py-6">
+    <footer className="w-full bg-[#080E26] text-white mt-12 pb-4 pt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         {/* First Row: Logo + Menu */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t border-white/20 pt-4">
+        <div
+          className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t pt-4"
+          style={{
+            borderStyle: "solid",
+            borderWidth: "2px solid white", // top border only
+            
+            borderImageSlice: 1,
+          }}
+        >
           {/* Logo */}
           <div className="flex-shrink-0 flex justify-center md:justify-start">
             <img
@@ -54,15 +62,15 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Second Row: Social Icons + Centered Text */}
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
+        {/* Second Row: Centered Text + Social Icons */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
           {/* Centered Text */}
-          <div className="text-center md:text-left text-sm text-gray-400">
-            <h3>@2025. ALL RIGHTS RESERVED</h3>
+          <div className="w-full text-center text-sm text-gray-400 md:order-1">
+            @2025. ALL RIGHTS RESERVED
           </div>
 
           {/* Social Icons */}
-          <div className="flex gap-4 justify-center md:justify-end">
+          <div className="flex gap-4 justify-center md:justify-end mt-2 md:mt-0 md:order-2">
             <a href="#" aria-label="Discord">
               <img
                 src={DiscordImg}

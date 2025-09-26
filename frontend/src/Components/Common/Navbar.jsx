@@ -83,51 +83,45 @@ export default function Navbar() {
               >
                 {shopOpen && (
                   <div
-                    className="w-[746px] h-[229px] rounded-[10px] shadow-lg bg-[#001554D9] mt-2"
-                    onMouseEnter={() => setShopOpen(true)}
-                    onMouseLeave={() => setShopOpen(false)}
-                  >
-                    <div className="grid grid-cols-3 gap-[53px] w-[688px] h-[185px] mx-auto px-[29px] py-[31px] text-white">
-                      <div className="flex flex-col gap-[32px] w-[194px]">
-                        <div className="flex flex-col gap-[4px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
-                          <h1 className="text-white font-semibold text-[16px]">
-                            Overview & Desc
-                          </h1>
-                          <p className="text-white text-[12px]">
-                            See what's new and trending.
-                          </p>
-                        </div>
-                        <div className="flex flex-col gap-[4px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
-                          <h1 className="text-white font-semibold text-[16px]">
-                            My Assets
-                          </h1>
-                          <p className="text-white text-[12px]">
-                            Track and manage everything you own.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-[16px] w-[194px]">
-                        <div className="flex flex-col gap-[4px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
-                          <h1 className="text-white font-semibold text-[16px]">
-                            Collectibles
-                          </h1>
-                          <p className="text-white text-[12px]">
-                            Track and manage your NFTs.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-[16px] w-[194px]">
-                        <div className="flex flex-col gap-[4px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
-                          <h1 className="text-white font-semibold text-[16px]">
-                            Land
-                          </h1>
-                          <p className="text-white text-[12px]">
-                            Buy a parcel of land and build on it.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  className="w-[746px] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] mt-2"
+  onMouseEnter={() => setShopOpen(true)}
+  onMouseLeave={() => setShopOpen(false)}
+>
+  <div className="grid grid-cols-3 gap-[65px] w-[688px] h-full mx-auto px-[29px] py-[31px] text-white">
+    {/* Column 1 */}
+    <div className="flex flex-col justify-between w-[194px] h-full">
+      <div className="flex flex-col gap-[12px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+        <h1 className="text-white font-semibold text-[16px]">Overview & Desc</h1>
+        <p className="text-white text-[12px]">See what's new and trending.</p>
+      </div>
+      <div className="flex flex-col gap-[4px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+        <h1 className="text-white font-semibold text-[16px]">My Assets</h1>
+        <p className="text-white text-[12px]">Track and manage everything you own.</p>
+      </div>
+    </div>
+
+    {/* Column 2 */}
+    <div className="flex flex-col justify-between w-[194px] h-full">
+      <div className="flex flex-col gap-[16px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+        <h1 className="text-white font-semibold text-[16px]">Collectibles</h1>
+        <p className="text-white text-[12px]">Track and manage your NFTs.</p>
+      </div>
+      {/* Empty div to keep height same as column 1 */}
+      <div></div>
+    </div>
+
+    {/* Column 3 */}
+    <div className="flex flex-col justify-between w-[194px] h-full">
+      <div className="flex flex-col gap-[1px] border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+        <h1 className="text-white font-semibold text-[16px]">Land</h1>
+        <p className="text-white text-[12px]">Buy a parcel of land and build on it.</p>
+      </div>
+      {/* Empty div to keep height same as column 1 */}
+      <div></div>
+    </div>
+  </div>
+</div>
+
                 )}
               </div>
             </div>
