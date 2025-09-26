@@ -1,0 +1,7 @@
+
+/* the home page hero section  */
+.outline-text {
+  color: transparent;              /* no fill */
+  -webkit-text-stroke: 1px #FFFFFF; /* white outline */
+  font-weight: bold;               /* optional for thicker stroke */
+}

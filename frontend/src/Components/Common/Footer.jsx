@@ -6,10 +6,10 @@ import DiscordImg from "../../assets/images/discard.png";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#080E26] text-white mt-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <footer className="w-full bg-[#080E26] text-white mt-12 h-[149px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-between py-6">
         {/* First Row: Logo + Menu */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t border-white/20 pt-6">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t border-white/20 pt-4">
           {/* Logo */}
           <div className="flex-shrink-0 flex justify-center md:justify-start">
             <img
@@ -55,7 +55,7 @@ function Footer() {
         </div>
 
         {/* Second Row: Social Icons + Centered Text */}
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-6 gap-4">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-4">
           {/* Centered Text */}
           <div className="text-center md:text-left text-sm text-gray-400">
             <h3>@2025. ALL RIGHTS RESERVED</h3>
@@ -67,21 +67,21 @@ function Footer() {
               <img
                 src={DiscordImg}
                 alt="Discord"
-                className="h-5 w-5 hover:opacity-75 transition"
+                className="w-[19px] h-[19px] hover:opacity-75 transition"
               />
             </a>
             <a href="#" aria-label="Skype">
               <img
                 src={SkypeImg}
                 alt="Skype"
-                className="h-5 w-5 hover:opacity-75 transition"
+                className="w-[19px] h-[19px] hover:opacity-75 transition"
               />
             </a>
             <a href="#" aria-label="Telegram">
               <img
                 src={TelegramImg}
                 alt="Telegram"
-                className="h-5 w-5 hover:opacity-75 transition"
+                className="w-[19px] h-[19px] hover:opacity-75 transition"
               />
             </a>
           </div>

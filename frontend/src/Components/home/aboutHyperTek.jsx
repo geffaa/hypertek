@@ -5,37 +5,40 @@ import RightImage2 from "../../assets/images/about/right.jpg";
 
 export default function HyperTekDesign() {
   return (
-    <section className="flex justify-center items-center relative my-16 w-full">
-      <div className="w-full max-w-7xl flex flex-col lg:flex-row justify-between items-start px-4 md:px-6 lg:px-8 gap-6">
-        {/* Left side */}
-        <div className="flex items-center gap-4 relative w-full lg:w-auto">
-          {/* Vertical text with lines */}
-          <div className="hidden lg:flex flex-col items-center justify-center absolute -left-10 top-1/2 -translate-y-1/2">
+    <section className="relative my-16 w-full">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left Box */}
+        <div className="relative bg-[#B0BDE4] flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]">
+          {/* Vertical Side Label (Large screen) */}
+          <div className="hidden lg:flex flex-col items-center absolute left-[50px] top-1/2 -translate-y-1/2">
             <div className="w-[2px] h-20 bg-white"></div>
-            <div
-              className="flex items-center justify-center my-3"
-              style={{
-                writingMode: "vertical-lr",
-                transform: "rotate(180deg)",
-              }}
-            >
-              <h2 className="font-bold text-sm uppercase tracking-widest text-white">
+            <div className="flex items-center justify-center my-3 [writing-mode:vertical-lr] rotate-180">
+              <h2 className="font-inter font-semibold text-[30px] uppercase tracking-widest text-white">
                 HYPER TEK 100
               </h2>
             </div>
             <div className="w-[2px] h-20 bg-white"></div>
           </div>
 
+          {/* Horizontal Label (Small screen) */}
+          <div className="flex lg:hidden items-center justify-center w-full absolute top-2 px-4">
+            <div className="flex-1 h-[2px] bg-white"></div>
+            <h2 className="mx-3 font-inter font-semibold text-base sm:text-lg uppercase tracking-widest text-white whitespace-nowrap">
+              HYPER TEK 100
+            </h2>
+            <div className="flex-1 h-[2px] bg-white"></div>
+          </div>
+
           {/* Big Image */}
           <img
             src={LeftImage}
             alt="Hyper Tek Main"
-            className="w-full max-w-full md:w-[546px] h-[250px] md:h-[414px] object-cover"
+            className="w-[90%] sm:w-[510px] h-[220px] sm:h-[320px] lg:w-[510px] lg:h-[414px] object-cover lg:absolute lg:left-[150px]"
           />
         </div>
 
-        {/* Right side */}
-        <div className="flex flex-col gap-6 w-full lg:w-[663px]">
+        {/* Right Side */}
+        <div className="flex flex-col gap-4 w-full lg:w-[663px] mt-8 lg:mt-14 lg:ml-40">
           {/* Two images side by side */}
           <div className="flex flex-col sm:flex-row gap-6 w-full">
             <img
@@ -51,15 +54,16 @@ export default function HyperTekDesign() {
           </div>
 
           {/* Paragraph */}
-          <p className="text-white text-sm md:text-base leading-relaxed font-inter">
+          <p className="text-white text-sm md:text-base leading-relaxed font-inter px-2">
             <span className="font-semibold">The year is 2117.</span> Humanity
-            didn&apos;t conquer the stars—it fractured into them. After Earth&apos;s
-            collapse, survivors launched the Hyper Tek Exodus, scattering AI,
-            enhanced genomes, and prototypes across thousands of seed worlds.
-            Each evolved in isolation, forming new species, cultures, and
-            technologies. At the center of it all lies the Echo Core, a quantum
-            relic now pulsing with riddles, memories, and a call to power. It
-            awakens you, a reborn Overlord, forged by legacy and technology.
+            didn&apos;t conquer the stars—it fractured into them. After
+            Earth&apos;s collapse, survivors launched the Hyper Tek Exodus,
+            scattering AI, enhanced genomes, and prototypes across thousands of
+            seed worlds. Each evolved in isolation, forming new species,
+            cultures, and technologies. At the center of it all lies the Echo
+            Core, a quantum relic now pulsing with riddles, memories, and a call
+            to power. It awakens you, a reborn Overlord, forged by legacy and
+            technology.
           </p>
         </div>
       </div>

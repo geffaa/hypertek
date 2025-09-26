@@ -2,6 +2,7 @@ import React from "react";
 import AboutTopImage from "../assets/images/aboutpage/aboutimage.png";
 import DownloadBtn from "../assets/images/download.png";
 import AboutUs1 from "../assets/images/aboutpage/aboutus.png";
+import CustomButton from "../Components/Buttons/Button1"
 
 import exchange from "../assets/images/aboutpage/Exchange.png";
 import game from "../assets/images/aboutpage/game.png";
@@ -34,7 +35,7 @@ function About() {
 
         {/* Button */}
         <button className="my-12">
-          <img src={DownloadBtn} alt="Download" />
+        <CustomButton text="Download"></CustomButton>
         </button>
       </div>
 

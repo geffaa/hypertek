@@ -15,12 +15,12 @@ function Home() {
         minHeight: "100vh",
       }}
     >
-      <Hero />
+       <Hero />
       <HyperTek />
       <News />
       <HowItsWork/>
       <PopularCollections/>
-      <MarketPlace/>
+      <MarketPlace/> 
       
     </div>
   );
