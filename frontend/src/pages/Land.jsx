@@ -8,6 +8,7 @@ import popularCollections from "../assets/images/popular/popolar.png";
 import CustomButton from '../Components/Buttons/Button1';
 import Logo from "../assets/images/logo.png";
 import land1Image from "../assets/images/Overview/land1.jpg";
+import NavLinks from "../Components/MarketPlaceCom/NavLinks"
 
 
 function Land() {
@@ -72,7 +73,8 @@ function Land() {
           lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8"
         >
           {/* Nav Links */}
-          <div className="w-full lg:w-auto">
+          <NavLinks/>
+          {/* <div className="w-full lg:w-auto">
             <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
               <li>
                 <Link
@@ -115,7 +117,7 @@ function Land() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Search Field */}
           <div
