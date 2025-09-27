@@ -10,7 +10,11 @@ import ForgotPasswor from "./pages/ForgotPasswor";
 import ResetPassword from "./pages/ResetPassword";
 import Loading from "./Components/Common/Loading";
 import { GrOverview } from "react-icons/gr";
-import Overview from "./pages/Overview";
+import MarketPlace from "./pages/MarketPlace";
+import NFA from "./pages/NFA";
+import Land from "./pages/Land";
+import PersonalActivity from "./pages/PersonalActivity";
+import NoPersonalActivity from "./pages/NoPersonalActivity";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -35,7 +39,11 @@ function AppWrapper() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
-          <Route path="/overview" element={<Overview/>} />
+          <Route path="/market-place" element={<MarketPlace/>} />
+          <Route path="/nfa-expand" element={<NFA/>} />
+          <Route path="/land" element={<Land/>} />
+          <Route path="/personal-activity" element={<PersonalActivity/>} />
+<Route path="/no-personal-activity" element={<NoPersonalActivity/>}/>
           <Route path="/forgot-password" element={<ForgotPasswor />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>

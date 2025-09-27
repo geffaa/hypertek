@@ -3,6 +3,7 @@ import popularCollections from "../../assets/images/popular/popolar.png";
 import TVector from "../../assets/images/popular/vector.png";
 import CustomButton from "../Buttons/Button1";
 import PageBackground from "../Common/BgEffect";
+import { Link  } from "react-router-dom";
 
 function PopularCollections() {
   return (
@@ -62,13 +63,17 @@ function PopularCollections() {
 
             {/* Buy Now Button fixed at bottom */}
             <div className="mt-auto flex justify-center">
+
+              <Link to="market-place" className="cursor-pointer">
               <CustomButton text="Buy Now" />
+              
+              </Link>
             </div>
           </div>
         ))}
       </div>
 
-      {/* NFA Section coding  */}
+     
       
 
 
