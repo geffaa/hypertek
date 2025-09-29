@@ -31,6 +31,7 @@ import Profile from "./Components/ProfileSection/Land";
 import Activity from "./Components/ProfileSection/Activity";
 import List from "./Components/ProfileSection/Listing";
 import Edit from "./Components/ProfileSection/EditProfile";
+import NotFound from "./pages/NotFound";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -73,6 +74,7 @@ function AppWrapper() {
           <Route path="/offer" element={<OfferPage />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/success" element={<Success />} />
+          <Route path="/not-found" element={<NotFound />} />
 
           {/* Personal Activities */}
           <Route path="/personal-activity" element={<PersonalActivity />} />
