@@ -1,82 +1,116 @@
-import React from "react";
-import Box from "@mui/material/Box";
+import React, { useMemo } from "react";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-} from "recharts";
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+import { Bar } from "react-chartjs-2";
+
+// Register Chart.js modules + plugins
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ChartDataLabels
+);
 
 function BuyNfa2() {
-  // Data for the bars
-  const data = [
-    { date: "Dec20", value: 0.036 },
-    { date: "Dec21", value: 0.06 },
-    { date: "Dec22", value: 0.085 },
-    { date: "Dec23", value: 0.085 },
-  ];
+  // Chart data (memoized to prevent re-creation on every render)
+  const data = useMemo(
+    () => ({
+      labels: ["Dec20", "Dec21", "Dec22"],
+      datasets: [
+        {
+          data: [0, 0.05, 0.1], // your actual values (left axis)
+          backgroundColor: "blue",
+          yAxisID: "y", // main left axis
+          barThickness: 40,
+        },
+      ],
+    }),
+    []
+  );
 
-  // Y-axis ticks
-  const yValues = [0, 0.036, 0.06, 0.085];
+  // Chart options (memoized)
+  const options = useMemo(
+    () => ({
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "Price History",
+          font: { size: 18 },
+          color: "white",
+        },
+        datalabels: {
+          anchor: "end",
+          align: "end",
+          color: "black",
+          font: { weight: "bold" },
+          formatter: (value) => value,
+        },
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: "white" },
+          grid: {
+            color: "rgba(255,255,255,0.2)",
+            drawBorder: false,
+          },
+        },
+        y2: {
+          beginAtZero: true,
+          position: "right",
+          ticks: {
+            color: "white",
+            // custom tick values for the right axis
+            callback: function (value) {
+              const mapping = {
+                0: "0.036",
+                0.05: "0.06",
+                0.1: "0.085",
+              };
+              return mapping[value] || "";
+            },
+          },
+          grid: { drawOnChartArea: false }, // avoid overlap
+        },
+        x: {
+          ticks: { color: "white" },
+          grid: {
+            color: "rgba(255,255,255,0.2)",
+            drawBorder: false,
+          },
+        },
+      },
+    }),
+    []
+  );
 
   return (
     <section className="w-full max-w-[1240px] h-[400px] mt-6 mx-auto rounded-[11px] bg-[#0b0b0b] p-4">
-      {/* Chart Title */}
+      {/* Title */}
       <div className="text-white mb-2">
         <h1 className="text-[25px] font-inter font-bold">Price History</h1>
       </div>
 
-      {/* Decorative horizontal line below title */}
+      {/* Divider line */}
       <div className="w-full border-t border-white opacity-70 mb-4"></div>
 
-      {/* Chart container */}
-      <div className="flex flex-col md:flex-row bg-[#111] rounded-lg p-2 h-[320px]">
-        {/* Optional Left Y-axis values (for desktop) */}
-        <div className="hidden md:flex flex-col justify-between text-white w-[50px] mr-2">
-          {yValues.slice(1).map((val, index) => (
-            <span key={index} className="text-sm">
-              {val.toFixed(3)}
-            </span>
-          ))}
-        </div>
-
-        {/* Chart */}
-        <Box sx={{ flex: 1, height: "100%", bgcolor: "#111" }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data}
-              margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
-              barCategoryGap="30%"
-            >
-              {/* Horizontal grid lines only */}
-              <CartesianGrid vertical={false} horizontal={true} stroke="#333" />
-
-              {/* X-axis */}
-              <XAxis
-                dataKey="date"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: "#fff" }}
-              />
-
-              {/* Right Y-axis */}
-              <YAxis
-                orientation="right"
-                domain={[0, 0.09]}
-                ticks={yValues}
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: "#fff", fontSize: 12 }}
-                tickFormatter={(v) => v.toFixed(3)}
-              />
-
-              {/* Bars */}
-              <Bar dataKey="value" barSize={40} fill="#0047FF" />
-            </BarChart>
-          </ResponsiveContainer>
-        </Box>
+      {/* Chart */}
+      <div className="h-[320px] bg-[#111] rounded-lg p-4">
+        <Bar data={data} options={options} redraw />
       </div>
     </section>
   );
