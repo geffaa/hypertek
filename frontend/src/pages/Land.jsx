@@ -13,7 +13,7 @@ import NavLinks from "../Components/MarketPlaceCom/NavLinks"
 
 function Land() {
   return (
-    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#000000] px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
         {/* Hero Banner */}
@@ -78,7 +78,7 @@ function Land() {
             <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
               <li>
                 <Link
-                  to="#"
+                  to="/market-place"
                   className="inline-flex items-center justify-center px-4 py-2 lg:px-[14px] lg:py-[4px]
                   rounded-[10px]  text-white font-inter font-semibold 
                   text-sm lg:text-[16px] whitespace-nowrap"
@@ -88,7 +88,7 @@ function Land() {
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/nfa-expand"
                   className="inline-flex items-center justify-center px-4 py-2 lg:px-[14px] lg:py-[4px]
                   rounded-[10px] text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10
                   transition-colors whitespace-nowrap"
