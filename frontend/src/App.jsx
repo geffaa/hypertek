@@ -15,6 +15,12 @@ import NFA from "./pages/NFA";
 import Land from "./pages/Land";
 import PersonalActivity from "./pages/PersonalActivity";
 import NoPersonalActivity from "./pages/NoPersonalActivity";
+import BuyNfa from "./pages/BuyNfa";
+import NfaLand from "./pages/NfaLand";
+import Payment from "./pages/Payment";
+import OfferPage from "./pages/OfferPage";
+import ErrorPage from "./pages/ErrorPage";
+import Success from "./pages/Success";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -42,6 +48,14 @@ function AppWrapper() {
           <Route path="/market-place" element={<MarketPlace/>} />
           <Route path="/nfa-expand" element={<NFA/>} />
           <Route path="/land" element={<Land/>} />
+
+          {/* NFA PAGES  */}
+          <Route path="/buy-nfa" element={<BuyNfa/>}/>
+          <Route path="/buy-land" element={<NfaLand/>}/>
+          <Route path="/payment" element={<Payment/>}/>
+          <Route path="/offer" element={<OfferPage/>}/>
+          <Route path="/error" element={<ErrorPage/>}/>
+          <Route path="/success" element={<Success/>}/>
           <Route path="/personal-activity" element={<PersonalActivity/>} />
 <Route path="/no-personal-activity" element={<NoPersonalActivity/>}/>
           <Route path="/forgot-password" element={<ForgotPasswor />} />
