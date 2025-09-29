@@ -15,6 +15,12 @@ import NFA from "./pages/NFA";
 import Land from "./pages/Land";
 import PersonalActivity from "./pages/PersonalActivity";
 import NoPersonalActivity from "./pages/NoPersonalActivity";
+import Collect from "./Components/ProfileSection/Collectible"
+import Profile from "./Components/ProfileSection/Land"
+import Activity from "./Components/ProfileSection/Activity"
+import List from "./Components/ProfileSection/Listing"
+import Edit from "./Components/ProfileSection/EditProfile"
+
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -39,13 +45,22 @@ function AppWrapper() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
-          <Route path="/market-place" element={<MarketPlace/>} />
-          <Route path="/nfa-expand" element={<NFA/>} />
-          <Route path="/land" element={<Land/>} />
-          <Route path="/personal-activity" element={<PersonalActivity/>} />
-<Route path="/no-personal-activity" element={<NoPersonalActivity/>}/>
+          <Route path="/market-place" element={<MarketPlace />} />
+          <Route path="/nfa-expand" element={<NFA />} />
+          <Route path="/land" element={<Land />} />
+          <Route path="/personal-activity" element={<PersonalActivity />} />
+          <Route
+            path="/no-personal-activity"
+            element={<NoPersonalActivity />}
+          />
           <Route path="/forgot-password" element={<ForgotPasswor />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/Profile" element={<Collect />} />
+          <Route path="/Lands" element={<Profile />} />
+          <Route path="/Activity" element={< Activity/>} />
+          <Route path="/List" element={< List/>} />
+          <Route path="/edit" element={< Edit/>} />
+
         </Routes>
       </div>
       <Footer />
