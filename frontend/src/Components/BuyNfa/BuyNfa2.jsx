@@ -46,7 +46,7 @@ function BuyNfa2() {
         legend: { display: false },
         title: {
           display: true,
-          text: "Price History",
+          // text: "Price History",
           font: { size: 18 },
           color: "white",
         },

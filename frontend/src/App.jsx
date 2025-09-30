@@ -100,7 +100,7 @@ function App() {
   return (
     <div
       style={{
-          background: "#000000",
+          background: "#000000ff",
     backdropFilter: "blur(500px)",     
         minHeight: "100vh",
         display: "flex",

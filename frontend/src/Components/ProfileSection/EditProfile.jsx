@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
 import Profile from "../../assets/images/Profile/Profile.png";
 import { FiCopy } from "react-icons/fi";
-import { ArrowRight } from "lucide-react"; // ✅ Arrow import
+import { ArrowRight } from "lucide-react"; // Arrow import
 import CustomButton from "../../Components/Buttons/Button1";
 
 function MarketPlace() {
@@ -18,6 +18,10 @@ function MarketPlace() {
   const [currentPass, setCurrentPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+
+  // Profile image state
+  const [profileImage, setProfileImage] = useState(Profile);
+  const fileInputRef = useRef(null);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(walletAddress);
@@ -35,8 +39,24 @@ function MarketPlace() {
       currentPass,
       newPass,
       confirmPass,
+      profileImage,
     });
     alert("Profile Updated Successfully!");
+  };
+
+  // Handle clicking profile image
+  const handleProfileClick = () => {
+    fileInputRef.current.click();
+  };
+
+  // Handle file selection
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => setProfileImage(reader.result);
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -55,11 +75,20 @@ function MarketPlace() {
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
               <img
-                src={Profile}
+                src={profileImage}
                 alt="Profile"
-                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg 
-                -mt-12 sm:-mt-16 md:-mt-16"
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-12 sm:-mt-16 md:-mt-16"
+                onClick={handleProfileClick}
               />
+              {/* Hidden file input */}
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+
               <div className="mt-3 text-white">
                 <h2 className="text-base sm:text-lg md:text-xl font-semibold">
                   {name}
@@ -163,8 +192,7 @@ function MarketPlace() {
                 placeholder="Confirm New Password"
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
-                
-                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white focus:outline-none 0"
+                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white focus:outline-none "
               />
 
               {/* Logout with Arrow */}
