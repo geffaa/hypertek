@@ -6,14 +6,14 @@ import PageBackground from "../Common/BgEffect";
 
 export default function HyperTekDesign() {
   return (
-    <section className="relative my-16 w-full">
-      <PageBackground/>
-      
+    <section className="relative my-16 w-full overflow-x-hidden">
+      {/* <PageBackground/> */}
+
       <div className="flex flex-col lg:flex-row">
         {/* Left Box */}
         <div className="relative bg-[#B0BDE4] flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]">
           {/* Vertical Side Label (Large screen) */}
-          <div className="hidden lg:flex flex-col items-center absolute left-[50px] top-1/2 -translate-y-1/2">
+          <div className="hidden lg:flex flex-col items-center absolute left-[50px] top-1/2 -translate-y-1/2 z-10">
             <div className="w-[2px] h-20 bg-white"></div>
             <div className="flex items-center justify-center my-3 [writing-mode:vertical-lr] rotate-180">
               <h2 className="font-inter font-semibold text-[30px] uppercase tracking-widest text-white">
@@ -36,12 +36,12 @@ export default function HyperTekDesign() {
           <img
             src={LeftImage}
             alt="Hyper Tek Main"
-            className="w-[90%] sm:w-[510px] h-[220px] sm:h-[320px] lg:w-[510px] lg:h-[414px] object-cover lg:absolute lg:left-[150px]"
+            className="w-[90%]  lg:ml-[240px] sm:w-[510px] h-[220px] sm:h-[320px] lg:w-[510px] lg:h-[414px] object-cover lg:absolute lg:max-w-full"
           />
         </div>
 
         {/* Right Side */}
-        <div className="flex flex-col gap-4 w-full lg:w-[663px] mt-8 lg:mt-14 lg:ml-40">
+        <div className="flex flex-col gap-4 w-full lg:w-[663px] mt-8 lg:mt-14 md:ml-36 ">
           {/* Two images side by side */}
           <div className="flex flex-col sm:flex-row gap-6 w-full">
             <img
@@ -52,13 +52,13 @@ export default function HyperTekDesign() {
             <img
               src={RightImage2}
               alt="Right Image 2"
-              className="w-full sm:w-[318px] h-[200px] sm:h-[255px] object-cover"
+              className="w-full sm:w-[318px] h-[200px] sm:h-[255px] object-cover lg:mr-[100px]"
             />
           </div>
 
           {/* Paragraph */}
           <p className="text-white text-sm md:text-base leading-relaxed font-inter px-2">
-            <span className="font-semibold">The year is 2117.</span> Humanity
+            <span className="font-semibold">The year is 2117.</span> <br /> Humanity
             didn&apos;t conquer the stars—it fractured into them. After
             Earth&apos;s collapse, survivors launched the Hyper Tek Exodus,
             scattering AI, enhanced genomes, and prototypes across thousands of

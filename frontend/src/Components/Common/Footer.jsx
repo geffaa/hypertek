@@ -6,7 +6,7 @@ import DiscordImg from "../../assets/images/discard.png";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#080E26] text-white mt-12 pb-4 pt-8">
+    <footer className="w-full  text-white mt-12 pb-4 pt-8 bg-[#000000]" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         {/* First Row: Logo + Menu */}
         <div
@@ -82,14 +82,14 @@ function Footer() {
               <img
                 src={SkypeImg}
                 alt="Skype"
-                className="w-[19px] h-[19px] hover:opacity-75 transition"
+                className="w-[19px] h-[17px] hover:opacity-75 transition"
               />
             </a>
             <a href="#" aria-label="Telegram">
               <img
                 src={TelegramImg}
                 alt="Telegram"
-                className="w-[19px] h-[19px] hover:opacity-75 transition"
+                className="w-[19px] h-[19px]  transition"
               />
             </a>
           </div>

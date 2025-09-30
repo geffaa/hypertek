@@ -11,7 +11,7 @@ function Home() {
   return (
     <div
       style={{
-        background: "linear-gradient(to bottom, #050404db, #2b3862ff)",
+        // background: "linear-gradient(to bottom, #050404db, #2b3862ff)",
         minHeight: "100vh",
       }}
     >

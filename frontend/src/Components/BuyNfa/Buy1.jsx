@@ -5,6 +5,7 @@ import CustomButton2 from "../../Components/Buttons/Button2";
 import { FiEdit2 } from "react-icons/fi";
 import popularCollections from "../../assets/images/popular/popolar.png";
 import { Link } from "react-router-dom";
+import { FiEye } from "react-icons/fi";
 
 function Buy1() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,7 @@ function Buy1() {
 
       {/* Content */}
       <div className="w-full md:w-[464px] flex flex-col gap-4">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center  gap-2">
           <h1 className="font-inter font-semibold text-xl md:text-2xl text-white cursor-default">
             Monkey ape
           </h1>
@@ -45,7 +46,7 @@ function Buy1() {
           Listed
         </p>
 
-        <div className="w-full h-auto bg-[#17171887] px-4 md:px-6 py-6 md:py-8 rounded-[10px]">
+        <div className="w-full h-auto bg-[#17171887] px-4 md:px-6 py-6 md:py-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-white opacity-70 cursor-default gap-2 md:gap-0">
             <p>Price</p>
             <p className="text-xs md:text-sm">
@@ -55,8 +56,14 @@ function Buy1() {
           <h2 className="text-white mt-3 text-lg md:text-xl cursor-default">
             $2000.00
           </h2>
+          <div className="flex justify-end mt-4 ">
+            <h3 className="flex items-center px-2">
+                <FiEye className="text-white w-5 h-5" />
+      <span className="text-white font-medium px-2">505 Views</span>
+            </h3>
+          </div>
 
-          <div className="w-full flex flex-col md:flex-row justify-center gap-4 mt-6 md:mt-12">
+          <div className="w-full flex flex-col md:flex-row justify-center gap-4 mt-2 ">
             <button onClick={openModal} className="cursor-pointer w-full md:w-auto">
               <CustomButton text="Buy Now" />
             </button>

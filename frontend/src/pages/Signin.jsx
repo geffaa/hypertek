@@ -6,6 +6,7 @@ import discard from "../assets/images/login/discard.png";
 import google from "../assets/images/login/google.png";
 import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
+import CustomButtonLarge from "../Components/Buttons/SignupButton";
 
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -104,12 +105,7 @@ function Login() {
             type="submit"
             className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
           >
-            <img
-              src={loginImg}
-              alt="Login"
-              className="h-10 sm:h-8"
-              style={{ height: "40px", width: "266px" }}
-            />
+            <CustomButtonLarge text="Sign In"/>
           </button>
         </form>
 
@@ -125,16 +121,16 @@ function Login() {
 
         {/* Social Images */}
         <div className="flex justify-center gap-4">
-          <button className="p-1 rounded-full border border-white hover:bg-white transition">
+          <button className="p-1 rounded-full border border-white  transition">
             <img src={skype} alt="Skype" className="w-6 h-6" />
           </button>
-          <button className="p-1 rounded-full border border-white hover:bg-white transition">
+          <button className="p-1 rounded-full border border-white  transition">
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
-          <button className="p-1 rounded-full border border-white hover:bg-white transition">
+          <button className="p-1 rounded-full border border-white  transition">
             <img src={google} alt="Google" className="w-6 h-6" />
           </button>
-          <button className="p-1 rounded-full border border-white hover:bg-white transition">
+          <button className="p-1 rounded-full border border-white  transition">
             <img src={symbol} alt="Symbol" className="w-6 h-6" />
           </button>
         </div>

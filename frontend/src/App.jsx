@@ -100,7 +100,8 @@ function App() {
   return (
     <div
       style={{
-        background: "linear-gradient(to bottom, #050404db, #2b3862ff)",
+          background: "#000000",
+    backdropFilter: "blur(500px)",     
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",

@@ -14,13 +14,13 @@ function MarketPlace() {
   return (
     <>
       {/* Main Container */}
-      <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-transparent  ">
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
+        <div className=" mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
           <div
-            className="relative h-48 md:h-56 lg:h-[237px] w-full 
-            bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-16 lg:mb-24"
+            className="relative h-56 md:h-56 lg:h-[237px] w-full 
+            bg-cover bg-top bg-no-repeat  shadow-lg mb-24 lg:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           >
             {/* Text Content */}
@@ -30,7 +30,7 @@ function MarketPlace() {
             >
               <h1
                 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] 
-                leading-tight text-white mb-2 lg:mb-0"
+                leading-tight text-white mb-4 lg:mb-"
               >
                 A New Era Dawns in Hyper Tek
               </h1>
@@ -71,7 +71,7 @@ function MarketPlace() {
 
           {/* Navigation and Search Section */}
           <div
-            className="relative flex flex-col lg:flex-row justify-between items-start 
+            className="relative flex px-8 flex-col lg:flex-row justify-between items-start 
             lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8"
           >
             {/* Nav Links */}
@@ -119,7 +119,7 @@ function MarketPlace() {
                 </li>
               </ul>
             </div> */}
-            <NavLinks/>
+            <NavLinks />
 
             {/* Search Field */}
             <div
@@ -138,38 +138,43 @@ function MarketPlace() {
           </div>
         </div>
 
-        {/* NFA Section */}
-        <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-2 mb-2 lg:mb-4">
-          <div className="flex flex-col gap-2 items-start">
-            <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-              NFA
-            </h1>
-            <div className="flex gap-2">
-              <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-              <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-              <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-              <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+        <div className="px-8">
+          {/* NFA Section */}
+        <section className="flex flex-col gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-6 md:px-8 lg:px-0">
+          {/* Header */}
+          <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+            <div className="flex flex-col gap-2 items-start">
+              <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                NFA
+              </h1>
+              <div className="flex gap-2">
+                <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+                <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+                <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+                <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+              </div>
+            </div>
+
+            <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
+              <button className="flex items-center gap-2 hover:text-gray-300 transition">
+                <span>Expand All</span>
+                <ArrowRight size={20} strokeWidth={2} />
+              </button>
             </div>
           </div>
 
-          <div className="flex justify-end items-center text-white">
-            <button className="flex items-center gap-2 hover:text-gray-300 transition">
-              <span>Expand All</span>
-              <ArrowRight size={20} strokeWidth={2} />
-            </button>
-          </div>
-
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
                 className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-                  lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
+                   lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
               >
+                {/* Image */}
                 <div
                   className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-                  bg-gradient-to-b from-[#977C34] to-[#493F26]"
+                     bg-gradient-to-b from-[#977C34] to-[#493F26]"
                 >
                   <img
                     src={popularCollections}
@@ -177,9 +182,13 @@ function MarketPlace() {
                     className="w-full h-full object-cover object-top scale-x-[-1]"
                   />
                 </div>
+
+                {/* Title */}
                 <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
                   Monkey Ape
                 </h2>
+
+                {/* Stats */}
                 <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
                   <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
                   <div className="flex items-center">
@@ -193,8 +202,10 @@ function MarketPlace() {
                     </h3>
                   </div>
                 </div>
+
+                {/* Button */}
                 <div className="mt-auto flex justify-center">
-                  <Link to="/nfa-expand" className="cursor-pointer">
+                  <Link to="/nfa-expand" className="cursor-pointer w-full">
                     <CustomButton text="Buy Now" />
                   </Link>
                 </div>
@@ -204,29 +215,41 @@ function MarketPlace() {
         </section>
 
         {/* LAND Section */}
-        <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8 mb-12 lg:mb-16">
-          <div className="flex flex-col gap-2 items-start">
-            <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-              LAND
-            </h1>
-            <div className="flex gap-2">
-              <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-              <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-              <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-              <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+        <section className="flex flex-col gap-6 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6 md:px-8 lg:px-0">
+          {/* Header */}
+          <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+            <div className="flex flex-col gap-2 items-start">
+              <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                LAND
+              </h1>
+              <div className="flex gap-2">
+                <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+                <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+                <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+                <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+              </div>
+            </div>
+
+            <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
+              <button className="flex items-center gap-2 hover:text-gray-300 transition">
+                <span>Expand All</span>
+                <ArrowRight size={20} strokeWidth={2} />
+              </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
                 className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
                   lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
               >
+                {/* Image */}
                 <div
                   className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-                  bg-gradient-to-b from-[#977C34] to-[#493F26]"
+                     bg-gradient-to-b from-[#977C34] to-[#493F26]"
                 >
                   <img
                     src={land1Image}
@@ -234,9 +257,13 @@ function MarketPlace() {
                     className="w-full h-full object-cover object-top scale-x-[-1]"
                   />
                 </div>
+
+                {/* Title */}
                 <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
                   Monkey Ape
                 </h2>
+
+                {/* Stats */}
                 <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
                   <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
                   <div className="flex items-center">
@@ -250,8 +277,10 @@ function MarketPlace() {
                     </h3>
                   </div>
                 </div>
+
+                {/* Button */}
                 <div className="mt-auto flex justify-center">
-                  <Link to="/land" className="cursor-pointer">
+                  <Link to="/land" className="cursor-pointer w-full">
                     <CustomButton text="Buy Now" />
                   </Link>
                 </div>
@@ -261,233 +290,105 @@ function MarketPlace() {
         </section>
 
         {/* ACTIVITIES Section */}
-        <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8 mb-16 lg:mb-24">
-          <div className="flex flex-col gap-2 items-start">
-            <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-              ACTIVITIES
-            </h1>
-            <div className="flex gap-2">
-              <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-              <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-              <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-              <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+        <section className="w-full flex justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
+          <div className=" w-full flex flex-col gap-6 lg:gap-8">
+            {/* Header */}
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+              <div className="flex flex-col gap-2 items-start">
+                <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                  ACTIVITIES
+                </h1>
+                <div className="flex gap-2">
+                  <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+                  <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+                  <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+                  <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                </div>
+              </div>
+
+              <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
+                <button className="flex items-center gap-2 hover:text-gray-300 transition">
+                  <span>Expand All</span>
+                  <ArrowRight size={20} strokeWidth={2} />
+                </button>
+              </div>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto rounded-lg border border-[#00134C] mt-4 w-full">
+              <table className="w-full min-w-full text-white">
+                <thead className="bg-[#00134C]">
+                  <tr className="text-left">
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Name
+                    </th>
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Type
+                    </th>
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Buyer
+                    </th>
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Seller
+                    </th>
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Price
+                    </th>
+                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                      Time
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...Array(5)].map((_, i) => (
+                    <tr
+                      key={i}
+                      className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+                    >
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
+                        <div className="flex items-start gap-3">
+                          <div
+                            className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                            style={{
+                              background:
+                                "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                            }}
+                          >
+                            <img
+                              src={i % 2 === 0 ? land1Image : ManImage}
+                              alt="Collection"
+                              className="w-full h-full object-cover object-top scale-x-[-1]"
+                              style={{ objectPosition: "top" }}
+                            />
+                          </div>
+                          <span className="text-sm lg:text-[18px] font-inter font-medium">
+                            Monkey Ape
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                        {i % 2 === 0 ? "Buyer" : "Seller"}
+                      </td>
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                        You
+                      </td>
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                        Oxxy
+                      </td>
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                        $2,000
+                      </td>
+                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                        2d
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <div className="overflow-x-auto rounded-lg border border-[#00134C]">
-            <table className="w-full min-w-[800px] lg:min-w-full text-white">
-              <thead className="bg-[#00134C]">
-                <tr className="text-left">
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Name
-                  </th>
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Type
-                  </th>
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Buyer
-                  </th>
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Seller
-                  </th>
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Price
-                  </th>
-                  <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                    Time
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Row 1 */}
-                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                    <div className="flex items-start gap-3">
-                      <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                        <img
-                          src={land1Image}
-                          alt="Avatar"
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[18px] font-inter font-medium">
-                        Monkey Ape
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Buyer
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    You
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Oxxy
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    $2,000
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    2 d
-                  </td>
-                </tr>
-
-                {/* Row 2 */}
-                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                    <div className="flex items-start gap-3">
-                      <div
-                        className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                        }}
-                      >
-                        <img
-                          src={ManImage}
-                          alt="Collection"
-                          className="w-full h-full object-cover object-top scale-x-[-1]"
-                          style={{ objectPosition: "top" }}
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[18px] font-inter font-medium">
-                        Monkey Ape
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Seller
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Don
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Don
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    $2,000
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    2d
-                  </td>
-                </tr>
-
-                {/* Row 3 */}
-                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                    <div className="flex items-start gap-3">
-                      <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                        <img
-                          src={land1Image}
-                          alt="Avatar"
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[18px] font-inter font-medium">
-                        Monkey Ape
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Buyer
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Don
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Debs
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    $2,000
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    2d
-                  </td>
-                </tr>
-
-                {/* Row 4 */}
-                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                    <div className="flex items-start gap-3">
-                      <div
-                        className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                        }}
-                      >
-                        <img
-                          src={ManImage}
-                          alt="Collection"
-                          className="w-full h-full object-cover object-top scale-x-[-1]"
-                          style={{ objectPosition: "top" }}
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[18px] font-inter font-medium">
-                        Monkey Ape
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Seller
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Oxxy
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Jude
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    $2,000
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    2d
-                  </td>
-                </tr>
-
-                {/* Row 5 */}
-                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                    <div className="flex items-start gap-3">
-                      <div
-                        className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                        }}
-                      >
-                        <img
-                          src={ManImage}
-                          alt="Collection"
-                          className="w-full h-full object-cover object-top scale-x-[-1]"
-                          style={{ objectPosition: "top" }}
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[18px] font-inter font-medium">
-                        Monkey Ape
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Seller
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Debs
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    Maxxi
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    $2,000
-                  </td>
-                  <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                    2d
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </section>
+        </div>
       </div>
     </>
   );

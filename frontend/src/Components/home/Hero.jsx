@@ -17,11 +17,10 @@ export default function Hero() {
   ];
 
   return (
-    <section className="w-full h-screen relative flex overflow-hidden">
-      
+    <section className="max-w-full w-full min-h-screen relative flex overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 pointer-events-none bg-no-repeat bg-cover bg-top scale-x-[-1] brightness-100"
+        className="absolute inset-0 pointer-events-none bg-no-repeat bg-cover bg-center scale-x-[-1] brightness-100"
         style={{ backgroundImage: `url(${heroImage})` }}
       ></div>
 
@@ -29,31 +28,24 @@ export default function Hero() {
       <div className="absolute top-0 right-0 h-full w-1/3 pointer-events-none bg-gradient-to-l from-white/50 to-transparent mix-blend-screen"></div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col mt-16 items-center justify-center gap-6 px-4 md:px-0 text-center max-w-full">
+      <div className="relative z-10 flex flex-col mt-20 items-center justify-center gap-6 px-4 md:px-0 text-center max-w-full">
         {/* Text */}
         <div className="flex flex-col items-center justify-center max-w-[90%]">
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase text-center m-0">
             Hyper Tek 100:
           </h1>
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase text-center m-0">
-            WHERE <span className="outline-text">Legends</span>
-            Are Forged.
+            WHERE <span className="outline-text">Legends</span> Are Forged.
           </h1>
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-[90%]">
-         <button>
-           <CustomButton 
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-[90vw] overflow-hidden">
+          <CustomButton 
             text="MarketPlace"
             bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
-           
-                      />
-         </button>
-         <button>
-
+          />
           <CustomButton2 text="Download Game" bgcolor="" />
-         </button>
         </div>
       </div>
 

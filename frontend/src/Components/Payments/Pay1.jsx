@@ -27,7 +27,7 @@ function Offer1() {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-5 left-4 md:top-6 md:left-10 text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200 z-20"
+        className="absolute top-5 left-4 md:top-16 md:left-10 text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200 z-20"
       >
         <FaArrowLeft />
       </button>
@@ -78,7 +78,7 @@ function Offer1() {
         </div>
 
         {/* Your Pay */}
-        <div className="flex justify-between items-center text-white text-sm md:text-base mt-2">
+        <div className="flex justify-between font-bold items-center text-white text-sm md:text-base mt-2">
           <p>Your Pay</p>
           <p>--- USDC</p>
         </div>

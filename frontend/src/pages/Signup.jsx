@@ -3,6 +3,7 @@ import Logo from "../assets/images/logo.png";
 import signupImg from "../assets/images/signup/signup.png";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import CustomButtonLarge from "../Components/Buttons/SignupButton";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -110,10 +111,11 @@ function Signup() {
             type="submit"
             className="w-full py-3 mt-4 flex items-center justify-center   text-white font-semibold rounded-lg transition"
           >
-            <img src={signupImg} alt="Sign Up" className="h-6 sm:h-5"  style={{
+            {/* <img src={signupImg} alt="Sign Up" className="h-6 sm:h-5"  style={{
                 height:"40px",
-                width:"266px"
-            }}/>
+                width:"220px"
+            }}/> */}
+            <CustomButtonLarge text="Sign Up"/>
            
           </button>
         </form>

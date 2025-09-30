@@ -150,7 +150,7 @@ function MarketPlace() {
                     </h3>
                   </div>
                 </div>
-                <div className="mt-auto flex justify-center">No Listing</div>
+                <div className=" flex justify-center">No Listing</div>
               </div>
             ))}
           </div>
