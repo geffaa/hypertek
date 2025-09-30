@@ -6,7 +6,14 @@ import DiscordImg from "../../assets/images/discard.png";
 
 function Footer() {
   return (
-    <footer className="w-full  text-white mt-12 pb-4 pt-8 bg-[#000000]" >
+    <footer className="w-full  text-white mt-12 pb-4 pt-8 " style={{
+      background: `
+      radial-gradient(circle at 10% 30%, rgba(8, 1, 33, 0.9) 0%, transparent 70%),
+      radial-gradient(circle at 70% 50%, rgba(13, 7, 22, 0.93) 0%, transparent 60%),
+      radial-gradient(circle at 50% 90%, rgba(5, 4, 17, 0.96) 0%, transparent 90%),
+      #0d0d14
+    `
+    }} >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         {/* First Row: Logo + Menu */}
         <div

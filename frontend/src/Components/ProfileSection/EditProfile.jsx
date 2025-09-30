@@ -64,12 +64,12 @@ function MarketPlace() {
       {/* Hero Section */}
       <div className="mx-auto mt-20 mb-16 lg:mt-[92px]">
         <div className="w-full">
-          {/* Hero Banner */}
-          <div
-            className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full 
-              bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-20 md:mb-24"
-            style={{ backgroundImage: `url(${overview1})` }}
-          ></div>
+         {/* Hero Banner */}
+<div
+  className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-screen -mx-4 sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
+  style={{ backgroundImage: `url(${overview1})` }}
+></div>
+
 
           {/* Profile Info */}
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
