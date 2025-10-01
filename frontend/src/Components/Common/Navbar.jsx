@@ -68,7 +68,7 @@ export default function Navbar() {
               </button>
 
               {shopOpen && (
-                <div className="absolute top-full left-0 mt-2 w-[746px] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden">
+                <div className="absolute top-full left-0  w-[746px] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden">
                   <div className="grid grid-cols-3 gap-[50px] w-[688px] h-full mx-auto px-[29px] py-[31px] text-white">
                     {/* Column 1 */}
                     <div className="flex flex-col gap-1 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
@@ -118,7 +118,7 @@ export default function Navbar() {
               </button>
 
               {socialOpen && (
-                <div className="absolute top-full left-0 mt-2 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg">
+                <div className="absolute top-full left-0  w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg">
                   <a href="https://discord.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors">
                     <img src={DiscordImg} alt="Discord" className="w-[19px] h-[16px]" />
                     <span className="text-white text-sm font-semibold">Discord</span>
