@@ -159,7 +159,7 @@ function NFA() {
                 {index === 0 ? (
                   // ✅ First card with custom text
                   <div className="flex flex-col items-center justify-center text-center gap-4 h-full">
-                    <img src={Logo} alt="logo image" />
+                    <img src={Logo} alt="logo image" className="w-[75px] h-[75px]" />
                     <h2 className="text-lg lg:text-xl font-bold my-2">
                       Instant Sell
                     </h2>

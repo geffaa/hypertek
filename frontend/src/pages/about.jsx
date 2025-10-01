@@ -72,7 +72,7 @@ function About() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-16 max-w-[1020px] mx-auto text-white px-4">
           {/* Text */}
           <div>
-            <h2 className="font-inter font-semibold text-base mb-2">
+            <h2 className="font-inter font-semibold text-base ">
               The year in 2117
             </h2>
             <p className="font-inter text-base leading-relaxed">
@@ -106,7 +106,7 @@ function About() {
 
           {/* Text */}
           <div className="text-white">
-            <h2 className="font-inter font-semibold text-base mb-4">
+            <h2 className="font-inter font-semibold text-base ">
               Three Fronts of War
             </h2>
 

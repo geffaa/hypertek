@@ -7,7 +7,7 @@ import GlowingOrb from "./BgColoring";
 
 function Footer() {
   return (
-    <footer className="w-full  text-white  pb-8 relative z-10 bg-[#000000]" style={{
+    <footer className="w-full  text-white  pb-8 relative z-10 bg-[#000000] " style={{
      
     }} >
       <div
@@ -25,10 +25,10 @@ function Footer() {
                     0_0_100px_50px_rgba(59,130,246,0.4),
                     0_0_200px_100px_rgba(59,130,246,0.2)]"
     ></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         {/* First Row: Logo + Menu */}
         <div
-          className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t pt-4"
+          className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t pt-4 mt-2"
           style={{
             borderStyle: "solid",
             borderWidth: "2px solid white", // top border only

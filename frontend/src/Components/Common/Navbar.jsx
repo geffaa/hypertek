@@ -69,27 +69,27 @@ export default function Navbar() {
 
               {shopOpen && (
                 <div className="absolute top-full left-0 mt-2 w-[746px] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden">
-                  <div className="grid grid-cols-3 gap-[65px] w-[688px] h-full mx-auto px-[29px] py-[31px] text-white">
+                  <div className="grid grid-cols-3 gap-[50px] w-[688px] h-full mx-auto px-[29px] py-[31px] text-white">
                     {/* Column 1 */}
-                    <div className="flex flex-col gap-4 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                    <div className="flex flex-col gap-1 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
                       <h1 className="text-white font-semibold text-[16px]">Overview & Desc</h1>
                       <p className="text-white text-[12px]">See what's new and trending.</p>
                     </div>
-                    <div className="flex flex-col gap-2 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                    <div className="flex flex-col gap-1 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
                       <h1 className="text-white font-semibold text-[16px]">My Assets</h1>
                       <p className="text-white text-[12px]">Track and manage everything you own.</p>
                     </div>
 
                     {/* Column 2 */}
-                    <div className="flex flex-col gap-4 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                    <div className="flex flex-col  border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10  rounded transition-colors">
                       <h1 className="text-white font-semibold text-[16px]">Collectibles</h1>
                       <p className="text-white text-[12px]">Track and manage your NFTs.</p>
                     </div>
 
                     {/* Column 3 */}
-                    <div className="flex   border-b-4 border-white  cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                    <div className="flex flex-col pb-4 border-b-4 border-white  cursor-pointer hover:bg-white/10  rounded transition-colors">
                       <h1 className="text-white font-semibold text-[16px]">Land</h1>
-                      <p className="text-white text-[12px]">Buy a parcel of land and build on it.</p>
+                      <p className="text-white text-[12px] ">Buy a parcel of land and build on it.</p>
                     </div>
                   </div>
                 </div>
