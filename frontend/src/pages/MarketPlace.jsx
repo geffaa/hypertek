@@ -158,10 +158,13 @@ function MarketPlace() {
             </div>
 
             <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-              <button className="flex items-center gap-2 hover:text-gray-300 transition">
+             
+               <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
                 <span>Expand All</span>
                 <ArrowRight size={20} strokeWidth={2} />
-              </button>
+               
+               </Link>
+              
             </div>
           </div>
 
@@ -207,7 +210,7 @@ function MarketPlace() {
 
                 {/* Button */}
                 <div className="mt-auto flex justify-center">
-                  <Link to="/nfa-expand" className="cursor-pointer w-full">
+                  <Link to="/buy-nfa" className="cursor-pointer w-full">
                     <CustomButton text="Buy Now" />
                   </Link>
                 </div>
@@ -233,10 +236,11 @@ function MarketPlace() {
             </div>
 
             <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-              <button className="flex items-center gap-2 hover:text-gray-300 transition">
+               <Link to="/buy-land" className="flex items-center gap-2 hover:text-gray-300 transition">
                 <span>Expand All</span>
                 <ArrowRight size={20} strokeWidth={2} />
-              </button>
+               
+               </Link>
             </div>
           </div>
 
@@ -282,7 +286,7 @@ function MarketPlace() {
 
                 {/* Button */}
                 <div className="mt-auto flex justify-center">
-                  <Link to="/land" className="cursor-pointer w-full">
+                  <Link to="/buy-land" className="cursor-pointer w-full">
                     <CustomButton text="Buy Now" />
                   </Link>
                 </div>
@@ -311,8 +315,10 @@ function MarketPlace() {
 
               <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
                 <button className="flex items-center gap-2 hover:text-gray-300 transition">
+                  <Link to="/nfa-land">
                   <span>Expand All</span>
                   <ArrowRight size={20} strokeWidth={2} />
+                  </Link>
                 </button>
               </div>
             </div>

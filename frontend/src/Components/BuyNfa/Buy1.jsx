@@ -6,6 +6,8 @@ import { FiEdit2 } from "react-icons/fi";
 import popularCollections from "../../assets/images/popular/popolar.png";
 import { Link } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
+import buyNfaImage from "../../assets/images/popolar.png"
+
 
 function Buy1() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +28,12 @@ function Buy1() {
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
       {/* Image */}
-      <img
-        src={Land1}
-        alt="land image"
-        className="w-full md:w-[375px] h-[250px] md:h-[350px] rounded-[10px] bg-[#00000033] object-cover cursor-default"
-      />
+     <img
+  src={buyNfaImage}
+  alt="land image"
+  className="w-full md:w-[375px] h-[230px] md:h-[350px] scale-x-[-1] rounded-[10px] bg-[#00000033] object-cover object-top cursor-default"
+/>
+
 
       {/* Content */}
       <div className="w-full md:w-[464px] flex flex-col gap-4">
@@ -67,9 +70,11 @@ function Buy1() {
             <button onClick={openModal} className="cursor-pointer w-full md:w-auto">
               <CustomButton text="Buy Now" />
             </button>
-            <button className="cursor-pointer w-full md:w-auto">
+            
+              <Link to="/offer" className="cursor-pointer w-full md:w-auto">
               <CustomButton text="Buy With Card" />
-            </button>
+              </Link>
+           
           </div>
 
           <div

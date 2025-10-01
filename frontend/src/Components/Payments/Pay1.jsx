@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CustomButton from "../Buttons/Button1";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 
@@ -40,10 +40,18 @@ function Offer1() {
 
         {/* Price Input */}
         <input
-          type="number"
-          placeholder="Price"
-          className="w-full h-12 px-3 border border-white rounded text-white placeholder-gray-400 bg-transparent outline-none focus:border-blue-500 transition-colors duration-200 text-sm md:text-base"
-        />
+  type="number"
+  placeholder="Price"
+  className="w-full h-12 px-3 border border-white rounded text-white placeholder-gray-400 bg-transparent outline-none 
+             focus:border-blue-500 transition-colors duration-200 text-sm md:text-base
+             [&::-webkit-inner-spin-button]:appearance-none
+             [&::-webkit-outer-spin-button]:appearance-none
+             [&::-webkit-inner-spin-button]:w-4
+             [&::-webkit-inner-spin-button]:h-4
+             [&::-webkit-inner-spin-button]:text-white
+             [&::-webkit-outer-spin-button]:text-white"
+/>
+
 
         {/* Expired In Label */}
         <h1 className="text-white font-semibold text-lg md:text-xl leading-tight tracking-wide mt-2">
@@ -84,8 +92,10 @@ function Offer1() {
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-center mt-4 w-full">
+        <div className="flex justify-center cursor-pointer mt-4 w-full">
+         <Link to="/success">
           <CustomButton text="Submit Offer" />
+         </Link>
         </div>
 
         {/* Paragraph */}

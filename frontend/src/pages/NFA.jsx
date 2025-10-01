@@ -211,7 +211,7 @@ function NFA() {
                     </div>
 
                     <div className="mt-auto flex justify-center">
-                      <Link to="/nfa-expand" className="cursor-pointer">
+                      <Link to="/buy-nfa" className="cursor-pointer">
                         <CustomButton text="Buy Now" />
                       </Link>
                     </div>

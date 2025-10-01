@@ -7,7 +7,7 @@ import BackHome from "../assets/images/backhome.png";
 
 function Success() {
   return (
-    <div className="flex justify-center flex-col items-center gap-8 mt-24 min-h-screen">
+    <div className="flex justify-center flex-col items-center gap-8 mt-24 ">
       {/* Success Icon */}
       <div className="relative w-24 h-24">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
@@ -42,7 +42,9 @@ function Success() {
 
         {/* View Collections Button */}
         <div className="my-4 flex justify-center text-[12px]">
+          <Link to="/">
           <CustomButton text="View | My Collections" />
+          </Link>
         </div>
 
         {/* Divider Line and Go Home Button together */}

@@ -6,6 +6,7 @@ import NewRightImage from "../../assets/images/News/newRight.jpg";
 import CustomButton from "../Buttons/Button1";
 import PageBackground from "../Common/BgEffect";
 import GlowingOrb from "../Common/BgColoring";
+import { Link } from "react-router-dom";
 
 
 export default function News() {
@@ -157,7 +158,9 @@ export default function News() {
 
           {/* More News Button */}
           <div className="flex justify-center mt-4">
+           <Link to="/more-news">
             <CustomButton text="More News" />
+           </Link>
           </div>
         </div>
       </div>

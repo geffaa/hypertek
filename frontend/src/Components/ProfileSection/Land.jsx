@@ -16,8 +16,8 @@ function Land() {
   return (
     <div className=" ">
       {/* Hero Section */}
-      <div className="mx-auto mt-20 lg:mt-[92px]">
-        <div className=" mx-auto">
+      <div className="mx-auto mt-18 lg:mt-[92px]">
+        <div className="">
           {/* Hero Banner */}
           <div
             className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full

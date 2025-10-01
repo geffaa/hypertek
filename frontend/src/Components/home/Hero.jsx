@@ -4,6 +4,7 @@ import Logo from "../../assets/images/logo.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton2 from "../Buttons/Button2";
 import "../../App.css";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const logoItems = [
@@ -41,11 +42,16 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-[90vw] overflow-hidden">
+          <Link to="/market-place">
           <CustomButton 
             text="MarketPlace"
             bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
           />
+          </Link>
+          <Link to="/download-game">
           <CustomButton2 text="Download Game" bgcolor="" />
+          
+          </Link>
         </div>
       </div>
 

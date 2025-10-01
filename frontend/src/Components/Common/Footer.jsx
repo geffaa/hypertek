@@ -53,12 +53,12 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className=" cursor-pointer hover:text-gray-400 transition-colors">
                 News
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors">
                 WhitePapers
               </a>
             </li>

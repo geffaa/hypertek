@@ -8,7 +8,7 @@ import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
 
 function MarketPlace() {
-  return (
+  return ( 
     <>
       {/* Main Container */}
       <div className="min-h-screen bg-transparent">
