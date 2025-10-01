@@ -7,6 +7,7 @@ import google from "../assets/images/login/google.png";
 import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -29,8 +30,11 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent mt-8">
+    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-8">
       {/* Login Container */}
+  <GlowingOrb Xaxis={70} Yaxis={150}/>
+     <GlowingOrb Xaxis={950} Yaxis={450}/>
+
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[450px] max-w-md sm:max-w-sm">
         {/* Logo */}
         <img

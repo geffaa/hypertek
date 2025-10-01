@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";
+import GlowingOrb from "../Common/BgColoring";
 
 function PersonalActivity() {
   return (
@@ -100,9 +101,10 @@ function PersonalActivity() {
       </div>
 
       {/* Activities Section */}
-      <section className=" mx-auto flex flex-col gap-6 lg:gap-8 mb-16">
+      <section className=" mx-auto flex flex-col gap-6 lg:gap-8 mb-16 ">
+        <GlowingOrb Xaxis={920} Yaxis={600}/>
         {/* Table */}
-        <div className="overflow-x-auto rounded-lg ">
+        <div className="overflow-x-auto rounded-lg z-10 ">
           <table className="w-full min-w-[800px] text-white">
             <thead className="bg-[#00134C]">
               <tr className="text-left">

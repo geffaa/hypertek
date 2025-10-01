@@ -9,12 +9,14 @@ import land1Image from "../assets/images/Overview/land1.jpg";
 import ManImage from "../assets/images/Overview/man.png";
 import { ArrowRight } from "lucide-react";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function MarketPlace() {
   return (
     <>
       {/* Main Container */}
-      <div className="min-h-screen bg-transparent  ">
+      <div className="min-h-screen bg-transparent relative z-10 ">
+
         {/* Hero Section */}
         <div className=" mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
@@ -290,7 +292,8 @@ function MarketPlace() {
         </section>
 
         {/* ACTIVITIES Section */}
-        <section className="w-full flex justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
+        <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
+          <GlowingOrb Xaxis={830} Yaxis={300}/>
           <div className=" w-full flex flex-col gap-6 lg:gap-8">
             {/* Header */}
             <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">

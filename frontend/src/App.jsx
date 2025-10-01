@@ -32,6 +32,7 @@ import Activity from "./Components/ProfileSection/Activity";
 import List from "./Components/ProfileSection/Listing";
 import Edit from "./Components/ProfileSection/EditProfile";
 import NotFound from "./pages/NotFound";
+import Testing from "./pages/Testing";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -89,6 +90,10 @@ function AppWrapper() {
           <Route path="/Activity" element={<Activity />} />
           <Route path="/List" element={<List />} />
           <Route path="/edit" element={<Edit />} />
+
+
+        {/* Testing Routes  */}
+        <Route path="/testing" element={<Testing/>}/>
         </Routes>
       </div>
       <Footer />

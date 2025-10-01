@@ -3,10 +3,11 @@ import Logo from "../../assets/images/logo.png";
 import TelegramImg from "../../assets/images/telegram.png";
 import SkypeImg from "../../assets/images/skipe.png";
 import DiscordImg from "../../assets/images/discard.png";
+import GlowingOrb from "./BgColoring";
 
 function Footer() {
   return (
-    <footer className="w-full  text-white mt-12 pb-4 pt-8 " style={{
+    <footer className="w-full  text-white  pb-8 relative z-10 " style={{
       background: `
       radial-gradient(circle at 10% 30%, rgba(8, 1, 33, 0.9) 0%, transparent 70%),
       radial-gradient(circle at 70% 50%, rgba(13, 7, 22, 0.93) 0%, transparent 60%),
@@ -14,6 +15,21 @@ function Footer() {
       #0d0d14
     `
     }} >
+      <div
+      style={{
+        top: `${0}px`,
+        right: `${350}px`,
+      }}
+      className="absolute 
+             w-[120px] h-[120px] 
+             md:w-[150px] md:h-[120px] 
+             rounded-full 
+             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
+             blur-[80px] md:blur-[100px]
+             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+                    0_0_100px_50px_rgba(59,130,246,0.4),
+                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+    ></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
         {/* First Row: Logo + Menu */}
         <div

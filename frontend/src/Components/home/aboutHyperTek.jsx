@@ -3,12 +3,32 @@ import LeftImage from "../../assets/images/about/about.jpg";
 import RightImage1 from "../../assets/images/about/left.jpg";
 import RightImage2 from "../../assets/images/about/right.jpg";
 import PageBackground from "../Common/BgEffect";
+import GlowingOrb from "../Common/BgColoring";
 
 export default function HyperTekDesign() {
   return (
-    <section className="relative my-16 w-full overflow-x-hidden">
-      {/* <PageBackground/> */}
+    <section className="relative my-4 w-full overflow-x-hidden overflow-hidden  relative z-10 ">
+      {/* <GlowingOrb Xaxis={1000} Yaxis={350}/> */}
+      <div
+        style={{
+          bottom: `${20}px`,
+          right: `${90}px`,
+        }}
+        className="absolute 
+             w-[120px] h-[120px] 
+             md:w-[250px] md:h-[250px] 
+             rounded-full 
+             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
+             blur-[80px] md:blur-[100px]
+             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+                    0_0_100px_50px_rgba(59,130,246,0.4),
+                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+      ></div>
 
+
+
+
+        
       <div className="flex flex-col lg:flex-row">
         {/* Left Box */}
         <div className="relative bg-[#B0BDE4] flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]">
@@ -58,8 +78,8 @@ export default function HyperTekDesign() {
 
           {/* Paragraph */}
           <p className="text-white text-sm md:text-base leading-relaxed font-inter px-2">
-            <span className="font-semibold">The year is 2117.</span> <br /> Humanity
-            didn&apos;t conquer the stars—it fractured into them. After
+            <span className="font-semibold">The year is 2117.</span> <br />{" "}
+            Humanity didn&apos;t conquer the stars—it fractured into them. After
             Earth&apos;s collapse, survivors launched the Hyper Tek Exodus,
             scattering AI, enhanced genomes, and prototypes across thousands of
             seed worlds. Each evolved in isolation, forming new species,

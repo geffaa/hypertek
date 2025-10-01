@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.png";
 import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.png";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function NoPersonalActivity() {
   return (
     <>
-      <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-transparent px-4 sm:px-6 relative z-10 lg:px-8">
+        <GlowingOrb Xaxis={840} Yaxis={550}/>
         <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
           <div

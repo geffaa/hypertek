@@ -4,11 +4,14 @@ import TVector from "../../assets/images/popular/vector.png";
 import CustomButton from "../Buttons/Button1";
 import { Link } from "react-router-dom";
 import PageBackground from "../Common/BgEffect";
+import GlowingOrb from "../Common/BgColoring";
+
 
 function PopularCollections() {
   return (
-    <section className="flex flex-col gap-8 w-full sm:px-8 pt-5 overflow-x-hidden mt-8">
-      {/* <PageBackground/> */}
+    <section className="flex flex-col overflow-hidden md:h-[700px] relative z-10 gap-8 w-full sm:px-8 pt-5 overflow-x-hidden ">
+   <GlowingOrb Xaxis={180} Yaxis={20}/>
+   <GlowingOrb Xaxis={700} Yaxis={420}/>
 
       {/* Container for heading and cards aligned from same left */}
       <div className="mx-auto w-full max-w-[1600px]  flex flex-col gap-8">
@@ -29,7 +32,7 @@ function PopularCollections() {
         </div>
 
         {/* Cards Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 z-10  sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}

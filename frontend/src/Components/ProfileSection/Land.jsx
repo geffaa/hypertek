@@ -10,6 +10,7 @@ import Logo from "../../assets/images/logo.png";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 import NavLinks from "../ProfileSection/Navlinks"; // ✅ Import same as MarketPlace
 import Profile from "../../assets/images/Profile/Profile.png";
+import GlowingOrb from "../Common/BgColoring";
 
 function Land() {
   return (
@@ -69,15 +70,16 @@ function Land() {
       </div>
 
       {/* Rest of Land Page */}
-      <section className=" mx-auto flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16">
+      <section className=" mx-auto flex flex-col relative z-10 gap-4 lg:gap-8 mb-12 lg:mb-16">
         {/* Heading */}
+         <GlowingOrb Xaxis={800} Yaxis={100}/>
 
         {/* ✅ Cards Section same as before */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
+              className="bg-gray-800 rounded-lg z-10 shadow-md text-white p-4 w-full max-w-sm mx-auto 
     lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
             >
               <div

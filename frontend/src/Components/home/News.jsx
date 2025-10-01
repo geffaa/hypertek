@@ -5,12 +5,48 @@ import NewsImage3 from "../../assets/images/News/new3.png";
 import NewRightImage from "../../assets/images/News/newRight.jpg";
 import CustomButton from "../Buttons/Button1";
 import PageBackground from "../Common/BgEffect";
+import GlowingOrb from "../Common/BgColoring";
 
 
 export default function News() {
   return (
-    <section className="w-full flex justify-center items-start px-4 md:px-6 py-10 md:py-12">
-      <PageBackground/>
+    <section className="w-full z-10 flex justify-center items-start px-4 md:px-6 py-10 md:py-12 relative">
+      
+      {/* first for top  */}
+      <div
+        style={{
+          bottom: `${890}px`,
+          right: `${110}px`,
+        }}
+         className="absolute 
+             w-[120px] h-[120px] 
+             md:w-[250px] md:h-[250px] 
+             rounded-full 
+             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
+             blur-[80px] md:blur-[100px]
+             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+                    0_0_100px_50px_rgba(59,130,246,0.4),
+                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+      ></div>
+
+       <div
+        style={{
+          bottom: `${90}px`,
+          right: `${100}px`,
+        }}
+         className="absolute 
+             w-[120px] h-[120px] 
+             md:w-[250px] md:h-[250px] 
+             rounded-full 
+             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
+             blur-[80px] md:blur-[100px]
+             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+                    0_0_100px_50px_rgba(59,130,246,0.4),
+                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+      ></div>
+      
+      <GlowingOrb Xaxis={220} Yaxis={400}/>
+
       <div className="flex flex-col md:flex-row gap-10 w-full max-w-[1247px]">
         {/* ================= Left Column ================= */}
         <div className="flex flex-col gap-8 w-full md:w-[680px]">
@@ -75,7 +111,7 @@ export default function News() {
         </div>
 
         {/* ================= Right Column ================= */}
-        <div className="flex flex-col gap-10 w-full md:w-[450px]">
+        <div className="flex flex-col z-10 gap-10 w-full md:w-[450px]">
           {/* Heading */}
           <div className="flex items-center w-full">
             <h2 className="text-white font-bold text-2xl sm:text-3xl font-goldman uppercase border-b-2 border-white pb-1">

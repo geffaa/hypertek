@@ -5,6 +5,7 @@ import Profile from "../../assets/images/Profile/Profile.png";
 import { FiCopy } from "react-icons/fi";
 import { ArrowRight } from "lucide-react"; // Arrow import
 import CustomButton from "../../Components/Buttons/Button1";
+import GlowingOrb from "../Common/BgColoring";
 
 function MarketPlace() {
   const walletAddress = "0xc416a645...b21a";
@@ -60,7 +61,11 @@ function MarketPlace() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8 relative z-10">
+      <GlowingOrb Xaxis={100} Yaxis={100}/>
+      <GlowingOrb Xaxis={920} Yaxis={480}/>
+      <GlowingOrb Xaxis={180} Yaxis={680}/>
+      <GlowingOrb Xaxis={920} Yaxis={1000}/>
       {/* Hero Section */}
       <div className="mx-auto mt-20 mb-16 lg:mt-[92px]">
         <div className="w-full">

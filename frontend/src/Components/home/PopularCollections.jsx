@@ -3,11 +3,14 @@ import popularCollections from "../../assets/images/popular/popolar.png";
 import TVector from "../../assets/images/popular/vector.png";
 import CustomButton from "../Buttons/Button1";
 import PageBackground from "../Common/BgEffect";
+import GlowingOrb from "../Common/BgColoring";
+
 
 function PopularCollections() {
   return (
-    <section className="flex flex-col gap-8 w-full sm:px-8 pt-5 overflow-x-hidden">
-      {/* <PageBackground/> */}
+    <section className="flex flex-col overflow-hidden gap-8 w-full sm:px-8 pt-5 overflow-x-hidden relative z-10">
+     
+     <GlowingOrb Xaxis={200} Yaxis={460}/>
 
       {/* Container to align text, underline, and cards */}
       <div className="mx-auto w-full max-w-[1600px]  flex flex-col gap-8">
@@ -28,7 +31,7 @@ function PopularCollections() {
         </div>
 
         {/* Cards Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}

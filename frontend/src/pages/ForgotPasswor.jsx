@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import sendImg from "../assets/images/send.png"; 
 import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,8 @@ function ForgotPassword() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent mt-8">
       {/* Container */}
+        <GlowingOrb Xaxis={70} Yaxis={150}/>
+     <GlowingOrb Xaxis={950} Yaxis={450}/>
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[420px] max-w-md sm:max-w-sm">
         {/* Logo */}
         <img

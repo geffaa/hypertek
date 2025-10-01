@@ -4,6 +4,7 @@ import Logo from "../assets/images/logo.png";
 import submitImg from "../assets/images/resetpassword.png";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,8 +28,11 @@ function ResetPassword() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent mt-8">
+    <div className="flex flex-col items-center relative z-10 justify-center min-h-screen px-4 bg-transparent mt-8">
       {/* Container */}
+
+        <GlowingOrb Xaxis={70} Yaxis={150}/>
+     <GlowingOrb Xaxis={950} Yaxis={450}/>
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[500px] max-w-md sm:max-w-sm">
         {/* Logo */}
         <img

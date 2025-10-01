@@ -8,11 +8,16 @@ import RightImage from "../assets/images/aboutpage/aboutRight.png";
 import exchange from "../assets/images/aboutpage/Exchange.png";
 import game from "../assets/images/aboutpage/game.png";
 import vector from "../assets/images/aboutpage/Vector.png";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function About() {
   return (
     <>
-      {/* Top Section */}
+      <div className="relative z-10">
+        <GlowingOrb Xaxis={100} Yaxis={350}/>
+        <GlowingOrb Xaxis={1000} Yaxis={400}/>
+       
+        {/* Top Section */}
       <div
         className="flex flex-col items-center justify-center text-center text-white px-4 py-16"
         style={{
@@ -50,20 +55,19 @@ function About() {
 
       {/* Second Section */}
 
-    
- <div
-  className="relative w-full h-[925px] overflow-hidden"
-  style={{
-    // backgroundImage: `url(${aboutBG})`,
-   
-    position:"relative",
-    backgroundPosition: "center", // X offset & vertical center
-    backgroundRepeat: "no-repeat",
-    backgroundColor: "#0d0d14", // fallback
-    opacity: 0.8, // note: this affects the whole div including children
-  }}
->
- 
+      <div
+        className="relative w-full  z-10 h-[925px] overflow-hidden"
+        style={{
+          // backgroundImage: `url(${aboutBG})`,
+
+          position: "relative",
+          backgroundPosition: "center", // X offset & vertical center
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "#0d0d14", // fallback
+          opacity: 0.8, // note: this affects the whole div including children
+        }}
+      >
+         <GlowingOrb Xaxis={1100} Yaxis={700}/>
         {/* First Section */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-16 max-w-[1020px] mx-auto text-white px-4">
           {/* Text */}
@@ -138,13 +142,14 @@ function About() {
       {/* --------------------------------------------  */}
       {/* Ecosystem Section */}
       <div
-        className="flex flex-col items-center text-center text-white mx-auto my-16 gap-2 max-w-[1161px] px-4 rounded-[20px]"
-        style={{
-          background:
-            "linear-gradient(180deg, #1e2330ff, #06133880, #090909ff)",
-        }}
+        className="flex flex-col relative z-10 items-center text-center text-white mx-auto  gap-2 max-w-[1161px] px-4 "
+        // style={{
+        //   background:
+        //     "linear-gradient(180deg, #1e2330ff, #06133880, #090909ff)",
+        // }}
       >
-        <h1 className="font-inter font-bold text-[28px] md:text-[35px] leading-[100%] text-center mt-6">
+       <GlowingOrb Xaxis={1000} Yaxis={0}/> 
+        <h1 className="font-inter font-bold z-10 text-[28px] md:text-[35px] leading-[100%] text-center mt-6">
           Our Ecosystem
         </h1>
 
@@ -201,6 +206,7 @@ function About() {
             </h4>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

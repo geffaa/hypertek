@@ -4,6 +4,7 @@ import signupImg from "../assets/images/signup/signup.png";
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
+import GlowingOrb from "../Components/Common/BgColoring";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +29,9 @@ function Signup() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent">
+    <div className="flex flex-col relative  z-10 items-center justify-center min-h-screen px-4 bg-transparent">
+     <GlowingOrb Xaxis={70} Yaxis={150}/>
+     <GlowingOrb Xaxis={950} Yaxis={450}/>
       {/* Signup Container */}
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] max-w-md sm:max-w-sm">
         {/* Logo Above Create Account */}
