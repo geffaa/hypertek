@@ -14,14 +14,14 @@ import GlowingOrb from "../Common/BgColoring";
 
 function Land() {
   return (
-    <div className=" px-4 sm:px-6 lg:px-8">
+    <div className=" ">
       {/* Hero Section */}
       <div className="mx-auto mt-20 lg:mt-[92px]">
         <div className=" mx-auto">
           {/* Hero Banner */}
           <div
             className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full
-            bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-20 md:mb-24"
+            bg-cover bg-top bg-no-repeat  mb-20 md:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           ></div>
 
@@ -70,9 +70,9 @@ function Land() {
       </div>
 
       {/* Rest of Land Page */}
-      <section className=" mx-auto flex flex-col relative z-10 gap-4 lg:gap-8 mb-12 lg:mb-16">
+      <section className="  flex flex-col relative z-10 gap-4 px-6 sm:px-12 xl:px-18 2xl:px-32  lg:gap-8 mb-12 lg:mb-16">
         {/* Heading */}
-         <GlowingOrb Xaxis={800} Yaxis={100}/>
+        <GlowingOrb Xaxis={800} Yaxis={100} />
 
         {/* ✅ Cards Section same as before */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">

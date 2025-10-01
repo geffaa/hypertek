@@ -13,7 +13,7 @@ function MarketPlace() {
       {/* Main Container */}
       <div className="min-h-screen bg-transparent">
         {/* Hero Section */}
-        <div className="mx-auto mt-20 lg:mt-[92px]">
+        <div className="mx-auto mt-18 lg:mt-[92px]">
           <div className="w-full">
             {/* Hero Banner */}
             <div
@@ -66,7 +66,7 @@ function MarketPlace() {
         </div>
 
         {/* NFA Section */}
-        <section className="mx-auto flex flex-col gap-6 lg:gap-2 mb-2 px-6 sm:px-12 xl:px-20 2xl:px-32 relative z-10 lg:mb-4">
+        <section className="mx-auto flex flex-col gap-6 lg:gap-2 mb-2 px-2 sm:px-12 xl:px-20 2xl:px-32 relative z-10 lg:mb-2">
           <GlowingOrb Xaxis={800} Yaxis={100} />
 
           {/* Cards Grid */}

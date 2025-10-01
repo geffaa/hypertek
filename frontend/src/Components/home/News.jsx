@@ -22,7 +22,7 @@ export default function News() {
              w-[120px] h-[120px] 
              md:w-[250px] md:h-[250px] 
              rounded-full 
-             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
+             bg-gradient-to-b from-blue-500/70 via-blue-800/80 to-white/0
              blur-[80px] md:blur-[100px]
              shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
                     0_0_100px_50px_rgba(59,130,246,0.4),

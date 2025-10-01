@@ -10,14 +10,14 @@ import GlowingOrb from "../Common/BgColoring";
 
 function PersonalActivity() {
   return (
-    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
+    <div className=" bg-transparent ">
       {/* Hero Section */}
       <div className=" mx-auto mt-20 lg:mt-[92px]">
         <div className="w-full">
           {/* Hero Banner */}
           <div
             className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full 
-           bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-20 md:mb-24"
+           bg-cover bg-top bg-no-repeat  mb-20 md:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           ></div>
 
@@ -101,7 +101,7 @@ function PersonalActivity() {
       </div>
 
       {/* Activities Section */}
-      <section className=" mx-auto flex flex-col gap-6 lg:gap-8 mb-16 ">
+      <section className=" mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-6 sm:px-12 xl:px-18 2xl:px-32 ">
         <GlowingOrb Xaxis={920} Yaxis={600}/>
         {/* Table */}
         <div className="overflow-x-auto rounded-lg z-10 ">
