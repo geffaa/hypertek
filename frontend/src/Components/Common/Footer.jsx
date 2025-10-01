@@ -7,13 +7,8 @@ import GlowingOrb from "./BgColoring";
 
 function Footer() {
   return (
-    <footer className="w-full  text-white  pb-8 relative z-10 " style={{
-      background: `
-      radial-gradient(circle at 10% 30%, rgba(8, 1, 33, 0.9) 0%, transparent 70%),
-      radial-gradient(circle at 70% 50%, rgba(13, 7, 22, 0.93) 0%, transparent 60%),
-      radial-gradient(circle at 50% 90%, rgba(5, 4, 17, 0.96) 0%, transparent 90%),
-      #0d0d14
-    `
+    <footer className="w-full  text-white  pb-8 relative z-10 bg-[#000000]" style={{
+     
     }} >
       <div
       style={{
