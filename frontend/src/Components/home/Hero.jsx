@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container mx-auto px-4 md:px-6">
         {/* Text */}
         <div className="flex flex-col max-w-[90%] md:max-w-[80%]">
-          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase m-0">
+          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white md:pl-12 leading-[100%] uppercase m-0">
             Hyper Tek 100:
           </h1>
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase m-0">

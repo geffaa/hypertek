@@ -1,5 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store"
+
 
 import Home from "./pages/home";
 import About from "./pages/About";
@@ -94,8 +98,12 @@ function AppWrapper() {
 
         {/* Testing Routes  */}
         <Route path="/testing" element={<Testing/>}/>
+
+
+      {/* set the toast contianer here  */}
         </Routes>
       </div>
+       <Toaster position="top-right" reverseOrder={false} />
       <Footer />
     </>
   );

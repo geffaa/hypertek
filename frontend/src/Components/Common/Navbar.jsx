@@ -7,6 +7,8 @@ import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+
 
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
@@ -15,9 +17,22 @@ import TelegramImg from "../../assets/images/telegram.png";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLogin] = useState(false);
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+
+  console.log("your user from redux store :",user);
+  console.log("your user from redux token :",token);
+  console.log("your user from redux isLoggedIn :",isLoggedInUser);
+useEffect(() => {
+    if (isLoggedInUser) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [isLoggedInUser]);
 
   const shopRef = useRef(null);
   const socialRef = useRef(null);
