@@ -7,67 +7,41 @@ import "../../App.css";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
-  const logoItems = [
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-    { text: "Hyper Tek" },
-  ];
-
   return (
-    <section className="max-w-full w-full min-h-screen relative flex overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 pointer-events-none bg-no-repeat bg-cover bg-center scale-x-[-1] brightness-100"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      ></div>
-
-      {/* Right-side brightness overlay */}
-      <div className="absolute top-0 right-0 h-full w-1/3 pointer-events-none bg-gradient-to-l from-white/50 to-transparent mix-blend-screen"></div>
-
+    <div
+      className="w-full h-[630px] scale-x-[-1] relative"
+      style={{
+        backgroundImage: `url(${heroImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center 1px",
+      }}
+    >
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col mt-20 items-center justify-center gap-6 px-4 md:px-0 text-center max-w-full">
+      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container mx-auto px-4 md:px-6">
         {/* Text */}
-        <div className="flex flex-col items-center justify-center max-w-[90%]">
-          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase text-center m-0">
+        <div className="flex flex-col max-w-[90%] md:max-w-[80%]">
+          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase m-0">
             Hyper Tek 100:
           </h1>
-          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase text-center m-0">
-            WHERE <span className="outline-text">Legends</span> Are Forged.
+          <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase m-0">
+            WHERE <span className="outline-text">Legends</span> Are <br />
+            <span className="md:pl-16">Forged.</span>
           </h1>
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-[90vw] overflow-hidden">
+        <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
           <Link to="/market-place">
-          <CustomButton 
-            text="MarketPlace"
-            bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
-          />
+            <CustomButton 
+              text="MarketPlace"
+              bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
+            />
           </Link>
           <Link to="/download-game">
-          <CustomButton2 text="Download Game" bgcolor="" />
-          
+            <CustomButton2 text="Download Game" bgcolor="" />
           </Link>
         </div>
       </div>
-
-      {/* Bottom Bar with Logos */}
-      <div className="absolute bottom-0 left-0 w-full flex justify-center items-center bg-[#00134C80] h-10 md:h-12 px-1 z-20">
-        <div className="flex flex-wrap items-center w-full max-w-7xl justify-center gap-4 md:justify-center">
-          {logoItems.map((item, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <img src={Logo} alt="Logo" className="w-7 h-6 md:w-7 md:h-6" />
-              <span className="text-white font-bold font-[11px] text-sm md:text-base whitespace-nowrap">
-                {item.text}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
