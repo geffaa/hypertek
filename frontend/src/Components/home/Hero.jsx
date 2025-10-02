@@ -7,6 +7,15 @@ import "../../App.css";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+    const logoItems = [
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+  ];
   return (
     <div
       className="w-full h-[630px] scale-x-[-1] relative"
@@ -42,6 +51,22 @@ export default function Hero() {
           </Link>
         </div>
       </div>
+
+       {/* Bottom Bar with Logos */}
+      <div className="absolute bottom-0 scale-x-[-1] left-0 w-full flex justify-center items-center bg-[#00134C80] h-10 md:h-12 px-1 z-20">
+        <div className="flex flex-wrap items-center w-full max-w-7xl justify-center gap-4 md:justify-center">
+          {logoItems.map((item, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <img src={Logo} alt="Logo" className="w-7 h-6 md:w-7 md:h-6" />
+              <span className="text-white font-bold font-[11px] text-sm md:text-base whitespace-nowrap">
+                {item.text}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
     </div>
   );
 }
