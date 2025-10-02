@@ -1,55 +1,79 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import submitImg from "../assets/images/resetpassword.png";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function ResetPassword() {
+  const { token } = useParams(); // Get token from URL
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+
+    // Password validations
+    if (formData.password.length < 8 || formData.password.length > 20) {
+      toast.error("Password must be between 8 and 20 characters");
       return;
     }
-    console.log("Reset Password Submitted:", formData);
-    // Add your reset password logic here
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+  try {
+  const res = await axios.post(
+    `http://localhost:3000/api/v1/user/reset-password/${token}`,
+    {
+      Password: formData.password,
+      ConfirmPassword: formData.confirmPassword
+    }
+  );
+
+  if (res.status === 200) {
+    toast.success("Password reset successful! Please login.");
+    setFormData({ password: "", confirmPassword: "" });
+    navigate("/signin");
+  } else {
+    toast.error(res.data.message || "Reset password failed");
+  }
+} catch (error) {
+  console.error("Reset Password error:", error.response?.data || error.message);
+  toast.error(error.response?.data?.message || "Something went wrong");
+}
+
   };
 
   return (
     <div className="flex flex-col items-center relative z-10 justify-center min-h-screen px-4 bg-transparent mt-8">
-      {/* Container */}
+      <GlowingOrb Xaxis={70} Yaxis={150}/>
+      <GlowingOrb Xaxis={950} Yaxis={450}/>
 
-        <GlowingOrb Xaxis={70} Yaxis={150}/>
-     <GlowingOrb Xaxis={950} Yaxis={450}/>
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[500px] max-w-md sm:max-w-sm">
         {/* Logo */}
-        <img
-          src={Logo}
-          alt="Logo"
-          className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]"
-        />
+        <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />
 
         {/* Title */}
-        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">
-          Reset Password
-        </h1>
+        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">Reset Password</h1>
 
-        {/* Info Text */}
-        <p className="text-white text-sm mb-6 text-center">
-          We sent a new password to your email, please check.
-        </p>
+        {/* Info */}
+        <p className="text-white text-sm mb-6 text-center">Enter your new password below</p>
 
         {/* Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -97,25 +121,18 @@ function ResetPassword() {
             </button>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
+            className={`w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={loading}
           >
-            <img
-              src={submitImg}
-              alt="Submit"
-              className="h-10 sm:h-8"
-              style={{ height: "40px", width: "266px" }}
-            />
+            <img src={submitImg} alt="Submit" className="h-10 sm:h-8" style={{ height: "40px", width: "266px" }} />
           </button>
         </form>
 
-        {/* Back to Login */}
-        <Link
-          to="/signin"
-          className="flex items-center text-blue-400 hover:underline mt-4"
-        >
+        {/* Back to login */}
+        <Link to="/signin" className="flex items-center text-blue-400 hover:underline mt-4">
           <FaArrowLeft className="mr-2" /> Back to Login
         </Link>
       </div>

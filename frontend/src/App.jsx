@@ -65,7 +65,7 @@ function AppWrapper() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPasswor />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           {/* Marketplace / NFA */}
           <Route path="/market-place" element={<MarketPlace />} />
