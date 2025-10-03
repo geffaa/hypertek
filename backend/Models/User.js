@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   Password: {
     type: String,
     required: function () {
-      return !this.GoogleId; // only require password if no GoogleId
+      return !this.GoogleId && !this.DiscordId; // require only if no OAuth
     },
     minLength: [8, "Password should be at least 8 characters"],
     maxLength: [20, "Password max length should be 20 characters"],
@@ -25,7 +25,11 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     sparse: true, // allows multiple null values
   },
-  DiscordId: { type: String, unique: true, sparse: true },
+  DiscordId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
 });
 
 // Pre-save middleware to hash password

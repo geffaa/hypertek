@@ -216,9 +216,16 @@ const GoogleAuth = async (req, res) => {
 const DiscordAuth = async (req, res) => {
   try {
     const { code } = req.body;
-    if (!code) return res.status(400).json({ message: "Authorization code is required" });
+    console.log("Received Discord auth code:", code);
+    
+    if (!code) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Authorization code is required" 
+      });
+    }
 
-    // 1. Exchange code for access_token
+    // Exchange code for access_token
     const params = new URLSearchParams();
     params.append("client_id", process.env.DISCORD_CLIENT_ID);
     params.append("client_secret", process.env.DISCORD_CLIENT_SECRET);
@@ -233,42 +240,79 @@ const DiscordAuth = async (req, res) => {
     });
 
     const tokenData = await tokenResponse.json();
+    console.log("Token exchange response:", tokenData);
+
     if (!tokenData.access_token) {
-      return res.status(400).json({ message: "Failed to exchange code", error: tokenData });
+      console.error("Token exchange failed:", tokenData);
+      return res.status(400).json({ 
+        success: false, 
+        message: "Failed to exchange authorization code", 
+        error: tokenData 
+      });
     }
 
-    // 2. Fetch user info
+    // Fetch Discord user info
     const userResponse = await fetch("https://discord.com/api/users/@me", {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
-
+    
     const discordUser = await userResponse.json();
+    console.log("Discord user data:", discordUser);
+
     if (!discordUser.id) {
-      return res.status(400).json({ message: "Failed to fetch Discord user", error: discordUser });
+      console.error("Failed to fetch Discord user:", discordUser);
+      return res.status(400).json({ 
+        success: false, 
+        message: "Failed to fetch Discord user information" 
+      });
     }
 
-    const { id: discordId, username, discriminator, email } = discordUser;
+    const { id: discordId, username, discriminator, email, global_name } = discordUser;
 
-    // 3. Find or create user
-    let user = await UserModel.findOne({ DiscordId: discordId });
+    // Find or create user
+    let user;
+    
+    // First, try to find by Discord ID
+    user = await UserModel.findOne({ DiscordId: discordId });
+    
+    // If not found by Discord ID, try by email
+    if (!user && email) {
+      user = await UserModel.findOne({ Email: email.toLowerCase() });
+      if (user) {
+        // Link Discord ID to existing email account
+        user.DiscordId = discordId;
+        await user.save();
+      }
+    }
 
+    // Create new user if not found
     if (!user) {
+      const fullName = global_name || `${username}${discriminator && discriminator !== '0' ? `#${discriminator}` : ''}`;
+      
       user = new UserModel({
         DiscordId: discordId,
-        FullName: `${username}#${discriminator}`,
-        Email: email || null, // email optional
+        Email: email ? email.toLowerCase() : `${username}@discord.user`,
+        FullName: fullName,
+        Password: null,
       });
       await user.save();
     }
 
-    // 4. Generate JWT
+    // Generate JWT token
     const jwtToken = jwt.sign(
-      { id: user._id, DiscordId: discordId, Email: user.Email },
-      JWT_SECRET,
+      { 
+        id: user._id, 
+        DiscordId: discordId, 
+        Email: user.Email 
+      },
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
+    console.log("Discord login successful for user:", user.Email);
+
     return res.status(200).json({
+      success: true,
       message: "Discord login successful",
       token: jwtToken,
       user: {
@@ -278,10 +322,16 @@ const DiscordAuth = async (req, res) => {
         DiscordId: user.DiscordId,
       },
     });
+
   } catch (err) {
     console.error("DiscordAuth error:", err);
-    return res.status(500).json({ message: "Discord auth failed", error: err.message });
+    return res.status(500).json({ 
+      success: false, 
+      message: "Internal server error during Discord authentication" 
+    });
   }
 };
+
+
 
 export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth, DiscordAuth };

@@ -86,7 +86,7 @@ useEffect(() => {
                 </button>
 
                 {shopOpen && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[746px] max-w-[90vw] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20">
+                  <div className="absolute  top-full left-[350px] transform -translate-x-1/2 mt-0 w-[746px] max-w-[90vw] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20">
                     <div className="grid grid-cols-3 gap-[50px] w-full h-full mx-auto px-[29px] py-[31px] text-white">
                       {/* Column 1 */}
                       <div 
@@ -161,7 +161,7 @@ useEffect(() => {
                 </button>
 
                 {socialOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
+                  <div className="absolute top-full left-0  w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
                     <a 
                       href="https://discord.com" 
                       target="_blank" 
