@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
+import fetch from "node-fetch";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
@@ -212,5 +213,75 @@ const GoogleAuth = async (req, res) => {
     return res.status(500).json({ message: "Google auth failed", error: err.message });
   }
 };
+const DiscordAuth = async (req, res) => {
+  try {
+    const { code } = req.body;
+    if (!code) return res.status(400).json({ message: "Authorization code is required" });
 
-export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth };
+    // 1. Exchange code for access_token
+    const params = new URLSearchParams();
+    params.append("client_id", process.env.DISCORD_CLIENT_ID);
+    params.append("client_secret", process.env.DISCORD_CLIENT_SECRET);
+    params.append("grant_type", "authorization_code");
+    params.append("code", code);
+    params.append("redirect_uri", process.env.DISCORD_REDIRECT_URI);
+
+    const tokenResponse = await fetch("https://discord.com/api/oauth2/token", {
+      method: "POST",
+      body: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+
+    const tokenData = await tokenResponse.json();
+    if (!tokenData.access_token) {
+      return res.status(400).json({ message: "Failed to exchange code", error: tokenData });
+    }
+
+    // 2. Fetch user info
+    const userResponse = await fetch("https://discord.com/api/users/@me", {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    });
+
+    const discordUser = await userResponse.json();
+    if (!discordUser.id) {
+      return res.status(400).json({ message: "Failed to fetch Discord user", error: discordUser });
+    }
+
+    const { id: discordId, username, discriminator, email } = discordUser;
+
+    // 3. Find or create user
+    let user = await UserModel.findOne({ DiscordId: discordId });
+
+    if (!user) {
+      user = new UserModel({
+        DiscordId: discordId,
+        FullName: `${username}#${discriminator}`,
+        Email: email || null, // email optional
+      });
+      await user.save();
+    }
+
+    // 4. Generate JWT
+    const jwtToken = jwt.sign(
+      { id: user._id, DiscordId: discordId, Email: user.Email },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    return res.status(200).json({
+      message: "Discord login successful",
+      token: jwtToken,
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        DiscordId: user.DiscordId,
+      },
+    });
+  } catch (err) {
+    console.error("DiscordAuth error:", err);
+    return res.status(500).json({ message: "Discord auth failed", error: err.message });
+  }
+};
+
+export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth, DiscordAuth };

@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     sparse: true, // allows multiple null values
   },
+  DiscordId: { type: String, unique: true, sparse: true },
 });
 
 // Pre-save middleware to hash password
