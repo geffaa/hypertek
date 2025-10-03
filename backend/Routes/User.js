@@ -3,7 +3,8 @@ import {
   LoginUser, 
   ForgotPassword, 
   ResetPassword,
-  GoogleAuth 
+  GoogleAuth,
+  DiscordAuth
 } from "../Controllers/User.js";
 import {authMiddleware } from "../Middleware/googleMiddle.js"
 
@@ -25,4 +26,5 @@ Route.post("/user/reset-password/:token", ResetPassword);
 
 Route.post("/user/google", GoogleAuth);
 
+Route.post("/user/discord", DiscordAuth);
 export { Route };
