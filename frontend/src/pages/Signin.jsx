@@ -6,14 +6,13 @@ import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../Redux/AuthSlice";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google"; // ✅ use GoogleLogin instead of useGoogleLogin
 
 function Login() {
   const navigate = useNavigate();
@@ -67,24 +66,17 @@ function Login() {
     }
   };
 
-  // Google Login
-  const googleLogin = useGoogleLogin({
-  onSuccess: async (credentialResponse) => {
+  // Google login
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      // credentialResponse.credential contains the ID token
-      console.log("Google ID Token:", credentialResponse);
-      console.log("Google access token are :", credentialResponse.access_token);
+      console.log("Google ID Token:", credentialResponse.credential);
 
-      // Send the ID token to your backend
-      const res = await axios.post('http://localhost:3000/api/v1/user/google', {
-        token:credentialResponse.credential, // ID token sent to backend
+      // Send ID token to backend
+      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
+        token: credentialResponse.credential, // 👈 backend expects "token"
       });
 
       if (res.status === 200) {
-        toast.success("User logged in successfully");
-        console.log("User from backend:", res.data);
-
-        // Optional: save to Redux or localStorage
         dispatch(
           loginSuccess({
             user: res.data.user,
@@ -92,24 +84,18 @@ function Login() {
             isLoggedInUser: true,
           })
         );
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem("token", res.data.token);
+        toast.success("Google login successful!");
+        
+        navigate("/");
       } else {
         toast.error(res.data.message || "Google login failed");
       }
-    } catch (err) {
-      console.error("Google login failed:", err.response?.data || err.message);
-      toast.error("Google login failed");
+    } catch (error) {
+      console.error("Error sending token to backend:", error);
+      toast.error("Google login failed!");
     }
-  },
-  onError: () => {
-    console.error("Google login failed");
-    toast.error("Google login failed");
-  },
-  scope: "openid email profile",
-});
-
-
-
+  };
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-8">
@@ -210,13 +196,22 @@ function Login() {
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
 
-          {/* Google Login */}
-          <button
-            onClick={() => googleLogin()}
-            className="p-1 rounded-full border border-white transition"
-          >
-            <img src={google} alt="Google" className="w-6 h-6" />
-          </button>
+          {/* ✅ Google Custom Button with ID Token */}
+          {/* Social Icons */}
+          <div className="flex justify-center gap-4">
+            {/* ✅ Proper Google Login Button */}
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => {
+                toast.error("Google login failed!");
+              }}
+              useOneTap={false}
+              theme="filled_blue"
+              size="large"
+              shape="circle"
+              type="icon"
+            />
+          </div>
 
           <button className="p-1 rounded-full border border-white transition">
             <img src={symbol} alt="Symbol" className="w-6 h-6" />

@@ -5,9 +5,16 @@ import News from "../Components/home/News";
 import HowItsWork from "../Components/home/HowItsWork";
 import PopularCollections from "../Components/home/PopularCollections";
 import MarketPlace from "../Components/home/MarketPlace";
+import { useSelector, useDispatch } from "react-redux";
 
 
 function Home() {
+ const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+ console.log("your home login user name :",user);
+ console.log("your home  login user token :",token);
+ console.log("your home login user isloggedin user:",isLoggedInUser);
+
+
   return (
     <div
       style={{
