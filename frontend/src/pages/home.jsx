@@ -10,9 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Home() {
  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
- console.log("your home login user name :",user);
- console.log("your home  login user token :",token);
- console.log("your home login user isloggedin user:",isLoggedInUser);
+//  console.log("your home login user name :",user);
+//  console.log("your home  login user token :",token);
+//  console.log("your home login user isloggedin user:",isLoggedInUser);
 
 
   return (
