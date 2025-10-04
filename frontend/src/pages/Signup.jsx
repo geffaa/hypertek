@@ -134,7 +134,7 @@ useEffect(() => {
 
 
   return (
-    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent">
+    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
       <GlowingOrb Xaxis={70} Yaxis={150} />
       <GlowingOrb Xaxis={950} Yaxis={450} />
 

@@ -29,8 +29,8 @@ export default function HyperTekDesign() {
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
           
-          {/* Left Box */}
-          <div className="relative bg-[#B0BDE4] flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px] rounded-lg overflow-hidden">
+          {/* Left Box - Hidden on small screens */}
+          <div className="hidden lg:relative lg:bg-[#B0BDE4] lg:flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px] rounded-lg overflow-hidden">
             
             {/* Vertical Side Label (Large screen) */}
             <div className="hidden lg:flex flex-col items-center absolute left-6 top-1/2 -translate-y-1/2 z-10">
@@ -43,15 +43,6 @@ export default function HyperTekDesign() {
               <div className="w-[2px] h-20 bg-white"></div>
             </div>
 
-            {/* Horizontal Label (Small screen) */}
-            <div className="flex lg:hidden items-center justify-center w-full absolute top-4 px-4 z-10">
-              <div className="flex-1 h-[2px] bg-white"></div>
-              <h2 className="mx-3 font-inter font-semibold text-base sm:text-lg uppercase tracking-widest text-white whitespace-nowrap">
-                HYPER TEK 100
-              </h2>
-              <div className="flex-1 h-[2px] bg-white"></div>
-            </div>
-
             {/* Big Image */}
             <img
               src={LeftImage}
@@ -60,27 +51,26 @@ export default function HyperTekDesign() {
             />
           </div>
 
-          {/* Right Side */}
+          {/* Right Side - Full width on small screens */}
           <div className="flex-1 flex flex-col gap-6 lg:gap-8 mt-4 lg:mt-0">
             
-            {/* Two images side by side */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full">
-              <div className="flex-1">
-                <img
-                  src={RightImage1}
-                  alt="Right Image 1"
-                  className="w-full h-[200px] sm:h-[255px] object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex-1">
-                <img
-                  src={RightImage2}
-                  alt="Right Image 2"
-                  className="w-full h-[200px] sm:h-[255px] object-cover rounded-lg"
-                />
-              </div>
-            </div>
-
+           {/* Two images side by side */}
+<div className="flex flex-row gap-4 sm:gap-6 w-full">
+  <div className="flex-1">
+    <img
+      src={RightImage1}
+      alt="Right Image 1"
+      className="w-full h-[150px] sm:h-[255px] object-cover rounded-lg"
+    />
+  </div>
+  <div className="flex-1">
+    <img
+      src={RightImage2}
+      alt="Right Image 2"
+      className="w-full h-[150px] sm:h-[255px] object-cover rounded-lg"
+    />
+  </div>
+</div>
             {/* Paragraph */}
             <div className="w-full">
               <p className="text-white text-sm md:text-base leading-relaxed font-inter">

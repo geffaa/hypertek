@@ -5,15 +5,14 @@ import CustomButton from "../Buttons/Button1";
 import PageBackground from "../Common/BgEffect";
 import GlowingOrb from "../Common/BgColoring";
 
-
 function PopularCollections() {
   return (
-    <section className="flex flex-col overflow-hidden gap-8 w-full sm:px-8 pt-5 overflow-x-hidden relative z-10">
+    <section className="flex flex-col overflow-hidden gap-8 w-full px-4 sm:px-8 pt-5 pb-8 sm:pb-12 overflow-x-hidden relative z-10">
      
      <GlowingOrb Xaxis={200} Yaxis={460}/>
 
       {/* Container to align text, underline, and cards */}
-      <div className="mx-auto w-full max-w-[1600px]  flex flex-col gap-8">
+      <div className="mx-auto w-full max-w-[1600px] flex flex-col gap-8">
         
         {/* Heading */}
         <div className="flex flex-col gap-2 items-start w-full">
@@ -31,7 +30,7 @@ function PopularCollections() {
         </div>
 
         {/* Cards Section */}
-        <div className="grid grid-cols-1 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
@@ -68,7 +67,7 @@ function PopularCollections() {
               </div>
 
               {/* Buy Now Button fixed at bottom */}
-              <div className="mt-auto flex justify-center">
+              <div className="mt-auto flex justify-center scale-90 sm:scale-100">
                <button>
                  <CustomButton text="Buy Now" />
                </button>
