@@ -52,7 +52,7 @@ function Success() {
          
           {/* Go Home Button */}
           <Link
-            to="/payment"
+            to="/"
             className="flex items-center justify-center no-underline hover:no-underline"
             style={{
               width: "146px",

@@ -64,9 +64,11 @@ function PopularCollections() {
               </div>
 
               {/* Buy Now Button */}
-              <div className="mt-auto flex justify-center w-full">
+              <div className="mt-auto flex justify-center w-full z-10">
                 <Link to="market-place" className="w-full">
-                  <CustomButton text="Buy Now" />
+                 <button>
+                   <CustomButton text="Buy Now" />
+                 </button>
                 </Link>
               </div>
             </div>

@@ -69,7 +69,9 @@ function PopularCollections() {
 
               {/* Buy Now Button fixed at bottom */}
               <div className="mt-auto flex justify-center">
-                <CustomButton text="Buy Now" />
+               <button>
+                 <CustomButton text="Buy Now" />
+               </button>
               </div>
             </div>
           ))}

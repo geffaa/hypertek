@@ -222,7 +222,11 @@ useEffect(() => {
                   />
                 </div>
                 <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">
+                  <Link to="profile">
+                  
+                  
                   <FontAwesomeIcon icon={faUser} className="text-white w-5 h-5" />
+                  </Link>
                 </div>
               </div>
             ) : (

@@ -1,23 +1,48 @@
-import React from "react";
-import land1Image from "../../assets/images/Overview/land1.jpg";
+import React, { useState } from "react";
 import ManImage from "../../assets/images/Overview/man.png";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";
 import GlowingOrb from "../Common/BgColoring";
 
 function PersonalActivity() {
+  // Activities data
+  const [activities, setActivities] = useState([
+    {
+      id: 1,
+      name: "Monkey Ape",
+      status: "Active",
+      price: 2000,
+      floor: 2000,
+      qty: 1,
+      image: ManImage,
+      checked: false,
+    },
+  ]);
+
+  // Toggle checkbox
+  const handleCheckboxChange = (id) => {
+    setActivities((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+
+  // Internal calculation (not shown unless > 0)
+  const selectedItems = activities.filter((a) => a.checked);
+  const totalSelected = selectedItems.length;
+  const totalValue = selectedItems.reduce((sum, a) => sum + a.price, 0);
+
   return (
-    <div className=" bg-transparent ">
+    <div className="bg-transparent">
       {/* Hero Section */}
-      <div className=" mx-auto mt-20 lg:mt-[92px]">
+      <div className="mx-auto mt-20 lg:mt-[92px]">
         <div className="w-full">
-          {/* Hero Banner */}
           <div
             className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full 
-           bg-cover bg-top bg-no-repeat  mb-20 md:mb-24"
+           bg-cover bg-top bg-no-repeat mb-20 md:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           ></div>
 
@@ -55,56 +80,18 @@ function PersonalActivity() {
           </div>
         </div>
 
-        {/* Navigation and Search */}
+        {/* Navigation */}
         <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-          {/* Nav Links
-          <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
-            <li>
-              <Link
-                to="/market-place"
-                className="px-4 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] 
-                 text-white font-inter font-semibold text-sm lg:text-[16px]"
-              >
-                Overview
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/nfa-expand"
-                className="px-4 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] 
-                text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Collectibles
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/land"
-                className="px-4 py-2 lg:px-[10px] lg:py-[4px] rounded-[10px] 
-                text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Lands
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/personal-activity"
-                className="px-4 py-2 lg:px-[12px] lg:py-[4px] rounded-[10px] 
-                text-white bg-[#002AA8] font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Activities
-              </Link>
-            </li>
-          </ul> */}
           <NavLinks />
         </div>
       </div>
 
       {/* Activities Section */}
-      <section className=" mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-6 sm:px-12 xl:px-18 2xl:px-32 ">
-        <GlowingOrb Xaxis={920} Yaxis={600}/>
+      <section className="mx-auto flex flex-col gap-6 lg:gap-8 mb-4 px-6 sm:px-12 xl:px-18 2xl:px-32">
+        <GlowingOrb Xaxis={920} Yaxis={600} />
+
         {/* Table */}
-        <div className="overflow-x-auto rounded-lg z-10 ">
+        <div className="overflow-x-auto rounded-lg z-10">
           <table className="w-full min-w-[800px] text-white">
             <thead className="bg-[#00134C]">
               <tr className="text-left">
@@ -122,67 +109,79 @@ function PersonalActivity() {
             </thead>
 
             <tbody>
-              {/* Example Row with Cropped Head Image */}
-              <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                      }}
-                    >
-                      <img
-                        src={ManImage}
-                        alt="Collection"
-                        className="w-full h-full object-cover object-top"
-                        style={{ objectPosition: "top" }} // focuses on head/face
-                      />
+              {activities.map((item) => (
+                <tr
+                  key={item.id}
+                  className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+                >
+                  <td className="px-4 lg:px-6 py-3">
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                        style={{
+                          background:
+                            "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          alt="Collection"
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                      <span className="text-sm lg:text-[18px] font-inter font-medium">
+                        {item.name}
+                      </span>
                     </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">
-                      Monkey Ape
+                  </td>
+
+                  {/* Status */}
+                  <td className="px-4 lg:px-6 py-3">
+                    <span className="flex items-center gap-2 px-3 py-1 rounded-md text-green-400 text-xs font-medium">
+                      <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                      {item.status}
                     </span>
-                  </div>
-                </td>
+                  </td>
 
-                {/* ✅ Status (default Active, green badge with dot) */}
-                <td className="px-4 lg:px-6 py-3">
-                  <span className="flex items-center gap-2 px-3 py-1 rounded-md text-green-400 text-xs font-medium">
-                    {/* Green Dot */}
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                    Active
-                  </span>
-                </td>
+                  <td className="px-4 lg:px-6 py-3">${item.price}</td>
+                  <td className="px-4 lg:px-6 py-3">${item.floor}</td>
+                  <td className="px-4 lg:px-6 py-3">{item.qty}</td>
 
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">01</td>
-
-                {/* ✅ Custom Checkbox */}
-                <td className="px-4 lg:px-6 py-3">
-                  <input
-                    type="checkbox"
-                    className="
-    w-4 h-4 
-    appearance-none 
-    border-2 border-blue-500 rounded 
-    bg-transparent 
-    cursor-pointer
-    checked:border-blue-500 
-    checked:bg-blue-500
-    checked:before:content-['✔'] 
-    checked:before:text-white 
-    checked:before:block 
-    checked:before:text-center 
-    checked:before:leading-4 
-    checked:before:text-xs 
-  "
-                  />
-                </td>
-              </tr>
+                  {/* Checkbox */}
+                  <td className="px-4 lg:px-6 py-3">
+                    <input
+                      type="checkbox"
+                      checked={item.checked}
+                      onChange={() => handleCheckboxChange(item.id)}
+                      className="
+                        w-4 h-4 
+                        appearance-none 
+                        border-2 border-blue-500 rounded 
+                        bg-transparent 
+                        cursor-pointer
+                        checked:border-blue-500 
+                        checked:bg-blue-500
+                        checked:before:content-['✔'] 
+                        checked:before:text-white 
+                        checked:before:block 
+                        checked:before:text-center 
+                        checked:before:leading-4 
+                        checked:before:text-xs 
+                      "
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
+
+          {/* Conditionally show the Cancel text only when items selected */}
+{totalSelected > 0 && (
+  <p className="text-white mt-12 bg-blue-500 px-3 py-1 rounded-md inline-block">
+    Cancel {totalSelected} Listing{totalSelected > 1 ? "s" : ""}
+  </p>
+)}
+
         </div>
       </section>
     </div>

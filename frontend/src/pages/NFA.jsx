@@ -7,7 +7,8 @@ import CustomButton from "../Components/Buttons/Button1";
 import Logo from "../assets/images/logo.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import Button2 from "../Components/Buttons/Button2";
-import symbol from "../assets/images/login/Symbol.svg.png";
+import symbol from "../assets/images/login/Symbol.svg.png"
+import { Link } from "react-router-dom";
 
 function NFA() {
   // ✅ State for multiple modals
@@ -201,7 +202,12 @@ function NFA() {
                     </div>
 
                     <div className="mt-auto flex justify-center">
-                      <CustomButton text="Buy Now" />
+                    
+                    <Link to="/buy-nfa">
+                    
+                        <CustomButton text="Buy Now" />
+                    </Link>
+                    
                     </div>
                   </>
                 )}
@@ -279,60 +285,60 @@ function NFA() {
               {/* Action Buttons */}
               <div className="flex justify-end gap-4">
                 <button onClick={closeFirstModal}>
-                    <div className="flex items-center">
-      {/* Left small bar */}
-      <div
-        className="bg-[#002AA8] mr-0.5"
-        style={{
-          width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
-        }}
-      ></div>
+                  <div className="flex items-center">
+                    {/* Left small bar */}
+                    <div
+                      className="bg-[#002AA8] mr-0.5"
+                      style={{
+                        width: "0.25rem", // ~3.99px
+                        height: "1.3rem", // ~21.93px
+                      }}
+                    ></div>
 
-      {/* Left angled border */}
-      <div
-        className="border-[#002AA8]"
-        style={{
-          width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
-          borderStyle: "solid",
-          borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-        }}
-      ></div>
+                    {/* Left angled border */}
+                    <div
+                      className="border-[#002AA8]"
+                      style={{
+                        width: "0.5rem", // ~7.97px
+                        height: "2.7rem", // ~42.86px
+                        borderStyle: "solid",
+                        borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      }}
+                    ></div>
 
-      {/* Main button area */}
-      <div
-        className="flex items-center justify-center text-white font-medium"
-        style={{
-          width: "9rem", // ~168px
-          height: "2.5rem", // ~39.59px
-          // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-          border: "0.15rem solid #002AA8", // ~2.42px
-        }}
-      >
-        Cancel
-      </div>
+                    {/* Main button area */}
+                    <div
+                      className="flex items-center justify-center text-white font-medium"
+                      style={{
+                        width: "9rem", // ~168px
+                        height: "2.5rem", // ~39.59px
+                        // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                        border: "0.15rem solid #002AA8", // ~2.42px
+                      }}
+                    >
+                      Cancel
+                    </div>
 
-      {/* Right angled border */}
-      <div
-        className="border-[#002AA8]"
-        style={{
-          width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
-          borderStyle: "solid",
-          borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-        }}
-      ></div>
+                    {/* Right angled border */}
+                    <div
+                      className="border-[#002AA8]"
+                      style={{
+                        width: "0.5rem", // ~7.97px
+                        height: "2.7rem", // ~42.86px
+                        borderStyle: "solid",
+                        borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      }}
+                    ></div>
 
-      {/* Right small bar */}
-      <div
-        className="bg-[#002AA8]"
-        style={{
-          width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
-        }}
-      ></div>
-    </div>
+                    {/* Right small bar */}
+                    <div
+                      className="bg-[#002AA8]"
+                      style={{
+                        width: "0.25rem", // ~3.99px
+                        height: "1.3rem", // ~21.93px
+                      }}
+                    ></div>
+                  </div>
                 </button>
 
                 {/* ✅ This button now opens the second modal */}
@@ -364,7 +370,7 @@ function NFA() {
               <hr className="border-t border-gray-600 my-4" />
 
               {/* Wallet Options */}
-              <div 
+              <div
                 onClick={handleConnectWallet}
                 className="flex items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20"
               >
@@ -381,96 +387,94 @@ function NFA() {
 
         {/* ✅ Third Modal - Final Confirmation */}
         {isThirdModalOpen && (
-       <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
-  <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
-    {/* Close Button */}
-    <button
-      onClick={closeThirdModal}
-      className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
-    >
-      ×
-    </button>
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
+            <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+              {/* Close Button */}
+              <button
+                onClick={closeThirdModal}
+                className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+              >
+                ×
+              </button>
 
-    {/* Modal Title */}
-    <h2 className="text-white text-lg font-bold text-center my-4">
-      Connect Wallet
-    </h2>
+              {/* Modal Title */}
+              <h2 className="text-white text-lg font-bold text-center my-4">
+                Connect Wallet
+              </h2>
 
-    {/* Horizontal Line */}
-    <hr className="border-t border-gray-600 my-4" />
+              {/* Horizontal Line */}
+              <hr className="border-t border-gray-600 my-4" />
 
-    {/* Wallet Image & Name */}
-    <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-8">
-      <img
-        src={symbol}
-        alt="Connect wallet image"
-        className="w-16 h-16 object-contain"
-      />
-      <h1 className="text-white font-medium text-xl">MetaMask</h1>
-    </div>
+              {/* Wallet Image & Name */}
+              <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-8">
+                <img
+                  src={symbol}
+                  alt="Connect wallet image"
+                  className="w-16 h-16 object-contain"
+                />
+                <h1 className="text-white font-medium text-xl">MetaMask</h1>
+              </div>
 
-    {/* Action Buttons - Centered like the image */}
-    <div className="flex flex-col items-center gap-4 mt-8">
-      <CustomButton text="Connect" />
-     <div className="flex items-center">
-      {/* Left small bar */}
-      <div
-        className="bg-[#002AA8] mr-0.5"
-        style={{
-          width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
-        }}
-      ></div>
+              {/* Action Buttons - Centered like the image */}
+              <div className="flex flex-col items-center gap-4 mt-8">
+                <CustomButton text="Connect" />
+                <div className="flex items-center cursor-pointer">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
 
-      {/* Left angled border */}
-      <div
-        className="border-[#002AA8]"
-        style={{
-          width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
-          borderStyle: "solid",
-          borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-        }}
-      ></div>
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.7rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
 
-      {/* Main button area */}
-      <div
-        className="flex items-center justify-center text-white font-medium"
-        style={{
-          width: "9rem", // ~168px
-          height: "2.5rem", // ~39.59px
-          // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-          border: "0.15rem solid #002AA8", // ~2.42px
-        }}
-      >
-        Cancel
-      </div>
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "9rem", // ~168px
+                      height: "2.5rem", // ~39.59px
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Cancel
+                  </div>
 
-      {/* Right angled border */}
-      <div
-        className="border-[#002AA8]"
-        style={{
-          width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
-          borderStyle: "solid",
-          borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-        }}
-      ></div>
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.7rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
 
-      {/* Right small bar */}
-      <div
-        className="bg-[#002AA8]"
-        style={{
-          width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
-        }}
-      ></div>
-    </div>
-    </div>
-  </div>
-</div>
-
-
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>
