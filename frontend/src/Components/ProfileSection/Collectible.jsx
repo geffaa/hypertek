@@ -52,23 +52,23 @@ function MarketPlace() {
         <div className="mx-auto mt-18 lg:mt-[92px]">
           <div className="w-full">
             <div
-              className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] xl:h-[300px] 2xl:h-[360px] 
-                         w-full bg-cover bg-center bg-no-repeat mb-20 md:mb-24"
+              className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] xl:h-[300px] 2xl:h-[360px] w-full bg-cover bg-center bg-no-repeat mb-20 md:mb-24"
               style={{ backgroundImage: `url(${overview1})` }}
             ></div>
 
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
-              <div className="flex flex-col items-center sm:items-start">
-                <div className="relative">
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                {/* Profile Image */}
+                <div className="relative flex-shrink-0">
                   <img
                     src={Profile}
                     alt="Profile"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
-                               rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
                   />
                 </div>
 
-                <div className="mt-3 text-center sm:text-left text-white">
+                {/* Profile Info */}
+                <div className="mt-3 text-left text-white sm:mt-0">
                   <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
                     Lana Kim
                   </h2>
@@ -88,10 +88,7 @@ function MarketPlace() {
             </div>
           </div>
 
-          <div
-            className="relative flex flex-col lg:flex-row justify-between items-start 
-                       lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8 xl:px-12 2xl:px-24"
-          >
+          <div className="relative flex flex-row justify-between items-center gap-2 mb-4 lg:mb-8 xl:px-12 2xl:px-24">
             <NavLinks />
           </div>
         </div>
@@ -99,20 +96,13 @@ function MarketPlace() {
         <section className="mx-auto flex flex-col gap-6 lg:gap-2 mb-2 px-2 sm:px-12 xl:px-20 2xl:px-32 relative z-10 lg:mb-2">
           <GlowingOrb Xaxis={800} Yaxis={100} />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 justify-center">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
-                className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 
-                 w-full max-w-sm mx-auto lg:max-w-none 
-                 h-[380px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] 
-                 flex flex-col justify-between transition-all duration-300"
+                className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-sm mx-auto lg:max-w-none h-[380px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
               >
-                <div
-                  className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] 
-                   overflow-hidden rounded-[19px] 
-                   bg-gradient-to-b from-[#977C34] to-[#493F26]"
-                >
+                <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                   <img
                     src={popularCollections}
                     alt="Collection"
@@ -140,16 +130,27 @@ function MarketPlace() {
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center mt-auto">
-                  <div className="hidden group-hover:block transition-all duration-300">
-                    <button onClick={openModal}>
-                      <CustomButton text="List Now" />
-                    </button>
-                  </div>
-                  <div className="group-hover:hidden text-gray-400 text-sm mt-2 transition-all duration-300">
-                    No Listing
-                  </div>
-                </div>
+              <div className="flex flex-col items-center justify-center mt-auto w-full">
+  {/* Small screens: always show List Now */}
+  <div className="block lg:hidden w-full">
+    <button onClick={openModal} className="w-full">
+      <CustomButton text="List Now" />
+    </button>
+  </div>
+
+  {/* Large screens: show on hover */}
+  <div className="hidden lg:group-hover:block transition-all duration-300 w-full">
+    <button onClick={openModal} className="w-full">
+      <CustomButton text="List Now" />
+    </button>
+  </div>
+
+  {/* No Listing text for hover state on large screens */}
+  <div className="lg:group-hover:hidden text-gray-400 text-sm mt-2 transition-all duration-300">
+    No Listing
+  </div>
+</div>
+
               </div>
             ))}
           </div>
@@ -157,64 +158,128 @@ function MarketPlace() {
       </div>
 
       {/* ------------------ First Modal ------------------ */}
-      <div className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-sm md:max-w-md h-auto mt-12">
-  {/* Close Button */}
-  <button
-    onClick={closeModal}
-    className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
-  >
-    &times;
-  </button>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-sm md:max-w-md h-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
+            >
+              &times;
+            </button>
 
-  {/* Title */}
-  <h1 className="text-white font-bold text-lg md:text-xl">Buy Assets</h1>
-  <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
+            {/* Title */}
+            <h1 className="text-white font-bold text-lg md:text-xl">
+              Buy Assets
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
-  {/* Image + Hover Button (Only triggers when hovering over image) */}
-  <div className="relative w-[60%] h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26] flex justify-center mx-auto group">
-    <img
-      src={popularCollections}
-      alt="Collection"
-      className="w-full h-full object-cover object-top scale-x-[-1]"
-    />
+            {/* Image + Hover Button */}
+            <div className="relative w-[60%] h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26] flex justify-center mx-auto group">
+              <img
+                src={popularCollections}
+                alt="Collection"
+                className="w-full h-full object-cover object-top scale-x-[-1]"
+              />
+              <button className="absolute bottom-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 text-white text-sm px-4 py-1 rounded-md">
+                Preview
+              </button>
+            </div>
 
-    {/* Button appears ONLY when hovering over image */}
-    <button className="absolute bottom-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 text-white text-sm px-4 py-1 rounded-md">
-      Preview
-    </button>
-  </div>
+            {/* Asset Title */}
+            <h1 className="text-white text-xl font-bold mb-2 mt-4">
+              Monkey Ape
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
-  {/* Asset Title */}
-  <h1 className="text-white text-xl font-bold mb-2 mt-4">Monkey Ape</h1>
-  <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
+            {/* Price Details */}
+            {[
+              { label: "List price", value: "$2000 USDT" },
+              { label: "Platform Fee", value: "$0.5 USDT" },
+            ].map((item, index) => (
+              <div key={index} className="w-[90%] mb-3">
+                <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
+                  <p className="text-gray-400 text-sm">{item.label}</p>
+                  <p className="text-white text-sm">{item.value}</p>
+                </div>
+              </div>
+            ))}
 
-  {/* Price Details */}
-  {[
-    { label: "List price", value: "$2000 USDT" },
-    { label: "Platform Fee", value: "$0.5 USDT" },
-  ].map((item, index) => (
-    <div key={index} className="w-[90%] mb-3">
-      <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-        <p className="text-gray-400 text-sm">{item.label}</p>
-        <p className="text-white text-sm">{item.value}</p>
-      </div>
-    </div>
-  ))}
+            {/* Action Buttons */}
+            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+              <button onClick={closeModal}>
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.1rem", // ~21.93px
+                    }}
+                  ></div>
 
-  {/* Action Buttons */}
-  <div className="flex flex-col md:flex-row gap-4 mt-6 w-full justify-center">
-    <button>
-      <CustomButton2 text="Cancel" onClick={closeModal} />
-    </button>
-    <button
-      onClick={openSecondModal}
-      className="w-full md:w-auto text-normal"
-    >
-      <CustomButton text="List now " />
-    </button>
-  </div>
-</div>
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
 
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "8rem", // ~168px
+                      height: "2rem", // ~39.59px
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Cancel
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.1rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
+              </button>
+              <button
+                onClick={openSecondModal}
+                className="w-full md:w-auto text-normal"
+              >
+                <CustomButton text="List now " />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ------------------ Second Modal ------------------ */}
       {isSecondOpen && (
@@ -233,7 +298,9 @@ function MarketPlace() {
               &times;
             </button>
 
-            <h1 className="text-white font-bold text-lg md:text-xl">Buy Assets</h1>
+            <h1 className="text-white font-bold text-lg md:text-xl">
+              Buy Assets
+            </h1>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
 
             <div className="w-[60%] h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26] flex justify-center mx-auto">
@@ -254,9 +321,62 @@ function MarketPlace() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4 mt-6 w-full justify-center">
-              <button onClick={closeSecondModal} className="w-full md:w-auto">
-                <CustomButton2 text="Close" />
+            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+              <button onClick={closeSecondModal} className="w-full w-[8rem] md:w-auto">
+                  <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.1rem", // ~21.93px
+                    }}
+                  ></div>
+
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+
+                  {/* Main button area */}
+                  <div
+                    className="flex  items-center justify-center text-white font-medium"
+                    style={{
+                      width: "8rem", // ~168px
+                      height: "2rem", // ~39.59px
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Close
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.1rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
               </button>
               <button onClick={openThirdModal}>
                 <CustomButton text="Confirm" />
@@ -280,7 +400,6 @@ function MarketPlace() {
             <h2 className="text-white text-lg font-bold text-center my-4">
               Connect Wallet
             </h2>
-
             <hr className="border-t border-gray-600 my-4" />
 
             <div
@@ -312,7 +431,6 @@ function MarketPlace() {
             <h2 className="text-white text-lg font-bold text-center my-4">
               Connect Wallet
             </h2>
-
             <hr className="border-t border-gray-600 my-4" />
 
             <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-8">

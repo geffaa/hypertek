@@ -131,22 +131,22 @@ function NoPersonalActivity() {
             </div>
           </div>
         </div>
-       <div className="flex flex-col justify-center items-center text-white gap-4 mt-16 min-h-[400px]">
-  <p className="text-lg font-medium">No Items</p>
-  <img
-    src={noActivity1}
-    alt="No activity one"
-    className="w-[200px] h-auto object-contain"
-  />
-  <img
-    src={noActivity2}
-    alt="No activity two"
-    className="w-[100px] h-auto object-contain"
-  />
-  <button className="w-[207px] h-[43px] mt-5 bg-[#002AA8] rounded-md hover:bg-blue-700 transition-colors">
-    Browse Collection
-  </button>
-</div>
+        <div className="flex flex-col justify-center items-center text-white gap-4 mt-16 min-h-[400px]">
+          <p className="text-lg font-medium">No Items</p>
+          <img
+            src={noActivity1}
+            alt="No activity one"
+            className="w-[200px] h-auto object-contain"
+          />
+          <img
+            src={noActivity2}
+            alt="No activity two"
+            className="w-[100px] h-auto object-contain"
+          />
+          <button className="w-[207px] h-[43px] mt-5 bg-[#002AA8] rounded-md hover:bg-blue-700 transition-colors">
+            Browse Collection
+          </button>
+        </div>
       </div>
     </>
   );
