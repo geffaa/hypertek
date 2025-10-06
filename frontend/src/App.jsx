@@ -41,7 +41,6 @@ import UserDashboard from "./pages/UserDashboard";
 import OfferedReceived from "./pages/OfferedReceived";
 import NoOffered from "./pages/NoOffered";
 import WalletConnect from "./pages/WalletConnect";
-import WalletConnecting from "./pages/WalletConnecting";
 import Wellcome from "./pages/Wellcome";
 import SigninWallet from "./pages/SigninWallet";
 import NoItem from "./pages/NoItem";
@@ -95,7 +94,6 @@ function AppWrapper() {
 
           {/* new page added i will update it according to the flow  */}
           <Route path="/wallet-connect" element={<WalletConnect />} />
-          <Route path="/wallet-connecting" element={<WalletConnecting />} />
           <Route path="/wellcome" element={<Wellcome />} />
           <Route path="/Signin-wallet" element={<SigninWallet />} />
           <Route path="/no-item-profile" element={<NoItem/>} />

@@ -130,27 +130,26 @@ function MarketPlace() {
                   </div>
                 </div>
 
-              <div className="flex flex-col items-center justify-center mt-auto w-full">
-  {/* Small screens: always show List Now */}
-  <div className="block lg:hidden w-full">
-    <button onClick={openModal} className="w-full">
-      <CustomButton text="List Now" />
-    </button>
-  </div>
+                <div className="flex flex-col items-center justify-center mt-auto w-full">
+                  {/* Small screens: always show List Now */}
+                  <div className="block lg:hidden w-full">
+                    <button onClick={openModal} className="w-full">
+                      <CustomButton text="List Now" />
+                    </button>
+                  </div>
 
-  {/* Large screens: show on hover */}
-  <div className="hidden lg:group-hover:block transition-all duration-300 w-full">
-    <button onClick={openModal} className="w-full">
-      <CustomButton text="List Now" />
-    </button>
-  </div>
+                  {/* Large screens: show on hover */}
+                  <div className="hidden lg:group-hover:block transition-all duration-300 w-full">
+                    <button onClick={openModal} className="w-full">
+                      <CustomButton text="List Now" />
+                    </button>
+                  </div>
 
-  {/* No Listing text for hover state on large screens */}
-  <div className="lg:group-hover:hidden text-gray-400 text-sm mt-2 transition-all duration-300">
-    No Listing
-  </div>
-</div>
-
+                  {/* No Listing text for hover state on large screens */}
+                  <div className="lg:group-hover:hidden text-gray-400 text-sm mt-2 transition-all duration-300">
+                    No Listing
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -322,8 +321,11 @@ function MarketPlace() {
             </div>
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
-              <button onClick={closeSecondModal} className="w-full w-[8rem] md:w-auto">
-                  <div className="flex items-center">
+              <button
+                onClick={closeSecondModal}
+                className="w-full w-[8rem] md:w-auto"
+              >
+                <div className="flex items-center">
                   {/* Left small bar */}
                   <div
                     className="bg-[#002AA8] mr-0.5"
@@ -447,7 +449,8 @@ function MarketPlace() {
                 <CustomButton text="Connect" />
               </button>
 
-              <div className="flex items-center cursor-pointer">
+              <button onClick={closeFourthModal}>
+                <div className="flex items-center cursor-pointer">
                 <div
                   className="bg-[#002AA8] mr-0.5"
                   style={{ width: "0.25rem", height: "1.3rem" }}
@@ -457,7 +460,7 @@ function MarketPlace() {
                   className="border-[#002AA8]"
                   style={{
                     width: "0.5rem",
-                    height: "2.7rem",
+                    height: "2.3rem",
                     borderStyle: "solid",
                     borderWidth: "0.375rem 0.25rem 0.375rem 0",
                   }}
@@ -466,8 +469,8 @@ function MarketPlace() {
                 <div
                   className="flex items-center justify-center text-white font-medium"
                   style={{
-                    width: "9rem",
-                    height: "2.5rem",
+                    width: "7.5rem",
+                    height: "2rem",
                     border: "0.15rem solid #002AA8",
                   }}
                 >
@@ -478,7 +481,7 @@ function MarketPlace() {
                   className="border-[#002AA8]"
                   style={{
                     width: "0.5rem",
-                    height: "2.7rem",
+                    height: "2.3rem",
                     borderStyle: "solid",
                     borderWidth: "0.25rem 0 0.375rem 0.25rem",
                   }}
@@ -486,9 +489,10 @@ function MarketPlace() {
 
                 <div
                   className="bg-[#002AA8]"
-                  style={{ width: "0.25rem", height: "1.3rem" }}
+                  style={{ width: "0.25rem", height: "1.2rem" }}
                 ></div>
               </div>
+              </button>
             </div>
           </div>
         </div>

@@ -255,18 +255,36 @@ function PersonalActivity() {
 
       {/* Modal Title */}
       <h1 className="text-white font-bold text-lg md:text-xl mb-4 text-center">
-        Confirm Cancellation
+        Cancel Listing
       </h1>
       <div className="w-[90%] h-[1px] bg-gray-300 mb-4"></div>
 
       {/* Optional Listing Preview Box */}
-      <div className="w-[60%] h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26] flex justify-center mx-auto mb-4">
-        <img
-          src={land1Image} // Show first selected item image
-          alt="Collection"
-          className="w-full h-full object-cover object-top"
-        />
-      </div>
+   <div className="flex items-start justify-between w-full max-w-xl  rounded-[19px] p-4 mx-auto mb-4">
+  {/* Left: Small Image */}
+  <div className="w-1/5 h-20 lg:h-24 xl:h-28 2xl:h-32 flex items-center justify-center rounded-[15px] bg-gradient-to-b from-[#977C34] to-[#493F26] overflow-hidden">
+    <img
+      src={land1Image}
+      alt="Collection"
+      className="w-3/4 h-3/4 object-cover object-center"
+    />
+  </div>
+
+  {/* Middle: Title & Description */}
+  <div className="flex-1 ml-4 ">
+    <h2 className="text-white font-bold text-lg">Monkey Ape</h2>
+    <p className="text-gray-200 text-sm mt-1">
+      You own 1
+    </p>
+  </div>
+
+  {/* Right: Price */}
+  <div className="flex-shrink-0 ml-4">
+    <p className="text-gray-500 font-semibold text-lg">Listed : $2000.05</p>
+  </div>
+</div>
+
+
 
       {/* Listing Name */}
       <h1 className="text-white text-lg md:text-xl mb-4">

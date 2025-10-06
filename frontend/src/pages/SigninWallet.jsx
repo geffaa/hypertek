@@ -67,7 +67,7 @@ function SigninWallet() {
               <div
                 className="flex items-center justify-center text-white font-medium"
                 style={{
-                  width: "8rem",
+                  width: "7.5rem",
                   height: "2rem",
                   border: "0.15rem solid #002AA8",
                 }}
