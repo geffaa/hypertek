@@ -5,8 +5,6 @@ import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
-const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // ------------------ SMTP TRANSPORTER ------------------
@@ -72,8 +70,8 @@ const LoginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ id: user._id, Email: user.Email }, JWT_SECRET, {
-      expiresIn: "1h",
+    const token = jwt.sign({ id: user._id, Email: user.Email }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
     });
 
     res.status(200).json({
@@ -97,7 +95,7 @@ const ForgotPassword = async (req, res) => {
     const resetToken = jwt.sign(
   { id: user._id, Email: user.Email },
   process.env.RESET_SECRET,  // <== must match
-  { expiresIn: "15m" }
+  { expiresIn: "1d" }
 );
     const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
     // Send email
@@ -264,8 +262,8 @@ const DiscordAuth = async (req, res) => {
     // 4. Generate JWT
     const jwtToken = jwt.sign(
       { id: user._id, DiscordId: discordId, Email: user.Email },
-      JWT_SECRET,
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
     );
 
     return res.status(200).json({
@@ -284,4 +282,59 @@ const DiscordAuth = async (req, res) => {
   }
 };
 
-export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth, DiscordAuth };
+const GetProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // from middleware
+    const user = await UserModel.findById(userId).select("-Password");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.status(200).json({ message: "Profile fetched successfully", user });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// ------------------ EDIT PROFILE ------------------
+const EditProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { FullName, Email, Password, NewPassword } = req.body;
+
+    const user = await UserModel.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // ✅ If updating password
+    if (Password && NewPassword) {
+      const isMatch = await bcrypt.compare(Password, user.Password);
+      if (!isMatch)
+        return res.status(400).json({ message: "Incorrect current password" });
+      user.Password = NewPassword;
+    }
+
+    // ✅ Update text fields
+    if (FullName) user.FullName = FullName;
+    if (Email) user.Email = Email;
+
+    // ✅ If image uploaded
+    if (req.file) {
+      const avatarUrl = `/uploads/profile_pics/${req.file.filename}`;
+      user.Avatar = avatarUrl;
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        Avatar: user.Avatar,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+
+export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth, DiscordAuth, GetProfile, EditProfile };
