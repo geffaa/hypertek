@@ -6,8 +6,18 @@ import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { loginSuccess } from "../Redux/AuthSlice";
+import { useDispatch } from "react-redux";
+import symbol from "../assets/images/login/Symbol.svg.png";
+import skype from "../assets/images/login/skipe.png";
+import discard from "../assets/images/login/discard.png";
+
+
+import { GoogleLogin } from "@react-oauth/google"; // ✅ use GoogleLogin instead of useGoogleLogin
+
 
 function Signup() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -57,6 +67,39 @@ function Signup() {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
+
+  // Google login
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      console.log("Google ID Token:", credentialResponse.credential);
+
+      // Send ID token to backend
+      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
+        token: credentialResponse.credential, // 👈 backend expects "token"
+      });
+
+      if (res.status === 200) {
+        dispatch(
+          loginSuccess({
+            user: res.data.user,
+            token: res.data.token,
+            isLoggedInUser: true,
+          })
+        );
+        localStorage.setItem("token", res.data.token);
+        toast.success("Google login successful!");
+        
+        navigate("/");
+      } else {
+        toast.error(res.data.message || "Google login failed");
+      }
+    } catch (error) {
+      console.error("Error sending token to backend:", error);
+      toast.error("Google login failed!");
+    }
+  };
+
+
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent">
@@ -147,6 +190,42 @@ function Signup() {
             <CustomButtonLarge text="Sign Up" />
           </button>
         </form>
+
+          <div className="flex items-center w-full my-2">
+          <hr className="flex-grow border-t border-white/40" />
+          <span className="mx-2 text-white/70 text-sm">or continue with</span>
+          <hr className="flex-grow border-t border-white/40" />
+        </div>
+
+         <div className="flex justify-center gap-4">
+          <button className="p-1 rounded-full border border-white transition">
+            <img src={skype} alt="Skype" className="w-6 h-6" />
+          </button>
+          <button className="p-1 rounded-full border border-white transition">
+            <img src={discard} alt="Discord" className="w-6 h-6" />
+          </button>
+
+          {/* ✅ Google Custom Button with ID Token */}
+          {/* Social Icons */}
+          <div className="flex justify-center gap-4">
+            {/* ✅ Proper Google Login Button */}
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => {
+                toast.error("Google login failed!");
+              }}
+              useOneTap={false}
+              theme="filled_blue"
+              size="large"
+              shape="circle"
+              type="icon"
+            />
+          </div> 
+
+          <button className="p-1 rounded-full border border-white transition">
+            <img src={symbol} alt="Symbol" className="w-6 h-6" />
+          </button>
+        </div>
       </div>
     </div>
   );
