@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
-import { ethers } from "ethers";
+import { ethers } from "ethers"; // ✅ must be this, not require("ethers")
+
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
@@ -53,6 +54,7 @@ const SignupUser = async (req, res) => {
 
 // ------------------ LOGIN ------------------
 const LoginUser = async (req, res) => {
+  console.log("your login user body :",req.body);
   try {
     const { Email, Password } = req.body;
 
@@ -536,7 +538,10 @@ const MetaAuth = async (req, res) => {
     });
   }
 };
+
+
 const MetaMaskAuth = async (req, res) => {
+  console.log("your meta mask body :", req.body);
   try {
     const { address, signature, message } = req.body;
 
@@ -544,39 +549,68 @@ const MetaMaskAuth = async (req, res) => {
     if (!address || !signature || !message) {
       return res
         .status(400)
-        .json({ message: "Address, signature, and message are required" });
+        .json({ 
+          success: false,
+          message: "Address, signature, and message are required" 
+        });
     }
 
     // ✅ Step 2: Verify wallet signature
     const recoveredAddress = ethers.verifyMessage(message, signature);
     if (recoveredAddress.toLowerCase() !== address.toLowerCase()) {
-      return res.status(401).json({ message: "Invalid signature" });
+      return res.status(401).json({ 
+        success: false,
+        message: "Invalid signature" 
+      });
     }
 
-    // ✅ Step 3: Find or create user in database
-    let user = await UserModel.findOne({
-      WalletAddress: address.toLowerCase(),
+    const normalizedAddress = address.toLowerCase();
+
+    // ✅ Step 3: Find or create user (Following Google pattern)
+    let user = await UserModel.findOne({ 
+      $or: [
+        { DiscordId: normalizedAddress },
+        
+      ]
     });
 
-    if (!user) {
+    if (user) {
+      console.log("User found, updating MetaMask information...");
+      user.DiscordId = normalizedAddress;
+      await user.save();
+      console.log("User MetaMask information updated successfully");
+
+    } 
+    if(!user){
+      // ✅ Create new user (Similar to Google pattern)
+      console.log("Creating new MetaMask user...");
       user = new UserModel({
-        WalletAddress: address.toLowerCase(),
-        FullName: "MetaMask User",
-        Email: `${address}@metamask.user`, // fallback email
-        Avatar: "", // optional avatar field
+        DiscordId: normalizedAddress,
+        Avatar: "",
+        lastLogin: new Date(),
+        loginCount: 1,
+        isActive: true,
+       
+        // No Password field - similar to Google accounts
       });
       await user.save();
+      console.log("New MetaMask user created successfully");
     }
 
-    // ✅ Step 4: Generate JWT
+    // ✅ Step 4: Generate JWT (Similar to Google pattern)
     const jwtToken = jwt.sign(
-      { id: user._id, WalletAddress: address },
+      { 
+        id: user._id, 
+        WalletAddress: normalizedAddress,
+        email: user.Email 
+      },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "1d" } // Match Google's expiry or adjust as needed
     );
 
-    // ✅ Step 5: Send response
+    // ✅ Step 5: Send response (Similar structure to Google)
     res.status(200).json({
+      success: true,
       message: "MetaMask login successful",
       token: jwtToken,
       user: {
@@ -585,12 +619,26 @@ const MetaMaskAuth = async (req, res) => {
         FullName: user.FullName,
         WalletAddress: user.WalletAddress,
         Avatar: user.Avatar,
+        lastLogin: user.lastLogin,
+        loginCount: user.loginCount,
+        isActive: user.isActive
       },
     });
+
   } catch (err) {
     console.error("MetaMaskAuth error:", err);
+    
+    // Handle specific errors
+    if (err.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "Wallet address already exists with different account"
+      });
+    }
+    
     res.status(500).json({
-      message: "Internal server error during MetaMask login",
+      success: false,
+      message: "MetaMask auth failed", // Changed to match Google error message pattern
       error: err.message,
     });
   }

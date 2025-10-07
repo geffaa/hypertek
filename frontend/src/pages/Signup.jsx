@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import skype from "../assets/images/login/skipe.png";
 import discard from "../assets/images/login/discard.png";
+import { ethers } from "ethers";
+
 
 import { GoogleLogin } from "@react-oauth/google";
 
@@ -68,7 +70,7 @@ function Signup() {
     }
   };
 
-  // ---------------- Google Login ----------------
+  // ---------------- Google Signup ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
       const res = await axios.post("http://localhost:3000/api/v1/user/google", {
@@ -85,7 +87,7 @@ function Signup() {
         );
         localStorage.setItem("token", res.data.token);
         toast.success("Google Signup successful!");
-        navigate("/");
+        navigate("/profile");
       } else {
         toast.error(res.data.message || "Google login failed");
       }
@@ -95,7 +97,7 @@ function Signup() {
     }
   };
 
-  // ---------------- Discord Login ----------------
+  // ---------------- Discord Signup ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
   const REDIRECT_URI = "http://localhost:5173/signin";
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
@@ -140,6 +142,114 @@ function Signup() {
 
     fetchDiscordUser();
   }, [dispatch, navigate]);
+
+
+// ---------------------- signup with metamask ------------------------- 
+const handleLogin = async () => {
+  try {
+    if (!window.ethereum) {
+      toast.error("MetaMask is not installed!");
+      return;
+    }
+
+    console.log("MetaMask detected, requesting accounts...");
+
+    // ✅ STEP 1: Clear previous permissions
+    try {
+      await window.ethereum.request({
+        method: 'wallet_revokePermissions',
+        params: [{ eth_accounts: {} }],
+      });
+      console.log("Previous permissions cleared");
+    } catch (error) {
+      console.log("No previous permissions to clear");
+    }
+
+    // ✅ STEP 2: Request fresh connection
+    const accounts = await window.ethereum.request({ 
+      method: 'eth_requestAccounts' 
+    });
+
+    console.log("Accounts granted:", accounts);
+    const address = accounts[0];
+    console.log("Address:", address);
+
+    // ✅ STEP 3: Use a simpler message format
+    const message = `Login to MyApp - ${Date.now()}`;
+    console.log("Signing message:", message);
+
+    console.log("Requesting signature via personal_sign...");
+
+    // ✅ STEP 4: Add manual popup trigger
+    // Sometimes we need to trigger MetaMask manually
+    setTimeout(() => {
+      toast.info(
+        <div>
+          <p>Check for MetaMask popup!</p>
+          <p>If not showing, click the MetaMask icon in your browser.</p>
+        </div>,
+        { duration: 10000 }
+      );
+    }, 1000);
+
+    const signature = await Promise.race([
+      window.ethereum.request({
+        method: 'personal_sign',
+        params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address],
+      }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Signature timeout - Click MetaMask icon if popup not visible")), 20000)
+      )
+    ]);
+
+    console.log("✅ Signature received:", signature);
+
+    // Continue with backend...
+    const res = await axios.post(
+      "http://localhost:3000/api/v1/user/MetaMask",
+      { 
+        address: address.toLowerCase(),
+        signature, 
+        message 
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    console.log("Backend response:", res.data);
+
+    dispatch(
+      loginSuccess({
+        user: res.data.user,
+        token: res.data.token,
+        isLoggedInUser: true,
+      })
+    );
+    localStorage.setItem("token", res.data.token);
+
+    toast.success("MetaMask login successful!");
+    navigate("/profile");
+
+  } catch (err) {
+    console.error("MetaMask login error:", err);
+    
+    if (err.message?.includes("timeout")) {
+      toast.error(
+        <div>
+          <strong>MetaMask Popup Issue!</strong><br/>
+          1. Click the MetaMask icon in your browser<br/>
+          2. Look for pending signature requests<br/>
+          3. Refresh the page and try again
+        </div>,
+        { duration: 8000 }
+      );
+    } else if (err.code === 4001) {
+      toast.error("Signature cancelled.");
+    } else {
+      toast.error("Login failed: " + (err.message || "Unknown error"));
+    }
+  }
+};
+
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
@@ -256,9 +366,13 @@ function Signup() {
             type="icon"
           />
 
-          <button className="p-1 rounded-full border border-white transition">
-            <img src={symbol} alt="Symbol" className="w-6 h-6" />
-          </button>
+          <button
+                      type="button"
+                      className="p-1 rounded-full border border-white transition cursor-pointer"
+                      onClick={handleLogin}
+                    >
+                      <img src={symbol} alt="MetaMask" className="w-6 h-6" />
+                    </button>
         </div>
       </div>
     </div>

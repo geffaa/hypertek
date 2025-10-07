@@ -12,6 +12,7 @@ import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
+import { ethers } from "ethers";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   // ---------------- Email/Password ----------------
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,19 +38,19 @@ function Login() {
       const res = await axios.post("http://localhost:3000/api/v1/user/login", {
         Email: formData.email,
         Password: formData.password,
-      });
+      }); 
 
-      dispatch(loginSuccess({
-        user: res.data.user,
-        token: res.data.token,
-        isLoggedInUser: true,
-      }));
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+          isLoggedInUser: true,
+        })
+      );
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
 
       navigate("/profile");
-
-      
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     }
@@ -61,18 +63,17 @@ function Login() {
         token: credentialResponse.credential,
       });
 
-      dispatch(loginSuccess({
-        user: res.data.user,
-        token: res.data.token,
-        isLoggedInUser: true,
-      }));
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+          isLoggedInUser: true,
+        })
+      );
       localStorage.setItem("token", res.data.token);
       toast.success("Google login successful!");
 
       navigate("/profile");
-
-      navigate("/");
-
     } catch (err) {
       toast.error("Google login failed!");
     }
@@ -85,41 +86,154 @@ function Login() {
     REDIRECT_URI
   )}&response_type=code&scope=identify%20email`;
 
-  
-useEffect(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get("code");
-  
-  if (!code) return;
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
 
-  // Clean URL immediately to prevent re-triggers
-  window.history.replaceState({}, document.title, "/login");
+    if (!code) return;
 
-  const fetchDiscordUser = async () => {
-    try {
-      const res = await axios.post("http://localhost:3000/api/v1/user/discord", { code });
+    // Clean URL immediately to prevent re-triggers
+    window.history.replaceState({}, document.title, "/login");
 
-      if (res.data.success && res.data.user) {
-        dispatch(loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
-          isLoggedInUser: true,
-        }));
-        localStorage.setItem("token", res.data.token);
+    const fetchDiscordUser = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/user/discord",
+          { code }
+        );
 
-        toast.success(`Discord login successful! Welcome ${res.data.user.FullName}`);
-        navigate("/profile");
-      } else {
-        toast.error(res.data.message || "Discord login failed!");
+        if (res.data.success && res.data.user) {
+          dispatch(
+            loginSuccess({
+              user: res.data.user,
+              token: res.data.token,
+              isLoggedInUser: true,
+            })
+          );
+          localStorage.setItem("token", res.data.token);
+
+          toast.success(
+            `Discord login successful! Welcome ${res.data.user.FullName}`
+          );
+          navigate("/profile");
+        } else {
+          toast.error(res.data.message || "Discord login failed!");
+        }
+      } catch (err) {
+        console.error("Discord login error:", err);
+        toast.error(err.response?.data?.message || "Discord login failed!");
       }
-    } catch (err) {
-      console.error("Discord login error:", err);
-      toast.error(err.response?.data?.message || "Discord login failed!");
-    }
-  };
+    };
 
-  fetchDiscordUser();
-}, [dispatch, navigate]);
+    fetchDiscordUser();
+  }, [dispatch, navigate]);
+
+ const handleLogin = async () => {
+  try {
+    if (!window.ethereum) {
+      toast.error("MetaMask is not installed!");
+      return;
+    }
+
+    console.log("MetaMask detected, requesting accounts...");
+
+    // ✅ STEP 1: Clear previous permissions
+    try {
+      await window.ethereum.request({
+        method: 'wallet_revokePermissions',
+        params: [{ eth_accounts: {} }],
+      });
+      console.log("Previous permissions cleared");
+    } catch (error) {
+      console.log("No previous permissions to clear");
+    }
+
+    // ✅ STEP 2: Request fresh connection
+    const accounts = await window.ethereum.request({ 
+      method: 'eth_requestAccounts' 
+    });
+
+    console.log("Accounts granted:", accounts);
+    const address = accounts[0];
+    console.log("Address:", address);
+
+    // ✅ STEP 3: Use a simpler message format
+    const message = `Login to MyApp - ${Date.now()}`;
+    console.log("Signing message:", message);
+
+    console.log("Requesting signature via personal_sign...");
+
+    // ✅ STEP 4: Add manual popup trigger
+    // Sometimes we need to trigger MetaMask manually
+    setTimeout(() => {
+      toast.info(
+        <div>
+          <p>Check for MetaMask popup!</p>
+          <p>If not showing, click the MetaMask icon in your browser.</p>
+        </div>,
+        { duration: 10000 }
+      );
+    }, 1000);
+
+    const signature = await Promise.race([
+      window.ethereum.request({
+        method: 'personal_sign',
+        params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address],
+      }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Signature timeout - Click MetaMask icon if popup not visible")), 20000)
+      )
+    ]);
+
+    console.log("✅ Signature received:", signature);
+
+    // Continue with backend...
+    const res = await axios.post(
+      "http://localhost:3000/api/v1/user/MetaMask",
+      { 
+        address: address.toLowerCase(),
+        signature, 
+        message 
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    console.log("Backend response:", res.data);
+
+    dispatch(
+      loginSuccess({
+        user: res.data.user,
+        token: res.data.token,
+        isLoggedInUser: true,
+      })
+    );
+    localStorage.setItem("token", res.data.token);
+
+    toast.success("MetaMask login successful!");
+    navigate("/profile");
+
+  } catch (err) {
+    console.error("MetaMask login error:", err);
+    
+    if (err.message?.includes("timeout")) {
+      toast.error(
+        <div>
+          <strong>MetaMask Popup Issue!</strong><br/>
+          1. Click the MetaMask icon in your browser<br/>
+          2. Look for pending signature requests<br/>
+          3. Refresh the page and try again
+        </div>,
+        { duration: 8000 }
+      );
+    } else if (err.code === 4001) {
+      toast.error("Signature cancelled.");
+    } else {
+      toast.error("Login failed: " + (err.message || "Unknown error"));
+    }
+  }
+};
+
+
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-8">
@@ -127,11 +241,19 @@ useEffect(() => {
       <GlowingOrb Xaxis={950} Yaxis={450} />
 
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[550px] max-w-md sm:max-w-sm">
-        <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />
-        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">Welcome Back!</h1>
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]"
+        />
+        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">
+          Welcome Back!
+        </h1>
         <p className="text-white text-sm mb-6 text-center">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-400 hover:underline">Sign Up</Link>
+          <Link to="/signup" className="text-blue-400 hover:underline">
+            Sign Up
+          </Link>
         </p>
 
         {/* Email/Password Form */}
@@ -172,12 +294,18 @@ useEffect(() => {
           </div>
 
           <div className="w-full text-right">
-            <Link to="/forgot-password" className="text-blue-400 text-sm hover:underline">
+            <Link
+              to="/forgot-password"
+              className="text-blue-400 text-sm hover:underline"
+            >
               Forgot Password?
             </Link>
           </div>
 
-          <button type="submit" className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition">
+          <button
+            type="submit"
+            className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
+          >
             <CustomButtonLarge text="Sign In" />
           </button>
         </form>
@@ -193,8 +321,10 @@ useEffect(() => {
             <img src={skype} alt="Skype" className="w-6 h-6" />
           </button>
 
-          <button className="p-1 rounded-full border border-white transition"
-            onClick={() => window.location.href = discordAuthUrl}>
+          <button
+            className="p-1 rounded-full border border-white transition"
+            onClick={() => (window.location.href = discordAuthUrl)}
+          >
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
 
@@ -208,8 +338,12 @@ useEffect(() => {
             type="icon"
           />
 
-          <button className="p-1 rounded-full border border-white transition">
-            <img src={symbol} alt="Symbol" className="w-6 h-6" />
+          <button
+            type="button"
+            className="p-1 rounded-full border border-white transition cursor-pointer"
+            onClick={handleLogin}
+          >
+            <img src={symbol} alt="MetaMask" className="w-6 h-6" />
           </button>
         </div>
       </div>

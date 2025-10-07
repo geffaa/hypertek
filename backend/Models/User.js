@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-// user schema
+
 const UserSchema = new mongoose.Schema({
   Email: {
     type: String,
-    required: [true, "Email is required"],
+    // ✅ Remove required and make it conditional
+    required: function() {
+      return !(this.GoogleId || this.DiscordId || this.MetaMaskAddress);
+    },
     unique: true,
+    sparse: true, // ✅ Add sparse for unique constraint
     lowercase: true,
     match: [/\S+@\S+\.\S+/, "Please provide a valid email"],
   },
@@ -15,48 +19,80 @@ const UserSchema = new mongoose.Schema({
     default: "",
   },
 
-  Password: {
+Password: {
+  type: String,
+  minlength: [8, "Password should be at least 8 characters"],
+  default:undefined, // ✅ Explicitly set default to undefined
+  
+},
+
+  Bio: {
     type: String,
-    required: function () {
-      return !(this.GoogleId || this.DiscordId || this.FacebookId); // require password only if no social auth
-    },
-    minlength: [8, "Password should be at least 8 characters"],
-    // ❌ removed maxLength — hash always ~60 chars
-  },
-  Bio:{
-    type:String,
-
+    default: "",
   },
 
+  // Social Login Fields
   GoogleId: {
     type: String,
     unique: true,
     sparse: true,
   },
 
-  DiscordId: { type: String, unique: true, sparse: true },
-  TwitterId: { type: String, unique: true, sparse: true },
-  FacebookId: { type: String, unique: true, sparse: true },
-  Avatar: {
-    type: String, // will store image URL or filename
-    default: "", // fallback if no image
+  DiscordId: { 
+    type: String, 
+    unique: true, 
+    sparse: true 
   },
+
+  TwitterId: { 
+    type: String, 
+    unique: true, 
+    sparse: true 
+  },
+
+  FacebookId: { 
+    type: String, 
+    unique: true, 
+    sparse: true 
+  },
+
+  // ✅ Add MetaMask specific field
+  MetaMaskAddress: {
+    type: String,
+    unique: true,
+    sparse: true,
+    lowercase: true,
+  },
+
+ 
+ 
+
+  Avatar: {
+    type: String,
+    default: "",
+  },
+}, {
+  timestamps: true
 });
 
-// ✅ Pre-save middleware to hash password safely
+// ✅ Modified pre-save middleware - only hash if password exists
 UserSchema.pre("save", async function (next) {
   try {
-    if (!this.isModified("Password") || !this.Password) return next();
-    const salt = await bcrypt.genSalt(10);
-    this.Password = await bcrypt.hash(this.Password, salt);
+    if (this.Password && this.isModified("Password")) {
+      const salt = await bcrypt.genSalt(10);
+      this.Password = await bcrypt.hash(this.Password, salt);
+    }
     next();
   } catch (err) {
     next(err);
   }
 });
 
-// ✅ Method to compare passwords
+// ✅ Method to compare passwords (only for password login)
 UserSchema.methods.comparePassword = async function (enteredPassword) {
+  if (!this.Password) {
+    throw new Error("No password set for this account");
+  }
   return await bcrypt.compare(enteredPassword, this.Password);
 };
 
