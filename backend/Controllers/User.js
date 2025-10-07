@@ -181,22 +181,23 @@ const GoogleAuth = async (req, res) => {
     }
 
     // Find or create user
-    let user = await UserModel.findOne({ Email: email });
-    if (user) {
-      // if user exists but no GoogleId, attach it
-      if (!user.GoogleId) {
-        user.GoogleId = googleId;
-        await user.save();
-      }
-    } else {
-      user = new UserModel({
-        Email: email,
-        FullName: name || "",
-        GoogleId: googleId,
-        // Password left undefined for Google-only accounts
-      });
-      await user.save();
-    }
+    let user = await UserModel.findOne({ email }); // lowercase
+
+if (user) {
+  if (!user.googleId) {
+    user.googleId = googleId; // lowercase
+    await user.save();
+  }
+} else {
+  user = new UserModel({
+    email, // lowercase
+    googleId, // lowercase
+    password: null, // explicitly null for OAuth users
+  });
+
+  await user.save();
+}
+
 
     // Generate our app JWT (use your JWT_SECRET)
     const jwtToken = jwt.sign({ id: user._id, Email: user.Email }, process.env.JWT_SECRET, {
@@ -213,6 +214,10 @@ const GoogleAuth = async (req, res) => {
     return res.status(500).json({ message: "Google auth failed", error: err.message });
   }
 };
+
+
+
+
 const DiscordAuth = async (req, res) => {
   try {
     const { code } = req.body;
@@ -243,7 +248,6 @@ const DiscordAuth = async (req, res) => {
     console.log("Token exchange response:", tokenData);
 
     if (!tokenData.access_token) {
-      console.error("Token exchange failed:", tokenData);
       return res.status(400).json({ 
         success: false, 
         message: "Failed to exchange authorization code", 
@@ -259,57 +263,33 @@ const DiscordAuth = async (req, res) => {
     const discordUser = await userResponse.json();
     console.log("Discord user data:", discordUser);
 
-    if (!discordUser.id) {
-      console.error("Failed to fetch Discord user:", discordUser);
-      return res.status(400).json({ 
-        success: false, 
-        message: "Failed to fetch Discord user information" 
-      });
-    }
-
     const { id: discordId, username, discriminator, email, global_name } = discordUser;
 
-    // Find or create user
-    let user;
-    
-    // First, try to find by Discord ID
-    user = await UserModel.findOne({ DiscordId: discordId });
-    
-    // If not found by Discord ID, try by email
+    let user = await UserModel.findOne({ discordId });
+
     if (!user && email) {
-      user = await UserModel.findOne({ Email: email.toLowerCase() });
+      user = await UserModel.findOne({ email: email.toLowerCase() });
       if (user) {
-        // Link Discord ID to existing email account
-        user.DiscordId = discordId;
+        user.discordId = discordId;
         await user.save();
       }
     }
 
-    // Create new user if not found
     if (!user) {
       const fullName = global_name || `${username}${discriminator && discriminator !== '0' ? `#${discriminator}` : ''}`;
-      
       user = new UserModel({
-        DiscordId: discordId,
-        Email: email ? email.toLowerCase() : `${username}@discord.user`,
-        FullName: fullName,
-        Password: null,
+        discordId,
+        email: email ? email.toLowerCase() : `${username}@discord.user`,
+        password: null, // will skip password validation
       });
       await user.save();
     }
 
-    // Generate JWT token
     const jwtToken = jwt.sign(
-      { 
-        id: user._id, 
-        DiscordId: discordId, 
-        Email: user.Email 
-      },
+      { id: user._id, discordId: user.discordId, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-
-    console.log("Discord login successful for user:", user.Email);
 
     return res.status(200).json({
       success: true,
@@ -317,9 +297,8 @@ const DiscordAuth = async (req, res) => {
       token: jwtToken,
       user: {
         id: user._id,
-        Email: user.Email,
-        FullName: user.FullName,
-        DiscordId: user.DiscordId,
+        email: user.email,
+        discordId: user.discordId,
       },
     });
 
@@ -327,7 +306,8 @@ const DiscordAuth = async (req, res) => {
     console.error("DiscordAuth error:", err);
     return res.status(500).json({ 
       success: false, 
-      message: "Internal server error during Discord authentication" 
+      message: "Internal server error during Discord authentication",
+      error: err.message 
     });
   }
 };

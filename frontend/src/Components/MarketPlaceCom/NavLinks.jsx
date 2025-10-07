@@ -11,13 +11,13 @@ const links = [
 
 function NavLinks() {
   return (
-    <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
+    <ul className="flex flex-wrap gap-4 lg:gap-[50px] md:justify-center lg:justify-start">
       {links.map((link, i) => (
         <li key={i}>
           <NavLink
             to={link.path}
             className={({ isActive }) =>
-              `px-2 md:ml-0 ml-2 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
+              `px-1 md:ml-0  py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
               transition-colors ${
                 isActive
                   ? " bg-[#002AA8] text-white font-semibold"

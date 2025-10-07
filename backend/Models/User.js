@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-// Define schema
 const UserSchema = new mongoose.Schema({
-  Email: {
+  email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
@@ -11,33 +10,38 @@ const UserSchema = new mongoose.Schema({
     match: [/\S+@\S+\.\S+/, "Please provide a valid email"], // basic email validation
   },
 
-  Password: {
+  password: {
     type: String,
     required: function () {
-      return !this.GoogleId && !this.DiscordId; // require only if no OAuth
+      // only require password if user is NOT using Google or Discord login
+      return !this.googleId && !this.discordId;
     },
     minLength: [8, "Password should be at least 8 characters"],
-    maxLength: [20, "Password max length should be 20 characters"],
+    default: null, // explicit for OAuth users
   },
 
-  GoogleId: {
+  googleId: {
     type: String,
     unique: true,
-    sparse: true, // allows multiple null values
+    sparse: true, // allows multiple nulls
+    default: null,
   },
-  DiscordId: {
+
+  discordId: {
     type: String,
     unique: true,
     sparse: true,
+    default: null,
   },
 });
 
-// Pre-save middleware to hash password
+// 🔒 Hash password before saving
 UserSchema.pre("save", async function (next) {
-  if (!this.isModified("Password") || !this.Password) return next(); // Only hash if password exists
+  if (!this.isModified("password") || !this.password) return next();
+
   try {
     const salt = await bcrypt.genSalt(10);
-    this.Password = await bcrypt.hash(this.Password, salt);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (err) {
     next(err);
@@ -45,5 +49,4 @@ UserSchema.pre("save", async function (next) {
 });
 
 const UserModel = mongoose.model("User", UserSchema);
-
 export default UserModel;
