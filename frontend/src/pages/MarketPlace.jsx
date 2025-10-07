@@ -32,12 +32,12 @@ function MarketPlace() {
             >
               <h1
                 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] 
-                leading-tight text-white mb-4 lg:mb-"
+                leading-tight text-white mt-3 mb-4 lg:mb-"
               >
                 A New Era Dawns in Hyper Tek
               </h1>
               <p
-                className="font-inter font-medium text-sm md:text-base lg:text-[18px] 
+                className="font-inter font-medium text-sm hidden md:block md:text-base lg:text-[18px] 
                 leading-relaxed text-white"
               >
                 It's the start of a living, breathing universe where every
@@ -73,7 +73,7 @@ function MarketPlace() {
 
           {/* Navigation and Search Section */}
           <div
-            className="relative flex px-8 flex-col lg:flex-row justify-between items-start 
+            className="relative flex md:px-8 px-4 flex-col lg:flex-row justify-between items-start 
             lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8"
           >
             {/* Nav Links */}
@@ -125,7 +125,7 @@ function MarketPlace() {
 
             {/* Search Field */}
             <div
-              className="w-full lg:w-[550px] flex items-center gap-3 lg:gap-[17px] 
+              className="md:w-full hidden md:d-block lg:w-[550px] flex items-center gap-3 lg:gap-[17px] 
               px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
               bg-white/10 backdrop-blur-sm"
             >
@@ -142,159 +142,155 @@ function MarketPlace() {
 
         <div className="px-8">
           {/* NFA Section */}
-        <section className="flex flex-col gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-6 md:px-8 lg:px-0">
+        <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-6 md:px-8 lg:px-0">
           {/* Header */}
-          <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
-            <div className="flex flex-col gap-2 items-start">
-              <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                NFA
-              </h1>
-              <div className="flex gap-2">
-                <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-                <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-                <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-                <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-              </div>
-            </div>
+        <div className="flex flex-row justify-between items-center gap-4">
+  <div className="flex flex-col gap-2 items-start">
+    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+      NFA
+    </h1>
+    <div className="flex gap-2">
+      <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+      <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+      <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+      <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+    </div>
+  </div>
 
-            <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-             
-               <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
-                <span>Expand All</span>
-                <ArrowRight size={20} strokeWidth={2} />
-               
-               </Link>
-              
-            </div>
-          </div>
+  <div className="flex justify-end items-center text-white">
+    <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
+      <span>Expand All</span>
+      <ArrowRight size={20} strokeWidth={2} />
+    </Link>
+  </div>
+</div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-            {[...Array(4)].map((_, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-                   lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-              >
-                {/* Image */}
-                <div
-                  className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-                     bg-gradient-to-b from-[#977C34] to-[#493F26]"
-                >
-                  <img
-                    src={popularCollections}
-                    alt="Collection"
-                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                  />
-                </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
+  {[...Array(4)].map((_, index) => (
+    <div
+      key={index}
+      className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
+         lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
+    >
+      {/* Image */}
+      <div
+        className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
+           bg-gradient-to-b from-[#977C34] to-[#493F26]"
+      >
+        <img
+          src={popularCollections}
+          alt="Collection"
+          className="w-full h-full object-cover object-top scale-x-[-1]"
+        />
+      </div>
 
-                {/* Title */}
-                <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-                  Monkey Ape
-                </h2>
+      {/* Title */}
+      <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
+        Monkey Ape
+      </h2>
 
-                {/* Stats */}
-                <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-                  <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-                  <div className="flex items-center">
-                    <img
-                      src={TVector}
-                      alt=""
-                      className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-                    />
-                    <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                      $2,000
-                    </h3>
-                  </div>
-                </div>
+      {/* Stats */}
+      <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
+        <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
+        <div className="flex items-center">
+          <img
+            src={TVector}
+            alt=""
+            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+          />
+          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+            $2,000
+          </h3>
+        </div>
+      </div>
 
-                {/* Button */}
-                <div className="mt-auto flex justify-center">
-                  <Link to="/buy-nfa" className="cursor-pointer w-full">
-                    <CustomButton text="Buy Now" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Button */}
+      <div className="mt-auto flex justify-center">
+        <Link to="/buy-nfa" className="cursor-pointer w-full">
+          <CustomButton text="Buy Now" />
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
+      
         </section>
 
         {/* LAND Section */}
-        <section className="flex flex-col gap-6 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6 md:px-8 lg:px-0">
-          {/* Header */}
-          <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
-            <div className="flex flex-col gap-2 items-start">
-              <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                LAND
-              </h1>
-              <div className="flex gap-2">
-                <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-                <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-                <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-                <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-              </div>
-            </div>
+    <section className="flex flex-col gap-6 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6 md:px-8 lg:px-0">
+  {/* Header */}
+  <div className="flex flex-row justify-between items-center gap-4">
+    <div className="flex flex-col gap-2 items-start">
+      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+        LAND
+      </h1>
+      <div className="flex gap-2">
+        <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+        <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+        <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+        <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+      </div>
+    </div>
 
-            <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-               <Link to="/buy-land" className="flex items-center gap-2 hover:text-gray-300 transition">
-                <span>Expand All</span>
-                <ArrowRight size={20} strokeWidth={2} />
-               
-               </Link>
-            </div>
+    <div className="flex justify-end items-center text-white">
+      <Link to="/buy-land" className="flex items-center gap-2 hover:text-gray-300 transition">
+        <span>Expand All</span>
+        <ArrowRight size={20} strokeWidth={2} />
+      </Link>
+    </div>
+  </div>
+
+  {/* Cards Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
+    {[...Array(4)].map((_, index) => (
+      <div
+        key={index}
+        className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
+          lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
+      >
+        {/* Image */}
+        <div
+          className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
+             bg-gradient-to-b from-[#977C34] to-[#493F26]"
+        >
+          <img
+            src={land1Image}
+            alt="Land Collection"
+            className="w-full h-full object-cover object-top scale-x-[-1]"
+          />
+        </div>
+
+        {/* Title */}
+        <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
+          Monkey Ape
+        </h2>
+
+        {/* Stats */}
+        <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
+          <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
+          <div className="flex items-center">
+            <img
+              src={TVector}
+              alt=""
+              className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+            />
+            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+              $2,000
+            </h3>
           </div>
+        </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-            {[...Array(4)].map((_, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-                  lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-              >
-                {/* Image */}
-                <div
-                  className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-                     bg-gradient-to-b from-[#977C34] to-[#493F26]"
-                >
-                  <img
-                    src={land1Image}
-                    alt="Land Collection"
-                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                  />
-                </div>
-
-                {/* Title */}
-                <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-                  Monkey Ape
-                </h2>
-
-                {/* Stats */}
-                <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-                  <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-                  <div className="flex items-center">
-                    <img
-                      src={TVector}
-                      alt=""
-                      className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-                    />
-                    <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                      $2,000
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Button */}
-                <div className="mt-auto flex justify-center">
-                  <Link to="/buy-land" className="cursor-pointer w-full">
-                    <CustomButton text="Buy Now" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* Button */}
+        <div className="mt-auto flex justify-center">
+          <Link to="/buy-land" className="cursor-pointer w-full">
+            <CustomButton text="Buy Now" />
+          </Link>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
         {/* ACTIVITIES Section */}
         <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
           <GlowingOrb Xaxis={830} Yaxis={300}/>

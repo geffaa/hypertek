@@ -45,7 +45,10 @@ function Login() {
       }));
       localStorage.setItem("token", res.data.token);
       toast.success("Login successful!");
-      navigate("/dashboard");
+
+      navigate("/profile");
+
+      
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     }
@@ -65,7 +68,11 @@ function Login() {
       }));
       localStorage.setItem("token", res.data.token);
       toast.success("Google login successful!");
-      navigate("/dashboard");
+
+      navigate("/profile");
+
+      navigate("/");
+
     } catch (err) {
       toast.error("Google login failed!");
     }
@@ -101,7 +108,7 @@ useEffect(() => {
         localStorage.setItem("token", res.data.token);
 
         toast.success(`Discord login successful! Welcome ${res.data.user.FullName}`);
-        navigate("/");
+        navigate("/profile");
       } else {
         toast.error(res.data.message || "Discord login failed!");
       }

@@ -37,6 +37,13 @@ import List from "./Components/ProfileSection/Listing";
 import Edit from "./Components/ProfileSection/EditProfile";
 import NotFound from "./pages/NotFound";
 import Testing from "./pages/Testing";
+import UserDashboard from "./pages/UserDashboard";
+import OfferedReceived from "./pages/OfferedReceived";
+import NoOffered from "./pages/NoOffered";
+import WalletConnect from "./pages/WalletConnect";
+import Wellcome from "./pages/Wellcome";
+import SigninWallet from "./pages/SigninWallet";
+import NoItem from "./pages/NoItem";
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -77,9 +84,19 @@ function AppWrapper() {
           <Route path="/buy-land" element={<NfaLand />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/offer" element={<OfferPage />} />
+          <Route path="/offer-recieved" element={<OfferedReceived/>} />
+          
+          {/* added this new page  */}
+          <Route path="/no-offer" element={<NoOffered/>} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/success" element={<Success />} />
           <Route path="/not-found" element={<NotFound />} />
+
+          {/* new page added i will update it according to the flow  */}
+          <Route path="/wallet-connect" element={<WalletConnect />} />
+          <Route path="/wellcome" element={<Wellcome />} />
+          <Route path="/Signin-wallet" element={<SigninWallet />} />
+          <Route path="/no-item-profile" element={<NoItem/>} />
 
           {/* Personal Activities */}
           <Route path="/personal-activity" element={<PersonalActivity />} />
@@ -94,6 +111,7 @@ function AppWrapper() {
           <Route path="/Activity" element={<Activity />} />
           <Route path="/List" element={<List />} />
           <Route path="/edit" element={<Edit />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
 
 
         {/* Testing Routes  */}

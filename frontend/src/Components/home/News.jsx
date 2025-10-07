@@ -52,23 +52,23 @@ export default function News() {
         {/* ================= Left Column ================= */}
         <div className="flex flex-col gap-8 w-full md:w-[680px]">
           {/* First Block */}
-          <div className="flex flex-col gap-5">
-            <img
-              src={NewsImage1}
-              alt="News 1"
-              className="w-full max-h-[350px] object-cover rounded-lg"
-            />
-            <div className="flex flex-col gap-3 p-4 w-full">
-              <h3 className="text-white text-xl sm:text-2xl font-bold uppercase font-goldman">
-                Hyper QUEST : the awakening
-              </h3>
-              <p className="text-white text-sm sm:text-base font-inter leading-relaxed md:w-[400px]">
-                Explore ruins, clash with factions, and uncover ancient tech.
-                Your choices shape your skills, species loyalty, and path:
-                liberator or dominator, relic hunter or techno savant.
-              </p>
-            </div>
-          </div>
+         <div className="flex flex-col gap-5">
+  <img
+    src={NewsImage1}
+    alt="News 1"
+    className="w-full max-h-[350px] object-cover rounded-lg"
+  />
+  <div className="flex flex-col gap-3 pt-2 md:p-4 w-full">
+    <h3 className="text-white text-xl sm:text-2xl font-bold uppercase font-goldman w-full whitespace-nowrap overflow-hidden text-ellipsis">
+      Hyper QUEST : the awakening
+    </h3>
+    <p className="text-white text-sm sm:text-base font-inter leading-relaxed md:w-[400px]">
+      Explore ruins, clash with factions, and uncover ancient tech.
+      Your choices shape your skills, species loyalty, and path:
+      liberator or dominator, relic hunter or techno savant.
+    </p>
+  </div>
+</div>
 
           {/* Second Block (2 smaller side-by-side cards) */}
           <div className="flex flex-col sm:flex-row gap-6">
@@ -81,7 +81,7 @@ export default function News() {
               />
               <div className="flex flex-col ">
                 <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
-                  Hyper racing : the velocity wars
+                  Hyper racing : the velocity <br /> wars
                 </h3>
                 <p className="text-white text-sm pt-2">
                   On Blacktrack Circuits, speed is war. Factions battle at 900
@@ -99,7 +99,7 @@ export default function News() {
               />
               <div className="flex flex-col ">
                 <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
-                  Overlord Realm : The Final Ascent
+                  Overlord Realm : <br /> The Final Ascent
                 </h3>
                 <p className="text-white text-sm pt-2">
                   Establish dominion across stars. Conquer with armies,
@@ -114,54 +114,54 @@ export default function News() {
         {/* ================= Right Column ================= */}
         <div className="flex flex-col z-10 gap-10 w-full md:w-[450px]">
           {/* Heading */}
-          <div className="flex items-center w-full">
-            <h2 className="text-white font-bold text-2xl sm:text-3xl font-goldman uppercase border-b-2 border-white pb-1">
-              News
-            </h2>
-            <div className="flex-1 ml-3 mt-10 h-[2px] bg-gradient-to-r from-white to-transparent"></div>
-          </div>
+         <div className="hidden sm:flex items-center w-full">
+  <h2 className="text-white font-bold text-2xl sm:text-3xl font-goldman uppercase border-b-2 border-white pb-1">
+    News
+  </h2>
+  <div className="flex-1 ml-3 mt-10 h-[2px] bg-gradient-to-r from-white to-transparent"></div>
+</div>
 
           {/* Featured Block */}
-          <div className="flex flex-col">
-            <img
-              src={NewRightImage}
-              alt="Featured News"
-              className="w-full max-h-[200px] object-cover rounded-lg"
-            />
-            <div className="text-white px-3 py-2">
-              <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
-                NEW PARTNERSHIP WITH GOD OF WAR GAME
-              </h3>
-            </div>
-          </div>
+         <div className="hidden sm:flex flex-col">
+  <img
+    src={NewRightImage}
+    alt="Featured News"
+    className="w-full max-h-[200px] object-cover rounded-lg"
+  />
+  <div className="text-white px-3 py-2">
+    <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
+      NEW PARTNERSHIP WITH GOD OF WAR GAME
+    </h3>
+  </div>
+</div>
 
           {/* Horizontal Blocks */}
-          <div className="flex flex-col gap-4">
-            {[1, 2, 3].map((block) => (
-              <div
-                key={block}
-                className="flex flex-col sm:flex-row gap-4 w-full bg-[#111] rounded-lg overflow-hidden"
-              >
-                <img
-                  src={NewRightImage}
-                  alt={`Update ${block}`}
-                  className="w-full sm:w-[200px] h-[140px] object-cover"
-                />
-                <div className="flex p-3">
-                  <p className="text-white text-sm sm:text-base font-inter leading-relaxed">
-                    New update coming up on the 25th of august
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-col gap-4">
+  {[1, 2, 3].map((block) => (
+    <div
+      key={block}
+      className="flex flex-row gap-3 w-full bg-[#111] rounded-lg overflow-hidden p-2"
+    >
+      <img
+        src={NewRightImage}
+        alt={`Update ${block}`}
+        className="w-[100px] h-[80px] sm:w-[200px] sm:h-[140px] object-cover"
+      />
+      <div className="flex p-2">
+        <p className="text-white text-xs sm:text-base font-inter leading-relaxed">
+          New update coming up on the 25th of august
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
 
           {/* More News Button */}
-          <div className="flex justify-center mt-4">
-           <Link to="/more-news">
-            <CustomButton text="More News" />
-           </Link>
-          </div>
+<div className="flex justify-start sm:justify-center mt-4">
+  <Link to="/more-news">
+    <CustomButton text="More News" />
+  </Link>
+</div>
         </div>
       </div>
     </section>

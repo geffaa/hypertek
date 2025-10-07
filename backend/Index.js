@@ -1,42 +1,38 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import cors from "cors";
 import { DBConnections } from "./Database/Db.js"; 
+
+// import Rotues 
 import { Route } from "./Routes/User.js";
 
-// ✅ Load environment variables
-dotenv.config();
-
-// ✅ Initialize app
-const app = express();
-
-// ✅ Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
-// ✅ Fix for ES modules (so we can use __dirname)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Serve static uploads (so images are accessible)
+// Load environment variables
+dotenv.config({ path: "./Config/.env" });
+const app = express();
+
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Connect Database
+// Middleware
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+
+// Database Connectivity
 DBConnections();
 
-// ✅ Routes
-app.use("/api/v1", Route);
+// Routes
+app.use(`/api/v1`,Route);
 
-// ✅ Fallback route (optional, for testing)
-app.get("/", (req, res) => {
-  res.send("🚀 API is running successfully");
-});
-
-// ✅ Start server
+// Port from .env
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running at: http://localhost:${PORT}`);
-});
+
+app.listen(PORT, () =>
+  console.log(`✅ Server running on http://localhost:${PORT}`)
+);
