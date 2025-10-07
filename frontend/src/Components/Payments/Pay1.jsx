@@ -99,7 +99,7 @@ function Offer1() {
         </div>
 
         {/* Paragraph */}
-        <p className="text-white text-sm md:text-base font-normal leading-tight tracking-wide text-center md:text-left mt-2">
+        <p className="text-white text-sm md:text-base font-normal leading-tight tracking-wide text-start md:text-center md:text-left mt-2">
           By clicking "Submit Item Offer", you agree to Hyper Tek the Terms of Service
         </p>
       </div>

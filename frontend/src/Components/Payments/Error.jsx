@@ -1,26 +1,15 @@
 import React from "react";
-import BackHome from "../../assets/images/backhome.png";
 import { Link } from "react-router-dom";
+import BackHome from "../../assets/images/backhome.png";
 
 function Error() {
   return (
-    <div
-      className="flex flex-col items-center justify-center text-center bg-transparent"
-      style={{
-        width: "248px",
-        height: "208px",
-        position: "absolute",
-        top: "140px",
-        left: "596px",
-        borderRadius: "30px",
-      }}
-    >
-      {/* Bold Red cross icon */}
-      <div className="flex items-center justify-center border-4 border-red-500 rounded-[50%] w-24 h-24 mb-4">
+    <div className="flex flex-col items-center justify-center text-center min-h-screen bg-[#0A0A0A] px-6">
+      {/* Red Cross Icon */}
+      <div className="flex items-center justify-center border-4 border-red-500 rounded-full w-20 h-20 sm:w-24 sm:h-24 mb-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
+          className="w-10 h-10 sm:w-12 sm:h-12"
           viewBox="0 0 24 24"
           fill="none"
           stroke="red"
@@ -34,55 +23,32 @@ function Error() {
       </div>
 
       {/* Error Message */}
-      <h3 className="text-white text-lg font-medium mb-6 leading-tight">
-        Your request was not <br /> successful
+      <h3 className="text-white text-base sm:text-lg md:text-xl font-medium mb-6 leading-tight">
+        Your request was not <br className="hidden sm:block" /> successful
       </h3>
 
       {/* Go Home Button */}
-      <Link 
-        to="/payment"
-        className="flex items-center justify-center no-underline hover:no-underline"
-        style={{
-          width: "146px",
-          height: "42px",
-        
-          padding: "8px 12px",
-          borderRadius: "4px",
-          cursor: "pointer",
-          boxSizing: "border-box",
-          textDecoration: "none",
-        }}
-      >
-        {/* Icon */}
-        <img
-          src={BackHome}
-          alt="Back Home"
-          style={{
-            width: "24px",
-            height: "17px",
-            opacity: 1,
-          }}
-        />
+    <div className="flex flex-col items-center justify-center">
+  {/* Go Home Button */}
+  <Link
+    to="/payment"
+    className="flex items-center justify-center gap-2 bg-transparent hover:bg-gray-800 px-5 py-2 rounded-lg transition duration-200 w-fit"
+  >
+    <img
+      src={BackHome}
+      alt="Back Home"
+      className="w-5 h-4 sm:w-6 sm:h-5"
+    />
+    <span className="font-inter font-medium text-white text-lg sm:text-xl">
+      Go Home
+    </span>
+  </Link>
 
-        {/* Text */}
-        <span
-          style={{
-            marginLeft: "8px",
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 500,
-            fontSize: "20px",
-            lineHeight: "100%",
-            textTransform: "capitalize",
-            color: "white",
-          }}
-        >
-          Go Home
-        </span>
-      </Link>
+  {/* Divider Line */}
+  <div className="mt-4 w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
+</div>
 
-      <div className="w-1/2 bg-white h-1">
 
-      </div>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
-import sendImg from "../assets/images/send.png"; 
 import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
+import CustomButton from "../Components/Buttons/Button1";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ function ForgotPassword() {
       
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[420px] max-w-md sm:max-w-sm">
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />
-        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">Forgotten Password</h1>
+        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center whitespace-nowrap">Forgotten Password</h1>
         <p className="text-white text-sm mb-6 text-center">Enter your email address</p>
 
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -70,15 +70,10 @@ function ForgotPassword() {
 
           <button
             type="submit"
-            className={`w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+            className={`w-full flex items-center justify-center ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             disabled={loading}
           >
-            <img
-              src={sendImg}
-              alt="Send"
-              className="h-10 sm:h-8"
-              style={{ height: "40px", width: "266px" }}
-            />
+            <CustomButton text="Send"/>
           </button>
         </form>
 

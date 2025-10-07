@@ -4,8 +4,10 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
+import { ethers } from "ethers";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
 
 // ------------------ SMTP TRANSPORTER ------------------
 const transporter = nodemailer.createTransport({
@@ -70,9 +72,13 @@ const LoginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ id: user._id, Email: user.Email }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { id: user._id, Email: user.Email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
 
     res.status(200).json({
       message: "Login successful",
@@ -93,10 +99,10 @@ const ForgotPassword = async (req, res) => {
     if (!user) return res.status(400).json({ message: "User not found" });
     // Generate reset token (15 minutes expiry)
     const resetToken = jwt.sign(
-  { id: user._id, Email: user.Email },
-  process.env.RESET_SECRET,  // <== must match
-  { expiresIn: "1d" }
-);
+      { id: user._id, Email: user.Email },
+      process.env.RESET_SECRET, // <== must match
+      { expiresIn: "1d" }
+    );
     const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
     // Send email
     await transporter.sendMail({
@@ -104,20 +110,56 @@ const ForgotPassword = async (req, res) => {
       to: Email,
       subject: "Password Reset Request",
       html: `
-        <h3>Password Reset</h3>
-        <p>Click the button below to reset your password:</p>
-        <a href="${resetLink}"
-           style="display:inline-block;
-                  padding:10px 20px;
-                  margin-top:10px;
-                  font-size:16px;
-                  color:#fff;
-                  background-color:#007bff;
-                  text-decoration:none;
-                  border-radius:5px;">
-          Reset Password
-        </a>
-        <p>This link will expire in 15 minutes.</p>
+<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f6f8; 
+            padding: 40px 0; 
+            text-align: center;">
+  <div style="max-width: 500px; 
+              margin: auto; 
+              background-color: #ffffff; 
+              border-radius: 10px; 
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+              padding: 30px 40px;">
+              
+    <h2 style="color: #1a1a1a; margin-bottom: 10px;">🔒 Password Reset Request</h2>
+    <p style="color: #555; font-size: 15px; line-height: 1.6;">
+      We received a request to reset your password.  
+      Click the button below to securely reset it.
+    </p>
+
+    <a href="${resetLink}"
+       style="display: inline-block;
+              margin-top: 20px;
+              padding: 12px 28px;
+              font-size: 16px;
+              color: #ffffff;
+              background-color: #007bff;
+              border-radius: 6px;
+              text-decoration: none;
+              font-weight: 600;
+              box-shadow: 0 2px 6px rgba(0,123,255,0.3);
+              transition: background-color 0.3s ease;">
+      Reset My Password
+    </a>
+
+    <p style="color: #777; font-size: 14px; margin-top: 25px;">
+      This link will expire in <strong>15 minutes</strong>.  
+      If you didn’t request this, you can safely ignore this email.
+    </p>
+
+    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;" />
+
+    <p style="font-size: 12px; color: #999;">
+      Need help? Contact our support team at  
+      <a href="mailto:support@innervoice.com" style="color: #007bff; text-decoration: none;">support@innervoice.com</a>
+    </p>
+  </div>
+
+  <p style="color: #aaa; font-size: 12px; margin-top: 20px;">
+    &copy; ${new Date().getFullYear()} Inner Voice. All rights reserved.
+  </p>
+</div>
+
       `,
     });
     res.status(200).json({ message: "Password reset link sent to email" });
@@ -126,7 +168,7 @@ const ForgotPassword = async (req, res) => {
   }
 };
 // ------------------ RESET PASSWORD ------------------
- const ResetPassword = async (req, res) => {
+const ResetPassword = async (req, res) => {
   try {
     const { token } = req.params;
     const { Password, ConfirmPassword } = req.body;
@@ -144,7 +186,7 @@ const ForgotPassword = async (req, res) => {
     // Verify token
     let decoded;
     try {
-     decoded = jwt.verify(token, process.env.RESET_SECRET);
+      decoded = jwt.verify(token, process.env.RESET_SECRET);
     } catch (err) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
@@ -160,10 +202,11 @@ const ForgotPassword = async (req, res) => {
   }
 };
 
+// ------------------ GoogleAuth ------------------
 const GoogleAuth = async (req, res) => {
   try {
     const { token } = req.body; // id_token from frontend
-    console.log("your token in the backend :",token);
+    console.log("your token in the backend :", token);
     if (!token) return res.status(400).json({ message: "Token is required" });
 
     // Verify id token (checks signature + audience)
@@ -175,7 +218,9 @@ const GoogleAuth = async (req, res) => {
     const { sub: googleId, email, name, email_verified, picture } = payload;
 
     if (!email || !email_verified) {
-      return res.status(400).json({ message: "Google account email not verified" });
+      return res
+        .status(400)
+        .json({ message: "Google account email not verified" });
     }
 
     // Find or create user
@@ -197,26 +242,46 @@ const GoogleAuth = async (req, res) => {
     }
 
     // Generate our app JWT (use your JWT_SECRET)
-    const jwtToken = jwt.sign({ id: user._id, Email: user.Email }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const jwtToken = jwt.sign(
+      { id: user._id, Email: user.Email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     return res.status(200).json({
       message: "Google login successful",
       token: jwtToken,
-      user: { id: user._id, Email: user.Email, FullName: user.FullName, picture },
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        picture,
+      },
     });
   } catch (err) {
     console.error("GoogleAuth err:", err);
-    return res.status(500).json({ message: "Google auth failed", error: err.message });
+    return res
+      .status(500)
+      .json({ message: "Google auth failed", error: err.message });
   }
 };
+
+// ------------------ Discord ------------------
 const DiscordAuth = async (req, res) => {
   try {
     const { code } = req.body;
-    if (!code) return res.status(400).json({ message: "Authorization code is required" });
+    console.log("Received Discord auth code:", code);
 
-    // 1. Exchange code for access_token
+    if (!code) {
+      return res.status(400).json({
+        success: false,
+        message: "Authorization code is required",
+      });
+    }
+
+    // Exchange code for access_token
     const params = new URLSearchParams();
     params.append("client_id", process.env.DISCORD_CLIENT_ID);
     params.append("client_secret", process.env.DISCORD_CLIENT_SECRET);
@@ -231,42 +296,85 @@ const DiscordAuth = async (req, res) => {
     });
 
     const tokenData = await tokenResponse.json();
+    console.log("Token exchange response:", tokenData);
+
     if (!tokenData.access_token) {
-      return res.status(400).json({ message: "Failed to exchange code", error: tokenData });
+      console.error("Token exchange failed:", tokenData);
+      return res.status(400).json({
+        success: false,
+        message: "Failed to exchange authorization code",
+        error: tokenData,
+      });
     }
 
-    // 2. Fetch user info
+    // Fetch Discord user info
     const userResponse = await fetch("https://discord.com/api/users/@me", {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
 
     const discordUser = await userResponse.json();
+    console.log("Discord user data:", discordUser);
+
     if (!discordUser.id) {
-      return res.status(400).json({ message: "Failed to fetch Discord user", error: discordUser });
+      console.error("Failed to fetch Discord user:", discordUser);
+      return res.status(400).json({
+        success: false,
+        message: "Failed to fetch Discord user information",
+      });
     }
 
-    const { id: discordId, username, discriminator, email } = discordUser;
+    const {
+      id: discordId,
+      username,
+      discriminator,
+      email,
+      global_name,
+    } = discordUser;
 
-    // 3. Find or create user
-    let user = await UserModel.findOne({ DiscordId: discordId });
+    // Find or create user
+    let user;
 
+    // First, try to find by Discord ID
+    user = await UserModel.findOne({ DiscordId: discordId });
+
+    // If not found by Discord ID, try by email
+    if (!user && email) {
+      user = await UserModel.findOne({ Email: email.toLowerCase() });
+      if (user) {
+        // Link Discord ID to existing email account
+        user.DiscordId = discordId;
+        await user.save();
+      }
+    }
+
+    // Create new user if not found
     if (!user) {
+      const fullName =
+        global_name ||
+        `${username}${
+          discriminator && discriminator !== "0" ? `#${discriminator}` : ""
+        }`;
+
       user = new UserModel({
         DiscordId: discordId,
-        FullName: `${username}#${discriminator}`,
-        Email: email || null, // email optional
+        Email: email ? email.toLowerCase() : `${username}@discord.user`,
+        FullName: fullName,
+        Password: null,
       });
       await user.save();
     }
 
-    // 4. Generate JWT
+    // Generate JWT token
     const jwtToken = jwt.sign(
       { id: user._id, DiscordId: discordId, Email: user.Email },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
+    console.log("Discord login successful for user:", user.Email);
+
     return res.status(200).json({
+      success: true,
       message: "Discord login successful",
       token: jwtToken,
       user: {
@@ -278,10 +386,14 @@ const DiscordAuth = async (req, res) => {
     });
   } catch (err) {
     console.error("DiscordAuth error:", err);
-    return res.status(500).json({ message: "Discord auth failed", error: err.message });
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error during Discord authentication",
+    });
   }
 };
 
+// ------------------  PROFILE ------------------
 const GetProfile = async (req, res) => {
   try {
     const userId = req.user.id; // from middleware
@@ -297,7 +409,8 @@ const GetProfile = async (req, res) => {
 const EditProfile = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { FullName, Email, Password, NewPassword } = req.body;
+    console.log("your edit req body is :",req.body);
+    const { FullName, Email, Password, NewPassword ,Bio } = req.body;
 
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -313,10 +426,11 @@ const EditProfile = async (req, res) => {
     // ✅ Update text fields
     if (FullName) user.FullName = FullName;
     if (Email) user.Email = Email;
+    if(Bio) user.Bio = Bio;
 
     // ✅ If image uploaded
     if (req.file) {
-      const avatarUrl = `/uploads/profile_pics/${req.file.filename}`;
+      const avatarUrl = `/uploads/temp/${req.file.filename}`;
       user.Avatar = avatarUrl;
     }
 
@@ -329,6 +443,7 @@ const EditProfile = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         Avatar: user.Avatar,
+        Bio:user.Bio
       },
     });
   } catch (err) {
@@ -336,5 +451,253 @@ const EditProfile = async (req, res) => {
   }
 };
 
+// ------------------ METAMask ------------------
+const MetaAuth = async (req, res) => {
+  try {
+    const { code } = req.body;
+    console.log("Received Facebook auth code:", code);
 
-export { SignupUser, LoginUser, ForgotPassword, ResetPassword, GoogleAuth, DiscordAuth, GetProfile, EditProfile };
+    if (!code) {
+      return res
+        .status(400)
+        .json({ message: "Authorization code is required" });
+    }
+
+    // Exchange code for access_token
+    const tokenResponse = await fetch(
+      `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.FACEBOOK_REDIRECT_URI}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&code=${code}`
+    );
+    const tokenData = await tokenResponse.json();
+    console.log("Facebook token data:", tokenData);
+
+    if (!tokenData.access_token) {
+      return res.status(400).json({
+        message: "Failed to get Facebook access token",
+        error: tokenData,
+      });
+    }
+
+    // Fetch Facebook user info
+    const userResponse = await fetch(
+      `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${tokenData.access_token}`
+    );
+    const fbUser = await userResponse.json();
+    console.log("Facebook user:", fbUser);
+
+    if (!fbUser.id) {
+      return res
+        .status(400)
+        .json({ message: "Failed to fetch Facebook user information" });
+    }
+
+    const { id: facebookId, email, name, picture } = fbUser;
+
+    // Find or create user
+    let user = await UserModel.findOne({ FacebookId: facebookId });
+    if (!user && email) {
+      user = await UserModel.findOne({ Email: email.toLowerCase() });
+      if (user) {
+        user.FacebookId = facebookId;
+        await user.save();
+      }
+    }
+
+    if (!user) {
+      user = new UserModel({
+        FacebookId: facebookId,
+        Email: email ? email.toLowerCase() : `${facebookId}@facebook.user`,
+        FullName: name || "Facebook User",
+        Avatar: picture?.data?.url || "",
+      });
+      await user.save();
+    }
+
+    const jwtToken = jwt.sign(
+      { id: user._id, FacebookId: facebookId, Email: user.Email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.status(200).json({
+      message: "Facebook login successful",
+      token: jwtToken,
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        Avatar: user.Avatar,
+      },
+    });
+  } catch (err) {
+    console.error("MetaAuth error:", err);
+    res.status(500).json({
+      message: "Internal server error during Facebook login",
+      error: err.message,
+    });
+  }
+};
+const MetaMaskAuth = async (req, res) => {
+  try {
+    const { address, signature, message } = req.body;
+
+    // ✅ Step 1: Validate required fields
+    if (!address || !signature || !message) {
+      return res
+        .status(400)
+        .json({ message: "Address, signature, and message are required" });
+    }
+
+    // ✅ Step 2: Verify wallet signature
+    const recoveredAddress = ethers.verifyMessage(message, signature);
+    if (recoveredAddress.toLowerCase() !== address.toLowerCase()) {
+      return res.status(401).json({ message: "Invalid signature" });
+    }
+
+    // ✅ Step 3: Find or create user in database
+    let user = await UserModel.findOne({
+      WalletAddress: address.toLowerCase(),
+    });
+
+    if (!user) {
+      user = new UserModel({
+        WalletAddress: address.toLowerCase(),
+        FullName: "MetaMask User",
+        Email: `${address}@metamask.user`, // fallback email
+        Avatar: "", // optional avatar field
+      });
+      await user.save();
+    }
+
+    // ✅ Step 4: Generate JWT
+    const jwtToken = jwt.sign(
+      { id: user._id, WalletAddress: address },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    // ✅ Step 5: Send response
+    res.status(200).json({
+      message: "MetaMask login successful",
+      token: jwtToken,
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        WalletAddress: user.WalletAddress,
+        Avatar: user.Avatar,
+      },
+    });
+  } catch (err) {
+    console.error("MetaMaskAuth error:", err);
+    res.status(500).json({
+      message: "Internal server error during MetaMask login",
+      error: err.message,
+    });
+  }
+};
+// ------------------ TWITTER AUTH ------------------
+const TwitterAuth = async (req, res) => {
+  try {
+    const { code } = req.body;
+    console.log("Received Twitter auth code:", code);
+
+    if (!code) {
+      return res
+        .status(400)
+        .json({ message: "Authorization code is required" });
+    }
+
+    // Exchange code for access token
+    const tokenResponse = await fetch(
+      "https://api.twitter.com/2/oauth2/token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization:
+            "Basic " +
+            Buffer.from(
+              `${process.env.TWITTER_CLIENT_ID}:${process.env.TWITTER_CLIENT_SECRET}`
+            ).toString("base64"),
+        },
+        body: new URLSearchParams({
+          code,
+          grant_type: "authorization_code",
+          client_id: process.env.TWITTER_CLIENT_ID,
+          redirect_uri: process.env.TWITTER_REDIRECT_URI,
+          code_verifier: "challenge", // same as used in frontend
+        }),
+      }
+    );
+
+    const tokenData = await tokenResponse.json();
+    console.log("Twitter token data:", tokenData);
+
+    if (!tokenData.access_token) {
+      return res.status(400).json({
+        message: "Failed to get Twitter access token",
+        error: tokenData,
+      });
+    }
+
+    // Fetch Twitter user info
+    const userResponse = await fetch("https://api.twitter.com/2/users/me", {
+      headers: { Authorization: `Bearer ${tokenData.access_token}` },
+    });
+    const twitterUser = await userResponse.json();
+    console.log("Twitter user:", twitterUser);
+
+    const userData = twitterUser.data;
+    if (!userData || !userData.id) {
+      return res
+        .status(400)
+        .json({ message: "Failed to fetch Twitter user information" });
+    }
+
+    const { id: twitterId, name, username } = userData;
+
+    // Find or create user
+    let user = await UserModel.findOne({ TwitterId: twitterId });
+
+    if (!user) {
+      user = new UserModel({
+        TwitterId: twitterId,
+        FullName: name || username,
+        Email: `${username}@twitter.user`,
+      });
+      await user.save();
+    }
+
+    // Create JWT
+    const jwtToken = jwt.sign(
+      { id: user._id, TwitterId: twitterId, Email: user.Email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.status(200).json({
+      message: "Twitter login successful",
+      token: jwtToken,
+      user: { id: user._id, Email: user.Email, FullName: user.FullName },
+    });
+  } catch (err) {
+    console.error("TwitterAuth error:", err);
+    res.status(500).json({
+      message: "Internal server error during Twitter login",
+      error: err.message,
+    });
+  }
+};
+
+export {
+  SignupUser,
+  LoginUser,
+  ForgotPassword,
+  ResetPassword,
+  GoogleAuth,
+  DiscordAuth,
+  GetProfile,
+  EditProfile,
+  TwitterAuth,
+  MetaMaskAuth,
+};

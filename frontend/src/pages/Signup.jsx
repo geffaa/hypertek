@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,13 +8,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
+
 import symbol from "../assets/images/login/Symbol.svg.png";
 import skype from "../assets/images/login/skipe.png";
 import discard from "../assets/images/login/discard.png";
 
-
-import { GoogleLogin } from "@react-oauth/google"; // ✅ use GoogleLogin instead of useGoogleLogin
-
+import { GoogleLogin } from "@react-oauth/google";
 
 function Signup() {
   const dispatch = useDispatch();
@@ -25,25 +24,25 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
- 
+
+  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle manual signup
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔹 Basic validations
+    // Basic validations
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       toast.error("Please enter a valid email address");
       return;
     }
-
     if (formData.password.length < 8 || formData.password.length > 20) {
       toast.error("Password must be between 8 and 20 characters");
       return;
     }
-
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -51,14 +50,15 @@ function Signup() {
 
     try {
       const res = await axios.post(`http://localhost:3000/api/v1/user/signup`, {
-        Email: formData.email,         // send email instead of FullName
+        Email: formData.email,
         Password: formData.password,
-        ConfirmPassword: formData.confirmPassword
+        ConfirmPassword: formData.confirmPassword,
       });
 
       if (res.status === 201) {
         toast.success("Signup successful!");
-        navigate("/signin"); // redirect to signin
+
+        navigate("/signin");
       } else {
         toast.error(res.data.message || "Signup failed");
       }
@@ -68,14 +68,11 @@ function Signup() {
     }
   };
 
-  // Google login
+  // ---------------- Google Login ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      console.log("Google ID Token:", credentialResponse.credential);
-
-      // Send ID token to backend
       const res = await axios.post("http://localhost:3000/api/v1/user/google", {
-        token: credentialResponse.credential, // 👈 backend expects "token"
+        token: credentialResponse.credential,
       });
 
       if (res.status === 200) {
@@ -87,32 +84,70 @@ function Signup() {
           })
         );
         localStorage.setItem("token", res.data.token);
-        toast.success("Google login successful!");
-        
+        toast.success("Google Signup successful!");
         navigate("/");
       } else {
         toast.error(res.data.message || "Google login failed");
       }
-    } catch (error) {
-      console.error("Error sending token to backend:", error);
+    } catch (err) {
+      console.error("Error sending token to backend:", err);
       toast.error("Google login failed!");
     }
   };
 
+  // ---------------- Discord Login ----------------
+  const DISCORD_CLIENT_ID = "1423260002587639828";
+  const REDIRECT_URI = "http://localhost:5173/signin";
+  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+    REDIRECT_URI
+  )}&response_type=code&scope=identify%20email`;
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+    if (!code) return;
+
+    // Clean URL immediately to prevent re-triggers
+    window.history.replaceState({}, document.title, "/signin");
+
+    const fetchDiscordUser = async () => {
+      try {
+        const res = await axios.post("http://localhost:3000/api/v1/user/discord", { code });
+        if (res.data.success && res.data.user) {
+          dispatch(
+            loginSuccess({
+              user: res.data.user,
+              token: res.data.token,
+              isLoggedInUser: true,
+            })
+          );
+          localStorage.setItem("token", res.data.token);
+          toast.success(`Discord Signup successful! Welcome ${res.data.user.FullName}`);
+          dispatch(loginSuccess({
+                  user: res.data.user,
+                  token: res.data.token,
+                  isLoggedInUser: true,
+                }));
+          navigate("/");
+        } else {
+          toast.error(res.data.message || "Discord login failed!");
+        }
+      } catch (err) {
+        console.error("Discord login error:", err);
+        toast.error(err.response?.data?.message || "Discord login failed!");
+      }
+    };
+
+    fetchDiscordUser();
+  }, [dispatch, navigate]);
 
   return (
-    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent">
+    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
       <GlowingOrb Xaxis={70} Yaxis={150} />
       <GlowingOrb Xaxis={950} Yaxis={450} />
 
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] max-w-md sm:max-w-sm">
-        {/* Logo */}
-        <img
-          src={Logo}
-          alt="Logo"
-          className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px] mb-4"
-        />
+        <img src={Logo} alt="Logo" className="w-[67px] h-[67px] mb-4" />
 
         <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">
           Create Account
@@ -125,6 +160,7 @@ function Signup() {
           </Link>
         </p>
 
+        {/* Signup Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
           {/* Email */}
           <div className="relative">
@@ -149,7 +185,7 @@ function Signup() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
-              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white  focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
+              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
               required
             />
             <button
@@ -170,7 +206,7 @@ function Signup() {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm Password"
-              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white  focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
+              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
               required
             />
             <button
@@ -182,7 +218,6 @@ function Signup() {
             </button>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full py-3 mt-4 flex items-center justify-center text-white font-semibold rounded-lg transition"
@@ -191,36 +226,35 @@ function Signup() {
           </button>
         </form>
 
-          <div className="flex items-center w-full my-2">
+        {/* Divider */}
+        <div className="flex items-center w-full my-4">
           <hr className="flex-grow border-t border-white/40" />
           <span className="mx-2 text-white/70 text-sm">or continue with</span>
           <hr className="flex-grow border-t border-white/40" />
         </div>
 
-         <div className="flex justify-center gap-4">
+        {/* Social Buttons */}
+        <div className="flex justify-center gap-4">
           <button className="p-1 rounded-full border border-white transition">
             <img src={skype} alt="Skype" className="w-6 h-6" />
           </button>
-          <button className="p-1 rounded-full border border-white transition">
+
+          <button
+            className="p-1 rounded-full border border-white transition"
+            onClick={() => (window.location.href = discordAuthUrl)}
+          >
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
 
-          {/* ✅ Google Custom Button with ID Token */}
-          {/* Social Icons */}
-          <div className="flex justify-center gap-4">
-            {/* ✅ Proper Google Login Button */}
-            <GoogleLogin
-              onSuccess={handleGoogleLoginSuccess}
-              onError={() => {
-                toast.error("Google login failed!");
-              }}
-              useOneTap={false}
-              theme="filled_blue"
-              size="large"
-              shape="circle"
-              type="icon"
-            />
-          </div> 
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => toast.error("Google login failed!")}
+            useOneTap={false}
+            theme="filled_blue"
+            size="large"
+            shape="circle"
+            type="icon"
+          />
 
           <button className="p-1 rounded-full border border-white transition">
             <img src={symbol} alt="Symbol" className="w-6 h-6" />

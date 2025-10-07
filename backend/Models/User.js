@@ -10,13 +10,22 @@ const UserSchema = new mongoose.Schema({
     match: [/\S+@\S+\.\S+/, "Please provide a valid email"],
   },
 
+  FullName: {
+    type: String,
+    default: "",
+  },
+
   Password: {
     type: String,
     required: function () {
-      return !this.GoogleId; // only require password if no GoogleId
+      return !(this.GoogleId || this.DiscordId || this.FacebookId); // require password only if no social auth
     },
     minlength: [8, "Password should be at least 8 characters"],
     // ❌ removed maxLength — hash always ~60 chars
+  },
+  Bio:{
+    type:String,
+
   },
 
   GoogleId: {
@@ -26,7 +35,8 @@ const UserSchema = new mongoose.Schema({
   },
 
   DiscordId: { type: String, unique: true, sparse: true },
-
+  TwitterId: { type: String, unique: true, sparse: true },
+  FacebookId: { type: String, unique: true, sparse: true },
   Avatar: {
     type: String, // will store image URL or filename
     default: "", // fallback if no image
