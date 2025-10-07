@@ -7,15 +7,13 @@ import GlowingOrb from "./BgColoring";
 
 function Footer() {
   return (
-    <footer className="w-full  text-white  pb-8 relative z-10 bg-[#000000] " style={{
-     
-    }} >
+    <footer className="w-full text-white pb-8 relative z-10 bg-[#000000]">
       <div
-      style={{
-        top: `${0}px`,
-        right: `${350}px`,
-      }}
-      className="absolute 
+        style={{
+          top: `${0}px`,
+          right: `${350}px`,
+        }}
+        className="absolute 
              w-[120px] h-[120px] 
              md:w-[150px] md:h-[120px] 
              rounded-full 
@@ -24,15 +22,87 @@ function Footer() {
              shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
                     0_0_100px_50px_rgba(59,130,246,0.4),
                     0_0_200px_100px_rgba(59,130,246,0.2)]"
-    ></div>
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-        {/* First Row: Logo + Menu */}
-        <div
-          className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t pt-4 mt-2"
+      ></div>
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+        {/* Mobile Layout: Menu + (Copyright, Social Icons, Logo) */}
+        <div className="flex sm:hidden gap-6 border-t pt-4 mt-2"
           style={{
             borderStyle: "solid",
-            borderWidth: "2px solid white", // top border only
+            borderWidth: "2px solid white",
+            borderImageSlice: 1,
+          }}
+        >
+          {/* Left Column - Menu */}
+          <div className="flex flex-col gap-3 text-sm font-medium flex-1">
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              Market Place
+            </a>
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              News
+            </a>
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              WhitePapers
+            </a>
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              FAQ
+            </a>
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              Disclaimer
+            </a>
+            <a href="#" className="hover:text-gray-400 transition-colors text-left">
+              Terms and Conditions
+            </a>
+          </div>
+          
+          {/* Right Column - Copyright, Social Icons, Logo */}
+          <div className="flex flex-col items-end gap-4 flex-shrink-0">
+            {/* Copyright Text */}
+           <div className="text-xs text-gray-400 text-left">
+  @2025. ALL RIGHTS<br />RESERVED
+</div>
             
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              <a href="#" aria-label="Discord">
+                <img
+                  src={DiscordImg}
+                  alt="Discord"
+                  className="w-[19px] h-[19px] hover:opacity-75 transition"
+                />
+              </a>
+              <a href="#" aria-label="Skype">
+                <img
+                  src={SkypeImg}
+                  alt="Skype"
+                  className="w-[19px] h-[17px] hover:opacity-75 transition"
+                />
+              </a>
+              <a href="#" aria-label="Telegram">
+                <img
+                  src={TelegramImg}
+                  alt="Telegram"
+                  className="w-[19px] h-[19px] transition"
+                />
+              </a>
+            </div>
+            
+            {/* Logo */}
+            <div className="flex-shrink-0 mt-16">
+              <img
+                src={Logo}
+                alt="Logo"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout: Logo + Menu (hidden on mobile) */}
+        <div
+          className="hidden sm:flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t pt-4 mt-2"
+          style={{
+            borderStyle: "solid",
+            borderWidth: "2px solid white",
             borderImageSlice: 1,
           }}
         >
@@ -44,7 +114,6 @@ function Footer() {
               className="h-10 w-auto object-contain"
             />
           </div>
-
           {/* Menu Links */}
           <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm font-medium justify-center md:justify-end text-center md:text-left">
             <li>
@@ -53,7 +122,7 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className=" cursor-pointer hover:text-gray-400 transition-colors">
+              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors">
                 News
               </a>
             </li>
@@ -80,15 +149,14 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Second Row: Centered Text + Social Icons */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
+        {/* Second Row: Centered Text + Social Icons (Desktop Only) */}
+        <div className="hidden sm:flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
           {/* Centered Text */}
-          <div className="w-full text-center text-sm text-gray-400 md:order-1">
+          <div className="w-full md:text-center text-sm text-gray-400 md:order-1">
             @2025. ALL RIGHTS RESERVED
           </div>
-
           {/* Social Icons */}
-          <div className="flex gap-4 justify-center md:justify-end mt-2 md:mt-0 md:order-2">
+          <div className="flex gap-4 justify-center  md:justify-end mt-2 md:mt-0 md:order-2">
             <a href="#" aria-label="Discord">
               <img
                 src={DiscordImg}
@@ -107,7 +175,7 @@ function Footer() {
               <img
                 src={TelegramImg}
                 alt="Telegram"
-                className="w-[19px] h-[19px]  transition"
+                className="w-[19px] h-[19px] transition"
               />
             </a>
           </div>

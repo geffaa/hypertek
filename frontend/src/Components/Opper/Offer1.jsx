@@ -11,12 +11,13 @@ function CardPayment() {
   return (
     <>
       {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="absolute md:top-[70px] top-[75px] left-[23px] md:left-10 text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
-      >
-        <FaArrowLeft />
-      </button>
+     <button
+  onClick={() => navigate(-1)}
+  className="hidden md:block absolute md:top-[70px] top-[75px] left-[23px] md:left-10 text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
+>
+  <FaArrowLeft />
+</button>
+
 
       <div
         className="flex flex-col gap-5 p-4 mx-auto mt-24 relative text-white"
