@@ -24,12 +24,17 @@ function PersonalActivity() {
             <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
               A New Era Dawns in Hyper Tek
             </h1>
-            <p className="font-inter font-medium text-sm md:text-base lg:text-[18px] text-white">
-              It's the start of a living, breathing universe where every decision
-              shapes the journey. Whether you're racing at light speed, forging
-              alliances in the Overlord Realm, or uncovering secrets in HyperQuest,
-              this is your chance to leave your mark on the story.
-            </p>
+                <p
+  className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
+  leading-relaxed text-white"
+>
+  It's the start of a living, breathing universe where every
+  decision shapes the journey. Whether you're racing at light
+  speed, forging alliances in the Overlord Realm, or uncovering
+  secrets in HyperQuest, this is your chance to leave your mark on
+  the story.
+</p>
+
           </div>
 
           {/* Stats Section */}
@@ -93,14 +98,14 @@ function PersonalActivity() {
           <NavLinks/>
 
           {/* Search Bar */}
-          <div className="w-full lg:w-[550px] flex items-center gap-3 px-4 py-3 border border-white/50 rounded-[12px] bg-white/10 backdrop-blur-sm">
-            <FiSearch className="text-white w-5 h-5 flex-shrink-0" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter"
-            />
-          </div>
+          <div className="hidden md:flex w-full lg:w-[550px] items-center gap-3 px-4 py-3 border border-white/50 rounded-[12px] bg-white/10 backdrop-blur-sm">
+  <FiSearch className="text-white w-5 h-5 flex-shrink-0" />
+  <input
+    type="text"
+    placeholder="Search..."
+    className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter"
+  />
+</div>
         </div>
       </div>
 
@@ -121,68 +126,68 @@ function PersonalActivity() {
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto rounded-lg border border-[#00134C]">
-          <table className="w-full min-w-[800px] text-white">
-            <thead className="bg-[#00134C]">
-              <tr className="text-left">
-                {["Name", "Type", "Buyer", "Seller", "Price", "Time"].map((h, i) => (
-                  <th
-                    key={i}
-                    className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium"
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+      <div className="overflow-x-auto rounded-lg border border-[#00134C]">
+  <table className="w-full min-w-[800px] text-white">
+    <thead className="bg-[#00134C]">
+      <tr className="text-left">
+        {["Name", "Type", "Buyer", "Seller", "Price", "Time"].map((h, i) => (
+          <th
+            key={i}
+            className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium"
+          >
+            {h}
+          </th>
+        ))}
+      </tr>
+    </thead>
 
-            <tbody>
-              {/* Example Row with Full Image */}
-              <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                      <img src={land1Image} alt="Avatar" className="w-full h-full object-cover" />
-                    </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">Monkey Ape</span>
-                  </div>
-                </td>
-                <td className="px-4 lg:px-6 py-3">Buyer</td>
-                <td className="px-4 lg:px-6 py-3">You</td>
-                <td className="px-4 lg:px-6 py-3">Oxxy</td>
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">2d</td>
-              </tr>
+    <tbody>
+      {/* Example Row with Full Image */}
+      <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
+        <td className="px-4 lg:px-6 py-3">
+          <div className="flex items-start gap-3">
+            <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
+              <img src={land1Image} alt="Avatar" className="w-full h-full object-cover" />
+            </div>
+            <span className="text-sm lg:text-[18px] font-inter font-medium">Monkey Ape</span>
+          </div>
+        </td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">Buyer</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">You</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">Oxxy</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">$2,000</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">2d</td>
+      </tr>
 
-              {/* Example Row with Cropped Head Image */}
-              <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                      style={{
-                        background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                      }}
-                    >
-                      <img
-                        src={ManImage}
-                        alt="Collection"
-                        className="w-full h-full object-cover object-top"
-                        style={{ objectPosition: "top" }} // focuses on head/face
-                      />
-                    </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">Monkey Ape</span>
-                  </div>
-                </td>
-                <td className="px-4 lg:px-6 py-3">Seller</td>
-                <td className="px-4 lg:px-6 py-3">Don</td>
-                <td className="px-4 lg:px-6 py-3">Don</td>
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">2d</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {/* Example Row with Cropped Head Image */}
+      <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
+        <td className="px-4 lg:px-6 py-3">
+          <div className="flex items-start gap-3">
+            <div
+              className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+              style={{
+                background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+              }}
+            >
+              <img
+                src={ManImage}
+                alt="Collection"
+                className="w-full h-full object-cover object-top"
+                style={{ objectPosition: "top" }} // focuses on head/face
+              />
+            </div>
+            <span className="text-sm lg:text-[18px] font-inter font-medium">Monkey Ape</span>
+          </div>
+        </td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">Seller</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">Don</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">Don</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">$2,000</td>
+        <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">2d</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
       </section>
     </div>
   );

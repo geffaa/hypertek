@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -6,9 +6,17 @@ import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import discard from "../assets/images/login/discard.png";
+import skype from "../assets/images/login/skipe.png";
+import symbol from "../assets/images/login/Symbol.svg.png";
+import { GoogleLogin } from "@react-oauth/google";
+
+
 
 function Signup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -58,8 +66,75 @@ function Signup() {
     }
   };
 
+
+    // ---------------- Google Login ----------------
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
+        token: credentialResponse.credential,
+      });
+
+      dispatch(loginSuccess({
+        user: res.data.user,
+        token: res.data.token,
+        isLoggedInUser: true,
+      }));
+      localStorage.setItem("token", res.data.token);
+      toast.success("Google login successful!");
+      navigate("/");
+    } catch (err) {
+      toast.error("Google login failed!");
+    }
+  };
+
+
+
+   // ---------------- Discord Login ----------------
+  const DISCORD_CLIENT_ID = "1423260002587639828";
+  const REDIRECT_URI = "http://localhost:5173/signin";
+  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+    REDIRECT_URI
+  )}&response_type=code&scope=identify%20email`;
+
+  
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get("code");
+  
+  if (!code) return;
+
+  // Clean URL immediately to prevent re-triggers
+  window.history.replaceState({}, document.title, "/login");
+
+  const fetchDiscordUser = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/v1/user/discord", { code });
+
+      if (res.data.success && res.data.user) {
+        dispatch(loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+          isLoggedInUser: true,
+        }));
+        localStorage.setItem("token", res.data.token);
+
+        toast.success(`Discord login successful! Welcome ${res.data.user.FullName}`);
+        navigate("/");
+      } else {
+        toast.error(res.data.message || "Discord login failed!");
+      }
+    } catch (err) {
+      console.error("Discord login error:", err);
+      toast.error(err.response?.data?.message || "Discord login failed!");
+    }
+  };
+
+  fetchDiscordUser();
+}, [dispatch, navigate]);
+
+
   return (
-    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent">
+    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
       <GlowingOrb Xaxis={70} Yaxis={150} />
       <GlowingOrb Xaxis={950} Yaxis={450} />
 
@@ -147,6 +222,37 @@ function Signup() {
             <CustomButtonLarge text="Sign Up" />
           </button>
         </form>
+
+         <div className="flex items-center w-full my-2">
+          <hr className="flex-grow border-t border-white/40" />
+          <span className="mx-2 text-white/70 text-sm">or continue with</span>
+          <hr className="flex-grow border-t border-white/40" />
+        </div>
+
+        <div className="flex justify-center gap-4">
+          <button className="p-1 rounded-full border border-white transition">
+            <img src={skype} alt="Skype" className="w-6 h-6" />
+          </button>
+
+          <button className="p-1 rounded-full border border-white transition"
+            onClick={() => window.location.href = discordAuthUrl}>
+            <img src={discard} alt="Discord" className="w-6 h-6" />
+          </button>
+
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => toast.error("Google login failed!")}
+            useOneTap={false}
+            theme="filled_blue"
+            size="large"
+            shape="circle"
+            type="icon"
+          />
+
+          <button className="p-1 rounded-full border border-white transition">
+            <img src={symbol} alt="Symbol" className="w-6 h-6" />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ function NoPersonalActivity() {
   return (
     <>
       <div className="min-h-screen bg-transparent px-4 sm:px-6 relative z-10 lg:px-8">
-        <GlowingOrb Xaxis={840} Yaxis={550}/>
+        <GlowingOrb Xaxis={840} Yaxis={550} />
         <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
           <div
@@ -30,8 +30,8 @@ function NoPersonalActivity() {
                 A New Era Dawns in Hyper Tek
               </h1>
               <p
-                className="font-inter font-medium text-sm md:text-base lg:text-[18px] 
-              leading-relaxed text-white"
+                className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
+  leading-relaxed text-white"
               >
                 It's the start of a living, breathing universe where every
                 decision shapes the journey. Whether you're racing at light
@@ -66,48 +66,48 @@ function NoPersonalActivity() {
 
           {/* Navigation and Search Section */}
           <div
-            className="relative flex flex-col lg:flex-row justify-between items-start 
-          lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8"
+            className="relative flex flex-col sm:flex-row justify-between items-start 
+  sm:items-center gap-4 sm:gap-4 mb-4 lg:mb-8"
           >
             {/* Nav Links */}
-            <div className="w-full lg:w-auto">
-              <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
-                <li>
+            <div className="w-full sm:w-auto overflow-x-auto">
+              <ul className="flex flex-nowrap gap-2 sm:gap-4 lg:gap-[50px] justify-start sm:justify-start">
+                <li className="flex-shrink-0">
                   <Link
                     to="#"
-                    className="inline-flex items-center justify-center px-4 py-2 lg:px-[14px] lg:py-[4px]
-                  rounded-[10px] bg-[#002AA8] text-white font-inter font-semibold 
-                  text-sm lg:text-[16px] whitespace-nowrap"
+                    className="inline-flex items-center justify-center px-3 py-2 lg:px-[14px] lg:py-[4px]
+          rounded-[10px] bg-[#002AA8] text-white font-inter font-semibold 
+          text-xs sm:text-sm lg:text-[16px] whitespace-nowrap"
                   >
                     Overview
                   </Link>
                 </li>
-                <li>
+                <li className="flex-shrink-0">
                   <Link
                     to="#"
-                    className="inline-flex items-center justify-center px-4 py-2 lg:px-[14px] lg:py-[4px]
-                  rounded-[10px] text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10
-                  transition-colors whitespace-nowrap"
+                    className="inline-flex items-center justify-center px-3 py-2 lg:px-[14px] lg:py-[4px]
+          rounded-[10px] text-white font-inter font-medium text-xs sm:text-sm lg:text-[18px] hover:bg-white/10
+          transition-colors whitespace-nowrap"
                   >
                     Collectibles
                   </Link>
                 </li>
-                <li>
+                <li className="flex-shrink-0">
                   <Link
                     to="#"
-                    className="inline-flex items-center justify-center px-4 py-2 lg:px-[10px] lg:py-[4px]
-                  rounded-[10px] text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10
-                  transition-colors whitespace-nowrap"
+                    className="inline-flex items-center justify-center px-3 py-2 lg:px-[10px] lg:py-[4px]
+          rounded-[10px] text-white font-inter font-medium text-xs sm:text-sm lg:text-[18px] hover:bg-white/10
+          transition-colors whitespace-nowrap"
                   >
                     Lands
                   </Link>
                 </li>
-                <li>
+                <li className="flex-shrink-0">
                   <Link
                     to="#"
-                    className="inline-flex items-center justify-center px-4 py-2 lg:px-[12px] lg:py-[4px]
-                  rounded-[10px] text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10
-                  transition-colors whitespace-nowrap"
+                    className="inline-flex items-center justify-center px-3 py-2 lg:px-[12px] lg:py-[4px]
+          rounded-[10px] text-white font-inter font-medium text-xs sm:text-sm lg:text-[18px] hover:bg-white/10
+          transition-colors whitespace-nowrap"
                   >
                     Activities
                   </Link>
@@ -117,37 +117,36 @@ function NoPersonalActivity() {
 
             {/* Search Field */}
             <div
-              className="w-full lg:w-[550px] flex items-center gap-3 lg:gap-[17px] 
-            px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
-            bg-white/10 backdrop-blur-sm"
+              className="w-full md:d-block hidden sm:w-[200px] lg:w-[550px] flex items-center gap-3 lg:gap-[17px] 
+    px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
+    bg-white/10 backdrop-blur-sm flex-shrink-0"
             >
               <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
               <input
                 type="text"
                 placeholder="Search..."
                 className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none 
-              text-sm lg:text-[16px] font-inter w-full"
+      text-sm lg:text-[16px] font-inter w-full"
               />
             </div>
           </div>
         </div>
-       <div className="flex flex-col justify-center  gap-8 items-center text-white gap-4 mt-16 min-h-[400px]">
-  <p className="text-lg font-medium">No Items</p>
-  <img
-    src={noActivity1}
-    alt="No activity one"
-    className="w-[200px] h-auto object-contain"
-  />
-  <img
-    src={noActivity2}
-    alt="No activity two"
-    className="w-[100px] h-auto object-contain"
-  />
-  <button className="w-[207px] h-[43px] mt-5 bg-[#002AA8] rounded-md hover:bg-blue-700 transition-colors">
-    Browse Collection
-  </button>
-</div>
-
+        <div className="flex flex-col justify-center items-center text-white gap-4 mt-16 min-h-[400px]">
+          <p className="text-lg font-medium">No Items</p>
+          <img
+            src={noActivity1}
+            alt="No activity one"
+            className="w-[200px] h-auto object-contain"
+          />
+          <img
+            src={noActivity2}
+            alt="No activity two"
+            className="w-[100px] h-auto object-contain"
+          />
+          <button className="w-[207px] h-[43px] mt-5 bg-[#002AA8] rounded-md hover:bg-blue-700 transition-colors">
+            Browse Collection
+          </button>
+        </div>
       </div>
     </>
   );
