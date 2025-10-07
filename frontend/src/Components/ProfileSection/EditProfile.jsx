@@ -127,7 +127,7 @@ const handleLogout = () => {
       <div className="mx-auto mt-20 mb-16 lg:mt-[92px]">
         <div className="w-full">
           <div
-            className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-screen -mx-4 sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
+            className="relative h-40 sm:h-48 md:h-56 lg:h-[237px]   sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           ></div>
 
