@@ -4,7 +4,9 @@ import {
   ForgotPassword, 
   ResetPassword,
   GoogleAuth,
-  DiscordAuth
+  DiscordAuth , 
+  MetaMaskAuth , 
+  TwitterAuth
 } from "../Controllers/User.js";
 import {authMiddleware } from "../Middleware/googleMiddle.js"
 
@@ -20,6 +22,13 @@ Route.post("/user/login", LoginUser);
 
 // Forgot password (send reset email)
 Route.post("/user/forgot-password", ForgotPassword);
+
+
+// 📘 Meta / Facebook authentication
+Route.post("/user/MetaMask", MetaMaskAuth);
+
+// 🐦 Twitter authentication
+Route.post("/user/twitter", TwitterAuth);
 
 // Reset password (via token)
 Route.post("/user/reset-password/:token", ResetPassword);
