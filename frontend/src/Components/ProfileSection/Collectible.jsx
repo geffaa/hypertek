@@ -12,6 +12,8 @@ import symbol from "../../assets/images/login/Symbol.svg.png";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { BASE_URL } from "../../Config"
+
 
 
 
@@ -63,7 +65,7 @@ const [ userData , setUserData ] = useState({});
 useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+        const res = await axios.get(`${BASE_URL}/api/v1/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },

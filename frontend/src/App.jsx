@@ -6,7 +6,7 @@ import { store } from "./Redux/Store"
 
 
 import Home from "./pages/home";
-import About from "./pages/About";
+import About from "./pages/about"
 import Navbar from "./Components/Common/Navbar";
 import Footer from "./Components/Common/Footer";
 import Signup from "./pages/Signup";

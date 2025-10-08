@@ -37,7 +37,7 @@ function About() {
             <span className="font-semibold">Hyper Tek</span> is where innovation meets art.
           </p>
 
-          <img
+          <img 
             src={AboutTopImage}
             alt="About Hyper Tek"
             className="w-full max-w-[640px] h-auto rounded-[40px] md:rounded-[161px] object-cover"
