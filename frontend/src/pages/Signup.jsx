@@ -17,6 +17,10 @@ import { ethers } from "ethers";
 
 import { GoogleLogin } from "@react-oauth/google";
 
+
+// import and use the base url 
+import { BASE_URL } from "../Config";
+
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,7 +55,8 @@ function Signup() {
     }
 
     try {
-      const res = await axios.post(`http://localhost:3000/api/v1/user/signup`, {
+      // const res = await axios.post(`http://localhost:3000/api/v1/user/signup`, {
+      const res = await axios.post(`${BASE_URL}/api/v1/user/signup`, {
         Email: formData.email,
         Password: formData.password,
         ConfirmPassword: formData.confirmPassword,
@@ -73,7 +78,7 @@ function Signup() {
   // ---------------- Google Signup ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
+      const res = await axios.post(`${BASE_URL}/api/v1/user/google`, {
         token: credentialResponse.credential,
       });
 
@@ -114,7 +119,7 @@ function Signup() {
 
     const fetchDiscordUser = async () => {
       try {
-        const res = await axios.post("http://localhost:3000/api/v1/user/discord", { code });
+        const res = await axios.post(`${BASE_URL}/api/v1/user/discord`, { code });
         if (res.data.success && res.data.user) {
           dispatch(
             loginSuccess({
@@ -206,7 +211,7 @@ const handleLogin = async () => {
 
     // Continue with backend...
     const res = await axios.post(
-      "http://localhost:3000/api/v1/user/MetaMask",
+      `${BASE_URL}/api/v1/user/MetaMask`,
       { 
         address: address.toLowerCase(),
         signature, 
@@ -249,6 +254,45 @@ const handleLogin = async () => {
     }
   }
 };
+
+
+
+// ------------------------------------- signup with twitter -------------------- 
+
+ 
+
+  const handleTwitterLogin = async () => {
+    const clientId = "MnpNNGRkM2Y2QmF0VEg0dUhBdXI6MTpjaQ";
+    const redirectUri = "http://localhost:5173/auth/twitter/callback";
+    const state = crypto.randomUUID(); // unique per request
+    const scope = "tweet.read users.read offline.access";
+
+    // Generate PKCE verifier and challenge
+    const codeVerifier = Array.from(crypto.getRandomValues(new Uint8Array(32)))
+      .map((x) => ("0" + x.toString(16)).slice(-2))
+      .join("");
+
+    const challengeBytes = sha256(codeVerifier);
+    const codeChallenge = Base64.stringify(challengeBytes)
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+
+    // Save verifier locally for callback use
+    localStorage.setItem("twitter_code_verifier", codeVerifier);
+
+    const authUrl = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}&scope=${encodeURIComponent(
+      scope
+    )}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
+
+    window.location.href = authUrl;
+  };
+
+  
+
+
 
 
   return (
@@ -345,7 +389,7 @@ const handleLogin = async () => {
 
         {/* Social Buttons */}
         <div className="flex justify-center gap-4">
-          <button className="p-1 rounded-full border border-white transition">
+          <button className="p-1 rounded-full border border-white transition" onClick={handleTwitterLogin}>
             <img src={skype} alt="Skype" className="w-6 h-6" />
           </button>
 

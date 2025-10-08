@@ -12,7 +12,9 @@ import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
-import { ethers } from "ethers";
+import { ethers } from "ethers";import { BASE_URL } from "../Config";
+
+
 
 function Login() {
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ function Login() {
       return;
     }
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/user/login", {
+      const res = await axios.post(`${BASE_URL}/api/v1/user/login`, {
         Email: formData.email,
         Password: formData.password,
       }); 
@@ -59,7 +61,7 @@ function Login() {
   // ---------------- Google Login ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
+      const res = await axios.post(`${BASE_URL}/api/v1/user/google`, {
         token: credentialResponse.credential,
       });
 
@@ -98,7 +100,7 @@ function Login() {
     const fetchDiscordUser = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/v1/user/discord",
+          `${BASE_URL}/api/v1/user/discord`,
           { code }
         );
 
@@ -145,7 +147,7 @@ function Login() {
       });
       console.log("Previous permissions cleared");
     } catch (error) {
-      console.log("No previous permissions to clear");
+      console.log("No previous permissions to clear",error);
     }
 
     // ✅ STEP 2: Request fresh connection
@@ -189,7 +191,7 @@ function Login() {
 
     // Continue with backend...
     const res = await axios.post(
-      "http://localhost:3000/api/v1/user/MetaMask",
+      `${BASE_URL}/api/v1/user/MetaMask`,
       { 
         address: address.toLowerCase(),
         signature, 
