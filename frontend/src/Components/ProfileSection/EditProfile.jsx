@@ -30,6 +30,8 @@ function EditProfile() {
   const location = useLocation();
   const { userData } = location.state || {};
 
+  console.log("your profile data from profile section :",userData);
+
   // ✅ Initialize states
   const [name, setName] = useState(userData?.FullName || "");
   const [email, setEmail] = useState(userData?.Email || "");
@@ -93,7 +95,7 @@ const handleLogout = () => {
       if (file) formData.append("Avatar", file);
 
       const res = await axios.put(
-        `${BASE_URL}/api/v1/profile`,
+        `http://localhost:3000/api/v1/profile`,
         formData,
         {
           headers: {
@@ -136,11 +138,21 @@ const handleLogout = () => {
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
               <img
-                   src={userData.Avatar ? `${BASE_URL}/${userData.Avatar}` : Profile}
-                alt="Profile"
-                className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white"
-                onClick={handleProfileClick}
-              />
+ src={
+  file
+    ? profileImage // show selected image preview
+    : userData?.Avatar
+    ? userData.Avatar.startsWith("http")
+      ? userData.Avatar // full URL (if hosted externally)
+      : `http://localhost:3000${userData.Avatar}` // correct local URL
+    : Profile
+}
+
+  alt="Profile"
+  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
+  onClick={handleProfileClick}
+/>
+
               <input
                 type="file"
                 ref={fileInputRef}
