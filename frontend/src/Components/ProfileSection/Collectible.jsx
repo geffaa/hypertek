@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useDebugValue } from "react";
+import React, { useState, useEffect, useDebugValue } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
 import popularCollections from "../../assets/images/popular/popolar.png";
@@ -12,20 +12,15 @@ import symbol from "../../assets/images/login/Symbol.svg.png";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { BASE_URL } from "../../Config"
-
-
-
+import { BASE_URL } from "../../Config";
 
 function MarketPlace() {
+  // get the login user data from the redux store
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  console.log("your data in the profile are :", user.id);
 
-  // get the login user data from the redux store 
-   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-   console.log("your data in the profile are :",user.id);
-
-
-// user data from the database 
-const [ userData , setUserData ] = useState({});
+  // user data from the database
+  const [userData, setUserData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
@@ -60,20 +55,21 @@ const [ userData , setUserData ] = useState({});
     }, 150);
   };
 
-
-
-useEffect(() => {
+  useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/api/v1/getProfile`, {
+        const res = await axios.get(`http://localhost:3000/api/v1/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
         });
-        setUserData(res.data.user)
+        setUserData(res.data.user);
         console.log("✅ User profile:", res.data.user);
       } catch (error) {
-        console.error("❌ Profile fetch error:", error.response?.data || error.message);
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
         toast.error(error.response?.data?.message || "Failed to fetch profile");
       }
     };
@@ -82,9 +78,8 @@ useEffect(() => {
       fetchProfile(); // only call if token exists
     }
   }, [token]);
-  
-console.log("Full Name:", userData.FullName);
 
+  console.log("Full Name:", userData.FullName);
 
   return (
     <>
@@ -100,24 +95,31 @@ console.log("Full Name:", userData.FullName);
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
-                <div className="relative flex-shrink-0">
-                  <img
-                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
-                    alt="Profile"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
-                  />
-                </div>
+                <img
+  src={
+    userData?.Avatar
+      ? userData.Avatar.startsWith("http")
+        ? userData.Avatar // full URL case
+        : `http://localhost:3000${userData.Avatar}` // use as-is from backend
+      : Profile
+  }
+  alt="Profile"
+  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+/>
+
 
                 {/* Profile Info */}
                 <div className="mt-3 text-left text-white sm:mt-0">
                   <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
-
-{userData.FullName || "N/A"}
+                    {userData.FullName || "N/A"}
                   </h2>
                   <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
-                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
+                    {userData.DiscordId ||
+                      userData.GoogleId ||
+                      userData._id ||
+                      "null"}
 
-                    <Link to="/edit"   state={{ userData }}>
+                    <Link to="/edit" state={{ userData }}>
                       <span className="ml-1 sm:ml-2 cursor-pointer underline">
                         Edit Profile
                       </span>
@@ -494,47 +496,47 @@ console.log("Full Name:", userData.FullName);
 
               <button onClick={closeFourthModal}>
                 <div className="flex items-center cursor-pointer">
-                <div
-                  className="bg-[#002AA8] mr-0.5"
-                  style={{ width: "0.25rem", height: "1.3rem" }}
-                ></div>
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{ width: "0.25rem", height: "1.3rem" }}
+                  ></div>
 
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.3rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.375rem 0.25rem 0.375rem 0",
-                  }}
-                ></div>
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.3rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                    }}
+                  ></div>
 
-                <div
-                  className="flex items-center justify-center text-white font-medium"
-                  style={{
-                    width: "7.5rem",
-                    height: "2rem",
-                    border: "0.15rem solid #002AA8",
-                  }}
-                >
-                  Cancel
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "7.5rem",
+                      height: "2rem",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Cancel
+                  </div>
+
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.3rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                    }}
+                  ></div>
+
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{ width: "0.25rem", height: "1.2rem" }}
+                  ></div>
                 </div>
-
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.3rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.25rem 0 0.375rem 0.25rem",
-                  }}
-                ></div>
-
-                <div
-                  className="bg-[#002AA8]"
-                  style={{ width: "0.25rem", height: "1.2rem" }}
-                ></div>
-              </div>
               </button>
             </div>
           </div>
