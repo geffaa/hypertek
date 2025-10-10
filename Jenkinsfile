@@ -43,25 +43,26 @@ pipeline {
         }
 
         stage('Build Frontend') {
-            steps {
-                echo '⚙️ Building frontend...'
-                sh '''
-                    export NVM_DIR="${NVM_DIR}"
-                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    steps {
+        echo '⚙️ Building frontend...'
+        sh '''
+            export NVM_DIR="/var/lib/jenkins/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-                    nvm install $NODE_VERSION
-                    nvm use $NODE_VERSION
-                    export PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
+            nvm install $NODE_VERSION
+            nvm use $NODE_VERSION
+            export PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
 
-                    node -v
-                    npm -v
+            node -v
+            npm -v
 
-                    cd $FRONTEND_DIR
-                    npm install --legacy-peer-deps --silent
-                    npm run build
-                '''
-            }
-        }
+            cd $FRONTEND_DIR
+            npm install --legacy-peer-deps --silent
+            npm run build
+        '''
+    }
+}
+
 
         stage('Install Backend Dependencies') {
             steps {
