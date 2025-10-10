@@ -41,7 +41,7 @@ pipeline {
                     node -v
                     npm -v
                     cd $FRONTEND_DIR
-                    npm install --legacy-peer-deps --silent
+                    npm ci --legacy-peer-deps || npm install --legacy-peer-deps
                     npm run build
                 """
             }
@@ -51,7 +51,7 @@ pipeline {
                 echo ':hammer_and_wrench: Installing backend dependencies...'
                 sh """
                     cd $BACKEND_DIR
-                    npm install --legacy-peer-deps --silent
+                    npm ci --legacy-peer-deps || npm install --legacy-peer-deps
                 """
             }
         }
