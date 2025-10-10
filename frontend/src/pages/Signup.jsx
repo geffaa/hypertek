@@ -17,10 +17,6 @@ import { ethers } from "ethers";
 
 import { GoogleLogin } from "@react-oauth/google";
 
-
-// import and use the base url 
-import { BASE_URL } from "../Config";
-
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,7 +52,6 @@ function Signup() {
 
     try {
       const res = await axios.post(`http://localhost:3000/api/v1/user/signup`, {
-      // const res = await axios.post(`${BASE_URL}/api/v1/user/signup`, {
         Email: formData.email,
         Password: formData.password,
         ConfirmPassword: formData.confirmPassword,
@@ -78,7 +73,7 @@ function Signup() {
   // ---------------- Google Signup ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/v1/user/google`, {
+      const res = await axios.post("http://localhost:3000/api/v1/user/google", {
         token: credentialResponse.credential,
       });
 
@@ -119,7 +114,7 @@ function Signup() {
 
     const fetchDiscordUser = async () => {
       try {
-        const res = await axios.post(`http://localhost:3000/api/v1/user/discord`, { code });
+        const res = await axios.post("http://localhost:3000/api/v1/user/discord", { code });
         if (res.data.success && res.data.user) {
           dispatch(
             loginSuccess({
@@ -135,7 +130,7 @@ function Signup() {
                   token: res.data.token,
                   isLoggedInUser: true,
                 }));
-          navigate("/profile");
+          navigate("/");
         } else {
           toast.error(res.data.message || "Discord login failed!");
         }
@@ -211,7 +206,7 @@ const handleLogin = async () => {
 
     // Continue with backend...
     const res = await axios.post(
-      `http://localhost:3000/api/v1/user/MetaMask`,
+      "http://localhost:3000/api/v1/user/MetaMask",
       { 
         address: address.toLowerCase(),
         signature, 
