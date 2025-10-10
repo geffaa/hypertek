@@ -34,32 +34,32 @@ Password: {
   // Social Login Fields
   GoogleId: {
     type: String,
-    unique: true,
+    // unique: true,
     sparse: true,
   },
 
   DiscordId: { 
     type: String, 
-    unique: true, 
+    // unique: true, 
     sparse: true 
   },
 
   TwitterId: { 
     type: String, 
-    unique: true, 
+    // unique: true, 
     sparse: true 
   },
 
   FacebookId: { 
     type: String, 
-    unique: true, 
+    // unique: true, 
     sparse: true 
   },
 
   // ✅ Add MetaMask specific field
   MetaMaskAddress: {
     type: String,
-    unique: true,
+    // unique: true,
     sparse: true,
     lowercase: true,
   },
