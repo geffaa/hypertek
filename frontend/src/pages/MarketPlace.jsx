@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import overview1 from "../assets/images/Overview/overview1.jpg";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
@@ -10,13 +10,36 @@ import ManImage from "../assets/images/Overview/man.png";
 import { ArrowRight } from "lucide-react";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import GlowingOrb from "../Components/Common/BgColoring";
+import axios from "axios";
 
 function MarketPlace() {
+  //// get the nfa data
+  const [marketData, setMarketData] = useState([]);
+
+  // get the market data here
+  useEffect(() => {
+    const fetchMarketData = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/getMarket");
+        if (res.data.success) {
+          setMarketData(res.data.data); // assuming backend returns { success, data }
+        } else {
+          console.error("Failed to fetch market data:", res.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      }
+    };
+
+    fetchMarketData();
+  }, []); // run once when component mounts
+
+  console.log("your market data are here :", marketData);
+
   return (
     <>
       {/* Main Container */}
       <div className="min-h-screen bg-transparent relative z-10 ">
-
         {/* Hero Section */}
         <div className=" mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
@@ -140,259 +163,286 @@ function MarketPlace() {
           </div>
         </div>
 
-        <div className="px-8">
-          {/* NFA Section */}
-        <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-6 md:px-8 lg:px-0">
-          {/* Header */}
-        <div className="flex flex-row justify-between items-center gap-4">
-  <div className="flex flex-col gap-2 items-start">
-    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-      NFA
-    </h1>
-    <div className="flex gap-2">
-      <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-      <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-      <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-      <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-    </div>
-  </div>
-
-  <div className="flex justify-end items-center text-white">
-    <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
-      <span>Expand All</span>
-      <ArrowRight size={20} strokeWidth={2} />
-    </Link>
-  </div>
-</div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-  {[...Array(4)].map((_, index) => (
-    <div
-      key={index}
-      className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-         lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-    >
-      {/* Image */}
-      <div
-        className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-           bg-gradient-to-b from-[#977C34] to-[#493F26]"
-      >
-        <img
-          src={popularCollections}
-          alt="Collection"
-          className="w-full h-full object-cover object-top scale-x-[-1]"
-        />
-      </div>
-
-      {/* Title */}
-      <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-        Monkey Ape
-      </h2>
-
-      {/* Stats */}
-      <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-        <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-        <div className="flex items-center">
-          <img
-            src={TVector}
-            alt=""
-            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-          />
-          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-            $2,000
-          </h3>
-        </div>
-      </div>
-
-      {/* Button */}
-      <div className="mt-auto flex justify-center">
-        <Link to="/buy-nfa" className="cursor-pointer w-full">
-          <CustomButton text="Buy Now" />
-        </Link>
-      </div>
-    </div>
-  ))}
-</div>
-      
-        </section>
-
-        {/* LAND Section */}
-    <section className="flex flex-col gap-6 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6 md:px-8 lg:px-0">
-  {/* Header */}
-  <div className="flex flex-row justify-between items-center gap-4">
-    <div className="flex flex-col gap-2 items-start">
-      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-        LAND
-      </h1>
-      <div className="flex gap-2">
-        <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-        <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-        <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-        <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-      </div>
-    </div>
-
-    <div className="flex justify-end items-center text-white">
-      <Link to="/buy-land" className="flex items-center gap-2 hover:text-gray-300 transition">
-        <span>Expand All</span>
-        <ArrowRight size={20} strokeWidth={2} />
-      </Link>
-    </div>
-  </div>
-
-  {/* Cards Grid */}
-  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-    {[...Array(4)].map((_, index) => (
-      <div
-        key={index}
-        className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-          lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-      >
-        {/* Image */}
-        <div
-          className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-             bg-gradient-to-b from-[#977C34] to-[#493F26]"
-        >
-          <img
-            src={land1Image}
-            alt="Land Collection"
-            className="w-full h-full object-cover object-top scale-x-[-1]"
-          />
-        </div>
-
-        {/* Title */}
-        <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-          Monkey Ape
-        </h2>
-
-        {/* Stats */}
-        <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-          <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-          <div className="flex items-center">
-            <img
-              src={TVector}
-              alt=""
-              className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-            />
-            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-              $2,000
-            </h3>
-          </div>
-        </div>
-
-        {/* Button */}
-        <div className="mt-auto flex justify-center">
-          <Link to="/buy-land" className="cursor-pointer w-full">
-            <CustomButton text="Buy Now" />
-          </Link>
-        </div>
-      </div>
-    ))}
-  </div>
-</section>
-        {/* ACTIVITIES Section */}
-        <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
-          <GlowingOrb Xaxis={830} Yaxis={300}/>
-          <div className=" w-full flex flex-col gap-6 lg:gap-8">
+        {/* ------------------------------------ NFA Section -----------------------------------  */}
+        <div className="md:px-8 px-5">
+          <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-3 md:px-8 lg:px-0">
             {/* Header */}
-            <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+            <div className="flex flex-row justify-between items-center gap-4">
               <div className="flex flex-col gap-2 items-start">
                 <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                  ACTIVITIES
+                  NFA
                 </h1>
                 <div className="flex gap-2">
-                  <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-                  <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-                  <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-                  <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                  <div className="h-[3px] md:w-8 w-3 lg:w-12 bg-white"></div>
+                  <div className="h-[3px] md:w-12 w-3 lg:w-20 bg-white"></div>
+                  <div className="h-[3px] md:w-6 w-3 lg:w-8 bg-white"></div>
+                  <div className="h-[3px] md:w-20 w-8 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
                 </div>
               </div>
 
-              <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-                <button className="flex items-center gap-2 hover:text-gray-300 transition">
-                  <Link to="/nfa-land">
-                  <span>Expand All</span>
+              <div className="flex justify-end items-center text-white">
+                <Link
+                  to="/nfa-expand"
+                  className="flex items-center gap-2 hover:text-gray-300 transition"
+                >
+                  <span>Explore All</span>
                   <ArrowRight size={20} strokeWidth={2} />
-                  </Link>
-                </button>
+                </Link>
               </div>
             </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto rounded-lg border border-[#00134C] mt-4 w-full">
-              <table className="w-full min-w-full text-white">
-                <thead className="bg-[#00134C]">
-                  <tr className="text-left">
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Name
-                    </th>
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Type
-                    </th>
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Buyer
-                    </th>
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Seller
-                    </th>
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Price
-                    </th>
-                    <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                      Time
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...Array(5)].map((_, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+            {/* Cards Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
+              {marketData.slice(0, 4).map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
+  lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
+                >
+                  {/* Image */}
+                  <div
+                    className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
+    bg-gradient-to-b from-[#977C34] to-[#493F26]"
+                  >
+                    <img
+                      src={popularCollections}
+                      alt="Collection"
+                      className="w-full h-full object-cover object-top scale-x-[-1]"
+                    />
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4 text-left">
+                    {item.title}
+                  </h2>
+
+                  {/* Stats */}
+                  <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
+                    <h3 className="text-xs lg:text-sm font-semibold">
+                      {item.serialNumber} 🔥
+                    </h3>
+                    <div className="flex items-center">
+                      <img
+                        src={TVector}
+                        alt=""
+                        className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                      />
+                      <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+                        ${item.price}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Button (Centered) */}
+                  <div className="mt-auto flex justify-center items-center">
+                    <Link
+                      to="/buy-nfa"
+                      state={{ item }}
+                      className="w-full flex justify-center"
                     >
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                        <div className="flex items-start gap-3">
-                          <div
-                            className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                            style={{
-                              background:
-                                "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                            }}
-                          >
-                            <img
-                              src={i % 2 === 0 ? land1Image : ManImage}
-                              alt="Collection"
-                              className="w-full h-full object-cover object-top scale-x-[-1]"
-                              style={{ objectPosition: "top" }}
-                            />
-                          </div>
-                          <span className="text-sm lg:text-[18px] font-inter font-medium">
-                            Monkey Ape
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                        {i % 2 === 0 ? "Buyer" : "Seller"}
-                      </td>
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                        You
-                      </td>
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                        Oxxy
-                      </td>
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                        $2,000
-                      </td>
-                      <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                        2d
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      <CustomButton text="Buy Now" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* ------------------------------------- Land Section -----------------------------  */}
+          <section className="flex flex-col gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16  sm:px-6 md:px-8 lg:px-0">
+            {/* Header */}
+            <div className="flex flex-row justify-between items-center gap-3 sm:gap-4">
+              <div className="flex flex-col gap-2 items-start">
+                <h1 className="text-white uppercase text-lg sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                  LAND
+                </h1>
+                <div className="flex gap-1 sm:gap-2">
+                  <div className="h-[3px] md:w-6 sm:w-3 lg:w-12 bg-white"></div>
+                  <div className="h-[3px] w-8 sm:w-3 lg:w-20 bg-white"></div>
+                  <div className="h-[3px] w-4 sm:w-3 lg:w-8 bg-white"></div>
+                  <div className="h-[3px] w-12 sm:w-8 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                </div>
+              </div>
+
+              <div className="flex justify-end items-center text-white">
+                <Link
+                  to="/buy-land"
+                  className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
+                >
+                  <span>Expand All</span>
+                  <ArrowRight
+                    size={16}
+                    className="sm:w-5 sm:h-5"
+                    strokeWidth={2}
+                  />
+                </Link>
+              </div>
+            </div>
+
+            {/* Cards Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-center mt-3 sm:mt-4">
+              {[...Array(4)].map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-800 rounded-lg shadow-md text-white p-3 sm:p-4 w-full max-w-sm mx-auto 
+        lg:max-w-none h-[340px] sm:h-[380px] lg:h-[400px] flex flex-col"
+                >
+                  {/* Image */}
+                  <div
+                    className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
+          bg-gradient-to-b from-[#977C34] to-[#493F26]"
+                  >
+                    <img
+                      src={land1Image}
+                      alt="Land Collection"
+                      className="w-full h-full object-cover object-top scale-x-[-1]"
+                    />
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+                    Monkey Ape
+                  </h2>
+
+                  {/* Stats */}
+                  <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
+                    <h3 className="text-xs sm:text-sm font-semibold">
+                      No33 🔥
+                    </h3>
+                    <div className="flex items-center">
+                      <img
+                        src={TVector}
+                        alt=""
+                        className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                      />
+                      <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
+                        $2,000
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Button (with side space) */}
+                  {/* Button (smaller & centered with spacing) */}
+                  <div className="mt-auto flex justify-center items-center px-4 sm:px-6 lg:px-8">
+                    <Link
+                      to="/buy-land"
+                      className="cursor-pointer flex justify-center w-full"
+                    >
+                      <CustomButton
+                        text="Buy Now"
+                        className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
+                      />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ------------------------------------------ activity section ----------------------------------  */}
+          <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
+            <GlowingOrb Xaxis={830} Yaxis={300} />
+            <div className=" w-full flex flex-col gap-6 lg:gap-8">
+              {/* Header */}
+              <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                <div className="flex flex-col gap-2 items-start">
+                  <h1 className="text-white uppercase md:text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                    ACTIVITIES
+                  </h1>
+                  <div className="flex gap-2">
+                    <div className="h-[3px] w-4 md:w-8 lg:w-12 bg-white"></div>
+                    <div className="h-[3px]  w-4 md:w-12 lg:w-20 bg-white"></div>
+                    <div className="h-[3px] w-4 md:w-6 lg:w-8 bg-white"></div>
+                    <div className="h-[3px] w-8 md:w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                  </div>
+                </div>
+
+              <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
+  <Link
+    to="/nfa-land"
+    className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
+  >
+    <span>Expand All</span>
+    <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
+  </Link>
+</div>
+
+              </div>
+
+              {/* Table */}
+              <div className="overflow-x-auto rounded-lg border border-[#00134C] mt-4 w-full">
+                <table className="w-full min-w-full text-white">
+                  <thead className="bg-[#00134C]">
+                    <tr className="text-left">
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Name
+                      </th>
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Type
+                      </th>
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Buyer
+                      </th>
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Seller
+                      </th>
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Price
+                      </th>
+                      <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+                        Time
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[...Array(5)].map((_, i) => (
+                      <tr
+                        key={i}
+                        className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+                      >
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
+                          <div className="flex items-start gap-3">
+                            <div
+                              className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                              style={{
+                                background:
+                                  "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                              }}
+                            >
+                              <img
+                                src={i % 2 === 0 ? land1Image : ManImage}
+                                alt="Collection"
+                                className="w-full h-full object-cover object-top scale-x-[-1]"
+                                style={{ objectPosition: "top" }}
+                              />
+                            </div>
+                            <span className="text-sm lg:text-[18px] font-inter font-medium">
+                              Monkey Ape
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                          {i % 2 === 0 ? "Buyer" : "Seller"}
+                        </td>
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                          You
+                        </td>
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                          Oxxy
+                        </td>
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                          $2,000
+                        </td>
+                        <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
+                          2d
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </>

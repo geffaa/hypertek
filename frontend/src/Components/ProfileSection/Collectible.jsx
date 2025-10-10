@@ -96,17 +96,16 @@ function MarketPlace() {
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
                 <img
-  src={
-    userData?.Avatar
-      ? userData.Avatar.startsWith("http")
-        ? userData.Avatar // full URL case
-        : `http://localhost:3000${userData.Avatar}` // use as-is from backend
-      : Profile
-  }
-  alt="Profile"
-  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-/>
-
+                  src={
+                    userData?.Avatar
+                      ? userData.Avatar.startsWith("http")
+                        ? userData.Avatar // full URL case
+                        : `http://localhost:3000${userData.Avatar}` // use as-is from backend
+                      : Profile
+                  }
+                  alt="Profile"
+                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+                />
 
                 {/* Profile Info */}
                 <div className="mt-3 text-left text-white sm:mt-0">
