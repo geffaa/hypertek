@@ -56,7 +56,16 @@ function PersonalActivity() {
         );
         console.log("your activity data in the console :", activity);
 
-        if (activity.data) setActivityData(activity.data);
+        if (activity.data) {
+  const arr =
+    Array.isArray(activity.data) 
+      ? activity.data 
+      : Array.isArray(activity.data.data) 
+      ? activity.data.data 
+      : [];
+  setActivityData(arr);
+}
+
       } catch (error) {
         console.error("Error fetching market data:", error);
       }
