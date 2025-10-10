@@ -2,10 +2,10 @@ pipeline {
     agent any
 
     environment {
-        # Force Node 22 for this pipeline only
+        // Force Node 22 for this pipeline only
         PATH = "/opt/node22/bin:${env.PATH}"
 
-        # Deployment directories
+        // Deployment directories
         DEPLOY_DIR = "/var/www/hyper-tek-game"
         FRONTEND_DIR = "${DEPLOY_DIR}/frontend"
         BACKEND_DIR = "${DEPLOY_DIR}/backend"
@@ -93,7 +93,7 @@ pipeline {
             steps {
                 echo "🔄 Restarting backend process on port $BACKEND_PORT"
                 sh """
-                    # Example using pm2; adjust if you use systemd
+                    # Use pm2 to manage backend process
                     if pm2 list | grep -q 'hyper-tek-backend'; then
                         pm2 restart hyper-tek-backend
                     else
