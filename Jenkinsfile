@@ -41,19 +41,24 @@ pipeline {
             }
         }
 
- stage('Build Frontend') {
+stage('Build Frontend') {
     steps {
         echo '⚙️ Building frontend...'
         sh '''
             export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM
             nvm use 22.20.0
+
+            node -v   # confirm Node version
+            npm -v    # confirm NPM version
+
             cd $FRONTEND_DIR
             npm install --legacy-peer-deps --silent
             npm run build
         '''
     }
 }
+
 
 
 
