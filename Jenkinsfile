@@ -41,18 +41,21 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                echo '⚙️ Building frontend...'
-                sh """
-                    cd $FRONTEND_DIR
-                    node -v
-                    npm -v
-                    npm install --legacy-peer-deps --silent
-                    npm run build
-                """
-            }
-        }
+       stage('Build Frontend') {
+    steps {
+        echo '⚙️ Building frontend...'
+        sh '''
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install 22 --lts
+            nvm use 22
+            cd $FRONTEND_DIR
+            npm install --legacy-peer-deps --silent
+            npm run build
+        '''
+    }
+}
+
 
         stage('Install Backend Dependencies') {
             steps {
