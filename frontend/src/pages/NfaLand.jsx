@@ -24,7 +24,7 @@ function NfaLand() {
 
   return (
     <div className="flex flex-col justify-center w-full mt-24 px-4">
-      <div className="flex flex-col md:flex-row md:justify-center gap-6 md:gap-[54px]  w-full h-auto">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-[54px] max-w-[918px] w-full h-auto">
        <div className="text-white flex items-center sm:hidden">
                <Link to="/buy-nfa" className="border-b-2 border-blue-500">
                Overview
@@ -91,7 +91,6 @@ function NfaLand() {
             </div>
 
             {/* Make Offer */}
-           <Link to="/payment">
             <div
               className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
               onClick={handleMakeOffer}
@@ -99,7 +98,6 @@ function NfaLand() {
               Make Offer
               <FiEdit2 className="text-base md:text-lg" />
             </div>
-           </Link>
           </div>
           <div
             className="flex md:hidden items-center gap-2 my-3 text-white cursor-pointer"

@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
-import { BASE_URL } from "../../Config"
 
 
 function EditProfile() {
@@ -29,8 +28,6 @@ function EditProfile() {
   // ✅ Get user data passed from Profile page
   const location = useLocation();
   const { userData } = location.state || {};
-
-  console.log("your profile data from profile section :",userData);
 
   // ✅ Initialize states
   const [name, setName] = useState(userData?.FullName || "");
@@ -95,7 +92,7 @@ const handleLogout = () => {
       if (file) formData.append("Avatar", file);
 
       const res = await axios.put(
-        `http://localhost:3000/api/v1/profile`,
+        "http://localhost:3000/api/v1/profile",
         formData,
         {
           headers: {
@@ -138,21 +135,11 @@ const handleLogout = () => {
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
               <img
- src={
-  file
-    ? profileImage // show selected image preview
-    : userData?.Avatar
-    ? userData.Avatar.startsWith("http")
-      ? userData.Avatar // full URL (if hosted externally)
-      : `http://localhost:3000${userData.Avatar}` // correct local URL
-    : Profile
-}
-
-  alt="Profile"
-  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
-  onClick={handleProfileClick}
-/>
-
+                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
+                alt="Profile"
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white"
+                onClick={handleProfileClick}
+              />
               <input
                 type="file"
                 ref={fileInputRef}
