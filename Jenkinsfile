@@ -2,12 +2,16 @@ pipeline {
     agent any
 
     environment {
+        # Force Node 22 for this pipeline only
+        PATH = "/opt/node22/bin:${env.PATH}"
+
+        # Deployment directories
         DEPLOY_DIR = "/var/www/hyper-tek-game"
         FRONTEND_DIR = "${DEPLOY_DIR}/frontend"
         BACKEND_DIR = "${DEPLOY_DIR}/backend"
-        WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
-        BACKUP_DIR = "/var/backups/nginx-site-hypertekgame"
-        BUILD_TAG = "build-${BUILD_NUMBER}"
+        FRONTEND_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
+        BACKEND_PORT = "3000"  // change if backend runs on another port
+        BACKUP_DIR = "/var/backups/nginx-site-hypertek"
     }
 
     stages {
@@ -16,6 +20,7 @@ pipeline {
                 echo '📦 Checking out source code...'
                 checkout scmGit(
                     branches: [[name: '*/main']],
+                    extensions: [],
                     userRemoteConfigs: [[
                         credentialsId: 'abdul_git_repo_credentials',
                         url: 'https://github.com/deventialimited/hyper-tek-game-web.git'
@@ -36,44 +41,38 @@ pipeline {
             }
         }
 
-       stage('Build Frontend') {
-    steps {
-        echo '⚙️ Building frontend...'
-        sh '''
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 22
-            nvm use 22
-            cd $FRONTEND_DIR
-            npm install --legacy-peer-deps --silent
-            npm run build
-        '''
-    }
-}
-
+        stage('Build Frontend') {
+            steps {
+                echo '⚙️ Building frontend...'
+                sh """
+                    cd $FRONTEND_DIR
+                    node -v
+                    npm -v
+                    npm install --legacy-peer-deps --silent
+                    npm run build
+                """
+            }
+        }
 
         stage('Install Backend Dependencies') {
             steps {
-                echo '⚙️ Installing backend dependencies...'
+                echo '🛠 Installing backend dependencies...'
                 sh """
                     cd $BACKEND_DIR
-                    npm install --silent
-                    # If you use PM2 or have a backend build step, include here
+                    npm install --legacy-peer-deps --silent
                 """
             }
         }
 
         stage('Backup Current Deployment') {
             steps {
-                echo "🗂️ Backing up current deployment to: ${BACKUP_DIR}"
+                echo "📦 Backing up current deployment to: ${BACKUP_DIR}"
                 sh """
                     sudo mkdir -p $BACKUP_DIR
                     sudo rm -rf $BACKUP_DIR/*
-                    if [ -d "$WEB_ROOT" ] && [ "\$(ls -A $WEB_ROOT)" ]; then
-                        echo "Found existing frontend deployment, backing up..."
-                        sudo cp -r $WEB_ROOT/* $BACKUP_DIR/
-                    else
-                        echo "No existing frontend found, skipping backup."
+                    if [ -d "$FRONTEND_WEB_ROOT" ] && [ "\$(ls -A $FRONTEND_WEB_ROOT)" ]; then
+                        echo "Backing up frontend..."
+                        sudo cp -r $FRONTEND_WEB_ROOT/* $BACKUP_DIR/
                     fi
                 """
             }
@@ -81,43 +80,43 @@ pipeline {
 
         stage('Deploy Frontend') {
             steps {
-                echo "🚀 Deploying frontend to Nginx web root: ${WEB_ROOT}"
+                echo "🚀 Deploying frontend to Nginx web root: ${FRONTEND_WEB_ROOT}"
                 sh """
-                    sudo mkdir -p $WEB_ROOT
-                    sudo rm -rf $WEB_ROOT/*
-                    sudo cp -r $FRONTEND_DIR/build/* $WEB_ROOT/
+                    sudo mkdir -p $FRONTEND_WEB_ROOT
+                    sudo rm -rf $FRONTEND_WEB_ROOT/*
+                    sudo cp -r $FRONTEND_DIR/dist/* $FRONTEND_WEB_ROOT/
                 """
             }
         }
 
-        stage('Deploy Backend') {
+        stage('Restart Backend') {
             steps {
-                echo "🚀 Deploying backend..."
+                echo "🔄 Restarting backend process on port $BACKEND_PORT"
                 sh """
-                    sudo systemctl stop hypertek-backend || true
-                    sudo rm -rf /var/www/hyper-tek-game/backend-deploy
-                    sudo mkdir -p /var/www/hyper-tek-game/backend-deploy
-                    sudo cp -r $BACKEND_DIR/* /var/www/hyper-tek-game/backend-deploy/
-                    sudo chown -R www-data:www-data /var/www/hyper-tek-game/backend-deploy
-                    sudo systemctl start hypertek-backend || true
+                    # Example using pm2; adjust if you use systemd
+                    if pm2 list | grep -q 'hyper-tek-backend'; then
+                        pm2 restart hyper-tek-backend
+                    else
+                        pm2 start $BACKEND_DIR/index.js --name hyper-tek-backend --watch --port $BACKEND_PORT
+                    fi
                 """
             }
         }
 
         stage('Restart Nginx') {
             steps {
-                echo '🔁 Restarting Nginx...'
-                sh "sudo nginx -t && sudo systemctl reload nginx"
+                echo '🔄 Restarting Nginx'
+                sh "sudo systemctl restart nginx"
             }
         }
     }
 
     post {
         success {
-            echo "✅ HyperTek Game project deployed successfully without affecting other apps!"
+            echo "✅ Hyper-Tek Game deployed successfully!"
         }
         failure {
-            echo "❌ Deployment failed. Please check Jenkins console logs for details."
+            echo "❌ Deployment failed. Check Jenkins logs for details."
         }
     }
 }
