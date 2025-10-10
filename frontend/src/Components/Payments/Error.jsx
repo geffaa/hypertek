@@ -6,7 +6,7 @@ function Error() {
   return (
     <div className="flex flex-col items-center justify-center text-center min-h-screen bg-[#0A0A0A] px-6">
       {/* Red Cross Icon */}
-      <div className="flex items-center justify-center border-4 border-red-500 rounded-full w-20 h-20 sm:w-24 sm:h-24 mb-6">
+      <div className="flex items-center justify-center border-4 border-red-900 rounded-full w-20 h-20 sm:w-24 sm:h-24 mb-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-10 h-10 sm:w-12 sm:h-12"
@@ -32,7 +32,7 @@ function Error() {
   {/* Go Home Button */}
   <Link
     to="/payment"
-    className="flex items-center justify-center gap-2 bg-transparent hover:bg-gray-800 px-5 py-2 rounded-lg transition duration-200 w-fit"
+    className="flex items-center justify-center gap-2 bg-transparent hover:bg-gray-800 px-5 py-1 rounded-lg transition duration-200 w-fit"
   >
     <img
       src={BackHome}

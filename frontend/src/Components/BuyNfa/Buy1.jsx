@@ -8,8 +8,28 @@ import { Link } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import buyNfaImage from "../../assets/images/popolar.png";
 import symbol from "../../assets/images/login/Symbol.svg.png"; // Make sure this image exists
+import { useLocation , useNavigate } from "react-router-dom";
+
+
 
 function Buy1() {
+    const location = useLocation();
+      const navigate = useNavigate();
+/// get the data that is send from the marketplace page 
+  const item = location.state?.item;
+
+  console.log("your itesm here :",item);
+// Redirect if no state (user opened URL directly)
+  if (!item) {
+    navigate("/marketplace"); // or wherever you want
+    return null; // don’t render until redirected
+  }
+
+
+
+
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
@@ -33,6 +53,29 @@ function Buy1() {
     console.log("Make offer clicked");
   };
 
+
+/// for connecting hte meta wallet 
+ const connectWallet = async () => {
+    try {
+      // Check if MetaMask is installed
+      if (!window.ethereum) {
+        alert("MetaMask is not installed. Please install it to connect.");
+        return;
+      }
+
+      // Request account access
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+
+      // Save the first account
+      setAccount(accounts[0]);
+      console.log("Connected account:", accounts[0]);
+    } catch (error) {
+      console.error("Error connecting to MetaMask:", error);
+    }
+  };
+
+
+
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
       {/* Image */}
@@ -46,11 +89,11 @@ function Buy1() {
         </Link>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6 items-start">
+      <div className="flex flex-col md:flex-row gap-6 items-start ">
         {/* ✅ Title appears ABOVE the image on small screens */}
         <div className="flex md:hidden items-center gap-2 w-full justify-left">
           <h1 className="font-inter font-semibold text-xl text-white cursor-default">
-            Monkey Ape
+            {item.title}
           </h1>
           <p className="font-inter font-semibold text-sm text-white cursor-default">
             No333 🔥
@@ -72,10 +115,10 @@ function Buy1() {
           {/* ✅ Title visible only on medium+ screens (beside image) */}
           <div className="hidden md:flex items-center gap-2">
             <h1 className="font-inter font-semibold text-2xl text-white cursor-default">
-              Monkey Ape
+              {item.title}
             </h1>
             <p className="font-inter font-semibold text-base text-white cursor-default">
-              No333 🔥
+              {item.serialNumber}🔥
             </p>
           </div>
 
@@ -92,7 +135,7 @@ function Buy1() {
             </div>
 
             <h2 className="text-white mt-3 text-lg md:text-xl cursor-default">
-              $2000.00
+              ${item.price}
             </h2>
 
             <div className="flex justify-end mt-4">
@@ -168,13 +211,13 @@ function Buy1() {
               />
             </div>
 
-            <h1 className="text-white text-xl font-bold mb-2">Monkey Ape</h1>
+            <h1 className="text-white text-xl font-bold mb-2">{item.title}</h1>
             <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
             {[
-              { label: "List price", value: "$2000 USDT" },
+              { label: "List price", value: `${item.price} USDT` },
               { label: "Platform Fee", value: "$0.5 USDT" },
-              { label: "Total Fee", value: "$2000.5 USDT" },
+              { label: "Total Fee", value: `${item.price + 0.5} USDT` },
             ].map((item, index) => (
               <div key={index} className="w-[90%] mb-3">
                 <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
@@ -282,7 +325,7 @@ function Buy1() {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">$2000.5</p>
+                <p className="text-white text-sm">${item.price + 0.5}</p>
               </div>
             </div>
 
@@ -378,7 +421,7 @@ function Buy1() {
 
             {/* Action Buttons - Centered */}
             <div className="flex flex-col items-center gap-4 mt-8">
-              <button>
+              <button  onClick={connectWallet}>
                 <CustomButton text="Connect" />
               </button>
               <div className="flex items-center cursor-pointer">

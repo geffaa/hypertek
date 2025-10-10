@@ -41,15 +41,68 @@ function Success() {
         </h1>
 
         {/* View Collections Button */}
-        <div className="my-4 flex justify-center text-[10px]">
+        <div className="my-4 flex justify-center text-[14px]">
           <Link to="/">
-          <CustomButton text="View | My Collections" />
+            {/* <CustomButton text="View | My Collections" /> */}
+            <div className="flex items-center">
+              {/* Left small bar */}
+              <div
+                className="bg-[#002AA8] mr-0.5"
+                style={{
+                  width: "0.25rem", // ~3.99px
+                  height: "1.3rem", // ~21.93px
+                }}
+              ></div>
+
+              {/* Left angled border */}
+              <div
+                className="border-[#002AA8]"
+                style={{
+                  width: "0.5rem", // ~7.97px
+                  height: "2.7rem", // ~42.86px
+                  borderStyle: "solid",
+                  borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                }}
+              ></div>
+
+              {/* Main button area */}
+              <div
+                className="flex items-center bg-blue-700 font-bold justify-center text-white font-medium"
+                style={{
+                  width: "10.5rem", // ~168px
+                  height: "2.5rem", // ~39.59px
+                  // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                  border: "0.15rem solid #002AA8", // ~2.42px
+                }}
+              >
+                View | My Collections
+              </div>
+
+              {/* Right angled border */}
+              <div
+                className="border-[#002AA8]"
+                style={{
+                  width: "0.5rem", // ~7.97px
+                  height: "2.7rem", // ~42.86px
+                  borderStyle: "solid",
+                  borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                }}
+              ></div>
+
+              {/* Right small bar */}
+              <div
+                className="bg-[#002AA8]"
+                style={{
+                  width: "0.25rem", // ~3.99px
+                  height: "1.3rem", // ~21.93px
+                }}
+              ></div>
+            </div>
           </Link>
         </div>
 
         {/* Divider Line and Go Home Button together */}
         <div className="flex flex-col items-center">
-         
           {/* Go Home Button */}
           <Link
             to="/"
@@ -88,9 +141,8 @@ function Success() {
               Go Home
             </span>
           </Link>
-           {/* Divider Line */}
+          {/* Divider Line */}
           <div className="w-1/3 bg-white h-0.5 mb-2"></div>
-
         </div>
       </div>
     </div>
