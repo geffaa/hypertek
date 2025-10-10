@@ -78,7 +78,7 @@ pipeline {
                 """
             }
         }
-       stage('Restart Backend') {
+  stage('Restart Backend') {
     steps {
         echo ":arrows_counterclockwise: Restarting backend process on port $BACKEND_PORT"
         sh """
@@ -86,11 +86,12 @@ pipeline {
             if pm2 list | grep -q 'hyper-tek-backend'; then
                 pm2 restart hyper-tek-backend
             else
-                PORT=$BACKEND_PORT pm2 start $BACKEND_DIR/index.js --name hyper-tek-backend --watch
+                PORT=$BACKEND_PORT pm2 start $BACKEND_DIR/Index.js --name hyper-tek-backend --watch
             fi
         """
     }
 }
+
 
         stage('Restart Nginx') {
             steps {
