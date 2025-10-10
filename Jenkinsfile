@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         // Deployment directories
         DEPLOY_DIR = "/var/www/hyper-tek-game"
@@ -9,16 +8,11 @@ pipeline {
         FRONTEND_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
         BACKEND_PORT = "3000"  // backend port
         BACKUP_DIR = "/var/backups/nginx-site-hypertek"
-
-        // NVM & Node 22 paths (isolated for this pipeline)
-        NVM_DIR = "/var/lib/jenkins/.nvm"
-        NODE_VERSION = "22.20.0"
     }
-
     stages {
         stage('Checkout') {
             steps {
-                echo '📦 Checking out source code...'
+                echo ':package: Checking out source code...'
                 checkout scmGit(
                     branches: [[name: '*/main']],
                     extensions: [],
@@ -29,10 +23,9 @@ pipeline {
                 )
             }
         }
-
         stage('Prepare Deployment Directory') {
             steps {
-                echo "📁 Preparing deployment directory: ${DEPLOY_DIR}"
+                echo ":file_folder: Preparing deployment directory: ${DEPLOY_DIR}"
                 sh """
                     sudo rm -rf $DEPLOY_DIR
                     sudo mkdir -p $DEPLOY_DIR
@@ -41,42 +34,30 @@ pipeline {
                 """
             }
         }
-
         stage('Build Frontend') {
-    steps {
-        echo '⚙️ Building frontend...'
-        sh '''
-            export NVM_DIR="/var/lib/jenkins/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-            nvm install $NODE_VERSION
-            nvm use $NODE_VERSION
-            export PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
-
-            node -v
-            npm -v
-
-            cd $FRONTEND_DIR
-            npm install --legacy-peer-deps --silent
-            npm run build
-        '''
-    }
-}
-
-
+            steps {
+                echo ':gear: Building frontend...'
+                sh """
+                    node -v
+                    npm -v
+                    cd $FRONTEND_DIR
+                    npm install --legacy-peer-deps --silent
+                    npm run build
+                """
+            }
+        }
         stage('Install Backend Dependencies') {
             steps {
-                echo '🛠 Installing backend dependencies...'
+                echo ':hammer_and_wrench: Installing backend dependencies...'
                 sh """
                     cd $BACKEND_DIR
                     npm install --legacy-peer-deps --silent
                 """
             }
         }
-
         stage('Backup Current Deployment') {
             steps {
-                echo "📦 Backing up current deployment to: ${BACKUP_DIR}"
+                echo ":package: Backing up current deployment to: ${BACKUP_DIR}"
                 sh """
                     sudo mkdir -p $BACKUP_DIR
                     sudo rm -rf $BACKUP_DIR/*
@@ -87,10 +68,9 @@ pipeline {
                 """
             }
         }
-
         stage('Deploy Frontend') {
             steps {
-                echo "🚀 Deploying frontend to Nginx web root: ${FRONTEND_WEB_ROOT}"
+                echo ":rocket: Deploying frontend to Nginx web root: ${FRONTEND_WEB_ROOT}"
                 sh """
                     sudo mkdir -p $FRONTEND_WEB_ROOT
                     sudo rm -rf $FRONTEND_WEB_ROOT/*
@@ -98,10 +78,9 @@ pipeline {
                 """
             }
         }
-
         stage('Restart Backend') {
             steps {
-                echo "🔄 Restarting backend process on port $BACKEND_PORT"
+                echo ":arrows_counterclockwise: Restarting backend process on port $BACKEND_PORT"
                 sh """
                     if pm2 list | grep -q 'hyper-tek-backend'; then
                         pm2 restart hyper-tek-backend
@@ -111,21 +90,19 @@ pipeline {
                 """
             }
         }
-
         stage('Restart Nginx') {
             steps {
-                echo '🔄 Restarting Nginx'
+                echo ':arrows_counterclockwise: Restarting Nginx'
                 sh "sudo systemctl restart nginx"
             }
         }
     }
-
     post {
         success {
-            echo "✅ Hyper-Tek Game deployed successfully!"
+            echo ":white_check_mark: Hyper-Tek Game deployed successfully!"
         }
         failure {
-            echo "❌ Deployment failed. Check Jenkins logs for details."
+            echo ":x: Deployment failed. Check Jenkins logs for details."
         }
     }
 }
