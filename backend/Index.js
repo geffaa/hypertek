@@ -11,6 +11,12 @@ import { Route } from "./Routes/User.js";
 // market place router 
 import router from "./Routes/MarketPlace.js";
 
+// land route 
+import Landrouter from "./Routes/LandRoute.js";
+
+// activity route 
+import ActivityRouter from "./Routes/Activity.js";
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
@@ -53,7 +59,15 @@ DBConnections();
 app.use(`/api/v1`,Route);
 
 /// market place route
-app.use(`/api/v1`,router);
+app.use(`/api/v1/market`,router);
+
+// Land Route 
+app.use('/api/v1/land',Landrouter)
+
+// activity router
+app.use("/api/v1/activity",ActivityRouter)
+
+
 
 // Port from .env
 const PORT = process.env.PORT || 5000;

@@ -5,12 +5,17 @@ import {
   getItemById,
   updateItem,
   deleteItem,
-} from "../Controllers/MarketPlace.js"
+} from "../Controllers/MarketPlace.js";
+
 const router = express.Router();
-router.post("/Market", createItem);
+
+// ✅ Static routes first (important order)
+router.post("/create", createItem);
 router.get("/getMarket", getItems);
+
+// ✅ Dynamic routes last (so they don't capture 'getMarket')
 router.get("/:id", getItemById);
 router.put("/:id", updateItem);
 router.delete("/:id", deleteItem);
-// :white_check_mark: Correct export (default)
+
 export default router;

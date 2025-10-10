@@ -7,13 +7,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function PopularCollections() {
-  const [marketData, setMarketData] = useState([]);
+  const [marketData, setMarketData] = useState([]); 
 
   // get the market data here
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getMarket");
+        const res = await axios.get("http://localhost:3000/api/v1/market/getMarket");
         if (res.data.success) {
           setMarketData(res.data.data); // assuming backend returns { success, data }
         } else {
