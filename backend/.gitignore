@@ -15,9 +15,6 @@ lib-cov
 coverage/
 .nyc_output
 # dotenv environment variables
-.env
-.env.local
-.env.*.local
 # Build output
 dist/
 build/
