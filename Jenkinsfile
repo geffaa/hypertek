@@ -2,16 +2,17 @@ pipeline {
     agent any
 
     environment {
-        // Force Node 22 for this pipeline only
-        PATH = "/opt/node22/bin:${env.PATH}"
-
         // Deployment directories
         DEPLOY_DIR = "/var/www/hyper-tek-game"
         FRONTEND_DIR = "${DEPLOY_DIR}/frontend"
         BACKEND_DIR = "${DEPLOY_DIR}/backend"
         FRONTEND_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
-        BACKEND_PORT = "3000"  // change if backend runs on another port
+        BACKEND_PORT = "3000"  // backend port
         BACKUP_DIR = "/var/backups/nginx-site-hypertek"
+
+        // NVM & Node 22 paths (isolated for this pipeline)
+        NVM_DIR = "/var/lib/jenkins/.nvm"
+        NODE_VERSION = "22.20.0"
     }
 
     stages {
@@ -41,30 +42,26 @@ pipeline {
             }
         }
 
-stage('Build Frontend') {
-    steps {
-        echo '⚙️ Building frontend...'
-        sh '''
-            export NVM_DIR="/var/lib/jenkins/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install 22.20.0
-            nvm use 22.20.0
-            export PATH="$NVM_DIR/versions/node/v22.20.0/bin:$PATH"
+        stage('Build Frontend') {
+            steps {
+                echo '⚙️ Building frontend...'
+                sh '''
+                    export NVM_DIR="${NVM_DIR}"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-            node -v   # should show v22.20.0
-            npm -v    # should show npm 10.x.x
+                    nvm install $NODE_VERSION
+                    nvm use $NODE_VERSION
+                    export PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH"
 
-            cd $FRONTEND_DIR
-            npm install --legacy-peer-deps --silent
-            npm run build
-        '''
-    }
-}
+                    node -v
+                    npm -v
 
-
-
-
-
+                    cd $FRONTEND_DIR
+                    npm install --legacy-peer-deps --silent
+                    npm run build
+                '''
+            }
+        }
 
         stage('Install Backend Dependencies') {
             steps {
@@ -105,7 +102,6 @@ stage('Build Frontend') {
             steps {
                 echo "🔄 Restarting backend process on port $BACKEND_PORT"
                 sh """
-                    # Use pm2 to manage backend process
                     if pm2 list | grep -q 'hyper-tek-backend'; then
                         pm2 restart hyper-tek-backend
                     else
