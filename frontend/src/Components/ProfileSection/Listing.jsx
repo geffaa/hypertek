@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import ManImage from "../../assets/images/Overview/man.png";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
@@ -7,9 +7,17 @@ import Profile from "../../assets/images/Profile/Profile.png";
 import GlowingOrb from "../Common/BgColoring";
 import CustomButton from "../Buttons/Button1";
 import land1Image from "../../assets/images/Overview/land1.jpg";
-
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function PersonalActivity() {
+
+
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+       const [ userData , setUserData ] = useState({});
+       
+  
   // Activities data
   const [activities, setActivities] = useState([
     {
@@ -43,6 +51,30 @@ function PersonalActivity() {
       checked: false,
     },
   ]);
+
+
+
+   useEffect(() => {
+      const fetchProfile = async () => {
+        try {
+          const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+            headers: {
+              Authorization: `Bearer ${token}`, // 👈 send token here
+            },
+          });
+          setUserData(res.data.user)
+          console.log("✅ User profile:", res.data.user);
+        } catch (error) {
+          console.error("❌ Profile fetch error:", error.response?.data || error.message);
+          toast.error(error.response?.data?.message || "Failed to fetch profile");
+        }
+      };
+  
+      if (token) {
+        fetchProfile(); // only call if token exists
+      }
+    }, [token]);
+    
 
   // State for modal visibility
   const [showModal, setShowModal] = useState(false);
@@ -100,8 +132,9 @@ function PersonalActivity() {
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <img
-                src={Profile}
-                alt="Profile"
+                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
+
+alt="Profile"
                 className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
               />
             </div>
@@ -109,11 +142,13 @@ function PersonalActivity() {
             {/* Profile Info */}
             <div className="text-left text-white">
               <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                Lana Kim
+                                                      {userData.FullName || "N/A"}
+
               </h2>
               <p className="text-xs sm:text-sm text-gray-400 break-words">
-                0xc416a645...b21a{" "}
-                <Link to="/edit">
+
+                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
+                <Link to="/edit"  state={{ userData }}>
                   <span className="ml-1 sm:ml-2 cursor-pointer underline">
                     Edit Profile
                   </span>

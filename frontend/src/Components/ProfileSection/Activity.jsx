@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 import ManImage from "../../assets/images/Overview/man.png";
 import overview1 from "../../assets/images/Profile/Hero.png";
@@ -6,8 +6,81 @@ import { Link } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";
 import GlowingOrb from "../Common/BgColoring";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function PersonalActivity() {
+  /// get the activity from the backend
+  const [activityData, setActivityData] = useState([]);
+    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+       const [ userData , setUserData ] = useState({});
+       const loginUserId = user.id;
+  
+
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+          headers: {
+            Authorization: `Bearer ${token}`, // 👈 send token here
+          },
+        });
+        setUserData(res.data.user)
+        console.log("✅ User profile:", res.data.user);
+      } catch (error) {
+        console.error("❌ Profile fetch error:", error.response?.data || error.message);
+        toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }
+    };
+
+    if (token) {
+      fetchProfile(); // only call if token exists
+    }
+  }, [token]);
+  
+
+
+  // get the market data here
+  useEffect(() => {
+    const fetchMarketData = async () => {
+      try {
+        /// get the land , market and activity through
+        if(!loginUserId){
+          toast.error("Please Login first!")
+        }
+
+        const activity = await axios.get(
+          `http://localhost:3000/api/v1/activity/${loginUserId}`
+        );
+        console.log("your activity data in the console :", activity);
+
+        if (activity.data) setActivityData(activity.data);
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      }
+    };
+
+    fetchMarketData();
+  }, []); // run once when component mounts
+
+  console.log("your activity  data are here :", activityData);
+
+  const getDaysAgo = (dateString) => {
+    const created = new Date(dateString);
+    const now = new Date();
+
+    // Difference in milliseconds
+    const diffInMs = now.getTime() - created.getTime();
+
+    // If the time is in the future, return "0d"
+    if (diffInMs < 0) return "0d";
+
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    return `${diffInDays}d`;
+  };
+
   return (
     <div className="bg-transparent">
       {/* Hero Section */}
@@ -26,7 +99,7 @@ function PersonalActivity() {
               {/* Profile Image */}
               <div className="flex-shrink-0">
                 <img
-                  src={Profile}
+                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
                   alt="Profile"
                   className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
                 />
@@ -35,11 +108,13 @@ function PersonalActivity() {
               {/* Profile Info */}
               <div className="text-left text-white">
                 <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                  Lana Kim
+                                      {userData.FullName || "N/A"}
+
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-400 break-words">
-                  0xc416a645...b21a{" "}
-                  <Link to="/edit">
+
+                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
+                  <Link to="/edit"  state={{ userData }}>
                     <span className="ml-1 sm:ml-2 cursor-pointer underline">
                       Edit Profile
                     </span>
@@ -83,57 +158,29 @@ function PersonalActivity() {
 
             <tbody>
               {/* Example Row with Full Image */}
-              <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                      <img
-                        src={land1Image}
-                        alt="Avatar"
-                        className="w-full h-full object-cover"
-                      />
+              {activityData.slice(0, 5).map((item, index) => (
+                <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
+                  <td className="px-4 lg:px-6 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
+                        <img
+                          src={land1Image}
+                          alt="Avatar"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <span className="text-sm lg:text-[18px] font-inter font-medium">
+                        {item.name}
+                      </span>
                     </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">
-                      Monkey Ape
-                    </span>
-                  </div>
-                </td>
-                <td className="px-4 lg:px-6 py-3">Buyer</td>
-                <td className="px-4 lg:px-6 py-3">You</td>
-                <td className="px-4 lg:px-6 py-3">Oxxy</td>
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">2d</td>
-              </tr>
-
-              {/* Example Row with Cropped Head Image */}
-              <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                      }}
-                    >
-                      <img
-                        src={ManImage}
-                        alt="Collection"
-                        className="w-full h-full object-cover object-top"
-                        style={{ objectPosition: "top" }}
-                      />
-                    </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">
-                      Monkey Ape
-                    </span>
-                  </div>
-                </td>
-                <td className="px-4 lg:px-6 py-3">Seller</td>
-                <td className="px-4 lg:px-6 py-3">Don</td>
-                <td className="px-4 lg:px-6 py-3">Don</td>
-                <td className="px-4 lg:px-6 py-3">$2,000</td>
-                <td className="px-4 lg:px-6 py-3">2d</td>
-              </tr>
+                  </td>
+                  <td className="px-4 lg:px-6 py-3">{item.type}</td>
+                  <td className="px-4 lg:px-6 py-3">{item.buyer}</td>
+                  <td className="px-4 lg:px-6 py-3">{item.seller}</td>
+                  <td className="px-4 lg:px-6 py-3">${item.price}</td>
+                  <td className="px-4 lg:px-6 py-3">{getDaysAgo(item.time)}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

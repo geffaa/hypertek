@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useEffect  , useState} from 'react'
 import { Link } from 'react-router-dom';
 import { FiSearch } from "react-icons/fi"; 
 
@@ -9,9 +9,35 @@ import CustomButton from '../Components/Buttons/Button1';
 import Logo from "../assets/images/logo.png";
 import land1Image from "../assets/images/Overview/land1.jpg";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks"
+import axios from 'axios';
 
 
 function Land() {
+
+ const [landData, setLandData] = useState([]);
+   
+    // get the market data here
+    useEffect(() => {
+      const fetchMarketData = async () => {
+        try {
+          /// get the land , market and activity through
+          const res = await axios.get(
+            "http://localhost:3000/api/v1/land/getland"
+          );
+
+         
+          if (res.data?.data) setLandData(res.data.data);
+        
+        } catch (error) {
+          console.error("Error fetching market data:", error);
+        }
+      };
+  
+      fetchMarketData();
+    }, []); 
+    console.log("your land data are here :", landData);
+
+
   return (
     <div className="min-h-screen bg-[#000000] px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
@@ -154,7 +180,7 @@ function Land() {
 
   {/* First Row of Cards (with custom 1st card) */}
   <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
-    {[...Array(4)].map((_, index) => (
+    {landData.map((item, index) => (
       <div
         key={index}
         className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
@@ -182,16 +208,16 @@ function Land() {
                 className="w-full h-full object-cover object-top scale-x-[-1]"
               />
             </div>
-            <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">Monkey Ape</h2>
+            <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">{item.title}</h2>
             <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-              <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
+              <h3 className="text-xs lg:text-sm font-semibold">{item.serialNumber} 🔥</h3>
               <div className="flex items-center">
                 <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-                <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">$2,000</h3>
+                <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.price}</h3>
               </div>
             </div>
             <div className="mt-auto flex justify-center">
-              <Link to="/buy-land" className="cursor-pointer">
+              <Link to="/buy-land" className="cursor-pointer"    state={{ item }}  >
                 <CustomButton text="Buy Now" />
               </Link>
             </div>
@@ -201,75 +227,9 @@ function Land() {
     ))}
   </div>
 
-  {/* Second Row of Cards */}
-  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
-    {[...Array(4)].map((_, index) => (
-      <div
-        key={index}
-        className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-          lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-      >
-        <div
-          className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-            bg-gradient-to-b from-[#977C34] to-[#493F26]"
-        >
-          <img
-            src={land1Image}
-            alt="Collection"
-            className="w-full h-full object-cover object-top scale-x-[-1]"
-          />
-        </div>
-        <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">Monkey Ape</h2>
-        <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-          <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-          <div className="flex items-center">
-            <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">$2,000</h3>
-          </div>
-        </div>
-        <div className="mt-auto flex justify-center">
-          <Link to="/nfa-expand" className="cursor-pointer">
-            <CustomButton text="Buy Now" />
-          </Link>
-        </div>
-      </div>
-    ))}
-  </div>
+  
 
-  {/* Third Row of Cards */}
-  <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
-    {[...Array(4)].map((_, index) => (
-      <div
-        key={index}
-        className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-          lg:max-w-none h-[380px] lg:h-[400px] flex flex-col justify-between"
-      >
-        <div
-          className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-            bg-gradient-to-b from-[#977C34] to-[#493F26]"
-        >
-          <img
-            src={land1Image}
-            alt="Collection"
-            className="w-full h-full object-cover object-top scale-x-[-1]"
-          />
-        </div>
-        <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">Monkey Ape</h2>
-        <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-          <h3 className="text-xs lg:text-sm font-semibold">No33 🔥</h3>
-          <div className="flex items-center">
-            <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">$2,000</h3>
-          </div>
-        </div>
-        <div className="mt-auto flex justify-center">
-          <Link to="/nfa-expand" className="cursor-pointer">
-            <CustomButton text="Buy Now" />
-          </Link>
-        </div>
-      </div>
-    ))}
-  </div>
+
 </section>
     </div>
   );

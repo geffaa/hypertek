@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
 import popularCollections from "../assets/images/popular/popolar.png";
@@ -10,6 +10,7 @@ import Button2 from "../Components/Buttons/Button2";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import { Link } from "react-router-dom";
 import InfoIcon from "../assets/images/info.png"
+import axios from "axios";
 
 function NFA() {
   // ✅ State for multiple modals
@@ -54,6 +55,33 @@ function NFA() {
       openThirdModal();
     }, 100);
   };
+
+
+
+  /// get the data from the backend 
+    const [marketData, setMarketData] = useState([]);
+   
+    // get the market data here
+    useEffect(() => {
+      const fetchMarketData = async () => {
+        try {
+          /// get the land , market and activity through
+          const res = await axios.get(
+            "http://localhost:3000/api/v1/market/getMarket"
+          );
+
+         
+          if (res.data?.data) setMarketData(res.data.data);
+        
+        } catch (error) {
+          console.error("Error fetching market data:", error);
+        }
+      };
+  
+      fetchMarketData();
+    }, []); 
+    console.log("your market data are here :", marketData);
+  
 
   return (
     <>
@@ -146,7 +174,7 @@ function NFA() {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center">
-            {[...Array(4)].map((_, index) => (
+            { marketData.slice(0,4).map((item, index) => (
               <div
                 key={index}
                 className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
@@ -164,7 +192,7 @@ function NFA() {
                         alt=""
                         className="w-6 h-6 p-1 rounded-full bg-[linear-gradient(180deg,#2AAC4F,#85F3BE)]"
                       />
-                      <p className="text-white font-medium">$1800</p>
+                      <p className="text-white font-medium">${item.price}</p>
                     </div>
 
                     {/* ✅ Open first modal on click */}
@@ -183,12 +211,12 @@ function NFA() {
                     </div>
 
                     <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-                      Monkey Ape
+                      {item.title}
                     </h2>
 
                     <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
                       <h3 className="text-xs lg:text-sm font-semibold">
-                        No33 🔥
+                        {item.serialNumber} 🔥
                       </h3>
                       <div className="flex items-center">
                         <img
@@ -197,13 +225,13 @@ function NFA() {
                           className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                         />
                         <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                          $2,000
+                          ${item.price}
                         </h3>
                       </div>
                     </div>
 
                     <div className="mt-auto flex justify-center">
-                      <Link to="/buy-nfa">
+                      <Link to="/buy-nfa"  state={{ item }}  >
                         <CustomButton text="Buy Now" />
                       </Link>
                     </div>
