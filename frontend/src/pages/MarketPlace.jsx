@@ -15,17 +15,27 @@ import axios from "axios";
 function MarketPlace() {
   //// get the nfa data
   const [marketData, setMarketData] = useState([]);
+  const [landData, setLandketData] = useState([]);
+  const [activityData, setActivityData] = useState([]);
 
   // get the market data here
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getMarket");
-        if (res.data.success) {
-          setMarketData(res.data.data); // assuming backend returns { success, data }
-        } else {
-          console.error("Failed to fetch market data:", res.data.message);
-        }
+        /// get the land , market and activity through
+        const res = await axios.get(
+          "http://localhost:3000/api/v1/market/getMarket"
+        );
+        const landres = await axios.get(
+          "http://localhost:3000/api/v1/land/getLand"
+        );
+        const activity = await axios.get(
+          "http://localhost:3000/api/v1/activity/getActivity"
+        );
+        console.log("your activity data in the console :", activity);
+        if (res.data?.data) setMarketData(res.data.data);
+        if (landres.data?.data) setLandketData(landres.data.data);
+        if (activity.data) setActivityData(activity.data);
       } catch (error) {
         console.error("Error fetching market data:", error);
       }
@@ -35,6 +45,28 @@ function MarketPlace() {
   }, []); // run once when component mounts
 
   console.log("your market data are here :", marketData);
+  console.log("your land  data are here :", landData);
+  console.log("your activity  data are here :", activityData);
+
+
+
+  /// convert the date to days only 
+const getDaysAgo = (dateString) => {
+  const created = new Date(dateString);
+  const now = new Date();
+
+  // Difference in milliseconds
+  const diffInMs = now.getTime() - created.getTime();
+
+  // If the time is in the future, return "0d"
+  if (diffInMs < 0) return "0d";
+
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  return `${diffInDays}d`;
+};
+
+
+
 
   return (
     <>
@@ -281,7 +313,7 @@ function MarketPlace() {
 
             {/* Cards Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-center mt-3 sm:mt-4">
-              {[...Array(4)].map((_, index) => (
+              {landData.slice(0.4).map((item, index) => (
                 <div
                   key={index}
                   className="bg-gray-800 rounded-lg shadow-md text-white p-3 sm:p-4 w-full max-w-sm mx-auto 
@@ -301,13 +333,13 @@ function MarketPlace() {
 
                   {/* Title */}
                   <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
-                    Monkey Ape
+                    {item.title}
                   </h2>
 
                   {/* Stats */}
                   <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
                     <h3 className="text-xs sm:text-sm font-semibold">
-                      No33 🔥
+                      {item.serialNumber} 🔥
                     </h3>
                     <div className="flex items-center">
                       <img
@@ -316,7 +348,7 @@ function MarketPlace() {
                         className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                       />
                       <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                        $2,000
+                        ${item.price}
                       </h3>
                     </div>
                   </div>
@@ -357,16 +389,19 @@ function MarketPlace() {
                   </div>
                 </div>
 
-              <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-  <Link
-    to="/nfa-land"
-    className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
-  >
-    <span>Expand All</span>
-    <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
-  </Link>
-</div>
-
+                <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
+                  <Link
+                    to="/nfa-land"
+                    className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
+                  >
+                    <span>Expand All</span>
+                    <ArrowRight
+                      size={16}
+                      className="sm:w-5 sm:h-5"
+                      strokeWidth={2}
+                    />
+                  </Link>
+                </div>
               </div>
 
               {/* Table */}
@@ -395,7 +430,7 @@ function MarketPlace() {
                     </tr>
                   </thead>
                   <tbody>
-                    {[...Array(5)].map((_, i) => (
+                    {activityData.slice(0.5).map((item, i) => (
                       <tr
                         key={i}
                         className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
@@ -417,24 +452,24 @@ function MarketPlace() {
                               />
                             </div>
                             <span className="text-sm lg:text-[18px] font-inter font-medium">
-                              Monkey Ape
+                              {item.name}
                             </span>
                           </div>
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          {i % 2 === 0 ? "Buyer" : "Seller"}
+                          {item.buyer}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          You
+                          {item.type}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          Oxxy
+                          {item.seller}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          $2,000
+                          ${item.price}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          2d
+                          {getDaysAgo(item.time)}
                         </td>
                       </tr>
                     ))}
