@@ -45,12 +45,14 @@ stage('Build Frontend') {
     steps {
         echo '⚙️ Building frontend...'
         sh '''
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # Load NVM
+            export NVM_DIR="/var/lib/jenkins/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install 22.20.0
             nvm use 22.20.0
+            export PATH="$NVM_DIR/versions/node/v22.20.0/bin:$PATH"
 
-            node -v   # confirm Node version
-            npm -v    # confirm NPM version
+            node -v   # should show v22.20.0
+            npm -v    # should show npm 10.x.x
 
             cd $FRONTEND_DIR
             npm install --legacy-peer-deps --silent
@@ -58,6 +60,8 @@ stage('Build Frontend') {
         '''
     }
 }
+
+
 
 
 
