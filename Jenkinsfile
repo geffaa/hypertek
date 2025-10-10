@@ -6,7 +6,7 @@ pipeline {
         FRONTEND_DIR = "${DEPLOY_DIR}/frontend"
         BACKEND_DIR = "${DEPLOY_DIR}/backend"
         FRONTEND_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
-        BACKEND_PORT = "3000"  // backend port
+        BACKEND_PORT = "4700"  // backend port
         BACKUP_DIR = "/var/backups/nginx-site-hypertek"
     }
     stages {
