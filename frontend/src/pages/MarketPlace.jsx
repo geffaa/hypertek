@@ -358,6 +358,7 @@ const getDaysAgo = (dateString) => {
                   <div className="mt-auto flex justify-center items-center px-4 sm:px-6 lg:px-8">
                     <Link
                       to="/buy-land"
+                        state={{ item }}
                       className="cursor-pointer flex justify-center w-full"
                     >
                       <CustomButton

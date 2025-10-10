@@ -5,8 +5,13 @@ import CustomButton2 from "../Components/Buttons/Button2";
 import { FiEdit2, FiEye } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
+import { useLocation } from "react-router-dom";
 
 function NfaLand() {
+  const location = useLocation();
+  const { item } = location.state || {}; // safely access it
+
+  console.log("your pass item to the land page are recieved :", item);
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
 
@@ -23,26 +28,24 @@ function NfaLand() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-full mt-24 px-4">
+    <div className="flex flex-col justify-center w-full mt-24 md:px-24">
       <div className="flex flex-col md:flex-row gap-6 md:gap-[54px] max-w-[918px] w-full h-auto">
-       <div className="text-white flex items-center sm:hidden">
-               <Link to="/buy-nfa" className="border-b-2 border-blue-500">
-               Overview
-              
-               </Link>
-               <Link to="/offer-recieved" className="pl-3">
-               Offer 0
-               </Link>
-               
-             </div>
-       
+        <div className="text-white flex items-center sm:hidden">
+          <Link to="/buy-nfa" className="border-b-2 border-blue-500">
+            Overview
+          </Link>
+          <Link to="/offer-recieved" className="pl-3">
+            Offer 0
+          </Link>
+        </div>
+
         {/* ✅ Title block on small screens (above the image) */}
         <div className="flex md:hidden items-center justify-left gap-2 mb-2">
           <h1 className="font-inter font-semibold text-[22px] text-white">
-            Monkey Ape
+            {item.title}
           </h1>
           <p className="flex items-center font-inter font-semibold text-[14px] text-white">
-            No333 🔥
+            {item.serialNumber} 🔥
           </p>
         </div>
 
@@ -58,10 +61,10 @@ function NfaLand() {
           {/* ✅ Title block for large screens (beside the image) */}
           <div className="hidden md:flex items-center justify-between gap-2">
             <h1 className="font-inter font-semibold text-[24px] md:text-[30px] text-white">
-              Monkey Ape
+              {item.title}
             </h1>
             <p className="flex items-center font-inter font-semibold text-[14px] md:text-[16px] text-white">
-              No333 🔥
+              {item.serialNumber} 🔥
             </p>
           </div>
 
@@ -77,7 +80,9 @@ function NfaLand() {
               </p>
             </div>
 
-            <h2 className="text-white mt-3 text-lg md:text-xl">$2000.00</h2>
+            <h2 className="text-white mt-3 text-lg md:text-xl">
+              ${item.price}
+            </h2>
 
             {/* Buttons */}
             <div className="w-full flex flex-row justify-center gap-4 mt-4 md:mt-6">
@@ -141,13 +146,13 @@ function NfaLand() {
               />
             </div>
 
-            <h1 className="text-white text-xl font-bold mb-2">Monkey Ape</h1>
+            <h1 className="text-white text-xl font-bold mb-2">{item.title}</h1>
             <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
             {[
-              { label: "List price", value: "$2000.00" },
+              { label: "List price", value: ` $ ${item.price}` },
               { label: "Platform Fee", value: "$0.5" },
-              { label: "Total Fee", value: "$2000.5" },
+              { label: "Total Fee", value: ` $ ${item.price + 0.5}` },
             ].map((item, index) => (
               <div key={index} className="w-[90%] mb-3">
                 <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
@@ -256,72 +261,71 @@ function NfaLand() {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">$2000.5</p>
+                <p className="text-white text-sm">${item.price + 0.5}</p>
               </div>
             </div>
 
-           <div className="flex flex-row gap-4 mt-6 w-full justify-center flex-wrap">
-  {/* Cancel button structure */}
-  <div className="flex items-center">
-    {/* Left small bar */}
-    <div
-      className="bg-[#002AA8] mr-0.5"
-      style={{
-        width: "0.25rem", // ~3.99px
-        height: "1rem", // ~21.93px
-      }}
-    ></div>
+            <div className="flex flex-row gap-4 mt-6 w-full justify-center flex-wrap">
+              {/* Cancel button structure */}
+              <div className="flex items-center">
+                {/* Left small bar */}
+                <div
+                  className="bg-[#002AA8] mr-0.5"
+                  style={{
+                    width: "0.25rem", // ~3.99px
+                    height: "1rem", // ~21.93px
+                  }}
+                ></div>
 
-    {/* Left angled border */}
-    <div
-      className="border-[#002AA8]"
-      style={{
-        width: "0.5rem", // ~7.97px
-        height: "2rem", // ~42.86px
-        borderStyle: "solid",
-        borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-      }}
-    ></div>
+                {/* Left angled border */}
+                <div
+                  className="border-[#002AA8]"
+                  style={{
+                    width: "0.5rem", // ~7.97px
+                    height: "2rem", // ~42.86px
+                    borderStyle: "solid",
+                    borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                  }}
+                ></div>
 
-    {/* Main button area */}
-    <div
-      className="flex items-center justify-center text-white font-medium"
-      style={{
-        width: "8rem", // ~168px
-        height: "2rem", // ~39.59px
-        border: "0.15rem solid #002AA8", // ~2.42px
-      }}
-    >
-      Cancel
-    </div>
+                {/* Main button area */}
+                <div
+                  className="flex items-center justify-center text-white font-medium"
+                  style={{
+                    width: "8rem", // ~168px
+                    height: "2rem", // ~39.59px
+                    border: "0.15rem solid #002AA8", // ~2.42px
+                  }}
+                >
+                  Cancel
+                </div>
 
-    {/* Right angled border */}
-    <div
-      className="border-[#002AA8]"
-      style={{
-        width: "0.5rem", // ~7.97px
-        height: "2.2rem", // ~42.86px
-        borderStyle: "solid",
-        borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-      }}
-    ></div>
+                {/* Right angled border */}
+                <div
+                  className="border-[#002AA8]"
+                  style={{
+                    width: "0.5rem", // ~7.97px
+                    height: "2.2rem", // ~42.86px
+                    borderStyle: "solid",
+                    borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                  }}
+                ></div>
 
-    {/* Right small bar */}
-    <div
-      className="bg-[#002AA8]"
-      style={{
-        width: "0.25rem", // ~3.99px
-        height: "1rem", // ~21.93px
-      }}
-    ></div>
-  </div>
+                {/* Right small bar */}
+                <div
+                  className="bg-[#002AA8]"
+                  style={{
+                    width: "0.25rem", // ~3.99px
+                    height: "1rem", // ~21.93px
+                  }}
+                ></div>
+              </div>
 
-  {/* Confirm button */}
-  <Link to="/payment" className="w-auto">
-    <CustomButton text="Confirm" onClick={closeSecondModal} />
-  </Link>
-</div>
-
+              {/* Confirm button */}
+              <Link to="/payment" className="w-auto">
+                <CustomButton text="Confirm" onClick={closeSecondModal} />
+              </Link>
+            </div>
           </div>
         </div>
       )}

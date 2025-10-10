@@ -21,7 +21,9 @@ function MarketPlace() {
    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
    console.log("your data in the profile are :",user.id);
 
-
+// get the nfa data 
+const [marketData, setMarketData] = useState([]);
+  
 // user data from the database 
 const [ userData , setUserData ] = useState({});
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +31,15 @@ const [ userData , setUserData ] = useState({});
   const [isThirdOpen, setIsThirdOpen] = useState(false);
   const [isFourthOpen, setIsFourthOpen] = useState(false);
 
-  const openModal = () => setIsOpen(true);
+
+    const [selectedItem, setSelectedItem] = useState(null);
+
+
+  // const openModal = () => setIsOpen(true);
+   const openModal = (item) => {
+    setSelectedItem(item);
+    setIsOpen(true);
+  };
   const closeModal = () => setIsOpen(false);
 
   const openSecondModal = () => {
@@ -58,7 +68,31 @@ const [ userData , setUserData ] = useState({});
     }, 150);
   };
 
+/// get the nfa data from the backend 
 
+  useEffect(() => {
+    const fetchMarketData = async () => {
+      try {
+        /// get the land , market and activity through
+        const res = await axios.get(
+          "http://localhost:3000/api/v1/market/getMarket"
+        );
+       
+        if (res.data?.data) setMarketData(res.data.data);
+        
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      }
+    };
+
+    fetchMarketData();
+  }, []); // run once when component mounts
+
+  console.log("your market data are here :", marketData);
+
+
+
+// git profile data from the backend 
 
 useEffect(() => {
     const fetchProfile = async () => {
@@ -138,7 +172,7 @@ console.log("Full Name:", userData.FullName);
           <GlowingOrb Xaxis={800} Yaxis={100} />
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 justify-center">
-            {[...Array(4)].map((_, index) => (
+            {marketData.slice(0.4).map((item, index) => (
               <div
                 key={index}
                 className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-sm mx-auto lg:max-w-none h-[380px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
@@ -152,12 +186,12 @@ console.log("Full Name:", userData.FullName);
                 </div>
 
                 <h2 className="text-base lg:text-lg xl:text-xl font-bold mt-3 lg:mt-4">
-                  Monkey Ape
+                  {item.title}
                 </h2>
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
                   <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
-                    No33 🔥
+                    {item.serialNumber} 🔥
                   </h3>
                   <div className="flex items-center">
                     <img
@@ -166,7 +200,7 @@ console.log("Full Name:", userData.FullName);
                       className="w-2 h-2 lg:w-[10px] lg:h-[9px] xl:w-[12px] xl:h-[12px]"
                     />
                     <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm xl:text-base font-semibold">
-                      $2,000
+                      ${item.price}
                     </h3>
                   </div>
                 </div>
@@ -181,7 +215,7 @@ console.log("Full Name:", userData.FullName);
 
                   {/* Large screens: show on hover */}
                   <div className="hidden lg:group-hover:block transition-all duration-300 w-full">
-                    <button onClick={openModal} className="w-full">
+                    <button onClick={()=>openModal(item)} className="w-full">
                       <CustomButton text="List Now" />
                     </button>
                   </div>
@@ -198,7 +232,7 @@ console.log("Full Name:", userData.FullName);
       </div>
 
       {/* ------------------ First Modal ------------------ */}
-      {isOpen && (
+      {isOpen && selectedItem &&  (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
           onClick={closeModal}
@@ -235,13 +269,13 @@ console.log("Full Name:", userData.FullName);
 
             {/* Asset Title */}
             <h1 className="text-white text-xl font-bold mb-2 mt-4">
-              Monkey Ape
+              {selectedItem.title}
             </h1>
             <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
             {/* Price Details */}
             {[
-              { label: "List price", value: "$2000 USDT" },
+              { label: "List price", value: `$ ${2000} USDT` },
               { label: "Platform Fee", value: "$0.5 USDT" },
             ].map((item, index) => (
               <div key={index} className="w-[90%] mb-3">
@@ -322,7 +356,7 @@ console.log("Full Name:", userData.FullName);
       )}
 
       {/* ------------------ Second Modal ------------------ */}
-      {isSecondOpen && (
+      {isSecondOpen &&  selectedItem &&  (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
           onClick={closeSecondModal}
@@ -351,13 +385,13 @@ console.log("Full Name:", userData.FullName);
               />
             </div>
 
-            <h1 className="text-white  text-lg md:text-xl">Monkey Ape</h1>
+            <h1 className="text-white  text-lg md:text-xl">{selectedItem.title}</h1>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
 
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">$2000.5</p>
+                <p className="text-white text-sm">${selectedItem.price + 0.5}</p>
               </div>
             </div>
 

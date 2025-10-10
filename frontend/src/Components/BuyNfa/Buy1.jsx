@@ -8,8 +8,18 @@ import { Link } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import buyNfaImage from "../../assets/images/popolar.png";
 import symbol from "../../assets/images/login/Symbol.svg.png"; // Make sure this image exists
+import { useLocation } from "react-router-dom";
+
+
 
 function Buy1() {
+
+
+  const location = useLocation();
+const { item } = location.state || {}; // safely access it
+
+console.log("your item in the buy nfa :",item);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
@@ -50,10 +60,10 @@ function Buy1() {
         {/* ✅ Title appears ABOVE the image on small screens */}
         <div className="flex md:hidden items-center gap-2 w-full justify-left">
           <h1 className="font-inter font-semibold text-xl text-white cursor-default">
-            Monkey Ape
+            {item.title}
           </h1>
           <p className="font-inter font-semibold text-sm text-white cursor-default">
-            No333 🔥
+            {item.serialNumber} 🔥
           </p>
         </div>
 
@@ -72,10 +82,10 @@ function Buy1() {
           {/* ✅ Title visible only on medium+ screens (beside image) */}
           <div className="hidden md:flex items-center gap-2">
             <h1 className="font-inter font-semibold text-2xl text-white cursor-default">
-              Monkey Ape
+              {item.title}
             </h1>
             <p className="font-inter font-semibold text-base text-white cursor-default">
-              No333 🔥
+              {item.serialNumber} 🔥
             </p>
           </div>
 
@@ -92,7 +102,7 @@ function Buy1() {
             </div>
 
             <h2 className="text-white mt-3 text-lg md:text-xl cursor-default">
-              $2000.00
+              ${item.price}
             </h2>
 
             <div className="flex justify-end mt-4">
@@ -168,13 +178,13 @@ function Buy1() {
               />
             </div>
 
-            <h1 className="text-white text-xl font-bold mb-2">Monkey Ape</h1>
+            <h1 className="text-white text-xl font-bold mb-2">{item.title}</h1>
             <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
 
             {[
-              { label: "List price", value: "$2000 USDT" },
+              { label: "List price", value: `${item.price}` },
               { label: "Platform Fee", value: "$0.5 USDT" },
-              { label: "Total Fee", value: "$2000.5 USDT" },
+              { label: "Total Fee", value: `${item.price + 0.5} USDT` },
             ].map((item, index) => (
               <div key={index} className="w-[90%] mb-3">
                 <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
@@ -282,7 +292,7 @@ function Buy1() {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">$2000.5</p>
+                <p className="text-white text-sm">${item.price + 0.5}</p>
               </div>
             </div>
 

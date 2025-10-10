@@ -29,15 +29,24 @@ import Activity from "../Models/ActivityModel.js"
   }
 };
 // Get a trade by ID
- const getTradeById = async (req, res) => {
+const getTradeById = async (req, res) => {
   try {
-    const trade = await Activity.findById(req.params.id);
-    if (!trade) return res.status(404).json({ message: "Trade not found" });
-    res.status(200).json(trade);
+    console.log("Requested user ID:", req.params.id);
+
+    // Use .find() to get all activities for this user
+    const trades = await Activity.find({ userId: req.params.id });
+
+    if (!trades || trades.length === 0) {
+      return res.status(404).json({ success: false, message: "No trades found for this user" });
+    }
+
+    res.status(200).json({ success: true, data: trades });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error fetching trades:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 // Update a trade
  const updateTrade = async (req, res) => {
   try {
