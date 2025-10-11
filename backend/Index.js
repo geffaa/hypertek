@@ -19,6 +19,7 @@ import ActivityRouter from "./Routes/Activity.js";
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://hyper-tek-games.deventiatech.com",
   "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
   "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app", // ✅ add this
 ];
