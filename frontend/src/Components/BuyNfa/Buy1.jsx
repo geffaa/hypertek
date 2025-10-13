@@ -479,7 +479,7 @@ function Buy1() {
         <button
           onClick={async () => {
             try {
-              const res = await fetch(`${BACKEND_BASE_URL}/stripe/create-checkout-session`, {
+              const res = await fetch(`${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: finalPrice * 100, userId: user.id }),
