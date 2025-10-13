@@ -44,6 +44,12 @@ import WalletConnect from "./pages/WalletConnect";
 import Wellcome from "./pages/Wellcome";
 import SigninWallet from "./pages/SigninWallet";
 import NoItem from "./pages/NoItem";
+import { loadStripe } from "@stripe/stripe-js";
+import { STRIPE_PUBLISHABLE_KEY } from "./Config"
+import { Elements } from "@stripe/react-stripe-js";
+
+
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 // Wrapper component to handle route changes
 function AppWrapper() {
@@ -61,6 +67,7 @@ function AppWrapper() {
 
   return (
     <>
+        <Elements stripe={stripePromise}>
       <Navbar />
       <div style={{ flex: 1 }}>
         <Routes>
@@ -123,6 +130,7 @@ function AppWrapper() {
       </div>
        <Toaster position="top-right" reverseOrder={false} />
       <Footer />
+      </Elements>
     </>
   );
 }
