@@ -136,7 +136,7 @@ console.log("Full Name:", userData.FullName);
                 {/* Profile Image */}
                 <div className="relative flex-shrink-0">
                   <img
-                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
+                   src={userData.Avatar ? `https://api-hyper-tek-games.deventiatech.com${userData.Avatar}` : Profile}
                     alt="Profile"
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
                   />
