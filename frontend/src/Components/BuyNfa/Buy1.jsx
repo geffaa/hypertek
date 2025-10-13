@@ -1,37 +1,122 @@
 import React, { useState } from "react";
-import Land1 from "../../assets/images/land1.jpg";
-import CustomButton from "../Buttons/Button1";
-import CustomButton2 from "../../Components/Buttons/Button2";
-import { FiEdit2 } from "react-icons/fi";
-import popularCollections from "../../assets/images/popular/popolar.png";
-import { Link } from "react-router-dom";
-import { FiEye } from "react-icons/fi";
-import buyNfaImage from "../../assets/images/popolar.png";
-import symbol from "../../assets/images/login/Symbol.svg.png"; // Make sure this image exists
-import { useLocation } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import { STRIPE_PUBLISHABLE_KEY , BACKEND_BASE_URL } from "../../Config";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { Elements, CardElement } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
+import CustomButton from "../Buttons/Button1";
+import popularCollections from "../../assets/images/popolar.png";
+import { FiEye } from "react-icons/fi";
+import { FiEdit2 } from "react-icons/fi";
+import buyNfaImage from "../../assets/images/popolar.png";
+import symbol from "../../assets/images/login/Symbol.svg.png"; // Wallet image
+import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../../Config";
 
+// Initialize Stripe
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+
+// Stripe Payment Form Component
+const StripePaymentForm = ({ amount, user, closeModal }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+
+  const handleStripePayment = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) {
+      toast.error("Stripe is not loaded yet");
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+    if (!cardElement) {
+      toast.error("Card element not found");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      // Step 1: Create PaymentIntent
+      const res = await fetch(`${BACKEND_BASE_URL}/stripe/create-payment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: amount * 100, userId: user.id }),
+      });
+      const data = await res.json();
+
+      if (!data.clientSecret) {
+        toast.error("Client secret missing from backend");
+        return;
+      }
+
+      // Step 2: Confirm Payment
+      const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: { card: cardElement },
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      // Step 3: Save Payment
+      await fetch(`${BACKEND_BASE_URL}/stripe/payment-success`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.id,
+          amount: amount,
+          currency: "usd",
+          provider: "stripe",
+          transactionId: paymentIntent.id,
+          paymentIntentId: paymentIntent.id,
+          paymentMethod: "stripe",
+          status: paymentIntent.status,
+        }),
+      });
+
+      toast.success("Payment successful!");
+      closeModal();
+    } catch (err) {
+      console.error(err);
+      toast.error("Payment failed!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleStripePayment} className="mt-4">
+      <div className="p-4 bg-gray-900 rounded-md border border-gray-700">
+        <CardElement
+          options={{
+            style: { base: { color: "#fff", fontSize: "16px" } },
+          }}
+        />
+      </div>
+      <button
+        type="submit"
+        className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200"
+        disabled={!stripe || !elements || loading}
+      >
+        {loading ? "Processing..." : `Pay $${amount}`}
+      </button>
+    </form>
+  );
+};
 
 function Buy1() {
   const location = useLocation();
-  const { item } = location.state || {}; // safely access it
-
-  // Access the user object from Redux
-  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-  console.log("your redux user is here :", user?.id);
-
-  console.log("your item in the buy nfa :", item);
+  const { item } = location.state || {};
+  const { user } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
-  const [finalPrice, setFinaPrice] = useState();
-  const [loading, setLoading] = useState(false);
+  const [showStripeForm, setShowStripeForm] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(0);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -43,121 +128,31 @@ function Buy1() {
   const closeSecondModal = () => setIsSecondOpen(false);
 
   const openThirdModal = (price) => {
-    setFinaPrice(price);
-    setIsSecondOpen(false);
-    setIsThirdOpen(true);
-  };
-  const closeThirdModal = () => setIsThirdOpen(false);
+  if (!price || isNaN(price)) {
+    toast.error("Invalid price");
+    return;
+  }
+  setFinalPrice(price);
+  setIsSecondOpen(false);
+  setIsThirdOpen(true);
+};
 
-  const handleMakeOffer = () => {
+  const closeThirdModal = () => {
+    setIsThirdOpen(false);
+    setShowStripeForm(false);
+  };
+
+  const handlePaypalPayment = () => toast("Redirecting to PayPal checkout...");
+  const handleCryptoPayment = () => toast("Connecting to crypto wallet...");
+
+
+   const handleMakeOffer = () => {
     console.log("Make offer clicked");
   };
-
-  const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY); // ⚠️ use your real Stripe publishable key
-
-  //// PAYMENT METHODS
-  const handleStripePayment = async () => {
-    console.log("your strip publich key :", STRIPE_PUBLISHABLE_KEY);
-
-    if(!finalPrice){
-      toast.error("stripe key is required")
-    }
-
-    if (!stripePromise || !user?.id || !finalPrice) {
-      toast.error("Stripe key, user ID, and amount are required");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      // ✅ Step 1: Create PaymentIntent from backend
-      const res = await fetch(
-        `${BACKEND_BASE_URL}/api/v1/stripe/create-payment`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: finalPrice * 100, // Stripe expects amount in cents
-            userId: user._id,
-          }),
-        }
-      );
-
-      const data = await res.json();
-      console.log("Stripe Payment Intent:", data);
-
-      if (!data.clientSecret) {
-        toast.error("Client secret missing from backend");
-        return;
-      }
-
-      // ✅ Step 2: Confirm payment using Stripe.js
-      const stripe = await stripePromise;
-      const elements = stripe.elements();
-      const cardElement = elements.getElement(CardElement);
-
-      const { error, paymentIntent } = await stripe.confirmCardPayment(
-        data.clientSecret,
-        {
-          payment_method: {
-            card: cardElement,
-          },
-        }
-      );
-
-      if (error) {
-        console.error("Payment error:", error);
-        toast.error(`Payment failed: ${error.message}`);
-        return;
-      }
-
-      // ✅ Step 3: Save Payment Details in Database
-      const saveRes = await fetch(
-        `${BACKEND_BASE_URL}/api/v1/stripe/payment-success`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user._id,
-            amount: finalPrice,
-            currency: "usd",
-            provider: "stripe",
-            transactionId: paymentIntent.id,
-            paymentIntentId: paymentIntent.id,
-            paymentMethod: "stripe",
-            status: paymentIntent.status,
-          }),
-        }
-      );
-
-      const saveData = await saveRes.json();
-      console.log("Saved Payment:", saveData);
-
-      toast.success("Payment successful!");
-    } catch (err) {
-      console.error("Error:", err);
-      toast.error("Something went wrong during payment");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePaypalPayment = () => {
-    alert("Redirecting to PayPal checkout...");
-    // Integrate PayPal SDK here
-  };
-
-  const handleCryptoPayment = () => {
-    alert("Connecting to crypto wallet (e.g., MetaMask)...");
-    // Integrate MetaMask or crypto API here
-  };
-
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
-      {/* Image */}
-
-      <div className="text-white flex items-center sm:hidden">
+      {/* NFT Content */}
+   <div className="text-white flex items-center sm:hidden">
         <Link to="/buy-nfa" className="border-b-2 border-blue-500">
           Overview
         </Link>
@@ -256,9 +251,9 @@ function Buy1() {
         </div>
       </div>
 
-      {/* --------------------------------------------------------------- */}
 
-      {/* First Modal */}
+      {/* ------------------ First Modal ------------------- */}
+    {/* First Modal */}
       {isOpen && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
@@ -308,12 +303,16 @@ function Buy1() {
               <button onClick={closeModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
+                  <div
+                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
+                    
+                  ></div>
 
                   {/* Left angled border */}
                   <div
                     className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
                     style={{
+                     
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -323,6 +322,7 @@ function Buy1() {
                   <div
                     className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
                     style={{
+                    
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8", // ~2.42px
                     }}
@@ -352,10 +352,7 @@ function Buy1() {
                 </div>
               </button>
 
-              <button
-                className="w-full md:w-auto"
-                onClickCapture={openSecondModal}
-              >
+              <button className="w-full md:w-auto" onClickCapture={openSecondModal}>
                 <CustomButton text="Buy Now" />
               </button>
             </div>
@@ -363,9 +360,8 @@ function Buy1() {
         </div>
       )}
 
-      {/* ---------------------------------------------------------  */}
-
-      {/* Second Modal */}
+      {/* ------------------ Second Modal ------------------- */}
+    {/* Second Modal */}
       {isSecondOpen && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
@@ -405,15 +401,19 @@ function Buy1() {
             </div>
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
-              <button onClick={closeSecondModal}>
+               <button onClick={closeSecondModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
+                  <div
+                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
+                    
+                  ></div>
 
                   {/* Left angled border */}
                   <div
                     className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
                     style={{
+                     
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -423,6 +423,7 @@ function Buy1() {
                   <div
                     className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
                     style={{
+                    
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8", // ~2.42px
                     }}
@@ -451,93 +452,59 @@ function Buy1() {
                   ></div>
                 </div>
               </button>
-              <button onClick={() => openThirdModal(item.price + 0.5)}>
-                <CustomButton text="Confirm" />
-              </button>
+              
+<button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
+  <CustomButton text="Confirm" />
+</button>
+
             </div>
           </div>
         </div>
       )}
 
-      {/* Third Modal (Connect Wallet) */}
+      {/* ------------------ Third Modal (Payment) ------------------- */}
       {isThirdOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 pt-16 p-4">
-          <div className="bg-gray-800 rounded-xl max-w-md w-full mx-auto relative border border-gray-700 shadow-2xl mt-8">
-            {/* Header */}
-            <div className="px-6 py-4 border-b border-gray-700">
-              <div className="flex items-center justify-between">
-                <h2 className="text-white text-lg font-semibold">
-                  Select Payment Method
-                </h2>
-                <button
-                  onClick={closeThirdModal}
-                  className="text-gray-400 hover:text-white transition-colors duration-200 text-xl font-light bg-gray-700 hover:bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-gray-400 text-sm mt-1">
-                Choose your preferred payment option
-              </p>
-            </div>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+            <button
+              onClick={closeThirdModal}
+              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+            >
+              ×
+            </button>
 
-            {/* Payment Options */}
-            <div className="p-6 space-y-4">
-              {/* Stripe */}
+            <h2 className="text-white text-lg font-bold text-center my-4">Select Payment Method</h2>
+            <hr className="border-t border-gray-600 my-4" />
+
+            <div className="flex flex-col items-center gap-4 mb-6 mt-4">
               <button
-                onClick={handleStripePayment}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg border border-gray-300 hover:border-gray-400 transition-all duration-200 flex items-center justify-center group shadow-sm"
+                onClick={() => setShowStripeForm(true)}
+                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
               >
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/stripe-4.svg"
-                  alt="Stripe"
-                  className="w-5 h-5 mr-3"
-                />
                 Pay with Stripe
-                <span className="ml-2 text-xs text-gray-500 group-hover:text-gray-700">
-                  • Cards & Bank
-                </span>
               </button>
-
-              {/* PayPal */}
               <button
                 onClick={handlePaypalPayment}
-                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg transition-all duration-200 flex items-center justify-center group shadow-sm"
+                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
               >
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/paypal-3.svg"
-                  alt="PayPal"
-                  className="w-5 h-5 mr-3 bg-white p-0.5 rounded"
-                />
                 Pay with PayPal
-                <span className="ml-2 text-xs text-blue-200 group-hover:text-blue-100">
-                  • Secure
-                </span>
               </button>
-
-              {/* Crypto */}
               <button
                 onClick={handleCryptoPayment}
-                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg border border-gray-700 hover:border-gray-600 transition-all duration-200 flex items-center justify-center group shadow-sm"
+                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
               >
-                <img
-                  src="https://cdn.worldvectorlogo.com/logos/bitcoin-btc.svg"
-                  alt="Cryptocurrency"
-                  className="w-5 h-5 mr-3 bg-orange-500 rounded-full p-0.5"
-                />
                 Pay with Crypto
-                <span className="ml-2 text-xs text-gray-400 group-hover:text-gray-300">
-                  • Bitcoin & More
-                </span>
               </button>
             </div>
 
-            {/* Footer */}
-            <div className="px-6 py-4 bg-gray-850 rounded-b-xl border-t border-gray-700">
-              <button
-                onClick={closeThirdModal}
-                className="w-full text-gray-400 hover:text-white text-sm font-medium py-2.5 hover:bg-gray-750 rounded-lg transition-colors duration-200"
-              >
+            {showStripeForm && (
+              <Elements stripe={stripePromise}>
+                <StripePaymentForm amount={finalPrice} user={user} closeModal={closeThirdModal} />
+              </Elements>
+            )}
+
+            <div className="flex justify-center mt-4">
+              <button onClick={closeThirdModal} className="text-gray-400 hover:text-white font-medium">
                 Cancel Payment
               </button>
             </div>
