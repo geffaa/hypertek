@@ -12,6 +12,8 @@ import symbol from "../../assets/images/login/Symbol.svg.png";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { BACKEND_BASE_URL } from "../../Config"
+
 
 
 
@@ -75,7 +77,7 @@ const [ userData , setUserData ] = useState({});
       try {
         /// get the land , market and activity through
         const res = await axios.get(
-          "http://localhost:3000/api/v1/market/getMarket"
+          `${BACKEND_BASE_URL}/api/v1/market/getMarket`
         );
        
         if (res.data?.data) setMarketData(res.data.data);
@@ -97,7 +99,7 @@ const [ userData , setUserData ] = useState({});
 useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
@@ -214,14 +216,15 @@ console.log("Full Name:", userData.FullName);
                   </div>
 
                   {/* Large screens: show on hover */}
-                  <div className="hidden lg:group-hover:block transition-all duration-300 w-full">
-                    <button onClick={()=>openModal(item)} className="w-full">
-                      <CustomButton text="List Now" />
-                    </button>
-                  </div>
+<div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
+  <button onClick={() => openModal(item)}>
+    <CustomButton text="List Now" />
+  </button>
+</div>
+
 
                   {/* No Listing text for hover state on large screens */}
-                  <div className="lg:group-hover:hidden text-gray-400 text-sm mt-2 transition-all duration-300">
+                  <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm mt-2 transition-all duration-300">
                     No Listing
                   </div>
                 </div>

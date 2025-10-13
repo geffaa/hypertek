@@ -13,6 +13,8 @@ import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { ethers } from "ethers";
+import { BACKEND_BASE_URL } from "../Config"
+
 
 function Login() {
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ function Login() {
       return;
     }
     try {
-      const res = await axios.post("https://api-hyper-tek-games.deventiatech.com/api/v1/user/login", {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/login`, {
         Email: formData.email,
         Password: formData.password,
       }); 
@@ -59,7 +61,7 @@ function Login() {
   // ---------------- Google Login ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post("https://api-hyper-tek-games.deventiatech.com/api/v1/user/google", {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
         token: credentialResponse.credential,
       });
 
@@ -81,7 +83,7 @@ function Login() {
 
   // ---------------- Discord Login ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
-  const REDIRECT_URI = "http://localhost:5173/signin";
+  const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
     REDIRECT_URI
   )}&response_type=code&scope=identify%20email`;
@@ -98,7 +100,7 @@ function Login() {
     const fetchDiscordUser = async () => {
       try {
         const res = await axios.post(
-          "https://api-hyper-tek-games.deventiatech.com/api/v1/user/discord",
+          `${BACKEND_BASE_URL}/api/v1/user/discord`,
           { code }
         );
 
@@ -145,7 +147,7 @@ function Login() {
       });
       console.log("Previous permissions cleared");
     } catch (error) {
-      console.log("No previous permissions to clear");
+      console.log("No previous permissions to clear",error);
     }
 
     // ✅ STEP 2: Request fresh connection
@@ -189,7 +191,7 @@ function Login() {
 
     // Continue with backend...
     const res = await axios.post(
-      "https://api-hyper-tek-games.deventiatech.com/api/v1/user/MetaMask",
+      `${BACKEND_BASE_URL}/api/v1/user/MetaMask`,
       { 
         address: address.toLowerCase(),
         signature, 

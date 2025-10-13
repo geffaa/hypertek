@@ -9,6 +9,7 @@ import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { BACKEND_BASE_URL } from "../../Config"
 
 function PersonalActivity() {
   /// get the activity from the backend
@@ -22,7 +23,7 @@ function PersonalActivity() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
@@ -52,7 +53,7 @@ function PersonalActivity() {
         }
 
         const activity = await axios.get(
-          `http://localhost:3000/api/v1/activity/${loginUserId}`
+          `${BACKEND_BASE_URL}/api/v1/activity/${loginUserId}`
         );
         console.log("your activity data in the console :", activity);
 

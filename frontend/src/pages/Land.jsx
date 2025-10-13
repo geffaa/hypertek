@@ -4,12 +4,12 @@ import { FiSearch } from "react-icons/fi";
 
 import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
-import popularCollections from "../assets/images/popular/popolar.png";
 import CustomButton from '../Components/Buttons/Button1';
 import Logo from "../assets/images/logo.png";
 import land1Image from "../assets/images/Overview/land1.jpg";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks"
 import axios from 'axios';
+import { BACKEND_BASE_URL } from "../Config"
 
 
 function Land() {
@@ -22,7 +22,7 @@ function Land() {
         try {
           /// get the land , market and activity through
           const res = await axios.get(
-            "http://localhost:3000/api/v1/land/getland"
+            `${BACKEND_BASE_URL}/api/v1/land/getland`
           );
 
          

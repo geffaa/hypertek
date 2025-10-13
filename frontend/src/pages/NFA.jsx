@@ -11,6 +11,7 @@ import symbol from "../assets/images/login/Symbol.svg.png";
 import { Link } from "react-router-dom";
 import InfoIcon from "../assets/images/info.png"
 import axios from "axios";
+import { BACKEND_BASE_URL } from "../Config"
 
 function NFA() {
   // ✅ State for multiple modals
@@ -67,7 +68,7 @@ function NFA() {
         try {
           /// get the land , market and activity through
           const res = await axios.get(
-            "http://localhost:3000/api/v1/market/getMarket"
+            `${BACKEND_BASE_URL}/api/v1/market/getMarket`
           );
 
          

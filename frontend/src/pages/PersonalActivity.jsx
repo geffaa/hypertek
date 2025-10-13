@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import axios from "axios";
+import { BACKEND_BASE_URL } from "../Config"
+
 
 function PersonalActivity() {
   const [activityData, setActivityData] = useState([]);
@@ -17,7 +19,7 @@ function PersonalActivity() {
         /// get the land , market and activity through
 
         const activity = await axios.get(
-          "http://localhost:3000/api/v1/activity/getActivity"
+          `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
         );
         console.log("your activity data in the console :", activity);
 
