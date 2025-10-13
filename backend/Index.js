@@ -10,7 +10,7 @@ import { Route } from "./Routes/User.js";
 import router from "./Routes/MarketPlace.js";
 import Landrouter from "./Routes/LandRoute.js";
 import ActivityRouter from "./Routes/Activity.js";
-
+import StripRoute from "./Routes/Stripe.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -58,6 +58,7 @@ app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
+app.use("/api/v1/stripe",StripRoute)
 
 // Global error handler
 app.use((err, req, res, next) => {
