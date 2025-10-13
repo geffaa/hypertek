@@ -39,7 +39,7 @@ const StripePaymentForm = ({ amount, user, closeModal }) => {
       setLoading(true);
 
       // Step 1: Create PaymentIntent
-      const res = await fetch(`${BACKEND_BASE_URL}/stripe/create-payment`, {
+      const res = await fetch(`http://localhost:4700/api/v1/stripe/create-payment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: amount * 100, userId: user.id }),
@@ -62,7 +62,7 @@ const StripePaymentForm = ({ amount, user, closeModal }) => {
       }
 
       // Step 3: Save Payment
-      await fetch(`${BACKEND_BASE_URL}/stripe/payment-success`, {
+      await fetch(`http://localhost:4700/api/v1/stripe/payment-success`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,7 +80,7 @@ const StripePaymentForm = ({ amount, user, closeModal }) => {
       toast.success("Payment successful!");
       closeModal();
     } catch (err) {
-      console.error(err);
+      console.error("your payment error are :",err);
       toast.error("Payment failed!");
     } finally {
       setLoading(false);
@@ -463,54 +463,62 @@ function Buy1() {
       )}
 
       {/* ------------------ Third Modal (Payment) ------------------- */}
-      {isThirdOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
-            <button
-              onClick={closeThirdModal}
-              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
-            >
-              ×
-            </button>
+  {/* ------------------ Third Modal (Payment) ------------------- */}
+{isThirdOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
+    <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+      <button onClick={closeThirdModal} className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition">×</button>
 
-            <h2 className="text-white text-lg font-bold text-center my-4">Select Payment Method</h2>
-            <hr className="border-t border-gray-600 my-4" />
+      <h2 className="text-white text-lg font-bold text-center my-4">
+        Select Payment Method
+      </h2>
+      <hr className="border-t border-gray-600 my-4" />
 
-            <div className="flex flex-col items-center gap-4 mb-6 mt-4">
-              <button
-                onClick={() => setShowStripeForm(true)}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Stripe
-              </button>
-              <button
-                onClick={handlePaypalPayment}
-                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with PayPal
-              </button>
-              <button
-                onClick={handleCryptoPayment}
-                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Crypto
-              </button>
-            </div>
+      <div className="flex flex-col items-center gap-4 mb-6 mt-4">
+        {/* Stripe Checkout */}
+        <button
+          onClick={async () => {
+            try {
+              const res = await fetch(`${BACKEND_BASE_URL}/stripe/create-checkout-session`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: finalPrice * 100, userId: user.id }),
+              });
+              const data = await res.json();
+              if (data.url) {
+                window.location.href = data.url; // Redirect to Stripe hosted checkout
+              } else {
+                toast.error("Failed to start Stripe checkout");
+              }
+            } catch (err) {
+              console.error(err);
+              toast.error("Stripe checkout error");
+            }
+          }}
+          className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
+        >
+          Pay with Stripe
+        </button>
 
-            {showStripeForm && (
-              <Elements stripe={stripePromise}>
-                <StripePaymentForm amount={finalPrice} user={user} closeModal={closeThirdModal} />
-              </Elements>
-            )}
+        <button onClick={handlePaypalPayment} className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
+          Pay with PayPal
+        </button>
 
-            <div className="flex justify-center mt-4">
-              <button onClick={closeThirdModal} className="text-gray-400 hover:text-white font-medium">
-                Cancel Payment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        <button onClick={handleCryptoPayment} className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
+          Pay with Crypto
+        </button>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <button onClick={closeThirdModal} className="text-gray-400 hover:text-white font-medium">
+          Cancel Payment
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 }

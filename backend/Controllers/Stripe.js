@@ -1,69 +1,82 @@
-
-
-
+// controllers/stripeController.js
 import dotenv from "dotenv";
 import Stripe from "stripe";
-import { Payment } from "../Models/Payment.js"; // ✅ Import your MongoDB schema
+import { Payment } from "../Models/Payment.js";
 
-dotenv.config({ path: "./Config/.env" }); // Load environment variables
+dotenv.config({ path: "./Config/.env" });
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ✅ STEP 1: Create Stripe Payment Intent
-export const ConnectStripe = async (req, res) => {
+// ✅ Create Stripe Checkout Session
+export const createCheckoutSession = async (req, res) => {
   try {
     const { amount, userId } = req.body;
 
-    if (!process.env.STRIPE_SECRET_KEY) {
-      return res.status(400).json({
-        message: "Stripe secret key is missing in .env file",
-      });
+    if (!amount || !userId) {
+      return res.status(400).json({ message: "Amount and userId are required" });
     }
 
-    // ✅ Create a new payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd",
-      automatic_payment_methods: { enabled: true },
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"], // or add others if needed
+      mode: "payment",
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Your Payment",
+            },
+            unit_amount: amount, // in cents
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: `${process.env.FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.FRONTEND_URL}/payment-cancel`,
+      metadata: { userId },
     });
 
-    res.status(200).json({
-      clientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id,
-    });
+    res.status(200).json({ url: session.url });
   } catch (error) {
-    console.error("Stripe Error:", error);
+    console.error("Stripe Checkout Error:", error);
     res.status(500).json({ error: error.message });
   }
 };
 
-// ✅ STEP 2: Save payment after successful payment (frontend calls this)
-export const SaveStripePayment = async (req, res) => {
-  console.log("your req body is :",req.body);
+// ✅ Webhook to save payment
+export const stripeWebhook = async (req, res) => {
+  const sig = req.headers["stripe-signature"];
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  let event;
   try {
-    const { userId, amount, currency, paymentIntentId, transactionId,provider, paymentMethod, status } = req.body;
-
-    // ✅ Create and save payment record
-    const payment = new Payment({
-      userId,
-      amount,
-      currency,
-      provider,
-      paymentIntentId,
-      transactionId,
-      paymentMethod,
-      status,
-      createdAt: new Date(),
-    });
-
-    await payment.save();
-
-    res.status(200).json({
-      message: "Payment stored successfully!",
-      payment,
-    });
-  } catch (error) {
-    console.error("Save Payment Error:", error);
-    res.status(500).json({ error: error.message });
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.error("Webhook signature verification failed:", err);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
   }
+
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object;
+
+    try {
+      const payment = new Payment({
+        userId: session.metadata.userId,
+        amount: session.amount_total / 100,
+        currency: session.currency,
+        provider: "stripe",
+        transactionId: session.payment_intent,
+        paymentMethod: "stripe",
+        status: "paid",
+        createdAt: new Date(),
+      });
+
+      await payment.save();
+      console.log("Payment saved successfully via webhook!");
+    } catch (err) {
+      console.error("Error saving payment:", err);
+    }
+  }
+
+  res.json({ received: true });
 };

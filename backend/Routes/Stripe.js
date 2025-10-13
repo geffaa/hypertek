@@ -1,10 +1,10 @@
 import express from "express";
-import { ConnectStripe , SaveStripePayment } from "../Controllers/Stripe.js";
+import { createCheckoutSession , stripeWebhook } from "../Controllers/Stripe.js";
 
 const StripRoute = express.Router();
 
-StripRoute.post("/create-payment", ConnectStripe);
-StripRoute.post("/payment-success", SaveStripePayment);
+StripRoute.post("/create-checkout-session", createCheckoutSession);
+StripRoute.post("/webhook", stripeWebhook);
 
 
 export default StripRoute;
