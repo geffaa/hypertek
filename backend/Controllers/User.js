@@ -105,7 +105,7 @@ const ForgotPassword = async (req, res) => {
       process.env.RESET_SECRET, // <== must match
       { expiresIn: "1d" }
     );
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://hyper-tek-games.deventiatech.com/reset-password/${resetToken}`;
     // Send email
     await transporter.sendMail({
       from: `"Support" <${process.env.SMTP_EMAIL}>`,
