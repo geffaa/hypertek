@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
@@ -13,101 +13,12 @@ import buyNfaImage from "../../assets/images/popolar.png";
 import symbol from "../../assets/images/login/Symbol.svg.png"; // Wallet image
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../../Config";
 
+
 // Initialize Stripe
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
-// Stripe Payment Form Component
-const StripePaymentForm = ({ amount, user, closeModal }) => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [loading, setLoading] = useState(false);
-
-  const handleStripePayment = async (e) => {
-    e.preventDefault();
-    if (!stripe || !elements) {
-      toast.error("Stripe is not loaded yet");
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
-      toast.error("Card element not found");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      // Step 1: Create PaymentIntent
-      const res = await fetch(`http://localhost:4700/api/v1/stripe/create-payment`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: amount * 100, userId: user.id }),
-      });
-      const data = await res.json();
-
-      if (!data.clientSecret) {
-        toast.error("Client secret missing from backend");
-        return;
-      }
-
-      // Step 2: Confirm Payment
-      const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-        payment_method: { card: cardElement },
-      });
-
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      // Step 3: Save Payment
-      await fetch(`http://localhost:4700/api/v1/stripe/payment-success`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: user.id,
-          amount: amount,
-          currency: "usd",
-          provider: "stripe",
-          transactionId: paymentIntent.id,
-          paymentIntentId: paymentIntent.id,
-          paymentMethod: "stripe",
-          status: paymentIntent.status,
-        }),
-      });
-
-      toast.success("Payment successful!");
-      closeModal();
-    } catch (err) {
-      console.error("your payment error are :",err);
-      toast.error("Payment failed!");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleStripePayment} className="mt-4">
-      <div className="p-4 bg-gray-900 rounded-md border border-gray-700">
-        <CardElement
-          options={{
-            style: { base: { color: "#fff", fontSize: "16px" } },
-          }}
-        />
-      </div>
-      <button
-        type="submit"
-        className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200"
-        disabled={!stripe || !elements || loading}
-      >
-        {loading ? "Processing..." : `Pay $${amount}`}
-      </button>
-    </form>
-  );
-};
-
 function Buy1() {
+
   const location = useLocation();
   const { item } = location.state || {};
   const { user } = useSelector((state) => state.auth);
@@ -149,6 +60,23 @@ function Buy1() {
    const handleMakeOffer = () => {
     console.log("Make offer clicked");
   };
+
+
+ useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get("session_id");
+
+    if (sessionId) {
+      // ✅ Payment successful
+      alert("Payment Successful!");
+      // Optional: remove session_id from URL
+      window.history.replaceState({}, document.title, location.pathname);
+    }
+  }, [location]);
+
+
+
+
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
       {/* NFT Content */}
@@ -476,29 +404,39 @@ function Buy1() {
 
       <div className="flex flex-col items-center gap-4 mb-6 mt-4">
         {/* Stripe Checkout */}
-        <button
-          onClick={async () => {
-            try {
-              const res = await fetch(`${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: finalPrice * 100, userId: user.id }),
-              });
-              const data = await res.json();
-              if (data.url) {
-                window.location.href = data.url; // Redirect to Stripe hosted checkout
-              } else {
-                toast.error("Failed to start Stripe checkout");
-              }
-            } catch (err) {
-              console.error(err);
-              toast.error("Stripe checkout error");
-            }
-          }}
-          className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-        >
-          Pay with Stripe
-        </button>
+
+
+
+<button
+  onClick={async () => {
+    try {
+      const res = await fetch(`http://localhost:4700/api/v1/stripe/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: finalPrice * 100,   // in cents
+          userId: user.id,
+          redirectUrl:`${window.location.origin}/dashboard`, // pass current page URL
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url; // Redirect to Stripe Checkout
+      } else {
+        toast.error("Failed to start Stripe checkout");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Stripe checkout error");
+    }
+  }}
+  className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
+>
+  Pay with Stripe
+</button>
+
 
         <button onClick={handlePaypalPayment} className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
           Pay with PayPal
