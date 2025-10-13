@@ -6,6 +6,7 @@ import PageBackground from "../Common/BgEffect";
 import axios from "axios";
 import GlowingOrb from "../Common/BgColoring";
 import { Link } from "react-router-dom";
+import { BACKEND_BASE_URL } from "../../Config"
 
 function PopularCollections() {
 
@@ -16,7 +17,7 @@ function PopularCollections() {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/land/getland");
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/land/getland`);
         if (res.data.success) {
           setLandData(res.data.data); // assuming backend returns { success, data }
         } else {

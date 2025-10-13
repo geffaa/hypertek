@@ -15,9 +15,13 @@ import discard from "../assets/images/login/discard.png";
 import { ethers } from "ethers";
 
 
+import { BACKEND_BASE_URL } from "../Config"
+
+
 import { GoogleLogin } from "@react-oauth/google";
 
 function Signup() {
+  console.log("your backend url are :",BACKEND_BASE_URL);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +55,7 @@ function Signup() {
     }
 
     try {
-      const res = await axios.post(`https://api-hyper-tek-games.deventiatech.com/api/v1/user/signup`, {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
         Email: formData.email,
         Password: formData.password,
         ConfirmPassword: formData.confirmPassword,
@@ -73,7 +77,7 @@ function Signup() {
   // ---------------- Google Signup ----------------
   const handleGoogleLoginSuccess = async (credentialResponse) => {
     try {
-      const res = await axios.post("https://api-hyper-tek-games.deventiatech.com/api/v1/user/google", {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
         token: credentialResponse.credential,
       });
 
@@ -99,7 +103,7 @@ function Signup() {
 
   // ---------------- Discord Signup ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
-  const REDIRECT_URI = "http://localhost:5173/signin";
+  const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
     REDIRECT_URI
   )}&response_type=code&scope=identify%20email`;
@@ -114,7 +118,7 @@ function Signup() {
 
     const fetchDiscordUser = async () => {
       try {
-        const res = await axios.post("https://api-hyper-tek-games.deventiatech.com/api/v1/user/discord", { code });
+        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/discord`, { code });
         if (res.data.success && res.data.user) {
           dispatch(
             loginSuccess({
@@ -162,7 +166,7 @@ const handleLogin = async () => {
       });
       console.log("Previous permissions cleared");
     } catch (error) {
-      console.log("No previous permissions to clear");
+      console.log("No previous permissions to clear",error);
     }
 
     // ✅ STEP 2: Request fresh connection
@@ -206,7 +210,7 @@ const handleLogin = async () => {
 
     // Continue with backend...
     const res = await axios.post(
-      "https://api-hyper-tek-games.deventiatech.com/api/v1/user/MetaMask",
+      `${BACKEND_BASE_URL}/api/v1/user/MetaMask`,
       { 
         address: address.toLowerCase(),
         signature, 

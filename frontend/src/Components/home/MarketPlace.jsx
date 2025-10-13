@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BACKEND_BASE_URL } from "../../Config"
+
 
 function PopularCollections() {
   const [marketData, setMarketData] = useState([]); 
@@ -13,7 +15,7 @@ function PopularCollections() {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/market/getMarket");
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/market/getMarket`);
         if (res.data.success) {
           setMarketData(res.data.data); // assuming backend returns { success, data }
         } else {

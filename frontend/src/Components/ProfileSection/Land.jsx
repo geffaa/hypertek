@@ -15,6 +15,8 @@ import symbol from "../../assets/images/login/Symbol.svg.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { BACKEND_BASE_URL } from "../../Config"
+
 
 function Land() { 
      const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
@@ -70,7 +72,7 @@ function Land() {
 useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
           headers: {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
@@ -98,7 +100,7 @@ useEffect(() => {
         try {
          
           const landres = await axios.get(
-            "http://localhost:3000/api/v1/land/getLand"
+            `${BACKEND_BASE_URL}/api/v1/land/getLand`
           );
        
           if (landres.data?.data) setLandketData(landres.data.data);

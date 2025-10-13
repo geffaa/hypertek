@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
+import { BACKEND_BASE_URL } from "../../Config"
 
 
 function EditProfile() {
@@ -92,7 +93,7 @@ const handleLogout = () => {
       if (file) formData.append("Avatar", file);
 
       const res = await axios.put(
-        "http://localhost:3000/api/v1/profile",
+        `${BACKEND_BASE_URL}/api/v1/profile`,
         formData,
         {
           headers: {
@@ -135,7 +136,7 @@ const handleLogout = () => {
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
               <img
-                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
+                   src={userData.Avatar ? `${BACKEND_BASE_URL}${userData.Avatar}` : Profile}
                 alt="Profile"
                 className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white"
                 onClick={handleProfileClick}

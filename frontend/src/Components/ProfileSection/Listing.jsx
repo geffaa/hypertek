@@ -10,6 +10,7 @@ import land1Image from "../../assets/images/Overview/land1.jpg";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { BACKEND_BASE_URL } from "../../Config"
 
 function PersonalActivity() {
 
@@ -57,7 +58,7 @@ function PersonalActivity() {
    useEffect(() => {
       const fetchProfile = async () => {
         try {
-          const res = await axios.get("http://localhost:3000/api/v1/getProfile", {
+          const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
             headers: {
               Authorization: `Bearer ${token}`, // 👈 send token here
             },
@@ -132,7 +133,7 @@ function PersonalActivity() {
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <img
-                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
+                   src={userData.Avatar ? `${BACKEND_BASE_URL}${userData.Avatar}` : Profile}
 
 alt="Profile"
                 className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"

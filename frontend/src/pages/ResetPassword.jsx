@@ -6,6 +6,9 @@ import { FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { BACKEND_BASE_URL } from "../Config"
+
+
 
 function ResetPassword() {
   const { token } = useParams(); // Get token from URL
@@ -39,7 +42,7 @@ function ResetPassword() {
     setLoading(true);
   try {
   const res = await axios.post(
-    `http://localhost:3000/api/v1/user/reset-password/${token}`,
+    `${BACKEND_BASE_URL}/api/v1/user/reset-password/${token}`,
     {
       Password: formData.password,
       ConfirmPassword: formData.confirmPassword

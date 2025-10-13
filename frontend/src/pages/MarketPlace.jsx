@@ -12,6 +12,8 @@ import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 
+import { BACKEND_BASE_URL } from "../Config"
+
 function MarketPlace() {
   //// get the nfa data
   const [marketData, setMarketData] = useState([]);
@@ -24,13 +26,13 @@ function MarketPlace() {
       try {
         /// get the land , market and activity through
         const res = await axios.get(
-          "http://localhost:3000/api/v1/market/getMarket"
+          `${BACKEND_BASE_URL}/api/v1/market/getMarket`
         );
         const landres = await axios.get(
-          "http://localhost:3000/api/v1/land/getLand"
+          `${BACKEND_BASE_URL}/api/v1/land/getLand`
         );
         const activity = await axios.get(
-          "http://localhost:3000/api/v1/activity/getActivity"
+          `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
         );
         console.log("your activity data in the console :", activity);
         if (res.data?.data) setMarketData(res.data.data);
@@ -378,31 +380,37 @@ const getDaysAgo = (dateString) => {
             <div className=" w-full flex flex-col gap-6 lg:gap-8">
               {/* Header */}
               <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
-                <div className="flex flex-col gap-2 items-start">
-                  <h1 className="text-white uppercase md:text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                    ACTIVITIES
-                  </h1>
-                  <div className="flex gap-2">
-                    <div className="h-[3px] w-4 md:w-8 lg:w-12 bg-white"></div>
-                    <div className="h-[3px]  w-4 md:w-12 lg:w-20 bg-white"></div>
-                    <div className="h-[3px] w-4 md:w-6 lg:w-8 bg-white"></div>
-                    <div className="h-[3px] w-8 md:w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-                  </div>
-                </div>
+               <div className="flex flex-col gap-3 w-full">
+  {/* Header Row */}
+  <div className="flex justify-between items-center w-full">
+    {/* Left Side - Title & Lines */}
+    <div className="flex flex-col items-start">
+      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+        ACTIVITIES
+      </h1>
 
-                <div className="flex justify-end items-center mt-2 sm:mt-0 text-white">
-                  <Link
-                    to="/nfa-land"
-                    className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
-                  >
-                    <span>Expand All</span>
-                    <ArrowRight
-                      size={16}
-                      className="sm:w-5 sm:h-5"
-                      strokeWidth={2}
-                    />
-                  </Link>
-                </div>
+      {/* Decorative lines only on the left */}
+      <div className="flex gap-2 mt-1">
+        <div className="h-[3px] w-4 md:w-8 lg:w-12 bg-white"></div>
+        <div className="h-[3px] w-4 md:w-12 lg:w-20 bg-white"></div>
+        <div className="h-[3px] w-4 md:w-6 lg:w-8 bg-white"></div>
+        <div className="h-[3px] w-8 md:w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+      </div>
+    </div>
+
+    {/* Right Side - Link */}
+    <Link
+      to="/nfa-land"
+      className="flex items-center gap-1 sm:gap-2 text-white hover:text-gray-300 transition text-xs sm:text-sm md:text-base mt-2 sm:mt-0"
+    >
+      <span>Expand All</span>
+      <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
+    </Link>
+  </div>
+</div>
+
+
+              
               </div>
 
               {/* Table */}
