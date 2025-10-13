@@ -8,31 +8,31 @@ dotenv.config({ path: "./Config/.env" });
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ✅ Create Stripe Checkout Session
+
+
 export const createCheckoutSession = async (req, res) => {
   try {
-    const { amount, userId } = req.body;
+    const { amount, userId, redirectUrl } = req.body;
 
-    if (!amount || !userId) {
-      return res.status(400).json({ message: "Amount and userId are required" });
+    if (!amount || !userId || !redirectUrl) {
+      return res.status(400).json({ message: "Amount, userId and redirectUrl are required" });
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"], // or add others if needed
+      payment_method_types: ["card"],
       mode: "payment",
       line_items: [
         {
           price_data: {
             currency: "usd",
-            product_data: {
-              name: "Your Payment",
-            },
-            unit_amount: amount, // in cents
+            product_data: { name: "Your Payment" },
+            unit_amount: amount,
           },
           quantity: 1,
         },
       ],
-      success_url: `${process.env.FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.FRONTEND_URL}/payment-cancel`,
+      success_url: `${redirectUrl}?session_id={CHECKOUT_SESSION_ID}`, // redirect back to same page
+      cancel_url: redirectUrl,
       metadata: { userId },
     });
 
@@ -42,6 +42,7 @@ export const createCheckoutSession = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // ✅ Webhook to save payment
 export const stripeWebhook = async (req, res) => {

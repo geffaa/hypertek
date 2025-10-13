@@ -6,21 +6,25 @@ function UserDashboard() {
   const location = useLocation();
 
   useEffect(() => {
+    // Get query params
     const params = new URLSearchParams(location.search);
-    const discordLogin = params.get('discordLogin');
-    console.log("your params in dashboard :",params);
+    const sessionId = params.get('session_id');
 
-    if (discordLogin) {
-      toast.success('Discord login successful!');
+    if (sessionId) {
+      // Show success toast
+      toast.success('Payment Successful!');
 
-      // Remove query param from URL without remounting
+      // Optionally, you can call backend to confirm session details
+      // fetch(`/api/v1/stripe/confirm-session?session_id=${sessionId}`)
+
+      // Remove session_id from URL without reloading
       const newUrl = window.location.pathname; // just /dashboard
       window.history.replaceState({}, document.title, newUrl);
     }
   }, [location]);
 
   return (
-    <div>
+    <div className='text-white font-bold flex justify-center items-center h-screen mt-24'>
       <h1>Welcome to Dashboard</h1>
     </div>
   );
