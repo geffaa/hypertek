@@ -11,6 +11,9 @@ import router from "./Routes/MarketPlace.js";
 import Landrouter from "./Routes/LandRoute.js";
 import ActivityRouter from "./Routes/Activity.js";
 import StripRoute from "./Routes/Stripe.js";
+import StripSaveRoute from "./Routes/StripeSave.js";
+import { stripeWebhook } from "./Controllers/Stripe.js"; // Import the webhook function directly
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,8 +22,6 @@ dotenv.config({ path: path.join(__dirname, "Config", ".env") });
 const app = express();
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // CORS setup
 const allowedOrigins = [
@@ -29,19 +30,19 @@ const allowedOrigins = [
   "https://www.hyper-tek-games.deventiatech.com",
   "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
   "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app",
+  "https://dreich-extortionately-shavonne.ngrok-free.dev/"
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman or server-to-server)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("CORS policy: Not allowed by CORS"));
       }
     },
-    credentials: true, // if you use cookies
+    credentials: true,
   })
 );
 
@@ -53,12 +54,23 @@ try {
   console.error("❌ Database connection error:", error);
 }
 
-// Routes
+
+// i set this route here becasue if i put this rotue below the middleware then it will not work
+app.use('/api/v1/stripe', StripSaveRoute);
+
+
+// ⚠️ NOW apply regular JSON parsing for all OTHER routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Other routes
 app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
-app.use("/api/v1/stripe",StripRoute)
+
+// Stripe routes (EXCLUDE webhook from these since it's already defined above)
+app.use("/api/v1/stripe", StripRoute);
 
 // Global error handler
 app.use((err, req, res, next) => {

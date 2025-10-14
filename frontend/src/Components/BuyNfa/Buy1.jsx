@@ -1,26 +1,28 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  Elements,
+  CardElement,
+  
+} from "@stripe/react-stripe-js";
 
 import CustomButton from "../Buttons/Button1";
 import popularCollections from "../../assets/images/popolar.png";
 import { FiEye } from "react-icons/fi";
 import { FiEdit2 } from "react-icons/fi";
 import buyNfaImage from "../../assets/images/popolar.png";
-import symbol from "../../assets/images/login/Symbol.svg.png"; // Wallet image
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../../Config";
 
-
 // Initialize Stripe
-const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
-
+ 
 function Buy1() {
-
   const location = useLocation();
   const { item } = location.state || {};
+
+  console.log("your seelcted item is here :",item);
   const { user } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -39,14 +41,14 @@ function Buy1() {
   const closeSecondModal = () => setIsSecondOpen(false);
 
   const openThirdModal = (price) => {
-  if (!price || isNaN(price)) {
-    toast.error("Invalid price");
-    return;
-  }
-  setFinalPrice(price);
-  setIsSecondOpen(false);
-  setIsThirdOpen(true);
-};
+    if (!price || isNaN(price)) {
+      toast.error("Invalid price");
+      return;
+    }
+    setFinalPrice(price);
+    setIsSecondOpen(false);
+    setIsThirdOpen(true);
+  };
 
   const closeThirdModal = () => {
     setIsThirdOpen(false);
@@ -56,13 +58,11 @@ function Buy1() {
   const handlePaypalPayment = () => toast("Redirecting to PayPal checkout...");
   const handleCryptoPayment = () => toast("Connecting to crypto wallet...");
 
-
-   const handleMakeOffer = () => {
+  const handleMakeOffer = () => {
     console.log("Make offer clicked");
   };
 
-
- useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const sessionId = params.get("session_id");
 
@@ -74,13 +74,10 @@ function Buy1() {
     }
   }, [location]);
 
-
-
-
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
       {/* NFT Content */}
-   <div className="text-white flex items-center sm:hidden">
+      <div className="text-white flex items-center sm:hidden">
         <Link to="/buy-nfa" className="border-b-2 border-blue-500">
           Overview
         </Link>
@@ -179,9 +176,8 @@ function Buy1() {
         </div>
       </div>
 
-
       {/* ------------------ First Modal ------------------- */}
-    {/* First Modal */}
+      {/* First Modal */}
       {isOpen && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
@@ -231,16 +227,12 @@ function Buy1() {
               <button onClick={closeModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div
-                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
-                    
-                  ></div>
+                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
 
                   {/* Left angled border */}
                   <div
                     className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
                     style={{
-                     
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -250,7 +242,6 @@ function Buy1() {
                   <div
                     className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
                     style={{
-                    
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8", // ~2.42px
                     }}
@@ -280,7 +271,10 @@ function Buy1() {
                 </div>
               </button>
 
-              <button className="w-full md:w-auto" onClickCapture={openSecondModal}>
+              <button
+                className="w-full md:w-auto"
+                onClickCapture={openSecondModal}
+              >
                 <CustomButton text="Buy Now" />
               </button>
             </div>
@@ -289,7 +283,7 @@ function Buy1() {
       )}
 
       {/* ------------------ Second Modal ------------------- */}
-    {/* Second Modal */}
+      {/* Second Modal */}
       {isSecondOpen && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
@@ -329,19 +323,15 @@ function Buy1() {
             </div>
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
-               <button onClick={closeSecondModal}>
+              <button onClick={closeSecondModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div
-                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
-                    
-                  ></div>
+                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
 
                   {/* Left angled border */}
                   <div
                     className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
                     style={{
-                     
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -351,7 +341,6 @@ function Buy1() {
                   <div
                     className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
                     style={{
-                    
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8", // ~2.42px
                     }}
@@ -380,83 +369,98 @@ function Buy1() {
                   ></div>
                 </div>
               </button>
-              
-<button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
-  <CustomButton text="Confirm" />
-</button>
 
+              <button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
+                <CustomButton text="Confirm" />
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {/* ------------------ Third Modal (Payment) ------------------- */}
-  {/* ------------------ Third Modal (Payment) ------------------- */}
-{isThirdOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
-    <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
-      <button onClick={closeThirdModal} className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition">×</button>
+      {/* ------------------ Third Modal (Payment) ------------------- */}
+      {isThirdOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+            <button
+              onClick={closeThirdModal}
+              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+            >
+              ×
+            </button>
 
-      <h2 className="text-white text-lg font-bold text-center my-4">
-        Select Payment Method
-      </h2>
-      <hr className="border-t border-gray-600 my-4" />
+            <h2 className="text-white text-lg font-bold text-center my-4">
+              Select Payment Method
+            </h2>
+            <hr className="border-t border-gray-600 my-4" />
 
-      <div className="flex flex-col items-center gap-4 mb-6 mt-4">
-        {/* Stripe Checkout */}
+            <div className="flex flex-col items-center gap-4 mb-6 mt-4">
+              {/* Stripe Checkout */}
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch(
+                      `http://localhost:4700/api/v1/stripe/create-checkout-session`,
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          amount: finalPrice * 100, // in cents
+                          userId: user.id,
+                          redirectUrl: `${window.location.origin}/dashboard`,
+                          // Add the new fields here:
+                          gameTitle:item?.title, // Replace with actual game title
+                          gameId:item?._id, // Replace with actual game ID
+                          itemType: "game", // or "in_game_item", "subscription", etc.
+                          platform: "pc", // or "playstation", "xbox", etc.
+                        }),
+                      }
+                    );
 
+                    const data = await res.json();
 
+                    if (data.url) {
+                      window.location.href = data.url; // Redirect to Stripe Checkout
+                    } else {
+                      toast.error("Failed to start Stripe checkout");
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    toast.error("Stripe checkout error");
+                  }
+                }}
+                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
+              >
+                Pay with Stripe
+              </button>
+              {/* pay with paypal  */}
+              <button
+                onClick={handlePaypalPayment}
+                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
+              >
+                Pay with PayPal
+              </button>
 
-<button
-  onClick={async () => {
-    try {
-      const res = await fetch(`http://localhost:4700/api/v1/stripe/create-checkout-session`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: finalPrice * 100,   // in cents
-          userId: user.id,
-          redirectUrl:`${window.location.origin}/dashboard`, // pass current page URL
-        }),
-      });
+              <button
+                onClick={handleCryptoPayment}
+                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
+              >
+                Pay with Crypto
+              </button>
+            </div>
 
-      const data = await res.json();
-
-      if (data.url) {
-        window.location.href = data.url; // Redirect to Stripe Checkout
-      } else {
-        toast.error("Failed to start Stripe checkout");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Stripe checkout error");
-    }
-  }}
-  className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
->
-  Pay with Stripe
-</button>
-
-
-        <button onClick={handlePaypalPayment} className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
-          Pay with PayPal
-        </button>
-
-        <button onClick={handleCryptoPayment} className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
-          Pay with Crypto
-        </button>
-      </div>
-
-      <div className="flex justify-center mt-4">
-        <button onClick={closeThirdModal} className="text-gray-400 hover:text-white font-medium">
-          Cancel Payment
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={closeThirdModal}
+                className="text-gray-400 hover:text-white font-medium"
+              >
+                Cancel Payment
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
