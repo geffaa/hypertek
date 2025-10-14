@@ -378,9 +378,10 @@ const openThirdModal = (price) => {
               {/* Stripe Checkout */}
               <button
                 onClick={async () => {
+                  console.log("your backend url is here :",BACKEND_BASE_URL);
                   try {
                     const res = await fetch(
-                      `http://localhost:4700/api/v1/stripe/create-checkout-session`,
+                      `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
