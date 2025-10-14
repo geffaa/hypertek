@@ -397,6 +397,7 @@ const openThirdModal = (price) => {
                         }),
                       }
                     );
+                    console.log("your response are :",res);
 
                     const data = await res.json();
 
