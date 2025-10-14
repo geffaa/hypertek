@@ -7,6 +7,38 @@ const PaymentSchema = new mongoose.Schema({
     required: true,
   },
 
+  // Game Information
+  gameId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Game", // Reference to your Game model if you have one
+    required: false, // Make required if you always have a game
+  },
+
+  gameTitle: {
+    type: String,
+    required: true,
+  },
+
+  serialNumber: {
+    type: String,
+    required: false, // Can be generated after payment
+    unique: true,
+    sparse: true // Allows multiple null values
+  },
+
+  // Purchase Details
+  itemType: {
+    type: String,
+    enum: ["game", "in_game_item", "subscription", "dlc", "other"],
+    default: "game"
+  },
+
+  platform: {
+    type: String,
+    enum: ["pc", "playstation", "xbox", "nintendo", "mobile", "other"],
+    default: "pc"
+  },
+
   // amount in smallest unit (e.g. cents, satoshis, etc.)
   amount: {
     type: Number,
@@ -44,11 +76,16 @@ const PaymentSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["succeeded", "pending", "failed", "cancelled"],
+    enum: ["succeeded", "pending", "failed", "cancelled", "refunded"],
     default: "pending",
   },
 
-  
+  // Additional metadata for flexibility
+  metadata: {
+    type: Object,
+    default: {}
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
@@ -60,5 +97,17 @@ const PaymentSchema = new mongoose.Schema({
   },
 });
 
+// Update the updatedAt field before saving
+PaymentSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+// Static method to generate serial number
+PaymentSchema.statics.generateSerialNumber = function() {
+  const timestamp = Date.now().toString(36);
+  const random = Math.random().toString(36).substr(2, 9);
+  return `GAME-${timestamp}-${random}`.toUpperCase();
+};
 
 export const Payment = mongoose.model("Payment", PaymentSchema);
