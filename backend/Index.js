@@ -13,6 +13,8 @@ import ActivityRouter from "./Routes/Activity.js";
 import StripRoute from "./Routes/Stripe.js";
 import StripSaveRoute from "./Routes/StripeSave.js";
 import { stripeWebhook } from "./Controllers/Stripe.js"; // Import the webhook function directly
+import CryptoSaveRotue from "./Routes/CryptoSave.js";
+import CryptoSessionRotue from "./Routes/CryptoSession.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +59,7 @@ try {
 
 // i set this route here becasue if i put this rotue below the middleware then it will not work
 app.use('/api/v1/stripe', StripSaveRoute);
+app.use('/api/v1/crypto',CryptoSaveRotue)
 
 
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
@@ -71,6 +74,7 @@ app.use("/api/v1/activity", ActivityRouter);
 
 // Stripe routes (EXCLUDE webhook from these since it's already defined above)
 app.use("/api/v1/stripe", StripRoute);
+app.use("/api/v1/crypto",CryptoSessionRotue)
 
 // Global error handler
 app.use((err, req, res, next) => {
