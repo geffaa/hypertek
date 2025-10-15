@@ -402,6 +402,7 @@ function Buy1() {
                   try {
                     const res = await fetch(
                       `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
+// "http://localhost:4700/api/v1/stripe/create-checkout-session",
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
