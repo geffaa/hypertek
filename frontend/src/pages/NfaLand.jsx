@@ -423,8 +423,45 @@ const openThirdModal = (price) => {
                 Pay with PayPal
               </button>
 
-              <button
-               
+                <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch(
+                      // "http://localhost:4700/api/v1/crypto/create-crypto-session",
+                      `${BACKEND_BASE_URL}/api/v1/crypto/create-crypto-session`,
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          amount: finalPrice * 100, // in cents
+                          userId: user.id,
+                          redirectUrl: `${window.location.origin}/dashboard`,
+                          // Add the new fields here:
+                          gameTitle: item?.title, // Replace with actual game title
+                          gameId: item?._id, // Replace with actual game ID
+                          itemType: "game", // or "in_game_item", "subscription", etc.
+                          platform: "pc", // or "playstation", "xbox", etc.
+                        }),
+                      }
+                    );
+
+                    const data = await res.json();
+                    // Check HTTP status
+                    if (!res.ok) {
+                      toast.error(data.message || "Failed to start checkout");
+                      return;
+                    }
+
+                    if (data.url) {
+                      window.location.href = data.url; // Redirect to Stripe Checkout
+                    } else {
+                      toast.error("Failed to start crypto checkout");
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    toast.error("Crypto checkout error");
+                  }
+                }}
                 className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
               >
                 Pay with Crypto

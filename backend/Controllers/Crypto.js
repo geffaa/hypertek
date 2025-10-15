@@ -43,7 +43,7 @@ export const createCryptoSession = async (req, res) => {
         },
       ],
       success_url: `${redirectUrl}?status=success&session_id={CHECKOUT_SESSION_ID}&provider=crypto`,
-      cancel_url: `${redirectUrl}/`,
+      cancel_url: `/`,
       metadata: {
         userId,
         gameTitle,
