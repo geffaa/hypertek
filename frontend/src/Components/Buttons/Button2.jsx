@@ -4,7 +4,7 @@ import "../../App.css";
 
 const CustomButton2 = ({ text }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center ">
       {/* Left small bar */}
       <div
         className="bg-[#002AA8] mr-0.5"
@@ -27,12 +27,12 @@ const CustomButton2 = ({ text }) => {
 
       {/* Main button area */}
       <div
-        className="flex items-center justify-center text-white font-medium"
+        className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
         style={{
-          width: "10.5rem", // ~168px
-          height: "2.5rem", // ~39.59px
+        
+        
           // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-          border: "0.15rem solid #002AA8", // ~2.42px
+          border: "2.24px solid #002AA8", // ~2.42px
         }}
       >
         {text}
