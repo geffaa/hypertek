@@ -19,7 +19,7 @@ export const createCheckoutSession = async (req, res) => {
     }
 
     const session = await stripe.checkout.sessions.create({
-payment_method_types: ["card", "usdc"],
+payment_method_types: ["card", "usdc","wechat_pay"],
       mode: "payment",
       line_items: [
         {
