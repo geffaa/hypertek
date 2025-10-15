@@ -3,11 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  CardElement,
-  
-} from "@stripe/react-stripe-js";
+import { Elements, CardElement } from "@stripe/react-stripe-js";
 
 import CustomButton from "../Buttons/Button1";
 import popularCollections from "../../assets/images/popolar.png";
@@ -17,12 +13,12 @@ import buyNfaImage from "../../assets/images/popolar.png";
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../../Config";
 
 // Initialize Stripe
- 
+
 function Buy1() {
   const location = useLocation();
   const { item } = location.state || {};
 
-  console.log("your seelcted item is here :",item);
+  console.log("your seelcted item is here :", item);
   const { user } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -400,31 +396,31 @@ function Buy1() {
               <button
                 onClick={async () => {
                   try {
+
+
                     const res = await fetch(
+                      // "http://localhost:4700/api/v1/stripe/create-checkout-session",
                       `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
-// "http://localhost:4700/api/v1/stripe/create-checkout-session",
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          amount: finalPrice * 100, // in cents
+                          amount: Number(finalPrice) * 100, // in cents
                           userId: user.id,
                           redirectUrl: `${window.location.origin}/dashboard`,
-                          // Add the new fields here:
-                          gameTitle:item?.title, // Replace with actual game title
-                          gameId:item?._id, // Replace with actual game ID
-                          itemType: "game", // or "in_game_item", "subscription", etc.
-                          platform: "pc", // or "playstation", "xbox", etc.
+                          gameTitle: item?.title,
+                          gameId: item?._id,
+                          itemType: "game",
+                          platform: "pc",
                         }),
                       }
                     );
 
                     const data = await res.json();
-
                     if (data.url) {
-                      window.location.href = data.url; // Redirect to Stripe Checkout
+                      window.location.href = data.url;
                     } else {
-                      toast.error("Failed to start Stripe checkout");
+                      toast.error(data.message);
                     }
                   } catch (err) {
                     console.error(err);
@@ -435,6 +431,7 @@ function Buy1() {
               >
                 Pay with Stripe
               </button>
+
               {/* pay with paypal  */}
               <button
                 onClick={handlePaypalPayment}
@@ -444,7 +441,44 @@ function Buy1() {
               </button>
 
               <button
-                onClick={handleCryptoPayment}
+                onClick={async () => {
+                  try {
+                    const res = await fetch(
+                      `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
+                      // "http://localhost:4700/api/v1/crypto/create-crypto-session",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          amount: finalPrice * 100, // in cents
+                          userId: user.id,
+                          redirectUrl: `${window.location.origin}/dashboard`,
+                          // Add the new fields here:
+                          gameTitle: item?.title, // Replace with actual game title
+                          gameId: item?._id, // Replace with actual game ID
+                          itemType: "game", // or "in_game_item", "subscription", etc.
+                          platform: "pc", // or "playstation", "xbox", etc.
+                        }),
+                      }
+                    );
+
+                    const data = await res.json();
+                    // Check HTTP status
+                    if (!res.ok) {
+                      toast.error(data.message || "Failed to start checkout");
+                      return;
+                    }
+
+                    if (data.url) {
+                      window.location.href = data.url; // Redirect to Stripe Checkout
+                    } else {
+                      toast.error("Failed to start crypto checkout");
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    toast.error("Crypto checkout error");
+                  }
+                }}
                 className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
               >
                 Pay with Crypto
