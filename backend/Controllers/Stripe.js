@@ -19,7 +19,7 @@ export const createCheckoutSession = async (req, res) => {
     }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+payment_method_types: ["card", "usdc"],
       mode: "payment",
       line_items: [
         {
@@ -32,7 +32,7 @@ export const createCheckoutSession = async (req, res) => {
         },
       ],
       success_url: `${redirectUrl}?status=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${redirectUrl}?status=cancelled`,
+      cancel_url: `${redirectUrl}?/`,
       metadata: { 
         userId,
         gameTitle,
