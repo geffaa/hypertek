@@ -223,11 +223,17 @@ function Buy1() {
               <button onClick={closeModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
 
                   {/* Left angled border */}
                   <div
-                    className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
@@ -236,10 +242,10 @@ function Buy1() {
 
                   {/* Main button area */}
                   <div
-                    className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
+                    className="flex items-center justify-center text-white font-medium w-[83.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
                     style={{
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "0.15rem solid #002AA8", // ~2.42px
+                      border: "2.24px solid #002AA8", // ~2.42px
                     }}
                   >
                     Cancel
@@ -247,23 +253,15 @@ function Buy1() {
 
                   {/* Right angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                     }}
                   ></div>
 
                   {/* Right small bar */}
-                  <div
-                    className="bg-[#002AA8]"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.2rem", // ~21.93px
-                    }}
-                  ></div>
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
                 </div>
               </button>
 
@@ -320,13 +318,18 @@ function Buy1() {
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
               <button onClick={closeSecondModal}>
-                <div className="flex items-center">
+                 <div className="flex items-center">
                   {/* Left small bar */}
-                  <div className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"></div>
+                  <div
+                    className="bg-[#002AA8] md:mr-0.5 mr-0.3 md:h-[1.5rem] h-[1rem]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                    }}
+                  ></div>
 
                   {/* Left angled border */}
                   <div
-                    className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
@@ -335,10 +338,10 @@ function Buy1() {
 
                   {/* Main button area */}
                   <div
-                    className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
+                    className="flex items-center justify-center text-white font-medium w-[83.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
                     style={{
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "0.15rem solid #002AA8", // ~2.42px
+                      border: "2.24px solid #002AA8", // ~2.42px
                     }}
                   >
                     Close
@@ -346,23 +349,18 @@ function Buy1() {
 
                   {/* Right angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                     }}
                   ></div>
 
                   {/* Right small bar */}
-                  <div
-                    className="bg-[#002AA8]"
-                    style={{
+                  <div className="bg-[#002AA8] ml-0.5 md:h-[1.5rem] h-[1rem] "
+                  style={{
                       width: "0.25rem", // ~3.99px
-                      height: "1.2rem", // ~21.93px
-                    }}
-                  ></div>
+                  }}></div>
                 </div>
               </button>
 
@@ -396,8 +394,6 @@ function Buy1() {
               <button
                 onClick={async () => {
                   try {
-
-
                     const res = await fetch(
                       // "http://localhost:4700/api/v1/stripe/create-checkout-session",
                       `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,

@@ -15,6 +15,7 @@ import StripSaveRoute from "./Routes/StripeSave.js";
 import { stripeWebhook } from "./Controllers/Stripe.js"; // Import the webhook function directly
 import CryptoSaveRotue from "./Routes/CryptoSave.js";
 import CryptoSessionRotue from "./Routes/CryptoSession.js";
+import HistoryRoute from "./Routes/History.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -71,6 +72,7 @@ app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
+app.use("/api/v1/history",HistoryRoute)
 
 // Stripe routes (EXCLUDE webhook from these since it's already defined above)
 app.use("/api/v1/stripe", StripRoute);
