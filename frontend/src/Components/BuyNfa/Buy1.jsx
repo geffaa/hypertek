@@ -440,8 +440,8 @@ function Buy1() {
                 onClick={async () => {
                   try {
                     const res = await fetch(
-                      // "http://localhost:4700/api/v1/crypto/create-crypto-session",
-                      `${BACKEND_BASE_URL}/api/v1/crypto/create-crypto-session`,
+                      "http://localhost:4700/api/v1/crypto/create-crypto-session",
+                      // `${BACKEND_BASE_URL}/api/v1/crypto/create-crypto-session`,
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
