@@ -79,7 +79,7 @@ function CardPayment() {
         paymentDetails: {
           amount: item.price * 100,
           payment_method_id: paymentMethod.id,
-          provider: "stripe",
+          provider: "card",
           currency: "usd",
         },
       };
@@ -88,11 +88,11 @@ function CardPayment() {
       }
 
       // const response = await axios.post("http://localhost:4700/api/v1/card/pay-with-card", paymentData);
-      const response = await axios.post(`${BACKEND_BASE_URL}/api/v1/card/pay-with-card", paymentData`);
-
+      const response = await axios.post(`${BACKEND_BASE_URL}/api/v1/card/pay-with-card`, paymentData);
+      console.log("your responsve :",response);
       if (response.data.success) {
         toast.success("Payment Successful!");
-        navigate("/success", { state: { payment: response.data } });
+        // navigate("/success", { state: { payment: response.data } });
       } else {
         setError("Payment failed. Please try again.");
       }
