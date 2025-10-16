@@ -146,13 +146,13 @@ function Buy1() {
                 <CustomButton text="Buy Now" />
               </button>
 
-              <Link to="/offer" className="cursor-pointer w-full md:w-auto">
+              <Link to="/offer"  state={{item}} className="cursor-pointer w-full md:w-auto">
                 <CustomButton text="Buy With Card" />
               </Link>
             </div>
 
             <Link
-              to="/payment"
+              to="/payment" state={{item}}
               className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
               onClick={handleMakeOffer}
             >

@@ -16,6 +16,8 @@ import { stripeWebhook } from "./Controllers/Stripe.js"; // Import the webhook f
 import CryptoSaveRotue from "./Routes/CryptoSave.js";
 import CryptoSessionRotue from "./Routes/CryptoSession.js";
 import HistoryRoute from "./Routes/History.js";
+import { CardRoute } from "./Routes/Paywithcard.js";
+import { SaveCardRoute } from "./Routes/SaveCard.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,6 +63,7 @@ try {
 // i set this route here becasue if i put this rotue below the middleware then it will not work
 app.use('/api/v1/stripe', StripSaveRoute);
 app.use('/api/v1/crypto',CryptoSaveRotue)
+app.use('/api/v1/card',SaveCardRoute)
 
 
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
@@ -77,6 +80,7 @@ app.use("/api/v1/history",HistoryRoute)
 // Stripe routes (EXCLUDE webhook from these since it's already defined above)
 app.use("/api/v1/stripe", StripRoute);
 app.use("/api/v1/crypto",CryptoSessionRotue)
+app.use("/api/v1/card",CardRoute)
 
 // Global error handler
 app.use((err, req, res, next) => {

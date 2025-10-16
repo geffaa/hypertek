@@ -16,10 +16,8 @@ function NfaLand() {
   const { item } = location.state || {}; // safely access it
   const { user } = useSelector((state) => state.auth);
 
-    const [finalPrice, setFinalPrice] = useState(0);
-      const [isThirdOpen, setIsThirdOpen] = useState(false);
-    
-  
+  const [finalPrice, setFinalPrice] = useState(0);
+  const [isThirdOpen, setIsThirdOpen] = useState(false);
 
   console.log("your pass item to the land page are recieved :", item);
   const [isOpen, setIsOpen] = useState(false);
@@ -37,9 +35,7 @@ function NfaLand() {
     console.log("Make offer clicked");
   };
 
-
-
-const openThirdModal = (price) => {
+  const openThirdModal = (price) => {
     if (!price || isNaN(price)) {
       toast.error("Invalid price");
       return;
@@ -52,10 +48,10 @@ const openThirdModal = (price) => {
   const closeThirdModal = () => {
     setIsThirdOpen(false);
   };
-  
+
   return (
     <div className="flex flex-col justify-center w-full mt-24 md:px-24">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-[54px] max-w-[918px] w-full h-auto">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-[54px] max-w-[918px] w-full h-auto px-4">
         <div className="text-white flex items-center sm:hidden">
           <Link to="/buy-nfa" className="border-b-2 border-blue-500">
             Overview
@@ -122,6 +118,7 @@ const openThirdModal = (price) => {
             </div>
 
             {/* Make Offer */}
+            <Link to="/payment">
             <div
               className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
               onClick={handleMakeOffer}
@@ -129,6 +126,7 @@ const openThirdModal = (price) => {
               Make Offer
               <FiEdit2 className="text-base md:text-lg" />
             </div>
+            </Link>
           </div>
           <div
             className="flex md:hidden items-center gap-2 my-3 text-white cursor-pointer"
@@ -189,22 +187,21 @@ const openThirdModal = (price) => {
             ))}
 
             <div className="flex flex-row gap-4 mt-6 w-full justify-center">
-              <div className="flex items-center">
+              <button onClick={closeModal}>
+                <div className="flex items-center">
                 {/* Left small bar */}
                 <div
                   className="bg-[#002AA8] mr-0.5"
                   style={{
                     width: "0.25rem", // ~3.99px
-                    height: "1rem", // ~21.93px
+                    height: "1.3rem", // ~21.93px
                   }}
                 ></div>
 
                 {/* Left angled border */}
                 <div
-                  className="border-[#002AA8]"
+                  className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                   style={{
-                    width: "0.5rem", // ~7.97px
-                    height: "2rem", // ~42.86px
                     borderStyle: "solid",
                     borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                   }}
@@ -212,12 +209,10 @@ const openThirdModal = (price) => {
 
                 {/* Main button area */}
                 <div
-                  className="flex items-center justify-center text-white font-medium"
+                  className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
                   style={{
-                    width: "8rem", // ~168px
-                    height: "2rem", // ~39.59px
                     // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                    border: "0.15rem solid #002AA8", // ~2.42px
+                    border: "2.24px solid #002AA8", // ~2.42px
                   }}
                 >
                   Cancel
@@ -225,24 +220,17 @@ const openThirdModal = (price) => {
 
                 {/* Right angled border */}
                 <div
-                  className="border-[#002AA8]"
+                  className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                   style={{
-                    width: "0.5rem", // ~7.97px
-                    height: "2.2rem", // ~42.86px
                     borderStyle: "solid",
                     borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                   }}
                 ></div>
 
                 {/* Right small bar */}
-                <div
-                  className="bg-[#002AA8]"
-                  style={{
-                    width: "0.25rem", // ~3.99px
-                    height: "1rem", // ~21.93px
-                  }}
-                ></div>
+                <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
               </div>
+              </button>
 
               <button onClick={openSecondModal} className="w-1/2 md:w-auto">
                 <CustomButton text="Buy Now" />
@@ -293,22 +281,21 @@ const openThirdModal = (price) => {
 
             <div className="flex flex-row gap-4 mt-6 w-full justify-center flex-wrap">
               {/* Cancel button structure */}
-              <div className="flex items-center">
+                 <button onClick={closeSecondModal}>
+                <div className="flex items-center">
                 {/* Left small bar */}
                 <div
                   className="bg-[#002AA8] mr-0.5"
                   style={{
                     width: "0.25rem", // ~3.99px
-                    height: "1rem", // ~21.93px
+                    height: "1.3rem", // ~21.93px
                   }}
                 ></div>
 
                 {/* Left angled border */}
                 <div
-                  className="border-[#002AA8]"
+                  className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                   style={{
-                    width: "0.5rem", // ~7.97px
-                    height: "2rem", // ~42.86px
                     borderStyle: "solid",
                     borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                   }}
@@ -316,11 +303,10 @@ const openThirdModal = (price) => {
 
                 {/* Main button area */}
                 <div
-                  className="flex items-center justify-center text-white font-medium"
+                  className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
                   style={{
-                    width: "8rem", // ~168px
-                    height: "2rem", // ~39.59px
-                    border: "0.15rem solid #002AA8", // ~2.42px
+                    // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                    border: "2.24px solid #002AA8", // ~2.42px
                   }}
                 >
                   Cancel
@@ -328,38 +314,29 @@ const openThirdModal = (price) => {
 
                 {/* Right angled border */}
                 <div
-                  className="border-[#002AA8]"
+                  className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                   style={{
-                    width: "0.5rem", // ~7.97px
-                    height: "2.2rem", // ~42.86px
                     borderStyle: "solid",
                     borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                   }}
                 ></div>
 
                 {/* Right small bar */}
-                <div
-                  className="bg-[#002AA8]"
-                  style={{
-                    width: "0.25rem", // ~3.99px
-                    height: "1rem", // ~21.93px
-                  }}
-                ></div>
+                <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
               </div>
+              </button>
 
               {/* Confirm button */}
               <button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
-                             <CustomButton text="Confirm" />
-                           </button>
+                <CustomButton text="Confirm" />
+              </button>
             </div>
           </div>
         </div>
       )}
 
-
-
       {/* open the third modal for payment  */}
-            {isThirdOpen && (
+      {isThirdOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
           <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
             <button
@@ -378,7 +355,7 @@ const openThirdModal = (price) => {
               {/* Stripe Checkout */}
               <button
                 onClick={async () => {
-                  console.log("your backend url is here :",BACKEND_BASE_URL);
+                  console.log("your backend url is here :", BACKEND_BASE_URL);
                   try {
                     const res = await fetch(
                       `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
@@ -390,14 +367,14 @@ const openThirdModal = (price) => {
                           userId: user.id,
                           redirectUrl: `${window.location.origin}/dashboard`,
                           // Add the new fields here:
-                          gameTitle:item?.title, // Replace with actual game title
-                          gameId:item?._id, // Replace with actual game ID
+                          gameTitle: item?.title, // Replace with actual game title
+                          gameId: item?._id, // Replace with actual game ID
                           itemType: "land", // or "in_game_item", "subscription", etc.
                           platform: "pc", // or "playstation", "xbox", etc.
                         }),
                       }
                     );
-                    console.log("your response are :",res);
+                    console.log("your response are :", res);
 
                     const data = await res.json();
 
@@ -416,14 +393,11 @@ const openThirdModal = (price) => {
                 Pay with Stripe
               </button>
               {/* pay with paypal  */}
-              <button
-               
-                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
+              <button className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
                 Pay with PayPal
               </button>
 
-                <button
+              <button
                 onClick={async () => {
                   try {
                     const res = await fetch(
