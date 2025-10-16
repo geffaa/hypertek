@@ -83,6 +83,9 @@ function CardPayment() {
           currency: "usd",
         },
       };
+      if(!BACKEND_BASE_URL){
+        toast.error("Base Url is requried")
+      }
 
       // const response = await axios.post("http://localhost:4700/api/v1/card/pay-with-card", paymentData);
       const response = await axios.post(`${BACKEND_BASE_URL}/api/v1/card/pay-with-card", paymentData`);
