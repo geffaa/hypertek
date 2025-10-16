@@ -92,7 +92,7 @@ function CardPayment() {
       console.log("your responsve :",response);
       if (response.data.success) {
         toast.success("Payment Successful!");
-        // navigate("/success", { state: { payment: response.data } });
+        navigate("/success", { state: { payment: response.data } });
       } else {
         setError("Payment failed. Please try again.");
       }
