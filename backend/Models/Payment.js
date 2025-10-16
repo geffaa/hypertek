@@ -53,7 +53,7 @@ const PaymentSchema = new mongoose.Schema({
   // STRIPE, PAYPAL, or CRYPTO
   provider: {
     type: String,
-    enum: ["stripe", "paypal", "crypto"],
+    enum: ["stripe", "paypal", "crypto","card"],
     required: true,
   },
 

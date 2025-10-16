@@ -112,7 +112,7 @@ function NfaLand() {
                 <CustomButton text="Buy Now" />
               </button>
 
-              <Link to="/offer" className="w-full md:w-auto">
+              <Link to="/offer" state={{item}} className="w-full md:w-auto">
                 <CustomButton text="Buy With Card" />
               </Link>
             </div>

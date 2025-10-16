@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const createCheckoutSession = async (req, res) => {
   try {
     const { amount, userId, redirectUrl, gameTitle, gameId, itemType, platform } = req.body;
-
+console.log("your req body is :",req.body);
     if (!amount || !userId || !redirectUrl || !gameTitle) {
       return res.status(400).json({ 
         message: "Amount, userId, redirectUrl and gameTitle are required" 
@@ -36,7 +36,7 @@ export const createCheckoutSession = async (req, res) => {
       metadata: { 
         userId,
         gameTitle,
-        gameId: gameId || "",
+        gameId: gameId,
         itemType: itemType || "game",
         platform: platform || "pc"
       },
@@ -52,6 +52,7 @@ export const createCheckoutSession = async (req, res) => {
 // ✅ Webhook Handler: Success + Failed + Canceled Payments
 export const stripeWebhook = async (req, res) => {
   console.log("🎯 Webhook processing started...");
+
 
   const sig = req.headers["stripe-signature"];
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -77,10 +78,12 @@ export const stripeWebhook = async (req, res) => {
         console.log("💰 Checkout completed successfully");
         const session = event.data.object;
 
+        console.log("you session is :",session);
+
         const payment = new Payment({
           userId: session.metadata.userId,
           gameId: session.metadata.gameId || null,
-          gameTitle: session.metadata.gameTitle || "Unknown Game",
+          gameTitle: session.metadata.gameTitle,
           serialNumber: Payment.generateSerialNumber(),
           itemType: session.metadata.itemType || "game",
           platform: session.metadata.platform || "pc",
@@ -95,7 +98,7 @@ export const stripeWebhook = async (req, res) => {
             customerEmail: session.customer_details?.email,
           },
         });
-
+console.log("your payment are :",payment);
         await payment.save();
         console.log("✅ Payment saved successfully!");
         break;
@@ -108,7 +111,7 @@ export const stripeWebhook = async (req, res) => {
 
         await Payment.create({
           userId: session.metadata?.userId || "unknown",
-          gameTitle: session.metadata?.gameTitle || "unknown",
+          gameTitle: session.metadata?.gameTitle,
           amount: session.amount_total ? session.amount_total / 100 : 0,
           currency: session.currency || "usd",
           status: "failed",
