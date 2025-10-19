@@ -36,13 +36,18 @@ const SignupUser = async (req, res) => {
 
     const newUser = new UserModel({ Email, Password });
     await newUser.save();
+    const token = jwt.sign(
+      { id: user._id, Email: user.Email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      })
 
     res.status(201).json({
       message: "Signup successful",
-      user: {
-        id: newUser._id,
-        Email: newUser.Email,
-      },
+      
+      token,
+      user: { id: user._id, Email: user.Email },
     });
   } catch (error) {
     if (error.code === 11000) {
