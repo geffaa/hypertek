@@ -7,18 +7,24 @@ function UserDashboard() {
   const toastShownRef = useRef(false);
 
   useEffect(() => {
-    // Get query params
     const params = new URLSearchParams(location.search);
-    const sessionId = params.get('session_id');
+    const redirectStatus = params.get('redirect_status'); // check redirect_status
+    const paymentIntent = params.get('payment_intent');
 
-    if (sessionId && !toastShownRef.current) {
-      // Mark toast as shown
+    if (paymentIntent && redirectStatus === 'succeeded' && !toastShownRef.current) {
       toastShownRef.current = true;
       
-      // Show success toast
-      toast.success('Payment Successful!');
+      toast.success('Payment Successful! 💳');
 
-      // Remove session_id from URL without reloading
+      // Remove query params from URL
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+
+    // Optional: handle failed payment
+    if (paymentIntent && redirectStatus === 'failed' && !toastShownRef.current) {
+      toastShownRef.current = true;
+      toast.error('Payment Failed ❌');
       const newUrl = window.location.pathname;
       window.history.replaceState({}, document.title, newUrl);
     }

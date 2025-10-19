@@ -110,11 +110,11 @@ export default function Navbar() {
                 </button>
 
                 {shopOpen && (
-                  <div className="absolute  top-full left-[350px] transform -translate-x-1/2 mt-0 w-[746px] max-w-[90vw] h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20">
-                    <div className="grid grid-cols-3 gap-[50px] w-full h-full mx-auto px-[29px] py-[31px] text-white">
+                  <div className="absolute  top-full left-[350px] transform -translate-x-1/2 mt-0 w-[746px] max-w-[90vw] pb-5 h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20 mb-4">
+                    <div className="grid grid-cols-3 gap-[30px] w-full h-full mx-auto px-[29px] py-[28px] text-white">
                       {/* Column 1 */}
                       <div
-                        className="flex flex-col gap-1 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
+                        className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2  transition-colors"
                         onClick={() => {
                           setShopOpen(false);
                           // Add your navigation logic here
@@ -129,7 +129,7 @@ export default function Navbar() {
                         </p>
                       </div>
                       <div
-                        className="flex flex-col gap-1 border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
+                        className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2  transition-colors"
                         onClick={() => {
                           setShopOpen(false);
                           // Add your navigation logic here
@@ -146,7 +146,7 @@ export default function Navbar() {
 
                       {/* Column 2 */}
                       <div
-                        className="flex flex-col border-b-4 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
+                        className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2  transition-colors"
                         onClick={() => {
                           setShopOpen(false);
                           // Add your navigation logic here
@@ -163,7 +163,7 @@ export default function Navbar() {
 
                       {/* Column 3 */}
                       <div
-                        className="flex flex-col pb-4 border-b-4 border-white cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
+                        className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
                         onClick={() => {
                           setShopOpen(false);
                           // Add your navigation logic here

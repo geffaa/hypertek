@@ -14,6 +14,10 @@ import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config"
+import google from "../assets/images/login/google.png";
+
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 
 function Login() {
@@ -59,27 +63,37 @@ function Login() {
   };
 
   // ---------------- Google Login ----------------
-  const handleGoogleLoginSuccess = async (credentialResponse) => {
-    try {
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
-        token: credentialResponse.credential,
-      });
-
-      dispatch(
-        loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
-          isLoggedInUser: true,
-        })
-      );
-      localStorage.setItem("token", res.data.token);
-      toast.success("Google login successful!");
-
-      navigate("/profile");
-    } catch (err) {
-      toast.error("Google login failed!");
-    }
-  };
+ 
+  const login = useGoogleLogin({
+      onSuccess: async (tokenResponse) => {
+        try {
+          // tokenResponse.access_token is what Google returns
+          // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
+          const res = await axios.post(
+            `http://localhost:4700/api/v1/user/google`,
+            {
+              token: tokenResponse.access_token, // or response.credential for ID token version
+            }
+          );
+  
+          dispatch(
+            loginSuccess({
+              user: res.data.user,
+              token: res.data.token,
+              isLoggedInUser: true,
+            })
+          );
+          localStorage.setItem("token", res.data.token);
+          toast.success("Google Login successful!");
+          navigate("/profile");
+        } catch (err) {
+          console.error("Google login error:", err);
+          toast.error(err.response?.data?.message || "Google login failed!");
+        }
+      },
+      onError: () => toast.error("Google login failed!"),
+    });
+  
 
   // ---------------- Discord Login ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
@@ -319,34 +333,38 @@ function Login() {
         </div>
 
         <div className="flex justify-center gap-4">
-          <button className="p-1 rounded-full border border-white transition">
+          <button
+            type="button"
+            className="p-1 rounded-full items-center justify-center flex border border-white transition w-[44px] h-[44px] cursor-pointer"
+            onClick={handleLogin}
+          >
+            <img src={symbol} alt="MetaMask" className="w-[23px] h-[22px]" />
+          </button>
+          <button             className="p-1 rounded-full items-center justify-center flex border border-white transition w-[44px] h-[44px] cursor-pointer"
+>
             <img src={skype} alt="Skype" className="w-6 h-6" />
+          </button>
+<button
+            onClick={() => login()}
+            className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
+          >
+            <img
+              src={google}
+              alt="Google"
+              className="w-6 h-6" 
+            />
           </button>
 
           <button
-            className="p-1 rounded-full border border-white transition"
+            className="p-1 rounded-full items-center justify-center flex border border-white transition w-[44px] h-[44px] cursor-pointer"
             onClick={() => (window.location.href = discordAuthUrl)}
           >
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
 
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={() => toast.error("Google login failed!")}
-            useOneTap={false}
-            theme="filled_blue"
-            size="large"
-            shape="circle"
-            type="icon"
-          />
+       
 
-          <button
-            type="button"
-            className="p-1 rounded-full border border-white transition cursor-pointer"
-            onClick={handleLogin}
-          >
-            <img src={symbol} alt="MetaMask" className="w-6 h-6" />
-          </button>
+          
         </div>
       </div>
     </div>

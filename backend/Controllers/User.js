@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
 import { ethers } from "ethers"; // ✅ must be this, not require("ethers")
-
+import axios from "axios"
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
@@ -205,19 +205,21 @@ const ResetPassword = async (req, res) => {
 };
 
 // ------------------ GoogleAuth ------------------
-const GoogleAuth = async (req, res) => {
+ const GoogleAuth = async (req, res) => {
   try {
-    const { token } = req.body; // id_token from frontend
-    console.log("your token in the backend :", token);
-    if (!token) return res.status(400).json({ message: "Token is required" });
+    const { token } = req.body; // access_token from frontend
+    console.log("Google access token from frontend:", token);
 
-    // Verify id token (checks signature + audience)
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    const { sub: googleId, email, name, email_verified, picture } = payload;
+    if (!token)
+      return res.status(400).json({ message: "Access token is required" });
+
+    // ✅ Use Google's userinfo endpoint to fetch user data
+    const googleRes = await axios.get(
+      `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
+    );
+
+    const { sub: googleId, email, name, picture, email_verified } =
+      googleRes.data;
 
     if (!email || !email_verified) {
       return res
@@ -225,10 +227,9 @@ const GoogleAuth = async (req, res) => {
         .json({ message: "Google account email not verified" });
     }
 
-    // Find or create user
+    // ✅ Find or create user in your DB
     let user = await UserModel.findOne({ Email: email });
     if (user) {
-      // if user exists but no GoogleId, attach it
       if (!user.GoogleId) {
         user.GoogleId = googleId;
         await user.save();
@@ -238,18 +239,15 @@ const GoogleAuth = async (req, res) => {
         Email: email,
         FullName: name || "",
         GoogleId: googleId,
-        // Password left undefined for Google-only accounts
       });
       await user.save();
     }
 
-    // Generate our app JWT (use your JWT_SECRET)
+    // ✅ Generate your own app JWT
     const jwtToken = jwt.sign(
       { id: user._id, Email: user.Email },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
+      { expiresIn: "1h" }
     );
 
     return res.status(200).json({
@@ -263,13 +261,13 @@ const GoogleAuth = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("GoogleAuth err:", err);
-    return res
-      .status(500)
-      .json({ message: "Google auth failed", error: err.message });
+    console.error("GoogleAuth error:", err.response?.data || err.message);
+    return res.status(500).json({
+      message: "Google auth failed",
+      error: err.response?.data || err.message,
+    });
   }
 };
-
 // ------------------ Discord ------------------
 const DiscordAuth = async (req, res) => {
   try {

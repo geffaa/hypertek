@@ -15,9 +15,7 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { BACKEND_BASE_URL } from "../../Config"
-
-
+import { BACKEND_BASE_URL } from "../../Config";
 
 function CardPayment() {
   const navigate = useNavigate();
@@ -25,14 +23,11 @@ function CardPayment() {
   const elements = useElements();
   const location = useLocation();
   const { item } = location.state || {};
-   const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-  console.log("your login user data are :",user);
-  console.log("your login user token are :",token);
-  console.log("your selected item is :",item);
-  
-
-
+  console.log("your login user data are :", user);
+  console.log("your login user token are :", token);
+  console.log("your selected item is :", item);
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,8 +37,8 @@ function CardPayment() {
     e.preventDefault();
     setError("");
 
-    if(!user || !token){
-      toast.error("User and token data is required")
+    if (!user || !token) {
+      toast.error("User and token data is required");
     }
     if (!stripe || !elements) return setError("Stripe not loaded");
 
@@ -54,11 +49,12 @@ function CardPayment() {
       const cardNumberElement = elements.getElement(CardNumberElement);
 
       // Create payment method
-      const { paymentMethod, error: stripeError } = await stripe.createPaymentMethod({
-        type: "card",
-        card: cardNumberElement,
-        billing_details: { name },
-      });
+      const { paymentMethod, error: stripeError } =
+        await stripe.createPaymentMethod({
+          type: "card",
+          card: cardNumberElement,
+          billing_details: { name },
+        });
 
       if (stripeError) {
         setError(stripeError.message);
@@ -66,10 +62,9 @@ function CardPayment() {
         return;
       }
 
-      // Send payment data to backend
       const paymentData = {
         userId: user?.id,
-        userInfo: { name:user.Fullname, email:user?.email },
+        userInfo: { name: user.Fullname, email: user?.email },
         gameDetails: {
           gameId: item?.id || item._id,
           serialNumber: item.serialNumber || item.code,
@@ -79,17 +74,22 @@ function CardPayment() {
         paymentDetails: {
           amount: item.price * 100,
           payment_method_id: paymentMethod.id,
-          provider: "card",
           currency: "usd",
         },
+        provider: "card", // ✅ Add here
+        productId: item?._id, // ✅ Add here
       };
-      if(!BACKEND_BASE_URL){
-        toast.error("Base Url is requried")
+
+      if (!BACKEND_BASE_URL) {
+        toast.error("Base Url is requried");
       }
 
-      // const response = await axios.post("http://localhost:4700/api/v1/card/pay-with-card", paymentData);
-      const response = await axios.post(`${BACKEND_BASE_URL}/api/v1/card/pay-with-card`, paymentData);
-      console.log("your responsve :",response);
+      const response = await axios.post("http://localhost:4700/api/v1/card/pay-with-card", paymentData);
+      // const response = await axios.post(
+      //   `${BACKEND_BASE_URL}/api/v1/card/pay-with-card`,
+      //   paymentData
+      // );
+      console.log("your responsve :", response);
       if (response.data.success) {
         toast.success("Payment Successful!");
         navigate("/success", { state: { payment: response.data } });
@@ -116,19 +116,39 @@ function CardPayment() {
       <form
         onSubmit={handlePayment}
         className="flex flex-col gap-5 p-4 mx-auto mt-24 relative text-white"
-        style={{ maxWidth: "409px", width: "100%", fontFamily: "Inter, sans-serif" }}
+        style={{
+          maxWidth: "409px",
+          width: "100%",
+          fontFamily: "Inter, sans-serif",
+        }}
       >
         {/* Card Number */}
         <div className="flex flex-col gap-2 relative">
           <label className="text-sm font-medium">Card number</label>
           <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
             <CardNumberElement
-              options={{ style: { base: { color: "#fff", fontSize: "16px", '::placeholder': { color: "#999" } } } }}
+              options={{
+                style: {
+                  base: {
+                    color: "#fff",
+                    fontSize: "16px",
+                    "::placeholder": { color: "#999" },
+                  },
+                },
+              }}
               className="w-full outline-none bg-transparent"
             />
             <div className="flex gap-2 ml-2 pointer-events-none">
-              <img src={VisaImage} alt="Visa" className="w-6 h-4 object-contain" />
-              <img src={MasterCard} alt="MasterCard" className="w-6 h-4 object-contain" />
+              <img
+                src={VisaImage}
+                alt="Visa"
+                className="w-6 h-4 object-contain"
+              />
+              <img
+                src={MasterCard}
+                alt="MasterCard"
+                className="w-6 h-4 object-contain"
+              />
             </div>
           </div>
         </div>
@@ -139,7 +159,15 @@ function CardPayment() {
             <label className="text-sm font-medium">Expiry date</label>
             <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
               <CardExpiryElement
-                options={{ style: { base: { color: "#fff", fontSize: "16px", '::placeholder': { color: "#999" } } } }}
+                options={{
+                  style: {
+                    base: {
+                      color: "#fff",
+                      fontSize: "16px",
+                      "::placeholder": { color: "#999" },
+                    },
+                  },
+                }}
                 className="w-full outline-none bg-transparent"
               />
             </div>
@@ -148,7 +176,15 @@ function CardPayment() {
             <label className="text-sm font-medium">CVV/CVC</label>
             <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
               <CardCvcElement
-                options={{ style: { base: { color: "#fff", fontSize: "16px", '::placeholder': { color: "#999" } } } }}
+                options={{
+                  style: {
+                    base: {
+                      color: "#fff",
+                      fontSize: "16px",
+                      "::placeholder": { color: "#999" },
+                    },
+                  },
+                }}
                 className="w-full outline-none bg-transparent"
               />
             </div>
@@ -178,8 +214,10 @@ function CardPayment() {
         {/* Purchase Button */}
         <div className="flex justify-center mt-4">
           <button>
-                      <CustomButton text={loading ? "Processing..." : "Purchase Now"} disabled={loading} />
-
+            <CustomButton
+              text={loading ? "Processing..." : "Purchase Now"}
+              disabled={loading}
+            />
           </button>
         </div>
       </form>

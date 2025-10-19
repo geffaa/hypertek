@@ -47,6 +47,7 @@ import NoItem from "./pages/NoItem";
 import { loadStripe } from "@stripe/stripe-js";
 import { STRIPE_PUBLISHABLE_KEY } from "./Config"
 import { Elements } from "@stripe/react-stripe-js";
+import Stripe from "./pages/Stripe";
 
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
@@ -64,11 +65,17 @@ function AppWrapper() {
   }, [location]);
 
   if (loading) return <Loading />;
+    // ✅ Routes where Navbar & Footer should be hidden
+  const hideLayoutRoutes = ["/stripe-payment"];
+
+  const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
 
   return (
     <>
         <Elements stripe={stripePromise}>
-      <Navbar />
+    
+          {!shouldHideLayout && <Navbar />}
+
       <div style={{ flex: 1 }}>
         <Routes>
           {/* Main Pages */}
@@ -124,12 +131,16 @@ function AppWrapper() {
         {/* Testing Routes  */}
         <Route path="/testing" element={<Testing/>}/>
 
+        {/* for payment options  */}
+
+        <Route path="/stripe-payment" element={<Stripe/>}/>
+
 
       {/* set the toast contianer here  */}
         </Routes>
       </div>
        <Toaster position="top-right" reverseOrder={false} />
-      <Footer />
+     {!shouldHideLayout && <Footer />}
       </Elements>
     </>
   );

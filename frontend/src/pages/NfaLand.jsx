@@ -5,20 +5,20 @@ import CustomButton2 from "../Components/Buttons/Button2";
 import { FiEdit2, FiEye } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
-import { useLocation } from "react-router-dom";
+import { useLocation , useNavigate  } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../Config";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function NfaLand() {
+function NfaLand() { 
   const location = useLocation();
+    const navigate = useNavigate();
+
   const { item } = location.state || {}; // safely access it
   const { user } = useSelector((state) => state.auth);
 
-  const [finalPrice, setFinalPrice] = useState(0);
-  const [isThirdOpen, setIsThirdOpen] = useState(false);
-
+  
   console.log("your pass item to the land page are recieved :", item);
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
@@ -35,19 +35,80 @@ function NfaLand() {
     console.log("Make offer clicked");
   };
 
-  const openThirdModal = (price) => {
-    if (!price || isNaN(price)) {
-      toast.error("Invalid price");
+ 
+
+
+  /// check payment 
+   const handlePayment = async (productId) => {
+    if (!productId || !user?.id) {
+      toast.error("User ID and Payment ID are required");
       return;
     }
-    setFinalPrice(price);
-    setIsSecondOpen(false);
-    setIsThirdOpen(true);
+
+    try {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+        userId: user.id,
+        productId: productId,
+      });
+
+      // Log the actual data
+      console.log("Payment response data:", res);
+
+      // Show backend message (success or info)
+      if (res.data?.exist === "no") {
+        navigate("/stripe-payment", { state: { item } });
+      }
+      if (res.data?.exist === "yes") {
+        toast.error("Sorry you have already purchased it");
+      }
+
+      // setIsSecondOpen(false);
+    } catch (error) {
+      console.error("Payment request error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message || error?.message || "Payment failed";
+
+      toast.error(errorMessage);
+    }
   };
 
-  const closeThirdModal = () => {
-    setIsThirdOpen(false);
+
+  // check payment through card 
+    const handlePaymentCard = async (productId) => {
+    if (!productId || !user?.id) {
+      toast.error("User ID and Payment ID are required");
+      return;
+    }
+
+    try {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+        userId: user.id,
+        productId: productId,
+      });
+
+      // Log the actual data
+      console.log("Payment response data:", res);
+
+      // Show backend message (success or info)
+      if (res.data?.exist === "no") {
+        navigate("/offer", { state: { item } });
+      }
+      if (res.data?.exist === "yes") {
+        toast.error("Sorry you have already purchased it");
+      }
+
+      // setIsSecondOpen(false);
+    } catch (error) {
+      console.error("Payment request error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message || error?.message || "Payment failed";
+
+      toast.error(errorMessage);
+    }
   };
+
 
   return (
     <div className="flex flex-col justify-center w-full mt-24 md:px-24">
@@ -112,9 +173,12 @@ function NfaLand() {
                 <CustomButton text="Buy Now" />
               </button>
 
-              <Link to="/offer" state={{item}} className="w-full md:w-auto">
-                <CustomButton text="Buy With Card" />
-              </Link>
+              {/* card button  */}
+              <button onClick={() => handlePaymentCard(item._id)} className="w-full md:w-auto">
+               <CustomButton text="Buy With Card" />
+              </button>
+
+              
             </div>
 
             {/* Make Offer */}
@@ -326,8 +390,8 @@ function NfaLand() {
               </div>
               </button>
 
-              {/* Confirm button */}
-              <button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
+             
+               <button onClick={() => handlePayment(item._id)}>
                 <CustomButton text="Confirm" />
               </button>
             </div>
@@ -335,124 +399,8 @@ function NfaLand() {
         </div>
       )}
 
-      {/* open the third modal for payment  */}
-      {isThirdOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
-            <button
-              onClick={closeThirdModal}
-              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
-            >
-              ×
-            </button>
-
-            <h2 className="text-white text-lg font-bold text-center my-4">
-              Select Payment Method
-            </h2>
-            <hr className="border-t border-gray-600 my-4" />
-
-            <div className="flex flex-col items-center gap-4 mb-6 mt-4">
-              {/* Stripe Checkout */}
-              <button
-                onClick={async () => {
-                  console.log("your backend url is here :", BACKEND_BASE_URL);
-                  try {
-                    const res = await fetch(
-                      `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          amount: finalPrice * 100, // in cents
-                          userId: user.id,
-                          redirectUrl: `${window.location.origin}/dashboard`,
-                          // Add the new fields here:
-                          gameTitle: item?.title, // Replace with actual game title
-                          gameId: item?._id, // Replace with actual game ID
-                          itemType: "land", // or "in_game_item", "subscription", etc.
-                          platform: "pc", // or "playstation", "xbox", etc.
-                        }),
-                      }
-                    );
-                    console.log("your response are :", res);
-
-                    const data = await res.json();
-
-                    if (data.url) {
-                      window.location.href = data.url; // Redirect to Stripe Checkout
-                    } else {
-                      toast.error("Failed to start Stripe checkout");
-                    }
-                  } catch (err) {
-                    console.error(err);
-                    toast.error("Stripe checkout error");
-                  }
-                }}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Stripe
-              </button>
-              {/* pay with paypal  */}
-              <button className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center">
-                Pay with PayPal
-              </button>
-
-              <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch(
-                      // "http://localhost:4700/api/v1/crypto/create-crypto-session",
-                      `${BACKEND_BASE_URL}/api/v1/crypto/create-crypto-session`,
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          amount: finalPrice * 100, // in cents
-                          userId: user.id,
-                          redirectUrl: `${window.location.origin}/dashboard`,
-                          // Add the new fields here:
-                          gameTitle: item?.title, // Replace with actual game title
-                          gameId: item?._id, // Replace with actual game ID
-                          itemType: "game", // or "in_game_item", "subscription", etc.
-                          platform: "pc", // or "playstation", "xbox", etc.
-                        }),
-                      }
-                    );
-
-                    const data = await res.json();
-                    // Check HTTP status
-                    if (!res.ok) {
-                      toast.error(data.message || "Failed to start checkout");
-                      return;
-                    }
-
-                    if (data.url) {
-                      window.location.href = data.url; // Redirect to Stripe Checkout
-                    } else {
-                      toast.error("Failed to start crypto checkout");
-                    }
-                  } catch (err) {
-                    console.error(err);
-                    toast.error("Crypto checkout error");
-                  }
-                }}
-                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Crypto
-              </button>
-            </div>
-
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={closeThirdModal}
-                className="text-gray-400 hover:text-white font-medium"
-              >
-                Cancel Payment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    
+    
     </div>
   );
 }
