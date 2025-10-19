@@ -58,6 +58,15 @@ function Signup() {
       });
 
       if (res.status === 201) {
+
+            dispatch(
+              loginSuccess({
+                user: res.data.user,
+                token: res.data.token,
+                isLoggedInUser: true,
+              })
+            );
+            localStorage.setItem("token", res.data.token);
         toast.success("Signup successful!");
         navigate("/");
       } else {
