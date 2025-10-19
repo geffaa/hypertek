@@ -59,7 +59,7 @@ function Signup() {
 
       if (res.status === 201) {
         toast.success("Signup successful!");
-        navigate("/profile");
+        navigate("/");
       } else {
         toast.error(res.data.message || "Signup failed");
       }
