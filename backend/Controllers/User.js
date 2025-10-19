@@ -47,7 +47,7 @@ const SignupUser = async (req, res) => {
       message: "Signup successful",
       
       token,
-      user: { id: user._id, Email: user.Email },
+      user: { id: newUser._id, Email: newUser.Email },
     });
   } catch (error) {
     if (error.code === 11000) {
