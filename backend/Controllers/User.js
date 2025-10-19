@@ -36,16 +36,16 @@ const SignupUser = async (req, res) => {
 
     const newUser = new UserModel({ Email, Password });
     await newUser.save();
+
+    // Use newUser instead of user
     const token = jwt.sign(
-      { id: user._id, Email: user.Email },
+      { id: newUser._id, Email: newUser.Email },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      })
+      { expiresIn: "1d" }
+    );
 
     res.status(201).json({
       message: "Signup successful",
-      
       token,
       user: { id: newUser._id, Email: newUser.Email },
     });
@@ -56,6 +56,7 @@ const SignupUser = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
 
 // ------------------ LOGIN ------------------
 const LoginUser = async (req, res) => {
