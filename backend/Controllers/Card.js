@@ -2,16 +2,16 @@ import { Payment } from "../Models/Payment.js";
 import Stripe from "stripe";
 import bodyParser from "body-parser";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // =======================
 // 1️⃣ Payment Endpoint
 // =======================
 export const PayWithCard = async (req, res) => {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   console.log("Received payment body:", req.body);
 
   try {
-    const { userId, userInfo, gameDetails, paymentDetails, provider = "stripe" } = req.body;
+    const { userId, userInfo, gameDetails, paymentDetails, provider,productId } = req.body;
 
     // Validate required fields
     if (!userId || !gameDetails || !paymentDetails) {
@@ -32,6 +32,8 @@ export const PayWithCard = async (req, res) => {
         userId,
         gameId: gameDetails.gameId,
         gameTitle: gameDetails.title,
+        provider:provider || "card",
+        productId:productId,
         serialNumber: gameDetails.serialNumber || Payment.generateSerialNumber(),
       },
     });
@@ -56,10 +58,10 @@ export const PayWithCard = async (req, res) => {
 // =======================
 export const SaveCardData = async (req, res) => {
   const sig = req.headers["stripe-signature"];
+  console.log("your signatatue ris :",sig);
   let event;
 
   try {
-    // Verify the webhook signature
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
@@ -70,67 +72,53 @@ export const SaveCardData = async (req, res) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  try {
-    if (event.type === "payment_intent.succeeded") {
-      const paymentIntent = event.data.object;
+  const paymentIntent = event.data?.object;
+  console.log("your payment intent are :",paymentIntent);
 
-      if (!paymentIntent.metadata?.userId) {
-        console.error("⚠️ Missing metadata in payment intent:", paymentIntent.id);
-        return res.status(400).json({ error: "Missing payment metadata" });
-      }
-
-      // Try saving payment data in DB
-      try {
-        const payment = new Payment({
-          userId: paymentIntent.metadata.userId,
-          gameId: paymentIntent.metadata.gameId,
-          gameTitle: paymentIntent.metadata.gameTitle,
-          serialNumber: paymentIntent.metadata.serialNumber,
-          amount: paymentIntent.amount,
-          currency: paymentIntent.currency,
-          provider: "card",
-          transactionId: paymentIntent.id,
-          status: "succeeded",
-        });
-
-        await payment.save();
-        console.log("✅ Payment stored in DB:", payment._id);
-
-        return res.status(200).json({ success: true, received: true });
-      } catch (dbError) {
-        console.error("🔥 DB Save Error:", dbError.message);
-        // 👇 custom message for failed database save
-        return res.status(500).json({
-          success: false,
-          message: "Payment was successful, but failed to store data in the database. Please contact support.",
-          error: dbError.message,
-        });
-      }
+  // Only handle succeeded or failed payments
+  if (event.type === "payment_intent.succeeded") {
+    if (!paymentIntent.metadata?.userId) {
+      console.error("⚠️ Missing metadata in payment intent:", paymentIntent.id);
+      return res.status(400).json({ error: "Missing payment metadata" });
     }
 
-    // Payment failed or canceled
-    else if (event.type === "payment_intent.payment_failed") {
-      const paymentIntent = event.data.object;
-      console.warn("⚠️ Payment failed:", paymentIntent.last_payment_error?.message);
+    try {
+      const payment = new Payment({
+        userId: paymentIntent.metadata.userId,
+        gameId: paymentIntent.metadata.gameId,
+        gameTitle: paymentIntent.metadata.gameTitle,
+        serialNumber: paymentIntent.metadata.serialNumber,
+        amount: paymentIntent.amount,
+        productId: paymentIntent.metadata.productId || paymentIntent.metadata.gameId, // fallback
+        currency: paymentIntent.currency,
+        provider: paymentIntent.metadata.provider || "card", // fallback
+        transactionId: paymentIntent.id,
+        status: "succeeded",
+      });
 
-      return res.status(200).json({
+      await payment.save();
+      console.log("✅ Payment stored in DB:", payment._id);
+      return res.status(200).json({ success: true, received: true });
+    } catch (dbError) {
+      console.error("🔥 DB Save Error:", dbError.message);
+      return res.status(500).json({
         success: false,
-        message: "Payment failed",
-        error: paymentIntent.last_payment_error?.message,
+        message: "Payment successful, but failed to save in DB",
+        error: dbError.message,
       });
     }
-
-    // Unhandled events
-    else {
-      console.log(`ℹ️ Unhandled event type: ${event.type}`);
-      return res.status(200).json({ received: true });
-    }
-  } catch (err) {
-    console.error("🔥 Unexpected error in webhook handler:", err.message);
-    return res.status(500).json({
+  } else if (event.type === "payment_intent.payment_failed") {
+    // handle failed payments
+    console.warn("⚠️ Payment failed:", paymentIntent.last_payment_error?.message);
+    return res.status(200).json({
       success: false,
-      message: "An unexpected server error occurred while processing payment.",
-      error: err.message,
+      message: "Payment failed",
+      error: paymentIntent.last_payment_error?.message,
     });
+  } else {
+    // Ignore all other event types
+    console.log(`ℹ️ Ignored event type: ${event.type}`);
+    return res.status(200).json({ received: true });
   }
 };
+

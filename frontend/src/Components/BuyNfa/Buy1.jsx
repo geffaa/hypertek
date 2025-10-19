@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement } from "@stripe/react-stripe-js";
 
 import CustomButton from "../Buttons/Button1";
@@ -11,10 +10,13 @@ import { FiEye } from "react-icons/fi";
 import { FiEdit2 } from "react-icons/fi";
 import buyNfaImage from "../../assets/images/popolar.png";
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../../Config";
+import axios from "axios";
 
 // Initialize Stripe
 
 function Buy1() {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const { item } = location.state || {};
 
@@ -23,9 +25,6 @@ function Buy1() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
-  const [isThirdOpen, setIsThirdOpen] = useState(false);
-  const [showStripeForm, setShowStripeForm] = useState(false);
-  const [finalPrice, setFinalPrice] = useState(0);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -36,24 +35,9 @@ function Buy1() {
   };
   const closeSecondModal = () => setIsSecondOpen(false);
 
-  const openThirdModal = (price) => {
-    if (!price || isNaN(price)) {
-      toast.error("Invalid price");
-      return;
-    }
-    setFinalPrice(price);
-    setIsSecondOpen(false);
-    setIsThirdOpen(true);
-  };
 
-  const closeThirdModal = () => {
-    setIsThirdOpen(false);
-    setShowStripeForm(false);
-  };
 
-  const handlePaypalPayment = () => toast("Redirecting to PayPal checkout...");
-  const handleCryptoPayment = () => toast("Connecting to crypto wallet...");
-
+  
   const handleMakeOffer = () => {
     console.log("Make offer clicked");
   };
@@ -69,6 +53,80 @@ function Buy1() {
       window.history.replaceState({}, document.title, location.pathname);
     }
   }, [location]);
+
+ 
+
+  /// for stripe methods 
+  const handlePayment = async (productId) => {
+    if (!productId || !user?.id) {
+      toast.error("User ID and Payment ID are required");
+      return;
+    }
+
+    try {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+        userId: user.id,
+        productId: productId,
+      });
+
+      // Log the actual data
+      console.log("Payment response data:", res);
+
+      // Show backend message (success or info)
+      if (res.data?.exist === "no") {
+        navigate("/stripe-payment", { state: { item } });
+      }
+      if (res.data?.exist === "yes") {
+        toast.error("Sorry you have already purchased it");
+      }
+
+      // setIsSecondOpen(false);
+    } catch (error) {
+      console.error("Payment request error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message || error?.message || "Payment failed";
+
+      toast.error(errorMessage);
+    }
+  };
+
+// for card methods 
+const handlePaymentCard = async (productId) => {
+    if (!productId || !user?.id) {
+      toast.error("User ID and Payment ID are required");
+      return;
+    }
+
+    try {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+        userId: user.id,
+        productId: productId,
+      });
+
+      // Log the actual data
+      console.log("Payment response data:", res);
+
+      // Show backend message (success or info)
+      if (res.data?.exist === "no") {
+        navigate("/offer", { state: { item } });
+      }
+      if (res.data?.exist === "yes") {
+        toast.error("Sorry you have already purchased it");
+      }
+
+      // setIsSecondOpen(false);
+    } catch (error) {
+      console.error("Payment request error:", error);
+
+      const errorMessage =
+        error?.response?.data?.message || error?.message || "Payment failed";
+
+      toast.error(errorMessage);
+    }
+  };
+
+
 
   return (
     <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
@@ -146,13 +204,20 @@ function Buy1() {
                 <CustomButton text="Buy Now" />
               </button>
 
-              <Link to="/offer"  state={{item}} className="cursor-pointer w-full md:w-auto">
+              {/* buy with card option  */}
+              <button
+                onClick={() => handlePaymentCard(item._id)}
+                className="cursor-pointer w-full md:w-auto"
+              >
                 <CustomButton text="Buy With Card" />
-              </Link>
+              </button>
+
+             
             </div>
 
             <Link
-              to="/payment" state={{item}}
+              to="/payment"
+              state={{ item }}
               className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
               onClick={handleMakeOffer}
             >
@@ -318,7 +383,7 @@ function Buy1() {
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
               <button onClick={closeSecondModal}>
-                 <div className="flex items-center">
+                <div className="flex items-center">
                   {/* Left small bar */}
                   <div
                     className="bg-[#002AA8] md:mr-0.5 mr-0.3 md:h-[1.5rem] h-[1rem]"
@@ -357,141 +422,29 @@ function Buy1() {
                   ></div>
 
                   {/* Right small bar */}
-                  <div className="bg-[#002AA8] ml-0.5 md:h-[1.5rem] h-[1rem] "
-                  style={{
+                  <div
+                    className="bg-[#002AA8] ml-0.5 md:h-[1.5rem] h-[1rem] "
+                    style={{
                       width: "0.25rem", // ~3.99px
-                  }}></div>
+                    }}
+                  ></div>
                 </div>
               </button>
 
-              <button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
+              {/* <button onClick={() => openThirdModal(Number(item?.price) + 0.5)}>
+               
+              </button> */}
+              <button onClick={() => handlePayment(item._id)}>
                 <CustomButton text="Confirm" />
               </button>
+             
             </div>
           </div>
         </div>
       )}
 
-      {/* ------------------ Third Modal (Payment) ------------------- */}
-      {/* ------------------ Third Modal (Payment) ------------------- */}
-      {isThirdOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-20 pt-24">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
-            <button
-              onClick={closeThirdModal}
-              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
-            >
-              ×
-            </button>
-
-            <h2 className="text-white text-lg font-bold text-center my-4">
-              Select Payment Method
-            </h2>
-            <hr className="border-t border-gray-600 my-4" />
-
-            <div className="flex flex-col items-center gap-4 mb-6 mt-4">
-              {/* Stripe Checkout */}
-              <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch(
-                      "http://localhost:4700/api/v1/stripe/create-checkout-session",
-                      // `${BACKEND_BASE_URL}/api/v1/stripe/create-checkout-session`,
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          amount: Number(finalPrice) * 100, // in cents
-                          userId: user?.id,
-                          redirectUrl: `${window.location.origin}/dashboard`,
-                          gameTitle: item?.title,
-                          gameId: item?._id,
-                          itemType: "game",
-                          platform: "pc",
-                        }),
-                      }
-                    );
-
-                    const data = await res.json();
-                    if (data.url) {
-                      window.location.href = data.url;
-                    } else {
-                      toast.error(data.message);
-                    }
-                  } catch (err) {
-                    console.error(err);
-                    toast.error("Stripe checkout error");
-                  }
-                }}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Stripe
-              </button>
-
-              {/* pay with paypal  */}
-              <button
-                onClick={handlePaypalPayment}
-                className="w-full bg-[#0070ba] hover:bg-[#005ea6] text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with PayPal
-              </button>
-
-              <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch(
-                      "http://localhost:4700/api/v1/crypto/create-crypto-session",
-                      // `${BACKEND_BASE_URL}/api/v1/crypto/create-crypto-session`,
-                      {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          amount: finalPrice * 100, // in cents
-                          userId: user.id,
-                          redirectUrl: `${window.location.origin}/dashboard`,
-                          // Add the new fields here:
-                          gameTitle: item?.title, // Replace with actual game title
-                          gameId: item?._id, // Replace with actual game ID
-                          itemType: "game", // or "in_game_item", "subscription", etc.
-                          platform: "pc", // or "playstation", "xbox", etc.
-                        }),
-                      }
-                    );
-
-                    const data = await res.json();
-                    // Check HTTP status
-                    if (!res.ok) {
-                      toast.error(data.message || "Failed to start checkout");
-                      return;
-                    }
-
-                    if (data.url) {
-                      window.location.href = data.url; // Redirect to Stripe Checkout
-                    } else {
-                      toast.error("Failed to start crypto checkout");
-                    }
-                  } catch (err) {
-                    console.error(err);
-                    toast.error("Crypto checkout error");
-                  }
-                }}
-                className="w-full bg-gray-900 hover:bg-gray-950 text-white font-medium py-3.5 px-4 rounded-lg flex items-center justify-center"
-              >
-                Pay with Crypto
-              </button>
-            </div>
-
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={closeThirdModal}
-                className="text-gray-400 hover:text-white font-medium"
-              >
-                Cancel Payment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     
+ 
     </div>
   );
 }

@@ -540,48 +540,57 @@ useEffect(() => {
                 <CustomButton text="Connect" />
               </button>
 
-              <div className="flex items-center cursor-pointer">
-                <div
-                  className="bg-[#002AA8] mr-0.5"
-                  style={{ width: "0.25rem", height: "1.3rem" }}
-                ></div>
+              <button onClick={closeFourthModal}>
+                 <div className="flex items-center">
+              {/* Left small bar */}
+              <div
+                className="bg-[#002AA8] mr-0.5"
+                style={{
+                  width: "0.25rem", // ~3.99px
+                  height: "1.3rem", // ~21.93px
+                }}
+              ></div>
 
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.7rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.375rem 0.25rem 0.375rem 0",
-                  }}
-                ></div>
+              {/* Left angled border */}
+              <div
+                className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                style={{
+                 
+                  borderStyle: "solid",
+                  borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                }}
+              ></div>
 
-                <div
-                  className="flex items-center justify-center text-white font-medium"
-                  style={{
-                    width: "9rem",
-                    height: "2.5rem",
-                    border: "0.15rem solid #002AA8",
-                  }}
-                >
-                  Cancel
-                </div>
-
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.7rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.25rem 0 0.375rem 0.25rem",
-                  }}
-                ></div>
-
-                <div
-                  className="bg-[#002AA8]"
-                  style={{ width: "0.25rem", height: "1.3rem" }}
-                ></div>
+              {/* Main button area */}
+              <div
+                className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
+                style={{
+                
+               
+                  // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                  border: "2.24px solid #002AA8", // ~2.42px
+                }}
+              >
+              Cancel
               </div>
+
+              {/* Right angled border */}
+              <div
+                className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                style={{
+                 
+                  borderStyle: "solid",
+                  borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                }}
+              ></div>
+
+              {/* Right small bar */}
+              <div
+                className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"
+               
+              ></div>
+            </div>
+              </button>
             </div>
           </div>
         </div>

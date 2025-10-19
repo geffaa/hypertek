@@ -4,20 +4,21 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cors from "cors";
 import { DBConnections } from "./Database/Db.js";
+import EventEmitter from "events";
+EventEmitter.defaultMaxListeners = 20; // or higher
 
 // Routes
 import { Route } from "./Routes/User.js";
 import router from "./Routes/MarketPlace.js";
 import Landrouter from "./Routes/LandRoute.js";
 import ActivityRouter from "./Routes/Activity.js";
-import StripRoute from "./Routes/Stripe.js";
-import StripSaveRoute from "./Routes/StripeSave.js";
-import { stripeWebhook } from "./Controllers/Stripe.js"; // Import the webhook function directly
-import CryptoSaveRotue from "./Routes/CryptoSave.js";
-import CryptoSessionRotue from "./Routes/CryptoSession.js";
 import HistoryRoute from "./Routes/History.js";
 import { CardRoute } from "./Routes/Paywithcard.js";
 import { SaveCardRoute } from "./Routes/SaveCard.js";
+import { PaymentRotue } from "./Routes/Payment-intent.js";
+import { PaymentHook } from "./Routes/webhookroute.js";
+import { PcheckingRoute } from "./Routes/checkPayment.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,9 +62,11 @@ try {
 
 
 // i set this route here becasue if i put this rotue below the middleware then it will not work
-app.use('/api/v1/stripe', StripSaveRoute);
-app.use('/api/v1/crypto',CryptoSaveRotue)
+// app.use('/api/v1/stripe', StripSaveRoute);
 app.use('/api/v1/card',SaveCardRoute)
+app.use("/api/v1/payment",PaymentHook)
+
+
 
 
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
@@ -76,11 +79,25 @@ app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
 app.use("/api/v1/history",HistoryRoute)
+app.use("/api/v1/payment",PaymentRotue)
+
+/// check game is already purchase or not 
+app.use('/api/v1/game',PcheckingRoute)
+
+app.use((req, res, next) => {
+  if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
+    next(); // skip express.json for this route
+  } else {
+    express.json()(req, res, next);
+  }
+});
+
 
 // Stripe routes (EXCLUDE webhook from these since it's already defined above)
-app.use("/api/v1/stripe", StripRoute);
-app.use("/api/v1/crypto",CryptoSessionRotue)
+// app.use("/api/v1/stripe", StripRoute);
 app.use("/api/v1/card",CardRoute)
+// Add this with your other regular routes
+
 
 // Global error handler
 app.use((err, req, res, next) => {

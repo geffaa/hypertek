@@ -14,6 +14,13 @@ const PaymentSchema = new mongoose.Schema({
     required: false, // Make required if you always have a game
   },
 
+  productId:{
+    required:[true,"product Id is required"],
+     type: mongoose.Schema.Types.ObjectId,
+
+  },
+
+
   gameTitle: {
     type: String,
     required: true,
