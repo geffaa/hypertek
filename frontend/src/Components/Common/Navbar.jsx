@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { FiSearch } from "react-icons/fi";
+import jwtDecode from "jwt-decode";
 
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
@@ -26,13 +27,32 @@ export default function Navbar() {
   console.log("your user from redux store :", user);
   console.log("your user from redux token :", token);
   console.log("your user from redux isLoggedIn :", isLoggedInUser);
+
+  // token expired logic
   useEffect(() => {
-    if (isLoggedInUser) {
-      setIsLogin(true);
-    } else {
+  if (!token) {
+    // No token → not logged in
+    setIsLogin(false);
+    return;
+  }
+
+  try {
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000; // convert ms → seconds
+
+    if (decoded.exp < currentTime) {
+      console.log("Token has expired");
       setIsLogin(false);
+    } else {
+      console.log("Token is valid");
+      setIsLogin(true);
     }
-  }, [isLoggedInUser]);
+  } catch (err) {
+    console.error("Invalid token:", err);
+    setIsLogin(false); // invalid token → not logged in
+  }
+}, [token]);
+
 
   const shopRef = useRef(null);
   const socialRef = useRef(null);

@@ -144,17 +144,20 @@ function CheckoutForm({ amount , item , user  }) {
             </p>
           )}
 
-          <button
-            disabled={!stripe || loading}
-            className={`w-full mt-6 py-3 rounded-xl font-semibold text-white text-lg tracking-wide transition-all duration-200 
-              ${
-                loading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
-              }`}
-          >
-            {loading ? "Processing..." : `Pay $${amount}`}
-          </button>
+         <div className="flex justify-center mt-6">
+  <button
+    disabled={!stripe || loading}
+    className={`w-1/2 py-3 rounded-xl font-semibold text-white text-lg tracking-wide transition-all duration-200 
+      ${
+        loading
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
+      }`}
+  >
+    {loading ? "Processing..." : `Pay $${amount}`}
+  </button>
+</div>
+
         </form>
       </div>
     </div>
