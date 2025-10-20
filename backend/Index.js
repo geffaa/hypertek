@@ -18,6 +18,7 @@ import { SaveCardRoute } from "./Routes/SaveCard.js";
 import { PaymentRotue } from "./Routes/Payment-intent.js";
 import { PaymentHook } from "./Routes/webhookroute.js";
 import { PcheckingRoute } from "./Routes/checkPayment.js";
+import { searchRouter } from "./Routes/SearchRoute.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -84,6 +85,10 @@ app.use("/api/v1/payment",PaymentRotue)
 /// check game is already purchase or not 
 app.use('/api/v1/game',PcheckingRoute)
 
+// Searching items
+app.use("/api/v1/search",searchRouter)
+
+
 app.use((req, res, next) => {
   if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
     next(); // skip express.json for this route
@@ -93,10 +98,8 @@ app.use((req, res, next) => {
 });
 
 
-// Stripe routes (EXCLUDE webhook from these since it's already defined above)
-// app.use("/api/v1/stripe", StripRoute);
+
 app.use("/api/v1/card",CardRoute)
-// Add this with your other regular routes
 
 
 // Global error handler

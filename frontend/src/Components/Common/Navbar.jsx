@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
+import { Link, useLocation  , useNavigate} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
@@ -10,13 +10,22 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { FiSearch } from "react-icons/fi";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { BACKEND_BASE_URL } from "../../Config";
+import { FiLogOut } from "react-icons/fi";
+import { toast } from "react-hot-toast"
+import { useDispatch } from "react-redux";
 
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
 import XImg from "../../assets/images/skipe.png";
 import TelegramImg from "../../assets/images/telegram.png";
+  import { logout } from "../../Redux/AuthSlice"
+
 
 export default function Navbar() {
+   const dispatch = useDispatch();
+  const navigate  = useNavigate()
   const location = useLocation();
   const [isLoggedIn, setIsLogin] = useState(false);
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
@@ -28,31 +37,99 @@ export default function Navbar() {
   console.log("your user from redux token :", token);
   console.log("your user from redux isLoggedIn :", isLoggedInUser);
 
+  // ------------------------- SEARCHING ------------------------------
+  const [results, setResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const [query, setQuery] = useState("");
+
+  // Fetch search results when query changes
+  useEffect(() => {
+    if (!query) {
+      setResults([]);
+      return;
+    }
+
+    const fetchResults = async () => {
+      try {
+        const res = await axios.get(
+          // `http://localhost:4700/api/v1/search/search?query=${query}`
+          `${BACKEND_BASE_URL}/api/v1/search/search?query=${query}`
+        );
+        setResults([...res.data.lands, ...res.data.nfas]);
+        setShowDropdown(true);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const delayDebounce = setTimeout(fetchResults, 300); // debounce
+    return () => clearTimeout(delayDebounce);
+  }, [query]);
+
+  /// get the search item
+  // handle search input
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (value.length > 1) {
+      try {
+        const res = await axios.get(
+          // `http://localhost:4700/api/v1/search/search?query=${value}`
+          `${BACKEND_BASE_URL}/api/v1/search/search?query=${value}`
+        );
+        setResults([...res.data.lands, ...res.data.nfas]);
+        setShowDropdown(true);
+        console.log("Search results:", res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      setResults([]);
+    }
+  };
+
+  // get the details of that search
+  const handleGetDetails = async (item) => {
+    try {
+      const res = await axios.get(
+        // `http://localhost:4700/api/v1/search/item/${item._id}`
+        `${BACKEND_BASE_URL}/api/v1/search/item/${item._id}`
+      );
+      console.log("Full item data:", res.data);
+      // You can navigate to a details page or open a modal
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // --------------------------- search end ---------------------------
+
   // token expired logic
   useEffect(() => {
-  if (!token) {
-    // No token → not logged in
-    setIsLogin(false);
-    return;
-  }
-
-  try {
-    const decoded = jwtDecode(token);
-    const currentTime = Date.now() / 1000; // convert ms → seconds
-
-    if (decoded.exp < currentTime) {
-      console.log("Token has expired");
+    if (!token) {
+      // No token → not logged in
       setIsLogin(false);
-    } else {
-      console.log("Token is valid");
-      setIsLogin(true);
+      return;
     }
-  } catch (err) {
-    console.error("Invalid token:", err);
-    setIsLogin(false); // invalid token → not logged in
-  }
-}, [token]);
 
+    try {
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // convert ms → seconds
+
+      if (decoded.exp < currentTime) {
+        console.log("Token has expired");
+        setIsLogin(false);
+      } else {
+        console.log("Token is valid");
+        setIsLogin(true);
+      }
+    } catch (err) {
+      console.error("Invalid token:", err);
+      setIsLogin(false); // invalid token → not logged in
+    }
+  }, [token]);
 
   const shopRef = useRef(null);
   const socialRef = useRef(null);
@@ -91,6 +168,20 @@ export default function Navbar() {
   ];
   const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
 
+
+
+   const handleLogout = () => {
+  
+
+  // Dispatch logout
+  dispatch(logout());
+
+  // Show success toast
+  toast.success("User logged out successfully");
+
+  // Redirect to login page
+  navigate("/signin");
+};
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
       {/* Container with max-width and centered */}
@@ -110,6 +201,9 @@ export default function Navbar() {
                   <input
                     type="text"
                     placeholder="Search..."
+                    value={query}
+                    onChange={handleSearchChange}
+                    onFocus={() => query && setShowDropdown(true)}
                     className="bg-transparent outline-none text-white pl-2 text-sm w-full"
                   />
                 </div>
@@ -301,7 +395,8 @@ export default function Navbar() {
             {/* Desktop Right Items */}
             {isLoggedIn ? (
               <div className="hidden md:flex items-center space-x-4">
-                <div className="flex items-center rounded-[10px] bg-[#8C9ED8] p-1 min-w-[200px]">
+                {/* ------------------------------------ Dynamic Searching -------------------------  */}
+                <div className="relative flex items-center rounded-[10px] bg-[#8C9ED8] p-1 min-w-[200px]">
                   <img
                     src={SearchImg}
                     alt="Search"
@@ -311,8 +406,35 @@ export default function Navbar() {
                     type="text"
                     placeholder="Search..."
                     className="bg-transparent outline-none text-white placeholder-white/80 pl-2 w-full text-sm"
+                    value={query}
+                    onChange={handleSearchChange}
+                    onFocus={() => query && setShowDropdown(true)}
                   />
+
+                  {/* Dropdown */}
+                  {showDropdown && results.length > 0 && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute top-full left-0 w-full bg-white text-black rounded-md shadow-lg mt-1 z-50 max-h-60 overflow-auto"
+                    >
+                      {results.map((item) => (
+                        <div
+                          key={item._id}
+                          onClick={() => handleGetDetails(item)}
+                          className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                        >
+                          {item.title}{" "}
+                          <span className="text-xs text-gray-500">
+                            {/* ({item.type}) */}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
+
+                {/* ---------------------------- search end ------------------  */}
+
                 <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">
                   <Link to="/profile">
                     <FontAwesomeIcon
@@ -320,6 +442,11 @@ export default function Navbar() {
                       className="text-white w-5 h-5"
                     />
                   </Link>
+                </div>
+                <div>
+                  <button onClick={handleLogout} className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white">
+                    <FiLogOut className="w-6 h-6" />
+                  </button>
                 </div>
               </div>
             ) : (
@@ -334,7 +461,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
+          <div className="md:hidden  bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
             {/* Shop */}
             <button
               onClick={() => setShopOpen(!shopOpen)}
@@ -453,27 +580,20 @@ export default function Navbar() {
 
             {/* Logged-in Search + Profile */}
             {isLoggedIn ? (
-              <div className="flex items-center justify-end space-x-2 mt-4 w-full">
-                <div className="flex hidden md:inline-block  items-center bg-[#8C9ED8] rounded-[10px] p-2 w-full">
-                  <img
-                    src={SearchImg}
-                    alt="Search"
-                    className="w-8 h-8 rounded-md"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="bg-transparent outline-none text-white placeholder-white/80 pl-2 w-full text-sm"
-                  />
-                </div>
+              <><div className="flex items-center justify-end space-x-2 mt-4 w-full">
                 <Link to="/profile">
                   <img
                     src={ProfileImg}
                     alt="Profile"
-                    className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200"
-                  />
-                </Link>{" "}
-              </div>
+                    className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200" />
+                </Link>
+                <button onClick={handleLogout}
+                
+                className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white"
+              >
+                  <FiLogOut className="w-6 h-6" />
+                </button>
+              </div></>
             ) : (
               <div className="flex justify-center mt-4 pt-4 border-t border-white/20">
                 <Link to="/signup" onClick={closeMobileMenu}>
@@ -481,6 +601,28 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
+          </div>
+        )}
+
+        {/* search field on the small screen  */}
+        {showDropdown && results.length > 0 && (
+          <div
+            ref={dropdownRef}
+            className="absolute top-[3rem] left-8 right-0 w-[13rem] mx-auto item-center sm:hidden bg-white text-black rounded-md shadow-lg mt-1 z-50 max-h-60 overflow-auto"
+          >
+            {results.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => {
+                  handleGetDetails(item);
+                  setShowDropdown(false);
+                }}
+                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
+              >
+                {item.title}{" "}
+                {/* <span className="text-xs text-gray-500">({item.type})</span> */}
+              </div>
+            ))}
           </div>
         )}
       </div>
