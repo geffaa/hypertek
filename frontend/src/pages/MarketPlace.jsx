@@ -466,10 +466,10 @@ const getDaysAgo = (dateString) => {
                           </div>
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          {item.buyer}
+                          {item.type}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                          {item.type}
+                          {item.buyer}
                         </td>
                         <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
                           {item.seller}

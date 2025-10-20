@@ -21,7 +21,7 @@ function authMiddleware(req, res, next) {
     next();
   } catch (err) {
     console.log("❌ JWT Verification Error:", err.message);
-    return res.status(403).json({ message: "Invalid or expired token", error: err.message });
+    return res.status(403).json({ message: "Token is Expired please Re-login", error: err.message });
   }
 }
 
