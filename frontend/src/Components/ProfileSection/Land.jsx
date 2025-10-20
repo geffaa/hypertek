@@ -137,8 +137,7 @@ useEffect(() => {
                 {/* Profile Image */}
                 <div className="relative">
                   <img
-                   src={userData.Avatar ? `http://localhost:3000${userData.Avatar}` : Profile}
-                    alt="Profile"
+ src={userData.Avatar ? `https://api-hyper-tek-games.deventiatech.com${userData.Avatar}` : Profile}                    alt="Profile"
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg 
             -mt-12 sm:-mt-16 md:-mt-16"
                   />
