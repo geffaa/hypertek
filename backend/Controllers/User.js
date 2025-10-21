@@ -403,7 +403,7 @@ const DiscordAuth = async (req, res) => {
 const GetProfile = async (req, res) => {
   try {
     const userId = req.user.id; // from middleware
-    const user = await UserModel.findById(userId).select("-Password");
+    const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
     res.status(200).json({ message: "Profile fetched successfully", user });
   } catch (err) {

@@ -24,7 +24,7 @@ function MarketPlace() {
 
   // get the login user data from the redux store 
    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-   console.log("your data in the profile are :",user.id);
+   console.log("your data in the profile are :",user);
 
 // get the nfa data 
 const [marketData, setMarketData] = useState([]);
@@ -35,6 +35,8 @@ const [ userData , setUserData ] = useState({});
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
   const [isFourthOpen, setIsFourthOpen] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
 
 
     const [selectedItem, setSelectedItem] = useState(null);
@@ -107,6 +109,8 @@ useEffect(() => {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
         });
+
+        console.log("your profile response are :",res);
         setUserData(res.data.user)
         console.log("✅ User profile:", res.data.user);
       } catch (error) {
@@ -121,7 +125,10 @@ useEffect(() => {
   }, [token]);
   
 console.log("Full Name:", userData.FullName);
-
+ const hasAvatar =
+    userData?.Avatar &&
+    userData.Avatar.trim() !== "" &&
+    !imageError;
 
   return (
     <>
@@ -137,19 +144,27 @@ console.log("Full Name:", userData.FullName);
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
-              <div className="relative flex-shrink-0">
-  {userData?.Avatar && userData.Avatar !== "" ? (
-    <img
-      src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-      alt="Profile"
-      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-    />
-  ) : (
-    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
-      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+               <div className="relative flex-shrink-0">
+      {hasAvatar ? (
+        <img
+          src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+          alt="Profile"
+          onError={() => setImageError(true)} // if image fails, fallback to avatar
+          className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
+                     rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+        />
+      ) : (
+        <div
+          className="flex items-center justify-center 
+                     bg-gradient-to-br from-blue-500 to-indigo-600 text-white 
+                     rounded-full shadow-lg 
+                     w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
+                     -mt-12 sm:-mt-16 md:-mt-16"
+        >
+          <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+        </div>
+      )}
     </div>
-  )}
-</div>
 
                 {/* Profile Info */}
                 <div className="mt-3 text-left text-white sm:mt-0">
