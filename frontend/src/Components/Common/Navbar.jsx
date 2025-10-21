@@ -21,6 +21,8 @@ import DiscordImg from "../../assets/images/discard.png";
 import XImg from "../../assets/images/skipe.png";
 import TelegramImg from "../../assets/images/telegram.png";
   import { logout } from "../../Redux/AuthSlice"
+  import { motion, AnimatePresence } from "framer-motion";
+
 
 
 export default function Navbar() {
@@ -42,6 +44,8 @@ export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const [query, setQuery] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
 
   // Fetch search results when query changes
   useEffect(() => {
@@ -167,27 +171,15 @@ export default function Navbar() {
 ];
 const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
 
-const handleLogout = () => {
-  const confirmLogout = window.confirm("Are you sure you want to log out?");
 
-  if (confirmLogout) {
-    // Dispatch logout action
+
+const handleLogoutConfirm = () => {
     dispatch(logout());
-
-    // Show success toast
     toast.success("User logged out successfully");
-
-    // Redirect to login page
     navigate("/signin");
-  } else {
-    toast.info("Logout cancelled");
-  }
-};
+  };
 
 
-const handleSocial = async(e)=>{
-  e.preventDefault();
-}
 
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
@@ -456,9 +448,13 @@ const handleSocial = async(e)=>{
                   </Link>
                 </div>
                 <div>
-                  <button onClick={handleLogout} className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white">
-                    <FiLogOut className="w-6 h-6" />
-                  </button>
+                 <button
+  onClick={() => setShowModal(true)}
+  className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white"
+>
+  <FiLogOut className="w-6 h-6" />
+</button>
+
                 </div>
               </div>
             ) : (
@@ -599,7 +595,7 @@ const handleSocial = async(e)=>{
                     alt="Profile"
                     className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200" />
                 </Link>
-                <button onClick={handleLogout}
+                <button   onClick={() => setShowModal(true)}
                 
                 className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white"
               >
@@ -638,6 +634,50 @@ const handleSocial = async(e)=>{
           </div>
         )}
       </div>
+
+        {/* Confirmation Modal */}
+    <AnimatePresence>
+  {showModal && (
+    <motion.div
+      className="fixed inset-0 z-50 pt-32 flex items-start justify-center bg-black/60 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 w-[90%] max-w-sm text-center"
+        initial={{ scale: 0.8, y: 30 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.8, y: 30 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      >
+        <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+          Confirm Logout
+        </h2>
+
+        <p className="text-gray-500 dark:text-gray-300 mb-8">
+          Are you sure you want to log out?
+        </p>
+
+        <div className="flex justify-center gap-4">
+          <button
+            onClick={handleLogoutConfirm}
+            className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-all"
+          >
+            Yes, Logout
+          </button>
+          <button
+            onClick={() => setShowModal(false)}
+            className="px-5 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-all"
+          >
+            Cancel
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </nav>
   );
 }
