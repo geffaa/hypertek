@@ -69,9 +69,10 @@ switch (event.type) {
     console.log("⚠️ Payment canceled:", paymentData.paymentIntentId);
     break;
 
-  default:
-    console.log(`Unhandled event type: ${event.type}`);
-    return res.status(400).send(`Unhandled event type: ${event.type}`);
+ default:
+  console.log(`ℹ️ Ignored event type: ${event.type}`);
+  return res.json({ received: true });
+
 }
 
 
