@@ -19,6 +19,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 
 
+
 function MarketPlace() {
 
   // get the login user data from the redux store 
@@ -136,10 +137,10 @@ console.log("Full Name:", userData.FullName);
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
-               <div className="relative flex-shrink-0">
-  {userData?.Avatar ? (
+              <div className="relative flex-shrink-0">
+  {userData?.Avatar && userData.Avatar !== "" ? (
     <img
-      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+      src={`https://api-hyper-tek-games.deventiatech.com/${userData.Avatar}`}
       alt="Profile"
       className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
     />
