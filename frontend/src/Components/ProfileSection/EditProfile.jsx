@@ -256,7 +256,7 @@ function EditProfile() {
                 onChange={(e) => setConfirmPass(e.target.value)}
                 className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white focus:outline-none "
               />
-
+{/* 
               <button
                 type="button"
                 onClick={handleLogout}
@@ -264,7 +264,7 @@ function EditProfile() {
               >
                 Logout
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </button> */}
             </div>
 
             {/* Save Button */}

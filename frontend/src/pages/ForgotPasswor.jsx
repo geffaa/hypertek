@@ -5,6 +5,8 @@ import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {  BACKEND_BASE_URL } from "../Config"
+
 import CustomButton from "../Components/Buttons/Button1";
 
 function ForgotPassword() {
@@ -25,7 +27,8 @@ function ForgotPassword() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/forgot-password",
+        // "http://localhost:3000/api/v1/user/forgot-password",
+        `${BACKEND_BASE_URL}/api/v1/user/forgot-password`,
         { Email: email }
       ); 
 
