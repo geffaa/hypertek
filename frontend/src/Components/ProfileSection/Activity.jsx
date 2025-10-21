@@ -125,11 +125,11 @@ function PersonalActivity() {
               {/* Profile Info */}
               <div className="text-left text-white">
                 <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                                     {userData.FullName
-    ? `${userData.FullName || ""}`
-    : userData.Email
-    ? userData.Email.split("@")[0]
-    : "Guest"} 
+                                   {userData.FullName
+  ? userData.FullName.replace(/[0-9]/g, "") || ""
+  : userData.Email
+  ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+  : "Guest"}
 
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-400 break-words">

@@ -171,10 +171,11 @@ console.log("Full Name:", userData.FullName);
                   <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
 
 {userData.FullName
-    ? `${userData.FullName || ""}`
-    : userData.Email
-    ? userData.Email.split("@")[0]
-    : "Guest"}                  </h2>
+  ? userData.FullName.replace(/[0-9]/g, "") || ""
+  : userData.Email
+  ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+  : "Guest"}
+                 </h2>
                   <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
                    {userData.DiscordId || userData.GoogleId || userData._id || "null"}
 
