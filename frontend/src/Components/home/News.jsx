@@ -158,7 +158,7 @@ export default function News() {
 
           {/* More News Button */}
 <div className="flex justify-start sm:justify-center mt-4">
-  <Link to="#">
+  <Link to="#" onClick={(e) => e.preventDefault()} >
     <CustomButton text="More News" />
   </Link>
 </div>

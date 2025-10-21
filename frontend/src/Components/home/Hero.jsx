@@ -46,8 +46,8 @@ export default function Hero() {
               bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
             />
           </Link>
-          <Link to="#" className="hidden md:block">
-            <div className="flex items-center">
+          <Link to="#" className="hidden md:block" onClick={(e) => e.preventDefault()} >
+            <div className="flex items-center pointer-events-none">
               {/* Left small bar */}
               <div
                 className="bg-[#002AA8] mr-0.5"

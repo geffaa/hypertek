@@ -63,21 +63,21 @@ function Footer() {
             
             {/* Social Icons */}
             <div className="flex gap-3">
-              <a href="#" aria-label="Discord">
+              <a href="#" aria-label="Discord" onClick={(e) => e.preventDefault()} >
                 <img
                   src={DiscordImg}
                   alt="Discord"
                   className="w-[19px] h-[19px] hover:opacity-75 transition"
                 />
               </a>
-              <a href="#" aria-label="Skype">
+              <a href="#" aria-label="Skype" onClick={(e) => e.preventDefault()} >
                 <img
                   src={SkypeImg}
                   alt="Skype"
                   className="w-[19px] h-[17px] hover:opacity-75 transition"
                 />
               </a>
-              <a href="#" aria-label="Telegram">
+              <a href="#" aria-label="Telegram" onClick={(e) => e.preventDefault()} >
                 <img
                   src={TelegramImg}
                   alt="Telegram"
@@ -87,7 +87,7 @@ function Footer() {
             </div>
             
             {/* Logo */}
-            <div className="flex-shrink-0 mt-16">
+            <div className="flex-shrink-0 mt-16 cursor-pointer" onClick={(e) => e.preventDefault()} >
               <img
                 src={Logo}
                 alt="Logo"
@@ -107,7 +107,7 @@ function Footer() {
           }}
         >
           {/* Logo */}
-          <div className="flex-shrink-0 flex justify-center md:justify-start">
+          <div className="flex-shrink-0 flex cursor-pointer justify-center md:justify-start">
             <img
               src={Logo}
               alt="Logo"
@@ -115,34 +115,34 @@ function Footer() {
             />
           </div>
           {/* Menu Links */}
-          <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm font-medium justify-center md:justify-end text-center md:text-left">
+          <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm font-medium justify-center md:justify-end text-center md:text-left z-20">
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className="hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
                 Market Place
               </a>
             </li>
-            <li>
-              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors">
+            <li className="">
+              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors z-10 " onClick={(e) => e.preventDefault()} >
                 News
               </a>
             </li>
             <li>
-              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors">
+              <a href="#" className="cursor-pointer hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
                 WhitePapers
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className="hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
                 FAQ
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className="hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
                 Disclaimer
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a href="#" className="hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
                 Terms and Conditions
               </a>
             </li>
@@ -157,21 +157,21 @@ function Footer() {
           </div>
           {/* Social Icons */}
           <div className="flex gap-4 justify-center  md:justify-end mt-2 md:mt-0 md:order-2">
-            <a href="#" aria-label="Discord">
+            <a href="#" aria-label="Discord" onClick={(e) => e.preventDefault()}>
               <img
                 src={DiscordImg}
                 alt="Discord"
                 className="w-[19px] h-[19px] hover:opacity-75 transition"
               />
             </a>
-            <a href="#" aria-label="Skype">
+            <a href="#" aria-label="Skype" onClick={(e) => e.preventDefault()}>
               <img
                 src={SkypeImg}
                 alt="Skype"
                 className="w-[19px] h-[17px] hover:opacity-75 transition"
               />
             </a>
-            <a href="#" aria-label="Telegram">
+            <a href="#" aria-label="Telegram" onClick={(e) => e.preventDefault()}>
               <img
                 src={TelegramImg}
                 alt="Telegram"

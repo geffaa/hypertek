@@ -184,6 +184,11 @@ const handleLogout = () => {
   }
 };
 
+
+const handleSocial = async(e)=>{
+  e.preventDefault();
+}
+
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
       {/* Container with max-width and centered */}
@@ -305,7 +310,8 @@ const handleLogout = () => {
                 About Us
               </Link>
               <Link
-                to="/news"
+                to="#"
+                onClick={(e) => e.preventDefault()}
                 className="hover:text-blue-300 transition-colors duration-200"
               >
                 News
@@ -325,11 +331,12 @@ const handleLogout = () => {
                 {socialOpen && (
                   <div className="absolute top-full left-0  w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
                     <a
-                      href="https://discord.com"
+                      href="#"
                       target="_blank"
                       rel="noreferrer"
+                      onClick={(e) => e.preventDefault()}
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      onClick={() => setSocialOpen(false)}
+                      // onClick={() => setSocialOpen(false)}
                     >
                       <img
                         src={DiscordImg}
@@ -341,11 +348,13 @@ const handleLogout = () => {
                       </span>
                     </a>
                     <a
-                      href="https://x.com"
+                      href="#"
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      onClick={() => setSocialOpen(false)}
+                      // onClick={() => setSocialOpen(false)}
+                      onClick={(e) => e.preventDefault()}
+                      
                     >
                       <img
                         src={XImg}
@@ -357,11 +366,12 @@ const handleLogout = () => {
                       </span>
                     </a>
                     <a
-                      href="https://t.me"
+                      href="#"
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      onClick={() => setSocialOpen(false)}
+                      // onClick={() => setSocialOpen(false)}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
                         src={TelegramImg}
