@@ -10,6 +10,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { BACKEND_BASE_URL } from "../../Config"
+import { FaUserCircle } from "react-icons/fa";
 
 function PersonalActivity() {
   /// get the activity from the backend
@@ -107,17 +108,28 @@ function PersonalActivity() {
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col sm:flex-row items-start gap-4">
               {/* Profile Image */}
-              <div className="flex-shrink-0">
-                <img
- src={userData.Avatar ? `https://api-hyper-tek-games.deventiatech.com${userData.Avatar}` : Profile}                  alt="Profile"
-                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
-                />
-              </div>
+              <div className="relative flex-shrink-0">
+  {userData?.Avatar ? (
+    <img
+      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+      alt="Profile"
+      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+    />
+  ) : (
+    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
+      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+    </div>
+  )}
+</div>
 
               {/* Profile Info */}
               <div className="text-left text-white">
                 <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                                      {userData.FullName || "N/A"}
+                                     {userData.FullName
+    ? `${userData.FullName || ""}`
+    : userData.Email
+    ? userData.Email.split("@")[0]
+    : "Guest"} 
 
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-400 break-words">

@@ -46,7 +46,7 @@ export default function Hero() {
               bgcolor="linear-gradient(180deg, #002AA8 0%, #001142 100%)"
             />
           </Link>
-          <Link to="/download-game" className="hidden md:block">
+          <Link to="#" className="hidden md:block">
             <div className="flex items-center">
               {/* Left small bar */}
               <div

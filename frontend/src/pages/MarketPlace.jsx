@@ -12,7 +12,7 @@ import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 
-import { BACKEND_BASE_URL } from "../Config"
+import { BACKEND_BASE_URL } from "../Config";
 
 function MarketPlace() {
   //// get the nfa data
@@ -50,25 +50,20 @@ function MarketPlace() {
   console.log("your land  data are here :", landData);
   console.log("your activity  data are here :", activityData);
 
+  /// convert the date to days only
+  const getDaysAgo = (dateString) => {
+    const created = new Date(dateString);
+    const now = new Date();
 
+    // Difference in milliseconds
+    const diffInMs = now.getTime() - created.getTime();
 
-  /// convert the date to days only 
-const getDaysAgo = (dateString) => {
-  const created = new Date(dateString);
-  const now = new Date();
+    // If the time is in the future, return "0d"
+    if (diffInMs < 0) return "0d";
 
-  // Difference in milliseconds
-  const diffInMs = now.getTime() - created.getTime();
-
-  // If the time is in the future, return "0d"
-  if (diffInMs < 0) return "0d";
-
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-  return `${diffInDays}d`;
-};
-
-
-
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    return `${diffInDays}d`;
+  };
 
   return (
     <>
@@ -246,12 +241,12 @@ const getDaysAgo = (dateString) => {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4 text-left">
+                  <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">
                     {item.title}
                   </h2>
 
                   {/* Stats */}
-                  <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
+                  <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
                     <h3 className="text-xs lg:text-sm font-semibold">
                       {item.serialNumber} 🔥
                     </h3>
@@ -268,7 +263,7 @@ const getDaysAgo = (dateString) => {
                   </div>
 
                   {/* Button (Centered) */}
-                  <div className="mt-auto flex justify-center items-center">
+                  <div className=" flex justify-center items-center">
                     <Link
                       to="/buy-nfa"
                       state={{ item }}
@@ -300,7 +295,7 @@ const getDaysAgo = (dateString) => {
 
               <div className="flex justify-end items-center text-white">
                 <Link
-                  to="/buy-land"
+                  to="/market-place"
                   className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
                 >
                   <span>Expand All</span>
@@ -357,10 +352,10 @@ const getDaysAgo = (dateString) => {
 
                   {/* Button (with side space) */}
                   {/* Button (smaller & centered with spacing) */}
-                  <div className="mt-auto flex justify-center items-center px-4 sm:px-6 lg:px-8">
+                  <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
                     <Link
                       to="/buy-land"
-                        state={{ item }}
+                      state={{ item }}
                       className="cursor-pointer flex justify-center w-full"
                     >
                       <CustomButton
@@ -380,37 +375,34 @@ const getDaysAgo = (dateString) => {
             <div className=" w-full flex flex-col gap-6 lg:gap-8">
               {/* Header */}
               <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
-               <div className="flex flex-col gap-3 w-full">
-  {/* Header Row */}
-  <div className="flex justify-between items-center w-full">
-    {/* Left Side - Title & Lines */}
-    <div className="flex flex-col items-start">
-      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-        ACTIVITIES
-      </h1>
+                <div className="flex flex-col gap-3 w-full">
+                  {/* Header Row */}
+                  <div className="flex justify-between items-center w-full">
+                    {/* Left Side - Title & Lines */}
+                    <div className="flex flex-col items-start">
+                      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                        ACTIVITIES
+                      </h1>
 
-      {/* Decorative lines only on the left */}
-      <div className="flex gap-2 mt-1">
-        <div className="h-[3px] w-4 md:w-8 lg:w-12 bg-white"></div>
-        <div className="h-[3px] w-4 md:w-12 lg:w-20 bg-white"></div>
-        <div className="h-[3px] w-4 md:w-6 lg:w-8 bg-white"></div>
-        <div className="h-[3px] w-8 md:w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-      </div>
-    </div>
+                      {/* Decorative lines only on the left */}
+                      <div className="flex gap-2 mt-1">
+                        <div className="h-[3px] w-4 md:w-8 lg:w-12 bg-white"></div>
+                        <div className="h-[3px] w-4 md:w-12 lg:w-20 bg-white"></div>
+                        <div className="h-[3px] w-4 md:w-6 lg:w-8 bg-white"></div>
+                        <div className="h-[3px] w-8 md:w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                      </div>
+                    </div>
 
-    {/* Right Side - Link */}
-    <Link
+                    {/* Right Side - Link */}
+                    {/* <Link
       to="/nfa-land"
       className="flex items-center gap-1 sm:gap-2 text-white hover:text-gray-300 transition text-xs sm:text-sm md:text-base mt-2 sm:mt-0"
     >
       <span>Expand All</span>
       <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
-    </Link>
-  </div>
-</div>
-
-
-              
+    </Link> */}
+                  </div>
+                </div>
               </div>
 
               {/* Table */}

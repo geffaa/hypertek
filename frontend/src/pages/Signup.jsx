@@ -357,12 +357,12 @@ function Signup() {
           </button>
 
           {/* Twitter */}
-          <button
+          {/* <button
             className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
             onClick={handleTwitterLogin}
           >
             <img src={skype} alt="Skype" className="w-6 h-6" />
-          </button>
+          </button> */}
 
           {/* Google */}
        
