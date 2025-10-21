@@ -42,10 +42,8 @@ function EditProfile() {
     userData?.Avatar ? userData.Avatar : Profile
   );
 
+  console.log("your user data in the edit profile :", userData);
 
-  console.log("your user data in the edit profile :",userData);
-
-  
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -129,51 +127,51 @@ function EditProfile() {
           {/* Profile Info */}
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
-            <div className="relative flex-shrink-0">
-  {/* Display image preview if user selects a new one */}
-  {profileImage && profileImage !== Profile ? (
-    <img
-      src={
-        profileImage.startsWith("data:")
-          ? profileImage // preview (newly uploaded)
-          : `${BACKEND_BASE_URL}${profileImage}` // existing from DB
-      }
-      alt="Profile"
-      className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
-      onClick={handleProfileClick}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = Profile; // fallback image
-      }}
-    />
-  ) : userData?.Avatar ? (
-    <img
-      src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-      alt="Profile"
-      className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
-      onClick={handleProfileClick}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = Profile; // fallback to default
-      }}
-    />
-  ) : (
-    <div
-      onClick={handleProfileClick}
-      className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg cursor-pointer w-24 h-24 md:w-28 md:h-28 -mt-16 border-2 border-white"
-    >
-      <FaUserCircle className="w-16 h-16 md:w-20 md:h-20 text-white" />
-    </div>
-  )}
+              <div className="relative flex-shrink-0">
+                {/* Display image preview if user selects a new one */}
+                {profileImage && profileImage !== Profile ? (
+                  <img
+                    src={
+                      profileImage.startsWith("data:")
+                        ? profileImage // preview (newly uploaded)
+                        : `${BACKEND_BASE_URL}${profileImage}` // existing from DB
+                    }
+                    alt="Profile"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
+                    onClick={handleProfileClick}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = Profile; // fallback image
+                    }}
+                  />
+                ) : userData?.Avatar ? (
+                  <img
+                    src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                    alt="Profile"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
+                    onClick={handleProfileClick}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = Profile; // fallback to default
+                    }}
+                  />
+                ) : (
+                  <div
+                    onClick={handleProfileClick}
+                    className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg cursor-pointer w-24 h-24 md:w-28 md:h-28 -mt-16 border-2 border-white"
+                  >
+                    <FaUserCircle className="w-16 h-16 md:w-20 md:h-20 text-white" />
+                  </div>
+                )}
 
-  <input
-    type="file"
-    ref={fileInputRef}
-    className="hidden"
-    accept="image/*"
-    onChange={handleFileChange}
-  />
-</div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </div>
 
               <div className="mt-3 text-white">
                 <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
@@ -249,7 +247,9 @@ function EditProfile() {
             </div>
 
             {/* Reset Password */}
-            <div className="w-full max-w-md flex flex-col gap-4">
+         {
+          userData.Password && (
+               <div className="w-full max-w-md flex flex-col gap-4">
               <label className="block text-[#FFFFFF] text-[25px] font-medium">
                 Reset Password
               </label>
@@ -274,7 +274,7 @@ function EditProfile() {
                 onChange={(e) => setConfirmPass(e.target.value)}
                 className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white focus:outline-none "
               />
-{/* 
+              {/* 
               <button
                 type="button"
                 onClick={handleLogout}
@@ -284,6 +284,8 @@ function EditProfile() {
                 <ArrowRight className="w-4 h-4" />
               </button> */}
             </div>
+          )
+         }
 
             {/* Save Button */}
             {/* Save Button */}
