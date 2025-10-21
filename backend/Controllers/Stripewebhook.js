@@ -10,6 +10,7 @@ export const StripeWebhook = async (req, res) => {
   let event;
 
   try {
+    // Construct Stripe event
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
@@ -20,41 +21,45 @@ export const StripeWebhook = async (req, res) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  const paymentIntent = event.data?.object;
+  // The object can be PaymentIntent or Charge
+  const dataObject = event.data?.object;
 
   try {
+    // Common payment data from metadata
     let paymentData = {
-      userId: paymentIntent.metadata.userId,
-      email: paymentIntent.metadata.email,
-      amount: paymentIntent.amount / 100,
-      currency: paymentIntent.currency,
-      description: paymentIntent.metadata.description,
-      paymentIntentId: paymentIntent.id,
-      productId: paymentIntent.metadata.productId,
-      provider: paymentIntent.metadata.provider,
-      gameTitle: paymentIntent.metadata.gameTitle,
-      transactionId: paymentIntent.metadata.transactionId || paymentIntent.id,
+      userId: dataObject.metadata?.userId || "unknown",
+      email: dataObject.metadata?.email || "unknown",
+      amount: dataObject.amount / 100 || 0,
+      currency: dataObject.currency || "usd",
+      description: dataObject.metadata?.description || dataObject.description || "",
+      paymentIntentId: dataObject.payment_intent || dataObject.id,
+      productId: dataObject.metadata?.productId || "",
+      provider: dataObject.metadata?.provider || "stripe",
+      gameTitle: dataObject.metadata?.gameTitle || "",
+      transactionId: dataObject.metadata?.transactionId || dataObject.id,
     };
 
     switch (event.type) {
       case "payment_intent.succeeded":
+      case "charge.succeeded":
         paymentData.status = "succeeded";
         await Payment.create(paymentData);
-        console.log("💾 Payment succeeded and stored:", paymentIntent.id);
+        console.log("💾 Payment succeeded and stored:", paymentData.paymentIntentId);
         break;
 
       case "payment_intent.payment_failed":
+      case "charge.failed":
         paymentData.status = "failed";
         paymentData.failureMessage =
-          paymentIntent.last_payment_error?.message || "Payment failed";
+          dataObject.last_payment_error?.message || "Payment failed";
         await Payment.create(paymentData);
-        console.log("❌ Payment failed:", paymentIntent.id);
+        console.log("❌ Payment failed:", paymentData.paymentIntentId);
         break;
 
       case "payment_intent.canceled":
         paymentData.status = "canceled";
         await Payment.create(paymentData);
-        console.log("⚠️ Payment canceled:", paymentIntent.id);
+        console.log("⚠️ Payment canceled:", paymentData.paymentIntentId);
         break;
 
       default:
@@ -62,11 +67,11 @@ export const StripeWebhook = async (req, res) => {
         return res.status(400).send(`Unhandled event type: ${event.type}`);
     }
 
-    // ✅ Only send success to Stripe if DB save succeeded
+    // ✅ Only return success if DB save succeeded
     res.json({ received: true });
   } catch (err) {
     console.error("Error storing payment in DB:", err);
-    // ❌ Tell Stripe webhook failed — it will retry
+    // ❌ Let Stripe retry the webhook
     res.status(500).send("Error storing payment in DB");
   }
 };
