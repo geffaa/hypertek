@@ -69,7 +69,6 @@ function Login() {
         // tokenResponse.access_token is what Google returns
         // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
         const res = await axios.post(
-          // `http://localhost:4700/api/v1/user/google`,
           `${BACKEND_BASE_URL}/api/v1/user/google`,
           {
             token: tokenResponse.access_token, // or response.credential for ID token version
