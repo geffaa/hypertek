@@ -38,34 +38,42 @@ export const StripeWebhook = async (req, res) => {
       gameTitle: dataObject.metadata?.gameTitle || "",
       transactionId: dataObject.metadata?.transactionId || dataObject.id,
     };
+switch (event.type) {
+  case "payment_intent.succeeded":
+    paymentData.status = "succeeded";
 
-    switch (event.type) {
-      case "payment_intent.succeeded":
-      case "charge.succeeded":
-        paymentData.status = "succeeded";
-        await Payment.create(paymentData);
-        console.log("💾 Payment succeeded and stored:", paymentData.paymentIntentId);
-        break;
+    // Check if payment already exists to prevent duplicates
+    const existingPayment = await Payment.findOne({
+      paymentIntentId: paymentData.paymentIntentId,
+    });
 
-      case "payment_intent.payment_failed":
-      case "charge.failed":
-        paymentData.status = "failed";
-        paymentData.failureMessage =
-          dataObject.last_payment_error?.message || "Payment failed";
-        await Payment.create(paymentData);
-        console.log("❌ Payment failed:", paymentData.paymentIntentId);
-        break;
-
-      case "payment_intent.canceled":
-        paymentData.status = "canceled";
-        await Payment.create(paymentData);
-        console.log("⚠️ Payment canceled:", paymentData.paymentIntentId);
-        break;
-
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
-        return res.status(400).send(`Unhandled event type: ${event.type}`);
+    if (!existingPayment) {
+      await Payment.create(paymentData);
+      console.log("💾 Payment succeeded and stored:", paymentData.paymentIntentId);
+    } else {
+      console.log("⚠️ Duplicate payment ignored:", paymentData.paymentIntentId);
     }
+    break;
+
+  case "payment_intent.payment_failed":
+    paymentData.status = "failed";
+    paymentData.failureMessage =
+      dataObject.last_payment_error?.message || "Payment failed";
+    await Payment.create(paymentData);
+    console.log("❌ Payment failed:", paymentData.paymentIntentId);
+    break;
+
+  case "payment_intent.canceled":
+    paymentData.status = "canceled";
+    await Payment.create(paymentData);
+    console.log("⚠️ Payment canceled:", paymentData.paymentIntentId);
+    break;
+
+  default:
+    console.log(`Unhandled event type: ${event.type}`);
+    return res.status(400).send(`Unhandled event type: ${event.type}`);
+}
+
 
     // ✅ Only return success if DB save succeeded
     res.json({ received: true });
