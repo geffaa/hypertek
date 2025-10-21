@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Elements,
@@ -7,29 +6,22 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { STRIPE_PUBLISHABLE_KEY , BACKEND_BASE_URL } from "../Config";
-
-
+import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../Config";
 
 import { useLocation } from "react-router-dom"; // add this
 import { useSelector } from "react-redux";
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 function ConvertToSubcurrency(amount, factor = 100) {
-
   return Math.round(amount * factor);
 }
-
-
 
 if (!STRIPE_PUBLISHABLE_KEY) {
   throw new Error("STRIPE_PUBLISHABLE_KEY is not defined");
 }
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
-function CheckoutForm({ amount , item , user  }) {
-  
-
+function CheckoutForm({ amount, item, user }) {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -38,8 +30,8 @@ function CheckoutForm({ amount , item , user  }) {
 
   useEffect(() => {
     if (!amount) return;
-    if(!amount || !item || !user){
-        toast.error("User data , amount and item details are required")
+    if (!amount || !item || !user) {
+      toast.error("User data , amount and item details are required");
     }
     const createPaymentIntent = async () => {
       try {
@@ -50,14 +42,13 @@ function CheckoutForm({ amount , item , user  }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               amount: ConvertToSubcurrency(amount),
-              userId:user?.id,
-              gameId:item?._id,
-              gameTitle:item?.title,
-              serialNumber:item?.serialNumber,
-              currency:"usd",
-              email:user?.email,
-              productId:item?._id
-            
+              userId: user?.id,
+              gameId: item?._id,
+              gameTitle: item?.title,
+              serialNumber: item?.serialNumber,
+              currency: "usd",
+              email: user?.email,
+              productId: item?._id,
             }),
           }
         );
@@ -71,40 +62,39 @@ function CheckoutForm({ amount , item , user  }) {
       }
     };
     createPaymentIntent();
-  }, [amount , item , user ]);
+  }, [amount, item, user]);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  if (!stripe || !elements) return;
+    if (!stripe || !elements) return;
 
-  const { error: submitError } = await elements.submit();
-  if (submitError) {
-    setErrorMessage(submitError.message);
-    toast.error(submitError.message); // show toast for submit error
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      setErrorMessage(submitError.message);
+      toast.error(submitError.message); // show toast for submit error
+      setLoading(false);
+      return;
+    }
+
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: {
+        return_url: `https://hyper-tek-games.deventiatech.com/dashboard?amount=${amount}`,
+      },
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      toast.error(error.message); // show toast if payment fails
+    } else if (paymentIntent && paymentIntent.status === "succeeded") {
+      toast.success(`Payment Successful! ✅ Amount: $${amount}`); // show success toast
+    }
+
     setLoading(false);
-    return;
-  }
-
-  const { error, paymentIntent } = await stripe.confirmPayment({
-    elements,
-    clientSecret,
-    confirmParams: {
-      return_url: `https://hyper-tek-games.deventiatech.com/dashboard?amount=${amount}`,
-    },
-  });
-
-  if (error) {
-    setErrorMessage(error.message);
-    toast.error(error.message); // show toast if payment fails
-  } else if (paymentIntent && paymentIntent.status === "succeeded") {
-    toast.success(`Payment Successful! ✅ Amount: $${amount}`); // show success toast
-  }
-
-  setLoading(false);
-};
-
+  };
 
   return (
     <div className="w-full max-w-2xl mx-auto mt-10">
@@ -131,7 +121,7 @@ function CheckoutForm({ amount , item , user  }) {
           </div>
         )}
         <p className="text-center text-gray-700 mb-4">
-          You are paying 
+          You are paying
           <span className="font-semibold text-gray-900">${amount}</span>
         </p>
 
@@ -144,20 +134,19 @@ function CheckoutForm({ amount , item , user  }) {
             </p>
           )}
 
-         <div className="flex justify-center mt-6">
-  <button
-    disabled={!stripe || loading}
-    className={`w-1/2 py-3 rounded-xl font-semibold text-white text-lg tracking-wide transition-all duration-200 
+          <div className="flex justify-center mt-6">
+            <button
+              disabled={!stripe || loading}
+              className={`w-1/2 py-3 rounded-xl font-semibold text-white text-lg tracking-wide transition-all duration-200 
       ${
         loading
           ? "bg-gray-400 cursor-not-allowed"
           : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
       }`}
-  >
-    {loading ? "Processing..." : `Pay $${amount}`}
-  </button>
-</div>
-
+            >
+              {loading ? "Processing..." : `Pay $${amount}`}
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -165,17 +154,14 @@ function CheckoutForm({ amount , item , user  }) {
 }
 
 export default function PaymentPage() {
-
-   const location = useLocation();
+  const location = useLocation();
   const { item } = location.state || {};
   const { user, isLoggedInUser } = useSelector((state) => state.auth);
-
 
   console.log("Received item:", item);
   console.log("your login user data are :", user);
 
   const amount = item?.price;
-
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-100 via-purple-100 to-indigo-100">
@@ -187,7 +173,7 @@ export default function PaymentPage() {
           currency: "usd",
         }}
       >
-         <CheckoutForm amount={amount} item={item} user={user} />
+        <CheckoutForm amount={amount} item={item} user={user} />
       </Elements>
     </div>
   );
