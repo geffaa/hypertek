@@ -159,29 +159,31 @@ export default function Navbar() {
 
   // Hide navbar items on these routes
   const hideOnPaths = [
-    "/",
-    "/signup",
-    "/forgot-password",
-    "/reset-password",
-    "/signin",
-    "/about",
-  ];
-  const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/signin",
+  "/about",
+];
+const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
 
+const handleLogout = () => {
+  const confirmLogout = window.confirm("Are you sure you want to log out?");
 
+  if (confirmLogout) {
+    // Dispatch logout action
+    dispatch(logout());
 
-   const handleLogout = () => {
-  
+    // Show success toast
+    toast.success("User logged out successfully");
 
-  // Dispatch logout
-  dispatch(logout());
-
-  // Show success toast
-  toast.success("User logged out successfully");
-
-  // Redirect to login page
-  navigate("/signin");
+    // Redirect to login page
+    navigate("/signin");
+  } else {
+    toast.info("Logout cancelled");
+  }
 };
+
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
       {/* Container with max-width and centered */}

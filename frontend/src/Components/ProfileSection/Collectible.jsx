@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config"
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 
@@ -134,20 +136,29 @@ console.log("Full Name:", userData.FullName);
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
-                <div className="relative flex-shrink-0">
-                  <img
-                   src={userData.Avatar ? `https://api-hyper-tek-games.deventiatech.com${userData.Avatar}` : Profile}
-                    alt="Profile"
-                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16"
-                  />
-                </div>
+               <div className="relative flex-shrink-0">
+  {userData?.Avatar ? (
+    <img
+      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+      alt="Profile"
+      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+    />
+  ) : (
+    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
+      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+    </div>
+  )}
+</div>
 
                 {/* Profile Info */}
                 <div className="mt-3 text-left text-white sm:mt-0">
                   <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
 
-{userData.FullName || "N/A"}
-                  </h2>
+{userData.FullName
+    ? `${userData.FullName || ""}`
+    : userData.Email
+    ? userData.Email.split("@")[0]
+    : "Guest"}                  </h2>
                   <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
                    {userData.DiscordId || userData.GoogleId || userData._id || "null"}
 
@@ -187,11 +198,11 @@ console.log("Full Name:", userData.FullName);
                   />
                 </div>
 
-                <h2 className="text-base lg:text-lg xl:text-xl font-bold mt-3 lg:mt-4">
+                <h2 className="text-base lg:text-lg xl:text-xl font-bold md:mt-3 lg:mt-4">
                   {item.title}
                 </h2>
 
-                <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
+                <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
                   <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
                     {item.serialNumber} 🔥
                   </h3>
@@ -207,7 +218,7 @@ console.log("Full Name:", userData.FullName);
                   </div>
                 </div>
 
-                <div className="flex flex-col items-center justify-center mt-auto w-full">
+                <div className="flex flex-col items-center justify-center w-full">
                   {/* Small screens: always show List Now */}
                   <div className="block lg:hidden w-full">
                     <button onClick={openModal} className="w-full">
@@ -224,7 +235,7 @@ console.log("Full Name:", userData.FullName);
 
 
                   {/* No Listing text for hover state on large screens */}
-                  <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm mt-2 transition-all duration-300">
+                  <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300">
                     No Listing
                   </div>
                 </div>

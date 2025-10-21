@@ -5,17 +5,18 @@ import { Link } from "react-router-dom";
 import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL } from "../../Config"
-
+import { BACKEND_BASE_URL } from "../../Config";
 
 function PopularCollections() {
-  const [marketData, setMarketData] = useState([]); 
+  const [marketData, setMarketData] = useState([]);
 
   // get the market data here
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/market/getMarket`);
+        const res = await axios.get(
+          `${BACKEND_BASE_URL}/api/v1/market/getMarket`
+        );
         if (res.data.success) {
           setMarketData(res.data.data); // assuming backend returns { success, data }
         } else {
@@ -54,61 +55,63 @@ function PopularCollections() {
           </div>
         </div>
         {/* Cards Section */}
- <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-  {marketData.slice(0, 4).map((data, index) => (
-    <div
-      key={index}
-      className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex flex-col justify-between w-full h-[400px]"
-    >
-      {/* Image container */}
-      <div
-        className="w-full aspect-[16/9] sm:aspect-[16/9] lg:aspect-[16/9] overflow-hidden rounded-[19px]"
-        style={{
-          background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-        }}
-      >
-        <img
-          src={popularCollections}
-          alt={data.title || "Collection"}
-          className="w-full h-full object-cover object-top scale-x-[-1]"
-        />
-      </div>
+        <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 ">
+          {marketData.slice(0, 4).map((data, index) => (
+            <div 
+              key={index}
+              className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex flex-col justify-between w-full h-[400px]"
+            >
+              {/* Image container */}
+              <div
+                className="w-full h-[160px] overflow-hidden rounded-[19px]"
+                style={{
+                  background:
+                    "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                }}
+              >
+                <img
+                  src={popularCollections}
+                  alt={data.title || "Collection"}
+                  className="w-full h-full object-cover object-top scale-x-[-1]"
+                />
+              </div>
 
-      {/* Title */}
-      <h2 className="text-lg font-bold mt-4 line-clamp-2" title={data.title}>
-        {data.title || "Monkey Ape"}
-      </h2>
+              {/* Title */}
+              <h2
+                className="text-lg font-bold md:mt-4 line-clamp-2"
+                title={data.title}
+              >
+                {data.title || "Monkey Ape"}
+              </h2>
 
-      {/* Info Row */}
-      <div className="flex justify-between items-center mb-4 mt-5">
-        <h3 className="text-sm font-semibold truncate">
-          {data.serialNumber || "No33"} 🔥
-        </h3>
-        <div className="flex items-center">
-          <img
-            src={TVector}
-            alt=""
-            className="w-[10px] h-[9px] bg-blue-400 rounded-md"
-          />
-          <h3 className="pl-2 text-sm font-semibold">
-            ${data.price || 2000}
-          </h3>
+              {/* Info Row */}
+              <div className="flex justify-between items-center md:mb-4 md:mt-5">
+                <h3 className="text-sm font-semibold truncate">
+                  {data.serialNumber || "No33"} 🔥
+                </h3>
+                <div className="flex items-center">
+                  <img
+                    src={TVector}
+                    alt=""
+                    className="w-[10px] h-[9px] bg-blue-400 rounded-md"
+                  />
+                  <h3 className="pl-2 text-sm font-semibold">
+                    ${data.price || 2000}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Buy Now Button */}
+              <div className=" flex justify-center w-full z-10 scale-90 sm:scale-100">
+                <Link to="market-place" className="flex justify-center">
+                  <button>
+                    <CustomButton text="Buy Now" />
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Buy Now Button */}
-      <div className="mt-auto flex justify-center w-full z-10 scale-90 sm:scale-100">
-        <Link to="market-place" className="flex justify-center">
-          <button>
-            <CustomButton text="Buy Now" />
-          </button>
-        </Link>
-      </div>
-    </div>
-  ))}
-</div>
-
-
       </div>
     </section>
   );

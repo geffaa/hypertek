@@ -8,12 +8,13 @@ import Profile from "../../assets/images/Profile/Profile.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FaUserCircle } from "react-icons/fa";
+
 import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
-import { BACKEND_BASE_URL } from "../../Config"
-
+import { BACKEND_BASE_URL } from "../../Config";
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -41,14 +42,11 @@ function EditProfile() {
     userData?.Avatar ? userData.Avatar : Profile
   );
 
-
-
-const handleLogout = () => {
-  dispatch(logout());    
-  toast.success("User Logout Successfully")    // ✅ clears Redux state & localStorage
-  navigate("/signin");        // ✅ redirect to login page
-};
-
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("User Logout Successfully"); // ✅ clears Redux state & localStorage
+    navigate("/signin"); // ✅ redirect to login page
+  };
 
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
@@ -110,9 +108,7 @@ const handleLogout = () => {
       navigate("/profile", { state: { userData: res.data.user } });
     } catch (error) {
       console.error("❌ Update error:", error);
-      toast.error(
-        error.response?.data?.message || "Failed to update profile"
-      );
+      toast.error(error.response?.data?.message || "Failed to update profile");
     }
   };
 
@@ -135,20 +131,32 @@ const handleLogout = () => {
           {/* Profile Info */}
           <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col items-center text-center">
-              <img
-                   src={userData.Avatar ? `${BACKEND_BASE_URL}${userData.Avatar}` : Profile}
-                alt="Profile"
-                className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white"
-                onClick={handleProfileClick}
-              />
-              <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
+              import {FaUserCircle} from "react-icons/fa";
+              <div className="relative flex-shrink-0">
+                {userData?.Avatar ? (
+                  <img
+                    src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                    alt="Profile"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg cursor-pointer -mt-16 border-2 border-white object-cover"
+                    onClick={handleProfileClick}
+                  />
+                ) : (
+                  <div
+                    onClick={handleProfileClick}
+                    className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg cursor-pointer w-24 h-24 md:w-28 md:h-28 -mt-16 border-2 border-white"
+                  >
+                    <FaUserCircle className="w-16 h-16 md:w-20 md:h-20 text-white" />
+                  </div>
+                )}
 
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </div>
               <div className="mt-3 text-white">
                 <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
                 <p className="text-xs sm:text-sm text-gray-400 break-words flex items-center gap-2">
@@ -250,27 +258,24 @@ const handleLogout = () => {
               />
 
               <button
-  type="button"
-  onClick={handleLogout}
-  className="text-red-500 text-sm flex items-center gap-2 cursor-pointer"
->
-  Logout
-  <ArrowRight className="w-4 h-4" />
-</button>
-
+                type="button"
+                onClick={handleLogout}
+                className="text-red-500 text-sm flex items-center gap-2 cursor-pointer"
+              >
+                Logout
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
 
             {/* Save Button */}
-           {/* Save Button */}
-<div className="flex justify-center w-full">
-  <div className="max-w-md w-full">
-    <button type="submit" className="mx-auto block">
-      <CustomButton text="Save" />
-    </button>
-  </div>
-</div>
-
-
+            {/* Save Button */}
+            <div className="flex justify-center w-full">
+              <div className="max-w-md w-full">
+                <button type="submit" className="mx-auto block">
+                  <CustomButton text="Save" />
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </section>

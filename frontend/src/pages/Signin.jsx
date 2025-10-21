@@ -13,12 +13,10 @@ import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import GlowingOrb from "../Components/Common/BgColoring";
 import { ethers } from "ethers";
-import { BACKEND_BASE_URL } from "../Config"
+import { BACKEND_BASE_URL } from "../Config";
 import google from "../assets/images/login/google.png";
 
 import { useGoogleLogin } from "@react-oauth/google";
-
-
 
 function Login() {
   const navigate = useNavigate();
@@ -42,10 +40,10 @@ function Login() {
     }
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/login`, {
-      // const res = await axios.post(`http://localhost:4700/api/v1/user/login`, {
+        // const res = await axios.post(`http://localhost:4700/api/v1/user/login`, {
         Email: formData.email,
         Password: formData.password,
-      }); 
+      });
 
       dispatch(
         loginSuccess({
@@ -64,38 +62,37 @@ function Login() {
   };
 
   // ---------------- Google Login ----------------
- 
+
   const login = useGoogleLogin({
-      onSuccess: async (tokenResponse) => {
-        try {
-          // tokenResponse.access_token is what Google returns
-          // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
-          const res = await axios.post(
-            // `http://localhost:4700/api/v1/user/google`,
-            `${BACKEND_BASE_URL}/api/v1/user/google`,
-            {
-              token: tokenResponse.access_token, // or response.credential for ID token version
-            }
-          );
-  
-          dispatch(
-            loginSuccess({
-              user: res.data.user,
-              token: res.data.token,
-              isLoggedInUser: true,
-            })
-          );
-          localStorage.setItem("token", res.data.token);
-          toast.success("Google Login successful!");
-          navigate("/profile");
-        } catch (err) {
-          console.error("Google login error:", err);
-          toast.error(err.response?.data?.message || "Google login failed!");
-        }
-      },
-      onError: () => toast.error("Google login failed!"),
-    });
-  
+    onSuccess: async (tokenResponse) => {
+      try {
+        // tokenResponse.access_token is what Google returns
+        // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
+        const res = await axios.post(
+          // `http://localhost:4700/api/v1/user/google`,
+          `${BACKEND_BASE_URL}/api/v1/user/google`,
+          {
+            token: tokenResponse.access_token, // or response.credential for ID token version
+          }
+        );
+
+        dispatch(
+          loginSuccess({
+            user: res.data.user,
+            token: res.data.token,
+            isLoggedInUser: true,
+          })
+        );
+        localStorage.setItem("token", res.data.token);
+        toast.success("Google Login successful!");
+        navigate("/profile");
+      } catch (err) {
+        console.error("Google login error:", err);
+        toast.error(err.response?.data?.message || "Google login failed!");
+      }
+    },
+    onError: () => toast.error("Google login failed!"),
+  });
 
   // ---------------- Discord Login ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
@@ -146,112 +143,120 @@ function Login() {
     fetchDiscordUser();
   }, [dispatch, navigate]);
 
- const handleLogin = async () => {
-  try {
-    if (!window.ethereum) {
-      toast.error("MetaMask is not installed!");
-      return;
-    }
-
-    console.log("MetaMask detected, requesting accounts...");
-
-    // ✅ STEP 1: Clear previous permissions
+  const handleLogin = async () => {
     try {
-      await window.ethereum.request({
-        method: 'wallet_revokePermissions',
-        params: [{ eth_accounts: {} }],
+      if (!window.ethereum) {
+        toast.error("MetaMask is not installed!");
+        return;
+      }
+
+      console.log("MetaMask detected, requesting accounts...");
+
+      // ✅ STEP 1: Clear previous permissions
+      try {
+        await window.ethereum.request({
+          method: "wallet_revokePermissions",
+          params: [{ eth_accounts: {} }],
+        });
+        console.log("Previous permissions cleared");
+      } catch (error) {
+        console.log("No previous permissions to clear", error);
+      }
+
+      // ✅ STEP 2: Request fresh connection
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
       });
-      console.log("Previous permissions cleared");
-    } catch (error) {
-      console.log("No previous permissions to clear",error);
-    }
 
-    // ✅ STEP 2: Request fresh connection
-    const accounts = await window.ethereum.request({ 
-      method: 'eth_requestAccounts' 
-    });
+      console.log("Accounts granted:", accounts);
+      const address = accounts[0];
+      console.log("Address:", address);
 
-    console.log("Accounts granted:", accounts);
-    const address = accounts[0];
-    console.log("Address:", address);
+      // ✅ STEP 3: Use a simpler message format
+      const message = `Login to MyApp - ${Date.now()}`;
+      console.log("Signing message:", message);
 
-    // ✅ STEP 3: Use a simpler message format
-    const message = `Login to MyApp - ${Date.now()}`;
-    console.log("Signing message:", message);
+      console.log("Requesting signature via personal_sign...");
 
-    console.log("Requesting signature via personal_sign...");
+      // ✅ STEP 4: Add manual popup trigger
+      // Sometimes we need to trigger MetaMask manually
+      setTimeout(() => {
+        toast.info(
+          <div>
+            <p>Check for MetaMask popup!</p>
+            <p>If not showing, click the MetaMask icon in your browser.</p>
+          </div>,
+          { duration: 10000 }
+        );
+      }, 1000);
 
-    // ✅ STEP 4: Add manual popup trigger
-    // Sometimes we need to trigger MetaMask manually
-    setTimeout(() => {
-      toast.info(
-        <div>
-          <p>Check for MetaMask popup!</p>
-          <p>If not showing, click the MetaMask icon in your browser.</p>
-        </div>,
-        { duration: 10000 }
+      const signature = await Promise.race([
+        window.ethereum.request({
+          method: "personal_sign",
+          params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address],
+        }),
+        new Promise((_, reject) =>
+          setTimeout(
+            () =>
+              reject(
+                new Error(
+                  "Signature timeout - Click MetaMask icon if popup not visible"
+                )
+              ),
+            20000
+          )
+        ),
+      ]);
+
+      console.log("✅ Signature received:", signature);
+
+      // Continue with backend...
+      const res = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/user/MetaMask`,
+        {
+          address: address.toLowerCase(),
+          signature,
+          message,
+        },
+        { headers: { "Content-Type": "application/json" } }
       );
-    }, 1000);
 
-    const signature = await Promise.race([
-      window.ethereum.request({
-        method: 'personal_sign',
-        params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address],
-      }),
-      new Promise((_, reject) => 
-        setTimeout(() => reject(new Error("Signature timeout - Click MetaMask icon if popup not visible")), 20000)
-      )
-    ]);
+      console.log("Backend response:", res.data);
 
-    console.log("✅ Signature received:", signature);
-
-    // Continue with backend...
-    const res = await axios.post(
-      `${BACKEND_BASE_URL}/api/v1/user/MetaMask`,
-      { 
-        address: address.toLowerCase(),
-        signature, 
-        message 
-      },
-      { headers: { "Content-Type": "application/json" } }
-    );
-
-    console.log("Backend response:", res.data);
-
-    dispatch(
-      loginSuccess({
-        user: res.data.user,
-        token: res.data.token,
-        isLoggedInUser: true,
-      })
-    );
-    localStorage.setItem("token", res.data.token);
-
-    toast.success("MetaMask login successful!");
-    navigate("/profile");
-
-  } catch (err) {
-    console.error("MetaMask login error:", err);
-    
-    if (err.message?.includes("timeout")) {
-      toast.error(
-        <div>
-          <strong>MetaMask Popup Issue!</strong><br/>
-          1. Click the MetaMask icon in your browser<br/>
-          2. Look for pending signature requests<br/>
-          3. Refresh the page and try again
-        </div>,
-        { duration: 8000 }
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+          isLoggedInUser: true,
+        })
       );
-    } else if (err.code === 4001) {
-      toast.error("Signature cancelled.");
-    } else {
-      toast.error("Login failed: " + (err.message || "Unknown error"));
+      localStorage.setItem("token", res.data.token);
+
+      toast.success("MetaMask login successful!");
+      navigate("/profile");
+    } catch (err) {
+      console.error("MetaMask login error:", err);
+
+      if (err.message?.includes("timeout")) {
+        toast.error(
+          <div>
+            <strong>MetaMask Popup Issue!</strong>
+            <br />
+            1. Click the MetaMask icon in your browser
+            <br />
+            2. Look for pending signature requests
+            <br />
+            3. Refresh the page and try again
+          </div>,
+          { duration: 8000 }
+        );
+      } else if (err.code === 4001) {
+        toast.error("Signature cancelled.");
+      } else {
+        toast.error("Login failed: " + (err.message || "Unknown error"));
+      }
     }
-  }
-};
-
-
+  };
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-8">
@@ -342,19 +347,14 @@ function Login() {
           >
             <img src={symbol} alt="MetaMask" className="w-[23px] h-[22px]" />
           </button>
-          <button             className="p-1 rounded-full items-center justify-center flex border border-white transition w-[44px] h-[44px] cursor-pointer"
->
+          {/* <button className="p-1 rounded-full items-center justify-center flex border border-white transition w-[44px] h-[44px] cursor-pointer">
             <img src={skype} alt="Skype" className="w-6 h-6" />
-          </button>
-<button
+          </button> */}
+          <button
             onClick={() => login()}
             className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
           >
-            <img
-              src={google}
-              alt="Google"
-              className="w-6 h-6" 
-            />
+            <img src={google} alt="Google" className="w-6 h-6" />
           </button>
 
           <button
@@ -363,10 +363,6 @@ function Login() {
           >
             <img src={discard} alt="Discord" className="w-6 h-6" />
           </button>
-
-       
-
-          
         </div>
       </div>
     </div>
