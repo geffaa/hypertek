@@ -11,17 +11,22 @@ import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 
+
 import symbol from "../assets/images/login/Symbol.svg.png";
 import google from "../assets/images/login/google.png";
 import skype from "../assets/images/login/skipe.png";
 import discard from "../assets/images/login/discard.png";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
+import FullScreenLoader from "../Components/Common/Spinner";
+
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,50 +38,55 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle manual signup
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      toast.error("Please enter a valid email address");
-      return;
-    }
-    if (formData.password.length < 8 || formData.password.length > 20) {
-      toast.error("Password must be between 8 and 20 characters");
-      return;
-    }
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
+  if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    toast.error("Please enter a valid email address");
+    setLoading(false); // stop loader
+    return;
+  }
+  if (formData.password.length < 8 || formData.password.length > 20) {
+    toast.error("Password must be between 8 and 20 characters");
+    setLoading(false); // stop loader
+    return;
+  }
+  if (formData.password !== formData.confirmPassword) {
+    toast.error("Passwords do not match");
+    setLoading(false); // stop loader
+    return;
+  }
 
-    try {
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
-        Email: formData.email,
-        Password: formData.password,
-        ConfirmPassword: formData.confirmPassword,
-      });
+  try {
+    const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
+      Email: formData.email,
+      Password: formData.password,
+      ConfirmPassword: formData.confirmPassword,
+    });
 
-      if (res.status === 201) {
-
-            dispatch(
-              loginSuccess({
-                user: res.data.user,
-                token: res.data.token,
-                isLoggedInUser: true,
-              })
-            );
-            localStorage.setItem("token", res.data.token);
-        toast.success("Signup successful!");
-        navigate("/");
-      } else {
-        toast.error(res.data.message || "Signup failed");
-      }
-    } catch (error) {
-      console.error("Signup error:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Something went wrong");
+    if (res.status === 201) {
+      dispatch(
+        loginSuccess({
+          user: res.data.user,
+          token: res.data.token,
+          isLoggedInUser: true,
+        })
+      );
+      localStorage.setItem("token", res.data.token);
+      toast.success("Signup successful!");
+      navigate("/");
+    } else {
+      toast.error(res.data.message || "Signup failed");
     }
-  };
+  } catch (error) {
+    console.error("Signup error:", error.response?.data || error.message);
+    toast.error(error.response?.data?.message || "Something went wrong");
+  } finally {
+    setLoading(false); // stop loader no matter what
+  }
+};
+
 
   
  
@@ -276,6 +286,8 @@ function Signup() {
 
         {/* Signup Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
+          {loading && <FullScreenLoader />}
+
           {/* Email */}
           <div className="relative">
             <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
@@ -324,7 +336,8 @@ function Signup() {
               required
             />
             <button
-              type="button"
+              type="button" 
+
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70"
             >
@@ -334,6 +347,7 @@ function Signup() {
 
           <button
             type="submit"
+              disabled={loading} // prevent multiple clicks
             className="w-full py-3 mt-4 flex items-center justify-center text-white font-semibold rounded-lg transition"
           >
             <CustomButtonLarge text="Sign Up" />

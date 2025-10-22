@@ -6,6 +6,8 @@ import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {  BACKEND_BASE_URL } from "../Config"
+import FullScreenLoader from "../Components/Common/Spinner";
+
 
 import CustomButton from "../Components/Buttons/Button1";
 
@@ -57,6 +59,8 @@ function ForgotPassword() {
         <p className="text-white text-sm mb-6 text-center">Enter your email address</p>
 
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
+           {loading && <FullScreenLoader />}
+
           <div className="relative w-full max-w-[412px]">
             <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
             <input
@@ -73,8 +77,9 @@ function ForgotPassword() {
 
           <button
             type="submit"
+              disabled={loading} // prevent multiple clicks
             className={`w-full flex items-center justify-center ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={loading}
+           
           >
             <CustomButton text="Send"/>
           </button>

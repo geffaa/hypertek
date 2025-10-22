@@ -57,14 +57,22 @@ function AppWrapper() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
+
+  // Routes where you want to show the loader
+  const loadingRoutes = ["/"];
+
   useEffect(() => {
-    // Show loader for 1 second whenever route changes
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    if (loadingRoutes.includes(location.pathname)) {
+      setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 1000); // 1 second loading
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
   }, [location]);
 
   if (loading) return <Loading />;
+
     // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = ["/stripe-payment"];
 

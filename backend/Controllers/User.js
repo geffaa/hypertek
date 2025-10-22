@@ -41,7 +41,7 @@ const SignupUser = async (req, res) => {
     const token = jwt.sign(
       { id: newUser._id, Email: newUser.Email },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "3h" }
     );
 
     res.status(201).json({
@@ -84,7 +84,7 @@ const LoginUser = async (req, res) => {
       { id: user._id, Email: user.Email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1d",
+        expiresIn: "3h",
       }
     );
 
@@ -109,7 +109,7 @@ const ForgotPassword = async (req, res) => {
     const resetToken = jwt.sign(
       { id: user._id, Email: user.Email },
       process.env.RESET_SECRET, // <== must match
-      { expiresIn: "1d" }
+      { expiresIn: "3h" }
     );
     const resetLink = `https://hyper-tek-games.deventiatech.com/reset-password/${resetToken}`;
     // Send email
@@ -374,7 +374,7 @@ const DiscordAuth = async (req, res) => {
     const jwtToken = jwt.sign(
       { id: user._id, DiscordId: discordId, Email: user.Email },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "3h" }
     );
 
     console.log("Discord login successful for user:", user.Email);
@@ -521,7 +521,7 @@ const MetaAuth = async (req, res) => {
     const jwtToken = jwt.sign(
       { id: user._id, FacebookId: facebookId, Email: user.Email },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "3h" }
     );
 
     res.status(200).json({
@@ -609,7 +609,7 @@ const MetaMaskAuth = async (req, res) => {
         email: user.Email 
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" } // Match Google's expiry or adjust as needed
+      { expiresIn: "3h" } // Match Google's expiry or adjust as needed
     );
 
     // ✅ Step 5: Send response (Similar structure to Google)
@@ -724,7 +724,7 @@ const TwitterAuth = async (req, res) => {
     const jwtToken = jwt.sign(
       { id: user._id, TwitterId: twitterId, Email: user.Email },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "3h" }
     );
 
     res.status(200).json({
