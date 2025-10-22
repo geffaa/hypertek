@@ -59,7 +59,7 @@ function AppWrapper() {
 
 
   // Routes where you want to show the loader
-  const loadingRoutes = ["/"];
+  const loadingRoutes = ["/home"];
 
   useEffect(() => {
     if (loadingRoutes.includes(location.pathname)) {
