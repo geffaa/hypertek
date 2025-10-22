@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { BACKEND_BASE_URL } from "../../Config"
 import { FaUserCircle } from "react-icons/fa";
 
+import FullScreenLoader from "../Common/Spinner"
 
 
 function Land() { 
@@ -28,6 +29,7 @@ function Land() {
 
       const [landData, setLandketData] = useState([]);
      const [selectedItem, setSelectedItem] = useState(null);
+          const [loading, setLoading] = useState(true); // ✅ loader state
       
 
   const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +86,8 @@ useEffect(() => {
       } catch (error) {
         console.error("❌ Profile fetch error:", error.response?.data || error.message);
         toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }finally {
+        setLoading(false); // ✅ hide loader after fetch
       }
     };
 
@@ -117,7 +121,9 @@ useEffect(() => {
   
     console.log("your land  data are here :", landData);
   
-
+if (loading) {
+    return <FullScreenLoader />;
+  }
   return (
     <>
       <div className=" ">
