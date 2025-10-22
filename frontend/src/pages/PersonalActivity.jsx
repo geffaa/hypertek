@@ -7,10 +7,14 @@ import { FiSearch } from "react-icons/fi";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config"
+import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
+
 
 
 function PersonalActivity() {
   const [activityData, setActivityData] = useState([]);
+      const [loading, setLoading] = useState(true); // ✅ loader state
+  
 
   // get the market data here
   useEffect(() => {
@@ -26,6 +30,8 @@ function PersonalActivity() {
         if (activity.data) setActivityData(activity.data);
       } catch (error) {
         console.error("Error fetching market data:", error);
+      }finally {
+        setLoading(false); // ✅ hide loader after fetch
       }
     };
 
@@ -49,7 +55,9 @@ function PersonalActivity() {
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
   return `${diffInDays}d`;
 };
-
+if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">

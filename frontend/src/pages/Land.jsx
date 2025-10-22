@@ -10,11 +10,15 @@ import land1Image from "../assets/images/Overview/land1.jpg";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks"
 import axios from 'axios';
 import { BACKEND_BASE_URL } from "../Config"
+import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
+
 
 
 function Land() {
 
  const [landData, setLandData] = useState([]);
+     const [loading, setLoading] = useState(true); // ✅ loader state
+ 
    
     // get the market data here
     useEffect(() => {
@@ -30,14 +34,18 @@ function Land() {
         
         } catch (error) {
           console.error("Error fetching market data:", error);
-        }
+        }finally {
+        setLoading(false); // ✅ hide loader after fetch
+      }
       };
   
       fetchMarketData();
     }, []); 
     console.log("your land data are here :", landData);
 
-
+if (loading) {
+    return <FullScreenLoader />;
+  }
   return (
     <div className="min-h-screen bg-[#000000] px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
