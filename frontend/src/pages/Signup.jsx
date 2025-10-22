@@ -105,6 +105,7 @@ function Signup() {
     window.history.replaceState({}, document.title, "/signin");
 
     const fetchDiscordUser = async () => {
+      setLoading(true); // start loader
       try {
         const res = await axios.post(
           `${BACKEND_BASE_URL}/api/v1/user/discord`,
@@ -130,6 +131,9 @@ function Signup() {
         console.error("Discord login error:", err);
         toast.error(err.response?.data?.message || "Discord login failed!");
       }
+      finally {
+      setLoading(false); // stop loader in all cases
+    }
     };
 
     fetchDiscordUser();
@@ -137,6 +141,7 @@ function Signup() {
 
   // ---------------------- signup with MetaMask -------------------------
   const handleLogin = async () => {
+      setLoading(true); // start loader
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed!");
@@ -221,7 +226,10 @@ function Signup() {
       } else {
         toast.error("Login failed: " + (err.message || "Unknown error"));
       }
-    }
+      
+    } finally {
+    setLoading(false); // stop loader no matter what
+  }
   };
 
   // ---------------- Twitter Login ----------------
@@ -235,6 +243,7 @@ function Signup() {
   /// signup with google 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+       setLoading(true); // start loader
       try {
         // tokenResponse.access_token is what Google returns
         // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
@@ -261,8 +270,14 @@ function Signup() {
         console.error("Google login error:", err);
         toast.error(err.response?.data?.message || "Google login failed!");
       }
+       finally {
+      setLoading(false); // stop loader in all cases
+    }
     },
-    onError: () => toast.error("Google login failed!"),
+    onError: () => {
+    setLoading(false);
+    toast.error("Google signup failed!");
+  },
   });
 
   return (
