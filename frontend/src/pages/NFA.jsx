@@ -12,12 +12,16 @@ import { Link } from "react-router-dom";
 import InfoIcon from "../assets/images/info.png"
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config"
+import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
+
 
 function NFA() {
   // ✅ State for multiple modals
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
   const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
+    const [loading, setLoading] = useState(true); // ✅ loader state
+
 
   // ✅ Open/Close handlers for first modal
   const openFirstModal = () => setIsFirstModalOpen(true);
@@ -76,13 +80,17 @@ function NFA() {
         
         } catch (error) {
           console.error("Error fetching market data:", error);
-        }
+        }finally {
+        setLoading(false); // ✅ hide loader after fetch
+      }
       };
   
       fetchMarketData();
     }, []); 
     console.log("your market data are here :", marketData);
-  
+   if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <>
