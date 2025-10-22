@@ -15,6 +15,7 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config"
 import { FaUserCircle } from "react-icons/fa";
 
+import FullScreenLoader from "../Common/Spinner"
 
 
 
@@ -25,6 +26,7 @@ function MarketPlace() {
   // get the login user data from the redux store 
    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
    console.log("your data in the profile are :",user);
+    const [loading, setLoading] = useState(true); // ✅ loader state
 
 // get the nfa data 
 const [marketData, setMarketData] = useState([]);
@@ -89,6 +91,8 @@ const [ userData , setUserData ] = useState({});
         
       } catch (error) {
         console.error("Error fetching market data:", error);
+      }finally {
+        setLoading(false); // ✅ hide loader after fetch
       }
     };
 
@@ -129,7 +133,9 @@ console.log("Full Name:", userData.FullName);
     userData?.Avatar &&
     userData.Avatar.trim() !== "" &&
     !imageError;
-
+ if (loading) {
+    return <FullScreenLoader />;
+  }
   return (
     <>
       {/* ------------------ Main Section ------------------ */}

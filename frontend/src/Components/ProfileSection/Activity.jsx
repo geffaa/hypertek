@@ -9,17 +9,19 @@ import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { BACKEND_BASE_URL } from "../../Config"
+import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
+import FullScreenLoader from "../Common/Spinner"
+
 
 function PersonalActivity() {
   /// get the activity from the backend
   const [activityData, setActivityData] = useState([]);
-    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-       const [ userData , setUserData ] = useState({});
-       const loginUserId = user.id;
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  const [userData, setUserData] = useState({});
+  const loginUserId = user.id;
+            const [loading, setLoading] = useState(true); // ✅ loader state
   
-
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -29,11 +31,17 @@ function PersonalActivity() {
             Authorization: `Bearer ${token}`, // 👈 send token here
           },
         });
-        setUserData(res.data.user)
+        setUserData(res.data.user);
         console.log("✅ User profile:", res.data.user);
       } catch (error) {
-        console.error("❌ Profile fetch error:", error.response?.data || error.message);
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
         toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }
+      finally {
+        setLoading(false); // ✅ hide loader after fetch
       }
     };
 
@@ -41,16 +49,14 @@ function PersonalActivity() {
       fetchProfile(); // only call if token exists
     }
   }, [token]);
-  
-
 
   // get the market data here
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
         /// get the land , market and activity through
-        if(!loginUserId){
-          toast.error("Please Login first!")
+        if (!loginUserId) {
+          toast.error("Please Login first!");
         }
 
         const activity = await axios.get(
@@ -59,17 +65,17 @@ function PersonalActivity() {
         console.log("your activity data in the console :", activity);
 
         if (activity.data) {
-  const arr =
-    Array.isArray(activity.data) 
-      ? activity.data 
-      : Array.isArray(activity.data.data) 
-      ? activity.data.data 
-      : [];
-  setActivityData(arr);
-}
-
+          const arr = Array.isArray(activity.data)
+            ? activity.data
+            : Array.isArray(activity.data.data)
+            ? activity.data.data
+            : [];
+          setActivityData(arr);
+        }
       } catch (error) {
         console.error("Error fetching market data:", error);
+      } finally {
+        setLoading(false); // ✅ hide loader after fetch
       }
     };
 
@@ -92,6 +98,11 @@ function PersonalActivity() {
     return `${diffInDays}d`;
   };
 
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
+
   return (
     <div className="bg-transparent">
       {/* Hero Section */}
@@ -109,33 +120,34 @@ function PersonalActivity() {
             <div className="flex flex-col sm:flex-row items-start gap-4">
               {/* Profile Image */}
               <div className="relative flex-shrink-0">
-  {userData?.Avatar ? (
-    <img
-      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
-      alt="Profile"
-      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-    />
-  ) : (
-    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
-      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-    </div>
-  )}
-</div>
+                {userData?.Avatar ? (
+                  <img
+                    src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+                    alt="Profile"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
+                    <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                  </div>
+                )}
+              </div>
 
               {/* Profile Info */}
               <div className="text-left text-white">
                 <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                                   {userData.FullName
-  ? userData.FullName.replace(/[0-9]/g, "") || ""
-  : userData.Email
-  ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
-  : "Guest"}
-
+                  {userData.FullName
+                    ? userData.FullName.replace(/[0-9]/g, "") || ""
+                    : userData.Email
+                    ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+                    : "Guest"}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-400 break-words">
-
-                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
-                  <Link to="/edit"  state={{ userData }}>
+                  {userData.DiscordId ||
+                    userData.GoogleId ||
+                    userData._id ||
+                    "null"}
+                  <Link to="/edit" state={{ userData }}>
                     <span className="ml-1 sm:ml-2 cursor-pointer underline">
                       Edit Profile
                     </span>
