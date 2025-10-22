@@ -15,6 +15,7 @@ import GlowingOrb from "../Components/Common/BgColoring";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import google from "../assets/images/login/google.png";
+import FullScreenLoader from "../Components/Common/Spinner";
 
 import { useGoogleLogin } from "@react-oauth/google";
 
@@ -23,6 +24,7 @@ function Login() {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   // ---------------- Email/Password ----------------
   const handleChange = (e) =>
@@ -30,17 +32,23 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    // Validation first
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       toast.error("Please enter a valid email address");
       return;
     }
+
     if (formData.password.length < 8 || formData.password.length > 20) {
       toast.error("Password must be between 8 and 20 characters");
       return;
     }
+
+    setLoading(true); // <-- show loader
+
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/login`, {
-        // const res = await axios.post(`http://localhost:4700/api/v1/user/login`, {
         Email: formData.email,
         Password: formData.password,
       });
@@ -52,12 +60,13 @@ function Login() {
           isLoggedInUser: true,
         })
       );
-      localStorage.setItem("token", res.data.token);
-      toast.success("Login successful!");
 
+      toast.success("Login successful!");
       navigate("/profile");
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false); // <-- hide loader
     }
   };
 
@@ -65,15 +74,13 @@ function Login() {
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
+       setLoading(true); // show loader
       try {
         // tokenResponse.access_token is what Google returns
         // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
-        const res = await axios.post(
-          `${BACKEND_BASE_URL}/api/v1/user/google`,
-          {
-            token: tokenResponse.access_token, // or response.credential for ID token version
-          }
-        );
+        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
+          token: tokenResponse.access_token, // or response.credential for ID token version
+        });
 
         dispatch(
           loginSuccess({
@@ -82,7 +89,7 @@ function Login() {
             isLoggedInUser: true,
           })
         );
-        localStorage.setItem("token", res.data.token);
+        // localStorage.setItem("token", res.data.token);
         toast.success("Google Login successful!");
         navigate("/profile");
       } catch (err) {
@@ -110,6 +117,7 @@ function Login() {
     window.history.replaceState({}, document.title, "/login");
 
     const fetchDiscordUser = async () => {
+        setLoading(true); 
       try {
         const res = await axios.post(
           `${BACKEND_BASE_URL}/api/v1/user/discord`,
@@ -124,7 +132,7 @@ function Login() {
               isLoggedInUser: true,
             })
           );
-          localStorage.setItem("token", res.data.token);
+          // localStorage.setItem("token", res.data.token);
 
           toast.success(
             `Discord login successful! Welcome ${res.data.user.FullName}`
@@ -143,6 +151,7 @@ function Login() {
   }, [dispatch, navigate]);
 
   const handleLogin = async () => {
+    //  setLoading(true); // 
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed!");
@@ -229,7 +238,7 @@ function Login() {
           isLoggedInUser: true,
         })
       );
-      localStorage.setItem("token", res.data.token);
+      // localStorage.setItem("token", res.data.token);
 
       toast.success("MetaMask login successful!");
       navigate("/profile");
@@ -280,6 +289,8 @@ function Login() {
 
         {/* Email/Password Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
+          {loading && <FullScreenLoader />}{" "}
+          {/* show loader if loading is true */}
           <div className="relative w-full max-w-[412px]">
             <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
             <input
@@ -293,7 +304,6 @@ function Login() {
               style={{ height: "48px" }}
             />
           </div>
-
           <div className="relative w-full max-w-[412px]">
             <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
             <input
@@ -314,7 +324,6 @@ function Login() {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-
           <div className="w-full text-right">
             <Link
               to="/forgot-password"
@@ -323,9 +332,16 @@ function Login() {
               Forgot Password?
             </Link>
           </div>
-
+          {/* <button
+            type="submit"
+            className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
+          >
+            <CustomButtonLarge text="Sign In" />
+          </button> */}
           <button
             type="submit"
+            onClick={handleSubmit}
+            disabled={loading} // prevent multiple clicks
             className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
           >
             <CustomButtonLarge text="Sign In" />
