@@ -10,6 +10,7 @@ import ManImage from "../assets/images/Overview/man.png";
 import { ArrowRight } from "lucide-react";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import GlowingOrb from "../Components/Common/BgColoring";
+import FullScreenLoader from "../Components/Common/Spinner";
 import axios from "axios";
 
 import { BACKEND_BASE_URL } from "../Config";
@@ -19,10 +20,14 @@ function MarketPlace() {
   const [marketData, setMarketData] = useState([]);
   const [landData, setLandketData] = useState([]);
   const [activityData, setActivityData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
   // get the market data here
   useEffect(() => {
     const fetchMarketData = async () => {
+       setLoading(true); // ✅ Start loading
+
       try {
         /// get the land , market and activity through
         const res = await axios.get(
@@ -40,6 +45,8 @@ function MarketPlace() {
         if (activity.data) setActivityData(activity.data);
       } catch (error) {
         console.error("Error fetching market data:", error);
+      }finally {
+        setLoading(false); // ✅ Stop loading after fetch
       }
     };
 
@@ -65,10 +72,17 @@ function MarketPlace() {
     return `${diffInDays}d`;
   };
 
+
+
   return (
     <>
-      {/* Main Container */}
+     {loading ? (
+      <FullScreenLoader />
+    ) :
+      
       <div className="min-h-screen bg-transparent relative z-10 ">
+        {/* Hero Section */}
+
         {/* Hero Section */}
         <div className=" mt-20 lg:mt-[92px]">
           {/* Hero Banner */}
@@ -221,6 +235,7 @@ function MarketPlace() {
             </div>
 
             {/* Cards Grid */}
+            
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
               {marketData.slice(0, 4).map((item, index) => (
                 <div
@@ -481,6 +496,7 @@ function MarketPlace() {
           </section>
         </div>
       </div>
+}
     </>
   );
 }
