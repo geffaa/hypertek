@@ -96,8 +96,15 @@ function Login() {
         console.error("Google login error:", err);
         toast.error(err.response?.data?.message || "Google login failed!");
       }
+      finally {
+      setLoading(false); // hide loader in all cases
+    }
     },
-    onError: () => toast.error("Google login failed!"),
+      onError: () => {
+    toast.error("Google login failed!");
+    setLoading(false); // make sure loader stops if Google login fails
+  },
+    
   });
 
   // ---------------- Discord Login ----------------
@@ -145,13 +152,16 @@ function Login() {
         console.error("Discord login error:", err);
         toast.error(err.response?.data?.message || "Discord login failed!");
       }
+      finally {
+      setLoading(false); // stop loader in all cases
+    }
     };
 
     fetchDiscordUser();
   }, [dispatch, navigate]);
 
   const handleLogin = async () => {
-    //  setLoading(true); // 
+     setLoading(true); // 
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed!");
@@ -263,7 +273,10 @@ function Login() {
       } else {
         toast.error("Login failed: " + (err.message || "Unknown error"));
       }
-    }
+      
+    } finally {
+    setLoading(false); // stop loader no matter what
+  }
   };
 
   return (
