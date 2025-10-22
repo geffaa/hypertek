@@ -284,7 +284,7 @@ const handlePaymentCard = async (productId) => {
               </div>
             ))}
 
-            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+            <div className="flex  md:flex-row gap-4 mt-6 pl-12 md:pl-1 w-full justify-center">
               <button onClick={closeModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
