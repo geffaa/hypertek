@@ -75,6 +75,8 @@ export const StripeWebhook = async (req, res) => {
         return res.json({ received: true });
     }
 
+     console.log("✅ Webhook event received:", event.type);
+
     res.json({ received: true });
   } catch (err) {
     console.error("Error storing payment in DB:", err);
