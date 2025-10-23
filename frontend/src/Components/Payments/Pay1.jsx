@@ -92,7 +92,7 @@ function Offer1() {
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-center cursor-pointer mt-4 w-full">
+        <div className="flex justify-center  mt-4 w-full">
          <Link to="/success">
           <CustomButton text="Submit Offer" />
          </Link>
