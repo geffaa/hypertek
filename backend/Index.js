@@ -68,12 +68,12 @@ app.use('/api/v1/card',SaveCardRoute)
 // app.use("/api/v1/payment",PaymentHook)
 
 
-app.use("/api/v1/payment",PaymentRotue)
 
 
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api/v1/payment",PaymentRotue)
 
 // Other routes
 app.use("/api/v1", Route);
