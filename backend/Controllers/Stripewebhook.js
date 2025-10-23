@@ -45,35 +45,41 @@ export const StripeWebhook = async (req, res) => {
       transactionId: dataObject.metadata?.transactionId || dataObject.id,
     };
 
-    switch (event.type) {
-      case "payment_intent.succeeded":
-        paymentData.status = "succeeded";
-        const existingPayment = await Payment.findOne({ paymentIntentId: paymentData.paymentIntentId });
-        if (!existingPayment) {
-          await Payment.create(paymentData);
-          console.log("💾 Payment succeeded and stored:", paymentData.paymentIntentId);
-        } else {
-          console.log("⚠️ Duplicate payment ignored:", paymentData.paymentIntentId);
-        }
-        break;
+   switch (event.type) {
+  case "payment_intent.succeeded":
+    paymentData.status = "succeeded";
 
-      case "payment_intent.payment_failed":
-        paymentData.status = "failed";
-        paymentData.failureMessage = dataObject.last_payment_error?.message || "Payment failed";
-        await Payment.create(paymentData);
-        console.log("❌ Payment failed:", paymentData.paymentIntentId);
-        break;
-
-      case "payment_intent.canceled":
-        paymentData.status = "canceled";
-        await Payment.create(paymentData);
-        console.log("⚠️ Payment canceled:", paymentData.paymentIntentId);
-        break;
-
-      default:
-        console.log(`ℹ️ Ignored event type: ${event.type}`);
-        return res.json({ received: true });
+    // Check if payment already exists
+    const existingPayment = await Payment.findOne({ paymentIntentId: paymentData.paymentIntentId });
+    if (!existingPayment) {
+      await Payment.create(paymentData);
+      console.log("💾 Payment succeeded and stored:", paymentData.paymentIntentId);
+    } else {
+      console.log("⚠️ Duplicate payment ignored:", paymentData.paymentIntentId);
     }
+    break;
+
+  case "payment_intent.payment_failed":
+  case "payment_intent.canceled":
+    // Also check for duplicates
+    const existing = await Payment.findOne({ paymentIntentId: paymentData.paymentIntentId });
+    if (!existing) {
+      paymentData.status = event.type === "payment_intent.payment_failed" ? "failed" : "canceled";
+      if (event.type === "payment_intent.payment_failed") {
+        paymentData.failureMessage = dataObject.last_payment_error?.message || "Payment failed";
+      }
+      await Payment.create(paymentData);
+      console.log(`💾 Payment ${paymentData.status} and stored:`, paymentData.paymentIntentId);
+    } else {
+      console.log("⚠️ Duplicate payment ignored:", paymentData.paymentIntentId);
+    }
+    break;
+
+  default:
+    console.log(`ℹ️ Ignored event type: ${event.type}`);
+    return res.json({ received: true });
+}
+
 
      console.log("✅ Webhook event received:", event.type);
 
