@@ -1,17 +1,9 @@
-
-
-
 import express from "express";
-import bodyParser from "body-parser";
-
 import { StripeWebhook } from "../Controllers/Stripewebhook.js";
-
 
 const PaymentHook = express.Router();
 
-PaymentHook.post(
-  "/webhook",
-  bodyParser.raw({ type: "application/json" }),
-  StripeWebhook
-);
-export { PaymentHook }
+// Remove bodyParser from here since we're applying it in index.js
+PaymentHook.post("/webhook", StripeWebhook);
+
+export { PaymentHook };
