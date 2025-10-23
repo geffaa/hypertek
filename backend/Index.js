@@ -65,9 +65,10 @@ try {
 // i set this route here becasue if i put this rotue below the middleware then it will not work
 // app.use('/api/v1/stripe', StripSaveRoute);
 app.use('/api/v1/card',SaveCardRoute)
-app.use("/api/v1/payment",PaymentHook)
+// app.use("/api/v1/payment",PaymentHook)
 
 
+app.use("/api/v1/payment",PaymentRotue)
 
 
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
@@ -80,7 +81,6 @@ app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
 app.use("/api/v1/history",HistoryRoute)
-app.use("/api/v1/payment",PaymentRotue)
 
 /// check game is already purchase or not 
 app.use('/api/v1/game',PcheckingRoute)
@@ -89,13 +89,13 @@ app.use('/api/v1/game',PcheckingRoute)
 app.use("/api/v1/search",searchRouter)
 
 
-app.use((req, res, next) => {
-  if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
-    next(); // skip express.json for this route
-  } else {
-    express.json()(req, res, next);
-  }
-});
+// app.use((req, res, next) => {
+//   if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
+//     next(); // skip express.json for this route
+//   } else {
+//     express.json()(req, res, next);
+//   }
+// });
 
 
 
