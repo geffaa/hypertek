@@ -121,10 +121,12 @@ export default function Navbar() {
 
       if (decoded.exp < currentTime) {
         console.log("Token has expired");
+        navigate('/signin')
         dispatch(logout);
         setIsLogin(false);
       } else {
         console.log("Token is valid");
+        // navigate("/signin")
         setIsLogin(true);
       }
     } catch (err) {
@@ -171,19 +173,18 @@ export default function Navbar() {
   const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
 
   const handleLogoutConfirm = () => {
-  // Close the modal first
-  setShowModal(false);
+    // Close the modal first
+    setShowModal(false);
 
-  // Perform logout
-  dispatch(logout());
+    // Perform logout
+    dispatch(logout());
 
-  // Show toast
-  toast.success("User logged out successfully");
+    // Show toast
+    toast.success("User logged out successfully");
 
-  // Navigate to signin
-  navigate("/signin");
-};
-
+    // Navigate to signin
+    navigate("/signin");
+  };
 
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
@@ -641,48 +642,49 @@ export default function Navbar() {
       </div>
 
       {/* Confirmation Modal */}
-    <AnimatePresence>
-  {showModal && (
-    <motion.div
-      className="fixed inset-0 z-50 pt-32 flex items-start justify-center bg-black/60 backdrop-blur-sm"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="rounded-2xl shadow-2xl p-5 w-[90%] max-w-sm text-start
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 z-50 pt-32 flex items-start justify-center bg-black/60 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="rounded-2xl shadow-2xl p-5 w-[90%] max-w-sm text-start
           bg-[radial-gradient(circle_at_10%_30%,rgba(8,1,33,0.9)_0%,transparent_70%),radial-gradient(circle_at_70%_50%,rgba(13,7,22,0.93)_0%,transparent_60%),radial-gradient(circle_at_50%_90%,rgba(5,4,17,0.96)_0%,transparent_90%),#0d0d14]
           backdrop-blur-[500px]"
-        initial={{ scale: 0.8, y: 30 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.8, y: 30 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-      >
-        <h2 className="text-2xl font-semibold text-white">Confirm Logout</h2>
-        <p className="text-white mb-8">
-          Are you sure you want to log out?
-        </p>
+              initial={{ scale: 0.8, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 30 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            >
+              <h2 className="text-2xl font-semibold text-white">
+                Confirm Logout
+              </h2>
+              <p className="text-white mb-8">
+                Are you sure you want to log out?
+              </p>
 
-        <div className="flex justify-end gap-4">
-          <button
-  onClick={() => setShowModal(false)}
-  className="px-5 py-2 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 dark:bg-gray-800/30 dark:text-gray-200 dark:hover:bg-gray-700/40 transition-all backdrop-blur-sm"
->
-  Cancel
-</button>
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-5 py-2 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 dark:bg-gray-800/30 dark:text-gray-200 dark:hover:bg-gray-700/40 transition-all backdrop-blur-sm"
+                >
+                  Cancel
+                </button>
 
-          <button
-            onClick={handleLogoutConfirm}
-            className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-all"
-          >
-            Logout
-          </button>
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+                <button
+                  onClick={handleLogoutConfirm}
+                  className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-all"
+                >
+                  Logout
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

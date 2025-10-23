@@ -37,11 +37,13 @@ function Login() {
     // Validation first
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       toast.error("Please enter a valid email address");
+          setLoading(false); // stop loader
       return;
     }
 
     if (formData.password.length < 8 || formData.password.length > 20) {
       toast.error("Password must be between 8 and 20 characters");
+         setLoading(false); // stop loader
       return;
     }
 
