@@ -10,7 +10,7 @@ import { StripeWebhook } from "../Controllers/Stripewebhook.js";
 const PaymentHook = express.Router();
 
 PaymentHook.post(
-  "/stripe/webhook",
+  "/webhook",
   bodyParser.raw({ type: "application/json" }),
   StripeWebhook
 );
