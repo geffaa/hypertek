@@ -8,10 +8,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const StripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
-  console.log("Stripe signature header:", req.headers["stripe-signature"]);
-console.log("Raw payload:", req.body.toString());
 
- 
+
+  console.log("✅ Webhook hit at:", new Date().toISOString());
+    console.log("Headers:", req.headers);
+    console.log("Signature:", sig);
+    console.log("Raw body length:", req.body.length);
 
   let event;
   console.log("✅ Webhook event received:", event.type);
