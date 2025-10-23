@@ -7,7 +7,8 @@ import { fileURLToPath } from "url";
 import cors from "cors";
 import { DBConnections } from "./Database/Db.js";
 import EventEmitter from "events";
-EventEmitter.defaultMaxListeners = 20; // or higher
+EventEmitter.defaultMaxListeners = 20; // or 
+import { StripeWebhook } from "./Controllers/Stripewebhook.js";
 
 // Routes
 import { Route } from "./Routes/User.js";
@@ -18,7 +19,7 @@ import HistoryRoute from "./Routes/History.js";
 import { CardRoute } from "./Routes/Paywithcard.js";
 import { SaveCardRoute } from "./Routes/SaveCard.js";
 import { PaymentRotue } from "./Routes/Payment-intent.js";
-import { PaymentHook } from "./Routes/webhookroute.js";
+// import { PaymentHook } from "./Routes/webhookroute.js";
 import { PcheckingRoute } from "./Routes/checkPayment.js";
 import { searchRouter } from "./Routes/SearchRoute.js";
 
@@ -67,7 +68,12 @@ try {
 // i set this route here becasue if i put this rotue below the middleware then it will not work
 // app.use('/api/v1/stripe', StripSaveRoute);
 app.use('/api/v1/card',SaveCardRoute)
-app.use("/api/v1/payment/stripe",  bodyParser.raw({ type: "application/json" }),PaymentHook)
+// app.use("/api/v1/payment/stripe",  bodyParser.raw({ type: "application/json" }),PaymentHook)
+app.post(
+  "/api/v1/payment/stripe/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  StripeWebhook
+);
 
 
 
