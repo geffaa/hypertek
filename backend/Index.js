@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import cors from "cors";
 import { DBConnections } from "./Database/Db.js";
 import EventEmitter from "events";
-EventEmitter.defaultMaxListeners = 20;
+EventEmitter.defaultMaxListeners = 20; // or higher
 
 // Routes
 import { Route } from "./Routes/User.js";
@@ -20,9 +20,11 @@ import { PaymentHook } from "./Routes/webhookroute.js";
 import { PcheckingRoute } from "./Routes/checkPayment.js";
 import { searchRouter } from "./Routes/SearchRoute.js";
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Load environment variables
 dotenv.config({ path: path.join(__dirname, "Config", ".env") });
 const app = express();
 
@@ -51,7 +53,7 @@ app.use(
   })
 );
 
-// Database connection
+// Database connectivity with error handling
 try {
   DBConnections();
   console.log("✅ Database connected");
@@ -59,32 +61,46 @@ try {
   console.error("❌ Database connection error:", error);
 }
 
-// ⚠️ CRITICAL FIX: Apply raw body parser ONLY to webhook route
-// Use express.raw() instead of bodyParser.raw()
-app.post(
-  "/api/v1/payment/stripe/webhook",
-  express.raw({ type: "application/json" }), // ✅ Use express.raw()
-  StripeWebhook
-);
 
-// ⚠️ Remove this line - you're already applying the webhook route above
-// app.use('/api/v1/payment/stripe', PaymentHook);
+// i set this route here becasue if i put this rotue below the middleware then it will not work
+// app.use('/api/v1/stripe', StripSaveRoute);
+app.use('/api/v1/card',SaveCardRoute)
+app.use("/api/v1/payment/stripe",PaymentHook)
 
-// Now apply JSON parser for ALL other routes
+
+
+
+// ⚠️ NOW apply regular JSON parsing for all OTHER routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api/v1/payment",PaymentRotue)
 
-// Other routes (they will use JSON parser)
-app.use("/api/v1/payment", PaymentRotue);
-app.use("/api/v1/card", SaveCardRoute);
+// Other routes
 app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
-app.use("/api/v1/history", HistoryRoute);
-app.use("/api/v1/game", PcheckingRoute);
-app.use("/api/v1/search", searchRouter);
-app.use("/api/v1/card", CardRoute);
+app.use("/api/v1/history",HistoryRoute)
+
+/// check game is already purchase or not 
+app.use('/api/v1/game',PcheckingRoute)
+
+// Searching items
+app.use("/api/v1/search",searchRouter)
+
+
+// app.use((req, res, next) => {
+//   if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
+//     next(); // skip express.json for this route
+//   } else {
+//     express.json()(req, res, next);
+//   }
+// });
+
+
+
+app.use("/api/v1/card",CardRoute)
+
 
 // Global error handler
 app.use((err, req, res, next) => {
@@ -92,5 +108,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "Something went wrong" });
 });
 
+// Port from .env
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
