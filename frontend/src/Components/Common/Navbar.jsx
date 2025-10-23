@@ -129,7 +129,7 @@ export default function Navbar() {
         // navigate("/signin")
         setIsLogin(true);
       }
-    } catch (err) {
+    }  catch (err) {
       console.error("Invalid token:", err);
       dispatch(logout);
       setIsLogin(false); // invalid token → not logged in
