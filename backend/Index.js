@@ -65,7 +65,7 @@ try {
 // i set this route here becasue if i put this rotue below the middleware then it will not work
 // app.use('/api/v1/stripe', StripSaveRoute);
 app.use('/api/v1/card',SaveCardRoute)
-// app.use("/api/v1/payment",PaymentHook)
+app.use("/api/v1/payment/stripe",PaymentHook)
 
 
 
