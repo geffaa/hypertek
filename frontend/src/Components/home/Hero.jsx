@@ -16,7 +16,7 @@ export default function Hero() {
     { text: "Hyper Tek" },
     { text: "Hyper Tek" },
   ];
-  return (
+  return ( 
     <div
       className="w-full h-[630px] scale-x-[-1] relative"
       style={{

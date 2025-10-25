@@ -22,6 +22,7 @@ import { PaymentRotue } from "./Routes/Payment-intent.js";
 // import { PaymentHook } from "./Routes/webhookroute.js";
 import { PcheckingRoute } from "./Routes/checkPayment.js";
 import { searchRouter } from "./Routes/SearchRoute.js";
+import OfferRoute from "./Routes/Offer.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -36,6 +37,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // CORS setup
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://hypertek100.com/",
   "https://hyper-tek-games.deventiatech.com",
   "https://www.hyper-tek-games.deventiatech.com",
   "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
@@ -95,14 +97,11 @@ app.use('/api/v1/game',PcheckingRoute)
 // Searching items
 app.use("/api/v1/search",searchRouter)
 
+// offer route 
+app.use("/api/v1/offer",OfferRoute)
 
-// app.use((req, res, next) => {
-//   if (req.originalUrl === "/api/v1/payment/stripe/webhook") {
-//     next(); // skip express.json for this route
-//   } else {
-//     express.json()(req, res, next);
-//   }
-// });
+
+
 
 
 

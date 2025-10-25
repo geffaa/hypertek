@@ -1,10 +1,20 @@
-import React from 'react'
-import Pay1 from '../Components/Payments/Pay1'
+import React from "react";
+import { useLocation } from "react-router-dom";
+import Pay1 from "../Components/Payments/Pay1";
 
 function Payment() {
-  return (
-  <Pay1/>
-  )
+  const location = useLocation();
+  let { item } = location.state || {};
+
+  // fallback to localStorage
+  if (!item) {
+    const saved = localStorage.getItem("paymentItem");
+    if (saved) item = JSON.parse(saved);
+  }
+
+  console.log("Payment item:", item);
+
+  return <Pay1 item={item} />;
 }
 
-export default Payment
+export default Payment;
