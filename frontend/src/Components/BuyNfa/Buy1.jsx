@@ -36,12 +36,6 @@ function Buy1() {
   const closeSecondModal = () => setIsSecondOpen(false);
 
 
-
-  
-  const handleMakeOffer = () => {
-    console.log("Make offer clicked");
-  };
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const sessionId = params.get("session_id");
@@ -54,9 +48,7 @@ function Buy1() {
     }
   }, [location]);
 
- 
-
-  /// for stripe methods 
+  /// for stripe methods
   const handlePayment = async (productId) => {
     if (!productId || !user?.id) {
       toast.error("User ID and Payment ID are required");
@@ -91,8 +83,8 @@ function Buy1() {
     }
   };
 
-// for card methods 
-const handlePaymentCard = async (productId) => {
+  // for card methods
+  const handlePaymentCard = async (productId) => {
     if (!productId || !user?.id) {
       toast.error("User ID and Payment ID are required");
       return;
@@ -126,6 +118,11 @@ const handlePaymentCard = async (productId) => {
     }
   };
 
+
+  /// for make payment 
+  const handleMakeOffer = () => {
+  if (item) localStorage.setItem("paymentItem", JSON.stringify(item));
+};
 
 
   return (
@@ -211,19 +208,19 @@ const handlePaymentCard = async (productId) => {
               >
                 <CustomButton text="Buy With Card" />
               </button>
-
-             
             </div>
 
-            <Link
-              to="/payment"
-              state={{ item }}
-              className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
-              onClick={handleMakeOffer}
-            >
-              Make Offer
-              <FiEdit2 className="text-base md:text-lg" />
-            </Link>
+          <Link
+  to="/payment"
+  state={{ item }}
+  onClick={handleMakeOffer}
+  className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
+>
+  Make Offer
+  <FiEdit2 className="text-base md:text-lg" />
+</Link>
+
+
           </div>
 
           <Link
@@ -437,14 +434,10 @@ const handlePaymentCard = async (productId) => {
               <button onClick={() => handlePayment(item._id)}>
                 <CustomButton text="Confirm" />
               </button>
-             
             </div>
           </div>
         </div>
       )}
-
-     
- 
     </div>
   );
 }

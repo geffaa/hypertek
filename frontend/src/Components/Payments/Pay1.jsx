@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate , useLocation  } from "react-router-dom";
 import CustomButton from "../Buttons/Button1";
 import { FaArrowLeft, FaChevronDown } from "react-icons/fa";
 
-function Offer1() {
+function Offer1({item}) {
   const navigate = useNavigate();
   const [selected, setSelected] = useState("6 Hours");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+   
+
+
+    // Receive the item data from state
+ 
+  console.log("your send item in the payment page are : ",item);
 
   const options = ["6 Hours", "12 Hours", "6 Months", "12 Months", "1 Year"];
 

@@ -48,6 +48,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { STRIPE_PUBLISHABLE_KEY } from "./Config"
 import { Elements } from "@stripe/react-stripe-js";
 import Stripe from "./pages/Stripe";
+import Funnel from "./pages/Funnel";
 
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
@@ -142,9 +143,9 @@ function AppWrapper() {
         {/* for payment options  */}
 
         <Route path="/stripe-payment" element={<Stripe/>}/>
+        <Route path="/funnel-page" element={<Funnel/>}/>
 
 
-      {/* set the toast contianer here  */}
         </Routes>
       </div>
        <Toaster position="top-right" reverseOrder={false} />

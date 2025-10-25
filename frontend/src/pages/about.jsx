@@ -133,7 +133,7 @@ function About() {
 
           {/* ----------------------------------- ------------------------------ */}
 
-          <div className="mt-12 cursor-pointer ">
+          <div className="mt-16 cursor-pointer ">
             {/* Show on large screens */}
             <div className="hidden sm:block">
               <CustomButton text="Download" />
