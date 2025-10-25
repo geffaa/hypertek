@@ -37,7 +37,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // CORS setup
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://hypertek100.com/",
+  "https://hypertek100.com",
   "https://hyper-tek-games.deventiatech.com",
   "https://www.hyper-tek-games.deventiatech.com",
   "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
