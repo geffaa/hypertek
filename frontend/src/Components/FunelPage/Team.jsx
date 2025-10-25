@@ -1,19 +1,13 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import UsmanImage from "../../assets/images/funnel/usman.jpeg";
-import ceo from "../../assets/images/funnel/ceo.png";
-import projectManager from "../../assets/images/funnel/projecmanger.png";
-import tester from "../../assets/images/funnel/walled.png";
-import wahab from "../../assets/images/funnel/wahab.png";
-import saif from "../../assets/images/funnel/saif.png";
 
 // --- Team Data ---
 const teamData = [
   {
     name: "Zubair Malik",
     role: "Chief Executive Officer",
-    img: ceo,
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
     bio: "Visionary leader with 12+ years in tech entrepreneurship and business strategy. Driving innovation and growth across multiple successful ventures.",
     expertise: ["Business Strategy", "Tech Innovation", "Team Leadership", "Investment"],
     socials: [
@@ -22,9 +16,9 @@ const teamData = [
     ],
   },
   {
-    name: "Huzaiffa Rajpoot",
-    role: "Project Manager",
-    img: projectManager,
+    name: "Huzaifa Rajpoot",
+    role: "Managing Director",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
     bio: "Agile expert with 8+ years managing complex software development projects. Specialized in delivering products on time and within budget.",
     expertise: ["Agile Methodology", "Team Coordination", "Risk Management", "Scrum"],
     socials: [
@@ -35,7 +29,7 @@ const teamData = [
   {
     name: "Muhammad Saif",
     role: "Senior UI/UX Designer",
-    img: saif,
+    img: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=400&h=400&fit=crop&crop=face",
     bio: "Creative designer focused on user-centered design and modern interfaces. Passionate about creating intuitive and beautiful user experiences.",
     expertise: ["UI/UX Design", "Prototyping", "Design Systems", "User Research"],
     socials: [
@@ -46,7 +40,7 @@ const teamData = [
   {
     name: "Hazrat Usman",
     role: "MERN-Stack Developer",
-    img: UsmanImage,
+    img: "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?w=400&h=400&fit=crop&crop=face",
     bio: "Full-stack developer specializing in scalable applications and modern frameworks. Expert in both frontend and backend technologies.",
     expertise: ["React/Next.js", "Node.js", "Database Design", "API Development"],
     socials: [
@@ -57,7 +51,7 @@ const teamData = [
   {
     name: "Waleed bin Khurshid",
     role: "Quality Assurance Tester",
-    img: tester,
+    img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&crop=face",
     bio: "Dedicated QA professional ensuring product excellence through comprehensive testing protocols. Committed to delivering bug-free, high-quality software.",
     expertise: ["Test Automation", "Quality Protocols", "Performance Testing", "CI/CD"],
     socials: [
@@ -68,7 +62,7 @@ const teamData = [
   {
     name: "Wahab Nadeem",
     role: "MERN Stack Developer",
-    img: wahab,
+    img: "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=400&h=400&fit=crop&crop=face",
     bio: "MERN stack specialist focused on building robust and scalable full-stack applications. Expert in MongoDB, Express, React, and Node.js.",
     expertise: ["MongoDB", "Express.js", "React", "Node.js", "REST APIs"],
     socials: [
@@ -185,14 +179,7 @@ const TeamSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          {/* <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-3 mb-6">
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold text-blue-400 tracking-widest uppercase">
-              OUR TEAM
-            </span>
-          </div> */}
-
-          <h2 className=" text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Meet Our <span className="text-blue-400">Expert</span> Team
           </h2>
 

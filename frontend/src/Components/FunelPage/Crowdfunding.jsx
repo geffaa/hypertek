@@ -76,11 +76,11 @@ const CrowdfundingSection = () => {
   };
 
   return (
-    <section className="relative py-20 lg:py-24 px-6 overflow-hidden">
+    <section className="relative py-20 lg:py-24 px-6 overflow-hidden bg-[#111827]">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-10 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 right-10 w-72 h-72 bg-gray-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-gray-500/5 rounded-full blur-3xl"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
       </div>
 
@@ -93,15 +93,7 @@ const CrowdfundingSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          {/* Badge */}
-          {/* <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-3 mb-6">
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold text-blue-400 tracking-widest uppercase">
-              LIVE CAMPAIGN
-            </span>
-          </div> */}
-
-          <h2 className="  text-4xl md:text-5xl font-bold font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Join Our{" "}
             <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               Funding Journey
@@ -145,23 +137,23 @@ const CrowdfundingSection = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -8, scale: 1.02 }}
-              className={`relative rounded-3xl p-8 backdrop-blur-xl border transition-all duration-500 ${
+              className={`relative rounded-3xl p-8 backdrop-blur-xl border transition-all duration-500 flex flex-col h-full ${
                 tier.popular
-                  ? "bg-gradient-to-br from-blue-600/40 to-indigo-600/40 text-white shadow-2xl shadow-blue-500/20 border-blue-400/50 scale-105"
-                  : "bg-white/5 border-white/10 shadow-xl hover:shadow-2xl hover:border-blue-300/30"
+                  ? "bg-gradient-to-br from-gray-700/40 to-gray-800/40 text-white shadow-2xl shadow-gray-500/20 border-gray-400/50 scale-105"
+                  : "bg-white/5 border-white/10 shadow-xl hover:shadow-2xl hover:border-gray-300/30"
               }`}
             >
               {/* Glass Overlay */}
               <div className={`absolute inset-0 rounded-3xl backdrop-blur-md ${
-                tier.popular ? "bg-blue-500/5" : "bg-white/5"
+                tier.popular ? "bg-gray-500/5" : "bg-white/5"
               }`}></div>
               
               {/* Content Container */}
-              <div className="relative z-10">
+              <div className="relative z-10 flex flex-col h-full">
                 {/* Popular Badge */}
                 {tier.popular && (
                   <div className="absolute -top-14 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg backdrop-blur-sm border border-white/20">
+                    <div className="bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg backdrop-blur-sm border border-white/20">
                       ⭐ MOST POPULAR
                     </div>
                   </div>
@@ -176,49 +168,51 @@ const CrowdfundingSection = () => {
                     <span className={`text-4xl font-bold ${tier.popular ? "text-white" : "text-white"}`}>
                       {tier.price}
                     </span>
-                    <span className={`text-lg line-through ${tier.popular ? "text-blue-200" : "text-gray-400"}`}>
+                    <span className={`text-lg line-through ${tier.popular ? "text-gray-300" : "text-gray-400"}`}>
                       {tier.originalPrice}
                     </span>
                   </div>
-                  <p className={`text-sm ${tier.popular ? "text-blue-100" : "text-gray-300"}`}>
+                  <p className={`text-sm ${tier.popular ? "text-gray-300" : "text-gray-300"}`}>
                     {tier.reward}
                   </p>
                 </div>
 
                 {/* Features List */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8 flex-grow">
                   {tier.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-center gap-3">
                       <div className={`w-6 h-6 rounded-full flex items-center justify-center backdrop-blur-sm ${
                         tier.popular 
                           ? "bg-white/20 text-white border border-white/30" 
-                          : "bg-blue-500/20 text-blue-300 border border-blue-400/30"
+                          : "bg-gray-500/20 text-gray-300 border border-gray-400/30"
                       }`}>
                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <span className={`text-sm ${tier.popular ? "text-blue-50" : "text-gray-200"}`}>
+                      <span className={`text-sm ${tier.popular ? "text-gray-200" : "text-gray-200"}`}>
                         {feature}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                {/* CTA Button */}
-                <button className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border ${
-                  tier.popular
-                    ? "bg-white/20 text-white border-white/30 hover:bg-white/30 hover:shadow-lg"
-                    : "bg-blue-500/20 text-white border-blue-400/30 hover:bg-blue-600/30 hover:shadow-lg"
-                }`}>
-                  {tier.buttonText}
-                </button>
+                {/* CTA Button Container - Pushed to bottom */}
+                <div className="mt-auto">
+                  <button className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border ${
+                    tier.popular
+                      ? "bg-white/20 text-white border-white/30 hover:bg-white/30 hover:shadow-lg"
+                      : "bg-gray-500/20 text-white border-gray-400/30 hover:bg-gray-600/30 hover:shadow-lg"
+                  }`}>
+                    {tier.buttonText}
+                  </button>
 
-                {/* Value Badge */}
-                <div className={`text-center mt-4 text-xs font-medium ${
-                  tier.popular ? "text-blue-200" : "text-gray-400"
-                }`}>
-                  Limited spots available
+                  {/* Value Badge */}
+                  <div className={`text-center mt-4 text-xs font-medium ${
+                    tier.popular ? "text-gray-300" : "text-gray-400"
+                  }`}>
+                    Limited spots available
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -236,15 +230,14 @@ const CrowdfundingSection = () => {
           <p className="text-gray-300 mb-6">Also available on popular platforms</p>
           <div className="flex flex-wrap justify-center gap-6">
             {[
-              { name: "Kickstarter", color: "bg-blue-500/20 hover:bg-blue-600/30",  border: "border-blue-400/30" },
-              { name: "Indiegogo", color: "bg-indigo-500/20 hover:bg-indigo-600/30",  border: "border-indigo-400/30" },
-              { name: "GoFundMe", color: "bg-blue-600/20 hover:bg-blue-700/30",  border: "border-blue-500/30" },
+              { name: "Kickstarter", color: "bg-gray-500/20 hover:bg-gray-600/30", border: "border-gray-400/30" },
+              { name: "Indiegogo", color: "bg-gray-500/20 hover:bg-gray-600/30", border: "border-gray-400/30" },
+              { name: "GoFundMe", color: "bg-gray-600/20 hover:bg-gray-700/30", border: "border-gray-500/30" },
             ].map((platform, index) => (
               <button
                 key={index}
-                className={`${platform.color} ${platform.border} text-white font-semibold py-3 px-2 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 shadow-lg hover:shadow-xl backdrop-blur-sm border`}
+                className={`${platform.color} ${platform.border} text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 shadow-lg hover:shadow-xl backdrop-blur-sm border`}
               >
-                <span className="text-lg">{platform.icon}</span>
                 {platform.name}
               </button>
             ))}
