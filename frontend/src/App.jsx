@@ -113,7 +113,6 @@ function AppWrapper() {
           <Route path="/no-offer" element={<NoOffered/>} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/success" element={<Success />} />
-          <Route path="/not-found" element={<NotFound />} />
 
           {/* new page added i will update it according to the flow  */}
           <Route path="/wallet-connect" element={<WalletConnect />} />
@@ -144,6 +143,12 @@ function AppWrapper() {
 
         <Route path="/stripe-payment" element={<Stripe/>}/>
         <Route path="/funnel-page" element={<Funnel/>}/>
+
+
+
+        {/* not found page  */}
+                  <Route path="*" element={<NotFound />} />
+
 
 
         </Routes>
