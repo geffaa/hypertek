@@ -122,7 +122,7 @@ export default function Navbar() {
       if (decoded.exp < currentTime) {
         console.log("Token has expired");
         // navigate('/signin')
-        dispatch(logout);
+        dispatch(logout());
         setIsLogin(false);
       } else {
         console.log("Token is valid");

@@ -50,8 +50,12 @@ function Buy1() {
 
   /// for stripe methods
   const handlePayment = async (productId) => {
-    if (!productId || !user?.id) {
-      toast.error("User ID and Payment ID are required");
+    if(!user?.id){
+      toast.error("User Id is required Please signin")
+      return;
+    }
+    if (!productId) {
+      toast.error("Product ID is  required");
       return;
     }
 
