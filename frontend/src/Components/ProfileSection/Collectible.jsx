@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useDebugValue } from "react";
+import React, { useState, useEffect, useDebugValue } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
 import popularCollections from "../../assets/images/popular/popolar.png";
@@ -12,40 +12,32 @@ import symbol from "../../assets/images/login/Symbol.svg.png";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { BACKEND_BASE_URL } from "../../Config"
+import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
 
-import FullScreenLoader from "../Common/Spinner"
-
-
-
-
+import FullScreenLoader from "../Common/Spinner";
 
 function MarketPlace() {
+  // get the login user data from the redux store
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  console.log("your data in the profile are :", user);
+  const [loading, setLoading] = useState(true); // ✅ loader state
 
-  // get the login user data from the redux store 
-   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-   console.log("your data in the profile are :",user);
-    const [loading, setLoading] = useState(true); // ✅ loader state
+  // get the nfa data
+  const [marketData, setMarketData] = useState([]);
 
-// get the nfa data 
-const [marketData, setMarketData] = useState([]);
-  
-// user data from the database 
-const [ userData , setUserData ] = useState({});
+  // user data from the database
+  const [userData, setUserData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
   const [isFourthOpen, setIsFourthOpen] = useState(false);
-    const [imageError, setImageError] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
-
-
-    const [selectedItem, setSelectedItem] = useState(null);
-
+  const [selectedItem, setSelectedItem] = useState(null);
 
   // const openModal = () => setIsOpen(true);
-   const openModal = (item) => {
+  const openModal = (item) => {
     setSelectedItem(item);
     setIsOpen(true);
   };
@@ -77,7 +69,7 @@ const [ userData , setUserData ] = useState({});
     }, 150);
   };
 
-/// get the nfa data from the backend 
+  /// get the nfa data from the backend
 
   useEffect(() => {
     const fetchMarketData = async () => {
@@ -86,12 +78,11 @@ const [ userData , setUserData ] = useState({});
         const res = await axios.get(
           `${BACKEND_BASE_URL}/api/v1/market/getMarket`
         );
-       
+
         if (res.data?.data) setMarketData(res.data.data);
-        
       } catch (error) {
         console.error("Error fetching market data:", error);
-      }finally {
+      } finally {
         setLoading(false); // ✅ hide loader after fetch
       }
     };
@@ -101,11 +92,9 @@ const [ userData , setUserData ] = useState({});
 
   console.log("your market data are here :", marketData);
 
+  // git profile data from the backend
 
-
-// git profile data from the backend 
-
-useEffect(() => {
+  useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
@@ -114,11 +103,14 @@ useEffect(() => {
           },
         });
 
-        console.log("your profile response are :",res);
-        setUserData(res.data.user)
+        console.log("your profile response are :", res);
+        setUserData(res.data.user);
         console.log("✅ User profile:", res.data.user);
       } catch (error) {
-        console.error("❌ Profile fetch error:", error.response?.data || error.message);
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
         toast.error(error.response?.data?.message || "Failed to fetch profile");
       }
     };
@@ -127,13 +119,11 @@ useEffect(() => {
       fetchProfile(); // only call if token exists
     }
   }, [token]);
-  
-console.log("Full Name:", userData.FullName);
- const hasAvatar =
-    userData?.Avatar &&
-    userData.Avatar.trim() !== "" &&
-    !imageError;
- if (loading) {
+
+  console.log("Full Name:", userData.FullName);
+  const hasAvatar =
+    userData?.Avatar && userData.Avatar.trim() !== "" && !imageError;
+  if (loading) {
     return <FullScreenLoader />;
   }
   return (
@@ -150,42 +140,44 @@ console.log("Full Name:", userData.FullName);
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 {/* Profile Image */}
-               <div className="relative flex-shrink-0">
-      {hasAvatar ? (
-        <img
-          src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-          alt="Profile"
-          onError={() => setImageError(true)} // if image fails, fallback to avatar
-          className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
+                <div className="relative flex-shrink-0">
+                  {hasAvatar ? (
+                    <img
+                      src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                      alt="Profile"
+                      onError={() => setImageError(true)} // if image fails, fallback to avatar
+                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
                      rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-        />
-      ) : (
-        <div
-          className="flex items-center justify-center 
+                    />
+                  ) : (
+                    <div
+                      className="flex items-center justify-center 
                      bg-gradient-to-br from-blue-500 to-indigo-600 text-white 
                      rounded-full shadow-lg 
                      w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
                      -mt-12 sm:-mt-16 md:-mt-16"
-        >
-          <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-        </div>
-      )}
-    </div>
+                    >
+                      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                    </div>
+                  )}
+                </div>
 
                 {/* Profile Info */}
                 <div className="mt-3 text-left text-white sm:mt-0">
                   <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
-
-{userData.FullName
-  ? userData.FullName.replace(/[0-9]/g, "") || ""
-  : userData.Email
-  ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
-  : "Guest"}
-                 </h2>
+                    {userData.FullName
+                      ? userData.FullName.replace(/[0-9]/g, "") || ""
+                      : userData.Email
+                      ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+                      : "Guest"}
+                  </h2>
                   <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
-                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
+                    {userData.DiscordId ||
+                      userData.GoogleId ||
+                      userData._id ||
+                      "null"}
 
-                    <Link to="/edit"   state={{ userData }}>
+                    <Link to="/edit" state={{ userData }}>
                       <span className="ml-1 sm:ml-2 cursor-pointer underline">
                         Edit Profile
                       </span>
@@ -250,12 +242,11 @@ console.log("Full Name:", userData.FullName);
                   </div>
 
                   {/* Large screens: show on hover */}
-<div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
-  <button onClick={() => openModal(item)}>
-    <CustomButton text="List Now" />
-  </button>
-</div>
-
+                  <div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
+                    <button onClick={() => openModal(item)}>
+                      <CustomButton text="List Now" />
+                    </button>
+                  </div>
 
                   {/* No Listing text for hover state on large screens */}
                   <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300">
@@ -269,7 +260,7 @@ console.log("Full Name:", userData.FullName);
       </div>
 
       {/* ------------------ First Modal ------------------ */}
-      {isOpen && selectedItem &&  (
+      {isOpen && selectedItem && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
           onClick={closeModal}
@@ -332,16 +323,14 @@ console.log("Full Name:", userData.FullName);
                     className="bg-[#002AA8] mr-0.5"
                     style={{
                       width: "0.25rem", // ~3.99px
-                      height: "1.1rem", // ~21.93px
+                      height: "1.3rem", // ~21.93px
                     }}
                   ></div>
 
                   {/* Left angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -349,12 +338,10 @@ console.log("Full Name:", userData.FullName);
 
                   {/* Main button area */}
                   <div
-                    className="flex items-center justify-center text-white font-medium"
+                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
                     style={{
-                      width: "8rem", // ~168px
-                      height: "2rem", // ~39.59px
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "0.15rem solid #002AA8", // ~2.42px
+                      border: "2.24px solid #002AA8", // ~2.42px
                     }}
                   >
                     Cancel
@@ -362,30 +349,64 @@ console.log("Full Name:", userData.FullName);
 
                   {/* Right angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                     }}
                   ></div>
 
                   {/* Right small bar */}
-                  <div
-                    className="bg-[#002AA8]"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.1rem", // ~21.93px
-                    }}
-                  ></div>
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
                 </div>
               </button>
-              <button
-                onClick={openSecondModal}
-                className="w-full md:w-auto text-normal"
-              >
-                <CustomButton text="List now " />
+
+              <button onClick={openSecondModal}>
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
+
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
+                    style={{
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+
+                      background:
+                        "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    List Now
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
+                </div>
               </button>
             </div>
           </div>
@@ -393,7 +414,7 @@ console.log("Full Name:", userData.FullName);
       )}
 
       {/* ------------------ Second Modal ------------------ */}
-      {isSecondOpen &&  selectedItem &&  (
+      {isSecondOpen && selectedItem && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
           onClick={closeSecondModal}
@@ -422,37 +443,36 @@ console.log("Full Name:", userData.FullName);
               />
             </div>
 
-            <h1 className="text-white  text-lg md:text-xl">{selectedItem.title}</h1>
+            <h1 className="text-white  text-lg md:text-xl">
+              {selectedItem.title}
+            </h1>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
 
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">${selectedItem.price + 0.5}</p>
+                <p className="text-white text-sm">
+                  ${selectedItem.price + 0.5}
+                </p>
               </div>
             </div>
 
             <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
-              <button
-                onClick={closeSecondModal}
-                className="w-full w-[8rem] md:w-auto"
-              >
+              <button onClick={closeSecondModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
                   <div
                     className="bg-[#002AA8] mr-0.5"
                     style={{
                       width: "0.25rem", // ~3.99px
-                      height: "1.1rem", // ~21.93px
+                      height: "1.3rem", // ~21.93px
                     }}
                   ></div>
 
                   {/* Left angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                     }}
@@ -460,40 +480,78 @@ console.log("Full Name:", userData.FullName);
 
                   {/* Main button area */}
                   <div
-                    className="flex  items-center justify-center text-white font-medium"
+                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
                     style={{
-                      width: "8rem", // ~168px
-                      height: "2rem", // ~39.59px
                       // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "0.15rem solid #002AA8", // ~2.42px
+
+                      // background:
+                      //   "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8",
                     }}
                   >
-                    Close
+                    Cancel
                   </div>
 
                   {/* Right angled border */}
                   <div
-                    className="border-[#002AA8]"
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
                       borderStyle: "solid",
                       borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                     }}
                   ></div>
 
                   {/* Right small bar */}
-                  <div
-                    className="bg-[#002AA8]"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.1rem", // ~21.93px
-                    }}
-                  ></div>
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
                 </div>
               </button>
+
               <button onClick={openThirdModal}>
-                <CustomButton text="Confirm" />
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
+
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium w-[90.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
+                    style={{
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+
+                      background:
+                        "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Confirm
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
+                </div>
               </button>
             </div>
           </div>
@@ -563,47 +621,47 @@ console.log("Full Name:", userData.FullName);
 
               <button onClick={closeFourthModal}>
                 <div className="flex items-center cursor-pointer">
-                <div
-                  className="bg-[#002AA8] mr-0.5"
-                  style={{ width: "0.25rem", height: "1.3rem" }}
-                ></div>
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{ width: "0.25rem", height: "1.3rem" }}
+                  ></div>
 
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.3rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.375rem 0.25rem 0.375rem 0",
-                  }}
-                ></div>
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.3rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                    }}
+                  ></div>
 
-                <div
-                  className="flex items-center justify-center text-white font-medium"
-                  style={{
-                    width: "7.5rem",
-                    height: "2rem",
-                    border: "0.15rem solid #002AA8",
-                  }}
-                >
-                  Cancel
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "7.5rem",
+                      height: "2rem",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Cancel
+                  </div>
+
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.3rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                    }}
+                  ></div>
+
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{ width: "0.25rem", height: "1.2rem" }}
+                  ></div>
                 </div>
-
-                <div
-                  className="border-[#002AA8]"
-                  style={{
-                    width: "0.5rem",
-                    height: "2.3rem",
-                    borderStyle: "solid",
-                    borderWidth: "0.25rem 0 0.375rem 0.25rem",
-                  }}
-                ></div>
-
-                <div
-                  className="bg-[#002AA8]"
-                  style={{ width: "0.25rem", height: "1.2rem" }}
-                ></div>
-              </div>
               </button>
             </div>
           </div>
