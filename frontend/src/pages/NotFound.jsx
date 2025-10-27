@@ -20,7 +20,7 @@ function NotFound() {
       </div>
 
       {/* Floating Faces (now correctly positioned even on small screens) */}
-      <div className="absolute top-[19rem] sm:top-[10rem] md:top-[14rem] left-1/2 transform -translate-x-1/2">
+      <div className="absolute top-[21rem] sm:top-[10rem] md:top-[16rem] left-1/2 transform -translate-x-1/2">
         <img
           src={FaceOne}
           alt="Face One"
@@ -28,7 +28,7 @@ function NotFound() {
         />
       </div>
 
-      <div className="absolute top-[22rem] sm:top-[14rem] md:top-[19rem] left-1/2 transform -translate-x-1/2">
+      <div className="absolute top-[24rem] sm:top-[14rem] md:top-[21rem] left-1/2 transform -translate-x-1/2">
         <img
           src={FaceTwo}
           alt="Face Two"
@@ -39,7 +39,7 @@ function NotFound() {
       {/* Go Home Button */}
       <Link
         to="/"
-        className="flex items-center justify-center gap-2 mt-14 px-5 py-2 rounded  transition duration-300"
+        className="flex items-center justify-center gap-2 mt-2 px-5 py-2 rounded  transition duration-300"
       >
         <img src={BackHome} alt="Back Home" className="w-5 h-4 opacity-90" />
         <span className="text-white text-lg font-medium">Go Home</span>
