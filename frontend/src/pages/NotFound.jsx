@@ -14,13 +14,13 @@ function NotFound() {
 
       {/* 404 Number */}
       <div className="flex text-center mt-6">
-        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[140px]">4</h1>
-        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[140px] mx-2">0</h1>
-        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[140px]">4</h1>
+        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[180px]">4</h1>
+        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[180px] mx-2">0</h1>
+        <h1 className="text-[#8C9ED8] font-bold text-[80px] sm:text-[100px] md:text-[180px]">4</h1>
       </div>
 
       {/* Floating Faces (now correctly positioned even on small screens) */}
-      <div className="absolute top-[24rem] sm:top-[10rem] md:top-[13rem] left-1/2 transform -translate-x-1/2">
+      <div className="absolute top-[19rem] sm:top-[10rem] md:top-[14rem] left-1/2 transform -translate-x-1/2">
         <img
           src={FaceOne}
           alt="Face One"
@@ -28,7 +28,7 @@ function NotFound() {
         />
       </div>
 
-      <div className="absolute top-[27rem] sm:top-[14rem] md:top-[18rem] left-1/2 transform -translate-x-1/2">
+      <div className="absolute top-[22rem] sm:top-[14rem] md:top-[19rem] left-1/2 transform -translate-x-1/2">
         <img
           src={FaceTwo}
           alt="Face Two"
@@ -38,7 +38,7 @@ function NotFound() {
 
       {/* Go Home Button */}
       <Link
-        to="/payment"
+        to="/"
         className="flex items-center justify-center gap-2 mt-14 px-5 py-2 rounded  transition duration-300"
       >
         <img src={BackHome} alt="Back Home" className="w-5 h-4 opacity-90" />
@@ -46,7 +46,7 @@ function NotFound() {
       </Link>
 
       {/* Divider Line */}
-      <div className="mt-4 w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
+      <div className=" w-[calc(100%-2rem)] max-w-[120px] h-[1px] bg-gray-200"></div>
     </div>
   );
 }
