@@ -108,16 +108,17 @@ function Footer() {
         >
           {/* Logo */}
           <div className="flex-shrink-0 flex cursor-pointer justify-center md:justify-start">
+            <a href="/">
             <img
               src={Logo}
               alt="Logo"
               className="h-10 w-auto object-contain"
-            />
+            /></a>
           </div>
           {/* Menu Links */}
           <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm font-medium justify-center md:justify-end text-center md:text-left z-20">
             <li>
-              <a href="#" className="hover:text-gray-400 transition-colors" onClick={(e) => e.preventDefault()} >
+              <a href="/market-place" className="hover:text-gray-400 transition-colors"  >
                 Market Place
               </a>
             </li>

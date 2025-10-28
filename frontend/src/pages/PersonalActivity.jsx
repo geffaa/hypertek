@@ -107,45 +107,7 @@ if (loading) {
 
         {/* Navigation and Search */}
         <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-          {/* Nav Links
-          <ul className="flex flex-wrap gap-4 lg:gap-[50px] justify-center lg:justify-start">
-            <li>
-              <Link
-                to="/market-place"
-                className="px-4 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] 
-                 text-white font-inter font-semibold text-sm lg:text-[16px]"
-              >
-                Overview
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/nfa-expand"
-                className="px-4 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] 
-                text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Collectibles
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/land"
-                className="px-4 py-2 lg:px-[10px] lg:py-[4px] rounded-[10px] 
-                text-white font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Lands
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/personal-activity"
-                className="px-4 py-2 lg:px-[12px] lg:py-[4px] rounded-[10px] 
-                text-white bg-[#002AA8] font-inter font-medium text-sm lg:text-[18px] hover:bg-white/10 transition-colors"
-              >
-                Activities
-              </Link>
-            </li>
-          </ul> */}
+
           <NavLinks />
 
           {/* Search Bar */}

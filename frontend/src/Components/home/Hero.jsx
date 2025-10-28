@@ -26,7 +26,7 @@ export default function Hero() {
       }}
     >
       {/* Hero Content */}
-      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[230px] mx-auto px-4 md:px-6">
+      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[230px]  mx-auto px-4 md:px-6">
         {/* Text */}
         <div className="flex flex-col max-w-[90%] md:max-w-[80%] text-center md:text-left">
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white md:pl-12 leading-[100%] uppercase m-0">
@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row items-center gap-4 pl-8 mt-6">
           <Link to="/market-place">
             <CustomButton
               text="MarketPlace"

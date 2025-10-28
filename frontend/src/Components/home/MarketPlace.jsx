@@ -85,19 +85,17 @@ function PopularCollections() {
               </h2>
 
               {/* Info Row */}
-              <div className="flex justify-between items-center md:mb-4 md:mt-5">
-                <h3 className="text-sm font-semibold truncate">
-                  {data.serialNumber || "No33"} 🔥
-                </h3>
-                <div className="flex items-center">
-                  <img
-                    src={TVector}
-                    alt=""
-                    className="w-[10px] h-[9px] bg-blue-400 rounded-md"
-                  />
-                  <h3 className="pl-2 text-sm font-semibold">
-                    ${data.price || 2000}
-                  </h3>
+               <div className="flex justify-between items-center mb-4 mt-5">
+                <h3 className="text-sm font-semibold">{data.serialNumber}🔥</h3>
+
+                <div className="flex items-center gap-2">
+                  {/* Icon Container */}
+                  <div className="flex items-center justify-center w-5 h-5 rounded-[50%] bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE]">
+                    <img src={TVector} alt="" className="w-3 h-3" />
+                  </div>
+
+                  {/* Price */}
+                  <h3 className="text-sm font-semibold">${data.price}</h3>
                 </div>
               </div>
 
