@@ -35,7 +35,6 @@ function Buy1() {
   };
   const closeSecondModal = () => setIsSecondOpen(false);
 
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const sessionId = params.get("session_id");
@@ -50,8 +49,8 @@ function Buy1() {
 
   /// for stripe methods
   const handlePayment = async (productId) => {
-    if(!user?.id){
-      toast.error("User Id is required Please signin")
+    if (!user?.id) {
+      toast.error("User Id is required Please signin");
       return;
     }
     if (!productId) {
@@ -122,119 +121,124 @@ function Buy1() {
     }
   };
 
-
-  /// for make payment 
+  /// for make payment
   const handleMakeOffer = () => {
-  if (item) localStorage.setItem("paymentItem", JSON.stringify(item));
-};
-
+    if (item) localStorage.setItem("paymentItem", JSON.stringify(item));
+  };
 
   return (
-    <div className="max-w-[918px] mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
-      {/* NFT Content */}
-      <div className="text-white flex items-center sm:hidden">
-        <Link to="/buy-nfa" className="border-b-2 border-blue-500">
-          Overview
-        </Link>
-        <Link to="/offer-recieved" className="pl-3">
-          Offer 0
-        </Link>
-      </div>
+    <>
 
-      <div className="flex flex-col md:flex-row gap-6 items-start">
-        {/* ✅ Title appears ABOVE the image on small screens */}
-        <div className="flex md:hidden items-center gap-2 w-full justify-left">
-          <h1 className="font-inter font-semibold text-xl text-white cursor-default">
-            {item.title}
-          </h1>
-          <p className="font-inter font-semibold text-sm text-white cursor-default">
-            {item.serialNumber} 🔥
-          </p>
+
+    <div className="flex flex-col">
+       <div className="text-white flex items-center  w-[283px] h-[28px] md:top-[3rem] my-12 md:mt-1 md:absolute lg:relative md:right-[5rem]">
+          <Link to="/buy-nfa" className="border-b-2 border-blue-500">
+            Overview
+          </Link>
+          <Link to="/offer-recieved" className="pl-3">
+            Offer 0
+          </Link>
         </div>
+    
+    
+    <div className="max-w-[918px] md:mt-24 w-full h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
+      {/* NFT Content */}
+      <div>
+       
 
-        {/* ✅ Image */}
-        <img
-          src={buyNfaImage}
-          alt="land image"
-          style={{
-            background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-          }}
-          className="w-full md:w-[375px] h-[230px] md:h-[350px] scale-x-[-1] rounded-[10px] object-cover object-top cursor-default"
-        />
-
-        {/* ✅ Content */}
-        <div className="w-full md:w-[464px] flex flex-col gap-4">
-          {/* ✅ Title visible only on medium+ screens (beside image) */}
-          <div className="hidden md:flex items-center gap-2">
-            <h1 className="font-inter font-semibold text-2xl text-white cursor-default">
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          {/* ✅ Title appears ABOVE the image on small screens */}
+          <div className="flex md:hidden items-center gap-2 w-full justify-left">
+            <h1 className="font-inter font-semibold text-xl text-white cursor-default">
               {item.title}
             </h1>
-            <p className="font-inter font-semibold text-base text-white cursor-default">
+            <p className="font-inter font-semibold text-sm text-white cursor-default">
               {item.serialNumber} 🔥
             </p>
           </div>
 
-          <p className="font-inter text-sm md:text-base text-white opacity-50 cursor-default">
-            Listed
-          </p>
+          {/* ✅ Image */}
+          <img
+            src={buyNfaImage}
+            alt="land image"
+            style={{
+              background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+            }}
+            className="w-full md:w-[375px] h-[230px] md:h-[350px] scale-x-[-1] rounded-[10px] object-cover object-top cursor-default"
+          />
 
-          <div className="w-full h-auto bg-[#17171887] px-4 md:px-6 py-6 md:py-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-white opacity-70 cursor-default gap-2 md:gap-0">
-              <p>Price</p>
-              <p className="text-xs md:text-sm">
-                Owned By : Oxc4c16a645...b21a
+          {/* ✅ Content */}
+          <div className="w-full md:w-[464px] flex flex-col gap-4">
+            {/* ✅ Title visible only on medium+ screens (beside image) */}
+            <div className="hidden md:flex items-center gap-2">
+              <h1 className="font-inter font-semibold text-2xl text-white cursor-default">
+                {item.title}
+              </h1>
+              <p className="font-inter font-semibold text-base text-white cursor-default">
+                {item.serialNumber} 🔥
               </p>
             </div>
 
-            <h2 className="text-white mt-3 text-lg md:text-xl cursor-default">
-              ${item.price}
-            </h2>
+            <p className="font-inter text-sm md:text-base text-white opacity-50 cursor-default">
+              Listed
+            </p>
 
-            <div className="flex justify-end mt-4">
-              <h3 className="flex items-center px-2">
-                <FiEye className="text-white w-5 h-5" />
-                <span className="text-white font-medium px-2">505 Views</span>
-              </h3>
+            <div className="w-full h-auto bg-[#17171887] px-4 md:px-6 py-6 md:py-8">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-white opacity-70 cursor-default gap-2 md:gap-0">
+                <p>Price</p>
+                <p className="text-xs md:text-sm">
+                  Owned By : Oxc4c16a645...b21a
+                </p>
+              </div>
+
+              <h2 className="text-white mt-3 text-lg md:text-xl cursor-default">
+                ${item.price}
+              </h2>
+
+              <div className="flex justify-end mt-4">
+                <h3 className="flex items-center px-2">
+                  <FiEye className="text-white w-5 h-5" />
+                  <span className="text-white font-medium px-2">505 Views</span>
+                </h3>
+              </div>
+
+              <div className="w-full flex flex-row justify-center gap-4 mt-2">
+                <button
+                  onClick={openModal}
+                  className="cursor-pointer w-full md:w-auto"
+                >
+                  <CustomButton text="Buy Now" />
+                </button>
+
+                {/* buy with card option  */}
+                <button
+                  onClick={() => handlePaymentCard(item._id)}
+                  className="cursor-pointer w-full md:w-auto"
+                >
+                  <CustomButton text="Buy With Card" />
+                </button>
+              </div>
+
+              <Link
+                to="/payment"
+                state={{ item }}
+                onClick={handleMakeOffer}
+                className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
+              >
+                Make Offer
+                <FiEdit2 className="text-base md:text-lg" />
+              </Link>
             </div>
 
-            <div className="w-full flex flex-row justify-center gap-4 mt-2">
-              <button
-                onClick={openModal}
-                className="cursor-pointer w-full md:w-auto"
-              >
-                <CustomButton text="Buy Now" />
-              </button>
-
-              {/* buy with card option  */}
-              <button
-                onClick={() => handlePaymentCard(item._id)}
-                className="cursor-pointer w-full md:w-auto"
-              >
-                <CustomButton text="Buy With Card" />
-              </button>
-            </div>
-
-          <Link
-  to="/payment"
-  state={{ item }}
-  onClick={handleMakeOffer}
-  className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
->
-  Make Offer
-  <FiEdit2 className="text-base md:text-lg" />
-</Link>
-
-
+            <Link
+              to="/payment"
+              className="flex md:hidden items-center gap-2 mt-4 text-white cursor-pointer"
+              onClick={handleMakeOffer}
+            >
+              Make Offer
+              <FiEdit2 className="text-base md:text-lg" />
+            </Link>
           </div>
-
-          <Link
-            to="/payment"
-            className="flex md:hidden items-center gap-2 mt-4 text-white cursor-pointer"
-            onClick={handleMakeOffer}
-          >
-            Make Offer
-            <FiEdit2 className="text-base md:text-lg" />
-          </Link>
         </div>
       </div>
 
@@ -443,6 +447,13 @@ function Buy1() {
         </div>
       )}
     </div>
+    
+    </div>
+    </>
+
+
+
+
   );
 }
 

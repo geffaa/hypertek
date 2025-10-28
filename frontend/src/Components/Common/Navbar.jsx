@@ -16,6 +16,9 @@ import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
+
+/// logout icions
+import logoutImage from "../../assets/images/login/logout.png"
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
 import XImg from "../../assets/images/skipe.png";
@@ -162,6 +165,14 @@ export default function Navbar() {
     setSocialOpen(false);
   };
 
+
+/// hide the signup button on the following pages 
+// Paths where Sign Up button should be hidden
+const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
+
+
+
+
   // Hide navbar items on these routes
   const hideOnPaths = [
     "/signup",
@@ -240,7 +251,7 @@ export default function Navbar() {
                         }}
                       >
                         <h1 className="text-white font-semibold text-[16px]">
-                          Overview & Desc
+                          Overview 
                         </h1>
                         <p className="text-white text-[12px]">
                           See what's new and trending.
@@ -451,22 +462,29 @@ export default function Navbar() {
                     />
                   </Link>
                 </div>
-                <div>
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white"
-                  >
-                    <FiLogOut className="w-6 h-6" />
-                  </button>
-                </div>
+              <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
+  <button 
+    className="flex items-center justify-center w-full h-full"
+    onClick={() => setShowModal(true)}
+  >
+    <img 
+      src={logoutImage} 
+      alt="Logout" 
+      className="w-[20px] h-[20px] brightness-0 invert"
+      style={{ filter: 'brightness(0) invert(1)' }}
+    />
+  </button>
+</div>
               </div>
-            ) : (
-              <div className="hidden md:block">
-                <Link to="/signup">
-                  <CustomeButton text="Sign In" />
-                </Link>
-              </div>
-            )}
+            ) :  (
+  !["/signup", "/signin", "/forgot-password"].includes(location.pathname) && (
+    <div className="hidden md:block">
+      <Link to="/signup">
+        <CustomeButton text="Sign UP" />
+      </Link>
+    </div>
+  )
+)}
           </div>
         </div>
 
@@ -600,12 +618,19 @@ export default function Navbar() {
                       className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200"
                     />
                   </Link>
-                  <button
-                    onClick={() => setShowModal(true)}
-                    className="flex items-center justify-center w-10 h-10 rounded-md bg-red-600 hover:bg-red-700 transition-colors text-white"
-                  >
-                    <FiLogOut className="w-6 h-6" />
-                  </button>
+                 <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
+  <button 
+    className="flex items-center justify-center w-full h-full"
+    onClick={() => setShowModal(true)}
+  >
+    <img 
+      src={logoutImage} 
+      alt="Logout" 
+      className="w-[20px] h-[20px] brightness-0 invert"
+      style={{ filter: 'brightness(0) invert(1)' }}
+    />
+  </button>
+</div>
                 </div>
               </>
             ) : (

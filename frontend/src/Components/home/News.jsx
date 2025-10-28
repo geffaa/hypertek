@@ -58,7 +58,7 @@ export default function News() {
     alt="News 1"
     className="w-full max-h-[350px] object-cover rounded-lg"
   />
-  <div className="flex flex-col gap-3 pt-2 md:p-4 w-full">
+  <div className="flex flex-col gap-3 pt-2  w-full">
     <h3 className="text-white text-xl sm:text-2xl font-bold uppercase font-goldman w-full whitespace-nowrap overflow-hidden text-ellipsis">
       Hyper QUEST : the awakening
     </h3>
@@ -79,13 +79,12 @@ export default function News() {
                 alt="News 2"
                 className="w-full max-h-[200px] object-cover rounded-lg"
               />
-              <div className="flex flex-col ">
+              <div className="flex flex-col gap-[12px] md:w-[247px] md:h-[176px]">
                 <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
-                  Hyper racing : the velocity <br /> wars
+                  Hyper racing : the  <br /> velocity  wars
                 </h3>
                 <p className="text-white text-sm pt-2">
-                  On Blacktrack Circuits, speed is war. Factions battle at 900
-                  kph for control of energy routes and warp towers...
+                 On Blacktrack Circuits, speed is war. Factions battle at 900 kph for control of energy routes and warp towers. Your vehicle is your weapon and your rise rewrites the map.
                 </p>
               </div>
             </div>
@@ -97,7 +96,7 @@ export default function News() {
                 alt="News 3"
                 className="w-full max-h-[200px] object-cover rounded-lg"
               />
-              <div className="flex flex-col ">
+              <div className="flex flex-col gap-[12px] md:w-[247px] md:h-[176px] ">
                 <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
                   Overlord Realm : <br /> The Final Ascent
                 </h3>
