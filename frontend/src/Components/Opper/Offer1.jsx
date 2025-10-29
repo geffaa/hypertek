@@ -106,9 +106,11 @@ function CardPayment() {
 
   return (
     <>
-      <button
+     <div className="max-w-[1300px] w-full mx-auto">
+
+       <button
         onClick={() => navigate(-1)}
-        className="hidden md:block absolute md:top-[70px] top-[75px] left-[23px] md:left-10 text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
+        className="hidden md:block  pt-[5rem] pl-[4rem] text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
       >
         <FaArrowLeft />
       </button>
@@ -221,6 +223,7 @@ function CardPayment() {
           </button>
         </div>
       </form>
+     </div>
     </>
   );
 }

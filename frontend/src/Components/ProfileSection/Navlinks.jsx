@@ -7,17 +7,18 @@ const links = [
   { name: "Land", path: "/Lands" },
   { name: "Activities", path: "/Activity" },
   { name: "Listing", path: "/List" },
+  { name: "Offer", path: "/offer" },
 ];
 
 function NavLinks() {
   return (
-    <ul className="flex flex-wrap gap-4 md:px-8 px-4 mt-12 lg:gap-[50px] justify-center lg:justify-start">
+    <ul className="flex flex-wrap gap-4  px-4 mt-5 lg:gap-[50px] justify-start lg:justify-start">
       {links.map((link, i) => (
         <li key={i}>
           <NavLink
             to={link.path}
             className={({ isActive }) =>
-              `px-2 md:px-4 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
+              `px-2 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
               transition-colors ${
                 isActive
                   ? " bg-[#002AA8] text-white font-semibold"

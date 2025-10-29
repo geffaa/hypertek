@@ -480,7 +480,7 @@ const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
   !["/signup", "/signin", "/forgot-password"].includes(location.pathname) && (
     <div className="hidden md:block">
       <Link to="/signup">
-        <CustomeButton text="Sign UP" />
+        <CustomeButton text="Sign Up" />
       </Link>
     </div>
   )
