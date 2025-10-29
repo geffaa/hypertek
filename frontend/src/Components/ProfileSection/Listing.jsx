@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ManImage from "../../assets/images/Overview/man.png";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
@@ -12,15 +12,12 @@ import { FaUserCircle } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { BACKEND_BASE_URL } from "../../Config"
+import { BACKEND_BASE_URL } from "../../Config";
 
 function PersonalActivity() {
-
-
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-       const [ userData , setUserData ] = useState({});
-       
-  
+  const [userData, setUserData] = useState({});
+
   // Activities data
   const [activities, setActivities] = useState([
     {
@@ -55,29 +52,29 @@ function PersonalActivity() {
     },
   ]);
 
-
-
-   useEffect(() => {
-      const fetchProfile = async () => {
-        try {
-          const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
-            headers: {
-              Authorization: `Bearer ${token}`, // 👈 send token here
-            },
-          });
-          setUserData(res.data.user)
-          console.log("✅ User profile:", res.data.user);
-        } catch (error) {
-          console.error("❌ Profile fetch error:", error.response?.data || error.message);
-          toast.error(error.response?.data?.message || "Failed to fetch profile");
-        }
-      };
-  
-      if (token) {
-        fetchProfile(); // only call if token exists
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // 👈 send token here
+          },
+        });
+        setUserData(res.data.user);
+        console.log("✅ User profile:", res.data.user);
+      } catch (error) {
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
+        toast.error(error.response?.data?.message || "Failed to fetch profile");
       }
-    }, [token]);
-    
+    };
+
+    if (token) {
+      fetchProfile(); // only call if token exists
+    }
+  }, [token]);
 
   // State for modal visibility
   const [showModal, setShowModal] = useState(false);
@@ -122,284 +119,305 @@ function PersonalActivity() {
   return (
     <div className="bg-transparent">
       {/* Hero Section */}
-      <div className="mt-20 lg:mt-[92px]">
-        {/* Hero Banner */}
-        <div
-          className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] w-full mb-20 md:mb-24 bg-cover bg-top bg-no-repeat"
-          style={{ backgroundImage: `url(${overview1})` }}
-        ></div>
+     <div className="mx-auto mt-18 lg:mt-[68px] max-w-[2000px]">
+          <div className="w-full overflow-x-hidden">
+            {/* Hero Banner - Fixed height for laptop screens */}
+            <div
+              className="relative w-full max-w-[1400px] mx-auto 
+    h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] 
+    mb-20 md:mb-24 overflow-hidden"
+            >
+              <img
+                src={overview1}
+                alt="Hero background"
+                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+              />
+            </div>
 
-        {/* Profile Content Section */}
-        <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-0 sm:px-6 lg:px-12">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 px-4 sm:px-0">
-            {/* Profile Image */}
-           <div className="relative flex-shrink-0">
-  {userData?.Avatar ? (
-    <img
-      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
-      alt="Profile"
-      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-    />
-  ) : (
-    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16">
-      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-    </div>
-  )}
-</div>
+            {/* Profile Section - aligned properly with banner */}
+            <div className="relative -mt-20 sm:-mt-24 md:-mt-24 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+              <div className="max-w-7xl mx-auto">
+                <div className="flex flex-col items-start">
+                  {/* Profile Image */}
+                  <div className="relative flex-shrink-0">
+                    {userData?.Avatar ? (
+                      <img
+                        src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+                        alt="Profile"
+                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 object-cover border-4 border-gray-900"
+                        onError={() => setImageError(true)}
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 border-4 border-gray-900">
+                        <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                      </div>
+                    )}
+                  </div>
 
-            {/* Profile Info */}
-            <div className="text-left text-white">
-              <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                                                   {userData.FullName
-  ? userData.FullName.replace(/[0-9]/g, "") || ""
-  : userData.Email
-  ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
-  : "Guest"}
-              </h2>
-              <p className="text-xs sm:text-sm text-gray-400 break-words">
+                  {/* Profile Info */}
+                  <div className="mt-3 text-left text-white">
+                    <h2 className="text-base sm:text-lg md:text-xl font-semibold">
+                      {userData.FullName
+                        ? userData.FullName.replace(/[0-9]/g, "") || ""
+                        : userData.Email
+                        ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+                        : "Guest"}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-400 break-words">
+                      {userData.DiscordId ||
+                        userData.GoogleId ||
+                        userData._id ||
+                        "null"}
+                      <Link to="/edit" state={{ userData }}>
+                        <span className="ml-1 sm:ml-2 cursor-pointer underline hover:text-white transition-colors">
+                          Edit Profile
+                        </span>
+                      </Link>
+                    </p>
+                    <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
+                      $3000
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                   {userData.DiscordId || userData.GoogleId || userData._id || "null"}
-                <Link to="/edit"  state={{ userData }}>
-                  <span className="ml-1 sm:ml-2 cursor-pointer underline">
-                    Edit Profile
-                  </span>
-                </Link>
-              </p>
-              <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
-                $3000
-              </p>
+          {/* Navigation */}
+          <div className="relative flex flex-row md:mr-24 lg:flex-row md:justify-center justify-start items-start gap-4 lg:gap-0 mb-4 lg:mb-8">
+            <div className="w-full max-w-7xl md:px-4 px-2 lg:px-8">
+              <NavLinks />
             </div>
           </div>
         </div>
 
-        {/* Navigation Section */}
-        <div className="relative flex flex-col lg:flex-row justify-start items-start gap-4 mb-8">
-          <NavLinks />
-        </div>
-      </div>
 
       {/* Activities Section */}
-      <section className="mx-auto flex flex-col gap-6 lg:gap-8 mb-4 px-4 sm:px-12 xl:px-18 2xl:px-32">
-        <GlowingOrb Xaxis={920} Yaxis={600} />
+     <section className="mx-auto w-full max-w-[1400px] flex flex-col gap-6 lg:gap-8 mb-4 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
+  <GlowingOrb Xaxis={920} Yaxis={600} />
 
-        {/* Table */}
-        <div className="overflow-x-auto rounded-lg z-10">
-          <table className="w-full text-white table-auto">
-            <thead className="bg-[#00134C]">
-              <tr className="text-left">
-                {["Listing", "Status", "Price", "Floor", "Qty", ""].map(
-                  (h, i) => (
-                    <th
-                      key={i}
-                      className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 text-xs sm:text-sm lg:text-[18px] font-inter font-medium"
-                    >
-                      {h}
-                    </th>
-                  )
-                )}
-              </tr>
-            </thead>
-
-            <tbody>
-              {activities.map((item) => (
-                <tr
-                  key={item.id}
-                  className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
-                >
-                  {/* Listing */}
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
-                      <div
-                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-md overflow-hidden relative"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          alt="Collection"
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-                      <span className="text-xs sm:text-sm lg:text-[18px] font-inter font-medium">
-                        {item.name}
-                      </span>
-                    </div>
-                  </td>
-
-                  {/* Status */}
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
-                    <span className="flex items-center gap-1 sm:gap-2 px-2 py-1 rounded-md text-green-400 text-xs sm:text-sm font-medium">
-                      <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                      {item.status}
-                    </span>
-                  </td>
-
-                  {/* Price, Floor, Qty */}
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
-                    ${item.price}
-                  </td>
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
-                    ${item.floor}
-                  </td>
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
-                    {item.qty}
-                  </td>
-
-                  {/* Checkbox */}
-                  <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
-                    <input
-                      type="checkbox"
-                      checked={item.checked}
-                      onChange={() => handleCheckboxChange(item.id)}
-                      className="
-                        w-4 h-4 appearance-none border-2 border-blue-500 rounded 
-                        bg-transparent cursor-pointer
-                        checked:border-blue-500 checked:bg-blue-500
-                        checked:before:content-['✔'] checked:before:text-white 
-                        checked:before:block checked:before:text-center 
-                        checked:before:leading-4 checked:before:text-xs
-                      "
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          {/* Cancel Button */}
-          {totalSelected > 0 && (
-            <button
-              onClick={handleCancelClick}
-              className="text-white mt-4 sm:mt-6 bg-blue-500 px-3 py-1 rounded-md inline-block transition-all duration-300"
+  {/* Table Container */}
+  <div className="overflow-x-auto rounded-lg z-10">
+    <table className="w-full text-white table-auto border-collapse">
+      <thead className="bg-[#00134C]">
+        <tr className="text-left">
+          {["Listing", "Status", "Price", "Floor", "Qty", ""].map((h, i) => (
+            <th
+              key={i}
+              className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 text-xs sm:text-sm lg:text-[18px] font-inter font-medium whitespace-nowrap"
             >
-              Cancel {totalSelected} Listing{totalSelected > 1 ? "s" : ""}
-            </button>
-          )}
-        </div>
-      </section>
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {activities.map((item) => (
+          <tr
+            key={item.id}
+            className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+          >
+            {/* Listing */}
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                <div
+                  className="h-10 w-10 sm:h-12 sm:w-12 rounded-md overflow-hidden relative"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                  }}
+                >
+                  <img
+                    src={item.image}
+                    alt="Collection"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <span className="text-xs sm:text-sm lg:text-[18px] font-inter font-medium">
+                  {item.name}
+                </span>
+              </div>
+            </td>
+
+            {/* Status */}
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
+              <span className="flex items-center gap-1 sm:gap-2 px-2 py-1 rounded-md text-green-400 text-xs sm:text-sm font-medium">
+                <span className="w-2 h-2 rounded-full bg-green-400"></span>
+                {item.status}
+              </span>
+            </td>
+
+            {/* Price, Floor, Qty */}
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
+              ${item.price}
+            </td>
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
+              ${item.floor}
+            </td>
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
+              {item.qty}
+            </td>
+
+            {/* Checkbox */}
+            <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
+              <input
+                type="checkbox"
+                checked={item.checked}
+                onChange={() => handleCheckboxChange(item.id)}
+                className="
+                  w-4 h-4 appearance-none border-2 border-blue-500 rounded 
+                  bg-transparent cursor-pointer
+                  checked:border-blue-500 checked:bg-blue-500
+                  checked:before:content-['✔'] checked:before:text-white 
+                  checked:before:block checked:before:text-center 
+                  checked:before:leading-4 checked:before:text-xs
+                "
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {/* Cancel Button */}
+    {totalSelected > 0 && (
+      <button
+        onClick={handleCancelClick}
+        className="text-white mt-4 sm:mt-6 bg-blue-500 px-3 py-1 rounded-md inline-block transition-all duration-300"
+      >
+        Cancel {totalSelected} Listing{totalSelected > 1 ? "s" : ""}
+      </button>
+    )}
+  </div>
+</section>
+
 
       {/* Modal */}
-  {showModal && (
-  <div
-    className="fixed inset-0 z-50 flex items-start justify-center p-4"
-    // Removed background overlay
-    onClick={handleCloseModal}
-  >
-    <div
-      className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
-      onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
-    >
-      {/* Close button top-right */}
-      <button
-        onClick={handleCloseModal}
-        className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
-      >
-        &times;
-      </button>
-
-      {/* Modal Title */}
-      <h1 className="text-white font-bold text-lg md:text-xl mb-4 text-center">
-        Cancel Listing
-      </h1>
-      <div className="w-[90%] h-[1px] bg-gray-300 mb-4"></div>
-
-      {/* Optional Listing Preview Box */}
-   <div className="flex items-start justify-between w-full max-w-xl  rounded-[19px] p-4 mx-auto mb-4">
-  {/* Left: Small Image */}
-  <div className="w-1/5 h-20 lg:h-24 xl:h-28 2xl:h-32 flex items-center justify-center rounded-[15px] bg-gradient-to-b from-[#977C34] to-[#493F26] overflow-hidden">
-    <img
-      src={land1Image}
-      alt="Collection"
-      className="w-3/4 h-3/4 object-cover object-center"
-    />
-  </div>
-
-  {/* Middle: Title & Description */}
-  <div className="flex-1 ml-4 ">
-    <h2 className="text-white font-bold text-lg">Monkey Ape</h2>
-    <p className="text-gray-200 text-sm mt-1">
-      You own 1
-    </p>
-  </div>
-
-  {/* Right: Price */}
-  <div className="flex-shrink-0 ml-4">
-    <p className="text-gray-500 font-semibold text-lg">Listed : $2000.05</p>
-  </div>
-</div>
-
-
-
-      {/* Listing Name */}
-      <h1 className="text-white text-lg md:text-xl mb-4">
-        {selectedToCancel.length === 1
-          ? selectedToCancel[0].name
-          : `${selectedToCancel.length} Items`}
-      </h1>
-      <div className="w-[90%] h-[1px] bg-gray-300 mb-6"></div>
-
-      {/* Price Info */}
-      <div className="w-[90%] mb-6">
-        <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-          <p className="text-gray-400 text-sm">Total Price</p>
-          <p className="text-white text-sm">
-            $
-            {selectedToCancel.reduce((sum, item) => sum + item.price, 0)}
-          </p>
-        </div>
-      </div>
-
-      {/* Buttons */}
-      <div className="flex md:flex-row gap-4 w-full justify-center">
-        {/* Cancel Button */}
-        <button onClick={handleCloseModal} className="w-full md:w-auto">
-          <div className="flex items-center">
-            {/* Left small bar */}
-            <div className="bg-[#002AA8] mr-0.5" style={{ width: "0.25rem", height: "1.1rem" }}></div>
-            {/* Left angled border */}
-            <div
-              className="border-[#002AA8]"
-              style={{
-                width: "0.5rem",
-                height: "2.2rem",
-                borderStyle: "solid",
-                borderWidth: "0.375rem 0.25rem 0.375rem 0",
-              }}
-            ></div>
-            {/* Main button */}
-            <div
-              className="flex items-center justify-center text-white font-medium"
-              style={{ width: "8rem", height: "2rem", border: "0.15rem solid #002AA8" }}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center p-4"
+          // Removed background overlay
+          onClick={handleCloseModal}
+        >
+          <div
+            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            onClick={(e) => e.stopPropagation()} // Prevent click from closing modal
+          >
+            {/* Close button top-right */}
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
             >
-              Close
+              &times;
+            </button>
+
+            {/* Modal Title */}
+            <h1 className="text-white font-bold text-lg md:text-xl mb-4 text-center">
+              Cancel Listing
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-300 mb-4"></div>
+
+            {/* Optional Listing Preview Box */}
+            <div className="flex items-start justify-between w-full max-w-xl  rounded-[19px] p-4 mx-auto mb-4">
+              {/* Left: Small Image */}
+              <div className="w-1/5 h-20 lg:h-24 xl:h-28 2xl:h-32 flex items-center justify-center rounded-[15px] bg-gradient-to-b from-[#977C34] to-[#493F26] overflow-hidden">
+                <img
+                  src={land1Image}
+                  alt="Collection"
+                  className="w-3/4 h-3/4 object-cover object-center"
+                />
+              </div>
+
+              {/* Middle: Title & Description */}
+              <div className="flex-1 ml-4 ">
+                <h2 className="text-white font-bold text-lg">Monkey Ape</h2>
+                <p className="text-gray-200 text-sm mt-1">You own 1</p>
+              </div>
+
+              {/* Right: Price */}
+              <div className="flex-shrink-0 ml-4">
+                <p className="text-gray-500 font-semibold text-lg">
+                  Listed : $2000.05
+                </p>
+              </div>
             </div>
-            {/* Right angled border */}
-            <div
-              className="border-[#002AA8]"
-              style={{
-                width: "0.5rem",
-                height: "2.2rem",
-                borderStyle: "solid",
-                borderWidth: "0.25rem 0 0.375rem 0.25rem",
-              }}
-            ></div>
-            {/* Right small bar */}
-            <div className="bg-[#002AA8]" style={{ width: "0.25rem", height: "1.1rem" }}></div>
+
+            {/* Listing Name */}
+            <h1 className="text-white text-lg md:text-xl mb-4">
+              {selectedToCancel.length === 1
+                ? selectedToCancel[0].name
+                : `${selectedToCancel.length} Items`}
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-300 mb-6"></div>
+
+            {/* Price Info */}
+            <div className="w-[90%] mb-6">
+              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
+                <p className="text-gray-400 text-sm">Total Price</p>
+                <p className="text-white text-sm">
+                  ${selectedToCancel.reduce((sum, item) => sum + item.price, 0)}
+                </p>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex md:flex-row gap-4 w-full justify-center">
+              {/* Cancel Button */}
+              <button onClick={handleCloseModal} className="w-full md:w-auto">
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{ width: "0.25rem", height: "1.1rem" }}
+                  ></div>
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.2rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                    }}
+                  ></div>
+                  {/* Main button */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "8rem",
+                      height: "2rem",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Close
+                  </div>
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.2rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                    }}
+                  ></div>
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{ width: "0.25rem", height: "1.1rem" }}
+                  ></div>
+                </div>
+              </button>
+
+              {/* Confirm Button */}
+              <button onClick={handleConfirmCancel}>
+                <CustomButton text="Confirm" />
+              </button>
+            </div>
           </div>
-        </button>
-
-        {/* Confirm Button */}
-        <button onClick={handleConfirmCancel}>
-          <CustomButton text="Confirm" />
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
+        </div>
+      )}
     </div>
   );
 }

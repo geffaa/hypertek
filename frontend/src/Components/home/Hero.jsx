@@ -15,6 +15,9 @@ export default function Hero() {
     { text: "Hyper Tek" },
     { text: "Hyper Tek" },
     { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
   ];
   return ( 
     <div
@@ -101,8 +104,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Bar with Logos */}
-      <div className="absolute bottom-0 scale-x-[-1] left-0 w-full flex justify-center items-center bg-[#00134C80] h-10 md:h-12 px-1 z-20">
-        <div className="flex flex-wrap items-center w-full max-w-7xl justify-center gap-4 md:justify-center">
+<div className="absolute bottom-0 scale-x-[-1] left-1/2 transform -translate-x-1/2 w-full max-w-[1493px] flex justify-center items-center bg-[#00134C80] h-10 md:h-12 px-1 z-20">        <div className="flex flex-wrap items-center w-full max-w-7xl justify-center gap-4 md:justify-center">
           {logoItems.slice(0, 3).map((item, i) => (
             <div key={i} className="flex items-center gap-2">
               <img src={Logo} alt="Logo" className="w-7 h-6 md:w-7 md:h-6" />

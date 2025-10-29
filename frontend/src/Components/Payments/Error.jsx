@@ -45,7 +45,7 @@ function Error() {
   </Link>
 
   {/* Divider Line */}
-  <div className="mt-4 w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
+  <div className=" w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
 </div>
 
 

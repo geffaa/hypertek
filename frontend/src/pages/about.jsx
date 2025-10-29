@@ -163,35 +163,31 @@ function About() {
         </div>
 
      {/* ---------------- Second Section ---------------- */}
-<div className="relative w-full z-10 min-h-[750px] overflow-visible bg-transparent">
+<div className="relative w-full z-10 min-h-[750px] overflow-hidden bg-[#00114280]
+">
   {/* Background Image Layer */}
   <div className="absolute inset-0">
-    {/* Blurred Background Image */}
+    {/* Full Background Image (shows full image, no scroll) */}
     <div
-      className="absolute inset-5"
+      className="absolute inset-0 "
       style={{
         backgroundImage: `url(${aboutsecond})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        
-        transform: "scale(1.05)", // prevent edges from showing
+        backgroundSize: "contain", // show the entire image (no cropping)
       }}
     ></div>
 
     {/* Blue Semi-Transparent Overlay */}
     <div
-      className="absolute inset-0"
-      style={{
-        background: "#00114280", // blue overlay with alpha
-      }}
+      className="absolute inset-0 bg-[#00114280]"
     ></div>
   </div>
 
   {/* Foreground Content */}
   <div className="relative z-10 h-full py-12 md:py-16">
     <GlowingOrb Xaxis={1100} Yaxis={700} />
-    
+
     {/* Story Section */}
     <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-4 max-w-[1020px] mx-auto text-white px-4">
       <img
@@ -242,6 +238,7 @@ function About() {
   </div>
 </div>
 
+
         {/* ---------------- Ecosystem Section ---------------- */}
         <div className="flex flex-col relative z-10 items-center text-center md:mt-2 mt-12 text-white mx-auto gap-2 max-w-[1161px] px-4">
           <GlowingOrb Xaxis={1000} Yaxis={0} />
@@ -260,7 +257,7 @@ function About() {
               <img
                 src={vector}
                 alt="NFA"
-                className="w-[93.97px] h-[89.43px] mb-4 object-contain"
+                className="w-[93.97px] h-[89.43px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 NFA
@@ -275,7 +272,7 @@ function About() {
               <img
                 src={game}
                 alt="Game"
-                className="w-[95px] h-[62px] mb-4 object-contain"
+                className="w-[95px] h-[62px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 Game
@@ -291,7 +288,7 @@ function About() {
               <img
                 src={exchange}
                 alt="Marketplace"
-                className="w-[80px] h-[80px] mb-4 object-contain"
+                className="w-[80px] h-[80px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 MarketPlace

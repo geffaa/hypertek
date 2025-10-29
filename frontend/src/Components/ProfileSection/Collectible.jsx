@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useDebugValue } from "react";
+import React, { useState, useEffect } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { Link } from "react-router-dom";
 import popularCollections from "../../assets/images/popular/popolar.png";
 import TVector from "../../assets/images/popular/vector.png";
-import Profile from "../../assets/images/Profile/Profile.png";
 import NavLinks from "../ProfileSection/Navlinks";
 import CustomButton from "../Buttons/Button1";
-import CustomButton2 from "../Buttons/Button2";
 import GlowingOrb from "../Common/BgColoring";
 import symbol from "../../assets/images/login/Symbol.svg.png";
 import { useSelector } from "react-redux";
@@ -14,29 +12,20 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
-
 import FullScreenLoader from "../Common/Spinner";
 
 function MarketPlace() {
-  // get the login user data from the redux store
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
-  console.log("your data in the profile are :", user);
-  const [loading, setLoading] = useState(true); // ✅ loader state
-
-  // get the nfa data
+  const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
-
-  // user data from the database
   const [userData, setUserData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
   const [isFourthOpen, setIsFourthOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
-
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // const openModal = () => setIsOpen(true);
   const openModal = (item) => {
     setSelectedItem(item);
     setIsOpen(true);
@@ -61,7 +50,6 @@ function MarketPlace() {
   };
   const closeFourthModal = () => setIsFourthOpen(false);
 
-  // Handle Connect Wallet click
   const handleConnectWallet = () => {
     closeThirdModal();
     setTimeout(() => {
@@ -69,43 +57,31 @@ function MarketPlace() {
     }, 150);
   };
 
-  /// get the nfa data from the backend
-
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        /// get the land , market and activity through
         const res = await axios.get(
           `${BACKEND_BASE_URL}/api/v1/market/getMarket`
         );
-
         if (res.data?.data) setMarketData(res.data.data);
       } catch (error) {
         console.error("Error fetching market data:", error);
       } finally {
-        setLoading(false); // ✅ hide loader after fetch
+        setLoading(false);
       }
     };
-
     fetchMarketData();
-  }, []); // run once when component mounts
-
-  console.log("your market data are here :", marketData);
-
-  // git profile data from the backend
+  }, []);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
           headers: {
-            Authorization: `Bearer ${token}`, // 👈 send token here
+            Authorization: `Bearer ${token}`,
           },
         });
-
-        console.log("your profile response are :", res);
         setUserData(res.data.user);
-        console.log("✅ User profile:", res.data.user);
       } catch (error) {
         console.error(
           "❌ Profile fetch error:",
@@ -116,145 +92,158 @@ function MarketPlace() {
     };
 
     if (token) {
-      fetchProfile(); // only call if token exists
+      fetchProfile();
     }
   }, [token]);
 
-  console.log("Full Name:", userData.FullName);
-  const hasAvatar =
-    userData?.Avatar && userData.Avatar.trim() !== "" && !imageError;
   if (loading) {
     return <FullScreenLoader />;
   }
+
   return (
     <>
       {/* ------------------ Main Section ------------------ */}
       <div className="min-h-screen bg-transparent">
-        <div className="mx-auto mt-18 lg:mt-[92px]">
-          <div className="w-full">
+        <div className="mx-auto mt-18 lg:mt-[68px] max-w-[2000px]">
+          <div className="w-full overflow-x-hidden">
+            {/* Hero Banner - Fixed height for laptop screens */}
             <div
-              className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] xl:h-[300px] 2xl:h-[360px] w-full bg-cover bg-center bg-no-repeat mb-20 md:mb-24"
-              style={{ backgroundImage: `url(${overview1})` }}
-            ></div>
+              className="relative w-full max-w-[1400px] mx-auto 
+    h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] 
+    mb-20 md:mb-24 overflow-hidden"
+            >
+              <img
+                src={overview1}
+                alt="Hero background"
+                className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+              />
+            </div>
 
-            <div className="relative -mt-16 sm:-mt-20 md:-mt-24 px-4 sm:px-6 lg:px-12 xl:px-20 2xl:px-32">
-              <div className="flex flex-col sm:flex-row items-start gap-4">
-                {/* Profile Image */}
-                <div className="relative flex-shrink-0">
-                  {hasAvatar ? (
-                    <img
-                      src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-                      alt="Profile"
-                      onError={() => setImageError(true)} // if image fails, fallback to avatar
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
-                     rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 object-cover"
-                    />
-                  ) : (
-                    <div
-                      className="flex items-center justify-center 
-                     bg-gradient-to-br from-blue-500 to-indigo-600 text-white 
-                     rounded-full shadow-lg 
-                     w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 
-                     -mt-12 sm:-mt-16 md:-mt-16"
-                    >
-                      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-                    </div>
-                  )}
-                </div>
+            {/* Profile Section - aligned properly with banner */}
+            <div className="relative -mt-20 sm:-mt-24 md:-mt-24 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+              <div className="max-w-7xl mx-auto">
+                <div className="flex flex-col items-start">
+                  {/* Profile Image */}
+                  <div className="relative flex-shrink-0">
+                    {userData?.Avatar ? (
+                      <img
+                        src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+                        alt="Profile"
+                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 object-cover border-4 border-gray-900"
+                        onError={() => setImageError(true)}
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 border-4 border-gray-900">
+                        <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                      </div>
+                    )}
+                  </div>
 
-                {/* Profile Info */}
-                <div className="mt-3 text-left text-white sm:mt-0">
-                  <h2 className="text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-semibold">
-                    {userData.FullName
-                      ? userData.FullName.replace(/[0-9]/g, "") || ""
-                      : userData.Email
-                      ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
-                      : "Guest"}
-                  </h2>
-                  <p className="text-xs sm:text-sm md:text-base text-gray-400 break-words">
-                    {userData.DiscordId ||
-                      userData.GoogleId ||
-                      userData._id ||
-                      "null"}
-
-                    <Link to="/edit" state={{ userData }}>
-                      <span className="ml-1 sm:ml-2 cursor-pointer underline">
-                        Edit Profile
-                      </span>
-                    </Link>
-                  </p>
-                  <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg xl:text-xl">
-                    $3000
-                  </p>
+                  {/* Profile Info */}
+                  <div className="mt-3 text-left text-white">
+                    <h2 className="text-base sm:text-lg md:text-xl font-semibold">
+                      {userData.FullName
+                        ? userData.FullName.replace(/[0-9]/g, "") || ""
+                        : userData.Email
+                        ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+                        : "Guest"}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-400 break-words">
+                      {userData.DiscordId ||
+                        userData.GoogleId ||
+                        userData._id ||
+                        "null"}
+                      <Link to="/edit" state={{ userData }}>
+                        <span className="ml-1 sm:ml-2 cursor-pointer underline hover:text-white transition-colors">
+                          Edit Profile
+                        </span>
+                      </Link>
+                    </p>
+                    <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
+                      $3000
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="relative flex flex-row justify-between items-center gap-2 mb-4 lg:mb-8 xl:px-12 2xl:px-24">
-            <NavLinks />
+          {/* Navigation */}
+          <div className="relative flex flex-row md:mr-24 lg:flex-row md:justify-center justify-start items-start gap-4 lg:gap-0 mb-4 lg:mb-8">
+            <div className="w-full max-w-7xl md:px-4 px-2 lg:px-8">
+              <NavLinks />
+            </div>
           </div>
         </div>
 
-        <section className="mx-auto flex flex-col gap-6 lg:gap-2 mb-2 px-2 sm:px-12 xl:px-20 2xl:px-32 relative z-10 lg:mb-2">
+        {/* ---------------------- Card Sections -------------------------------------- */}
+        <section className="flex flex-col relative z-10 gap-4 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 lg:gap-8 mb-12 lg:mb-16">
           <GlowingOrb Xaxis={800} Yaxis={100} />
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 justify-center">
-            {marketData.slice(0.4).map((item, index) => (
-              <div
-                key={index}
-                className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-sm mx-auto lg:max-w-none h-[380px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
-              >
-                <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                  <img
-                    src={popularCollections}
-                    alt="Collection"
-                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                  />
-                </div>
-
-                <h2 className="text-base lg:text-lg xl:text-xl font-bold md:mt-3 lg:mt-4">
-                  {item.title}
-                </h2>
-
-                <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
-                  <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
-                    {item.serialNumber} 🔥
-                  </h3>
-                  <div className="flex items-center">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center">
+              {marketData.slice(0, 4).map((item, index) => (
+                <div
+                  key={index}
+                  className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-xs sm:max-w-sm lg:max-w-none h-[320px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
+                >
+                  <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                     <img
-                      src={TVector}
-                      alt=""
-                      className="w-2 h-2 lg:w-[10px] lg:h-[9px] xl:w-[12px] xl:h-[12px]"
+                      src={popularCollections}
+                      alt="Collection"
+                      className="w-full h-full object-cover object-top scale-x-[-1]"
                     />
-                    <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm xl:text-base font-semibold">
-                      ${item.price}
+                  </div>
+
+                  <h2 className="text-base lg:text-lg xl:text-xl font-bold md:mt-3 lg:mt-4 line-clamp-2">
+                    {item.title}
+                  </h2>
+
+                  <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
+                    <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
+                      {item.serialNumber} 🔥
                     </h3>
+                    <div className="flex items-center">
+                      <img
+                        src={TVector}
+                        alt=""
+                        className="w-2 h-2 lg:w-[10px] lg:h-[9px] xl:w-[12px] xl:h-[12px]"
+                      />
+                      <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm xl:text-base font-semibold">
+                        ${item.price}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center w-full">
+                    {/* Small screens: always show List Now */}
+                    <div className="block lg:hidden w-full">
+                      <button
+                        onClick={() => openModal(item)}
+                        className="w-full"
+                      >
+                        <CustomButton text="List Now" />
+                      </button>
+                    </div>
+
+                    {/* Large screens: show on hover */}
+                    <div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
+                      <button
+                        onClick={() => openModal(item)}
+                        className="w-full"
+                      >
+                        <CustomButton text="List Now" />
+                      </button>
+                    </div>
+
+                    {/* No Listing text for hover state on large screens */}
+                    <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300 text-center">
+                      No Listing
+                    </div>
                   </div>
                 </div>
-
-                <div className="flex flex-col items-center justify-center w-full">
-                  {/* Small screens: always show List Now */}
-                  <div className="block lg:hidden w-full">
-                    <button onClick={openModal} className="w-full">
-                      <CustomButton text="List Now" />
-                    </button>
-                  </div>
-
-                  {/* Large screens: show on hover */}
-                  <div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
-                    <button onClick={() => openModal(item)}>
-                      <CustomButton text="List Now" />
-                    </button>
-                  </div>
-
-                  {/* No Listing text for hover state on large screens */}
-                  <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300">
-                    No Listing
-                  </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
       </div>
@@ -315,15 +304,15 @@ function MarketPlace() {
             ))}
 
             {/* Action Buttons */}
-            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full justify-center">
               <button onClick={closeModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
                   <div
                     className="bg-[#002AA8] mr-0.5"
                     style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
+                      width: "0.25rem",
+                      height: "1.3rem",
                     }}
                   ></div>
 
@@ -332,7 +321,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
                     }}
                   ></div>
 
@@ -340,8 +329,7 @@ function MarketPlace() {
                   <div
                     className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
                     style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "2.24px solid #002AA8", // ~2.42px
+                      border: "2.24px solid #002AA8",
                     }}
                   >
                     Cancel
@@ -352,7 +340,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
                     }}
                   ></div>
 
@@ -367,8 +355,8 @@ function MarketPlace() {
                   <div
                     className="bg-[#002AA8] mr-0.5"
                     style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
+                      width: "0.25rem",
+                      height: "1.3rem",
                     }}
                   ></div>
 
@@ -377,7 +365,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
                     }}
                   ></div>
 
@@ -385,8 +373,6 @@ function MarketPlace() {
                   <div
                     className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
                     style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-
                       background:
                         "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8",
@@ -400,7 +386,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
                     }}
                   ></div>
 
@@ -416,11 +402,11 @@ function MarketPlace() {
       {/* ------------------ Second Modal ------------------ */}
       {isSecondOpen && selectedItem && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
           onClick={closeSecondModal}
         >
           <div
-            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-sm md:max-w-md h-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -443,7 +429,7 @@ function MarketPlace() {
               />
             </div>
 
-            <h1 className="text-white  text-lg md:text-xl">
+            <h1 className="text-white text-lg md:text-xl">
               {selectedItem.title}
             </h1>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
@@ -457,15 +443,15 @@ function MarketPlace() {
               </div>
             </div>
 
-            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full justify-center">
               <button onClick={closeSecondModal}>
                 <div className="flex items-center">
                   {/* Left small bar */}
                   <div
                     className="bg-[#002AA8] mr-0.5"
                     style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
+                      width: "0.25rem",
+                      height: "1.3rem",
                     }}
                   ></div>
 
@@ -474,18 +460,14 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
                     }}
                   ></div>
 
                   {/* Main button area */}
                   <div
-                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
+                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
                     style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-
-                      // background:
-                      //   "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8",
                     }}
                   >
@@ -497,7 +479,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
                     }}
                   ></div>
 
@@ -512,8 +494,8 @@ function MarketPlace() {
                   <div
                     className="bg-[#002AA8] mr-0.5"
                     style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
+                      width: "0.25rem",
+                      height: "1.3rem",
                     }}
                   ></div>
 
@@ -522,16 +504,14 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
                     }}
                   ></div>
 
                   {/* Main button area */}
                   <div
-                    className="flex items-center justify-center text-white font-medium w-[90.89px] h-[19.45] md:w-[168.31px] md:h-[39.59px]"
+                    className="flex items-center justify-center text-white font-medium w-[95.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
                     style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-
                       background:
                         "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                       border: "0.15rem solid #002AA8",
@@ -545,7 +525,7 @@ function MarketPlace() {
                     className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
                     style={{
                       borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
                     }}
                   ></div>
 
@@ -560,8 +540,8 @@ function MarketPlace() {
 
       {/* ------------------ Third Modal (Connect Wallet) ------------------ */}
       {isThirdOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 rounded-lg p-6 w-full max-w-sm sm:max-w-md relative">
             <button
               onClick={closeThirdModal}
               className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
@@ -576,7 +556,7 @@ function MarketPlace() {
 
             <div
               onClick={handleConnectWallet}
-              className="flex items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20"
+              className="flex items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-4 cursor-pointer hover:bg-gray-700 transition h-20"
             >
               <img
                 src={symbol}
@@ -591,8 +571,8 @@ function MarketPlace() {
 
       {/* ------------------ Fourth Modal ------------------ */}
       {isFourthOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 rounded-lg p-6 w-full max-w-sm sm:max-w-md relative">
             <button
               onClick={closeFourthModal}
               className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
@@ -605,7 +585,7 @@ function MarketPlace() {
             </h2>
             <hr className="border-t border-gray-600 my-4" />
 
-            <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-8">
+            <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-4">
               <img
                 src={symbol}
                 alt="Connect wallet image"
@@ -614,7 +594,7 @@ function MarketPlace() {
               <h1 className="text-white font-medium text-xl">MetaMask</h1>
             </div>
 
-            <div className="flex flex-col items-center gap-4 mt-8">
+            <div className="flex flex-col items-center gap-4 mt-6">
               <button>
                 <CustomButton text="Connect" />
               </button>

@@ -107,13 +107,21 @@ function NfaLand() {
   return (
     <div className="flex flex-col justify-center w-full mt-12 md:px-24">
       <div className="flex flex-col  text-white">
-        <div className="text-white flex items-center  w-[283px] h-[28px] md:top-[3rem] my-12 md:mt-1 md:absolute pl-5  lg:relative md:left-[5rem]">
-          <Link to="/buy-nfa" className="border-b-2 border-blue-500">
-            Overview
-          </Link>
-          <Link to="/offer-recieved" className="pl-3">
-            Offer 0
-          </Link>
+        <div className="w-full max-w-[1000px] mx-auto px-4">
+          <div className="text-white flex items-center justify-start my-8 md:my-4 md:mr-8">
+            <Link
+              to="/buy-nfa"
+              className="border-b-2 border-blue-500 pb-1 text-sm md:text-base hover:text-blue-400 transition-colors"
+            >
+              Overview
+            </Link>
+            <Link
+              to="/offer-recieved"
+              className="pl-4 md:pl-6 text-sm md:text-base hover:text-blue-400 transition-colors"
+            >
+              Offer 0
+            </Link>
+          </div>
         </div>
 
         {/* Main Card Container */}
