@@ -18,7 +18,7 @@ function MarketPlace() {
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [isThirdOpen, setIsThirdOpen] = useState(false);
@@ -96,6 +96,10 @@ function MarketPlace() {
     }
   }, [token]);
 
+console.log("your user get data are :",userData);
+// console.log("Avatar:", userData.Bio);
+
+
   if (loading) {
     return <FullScreenLoader />;
   }
@@ -142,16 +146,16 @@ function MarketPlace() {
                   {/* Profile Info */}
                   <div className="mt-3 text-left text-white">
                     <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                      {userData.FullName
+                      {userData?.FullName
                         ? userData.FullName.replace(/[0-9]/g, "") || ""
-                        : userData.Email
+                        : userData?.Email
                         ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
                         : "Guest"}
                     </h2>
                     <p className="text-xs sm:text-sm text-gray-400 break-words">
-                      {userData.DiscordId ||
-                        userData.GoogleId ||
-                        userData._id ||
+                      {userData?.DiscordId ||
+                        userData?.GoogleId ||
+                        userData?._id ||
                         "null"}
                       <Link to="/edit" state={{ userData }}>
                         <span className="ml-1 sm:ml-2 cursor-pointer underline hover:text-white transition-colors">
