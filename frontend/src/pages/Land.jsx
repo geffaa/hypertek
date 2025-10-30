@@ -8,6 +8,8 @@ import CustomButton from "../Components/Buttons/Button1";
 import Logo from "../assets/images/logo.png";
 import land1Image from "../assets/images/Overview/land1.jpg";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
+import symbol from "../assets/images/login/Symbol.svg.png";
+
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
@@ -15,6 +17,9 @@ import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
 function Land() {
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true); // ✅ loader state
+  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
+  const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
 
   // get the market data here
   useEffect(() => {
@@ -34,6 +39,40 @@ function Land() {
     fetchMarketData();
   }, []);
   console.log("your land data are here :", landData);
+
+  /// open and close the model
+  const openFirstModal = () => setIsFirstModalOpen(true);
+  const closeFirstModal = () => setIsFirstModalOpen(false);
+  const closeSecondModal = () => setIsSecondModalOpen(false);
+    const closeThirdModal = () => setIsThirdModalOpen(false);
+
+const openThirdModal = () => {
+    setIsSecondModalOpen(false); // Close second modal
+    setIsThirdModalOpen(true); // Open third modal
+  };
+
+  // ✅ Handle Connect Wallet click from second modal
+  const handleConnectWallet = () => {
+    closeSecondModal();
+    // Small delay for smooth transition
+    setTimeout(() => {
+      openThirdModal();
+    }, 100);
+  };
+
+  // ✅ Handle Sell Now click from first modal
+  const handleSellNow = () => {
+    closeFirstModal();
+    // Small delay for smooth transition
+    setTimeout(() => {
+      openSecondModal();
+    }, 100);
+  };
+
+  const openSecondModal = () => {
+    setIsFirstModalOpen(false); // Close first modal
+    setIsSecondModalOpen(true); // Open second modal
+  };
 
   if (loading) {
     return <FullScreenLoader />;
@@ -103,15 +142,15 @@ function Land() {
 
           {/* Search Field */}
           <div
-            className="hidden md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] 
+            className="hidden md:flex mr-16 lg:w-[550px] items-center gap-3 lg:gap-[17px] 
     px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
     bg-white/10 backdrop-blur-sm"
           >
             <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
             <input
               type="text"
-              placeholder="Search..."
-              className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none 
+              placeholder=" Search..."
+              className="flex-1 bg-transparent pl-2 text-white placeholder-gray-300 outline-none 
       text-sm lg:text-[16px] font-inter w-full"
             />
           </div>
@@ -147,9 +186,10 @@ function Land() {
                   <h2 className="text-lg lg:text-xl font-bold my-2">
                     Instant Sell
                   </h2>
-                  <Link to="#">
+
+                  <button onClick={openFirstModal}>
                     <CustomButton text="Sell Now" />
-                  </Link>
+                  </button>
                 </div>
               ) : (
                 // ✅ Other cards same
@@ -199,6 +239,331 @@ function Land() {
           ))}
         </div>
       </section>
+
+      {/* ✅ First Modal - Select Item */}
+      {isFirstModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-20">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+            {/* Close Button */}
+            <button
+              onClick={closeFirstModal}
+              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+            >
+              ×
+            </button>
+
+            {/* Modal Title */}
+            <h2 className="text-white text-lg font-bold text-center my-4">
+              Select item to sell
+            </h2>
+
+            <hr className="border-t border-gray-600 my-4" />
+
+            {/* NFT Item Display */}
+            <div className="w-full">
+              <div className="flex items-center justify-between text-white py-4 gap-4">
+                {/* Left side: image + name */}
+                <div className="flex items-center gap-3">
+                  <div className="w-28 h-20 overflow-hidden rounded-lg bg-gradient-to-b from-[#977C34] to-[#493F26]">
+                    <img
+                      src={land1Image}
+                      alt="Collection"
+                      className="w-[110%] h-auto object-top scale-x-[-1]"
+                    />
+                  </div>
+                  <h1 className="text-sm lg:text-base font-bold">Monkey Ape</h1>
+                </div>
+
+                {/* Right side: price */}
+                <h3 className="text-sm lg:text-base font-semibold">
+                  $1800 USDT
+                </h3>
+              </div>
+            </div>
+
+            <hr className="border-t border-gray-600 mb-4" />
+
+            {/* Fee Details */}
+            <div className="space-y-3 text-white mb-4">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-400">Platform Fee</span>
+                <span className="font-semibold">$0.5 USDT</span>
+              </div>
+
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-400">Total Fee</span>
+                <span className="font-semibold">$1800.5</span>
+              </div>
+            </div>
+
+            <hr className="border-t border-gray-600 my-4" />
+
+            {/* Terms Agreement */}
+            <p className="text-gray-400 text-xs text-start mb-4">
+              By clicking "Sell Now", you agree to the Hyper Tek <br /> Terms of
+              Service
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end gap-2 justify-between">
+              
+                <button onClick={closeFirstModal}>
+                  <div className="flex items-center">
+                    {/* Left small bar */}
+                    <div
+                      className="bg-[#002AA8] mr-0.5"
+                      style={{
+                        width: "0.25rem", // ~3.99px
+                        height: "1.3rem", // ~21.93px
+                      }}
+                    ></div>
+
+                    {/* Left angled border */}
+                    <div
+                      className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                      style={{
+                        borderStyle: "solid",
+                        borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                      }}
+                    ></div>
+
+                    {/* Main button area */}
+                    <div
+                      className="flex items-center justify-center text-white font-medium w-[83.89px] h-[19.45] md:w-[150.31px] md:h-[39.59px]"
+                      style={{
+                        // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                        border: "2.24px solid #002AA8", // ~2.42px
+                      }}
+                    >
+                      Cancel
+                    </div>
+
+                    {/* Right angled border */}
+                    <div
+                      className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
+                      style={{
+                        borderStyle: "solid",
+                        borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                      }}
+                    ></div>
+
+                    {/* Right small bar */}
+                    <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
+                  </div>
+                </button>
+              
+
+              {/* ✅ Large screen - opens second modal */}
+              <button onClick={handleSellNow} className="hidden md:block">
+                <div
+                  className="
+        flex items-center 
+        scale-90 sm:scale-100 
+        transition-transform duration-300 ease-in-out 
+        md:hover:scale-95   /* Slight zoom out on hover (desktop only) */
+        group                /* enables child hover states */
+      "
+                >
+                  {/* Left small bar */}
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] mr-0.5 transition-all duration-300 group-hover:bg-[#0034d6]"></div>
+
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[42.86px] h-[30.79px] transition-all duration-300 group-hover:border-[#0034d6]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                    }}
+                  ></div>
+
+                  {/* Main button area */}
+                  <div
+                    className="
+          flex items-center justify-center 
+          text-white font-medium 
+          text-xs sm:text-sm
+          md:w-[150px] md:h-[39px] 
+          w-[103px] h-[28px]
+          transition-all duration-300 ease-in-out
+          group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
+        "
+                    style={{
+                      background:
+                        "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Sell Now
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[42.86px] h-[30.79px] transition-all duration-300 group-hover:border-[#0034d6]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] transition-all duration-300 group-hover:bg-[#0034d6]"></div>
+                </div>
+              </button>
+
+              {/* ✅ Small screen - navigates to /wallet-connect */}
+              <Link to="/wallet-connect" className="block md:hidden">
+                <CustomButton text="Sell Now" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isSecondModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+            {/* Close Button */}
+            <button
+              onClick={closeSecondModal}
+              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+            >
+              ×
+            </button>
+
+            {/* Modal Title */}
+            <h2 className="text-white text-lg font-bold text-center my-4">
+              Connect Wallet
+            </h2>
+
+            <hr className="border-t border-gray-600 my-4" />
+
+            {/* Wallet Options */}
+
+            {/* For large screeen  */}
+            <div
+              onClick={handleConnectWallet}
+              className="hidden md:flex items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20"
+            >
+              <img
+                src={symbol}
+                alt="Connect wallet image"
+                className="w-10 h-10 object-contain"
+              />
+              <h1 className="text-white font-medium text-lg">MetaMask</h1>
+            </div>
+
+            {/* for mobile screeen  */}
+
+            <Link to="/wallet-connect">
+              <div className="flex md:hidden items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20">
+                <img
+                  src={symbol}
+                  alt="Connect wallet image"
+                  className="w-10 h-10 object-contain"
+                />
+                <h1 className="text-white font-medium text-lg">MetaMask</h1>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+
+
+           {isThirdModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-start justify-center z-50 pt-24">
+            <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative">
+              {/* Close Button */}
+              <button
+                onClick={closeThirdModal}
+                className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
+              >
+                ×
+              </button>
+
+              {/* Modal Title */}
+              <h2 className="text-white text-lg font-bold text-center my-4">
+                Connect Wallet
+              </h2>
+
+              {/* Horizontal Line */}
+              <hr className="border-t border-gray-600 my-4" />
+
+              {/* Wallet Image & Name */}
+              <div className="flex flex-col items-center justify-center gap-4 mb-6 mt-8">
+                <img
+                  src={symbol}
+                  alt="Connect wallet image"
+                  className="w-16 h-16 object-contain"
+                />
+                <h1 className="text-white font-medium text-xl">MetaMask</h1>
+              </div>
+
+              {/* Action Buttons - Centered like the image */}
+              <div className="flex flex-col items-center gap-4 mt-8">
+                <button>
+                  <CustomButton text="Connect" />
+                </button>
+                <div className="flex items-center cursor-pointer" onClick={closeThirdModal}>
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
+
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.6rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center justify-center text-white font-medium"
+                    style={{
+                      width: "12rem", // ~168px
+                      height: "2.5rem", // ~39.59px
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Cancel
+                  </div>
+
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.6rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.3rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+        
     </div>
   );
 }

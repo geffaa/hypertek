@@ -11,6 +11,7 @@ import bgleft from "../assets/images/about/bgleft.jpg";
 import centerBg from "../assets/images/about/centerbg.png";
 import bgright from "../assets/images/about/bgright.jpg";
 import aboutsecond from "../assets/images/about/aboutsecond.png";
+import abouttopbg from "../assets/images/about/abouttopbg.png";
 
 import leftImage from "../assets/images/about/leftImage.png";
 import CenterImage from "../assets/images/about/centerImae.png";
@@ -38,9 +39,9 @@ function About() {
           {/* Top section with full-width background image */}
           <div className="relative w-full h-[252px] flex justify-center items-center overflow-hidden">
             {/* 🔹 Background image behind content */}
-            <div className="absolute md:w-[1275px]  opacity-[15%] ">
+            <div className="absolute md:w-[1275px]   ">
               <img
-                src={aboutBG}
+                src={abouttopbg}
                 alt=""
                 className="h-[252.39px] w-[1275px] opacit-[25%]"
               />
@@ -150,7 +151,7 @@ function About() {
           <div className="mt-16 flex justify-center items-center cursor-pointer">
             {/* Show on large screens */}
             <div className="hidden ml-12 sm:block">
-              <a href="/market-place">
+              <a href="#">
                 <CustomButton text="Download Game" />
               </a>
             </div>
