@@ -143,7 +143,7 @@ function MarketPlace() {
 
                 {/* Search Field */}
                 <div
-                  className="hidden md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] 
+                  className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] 
     px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
     bg-white/10 backdrop-blur-sm"
                 >
@@ -151,7 +151,7 @@ function MarketPlace() {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none 
+                    className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none 
       text-sm lg:text-[16px] font-inter w-full"
                   />
                 </div>
@@ -265,7 +265,7 @@ function MarketPlace() {
 
                   <div className="flex justify-end items-center text-white">
                     <Link
-                      to="/market-place"
+                      to="/land"
                       className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
                     >
                       <span>Expand All</span>

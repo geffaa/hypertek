@@ -7,7 +7,7 @@ function OfferedReceived() {
       {/* Navigation Tabs */}
       <div className="flex items-center gap-3 mb-6">
         <Link
-          to="/buy-nfa"
+          to="#"
           className="pb-1 text-white font-medium hover:text-blue-400 transition-colors"
         >
           Overview

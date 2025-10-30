@@ -158,6 +158,24 @@ export default function Navbar() {
     };
   }, []);
 
+
+
+  // hide the dropdown if click outside the modal 
+  // Hide search suggestions when clicking outside
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
   // Close mobile menu when clicking on a link
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);

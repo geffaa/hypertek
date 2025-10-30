@@ -86,7 +86,10 @@ if (loading) {
           </div>
 
           {/* Stats Section */}
-          <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
+         <div
+            className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] 
+            w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]"
+          >
             {[
               { num: "5K", label: "Total Item" },
               { num: "50.5K", label: "Total Volume" },
@@ -94,10 +97,10 @@ if (loading) {
               { num: "2.6K", label: "Owners" },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col gap-1">
-                <h1 className="text-sm md:text-[16px] font-medium text-white">
+                <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
                   {stat.num}
                 </h1>
-                <p className="text-xs md:text-[12px] text-white">
+                <p className="text-xs md:text-[12px] font-normal text-white">
                   {stat.label}
                 </p>
               </div>
