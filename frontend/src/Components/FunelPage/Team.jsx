@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import SaifImage from "../../assets/images/saifullah.png"
 
 // --- Team Data ---
 const teamData = [
@@ -27,9 +28,9 @@ const teamData = [
     ],
   },
   {
-    name: "Muhammad Saif",
+    name: "Saif Ullah",
     role: "Senior UI/UX Designer",
-    img: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=400&h=400&fit=crop&crop=face",
+    img: SaifImage,
     bio: "Creative designer focused on user-centered design and modern interfaces. Passionate about creating intuitive and beautiful user experiences.",
     expertise: ["UI/UX Design", "Prototyping", "Design Systems", "User Research"],
     socials: [
