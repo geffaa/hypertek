@@ -8,3 +8,15 @@
 
 
 
+
+
+/* the sidebar scroller  */
+/* Chrome, Safari */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.sidebar {
+  scrollbar-width: none;
+}

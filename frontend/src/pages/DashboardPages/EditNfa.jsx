@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import uploadIcon from "../assets/images/CreateCollection/uploadIcon.png";
-import ChainIcon from "../assets/images/CreateCollection/ChainIcon.png";
+import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
+import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
 import { Link } from "react-router-dom";
 
-function CreateCollections() {
+function EditNfa() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Handle file selection
@@ -99,9 +99,9 @@ function CreateCollections() {
 
           {/* Right Side: Form */}
           <div className="relative z-50 rounded-lg p-6 w-[456px] flex flex-col gap-6">
-            <h2 className="text-white text-2xl font-semibold">Create your own NFA's</h2>
+            <h2 className="text-white text-2xl font-semibold">Edit your own NFA's</h2>
             <p className="text-white/70 text-base">
-              Create your own digital universe where every piece you mint tells a story, carries emotion, and becomes part of something timeless.
+              Edit your own digital universe where every piece you mint tells a story, carries emotion, and becomes part of something timeless.
             </p>
 
             {/* Name Field */}
@@ -206,4 +206,4 @@ function CreateCollections() {
   );
 }
 
-export default CreateCollections;
+export default EditNfa;

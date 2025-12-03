@@ -51,6 +51,20 @@ import Stripe from "./pages/Stripe";
 import Funnel from "./pages/Funnel";
 
 
+import DashboardLayout from "./Layout/DashboardLayout";
+
+import CreateCollections from "./pages/DashboardPages/CreateNfa";
+import NFAdetails from "./pages/DashboardPages/NFAdetails";
+import NFTs from "./pages/DashboardPages/Nfts";
+import EditColelctions from "./assets/EditCollection";
+import EditProfile from "./pages/DashboardPages/EditUser";
+import Transactions from "./pages/DashboardPages/Transaction";
+import Support from "./pages/DashboardPages/Support";
+import AddCollection from "./pages/DashboardPages/AddCollection";
+import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
+import EditNfa from "./pages/DashboardPages/EditNfa";
+
+
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 // Wrapper component to handle route changes
@@ -75,7 +89,21 @@ function AppWrapper() {
   if (loading) return <Loading />;
 
     // ✅ Routes where Navbar & Footer should be hidden
-  const hideLayoutRoutes = ["/stripe-payment"];
+const hideLayoutRoutes = [
+  "/stripe-payment",
+  "/dashboard",
+  "/dashboard/create-nfa",
+  "/dashboard/nfa-details",
+  "/dashboard/collections",
+  "/dashboard/edit-collection-item",
+  "/dashboard/edit-profile",
+  "/dashboard/transactions",
+  "/dashboard/support",
+  "/dashboard/add-collection",
+  "/dashboard/collection-on-sale",
+  "/dashboard/edit-nfa",
+
+];
 
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
 
@@ -133,7 +161,10 @@ function AppWrapper() {
           <Route path="/Activity" element={<Activity />} />
           <Route path="/List" element={<List />} />
           <Route path="/edit" element={<Edit />} />
-          <Route path="/dashboard" element={<UserDashboard />} />
+
+
+        
+
 
 
         {/* Testing Routes  */}
@@ -143,6 +174,30 @@ function AppWrapper() {
 
         <Route path="/stripe-payment" element={<Stripe/>}/>
         <Route path="/funnel-page" element={<Funnel/>}/>
+
+
+
+<Route path="/dashboard" element={<DashboardLayout />}>
+
+  {/* Default dashboard home */}
+  <Route index element={<UserDashboard />} />
+
+  {/* Dashboard pages */}
+  <Route path="create-nfa" element={<CreateCollections />} />
+  <Route path="nfa-details" element={<NFAdetails />} />
+  <Route path="edit-nfa" element={<EditNfa />} />
+  <Route path="collections" element={<NFTs />} />
+  <Route path="edit-collection-item" element={<EditColelctions />} />
+  <Route path="edit-profile" element={<EditProfile />} />
+  <Route path="transactions" element={<Transactions/>} />
+  <Route path="support" element={<Support/>} />
+  <Route path="add-collection" element={<AddCollection/>} />
+  <Route path="collection-on-sale" element={<CollectionOnSale/>} />
+
+
+  
+
+</Route>
 
 
 
