@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
 import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import { useAnimate } from "framer-motion";
 
 function CreateCollections() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const navigate = useNavigate()
 
   // Handle file selection
   const handleFileChange = (event) => {
@@ -17,6 +19,10 @@ function CreateCollections() {
       reader.readAsDataURL(file);
     }
   };
+
+  const handleBackClick = ()=>{
+    navigate("/dashboard/nfa-details")
+  }
 
   // Handle drag and drop
   const handleDrop = (event) => {
@@ -90,7 +96,7 @@ function CreateCollections() {
                 >
                   <img src={uploadIcon} alt="" className="w-[16px] h-[16px]" />
                 </div>
-                <div
+                <div className=""
                   style={{
                     width: "240px",
                     height: "49px",
@@ -215,7 +221,7 @@ function CreateCollections() {
                 {/* Creator Fee */}
                 <div className="flex flex-col gap-2 w-[180px]">
                   <h1 className="text-white text-[18px] m-0">Creator Fee</h1>
-                  <div className="flex items-center border border-gray-600 rounded-md h-[48px] px-3">
+                  <div className="flex items-center bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors border border-gray-600 rounded-md h-[48px] px-3">
                     <input
                       type="text"
                       defaultValue="0"
@@ -231,7 +237,7 @@ function CreateCollections() {
                 {/* Supply */}
                 <div className="flex flex-col gap-2 w-[180px]">
                   <h1 className="text-white text-[18px] m-0">Supply</h1>
-                  <div className="flex items-center border border-gray-600 rounded-md h-[48px] px-3">
+                  <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center border border-gray-600 rounded-md h-[48px] px-3">
                     <input
                       type="text"
                       defaultValue="0"
@@ -280,7 +286,7 @@ function CreateCollections() {
 
         {/* Action Buttons */}
         <div className="flex mt-16 justify-end mx-8 pt-16 pb-32 relative z-10 gap-6">
-          <button className="w-[133px] h-[42px] rounded-md border border-white text-white hover:bg-white/10 transition-colors">
+          <button onClick={handleBackClick} className="w-[133px] h-[42px] rounded-md border border-white text-white hover:bg-white/10 transition-colors">
             Cancel
           </button>
           <button className="w-[190px] h-[42px] rounded-md bg-blue-800 hover:bg-blue-700 text-white transition-colors">

@@ -96,7 +96,7 @@ const Sidebar = ({ onLogoutClick }) => {
       <div className="flex flex-col justify-between h-full">
         <div className="flex-1">
           {/* Logo - Centered */}
-          <div className="flex justify-center mb-24">
+          <div className="flex justify-center mt-12 mb-8">
             <div className="hidden lg:flex items-center gap-1.5">
               <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
               <span className="font-inter font-bold text-[18px] leading-[22px]">

@@ -145,7 +145,7 @@ function CreateCollections() {
               {/* Creator Fee */}
               <div className="flex flex-col gap-2 w-1/2">
                 <label className="text-white text-base font-normal">Creator Fee</label>
-                <div className="flex items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
+                <div className="flex items-center h-12 px-3 border focus-within:border-blue-500  hover:border-blue-500  border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
                     defaultValue="0"
@@ -159,7 +159,7 @@ function CreateCollections() {
               {/* Supply */}
               <div className="flex flex-col gap-2 w-1/2">
                 <label className="text-white text-base font-normal">Supply</label>
-                <div className="flex items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
+                <div className="flex items-center h-12 focus-within:border-blue-500  hover:border-blue-500  border-gray-600 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
                     defaultValue="0"

@@ -345,13 +345,13 @@ function EditProfile() {
               </div>
             )}
 
-            {/* Save Button */}
-            <div className="flex justify-center w-full my-16">
+             <div className="flex justify-center w-full my-16">
               <div className="max-w-md w-full">
                 <button type="submit" className="mx-auto block">
                   <CustomButton text="Save" />
                 </button>
-              </div>
+              </div> {/* Save Button */}
+          
             </div>
           </form>
         </div>
