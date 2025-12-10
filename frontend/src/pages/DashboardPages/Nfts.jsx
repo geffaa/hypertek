@@ -83,7 +83,7 @@ function NFTs() {
 
           </div>
          <Link
-  to="/dashboard/add-collection"
+  to="/dashboard/add-user-collection"
   className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
 >
   Add Collection

@@ -63,6 +63,7 @@ import Support from "./pages/DashboardPages/Support";
 import AddCollection from "./pages/DashboardPages/AddCollection";
 import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
 import EditNfa from "./pages/DashboardPages/EditNfa";
+import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
 
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
@@ -102,6 +103,8 @@ const hideLayoutRoutes = [
   "/dashboard/add-collection",
   "/dashboard/collection-on-sale",
   "/dashboard/edit-nfa",
+  "/dashboard/add-nfts",
+  "/dashboard/add-user-collection",
 
 ];
 
@@ -191,8 +194,9 @@ const hideLayoutRoutes = [
   <Route path="edit-profile" element={<EditProfile />} />
   <Route path="transactions" element={<Transactions/>} />
   <Route path="support" element={<Support/>} />
-  <Route path="add-collection" element={<AddCollection/>} />
+  <Route path="add-nfts" element={<AddCollection/>} />
   <Route path="collection-on-sale" element={<CollectionOnSale/>} />
+  <Route path="add-user-collection" element={<AddUserCollection/>} />
 
 
   

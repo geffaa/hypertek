@@ -330,39 +330,38 @@ function CreateCollections() {
               Earnings
             </span>
 
-            <div className="flex justify-between gap-6 mt-5">
-              {/* Creator Fee */}
-              <div className="flex flex-col gap-2 w-[180px]">
-                <h1 className="font-inter font-normal text-[18px] m-0">
-                  Creator Fee
-                </h1>
-                <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
-                  <input
-                    type="text"
-                    defaultValue="0"
-                    className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
-                  />
-                  <span className="text-[18px] text-white/70 px-2">%</span>
-                </div>
-                <p className="text-[14px] text-white/70 font-inter m-0">
-                  Support 100% total fee
-                </p>
-              </div>
+      {/* Creator Fee */}
+<div className="flex flex-col gap-2 w-[180px]">
+  <h1 className="font-inter font-normal text-[18px] m-0">
+    Creator Fee
+  </h1>
+  <div className="flex items-center border border-gray-600 rounded-md h-[48px] px-3 bg-white/10 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors">
+    <input
+      type="text"
+      defaultValue="0"
+      className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
+    />
+    <span className="text-[18px] text-white/70 px-2">%</span>
+  </div>
+  <p className="text-[14px] text-white/70 font-inter m-0">
+    Support 100% total fee
+  </p>
+</div>
 
-              {/* Supply */}
-              <div className="flex flex-col gap-2 w-[180px]">
-                <h1 className="font-inter font-normal text-[18px] m-0">
-                  Supply
-                </h1>
-                <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
-                  <input
-                    type="text"
-                    defaultValue="0"
-                    className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
-                  />
-                </div>
-              </div>
-            </div>
+{/* Supply */}
+<div className="flex flex-col gap-2 w-[180px]">
+  <h1 className="font-inter font-normal text-[18px] m-0">
+    Supply
+  </h1>
+  <div className="flex items-center border border-gray-600 rounded-md h-[48px] px-3 bg-white/10 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors">
+    <input
+      type="text"
+      defaultValue="0"
+      className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
+    />
+  </div>
+</div>
+
 
             {/* Recipient Wallet Address */}
             <div className="flex flex-col gap-2 mt-8 w-full">

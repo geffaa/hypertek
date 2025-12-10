@@ -101,7 +101,7 @@ const handleNavigate = ()=>{
   type="text"
   id="name"
   placeholder="Add Name"
-  className="text-white placeholder-[#FFFFFFAB] bg-transparent rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none"
+  className="text-white bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors placeholder-[#FFFFFFAB] bg-transparent rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none"
   style={{
     width: "400px",
     height: "40px",
@@ -153,7 +153,7 @@ const handleNavigate = ()=>{
                 type="text"
                 id="symbol"
                 placeholder="Create Name"
-                className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
+                className="w-full h-10 px-3 z-10 bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
               />
             </div>
 
@@ -204,7 +204,7 @@ const handleNavigate = ()=>{
           {/* Creator Fee */}
           <div className="flex flex-col gap-2 w-[170px]">
             <h1 className="font-inter font-normal text-[18px] m-0">Creator Fee</h1>
-            <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
+            <div className="flex items-center bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors border border-[#555] rounded-md h-[48px] px-3">
               <input
                 type="text"
                 defaultValue="0"
@@ -220,7 +220,7 @@ const handleNavigate = ()=>{
           {/* Supply */}
           <div className="flex flex-col gap-2 w-[170px]">
             <h1 className="font-inter font-normal text-[18px] m-0">Supply</h1>
-            <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
+            <div className="flex items-center bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors border border-[#555] rounded-md h-[48px] px-3">
               <input
                 type="text"
                 defaultValue="0"
@@ -243,7 +243,7 @@ const handleNavigate = ()=>{
       type="text"
       id="price"
       placeholder="Add Price"
-      className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
+      className="text-white placeholder-[#FFFFFFAB] bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
       style={{
         width: "400px",
         height: "40px",

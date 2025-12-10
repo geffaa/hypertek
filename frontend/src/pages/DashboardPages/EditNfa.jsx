@@ -145,7 +145,7 @@ function EditNfa() {
               {/* Creator Fee */}
               <div className="flex flex-col gap-2 w-1/2">
                 <label className="text-white text-base font-normal">Creator Fee</label>
-                <div className="flex items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
+                <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
                     defaultValue="0"
@@ -159,7 +159,7 @@ function EditNfa() {
               {/* Supply */}
               <div className="flex flex-col gap-2 w-1/2">
                 <label className="text-white text-base font-normal">Supply</label>
-                <div className="flex items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
+                <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
                     defaultValue="0"
