@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import overview1 from "../assets/hero.png";
+import overview1 from "../assets/Hero.png";
 import Profile from "../assets/Profile.png";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy } from "react-icons/fi";
