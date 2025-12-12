@@ -3,13 +3,21 @@ pipeline {
     environment {
         // Deployment directories
         DEPLOY_DIR = "/var/www/hyper-tek-game"
+        
         FRONTEND_DIR = "${DEPLOY_DIR}/frontend"
+        ADMIN_DIR = "${DEPLOY_DIR}/admin"
         BACKEND_DIR = "${DEPLOY_DIR}/backend"
+
         FRONTEND_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame"
-        BACKEND_PORT = "4700"  // backend port
+        ADMIN_WEB_ROOT = "/usr/share/nginx/html/hyper-tekgame-admin"
+
+        BACKEND_PORT = "4700"
+        
         BACKUP_DIR = "/var/backups/nginx-site-hypertek"
     }
+
     stages {
+
         stage('Checkout') {
             steps {
                 echo ':package: Checking out source code...'
@@ -23,9 +31,10 @@ pipeline {
                 )
             }
         }
+
         stage('Prepare Deployment Directory') {
             steps {
-                echo ":file_folder: Preparing deployment directory: ${DEPLOY_DIR}"
+                echo ":file_folder: Preparing deployment directory..."
                 sh """
                     sudo rm -rf $DEPLOY_DIR
                     sudo mkdir -p $DEPLOY_DIR
@@ -34,18 +43,29 @@ pipeline {
                 """
             }
         }
-        stage('Build Frontend') {
+
+        stage('Build User Frontend') {
             steps {
-                echo ':gear: Building frontend...'
+                echo ':gear: Building USER frontend...'
                 sh """
-                    node -v
-                    npm -v
                     cd $FRONTEND_DIR
                     npm ci --legacy-peer-deps || npm install --legacy-peer-deps
                     npm run build
                 """
             }
         }
+
+        stage('Build Admin Frontend') {
+            steps {
+                echo ':gear: Building ADMIN frontend...'
+                sh """
+                    cd $ADMIN_DIR
+                    npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+                    npm run build
+                """
+            }
+        }
+
         stage('Install Backend Dependencies') {
             steps {
                 echo ':hammer_and_wrench: Installing backend dependencies...'
@@ -55,22 +75,33 @@ pipeline {
                 """
             }
         }
+
         stage('Backup Current Deployment') {
             steps {
-                echo ":package: Backing up current deployment to: ${BACKUP_DIR}"
+                echo ":package: Backing up current deployment..."
+
                 sh """
                     sudo mkdir -p $BACKUP_DIR
                     sudo rm -rf $BACKUP_DIR/*
+
+                    # Backup user frontend
                     if [ -d "$FRONTEND_WEB_ROOT" ] && [ "\$(ls -A $FRONTEND_WEB_ROOT)" ]; then
-                        echo "Backing up frontend..."
-                        sudo cp -r $FRONTEND_WEB_ROOT/* $BACKUP_DIR/
+                        echo "Backing up USER frontend..."
+                        sudo cp -r $FRONTEND_WEB_ROOT/* $BACKUP_DIR/user/
+                    fi
+
+                    # Backup admin frontend
+                    if [ -d "$ADMIN_WEB_ROOT" ] && [ "\$(ls -A $ADMIN_WEB_ROOT)" ]; then
+                        echo "Backing up ADMIN frontend..."
+                        sudo cp -r $ADMIN_WEB_ROOT/* $BACKUP_DIR/admin/
                     fi
                 """
             }
         }
-        stage('Deploy Frontend') {
+
+        stage('Deploy User Frontend') {
             steps {
-                echo ":rocket: Deploying frontend to Nginx web root: ${FRONTEND_WEB_ROOT}"
+                echo ":rocket: Deploying USER frontend..."
                 sh """
                     sudo mkdir -p $FRONTEND_WEB_ROOT
                     sudo rm -rf $FRONTEND_WEB_ROOT/*
@@ -78,9 +109,21 @@ pipeline {
                 """
             }
         }
+
+        stage('Deploy Admin Frontend') {
+            steps {
+                echo ":rocket: Deploying ADMIN frontend..."
+                sh """
+                    sudo mkdir -p $ADMIN_WEB_ROOT
+                    sudo rm -rf $ADMIN_WEB_ROOT/*
+                    sudo cp -r $ADMIN_DIR/dist/* $ADMIN_WEB_ROOT/
+                """
+            }
+        }
+
         stage('Restart Backend') {
             steps {
-                echo ":arrows_counterclockwise: Restarting backend process on port $BACKEND_PORT"
+                echo ":arrows_counterclockwise: Restarting backend..."
                 sh """
                     if pm2 list | grep -q 'hyper-tek-backend'; then
                         pm2 restart hyper-tek-backend
@@ -90,6 +133,7 @@ pipeline {
                 """
             }
         }
+
         stage('Restart Nginx') {
             steps {
                 echo ':arrows_counterclockwise: Restarting Nginx'
@@ -97,9 +141,10 @@ pipeline {
             }
         }
     }
+
     post {
         success {
-            echo ":white_check_mark: Hyper-Tek Game deployed successfully!"
+            echo ":white_check_mark: Hyper-Tek Game (User + Admin) deployed successfully!"
         }
         failure {
             echo ":x: Deployment failed. Check Jenkins logs for details."
