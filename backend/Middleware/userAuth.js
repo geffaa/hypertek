@@ -2,27 +2,22 @@ import jwt from "jsonwebtoken";
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
-    console.log("❌ No token provided");
     return res.status(401).json({ message: "Access Denied: No token provided" });
   }
 
-  console.log("🧾 Token Received:", token);
-  console.log("🔐 JWT_SECRET being used:", process.env.JWT_SECRET);
-
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("✅ Token Verified Successfully!");
-    console.log("👤 Decoded User:", verified);
 
-    req.user = verified; // attach user info to request
+    // Map payload id to _id for Mongoose
+    req.user = { _id: verified.id, email: verified.email }; 
     next();
   } catch (err) {
-    console.log("❌ JWT Verification Error:", err.message);
-    return res.status(403).json({ message: "Token is Expired please Re-login", error: err.message });
+    return res.status(403).json({ message: "Token expired or invalid", error: err.message });
   }
 }
+
 
 export { authMiddleware };
