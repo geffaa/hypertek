@@ -4,20 +4,31 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
-import { ethers } from "ethers"; // ✅ must be this, not require("ethers")
-import axios from "axios"
+import { ethers } from "ethers";
+import axios from "axios";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
 
 // ------------------ SMTP TRANSPORTER ------------------
 const transporter = nodemailer.createTransport({
-  service: "gmail", // you can use outlook, yahoo, custom SMTP
+  service: "gmail",
   auth: {
-    user: "wahabnadeem311@gmail.com", // your email
-    pass: "aceu vgyd azni ngoq", // your app password
+    user: "wahabnadeem311@gmail.com",
+    pass: "aceu vgyd azni ngoq",
   },
 });
+
+// ------------------ HELPER FUNCTION TO CHECK USER STATUS ------------------
+const checkUserStatus = (user) => {
+  if (user.isActive === false) {
+    return {
+      allowed: false,
+      message: "Your account has been deactivated. Please contact support.",
+    };
+  }
+  return { allowed: true };
+};
 
 // ------------------ SIGNUP ------------------
 const SignupUser = async (req, res) => {
@@ -34,12 +45,19 @@ const SignupUser = async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
-    const newUser = new UserModel({ Email, Password });
+    const newUser = new UserModel({
+      Email,
+      Password,
+      isActive: true, // ✅ New users are active by default
+    });
     await newUser.save();
 
-    // Use newUser instead of user
     const token = jwt.sign(
-      { id: newUser._id, Email: newUser.Email },
+      {
+        id: newUser._id,
+        Email: newUser.Email,
+        role: newUser.Role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "3h" }
     );
@@ -47,7 +65,12 @@ const SignupUser = async (req, res) => {
     res.status(201).json({
       message: "Signup successful",
       token,
-      user: { id: newUser._id, Email: newUser.Email },
+      user: {
+        id: newUser._id,
+        Email: newUser.Email,
+        Role: newUser.Role,
+        isActive: newUser.isActive,
+      },
     });
   } catch (error) {
     if (error.code === 11000) {
@@ -57,10 +80,9 @@ const SignupUser = async (req, res) => {
   }
 };
 
-
 // ------------------ LOGIN ------------------
 const LoginUser = async (req, res) => {
-  console.log("your login user body :",req.body);
+  console.log("your login user body :", req.body);
   try {
     const { Email, Password } = req.body;
 
@@ -75,23 +97,39 @@ const LoginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
+    // ✅ CHECK IF USER IS ACTIVE
+    const statusCheck = checkUserStatus(user);
+    if (!statusCheck.allowed) {
+      return res.status(403).json({
+        success: false,
+        message: statusCheck.message,
+      });
+    }
+
     const isMatch = await bcrypt.compare(Password, user.Password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
     const token = jwt.sign(
-      { id: user._id, Email: user.Email },
-      process.env.JWT_SECRET,
       {
-        expiresIn: "3h",
-      }
+        id: user._id,
+        Email: user.Email,
+        role: user.Role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "3h" }
     );
 
     res.status(200).json({
       message: "Login successful",
       token,
-      user: { id: user._id, Email: user.Email },
+      user: {
+        id: user._id,
+        Email: user.Email,
+        Role: user.Role,
+        isActive: user.isActive,
+      },
     });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -103,129 +141,114 @@ const ForgotPassword = async (req, res) => {
   try {
     const { Email } = req.body;
     if (!Email) return res.status(400).json({ message: "Email is required" });
+
     const user = await UserModel.findOne({ Email });
     if (!user) return res.status(400).json({ message: "User not found" });
-    // Generate reset token (15 minutes expiry)
+
+    // ✅ CHECK IF USER IS ACTIVE
+    const statusCheck = checkUserStatus(user);
+    if (!statusCheck.allowed) {
+      return res.status(403).json({
+        success: false,
+        message: statusCheck.message,
+      });
+    }
+
     const resetToken = jwt.sign(
-      { id: user._id, Email: user.Email },
-      process.env.RESET_SECRET, // <== must match
+      {
+        id: user._id,
+        Email: user.Email,
+        role: user.Role,
+      },
+      process.env.RESET_SECRET,
       { expiresIn: "3h" }
     );
+
     const resetLink = `https://hyper-tek-games.deventiatech.com/reset-password/${resetToken}`;
-    // Send email
+
     await transporter.sendMail({
       from: `"Support" <${process.env.SMTP_EMAIL}>`,
       to: Email,
       subject: "Password Reset Request",
       html: `
-<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f6f8; 
-            padding: 40px 0; 
-            text-align: center;">
-  <div style="max-width: 500px; 
-              margin: auto; 
-              background-color: #ffffff; 
-              border-radius: 10px; 
-              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-              padding: 30px 40px;">
-              
-    <h2 style="color: #1a1a1a; margin-bottom: 10px;">🔒 Password Reset Request</h2>
-    <p style="color: #555; font-size: 15px; line-height: 1.6;">
-      We received a request to reset your password.  
-      Click the button below to securely reset it.
-    </p>
-
-    <a href="${resetLink}"
-       style="display: inline-block;
-              margin-top: 20px;
-              padding: 12px 28px;
-              font-size: 16px;
-              color: #ffffff;
-              background-color: #007bff;
-              border-radius: 6px;
-              text-decoration: none;
-              font-weight: 600;
-              box-shadow: 0 2px 6px rgba(0,123,255,0.3);
-              transition: background-color 0.3s ease;">
-      Reset My Password
-    </a>
-
-    <p style="color: #777; font-size: 14px; margin-top: 25px;">
-      This link will expire in <strong>15 minutes</strong>.  
-      If you didn’t request this, you can safely ignore this email.
-    </p>
-
-    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;" />
-
-    <p style="font-size: 12px; color: #999;">
-      Need help? Contact our support team at  
-      <a href="mailto:support@innervoice.com" style="color: #007bff; text-decoration: none;">support@innervoice.com</a>
-    </p>
-  </div>
-
-  <p style="color: #aaa; font-size: 12px; margin-top: 20px;">
-    &copy; ${new Date().getFullYear()} Inner Voice. All rights reserved.
-  </p>
-</div>
-
-      `,
+🔒 Password Reset Request
+We received a request to reset your password. Click the button below to securely reset it.
+ Reset My Password
+This link will expire in 15 minutes. If you didn't request this, you can safely ignore this email.
+Need help? Contact our support team at support@innervoice.com
+© ${new Date().getFullYear()} Inner Voice. All rights reserved.
+ `,
     });
+
     res.status(200).json({ message: "Password reset link sent to email" });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
 // ------------------ RESET PASSWORD ------------------
 const ResetPassword = async (req, res) => {
   try {
     const { token } = req.params;
     const { Password, ConfirmPassword } = req.body;
-    console.log("RESET_SECRET:", RESET_SECRET);
-    console.log("Request body:", req.body);
-    // Validate input
+
     if (!Password || !ConfirmPassword) {
       return res.status(400).json({
         message: "New Password and Confirm Password are required",
       });
     }
+
     if (Password !== ConfirmPassword) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
-    // Verify token
+
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.RESET_SECRET);
     } catch (err) {
       return res.status(400).json({ message: "Invalid or expired token" });
     }
-    // Find user
+
     const user = await UserModel.findById(decoded.id);
     if (!user) return res.status(404).json({ message: "User not found" });
-    // Update password
-    user.Password = Password; // make sure pre-save hook hashes it
+
+    // ✅ CHECK IF USER IS ACTIVE
+    const statusCheck = checkUserStatus(user);
+    if (!statusCheck.allowed) {
+      return res.status(403).json({
+        success: false,
+        message: statusCheck.message,
+      });
+    }
+
+    user.Password = Password;
     await user.save();
+
     res.status(200).json({ message: "Password reset successful" });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
-}; 
+};
 
 // ------------------ GoogleAuth ------------------
- const GoogleAuth = async (req, res) => {
+const GoogleAuth = async (req, res) => {
   try {
-    const { token } = req.body; // access_token from frontend
-    console.log("Google access token from frontend:", token);
+    const { token } = req.body;
 
     if (!token)
       return res.status(400).json({ message: "Access token is required" });
 
-    // ✅ Use Google's userinfo endpoint to fetch user data
     const googleRes = await axios.get(
       `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`
     );
 
-    const { sub: googleId, email, name, picture, email_verified } =
-      googleRes.data;
+    const {
+      sub: googleId,
+      email,
+      name,
+      picture,
+      email_verified,
+    } = googleRes.data;
 
     if (!email || !email_verified) {
       return res
@@ -233,9 +256,18 @@ const ResetPassword = async (req, res) => {
         .json({ message: "Google account email not verified" });
     }
 
-    // ✅ Find or create user in your DB
     let user = await UserModel.findOne({ Email: email });
+
     if (user) {
+      // ✅ CHECK IF USER IS ACTIVE
+      const statusCheck = checkUserStatus(user);
+      if (!statusCheck.allowed) {
+        return res.status(403).json({
+          success: false,
+          message: statusCheck.message,
+        });
+      }
+
       if (!user.GoogleId) {
         user.GoogleId = googleId;
         await user.save();
@@ -245,13 +277,17 @@ const ResetPassword = async (req, res) => {
         Email: email,
         FullName: name || "",
         GoogleId: googleId,
+        isActive: true, // ✅ New users active by default
       });
       await user.save();
     }
 
-    // ✅ Generate your own app JWT
     const jwtToken = jwt.sign(
-      { id: user._id, Email: user.Email },
+      {
+        id: user._id,
+        Email: user.Email,
+        role: user.Role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -264,6 +300,8 @@ const ResetPassword = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         picture,
+        Role: user.Role, // ✅ ADD THIS
+        isActive: user.isActive,
       },
     });
   } catch (err) {
@@ -274,11 +312,11 @@ const ResetPassword = async (req, res) => {
     });
   }
 };
+
 // ------------------ Discord ------------------
 const DiscordAuth = async (req, res) => {
   try {
     const { code } = req.body;
-    console.log("Received Discord auth code:", code);
 
     if (!code) {
       return res.status(400).json({
@@ -287,7 +325,6 @@ const DiscordAuth = async (req, res) => {
       });
     }
 
-    // Exchange code for access_token
     const params = new URLSearchParams();
     params.append("client_id", process.env.DISCORD_CLIENT_ID);
     params.append("client_secret", process.env.DISCORD_CLIENT_SECRET);
@@ -302,10 +339,8 @@ const DiscordAuth = async (req, res) => {
     });
 
     const tokenData = await tokenResponse.json();
-    console.log("Token exchange response:", tokenData);
 
     if (!tokenData.access_token) {
-      console.error("Token exchange failed:", tokenData);
       return res.status(400).json({
         success: false,
         message: "Failed to exchange authorization code",
@@ -313,16 +348,13 @@ const DiscordAuth = async (req, res) => {
       });
     }
 
-    // Fetch Discord user info
     const userResponse = await fetch("https://discord.com/api/users/@me", {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
 
     const discordUser = await userResponse.json();
-    console.log("Discord user data:", discordUser);
 
     if (!discordUser.id) {
-      console.error("Failed to fetch Discord user:", discordUser);
       return res.status(400).json({
         success: false,
         message: "Failed to fetch Discord user information",
@@ -337,23 +369,25 @@ const DiscordAuth = async (req, res) => {
       global_name,
     } = discordUser;
 
-    // Find or create user
-    let user;
+    let user = await UserModel.findOne({ DiscordId: discordId });
 
-    // First, try to find by Discord ID
-    user = await UserModel.findOne({ DiscordId: discordId });
-
-    // If not found by Discord ID, try by email
     if (!user && email) {
       user = await UserModel.findOne({ Email: email.toLowerCase() });
       if (user) {
-        // Link Discord ID to existing email account
+        // ✅ CHECK IF USER IS ACTIVE
+        const statusCheck = checkUserStatus(user);
+        if (!statusCheck.allowed) {
+          return res.status(403).json({
+            success: false,
+            message: statusCheck.message,
+          });
+        }
+
         user.DiscordId = discordId;
         await user.save();
       }
     }
 
-    // Create new user if not found
     if (!user) {
       const fullName =
         global_name ||
@@ -366,18 +400,30 @@ const DiscordAuth = async (req, res) => {
         Email: email ? email.toLowerCase() : `${username}@discord.user`,
         FullName: fullName,
         Password: null,
+        isActive: true, // ✅ New users active by default
       });
       await user.save();
+    } else {
+      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      const statusCheck = checkUserStatus(user);
+      if (!statusCheck.allowed) {
+        return res.status(403).json({
+          success: false,
+          message: statusCheck.message,
+        });
+      }
     }
 
-    // Generate JWT token
     const jwtToken = jwt.sign(
-      { id: user._id, DiscordId: discordId, Email: user.Email },
+      {
+        id: user._id,
+        DiscordId: discordId,
+        Email: user.Email,
+        role: user.Role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "3h" }
     );
-
-    console.log("Discord login successful for user:", user.Email);
 
     return res.status(200).json({
       success: true,
@@ -388,6 +434,8 @@ const DiscordAuth = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         DiscordId: user.DiscordId,
+        Role: user.Role, // ✅ MUST
+        isActive: user.isActive,
       },
     });
   } catch (err) {
@@ -399,12 +447,38 @@ const DiscordAuth = async (req, res) => {
   }
 };
 
-// ------------------  PROFILE ------------------
+// ------------------ GET USER FOR ADMIN ------------------
+const GetAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find().select("-Password");
+    res.status(200).json({
+      success: true,
+      message: "Users fetched successfully",
+      users,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err.message });
+  }
+};
+
+// ------------------ PROFILE ------------------
 const GetProfile = async (req, res) => {
   try {
-    const userId = req.user.id; // from middleware
+    const userId = req.user.id;
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
+
+    // ✅ CHECK IF USER IS ACTIVE
+    const statusCheck = checkUserStatus(user);
+    if (!statusCheck.allowed) {
+      return res.status(403).json({
+        success: false,
+        message: statusCheck.message,
+      });
+    }
+
     res.status(200).json({ message: "Profile fetched successfully", user });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -415,13 +489,20 @@ const GetProfile = async (req, res) => {
 const EditProfile = async (req, res) => {
   try {
     const userId = req.user.id;
-    console.log("your edit req body is :",req.body);
-    const { FullName, Email, Password, NewPassword ,Bio } = req.body;
+    const { FullName, Email, Password, NewPassword, Bio } = req.body;
 
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // ✅ If updating password
+    // ✅ CHECK IF USER IS ACTIVE
+    const statusCheck = checkUserStatus(user);
+    if (!statusCheck.allowed) {
+      return res.status(403).json({
+        success: false,
+        message: statusCheck.message,
+      });
+    }
+
     if (Password && NewPassword) {
       const isMatch = await bcrypt.compare(Password, user.Password);
       if (!isMatch)
@@ -429,12 +510,10 @@ const EditProfile = async (req, res) => {
       user.Password = NewPassword;
     }
 
-    // ✅ Update text fields
     if (FullName) user.FullName = FullName;
     if (Email) user.Email = Email;
-    if(Bio) user.Bio = Bio;
+    if (Bio) user.Bio = Bio;
 
-    // ✅ If image uploaded
     if (req.file) {
       const avatarUrl = `/uploads/temp/${req.file.filename}`;
       user.Avatar = avatarUrl;
@@ -449,7 +528,8 @@ const EditProfile = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         Avatar: user.Avatar,
-        Bio:user.Bio
+        Bio: user.Bio,
+        isActive: user.isActive,
       },
     });
   } catch (err) {
@@ -461,7 +541,6 @@ const EditProfile = async (req, res) => {
 const MetaAuth = async (req, res) => {
   try {
     const { code } = req.body;
-    console.log("Received Facebook auth code:", code);
 
     if (!code) {
       return res
@@ -469,12 +548,11 @@ const MetaAuth = async (req, res) => {
         .json({ message: "Authorization code is required" });
     }
 
-    // Exchange code for access_token
     const tokenResponse = await fetch(
       `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.FACEBOOK_REDIRECT_URI}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&code=${code}`
     );
+
     const tokenData = await tokenResponse.json();
-    console.log("Facebook token data:", tokenData);
 
     if (!tokenData.access_token) {
       return res.status(400).json({
@@ -483,12 +561,11 @@ const MetaAuth = async (req, res) => {
       });
     }
 
-    // Fetch Facebook user info
     const userResponse = await fetch(
       `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${tokenData.access_token}`
     );
+
     const fbUser = await userResponse.json();
-    console.log("Facebook user:", fbUser);
 
     if (!fbUser.id) {
       return res
@@ -498,11 +575,20 @@ const MetaAuth = async (req, res) => {
 
     const { id: facebookId, email, name, picture } = fbUser;
 
-    // Find or create user
     let user = await UserModel.findOne({ FacebookId: facebookId });
+
     if (!user && email) {
       user = await UserModel.findOne({ Email: email.toLowerCase() });
       if (user) {
+        // ✅ CHECK IF USER IS ACTIVE
+        const statusCheck = checkUserStatus(user);
+        if (!statusCheck.allowed) {
+          return res.status(403).json({
+            success: false,
+            message: statusCheck.message,
+          });
+        }
+
         user.FacebookId = facebookId;
         await user.save();
       }
@@ -514,12 +600,27 @@ const MetaAuth = async (req, res) => {
         Email: email ? email.toLowerCase() : `${facebookId}@facebook.user`,
         FullName: name || "Facebook User",
         Avatar: picture?.data?.url || "",
+        isActive: true, // ✅ New users active by default
       });
       await user.save();
+    } else {
+      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      const statusCheck = checkUserStatus(user);
+      if (!statusCheck.allowed) {
+        return res.status(403).json({
+          success: false,
+          message: statusCheck.message,
+        });
+      }
     }
 
     const jwtToken = jwt.sign(
-      { id: user._id, FacebookId: facebookId, Email: user.Email },
+      {
+        id: user._id,
+        FacebookId: facebookId,
+        Email: user.Email,
+        role: user.Role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "3h" }
     );
@@ -532,6 +633,8 @@ const MetaAuth = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         Avatar: user.Avatar,
+        Role: user.Role,
+        isActive: user.isActive,
       },
     });
   } catch (err) {
@@ -543,76 +646,66 @@ const MetaAuth = async (req, res) => {
   }
 };
 
-
 const MetaMaskAuth = async (req, res) => {
-  console.log("your meta mask body :", req.body);
   try {
     const { address, signature, message } = req.body;
 
-    // ✅ Step 1: Validate required fields
     if (!address || !signature || !message) {
-      return res
-        .status(400)
-        .json({ 
-          success: false,
-          message: "Address, signature, and message are required" 
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Address, signature, and message are required",
+      });
     }
 
-    // ✅ Step 2: Verify wallet signature
     const recoveredAddress = ethers.verifyMessage(message, signature);
     if (recoveredAddress.toLowerCase() !== address.toLowerCase()) {
-      return res.status(401).json({ 
-        success: false,
-        message: "Invalid signature" 
-      });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid signature" });
     }
 
     const normalizedAddress = address.toLowerCase();
 
-    // ✅ Step 3: Find or create user (Following Google pattern)
-    let user = await UserModel.findOne({ 
-      $or: [
-        { DiscordId: normalizedAddress },
-        
-      ]
+    let user = await UserModel.findOne({
+      $or: [{ DiscordId: normalizedAddress }],
     });
 
     if (user) {
-      console.log("User found, updating MetaMask information...");
+      // ✅ CHECK IF USER IS ACTIVE
+      const statusCheck = checkUserStatus(user);
+      if (!statusCheck.allowed) {
+        return res.status(403).json({
+          success: false,
+          message: statusCheck.message,
+        });
+      }
+
       user.DiscordId = normalizedAddress;
       await user.save();
-      console.log("User MetaMask information updated successfully");
+    }
 
-    } 
-    if(!user){
-      // ✅ Create new user (Similar to Google pattern)
-      console.log("Creating new MetaMask user...");
+    if (!user) {
       user = new UserModel({
         DiscordId: normalizedAddress,
         Avatar: "",
         lastLogin: new Date(),
         loginCount: 1,
-        isActive: true,
-       
-        // No Password field - similar to Google accounts
+        isActive: true, // ✅ New users active by default
       });
       await user.save();
-      console.log("New MetaMask user created successfully");
     }
 
-    // ✅ Step 4: Generate JWT (Similar to Google pattern)
     const jwtToken = jwt.sign(
-      { 
-        id: user._id, 
+      {
+        id: user._id,
         WalletAddress: normalizedAddress,
-        email: user.Email 
+        email: user.Email,
+        role: user.Role,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "3h" } // Match Google's expiry or adjust as needed
+      { expiresIn: "3h" }
     );
 
-    // ✅ Step 5: Send response (Similar structure to Google)
     res.status(200).json({
       success: true,
       message: "MetaMask login successful",
@@ -625,33 +718,32 @@ const MetaMaskAuth = async (req, res) => {
         Avatar: user.Avatar,
         lastLogin: user.lastLogin,
         loginCount: user.loginCount,
-        isActive: user.isActive
+        Role: user.Role,
+        isActive: user.isActive,
       },
     });
-
   } catch (err) {
     console.error("MetaMaskAuth error:", err);
-    
-    // Handle specific errors
+
     if (err.code === 11000) {
       return res.status(400).json({
         success: false,
-        message: "Wallet address already exists with different account"
+        message: "Wallet address already exists with different account",
       });
     }
-    
+
     res.status(500).json({
       success: false,
-      message: "MetaMask auth failed", // Changed to match Google error message pattern
+      message: "MetaMask auth failed",
       error: err.message,
     });
   }
 };
+
 // ------------------ TWITTER AUTH ------------------
 const TwitterAuth = async (req, res) => {
   try {
     const { code } = req.body;
-    console.log("Received Twitter auth code:", code);
 
     if (!code) {
       return res
@@ -659,7 +751,6 @@ const TwitterAuth = async (req, res) => {
         .json({ message: "Authorization code is required" });
     }
 
-    // Exchange code for access token
     const tokenResponse = await fetch(
       "https://api.twitter.com/2/oauth2/token",
       {
@@ -677,13 +768,12 @@ const TwitterAuth = async (req, res) => {
           grant_type: "authorization_code",
           client_id: process.env.TWITTER_CLIENT_ID,
           redirect_uri: process.env.TWITTER_REDIRECT_URI,
-          code_verifier: "challenge", // same as used in frontend
+          code_verifier: "challenge",
         }),
       }
     );
 
     const tokenData = await tokenResponse.json();
-    console.log("Twitter token data:", tokenData);
 
     if (!tokenData.access_token) {
       return res.status(400).json({
@@ -692,14 +782,13 @@ const TwitterAuth = async (req, res) => {
       });
     }
 
-    // Fetch Twitter user info
     const userResponse = await fetch("https://api.twitter.com/2/users/me", {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
-    const twitterUser = await userResponse.json();
-    console.log("Twitter user:", twitterUser);
 
+    const twitterUser = await userResponse.json();
     const userData = twitterUser.data;
+
     if (!userData || !userData.id) {
       return res
         .status(400)
@@ -708,7 +797,6 @@ const TwitterAuth = async (req, res) => {
 
     const { id: twitterId, name, username } = userData;
 
-    // Find or create user
     let user = await UserModel.findOne({ TwitterId: twitterId });
 
     if (!user) {
@@ -716,13 +804,27 @@ const TwitterAuth = async (req, res) => {
         TwitterId: twitterId,
         FullName: name || username,
         Email: `${username}@twitter.user`,
+        isActive: true, // ✅ New users active by default
       });
       await user.save();
+    } else {
+      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      const statusCheck = checkUserStatus(user);
+      if (!statusCheck.allowed) {
+        return res.status(403).json({
+          success: false,
+          message: statusCheck.message,
+        });
+      }
     }
 
-    // Create JWT
     const jwtToken = jwt.sign(
-      { id: user._id, TwitterId: twitterId, Email: user.Email },
+      {
+        id: user._id,
+        TwitterId: twitterId,
+        Email: user.Email,
+        role: user.Role,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "3h" }
     );
@@ -730,12 +832,151 @@ const TwitterAuth = async (req, res) => {
     res.status(200).json({
       message: "Twitter login successful",
       token: jwtToken,
-      user: { id: user._id, Email: user.Email, FullName: user.FullName },
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        isActive: user.isActive,
+        Role: user.Role,
+      },
     });
   } catch (err) {
     console.error("TwitterAuth error:", err);
     res.status(500).json({
       message: "Internal server error during Twitter login",
+      error: err.message,
+    });
+  }
+};
+
+// ✅ Toggle User Active/Inactive Status (Admin Only)
+const ToggleUserStatus = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { isActive } = req.body;
+
+    if (typeof isActive !== "boolean") {
+      return res.status(400).json({
+        success: false,
+        message: "isActive must be a boolean value",
+      });
+    }
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    user.isActive = isActive;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: `User ${isActive ? "activated" : "deactivated"} successfully`,
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        isActive: user.isActive,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
+// ✅ NEW API: Edit User (Admin Only)
+const EditUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    let { FullName, Email, Password, Role, Bio, isActive } = req.body;
+
+    const user = await UserModel.findById(userId);
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    if (FullName !== undefined) user.FullName = FullName;
+    if (Email !== undefined) {
+      const existingUser = await UserModel.findOne({
+        Email,
+        _id: { $ne: userId },
+      });
+      if (existingUser)
+        return res
+          .status(400)
+          .json({ success: false, message: "Email already exists" });
+      user.Email = Email;
+    }
+    if (Password) user.Password = Password;
+    if (Role !== undefined) user.Role = Role;
+    if (Bio !== undefined) user.Bio = Bio;
+    if (typeof isActive !== "undefined") user.isActive = isActive === "true";
+
+    // Handle file upload
+    if (req.file) {
+      // Save the file path (or filename) in DB
+      user.Avatar = `/uploads/temp/${req.file.filename}`;
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      user: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+        Role: user.Role,
+        Bio: user.Bio,
+        Avatar: user.Avatar,
+        isActive: user.isActive,
+      },
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err.message });
+  }
+};
+
+// ✅ NEW API: Delete User (Admin Only)
+const DeleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    await UserModel.findByIdAndDelete(userId);
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      deletedUser: {
+        id: user._id,
+        Email: user.Email,
+        FullName: user.FullName,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
       error: err.message,
     });
   }
@@ -752,4 +993,8 @@ export {
   EditProfile,
   TwitterAuth,
   MetaMaskAuth,
+  GetAllUsers,
+  ToggleUserStatus,
+  EditUser, // ✅ New export
+  DeleteUser, // ✅ New export
 };

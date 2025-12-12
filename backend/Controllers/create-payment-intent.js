@@ -5,18 +5,17 @@ dotenv.config({ path: "./Config/.env" }); // adjust path if needed
 
 import Stripe from "stripe";
 
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const CreatePaymentIntent = async (req, res) => {
   console.log("CreatePaymentIntent payload:", req.body);
 
   try {
-    const { amount, userId, email, description , productId } = req.body;
-    if(!stripe){
-        return res.status(400).json({
-            message:"Your stripe key is required"
-        })
+    const { amount, userId, email, description, productId } = req.body;
+    if (!stripe) {
+      return res.status(400).json({
+        message: "Your stripe key is required",
+      });
     }
 
     if (!amount) {
@@ -24,19 +23,18 @@ export const CreatePaymentIntent = async (req, res) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-  amount, 
-  currency: "usd",
-  automatic_payment_methods: { enabled: true },
-  metadata: {
-    userId: userId,             // MongoDB ObjectId
-    email: email || "unknown",
-    provider: "stripe",          // required by schema
-    gameTitle: req.body.gameTitle, // required by schema
-    transactionId:"",        
-    productId:productId
-  },
-});
-
+      amount,
+      currency: "usd",
+      automatic_payment_methods: { enabled: true },
+      metadata: {
+        userId: userId, // MongoDB ObjectId
+        email: email || "unknown",
+        provider: "stripe", // required by schema
+        gameTitle: req.body.gameTitle, // required by schema
+        transactionId: "",
+        productId: productId,
+      },
+    });
 
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {

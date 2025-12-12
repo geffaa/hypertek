@@ -2,12 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import bodyParser from "body-parser";
-
 import { fileURLToPath } from "url";
 import cors from "cors";
 import { DBConnections } from "./Database/Db.js";
 import EventEmitter from "events";
-EventEmitter.defaultMaxListeners = 20; // or 
+EventEmitter.defaultMaxListeners = 20;
 import { StripeWebhook } from "./Controllers/Stripewebhook.js";
 
 // Routes
@@ -19,10 +18,12 @@ import HistoryRoute from "./Routes/History.js";
 import { CardRoute } from "./Routes/Paywithcard.js";
 import { SaveCardRoute } from "./Routes/SaveCard.js";
 import { PaymentRotue } from "./Routes/Payment-intent.js";
-// import { PaymentHook } from "./Routes/webhookroute.js";
 import { PcheckingRoute } from "./Routes/checkPayment.js";
 import { searchRouter } from "./Routes/SearchRoute.js";
 import OfferRoute from "./Routes/Offer.js";
+import Dashboard from "./Routes/Dashboard.js";
+import NFTRouter from "./Routes/NFT.js";
+import News from  "./Routes/News.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -66,54 +67,85 @@ try {
   console.error("❌ Database connection error:", error);
 }
 
-
-// app.use('/api/v1/stripe', StripSaveRoute);
-app.use('/api/v1/card',SaveCardRoute)
-// app.use("/api/v1/payment/stripe",  bodyParser.raw({ type: "application/json" }),PaymentHook)
+// ⚠️ IMPORTANT: Stripe webhook MUST come BEFORE express.json()
 app.post(
   "/api/v1/payment/stripe/webhook",
   bodyParser.raw({ type: "application/json" }),
   StripeWebhook
 );
 
-
-
-
 // ⚠️ NOW apply regular JSON parsing for all OTHER routes
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/api/v1/payment",PaymentRotue)
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Other routes
+// Logging middleware for debugging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
+// Payment and Card routes
+app.use('/api/v1/card', SaveCardRoute);
+app.use("/api/v1/payment", PaymentRotue);
+app.use("/api/v1/card", CardRoute);
+
+// Other existing routes
 app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
 app.use("/api/v1/activity", ActivityRouter);
-app.use("/api/v1/history",HistoryRoute)
+app.use("/api/v1/history", HistoryRoute);
+app.use('/api/v1/game', PcheckingRoute);
+app.use("/api/v1/search", searchRouter);
+app.use("/api/v1/offer", OfferRoute);
+app.use("/api/dashboard", Dashboard);
 
-/// check game is already purchase or not 
-app.use('/api/v1/game',PcheckingRoute)
+// ✨ NEW: NFT Marketplace Routes with Blockchain
+app.use("/api/v1/nft", NFTRouter);
+app.use("/api/v1/news", News);
 
-// Searching items
-app.use("/api/v1/search",searchRouter)
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    blockchain: {
+      nftContract: !!process.env.MYNFT_ADDRESS,
+      marketContract: !!process.env.MARKETPLACE_ADDRESS,
+      provider: !!process.env.ALCHEMY_RPC_URL
+    },
+    database: 'Connected'
+  });
+});
 
-// offer route 
-app.use("/api/v1/offer",OfferRoute)
-
-
-
-
-
-
-app.use("/api/v1/card",CardRoute)
-
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ 
+    error: 'Route not found',
+    path: req.path,
+    method: req.method
+  });
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: err.message || "Something went wrong" });
+  console.error('Server Error:', err.stack);
+  res.status(err.status || 500).json({ 
+    error: err.message || "Something went wrong",
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+  });
 });
 
 // Port from .env
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log('\n' + '='.repeat(60));
+  console.log('🚀 NFT Marketplace Server');
+  console.log('='.repeat(60));
+  console.log(`📡 Server: http://localhost:${PORT}`);
+  console.log(`🗄️  Database: ${process.env.MONGODB_URL ? 'Connected' : 'Not configured'}`);
+  console.log(`🔗 NFT Contract: ${process.env.MYNFT_ADDRESS || 'Not deployed'}`);
+  console.log(`🏪 Marketplace: ${process.env.MARKETPLACE_ADDRESS || 'Not deployed'}`);
+  console.log(`💰 Platform Wallet: ${process.env.PLATFORM_WALLET_ADDRESS || 'Not set'}`);
+  console.log('='.repeat(60) + '\n');
+});

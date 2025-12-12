@@ -1,79 +1,88 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = new mongoose.Schema({
-  Email: {
-    type: String,
-    // ✅ Remove required and make it conditional
-    required: function() {
-      return !(this.GoogleId || this.DiscordId || this.MetaMaskAddress);
+const UserSchema = new mongoose.Schema(
+  {
+    Email: {
+      type: String,
+      // ✅ Remove required and make it conditional
+      required: function () {
+        return !(this.GoogleId || this.DiscordId || this.MetaMaskAddress);
+      },
+      unique: true,
+      sparse: true, // ✅ Add sparse for unique constraint
+      lowercase: true,
+      match: [/\S+@\S+\.\S+/, "Please provide a valid email"],
     },
-    unique: true,
-    sparse: true, // ✅ Add sparse for unique constraint
-    lowercase: true,
-    match: [/\S+@\S+\.\S+/, "Please provide a valid email"],
+
+    FullName: {
+      type: String,
+      default: "",
+    },
+    Role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
+
+    Password: {
+      type: String,
+      minlength: [8, "Password should be at least 8 characters"],
+      default: undefined, // ✅ Explicitly set default to undefined
+    },
+
+    Bio: {
+      type: String,
+      default: "",
+    },
+
+    // Social Login Fields
+    GoogleId: {
+      type: String,
+      // unique: true,
+      sparse: true,
+    },
+
+    DiscordId: {
+      type: String,
+      // unique: true,
+      sparse: true,
+    },
+
+    TwitterId: {
+      type: String,
+      // unique: true,
+      sparse: true,
+    },
+
+    FacebookId: {
+      type: String,
+      // unique: true,
+      sparse: true,
+    },
+
+    // ✅ Add MetaMask specific field
+    MetaMaskAddress: {
+      type: String,
+      // unique: true,
+      sparse: true,
+      lowercase: true,
+    },
+
+    Avatar: {
+      type: String,
+      default: "",
+    },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-
-  FullName: {
-    type: String,
-    default: "",
-  },
-
-Password: {
-  type: String,
-  minlength: [8, "Password should be at least 8 characters"],
-  default:undefined, // ✅ Explicitly set default to undefined
-  
-},
-
-  Bio: {
-    type: String,
-    default: "",
-  },
-
-  // Social Login Fields
-  GoogleId: {
-    type: String,
-    // unique: true,
-    sparse: true,
-  },
-
-  DiscordId: { 
-    type: String, 
-    // unique: true, 
-    sparse: true 
-  },
-
-  TwitterId: { 
-    type: String, 
-    // unique: true, 
-    sparse: true 
-  },
-
-  FacebookId: { 
-    type: String, 
-    // unique: true, 
-    sparse: true 
-  },
-
-  // ✅ Add MetaMask specific field
-  MetaMaskAddress: {
-    type: String,
-    // unique: true,
-    sparse: true,
-    lowercase: true,
-  },
-
- 
- 
-
-  Avatar: {
-    type: String,
-    default: "",
-  },
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true,
+  }
+);
 
 // ✅ Modified pre-save middleware - only hash if password exists
 UserSchema.pre("save", async function (next) {

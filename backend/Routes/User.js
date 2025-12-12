@@ -1,14 +1,18 @@
-import { 
-  SignupUser, 
-  LoginUser, 
-  ForgotPassword, 
+import {
+  SignupUser,
+  LoginUser,
+  ForgotPassword,
   ResetPassword,
   GoogleAuth,
   DiscordAuth,
   GetProfile,
   EditProfile,
   MetaMaskAuth,
-  TwitterAuth
+  TwitterAuth,
+  GetAllUsers,
+  ToggleUserStatus, 
+  EditUser,
+  DeleteUser,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import upload from "../Middleware/UploadMulter.js";
@@ -43,7 +47,19 @@ Route.post("/user/twitter", TwitterAuth);
 // 👤 Get user profile (protected route)
 Route.get("/getProfile", authMiddleware, GetProfile);
 
+
+Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
+
+
+Route.delete("/delete/:userId", DeleteUser);
+
 // ✏️ Edit user profile (update info or upload avatar)
 Route.put("/profile", authMiddleware, upload.single("Avatar"), EditProfile);
+
+// ✅ Get all users (admin only)
+Route.get("/users", GetAllUsers);
+
+// ✅ NEW ROUTE: Toggle user active/inactive status (admin only)
+Route.patch("/user/status/:userId",  ToggleUserStatus);
 
 export { Route };
