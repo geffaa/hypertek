@@ -81,16 +81,20 @@ pipeline {
                 echo ":package: Backing up current deployment..."
 
                 sh """
-                    sudo mkdir -p $BACKUP_DIR
-                    sudo rm -rf $BACKUP_DIR/*
+                    # Create backup folders properly
+                    sudo mkdir -p $BACKUP_DIR/user
+                    sudo mkdir -p $BACKUP_DIR/admin
 
-                    # Backup user frontend
+                    sudo rm -rf $BACKUP_DIR/user/*
+                    sudo rm -rf $BACKUP_DIR/admin/*
+
+                    # Backup USER frontend
                     if [ -d "$FRONTEND_WEB_ROOT" ] && [ "\$(ls -A $FRONTEND_WEB_ROOT)" ]; then
                         echo "Backing up USER frontend..."
                         sudo cp -r $FRONTEND_WEB_ROOT/* $BACKUP_DIR/user/
                     fi
 
-                    # Backup admin frontend
+                    # Backup ADMIN frontend
                     if [ -d "$ADMIN_WEB_ROOT" ] && [ "\$(ls -A $ADMIN_WEB_ROOT)" ]; then
                         echo "Backing up ADMIN frontend..."
                         sudo cp -r $ADMIN_WEB_ROOT/* $BACKUP_DIR/admin/
