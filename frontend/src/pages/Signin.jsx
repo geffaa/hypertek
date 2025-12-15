@@ -59,16 +59,17 @@ function Login() {
           isLoggedInUser: true,
         })
       );
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.user.Role);
+
+      toast.success("Login successful!");
+
       if (res.data.user.Role === "admin") {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("role", res.data.user.Role);
-
-        // 🔴 IMPORTANT: React Router ko completely bypass karo
-        window.location.replace("https://admin-hyper-tek-game.deventiatech.com");
-        return; // ⬅️ VERY IMPORTANT
+        window.location.href = "https://admin-hyper-tek-game.deventiatech.com";
+      } else {
+        navigate("/dashboard");
       }
-
-      navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     } finally {
