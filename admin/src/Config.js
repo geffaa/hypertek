@@ -1,4 +1,4 @@
-const Dashboard_Base_Url="https://api-hyper-tek-games.deventiatech.com"
+const Dashboard_Base_Url="https://api-hyper-tek-games.deventiatech.com/api"
 const Image_Base_Url="https://api-hyper-tek-games.deventiatech.com"
 
 
