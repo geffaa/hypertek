@@ -9,6 +9,7 @@ import PageBackground from "../Common/BgEffect";
 import GlowingOrb from "../Common/BgColoring";
 import { Link } from "react-router-dom";
 import { NewsImage_Url } from "../../Config";
+import { BACKEND_BASE_URL } from "../../Config";
 
 export default function News() {
   const [news, setNews] = useState([]);
@@ -16,7 +17,7 @@ export default function News() {
   
 
   useEffect(() => {
-    fetch("http://localhost:4700/api/v1/news/getNews")
+    fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setNews(data.data);
