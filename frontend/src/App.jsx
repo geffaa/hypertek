@@ -64,7 +64,7 @@ import AddCollection from "./pages/DashboardPages/AddCollection";
 import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
 import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
-
+import ProtectedRoute from "../ProtectedRoute";
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -180,7 +180,7 @@ const hideLayoutRoutes = [
 
 
 
-<Route path="/dashboard" element={<DashboardLayout />}>
+<Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
 
   {/* Default dashboard home */}
   <Route index element={<UserDashboard />} />

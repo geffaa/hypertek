@@ -85,16 +85,17 @@ const UserSchema = new mongoose.Schema(
 );
 
 // ✅ Modified pre-save middleware - only hash if password exists
-UserSchema.pre("save", async function (next) {
-  try {
-    if (this.Password && this.isModified("Password")) {
-      const salt = await bcrypt.genSalt(10);
-      this.Password = await bcrypt.hash(this.Password, salt);
-    }
-    next();
-  } catch (err) {
-    next(err);
+UserSchema.pre("save", function (next) {
+  // If password already hashed by manual admin creation → skip
+  if (!this.isModified("Password")) return next();
+
+  // If password looks already hashed → skip hashing
+  if (this.Password && this.Password.startsWith("$2b$")) {
+    return next();
   }
+
+  this.Password = bcrypt.hashSync(this.Password, 10);
+  next();
 });
 
 // ✅ Method to compare passwords (only for password login)
