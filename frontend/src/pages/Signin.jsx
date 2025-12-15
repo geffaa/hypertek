@@ -34,20 +34,17 @@ function Login() {
     e.preventDefault();
     setLoading(true);
 
-    // Validation first
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       toast.error("Please enter a valid email address");
-          setLoading(false); // stop loader
+      setLoading(false);
       return;
     }
 
     if (formData.password.length < 8 || formData.password.length > 20) {
       toast.error("Password must be between 8 and 20 characters");
-         setLoading(false); // stop loader
+      setLoading(false);
       return;
     }
-
-    setLoading(true); // <-- show loader
 
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/login`, {
@@ -62,13 +59,20 @@ function Login() {
           isLoggedInUser: true,
         })
       );
+      if (res.data.user.Role === "admin") {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("role", res.data.user.Role);
 
-      toast.success("Login successful!");
-      navigate("/profile");
+        // 🔴 IMPORTANT: React Router ko completely bypass karo
+        window.location.replace("https://admin-hyper-tek-game.deventiatech.com");
+        return; // ⬅️ VERY IMPORTANT
+      }
+
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
     } finally {
-      setLoading(false); // <-- hide loader
+      setLoading(false);
     }
   };
 
@@ -76,7 +80,7 @@ function Login() {
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-       setLoading(true); // show loader
+      setLoading(true); // show loader
       try {
         // tokenResponse.access_token is what Google returns
         // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
@@ -97,16 +101,14 @@ function Login() {
       } catch (err) {
         console.error("Google login error:", err);
         toast.error(err.response?.data?.message || "Google login failed!");
+      } finally {
+        setLoading(false); // hide loader in all cases
       }
-      finally {
-      setLoading(false); // hide loader in all cases
-    }
     },
-      onError: () => {
-    toast.error("Google login failed!");
-    setLoading(false); // make sure loader stops if Google login fails
-  },
-    
+    onError: () => {
+      toast.error("Google login failed!");
+      setLoading(false); // make sure loader stops if Google login fails
+    },
   });
 
   // ---------------- Discord Login ----------------
@@ -126,7 +128,7 @@ function Login() {
     window.history.replaceState({}, document.title, "/login");
 
     const fetchDiscordUser = async () => {
-        setLoading(true); 
+      setLoading(true);
       try {
         const res = await axios.post(
           `${BACKEND_BASE_URL}/api/v1/user/discord`,
@@ -153,17 +155,16 @@ function Login() {
       } catch (err) {
         console.error("Discord login error:", err);
         toast.error(err.response?.data?.message || "Discord login failed!");
+      } finally {
+        setLoading(false); // stop loader in all cases
       }
-      finally {
-      setLoading(false); // stop loader in all cases
-    }
     };
 
     fetchDiscordUser();
   }, [dispatch, navigate]);
 
   const handleLogin = async () => {
-     setLoading(true); // 
+    setLoading(true); //
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed!");
@@ -275,10 +276,9 @@ function Login() {
       } else {
         toast.error("Login failed: " + (err.message || "Unknown error"));
       }
-      
     } finally {
-    setLoading(false); // stop loader no matter what
-  }
+      setLoading(false); // stop loader no matter what
+    }
   };
 
   return (

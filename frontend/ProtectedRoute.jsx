@@ -1,0 +1,12 @@
+import { Navigate } from "react-router-dom";
+
+export default function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
+  if (!token) return <Navigate to="/signin" />; // not logged in
+  if (role === "admin") return <Navigate to="https://admin-hyper-tek-game.deventiatech.com" />; // redirect admin to admin frontend
+  if (role !== "user") return <Navigate to="/signin" />; // invalid role
+
+  return children;
+}

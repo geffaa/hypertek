@@ -20,15 +20,16 @@ const ensureAdminExists = async () => {
       console.log("✅ Admin already exists");
       return;
     }
-
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
-    await UserModel.create({
+    const admin = new UserModel({
       Email: adminEmail,
       Password: hashedPassword,
       Role: "admin",
       isActive: true,
     });
+
+    await admin.save({ validateModifiedOnly: true });
 
     console.log("✅ Admin Created Successfully");
   } catch (error) {
