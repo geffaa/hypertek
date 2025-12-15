@@ -1,31 +1,108 @@
 import React, { useState } from "react";
 import uploadIcon from "../assets/images/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/images/CreateCollection/ChainIcon.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast, { ToastIcon } from "react-hot-toast";
+import { useSelector } from "react-redux";
+
+
+import { User_Dashboard_Url} from "../Config"
 
 function CreateCollections() {
-  const [selectedImage, setSelectedImage] = useState(null);
 
-  // Handle file selection
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setSelectedImage(reader.result);
-      reader.readAsDataURL(file);
-    }
-  };
 
-  // Handle drag and drop
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setSelectedImage(reader.result);
-      reader.readAsDataURL(file);
+  // getting the data from the redux store 
+const user = useSelector((state) => state.auth.user);
+const token = useSelector((state) => state.auth.token);
+const isLoggedIn = useSelector((state) => state.auth.isLoggedInUser);
+
+
+
+
+console.log("your user data fro mthe redux store are :",user.id);
+
+  const navigate = useNavigate();
+  const [previewImage, setPreviewImage] = useState(null);
+
+const [recipientWallet, setRecipientWallet] = useState("");
+   const [selectedImage, setSelectedImage] = useState(null);
+  const [collectionType, setCollectionType] = useState("");
+  const [name, setName] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [chain, setChain] = useState("");
+  const [royaltyPercent, setRoyaltyPercent] = useState(0);
+  const [royaltyWallet, setRoyaltyWallet] = useState("");
+  const [supply, setSupply] = useState(1);
+
+
+
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    setSelectedImage(file); // for API
+    setPreviewImage(URL.createObjectURL(file)); // for preview
+  }
+};
+
+const handleDrop = (event) => {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    setSelectedImage(file); // for API
+    setPreviewImage(URL.createObjectURL(file)); // for preview
+  }
+};
+
+
+
+  // create collection handler 
+
+ const handleSubmit = async () => {
+  try {
+    if (!selectedImage) {
+      alert("Please select an image!");
+      return;
     }
-  };
+
+    const userId = user.id;
+    if(!userId){
+      toast.error("User Id is required")
+    }
+
+    const formData = new FormData();
+    formData.append("userId",userId)
+    formData.append("creator","user");
+    formData.append("image", selectedImage);
+    formData.append("name", name);
+    formData.append("symbol", symbol);
+    formData.append("Type", collectionType);
+    formData.append("chain", chain);
+    formData.append("owner", recipientWallet); // recipient wallet
+    formData.append("royaltyPercent", Number(royaltyPercent)); // numeric
+    formData.append("royaltyWallet", royaltyWallet);
+    formData.append("supply", Number(supply)); // numeric
+
+    const response = await axios.post(
+      `${User_Dashboard_Url}/nft/collection/create`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    console.log("API RESPONSE =>", response.data);
+    toast.success("User Collection Created Successfully")
+    navigate("/dashboard/nfa-details")
+  } catch (err) {
+    console.error("CREATE COLLECTION ERROR =>", err.response || err);
+    toast.error("There is some problem while creating collection")
+  }
+};
+
+
 
   const handleDragOver = (event) => event.preventDefault();
 
@@ -72,13 +149,13 @@ function CreateCollections() {
             onDragOver={handleDragOver}
             onClick={() => document.getElementById("file-upload").click()}
           >
-            {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt="Preview"
-                className="max-w-full max-h-full rounded-md"
-              />
-            ) : (
+           {previewImage ? (
+  <img
+    src={previewImage}
+    alt="Preview"
+    className="max-w-full max-h-full rounded-md"
+  />
+) :(
               <div className="flex flex-col items-center justify-center gap-2">
                 <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
                 <div className="relative w-[240px] h-[49px] flex items-center justify-center rounded-md">
@@ -109,6 +186,8 @@ function CreateCollections() {
               <label className="text-white text-base font-normal">Name</label>
               <input
                 type="text"
+                  value={name}
+        onChange={(e) => setName(e.target.value)}
                 placeholder="Add Contract Name"
                 className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
               />
@@ -119,6 +198,8 @@ function CreateCollections() {
               <label className="text-white text-base font-normal">Token Symbol</label>
               <input
                 type="text"
+                 value={symbol}
+        onChange={(e) => setSymbol(e.target.value)}
                 placeholder="Create Name"
                 className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
               />
@@ -133,6 +214,8 @@ function CreateCollections() {
                 </div>
                 <input
                   type="text"
+                    value={chain}
+        onChange={(e) => setChain(e.target.value)}
                   placeholder="USDT"
                   className="w-full bg-transparent outline-none text-white placeholder-white/60"
                 />
@@ -148,6 +231,8 @@ function CreateCollections() {
                 <div className="flex items-center h-12 px-3 border focus-within:border-blue-500  hover:border-blue-500  border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
+                     value={royaltyPercent}
+        onChange={(e) => setRoyaltyPercent(e.target.value)}
                     defaultValue="0"
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/60"
                   />
@@ -162,17 +247,39 @@ function CreateCollections() {
                 <div className="flex items-center h-12 focus-within:border-blue-500  hover:border-blue-500  border-gray-600 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
+                     value={supply}
+        onChange={(e) => setSupply(e.target.value)}
                     defaultValue="0"
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/60"
                   />
                 </div>
               </div>
+
+              
             </div>
+
+{/* Collection Type */}
+<div className="flex flex-col gap-2">
+  <label className="text-white text-base font-normal">Collection Type</label>
+  <select
+    value={collectionType}
+    onChange={(e) => setCollectionType(e.target.value)}
+    className="w-full h-12 px-3 rounded-md text-white bg-transparent border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-transparent transition"
+  >
+    <option value="" className="bg-gray-700 text-white">Select Type</option>
+    <option value="NFA" className="bg-gray-700 text-white">NFA</option>
+    <option value="Land" className="bg-gray-700 text-white">Land</option>
+  </select>
+</div>
+
+
 
             {/* Recipient Wallet */}
             <div className="flex flex-col gap-2 mt-4">
               <label className="text-white text-base font-normal">Recipient Wallet Address</label>
               <input
+              value={recipientWallet}
+  onChange={(e) => setRecipientWallet(e.target.value)}
                 type="text"
                 placeholder="Add wallet address"
                 className="w-full h-12 px-3 rounded-md border border-gray-600 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
@@ -197,7 +304,7 @@ function CreateCollections() {
           <button className="border border-white text-white hover:bg-white/10 transition-colors w-32 h-10 rounded-md font-medium">
             Cancel
           </button>
-          <button className="bg-blue-800 hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white">
+          <button  onClick={handleSubmit} className="bg-blue-800 hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white">
             Publish Contract
           </button>
         </div>

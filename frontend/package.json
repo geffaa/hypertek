@@ -27,7 +27,7 @@
     "chart.js": "^4.5.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "ethers": "^6.15.0",
-    "framer-motion": "^12.23.24",
+    "framer-motion": "^12.23.25",
     "jwt-decode": "^3.1.2",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
