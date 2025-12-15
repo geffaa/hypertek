@@ -2,30 +2,102 @@ import React, { useState } from "react";
 import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
 import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { User_Dashboard_Url } from "../../Config";
+import toast from "react-hot-toast";
+
+
+
 
 function EditNfa() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const location = useLocation();
+ const { collection } = location.state || {};
+ const navigate = useNavigate();
+const [imageFile, setImageFile] = useState(null);
+
+
+
+ console.log("your collection data are here :",collection);
+const [selectedImage, setSelectedImage] = useState(collection?.image || null);
+
+
+const [formData, setFormData] = useState({
+  name: collection?.name || "",
+  symbol: collection?.symbol || "",
+  chain: collection?.chain || "",
+  Type: collection?.Type || "",
+  royaltyPercent: collection?.creatorFee || "",
+  supply: collection?.supply || "",
+  royaltyWallet: collection?.recipient || "",
+});
+
 
   // Handle file selection
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setSelectedImage(reader.result);
-      reader.readAsDataURL(file);
-    }
-  };
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    setImageFile(file); // <-- important (store file)
+    const reader = new FileReader();
+    reader.onload = () => setSelectedImage(reader.result);
+    reader.readAsDataURL(file);
+  }
+};
 
   // Handle drag and drop
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setSelectedImage(reader.result);
-      reader.readAsDataURL(file);
+ const handleDrop = (event) => {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    setImageFile(file); // <-- SAVE FILE
+    const reader = new FileReader();
+    reader.onload = () => setSelectedImage(reader.result);
+    reader.readAsDataURL(file);
+  }
+};
+
+
+const handleUpdate = async () => {
+  try {
+    const id = collection?._id || collection?.id;
+
+    if (!id) {
+      toast.error("Collection ID missing");
+      return;
     }
-  };
+
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("symbol", formData.symbol);
+    form.append("chain", formData.chain);
+    form.append("Type", formData.Type);
+    form.append("royaltyPercent", formData.royaltyPercent);
+    form.append("supply", formData.supply);
+    form.append("royaltyWallet", formData.royaltyWallet);
+
+    // Only append image if user uploaded a new one
+    if (imageFile) {
+      form.append("image", imageFile);
+    }
+
+    const response = await axios.put(
+      `${User_Dashboard_Url}/nft/collection/update/${id}`,
+      form,
+      {
+        headers: { "Content-Type": "multipart/form-data" }
+      }
+    );
+
+    if (response.data.success) {
+      toast.success("Collection Updated Successfully");
+      navigate("/dashboard/nfa-details");
+    }
+  } catch (error) {
+    console.log("UPDATE ERROR:", error);
+    toast.error("Failed to update collection");
+  }
+};
 
   const handleDragOver = (event) => event.preventDefault();
 
@@ -59,43 +131,47 @@ function EditNfa() {
       <div className="relative z-50">
         <div className="flex gap-10 mt-20 mx-8">
           {/* Left Side: Image Upload */}
-          <div
-            className="flex items-center justify-center cursor-pointer backdrop-blur-sm bg-white/5 border border-white/30 rounded-md"
-            style={{
-              width: "456px",
-              height: "440px",
-              borderStyle: "dashed",
-              position: "relative",
-              boxSizing: "border-box",
-            }}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-            onClick={() => document.getElementById("file-upload").click()}
-          >
-            {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt="Preview"
-                className="max-w-full max-h-full rounded-md"
-              />
-            ) : (
-              <div className="flex flex-col items-center justify-center gap-2">
-                <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
-                <div className="relative w-[240px] h-[49px] flex items-center justify-center rounded-md">
-                  <input
-                    type="file"
-                    id="file-upload"
-                    accept="image/*"
-                    className="absolute w-full h-full opacity-0 pointer-events-none"
-                    onChange={handleFileChange}
-                  />
-                  <label htmlFor="file-upload" className="text-center text-white">
-                    <span className="font-bold text-blue-400">Click to upload</span> or drag and drop
-                  </label>
-                </div>
-              </div>
-            )}
-          </div>
+     <div
+  className="flex items-center justify-center cursor-pointer backdrop-blur-sm bg-white/5 border border-white/30 rounded-md relative"
+  style={{
+    width: "456px",
+    height: "440px",
+    borderStyle: "dashed",
+    boxSizing: "border-box",
+  }}
+  onDrop={handleDrop}
+  onDragOver={handleDragOver}
+  onClick={() => document.getElementById("file-upload").click()} // parent triggers input
+>
+  {/* Preview Image */}
+  {selectedImage && (
+    <img
+      src={selectedImage}
+      alt="Preview"
+      className="max-w-full max-h-full rounded-md"
+    />
+  )}
+
+  {/* File Input */}
+  <input
+    type="file"
+    id="file-upload"
+    accept="image/*"
+    onChange={handleFileChange}
+    className="hidden" // hide it completely
+  />
+
+  {/* Placeholder */}
+  {!selectedImage && (
+    <div className="flex flex-col items-center justify-center gap-2">
+      <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
+      <div className="text-center text-white">
+        <span className="font-bold text-blue-400">Click to upload</span> or drag & drop
+      </div>
+    </div>
+  )}
+</div>
+
 
           {/* Right Side: Form */}
           <div className="relative z-50 rounded-lg p-6 w-[456px] flex flex-col gap-6">
@@ -108,6 +184,8 @@ function EditNfa() {
             <div className="flex flex-col gap-2">
               <label className="text-white text-base font-normal">Name</label>
               <input
+               value={formData.name}
+  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 type="text"
                 placeholder="Add Contract Name"
                 className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
@@ -120,6 +198,8 @@ function EditNfa() {
               <input
                 type="text"
                 placeholder="Create Name"
+                 value={formData.symbol}
+  onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
                 className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
               />
             </div>
@@ -133,11 +213,43 @@ function EditNfa() {
                 </div>
                 <input
                   type="text"
+                    value={formData.chain}
+  onChange={(e) => setFormData({ ...formData, chain: e.target.value })}
                   placeholder="USDT"
                   className="w-full bg-transparent outline-none text-white placeholder-white/60"
                 />
               </div>
             </div>
+             <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+  <label
+    htmlFor="type"
+    style={{
+      fontFamily: "Inter, sans-serif",
+      fontWeight: 400,
+      fontStyle: "normal",
+      fontSize: "18px",
+      lineHeight: "100%",
+      letterSpacing: "0%",
+      color: "white",
+    }}
+  >
+    Collection Type
+  </label>
+
+<select
+  id="Type"
+   value={formData.Type}
+  onChange={(e) => setFormData({ ...formData, Type: e.target.value })}
+  className="w-full h-10 px-3 rounded-md bg-transparent text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors"
+>
+  <option value="" className="text-black">Select Type</option>
+  <option value="NFA" className="text-black">NFA</option>
+  <option value="Land" className="text-black">Land</option>
+</select>
+
+
+</div>
+
 
             {/* Earnings */}
             <span className="text-white text-xl font-semibold">Earnings</span>
@@ -148,6 +260,8 @@ function EditNfa() {
                 <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
+                      value={formData.royaltyPercent}
+  onChange={(e) => setFormData({ ...formData, royaltyPercent: e.target.value })}
                     defaultValue="0"
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/60"
                   />
@@ -162,6 +276,8 @@ function EditNfa() {
                 <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center h-12 px-3 border border-gray-600 rounded-md bg-white/10">
                   <input
                     type="text"
+                     value={formData.supply}
+  onChange={(e) => setFormData({ ...formData, supply: e.target.value })}
                     defaultValue="0"
                     className="w-full bg-transparent border-none outline-none text-white placeholder-white/60"
                   />
@@ -174,6 +290,8 @@ function EditNfa() {
               <label className="text-white text-base font-normal">Recipient Wallet Address</label>
               <input
                 type="text"
+                 value={formData.royaltyWallet}
+  onChange={(e) => setFormData({ ...formData, royaltyWallet: e.target.value })}
                 placeholder="Add wallet address"
                 className="w-full h-12 px-3 rounded-md border border-gray-600 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
               />
@@ -197,7 +315,7 @@ function EditNfa() {
           <button className="border border-white text-white hover:bg-white/10 transition-colors w-32 h-10 rounded-md font-medium">
             Cancel
           </button>
-          <button className="bg-blue-800 hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white">
+          <button   onClick={handleUpdate} className="bg-blue-800 hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white">
             Publish Contract
           </button>
         </div>

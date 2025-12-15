@@ -10,34 +10,27 @@ import { FaUserCircle } from "react-icons/fa";
 import { FiCamera } from "react-icons/fi";
 import FullScreenLoader from "../../Components/Common/Spinner";
 import { useSelector } from "react-redux";
-import { BACKEND_BASE_URL } from "../../Config";
+import { User_Dashboard_Url } from "../../Config";
 
 function EditProfile() {
   const navigate = useNavigate();
   const walletAddress = "0xc416a645...b21a";
   const [copied, setCopied] = useState(false);
+  const user = useSelector((state) => state.auth.user);
 
-  const token =
-    useSelector((state) => state.auth.token) ||
-    JSON.parse(localStorage.getItem("auth"))?.token;
+  console.log("your login user in profile :",user);
+
 
   const location = useLocation();
-  const { userData } = location.state || {};
-  const dummyData = {
-    FullName: "John Doe",
-    Email: "john.doe@example.com",
-    Bio: "This is a sample bio",
-    Avatar: null,
-    Password: true,
-    DiscordId: null,
-    GoogleId: null,
-    _id: "1234567890",
-  };
-  const safeUserData = userData || dummyData;
+  const safeUserData = user || {};
+const [name, setName] = useState(user?.FullName || "");
+const [email, setEmail] = useState(user?.Email || "");
+const [bio, setBio] = useState(user?.Bio || "");
+const [userName, setUserName] = useState(user?.UserName || "");
 
-  const [name, setName] = useState(safeUserData.FullName);
-  const [email, setEmail] = useState(safeUserData.Email);
-  const [bio, setBio] = useState(safeUserData.Bio);
+
+
+  
   const [currentPass, setCurrentPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -74,6 +67,10 @@ function EditProfile() {
       return toast.error("New password and confirm password do not match");
     }
 
+
+    if(!user.id){
+      toast.error("User Id is required ")
+    }
     try {
       setLoading(true);
       const formData = new FormData();
@@ -81,19 +78,21 @@ function EditProfile() {
       formData.append("Email", email);
       formData.append("Password", currentPass);
       formData.append("NewPassword", newPass);
+      formData.append("UserName", userName);
+
       formData.append("Bio", bio);
       if (file) formData.append("Avatar", file);
 
-      const res = await axios.put(
-        `${BACKEND_BASE_URL}/api/v1/profile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+     const res = await axios.put(
+  `${User_Dashboard_Url}/edit/${user.id}`,
+  formData,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }
+);
+
 
       toast.success("Profile updated successfully!");
       navigate("/profile", { state: { userData: res.data.user } });
@@ -203,7 +202,7 @@ function EditProfile() {
                 <p className="text-xs sm:text-sm text-gray-400 break-words flex items-center gap-2">
                   {safeUserData.DiscordId ||
                     safeUserData.GoogleId ||
-                    safeUserData._id ||
+                    safeUserData.id ||
                     "null"}
                   <button
                     onClick={handleCopy}
@@ -244,13 +243,15 @@ function EditProfile() {
                 <input
                   type="text"
                   value={name}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
-                      setName(value);
-                    }
-                  }}
-                  placeholder="Full Name"
+                
+  onChange={(e) => {
+     const value = e.target.value;
+     if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
+        setName(value);
+     }
+  }}
+                  placeholder={user?.FullName || "Full Name"}
+
                   className={inputClass}
                 />
                 {name.length >= 30 && (
@@ -260,14 +261,14 @@ function EditProfile() {
                 )}
                 <input
                   type="text"
-                  value={name}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
-                      setName(value);
-                    }
-                  }}
-                  placeholder="User Name"
+                 value={userName}
+  onChange={(e) => {
+    const value = e.target.value;
+    if (value.length <= 30 && /^[a-zA-Z0-9_]*$/.test(value)) {
+      setUserName(value);
+    }
+  }}
+  placeholder={user?.UserName || "User Name"}
                   className={inputClass}
                 />
                 {name.length >= 30 && (
@@ -292,7 +293,8 @@ function EditProfile() {
                 value={email}
                 disabled
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+              placeholder={user?.Email || "Email"}
+
                 className={inputClass}
               />
             </div>
@@ -303,7 +305,7 @@ function EditProfile() {
                 className="block text-white font-bold text-[20.97px] leading-[100%] my-8"
                 style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
               >
-                Reset Password
+                Enter Your Bio
               </label>
 
               <textarea

@@ -5,31 +5,106 @@ import Collectionimage from "../../assets/images/CreateCollection/collection.png
 import EditImage from "../../assets/edit.png";
 import DeleteImage from "../../assets/delete.png";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { User_Dashboard_Url } from "../../Config";
+import { ToastIcon } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 function CollectionDetails() {
-  const [collections, setCollections] = useState([
-    {
-      id: 1,
-      name: "Character",
-      image: Collectionimage,
-      supply: 120,
-      status: true,
-    },
-    { id: 2, name: "NFA", image: Collectionimage, supply: 80, status: false },
-    {
-      id: 3,
-      name: "Weapon",
-      image: Collectionimage,
-      supply: 200,
-      status: true,
-    },
-  ]);
+  const [collections, setCollections] = useState([]);
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedId, setSelectedId] = useState(null);
 
-  const toggleStatus = (id) => {
+
+  
+  const user = useSelector((state) => state.auth.user);
+  // console.log("your login user id is :",user);
+
+useEffect(() => {
+  if (!user?.id){
+    toast.error("User id is requried")
+  }
+
+  async function fetchCollections() {
+    try {
+      const res = await axios.get(
+        `${User_Dashboard_Url}/nft/collection/get/${user.id}`
+      );
+      console.log("your user Dashboard data Aare :",res);
+
+
+   setCollections(
+  res.data.collection.map((item) => ({
+    id: item._id,
+    name: item.collection.name,
+    symbol: item.collection.symbol,
+    chain: item.collection.chain,
+    creatorFee: item.collection.royaltyPercent,
+    supply: item.collection.supply,
+    image: `${User_Dashboard_Url}${item.collection.image}`,
+    recipient: item.collection.owner,
+    status: item.status === "active" ? true : false, // map active/inactive
+  }))
+);
+
+    } catch (err) {
+      console.log("Fetch error:", err);
+    }
+  }
+
+  fetchCollections();
+}, [user]);
+
+
+const handleDelete = async () => {
+  try {
+    await axios.delete(`${User_Dashboard_Url}/nft/collection/delete/${selectedId}`);
+    setCollections(prev => prev.filter(col => col.id !== selectedId));
+    toast.success("Collection deleted successfully");
+    setIsModalOpen(false);
+  } catch (err) {
+    console.error("Delete error:", err);
+    toast.error("Failed to delete collection");
+  }
+};
+
+
+
+/// change the status api 
+const toggleStatus = async (id, currentStatus) => {
+  try {
+    // Determine new status for API
+    const newStatus = currentStatus ? "inactive" : "active";
+
+    if (!id) {
+      toast.error("Collection Id is required");
+      return;
+    }
+
+    // Call backend API
+    await axios.put(`${User_Dashboard_Url}/nft/status/${id}`, {
+      status: newStatus,
+    });
+
+    // Update local state so UI switches correctly
     setCollections((prev) =>
-      prev.map((col) => (col.id === id ? { ...col, status: !col.status } : col))
+      prev.map((col) =>
+        col.id === id ? { ...col, status: !currentStatus } : col
+      )
     );
-  };
+
+    toast.success(`Status updated to ${newStatus}`);
+  } catch (err) {
+    console.error("Status update error:", err);
+    toast.error("Failed to update status");
+  }
+};
+
+
 
   return (
     <div className=" mt-12 flex h-[700px] bg-black flex-col">
@@ -78,7 +153,7 @@ function CollectionDetails() {
             />
           </div>
          <Link
-  to="/dashboard/add-nfts"
+  to="/dashboard"
   className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
 >
   Add NFA
@@ -118,15 +193,20 @@ function CollectionDetails() {
           <td className="px-6 py-4 text-white/80 font-medium">{col.supply}</td>
           <td className="px-6 py-4 text-white/80 font-medium">{col.recipient}</td>
           <td className="px-6 py-4 flex gap-4">
-            <Link to="/dashboard/edit-nfa">
+            <Link to="/dashboard/edit-nfa"  state={{ collection: col }}>
               <img src={EditImage} alt="edit" className="w-4 h-4 cursor-pointer" />
             </Link>
-            <img src={DeleteImage} alt="delete" className="w-3 h-4 cursor-pointer" />
+            <button  onClick={() => {
+    setSelectedId(col.id); // store the id to delete
+    setIsModalOpen(true);   // open modal
+  }}>
+              <img src={DeleteImage} alt="delete" className="w-3 h-4 cursor-pointer" />
+            </button>
           </td>
           <td className="px-6 py-4">
             <Switch
-              checked={col.status}
-              onChange={() => toggleStatus(col.id)}
+               checked={col.status}
+  onChange={() => toggleStatus(col.id, col.status)}
               sx={{
                 width: 47,
                 height: 20,
@@ -182,6 +262,41 @@ function CollectionDetails() {
     background-color: rgba(255, 255, 255, 0.5);
   }
 `}</style>
+
+<AnimatePresence>
+  {isModalOpen && (
+    <motion.div
+      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-gray-800 rounded-lg p-6 w-96 flex flex-col gap-4"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.8 }}
+      >
+        <h2 className="text-white text-lg font-semibold">Confirm Delete</h2>
+        <p className="text-white/70">Are you sure you want to delete this collection?</p>
+        <div className="flex justify-end gap-4 mt-4">
+          <button
+            className="px-4 py-2 border border-white text-white rounded-md hover:bg-white/10"
+            onClick={() => setIsModalOpen(false)}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-red-600 rounded-md text-white hover:bg-red-700"
+            onClick={handleDelete} // your delete API call
+          >
+            Delete
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
 
 
