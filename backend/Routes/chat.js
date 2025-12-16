@@ -133,7 +133,6 @@ router.post(
   authMiddleware(["user"]),
   async (req, res) => {
     const { adminId, message } = req.body;
-
     let room = await ChatRoom.findOne({
       adminId,
       userId: req.user.id
