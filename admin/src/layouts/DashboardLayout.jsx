@@ -3,7 +3,12 @@ import Sidebar from "../components/common/sidebar";
 import Header from "../components/common/header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../components/common/LogoutModel";
-import { useState } from "react";
+
+
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+
 
 const DashboardLayout = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);

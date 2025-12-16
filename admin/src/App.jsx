@@ -31,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DashboardLayout />}>
+        <Route path="/:userId" element={<DashboardLayout />}>
           {/* Default page */}
           <Route index element={<Dashboard />} />
 

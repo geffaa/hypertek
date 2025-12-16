@@ -1,7 +1,7 @@
 // src/services/socket.js
 import { io } from "socket.io-client";
 
-const SERVER_URL = "https://api-hyper-tek-games.deventiatech.com"; // backend server URL
+const SERVER_URL = "http://localhost:4700"; // backend server URL
 
 let socket;
 
