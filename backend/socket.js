@@ -3,7 +3,7 @@ import Message from "./Models/Message.js";
 import ChatRoom from "./Models/ChatRoom.js";
 
 export const socketHandler = (io) => {
-  // Socket authentication middleware
+  // 🔐 Socket auth
   io.use((socket, next) => {
     const token = socket.handshake.auth?.token;
     if (!token) return next(new Error("No token"));
@@ -13,45 +13,81 @@ export const socketHandler = (io) => {
       socket.user = decoded; // { id, role }
       next();
     } catch (err) {
-      console.log("❌ Invalid socket token:", err.message);
       next(new Error("Invalid token"));
     }
   });
 
   io.on("connection", (socket) => {
-    console.log(`✅ Socket connected: ${socket.id} | User: ${socket.user.id} (${socket.user.role})`);
+    console.log(`✅ Connected: ${socket.user.id} (${socket.user.role})`);
 
-    // ---------------- JOIN ROOM ----------------
+    /**
+     * JOIN ROOM
+     * admin → userId required
+     * user → adminId required
+     */
     socket.on("joinRoom", async ({ userId, adminId }) => {
       try {
         let room;
 
         if (socket.user.role === "admin") {
-          // Admin clicks on user → find/create room
-          room = await ChatRoom.findOne({ adminId: socket.user.id, userId });
-          if (!room) room = await ChatRoom.create({ adminId: socket.user.id, userId });
-        } else {
-          // User → fixed admin
-          room = await ChatRoom.findOne({ userId: socket.user.id });
-          if (!room && adminId) {
-            room = await ChatRoom.create({ adminId, userId: socket.user.id });
+          if (!userId) return;
+
+          room = await ChatRoom.findOne({
+            adminId: socket.user.id,
+            userId
+          });
+
+          if (!room) {
+            room = await ChatRoom.create({
+              adminId: socket.user.id,
+              userId
+            });
           }
         }
 
-        if (room) {
-          socket.join(room._id.toString());
-          console.log(`🟢 Socket ${socket.id} joined room ${room._id}`);
-          socket.emit("roomJoined", room._id);
+        if (socket.user.role === "user") {
+          if (!adminId) return;
+
+          room = await ChatRoom.findOne({
+            adminId,
+            userId: socket.user.id
+          });
+
+          if (!room) {
+            room = await ChatRoom.create({
+              adminId,
+              userId: socket.user.id
+            });
+          }
         }
+
+        socket.join(room._id.toString());
+        socket.emit("roomJoined", room._id);
+        console.log(`🟢 Joined room: ${room._id}`);
       } catch (err) {
-        console.error("❌ Error joining room:", err);
+        console.error("❌ joinRoom error:", err);
       }
     });
 
-    // ---------------- SEND MESSAGE ----------------
+    /**
+     * SEND MESSAGE (ADMIN & USER SAME LOGIC)
+     */
     socket.on("sendMessage", async ({ roomId, message }) => {
       try {
         if (!roomId || !message) return;
+
+        const room = await ChatRoom.findById(roomId);
+        if (!room) return;
+
+        // 🔐 Security check
+        if (
+          (socket.user.role === "admin" &&
+            room.adminId.toString() !== socket.user.id) ||
+          (socket.user.role === "user" &&
+            room.userId.toString() !== socket.user.id)
+        ) {
+          return;
+        }
 
         const newMsg = await Message.create({
           roomId,
@@ -60,16 +96,14 @@ export const socketHandler = (io) => {
           message
         });
 
-        // Emit message to all clients in this room
         io.to(roomId).emit("receiveMessage", newMsg);
       } catch (err) {
-        console.error("❌ Error sending message:", err);
+        console.error("❌ sendMessage error:", err);
       }
     });
 
-    // ---------------- DISCONNECT ----------------
     socket.on("disconnect", () => {
-      console.log(`🔴 Socket disconnected: ${socket.id} | User: ${socket.user.id}`);
+      console.log(`🔴 Disconnected: ${socket.user.id}`);
     });
   });
 };
