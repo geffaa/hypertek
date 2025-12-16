@@ -32,6 +32,7 @@
     "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-twitter-oauth2": "^2.1.1",
+    "socket.io": "^4.8.1",
     "stripe": "^19.3.1"
   },
   "devDependencies": {

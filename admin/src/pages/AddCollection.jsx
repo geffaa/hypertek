@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import searchImage from "../assets/search.png";
@@ -8,7 +6,7 @@ import DeleteImage from "../assets/delete.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url,Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
 function AddCollection() {
   const [collections, setCollections] = useState([]);
@@ -17,50 +15,49 @@ function AddCollection() {
   const [selectedCollection, setSelectedCollection] = useState(null);
 
   // Fetch data from API
-useEffect(() => {
-  const fetchCollections = async () => {
-    if (!Dashboard_Base_Url) {
-      toast.error("Sorry Base url is required");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      const response = await axios.get(`${Dashboard_Base_Url}/v1/nft/all`);
-      console.log("Collections response:", response.data);
-
-      // ✅ Use "nfts" because API returns nfts
-      if (response.data.success && response.data.nfts) {
-        const mappedCollections = response.data.nfts.map((item, index) => ({
-          id: item._id,
-          indexId: index + 1,
-          name: item.collection?.name || "Unnamed Collection",
-          image: item.collection?.image || "",
-          supply: item.collection?.supply || 0,
-          
-          // use actual status from API ✔
-          status: item.status === "active" ? true : false,
-
-
-          _id: item._id,
-          collectionData: item.collection,
-        }));
-
-        setCollections(mappedCollections);
-      } else {
-        setCollections([]);
+  useEffect(() => {
+    const fetchCollections = async () => {
+      if (!Dashboard_Base_Url) {
+        toast.error("Sorry Base url is required");
+        return;
       }
-    } catch (error) {
-      console.error("Error fetching collections:", error);
-      toast.error("Error fetching collections");
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  fetchCollections();
-}, []);
+      try {
+        setLoading(true);
+
+        const response = await axios.get(`${Dashboard_Base_Url}/v1/nft/all`);
+        console.log("Collections response:", response.data);
+
+        // ✅ Use "nfts" because API returns nfts
+        if (response.data.success && response.data.nfts) {
+          const mappedCollections = response.data.nfts.map((item, index) => ({
+            id: item._id,
+            indexId: index + 1,
+            name: item.collection?.name || "Unnamed Collection",
+            image: item.collection?.image || "",
+            supply: item.collection?.supply || 0,
+
+            // use actual status from API ✔
+            status: item.status === "active" ? true : false,
+
+            _id: item._id,
+            collectionData: item.collection,
+          }));
+
+          setCollections(mappedCollections);
+        } else {
+          setCollections([]);
+        }
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+        toast.error("Error fetching collections");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCollections();
+  }, []);
 
   const toggleStatus = (id) => {
     setCollections((prev) =>
@@ -74,14 +71,14 @@ useEffect(() => {
     setShowDeleteModal(true);
   };
 
-  // Delete the item 
+  // Delete the item
   const handleDeleteCollection = async () => {
     if (!selectedCollection?._id) {
       toast.error("Item ID is required");
       return;
     }
-    if(!Dashboard_Base_Url){
-      toast.error("Base url is required")
+    if (!Dashboard_Base_Url) {
+      toast.error("Base url is required");
     }
 
     try {
@@ -91,7 +88,9 @@ useEffect(() => {
 
       if (response.data.success) {
         // Remove the deleted item from state
-        setCollections(prev => prev.filter(c => c._id !== selectedCollection._id));
+        setCollections((prev) =>
+          prev.filter((c) => c._id !== selectedCollection._id)
+        );
         toast.success("Collection deleted successfully!");
         setShowDeleteModal(false);
         setSelectedCollection(null);
@@ -104,43 +103,43 @@ useEffect(() => {
     }
   };
 
-/// handle collection status 
-const HandleCollectionStatus = async (collection) => {
-  if (!Dashboard_Base_Url || !collection?._id) return;
+  /// handle collection status
+  const HandleCollectionStatus = async (collection) => {
+    if (!Dashboard_Base_Url || !collection?._id) return;
 
-  console.log("your collection is :",collection.status);
-  try {
-    // Determine the new status: toggle between 'active' and 'inactive'
-    const newStatus = collection.status === true || collection.status === "active"
-      ? "inactive"
-      : "active";
+    console.log("your collection is :", collection.status);
+    try {
+      // Determine the new status: toggle between 'active' and 'inactive'
+      const newStatus =
+        collection.status === true || collection.status === "active"
+          ? "inactive"
+          : "active";
 
-    console.log("Toggling status to:", newStatus);
+      console.log("Toggling status to:", newStatus);
 
-    // Call API to update status
-    const response = await axios.put(
-      `${Dashboard_Base_Url}/v1/nft/status/${collection._id}`,
-      { status: newStatus }
-    );
+      // Call API to update status
+      const response = await axios.put(
+        `${Dashboard_Base_Url}/v1/nft/status/${collection._id}`,
+        { status: newStatus }
+      );
 
-    // Update local state ONLY after API succeeds
-    setCollections((prev) =>
-      prev.map((col) =>
-        col._id === collection._id
-          ? { ...col, status: response.data.nft.status === "active" } // store as boolean for Switch
-          : col
-      )
-    );
+      // Update local state ONLY after API succeeds
+      setCollections((prev) =>
+        prev.map((col) =>
+          col._id === collection._id
+            ? { ...col, status: response.data.nft.status === "active" } // store as boolean for Switch
+            : col
+        )
+      );
 
-    toast.success(`NFT status updated to ${response.data.nft.status}!`);
-  } catch (error) {
-    console.error(error);
-    toast.error(error.response?.data?.message || "Failed to update collection status");
-  }
-};
-
-
-
+      toast.success(`NFT status updated to ${response.data.nft.status}!`);
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        error.response?.data?.message || "Failed to update collection status"
+      );
+    }
+  };
 
   // Loading state
   if (loading) {
@@ -170,7 +169,7 @@ const HandleCollectionStatus = async (collection) => {
                   0_0_100px_50px_rgba(59,130,246,0.4),
                   0_0_200px_100px_rgba(59,130,246,0.2)]"
         ></div>
-        
+
         <div className="flex flex-col w-[900px] gap-6 ml-12">
           <h1 className="font-inter font-semibold text-[25px] text-white">
             Collection Management
@@ -192,9 +191,11 @@ const HandleCollectionStatus = async (collection) => {
             </Link>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-center h-full">
-          <div className="text-white text-lg">No collections found. Create your first collection!</div>
+          <div className="text-white text-lg">
+            No collections found. Create your first collection!
+          </div>
         </div>
       </div>
     );
@@ -217,7 +218,7 @@ const HandleCollectionStatus = async (collection) => {
                 0_0_100px_50px_rgba(59,130,246,0.4),
                 0_0_200px_100px_rgba(59,130,246,0.2)]"
       ></div>
-      
+
       <div
         style={{
           top: `560px`,
@@ -296,16 +297,19 @@ const HandleCollectionStatus = async (collection) => {
                 </td>
                 <td className="px-6 py-4">
                   {col.image ? (
-                   <img
-  src={col.image ? `${Image_Base_Url}${col.image}` : `${Image_Base_Url}${col.image}` }
-  alt={col.name}
-  className="w-12 h-12 object-cover border border-white/10 rounded"
-  onError={(e) => {
-    e.target.onerror = null;
-    e.target.src = "https://via.placeholder.com/48"; 
-  }}
-/>
-
+                    <img
+                      src={
+                        col.image
+                          ? `${Image_Base_Url}${col.image}`
+                          : `${Image_Base_Url}${col.image}`
+                      }
+                      alt={col.name}
+                      className="w-12 h-12 object-cover border border-white/10 rounded"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        // e.target.src = "https://via.placeholder.com/48";
+                      }}
+                    />
                   ) : (
                     <div className="w-12 h-12 bg-gray-700 border border-white/10 rounded flex items-center justify-center">
                       <span className="text-white text-xs">No Image</span>
@@ -318,12 +322,14 @@ const HandleCollectionStatus = async (collection) => {
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
                     <button className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded">
-                      <Link to={`/edit-collection-item`}  state={{ collection: col }}>
-                      
+                      <Link
+                        to={`/edit-collection-item`}
+                        state={{ collection: col }}
+                      >
                         <img src={EditImage} alt="edit" className="w-4 h-4" />
                       </Link>
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleOpenDeleteModal(col)}
                       className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
                     >
@@ -331,56 +337,56 @@ const HandleCollectionStatus = async (collection) => {
                     </button>
                   </div>
                 </td>
-                <td className="px-6 py-4" >
-                 <Switch
-  checked={col.status} // boolean
-    onChange={() => HandleCollectionStatus(col)}
-  sx={{
-    width: 47,
-    height: 20,
-    padding: 0,
-    "& .MuiSwitch-switchBase": {
-      padding: 0,
-      margin: 0,
-      transitionDuration: "300ms",
-      "&.Mui-checked": {
-        transform: "translateX(24px)",
-        color: "#fff",
-        "& + .MuiSwitch-track": {
-          backgroundColor: "#0860eeff",
-          opacity: 1,
-          border: 0,
-        },
-        "&.Mui-disabled + .MuiSwitch-track": {
-          opacity: 0.5,
-        },
-      },
-      "& .Mui-focusVisible .MuiSwitch-thumb": {
-        color: "#3b82f6",
-        border: "6px solid #fff",
-      },
-      "& .Mui-disabled .MuiSwitch-thumb": {
-        color: "gray",
-      },
-      "& .Mui-disabled + .MuiSwitch-track": {
-        opacity: 0.7,
-      },
-    },
-    "& .MuiSwitch-thumb": {
-      boxSizing: "border-box",
-      width: 22,
-      height: 20,
-      backgroundColor: "#fff",
-      boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-    },
-    "& .MuiSwitch-track": {
-      borderRadius: 34 / 2,
-      backgroundColor: "#9ca3af",
-      opacity: 1,
-      transition: "background-color 500ms",
-    },
-  }}
-               />
+                <td className="px-6 py-4">
+                  <Switch
+                    checked={col.status} // boolean
+                    onChange={() => HandleCollectionStatus(col)}
+                    sx={{
+                      width: 47,
+                      height: 20,
+                      padding: 0,
+                      "& .MuiSwitch-switchBase": {
+                        padding: 0,
+                        margin: 0,
+                        transitionDuration: "300ms",
+                        "&.Mui-checked": {
+                          transform: "translateX(24px)",
+                          color: "#fff",
+                          "& + .MuiSwitch-track": {
+                            backgroundColor: "#0860eeff",
+                            opacity: 1,
+                            border: 0,
+                          },
+                          "&.Mui-disabled + .MuiSwitch-track": {
+                            opacity: 0.5,
+                          },
+                        },
+                        "& .Mui-focusVisible .MuiSwitch-thumb": {
+                          color: "#3b82f6",
+                          border: "6px solid #fff",
+                        },
+                        "& .Mui-disabled .MuiSwitch-thumb": {
+                          color: "gray",
+                        },
+                        "& .Mui-disabled + .MuiSwitch-track": {
+                          opacity: 0.7,
+                        },
+                      },
+                      "& .MuiSwitch-thumb": {
+                        boxSizing: "border-box",
+                        width: 22,
+                        height: 20,
+                        backgroundColor: "#fff",
+                        boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+                      },
+                      "& .MuiSwitch-track": {
+                        borderRadius: 34 / 2,
+                        backgroundColor: "#9ca3af",
+                        opacity: 1,
+                        transition: "background-color 500ms",
+                      },
+                    }}
+                  />
                 </td>
               </tr>
             ))}
@@ -392,9 +398,12 @@ const HandleCollectionStatus = async (collection) => {
       {showDeleteModal && selectedCollection && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
           <div className="bg-gray-800 rounded-lg p-6 w-[400px] border border-white/10">
-            <h2 className="text-lg font-semibold mb-4 text-white">Confirm Deletion</h2>
+            <h2 className="text-lg font-semibold mb-4 text-white">
+              Confirm Deletion
+            </h2>
             <p className="mb-6 text-gray-300">
-              Are you sure you want to delete <strong className="text-white">{selectedCollection.name}</strong>?
+              Are you sure you want to delete{" "}
+              <strong className="text-white">{selectedCollection.name}</strong>?
               This action cannot be undone.
             </p>
             <div className="flex justify-end gap-4">

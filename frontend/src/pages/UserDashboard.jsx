@@ -58,7 +58,7 @@ const handleDrop = (event) => {
 
   // create collection handler 
 
- const handleSubmit = async () => {
+const handleSubmit = async () => {
   try {
     if (!selectedImage) {
       alert("Please select an image!");
@@ -66,13 +66,14 @@ const handleDrop = (event) => {
     }
 
     const userId = user.id;
-    if(!userId){
-      toast.error("User Id is required")
+    if (!userId) {
+      toast.error("User Id is required");
+      return;
     }
 
     const formData = new FormData();
-    formData.append("userId",userId)
-    formData.append("creator","user");
+    formData.append("userId", userId);
+    formData.append("creator", "user");
     formData.append("image", selectedImage);
     formData.append("name", name);
     formData.append("symbol", symbol);
@@ -83,24 +84,27 @@ const handleDrop = (event) => {
     formData.append("royaltyWallet", royaltyWallet);
     formData.append("supply", Number(supply)); // numeric
 
+    // ✅ Add token in Authorization header
     const response = await axios.post(
       `${User_Dashboard_Url}/nft/collection/create`,
       formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}` // <-- token from Redux
         },
       }
     );
 
     console.log("API RESPONSE =>", response.data);
-    toast.success("User Collection Created Successfully")
-    navigate("/dashboard/nfa-details")
+    toast.success("User Collection Created Successfully");
+    navigate("/dashboard/nfa-details");
   } catch (err) {
     console.error("CREATE COLLECTION ERROR =>", err.response || err);
-    toast.error("There is some problem while creating collection")
+    toast.error("There is some problem while creating collection");
   }
 };
+
 
 
 

@@ -1,4 +1,4 @@
-// Routes/NFTRoute.js - UPDATED WITH NEW ROUTES
+// Routes/NFTRoute.js - FIXED VERSION
 import express from "express";
 import {
   createCollection,
@@ -18,74 +18,87 @@ import {
   updateNFTStatus,
   getAllNFTs,
   getPopularCollections,
+  getTotalCounts,
 } from "../Controllers/nftController.js";
 import uploadTemp from "../Middleware/UploadMulter.js";
-import { authMiddleware } from "../Middleware/userAuth.js";
-
+import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const NFTRouter = express.Router();
+
 // ======================
-// COLLECTION CRUD
+// PUBLIC ROUTES (No Auth Required)
 // ======================
-NFTRouter.post(
-  "/collection/create",
-  uploadTemp.single("image"), // <-- multer middleware
-  createCollection
-);
 NFTRouter.get("/collection/get", getAllCollections);
-NFTRouter.get("/collection/get/:id", getSingleCollection);
-NFTRouter.put(
-  "/collection/update/:id",
-  uploadTemp.single("image"), // <-- multer middleware
-  updateCollection
-);
-NFTRouter.delete("/collection/delete/:id", deleteCollection);
 NFTRouter.get("/all", getAllNFTs);
-NFTRouter.put("/status/:id", updateNFTStatus);
 NFTRouter.get("/collections/popular", getPopularCollections);
-
-
-//User Dashboard Routes
-NFTRouter.post(
-  "/collection/create",
-  uploadTemp.single("image"), 
-  createCollection
-);
-NFTRouter.put(
-  "/collection/update/:id",
-  authMiddleware,
-  uploadTemp.single("image"), 
-  updateCollection
-);
-NFTRouter.delete("/collection/delete/:id", authMiddleware, deleteCollection);
-NFTRouter.get("/collection/get/:id", authMiddleware, getSingleCollection);
-NFTRouter.put("/status/:id", authMiddleware, updateNFTStatus);
-
-
-// ======================
-// NFT MINTING
-// ======================
-NFTRouter.post("/mint", serverMint);
-
-
-// ======================
-// NFT QUERIES
-// ======================
-NFTRouter.get("/nft/:id", getNFTById);  // Get NFT by MongoDB ID
-NFTRouter.get("/owner", getNFTsByOwner);  // Get NFTs by owner wallet
-NFTRouter.get("/creator", getNFTsByCreator);  // Get NFTs by creator wallet
-
-// ======================
-// MARKETPLACE
-// ======================
-NFTRouter.post("/listing/create", createListing);
-NFTRouter.get("/listing/:tokenId", getListingDetails);  // Get listing by tokenId
-
-// ======================
-// SALES & ANALYTICS
-// ======================
-NFTRouter.post("/sale/record", recordOnchainSale);  // ⭐ Main endpoint for buy flow
+NFTRouter.get("/nft/:id", getNFTById);
+NFTRouter.get("/owner", getNFTsByOwner);
+NFTRouter.get("/creator", getNFTsByCreator);
+NFTRouter.get("/listing/:tokenId", getListingDetails);
 NFTRouter.get("/royalties/summary", getRoyaltiesSummary);
 NFTRouter.get("/platform/revenue", getPlatformRevenue);
+
+// ======================
+// ADMIN ROUTES (Admin Role Required)
+// ======================
+NFTRouter.post(
+  "/admin/collection/create",
+  authMiddleware("admin"), // Admin only
+  uploadTemp.single("image"),
+  createCollection
+);
+
+NFTRouter.put(
+  "/collection/update/:id",
+
+  uploadTemp.single("image"),
+  updateCollection
+);
+
+NFTRouter.delete(
+  "/collection/delete/:id",
+  deleteCollection
+);
+
+NFTRouter.get("/dashboard/total-counts", getTotalCounts);
+
+NFTRouter.put("/admin/status/:id", authMiddleware("admin"), updateNFTStatus);
+
+// ======================
+// USER ROUTES (User Auth Required)
+// ======================
+NFTRouter.post(
+  "/collection/create",
+  authMiddleware("user"), // User only
+  uploadTemp.single("image"),
+  createCollection
+);
+
+NFTRouter.get(
+  "/user/collection/get/:id",
+  authMiddleware("user"),
+  getSingleCollection
+);
+
+NFTRouter.put(
+  "/user/collection/update/:id",
+  authMiddleware("user"),
+  uploadTemp.single("image"),
+  updateCollection
+);
+
+NFTRouter.delete(
+  "/user/collection/delete/:id",
+  authMiddleware("user"),
+  deleteCollection
+);
+
+NFTRouter.put("/status/:id", updateNFTStatus);
+// ======================
+// AUTHENTICATED ROUTES (Any logged-in user)
+// ======================
+NFTRouter.post("/mint", authMiddleware(), serverMint);
+NFTRouter.post("/listing/create", authMiddleware(), createListing);
+NFTRouter.post("/sale/record", authMiddleware(), recordOnchainSale);
 
 export default NFTRouter;

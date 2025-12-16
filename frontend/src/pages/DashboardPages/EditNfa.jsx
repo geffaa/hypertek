@@ -1,106 +1,101 @@
 import React, { useState } from "react";
 import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
 import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { User_Dashboard_Url } from "../../Config";
 import toast from "react-hot-toast";
-
-
-
+import { useSelector } from "react-redux";
 
 function EditNfa() {
   const location = useLocation();
- const { collection } = location.state || {};
- const navigate = useNavigate();
-const [imageFile, setImageFile] = useState(null);
+  const { collection } = location.state || {};
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token) || localStorage.getItem("token");
 
+  const [imageFile, setImageFile] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(collection?.image || null);
+  const [formData, setFormData] = useState({
+    name: collection?.name || "",
+    symbol: collection?.symbol || "",
+    chain: collection?.chain || "",
+    Type: collection?.Type || "",
+    royaltyPercent: collection?.creatorFee || "",
+    supply: collection?.supply || "",
+    royaltyWallet: collection?.recipient || "",
+  });
 
-
- console.log("your collection data are here :",collection);
-const [selectedImage, setSelectedImage] = useState(collection?.image || null);
-
-
-const [formData, setFormData] = useState({
-  name: collection?.name || "",
-  symbol: collection?.symbol || "",
-  chain: collection?.chain || "",
-  Type: collection?.Type || "",
-  royaltyPercent: collection?.creatorFee || "",
-  supply: collection?.supply || "",
-  royaltyWallet: collection?.recipient || "",
-});
-
+  // Axios instance with token
+  const api = axios.create({
+    baseURL: User_Dashboard_Url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   // Handle file selection
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    setImageFile(file); // <-- important (store file)
-    const reader = new FileReader();
-    reader.onload = () => setSelectedImage(reader.result);
-    reader.readAsDataURL(file);
-  }
-};
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onload = () => setSelectedImage(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Handle drag and drop
- const handleDrop = (event) => {
-  event.preventDefault();
-  const file = event.dataTransfer.files[0];
-  if (file) {
-    setImageFile(file); // <-- SAVE FILE
-    const reader = new FileReader();
-    reader.onload = () => setSelectedImage(reader.result);
-    reader.readAsDataURL(file);
-  }
-};
-
-
-const handleUpdate = async () => {
-  try {
-    const id = collection?._id || collection?.id;
-
-    if (!id) {
-      toast.error("Collection ID missing");
-      return;
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onload = () => setSelectedImage(reader.result);
+      reader.readAsDataURL(file);
     }
-
-    const form = new FormData();
-    form.append("name", formData.name);
-    form.append("symbol", formData.symbol);
-    form.append("chain", formData.chain);
-    form.append("Type", formData.Type);
-    form.append("royaltyPercent", formData.royaltyPercent);
-    form.append("supply", formData.supply);
-    form.append("royaltyWallet", formData.royaltyWallet);
-
-    // Only append image if user uploaded a new one
-    if (imageFile) {
-      form.append("image", imageFile);
-    }
-
-    const response = await axios.put(
-      `${User_Dashboard_Url}/nft/collection/update/${id}`,
-      form,
-      {
-        headers: { "Content-Type": "multipart/form-data" }
-      }
-    );
-
-    if (response.data.success) {
-      toast.success("Collection Updated Successfully");
-      navigate("/dashboard/nfa-details");
-    }
-  } catch (error) {
-    console.log("UPDATE ERROR:", error);
-    toast.error("Failed to update collection");
-  }
-};
+  };
 
   const handleDragOver = (event) => event.preventDefault();
 
+  const handleUpdate = async () => {
+    try {
+      const id = collection?._id || collection?.id;
+
+      if (!id) {
+        toast.error("Collection ID missing");
+        return;
+      }
+
+      const form = new FormData();
+      form.append("name", formData.name);
+      form.append("symbol", formData.symbol);
+      form.append("chain", formData.chain);
+      form.append("Type", formData.Type);
+      form.append("royaltyPercent", formData.royaltyPercent);
+      form.append("supply", formData.supply);
+      form.append("royaltyWallet", formData.royaltyWallet);
+
+      if (imageFile) {
+        form.append("image", imageFile);
+      }
+
+      const response = await api.put(
+        `/nft/user/collection/update/${id}`,
+        form,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      if (response.data.success) {
+        toast.success("Collection Updated Successfully");
+        navigate("/dashboard/nfa-details");
+      }
+    } catch (error) {
+      console.error("UPDATE ERROR:", error);
+      toast.error(error.response?.data?.message || "Failed to update collection");
+    }
+  };
   return (
     <div className="flex flex-col min-h-screen bg-black overflow-hidden relative">
       {/* Background Blurs */}

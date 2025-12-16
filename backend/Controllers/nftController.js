@@ -20,10 +20,30 @@ export async function createCollection(req, res) {
       supply
     } = req.body;
 
-    // Detect creator info from authenticated user
-    const creatorType = req.user?.role === "admin" ? "admin" : "user";
-    const creatorUserId = req.user?._id || null;
+    // ✅ FIX: Detect creator info from authenticated user
+    // Check both Role (uppercase) and role (lowercase) from token
+    const userRole = req.user?.Role || req.user?.role;
+    const isAdmin = userRole?.toLowerCase() === "admin";
+    const creatorType = isAdmin ? "admin" : "user";
+    
+    // ✅ FIX: Only set userId for regular users, NOT for admins
+    // Check both _id and id from token
+    const userId = isAdmin ? null : (req.user?._id || req.user?.id || null);
     const creatorWallet = owner; // collection owner wallet
+
+    // console.log("📝 Creating Collection:");
+    // console.log("- User from token:", req.user);
+    // console.log("- User Role detected:", userRole);
+    // console.log("- Is Admin:", isAdmin);
+    // console.log("- UserID will be:", userId);
+    // console.log("- Creator Type:", creatorType);
+
+    // Validate required fields
+    if (!name || !symbol || !chain || !owner) {
+      return res.status(400).json({
+        error: "Missing required fields: name, symbol, chain, owner"
+      });
+    }
 
     // Handle image
     let image;
@@ -39,29 +59,44 @@ export async function createCollection(req, res) {
 
     const finalRoyaltyWallet = royaltyWallet || owner;
 
-    // Create the collection
+    // ✅ FIX: Create collection with proper userId handling
     const doc = await NFTSystem.create({
-      userId: creatorUserId,  
-      creatorUserId,
-      creatorWallet,
-      creatorType,
+      userId: userId, // null for admin, actual ID for users
       collection: { 
         name, 
         symbol, 
-        Type,
+        Type: Type || "ERC721",
         chain, 
         image,
         owner,
-        royaltyPercent,
+        royaltyPercent: royaltyPercent || 5,
         royaltyWallet: finalRoyaltyWallet,
-        supply: supply || 1
+        supply: supply || 1,
+        creator: creatorType, // "admin" or "user"
+        salesCount: 0 // Initialize sales count
       },
+      creator: creatorWallet, // blockchain wallet address
+      owner: creatorWallet,
       status: "active"
     });
 
-    return res.json({ success: true, doc });
+    // console.log("✅ Collection created successfully:", doc._id);
+    // console.log("- Collection userId:", doc.userId);
+    // console.log("- Collection creator type:", doc.collection.creator);
+
+    return res.json({ 
+      success: true, 
+      message: `Collection created by ${creatorType}`,
+      doc,
+      createdBy: {
+        role: userRole,
+        userId: userId,
+        type: creatorType,
+        isAdmin: isAdmin
+      }
+    });
   } catch (err) {
-    console.error("CREATE COLLECTION ERROR:", err);
+    console.error("❌ CREATE COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -681,6 +716,41 @@ export async function deleteCollection(req, res) {
     });
   } catch (err) {
     console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+
+/**
+ * Get total counts: collections, NFTs, sales (all, not just active)
+ */
+export async function getTotalCounts(req, res) {
+  try {
+    // Total collections (all)
+    const totalCollections = await NFTSystem.countDocuments({});
+
+    // Total NFTs
+    const totalNFTs = await NFTSystem.countDocuments({});
+
+    // Total sales (sum of all salesHistory lengths)
+    const nftsWithSales = await NFTSystem.find({}, "salesHistory");
+    let totalSalesCount = 0;
+    nftsWithSales.forEach(nft => {
+      totalSalesCount += nft.salesHistory.length;
+    });
+
+    // Total buys = same as total sales
+    const totalBuysCount = totalSalesCount;
+
+    return res.json({
+      success: true,
+      totalCollections,
+      totalNFTs,
+      totalSalesCount,
+      totalBuysCount
+    });
+  } catch (err) {
+    console.error("getTotalCounts error:", err);
     return res.status(500).json({ error: err.message });
   }
 }
