@@ -13,8 +13,16 @@ import TransactionImage from "../../assets/Sidebar/transaction.png";
 import SaleImage from "../../assets/Sidebar/sale.png";
 import SupportImage from "../../assets/Sidebar/support.png";
 import LogoutImage from "../../assets/Sidebar/logout.png";
+import { useSelector } from "react-redux";
+
 
 const Sidebar = ({  onLogoutClick}) => {
+
+
+const admin = useSelector((state) => state.admin.admin);
+const adminId = admin?._id;
+
+
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
@@ -58,7 +66,10 @@ const Sidebar = ({  onLogoutClick}) => {
     setOpenCollection(false);
   };
 
-
+const withAdmin = (path) => {
+  if (!adminId) return "#"; // prevent crash / bad navigation
+  return `/${adminId}${path}`;
+};
 
   
 
@@ -83,7 +94,8 @@ const Sidebar = ({  onLogoutClick}) => {
       {/* Menu */}
       <ul className="flex flex-col items-center mt-24">
         {/* Dashboard 1 */}
-       <Link to="/">
+    <Link to={withAdmin("/dashboard")}>
+
        
         <li
           className={`flex items-center gap-2 rounded-md px-3 py-2 cursor-pointer ${
@@ -222,26 +234,33 @@ const Sidebar = ({  onLogoutClick}) => {
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/collections">Collections</Link>
+<Link to={withAdmin("/collections")}>
+  Collections
+</Link>
+
               </li>
             </div>
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/character-collection">Character</Link>
+<Link to={withAdmin("/character-collection")}>
+  Character
+</Link>
               </li>
             </div>
             <div className="flex ">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white ">
-                <Link to="/land-collection" className="hover:text-slate-300 cursor-pointer">Land</Link>
+<Link to={withAdmin("/land-collection")}>
+  Land
+</Link>
               </li>
             </div>
           </ul>
         )}
 
         {/* Edit User 4  */}
-  <Link to="/users">
+<Link to={withAdmin("/users")}>
         <li
           className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
             selectedItem === "users" ? "bg-[#002AA8]" : ""
@@ -311,19 +330,19 @@ const Sidebar = ({  onLogoutClick}) => {
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/add-news">Add News</Link>
+               <Link to={withAdmin("/add-news")}>Add news</Link>
               </li>
             </div>
              <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/edit-news">Edit News</Link>
+               <Link to={withAdmin("/edit-news")}>edit News</Link>
               </li>
             </div>
              <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/other-news">Other News</Link>
+             <Link to={withAdmin("/other-news")}>Other-news</Link>
               </li>
             </div>
            
@@ -332,7 +351,8 @@ const Sidebar = ({  onLogoutClick}) => {
 
         {/* Collection on sale  */}
 
-        <Link to="/collection-listed-sale">
+       <Link to={withAdmin("/collection-listed-sale")}>
+
         <li
           className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
             selectedItem === "Sale" ? "bg-[#002AA8]" : ""
@@ -387,7 +407,8 @@ const Sidebar = ({  onLogoutClick}) => {
         )} */}
 
         {/* Transaction News 6  */}
-      <Link to="/transactions">
+    <Link to={withAdmin("/transactions")}>
+
         <li
           className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
             selectedItem === "Transaction" ? "bg-[#002AA8]" : ""
@@ -421,7 +442,8 @@ const Sidebar = ({  onLogoutClick}) => {
       </Link>
 
         {/* Support 7  */}
-    <Link to="/support">
+   <Link to={withAdmin("/support")}>
+
         <li
           className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
              selectedItem === "support" ? "bg-[#002AA8]" : ""

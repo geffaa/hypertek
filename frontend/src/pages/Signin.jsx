@@ -51,12 +51,12 @@ function Login() {
         Email: formData.email,
         Password: formData.password,
       });
+ if (res.data.user.Role === "user") {
 
       // ✅ Save full response as JSON string
 // Save all admin/user data as JSON string
 localStorage.setItem("authData", JSON.stringify(res.data));
       console.log("Your login response are :",res);
-
       dispatch(
         loginSuccess({
           user: res.data.user,
@@ -66,17 +66,18 @@ localStorage.setItem("authData", JSON.stringify(res.data));
       );
 
       localStorage.setItem("token", res.data.token);
+      
       localStorage.setItem("role", res.data.user.Role);
-
+       
       toast.success("Login successful!");
-
+    }
       if (res.data.user.Role === "admin") {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("admin-data",res.data)
+        // localStorage.setItem("token", res.data.token);
+        // localStorage.setItem("admin-data",res.data)
         console.log("your login data response are :",res.data);
         const userId = res.data.user.id;
       
-         window.location.href = `http://localhost:5174/admin?userId=${userId}`;
+window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
       } else {
         navigate("/dashboard");
       }
