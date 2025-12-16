@@ -1,9 +1,23 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { logoutAdmin } from "../../Redux/AdminSlice"
 
 const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+    const dispatch = useDispatch();
+const handleLogout = () => {
+    // 1. Clear Redux store
+    dispatch(logoutAdmin());
+
+    // 2. Clear local/session storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 3. Redirect to login
+    window.location.href = " http://localhost:5173/signin";
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -108,7 +122,7 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
               Cancel
             </button>
             <button 
-              onClick={onConfirm}
+             onClick={handleLogout}
               className="
                 px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 
                 rounded-xl hover:from-red-500 hover:to-red-600

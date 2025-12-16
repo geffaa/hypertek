@@ -982,6 +982,41 @@ const DeleteUser = async (req, res) => {
   }
 };
 
+
+const GetAdminByAdminId = async (req, res) => {
+  try {
+    const { adminId } = req.params;
+    // validate ObjectId
+    if (!adminId) {
+      return res.status(400).json({
+        success: false,
+        message: "adminId is required",
+      });
+    }
+    const admin = await UserModel.findOne({
+      _id: adminId,
+      Role: "admin",
+    }).select("-Password");
+    if (!admin) {
+      return res.status(404).json({
+        success: false,
+        message: "Admin not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Admin fetched successfully",
+      admin,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
+
 export {
   SignupUser,
   LoginUser,
@@ -995,6 +1030,7 @@ export {
   MetaMaskAuth,
   GetAllUsers,
   ToggleUserStatus,
-  EditUser, // ✅ New export
-  DeleteUser, // ✅ New export
+  EditUser, // :white_check_mark: New export
+  DeleteUser, // :white_check_mark: New export
+  GetAdminByAdminId,
 };
