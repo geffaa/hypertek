@@ -40,7 +40,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["https://hyper-tek-games.deventiatech.com", "https://admin-hyper-tek-game.deventiatech.com"], // frontend
+    origin: ["http://localhost:5173", "http://localhost:5174"], // frontend
     methods: ["GET", "POST"],
     credentials: true
   }

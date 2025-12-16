@@ -122,8 +122,41 @@ router.post(
         userId
       });
     }
-
     res.json(room);
+  }
+);
+
+
+
+router.post(
+  "/user/message",
+  authMiddleware(["user"]),
+  async (req, res) => {
+    const { adminId, message } = req.body;
+
+    let room = await ChatRoom.findOne({
+      adminId,
+      userId: req.user.id
+    });
+
+    if (!room) {
+      room = await ChatRoom.create({
+        adminId,
+        userId: req.user.id
+      });
+    }
+
+    const newMessage = await Message.create({
+      roomId: room._id,
+      senderId: req.user.id,
+      senderRole: "user",
+      message
+    });
+
+    res.json({
+      roomId: room._id,
+      data: newMessage
+    });
   }
 );
 

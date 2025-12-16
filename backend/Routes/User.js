@@ -13,6 +13,7 @@ import {
   ToggleUserStatus, 
   EditUser,
   DeleteUser,
+  GetAdminByAdminId,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import upload from "../Middleware/UploadMulter.js";
@@ -61,5 +62,11 @@ Route.get("/users", GetAllUsers);
 
 // ✅ NEW ROUTE: Toggle user active/inactive status (admin only)
 Route.patch("/user/status/:userId",  ToggleUserStatus);
+
+Route.get(
+  "/admin/:adminId", // only admin can access
+  GetAdminByAdminId
+);
+
 
 export { Route };
