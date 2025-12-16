@@ -24,7 +24,10 @@ import OfferRoute from "./Routes/Offer.js";
 import Dashboard from "./Routes/Dashboard.js";
 import NFTRouter from "./Routes/NFT.js";
 import News from  "./Routes/News.js";
-
+import chatRoutes from "./Routes/chat.js"; // NEW
+import { socketHandler } from "./socket.js";
+import { Server } from "socket.io";
+import http from "http";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,35 +36,40 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, "Config", ".env") });
 const app = express();
 
+// ✨ Create HTTP server for Socket.IO
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: ["https://hyper-tek-games.deventiatech.com", "https://admin-hyper-tek-game.deventiatech.com"], // frontend
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
+// Apply Socket.IO handler
+socketHandler(io);
+
+// Middleware
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// CORS setup
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "https://hypertek100.com",
-  "https://hyper-tek-games.deventiatech.com",
-  "https://www.hyper-tek-games.deventiatech.com",
-  "https://admin-hyper-tek-game.deventiatech.com",
-  "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
-  "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app",
-  "https://dreich-extortionately-shavonne.ngrok-free.dev/"
-];
-
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log("Blocked by CORS:", origin);
-      callback(new Error("Not allowed by CORS"));
-    }
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://hypertek100.com",
+      "https://hyper-tek-games.deventiatech.com",
+      "https://www.hyper-tek-games.deventiatech.com",
+      "https://admin-hyper-tek-game.deventiatech.com",
+      "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
+      "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+    else callback(new Error("Not allowed by CORS"));
   },
-  credentials: true, // allows cookies
+  credentials: true
 }));
 
-// Database connectivity with error handling
+// Database connection
 try {
   DBConnections();
   console.log("✅ Database connected");
@@ -69,29 +77,27 @@ try {
   console.error("❌ Database connection error:", error);
 }
 
-// ⚠️ IMPORTANT: Stripe webhook MUST come BEFORE express.json()
+// Stripe webhook (before express.json)
 app.post(
   "/api/v1/payment/stripe/webhook",
   bodyParser.raw({ type: "application/json" }),
   StripeWebhook
 );
 
-// ⚠️ NOW apply regular JSON parsing for all OTHER routes
+// Parse JSON
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Logging middleware for debugging
+// Logging middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
 });
 
-// Payment and Card routes
+// Routes
 app.use('/api/v1/card', SaveCardRoute);
 app.use("/api/v1/payment", PaymentRotue);
 app.use("/api/v1/card", CardRoute);
-
-// Other existing routes
 app.use("/api/v1", Route);
 app.use("/api/v1/market", router);
 app.use("/api/v1/land", Landrouter);
@@ -101,12 +107,11 @@ app.use('/api/v1/game', PcheckingRoute);
 app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/offer", OfferRoute);
 app.use("/api/dashboard", Dashboard);
-
-// ✨ NEW: NFT Marketplace Routes with Blockchain
 app.use("/api/v1/nft", NFTRouter);
 app.use("/api/v1/news", News);
+app.use("/api/v1/chat", chatRoutes); // NEW: chat routes
 
-// Health check endpoint
+// Health check
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
@@ -138,16 +143,26 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Port from .env
+// Start server with Socket.IO
+// Start server with Socket.IO
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log('\n' + '='.repeat(60));
-  console.log('🚀 NFT Marketplace Server');
+  console.log('🚀 NFT Marketplace Server with Socket.IO');
   console.log('='.repeat(60));
   console.log(`📡 Server: http://localhost:${PORT}`);
   console.log(`🗄️  Database: ${process.env.MONGODB_URL ? 'Connected' : 'Not configured'}`);
   console.log(`🔗 NFT Contract: ${process.env.MYNFT_ADDRESS || 'Not deployed'}`);
   console.log(`🏪 Marketplace: ${process.env.MARKETPLACE_ADDRESS || 'Not deployed'}`);
   console.log(`💰 Platform Wallet: ${process.env.PLATFORM_WALLET_ADDRESS || 'Not set'}`);
+  console.log('='.repeat(60));
+
+  // ✅ Socket.IO check
+  if (io) {
+    console.log('💬 Socket.IO is running and ready to accept connections!');
+  } else {
+    console.log('❌ Socket.IO is not initialized!');
+  }
+
   console.log('='.repeat(60) + '\n');
 });

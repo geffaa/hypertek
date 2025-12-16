@@ -271,3 +271,190 @@ function Support() {
 }
 
 export default Support;
+
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { io } from "socket.io-client";
+
+// // 🔥 Create socket ONCE
+// const socket = io("http://localhost:4700", {
+//   auth: {
+//     token: localStorage.getItem("token"),
+//   },
+// });
+
+// function Support() {
+//   const [chats, setChats] = useState([]);       // MUST be array
+//   const [selectedChat, setSelectedChat] = useState(null);
+//   const [messages, setMessages] = useState([]);
+//   const [text, setText] = useState("");
+
+//   const token = localStorage.getItem("token");
+//   const userRole = localStorage.getItem("role"); // "admin" | "user"
+
+//   /* ===============================
+//      FETCH CHATS (ADMIN / USER)
+//   =============================== */
+//   useEffect(() => {
+//     const fetchChats = async () => {
+//       try {
+//         const url =
+//           userRole === "admin"
+//             ? "/api/v1/chat/admin/chats"
+//             : "/api/v1/chat/admin/chats"; 
+//             // user ke liye backend auto-filter karega
+
+//         const res = await axios.get(url, {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+
+//         console.log("Chats API:", res.data);
+
+//         // ✅ SAFETY CHECK
+//         setChats(Array.isArray(res.data) ? res.data : []);
+//       } catch (err) {
+//         console.error("Fetch chats error:", err);
+//         setChats([]);
+//       }
+//     };
+
+//     if (token) fetchChats();
+//   }, [userRole, token]);
+
+//   /* ===============================
+//      FETCH MESSAGES
+//   =============================== */
+//   useEffect(() => {
+//     if (!selectedChat) return;
+
+//     const fetchMessages = async () => {
+//       try {
+//         const res = await axios.get(
+//           `/api/v1/chat/messages/${selectedChat._id}`,
+//           {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }
+//         );
+
+//         setMessages(Array.isArray(res.data) ? res.data : []);
+//       } catch (err) {
+//         console.error("Fetch messages error:", err);
+//       }
+//     };
+
+//     fetchMessages();
+
+//     // 🔥 Join socket room
+//     socket.emit("joinRoom", {
+//       userId:
+//         userRole === "admin"
+//           ? selectedChat.userId?._id
+//           : selectedChat.adminId,
+//     });
+//   }, [selectedChat, token, userRole]);
+
+//   /* ===============================
+//      SOCKET LISTENER
+//   =============================== */
+//   useEffect(() => {
+//     socket.on("receiveMessage", (msg) => {
+//       if (msg.roomId === selectedChat?._id) {
+//         setMessages((prev) => [...prev, msg]);
+//       }
+//     });
+
+//     return () => {
+//       socket.off("receiveMessage");
+//     };
+//   }, [selectedChat]);
+
+//   /* ===============================
+//      SEND MESSAGE
+//   =============================== */
+//   const handleSendMessage = () => {
+//     if (!text.trim() || !selectedChat) return;
+
+//     socket.emit("sendMessage", {
+//       roomId: selectedChat._id,
+//       message: text,
+//     });
+
+//     setText("");
+//   };
+
+//   return (
+//     <div className="flex h-screen">
+//       {/* ================= SIDEBAR ================= */}
+//       <div className="w-64 border-r p-2 overflow-y-auto">
+//         {chats.length === 0 && (
+//           <p className="text-gray-500 text-sm">No chats found</p>
+//         )}
+
+//         {Array.isArray(chats) &&
+//           chats.map((chat) => (
+//             <div
+//               key={chat._id}
+//               onClick={() => setSelectedChat(chat)}
+//               className={`p-2 cursor-pointer rounded ${
+//                 selectedChat?._id === chat._id
+//                   ? "bg-gray-200"
+//                   : "hover:bg-gray-100"
+//               }`}
+//             >
+//               {userRole === "admin"
+//                 ? chat.userId?.name || "User"
+//                 : "Support Admin"}
+//             </div>
+//           ))}
+//       </div>
+
+//       {/* ================= CHAT WINDOW ================= */}
+//       <div className="flex-1 p-4 flex flex-col">
+//         {!selectedChat ? (
+//           <p className="text-gray-500">Select a chat</p>
+//         ) : (
+//           <>
+//             {/* Messages */}
+//             <div className="flex-1 overflow-y-auto space-y-2">
+//               {messages.map((msg) => (
+//                 <div
+//                   key={msg._id}
+//                   className={`${
+//                     msg.senderRole === userRole
+//                       ? "text-right"
+//                       : "text-left"
+//                   }`}
+//                 >
+//                   <span className="inline-block bg-blue-100 px-3 py-1 rounded">
+//                     {msg.message}
+//                   </span>
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Input */}
+//             <div className="flex gap-2 mt-2">
+//               <input
+//                 value={text}
+//                 onChange={(e) => setText(e.target.value)}
+//                 onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+//                 className="flex-1 border px-3 py-2 rounded"
+//                 placeholder="Type a message..."
+//               />
+//               <button
+//                 onClick={handleSendMessage}
+//                 className="bg-blue-500 text-white px-4 rounded"
+//               >
+//                 Send
+//               </button>
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Support;

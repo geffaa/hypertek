@@ -66,6 +66,7 @@ function Login() {
       toast.success("Login successful!");
 
       if (res.data.user.Role === "admin") {
+        localStorage.setItem("token", res.data.token);
         window.location.href = "https://admin-hyper-tek-game.deventiatech.com";
       } else {
         navigate("/dashboard");
