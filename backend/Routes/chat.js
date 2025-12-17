@@ -109,6 +109,9 @@ router.post(
     res.json(room);
   }
 );
+
+
+
 router.post(
   "/user/message",
   authMiddleware(["user"]),
@@ -118,22 +121,27 @@ router.post(
       adminId,
       userId: req.user.id
     });
+
     if (!room) {
       room = await ChatRoom.create({
         adminId,
         userId: req.user.id
       });
     }
+
     const newMessage = await Message.create({
       roomId: room._id,
       senderId: req.user.id,
       senderRole: "user",
       message
     });
+
     res.json({
       roomId: room._id,
       data: newMessage
     });
   }
 );
+
+
 export default router;

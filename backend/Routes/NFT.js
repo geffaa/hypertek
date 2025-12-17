@@ -50,8 +50,7 @@ NFTRouter.post(
 
 NFTRouter.put(
   "/collection/update/:id",
-
-  uploadTemp.single("image"),
+ uploadTemp.single("image"),
   updateCollection
 );
 
@@ -72,6 +71,11 @@ NFTRouter.post(
   authMiddleware("user"), // User only
   uploadTemp.single("image"),
   createCollection
+);
+
+NFTRouter.get(
+  "/user/collection/get/:id",
+  getSingleCollection
 );
 
 NFTRouter.get(

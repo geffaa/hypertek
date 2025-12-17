@@ -16,57 +16,52 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config";
 
 function MarketPlace() {
-  //// get the nfa data
-  const [marketData, setMarketData] = useState([]);
-  const [landData, setLandketData] = useState([]);
+  const [marketData, setMarketData] = useState([]); // NFA
+  const [landData, setLandketData] = useState([]); // LAND
   const [activityData, setActivityData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // get the market data here
+  // Fetch and filter collections
   useEffect(() => {
-    const fetchMarketData = async () => {
-      setLoading(true); // ✅ Start loading
-
+    const fetchCollections = async () => {
+      setLoading(true);
       try {
-        /// get the land , market and activity through
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/market/getMarket`
-        );
-        const landres = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/land/getLand`
-        );
-        const activity = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
-        );
-        console.log("your activity data in the console :", activity);
-        if (res.data?.data) setMarketData(res.data.data);
-        if (landres.data?.data) setLandketData(landres.data.data);
-        if (activity.data) setActivityData(activity.data);
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/collection/get`);
+        if (res.data.success) {
+          const collections = res.data.collections;
+
+          // Filter NFA and LAND
+          const nfaCollections = collections.filter(
+            (item) => item.collection.Type === "NFA"
+          );
+          const landCollections = collections.filter(
+            (item) => item.collection.Type === "Land"
+          );
+
+          setMarketData(nfaCollections);
+          setLandketData(landCollections);
+        } else {
+          console.error("Failed to fetch collections:", res.data.message);
+        }
       } catch (error) {
-        console.error("Error fetching market data:", error);
+        console.error("Error fetching collections:", error);
       } finally {
-        setLoading(false); // ✅ Stop loading after fetch
+        setLoading(false);
       }
     };
 
-    fetchMarketData();
-  }, []); // run once when component mounts
+    fetchCollections();
+  }, []);
 
-  console.log("your market data are here :", marketData);
-  console.log("your land  data are here :", landData);
-  console.log("your activity  data are here :", activityData);
+  console.log("NFA Data:", marketData);
+  console.log("LAND Data:", landData);
+  console.log("Activity Data:", activityData);
 
-  /// convert the date to days only
   const getDaysAgo = (dateString) => {
     const created = new Date(dateString);
     const now = new Date();
-
-    // Difference in milliseconds
     const diffInMs = now.getTime() - created.getTime();
-
-    // If the time is in the future, return "0d"
     if (diffInMs < 0) return "0d";
-
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     return `${diffInDays}d`;
   };
@@ -78,44 +73,24 @@ function MarketPlace() {
       ) : (
         <div className="min-h-screen bg-transparent relative z-10 ">
           {/* Hero Section */}
-
-          {/* Hero Section */}
           <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto">
-            <div className=" mt-20 lg:mt-[92px]">
-              {/* Hero Banner */}
+            <div className="mt-20 lg:mt-[92px]">
               <div
-                className="relative h-56 md:h-56 lg:h-[237px] w-full 
-            bg-cover bg-top bg-no-repeat  shadow-lg mb-24 lg:mb-24"
+                className="relative h-56 md:h-56 lg:h-[237px] w-full bg-cover bg-top bg-no-repeat shadow-lg mb-24 lg:mb-24"
                 style={{ backgroundImage: `url(${overview1})` }}
               >
-                {/* Text Content */}
                 <div
-                  className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] 
-              w-full lg:w-[902px] max-w-[90%] lg:max-w-none"
+                  className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%] lg:max-w-none"
                 >
-                  <h1
-                    className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] 
-                leading-tight text-white mt-3 mb-4 lg:mb-"
-                  >
+                  <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mt-3 mb-4">
                     A New Era Dawns in Hyper Tek
                   </h1>
-                  <p
-                    className="font-inter font-medium text-sm hidden md:block md:text-base lg:text-[18px] 
-                leading-relaxed text-white"
-                  >
-                    It's the start of a living, breathing universe where every
-                    decision shapes the journey. Whether you're racing at light
-                    speed, forging alliances in the Overlord Realm, or
-                    uncovering secrets in HyperQuest, this is your chance to
-                    leave your mark on the story.
+                  <p className="font-inter font-medium text-sm hidden md:block md:text-base lg:text-[18px] leading-relaxed text-white">
+                    It's the start of a living, breathing universe where every decision shapes the journey...
                   </p>
                 </div>
 
-                {/* Stats Section */}
-                <div
-                  className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] 
-              w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]"
-                >
+                <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
                   {[
                     { num: "5K", label: "Total Item" },
                     { num: "50.5K", label: "Total Volume" },
@@ -123,53 +98,34 @@ function MarketPlace() {
                     { num: "2.6K", label: "Owners" },
                   ].map((stat, i) => (
                     <div key={i} className="flex flex-col gap-1">
-                      <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
-                        {stat.num}
-                      </h1>
-                      <p className="text-xs md:text-[12px] font-normal text-white">
-                        {stat.label}
-                      </p>
+                      <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">{stat.num}</h1>
+                      <p className="text-xs md:text-[12px] font-normal text-white">{stat.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Navigation and Search Section */}
-              <div
-                className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start 
-            lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8"
-              >
+              <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
                 <NavLinks />
-
-                {/* Search Field */}
-                <div
-                  className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] 
-    px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] 
-    bg-white/10 backdrop-blur-sm"
-                >
+                <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] bg-white/10 backdrop-blur-sm">
                   <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none 
-      text-sm lg:text-[16px] font-inter w-full"
+                    className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ------------------------------------ NFA Section -----------------------------------  */}
-
+          {/* NFA Section */}
           <div className="w-full max-w-[1400px] mx-auto px-2 sm:px-6 md:px-8">
             <div className="md:px-8 px-5">
-              <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6  sm:px-3 md:px-8 lg:px-0">
-                {/* Header */}
+              <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6 sm:px-3 md:px-8 lg:px-0">
                 <div className="flex flex-row justify-between items-center gap-4">
                   <div className="flex flex-col gap-2 items-start">
-                    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                      NFA
-                    </h1>
+                    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">NFA</h1>
                     <div className="flex gap-2">
                       <div className="h-[3px] md:w-8 w-3 lg:w-12 bg-white"></div>
                       <div className="h-[3px] md:w-12 w-3 lg:w-20 bg-white"></div>
@@ -177,68 +133,34 @@ function MarketPlace() {
                       <div className="h-[3px] md:w-20 w-8 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
                     </div>
                   </div>
-
                   <div className="flex justify-end items-center text-white">
-                    <Link
-                      to="/nfa-expand"
-                      className="flex items-center gap-2 hover:text-gray-300 transition"
-                    >
+                    <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
                       <span>Explore All</span>
                       <ArrowRight size={20} strokeWidth={2} />
                     </Link>
                   </div>
                 </div>
 
-                {/* Cards Grid */}
-
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
                   {marketData.slice(0, 4).map((item, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-  lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"
-                    >
-                      {/* Image */}
-                      <div
-                        className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-    bg-gradient-to-b from-[#977C34] to-[#493F26]"
-                      >
+                    <div key={index} className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between">
+                      <div className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                         <img
-                          src={popularCollections}
-                          alt="Collection"
+                          src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : popularCollections}
+                          alt={item.collection.name || "Collection"}
                           className="w-full h-full object-cover object-top scale-x-[-1]"
                         />
                       </div>
-
-                      {/* Title */}
-                      <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">
-                        {item.title}
-                      </h2>
-
-                      {/* Stats */}
+                      <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">{item.collection.name}</h2>
                       <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
-                        <h3 className="text-xs lg:text-sm font-semibold">
-                          {item.serialNumber} 🔥
-                        </h3>
+                        <h3 className="text-xs lg:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
                         <div className="flex items-center">
-                          <img
-                            src={TVector}
-                            alt=""
-                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-                          />
-                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                            ${item.price}
-                          </h3>
+                          <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
+                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.priceETH}</h3>
                         </div>
                       </div>
-
-                      {/* Button (Centered) */}
-                      <div className=" flex justify-center items-center">
-                        <Link
-                          to="/buy-nfa"
-                          state={{ item }}
-                          className="w-full flex justify-center"
-                        >
+                      <div className="flex justify-center items-center">
+                        <Link to="/buy-nfa" state={{ item }} className="w-full flex justify-center">
                           <CustomButton text="Buy Now" />
                         </Link>
                       </div>
@@ -247,14 +169,11 @@ function MarketPlace() {
                 </div>
               </section>
 
-              {/* ------------------------------------- Land Section -----------------------------  */}
-              <section className="flex flex-col gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16  sm:px-6 md:px-8 lg:px-0">
-                {/* Header */}
+              {/* LAND Section */}
+              <section className="flex flex-col gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16 sm:px-6 md:px-8 lg:px-0">
                 <div className="flex flex-row justify-between items-center gap-3 sm:gap-4">
                   <div className="flex flex-col gap-2 items-start">
-                    <h1 className="text-white uppercase text-lg sm:text-2xl lg:text-[30px] font-goldman font-bold">
-                      LAND
-                    </h1>
+                    <h1 className="text-white uppercase text-lg sm:text-2xl lg:text-[30px] font-goldman font-bold">LAND</h1>
                     <div className="flex gap-1 sm:gap-2">
                       <div className="h-[3px] md:w-6 sm:w-3 lg:w-12 bg-white"></div>
                       <div className="h-[3px] w-8 sm:w-3 lg:w-20 bg-white"></div>
@@ -262,84 +181,42 @@ function MarketPlace() {
                       <div className="h-[3px] w-12 sm:w-8 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
                     </div>
                   </div>
-
                   <div className="flex justify-end items-center text-white">
-                    <Link
-                      to="/land"
-                      className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
-                    >
+                    <Link to="/land" className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base">
                       <span>Expand All</span>
-                      <ArrowRight
-                        size={16}
-                        className="sm:w-5 sm:h-5"
-                        strokeWidth={2}
-                      />
+                      <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
                     </Link>
                   </div>
                 </div>
 
-                {/* Cards Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-center mt-3 sm:mt-4">
-                  {landData.slice(0.4).map((item, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto 
-  lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"
-                    >
-                      {/* Image */}
-                      <div
-                        className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] 
-          bg-gradient-to-b from-[#977C34] to-[#493F26]"
-                      >
+                  {landData.slice(0, 4).map((item, index) => (
+                    <div key={index} className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between">
+                      <div className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                         <img
-                          src={land1Image}
-                          alt="Land Collection"
+                          src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
+                          alt={item.collection.name || "Land Collection"}
                           className="w-full h-full object-cover object-top scale-x-[-1]"
                         />
                       </div>
-
-                      {/* Title */}
-                      <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
-                        {item.title}
-                      </h2>
-
-                      {/* Stats */}
+                      <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">{item.collection.name}</h2>
                       <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
-                        <h3 className="text-xs sm:text-sm font-semibold">
-                          {item.serialNumber} 🔥
-                        </h3>
+                        <h3 className="text-xs sm:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
                         <div className="flex items-center">
-                          <img
-                            src={TVector}
-                            alt=""
-                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
-                          />
-                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                            ${item.price}
-                          </h3>
+                          <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
+                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.priceETH}</h3>
                         </div>
                       </div>
-
-                      {/* Button (with side space) */}
-                      {/* Button (smaller & centered with spacing) */}
                       <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
-                        <Link
-                          to="/buy-land"
-                          state={{ item }}
-                          className="cursor-pointer flex justify-center w-full"
-                        >
-                          <CustomButton
-                            text="Buy Now"
-                            className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
-                          />
+                        <Link to="/buy-land" state={{ item }} className="cursor-pointer flex justify-center w-full">
+                          <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
                         </Link>
                       </div>
                     </div>
                   ))}
                 </div>
               </section>
-
-              {/* ------------------------------------------ activity section ----------------------------------  */}
+               {/* ------------------------------------------ activity section ----------------------------------  */}
               <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
                 <GlowingOrb Xaxis={830} Yaxis={300} />
                 <div className=" w-full flex flex-col gap-6 lg:gap-8">
