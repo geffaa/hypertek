@@ -3,16 +3,19 @@ import Switch from "@mui/material/Switch";
 import searchImage from "../assets/search.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
 function AddCollection() {
+  const navigate = useNavigate()
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState(null);
+const [localData , setLocalData ] = useState();
+
 
   // Fetch data from API
   useEffect(() => {
@@ -59,6 +62,9 @@ function AddCollection() {
     fetchCollections();
   }, []);
 
+
+ 
+
   const toggleStatus = (id) => {
     setCollections((prev) =>
       prev.map((col) => (col.id === id ? { ...col, status: !col.status } : col))
@@ -70,6 +76,49 @@ function AddCollection() {
     setSelectedCollection(collection);
     setShowDeleteModal(true);
   };
+
+
+const handleAddCollection = () => {
+  const adminDataString = localStorage.getItem("admin_data"); // get from localStorage
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again."); // no data in storage
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again."); // ID missing
+    return;
+  }
+  console.log("your admin id is :",adminId);
+
+  console.log("Admin ID:", adminId);
+  navigate(`/${adminId}/create-collection`); // navigate when ID exists
+};
+
+
+const handleEditCollection = (collection) => {
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+
+  // Navigate with admin ID and pass collection data via state
+  navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
+};
 
   // Delete the item
   const handleDeleteCollection = async () => {
@@ -141,6 +190,9 @@ function AddCollection() {
     }
   };
 
+
+
+
   // Loading state
   if (loading) {
     return (
@@ -149,6 +201,8 @@ function AddCollection() {
       </div>
     );
   }
+
+
 
   // Empty state
   if (collections.length === 0 && !loading) {
@@ -183,12 +237,15 @@ function AddCollection() {
                 className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300 "
               />
             </div>
-            <Link
-              to="/create-collection"
-              className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
-            >
-              Add Collection
-            </Link>
+         <div className="flex justify-end mt-4">
+      <button
+        onClick={handleAddCollection}
+        className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
+      >
+        Add Collection
+      </button>
+    </div>
+
           </div>
         </div>
 
@@ -248,12 +305,10 @@ function AddCollection() {
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300 "
             />
           </div>
-          <Link
-            to="/create-collection"
-            className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
-          >
-            Add Collection
-          </Link>
+         <button onClick={handleAddCollection} className="...">
+  Add Collection
+</button>
+
         </div>
       </div>
 
@@ -321,14 +376,13 @@ function AddCollection() {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                    <button className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded">
-                      <Link
-                        to={`/edit-collection-item`}
-                        state={{ collection: col }}
-                      >
-                        <img src={EditImage} alt="edit" className="w-4 h-4" />
-                      </Link>
-                    </button>
+                   <button
+  onClick={() => handleEditCollection(col)}
+  className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+>
+  <img src={EditImage} alt="edit" className="w-4 h-4" />
+</button>
+
                     <button
                       onClick={() => handleOpenDeleteModal(col)}
                       className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"

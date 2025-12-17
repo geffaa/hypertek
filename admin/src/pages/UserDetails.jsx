@@ -4,47 +4,39 @@ import searchImage from "../assets/search.png";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Link , useNavigate } from "react-router-dom"
+import { Dashboard_Base_Url , Image_Base_Url  } from "../Config";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 function AddCollection() {
-  const [collections, setCollections] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const navigate = useNavigate()
+const [collections, setCollections] = useState([]);
+const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [selectedUserId, setSelectedUserId] = useState(null);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get(`${Dashboard_Base_Url}/v1/users`);
-        console.log("API response:", res.data.users);
 
-        if (res.data.success && res.data.users) {
-          const mapped = res.data.users.map((user) => ({
-            id: user._id,
-            name: user.FullName || "No Name",
-            avatar: user.Avatar,
-            email: user.Email,
-            status: user.isActive, // use database value
-          }));
+const handleEditUser = (collection) => {
+  console.log("your user data are :",collection);
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
 
-          setCollections(mapped);
-          console.log("Mapped users:", mapped);
-        }
-      } catch (err) {
-        console.log("Error fetching users:", err);
-      }
-    };
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
 
-    fetchUsers();
-  }, []);
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
 
-  const toggleStatus = async (id, currentStatus) => {
-    if (!id) {
-      toast.error("Id is required");
-      return;
-    }
+  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+
+  // Navigate with admin ID and pass collection data via state
+navigate(`/${adminId}/edit-user`, { state: { userData: collection } });
+};
 
     try {
       // Toggle the status
@@ -184,18 +176,16 @@ function AddCollection() {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                    <button className="p-2  cursor-pointer transition-colors duration-200">
-                      <Link to="/edit-user" state={{ userData: col }}>
-                        <img src={EditImage} alt="edit" className="w-4 h-4" />
-                      </Link>
-                    </button>
-                    <button
-                      className="p-2  cursor-pointer  transition-colors duration-200"
-                      onClick={() => {
-                        setSelectedUserId(col.id);
-                        setShowDeleteModal(true);
-                      }}
-                    >
+                   <button
+                                        onClick={() => handleEditUser(col)}
+                                        className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+                                      >
+                                        <img src={EditImage} alt="edit" className="w-4 h-4" />
+                                      </button>
+                    <button className="p-2  cursor-pointer  transition-colors duration-200"   onClick={() => {
+    setSelectedUserId(col.id);
+    setShowDeleteModal(true);
+  }}>
                       <img src={DeleteImage} alt="delete" className="w-3 h-4" />
                     </button>
                   </div>

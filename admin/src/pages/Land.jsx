@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config"; // make sure these exist
@@ -10,6 +10,7 @@ import { Dashboard_Base_Url, Image_Base_Url } from "../Config"; // make sure the
 function Land() {
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [selectedLand, setSelectedLand] = useState(null);
@@ -46,6 +47,27 @@ const handleDeleteLand = async () => {
     console.error(error);
     toast.error(error.response?.data?.message || "Error deleting land");
   }
+};
+
+const handleEditLand = (collection) => {
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+
+  // Navigate with admin ID and pass collection data via state
+  navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
 };
 
 
@@ -185,9 +207,13 @@ src={land.image ? `${Image_Base_Url}${land.image}` : `${Image_Base_Url}${land.im
       </td>
       <td className="px-6 py-4">
         <div className="flex gap-4">
-          <Link to={`/edit-collection-item`} state={{ collection: land }}>
-            <img src={EditImage} alt="edit" className="w-4 h-4" />
-          </Link>
+         <button
+  onClick={() => handleEditLand(land)}
+  className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+>
+  <img src={EditImage} alt="edit" className="w-4 h-4" />
+</button>
+
           <button onClick={() => handleOpenDeleteModal(land)}>
             <img src={DeleteImage} alt="delete" className="w-3 h-4" />
           </button>

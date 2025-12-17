@@ -3,7 +3,7 @@ import Switch from "@mui/material/Switch";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -11,6 +11,7 @@ import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
 
 function Character() {
+  const navigate = useNavigate()
   const [characters, setCharacters] = useState([]);
 const [loading, setLoading] = useState(true);
 const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -48,6 +49,28 @@ useEffect(() => {
 
   fetchCharacters();
 }, []);
+
+
+const handleEditCharacter = (collection) => {
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+
+  // Navigate with admin ID and pass collection data via state
+  navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
+};
 
 
  const handleToggleStatus = async (char) => {
@@ -192,10 +215,11 @@ const handleDeleteCharacter = async () => {
                 {/* Action */}
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                    <button className="p-2 cursor-pointer">
-                      <Link to="/edit-collection-item" state={{ collection: char }}>
-                        <img src={EditImage} alt="edit" className="w-4 h-4" />
-                      </Link>
+                     <button
+                      onClick={() => handleEditCharacter(char)}
+                      className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+                    >
+                      <img src={EditImage} alt="edit" className="w-4 h-4" />
                     </button>
 
                     <button className="p-2 cursor-pointer" onClick={() => handleOpenDeleteModal(char)}>
