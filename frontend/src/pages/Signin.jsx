@@ -77,7 +77,8 @@ localStorage.setItem("authData", JSON.stringify(res.data));
         console.log("your login data response are :",res.data);
         const userId = res.data.user.id;
       
-window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
+// window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
+window.location.href = `http://localhost:5174/${userId}`;
       } else {
         navigate("/dashboard");
       }
