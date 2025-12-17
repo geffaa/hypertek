@@ -2,126 +2,130 @@ import React, { useState, useRef } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import BgEffect2 from "../components/common/BgEffect2";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
 
-
-
 function CreateCollections() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
-  const fileInputRef = useRef(null); 
+  const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
- const [formData, setFormData] = useState({
-  name: "",
-  symbol: "",
-  chain: "",
-  royaltyPercent: "",
-  royaltyWallet: "",
-  image: "",
-  supply: "",
-  Type: "",
-  owner:"admin",
-  creator:"admin"
-  
+  const [formData, setFormData] = useState({
+    name: "",
+    symbol: "",
+    chain: "",
+    royaltyPercent: "",
+    royaltyWallet: "",
+    image: "",
+    supply: "",
+    Type: "",
+    owner: "admin",
+    creator: "admin",
+  });
 
-});
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file); // store the file
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result); // for preview
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-
- const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    setSelectedFile(file); // store the file
-    const reader = new FileReader();
-    reader.onload = () => {
-      setSelectedImage(reader.result); // for preview
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-const handleDrop = (event) => {
-  event.preventDefault();
-  const file = event.dataTransfer.files[0];
-  if (file) {
-    setSelectedFile(file); // store the file
-    const reader = new FileReader();
-    reader.onload = () => {
-      setSelectedImage(reader.result); // for preview
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      setSelectedFile(file); // store the file
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result); // for preview
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleDragOver = (event) => {
     event.preventDefault(); // allow drop
   };
 
-const handleSubmit = async () => {
-  if (!formData.name || !formData.symbol || !formData.chain || !formData.Type) {
-    toast.error("All fields are required");
-    return;
-  }
-
-  if (!selectedImage) {
-    toast.error("Image is required");
-    return;
-  }
-
-  if (!Dashboard_Base_Url) {
-    toast.error("Base URL is required");
-    return;
-  }
-
-  const loading = toast.loading("Creating collection...");
-
-  try {
-    if (!selectedFile) {
-  toast.error("Image is required");
-  return;
-}
-
-const data = new FormData();
-data.append("name", formData.name);
-data.append("symbol", formData.symbol);
-data.append("chain", formData.chain);
-data.append("Type", formData.Type);
-data.append("royaltyPercent", formData.royaltyPercent);
-data.append("royaltyWallet", formData.royaltyWallet);
-data.append("supply", formData.supply);
-data.append("image", selectedFile); // use the actual file object
-data.append("owner", (formData.owner || "admin").toString());
-data.append("creator", (formData.creator || "admin").toString());
-
-
-
-    const res = await fetch(`${Dashboard_Base_Url}/v1/nft/collection/create`, {
-      method: "POST",
-      body: data, // don't stringify FormData
-    });
-
-    const result = await res.json();
-
-    if (res.ok) {
-      toast.success("Collection Created Successfully", { id: loading });
-      navigate("/collections");
-    } else {
-      toast.error(result.error || "Failed to create collection", { id: loading });
+  const handleSubmit = async () => {
+    if (
+      !formData.name ||
+      !formData.symbol ||
+      !formData.chain ||
+      !formData.Type
+    ) {
+      toast.error("All fields are required");
+      return;
     }
-  } catch (err) {
-    toast.error(err.message || "Something went wrong", { id: loading });
-  }
-};
 
+    if (!selectedImage) {
+      toast.error("Image is required");
+      return;
+    }
 
+    if (!Dashboard_Base_Url) {
+      toast.error("Base URL is required");
+      return;
+    }
 
-const handleBackButton = ()=>{
-  navigate("/collections")
-}
+    const loading = toast.loading("Creating collection...");
 
+    try {
+      if (!selectedFile) {
+        toast.error("Image is required");
+        return;
+      }
+
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("symbol", formData.symbol);
+      data.append("chain", formData.chain);
+      data.append("Type", formData.Type);
+      data.append("royaltyPercent", formData.royaltyPercent);
+      data.append("royaltyWallet", formData.royaltyWallet);
+      data.append("supply", formData.supply);
+      data.append("image", selectedFile); // use the actual file object
+      data.append("owner", (formData.owner || "admin").toString());
+      data.append("creator", (formData.creator || "admin").toString());
+
+      const token = localStorage.getItem("token"); // get token from storage
+
+      const res = await fetch(
+        `${Dashboard_Base_Url}/v1/nft/admin/collection/create`,
+        {
+          method: "POST",
+          body: data, // FormData
+          headers: {
+            Authorization: `Bearer ${token}`, // 🔑 send the token
+          },
+        }
+      );
+
+      const result = await res.json();
+
+      if (res.ok) {
+        toast.success("Collection Created Successfully", { id: loading });
+        navigate("/collections");
+      } else {
+        toast.error(result.error || "Failed to create collection", {
+          id: loading,
+        });
+      }
+    } catch (err) {
+      toast.error(err.message || "Something went wrong", { id: loading });
+    }
+  };
+
+  const handleBackButton = () => {
+    navigate("/collections");
+  };
 
   return (
     <div className="flex flex-col  min-h-screen bg-black  overflow-hidden">
@@ -317,7 +321,9 @@ const handleBackButton = ()=>{
                 id="name"
                 placeholder="Add Contract Name"
                 value={formData.name}
-  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
               />
             </div>
@@ -345,41 +351,48 @@ const handleBackButton = ()=>{
                 id="symbol"
                 placeholder="Create Name"
                 value={formData.symbol}
-  onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, symbol: e.target.value })
+                }
                 className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
               />
             </div>
 
             <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
-  <label
-    htmlFor="type"
-    style={{
-      fontFamily: "Inter, sans-serif",
-      fontWeight: 400,
-      fontStyle: "normal",
-      fontSize: "18px",
-      lineHeight: "100%",
-      letterSpacing: "0%",
-      color: "white",
-    }}
-  >
-    Collection Type
-  </label>
+              <label
+                htmlFor="type"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  color: "white",
+                }}
+              >
+                Collection Type
+              </label>
 
-<select
-  id="Type"
-  value={formData.Type}
-  onChange={(e) => setFormData({ ...formData, Type: e.target.value })}
-  className="w-full h-10 px-3 rounded-md bg-transparent text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors"
->
-  <option value="" className="text-black">Select Type</option>
-  <option value="NFA" className="text-black">NFA</option>
-  <option value="Land" className="text-black">Land</option>
-</select>
-
-
-</div>
-
+              <select
+                id="Type"
+                value={formData.Type}
+                onChange={(e) =>
+                  setFormData({ ...formData, Type: e.target.value })
+                }
+                className="w-full h-10 px-3 rounded-md bg-transparent text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors"
+              >
+                <option value="" className="text-black">
+                  Select Type
+                </option>
+                <option value="NFA" className="text-black">
+                  NFA
+                </option>
+                <option value="Land" className="text-black">
+                  Land
+                </option>
+              </select>
+            </div>
 
             {/* third  */}
             <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
@@ -416,8 +429,10 @@ const handleBackButton = ()=>{
                 <input
                   type="text"
                   id="chain"
-                 value={formData.chain}
-  onChange={(e) => setFormData({ ...formData, chain: e.target.value })}
+                  value={formData.chain}
+                  onChange={(e) =>
+                    setFormData({ ...formData, chain: e.target.value })
+                  }
                   placeholder="USDT"
                   className="w-full h-10 px-3 bg-transparent outline-none"
                 />
@@ -437,10 +452,13 @@ const handleBackButton = ()=>{
                   <input
                     type="text"
                     defaultValue="0"
-                     value={formData.royaltyPercent} // <-- use royaltyPercent here
-  onChange={(e) =>
-    setFormData({ ...formData, royaltyPercent: e.target.value })
-  }
+                    value={formData.royaltyPercent} // <-- use royaltyPercent here
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        royaltyPercent: e.target.value,
+                      })
+                    }
                     className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
                   />
                   <span className="text-[18px] text-white/70 px-2">%</span>
@@ -459,10 +477,10 @@ const handleBackButton = ()=>{
                   <input
                     type="text"
                     defaultValue="0"
-                     value={formData.supply}
-      onChange={(e) =>
-        setFormData({ ...formData, supply: e.target.value })
-      }
+                    value={formData.supply}
+                    onChange={(e) =>
+                      setFormData({ ...formData, supply: e.target.value })
+                    }
                     className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
                   />
                 </div>
@@ -477,10 +495,11 @@ const handleBackButton = ()=>{
               <input
                 type="text"
                 placeholder="Add wallet address"
-                value={formData.royaltyWallet}          // <-- bind value
-  onChange={(e) =>
-    setFormData({ ...formData, royaltyWallet: e.target.value }) // <-- update formData
-  }
+                value={formData.royaltyWallet} // <-- bind value
+                onChange={
+                  (e) =>
+                    setFormData({ ...formData, royaltyWallet: e.target.value }) // <-- update formData
+                }
                 className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
               />
             </div>
@@ -511,7 +530,8 @@ const handleBackButton = ()=>{
             gap: "37px",
           }}
         >
-          <button onClick={handleBackButton}
+          <button
+            onClick={handleBackButton}
             className="border border-white text-white hover:bg-white/10 transition-colors"
             style={{
               width: "133px",
@@ -540,7 +560,8 @@ const handleBackButton = ()=>{
               Cancel
             </span>
           </button>
-          <button onClick={handleSubmit}
+          <button
+            onClick={handleSubmit}
             className="bg-blue-800 hover:bg-blue-700 transition-colors"
             style={{
               width: "190px",

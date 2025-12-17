@@ -10,7 +10,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FiCamera } from "react-icons/fi";
 import FullScreenLoader from "../../Components/Common/Spinner";
 import { useSelector } from "react-redux";
-import { User_Dashboard_Url } from "../../Config";
+import { User_Dashboard_Url, BACKEND_BASE_URL } from "../../Config";
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -18,19 +18,56 @@ function EditProfile() {
   const [copied, setCopied] = useState(false);
   const user = useSelector((state) => state.auth.user);
 
-  console.log("your login user in profile :",user);
+  console.log("your login user in profile :", user);
 
+  const compressImage = (file, maxWidth = 800, quality = 0.7) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(
+            (blob) => {
+              const compressedFile = new File([blob], file.name, {
+                type: "image/jpeg",
+              });
+              resolve(compressedFile);
+            },
+            "image/jpeg",
+            quality
+          );
+        };
+      };
+    });
+  };
 
   const location = useLocation();
   const safeUserData = user || {};
-const [name, setName] = useState(user?.FullName || "");
-const [email, setEmail] = useState(user?.Email || "");
-const [bio, setBio] = useState(user?.Bio || "");
-const [userName, setUserName] = useState(user?.UserName || "");
+  const [name, setName] = useState(user?.FullName || "");
+  const [email, setEmail] = useState(user?.Email || "");
+  const [bio, setBio] = useState(user?.Bio || "");
+  const [userName, setUserName] = useState(user?.UserName || "");
 
-
-
-  
   const [currentPass, setCurrentPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -47,14 +84,20 @@ const [userName, setUserName] = useState(user?.UserName || "");
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selected = e.target.files[0];
-    if (selected) {
-      setFile(selected);
-      const reader = new FileReader();
-      reader.onload = () => setProfileImage(reader.result);
-      reader.readAsDataURL(selected);
-    }
+    if (!selected) return;
+
+    // Compress image
+    const compressedFile = await compressImage(selected);
+
+    // Save compressed file for API
+    setFile(compressedFile);
+
+    // Preview (lightweight base64)
+    const reader = new FileReader();
+    reader.onload = () => setProfileImage(reader.result);
+    reader.readAsDataURL(compressedFile);
   };
 
   const handleProfileClick = () => {
@@ -67,9 +110,8 @@ const [userName, setUserName] = useState(user?.UserName || "");
       return toast.error("New password and confirm password do not match");
     }
 
-
-    if(!user.id){
-      toast.error("User Id is required ")
+    if (!user.id) {
+      toast.error("User Id is required ");
     }
     try {
       setLoading(true);
@@ -83,16 +125,15 @@ const [userName, setUserName] = useState(user?.UserName || "");
       formData.append("Bio", bio);
       if (file) formData.append("Avatar", file);
 
-     const res = await axios.put(
-  `${User_Dashboard_Url}/edit/${user.id}`,
-  formData,
-  {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  }
-);
-
+      const res = await axios.put(
+        `${User_Dashboard_Url}/edit/${user.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       toast.success("Profile updated successfully!");
       navigate("/profile", { state: { userData: res.data.user } });
@@ -243,15 +284,13 @@ const [userName, setUserName] = useState(user?.UserName || "");
                 <input
                   type="text"
                   value={name}
-                
-  onChange={(e) => {
-     const value = e.target.value;
-     if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
-        setName(value);
-     }
-  }}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
+                      setName(value);
+                    }
+                  }}
                   placeholder={user?.FullName || "Full Name"}
-
                   className={inputClass}
                 />
                 {name.length >= 30 && (
@@ -261,14 +300,14 @@ const [userName, setUserName] = useState(user?.UserName || "");
                 )}
                 <input
                   type="text"
-                 value={userName}
-  onChange={(e) => {
-    const value = e.target.value;
-    if (value.length <= 30 && /^[a-zA-Z0-9_]*$/.test(value)) {
-      setUserName(value);
-    }
-  }}
-  placeholder={user?.UserName || "User Name"}
+                  value={userName}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.length <= 30 && /^[a-zA-Z0-9_]*$/.test(value)) {
+                      setUserName(value);
+                    }
+                  }}
+                  placeholder={user?.UserName || "User Name"}
                   className={inputClass}
                 />
                 {name.length >= 30 && (
@@ -293,8 +332,7 @@ const [userName, setUserName] = useState(user?.UserName || "");
                 value={email}
                 disabled
                 onChange={(e) => setEmail(e.target.value)}
-              placeholder={user?.Email || "Email"}
-
+                placeholder={user?.Email || "Email"}
                 className={inputClass}
               />
             </div>
@@ -347,13 +385,13 @@ const [userName, setUserName] = useState(user?.UserName || "");
               </div>
             )}
 
-             <div className="flex justify-center w-full my-16">
+            <div className="flex justify-center w-full my-16">
               <div className="max-w-md w-full">
                 <button type="submit" className="mx-auto block">
                   <CustomButton text="Save" />
                 </button>
-              </div> {/* Save Button */}
-          
+              </div>{" "}
+              {/* Save Button */}
             </div>
           </form>
         </div>
