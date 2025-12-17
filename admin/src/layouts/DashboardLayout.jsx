@@ -38,6 +38,8 @@ useEffect(() => {
       const res = await axios.get(`${Dashboard_Base_Url}/v1/admin/${userId}`);
       const adminData = res.data?.admin || res.data?.user;
 
+      console.log("your user data are :",res);
+
       if (!adminData?._id) throw new Error("Invalid admin data");
 
       dispatch(setAdmin(adminData));

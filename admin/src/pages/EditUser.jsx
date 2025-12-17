@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 function EditUser() {
    const location = useLocation();
    const navigate = useNavigate()
-  const userData = location.state?.userData || {}; // get user data or default empty
+  const userData = location.state?.userData || {}; 
+  console.log("your recieved data are :",userData);
 
 
   console.log("your recieved data is here :",userData

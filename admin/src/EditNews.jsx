@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import SearchIcon from "./assets/search.png";
 import Collectionimage from "./assets/CreateCollection/collection.png";
@@ -11,6 +12,68 @@ import { Dashboard_Base_Url, Image_Base_Url } from "./Config";
 import toast from "react-hot-toast";
 
 function EditNews() {
+  const navigate = useNavigate()
+ const [collections, setCollections] = useState([]);
+useEffect(() => {
+  const fetchNews = async () => {
+    try {
+      const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
+
+      console.log("Your news response:", res.data.data);
+
+      if (res.data) {
+       const newsData = res.data.data.map((item) => {
+  // Get the image file name only
+  const imageName = item.image ? item.image.split("/").pop() : null;
+
+  // Construct the proper URL
+  const imageUrl = imageName
+    ? `${Image_Base_Url}/uploads/news/${imageName}` // <-- use correct folder 'news'
+    : null;
+
+  console.log("Your complete image URL:", imageUrl);
+
+  return {
+    id: item._id,
+    name: item.heading,
+    image: imageUrl, // <-- use dynamic URL here
+    supply: new Date(item.createdAt).toLocaleDateString(),
+    status: item.status === "active",
+    description: item.description,
+  };
+});
+
+
+        console.log("Processed newsData:", newsData); // Full URLs with file names
+        setCollections(newsData);
+      }
+    } catch (error) {
+      console.log("Error fetching news:", error);
+    }
+  };
+
+  fetchNews();
+}, []);
+
+const handleEditNews = (news) => {
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+  console.log("your news data are :",news);
+
+  // Navigate to UpdateNews page with news data
+  navigate(`/${adminId}/edit-news-item`, { state: { newsItem: news } });
+};
   const [collections, setCollections] = useState([]);
   useEffect(() => {
     const fetchNews = async () => {
@@ -249,10 +312,10 @@ function EditNews() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
-                      <button className="p-2  cursor-pointer transition-colors duration-200">
-                        <Link to="/edit-news-item" state={{ newsItem: col }}>
+                      <button onClick={() => handleEditNews(col)} className="p-2  cursor-pointer transition-colors duration-200">
+                       
                           <img src={EditImage} alt="edit" className="w-4 h-4" />
-                        </Link>
+                        
                       </button>
                       <button
                         className="p-2  cursor-pointer  transition-colors duration-200"
