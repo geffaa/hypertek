@@ -4,6 +4,7 @@ import Marketplace from "../Models/MarketPlace.js";
 import { Offer } from "../Models/Offer.js";
 import LandSchema from "../Models/LandModel.js";
 import { Payment } from "../Models/Payment.js";   
+import NFT from "../Models/NFTSystem.js";
 
 
 // Helper: Build date filter
@@ -116,10 +117,10 @@ const getTotalMarketplaceCount = async (req, res) => {
     const filter = buildMonthFilter(month, year);
 
     // ✅ Total Count
-    const totalItems = await Marketplace.countDocuments(filter);
+    const totalItems = await NFT.countDocuments(filter);
 
     // ✅ Full Data with createdAt
-    const marketplaceItems = await Marketplace.find(filter)
+    const marketplaceItems = await NFT.find(filter)
       .select(`
         title
         serialNumber
@@ -196,7 +197,7 @@ const getCombinedCounts = async (req, res) => {
 
     // ✅ Total Counts
     const landCount = await LandSchema.countDocuments(filter);
-    const marketplaceCount = await Marketplace.countDocuments(filter);
+    const marketplaceCount = await NFT.countDocuments(filter);
 
     // ✅ Full Land Data with createdAt
     const lands = await LandSchema.find(filter)
@@ -204,7 +205,7 @@ const getCombinedCounts = async (req, res) => {
       .sort({ createdAt: -1 });
 
     // ✅ Full Marketplace Data with createdAt
-    const marketplaceItems = await Marketplace.find(filter)
+    const marketplaceItems = await NFT.find(filter)
       .select("title serialNumber price userId createdAt")
       .sort({ createdAt: -1 });
 

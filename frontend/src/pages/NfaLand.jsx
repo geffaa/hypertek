@@ -1,402 +1,239 @@
-import React, { useState } from "react";
-import Land1 from "../assets/images/land1.jpg";
+import React, { useState, useEffect } from "react";
 import CustomButton from "../Components/Buttons/Button1";
-import CustomButton2 from "../Components/Buttons/Button2";
 import { FiEdit2, FiEye } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from "../Config";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { BACKEND_BASE_URL } from "../Config";
+import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 
 function NfaLand() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { item } = location.state || {}; // safely access it
+  // 🔥 Selected NFT / Land
+  const { item } = location.state || {};
+  const collection = item?.collection;
+
   const { user } = useSelector((state) => state.auth);
 
-  console.log("your pass item to the land page are recieved :", item);
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-  const openSecondModal = () => {
-    setIsOpen(false);
-    setIsSecondOpen(true);
-  };
-  const closeSecondModal = () => setIsSecondOpen(false);
+  useEffect(() => {
+    if (!item) {
+      toast.error("No land selected");
+      navigate("/buy-nfa");
+    }
+  }, [item, navigate]);
 
-  const handleMakeOffer = () => {
-    console.log("Make offer clicked");
-  };
-
-  /// check payment
   const handlePayment = async (productId) => {
-    if (!productId || !user?.id) {
-      toast.error("User ID and Payment ID are required");
+    if (!user?.id) {
+      toast.error("Please login first");
       return;
     }
 
     try {
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
-        userId: user.id,
-        productId: productId,
-      });
+      const res = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/game/create`,
+        {
+          userId: user.id,
+          productId,
+        }
+      );
 
-      // Log the actual data
-      console.log("Payment response data:", res);
-
-      // Show backend message (success or info)
       if (res.data?.exist === "no") {
         navigate("/stripe-payment", { state: { item } });
+      } else {
+        toast.error("Already purchased");
       }
-      if (res.data?.exist === "yes") {
-        toast.error("Sorry you have already purchased it");
-      }
-
-      // setIsSecondOpen(false);
-    } catch (error) {
-      console.error("Payment request error:", error);
-
-      const errorMessage =
-        error?.response?.data?.message || error?.message || "Payment failed";
-
-      toast.error(errorMessage);
+    } catch {
+      toast.error("Payment failed");
     }
   };
 
-  // check payment through card
   const handlePaymentCard = async (productId) => {
-    if (!productId || !user?.id) {
-      toast.error("User ID and Payment ID are required");
+    if (!user?.id) {
+      toast.error("Please login first");
       return;
     }
 
     try {
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
-        userId: user.id,
-        productId: productId,
-      });
+      const res = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/game/create`,
+        {
+          userId: user.id,
+          productId,
+        }
+      );
 
-      // Log the actual data
-      console.log("Payment response data:", res);
-
-      // Show backend message (success or info)
       if (res.data?.exist === "no") {
         navigate("/offer", { state: { item } });
+      } else {
+        toast.error("Already purchased");
       }
-      if (res.data?.exist === "yes") {
-        toast.error("Sorry you have already purchased it");
-      }
-
-      // setIsSecondOpen(false);
-    } catch (error) {
-      console.error("Payment request error:", error);
-
-      const errorMessage =
-        error?.response?.data?.message || error?.message || "Payment failed";
-
-      toast.error(errorMessage);
+    } catch {
+      toast.error("Payment failed");
     }
   };
 
+  if (!item) return null;
+
   return (
-    <div className="flex flex-col justify-center w-full mt-12 md:px-24">
-      <div className="flex flex-col  text-white">
-        <div className="w-full max-w-[1000px] mx-auto px-4">
-          <div className="text-white flex items-center justify-start my-8 md:my-4 md:mr-8">
-            <Link
-              to="/buy-nfa"
-              className="border-b-2 border-blue-500 pb-1 text-sm md:text-base hover:text-blue-400 transition-colors"
-            >
-              Overview
-            </Link>
-            <Link
-              to="/offer-recieved"
-              className="pl-4 md:pl-6 text-sm md:text-base hover:text-blue-400 transition-colors"
-            >
-              Offer 0
-            </Link>
-          </div>
+    <div className="flex flex-col w-full mt-12 md:px-24 text-white">
+      {/* Tabs */}
+      {/* <div className="max-w-[1000px] mx-auto px-4">
+        <div className="flex gap-6 my-6">
+          <Link to="/buy-nfa" className="border-b-2 border-blue-500">
+            Overview
+          </Link>
+          <Link to="/offer-recieved">Offer 0</Link>
         </div>
+      </div> */}
 
-        {/* Main Card Container */}
-        <div className="max-w-[918px] mx-auto w-full mt-6 md:mt-8 h-auto flex flex-col md:flex-row gap-6 md:gap-[54px] px-4">
-          {/* Title Above Image for small screens */}
-          <div className="flex md:hidden flex-col gap-2 w-full">
-            <div className="flex items-center gap-2">
-              <h1 className="font-inter font-semibold text-xl text-white">
-                {item.title}
-              </h1>
-              <p className="font-inter font-semibold text-sm text-white">
-                {item.serialNumber} 🔥
-              </p>
-            </div>
-          </div>
+      {/* Main Content */}
+      <div className="max-w-[918px] mx-auto w-full mt-10 flex flex-col md:flex-row gap-8 px-4">
+        {/* Image */}
+        <img
+          src={`${BACKEND_BASE_URL}${collection?.image}`}
+          alt={collection?.name}
+          className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
+        />
 
-          {/* Image */}
-          <img
-            src={Land1}
-            alt="land image"
-            className="w-full md:w-[375px] h-[230px] md:h-[350px] rounded-[10px] object-cover object-top cursor-default"
-          />
+        {/* Details */}
+        <div className="flex-1 space-y-4">
+          <h1 className="text-2xl font-bold">
+            {collection?.name}
+          </h1>
 
-          {/* Content Section */}
-          <div className="w-full md:w-[464px] flex flex-col gap-4">
-            {/* Title Next to Image on medium+ screens */}
-            <div className="hidden md:flex items-center justify-between gap-2">
-              <h1 className="font-inter font-semibold text-2xl md:text-3xl text-white">
-                {item.title}
-              </h1>
-              <p className="font-inter font-semibold text-base md:text-[16px] text-white">
-                {item.serialNumber} 🔥
-              </p>
+          <p className="opacity-60">
+            Chain: {collection?.chain} | Symbol: {collection?.symbol}
+          </p>
+
+          <div className="bg-[#17171887] p-6 rounded-lg">
+            <div className="flex justify-between opacity-70">
+              <span>Price</span>
+              <span>Owner: {collection?.owner}</span>
             </div>
 
-            <p className="text-white opacity-50">Listed</p>
+            <h2 className="text-xl mt-3">
+              {item.priceETH ?? item.price} {collection?.symbol}
+            </h2>
 
-            {/* Card Section */}
-            <div className="w-full h-auto bg-[#17171887] px-4 md:px-6 py-6 md:py-8 rounded-[10px]">
-              {/* Price & Owner */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-white opacity-70 gap-2 md:gap-0">
-                <p>Price</p>
-                <p className="text-xs md:text-sm">
-                  Owned By : Oxc4c16a645...b21a
-                </p>
-              </div>
-
-              <h2 className="text-white mt-3 text-lg md:text-xl">
-                ${item.price}
-              </h2>
-
-              {/* Buttons */}
-              <div className="w-full flex flex-row justify-center gap-4 mt-4 md:mt-6">
-                <button onClick={openModal} className="w-full md:w-auto">
-                  <CustomButton text="Buy Now" />
-                </button>
-
-                <button
-                  onClick={() => handlePaymentCard(item._id)}
-                  className="w-full md:w-auto"
-                >
-                  <CustomButton text="Buy With Card" />
-                </button>
-              </div>
-
-              {/* Make Offer */}
-              <Link
-                to="/payment"
-                className="hidden md:flex items-center gap-2 mt-4 md:mt-6 text-white cursor-pointer"
-                onClick={handleMakeOffer}
-              >
-                Make Offer
-                <FiEdit2 className="text-base md:text-lg" />
-              </Link>
+            <div className="flex justify-end mt-3">
+              <FiEye /> <span className="ml-2">505 Views</span>
             </div>
 
-            {/* Make Offer for small screens */}
+            <div className="flex gap-4 mt-6">
+              <button onClick={() => setIsOpen(true)}>
+                <CustomButton text="Buy Now" />
+              </button>
+
+              <button onClick={() => handlePaymentCard(item._id)}>
+                <CustomButton text="Buy With Card" />
+              </button>
+            </div>
+
             <Link
               to="/payment"
-              className="flex md:hidden items-center gap-2 mt-4 text-white cursor-pointer"
-              onClick={handleMakeOffer}
+              state={{ item }}
+              className="flex items-center gap-2 mt-4"
             >
-              Make Offer
-              <FiEdit2 className="text-base md:text-lg" />
+              Make Offer <FiEdit2 />
             </Link>
           </div>
         </div>
       </div>
-
       <BuyNfa2 />
 
-      {/* First Modal */}
+      {/* ---------------- FIRST MODAL ---------------- */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
-          onClick={closeModal}
+          className="fixed inset-0 bg-black/70 flex justify-center pt-20 z-50"
+          onClick={() => setIsOpen(false)}
         >
           <div
-            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            className="bg-[#252B37] p-6 rounded-lg w-full max-w-md"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
-            >
-              &times;
-            </button>
+            <h2 className="text-xl font-bold text-center">Buy Land</h2>
 
-            <h1 className="text-white font-bold text-lg md:text-xl">
-              Buy Land
-            </h1>
-            <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
+            <img
+              src={`${BACKEND_BASE_URL}${collection?.image}`}
+              alt={collection?.name}
+              className="w-40 h-36 mx-auto my-4 rounded object-cover"
+            />
 
-            <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
-              <img
-                src={Land1}
-                alt="Land"
-                className="w-full h-full object-cover"
-              />
+            <h3 className="text-center font-semibold">
+              {collection?.name}
+            </h3>
+
+            <div className="mt-4 space-y-2">
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+                <span>List Price</span>
+                <span>
+                  {item.priceETH ?? item.price} {collection?.symbol}
+                </span>
+              </div>
+
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+                <span>Platform Fee</span>
+                <span>0.5 {collection?.symbol}</span>
+              </div>
+
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+                <span>Total</span>
+                <span>
+                  {Number(item.priceETH ?? item.price) + 0.5}{" "}
+                  {collection?.symbol}
+                </span>
+              </div>
             </div>
 
-            <h1 className="text-white text-xl font-bold mb-2">{item.title}</h1>
-            <div className="w-[90%] h-[1px] bg-gray-500 my-4"></div>
-
-            {[
-              { label: "List price", value: ` $ ${item.price}` },
-              { label: "Platform Fee", value: "$0.5" },
-              { label: "Total Fee", value: ` $ ${item.price + 0.5}` },
-            ].map((item, index) => (
-              <div key={index} className="w-[90%] mb-3">
-                <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                  <p className="text-gray-400 text-sm">{item.label}</p>
-                  <p className="text-white text-sm">{item.value}</p>
-                </div>
-              </div>
-            ))}
-
-            <div className="flex flex-row gap-4 mt-6 w-full justify-center">
-              <button onClick={closeModal}>
-                <div className="flex items-center">
-                  {/* Left small bar */}
-                  <div
-                    className="bg-[#002AA8] mr-0.5"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
-                    }}
-                  ></div>
-
-                  {/* Left angled border */}
-                  <div
-                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-                    }}
-                  ></div>
-
-                  {/* Main button area */}
-                  <div
-                    className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
-                    style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "2.24px solid #002AA8", // ~2.42px
-                    }}
-                  >
-                    Cancel
-                  </div>
-
-                  {/* Right angled border */}
-                  <div
-                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-                    }}
-                  ></div>
-
-                  {/* Right small bar */}
-                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
-                </div>
+            <div className="flex justify-between mt-6">
+              <button onClick={() => setIsOpen(false)}>
+                <CustomButton text="Cancel" />
               </button>
 
-              <button onClick={openSecondModal} className="w-1/2 md:w-auto">
-                <CustomButton text="Buy Now" />
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsSecondOpen(true);
+                }}
+              >
+                <CustomButton text="Continue" />
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Second Modal */}
+      {/* ---------------- SECOND MODAL ---------------- */}
       {isSecondOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
-          onClick={closeSecondModal}
+          className="fixed inset-0 bg-black/70 flex justify-center pt-20 z-50"
+          onClick={() => setIsSecondOpen(false)}
         >
           <div
-            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            className="bg-[#252B37] p-6 rounded-lg w-full max-w-md"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={closeSecondModal}
-              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
-            >
-              &times;
-            </button>
+            <h2 className="text-xl font-bold text-center">
+              Confirm Purchase
+            </h2>
 
-            <h1 className="text-white font-bold text-lg md:text-xl">
-              Buy Land
-            </h1>
-            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
-
-            <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
-              <img
-                src={Land1}
-                alt="Land"
-                className="w-full h-full object-cover"
-              />
+            <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
+              <span>Total Price</span>
+              <span>
+                {Number(item.priceETH ?? item.price) + 0.5}{" "}
+                {collection?.symbol}
+              </span>
             </div>
 
-            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
-
-            <div className="w-[90%] mb-3">
-              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">${item.price + 0.5}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-row gap-4 mt-6 w-full justify-center flex-wrap">
-              {/* Cancel button structure */}
-              <button onClick={closeSecondModal}>
-                <div className="flex items-center">
-                  {/* Left small bar */}
-                  <div
-                    className="bg-[#002AA8] mr-0.5"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.3rem", // ~21.93px
-                    }}
-                  ></div>
-
-                  {/* Left angled border */}
-                  <div
-                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-                    }}
-                  ></div>
-
-                  {/* Main button area */}
-                  <div
-                    className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px]"
-                    style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "2.24px solid #002AA8", // ~2.42px
-                    }}
-                  >
-                    Cancel
-                  </div>
-
-                  {/* Right angled border */}
-                  <div
-                    className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px]"
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-                    }}
-                  ></div>
-
-                  {/* Right small bar */}
-                  <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem]"></div>
-                </div>
+            <div className="flex justify-between mt-6">
+              <button onClick={() => setIsSecondOpen(false)}>
+                <CustomButton text="Close" />
               </button>
 
               <button onClick={() => handlePayment(item._id)}>

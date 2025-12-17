@@ -9,6 +9,7 @@ import { User_Dashboard_Url } from "../../Config";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { NewsImage_Url } from "../../Config";
 
 function CollectionDetails() {
   const [collections, setCollections] = useState([]);
@@ -45,7 +46,7 @@ function CollectionDetails() {
             chain: item.collection.chain,
             creatorFee: item.collection.royaltyPercent,
             supply: item.collection.supply,
-            image: `${User_Dashboard_Url}${item.collection.image}`,
+            image: `${NewsImage_Url}${item.collection.image}`,
             recipient: item.collection.owner,
             status: item.status === "active",
           }))

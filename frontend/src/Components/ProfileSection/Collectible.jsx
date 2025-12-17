@@ -61,9 +61,9 @@ function MarketPlace() {
     const fetchMarketData = async () => {
       try {
         const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/market/getMarket`
+          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
         );
-        if (res.data?.data) setMarketData(res.data.data);
+        if (res.data.success) setMarketData(res.data.collections);
       } catch (error) {
         console.error("Error fetching market data:", error);
       } finally {
@@ -82,6 +82,7 @@ function MarketPlace() {
           },
         });
         setUserData(res.data.user);
+        console.log("✅ Profile fetched:", res.data.user);
       } catch (error) {
         console.error(
           "❌ Profile fetch error:",
@@ -96,9 +97,8 @@ function MarketPlace() {
     }
   }, [token]);
 
-console.log("your user get data are :",userData);
-// console.log("Avatar:", userData.Bio);
-
+  console.log("your user get data are :", userData);
+  // console.log("Avatar:", userData.Bio);
 
   if (loading) {
     return <FullScreenLoader />;
@@ -186,67 +186,67 @@ console.log("your user get data are :",userData);
 
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center">
-              {marketData.slice(0, 4).map((item, index) => (
-                <div
-                  key={index}
-                  className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-xs sm:max-w-sm lg:max-w-none h-[320px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
-                >
-                  <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                    <img
-                      src={popularCollections}
-                      alt="Collection"
-                      className="w-full h-full object-cover object-top scale-x-[-1]"
-                    />
-                  </div>
-
-                  <h2 className="text-base lg:text-lg xl:text-xl font-bold md:mt-3 lg:mt-4 line-clamp-2">
-                    {item.title}
-                  </h2>
-
-                  <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
-                    <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
-                      {item.serialNumber} 🔥
-                    </h3>
-                    <div className="flex items-center">
+              {marketData.slice(0, 4).map((item, index) => {
+                const collection = item.collection; // extract the inner collection object
+                return (
+                  <div
+                    key={index}
+                    className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-xs sm:max-w-sm lg:max-w-none h-[320px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
+                  >
+                    <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                       <img
-                        src={TVector}
-                        alt=""
-                        className="w-2 h-2 lg:w-[10px] lg:h-[9px] xl:w-[12px] xl:h-[12px]"
+                        src={`${BACKEND_BASE_URL}${collection.image}`}
+                        alt={collection.name}
+                        className="w-full h-full object-cover object-top"
                       />
-                      <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm xl:text-base font-semibold">
-                        ${item.price}
+                    </div>
+
+                    <h2 className="text-base lg:text-lg xl:text-xl font-bold md:mt-3 lg:mt-4 line-clamp-2">
+                      {collection.name}
+                    </h2>
+
+                    <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
+                      <h3 className="text-xs lg:text-sm xl:text-base font-semibold">
+                        {collection.symbol} 🔥
                       </h3>
+                      <div className="flex items-center">
+                        <img
+                          src={TVector}
+                          alt=""
+                          className="w-2 h-2 lg:w-[10px] lg:h-[9px] xl:w-[12px] xl:h-[12px]"
+                        />
+                        <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm xl:text-base font-semibold">
+                          ${collection.priceETH || 0}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-full">
+                      <div className="block lg:hidden w-full">
+                        <button
+                          onClick={() => openModal(collection)}
+                          className="w-full"
+                        >
+                          <CustomButton text="List Now" />
+                        </button>
+                      </div>
+
+                      <div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
+                        <button
+                          onClick={() => openModal(collection)}
+                          className="w-full"
+                        >
+                          <CustomButton text="List Now" />
+                        </button>
+                      </div>
+
+                      <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300 text-center">
+                        No Listing
+                      </div>
                     </div>
                   </div>
-
-                  <div className="flex flex-col items-center justify-center w-full">
-                    {/* Small screens: always show List Now */}
-                    <div className="block lg:hidden w-full">
-                      <button
-                        onClick={() => openModal(item)}
-                        className="w-full"
-                      >
-                        <CustomButton text="List Now" />
-                      </button>
-                    </div>
-
-                    {/* Large screens: show on hover */}
-                    <div className="hidden lg:group-hover:flex justify-center transition-all duration-300 w-full">
-                      <button
-                        onClick={() => openModal(item)}
-                        className="w-full"
-                      >
-                        <CustomButton text="List Now" />
-                      </button>
-                    </div>
-
-                    {/* No Listing text for hover state on large screens */}
-                    <div className="lg:group-hover:hidden hidden md:block text-gray-400 text-sm md:mt-2 transition-all duration-300 text-center">
-                      No Listing
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
