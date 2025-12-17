@@ -4,19 +4,40 @@ import searchImage from "../assets/search.png";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
 import { Dashboard_Base_Url , Image_Base_Url  } from "../Config";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 
 function AddCollection() {
+  const navigate = useNavigate()
 const [collections, setCollections] = useState([]);
 const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [selectedUserId, setSelectedUserId] = useState(null);
 
 
+const handleEditUser = (collection) => {
+  console.log("your user data are :",collection);
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
 
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  if (!adminId) {
+    toast.error("Admin ID not found. Please try again.");
+    return;
+  }
+
+  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+
+  // Navigate with admin ID and pass collection data via state
+navigate(`/${adminId}/edit-user`, { state: { userData: collection } });
+};
 
 useEffect(() => {
   const fetchUsers = async () => {
@@ -189,11 +210,12 @@ const deleteUser = async () => {
                 <td className="px-6 py-4 text-[#FFFFFFC4]  font-medium">{col.supply}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                    <button className="p-2  cursor-pointer transition-colors duration-200">
-                     <Link to="/edit-user" state={{ userData: col }}>
-                     
-                      <img src={EditImage} alt="edit" className="w-4 h-4" /></Link>
-                    </button>
+                   <button
+                                        onClick={() => handleEditUser(col)}
+                                        className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+                                      >
+                                        <img src={EditImage} alt="edit" className="w-4 h-4" />
+                                      </button>
                     <button className="p-2  cursor-pointer  transition-colors duration-200"   onClick={() => {
     setSelectedUserId(col.id);
     setShowDeleteModal(true);
