@@ -10,7 +10,7 @@ import {
   MetaMaskAuth,
   TwitterAuth,
   GetAllUsers,
-  ToggleUserStatus, 
+  ToggleUserStatus,
   EditUser,
   DeleteUser,
   GetAdminByAdminId,
@@ -18,49 +18,32 @@ import {
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import upload from "../Middleware/UploadMulter.js";
 import express from "express";
-
 const Route = express.Router();
-
-// 📝 User signup
+// :memo: User signup
 Route.post("/user/signup", SignupUser);
-
-// 🔑 User login
+// :key: User login
 Route.post("/user/login", LoginUser);
-
-// 📩 Forgot password (send reset email)
+// :envelope_with_arrow: Forgot password (send reset email)
 Route.post("/user/forgot-password", ForgotPassword);
-
-// 🔒 Reset password (verify token and update password)
+// :lock: Reset password (verify token and update password)
 Route.post("/user/reset-password/:token", ResetPassword);
-
-// 🌐 Google authentication
+// :globe_with_meridians: Google authentication
 Route.post("/user/google", GoogleAuth);
-
-// 💬 Discord authentication
+// :speech_balloon: Discord authentication
 Route.post("/user/discord", DiscordAuth);
-
-// 📘 Meta / Facebook authentication
+// :blue_book: Meta / Facebook authentication
 Route.post("/user/MetaMask", MetaMaskAuth);
-
-// 🐦 Twitter authentication
+// :bird: Twitter authentication
 Route.post("/user/twitter", TwitterAuth);
-
-// 👤 Get user profile (protected route)
+// :bust_in_silhouette: Get user profile (protected route)
 Route.get("/getProfile", authMiddleware, GetProfile);
-
-
 Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
-
-
 Route.delete("/delete/:userId", DeleteUser);
-
-// ✏️ Edit user profile (update info or upload avatar)
+// :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", authMiddleware, upload.single("Avatar"), EditProfile);
-
-// ✅ Get all users (admin only)
+// :white_check_mark: Get all users (admin only)
 Route.get("/users", GetAllUsers);
-
-// ✅ NEW ROUTE: Toggle user active/inactive status (admin only)
+// :white_check_mark: NEW ROUTE: Toggle user active/inactive status (admin only)
 Route.patch("/user/status/:userId",  ToggleUserStatus);
 
 Route.get(
