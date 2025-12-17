@@ -1,7 +1,12 @@
 // Controllers/nftController.js - FIXED VERSION
 import NFTSystem from "../Models/NFTSystem.js";
-import { nftContract, marketContract, wallet, ethers, formatEther } from "../Service/blockchain.js";
-
+import {
+  nftContract,
+  marketContract,
+  wallet,
+  ethers,
+  formatEther,
+} from "../Service/blockchain.js";
 
 /**
  * Create Collection (store metadata)
@@ -9,15 +14,15 @@ import { nftContract, marketContract, wallet, ethers, formatEther } from "../Ser
 export async function createCollection(req, res) {
   try {
     // Extract data from body
-    const { 
-      name, 
-      symbol, 
-      Type, 
-      chain, 
-      owner, 
-      royaltyPercent, 
-      royaltyWallet, 
-      supply
+    const {
+      name,
+      symbol,
+      Type,
+      chain,
+      owner,
+      royaltyPercent,
+      royaltyWallet,
+      supply,
     } = req.body;
 
     // ✅ FIX: Detect creator info from authenticated user
@@ -25,10 +30,9 @@ export async function createCollection(req, res) {
     const userRole = req.user?.Role || req.user?.role;
     const isAdmin = userRole?.toLowerCase() === "admin";
     const creatorType = isAdmin ? "admin" : "user";
-    
-    // ✅ FIX: Only set userId for regular users, NOT for admins
-    // Check both _id and id from token
-    const userId = isAdmin ? null : (req.user?._id || req.user?.id || null);
+
+    // Use ID for everyone, not just regular users
+    const userId = req.user?._id || req.user?.id || null;
     const creatorWallet = owner; // collection owner wallet
 
     // console.log("📝 Creating Collection:");
@@ -41,7 +45,7 @@ export async function createCollection(req, res) {
     // Validate required fields
     if (!name || !symbol || !chain || !owner) {
       return res.status(400).json({
-        error: "Missing required fields: name, symbol, chain, owner"
+        error: "Missing required fields: name, symbol, chain, owner",
       });
     }
 
@@ -53,7 +57,7 @@ export async function createCollection(req, res) {
       image = req.body.image;
     } else {
       return res.status(400).json({
-        error: "Image is required (file or URL)."
+        error: "Image is required (file or URL).",
       });
     }
 
@@ -62,38 +66,38 @@ export async function createCollection(req, res) {
     // ✅ FIX: Create collection with proper userId handling
     const doc = await NFTSystem.create({
       userId: userId, // null for admin, actual ID for users
-      collection: { 
-        name, 
-        symbol, 
+      collection: {
+        name,
+        symbol,
         Type: Type || "ERC721",
-        chain, 
+        chain,
         image,
         owner,
         royaltyPercent: royaltyPercent || 5,
         royaltyWallet: finalRoyaltyWallet,
         supply: supply || 1,
         creator: creatorType, // "admin" or "user"
-        salesCount: 0 // Initialize sales count
+        salesCount: 0, // Initialize sales count
       },
       creator: creatorWallet, // blockchain wallet address
       owner: creatorWallet,
-      status: "active"
+      status: "active",
     });
 
     // console.log("✅ Collection created successfully:", doc._id);
     // console.log("- Collection userId:", doc.userId);
     // console.log("- Collection creator type:", doc.collection.creator);
 
-    return res.json({ 
-      success: true, 
+    return res.json({
+      success: true,
       message: `Collection created by ${creatorType}`,
       doc,
       createdBy: {
         role: userRole,
         userId: userId,
         type: creatorType,
-        isAdmin: isAdmin
-      }
+        isAdmin: isAdmin,
+      },
     });
   } catch (err) {
     console.error("❌ CREATE COLLECTION ERROR:", err);
@@ -101,16 +105,13 @@ export async function createCollection(req, res) {
   }
 }
 
-
-
-
 /**
  * Server-side Mint NFT
  */
 export async function serverMint(req, res) {
   try {
     const { docId, tokenURI, royaltyBps, creatorWallet } = req.body;
-    
+
     if (!nftContract) {
       return res.status(500).json({ error: "NFT contract not initialized" });
     }
@@ -121,7 +122,7 @@ export async function serverMint(req, res) {
 
     // Extract tokenId from Minted event
     let tokenId;
-    const mintedEvent = receipt.logs.find(log => {
+    const mintedEvent = receipt.logs.find((log) => {
       try {
         const parsed = nftContract.interface.parseLog(log);
         return parsed && parsed.name === "Minted";
@@ -139,20 +140,24 @@ export async function serverMint(req, res) {
     }
 
     // Update database with creator wallet
-    const nftDoc = await NFTSystem.findByIdAndUpdate(docId, {
-      tokenId,
-      tokenURI,
-      creator: creatorWallet || wallet.address, // Store the actual creator
-      owner: creatorWallet || wallet.address,
-      listed: false,
-      isFirstSale: true
-    }, { new: true });
+    const nftDoc = await NFTSystem.findByIdAndUpdate(
+      docId,
+      {
+        tokenId,
+        tokenURI,
+        creator: creatorWallet || wallet.address, // Store the actual creator
+        owner: creatorWallet || wallet.address,
+        listed: false,
+        isFirstSale: true,
+      },
+      { new: true }
+    );
 
-    return res.json({ 
-      success: true, 
-      tokenId, 
+    return res.json({
+      success: true,
+      tokenId,
       nftDoc,
-      txHash: receipt.hash 
+      txHash: receipt.hash,
     });
   } catch (err) {
     console.error(err);
@@ -166,12 +171,16 @@ export async function serverMint(req, res) {
 export async function createListing(req, res) {
   try {
     const { nftId, tokenId, seller, priceETH } = req.body;
-    
-    const nft = await NFTSystem.findByIdAndUpdate(nftId, {
-      listed: true, 
-      priceETH, 
-      seller
-    }, { new: true });
+
+    const nft = await NFTSystem.findByIdAndUpdate(
+      nftId,
+      {
+        listed: true,
+        priceETH,
+        seller,
+      },
+      { new: true }
+    );
 
     if (!nft) {
       return res.status(404).json({ error: "NFT not found" });
@@ -179,7 +188,7 @@ export async function createListing(req, res) {
 
     return res.json({ success: true, nft });
   } catch (err) {
-    console.error(err); 
+    console.error(err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -190,7 +199,7 @@ export async function createListing(req, res) {
 export async function getListingDetails(req, res) {
   try {
     const { tokenId } = req.params;
-    
+
     const nft = await NFTSystem.findOne({ tokenId: Number(tokenId) });
     if (!nft) {
       return res.status(404).json({ error: "NFT not found" });
@@ -201,23 +210,23 @@ export async function getListingDetails(req, res) {
     if (marketContract && process.env.MYNFT_ADDRESS) {
       try {
         const listing = await marketContract.getListing(
-          process.env.MYNFT_ADDRESS, 
+          process.env.MYNFT_ADDRESS,
           tokenId
         );
         blockchainListing = {
           seller: listing[0],
           price: formatEther(listing[1]),
-          active: listing[2]
+          active: listing[2],
         };
       } catch (err) {
         console.error("Error fetching blockchain listing:", err);
       }
     }
 
-    return res.json({ 
-      success: true, 
+    return res.json({
+      success: true,
       nft,
-      blockchainListing
+      blockchainListing,
     });
   } catch (err) {
     console.error(err);
@@ -229,16 +238,21 @@ export async function getListingDetails(req, res) {
  * Calculate payment distribution
  * IMPORTANT: This matches your smart contract logic
  */
-function calculatePaymentDistribution(priceETH, isFirstSale, creatorWallet, sellerWallet) {
+function calculatePaymentDistribution(
+  priceETH,
+  isFirstSale,
+  creatorWallet,
+  sellerWallet
+) {
   const PLATFORM_FEE_PERCENT = 10;
   const CREATOR_ROYALTY_PERCENT = 5;
   const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
-  
+
   let distribution = {
     sellerAmount: 0,
     creatorAmount: 0,
     platformAmount: 0,
-    payments: []
+    payments: [],
   };
 
   if (isFirstSale) {
@@ -248,32 +262,33 @@ function calculatePaymentDistribution(priceETH, isFirstSale, creatorWallet, sell
       recipient: creatorWallet,
       amount: priceETH,
       percentage: 100,
-      type: "creator_first_sale"
+      type: "creator_first_sale",
     });
   } else {
     // Subsequent sales: 5% creator, 10% platform, 85% seller
     distribution.creatorAmount = (priceETH * CREATOR_ROYALTY_PERCENT) / 100;
     distribution.platformAmount = (priceETH * PLATFORM_FEE_PERCENT) / 100;
-    distribution.sellerAmount = priceETH - distribution.creatorAmount - distribution.platformAmount;
+    distribution.sellerAmount =
+      priceETH - distribution.creatorAmount - distribution.platformAmount;
 
     distribution.payments.push(
       {
         recipient: creatorWallet,
         amount: distribution.creatorAmount,
         percentage: 5,
-        type: "creator_royalty"
+        type: "creator_royalty",
       },
       {
         recipient: platformWallet,
         amount: distribution.platformAmount,
         percentage: 10,
-        type: "platform_fee"
+        type: "platform_fee",
       },
       {
         recipient: sellerWallet,
         amount: distribution.sellerAmount,
         percentage: 85,
-        type: "seller_proceeds"
+        type: "seller_proceeds",
       }
     );
   }
@@ -304,8 +319,8 @@ export async function recordOnchainSale(req, res) {
 
     // Payment distribution
     const distribution = calculatePaymentDistribution(
-      priceETH, 
-      nft.isFirstSale, 
+      priceETH,
+      nft.isFirstSale,
       creatorWallet,
       seller
     );
@@ -320,7 +335,7 @@ export async function recordOnchainSale(req, res) {
       sellerReceived: distribution.sellerAmount,
       txHash: txHash,
       isFirstSale: nft.isFirstSale,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     nft.salesHistory.push(saleRecord);
@@ -348,36 +363,35 @@ export async function recordOnchainSale(req, res) {
         seller: nft.seller,
         buyer: nft.buyer,
         isFirstSale: nft.isFirstSale,
-        collectionSalesCount: nft.collection.salesCount
+        collectionSalesCount: nft.collection.salesCount,
       },
       sale: saleRecord,
       paymentDistribution: {
         total: priceETH,
-        breakdown: distribution.payments.map(p => ({
+        breakdown: distribution.payments.map((p) => ({
           recipient: p.recipient,
           amount: p.amount,
           percentage: p.percentage,
           type: p.type,
-          amountETH: p.amount.toFixed(4)
+          amountETH: p.amount.toFixed(4),
         })),
-        wasFirstSale: saleRecord.isFirstSale
-      }
+        wasFirstSale: saleRecord.isFirstSale,
+      },
     });
   } catch (err) {
     console.error("Error recording sale:", err);
     return res.status(500).json({
       error: err.message,
-      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
     });
   }
 }
-
 
 export async function getPopularCollections(req, res) {
   try {
     const topN = parseInt(req.query.top) || 10; // Default top 10
 
-    const collections = await NFTSystem.find({ "status": "active" })
+    const collections = await NFTSystem.find({ status: "active" })
       .sort({ "collection.salesCount": -1 })
       .limit(topN)
       .select("collection tokenId owner listed priceETH createdAt isFirstSale");
@@ -385,7 +399,7 @@ export async function getPopularCollections(req, res) {
     return res.json({
       success: true,
       collections,
-      count: collections.length
+      count: collections.length,
     });
   } catch (err) {
     console.error("getPopularCollections error:", err);
@@ -393,29 +407,29 @@ export async function getPopularCollections(req, res) {
   }
 }
 
-
 /**
  * Get royalties summary for a specific creator
  */
 export async function getRoyaltiesSummary(req, res) {
   try {
     const { creatorWallet } = req.query;
-    
+
     let matchStage = {};
     if (creatorWallet) {
-      matchStage = { 
+      matchStage = {
         $or: [
           { creator: creatorWallet },
           { "collection.owner": creatorWallet },
-          { "collection.royaltyWallet": creatorWallet }
-        ]
+          { "collection.royaltyWallet": creatorWallet },
+        ],
       };
     }
 
     const pipeline = [
       { $match: matchStage },
       { $unwind: "$salesHistory" },
-      { $group: {
+      {
+        $group: {
           _id: "$creator",
           creatorWallet: { $first: "$creator" },
           royaltyWallet: { $first: "$collection.royaltyWallet" },
@@ -427,37 +441,38 @@ export async function getRoyaltiesSummary(req, res) {
               $cond: [
                 { $eq: ["$salesHistory.isFirstSale", true] },
                 "$salesHistory.priceETH",
-                0
-              ]
-            }
+                0,
+              ],
+            },
           },
           subsequentRoyalties: {
             $sum: {
               $cond: [
                 { $eq: ["$salesHistory.isFirstSale", false] },
                 "$salesHistory.royaltyPaid",
-                0
-              ]
-            }
-          }
-      }},
-      { $sort: { totalRoyaltyEarned: -1 } }
+                0,
+              ],
+            },
+          },
+        },
+      },
+      { $sort: { totalRoyaltyEarned: -1 } },
     ];
-    
+
     const result = await NFTSystem.aggregate(pipeline);
-    
-    return res.json({ 
-      success: true, 
-      summary: result.map(r => ({
+
+    return res.json({
+      success: true,
+      summary: result.map((r) => ({
         ...r,
         totalRoyaltyEarnedETH: r.totalRoyaltyEarned.toFixed(4),
         totalSalesValueETH: r.totalSalesValue.toFixed(4),
         firstSaleEarningsETH: r.firstSaleEarnings.toFixed(4),
-        subsequentRoyaltiesETH: r.subsequentRoyalties.toFixed(4)
-      }))
+        subsequentRoyaltiesETH: r.subsequentRoyalties.toFixed(4),
+      })),
     });
   } catch (err) {
-    console.error(err); 
+    console.error(err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -469,10 +484,10 @@ export async function getPlatformRevenue(req, res) {
   try {
     const pipeline = [
       { $unwind: "$salesHistory" },
-      { 
+      {
         $match: {
-          "salesHistory.isFirstSale": false // Only count platform fees from secondary sales
-        }
+          "salesHistory.isFirstSale": false, // Only count platform fees from secondary sales
+        },
       },
       {
         $group: {
@@ -480,31 +495,31 @@ export async function getPlatformRevenue(req, res) {
           totalPlatformFees: { $sum: "$salesHistory.platformFee" },
           totalTransactionValue: { $sum: "$salesHistory.priceETH" },
           transactionCount: { $sum: 1 },
-          averageTransactionValue: { $avg: "$salesHistory.priceETH" }
-        }
-      }
+          averageTransactionValue: { $avg: "$salesHistory.priceETH" },
+        },
+      },
     ];
-    
+
     const result = await NFTSystem.aggregate(pipeline);
-    
+
     const revenue = result[0] || {
       totalPlatformFees: 0,
       totalTransactionValue: 0,
       transactionCount: 0,
-      averageTransactionValue: 0
+      averageTransactionValue: 0,
     };
 
-    return res.json({ 
-      success: true, 
+    return res.json({
+      success: true,
       platformRevenue: {
         ...revenue,
         totalPlatformFeesETH: revenue.totalPlatformFees.toFixed(4),
         totalTransactionValueETH: revenue.totalTransactionValue.toFixed(4),
-        averageTransactionValueETH: revenue.averageTransactionValue.toFixed(4)
-      }
+        averageTransactionValueETH: revenue.averageTransactionValue.toFixed(4),
+      },
     });
   } catch (err) {
-    console.error(err); 
+    console.error(err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -516,7 +531,7 @@ export async function getNFTById(req, res) {
   try {
     const { id } = req.params;
     const nft = await NFTSystem.findById(id);
-    
+
     if (!nft) {
       return res.status(404).json({ error: "NFT not found" });
     }
@@ -534,9 +549,13 @@ export async function getNFTById(req, res) {
 export async function getNFTsByOwner(req, res) {
   try {
     const { owner } = req.query;
-    if (!owner) return res.status(400).json({ error: "Owner address required" });
+    if (!owner)
+      return res.status(400).json({ error: "Owner address required" });
 
-    const nfts = await NFTSystem.find({ owner: owner.toLowerCase(), status: "active" }) // <-- filter active
+    const nfts = await NFTSystem.find({
+      owner: owner.toLowerCase(),
+      status: "active",
+    }) // <-- filter active
       .sort({ createdAt: -1 });
 
     return res.json({ success: true, nfts, count: nfts.length });
@@ -552,9 +571,13 @@ export async function getNFTsByOwner(req, res) {
 export async function getNFTsByCreator(req, res) {
   try {
     const { creator } = req.query;
-    if (!creator) return res.status(400).json({ error: "Creator address required" });
+    if (!creator)
+      return res.status(400).json({ error: "Creator address required" });
 
-    const nfts = await NFTSystem.find({ creator: creator.toLowerCase(), status: "active" }) // <-- filter active
+    const nfts = await NFTSystem.find({
+      creator: creator.toLowerCase(),
+      status: "active",
+    }) // <-- filter active
       .sort({ createdAt: -1 });
 
     return res.json({ success: true, nfts, count: nfts.length });
@@ -571,7 +594,7 @@ export async function getAllNFTs(req, res) {
     return res.json({
       success: true,
       count: nfts.length,
-      nfts
+      nfts,
     });
   } catch (err) {
     console.error("getAllNFTs error:", err);
@@ -579,11 +602,10 @@ export async function getAllNFTs(req, res) {
   }
 }
 
-
 // Collection CRUD operations
 export async function getAllCollections(req, res) {
   try {
-    const collections = await NFTSystem.find({ "status": "active" }) // <-- filter active
+    const collections = await NFTSystem.find({ status: "active" }) // <-- filter active
       .select("collection tokenId owner listed priceETH createdAt isFirstSale")
       .sort({ createdAt: -1 });
 
@@ -617,23 +639,19 @@ export async function updateNFTStatus(req, res) {
     return res.json({
       success: true,
       message: `NFT status updated to ${status}`,
-      nft
+      nft,
     });
-
   } catch (err) {
     console.error("updateNFTStatus error:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
-
-
-
 export async function getSingleCollection(req, res) {
   try {
     const { id } = req.params;
     const collection = await NFTSystem.find({ userId: id });
-    
+
     if (!collection) {
       return res.status(404).json({ error: "Collection not found" });
     }
@@ -648,17 +666,17 @@ export async function getSingleCollection(req, res) {
 export async function updateCollection(req, res) {
   try {
     const { id } = req.params;
-    const { 
-      name, 
-      symbol, 
-      Type, 
-      chain, 
+    const {
+      name,
+      symbol,
+      Type,
+      chain,
       owner,
-      royaltyPercent, 
-      royaltyWallet, 
-      status, 
+      royaltyPercent,
+      royaltyWallet,
+      status,
       supply,
-      creator
+      creator,
     } = req.body;
 
     // Find existing collection
@@ -682,44 +700,42 @@ export async function updateCollection(req, res) {
         "collection.chain": chain || existing.collection.chain,
         "collection.image": image,
         "collection.owner": owner || existing.collection.owner,
-        "collection.royaltyPercent": royaltyPercent ?? existing.collection.royaltyPercent,
-        "collection.royaltyWallet": royaltyWallet || existing.collection.royaltyWallet,
+        "collection.royaltyPercent":
+          royaltyPercent ?? existing.collection.royaltyPercent,
+        "collection.royaltyWallet":
+          royaltyWallet || existing.collection.royaltyWallet,
         "collection.creator": creator || existing.collection.creator,
         "collection.supply": supply || existing.collection.supply,
-        "collection.status": status || existing.collection.status
+        "collection.status": status || existing.collection.status,
       },
       { new: true }
     );
 
     return res.json({ success: true, updated });
-
   } catch (err) {
     console.error("UPDATE COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
-
-
 export async function deleteCollection(req, res) {
   try {
     const { id } = req.params;
     const deleted = await NFTSystem.findByIdAndDelete(id);
-    
+
     if (!deleted) {
       return res.status(404).json({ error: "Collection not found" });
     }
 
-    return res.json({ 
-      success: true, 
-      message: "Collection deleted successfully" 
+    return res.json({
+      success: true,
+      message: "Collection deleted successfully",
     });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: err.message });
   }
 }
-
 
 /**
  * Get total counts: collections, NFTs, sales (all, not just active)
@@ -735,7 +751,7 @@ export async function getTotalCounts(req, res) {
     // Total sales (sum of all salesHistory lengths)
     const nftsWithSales = await NFTSystem.find({}, "salesHistory");
     let totalSalesCount = 0;
-    nftsWithSales.forEach(nft => {
+    nftsWithSales.forEach((nft) => {
       totalSalesCount += nft.salesHistory.length;
     });
 
@@ -747,7 +763,7 @@ export async function getTotalCounts(req, res) {
       totalCollections,
       totalNFTs,
       totalSalesCount,
-      totalBuysCount
+      totalBuysCount,
     });
   } catch (err) {
     console.error("getTotalCounts error:", err);
