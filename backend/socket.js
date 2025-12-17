@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import Message from "./Models/Message.js";
 import ChatRoom from "./Models/ChatRoom.js";
 export const socketHandler = (io) => {
-  // :closed_lock_with_key: Socket auth
+  // 🔐 Socket auth
   io.use((socket, next) => {
     const token = socket.handshake.auth?.token;
     if (!token) return next(new Error("No token"));
@@ -15,7 +15,8 @@ export const socketHandler = (io) => {
     }
   });
   io.on("connection", (socket) => {
-    console.log(`:white_check_mark: Connected: ${socket.user.id} (${socket.user.role})`);
+    console.log(`✅ Connected: ${socket.user.id} (${socket.user.role})`);
+
     /**
      * JOIN ROOM
      * admin → userId required
@@ -26,10 +27,12 @@ export const socketHandler = (io) => {
         let room;
         if (socket.user.role === "admin") {
           if (!userId) return;
+
           room = await ChatRoom.findOne({
             adminId: socket.user.id,
             userId
           });
+
           if (!room) {
             room = await ChatRoom.create({
               adminId: socket.user.id,
@@ -37,12 +40,15 @@ export const socketHandler = (io) => {
             });
           }
         }
+
         if (socket.user.role === "user") {
           if (!adminId) return;
+
           room = await ChatRoom.findOne({
             adminId,
             userId: socket.user.id
           });
+
           if (!room) {
             room = await ChatRoom.create({
               adminId,
@@ -50,22 +56,26 @@ export const socketHandler = (io) => {
             });
           }
         }
+
         socket.join(room._id.toString());
         socket.emit("roomJoined", room._id);
-        console.log(`:large_green_circle: Joined room: ${room._id}`);
+        console.log(`🟢 Joined room: ${room._id}`);
       } catch (err) {
-        console.error(":x: joinRoom error:", err);
+        console.error("❌ joinRoom error:", err);
       }
     });
+
     /**
      * SEND MESSAGE (ADMIN & USER SAME LOGIC)
      */
     socket.on("sendMessage", async ({ roomId, message }) => {
       try {
         if (!roomId || !message) return;
+
         const room = await ChatRoom.findById(roomId);
         if (!room) return;
-        // :closed_lock_with_key: Security check
+
+        // 🔐 Security check
         if (
           (socket.user.role === "admin" &&
             room.adminId.toString() !== socket.user.id) ||
@@ -74,19 +84,22 @@ export const socketHandler = (io) => {
         ) {
           return;
         }
+
         const newMsg = await Message.create({
           roomId,
           senderId: socket.user.id,
           senderRole: socket.user.role,
           message
         });
+
         io.to(roomId).emit("receiveMessage", newMsg);
       } catch (err) {
-        console.error(":x: sendMessage error:", err);
+        console.error("❌ sendMessage error:", err);
       }
     });
+
     socket.on("disconnect", () => {
-      console.log(`:red_circle: Disconnected: ${socket.user.id}`);
+      console.log(`🔴 Disconnected: ${socket.user.id}`);
     });
   });
 };

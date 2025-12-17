@@ -45,8 +45,11 @@ Route.put("/profile", authMiddleware, upload.single("Avatar"), EditProfile);
 Route.get("/users", GetAllUsers);
 // :white_check_mark: NEW ROUTE: Toggle user active/inactive status (admin only)
 Route.patch("/user/status/:userId",  ToggleUserStatus);
+
 Route.get(
   "/admin/:adminId", // only admin can access
   GetAdminByAdminId
 );
+
+
 export { Route };
