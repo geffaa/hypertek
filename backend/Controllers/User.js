@@ -988,7 +988,7 @@ const GetAdminByAdminId = async (req, res) => {
   try {
     const { adminId } = req.params;
 
-    // validate ObjectId
+    
     if (!adminId) {
       return res.status(400).json({
         success: false,
