@@ -3,9 +3,56 @@ import Sidebar from "../components/common/sidebar";
 import Header from "../components/common/header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../components/common/LogoutModel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { Dashboard_Base_Url } from "../Config";
+import { useDispatch } from "react-redux";
+import { setAdmin } from "../Redux/AdminSlice"
+import { useParams } from "react-router-dom";
+
+
+import {  useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
 
 const DashboardLayout = () => {
+const [userData, setUserData] = useState(null); // store fetched user data
+
+const location = useLocation(); // hook to access current URL
+  const { userId } = useParams();
+console.log("your user Id is:", userId);
+
+  const dispatch = useDispatch();
+  // const admin = useSelector((state) => state.admin.admin);
+
+  console.log("your user Id are :",userId);
+
+
+    
+useEffect(() => {
+  if (!userId) return;
+
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get(`${Dashboard_Base_Url}/v1/admin/${userId}`);
+      const adminData = res.data?.admin || res.data?.user;
+
+      if (!adminData?._id) throw new Error("Invalid admin data");
+
+      dispatch(setAdmin(adminData));
+      localStorage.setItem("admin_data", JSON.stringify(adminData));
+      toast.success("Admin data loaded successfully");
+    } catch (err) {
+      console.error("Failed to fetch admin data:", err);
+      toast.error("Failed to fetch admin data");
+    }
+  };
+
+  fetchUserData();
+}, [userId, dispatch]);
+
+
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (

@@ -1,13 +1,11 @@
 import jwt from "jsonwebtoken";
 import Message from "./Models/Message.js";
 import ChatRoom from "./Models/ChatRoom.js";
-
 export const socketHandler = (io) => {
   // 🔐 Socket auth
   io.use((socket, next) => {
     const token = socket.handshake.auth?.token;
     if (!token) return next(new Error("No token"));
-
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       socket.user = decoded; // { id, role }
@@ -16,7 +14,6 @@ export const socketHandler = (io) => {
       next(new Error("Invalid token"));
     }
   });
-
   io.on("connection", (socket) => {
     console.log(`✅ Connected: ${socket.user.id} (${socket.user.role})`);
 
@@ -28,7 +25,6 @@ export const socketHandler = (io) => {
     socket.on("joinRoom", async ({ userId, adminId }) => {
       try {
         let room;
-
         if (socket.user.role === "admin") {
           if (!userId) return;
 
