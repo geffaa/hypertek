@@ -74,46 +74,46 @@ const handleEditNews = (news) => {
   // Navigate to UpdateNews page with news data
   navigate(`/${adminId}/edit-news-item`, { state: { newsItem: news } });
 };
-  const [collections, setCollections] = useState([]);
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
+  // const [collections, setCollections] = useState([]);
+  // useEffect(() => {
+  //   const fetchNews = async () => {
+  //     try {
+  //       const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
 
-        console.log("Your news response:", res.data.data);
+  //       console.log("Your news response:", res.data.data);
 
-        if (res.data) {
-          const newsData = res.data.data.map((item) => {
-            // Get the image file name only
-            const imageName = item.image ? item.image.split("/").pop() : null;
+  //       if (res.data) {
+  //         const newsData = res.data.data.map((item) => {
+  //           // Get the image file name only
+  //           const imageName = item.image ? item.image.split("/").pop() : null;
 
-            // Construct the proper URL
-            const imageUrl = imageName
-              ? `${Image_Base_Url}/uploads/news/${imageName}` // <-- use correct folder 'news'
-              : null;
+  //           // Construct the proper URL
+  //           const imageUrl = imageName
+  //             ? `${Image_Base_Url}/uploads/news/${imageName}` // <-- use correct folder 'news'
+  //             : null;
 
-            console.log("Your complete image URL:", imageUrl);
+  //           console.log("Your complete image URL:", imageUrl);
 
-            return {
-              id: item._id,
-              name: item.heading,
-              image: imageUrl, // <-- use dynamic URL here
-              supply: new Date(item.createdAt).toLocaleDateString(),
-              status: item.status === "active",
-              description: item.description,
-            };
-          });
+  //           return {
+  //             id: item._id,
+  //             name: item.heading,
+  //             image: imageUrl, // <-- use dynamic URL here
+  //             supply: new Date(item.createdAt).toLocaleDateString(),
+  //             status: item.status === "active",
+  //             description: item.description,
+  //           };
+  //         });
 
-          console.log("Processed newsData:", newsData); // Full URLs with file names
-          setCollections(newsData);
-        }
-      } catch (error) {
-        console.log("Error fetching news:", error);
-      }
-    };
+  //         console.log("Processed newsData:", newsData); // Full URLs with file names
+  //         setCollections(newsData);
+  //       }
+  //     } catch (error) {
+  //       console.log("Error fetching news:", error);
+  //     }
+  //   };
 
-    fetchNews();
-  }, []);
+  //   fetchNews();
+  // }, []);
 
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,

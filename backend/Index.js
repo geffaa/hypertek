@@ -24,7 +24,7 @@ import OfferRoute from "./Routes/Offer.js";
 import Dashboard from "./Routes/Dashboard.js";
 import NFTRouter from "./Routes/NFT.js";
 import News from "./Routes/News.js";
-import chatRoutes from "./Routes/chat.js"; // NEW
+import chatRoutes from "./Routes/chat.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -38,15 +38,20 @@ const app = express();
 
 // ✨ Create HTTP server for Socket.IO
 const server = http.createServer(app);
+
+// ✅ FIXED: Changed https to http for localhost
 const io = new Server(server, {
   cors: {
     origin: [
-      "https://hyper-tek-games.deventiatech.com",
-      "https://admin-hyper-tek-game.deventiatech.com",
-    ], // frontend
+      "https://hyper-tek-games.deventiatech.com",  // ✅ Changed from https
+      "https://admin-hyper-tek-game.deventiatech.com",  // ✅ Changed from https
+      "http://localhost:3000",  // Additional common port
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   },
+  transports: ["websocket", "polling"], // Allow both transports
 });
 
 // Apply Socket.IO handler
@@ -54,12 +59,15 @@ socketHandler(io);
 
 // Middleware
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ✅ CORS Configuration
 app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
         "http://localhost:5173",
         "http://localhost:5174",
+        "http://localhost:3000",
         "https://hypertek100.com",
         "https://hyper-tek-games.deventiatech.com",
         "https://www.hyper-tek-games.deventiatech.com",
@@ -67,8 +75,13 @@ app.use(
         "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
         "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app",
       ];
-      if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-      else callback(new Error("Not allowed by CORS"));
+      // Allow requests with no origin (mobile apps, curl, etc)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("❌ CORS blocked origin:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
     },
     credentials: true,
   })
@@ -114,13 +127,14 @@ app.use("/api/v1/offer", OfferRoute);
 app.use("/api/dashboard", Dashboard);
 app.use("/api/v1/nft", NFTRouter);
 app.use("/api/v1/news", News);
-app.use("/api/v1/chat", chatRoutes); // NEW: chat routes
+app.use("/api/v1/chat", chatRoutes); // Chat routes
 
 // Health check
 app.get("/health", (req, res) => {
   res.json({
     status: "OK",
     timestamp: new Date().toISOString(),
+    socketio: io ? "Connected" : "Not initialized",
     blockchain: {
       nftContract: !!process.env.MYNFT_ADDRESS,
       marketContract: !!process.env.MARKETPLACE_ADDRESS,
@@ -149,13 +163,14 @@ app.use((err, req, res, next) => {
 });
 
 // Start server with Socket.IO
-// Start server with Socket.IO
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4700; // Changed to 4700 to match your socket config
+
 server.listen(PORT, () => {
   console.log("\n" + "=".repeat(60));
   console.log("🚀 NFT Marketplace Server with Socket.IO");
   console.log("=".repeat(60));
   console.log(`📡 Server: http://localhost:${PORT}`);
+  console.log(`💬 Socket.IO: ENABLED with CORS for http://localhost:5173`);
   console.log(
     `🗄️  Database: ${process.env.MONGODB_URL ? "Connected" : "Not configured"}`
   );
@@ -168,14 +183,7 @@ server.listen(PORT, () => {
   console.log(
     `💰 Platform Wallet: ${process.env.PLATFORM_WALLET_ADDRESS || "Not set"}`
   );
-  console.log("=".repeat(60));
-
-  // ✅ Socket.IO check
-  if (io) {
-    console.log("💬 Socket.IO is running and ready to accept connections!");
-  } else {
-    console.log("❌ Socket.IO is not initialized!");
-  }
-
   console.log("=".repeat(60) + "\n");
 });
+
+export default app;

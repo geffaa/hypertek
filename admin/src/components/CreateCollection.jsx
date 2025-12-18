@@ -95,16 +95,12 @@ function CreateCollections() {
       data.append("owner", (formData.owner || "admin").toString());
       data.append("creator", (formData.creator || "admin").toString());
 
-      const token = localStorage.getItem("token"); // get token from storage
 
       const res = await fetch(
         `${Dashboard_Base_Url}/v1/nft/admin/collection/create`,
         {
           method: "POST",
           body: data, // FormData
-          headers: {
-            Authorization: `Bearer ${token}`, // 🔑 send the token
-          },
         }
       );
 
@@ -112,7 +108,7 @@ function CreateCollections() {
 
       if (res.ok) {
         toast.success("Collection Created Successfully", { id: loading });
-        navigate("/collections");
+        // navigate("/collections");
       } else {
         toast.error(result.error || "Failed to create collection", {
           id: loading,

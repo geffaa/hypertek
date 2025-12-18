@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { Image_Base_Url } from "../Config";
-import {Dashboard_Base_Url} from "../Config";
+import axios from "axios"; // make sure axios is imported
+import { Dashboard_Base_Url } from "../Config";
 
 function UserDetails() {
   const [activeTab, setActiveTab] = useState("details");
@@ -12,26 +12,26 @@ function UserDetails() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const user = location.state; // user object passed from previous page
+  const user = location.state?.userData; // safe access
 
-  const handleBackButton = () => {
-    navigate("/users");
-  };
+  // Redirect if no user data
+  useEffect(() => {
+    if (!user) {
+      navigate("/users");
+      return;
+    }
+  }, [user, navigate]);
 
-  // ==========================
-  // Fetch user collections (NO TOKEN)
-  // ==========================
+  // Fetch user collections
   useEffect(() => {
     if (!user?.id) return;
 
     const fetchUserCollections = async () => {
       try {
         setLoading(true);
-
         const res = await axios.get(
           `${Dashboard_Base_Url}/v1/nft/user/collection/get/${user.id}`
         );
-
         setCollections(res.data.collection || []);
         console.log("Fetched collections:", res.data);
       } catch (err) {
@@ -44,11 +44,14 @@ function UserDetails() {
     fetchUserCollections();
   }, [user]);
 
+  const handleBackButton = () => {
+    navigate("/users");
+  };
+
   return (
-    <div className="bg-black min-h-screen flex flex-col relative">
-      {/* BG Effects */}
+    <div className="bg-black min-h-screen flex flex-col">
+      {/* BG Effect */}
       <div
-        className="absolute rounded-full"
         style={{
           top: "150px",
           left: "320px",
@@ -56,10 +59,11 @@ function UserDetails() {
           height: "250px",
           background: "#002AA8",
           filter: "blur(180px)",
+          pointerEvents: "none",
         }}
-      />
-      <div
         className="absolute rounded-full"
+      ></div>
+      <div
         style={{
           top: "500px",
           left: "900px",
@@ -67,125 +71,172 @@ function UserDetails() {
           height: "250px",
           background: "#002AA8",
           filter: "blur(180px)",
+          pointerEvents: "none",
         }}
-      />
+        className="absolute rounded-full"
+      ></div>
 
       <div className="m-12 flex-1">
-        {/* Tabs */}
-        <div className="flex gap-[101px]">
+        {/* Tab Buttons */}
+        <div
+          className="flex"
+          style={{
+            width: "404.056px",
+            height: "31px",
+            gap: "101px",
+            opacity: 1,
+          }}
+        >
           <button
             onClick={() => setActiveTab("details")}
-            className={`font-semibold text-[20px] pb-2 ${
-              activeTab === "details"
-                ? "text-white border-b-2 border-white"
-                : "text-white/70"
-            }`}
+            className="flex justify-center items-center cursor-pointer"
+            style={{
+              height: "31px",
+              paddingBottom: "6px",
+              fontFamily: "Inter",
+              fontWeight: 600,
+              fontSize: "20px",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+              color: activeTab === "details" ? "#FFFFFF" : "#FFFFFFAB",
+              borderBottom:
+                activeTab === "details"
+                  ? "2px solid #FFFFFF"
+                  : "1px solid transparent",
+              background: "transparent",
+            }}
           >
             User Details
           </button>
 
           <button
             onClick={() => setActiveTab("collections")}
-            className={`font-semibold text-[20px] pb-2 ${
-              activeTab === "collections"
-                ? "text-white border-b-2 border-white"
-                : "text-white/70"
-            }`}
+            className="flex items-center justify-center cursor-pointer"
+            style={{
+              height: "31px",
+              paddingBottom: "6px",
+              fontFamily: "Inter",
+              fontWeight: 600,
+              fontSize: "20px",
+              lineHeight: "100%",
+              letterSpacing: "0%",
+              color: activeTab === "collections" ? "#FFFFFF" : "#FFFFFFAB",
+              borderBottom:
+                activeTab === "collections"
+                  ? "2px solid #FFFFFF"
+                  : "1px solid transparent",
+              background: "transparent",
+            }}
           >
             User Collections
           </button>
         </div>
 
-        {/* ==========================
-            USER DETAILS TAB
-        ========================== */}
-        {activeTab === "details" && (
-          <div className="mt-12 px-5 flex flex-col gap-6">
+        {/* Content Section */}
+        {activeTab === "details" && user && (
+          <div
+            className="mt-12 px-5"
+            style={{
+              width: "502px",
+              height: "220px",
+              gap: "0px",
+              opacity: 1,
+              borderRadius: "6px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <img
               src={
-                user?.avatar
+                user.avatar
                   ? `${Image_Base_Url}${user.avatar}`
                   : Collectionimage
               }
-              alt={user?.name}
-              className="w-[117px] h-[122px] rounded-full object-cover"
+              alt={user.name || "User"}
+              className="w-[117px] h-[122px] mb-[5px] rounded-full object-cover opacity-100"
             />
 
-            <div className="flex gap-12 text-white">
-              <div>
-                <h1 className="font-semibold">Name:</h1>
-                <p>{user?.name || "-"}</p>
+            <div className="w-[481px] h-[43px] flex items-center gap-[45px] opacity-100">
+              <div className="flex flex-col items-start justify-center gap-[2px] w-[56px] h-[41px]">
+                <h1 className="font-inter font-semibold text-[18px] leading-[100%] opacity-100">
+                  Name:
+                </h1>
+                <p className="font-inter font-medium text-[14px] leading-[100%] opacity-100">
+                  {user.name}
+                </p>
               </div>
-
-              <div>
-                <h1 className="font-semibold">Email:</h1>
-                <p>{user?.email || "No Email"}</p>
+              <div className="flex flex-col items-start justify-center gap-[2px] w-[160px] h-[41px] opacity-100">
+                <h1 className="font-inter font-semibold text-[18px] leading-[100%] opacity-100">
+                  Email:
+                </h1>
+                <p className="font-inter font-medium text-[14px] leading-[100%] opacity-100">
+                  {user.supply || "No Email"}
+                </p>
               </div>
-
-              <div>
-                <h1 className="font-semibold">UID:</h1>
-                <p>{user?.id || "-"}</p>
+              <div className="flex flex-col items-start justify-center gap-[2px] w-[160px] h-[41px] opacity-100">
+                <h1 className="font-inter font-semibold text-[18px] leading-[100%] opacity-100">
+                  UID:
+                </h1>
+                <p className="font-inter font-medium text-[14px] leading-[100%] opacity-100">
+                  {user.id || "No UID"}
+                </p>
               </div>
             </div>
           </div>
         )}
 
-        {/* ==========================
-            USER COLLECTIONS TAB
-        ========================== */}
         {activeTab === "collections" && (
-          <div className="mt-12">
-            {loading && <p className="text-white">Loading collections...</p>}
-
-            {!loading && collections.length === 0 && (
-              <p className="text-white">No collections found</p>
-            )}
-
-            <div className="flex flex-wrap gap-8">
-              {collections.map((col) => (
+          <div className="flex flex-wrap gap-8 mt-12">
+            {loading ? (
+              <p className="text-white">Loading collections...</p>
+            ) : collections.length > 0 ? (
+              collections.map((col) => (
                 <div
                   key={col._id}
-                  className="w-[420px] h-[178px] flex items-center gap-4 p-5 rounded-[6px] border border-white/20"
+                  className="w-[420px] h-auto flex items-center gap-4 p-5 rounded-[6px] border-[1px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]"
+                  style={{
+                    borderImageSource:
+                      "linear-gradient(178.61deg, rgba(49, 47, 47, 0.56) 67.55%, rgba(151, 145, 145, 0.33) 98.82%)",
+                    borderImageSlice: 1,
+                  }}
                 >
                   <img
                     src={
-                      col.collection?.image
-                        ? `${Image_Base_Url}${col.collection.image}`
+                      col.collection.image
+                        ? `${Image_Base_Url}${col.image}`
                         : Collectionimage
                     }
-                    alt={col.collection?.name}
+                    alt={col.name || "Collection"}
                     className="w-[117px] h-[122px] rounded-full object-cover"
                   />
-
-                  <div className="text-white space-y-2">
-                    <div>
-                      <span className="font-semibold">Collection:</span>{" "}
-                      {col.collection?.name}
-                    </div>
-
-                    <div>
-                      <span className="font-semibold">Owner:</span>{" "}
-                      {col.collection?.owner?.slice(0, 6)}...
-                      {col.collection?.owner?.slice(-4)}
-                    </div>
-
-                    <div>
-                      <span className="font-semibold">Supply:</span>{" "}
-                      {col.collection?.supply}
-                    </div>
+                  <div className="flex flex-col gap-1 text-white">
+                    <p>
+                      <strong>Name:</strong> {col.collection.name}
+                    </p>
+                    <p>
+                      <strong>ID:</strong> {col._id}
+                    </p>
+                    <p>
+                      <strong>Supply:</strong> {col.collection.supply}
+                    </p>
+                    <p>
+                      <strong>Chain:</strong> {col.collection.chain}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <p className="text-white">No collections found.</p>
+            )}
           </div>
         )}
       </div>
 
       {/* Back Button */}
-      <div className="ml-12 pb-20">
+      <div className="flex justify-start ml-12 py-32">
         <button
+          className="w-[190px] h-[42px] rounded-[6px] cursor-pointer flex items-center justify-center gap-[10px] p-[10px] opacity-100 bg-[#002AA8] text-white"
           onClick={handleBackButton}
-          className="w-[190px] h-[42px] rounded bg-[#002AA8] text-white"
         >
           Back
         </button>

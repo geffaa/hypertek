@@ -43,7 +43,6 @@ NFTRouter.get("/platform/revenue", getPlatformRevenue);
 // ======================
 NFTRouter.post(
   "/admin/collection/create",
-  authMiddleware("admin"), // Admin only
   uploadTemp.single("image"),
   createCollection
 );

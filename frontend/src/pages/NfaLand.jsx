@@ -118,7 +118,7 @@ function NfaLand() {
             </div>
 
             <h2 className="text-xl mt-3">
-              {item.priceETH ?? item.price} {collection?.symbol}
+              {item.collection.supply ?? item.price} {collection?.symbol}
             </h2>
 
             <div className="flex justify-end mt-3">
@@ -173,7 +173,7 @@ function NfaLand() {
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>List Price</span>
                 <span>
-                  {item.priceETH ?? item.price} {collection?.symbol}
+                  {item.collection.supply ?? item.price} {collection?.symbol}
                 </span>
               </div>
 
@@ -185,7 +185,7 @@ function NfaLand() {
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Total</span>
                 <span>
-                  {Number(item.priceETH ?? item.price) + 0.5}{" "}
+                  {Number(item.collection.supply ?? item.price) + 0.5}{" "}
                   {collection?.symbol}
                 </span>
               </div>
@@ -226,7 +226,7 @@ function NfaLand() {
             <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
               <span>Total Price</span>
               <span>
-                {Number(item.priceETH ?? item.price) + 0.5}{" "}
+                {Number(item.collection.supply ?? item.price) + 0.5}{" "}
                 {collection?.symbol}
               </span>
             </div>
