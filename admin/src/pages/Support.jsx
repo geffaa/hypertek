@@ -131,7 +131,7 @@ function Support() {
       }
 
       try {
-        const res = await axios.get(`${Dashboard_Base_Url}/api/v1/chat/admin/chats`, {
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/chat/admin/chats`, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'X-Admin-Id': adminInfo._id
@@ -157,7 +157,7 @@ function Support() {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          `${Dashboard_Base_Url}/api/v1/chat/messages/${selectedChat._id}`,
+          `${Dashboard_Base_Url}/v1/chat/messages/${selectedChat._id}`,
           {
             headers: { 
               Authorization: `Bearer ${token}`,
