@@ -37,7 +37,7 @@ router.get("/get-support-admin", async (req, res) => {
 router.get("/admin/chats", authMiddleware(["admin"]), async (req, res) => {
   try {
     const chats = await ChatRoom.find({ adminId: req.user.id })
-      .populate("userId", "name email")
+      .populate("userId", "FullName Email")
       .sort({ updatedAt: -1 }); // Latest first
     res.json(chats);
   } catch (err) {

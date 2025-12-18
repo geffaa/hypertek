@@ -294,7 +294,7 @@ const handleWeb3Purchase = async () => {
             </h2>
 
             <div className="flex justify-end mt-4">
-              <FiEye /> <span className="ml-2">505 Views</span>
+              <FiEye /> <span className="ml-2">508 Views</span>
             </div>
 
             <div className="flex gap-4 mt-6">
