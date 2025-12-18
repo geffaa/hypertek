@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import {
   MARKETPLACE_ADDRESS,
@@ -18,6 +18,12 @@ import { BACKEND_BASE_URL } from "../../Config";
 function Buy1() {
   const navigate = useNavigate();
   const location = useLocation();
+
+    const {  token, isLoggedInUser } = useSelector((state) => state.auth);
+  
+console.log("your user token are :",token);
+
+ 
 
   // 🔥 Selected NFT item
   const { item } = location.state || {};
@@ -55,7 +61,7 @@ function Buy1() {
         toast.error("Already purchased");
       }
     } catch (err) {
-      toast.error("Payment failed");
+      toast.error("Payment failed",err);
     }
   };
 
@@ -87,180 +93,163 @@ function Buy1() {
 
   //// web 3
 
-const createListingAutomatically = async (signer, buyerAddress) => {
+ // ---------------------------------
+// 1️⃣ Mint NFT via backend with proper error handling
+const mintNFTBackend = async () => {
+  if (!user?.id) {
+    toast.error("Please login first");
+    return null;
+  }
+
   try {
-    toast.loading("Creating NFT listing...");
-    
-    // 1. Create contracts
-    const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
-    const marketplace = new ethers.Contract(MARKETPLACE_ADDRESS, MARKETPLACE_ABI, signer);
-    
-    let tokenId;
-    
-    // 2. Try to find existing NFTs owned by user
-    try {
-      // Try tokenId 0 first
-      const owner = await nftContract.ownerOf(0);
-      if (owner.toLowerCase() === buyerAddress.toLowerCase()) {
-        tokenId = 0;
-        console.log("User owns tokenId 0");
-      } else {
-        // Mint new NFT
-        toast.loading("Minting new NFT...");
-        const mintTx = await nftContract.mint(
-          `ipfs://auto-${Date.now()}`,
-          500 // 5% royalty
-        );
-        await mintTx.wait();
-        tokenId = 0; // Assuming first mint = tokenId 0
-        console.log("Minted new NFT, tokenId:", tokenId);
+    const res = await axios.post(
+      `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+      {
+        docId: item._id,
+        tokenURI: `ipfs://auto-${Date.now()}`,
+        royaltyBps: 500,
+        creatorWallet: user.wallet,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // user token
+          "Content-Type": "application/json",
+        },
       }
-    } catch (mintError) {
-      // If ownerOf fails, mint new NFT
-      console.log("Minting new NFT...", mintError.message);
-      
-      toast.loading("Minting new NFT...");
-      const mintTx = await nftContract.mint(
-        `ipfs://auto-create-${Date.now()}`,
-        500
-      );
-      await mintTx.wait();
-      tokenId = 0; // First NFT = tokenId 0
+    );
+
+    console.log("Mint API response:", res);
+
+    if (res?.data?.success) {
+      toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
+      return res.data.tokenId;
+    } else {
+      toast.error(res?.data?.error || "Mint failed: No TokenId returned");
+      return null;
     }
-    
-    // 3. Approve marketplace
-    toast.loading("Approving marketplace...");
-    const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
-    await approveTx.wait();
-    
-    // 4. Create listing with default price
-    const priceWei = ethers.parseEther("0.01"); // Default 0.01 ETH
-    const priceETH = "0.01";
-    
-    toast.loading("Creating listing...");
-    const listTx = await marketplace.createListing(NFT_ADDRESS, tokenId, priceWei);
-    await listTx.wait();
-    
-    console.log("Listing created:", { tokenId, price: priceETH });
-    
-    return {
-      success: true,
-      tokenId: tokenId,
-      price: priceETH,
-      message: `NFT listed! TokenId: ${tokenId}, Price: ${priceETH} ETH`
-    };
-    
   } catch (err) {
-    console.error("Auto-create error:", err);
-    return {
-      success: false,
-      error: err.reason || err.message,
-      message: "Failed to create listing"
-    };
+    console.error("Mint request error:", err.response?.data || err.message);
+    const message =
+      err.response?.data?.error ||
+      (err.message.includes("insufficient funds")
+        ? "Insufficient ETH in wallet to mint NFT"
+        : err.message);
+    toast.error(message);
+    return null;
   }
 };
 
+// 2️⃣ Create listing automatically with safe checks
+const createListingAutomatically = async (signer, buyerAddress) => {
+  try {
+    toast.loading("Minting NFT via backend...");
+    const tokenId = await mintNFTBackend();
 
+    if (!tokenId) {
+      toast.error("Cannot list NFT: TokenId not returned");
+      return { success: false, error: "TokenId not returned from backend" };
+    }
 
+    const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
+    const marketplace = new ethers.Contract(MARKETPLACE_ADDRESS, MARKETPLACE_ABI, signer);
+
+    toast.loading("Approving marketplace...");
+    const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
+    await approveTx.wait();
+
+    const priceWei = ethers.parseEther("0.01");
+    const listTx = await marketplace.createListing(NFT_ADDRESS, tokenId, priceWei);
+    await listTx.wait();
+
+    toast.success(`NFT listed! TokenId: ${tokenId}`);
+    return { success: true, tokenId, price: "0.01" };
+  } catch (err) {
+    console.error(err);
+    let errorMsg =
+      err.message.includes("insufficient funds")
+        ? "Insufficient ETH to approve/list NFT"
+        : err.message;
+    toast.error(errorMsg || "Failed to create listing");
+    return { success: false, error: errorMsg };
+  }
+};
+
+// 3️⃣ Handle Web3 purchase with wallet balance check
 const handleWeb3Purchase = async () => {
   try {
-    // 1. Basic checks
     if (!window.ethereum) {
       toast.error("MetaMask not installed");
       return;
     }
-    
+
     if (!user?.id) {
       toast.error("Please login first");
       return;
     }
 
-    // 2. Connect wallet
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     const buyer = await signer.getAddress();
 
-    console.log("Buyer:", buyer);
+    // ✅ Check wallet balance first
+    const balance = await provider.getBalance(buyer);
+    if (Number(ethers.formatEther(balance)) < 0.01) {
+      toast.error("Insufficient ETH in wallet to perform this transaction");
+      return;
+    }
 
-    // 3. Create contracts
-    const marketplace = new ethers.Contract(
-      MARKETPLACE_ADDRESS,
-      MARKETPLACE_ABI,
-      signer
-    );
+    const marketplace = new ethers.Contract(MARKETPLACE_ADDRESS, MARKETPLACE_ABI, signer);
 
-    // 4. Try to buy FIRST - if listing exists
+    // Try existing listing
+    let tokenIdToBuy = 0;
+    let listingExists = false;
+
     try {
-      // Try tokenId 0 first (most common)
-      const tokenId = 0;
-      
-      console.log("Checking listing for tokenId:", tokenId);
-      const listing = await marketplace.getListing(NFT_ADDRESS, tokenId);
-      
-      // If we get here, listing exists!
-      console.log("Listing found:", {
-        seller: listing[0],
-        price: ethers.formatEther(listing[1]),
-        active: listing[2]
-      });
+      const listing = await marketplace.getListing(NFT_ADDRESS, tokenIdToBuy);
+      if (listing.active) {
+        listingExists = true;
+        toast.loading("Confirm purchase in MetaMask...");
+        const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenIdToBuy, { value: listing[1] });
+        const receipt = await tx.wait();
+        toast.success("NFT purchased successfully! 🎉");
 
-      // Check if active
-      if (!listing[2]) {
-        throw new Error("Listing not active");
+        // Save to backend
+        await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/mint`, {
+          userId: user.id,
+          productId: item._id,
+          wallet: buyer,
+          tokenId: tokenIdToBuy,
+          txHash: receipt.hash,
+        });
+
+        setIsSecondOpen(false);
+        return;
       }
+    } catch (err) {
+      console.log("No active listing found, will mint and list automatically.");
+    }
 
-      // 5. BUY NFT (listing exists!)
-      toast.loading("Confirm purchase in MetaMask...");
-      const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenId, {
-        value: listing[1]
-      });
-      
-      const receipt = await tx.wait();
-      toast.success("NFT purchased successfully! 🎉");
-
-      // 6. Save to backend
-      await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/mint`, {
-        userId: user.id,
-        productId: item._id,
-        wallet: buyer,
-        tokenId: tokenId,
-        txHash: receipt.hash
-      });
-
-      setIsSecondOpen(false);
-      return; // Success! Exit function
-
-    } catch (buyError) {
-      // If listing doesn't exist, create one automatically
-      console.log("No listing found, creating one...", buyError.message);
-      
-      // 7. CREATE LISTING AUTOMATICALLY
+    // Mint + list automatically
+    if (!listingExists) {
       const result = await createListingAutomatically(signer, buyer);
-      
       if (result.success) {
         toast.success(`NFT listed! TokenId: ${result.tokenId}, Price: ${result.price} ETH`);
-        
-        // Ask user to try buying again
         const tryAgain = confirm(
-          `Listing created successfully!\n\n` +
-          `TokenId: ${result.tokenId}\n` +
-          `Price: ${result.price} ETH\n\n` +
-          `Click "Buy Now" again to purchase!`
+          `Listing created successfully!\n\nTokenId: ${result.tokenId}\nPrice: ${result.price} ETH\n\nClick "Buy Now" again to purchase!`
         );
-        
-        if (tryAgain) {
-          // You could auto-retry here, but let's keep it simple
-          toast.info("Please click 'Buy Now' again");
-        }
+        if (tryAgain) toast.info("Please click 'Buy Now' again");
       } else {
         toast.error("Failed to create listing: " + result.error);
       }
     }
-
   } catch (err) {
     console.error("Purchase error:", err);
-    toast.error(err.reason || err.message || "Transaction failed");
+    const message =
+      err.message.includes("insufficient funds")
+        ? "Insufficient ETH to complete transaction"
+        : err.reason || err.message || "Transaction failed";
+    toast.error(message);
   }
 };
 
@@ -294,7 +283,7 @@ const handleWeb3Purchase = async () => {
             </h2>
 
             <div className="flex justify-end mt-4">
-              <FiEye /> <span className="ml-2">508 Views</span>
+              <FiEye /> <span className="ml-2">505 Views</span>
             </div>
 
             <div className="flex gap-4 mt-6">
