@@ -7,9 +7,10 @@ import Icon2 from "../../assets/images/Support/icon2.png";
 import Icon3 from "../../assets/images/Support/icon3.png";
 import Icon4 from "../../assets/images/Support/icon4.png";
 import SendIcon from "../../assets/images/Support/sendIcon.png";
+import {BACKEND_BASE_URL} from "../../Config";
 
 // ------------------------ SOCKET CONNECTION ------------------------
-const socket = io("http://localhost:4700", {
+const socket = io(BACKEND_BASE_URL, {
   auth: {
     token: localStorage.getItem("token"),
   },
@@ -37,7 +38,7 @@ function Support() {
 useEffect(() => {
   const initChat = async () => {
     try {
-      const res = await axios.get("http://localhost:4700/api/v1/chat/get-support-admin"); // full URL
+      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/chat/get-support-admin`); // full URL
       console.log("Support admin response:", res.data);
 
       const adminUserId = res.data.adminId || (res.data._id && res.data._id); // fallback
@@ -69,7 +70,7 @@ useEffect(() => {
   // ------------------------ FETCH MESSAGES ------------------------
   const fetchMessages = async (room) => {
     try {
-      const res = await axios.get(`http://localhost:4700/api/v1/chat/messages/${room}`, {
+      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/chat/messages/${room}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessages(Array.isArray(res.data) ? res.data : []);
