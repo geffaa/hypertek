@@ -156,7 +156,7 @@ function MarketPlace() {
                         <h3 className="text-xs lg:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
                         <div className="flex items-center">
                           <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.priceETH}</h3>
+                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.collection.supply}</h3>
                         </div>
                       </div>
                       <div className="flex justify-center items-center">
@@ -204,7 +204,7 @@ function MarketPlace() {
                         <h3 className="text-xs sm:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
                         <div className="flex items-center">
                           <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.priceETH}</h3>
+                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.collection.supply}</h3>
                         </div>
                       </div>
                       <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">

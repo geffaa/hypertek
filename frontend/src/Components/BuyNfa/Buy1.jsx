@@ -110,7 +110,7 @@ function Buy1() {
             </div>
 
             <h2 className="text-xl mt-3">
-              {item.priceETH} {collection?.symbol}
+              {item.collection.supply} {collection?.symbol}
             </h2>
 
             <div className="flex justify-end mt-4">
@@ -164,7 +164,7 @@ function Buy1() {
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>List Price</span>
                 <span>
-                  {item.priceETH} {collection?.symbol}
+                  {item.collection.supply} {collection?.symbol}
                 </span>
               </div>
 
@@ -176,7 +176,7 @@ function Buy1() {
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Total</span>
                 <span>
-                  {Number(item.priceETH) + 0.5} {collection?.symbol}
+                  {Number(item.collection.supply) + 0.5} {collection?.symbol}
                 </span>
               </div>
             </div>
@@ -216,7 +216,7 @@ function Buy1() {
             <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
               <span>Total Price</span>
               <span>
-                {Number(item.priceETH) + 0.5} {collection?.symbol}
+                {Number(item.collection.supply) + 0.5} {collection?.symbol}
               </span>
             </div>
 

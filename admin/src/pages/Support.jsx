@@ -276,108 +276,188 @@ export default Support;
 
 
 
-// import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect, useRef } from "react";
 // import axios from "axios";
-// import { initiateSocket, getSocket } from "../services/socket.js";
+// import { io } from "socket.io-client";
 // import ChatImage from "../assets/chat.png";
+// import Icon1 from "../assets/Support/icon1.png";
+// import Icon2 from "../assets/Support/icon2.png";
+// import Icon3 from "../assets/Support/icon3.png";
+// import Icon4 from "../assets/Support/icon4.png";
 // import SendIcon from "../assets/Support/sendIcon.png";
+
+// // Socket connection
+// const socket = io("http://localhost:4700", {
+//   auth: {
+//     token: localStorage.getItem("token"),
+//   },
+// });
 
 // function Support() {
 //   const [chats, setChats] = useState([]);
-//   const [selectedChatIndex, setSelectedChatIndex] = useState(null);
+//   const [selectedChat, setSelectedChat] = useState(null);
 //   const [messages, setMessages] = useState([]);
-//   const [newMessage, setNewMessage] = useState("");
-//   const token = localStorage.getItem("token"); // admin JWT
+//   const [text, setText] = useState("");
+//   const messagesEndRef = useRef(null);
 
-//   // Initialize socket
+//   const token = localStorage.getItem("token");
+
+//   // Scroll to bottom
+//   const scrollToBottom = () => {
+//     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//   };
+
 //   useEffect(() => {
-//     initiateSocket(token);
+//     scrollToBottom();
+//   }, [messages]);
 
-//     const socket = getSocket();
-//     if (!socket) return;
-
-//     socket.on("receiveMessage", (msg) => {
-//       if (msg.roomId === chats[selectedChatIndex]?._id) {
-//         setMessages((prev) => [...prev, msg]);
-//       }
-//     });
-
-//     return () => {
-//       socket.disconnect();
-//     };
-//   }, [selectedChatIndex, chats]);
-
-//   // Fetch all admin chats (sidebar)
+//   /* ===============================
+//      FETCH ADMIN CHATS
+//   =============================== */
 //   useEffect(() => {
 //     const fetchChats = async () => {
 //       try {
 //         const res = await axios.get("http://localhost:4700/api/v1/chat/admin/chats", {
 //           headers: { Authorization: `Bearer ${token}` },
 //         });
-//         setChats(res.data);
+//         setChats(Array.isArray(res.data) ? res.data : []);
 //       } catch (err) {
-//         console.error(err);
+//         console.error("Fetch chats error:", err);
+//         setChats([]);
 //       }
 //     };
 
-//     fetchChats();
-//   }, []);
+//     if (token) fetchChats();
+//   }, [token]);
 
-//   // Fetch messages when chat selected
-//   const handleChatClick = async (index) => {
-//     setSelectedChatIndex(index);
-//     const roomId = chats[index]._id;
+//   /* ===============================
+//      FETCH MESSAGES WHEN CHAT SELECTED
+//   =============================== */
+//   useEffect(() => {
+//     if (!selectedChat) return;
 
-//     // Join room via socket
-//     const socket = getSocket();
-//     socket.emit("joinRoom", { userId: chats[index].userId._id });
+//     const fetchMessages = async () => {
+//       try {
+//         const res = await axios.get(
+//           `/api/v1/chat/messages/${selectedChat._id}`,
+//           {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }
+//         );
+//         setMessages(Array.isArray(res.data) ? res.data : []);
+//       } catch (err) {
+//         console.error("Fetch messages error:", err);
+//       }
+//     };
 
-//     try {
-//       const res = await axios.get(`http://localhost:4700/api/v1/chat/messages/${roomId}`, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
-//       setMessages(res.data);
-//     } catch (err) {
-//       console.error(err);
-//     }
+//     fetchMessages();
+
+//     // Join socket room
+//     socket.emit("joinRoom", {
+//       userId: selectedChat.userId?._id,
+//     });
+//   }, [selectedChat, token]);
+
+//   /* ===============================
+//      SOCKET LISTENER FOR NEW MESSAGES
+//   =============================== */
+//   useEffect(() => {
+//     socket.on("receiveMessage", (msg) => {
+//       if (msg.roomId === selectedChat?._id) {
+//         setMessages((prev) => [...prev, msg]);
+//       }
+//     });
+
+//     return () => {
+//       socket.off("receiveMessage");
+//     };
+//   }, [selectedChat]);
+
+//   /* ===============================
+//      SEND MESSAGE
+//   =============================== */
+//   const handleSendMessage = () => {
+//     if (!text.trim() || !selectedChat) return;
+
+//     socket.emit("sendMessage", {
+//       roomId: selectedChat._id,
+//       message: text,
+//     });
+
+//     setText("");
 //   };
 
-//   // Send message
-//   const handleSendMessage = () => {
-//     if (!newMessage || selectedChatIndex === null) return;
+//   const handleChatClick = (chat) => {
+//     setSelectedChat(chat);
+//   };
 
-//     const roomId = chats[selectedChatIndex]._id;
-//     const socket = getSocket();
-//     socket.emit("sendMessage", { roomId, message: newMessage });
-//     setNewMessage("");
+//   const formatTime = (date) => {
+//     const d = new Date(date);
+//     return d.toLocaleTimeString("en-US", {
+//       hour: "2-digit",
+//       minute: "2-digit",
+//       hour12: false,
+//     });
 //   };
 
 //   return (
 //     <div className="flex min-h-screen bg-black p-4">
-//       {/* Left Sidebar */}
-//       <div className="flex flex-col w-[304px] min-h-[750px] border-2 border-[#1E1E1E] gap-4 p-2">
-//         {chats.map((chat, index) => (
+//       <div
+//         style={{
+//           top: "20px",
+//           left: "360px",
+//           width: "250px",
+//           height: "250px",
+//           background: "#002AA8",
+//           filter: "blur(180px)",
+//           pointerEvents: "none",
+//         }}
+//         className="absolute rounded-full"
+//       ></div>
+
+//       <div
+//         style={{
+//           top: "810px",
+//           left: "960px",
+//           width: "250px",
+//           height: "250px",
+//           background: "#002AA8",
+//           filter: "blur(180px)",
+//           pointerEvents: "none",
+//         }}
+//         className="absolute rounded-full"
+//       ></div>
+
+//       {/* Left Sidebar - User List */}
+//       <div className="flex flex-col w-[304px] min-h-[750px] border-2 border-[#1E1E1E] gap-4 p-2 overflow-y-auto">
+//         {chats.length === 0 && (
+//           <p className="text-gray-400 text-sm text-center mt-4">
+//             No conversations yet
+//           </p>
+//         )}
+
+//         {chats.map((chat) => (
 //           <div
 //             key={chat._id}
 //             className={`flex items-center justify-between gap-2 h-[45px] my-2 cursor-pointer p-2 rounded ${
-//               selectedChatIndex === index ? "bg-gray-800" : ""
+//               selectedChat?._id === chat._id ? "bg-gray-800" : ""
 //             }`}
-//             onClick={() => handleChatClick(index)}
+//             onClick={() => handleChatClick(chat)}
 //           >
 //             <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
 //             <div className="flex flex-col flex-1 justify-center gap-0.5">
 //               <h1 className="font-inter font-semibold text-[14px] text-[#414651] m-0">
-//                 {chat.userId.name}
+//                 {chat.userId?.name || "User"}
 //               </h1>
-//               <p className="font-inter font-medium text-[12px] text-[#757285] m-0">
-//                 {chat.lastMessage || "Start chat..."}
+//               <p className="font-inter font-medium text-[12px] text-[#757285] m-0 truncate">
+//                 {chat.userId?.email || ""}
 //               </p>
 //             </div>
 //             <div className="flex flex-col items-center gap-4">
-//               <div className="w-5 h-5 bg-[#D34827] rounded-sm flex items-center justify-center">
-//                 <p className="text-white font-inter font-medium text-[10px] m-0">
-//                   {chat.unreadCount || 0}
-//                 </p>
+//               <div className="flex gap-1">
+//                 <div className="w-[4px] h-[4px] rounded-full bg-[#a19e9e]"></div>
+//                 <div className="w-[4px] h-[4px] rounded-full bg-[#a6a0a0]"></div>
+//                 <div className="w-[4px] h-[4px] rounded-full bg-[#b8b4b4]"></div>
 //               </div>
 //             </div>
 //           </div>
@@ -388,71 +468,141 @@ export default Support;
 //       <div className="flex flex-col w-[554px] h-[846px] px-4">
 //         {/* Top Status */}
 //         <div className="flex items-center gap-2 w-full h-[50px] border-b border-white">
-//           <img
-//             src={ChatImage}
-//             alt=""
-//             className="w-8 h-8 rounded-full"
-//           />
+//           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
 //           <p className="font-inter font-medium text-white">
-//             {selectedChatIndex !== null
-//               ? chats[selectedChatIndex].userId.name
-//               : "Select a chat"} - Online
+//             {selectedChat
+//               ? `${selectedChat.userId?.name || "User"} - Online`
+//               : "Select a chat"}
 //           </p>
 //         </div>
 
 //         {/* Chat Messages */}
-//         <div className="flex flex-col gap-4 mt-4 overflow-y-auto max-h-[700px]">
-//           {messages.map((msg) => (
-//             <div
-//               key={msg._id}
-//               className={`flex gap-3 items-end ${
-//                 msg.senderRole === "admin" ? "justify-end" : "justify-start"
-//               }`}
-//             >
-//               {msg.senderRole !== "admin" && (
-//                 <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
-//               )}
-//               <div
-//                 className={`flex flex-col p-2 rounded ${
-//                   msg.senderRole === "admin"
-//                     ? "bg-[#1D7AD6] text-white rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px]"
-//                     : "bg-[#F3F4F6] text-black rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px]"
-//                 }`}
-//               >
-//                 <p className="text-[12px]">{msg.message}</p>
-//                 <p
-//                   className={`text-[10px] ${
-//                     msg.senderRole === "admin" ? "text-right text-white/70" : "text-right text-[#797782]"
-//                   }`}
-//                 >
-//                   {new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-//                 </p>
-//               </div>
-//               {msg.senderRole === "admin" && (
-//                 <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
-//               )}
-//             </div>
-//           ))}
+//         <div className="flex flex-col gap-4 mt-4 overflow-y-auto flex-1 pr-2">
+//           {!selectedChat ? (
+//             <p className="text-gray-400 text-center mt-10">
+//               Select a user to start chatting
+//             </p>
+//           ) : messages.length === 0 ? (
+//             <p className="text-gray-400 text-center mt-10">
+//               No messages yet. Start the conversation!
+//             </p>
+//           ) : (
+//             messages.map((msg) =>
+//               msg.senderRole === "admin" ? (
+//                 // Admin Message (Right)
+//                 <div key={msg._id} className="flex justify-end gap-3 items-end">
+//                   <div className="flex flex-col max-w-[401px] gap-2 p-2.5 bg-[#1D7AD6] rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] text-white">
+//                     <p className="font-inter font-medium text-[12px] leading-4">
+//                       {msg.message}
+//                     </p>
+//                     <p className="text-right font-inter font-medium text-[12px] leading-4">
+//                       {formatTime(msg.createdAt)}
+//                     </p>
+//                   </div>
+//                   <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
+//                 </div>
+//               ) : (
+//                 // User Message (Left)
+//                 <div key={msg._id} className="flex flex-col max-w-[401px] bg-[#F3F4F6] rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px] p-3 gap-2">
+//                   <p className="font-inter font-medium text-[12px] leading-4 text-black">
+//                     {msg.message}
+//                   </p>
+//                   <p className="font-inter font-medium text-[12px] leading-4 text-right text-[#797782]">
+//                     {formatTime(msg.createdAt)}
+//                   </p>
+//                 </div>
+//               )
+//             )
+//           )}
+//           <div ref={messagesEndRef} />
+//         </div>
 
-//           {/* Input */}
-//           {selectedChatIndex !== null && (
-//             <div className="mt-4 flex gap-2">
-//               <input
-//                 type="text"
-//                 value={newMessage}
-//                 onChange={(e) => setNewMessage(e.target.value)}
-//                 placeholder="Type a message..."
-//                 className="flex-1 p-2 rounded border"
-//               />
+//         {/* Input Area */}
+//         {selectedChat && (
+//           <div className="mt-4 flex flex-col rounded-xl justify-between bg-gray-50 w-[512px] h-[144px] border border-[#EDEDED]">
+//             <input
+//               type="text"
+//               value={text}
+//               onChange={(e) => setText(e.target.value)}
+//               onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+//               placeholder='Type your message...'
+//               className="m-5 w-full text-black font-inter font-medium text-[12px] leading-4 rounded px-1 py-0.5 outline-none bg-transparent"
+//             />
+
+//             <div className="w-full flex justify-between items-center">
+//               {/* Left Icons */}
+//               <div className="m-5 w-[100px] h-[16px] flex gap-[12px]">
+//                 <button className="cursor-pointer">
+//                   <img src={Icon1} alt="" className="w-[16px] h-[16px]" />
+//                 </button>
+//                 <button className="cursor-pointer">
+//                   <img src={Icon2} alt="" className="w-[16px] h-[16px]" />
+//                 </button>
+//                 <button className="cursor-pointer">
+//                   <img src={Icon3} alt="" className="w-[16px] h-[16px]" />
+//                 </button>
+//                 <button className="cursor-pointer">
+//                   <img src={Icon4} alt="" className="w-[16px] h-[16px]" />
+//                 </button>
+//               </div>
+
+//               {/* Send Button */}
 //               <button
 //                 onClick={handleSendMessage}
-//                 className="bg-[#1D7AD6] text-white px-4 rounded"
+//                 className="cursor-pointer flex items-center m-5 gap-2 justify-center w-[70px] h-[29px] bg-[#1D7AD6] rounded-[6px]"
 //               >
-//                 Send
+//                 <h1 className="font-inter font-semibold text-[12px] leading-[14px] text-white">
+//                   Send
+//                 </h1>
+//                 <img src={SendIcon} alt="" className="w-[16px] h-[16px]" />
 //               </button>
 //             </div>
-//           )}
-//         </div>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Right Side - User Details */}
+//       <div className="w-[160px] rounded-lg p-2">
+//         {selectedChat && (
+//           <>
+//             <div className="flex justify-between items-center mb-2">
+//               <div className="flex items-center gap-2">
+//                 <img src={ChatImage} alt="User" className="w-8 h-8 rounded-full" />
+//               </div>
+//               <div className="flex items-center">
+//                 <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white">
+//                   User Details
+//                 </h1>
+//               </div>
+//             </div>
+
+//             <div className="flex justify-between items-center mb-2">
+//               <div>
+//                 <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-gray-400">
+//                   Name
+//                 </h1>
+//               </div>
+//               <div>
+//                 <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white">
+//                   {selectedChat.userId?.name}
+//                 </h1>
+//               </div>
+//             </div>
+
+//             <div className="flex justify-between items-center">
+//               <div>
+//                 <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-gray-400">
+//                   Email
+//                 </h1>
+//               </div>
+//               <div>
+//                 <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white truncate max-w-[100px]">
+//                   {selectedChat.userId?.email}
+//                 </h1>
+//               </div>
+//             </div>
+//           </>
+//         )}
 //       </div>
 //     </div>
 //   );
