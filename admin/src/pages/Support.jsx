@@ -17,6 +17,7 @@ function Support() {
   const [socket, setSocket] = useState(null);
   const [adminInfo, setAdminInfo] = useState(null);
   const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // 🔥 Get admin data from Redux persist
   const adminState = useSelector((state) => state.admin);
@@ -112,7 +113,9 @@ function Support() {
 
   // Scroll to bottom
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -227,6 +230,7 @@ function Support() {
   const handleChatClick = (chat) => {
     console.log("💬 Chat selected:", chat);
     setSelectedChat(chat);
+    setMessages([]); // Clear messages when switching
   };
 
   const formatTime = (date) => {
@@ -280,8 +284,8 @@ function Support() {
       ></div>
 
       {/* Left Sidebar - User List */}
-      <div className="flex flex-col w-[304px] h-[846px] border-2 border-[#1E1E1E] gap-4 p-2 overflow-y-auto flex-shrink-0">
-        <div className="text-white text-xs p-2 bg-gray-800 rounded mb-2">
+      <div className="flex flex-col w-[304px] h-[846px] border-2 border-[#1E1E1E] gap-4 p-2 overflow-y-auto flex-shrink-0 bg-black">
+        <div className="text-white text-xs p-2 bg-gray-800 rounded mb-2 flex-shrink-0">
           <p>👤 Admin: {adminInfo.FullName}</p>
           <p className="text-gray-400">{adminInfo.Email}</p>
         </div>
@@ -295,13 +299,13 @@ function Support() {
         {chats.map((chat) => (
           <div
             key={chat._id}
-            className={`flex items-center justify-between gap-2 h-[45px] my-2 cursor-pointer p-2 rounded ${
+            className={`flex items-center justify-between gap-2 min-h-[45px] my-2 cursor-pointer p-2 rounded flex-shrink-0 ${
               selectedChat?._id === chat._id ? "bg-gray-800" : ""
             }`}
             onClick={() => handleChatClick(chat)}
           >
-            <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
-            <div className="flex flex-col flex-1 justify-center gap-0.5">
+            <img src={ChatImage} alt="" className="w-8 h-8 rounded-full flex-shrink-0" />
+            <div className="flex flex-col flex-1 justify-center gap-0.5 min-w-0">
               <h1 className="font-inter font-semibold text-[14px] text-[#414651] m-0">
                 {chat.userId?.FullName || "User"}
               </h1>
@@ -309,7 +313,7 @@ function Support() {
                 {chat.userId?.Email || ""}
               </p>
             </div>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-4 flex-shrink-0">
               <div className="flex gap-1">
                 <div className="w-[4px] h-[4px] rounded-full bg-[#a19e9e]"></div>
                 <div className="w-[4px] h-[4px] rounded-full bg-[#a6a0a0]"></div>
@@ -322,8 +326,8 @@ function Support() {
 
       {/* Center Chat Area */}
       <div className="flex flex-col w-[554px] h-[846px] px-4 flex-shrink-0">
-        {/* Top Status */}
-        <div className="flex items-center gap-2 w-full h-[50px] border-b border-white flex-shrink-0">
+        {/* Top Status - Absolute positioned at top */}
+        <div className="flex items-center gap-2 w-full min-h-[50px] border-b border-white flex-shrink-0 bg-black pb-2">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
             {selectedChat
@@ -332,8 +336,15 @@ function Support() {
           </p>
         </div>
 
-        {/* Chat Messages */}
-        <div className="flex flex-col gap-4 mt-4 overflow-y-auto flex-1 pr-2">
+        {/* Chat Messages Container - Calculate proper height */}
+        <div 
+          ref={chatContainerRef}
+          className="flex flex-col gap-4 py-4 overflow-y-auto pr-2"
+          style={{ 
+            height: 'calc(846px - 50px - 144px - 16px)', // Total height - header - input - padding
+            maxHeight: 'calc(846px - 50px - 144px - 16px)'
+          }}
+        >
           {!selectedChat ? (
             <p className="text-gray-400 text-center mt-10">
               Select a user to start chatting
@@ -346,21 +357,21 @@ function Support() {
             messages.map((msg) =>
               msg.senderRole === "admin" ? (
                 // Admin Message (Right)
-                <div key={msg._id} className="flex justify-end gap-3 items-end">
+                <div key={msg._id} className="flex justify-end gap-3 items-end flex-shrink-0">
                   <div className="flex flex-col max-w-[401px] gap-2 p-2.5 bg-[#1D7AD6] rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] text-white">
-                    <p className="font-inter font-medium text-[12px] leading-4">
+                    <p className="font-inter font-medium text-[12px] leading-4 break-words">
                       {msg.message}
                     </p>
                     <p className="text-right font-inter font-medium text-[12px] leading-4">
                       {formatTime(msg.createdAt)}
                     </p>
                   </div>
-                  <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
+                  <img src={ChatImage} alt="" className="w-8 h-8 rounded-full flex-shrink-0" />
                 </div>
               ) : (
                 // User Message (Left)
-                <div key={msg._id} className="flex flex-col max-w-[401px] bg-[#F3F4F6] rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px] p-3 gap-2">
-                  <p className="font-inter font-medium text-[12px] leading-4 text-black">
+                <div key={msg._id} className="flex flex-col max-w-[401px] bg-[#F3F4F6] rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px] p-3 gap-2 flex-shrink-0">
+                  <p className="font-inter font-medium text-[12px] leading-4 text-black break-words">
                     {msg.message}
                   </p>
                   <p className="font-inter font-medium text-[12px] leading-4 text-right text-[#797782]">
@@ -373,9 +384,9 @@ function Support() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Area */}
+        {/* Input Area - Fixed at bottom */}
         {selectedChat && (
-          <div className="mt-4 flex flex-col rounded-xl justify-between bg-gray-50 w-[512px] h-[144px] border border-[#EDEDED] flex-shrink-0">
+          <div className="flex flex-col rounded-xl justify-between bg-gray-50 w-[512px] h-[144px] border border-[#EDEDED] flex-shrink-0">
             <input
               type="text"
               value={text}
