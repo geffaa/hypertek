@@ -77,7 +77,7 @@ function Buy1() {
         toast.error("Already purchased");
       }
     } catch (err) {
-      toast.error("Payment failed");
+      toast.error("Payment failed",err);
     }
   };
 
