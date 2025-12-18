@@ -40,7 +40,7 @@ NFTRouter.get("/platform/revenue", getPlatformRevenue);
 
 // ======================
 // ADMIN ROUTES (Admin Role Required)
-// ======================
+
 NFTRouter.post(
   "/admin/collection/create",
   uploadTemp.single("image"),
