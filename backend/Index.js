@@ -171,7 +171,6 @@ server.listen(PORT, () => {
   console.log("🚀 NFT Marketplace Server with Socket.IO");
   console.log("=".repeat(60));
   console.log(`📡 Server: http://localhost:${PORT}`);
-  console.log(`💬 Socket.IO: ENABLED with CORS for http://localhost:5173`);
   console.log(
     `🗄️  Database: ${process.env.MONGODB_URL ? "Connected" : "Not configured"}`
   );

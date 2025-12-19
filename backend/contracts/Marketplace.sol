@@ -4,7 +4,6 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-
 interface IMyNFT {
     function getRoyaltyInfo(uint256 tokenId) 
         external 
@@ -90,66 +89,79 @@ contract Marketplace is ReentrancyGuard {
         emit ListingCancelled(msg.sender, nftAddress, tokenId);
     }
     
+    // ✅ FIXED: Proper order of operations and first sale handling
     function buyNFT(
-    address nftAddress,
-    uint256 tokenId
-) external payable nonReentrant {
-    Listing storage listing = listings[nftAddress][tokenId];
-    require(listing.active, "Listing not active");
-    require(msg.value == listing.price, "Incorrect payment amount");
+        address nftAddress,
+        uint256 tokenId
+    ) external payable nonReentrant {
+        Listing storage listing = listings[nftAddress][tokenId];
+        require(listing.active, "Listing not active");
+        require(msg.value == listing.price, "Incorrect payment amount");
+        require(msg.sender != listing.seller, "Cannot buy your own NFT");
 
-    address seller = listing.seller;
-    uint256 price = listing.price;
+        address seller = listing.seller;
+        uint256 price = listing.price;
 
-    // Mark as inactive
-    listing.active = false;
+        // Mark as inactive immediately
+        listing.active = false;
 
-    // Get royalty info from NFT contract
-    IMyNFT nft = IMyNFT(nftAddress);
-    (address creator, uint16 royaltyBps, bool isFirstSale) = nft.getRoyaltyInfo(tokenId);
+        // Get royalty info from NFT contract
+        IMyNFT nft = IMyNFT(nftAddress);
+        (address creator, uint16 royaltyBps, bool isFirstSale) = nft.getRoyaltyInfo(tokenId);
 
-    // Calculate distribution ALWAYS: creator (royaltyBps), platform (PLATFORM_FEE_BPS), seller (remainder)
-    uint256 creatorAmount = (price * uint256(royaltyBps)) / 10000;
-    uint256 platformAmount = (price * uint256(PLATFORM_FEE_BPS)) / 10000;
-    uint256 sellerAmount = price - creatorAmount - platformAmount;
+        uint256 creatorAmount;
+        uint256 platformAmount;
+        uint256 sellerAmount;
 
-    // Transfer payments (order: creator -> platform -> seller)
-    if (creatorAmount > 0) {
-        (bool successCreator, ) = creator.call{value: creatorAmount}("");
-        require(successCreator, "Creator payment failed");
+        // ✅ FIX: Correct payment distribution based on sale type
+        if (isFirstSale) {
+            // First sale: 100% to creator
+            creatorAmount = price;
+            platformAmount = 0;
+            sellerAmount = 0;
+        } else {
+            // Secondary sales: royalty to creator, platform fee, rest to seller
+            creatorAmount = (price * uint256(royaltyBps)) / 10000;
+            platformAmount = (price * uint256(PLATFORM_FEE_BPS)) / 10000;
+            sellerAmount = price - creatorAmount - platformAmount;
+        }
+
+        // ✅ FIX: Mark as sold BEFORE transferring NFT (while seller still owns it)
+        if (isFirstSale) {
+            nft.markAsSold(tokenId);
+        }
+
+        // Transfer payments in order: creator -> platform -> seller
+        if (creatorAmount > 0) {
+            (bool successCreator, ) = creator.call{value: creatorAmount}("");
+            require(successCreator, "Creator payment failed");
+        }
+
+        if (platformAmount > 0) {
+            (bool successPlatform, ) = platformWallet.call{value: platformAmount}("");
+            require(successPlatform, "Platform payment failed");
+        }
+
+        if (sellerAmount > 0) {
+            (bool successSeller, ) = seller.call{value: sellerAmount}("");
+            require(successSeller, "Seller payment failed");
+        }
+
+        // Transfer NFT to buyer (after all payments and marking)
+        IERC721(nftAddress).safeTransferFrom(seller, msg.sender, tokenId);
+
+        emit NFTSold(
+            msg.sender,
+            seller,
+            nftAddress,
+            tokenId,
+            price,
+            creatorAmount,
+            platformAmount,
+            sellerAmount,
+            isFirstSale
+        );
     }
-
-    if (platformAmount > 0) {
-        (bool successPlatform, ) = platformWallet.call{value: platformAmount}("");
-        require(successPlatform, "Platform payment failed");
-    }
-
-    if (sellerAmount > 0) {
-        (bool successSeller, ) = seller.call{value: sellerAmount}("");
-        require(successSeller, "Seller payment failed");
-    }
-
-    // If it was the first sale, mark as sold on the NFT contract
-    if (isFirstSale) {
-        nft.markAsSold(tokenId);
-    }
-
-    // Transfer NFT to buyer
-    IERC721(nftAddress).safeTransferFrom(seller, msg.sender, tokenId);
-
-    emit NFTSold(
-        msg.sender,
-        seller,
-        nftAddress,
-        tokenId,
-        price,
-        creatorAmount,
-        platformAmount,
-        sellerAmount,
-        isFirstSale
-    );
-}
-
     
     function getListing(address nftAddress, uint256 tokenId)
         external
