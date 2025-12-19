@@ -4,6 +4,7 @@ import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import BgEffect2 from "../components/common/BgEffect2"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BACKEND_BASE_URL } from "../../../frontend/src/Config";
 
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -83,7 +84,8 @@ const handleUpdateNews = async () => {
     }
 
     const response = await axios.put(
-      `http://localhost:4700/api/v1/news/edit/${newsItem.id}`,
+      // `http://localhost:4700/api/v1/news/edit/${newsItem.id}`,
+      `${BACKEND_BASE_URL}/api/v1/news/edit/${newsItem.id}`,
       formData,
       {
         headers: {
