@@ -106,10 +106,21 @@ export async function createCollection(req, res) {
 }
 
 /**
- * Server-side Mint NFT
+ * Server-side Mint NFT 
  */
 export async function serverMint(req, res) {
+  console.log("Incoming mint request:", req.body);
+
   try {
+
+   console.log("====================================");
+  console.log("🔥 /api/v1/nft/mint HIT - request received!");
+  console.log("METHOD:", req.method);
+  console.log("URL:", req.originalUrl);
+  console.log("HEADERS:", req.headers);
+  console.log("BODY:", req.body);
+  console.log("AUTH HEADER:", req.headers.authorization);
+
     const { docId, tokenURI, royaltyBps, creatorWallet } = req.body;
 
     if (!nftContract) {
