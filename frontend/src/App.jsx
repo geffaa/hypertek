@@ -90,6 +90,8 @@ function AppWrapper() {
   const hideLayoutRoutes = [
     "/signup",
     "/signin",
+    "/forgot-password",
+    "",
     "/stripe-payment",
     "/dashboard",
     "/dashboard/create-nfa",
