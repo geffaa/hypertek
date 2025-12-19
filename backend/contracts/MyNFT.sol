@@ -25,13 +25,15 @@ contract MyNFT is ERC721URIStorage, Ownable {
     );
     
     event MarketplaceAuthorized(address indexed marketplace, bool authorized);
+    event FirstSaleCompleted(uint256 indexed tokenId);
     
     constructor() ERC721("MyNFT", "MNFT") Ownable(msg.sender) {
         nextTokenId = 1;
     }
     
-    // Authorize marketplace to call markAsSold
+    // ✅ FIX: Authorize marketplace to call markAsSold
     function setMarketplaceAuthorization(address marketplace, bool authorized) external onlyOwner {
+        require(marketplace != address(0), "Invalid marketplace address");
         authorizedMarketplaces[marketplace] = authorized;
         emit MarketplaceAuthorized(marketplace, authorized);
     }
@@ -41,6 +43,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
         uint16 royaltyBps
     ) external returns (uint256) {
         require(royaltyBps <= 10000, "Royalty too high"); // Max 100%
+        require(bytes(tokenURI).length > 0, "Token URI cannot be empty");
         
         uint256 tokenId = nextTokenId;
         nextTokenId++;
@@ -65,17 +68,32 @@ contract MyNFT is ERC721URIStorage, Ownable {
         view 
         returns (address creator, uint16 royaltyBps, bool isFirstSale) 
     {
+        require(_ownerOf(tokenId) != address(0), "Token does not exist");
         NFTRoyalty memory royalty = tokenRoyalties[tokenId];
         return (royalty.creator, royalty.royaltyBps, !hasBeenSold[tokenId]);
     }
     
-    // FIXED: Allow authorized marketplaces to mark as sold
+    // ✅ FIX: Better authorization check and validation
     function markAsSold(uint256 tokenId) external {
         require(
             authorizedMarketplaces[msg.sender] || msg.sender == owner(),
             "Not authorized to mark as sold"
         );
         require(_ownerOf(tokenId) != address(0), "Token does not exist");
+        require(!hasBeenSold[tokenId], "Already marked as sold");
+        
         hasBeenSold[tokenId] = true;
+        emit FirstSaleCompleted(tokenId);
+    }
+    
+    // ✅ NEW: Helper function to check if marketplace is authorized
+    function isMarketplaceAuthorized(address marketplace) external view returns (bool) {
+        return authorizedMarketplaces[marketplace];
+    }
+    
+    // ✅ NEW: Get creator of a token
+    function getCreator(uint256 tokenId) external view returns (address) {
+        require(_ownerOf(tokenId) != address(0), "Token does not exist");
+        return tokenRoyalties[tokenId].creator;
     }
 }

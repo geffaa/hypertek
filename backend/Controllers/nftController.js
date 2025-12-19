@@ -117,7 +117,7 @@ export async function serverMint(req, res) {
     }
 
     // Mint NFT on blockchain
-    const tx = await nftContract.mint(tokenURI, royaltyBps || 500); // 500 = 5%
+    const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
     const receipt = await tx.wait();
 
     // Extract tokenId from Minted event
@@ -145,7 +145,7 @@ export async function serverMint(req, res) {
       {
         tokenId,
         tokenURI,
-        creator: creatorWallet || wallet.address, // Store the actual creator
+        creator: creatorWallet || wallet.address,
         owner: creatorWallet || wallet.address,
         listed: false,
         isFirstSale: true,
@@ -160,13 +160,13 @@ export async function serverMint(req, res) {
       txHash: receipt.hash,
     });
   } catch (err) {
-    console.error(err);
+    console.error("❌ MINT ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
 /**
- * Create Listing (Update DB after frontend creates blockchain listing)
+ * Create Listing
  */
 export async function createListing(req, res) {
   try {
@@ -188,13 +188,13 @@ export async function createListing(req, res) {
 
     return res.json({ success: true, nft });
   } catch (err) {
-    console.error(err);
+    console.error("❌ CREATE LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
 /**
- * Get Listing Details (for display on frontend)
+ * Get Listing Details
  */
 export async function getListingDetails(req, res) {
   try {
@@ -205,7 +205,6 @@ export async function getListingDetails(req, res) {
       return res.status(404).json({ error: "NFT not found" });
     }
 
-    // Get blockchain listing data
     let blockchainListing = null;
     if (marketContract && process.env.MYNFT_ADDRESS) {
       try {
@@ -229,14 +228,13 @@ export async function getListingDetails(req, res) {
       blockchainListing,
     });
   } catch (err) {
-    console.error(err);
+    console.error("❌ GET LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
 /**
- * Calculate payment distribution
- * IMPORTANT: This matches your smart contract logic
+ * ✅ FIXED: Calculate payment distribution
  */
 function calculatePaymentDistribution(
   priceETH,
@@ -256,7 +254,7 @@ function calculatePaymentDistribution(
   };
 
   if (isFirstSale) {
-    // First sale: 100% to creator
+    // ✅ FIX: First sale: 100% to creator
     distribution.creatorAmount = priceETH;
     distribution.payments.push({
       recipient: creatorWallet,
@@ -265,7 +263,7 @@ function calculatePaymentDistribution(
       type: "creator_first_sale",
     });
   } else {
-    // Subsequent sales: 5% creator, 10% platform, 85% seller
+    // Secondary sales: 5% creator, 10% platform, 85% seller
     distribution.creatorAmount = (priceETH * CREATOR_ROYALTY_PERCENT) / 100;
     distribution.platformAmount = (priceETH * PLATFORM_FEE_PERCENT) / 100;
     distribution.sellerAmount =
@@ -297,8 +295,7 @@ function calculatePaymentDistribution(
 }
 
 /**
- * Record On-chain Sale (Called AFTER blockchain transaction completes)
- * This is called by frontend after successful buyNFT transaction
+ * ✅ FIXED: Record On-chain Sale with validation
  */
 export async function recordOnchainSale(req, res) {
   try {
@@ -306,6 +303,22 @@ export async function recordOnchainSale(req, res) {
 
     if (!tokenId || !buyer || !seller || !priceETH || !txHash) {
       return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // ✅ FIX: Validate transaction exists and succeeded
+    try {
+      const tx = await provider.getTransaction(txHash);
+      if (!tx) {
+        return res.status(400).json({ error: "Transaction not found on blockchain" });
+      }
+
+      const receipt = await tx.wait();
+      if (receipt.status !== 1) {
+        return res.status(400).json({ error: "Transaction failed on blockchain" });
+      }
+    } catch (error) {
+      console.error("Transaction validation error:", error);
+      return res.status(400).json({ error: "Failed to validate transaction" });
     }
 
     const nft = await NFTSystem.findOne({ tokenId: Number(tokenId) });
@@ -348,7 +361,6 @@ export async function recordOnchainSale(req, res) {
     nft.priceETH = 0;
     if (nft.isFirstSale) nft.isFirstSale = false;
 
-    // ✅ Increment collection sales count for popularity
     nft.collection.salesCount = (nft.collection.salesCount || 0) + 1;
 
     await nft.save();
@@ -379,7 +391,7 @@ export async function recordOnchainSale(req, res) {
       },
     });
   } catch (err) {
-    console.error("Error recording sale:", err);
+    console.error("❌ RECORD SALE ERROR:", err);
     return res.status(500).json({
       error: err.message,
       stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
@@ -389,7 +401,7 @@ export async function recordOnchainSale(req, res) {
 
 export async function getPopularCollections(req, res) {
   try {
-    const topN = parseInt(req.query.top) || 10; // Default top 10
+    const topN = parseInt(req.query.top) || 10;
 
     const collections = await NFTSystem.find({ status: "active" })
       .sort({ "collection.salesCount": -1 })
@@ -402,14 +414,11 @@ export async function getPopularCollections(req, res) {
       count: collections.length,
     });
   } catch (err) {
-    console.error("getPopularCollections error:", err);
+    console.error("❌ GET POPULAR COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
-/**
- * Get royalties summary for a specific creator
- */
 export async function getRoyaltiesSummary(req, res) {
   try {
     const { creatorWallet } = req.query;
@@ -472,21 +481,18 @@ export async function getRoyaltiesSummary(req, res) {
       })),
     });
   } catch (err) {
-    console.error(err);
+    console.error("❌ GET ROYALTIES ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
 
-/**
- * Get platform revenue
- */
 export async function getPlatformRevenue(req, res) {
   try {
     const pipeline = [
       { $unwind: "$salesHistory" },
       {
         $match: {
-          "salesHistory.isFirstSale": false, // Only count platform fees from secondary sales
+          "salesHistory.isFirstSale": false,
         },
       },
       {
@@ -519,7 +525,7 @@ export async function getPlatformRevenue(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
+    console.error("❌ GET PLATFORM REVENUE ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
