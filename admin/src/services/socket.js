@@ -5,6 +5,7 @@ const SERVER_URL = "https://api-hyper-tek-games.deventiatech.com"; // backend se
 
 let socket;
 
+
 export const initiateSocket = (token) => {
   socket = io(SERVER_URL, {
     auth: { token }
