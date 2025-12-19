@@ -122,7 +122,8 @@ function NfaLand() {
         console.log("Sending mint request to backend with payload:", payload);
   
         const res = await axios.post(
-          "http://localhost:4700/api/v1/nft/mint",
+          // "http://localhost:4700/api/v1/nft/mint",
+          `${BACKEND_BASE_URL}/api/v1/nft/mint`,
           payload,
           {
             headers: {
