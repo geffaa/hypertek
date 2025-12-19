@@ -100,7 +100,8 @@ const handleUpdateNews = async () => {
     }
   } catch (error) {
     console.error(error);
-    alert("Failed to update news");
+    // alert("Failed to update news");
+    toast.error("Failed to update the news")
   }
 };
 

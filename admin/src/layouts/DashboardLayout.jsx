@@ -84,7 +84,7 @@ useEffect(() => {
         onConfirm={() => {
           localStorage.clear();
           sessionStorage.clear();
-          window.location.href = "/login";
+          window.location.href = "https://hyper-tek-games.deventiatech.com/signin";
           setShowLogoutModal(false);
         }}
       />
