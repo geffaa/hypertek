@@ -39,7 +39,7 @@ const DashboardLayout = () => {
         onConfirm={() => {
           localStorage.clear();
           sessionStorage.clear();
-          window.location.href = "/login";
+          window.location.href = "/signin";
           setShowLogoutModal(false);
         }}
       />
