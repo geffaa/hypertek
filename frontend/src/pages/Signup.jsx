@@ -283,7 +283,7 @@ function Signup() {
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
       <GlowingOrb Xaxis={70} Yaxis={150} />
-      <GlowingOrb Xaxis={950} Yaxis={450} />
+      <GlowingOrb Xaxis={950} Yaxis={430} />
 
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] max-w-md sm:max-w-sm">
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] mb-4" />

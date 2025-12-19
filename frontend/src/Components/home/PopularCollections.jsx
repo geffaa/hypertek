@@ -40,9 +40,10 @@ function PopularCollections() {
       <div className="mx-auto w-full max-w-[1600px] flex flex-col gap-8">
         {/* Heading */}
         <div className="flex flex-col gap-2 items-start w-full">
-          <h1 className="text-white uppercase text-2xl sm:text-3xl lg:text-[30px] font-goldman font-bold leading-[100%]">
-            Popular Collections
-          </h1>
+          <h1 className="text-white font-goldman font-bold text-[30px] leading-[100%] tracking-[0] uppercase">
+  Popular Collections
+</h1>
+
 
           {/* Decorative underline bars */}
           <div className="flex gap-2">
