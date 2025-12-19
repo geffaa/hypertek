@@ -7,10 +7,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../Config";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
+import { ethers } from "ethers";
+import { MARKETPLACE_ADDRESS, NFT_ADDRESS, MARKETPLACE_ABI, NFT_ABI } from "../Web3/Config";
+
 
 function NfaLand() {
   const location = useLocation();
   const navigate = useNavigate();
+
+
+  const { token } = useSelector((state) => state.auth);
+
 
   // 🔥 Selected NFT / Land
   const { item } = location.state || {};
@@ -77,6 +84,202 @@ function NfaLand() {
       toast.error("Payment failed");
     }
   };
+
+
+
+
+
+   // ---------------------------------
+    // 1️⃣ Mint NFT via backend with proper error handling
+    const mintNFTBackend = async () => {
+      if (!user?.id) {
+        toast.error("Please login first");
+        return null;
+      }
+  
+      if (!item._id) {
+        toast.error("Your Item is required");
+        return null;
+      }
+  
+      try {
+        // Get wallet from Redux if exists, otherwise from MetaMask
+        let creatorWallet = user.wallet;
+        if (!creatorWallet && window.ethereum) {
+          await window.ethereum.request({ method: "eth_requestAccounts" });
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          creatorWallet = await signer.getAddress();
+        }
+  
+        const payload = {
+          docId: item._id,
+          tokenURI: `ipfs://auto-${Date.now()}`,
+          royaltyBps: 500,
+          creatorWallet, // now this will not be undefined
+        };
+  
+        console.log("Sending mint request to backend with payload:", payload);
+  
+        const res = await axios.post(
+          "http://localhost:4700/api/v1/nft/mint",
+          payload,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        console.log("Mint API response:", res);
+  
+        if (res?.data?.success) {
+          toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
+          return res.data.tokenId;
+        } else {
+          toast.error(res?.data?.error || "Mint failed: No TokenId returned");
+          return null;
+        }
+      } catch (err) {
+        console.error("Mint request error:", err.response?.data || err.message);
+        const message =
+          err.response?.data?.error ||
+          (err.message.includes("insufficient funds")
+            ? "Insufficient ETH in wallet to mint NFT"
+            : err.message);
+        toast.error(message);
+        return null;
+      }
+    };
+  
+    // 2️⃣ Create listing automatically with safe checks
+    const createListingAutomatically = async (signer, buyerAddress) => {
+      try {
+        const toastId = toast.loading("Minting NFT via backend...");
+        const tokenId = await mintNFTBackend();
+        if (tokenId) {
+          toast.success(`NFT minted! TokenId: ${tokenId}`, { id: toastId });
+        } else {
+          toast.error("Mint failed", { id: toastId });
+        }
+  
+        if (!tokenId) {
+          toast.error("Cannot list NFT: TokenId not returned");
+          return { success: false, error: "TokenId not returned from backend" };
+        }
+  
+        const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
+        const marketplace = new ethers.Contract(
+          MARKETPLACE_ADDRESS,
+          MARKETPLACE_ABI,
+          signer
+        );
+  
+        toast.loading("Approving marketplace...");
+        const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
+        await approveTx.wait();
+  
+        const priceWei = ethers.parseEther("0.01");
+        const listTx = await marketplace.createListing(
+          NFT_ADDRESS,
+          tokenId,
+          priceWei
+        );
+        await listTx.wait();
+  
+        toast.success(`NFT listed! TokenId: ${tokenId}`);
+        return { success: true, tokenId, price: "0.01" };
+      } catch (err) {
+        console.error(err);
+        let errorMsg = err.message.includes("insufficient funds")
+          ? "Insufficient ETH to approve/list NFT"
+          : err.message;
+        toast.error(errorMsg || "Failed to create listing");
+        return { success: false, error: errorMsg };
+      }
+    };
+  
+    // 3️⃣ Handle Web3 purchase with wallet balance check
+    const handleWeb3Purchase = async () => {
+      try {
+        if (!window.ethereum) {
+          toast.error("MetaMask not installed");
+          return;
+        }
+  
+        if (!user?.id) {
+          toast.error("Please login first");
+          return;
+        }
+  
+        // Request wallet connection
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const buyer = await signer.getAddress();
+  
+        const marketplace = new ethers.Contract(
+          MARKETPLACE_ADDRESS,
+          MARKETPLACE_ABI,
+          signer
+        );
+  
+        // Use the correct tokenId from item
+        const tokenIdToBuy = item.tokenId || 0; // Make sure item has tokenId
+        let listingExists = false;
+  
+        // Check if listing exists
+        try {
+          const listing = await marketplace.getListing(NFT_ADDRESS, tokenIdToBuy);
+          if (listing.active) {
+            listingExists = true;
+            toast.loading("Confirm purchase in MetaMask...");
+  
+            const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenIdToBuy, {
+              value: listing.price || listing[1], // price from contract
+            });
+            await tx.wait();
+            toast.success("NFT purchased successfully! 🎉");
+  
+            // No need to mint backend if NFT already exists
+            setIsSecondOpen(false);
+            return;
+          }
+        } catch (err) {
+          console.log(
+            "No active listing found, will mint and list automatically."
+          );
+        }
+  
+        // If no listing exists, mint via backend + list automatically
+        if (!listingExists) {
+          const result = await createListingAutomatically(signer, buyer);
+  
+          if (result.success) {
+            toast.success(
+              `NFT listed! TokenId: ${result.tokenId}, Price: ${result.price} ETH`
+            );
+  
+            const tryAgain = confirm(
+              `Listing created successfully!\n\nTokenId: ${result.tokenId}\nPrice: ${result.price} ETH\n\nClick "Buy Now" again to purchase!`
+            );
+            if (tryAgain) toast.info("Please click 'Buy Now' again");
+          } else {
+            toast.error("Failed to create listing: " + result.error);
+          }
+        }
+      } catch (err) {
+        console.error("Purchase error:", err);
+        const message = err.message?.includes("insufficient funds")
+          ? "Insufficient ETH to complete transaction"
+          : err.reason || err.message || "Transaction failed";
+        toast.error(message);
+      }
+    };
+
+
+
 
   if (!item) return null;
 
@@ -148,100 +351,96 @@ function NfaLand() {
       <BuyNfa2 />
 
       {/* ---------------- FIRST MODAL ---------------- */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/70 flex justify-center pt-20 z-50"
-          onClick={() => setIsOpen(false)}
-        >
-          <div
-            className="bg-[#252B37] p-6 rounded-lg w-full max-w-md"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-xl font-bold text-center">Buy Land</h2>
+    {isOpen && (
+  <div
+    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+    onClick={() => setIsOpen(false)}
+  >
+    <div
+      className="bg-[#252B37] p-6 rounded-lg w-full max-w-[480px] max-h-[80vh] overflow-x-hidden overflow-y-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <h2 className="text-xl font-bold text-center">Buy Land</h2>
 
-            <img
-              src={`${BACKEND_BASE_URL}${collection?.image}`}
-              alt={collection?.name}
-              className="w-40 h-36 mx-auto my-4 rounded object-cover"
-            />
+      <img
+        src={`${BACKEND_BASE_URL}${collection?.image}`}
+        alt={collection?.name}
+        className="w-40 h-36 mx-auto my-4 rounded object-cover"
+      />
 
-            <h3 className="text-center font-semibold">
-              {collection?.name}
-            </h3>
+      <h3 className="text-center font-semibold">{collection?.name}</h3>
 
-            <div className="mt-4 space-y-2">
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-                <span>List Price</span>
-                <span>
-                  {item.collection.supply ?? item.price} {collection?.symbol}
-                </span>
-              </div>
-
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-                <span>Platform Fee</span>
-                <span>0.5 {collection?.symbol}</span>
-              </div>
-
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-                <span>Total</span>
-                <span>
-                  {Number(item.collection.supply ?? item.price) + 0.5}{" "}
-                  {collection?.symbol}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex justify-between mt-6">
-              <button onClick={() => setIsOpen(false)}>
-                <CustomButton text="Cancel" />
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                  setIsSecondOpen(true);
-                }}
-              >
-                <CustomButton text="Continue" />
-              </button>
-            </div>
-          </div>
+      <div className="mt-4 space-y-2">
+        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+          <span>List Price</span>
+          <span>
+            {item.collection.supply ?? item.price} {collection?.symbol}
+          </span>
         </div>
-      )}
+
+        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+          <span>Platform Fee</span>
+          <span>0.5 {collection?.symbol}</span>
+        </div>
+
+        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+          <span>Total</span>
+          <span>
+            {Number(item.collection.supply ?? item.price) + 0.5} {collection?.symbol}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex justify-between  mt-6">
+        <button onClick={() => setIsOpen(false)}>
+          <CustomButton text="Cancel" />
+        </button>
+
+        <button
+          onClick={() => {
+            setIsOpen(false);
+            setIsSecondOpen(true);
+          }}
+        >
+          <CustomButton text="Continue" />
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* ---------------- SECOND MODAL ---------------- */}
       {isSecondOpen && (
-        <div
-          className="fixed inset-0 bg-black/70 flex justify-center pt-20 z-50"
-          onClick={() => setIsSecondOpen(false)}
-        >
-          <div
-            className="bg-[#252B37] p-6 rounded-lg w-full max-w-md"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-xl font-bold text-center">
-              Confirm Purchase
-            </h2>
+   <div
+  className="fixed inset-0 bg-black/70 flex items-start mt-24 justify-center z-50"
+  onClick={() => setIsSecondOpen(false)}
+>
+  <div
+    className="bg-[#252B37] p-6 rounded-lg w-full max-w-[470px] max-h-[80vh] overflow-x-hidden overflow-y-auto"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <h2 className="text-xl font-bold text-center">Confirm Purchase</h2>
 
-            <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
-              <span>Total Price</span>
-              <span>
-                {Number(item.collection.supply ?? item.price) + 0.5}{" "}
-                {collection?.symbol}
-              </span>
-            </div>
+    <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
+      <span>Total Price</span>
+      <span>
+        {Number(item.collection.supply ?? item.price) + 0.5} {collection?.symbol}
+      </span>
+    </div>
 
-            <div className="flex justify-between mt-6">
-              <button onClick={() => setIsSecondOpen(false)}>
-                <CustomButton text="Close" />
-              </button>
+    <div className="flex justify-between mt-6">
+      <button onClick={() => setIsSecondOpen(false)}>
+        <CustomButton text="Close" />
+      </button>
 
-              <button onClick={() => handlePayment(item._id)}>
-                <CustomButton text="Confirm" />
-              </button>
-            </div>
-          </div>
-        </div>
+      <button onClick={handleWeb3Purchase}>
+        <CustomButton text="Confirm" />
+      </button>
+    </div>
+  </div>
+</div>
+
       )}
     </div>
   );
