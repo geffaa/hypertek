@@ -44,10 +44,10 @@ useEffect(() => {
 
       dispatch(setAdmin(adminData));
       localStorage.setItem("admin_data", JSON.stringify(adminData));
-      toast.success("Admin data loaded successfully");
+      // toast.success("Admin data loaded successfully");
     } catch (err) {
       console.error("Failed to fetch admin data:", err);
-      toast.error("Failed to fetch admin data");
+      // toast.error("Failed to fetch admin data");
     }
   };
 
