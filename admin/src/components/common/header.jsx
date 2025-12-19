@@ -90,7 +90,7 @@ const Header = () => {
         </div> */}
 
         {/* 🔔 Animated Notification Bell */}
-        <div className="relative">
+        {/* <div className="relative">
           <button 
             ref={bellRef}
             className={`
@@ -107,7 +107,7 @@ const Header = () => {
             onMouseEnter={() => setIsBellHovered(true)}
             onMouseLeave={() => setIsBellHovered(false)}
           >
-            {/* Bell Icon with Multiple Animations */}
+            Bell Icon with Multiple Animations
             <div className="relative">
               <img
                 src={HeaderIcon}
@@ -120,7 +120,7 @@ const Header = () => {
                 `}
               />
               
-              {/* Ripple Effect */}
+              Ripple Effect
               <div className={`
                 absolute inset-0 rounded-full bg-blue-400/20
                 transform scale-0 transition-all duration-700 ease-out
@@ -128,7 +128,7 @@ const Header = () => {
               `} />
             </div>
 
-            {/* Pulsing Notification Dot */}
+            Pulsing Notification Dot
             <div className={`
               absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 
               rounded-full flex items-center justify-center text-white text-xs font-bold
@@ -140,7 +140,7 @@ const Header = () => {
               {notificationCount}
             </div>
 
-            {/* Hover Glow */}
+            Hover Glow
             <div className={`
               absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/10 to-purple-400/10
               opacity-0 transition-opacity duration-500
@@ -148,12 +148,12 @@ const Header = () => {
             `} />
           </button>
           
-          {/* Notification Dropdown */}
+          Notification Dropdown
           <NotificationDropdown 
             isOpen={showNotifications}
             onClose={() => setShowNotifications(false)}
           />
-        </div>
+        </div> */}
 
         {/* 👤 Animated Profile Picture */}
         <div 
@@ -192,7 +192,7 @@ const Header = () => {
           </div>
 
           {/* Online Status with Animation */}
-          <div className={`
+          {/* <div className={`
             absolute bottom-0 right-0 w-4 h-4 bg-green-500 
             rounded-full border-3 border-white
             transition-all duration-500 ease-out
@@ -201,10 +201,10 @@ const Header = () => {
               : 'shadow-md'
             }
             animate-pulse
-          `} />
+          `} /> */}
 
           {/* Profile Tooltip */}
-          <div className={`
+          {/* <div className={`
             absolute top-full right-0 mt-3 px-4 py-2 
             bg-gray-900 text-white text-sm rounded-xl
             opacity-0 transform translate-y-4
@@ -219,7 +219,7 @@ const Header = () => {
               <span>Online - View Profile</span>
             </div>
             <div className="absolute -top-1 right-4 w-3 h-3 bg-gray-900 transform rotate-45" />
-          </div>
+          </div> */}
         </div>
       </div>
 
