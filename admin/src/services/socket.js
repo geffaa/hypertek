@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 const SERVER_URL = "https://api-hyper-tek-games.deventiatech.com"; // backend server URL
 
 let socket;
+// Initialize Socket.IO client with authentication token
 
 export const initiateSocket = (token) => {
   socket = io(SERVER_URL, {
