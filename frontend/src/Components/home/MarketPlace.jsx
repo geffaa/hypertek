@@ -102,7 +102,7 @@ function PopularCollections() {
         </div>
 
         {/* Price */}
-        <h3 className="text-sm font-semibold">${data.collection.supply}</h3>
+        <h3 className="text-sm font-semibold">${data.collection.chain}</h3>
       </div>
     </div>
 

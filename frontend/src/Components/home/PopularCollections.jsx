@@ -88,7 +88,7 @@ function PopularCollections() {
           <div className="flex items-center justify-center w-5 h-5 rounded-[50%] bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE]">
             <img src={TVector} alt="" className="w-3 h-3" />
           </div>
-          <h3 className="text-sm font-semibold">${item.collection.supply}</h3>
+          <h3 className="text-sm font-semibold">${item.collection.chain}</h3>
         </div>
       </div>
 
