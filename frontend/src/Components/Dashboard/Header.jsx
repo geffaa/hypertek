@@ -49,7 +49,7 @@ const Header = () => {
         }}
       >
         {/* 🔍 Animated Search Box */}
-        <div className="relative">
+        {/* <div className="relative">
           <div
             className={`
               flex items-center gap-2 rounded-xl px-4 py-3 
@@ -80,14 +80,14 @@ const Header = () => {
               onBlur={() => setIsSearchFocused(false)}
             />
             
-            {/* Search Animation Line */}
+            Search Animation Line
             <div className={`
               absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400
               transform origin-left transition-all duration-500 ease-out
               ${isSearchFocused ? 'scale-x-100' : 'scale-x-0'}
             `} />
           </div>
-        </div>
+        </div> */}
 
         {/* 🔔 Animated Notification Bell */}
         <div className="relative">
