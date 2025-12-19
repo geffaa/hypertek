@@ -88,6 +88,8 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
+    "/signup",
+    "/signin",
     "/stripe-payment",
     "/dashboard",
     "/dashboard/create-nfa",
