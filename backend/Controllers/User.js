@@ -171,13 +171,24 @@ const ForgotPassword = async (req, res) => {
       to: Email,
       subject: "Password Reset Request",
       html: `
-🔒 Password Reset Request
-We received a request to reset your password. Click the button below to securely reset it.
- Reset My Password
-This link will expire in 15 minutes. If you didn't request this, you can safely ignore this email.
-Need help? Contact our support team at support@innervoice.com
-© ${new Date().getFullYear()} Inner Voice. All rights reserved.
- `,
+    <div style="font-family: Arial, sans-serif; line-height: 1.5;">
+      <h2>🔒 Password Reset Request</h2>
+      <p>We received a request to reset your password. Click the button below to securely reset it:</p>
+      <a href="${resetLink}" style="
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px 0;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+      ">Reset My Password</a>
+      <p>This link will expire in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
+      <p>Need help? Contact our support team at <a href="mailto:support@innervoice.com">support@innervoice.com</a></p>
+      <p>© ${new Date().getFullYear()} Inner Voice. All rights reserved.</p>
+    </div>
+  `,
     });
 
     res.status(200).json({ message: "Password reset link sent to email" });
@@ -988,7 +999,6 @@ const GetAdminByAdminId = async (req, res) => {
   try {
     const { adminId } = req.params;
 
-    
     if (!adminId) {
       return res.status(400).json({
         success: false,
@@ -1021,9 +1031,6 @@ const GetAdminByAdminId = async (req, res) => {
     });
   }
 };
-
-
-
 
 export {
   SignupUser,
