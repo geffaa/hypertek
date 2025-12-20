@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 function Character() {
   const [characters, setCharacters] = useState([]);
@@ -97,13 +98,9 @@ function Character() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-black text-white">
-        Loading...
-      </div>
-    );
-  }
+ if (loading) {
+  return <FullScreenLoader />;
+}
 
   return (
     <>
@@ -142,8 +139,10 @@ function Character() {
         </div>
 
         {/* ===== TABLE (DESIGN SAME) ===== */}
-        <div className="pl-24 mt-12 z-10 relative">
-          <table className="w-[927px] text-left rounded-lg overflow-hidden">
+        <div className="pl-24 mt-12 z-10 relative ">
+
+          
+          <table className="w-[927px] text-left rounded-lg overflow-hidden overflow-y-auto max-h-[560px]">
             <thead>
               <tr className="h-[50px]">
                 <th className="px-6 py-3 text-[#FFFFFFC4]">Image</th>

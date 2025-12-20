@@ -7,6 +7,7 @@ import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
   const navigate = useNavigate()
@@ -194,15 +195,9 @@ const handleEditCollection = (collection) => {
 
 
   // Loading state
-  if (loading) {
-    return (
-      <div className="mt-12 flex h-[700px] bg-black flex-col items-center justify-center">
-        <div className="text-white text-lg">Loading collections...</div>
-      </div>
-    );
-  }
-
-
+ if (loading) {
+  return <FullScreenLoader />;
+}
 
   // Empty state
   if (collections.length === 0 && !loading) {

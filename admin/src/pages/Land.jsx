@@ -6,11 +6,14 @@ import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config"; // make sure these exist
+import FullScreenLoader from "../components/common/Spinner";
+
 
 function Land() {
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
+  
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [selectedLand, setSelectedLand] = useState(null);
@@ -101,14 +104,16 @@ setLandData(lands);
         console.error("Error fetching land data:", error);
         toast.error("Failed to fetch land data");
       } finally {
-        setLoading(false);
+        setLoading(false); // ✅ Loading stops here
       }
     };
 
     fetchLandData();
   }, []);
 
-
+if (loading) {
+    return <FullScreenLoader />; // Or your custom loading UI
+  }
 
 const handleToggleStatus = async (land) => {
   if (!Dashboard_Base_Url || !land?.id) return; // use land.id

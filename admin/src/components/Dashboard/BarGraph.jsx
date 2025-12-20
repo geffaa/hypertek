@@ -3,6 +3,8 @@ import BarCard from "./BarCard";
 import axios from "axios";
 import { Dashboard_Base_Url } from "../../Config";
 import toast from "react-hot-toast";
+import FullScreenLoader from "../common/Spinner"
+
 
 function BarGraph() {
   // ✅ Separate states for each dataset
@@ -13,6 +15,10 @@ function BarGraph() {
   const [totalCollection, setTotalCollection] = useState(null);
   const [totalOffers, setTotalOffers] = useState(null);
   const [combinedNfa, setCombinedNfa] = useState([]); // For combined lands + marketplace items
+  const [loading, setLoading] = useState(true); // ✅ Add loading state
+
+
+
 
   const currentMonth = new Date().getMonth(); // 0 = Jan, 11 = Dec
 const [selectedMonth, setSelectedMonth] = useState(currentMonth);
@@ -23,9 +29,11 @@ const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const GetAllData = async () => {
     if(!Dashboard_Base_Url){
       toast.error("Base Url is required")
+      setLoading(false);
     }
 
     try {
+      setLoading(true);
      const [users, Buy, Sell, Nfa, collections, offer] = await Promise.all([
     axios.get(`${Dashboard_Base_Url}/dashboard/user/Count`),
     axios.get(`${Dashboard_Base_Url}/dashboard/buyers/Count`),
@@ -49,12 +57,19 @@ const [selectedMonth, setSelectedMonth] = useState(currentMonth);
     } catch (error) {
       console.log("Dashboard API Error:", error);
     }
+    finally {
+      setLoading(false); // ✅ Stop loading regardless of success/error
+    }
   };
 
   useEffect(() => {
     GetAllData();
   }, []);
 
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
 console.log("your total Sellers:", totalSell?.sellers);
   return (

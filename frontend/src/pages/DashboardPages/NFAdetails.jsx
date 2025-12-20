@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { NewsImage_Url } from "../../Config";
+import FullScreenLoader from "../../Components/Common/Spinner";
 
 function CollectionDetails() {
   const [collections, setCollections] = useState([]);
@@ -17,6 +18,8 @@ function CollectionDetails() {
   const [selectedId, setSelectedId] = useState(null);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
 
   const user = useSelector((state) => state.auth.user);
@@ -38,6 +41,8 @@ function CollectionDetails() {
 
     async function fetchCollections() {
       try {
+
+         setLoading(true); // show loader
         const res = await api.get(`/nft/user/collection/get/${user.id}`);
         console.log("User Dashboard data:", res);
 
@@ -58,6 +63,9 @@ function CollectionDetails() {
         console.error("Fetch error:", err);
         toast.error(err.response?.data?.message || "Failed to fetch collections");
       }
+      finally {
+    setLoading(false); // hide loader
+  }
     }
 
     fetchCollections();
@@ -122,7 +130,9 @@ const shortenAddress = (address) => {
 
 
   return (
-    <div className="mt-12 flex h-[700px] bg-black flex-col">
+    <div className="mt-12 flex h-[400px] bg-black flex-col">
+        {loading && <FullScreenLoader size={4} color="white" />}
+
       {/* Background blurs */}
       <div
         style={{ top: "120px", left: "290px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }}
@@ -157,7 +167,7 @@ const shortenAddress = (address) => {
       </div>
 
       {/* Table */}
-      <div className="w-[700px] ml-12 mt-12  custom-scrollbar">
+<div className="w-[900px] ml-12 mt-12 max-h-[400px] overflow-y-auto custom-scrollbar">
 <table className="min-w-[800px] text-left rounded-lg border-collapse border-spacing-0">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
@@ -167,7 +177,7 @@ const shortenAddress = (address) => {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/10">
+          <tbody className="divide-y divide-white/10 overflow-y-scroll  overflow-y-auto max-h-[400px]">
             {filteredCollections.map((col) => (
 
               <tr key={col.id} className="h-[70px] transition-all duration-200 backdrop-blur-sm">

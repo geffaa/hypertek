@@ -8,6 +8,7 @@ import { Link , useNavigate } from "react-router-dom"
 import { Dashboard_Base_Url , Image_Base_Url  } from "../Config";
 import axios from "axios";
 import toast from "react-hot-toast";
+import FullScreenLoader from "../components/common/Spinner";
 
 
 function AddCollection() {
@@ -15,6 +16,7 @@ function AddCollection() {
 const [collections, setCollections] = useState([]);
 const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [selectedUserId, setSelectedUserId] = useState(null);
+const [loading, setLoading] = useState(true);
 
 
 const handleEditUser = (collection) => {
@@ -69,6 +71,7 @@ const handleViewProfile = (user) => {
 useEffect(() => {
   const fetchUsers = async () => {
     try {
+       setLoading(true);
       const res = await axios.get(`${Dashboard_Base_Url}/v1/users`);
       console.log("API response:", res.data.users);
 
@@ -85,6 +88,9 @@ useEffect(() => {
       }
     } catch (err) {
       console.log("Error fetching users:", err);
+    }
+    finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -142,7 +148,9 @@ const deleteUser = async () => {
     toast.error("Failed to delete user");
   }
 };
-
+if (loading) {
+  return <FullScreenLoader />;
+}
 
   return (
     <div className=" flex h-[700px] bg-black flex-col">
