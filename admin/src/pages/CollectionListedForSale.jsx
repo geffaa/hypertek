@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 function Character() {
   const [characters, setCharacters] = useState([]);
@@ -97,13 +98,9 @@ function Character() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-black text-white">
-        Loading...
-      </div>
-    );
-  }
+ if (loading) {
+  return <FullScreenLoader />;
+}
 
   return (
     <>

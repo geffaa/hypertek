@@ -6,16 +6,18 @@ import DeleteImage from "../assets/delete.png";
 import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import FullScreenLoader from "../components/common/Spinner";
 
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
-
+ 
 function Character() {
   const navigate = useNavigate()
   const [characters, setCharacters] = useState([]);
 const [loading, setLoading] = useState(true);
 const [showDeleteModal, setShowDeleteModal] = useState(false);
 const [selectedCharacter, setSelectedCharacter] = useState(null);
+
 
 
 useEffect(() => {
@@ -43,14 +45,17 @@ useEffect(() => {
       console.error("Error fetching characters:", error);
       toast.error("Failed to fetch characters");
     } finally {
-      setLoading(false);
-    }
+        setLoading(false); // ✅ Loading stops here
+      }
   };
 
   fetchCharacters();
 }, []);
 
 
+ if (loading) {
+    return <FullScreenLoader />; // Or your custom loading UI
+  }
 const handleEditCharacter = (collection) => {
   const adminDataString = localStorage.getItem("admin_data");
   if (!adminDataString) {

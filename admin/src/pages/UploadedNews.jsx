@@ -5,6 +5,7 @@ import BgEffect2 from "../components/common/BgEffect2"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../frontend/src/Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,6 +14,8 @@ import toast from "react-hot-toast";
 
 function UpdateNewsItems() {
   const location = useLocation();
+  // Add this with your other useState declarations
+const [loading, setLoading] = useState(false);
   const { newsItem } = location.state || {};
   console.log("your new itesm are :",newsItem);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -68,7 +71,7 @@ const handleUpdateNews = async () => {
     alert("Please fill in all fields");
     return;
   }
-
+setLoading(true); 
   try {
     const formData = new FormData();
     formData.append("name", heading);
@@ -103,9 +106,16 @@ const handleUpdateNews = async () => {
     // alert("Failed to update news");
     toast.error("Failed to update the news")
   }
+   finally {
+    setLoading(false); // Stop loading always
+  }
 };
 
 
+
+if (loading) {
+  return <FullScreenLoader />;
+}
   return (
     <div className=" min-h-screen w-full bg-black   overflow-hidden">
       {/* Background Glowing Effects */}

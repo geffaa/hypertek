@@ -5,12 +5,14 @@ import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { ToastIcon } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import FullScreenLoader from "../Components/Common/Spinner";
 
 
 import { User_Dashboard_Url} from "../Config"
 
 function CreateCollections() {
 
+const [loading, setLoading] = useState(false);
 
   // getting the data from the redux store 
 const user = useSelector((state) => state.auth.user);
@@ -58,6 +60,53 @@ const handleDrop = (event) => {
 
   // create collection handler 
 
+// const handleSubmit = async () => {
+//   try {
+//     if (!selectedImage) {
+//       alert("Please select an image!");
+//       return;
+//     }
+
+//     const userId = user.id;
+//     if (!userId) {
+//       toast.error("User Id is required");
+//       return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append("userId", userId);
+//     formData.append("creator", "user");
+//     formData.append("image", selectedImage);
+//     formData.append("name", name);
+//     formData.append("symbol", symbol);
+//     formData.append("Type", collectionType);
+//     formData.append("chain", chain);
+//     formData.append("owner", recipientWallet); // recipient wallet
+//     formData.append("royaltyPercent", Number(royaltyPercent)); // numeric
+//     formData.append("royaltyWallet", royaltyWallet);
+//     formData.append("supply", Number(supply)); // numeric
+
+//     // ✅ Add token in Authorization header
+//     const response = await axios.post(
+//       `${User_Dashboard_Url}/nft/collection/create`,
+//       formData,
+//       {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//           Authorization: `Bearer ${token}` // <-- token from Redux
+//         },
+//       }
+//     );
+
+//     console.log("API RESPONSE =>", response.data);
+//     toast.success("User Collection Created Successfully");
+//     navigate("/dashboard/nfa-details");
+//   } catch (err) {
+//     console.error("CREATE COLLECTION ERROR =>", err.response || err);
+//     toast.error("There is some problem while creating collection");
+//   }
+// };
+
 const handleSubmit = async () => {
   try {
     if (!selectedImage) {
@@ -84,14 +133,16 @@ const handleSubmit = async () => {
     formData.append("royaltyWallet", royaltyWallet);
     formData.append("supply", Number(supply)); // numeric
 
-    // ✅ Add token in Authorization header
+    // ✅ Show loader
+    setLoading(true);
+
     const response = await axios.post(
       `${User_Dashboard_Url}/nft/collection/create`,
       formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}` // <-- token from Redux
+          Authorization: `Bearer ${token}`
         },
       }
     );
@@ -99,11 +150,16 @@ const handleSubmit = async () => {
     console.log("API RESPONSE =>", response.data);
     toast.success("User Collection Created Successfully");
     navigate("/dashboard/nfa-details");
+
   } catch (err) {
     console.error("CREATE COLLECTION ERROR =>", err.response || err);
     toast.error("There is some problem while creating collection");
+  } finally {
+    // ✅ Hide loader when request finishes
+    setLoading(false);
   }
 };
+
 
 
 
@@ -112,6 +168,8 @@ const handleSubmit = async () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-black overflow-hidden relative">
+      {loading && <FullScreenLoader size={4} color="white" />}
+
       {/* Background Blurs */}
       <div
         className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
