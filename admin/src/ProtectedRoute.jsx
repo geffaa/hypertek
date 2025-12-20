@@ -39,8 +39,8 @@ const ProtectedRoute = () => {
   // ❌ Not logged in → redirect AFTER check
   if (!isLoggedIn) {
     toast.error("Please login to access this page");
-    window.location.href = "https://hyper-tek-games.deventiatech.com/signin";
-    // window.location.href = "http://localhost:5173/signin";
+    // window.location.href = "https://hyper-tek-games.deventiatech.com/signin";
+    window.location.href = "http://localhost:5173/signin";
     return null;
   }
 

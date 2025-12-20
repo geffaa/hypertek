@@ -477,11 +477,15 @@ const GetAllUsers = async (req, res) => {
 // ------------------ PROFILE ------------------
 const GetProfile = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const user = await UserModel.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const userId = req.user._id; // ✅ FIX HERE
 
-    // ✅ CHECK IF USER IS ACTIVE
+    const user = await UserModel.findById(userId).select("-Password");
+    // console.log("Fetched user profile:", user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const statusCheck = checkUserStatus(user);
     if (!statusCheck.allowed) {
       return res.status(403).json({
@@ -490,16 +494,21 @@ const GetProfile = async (req, res) => {
       });
     }
 
-    res.status(200).json({ message: "Profile fetched successfully", user });
+    res.status(200).json({
+      success: true,
+      message: "Profile fetched successfully",
+      user,
+    });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
+
 // ------------------ EDIT PROFILE ------------------
 const EditProfile = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     const { FullName, Email, Password, NewPassword, Bio } = req.body;
 
     const user = await UserModel.findById(userId);
