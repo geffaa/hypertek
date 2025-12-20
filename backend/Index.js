@@ -45,8 +45,7 @@ const io = new Server(server, {
     origin: [
       "https://hyper-tek-games.deventiatech.com",  // ✅ Changed from https
       "https://admin-hyper-tek-game.deventiatech.com",  // ✅ Changed from https
-      "http://localhost:3000",
-      "http://localhost:5173"
+      "http://localhost:3000",  // Additional common port
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,

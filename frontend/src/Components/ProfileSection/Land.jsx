@@ -199,7 +199,7 @@ useEffect(() => {
                       </Link>
                     </p>
                     <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
-                      $3000
+                    
                     </p>
                   </div>
                 </div>
