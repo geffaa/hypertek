@@ -202,11 +202,11 @@ function UserDetails() {
                 >
                   <img
                     src={
-                      col.collection.image
-                        ? `${Image_Base_Url}${col.image}`
+                      col.collection?.image
+                        ? `${Image_Base_Url}${col.collection.image}`
                         : Collectionimage
                     }
-                    alt={col.name || "Collection"}
+                    alt={col.collection?.name || "Collection"}
                     className="w-[117px] h-[122px] rounded-full object-cover"
                   />
                   <div className="flex flex-col gap-1 text-white">

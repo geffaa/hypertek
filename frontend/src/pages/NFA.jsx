@@ -137,7 +137,7 @@ function NFA() {
                   </span>
                   <div className="flex items-center gap-1">
                     <img src={TVector} className="w-3 h-3" alt="" />
-                    <span>${item.collection.supply}</span>
+                    <span>${item.collection.chain}</span>
                   </div>
                 </div>
               </div>

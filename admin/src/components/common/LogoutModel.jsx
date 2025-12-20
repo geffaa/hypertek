@@ -16,7 +16,7 @@ const handleLogout = () => {
     sessionStorage.clear();
 
     // 3. Redirect to login
-    window.location.href = " http://localhost:5173/signin";
+    window.location.href = "https://hyper-tek-games.deventiatech.com/signin";
   };
 
   useEffect(() => {

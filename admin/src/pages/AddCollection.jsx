@@ -3,20 +3,21 @@ import Switch from "@mui/material/Switch";
 import searchImage from "../assets/search.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState(null);
-const [localData , setLocalData ] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
 
+  const [localData, setLocalData] = useState();
 
   // Fetch data from API
   useEffect(() => {
@@ -63,9 +64,6 @@ const [localData , setLocalData ] = useState();
     fetchCollections();
   }, []);
 
-
- 
-
   const toggleStatus = (id) => {
     setCollections((prev) =>
       prev.map((col) => (col.id === id ? { ...col, status: !col.status } : col))
@@ -78,48 +76,51 @@ const [localData , setLocalData ] = useState();
     setShowDeleteModal(true);
   };
 
+  const handleAddCollection = () => {
+    const adminDataString = localStorage.getItem("admin_data"); // get from localStorage
+    if (!adminDataString) {
+      toast.error("Admin ID not found. Please try again."); // no data in storage
+      return;
+    }
 
-const handleAddCollection = () => {
-  const adminDataString = localStorage.getItem("admin_data"); // get from localStorage
-  if (!adminDataString) {
-    toast.error("Admin ID not found. Please try again."); // no data in storage
-    return;
-  }
+    const adminData = JSON.parse(adminDataString);
+    const adminId = adminData._id;
 
-  const adminData = JSON.parse(adminDataString);
-  const adminId = adminData._id;
+    if (!adminId) {
+      toast.error("Admin ID not found. Please try again."); // ID missing
+      return;
+    }
+    console.log("your admin id is :", adminId);
 
-  if (!adminId) {
-    toast.error("Admin ID not found. Please try again."); // ID missing
-    return;
-  }
-  console.log("your admin id is :",adminId);
+    console.log("Admin ID:", adminId);
+    navigate(`/${adminId}/create-collection`); // navigate when ID exists
+  };
 
-  console.log("Admin ID:", adminId);
-  navigate(`/${adminId}/create-collection`); // navigate when ID exists
-};
+  const handleEditCollection = (collection) => {
+    const adminDataString = localStorage.getItem("admin_data");
+    if (!adminDataString) {
+      toast.error("Admin ID not found. Please try again.");
+      return;
+    }
 
+    const adminData = JSON.parse(adminDataString);
+    const adminId = adminData._id;
 
-const handleEditCollection = (collection) => {
-  const adminDataString = localStorage.getItem("admin_data");
-  if (!adminDataString) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
+    if (!adminId) {
+      toast.error("Admin ID not found. Please try again.");
+      return;
+    }
 
-  const adminData = JSON.parse(adminDataString);
-  const adminId = adminData._id;
+    console.log("Editing collection:", collection._id, "Admin ID:", adminId);
 
-  if (!adminId) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
+    // Navigate with admin ID and pass collection data via state
+    navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
+  };
 
-  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
+const filteredCollections = collections.filter((col) =>
+  col.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
-  // Navigate with admin ID and pass collection data via state
-  navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
-};
 
   // Delete the item
   const handleDeleteCollection = async () => {
@@ -191,13 +192,20 @@ const handleEditCollection = (collection) => {
     }
   };
 
-
-
-
   // Loading state
+
  if (loading) {
   return <FullScreenLoader />;
 }
+
+  if (loading) {
+    return (
+      <div className="mt-12 flex h-[700px] bg-black flex-col items-center justify-center">
+        <div className="text-white text-lg">Loading collections...</div>
+      </div>
+    );
+  }
+
 
   // Empty state
   if (collections.length === 0 && !loading) {
@@ -229,18 +237,19 @@ const handleEditCollection = (collection) => {
               <input
                 type="text"
                 placeholder="Search collections"
-                className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300 "
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
               />
             </div>
-         <div className="flex justify-end mt-4">
-      <button
-        onClick={handleAddCollection}
-        className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
-      >
-        Add Collection
-      </button>
-    </div>
-
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={handleAddCollection}
+                className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
+              >
+                Add Collection
+              </button>
+            </div>
           </div>
         </div>
 
@@ -295,15 +304,16 @@ const handleEditCollection = (collection) => {
           <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
             <img src={searchImage} alt="search" className="w-4 h-4" />
             <input
-              type="text"
-              placeholder="Search collections"
-              className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300 "
-            />
+                type="text"
+                placeholder="Search collections"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
+              />
           </div>
-         <button onClick={handleAddCollection} className="...">
-  Add Collection
-</button>
-
+          <button onClick={handleAddCollection} className="...">
+            Add Collection
+          </button>
         </div>
       </div>
 
@@ -334,7 +344,7 @@ const handleEditCollection = (collection) => {
           </thead>
 
           <tbody className="divide-y divide-white/10">
-            {collections.map((col) => (
+            {filteredCollections.map((col) => (
               <tr
                 key={col._id} // Use the actual _id as key
                 className="h-[70px] transition-all duration-200 backdrop-blur-sm"
@@ -371,12 +381,12 @@ const handleEditCollection = (collection) => {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                   <button
-  onClick={() => handleEditCollection(col)}
-  className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
->
-  <img src={EditImage} alt="edit" className="w-4 h-4" />
-</button>
+                    <button
+                      onClick={() => handleEditCollection(col)}
+                      className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
+                    >
+                      <img src={EditImage} alt="edit" className="w-4 h-4" />
+                    </button>
 
                     <button
                       onClick={() => handleOpenDeleteModal(col)}

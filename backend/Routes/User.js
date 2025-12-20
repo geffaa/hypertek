@@ -16,6 +16,7 @@ import {
   GetAdminByAdminId,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
+import { auth } from "../Middleware/userAuth.js";
 import upload from "../Middleware/UploadMulter.js";
 import express from "express";
 const Route = express.Router();
@@ -36,11 +37,11 @@ Route.post("/user/MetaMask", MetaMaskAuth);
 // :bird: Twitter authentication
 Route.post("/user/twitter", TwitterAuth);
 // :bust_in_silhouette: Get user profile (protected route)
-Route.get("/getProfile", authMiddleware, GetProfile);
+Route.get("/getProfile", auth, GetProfile);
 Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
 Route.delete("/delete/:userId", DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
-Route.put("/profile", authMiddleware, upload.single("Avatar"), EditProfile);
+Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
 // :white_check_mark: Get all users (admin only)
 Route.get("/users", GetAllUsers);
 // :white_check_mark: NEW ROUTE: Toggle user active/inactive status (admin only)

@@ -1,4 +1,4 @@
-import { authMiddleware } from "../Middleware/userAuth.js"
+import { auth } from "../Middleware/userAuth.js"
 
 import express from "express";
 import {
@@ -12,6 +12,6 @@ const HistoryRoute = express.Router();
 HistoryRoute.get("/get-history", getAllPaymentHistory);
 
 // Get payments by user ID
-HistoryRoute.get("/history/:userId",authMiddleware, getPaymentHistoryByUserId);
+HistoryRoute.get("/history/:userId",auth, getPaymentHistoryByUserId);
 
 export default HistoryRoute;
