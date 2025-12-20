@@ -201,7 +201,7 @@ useEffect(() => {
         >
           <div className={`
             relative w-[44px] h-[44px] rounded-2xl 
-            bg-gradient-to-r from-blue-400 to-purple-500 
+            
             p-0.5 transition-all duration-700 ease-out
             ${isProfileHovered 
               ? 'transform scale-110 shadow-2xl rotate-3' 
