@@ -10,13 +10,17 @@ import Switch from "@mui/material/Switch";
 import DeleteImage from "./assets/delete.png";
 import { Dashboard_Base_Url, Image_Base_Url } from "./Config";
 import toast from "react-hot-toast";
+import FullScreenLoader from "./components/common/Spinner";
 
 function EditNews() {
   const navigate = useNavigate()
  const [collections, setCollections] = useState([]);
+ // Add this with your other useState declarations
+const [loading, setLoading] = useState(true);
 useEffect(() => {
   const fetchNews = async () => {
     try {
+       setLoading(true); // Start loading
       const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
 
       console.log("Your news response:", res.data.data);
@@ -50,10 +54,16 @@ useEffect(() => {
     } catch (error) {
       console.log("Error fetching news:", error);
     }
+    finally {
+      setLoading(false); // Stop loading always
+    }
   };
 
   fetchNews();
 }, []);
+
+
+
 
 const handleEditNews = (news) => {
   const adminDataString = localStorage.getItem("admin_data");
@@ -224,6 +234,11 @@ const handleEditNews = (news) => {
       toast.error("Error deleting article");
     }
   };
+
+
+  if (loading) {
+  return <FullScreenLoader />;
+}
 
   return (
     <div className="min-h-screen w-full bg-black text-white p-16 h-[850px]">

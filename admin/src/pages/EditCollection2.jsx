@@ -5,10 +5,13 @@ import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 function EditCollection2() {
     const location = useLocation();
   const navigate = useNavigate();
+  // Add this near your other useState declarations
+const [updating, setUpdating] = useState(false);
   // inside component
 const fileInputRef = useRef(null);
 
@@ -82,6 +85,7 @@ const handleUpdate = async () => {
     toast.error("Base URL is required");
     return;
   }
+   setUpdating(true); // Start loading
 
   try {
     const formData = new FormData();
@@ -115,11 +119,18 @@ formData.append("collectionType", collectionType); // use correct key
   } catch (error) {
     toast.error(error.response?.data?.message || "Update failed!");
   }
+   finally {
+    setUpdating(false); // Stop loading regardless of success/error
+  }
 };
 
-
+// Place this right before your main return statement
+if (updating) {
+  return <FullScreenLoader />;
+}
   return (
     <div className="p-8 bg-black h-[950px] py-12 flex flex-col gap-6">
+      
       <div
         style={{
           top: `120px`,

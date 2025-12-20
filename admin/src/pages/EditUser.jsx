@@ -10,6 +10,7 @@ import { Image_Base_Url } from "../Config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+import FullScreenLoader from "../components/common/Spinner";
 
 function EditUser() {
    const location = useLocation();
@@ -110,6 +111,10 @@ const [email, setEmail] = useState(userData.supply || "");
   setTimeout(() => setCopied(false), 2000);
 };
 
+
+if (loading) {
+  return <FullScreenLoader />;
+}
   return (
     <>
       <div className="min-h-screen bg-transparent relative z-10">

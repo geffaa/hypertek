@@ -3,6 +3,8 @@ import BarCard from "./BarCard";
 import axios from "axios";
 import { Dashboard_Base_Url } from "../../Config";
 import toast from "react-hot-toast";
+import FullScreenLoader from "../common/Spinner"
+
 
 function BarGraph() {
   // ✅ Separate states for each dataset
@@ -13,22 +15,28 @@ function BarGraph() {
   const [totalCollection, setTotalCollection] = useState(null);
   const [totalOffers, setTotalOffers] = useState(null);
   const [combinedNfa, setCombinedNfa] = useState([]); // For combined lands + marketplace items
+  const [loading, setLoading] = useState(true); // ✅ Add loading state
+
+
+
 
   // ✅ Fetch all dashboard data
   const GetAllData = async () => {
-    if (!Dashboard_Base_Url) {
-      toast.error("Base Url is required");
+    if(!Dashboard_Base_Url){
+      toast.error("Base Url is required")
+      setLoading(false);
     }
 
     try {
-      const [users, Buy, Sell, Nfa, collections, offer] = await Promise.all([
-        axios.get(`${Dashboard_Base_Url}/dashboard/user/Count`),
-        axios.get(`${Dashboard_Base_Url}/dashboard/buyers/Count`),
-        axios.get(`${Dashboard_Base_Url}/dashboard/sellers/Count`),
-        axios.get(`${Dashboard_Base_Url}/dashboard/combined/Counts`),
-        axios.get(`${Dashboard_Base_Url}/dashboard/marketplace/Count`),
-        axios.get(`${Dashboard_Base_Url}/dashboard/offers/Count`),
-      ]);
+      setLoading(true);
+     const [users, Buy, Sell, Nfa, collections, offer] = await Promise.all([
+    axios.get(`${Dashboard_Base_Url}/dashboard/user/Count`),
+    axios.get(`${Dashboard_Base_Url}/dashboard/buyers/Count`),
+    axios.get(`${Dashboard_Base_Url}/dashboard/sellers/Count`),
+    axios.get(`${Dashboard_Base_Url}/dashboard/combined/Counts`),
+    axios.get(`${Dashboard_Base_Url}/dashboard/marketplace/Count`),
+    axios.get(`${Dashboard_Base_Url}/dashboard/offers/Count`),
+  ]);
 
       // ✅ Combine NFA lands + marketplaceItems
       const combined = [...Nfa.data.lands, ...Nfa.data.marketplaceItems];
@@ -44,13 +52,21 @@ function BarGraph() {
     } catch (error) {
       console.log("Dashboard API Error:", error);
     }
+    finally {
+      setLoading(false); // ✅ Stop loading regardless of success/error
+    }
   };
 
   useEffect(() => {
     GetAllData();
   }, []);
 
-  console.log("your total Sellers:", totalSell?.sellers);
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
+
+console.log("your total Sellers:", totalSell?.sellers);
   return (
     <div className="my-8 w-full max-w-[993px] mx-auto h-auto grid grid-cols-3 grid-rows-2 gap-6">
       {/* ✅ Pass each dataset individually */}

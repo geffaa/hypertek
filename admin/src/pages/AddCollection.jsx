@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
   const navigate = useNavigate();
@@ -192,6 +193,11 @@ const filteredCollections = collections.filter((col) =>
   };
 
   // Loading state
+
+ if (loading) {
+  return <FullScreenLoader />;
+}
+
   if (loading) {
     return (
       <div className="mt-12 flex h-[700px] bg-black flex-col items-center justify-center">
@@ -199,6 +205,7 @@ const filteredCollections = collections.filter((col) =>
       </div>
     );
   }
+
 
   // Empty state
   if (collections.length === 0 && !loading) {
