@@ -51,7 +51,7 @@ function ForgotPassword() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent mt-8">
       <GlowingOrb Xaxis={70} Yaxis={150}/>
-      <GlowingOrb Xaxis={950} Yaxis={450}/>
+      <GlowingOrb Xaxis={950} Yaxis={400}/>
       
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[420px] max-w-md sm:max-w-sm">
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />

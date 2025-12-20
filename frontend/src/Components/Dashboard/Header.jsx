@@ -4,6 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/images/Sidebar/headerIcon.png";
 import HeaderImage from "../../assets/images/Sidebar/headerImage.png";
 import NotificationDropdown from "./Notification";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { BACKEND_BASE_URL } from "../../Config";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -11,6 +15,11 @@ const Header = () => {
   const [isBellHovered, setIsBellHovered] = useState(false);
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
+    const [userData, setUserData] = useState(null);
+  
+
+    const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  
   
   const bellRef = useRef(null);
 
@@ -34,6 +43,35 @@ const Header = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+ 
+
+/// get the user profle 
+useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("your user Response are :",res);
+        setUserData(res.data.user);
+        console.log("✅ Profile fetched:", res.data.user);
+      } catch (error) {
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
+        toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }
+    };
+
+    if (token) {
+      fetchProfile();
+    }
+  }, [token]);
+
 
   return (
 <header className="p-4 flex justify-end items-end relative z-50 ">
@@ -171,17 +209,19 @@ const Header = () => {
             }
           `}>
             {/* Profile Image Container */}
-            <div className="w-full h-full rounded-xl bg-white overflow-hidden">
-              <img
-                src={HeaderImage}
-                alt="Profile"
-                className={`
-                  w-full h-full object-cover rounded-xl
-                  transition-all duration-700 ease-out
-                  ${isProfileHovered ? 'transform scale-110' : ''}
-                `}
-              />
-            </div>
+           {/* Profile Image Container */}
+<div className="w-full h-full rounded-xl bg-white overflow-hidden">
+  <img
+    src={
+      userData?.Avatar
+        ? `${BACKEND_BASE_URL}${userData.Avatar}` // Use profile avatar if exists
+        : HeaderImage // Fallback to default image
+    }
+    alt={userData?.FullName || "Profile"}
+    className={`w-full h-full object-cover rounded-xl transition-all duration-700 ease-out ${isProfileHovered ? 'transform scale-110' : ''}`}
+  />
+</div>
+
 
             {/* Floating Elements on Hover */}
             <div className={`
