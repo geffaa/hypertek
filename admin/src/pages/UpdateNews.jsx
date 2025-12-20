@@ -6,12 +6,14 @@ import { useNavigate  } from "react-router-dom";
 import axios from "axios"
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
+import FullScreenLoader from "../components/common/Spinner";
 
 
 function UpdateNews() {
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
-
+// Add this with your other useState declarations
+const [loading, setLoading] = useState(false);
   const [heading, setHeading] = useState("");
 const [description, setDescription] = useState("");
 const [file, setFile] = useState(null); // actual File object, not base64
@@ -63,7 +65,7 @@ const handlePublish = async () => {
     toast.error("Heading, description & image are required");
     return;
   }
-
+ setLoading(true);
   const formData = new FormData();
   formData.append("heading", heading);
   formData.append("description", description);
@@ -93,9 +95,14 @@ const handlePublish = async () => {
   } catch (error) {
     console.log("Error creating news:", error);
     toast.error("Server error");
+  }finally {
+    setLoading(false); // Stop loading always
   }
 };
 
+if (loading) {
+  return <FullScreenLoader />;
+}
 
   return (
     <div className="  min-h-screen w-full bg-black   overflow-hidden">

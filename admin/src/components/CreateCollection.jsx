@@ -5,12 +5,14 @@ import BgEffect2 from "../components/common/BgEffect2";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
+import FullScreenLoader from "./common/Spinner";
 
 function CreateCollections() {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -75,6 +77,8 @@ function CreateCollections() {
       return;
     }
 
+     setIsSubmitting(true); // Start loading
+
     const loading = toast.loading("Creating collection...");
 
     try {
@@ -108,7 +112,7 @@ function CreateCollections() {
 
       if (res.ok) {
         toast.success("Collection Created Successfully", { id: loading });
-        // navigate("/collections");
+        navigate("/collections");
       } else {
         toast.error(result.error || "Failed to create collection", {
           id: loading,
@@ -117,12 +121,18 @@ function CreateCollections() {
     } catch (err) {
       toast.error(err.message || "Something went wrong", { id: loading });
     }
+    finally {
+    setIsSubmitting(false); // Stop loading
+  }
   };
 
   const handleBackButton = () => {
     navigate("/collections");
   };
 
+  if (isSubmitting) {
+  return <FullScreenLoader />;
+}
   return (
     <div className="flex flex-col  min-h-screen bg-black  overflow-hidden">
       {/* Background Glowing Effects */}
