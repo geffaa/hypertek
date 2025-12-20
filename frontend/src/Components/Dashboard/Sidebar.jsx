@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation , useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import Logo from "../../assets/images/Sidebar/logo.png";
@@ -15,6 +15,7 @@ import SupportImage from "../../assets/images/Sidebar/support.png";
 import LogoutImage from "../../assets/images/Sidebar/logout.png";
 
 const Sidebar = ({ onLogoutClick }) => {
+  const navigate = useNavigate()
   const location = useLocation();
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
@@ -86,6 +87,12 @@ const Sidebar = ({ onLogoutClick }) => {
     setOpenNews(false);
   };
 
+
+
+  const handleClickBack = ()=>{
+    navigate("/")
+  }
+
   // Check if a route is active
   const isRouteActive = (routePath) => {
     return location.pathname === routePath || location.pathname.startsWith(routePath + "/");
@@ -97,7 +104,7 @@ const Sidebar = ({ onLogoutClick }) => {
         <div className="flex-1">
           {/* Logo - Centered */}
           <div className="flex justify-center mt-12 mb-8">
-            <div className="hidden lg:flex items-center gap-1.5">
+            <div className="hidden lg:flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
               <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
               <span className="font-inter font-bold text-[18px] leading-[22px]">
                 HYPER TEK

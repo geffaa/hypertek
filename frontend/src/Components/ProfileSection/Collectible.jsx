@@ -63,6 +63,8 @@ function MarketPlace() {
         const res = await axios.get(
           `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
         );
+
+        console.log("your colleciable are :",res);
         if (res.data.success) setMarketData(res.data.collections);
       } catch (error) {
         console.error("Error fetching market data:", error);
@@ -81,6 +83,7 @@ function MarketPlace() {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log("your user Response are :",res);
         setUserData(res.data.user);
         console.log("✅ Profile fetched:", res.data.user);
       } catch (error) {
@@ -95,7 +98,7 @@ function MarketPlace() {
     if (token) {
       fetchProfile();
     }
-  }, [token]);
+  }, [token]); 
 
   console.log("your user get data are :", userData);
   // console.log("Avatar:", userData.Bio);
