@@ -142,7 +142,7 @@ function Character() {
         </div>
 
         {/* ===== TABLE (DESIGN SAME) ===== */}
-        <div className="pl-24 mt-12 z-10 relative">
+        <div className="pl-7 mt-12 z-10 relative">
           <table className="w-[927px] text-left rounded-lg overflow-hidden">
             <thead>
               <tr className="h-[50px]">
