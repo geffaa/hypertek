@@ -81,6 +81,7 @@ function MarketPlace() {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log("your user Response are :",res);
         setUserData(res.data.user);
         console.log("✅ Profile fetched:", res.data.user);
       } catch (error) {
