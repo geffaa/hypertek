@@ -89,9 +89,6 @@ function EditProfile() {
 };
 
 
-const handleGoToDashboard = () => {
-  navigate("/dashboard"); // change route if your dashboard path is different
-};
 
 
   return (
@@ -103,23 +100,7 @@ const handleGoToDashboard = () => {
         className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
         style={{ backgroundImage: `url(${overview1})` }}
       ></div>
-   <div className="absolute top-[17rem] right-4 sm:right-6 lg:right-12 z-50 pointer-events-auto">
-  <button
-    onClick={handleGoToDashboard}
-    className="
-      cursor-pointer
-      bg-transparent
-      border border-white
-      text-white
-      px-4 py-2
-      rounded-lg
-      hover:bg-white/10
-      transition
-    "
-  >
-    Go to Dashboard
-  </button>
-</div>
+   
 
 
 

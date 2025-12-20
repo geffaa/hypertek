@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import popularCollections from "../../assets/images/popular/popolar.png";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";
@@ -15,6 +15,7 @@ import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner";
 
 function MarketPlace() {
+  const navigate= useNavigate()
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
@@ -57,23 +58,38 @@ function MarketPlace() {
     }, 150);
   };
 
-  useEffect(() => {
-    const fetchMarketData = async () => {
-      try {
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
-        );
+ useEffect(() => {
+  if (!user?.id || !token) return;
 
-        console.log("your colleciable are :",res);
-        if (res.data.success) setMarketData(res.data.collections);
-      } catch (error) {
-        console.error("Error fetching market data:", error);
-      } finally {
-        setLoading(false);
+  const fetchUserCollections = async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/user/collection/get/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("your collectives are :",res);
+
+      if (res.data.success) {
+        setMarketData(res.data.collection); // 👈 IMPORTANT
       }
-    };
-    fetchMarketData();
-  }, []);
+    } catch (error) {
+      console.error("Error fetching user collections:", error);
+      toast.error(
+        error.response?.data?.message || "Failed to fetch collections"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUserCollections();
+}, [user?.id, token]);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -107,6 +123,12 @@ function MarketPlace() {
     return <FullScreenLoader />;
   }
 
+
+  const handleGoToDashboard = () => {
+  navigate("/dashboard"); // change route if your dashboard path is different
+};
+
+
   return (
     <>
       {/* ------------------ Main Section ------------------ */}
@@ -125,6 +147,7 @@ function MarketPlace() {
                 className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
               />
             </div>
+            
 
             {/* Profile Section - aligned properly with banner */}
             <div className="relative -mt-20 sm:-mt-24 md:-mt-24 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
@@ -166,11 +189,13 @@ function MarketPlace() {
                         </span>
                       </Link>
                     </p>
-                    <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
+                    {/* <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
                       $3000
-                    </p>
+                    </p> */}
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
@@ -182,6 +207,23 @@ function MarketPlace() {
             </div>
           </div>
         </div>
+        <div className="absolute top-[25rem] right-4 sm:right-6 lg:right-12 z-50 pointer-events-auto">
+  <button
+    onClick={handleGoToDashboard}
+    className="
+      cursor-pointer
+      bg-transparent
+      border border-white
+      text-white
+      px-4 py-2
+      rounded-lg
+      hover:bg-white/10
+      transition
+    "
+  >
+    Go to Dashboard
+  </button>
+</div>
 
         {/* ---------------------- Card Sections -------------------------------------- */}
         <section className="flex flex-col relative z-10 gap-4 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 lg:gap-8 mb-12 lg:mb-16">
@@ -189,7 +231,10 @@ function MarketPlace() {
 
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 justify-items-center">
-              {marketData.slice(0, 4).map((item, index) => {
+            {marketData
+  .filter(item => item.collection.Type === "NFA") // 👈 filter NFA collections
+  .slice(0, 4)
+  .map((item, index) => {
                 const collection = item.collection; // extract the inner collection object
                 return (
                   <div
