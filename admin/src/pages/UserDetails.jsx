@@ -192,7 +192,7 @@ const deleteUser = async () => {
       </div>
 
       {/* Table */}
-      <div className="pl-24 mt-12 ">
+      <div className="pl-7 mt-12 ">
         <table className="min-w-full text-left rounded-lg overflow-hidden">
           <thead>
             <tr className=" h-[50px] backdrop-blur-sm">

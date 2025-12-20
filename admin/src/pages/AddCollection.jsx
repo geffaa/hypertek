@@ -311,7 +311,7 @@ const filteredCollections = collections.filter((col) =>
       </div>
 
       {/* Table */}
-      <div className="pl-24 mt-12 overflow-x-auto">
+      <div className="pl-7 mt-12 overflow-x-auto">
         <table className="min-w-[897px] text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
