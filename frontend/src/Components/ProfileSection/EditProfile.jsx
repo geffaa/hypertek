@@ -15,6 +15,7 @@ function EditProfile() {
   const token = useSelector((state) => state.auth.token) || JSON.parse(localStorage.getItem("auth"))?.token;
 
   const userData = location.state?.userData || {};
+  console.log("your recieved data are :",userData);
 
   const [name, setName] = useState(userData.FullName || "");
   const [email, setEmail] = useState(userData.Email || "");
@@ -88,8 +89,13 @@ function EditProfile() {
 };
 
 
+const handleGoToDashboard = () => {
+  navigate("/dashboard"); // change route if your dashboard path is different
+};
+
+
   return (
-    <div className="min-h-screen bg-transparent relative z-10">
+    <div className="min-h-screen bg-transparent relative z-10 mt-16">
       {loading && <FullScreenLoader />}
 
       {/* Hero */}
@@ -97,6 +103,26 @@ function EditProfile() {
         className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
         style={{ backgroundImage: `url(${overview1})` }}
       ></div>
+   <div className="absolute top-[17rem] right-4 sm:right-6 lg:right-12 z-50 pointer-events-auto">
+  <button
+    onClick={handleGoToDashboard}
+    className="
+      cursor-pointer
+      bg-transparent
+      border border-white
+      text-white
+      px-4 py-2
+      rounded-lg
+      hover:bg-white/10
+      transition
+    "
+  >
+    Go to Dashboard
+  </button>
+</div>
+
+
+
 
       {/* Profile Info */}
       <div className="relative -mt-16 sm:-mt-24 md:-mt-32 lg:-mt-36 px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
@@ -125,7 +151,7 @@ function EditProfile() {
         <div className="mt-3 text-white">
           <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
           <p className="text-xs sm:text-sm text-gray-400 flex items-center gap-2">
-            {userData._id || "null"}
+            {userData._id || userData.id || "null"}
             <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" title="Copy">
               <FiCopy className="w-4 h-4" />
             </button>
