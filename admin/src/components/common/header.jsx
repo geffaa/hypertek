@@ -3,13 +3,11 @@ import { FiSearch, FiBell } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
 import HeaderImage from "../../assets/Sidebar/headerImage.png";
-import NotificationDropdown from "../common/Notification"
-import { Dashboard_Base_Url , Image_Base_Url } from "../../Config";
+import NotificationDropdown from "../common/Notification";
+import { Dashboard_Base_Url, Image_Base_Url } from "../../Config";
 import { useSelector } from "react-redux";
-import axios from "axios"
-import toast from "react-hot-toast"
-
-
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -17,29 +15,28 @@ const Header = () => {
   const [isBellHovered, setIsBellHovered] = useState(false);
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
-      const [userData, setUserData] = useState(null);
-const { user, token, isLoggedInUser } = useSelector((state) => state.auth || {});
+  const [userData, setUserData] = useState(null);
+  const { user, token, isLoggedInUser } = useSelector(
+    (state) => state.auth || {}
+  );
 
-
-  
   const bellRef = useRef(null);
 
   // Bell shake animation on new notifications
   const triggerBellAnimation = () => {
     if (bellRef.current) {
-      bellRef.current.classList.add('animate-shake');
+      bellRef.current.classList.add("animate-shake");
       setTimeout(() => {
         if (bellRef.current) {
-          bellRef.current.classList.remove('animate-shake');
+          bellRef.current.classList.remove("animate-shake");
         }
       }, 600);
     }
   };
 
+  // get the profile data
 
-// get the profile data 
-
-useEffect(() => {
+  useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`${Dashboard_Base_Url}/v1/getProfile`, {
@@ -47,7 +44,7 @@ useEffect(() => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("your user Response are :",res);
+        console.log("your user Response are :", res);
         setUserData(res.data.user);
         console.log("✅ Profile fetched:", res.data.user);
       } catch (error) {
@@ -64,10 +61,6 @@ useEffect(() => {
     }
   }, [token]);
 
-
-
-
-
   // Simulate new notifications
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,9 +71,7 @@ useEffect(() => {
   }, []);
 
   return (
-<header className="p-4 flex justify-end items-end relative z-50 ">
-
-  
+    <header className="p-4 flex justify-end items-end relative z-50 ">
       <div
         className="flex items-center justify-end gap-[46px] mr-16"
         style={{
@@ -198,42 +189,45 @@ useEffect(() => {
         </div> */}
 
         {/* 👤 Animated Profile Picture */}
-        <div 
+        <div
           className="relative group cursor-pointer"
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
         >
-          <div className={`
+          <div
+            className={`
             relative w-[44px] h-[44px] rounded-2xl 
-            bg-gradient-to-r from-blue-400 to-purple-500 
             p-0.5 transition-all duration-700 ease-out
-            ${isProfileHovered 
-              ? 'transform scale-110 shadow-2xl rotate-3' 
-              : 'shadow-lg'
+            ${
+              isProfileHovered
+                ? "transform scale-110 shadow-2xl rotate-3"
+                : "shadow-lg"
             }
-          `}>
+          `}
+          >
             {/* Profile Image Container */}
-           <img
-  src={
-    userData?.Avatar
-      ? `${Image_Base_Url}${userData.Avatar}` // use backend avatar
-      : HeaderImage // fallback image
-  }
-  alt="Profile"
-  className={`
+            <img
+              src={
+                userData?.Avatar
+                  ? `${Image_Base_Url}${userData.Avatar}` // use backend avatar
+                  : HeaderImage // fallback image
+              }
+              alt="Profile"
+              className={`
     w-full h-full object-cover rounded-xl
     transition-all duration-700 ease-out
-    ${isProfileHovered ? 'transform scale-110' : ''}
+    ${isProfileHovered ? "transform scale-110" : ""}
   `}
-/>
-
+            />
 
             {/* Floating Elements on Hover */}
-            <div className={`
+            <div
+              className={`
               absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
               opacity-0 transition-all duration-1000 ease-out
-              ${isProfileHovered ? 'opacity-100 animate-pulse' : ''}
-            `} />
+              ${isProfileHovered ? "opacity-100 animate-pulse" : ""}
+            `}
+            />
           </div>
 
           {/* Online Status with Animation */}
@@ -271,9 +265,16 @@ useEffect(() => {
       {/* Custom Animation Styles */}
       <style jsx>{`
         @keyframes shake {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-5deg); }
-          75% { transform: rotate(5deg); }
+          0%,
+          100% {
+            transform: rotate(0deg);
+          }
+          25% {
+            transform: rotate(-5deg);
+          }
+          75% {
+            transform: rotate(5deg);
+          }
         }
         .animate-shake {
           animation: shake 0.6s ease-in-out;

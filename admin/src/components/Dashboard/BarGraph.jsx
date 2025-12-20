@@ -14,23 +14,21 @@ function BarGraph() {
   const [totalOffers, setTotalOffers] = useState(null);
   const [combinedNfa, setCombinedNfa] = useState([]); // For combined lands + marketplace items
 
-
-
   // ✅ Fetch all dashboard data
   const GetAllData = async () => {
-    if(!Dashboard_Base_Url){
-      toast.error("Base Url is required")
+    if (!Dashboard_Base_Url) {
+      toast.error("Base Url is required");
     }
 
     try {
-     const [users, Buy, Sell, Nfa, collections, offer] = await Promise.all([
-    axios.get(`${Dashboard_Base_Url}/dashboard/user/Count`),
-    axios.get(`${Dashboard_Base_Url}/dashboard/buyers/Count`),
-    axios.get(`${Dashboard_Base_Url}/dashboard/sellers/Count`),
-    axios.get(`${Dashboard_Base_Url}/dashboard/combined/Counts`),
-    axios.get(`${Dashboard_Base_Url}/dashboard/marketplace/Count`),
-    axios.get(`${Dashboard_Base_Url}/dashboard/offers/Count`),
-  ]);
+      const [users, Buy, Sell, Nfa, collections, offer] = await Promise.all([
+        axios.get(`${Dashboard_Base_Url}/dashboard/user/Count`),
+        axios.get(`${Dashboard_Base_Url}/dashboard/buyers/Count`),
+        axios.get(`${Dashboard_Base_Url}/dashboard/sellers/Count`),
+        axios.get(`${Dashboard_Base_Url}/dashboard/combined/Counts`),
+        axios.get(`${Dashboard_Base_Url}/dashboard/marketplace/Count`),
+        axios.get(`${Dashboard_Base_Url}/dashboard/offers/Count`),
+      ]);
 
       // ✅ Combine NFA lands + marketplaceItems
       const combined = [...Nfa.data.lands, ...Nfa.data.marketplaceItems];
@@ -52,46 +50,24 @@ function BarGraph() {
     GetAllData();
   }, []);
 
-
-console.log("your total Sellers:", totalSell?.sellers);
+  console.log("your total Sellers:", totalSell?.sellers);
   return (
     <div className="my-8 w-full max-w-[993px] mx-auto h-auto grid grid-cols-3 grid-rows-2 gap-6">
       {/* ✅ Pass each dataset individually */}
       <BarCard
-       
-       
-       
-       
         userSendData={userData?.users || []}
         userCount={userData?.totalUsers || 0}
-
- totalBuySendData={totalBuy?.buyers || []} 
-  totalBuyerCount={totalBuy?.totalBuyers || 0}
-
-
-  totalSellSendData = { totalSell?.sellers || []}
-  totalSellCount = { totalSell?.totalSellers || 0}
-
-
-  totalNfaSend ={combinedNfa || []}
-  totalNfaCount={totalNfa?.total || 0}
-
-
-   totalCollectionSend={totalCollection?.marketplaceItems || []}
-   totalCollectionCount={totalCollection?.totalItems || 0}
-
-    totalOfferSend={totalOffers?.offers || []}
-  totalOfferCount={totalOffers?.totalOffers || 0}
-
-
-
+        totalBuySendData={totalBuy?.buyers || []}
+        totalBuyerCount={totalBuy?.totalBuyers || 0}
+        totalSellSendData={totalSell?.sellers || []}
+        totalSellCount={totalSell?.totalSellers || 0}
+        totalNfaSend={combinedNfa || []}
+        totalNfaCount={totalNfa?.total || 0}
+        totalCollectionSend={totalCollection?.marketplaceItems || []}
+        totalCollectionCount={totalCollection?.totalItems || 0}
+        totalOfferSend={totalOffers?.offers || []}
+        totalOfferCount={totalOffers?.totalOffers || 0}
       />
-
-   
-
-
-
-    
     </div>
   );
 }
