@@ -220,7 +220,7 @@ const Sidebar = ({ onLogoutClick }) => {
             )}
 
             {/* NFA's Collection */}
-            <Link to="/dashboard/collections">
+            {/* <Link to="/dashboard/collections">
               <li
                 className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
                   selectedItem === "Collection"
@@ -249,7 +249,7 @@ const Sidebar = ({ onLogoutClick }) => {
                   </h1>
                 </div>
               </li>
-            </Link>
+            </Link> */}
 
             {/* Edit User */}
             <Link to="/dashboard/edit-profile">
@@ -284,7 +284,7 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link>
 
             {/* Update News */}
-            <li
+            {/* <li
               className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
                 selectedItem === "News"
                   ? "bg-[#002AA8]"
@@ -317,7 +317,7 @@ const Sidebar = ({ onLogoutClick }) => {
               ) : (
                 <FiChevronDown className="text-white" />
               )}
-            </li>
+            </li> */}
 
             {/* Dropdown Options for News */}
             {openNews && (
@@ -356,7 +356,7 @@ const Sidebar = ({ onLogoutClick }) => {
             )}
 
             {/* Collection on Sale */}
-            <Link to="/dashboard/collection-on-sale">
+            {/* <Link to="/dashboard/collection-on-sale">
               <li
                 className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
                   selectedItem === "Sale"
@@ -385,7 +385,7 @@ const Sidebar = ({ onLogoutClick }) => {
                   </h1>
                 </div>
               </li>
-            </Link>
+            </Link> */}
 
             {/* Transaction */}
             <Link to="/dashboard/transactions">

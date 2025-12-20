@@ -1,30 +1,30 @@
-// scripts/deploy-v3.js - FOR HARDHAT v3
-import hre from "hardhat";
+// scripts/deploy.js - ES MODULE VERSION
+import { ethers } from "hardhat";  // Try this import instead
 import fs from "fs";
 
 async function main() {
-  console.log("🚀 Starting Hardhat v3 deployment...\n");
+  console.log("🚀 Starting deployment...\n");
 
-  // Get deployer account - NEW WAY in v3
-  const [deployer] = await hre.ethers.getSigners();
+  // Get deployer account
+  const [deployer] = await ethers.getSigners();
   console.log("👤 Deploying with account:", deployer.address);
 
   // Get balance
   const balance = await deployer.provider.getBalance(deployer.address);
-  console.log("💰 Balance:", hre.ethers.formatEther(balance), "ETH\n");
+  console.log("💰 Balance:", ethers.formatEther(balance), "ETH\n");
 
-  // 1. Deploy NFT contract - NEW WAY
+  // 1. Deploy NFT contract
   console.log("📦 Deploying MyNFT contract...");
-  const MyNFT = await hre.ethers.getContractFactory("MyNFT");
+  const MyNFT = await ethers.getContractFactory("MyNFT");
   const myNFT = await MyNFT.deploy();
-  await myNFT.waitForDeployment();  // NEW in v3
+  await myNFT.waitForDeployment();
   
-  const nftAddress = await myNFT.getAddress();  // NEW in v3
+  const nftAddress = await myNFT.getAddress();
   console.log("✅ MyNFT deployed to:", nftAddress);
 
   // 2. Deploy Marketplace
   console.log("\n🏪 Deploying Marketplace contract...");
-  const Marketplace = await hre.ethers.getContractFactory("Marketplace");
+  const Marketplace = await ethers.getContractFactory("Marketplace");
   const marketplace = await Marketplace.deploy(deployer.address);
   await marketplace.waitForDeployment();
   
@@ -36,16 +36,15 @@ async function main() {
     NFT_ADDRESS: nftAddress,
     MARKETPLACE_ADDRESS: marketAddress,
     DEPLOYER: deployer.address,
-    NETWORK: "localhost",
-    HARDHAT_VERSION: "3.1.0"
+    NETWORK: "localhost"
   };
   
   fs.writeFileSync(
-    "./deployed-addresses-v3.json",
+    "./deployed-addresses.json",
     JSON.stringify(config, null, 2)
   );
   
-  console.log("\n📁 Addresses saved to: deployed-addresses-v3.json");
+  console.log("\n📁 Addresses saved to: deployed-addresses.json");
 
   // 4. Test contracts
   console.log("\n🔍 Testing contracts...");
@@ -66,7 +65,7 @@ async function main() {
     console.log("   Marketplace.getListing(): Works (no listing yet)");
   }
 
-  console.log("\n🎉 HARDHAT v3 DEPLOYMENT COMPLETE!");
+  console.log("\n🎉 DEPLOYMENT COMPLETE!");
   console.log("===================================");
   console.log("MyNFT:      ", nftAddress);
   console.log("Marketplace:", marketAddress);
@@ -75,6 +74,7 @@ async function main() {
   return { nftAddress, marketAddress };
 }
 
+// Use the Hardhat Runtime Environment
 main()
   .then(() => process.exit(0))
   .catch((error) => {

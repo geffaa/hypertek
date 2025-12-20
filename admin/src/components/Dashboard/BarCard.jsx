@@ -26,6 +26,16 @@ function BarCard({
   const maxHeight = 88;
   const maxBarsToShow = 7; // Maximum number of bars to show in the chart
 
+
+  const getDefaultMonthValue = (monthIndex) => {
+  const year = new Date().getFullYear();
+  const month = String(monthIndex + 1).padStart(2, "0");
+  return `${year}-${month}`;
+};
+
+const defaultMonth = getDefaultMonthValue(selectedMonth);
+
+
   // -------------------- Helper: Calculate Optimal Group Size --------------------
   const calculateOptimalGroupSize = (dataLength) => {
     if (dataLength <= maxBarsToShow) return 1; // No grouping needed
@@ -210,6 +220,19 @@ function BarCard({
   const maxValueNfa = getMaxValue(nfaGroupedData);
   const maxValueCollection = getMaxValue(collectionGroupedData);
   const maxValueOffer = getMaxValue(offerGroupedData);
+
+
+  useEffect(() => {
+  const newMonth = getDefaultMonthValue(selectedMonth);
+
+  setSelectedMonthUsers(newMonth);
+  setSelectedMonthBuy(newMonth);
+  setSelectedMonthSell(newMonth);
+  setSelectedMonthNfa(newMonth);
+  setSelectedMonthCollection(newMonth);
+  setSelectedMonthOffer(newMonth);
+}, [selectedMonth]);
+
 
   // -------------------- Chart Render with Flexible Grouped Data --------------------
   const renderFlexibleGroupedChart = (groupedData, maxValue) =>
