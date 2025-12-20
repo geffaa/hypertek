@@ -24,7 +24,7 @@ function Land() {
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState({});
 
-  const [landData, setLandketData] = useState([]);
+const [landData, setLandData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [loading, setLoading] = useState(true); // ✅ loader state
 
@@ -96,32 +96,43 @@ function Land() {
   //// get the nfa data
 
   // get the market data here
- useEffect(() => {
+useEffect(() => {
+  if (!user?.id || !token) return;
+
   const fetchMarketData = async () => {
     try {
+      setLoading(true);
+      
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
+        `${BACKEND_BASE_URL}/api/v1/nft/user/collection/get/${user.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add token like in MarketPlace
+          },
+        }
       );
 
-      console.log("All data:", res.data.collections);
+      console.log("Land API Response:", res.data);
 
       if (res.data.success) {
-        // ✅ Filter only items where collection.Type === "Land"
-        const landItems = res.data.collections.filter(
+        // CORRECT: Use res.data.collection (not res.data.data.collections)
+        const landItems = res.data.collection.filter(
           (item) => item.collection.Type === "Land"
         );
-        setLandketData(landItems);
+
+        console.log("Filtered Land Items:", landItems);
+        setLandData(landItems);
       }
     } catch (error) {
-      console.error("Error fetching market data:", error);
+      console.error("Error fetching land data:", error);
+      toast.error("Failed to fetch land data");
     } finally {
       setLoading(false);
     }
   };
 
   fetchMarketData();
-}, []);
-
+}, [user?.id, token]); // Use user.id (not user._id)
 
   console.log("your land  data are here :", landData);
 

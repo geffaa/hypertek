@@ -3,11 +3,15 @@ import { FiSearch, FiBell } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
 import HeaderImage from "../../assets/Sidebar/headerImage.png";
-import NotificationDropdown from "../common/Notification";
+import NotificationDropdown from "../common/Notification"
 import { Dashboard_Base_Url, Image_Base_Url } from "../../Config";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import toast from "react-hot-toast";
+import axios from "axios"
+import toast from "react-hot-toast"
+import { FaUserCircle } from "react-icons/fa";
+
+
+
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -36,30 +40,18 @@ const Header = () => {
 
   // get the profile data
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await axios.get(`${Dashboard_Base_Url}/v1/getProfile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log("your user Response are :", res);
-        setUserData(res.data.user);
-        console.log("✅ Profile fetched:", res.data.user);
-      } catch (error) {
-        console.error(
-          "❌ Profile fetch error:",
-          error.response?.data || error.message
-        );
-        toast.error(error.response?.data?.message || "Failed to fetch profile");
-      }
-    };
+// get the profile data 
 
-    if (token) {
-      fetchProfile();
+useEffect(() => {
+  try {
+    const adminData = localStorage.getItem("admin_data");
+    if (adminData) {
+      setUserData(JSON.parse(adminData));
     }
-  }, [token]);
+  } catch (error) {
+    console.error("Failed to parse admin data from localStorage", error);
+  }
+}, []);
 
   // Simulate new notifications
   useEffect(() => {
@@ -194,41 +186,26 @@ const Header = () => {
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
         >
-          <div
-            className={`
-            relative w-[44px] h-[44px] rounded-2xl 
-            p-0.5 transition-all duration-700 ease-out
-            ${
-              isProfileHovered
-                ? "transform scale-110 shadow-2xl rotate-3"
-                : "shadow-lg"
-            }
-          `}
-          >
-            {/* Profile Image Container */}
-            <img
-              src={
-                userData?.Avatar
-                  ? `${Image_Base_Url}${userData.Avatar}` // use backend avatar
-                  : HeaderImage // fallback image
-              }
-              alt="Profile"
-              className={`
-    w-full h-full object-cover rounded-xl
-    transition-all duration-700 ease-out
-    ${isProfileHovered ? "transform scale-110" : ""}
-  `}
-            />
+        <div
+  className={`relative w-[44px] h-[44px] rounded-2xl cursor-pointer 
+    transition-transform duration-700 ease-out
+    ${isProfileHovered ? 'transform scale-110' : ''}`}
+  onMouseEnter={() => setIsProfileHovered(true)}
+  onMouseLeave={() => setIsProfileHovered(false)}
+>
+ {userData?.Avatar ? (
+ <img
+  src={`${Image_Base_Url}${userData.Avatar.startsWith('/') ? userData.Avatar : '/' + userData.Avatar}`}
+  alt={userData?.FullName || "Profile"}
+  className="w-full h-full object-cover rounded-2xl"
+/>
 
-            {/* Floating Elements on Hover */}
-            <div
-              className={`
-              absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
-              opacity-0 transition-all duration-1000 ease-out
-              ${isProfileHovered ? "opacity-100 animate-pulse" : ""}
-            `}
-            />
-          </div>
+) : (
+  <FaUserCircle className="w-full h-full text-gray-400 p-1" />
+)}
+
+</div>
+
 
           {/* Online Status with Animation */}
           {/* <div className={`
