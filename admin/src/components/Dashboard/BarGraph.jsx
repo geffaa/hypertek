@@ -20,11 +20,6 @@ function BarGraph() {
 
 
 
-  const currentMonth = new Date().getMonth(); // 0 = Jan, 11 = Dec
-const [selectedMonth, setSelectedMonth] = useState(currentMonth);
-
-
-
   // ✅ Fetch all dashboard data
   const GetAllData = async () => {
     if(!Dashboard_Base_Url){
@@ -75,28 +70,20 @@ console.log("your total Sellers:", totalSell?.sellers);
   return (
     <div className="my-8 w-full max-w-[993px] mx-auto h-auto grid grid-cols-3 grid-rows-2 gap-6">
       {/* ✅ Pass each dataset individually */}
-    <BarCard
-  selectedMonth={selectedMonth}
-  setSelectedMonth={setSelectedMonth}
-  userSendData={userData?.users || []}
-  userCount={userData?.totalUsers || 0}
-  totalBuySendData={totalBuy?.buyers || []}
-  totalBuyerCount={totalBuy?.totalBuyers || 0}
-  totalSellSendData={totalSell?.sellers || []}
-  totalSellCount={totalSell?.totalSellers || 0}
-  totalNfaSend={combinedNfa || []}
-  totalNfaCount={totalNfa?.total || 0}
-  totalCollectionSend={totalCollection?.marketplaceItems || []}
-  totalCollectionCount={totalCollection?.totalItems || 0}
-  totalOfferSend={totalOffers?.offers || []}
-  totalOfferCount={totalOffers?.totalOffers || 0}
-/>
-
-   
-
-
-
-    
+      <BarCard
+        userSendData={userData?.users || []}
+        userCount={userData?.totalUsers || 0}
+        totalBuySendData={totalBuy?.buyers || []}
+        totalBuyerCount={totalBuy?.totalBuyers || 0}
+        totalSellSendData={totalSell?.sellers || []}
+        totalSellCount={totalSell?.totalSellers || 0}
+        totalNfaSend={combinedNfa || []}
+        totalNfaCount={totalNfa?.total || 0}
+        totalCollectionSend={totalCollection?.marketplaceItems || []}
+        totalCollectionCount={totalCollection?.totalItems || 0}
+        totalOfferSend={totalOffers?.offers || []}
+        totalOfferCount={totalOffers?.totalOffers || 0}
+      />
     </div>
   );
 }

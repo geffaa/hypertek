@@ -159,7 +159,7 @@ function Land() {
           <div className="flex items-center">
             <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
             <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-              ${item.collection.supply}
+              ${item.collection.chain}
             </h3>
           </div>
         </div>

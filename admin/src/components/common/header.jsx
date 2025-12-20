@@ -19,25 +19,26 @@ const Header = () => {
   const [isBellHovered, setIsBellHovered] = useState(false);
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
-      const [userData, setUserData] = useState(null);
-const { user, token, isLoggedInUser } = useSelector((state) => state.auth || {});
+  const [userData, setUserData] = useState(null);
+  const { user, token, isLoggedInUser } = useSelector(
+    (state) => state.auth || {}
+  );
 
-
-  
   const bellRef = useRef(null);
 
   // Bell shake animation on new notifications
   const triggerBellAnimation = () => {
     if (bellRef.current) {
-      bellRef.current.classList.add('animate-shake');
+      bellRef.current.classList.add("animate-shake");
       setTimeout(() => {
         if (bellRef.current) {
-          bellRef.current.classList.remove('animate-shake');
+          bellRef.current.classList.remove("animate-shake");
         }
       }, 600);
     }
   };
 
+  // get the profile data
 
 // get the profile data 
 
@@ -52,10 +53,6 @@ useEffect(() => {
   }
 }, []);
 
-
-
-
-
   // Simulate new notifications
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,9 +63,7 @@ useEffect(() => {
   }, []);
 
   return (
-<header className="p-4 flex justify-end items-end relative z-50 ">
-
-  
+    <header className="p-4 flex justify-end items-end relative z-50 ">
       <div
         className="flex items-center justify-end gap-[46px] mr-16"
         style={{
@@ -186,7 +181,7 @@ useEffect(() => {
         </div> */}
 
         {/* 👤 Animated Profile Picture */}
-        <div 
+        <div
           className="relative group cursor-pointer"
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
@@ -247,9 +242,16 @@ useEffect(() => {
       {/* Custom Animation Styles */}
       <style jsx>{`
         @keyframes shake {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-5deg); }
-          75% { transform: rotate(5deg); }
+          0%,
+          100% {
+            transform: rotate(0deg);
+          }
+          25% {
+            transform: rotate(-5deg);
+          }
+          75% {
+            transform: rotate(5deg);
+          }
         }
         .animate-shake {
           animation: shake 0.6s ease-in-out;
