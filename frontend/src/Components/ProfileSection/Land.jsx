@@ -96,21 +96,32 @@ function Land() {
   //// get the nfa data
 
   // get the market data here
-  useEffect(() => {
-    const fetchMarketData = async () => {
-      try {
-        const landres = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/land/getLand`
+ useEffect(() => {
+  const fetchMarketData = async () => {
+    try {
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
+      );
+
+      console.log("All data:", res.data.collections);
+
+      if (res.data.success) {
+        // ✅ Filter only items where collection.Type === "Land"
+        const landItems = res.data.collections.filter(
+          (item) => item.collection.Type === "Land"
         );
-
-        if (landres.data?.data) setLandketData(landres.data.data);
-      } catch (error) {
-        console.error("Error fetching market data:", error);
+        setLandketData(landItems);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching market data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchMarketData();
-  }, []); // run once when component mounts
+  fetchMarketData();
+}, []);
+
 
   console.log("your land  data are here :", landData);
 
@@ -219,12 +230,12 @@ function Land() {
                 </div>
 
                 <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-                  {item.title}
+                  {item.title || item.collection.name}
                 </h2>
 
                 <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
                   <h3 className="text-xs lg:text-sm font-semibold">
-                    {item.serialNumber}🔥
+                    {item._id.slice(0, 6)}🔥
                   </h3>
                   <div className="flex items-center">
                     <img
@@ -233,7 +244,7 @@ function Land() {
                       className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                     />
                     <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                      ${item.price}
+                      ${item.priceETH}
                     </h3>
                   </div>
                 </div>

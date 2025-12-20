@@ -4,6 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
 import HeaderImage from "../../assets/Sidebar/headerImage.png";
 import NotificationDropdown from "../common/Notification"
+import { Dashboard_Base_Url , Image_Base_Url } from "../../Config";
+import { useSelector } from "react-redux";
+import axios from "axios"
+import toast from "react-hot-toast"
+
+
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -11,6 +17,10 @@ const Header = () => {
   const [isBellHovered, setIsBellHovered] = useState(false);
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
+      const [userData, setUserData] = useState(null);
+const { user, token, isLoggedInUser } = useSelector((state) => state.auth || {});
+
+
   
   const bellRef = useRef(null);
 
@@ -25,6 +35,38 @@ const Header = () => {
       }, 600);
     }
   };
+
+
+// get the profile data 
+
+useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/getProfile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("your user Response are :",res);
+        setUserData(res.data.user);
+        console.log("✅ Profile fetched:", res.data.user);
+      } catch (error) {
+        console.error(
+          "❌ Profile fetch error:",
+          error.response?.data || error.message
+        );
+        toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }
+    };
+
+    if (token) {
+      fetchProfile();
+    }
+  }, [token]);
+
+
+
+
 
   // Simulate new notifications
   useEffect(() => {
@@ -49,7 +91,7 @@ const Header = () => {
         }}
       >
         {/* 🔍 Animated Search Box */}
-        <div className="relative">
+        {/* <div className="relative">
           <div
             className={`
               flex items-center gap-2 rounded-xl px-4 py-3 
@@ -80,17 +122,17 @@ const Header = () => {
               onBlur={() => setIsSearchFocused(false)}
             />
             
-            {/* Search Animation Line */}
+            Search Animation Line
             <div className={`
               absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400
               transform origin-left transition-all duration-500 ease-out
               ${isSearchFocused ? 'scale-x-100' : 'scale-x-0'}
             `} />
           </div>
-        </div>
+        </div> */}
 
         {/* 🔔 Animated Notification Bell */}
-        <div className="relative">
+        {/* <div className="relative">
           <button 
             ref={bellRef}
             className={`
@@ -107,7 +149,7 @@ const Header = () => {
             onMouseEnter={() => setIsBellHovered(true)}
             onMouseLeave={() => setIsBellHovered(false)}
           >
-            {/* Bell Icon with Multiple Animations */}
+            Bell Icon with Multiple Animations
             <div className="relative">
               <img
                 src={HeaderIcon}
@@ -120,7 +162,7 @@ const Header = () => {
                 `}
               />
               
-              {/* Ripple Effect */}
+              Ripple Effect
               <div className={`
                 absolute inset-0 rounded-full bg-blue-400/20
                 transform scale-0 transition-all duration-700 ease-out
@@ -128,7 +170,7 @@ const Header = () => {
               `} />
             </div>
 
-            {/* Pulsing Notification Dot */}
+            Pulsing Notification Dot
             <div className={`
               absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 
               rounded-full flex items-center justify-center text-white text-xs font-bold
@@ -140,7 +182,7 @@ const Header = () => {
               {notificationCount}
             </div>
 
-            {/* Hover Glow */}
+            Hover Glow
             <div className={`
               absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/10 to-purple-400/10
               opacity-0 transition-opacity duration-500
@@ -148,12 +190,12 @@ const Header = () => {
             `} />
           </button>
           
-          {/* Notification Dropdown */}
+          Notification Dropdown
           <NotificationDropdown 
             isOpen={showNotifications}
             onClose={() => setShowNotifications(false)}
           />
-        </div>
+        </div> */}
 
         {/* 👤 Animated Profile Picture */}
         <div 
@@ -171,17 +213,20 @@ const Header = () => {
             }
           `}>
             {/* Profile Image Container */}
-            <div className="w-full h-full rounded-xl bg-white overflow-hidden">
-              <img
-                src={HeaderImage}
-                alt="Profile"
-                className={`
-                  w-full h-full object-cover rounded-xl
-                  transition-all duration-700 ease-out
-                  ${isProfileHovered ? 'transform scale-110' : ''}
-                `}
-              />
-            </div>
+           <img
+  src={
+    userData?.Avatar
+      ? `${Image_Base_Url}${userData.Avatar}` // use backend avatar
+      : HeaderImage // fallback image
+  }
+  alt="Profile"
+  className={`
+    w-full h-full object-cover rounded-xl
+    transition-all duration-700 ease-out
+    ${isProfileHovered ? 'transform scale-110' : ''}
+  `}
+/>
+
 
             {/* Floating Elements on Hover */}
             <div className={`
@@ -192,7 +237,7 @@ const Header = () => {
           </div>
 
           {/* Online Status with Animation */}
-          <div className={`
+          {/* <div className={`
             absolute bottom-0 right-0 w-4 h-4 bg-green-500 
             rounded-full border-3 border-white
             transition-all duration-500 ease-out
@@ -201,10 +246,10 @@ const Header = () => {
               : 'shadow-md'
             }
             animate-pulse
-          `} />
+          `} /> */}
 
           {/* Profile Tooltip */}
-          <div className={`
+          {/* <div className={`
             absolute top-full right-0 mt-3 px-4 py-2 
             bg-gray-900 text-white text-sm rounded-xl
             opacity-0 transform translate-y-4
@@ -219,7 +264,7 @@ const Header = () => {
               <span>Online - View Profile</span>
             </div>
             <div className="absolute -top-1 right-4 w-3 h-3 bg-gray-900 transform rotate-45" />
-          </div>
+          </div> */}
         </div>
       </div>
 
