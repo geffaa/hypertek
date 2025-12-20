@@ -16,6 +16,9 @@ function CollectionDetails() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token) || localStorage.getItem("token");
 
@@ -72,6 +75,26 @@ function CollectionDetails() {
     }
   };
 
+
+
+const handleCopyWallet = async (address) => {
+  try {
+    await navigator.clipboard.writeText(address);
+    toast.success("Wallet address copied!");
+  } catch (err) {
+    toast.error("Failed to copy wallet address");
+  }
+};
+
+
+const shortenAddress = (address) => {
+  if (!address) return "";
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+};
+
+
+
+
   const toggleStatus = async (id, currentStatus) => {
     try {
       const newStatus = currentStatus ? "inactive" : "active";
@@ -90,6 +113,13 @@ function CollectionDetails() {
       toast.error(err.response?.data?.message || "Failed to update status");
     }
   };
+
+
+
+  const filteredCollections = collections.filter((col) =>
+  col.name.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
 
   return (
     <div className="mt-12 flex h-[700px] bg-black flex-col">
@@ -111,6 +141,8 @@ function CollectionDetails() {
             <img src={searchImage} alt="search" className="w-4 h-4" />
             <input
               type="text"
+               value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search collections"
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
             />
@@ -125,28 +157,44 @@ function CollectionDetails() {
       </div>
 
       {/* Table */}
-      <div className="w-[900px] ml-24 mt-12 overflow-x-auto custom-scrollbar">
-        <table className="min-w-[1200px] text-left rounded-lg">
+      <div className="w-[700px] ml-12 mt-12  custom-scrollbar">
+<table className="min-w-[800px] text-left rounded-lg border-collapse border-spacing-0">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
-              {["Name","Image","Symbol","Chain","Creator Fee","Supply","Wallet Address","Action","Status"].map((title) => (
-                <th key={title} className="px-6 py-3 text-white font-semibold text-sm tracking-wider">{title}</th>
+              {/* {["Name","Image","Symbol","Chain","Creator Fee","Supply","Wallet Address","Action","Status"].map((title) => ( */}
+              {["Name","Image","Creator Fee","Wallet Address","Action","Status"].map((title) => (
+                <th key={title} className=" py-3 text-white font-semibold text-sm tracking-wider">{title}</th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-white/10">
-            {collections.map((col) => (
+            {filteredCollections.map((col) => (
+
               <tr key={col.id} className="h-[70px] transition-all duration-200 backdrop-blur-sm">
-                <td className="px-6 py-4 text-white/80 font-medium">{col.name}</td>
-                <td className="px-6 py-4">
+                <td className="  text-white/80 font-medium">{col.name}</td>
+                <td className=" ">
                   <img src={col.image} alt={col.name} className="w-12 h-12 object-cover border border-white/10 rounded-md" />
                 </td>
-                <td className="px-6 py-4 text-white/80 font-medium">{col.symbol}</td>
-                <td className="px-6 py-4 text-white/80 font-medium">{col.chain}</td>
+                {/* <td className="px-6 py-4 text-white/80 font-medium">{col.symbol}</td> */}
+                {/* <td className="px-6 py-4 text-white/80 font-medium">{col.chain}</td> */}
                 <td className="px-6 py-4 text-white/80 font-medium">{col.creatorFee}%</td>
-                <td className="px-6 py-4 text-white/80 font-medium">{col.supply}</td>
-                <td className="px-6 py-4 text-white/80 font-medium">{col.recipient}</td>
-                <td className="px-6 py-4 flex gap-4">
+                {/* <td className="px-6 py-4 text-white/80 font-medium">{col.supply}</td> */}
+<td className="text-white/80 font-medium">
+  <div className="flex items-center gap-2">
+    <span className="text-sm">
+      {shortenAddress(col.recipient)}
+    </span>
+
+    <button
+      onClick={() => handleCopyWallet(col.recipient)}
+      className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 border border-white/20 transition"
+      title="Copy wallet address"
+    >
+      Copy
+    </button>
+  </div>
+</td>
+                <td className=" py-4 mt-3 flex gap-4">
                   <Link to="/dashboard/edit-nfa" state={{ collection: col }}>
                     <img src={EditImage} alt="edit" className="w-4 h-4 cursor-pointer" />
                   </Link>
@@ -154,7 +202,7 @@ function CollectionDetails() {
                     <img src={DeleteImage} alt="delete" className="w-3 h-4 cursor-pointer" />
                   </button>
                 </td>
-                <td className="px-6 py-4">
+                <td className=" ">
                   <Switch
                     checked={col.status}
                     onChange={() => toggleStatus(col.id, col.status)}

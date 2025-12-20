@@ -92,68 +92,79 @@ function Buy1() {
 
   // ---------------------------------
   // 1️⃣ Mint NFT via backend with proper error handling
-  const mintNFTBackend = async () => {
-    if (!user?.id) {
-      toast.error("Please login first");
-      return null;
+ const mintNFTBackend = async () => {
+  if (!user?.id) {
+    toast.error("Please login first");
+    return null;
+  }
+
+  if (!item._id) {
+    toast.error("Your Item is required");
+    return null;
+  }
+
+  try {
+    // Get wallet from Redux if exists, otherwise from MetaMask
+    let creatorWallet = user.wallet;
+    if (!creatorWallet && window.ethereum) {
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      creatorWallet = await signer.getAddress();
     }
 
-    if (!item._id) {
-      toast.error("Your Item is required");
-      return null;
-    }
+    const payload = {
+      docId: item._id,
+      tokenURI: `ipfs://auto-${Date.now()}`,
+      royaltyBps: 500,
+      creatorWallet, // now this will not be undefined
+    };
 
-    try {
-      // Get wallet from Redux if exists, otherwise from MetaMask
-      let creatorWallet = user.wallet;
-      if (!creatorWallet && window.ethereum) {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        creatorWallet = await signer.getAddress();
+    console.log("Sending mint request to backend with payload:", payload);
+
+    const res = await axios.post(
+      `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
+    );
 
-      const payload = {
-        docId: item._id,
-        tokenURI: `ipfs://auto-${Date.now()}`,
-        royaltyBps: 500,
-        creatorWallet, // now this will not be undefined
-      };
+    console.log("Mint API response:", res);
 
-      console.log("Sending mint request to backend with payload:", payload);
-
-      const res = await axios.post(
-        // "http://localhost:4700/api/v1/nft/mint",
-        `${BACKEND_BASE_URL}/api/v1/nft/mint`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Mint API response:", res);
-
-      if (res?.data?.success) {
-        toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
-        return res.data.tokenId;
-      } else {
-        toast.error(res?.data?.error || "Mint failed: No TokenId returned");
-        return null;
-      }
-    } catch (err) {
-      console.error("Mint request error:", err.response?.data || err.message);
-      const message =
-        err.response?.data?.error ||
-        (err.message.includes("insufficient funds")
-          ? "Insufficient ETH in wallet to mint NFT"
-          : err.message);
-      toast.error(message);
+    if (res?.data?.success) {
+      toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
+      return res.data.tokenId;
+    } else {
+      toast.error(res?.data?.error || "Mint failed: No TokenId returned");
       return null;
     }
-  };
+  } catch (err) {
+    console.error("Mint request error:", err.response?.data || err.message);
+    
+    // More detailed error handling
+    if (err.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error("Error data:", err.response.data);
+      console.error("Error status:", err.response.status);
+      toast.error(`Server error: ${err.response.data.error || err.response.data.message || 'Unknown error'}`);
+    } else if (err.request) {
+      // The request was made but no response was received
+      console.error("No response received:", err.request);
+      toast.error("No response from server. Please check your connection.");
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("Error setting up request:", err.message);
+      toast.error(`Request error: ${err.message}`);
+    }
+    
+    return null;
+  } 
+};
 
   // 2️⃣ Create listing automatically with safe checks
   const createListingAutomatically = async (signer, buyerAddress) => {

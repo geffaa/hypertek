@@ -8,6 +8,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
+import { FaUserCircle } from "react-icons/fa";
+
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -194,73 +196,33 @@ useEffect(() => {
         </div> */}
 
         {/* 👤 Animated Profile Picture */}
-        <div 
-          className="relative group cursor-pointer"
-          onMouseEnter={() => setIsProfileHovered(true)}
-          onMouseLeave={() => setIsProfileHovered(false)}
-        >
-          <div className={`
-            relative w-[44px] h-[44px] rounded-2xl 
-            bg-gradient-to-r from-blue-400 to-purple-500 
-            p-0.5 transition-all duration-700 ease-out
-            ${isProfileHovered 
-              ? 'transform scale-110 shadow-2xl rotate-3' 
-              : 'shadow-lg'
-            }
-          `}>
-            {/* Profile Image Container */}
-           {/* Profile Image Container */}
-<div className="w-full h-full rounded-xl bg-white overflow-hidden">
-  <img
-    src={
-      userData?.Avatar
-        ? `${BACKEND_BASE_URL}${userData.Avatar}` // Use profile avatar if exists
-        : HeaderImage // Fallback to default image
-    }
-    alt={userData?.FullName || "Profile"}
-    className={`w-full h-full object-cover rounded-xl transition-all duration-700 ease-out ${isProfileHovered ? 'transform scale-110' : ''}`}
-  />
+  {/* 👤 Animated Profile Picture */}
+<div className={`
+  relative w-[44px] h-[44px] rounded-3xl 
+  p-0.5 transition-all duration-700 ease-out
+  ${isProfileHovered ? 'transform scale-110 rotate-3' : 'shadow-lg'}
+`}>
+  <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center">
+    {userData?.Avatar ? (
+      <img
+        src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+        alt={userData?.FullName || "Profile"}
+        className={`w-full h-full object-cover rounded-xl transition-all duration-700 ease-out ${isProfileHovered ? 'transform scale-110' : ''}`}
+      />
+    ) : (
+      <FaUserCircle className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400" />
+    )}
+  </div>
+
+  {/* Floating hover gradient */}
+  <div className={`
+    absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
+    opacity-0 transition-all duration-1000 ease-out
+    ${isProfileHovered ? 'opacity-100 animate-pulse' : ''}
+  `} />
 </div>
 
 
-            {/* Floating Elements on Hover */}
-            <div className={`
-              absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
-              opacity-0 transition-all duration-1000 ease-out
-              ${isProfileHovered ? 'opacity-100 animate-pulse' : ''}
-            `} />
-          </div>
-
-          {/* Online Status with Animation */}
-          {/* <div className={`
-            absolute bottom-0 right-0 w-4 h-4 bg-green-500 
-            rounded-full border-3 border-white
-            transition-all duration-500 ease-out
-            ${isProfileHovered 
-              ? 'transform scale-125 bg-green-400 shadow-lg' 
-              : 'shadow-md'
-            }
-            animate-pulse
-          `} /> */}
-
-          {/* Profile Tooltip */}
-          {/* <div className={`
-            absolute top-full right-0 mt-3 px-4 py-2 
-            bg-gray-900 text-white text-sm rounded-xl
-            opacity-0 transform translate-y-4
-            transition-all duration-500 ease-out
-            whitespace-nowrap z-50
-            pointer-events-none
-            shadow-2xl
-            ${isProfileHovered ? 'opacity-100 translate-y-2' : ''}
-          `}>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span>Online - View Profile</span>
-            </div>
-            <div className="absolute -top-1 right-4 w-3 h-3 bg-gray-900 transform rotate-45" />
-          </div> */}
-        </div>
       </div>
 
       {/* Custom Animation Styles */}

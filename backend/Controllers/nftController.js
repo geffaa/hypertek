@@ -108,74 +108,295 @@ export async function createCollection(req, res) {
 /**
  * Server-side Mint NFT 
  */
+// export async function serverMint(req, res) {
+//   console.log("Incoming mint request:", req.body);
+
+//   try {
+
+//    console.log("====================================");
+//   console.log("🔥 /api/v1/nft/mint HIT - request received!");
+//   console.log("METHOD:", req.method);
+//   console.log("URL:", req.originalUrl);
+//   console.log("HEADERS:", req.headers);
+//   console.log("BODY:", req.body);
+//   console.log("AUTH HEADER:", req.headers.authorization);
+
+//     const { docId, tokenURI, royaltyBps, creatorWallet } = req.body;
+
+//     if (!nftContract) {
+//       return res.status(500).json({ error: "NFT contract not initialized" });
+//     }
+
+//     // Mint NFT on blockchain
+//     const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
+//     const receipt = await tx.wait();
+
+//     // Extract tokenId from Minted event
+//     let tokenId;
+//     const mintedEvent = receipt.logs.find((log) => {
+//       try {
+//         const parsed = nftContract.interface.parseLog(log);
+//         return parsed && parsed.name === "Minted";
+//       } catch (e) {
+//         return false;
+//       }
+//     });
+
+//     if (mintedEvent) {
+//       const parsed = nftContract.interface.parseLog(mintedEvent);
+//       tokenId = Number(parsed.args[1]);
+//     } else {
+//       const next = await nftContract.nextTokenId();
+//       tokenId = Number(next) - 1;
+//     }
+
+//     // Update database with creator wallet
+//     const nftDoc = await NFTSystem.findByIdAndUpdate(
+//       docId,
+//       {
+//         tokenId,
+//         tokenURI,
+//         creator: creatorWallet || wallet.address,
+//         owner: creatorWallet || wallet.address,
+//         listed: false,
+//         isFirstSale: true,
+//       },
+//       { new: true }
+//     );
+
+//     return res.json({
+//       success: true,
+//       tokenId,
+//       nftDoc,
+//       txHash: receipt.hash,
+//     });
+//   } catch (err) {
+//     console.error("❌ MINT ERROR:", err);
+//     return res.status(500).json({ error: err.message });
+//   }
+// } 
+
+// ---------------- added by usman ---------------------- 
+// Replace your existing serverMint function with this one
 export async function serverMint(req, res) {
   console.log("Incoming mint request:", req.body);
 
   try {
-
-   console.log("====================================");
-  console.log("🔥 /api/v1/nft/mint HIT - request received!");
-  console.log("METHOD:", req.method);
-  console.log("URL:", req.originalUrl);
-  console.log("HEADERS:", req.headers);
-  console.log("BODY:", req.body);
-  console.log("AUTH HEADER:", req.headers.authorization);
+    console.log("====================================");
+    console.log("🔥 /api/v1/nft/mint HIT - request received!");
+    console.log("METHOD:", req.method);
+    console.log("URL:", req.originalUrl);
+    console.log("HEADERS:", req.headers);
+    console.log("BODY:", req.body);
+    console.log("AUTH HEADER:", req.headers.authorization);
 
     const { docId, tokenURI, royaltyBps, creatorWallet } = req.body;
+    
+    if (!docId || !tokenURI || !creatorWallet) {
+      return res.status(400).json({ 
+        error: "Missing required fields: docId, tokenURI, or creatorWallet" 
+      });
+    }
 
     if (!nftContract) {
       return res.status(500).json({ error: "NFT contract not initialized" });
     }
 
-    // Mint NFT on blockchain
-    const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
-    const receipt = await tx.wait();
-
-    // Extract tokenId from Minted event
-    let tokenId;
-    const mintedEvent = receipt.logs.find((log) => {
-      try {
-        const parsed = nftContract.interface.parseLog(log);
-        return parsed && parsed.name === "Minted";
-      } catch (e) {
-        return false;
+    // Debug: Check provider and network
+    try {
+      console.log("Contract address:", nftContract.target);
+      console.log("Contract runner address:", await nftContract.runner.getAddress());
+      
+      // Get the provider from the contract
+      const provider = nftContract.runner.provider;
+      const network = await provider.getNetwork();
+      console.log("Connected to network:", {
+        name: network.name,
+        chainId: network.chainId.toString()
+      });
+      
+      // Check if the contract address exists
+      const code = await provider.getCode(nftContract.target);
+      if (code === "0x") {
+        return res.status(500).json({ 
+          error: `No contract deployed at address ${nftContract.target} on this network` 
+        });
       }
-    });
-
-    if (mintedEvent) {
-      const parsed = nftContract.interface.parseLog(mintedEvent);
-      tokenId = Number(parsed.args[1]);
-    } else {
-      const next = await nftContract.nextTokenId();
-      tokenId = Number(next) - 1;
+      console.log("Contract code found at address:", nftContract.target);
+      
+      // Check wallet balance
+      const balance = await provider.getBalance(nftContract.runner.getAddress());
+      console.log("Wallet balance:", ethers.formatEther(balance), "ETH");
+      
+      if (balance === 0n) {
+        return res.status(500).json({ 
+          error: "Wallet has no ETH to pay for gas fees" 
+        });
+      }
+    } catch (err) {
+      console.error("Error checking provider/network:", err);
+      return res.status(500).json({ 
+        error: "Failed to connect to blockchain network" 
+      });
     }
 
-    // Update database with creator wallet
-    const nftDoc = await NFTSystem.findByIdAndUpdate(
-      docId,
-      {
-        tokenId,
-        tokenURI,
-        creator: creatorWallet || wallet.address,
-        owner: creatorWallet || wallet.address,
-        listed: false,
-        isFirstSale: true,
-      },
-      { new: true }
-    );
+    // Check if the document exists
+    const nftDoc = await NFTSystem.findById(docId);
+    if (!nftDoc) {
+      return res.status(404).json({ error: "NFT document not found" });
+    }
 
-    return res.json({
-      success: true,
-      tokenId,
-      nftDoc,
-      txHash: receipt.hash,
-    });
+    // Check if already minted
+    if (nftDoc.tokenId) {
+      return res.status(400).json({ error: "NFT already minted" });
+    }
+
+    console.log("Attempting to mint NFT...");
+    
+    // Try to call a simple function to verify the contract is working
+    // We'll use a different approach - call the function directly with the provider
+    try {
+      // Create a new contract instance with the provider only (no wallet)
+      const provider = nftContract.runner.provider;
+      const readContract = new ethers.Contract(nftContract.target, nftContract.interface, provider);
+      
+      // Try to call the name function
+      const name = await readContract.name();
+      console.log("Contract name:", name);
+      
+      // Try to call the symbol function
+      const symbol = await readContract.symbol();
+      console.log("Contract symbol:", symbol);
+      
+      // Try to get the nextTokenId
+      const nextTokenId = await readContract.nextTokenId();
+      console.log("Next tokenId:", nextTokenId.toString());
+    } catch (err) {
+      console.error("Error calling contract functions:", err);
+      return res.status(500).json({ 
+        error: "Failed to interact with contract. Please check the contract address and ABI." 
+      });
+    }
+    
+    // Now try to mint with the wallet
+    try {
+      // Mint NFT on blockchain
+      const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
+      console.log("Transaction sent:", tx.hash);
+      
+      // Wait for the transaction to be confirmed
+      const receipt = await tx.wait();
+      console.log("Transaction confirmed:", receipt);
+
+      // Try to get the tokenId from the transaction receipt
+      let tokenId = null;
+      
+      // Try to get it from the Minted event
+      try {
+        console.log("Transaction logs:", receipt.logs);
+        
+        // Look for the Minted event
+        const mintedEvent = receipt.logs.find((log) => {
+          try {
+            // Check if this log is from our NFT contract
+            if (log.address.toLowerCase() !== nftContract.target.toLowerCase()) {
+              return false;
+            }
+            
+            const parsed = nftContract.interface.parseLog(log);
+            return parsed && parsed.name === "Minted";
+          } catch (e) {
+            return false;
+          }
+        });
+        
+        if (mintedEvent) {
+          const parsed = nftContract.interface.parseLog(mintedEvent);
+          console.log("Parsed Minted event:", parsed);
+          
+          // Extract tokenId from the event
+          tokenId = Number(parsed.args.tokenId);
+          console.log("TokenId from Minted event:", tokenId);
+        }
+      } catch (err) {
+        console.error("Error parsing Minted event:", err);
+      }
+      
+      // If we couldn't get the tokenId from the event, try other methods
+      if (!tokenId) {
+        try {
+          // Get the nextTokenId after minting
+          const provider = nftContract.runner.provider;
+          const readContract = new ethers.Contract(nftContract.target, nftContract.interface, provider);
+          const nextTokenId = await readContract.nextTokenId();
+          tokenId = Number(nextTokenId) - 1; // The tokenId would be the previous value
+          console.log("TokenId from nextTokenId after minting:", tokenId);
+        } catch (err) {
+          console.error("Error getting nextTokenId after minting:", err);
+        }
+      }
+      
+      // If we still don't have a tokenId, we need to abort
+      if (!tokenId) {
+        return res.status(500).json({ 
+          error: "Could not determine tokenId after minting. Transaction was confirmed but tokenId could not be retrieved." 
+        });
+      }
+
+      console.log("Minted NFT with tokenId:", tokenId);
+
+      // Update database with creator wallet
+      const updatedNftDoc = await NFTSystem.findByIdAndUpdate(
+        docId,
+        {
+          tokenId,
+          tokenURI,
+          creator: creatorWallet,
+          owner: creatorWallet,
+          listed: false,
+          isFirstSale: true,
+        },
+        { new: true }
+      );
+
+      console.log("Database updated with NFT details");
+
+      return res.json({
+        success: true,
+        tokenId,
+        nftDoc: updatedNftDoc,
+        txHash: receipt.hash,
+      });
+    } catch (err) {
+      console.error("Error during minting:", err);
+      return res.status(500).json({ 
+        error: "Failed to mint NFT: " + err.message 
+      });
+    }
   } catch (err) {
     console.error("❌ MINT ERROR:", err);
-    return res.status(500).json({ error: err.message });
+    
+    // Provide more specific error information
+    let errorMessage = "Unknown error occurred";
+    
+    if (err.reason) {
+      errorMessage = err.reason;
+    } else if (err.message) {
+      errorMessage = err.message;
+    }
+    
+    return res.status(500).json({ 
+      error: errorMessage,
+      details: err.toString()
+    });
   }
 }
 
+
+
+
+
+// --------------------------------------------- end of the custom function =---------------- 
 /**
  * Create Listing
  */

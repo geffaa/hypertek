@@ -162,7 +162,7 @@ export default function News() {
           {/* Horizontal Blocks */}
           {/* Horizontal Blocks */}
           <div className="flex flex-col gap-4">
-            {news.slice(3, 8).map((item) => (
+            {news.slice(3, 6).map((item) => (
               <div
                 key={item._id}
                 className="flex flex-row gap-3 w-full bg-[#111] rounded-lg overflow-hidden p-2"
