@@ -70,7 +70,7 @@ useEffect(() => {
         <div className="h-[10px] top-0 left-[298px]  right-0 z-20">
           <Header />
         </div>
-
+        
         {/* Scrollable main content */}
         <main className="flex-1 mt-[40px] overflow-y-auto p-4  z-10">
           <Outlet />
