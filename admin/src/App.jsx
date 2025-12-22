@@ -23,6 +23,7 @@ import EditCollection2 from "./pages/EditCollection2";
 import AddCollection from "./pages/AddCollection";
 import Support from "./pages/Support";
 import ProtectedRoute from "./ProtectedRoute";
+import NotificationsPage from "./pages/Notifications";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
             <Route path="edit-news" element={<EditNews />} />
             <Route path="edit-news-item" element={<UploadedNews />} />
             <Route path="support" element={<Support />} />
+            <Route path="notification" element={<NotificationsPage />} />
           </Route>
         </Route>
 

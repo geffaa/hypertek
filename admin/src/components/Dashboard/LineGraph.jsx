@@ -465,29 +465,40 @@ function LineGraph() {
                     <td className="pl-2">{row.gameTitle}</td>
                     <td className="pl-3">{new Date(row.createdAt).toLocaleDateString()}</td>
                     <td className="pl-5">${row.amount.toLocaleString()}</td>
-                    <td className="px-4 text-center">
-                      <span
-                        style={{
-                          borderRadius: "4px",
-                          display: "inline-flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          backgroundColor:
-                            row.status === "Deposit"
-                              ? "#17361A"
-                              : row.status === "Pending"
-                              ? "#362B17"
-                              : "#361718",
-                          color: "white",
-                          fontFamily: "Inter, sans-serif",
-                          fontWeight: 500,
-                          fontSize: "11px",
-                          lineHeight: "18px",
-                        }}
-                      >
-                        {row.status}
-                      </span>
-                    </td>
+                <td className="px-4 text-center">
+  <span
+    style={{
+      borderRadius: "4px",
+      padding: "4px 12px",
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor:
+        row.status === "Deposit"
+          ? "#17361A" // Green for Deposit
+          : row.status === "Pending"
+          ? "#362B17" // Orange for Pending
+          : row.status === "Withdraw" || row.status === "Withdrawal"
+          ? "#880E10" // Red for Withdraw
+          : "#361718", // Default fallback
+      color: 
+        row.status === "Deposit"
+          ? "#4CAF50" // Light green text for Deposit
+          : row.status === "Pending"
+          ? "#FF9800" // Orange text for Pending
+          : row.status === "Withdraw" || row.status === "Withdrawal"
+          ? "#FF5252" // Light red text for Withdraw
+          : "#FFFFFF", // Default white text
+      fontFamily: "Inter, sans-serif",
+      fontWeight: 500,
+      fontSize: "11px",
+      lineHeight: "18px",
+      minWidth: "70px",
+    }}
+  >
+    {row.status}
+  </span>
+</td>
                   </tr>
                 ))}
             </tbody>

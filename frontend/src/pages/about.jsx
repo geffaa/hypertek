@@ -164,7 +164,7 @@ function About() {
         </div>
 
      {/* ---------------- Second Section ---------------- */}
-<div className="relative w-full z-10 min-h-[750px] overflow-hidden bg-[#00114280]
+<div className="relative w-full z-10 min-h-[750px] rounded-xl overflow-hidden bg-[#00114280]
 ">
   {/* Background Image Layer */}
   <div className="absolute inset-0">

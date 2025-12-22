@@ -192,7 +192,7 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Dropdown Options for Create NFA */}
             {openCreate && (
               <ul className="flex flex-col items-start w-[129px] h-[27px] mb-8 opacity-100 rounded mr-3">
-                <div className="flex">
+                {/* <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
                     className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${
@@ -203,7 +203,7 @@ const Sidebar = ({ onLogoutClick }) => {
                   >
                     <Link to="/dashboard">Create NFA</Link>
                   </li>
-                </div>
+                </div> */}
                 <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
@@ -254,7 +254,7 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Edit User */}
             <Link to="/dashboard/edit-profile">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+                className={`flex items-center justify-between px-3  cursor-pointer ${
                   selectedItem === "users"
                     ? "bg-[#002AA8]"
                     : ""

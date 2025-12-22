@@ -74,7 +74,7 @@ function ResetPassword() {
       <GlowingOrb Xaxis={70} Yaxis={150}/>
       <GlowingOrb Xaxis={950} Yaxis={450}/>
 
-      <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[500px] max-w-md sm:max-w-sm">
+      <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[600px] h-[500px] max-w-[650px] sm:max-w-sm">
         {/* Logo */}
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />
 
@@ -82,7 +82,7 @@ function ResetPassword() {
         <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">Reset Password</h1>
 
         {/* Info */}
-        <p className="text-white text-sm mb-6 text-center">Enter your new password below</p>
+        <p className="text-white text-[18px] mb-6 text-center w-[600px]">We sent the new password to your email address, please check your email</p>
 
         {/* Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -195,7 +195,7 @@ function ResetPassword() {
         </form>
 
         {/* Back to login */}
-        <Link to="/signin" className="flex items-center text-blue-400 hover:underline mt-4">
+        <Link to="/signin" className="flex items-center text-white  mt-4">
           <FaArrowLeft className="mr-2" /> Back to Login
         </Link>
       </div>

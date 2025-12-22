@@ -227,7 +227,10 @@ useEffect(() => {
             {landData.slice(0, 4).map((item, index) => (
               <div
                 key={index}
-                className="bg-gray-800 rounded-lg z-10 shadow-md text-white p-4 w-full h-[320px] lg:h-[400px] flex flex-col justify-between group relative"
+                className=" rounded-lg z-10 shadow-md text-white p-4 w-full h-[320px] lg:h-[400px] flex flex-col justify-between group relative"
+               style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }}
               >
                 <div
                   className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] 

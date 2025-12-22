@@ -207,7 +207,7 @@ function MarketPlace() {
             </div>
           </div>
         </div>
-        <div className="absolute top-[25rem] right-4 sm:right-6 lg:right-12 z-50 pointer-events-auto">
+        {/* <div className="absolute top-[25rem] right-4 sm:right-6 lg:right-12 z-50 pointer-events-auto">
   <button
     onClick={handleGoToDashboard}
     className="
@@ -223,7 +223,7 @@ function MarketPlace() {
   >
     Go to Dashboard
   </button>
-</div>
+</div> */}
 
         {/* ---------------------- Card Sections -------------------------------------- */}
         <section className="flex flex-col relative z-10 gap-4 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 lg:gap-8 mb-12 lg:mb-16">
@@ -239,8 +239,11 @@ function MarketPlace() {
                 return (
                   <div
                     key={index}
-                    className="group bg-gray-800 rounded-lg shadow-md text-white p-4 z-10 w-full max-w-xs sm:max-w-sm lg:max-w-none h-[320px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
-                  >
+                    className=" rounded-lg shadow-md text-white p-4 z-10 w-full max-w-xs sm:max-w-sm lg:max-w-none h-[320px] lg:h-[400px] xl:h-[420px] 2xl:h-[450px] flex flex-col justify-between transition-all duration-300"
+                  style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }}
+                 >
                     <div className="w-full h-32 lg:h-[160px] xl:h-[180px] 2xl:h-[200px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                       <img
                         src={`${BACKEND_BASE_URL}${collection.image}`}
