@@ -136,11 +136,7 @@ function Support() {
         <div className="flex items-center gap-2 h-[50px] border-b border-white">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
-<<<<<<< HEAD
-            Online
-=======
-            Customer Support — Online
->>>>>>> acb919d517b3f1e1cacc2fdc636d9de97162ca11
+             Online
           </p>
         </div>
 
@@ -207,25 +203,6 @@ function Support() {
           </div>
         </div>
 
-<<<<<<< HEAD
-      {/* Right Info */}
-      <div className="w-[160px] rounded-lg p-2">
-        <div className="flex justify-between items-center mb-2">
-          <img src={ChatImage} alt="User" className="w-8 h-8 rounded-full" />
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white">
-            User Details
-          </h1>
-        </div>
-        <div className="flex justify-between items-center">
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-gray-400">
-            Status
-          </h1>
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-green-400">
-            Online
-          </h1>
-        </div>
-=======
->>>>>>> acb919d517b3f1e1cacc2fdc636d9de97162ca11
       </div>
     </div>
   );
