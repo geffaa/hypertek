@@ -21,6 +21,37 @@ function MarketPlace() {
   const [activityData, setActivityData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
+
+const staticActivityData = [
+  {
+    name: "Land #123",
+    type: "Land",
+    buyer: "Alice",
+    seller: "Bob",
+    price: 500,
+    time: "2025-12-20T12:00:00Z",
+  },
+  {
+    name: "NFA #456",
+    type: "NFA",
+    buyer: "Charlie",
+    seller: "Dave",
+    price: 250,
+    time: "2025-12-21T09:30:00Z",
+  },
+  {
+    name: "Land #789",
+    type: "Land",
+    buyer: "Eve",
+    seller: "Frank",
+    price: 1000,
+    time: "2025-12-21T08:00:00Z",
+  },
+];
+
+
+
   // Fetch and filter collections
   useEffect(() => {
     const fetchCollections = async () => {
@@ -65,7 +96,7 @@ function MarketPlace() {
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     return `${diffInDays}d`;
   };
-
+ 
   return (
     <>
       {loading ? (
@@ -143,7 +174,10 @@ function MarketPlace() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
                   {marketData.slice(0, 4).map((item, index) => (
-                    <div key={index} className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between">
+                    <div key={index} className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"  
+                     style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }} >
                       <div className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                         <img
                           src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : popularCollections}
@@ -191,8 +225,10 @@ function MarketPlace() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-center mt-3 sm:mt-4">
                   {landData.slice(0, 4).map((item, index) => (
-                    <div key={index} className="bg-gray-800 rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between">
-                      <div className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+                    <div key={index} className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"  style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }} >
+                      <div className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]" >
                         <img
                           src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
                           alt={item.collection.name || "Land Collection"}
@@ -253,7 +289,7 @@ function MarketPlace() {
                   </div>
 
                   {/* Table */}
-                  <div className="overflow-x-auto rounded-lg border border-[#00134C] mt-4 w-full">
+                  <div className="overflow-x-auto rounded-lg  mt-4 w-full">
                     <table className="w-full min-w-full text-white">
                       <thead className="bg-[#00134C]">
                         <tr className="text-left">
@@ -278,10 +314,10 @@ function MarketPlace() {
                         </tr>
                       </thead>
                       <tbody>
-                        {activityData.slice(0.5).map((item, i) => (
+{staticActivityData.map((item, i) => (
                           <tr
                             key={i}
-                            className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+                            className=" transition-colors"
                           >
                             <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
                               <div className="flex items-start gap-3">

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/logo.jpeg";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
@@ -189,6 +189,10 @@ useEffect(() => {
 const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
 
 
+
+
+/// show only the logout icon on the signup , login and forgot page its client requirement 
+const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
 
 
   // Hide navbar items on these routes

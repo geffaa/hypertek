@@ -84,6 +84,41 @@ function NfaLand() {
       toast.error("Payment failed");
     }
   };
+  const [isThirdOpen, setIsThirdOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+  const openSecondModal = () => {
+    setIsOpen(false);
+    setIsSecondOpen(true);
+  };
+  const closeSecondModal = () => setIsSecondOpen(false);
+  const openThirdModal = () => {
+    setIsSecondOpen(false);
+    setIsThirdOpen(true);
+  };
+  const closeThirdModal = () => setIsThirdOpen(false);
+  const handleMakeOffer = () => {
+    console.log("Make offer clicked");
+  };
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -296,8 +331,32 @@ function NfaLand() {
         </div>
       </div> */}
 
+      <div
+        className="flex justify-between items-center text-white"
+        style={{
+          width: "200px",
+          height: "28px",
+          transform: "rotate(0deg)",
+          opacity: 1,
+          position: "absolute",
+          top: "70px",
+          left: "134px",
+        
+        }}
+      >
+        <Link to="/overview" className="text-white font-medium">
+          Overview
+        </Link>
+      
+        <Link to="/offers" className="text-white font-medium">
+          Offers <span>0</span>
+        </Link>
+      </div>
+      
+
       {/* Main Content */}
-      <div className="max-w-[918px] mx-auto w-full mt-10 flex flex-col md:flex-row gap-8 px-4">
+      <div className="max-w-[918px] mx-auto w-full mt-16 flex flex-col md:flex-row gap-8 px-4">
+        
         {/* Image */}
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
@@ -307,18 +366,22 @@ function NfaLand() {
 
         {/* Details */}
         <div className="flex-1 space-y-4">
-          <h1 className="text-2xl font-bold">
-            {collection?.name}
-          </h1>
-
+           <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{collection?.name}</h1>
+            <p>{collection?.chain}🔥</p>
+          </div>
           <p className="opacity-60">
-            Chain: {collection?.chain} | Symbol: {collection?.symbol}
-          </p>
+Listed          </p>
 
           <div className="bg-[#17171887] p-6 rounded-lg">
-            <div className="flex justify-between opacity-70">
+           <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
-              <span>Owner: {collection?.owner}</span>
+              <span
+                className="truncate max-w-[150px]" // adjust max-width as needed
+                title={collection?.owner} // full address on hover
+              >
+                Owner: {collection?.owner}
+              </span>
             </div>
 
             <h2 className="text-xl mt-3">
@@ -412,36 +475,91 @@ function NfaLand() {
 
 
       {/* ---------------- SECOND MODAL ---------------- */}
-      {isSecondOpen && (
-   <div
-  className="fixed inset-0 bg-black/70 flex items-start mt-24 justify-center z-50"
-  onClick={() => setIsSecondOpen(false)}
->
-  <div
-    className="bg-[#252B37] p-6 rounded-lg w-full max-w-[470px] max-h-[80vh] overflow-x-hidden overflow-y-auto"
-    onClick={(e) => e.stopPropagation()}
-  >
-    <h2 className="text-xl font-bold text-center">Confirm Purchase</h2>
+         {isSecondOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
+          onClick={closeSecondModal}
+        >
+          <div
+            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeSecondModal}
+              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
+            >
+              &times;
+            </button>
+            <h1 className="text-white font-bold text-lg md:text-xl">
+              Buy Assets
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
+            <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
+          <img
+  src={`${BACKEND_BASE_URL}${collection?.image}`}
+  alt={collection?.name}
+  className="w-full h-full object-cover object-top scale-x-[-1]"
+/>
 
-    <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
-      <span>Total Price</span>
-      <span>
-        {Number(item.collection.chain ?? item.price) + 0.5} {collection?.symbol}
-      </span>
-    </div>
-
-    <div className="flex justify-between mt-6">
-      <button onClick={() => setIsSecondOpen(false)}>
-        <CustomButton text="Close" />
-      </button>
-
-      <button onClick={handleWeb3Purchase}>
-        <CustomButton text="Confirm" />
-      </button>
-    </div>
-  </div>
-</div>
-
+            </div>
+            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
+            <div className="w-[90%] mb-3">
+              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
+                <p className="text-gray-400 text-sm">List Price</p>
+                <p className="text-white text-sm">$2000.5</p>
+              </div>
+            </div>
+            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+               <button onClick={closeSecondModal}>
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
+                  ></div>
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
+                    style={{
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Close
+                  </div>
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.2rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
+              </button>
+              <button onClick={handleWeb3Purchase}>
+                <CustomButton text="Confirm" />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

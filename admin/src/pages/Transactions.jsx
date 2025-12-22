@@ -1,57 +1,75 @@
-import React , { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SearchImage from "../assets/search.png";
 import { Dashboard_Base_Url } from "../Config";
 import axios from "axios";
 
 function Transactions() {
-const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // <-- add state for search
+  const [filteredTransactions, setFilteredTransactions] = useState([]); // filtered list
 
-useEffect(() => {
-  const fetchHistory = async () => {
-    try {
-      const res = await axios.get(
-        `${Dashboard_Base_Url}/v1/history/get-history`
-      );
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await axios.get(
+          `${Dashboard_Base_Url}/v1/history/get-history`
+        );
 
-      console.log("API Response:", res.data);
+        console.log("API Response:", res.data);
 
-      if (res.data.success) {
-        setTransactions(res.data.data); // store full array
+        if (res.data.success) {
+          setTransactions(res.data.data);
+          setFilteredTransactions(res.data.data); // initialize filtered list
+        }
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
       }
-    } catch (error) {
-      console.error("Error fetching transactions:", error);
+    };
+
+    fetchHistory();
+  }, []);
+
+  // Filter transactions when searchQuery changes
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredTransactions(transactions);
+    } else {
+      const lowerQuery = searchQuery.toLowerCase();
+      const filtered = transactions.filter(
+        (tx) =>
+          tx.gameTitle.toLowerCase().includes(lowerQuery) ||
+          tx.transactionId.toLowerCase().includes(lowerQuery) ||
+          tx.amount.toString().includes(lowerQuery)
+      );
+      setFilteredTransactions(filtered);
     }
-  };
+  }, [searchQuery, transactions]);
 
-  fetchHistory();
-}, []);
+  function timeAgo(date) {
+    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
 
-function timeAgo(date) {
-  const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+    if (interval >= 1) return interval + " year" + (interval > 1 ? "s ago" : " ago");
 
-  let interval = Math.floor(seconds / 31536000);
-  if (interval >= 1) return interval + " year" + (interval > 1 ? "s ago" : " ago");
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) return interval + " month" + (interval > 1 ? "s ago" : " ago");
 
-  interval = Math.floor(seconds / 2592000);
-  if (interval >= 1) return interval + " month" + (interval > 1 ? "s ago" : " ago");
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) return interval + " day" + (interval > 1 ? "s ago" : " ago");
 
-  interval = Math.floor(seconds / 86400);
-  if (interval >= 1) return interval + " day" + (interval > 1 ? "s ago" : " ago");
+    interval = Math.floor(seconds / 3600);
+    if (interval >= 1) return interval + " hour" + (interval > 1 ? "s ago" : " ago");
 
-  interval = Math.floor(seconds / 3600);
-  if (interval >= 1) return interval + " hour" + (interval > 1 ? "s ago" : " ago");
+    interval = Math.floor(seconds / 60);
+    if (interval >= 1) return interval + " minute" + (interval > 1 ? "s ago" : " ago");
 
-  interval = Math.floor(seconds / 60);
-  if (interval >= 1) return interval + " minute" + (interval > 1 ? "s ago" : " ago");
-
-  return "just now";
-}
-
+    return "just now";
+  }
 
   return (
     <div className="w-full h-[950px] bg-black text-white p-16">
-
-<div
+      {/* Background circles */}
+      <div
         style={{
           top: "20px",
           left: "360px",
@@ -63,9 +81,7 @@ function timeAgo(date) {
         }}
         className="absolute rounded-full"
       ></div>
-
-
-<div
+      <div
         style={{
           top: "610px",
           left: "860px",
@@ -106,14 +122,12 @@ function timeAgo(date) {
             background: "#FFFFFF1C",
           }}
         >
-          <img
-            src={SearchImage}
-            alt="search"
-            className="w-[16px] h-[16px]"
-          />
+          <img src={SearchImage} alt="search" className="w-[16px] h-[16px]" />
           <input
             type="text"
-            placeholder="Search collections"
+            placeholder="Search transactions"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: "123px",
               height: "17px",
@@ -131,8 +145,7 @@ function timeAgo(date) {
 
       {/* Transactions List */}
       <div className="mt-8 space-y-4">
-      {transactions.map((item, idx) => (
-
+        {filteredTransactions.map((item, idx) => (
           <div
             key={idx}
             className="flex items-center w-full max-w-[954px] gap-5"
@@ -160,8 +173,7 @@ function timeAgo(date) {
                     margin: 0,
                   }}
                 >
-                 {item.gameTitle}
-
+                  {item.gameTitle}
                 </h2>
                 <p
                   style={{
@@ -172,9 +184,7 @@ function timeAgo(date) {
                     margin: 0,
                   }}
                 >
-                {timeAgo(item.createdAt)}
-
-
+                  {timeAgo(item.createdAt)}
                 </p>
               </div>
             </div>
@@ -189,8 +199,7 @@ function timeAgo(date) {
                   margin: 0,
                 }}
               >
-               {item.transactionId}..
-
+                {item.transactionId}..
               </p>
             </div>
 
@@ -204,8 +213,7 @@ function timeAgo(date) {
                   margin: 0,
                 }}
               >
-               ${item.amount}
-
+                ${item.amount}
               </p>
             </div>
           </div>

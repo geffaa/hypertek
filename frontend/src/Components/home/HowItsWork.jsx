@@ -41,12 +41,12 @@ function HowItsWork() {
       {/* Left side */}
       <div className="w-full lg:w-[340px] flex flex-col my-auto gap-6 text-white text-center lg:text-left">
         <h2
-          className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-[120%] tracking-normal"
+          className="text-3xl z-10 sm:text-4xl lg:text-[42px] font-bold leading-[120%] tracking-normal"
           style={{ fontFamily: "Goldman" }}
         >
           How It Works
         </h2>
-        <p className="text-base sm:text-lg font-normal leading-[150%]">
+        <p className="z-10 sm:text-lg font-normal leading-[150%]">
           Get started in just a few steps <br />
           and unlock the world of <br />
           digital collectibles.
@@ -58,7 +58,7 @@ function HowItsWork() {
         {steps.map((step, index) => (
           <div
             key={index}
-            className="relative flex flex-col items-start p-6 rounded-2xl shadow-md bg-gray-900 overflow-hidden custom-border w-full sm:w-[334px] h-auto sm:h-[252px]"
+            className="relative flex flex-col items-start p-6 rounded-[40px] shadow-md  overflow-hidden custom-border w-full sm:w-[334px] h-auto sm:h-[252px]"
           >
             <img
               src={step.icon}

@@ -18,6 +18,10 @@ import { BACKEND_BASE_URL } from "../../Config";
 function Buy1() {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const [isThirdOpen, setIsThirdOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const { token, isLoggedInUser } = useSelector((state) => state.auth);
 
@@ -92,79 +96,111 @@ function Buy1() {
 
   // ---------------------------------
   // 1️⃣ Mint NFT via backend with proper error handling
- const mintNFTBackend = async () => {
-  if (!user?.id) {
-    toast.error("Please login first");
-    return null;
-  }
-
-  if (!item._id) {
-    toast.error("Your Item is required");
-    return null;
-  }
-
-  try {
-    // Get wallet from Redux if exists, otherwise from MetaMask
-    let creatorWallet = user.wallet;
-    if (!creatorWallet && window.ethereum) {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      creatorWallet = await signer.getAddress();
-    }
-
-    const payload = {
-      docId: item._id,
-      tokenURI: `ipfs://auto-${Date.now()}`,
-      royaltyBps: 500,
-      creatorWallet, // now this will not be undefined
-    };
-
-    console.log("Sending mint request to backend with payload:", payload);
-
-    const res = await axios.post(
-      `${BACKEND_BASE_URL}/api/v1/nft/mint`,
-      payload,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    console.log("Mint API response:", res);
-
-    if (res?.data?.success) {
-      toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
-      return res.data.tokenId;
-    } else {
-      toast.error(res?.data?.error || "Mint failed: No TokenId returned");
+  const mintNFTBackend = async () => {
+    if (!user?.id) {
+      toast.error("Please login first");
       return null;
     }
-  } catch (err) {
-    console.error("Mint request error:", err.response?.data || err.message);
-    
-    // More detailed error handling
-    if (err.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.error("Error data:", err.response.data);
-      console.error("Error status:", err.response.status);
-      toast.error(`Server error: ${err.response.data.error || err.response.data.message || 'Unknown error'}`);
-    } else if (err.request) {
-      // The request was made but no response was received
-      console.error("No response received:", err.request);
-      toast.error("No response from server. Please check your connection.");
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error("Error setting up request:", err.message);
-      toast.error(`Request error: ${err.message}`);
+
+    if (!item._id) {
+      toast.error("Your Item is required");
+      return null;
     }
-    
-    return null;
-  } 
-};
+
+    try {
+      // Get wallet from Redux if exists, otherwise from MetaMask
+      let creatorWallet = user.wallet;
+      if (!creatorWallet && window.ethereum) {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        creatorWallet = await signer.getAddress();
+      }
+
+      const payload = {
+        docId: item._id,
+        tokenURI: `ipfs://auto-${Date.now()}`,
+        royaltyBps: 500,
+        creatorWallet, // now this will not be undefined
+      };
+
+      console.log("Sending mint request to backend with payload:", payload);
+
+      const res = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Mint API response:", res);
+
+      if (res?.data?.success) {
+        toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
+        return res.data.tokenId;
+      } else {
+        toast.error(res?.data?.error || "Mint failed: No TokenId returned");
+        return null;
+      }
+    } catch (err) {
+      console.error("Mint request error:", err.response?.data || err.message);
+
+      // More detailed error handling
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error data:", err.response.data);
+        console.error("Error status:", err.response.status);
+        toast.error(
+          `Server error: ${
+            err.response.data.error ||
+            err.response.data.message ||
+            "Unknown error"
+          }`
+        );
+      } else if (err.request) {
+        // The request was made but no response was received
+        console.error("No response received:", err.request);
+        toast.error("No response from server. Please check your connection.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error setting up request:", err.message);
+        toast.error(`Request error: ${err.message}`);
+      }
+
+      return null;
+    }
+  };
+
+
+  const openSecondModal = () => {
+    setIsOpen(false);
+    setIsSecondOpen(true);
+  };
+  const closeSecondModal = () => setIsSecondOpen(false);
+  const openThirdModal = () => {
+    setIsSecondOpen(false);
+    setIsThirdOpen(true);
+  };
+  const closeThirdModal = () => setIsThirdOpen(false);
+  const handleMakeOffer = () => {
+    console.log("Make offer clicked");
+  };
+
+
+
+
+
+
+
+
+
+
+
 
   // 2️⃣ Create listing automatically with safe checks
   const createListingAutomatically = async (signer, buyerAddress) => {
@@ -293,6 +329,27 @@ function Buy1() {
 
   return (
     <div className="flex flex-col text-white px-4">
+      <div
+        className="flex justify-between items-center text-white"
+        style={{
+          width: "200px",
+          height: "28px",
+          transform: "rotate(0deg)",
+          opacity: 1,
+          position: "absolute",
+          top: "70px",
+          left: "134px",
+        }}
+      >
+        <Link to="/overview" className="text-white font-medium">
+          Overview
+        </Link>
+
+        <Link to="/offers" className="text-white font-medium">
+          Offers <span>0</span>
+        </Link>
+      </div>
+
       {/* ---------------- NFT DETAILS ---------------- */}
       <div className="max-w-[918px] w-full mx-auto mt-20 flex flex-col md:flex-row gap-8">
         {/* Image */}
@@ -304,16 +361,22 @@ function Buy1() {
 
         {/* Content */}
         <div className="flex-1 space-y-4">
-          <h1 className="text-2xl font-bold">{collection?.name}</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{collection?.name}</h1>
+            <p>{collection?.chain}🔥</p>
+          </div>
 
-          <p className="opacity-60">
-            Chain: {collection?.chain} | Symbol: {collection?.symbol}
-          </p>
+          <p className="opacity-60">Listed</p>
 
           <div className="bg-[#17171887] p-6 rounded-lg">
-            <div className="flex justify-between opacity-70">
+            <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
-              <span>Owner: {collection?.owner}</span>
+              <span
+                className="truncate max-w-[150px]" // adjust max-width as needed
+                title={collection?.owner} // full address on hover
+              >
+                Owner: {collection?.owner}
+              </span>
             </div>
 
             <h2 className="text-xl mt-3">
@@ -405,39 +468,93 @@ function Buy1() {
       )}
 
       {/* ---------------- SECOND MODAL ---------------- */}
-      {isSecondOpen && (
+    {isSecondOpen && (
         <div
-          className="fixed inset-0 bg-black/70 flex justify-center items-start pt-20 z-50"
-          onClick={() => setIsSecondOpen(false)}
+          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
+          onClick={closeSecondModal}
         >
           <div
-            className="bg-[#252B37] p-6 rounded-lg w-full max-w-md"
+            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-xl font-bold text-center">Confirm Purchase</h2>
-
-            <div className="flex justify-between bg-white/10 px-4 py-2 mt-6 rounded">
-              <span>Total Price</span>
-              <span>
-                {Number(item.collection.chain) + 0.5} {collection?.symbol}
-              </span>
+            <button
+              onClick={closeSecondModal}
+              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
+            >
+              &times;
+            </button>
+            <h1 className="text-white font-bold text-lg md:text-xl">
+              Buy Assets
+            </h1>
+            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
+            <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
+              <img
+                src={`${BACKEND_BASE_URL}${collection?.image}`}
+                alt="Collection"
+                className="w-full h-full object-cover object-top scale-x-[-1]"
+              />
             </div>
-
-            <div className="flex justify-between mt-6">
-              <button onClick={() => setIsSecondOpen(false)}>
-                <CustomButton text="Close" />
+            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
+            <div className="w-[90%] mb-3">
+              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
+                <p className="text-gray-400 text-sm">List Price</p>
+                <p className="text-white text-sm">$2000.5</p>
+              </div>
+            </div>
+            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
+               <button onClick={closeSecondModal}>
+                <div className="flex items-center">
+                  {/* Left small bar */}
+                  <div
+                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
+                  ></div>
+                  {/* Left angled border */}
+                  <div
+                    className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
+                    style={{
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
+                    }}
+                  ></div>
+                  {/* Main button area */}
+                  <div
+                    className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
+                    style={{
+                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+                      border: "0.15rem solid #002AA8", // ~2.42px
+                    }}
+                  >
+                    Close
+                  </div>
+                  {/* Right angled border */}
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem", // ~7.97px
+                      height: "2.2rem", // ~42.86px
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
+                    }}
+                  ></div>
+                  {/* Right small bar */}
+                  <div
+                    className="bg-[#002AA8]"
+                    style={{
+                      width: "0.25rem", // ~3.99px
+                      height: "1.2rem", // ~21.93px
+                    }}
+                  ></div>
+                </div>
               </button>
-
-              {/* <button onClick={() => handlePayment(item._id)}>
-                <CustomButton text="Confirm" />
-              </button> */}
               <button onClick={handleWeb3Purchase}>
-                <CustomButton text="Confirm" />
-              </button>
+  <CustomButton text="Confirm" />
+</button>
+
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }

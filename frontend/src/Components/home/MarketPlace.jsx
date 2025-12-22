@@ -35,7 +35,7 @@ function PopularCollections() {
   console.log("your market data are here :", marketData);
 
   return (
-    <section className="relative flex flex-col overflow-hidden w-full px-4 my-5 sm:px-8 pt-5 gap-8">
+    <section className="relative flex flex-col overflow-hidden w-full px-4 pt-5 pb-8 sm:px-8  gap-8">
       {/* Decorative glowing orbs */}
       <GlowingOrb Xaxis={180} Yaxis={20} />
       <GlowingOrb Xaxis={700} Yaxis={420} />
@@ -60,6 +60,9 @@ function PopularCollections() {
         <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 ">
          {marketData?.slice(0, 4).map((data, index) => (
   <div
+  style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }}
     key={index}
     className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex flex-col justify-between w-full h-[400px]"
   >
