@@ -183,7 +183,7 @@ const handleToggleStatus = async (land) => {
       </div>
 
       {/* Table */}
-      <div className="pl-24 mt-12 z-10 relative">
+      <div className="pl-7 mt-12 z-10 relative">
         <table className="min-w-[950px] text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">

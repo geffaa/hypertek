@@ -202,8 +202,13 @@ function AddCollection() {
         </h1>
       </div>
 
+<<<<<<< HEAD
       {/* Table Container */}
       <div className="flex-1 overflow-x-auto p-6 z-10">
+=======
+      {/* Table */}
+      <div className="pl-7 mt-12 ">
+>>>>>>> acb919d517b3f1e1cacc2fdc636d9de97162ca11
         <table className="min-w-full text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">

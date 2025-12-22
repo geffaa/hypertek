@@ -139,10 +139,8 @@ function Character() {
         </div>
 
         {/* ===== TABLE (DESIGN SAME) ===== */}
-        <div className="pl-24 mt-12 z-10 relative ">
-
-          
-          <table className="w-[927px] text-left rounded-lg overflow-hidden overflow-y-auto max-h-[560px]">
+        <div className="pl-7 mt-12 z-10 relative">
+          <table className="w-[927px] text-left rounded-lg overflow-hidden">
             <thead>
               <tr className="h-[50px]">
                 <th className="px-6 py-3 text-[#FFFFFFC4]">Image</th>
