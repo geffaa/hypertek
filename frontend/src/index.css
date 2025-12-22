@@ -13,7 +13,7 @@
 /* how its work css  */
 
 .custom-border {
-  border-left: 3px solid #3b82f6; /* Solid left border */
+  border-left: 3px solid #23478e; /* Solid left border */
   position: relative;
 }
 
@@ -22,9 +22,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 85%; 
+  width: 70%; 
   height: 3px;
-  background: linear-gradient(to right, #3b82f6, transparent);
+   background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
 }
 
 .custom-border::after {
@@ -34,7 +34,7 @@
   left: 0;
   width: 20%; 
   height: 3px;
-  background: linear-gradient(to right, #3b82f6, transparent);
+   background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
 }
 
 

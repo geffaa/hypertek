@@ -18,6 +18,10 @@ export default function Hero() {
     { text: "Hyper Tek" },
     { text: "Hyper Tek" },
     { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
+    { text: "Hyper Tek" },
   ];
   return ( 
     <div
@@ -106,27 +110,29 @@ export default function Hero() {
       </div>
 
       {/* Bottom Bar with Logos */}
-<div className="absolute bottom-0 scale-x-[-1] left-1/2 transform -translate-x-1/2 w-full max-w-[1493px] flex justify-center items-center bg-[#00134C80] h-10 md:h-12 px-2 md:px-4 z-20">
-  <div className="flex items-center w-full justify-center overflow-x-hidden gap-2 md:gap-4 px-2">
-    {logoItems.slice(0, 3).map((item, i) => (
-      <div key={i} className="flex items-center gap-1 md:gap-2 flex-shrink-0">
-        <img src={Logo} alt="Logo" className="w-6 h-5 md:w-7 md:h-6 flex-shrink-0" />
-        <span className="text-white font-bold text-xs md:text-sm whitespace-nowrap flex-shrink-0">
-          {item.text}
-        </span>
-      </div>
-    ))}
-    {/* Show remaining items on medium screens and up */}
-    {logoItems.slice(3).map((item, i) => (
-      <div key={i + 3} className="hidden md:flex items-center gap-1 md:gap-2 flex-shrink-0">
-        <img src={Logo} alt="Logo" className="w-6 h-5 md:w-7 md:h-6 flex-shrink-0" />
-        <span className="text-white font-bold text-xs md:text-sm whitespace-nowrap flex-shrink-0">
+<div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[1493px] bg-[#00134C80] h-10 md:h-12 overflow-hidden z-20">
+  {/* Moving Track */}
+  <div className="flex items-center gap-6 animate-marqueeRight whitespace-nowrap">
+    {[...logoItems, ...logoItems].map((item, i) => (
+      <div
+        key={i}
+        className="flex items-center gap-2 flex-shrink-0 pt-2 scale-x-[-1]
+"
+      >
+        <img
+          src={Logo}
+          alt="Logo"
+          className="w-6 h-5 md:w-7 md:h-6"
+        />
+        <span className="text-white font-bold text-xs md:text-sm">
           {item.text}
         </span>
       </div>
     ))}
   </div>
 </div>
+
+
     </div>
   );
 }

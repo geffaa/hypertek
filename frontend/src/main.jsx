@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/Store'; // make sure this path is correct
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+
 const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID"; // replace with your client ID
 
 createRoot(document.getElementById('root')).render(

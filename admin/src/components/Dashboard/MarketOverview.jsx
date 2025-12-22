@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import CreateNews from "../../assets/MarketOverview/createnews.png";
 import SupportImage from "../../assets/MarketOverview/support.png";
 import { Link } from "react-router-dom";
 
 function MarketOverview() {
   const [filterType, setFilterType] = useState("today");
+  const [ userData , setUserData] = useState([]);
+
+
+
+  useEffect(() => {
+    try {
+      const adminData = localStorage.getItem("admin_data");
+      if (adminData) {
+        setUserData(JSON.parse(adminData));
+      }
+    } catch (error) {
+      console.error("Failed to parse admin data from localStorage", error);
+    }
+  }, []);
+  
 
   // Dummy data for all filters
   const allData = {
@@ -162,7 +177,8 @@ function MarketOverview() {
             }}
           />
           <Link
-            to="/add-news"
+          to={`/${userData._id}/add-news`}
+
             style={{
               width: "175px",
               height: "26px",
@@ -223,7 +239,7 @@ function MarketOverview() {
           />
 
           <Link
-            to="/support"
+            to={`/${userData._id}/support`}
             style={{
               width: "175px",
               height: "26px",

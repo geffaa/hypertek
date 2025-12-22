@@ -14,12 +14,14 @@ import Login from "./pages/Signin";
 import ForgotPasswor from "./pages/ForgotPasswor";
 import ResetPassword from "./pages/ResetPassword";
 import Loading from "./Components/Common/Loading";
+import  HypeGamePage from "./pages/MoreNews"
 
 import MarketPlace from "./pages/MarketPlace";
 import NFA from "./pages/NFA";
 import Land from "./pages/Land";
 import PersonalActivity from "./pages/PersonalActivity";
 import NoPersonalActivity from "./pages/NoPersonalActivity";
+import CreateEarning from "./pages/CreateEarning"
 
 // NFA Pages
 import BuyNfa from "./pages/BuyNfa";
@@ -88,10 +90,8 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
-    "/signup",
-    "/signin",
-    "/forgot-password",
-    "",
+   
+    "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
     "/dashboard/create-nfa",
@@ -131,6 +131,7 @@ function AppWrapper() {
             <Route path="/market-place" element={<MarketPlace />} />
             <Route path="/nfa-expand" element={<NFA />} />
             <Route path="/land" element={<Land />} />
+            <Route path="/more-news" element={<HypeGamePage/>} />
 
             {/* NFA Pages */}
             <Route path="/buy-nfa" element={<BuyNfa />} />
@@ -185,6 +186,7 @@ function AppWrapper() {
 
               {/* Dashboard pages */}
               <Route path="create-nfa" element={<CreateCollections />} />
+              <Route path="create-earning" element={< CreateEarning/>} />
               <Route path="nfa-details" element={<NFAdetails />} />
               <Route path="edit-nfa" element={<EditNfa />} />
               <Route path="collections" element={<NFTs />} />

@@ -1,21 +1,34 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
-      // Add font family configuration
       fontFamily: {
-        'goldman': ['Goldman', 'sans-serif'],
+        goldman: ["Goldman", "sans-serif"],
+
+        // ⚠️ WEB FIX — do NOT use Inter_400Regular here
+        inter: ["Inter", "sans-serif"],
       },
-      // Optional: Add custom colors if needed
+
+      keyframes: {
+        marqueeRight: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
+
+      animation: {
+        marqueeRight: "marqueeRight 20s linear infinite",
+      },
+
       colors: {
-        'gold': '#977C34',
-        'dark-gold': '#493F26',
+        gold: "#977C34",
+        "dark-gold": "#493F26",
       },
     },
   },
   plugins: [],
-}
+};

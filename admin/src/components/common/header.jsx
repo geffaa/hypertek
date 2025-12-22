@@ -2,16 +2,11 @@
 import { FiSearch, FiBell } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
-import HeaderImage from "../../assets/Sidebar/headerImage.png";
 import NotificationDropdown from "../common/Notification"
-import { Dashboard_Base_Url, Image_Base_Url } from "../../Config";
+import { Image_Base_Url } from "../../Config";
 import { useSelector } from "react-redux";
-import axios from "axios"
-import toast from "react-hot-toast"
 import { FaUserCircle } from "react-icons/fa";
-
-
-
+import {  useNavigate} from "react-router-dom"
 
 const Header = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -20,7 +15,8 @@ const Header = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
   const [userData, setUserData] = useState(null);
-  const { user, token, isLoggedInUser } = useSelector(
+  const navigate = useNavigate();
+    const { user, token, isLoggedInUser } = useSelector(
     (state) => state.auth || {}
   );
 
@@ -38,20 +34,17 @@ const Header = () => {
     }
   };
 
-  // get the profile data
-
-// get the profile data 
-
-useEffect(() => {
-  try {
-    const adminData = localStorage.getItem("admin_data");
-    if (adminData) {
-      setUserData(JSON.parse(adminData));
+  // Get the profile data
+  useEffect(() => {
+    try {
+      const adminData = localStorage.getItem("admin_data");
+      if (adminData) {
+        setUserData(JSON.parse(adminData));
+      }
+    } catch (error) {
+      console.error("Failed to parse admin data from localStorage", error);
     }
-  } catch (error) {
-    console.error("Failed to parse admin data from localStorage", error);
-  }
-}, []);
+  }, []);
 
   // Simulate new notifications
   useEffect(() => {
@@ -62,19 +55,17 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, []);
 
+
+
+  const handleNotification = ()=>{
+    navigate(`/${userData._id}/notification`)
+  }
+
   return (
-    <header className="p-4 flex justify-end items-end relative z-50 ">
-      <div
-        className="flex items-center justify-end gap-[46px] mr-16"
-        style={{
-          width: "398.1px",
-          height: "44.88px",
-          top: "40px",
-          right: "10px",
-        }}
-      >
+    <header className="p-4 flex justify-end items-center bg-[#000000] z-50">
+      <div className="flex items-center justify-end gap-6 mr-8">
         {/* 🔍 Animated Search Box */}
-        {/* <div className="relative">
+        <div className="relative">
           <div
             className={`
               flex items-center gap-2 rounded-xl px-4 py-3 
@@ -105,21 +96,22 @@ useEffect(() => {
               onBlur={() => setIsSearchFocused(false)}
             />
             
-            Search Animation Line
+            {/* Search Animation Line */}
             <div className={`
               absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400
               transform origin-left transition-all duration-500 ease-out
               ${isSearchFocused ? 'scale-x-100' : 'scale-x-0'}
             `} />
           </div>
-        </div> */}
+        </div>
 
         {/* 🔔 Animated Notification Bell */}
-        {/* <div className="relative">
+        <div className="relative">
           <button 
+          onClick={handleNotification}
             ref={bellRef}
             className={`
-              relative w-[40px] h-[40px] rounded-2xl 
+              w-[40px] h-[40px] rounded-2xl 
               flex items-center justify-center
               transition-all duration-500 ease-out
               group
@@ -128,11 +120,10 @@ useEffect(() => {
                 : 'bg-white shadow-lg hover:shadow-2xl hover:transform hover:scale-110'
               }
             `}
-            onClick={() => setShowNotifications(!showNotifications)}
             onMouseEnter={() => setIsBellHovered(true)}
             onMouseLeave={() => setIsBellHovered(false)}
           >
-            Bell Icon with Multiple Animations
+            {/* Bell Icon with Multiple Animations */}
             <div className="relative">
               <img
                 src={HeaderIcon}
@@ -145,27 +136,13 @@ useEffect(() => {
                 `}
               />
               
-              Ripple Effect
-              <div className={`
-                absolute inset-0 rounded-full bg-blue-400/20
-                transform scale-0 transition-all duration-700 ease-out
-                ${isBellHovered ? 'scale-150 opacity-0' : ''}
-              `} />
+             
             </div>
 
-            Pulsing Notification Dot
-            <div className={`
-              absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 
-              rounded-full flex items-center justify-center text-white text-xs font-bold
-              border-2 border-white
-              transition-all duration-300 ease-out
-              ${showNotifications ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}
-              animate-pulse
-            `}>
-              {notificationCount}
-            </div>
+            {/* Pulsing Notification Dot */}
+          
 
-            Hover Glow
+            {/* Hover Glow */}
             <div className={`
               absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/10 to-purple-400/10
               opacity-0 transition-opacity duration-500
@@ -173,54 +150,32 @@ useEffect(() => {
             `} />
           </button>
           
-          Notification Dropdown
-          <NotificationDropdown 
-            isOpen={showNotifications}
-            onClose={() => setShowNotifications(false)}
-          />
-        </div> */}
+          {/* Notification Dropdown */}
+         
+        </div>
 
         {/* 👤 Animated Profile Picture */}
-        <div
-          className="relative group cursor-pointer"
-          onMouseEnter={() => setIsProfileHovered(true)}
-          onMouseLeave={() => setIsProfileHovered(false)}
-        >
-        <div
-  className={`relative w-[44px] h-[44px] rounded-2xl cursor-pointer 
-    transition-transform duration-700 ease-out
-    ${isProfileHovered ? 'transform scale-110' : ''}`}
-  onMouseEnter={() => setIsProfileHovered(true)}
-  onMouseLeave={() => setIsProfileHovered(false)}
->
- {userData?.Avatar ? (
- <img
-  src={`${Image_Base_Url}${userData.Avatar.startsWith('/') ? userData.Avatar : '/' + userData.Avatar}`}
-  alt={userData?.FullName || "Profile"}
-  className="w-full h-full object-cover rounded-2xl"
-/>
+        <div className="relative group cursor-pointer">
+          <div
+            className={`relative w-[44px] h-[44px] rounded-2xl cursor-pointer 
+              transition-transform duration-700 ease-out
+              ${isProfileHovered ? 'transform scale-110' : ''}`}
+            onMouseEnter={() => setIsProfileHovered(true)}
+            onMouseLeave={() => setIsProfileHovered(false)}
+          >
+            {userData?.Avatar ? (
+              <img
+                src={`${Image_Base_Url}${userData.Avatar.startsWith('/') ? userData.Avatar : '/' + userData.Avatar}`}
+                alt={userData?.FullName || "Profile"}
+                className="w-full h-full object-cover rounded-2xl"
+              />
+            ) : (
+              <FaUserCircle className="w-full h-full text-gray-400 p-1" />
+            )}
+          </div>
 
-) : (
-  <FaUserCircle className="w-full h-full text-gray-400 p-1" />
-)}
-
-</div>
-
-
-          {/* Online Status with Animation */}
-          {/* <div className={`
-            absolute bottom-0 right-0 w-4 h-4 bg-green-500 
-            rounded-full border-3 border-white
-            transition-all duration-500 ease-out
-            ${isProfileHovered 
-              ? 'transform scale-125 bg-green-400 shadow-lg' 
-              : 'shadow-md'
-            }
-            animate-pulse
-          `} /> */}
-
-          {/* Profile Tooltip */}
-          {/* <div className={`
+          {/* Profile Tooltip - Optional */}
+          <div className={`
             absolute top-full right-0 mt-3 px-4 py-2 
             bg-gray-900 text-white text-sm rounded-xl
             opacity-0 transform translate-y-4
@@ -235,7 +190,7 @@ useEffect(() => {
               <span>Online - View Profile</span>
             </div>
             <div className="absolute -top-1 right-4 w-3 h-3 bg-gray-900 transform rotate-45" />
-          </div> */}
+          </div>
         </div>
       </div>
 

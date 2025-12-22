@@ -80,7 +80,7 @@ localStorage.setItem("authData", JSON.stringify(res.data));
 window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
 // window.location.href = `http://localhost:5174/${userId}`;
       } else {
-       navigate("/edit", {
+       navigate("/dashboard", {
   state: {
     userData: res.data.user,
   },
@@ -115,7 +115,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
         );
         // localStorage.setItem("token", res.data.token);
         toast.success("Google Login successful!");
-        navigate("/profile");
+        navigate("/dashboard");
       } catch (err) {
         console.error("Google login error:", err);
         toast.error(err.response?.data?.message || "Google login failed!");
@@ -166,7 +166,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
           toast.success(
             `Discord login successful! Welcome ${res.data.user.FullName}`
           );
-          navigate("/profile");
+          navigate("/dasbhoard");
         } else {
           toast.error(res.data.message || "Discord login failed!");
         }
@@ -310,15 +310,10 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
           alt="Logo"
           className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]"
         />
-        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">
+        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center mb-8">
           Welcome Back!
         </h1>
-        <p className="text-white text-sm mb-6 text-center">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-400 hover:underline">
-            Sign Up
-          </Link>
-        </p>
+        
 
         {/* Email/Password Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -360,9 +355,9 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
           <div className="w-full text-right">
             <Link
               to="/forgot-password"
-              className="text-blue-400 text-sm hover:underline"
+              className="text-white text-sm "
             >
-              Forgot Password?
+              Forgot Password ?
             </Link>
           </div>
           {/* <button
@@ -377,9 +372,16 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             disabled={loading} // prevent multiple clicks
             className="w-full py-3 flex items-center justify-center text-white font-semibold rounded-lg transition"
           >
-            <CustomButtonLarge text="Sign In" />
+            <CustomButtonLarge text="Send" />
           </button>
         </form>
+
+        <p className="text-white text-sm mb-2 text-center">
+         
+          <Link to="/signup" className="text-white text-xl ">
+            Sign Up
+          </Link>
+        </p>
 
         <div className="flex items-center w-full my-2">
           <hr className="flex-grow border-t border-white/40" />

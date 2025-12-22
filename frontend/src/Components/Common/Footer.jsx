@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/logo.jpeg";
 import TelegramImg from "../../assets/images/telegram.png";
 import SkypeImg from "../../assets/images/skipe.png";
 import DiscordImg from "../../assets/images/discard.png";
@@ -16,7 +16,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="w-full text-white pb-4 relative z-10 bg-[#000000] overflow-hidden">
+    <footer className="w-full text-white pb-4 relative z-10  overflow-hidden">
       {/* Center container to control max width */}
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] flex flex-col justify-between">
         {/* Glowing Orb */}
@@ -30,8 +30,12 @@ function Footer() {
         ></div>
 
         {/* Mobile Layout */}
-        <div className="flex sm:hidden gap-6 border-t border-white pt-2 mt-2">
-          <div className="flex flex-col gap-3 text-sm font-medium flex-1">
+<div className="flex sm:hidden gap-6 pt-2 mt-2 border-t-[1px] border-transparent bg-gradient-to-r from-[#002AA8] to-[#8C9ED8] bg-clip-border [mask:linear-gradient(white,white)_padding-box,linear-gradient(white,white)] [mask-composite:exclude]"
+style={{
+  borderImage: 'linear-gradient(270.02deg, #002AA8 0.18%, #8C9ED8 78.16%) 1',
+  borderImageSlice: 1,
+  borderTop: '1px solid transparent'
+}}>          <div className="flex flex-col gap-3 text-sm font-medium flex-1">
             {menuItems.map((item, idx) => (
               <Link
                 key={idx}
@@ -43,7 +47,7 @@ function Footer() {
             ))}
           </div>
           <div className="flex flex-col items-end gap-4 flex-shrink-0">
-            <div className="text-xs text-gray-400 text-left">
+            <div className="text-xs text-white text-left">
               @2025. ALL RIGHTS
               <br />
               RESERVED
@@ -71,8 +75,12 @@ function Footer() {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden sm:flex flex-col md:flex-row md:justify-between md:items-center gap-6 border-t border-white pt-4 mt-2">
-          <div className="flex-shrink-0 flex cursor-pointer justify-center md:justify-start">
+<div className="hidden sm:flex flex-col md:flex-row md:justify-between md:items-center gap-6 pt-4 mt-2"
+style={{
+  borderTop: '1px solid transparent',
+  borderImage: 'linear-gradient(270.02deg, #002AA8 0.18%, #8C9ED8 78.16%) 1',
+  borderImageSlice: 1
+}}>          <div className="flex-shrink-0 flex cursor-pointer justify-center md:justify-start">
              <Link to="/">
               <img
                 src={Logo}
@@ -96,7 +104,7 @@ function Footer() {
 
         {/* Second Row - Desktop */}
         <div className="hidden sm:flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
-          <div className="w-full md:text-center text-sm text-gray-400">
+          <div className="w-full md:text-center text-sm text-white">
             @2025. ALL RIGHTS RESERVED
           </div>
           <div className="flex gap-4 justify-center md:justify-end mt-2 md:mt-0">

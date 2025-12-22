@@ -16,29 +16,65 @@ function PersonalActivity() {
       const [loading, setLoading] = useState(true); // ✅ loader state
   
 
-  // get the market data here
-  useEffect(() => {
-    const fetchMarketData = async () => {
-      try {
-        /// get the land , market and activity through
 
-        const activity = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
-        );
-        console.log("your activity data in the console :", activity);
 
-        if (activity.data) setActivityData(activity.data);
-      } catch (error) {
-        console.error("Error fetching market data:", error);
-      }finally {
-        setLoading(false); // ✅ hide loader after fetch
+const staticActivityData = [
+  {
+    name: "Monkey Ape",
+    type: "Land",
+    buyer: "John Doe",
+    seller: "Jane Doe",
+    price: 1800,
+    time: new Date(), // fallback to current date
+    image: null,      // optional, you can use land1Image
+  },
+  {
+    name: "Crypto Kitty",
+    type: "NFT",
+    buyer: "Alice",
+    seller: "Bob",
+    price: 2500,
+    time: new Date(),
+    image: null,
+  },
+  {
+    name: "Pixel Dragon",
+    type: "Collectible",
+    buyer: "Charlie",
+    seller: "Dave",
+    price: 3200,
+    time: new Date(),
+    image: null,
+  },
+];
+
+
+useEffect(() => {
+  const fetchMarketData = async () => {
+    try {
+      const activity = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
+      );
+      console.log("API activity data:", activity.data);
+
+      // if API data is empty, use static data
+      if (activity.data && activity.data.length > 0) {
+        setActivityData(activity.data);
+      } else {
+        setActivityData(staticActivityData);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching activity data:", error);
+      // fallback to static data if API fails
+      setActivityData(staticActivityData);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchMarketData();
-  }, []); // run once when component mounts
+  fetchMarketData();
+}, []);
 
-  console.log("your activity  data are here :", activityData);
 
 
 
@@ -141,7 +177,7 @@ if (loading) {
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto rounded-lg border border-[#00134C]">
+        <div className="overflow-x-auto rounded-lg ">
           <table className="w-full min-w-[800px] text-white">
             <thead className="bg-[#00134C]">
               <tr className="text-left">
@@ -162,7 +198,7 @@ if (loading) {
               {/* Example Row with Full Image */}
              {
               activityData.slice(0,5).map((item,index)=>(
-                 <tr className="border-b border-[#00134C] hover:bg-white/5 transition-colors">
+                 <tr className=" transition-colors">
                 <td className="px-4 lg:px-6 py-3">
                   <div className="flex items-start gap-3">
                     <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
