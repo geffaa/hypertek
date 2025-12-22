@@ -132,7 +132,7 @@ function Support() {
         <div className="flex items-center gap-2 w-full h-[50px] border-b border-white">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
-            Customer Support - Online
+            Online
           </p>
         </div>
 
@@ -206,7 +206,7 @@ function Support() {
         <div className="flex justify-between items-center mb-2">
           <img src={ChatImage} alt="User" className="w-8 h-8 rounded-full" />
           <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white">
-            Support Team
+            User Details
           </h1>
         </div>
         <div className="flex justify-between items-center">

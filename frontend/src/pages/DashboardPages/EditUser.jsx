@@ -136,7 +136,7 @@ function EditProfile() {
       );
 
       toast.success("Profile updated successfully!");
-      navigate("/profile", { state: { userData: res.data.user } });
+      navigate("/dashboard", { state: { userData: res.data.user } });
     } catch (error) {
       console.error("Update error:", error);
       toast.error(error.response?.data?.message || "Failed to update profile");

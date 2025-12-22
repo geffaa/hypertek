@@ -15,6 +15,8 @@ import FullScreenLoader from "./components/common/Spinner";
 function EditNews() {
   const navigate = useNavigate()
  const [collections, setCollections] = useState([]);
+ const [searchQuery, setSearchQuery] = useState("");
+
  // Add this with your other useState declarations
 const [loading, setLoading] = useState(true);
 useEffect(() => {
@@ -131,6 +133,12 @@ const handleEditNews = (news) => {
     collectionName: "",
   });
 
+
+  const filteredCollections = collections.filter((col) =>
+  col.name.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+
   const toggleStatus = async (id, currentStatus) => {
     try {
       if (!id || currentStatus === undefined || currentStatus === null) {
@@ -241,7 +249,7 @@ const handleEditNews = (news) => {
 }
 
   return (
-    <div className="min-h-screen w-full bg-black text-white p-16 h-[850px]">
+    <div className="min-h-screen w-full bg-black text-white p-8 h-[850px]">
       {/* Background effect */}
       <div
         style={{
@@ -271,8 +279,24 @@ const handleEditNews = (news) => {
         className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
       ></div>
 
+
+<h1 className="text-white font-semibold text-[25px] mb-8 w-[426px] h-[30px]">
+  Edit News
+</h1>
+      <div className="flex items-center mb-6 w-[400px] gap-3 px-3 py-2 rounded-md bg-white/10">
+  <img src={SearchIcon} alt="search" className="w-4 h-4" />
+  <input
+    type="text"
+    placeholder="Search news..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    className="bg-transparent outline-none border-none text-white w-full"
+  />
+</div>
+
+
       <div className="">
-        <div className="pl-5 mt-5 overflow-x-auto w-full">
+        <div className=" mt-5 overflow-x-auto w-full">
           <table className="min-w-[897px] text-left rounded-lg overflow-hidden overflow-x-scroll">
             <thead>
               <tr className=" h-[50px] backdrop-blur-sm">
@@ -298,7 +322,7 @@ const handleEditNews = (news) => {
             </thead>
 
             <tbody className="divide-y divide-white/10">
-              {collections.map((col) => (
+             {filteredCollections.map((col) => (
                 <tr
                   key={col.id}
                   className="h-[70px]  transition-all duration-200 backdrop-blur-sm"

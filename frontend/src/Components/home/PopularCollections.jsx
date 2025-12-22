@@ -33,7 +33,7 @@ function PopularCollections() {
   console.log("your land data are here :", landData);
 
   return (
-    <section className="flex flex-col overflow-hidden gap-8 w-full px-4 sm:px-8 pt-5 pb-8 sm:pb-12 overflow-x-hidden relative z-10">
+    <section className="flex flex-col overflow-hidden gap-8 w-full px-4 sm:px-8  sm:pb-12 overflow-x-hidden relative z-10">
       <GlowingOrb Xaxis={200} Yaxis={460} />
 
       {/* Container to align text, underline, and cards */}
@@ -60,6 +60,9 @@ function PopularCollections() {
     <div
       key={item._id}
       className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex flex-col justify-between w-full h-[400px]"
+       style={{
+    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+  }} 
     >
       {/* Image container */}
       <div
@@ -82,7 +85,7 @@ function PopularCollections() {
 
       {/* Info Row */}
       <div className="flex justify-between items-center mb-4 mt-5">
-        <h3 className="text-sm font-semibold">{item.collection.symbol}</h3>
+        <h3 className="text-sm font-semibold">{item.collection.symbol} 🔥</h3>
 
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center w-5 h-5 rounded-[50%] bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE]">

@@ -7,7 +7,7 @@ const CustomButtonLarge = ({ text }) => {
     <div className="flex items-center">
       {/* Left small bar */}
       <div
-        className="bg-[#4A6CF7] mr-0.5" // lighter blue
+        className="bg-[#002AA8] mr-0.5" // lighter blue
         style={{
           width: "0.35rem",
           height: "1.5rem",
@@ -16,7 +16,7 @@ const CustomButtonLarge = ({ text }) => {
 
       {/* Left angled border */}
       <div
-        className="border-[#4A6CF7]"
+        className="border-[#002AA8]"
         style={{
           width: "0.6rem",
           height: "2.5rem",
@@ -31,8 +31,9 @@ const CustomButtonLarge = ({ text }) => {
         style={{
           width: "12rem",
           height: "2.8rem",
-          background: "linear-gradient(180deg, #3156eaff 0%, #2A4AB3 100%)", // softer gradient
-          border: "0.2rem solid #4A6CF7",
+          // background: "linear-gradient(180deg, #2b48beff 0%, #2c4080ff 100%)", 
+          backgroundColor:" #002AA8",
+          border: "0.2rem solid #002AA8",
         }}
       >
         {text}
@@ -40,7 +41,7 @@ const CustomButtonLarge = ({ text }) => {
 
       {/* Right angled border */}
       <div
-        className="border-[#4A6CF7]"
+        className="border-[#002AA8]"
         style={{
           width: "0.6rem",
           height: "2.5rem",
@@ -51,7 +52,7 @@ const CustomButtonLarge = ({ text }) => {
 
       {/* Right small bar */}
       <div
-        className="bg-[#4A6CF7]"
+        className="bg-[#002AA8]"
         style={{
           width: "0.35rem",
           height: "1.4rem",

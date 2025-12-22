@@ -104,7 +104,7 @@ function Character() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-black">
+      <div className="flex flex-col min-h-screen bg-black mt-12">
 
         {/* ===== SAME BLUR DESIGN ===== */}
         <div

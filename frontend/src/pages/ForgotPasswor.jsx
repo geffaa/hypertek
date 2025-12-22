@@ -87,7 +87,7 @@ function ForgotPassword() {
 
         <Link
           to="/signin"
-          className="flex items-center text-blue-400 hover:underline mt-4"
+          className="flex items-center text-white  mt-4"
         >
           <FaArrowLeft className="mr-2" /> Back to Login
         </Link>
