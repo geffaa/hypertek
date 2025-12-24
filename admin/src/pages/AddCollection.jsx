@@ -117,10 +117,9 @@ function AddCollection() {
     navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
   };
 
-const filteredCollections = collections.filter((col) =>
-  col.name.toLowerCase().includes(searchTerm.toLowerCase())
-);
-
+  const filteredCollections = collections.filter((col) =>
+    col.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // Delete the item
   const handleDeleteCollection = async () => {
@@ -194,9 +193,9 @@ const filteredCollections = collections.filter((col) =>
 
   // Loading state
 
- if (loading) {
-  return <FullScreenLoader />;
-}
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   if (loading) {
     return (
@@ -206,11 +205,10 @@ const filteredCollections = collections.filter((col) =>
     );
   }
 
-
   // Empty state
   if (collections.length === 0 && !loading) {
     return (
-      <div className="mt-12 flex h-[700px] bg-black flex-col">
+      <div className="mt-8 flex h-[700px] bg-black flex-col">
         {/* Background blur divs */}
         <div
           style={{
@@ -227,8 +225,8 @@ const filteredCollections = collections.filter((col) =>
                   0_0_200px_100px_rgba(59,130,246,0.2)]"
         ></div>
 
-        <div className="flex flex-col w-[900px] gap-6 ml-12">
-          <h1 className="font-inter font-semibold text-[25px] text-white">
+        <div className="flex flex-col w-[900px] h-[200px] gap-6 ml-12">
+          <h1 className="font-inter font-semibold text-[25px] text-white z-50">
             Collection Management
           </h1>
           <div className="flex justify-between">
@@ -263,7 +261,7 @@ const filteredCollections = collections.filter((col) =>
   }
 
   return (
-    <div className="mt-12 flex h-[700px] bg-black flex-col">
+    <div className="mt-12 flex h-[500px] bg-black flex-col">
       {/* Background blur divs */}
       <div
         style={{
@@ -304,14 +302,14 @@ const filteredCollections = collections.filter((col) =>
           <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
             <img src={searchImage} alt="search" className="w-4 h-4" />
             <input
-                type="text"
-                placeholder="Search collections"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
-              />
+              type="text"
+              placeholder="Search collections"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
+            />
           </div>
-          <button onClick={handleAddCollection} className="...">
+          <button onClick={handleAddCollection} className="border rounded-md px-2 py-1 cursor-pointer">
             Add Collection
           </button>
         </div>
@@ -319,25 +317,25 @@ const filteredCollections = collections.filter((col) =>
 
       {/* Table */}
       <div className="pl-7 mt-12 overflow-x-auto">
-        <table className="min-w-[897px] text-left rounded-lg overflow-hidden">
+        <table className="min-w-[897px] text-left rounded-lg overflow-hidden ml-12">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              {/* <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
                 #
-              </th>
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              </th> */}
+              <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Name
               </th>
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              <th className=" py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Image
               </th>
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Supply
               </th>
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Action
               </th>
-              <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">
+              <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Status
               </th>
             </tr>
@@ -349,13 +347,14 @@ const filteredCollections = collections.filter((col) =>
                 key={col._id} // Use the actual _id as key
                 className="h-[70px] transition-all duration-200 backdrop-blur-sm"
               >
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+                {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
                   {col.indexId}
-                </td>
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-                  {col.name}
-                </td>
-                <td className="px-6 py-4">
+                </td> */}
+              <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+  {col.name?.length > 15 ? `${col.name.slice(0, 15)}...` : col.name}
+</td>
+
+                <td className=" py-4">
                   {col.image ? (
                     <img
                       src={
@@ -376,9 +375,10 @@ const filteredCollections = collections.filter((col) =>
                     </div>
                   )}
                 </td>
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-                  {col.supply}
-                </td>
+               <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+  {Number(col.supply).toPrecision(1)}
+</td>
+
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
                     <button

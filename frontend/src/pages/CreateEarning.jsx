@@ -14,7 +14,7 @@ function CollectionDetails() {
     previewImage: null,
     name: "",
     symbol: "",
-    chain: ""
+    chain: "",
   });
 
   // Getting the data from the redux store
@@ -24,7 +24,7 @@ function CollectionDetails() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Get data from navigation state
   useEffect(() => {
     if (location.state) {
@@ -35,7 +35,7 @@ function CollectionDetails() {
       toast.error("Please complete the basic information first");
     }
   }, [location.state, navigate]);
-  
+
   // Additional form fields
   const [recipientWallet, setRecipientWallet] = useState("");
   const [collectionType, setCollectionType] = useState("");
@@ -45,23 +45,24 @@ function CollectionDetails() {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!collectionType) {
       newErrors.collectionType = "Please select a collection type";
     }
-    
+
     if (!recipientWallet.trim()) {
       newErrors.recipientWallet = "Recipient wallet address is required";
-    } 
-    
+    } else if (recipientWallet.length !== 42) {
+      newErrors.recipientWallet =
+        "Wallet address must be exactly 42 characters";
+    }
+
     if (isNaN(royaltyPercent) || royaltyPercent < 0 || royaltyPercent > 100) {
       newErrors.royaltyPercent = "Royalty percent must be between 0 and 100";
     }
-    
-   
-    
+
     setErrors(newErrors);
-    
+
     // Return true if no errors
     return Object.keys(newErrors).length === 0;
   };
@@ -76,7 +77,7 @@ function CollectionDetails() {
       setLoading(true);
 
       const formData = new FormData();
-      
+
       // Add basic info
       formData.append("userId", user.id);
       formData.append("creator", "user");
@@ -84,13 +85,12 @@ function CollectionDetails() {
       formData.append("name", basicInfo.name);
       formData.append("symbol", basicInfo.symbol);
       formData.append("chain", basicInfo.chain);
-      
+
       // Add additional info
       formData.append("Type", collectionType);
       formData.append("owner", recipientWallet);
       formData.append("royaltyPercent", Number(royaltyPercent));
       formData.append("royaltyWallet", royaltyWallet);
-      
 
       const response = await axios.post(
         `${User_Dashboard_Url}/nft/collection/create`,
@@ -150,27 +150,30 @@ function CollectionDetails() {
       <div className="relative z-50">
         <div className="flex gap-10  mx-8">
           {/* Left Side: Basic Information and Preview */}
-      
 
           {/* Right Side: Form */}
           <div className="relative z-50 rounded-lg p-6 w-[456px] flex flex-col gap-6">
-            
             {/* Earnings */}
             <span className="text-white text-xl font-semibold">Earnings</span>
             <div className="flex gap-6">
               {/* Creator Fee */}
-              <div className="flex flex-col gap-2 w-1/2">
+              <div className="flex flex-col gap-2 w-[210px] h-[115px]">
                 <label className="text-white text-base font-normal">
                   Creator Fee
                 </label>
-                <div className={`flex items-center h-12 px-3 border rounded-md bg-white/10 ${errors.royaltyPercent ? 'border-red-500' : 'border-gray-600'} focus-within:border-blue-500 hover:border-blue-500`}>
+                <div
+                  className={`flex items-center h-12 px-3 border rounded-md bg-white/10 ${
+                    errors.royaltyPercent ? "border-red-500" : "border-gray-600"
+                  } focus-within:border-blue-500 hover:border-blue-500`}
+                >
                   <input
                     type="number"
                     value={royaltyPercent}
                     onChange={(e) => {
                       setRoyaltyPercent(e.target.value);
                       // Clear error when user starts typing
-                      if (errors.royaltyPercent) setErrors(prev => ({ ...prev, royaltyPercent: "" }));
+                      if (errors.royaltyPercent)
+                        setErrors((prev) => ({ ...prev, royaltyPercent: "" }));
                     }}
                     min="0"
                     max="100"
@@ -178,11 +181,13 @@ function CollectionDetails() {
                   />
                   <span className="text-white/70 px-2">%</span>
                 </div>
-                {errors.royaltyPercent && <p className="text-red-500 text-sm mt-1">{errors.royaltyPercent}</p>}
+                {errors.royaltyPercent && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.royaltyPercent}
+                  </p>
+                )}
                 <p className="text-white/70 text-sm">Support 100% total fee</p>
               </div>
-              
-             
             </div>
 
             {/* Collection Type */}
@@ -195,9 +200,12 @@ function CollectionDetails() {
                 onChange={(e) => {
                   setCollectionType(e.target.value);
                   // Clear error when user selects an option
-                  if (errors.collectionType) setErrors(prev => ({ ...prev, collectionType: "" }));
+                  if (errors.collectionType)
+                    setErrors((prev) => ({ ...prev, collectionType: "" }));
                 }}
-                className={`w-full h-12 px-3 rounded-md text-white bg-transparent border ${errors.collectionType ? 'border-red-500' : 'border-gray-600'} focus:outline-none focus:border-blue-500 focus:bg-transparent transition`}
+                className={`w-full h-12 px-3 rounded-md text-white bg-transparent border ${
+                  errors.collectionType ? "border-red-500" : "border-gray-600"
+                } focus:outline-none focus:border-blue-500 focus:bg-transparent transition`}
               >
                 <option value="" className="bg-gray-700 text-white">
                   Select Type
@@ -209,7 +217,11 @@ function CollectionDetails() {
                   Land
                 </option>
               </select>
-              {errors.collectionType && <p className="text-red-500 text-sm mt-1">{errors.collectionType}</p>}
+              {errors.collectionType && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.collectionType}
+                </p>
+              )}
             </div>
 
             {/* Recipient Wallet */}
@@ -220,15 +232,30 @@ function CollectionDetails() {
               <input
                 value={recipientWallet}
                 onChange={(e) => {
-                  setRecipientWallet(e.target.value);
-                  // Clear error when user starts typing
-                  if (errors.recipientWallet) setErrors(prev => ({ ...prev, recipientWallet: "" }));
+                  const value = e.target.value;
+
+                  // Prevent typing more than 42 chars
+                  if (value.length <= 42) {
+                    setRecipientWallet(value);
+                  }
+
+                  if (errors.recipientWallet) {
+                    setErrors((prev) => ({ ...prev, recipientWallet: "" }));
+                  }
                 }}
                 type="text"
+                maxLength={42}
                 placeholder="Add wallet address"
-                className={`w-full h-12 px-3 rounded-md border bg-white/10 text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${errors.recipientWallet ? 'border-red-500' : 'border-gray-600'}`}
+                className={`w-full h-12 px-3 rounded-md border bg-white/10 text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${
+                  errors.recipientWallet ? "border-red-500" : "border-gray-600"
+                }`}
               />
-              {errors.recipientWallet && <p className="text-red-500 text-sm mt-1">{errors.recipientWallet}</p>}
+
+              {errors.recipientWallet && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.recipientWallet}
+                </p>
+              )}
             </div>
 
             {/* Creator Earnings Info */}
@@ -241,7 +268,7 @@ function CollectionDetails() {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.{" "}
-                <Link to="#" className="underline">
+                <Link to="#" className="text-blue-400">
                   Learn more
                 </Link>
               </p>
@@ -251,12 +278,11 @@ function CollectionDetails() {
 
         {/* Buttons */}
         <div className="flex justify-end gap-6 mt-16 mx-8">
-         
           <button
             onClick={handleSubmit}
-            className="bg-blue-800 hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white"
+            className="bg-[#002AA8] w-[190px] h-[42px] hover:bg-blue-700 transition-colors w-48 h-10 rounded-md font-medium text-white"
           >
-            Create Collection
+            Save
           </button>
         </div>
       </div>

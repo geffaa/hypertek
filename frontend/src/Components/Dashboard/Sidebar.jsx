@@ -103,7 +103,7 @@ const Sidebar = ({ onLogoutClick }) => {
       <div className="flex flex-col justify-between h-full">
         <div className="flex-1">
           {/* Logo - Centered */}
-          <div className="flex justify-center mt-12 mb-8">
+          <div className="flex justify-center mt-12 mb-12">
             <div className="hidden lg:flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
               <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
               <span className="font-inter font-bold text-[18px] leading-[22px]">
@@ -191,7 +191,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
             {/* Dropdown Options for Create NFA */}
             {openCreate && (
-              <ul className="flex flex-col items-start w-[129px] h-[27px] mb-8 opacity-100 rounded mr-3">
+              <ul className="flex flex-col items-start w-[129px] h-[27px]  opacity-100 rounded mr-3">
                 {/* <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
@@ -252,9 +252,9 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link> */}
 
             {/* Edit User */}
-            <Link to="/dashboard/edit-profile">
+            <Link to="/dashboard/edit-profile ">
               <li
-                className={`flex items-center justify-between px-3  cursor-pointer ${
+                className={`flex items-center justify-between px-3 mt-3  cursor-pointer ${
                   selectedItem === "users"
                     ? "bg-[#002AA8]"
                     : ""
@@ -390,7 +390,7 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Transaction */}
             <Link to="/dashboard/transactions">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer ${
                   selectedItem === "Transaction"
                     ? "bg-[#002AA8]"
                     : ""
