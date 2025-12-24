@@ -365,4 +365,5 @@ function AddCollection() {
   );
 }
 
+
 export default AddCollection;
