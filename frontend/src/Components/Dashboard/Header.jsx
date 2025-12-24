@@ -76,7 +76,7 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4 flex justify-end items-end relative z-50">
+    <header className="p-4 flex justify-end items-end  z-50">
       <div
         className="flex items-center justify-end gap-[46px] mr-16"
         style={{
@@ -88,7 +88,7 @@ const Header = () => {
       >
 
 <div
-  className="bg-white flex items-center justify-center rounded-full"
+  className="bg-white flex items-center justify-center rounded-full cursor-pointer "
   style={{
     width: "32.21484375px",
     height: "32.21484375px",
@@ -110,20 +110,20 @@ const Header = () => {
         {/* 👤 Animated Profile Picture */}
         <div 
           className={`
-            relative w-[44px] h-[44px] rounded-3xl 
+            relative w-[44px] h-[44px] rounded-3xl cursor-pointer
             p-0.5 transition-all duration-700 ease-out
             ${isProfileHovered ? 'transform scale-110 rotate-3' : 'shadow-lg'}
           `}
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
         >
-          <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center bg-gray-100">
+          <div className="w-full h-full  overflow-hidden flex items-center justify-center ">
             {userData?.Avatar && !imageError ? (
               <img
                 src={`${BACKEND_BASE_URL}${userData.Avatar}`}
                 alt={userData?.FullName || "Profile"}
                 className={`
-                  w-full h-full object-cover rounded-xl 
+                  w-full h-full object-cover rounded-3xl 
                   transition-all duration-700 ease-out 
                   ${isProfileHovered ? 'transform scale-110' : ''}
                 `}

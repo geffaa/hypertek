@@ -173,11 +173,11 @@ const handleDeleteCharacter = async () => {
       </div>
 
       {/* Table */}
-      <div className="pl-7 mt-12 z-10 relative">
+      <div className="pl-7 mt-12 z-10 relative ml-12">
         <table className="min-w-[950px] text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
-              <th className="px-6 py-3 text-white font-semibold text-sm">No.</th>
+              {/* <th className="px-6 py-3 text-white font-semibold text-sm">No.</th> */}
               <th className="px-6 py-3 text-white font-semibold text-sm">Name</th>
               <th className="px-6 py-3 text-white font-semibold text-sm">Image</th>
               <th className="px-6 py-3 text-white font-semibold text-sm">Price</th>
@@ -193,14 +193,15 @@ const handleDeleteCharacter = async () => {
                 className="h-[70px] transition-all duration-200 backdrop-blur-sm"
               >
                 {/* Number */}
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+                {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
                   {index + 1}
-                </td>
+                </td> */}
 
                 {/* Name */}
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-                  {char.name}
-                </td>
+              <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+  {char.name.length > 12 ? `${char.name.slice(0, 15)}...` : char.name}
+</td>
+
 
                 {/* Image */}
                 <td className="px-6 py-4">

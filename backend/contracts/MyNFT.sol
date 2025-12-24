@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -17,7 +17,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
     mapping(uint256 => bool) public hasBeenSold; // Track first sale
     mapping(address => bool) public authorizedMarketplaces; // Allow marketplace to mark as sold
     
-    event Minted(
+    event Minted( 
         address indexed owner,
         uint256 tokenId,
         string tokenURI,

@@ -8,7 +8,7 @@ import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
   MARKETPLACE_ABI,
-  NFT_ABI,
+  NFT_ABI, 
 } from "../../Web3/Config";
 
 import CustomButton from "../Buttons/Button1";

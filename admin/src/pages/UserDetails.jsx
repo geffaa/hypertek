@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
 import { FaUserCircle } from "react-icons/fa"; // Added for fallback avatar
 
-function AddCollection() {
+function AddCollection() { 
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -202,8 +202,8 @@ function AddCollection() {
         </h1>
       </div>
 
-      {/* Table */}
-      <div className="pl-7 mt-12 ">
+      {/* Table Container */}
+      <div className="flex-1 overflow-x-auto p-6 z-10">
         <table className="min-w-full text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">

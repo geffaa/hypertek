@@ -80,8 +80,7 @@ localStorage.setItem("authData", JSON.stringify(res.data));
 window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
 // window.location.href = `http://localhost:5174/${userId}`;
       } else {
-
-       navigate("/dashboard", {
+       navigate("/dashboard", {
   state: {
     userData: res.data.user,
   },

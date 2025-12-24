@@ -12,14 +12,25 @@ import { setAdmin } from "../Redux/AdminSlice"
 import { useParams } from "react-router-dom";
 
 
+
 import {  useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 
 const DashboardLayout = () => {
 const [userData, setUserData] = useState(null); // store fetched user data
-
 const location = useLocation(); // hook to access current URL
+
+
+
+// List routes where you want to hide scroll
+// Hide scroll for specific pages (dynamic user ID)
+const hideScrollPages = ["/collections"]; // check if pathname includes this
+const shouldHideScroll = hideScrollPages.some((page) =>
+  location.pathname.includes(page)
+);
+
+
   const { userId } = useParams();
 console.log("your user Id is:", userId);
 
@@ -67,14 +78,20 @@ useEffect(() => {
       {/* Main area */}
       <div className="flex flex-col flex-1  h-screen">
         {/* Header: fixed on top with transparent bg */}
-        <div className="h-[10px] top-0 left-[298px]  right-0 z-20">
+        <div className="h-[35px] top-0 left-[298px]  right-0 z-20">
           <Header />
         </div>
         
         {/* Scrollable main content */}
-        <main className="flex-1 mt-[40px] overflow-y-auto p-4  z-10">
-          <Outlet />
-        </main>
+     <main
+  className={`flex-1 mt-[35px] p-4 z-10 ${
+    shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
+  }`}
+>
+  <Outlet />
+</main>
+
+         
       </div>
 
       {/* Logout Modal */}
