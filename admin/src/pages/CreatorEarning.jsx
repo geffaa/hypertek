@@ -54,6 +54,14 @@ function CreatorEarning() {
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+  // Only allow numbers for royaltyPercent and supply
+  if ((name === "royaltyPercent" || name === "supply") && value !== "") {
+    // Regex to allow only numbers
+    if (!/^\d*\.?\d*$/.test(value)) return; // ignore non-number input
+  }
+
+
+
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -62,10 +70,15 @@ function CreatorEarning() {
 
   // Submit data to backend
   const handleSubmit = async () => {
-    if (!formData.royaltyPercent || !formData.royaltyWallet || !formData.supply) {
-      toast.error("All fields are required");
-      return;
-    }
+   if (!formData.royaltyPercent || !formData.royaltyWallet || !formData.supply) {
+  toast.error("All fields are required");
+  return;
+}
+
+if (formData.royaltyWallet.length !== 42) {
+  toast.error("Wallet address must be exactly 42 characters");
+  return;
+}
 
     setIsSubmitting(true);
     const loading = toast.loading("Creating collection...");
@@ -212,13 +225,15 @@ function CreatorEarning() {
               Recipient Wallet Address
             </h1>
             <input
-              type="text"
-              name="royaltyWallet"
-              value={formData.royaltyWallet}
-              onChange={handleInputChange}
-              placeholder="Add wallet address"
-              className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
-            />
+  type="text"
+  name="royaltyWallet"
+  value={formData.royaltyWallet}
+  onChange={handleInputChange}
+  placeholder="Add wallet address"
+  maxLength={42}
+  className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
+/>
+
           </div>
 
           {/* Creator Earnings Info */}

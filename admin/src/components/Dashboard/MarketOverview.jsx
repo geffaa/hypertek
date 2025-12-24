@@ -1,13 +1,11 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CreateNews from "../../assets/MarketOverview/createnews.png";
 import SupportImage from "../../assets/MarketOverview/support.png";
 import { Link } from "react-router-dom";
 
 function MarketOverview() {
   const [filterType, setFilterType] = useState("today");
-  const [ userData , setUserData] = useState([]);
-
-
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     try {
@@ -19,7 +17,6 @@ function MarketOverview() {
       console.error("Failed to parse admin data from localStorage", error);
     }
   }, []);
-  
 
   // Dummy data for all filters
   const allData = {
@@ -57,6 +54,7 @@ function MarketOverview() {
           style={{ width: "431px", height: "28px" }}
         >
           <h1
+            className="z-10"
             style={{
               width: "150px",
               height: "23px",
@@ -95,8 +93,8 @@ function MarketOverview() {
                   borderRadius: "6px",
                   padding: "3px 10px",
                   backgroundColor:
-                    filterType === type ? "#ffffff22" : "transparent",
-                  color: filterType === type ? "#00A8FF" : "white",
+                    filterType === type ? "#002AA8" : "transparent",
+                  color: "white", // 👈 always white
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
                   fontSize: "12px",
@@ -112,45 +110,45 @@ function MarketOverview() {
         </div>
 
         {/* Main Table */}
-        <div className="w-[544px] h-[332px] rounded-[10px] bg-[#100F0F] z-50 relative px-8 py-3 opacity-100">
-          <table className="w-[461px] text-white text-sm border-collapse mt-12">
-            <thead>
-              <tr className="w-[461px] h-4 opacity-100 gap-[82px]">
-                <th className="text-left w-[83px] font-inter font-semibold text-[11px]">
-                  Collection Type
-                </th>
-                <th className="text-left w-[21px] font-inter font-semibold text-[11px]">
-                  Buy
-                </th>
-                <th className="text-left w-[20px] font-inter font-semibold text-[11px]">
-                  Sell
-                </th>
-                <th className="text-left w-[91px] font-inter font-semibold text-[11px]">
-                  Total Market Gap
-                </th>
-              </tr>
-            </thead>
+     <div className="w-[544px] h-[332px] rounded-[10px] bg-[#100F0F] mt-5 z-50 relative px-8 py-3 opacity-100">
+  <table className="w-[461px] text-white text-sm border-separate border-spacing-y-4">
+    <thead>
+      <tr className="w-[461px] h-4 opacity-100 gap-[82px]">
+        <th className="text-left w-[83px] font-inter font-semibold text-[11px]">
+          Collection Type
+        </th>
+        <th className="text-left pl-2 w-[21px] font-inter font-semibold text-[11px]">
+          Buy
+        </th>
+        <th className="text-left pl-2 w-[20px] font-inter font-semibold text-[11px]">
+          Sell
+        </th>
+        <th className="text-left w-[91px] font-inter font-semibold text-[11px]">
+          Total Market Gap
+        </th>
+      </tr>
+    </thead>
 
-            <tbody>
-              {filteredRows.map((row, index) => (
-                <tr key={index}>
-                  <td className="py-2 font-inter font-medium text-[11px]">
-                    {row.type}
-                  </td>
-                  <td className="py-2 font-inter text-[11px] text-green-400">
-                    +${row.buy}
-                  </td>
-                  <td className="py-2 font-inter text-[11px] text-red-400">
-                    -${row.sell}
-                  </td>
-                  <td className="py-2 font-inter text-[11px] text-gray-400">
-                    {row.gap}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <tbody>
+      {filteredRows.map((row, index) => (
+        <tr key={index} className=" rounded-md w-[398px]">
+          <td className="py-2 w-[16px] font-inter font-medium text-[11px]">
+            {row.type}
+          </td>
+          <td className="py-2 pr-8 font-inter text-[11px] text-green-400">
+            +${row.buy}
+          </td>
+          <td className="py-2 pr-5 font-inter text-[11px] text-[#FF5733]">
+            -${row.sell}
+          </td>
+          <td className="py-2  font-inter text-[11px] text-gray-400">
+            {row.gap}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
       </div>
 
       {/* Right Side */}
@@ -177,8 +175,7 @@ function MarketOverview() {
             }}
           />
           <Link
-          to={`/${userData._id}/add-news`}
-
+            to={`/${userData._id}/add-news`}
             style={{
               width: "175px",
               height: "26px",

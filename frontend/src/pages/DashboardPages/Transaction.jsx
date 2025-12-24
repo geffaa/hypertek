@@ -81,12 +81,12 @@ function Transactions() {
   );
 
   return (
-    <div className="w-full h-[950px] bg-black text-white p-16 relative overflow-hidden">
+    <div className="w-full h-[950px] bg-black text-white p-16  overflow-hidden">
       {/* Background Blurs */}
       <div
         style={{
-          top: "20px",
-          left: "360px",
+          top: "0px",
+          left: "330px",
           width: "250px",
           height: "250px",
           background: "#002AA8",

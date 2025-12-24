@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ViewAll from "../../assets/LineGraph/viewall.png";
-import { Link } from "react-router-dom";
-import { Dashboard_Base_Url } from "../../Config"
-import toast from "react-hot-toast"
+import { Link , useNavigate } from "react-router-dom";
+import { Dashboard_Base_Url } from "../../Config";
+import toast from "react-hot-toast";
 
 function LineGraph() {
+  const navigate = useNavigate()
   const periods = ["Today", "Week", "Month", "Year"];
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedPeriod, setSelectedPeriod] = useState("Month");
+  const [ userData , setUserData ] =useState([])
   const [tooltip, setTooltip] = useState({
     show: false,
     x: 0,
@@ -30,13 +32,13 @@ function LineGraph() {
   // Fetch dynamic data from API
   useEffect(() => {
     const fetchData = async () => {
-      if(!Dashboard_Base_Url){
-        toast.error("Base url is required")
+      if (!Dashboard_Base_Url) {
+        toast.error("Base url is required");
       }
       try {
-        const res = await axios.get(
-          `${Dashboard_Base_Url}/dashboard/payments`
-        );
+        const res = await axios.get(`${Dashboard_Base_Url}/dashboard/payments`);
+
+        console.log("your payment are :",res);
         if (res.data.success) {
           const rawData = res.data.data;
 
@@ -78,7 +80,9 @@ function LineGraph() {
               createdAt.getFullYear() === now.getFullYear()
             ) {
               chartData.Month.push({
-                label: createdAt.toLocaleDateString("en-US", { day: "numeric" }),
+                label: createdAt.toLocaleDateString("en-US", {
+                  day: "numeric",
+                }),
                 value: item.amount,
               });
             }
@@ -86,7 +90,9 @@ function LineGraph() {
             // Year (current year)
             if (createdAt.getFullYear() === now.getFullYear()) {
               chartData.Year.push({
-                label: createdAt.toLocaleDateString("en-US", { month: "short" }),
+                label: createdAt.toLocaleDateString("en-US", {
+                  month: "short",
+                }),
                 value: item.amount,
               });
             }
@@ -102,6 +108,22 @@ function LineGraph() {
 
     fetchData();
   }, []);
+
+
+
+   useEffect(() => {
+  setTimeout(() => {
+    try {
+      const adminData = localStorage.getItem("admin_data");
+      console.log("your admin data are :",adminData._id);
+      if (adminData) setUserData(JSON.parse(adminData));
+    } catch (error) {
+      console.error("Failed to parse admin data from localStorage", error);
+    }
+  }, 0);
+}, []);
+
+    
 
   const data = allData[selectedPeriod] || [];
   const maxValue = data.length
@@ -181,7 +203,12 @@ function LineGraph() {
 
     // Gradient fill
     if (animationProgress > 0 && animatedPoints.length) {
-      const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+      const gradient = ctx.createLinearGradient(
+        0,
+        padding.top,
+        0,
+        height - padding.bottom
+      );
       gradient.addColorStop(0, "rgba(15, 19, 238, 0.3)");
       gradient.addColorStop(1, "rgba(99, 102, 241, 0)");
       ctx.beginPath();
@@ -194,7 +221,10 @@ function LineGraph() {
           ctx.bezierCurveTo(cpX, prev.y, cpX, p.y, p.x, p.y);
         }
       });
-      ctx.lineTo(animatedPoints[animatedPoints.length - 1].x, height - padding.bottom);
+      ctx.lineTo(
+        animatedPoints[animatedPoints.length - 1].x,
+        height - padding.bottom
+      );
       ctx.closePath();
       ctx.fillStyle = gradient;
       ctx.fill();
@@ -290,6 +320,16 @@ function LineGraph() {
     setTooltip({ ...tooltip, show: false });
   };
 
+
+
+ const handleViewAllTransaction = () => {
+  if (!userData?._id) {
+    toast.error("You should be an authentic user to view all transactions");
+    return; // prevent navigation if user is not valid
+  }
+  navigate(`/${userData._id}/transactions`);
+};
+
   return (
     <div className="flex mx-auto space-x-3 relative">
       {/* Left Side Graph */}
@@ -320,8 +360,9 @@ function LineGraph() {
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: "pointer",
-                  background: selectedPeriod === period ? "#002AA8" : "transparent",
-                  color: "white",
+                  background:
+                    selectedPeriod === period ? "#002AA8" : "transparent",
+                  color: "#FFFFFF",
                   fontWeight: selectedPeriod === period ? 600 : 400,
                   transition: "0.2s",
                 }}
@@ -334,7 +375,11 @@ function LineGraph() {
 
         <div
           className="bg-[#100F0F] p-4 rounded-lg"
-          style={{ width: "543.68px", height: "236.31px", position: "relative" }}
+          style={{
+            width: "543.68px",
+            height: "236.31px",
+            position: "relative",
+          }}
         >
           <div
             ref={containerRef}
@@ -360,7 +405,9 @@ function LineGraph() {
                 <div className="text-gray-900 font-bold text-lg">
                   ${tooltip.value.toLocaleString()}
                 </div>
-                <div className="text-indigo-600 text-sm font-semibold">+3.4%</div>
+                <div className="text-indigo-600 text-sm font-semibold">
+                  +3.4%
+                </div>
                 <div
                   className="absolute left-1/2 transform -translate-x-1/2 bottom-0 translate-y-full"
                   style={{
@@ -389,7 +436,15 @@ function LineGraph() {
         }}
       >
         {/* Header Filters */}
-        <div className="my-3" style={{ width: "385px", display: "flex", gap: "6px", alignItems: "center" }}>
+        <div
+          className="my-3"
+          style={{
+            width: "385px",
+            display: "flex",
+            gap: "6px",
+            alignItems: "center",
+          }}
+        >
           <h1
             style={{
               width: "128px",
@@ -426,7 +481,8 @@ function LineGraph() {
                   cursor: "pointer",
                   borderRadius: "6px",
                   padding: "3px 10px",
-                  backgroundColor: selectedFilter === filter ? "#002AA8" : "transparent",
+                  backgroundColor:
+                    selectedFilter === filter ? "#002AA8" : "transparent",
                   color: "white",
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
@@ -444,13 +500,16 @@ function LineGraph() {
 
         {/* Table */}
         <div className="">
-          <table className="w-[387px] text-white rounded-lg" style={{ borderCollapse: "collapse" }}>
+        <table className="w-[387px] text-white rounded-lg border-separate border-spacing-y-3">
+
             <thead>
               <tr>
                 <th className="text-left pl-1 text-xs font-semibold">Title</th>
                 <th className="text-left pl-3 text-xs font-semibold">Date</th>
                 <th className="text-left pl-5 text-xs font-semibold">Amount</th>
-                <th className="text-center px-2 text-xs font-semibold">Status</th>
+                <th className="text-center px-2 text-xs font-semibold">
+                  Status
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -459,35 +518,39 @@ function LineGraph() {
                   selectedFilter === "All"
                     ? true
                     : row.status.toLowerCase() === selectedFilter.toLowerCase()
-                ).slice(0,3)
+                )
+                .slice(0, 3)
                 .map((row, index) => (
-                  <tr key={index}>
-                    <td className="pl-2">{row.gameTitle}</td>
-                    <td className="pl-3">{new Date(row.createdAt).toLocaleDateString()}</td>
-                    <td className="pl-5">${row.amount.toLocaleString()}</td>
-                <td className="px-4 text-center">
+                  <tr key={index} className="my-4">
+                    <td className="pl-1 text-[11px] text-[#FFFFFF8C] gap-8 ">
+                      {row.gameTitle.length > 10
+                        ? row.gameTitle.slice(0, 10) + "..."
+                        : row.gameTitle}
+                    </td>
+                    <td className="pl-3 text-[11px] text-[#FFFFFF8C]">
+                      {new Date(row.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="pl-5 text-[11px]   text-[#FFFFFF8C]">
+                      ${row.amount.toLocaleString()}
+                    </td>
+<td className="px-4 text-[11px] h-[18px] w-[63px] text-center">
   <span
     style={{
       borderRadius: "4px",
-      padding: "4px 12px",
       display: "inline-flex",
       justifyContent: "center",
       alignItems: "center",
       backgroundColor:
-        row.status === "Deposit"
-          ? "#17361A" // Green for Deposit
-          : row.status === "Pending"
-          ? "#362B17" // Orange for Pending
-          : row.status === "Withdraw" || row.status === "Withdrawal"
-          ? "#880E10" // Red for Withdraw
+        row.status === "succeeded"
+          ? "#17361A" // Green background for succeeded
+          : row.status === "failed"
+          ? "#361718" // Red background for failed
           : "#361718", // Default fallback
-      color: 
-        row.status === "Deposit"
-          ? "#4CAF50" // Light green text for Deposit
-          : row.status === "Pending"
-          ? "#FF9800" // Orange text for Pending
-          : row.status === "Withdraw" || row.status === "Withdrawal"
-          ? "#FF5252" // Light red text for Withdraw
+      color:
+        row.status === "succeeded"
+          ? "#19880E" // Green text for succeeded
+          : row.status === "failed"
+          ? "#880E10" // Red text for failed
           : "#FFFFFF", // Default white text
       fontFamily: "Inter, sans-serif",
       fontWeight: 500,
@@ -496,7 +559,7 @@ function LineGraph() {
       minWidth: "70px",
     }}
   >
-    {row.status}
+    {row.status === "succeeded" ? "Success" : row.status === "failed" ? "Failed" : row.status}
   </span>
 </td>
                   </tr>
@@ -506,14 +569,26 @@ function LineGraph() {
         </div>
 
         <div className="flex justify-end w-full pr-12 mt-[18px] mb-8">
-          <Link
-            to="/transactions"
-            className="border border-white rounded-md flex justify-end items-center ml-5"
-            style={{ width: "90px", height: "20px", padding: "10px", gap: "10px" }}
+          <button onClick={handleViewAllTransaction}
+            className="border border-white rounded-md flex justify-end items-center ml-5 cursor-pointer"
+            style={{
+              width: "90px",
+              height: "20px",
+              padding: "10px",
+              gap: "10px",
+            }}
           >
-            <h1 className="text-white font-normal text-xs">View All</h1>
-            <img src={ViewAll} alt="View All" style={{ width: "8.67px", height: "8.67px" }} />
-          </Link>
+
+
+
+              <h1 className="text-white font-normal text-xs">View All</h1>
+
+            <img
+              src={ViewAll}
+              alt="View All"
+              style={{ width: "8.67px", height: "8.67px" }}
+            />
+          </button> 
         </div>
       </div>
     </div>

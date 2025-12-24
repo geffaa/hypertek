@@ -178,7 +178,7 @@ function AppWrapper() {
               element={
                 <ProtectedRoute>
                   <DashboardLayout />
-                </ProtectedRoute>
+                </ProtectedRoute> 
               }
             >
               {/* Default dashboard home */}

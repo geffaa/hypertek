@@ -68,7 +68,7 @@ function BarGraph() {
 
 console.log("your total Sellers:", totalSell?.sellers);
   return (
-    <div className="my-8 w-full max-w-[993px] mx-auto h-auto grid grid-cols-3 grid-rows-2 gap-6">
+    <div className="mb-8 w-full max-w-[993px] mx-auto h-auto grid grid-cols-3 grid-rows-2 gap-6">
       {/* ✅ Pass each dataset individually */}
       <BarCard
         userSendData={userData?.users || []}

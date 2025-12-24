@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
 import FullScreenLoader from "./common/Spinner";
+import { formGroupClasses } from "@mui/material/FormGroup";
 
 function CreateCollections() {
   const navigate = useNavigate();
@@ -97,58 +98,59 @@ function CreateCollections() {
   }, []);
 
   const validateForm = () => {
-    const newErrors = {};
-    
-    if (!selectedImage) {
-      newErrors.image = "Image is required";
-    }
-    
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    } else if (formData.name.length < 2) {
-      newErrors.name = "Name must be at least 2 characters";
-    }
-    
-    if (!formData.symbol.trim()) {
-      newErrors.symbol = "Token symbol is required";
-    } else if (formData.symbol.length < 2) {
-      newErrors.symbol = "Symbol must be at least 2 characters";
-    }
-    
-    if (!formData.chain.trim()) {
-      newErrors.chain = "Chain is required";
-    }
-    
-    if (!formData.Type) {
-      newErrors.Type = "Collection type is required";
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const newErrors = {};
+
+  if (!selectedImage) {
+    newErrors.image = "Image is required";
+  }
+
+  if (!formData.name.trim()) {
+    newErrors.name = "Name is required";
+  }
+  if (formData.name.length > 20 || formData.name.length<4) {
+    newErrors.name = "Name must be at least 2 - 20 characters";
+  }
+
+  if (!formData.symbol.trim()) {
+    newErrors.symbol = "Token symbol is required";
+  } 
+  if (formData.symbol.length < 3) {
+    newErrors.symbol = "Symbol must be at least 2 characters";
+  }
+
+  if (!formData.chain.trim()) {
+    newErrors.chain = "Chain is required";
+  }
+
+  if (!formData.Type) {
+    newErrors.Type = "Collection type is required";
+  }
+
+  setErrors(newErrors);
+  return newErrors;
+};
+
 
   const handleNext = () => {
-    if (!validateForm()) {
-      // Show specific error messages
-      if (errors.image) toast.error(errors.image);
-      if (errors.name) toast.error(errors.name);
-      if (errors.symbol) toast.error(errors.symbol);
-      if (errors.chain) toast.error(errors.chain);
-      if (errors.Type) toast.error(errors.Type);
-      return;
-    }
+  const validationErrors = validateForm();
 
-    // Navigate to the next page with form data and image
-    navigate(`/${userData._id}/creator-earning`, {
-      state: {
-        formData: {
-          ...formData,
-          imagePreview: selectedImage
-        },
-        selectedFile: selectedFile
-      }
+  if (Object.keys(validationErrors).length > 0) {
+    Object.values(validationErrors).forEach((err) => {
+      toast.error(err);
     });
-  };
+    return;
+  }
+
+  navigate(`/${userData._id}/creator-earning`, {
+    state: {
+      formData: {
+        ...formData,
+        imagePreview: selectedImage,
+      },
+      selectedFile,
+    },
+  });
+};
 
   const handleBackButton = () => {
     navigate("/collections");
@@ -166,7 +168,7 @@ function CreateCollections() {
       
       {/* Content */}
       <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-8">
+        <div className="flex gap-10 mt-[80px] mx-2">
           {/* left side preview / modal - FIXED: Single click handler */}
           <div
             className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
@@ -180,7 +182,6 @@ function CreateCollections() {
             }}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            // REMOVED the onClick from parent div to avoid double triggering
           >
             {/* Hidden file input */}
             <input
@@ -208,7 +209,7 @@ function CreateCollections() {
                     width: "100%",
                     height: "100%",
                     borderRadius: "6px",
-                    objectFit: "contain",
+                    
                   }}
                 />
                 
@@ -275,7 +276,7 @@ function CreateCollections() {
 
           {/* right side - form */}
           <div
-            className="z-50 relative rounded-lg p-6"
+            className="z-50 relative rounded-lg pl-2"
             style={{
               width: "456px",
               boxSizing: "border-box",
@@ -349,7 +350,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                  color: "white",
+                  color: "#FFFFFF",
                 }}
               >
                 Name *
@@ -376,7 +377,7 @@ function CreateCollections() {
             </div>
 
             {/* Token Symbol with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
               <label
                 htmlFor="symbol"
                 style={{
@@ -386,7 +387,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                  color: "white",
+                    color: "#FFFFFF",
                 }}
               >
                 Token Symbol *
@@ -413,7 +414,7 @@ function CreateCollections() {
             </div>
 
             {/* Collection Type with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
               <label
                 htmlFor="type"
                 style={{
@@ -423,7 +424,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                  color: "white",
+                    color: "#FFFFFF",
                 }}
               >
                 Collection Type *
@@ -458,7 +459,7 @@ function CreateCollections() {
             </div>
 
             {/* Chain with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
               <label
                 htmlFor="chain"
                 style={{
@@ -468,7 +469,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                  color: "white",
+                  color: "#FFFFFF",
                 }}
               >
                 Chain *
@@ -514,7 +515,7 @@ function CreateCollections() {
 
         {/* last buttons div  */}
         <div
-          className="flex mt-16 justify-end mx-8 pt-16 pb-32 relative z-10"
+          className="flex mt-8 justify-end mx-8 pt-16 pb-32 relative z-10"
           style={{
             opacity: 1,
             gap: "37px",
@@ -544,7 +545,7 @@ function CreateCollections() {
                 fontSize: "18px",
                 lineHeight: "100%",
                 letterSpacing: "0%",
-                color: "white",
+                 color: "#FFFFFF",
               }}
             >
               Cancel
