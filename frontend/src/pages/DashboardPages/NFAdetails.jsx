@@ -145,7 +145,7 @@ const shortenAddress = (address) => {
 
       {/* Header */}
       <div className="flex flex-col w-[900px] gap-6 ml-12">
-        <h1 className="font-inter font-semibold text-[25px] text-white">NFA Details</h1>
+        <h1 className="font-inter font-semibold text-[25px] text-white z-10">NFA Details</h1>
         <div className="flex justify-between">
           <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
             <img src={searchImage} alt="search" className="w-4 h-4" />
@@ -161,7 +161,7 @@ const shortenAddress = (address) => {
             to="/dashboard"
             className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
           >
-            Add NFA
+            Create NFA
           </Link>
         </div>
       </div>

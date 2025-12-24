@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect} from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { FiCopy } from "react-icons/fi";
 import CustomButton from "../../Components/Buttons/Button1";
@@ -14,9 +14,11 @@ import { User_Dashboard_Url, BACKEND_BASE_URL } from "../../Config";
 
 function EditProfile() {
   const navigate = useNavigate();
+
+      const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+
   const walletAddress = "0xc416a645...b21a";
   const [copied, setCopied] = useState(false);
-  const user = useSelector((state) => state.auth.user);
 
   console.log("your login user in profile :", user);
 
@@ -57,16 +59,20 @@ function EditProfile() {
             quality
           );
         };
-      };
+      }; 
     });
   };
 
   const location = useLocation();
   const safeUserData = user || {};
-  const [name, setName] = useState(user?.FullName || "");
-  const [email, setEmail] = useState(user?.Email || "");
-  const [bio, setBio] = useState(user?.Bio || "");
-  const [userName, setUserName] = useState(user?.UserName || "");
+  
+
+  const [userData, setUserData] = useState(null); // store backend user
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [bio, setBio] = useState("");
+const [userName, setUserName] = useState("");
+
 
   const [currentPass, setCurrentPass] = useState("");
   const [newPass, setNewPass] = useState("");
@@ -83,6 +89,38 @@ function EditProfile() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+
+
+ // Get the user profile 
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const user = res.data.user;
+      console.log("your profile response :",user);
+      setUserData(user);
+      setProfileImage(user.Avatar ? `${BACKEND_BASE_URL}${user.Avatar}` : Profile);
+      setName(user.FullName || "");
+      setEmail(user.Email || "");
+      setBio(user.Bio || "");
+      setUserName(user.UserName || "");
+      
+    } catch (error) {
+      console.error("❌ Profile fetch error:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Failed to fetch profile");
+    }
+  };
+
+  if (token) fetchProfile();
+}, [token]);
+
+
 
   const handleFileChange = async (e) => {
     const selected = e.target.files[0];
@@ -150,7 +188,7 @@ function EditProfile() {
     "hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200";
 
   return (
-    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="min-h-screen bg-transparent px-4   relative z-10">
       {/* Bg EFFECT */}
       <div
         style={{
@@ -203,18 +241,15 @@ function EditProfile() {
               <div className="relative flex-shrink-0 cursor-pointer">
                 {profileImage && profileImage !== Profile ? (
                   <img
-                    src={
-                      profileImage.startsWith("data:")
-                        ? profileImage
-                        : `${BACKEND_BASE_URL}${profileImage}`
-                    }
-                    alt="Profile"
-                    className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      setProfileImage(null);
-                    }}
-                  />
+  src={profileImage}
+  alt="Profile"
+  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
+  onError={(e) => {
+    e.target.onerror = null;
+    setProfileImage(Profile);
+  }}
+/>
+                 
                 ) : (
                   <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-24 h-24 md:w-28 md:h-28 border-2 border-white">
                     <FaUserCircle className="w-16 h-16 md:w-20 md:h-20" />
@@ -272,9 +307,9 @@ function EditProfile() {
             {loading && <FullScreenLoader />}
 
             {/* Name */}
-            <div className="w-[369px] max-w-md">
+            <div className="w-[369px] max-w-md z-10">
               <label
-                className="block text-[20.97px] text-white font-bold leading-[100%] mb-8"
+                className="block text-[20.97px] text-white font-bold leading-[100%] mb-8 "
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Enter your details
@@ -290,7 +325,7 @@ function EditProfile() {
                       setName(value);
                     }
                   }}
-                  placeholder={user?.FullName || "Full Name"}
+                  placeholder={user?.FullName || "Name"}
                   className={inputClass}
                 />
                 {name.length >= 30 && (
@@ -321,7 +356,7 @@ function EditProfile() {
             {/* Email */}
             <div className="w-[369px] max-w-md mt-2">
               <label
-                className="block text-white font-bold text-[20.97px] leading-[100%] my-8"
+                className="block text-white font-bold text-[20.97px] leading-[100%] my-5"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Enter your email
@@ -340,7 +375,7 @@ function EditProfile() {
             {/* Bio */}
             <div className="w-[369px] max-w-md mt-4">
               <label
-                className="block text-white font-bold text-[20.97px] leading-[100%] my-8"
+                className="block text-white font-bold text-[20.97px] leading-[100%] my-5"
                 style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
               >
                 Enter Your Bio
@@ -356,7 +391,7 @@ function EditProfile() {
             </div>
 
             {/* Reset Password */}
-            {safeUserData.Password && (
+            {/* {safeUserData.Password && ( */}
               <div className="w-[369px] max-w-md flex flex-col gap-4">
                 <label className="block text-[#FFFFFF] text-[25px] font-medium">
                   Reset Password
@@ -383,13 +418,19 @@ function EditProfile() {
                   className={inputClass}
                 />
               </div>
-            )}
+            {/* )} */}
 
             <div className="flex justify-center w-full my-16">
               <div className="max-w-md w-full">
-                <button type="submit" className="mx-auto block">
+                {/* <button type="submit" className="mx-auto block">
                   <CustomButton text="Save" />
-                </button>
+                </button> */}
+                 <button 
+           
+            className=" mx-auto block bg-[#002AA8]  transition-colors w-[190px] h-[42px] rounded-md font-medium text-white"
+          >
+            Save
+          </button>
               </div>{" "}
               {/* Save Button */}
             </div>

@@ -183,11 +183,11 @@ const handleToggleStatus = async (land) => {
       </div>
 
       {/* Table */}
-      <div className="pl-7 mt-12 z-10 relative">
+      <div className="pl-7 mt-12 z-10 relative h-[500px] ml-12 ">
         <table className="min-w-[950px] text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
-              <th className="px-6 py-3 text-white font-semibold text-sm">No.</th>
+              {/* <th className="px-6 py-3 text-white font-semibold text-sm">No.</th> */}
               <th className="px-6 py-3 text-white font-semibold text-sm">Name</th>
               <th className="px-6 py-3 text-white font-semibold text-sm">Image</th>
               <th className="px-6 py-3 text-white font-semibold text-sm">Price</th>
@@ -199,7 +199,7 @@ const handleToggleStatus = async (land) => {
      <tbody className="divide-y divide-white/10">
   {landData.map((land, index) => (
     <tr key={land.id} className="h-[70px] transition-all duration-200 backdrop-blur-sm">
-      <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">{land.indexId}</td>
+      {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">{land.indexId}</td> */}
       <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">{land.name}</td>
       <td className="px-6 py-4">
         <img
