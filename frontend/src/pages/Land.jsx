@@ -5,7 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
 import CustomButton from "../Components/Buttons/Button1";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/logo1.png";
 import land1Image from "../assets/images/Overview/land1.jpg";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import symbol from "../assets/images/login/Symbol.svg.png";
@@ -120,20 +120,22 @@ function Land() {
 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 mb-5 gap-4 lg:gap-6 justify-center">
 
   {/* ✅ Instant Sell Card (STATIC) */}
-  <div className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-center items-center gap-4"
+<div
+  className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col justify-center items-center gap-4"
   style={{
-    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+    background:
+      "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
   }}
-  >
-    <img src={Logo} alt="logo image" className="w-20 h-20" />
-    <h2 className="text-lg lg:text-xl font-bold my-2">Instant Sell</h2>
+>
+  <img src={Logo} alt="logo image" className="w-20 h-20" />
+  <h2 className="text-lg lg:text-xl font-bold my-2">Instant Sell</h2>
 
-          <div className="flex items-center mb-4">
-                  <div
+  <div className="flex items-center mb-4">
+    <div
       style={{
         width: "17px",
         height: "17px",
-        gap: "0.84px", // gap only works for flex/grid children
+        gap: "0.84px",
         opacity: 1,
         borderRadius: "8.5px",
         paddingTop: "3.62px",
@@ -151,10 +153,10 @@ function Land() {
         height: "19px",
         opacity: 1,
         fontFamily: "Inter, sans-serif",
-        fontWeight: 600, // Semi Bold
+        fontWeight: 600,
         fontStyle: "normal",
         fontSize: "16px",
-        lineHeight: "19px", // 100% of 19px height
+        lineHeight: "19px",
         letterSpacing: "5%",
         textAlign: "right",
         textTransform: "capitalize",
@@ -162,62 +164,52 @@ function Land() {
     >
       $1800
     </h1>
-    
-    
-                </div>
-    <button onClick={openFirstModal}>
-      <CustomButton text="Sell Now" />
-    </button>
   </div>
 
-  {/* ✅ REAL LAND DATA FROM API */}
-  {landData.map((item) => (
-    <div
-      key={item._id}
-      className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"
-    
+  <button onClick={openFirstModal} className="w-full flex justify-center">
+    <CustomButton text="Sell Now" />
+  </button>
+</div>
+
+
+ 
+ {/* ✅ REAL LAND DATA FROM API */}
+{landData.map((item) => (
+  <div
+    key={item._id}
+    className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
     style={{
-    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-  }}
-    >
-      <div>
-        <div className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-          <img
-            src={
-              item.collection.image
-                ? `${BACKEND_BASE_URL}${item.collection.image}`
-                : land1Image
-            }
-            alt={item.collection.name}
-            className="w-full h-full object-cover object-top scale-x-[-1]"
-          />
-        </div>
+      background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+    }}
+  >
+    <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+      <img
+        src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
+        alt={item.collection.name || "Land Collection"}
+        className="w-full h-full object-cover object-top scale-x-[-1]"
+      />
+    </div>
 
-        <h2 className="text-base lg:text-lg font-bold mt-3 lg:mt-4">
-          {item.collection.name}
-        </h2>
+    <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+      {item.collection.name}
+    </h2>
 
-        <div className="flex justify-between items-center mb-3 lg:mb-4 mt-4 lg:mt-5">
-          <h3 className="text-xs lg:text-sm font-semibold">
-            {item._id.slice(0, 6)} 🔥
-          </h3>
-
-          <div className="flex items-center">
-            <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-              ${item.collection.chain}
-            </h3>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-6 flex justify-center">
-        <Link to="/buy-land" state={{ item }}>
-          <CustomButton text="Buy Now" />
-        </Link>
+    <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
+      <h3 className="text-xs sm:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
+      <div className="flex items-center">
+        <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
+        <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.collection.chain}</h3>
       </div>
     </div>
-  ))}
+
+    <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      <Link to="/buy-land" state={{ item }} className="cursor-pointer flex justify-center w-full">
+        <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
+      </Link>
+    </div>
+  </div>
+))}
+
 </div>
 
       </section>

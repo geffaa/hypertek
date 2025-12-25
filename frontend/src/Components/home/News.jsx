@@ -20,54 +20,47 @@ export default function News() {
 
   // Function to handle news item click - NO ID IN URL
   const handleNewsClick = (newsItem) => {
-    // Navigate without ID in URL, only pass data in state
     navigate(`/more-news`, { state: { newsItem } });
   };
 
   return (
     <section className="w-full z-10 flex justify-center items-start px-4 md:px-6 py-10 md:py-12 relative">
-      {/* Background effects... */}
+      {/* Background effects */}
       <div
-        style={{
-          bottom: `${890}px`,
-          right: `${110}px`,
-        }}
-        className="absolute 
-             w-[120px] h-[120px] 
-             md:w-[250px] md:h-[250px] 
-             rounded-full 
-             bg-gradient-to-b from-blue-500/70 via-blue-800/80 to-white/0
-             blur-[80px] md:blur-[100px]
-             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                    0_0_100px_50px_rgba(59,130,246,0.4),
-                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+        style={{ bottom: "890px", right: "110px" }}
+        className="absolute
+          w-[120px] h-[120px]
+          md:w-[220px] md:h-[220px]
+          rounded-full
+          bg-gradient-to-b from-blue-500/50 via-blue-800/60 to-white/0
+          blur-[60px] md:blur-[80px]
+          shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
+                  0_0_80px_40px_rgba(59,130,246,0.3),
+                  0_0_160px_80px_rgba(59,130,246,0.15)]"
       ></div>
 
       <div
-        style={{
-          bottom: `${90}px`,
-          right: `${100}px`,
-        }}
-        className="absolute 
-             w-[120px] h-[120px] 
-             md:w-[250px] md:h-[250px] 
-             rounded-full 
-             bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
-             blur-[80px] md:blur-[100px]
-             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                    0_0_100px_50px_rgba(59,130,246,0.4),
-                    0_0_200px_100px_rgba(59,130,246,0.2)]"
+        style={{ bottom: "90px", right: "100px" }}
+        className="absolute
+          w-[120px] h-[120px]
+          md:w-[220px] md:h-[220px]
+          rounded-full
+          bg-gradient-to-b from-blue-500/50 via-blue-600/60 to-white/20
+          blur-[60px] md:blur-[80px]
+          shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
+                  0_0_80px_40px_rgba(59,130,246,0.3),
+                  0_0_160px_80px_rgba(59,130,246,0.15)]"
       ></div>
 
       <GlowingOrb Xaxis={220} Yaxis={400} />
 
       <div className="flex flex-col md:flex-row gap-10 w-full max-w-[1247px]">
-        {/* ================= Left Column ================= */}
+        {/* Left Column */}
         <div className="flex flex-col gap-8 w-full md:w-[680px]">
           {/* First Block */}
           {news.slice(0, 1).map((item) => (
-            <div 
-              key={item._id} 
+            <div
+              key={item._id}
               className="flex flex-col gap-5 cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => handleNewsClick(item)}
             >
@@ -99,11 +92,13 @@ export default function News() {
                 className="flex flex-col gap-4 w-full sm:w-1/2 cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => handleNewsClick(item)}
               >
-                <img
-                  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
-                  alt={item.heading}
-                  className="w-full max-h-[200px] object-cover rounded-lg"
-                />
+                <div className="relative">
+                  <img
+                    src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                    alt={item.heading}
+                    className="relative z-10 w-full max-h-[200px] object-cover rounded-lg"
+                  />
+                </div>
                 <div className="flex flex-col gap-[12px] md:w-[247px] md:h-[176px]">
                   <h3 className="text-white text-lg sm:text-xl font-bold uppercase font-goldman">
                     {item.heading.length > 30
@@ -121,7 +116,7 @@ export default function News() {
           </div>
         </div>
 
-        {/* ================= Right Column ================= */}
+        {/* Right Column */}
         <div className="flex flex-col z-10 gap-10 w-full md:w-[450px]">
           {/* Heading */}
           <div className="hidden sm:flex items-center w-full">
@@ -133,7 +128,7 @@ export default function News() {
 
           {/* Featured Block */}
           {news[3] && (
-            <div 
+            <div
               className="hidden sm:flex flex-col cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => handleNewsClick(news[0])}
             >
@@ -157,13 +152,13 @@ export default function News() {
             {news.slice(3, 6).map((item) => (
               <div
                 key={item._id}
-                className="flex flex-row gap-3 w-full bg-[#111] rounded-lg overflow-hidden p-2 cursor-pointer hover:bg-[#222] transition-colors"
+                className="flex flex-row gap-3 w-full rounded-lg overflow-hidden p-2 cursor-pointer"
                 onClick={() => handleNewsClick(item)}
               >
                 <img
                   src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
                   alt={item.heading}
-                  className="w-[100px] h-[80px] sm:w-[200px] sm:h-[140px] object-cover"
+                  className="w-[200px] h-[140px] object-cover"
                 />
                 <div className="flex p-2">
                   <p className="text-white text-xs sm:text-base font-inter leading-relaxed">

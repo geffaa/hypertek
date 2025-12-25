@@ -174,11 +174,17 @@ const staticActivityData = [
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
                   {marketData.slice(0, 4).map((item, index) => (
-                    <div key={index} className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"  
-                     style={{
-    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-  }} >
-                      <div className="w-full h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+                   <div
+                   key={index}
+                   className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                   style={{
+                     background:
+                       "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                   }}
+                 >
+                 
+                     <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+
                         <img
                           src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : popularCollections}
                           alt={item.collection.name || "Collection"}
@@ -225,10 +231,17 @@ const staticActivityData = [
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 justify-center mt-3 sm:mt-4">
                   {landData.slice(0, 4).map((item, index) => (
-                    <div key={index} className=" rounded-lg shadow-md text-white p-4 w-full max-w-sm mx-auto lg:max-w-none h-[320px] lg:h-[400px] flex flex-col justify-between"  style={{
-    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-  }} >
-                      <div className="w-full h-28 sm:h-32 lg:h-[160px] overflow-hidden rounded-[19px] bg-gradient-to-b from-[#977C34] to-[#493F26]" >
+        <div
+        key={index}
+        className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+        style={{
+          background:
+            "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+        }}
+      >
+      
+      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+
                         <img
                           src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
                           alt={item.collection.name || "Land Collection"}

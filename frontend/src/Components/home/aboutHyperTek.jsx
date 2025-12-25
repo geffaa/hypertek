@@ -8,28 +8,11 @@ import GlowingOrb from "../Common/BgColoring";
 export default function HyperTekDesign() {
   return (
     <section className="relative w-full overflow-hidden z-10 py-8">
-      {/* Glowing Orb */}
-      <div
-        style={{
-          bottom: `${20}px`,
-          right: `${90}px`,
-        }}
-        className="absolute 
-             w-[120px] h-[120px] 
-             md:w-[250px] md:h-[250px] 
-             rounded-full 
-             bg-gradient-to-b from-blue-500/70 via-blue-800/80 to-white/0
-             blur-[80px] md:blur-[100px]
-             shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                    0_0_100px_50px_rgba(59,130,246,0.4),
-                    0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
       {/* Main Container */}
       <div className="max-w-[1450px] mx-auto pr-4 sm:pr-6 md:pr-8">
         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
           {/* Left Box - Hidden on small screens */}
-          <div className="hidden lg:relative lg:bg-[#B0BDE4] lg:flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]  ">
+          <div className="hidden lg:relative lg:bg-[#B0BDE4] lg:flex items-center justify-center w-full lg:w-[520px] h-[300px] sm:h-[400px] lg:h-[520px]">
             {/* Vertical Side Label (Large screen) */}
             <div className="hidden lg:flex flex-col items-center absolute left-6 top-1/2 -translate-y-1/2 z-10">
               <div className="w-[2px] h-20 bg-white"></div>
@@ -50,14 +33,14 @@ export default function HyperTekDesign() {
           </div>
 
           {/* Right Side - Full width on small screens */}
-<div className="flex-1 flex flex-col gap-6 lg:gap-8 mt-4 lg:mt-0 lg:pl-12 xl:pl-20">
+          <div className="flex-1 flex flex-col gap-6 lg:gap-8 mt-8 lg:mt-14 lg:pl-12 xl:pl-20">
             {/* Two images side by side */}
             <div className="flex flex-row gap-4 sm:gap-6 w-full">
               <div className="flex-1">
                 <img
                   src={RightImage1}
                   alt="Right Image 1"
-                  className="w-full h-[150px] sm:h-[255px] object-cover "
+                  className="w-full h-[150px] sm:h-[255px] object-cover"
                 />
               </div>
               <div className="flex-1">
@@ -68,24 +51,24 @@ export default function HyperTekDesign() {
                 />
               </div>
             </div>
+
             {/* Paragraph */}
-           <div className="w-full">
-  {/* Heading */}
-  <h1 className="text-white font-inter font-semibold text-lg md:text-xl mb-2">
-    The year is 2117.
-  </h1>
+            <div className="w-full mt-[-20px]">
+              {/* Heading */}
+              <h1 className="text-white font-inter font-semibold text-lg md:text-xl mb-1">
+                The year is 2117.
+              </h1>
 
-  {/* Paragraph */}
-  <p className="text-white font-inter text-sm md:text-base leading-relaxed">
-    Humanity didn't conquer the stars—it fractured into them. After Earth's collapse,
-    survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and 
-    prototypes across thousands of seed worlds. Each evolved in isolation, forming new 
-    species, cultures, and technologies. At the center of it all lies the Echo Core, 
-    a quantum relic now pulsing with riddles, memories, and a call to power. It awakens 
-    you, a reborn Overlord, forged by legacy and technology.
-  </p>
-</div>
-
+              {/* Paragraph */}
+              <p className="text-white font-inter text-sm md:text-base leading-relaxed">
+                Humanity didn't conquer the stars—it fractured into them. After Earth's collapse,
+                survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and 
+                prototypes across thousands of seed worlds. Each evolved in isolation, forming new 
+                species, cultures, and technologies. At the center of it all lies the Echo Core, 
+                a quantum relic now pulsing with riddles, memories, and a call to power. It awakens 
+                you, a reborn Overlord, forged by legacy and technology.
+              </p>
+            </div>
           </div>
         </div>
       </div>
