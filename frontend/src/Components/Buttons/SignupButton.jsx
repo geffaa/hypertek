@@ -7,10 +7,10 @@ const CustomButtonLarge = ({ text }) => {
     <div className="flex items-center">
       {/* Left small bar */}
       <div
-        className="bg-[#002AA8] mr-0.5" // lighter blue
+        className="bg-[#002AA8] mr-0.5"
         style={{
-          width: "0.35rem",
-          height: "1.5rem",
+          width: "0.3rem",
+          height: "1.2rem",
         }}
       ></div>
 
@@ -18,22 +18,21 @@ const CustomButtonLarge = ({ text }) => {
       <div
         className="border-[#002AA8]"
         style={{
-          width: "0.6rem",
-          height: "2.5rem",
+          width: "0.5rem",
+          height: "2.1rem",
           borderStyle: "solid",
-          borderWidth: "0.45rem 0.3rem 0.45rem 0",
+          borderWidth: "0.35rem 0.25rem 0.35rem 0",
         }}
       ></div>
 
       {/* Main button area */}
       <div
-        className="flex items-center justify-center text-white font-medium"
+        className="flex items-center justify-center text-white font-medium text-sm"
         style={{
-          width: "12rem",
-          height: "2.8rem",
-          // background: "linear-gradient(180deg, #2b48beff 0%, #2c4080ff 100%)", 
-          backgroundColor:" #002AA8",
-          border: "0.2rem solid #002AA8",
+          width: "10.5rem",
+          height: "2.2rem",
+          backgroundColor: "#002AA8",
+          border: "0.15rem solid #002AA8",
         }}
       >
         {text}
@@ -43,10 +42,10 @@ const CustomButtonLarge = ({ text }) => {
       <div
         className="border-[#002AA8]"
         style={{
-          width: "0.6rem",
-          height: "2.5rem",
+          width: "0.5rem",
+          height: "2.1rem",
           borderStyle: "solid",
-          borderWidth: "0.3rem 0 0.45rem 0.3rem",
+          borderWidth: "0.25rem 0 0.35rem 0.25rem",
         }}
       ></div>
 
@@ -54,8 +53,8 @@ const CustomButtonLarge = ({ text }) => {
       <div
         className="bg-[#002AA8]"
         style={{
-          width: "0.35rem",
-          height: "1.4rem",
+          width: "0.3rem",
+          height: "1.2rem",
         }}
       ></div>
     </div>
@@ -63,3 +62,4 @@ const CustomButtonLarge = ({ text }) => {
 };
 
 export default CustomButtonLarge;
+

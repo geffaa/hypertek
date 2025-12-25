@@ -4,7 +4,7 @@ import overview1 from "../assets/images/Overview/overview1.jpg";
 import popularCollections from "../assets/images/popular/popolar.png";
 import { FiSearch } from "react-icons/fi";
 import CustomButton from "../Components/Buttons/Button1";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import { Link } from "react-router-dom";
@@ -119,102 +119,102 @@ function NFA() {
         </h1>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* ✅ INSTANT SELL (STATIC CARD) */}
-          <div
-            className=" rounded-lg p-4 text-white flex flex-col items-center justify-center h-[320px] lg:h-[400px]"
-            style={{
-              background:
-                "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-            }}
-          >
-            <img src={Logo} className="w-20 h-20" alt="logo" />
-            <h2 className="text-xl font-bold my-4">Instant Sell</h2>
-
-
-
-
-            <div className="flex items-center mb-4">
-              <div
+        {/* ✅ INSTANT SELL (STATIC CARD) */}
+<div
+  className="rounded-[18px] p-5 text-white flex flex-col items-center justify-center h-[420px]"
   style={{
-    width: "17px",
-    height: "17px",
-    gap: "0.84px", // gap only works for flex/grid children
-    opacity: 1,
-    borderRadius: "8.5px",
-    paddingTop: "3.62px",
-    paddingRight: "3.2px",
-    paddingBottom: "3.62px",
-    paddingLeft: "3.2px",
-    background: "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)",
+    background:
+      "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
   }}
 >
-  <img src={TVector} alt="" />
+  <img src={Logo} className="w-20 h-20" alt="logo" />
+  <h2 className="text-xl font-bold my-4">Instant Sell</h2>
+
+  <div className="flex items-center mb-4">
+    <div
+      style={{
+        width: "17px",
+        height: "17px",
+        gap: "0.84px",
+        opacity: 1,
+        borderRadius: "8.5px",
+        paddingTop: "3.62px",
+        paddingRight: "3.2px",
+        paddingBottom: "3.62px",
+        paddingLeft: "3.2px",
+        background: "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)",
+      }}
+    >
+      <img src={TVector} alt="" />
+    </div>
+    <h1
+      style={{
+        width: "55px",
+        height: "19px",
+        opacity: 1,
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 600,
+        fontStyle: "normal",
+        fontSize: "16px",
+        lineHeight: "19px",
+        letterSpacing: "5%",
+        textAlign: "right",
+        textTransform: "capitalize",
+      }}
+    >
+      $1800
+    </h1>
+  </div>
+
+  <button onClick={openFirstModal} className="w-full flex justify-center">
+    <CustomButton text="Sell Now" />
+  </button>
 </div>
-<h1
-  style={{
-    width: "55px",
-    height: "19px",
-    opacity: 1,
-    fontFamily: "Inter, sans-serif",
-    fontWeight: 600, // Semi Bold
-    fontStyle: "normal",
-    fontSize: "16px",
-    lineHeight: "19px", // 100% of 19px height
-    letterSpacing: "5%",
-    textAlign: "right",
-    textTransform: "capitalize",
-  }}
->
-  $1800
-</h1>
 
-
-            </div>
-
-            <button onClick={openFirstModal}>
-              <CustomButton text="Sell Now" />
-            </button>
-          </div>
 
           {/* ✅ NFA DATA FROM API */}
-          {marketData.slice(0, 3).map((item) => (
-            <div
-              key={item._id}
-              className=" rounded-lg p-4 mb-4 text-white h-[320px] lg:h-[400px] flex flex-col justify-between"
-              style={{
-                background:
-                  "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-              }}
-            >
-              <div>
-                <div className="h-36 overflow-hidden rounded-lg bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                  <img
-                    src={
-                      item.collection?.image
-                        ? `${BACKEND_BASE_URL}${item.collection.image}`
-                        : popularCollections
-                    }
-                    alt={item.collection?.name}
-                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                  />
-                </div>
+    
+{marketData.slice(0, 3).map((item) => (
+  <div
+    key={item._id}
+    className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+    style={{
+      background:
+        "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+    }}
+  >
+    <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+      <img
+        src={
+          item.collection?.image
+            ? `${BACKEND_BASE_URL}${item.collection.image}`
+            : popularCollections
+        }
+        alt={item.collection?.name || "NFA Collection"}
+        className="w-full h-full object-cover object-top scale-x-[-1]"
+      />
+    </div>
 
-                <h2 className="font-bold mt-4">{item.collection?.name}</h2>
+    <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+      {item.collection?.name}
+    </h2>
 
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm">{item._id.slice(0, 6)} 🔥</span>
-                  <div className="flex items-center gap-1">
-                    <img src={TVector} className="w-3 h-3" alt="" />
-                    <span>${item.collection.chain}</span>
-                  </div>
-                </div>
-              </div>
+    <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
+      <h3 className="text-xs sm:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
+      <div className="flex items-center">
+        <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
+        <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.collection.chain}</h3>
+      </div>
+    </div>
 
-              <Link to="/buy-nfa" state={{ item }} className="mt-6">
-                <CustomButton text="Buy Now" />
-              </Link>
-            </div>
-          ))}
+    <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      <Link to="/buy-nfa" state={{ item }} className="cursor-pointer flex justify-center w-full">
+        <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
+      </Link>
+    </div>
+  </div>
+))}
+
         </div>
       </section>
 

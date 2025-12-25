@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/logo1.png";
 import TelegramImg from "../../assets/images/telegram.png";
 import SkypeImg from "../../assets/images/skipe.png";
 import DiscordImg from "../../assets/images/discard.png";
@@ -16,108 +16,83 @@ function Footer() {
   ];
 
   return (
-    <footer className="w-full text-white pb-4 relative z-10  overflow-hidden">
-      {/* Center container to control max width */}
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] flex flex-col justify-between">
-        {/* Glowing Orb */}
-        <div
-          className="absolute top-0 right-1/4 md:right-40 w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full
-                        bg-gradient-to-b from-blue-500/70 via-blue-600/80 to-white/30
-                        blur-[80px] md:blur-[100px]
-                        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                                0_0_100px_50px_rgba(59,130,246,0.4),
-                                0_0_200px_100px_rgba(59,130,246,0.2)]"
-        ></div>
+    <footer className="w-full text-white relative z-10 overflow-hidden">
 
-        {/* Mobile Layout */}
-<div className="flex sm:hidden gap-6 pt-2 mt-2 border-t-[1px] border-transparent bg-gradient-to-r from-[#002AA8] to-[#8C9ED8] bg-clip-border [mask:linear-gradient(white,white)_padding-box,linear-gradient(white,white)] [mask-composite:exclude]"
-style={{
-  borderImage: 'linear-gradient(270.02deg, #002AA8 0.18%, #8C9ED8 78.16%) 1',
-  borderImageSlice: 1,
-  borderTop: '1px solid transparent'
-}}>          <div className="flex flex-col gap-3 text-sm font-medium flex-1">
-            {menuItems.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.path}
-                className="hover:text-gray-400 transition-colors text-left"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col items-end gap-4 flex-shrink-0">
-            <div className="text-xs text-white text-left">
-              @2025. ALL RIGHTS
-              <br />
-              RESERVED
-            </div>
-            <div className="flex gap-3">
-              {[DiscordImg, SkypeImg, TelegramImg].map((icon, idx) => (
-                <img
+      {/* ===== Background Glow (same as News) ===== */}
+      <div
+        className="pointer-events-none absolute bottom-0 right-1/4
+        w-[180px] h-[180px] rounded-full
+        bg-gradient-to-b from-black-500/70 via-blue-600/80 to-white/30
+        blur-[120px]
+        "
+      />
+
+      <div className="mx-auto max-w-[1500px] px-6">
+
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600 to-transparent mt-20 mb-10" />
+
+        {/* ================= DESKTOP ================= */}
+        <div className="hidden sm:flex justify-between items-start">
+
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0">
+            <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
+          </Link>
+
+          {/* Menu + Socials */}
+          <div className="flex flex-col items-end gap-5">
+            <nav className="flex gap-8 text-sm font-medium">
+              {menuItems.map((item, idx) => (
+                <Link
                   key={idx}
-                  src={icon}
-                  alt=""
-                  className="w-5 h-5 hover:opacity-75 transition"
-                />
+                  to={item.path}
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="hover:text-gray-400 transition"
+                >
+                  {item.name}
+                </Link>
               ))}
-            </div>
-            <div className="mt-4 cursor-pointer">
-           <Link to="/">
-              <img
-                src={Logo}
-                alt="Logo"
-                className="h-10 w-auto object-contain"
-              />
-           </Link>
+            </nav>
+
+            <div className="flex gap-4">
+              <img src={DiscordImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
+              <img src={SkypeImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
+              <img src={TelegramImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
             </div>
           </div>
         </div>
 
-        {/* Desktop Layout */}
-<div className="hidden sm:flex flex-col md:flex-row md:justify-between md:items-center gap-6 pt-4 mt-2"
-style={{
-  borderTop: '1px solid transparent',
-  borderImage: 'linear-gradient(270.02deg, #002AA8 0.18%, #8C9ED8 78.16%) 1',
-  borderImageSlice: 1
-}}>          <div className="flex-shrink-0 flex cursor-pointer justify-center md:justify-start">
-             <Link to="/">
-              <img
-                src={Logo}
-                alt="Logo"
-                className="h-10 w-auto object-contain"
-              />
-           </Link> 
-          </div>
-          <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm font-medium justify-center md:justify-end text-center md:text-left">
+        {/* Desktop copyright */}
+        <div className="hidden sm:block text-center text-xs text-gray-300 mt-10 mb-6">
+          © 2025. All Right Reserved
+        </div>
+
+        {/* ================= MOBILE ================= */}
+        <div className="sm:hidden flex flex-col items-center gap-6 pb-8">
+          <Link to="/">
+            <img src={Logo} alt="Logo" className="h-9 w-auto object-contain" />
+          </Link>
+
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium text-center">
             {menuItems.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.path}
-                className="hover:text-gray-400 transition-colors text-left z-10"
-              >
+              <Link key={idx} to={item.path} className="hover:text-gray-400 transition">
                 {item.name}
               </Link>
             ))}
-          </ul>
+          </nav>
+
+          <div className="flex gap-5">
+            <img src={DiscordImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
+            <img src={SkypeImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
+            <img src={TelegramImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
+          </div>
+
+          <div className="text-xs text-gray-300 text-center">
+            © 2025. All Right Reserved
+          </div>
         </div>
 
-        {/* Second Row - Desktop */}
-        <div className="hidden sm:flex flex-col md:flex-row items-center justify-between gap-4 mt-4">
-          <div className="w-full md:text-center text-sm text-white">
-            @2025. ALL RIGHTS RESERVED
-          </div>
-          <div className="flex gap-4 justify-center md:justify-end mt-2 md:mt-0">
-            {[DiscordImg, SkypeImg, TelegramImg].map((icon, idx) => (
-              <img
-                key={idx}
-                src={icon}
-                alt=""
-                className="w-5 h-5 hover:opacity-75 transition"
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </footer>
   );

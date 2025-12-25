@@ -7,7 +7,7 @@ const CustomButton = ({ text }) => {
     <div
       className="
         flex items-center 
-        scale-90 sm:scale-100 
+        scale-80 sm:scale-90
         transition-transform duration-300 ease-in-out 
         md:hover:scale-95   /* Slight zoom out on hover (desktop only) */
         group                /* enables child hover states */
@@ -20,7 +20,7 @@ const CustomButton = ({ text }) => {
 
       {/* Left angled border */}
       <div
-        className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[42.86px] h-[30.79px] transition-all duration-300 group-hover:border-[#0034d6]"
+        className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[36px] h-[26px] transition-all duration-300 group-hover:border-[#0034d6]"
         style={{
           borderStyle: "solid",
           borderWidth: "0.375rem 0.25rem 0.375rem 0",
@@ -33,8 +33,8 @@ const CustomButton = ({ text }) => {
           flex items-center justify-center 
           text-white font-medium 
           text-xs sm:text-sm
-          md:w-[190px] md:h-[39px] 
-          w-[103px] h-[28px]
+          md:w-[160px] md:h-[34px]
+          w-[90px] h-[24px]
           transition-all duration-300 ease-in-out
           group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
         "
@@ -48,7 +48,7 @@ const CustomButton = ({ text }) => {
 
       {/* Right angled border */}
       <div
-        className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[42.86px] h-[30.79px] transition-all duration-300 group-hover:border-[#0034d6]"
+        className="border-[#002AA8] md:w-[7.97px] w-[5.73px] md:h-[36px] h-[26px] transition-all duration-300 group-hover:border-[#0034d6]"
         style={{
           borderStyle: "solid",
           borderWidth: "0.25rem 0 0.375rem 0.25rem",
