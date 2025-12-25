@@ -11,7 +11,7 @@ import { NewsImage_Url } from "../../Config";
 function PopularCollections() {
   const [marketData, setMarketData] = useState([]);
 
-  // get the market data here
+  // Fetch market data
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
@@ -19,7 +19,7 @@ function PopularCollections() {
           `${BACKEND_BASE_URL}/api/v1/nft/collection/get`
         );
         if (res.data.success) {
-          setMarketData(res.data.collections); // assuming backend returns { success, data }
+          setMarketData(res.data.collections);
           console.log("Fetched market data:", res.data);
         } else {
           console.error("Failed to fetch market data:", res.data.message);
@@ -30,96 +30,88 @@ function PopularCollections() {
     };
 
     fetchMarketData();
-  }, []); // run once when component mounts
+  }, []);
 
   console.log("your market data are here :", marketData);
 
   return (
-    <section className="relative flex flex-col overflow-hidden w-full px-4 pt-5 pb-8 sm:px-8  gap-8">
-      {/* Decorative glowing orbs */}
+    <section className="relative z-10 w-full px-6 pb-20 overflow-hidden">
       <GlowingOrb Xaxis={180} Yaxis={20} />
       <GlowingOrb Xaxis={700} Yaxis={420} />
 
-      {/* Container for heading and cards */}
-      <div className="mx-auto w-full max-w-[1600px] flex flex-col gap-8">
+      <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-        <div className="flex flex-col gap-2 items-center sm:items-start w-full px-4 sm:px-0">
-          <h1 className="text-white uppercase text-2xl sm:text-3xl lg:text-[30px] font-goldman font-bold leading-[100%]">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-white uppercase text-[30px] font-goldman font-bold">
             MarketPlace
           </h1>
 
-          {/* Decorative underline bars */}
-          <div className="flex gap-2 ml-6 sm:ml-0">
-            <div className="h-[3px] w-8 md:w-12 bg-white"></div>
-            <div className="h-[3px] w-12 md:w-20 bg-white"></div>
-            <div className="h-[3px] w-4 md:w-8 bg-white"></div>
-            <div className="h-[3px] w-20 md:w-40 bg-gradient-to-r from-white to-transparent"></div>
+          <div className="flex gap-2">
+            <div className="h-[3px] w-14 bg-white" />
+            <div className="h-[3px] w-20 bg-white" />
+            <div className="h-[3px] w-10 bg-white" />
+            <div className="h-[3px] w-44 bg-gradient-to-r from-white to-transparent" />
           </div>
         </div>
-        {/* Cards Section */}
-        <div className="grid grid-cols-2 z-10 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 ">
-         {marketData?.slice(0, 4).map((data, index) => (
-  <div
-  style={{
-    background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-  }}
-    key={index}
-    className="bg-gray-800 rounded-lg shadow-md text-white p-4 flex flex-col justify-between w-full h-[400px]"
-  >
-    {/* Image container */}
-    <div
-      className="w-full h-[160px] overflow-hidden rounded-[19px]"
-      style={{
-        background:
-          "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-      }}
-    >
-      <img
-        src={
-          data.collection.image
-            ? `${NewsImage_Url}${data.collection.image}`
-            : popularCollections
-        }
-        alt={data.collection.name || "Collection"}
-        className="w-full h-full object-contain"
-      />
-    </div>
 
-    {/* Title */}
-    <h2
-      className="text-lg font-bold md:mt-4 line-clamp-2"
-      title={data.collection.name}
-    >
-      {data.collection.name || "Monkey Ape"}
-    </h2>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {marketData?.slice(0, 4).map((data, index) => (
+            <div
+              key={index}
+              className="relative rounded-[18px] p-5 text-white flex flex-col h-[420px]"
+              style={{
+                background:
+                  "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+              }}
+            >
+              {/* Image */}
+              <div
+                className="h-[210px] rounded-[16px] overflow-hidden"
+                style={{
+                  background: "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                }}
+              >
+                <img
+                  src={
+                    data.collection.image
+                      ? `${NewsImage_Url}${data.collection.image}`
+                      : popularCollections
+                  }
+                  alt={data.collection.name || "Collection"}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-    {/* Info Row */}
-    <div className="flex justify-between items-center mb-4 mt-5">
-      <h3 className="text-sm font-semibold">
-        {data._id.slice(0, 6)}🔥
-      </h3>
+              {/* Title */}
+              <h2 className="text-[18px] font-semibold mt-5 line-clamp-1">
+                {data.collection.name || "Collection"}
+              </h2>
 
-      <div className="flex items-center gap-2">
-        <div className="flex items-center justify-center w-5 h-5 rounded-[50%] bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE]">
-          <img src={TVector} alt="" className="w-3 h-3" />
-        </div>
+              {/* Info */}
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-sm font-medium text-gray-300">
+                  {data._id.slice(0, 6)} 🔥
+                </span>
 
-        {/* Price */}
-        <h3 className="text-sm font-semibold">${data.collection.chain}</h3>
-      </div>
-    </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                    <img src={TVector} className="w-3 h-3" alt="chain" />
+                  </div>
+                  <span className="text-sm font-semibold">
+                    ${data.collection.chain}
+                  </span>
+                </div>
+              </div>
 
-    {/* Buy Now Button */}
-    <div className=" flex justify-center w-full z-10 scale-90 sm:scale-100">
-      <Link to="market-place" className="flex justify-center">
-        <button>
-          <CustomButton text="Buy Now" />
-        </button>
-      </Link>
-    </div>
-  </div>
-))}
-
+              {/* Button */}
+              <div className="mt-auto flex justify-center">
+                <Link to="/market-place">
+                  <CustomButton text="Buy Now" />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

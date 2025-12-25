@@ -1,6 +1,6 @@
 import React from "react";
 import heroImage from "../../assets/images/hero.jpg";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/logo1.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton2 from "../Buttons/Button2";
 import "../../App.css";
@@ -33,7 +33,7 @@ export default function Hero() {
       }}
     >
       {/* Hero Content */}
-      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[230px]  mx-auto px-4 md:px-6">
+      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[100px]  mx-auto px-4 md:px-6">
         {/* Text */}
         <div className="flex flex-col max-w-[100%] md:max-w-[78%] text-center md:text-left md:ml-16">
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white md:pl-12 leading-[100%] uppercase m-0">
@@ -66,7 +66,7 @@ export default function Hero() {
     <div
       className="bg-[#002AA8] mr-0.5 transition-all duration-300 hover:bg-[#0034d6]"
       style={{
-        width: "0.25rem",
+        width: "0.2rem",
         height: "1.3rem",
       }}
     ></div>
@@ -82,7 +82,7 @@ export default function Hero() {
 
     {/* Main button area */}
     <div
-      className="flex items-center justify-center text-white font-medium md:w-[168.31px] md:h-[39.59px] transition-all duration-300  hover:shadow-[0_0_10px_#002AA8]"
+      className="flex items-center justify-center text-white font-medium  md:w-[160px] md:h-[32px]  transition-all duration-300  hover:shadow-[0_0_10px_#002AA8]"
       style={{
         border: "2.24px solid #002AA8",
       }}
@@ -116,8 +116,7 @@ export default function Hero() {
     {[...logoItems, ...logoItems].map((item, i) => (
       <div
         key={i}
-        className="flex items-center gap-2 flex-shrink-0 pt-2 scale-x-[-1]
-"
+        className="flex items-center gap-2 flex-shrink-0 pt-2 scale-x-[-1]"
       >
         <img
           src={Logo}
@@ -131,7 +130,6 @@ export default function Hero() {
     ))}
   </div>
 </div>
-
 
     </div>
   );

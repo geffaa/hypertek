@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
@@ -220,15 +220,17 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
   };
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 bg-[#001554D9] md:bg-transparent">
+    <nav className="w-full fixed top-0 left-0 z-50 md:bg-transparent">
       {/* Container with max-width and centered */}
-      <div className="w-full mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+      <div className="w-full mx-auto max-w-[1300px] px-4 sm:px-6 md:px-2">
+
         {/* Top Section */}
         <div className="w-full py-3 flex items-center justify-between">
           {/* Left: Logo + Desktop Menu */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-28">
             <Link to="/" onClick={closeMobileMenu}>
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+            <img src={logo} alt="Logo" className="h-10 w-auto mt-2" />
+
             </Link>
             {/* Mobile Search */}
             {isLoggedIn && showSearchBar && (
@@ -248,7 +250,7 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
             )}
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 font-semibold text-white relative ml-8">
+            <div className="hidden md:flex items-center space-x-6 font-semibold text-white relative ml-4">
               {/* Shop Dropdown */}
               <div
                 ref={shopRef}
@@ -264,70 +266,55 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                   <div className="absolute  top-full left-[350px] transform -translate-x-1/2 mt-0 w-[746px] max-w-[90vw] pb-5 h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20 mb-4">
                     <div className="grid grid-cols-3 gap-[30px] w-full h-full mx-auto px-[29px] py-[28px] text-white">
                       {/* Column 1 */}
-                      <div
-                        className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2  transition-colors"
-                        onClick={() => {
-                          setShopOpen(false);
-                          // Add your navigation logic here
-                          console.log("Overview & Desc clicked");
-                        }}
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Overview 
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          See what's new and trending.
-                        </p>
-                      </div>
-                      <div
-                        className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2  transition-colors"
-                        onClick={() => {
-                          setShopOpen(false);
-                          // Add your navigation logic here
-                          console.log("My Assets clicked");
-                        }}
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          My Assets
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Track and manage everything you own.
-                        </p>
-                      </div>
+                      <Link
+  to="/market-place"
+  onClick={() => setShopOpen(false)}
+  className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+>
+  <h1 className="text-white font-semibold text-[16px]">Overview</h1>
+  <p className="text-white text-[12px]">
+    See what's new and trending.
+  </p>
+</Link>
+
+
+           <Link
+               to="/personal-activity"
+           onClick={() => setShopOpen(false)}
+  className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+>
+  <h1 className="text-white font-semibold text-[16px]">My Assets</h1>
+  <p className="text-white text-[12px]">
+    Track and manage everything you own.
+  </p>
+</Link>
+
 
                       {/* Column 2 */}
-                      <div
-                        className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2  transition-colors"
-                        onClick={() => {
-                          setShopOpen(false);
-                          // Add your navigation logic here
-                          console.log("Collectibles clicked");
-                        }}
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Collectibles
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Track and manage your NFTs.
-                        </p>
-                      </div>
+                      <Link
+                          to="/nfa-expand"
+                            onClick={() => setShopOpen(false)}
+                            className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                              > 
+                                <h1 className="text-white font-semibold text-[16px]">Collectibles</h1>
+                                <p className="text-white text-[12px]">
+                                Track and manage your NFTs.
+  </p>
+</Link>
+
 
                       {/* Column 3 */}
-                      <div
-                        className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 rounded transition-colors"
-                        onClick={() => {
-                          setShopOpen(false);
-                          // Add your navigation logic here
-                          console.log("Land clicked");
-                        }}
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Land
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Buy a parcel of land and build on it.
-                        </p>
-                      </div>
+                      <Link
+                      to="/land"
+                        onClick={() => setShopOpen(false)}
+                          className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                              >
+                            <h1 className="text-white font-semibold text-[16px]">Land</h1>
+                              <p className="text-white text-[12px]">
+                                Buy a parcel of land and build on it.
+                                    </p>
+                                  </Link>
+
                     </div>
                   </div>
                 )}
@@ -566,21 +553,22 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
               </div>
             )}
 
-            {/* About & News */}
-            <Link
-              to="/about"
-              className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-              onClick={closeMobileMenu}
-            >
-              About Us
-            </Link>
-            <Link
-              to="/news"
-              className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-              onClick={closeMobileMenu}
-            >
-              News
-            </Link>
+          {/* About & News */}
+<Link
+  to="/about"
+  className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
+  onClick={closeMobileMenu}
+>
+  About Us
+</Link>
+<Link
+  to="/more-news"
+  className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
+  onClick={closeMobileMenu}
+>
+  News
+</Link>
+
 
             {/* Social */}
             <button
