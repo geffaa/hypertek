@@ -129,48 +129,19 @@ function Support() {
     });
 
   return (
-    <div className="flex bg-black ">
-
-
-        <div
-        style={{
-          top: `0px`,
-          left: `330px`,
-          width: "357px",
-          height: "357px",
-          background: "#002AA8",
-          filter: "blur(210px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-      
-        <div
-        style={{
-          top: `430px`,
-          left: `930px`,
-          width: "357px",
-          height: "357px",
-          background: "#002AA8",
-          filter: "blur(210px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-  
-
-
+    <div className="flex bg-black">
       <div className="flex flex-col w-full max-w-[1100px] h-[480px] px-4">
         
         {/* Header */}
         <div className="flex items-center gap-2 h-[50px] border-b border-white">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
-            Online
+             Online
           </p>
         </div>
 
         {/* Messages */}
-        <div className="flex flex-col gap-4 mt-4 overflow-y-auto flex-1 pr-2 z-50" >
+        <div className="flex flex-col gap-4 mt-4 overflow-y-auto flex-1 pr-2">
           {messages.length === 0 ? (
             <p className="text-gray-400 text-center mt-10">
               Start a conversation with our support team
@@ -205,7 +176,7 @@ function Support() {
         </div>
 
         {/* Slack-style Input */}
-        <div className="mt-4 bg-gray-50 z-10 border border-[#EDEDED] rounded-xl p-3">
+        <div className="mt-4 bg-gray-50 border border-[#EDEDED] rounded-xl p-3">
           <textarea
             ref={textareaRef}
             rows={1}
@@ -231,10 +202,10 @@ function Support() {
             </button>
           </div>
         </div>
-    </div>
+
+      </div>
     </div>
   );
 }
 
 export default Support;
-
