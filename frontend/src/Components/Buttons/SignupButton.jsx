@@ -26,17 +26,22 @@ const CustomButtonLarge = ({ text }) => {
       ></div>
 
       {/* Main button area */}
-      <div
-        className="flex items-center justify-center text-white font-medium text-sm"
-        style={{
-          width: "10.5rem",
-          height: "2.2rem",
-          backgroundColor: "#002AA8",
-          border: "0.15rem solid #002AA8",
-        }}
-      >
-        {text}
-      </div>
+<div
+  className="
+    flex items-center justify-center
+    text-white font-inter font-medium
+    text-[13.19px] leading-[1] tracking-[0] text-center capitalize
+  "
+  style={{
+    width: "10.5rem",
+    height: "2.2rem",
+    backgroundColor: "#002AA8",
+    border: "0.15rem solid #002AA8",
+  }}
+>
+  {text}
+</div>
+
 
       {/* Right angled border */}
       <div

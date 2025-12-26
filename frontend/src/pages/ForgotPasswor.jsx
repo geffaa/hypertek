@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/logo1.png";
 import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";

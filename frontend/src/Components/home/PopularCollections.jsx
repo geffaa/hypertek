@@ -102,7 +102,7 @@ function PopularCollections() {
                 </div>
 
                 {/* BUTTON */}
-                <div className="mt-auto flex justify-center">
+                <div className="flex justify-center items-center mt-8">
                   <Link to="/market-place">
                     <CustomButton text="Buy Now" />
                   </Link>

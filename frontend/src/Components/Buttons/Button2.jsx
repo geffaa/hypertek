@@ -27,24 +27,24 @@ const CustomButton2 = ({ text }) => {
         }}
       ></div>
 
-      {/* Main button area */}
-      <div
-        className="
-          flex items-center justify-center
-          text-white font-medium
-          text-xs sm:text-sm
-          md:w-[160px] md:h-[34px]
-          w-[90px] h-[24px]
-          transition-all duration-300 ease-in-out
-          group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
-        "
-        style={{
-          background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-          border: "0.15rem solid #002AA8",
-        }}
-      >
-        {text}
-      </div>
+     {/* Main button area */}
+<div
+  className="
+    flex items-center justify-center
+    text-white font-inter font-medium
+    text-[11.52px] leading-[1] tracking-[0] text-center capitalize
+    md:w-[160px] md:h-[34px]
+    w-[90px] h-[24px]
+    transition-all duration-300 ease-in-out
+    group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
+  "
+  style={{
+    background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+    border: "0.15rem solid #002AA8",
+  }}
+>
+  {text}
+</div>
 
       {/* Right angled border */}
       <div
