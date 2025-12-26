@@ -231,27 +231,10 @@ function Support() {
             </button>
           </div>
         </div>
-
-      {/* Right Info */}
-      <div className="w-[160px] rounded-lg p-2">
-        <div className="flex justify-between items-center mb-2">
-          <img src={ChatImage} alt="User" className="w-8 h-8 rounded-full" />
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-white">
-            User Details
-          </h1>
-        </div>
-        <div className="flex justify-between items-center">
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-gray-400">
-            Status
-          </h1>
-          <h1 className="font-inter font-medium text-[10.65px] leading-[12.42px] text-green-400">
-            Online
-          </h1>
-        </div>
-      </div>
     </div>
     </div>
   );
 }
 
 export default Support;
+
