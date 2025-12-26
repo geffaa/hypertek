@@ -111,7 +111,7 @@ if (loading) {
           <BgEffect2 Xaxis={400} Yaxis={650} />
             {/* Content */}
       <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-8">
+        <div className="flex gap-10 mt-[80px] mx-3">
           {/* left side preview / modal */}
       <div
   className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
@@ -136,15 +136,19 @@ if (loading) {
         src={selectedImage}
         alt="Preview"
         style={{
-          maxWidth: "100%",
-          maxHeight: "100%",
+          // maxWidth: "100%",
+          width:"456px",
+          height:"440px",
+          // maxHeight: "100%",
           borderRadius: "6px",
         }}
       />
     ) : (
       <div className="flex flex-col items-center gap-2">
         <img src={uploadIcon} alt="" className="w-6 h-6" />
-        <span className="text-blue-400 font-bold">Click to upload or drag and drop</span>
+       <p>
+         <span className="text-blue-400 font-bold">Click to upload </span> or drag and drop
+       </p>
       </div>
     )}
 
@@ -161,7 +165,7 @@ if (loading) {
           <div
             className="z-50 relative rounded-lg p-6"
             style={{
-              width: "456px",
+              width: "495px",
               // height: "440px",
               boxSizing: "border-box",
               position: "relative",
@@ -170,7 +174,7 @@ if (loading) {
             <div
               style={{
                 width: "495px",
-                height: "110px",
+                height: "88px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "14px",
@@ -180,7 +184,7 @@ if (loading) {
               <div
                 className="flex flex-col justify-start"
                 style={{
-                  width: "495px",
+                  width: "451px",
                   fontFamily: "Inter, sans-serif",
                   display: "flex",
                   flexDirection: "column",
@@ -223,7 +227,7 @@ if (loading) {
 
             {/* input fields  */}
 
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[451px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
               <label
                 htmlFor="name"
                 style={{
