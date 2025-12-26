@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/logo1.png";
 import discard from "../assets/images/login/discard.png";
 import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";

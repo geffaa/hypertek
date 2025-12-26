@@ -199,7 +199,8 @@ const staticActivityData = [
                           <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.collection.chain}</h3>
                         </div>
                       </div>
-                      <div className="flex justify-center items-center">
+                      <div className="flex justify-center items-center mt-4">
+
                         <Link to="/buy-nfa" state={{ item }} className="w-full flex justify-center">
                           <CustomButton text="Buy Now" />
                         </Link>
@@ -255,8 +256,7 @@ const staticActivityData = [
                           <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
                           <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.collection.chain}</h3>
                         </div>
-                      </div>
-                      <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
+                      </div><div className="flex justify-center items-center mt-4">
                         <Link to="/buy-land" state={{ item }} className="cursor-pointer flex justify-center w-full">
                           <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
                         </Link>

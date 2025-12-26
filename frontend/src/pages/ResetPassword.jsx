@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/logo1.png";
 import submitImg from "../assets/images/resetpassword.png";
 import { FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import GlowingOrb from "../Components/Common/BgColoring";
