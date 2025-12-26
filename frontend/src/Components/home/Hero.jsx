@@ -81,14 +81,22 @@ export default function Hero() {
     ></div>
 
     {/* Main button area */}
-    <div
-      className="flex items-center justify-center text-white font-medium  md:w-[160px] md:h-[32px]  transition-all duration-300  hover:shadow-[0_0_10px_#002AA8]"
-      style={{
-        border: "2.24px solid #002AA8",
-      }}
-    >
-      Download Game
-    </div>
+<div
+  className="
+    flex items-center justify-center
+    text-white font-inter font-medium
+    text-[16px] leading-[1] tracking-[0] text-center capitalize
+    md:w-[160px] md:h-[32px]
+    transition-all duration-300
+    hover:shadow-[0_0_10px_#002AA8]
+  "
+  style={{
+    border: "2.24px solid #002AA8",
+  }}
+>
+  Download Game
+</div>
+
 
     {/* Right angled border */}
     <div
@@ -123,9 +131,11 @@ export default function Hero() {
           alt="Logo"
           className="w-6 h-5 md:w-7 md:h-6"
         />
-        <span className="text-white font-bold text-xs md:text-sm">
-          {item.text}
-        </span>
+        <span className="text-white font-inter font-bold uppercase text-[11.69px] leading-[1] tracking-[0.08em] text-center">
+  {item.text}
+</span>
+
+
       </div>
     ))}
   </div>

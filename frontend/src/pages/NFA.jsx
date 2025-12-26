@@ -62,7 +62,7 @@ function NFA() {
   if (loading) return <FullScreenLoader />;
 
   return (
-    <div className="min-h-screen bg-black px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-transparent relative z-10 ">
       {/* ---------------- HERO ---------------- */}
       <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
         <div
@@ -166,7 +166,7 @@ function NFA() {
     </h1>
   </div>
 
-  <button onClick={openFirstModal} className="w-full flex justify-center">
+  <button onClick={openFirstModal}  className="flex justify-center items-center mt-6">
     <CustomButton text="Sell Now" />
   </button>
 </div>
@@ -207,7 +207,7 @@ function NFA() {
       </div>
     </div>
 
-    <div className="mt-6 flex justify-center items-center px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-center items-center mt-4">
       <Link to="/buy-nfa" state={{ item }} className="cursor-pointer flex justify-center w-full">
         <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
       </Link>

@@ -26,31 +26,32 @@ export default function News() {
   return (
     <section className="w-full z-10 flex justify-center items-start px-4 md:px-6 py-10 md:py-12 relative">
       {/* Background effects */}
-      <div
-        style={{ bottom: "890px", right: "110px" }}
-        className="absolute
-          w-[120px] h-[120px]
-          md:w-[220px] md:h-[220px]
-          rounded-full
-          bg-gradient-to-b from-blue-500/50 via-blue-800/60 to-white/0
-          blur-[60px] md:blur-[80px]
-          shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
-                  0_0_80px_40px_rgba(59,130,246,0.3),
-                  0_0_160px_80px_rgba(59,130,246,0.15)]"
-      ></div>
+<div
+  style={{ bottom: "890px", right: "110px" }}
+  className="absolute -z-10
+    w-[120px] h-[120px]
+    md:w-[220px] md:h-[220px]
+    rounded-full
+     from-blue-500/50 via-blue-800/60 to-white/0
+    blur-[60px] md:blur-[90px]
+    shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
+            0_0_80px_40px_rgba(59,130,246,0.3),
+            0_0_160px_80px_rgba(59,130,246,0.15)]"
+/>
 
-      <div
-        style={{ bottom: "90px", right: "100px" }}
-        className="absolute
-          w-[120px] h-[120px]
-          md:w-[220px] md:h-[220px]
-          rounded-full
-          bg-gradient-to-b from-blue-500/50 via-blue-600/60 to-white/20
-          blur-[60px] md:blur-[80px]
-          shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
-                  0_0_80px_40px_rgba(59,130,246,0.3),
-                  0_0_160px_80px_rgba(59,130,246,0.15)]"
-      ></div>
+<div
+  style={{ bottom: "90px", right: "100px" }}
+  className="absolute -z-10
+    w-[120px] h-[120px]
+    md:w-[220px] md:h-[220px]
+    rounded-full
+    bg-gradient-to-b from-blue-500/50 via-blue-600/60 to-white/20
+    blur-[60px] md:blur-[100px]
+    shadow-[0_0_30px_15px_rgba(59,130,246,0.45),
+            0_0_80px_40px_rgba(59,130,246,0.3),
+            0_0_160px_80px_rgba(59,130,246,0.15)]"
+/>
+
 
       <GlowingOrb Xaxis={220} Yaxis={400} />
 
@@ -65,11 +66,12 @@ export default function News() {
               onClick={() => handleNewsClick(item)}
             >
               <img
-                src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
-                alt={item.heading}
-                className="w-full max-h-[350px] object-cover rounded-lg"
-              />
-              <div className="flex flex-col gap-3 pt-2 w-full">
+  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+  alt={item.heading}
+  className="relative z-10 w-full max-h-[350px] object-cover rounded-lg"
+/>
+
+<div className="relative z-20 flex flex-col gap-3 pt-2 w-full">
                 <h3 className="text-white text-xl sm:text-2xl font-bold uppercase font-goldman w-full">
                   {item.heading.length > 50
                     ? item.heading.slice(0, 50) + "..."
