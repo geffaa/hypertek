@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaArrowLeft, FaShareAlt } from "react-icons/fa";
-import NewsHeroImage from "../assets/newsheading.png"
+import { NewsImage_Url } from "../Config";
+
 
 export default function NewsDetail() {
   const location = useLocation();
@@ -51,11 +52,26 @@ export default function NewsDetail() {
     <div className="min-h-screen bg-black text-white font-sans relative mt-24">
           {/* Featured Image */}
         <div className="mb-8">
-          <img
-            src={NewsHeroImage}
-            alt={newsItem.heading}
-            className="w-full h-auto max-h-[500px] object-cover rounded-lg"
-          />
+        <img
+  src={
+    newsItem.image
+      ? `${NewsImage_Url}${newsItem.image.replace("/temp/", "/news/")}`
+      : ""
+  }
+  alt={newsItem.heading}
+  className="
+    w-screen
+    max-h-[420px]
+    object-cover
+    relative
+    left-1/2
+    right-1/2
+    -ml-[50vw]
+    -mr-[50vw]
+  "
+/>
+
+
         </div>
 
       {/* Background Effects */}

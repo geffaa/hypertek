@@ -40,27 +40,60 @@ function Footer() {
             <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
           </Link>
 
-          {/* Menu + Socials */}
-          <div className="flex flex-col items-end gap-5">
-            <nav className="flex gap-8 text-sm font-medium">
-              {menuItems.map((item, idx) => (
-                <Link
-                  key={idx}
-                  to={item.path}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="hover:text-gray-400 transition"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+         {/* Menu + Socials */}
+<div className="flex flex-col items-end gap-5">
+  <nav className="flex gap-8 text-sm font-medium">
+    {menuItems.map((item, idx) => (
+      <Link
+        key={idx}
+        to={item.path}
+        onClick={() => window.scrollTo(0, 0)}
+        className="hover:text-gray-400 transition"
+      >
+        {item.name}
+      </Link>
+    ))}
+  </nav>
 
-            <div className="flex gap-4">
-              <img src={DiscordImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
-              <img src={SkypeImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
-              <img src={TelegramImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
-            </div>
-          </div>
+  <div className="flex gap-4">
+    <a
+      href="https://discord.com"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <img
+        src={DiscordImg}
+        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+        alt="Discord"
+      />
+    </a>
+
+    <a
+      href="https://x.com"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <img
+        src={SkypeImg}
+        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+        alt="X.com"
+      />
+    </a>
+
+    <a
+      href="https://telegram.org"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <img
+        src={TelegramImg}
+        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+        alt="Telegram"
+      />
+    </a>
+  </div>
+</div>
+
         </div>
 
         {/* Desktop copyright */}

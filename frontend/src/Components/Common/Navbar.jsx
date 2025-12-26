@@ -327,12 +327,12 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                 About Us
               </Link>
               <Link
-                to="#"
-                onClick={(e) => e.preventDefault()}
-                className="hover:text-blue-300 transition-colors duration-200"
-              >
-                News
-              </Link>
+  to="/more-news"
+  className="hover:text-blue-300 transition-colors duration-200"
+>
+  News
+</Link>
+
 
               {/* Social Dropdown */}
               <div
@@ -346,60 +346,41 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                 </button>
 
                 {socialOpen && (
-                  <div className="absolute top-full left-0  w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(e) => e.preventDefault()}
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      // onClick={() => setSocialOpen(false)}
-                    >
-                      <img
-                        src={DiscordImg}
-                        alt="Discord"
-                        className="w-[19px] h-[16px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        Discord
-                      </span>
-                    </a>
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      // onClick={() => setSocialOpen(false)}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <img
-                        src={XImg}
-                        alt="X.com"
-                        className="w-[18px] h-[18px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        X.com
-                      </span>
-                    </a>
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                      // onClick={() => setSocialOpen(false)}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <img
-                        src={TelegramImg}
-                        alt="Telegram"
-                        className="w-[15px] h-[15px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        Telegram
-                      </span>
-                    </a>
-                  </div>
-                )}
+  <div className="absolute top-full left-0 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
+    
+    <a
+      href="https://discord.gg"
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+    >
+      <img src={DiscordImg} alt="Discord" className="w-[19px] h-[16px]" />
+      <span className="text-white text-sm font-semibold">Discord</span>
+    </a>
+
+    <a
+      href="https://x.com"
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+    >
+      <img src={XImg} alt="X.com" className="w-[18px] h-[18px]" />
+      <span className="text-white text-sm font-semibold">X.com</span>
+    </a>
+
+    <a
+      href="https://t.me"
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+    >
+      <img src={TelegramImg} alt="Telegram" className="w-[15px] h-[15px]" />
+      <span className="text-white text-sm font-semibold">Telegram</span>
+    </a>
+
+  </div>
+)}
+
               </div>
             </div>
           </div>
