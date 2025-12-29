@@ -1,16 +1,121 @@
+// // Service/blockchain.js
+// import { ethers } from "ethers";
+// import dotenv from 'dotenv';
+// import fs from 'fs';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+
+// dotenv.config();
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// // Load ABIs with better error handling
+// function loadABI(filename) {
+//   const possiblePaths = [
+//     path.join(__dirname, `../abis/${filename}`),
+//     path.join(__dirname, `../../abis/${filename}`),
+//     path.join(process.cwd(), `abis/${filename}`),
+//     path.join(process.cwd(), `backend/abis/${filename}`)
+//   ];
+
+//   for (const abiPath of possiblePaths) {
+//     if (fs.existsSync(abiPath)) {
+//       const abi = JSON.parse(fs.readFileSync(abiPath, 'utf-8'));
+//       console.log(`✅ ${filename} loaded from: ${abiPath}`);
+//       return abi;
+//     }
+//   }
+
+//   console.warn(`⚠️  ${filename} not found. Please create the ABI file.`);
+//   return [];
+// }
+
+// const MyNFTAbi = loadABI('MyNFT.json');
+// const MarketplaceAbi = loadABI('Marketplace.json');
+
+// // Initialize provider and wallet
+// let provider, wallet, nftContract, marketContract;
+
+// try {
+//   if (!process.env.ALCHEMY_RPC_URL) {
+//     throw new Error('ALCHEMY_RPC_URL not found in environment variables');
+//   }
+
+//   provider = new ethers.JsonRpcProvider(process.env.ALCHEMY_RPC_URL);
+//   console.log('✅ Provider initialized');
+
+//   if (process.env.DEPLOYER_PRIVATE_KEY) {
+//     wallet = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY, provider);
+//     console.log('✅ Wallet initialized:', wallet.address);
+//   } else {
+//     console.warn('⚠️  DEPLOYER_PRIVATE_KEY not found.');
+//   }
+
+//   // Initialize NFT Contract
+//   if (process.env.MYNFT_ADDRESS && MyNFTAbi.length > 0 && wallet) {
+//     nftContract = new ethers.Contract(
+//       process.env.MYNFT_ADDRESS,
+//       MyNFTAbi,
+//       wallet
+//     );
+//     console.log('✅ NFT Contract initialized:', process.env.MYNFT_ADDRESS);
+//   }
+
+//   // Initialize Marketplace Contract
+//   if (process.env.MARKETPLACE_ADDRESS && MarketplaceAbi.length > 0 && wallet) {
+//     marketContract = new ethers.Contract(
+//       process.env.MARKETPLACE_ADDRESS,
+//       MarketplaceAbi,
+//       wallet
+//     );
+//     console.log('✅ Marketplace Contract initialized:', process.env.MARKETPLACE_ADDRESS);
+//   }
+
+// } catch (error) {
+//   console.error('❌ Blockchain initialization error:', error.message);
+// }
+
+// // Helper function to parse ETH to Wei
+// export function parseEther(ethAmount) {
+//   return ethers.parseEther(ethAmount.toString());
+// }
+
+// // Helper function to format Wei to ETH
+// export function formatEther(weiAmount) {
+//   return ethers.formatEther(weiAmount);
+// }
+
+// // Helper to get transaction receipt and extract events
+// export async function waitForTransaction(tx) {
+//   const receipt = await tx.wait();
+//   return receipt;
+// }
+
+// export {
+//   provider,
+//   wallet,
+//   nftContract,
+//   marketContract,
+//   ethers,
+//   MyNFTAbi,
+//   MarketplaceAbi
+// };
+
+
 // Service/blockchain.js
 import { ethers } from "ethers";
-import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load ABIs with better error handling
+// ---------- ABI LOADER ----------
 function loadABI(filename) {
   const possiblePaths = [
     path.join(__dirname, `../abis/${filename}`),
@@ -21,75 +126,93 @@ function loadABI(filename) {
 
   for (const abiPath of possiblePaths) {
     if (fs.existsSync(abiPath)) {
-      const abi = JSON.parse(fs.readFileSync(abiPath, 'utf-8'));
       console.log(`✅ ${filename} loaded from: ${abiPath}`);
-      return abi;
+      return JSON.parse(fs.readFileSync(abiPath, "utf-8"));
     }
   }
 
-  console.warn(`⚠️  ${filename} not found. Please create the ABI file.`);
-  return [];
+  throw new Error(`❌ ABI file not found: ${filename}`);
 }
 
-const MyNFTAbi = loadABI('MyNFT.json');
-const MarketplaceAbi = loadABI('Marketplace.json');
+const MyNFTAbi = loadABI("MyNFT.json");
+const MarketplaceAbi = loadABI("Marketplace.json");
 
-// Initialize provider and wallet
-let provider, wallet, nftContract, marketContract;
+// ---------- NETWORK SELECTION ----------
+const isLocal = process.env.NODE_ENV !== "production";
 
-try {
-  if (!process.env.ALCHEMY_RPC_URL) {
-    throw new Error('ALCHEMY_RPC_URL not found in environment variables');
-  }
+const RPC_URL = isLocal
+  ? process.env.LOCAL_RPC_URL || "http://127.0.0.1:8545"
+  : process.env.ALCHEMY_RPC_URL;
 
-  provider = new ethers.JsonRpcProvider(process.env.ALCHEMY_RPC_URL);
-  console.log('✅ Provider initialized');
-
-  if (process.env.DEPLOYER_PRIVATE_KEY) {
-    wallet = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY, provider);
-    console.log('✅ Wallet initialized:', wallet.address);
-  } else {
-    console.warn('⚠️  DEPLOYER_PRIVATE_KEY not found.');
-  }
-
-  // Initialize NFT Contract
-  if (process.env.MYNFT_ADDRESS && MyNFTAbi.length > 0 && wallet) {
-    nftContract = new ethers.Contract(
-      process.env.MYNFT_ADDRESS,
-      MyNFTAbi,
-      wallet
-    );
-    console.log('✅ NFT Contract initialized:', process.env.MYNFT_ADDRESS);
-  }
-
-  // Initialize Marketplace Contract
-  if (process.env.MARKETPLACE_ADDRESS && MarketplaceAbi.length > 0 && wallet) {
-    marketContract = new ethers.Contract(
-      process.env.MARKETPLACE_ADDRESS,
-      MarketplaceAbi,
-      wallet
-    );
-    console.log('✅ Marketplace Contract initialized:', process.env.MARKETPLACE_ADDRESS);
-  }
-
-} catch (error) {
-  console.error('❌ Blockchain initialization error:', error.message);
+if (!RPC_URL) {
+  throw new Error("❌ RPC URL not configured");
 }
 
-// Helper function to parse ETH to Wei
-export function parseEther(ethAmount) {
-  return ethers.parseEther(ethAmount.toString());
+// ---------- PROVIDER ----------
+const provider = new ethers.JsonRpcProvider(RPC_URL);
+console.log("✅ Connected RPC:", RPC_URL);
+
+// ---------- WALLET ----------
+// ---------- WALLET ----------
+// Use HARDHAT_PRIVATE_KEY for local development
+const privateKey = isLocal 
+  ? process.env.HARDHAT_PRIVATE_KEY 
+  : process.env.DEPLOYER_PRIVATE_KEY || process.env.SEPOLIA_PRIVATE_KEY;
+
+if (!privateKey) {
+  throw new Error("❌ Private key missing. Check .env file for HARDHAT_PRIVATE_KEY or DEPLOYER_PRIVATE_KEY");
 }
 
-// Helper function to format Wei to ETH
-export function formatEther(weiAmount) {
-  return ethers.formatEther(weiAmount);
+const wallet = new ethers.Wallet(privateKey, provider);
+
+console.log("✅ Wallet:", wallet.address);
+console.log("✅ Expected for local:", "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+
+// Verify it's the correct wallet
+if (isLocal && wallet.address !== "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266") {
+  console.warn("⚠️  WARNING: Wallet address mismatch!");
+  console.warn("Expected: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+  console.warn("Got:", wallet.address);
+  console.warn("Check HARDHAT_PRIVATE_KEY in .env file");
 }
 
-// Helper to get transaction receipt and extract events
+console.log("✅ Wallet:", wallet.address);
+
+// ---------- CONTRACTS ----------
+if (!process.env.MYNFT_ADDRESS) {
+  throw new Error("❌ MYNFT_ADDRESS missing");
+}
+
+if (!process.env.MARKETPLACE_ADDRESS) {
+  throw new Error("❌ MARKETPLACE_ADDRESS missing");
+}
+
+const nftContract = new ethers.Contract(
+  process.env.MYNFT_ADDRESS,
+  MyNFTAbi,
+  wallet
+);
+
+const marketContract = new ethers.Contract(
+  process.env.MARKETPLACE_ADDRESS,
+  MarketplaceAbi,
+  wallet
+);
+
+console.log("✅ NFT Contract:", nftContract.target);
+console.log("✅ Marketplace Contract:", marketContract.target);
+
+// ---------- HELPERS ----------
+export function parseEther(value) {
+  return ethers.parseEther(value.toString());
+}
+
+export function formatEther(value) {
+  return ethers.formatEther(value);
+}
+
 export async function waitForTransaction(tx) {
-  const receipt = await tx.wait();
-  return receipt;
+  return await tx.wait();
 }
 
 export {
