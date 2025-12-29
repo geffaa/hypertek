@@ -8,7 +8,7 @@ import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
   MARKETPLACE_ABI,
-  NFT_ABI, 
+  NFT_ABI,  
 } from "../../Web3/Config";
 
 import CustomButton from "../Buttons/Button1";
@@ -250,82 +250,85 @@ function Buy1() {
   };
 
   // 3️⃣ Handle Web3 purchase with wallet balance check
-  const handleWeb3Purchase = async () => {
+ const handleWeb3Purchase = async () => {
+  try {
+    if (!window.ethereum) {
+      toast.error("MetaMask not installed");
+      return;
+    }
+
+    if (!user?.id) {
+      toast.error("Please login first");
+      return;
+    }
+
+    // Request wallet connection
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const buyer = await signer.getAddress();
+
+    // ✅ Get wallet balance
+    const balanceBigInt = await provider.getBalance(buyer); // returns BigInt
+    const balanceEth = ethers.formatEther(balanceBigInt); // convert to ETH
+    console.log("Wallet balance in ETH:", balanceEth);
+
+    if (Number(balanceEth) <= 0) {
+      toast.error("Wallet has no ETH for gas");
+      return;
+    }
+
+    const marketplace = new ethers.Contract(
+      MARKETPLACE_ADDRESS,
+      MARKETPLACE_ABI,
+      signer
+    );
+
+    const tokenIdToBuy = item.tokenId || 0;
+    let listingExists = false;
+
+    // Check if listing exists
     try {
-      if (!window.ethereum) {
-        toast.error("MetaMask not installed");
+      const listing = await marketplace.getListing(NFT_ADDRESS, tokenIdToBuy);
+      if (listing.active) {
+        listingExists = true;
+        toast.loading("Confirm purchase in MetaMask...");
+
+        const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenIdToBuy, {
+          value: listing.price || listing[1], // price from contract
+        });
+        await tx.wait();
+        toast.success("NFT purchased successfully! 🎉");
+        setIsSecondOpen(false);
         return;
-      }
-
-      if (!user?.id) {
-        toast.error("Please login first");
-        return;
-      }
-
-      // Request wallet connection
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const buyer = await signer.getAddress();
-
-      const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
-        MARKETPLACE_ABI,
-        signer
-      );
-
-      // Use the correct tokenId from item
-      const tokenIdToBuy = item.tokenId || 0; // Make sure item has tokenId
-      let listingExists = false;
-
-      // Check if listing exists
-      try {
-        const listing = await marketplace.getListing(NFT_ADDRESS, tokenIdToBuy);
-        if (listing.active) {
-          listingExists = true;
-          toast.loading("Confirm purchase in MetaMask...");
-
-          const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenIdToBuy, {
-            value: listing.price || listing[1], // price from contract
-          });
-          await tx.wait();
-          toast.success("NFT purchased successfully! 🎉");
-
-          // No need to mint backend if NFT already exists
-          setIsSecondOpen(false);
-          return;
-        }
-      } catch (err) {
-        console.log(
-          "No active listing found, will mint and list automatically."
-        );
-      }
-
-      // If no listing exists, mint via backend + list automatically
-      if (!listingExists) {
-        const result = await createListingAutomatically(signer, buyer);
-
-        if (result.success) {
-          toast.success(
-            `NFT listed! TokenId: ${result.tokenId}, Price: ${result.price} ETH`
-          );
-
-          const tryAgain = confirm(
-            `Listing created successfully!\n\nTokenId: ${result.tokenId}\nPrice: ${result.price} ETH\n\nClick "Buy Now" again to purchase!`
-          );
-          if (tryAgain) toast.info("Please click 'Buy Now' again");
-        } else {
-          toast.error("Failed to create listing: " + result.error);
-        }
       }
     } catch (err) {
-      console.error("Purchase error:", err);
-      const message = err.message?.includes("insufficient funds")
-        ? "Insufficient ETH to complete transaction"
-        : err.reason || err.message || "Transaction failed";
-      toast.error(message);
+      console.log("No active listing found, will mint and list automatically.");
     }
-  };
+
+    if (!listingExists) {
+      const result = await createListingAutomatically(signer, buyer);
+      if (result.success) {
+        toast.success(
+          `NFT listed! TokenId: ${result.tokenId}, Price: ${result.price} ETH`
+        );
+        const tryAgain = confirm(
+          `Listing created successfully!\n\nTokenId: ${result.tokenId}\nPrice: ${result.price} ETH\n\nClick "Buy Now" again to purchase!`
+        );
+        if (tryAgain) toast.info("Please click 'Buy Now' again");
+      } else {
+        toast.error("Failed to create listing: " + result.error);
+      }
+    }
+  } catch (err) {
+    console.error("Purchase error:", err);
+    const message = err.message?.includes("insufficient funds")
+      ? "Insufficient ETH to complete transaction"
+      : err.reason || err.message || "Transaction failed";
+    toast.error(message);
+  }
+};
+
 
   return (
     <div className="flex flex-col text-white px-4">
