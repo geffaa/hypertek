@@ -180,6 +180,7 @@ export async function createCollection(req, res) {
 // Replace your existing serverMint function with this one
 export async function serverMint(req, res) {
   console.log("Incoming mint request:", req.body);
+  
 
   try {
     console.log("====================================");
@@ -228,11 +229,16 @@ export async function serverMint(req, res) {
       const balance = await provider.getBalance(nftContract.runner.getAddress());
       console.log("Wallet balance:", ethers.formatEther(balance), "ETH");
       
-      if (balance === 0n) {
-        return res.status(500).json({ 
-          error: "Wallet has no ETH to pay for gas fees" 
-        });
-      }
+     // Correct way to get wallet address and balance
+const walletAddress = await wallet.getAddress();  // <- use the wallet instance directly
+
+console.log("Backend wallet address:", walletAddress);
+console.log("Backend wallet balance:", ethers.formatEther(balance), "ETH");
+
+if (balance === 0n) {
+  return res.status(500).json({ error: "Wallet has no ETH to pay for gas fees" });
+}
+
     } catch (err) {
       console.error("Error checking provider/network:", err);
       return res.status(500).json({ 

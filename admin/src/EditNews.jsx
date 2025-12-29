@@ -28,26 +28,27 @@ useEffect(() => {
       console.log("Your news response:", res.data.data);
 
       if (res.data) {
-       const newsData = res.data.data.map((item) => {
-  // Get the image file name only
+     const newsData = res.data.data.map((item) => {
   const imageName = item.image ? item.image.split("/").pop() : null;
 
-  // Construct the proper URL
   const imageUrl = imageName
-    ? `${Image_Base_Url}/uploads/news/${imageName}` // <-- use correct folder 'news'
+    ? `${Image_Base_Url}/uploads/news/${imageName}`
     : null;
-
-  console.log("Your complete image URL:", imageUrl);
 
   return {
     id: item._id,
     name: item.heading,
-    image: imageUrl, // <-- use dynamic URL here
-    supply: new Date(item.createdAt).toLocaleDateString(),
+    image: imageUrl,
+    supply: new Date(item.createdAt).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }),
     status: item.status === "active",
     description: item.description,
   };
 });
+
 
 
         console.log("Processed newsData:", newsData); // Full URLs with file names
@@ -336,12 +337,12 @@ const handleEditNews = (news) => {
                       />
                     </td>
                   </Link>
-                  <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+                  <td className="px-6 py-4 text-[#FFFFFFC4] text-[16px] font-medium w-[179px]">
                     {col.name.length > 20
                       ? col.name.slice(0, 20) + "..."
                       : col.name}
                   </td>
-                  <td className="px-6 py-4 text-[#FFFFFFC4]  font-medium">
+                  <td className="px-6 py-4 text-[16px] text-[#FFFFFFC4]  w-[150px] font-medium">
                     {col.supply}
                   </td>
                   <td className="px-6 py-4 text-[#FFFFFFC4]  font-medium">
