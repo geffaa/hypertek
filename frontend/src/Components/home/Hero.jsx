@@ -61,57 +61,14 @@ export default function Hero() {
     console.log("Download button clicked!");
   }}
 >
-  <div className="flex items-center transition-all duration-300 hover:scale-90 sm:scale-100">
-    {/* Left small bar */}
-    <div
-      className="bg-[#002AA8] mr-0.5 transition-all duration-300 hover:bg-[#0034d6]"
-      style={{
-        width: "0.2rem",
-        height: "1.3rem",
-      }}
-    ></div>
-
-    {/* Left angled border */}
-    <div
-      className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px] transition-all duration-300 "
-      style={{
-        borderStyle: "solid",
-        borderWidth: "0.375rem 0.25rem 0.375rem 0",
-      }}
-    ></div>
-
-    {/* Main button area */}
-<div
-  className="
-    flex items-center justify-center
-    text-white font-inter font-medium
-    text-[16px] leading-[1] tracking-[0] text-center capitalize
-    md:w-[160px] md:h-[32px]
-    transition-all duration-300
-    hover:shadow-[0_0_10px_#002AA8]
-  "
-  style={{
-    border: "2.24px solid #002AA8",
-  }}
->
-  Download Game
-</div>
-
-
-    {/* Right angled border */}
-    <div
-      className="border-[#002AA8] h-[30.79px] md:w-[7.97px] w-[5.73px] md:h-[42.86px] transition-all duration-300 hover:border-[#0034d6]"
-      style={{
-        borderStyle: "solid",
-        borderWidth: "0.25rem 0 0.375rem 0.25rem",
-      }}
-    ></div>
-
-    {/* Right small bar */}
-    <div
-      className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] transition-all duration-300 hover:bg-[#0034d6]"
-    ></div>
-  </div>
+    {/* Download Game Button */}
+    <Link
+    to="#"
+    className="hidden md:block"
+    onClick={(e) => e.preventDefault()}
+  >
+    <CustomButton2 text="Download Game" />
+  </Link>
 </Link>
 
         </div>
