@@ -17,7 +17,6 @@ function Footer() {
 
   return (
     <footer className="w-full text-white relative z-10 overflow-hidden">
-
       {/* ===== Background Glow (same as News) ===== */}
       <div
         className="pointer-events-none absolute bottom-0 right-1/4
@@ -28,72 +27,57 @@ function Footer() {
       />
 
       <div className="mx-auto max-w-[1500px] px-6">
-
         {/* Divider */}
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600 to-transparent mt-20 mb-10" />
 
         {/* ================= DESKTOP ================= */}
         <div className="hidden sm:flex justify-between items-start">
-
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
           </Link>
 
-         {/* Menu + Socials */}
-<div className="flex flex-col items-end gap-5">
-  <nav className="flex gap-8 text-sm font-medium">
-    {menuItems.map((item, idx) => (
-      <Link
-        key={idx}
-        to={item.path}
-        onClick={() => window.scrollTo(0, 0)}
-        className="hover:text-gray-400 transition"
-      >
-        {item.name}
-      </Link>
-    ))}
-  </nav>
+          {/* Menu + Socials */}
+          <div className="flex flex-col items-end gap-5">
+            <nav className="flex gap-8 text-sm font-medium">
+              {menuItems.map((item, idx) => (
+                <Link
+                  key={idx}
+                  to={item.path}
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="hover:text-gray-400 transition"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
 
-  <div className="flex gap-4">
-    <a
-      href="https://discord.com"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <img
-        src={DiscordImg}
-        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-        alt="Discord"
-      />
-    </a>
+            <div className="flex gap-4">
+              <a href="https://discord.com" target="_blank" rel="noreferrer">
+                <img
+                  src={DiscordImg}
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="Discord"
+                />
+              </a>
 
-    <a
-      href="https://x.com"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <img
-        src={SkypeImg}
-        className="w-3.5 h-3 opacity-80 hover:opacity-100 cursor-pointer"
-        alt="X.com"
-      />
-    </a>
+              <a href="https://x.com" target="_blank" rel="noreferrer">
+                <img
+                  src={SkypeImg}
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="X.com"
+                />
+              </a>
 
-    <a
-      href="https://telegram.org"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <img
-        src={TelegramImg}
-        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-        alt="Telegram"
-      />
-    </a>
-  </div>
-</div>
-
+              <a href="https://telegram.org" target="_blank" rel="noreferrer">
+                <img
+                  src={TelegramImg}
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="Telegram"
+                />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Desktop copyright */}
@@ -102,30 +86,46 @@ function Footer() {
         </div>
 
         {/* ================= MOBILE ================= */}
-        <div className="sm:hidden flex flex-col items-center gap-6 pb-8">
-          <Link to="/">
-            <img src={Logo} alt="Logo" className="h-9 w-auto object-contain" />
-          </Link>
-
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium text-center">
+        <div className="sm:hidden flex justify-between items-start pb-8 text-sm">
+          {/* LEFT MENU */}
+          <div className="flex flex-col gap-2">
             {menuItems.map((item, idx) => (
-              <Link key={idx} to={item.path} className="hover:text-gray-400 transition">
+              <Link
+                key={idx}
+                to={item.path}
+                onClick={() => window.scrollTo(0, 0)}
+                className="text-gray-300 hover:text-white transition"
+              >
                 {item.name}
               </Link>
             ))}
-          </nav>
-
-          <div className="flex gap-5">
-            <img src={DiscordImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
-            <img src={SkypeImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
-            <img src={TelegramImg} className="w-4 h-4 opacity-80 hover:opacity-100" />
           </div>
 
-          <div className="text-xs text-gray-300 text-center">
-            © 2025. All Right Reserved
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col items-end gap-4">
+            {/* Copyright */}
+            <p className="text-xs text-gray-400">© 2025. All Right Reserved</p>
+
+            {/* Social Icons */}
+            <div className="flex gap-4">
+              <img
+                src={DiscordImg}
+                className="w-4 h-4 opacity-80 hover:opacity-100"
+                alt="Discord"
+              />
+              <img
+                src={SkypeImg}
+                className="w-4 h-4 opacity-80 hover:opacity-100"
+                alt="X"
+              />
+              <img
+                src={TelegramImg}
+                className="w-4 h-4 opacity-80 hover:opacity-100"
+                alt="Telegram"
+              />
+            </div>
           </div>
         </div>
-
       </div>
     </footer>
   );
