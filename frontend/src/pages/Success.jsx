@@ -7,7 +7,8 @@ import BackHome from "../assets/images/backhome.png";
 
 function Success() {
   return (
-    <div className="flex justify-center flex-col items-center gap-8 mt-48 md:mt-24 ">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8">
+
       {/* Success Icon */}
       <div className="relative w-24 h-24">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
@@ -25,7 +26,8 @@ function Success() {
         </svg>
 
         {/* Check icon */}
-        <div className="absolute -top-2 -right-1 rounded-full p-1">
+        <div className="absolute -top-1 -right-1 rounded-full p-1">
+
           <FontAwesomeIcon
             icon={faCheck}
             className="text-[#32D583] h-16 w-16"
@@ -36,12 +38,14 @@ function Success() {
       {/* Text Content */}
       <div className="text-center w-full max-w-md">
         {/* Success Message */}
-        <h1 className="text-xl font-semibold text-white">
+        <h1 className="text-lg md:text-xl font-semibold text-white leading-snug">
+
           Your request has been sent <br /> successfully
         </h1>
 
         {/* View Collections Button */}
-        <div className="my-4 flex justify-center text-[10px]">
+       <div className="my-5 flex justify-center text-[10px]">
+
           <Link to="/">
           {/* <CustomButton text="View | My Collections" /> */}
           <div className="flex items-center">
@@ -50,7 +54,7 @@ function Success() {
         className="bg-[#002AA8] mr-0.5"
         style={{
           width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
+          height: "1.1rem", // ~21.93px
         }}
       ></div>
 
@@ -59,7 +63,7 @@ function Success() {
         className="border-[#002AA8]"
         style={{
           width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
+          height: "2.4rem", // ~42.86px
           borderStyle: "solid",
           borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
         }}
@@ -67,23 +71,29 @@ function Success() {
 
       {/* Main button area */}
       <div
-        className="flex items-center font-bold justify-center text-white font-medium"
-        style={{
-          width: "10.5rem", // ~168px
-          height: "2.5rem", // ~39.59px
-          background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-          border: "0.15rem solid #002AA8", // ~2.42px
-        }}
-      >
-        View | My Collection
-      </div>
-
+  className="flex items-center justify-center text-white"
+  style={{
+    width: "9.5rem",              // 🔽 slightly smaller
+    height: "2.2rem",             // 🔽 slightly smaller
+    background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+    border: "0.15rem solid #002AA8",
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 500,
+    fontSize: "13.19px",
+    lineHeight: "100%",
+    letterSpacing: "0%",
+    textTransform: "capitalize",
+    textAlign: "center",
+  }}
+>
+  View | My Collection
+</div>
       {/* Right angled border */}
       <div
         className="border-[#002AA8]"
         style={{
           width: "0.5rem", // ~7.97px
-          height: "2.7rem", // ~42.86px
+          height: "2.4rem", // ~42.86px
           borderStyle: "solid",
           borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
         }}
@@ -94,7 +104,7 @@ function Success() {
         className="bg-[#002AA8]"
         style={{
           width: "0.25rem", // ~3.99px
-          height: "1.3rem", // ~21.93px
+          height: "1.1rem", // ~21.93px
         }}
       ></div>
     </div>
@@ -133,7 +143,8 @@ function Success() {
                 marginLeft: "4px", // reduced space for tighter look
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 500,
-                fontSize: "20px",
+                fontSize: "18px",
+
                 lineHeight: "100%",
                 textTransform: "capitalize",
                 color: "white",
@@ -143,7 +154,7 @@ function Success() {
             </span>
           </Link>
            {/* Divider Line */}
-          <div className="w-1/3 bg-white h-0.5 mb-2"></div>
+<div className="w-32 bg-white h-[2px] mb-3"></div>
 
         </div>
       </div>
