@@ -5,7 +5,6 @@ import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
-import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -17,9 +16,8 @@ import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-
 /// logout icions
-import logoutImage from "../../assets/images/login/logout.png"
+import logoutImage from "../../assets/images/login/logout.png";
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
 import XImg from "../../assets/images/skipe.png";
@@ -133,7 +131,7 @@ export default function Navbar() {
         // navigate("/signin")
         setIsLogin(true);
       }
-    }  catch (err) {
+    } catch (err) {
       console.error("Invalid token:", err);
       dispatch(logout);
       setIsLogin(false); // invalid token → not logged in
@@ -159,23 +157,20 @@ export default function Navbar() {
     };
   }, []);
 
-
-
-  // hide the dropdown if click outside the modal 
+  // hide the dropdown if click outside the modal
   // Hide search suggestions when clicking outside
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setShowDropdown(false);
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
-
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Close mobile menu when clicking on a link
   const closeMobileMenu = () => {
@@ -184,17 +179,12 @@ useEffect(() => {
     setSocialOpen(false);
   };
 
+  /// hide the signup button on the following pages
+  // Paths where Sign Up button should be hidden
+  const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
 
-/// hide the signup button on the following pages 
-// Paths where Sign Up button should be hidden
-const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
-
-
-
-
-/// show only the logout icon on the signup , login and forgot page its client requirement 
-const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
-
+  /// show only the logout icon on the signup , login and forgot page its client requirement
+  const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
 
   // Hide navbar items on these routes
   const hideOnPaths = [
@@ -221,17 +211,15 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
   };
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 md:bg-transparent">
+    <nav className="fixed top-0 left-0 z-50 w-full bg-[#001142CC] md:bg-transparent">
       {/* Container with max-width and centered */}
       <div className="w-full mx-auto max-w-[1300px] px-4 sm:px-6 md:px-2">
-
         {/* Top Section */}
         <div className="w-full py-3 flex items-center justify-between">
           {/* Left: Logo + Desktop Menu */}
           <div className="flex items-center space-x-28">
             <Link to="/" onClick={closeMobileMenu}>
-            <img src={logo} alt="Logo" className="h-10 w-auto mt-2" />
-
+              <img src={logo} alt="Logo" className="h-10 w-auto mt-2" />
             </Link>
             {/* Mobile Search */}
             {isLoggedIn && showSearchBar && (
@@ -268,54 +256,58 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                     <div className="grid grid-cols-3 gap-[30px] w-full h-full mx-auto px-[29px] py-[28px] text-white">
                       {/* Column 1 */}
                       <Link
-  to="/market-place"
-  onClick={() => setShopOpen(false)}
-  className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2 transition-colors"
->
-  <h1 className="text-white font-semibold text-[16px]">Overview</h1>
-  <p className="text-white text-[12px]">
-    See what's new and trending.
-  </p>
-</Link>
+                        to="/market-place"
+                        onClick={() => setShopOpen(false)}
+                        className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                      >
+                        <h1 className="text-white font-semibold text-[16px]">
+                          Overview
+                        </h1>
+                        <p className="text-white text-[12px]">
+                          See what's new and trending.
+                        </p>
+                      </Link>
 
-
-           <Link
-               to="/personal-activity"
-           onClick={() => setShopOpen(false)}
-  className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
->
-  <h1 className="text-white font-semibold text-[16px]">My Assets</h1>
-  <p className="text-white text-[12px]">
-    Track and manage everything you own.
-  </p>
-</Link>
-
+                      <Link
+                        to="/personal-activity"
+                        onClick={() => setShopOpen(false)}
+                        className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                      >
+                        <h1 className="text-white font-semibold text-[16px]">
+                          My Assets
+                        </h1>
+                        <p className="text-white text-[12px]">
+                          Track and manage everything you own.
+                        </p>
+                      </Link>
 
                       {/* Column 2 */}
                       <Link
-                          to="/nfa-expand"
-                            onClick={() => setShopOpen(false)}
-                            className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                              > 
-                                <h1 className="text-white font-semibold text-[16px]">Collectibles</h1>
-                                <p className="text-white text-[12px]">
-                                Track and manage your NFTs.
-  </p>
-</Link>
-
+                        to="/nfa-expand"
+                        onClick={() => setShopOpen(false)}
+                        className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                      >
+                        <h1 className="text-white font-semibold text-[16px]">
+                          Collectibles
+                        </h1>
+                        <p className="text-white text-[12px]">
+                          Track and manage your NFTs.
+                        </p>
+                      </Link>
 
                       {/* Column 3 */}
                       <Link
-                      to="/land"
+                        to="/land"
                         onClick={() => setShopOpen(false)}
-                          className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                              >
-                            <h1 className="text-white font-semibold text-[16px]">Land</h1>
-                              <p className="text-white text-[12px]">
-                                Buy a parcel of land and build on it.
-                                    </p>
-                                  </Link>
-
+                        className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 transition-colors"
+                      >
+                        <h1 className="text-white font-semibold text-[16px]">
+                          Land
+                        </h1>
+                        <p className="text-white text-[12px]">
+                          Buy a parcel of land and build on it.
+                        </p>
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -328,12 +320,11 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                 About Us
               </Link>
               <Link
-  to="/more-news"
-  className="hover:text-blue-300 transition-colors duration-200"
->
-  News
-</Link>
-
+                to="/more-news"
+                className="hover:text-blue-300 transition-colors duration-200"
+              >
+                News
+              </Link>
 
               {/* Social Dropdown */}
               <div
@@ -347,41 +338,56 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                 </button>
 
                 {socialOpen && (
-  <div className="absolute top-full left-0 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
-    
-    <a
-      href="https://discord.gg"
-      target="_blank"
-      rel="noreferrer"
-      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-    >
-      <img src={DiscordImg} alt="Discord" className="w-[19px] h-[16px]" />
-      <span className="text-white text-sm font-semibold">Discord</span>
-    </a>
+                  <div className="absolute top-full left-0 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
+                    <a
+                      href="https://discord.gg"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+                    >
+                      <img
+                        src={DiscordImg}
+                        alt="Discord"
+                        className="w-[19px] h-[16px]"
+                      />
+                      <span className="text-white text-sm font-semibold">
+                        Discord
+                      </span>
+                    </a>
 
-    <a
-      href="https://x.com"
-      target="_blank"
-      rel="noreferrer"
-      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-    >
-      <img src={XImg} alt="X.com" className="w-[18px] h-[18px]" />
-      <span className="text-white text-sm font-semibold">X.com</span>
-    </a>
+                    <a
+                      href="https://x.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+                    >
+                      <img
+                        src={XImg}
+                        alt="X.com"
+                        className="w-[18px] h-[18px]"
+                      />
+                      <span className="text-white text-sm font-semibold">
+                        X.com
+                      </span>
+                    </a>
 
-    <a
-      href="https://t.me"
-      target="_blank"
-      rel="noreferrer"
-      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-    >
-      <img src={TelegramImg} alt="Telegram" className="w-[15px] h-[15px]" />
-      <span className="text-white text-sm font-semibold">Telegram</span>
-    </a>
-
-  </div>
-)}
-
+                    <a
+                      href="https://t.me"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
+                    >
+                      <img
+                        src={TelegramImg}
+                        alt="Telegram"
+                        className="w-[15px] h-[15px]"
+                      />
+                      <span className="text-white text-sm font-semibold">
+                        Telegram
+                      </span>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -453,29 +459,31 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                     />
                   </Link>
                 </div>
-              <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
-  <button 
-    className="flex items-center justify-center w-full h-full"
-    onClick={() => setShowModal(true)}
-  >
-    <img 
-      src={logoutImage} 
-      alt="Logout" 
-      className="w-[20px] h-[20px] brightness-0 invert"
-      style={{ filter: 'brightness(0) invert(1)' }}
-    />
-  </button>
-</div>
+                <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
+                  <button
+                    className="flex items-center justify-center w-full h-full"
+                    onClick={() => setShowModal(true)}
+                  >
+                    <img
+                      src={logoutImage}
+                      alt="Logout"
+                      className="w-[20px] h-[20px] brightness-0 invert"
+                      style={{ filter: "brightness(0) invert(1)" }}
+                    />
+                  </button>
+                </div>
               </div>
-            ) :  (
-  !["/signup", "/signin", "/forgot-password"].includes(location.pathname) && (
-    <div className="hidden md:block">
-      <Link to="/signup">
-        <CustomeButtonLarge text="Sign Up" />
-      </Link>
-    </div>
-  )
-)}
+            ) : (
+              !["/signup", "/signin", "/forgot-password"].includes(
+                location.pathname
+              ) && (
+                <div className="hidden md:block">
+                  <Link to="/signup">
+                    <CustomeButton text="Sign Up" />
+                  </Link>
+                </div>
+              )
+            )}
           </div>
         </div>
 
@@ -535,22 +543,21 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
               </div>
             )}
 
-          {/* About & News */}
-<Link
-  to="/about"
-  className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-  onClick={closeMobileMenu}
->
-  About Us
-</Link>
-<Link
-  to="/more-news"
-  className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-  onClick={closeMobileMenu}
->
-  News
-</Link>
-
+            {/* About & News */}
+            <Link
+              to="/about"
+              className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
+              onClick={closeMobileMenu}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/more-news"
+              className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
+              onClick={closeMobileMenu}
+            >
+              News
+            </Link>
 
             {/* Social */}
             <button
@@ -610,19 +617,19 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
                       className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200"
                     />
                   </Link>
-                 <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
-  <button 
-    className="flex items-center justify-center w-full h-full"
-    onClick={() => setShowModal(true)}
-  >
-    <img 
-      src={logoutImage} 
-      alt="Logout" 
-      className="w-[20px] h-[20px] brightness-0 invert"
-      style={{ filter: 'brightness(0) invert(1)' }}
-    />
-  </button>
-</div>
+                  <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
+                    <button
+                      className="flex items-center justify-center w-full h-full"
+                      onClick={() => setShowModal(true)}
+                    >
+                      <img
+                        src={logoutImage}
+                        alt="Logout"
+                        className="w-[20px] h-[20px] brightness-0 invert"
+                        style={{ filter: "brightness(0) invert(1)" }}
+                      />
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (
