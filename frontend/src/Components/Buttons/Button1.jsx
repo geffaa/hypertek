@@ -9,14 +9,12 @@ const CustomButton = ({ text }) => {
         flex items-center 
         scale-80 sm:scale-90
         transition-transform duration-300 ease-in-out 
-        md:hover:scale-95   /* Slight zoom out on hover (desktop only) */
-        group                /* enables child hover states */
+        md:hover:scale-95
+        group
       "
     >
       {/* Left small bar */}
-      <div
-        className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] mr-0.5 transition-all duration-300 group-hover:bg-[#0034d6]"
-      ></div>
+      <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] mr-0.5 transition-all duration-300 group-hover:bg-[#0034d6]" />
 
       {/* Left angled border */}
       <div
@@ -25,26 +23,27 @@ const CustomButton = ({ text }) => {
           borderStyle: "solid",
           borderWidth: "0.375rem 0.25rem 0.375rem 0",
         }}
-      ></div>
+      />
 
-     {/* Main button area */}
-     <div
-  className="
+      {/* Main button area */}
+      <div
+        className="
     flex items-center justify-center 
-    text-white font-inter font-medium text-[16px] leading-[1] tracking-[0] text-center
-    md:w-[160px] md:h-[34px]
-    w-[90px] h-[24px]
+    text-white font-inter font-medium 
+    text-[14px] md:text-[15px]
+    leading-[1] text-center
+    md:w-[190px] w-[120px]
+    py-[6px] md:py-[8px]        /* vertical padding added */
     transition-all duration-300 ease-in-out
     group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
   "
-  style={{
-    background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-    border: "0.15rem solid #002AA8",
-  }}
->
-  {text}
-</div>
-
+        style={{
+          background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+          border: "0.15rem solid #002AA8",
+        }}
+      >
+        {text}
+      </div>
 
       {/* Right angled border */}
       <div
@@ -53,10 +52,10 @@ const CustomButton = ({ text }) => {
           borderStyle: "solid",
           borderWidth: "0.25rem 0 0.375rem 0.25rem",
         }}
-      ></div>
+      />
 
       {/* Right small bar */}
-      <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] transition-all duration-300 group-hover:bg-[#0034d6]"></div>
+      <div className="bg-[#002AA8] md:h-[1.5rem] h-[1rem] w-[0.25rem] transition-all duration-300 group-hover:bg-[#0034d6]" />
     </div>
   );
 };
