@@ -35,7 +35,7 @@ function PopularCollections() {
   console.log("your market data are here :", marketData);
 
   return (
-    <section className="relative z-10 w-full px-6 pb-20 overflow-hidden">
+    <section className="relative z-10 w-full px-6 pb-20 ">
       <GlowingOrb Xaxis={180} Yaxis={20} />
       <GlowingOrb Xaxis={700} Yaxis={420} />
 

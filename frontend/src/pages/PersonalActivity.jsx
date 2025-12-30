@@ -196,42 +196,45 @@ if (loading) {
 
             <tbody>
               {/* Example Row with Full Image */}
-             {
-              activityData.slice(0,5).map((item,index)=>(
-                 <tr className=" transition-colors">
-                <td className="px-4 lg:px-6 py-3">
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                      <img
-                        src={land1Image}
-                        alt="Avatar"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <span className="text-sm lg:text-[18px] font-inter font-medium">
-                      {item.name}
-                    </span>
-                  </div>
-                </td>
-                <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">
-                {item.type}
-                </td>
-                <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">
-                  {item.buyer}
-                </td>
-                <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">
-                  {item.seller}
-                </td>
-                <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">
-                  ${item.price}
-                </td>
-                <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter">
-                  {getDaysAgo(item.time)}
-                </td>
-              </tr>
+              {activityData.slice(0, 5).map((item, index) => (
+  <tr key={index} className="transition-colors border-b border-[#0B2A6F]">
+    <td className="px-4 lg:px-6 py-3 align-middle">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
+          <img
+            src={land1Image}
+            alt="Avatar"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <span className="text-sm lg:text-[18px] font-inter font-normal">
+          {item.name}
+        </span>
+      </div>
+    </td>
 
-              ))
-             }
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+      {item.type}
+    </td>
+
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+      {item.buyer}
+    </td>
+
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+      {item.seller}
+    </td>
+
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+      ${item.price}
+    </td>
+
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+      {getDaysAgo(item.time)}
+    </td>
+  </tr>
+))}
+
               {/* Example Row with Cropped Head Image */}
              
             </tbody>

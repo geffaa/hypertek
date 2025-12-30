@@ -5,6 +5,7 @@ import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
+import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -470,7 +471,7 @@ const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
   !["/signup", "/signin", "/forgot-password"].includes(location.pathname) && (
     <div className="hidden md:block">
       <Link to="/signup">
-        <CustomeButton text="Sign Up" />
+        <CustomeButtonLarge text="Sign Up" />
       </Link>
     </div>
   )
