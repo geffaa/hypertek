@@ -339,7 +339,7 @@ function NfaLand() {
           transform: "rotate(0deg)",
           opacity: 1,
           position: "absolute",
-          top: "70px",
+          top: "150px",
           left: "134px",
         
         }}
