@@ -1,106 +1,149 @@
 import React, { useState } from "react";
 import InfoIcon from "../assets/images/info.png";
-import symbol from "../assets/images/login/Symbol.svg.png"; // Wallet icon
+import symbol from "../assets/images/login/Symbol.svg.png";
 
 function WalletConnect() {
   const [isVisible, setIsVisible] = useState(true);
   const [isSecondModalView, setIsSecondModalView] = useState(false);
 
   const closeFirstModal = () => setIsVisible(false);
-
   const handleOnclickFirst = () => {
     setIsVisible(false);
     setIsSecondModalView(true);
   };
-
   const closeSecondModal = () => {
     setIsSecondModalView(false);
-    setIsVisible(true); // ✅ reopen first modal
+    setIsVisible(true);
   };
 
   return (
     <>
-      {/* First Modal */}
-      {isVisible && (
-        <div className="fixed inset-0 flex items-start justify-center z-30 pt-24 px-4 bg-black bg-opacity-60">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 sm:w-[450px] relative text-white">
-            <button
-              onClick={closeFirstModal}
-              className="absolute top-3 right-3 text-white font-bold text-2xl hover:text-gray-300 transition"
-            >
-              ×
-            </button>
+     {/* FIRST POPUP */}
+{isVisible && (
+  <div className="fixed inset-0 z-40 backdrop-blur-md bg-black/40">
 
-            <h2 className="text-white text-lg font-bold text-center my-4">
-              Connect Wallet
-            </h2>
-            <hr className="border-t border-gray-600 my-4" />
+    {/* Connect Wallet Modal */}
+    <div className="
+      absolute top-[20%] left-1/2 -translate-x-1/2
+      bg-[#2b3442]
+      w-[350px]
+      rounded-xl
+      text-white
+      shadow-xl
+    ">
+      <button
+        onClick={closeFirstModal}
+        className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
+      >
+        ×
+      </button>
 
-            {/* Large Screen */}
-            <button onClick={handleOnclickFirst}>
-              <div className="hidden md:flex items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20 w-[25rem]">
-                <img src={symbol} alt="Connect wallet" className="w-10 h-10 object-contain" />
-                <h1 className="text-white font-medium text-lg">MetaMask</h1>
-              </div>
-            </button>
+      <div className="px-5 py-5">
+        <h2 className="text-center font-semibold text-[16px]">
+          Connect Wallet
+        </h2>
 
-            {/* Small Screen */}
-            <button onClick={handleOnclickFirst}>
-              <div className="flex md:hidden items-center justify-center gap-4 p-6 bg-gray-800 border border-gray-700 rounded-xl mt-8 cursor-pointer hover:bg-gray-700 transition h-20 w-[15rem] max-w-[25rem] mx-auto">
-                <img src={symbol} alt="Connect wallet" className="w-10 h-10 object-contain" />
-                <h1 className="text-white font-medium text-lg">MetaMask</h1>
-              </div>
-            </button>
-          </div>
-        </div>
-      )}
+        <div className="h-px bg-white/15 my-5" />
 
-      {/* Warning Section */}
-      {isVisible && (
-        <div className="mt-[26rem] px-5 py-4 border-2 rounded-[2rem] border-blue-500 max-w-md mx-4 sm:mx-auto">
-          <div className="flex items-start gap-3 p-4 rounded mb-4">
-            <div className="flex-shrink-0 rounded-full p-1 flex items-center justify-center">
-              <img src={InfoIcon} alt="Info" className="w-6 h-6" />
+        <button
+          onClick={handleOnclickFirst}
+          className="
+            mx-auto
+            flex items-center justify-center gap-2
+            border border-white/40
+            rounded-lg
+            px-7 py-2
+            text-sm
+            hover:bg-white/5
+            transition
+          "
+        >
+          <img src={symbol} alt="MetaMask" className="w-5 h-5" />
+          <span className="font-medium">MetaMask</span>
+        </button>
+      </div>
+    </div>
+
+
+          {/* Warning Box */}
+          <div className="absolute bottom-[14%] left-1/2 -translate-x-1/2 w-[640px] /60 p-6 text-white">
+            <div className="flex items-center gap-3 mb-4">
+              <img src={InfoIcon} alt="info" className="w-5 h-5" />
+              <p className="text-sm text-blue-400">
+                HyperTek will never request your seed phrase or private key.
+              </p>
             </div>
-            <p className="text-sm sm:text-base text-white font-medium">
-              <span className="text-blue-700">HyperTek</span> will never request your seed phrase or private key.
-            </p>
-          </div>
-          <h2 className="text-lg sm:text-xl font-bold mb-2 text-white">What is a crypto wallet?</h2>
-          <p className="text-xs sm:text-base font-normal leading-[1.5] text-gray-300">
-            A crypto wallet lets you interact with the blockchain. You can use it to buy, sell, or create NFTs. <br />
-            We recommend MetaMask.
-          </p>
-        </div>
-      )}
 
-      {/* Second Modal */}
-      {isSecondModalView && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-60 px-4">
-          <div className="bg-gray-900 rounded-lg p-4 w-full max-w-xs relative text-white">
-            <button
-              onClick={closeSecondModal}
-              className="absolute top-2 right-2 text-white font-bold text-xl hover:text-gray-300 transition"
-            >
-              ×
-            </button>
+            <div className="border border-blue-500 rounded-xl px-4 py-3">
+  <h3 className="font-semibold mb-1">
+    What is a crypto wallet?
+  </h3>
 
-            <h2 className="text-white text-base font-bold text-center my-3">Connecting Wallet</h2>
-            <hr className="border-t  my-2" />
+  <p className="text-sm text-gray-300 leading-relaxed">
+    A crypto wallet lets you interact with the blockchain. You can use
+    it to buy, sell or create NFTs.
+    <br />
+    We recommend MetaMask.
+  </p>
+</div>
 
-            <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl mt-3 w-full">
-              <img src={symbol} alt="Wallet" className="w-16 h-16 object-contain" />
-              <div className="w-8 h-8 relative mt-2">
-                <div className="absolute inset-0 rounded-full border-4 border-gray-700"></div>
-                <div
-                  className="absolute inset-0 rounded-full border-4 border-blue-500 border-solid border-r-transparent border-b-transparent"
-                  style={{ transform: "rotate(-230deg)" }}
-                ></div>
-              </div>
-            </div>
           </div>
         </div>
       )}
+
+    {/* SECOND POPUP */}
+{isSecondModalView && (
+  <div className="fixed inset-0 z-50 backdrop-blur-md bg-black/40 flex items-center justify-center">
+
+    <div className="
+      bg-[#2b3442]
+      w-[360px]
+      rounded-xl
+      text-white
+      relative
+      px-6
+      py-5
+      shadow-xl
+    ">
+      <button
+        onClick={closeSecondModal}
+        className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
+      >
+        ×
+      </button>
+
+      <h2 className="text-center font-semibold text-[15px] mb-4">
+        Connecting to Wallet
+      </h2>
+
+      <div className="h-px bg-white/15 mb-6" />
+
+      <div className="flex flex-col items-center gap-4">
+        {/* Wallet Icon */}
+        <img
+          src={symbol}
+          alt="wallet"
+          className="w-14 h-14"
+        />
+
+        <p className="text-sm font-medium opacity-90">
+          Sign Message
+        </p>
+
+        {/* Loader */}
+        <div className="w-8 h-8 relative mt-1">
+          <div className="absolute inset-0 rounded-full border-4 border-white/20" />
+          <div
+            className="absolute inset-0 rounded-full border-4 border-blue-500 border-r-transparent border-b-transparent"
+            style={{ transform: "rotate(-225deg)" }}
+          />
+        </div>
+      </div>
+    </div>
+
+  </div>
+)}
+
     </>
   );
 }
