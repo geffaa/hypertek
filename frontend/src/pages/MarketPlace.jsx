@@ -302,77 +302,85 @@ const staticActivityData = [
                   </div>
 
                   {/* Table */}
-                  <div className="overflow-x-auto rounded-lg  mt-4 w-full">
-                    <table className="w-full min-w-full text-white">
-                      <thead className="bg-[#00134C]">
-                        <tr className="text-left">
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Name
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Type
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Buyer
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Seller
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Price
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Time
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-{staticActivityData.map((item, i) => (
-                          <tr
-                            key={i}
-                            className=" transition-colors"
-                          >
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                              <div className="flex items-start gap-3">
-                                <div
-                                  className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                                  style={{
-                                    background:
-                                      "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                                  }}
-                                >
-                                  <img
-                                    src={i % 2 === 0 ? land1Image : ManImage}
-                                    alt="Collection"
-                                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                                    style={{ objectPosition: "top" }}
-                                  />
-                                </div>
-                                <span className="text-sm lg:text-[18px] font-inter font-medium">
-                                  {item.name}
-                                </span>
-                              </div>
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.type}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.buyer}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.seller}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              ${item.price}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {getDaysAgo(item.time)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <div className="overflow-x-auto rounded-lg mt-4 w-full">
+  <table className="w-full min-w-full table-fixed text-white">
+    <thead className="bg-[#00134C]">
+      <tr className="text-left">
+        <th className="w-[28%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Name
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Type
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Buyer
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Seller
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Price
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+          Time
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {staticActivityData.map((item, i) => (
+        <tr key={i} className="transition-colors border-b border-[#0B2A6F]">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 align-middle">
+            <div className="flex items-center gap-3">
+              <div
+                className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                style={{
+                  background:
+                    "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                }}
+              >
+                <img
+                  src={i % 2 === 0 ? land1Image : ManImage}
+                  alt="Collection"
+                  className="w-full h-full object-cover object-top scale-x-[-1]"
+                />
+              </div>
+              <span className="text-sm lg:text-[18px] font-inter font-medium">
+                {item.name}
+              </span>
+            </div>
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+
+            {item.type}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+
+            {item.buyer}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+
+            {item.seller}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+
+            ${item.price}
+          </td>
+
+          <td className="px-5 lg:px-8 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+
+            {getDaysAgo(item.time)}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
                 </div>
               </section>
             </div>

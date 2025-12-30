@@ -75,7 +75,7 @@ function Footer() {
     >
       <img
         src={SkypeImg}
-        className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+        className="w-3.5 h-3 opacity-80 hover:opacity-100 cursor-pointer"
         alt="X.com"
       />
     </a>
