@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import Logo from "../../assets/Sidebar/logo.png";
+import Logo from "../../assets/Sidebar/logo1.png";
 import DashboardImage from "../../assets/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/Sidebar/create1.png";
 import CreateCollection2 from "../../assets/Sidebar/create2.png";
@@ -110,7 +110,8 @@ const withAdmin = (path) => {
             style={{ width: "22px", height: "22px" }}
           />
           <h1
-            className="text-white font-bold"
+            className="text-white font-normal ml-3"
+          
             style={{
               width: "100px",
               height: "17px",
@@ -206,7 +207,8 @@ const withAdmin = (path) => {
               <img src={CollectionImage} alt="" className="w-[22px] h-[22px]" />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+              className="text-white font-normal ml-3"
+
               style={{
                 width: "120px",
                 height: "17px",
@@ -273,7 +275,8 @@ const withAdmin = (path) => {
               <img src={EditUser} alt="" className="w-[22px] h-[22px]" />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+             className="text-white font-normal ml-3"
+            
               style={{
                 width: "120px",
                 height: "17px",
@@ -303,7 +306,8 @@ const withAdmin = (path) => {
               <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+              className="text-white font-normal ml-3"
+
               style={{
                 width: "120px",
                 height: "17px",
@@ -365,7 +369,8 @@ const withAdmin = (path) => {
               <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+           className="text-white font-normal ml-3"
+
               style={{
                 width: "130px",
                 height: "17px",
@@ -425,7 +430,8 @@ const withAdmin = (path) => {
               />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+            className="text-white font-normal ml-3"
+
               style={{
                 width: "120px",
                 height: "17px",
@@ -456,7 +462,8 @@ const withAdmin = (path) => {
               <img src={SupportImage} alt="" className="w-[22px] h-[22px]" />
             </div>
             <h1
-              className="text-white font-bold ml-3"
+             className="text-white font-normal ml-3"
+
               style={{
                 width: "120px",
                 height: "17px",

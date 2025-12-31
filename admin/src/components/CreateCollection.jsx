@@ -525,11 +525,11 @@ function CreateCollections() {
             onClick={handleBackButton}
             className="border border-white text-white hover:bg-white/10 transition-colors"
             style={{
-              width: "133px",
-              height: "42px",
+              width: "120px",
+              height: "36px",
               borderRadius: "6px",
               gap: "10px",
-              padding: "10px",
+              padding: "6px",
               background: "transparent",
               display: "flex",
               alignItems: "center",
@@ -555,11 +555,11 @@ function CreateCollections() {
             onClick={handleNext}
             className="bg-blue-800 hover:bg-blue-700 transition-colors"
             style={{
-              width: "190px",
-              height: "42px",
+              width: "120px",
+              height: "36px",
               borderRadius: "6px",
               gap: "10px",
-              padding: "10px",
+              padding: "6px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
