@@ -69,7 +69,8 @@ useEffect(() => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
-    <div className="flex h-screen max-w-[1400px] mx-auto text-white relative bg-black overflow-hidden">
+    <div className="flex w-full min-h-screen text-white relative bg-black overflow-hidden">
+
       {/* Global Blur Background Circles */}
 
       {/* Sidebar */}
@@ -84,7 +85,7 @@ useEffect(() => {
         
         {/* Scrollable main content */}
      <main
-  className={`flex-1 mt-[35px] p-4 z-10 ${
+  className={`flex-1 pt-3 px-4 z-10 ${
     shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
   }`}
 >

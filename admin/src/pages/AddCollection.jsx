@@ -241,12 +241,28 @@ function AddCollection() {
               />
             </div>
             <div className="flex justify-end mt-4">
-              <button
-                onClick={handleAddCollection}
-                className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
-              >
-                Add Collection
-              </button>
+            <div className="flex justify-end mt-2">
+            <button
+  type="button"
+  onClick={handleAddCollection}
+  className="text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+  style={{
+    width: "120px",
+    height: "36px",
+    borderRadius: "6px",
+    gap: "10px",
+    padding: "6px",
+    background: "rgba(255, 255, 255, 0.10)",
+    border: "1px solid rgba(255, 255, 255, 0.20)",
+    cursor: "pointer",
+  }}
+>
+  Add Collection
+</button>
+</div>
+
+
+
             </div>
           </div>
         </div>
