@@ -331,41 +331,37 @@ function NfaLand() {
         </div>
       </div> */}
 
-      <div
-        className="flex justify-between items-center text-white"
-        style={{
-          width: "200px",
-          height: "28px",
-          transform: "rotate(0deg)",
-          opacity: 1,
-          position: "absolute",
-          top: "150px",
-          left: "134px",
-        
-        }}
-      >
-        <Link to="/overview" className="text-white font-medium">
-          Overview
-        </Link>
-      
-        <Link to="/offers" className="text-white font-medium">
-          Offers <span>0</span>
-        </Link>
-      </div>
-      
+<div className="flex flex-col w-full mt-12 md:px-24 text-white">
+  <div
+    className="flex justify-between items-center text-white mt-4"
+    style={{
+      width: "200px",
+      height: "28px",
+      opacity: 1,
+    }}
+  >
+    <Link to="/overview" className="text-white font-medium">
+      Overview
+    </Link>
+
+    <Link to="/offers" className="text-white font-medium">
+      Offers <span>0</span>
+    </Link>
+  </div>
+</div>
 
       {/* Main Content */}
-      <div className="max-w-[918px] mx-auto w-full mt-16 flex flex-col md:flex-row gap-8 px-4">
+      <div className="max-w-[918px] mx-auto w-full mt-8 flex flex-col md:flex-row gap-8 px-4">
         
         {/* Image */}
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
+          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover"
         />
 
         {/* Details */}
-        <div className="flex-1 space-y-4">
+        <div className="flex-1 space-y-2">
            <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{collection?.name}</h1>
             <p>{collection?.chain}🔥</p>

@@ -9,7 +9,7 @@ import {  BACKEND_BASE_URL } from "../Config"
 import FullScreenLoader from "../Components/Common/Spinner";
 
 
-import CustomButton from "../Components/Buttons/Button1";
+import CustomButton3 from "../Components/Buttons/Button3";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -81,7 +81,7 @@ function ForgotPassword() {
             className={`w-full flex items-center justify-center ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
            
           >
-            <CustomButton text="Send"/>
+            <CustomButton3 text="Send"/>
           </button>
         </form>
 

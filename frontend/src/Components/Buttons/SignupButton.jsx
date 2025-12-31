@@ -32,7 +32,7 @@ const CustomButtonLarge = ({ text }) => {
   className="
     flex items-center justify-center 
     text-white font-inter font-medium text-[16px] leading-[1] tracking-[0] text-center
-    md:w-[140px] md:h-[32px]
+    md:w-[130px] md:h-[32px]
     w-[90px] h-[24px]
     transition-all duration-300 ease-in-out
     group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
