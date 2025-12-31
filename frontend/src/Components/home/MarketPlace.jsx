@@ -41,12 +41,12 @@ function PopularCollections() {
 
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-white uppercase text-[30px] font-goldman font-bold">
+      <div className="flex flex-col gap-3 items-center sm:items-start">
+          <h1 className="text-white uppercase text-[20px] sm:text-[30px] font-goldman font-bold text-center sm:text-left">
             MarketPlace
           </h1>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center sm:justify-start w-full sm:w-auto">
             <div className="h-[3px] w-14 bg-white" />
             <div className="h-[3px] w-20 bg-white" />
             <div className="h-[3px] w-10 bg-white" />
@@ -119,3 +119,4 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
+
