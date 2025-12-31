@@ -13,11 +13,14 @@ const Dashboard = () => {
       <GlowingOrb Xaxis={730} Yaxis={1040} />
       <GlowingOrb Xaxis={60} Yaxis={1040} />
 
-    <div className=" text-white bg-black  flex flex-col ">
-      <Graph />
-      <LineGraph />
-      <MarketOverview />
-    </div>
+      <div className="flex-1 min-h-screen bg-black text-white flex justify-center overflow-x-hidden">
+  <div className="w-full max-w-[1400px] px-6">
+    
+    <Graph />
+    <LineGraph />
+    <MarketOverview />
+  </div>
+</div>
     </>
   );
 };
