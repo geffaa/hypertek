@@ -5,6 +5,7 @@ import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
+import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -479,7 +480,7 @@ export default function Navbar() {
               ) && (
                 <div className="hidden md:block">
                   <Link to="/signup">
-                    <CustomeButton text="Sign Up" />
+                    <CustomeButtonLarge text="Sign Up" />
                   </Link>
                 </div>
               )
@@ -503,45 +504,55 @@ export default function Navbar() {
               />
             </button>
             {shopOpen && (
-              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Overview & Desc
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  My Assets
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Collectibles
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Land
-                </button>
-              </div>
-            )}
+  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+
+    <Link
+      to="/market-place"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Overview
+    </Link>
+
+    <Link
+      to="/personal-activity"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      My Assets
+    </Link>
+
+    <Link
+      to="/nfa-expand"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Collectibles
+    </Link>
+
+    <Link
+      to="/land"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Land
+    </Link>
+
+  </div>
+)}
+
 
             {/* About & News */}
             <Link
