@@ -36,7 +36,7 @@ function HowItsWork() {
   ];
 
   return (
-    <section className="flex flex-col lg:flex-row gap-20 px-4 sm:px-8 md:px-16 py-12 lg:py-16 items-start justify-center relative z-10">
+    <section className="flex flex-col lg:flex-row gap-12 px-11 sm:px-8 md:px-16 py-12 lg:py-16 items-start justify-center relative z-10">
       <GlowingOrb Xaxis={70} Yaxis={190} />
       {/* Left side */}
       <div className="w-full lg:w-[340px] flex flex-col my-auto gap-6 text-white text-center lg:text-left">
@@ -54,8 +54,7 @@ function HowItsWork() {
       </div>
 
       {/* Right side */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10 lg:gap-x-12 lg:gap-y-12 w-full lg:w-[716px]">
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 w-full lg:w-[716px]">
         {steps.map((step, index) => (
           <div
             key={index}

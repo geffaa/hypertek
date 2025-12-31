@@ -37,8 +37,8 @@ function PopularCollections() {
 
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-white font-goldman font-bold text-[30px] uppercase">
+       <div className="flex flex-col gap-3">
+          <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase truncate">
             Popular Collections
           </h1>
 
@@ -117,3 +117,4 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
+
