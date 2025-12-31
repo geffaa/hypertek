@@ -22,7 +22,9 @@ export default function News() {
   };
 
   return (
-    <section className="w-full z-10 flex justify-center items-start px-4 md:px-6 lg:px-2 py-10 md:py-12 relative">
+    <section className="w-full z-10 flex justify-center items-start px-0 py-10 md:py-12 relative">
+
+
       {/* Background effects */}
       <div
         style={{ bottom: "890px", right: "110px" }}
@@ -34,7 +36,7 @@ export default function News() {
       />
       <GlowingOrb Xaxis={220} Yaxis={400} />
 
-      <div className="flex flex-col md:flex-row gap-10 w-full max-w-[1247px]">
+      <div className="flex flex-col md:flex-row gap-20 w-full max-w-[1360px]">
         {/* Left Column */}
         <div className="flex flex-col gap-8 w-full md:w-[680px]">
           {news.slice(0, 1).map((item) => (
@@ -87,7 +89,8 @@ export default function News() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col z-10 gap-10 w-full md:w-[450px]">
+        <div className="flex flex-col z-10 gap-16 w-full md:w-[450px]">
+          {/* Heading */}
           <div className="hidden sm:flex items-center w-full">
             <h2 className="text-white font-bold text-2xl sm:text-3xl font-goldman uppercase border-b-2 border-white pb-1">
               News

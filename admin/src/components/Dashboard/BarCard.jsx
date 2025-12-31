@@ -239,7 +239,7 @@ function BarCard({
             />
             <div
               style={{ height: `${filledHeight}px` }}
-              className="bg-blue-800 w-full"
+              className={`${index % 2 === 0 ? "bg-white" : "bg-blue-800"}`}
             />
           </div>
         );

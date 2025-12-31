@@ -294,6 +294,13 @@ if (loading) {
         <div
           className="flex mt-16  justify-end mx-8 pt-16 pb-32 relative z-10"
           style={{
+            fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                fontStyle: "normal",
+                fontSize: "17.5px",
+                lineHeight: "100%",
+                letterSpacing: "0%",
+                color: "white",
             opacity: 1,
             gap: "37px",
           }}
@@ -303,11 +310,11 @@ if (loading) {
   onClick={handleCancelButton}
   className="border border-white text-white hover:bg-white/10 transition-colors flex items-center justify-center"
   style={{
-    width: "133px",
-    height: "42px",
+    width: "120px",
+    height: "36px",
     borderRadius: "6px",
     gap: "10px",
-    padding: "10px",
+    padding: "6px",
     background: "transparent",
     cursor: "pointer",
   }}
@@ -318,11 +325,11 @@ if (loading) {
           <button onClick={handlePublish}
             className="bg-blue-800 hover:bg-blue-700 transition-colors"
             style={{
-              width: "190px",
-              height: "42px",
+              width: "120px",
+              height: "36px",
               borderRadius: "6px",
               gap: "10px",
-              padding: "10px",
+              padding: "6px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -335,7 +342,7 @@ if (loading) {
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 400,
                 fontStyle: "normal",
-                fontSize: "18px",
+                fontSize: "17.5px",
                 lineHeight: "100%",
                 letterSpacing: "0%",
                 color: "white",
