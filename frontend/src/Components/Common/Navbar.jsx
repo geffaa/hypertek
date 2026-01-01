@@ -493,9 +493,13 @@ export default function Navbar() {
           <div className="md:hidden  bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
             {/* Shop */}
             <button
-              onClick={() => setShopOpen(!shopOpen)}
-              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
-            >
+  onClick={(e) => {
+    e.stopPropagation();
+    setShopOpen(!shopOpen);
+  }}
+  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+>
+
               <span className="font-semibold">Shop</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform duration-200 ${
@@ -570,52 +574,71 @@ export default function Navbar() {
               News
             </Link>
 
-            {/* Social */}
-            <button
-              onClick={() => setSocialOpen(!socialOpen)}
-              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
-            >
-              <span className="font-semibold">Social</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  socialOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {socialOpen && (
-              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-                <a
-                  href="https://discord.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
-                  Discord
-                </a>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={XImg} alt="X.com" className="w-4 h-4" />
-                  X.com
-                </a>
-                <a
-                  href="https://t.me"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
-                  Telegram
-                </a>
-              </div>
-            )}
+           {/* Social */}
+           <button
+  onClick={(e) => {
+    e.stopPropagation();
+    setSocialOpen(!socialOpen);
+  }}
+  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+>
+
+  <span className="font-semibold">Social</span>
+  <ChevronDown
+    className={`h-4 w-4 transition-transform duration-200 ${
+      socialOpen ? "rotate-180" : ""
+    }`}
+  />
+</button>
+
+{socialOpen && (
+  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+  <a
+  href="https://discord.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+  onClick={(e) => {
+    e.stopPropagation();
+    setSocialOpen(false);
+    closeMobileMenu();
+  }}
+>
+      <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
+      Discord
+    </a>
+
+    <a
+      href="https://x.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSocialOpen(false);
+        closeMobileMenu();
+      }}
+    >
+      <img src={XImg} alt="X.com" className="w-4 h-4" />
+      X.com
+    </a>
+
+    <a
+      href="https://t.me"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSocialOpen(false);
+        closeMobileMenu();
+      }}
+    >
+      <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
+      Telegram
+    </a>
+  </div>
+)}
 
             {/* Logged-in Search + Profile */}
             {isLoggedIn ? (
