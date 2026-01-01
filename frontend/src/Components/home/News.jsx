@@ -27,13 +27,13 @@ export default function News() {
       {/* Background effects */}
       <div
         style={{ bottom: "890px", right: "110px" }}
-        className="absolute -z-10 w-[120px] h-[120px] md:w-[220px] md:h-[220px] rounded-full from-blue-500/50 via-blue-800/60 to-white/0 blur-[60px] md:blur-[90px]"
+        className="absolute -z-10 w-[120px] h-[120px] md:w-[220px] md:h-[220px] rounded-full from-blue-500/50 via-blue-800/60 to-white/0 blur-[80px] md:blur-[100px]"
       />
       <div
         style={{ bottom: "90px", right: "100px" }}
         className="absolute -z-10 w-[120px] h-[120px] md:w-[220px] md:h-[220px] rounded-full bg-gradient-to-b from-blue-500/50 via-blue-600/60 to-white/20 blur-[60px] md:blur-[100px]"
       />
-      <GlowingOrb Xaxis={220} Yaxis={400} />
+      <GlowingOrb Xaxis={250} Yaxis={400} />
 
  {/* ================= MOBILE NEWS (EXACT DESIGN) ================= */}
 <div className="flex md:hidden flex-col w-full px-4 space-y-8">
@@ -113,7 +113,7 @@ export default function News() {
 
 
       {/* ================= DESKTOP LAYOUT (UNCHANGED) ================= */}
-      <div className="hidden md:flex flex-col md:flex-row gap-24 w-full max-w-[1360px] mx-auto px-16">
+      <div className="hidden md:flex flex-col md:flex-row gap-20 w-full max-w-[1480px] mx-auto px-16">
 
 
         {/* Left Column */}
@@ -121,13 +121,13 @@ export default function News() {
           {news.slice(0, 1).map((item) => (
             <div
               key={item._id}
-              className="flex flex-col gap-5 cursor-pointer"
+              className="flex flex-col gap-5"
               onClick={() => handleNewsClick(item)}
             >
               <img
                 src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
                 alt={item.heading}
-                className="w-full max-h-[350px] object-cover rounded-lg"
+                className="w-full max-h-[350px] rounded-lg"
               />
               <div className="flex flex-col gap-3 pt-2">
                 <h3 className="text-white text-2xl font-bold uppercase font-goldman">
