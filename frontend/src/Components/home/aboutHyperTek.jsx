@@ -49,7 +49,7 @@ export default function HyperTekDesign() {
             </div>
 
             {/* TEXT (LOCKED UNDER IMAGES) */}
-            <div className="w-full">
+            <div className="w-full -mt-6">
               <h1 className="text-white pl-4  font-inter font-semibold text-lg md:text-xl mb-2">
                 The year is 2117.
               </h1>

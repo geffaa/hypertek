@@ -306,22 +306,22 @@ const staticActivityData = [
   <table className="w-full min-w-full table-fixed text-white">
     <thead className="bg-[#00134C]">
       <tr className="text-left">
-        <th className="w-[28%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[28%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Name
         </th>
-        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Type
         </th>
-        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Buyer
         </th>
-        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Seller
         </th>
-        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Price
         </th>
-        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
           Time
         </th>
       </tr>
@@ -345,33 +345,33 @@ const staticActivityData = [
                   className="w-full h-full object-cover object-top scale-x-[-1]"
                 />
               </div>
-              <span className="text-sm lg:text-[18px] font-inter font-medium">
+              <span className="text-sm lg:text-[16px] font-inter font-medium">
                 {item.name}
               </span>
             </div>
           </td>
 
-          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
 
             {item.type}
           </td>
 
-          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
 
             {item.buyer}
           </td>
 
-          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
 
             {item.seller}
           </td>
 
-          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
 
             ${item.price}
           </td>
 
-          <td className="px-5 lg:px-8 py-3 lg:py-4 text-sm lg:text-[18px] font-normal align-middle">
+          <td className="px-5 lg:px-8 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
 
             {getDaysAgo(item.time)}
           </td>
