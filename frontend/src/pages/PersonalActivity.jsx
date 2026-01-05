@@ -185,7 +185,7 @@ if (loading) {
                   (h, i) => (
                     <th
                       key={i}
-                      className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium"
+                      className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium"
                     >
                       {h}
                     </th>
@@ -207,29 +207,29 @@ if (loading) {
             className="w-full h-full object-cover"
           />
         </div>
-        <span className="text-sm lg:text-[18px] font-inter font-normal">
+        <span className="text-sm lg:text-[16px] font-inter font-normal">
           {item.name}
         </span>
       </div>
     </td>
 
-    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
       {item.type}
     </td>
 
-    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
       {item.buyer}
     </td>
 
-    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
       {item.seller}
     </td>
 
-    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
       ${item.price}
     </td>
 
-    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[18px] font-inter font-normal align-middle">
+    <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
       {getDaysAgo(item.time)}
     </td>
   </tr>

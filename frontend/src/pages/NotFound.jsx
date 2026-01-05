@@ -5,7 +5,8 @@ import BackHome from "../assets/images/backhome.png";
 import { Link } from "react-router-dom";
 function NotFound() {
   return (
-    <div className="fixed inset-0 flex justify-center items-center overflow-hidden z-50 bg-transparent">
+    <div className="fixed inset-0 flex justify-center items-center pb-20 overflow-hidden z-50 bg-transparent">
+
 
 
       {/* Container */}
@@ -30,16 +31,17 @@ function NotFound() {
           <img src={FaceTwo} alt="Face Two" className="w-16 h-10 pb-3" />
         </div>
 
-        {/* Go Home Button */}
-        <Link
-          to="/"
-          className="relative z-20 flex items-center justify-center gap-2 px-5 rounded transition duration-300 cursor-pointer"
-        >
-          <img src={BackHome} alt="Back Home" className="w-5 h-4 opacity-90" />
-          <span className="text-white text-lg font-medium">Go Home</span>
-        </Link>
+     {/* Go Home Button */}
+<Link
+  to="/"
+  className="relative z-20 flex items-center justify-center gap-2 px-4 py-1 rounded transition duration-300 cursor-pointer"
+>
+  <img src={BackHome} alt="Back Home" className="w-4 h-3 opacity-90" />
+  <span className="text-white text-sm font-medium">Go Home</span>
+</Link>
 
-        <div className="w-[120px] h-[1px] bg-gray-200 mt-2 mb-8"></div>
+<div className="w-[100px] h-[1px] bg-gray-200 mt-2 mb-10"></div>
+
       </div>
     </div>
   );
