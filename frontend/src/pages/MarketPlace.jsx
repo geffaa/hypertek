@@ -104,12 +104,27 @@ const staticActivityData = [
       ) : (
         <div className="min-h-screen bg-transparent relative z-10 ">
           {/* Hero Section */}
-          <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto">
+          <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
             <div className="mt-20 lg:mt-[92px]">
-              <div
-                className="relative h-56 md:h-56 lg:h-[237px] w-full bg-cover bg-top bg-no-repeat shadow-lg mb-24 lg:mb-24"
-                style={{ backgroundImage: `url(${overview1})` }}
-              >
+            <div
+  className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
+  style={{
+    backgroundImage: `
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.55) 40%,
+        rgba(0, 0, 0, 0.15) 65%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url(${overview1})
+    `,
+    backgroundPosition: '50% 8.5%', // ✅ THIS is the key
+    backgroundSize: 'cover',
+  }}
+>
+
+
                 <div
                   className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%] lg:max-w-none"
                 >
@@ -121,7 +136,7 @@ const staticActivityData = [
                   </p>
                 </div>
 
-                <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
+                <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
                   {[
                     { num: "5K", label: "Total Item" },
                     { num: "50.5K", label: "Total Volume" },
