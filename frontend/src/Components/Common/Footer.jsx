@@ -52,27 +52,29 @@ function Footer() {
               ))}
             </nav>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <a href="https://discord.com" target="_blank" rel="noreferrer">
                 <img
                   src={DiscordImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
                   alt="Discord"
                 />
               </a>
 
               <a href="https://x.com" target="_blank" rel="noreferrer">
-                <img
-                  src={SkypeImg}
-                  className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer"
-                  alt="X.com"
-                />
-              </a>
+  <img
+    src={SkypeImg}
+    className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
+    alt="X.com"
+  />
+</a>
+
+
 
               <a href="https://telegram.org" target="_blank" rel="noreferrer">
                 <img
                   src={TelegramImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
                   alt="Telegram"
                 />
               </a>
