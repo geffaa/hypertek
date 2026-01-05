@@ -5,7 +5,7 @@ import BackHome from "../assets/images/backhome.png";
 import { Link } from "react-router-dom";
 function NotFound() {
   return (
-    <div className="fixed inset-0 flex justify-center items-center pb-20 overflow-hidden z-50 bg-transparent">
+    <div className="fixed inset-0 flex justify-center items-center pb-20 overflow-hidden z-0 pointer-events-none bg-transparent">
 
 
 
