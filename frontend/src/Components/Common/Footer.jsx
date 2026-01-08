@@ -52,27 +52,29 @@ function Footer() {
               ))}
             </nav>
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <a href="https://discord.com" target="_blank" rel="noreferrer">
                 <img
                   src={DiscordImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
                   alt="Discord"
                 />
               </a>
 
               <a href="https://x.com" target="_blank" rel="noreferrer">
-                <img
-                  src={SkypeImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-                  alt="X.com"
-                />
-              </a>
+  <img
+    src={SkypeImg}
+    className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
+    alt="X.com"
+  />
+</a>
+
+
 
               <a href="https://telegram.org" target="_blank" rel="noreferrer">
                 <img
                   src={TelegramImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
                   alt="Telegram"
                 />
               </a>
@@ -105,25 +107,49 @@ function Footer() {
           <div className="flex flex-col items-end gap-4">
             {/* Copyright */}
             <p className="text-xs text-gray-400">© 2025. All Right Reserved</p>
+{/* Social Icons */}
+<div className="flex gap-4">
+  <a
+    href="https://discord.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      src={DiscordImg}
+      className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+      alt="Discord"
+    />
+  </a>
 
-            {/* Social Icons */}
-            <div className="flex gap-4">
-              <img
-                src={DiscordImg}
-                className="w-4 h-4 opacity-80 hover:opacity-100"
-                alt="Discord"
-              />
-              <img
-                src={SkypeImg}
-                className="w-4 h-4 opacity-80 hover:opacity-100"
-                alt="X"
-              />
-              <img
-                src={TelegramImg}
-                className="w-4 h-4 opacity-80 hover:opacity-100"
-                alt="Telegram"
-              />
-            </div>
+  <a
+    href="https://x.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      src={SkypeImg}
+      className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer"
+      alt="X.com"
+    />
+  </a>
+
+  <a
+    href="https://t.me.com"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      src={TelegramImg}
+      className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+      alt="Telegram"
+    />
+  </a>
+</div>
+
+ {/* Logo */}
+ <Link to="/" className="flex-shrink-0">
+            <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
+          </Link>
           </div>
         </div>
       </div>

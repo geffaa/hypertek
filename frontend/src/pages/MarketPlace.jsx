@@ -104,12 +104,27 @@ const staticActivityData = [
       ) : (
         <div className="min-h-screen bg-transparent relative z-10 ">
           {/* Hero Section */}
-          <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1400px] mx-auto">
+          <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
             <div className="mt-20 lg:mt-[92px]">
-              <div
-                className="relative h-56 md:h-56 lg:h-[237px] w-full bg-cover bg-top bg-no-repeat shadow-lg mb-24 lg:mb-24"
-                style={{ backgroundImage: `url(${overview1})` }}
-              >
+            <div
+  className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
+  style={{
+    backgroundImage: `
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.55) 40%,
+        rgba(0, 0, 0, 0.15) 65%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url(${overview1})
+    `,
+    backgroundPosition: '50% 8.5%', // ✅ THIS is the key
+    backgroundSize: 'cover',
+  }}
+>
+
+
                 <div
                   className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%] lg:max-w-none"
                 >
@@ -121,7 +136,7 @@ const staticActivityData = [
                   </p>
                 </div>
 
-                <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
+                <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
                   {[
                     { num: "5K", label: "Total Item" },
                     { num: "50.5K", label: "Total Volume" },
@@ -302,77 +317,85 @@ const staticActivityData = [
                   </div>
 
                   {/* Table */}
-                  <div className="overflow-x-auto rounded-lg  mt-4 w-full">
-                    <table className="w-full min-w-full text-white">
-                      <thead className="bg-[#00134C]">
-                        <tr className="text-left">
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Name
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Type
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Buyer
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Seller
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Price
-                          </th>
-                          <th className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] font-inter font-medium">
-                            Time
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-{staticActivityData.map((item, i) => (
-                          <tr
-                            key={i}
-                            className=" transition-colors"
-                          >
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 align-top">
-                              <div className="flex items-start gap-3">
-                                <div
-                                  className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                                  style={{
-                                    background:
-                                      "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                                  }}
-                                >
-                                  <img
-                                    src={i % 2 === 0 ? land1Image : ManImage}
-                                    alt="Collection"
-                                    className="w-full h-full object-cover object-top scale-x-[-1]"
-                                    style={{ objectPosition: "top" }}
-                                  />
-                                </div>
-                                <span className="text-sm lg:text-[18px] font-inter font-medium">
-                                  {item.name}
-                                </span>
-                              </div>
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.type}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.buyer}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {item.seller}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              ${item.price}
-                            </td>
-                            <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[18px] align-top">
-                              {getDaysAgo(item.time)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <div className="overflow-x-auto rounded-lg mt-4 w-full">
+  <table className="w-full min-w-full table-fixed text-white">
+    <thead className="bg-[#00134C]">
+      <tr className="text-left">
+        <th className="w-[28%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Name
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Type
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Buyer
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Seller
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Price
+        </th>
+        <th className="w-[15%] px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium">
+          Time
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {staticActivityData.map((item, i) => (
+        <tr key={i} className="transition-colors border-b border-[#0B2A6F]">
+          <td className="px-4 lg:px-6 py-3 lg:py-4 align-middle">
+            <div className="flex items-center gap-3">
+              <div
+                className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                style={{
+                  background:
+                    "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                }}
+              >
+                <img
+                  src={i % 2 === 0 ? land1Image : ManImage}
+                  alt="Collection"
+                  className="w-full h-full object-cover object-top scale-x-[-1]"
+                />
+              </div>
+              <span className="text-sm lg:text-[16px] font-inter font-medium">
+                {item.name}
+              </span>
+            </div>
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
+
+            {item.type}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
+
+            {item.buyer}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
+
+            {item.seller}
+          </td>
+
+          <td className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
+
+            ${item.price}
+          </td>
+
+          <td className="px-5 lg:px-8 py-3 lg:py-4 text-sm lg:text-[16px] font-normal align-middle">
+
+            {getDaysAgo(item.time)}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
                 </div>
               </section>
             </div>

@@ -41,7 +41,10 @@ const DashboardLayout = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
-    <div className="flex h-screen w-full text-white relative bg-black overflow-x-hidden">
+    <div className="flex w-full min-h-screen text-white relative bg-black overflow-hidden">
+
+      {/* Global Blur Background Circles */}
+
       {/* Sidebar */}
       <Sidebar onLogoutClick={() => setShowLogoutModal(true)} />
       
@@ -53,13 +56,15 @@ const DashboardLayout = () => {
         </div>
         
         {/* Scrollable main content */}
-        <main
-          className={`flex-1 mt-[35px] p-4 z-10 ${
-            shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
-          }`}
-        >
-          <Outlet />
-        </main>
+     <main
+  className={`flex-1 pt-3 px-4 z-10 ${
+    shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
+  }`}
+>
+  <Outlet />
+</main>
+
+         
       </div>
       
       {/* Logout Modal */}

@@ -42,14 +42,14 @@ export default function NewsDetail() {
 
   if (!newsItem) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen text-white flex items-center justify-center">
         <div className="text-xl">Loading news...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans relative mt-24">
+    <div className="min-h-screen text-white font-sans relative mt-24">
           {/* Featured Image */}
         <div className="mb-8">
         <img
