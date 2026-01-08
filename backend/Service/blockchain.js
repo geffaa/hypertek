@@ -102,7 +102,6 @@
 //   MarketplaceAbi
 // };
 
-
 // Service/blockchain.js
 import { ethers } from "ethers";
 import dotenv from "dotenv";
@@ -121,7 +120,7 @@ function loadABI(filename) {
     path.join(__dirname, `../abis/${filename}`),
     path.join(__dirname, `../../abis/${filename}`),
     path.join(process.cwd(), `abis/${filename}`),
-    path.join(process.cwd(), `backend/abis/${filename}`)
+    path.join(process.cwd(), `backend/abis/${filename}`),
   ];
 
   for (const abiPath of possiblePaths) {
@@ -138,53 +137,25 @@ const MyNFTAbi = loadABI("MyNFT.json");
 const MarketplaceAbi = loadABI("Marketplace.json");
 
 // ---------- NETWORK SELECTION ----------
-const isLocal = process.env.NODE_ENV !== "production";
+const isLocal = false; 
 
-const RPC_URL = isLocal
-  ? process.env.LOCAL_RPC_URL || "http://127.0.0.1:8545"
-  : process.env.ALCHEMY_RPC_URL;
+// For Sepolia, use SEPOLIA_RPC_URL
+const RPC_URL = process.env.SEPOLIA_RPC_URL;
+if (!RPC_URL) throw new Error("❌ RPC URL not configured");
 
-if (!RPC_URL) {
-  throw new Error("❌ RPC URL not configured");
-}
+const privateKey = process.env.SEPOLIA_PRIVATE_KEY;
+if (!privateKey)
+  throw new Error("❌ Private key missing. Set SEPOLIA_PRIVATE_KEY in .env");
 
-// ---------- PROVIDER ----------
 const provider = new ethers.JsonRpcProvider(RPC_URL);
-console.log("✅ Connected RPC:", RPC_URL);
-
-// ---------- WALLET ----------
-// ---------- WALLET ----------
-// Use HARDHAT_PRIVATE_KEY for local development
-const privateKey = isLocal 
-  ? process.env.HARDHAT_PRIVATE_KEY 
-  : process.env.DEPLOYER_PRIVATE_KEY || process.env.SEPOLIA_PRIVATE_KEY;
-
-if (!privateKey) {
-  throw new Error("❌ Private key missing. Check .env file for HARDHAT_PRIVATE_KEY or DEPLOYER_PRIVATE_KEY");
-}
-
 const wallet = new ethers.Wallet(privateKey, provider);
-
-console.log("✅ Wallet:", wallet.address);
-console.log("✅ Expected for local:", "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
-
-// Verify it's the correct wallet
-if (isLocal && wallet.address !== "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266") {
-  console.warn("⚠️  WARNING: Wallet address mismatch!");
-  console.warn("Expected: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
-  console.warn("Got:", wallet.address);
-  console.warn("Check HARDHAT_PRIVATE_KEY in .env file");
-}
-
-console.log("✅ Wallet:", wallet.address);
-
 // ---------- CONTRACTS ----------
 if (!process.env.MYNFT_ADDRESS) {
-  throw new Error("❌ MYNFT_ADDRESS missing");
+  throw new Error("❌ MYNFT_ADDRESS missing in .env");
 }
 
 if (!process.env.MARKETPLACE_ADDRESS) {
-  throw new Error("❌ MARKETPLACE_ADDRESS missing");
+  throw new Error("❌ MARKETPLACE_ADDRESS missing in .env");
 }
 
 const nftContract = new ethers.Contract(
@@ -215,6 +186,7 @@ export async function waitForTransaction(tx) {
   return await tx.wait();
 }
 
+// ---------- EXPORT ----------
 export {
   provider,
   wallet,
@@ -222,5 +194,5 @@ export {
   marketContract,
   ethers,
   MyNFTAbi,
-  MarketplaceAbi
+  MarketplaceAbi,
 };

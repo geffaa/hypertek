@@ -38,7 +38,7 @@ function PopularCollections() {
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-white font-goldman font-bold text-[30px] uppercase">
+          <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase truncate">
             Popular Collections
           </h1>
 
@@ -81,13 +81,14 @@ function PopularCollections() {
                 </div>
 
                 {/* TITLE */}
-                <h2 className="text-[18px] font-semibold mt-5">
+                {/* TITLE */}
+                <h2 className="text-[16px] sm:text-[18px] font-semibold mt-5 truncate">
                   {item?.collection?.name}
                 </h2>
 
                 {/* INFO */}
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm font-medium text-gray-300">
+                <div className="flex justify-between items-center mt-4 text-[12px] sm:text-sm">
+                  <span className="font-medium text-gray-300 truncate">
                     {item?.collection?.symbol} 🔥
                   </span>
 
@@ -95,7 +96,7 @@ function PopularCollections() {
                     <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
                       <img src={TVector} alt="chain" className="w-3 h-3" />
                     </div>
-                    <span className="text-sm font-semibold">
+                    <span className="font-semibold truncate">
                       ${item?.collection?.chain}
                     </span>
                   </div>

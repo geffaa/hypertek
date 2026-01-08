@@ -8,25 +8,27 @@ import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../Config";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 import { ethers } from "ethers";
-import { MARKETPLACE_ADDRESS, NFT_ADDRESS, MARKETPLACE_ABI, NFT_ABI } from "../Web3/Config";
-
+import {
+  MARKETPLACE_ADDRESS,
+  NFT_ADDRESS,
+  MARKETPLACE_ABI,
+  NFT_ABI,
+} from "../Web3/Config";
 
 function NfaLand() {
   const location = useLocation();
   const navigate = useNavigate();
-
-
   const { token } = useSelector((state) => state.auth);
-
-
-  // 🔥 Selected NFT / Land
   const { item } = location.state || {};
   const collection = item?.collection;
-
   const { user } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
+  const [connectedWallet, setConnectedWallet] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
+  const [listingData, setListingData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!item) {
@@ -35,31 +37,406 @@ function NfaLand() {
     }
   }, [item, navigate]);
 
-  const handlePayment = async (productId) => {
-    if (!user?.id) {
-      toast.error("Please login first");
-      return;
+  // Check connected wallet and ownership
+  useEffect(() => {
+    checkWalletAndOwnership();
+    
+    // Listen for account changes
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', () => window.location.reload());
     }
-
-    try {
-      const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/game/create`,
-        {
-          userId: user.id,
-          productId,
-        }
-      );
-
-      if (res.data?.exist === "no") {
-        navigate("/stripe-payment", { state: { item } });
-      } else {
-        toast.error("Already purchased");
+    
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
       }
-    } catch {
-      toast.error("Payment failed");
+    };
+  }, [item]);
+
+  const handleAccountsChanged = (accounts) => {
+    if (accounts.length > 0) {
+      checkWalletAndOwnership();
+    } else {
+      setConnectedWallet(null);
+      setIsOwner(false);
     }
   };
 
+  const checkWalletAndOwnership = async () => {
+    try {
+      if (!window.ethereum || !item) return;
+
+      // Request accounts to ensure wallet is connected
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+      
+      if (accounts.length > 0) {
+        const wallet = accounts[0].toLowerCase();
+        setConnectedWallet(wallet);
+        console.log("Connected wallet:", wallet);
+        console.log("Item owner:", item.owner);
+
+        // Check if user is the owner
+        if (item.owner) {
+          const ownerMatch = wallet === item.owner.toLowerCase();
+          setIsOwner(ownerMatch);
+          console.log("Is owner:", ownerMatch);
+        } else {
+          // If no owner set yet, user can mint it
+          setIsOwner(true);
+          console.log("No owner - user can mint");
+        }
+
+        // Check listing status if tokenId exists
+        if (item.tokenId) {
+          await checkListingStatus();
+        }
+      }
+    } catch (err) {
+      console.error("Error checking wallet:", err);
+      // If user rejects, don't show error but allow manual connection
+      if (err.code === 4001) {
+        console.log("User rejected wallet connection");
+      }
+    }
+  };
+
+  const checkListingStatus = async () => {
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const marketplace = new ethers.Contract(
+        MARKETPLACE_ADDRESS,
+        MARKETPLACE_ABI,
+        provider
+      );
+
+      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      setListingData({
+        seller: listing[0],
+        price: listing[1],
+        active: listing[2],
+      });
+    } catch (err) {
+      console.error("Error checking listing:", err);
+    }
+  };
+
+  const switchToSepolia = async () => {
+    const SEPOLIA_CHAIN_ID = "0xaa36a7";
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: SEPOLIA_CHAIN_ID }],
+      });
+      return true;
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: SEPOLIA_CHAIN_ID,
+                chainName: "Sepolia Testnet",
+                nativeCurrency: {
+                  name: "SepoliaETH",
+                  symbol: "ETH",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://sepolia.infura.io/v3/"],
+                blockExplorerUrls: ["https://sepolia.etherscan.io"],
+              },
+            ],
+          });
+          return true;
+        } catch (addError) {
+          console.error("Failed to add Sepolia:", addError);
+          return false;
+        }
+      }
+      console.error("Failed to switch to Sepolia:", switchError);
+      return false;
+    }
+  };
+
+  // MINT NFT (Backend mints to buyer's wallet)
+  const mintNFTToWallet = async (buyerWallet) => {
+    if (!user?.id || !item._id) {
+      toast.error("Invalid user or item");
+      return null;
+    }
+
+    try {
+      const payload = {
+        docId: item._id,
+        tokenURI: `ipfs://auto-${Date.now()}`,
+        royaltyBps: 500,
+        creatorWallet: buyerWallet.toLowerCase(),
+      };
+
+      console.log("🎨 Minting NFT:", payload);
+
+      const res = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (res.data?.success && res.data?.tokenId) {
+        toast.success(`NFT Minted! Token ID: ${res.data.tokenId}`);
+        return res.data.tokenId;
+      } else {
+        toast.error(res.data?.error || "Mint failed");
+        return null;
+      }
+    } catch (err) {
+      console.error("❌ Mint error:", err.response?.data || err);
+      toast.error(err.response?.data?.error || "Mint failed");
+      return null;
+    }
+  };
+
+  // CREATE LISTING (Owner lists NFT)
+  const handleCreateListing = async () => {
+    const toastId = toast.loading("Creating listing...");
+    setLoading(true);
+
+    try {
+      if (!window.ethereum) {
+        toast.error("MetaMask not installed", { id: toastId });
+        return;
+      }
+
+      // Switch to Sepolia
+      const chainId = await window.ethereum.request({ method: "eth_chainId" });
+      if (chainId !== "0xaa36a7") {
+        const switched = await switchToSepolia();
+        if (!switched) {
+          toast.error("Please switch to Sepolia", { id: toastId });
+          return;
+        }
+      }
+
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const walletAddress = await signer.getAddress();
+
+      const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
+      const marketplace = new ethers.Contract(
+        MARKETPLACE_ADDRESS,
+        MARKETPLACE_ABI,
+        signer
+      );
+
+      let tokenId = item.tokenId;
+
+      // If not minted, mint first
+      if (!tokenId) {
+        toast.loading("Minting NFT...", { id: toastId });
+        tokenId = await mintNFTToWallet(walletAddress);
+        if (!tokenId) {
+          toast.error("Mint failed", { id: toastId });
+          return;
+        }
+        item.tokenId = tokenId;
+      }
+
+      // Check ownership
+      const owner = await nftContract.ownerOf(tokenId);
+      if (owner.toLowerCase() !== walletAddress.toLowerCase()) {
+        toast.error("You don't own this NFT", { id: toastId });
+        return;
+      }
+
+      // Approve marketplace if not approved
+      const approved = await nftContract.getApproved(tokenId);
+      if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
+        toast.loading("Approving marketplace...", { id: toastId });
+        const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
+        await approveTx.wait();
+      }
+
+      // Check if already listed
+      const listing = await marketplace.getListing(NFT_ADDRESS, tokenId);
+      if (listing[2]) {
+        toast.success("Already listed!", { id: toastId });
+        setListingData({ seller: listing[0], price: listing[1], active: true });
+        return;
+      }
+
+      // Create listing
+      toast.loading("Creating listing on marketplace...", { id: toastId });
+      const priceWei = ethers.parseEther("0.01");
+      const listTx = await marketplace.createListing(NFT_ADDRESS, tokenId, priceWei, {
+        gasLimit: 300000,
+      });
+      await listTx.wait();
+
+      // Update database
+      await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/listing/create`,
+        {
+          nftId: item._id,
+          tokenId,
+          seller: walletAddress.toLowerCase(),
+          priceETH: 0.01,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      toast.success(`✅ Listed! Token #${tokenId} @ 0.01 ETH`, {
+        id: toastId,
+        duration: 5000,
+      });
+
+      setListingData({
+        seller: walletAddress.toLowerCase(),
+        price: priceWei,
+        active: true,
+      });
+
+      // Refresh listing status
+      await checkListingStatus();
+    } catch (err) {
+      console.error("❌ Listing error:", err);
+      let msg = "Listing failed";
+      if (err.message?.includes("insufficient funds")) msg = "⛽ Add Sepolia ETH";
+      else if (err.message?.includes("user rejected")) msg = "Transaction rejected";
+      toast.error(msg, { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // BUY NFT (Buyer purchases from listing)
+  const handleBuyNFT = async () => {
+    const toastId = toast.loading("Processing purchase...");
+    setLoading(true);
+
+    try {
+      if (!window.ethereum) {
+        toast.error("MetaMask not installed", { id: toastId });
+        return;
+      }
+
+      if (!user?.id) {
+        toast.error("Please login first", { id: toastId });
+        return;
+      }
+
+      if (!item.tokenId) {
+        toast.error("NFT not minted yet", { id: toastId });
+        return;
+      }
+
+      // Switch to Sepolia
+      const chainId = await window.ethereum.request({ method: "eth_chainId" });
+      if (chainId !== "0xaa36a7") {
+        const switched = await switchToSepolia();
+        if (!switched) {
+          toast.error("Please switch to Sepolia", { id: toastId });
+          return;
+        }
+      }
+
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const buyer = await signer.getAddress();
+
+      // Check if buyer is trying to buy their own NFT
+      if (buyer.toLowerCase() === item.owner?.toLowerCase()) {
+        toast.error("❌ You cannot buy your own NFT", { id: toastId });
+        return;
+      }
+
+      const balance = await provider.getBalance(buyer);
+      if (balance === 0n) {
+        toast.error("Your wallet has no ETH", { id: toastId });
+        return;
+      }
+
+      const marketplace = new ethers.Contract(
+        MARKETPLACE_ADDRESS,
+        MARKETPLACE_ABI,
+        signer
+      );
+
+      // Get listing details
+      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      if (!listing[2]) {
+        toast.error("NFT not listed for sale", { id: toastId });
+        return;
+      }
+
+      const price = listing[1];
+
+      // Check if buyer has enough ETH
+      if (balance < price) {
+        toast.error("Insufficient ETH to buy this NFT", { id: toastId });
+        return;
+      }
+
+      // Buy NFT
+      toast.loading("Buying NFT...", { id: toastId });
+      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, item.tokenId, {
+        value: price,
+        gasLimit: 400000,
+      });
+
+      const receipt = await buyTx.wait();
+
+      // Record sale in backend
+      await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/sale/record`,
+        {
+          tokenId: item.tokenId,
+          buyer: buyer.toLowerCase(),
+          seller: listing[0].toLowerCase(),
+          priceETH: ethers.formatEther(price),
+          txHash: receipt.hash,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      toast.success(
+        `✅ NFT Purchased Successfully!\n\nToken ID: ${item.tokenId}\nPrice: ${ethers.formatEther(price)} ETH`,
+        { id: toastId, duration: 8000 }
+      );
+
+      // Update local state
+      item.owner = buyer.toLowerCase();
+      setIsOwner(true);
+      setListingData(null);
+
+      // Redirect or refresh
+  
+    } catch (err) {
+      console.error("❌ Purchase error:", err);
+      let msg = "Purchase failed";
+      if (err.message?.includes("insufficient funds")) msg = "Insufficient ETH";
+      else if (err.message?.includes("user rejected")) msg = "Transaction rejected";
+      else if (err.message?.includes("Cannot buy your own NFT"))
+        msg = "You cannot buy your own NFT";
+      toast.error(msg, { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle payment with card
   const handlePaymentCard = async (productId) => {
     if (!user?.id) {
       toast.error("Please login first");
@@ -67,13 +444,10 @@ function NfaLand() {
     }
 
     try {
-      const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/game/create`,
-        {
-          userId: user.id,
-          productId,
-        }
-      );
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+        userId: user.id,
+        productId,
+      });
 
       if (res.data?.exist === "no") {
         navigate("/offer", { state: { item } });
@@ -84,308 +458,127 @@ function NfaLand() {
       toast.error("Payment failed");
     }
   };
-  const [isThirdOpen, setIsThirdOpen] = useState(false);
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-  const openSecondModal = () => {
-    setIsOpen(false);
-    setIsSecondOpen(true);
-  };
-  const closeSecondModal = () => setIsSecondOpen(false);
-  const openThirdModal = () => {
-    setIsSecondOpen(false);
-    setIsThirdOpen(true);
-  };
-  const closeThirdModal = () => setIsThirdOpen(false);
-  const handleMakeOffer = () => {
-    console.log("Make offer clicked");
-  };
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   // ---------------------------------
-    // 1️⃣ Mint NFT via backend with proper error handling
-    const mintNFTBackend = async () => {
-      if (!user?.id) {
-        toast.error("Please login first");
-        return null;
-      }
-  
-      if (!item._id) {
-        toast.error("Your Item is required");
-        return null;
-      }
-  
-      try {
-        // Get wallet from Redux if exists, otherwise from MetaMask
-        let creatorWallet = user.wallet;
-        if (!creatorWallet && window.ethereum) {
-          await window.ethereum.request({ method: "eth_requestAccounts" });
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await provider.getSigner();
-          creatorWallet = await signer.getAddress();
-        }
-  
-        const payload = {
-          docId: item._id,
-          tokenURI: `ipfs://auto-${Date.now()}`,
-          royaltyBps: 500,
-          creatorWallet, // now this will not be undefined
-        };
-  
-        console.log("Sending mint request to backend with payload:", payload);
-  
-        const res = await axios.post(
-          // "http://localhost:4700/api/v1/nft/mint",
-          `${BACKEND_BASE_URL}/api/v1/nft/mint`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-  
-        console.log("Mint API response:", res);
-  
-        if (res?.data?.success) {
-          toast.success(`NFT minted! TokenId: ${res.data.tokenId}`);
-          return res.data.tokenId;
-        } else {
-          toast.error(res?.data?.error || "Mint failed: No TokenId returned");
-          return null;
-        }
-      } catch (err) {
-        console.error("Mint request error:", err.response?.data || err.message);
-        const message =
-          err.response?.data?.error ||
-          (err.message.includes("insufficient funds")
-            ? "Insufficient ETH in wallet to mint NFT"
-            : err.message);
-        toast.error(message);
-        return null;
-      }
-    };
-  
-    // 2️⃣ Create listing automatically with safe checks
-    const createListingAutomatically = async (signer, buyerAddress) => {
-      try {
-        const toastId = toast.loading("Minting NFT via backend...");
-        const tokenId = await mintNFTBackend();
-        if (tokenId) {
-          toast.success(`NFT minted! TokenId: ${tokenId}`, { id: toastId });
-        } else {
-          toast.error("Mint failed", { id: toastId });
-        }
-  
-        if (!tokenId) {
-          toast.error("Cannot list NFT: TokenId not returned");
-          return { success: false, error: "TokenId not returned from backend" };
-        }
-  
-        const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
-        const marketplace = new ethers.Contract(
-          MARKETPLACE_ADDRESS,
-          MARKETPLACE_ABI,
-          signer
-        );
-  
-        toast.loading("Approving marketplace...");
-        const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
-        await approveTx.wait();
-  
-        const priceWei = ethers.parseEther("0.01");
-        const listTx = await marketplace.createListing(
-          NFT_ADDRESS,
-          tokenId,
-          priceWei
-        );
-        await listTx.wait();
-  
-        toast.success(`NFT listed! TokenId: ${tokenId}`);
-        return { success: true, tokenId, price: "0.01" };
-      } catch (err) {
-        console.error(err);
-        let errorMsg = err.message.includes("insufficient funds")
-          ? "Insufficient ETH to approve/list NFT"
-          : err.message;
-        toast.error(errorMsg || "Failed to create listing");
-        return { success: false, error: errorMsg };
-      }
-    };
-  
-    // 3️⃣ Handle Web3 purchase with wallet balance check
-    const handleWeb3Purchase = async () => {
-      try {
-        if (!window.ethereum) {
-          toast.error("MetaMask not installed");
-          return;
-        }
-  
-        if (!user?.id) {
-          toast.error("Please login first");
-          return;
-        }
-  
-        // Request wallet connection
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const buyer = await signer.getAddress();
-  
-        const marketplace = new ethers.Contract(
-          MARKETPLACE_ADDRESS,
-          MARKETPLACE_ABI,
-          signer
-        );
-  
-        // Use the correct tokenId from item
-        const tokenIdToBuy = item.tokenId || 0; // Make sure item has tokenId
-        let listingExists = false;
-  
-        // Check if listing exists
-        try {
-          const listing = await marketplace.getListing(NFT_ADDRESS, tokenIdToBuy);
-          if (listing.active) {
-            listingExists = true;
-            toast.loading("Confirm purchase in MetaMask...");
-  
-            const tx = await marketplace.buyNFT(NFT_ADDRESS, tokenIdToBuy, {
-              value: listing.price || listing[1], // price from contract
-            });
-            await tx.wait();
-            toast.success("NFT purchased successfully! 🎉");
-  
-            // No need to mint backend if NFT already exists
-            setIsSecondOpen(false);
-            return;
-          }
-        } catch (err) {
-          console.log(
-            "No active listing found, will mint and list automatically."
-          );
-        }
-  
-        // If no listing exists, mint via backend + list automatically
-        if (!listingExists) {
-          const result = await createListingAutomatically(signer, buyer);
-  
-          if (result.success) {
-            toast.success(
-              `NFT listed! TokenId: ${result.tokenId}, Price: ${result.price} ETH`
-            );
-  
-            const tryAgain = confirm(
-              `Listing created successfully!\n\nTokenId: ${result.tokenId}\nPrice: ${result.price} ETH\n\nClick "Buy Now" again to purchase!`
-            );
-            if (tryAgain) toast.info("Please click 'Buy Now' again");
-          } else {
-            toast.error("Failed to create listing: " + result.error);
-          }
-        }
-      } catch (err) {
-        console.error("Purchase error:", err);
-        const message = err.message?.includes("insufficient funds")
-          ? "Insufficient ETH to complete transaction"
-          : err.reason || err.message || "Transaction failed";
-        toast.error(message);
-      }
-    };
-
-
-
 
   if (!item) return null;
+
+  // Determine button text and action
+  const getButtonAction = () => {
+    if (loading) return { text: "Processing...", disabled: true };
+    
+    // If wallet not connected, show connect button
+    if (!connectedWallet) {
+      return {
+        text: "Connect Wallet",
+        action: async () => {
+          try {
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            await checkWalletAndOwnership();
+            toast.success("Wallet connected!");
+          } catch (err) {
+            toast.error("Failed to connect wallet");
+          }
+        },
+        disabled: false,
+      };
+    }
+    
+    if (!item.tokenId) {
+      // Not minted yet - anyone with connected wallet can mint
+      return {
+        text: "Mint & List NFT",
+        action: handleCreateListing,
+        disabled: false,
+      };
+    }
+
+    if (listingData?.active) {
+      // Listed and active
+      if (isOwner) {
+        return { text: "Your NFT (Listed)", disabled: true };
+      }
+      return { text: "Buy Now", action: handleBuyNFT, disabled: false };
+    }
+
+    // Minted but not listed
+    if (isOwner) {
+      return { text: "List for Sale", action: handleCreateListing, disabled: false };
+    }
+
+    return { text: "Not Listed", disabled: true };
+  };
+
+  const buttonConfig = getButtonAction();
 
   return (
     <div className="flex flex-col w-full mt-12 md:px-24 text-white">
       {/* Tabs */}
-      {/* <div className="max-w-[1000px] mx-auto px-4">
-        <div className="flex gap-6 my-6">
-          <Link to="/buy-nfa" className="border-b-2 border-blue-500">
-            Overview
-          </Link>
-          <Link to="/offer-recieved">Offer 0</Link>
-        </div>
-      </div> */}
-
       <div
         className="flex justify-between items-center text-white"
         style={{
           width: "200px",
           height: "28px",
-          transform: "rotate(0deg)",
-          opacity: 1,
           position: "absolute",
           top: "70px",
           left: "134px",
-        
         }}
       >
         <Link to="/overview" className="text-white font-medium">
           Overview
         </Link>
-      
         <Link to="/offers" className="text-white font-medium">
           Offers <span>0</span>
         </Link>
       </div>
-      
 
       {/* Main Content */}
       <div className="max-w-[918px] mx-auto w-full mt-16 flex flex-col md:flex-row gap-8 px-4">
-        
-        {/* Image */}
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
           className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
         />
-
-        {/* Details */}
         <div className="flex-1 space-y-4">
-           <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{collection?.name}</h1>
-            <p>{collection?.chain}🔥</p>
+            <p>{collection?.chain} 🔥</p>
           </div>
-          <p className="opacity-60">
-Listed          </p>
+          
+          {/* Status badges */}
+          <div className="flex gap-2 flex-wrap">
+            {connectedWallet && (
+              <span className="px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-sm">
+                Connected: {connectedWallet.substring(0, 6)}...{connectedWallet.substring(38)}
+              </span>
+            )}
+            {item.tokenId && (
+              <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
+                Minted #{item.tokenId}
+              </span>
+            )}
+            {listingData?.active && (
+              <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">
+                Listed
+              </span>
+            )}
+            {isOwner && item.tokenId && (
+              <span className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">
+                You Own This
+              </span>
+            )}
+          </div>
 
           <div className="bg-[#17171887] p-6 rounded-lg">
-           <div className="flex justify-between opacity-70 w-full">
+            <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
-              <span
-                className="truncate max-w-[150px]" // adjust max-width as needed
-                title={collection?.owner} // full address on hover
-              >
-                Owner: {collection?.owner}
+              <span className="truncate max-w-[150px]" title={collection?.owner}>
+                Owner: {item.owner ? `${item.owner.substring(0, 6)}...${item.owner.substring(38)}` : collection?.owner}
               </span>
             </div>
 
             <h2 className="text-xl mt-3">
-              {item.collection.chain ?? item.price} {collection?.symbol}
+              {listingData?.active
+                ? `${ethers.formatEther(listingData.price)} ETH`
+                : `${item.priceETH || 0.01} ETH`}
             </h2>
 
             <div className="flex justify-end mt-3">
@@ -393,11 +586,18 @@ Listed          </p>
             </div>
 
             <div className="flex gap-4 mt-6">
-              <button onClick={() => setIsOpen(true)}>
-                <CustomButton text="Buy Now" />
+              <button
+                onClick={buttonConfig.action || (() => setIsOpen(true))}
+                disabled={buttonConfig.disabled || loading}
+                className={buttonConfig.disabled ? "opacity-50 cursor-not-allowed" : ""}
+              >
+                <CustomButton text={buttonConfig.text} />
               </button>
 
-              <button onClick={() => handlePaymentCard(item._id)}>
+              <button
+                onClick={() => handlePaymentCard(item._id)}
+                disabled={loading}
+              >
                 <CustomButton text="Buy With Card" />
               </button>
             </div>
@@ -405,7 +605,7 @@ Listed          </p>
             <Link
               to="/payment"
               state={{ item }}
-              className="flex items-center gap-2 mt-4"
+              className="flex items-center gap-2 mt-4 hover:text-blue-400"
             >
               Make Offer <FiEdit2 />
             </Link>
@@ -414,148 +614,104 @@ Listed          </p>
       </div>
       <BuyNfa2 />
 
-      {/* ---------------- FIRST MODAL ---------------- */}
-    {isOpen && (
-  <div
-    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-    onClick={() => setIsOpen(false)}
-  >
-    <div
-      className="bg-[#252B37] p-6 rounded-lg w-full max-w-[480px] max-h-[80vh] overflow-x-hidden overflow-y-auto"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <h2 className="text-xl font-bold text-center">Buy Land</h2>
-
-      <img
-        src={`${BACKEND_BASE_URL}${collection?.image}`}
-        alt={collection?.name}
-        className="w-40 h-36 mx-auto my-4 rounded object-cover"
-      />
-
-      <h3 className="text-center font-semibold">{collection?.name}</h3>
-
-      <div className="mt-4 space-y-2">
-        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-          <span>List Price</span>
-          <span>
-            {item.collection.chain ?? item.price} {collection?.symbol}
-          </span>
-        </div>
-
-        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-          <span>Platform Fee</span>
-          <span>0.5 {collection?.symbol}</span>
-        </div>
-
-        <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-          <span>Total</span>
-          <span>
-            {Number(item.collection.chain ?? item.price) + 0.5} {collection?.symbol}
-          </span>
-        </div>
-      </div>
-
-      <div className="flex justify-between  mt-6">
-        <button onClick={() => setIsOpen(false)}>
-          <CustomButton text="Cancel" />
-        </button>
-
-        <button
-          onClick={() => {
-            setIsOpen(false);
-            setIsSecondOpen(true);
-          }}
+      {/* Confirmation Modal */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={() => setIsOpen(false)}
         >
-          <CustomButton text="Continue" />
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+          <div
+            className="bg-[#252B37] p-6 rounded-lg w-full max-w-[480px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-xl font-bold text-center">Confirm Action</h2>
+            <img
+              src={`${BACKEND_BASE_URL}${collection?.image}`}
+              alt={collection?.name}
+              className="w-40 h-36 mx-auto my-4 rounded object-cover"
+            />
+            <h3 className="text-center font-semibold">{collection?.name}</h3>
+            <div className="mt-4 space-y-2">
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+                <span>List Price</span>
+                <span>0.01 ETH</span>
+              </div>
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
+                <span>Platform Fee (10%)</span>
+                <span>0.001 ETH</span>
+              </div>
+              <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
+                <span>Total</span>
+                <span>0.011 ETH</span>
+              </div>
+            </div>
+            <div className="flex justify-between mt-6">
+              <button onClick={() => setIsOpen(false)}>
+                <CustomButton text="Cancel" />
+              </button>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsSecondOpen(true);
+                }}
+              >
+                <CustomButton text="Continue" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-
-      {/* ---------------- SECOND MODAL ---------------- */}
-         {isSecondOpen && (
+      {/* Final Confirmation Modal */}
+      {isSecondOpen && (
         <div
           className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
-          onClick={closeSecondModal}
+          onClick={() => setIsSecondOpen(false)}
         >
           <div
             className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={closeSecondModal}
-              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
+              onClick={() => setIsSecondOpen(false)}
+              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700"
             >
               &times;
             </button>
             <h1 className="text-white font-bold text-lg md:text-xl">
-              Buy Assets
+              {isOwner ? "List NFT" : "Buy NFT"}
             </h1>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
             <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
-          <img
-  src={`${BACKEND_BASE_URL}${collection?.image}`}
-  alt={collection?.name}
-  className="w-full h-full object-cover object-top scale-x-[-1]"
-/>
-
+              <img
+                src={`${BACKEND_BASE_URL}${collection?.image}`}
+                alt={collection?.name}
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                <p className="text-gray-400 text-sm">List Price</p>
-                <p className="text-white text-sm">$2000.5</p>
+                <p className="text-gray-400 text-sm">Price</p>
+                <p className="text-white text-sm">0.01 ETH</p>
               </div>
             </div>
-            <div className="flex  md:flex-row gap-4 mt-6 w-full justify-center">
-               <button onClick={closeSecondModal}>
-                <div className="flex items-center">
-                  {/* Left small bar */}
-                  <div
-                    className="bg-[#002AA8] mr-0.5 w-[0.25rem] h-[1.2rem]"
-                  ></div>
-                  {/* Left angled border */}
-                  <div
-                    className="border-[#002AA8] w-[0.5rem] h-[2.2rem]"
-                    style={{
-                      borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
-                    }}
-                  ></div>
-                  {/* Main button area */}
-                  <div
-                    className="flex items-center w-[7rem] md:w-[9rem] h-[2rem] justify-center text-white font-medium"
-                    style={{
-                      // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
-                      border: "0.15rem solid #002AA8", // ~2.42px
-                    }}
-                  >
-                    Close
-                  </div>
-                  {/* Right angled border */}
-                  <div
-                    className="border-[#002AA8]"
-                    style={{
-                      width: "0.5rem", // ~7.97px
-                      height: "2.2rem", // ~42.86px
-                      borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
-                    }}
-                  ></div>
-                  {/* Right small bar */}
-                  <div
-                    className="bg-[#002AA8]"
-                    style={{
-                      width: "0.25rem", // ~3.99px
-                      height: "1.2rem", // ~21.93px
-                    }}
-                  ></div>
-                </div>
+            <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">
+              <button onClick={() => setIsSecondOpen(false)}>
+                <CustomButton text="Cancel" />
               </button>
-              <button onClick={handleWeb3Purchase}>
-                <CustomButton text="Confirm" />
+              <button
+                onClick={() => {
+                  setIsSecondOpen(false);
+                  if (isOwner) {
+                    handleCreateListing();
+                  } else {
+                    handleBuyNFT();
+                  }
+                }}
+                disabled={loading}
+              >
+                <CustomButton text={loading ? "Processing..." : "Confirm"} />
               </button>
             </div>
           </div>
