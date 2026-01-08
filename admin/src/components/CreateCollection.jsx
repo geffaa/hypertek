@@ -22,33 +22,34 @@ function CreateCollections() {
     symbol: "",
     chain: "",
     Type: "",
+    priceETH: "",
   });
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
+      if (!file.type.startsWith("image/")) {
         toast.error("Please select an image file");
         return;
       }
-      
+
       // Validate file size (e.g., 5MB max)
       if (file.size > 5 * 1024 * 1024) {
         toast.error("Image size should be less than 5MB");
         return;
       }
-      
+
       setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = () => {
         setSelectedImage(reader.result);
       };
       reader.readAsDataURL(file);
-      
+
       // Clear image error if any
       if (errors.image) {
-        setErrors(prev => ({ ...prev, image: "" }));
+        setErrors((prev) => ({ ...prev, image: "" }));
       }
     }
   };
@@ -58,26 +59,26 @@ function CreateCollections() {
     const file = event.dataTransfer.files[0];
     if (file) {
       // Validate file type
-      if (!file.type.startsWith('image/')) {
+      if (!file.type.startsWith("image/")) {
         toast.error("Please drop an image file");
         return;
       }
-      
+
       // Validate file size
       if (file.size > 5 * 1024 * 1024) {
         toast.error("Image size should be less than 5MB");
         return;
       }
-      
+
       setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = () => {
         setSelectedImage(reader.result);
       };
       reader.readAsDataURL(file);
-      
+
       if (errors.image) {
-        setErrors(prev => ({ ...prev, image: "" }));
+        setErrors((prev) => ({ ...prev, image: "" }));
       }
     }
   };
@@ -98,59 +99,68 @@ function CreateCollections() {
   }, []);
 
   const validateForm = () => {
-  const newErrors = {};
+    const newErrors = {};
 
-  if (!selectedImage) {
-    newErrors.image = "Image is required";
-  }
+    if (!selectedImage) {
+      newErrors.image = "Image is required";
+    }
 
-  if (!formData.name.trim()) {
-    newErrors.name = "Name is required";
-  }
-  if (formData.name.length > 20 || formData.name.length<4) {
-    newErrors.name = "Name must be at least 2 - 20 characters";
-  }
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
 
-  if (!formData.symbol.trim()) {
-    newErrors.symbol = "Token symbol is required";
-  } 
-  if (formData.symbol.length < 3) {
-    newErrors.symbol = "Symbol must be at least 2 characters";
-  }
+    if (formData.name.length > 20 || formData.name.length < 4) {
+      newErrors.name = "Name must be 4 - 20 characters";
+    }
 
-  if (!formData.chain.trim()) {
-    newErrors.chain = "Chain is required";
-  }
+    if (!formData.symbol.trim()) {
+      newErrors.symbol = "Token symbol is required";
+    }
 
-  if (!formData.Type) {
-    newErrors.Type = "Collection type is required";
-  }
+    if (formData.symbol.length < 2) {
+      newErrors.symbol = "Symbol must be at least 2 characters";
+    }
 
-  setErrors(newErrors);
-  return newErrors;
-};
+    if (!formData.Type) {
+      newErrors.Type = "Collection type is required";
+    }
 
+    if (!formData.chain.trim()) {
+      newErrors.chain = "Chain is required";
+    }
+
+    // ✅ PRICE VALIDATION
+    if (!formData.priceETH) {
+      newErrors.priceETH = "Price is required";
+    } else if (Number(formData.priceETH) <= 0) {
+      newErrors.priceETH = "Price must be greater than 0";
+    }
+
+    setErrors(newErrors);
+    return newErrors;
+  };
 
   const handleNext = () => {
-  const validationErrors = validateForm();
+    const validationErrors = validateForm();
 
-  if (Object.keys(validationErrors).length > 0) {
-    Object.values(validationErrors).forEach((err) => {
-      toast.error(err);
-    });
-    return;
-  }
+    if (Object.keys(validationErrors).length > 0) {
+      Object.values(validationErrors).forEach((err) => {
+        toast.error(err);
+      });
+      return;
+    }
 
-  navigate(`/${userData._id}/creator-earning`, {
-    state: {
-      formData: {
-        ...formData,
-        imagePreview: selectedImage,
+    navigate(`/${userData._id}/creator-earning`, {
+      state: {
+        formData: {
+          ...formData,
+          price: formData.priceETH, // mapping
+          imagePreview: selectedImage,
+        },
+        selectedFile,
       },
-      selectedFile,
-    },
-  });
-};
+    });
+  };
 
   const handleBackButton = () => {
     navigate("/collections");
@@ -165,7 +175,7 @@ function CreateCollections() {
       {/* Background Glowing Effects */}
       <BgEffect2 Xaxis={950} Yaxis={30} />
       <BgEffect2 Xaxis={750} Yaxis={450} />
-      
+
       {/* Content */}
       <div className="relative z-50">
         <div className="flex gap-10 mt-[80px] mx-2">
@@ -209,18 +219,21 @@ function CreateCollections() {
                     width: "100%",
                     height: "100%",
                     borderRadius: "6px",
-                    
                   }}
                 />
-                
+
                 {/* Hover overlay to change image - FIXED: Only this triggers file input */}
-                <div 
+                <div
                   className="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3 rounded-md cursor-pointer"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <img src={uploadIcon} alt="Change" className="w-10 h-10" />
-                  <p className="text-white text-base font-semibold">Click to change image</p>
-                  <p className="text-white/70 text-sm">or drag and drop a new one</p>
+                  <p className="text-white text-base font-semibold">
+                    Click to change image
+                  </p>
+                  <p className="text-white/70 text-sm">
+                    or drag and drop a new one
+                  </p>
                 </div>
               </div>
             ) : (
@@ -263,12 +276,16 @@ function CreateCollections() {
                       textAlign: "center",
                     }}
                   >
-                    <span className="font-bold text-blue-400">Click to upload</span>{" "}
+                    <span className="font-bold text-blue-400">
+                      Click to upload
+                    </span>{" "}
                     or drag and drop
                   </div>
                 </div>
                 {errors.image && (
-                  <p className="text-red-500 text-sm text-center mt-2">{errors.image}</p>
+                  <p className="text-red-500 text-sm text-center mt-2">
+                    {errors.image}
+                  </p>
                 )}
               </div>
             )}
@@ -364,11 +381,11 @@ function CreateCollections() {
                 onChange={(e) => {
                   setFormData({ ...formData, name: e.target.value });
                   if (errors.name) {
-                    setErrors(prev => ({ ...prev, name: "" }));
+                    setErrors((prev) => ({ ...prev, name: "" }));
                   }
                 }}
                 className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
-                  errors.name ? 'border-red-500' : 'border-gray-600'
+                  errors.name ? "border-red-500" : "border-gray-600"
                 } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
               />
               {errors.name && (
@@ -387,7 +404,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                    color: "#FFFFFF",
+                  color: "#FFFFFF",
                 }}
               >
                 Token Symbol *
@@ -401,11 +418,11 @@ function CreateCollections() {
                 onChange={(e) => {
                   setFormData({ ...formData, symbol: e.target.value });
                   if (errors.symbol) {
-                    setErrors(prev => ({ ...prev, symbol: "" }));
+                    setErrors((prev) => ({ ...prev, symbol: "" }));
                   }
                 }}
                 className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
-                  errors.symbol ? 'border-red-500' : 'border-gray-600'
+                  errors.symbol ? "border-red-500" : "border-gray-600"
                 } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
               />
               {errors.symbol && (
@@ -424,7 +441,7 @@ function CreateCollections() {
                   fontSize: "18px",
                   lineHeight: "100%",
                   letterSpacing: "0%",
-                    color: "#FFFFFF",
+                  color: "#FFFFFF",
                 }}
               >
                 Collection Type *
@@ -436,11 +453,11 @@ function CreateCollections() {
                 onChange={(e) => {
                   setFormData({ ...formData, Type: e.target.value });
                   if (errors.Type) {
-                    setErrors(prev => ({ ...prev, Type: "" }));
+                    setErrors((prev) => ({ ...prev, Type: "" }));
                   }
                 }}
                 className={`w-full h-10 px-3 rounded-md bg-transparent text-white border ${
-                  errors.Type ? 'border-red-500' : 'border-gray-600'
+                  errors.Type ? "border-red-500" : "border-gray-600"
                 } focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors`}
               >
                 <option value="" className="text-black">
@@ -475,9 +492,11 @@ function CreateCollections() {
                 Chain *
               </label>
 
-              <div className={`flex items-center rounded-md bg-white/10 text-white border px-2 ${
-                errors.chain ? 'border-red-500' : 'border-gray-600'
-              } focus-within:border-blue-500 focus-within:bg-white/15 transition-colors`}>
+              <div
+                className={`flex items-center rounded-md bg-white/10 text-white border px-2 ${
+                  errors.chain ? "border-red-500" : "border-gray-600"
+                } focus-within:border-blue-500 focus-within:bg-white/15 transition-colors`}
+              >
                 <div
                   className="w-[17px] h-[17px] rounded-2xl flex items-center justify-center"
                   style={{
@@ -499,7 +518,7 @@ function CreateCollections() {
                   onChange={(e) => {
                     setFormData({ ...formData, chain: e.target.value });
                     if (errors.chain) {
-                      setErrors(prev => ({ ...prev, chain: "" }));
+                      setErrors((prev) => ({ ...prev, chain: "" }));
                     }
                   }}
                   placeholder="USDT"
@@ -508,6 +527,42 @@ function CreateCollections() {
               </div>
               {errors.chain && (
                 <p className="text-red-500 text-sm">{errors.chain}</p>
+              )}
+            </div>
+            {/* Price Field */}
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
+              <label
+                htmlFor="priceETH"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  color: "#FFFFFF",
+                }}
+              >
+                Price (ETH) *
+              </label>
+
+              <input
+                type="number"
+                id="priceETH"
+                placeholder="0.05"
+                min="0"
+                step="0.0001"
+                value={formData.priceETH}
+                onChange={(e) => {
+                  setFormData({ ...formData, priceETH: e.target.value });
+                  if (errors.priceETH) {
+                    setErrors((prev) => ({ ...prev, priceETH: "" }));
+                  }
+                }}
+                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
+                  errors.priceETH ? "border-red-500" : "border-gray-600"
+                } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
+              />
+
+              {errors.priceETH && (
+                <p className="text-red-500 text-sm">{errors.priceETH}</p>
               )}
             </div>
           </div>
@@ -545,7 +600,7 @@ function CreateCollections() {
                 fontSize: "18px",
                 lineHeight: "100%",
                 letterSpacing: "0%",
-                 color: "#FFFFFF",
+                color: "#FFFFFF",
               }}
             >
               Cancel

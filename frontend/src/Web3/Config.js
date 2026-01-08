@@ -1,24 +1,11 @@
-// export const MARKETPLACE_ADDRESS =
-//   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+// src/Web3/Config.js
 
-// export const NFT_ADDRESS =
-//   "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+// ✅ Addresses from your deployment (Sepolia)
+export const NFT_ADDRESS = "0xC40f17FfF5591dbb12CD4279111C22bb33425244";
+export const MARKETPLACE_ADDRESS = "0x2E3Ae1bC661C170D009Cf3E9686dFFfF60AEDc0b";
 
-// In your Web3/Config.js, update for local network
-// export const MARKETPLACE_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-// export const NFT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-// export const NFT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-// export const MARKETPLACE_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-
-export const NFT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-export const MARKETPLACE_ADDRESS = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-
-
-
-
-
-
-// ... rest of your ABIs
+// ✅ CHAIN ID for Sepolia
+export const CHAIN_ID = 11155111; // Sepolia
 
 // ---------------- NFT ABI ----------------
 export const NFT_ABI = [
@@ -64,15 +51,31 @@ export const NFT_ABI = [
     "type": "function"
   },
   {
-    "anonymous": false,
+    "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }],
+    "name": "getApproved",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
-      { "indexed": true, "internalType": "address", "name": "owner", "type": "address" },
-      { "indexed": false, "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "indexed": false, "internalType": "string", "name": "tokenURI", "type": "string" },
-      { "indexed": false, "internalType": "uint16", "name": "royaltyBps", "type": "uint16" }
+      { "internalType": "address", "name": "operator", "type": "address" },
+      { "internalType": "bool", "name": "approved", "type": "bool" }
     ],
-    "name": "Minted",
-    "type": "event"
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" },
+      { "internalType": "address", "name": "operator", "type": "address" }
+    ],
+    "name": "isApprovedForAll",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
   }
 ];
 
@@ -122,27 +125,5 @@ export const MARKETPLACE_ABI = [
     ],
     "stateMutability": "view",
     "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": true, "internalType": "address", "name": "seller", "type": "address" },
-      { "indexed": true, "internalType": "address", "name": "nftAddress", "type": "address" },
-      { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "indexed": false, "internalType": "uint256", "name": "price", "type": "uint256" }
-    ],
-    "name": "ListingCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": true, "internalType": "address", "name": "buyer", "type": "address" },
-      { "indexed": true, "internalType": "address", "name": "seller", "type": "address" },
-      { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "indexed": false, "internalType": "uint256", "name": "price", "type": "uint256" }
-    ],
-    "name": "NFTSold",
-    "type": "event"
   }
 ];
