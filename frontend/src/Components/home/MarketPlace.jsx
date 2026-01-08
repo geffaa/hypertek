@@ -35,13 +35,13 @@ function PopularCollections() {
   console.log("your market data are here :", marketData);
 
   return (
-    <section className="relative z-10 w-full px-6 pb-20 overflow-hidden">
+    <section className="relative z-10 w-full px-6 pb-20 ">
       <GlowingOrb Xaxis={180} Yaxis={20} />
       <GlowingOrb Xaxis={700} Yaxis={420} />
 
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-        <div className="flex flex-col gap-3 items-center sm:items-start">
+      <div className="flex flex-col gap-3 items-center sm:items-start">
           <h1 className="text-white uppercase text-[20px] sm:text-[30px] font-goldman font-bold text-center sm:text-left">
             MarketPlace
           </h1>
@@ -120,3 +120,4 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
+

@@ -32,12 +32,12 @@ function PopularCollections() {
   }, []);
 
   return (
-    <section className="relative z-10 w-full px-6 pb-20 overflow-hidden">
-      <GlowingOrb Xaxis={200} Yaxis={460} />
+    <section className="relative z-10 w-full px-6 pb-20">
+      <GlowingOrb Xaxis={200} Yaxis={860} />
 
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-        <div className="flex flex-col gap-3">
+       <div className="flex flex-col gap-3">
           <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase truncate">
             Popular Collections
           </h1>
@@ -118,3 +118,4 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
+

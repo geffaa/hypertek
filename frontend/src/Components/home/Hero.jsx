@@ -32,20 +32,23 @@ export default function Hero() {
         backgroundPosition: "center 1px",
       }}
     >
-      {/* Hero Content */}
-      <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[100px]  mx-auto px-4 md:px-6">
+     {/* Hero Content */}
+     <div className="scale-x-[-1] z-10 flex flex-col justify-center h-full container pt-[100px]  mx-auto px-4 md:px-6">
         {/* Text */}
         <div className="flex flex-col max-w-[100%] md:max-w-[78%] text-center md:text-left md:ml-16">
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white md:pl-12 leading-[100%] uppercase m-0">
             Hyper Tek 100:
           </h1>
           <h1 className="font-[Goldman] font-bold text-[clamp(28px,5vw,40px)] text-white leading-[100%] uppercase m-0">
-            WHERE <span className="outline-text">Legends</span> Are{" "}
-            <span className="hidden md:inline">
-              <br />
-            </span>
-            <span className="md:hidden"> </span>Forged.
-          </h1>
+  WHERE <span className="outline-text">LEGENDS</span>
+  <span className="block md:hidden" />
+  <span className="hidden md:inline"> Are </span>
+  <span className="block md:hidden">ARE FORGED.</span>
+  <span className="hidden md:inline">
+    <br />
+    <span className="ml-36">Forged.</span>
+  </span>
+</h1>
         </div>
 
         {/* Buttons */}

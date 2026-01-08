@@ -535,7 +535,7 @@ function NfaLand() {
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
+          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover"
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">

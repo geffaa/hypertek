@@ -116,7 +116,7 @@ function AppWrapper() {
         {!shouldHideLayout && <Navbar />}
 
         <div style={{ flex: 1 }}>
-          <Routes>
+        <Routes key={location.pathname}>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

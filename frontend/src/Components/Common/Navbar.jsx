@@ -5,6 +5,7 @@ import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
+import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -479,7 +480,7 @@ export default function Navbar() {
               ) && (
                 <div className="hidden md:block">
                   <Link to="/signup">
-                    <CustomeButton text="Sign Up" />
+                    <CustomeButtonLarge text="Sign Up" />
                   </Link>
                 </div>
               )
@@ -492,9 +493,13 @@ export default function Navbar() {
           <div className="md:hidden  bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
             {/* Shop */}
             <button
-              onClick={() => setShopOpen(!shopOpen)}
-              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
-            >
+  onClick={(e) => {
+    e.stopPropagation();
+    setShopOpen(!shopOpen);
+  }}
+  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+>
+
               <span className="font-semibold">Shop</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform duration-200 ${
@@ -503,45 +508,55 @@ export default function Navbar() {
               />
             </button>
             {shopOpen && (
-              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Overview & Desc
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  My Assets
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Collectibles
-                </button>
-                <button
-                  className="py-2 text-left hover:text-blue-300 transition-colors duration-200"
-                  onClick={() => {
-                    closeMobileMenu();
-                    // Add navigation logic here
-                  }}
-                >
-                  Land
-                </button>
-              </div>
-            )}
+  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+
+    <Link
+      to="/market-place"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Overview
+    </Link>
+
+    <Link
+      to="/personal-activity"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      My Assets
+    </Link>
+
+    <Link
+      to="/nfa-expand"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Collectibles
+    </Link>
+
+    <Link
+      to="/land"
+      onClick={() => {
+        setShopOpen(false);
+        closeMobileMenu();
+      }}
+      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+    >
+      Land
+    </Link>
+
+  </div>
+)}
+
 
             {/* About & News */}
             <Link
@@ -559,52 +574,71 @@ export default function Navbar() {
               News
             </Link>
 
-            {/* Social */}
-            <button
-              onClick={() => setSocialOpen(!socialOpen)}
-              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
-            >
-              <span className="font-semibold">Social</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  socialOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {socialOpen && (
-              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-                <a
-                  href="https://discord.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
-                  Discord
-                </a>
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={XImg} alt="X.com" className="w-4 h-4" />
-                  X.com
-                </a>
-                <a
-                  href="https://t.me"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-                  onClick={closeMobileMenu}
-                >
-                  <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
-                  Telegram
-                </a>
-              </div>
-            )}
+           {/* Social */}
+           <button
+  onClick={(e) => {
+    e.stopPropagation();
+    setSocialOpen(!socialOpen);
+  }}
+  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+>
+
+  <span className="font-semibold">Social</span>
+  <ChevronDown
+    className={`h-4 w-4 transition-transform duration-200 ${
+      socialOpen ? "rotate-180" : ""
+    }`}
+  />
+</button>
+
+{socialOpen && (
+  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+  <a
+  href="https://discord.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+  onClick={(e) => {
+    e.stopPropagation();
+    setSocialOpen(false);
+    closeMobileMenu();
+  }}
+>
+      <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
+      Discord
+    </a>
+
+    <a
+      href="https://x.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSocialOpen(false);
+        closeMobileMenu();
+      }}
+    >
+      <img src={XImg} alt="X.com" className="w-4 h-4" />
+      X.com
+    </a>
+
+    <a
+      href="https://t.me"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+      onClick={(e) => {
+        e.stopPropagation();
+        setSocialOpen(false);
+        closeMobileMenu();
+      }}
+    >
+      <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
+      Telegram
+    </a>
+  </div>
+)}
 
             {/* Logged-in Search + Profile */}
             {isLoggedIn ? (

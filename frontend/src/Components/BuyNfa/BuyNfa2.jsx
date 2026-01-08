@@ -174,14 +174,14 @@ function BuyNfa2() {
   // ✅ Render UI
   if (loading) {
     return (
-      <section className="w-full max-w-[1240px] h-[400px] mt-6 mx-auto rounded-[11px] bg-[#0b0b0b] p-4 flex items-center justify-center">
+      <section className="w-full max-w-[1240px] h-[400px] mt-6 mx-auto rounded-[11px]  p-4 flex items-center justify-center">
         <p className="text-white text-center">Loading payment history...</p>
       </section>
     );
   }
 
   return (
-    <section className="w-full max-w-[1240px] h-[400px] mt-6 mx-auto rounded-[11px] bg-[#0b0b0b] p-4 relative">
+    <section className="w-full max-w-[1240px] h-[400px] mt-6 mx-auto rounded-[11px] p-4 relative">
       {/* Title */}
       <div className="text-white mb-2">
         <h1 className="text-[25px] font-inter font-bold">Price History</h1>
@@ -191,11 +191,11 @@ function BuyNfa2() {
       <div className="w-full border-t border-white opacity-70 mb-4"></div>
 
       {/* Chart Area */}
-      <div className="h-[320px] bg-[#111] rounded-lg p-4 relative">
+      <div className="h-[320px]  rounded-lg p-4 relative">
         <Bar data={data} options={options} redraw />
 
         {(noData || error) && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#111]/80 rounded-lg">
+          <div className="absolute inset-0 flex items-center justify-center /80 rounded-lg">
             <p className="text-gray-300 text-center text-sm sm:text-base px-4">
               {error || "No purchase history available."}
             </p>
