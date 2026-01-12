@@ -42,3 +42,37 @@
 #tab-logo{
    color: "black";
 }
+
+
+/* ========================= */
+/* MOBILE-ONLY FIXES */
+/* Desktop will NOT change */
+/* ========================= */
+@media (max-width: 768px) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  body {
+    background-color: #000; /* match your app background */
+  }
+
+  section,
+  div {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .custom-border::before,
+  .custom-border::after {
+    max-width: 100%;
+  }
+}

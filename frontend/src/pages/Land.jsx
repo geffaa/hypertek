@@ -13,6 +13,7 @@ import symbol from "../assets/images/login/Symbol.svg.png";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner"; // ✅ loader
+import CustomButton4 from "../Components/Buttons/Button4";
 
 function Land() {
   const [landData, setLandData] = useState([]);
@@ -70,54 +71,91 @@ function Land() {
   if (loading) return <FullScreenLoader />;
 
   return (
-    <div className="min-h-screen bg-transparent relative z-10 ">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
+    <div className="min-h-screen bg-transparent relative z-10">
+    {/* Hero Section */}
+    <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
+      <div className="mt-20 lg:mt-[92px]">
         <div
-          className="relative h-48 md:h-56 lg:h-[237px] w-full bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-16 lg:mb-24"
-          style={{ backgroundImage: `url(${overview1})` }}
+          className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.55) 40%,
+                rgba(0, 0, 0, 0.15) 65%,
+                rgba(0, 0, 0, 0) 100%
+              ),
+              url(${overview1})
+            `,
+            backgroundPosition: '50% 8.5%',
+            backgroundSize: 'cover',
+          }}
         >
-          <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%] lg:max-w-none">
-            <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mt-3 mb-2 lg:mb-0">
+          {/* Text Content */}
+          <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
+            <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
               A New Era Dawns in Hyper Tek
             </h1>
             <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
-              It's the start of a living, breathing universe where every decision shapes the journey...
+              It's the start of a living, breathing universe where every
+              decision shapes the journey. Whether you're racing at light speed,
+              forging alliances in the Overlord Realm, or uncovering secrets in
+              HyperQuest, this is your chance to leave your mark on the story.
             </p>
-          </div> 
-
-          <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
-            {[{ num: "5K", label: "Total Item" }, { num: "50.5K", label: "Total Volume" }, { num: "3.5K", label: "Listed" }, { num: "2.6K", label: "Owners" }].map((stat, i) => (
+          </div>
+  
+          {/* Stats Section */}
+          <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
+            {[
+              { num: "5K", label: "Total Item" },
+              { num: "50.5K", label: "Total Volume" },
+              { num: "3.5K", label: "Listed" },
+              { num: "2.6K", label: "Owners" },
+            ].map((stat, i) => (
               <div key={i} className="flex flex-col gap-1">
-                <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">{stat.num}</h1>
-                <p className="text-xs md:text-[12px] font-normal text-white">{stat.label}</p>
+                <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
+                  {stat.num}
+                </h1>
+                <p className="text-xs md:text-[12px] font-normal text-white">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Navigation & Search */}
-        <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
+        </div>
+  
+        {/* NavLinks & Search Section */}
+        <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
           <NavLinks />
-          <div className="hidden md:flex mr-16 lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] bg-white/10 backdrop-blur-sm">
+          <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
             <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
-            <input type="text" placeholder=" Search..." className="flex-1 bg-transparent pl-2 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full"
+            />
           </div>
         </div>
       </div>
-
-      {/* Land Section */}
-      <section className="max-w-7xl mx-auto flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16">
-        <div className="flex flex-col gap-2 items-start">
-          <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">Land</h1>
-          <div className="flex gap-2">
-            <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-            <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-            <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-            <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-          </div>
-        </div>
-<div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 mb-5 gap-4 lg:gap-6 justify-center">
+   
+ 
+      <section className="max-w-7xl mx-auto flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6">
+  {/* Heading */}
+  <div className="flex flex-col gap-2 items-start">
+    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+      Land
+    </h1>
+    <div className="flex gap-2">
+      <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+      <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+      <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+      <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+    </div>
+  </div>
+{/* DESKTOP & TABLET GRID */}
+<div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 mb-5 gap-4 lg:gap-6 justify-center">
 
   {/* ✅ Instant Sell Card (STATIC) */}
 <div
@@ -186,7 +224,7 @@ function Land() {
       <img
         src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
         alt={item.collection.name || "Land Collection"}
-        className="w-full h-full object-cover object-top scale-x-[-1]"
+        className="w-full h-full object-cover object-top"
       />
     </div>
 
@@ -209,8 +247,99 @@ function Land() {
     </div>
   </div>
 ))}
+</div>
+{/* MOBILE GRID – PopularCollections Style */}
+<div className="sm:hidden grid grid-cols-2 gap-4 pb-4">
+
+  {/* Instant Sell Card */}
+  <div
+    className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+    style={{
+      background:
+        "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+    }}
+  >
+    <div
+      className="h-[150px] flex items-center justify-center rounded-[14px]"
+    
+    >
+      <img src={Logo} alt="logo" className="w-16 h-16" />
+    </div>
+
+    <h2 className="text-[14px] font-semibold mt-4 text-center truncate">
+      Instant Sell
+    </h2>
+
+    <div className="flex justify-center items-center mt-3 gap-2 text-[11px]">
+      <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+        <img src={TVector} alt="" className="w-3 h-3" />
+      </div>
+      <span className="font-semibold">$1800</span>
+    </div>
+
+    <div className="flex justify-center items-center mt-10">
+      <CustomButton4 text="Sell Now" className="!text-xs !py-2 !px-6" />
+    </div>
+  </div>
+
+  {/* Land Cards */}
+  {landData.map((item) => (
+    <div
+      key={item._id}
+      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+      style={{
+        background:
+          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+      }}
+    >
+      <div
+        className="h-[150px] rounded-[14px] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+        }}
+      >
+        <img
+          src={
+            item.collection.image
+              ? `${BACKEND_BASE_URL}${item.collection.image}`
+              : land1Image
+          }
+          alt={item.collection.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <h2 className="text-[14px] font-semibold mt-4 truncate">
+        {item.collection.name}
+      </h2>
+
+      <div className="flex justify-between items-center mt-3 text-[11px]">
+        <span className="text-gray-300 font-medium truncate">
+          {item._id.slice(0, 6)} 🔥
+        </span>
+
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+            <img src={TVector} alt="" className="w-3 h-3" />
+          </div>
+          <span className="font-semibold truncate">
+            ${item.collection.chain}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center mt-10">
+        <Link to="/buy-land" state={{ item }}>
+          <CustomButton4 text="Buy Now" className="!text-xs !py-2 !px-6" />
+        </Link>
+      </div>
+    </div>
+  ))}
 
 </div>
+
+
 
       </section>
 

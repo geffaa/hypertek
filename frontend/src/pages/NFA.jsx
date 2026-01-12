@@ -4,6 +4,7 @@ import overview1 from "../assets/images/Overview/overview1.jpg";
 import popularCollections from "../assets/images/popular/popolar.png";
 import { FiSearch } from "react-icons/fi";
 import CustomButton from "../Components/Buttons/Button1";
+import CustomButton4 from "../Components/Buttons/Button4";
 import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import symbol from "../assets/images/login/Symbol.svg.png";
@@ -62,63 +63,93 @@ function NFA() {
   if (loading) return <FullScreenLoader />;
 
   return (
-    <div className="min-h-screen bg-transparent relative z-10 ">
-      {/* ---------------- HERO ---------------- */}
-      <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
-        <div
-          className="relative h-48 lg:h-[237px] bg-cover bg-top rounded-lg mb-16"
-          style={{ backgroundImage: `url(${overview1})` }}
-        >
-          <div className="absolute top-6 left-6 text-white">
-            <h1 className="text-2xl lg:text-[35px] font-semibold">
-              A New Era Dawns in Hyper Tek
-            </h1>
-            <p className="hidden md:block w-[920px] mt-2 text-[18px]">
-              it’s the start of a living, breathing universe where every
-              decision shapes the journey. Whether you’re racing at light speed,
-              forging alliances in the Overlord Realm, or uncovering secrets in
-              HyperQuest, this is your chance to leave your mark on the story.
-            </p>
-          </div>
+    <div className="min-h-screen bg-transparent relative z-10">
+  {/* Hero Section */}
+  <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
+    <div className="mt-20 lg:mt-[92px]">
+      <div
+        className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24 rounded-lg"
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              to right,
+              rgba(0, 0, 0, 0.85) 0%,
+              rgba(0, 0, 0, 0.55) 40%,
+              rgba(0, 0, 0, 0.15) 65%,
+              rgba(0, 0, 0, 0) 100%
+            ),
+            url(${overview1})
+          `,
+          backgroundPosition: '50% 8.5%',
+          backgroundSize: 'cover',
+        }}
+      >
+        {/* Text Content */}
+        <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
+          <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
+            A New Era Dawns in Hyper Tek
+          </h1>
+          <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
+            It's the start of a living, breathing universe where every
+            decision shapes the journey. Whether you're racing at light speed,
+            forging alliances in the Overlord Realm, or uncovering secrets in
+            HyperQuest, this is your chance to leave your mark on the story.
+          </p>
+        </div>
 
-          <div className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
-            {[
-              { num: "5K", label: "Total Item" },
-              { num: "50.5K", label: "Total Volume" },
-              { num: "3.5K", label: "Listed" },
-              { num: "2.6K", label: "Owners" },
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col gap-1">
-                <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
-                  {stat.num}
-                </h1>
-                <p className="text-xs md:text-[12px] font-normal text-white">
-                  {stat.label}
-                </p>
+        {/* Stats Section */}
+        <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
+          {[
+            { num: "5K", label: "Total Item" },
+            { num: "50.5K", label: "Total Volume" },
+            { num: "3.5K", label: "Listed" },
+            { num: "2.6K", label: "Owners" },
+          ].map((stat, i) => (
+            <div key={i} className="flex flex-col gap-1">
+              <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
+                {stat.num}
+              </h1>
+              <p className="text-xs md:text-[12px] font-normal text-white">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  
+
+
+    <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
+                <NavLinks />
+                <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
+                  <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full"
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-between items-center mb-8">
-          <NavLinks />
-          <div className="hidden md:flex items-center gap-3 border border-white/40 rounded-lg px-4 py-2">
-            <FiSearch className="text-white" />
-            <input
-              placeholder="Search..."
-              className="bg-transparent outline-none text-white"
-            />
-          </div>
-        </div>
       </div>
 
       {/* ---------------- NFA SECTION ---------------- */}
-      <section className="max-w-7xl mx-auto mb-16">
-        <h1 className="text-white text-2xl lg:text-[30px] font-bold mb-6">
+      <section className="max-w-7xl mx-auto flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6">
+  {/* Heading */}
+  <div className="flex flex-col gap-2 items-start">
+    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
           NFA
-        </h1>
+          </h1>
+    <div className="flex gap-2">
+      <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+      <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+      <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+      <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+    </div>
+  </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+{/* DESKTOP & TABLET GRID */}
+<div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 mb-5 gap-4 lg:gap-6 justify-center">
         {/* ✅ INSTANT SELL (STATIC CARD) */}
 <div
   className="rounded-[18px] p-5 text-white flex flex-col items-center justify-center h-[420px]"
@@ -191,7 +222,7 @@ function NFA() {
             : popularCollections
         }
         alt={item.collection?.name || "NFA Collection"}
-        className="w-full h-full object-cover object-top scale-x-[-1]"
+        className="w-full h-full object-cover object-top "
       />
     </div>
 
@@ -214,8 +245,96 @@ function NFA() {
     </div>
   </div>
 ))}
-
         </div>
+   {/* MOBILE GRID */}
+<div className="sm:hidden grid grid-cols-2 gap-4 pb-4">
+
+{/* Instant Sell Card */}
+<div
+  className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+  style={{
+    background:
+      "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+  }}
+>
+  <div className="h-[150px] flex items-center justify-center rounded-[14px]">
+    <img src={Logo} alt="logo" className="w-16 h-16" />
+  </div>
+
+  <h2 className="text-[14px] font-semibold mt-4 text-center truncate">
+    Instant Sell
+  </h2>
+
+  <div className="flex justify-center items-center mt-3 gap-2 text-[11px]">
+    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+      <img src={TVector} alt="" className="w-3 h-3" />
+    </div>
+    <span className="font-semibold">$1800</span>
+  </div>
+
+  <div className="flex justify-center items-center mt-10">
+    <button onClick={openFirstModal}>
+      <CustomButton4 text="Sell Now" className="!text-xs !py-2 !px-6" />
+    </button>
+  </div>
+</div>
+
+{/* Market Cards (Mobile Style) */}
+{marketData.slice(0, 3).map((item) => (
+  <div
+    key={item._id}
+    className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+    style={{
+      background:
+        "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+    }}
+  >
+    <div
+      className="h-[150px] rounded-[14px] overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+      }}
+    >
+      <img
+        src={
+          item.collection?.image
+            ? `${BACKEND_BASE_URL}${item.collection.image}`
+            : popularCollections
+        }
+        alt={item.collection?.name}
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+    <h2 className="text-[14px] font-semibold mt-4 truncate">
+      {item.collection?.name}
+    </h2>
+
+    <div className="flex justify-between items-center mt-3 text-[11px]">
+      <span className="text-gray-300 font-medium truncate">
+        {item._id.slice(0, 6)} 🔥
+      </span>
+
+      <div className="flex items-center gap-2">
+        <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+          <img src={TVector} alt="" className="w-3 h-3" />
+        </div>
+        <span className="font-semibold truncate">
+          ${item.collection?.chain}
+        </span>
+      </div>
+    </div>
+
+    <div className="flex justify-center items-center mt-10">
+      <Link to="/buy-nfa" state={{ item }}>
+        <CustomButton4 text="Buy Now" className="!text-xs !py-2 !px-6" />
+      </Link>
+    </div>
+  </div>
+))}
+</div>
+
       </section>
 
       {/* ---------------- MODALS (same as yours) ---------------- */}
@@ -284,7 +403,7 @@ function NFA() {
                       className="bg-[#002AA8] mr-0.5"
                       style={{
                         width: "0.25rem", // ~3.99px
-                        height: "1.3rem", // ~21.93px
+                        height: "1.1rem", // ~21.93px
                       }}
                     ></div>
                     {/* Left angled border */}
@@ -292,7 +411,7 @@ function NFA() {
                       className="border-[#002AA8]"
                       style={{
                         width: "0.5rem", // ~7.97px
-                        height: "2.5rem", // ~42.86px
+                        height: "2.2rem", // ~42.86px
                         borderStyle: "solid",
                         borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                       }}
@@ -301,8 +420,8 @@ function NFA() {
                     <div
                       className="flex items-center justify-center text-white font-medium"
                       style={{
-                        width: "10rem", // ~168px
-                        height: "2.2rem", // ~39.59px
+                        width: "8rem", // ~168px
+                        height: "2.0rem", // ~39.59px
                         // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                         border: "0.15rem solid #002AA8", // ~2.42px
                       }}
@@ -314,7 +433,7 @@ function NFA() {
                       className="border-[#002AA8]"
                       style={{
                         width: "0.5rem", // ~7.97px
-                        height: "2.3rem", // ~42.86px
+                        height: "2.2rem", // ~42.86px
                         borderStyle: "solid",
                         borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                       }}
@@ -324,14 +443,14 @@ function NFA() {
                       className="bg-[#002AA8]"
                       style={{
                         width: "0.25rem", // ~3.99px
-                        height: "1.3rem", // ~21.93px
+                        height: "1.1rem", // ~21.93px
                       }}
                     ></div>
                   </div>
                 </button>
                 {/* :white_check_mark: Large screen - opens second modal */}
 <Link to="/wallet-connect" onClick={handleSellNow} className="hidden md:block">
-  <CustomButton text="Sell Now" />
+  <CustomButton4 text="Sell Now" />
 </Link>
 {/* :white_check_mark: Small screen - navigates to /wallet-connect */}
 <Link to="/wallet-connect" className="block md:hidden">
