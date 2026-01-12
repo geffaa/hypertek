@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import TVector from "../../assets/images/popular/vector.png";
-import CustomButton from "../Buttons/Button1";
+import CustomButton4 from "../Buttons/Button4";
 import GlowingOrb from "../Common/BgColoring";
 import { MarketPlace_Url, NewsImage_Url } from "../../Config";
 
@@ -55,19 +55,21 @@ function PopularCollections() {
         {error && <p className="text-red-500">{error}</p>}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10">
+
             {landData.slice(0, 4).map((item) => (
               <div
                 key={item?._id}
-                className="relative rounded-[18px] p-5 text-white flex flex-col h-[420px]"
+                className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col
+           h-[360px] sm:h-[390px] lg:h-[420px]"
+
                 style={{
                   background:
                     "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                 }}
               >
                 {/* IMAGE */}
-                <div
-                  className="h-[210px] rounded-[16px] overflow-hidden"
+                <div className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
                   style={{
                     background:
                       "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
@@ -82,12 +84,14 @@ function PopularCollections() {
 
                 {/* TITLE */}
                 {/* TITLE */}
-                <h2 className="text-[16px] sm:text-[18px] font-semibold mt-5 truncate">
+                <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
+
                   {item?.collection?.name}
                 </h2>
 
                 {/* INFO */}
-                <div className="flex justify-between items-center mt-4 text-[12px] sm:text-sm">
+                <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
+
                   <span className="font-medium text-gray-300 truncate">
                     {item?.collection?.symbol} 🔥
                   </span>
@@ -104,8 +108,9 @@ function PopularCollections() {
 
                 {/* BUTTON */}
                 <div className="flex justify-center items-center mt-8">
+
                   <Link to="/market-place">
-                    <CustomButton text="Buy Now" />
+                    <CustomButton4 text="Buy Now" />
                   </Link>
                 </div>
               </div>
