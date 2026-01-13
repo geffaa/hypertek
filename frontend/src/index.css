@@ -6,6 +6,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== GLOBAL RESET (FIX SIDE GAP) ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
 
 
 
