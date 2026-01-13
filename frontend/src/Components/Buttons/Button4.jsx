@@ -1,0 +1,64 @@
+// src/components/CustomButton.jsx
+import React from "react";
+import "../../App.css";
+
+const CustomButton4 = ({ text }) => {
+  return (
+    <div
+      className="
+        flex items-center 
+        scale-[0.85] sm:scale-[0.95]    /* ↑ increased scale */
+        transition-transform duration-300 ease-in-out 
+        md:hover:scale-[1]             /* ↑ increased hover scale */
+        group
+      "
+    >
+      {/* Left small bar */}
+      <div className="bg-[#002AA8] md:h-[1.5rem] h-[1.1rem] w-[0.25rem] mr-0.5 transition-all duration-300 group-hover:bg-[#0034d6]" />
+
+      {/* Left angled border */}
+      <div
+        className="border-[#002AA8] md:w-[7.5px] w-[5.5px] md:h-[35px] h-[25px] transition-all duration-300 group-hover:border-[#0034d6]"
+        style={{
+          borderStyle: "solid",
+          borderWidth: "0.35rem 0.25rem 0.35rem 0",
+        }}
+      />
+
+      {/* Main button area */}
+      <div
+        className="
+          flex items-center justify-center 
+          text-white font-inter font-medium 
+          text-[14px] md:text-[15px]      /* ↑ font size */
+          leading-[1] text-center
+          md:w-[140px] w-[110px]         /* ↑ width */
+          py-[6px] md:py-[7px]           /* ↑ padding */
+          transition-all duration-300 ease-in-out
+          group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
+        "
+        style={{
+          background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+          border: "0.15rem solid #002AA8", /* ↑ border thickness */
+        }}
+      >
+        {text}
+      </div>
+
+      {/* Right angled border */}
+      <div
+        className="border-[#002AA8] md:w-[7.5px] w-[5.5px] md:h-[35px] h-[25px] transition-all duration-300 group-hover:border-[#0034d6]"
+        style={{
+          borderStyle: "solid",
+          borderWidth: "0.25rem 0 0.35rem 0.25rem",
+        }}
+      />
+
+      {/* Right small bar */}
+      <div className="bg-[#002AA8] md:h-[1.5rem] h-[1.1rem] w-[0.25rem] transition-all duration-300 group-hover:bg-[#0034d6]" />
+    </div>
+  );
+};
+
+export default CustomButton4;
+
