@@ -96,36 +96,42 @@ if (loading) {
   }
 
   return (
-    <div className="min-h-screen bg-transparent px-4 sm:px-6 lg:px-8">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto mt-20 lg:mt-[92px]">
-        {/* Hero Banner */}
+    <div className="min-h-screen bg-transparent relative z-10">
+    {/* Hero Section */}
+    <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
+      <div className="mt-20 lg:mt-[92px]">
         <div
-          className="relative h-48 md:h-56 lg:h-[237px] w-full 
-          bg-cover bg-top bg-no-repeat rounded-lg shadow-lg mb-16 lg:mb-24"
-          style={{ backgroundImage: `url(${overview1})` }}
+          className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24 rounded-lg"
+          style={{
+            backgroundImage: `
+              linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.55) 40%,
+                rgba(0, 0, 0, 0.15) 65%,
+                rgba(0, 0, 0, 0) 100%
+              ),
+              url(${overview1})
+            `,
+            backgroundPosition: '50% 8.5%',
+            backgroundSize: 'cover',
+          }}
         >
           {/* Text Content */}
           <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
             <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
               A New Era Dawns in Hyper Tek
             </h1>
-            <p
-              className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
-  leading-relaxed text-white"
-            >
+            <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
               It's the start of a living, breathing universe where every
               decision shapes the journey. Whether you're racing at light speed,
               forging alliances in the Overlord Realm, or uncovering secrets in
               HyperQuest, this is your chance to leave your mark on the story.
             </p>
           </div>
-
+  
           {/* Stats Section */}
-         <div
-            className="absolute bottom-4 left-4 lg:top-[185px] lg:left-[48px] 
-            w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]"
-          >
+          <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
             {[
               { num: "5K", label: "Total Item" },
               { num: "50.5K", label: "Total Volume" },
@@ -143,26 +149,27 @@ if (loading) {
             ))}
           </div>
         </div>
+      </div>
+    
+
 
         {/* Navigation and Search */}
-        <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-
-          <NavLinks />
-
-          {/* Search Bar */}
-          <div className="hidden md:flex w-full lg:w-[550px] items-center gap-3 px-4 py-3 border border-white/50 rounded-[12px] bg-white/10 backdrop-blur-sm">
-            <FiSearch className="text-white w-5 h-5 flex-shrink-0" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="flex-1 bg-transparent text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter"
-            />
-          </div>
-        </div>
-      </div>
+        <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
+                <NavLinks />
+                <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
+                  <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full"
+                  />
+                </div>
+              </div>
+            </div>
+   
 
       {/* Activities Section */}
-      <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8 mb-16">
+   <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-4 sm:px-6 lg:px-0">
         {/* Section Title */}
         <div className="flex flex-col gap-2 items-start">
           <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
@@ -242,6 +249,7 @@ if (loading) {
         </div>
       </section>
     </div>
+  
   );
 }
 
