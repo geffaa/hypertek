@@ -277,8 +277,8 @@ function Land() {
       <span className="font-semibold">$1800</span>
     </div>
 
-    <div className="flex justify-center items-center mt-10">
-      <CustomButton4 text="Sell Now" className="!text-xs !py-2 !px-6" />
+    <div  onClick={openFirstModal} className="flex justify-center items-center mt-10">
+      <CustomButton4  text="Sell Now" className="!text-xs !py-2 !px-6" />
     </div>
   </div>
 
@@ -408,7 +408,7 @@ function Land() {
                          className="bg-[#002AA8] mr-0.5"
                          style={{
                            width: "0.25rem", // ~3.99px
-                           height: "1.3rem", // ~21.93px
+                           height: "1.1rem", // ~21.93px
                          }}
                        ></div>
                        {/* Left angled border */}
@@ -416,7 +416,7 @@ function Land() {
                          className="border-[#002AA8]"
                          style={{
                            width: "0.5rem", // ~7.97px
-                           height: "2.5rem", // ~42.86px
+                           height: "2.2rem", // ~42.86px
                            borderStyle: "solid",
                            borderWidth: "0.375rem 0.25rem 0.375rem 0", // ~6px 4px 6px 0
                          }}
@@ -425,8 +425,8 @@ function Land() {
                        <div
                          className="flex items-center justify-center text-white font-medium"
                          style={{
-                           width: "10rem", // ~168px
-                           height: "2.2rem", // ~39.59px
+                           width: "7rem", // ~168px
+                           height: "2.0rem", // ~39.59px
                            // background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
                            border: "0.15rem solid #002AA8", // ~2.42px
                          }}
@@ -438,7 +438,7 @@ function Land() {
                          className="border-[#002AA8]"
                          style={{
                            width: "0.5rem", // ~7.97px
-                           height: "2.3rem", // ~42.86px
+                           height: "2.2rem", // ~42.86px
                            borderStyle: "solid",
                            borderWidth: "0.25rem 0 0.375rem 0.25rem", // ~4px 0 6px 4px
                          }}
@@ -448,7 +448,7 @@ function Land() {
                          className="bg-[#002AA8]"
                          style={{
                            width: "0.25rem", // ~3.99px
-                           height: "1.3rem", // ~21.93px
+                           height: "1.1rem", // ~21.93px
                          }}
                        ></div>
                      </div>
