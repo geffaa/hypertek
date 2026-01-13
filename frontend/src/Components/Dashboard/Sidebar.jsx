@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation , useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import Logo from "../../assets/images/Sidebar/logo.png";
+import Logo from "../../assets/logo1.png";
 import DashboardImage from "../../assets/images/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
 import CreateCollection2 from "../../assets/images/Sidebar/create2.png";
@@ -105,7 +105,7 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Logo - Centered */}
           <div className="flex justify-center mt-12 mb-12">
             <div className="hidden lg:flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
-              <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
+              <img src={Logo} alt="Logo" className="w-[35px] h-[35px]" />
               <span className="font-inter font-bold text-[18px] leading-[22px]">
                 HYPER TEK
               </span>
