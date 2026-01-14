@@ -510,19 +510,18 @@ function NfaLand() {
   const buttonConfig = getButtonAction();
 
   return (
-    <div flex flex-col w-full mt-14 md:px-24 text-white">
-      {/* Tabs */}
-      <div
-        className="flex justify-between items-center text-white"
-        style={{
-      width: "200px",
-      height: "28px",
-      position: "absolute",
-      top: "100px", // moved down from 70px to 100px
-      left: "134px",
-    }}
-  
-      >
+    <div className="flex flex-col w-full mt-14 md:px-24 text-white">
+    {/* Tabs */}
+    <div
+      className="flex justify-between items-center text-white"
+      style={{
+        width: "200px",
+        height: "28px",
+        position: "absolute",
+        top: "100px", // moved down from 70px to 100px
+        left: "134px",
+      }}
+    >
         <Link to="/overview" className="text-white font-medium">
           Overview
         </Link>
@@ -536,7 +535,7 @@ function NfaLand() {
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26]"
+          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover"
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
@@ -721,6 +720,5 @@ function NfaLand() {
     </div>
   );
 }
-
 
 export default NfaLand;
