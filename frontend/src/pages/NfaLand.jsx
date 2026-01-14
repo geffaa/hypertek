@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../Config";
+import FaceOne from "../assets/images/noActivity1.png";
+import FaceTwo from "../assets/images/noActivity2.png";
+
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 import { ethers } from "ethers";
 import {
@@ -29,6 +32,10 @@ function NfaLand() {
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const [showOffers, setShowOffers] = useState(false);
+const [offers, setOffers] = useState([]);
+  
 
   useEffect(() => {
     if (!item) {
@@ -510,32 +517,39 @@ function NfaLand() {
   const buttonConfig = getButtonAction();
 
   return (
-    <div className="flex flex-col w-full mt-12 md:px-24 text-white">
+    <div className="flex flex-col w-full mt-14 md:px-24 text-white">
       {/* Tabs */}
-      <div
-        className="flex justify-between items-center text-white"
-        style={{
-          width: "200px",
-          height: "28px",
-          position: "absolute",
-          top: "70px",
-          left: "134px",
-        }}
-      >
-        <Link to="/overview" className="text-white font-medium">
-          Overview
-        </Link>
-        <Link to="/offers" className="text-white font-medium">
-          Offers <span>0</span>
-        </Link>
-      </div>
-
+      <div className="flex flex-col w-full mt-14 md:px-24 text-white">
+  {/* Tabs */}
+  <div
+    className="flex justify-between items-center text-white"
+    style={{
+      width: "200px",
+      height: "28px",
+      position: "absolute",
+      top: "100px", // moved down from 70px to 100px
+      left: "134px",
+    }}
+  >
+    <Link to="/market-place" className="text-white font-medium">
+      Overview
+    </Link>
+    <button
+      onClick={() => setShowOffers(true)}
+      className="text-white font-medium"
+    >
+      Offers <span>{offers.length}</span>
+    </button>
+  </div>
+</div>
       {/* Main Content */}
-      <div className="max-w-[918px] mx-auto w-full mt-16 flex flex-col md:flex-row gap-8 px-4">
+      <div className="max-w-[918px] mx-auto w-full mt-10 flex flex-col md:flex-row gap-8 px-4">
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
+          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover 
+bg-gradient-to-b from-[#977C34] to-[#493F26] "
+
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
@@ -567,7 +581,7 @@ function NfaLand() {
             )}
           </div>
 
-          <div className="bg-[#17171887] p-6 rounded-lg">
+          <div className=" p-6 rounded-lg">
             <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
               <span className="truncate max-w-[150px]" title={collection?.owner}>
@@ -717,9 +731,58 @@ function NfaLand() {
           </div>
         </div>
       )}
+      {showOffers && (
+  <div
+    className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"
+    style={{ alignItems: "flex-start", paddingTop: "100px" }}
+  >
+    <div className="bg-[#1f2937] w-[700px] relative p-6 text-white">
+      
+      <button
+        onClick={() => setShowOffers(false)}
+        className="absolute top-3 right-4 text-xl opacity-70 hover:opacity-100"
+      >
+        ×
+      </button>
+
+      <h2 className="text-lg font-semibold mb-4">
+        {collection?.name}
+      </h2>
+
+      <div className="flex gap-6 border-b border-white/10 pb-2 mb-6">
+        <span className="opacity-70">Overview</span>
+        <span className="font-semibold border-b-2 border-blue-500">
+          Offers {offers.length}
+        </span>
+      </div>
+
+      {offers.length === 0 && (
+        <div className="relative flex flex-col justify-center items-center h-[420px] overflow-hidden">
+          <h1 className="text-center font-bold text-3xl">
+            No offers right now
+          </h1>
+
+          <div className="flex mt-4">
+            <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
+            <h1 className="text-[#8C9ED8] font-bold text-[160px] mx-2">0</h1>
+            <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
+          </div>
+
+          <div className="absolute top-[11rem] left-1/2 -translate-x-1/2">
+            <img src={FaceOne} className="w-28 h-24" />
+          </div>
+
+          <div className="absolute top-[15rem] left-1/2 -translate-x-1/2">
+            <img src={FaceTwo} className="w-16 h-10 pb-3" />
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
 
 export default NfaLand;
-
