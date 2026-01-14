@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InfoIcon from "../assets/images/info.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 
@@ -6,14 +7,17 @@ function WalletConnect() {
   const [isVisible, setIsVisible] = useState(true);
   const [isSecondModalView, setIsSecondModalView] = useState(false);
 
-  const closeFirstModal = () => setIsVisible(false);
+  const navigate = useNavigate();
+
+  const closeAndGoToNfa = () => {
+    setIsVisible(false);
+    setIsSecondModalView(false);
+    navigate("/nfa-expand");
+  };
+
   const handleOnclickFirst = () => {
     setIsVisible(false);
     setIsSecondModalView(true);
-  };
-  const closeSecondModal = () => {
-    setIsSecondModalView(false);
-    setIsVisible(true);
   };
 
   return (
@@ -30,13 +34,12 @@ function WalletConnect() {
               left-1/2 -translate-x-1/2
               bg-[#2b3442]
               w-[90%] sm:w-[350px]
-              
               text-white
               shadow-xl
             "
           >
             <button
-              onClick={closeFirstModal}
+              onClick={closeAndGoToNfa}
               className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
             >
               ×
@@ -70,15 +73,16 @@ function WalletConnect() {
 
           {/* Warning Box */}
           <div
-  className="
-    absolute
-    bottom-[22%] sm:bottom-[12%] md:bottom-[14%]
-    left-1/2 -translate-x-1/2
-    w-[90%] md:w-[640px]
-    p-4 md:p-6
-    text-white
-  "
->          <div className="flex items-center gap-3 mb-4">
+            className="
+              absolute
+              bottom-[22%] sm:bottom-[12%] md:bottom-[14%]
+              left-1/2 -translate-x-1/2
+              w-[90%] md:w-[640px]
+              p-4 md:p-6
+              text-white
+            "
+          >
+            <div className="flex items-center gap-3 mb-4">
               <img src={InfoIcon} alt="info" className="w-5 h-5" />
               <p className="text-sm text-blue-400">
                 HyperTek will never request your seed phrase or private key.
@@ -118,7 +122,7 @@ function WalletConnect() {
             "
           >
             <button
-              onClick={closeSecondModal}
+              onClick={closeAndGoToNfa}
               className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
             >
               ×
