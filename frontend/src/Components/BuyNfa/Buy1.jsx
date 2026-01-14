@@ -4,10 +4,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ethers } from "ethers";
-import FaceOne from "../../assets/images/noActivity1.png";
-import FaceTwo from "../../assets/images/noActivity2.png";
-import BackHome from "../../assets/images/backhome.png";
-
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
@@ -33,9 +29,6 @@ function Buy1() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
-  const [showOffers, setShowOffers] = useState(false);
-const [offers, setOffers] = useState([]);
-
 
   /* ---------------------------------- INIT ---------------------------------- */
   useEffect(() => {
@@ -496,39 +489,32 @@ const [offers, setOffers] = useState([]);
   if (!item) return null;
 
   return (
-    <div className="flex flex-col w-full mt-14 md:px-24 text-white">
+    <div className="flex flex-col w-full mt-12 md:px-24 text-white">
       {/* Tabs */}
-      <div className="flex flex-col w-full mt-14 md:px-24 text-white">
-  {/* Tabs */}
-  <div
-    className="flex justify-between items-center text-white"
-    style={{
-      width: "200px",
-      height: "28px",
-      position: "absolute",
-      top: "100px", // moved down from 70px to 100px
-      left: "134px",
-    }}
-  >
-    <Link to="/market-place" className="text-white font-medium">
-      Overview
-    </Link>
-    <button
-      onClick={() => setShowOffers(true)}
-      className="text-white font-medium"
-    >
-      Offers <span>{offers.length}</span>
-    </button>
-  </div>
-</div>
-
+      <div
+        className="flex justify-between items-center text-white"
+        style={{
+          width: "200px",
+          height: "28px",
+          position: "absolute",
+          top: "70px",
+          left: "134px",
+        }}
+      >
+        <Link to="/overview" className="text-white font-medium">
+          Overview
+        </Link>
+        <Link to="/offers" className="text-white font-medium">
+          Offers <span>0</span>
+        </Link>
+      </div>
 
       {/* Main Content */}
-      <div className="max-w-[918px] mx-auto w-full mt-2 flex flex-col md:flex-row gap-8 px-4">
+      <div className="max-w-[918px] mx-auto w-full mt-16 flex flex-col md:flex-row gap-8 px-4">
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26] "
+          className="w-full md:w-[375px] h-[350px] rounded-lg object-cover"
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
@@ -561,7 +547,7 @@ const [offers, setOffers] = useState([]);
             )}
           </div>
 
-          <div className="p-6 rounded-lg">
+          <div className="bg-[#17171887] p-6 rounded-lg">
             <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
               <span className="truncate max-w-[150px]" title={collection?.owner}>
@@ -715,97 +701,8 @@ const [offers, setOffers] = useState([]);
           </div>
         </div>
       )}
-
-      {/* OFFERS POPUP */}
-{showOffers && (
-  <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center" 
-  style={{ alignItems: 'flex-start', paddingTop: '100px' }}>
-    <div className="bg-[#1f2937] w-[700px] relative p-6 text-white">
-
-      {/* Close */}
-      <button
-        onClick={() => setShowOffers(false)}
-        className="absolute top-3 right-4 text-xl opacity-70 hover:opacity-100"
-      >
-        ×
-      </button>
-
-      {/* Header */}
-      <h2 className="text-lg font-semibold mb-4">
-        {collection?.name}
-      </h2>
-
-      {/* Tabs */}
-      <div className="flex gap-6 border-b border-white/10 pb-2 mb-6">
-        <span className="opacity-70">Overview</span>
-        <span className="font-semibold border-b-2 border-blue-500">
-          Offers {offers.length}
-        </span>
-      </div>
-{/* EMPTY STATE */}
-{offers.length === 0 && (
-  <div className="relative flex flex-col justify-center items-center h-[420px] overflow-hidden">
-
-    <h1 className="text-center text-white font-bold text-3xl">
-      No offers right now
-    </h1>
-
-    <div className="flex text-center mt-4">
-          <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
-          <h1 className="text-[#8C9ED8] font-bold text-[160px] mx-2">0</h1>
-          <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
-        </div>
-
-        {/* Floating Faces */}
-        <div className="absolute top-[11rem] left-1/2 -translate-x-1/2 pointer-events-none z-10">
-          <img src={FaceOne} alt="Face One" className="w-28 h-24" />
-        </div>
-
-        <div className="absolute top-[15rem] left-1/2 -translate-x-1/2 pointer-events-none z-10">
-          <img src={FaceTwo} alt="Face Two" className="w-16 h-10 pb-3" />
-        </div>
-
-
-  
-  </div>
-)}
-
-
-      {/* OFFERS LIST */}
-      {offers.length > 0 && (
-        <div className="w-full">
-          <div className="grid grid-cols-5 gap-4 text-sm opacity-70 mb-3">
-            <span>Price</span>
-            <span>Offers</span>
-            <span>From</span>
-            <span>Expire In</span>
-            <span>Action</span>
-          </div>
-
-          {offers.map((offer, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-5 gap-4 items-center bg-white/5 p-3 rounded"
-            >
-              <span>{offer.price} USDT</span>
-              <span>Collection</span>
-              <span>{offer.from}</span>
-              <span>{offer.expire}</span>
-              <button className="bg-blue-600 px-3 py-1 rounded text-sm">
-                Accept Offer
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  </div>
-)}
-
-
     </div>
   );
 }
-
 
 export default Buy1;
