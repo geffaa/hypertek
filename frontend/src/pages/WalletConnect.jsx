@@ -20,37 +20,39 @@ function WalletConnect() {
 
   // 🔹 MetaMask Connect Function (UNCHANGED)
   const connectMetaMask = async () => {
-    if (!window.ethereum || !window.ethereum.isMetaMask) {
-      alert("MetaMask is not installed");
-      return;
+  if (!window.ethereum || !window.ethereum.isMetaMask) {
+    alert("MetaMask is not installed");
+    return;
+  }
+
+  if (isConnecting) return;
+
+  try {
+    setIsConnecting(true);
+    setIsVisible(false);
+    setIsSecondModalView(true);
+
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+    if (accounts && accounts.length > 0) {
+      setAccount(accounts[0]);
+
+      // ✅ SUCCESS → navigate
+      setTimeout(() => {
+        setIsSecondModalView(false);
+        navigate("/nfa-expand");
+      }, 1000);
     }
-
-    if (isConnecting) return;
-
-    try {
-      setIsConnecting(true);
-      setIsVisible(false);
-      setIsSecondModalView(true);
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (accounts && accounts.length > 0) {
-        setAccount(accounts[0]);
-
-        setTimeout(() => {
-          setIsSecondModalView(false);
-        }, 1000);
-      }
-    } catch (err) {
-      console.error("MetaMask error:", err);
-      setIsSecondModalView(false);
-      setIsVisible(true);
-    } finally {
-      setIsConnecting(false);
-    }
-  };
+  } catch (err) {
+    console.error("MetaMask error:", err);
+    setIsSecondModalView(false);
+    setIsVisible(true);
+  } finally {
+    setIsConnecting(false);
+  }
+};
 
   return (
     <>
@@ -145,3 +147,4 @@ function WalletConnect() {
 }
 
 export default WalletConnect;
+
