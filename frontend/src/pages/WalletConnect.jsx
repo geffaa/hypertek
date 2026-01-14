@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InfoIcon from "../assets/images/info.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 
@@ -59,7 +60,7 @@ function WalletConnect() {
         <div className="fixed inset-0 z-40 backdrop-blur-md bg-black/40 flex justify-center">
           <div className="absolute top-[24%] md:top-[20%] left-1/2 -translate-x-1/2 bg-[#2b3442] w-[90%] sm:w-[350px] text-white shadow-xl">
             <button
-              onClick={closeFirstModal}
+              onClick={closeAndGoToNfa}
               className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
             >
               ×
@@ -108,7 +109,7 @@ function WalletConnect() {
         <div className="fixed inset-0 z-50 backdrop-blur-md bg-black/40 flex items-center justify-center">
           <div className="bg-[#2b3442] w-[90%] sm:w-[360px] rounded-xl text-white relative px-6 py-5 shadow-xl">
             <button
-              onClick={closeSecondModal}
+              onClick={closeAndGoToNfa}
               className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
             >
               ×
