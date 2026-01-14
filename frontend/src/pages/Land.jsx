@@ -220,7 +220,7 @@ function Land() {
       background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
     }}
   >
-    <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
+    <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26] ">
       <img
         src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
         alt={item.collection.name || "Land Collection"}
