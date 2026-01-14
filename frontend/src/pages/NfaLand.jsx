@@ -510,17 +510,18 @@ function NfaLand() {
   const buttonConfig = getButtonAction();
 
   return (
-    <div className="flex flex-col w-full mt-12 md:px-24 text-white">
+    <div flex flex-col w-full mt-14 md:px-24 text-white">
       {/* Tabs */}
       <div
         className="flex justify-between items-center text-white"
         style={{
-          width: "200px",
-          height: "28px",
-          position: "absolute",
-          top: "70px",
-          left: "134px",
-        }}
+      width: "200px",
+      height: "28px",
+      position: "absolute",
+      top: "100px", // moved down from 70px to 100px
+      left: "134px",
+    }}
+  
       >
         <Link to="/overview" className="text-white font-medium">
           Overview
@@ -535,7 +536,7 @@ function NfaLand() {
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover"
+          className="w-full  md:w-[340px] h-[320px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26]"
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
@@ -567,7 +568,7 @@ function NfaLand() {
             )}
           </div>
 
-          <div className="bg-[#17171887] p-6 rounded-lg">
+          <div className=" p-6 rounded-lg">
             <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
               <span className="truncate max-w-[150px]" title={collection?.owner}>
@@ -720,5 +721,6 @@ function NfaLand() {
     </div>
   );
 }
+
 
 export default NfaLand;
