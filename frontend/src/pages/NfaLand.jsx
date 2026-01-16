@@ -29,6 +29,7 @@ function NfaLand() {
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [onChainOwner, setOnChainOwner] = useState(null);
 
   useEffect(() => {
     if (!item) {
@@ -60,6 +61,7 @@ function NfaLand() {
     } else {
       setConnectedWallet(null);
       setIsOwner(false);
+      setOnChainOwner(null);
     }
   };
 
@@ -76,17 +78,50 @@ function NfaLand() {
         const wallet = accounts[0].toLowerCase();
         setConnectedWallet(wallet);
         console.log("Connected wallet:", wallet);
-        console.log("Item owner:", item.owner);
+        console.log("Item owner from DB:", item.owner);
 
-        // Check if user is the owner
-        if (item.owner) {
-          const ownerMatch = wallet === item.owner.toLowerCase();
-          setIsOwner(ownerMatch);
-          console.log("Is owner:", ownerMatch);
+        // ✅ If tokenId exists, check BLOCKCHAIN ownership (source of truth)
+        if (item.tokenId) {
+          try {
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, provider);
+            const owner = await nftContract.ownerOf(item.tokenId);
+            const ownerLower = owner.toLowerCase();
+            
+            setOnChainOwner(ownerLower);
+            console.log("On-chain owner:", ownerLower);
+            
+            // Update item.owner if blockchain differs from database
+            if (item.owner !== ownerLower) {
+              console.log("Updating item.owner to match blockchain");
+              item.owner = ownerLower;
+            }
+            
+            const ownerMatch = wallet === ownerLower;
+            setIsOwner(ownerMatch);
+            console.log("Is owner (blockchain check):", ownerMatch);
+          } catch (err) {
+            console.error("Error checking on-chain owner:", err);
+            // Fallback to database owner if blockchain check fails
+            if (item.owner) {
+              const ownerMatch = wallet === item.owner.toLowerCase();
+              setIsOwner(ownerMatch);
+              console.log("Is owner (DB fallback):", ownerMatch);
+            } else {
+              setIsOwner(false);
+            }
+          }
         } else {
-          // If no owner set yet, user can mint it
-          setIsOwner(true);
-          console.log("No owner - user can mint");
+          // Not minted yet - check database owner or allow anyone to mint
+          if (item.owner) {
+            const ownerMatch = wallet === item.owner.toLowerCase();
+            setIsOwner(ownerMatch);
+            console.log("Is owner (not minted, DB check):", ownerMatch);
+          } else {
+            // If no owner set yet, user can mint it
+            setIsOwner(true);
+            console.log("No owner - user can mint");
+          }
         }
 
         // Check listing status if tokenId exists
@@ -161,7 +196,6 @@ function NfaLand() {
     }
   };
 
-  // MINT NFT (Backend mints to buyer's wallet)
   const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
       toast.error("Invalid user or item");
@@ -191,6 +225,12 @@ function NfaLand() {
 
       if (res.data?.success && res.data?.tokenId) {
         toast.success(`NFT Minted! Token ID: ${res.data.tokenId}`);
+        
+        // ✅ UPDATE ITEM OWNER IMMEDIATELY AFTER MINT
+        item.owner = buyerWallet.toLowerCase();
+        setIsOwner(true);
+        setOnChainOwner(buyerWallet.toLowerCase());
+        
         return res.data.tokenId;
       } else {
         toast.error(res.data?.error || "Mint failed");
@@ -203,7 +243,6 @@ function NfaLand() {
     }
   };
 
-  // CREATE LISTING (Owner lists NFT)
   const handleCreateListing = async () => {
     const toastId = toast.loading("Creating listing...");
     setLoading(true);
@@ -211,6 +250,7 @@ function NfaLand() {
     try {
       if (!window.ethereum) {
         toast.error("MetaMask not installed", { id: toastId });
+        setLoading(false);
         return;
       }
 
@@ -220,6 +260,7 @@ function NfaLand() {
         const switched = await switchToSepolia();
         if (!switched) {
           toast.error("Please switch to Sepolia", { id: toastId });
+          setLoading(false);
           return;
         }
       }
@@ -244,16 +285,59 @@ function NfaLand() {
         tokenId = await mintNFTToWallet(walletAddress);
         if (!tokenId) {
           toast.error("Mint failed", { id: toastId });
+          setLoading(false);
           return;
         }
+        
+        // ✅ UPDATE ITEM TOKEN ID AND OWNER
         item.tokenId = tokenId;
+        item.owner = walletAddress.toLowerCase();
+        setIsOwner(true);
+        setOnChainOwner(walletAddress.toLowerCase());
+        
+        // ✅ WAIT FOR BLOCKCHAIN TO SYNC
+        toast.loading("Waiting for blockchain confirmation...", { id: toastId });
+        await new Promise(resolve => setTimeout(resolve, 3000));
       }
 
-      // Check ownership
-      const owner = await nftContract.ownerOf(tokenId);
-      if (owner.toLowerCase() !== walletAddress.toLowerCase()) {
-        toast.error("You don't own this NFT", { id: toastId });
-        return;
+      // ✅ VERIFY OWNERSHIP ON-CHAIN BEFORE PROCEEDING
+      let owner;
+      let retries = 3;
+      while (retries > 0) {
+        try {
+          owner = await nftContract.ownerOf(tokenId);
+          console.log("On-chain owner:", owner);
+          console.log("Wallet address:", walletAddress);
+          
+          if (owner.toLowerCase() === walletAddress.toLowerCase()) {
+            // ✅ Update local state with blockchain owner
+            item.owner = owner.toLowerCase();
+            setOnChainOwner(owner.toLowerCase());
+            setIsOwner(true);
+            break;
+          } else if (retries > 1) {
+            // Wait and retry if owner doesn't match
+            console.log(`Owner mismatch, retrying... (${retries - 1} attempts left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            retries--;
+            continue;
+          } else {
+            toast.error("You don't own this NFT", { id: toastId });
+            setLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.error("Error getting owner:", err);
+          if (retries > 1) {
+            console.log(`Retrying blockchain check... (${retries - 1} attempts left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            retries--;
+          } else {
+            toast.error("NFT not found on blockchain yet. Please try again in a moment.", { id: toastId });
+            setLoading(false);
+            return;
+          }
+        }
       }
 
       // Approve marketplace if not approved
@@ -269,6 +353,7 @@ function NfaLand() {
       if (listing[2]) {
         toast.success("Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
+        setLoading(false);
         return;
       }
 
@@ -354,8 +439,9 @@ function NfaLand() {
       const signer = await provider.getSigner();
       const buyer = await signer.getAddress();
 
-      // Check if buyer is trying to buy their own NFT
-      if (buyer.toLowerCase() === item.owner?.toLowerCase()) {
+      // Check if buyer is trying to buy their own NFT (check against blockchain owner)
+      const currentOwner = onChainOwner || item.owner;
+      if (buyer.toLowerCase() === currentOwner?.toLowerCase()) {
         toast.error("❌ You cannot buy your own NFT", { id: toastId });
         return;
       }
@@ -419,6 +505,7 @@ function NfaLand() {
       // Update local state
       item.owner = buyer.toLowerCase();
       setIsOwner(true);
+      setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
 
       // Redirect or refresh
@@ -570,8 +657,8 @@ function NfaLand() {
           <div className="bg-[#17171887] p-6 rounded-lg">
             <div className="flex justify-between opacity-70 w-full">
               <span>Price</span>
-              <span className="truncate max-w-[150px]" title={collection?.owner}>
-                Owner: {item.owner ? `${item.owner.substring(0, 6)}...${item.owner.substring(38)}` : collection?.owner}
+              <span className="truncate max-w-[150px]" title={onChainOwner || item.owner || collection?.owner}>
+                Owner: {(onChainOwner || item.owner) ? `${(onChainOwner || item.owner).substring(0, 6)}...${(onChainOwner || item.owner).substring(38)}` : collection?.owner}
               </span>
             </div>
 
