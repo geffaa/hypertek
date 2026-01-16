@@ -139,7 +139,7 @@ export async function serverMint(req, res) {
 
     const walletAddress = await wallet.getAddress();
     const balance = await provider.getBalance(walletAddress);
-    
+
     console.log("💰 Backend wallet:", walletAddress);
     console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
 
@@ -161,7 +161,7 @@ export async function serverMint(req, res) {
       // Try to mint
       tx = await nftContract.mint(tokenURI, royaltyBps || 500);
       console.log("📤 Transaction sent:", tx.hash);
-      
+
       receipt = await tx.wait();
       console.log("✅ Confirmed in block:", receipt.blockNumber);
 
@@ -218,7 +218,7 @@ export async function serverMint(req, res) {
 
       if (actualOwner !== expectedOwner) {
         console.log("⚠️ Ownership mismatch - transferring...");
-        
+
         if (actualOwner === walletAddress.toLowerCase()) {
           const transferTx = await nftContract.transferFrom(
             walletAddress,
@@ -561,9 +561,9 @@ export async function getListingDetails(req, res) {
   }
 }
 
-// ... (Keep all other existing functions: getPopularCollections, getRoyaltiesSummary, 
-// getPlatformRevenue, getNFTById, getNFTsByOwner, getNFTsByCreator, getAllNFTs, 
-// getAllCollections, updateNFTStatus, getSingleCollection, updateCollection, 
+// ... (Keep all other existing functions: getPopularCollections, getRoyaltiesSummary,
+// getPlatformRevenue, getNFTById, getNFTsByOwner, getNFTsByCreator, getAllNFTs,
+// getAllCollections, updateNFTStatus, getSingleCollection, updateCollection,
 // deleteCollection, getTotalCounts)
 
 export async function getPopularCollections(req, res) {
@@ -917,6 +917,44 @@ export async function getTotalCounts(req, res) {
     });
   } catch (err) {
     console.error("getTotalCounts error:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+
+export async function cancelListing(req, res) {
+  try {
+    const { nftId, tokenId } = req.body;
+
+    if (!nftId || !tokenId) {
+      return res.status(400).json({
+        error: "Missing required fields: nftId, tokenId",
+      });
+    }
+
+    const nft = await NFTSystem.findByIdAndUpdate(
+      nftId,
+      {
+        listed: false,
+        priceETH: 0,
+        seller: null,
+      },
+      { new: true }
+    );
+
+    if (!nft) {
+      return res.status(404).json({ error: "NFT not found" });
+    }
+
+    console.log(`✅ Listing cancelled for Token #${tokenId}`);
+
+    return res.json({
+      success: true,
+      message: "Listing cancelled successfully",
+      nft,
+    });
+  } catch (err) {
+    console.error("❌ CANCEL LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }

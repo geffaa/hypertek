@@ -19,6 +19,7 @@ import {
   getAllNFTs,
   getPopularCollections,
   getTotalCounts,
+  cancelListing
 } from "../Controllers/nftController.js";
 import uploadTemp from "../Middleware/UploadMulter.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
@@ -103,5 +104,6 @@ NFTRouter.put("/status/:id", updateNFTStatus);
 NFTRouter.post("/mint", authMiddleware(), serverMint);
 NFTRouter.post("/listing/create", authMiddleware(), createListing);
 NFTRouter.post("/sale/record", authMiddleware(), recordOnchainSale);
+NFTRouter.post("/listing/cancel", authMiddleware(), cancelListing);
 
 export default NFTRouter;
