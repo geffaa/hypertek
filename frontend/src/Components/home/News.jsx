@@ -192,7 +192,7 @@ export default function News() {
           </div>
 
           <div className="flex justify-center mt-4">
-            <Link to="/news/all">
+            <Link to="/news">
               <CustomButton text="More News" />
             </Link>
           </div>
