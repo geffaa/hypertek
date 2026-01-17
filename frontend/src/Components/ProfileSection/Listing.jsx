@@ -7,6 +7,8 @@ import { ethers } from "ethers";
 import { FaUserCircle } from "react-icons/fa";
 import NavLinks from "../ProfileSection/Navlinks";
 import overview1 from "../../assets/images/Profile/Hero.png";
+import FaceOne from "../../assets/images/noActivity1.png";
+import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
 
 import {
@@ -320,11 +322,26 @@ function UserListings() {
             <p className="text-xl">Loading your listings...</p>
           </div>
         ) : listings.length === 0 ? (
-          <div className="text-center text-gray-400 py-20">
-            <p className="text-xl mb-4">You have no active listings</p>
-            <Link to="/market-place">
-              <CustomButton text="Browse NFTs" />
-            </Link>
+          <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
+            <h2 className="text-lg font-semibold -mt-4">
+              No Item
+            </h2>
+        
+            {/* Floating Faces */}
+            <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
+              <img
+                src={FaceOne}
+                alt="Face One"
+                className="w-34 h-24"
+              />
+        
+              <img
+                src={FaceTwo}
+                alt="Face Two"
+                className="absolute top-24 w-28 h-10"
+              />
+            </div>
+        
           </div>
         ) : (
           <div className="overflow-x-auto rounded-lg z-10">
