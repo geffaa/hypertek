@@ -7,7 +7,10 @@ import { ethers } from "ethers";
 import { FaUserCircle } from "react-icons/fa";
 import NavLinks from "../ProfileSection/Navlinks";
 import overview1 from "../../assets/images/Profile/Hero.png";
+import FaceOne from "../../assets/images/noActivity1.png";
+import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
+import CustomButton4 from "../Buttons/Button4";
 
 import {
   MARKETPLACE_ADDRESS,
@@ -320,11 +323,26 @@ function UserListings() {
             <p className="text-xl">Loading your listings...</p>
           </div>
         ) : listings.length === 0 ? (
-          <div className="text-center text-gray-400 py-20">
-            <p className="text-xl mb-4">You have no active listings</p>
-            <Link to="/market-place">
-              <CustomButton text="Browse NFTs" />
-            </Link>
+          <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
+            <h2 className="text-lg font-semibold -mt-4">
+              No Item
+            </h2>
+        
+            {/* Floating Faces */}
+            <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
+              <img
+                src={FaceOne}
+                alt="Face One"
+                className="w-34 h-24"
+              />
+        
+              <img
+                src={FaceTwo}
+                alt="Face Two"
+                className="absolute top-24 w-28 h-10"
+              />
+            </div>
+        
           </div>
         ) : (
           <div className="overflow-x-auto rounded-lg z-10">
@@ -413,103 +431,120 @@ function UserListings() {
         )}
       </section>
 
-      {/* Cancel Confirmation Modal */}
-      {showModal && (
+   {/* Cancel Listing Modal */}
+{showModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div
+      className="bg-[#1F2633] p-5 w-[400px] h-[400px] relative text-white"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close */}
+      <button
+        onClick={() => !cancelling && setShowModal(false)}
+        className="absolute top-3 right-3 text-white font-bold text-lg hover:text-gray-300"
+        disabled={cancelling}
+      >
+        ×
+      </button>
+
+      {/* Title */}
+      <h2 className="font-inter font-semibold text-[20px] leading-[100%] text-white text-center mb-6">
+        Cancel Listing
+      </h2>
+
+      <div className="h-px bg-white/20 mb-4" />
+
+      {/* Item Row */}
+      {selectedListings.map((item) => (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black/70"
-          onClick={() => !cancelling && setShowModal(false)}
+          key={item._id}
+          className="flex items-center justify-between  p-3 rounded-md"
         >
-          <div
-            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => !cancelling && setShowModal(false)}
-              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 hover:text-red-500"
-              disabled={cancelling}
-            >
-              &times;
-            </button>
-
-            <h1 className="text-white font-bold text-lg md:text-xl mb-4 text-center">
-              Cancel Listing{totalSelected > 1 ? 's' : ''}
-            </h1>
-            <div className="w-[90%] h-[1px] bg-gray-300 mb-4"></div>
-
-            <div className="w-full max-h-60 overflow-y-auto mb-4">
-              {selectedListings.map((item) => (
-                <div key={item._id} className="flex items-center justify-between w-full max-w-xl rounded-[19px] p-4 mb-2 bg-white/5">
-                  <div className="w-1/5 h-20 flex items-center justify-center rounded-[15px] bg-gradient-to-b from-[#977C34] to-[#493F26] overflow-hidden">
-                    <img
-                      src={`${BACKEND_BASE_URL}${item.collection?.image}`}
-                      alt={item.collection?.name}
-                      className="w-3/4 h-3/4 object-cover object-center"
-                    />
-                  </div>
-
-                  <div className="flex-1 ml-4">
-                    <h2 className="text-white font-bold text-lg">
-                      {item.collection?.name}
-                    </h2>
-                    <p className="text-gray-200 text-sm mt-1">
-                      Token #{item.tokenId}
-                    </p>
-                  </div>
-
-                  <div className="flex-shrink-0 ml-4">
-                    <p className="text-gray-400 font-semibold text-lg">
-                      {item.priceETH} ETH
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <h1 className="text-white text-lg md:text-xl mb-4">
-              {totalSelected === 1
-                ? selectedListings[0]?.collection?.name
-                : `${totalSelected} Items`}
-            </h1>
-            <div className="w-[90%] h-[1px] bg-gray-300 mb-6"></div>
-
-            <div className="w-[90%] mb-6">
-              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                <p className="text-gray-400 text-sm">Total Listed Price</p>
-                <p className="text-white text-sm">{totalPrice.toFixed(4)} ETH</p>
-              </div>
-            </div>
-
-            <p className="text-yellow-400 text-sm mb-6 text-center">
-              ⚠️ This will remove your listing(s) from the marketplace
-            </p>
-
-            <div className="flex md:flex-row gap-4 w-full justify-center">
-              <button 
-                onClick={() => setShowModal(false)} 
-                className="w-full md:w-auto"
-                disabled={cancelling}
-              >
-                <div className="flex items-center">
-                  <div className="bg-[#002AA8] mr-0.5" style={{ width: "0.25rem", height: "1.1rem" }}></div>
-                  <div className="border-[#002AA8]" style={{ width: "0.5rem", height: "2.2rem", borderStyle: "solid", borderWidth: "0.375rem 0.25rem 0.375rem 0" }}></div>
-                  <div className="flex items-center justify-center text-white font-medium" style={{ width: "8rem", height: "2rem", border: "0.15rem solid #002AA8" }}>
-                    Close
-                  </div>
-                  <div className="border-[#002AA8]" style={{ width: "0.5rem", height: "2.2rem", borderStyle: "solid", borderWidth: "0.25rem 0 0.375rem 0.25rem" }}></div>
-                  <div className="bg-[#002AA8]" style={{ width: "0.25rem", height: "1.1rem" }}></div>
-                </div>
-              </button>
-
-              <button 
-                onClick={handleConfirmCancel}
-                disabled={cancelling}
-              >
-                <CustomButton text={cancelling ? "Processing..." : "Confirm Cancel"} />
-              </button>
-            </div>
+          {/* Image */}
+          <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
+            <img
+              src={`${BACKEND_BASE_URL}${item.collection?.image}`}
+              alt={item.collection?.name}
+              className="w-full h-full object-cover"
+            />
           </div>
+
+          {/* Name */}
+          <div className="flex-1 ml-3 space-y-2">
+  <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
+    {item.collection?.name}
+  </p>
+  <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
+    You Own {item.quantity || 1}
+  </p>
+</div>
+
+
+          {/* Price */}
+          <p className="text-sm font-medium text-gray-300">
+            ${item.priceUSD?.toFixed(2) || item.priceETH}
+          </p>
         </div>
-      )}
+      ))}
+
+      
+
+      {/* Buttons */}
+      <div className="flex justify-center gap-8  mt-40">
+        {/* Cancel – Bracket */}
+        <button
+          onClick={() => setShowModal(false)}
+          disabled={cancelling}
+        >
+          <div className="flex items-center">
+            <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
+            <div
+              className="border-[#002AA8]"
+              style={{
+                width: "0.5rem",
+                height: "2.1rem",
+                borderStyle: "solid",
+                borderWidth: "0.375rem 0.25rem 0.375rem 0",
+              }}
+            />
+            <div
+              className="flex items-center justify-center text-white text-sm font-medium"
+              style={{
+                width: "6.5rem",
+                height: "2rem",
+                border: "0.15rem solid #002AA8",
+              }}
+            >
+              Cancel
+            </div>
+            <div
+              className="border-[#002AA8]"
+              style={{
+                width: "0.5rem",
+                height: "2.1rem",
+                borderStyle: "solid",
+                borderWidth: "0.25rem 0 0.375rem 0.25rem",
+              }}
+            />
+            <div className="bg-[#002AA8] w-1 h-5"></div>
+          </div>
+        </button>
+
+        {/* Delist */}
+        <button
+          onClick={handleConfirmCancel}
+          disabled={cancelling}
+        >
+          <CustomButton4
+            text={cancelling ? "Processing..." : "Delist Item"}
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 }
