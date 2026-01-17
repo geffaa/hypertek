@@ -37,12 +37,9 @@ function Land() {
 
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/getProfile`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUserData(res.data.user);
       } catch (err) {
         toast.error("Failed to fetch profile");
@@ -64,12 +61,13 @@ function Land() {
           `${BACKEND_BASE_URL}/api/v1/nft/user/collection/get/${user.id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
 
         if (res.data?.success) {
           const landItems = res.data.collection.filter(
-            (item) => item?.collection?.Type === "Land"
+            (item) =>
+              item?.collection?.Type === "Land" && item?.listed === false,
           );
 
           setLandData(landItems);
@@ -112,9 +110,7 @@ function Land() {
             )}
 
             <h2 className="mt-3 text-xl font-semibold">
-              {userData?.FullName ||
-                userData?.Email?.split("@")[0] ||
-                "Guest"}
+              {userData?.FullName || userData?.Email?.split("@")[0] || "Guest"}
             </h2>
 
             <Link
@@ -167,9 +163,7 @@ function Land() {
                     </h2>
 
                     <div className="flex justify-between items-center mt-2">
-                      <span className="text-sm">
-                        {item._id.slice(0, 6)}
-                      </span>
+                      <span className="text-sm">{item._id.slice(0, 6)}</span>
                       <span className="flex items-center gap-1 text-sm">
                         <img src={TVector} alt="" className="w-3 h-3" />
                         {collection?.priceETH || item.priceETH} ETH
