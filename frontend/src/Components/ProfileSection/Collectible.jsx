@@ -169,9 +169,11 @@ function MarketPlace() {
              />
            </div>
          
-           <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8] -700 transition">
-             Browse Collection
-           </button>
+           <Link to="/market-place">
+  <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
+    Browse Collection
+  </button>
+</Link>
          
          </div>
          
