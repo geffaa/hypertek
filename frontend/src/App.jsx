@@ -14,7 +14,9 @@ import Login from "./pages/Signin";
 import ForgotPasswor from "./pages/ForgotPasswor";
 import ResetPassword from "./pages/ResetPassword";
 import Loading from "./Components/Common/Loading";
-import  HypeGamePage from "./pages/MoreNews"
+import  HypeGamePage from "./pages/MoreNews";
+import NewsAll from "./pages/NewsAll";
+
 
 import MarketPlace from "./pages/MarketPlace";
 import NFA from "./pages/NFA";
@@ -132,6 +134,7 @@ function AppWrapper() {
             <Route path="/nfa-expand" element={<NFA />} />
             <Route path="/land" element={<Land />} />
             <Route path="/more-news" element={<HypeGamePage/>} />
+            <Route path="/news" element={<NewsAll />} />
 
             {/* NFA Pages */}
             <Route path="/buy-nfa" element={<BuyNfa />} />

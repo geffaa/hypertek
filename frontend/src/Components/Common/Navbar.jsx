@@ -321,7 +321,7 @@ export default function Navbar() {
                 About Us
               </Link>
               <Link
-                to="/more-news"
+                to="/news"
                 className="hover:text-blue-300 transition-colors duration-200"
               >
                 News
