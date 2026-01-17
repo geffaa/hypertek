@@ -32,7 +32,7 @@ const CustomButton4 = ({ text }) => {
           text-white font-inter font-medium 
           text-[14px] md:text-[15px]      /* ↑ font size */
           leading-[1] text-center
-          md:w-[140px] w-[110px]         /* ↑ width */
+          md:w-[120px] w-[110px]         /* ↑ width */
           py-[6px] md:py-[7px]           /* ↑ padding */
           transition-all duration-300 ease-in-out
           group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
