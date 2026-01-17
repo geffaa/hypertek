@@ -47,7 +47,7 @@ export default function NewsAll() {
 
   if (loading) {
     return (
-      <section className="min-h-screen bg-black flex items-center justify-center">
+      <section className="min-h-screen  flex items-center justify-center">
         <p className="text-white">Loading news...</p>
       </section>
     );
@@ -55,7 +55,7 @@ export default function NewsAll() {
 
   if (!news.length) {
     return (
-      <section className="min-h-screen bg-black flex items-center justify-center">
+      <section className="min-h-screen flex items-center justify-center">
         <p className="text-white">No news available</p>
       </section>
     );
@@ -71,7 +71,7 @@ export default function NewsAll() {
         <div className="absolute bottom-20 left-5 w-40 h-40 rounded-full bg-purple-500/10 blur-[80px]"></div>
       </div>
 
-      <GlowingOrb Xaxis={200} Yaxis={200} />
+      <GlowingOrb Xaxis={900} Yaxis={700} />
 
       {/* Featured Image */}
       <div className="mb-8">
