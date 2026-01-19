@@ -66,7 +66,8 @@ export default function NewsAll() {
   return (
     <div className="min-h-screen text-white font-sans relative mt-24 px-4 sm:px-6">
       {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
         <div className="absolute top-20 right-5 w-40 h-40 rounded-full bg-blue-500/10 blur-[80px]"></div>
         <div className="absolute bottom-20 left-5 w-40 h-40 rounded-full bg-purple-500/10 blur-[80px]"></div>
       </div>
@@ -83,24 +84,26 @@ export default function NewsAll() {
       </div>
 
       {/* Header with Breadcrumb */}
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-6">
-        <nav className="flex items-center gap-2 text-sm flex-wrap">
-          <button
-            onClick={() => navigate("/")}
-            className="text-gray-400 hover:text-white transition-colors font-inter font-medium text-[16px]"
-          >
-            Home
-          </button>
-          <span className="text-gray-600">›</span>
-          <button
-            onClick={() => navigate("/news")}
-            className="text-gray-400 hover:text-white transition-colors font-inter font-medium text-[16px]"
-          >
-            News
-          </button>
-          <span className="text-gray-600">›</span>
-        </nav>
-      </div>
+      <div className="relative z-20 max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-6">
+
+  <nav className="flex items-center gap-2 text-sm flex-wrap">
+    {/* Home (clickable) */}
+    <button
+      onClick={() => navigate("/")}
+      className="text-gray-400 hover:text-white transition-colors font-inter font-medium text-[16px]"
+    >
+      Home
+    </button>
+
+    <span className="text-gray-600">›</span>
+
+    {/* Current Page: News */}
+    <span className="text-white font-bold font-inter text-[16px]">
+      News
+    </span>
+  </nav>
+</div>
+
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto relative z-10 pb-24">
