@@ -127,7 +127,7 @@ const withAdmin = (path) => {
        </Link>
 
         {/* Create Collection 2 */}
-        {/* <li
+        <li
           className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
             selectedItem === "Create Collection" ? "bg-[#002AA8]" : ""
           }`}
@@ -147,19 +147,27 @@ const withAdmin = (path) => {
                 className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2"
               />
             </div>
-            <h1
-              className="text-white font-bold ml-3"
-              style={{
-                width: "120px",
-                height: "17px",
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 700,
-                fontSize: "14px",
-                lineHeight: "17px",
-              }}
-            >
-              Create Collection
-            </h1>
+            <Link
+to={withAdmin("/create-collection")}
+
+  onClick={(e) => e.stopPropagation()}
+  className="ml-3"
+>
+  <h1
+    className="text-white font-bold hover:underline"
+    style={{
+      width: "120px",
+      height: "17px",
+      fontFamily: "Inter, sans-serif",
+      fontWeight: 700,
+      fontSize: "14px",
+      lineHeight: "17px",
+    }}
+  >
+    Create Collection
+  </h1>
+</Link>
+
           </div>
 
           {openCreate ? (
@@ -167,31 +175,31 @@ const withAdmin = (path) => {
           ) : (
             <FiChevronDown className="text-white" />
           )}
-        </li> */}
+        </li> 
 
         {/* Dropdown Options */}
-        {/* {openCreate && (
+         {openCreate && (
           <ul className="flex flex-col items-start w-[129px] h-[27px] mb-8  opacity-100 rounded mr-3 ">
+        
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/create-collection">Create Collection</Link>
+              <Link to={withAdmin("/collections")}>
+  Collection Details
+</Link>
               </li>
             </div>
             <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/collection-details">Collection Details</Link>
-              </li>
-            </div>
-            <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal   leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/creator-earning">Creator Earning</Link>
-              </li>
-            </div>
+  <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
+  <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal leading-none text-white hover:text-slate-300 cursor-pointer">
+    <Link to={withAdmin("/creator-earning")}>
+      Creator Earning
+    </Link>
+  </li>
+</div>
+
           </ul>
-        )} */}
+        )}
 
         {/* Collections  3 */}
 
@@ -232,16 +240,7 @@ const withAdmin = (path) => {
         {/* Dropdown Options */}
         {openCollection && (
           <ul className="flex flex-col items-start w-[129px] h-[65px]   opacity-100 rounded mr-3 ">
-           
-            <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-<Link to={withAdmin("/collections")}>
-  Collections
-</Link>
-
-              </li>
-            </div>
+          
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
@@ -295,52 +294,54 @@ const withAdmin = (path) => {
         {/* News section 5  */}
 
         <li
-          className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-            selectedItem === "News" ? "bg-[#002AA8]" : ""
-          }`}
-          style={{ width: "222px", height: "42px", opacity: 1 }}
-          onClick={() => toggleDropdown("news", "News")}
-        >
-          <div className="flex items-center">
-            <div className="relative">
-              <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
-            </div>
-            <h1
-              className="text-white font-normal ml-3"
+  className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+    selectedItem === "News" ? "bg-[#002AA8]" : ""
+  }`}
+  style={{ width: "222px", height: "42px", opacity: 1 }}
+  onClick={() => toggleDropdown("news", "News")}
+>
+  <div className="flex items-center">
+    <div className="relative">
+      <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
+    </div>
 
-              style={{
-                width: "120px",
-                height: "17px",
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 700,
-                fontSize: "14px",
-                lineHeight: "17px",
-              }}
-            >
-              Update News
-            </h1>
-          </div>
+    {/* Upload News → Direct Add News */}
+    <Link
+      to={withAdmin("/add-news")}
+      onClick={(e) => e.stopPropagation()}
+      className="ml-3"
+    >
+      <h1
+        className="text-white font-normal hover:underline"
+        style={{
+          width: "120px",
+          height: "17px",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 700,
+          fontSize: "14px",
+          lineHeight: "17px",
+        }}
+      >
+        Upload News
+      </h1>
+    </Link>
+  </div>
 
-          {openNews ? (
-            <FiChevronUp className="text-white" />
-          ) : (
-            <FiChevronDown className="text-white" />
-          )}
-        </li>
+  {openNews ? (
+    <FiChevronUp className="text-white" />
+  ) : (
+    <FiChevronDown className="text-white" />
+  )}
+</li>
+
 
         {/* Dropdown Options */}
         {openNews && (
           <ul className="flex flex-col items-start w-[129px] h-[60px] mb-2   opacity-100 rounded mr-3 ">
-            <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-               <Link to={withAdmin("/add-news")}>Add news</Link>
-              </li>
-            </div>
              <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-               <Link to={withAdmin("/edit-news")}>edit News</Link>
+               <Link to={withAdmin("/edit-news")}>Edit News</Link>
               </li>
             </div>
              <div className="flex">
