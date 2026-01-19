@@ -178,7 +178,7 @@ const handleToggleStatus = async (land) => {
       {/* Header */}
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
         <h1 className="font-inter font-semibold text-[25px] text-white">
-          Land Management
+          Land Collection
         </h1>
       </div>
 
