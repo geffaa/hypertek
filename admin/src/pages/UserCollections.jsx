@@ -53,11 +53,11 @@ function UserDetailsSection({ user }) {
       </div>
 
       <div className="w-[481px] h-[43px] flex items-center gap-[45px]">
-        <div className="flex flex-col items-start justify-center gap-[2px] w-[56px]">
+        <div className="flex flex-col items-start justify-center gap-[2px] w-[120px]">
           <h1 className="font-inter font-semibold text-[18px]">Name:</h1>
           <p className="font-inter font-medium text-[14px]">{user.name}</p>
         </div>
-        <div className="flex flex-col items-start justify-center gap-[2px] w-[160px]">
+        <div className="flex flex-col items-start justify-center gap-[2px] w-[170px]">
           <h1 className="font-inter font-semibold text-[18px]">Email:</h1>
           <p className="font-inter font-medium text-[14px]">{user.supply || "No Email"}</p>
         </div>

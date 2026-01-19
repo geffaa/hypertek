@@ -249,11 +249,23 @@ function AddCollection() {
                   )}
                 </td>
 
-                {/* Name Cell */}
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">{col.name}</td>
+               {/* Name Cell */}
+<td
+  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer hover:underline"
+  onClick={() => handleViewProfile(col)}
+>
+  {col.name}
+</td>
+
                 
-                {/* UID Cell */}
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">{col.supply}</td>
+               {/* UID Cell */}
+<td
+  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer hover:underline"
+  onClick={() => handleViewProfile(col)}
+>
+  {col.supply}
+</td>
+
                 
                 {/* Action Cell - Only show if user is not admin */}
                 {!isAdmin && (
