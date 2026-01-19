@@ -131,29 +131,29 @@ const Header = () => {
       />
     </div>
 
-        {/* 👤 Animated Profile Picture */}
-        <div className="relative group cursor-pointer">
-          <div
-            className={`relative w-[44px] h-[44px] rounded-2xl cursor-pointer 
-              transition-transform duration-700 ease-out
-              ${isProfileHovered ? 'transform scale-110' : ''}`}
-            onMouseEnter={() => setIsProfileHovered(true)}
-            onMouseLeave={() => setIsProfileHovered(false)}
-          >
-            {userData?.Avatar ? (
-              <img
-                src={`${Image_Base_Url}${userData.Avatar.startsWith('/') ? userData.Avatar : '/' + userData.Avatar}`}
-                alt={userData?.FullName || "Profile"}
-                className="w-full h-full object-cover rounded-[50%]"
-              />
-            ) : (
-              <FaUserCircle className="w-full h-full text-gray-400 p-1" />
-            )}
-          </div>
+      {/* 👤 Clickable Profile Picture */}
+<div
+  className="relative group cursor-pointer"
+  onClick={() => navigate("/edit-profile")} // navigate to edit profile page
+>
+  <div
+    className={`relative w-[44px] h-[44px] rounded-2xl transition-transform duration-700 ease-out
+      ${isProfileHovered ? "transform scale-110" : ""}`}
+    onMouseEnter={() => setIsProfileHovered(true)}
+    onMouseLeave={() => setIsProfileHovered(false)}
+  >
+    {userData?.Avatar ? (
+      <img
+        src={`${Image_Base_Url}${userData.Avatar.startsWith("/") ? userData.Avatar : "/" + userData.Avatar}`}
+        alt={userData?.FullName || "Profile"}
+        className="w-full h-full object-cover rounded-[50%]"
+      />
+    ) : (
+      <FaUserCircle className="w-full h-full text-gray-400 p-1" />
+    )}
+  </div>
+</div>
 
-          {/* Profile Tooltip - Optional */}
-
-        </div>
       </div>
 
       {/* Custom Animation Styles */}

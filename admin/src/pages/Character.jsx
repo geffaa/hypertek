@@ -6,6 +6,7 @@ import DeleteImage from "../assets/delete.png";
 import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+
 import FullScreenLoader from "../components/common/Spinner";
 
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
@@ -133,42 +134,43 @@ const handleDeleteCharacter = async () => {
     toast.error(error.response?.data?.message || "Error deleting character");
   }
 };
+const withAdmin = (path) => {
+  if (!adminId) return "#"; // prevent crash / bad navigation
+  return `/${adminId}${path}`;
+};
 
 
   return (
     <div className="pt-16 flex h-[700px] bg-black flex-col ">
-      {/* Blur Background Left */}
-      <div
-        style={{
-          top: "10px",
-          left: "100px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
+     <div
+  style={{
+    top: "10px",
+    left: "100px",
+    width: "250px",
+    height: "250px",
+    background: "#002AA8",
+    filter: "blur(180px)",
+  }}
+  className="absolute rounded-full pointer-events-none z-0"
+></div>
 
-      {/* Blur Background Right */}
-      <div
-        style={{
-          top: "400px",
-          left: "620px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
+<div
+  style={{
+    top: "400px",
+    left: "620px",
+    width: "250px",
+    height: "250px",
+    background: "#002AA8",
+    filter: "blur(180px)",
+  }}
+  className="absolute rounded-full pointer-events-none z-0"
+></div>
+
 
       {/* Header */}
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
         <h1 className="font-inter font-semibold text-[25px] text-white">
-          Character Management
+          Character Collection
         </h1>
       </div>
 
@@ -271,6 +273,9 @@ const handleDeleteCharacter = async () => {
             ))}
           </tbody>
         </table>
+        
+        
+
 
 
         {showDeleteModal && selectedCharacter && (
@@ -299,10 +304,16 @@ const handleDeleteCharacter = async () => {
         </button>
       </div>
     </div>
+    
   </div>
+
+  
 )}
 
+
+
       </div>
+    
     </div>
   );
 }
