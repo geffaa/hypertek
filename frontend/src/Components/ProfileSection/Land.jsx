@@ -169,7 +169,7 @@ function Land() {
     }
   };
 
-  /* ================= MINT NFT ================= */
+  // /* ================= MINT NFT ================= */. 
   const mintNFTToWallet = async (buyerWallet, item) => {
     if (!user?.id || !item._id) {
       toast.error("Invalid user or item");
