@@ -223,7 +223,7 @@ function Buy1() {
         creatorWallet: buyerWallet.toLowerCase(),
       };
 
-      console.log("🎨 Minting NFT:", payload);
+      console.log("🎨 Minting NFA:", payload);
 
       const res = await axios.post(
         `${BACKEND_BASE_URL}/api/v1/nft/mint`,
@@ -293,7 +293,7 @@ function Buy1() {
       let tokenId = item.tokenId;
 
       if (!tokenId) {
-        toast.loading("Minting NFT...", { id: toastId });
+        toast.loading("Minting NFA...", { id: toastId });
         tokenId = await mintNFTToWallet(walletAddress);
         if (!tokenId) {
           toast.error("Mint failed", { id: toastId });
@@ -338,7 +338,7 @@ function Buy1() {
             retries--;
             continue;
           } else {
-            toast.error("You don't own this NFT", { id: toastId });
+            toast.error("You don't own this NFA", { id: toastId });
             setLoading(false);
             return;
           }
@@ -446,7 +446,7 @@ function Buy1() {
       }
 
       if (!item.tokenId) {
-        toast.error("NFT not minted yet", { id: toastId });
+        toast.error("NFA not minted yet", { id: toastId });
         return;
       }
 
@@ -467,7 +467,7 @@ function Buy1() {
       // Check if buyer is trying to buy their own NFT (check against blockchain owner)
       const currentOwner = onChainOwner || item.owner;
       if (buyer.toLowerCase() === currentOwner?.toLowerCase()) {
-        toast.error("❌ You cannot buy your own NFT", { id: toastId });
+        toast.error("❌ You cannot buy your own NFA", { id: toastId });
         return;
       }
 
@@ -492,11 +492,11 @@ function Buy1() {
       const price = listing[1];
 
       if (balance < price) {
-        toast.error("Insufficient ETH to buy this NFT", { id: toastId });
+        toast.error("Insufficient ETH to buy this NFA", { id: toastId });
         return;
       }
 
-      toast.loading("Buying NFT...", { id: toastId });
+      toast.loading("Buying NFA...", { id: toastId });
       const buyTx = await marketplace.buyNFT(NFT_ADDRESS, item.tokenId, {
         value: price,
         gasLimit: 400000,
@@ -535,8 +535,8 @@ function Buy1() {
       if (err.message?.includes("insufficient funds")) msg = "Insufficient ETH";
       else if (err.message?.includes("user rejected"))
         msg = "Transaction rejected";
-      else if (err.message?.includes("Cannot buy your own NFT"))
-        msg = "You cannot buy your own NFT";
+      else if (err.message?.includes("Cannot buy your own NFA"))
+        msg = "You cannot buy your own NFA";
       toast.error(msg, { id: toastId });
     } finally {
       setLoading(false);
@@ -588,7 +588,7 @@ function Buy1() {
 
     if (!item.tokenId) {
       return {
-        text: "Mint & List NFT",
+        text: "Mint & List NFA",
         action: handleCreateListing,
         disabled: false,
       };
@@ -596,7 +596,7 @@ function Buy1() {
 
     if (listingData?.active) {
       if (isOwner) {
-        return { text: "Your NFT (Listed)", disabled: true };
+        return { text: "Your NFA (Listed)", disabled: true };
       }
       return { text: "Buy Now", action: handleBuyNFT, disabled: false };
     }

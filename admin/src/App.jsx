@@ -32,9 +32,9 @@ function App() {
       <Routes>
         {/* Public Route */}
 
-          <Route path="/:userId" element={<DashboardLayout />}>
-        {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
+        <Route path="/:userId" element={<DashboardLayout />}>
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
             {/* Nested dashboard routes */}
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
@@ -47,8 +47,14 @@ function App() {
             <Route path="edit-collection-item" element={<EditCollection2 />} />
             <Route path="character-collection" element={<Character />} />
             <Route path="land-collection" element={<Land />} />
-            <Route path="collection-listed-sale" element={<CollectionListedForSale />} />
-            <Route path="collection-details-2" element={<CollectionDetails2 />} />
+            <Route
+              path="collection-listed-sale"
+              element={<CollectionListedForSale />}
+            />
+            <Route
+              path="collection-details-2"
+              element={<CollectionDetails2 />}
+            />
             <Route path="edit-user" element={<EditUsers />} />
             <Route path="users" element={<UserDetails />} />
             <Route path="user-details" element={<UserCollections />} />
@@ -58,12 +64,12 @@ function App() {
             <Route path="edit-news-item" element={<UploadedNews />} />
             <Route path="support" element={<Support />} />
             <Route path="notification" element={<NotificationsPage />} />
-           
+            <Route path="edit-profile" element={<EditAdminProfile />} />
           </Route>
         </Route>
 
         {/* // Admin Profile (outside user routes) */}
-<Route path="/edit-profile" element={<EditAdminProfile />} />
+        {/* <Route path="/edit-profile" element={<EditAdminProfile />} /> */}
 
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/signin" replace />} />
