@@ -18,7 +18,7 @@ const Header = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
 
-  // ✅ FIX: initialize userData synchronously
+  // Existing synchronous init (unchanged)
   const [userData, setUserData] = useState(() => {
     try {
       const adminData = localStorage.getItem("admin_data");
@@ -57,7 +57,15 @@ const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ FIX: guarded navigation
+  // ✅ ADDED FIX — sync Redux user to Header (NO REFRESH NEEDED)
+  useEffect(() => {
+    if (user && user._id) {
+      setUserData(user);
+      localStorage.setItem("admin_data", JSON.stringify(user));
+    }
+  }, [user]);
+
+  // Guarded navigation (unchanged)
   const handleNotification = () => {
     if (!userData?._id) return;
     navigate(`/${userData._id}/notification`);
