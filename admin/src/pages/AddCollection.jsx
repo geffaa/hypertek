@@ -328,9 +328,7 @@ function AddCollection() {
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
             />
           </div>
-          <button onClick={handleAddCollection} className="border rounded-md px-2 py-1 cursor-pointer">
-            Add Collection
-          </button>
+          
         </div>
       </div>
 
