@@ -110,7 +110,7 @@ const withAdmin = (path) => {
             style={{ width: "22px", height: "22px" }}
           />
           <h1
-            className="text-white font-normal ml-3"
+            className="text-white font-normal"
           
             style={{
               width: "100px",
@@ -154,7 +154,7 @@ to={withAdmin("/create-collection")}
   className="ml-3"
 >
   <h1
-    className="text-white font-bold hover:underline"
+    className="text-white font-normal"
     style={{
       width: "120px",
       height: "17px",
@@ -312,7 +312,7 @@ to={withAdmin("/create-collection")}
       className="ml-3"
     >
       <h1
-        className="text-white font-normal hover:underline"
+        className="text-white font-normal"
         style={{
           width: "120px",
           height: "17px",

@@ -251,7 +251,7 @@ function AddCollection() {
 
                {/* Name Cell */}
 <td
-  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer hover:underline"
+  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
   onClick={() => handleViewProfile(col)}
 >
   {col.name}
@@ -260,7 +260,7 @@ function AddCollection() {
                 
                {/* UID Cell */}
 <td
-  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer hover:underline"
+  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
   onClick={() => handleViewProfile(col)}
 >
   {col.supply}
