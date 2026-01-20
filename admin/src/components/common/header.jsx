@@ -63,6 +63,10 @@ const Header = () => {
   const handleNotification = ()=>{
     navigate(`/${userData._id}/notification`)
   }
+  const handleProfile = () => {
+    navigate(`/${userData._id}/edit-profile`);
+  };
+  
 
   return (
     <header className="p-4 flex justify-end items-center  z-50">
@@ -130,11 +134,10 @@ const Header = () => {
         }}
       />
     </div>
-
-      {/* 👤 Clickable Profile Picture */}
+{/* 👤 Clickable Profile Picture */}
 <div
   className="relative group cursor-pointer"
-  onClick={() => navigate("/edit-profile")} // navigate to edit profile page
+  onClick={handleProfile}
 >
   <div
     className={`relative w-[44px] h-[44px] rounded-2xl transition-transform duration-700 ease-out
@@ -144,7 +147,11 @@ const Header = () => {
   >
     {userData?.Avatar ? (
       <img
-        src={`${Image_Base_Url}${userData.Avatar.startsWith("/") ? userData.Avatar : "/" + userData.Avatar}`}
+        src={`${Image_Base_Url}${
+          userData.Avatar.startsWith("/")
+            ? userData.Avatar
+            : "/" + userData.Avatar
+        }`}
         alt={userData?.FullName || "Profile"}
         className="w-full h-full object-cover rounded-[50%]"
       />
@@ -153,6 +160,7 @@ const Header = () => {
     )}
   </div>
 </div>
+
 
       </div>
 
