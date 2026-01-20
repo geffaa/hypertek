@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
 
 // ✅ Import your Header component
-import Header from "../components/common/header";
+// import Header from "../components/common/header";
 
 
 function EditAdminProfile() {
@@ -76,7 +76,7 @@ function EditAdminProfile() {
 
     try {
       setLoading(true);
-      const res = await fetch(`${Dashboard_Base_Url}/v1/admin/edit/${adminId}`, {
+      const res = await fetch(`${Dashboard_Base_Url}/v1/edit/${adminId}`, {
         method: "PUT",
         body: formData,
       });
@@ -110,7 +110,7 @@ function EditAdminProfile() {
       {/* Hero Banner */}
 
        {/* ✅ Header */}
-       <Header />
+       {/* <Header /> */}
 
       
 <div
