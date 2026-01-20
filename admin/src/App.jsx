@@ -57,13 +57,13 @@ function App() {
             <Route path="edit-news" element={<EditNews />} />
             <Route path="edit-news-item" element={<UploadedNews />} />
             <Route path="support" element={<Support />} />
-            <Route path="notification" element={<NotificationsPage />} />
-           
+              <Route path="notification" element={<NotificationsPage />} />
+    <Route path="edit-profile" element={<EditAdminProfile />} />
           </Route>
         </Route>
 
         {/* // Admin Profile (outside user routes) */}
-<Route path="/edit-profile" element={<EditAdminProfile />} />
+{/* <Route path="/edit-profile" element={<EditAdminProfile />} /> */}
 
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/signin" replace />} />
