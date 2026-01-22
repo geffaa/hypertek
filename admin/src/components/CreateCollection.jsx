@@ -163,8 +163,9 @@ function CreateCollections() {
   };
 
   const handleBackButton = () => {
-    navigate("/collections");
+    navigate(-1);
   };
+  
 
   if (isSubmitting) {
     return <FullScreenLoader />;
