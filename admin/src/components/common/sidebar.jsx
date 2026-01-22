@@ -127,55 +127,51 @@ const withAdmin = (path) => {
        </Link>
 
         {/* Create Collection 2 */}
-        <li
-          className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-            selectedItem === "Create Collection" ? "bg-[#002AA8]" : ""
-          }`}
-          style={{ width: "222px", height: "42px", opacity: 1 }}
-          onClick={() => toggleDropdown("create", "Create Collection")}
-        >
-          <div className="flex items-center">
-            <div className="relative">
-              <img
-                src={CreateCollection2}
-                alt=""
-                className="w-[16.5px] h-[16.5px]"
-              />
-              <img
-                src={CreateCollection1}
-                alt=""
-                className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2"
-              />
-            </div>
-            <Link
-to={withAdmin("/create-collection")}
-
-  onClick={(e) => e.stopPropagation()}
-  className="ml-3"
->
-  <h1
-    className="text-white font-normal"
-    style={{
-      width: "120px",
-      height: "17px",
-      fontFamily: "Inter, sans-serif",
-      fontWeight: 700,
-      fontSize: "14px",
-      lineHeight: "17px",
-    }}
+<Link to={withAdmin("/create-collection")}>
+  <li
+    className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+      selectedItem === "Create Collection" ? "bg-[#002AA8]" : ""
+    }`}
+    style={{ width: "222px", height: "42px", opacity: 1 }}
+    onClick={() => toggleDropdown("create", "Create Collection")}
   >
-    Create Collection
-  </h1>
+    <div className="flex items-center">
+      <div className="relative">
+        <img
+          src={CreateCollection2}
+          alt=""
+          className="w-[16.5px] h-[16.5px]"
+        />
+        <img
+          src={CreateCollection1}
+          alt=""
+          className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+
+      <h1
+        className="text-white font-normal ml-3"
+        style={{
+          width: "120px",
+          height: "17px",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 700,
+          fontSize: "14px",
+          lineHeight: "17px",
+        }}
+      >
+        Create Collection
+      </h1>
+    </div>
+
+    {openCreate ? (
+      <FiChevronUp className="text-white" />
+    ) : (
+      <FiChevronDown className="text-white" />
+    )}
+  </li>
 </Link>
-
-          </div>
-
-          {openCreate ? (
-            <FiChevronUp className="text-white" />
-          ) : (
-            <FiChevronDown className="text-white" />
-          )}
-        </li> 
+ 
 
         {/* Dropdown Options */}
          {openCreate && (
@@ -184,7 +180,7 @@ to={withAdmin("/create-collection")}
             <div className="flex">
               <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
               <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-              <Link to={withAdmin("/collections")}>
+              <Link to={withAdmin("/edit-collection")}>
   Collection Details
 </Link>
               </li>
@@ -202,40 +198,46 @@ to={withAdmin("/create-collection")}
         )}
 
         {/* Collections  3 */}
+        <Link to={withAdmin("/collections")}>
+  <li
+    className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+      selectedItem === "Collection" ? "bg-[#002AA8]" : ""
+    }`}
+    style={{ width: "222px", height: "42px", opacity: 1 }}
+    onClick={() => toggleDropdown("collection", "Collection")}
+  >
+    <div className="flex items-center">
+      <div className="relative">
+        <img
+          src={CollectionImage}
+          alt=""
+          className="w-[22px] h-[22px]"
+        />
+      </div>
 
-        <li
-          className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-            selectedItem === "Collection" ? "bg-[#002AA8]" : ""
-          }`}
-          style={{ width: "222px", height: "42px", opacity: 1 }}
-          onClick={() => toggleDropdown("collection", "Collection")}
-        >
-          <div className="flex items-center">
-            <div className="relative">
-              <img src={CollectionImage} alt="" className="w-[22px] h-[22px]" />
-            </div>
-            <h1
-              className="text-white font-normal ml-3"
+      <h1
+        className="text-white ml-3"
+        style={{
+          width: "120px",
+          height: "17px",
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 700,
+          fontSize: "14px",
+          lineHeight: "17px",
+        }}
+      >
+        Collection
+      </h1>
+    </div>
 
-              style={{
-                width: "120px",
-                height: "17px",
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 700,
-                fontSize: "14px",
-                lineHeight: "17px",
-              }}
-            >
-              Collection
-            </h1>
-          </div>
+    {openCollection ? (
+      <FiChevronUp className="text-white" />
+    ) : (
+      <FiChevronDown className="text-white" />
+    )}
+  </li>
+</Link>
 
-          {openCollection ? (
-            <FiChevronUp className="text-white" />
-          ) : (
-            <FiChevronDown className="text-white" />
-          )}
-        </li>
 
         {/* Dropdown Options */}
         {openCollection && (
@@ -293,26 +295,22 @@ to={withAdmin("/create-collection")}
 
         {/* News section 5  */}
 
-        <li
-  className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-    selectedItem === "News" ? "bg-[#002AA8]" : ""
-  }`}
-  style={{ width: "222px", height: "42px", opacity: 1 }}
-  onClick={() => toggleDropdown("news", "News")}
->
-  <div className="flex items-center">
-    <div className="relative">
-      <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
-    </div>
+      {/* News section 5 */}
+<Link to={withAdmin("/add-news")}>
+  <li
+    className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
+      selectedItem === "News" ? "bg-[#002AA8]" : ""
+    }`}
+    style={{ width: "222px", height: "42px", opacity: 1 }}
+    onClick={() => toggleDropdown("news", "News")}
+  >
+    <div className="flex items-center">
+      <div className="relative">
+        <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
+      </div>
 
-    {/* Upload News → Direct Add News */}
-    <Link
-      to={withAdmin("/add-news")}
-      onClick={(e) => e.stopPropagation()}
-      className="ml-3"
-    >
       <h1
-        className="text-white font-normal"
+        className="text-white ml-3"
         style={{
           width: "120px",
           height: "17px",
@@ -324,15 +322,16 @@ to={withAdmin("/create-collection")}
       >
         Upload News
       </h1>
-    </Link>
-  </div>
+    </div>
 
-  {openNews ? (
-    <FiChevronUp className="text-white" />
-  ) : (
-    <FiChevronDown className="text-white" />
-  )}
-</li>
+    {openNews ? (
+      <FiChevronUp className="text-white" />
+    ) : (
+      <FiChevronDown className="text-white" />
+    )}
+  </li>
+</Link>
+
 
 
         {/* Dropdown Options */}
