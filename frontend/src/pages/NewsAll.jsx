@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GlowingOrb from "../Components/Common/BgColoring";
 import { BACKEND_BASE_URL, NewsImage_Url } from "../Config";
+import GlowingOrb from "../Components/Common/BgColoring";
 import CustomButton5 from "../Components/Buttons/Button5";
-import CustomButton6 from "../Components/Buttons/Button6";
+const ITEMS_PER_PAGE = 3;
 
-export default function NewsAll() {
+export default function NewsList() {
   const [news, setNews] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,199 +16,86 @@ export default function NewsAll() {
       .then((data) => {
         if (data.success) setNews(data.data);
       })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      .catch(console.error);
   }, []);
 
-  const nextNews = () => {
-    if (currentIndex < news.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  const loadMore = () => {
+    setVisibleCount((prev) => prev + ITEMS_PER_PAGE);
   };
 
-  const prevNews = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  const handleNewsClick = (newsItem) => {
+    navigate(`/more-news`, { state: { newsItem } });
   };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
-  if (loading) {
-    return (
-      <section className="min-h-screen  flex items-center justify-center">
-        <p className="text-white">Loading news...</p>
-      </section>
-    );
-  }
-
-  if (!news.length) {
-    return (
-      <section className="min-h-screen flex items-center justify-center">
-        <p className="text-white">No news available</p>
-      </section>
-    );
-  }
-
-  const item = news[currentIndex];
 
   return (
-    <div className="min-h-screen text-white font-sans relative mt-24 px-4 sm:px-6">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="min-h-screen text-white relative px-4 sm:px-6 py-24">
+      <GlowingOrb Xaxis={800} Yaxis={600} />
 
-        <div className="absolute top-20 right-5 w-40 h-40 rounded-full bg-blue-500/10 blur-[80px]"></div>
-        <div className="absolute bottom-20 left-5 w-40 h-40 rounded-full bg-purple-500/10 blur-[80px]"></div>
+      {/* Breadcrumb */}
+      <div className="max-w-6xl mx-auto mb-12">
+        <button
+          onClick={() => navigate("/")}
+          className="text-gray-400 hover:text-white text-sm"
+        >
+          Home
+        </button>
+        <span className="mx-2 text-gray-600">›</span>
+        <span className="font-semibold">News</span>
       </div>
 
-      <GlowingOrb Xaxis={900} Yaxis={700} />
+      {/* Vertical News List */}
+      <div className="max-w-6xl mx-auto space-y-12">
+        {news.slice(0, visibleCount).map((item, index) => (
+          <div
+            key={item._id}
+            onClick={() => handleNewsClick(item)}
+            className="group cursor-pointer flex flex-col sm:flex-row gap-6 border-b border-gray-800 pb-10"
+          >
+            {/* Image */}
+            <div className="relative w-full sm:w-[320px] h-[200px] overflow-hidden rounded-lg shrink-0">
+              <img
+                src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                alt={item.heading}
+                className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-black/40"></div>
+            </div>
 
-      {/* Featured Image */}
-      <div className="mb-8">
-        <img
-          src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
-          alt={item.heading}
-          className="w-full max-h-[420px] object-cover"
-        />
+            {/* Content */}
+            <div className="flex-1">
+              {/* LATEST only for first news */}
+              {index === 0 && (
+                <span className="text-xs text-blue-500 font-semibold">
+                  LATEST
+                </span>
+              )}
+
+              <h3 className="mt-2 text-xl font-semibold leading-snug group-hover:text-blue-400 transition">
+                {item.heading}
+              </h3>
+
+              <p className="text-gray-400 text-sm mt-2">
+                {new Date(item.createdAt).toDateString()}
+              </p>
+
+              <p className="text-gray-300 mt-4 line-clamp-3">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-
-      {/* Header with Breadcrumb */}
-      <div className="relative z-20 max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-6">
-
-  <nav className="flex items-center gap-2 text-sm flex-wrap">
-    {/* Home (clickable) */}
-    <button
-      onClick={() => navigate("/")}
-      className="text-gray-400 hover:text-white transition-colors font-inter font-medium text-[16px]"
-    >
-      Home
-    </button>
-
-    <span className="text-gray-600">›</span>
-
-    {/* Current Page: News */}
-    <span className="text-white font-bold font-inter text-[16px]">
-      News
-    </span>
-  </nav>
-</div>
-
-
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto relative z-10 pb-24">
-        {/* Title */}
-        <div className="mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-            <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded">
-              LATEST
-            </span>
-            <h1
-  className="text-2xl sm:text-3xl mt-2 sm:mt-0 uppercase"
-  style={{
-    fontFamily: "Goldman",
-    fontWeight: 400,
-    fontStyle: "normal",
-    fontSize: "16px",
-    lineHeight: "100%",
-    letterSpacing: "0%",
-  }}
->
-  {item.heading}
-</h1>
-          </div >
-         {/* Border below heading */}
-    <div className="border-t border-gray-800 mt-2"></div>
-        </div>
-
-       {/* Full Description */}
-<div className="mb-8">
-  <div
-    className="text-gray-300 leading-relaxed space-y-4"
-    style={{
-      fontFamily: "Inter",
-      fontWeight: 500,
-      fontStyle: "medium",
-      fontSize: "16px",
-      lineHeight: "100%",
-      letterSpacing: "0%",
-    }}
-  >
-    {item.description.split("\n").map((p, i) => (
-      <p key={i} className="text-base sm:text-lg">
-        {p}
-      </p>
-    ))}
-
-    {/* Event Launch Details */}
-    <p>Event Launch Date:</p>
-    <ul className="list-disc list-inside">
-      <li>Begins Nov 10, 2025, 00:00 (UTC+0)</li>
-      <li>Ends Nov 24, 2025, 23:59 (UTC+0)</li>
-    </ul>
-
-    <p>What’s Coming:</p>
-    <ul className="list-disc list-inside">
-      <li>God of War-themed challenges across all Hyper Tek platforms</li>
-      <li>Exclusive skins, collectibles, and weapon upgrades</li>
-      <li>Mythic Quests — complete missions to earn special rewards</li>
-      <li>Community leaderboard with cash and in-game prize drops</li>
-    </ul>
-
-    <p>Rewards:</p>
-    <ul className="list-disc list-inside">
-      <li>1st Place: $2,000 + Limited Edition Kratos NFT</li>
-      <li>2nd–5th: $1,000 each + Exclusive Weapon Skins</li>
-      <li>6th–20th: $250 each + God of War Digital Collectibles</li>
-      <li>Participation Reward: Special “Mark of the Gods” badge</li>
-    </ul>
-
-    <p>How to Join:</p>
-    <p>
-      Register on the Hyper Tek events page and complete in-game challenges between Nov 10–24. Earn points by completing quests, unlocking loot, and participating in community events.
-    </p>
-
-    <p>Rules:</p>
-    <ul className="list-disc list-inside">
-      <li>Only verified Hyper Tek accounts can participate.</li>
-      <li>Rewards are distributed based on total quest points.</li>
-      <li>Cheating, multi-accounting, or exploit use will result in disqualification.</li>
-    </ul>
-
-    <p>Gear up, warriors. Ragnarok is coming and this time, you’re part of the legend.</p>
+{/* NEXT BUTTON */}
+{visibleCount < news.length && (
+  <div className="flex justify-center mt-16">
+    <CustomButton5
+      text="Next"
+      onClick={loadMore}
+      className="px-10 py-3"
+    />
   </div>
-</div>
+)}
 
-
-        {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 mt-12">
-  <CustomButton6
-    text="Previous"
-    onClick={prevNews}
-    disabled={currentIndex === 0}
-  />
-
-  <div className="text-gray-400 text-sm">
-    Page {currentIndex + 1} of {news.length}
-  </div>
-
-  <CustomButton5
-    text="Next"
-    onClick={nextNews}
-    disabled={currentIndex === news.length - 1}
-  />
-</div>
-
-      </main>
     </div>
   );
 }
