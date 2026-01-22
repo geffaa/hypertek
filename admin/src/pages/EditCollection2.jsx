@@ -27,6 +27,10 @@ const fileInputRef = useRef(null);
 
   const [name, setName] = useState(collection.name);
 const [symbol, setSymbol] = useState(collection.collectionData.symbol);
+const [priceETH, setPriceETH] = useState(
+  collection?.collectionData?.priceETH || ""
+);
+
 
   const [selectedImage, setSelectedImage] = useState(null);
 const [chain, setChain] = useState(collection.collectionData.chain);
@@ -74,9 +78,9 @@ const [collectionType, setCollectionType] = useState(
     event.preventDefault();
   };
 
-  const handleNavigate = () => {
-    navigate("/collections");
-  };
+ const handleNavigate = () => {
+  navigate(-1);
+};
 
 
 /// update the user data 
@@ -95,6 +99,7 @@ const handleUpdate = async () => {
     formData.append("royaltyPercent", royaltyPercent);
     formData.append("royaltyWallet", royaltyWallet);
     formData.append("supply", supply);
+    formData.append("priceETH", priceETH);
     formData.append("owner", "admin");
     formData.append("creator", "admin");
 formData.append("collectionType", collectionType); // use correct key
@@ -176,7 +181,7 @@ if (updating) {
         <div>
           {/* Name Field */}
           <div
-            className="rounded-md p-4 flex w-[334px] flex-col gap-2 relative z-50"
+            className="rounded-md p-4 flex w-[300px] flex-col gap-2 relative z-50"
             
           >
             <label
@@ -193,9 +198,9 @@ if (updating) {
   onChange={(e) => setName(e.target.value)}
                 placeholder={collection.name}
 
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none"
+              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 focus:outline-none"
               style={{
-                width: "434px",
+                width: "400px",
                 height: "40px",
                 borderRadius: "4px",
                 letterSpacing: "0%",
@@ -204,7 +209,7 @@ if (updating) {
           </div>
 
           {/* Description Field */}
-          {/* <div className="rounded-md p-4 flex flex-col gap-2 relative z-50" style={{ width: "434px" }}>
+          <div className="rounded-md p-4 flex flex-col gap-2 relative z-50" style={{ width: "434px" }}>
     <label
       htmlFor="description"
       className="font-inter font-normal text-[18px] text-white"
@@ -222,186 +227,40 @@ if (updating) {
         letterSpacing: "0%",
       }}
     />
-  </div> */}
+  </div>
 
-    <div className="w-[434px] h-[84px] flex flex-col gap-[14px] mt-8 mx-4">
+
+         {/* Price Field */}
+<div
+  className="rounded-md p-4 flex flex-col gap-2"
+  style={{ width: "405px" }}
+>
   <label
-    htmlFor="type"
-    style={{
-      fontFamily: "Inter, sans-serif",
-      fontWeight: 400,
-      fontStyle: "normal",
-      fontSize: "18px",
-      lineHeight: "100%",
-      letterSpacing: "0%",
-      color: "white",
-    }}
+    htmlFor="priceETH"
+    className="font-inter font-normal text-[18px] text-white"
+    style={{ lineHeight: "22px", letterSpacing: "0%" }}
   >
-    Collection Type
+    Price
   </label>
 
-  <select
-    id="type"
-    value={collectionType}
-    onChange={(e) => setCollectionType(e.target.value)}
-    className="w-full h-10 px-3 z-10 rounded-md bg-transparent text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors appearance-none"
-  >
-    <option value="">Select Type</option>
-    <option value="NFA">NFA</option>
-    <option value="Land">Land</option>
-  </select>
+  <input
+    type="number"
+    id="priceETH"
+    placeholder=""
+    min="0"
+    step="0.0001"
+    value={priceETH}
+    onChange={(e) => setPriceETH(e.target.value)}
+    className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
+    style={{
+      width: "200px",
+      height: "40px",
+      borderRadius: "4px",
+      letterSpacing: "0%",
+    }}
+  />
 </div>
 
-          <div className="w-[434px] h-[84px] pl-2 flex flex-col gap-[14px] mt-8 pl-5">
-            <label
-              htmlFor="symbol"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Token Symbol
-            </label>
-
-            <input
-              type="text"
-              id="symbol"
-               value={symbol}
-  onChange={(e) => setSymbol(e.target.value)}
- placeholder={collection.collectionData.symbol}
-               className="w-[434px] h-10  z-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
-            />
-          </div>
-
-          {/* third chain */}
-          <div className="w-[434px] h-[84px] flex flex-col pl-3 gap-[14px] mt-8 mx-2">
-            <label
-              htmlFor="chain"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Chain
-            </label>
-
-            <div className="flex items-center w-[434px] pl-3 rounded-md bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors px-2">
-              <div
-                className="w-[17px] h-[17px] rounded-2xl flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)",
-                }}
-              >
-                <img
-                  src={ChainIcon}
-                  alt=""
-                  className="w-[10.62px] h-[9.78px]"
-                />
-              </div>
-
-              <input
-                type="text"
-                id="chain"
-                placeholder={collection.collectionData.chain}
-                value={chain}
-  onChange={(e) => setChain(e.target.value)}
-                className="w-full h-10 px-3 bg-transparent outline-none"
-              />
-            </div>
-          </div>
-
-<div className="flex justify-between items-start pl-4 gap-8 mt-5 w-[434px]">
-            {/* Creator Fee */}
-            <div className="w-[434px] flex gap-8 justify-between pl-2">
-              <div className="flex flex-col gap-2 w-[210px]">
-                <h1 className="font-inter font-normal text-[18px] m-0">
-                  Creator Fee
-                </h1>
-                <div className="flex items-center z-10 border border-[#555] rounded-md h-[48px] px-3">
-                  <input
-                    type="text"
-                    // defaultValue={collection.collectionData.royaltyPercent}
-                     value={royaltyPercent}
-  onChange={(e) => setRoyaltyPercent(e.target.value)}
-
-                    className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
-                  />
-                  <span className="text-[18px] text-white/70 px-2">%</span>
-                </div>
-                <p className="text-[14px] text-white/70 font-inter m-0">
-                  Support 100% total fee
-                </p>
-              </div>
-
-              {/* Supply */}
-              <div className="flex flex-col gap-2 w-[220px] ">
-                <h1 className="font-inter font-normal text-[18px] m-0">
-                  Supply
-                </h1>
-                <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
-                  <input
-                    type="text"
-                     value={supply}
-  onChange={(e) => setSupply(e.target.value)}
-                    defaultValue={collection.supply}
-
-                    className="w-full bg-transparent border-none outline-none text-[18px] text-white/70 font-inter"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Recipient Wallet Address */}
-          <div className="flex  flex-col gap-2 pl-4 mt-8 w-[434px] px-1 justify-center">
-            <h1 className="font-inter font-normal text-[18px] m-0">
-              Recipient Wallet Address
-            </h1>
-            <input
-              type="text"
-               value={royaltyWallet}
-  onChange={(e) => setRoyaltyWallet(e.target.value)}
-              placeholder={collection.collectionData.royaltyWallet}
-              className="w-[434px] h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
-            />
-          </div>
-
-          {/* Price Field */}
-          {/* <div
-            className="rounded-md p-4 flex flex-col gap-2"
-            style={{ width: "405px" }}
-          >
-            <label
-              htmlFor="price"
-              className="font-inter font-normal text-[18px] text-white"
-              style={{ lineHeight: "22px", letterSpacing: "0%" }}
-            >
-              Price
-            </label>
-            <input
-              type="text"
-              id="price"
-              placeholder={collection.}
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
-              style={{
-                width: "385px",
-                height: "40px",
-                borderRadius: "4px",
-                letterSpacing: "0%",
-              }}
-            />
-          </div> */}
         </div>
 
         {/* right side  */}
