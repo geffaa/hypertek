@@ -134,11 +134,12 @@ stage('Restart Backend') {
             if pm2 list | grep -q 'hyper-tek-backend'; then
                 pm2 restart hyper-tek-backend --update-env
             else
-                pm2 start $BACKEND_DIR/index.js --name hyper-tek-backend --watch
+                pm2 start $BACKEND_DIR/Index.js --name hyper-tek-backend --watch
             fi
         """
     }
 }
+
 
 
         stage('Restart Nginx') {
@@ -159,4 +160,5 @@ stage('Restart Backend') {
     }
 }
  
+
 
