@@ -19,7 +19,8 @@ import {
   getAllNFTs,
   getPopularCollections,
   getTotalCounts,
-  cancelListing
+  cancelListing,
+  getNFTsByWallet,
 } from "../Controllers/nftController.js";
 import uploadTemp from "../Middleware/UploadMulter.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
@@ -96,6 +97,8 @@ NFTRouter.delete(
   authMiddleware("user"),
   deleteCollection
 );
+// NEW ROUTE
+NFTRouter.get("/user/owned/:walletAddress", getNFTsByWallet);
 
 NFTRouter.put("/status/:id", updateNFTStatus);
 // ======================
