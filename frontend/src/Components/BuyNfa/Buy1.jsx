@@ -522,12 +522,12 @@ function Buy1() {
         );
 
         setLoading(false);
-        
+
         // Redirect to marketplace profile after 2 seconds
         setTimeout(() => {
           navigate("/profile");
         }, 2000);
-        
+
         return;
       }
 
@@ -623,7 +623,7 @@ function Buy1() {
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
       console.log("✅ Purchase complete!");
-      
+
       // Redirect to marketplace profile after 2 seconds
       setTimeout(() => {
         navigate("/profile");
@@ -708,7 +708,7 @@ function Buy1() {
     // If user is owner but not listed, allow them to list
     if (isOwner && !listingData?.active) {
       return {
-        text: "💰 Sell Now",
+        text: " List Now",
         action: handleCreateListing,
       };
     }
@@ -849,7 +849,6 @@ function Buy1() {
           </div>
         </div>
       </div>
-
 
       {/* Confirmation Modal */}
       {isOpen && (
@@ -1045,4 +1044,3 @@ function Buy1() {
 }
 
 export default Buy1;
-
