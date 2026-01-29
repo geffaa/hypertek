@@ -22,52 +22,50 @@ function MarketPlace() {
   const [activityData, setActivityData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
-
-const staticActivityData = [
-  {
-    name: "Land #123",
-    type: "Land",
-    buyer: "Alice",
-    seller: "Bob",
-    price: 500,
-    time: "2025-12-20T12:00:00Z",
-  },
-  {
-    name: "NFA #456",
-    type: "NFA",
-    buyer: "Charlie",
-    seller: "Dave",
-    price: 250,
-    time: "2025-12-21T09:30:00Z",
-  },
-  {
-    name: "Land #789",
-    type: "Land",
-    buyer: "Eve",
-    seller: "Frank",
-    price: 1000,
-    time: "2025-12-21T08:00:00Z",
-  },
-];
-
-
+  const staticActivityData = [
+    {
+      name: "Land #123",
+      type: "Land",
+      buyer: "Alice",
+      seller: "Bob",
+      price: 500,
+      time: "2025-12-20T12:00:00Z",
+    },
+    {
+      name: "NFA #456",
+      type: "NFA",
+      buyer: "Charlie",
+      seller: "Dave",
+      price: 250,
+      time: "2025-12-21T09:30:00Z",
+    },
+    {
+      name: "Land #789",
+      type: "Land",
+      buyer: "Eve",
+      seller: "Frank",
+      price: 1000,
+      time: "2025-12-21T08:00:00Z",
+    },
+  ];
 
   // Fetch and filter collections
   useEffect(() => {
     const fetchCollections = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/collection/get`);
+        const res = await axios.get(
+          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`,
+        );
         if (res.data.success) {
           const collections = res.data.collections;
 
           // Filter NFA and LAND
           const nfaCollections = collections.filter(
-            (item) => item.collection.Type === "NFA"
+            (item) => item.collection.Type === "NFA",
           );
           const landCollections = collections.filter(
-            (item) => item.collection.Type === "Land"
+            (item) => item.collection.Type === "Land",
           );
 
           setMarketData(nfaCollections);
@@ -97,7 +95,7 @@ const staticActivityData = [
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
     return `${diffInDays}d`;
   };
- 
+
   return (
     <>
       {loading ? (
@@ -107,10 +105,10 @@ const staticActivityData = [
           {/* Hero Section */}
           <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
             <div className="mt-20 lg:mt-[92px]">
-            <div
-  className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
-  style={{
-    backgroundImage: `
+              <div
+                className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
+                style={{
+                  backgroundImage: `
       linear-gradient(
         to right,
         rgba(0, 0, 0, 0.85) 0%,
@@ -120,25 +118,25 @@ const staticActivityData = [
       ),
       url(${overview1})
     `,
-    backgroundPosition: '50% 8.5%', // ✅ THIS is the key
-    backgroundSize: 'cover',
-  }}
->
-
-<div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
-            <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
-              A New Era Dawns in Hyper Tek
-            </h1>
-            <p
-              className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
+                  backgroundPosition: "50% 8.5%", // ✅ THIS is the key
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
+                  <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
+                    A New Era Dawns in Hyper Tek
+                  </h1>
+                  <p
+                    className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
   leading-relaxed text-white"
-            >
-              It's the start of a living, breathing universe where every
-              decision shapes the journey. Whether you're racing at light speed,
-              forging alliances in the Overlord Realm, or uncovering secrets in
-              HyperQuest, this is your chance to leave your mark on the story.
-            </p>
-          </div>
+                  >
+                    It's the start of a living, breathing universe where every
+                    decision shapes the journey. Whether you're racing at light
+                    speed, forging alliances in the Overlord Realm, or
+                    uncovering secrets in HyperQuest, this is your chance to
+                    leave your mark on the story.
+                  </p>
+                </div>
 
                 <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
                   {[
@@ -148,8 +146,12 @@ const staticActivityData = [
                     { num: "2.6K", label: "Owners" },
                   ].map((stat, i) => (
                     <div key={i} className="flex flex-col gap-1">
-                      <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">{stat.num}</h1>
-                      <p className="text-xs md:text-[12px] font-normal text-white">{stat.label}</p>
+                      <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
+                        {stat.num}
+                      </h1>
+                      <p className="text-xs md:text-[12px] font-normal text-white">
+                        {stat.label}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -175,7 +177,9 @@ const staticActivityData = [
               <section className="flex flex-col mt-5 gap-6 lg:gap-4 mb-4 lg:mb-6 sm:px-3 md:px-8 lg:px-0">
                 <div className="flex flex-row justify-between items-center gap-4">
                   <div className="flex flex-col gap-2 items-start">
-                    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">NFA</h1>
+                    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                      NFA
+                    </h1>
                     <div className="flex gap-2">
                       <div className="h-[3px] md:w-8 w-3 lg:w-12 bg-white"></div>
                       <div className="h-[3px] md:w-12 w-3 lg:w-20 bg-white"></div>
@@ -184,44 +188,62 @@ const staticActivityData = [
                     </div>
                   </div>
                   <div className="flex justify-end items-center text-white">
-                    <Link to="/nfa-expand" className="flex items-center gap-2 hover:text-gray-300 transition">
+                    <Link
+                      to="/nfa-expand"
+                      className="flex items-center gap-2 hover:text-gray-300 transition"
+                    >
                       <span>Explore All</span>
                       <ArrowRight size={20} strokeWidth={2} />
                     </Link>
                   </div>
                 </div>
 
-               {/* DESKTOP & TABLET NFA GRID */}
-<div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
+                {/* DESKTOP & TABLET NFA GRID */}
+                <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
                   {marketData.slice(0, 4).map((item, index) => (
-                   <div
-                   key={index}
-                   className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
-                   style={{
-                     background:
-                       "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-                   }}
-                 >
-                 
-                     <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-
+                    <div
+                      key={index}
+                      className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                      style={{
+                        background:
+                          "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                      }}
+                    >
+                      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                         <img
-                          src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : popularCollections}
+                          src={
+                            item.collection.image
+                              ? `${BACKEND_BASE_URL}${item.collection.image}`
+                              : popularCollections
+                          }
                           alt={item.collection.name || "Collection"}
                           className="w-full h-full object-cover object-top"
                         />
                       </div>
-                      <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">{item.collection.name}</h2>
+                      <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">
+                        {item.collection.name}
+                      </h2>
                       <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
-                        <h3 className="text-xs lg:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
+                        <h3 className="text-xs lg:text-sm font-semibold">
+                          {item._id.slice(0, 6)} 🔥
+                        </h3>
                         <div className="flex items-center">
-                          <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">${item.collection.chain}</h3>
+                          <img
+                            src={TVector}
+                            alt=""
+                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                          />
+                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+                            ${item.collection.chain}
+                          </h3>
                         </div>
                       </div>
                       <div className="flex justify-center items-center mt-4">
-
-                        <Link to="/buy-nfa" state={{ item }} className="w-full flex justify-center">
+                        <Link
+                          to="/buy-nfa"
+                          state={{ item }}
+                          className="w-full flex justify-center"
+                        >
                           <CustomButton text="Buy Now" />
                         </Link>
                       </div>
@@ -229,69 +251,73 @@ const staticActivityData = [
                   ))}
                 </div>
                 {/* MOBILE NFA GRID */}
-<div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
-  {marketData.slice(0, 4).map((item) => (
-    <div
-      key={item._id}
-      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
-      style={{
-        background:
-          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-      }}
-    >
-      <div
-        className="h-[150px] rounded-[14px] overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-        }}
-      >
-        <img
-          src={
-            item.collection?.image
-              ? `${BACKEND_BASE_URL}${item.collection.image}`
-              : popularCollections
-          }
-          alt={item.collection?.name}
-          className="w-full h-full object-cover"
-        />
-      </div>
+                <div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
+                  {marketData.slice(0, 4).map((item) => (
+                    <div
+                      key={item._id}
+                      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+                      style={{
+                        background:
+                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                      }}
+                    >
+                      <div
+                        className="h-[150px] rounded-[14px] overflow-hidden"
+                        style={{
+                          background:
+                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                        }}
+                      >
+                        <img
+                          src={
+                            item.collection?.image
+                              ? `${BACKEND_BASE_URL}${item.collection.image}`
+                              : popularCollections
+                          }
+                          alt={item.collection?.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-      <h2 className="text-[14px] font-semibold mt-4 truncate">
-        {item.collection?.name}
-      </h2>
+                      <h2 className="text-[14px] font-semibold mt-4 truncate">
+                        {item.collection?.name}
+                      </h2>
 
-      <div className="flex justify-between items-center mt-3 text-[11px]">
-        <span className="text-gray-300 font-medium truncate">
-          {item._id.slice(0, 6)} 🔥
-        </span>
+                      <div className="flex justify-between items-center mt-3 text-[11px]">
+                        <span className="text-gray-300 font-medium truncate">
+                          {item._id.slice(0, 6)} 🔥
+                        </span>
 
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-            <img src={TVector} alt="" className="w-3 h-3" />
-          </div>
-          <span className="font-semibold truncate">
-            ${item.collection?.chain}
-          </span>
-        </div>
-      </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                            <img src={TVector} alt="" className="w-3 h-3" />
+                          </div>
+                          <span className="font-semibold truncate">
+                            ${item.collection?.chain}
+                          </span>
+                        </div>
+                      </div>
 
-      <div className="flex justify-center items-center mt-10">
-        <Link to="/buy-nfa" state={{ item }}>
-          <CustomButton4 text="Buy Now" className="!text-xs !py-2 !px-6" />
-        </Link>
-      </div>
-    </div>
-  ))}
-</div>
-
+                      <div className="flex justify-center items-center mt-10">
+                        <Link to="/buy-nfa" state={{ item }}>
+                          <CustomButton4
+                            text="Buy Now"
+                            className="!text-xs !py-2 !px-6"
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </section>
 
               {/* LAND Section */}
               <section className="flex flex-col gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16 sm:px-6 md:px-8 lg:px-0">
                 <div className="flex flex-row justify-between items-center gap-3 sm:gap-4">
                   <div className="flex flex-col gap-2 items-start">
-                    <h1 className="text-white uppercase text-lg sm:text-2xl lg:text-[30px] font-goldman font-bold">LAND</h1>
+                    <h1 className="text-white uppercase text-lg sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                      LAND
+                    </h1>
                     <div className="flex gap-1 sm:gap-2">
                       <div className="h-[3px] md:w-6 sm:w-3 lg:w-12 bg-white"></div>
                       <div className="h-[3px] w-8 sm:w-3 lg:w-20 bg-white"></div>
@@ -300,204 +326,233 @@ const staticActivityData = [
                     </div>
                   </div>
                   <div className="flex justify-end items-center text-white">
-                    <Link to="/land" className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base">
+                    <Link
+                      to="/land"
+                      className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
+                    >
                       <span>Expand All</span>
-                      <ArrowRight size={16} className="sm:w-5 sm:h-5" strokeWidth={2} />
+                      <ArrowRight
+                        size={16}
+                        className="sm:w-5 sm:h-5"
+                        strokeWidth={2}
+                      />
                     </Link>
                   </div>
                 </div>
 
-              
-               {/* DESKTOP & TABLET NFA GRID */}
-<div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
+                {/* DESKTOP & TABLET NFA GRID */}
+                <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
                   {landData.slice(0, 4).map((item, index) => (
-        <div
-        key={index}
-        className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
-        style={{
-          background:
-            "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-        }}
-      >
-      
-      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-
+                    <div
+                      key={index}
+                      className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                      style={{
+                        background:
+                          "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                      }}
+                    >
+                      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                         <img
-                          src={item.collection.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
+                          src={
+                            item.collection.image
+                              ? `${BACKEND_BASE_URL}${item.collection.image}`
+                              : land1Image
+                          }
                           alt={item.collection.name || "Land Collection"}
                           className="w-full h-full object-cover object-top "
                         />
                       </div>
-                      <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">{item.collection.name}</h2>
+                      <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+                        {item.collection.name}
+                      </h2>
                       <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
-                        <h3 className="text-xs sm:text-sm font-semibold">{item._id.slice(0, 6)} 🔥</h3>
+                        <h3 className="text-xs sm:text-sm font-semibold">
+                          {item._id.slice(0, 6)} 🔥
+                        </h3>
                         <div className="flex items-center">
-                          <img src={TVector} alt="" className="w-2 h-2 lg:w-[10px] lg:h-[9px]" />
-                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">${item.collection.chain}</h3>
+                          <img
+                            src={TVector}
+                            alt=""
+                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                          />
+                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
+                            ${item.collection.chain}
+                          </h3>
                         </div>
-                      </div><div className="flex justify-center items-center mt-4">
-                        <Link to="/buy-land" state={{ item }} className="cursor-pointer flex justify-center w-full">
-                          <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
+                      </div>
+                      <div className="flex justify-center items-center mt-4">
+                        <Link
+                          to="/buy-land"
+                          state={{ item }}
+                          className="cursor-pointer flex justify-center w-full"
+                        >
+                          <CustomButton
+                            text="Buy Now"
+                            className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
+                          />
                         </Link>
                       </div>
                     </div>
                   ))}
                 </div>
                 {/* MOBILE LAND GRID */}
-<div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
+                <div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
+                  {landData.slice(0, 4).map((item) => (
+                    <div
+                      key={item._id}
+                      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
+                      style={{
+                        background:
+                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                      }}
+                    >
+                      {/* Image */}
+                      <div
+                        className="h-[150px] rounded-[14px] overflow-hidden"
+                        style={{
+                          background:
+                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                        }}
+                      >
+                        <img
+                          src={
+                            item.collection?.image
+                              ? `${BACKEND_BASE_URL}${item.collection.image}`
+                              : land1Image
+                          }
+                          alt={item.collection?.name || "Land Collection"}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-{landData.slice(0, 4).map((item) => (
-  <div
-    key={item._id}
-    className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
-    style={{
-      background:
-        "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-    }}
-  >
-    {/* Image */}
-    <div
-      className="h-[150px] rounded-[14px] overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-      }}
-    >
-      <img
-        src={
-          item.collection?.image
-            ? `${BACKEND_BASE_URL}${item.collection.image}`
-            : land1Image
-        }
-        alt={item.collection?.name || "Land Collection"}
-        className="w-full h-full object-cover"
-      />
-    </div>
+                      {/* Title */}
+                      <h2 className="text-[14px] font-semibold mt-4 truncate">
+                        {item.collection?.name}
+                      </h2>
 
-    {/* Title */}
-    <h2 className="text-[14px] font-semibold mt-4 truncate">
-      {item.collection?.name}
-    </h2>
+                      {/* ID + Price */}
+                      <div className="flex justify-between items-center mt-3 text-[11px]">
+                        <span className="text-gray-300 font-medium truncate">
+                          {item._id.slice(0, 6)} 🔥
+                        </span>
 
-    {/* ID + Price */}
-    <div className="flex justify-between items-center mt-3 text-[11px]">
-      <span className="text-gray-300 font-medium truncate">
-        {item._id.slice(0, 6)} 🔥
-      </span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                            <img src={TVector} alt="" className="w-3 h-3" />
+                          </div>
+                          <span className="font-semibold truncate">
+                            ${item.collection?.chain}
+                          </span>
+                        </div>
+                      </div>
 
-      <div className="flex items-center gap-2">
-        <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-          <img src={TVector} alt="" className="w-3 h-3" />
-        </div>
-        <span className="font-semibold truncate">
-          ${item.collection?.chain}
-        </span>
-      </div>
-    </div>
-
-    {/* Button */}
-    <div className="flex justify-center items-center mt-10">
-      <Link to="/buy-land" state={{ item }}>
-        <CustomButton4
-          text="Buy Now"
-          className="!text-xs !py-2 !px-6"
-        />
-      </Link>
-    </div>
-  </div>
-))}
-</div>
-
-
-              </section>
-    {/* ------------------------------------------ activity section ---------------------------------- */}
-<section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
-  <GlowingOrb Xaxis={830} Yaxis={300} />
-  <div className="w-full flex flex-col gap-6 lg:gap-8">
-    {/* Header */}
-    <div className="flex flex-col gap-2 items-start">
-      <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-        ACTIVITIES
-      </h1>
-      {/* Decorative lines */}
-      <div className="flex gap-2 mt-1">
-        <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-        <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-        <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-        <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-      </div>
-    </div>
-
-    {/* Table */}
-    <div className="overflow-x-auto rounded-lg w-full">
-      <table className="w-full min-w-[800px] text-white">
-        <thead className="bg-[#00134C]">
-          <tr className="text-left">
-            {["Name", "Type", "Buyer", "Seller", "Price", "Time"].map(
-              (h, i) => (
-                <th
-                  key={i}
-                  className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium"
-                >
-                  {h}
-                </th>
-              )
-            )}
-          </tr>
-        </thead>
-
-        <tbody>
-          {staticActivityData.map((item, i) => (
-            <tr key={i} className="transition-colors border-b border-[#0B2A6F]">
-              <td className="px-4 lg:px-6 py-3 align-middle">
-                <div className="flex items-center gap-3">
-                  <div
-                    className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
-                    }}
-                  >
-                    <img
-                      src={i % 2 === 0 ? land1Image : ManImage}
-                      alt="Collection"
-                      className="w-full h-full object-cover object-top scale-x-[-1]"
-                    />
-                  </div>
-                  <span className="text-sm lg:text-[16px] font-inter font-medium">
-                    {item.name}
-                  </span>
+                      {/* Button */}
+                      <div className="flex justify-center items-center mt-10">
+                        <Link to="/buy-land" state={{ item }}>
+                          <CustomButton4
+                            text="Buy Now"
+                            className="!text-xs !py-2 !px-6"
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </td>
+              </section>
+              {/* ------------------------------------------ activity section ---------------------------------- */}
+              <section className="w-full flex relative z-10 justify-center mb-16 lg:mb-24 px-4 sm:px-6 md:px-8 lg:px-0">
+                <GlowingOrb Xaxis={830} Yaxis={300} />
+                <div className="w-full flex flex-col gap-6 lg:gap-8">
+                  {/* Header */}
+                  <div className="flex flex-col gap-2 items-start">
+                    <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+                      ACTIVITIES
+                    </h1>
+                    {/* Decorative lines */}
+                    <div className="flex gap-2 mt-1">
+                      <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
+                      <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
+                      <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
+                      <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
+                    </div>
+                  </div>
 
-              <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                {item.type}
-              </td>
+                  {/* Table */}
+                  <div className="overflow-x-auto rounded-lg w-full">
+                    <table className="w-full min-w-[800px] text-white">
+                      <thead className="bg-[#00134C]">
+                        <tr className="text-left">
+                          {[
+                            "Name",
+                            "Type",
+                            "Buyer",
+                            "Seller",
+                            "Price",
+                            "Time",
+                          ].map((h, i) => (
+                            <th
+                              key={i}
+                              className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium"
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
 
-              <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                {item.buyer}
-              </td>
+                      <tbody>
+                        {staticActivityData.map((item, i) => (
+                          <tr
+                            key={i}
+                            className="transition-colors border-b border-[#0B2A6F]"
+                          >
+                            <td className="px-4 lg:px-6 py-3 align-middle">
+                              <div className="flex items-center gap-3">
+                                <div
+                                  className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden relative"
+                                  style={{
+                                    background:
+                                      "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                                  }}
+                                >
+                                  <img
+                                    src={i % 2 === 0 ? land1Image : ManImage}
+                                    alt="Collection"
+                                    className="w-full h-full object-cover object-top scale-x-[-1]"
+                                  />
+                                </div>
+                                <span className="text-sm lg:text-[16px] font-inter font-medium">
+                                  {item.name}
+                                </span>
+                              </div>
+                            </td>
 
-              <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                {item.seller}
-              </td>
+                            <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
+                              {item.type}
+                            </td>
 
-              <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                ${item.price}
-              </td>
+                            <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
+                              {item.buyer}
+                            </td>
 
-              <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                {getDaysAgo(item.time)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+                            <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
+                              {item.seller}
+                            </td>
 
+                            <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
+                              ${item.price}
+                            </td>
 
+                            <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
+                              {getDaysAgo(item.time)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
