@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
+
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 import { useSelector } from "react-redux";
@@ -33,6 +34,9 @@ function MarketPlace() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showListModal, setShowListModal] = useState(false);
   const [listingInProgress, setListingInProgress] = useState(false);
+  const [showMobileList, setShowMobileList] = useState({});
+
+  
 
   /* ================= PROFILE ================= */
   useEffect(() => {
@@ -427,60 +431,95 @@ function MarketPlace() {
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                {filteredCollections.map((item) => {
-                  const collection = item.collection;
-                  return (
-                    <div
-                      key={item._id}
-                      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
-                      style={{
-                        background:
-                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-                      }}
-                    >
-                      <div
-                        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-                        }}
-                      >
-                        <img
-                          src={`${BACKEND_BASE_URL}${collection.image}`}
-                          alt={collection.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+               {filteredCollections.map((item) => {
+  const collection = item.collection;
+  return (
+    <div
+      key={item._id}
+      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
+      style={{
+        background:
+          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+      }}
+    >
+      <div
+        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+        }}
+      >
+        <img
+          src={`${BACKEND_BASE_URL}${collection.image}`}
+          alt={collection.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-                      <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                        {collection.name}
-                      </h2>
+      <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
+        {collection.name}
+      </h2>
 
-                      <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-                        <span className="font-medium text-gray-300 truncate">
-                          {collection.symbol} 🔥
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img src={TVector} className="w-3 h-3" alt="chain" />
-                          </div>
-                          <span className="font-semibold truncate">
-                            ${collection.chain}
-                          </span>
-                        </div>
-                      </div>
+      <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
+        <span className="font-medium text-gray-300 truncate">
+          {collection.symbol} 🔥
+        </span>
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+            <img src={TVector} className="w-3 h-3" alt="chain" />
+          </div>
+          <span className="font-semibold truncate">
+            ${collection.chain}
+          </span>
+        </div>
+      </div>
 
-                      <p
-                        onClick={() => {
-                          navigate("/buy-nfa", { state: { item } });
-                        }}
-                        className="mt-auto pt-6 text-center text-sm text-white cursor-pointer transition  py-2 rounded"
-                      >
-                        Not Listed
-                      </p>
-                    </div>
-                  );
-                })}
+      {/* ================= DESKTOP ================= */}
+      <div
+        className="mt-auto pt-6 text-center relative group focus-within:outline-none"
+        tabIndex={0}
+      >
+        <p className="hidden md:block text-sm text-white transition-opacity group-hover:opacity-0">
+          Not Listed
+        </p>
+
+        <div className="hidden md:flex absolute inset-0 justify-center items-center opacity-0 group-hover:opacity-100 transition">
+          <div
+            onClick={() => {
+              navigate("/buy-nfa", { state: { item } });
+            }}
+          >
+            <CustomButton4 text="List Now" />
+          </div>
+        </div>
+
+     {/* ================= MOBILE ================= */}
+<div className="md:hidden mt-2 relative">
+  {!showMobileList[item._id] ? (
+    <button
+      className="text-sm text-white"
+      onClick={() =>
+        setShowMobileList((prev) => ({ ...prev, [item._id]: true }))
+      }
+    >
+      Not Listed
+    </button>
+  ) : (
+    <div
+      className="flex justify-center items-center"
+      onClick={() => navigate("/buy-nfa", { state: { item } })}
+    >
+      <CustomButton4 text="List Now" />
+    </div>
+  )}
+</div>
+
+
+      </div>
+    </div>
+  );
+})}
+
               </div>
             )}
           </section>
