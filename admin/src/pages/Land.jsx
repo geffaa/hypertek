@@ -73,6 +73,20 @@ const handleEditLand = (collection) => {
   navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
 };
 
+const handleAddMore = () => {
+  const adminDataString = localStorage.getItem("admin_data");
+  if (!adminDataString) {
+    toast.error("Admin ID not found");
+    return;
+  }
+
+  const adminData = JSON.parse(adminDataString);
+  const adminId = adminData._id;
+
+  navigate(`/${adminId}/create-land-collection`);
+};
+
+
 
   // Fetch NFT data
   useEffect(() => {
@@ -298,6 +312,16 @@ src={land.image ? `${Image_Base_Url}${land.image}` : `${Image_Base_Url}${land.im
     </div>
   </div>
 )}
+{/* Add More Button */}
+<div className="mt-24">
+  <button
+    onClick={handleAddMore}
+    className="bg-[#0860ee] hover:bg-[#064fc7] text-white px-6 py-2 rounded-md text-sm font-medium transition-all"
+  >
+    Add More
+  </button>
+</div>
+
 
       </div>
     </div>
