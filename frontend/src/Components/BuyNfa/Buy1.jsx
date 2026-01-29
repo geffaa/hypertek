@@ -761,7 +761,7 @@ function Buy1() {
         <img
           src={`${BACKEND_BASE_URL}${collection?.image}`}
           alt={collection?.name}
-          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26] scale-x-[-1]"
+          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26] "
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
