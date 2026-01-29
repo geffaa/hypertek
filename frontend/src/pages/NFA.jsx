@@ -41,6 +41,10 @@ function NFA() {
   // Check if user has unlisted NFA items
   const checkAndNavigate = async () => {
     try {
+      if (!token) {
+        toast.error("Please login first");
+        return;
+      }
       // Get user's wallet address
       if (!window.ethereum) {
         toast.error("Please install MetaMask");
@@ -59,8 +63,8 @@ function NFA() {
 
       // Fetch user's owned NFTs
       const res = await axios.get(
-        ${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet},
-        { headers: { Authorization: Bearer ${token} } },
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       if (res.data?.success) {
@@ -93,7 +97,7 @@ function NFA() {
     const fetchMarketData = async () => {
       try {
         const res = await axios.get(
-          ${BACKEND_BASE_URL}/api/v1/nft/collection/get,
+          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`,
         );
 
         if (res.data.success) {
@@ -285,7 +289,7 @@ function NFA() {
                 <img
                   src={
                     item.collection?.image
-                      ? ${BACKEND_BASE_URL}${item.collection.image}
+                      ? `${BACKEND_BASE_URL}${item.collection.image}`
                       : popularCollections
                   }
                   alt={item.collection?.name || "NFA Collection"}
@@ -389,7 +393,7 @@ function NFA() {
                 <img
                   src={
                     item.collection?.image
-                      ? ${BACKEND_BASE_URL}${item.collection.image}
+                      ? `${BACKEND_BASE_URL}${item.collection.image}`
                       : popularCollections
                   }
                   alt={item.collection?.name}

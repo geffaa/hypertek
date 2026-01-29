@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";
-import CustomButton from "../Buttons/Button1";
-import CustomButton4 from "../Buttons/Button4";
 import GlowingOrb from "../Common/BgColoring";
+
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
-
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -22,112 +20,108 @@ import {
   MARKETPLACE_ABI,
   NFT_ABI,
 } from "../../Web3/Config";
+import CustomButton4 from "../Buttons/Button4";
 
 function MarketPlace() {
-  const { user, token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
   const [userData, setUserData] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [showListModal, setShowListModal] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(null);
+
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [showListModal, setShowListModal] = useState(false);
   const [listingInProgress, setListingInProgress] = useState(false);
+  const [showMobileList, setShowMobileList] = useState({});
 
-  /* ================= FETCH USER COLLECTIONS (MIDDLEWARE API) ================= */
-  useEffect(() => {
-    if (!user?.id || !token) return;
+  
 
-    const fetchUserCollections = async () => {
-      try {
-        setLoading(true);
-
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/nft/user/collection/get/${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (res.data?.success) {
-          setMarketData(res.data.collection || []);
-        }
-      } catch (error) {
-        toast.error(
-          error.response?.data?.message || "Failed to fetch collections"
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserCollections();
-  }, [user?.id, token]);
-
-  /* ================= FETCH PROFILE ================= */
+  /* ================= PROFILE ================= */
   useEffect(() => {
     if (!token) return;
-
-    const fetchProfile = async () => {
-      try {
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/getProfile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUserData(res.data.user);
-      } catch (error) {
-        toast.error("Failed to fetch profile");
-      }
-    };
-
-    fetchProfile();
+    axios
+      .get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setUserData(res.data.user))
+      .catch(() => toast.error("Failed to fetch profile"));
   }, [token]);
 
-  /* ================= CHECK WALLET ================= */
+  /* ================= WALLET ================= */
   useEffect(() => {
     checkWallet();
-
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
-      window.ethereum.on("chainChanged", () => window.location.reload());
     }
-
     return () => {
-      if (window.ethereum) {
-        window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
-      }
+      window.ethereum?.removeListener("accountsChanged", handleAccountsChanged);
     };
   }, []);
 
   const handleAccountsChanged = (accounts) => {
-    if (accounts.length > 0) {
-      setConnectedWallet(accounts[0].toLowerCase());
+    if (accounts.length) {
+      const wallet = accounts[0].toLowerCase();
+      setConnectedWallet(wallet);
+      fetchOwnedNFTs(wallet);
     } else {
       setConnectedWallet(null);
+      setMarketData([]);
     }
   };
 
   const checkWallet = async () => {
+    if (!window.ethereum) return setLoading(false);
+    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    if (accounts.length) {
+      const wallet = accounts[0].toLowerCase();
+      setConnectedWallet(wallet);
+      fetchOwnedNFTs(wallet);
+    } else setLoading(false);
+  };
+
+  const connectWallet = async () => {
     try {
-      if (!window.ethereum) return;
-
+      if (!window.ethereum) {
+        toast.error("MetaMask not installed");
+        return;
+      }
       const accounts = await window.ethereum.request({
-        method: "eth_accounts",
+        method: "eth_requestAccounts",
       });
-
-      if (accounts.length > 0) {
-        setConnectedWallet(accounts[0].toLowerCase());
+      if (accounts.length) {
+        const wallet = accounts[0].toLowerCase();
+        setConnectedWallet(wallet);
+        fetchOwnedNFTs(wallet);
+        toast.success("Wallet connected!");
       }
     } catch (err) {
-      console.error("Error checking wallet:", err);
+      console.error("Wallet connection error:", err);
+      toast.error("Failed to connect wallet");
+    }
+  };
+
+  /* ================= FETCH OWNED NFTS (SINGLE SOURCE) ================= */
+  const fetchOwnedNFTs = async (wallet) => {
+    try {
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (res.data?.success) {
+        setMarketData(
+          res.data.nfts.map((nft) => ({
+            ...nft,
+            userOwns: true,
+          }))
+        );
+      }
+    } catch (err) {
+      toast.error("Failed to load NFTs");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -172,8 +166,8 @@ function MarketPlace() {
 
   /* ================= MINT NFT ================= */
   const mintNFTToWallet = async (buyerWallet, item) => {
-    if (!user?.id || !item._id) {
-      toast.error("Invalid user or item");
+    if (!item._id) {
+      toast.error("Invalid item");
       return null;
     }
 
@@ -199,23 +193,19 @@ function MarketPlace() {
       );
 
       if (res.data?.success && res.data?.tokenId) {
-        toast.success(`NFT Minted! Token ID: ${res.data.tokenId}`);
         return res.data.tokenId;
       } else {
-        toast.error(res.data?.error || "Mint failed");
         return null;
       }
     } catch (err) {
       console.error("❌ Mint error:", err.response?.data || err);
-      toast.error(err.response?.data?.error || "Mint failed");
       return null;
     }
   };
 
-  /* ================= CREATE LISTING ================= */
+  /* ================= LISTING LOGIC ================= */
   const handleCreateListing = async () => {
     if (!selectedItem) return;
-
     const toastId = toast.loading("Creating listing...");
     setListingInProgress(true);
 
@@ -254,6 +244,7 @@ function MarketPlace() {
       if (!tokenId) {
         toast.loading("Minting NFT...", { id: toastId });
         tokenId = await mintNFTToWallet(walletAddress, selectedItem);
+
         if (!tokenId) {
           toast.error("Mint failed", { id: toastId });
           setListingInProgress(false);
@@ -295,7 +286,9 @@ function MarketPlace() {
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
-            toast.error("NFT not found on blockchain yet. Please try again in a moment.", { id: toastId });
+            toast.error("NFT not found on blockchain yet. Please try again.", {
+              id: toastId,
+            });
             setListingInProgress(false);
             return;
           }
@@ -336,9 +329,7 @@ function MarketPlace() {
           seller: walletAddress.toLowerCase(),
           priceETH: 0.01,
         },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       toast.success(`✅ Listed! Token #${tokenId} @ 0.01 ETH`, {
@@ -349,9 +340,7 @@ function MarketPlace() {
       // Update local state
       setMarketData((prev) =>
         prev.map((item) =>
-          item._id === selectedItem._id
-            ? { ...item, listed: true, tokenId }
-            : item
+          item._id === selectedItem._id ? { ...item, listed: true, tokenId } : item
         )
       );
 
@@ -367,28 +356,6 @@ function MarketPlace() {
     }
   };
 
-  /* ================= CONNECT WALLET ================= */
-  const connectWallet = async () => {
-    try {
-      if (!window.ethereum) {
-        toast.error("MetaMask not installed");
-        return;
-      }
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (accounts.length > 0) {
-        setConnectedWallet(accounts[0].toLowerCase());
-        toast.success("Wallet connected!");
-      }
-    } catch (err) {
-      console.error("Wallet connection error:", err);
-      toast.error("Failed to connect wallet");
-    }
-  };
-
   if (loading) return <FullScreenLoader />;
 
   /* ================= FILTER LOGIC ================= */
@@ -398,9 +365,9 @@ function MarketPlace() {
 
   return (
     <>
-      {/* ================= HERO ================= */}
       <div className="min-h-screen bg-transparent">
         <div className="mx-auto mt-[68px] max-w-[2000px]">
+          {/* ================= HERO ================= */}
           <div className="relative w-full max-w-[1400px] mx-auto h-[260px] mb-20 overflow-hidden">
             <img
               src={overview1}
@@ -423,11 +390,9 @@ function MarketPlace() {
                   <FaUserCircle className="w-28 h-28 text-gray-400" />
                 )}
               </div>
-
               <h2 className="mt-3 text-xl font-semibold">
                 {userData?.FullName || userData?.Email?.split("@")[0] || "Guest"}
               </h2>
-
               <Link
                 to="/edit"
                 state={{ userData }}
@@ -450,7 +415,6 @@ function MarketPlace() {
             {filteredCollections.length === 0 ? (
               <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
                 <h2 className="text-lg font-semibold -mt-4">No Item</h2>
-
                 <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
                   <img src={FaceOne} alt="Face One" className="w-34 h-24" />
                   <img
@@ -459,72 +423,103 @@ function MarketPlace() {
                     className="absolute top-24 w-28 h-10"
                   />
                 </div>
-
                 <Link to="/market-place">
-  <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
-    Browse Collection
-  </button>
-</Link>
+                  <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
+                    Browse Collection
+                  </button>
+                </Link>
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                {filteredCollections.map((item) => {
-                  const collection = item.collection;
+               {filteredCollections.map((item) => {
+  const collection = item.collection;
+  return (
+    <div
+      key={item._id}
+      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
+      style={{
+        background:
+          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+      }}
+    >
+      <div
+        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+        }}
+      >
+        <img
+          src={`${BACKEND_BASE_URL}${collection.image}`}
+          alt={collection.name}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-                  return (
-                    <div
-                      key={item._id}
-                      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
-                      style={{
-                        background:
-                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-                      }}
-                    >
-                      <div
-                        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-                        }}
-                      >
-                        <img
-                          src={`${BACKEND_BASE_URL}${collection.image}`}
-                          alt={collection.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+      <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
+        {collection.name}
+      </h2>
 
-                      <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                        {collection.name}
-                      </h2>
+      <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
+        <span className="font-medium text-gray-300 truncate">
+          {collection.symbol} 🔥
+        </span>
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+            <img src={TVector} className="w-3 h-3" alt="chain" />
+          </div>
+          <span className="font-semibold truncate">
+            ${collection.chain}
+          </span>
+        </div>
+      </div>
 
-                      <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-                        <span className="font-medium text-gray-300 truncate">
-                          {collection.symbol} 🔥
-                        </span>
+      {/* ================= DESKTOP ================= */}
+      <div
+        className="mt-auto pt-6 text-center relative group focus-within:outline-none"
+        tabIndex={0}
+      >
+        <p className="hidden md:block text-sm text-white transition-opacity group-hover:opacity-0">
+          Not Listed
+        </p>
 
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img src={TVector} className="w-3 h-3" alt="chain" />
-                          </div>
-                          <span className="font-semibold truncate">
-                            ${collection.chain}
-                          </span>
-                        </div>
-                      </div>
+        <div className="hidden md:flex absolute inset-0 justify-center items-center opacity-0 group-hover:opacity-100 transition">
+          <div
+            onClick={() => {
+              navigate("/buy-nfa", { state: { item } });
+            }}
+          >
+            <CustomButton4 text="List Now" />
+          </div>
+        </div>
 
-                      <p
-                        onClick={() => {
-                          setSelectedItem(item);
-                          setShowListModal(true);
-                        }}
-                        className="mt-auto pt-6 text-center text-sm text-white-400 cursor-pointer transition hover:text-blue-400"
-                      >
-                        Not Listed
-                      </p>
-                    </div>
-                  );
-                })}
+     {/* ================= MOBILE ================= */}
+<div className="md:hidden mt-2 relative">
+  {!showMobileList[item._id] ? (
+    <button
+      className="text-sm text-white"
+      onClick={() =>
+        setShowMobileList((prev) => ({ ...prev, [item._id]: true }))
+      }
+    >
+      Not Listed
+    </button>
+  ) : (
+    <div
+      className="flex justify-center items-center"
+      onClick={() => navigate("/buy-nfa", { state: { item } })}
+    >
+      <CustomButton4 text="List Now" />
+    </div>
+  )}
+</div>
+
+
+      </div>
+    </div>
+  );
+})}
+
               </div>
             )}
           </section>
@@ -555,7 +550,6 @@ function MarketPlace() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-
                   <p className="text-sm font-medium">
                     {selectedItem.collection.name}
                   </p>
