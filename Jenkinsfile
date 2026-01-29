@@ -129,12 +129,12 @@ stage('Restart Backend') {
     steps {
         echo ":arrows_counterclockwise: Restarting backend..."
         sh """
-            export PORT=$BACKEND_PORT
-
-            if pm2 list | grep -q 'hyper-tek-backend'; then
-                pm2 restart hyper-tek-backend --update-env
+            if pm2 describe hyper-tek-backend >/dev/null 2>&1; then
+                pm2 restart hyper-tek-backend
             else
-                pm2 start $BACKEND_DIR/Index.js --name hyper-tek-backend --watch
+                cd $BACKEND_DIR
+                PORT=$BACKEND_PORT NODE_ENV=production pm2 start index.js --name hyper-tek-backend
+                pm2 save
             fi
         """
     }
@@ -160,5 +160,6 @@ stage('Restart Backend') {
     }
 }
  
+
 
 
