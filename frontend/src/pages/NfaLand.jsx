@@ -718,7 +718,7 @@ function NfaLand() {
     // If user is owner but not listed, allow them to list
     if (isOwner && !listingData?.active) {
       return {
-        text: "💰 Sell Now",
+        text: " List Now",
         action: handleCreateListing,
       };
     }
