@@ -620,7 +620,7 @@ function NfaLand() {
 
       // Redirect to marketplace profile after 2 seconds
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/Lands");
       }, 1000);
     } catch (err) {
       console.error("❌ Purchase error:", err);

@@ -36,9 +36,11 @@ function Land() {
   const [showListModal, setShowListModal] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [listingInProgress, setListingInProgress] = useState(false);
+  const [connectingWallet, setConnectingWallet] = useState({});
+  const [userHasInteracted, setUserHasInteracted] = useState({});
+  const [showMobileList, setShowMobileList] = useState({});
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-  
   /* ================= PROFILE ================= */
   useEffect(() => {
     if (!token) return;
@@ -109,20 +111,21 @@ function Land() {
     try {
       const res = await axios.get(
         `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       if (res.data?.success) {
         // Filter for Land type only
         const landItems = res.data.nfts.filter(
-          (nft) => nft?.collection?.Type === "Land"
+          (nft) => nft?.collection?.Type === "Land",
         );
 
         setLandData(
           landItems.map((nft) => ({
             ...nft,
             userOwns: true,
-          }))
+            hasInteracted: userHasInteracted[nft._id] || false, // Preserve interaction state
+          })),
         );
       }
     } catch (err) {
@@ -171,6 +174,67 @@ function Land() {
     }
   };
 
+  /* ================= HANDLE SELL NOW CLICK ================= */
+  const handleSellNowClick = async (itemId) => {
+    if (!window.ethereum) {
+      toast.error("Please install MetaMask!");
+      return;
+    }
+
+    setConnectingWallet(prev => ({ ...prev, [itemId]: true }));
+
+    try {
+      // Force MetaMask popup every time
+      await window.ethereum.request({
+        method: "wallet_requestPermissions",
+        params: [{ eth_accounts: {} }],
+      });
+
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      if (!accounts || !accounts.length) return;
+
+      const wallet = accounts[0].toLowerCase();
+      setConnectedWallet(wallet);
+
+      // Mark this item as interacted
+      setUserHasInteracted(prev => ({
+        ...prev,
+        [itemId]: true,
+      }));
+
+      // Update the specific item's state
+      setLandData(prev => 
+        prev.map(item => 
+          item._id === itemId 
+            ? { ...item, hasInteracted: true } 
+            : item
+        )
+      );
+
+      // Fetch NFTs for the connected wallet
+      await fetchOwnedNFTs(wallet);
+
+      toast.success("Wallet connected!");
+    } catch (err) {
+      if (err.code === 4001) toast.error("Connection cancelled");
+      else toast.error("Wallet connection failed");
+    } finally {
+      setConnectingWallet(prev => ({ ...prev, [itemId]: false }));
+    }
+  };
+
+  /* ================= NAVIGATE TO BUY-NFA ================= */
+  const navigateToBuyNFA = (item) => {
+    if (!userHasInteracted[item._id]) {
+      toast.error("Please connect wallet first");
+      return;
+    }
+    navigate("/buy-nfa", { state: { item } });
+  };
+
   /* ================= MINT NFT ================= */
   const mintNFTToWallet = async (buyerWallet, item) => {
     if (!item._id) {
@@ -196,7 +260,7 @@ function Land() {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (res.data?.success && res.data?.tokenId) {
@@ -242,7 +306,7 @@ function Land() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer
+        signer,
       );
 
       let tokenId = selectedItem.tokenId;
@@ -261,7 +325,9 @@ function Land() {
         selectedItem.tokenId = tokenId;
         selectedItem.owner = walletAddress.toLowerCase();
 
-        toast.loading("Waiting for blockchain confirmation...", { id: toastId });
+        toast.loading("Waiting for blockchain confirmation...", {
+          id: toastId,
+        });
         await new Promise((resolve) => setTimeout(resolve, 3000));
       }
 
@@ -277,7 +343,9 @@ function Land() {
           if (owner.toLowerCase() === walletAddress.toLowerCase()) {
             break;
           } else if (retries > 1) {
-            console.log(`Owner mismatch, retrying... (${retries - 1} attempts left)`);
+            console.log(
+              `Owner mismatch, retrying... (${retries - 1} attempts left)`,
+            );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
             continue;
@@ -289,7 +357,9 @@ function Land() {
         } catch (err) {
           console.error("Error getting owner:", err);
           if (retries > 1) {
-            console.log(`Retrying blockchain check... (${retries - 1} attempts left)`);
+            console.log(
+              `Retrying blockchain check... (${retries - 1} attempts left)`,
+            );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
@@ -306,7 +376,10 @@ function Land() {
       const approved = await nftContract.getApproved(tokenId);
       if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("Approving marketplace...", { id: toastId });
-        const approveTx = await nftContract.approve(MARKETPLACE_ADDRESS, tokenId);
+        const approveTx = await nftContract.approve(
+          MARKETPLACE_ADDRESS,
+          tokenId,
+        );
         await approveTx.wait();
       }
 
@@ -322,9 +395,14 @@ function Land() {
       // Create listing
       toast.loading("Creating listing on marketplace...", { id: toastId });
       const priceWei = ethers.parseEther("0.01");
-      const listTx = await marketplace.createListing(NFT_ADDRESS, tokenId, priceWei, {
-        gasLimit: 300000,
-      });
+      const listTx = await marketplace.createListing(
+        NFT_ADDRESS,
+        tokenId,
+        priceWei,
+        {
+          gasLimit: 300000,
+        },
+      );
       await listTx.wait();
 
       // Save to backend
@@ -336,7 +414,7 @@ function Land() {
           seller: walletAddress.toLowerCase(),
           priceETH: 0.01,
         },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       toast.success(`✅ Listed! Token #${tokenId} @ 0.01 ETH`, {
@@ -347,16 +425,20 @@ function Land() {
       // Update local state
       setLandData((prev) =>
         prev.map((item) =>
-          item._id === selectedItem._id ? { ...item, listed: true, tokenId } : item
-        )
+          item._id === selectedItem._id
+            ? { ...item, listed: true, tokenId }
+            : item,
+        ),
       );
 
       setShowListModal(false);
     } catch (err) {
       console.error("❌ Listing error:", err);
       let msg = "Listing failed";
-      if (err.message?.includes("insufficient funds")) msg = "⛽ Add Sepolia ETH";
-      else if (err.message?.includes("user rejected")) msg = "Transaction rejected";
+      if (err.message?.includes("insufficient funds"))
+        msg = "⛽ Add Sepolia ETH";
+      else if (err.message?.includes("user rejected"))
+        msg = "Transaction rejected";
       toast.error(msg, { id: toastId });
     } finally {
       setListingInProgress(false);
@@ -366,7 +448,9 @@ function Land() {
   if (loading) return <FullScreenLoader />;
 
   /* ================= FILTER LOGIC ================= */
-  const filteredLandCollections = landData.filter((item) => item?.listed === false);
+  const filteredLandCollections = landData.filter(
+    (item) => item?.listed === false,
+  );
 
   return (
     <>
@@ -396,7 +480,9 @@ function Land() {
                 )}
               </div>
               <h2 className="mt-3 text-xl font-semibold">
-                {userData?.FullName || userData?.Email?.split("@")[0] || "Guest"}
+                {userData?.FullName ||
+                  userData?.Email?.split("@")[0] ||
+                  "Guest"}
               </h2>
               <Link
                 to="/edit"
@@ -438,6 +524,9 @@ function Land() {
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {filteredLandCollections.map((item) => {
                   const collection = item.collection;
+                  const isConnecting = connectingWallet[item._id];
+                  const hasInteracted = userHasInteracted[item._id] || item.hasInteracted;
+                  
                   return (
                     <div
                       key={item._id}
@@ -471,22 +560,103 @@ function Land() {
                         </span>
                         <div className="flex items-center gap-2">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img src={TVector} className="w-3 h-3" alt="chain" />
+                            <img
+                              src={TVector}
+                              className="w-3 h-3"
+                              alt="chain"
+                            />
                           </div>
                           <span className="font-semibold truncate">
-                            {collection?.priceETH || item.priceETH || "0.01"} ETH
+                            {collection?.priceETH || item.priceETH || "0.01"}{" "}
+                            ETH
                           </span>
                         </div>
                       </div>
 
-                     <p
-                        onClick={() => {
-                          navigate("/buy-land", { state: { item } });
-                        }}
-                        className="mt-auto pt-6 text-center text-sm text-white cursor-pointer transition  py-2 rounded"
-                      >
-                        Not Listed
-                      </p>
+                      {/* ================= DESKTOP VIEW ================= */}
+                      <div className="hidden md:block mt-auto pt-6">
+                        {/* Always show Sell Now button first, unless user has interacted */}
+                        {!hasInteracted ? (
+                          <div className="flex justify-center items-center w-full mt-auto pt-6">
+                            <button
+                              onClick={() => handleSellNowClick(item._id)}
+                              disabled={isConnecting}
+                              className="w-full flex justify-center"
+                            >
+                              <CustomButton4
+                                text={
+                                  isConnecting ? "Connecting..." : "Sell Now"
+                                }
+                                disabled={isConnecting}
+                              />
+                            </button>
+                          </div>
+                        ) : (
+                          /* After interaction, show Not Listed with hover effect */
+                          <div className="relative group text-center">
+                            {/* Default view - Not Listed */}
+                            <div className="text-sm text-white py-2 transition-opacity duration-300 group-hover:opacity-0">
+                              Not Listed
+                            </div>
+
+                            {/* Hover view - List Now button */}
+                            <div
+                              onClick={() => navigateToBuyNFA(item)}
+                              className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                            >
+                              <div className="w-full max-w-[200px] mx-auto">
+                                <CustomButton4 text="List Now" />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* ================= MOBILE VIEW ================= */}
+                      <div className="md:hidden mt-auto pt-6">
+                        {!hasInteracted ? (
+                          /* Mobile: Always show Sell Now first */
+                         <div className="flex justify-center items-center w-full mt-auto pt-6">
+                            <button
+                              onClick={() => handleSellNowClick(item._id)}
+                              disabled={isConnecting}
+                              className="w-full flex justify-center"
+                            >
+                              <CustomButton4
+                                text={
+                                  isConnecting ? "Connecting..." : "Sell Now"
+                                }
+                                disabled={isConnecting}
+                              />
+                            </button>
+                          </div>
+                        ) : !showMobileList[item._id] ? (
+                          /* Mobile: After interaction, show Not Listed initially */
+                          <div className="text-center">
+                            <button
+                              onClick={() =>
+                                setShowMobileList((prev) => ({
+                                  ...prev,
+                                  [item._id]: true,
+                                }))
+                              }
+                              className="text-sm text-white w-full py-2"
+                            >
+                              Not Listed
+                            </button>
+                          </div>
+                        ) : (
+                          /* Mobile: Tapped - show List Now button */
+                          <div className="flex justify-center items-center">
+                            <button
+                              onClick={() => navigateToBuyNFA(item)}
+                              className="w-full max-w-[180px] mx-auto"
+                            >
+                              <CustomButton4 text="List Now" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
@@ -587,7 +757,10 @@ function Land() {
                   </button>
 
                   {!connectedWallet ? (
-                    <button onClick={connectWallet} disabled={listingInProgress}>
+                    <button
+                      onClick={connectWallet}
+                      disabled={listingInProgress}
+                    >
                       <CustomButton4 text="Connect Wallet" />
                     </button>
                   ) : (
