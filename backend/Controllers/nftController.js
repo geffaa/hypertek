@@ -73,7 +73,7 @@ export async function createCollection(req, res) {
       listed: false, // Initially not listed
       isFirstSale: true,
     });
-
+ 
     return res.json({
       success: true,
       message: `Collection created by ${creatorType}`,
@@ -955,6 +955,31 @@ export async function cancelListing(req, res) {
     });
   } catch (err) {
     console.error("❌ CANCEL LISTING ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+
+// Get NFTs owned by a specific wallet (public or authenticated)
+export async function getNFTsByWallet(req, res) {
+  try {
+    const walletAddress = req.params.walletAddress;
+    if (!walletAddress) {
+      return res.status(400).json({ error: "Wallet address is required" });
+    }
+
+    const nfts = await NFTSystem.find({
+      owner: walletAddress.toLowerCase(),
+      status: "active",
+    }).sort({ createdAt: -1 });
+
+    return res.json({
+      success: true,
+      count: nfts.length,
+      nfts,
+    });
+  } catch (err) {
+    console.error("❌ GET NFTs BY WALLET ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }

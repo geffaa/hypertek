@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 
 import TVector from "../assets/images/popular/vector.png";
@@ -12,15 +12,21 @@ import symbol from "../assets/images/login/Symbol.svg.png";
 
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config";
-import FullScreenLoader from "../Components/Common/Spinner"; // ✅ loader
+import FullScreenLoader from "../Components/Common/Spinner";
 import CustomButton4 from "../Components/Buttons/Button4";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function Land() {
+  const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const [landData, setLandData] = useState([]);
-  const [loading, setLoading] = useState(true); // loader state
+  const [loading, setLoading] = useState(true);
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
   const [isThirdModalOpen, setIsThirdModalOpen] = useState(false);
+  const [showNoItemMsg, setShowNoItemMsg] = useState(false);
 
   // Fetch only collections of type "Land"
   useEffect(() => {
@@ -66,6 +72,57 @@ function Land() {
   const handleConnectWallet = () => {
     closeSecondModal();
     setTimeout(() => openThirdModal(), 100);
+  };
+
+  // Check if user has unlisted Land items
+  const checkAndNavigate = async () => {
+    try {
+      if (!token) {
+        toast.error("Please login first");
+        return;
+      }
+      // Get user's wallet address
+      if (!window.ethereum) {
+        toast.error("Please install MetaMask");
+        return;
+      }
+
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      if (!accounts.length) {
+        toast.error("Please connect your wallet first");
+        return;
+      }
+
+      const wallet = accounts[0].toLowerCase();
+
+      // Fetch user's owned NFTs
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+
+      if (res.data?.success) {
+        // Filter for unlisted Land items
+        const unlistedLandItems = res.data.nfts.filter(
+          (item) => item?.collection?.Type === "Land" && item?.listed === false,
+        );
+
+        if (unlistedLandItems.length > 0) {
+          navigate("/Lands");
+        } else {
+          setShowNoItemMsg(true);
+
+          setTimeout(() => {
+            setShowNoItemMsg(false);
+          }, 2000); // 2 sec baad hide
+        }
+      }
+    } catch (error) {
+      console.error("Error checking items:", error);
+      toast.error("Failed to check items");
+    }
   };
 
   if (loading) return <FullScreenLoader />;
@@ -154,6 +211,7 @@ function Land() {
       <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
     </div>
   </div>
+
 {/* DESKTOP & TABLET GRID */}
 <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 mb-5 gap-4 lg:gap-6 justify-center">
 
@@ -204,7 +262,19 @@ function Land() {
     </h1>
   </div>
 
-  <button onClick={openFirstModal} className="flex justify-center items-center mt-6">
+  {showNoItemMsg && (
+    <div
+      className={`bg-black text-white text-xs px-3 py-2 rounded-md shadow-xl transition-all duration-300 ${
+        showNoItemMsg
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-2 pointer-events-none"
+      }`}
+    >
+      you don't have any item to sell
+    </div>
+  )}
+
+  <button onClick={checkAndNavigate} className="flex justify-center items-center mt-6">
     <CustomButton text="Sell Now" />
   </button>
 </div>
@@ -248,6 +318,7 @@ function Land() {
   </div>
 ))}
 </div>
+
 {/* MOBILE GRID – PopularCollections Style */}
 <div className="sm:hidden grid grid-cols-2 gap-4 pb-4">
 
@@ -277,8 +348,16 @@ function Land() {
       <span className="font-semibold">$1800</span>
     </div>
 
-    <div  onClick={openFirstModal} className="flex justify-center items-center mt-10">
-      <CustomButton4  text="Sell Now" className="!text-xs !py-2 !px-6" />
+    <div className="flex justify-center items-center mt-10">
+      {showNoItemMsg && (
+        <div className="mb-3 bg-black text-white text-xs px-3 py-2 rounded-md shadow-lg">
+          you don't have any item to sell
+        </div>
+      )}
+
+      <button onClick={checkAndNavigate} className="flex justify-center items-center mt-6">
+        <CustomButton4 text="Sell Now" className="!text-xs !py-2 !px-6" />
+      </button>
     </div>
   </div>
 
@@ -338,8 +417,6 @@ function Land() {
   ))}
 
 </div>
-
-
 
       </section>
 
