@@ -63,24 +63,37 @@ function NFA() {
 
       // Fetch user's owned NFTs
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
       if (res.data?.success) {
-        // Filter for unlisted NFA items
-        const unlistedNFAItems = res.data.nfts.filter(
-          (item) => item?.collection?.Type === "NFA" && item?.listed === false,
-        );
+        const unlistedCharacterNFTs = res.data.nfts.flatMap((item) => {
+          // only characters parent collection
+          if (item.category !== "characters") return [];
 
-        if (unlistedNFAItems.length > 0) {
-          navigate("/profile");
+          if (!item.isParentCollection || !Array.isArray(item.subCollections))
+            return [];
+
+          // get unlisted + owned sub NFTs
+          return item.subCollections.filter((sub) => {
+            const ownerMatch =
+              sub.owner?.toLowerCase() === wallet?.toLowerCase();
+
+            return ownerMatch && sub.listed === false;
+          });
+        });
+
+        console.log("🎯 Unlisted character NFTs:", unlistedCharacterNFTs);
+
+        if (unlistedCharacterNFTs.length > 0) {
+          navigate("/profile"); // ✅ characters found → go profile
         } else {
           setShowNoItemMsg(true);
 
           setTimeout(() => {
             setShowNoItemMsg(false);
-          }, 2000); // 2 sec baad hide
+          }, 2000);
         }
       }
     } catch (error) {
@@ -95,20 +108,75 @@ function NFA() {
 
   useEffect(() => {
     const fetchMarketData = async () => {
+      setLoading(true);
       try {
+        // Fetch parent collections
         const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`,
+          `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`,
         );
 
+        console.log("NFA - Parent Collections Response:", res.data);
+
         if (res.data.success) {
-          // ✅ ONLY NFA TYPE DATA
-          const nfaData = res.data.collections.filter(
-            (item) => item.collection?.Type === "NFA",
-          );
-          setMarketData(nfaData);
+          const parentCollections = res.data.nfts || res.data.collections;
+
+          console.log("NFA - Parent Collections:", parentCollections);
+
+          let nfaCollections = [];
+
+          // Fetch sub-collections for each parent
+          for (const parent of parentCollections) {
+            console.log(
+              `NFA - Fetching sub-collections for parent: ${parent._id}, category: ${parent.category}`,
+            );
+
+            // Only fetch for 'characters' category
+            if (parent.category === "characters") {
+              try {
+                const subRes = await axios.get(
+                  `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`,
+                );
+
+                console.log(
+                  `NFA - Sub-collections response for ${parent._id}:`,
+                  subRes.data,
+                );
+
+                if (subRes.data.success && subRes.data.subCollections) {
+                  const subCollections = subRes.data.subCollections;
+
+                  // Add to NFA with parent info and maintain collection structure for UI compatibility
+                  nfaCollections.push(
+                    ...subCollections.map((sub) => ({
+                      ...sub,
+                      parentId: parent._id,
+                      parentCategory: parent.category,
+                      // Keep collection structure for compatibility with existing UI
+                      collection: {
+                        name: sub.name,
+                        image: sub.image,
+                        chain: sub.chain || sub.Type,
+                        Type: sub.Type,
+                      },
+                    })),
+                  );
+                }
+              } catch (subError) {
+                console.error(
+                  `NFA - Error fetching sub-collections for parent ${parent._id}:`,
+                  subError,
+                );
+                console.error("NFA - Error details:", subError.response?.data);
+              }
+            }
+          }
+
+          console.log("NFA - Final NFA Collections:", nfaCollections);
+          setMarketData(nfaCollections);
         }
       } catch (error) {
-        console.error("Error fetching market data:", error);
+        console.error("NFA - Error fetching market data:", error);
+        console.error("NFA - Error details:", error.response?.data);
       } finally {
         setLoading(false);
       }
@@ -275,63 +343,69 @@ function NFA() {
           </div>
 
           {/* ✅ NFA DATA FROM API */}
-
-          {marketData.map((item) => (
-            <div
-              key={item._id}
-              className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
-              style={{
-                background:
-                  "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-              }}
-            >
-              <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                <img
-                  src={
-                    item.collection?.image
-                      ? `${BACKEND_BASE_URL}${item.collection.image}`
-                      : popularCollections
-                  }
-                  alt={item.collection?.name || "NFA Collection"}
-                  className="w-full h-full object-cover object-top "
-                />
-              </div>
-
-              <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
-                {item.collection?.name}
-              </h2>
-
-              <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
-                <h3 className="text-xs sm:text-sm font-semibold">
-                  {item._id.slice(0, 6)} 🔥
-                </h3>
-                <div className="flex items-center">
+          {marketData && marketData.length > 0 ? (
+            marketData.map((item) => (
+              <div
+                key={item._id}
+                className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                style={{
+                  background:
+                    "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                }}
+              >
+                <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                   <img
-                    src={TVector}
-                    alt=""
-                    className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                    src={
+                      item.collection?.image
+                        ? `${BACKEND_BASE_URL}${item.collection.image}`
+                        : popularCollections
+                    }
+                    alt={item.collection?.name || "NFA Collection"}
+                    className="w-full h-full object-cover object-top "
                   />
-                  <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                    ${item.collection.chain}
+                </div>
+
+                <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+                  {item.collection?.name || item.name || "Unnamed"}
+                </h2>
+
+                <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
+                  <h3 className="text-xs sm:text-sm font-semibold">
+                    {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                   </h3>
+                  <div className="flex items-center">
+                    <img
+                      src={TVector}
+                      alt=""
+                      className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                    />
+                    <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
+                      ${item.priceETH || item.chain || item.Type || "ETH"}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center mt-4">
+                  <Link
+                    to="/buy-nfa"
+                    state={{ item }}
+                    className="cursor-pointer flex justify-center w-full"
+                  >
+                    <CustomButton
+                      text="Buy Now"
+                      className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
+                    />
+                  </Link>
                 </div>
               </div>
-
-              <div className="flex justify-center items-center mt-4">
-                <Link
-                  to="/buy-nfa"
-                  state={{ item }}
-                  className="cursor-pointer flex justify-center w-full"
-                >
-                  <CustomButton
-                    text="Buy Now"
-                    className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
-                  />
-                </Link>
-              </div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center text-white py-8">
+              No NFA collections available
             </div>
-          ))}
+          )}
         </div>
+
         {/* MOBILE GRID */}
         <div className="sm:hidden grid grid-cols-2 gap-4 pb-4">
           {/* Instant Sell Card */}
@@ -374,62 +448,68 @@ function NFA() {
           </div>
 
           {/* Market Cards (Mobile Style) */}
-          {marketData.map((item) => (
-            <div
-              key={item._id}
-              className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
-              style={{
-                background:
-                  "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-              }}
-            >
+          {marketData && marketData.length > 0 ? (
+            marketData.map((item) => (
               <div
-                className="h-[150px] rounded-[14px] overflow-hidden"
+                key={item._id}
+                className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
                 style={{
                   background:
-                    "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                    "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                 }}
               >
-                <img
-                  src={
-                    item.collection?.image
-                      ? `${BACKEND_BASE_URL}${item.collection.image}`
-                      : popularCollections
-                  }
-                  alt={item.collection?.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+                <div
+                  className="h-[150px] rounded-[14px] overflow-hidden"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                  }}
+                >
+                  <img
+                    src={
+                      item.collection?.image
+                        ? `${BACKEND_BASE_URL}${item.collection.image}`
+                        : popularCollections
+                    }
+                    alt={item.collection?.name || item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              <h2 className="text-[14px] font-semibold mt-4 truncate">
-                {item.collection?.name}
-              </h2>
+                <h2 className="text-[14px] font-semibold mt-4 truncate">
+                  {item.collection?.name || item.name || "Unnamed"}
+                </h2>
 
-              <div className="flex justify-between items-center mt-3 text-[11px]">
-                <span className="text-gray-300 font-medium truncate">
-                  {item._id.slice(0, 6)} 🔥
-                </span>
-
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                    <img src={TVector} alt="" className="w-3 h-3" />
-                  </div>
-                  <span className="font-semibold truncate">
-                    ${item.collection?.chain}
+                <div className="flex justify-between items-center mt-3 text-[11px]">
+                  <span className="text-gray-300 font-medium truncate">
+                    {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                   </span>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                      <img src={TVector} alt="" className="w-3 h-3" />
+                    </div>
+                    <span className="font-semibold truncate">
+                      ${item.priceETH || item.chain || item.Type || "ETH"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center mt-10">
+                  <Link to="/buy-nfa" state={{ item }}>
+                    <CustomButton4
+                      text="Buy Now"
+                      className="!text-xs !py-2 !px-6"
+                    />
+                  </Link>
                 </div>
               </div>
-
-              <div className="flex justify-center items-center mt-10">
-                <Link to="/buy-nfa" state={{ item }}>
-                  <CustomButton4
-                    text="Buy Now"
-                    className="!text-xs !py-2 !px-6"
-                  />
-                </Link>
-              </div>
+            ))
+          ) : (
+            <div className="col-span-2 text-center text-white py-8">
+              No NFA collections available
             </div>
-          ))}
+          )}
         </div>
       </section>
 

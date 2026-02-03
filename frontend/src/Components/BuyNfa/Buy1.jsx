@@ -21,7 +21,7 @@ function Buy1() {
   const navigate = useNavigate();
   const location = useLocation();
   const { item } = location.state || {};
-  const collection = item?.collection;
+  const collection = item?.subCollection || item;
 
   const { token, user } = useSelector((state) => state.auth);
 
@@ -222,7 +222,8 @@ function Buy1() {
 
     try {
       const payload = {
-        docId: item._id,
+        parentId: item.parentId, // Add this
+        subCollectionId: item._id, // Use this instead of docId
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
@@ -231,7 +232,7 @@ function Buy1() {
       console.log("🎨 Minting NFA with payload:", payload);
 
       const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/mint`,
         payload,
         {
           headers: {

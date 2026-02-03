@@ -31,6 +31,7 @@ function Land() {
   const [userData, setUserData] = useState(null);
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [marketData, setMarketData] = useState([]);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [showListModal, setShowListModal] = useState(false);
@@ -40,7 +41,67 @@ function Land() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [showMobileList, setShowMobileList] = useState({});
   const navigate = useNavigate();
+const extractMintedNFTs = (data) => {
+    console.log("🔍 Raw data received:", data);
 
+    if (!Array.isArray(data)) {
+      console.log("❌ Data is not an array");
+      return [];
+    }
+
+    const extracted = [];
+
+    data.forEach((item, index) => {
+      console.log(`📦 Processing item ${index}:`, item);
+
+      // ✅ ONLY characters category
+      if (item.category !== "land") {
+        console.log(`⏭ Skipped (not characters):`, item.category);
+        return;
+      }
+
+      // Check if parent collection
+      if (item.isParentCollection && Array.isArray(item.subCollections)) {
+        console.log(
+          `✅ Characters collection found with ${item.subCollections.length} sub NFTs`,
+        );
+
+        const ownedSubNFTs = item.subCollections.filter((subNft) => {
+          const subOwner = subNft.owner?.toLowerCase();
+          const walletLower = connectedWallet?.toLowerCase();
+          return subOwner === walletLower;
+        });
+
+        ownedSubNFTs.forEach((subNft) => {
+          extracted.push({
+            _id: subNft._id,
+            parentId: item._id,
+            name: subNft.name,
+            symbol: subNft.symbol,
+            image: subNft.image,
+            description: subNft.description,
+            owner: subNft.owner,
+            listed: subNft.listed || false,
+            priceETH: subNft.priceETH,
+            isFirstSale: subNft.isFirstSale,
+            tokenId: subNft.tokenId,
+            tokenURI: subNft.tokenURI,
+            createdAt: subNft.createdAt,
+
+            // parent metadata
+            category: item.category,
+            chain: "ETH",
+
+            isSubCollection: true,
+            userOwns: true,
+          });
+        });
+      }
+    });
+
+    console.log("✅ Characters NFTs extracted:", extracted.length);
+    return extracted;
+  };
   /* ================= PROFILE ================= */
   useEffect(() => {
     if (!token) return;
@@ -72,6 +133,8 @@ function Land() {
     } else {
       setConnectedWallet(null);
       setLandData([]);
+      setMarketData([]);
+
     }
   };
 
@@ -107,29 +170,31 @@ function Land() {
   };
 
   /* ================= FETCH OWNED NFTS (SINGLE SOURCE) ================= */
-  const fetchOwnedNFTs = async (wallet) => {
+   const fetchOwnedNFTs = async (wallet) => {
     try {
+      setLoading(true);
+
+      console.log("🔄 Fetching NFTs for wallet:", wallet);
+
+      // Fetch the user's owned NFTs (including sub-collections)
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      if (res.data?.success) {
-        // Filter for Land type only
-        const landItems = res.data.nfts.filter(
-          (nft) => nft?.collection?.Type === "Land",
-        );
+      console.log("📡 Backend Response:", res.data);
+      console.log("📦 NFTs Array:", res.data?.nfts);
 
-        setLandData(
-          landItems.map((nft) => ({
-            ...nft,
-            userOwns: true,
-            hasInteracted: userHasInteracted[nft._id] || false, // Preserve interaction state
-          })),
-        );
+      if (res.data?.success) {
+        console.log("✅ Success! Setting marketData with:", res.data.nfts);
+        setMarketData(res.data.nfts);
+      } else {
+        console.log("⚠️ Response success is false");
       }
     } catch (err) {
-      toast.error("Failed to load Land NFTs");
+      console.error("❌ Error fetching NFTs:", err);
+      console.error("Error details:", err.response?.data);
+      toast.error("Failed to load NFTs");
     } finally {
       setLoading(false);
     }
@@ -448,9 +513,8 @@ function Land() {
   if (loading) return <FullScreenLoader />;
 
   /* ================= FILTER LOGIC ================= */
-  const filteredLandCollections = landData.filter(
-    (item) => item?.listed === false,
-  );
+  const filteredLandCollections = extractMintedNFTs(marketData);
+  
 
   return (
     <>
@@ -499,7 +563,7 @@ function Land() {
             <NavLinks />
           </div>
 
-          {/* ================= LAND CARDS ================= */}
+          {/* ================= NFT CARDS ================= */}
           <section className="relative z-10 px-6 mt-10">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
@@ -521,12 +585,11 @@ function Land() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {filteredLandCollections.map((item) => {
-                  const collection = item.collection;
                   const isConnecting = connectingWallet[item._id];
-                  const hasInteracted = userHasInteracted[item._id] || item.hasInteracted;
-                  
+                  const hasInteracted = userHasInteracted[item._id];
+
                   return (
                     <div
                       key={item._id}
@@ -544,19 +607,19 @@ function Land() {
                         }}
                       >
                         <img
-                          src={land1Image}
-                          alt={collection?.name}
+                          src={`${BACKEND_BASE_URL}${item.image}`}
+                          alt={item.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
 
                       <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                        {collection?.name || "Land NFT"}
+                        {item.name}
                       </h2>
 
                       <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
                         <span className="font-medium text-gray-300 truncate">
-                          {item._id.slice(0, 6)} 🔥
+                          {item.symbol} 🔥
                         </span>
                         <div className="flex items-center gap-2">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
@@ -567,14 +630,13 @@ function Land() {
                             />
                           </div>
                           <span className="font-semibold truncate">
-                            {collection?.priceETH || item.priceETH || "0.01"}{" "}
-                            ETH
+                            ${item.priceETH}
                           </span>
                         </div>
                       </div>
 
                       {/* ================= DESKTOP VIEW ================= */}
-                      <div className="hidden md:block mt-auto pt-6">
+                      <div className="hidden md:block mt-auto pt-6 text-center relative group focus-within:outline-none">
                         {/* Always show Sell Now button first, unless user has interacted */}
                         {!hasInteracted ? (
                           <div className="flex justify-center items-center w-full mt-auto pt-6">
@@ -593,7 +655,7 @@ function Land() {
                           </div>
                         ) : (
                           /* After interaction, show Not Listed with hover effect */
-                          <div className="relative group text-center">
+                          <div className="relative group">
                             {/* Default view - Not Listed */}
                             <div className="text-sm text-white py-2 transition-opacity duration-300 group-hover:opacity-0">
                               Not Listed
@@ -604,19 +666,17 @@ function Land() {
                               onClick={() => navigateToBuyNFA(item)}
                               className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
                             >
-                              <div className="w-full max-w-[200px] mx-auto">
-                                <CustomButton4 text="List Now" />
-                              </div>
+                              <CustomButton4 text="List Now" />
                             </div>
                           </div>
                         )}
                       </div>
 
                       {/* ================= MOBILE VIEW ================= */}
-                      <div className="md:hidden mt-auto pt-6">
+                      <div className="md:hidden mt-auto pt-6 text-center">
                         {!hasInteracted ? (
                           /* Mobile: Always show Sell Now first */
-                         <div className="flex justify-center items-center w-full mt-auto pt-6">
+                          <div className="flex justify-center items-center w-full mt-auto pt-6">
                             <button
                               onClick={() => handleSellNowClick(item._id)}
                               disabled={isConnecting}
@@ -632,29 +692,25 @@ function Land() {
                           </div>
                         ) : !showMobileList[item._id] ? (
                           /* Mobile: After interaction, show Not Listed initially */
-                          <div className="text-center">
-                            <button
-                              onClick={() =>
-                                setShowMobileList((prev) => ({
-                                  ...prev,
-                                  [item._id]: true,
-                                }))
-                              }
-                              className="text-sm text-white w-full py-2"
-                            >
-                              Not Listed
-                            </button>
-                          </div>
+                          <button
+                            onClick={() =>
+                              setShowMobileList((prev) => ({
+                                ...prev,
+                                [item._id]: true,
+                              }))
+                            }
+                            className="text-sm text-white w-full py-2"
+                          >
+                            Not Listed
+                          </button>
                         ) : (
                           /* Mobile: Tapped - show List Now button */
-                          <div className="flex justify-center items-center">
-                            <button
-                              onClick={() => navigateToBuyNFA(item)}
-                              className="w-full max-w-[180px] mx-auto"
-                            >
-                              <CustomButton4 text="List Now" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => navigateToBuyNFA(item)}
+                            className="w-full"
+                          >
+                            <CustomButton4 text="List Now" />
+                          </button>
                         )}
                       </div>
                     </div>
@@ -663,120 +719,6 @@ function Land() {
               </div>
             )}
           </section>
-
-          {/* ================= LIST MODAL ================= */}
-          {showListModal && selectedItem && (
-            <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-              <div className="bg-[#1F2633] p-6 w-11/12 sm:w-[360px] relative text-white">
-                <button
-                  onClick={() => setShowListModal(false)}
-                  className="absolute top-3 right-3 text-white font-bold text-xl hover:text-gray-300"
-                  disabled={listingInProgress}
-                >
-                  ×
-                </button>
-
-                <h2 className="text-white text-sm font-semibold text-center my-3">
-                  List Asset
-                </h2>
-
-                <hr className="border-t border-white/20 my-3" />
-
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-[90px] h-[90px] overflow-hidden rounded-lg bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
-                    <img
-                      src={land1Image}
-                      alt={selectedItem.collection?.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-sm font-medium">
-                    {selectedItem.collection?.name || "Land NFT"}
-                  </p>
-                </div>
-
-                <hr className="border-t border-white/20 my-4" />
-
-                <div className="flex justify-between items-center bg-[#2F3744] px-3 py-2 mb-2">
-                  <span className="font-inter font-medium text-[14px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
-                    List Price
-                  </span>
-                  <span className="font-inter font-medium text-[14px] leading-[100%] tracking-[0.05em] capitalize">
-                    0.01 ETH
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center bg-[#2F3744] px-3 py-2">
-                  <span className="font-inter font-medium text-[14px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
-                    Platform Fee
-                  </span>
-                  <span className="font-inter font-medium text-[14px] leading-[100%] tracking-[0.05em] capitalize">
-                    0.001 ETH
-                  </span>
-                </div>
-
-                <hr className="border-t border-white/20 my-4" />
-
-                <div className="flex justify-end gap-4">
-                  <button
-                    onClick={() => setShowListModal(false)}
-                    disabled={listingInProgress}
-                  >
-                    <div className="flex items-center">
-                      <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
-                      <div
-                        className="border-[#002AA8]"
-                        style={{
-                          width: "0.5rem",
-                          height: "2.1rem",
-                          borderStyle: "solid",
-                          borderWidth: "0.375rem 0.25rem 0.375rem 0",
-                        }}
-                      />
-                      <div
-                        className="flex items-center justify-center text-white text-sm font-medium"
-                        style={{
-                          width: "5.5rem",
-                          height: "2rem",
-                          border: "0.15rem solid #002AA8",
-                        }}
-                      >
-                        Cancel
-                      </div>
-                      <div
-                        className="border-[#002AA8]"
-                        style={{
-                          width: "0.5rem",
-                          height: "2.1rem",
-                          borderStyle: "solid",
-                          borderWidth: "0.25rem 0 0.375rem 0.25rem",
-                        }}
-                      />
-                      <div className="bg-[#002AA8] w-1 h-5"></div>
-                    </div>
-                  </button>
-
-                  {!connectedWallet ? (
-                    <button
-                      onClick={connectWallet}
-                      disabled={listingInProgress}
-                    >
-                      <CustomButton4 text="Connect Wallet" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleCreateListing}
-                      disabled={listingInProgress}
-                    >
-                      <CustomButton4
-                        text={listingInProgress ? "Processing..." : "List Now"}
-                      />
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>

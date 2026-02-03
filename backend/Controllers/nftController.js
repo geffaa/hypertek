@@ -1301,3 +1301,61 @@ export async function getNFTsByWallet(req, res) {
     return res.status(500).json({ error: err.message });
   }
 }
+
+// Add this new function to your nftController.js
+
+/**
+ * Get NFTs owned by wallet - INCLUDING SUB-COLLECTIONS
+ * This endpoint returns both regular NFTs and parent collections with their sub-collections
+ */
+export async function getNFTsWithSubCollections(req, res) {
+  try {
+    const walletAddress = req.params.walletAddress;
+    
+    if (!walletAddress) {
+      return res.status(400).json({ error: "Wallet address is required" });
+    }
+
+    console.log("🔍 Fetching NFTs for wallet:", walletAddress);
+
+    // Find all parent collections where user owns sub-collections
+    const parentCollections = await NFTSystem.find({
+      "subCollections.owner": walletAddress.toLowerCase(),
+      status: "active",
+    }).sort({ createdAt: -1 });
+
+    console.log("📦 Found parent collections:", parentCollections.length);
+
+    // Also find regular NFTs (non-parent collections)
+    const regularNFTs = await NFTSystem.find({
+      owner: walletAddress.toLowerCase(),
+      status: "active",
+      $or: [
+        { isParentCollection: { $exists: false } },
+        { isParentCollection: false }
+      ]
+    }).sort({ createdAt: -1 });
+
+    console.log("🎨 Found regular NFTs:", regularNFTs.length);
+
+    // Combine both
+    const allNFTs = [...parentCollections, ...regularNFTs];
+
+    return res.json({
+      success: true,
+      count: allNFTs.length,
+      nfts: allNFTs,
+      breakdown: {
+        parentCollections: parentCollections.length,
+        regularNFTs: regularNFTs.length,
+        totalSubCollections: parentCollections.reduce(
+          (sum, parent) => sum + (parent.subCollections?.length || 0), 
+          0
+        )
+      }
+    });
+  } catch (err) {
+    console.error("❌ GET NFTs WITH SUB-COLLECTIONS ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}

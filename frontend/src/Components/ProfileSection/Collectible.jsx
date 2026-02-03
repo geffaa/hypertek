@@ -35,6 +35,69 @@ function MarketPlace() {
   const [connectingWallet, setConnectingWallet] = useState({});
   const [userHasInteracted, setUserHasInteracted] = useState({});
 
+  /* ================= GET MINTED SUB COLLECTION NFTS ================= */
+  const extractMintedNFTs = (data) => {
+    console.log("🔍 Raw data received:", data);
+
+    if (!Array.isArray(data)) {
+      console.log("❌ Data is not an array");
+      return [];
+    }
+
+    const extracted = [];
+
+    data.forEach((item, index) => {
+      console.log(`📦 Processing item ${index}:`, item);
+
+      // ✅ ONLY characters category
+      if (item.category !== "characters") {
+        console.log(`⏭ Skipped (not characters):`, item.category);
+        return;
+      }
+
+      // Check if parent collection
+      if (item.isParentCollection && Array.isArray(item.subCollections)) {
+        console.log(
+          `✅ Characters collection found with ${item.subCollections.length} sub NFTs`,
+        );
+
+        const ownedSubNFTs = item.subCollections.filter((subNft) => {
+          const subOwner = subNft.owner?.toLowerCase();
+          const walletLower = connectedWallet?.toLowerCase();
+          return subOwner === walletLower;
+        });
+
+        ownedSubNFTs.forEach((subNft) => {
+          extracted.push({
+            _id: subNft._id,
+            parentId: item._id,
+            name: subNft.name,
+            symbol: subNft.symbol,
+            image: subNft.image,
+            description: subNft.description,
+            owner: subNft.owner,
+            listed: subNft.listed || false,
+            priceETH: subNft.priceETH,
+            isFirstSale: subNft.isFirstSale,
+            tokenId: subNft.tokenId,
+            tokenURI: subNft.tokenURI,
+            createdAt: subNft.createdAt,
+
+            // parent metadata
+            category: item.category,
+            chain: "ETH",
+
+            isSubCollection: true,
+            userOwns: true,
+          });
+        });
+      }
+    });
+
+    console.log("✅ Characters NFTs extracted:", extracted.length);
+    return extracted;
+  };
+
   /* ================= PROFILE ================= */
   useEffect(() => {
     if (!token) return;
@@ -101,22 +164,27 @@ function MarketPlace() {
   const fetchOwnedNFTs = async (wallet) => {
     try {
       setLoading(true);
+
+      console.log("🔄 Fetching NFTs for wallet:", wallet);
+
+      // Fetch the user's owned NFTs (including sub-collections)
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/user/owned/${wallet}`,
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
+      console.log("📡 Backend Response:", res.data);
+      console.log("📦 NFTs Array:", res.data?.nfts);
+
       if (res.data?.success) {
-        setMarketData(
-          res.data.nfts.map((nft) => ({
-            ...nft,
-            userOwns: true,
-            // Don't set isWalletConnected here - always start with false for fresh experience
-          })),
-        );
+        console.log("✅ Success! Setting marketData with:", res.data.nfts);
+        setMarketData(res.data.nfts);
+      } else {
+        console.log("⚠️ Response success is false");
       }
     } catch (err) {
-      console.error("Error fetching NFTs:", err);
+      console.error("❌ Error fetching NFTs:", err);
+      console.error("Error details:", err.response?.data);
       toast.error("Failed to load NFTs");
     } finally {
       setLoading(false);
@@ -161,12 +229,6 @@ function MarketPlace() {
       // Refresh owned NFTs every time (safe + clean)
       await fetchOwnedNFTs(wallet);
 
-      setMarketData((prev) =>
-        prev.map((item) =>
-          item._id === itemId ? { ...item, isWalletConnected: true } : item,
-        ),
-      );
-
       toast.success("Wallet connected!");
     } catch (err) {
       console.error("MetaMask popup error:", err);
@@ -194,9 +256,10 @@ function MarketPlace() {
   if (loading) return <FullScreenLoader />;
 
   /* ================= FILTER LOGIC ================= */
-  const filteredCollections = marketData.filter(
-    (item) => item?.collection?.Type === "NFA" && item?.listed === false,
-  );
+  const filteredCollections = extractMintedNFTs(marketData);
+
+  console.log("🎯 Final filteredCollections to render:", filteredCollections);
+  console.log("📊 Total items to display:", filteredCollections.length);
 
   return (
     <>
@@ -269,7 +332,6 @@ function MarketPlace() {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {filteredCollections.map((item) => {
-                  const collection = item.collection;
                   const isConnecting = connectingWallet[item._id];
                   const hasInteracted = userHasInteracted[item._id];
 
@@ -290,19 +352,19 @@ function MarketPlace() {
                         }}
                       >
                         <img
-                          src={`${BACKEND_BASE_URL}${collection.image}`}
-                          alt={collection.name}
+                          src={`${BACKEND_BASE_URL}${item.image}`}
+                          alt={item.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
 
                       <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                        {collection.name}
+                        {item.name}
                       </h2>
 
                       <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
                         <span className="font-medium text-gray-300 truncate">
-                          {collection.symbol} 🔥
+                          {item.symbol} 🔥
                         </span>
                         <div className="flex items-center gap-2">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
@@ -313,13 +375,13 @@ function MarketPlace() {
                             />
                           </div>
                           <span className="font-semibold truncate">
-                            ${collection.chain}
+                            ${item.priceETH}
                           </span>
                         </div>
                       </div>
 
                       {/* ================= DESKTOP VIEW ================= */}
-                      <div className="hidden md:block mt-auto pt-6 text-center  relative group focus-within:outline-none">
+                      <div className="hidden md:block mt-auto pt-6 text-center relative group focus-within:outline-none">
                         {/* Always show Sell Now button first, unless user has interacted */}
                         {!hasInteracted ? (
                           <div className="flex justify-center items-center w-full mt-auto pt-6">
@@ -359,7 +421,7 @@ function MarketPlace() {
                       <div className="md:hidden mt-auto pt-6 text-center">
                         {!hasInteracted ? (
                           /* Mobile: Always show Sell Now first */
-                         <div className="flex justify-center items-center w-full mt-auto pt-6">
+                          <div className="flex justify-center items-center w-full mt-auto pt-6">
                             <button
                               onClick={() => handleSellNowClick(item._id)}
                               disabled={isConnecting}

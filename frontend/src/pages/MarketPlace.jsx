@@ -17,8 +17,8 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../Config";
 
 function MarketPlace() {
-  const [marketData, setMarketData] = useState([]); // NFA
-  const [landData, setLandketData] = useState([]); // LAND
+  const [marketData, setMarketData] = useState([]); // NFA (characters)
+  const [landData, setLandData] = useState([]); // LAND
   const [activityData, setActivityData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,32 +49,75 @@ function MarketPlace() {
     },
   ];
 
-  // Fetch and filter collections
+  // Fetch parent collections and their sub-collections
   useEffect(() => {
     const fetchCollections = async () => {
       setLoading(true);
       try {
+        // Fetch parent collections
         const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/nft/collection/get`,
+          `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`
         );
+        
+        console.log("Parent Collections Response:", res.data);
+        
         if (res.data.success) {
-          const collections = res.data.collections;
+          const parentCollections = res.data.nfts || res.data.collections;
+          
+          console.log("Parent Collections:", parentCollections);
+          
+          // Arrays to store filtered sub-collections
+          let nfaCollections = [];
+          let landCollections = [];
 
-          // Filter NFA and LAND
-          const nfaCollections = collections.filter(
-            (item) => item.collection.Type === "NFA",
-          );
-          const landCollections = collections.filter(
-            (item) => item.collection.Type === "Land",
-          );
+          // Fetch sub-collections for each parent
+          for (const parent of parentCollections) {
+            console.log(`Fetching sub-collections for parent: ${parent._id}, category: ${parent.category}`);
+            
+            try {
+              const subRes = await axios.get(
+                `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`
+              );
+
+              console.log(`Sub-collections response for ${parent._id}:`, subRes.data);
+
+              if (subRes.data.success && subRes.data.subCollections) {
+                const subCollections = subRes.data.subCollections;
+
+                // Filter based on parent category
+                if (parent.category === "characters") {
+                  // Add to NFA with parent info
+                  nfaCollections.push(...subCollections.map(sub => ({
+                    ...sub,
+                    parentId: parent._id,
+                    parentCategory: parent.category
+                  })));
+                } else if (parent.category === "land") {
+                  // Add to LAND with parent info
+                  landCollections.push(...subCollections.map(sub => ({
+                    ...sub,
+                    parentId: parent._id,
+                    parentCategory: parent.category
+                  })));
+                }
+              }
+            } catch (subError) {
+              console.error(`Error fetching sub-collections for parent ${parent._id}:`, subError);
+              console.error("Error details:", subError.response?.data);
+            }
+          }
+
+          console.log("Final NFA Collections:", nfaCollections);
+          console.log("Final LAND Collections:", landCollections);
 
           setMarketData(nfaCollections);
-          setLandketData(landCollections);
+          setLandData(landCollections);
         } else {
-          console.error("Failed to fetch collections:", res.data.message);
+          console.error("Failed to fetch parent collections:", res.data.message);
         }
       } catch (error) {
         console.error("Error fetching collections:", error);
+        console.error("Error details:", error.response?.data);
       } finally {
         setLoading(false);
       }
@@ -118,7 +161,7 @@ function MarketPlace() {
       ),
       url(${overview1})
     `,
-                  backgroundPosition: "50% 8.5%", // ✅ THIS is the key
+                  backgroundPosition: "50% 8.5%",
                   backgroundSize: "cover",
                 }}
               >
@@ -200,114 +243,126 @@ function MarketPlace() {
 
                 {/* DESKTOP & TABLET NFA GRID */}
                 <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-                  {marketData.slice(0, 4).map((item, index) => (
-                    <div
-                      key={index}
-                      className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
-                      style={{
-                        background:
-                          "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-                      }}
-                    >
-                      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                        <img
-                          src={
-                            item.collection.image
-                              ? `${BACKEND_BASE_URL}${item.collection.image}`
-                              : popularCollections
-                          }
-                          alt={item.collection.name || "Collection"}
-                          className="w-full h-full object-cover object-top"
-                        />
-                      </div>
-                      <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">
-                        {item.collection.name}
-                      </h2>
-                      <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
-                        <h3 className="text-xs lg:text-sm font-semibold">
-                          {item._id.slice(0, 6)} 🔥
-                        </h3>
-                        <div className="flex items-center">
+                  {marketData && marketData.length > 0 ? (
+                    marketData.slice(0, 4).map((item, index) => (
+                      <div
+                        key={item._id || index}
+                        className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                        style={{
+                          background:
+                            "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                        }}
+                      >
+                        <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                           <img
-                            src={TVector}
-                            alt=""
-                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                            src={
+                              item.image
+                                ? `${BACKEND_BASE_URL}${item.image}`
+                                : popularCollections
+                            }
+                            alt={item.name || "Collection"}
+                            className="w-full h-full object-cover object-top"
                           />
-                          <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                            ${item.collection.chain}
+                        </div>
+                        <h2 className="text-base lg:text-lg font-bold md:mt-3 lg:mt-4 text-left">
+                          {item.name || "Unnamed"}
+                        </h2>
+                        <div className="flex justify-between items-center md:mb-3 lg:mb-4 md:mt-4 lg:mt-5">
+                          <h3 className="text-xs lg:text-sm font-semibold">
+                            {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                           </h3>
+                          <div className="flex items-center">
+                            <img
+                              src={TVector}
+                              alt=""
+                              className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                            />
+                            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+                              ${item.priceETH || item.Type || "ETH"} Eth
+                            </h3>
+                          </div>
+                        </div>
+                        <div className="flex justify-center items-center mt-4">
+                          <Link
+                            to="/buy-nfa"
+                            state={{ item }}
+                            className="w-full flex justify-center"
+                          >
+                            <CustomButton text="Buy Now" />
+                          </Link>
                         </div>
                       </div>
-                      <div className="flex justify-center items-center mt-4">
-                        <Link
-                          to="/buy-nfa"
-                          state={{ item }}
-                          className="w-full flex justify-center"
-                        >
-                          <CustomButton text="Buy Now" />
-                        </Link>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-4 text-center text-white py-8">
+                      No NFA collections available
                     </div>
-                  ))}
+                  )}
                 </div>
                 {/* MOBILE NFA GRID */}
                 <div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
-                  {marketData.slice(0, 4).map((item) => (
-                    <div
-                      key={item._id}
-                      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
-                      style={{
-                        background:
-                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-                      }}
-                    >
+                  {marketData && marketData.length > 0 ? (
+                    marketData.slice(0, 4).map((item, index) => (
                       <div
-                        className="h-[150px] rounded-[14px] overflow-hidden"
+                        key={item._id || index}
+                        className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
                         style={{
                           background:
-                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                            "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                         }}
                       >
-                        <img
-                          src={
-                            item.collection?.image
-                              ? `${BACKEND_BASE_URL}${item.collection.image}`
-                              : popularCollections
-                          }
-                          alt={item.collection?.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                        <div
+                          className="h-[150px] rounded-[14px] overflow-hidden"
+                          style={{
+                            background:
+                              "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                          }}
+                        >
+                          <img
+                            src={
+                              item.image
+                                ? `${BACKEND_BASE_URL}${item.image}`
+                                : popularCollections
+                            }
+                            alt={item.name || "Collection"}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
 
-                      <h2 className="text-[14px] font-semibold mt-4 truncate">
-                        {item.collection?.name}
-                      </h2>
+                        <h2 className="text-[14px] font-semibold mt-4 truncate">
+                          {item.name || "Unnamed"}
+                        </h2>
 
-                      <div className="flex justify-between items-center mt-3 text-[11px]">
-                        <span className="text-gray-300 font-medium truncate">
-                          {item._id.slice(0, 6)} 🔥
-                        </span>
-
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img src={TVector} alt="" className="w-3 h-3" />
-                          </div>
-                          <span className="font-semibold truncate">
-                            ${item.collection?.chain}
+                        <div className="flex justify-between items-center mt-3 text-[11px]">
+                          <span className="text-gray-300 font-medium truncate">
+                            {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                           </span>
+
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                              <img src={TVector} alt="" className="w-3 h-3" />
+                            </div>
+                            <span className="font-semibold truncate">
+                              ${item.priceETH || item.Type || "ETH"} Eth
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-center items-center mt-10">
+                          <Link to="/buy-nfa" state={{ item }}>
+                            <CustomButton4
+                              text="Buy Now"
+                              className="!text-xs !py-2 !px-6"
+                            />
+                          </Link>
                         </div>
                       </div>
-
-                      <div className="flex justify-center items-center mt-10">
-                        <Link to="/buy-nfa" state={{ item }}>
-                          <CustomButton4
-                            text="Buy Now"
-                            className="!text-xs !py-2 !px-6"
-                          />
-                        </Link>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 text-center text-white py-8">
+                      No NFA collections available
                     </div>
-                  ))}
+                  )}
                 </div>
               </section>
 
@@ -340,123 +395,135 @@ function MarketPlace() {
                   </div>
                 </div>
 
-                {/* DESKTOP & TABLET NFA GRID */}
+                {/* DESKTOP & TABLET LAND GRID */}
                 <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 justify-center mt-4">
-                  {landData.slice(0, 4).map((item, index) => (
-                    <div
-                      key={index}
-                      className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
-                      style={{
-                        background:
-                          "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-                      }}
-                    >
-                      <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                        <img
-                          src={
-                            item.collection.image
-                              ? `${BACKEND_BASE_URL}${item.collection.image}`
-                              : land1Image
-                          }
-                          alt={item.collection.name || "Land Collection"}
-                          className="w-full h-full object-cover object-top "
-                        />
-                      </div>
-                      <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
-                        {item.collection.name}
-                      </h2>
-                      <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
-                        <h3 className="text-xs sm:text-sm font-semibold">
-                          {item._id.slice(0, 6)} 🔥
-                        </h3>
-                        <div className="flex items-center">
+                  {landData && landData.length > 0 ? (
+                    landData.slice(0, 4).map((item, index) => (
+                      <div
+                        key={item._id || index}
+                        className="relative rounded-[18px] shadow-md text-white p-5 w-full max-w-sm mx-auto lg:max-w-none h-[420px] flex flex-col"
+                        style={{
+                          background:
+                            "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                        }}
+                      >
+                        <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                           <img
-                            src={TVector}
-                            alt=""
-                            className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                            src={
+                              item.image
+                                ? `${BACKEND_BASE_URL}${item.image}`
+                                : land1Image
+                            }
+                            alt={item.name || "Land Collection"}
+                            className="w-full h-full object-cover object-top "
                           />
-                          <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                            ${item.collection.chain}
+                        </div>
+                        <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
+                          {item.name || "Unnamed"}
+                        </h2>
+                        <div className="flex justify-between items-center mb-2 sm:mb-3 lg:mb-4 mt-3 sm:mt-4 lg:mt-5">
+                          <h3 className="text-xs sm:text-sm font-semibold">
+                            {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                           </h3>
+                          <div className="flex items-center">
+                            <img
+                              src={TVector}
+                              alt=""
+                              className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
+                            />
+                            <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
+                              {item.priceETH || item.Type || "ETH"} Eth
+                            </h3>
+                          </div>
+                        </div>
+                        <div className="flex justify-center items-center mt-4">
+                          <Link
+                            to="/buy-land"
+                            state={{ item }}
+                            className="cursor-pointer flex justify-center w-full"
+                          >
+                            <CustomButton
+                              text="Buy Now"
+                              className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
+                            />
+                          </Link>
                         </div>
                       </div>
-                      <div className="flex justify-center items-center mt-4">
-                        <Link
-                          to="/buy-land"
-                          state={{ item }}
-                          className="cursor-pointer flex justify-center w-full"
-                        >
-                          <CustomButton
-                            text="Buy Now"
-                            className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8"
-                          />
-                        </Link>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-4 text-center text-white py-8">
+                      No LAND collections available
                     </div>
-                  ))}
+                  )}
                 </div>
                 {/* MOBILE LAND GRID */}
                 <div className="sm:hidden grid grid-cols-2 gap-4 mt-4 pb-4">
-                  {landData.slice(0, 4).map((item) => (
-                    <div
-                      key={item._id}
-                      className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
-                      style={{
-                        background:
-                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
-                      }}
-                    >
-                      {/* Image */}
+                  {landData && landData.length > 0 ? (
+                    landData.slice(0, 4).map((item, index) => (
                       <div
-                        className="h-[150px] rounded-[14px] overflow-hidden"
+                        key={item._id || index}
+                        className="relative rounded-[16px] p-3 text-white flex flex-col h-[360px]"
                         style={{
                           background:
-                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                            "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                         }}
                       >
-                        <img
-                          src={
-                            item.collection?.image
-                              ? `${BACKEND_BASE_URL}${item.collection.image}`
-                              : land1Image
-                          }
-                          alt={item.collection?.name || "Land Collection"}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                        {/* Image */}
+                        <div
+                          className="h-[150px] rounded-[14px] overflow-hidden"
+                          style={{
+                            background:
+                              "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
+                          }}
+                        >
+                          <img
+                            src={
+                              item.image
+                                ? `${BACKEND_BASE_URL}${item.image}`
+                                : land1Image
+                            }
+                            alt={item.name || "Land Collection"}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
 
-                      {/* Title */}
-                      <h2 className="text-[14px] font-semibold mt-4 truncate">
-                        {item.collection?.name}
-                      </h2>
+                        {/* Title */}
+                        <h2 className="text-[14px] font-semibold mt-4 truncate">
+                          {item.name || "Unnamed"}
+                        </h2>
 
-                      {/* ID + Price */}
-                      <div className="flex justify-between items-center mt-3 text-[11px]">
-                        <span className="text-gray-300 font-medium truncate">
-                          {item._id.slice(0, 6)} 🔥
-                        </span>
-
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img src={TVector} alt="" className="w-3 h-3" />
-                          </div>
-                          <span className="font-semibold truncate">
-                            ${item.collection?.chain}
+                        {/* ID + Price */}
+                        <div className="flex justify-between items-center mt-3 text-[11px]">
+                          <span className="text-gray-300 font-medium truncate">
+                            {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
                           </span>
+
+                          <div className="flex items-center gap-2">
+                            <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                              <img src={TVector} alt="" className="w-3 h-3" />
+                            </div>
+                            <span className="font-semibold truncate">
+                              ${item.priceETH || item.Type || "ETH"} Eth
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Button */}
+                        <div className="flex justify-center items-center mt-10">
+                          <Link to="/buy-land" state={{ item }}>
+                            <CustomButton4
+                              text="Buy Now"
+                              className="!text-xs !py-2 !px-6"
+                            />
+                          </Link>
                         </div>
                       </div>
-
-                      {/* Button */}
-                      <div className="flex justify-center items-center mt-10">
-                        <Link to="/buy-land" state={{ item }}>
-                          <CustomButton4
-                            text="Buy Now"
-                            className="!text-xs !py-2 !px-6"
-                          />
-                        </Link>
-                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-2 text-center text-white py-8">
+                      No LAND collections available
                     </div>
-                  ))}
+                  )}
                 </div>
               </section>
               {/* ------------------------------------------ activity section ---------------------------------- */}
