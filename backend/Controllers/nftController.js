@@ -10,6 +10,326 @@ import {
 } from "../Service/blockchain.js";
 
 /**
+ * Create Parent Collection (Characters, Land, etc.)
+ */
+export async function createParentCollection(req, res) {
+  try {
+    const { name, symbol, Type, chain, owner, category } = req.body;
+
+    const userRole = req.user?.Role || req.user?.role;
+    const isAdmin = userRole?.toLowerCase() === "admin";
+    const creatorType = isAdmin ? "admin" : "user";
+    const userId = req.user?._id || req.user?.id || null;
+
+    if (!name || !symbol || !chain || !owner || !category) {
+      return res.status(400).json({
+        error: "Missing required fields: name, symbol, chain, owner, category",
+      });
+    }
+
+    let image;
+    if (req.file) {
+      image = `/uploads/temp/${req.file.filename}`;
+    } else if (req.body.image) {
+      image = req.body.image;
+    } else {
+      return res.status(400).json({
+        error: "Image is required (file or URL).",
+      });
+    }
+
+    const doc = await NFTSystem.create({
+      userId: userId,
+      collection: {
+        name,
+        symbol,
+        Type: Type || "ERC721",
+        chain,
+        image,
+        owner,
+        creator: creatorType,
+        salesCount: 0,
+      },
+      category: category.toLowerCase(),
+      isParentCollection: true,
+      subCollections: [],
+      status: "active",
+    });
+
+    return res.json({
+      success: true,
+      message: `Parent collection "${name}" created`,
+      doc,
+    });
+  } catch (err) {
+    console.error("❌ CREATE PARENT COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Add Sub-Collection to Parent Collection
+ */
+export async function addSubCollection(req, res) {
+  try {
+    const { parentId } = req.params;
+    const { name, symbol, description, priceETH } = req.body;
+
+    if (!name || !symbol) {
+      return res.status(400).json({
+        error: "Missing required fields: name, symbol",
+      });
+    }
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) {
+      return res.status(404).json({ error: "Parent collection not found" });
+    }
+
+    if (!parent.isParentCollection) {
+      return res.status(400).json({
+        error: "This is not a parent collection",
+      });
+    }
+
+    let image;
+    if (req.file) {
+      image = `/uploads/temp/${req.file.filename}`;
+    } else if (req.body.image) {
+      image = req.body.image;
+    }
+
+    const subCollection = {
+      name,
+      symbol,
+      image: image || parent.collection.image,
+      description: description || "",
+      owner: parent.collection.owner,
+      listed: false,
+      priceETH: priceETH || 0,
+      isFirstSale: true,
+      salesHistory: [],
+      createdAt: new Date(),
+    };
+
+    parent.subCollections.push(subCollection);
+    await parent.save();
+
+    return res.json({
+      success: true,
+      message: "Sub-collection added successfully",
+      parent,
+      newSubCollection: parent.subCollections[parent.subCollections.length - 1],
+    });
+  } catch (err) {
+    console.error("❌ ADD SUB-COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Get Parent Collections by Category
+ */
+export async function getParentCollections(req, res) {
+  try {
+    const { category } = req.query;
+
+    let query = { isParentCollection: true, status: "active" };
+
+    if (category) {
+      query.category = category.toLowerCase();
+    }
+
+    const collections = await NFTSystem.find(query)
+      .select("collection category subCollections createdAt")
+      .sort({ createdAt: -1 });
+
+    return res.json({
+      success: true,
+      collections,
+      count: collections.length,
+    });
+  } catch (err) {
+    console.error("❌ GET PARENT COLLECTIONS ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Get Sub-Collections from a Parent
+ */
+export async function getSubCollections(req, res) {
+  try {
+    const { parentId } = req.params;
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) {
+      return res.status(404).json({ error: "Parent collection not found" });
+    }
+
+    return res.json({
+      success: true,
+      parentCollection: {
+        name: parent.collection.name,
+        category: parent.category,
+        image: parent.collection.image,
+      },
+      subCollections: parent.subCollections,
+      count: parent.subCollections.length,
+    });
+  } catch (err) {
+    console.error("❌ GET SUB-COLLECTIONS ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Update Sub-Collection
+ */
+export async function updateSubCollection(req, res) {
+  try {
+    const { parentId, subCollectionId } = req.params;
+    const { name, symbol, description, priceETH, listed } = req.body;
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) {
+      return res.status(404).json({ error: "Parent collection not found" });
+    }
+
+    const subCollection = parent.subCollections.id(subCollectionId);
+    if (!subCollection) {
+      return res.status(404).json({ error: "Sub-collection not found" });
+    }
+
+    if (name) subCollection.name = name;
+    if (symbol) subCollection.symbol = symbol;
+    if (description !== undefined) subCollection.description = description;
+    if (priceETH !== undefined) subCollection.priceETH = priceETH;
+    if (listed !== undefined) subCollection.listed = listed;
+
+    if (req.file) {
+      subCollection.image = `/uploads/temp/${req.file.filename}`;
+    } else if (req.body.image) {
+      subCollection.image = req.body.image;
+    }
+
+    await parent.save();
+
+    return res.json({
+      success: true,
+      message: "Sub-collection updated successfully",
+      subCollection,
+    });
+  } catch (err) {
+    console.error("❌ UPDATE SUB-COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Delete Sub-Collection
+ */
+export async function deleteSubCollection(req, res) {
+  try {
+    const { parentId, subCollectionId } = req.params;
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) {
+      return res.status(404).json({ error: "Parent collection not found" });
+    }
+
+    parent.subCollections.pull(subCollectionId);
+    await parent.save();
+
+    return res.json({
+      success: true,
+      message: "Sub-collection deleted successfully",
+    });
+  } catch (err) {
+    console.error("❌ DELETE SUB-COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Mint Sub-Collection NFT
+ */
+export async function mintSubCollection(req, res) {
+  try {
+    const { parentId, subCollectionId, tokenURI, royaltyBps, creatorWallet } =
+      req.body;
+
+    if (!parentId || !subCollectionId || !tokenURI || !creatorWallet) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required fields",
+      });
+    }
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent) {
+      return res.status(404).json({ error: "Parent collection not found" });
+    }
+
+    const subCollection = parent.subCollections.id(subCollectionId);
+    if (!subCollection) {
+      return res.status(404).json({ error: "Sub-collection not found" });
+    }
+
+    if (subCollection.tokenId) {
+      return res.status(400).json({
+        error: "Sub-collection already minted",
+        tokenId: subCollection.tokenId,
+      });
+    }
+
+    // Mint on blockchain
+    const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
+    const receipt = await tx.wait();
+
+    let tokenId;
+    for (const log of receipt.logs) {
+      try {
+        const parsed = nftContract.interface.parseLog({
+          topics: log.topics,
+          data: log.data,
+        });
+        if (parsed.name === "Transfer" || parsed.name === "Minted") {
+          tokenId = Number(
+            parsed.args.tokenId || parsed.args[2] || parsed.args[1],
+          );
+          break;
+        }
+      } catch (e) {
+        continue;
+      }
+    }
+
+    if (!tokenId) {
+      const nextId = await nftContract.nextTokenId();
+      tokenId = Number(nextId) - 1;
+    }
+
+    // Update sub-collection
+    subCollection.tokenId = tokenId;
+    subCollection.tokenURI = tokenURI;
+    subCollection.owner = creatorWallet.toLowerCase();
+
+    await parent.save();
+
+    return res.json({
+      success: true,
+      message: "Sub-collection NFT minted successfully",
+      tokenId,
+      subCollection,
+    });
+  } catch (err) {
+    console.error("❌ MINT SUB-COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
  * Create Collection (store metadata)
  */
 export async function createCollection(req, res) {
@@ -73,7 +393,7 @@ export async function createCollection(req, res) {
       listed: false, // Initially not listed
       isFirstSale: true,
     });
- 
+
     return res.json({
       success: true,
       message: `Collection created by ${creatorType}`,
@@ -223,7 +543,7 @@ export async function serverMint(req, res) {
           const transferTx = await nftContract.transferFrom(
             walletAddress,
             creatorWallet,
-            tokenId
+            tokenId,
           );
           await transferTx.wait();
           console.log("✅ NFT transferred to:", creatorWallet);
@@ -263,7 +583,7 @@ export async function serverMint(req, res) {
         listed: false, // Not listed yet
         isFirstSale: true,
       },
-      { new: true }
+      { new: true },
     );
 
     console.log("✅ Mint completed!");
@@ -310,7 +630,7 @@ export async function createListing(req, res) {
         priceETH,
         seller: seller.toLowerCase(),
       },
-      { new: true }
+      { new: true },
     );
 
     if (!nft) {
@@ -410,7 +730,7 @@ export async function recordOnchainSale(req, res) {
       priceETH,
       nft.isFirstSale,
       creatorWallet,
-      seller
+      seller,
     );
 
     // Record sale
@@ -467,7 +787,7 @@ function calculatePaymentDistribution(
   priceETH,
   isFirstSale,
   creatorWallet,
-  sellerWallet
+  sellerWallet,
 ) {
   const PLATFORM_FEE_PERCENT = 10;
   const CREATOR_ROYALTY_PERCENT = 5;
@@ -514,7 +834,7 @@ function calculatePaymentDistribution(
         amount: distribution.sellerAmount,
         percentage: 85,
         type: "seller_proceeds",
-      }
+      },
     );
   }
 
@@ -538,7 +858,7 @@ export async function getListingDetails(req, res) {
       try {
         const listing = await marketContract.getListing(
           process.env.MYNFT_ADDRESS,
-          tokenId
+          tokenId,
         );
         blockchainListing = {
           seller: listing[0],
@@ -866,7 +1186,7 @@ export async function updateCollection(req, res) {
         "collection.supply": supply || existing.collection.supply,
         "collection.status": status || existing.collection.status,
       },
-      { new: true }
+      { new: true },
     );
 
     return res.json({ success: true, updated });
@@ -921,7 +1241,6 @@ export async function getTotalCounts(req, res) {
   }
 }
 
-
 export async function cancelListing(req, res) {
   try {
     const { nftId, tokenId } = req.body;
@@ -939,7 +1258,7 @@ export async function cancelListing(req, res) {
         priceETH: 0,
         seller: null,
       },
-      { new: true }
+      { new: true },
     );
 
     if (!nft) {
@@ -958,7 +1277,6 @@ export async function cancelListing(req, res) {
     return res.status(500).json({ error: err.message });
   }
 }
-
 
 // Get NFTs owned by a specific wallet (public or authenticated)
 export async function getNFTsByWallet(req, res) {

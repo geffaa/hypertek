@@ -8,27 +8,46 @@ import GlowingOrb from "../Common/BgColoring";
 import { MarketPlace_Url, NewsImage_Url } from "../../Config";
 
 function PopularCollections() {
-  const [landData, setLandData] = useState([]);
+  const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchCollections = async () => {
+    const loadData = async () => {
       try {
-        const res = await axios.get(`${MarketPlace_Url}/nft/collection/get`);
-        if (res.data?.success) {
-          setLandData(res.data.collections || []);
-        } else {
-          setError("Failed to load collections");
-        }
-      } catch {
-        setError("Something went wrong while fetching data");
+        // 1️⃣ parent collections
+        const parentsRes = await axios.get(
+          `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`,
+        );
+
+        if (!parentsRes.data?.success) return;
+
+        const parents = parentsRes.data.collections || [];
+
+        // 2️⃣ har parent se sub collections lao
+        const requests = parents.map((p) =>
+          axios.get(
+            `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${p._id}/sub-collections`,
+          ),
+        );
+
+        const responses = await Promise.all(requests);
+
+        // ✅ CORRECT PARSING (new API response)
+        const allSubs = responses.flatMap((res) => {
+          return res.data?.subCollections || [];
+        });
+
+        setCollections(allSubs);
+      } catch (err) {
+        console.error("API error:", err);
+        setError("Failed to load collections");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCollections();
+    loadData();
   }, []);
 
   return (
@@ -37,8 +56,8 @@ function PopularCollections() {
 
       <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
         {/* Heading */}
-       <div className="flex flex-col gap-3">
-          <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase truncate">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase">
             Popular Collections
           </h1>
 
@@ -50,65 +69,43 @@ function PopularCollections() {
           </div>
         </div>
 
-        {/* Content */}
-        {loading && <p className="text-white">Loading collections...</p>}
+        {loading && <p className="text-white">Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
         {!loading && !error && (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10">
-
-            {landData.slice(0, 4).map((item) => (
+            {collections.slice(0, 4).map((item) => (
               <div
-                key={item?._id}
-                className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col
-           h-[360px] sm:h-[390px] lg:h-[420px]"
-
+                key={item._id}
+                className="rounded-[16px] p-4 text-white flex flex-col h-[420px]"
                 style={{
                   background:
                     "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                 }}
               >
-                {/* IMAGE */}
-                <div className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-                  }}
-                >
+                <div className="h-[210px] rounded-[14px] overflow-hidden">
                   <img
-                    src={`${NewsImage_Url}${item?.collection?.image}`}
-                    alt={item?.collection?.name}
+                    src={`${NewsImage_Url}${item.image}`}
+                    alt={item.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
-                {/* TITLE */}
-                {/* TITLE */}
-                <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-
-                  {item?.collection?.name}
+                <h2 className="text-lg font-semibold mt-4 truncate">
+                  {item.name}
                 </h2>
 
-                {/* INFO */}
-                <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-
-                  <span className="font-medium text-gray-300 truncate">
-                    {item?.collection?.symbol} 🔥
-                  </span>
-
+                <div className="flex justify-between items-center mt-3 text-sm">
+                  <span className="text-gray-300">{item.symbol} 🔥</span>
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                      <img src={TVector} alt="chain" className="w-3 h-3" />
+                      <img src={TVector} className="w-3 h-3" alt="chain" />
                     </div>
-                    <span className="font-semibold truncate">
-                      ${item?.collection?.chain}
-                    </span>
+                    <span className="font-semibold">{item.priceETH} ETH</span>
                   </div>
                 </div>
 
-                {/* BUTTON */}
-                <div className="flex justify-center items-center mt-8">
-
+                <div className="mt-auto flex justify-center">
                   <Link to="/market-place">
                     <CustomButton4 text="Buy Now" />
                   </Link>
@@ -123,4 +120,3 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
-
