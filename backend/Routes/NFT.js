@@ -34,6 +34,7 @@ import {
   getTotalCounts,
   cancelListing,
   getNFTsByWallet,
+  getNFTsWithSubCollections,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -102,6 +103,7 @@ NFTRouter.get("/royalties/summary", getRoyaltiesSummary);
 NFTRouter.get("/platform/revenue", getPlatformRevenue);
 
 NFTRouter.get("/user/owned/:walletAddress", getNFTsByWallet);
+NFTRouter.get("/user/owned-with-subs/:walletAddress", getNFTsWithSubCollections);
 
 /* =====================================================
    COLLECTION CRUD (NO ADMIN AUTH NOW)

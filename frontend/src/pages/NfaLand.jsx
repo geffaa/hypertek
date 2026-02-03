@@ -215,11 +215,10 @@ function NfaLand() {
       return null;
     }
 
-    // Don't show toast here - let the calling function handle it
-
     try {
       const payload = {
-        docId: item._id,
+        parentId: item.parentId, // Add this
+        subCollectionId: item._id, // Use this instead of docId
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
@@ -228,7 +227,7 @@ function NfaLand() {
       console.log("🎨 Minting NFA with payload:", payload);
 
       const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/nft/mint`,
+        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/mint`,
         payload,
         {
           headers: {
