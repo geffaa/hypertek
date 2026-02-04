@@ -35,6 +35,7 @@ import {
   cancelListing,
   getNFTsByWallet,
   getNFTsWithSubCollections,
+  createSubCollectionListing,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -169,5 +170,6 @@ NFTRouter.post("/listing/create", authMiddleware(), createListing);
 NFTRouter.post("/sale/record", authMiddleware(), recordOnchainSale);
 
 NFTRouter.post("/listing/cancel", authMiddleware(), cancelListing);
+NFTRouter.post("/sub-collection/listing/create", createSubCollectionListing);
 
 export default NFTRouter;

@@ -20,8 +20,32 @@ import { FiEye, FiEdit2 } from "react-icons/fi";
 function Buy1() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { item } = location.state || {};
-  const collection = item?.subCollection || item;
+
+  // Extract parent and subCollection properly
+  const { item, subCollection: passedSubCollection } = location.state || {};
+
+  // Determine which is parent and which is sub-collection
+  let parentCollection, subCollection;
+
+  if (passedSubCollection) {
+    // If subCollection was passed separately
+    parentCollection = item;
+    subCollection = passedSubCollection;
+  } else if (item?.isParentCollection) {
+    // If item is a parent collection, extract the first sub-collection
+    parentCollection = item;
+    subCollection = item.subCollections?.[0];
+  } else if (item?.subCollection) {
+    // If item has subCollection nested
+    subCollection = item.subCollection;
+    parentCollection = item; // Might need to fetch parent separately
+  } else {
+    // Fallback: treat item as the collection to display
+    subCollection = item;
+  }
+
+  // Use subCollection for display
+  const collection = subCollection || item;
 
   const { token, user } = useSelector((state) => state.auth);
 
@@ -38,12 +62,17 @@ function Buy1() {
 
   /* ================================ INIT ================================ */
   useEffect(() => {
-    if (!item) {
-      toast.error("❌ No land selected");
+    console.log("📦 Location State:", location.state);
+    console.log("📦 Parent Collection:", parentCollection);
+    console.log("📦 Sub-Collection:", subCollection);
+    console.log("📦 Collection (display):", collection);
+
+    if (!collection) {
+      toast.error("❌ No NFT data found");
       navigate("/buy-nfa");
       return;
     }
-  }, [item, navigate]);
+  }, [collection, navigate]);
 
   useEffect(() => {
     checkWalletAndOwnership();
@@ -61,7 +90,7 @@ function Buy1() {
         );
       }
     };
-  }, [item]);
+  }, [collection]);
 
   const handleAccountsChanged = (accounts) => {
     if (accounts.length > 0) {
@@ -148,6 +177,8 @@ function Buy1() {
   /* ========================= CHECK LISTING ========================= */
   const checkListingStatus = async () => {
     try {
+      if (!collection.tokenId) return;
+
       const provider = new ethers.BrowserProvider(window.ethereum);
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
@@ -155,13 +186,21 @@ function Buy1() {
         provider,
       );
 
-      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      const listing = await marketplace.getListing(
+        NFT_ADDRESS,
+        collection.tokenId,
+      );
+
       setListingData({
         seller: listing[0],
         price: listing[1],
         active: listing[2],
       });
+
       console.log("📊 Listing status:", listing[2] ? "Active" : "Inactive");
+
+      // Also update local collection state
+      collection.listed = listing[2];
     } catch (err) {
       console.error("❌ Error checking listing:", err);
     }
@@ -294,7 +333,7 @@ function Buy1() {
         signer,
       );
 
-      let tokenId = item.tokenId;
+      let tokenId = collection.tokenId;
 
       // Mint if not exists
       if (!tokenId) {
@@ -307,8 +346,8 @@ function Buy1() {
           return;
         }
 
-        item.tokenId = tokenId;
-        item.owner = walletAddress.toLowerCase();
+        collection.tokenId = tokenId;
+        collection.owner = walletAddress.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(walletAddress.toLowerCase());
 
@@ -330,7 +369,7 @@ function Buy1() {
           console.log("👛 Your wallet:", walletAddress);
 
           if (owner.toLowerCase() === walletAddress.toLowerCase()) {
-            item.owner = owner.toLowerCase();
+            collection.owner = owner.toLowerCase();
             setOnChainOwner(owner.toLowerCase());
             setIsOwner(true);
             console.log("✅ Ownership verified");
@@ -384,9 +423,9 @@ function Buy1() {
         return;
       }
 
-      // Create listing
+      // Create listing on blockchain
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
-      const priceWei = ethers.parseEther("0.01");
+      const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
       const listTx = await marketplace.createListing(
         NFT_ADDRESS,
         tokenId,
@@ -398,23 +437,38 @@ function Buy1() {
 
       // Record in backend
       toast.loading("💾 Saving listing data...", { id: toastId });
-      await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/nft/listing/create`,
-        {
-          nftId: item._id,
-          tokenId,
-          seller: walletAddress.toLowerCase(),
-          priceETH: 0.01,
-        },
+
+      const listingPayload = {
+        subCollectionId: collection._id,
+        tokenId,
+        seller: walletAddress.toLowerCase(),
+        priceETH: collection.priceETH || 0.01,
+      };
+
+      // Add parentId only if it exists
+      if (parentCollection?._id) {
+        listingPayload.parentId = parentCollection._id;
+      }
+
+      console.log("📤 Sending listing payload:", listingPayload);
+
+      const response = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/create`,
+        listingPayload,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
 
-      toast.success("🎉 NFA listed for sale @ 0.01 ETH!", {
-        id: toastId,
-        duration: 5000,
-      });
+      console.log("✅ Backend response:", response.data);
+
+      toast.success(
+        `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} ETH!`,
+        {
+          id: toastId,
+          duration: 5000,
+        },
+      );
 
       setListingData({
         seller: walletAddress.toLowerCase(),
@@ -422,11 +476,18 @@ function Buy1() {
         active: true,
       });
 
+      // Update local state
+      collection.listed = true;
+
       await checkListingStatus();
     } catch (err) {
       console.error("❌ Listing error:", err);
+      console.error("❌ Error response:", err.response?.data);
+
       let msg = "❌ Listing failed";
-      if (err.message?.includes("insufficient funds")) {
+      if (err.response?.data?.error) {
+        msg = `❌ ${err.response.data.error}`;
+      } else if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient gas. Add Sepolia ETH";
       } else if (err.message?.includes("user rejected")) {
         msg = "❌ Transaction rejected by user";

@@ -14,8 +14,8 @@ const saleSchema = new mongoose.Schema({
 
 // Sub-collection schema (NFTs within a collection category)
 const subCollectionSchema = new mongoose.Schema({
-  name: String,
-  symbol: String,
+  name: { type: String, required: true }, // agar name required chahiye
+  symbol: { type: String, required: false }, // optional
   image: String,
   description: String,
   tokenId: Number,
@@ -35,7 +35,7 @@ const nftSystemSchema = new mongoose.Schema(
       ref: "User",
       required: false,
     },
-    
+
     // Main collection information
     collection: {
       name: String, // "Characters" or "Land"
@@ -100,7 +100,7 @@ const nftSystemSchema = new mongoose.Schema(
     },
     salesHistory: [saleSchema],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("NFTSystem", nftSystemSchema);
