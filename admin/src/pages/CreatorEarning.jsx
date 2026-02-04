@@ -82,15 +82,36 @@ if (formData.royaltyWallet.length !== 42) {
 
     setIsSubmitting(true);
     const loading = toast.loading("Creating collection...");
-
     try {
+      // Map frontend Type to backend category enum
+      let category = "other"; // default
+      if (basicData.Type) {
+        switch (basicData.Type.toLowerCase()) {
+          case "characters":
+          case "character":
+          case "nfa": // if old NFA still appears
+            category = "characters";
+            break;
+          case "land":
+            category = "land";
+            break;
+          case "weapons":
+            category = "weapons";
+            break;
+          default:
+            category = "other";
+        }
+      }
+  
       // Combine data from both steps
       const combinedData = {
         ...basicData,
         ...formData,
         owner: "admin",
-        creator: "admin"
+        creator: "admin",
+        category, // ✅ properly mapped category
       };
+
 
       const data = new FormData();
       data.append("name", combinedData.name);
@@ -102,6 +123,8 @@ if (formData.royaltyWallet.length !== 42) {
       data.append("supply", combinedData.supply);
       data.append("owner", combinedData.owner);
       data.append("creator", combinedData.creator);
+      data.append("category", combinedData.category); // <-- add this line
+
       
       // Add the image file if it exists
       if (basicData.selectedFile) {
@@ -109,12 +132,13 @@ if (formData.royaltyWallet.length !== 42) {
       }
 
       const res = await fetch(
-        `${Dashboard_Base_Url}/v1/nft/admin/collection/create`,
+        `http://localhost:4700/api/v1/nft/parent-collection/create`,
         {
           method: "POST",
           body: data,
         }
       );
+      
 
       const result = await res.json();
 
@@ -134,8 +158,9 @@ if (formData.royaltyWallet.length !== 42) {
   };
 
   const handleBackButton = () => {
-    navigate("/create-collection");
+    navigate(-1);
   };
+  
 
   if (isSubmitting) {
     return <FullScreenLoader />;

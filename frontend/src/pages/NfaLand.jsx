@@ -19,36 +19,65 @@ import {
 } from "../Web3/Config";
 
 function NfaLand() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
-  const { item } = location.state || {};
-  const collection = item?.collection;
-  const { user } = useSelector((state) => state.auth);
+  const location = useLocation();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSecondOpen, setIsSecondOpen] = useState(false);
+  // Extract parent and subCollection properly
+  const { item, subCollection: passedSubCollection, parentId } = location.state || {};
+
+  // Determine which is parent and which is sub-collection
+  let parentCollection, subCollection;
+
+  if (passedSubCollection) {
+    // If subCollection was passed separately
+    parentCollection = item;
+    subCollection = passedSubCollection;
+  } else if (item?.isParentCollection) {
+    // If item is a parent collection, extract the first sub-collection
+    parentCollection = item;
+    subCollection = item.subCollections?.[0];
+  } else if (item?.subCollection) {
+    // If item has subCollection nested
+    subCollection = item.subCollection;
+    parentCollection = item;
+  } else {
+    // Fallback: treat item as the collection to display
+    subCollection = item;
+  }
+
+  // Use subCollection for display
+  const collection = subCollection || item;
+
+  const { token, user } = useSelector((state) => state.auth);
+
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [onChainOwner, setOnChainOwner] = useState(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
 
+  /* ================================ INIT ================================ */
   useEffect(() => {
-    if (!item) {
-      toast.error("No land selected");
-      navigate("/buy-nfa");
-    }
-  }, [item, navigate]);
+    console.log("📦 Location State:", location.state);
+    console.log("📦 Parent Collection:", parentCollection);
+    console.log("📦 Sub-Collection:", subCollection);
+    console.log("📦 Collection (display):", collection);
 
-  // Check connected wallet and ownership
+    if (!collection) {
+      toast.error("❌ No NFT data found");
+      navigate("/buy-nfa");
+      return;
+    }
+  }, [collection, navigate]);
+
   useEffect(() => {
     checkWalletAndOwnership();
 
-    // Listen for account changes
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
       window.ethereum.on("chainChanged", () => window.location.reload());
@@ -58,11 +87,11 @@ function NfaLand() {
       if (window.ethereum) {
         window.ethereum.removeListener(
           "accountsChanged",
-          handleAccountsChanged,
+          handleAccountsChanged
         );
       }
     };
-  }, [item]);
+  }, [collection]);
 
   const handleAccountsChanged = (accounts) => {
     if (accounts.length > 0) {
@@ -74,11 +103,11 @@ function NfaLand() {
     }
   };
 
+  /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
     try {
-      if (!window.ethereum || !item) return;
+      if (!window.ethereum || !collection) return;
 
-      // Request accounts to ensure wallet is connected
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -86,102 +115,114 @@ function NfaLand() {
       if (accounts.length > 0) {
         const wallet = accounts[0].toLowerCase();
         setConnectedWallet(wallet);
-        console.log("Connected wallet:", wallet);
-        console.log("Item owner from DB:", item.owner);
+        console.log("✅ Connected wallet:", wallet);
+        console.log("📋 Collection owner from DB:", collection.owner);
 
-        // ✅ If tokenId exists, check BLOCKCHAIN ownership (source of truth)
-        if (item.tokenId) {
+        // Check BLOCKCHAIN ownership if tokenId exists
+        if (collection.tokenId) {
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const nftContract = new ethers.Contract(
               NFT_ADDRESS,
               NFT_ABI,
-              provider,
+              provider
             );
-            const owner = await nftContract.ownerOf(item.tokenId);
+            const owner = await nftContract.ownerOf(collection.tokenId);
             const ownerLower = owner.toLowerCase();
 
             setOnChainOwner(ownerLower);
-            console.log("On-chain owner:", ownerLower);
+            console.log("⛓️ On-chain owner:", ownerLower);
 
-            // Update item.owner if blockchain differs from database
-            if (item.owner !== ownerLower) {
-              console.log("Updating item.owner to match blockchain");
-              item.owner = ownerLower;
+            if (collection.owner !== ownerLower) {
+              console.log("🔄 Updating collection.owner to match blockchain");
+              collection.owner = ownerLower;
             }
 
             const ownerMatch = wallet === ownerLower;
             setIsOwner(ownerMatch);
-            console.log("Is owner (blockchain check):", ownerMatch);
+            console.log("🔍 Is owner (blockchain check):", ownerMatch);
           } catch (err) {
-            console.error("Error checking on-chain owner:", err);
-            // Fallback to database owner if blockchain check fails
-            if (item.owner) {
-              const ownerMatch = wallet === item.owner.toLowerCase();
+            console.error("❌ Error checking on-chain owner:", err);
+            if (collection.owner) {
+              const ownerMatch = wallet === collection.owner.toLowerCase();
               setIsOwner(ownerMatch);
-              console.log("Is owner (DB fallback):", ownerMatch);
+              console.log("🔍 Is owner (DB fallback):", ownerMatch);
             } else {
               setIsOwner(false);
             }
           }
         } else {
-          // Not minted yet - check database owner or allow anyone to mint
-          if (item.owner) {
-            const ownerMatch = wallet === item.owner.toLowerCase();
+          // Not minted yet
+          if (collection.owner) {
+            const ownerMatch = wallet === collection.owner.toLowerCase();
             setIsOwner(ownerMatch);
-            console.log("Is owner (not minted, DB check):", ownerMatch);
+            console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
           } else {
-            // If no owner set yet, user can mint it
             setIsOwner(true);
-            console.log("No owner - user can mint");
+            console.log("🆕 No owner - user can mint");
           }
         }
 
-        // Check listing status if tokenId exists
-        if (item.tokenId) {
+        if (collection.tokenId) {
           await checkListingStatus();
         }
       }
     } catch (err) {
-      console.error("Error checking wallet:", err);
-      // If user rejects, don't show error but allow manual connection
+      console.error("❌ Error checking wallet:", err);
       if (err.code === 4001) {
-        console.log("User rejected wallet connection");
+        console.log("👤 User rejected wallet connection");
       }
     }
   };
 
+  /* ========================= CHECK LISTING ========================= */
   const checkListingStatus = async () => {
     try {
+      if (!collection.tokenId) return;
+
       const provider = new ethers.BrowserProvider(window.ethereum);
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        provider,
+        provider
       );
 
-      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      const listing = await marketplace.getListing(
+        NFT_ADDRESS,
+        collection.tokenId
+      );
+
       setListingData({
         seller: listing[0],
         price: listing[1],
         active: listing[2],
       });
+
+      console.log("📊 Listing status:", listing[2] ? "Active" : "Inactive");
+
+      // Also update local collection state
+      collection.listed = listing[2];
     } catch (err) {
-      console.error("Error checking listing:", err);
+      console.error("❌ Error checking listing:", err);
     }
   };
 
+  /* ======================== SWITCH SEPOLIA ======================== */
   const switchToSepolia = async () => {
     const SEPOLIA_CHAIN_ID = "0xaa36a7";
+    const toastId = toast.loading("🔄 Switching to Sepolia network...");
+
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: SEPOLIA_CHAIN_ID }],
       });
+      toast.success("✅ Switched to Sepolia", { id: toastId });
       return true;
     } catch (switchError) {
       if (switchError.code === 4902) {
         try {
+          toast.loading("➕ Adding Sepolia network...", { id: toastId });
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [
@@ -198,18 +239,22 @@ function NfaLand() {
               },
             ],
           });
+          toast.success("✅ Sepolia network added", { id: toastId });
           return true;
         } catch (addError) {
-          console.error("Failed to add Sepolia:", addError);
+          console.error("❌ Failed to add Sepolia:", addError);
+          toast.error("❌ Failed to add Sepolia network", { id: toastId });
           return false;
         }
       }
-      console.error("Failed to switch to Sepolia:", switchError);
+      console.error("❌ Failed to switch to Sepolia:", switchError);
+      toast.error("❌ Failed to switch network", { id: toastId });
       return false;
     }
   };
 
-  const mintNFTToWallet = async (buyerWallet) => {
+  /* ========================== BACKEND MINT ========================== */
+const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
       toast.error("❌ Invalid user or item data");
       return null;
@@ -250,163 +295,183 @@ function NfaLand() {
     }
   };
 
+  /* ======================= CREATE LISTING ======================= */
   const handleCreateListing = async () => {
-    const toastId = toast.loading("Creating listing...");
+    const toastId = toast.loading("🔧 Preparing to list NFA...");
     setLoading(true);
 
     try {
+      // Check MetaMask
       if (!window.ethereum) {
-        toast.error("MetaMask not installed", { id: toastId });
+        toast.error("❌ MetaMask not installed", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Switch to Sepolia
+      // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
       if (chainId !== "0xaa36a7") {
+        toast.dismiss(toastId);
         const switched = await switchToSepolia();
         if (!switched) {
-          toast.error("Please switch to Sepolia", { id: toastId });
           setLoading(false);
           return;
         }
+        toast.loading("🔧 Preparing to list NFA...", { id: toastId });
       }
 
+      // Get signer
       await window.ethereum.request({ method: "eth_requestAccounts" });
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const walletAddress = await signer.getAddress();
+      console.log("👛 Wallet address:", walletAddress);
 
       const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer,
+        signer
       );
 
-      let tokenId = item.tokenId;
+      let tokenId = collection.tokenId;
 
-      // If not minted, mint first
+      // Mint if not exists
       if (!tokenId) {
-        toast.loading("Minting NFA...", { id: toastId });
+        toast.loading("🔧 Processing listing...", { id: toastId });
         tokenId = await mintNFTToWallet(walletAddress);
+
         if (!tokenId) {
-          toast.error("Mint failed", { id: toastId });
+          toast.error("❌ Failed to prepare NFA", { id: toastId });
           setLoading(false);
           return;
         }
 
-        // ✅ UPDATE ITEM TOKEN ID AND OWNER
-        item.tokenId = tokenId;
-        item.owner = walletAddress.toLowerCase();
+        collection.tokenId = tokenId;
+        collection.owner = walletAddress.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(walletAddress.toLowerCase());
 
-        // ✅ WAIT FOR BLOCKCHAIN TO SYNC
-        toast.loading("Waiting for blockchain confirmation...", {
+        toast.loading("⏳ Waiting for blockchain confirmation...", {
           id: toastId,
         });
         await new Promise((resolve) => setTimeout(resolve, 3000));
       }
 
-      // ✅ VERIFY OWNERSHIP ON-CHAIN BEFORE PROCEEDING
+      // Verify ownership
+      toast.loading("🔍 Verifying ownership...", { id: toastId });
       let owner;
       let retries = 3;
+
       while (retries > 0) {
         try {
           owner = await nftContract.ownerOf(tokenId);
-          console.log("On-chain owner:", owner);
-          console.log("Wallet address:", walletAddress);
+          console.log("⛓️ On-chain owner:", owner);
+          console.log("👛 Your wallet:", walletAddress);
 
           if (owner.toLowerCase() === walletAddress.toLowerCase()) {
-            // ✅ Update local state with blockchain owner
-            item.owner = owner.toLowerCase();
+            collection.owner = owner.toLowerCase();
             setOnChainOwner(owner.toLowerCase());
             setIsOwner(true);
+            console.log("✅ Ownership verified");
             break;
           } else if (retries > 1) {
-            // Wait and retry if owner doesn't match
-            console.log(
-              `Owner mismatch, retrying... (${retries - 1} attempts left)`,
-            );
+            console.log(`⏳ Owner mismatch, retrying... (${retries - 1} left)`);
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
             continue;
           } else {
-            toast.error("You don't own this NFT", { id: toastId });
+            toast.error("❌ You don't own this NFA", { id: toastId });
             setLoading(false);
             return;
           }
         } catch (err) {
-          console.error("Error getting owner:", err);
+          console.error("❌ Error getting owner:", err);
           if (retries > 1) {
             console.log(
-              `Retrying blockchain check... (${retries - 1} attempts left)`,
+              `⏳ Retrying blockchain check... (${retries - 1} left)`
             );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
-            toast.error(
-              "NFT not found on blockchain yet. Please try again in a moment.",
-              { id: toastId },
-            );
+            toast.error("❌ NFT not found on blockchain. Please try again.", {
+              id: toastId,
+            });
             setLoading(false);
             return;
           }
         }
       }
 
-      // Approve marketplace if not approved
+      // Check approval
       const approved = await nftContract.getApproved(tokenId);
       if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
-        toast.loading("Approving marketplace...", { id: toastId });
+        toast.loading("✍️ Approving marketplace...", { id: toastId });
         const approveTx = await nftContract.approve(
           MARKETPLACE_ADDRESS,
-          tokenId,
+          tokenId
         );
         await approveTx.wait();
+        console.log("✅ Marketplace approved");
       }
 
       // Check if already listed
       const listing = await marketplace.getListing(NFT_ADDRESS, tokenId);
       if (listing[2]) {
-        toast.success("Already listed!", { id: toastId });
+        toast.success("✅ Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
         setLoading(false);
         return;
       }
 
-      // Create listing
-      toast.loading("Creating listing on marketplace...", { id: toastId });
-      const priceWei = ethers.parseEther("0.01");
+      // Create listing on blockchain
+      toast.loading("📝 Creating marketplace listing...", { id: toastId });
+      const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
       const listTx = await marketplace.createListing(
         NFT_ADDRESS,
         tokenId,
         priceWei,
-        {
-          gasLimit: 300000,
-        },
+        { gasLimit: 300000 }
       );
       await listTx.wait();
+      console.log("✅ Listing created on blockchain");
 
-      // Update database
-      await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/nft/listing/create`,
-        {
-          nftId: item._id,
-          tokenId,
-          seller: walletAddress.toLowerCase(),
-          priceETH: 0.01,
-        },
+      // Record in backend
+      toast.loading("💾 Saving listing data...", { id: toastId });
+
+      const listingPayload = {
+        subCollectionId: collection._id,
+        tokenId,
+        seller: walletAddress.toLowerCase(),
+        priceETH: collection.priceETH || 0.01,
+      };
+
+      // Add parentId if available
+      if (parentCollection?._id) {
+        listingPayload.parentId = parentCollection._id;
+      } else if (parentId) {
+        listingPayload.parentId = parentId;
+      }
+
+      console.log("📤 Sending listing payload:", listingPayload);
+
+      const response = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/create`,
+        listingPayload,
         {
           headers: { Authorization: `Bearer ${token}` },
-        },
+        }
       );
 
-      toast.success(`✅ Listed! Token #${tokenId} @ 0.01 ETH`, {
-        id: toastId,
-        duration: 5000,
-      });
+      console.log("✅ Backend response:", response.data);
+
+      toast.success(
+        `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} ETH!`,
+        {
+          id: toastId,
+          duration: 5000,
+        }
+      );
 
       setListingData({
         seller: walletAddress.toLowerCase(),
@@ -414,22 +479,29 @@ function NfaLand() {
         active: true,
       });
 
-      // Refresh listing status
+      // Update local state
+      collection.listed = true;
+
       await checkListingStatus();
     } catch (err) {
       console.error("❌ Listing error:", err);
-      let msg = "Listing failed";
-      if (err.message?.includes("insufficient funds"))
-        msg = "⛽ Add Sepolia ETH";
-      else if (err.message?.includes("user rejected"))
-        msg = "Transaction rejected";
+      console.error("❌ Error response:", err.response?.data);
+
+      let msg = "❌ Listing failed";
+      if (err.response?.data?.error) {
+        msg = `❌ ${err.response.data.error}`;
+      } else if (err.message?.includes("insufficient funds")) {
+        msg = "⛽ Insufficient gas. Add Sepolia ETH";
+      } else if (err.message?.includes("user rejected")) {
+        msg = "❌ Transaction rejected by user";
+      }
       toast.error(msg, { id: toastId });
     } finally {
       setLoading(false);
     }
   };
 
-  // BUY NFT (Buyer purchases from listing)
+  /* ============================ BUY NFT ============================ */
   const handleBuyNFT = async () => {
     const toastId = toast.loading("🛒 Preparing purchase...");
     setLoading(true);
@@ -481,12 +553,12 @@ function NfaLand() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer,
+        signer
       );
       const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
-      if (!item.tokenId) {
+      if (!collection.tokenId) {
         toast.loading("🛒 Processing purchase...", { id: toastId });
         console.log("🆕 NFA not minted yet, minting to buyer...");
 
@@ -499,8 +571,8 @@ function NfaLand() {
         }
 
         // Update state
-        item.tokenId = mintedTokenId;
-        item.owner = buyer.toLowerCase();
+        collection.tokenId = mintedTokenId;
+        collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
         console.log("✅ NFA prepared, Token ID:", mintedTokenId);
@@ -510,15 +582,15 @@ function NfaLand() {
         await new Promise((r) => setTimeout(r, 1500));
 
         toast.success(
-          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${item.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
-          { id: toastId, duration: 8000 },
+          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
+          { id: toastId, duration: 8000 }
         );
 
         setLoading(false);
 
         // Redirect to marketplace profile after 2 seconds
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/Lands");
         }, 2000);
 
         return;
@@ -529,7 +601,7 @@ function NfaLand() {
 
       let currentOwner;
       try {
-        currentOwner = await nftContract.ownerOf(item.tokenId);
+        currentOwner = await nftContract.ownerOf(collection.tokenId);
         currentOwner = currentOwner.toLowerCase();
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
@@ -548,7 +620,7 @@ function NfaLand() {
 
       // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      const listing = await marketplace.getListing(NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -563,7 +635,7 @@ function NfaLand() {
       if (balance < price) {
         toast.error(
           `❌ Insufficient ETH\n\nNeed: ${ethers.formatEther(price)} ETH\nYou have: ${ethers.formatEther(balance)} ETH`,
-          { id: toastId, duration: 6000 },
+          { id: toastId, duration: 6000 }
         );
         setLoading(false);
         return;
@@ -573,7 +645,7 @@ function NfaLand() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, item.tokenId, {
+      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, collection.tokenId, {
         value: price,
         gasLimit: 400000,
       });
@@ -584,34 +656,50 @@ function NfaLand() {
       const receipt = await buyTx.wait();
       console.log("✅ Transaction confirmed:", receipt.hash);
 
-      // Record sale
+      // Record sale in backend
       toast.loading("💾 Recording purchase...", { id: toastId });
       try {
+        const salePayload = {
+          tokenId: collection.tokenId,
+          buyer: buyer.toLowerCase(),
+          seller: listing[0].toLowerCase(),
+          priceETH: ethers.formatEther(price),
+          txHash: receipt.hash,
+        };
+
+        // Add parent/sub-collection IDs if available
+        if (parentCollection?._id) {
+          salePayload.parentId = parentCollection._id;
+        } else if (parentId) {
+          salePayload.parentId = parentId;
+        }
+        
+        if (collection._id) {
+          salePayload.subCollectionId = collection._id;
+        }
+
+        console.log("📤 Recording sale with payload:", salePayload);
+
         await axios.post(
-          `${BACKEND_BASE_URL}/api/v1/nft/sale/record`,
-          {
-            tokenId: item.tokenId,
-            buyer: buyer.toLowerCase(),
-            seller: listing[0].toLowerCase(),
-            priceETH: ethers.formatEther(price),
-            txHash: receipt.hash,
-          },
+          `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/sale/record`,
+          salePayload,
           {
             headers: { Authorization: `Bearer ${token}` },
-          },
+          }
         );
         console.log("✅ Sale recorded in backend");
       } catch (recordErr) {
         console.error("⚠️ Error recording sale:", recordErr);
+        console.error("⚠️ Error response:", recordErr.response?.data);
       }
 
       toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${item.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
-        { id: toastId, duration: 8000 },
+        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
+        { id: toastId, duration: 8000 }
       );
 
       // Update state
-      item.owner = buyer.toLowerCase();
+      collection.owner = buyer.toLowerCase();
       setIsOwner(true);
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
@@ -641,12 +729,14 @@ function NfaLand() {
     }
   };
 
-  // Handle payment with card
+  /* ======================== CARD PAYMENT ======================== */
   const handlePaymentCard = async (productId) => {
     if (!user?.id) {
-      toast.error("Please login first");
+      toast.error("❌ Please login first");
       return;
     }
+
+    const toastId = toast.loading("💳 Processing card payment...");
 
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
@@ -655,37 +745,19 @@ function NfaLand() {
       });
 
       if (res.data?.exist === "no") {
-        navigate("/offer", { state: { item } });
+        toast.success("✅ Payment initiated", { id: toastId });
+        navigate("/offer", { state: { item: collection } });
       } else {
-        toast.error("Already purchased");
+        toast.error("❌ Already purchased", { id: toastId });
       }
-    } catch {
-      toast.error("Payment failed");
+    } catch (err) {
+      console.error("❌ Card payment error:", err);
+      toast.error("❌ Payment failed", { id: toastId });
     }
   };
 
-  if (!item) return null;
-
-  // Determine button text and action
-  const isPlatformOwned = !item.owner || item.owner === "admin";
-
-  // Check if NFT is available for purchase (not minted yet OR has different owner)
-  const isAvailableForPurchase = () => {
-    // Not minted yet - can be purchased by anyone
-    if (!item.tokenId) return true;
-
-    // Platform owned - can be purchased
-    if (isPlatformOwned) return true;
-
-    // Listed on marketplace - can be purchased by non-owners
-    if (listingData?.active && !isOwner) return true;
-
-    // Has an owner but not the current user and not listed
-    // This handles user-created NFTs that haven't been listed yet
-    if (item.owner && !isOwner && !item.tokenId) return true;
-
-    return false;
-  };
+  /* ======================== BUTTON LOGIC ======================== */
+  const isPlatformOwned = !collection.owner || collection.owner === "admin";
 
   const getButtonAction = () => {
     if (loading) return { text: "⏳ Processing...", disabled: true };
@@ -706,8 +778,8 @@ function NfaLand() {
       };
     }
 
-    // If NFT is available for purchase and user is not the owner
-    if (!isOwner && isAvailableForPurchase()) {
+    // If user is not owner, and NFT is listed OR platform-owned, show Buy button
+    if (!isOwner && (listingData?.active || isPlatformOwned)) {
       return {
         text: "🛒 Buy Now",
         action: handleBuyNFT,
@@ -717,7 +789,7 @@ function NfaLand() {
     // If user is owner but not listed, allow them to list
     if (isOwner && !listingData?.active) {
       return {
-        text: " List Now",
+        text: "📝 List Now",
         action: handleCreateListing,
       };
     }
@@ -730,19 +802,14 @@ function NfaLand() {
       };
     }
 
-    // NFT is owned by someone else and not listed - cannot buy
-    if (!isOwner && item.tokenId && !listingData?.active) {
-      return {
-        text: "❌ Not Listed For Sale",
-        disabled: true,
-      };
-    }
-
     // Fallback
     return { text: "❌ Not Available", disabled: true };
   };
 
   const buttonConfig = getButtonAction();
+
+  /* ================================== UI ================================== */
+  if (!collection) return null;
 
   return (
     <div className="flex flex-col w-full mt-14 md:px-24 text-white">

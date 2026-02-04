@@ -22,7 +22,7 @@ function Buy1() {
   const location = useLocation();
 
   // Extract parent and subCollection properly
-  const { item, subCollection: passedSubCollection } = location.state || {};
+  const { item, subCollection: passedSubCollection, parentId } = location.state || {};
 
   // Determine which is parent and which is sub-collection
   let parentCollection, subCollection;
@@ -38,7 +38,7 @@ function Buy1() {
   } else if (item?.subCollection) {
     // If item has subCollection nested
     subCollection = item.subCollection;
-    parentCollection = item; // Might need to fetch parent separately
+    parentCollection = item;
   } else {
     // Fallback: treat item as the collection to display
     subCollection = item;
@@ -86,7 +86,7 @@ function Buy1() {
       if (window.ethereum) {
         window.ethereum.removeListener(
           "accountsChanged",
-          handleAccountsChanged,
+          handleAccountsChanged
         );
       }
     };
@@ -105,7 +105,7 @@ function Buy1() {
   /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
     try {
-      if (!window.ethereum || !item) return;
+      if (!window.ethereum || !collection) return;
 
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -115,26 +115,26 @@ function Buy1() {
         const wallet = accounts[0].toLowerCase();
         setConnectedWallet(wallet);
         console.log("✅ Connected wallet:", wallet);
-        console.log("📋 Item owner from DB:", item.owner);
+        console.log("📋 Collection owner from DB:", collection.owner);
 
         // Check BLOCKCHAIN ownership if tokenId exists
-        if (item.tokenId) {
+        if (collection.tokenId) {
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const nftContract = new ethers.Contract(
               NFT_ADDRESS,
               NFT_ABI,
-              provider,
+              provider
             );
-            const owner = await nftContract.ownerOf(item.tokenId);
+            const owner = await nftContract.ownerOf(collection.tokenId);
             const ownerLower = owner.toLowerCase();
 
             setOnChainOwner(ownerLower);
             console.log("⛓️ On-chain owner:", ownerLower);
 
-            if (item.owner !== ownerLower) {
-              console.log("🔄 Updating item.owner to match blockchain");
-              item.owner = ownerLower;
+            if (collection.owner !== ownerLower) {
+              console.log("🔄 Updating collection.owner to match blockchain");
+              collection.owner = ownerLower;
             }
 
             const ownerMatch = wallet === ownerLower;
@@ -142,8 +142,8 @@ function Buy1() {
             console.log("🔍 Is owner (blockchain check):", ownerMatch);
           } catch (err) {
             console.error("❌ Error checking on-chain owner:", err);
-            if (item.owner) {
-              const ownerMatch = wallet === item.owner.toLowerCase();
+            if (collection.owner) {
+              const ownerMatch = wallet === collection.owner.toLowerCase();
               setIsOwner(ownerMatch);
               console.log("🔍 Is owner (DB fallback):", ownerMatch);
             } else {
@@ -152,8 +152,8 @@ function Buy1() {
           }
         } else {
           // Not minted yet
-          if (item.owner) {
-            const ownerMatch = wallet === item.owner.toLowerCase();
+          if (collection.owner) {
+            const ownerMatch = wallet === collection.owner.toLowerCase();
             setIsOwner(ownerMatch);
             console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
           } else {
@@ -162,7 +162,7 @@ function Buy1() {
           }
         }
 
-        if (item.tokenId) {
+        if (collection.tokenId) {
           await checkListingStatus();
         }
       }
@@ -183,12 +183,12 @@ function Buy1() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        provider,
+        provider
       );
 
       const listing = await marketplace.getListing(
         NFT_ADDRESS,
-        collection.tokenId,
+        collection.tokenId
       );
 
       setListingData({
@@ -253,7 +253,7 @@ function Buy1() {
   };
 
   /* ========================== BACKEND MINT ========================== */
-  const mintNFTToWallet = async (buyerWallet) => {
+const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
       toast.error("❌ Invalid user or item data");
       return null;
@@ -330,7 +330,7 @@ function Buy1() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer,
+        signer
       );
 
       let tokenId = collection.tokenId;
@@ -388,7 +388,7 @@ function Buy1() {
           console.error("❌ Error getting owner:", err);
           if (retries > 1) {
             console.log(
-              `⏳ Retrying blockchain check... (${retries - 1} left)`,
+              `⏳ Retrying blockchain check... (${retries - 1} left)`
             );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
@@ -408,7 +408,7 @@ function Buy1() {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
         const approveTx = await nftContract.approve(
           MARKETPLACE_ADDRESS,
-          tokenId,
+          tokenId
         );
         await approveTx.wait();
         console.log("✅ Marketplace approved");
@@ -430,7 +430,7 @@ function Buy1() {
         NFT_ADDRESS,
         tokenId,
         priceWei,
-        { gasLimit: 300000 },
+        { gasLimit: 300000 }
       );
       await listTx.wait();
       console.log("✅ Listing created on blockchain");
@@ -445,9 +445,11 @@ function Buy1() {
         priceETH: collection.priceETH || 0.01,
       };
 
-      // Add parentId only if it exists
+      // Add parentId if available
       if (parentCollection?._id) {
         listingPayload.parentId = parentCollection._id;
+      } else if (parentId) {
+        listingPayload.parentId = parentId;
       }
 
       console.log("📤 Sending listing payload:", listingPayload);
@@ -457,7 +459,7 @@ function Buy1() {
         listingPayload,
         {
           headers: { Authorization: `Bearer ${token}` },
-        },
+        }
       );
 
       console.log("✅ Backend response:", response.data);
@@ -467,7 +469,7 @@ function Buy1() {
         {
           id: toastId,
           duration: 5000,
-        },
+        }
       );
 
       setListingData({
@@ -550,14 +552,14 @@ function Buy1() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer,
+        signer
       );
       const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
-      if (!item.tokenId) {
+      if (!collection.tokenId) {
         toast.loading("🛒 Processing purchase...", { id: toastId });
-        console.log("🆕 NFT not minted yet, minting to buyer...");
+        console.log("🆕 NFA not minted yet, minting to buyer...");
 
         const mintedTokenId = await mintNFTToWallet(buyer);
 
@@ -568,8 +570,8 @@ function Buy1() {
         }
 
         // Update state
-        item.tokenId = mintedTokenId;
-        item.owner = buyer.toLowerCase();
+        collection.tokenId = mintedTokenId;
+        collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
         console.log("✅ NFA prepared, Token ID:", mintedTokenId);
@@ -579,8 +581,8 @@ function Buy1() {
         await new Promise((r) => setTimeout(r, 1500));
 
         toast.success(
-          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${item.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
-          { id: toastId, duration: 8000 },
+          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
+          { id: toastId, duration: 8000 }
         );
 
         setLoading(false);
@@ -598,7 +600,7 @@ function Buy1() {
 
       let currentOwner;
       try {
-        currentOwner = await nftContract.ownerOf(item.tokenId);
+        currentOwner = await nftContract.ownerOf(collection.tokenId);
         currentOwner = currentOwner.toLowerCase();
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
@@ -617,7 +619,7 @@ function Buy1() {
 
       // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(NFT_ADDRESS, item.tokenId);
+      const listing = await marketplace.getListing(NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -632,7 +634,7 @@ function Buy1() {
       if (balance < price) {
         toast.error(
           `❌ Insufficient ETH\n\nNeed: ${ethers.formatEther(price)} ETH\nYou have: ${ethers.formatEther(balance)} ETH`,
-          { id: toastId, duration: 6000 },
+          { id: toastId, duration: 6000 }
         );
         setLoading(false);
         return;
@@ -642,7 +644,7 @@ function Buy1() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, item.tokenId, {
+      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, collection.tokenId, {
         value: price,
         gasLimit: 400000,
       });
@@ -653,34 +655,50 @@ function Buy1() {
       const receipt = await buyTx.wait();
       console.log("✅ Transaction confirmed:", receipt.hash);
 
-      // Record sale
+      // Record sale in backend
       toast.loading("💾 Recording purchase...", { id: toastId });
       try {
+        const salePayload = {
+          tokenId: collection.tokenId,
+          buyer: buyer.toLowerCase(),
+          seller: listing[0].toLowerCase(),
+          priceETH: ethers.formatEther(price),
+          txHash: receipt.hash,
+        };
+
+        // Add parent/sub-collection IDs if available
+        if (parentCollection?._id) {
+          salePayload.parentId = parentCollection._id;
+        } else if (parentId) {
+          salePayload.parentId = parentId;
+        }
+        
+        if (collection._id) {
+          salePayload.subCollectionId = collection._id;
+        }
+
+        console.log("📤 Recording sale with payload:", salePayload);
+
         await axios.post(
-          `${BACKEND_BASE_URL}/api/v1/nft/sale/record`,
-          {
-            tokenId: item.tokenId,
-            buyer: buyer.toLowerCase(),
-            seller: listing[0].toLowerCase(),
-            priceETH: ethers.formatEther(price),
-            txHash: receipt.hash,
-          },
+          `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/sale/record`,
+          salePayload,
           {
             headers: { Authorization: `Bearer ${token}` },
-          },
+          }
         );
         console.log("✅ Sale recorded in backend");
       } catch (recordErr) {
         console.error("⚠️ Error recording sale:", recordErr);
+        console.error("⚠️ Error response:", recordErr.response?.data);
       }
 
       toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${item.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
-        { id: toastId, duration: 8000 },
+        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
+        { id: toastId, duration: 8000 }
       );
 
       // Update state
-      item.owner = buyer.toLowerCase();
+      collection.owner = buyer.toLowerCase();
       setIsOwner(true);
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
@@ -727,7 +745,7 @@ function Buy1() {
 
       if (res.data?.exist === "no") {
         toast.success("✅ Payment initiated", { id: toastId });
-        navigate("/offer", { state: { item } });
+        navigate("/offer", { state: { item: collection } });
       } else {
         toast.error("❌ Already purchased", { id: toastId });
       }
@@ -738,7 +756,7 @@ function Buy1() {
   };
 
   /* ======================== BUTTON LOGIC ======================== */
-  const isPlatformOwned = !item.owner || item.owner === "admin";
+  const isPlatformOwned = !collection.owner || collection.owner === "admin";
 
   const getButtonAction = () => {
     if (loading) return { text: "⏳ Processing...", disabled: true };
@@ -770,7 +788,7 @@ function Buy1() {
     // If user is owner but not listed, allow them to list
     if (isOwner && !listingData?.active) {
       return {
-        text: " List Now",
+        text: "📝 List Now",
         action: handleCreateListing,
       };
     }
@@ -790,7 +808,7 @@ function Buy1() {
   const buttonConfig = getButtonAction();
 
   /* ================================== UI ================================== */
-  if (!item) return null;
+  if (!collection) return null;
 
   return (
     <div className="flex flex-col w-full mt-14 md:px-24 text-white">
@@ -828,7 +846,7 @@ function Buy1() {
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{collection?.name}</h1>
-            <p>{collection?.chain} 🔥</p>
+            <p>{collection?.symbol || "NFA"} 🔥</p>
           </div>
 
           {/* Status badges */}
@@ -839,17 +857,13 @@ function Buy1() {
                 {connectedWallet.substring(38)}
               </span>
             )}
-            {/* {item.tokenId && (
-              <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
-                Minted #{item.tokenId}
-              </span>
-            )} */}
+
             {listingData?.active && (
               <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">
                 Listed
               </span>
             )}
-            {isOwner && item.tokenId && (
+            {isOwner && collection.tokenId && (
               <span className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">
                 You Own This
               </span>
@@ -861,21 +875,21 @@ function Buy1() {
               <span>Price</span>
               <span
                 className="truncate max-w-[150px]"
-                title={onChainOwner || item.owner || collection?.owner}
+                title={onChainOwner || collection.owner}
               >
                 Owner:{" "}
-                {onChainOwner || item.owner
-                  ? `${(onChainOwner || item.owner).substring(0, 6)}...${(
-                      onChainOwner || item.owner
+                {onChainOwner || collection.owner
+                  ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(
+                      onChainOwner || collection.owner
                     ).substring(38)}`
-                  : collection?.owner}
+                  : "Platform"}
               </span>
             </div>
 
             <h2 className="text-xl mt-3">
               {listingData?.active
                 ? `${ethers.formatEther(listingData.price)} ETH`
-                : `${item.priceETH || 0.01} ETH`}
+                : `${collection.priceETH || 0.01} ETH`}
             </h2>
 
             <div className="flex justify-end mt-3">
@@ -894,7 +908,7 @@ function Buy1() {
               </button>
 
               <button
-                onClick={() => handlePaymentCard(item._id)}
+                onClick={() => handlePaymentCard(collection._id)}
                 disabled={loading}
               >
                 <CustomButton text="Buy With Card" />
@@ -903,7 +917,7 @@ function Buy1() {
 
             <Link
               to="/payment"
-              state={{ item }}
+              state={{ item: collection }}
               className="flex items-center gap-2 mt-4 hover:text-blue-400"
             >
               Make Offer <FiEdit2 />
@@ -932,15 +946,15 @@ function Buy1() {
             <div className="mt-4 space-y-2">
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>List Price</span>
-                <span>0.01 ETH</span>
+                <span>{collection.priceETH || 0.01} ETH</span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Platform Fee (10%)</span>
-                <span>0.001 ETH</span>
+                <span>{((collection.priceETH || 0.01) * 0.1).toFixed(4)} ETH</span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
                 <span>Total</span>
-                <span>0.011 ETH</span>
+                <span>{((collection.priceETH || 0.01) * 1.1).toFixed(4)} ETH</span>
               </div>
             </div>
             <div className="flex justify-between mt-6">
@@ -991,7 +1005,7 @@ function Buy1() {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">Price</p>
-                <p className="text-white text-sm">0.01 ETH</p>
+                <p className="text-white text-sm">{collection.priceETH || 0.01} ETH</p>
               </div>
             </div>
             <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">

@@ -36,6 +36,10 @@ import {
   getNFTsByWallet,
   getNFTsWithSubCollections,
   createSubCollectionListing,
+  recordSubCollectionSale,
+  cancelSubCollectionListing,
+  getOwnedSubCollectionsOnly,
+  getListedSubCollections,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -127,6 +131,8 @@ NFTRouter.delete(
   deleteCollection
 );
 
+NFTRouter.get("/user/owned-subs-only/:walletAddress", getOwnedSubCollectionsOnly);
+
 NFTRouter.get("/dashboard/total-counts", getTotalCounts);
 
 NFTRouter.put("/admin/status/:id", updateNFTStatus);
@@ -170,6 +176,17 @@ NFTRouter.post("/listing/create", authMiddleware(), createListing);
 NFTRouter.post("/sale/record", authMiddleware(), recordOnchainSale);
 
 NFTRouter.post("/listing/cancel", authMiddleware(), cancelListing);
+NFTRouter.post(
+  "/sub-collection/listing/cancel",
+  authMiddleware(),
+  cancelSubCollectionListing
+);
 NFTRouter.post("/sub-collection/listing/create", createSubCollectionListing);
+NFTRouter.post("/sub-collection/sale/record", authMiddleware(), recordSubCollectionSale);
+NFTRouter.get(
+  "/user/listed-subs/:walletAddress",
+  authMiddleware(),
+  getListedSubCollections
+);
 
 export default NFTRouter;

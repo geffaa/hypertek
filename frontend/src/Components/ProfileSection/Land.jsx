@@ -41,38 +41,28 @@ function Land() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [showMobileList, setShowMobileList] = useState({});
   const navigate = useNavigate();
-const extractMintedNFTs = (data) => {
+  const extractMintedNFTs = (data) => {
     console.log("🔍 Raw data received:", data);
 
-    if (!Array.isArray(data)) {
-      console.log("❌ Data is not an array");
-      return [];
-    }
+    if (!Array.isArray(data)) return [];
 
     const extracted = [];
 
     data.forEach((item, index) => {
-      console.log(`📦 Processing item ${index}:`, item);
+      // Only characters category
+      if (item.category !== "land") return;
 
-      // ✅ ONLY characters category
-      if (item.category !== "land") {
-        console.log(`⏭ Skipped (not characters):`, item.category);
-        return;
-      }
-
-      // Check if parent collection
+      // If parent collection with subCollections
       if (item.isParentCollection && Array.isArray(item.subCollections)) {
-        console.log(
-          `✅ Characters collection found with ${item.subCollections.length} sub NFTs`,
-        );
-
-        const ownedSubNFTs = item.subCollections.filter((subNft) => {
+        const ownedUnlistedSubs = item.subCollections.filter((subNft) => {
           const subOwner = subNft.owner?.toLowerCase();
           const walletLower = connectedWallet?.toLowerCase();
-          return subOwner === walletLower;
+
+          // ✅ Must belong to current wallet AND not listed
+          return subOwner === walletLower && !subNft.listed;
         });
 
-        ownedSubNFTs.forEach((subNft) => {
+        ownedUnlistedSubs.forEach((subNft) => {
           extracted.push({
             _id: subNft._id,
             parentId: item._id,
@@ -88,7 +78,7 @@ const extractMintedNFTs = (data) => {
             tokenURI: subNft.tokenURI,
             createdAt: subNft.createdAt,
 
-            // parent metadata
+            // Parent metadata
             category: item.category,
             chain: "ETH",
 
@@ -134,7 +124,6 @@ const extractMintedNFTs = (data) => {
       setConnectedWallet(null);
       setLandData([]);
       setMarketData([]);
-
     }
   };
 
@@ -170,7 +159,7 @@ const extractMintedNFTs = (data) => {
   };
 
   /* ================= FETCH OWNED NFTS (SINGLE SOURCE) ================= */
-   const fetchOwnedNFTs = async (wallet) => {
+  const fetchOwnedNFTs = async (wallet) => {
     try {
       setLoading(true);
 
@@ -246,7 +235,7 @@ const extractMintedNFTs = (data) => {
       return;
     }
 
-    setConnectingWallet(prev => ({ ...prev, [itemId]: true }));
+    setConnectingWallet((prev) => ({ ...prev, [itemId]: true }));
 
     try {
       // Force MetaMask popup every time
@@ -265,18 +254,16 @@ const extractMintedNFTs = (data) => {
       setConnectedWallet(wallet);
 
       // Mark this item as interacted
-      setUserHasInteracted(prev => ({
+      setUserHasInteracted((prev) => ({
         ...prev,
         [itemId]: true,
       }));
 
       // Update the specific item's state
-      setLandData(prev => 
-        prev.map(item => 
-          item._id === itemId 
-            ? { ...item, hasInteracted: true } 
-            : item
-        )
+      setLandData((prev) =>
+        prev.map((item) =>
+          item._id === itemId ? { ...item, hasInteracted: true } : item,
+        ),
       );
 
       // Fetch NFTs for the connected wallet
@@ -287,7 +274,7 @@ const extractMintedNFTs = (data) => {
       if (err.code === 4001) toast.error("Connection cancelled");
       else toast.error("Wallet connection failed");
     } finally {
-      setConnectingWallet(prev => ({ ...prev, [itemId]: false }));
+      setConnectingWallet((prev) => ({ ...prev, [itemId]: false }));
     }
   };
 
@@ -514,7 +501,6 @@ const extractMintedNFTs = (data) => {
 
   /* ================= FILTER LOGIC ================= */
   const filteredLandCollections = extractMintedNFTs(marketData);
-  
 
   return (
     <>
