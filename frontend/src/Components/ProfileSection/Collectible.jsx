@@ -36,67 +36,58 @@ function MarketPlace() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
 
   /* ================= GET MINTED SUB COLLECTION NFTS ================= */
-  const extractMintedNFTs = (data) => {
-    console.log("🔍 Raw data received:", data);
+ const extractMintedNFTs = (data) => {
+  console.log("🔍 Raw data received:", data);
 
-    if (!Array.isArray(data)) {
-      console.log("❌ Data is not an array");
-      return [];
+  if (!Array.isArray(data)) return [];
+
+  const extracted = [];
+
+  data.forEach((item, index) => {
+    // Only characters category
+    if (item.category !== "characters") return;
+
+    // If parent collection with subCollections
+    if (item.isParentCollection && Array.isArray(item.subCollections)) {
+      const ownedUnlistedSubs = item.subCollections.filter((subNft) => {
+        const subOwner = subNft.owner?.toLowerCase();
+        const walletLower = connectedWallet?.toLowerCase();
+
+        // ✅ Must belong to current wallet AND not listed
+        return subOwner === walletLower && !subNft.listed;
+      });
+
+      ownedUnlistedSubs.forEach((subNft) => {
+        extracted.push({
+          _id: subNft._id,
+          parentId: item._id,
+          name: subNft.name,
+          symbol: subNft.symbol,
+          image: subNft.image,
+          description: subNft.description,
+          owner: subNft.owner,
+          listed: subNft.listed || false,
+          priceETH: subNft.priceETH,
+          isFirstSale: subNft.isFirstSale,
+          tokenId: subNft.tokenId,
+          tokenURI: subNft.tokenURI,
+          createdAt: subNft.createdAt,
+
+          // Parent metadata
+          category: item.category,
+          chain: "ETH",
+
+          isSubCollection: true,
+          userOwns: true,
+        });
+      });
     }
+  });
 
-    const extracted = [];
+  console.log("✅ Characters NFTs extracted:", extracted.length);
+  return extracted;
+};
 
-    data.forEach((item, index) => {
-      console.log(`📦 Processing item ${index}:`, item);
-
-      // ✅ ONLY characters category
-      if (item.category !== "characters") {
-        console.log(`⏭ Skipped (not characters):`, item.category);
-        return;
-      }
-
-      // Check if parent collection
-      if (item.isParentCollection && Array.isArray(item.subCollections)) {
-        console.log(
-          `✅ Characters collection found with ${item.subCollections.length} sub NFTs`,
-        );
-
-        const ownedSubNFTs = item.subCollections.filter((subNft) => {
-          const subOwner = subNft.owner?.toLowerCase();
-          const walletLower = connectedWallet?.toLowerCase();
-          return subOwner === walletLower;
-        });
-
-        ownedSubNFTs.forEach((subNft) => {
-          extracted.push({
-            _id: subNft._id,
-            parentId: item._id,
-            name: subNft.name,
-            symbol: subNft.symbol,
-            image: subNft.image,
-            description: subNft.description,
-            owner: subNft.owner,
-            listed: subNft.listed || false,
-            priceETH: subNft.priceETH,
-            isFirstSale: subNft.isFirstSale,
-            tokenId: subNft.tokenId,
-            tokenURI: subNft.tokenURI,
-            createdAt: subNft.createdAt,
-
-            // parent metadata
-            category: item.category,
-            chain: "ETH",
-
-            isSubCollection: true,
-            userOwns: true,
-          });
-        });
-      }
-    });
-
-    console.log("✅ Characters NFTs extracted:", extracted.length);
-    return extracted;
-  };
 
   /* ================= PROFILE ================= */
   useEffect(() => {

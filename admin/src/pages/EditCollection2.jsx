@@ -1,5 +1,6 @@
-import React, { useState , useRef, } from "react";
-import { useParams,  useLocation,  useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import axios from "axios";
@@ -8,50 +9,85 @@ import { Dashboard_Base_Url } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function EditCollection2() {
-    const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-  // Add this near your other useState declarations
-const [updating, setUpdating] = useState(false);
-  // inside component
-const fileInputRef = useRef(null);
 
-  // Get the collection object passed via state
+  // If editing existing collection
   const collection = location.state?.collection;
 
+  // If creating sub-collection
+  const parentCollectionId = location.state?.parentCollectionId || null;
+  const isCreatingSubCollection =
+    location.state?.isCreatingSubCollection || false;
+  const category = location.state?.category || "";
+
+  // Add this near your other useState declarations
+  const [updating, setUpdating] = useState(false);
+  // inside component
+  const fileInputRef = useRef(null);
+  // Sub-collections state
+  const [subCollections, setSubCollections] = useState([]);
+  const [loadingSubs, setLoadingSubs] = useState(false);
+
   console.log("Received collection:", collection);
+  console.log("Parent Collection ID:", parentCollectionId);
+  console.log("Is Creating Sub-Collection:", isCreatingSubCollection);
+  console.log("Category:", category);
 
+  useEffect(() => {
+    if (!collection?._id || !Dashboard_Base_Url) return;
 
+    const fetchSubCollections = async () => {
+      try {
+        setLoadingSubs(true);
 
+        const response = await axios.get(
+          `${Dashboard_Base_Url}/v1/nft/parent-collection/${collection._id}/sub-collections`,
+        );
 
+        if (response.data.success) {
+          setSubCollections(response.data.subCollections || []);
+        } else {
+          setSubCollections([]);
+        }
+      } catch (error) {
+        console.error("Error fetching sub-collections:", error);
+        toast.error("Failed to load sub collections");
+      } finally {
+        setLoadingSubs(false);
+      }
+    };
 
+    fetchSubCollections();
+  }, [collection]);
 
-  const [name, setName] = useState(collection.name);
-const [symbol, setSymbol] = useState(collection.collectionData.symbol);
-const [priceETH, setPriceETH] = useState(
-  collection?.collectionData?.priceETH || ""
-);
+  const [selectedImage, setSelectedImage] = useState(
+    collection?.collection?.image || null,
+  );
+  const [name, setName] = useState(collection?.collection?.name || "");
+  const [symbol, setSymbol] = useState(collection?.collection?.symbol || "");
+  const [chain, setChain] = useState(collection?.collection?.chain || "");
+  const [priceETH, setPriceETH] = useState(collection?.priceETH || 0);
+  const [royaltyPercent, setRoyaltyPercent] = useState(
+    collection?.collection?.royaltyPercent || 5,
+  );
+  const [royaltyWallet, setRoyaltyWallet] = useState(
+    collection?.collection?.royaltyWallet || "",
+  );
+  const [supply, setSupply] = useState(collection?.collection?.supply || 1);
+  const [collectionType, setCollectionType] = useState(
+    collection?.collection?.Type || "",
+  );
 
-
-  const [selectedImage, setSelectedImage] = useState(null);
-const [chain, setChain] = useState(collection.collectionData.chain);
-const [royaltyPercent, setRoyaltyPercent] = useState(collection.collectionData.royaltyPercent);
-const [supply, setSupply] = useState( collection.collectionData.supply);
-const [royaltyWallet, setRoyaltyWallet] = useState(collection.collectionData.royaltyWallet);
-const [collectionType, setCollectionType] = useState(
-  collection.collectionData.Type || ""
-);
-
-
-
-  if (!collection) {
-    return <div className="text-white">No collection data found!</div>;
+  // ✅ Updated: Show appropriate message when creating new sub-collection
+  if (!collection && !isCreatingSubCollection) {
+    return (
+      <div className="text-white p-8">
+        No collection data found! Please select a collection to edit or create a
+        new one.
+      </div>
+    );
   }
-
-
-
-
-
-
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -78,64 +114,123 @@ const [collectionType, setCollectionType] = useState(
     event.preventDefault();
   };
 
- const handleNavigate = () => {
-  navigate(-1);
-};
+  const handleNavigate = () => {
+    navigate(-1);
+  };
 
-
-/// update the user data 
-const handleUpdate = async () => {
+  // ✅ ALTERNATIVE: Try sending as JSON with base64 image
+const handleSubmit = async () => {
   if (!Dashboard_Base_Url) {
     toast.error("Base URL is required");
     return;
   }
-   setUpdating(true); // Start loading
+
+  if (!name || name.trim() === "") {
+    toast.error("Name is required");
+    return;
+  }
+  if (!symbol || symbol.trim() === "") {
+    toast.error("Symbol is required");
+    return;
+  }
+
+  setUpdating(true);
 
   try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("symbol", symbol);
-    formData.append("chain", chain);
-    formData.append("royaltyPercent", royaltyPercent);
-    formData.append("royaltyWallet", royaltyWallet);
-    formData.append("supply", supply);
-    formData.append("priceETH", priceETH);
-    formData.append("owner", "admin");
-    formData.append("creator", "admin");
-formData.append("collectionType", collectionType); // use correct key
+    let response;
 
+    if (collection && collection._id && parentCollectionId) {
+      // Editing existing sub-collection
+      console.log("Updating sub-collection:", collection._id);
 
-    if (selectedImage) {
-      // Convert base64 to blob before appending
-      const blob = await fetch(selectedImage).then(res => res.blob());
-      formData.append("image", blob, "image.png");
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("symbol", symbol);
+      if (chain) formData.append("chain", chain);
+      if (royaltyPercent) formData.append("royaltyPercent", royaltyPercent);
+      if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
+      if (supply) formData.append("supply", supply);
+      if (priceETH) formData.append("price", priceETH);
+      if (collectionType) formData.append("Type", collectionType);
+
+      if (
+        selectedImage &&
+        typeof selectedImage === "string" &&
+        selectedImage.startsWith("data:")
+      ) {
+        const blob = await fetch(selectedImage).then((res) => res.blob());
+        formData.append("image", blob, "image.png");
+      }
+
+      response = await axios.put(
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentCollectionId}/sub-collection/${collection._id}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      toast.success("Sub-collection updated successfully!");
+    } else if (parentCollectionId) {
+      // Creating new sub-collection
+      console.log("Creating new sub-collection under parent:", parentCollectionId);
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("symbol", symbol);
+      if (chain) formData.append("chain", chain);
+      if (royaltyPercent) formData.append("royaltyPercent", royaltyPercent);
+      if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
+      if (supply) formData.append("supply", supply);
+      if (priceETH) formData.append("price", priceETH);
+      if (collectionType) formData.append("Type", collectionType);
+      formData.append("category", category || "characters");
+      formData.append("owner", "admin");
+      formData.append("creator", "admin");
+
+      if (
+        selectedImage &&
+        typeof selectedImage === "string" &&
+        selectedImage.startsWith("data:")
+      ) {
+        const blob = await fetch(selectedImage).then((res) => res.blob());
+        formData.append("image", blob, "image.png");
+      }
+
+      response = await axios.post(
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentCollectionId}/sub-collection`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      toast.success("Sub-collection created successfully!");
+    } else {
+      toast.error("No parent collection ID provided");
+      setUpdating(false);
+      return;
     }
 
-    const collectionId = collection._id || collection.id;
-    const response = await axios.put(
-      `${Dashboard_Base_Url}/v1/nft/collection/update/${collectionId}`, // remove extra /api if needed
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+    console.log("API Response:", response.data);
 
-    toast.success("Collection updated successfully!");
-    console.log("your update response are:", response);
-    navigate("/collections");
+    setTimeout(() => navigate(-1), 1000);
   } catch (error) {
-    toast.error(error.response?.data?.message || "Update failed!");
-  }
-   finally {
-    setUpdating(false); // Stop loading regardless of success/error
+    console.error("Error in handleSubmit:", error);
+    const errorMessage =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.message ||
+      "Failed to submit sub-collection";
+    toast.error(errorMessage);
+  } finally {
+    setUpdating(false);
   }
 };
 
-// Place this right before your main return statement
-if (updating) {
-  return <FullScreenLoader />;
-}
+
+  // Place this right before your main return statement
+  if (updating) {
+    return <FullScreenLoader />;
+  }
   return (
     <div className="p-8 bg-black h-[980px] py-12  flex flex-col gap-6">
-      
       <div
         style={{
           top: `120px`,
@@ -174,16 +269,13 @@ if (updating) {
           letterSpacing: "0%",
         }}
       >
-        Edit Collection
+        {collection ? "Edit Collection" : "Add New Character"}
       </h1>
 
       <div className="flex justify-between items-center">
         <div>
           {/* Name Field */}
-          <div
-            className="rounded-md p-4 flex w-[300px] flex-col gap-2 relative z-50"
-            
-          >
+          <div className="rounded-md p-4 flex w-[300px] flex-col gap-2 relative z-50">
             <label
               htmlFor="name"
               className="font-inter font-normal text-[18px] text-white"
@@ -194,11 +286,10 @@ if (updating) {
             <input
               type="text"
               id="name"
-                value={name}
-  onChange={(e) => setName(e.target.value)}
-                placeholder={collection.name}
-
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 focus:outline-none"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={collection?.name || "Enter character name"}
+              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 focus:outline-none bg-transparent"
               style={{
                 width: "400px",
                 height: "40px",
@@ -209,98 +300,98 @@ if (updating) {
           </div>
 
           {/* Description Field */}
-          <div className="rounded-md p-4 flex flex-col gap-2 relative z-50" style={{ width: "434px" }}>
-    <label
-      htmlFor="description"
-      className="font-inter font-normal text-[18px] text-white"
-      style={{ lineHeight: "22px", letterSpacing: "0%" }}
-    >
-      Description
-    </label>
-    <textarea
-      id="description"
-      placeholder="Description"
-      className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full h-[93px] focus:outline-none resize-none bg-transparent"
-      style={{
-        width: "400px",
-        borderRadius: "4px",
-        letterSpacing: "0%",
-      }}
-    />
-  </div>
+          <div
+            className="rounded-md p-4 flex flex-col gap-2 relative z-50"
+            style={{ width: "434px" }}
+          >
+            <label
+              htmlFor="description"
+              className="font-inter font-normal text-[18px] text-white"
+              style={{ lineHeight: "22px", letterSpacing: "0%" }}
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              placeholder="Description"
+              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full h-[93px] focus:outline-none resize-none bg-transparent"
+              style={{
+                width: "400px",
+                borderRadius: "4px",
+                letterSpacing: "0%",
+              }}
+            />
+          </div>
 
+          {/* Price Field */}
+          <div
+            className="rounded-md p-4 flex flex-col gap-2"
+            style={{ width: "405px" }}
+          >
+            <label
+              htmlFor="priceETH"
+              className="font-inter font-normal text-[18px] text-white"
+              style={{ lineHeight: "22px", letterSpacing: "0%" }}
+            >
+              Price
+            </label>
 
-         {/* Price Field */}
-<div
-  className="rounded-md p-4 flex flex-col gap-2"
-  style={{ width: "405px" }}
->
-  <label
-    htmlFor="priceETH"
-    className="font-inter font-normal text-[18px] text-white"
-    style={{ lineHeight: "22px", letterSpacing: "0%" }}
-  >
-    Price
-  </label>
-
-  <input
-    type="number"
-    id="priceETH"
-    placeholder=""
-    min="0"
-    step="0.0001"
-    value={priceETH}
-    onChange={(e) => setPriceETH(e.target.value)}
-    className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
-    style={{
-      width: "200px",
-      height: "40px",
-      borderRadius: "4px",
-      letterSpacing: "0%",
-    }}
-  />
-</div>
-
+            <input
+              type="number"
+              id="priceETH"
+              placeholder="0.0000"
+              min="0"
+              step="0.0001"
+              value={priceETH}
+              onChange={(e) => setPriceETH(e.target.value)}
+              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
+              style={{
+                width: "200px",
+                height: "40px",
+                borderRadius: "4px",
+                letterSpacing: "0%",
+              }}
+            />
+          </div>
         </div>
 
         {/* right side  */}
-   <div
-  className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 rounded-md cursor-pointer"
-  style={{
-    width: "324px",
-    height: "312px",
-    borderStyle: "dashed",
-    position: "relative",
-  }}
-  onDrop={handleDrop}
-  onDragOver={handleDragOver}
-  onClick={() => fileInputRef.current?.click()}   // <-- trigger file input
->
-  {selectedImage ? (
-    <img
-      src={selectedImage}
-      alt="Preview"
-      className="max-w-full max-h-full rounded-md"
-    />
-  ) : (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
-      <span className="text-white font-semibold text-center">
-        Click to upload or drag and drop
-      </span>
-    </div>
-  )}
+        <div
+          className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 rounded-md cursor-pointer"
+          style={{
+            width: "324px",
+            height: "312px",
+            borderStyle: "dashed",
+            position: "relative",
+          }}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={() => fileInputRef.current?.click()} // <-- trigger file input
+        >
+          {selectedImage ? (
+            <img
+              src={selectedImage}
+              alt="Preview"
+              className="max-w-full max-h-full rounded-md"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-2">
+              <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
+              <span className="text-white font-semibold text-center">
+                Click to upload or drag and drop
+              </span>
+            </div>
+          )}
 
-  {/* Hidden file input */}
-  <input
-    type="file"
-    accept="image/*"
-    ref={fileInputRef}           // <-- assign ref
-    onChange={handleFileChange}
-    className="absolute w-full h-full opacity-0 cursor-pointer pointer-events-none"
-  />
-</div>
-
+          {/* Hidden file input */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef} // <-- assign ref
+            onChange={handleFileChange}
+            className="absolute w-full h-full opacity-0 cursor-pointer pointer-events-none"
+          />
+        </div>
       </div>
 
       <div className="w-full flex justify-between px-12 items-center pt-24">
@@ -334,7 +425,8 @@ if (updating) {
             Back
           </span>
         </button>
-        <button onClick={handleUpdate}
+        <button
+          onClick={handleSubmit}
           className="flex items-center justify-center rounded-[6px] px-4 py-2"
           style={{
             width: "190px",
@@ -360,7 +452,7 @@ if (updating) {
               color: "#FFFFFF",
             }}
           >
-            Save
+            {collection ? "Update Collection" : "Add to Collection"}
           </span>
         </button>
       </div>

@@ -22,7 +22,7 @@ import { BACKEND_BASE_URL } from "../../Config";
 function UserListings() {
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
-  
+
   const [userData, setUserData] = useState({});
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,11 +64,11 @@ function UserListings() {
         setLoading(false);
         return;
       }
-      
-      const accounts = await window.ethereum.request({ 
-        method: 'eth_requestAccounts' 
+
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
       });
-      
+
       if (accounts.length > 0) {
         setConnectedWallet(accounts[0].toLowerCase());
         console.log("✅ Wallet connected:", accounts[0].toLowerCase());
@@ -93,45 +93,40 @@ function UserListings() {
   const fetchUserListings = async () => {
     try {
       setLoading(true);
-      
-      if (!connectedWallet) {
-        console.log("❌ No wallet connected");
-        setLoading(false);
-        return;
-      }
-
-      console.log("📥 Fetching listings for:", connectedWallet);
 
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/owner?owner=${connectedWallet}`,
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${connectedWallet}`,
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      console.log("📦 Total NFTs fetched:", res.data.nfts?.length || 0);
-      console.log("📦 All NFTs:", res.data.nfts);
+      console.log("ALL DATA:", res.data.nfts);
 
-      const listedNFTs = res.data.nfts.filter(nft => nft.listed === true);
-      console.log("✅ Listed NFTs:", listedNFTs.length);
-      console.log("✅ Listed data:", listedNFTs);
-      
+      // ✅ Extract listed sub NFTs
+      const listedNFTs = res.data.nfts.flatMap(
+        (parent) =>
+          parent.subCollections
+            ?.filter((sub) => sub.listed === true)
+            .map((sub) => ({
+              ...sub,
+              parentId: parent._id,
+              collection: parent.collection, // so UI keeps working
+            })) || [],
+      );
+
+      console.log("🔥 Listed sub NFTs:", listedNFTs);
+
       setListings(listedNFTs);
-      
     } catch (err) {
-      console.error("❌ Error fetching listings:", err);
-      console.error("Error details:", err.response?.data);
-      toast.error(err.response?.data?.error || "Failed to load listings");
+      console.error(err);
+      toast.error("Failed to load listings");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCheckboxChange = (id) => {
-    setSelectedItems(prev => 
-      prev.includes(id) 
-        ? prev.filter(item => item !== id)
-        : [...prev, id]
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
@@ -182,11 +177,11 @@ function UserListings() {
       const marketplace = new ethers.Contract(
         MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
-        signer
+        signer,
       );
 
-      const selectedListings = listings.filter(item => 
-        selectedItems.includes(item._id)
+      const selectedListings = listings.filter((item) =>
+        selectedItems.includes(item._id),
       );
 
       let successCount = 0;
@@ -194,31 +189,32 @@ function UserListings() {
 
       for (const listing of selectedListings) {
         try {
-          toast.loading(`Cancelling Token #${listing.tokenId}...`, { id: toastId });
-          
+          toast.loading(`Cancelling Token #${listing.tokenId}...`, {
+            id: toastId,
+          });
+
           // Cancel on blockchain
           const tx = await marketplace.cancelListing(
             NFT_ADDRESS,
             listing.tokenId,
-            { gasLimit: 200000 }
+            { gasLimit: 200000 },
           );
-          
+
           await tx.wait();
-          
+
           // Update backend
           await axios.post(
-            `${BACKEND_BASE_URL}/api/v1/nft/listing/cancel`,
+            `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
             {
-              nftId: listing._id,
-              tokenId: listing.tokenId
+              nftId: listing.parentId, // ✅ FIXED
+              tokenId: listing.tokenId,
             },
             {
-              headers: { Authorization: `Bearer ${token}` }
-            }
+              headers: { Authorization: `Bearer ${token}` },
+            },
           );
 
           successCount++;
-
         } catch (err) {
           console.error(`Failed to cancel token ${listing.tokenId}:`, err);
           failCount++;
@@ -226,20 +222,21 @@ function UserListings() {
       }
 
       if (successCount > 0) {
-        toast.success(
-          `✅ Cancelled ${successCount} listing(s)!`,
-          { id: toastId, duration: 5000 }
-        );
+        toast.success(`✅ Cancelled ${successCount} listing(s)!`, {
+          id: toastId,
+          duration: 5000,
+        });
       }
 
       if (failCount > 0) {
-        toast.error(`❌ Failed to cancel ${failCount} listing(s)`, { duration: 5000 });
+        toast.error(`❌ Failed to cancel ${failCount} listing(s)`, {
+          duration: 5000,
+        });
       }
 
       setShowModal(false);
       setSelectedItems([]);
       await fetchUserListings();
-
     } catch (err) {
       console.error("Cancel error:", err);
       let msg = "Failed to cancel listings";
@@ -253,8 +250,13 @@ function UserListings() {
   };
 
   const totalSelected = selectedItems.length;
-  const selectedListings = listings.filter(item => selectedItems.includes(item._id));
-  const totalPrice = selectedListings.reduce((sum, item) => sum + (item.priceETH || 0), 0);
+  const selectedListings = listings.filter((item) =>
+    selectedItems.includes(item._id),
+  );
+  const totalPrice = selectedListings.reduce(
+    (sum, item) => sum + (item.priceETH || 0),
+    0,
+  );
 
   return (
     <div className="bg-transparent min-h-screen">
@@ -289,12 +291,12 @@ function UserListings() {
 
                 <div className="mt-3 text-left text-white">
                   <h2 className="text-base sm:text-lg md:text-xl font-semibold">
-                    {userData.FullName?.replace(/[0-9]/g, "") || 
-                     userData.Email?.split("@")[0].replace(/[0-9]/g, "") || 
-                     "Guest"}
+                    {userData.FullName?.replace(/[0-9]/g, "") ||
+                      userData.Email?.split("@")[0].replace(/[0-9]/g, "") ||
+                      "Guest"}
                   </h2>
                   <p className="text-xs sm:text-sm text-gray-400 break-words">
-                    {connectedWallet 
+                    {connectedWallet
                       ? `${connectedWallet.substring(0, 6)}...${connectedWallet.substring(38)}`
                       : "Not connected"}
                   </p>
@@ -314,9 +316,7 @@ function UserListings() {
 
       {/* Listings Section */}
       <section className="mx-auto w-full max-w-[1400px] flex flex-col gap-6 lg:gap-8 mb-4 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
-        <div className="flex justify-between items-center">
-         
-        </div>
+        <div className="flex justify-between items-center"></div>
 
         {loading ? (
           <div className="text-center text-white py-20">
@@ -324,32 +324,32 @@ function UserListings() {
           </div>
         ) : listings.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
-            <h2 className="text-lg font-semibold -mt-4">
-              No Item
-            </h2>
-        
+            <h2 className="text-lg font-semibold -mt-4">No Item</h2>
+
             {/* Floating Faces */}
             <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
-              <img
-                src={FaceOne}
-                alt="Face One"
-                className="w-34 h-24"
-              />
-        
+              <img src={FaceOne} alt="Face One" className="w-34 h-24" />
+
               <img
                 src={FaceTwo}
                 alt="Face Two"
                 className="absolute top-24 w-28 h-10"
               />
             </div>
-        
           </div>
         ) : (
           <div className="overflow-x-auto rounded-lg z-10">
             <table className="w-full text-white table-auto border-collapse">
               <thead className="bg-[#00134C]">
                 <tr className="text-left">
-                  {["Listing", "Status", "Price", "Token ID", "Qty", "Select"].map((h, i) => (
+                  {[
+                    "Listing",
+                    "Status",
+                    "Price",
+                    "Token ID",
+                    "Qty",
+                    "Select",
+                  ].map((h, i) => (
                     <th
                       key={i}
                       className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 text-xs sm:text-sm lg:text-[18px] font-inter font-medium whitespace-nowrap"
@@ -371,7 +371,8 @@ function UserListings() {
                         <div
                           className="h-10 w-10 sm:h-12 sm:w-12 rounded-md overflow-hidden relative"
                           style={{
-                            background: "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
+                            background:
+                              "linear-gradient(180deg, #977C34 0%, #493F26 100%)",
                           }}
                         >
                           <img
@@ -424,127 +425,118 @@ function UserListings() {
                 disabled={cancelling}
                 className="text-white mt-4 sm:mt-6 bg-[#002AA8] px-4 py-1 rounded-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {cancelling ? 'Cancelling...' : `Cancel ${totalSelected} Listing${totalSelected > 1 ? 's' : ''}`}
+                {cancelling
+                  ? "Cancelling..."
+                  : `Cancel ${totalSelected} Listing${totalSelected > 1 ? "s" : ""}`}
               </button>
             )}
           </div>
         )}
       </section>
 
-   {/* Cancel Listing Modal */}
-{showModal && (
-  <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-    <div
-      className="bg-[#1F2633] p-5 w-[400px] h-[400px] relative text-white"
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Close */}
-      <button
-        onClick={() => !cancelling && setShowModal(false)}
-        className="absolute top-3 right-3 text-white font-bold text-lg hover:text-gray-300"
-        disabled={cancelling}
-      >
-        ×
-      </button>
-
-      {/* Title */}
-      <h2 className="font-inter font-semibold text-[20px] leading-[100%] text-white text-center mb-6">
-        Cancel Listing
-      </h2>
-
-      <div className="h-px bg-white/20 mb-4" />
-
-      {/* Item Row */}
-      {selectedListings.map((item) => (
-        <div
-          key={item._id}
-          className="flex items-center justify-between  p-3 rounded-md"
-        >
-          {/* Image */}
-          <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
-            <img
-              src={`${BACKEND_BASE_URL}${item.collection?.image}`}
-              alt={item.collection?.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Name */}
-          <div className="flex-1 ml-3 space-y-2">
-  <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
-    {item.collection?.name}
-  </p>
-  <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
-    You Own {item.quantity || 1}
-  </p>
-</div>
-
-
-          {/* Price */}
-          <p className="text-sm font-medium text-gray-300">
-            ${item.priceUSD?.toFixed(2) || item.priceETH}
-          </p>
-        </div>
-      ))}
-
-      
-
-      {/* Buttons */}
-      <div className="flex justify-center gap-8  mt-40">
-        {/* Cancel – Bracket */}
-        <button
-          onClick={() => setShowModal(false)}
-          disabled={cancelling}
-        >
-          <div className="flex items-center">
-            <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
-            <div
-              className="border-[#002AA8]"
-              style={{
-                width: "0.5rem",
-                height: "2.1rem",
-                borderStyle: "solid",
-                borderWidth: "0.375rem 0.25rem 0.375rem 0",
-              }}
-            />
-            <div
-              className="flex items-center justify-center text-white text-sm font-medium"
-              style={{
-                width: "6.5rem",
-                height: "2rem",
-                border: "0.15rem solid #002AA8",
-              }}
+      {/* Cancel Listing Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div
+            className="bg-[#1F2633] p-5 w-[400px] h-[400px] relative text-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close */}
+            <button
+              onClick={() => !cancelling && setShowModal(false)}
+              className="absolute top-3 right-3 text-white font-bold text-lg hover:text-gray-300"
+              disabled={cancelling}
             >
-              Cancel
+              ×
+            </button>
+
+            {/* Title */}
+            <h2 className="font-inter font-semibold text-[20px] leading-[100%] text-white text-center mb-6">
+              Cancel Listing
+            </h2>
+
+            <div className="h-px bg-white/20 mb-4" />
+
+            {/* Item Row */}
+            {selectedListings.map((item) => (
+              <div
+                key={item._id}
+                className="flex items-center justify-between  p-3 rounded-md"
+              >
+                {/* Image */}
+                <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
+                  <img
+                    src={`${BACKEND_BASE_URL}${item.collection?.image}`}
+                    alt={item.collection?.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Name */}
+                <div className="flex-1 ml-3 space-y-2">
+                  <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
+                    {item.collection?.name}
+                  </p>
+                  <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
+                    You Own {item.quantity || 1}
+                  </p>
+                </div>
+
+                {/* Price */}
+                <p className="text-sm font-medium text-gray-300">
+                  ${item.priceUSD?.toFixed(2) || item.priceETH}
+                </p>
+              </div>
+            ))}
+
+            {/* Buttons */}
+            <div className="flex justify-center gap-8  mt-40">
+              {/* Cancel – Bracket */}
+              <button onClick={() => setShowModal(false)} disabled={cancelling}>
+                <div className="flex items-center">
+                  <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.1rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                    }}
+                  />
+                  <div
+                    className="flex items-center justify-center text-white text-sm font-medium"
+                    style={{
+                      width: "6.5rem",
+                      height: "2rem",
+                      border: "0.15rem solid #002AA8",
+                    }}
+                  >
+                    Cancel
+                  </div>
+                  <div
+                    className="border-[#002AA8]"
+                    style={{
+                      width: "0.5rem",
+                      height: "2.1rem",
+                      borderStyle: "solid",
+                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                    }}
+                  />
+                  <div className="bg-[#002AA8] w-1 h-5"></div>
+                </div>
+              </button>
+
+              {/* Delist */}
+              <button onClick={handleConfirmCancel} disabled={cancelling}>
+                <CustomButton4
+                  text={cancelling ? "Processing..." : "Delist Item"}
+                />
+              </button>
             </div>
-            <div
-              className="border-[#002AA8]"
-              style={{
-                width: "0.5rem",
-                height: "2.1rem",
-                borderStyle: "solid",
-                borderWidth: "0.25rem 0 0.375rem 0.25rem",
-              }}
-            />
-            <div className="bg-[#002AA8] w-1 h-5"></div>
           </div>
-        </button>
-
-        {/* Delist */}
-        <button
-          onClick={handleConfirmCancel}
-          disabled={cancelling}
-        >
-          <CustomButton4
-            text={cancelling ? "Processing..." : "Delist Item"}
-          />
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
+        </div>
+      )}
     </div>
   );
 }

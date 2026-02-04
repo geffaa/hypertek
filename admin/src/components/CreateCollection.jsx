@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import React, { useState, useRef, useEffect } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
@@ -24,6 +26,7 @@ function CreateCollections() {
     Type: "",
     priceETH: "",
   });
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -129,12 +132,7 @@ function CreateCollections() {
       newErrors.chain = "Chain is required";
     }
 
-    // ✅ PRICE VALIDATION
-    if (!formData.priceETH) {
-      newErrors.priceETH = "Price is required";
-    } else if (Number(formData.priceETH) <= 0) {
-      newErrors.priceETH = "Price must be greater than 0";
-    }
+   
 
     setErrors(newErrors);
     return newErrors;
@@ -432,49 +430,49 @@ function CreateCollections() {
             </div>
 
             {/* Collection Type with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
-              <label
-                htmlFor="type"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0%",
-                  color: "#FFFFFF",
-                }}
-              >
-                Collection Type *
-              </label>
+<div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
+  <label
+    htmlFor="type"
+    style={{
+      fontFamily: "Inter, sans-serif",
+      fontWeight: 400,
+      fontStyle: "normal",
+      fontSize: "18px",
+      lineHeight: "100%",
+      letterSpacing: "0%",
+      color: "#FFFFFF",
+    }}
+  >
+    Collection Type *
+  </label>
 
-              <select
-                id="Type"
-                value={formData.Type}
-                onChange={(e) => {
-                  setFormData({ ...formData, Type: e.target.value });
-                  if (errors.Type) {
-                    setErrors((prev) => ({ ...prev, Type: "" }));
-                  }
-                }}
-                className={`w-full h-10 px-3 rounded-md bg-transparent text-white border ${
-                  errors.Type ? "border-red-500" : "border-gray-600"
-                } focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors`}
-              >
-                <option value="" className="text-black">
-                  Select Type
-                </option>
-                <option value="NFA" className="text-black">
-                  NFA
-                </option>
-                <option value="Land" className="text-black">
-                  Land
-                </option>
-              </select>
-              {errors.Type && (
-                <p className="text-red-500 text-sm">{errors.Type}</p>
-              )}
-            </div>
+  <select
+    id="Type"
+    value={formData.Type}
+    onChange={(e) => {
+      setFormData({ ...formData, Type: e.target.value });
+      if (errors.Type) {
+        setErrors((prev) => ({ ...prev, Type: "" }));
+      }
+    }}
+    className={`w-full h-10 px-3 rounded-md bg-transparent text-white border ${
+      errors.Type ? "border-red-500" : "border-gray-600"
+    } focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors`}
+  >
+    <option value="" className="text-black">
+      Select Type
+    </option>
+    <option value="characters" className="text-black">
+      Character
+    </option>
+    <option value="land" className="text-black">
+      Land
+    </option>
+    
+  </select>
+  {errors.Type && <p className="text-red-500 text-sm">{errors.Type}</p>}
+</div>
+
 
             {/* Chain with validation */}
             <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
@@ -530,42 +528,7 @@ function CreateCollections() {
                 <p className="text-red-500 text-sm">{errors.chain}</p>
               )}
             </div>
-            {/* Price Field */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
-              <label
-                htmlFor="priceETH"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontSize: "18px",
-                  color: "#FFFFFF",
-                }}
-              >
-                Price (ETH) *
-              </label>
-
-              <input
-                type="number"
-                id="priceETH"
-                placeholder="0.05"
-                min="0"
-                step="0.0001"
-                value={formData.priceETH}
-                onChange={(e) => {
-                  setFormData({ ...formData, priceETH: e.target.value });
-                  if (errors.priceETH) {
-                    setErrors((prev) => ({ ...prev, priceETH: "" }));
-                  }
-                }}
-                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
-                  errors.priceETH ? "border-red-500" : "border-gray-600"
-                } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
-              />
-
-              {errors.priceETH && (
-                <p className="text-red-500 text-sm">{errors.priceETH}</p>
-              )}
-            </div>
+          
           </div>
         </div>
 

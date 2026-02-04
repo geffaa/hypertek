@@ -1,171 +1,182 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import EditImage from "../assets/edit.png";
 import DeleteImage from "../assets/delete.png";
-import { Link , useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-
 import FullScreenLoader from "../components/common/Spinner";
-
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
- 
 function Character() {
-  const navigate = useNavigate()
+  const ITEMS_PER_PAGE = 5;
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const navigate = useNavigate();
+
   const [characters, setCharacters] = useState([]);
-const [loading, setLoading] = useState(true);
-const [showDeleteModal, setShowDeleteModal] = useState(false);
-const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
+  const adminDataString = localStorage.getItem("admin_data");
+  const adminId = adminDataString ? JSON.parse(adminDataString)._id : null;
 
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      if (!adminId) return setLoading(false);
+      setLoading(true);
 
-useEffect(() => {
-  const fetchCharacters = async () => {
-    try {
-      const response = await axios.get(`${Dashboard_Base_Url}/v1/nft/all`);
-      if (response.data.success && response.data.nfts) {
-       const chars = response.data.nfts
-  .filter(item => item.collection?.Type === "NFA") // <-- filter NFA only
-  .map((item, index) => ({
-    id: item._id,
-    indexId: index + 1,
-    name: item.collection?.name || "Unnamed Character",
-    image: item.collection?.image || Collectionimage,
-    price: item.collection?.price || 0,
-    status: item.status === "active",
-    collectionData: item.collection,
-  }));
+      try {
+        // Fetch parent collections for this admin
+        const parentRes = await axios.get(
+          `${Dashboard_Base_Url}/v1/nft/parent-collections`,
+        );
 
-        setCharacters(chars);
-      } else {
-        setCharacters([]);
+        if (!parentRes.data.success) {
+          toast.error("Failed to fetch parent collections");
+          setLoading(false);
+          return;
+        }
+
+        const parentCollections = parentRes.data.collections || [];
+
+        let allCharacters = [];
+
+        for (const parent of parentCollections) {
+          try {
+            const subRes = await axios.get(
+              `${Dashboard_Base_Url}/v1/nft/parent-collection/${parent._id}/sub-collections`,
+            );
+
+            if (subRes.data.success && subRes.data.subCollections) {
+              const charSub = subRes.data.subCollections
+                .filter(() => parent.category === "characters")
+                .map((sub) => ({
+                  id: sub._id,
+                  name: sub.name || "Unnamed Character",
+                  image: sub.image || "",
+                  price: sub.priceETH || 0,
+                  status: sub.listed,
+                  collectionData: parent,
+                  parentId: parent._id,
+                }));
+
+              allCharacters.push(...charSub);
+            }
+          } catch (err) {
+            console.error(
+              `Error fetching sub-collections for parent ${parent._id}:`,
+              err,
+            );
+          }
+        }
+
+        setCharacters(allCharacters);
+      } catch (err) {
+        console.error("Error fetching characters:", err);
+        toast.error("Failed to fetch characters");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching characters:", error);
-      toast.error("Failed to fetch characters");
-    } finally {
-        setLoading(false); // ✅ Loading stops here
-      }
+    };
+
+    fetchCharacters();
+  }, [adminId]);
+
+  if (loading) return <FullScreenLoader />;
+
+  const handleEditCharacter = (char) => {
+    navigate(`/${adminId}/edit-collection-item`, {
+      state: {
+        collection: char.collectionData,
+        collectionId: char.id,
+        parentId: char.parentId,
+      },
+    });
   };
 
-  fetchCharacters();
-}, []);
+  const handleToggleStatus = async (char) => {
+    try {
+      const newStatus = char.status ? "inactive" : "active";
+      const res = await axios.put(
+        `${Dashboard_Base_Url}/v1/nft/status/${char.id}`,
+        { status: newStatus },
+      );
 
-
- if (loading) {
-    return <FullScreenLoader />; // Or your custom loading UI
-  }
-const handleEditCharacter = (collection) => {
-  const adminDataString = localStorage.getItem("admin_data");
-  if (!adminDataString) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
-
-  const adminData = JSON.parse(adminDataString);
-  const adminId = adminData._id;
-
-  if (!adminId) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
-
-  console.log("Editing collection:", collection._id, "Admin ID:", adminId);
-
-  // Navigate with admin ID and pass collection data via state
-  navigate(`/${adminId}/edit-collection-item`, { state: { collection } });
-};
-
-
- const handleToggleStatus = async (char) => {
-  if (!Dashboard_Base_Url || !char?.id) return;
-
-  try {
-    const newStatus = char.status ? "inactive" : "active";
-
-    const response = await axios.put(
-      `${Dashboard_Base_Url}/v1/nft/status/${char.id}`,
-      { status: newStatus }
-    );
-
-    setCharacters((prev) =>
-      prev.map((item) =>
-        item.id === char.id
-          ? { ...item, status: response.data.nft.status === "active" }
-          : item
-      )
-    );
-
-    toast.success(`Character status updated to ${response.data.nft.status}!`);
-  } catch (error) {
-    console.error("Error updating status:", error);
-    toast.error(error.response?.data?.message || "Failed to update status");
-  }
-};
-
-
-
-const handleOpenDeleteModal = (char) => {
-  setSelectedCharacter(char);
-  setShowDeleteModal(true);
-};
-
-const handleDeleteCharacter = async () => {
-  if (!selectedCharacter?.id) return toast.error("Character ID is required");
-  if (!Dashboard_Base_Url) return toast.error("Base URL is required");
-
-  try {
-    const response = await axios.delete(
-      `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCharacter.id}`
-    );
-
-    if (response.data.success) {
-      setCharacters((prev) => prev.filter((c) => c.id !== selectedCharacter.id));
-      toast.success("Character deleted successfully!");
-      setShowDeleteModal(false);
-      setSelectedCharacter(null);
-    } else {
-      toast.error(response.data.message || "Failed to delete character");
+      setCharacters((prev) =>
+        prev.map((c) =>
+          c.id === char.id
+            ? { ...c, status: res.data.nft.status === "active" }
+            : c,
+        ),
+      );
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update status");
     }
-  } catch (error) {
-    console.error(error);
-    toast.error(error.response?.data?.message || "Error deleting character");
-  }
-};
-const withAdmin = (path) => {
-  if (!adminId) return "#"; // prevent crash / bad navigation
-  return `/${adminId}${path}`;
-};
+  };
 
+  const handleDeleteCharacter = async () => {
+    if (!selectedCharacter) return;
+
+    try {
+      await axios.delete(
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/${selectedCharacter.parentId}/sub-collection/${selectedCharacter.id}`,
+      );
+
+      // Remove from frontend state
+      setCharacters((prev) =>
+        prev.filter((c) => c.id !== selectedCharacter.id),
+      );
+
+      setShowDeleteModal(false);
+      toast.success("Character deleted successfully");
+    } catch (err) {
+      console.error("Delete failed:", err);
+      if (err.response?.data?.error) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error("Delete failed");
+      }
+    }
+  };
+
+  const handleAddMore = () => {
+    navigate(`/${adminId}/edit-collection-item`, {
+      state: {
+        parentCollectionId: adminId,
+        isCreatingSubCollection: true,
+        category: "characters",
+      },
+    });
+  };
 
   return (
-    <div className="pt-16 flex h-[700px] bg-black flex-col ">
-     <div
-  style={{
-    top: "10px",
-    left: "100px",
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full pointer-events-none z-0"
-></div>
-
-<div
-  style={{
-    top: "400px",
-    left: "620px",
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full pointer-events-none z-0"
-></div>
-
+    <div className="pt-16 flex h-[700px] bg-black flex-col relative">
+      {/* Blur Backgrounds */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          top: "10px",
+          left: "20px",
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+      />
+      <div
+        className="absolute rounded-full"
+        style={{
+          top: "400px",
+          left: "620px",
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+      />
 
       {/* Header */}
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
@@ -175,97 +186,61 @@ const withAdmin = (path) => {
       </div>
 
       {/* Table */}
-      <div className="pl-7 mt-12 z-10 relative ml-12">
+      <div className="pl-7 mt-12 z-10 relative h-[500px] ml-12 overflow-x-auto">
         <table className="min-w-[950px] text-left rounded-lg overflow-hidden">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
-              {/* <th className="px-6 py-3 text-white font-semibold text-sm">No.</th> */}
-              <th className="px-6 py-3 text-white font-semibold text-sm">Name</th>
-              <th className="px-6 py-3 text-white font-semibold text-sm">Image</th>
-              <th className="px-6 py-3 text-white font-semibold text-sm">Price</th>
-              <th className="px-6 py-3 text-white font-semibold text-sm">Action</th>
-              <th className="px-6 py-3 text-white font-semibold text-sm">Status</th>
+              <th className="px-6 py-3 text-white text-sm">Name</th>
+              <th className="px-6 py-3 text-white text-sm">Image</th>
+              <th className="px-6 py-3 text-white text-sm">Price</th>
+              <th className="px-6 py-3 text-white text-sm">Action</th>
+              <th className="px-6 py-3 text-white text-sm">Status</th>
             </tr>
           </thead>
 
           <tbody className="divide-y divide-white/10">
-            {characters.map((char, index) => (
-              <tr
-                key={char.id}
-                className="h-[70px] transition-all duration-200 backdrop-blur-sm"
-              >
-                {/* Number */}
-                {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-                  {index + 1}
-                </td> */}
-
-                {/* Name */}
-              <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-  {char.name.length > 12 ? `${char.name.slice(0, 15)}...` : char.name}
-</td>
-
-
-                {/* Image */}
+            {characters.slice(0, visibleCount).map((char) => (
+              <tr key={char.id} className="h-[70px] backdrop-blur-sm">
+                <td className="px-6 py-4 text-[#FFFFFFC4]">{char.name}</td>
                 <td className="px-6 py-4">
                   <img
-                      src={char.image ? `${Image_Base_Url}${char.image}` : `${Image_Base_Url}${char.image}` }
-                    
-                    alt={char.name}
-                    className="w-12 h-12 object-cover border border-white/10"
+                    src={
+                      char.image
+                        ? `${Image_Base_Url}${char.image}`
+                        : Collectionimage
+                    }
+                    className="w-12 h-12 rounded border border-white/10"
+                    alt=""
                   />
                 </td>
-
-                {/* Price */}
-                <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-                  ${char.price}
-                </td>
-
-                {/* Action */}
+                <td className="px-6 py-4 text-[#FFFFFFC4]">${char.price}</td>
                 <td className="px-6 py-4">
                   <div className="flex gap-4">
-                     <button
-                      onClick={() => handleEditCharacter(char)}
-                      className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
-                    >
-                      <img src={EditImage} alt="edit" className="w-4 h-4" />
+                    <button onClick={() => handleEditCharacter(char)}>
+                      <img src={EditImage} className="w-4 h-4" alt="Edit" />
                     </button>
-
-                    <button className="p-2 cursor-pointer" onClick={() => handleOpenDeleteModal(char)}>
-                      <img src={DeleteImage} alt="delete" className="w-3 h-4" />
+                    <button
+                      onClick={() => {
+                        setSelectedCharacter(char);
+                        setShowDeleteModal(true);
+                      }}
+                    >
+                      <img src={DeleteImage} className="w-3 h-4" alt="Delete" />
                     </button>
                   </div>
                 </td>
-
-                {/* Status */}
                 <td className="px-6 py-4">
                   <Switch
                     checked={char.status}
-  onChange={() => handleToggleStatus(char)}
+                    onChange={() => handleToggleStatus(char)}
                     sx={{
                       width: 47,
                       height: 20,
                       padding: 0,
-                      "& .MuiSwitch-switchBase": {
-                        padding: 0,
-                        margin: 0,
-                        "&.Mui-checked": {
-                          transform: "translateX(24px)",
-                          color: "#fff",
-                          "& + .MuiSwitch-track": {
-                            backgroundColor: "#0860eeff",
-                            opacity: 1,
-                          },
+                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
+                        {
+                          backgroundColor: "#0860eeff",
                         },
-                      },
-                      "& .MuiSwitch-thumb": {
-                        width: 22,
-                        height: 20,
-                        background: "#fff",
-                      },
-                      "& .MuiSwitch-track": {
-                        borderRadius: 34 / 2,
-                        backgroundColor: "#9ca3af",
-                      },
                     }}
                   />
                 </td>
@@ -273,47 +248,50 @@ const withAdmin = (path) => {
             ))}
           </tbody>
         </table>
-        
-        
 
+        {/* Footer */}
+        <div className="flex justify-between items-center mt-8 px-6">
+          <button
+            onClick={handleAddMore}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-sm"
+          >
+            Add More
+          </button>
 
-
-        {showDeleteModal && selectedCharacter && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-    <div className="bg-gray-800 rounded-lg p-6 w-[400px] border border-white/10">
-      <h2 className="text-lg font-semibold mb-4 text-white">Confirm Deletion</h2>
-      <p className="mb-6 text-gray-300">
-        Are you sure you want to delete <strong className="text-white">{selectedCharacter.name}</strong>?
-        This action cannot be undone.
-      </p>
-      <div className="flex justify-end gap-4">
-        <button
-          className="px-4 py-2 border border-gray-400 rounded text-gray-300 hover:bg-gray-700"
-          onClick={() => {
-            setShowDeleteModal(false);
-            setSelectedCharacter(null);
-          }}
-        >
-          Cancel
-        </button>
-        <button
-          className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-          onClick={handleDeleteCharacter}
-        >
-          Delete
-        </button>
+          {visibleCount < characters.length && (
+            <button onClick={() => setVisibleCount((v) => v + ITEMS_PER_PAGE)}>
+              {/* Replace with your ArrowIcon */}
+              <span className="text-white text-xl">{">"}</span>
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-    
-  </div>
 
-  
-)}
-
-
-
-      </div>
-    
+      {/* Delete Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 p-6 rounded-lg w-[400px]">
+            <h2 className="text-white mb-4">Confirm Deletion</h2>
+            <p className="text-gray-300 mb-6">
+              Delete <strong>{selectedCharacter.name}</strong>?
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                className="border px-4 py-2 text-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteCharacter}
+                className="bg-red-600 px-4 py-2 text-white"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

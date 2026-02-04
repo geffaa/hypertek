@@ -11,6 +11,11 @@ import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
   const navigate = useNavigate();
+    // ✅ Get adminId (same as Sidebar)
+    const adminDataString = localStorage.getItem("admin_data");
+    const adminData = adminDataString ? JSON.parse(adminDataString) : null;
+    const adminId = adminData?._id;
+  
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -26,41 +31,47 @@ function AddCollection() {
         toast.error("Sorry Base url is required");
         return;
       }
-
+  
       try {
         setLoading(true);
-
-        const response = await axios.get(`${Dashboard_Base_Url}/v1/nft/all`);
-        console.log("Collections response:", response.data);
-
-        // ✅ Use "nfts" because API returns nfts
-        if (response.data.success && response.data.nfts) {
-          const mappedCollections = response.data.nfts.map((item, index) => ({
+  
+        const response = await axios.get(
+          `${Dashboard_Base_Url}/v1/nft/parent-collections`
+        );
+  
+        console.log("Parent Collections response:", response.data);
+  
+        // Assuming API returns { success: true, collections: [...] }
+        if (response.data.success && response.data.collections) {
+          const mappedCollections = response.data.collections.map((item, index) => ({
             id: item._id,
             indexId: index + 1,
             name: item.collection?.name || "Unnamed Collection",
+          
+            // ✅ FIX IS HERE
+            category: item.category?.toLowerCase(), // <-- ADD THIS
+            type: item.category?.toLowerCase(),     // <-- USE BACKEND CATEGORY
+          
             image: item.collection?.image || "",
             supply: item.collection?.supply || 0,
-
-            // use actual status from API ✔
-            status: item.status === "active" ? true : false,
+            status: true, // ✅ set active by default
 
             _id: item._id,
-            collectionData: item.collection,
           }));
-
+          
+  
           setCollections(mappedCollections);
         } else {
           setCollections([]);
         }
       } catch (error) {
-        console.error("Error fetching collections:", error);
-        toast.error("Error fetching collections");
+        console.error("Error fetching parent collections:", error);
+        toast.error("Error fetching parent collections");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchCollections();
   }, []);
 
@@ -96,6 +107,15 @@ function AddCollection() {
     navigate(`/${adminId}/create-collection`); // navigate when ID exists
   };
 
+    // ✅ Admin-based navigation helper (same as Sidebar)
+    const withAdmin = (path) => {
+      if (!adminId) {
+        toast.error("Admin not found");
+        return;
+      }
+      navigate(`/${adminId}${path}`);
+    };
+    
   const handleEditCollection = (collection) => {
     const adminDataString = localStorage.getItem("admin_data");
     if (!adminDataString) {
@@ -278,7 +298,22 @@ function AddCollection() {
       </div>
     );
   }
+   // ✅ Matches Sidebar routing exactly
+   const handleTypeNavigation = (col) => {
+    if (!adminId) {
+      toast.error("Admin ID missing");
+      return;
+    }
+  
+    if (col.category === "land") {
+      withAdmin("/land-collection");
+    } else if (col.category === "characters") {
+      withAdmin("/character-collection");
+    }
+  };
+  
 
+  
   return (
     <div className="mt-12 flex h-[500px] bg-black flex-col">
       {/* Background blur divs */}
@@ -343,7 +378,7 @@ function AddCollection() {
               <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Name
               </th>
-              <th className=" py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
+              <th className=" px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
                 Image
               </th>
               <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm tracking-wider">
@@ -367,11 +402,24 @@ function AddCollection() {
                 {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
                   {col.indexId}
                 </td> */}
-              <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
-  {col.name?.length > 15 ? `${col.name.slice(0, 15)}...` : col.name}
+<td
+  className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
+  onClick={() => handleTypeNavigation(col)}
+>
+  {{
+    land: "Land",
+    characters: "Character",
+    character: "Character",
+    nfa: "NFA",
+    other: "Other",
+  }[col.category] || "Unknown"}
 </td>
 
-                <td className=" py-4">
+
+
+
+
+                <td className="px-6 py-3">
                   {col.image ? (
                     <img
                       src={
@@ -392,11 +440,11 @@ function AddCollection() {
                     </div>
                   )}
                 </td>
-               <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
+               <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
   {Number(col.supply).toPrecision(1)}
 </td>
 
-                <td className="px-6 py-4">
+                <td className="px-6 py-3">
                   <div className="flex gap-4">
                     <button
                       onClick={() => handleEditCollection(col)}
@@ -413,7 +461,7 @@ function AddCollection() {
                     </button>
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-3">
                   <Switch
                     checked={col.status} // boolean
                     onChange={() => HandleCollectionStatus(col)}
@@ -507,4 +555,3 @@ function AddCollection() {
 }
 
 export default AddCollection;
-

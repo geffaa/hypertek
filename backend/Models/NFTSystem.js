@@ -39,7 +39,7 @@ const nftSystemSchema = new mongoose.Schema(
     // Main collection information
     collection: {
       name: String, // "Characters" or "Land"
-      symbol: String,
+      symbol: { type: String, required: false },
       Type: String,
       chain: String,
       image: String,
