@@ -1359,3 +1359,99 @@ export async function getNFTsWithSubCollections(req, res) {
     return res.status(500).json({ error: err.message });
   }
 }
+
+/**
+ * Create Listing for Sub-Collection
+ */
+/**
+ * Create Listing for Sub-Collection - SMART VERSION
+ */
+export async function createSubCollectionListing(req, res) {
+  try {
+    const { parentId, subCollectionId, tokenId, seller, priceETH } = req.body;
+
+    console.log("📥 Listing request:", { parentId, subCollectionId, tokenId, seller, priceETH });
+
+    if (!tokenId || !seller || !priceETH) {
+      return res.status(400).json({
+        error: "Missing required fields: tokenId, seller, priceETH",
+      });
+    }
+
+    let parent;
+
+    // Option 1: If parentId is provided
+    if (parentId && subCollectionId) {
+      parent = await NFTSystem.findById(parentId);
+      if (!parent) {
+        return res.status(404).json({ error: "Parent collection not found" });
+      }
+    } 
+    // Option 2: Find parent by sub-collection ID
+    else if (subCollectionId) {
+      parent = await NFTSystem.findOne({
+        "subCollections._id": subCollectionId,
+      });
+      if (!parent) {
+        return res.status(404).json({ 
+          error: "Parent collection not found for this sub-collection" 
+        });
+      }
+    }
+    // Option 3: Find by tokenId
+    else if (tokenId) {
+      parent = await NFTSystem.findOne({
+        "subCollections.tokenId": tokenId,
+      });
+      if (!parent) {
+        return res.status(404).json({ 
+          error: "Parent collection not found for this token" 
+        });
+      }
+    } else {
+      return res.status(400).json({
+        error: "Must provide parentId, subCollectionId, or tokenId",
+      });
+    }
+
+    console.log("✅ Found parent:", parent._id);
+
+    // Find sub-collection
+    const subCollection = subCollectionId 
+      ? parent.subCollections.id(subCollectionId)
+      : parent.subCollections.find(sub => sub.tokenId === tokenId);
+
+    if (!subCollection) {
+      return res.status(404).json({ error: "Sub-collection not found" });
+    }
+
+    console.log("✅ Found sub-collection:", subCollection._id);
+
+    // Verify ownership
+    if (subCollection.owner.toLowerCase() !== seller.toLowerCase()) {
+      return res.status(403).json({ 
+        error: "You don't own this sub-collection",
+        currentOwner: subCollection.owner,
+        providedSeller: seller
+      });
+    }
+
+    // Update sub-collection listing status
+    subCollection.listed = true;
+    subCollection.priceETH = priceETH;
+    
+    await parent.save();
+
+    console.log(`✅ Sub-collection ${tokenId} listed for ${priceETH} ETH`);
+
+    return res.json({
+      success: true,
+      message: "Sub-collection listed successfully",
+      subCollection,
+      parentId: parent._id,
+    });
+  } catch (err) {
+    console.error("❌ CREATE SUB-COLLECTION LISTING ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
