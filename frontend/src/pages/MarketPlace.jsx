@@ -278,7 +278,7 @@ function MarketPlace() {
                               className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                             />
                             <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
-                              ${item.priceETH || item.Type || "ETH"} Eth
+                              {item.priceETH || item.Type || ""} ETH
                             </h3>
                           </div>
                         </div>
@@ -343,7 +343,7 @@ function MarketPlace() {
                               <img src={TVector} alt="" className="w-3 h-3" />
                             </div>
                             <span className="font-semibold truncate">
-                              ${item.priceETH || item.Type || "ETH"} Eth
+                              {item.priceETH || item.Type || ""} ETH
                             </span>
                           </div>
                         </div>
@@ -431,8 +431,8 @@ function MarketPlace() {
                               alt=""
                               className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                             />
-                            <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                              {item.priceETH || item.Type || "ETH"} Eth
+                            <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
+                              {item.priceETH || item.Type || ""} ETH
                             </h3>
                           </div>
                         </div>
@@ -503,7 +503,7 @@ function MarketPlace() {
                               <img src={TVector} alt="" className="w-3 h-3" />
                             </div>
                             <span className="font-semibold truncate">
-                              ${item.priceETH || item.Type || "ETH"} Eth
+                              {item.priceETH || item.Type || ""} ETH
                             </span>
                           </div>
                         </div>
@@ -607,7 +607,7 @@ function MarketPlace() {
                             </td>
 
                             <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
-                              ${item.price}
+                              {item.price}
                             </td>
 
                             <td className="px-4 lg:px-6 py-3 text-sm lg:text-[16px] font-inter font-normal align-middle">
