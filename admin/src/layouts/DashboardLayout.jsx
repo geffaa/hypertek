@@ -22,6 +22,18 @@ const DashboardLayout = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
 
+  // ✅ When redirected from frontend with ?token=...,
+  //    capture it once and persist in this (admin) origin.
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tokenFromUrl = searchParams.get("token");
+
+    if (tokenFromUrl) {
+      localStorage.setItem("token", tokenFromUrl);
+      localStorage.setItem("role", "admin");
+    }
+  }, [location.search]);
+
   useEffect(() => {
     if (!userId) return;
     const fetchUserData = async () => {

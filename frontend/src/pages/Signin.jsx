@@ -51,37 +51,51 @@ function Login() {
         Email: formData.email,
         Password: formData.password,
       });
-      if (res.data.user.Role === "user") {
-        // ✅ Save full response as JSON string
-        // Save all admin/user data as JSON string
-        localStorage.setItem("authData", JSON.stringify(res.data));
-        console.log("Your login response are :", res);
-        dispatch(
-          loginSuccess({
-            user: res.data.user,
-            token: res.data.token,
-            isLoggedInUser: true,
-          }),
-        );
+      const { user, token } = res.data || {};
 
-        localStorage.setItem("token", res.data.token);
+      // ✅ Save full response as JSON string (for both user & admin)
+      localStorage.setItem("authData", JSON.stringify(res.data));
+      console.log("Your login response are :", res);
 
-        localStorage.setItem("role", res.data.user.Role);
+      // ✅ Keep Redux auth state in sync for both roles
+      dispatch(
+        loginSuccess({
+          user,
+          token,
+          isLoggedInUser: true,
+        }),
+      );
 
-        toast.success("Login successful!");
+      // ✅ Persist token & role in this (frontend) origin for both roles
+      if (token) {
+        localStorage.setItem("token", token);
       }
-      if (res.data.user.Role === "admin") {
-        // localStorage.setItem("token", res.data.token);
-        // localStorage.setItem("admin-data",res.data)
-        console.log("your login data response are :", res.data);
-        const userId = res.data.user.id;
+      if (user?.Role) {
+        localStorage.setItem("role", user.Role);
+      }
 
-        window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
-        // window.location.href = `http://localhost:5174/${userId}`;
+      if (user?.Role === "admin") {
+        // Admin: redirect to admin panel AND pass token so admin origin can store it
+        const userId = user.id;
+        const adminUrl = new URL(
+          `https://admin-hyper-tek-game.deventiatech.com/${userId}`,
+        );
+        if (token) {
+          adminUrl.searchParams.set("token", token);
+        }
+
+        toast.success("Admin login successful!");
+        window.location.href = adminUrl.toString();
+        // For local dev:
+        // const adminUrl = new URL(`http://localhost:5174/${userId}`);
+        // if (token) adminUrl.searchParams.set("token", token);
+        // window.location.href = adminUrl.toString();
       } else {
+        // Normal user flow
+        toast.success("Login successful!");
         navigate("/dashboard", {
           state: {
-            userData: res.data.user,
+            userData: user,
           },
         });
       }
