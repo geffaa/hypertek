@@ -54,7 +54,7 @@ function AddCollection() {
               type: item.category?.toLowerCase(), // <-- USE BACKEND CATEGORY
 
               image: item.collection?.image || "",
-              supply: item.collection?.supply || 0,
+              supply: item.subCollections?.length || 0,
               status: true, // ✅ set active by default
 
               _id: item._id,
