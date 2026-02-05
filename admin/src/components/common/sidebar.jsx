@@ -86,9 +86,11 @@ const withAdmin = (path) => {
        {/* Logo */}
       <div className="hidden lg:flex items-center absolute top-[25px] left-[83px] gap-1.5 w-[132px] h-[25px]">
         <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
+        <Link to="/">
         <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
           HYPER TEK
         </span>
+        </Link>
       </div>
 
       {/* Menu */}
