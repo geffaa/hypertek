@@ -256,77 +256,223 @@ export async function deleteSubCollection(req, res) {
  * Mint Sub-Collection NFT
  */
 export async function mintSubCollection(req, res) {
+  console.log("📥 Mint sub-collection request:", req.body);
+
   try {
     const { parentId, subCollectionId, tokenURI, royaltyBps, creatorWallet } =
       req.body;
 
+    // ✅ Validation
     if (!parentId || !subCollectionId || !tokenURI || !creatorWallet) {
       return res.status(400).json({
         success: false,
-        error: "Missing required fields",
+        error:
+          "Missing required fields: parentId, subCollectionId, tokenURI, or creatorWallet",
       });
     }
 
+    if (!ethers.isAddress(creatorWallet)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid Ethereum address",
+      });
+    }
+
+    // ✅ Find parent collection
     const parent = await NFTSystem.findById(parentId);
     if (!parent) {
-      return res.status(404).json({ error: "Parent collection not found" });
+      return res.status(404).json({
+        success: false,
+        error: "Parent collection not found",
+      });
     }
 
+    // ✅ Find sub-collection within parent
     const subCollection = parent.subCollections.id(subCollectionId);
     if (!subCollection) {
-      return res.status(404).json({ error: "Sub-collection not found" });
+      return res.status(404).json({
+        success: false,
+        error: "Sub-collection not found",
+      });
     }
 
+    // ✅ Check if already minted
     if (subCollection.tokenId) {
       return res.status(400).json({
-        error: "Sub-collection already minted",
+        success: false,
+        error: "NFT already minted",
         tokenId: subCollection.tokenId,
       });
     }
 
-    // Mint on blockchain
-    const tx = await nftContract.mint(tokenURI, royaltyBps || 500);
-    const receipt = await tx.wait();
+    // ✅ Check blockchain initialization
+    if (!nftContract || !provider || !wallet) {
+      return res.status(500).json({
+        success: false,
+        error: "Blockchain not initialized",
+      });
+    }
 
-    let tokenId;
-    for (const log of receipt.logs) {
-      try {
-        const parsed = nftContract.interface.parseLog({
-          topics: log.topics,
-          data: log.data,
-        });
-        if (parsed.name === "Transfer" || parsed.name === "Minted") {
-          tokenId = Number(
-            parsed.args.tokenId || parsed.args[2] || parsed.args[1],
-          );
-          break;
+    // ✅ Backend wallet balance check
+    const backendWallet = await wallet.getAddress();
+    const balance = await provider.getBalance(backendWallet);
+
+    console.log("💰 Backend wallet:", backendWallet);
+    console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
+
+    if (balance === 0n) {
+      return res.status(500).json({
+        success: false,
+        error: "Backend wallet has no ETH for gas",
+      });
+    }
+
+    let tx, receipt, tokenId;
+
+    try {
+      // ✅ Mint NFT on blockchain
+      console.log("🎨 Minting NFT...");
+      console.log("- TokenURI:", tokenURI);
+      console.log("- RoyaltyBps:", royaltyBps || 500);
+
+      tx = await nftContract.mint(tokenURI, royaltyBps || 500);
+      console.log("📤 Transaction sent:", tx.hash);
+
+      receipt = await tx.wait();
+      console.log("✅ Confirmed in block:", receipt.blockNumber);
+
+      // ✅ Extract TokenId from events
+      for (const log of receipt.logs) {
+        try {
+          if (log.address.toLowerCase() !== nftContract.target.toLowerCase()) {
+            continue;
+          }
+
+          const parsed = nftContract.interface.parseLog({
+            topics: log.topics,
+            data: log.data,
+          });
+
+          if (parsed.name === "Transfer") {
+            tokenId = Number(parsed.args.tokenId || parsed.args[2]);
+            if (tokenId !== undefined) {
+              console.log("🎯 TokenId from Transfer:", tokenId);
+              break;
+            }
+          }
+
+          if (parsed.name === "Minted") {
+            tokenId = Number(parsed.args.tokenId || parsed.args[1]);
+            if (tokenId !== undefined) {
+              console.log("🎯 TokenId from Minted:", tokenId);
+              break;
+            }
+          }
+        } catch (e) {
+          continue;
         }
-      } catch (e) {
-        continue;
       }
+
+      // ✅ Fallback: nextTokenId
+      if (tokenId === undefined) {
+        console.log("⚠️ Getting tokenId from nextTokenId...");
+        const nextId = await nftContract.nextTokenId();
+        tokenId = Number(nextId) - 1;
+        console.log("🎯 TokenId:", tokenId);
+      }
+
+      if (tokenId === undefined) {
+        throw new Error("Could not determine tokenId");
+      }
+
+      // ✅ Verify and transfer ownership
+      const chainOwner = await nftContract.ownerOf(tokenId);
+      console.log("✅ Current on-chain owner:", chainOwner);
+
+      const expectedOwner = creatorWallet.toLowerCase();
+      const actualOwner = chainOwner.toLowerCase();
+      const backendLower = backendWallet.toLowerCase();
+
+      if (actualOwner !== expectedOwner) {
+        console.log("⚠️ Ownership mismatch - transferring...");
+
+        if (actualOwner === backendLower) {
+          const transferTx = await nftContract.transferFrom(
+            backendWallet,
+            creatorWallet,
+            tokenId,
+          );
+          await transferTx.wait();
+          console.log("✅ NFT transferred to:", creatorWallet);
+        } else {
+          throw new Error(
+            `Cannot transfer - owned by unexpected wallet: ${actualOwner}`,
+          );
+        }
+      } else {
+        console.log("✅ NFT already owned by creator");
+      }
+    } catch (mintErr) {
+      console.error("❌ Mint error:", mintErr);
+
+      let errorMessage = "Failed to mint NFT";
+
+      if (mintErr.message.includes("insufficient funds")) {
+        errorMessage = "Insufficient ETH in backend wallet";
+      } else if (mintErr.reason) {
+        errorMessage = mintErr.reason;
+      } else if (mintErr.message) {
+        errorMessage = mintErr.message;
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: errorMessage,
+        details: mintErr.toString(),
+      });
     }
 
-    if (!tokenId) {
-      const nextId = await nftContract.nextTokenId();
-      tokenId = Number(nextId) - 1;
-    }
+    // ✅ Update Database - ONLY sub-collection
+    console.log("💾 Updating database...");
 
-    // Update sub-collection
     subCollection.tokenId = tokenId;
     subCollection.tokenURI = tokenURI;
     subCollection.owner = creatorWallet.toLowerCase();
+    subCollection.listed = false;
+    subCollection.isFirstSale = true;
 
     await parent.save();
 
+    console.log("✅ Mint completed!");
+    console.log("- TokenId:", tokenId);
+    console.log("- Owner:", creatorWallet.toLowerCase());
+    console.log("- Sub-collection updated in database");
+
     return res.json({
       success: true,
-      message: "Sub-collection NFT minted successfully",
-      tokenId,
-      subCollection,
+      message: "NFT minted successfully",
+      tokenId: tokenId,
+      owner: creatorWallet.toLowerCase(),
+      subCollection: {
+        _id: subCollection._id,
+        name: subCollection.name,
+        symbol: subCollection.symbol,
+        tokenId: subCollection.tokenId,
+        owner: subCollection.owner,
+        listed: subCollection.listed,
+        isFirstSale: subCollection.isFirstSale,
+      },
+      txHash: receipt.hash,
+      blockNumber: receipt.blockNumber,
     });
   } catch (err) {
-    console.error("❌ MINT SUB-COLLECTION ERROR:", err);
-    return res.status(500).json({ error: err.message });
+    console.error("❌ SERVER ERROR:", err);
+
+    return res.status(500).json({
+      success: false,
+      error: err.message || "Unknown error",
+      details: process.env.NODE_ENV === "development" ? err.stack : undefined,
+    });
   }
 }
 
@@ -1648,6 +1794,7 @@ export async function cancelSubCollectionListing(req, res) {
       time: new Date().toISOString(),
     });
 
+    // 1. Validate required fields
     if (!nftId || tokenId === undefined) {
       return res.status(400).json({
         success: false,
@@ -1655,7 +1802,7 @@ export async function cancelSubCollectionListing(req, res) {
       });
     }
 
-    // 1. Parent collection تلاش کریں
+    // 2. Find parent collection
     const parent = await NFTSystem.findById(nftId);
     if (!parent) {
       console.error("❌ Parent collection not found with ID:", nftId);
@@ -1665,24 +1812,13 @@ export async function cancelSubCollectionListing(req, res) {
       });
     }
 
-    console.log("✅ Found parent:", parent._id);
-    console.log(
-      "📊 Parent sub-collections count:",
-      parent.subCollections.length,
-    );
-
-    // Sub-collections کو log کریں
-    parent.subCollections.forEach((sub, index) => {
-      console.log(`   Sub-collection [${index}]:`, {
-        _id: sub._id,
-        tokenId: sub.tokenId,
-        tokenIdType: typeof sub.tokenId,
-        listed: sub.listed,
-        name: sub.name,
-      });
+    console.log("✅ Found parent:", {
+      id: parent._id,
+      name: parent.collection?.name,
+      subCollectionsCount: parent.subCollections?.length || 0,
     });
 
-    // 2. tokenId کو number میں convert کریں
+    // 3. Convert tokenId to number
     const tokenIdNum = parseInt(tokenId);
     if (isNaN(tokenIdNum)) {
       return res.status(400).json({
@@ -1693,7 +1829,7 @@ export async function cancelSubCollectionListing(req, res) {
 
     console.log("🔍 Looking for sub-collection with tokenId:", tokenIdNum);
 
-    // 3. subCollection تلاش کریں
+    // 4. Find sub-collection by tokenId
     const subCollection = parent.subCollections.find(
       (sub) => sub.tokenId === tokenIdNum,
     );
@@ -1716,27 +1852,33 @@ export async function cancelSubCollectionListing(req, res) {
       tokenId: subCollection.tokenId,
       listed: subCollection.listed,
       priceETH: subCollection.priceETH,
+      owner: subCollection.owner,
     });
 
-    // 4. Update sub-collection listing status
+    // 5. Update sub-collection listing status
     subCollection.listed = false;
     subCollection.priceETH = null;
     subCollection.seller = null;
 
-    // 5. Save changes
-    const updatedParent = await parent.save();
+    // 6. Save changes
+    await parent.save();
 
-    console.log("✅ Successfully updated listing status:", {
+    console.log("✅ Successfully cancelled listing:", {
       tokenId: tokenIdNum,
-      newListed: subCollection.listed,
-      newPriceETH: subCollection.priceETH,
+      newListed: false,
+      newPriceETH: null,
     });
 
-    // 6. Verify the update
+    // 7. Verify the update
     const verifiedParent = await NFTSystem.findById(nftId);
     const verifiedSub = verifiedParent.subCollections.find(
       (sub) => sub.tokenId === tokenIdNum,
     );
+
+    console.log("✅ Verification:", {
+      listed: verifiedSub.listed,
+      priceETH: verifiedSub.priceETH,
+    });
 
     return res.json({
       success: true,
@@ -1757,7 +1899,7 @@ export async function cancelSubCollectionListing(req, res) {
       time: new Date().toISOString(),
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error: err.message,
       details: process.env.NODE_ENV === "development" ? err.stack : undefined,
@@ -1825,21 +1967,28 @@ export async function getListedSubCollections(req, res) {
   try {
     const walletAddress = req.params.walletAddress;
 
+    console.log("📋 Getting listed sub-collections for:", walletAddress);
+
     if (!walletAddress) {
-      return res.status(400).json({ error: "Wallet address is required" });
+      return res.status(400).json({
+        success: false,
+        error: "Wallet address is required",
+      });
     }
 
     const walletLower = walletAddress.toLowerCase();
 
-    // Find parent collections with LISTED sub-collections
+    // Find parent collections with LISTED sub-collections owned by this wallet
     const parents = await NFTSystem.find({
       "subCollections.owner": walletLower,
-      "subCollections.listed": true, // فقط listed sub-collections
+      "subCollections.listed": true,
       status: "active",
       isParentCollection: true,
     }).select("collection.name collection.image category subCollections");
 
-    // Extract only LISTED sub-collections
+    console.log("✅ Found parent collections:", parents.length);
+
+    // Extract only LISTED sub-collections owned by this wallet
     const listedSubCollections = [];
 
     parents.forEach((parent) => {
@@ -1849,6 +1998,8 @@ export async function getListedSubCollections(req, res) {
           sub.owner.toLowerCase() === walletLower &&
           sub.listed === true,
       );
+
+      console.log(`   Parent ${parent._id}: ${listedSubs.length} listed subs`);
 
       listedSubs.forEach((sub) => {
         listedSubCollections.push({
@@ -1860,11 +2011,12 @@ export async function getListedSubCollections(req, res) {
           owner: sub.owner,
           listed: sub.listed,
           priceETH: sub.priceETH,
+          priceUSD: sub.priceUSD,
           tokenId: sub.tokenId,
           tokenURI: sub.tokenURI,
           createdAt: sub.createdAt,
           parentInfo: {
-            parentId: parent._id,
+            parentId: parent._id, // ✅ CRITICAL - parent ID for cancel listing
             parentName: parent.collection?.name,
             parentImage: parent.collection?.image,
             category: parent.category,
@@ -1873,10 +2025,10 @@ export async function getListedSubCollections(req, res) {
       });
     });
 
-    console.log("✅ Listed Sub-Collections:", {
-      total: listedSubCollections.length,
-      wallet: walletLower,
-    });
+    console.log(
+      "✅ Total listed sub-collections:",
+      listedSubCollections.length,
+    );
 
     return res.json({
       success: true,

@@ -95,29 +95,38 @@ function UserListings() {
       setLoading(true);
 
       const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${connectedWallet}`,
+        `${BACKEND_BASE_URL}/api/v1/nft/user/listed-subs/${connectedWallet}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      console.log("ALL DATA:", res.data.nfts);
+      console.log("📋 Listed Sub-Collections Response:", res.data);
 
-      // ✅ Extract listed sub NFTs
-      const listedNFTs = res.data.nfts.flatMap(
-        (parent) =>
-          parent.subCollections
-            ?.filter((sub) => sub.listed === true)
-            .map((sub) => ({
-              ...sub,
-              parentId: parent._id,
-              collection: parent.collection, // so UI keeps working
-            })) || [],
-      );
+      // ✅ Use the properly formatted data from backend
+      const listedNFTs = res.data.listedSubCollections.map((sub) => ({
+        _id: sub.subId,
+        tokenId: sub.tokenId,
+        name: sub.name,
+        symbol: sub.symbol,
+        image: sub.image,
+        description: sub.description,
+        owner: sub.owner,
+        listed: sub.listed,
+        priceETH: sub.priceETH,
+        priceUSD: sub.priceUSD,
+        tokenURI: sub.tokenURI,
+        createdAt: sub.createdAt,
+        parentId: sub.parentInfo.parentId, // ✅ CRITICAL
+        collection: {
+          name: sub.parentInfo.parentName,
+          image: sub.parentInfo.parentImage,
+        },
+      }));
 
-      console.log("🔥 Listed sub NFTs:", listedNFTs);
+      console.log("🔥 Formatted Listed NFTs:", listedNFTs);
 
       setListings(listedNFTs);
     } catch (err) {
-      console.error(err);
+      console.error("❌ Fetch listings error:", err);
       toast.error("Failed to load listings");
     } finally {
       setLoading(false);
@@ -189,6 +198,12 @@ function UserListings() {
 
       for (const listing of selectedListings) {
         try {
+          console.log("🔄 Cancelling listing:", {
+            tokenId: listing.tokenId,
+            parentId: listing.parentId,
+            _id: listing._id,
+          });
+
           toast.loading(`Cancelling Token #${listing.tokenId}...`, {
             id: toastId,
           });
@@ -202,11 +217,11 @@ function UserListings() {
 
           await tx.wait();
 
-          // Update backend
-          await axios.post(
+          // ✅ Update backend with CORRECT parentId
+          const cancelResponse = await axios.post(
             `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
             {
-              nftId: listing.parentId, // ✅ FIXED
+              nftId: listing.parentId, // ✅ PARENT ID
               tokenId: listing.tokenId,
             },
             {
@@ -214,9 +229,14 @@ function UserListings() {
             },
           );
 
+          console.log("✅ Backend response:", cancelResponse.data);
+
           successCount++;
         } catch (err) {
-          console.error(`Failed to cancel token ${listing.tokenId}:`, err);
+          console.error(`❌ Failed to cancel token ${listing.tokenId}:`, err);
+          if (err.response) {
+            console.error("Backend error:", err.response.data);
+          }
           failCount++;
         }
       }
@@ -236,7 +256,7 @@ function UserListings() {
 
       setShowModal(false);
       setSelectedItems([]);
-      await fetchUserListings();
+      await fetchUserListings(); // Refresh the list
     } catch (err) {
       console.error("Cancel error:", err);
       let msg = "Failed to cancel listings";
@@ -382,7 +402,7 @@ function UserListings() {
                           />
                         </div>
                         <span className="text-xs sm:text-sm lg:text-[18px] font-inter font-medium">
-                          {item.collection?.name || "Unnamed NFT"}
+                          {item.name || "Unnamed NFT"}
                         </span>
                       </div>
                     </td>
@@ -475,16 +495,16 @@ function UserListings() {
                 {/* Name */}
                 <div className="flex-1 ml-3 space-y-2">
                   <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
-                    {item.collection?.name}
+                    {item.name}
                   </p>
                   <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
-                    You Own {item.quantity || 1}
+                    Token #{item.tokenId}
                   </p>
                 </div>
 
                 {/* Price */}
                 <p className="text-sm font-medium text-gray-300">
-                  ${item.priceUSD?.toFixed(2) || item.priceETH}
+                  {item.priceETH} ETH
                 </p>
               </div>
             ))}
