@@ -11,6 +11,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const { user, token, isLoggedInUser } = useSelector(
+    (state) => state.auth || {}
+  );
 
   const [showNotifications, setShowNotifications] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -18,21 +23,15 @@ const Header = () => {
   const [isProfileHovered, setIsProfileHovered] = useState(false);
   const [notificationCount] = useState(3);
 
-  // Existing synchronous init (unchanged)
-  const [userData, setUserData] = useState(() => {
+  // Use Redux user directly, fallback to localStorage
+  const userData = user || (() => {
     try {
       const adminData = localStorage.getItem("admin_data");
       return adminData ? JSON.parse(adminData) : null;
     } catch {
       return null;
     }
-  });
-
-  const navigate = useNavigate();
-
-  const { user, token, isLoggedInUser } = useSelector(
-    (state) => state.auth || {}
-  );
+  })();
 
   const bellRef = useRef(null);
 
@@ -57,23 +56,24 @@ const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // ✅ ADDED FIX — sync Redux user to Header (NO REFRESH NEEDED)
+  // Sync Redux user to localStorage when available
   useEffect(() => {
     if (user && user._id) {
-      setUserData(user);
       localStorage.setItem("admin_data", JSON.stringify(user));
     }
   }, [user]);
 
-  // Guarded navigation (unchanged)
+  // Navigation handlers - use Redux user first
   const handleNotification = () => {
-    if (!userData?._id) return;
-    navigate(`/${userData._id}/notification`);
+    const userId = user?._id || userData?._id;
+    if (!userId) return;
+    navigate(`/${userId}/notification`);
   };
 
   const handleEditProfile = () => {
-    if (!userData?._id) return;
-    navigate(`/${userData._id}/edit-profile`);
+    const userId = user?._id || userData?._id;
+    if (!userId) return;
+    navigate(`/${userId}/edit-profile`);
   };
 
   return (

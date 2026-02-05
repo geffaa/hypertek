@@ -51,41 +51,39 @@ function Login() {
         Email: formData.email,
         Password: formData.password,
       });
- if (res.data.user.Role === "user") {
+      if (res.data.user.Role === "user") {
+        // ✅ Save full response as JSON string
+        // Save all admin/user data as JSON string
+        localStorage.setItem("authData", JSON.stringify(res.data));
+        console.log("Your login response are :", res);
+        dispatch(
+          loginSuccess({
+            user: res.data.user,
+            token: res.data.token,
+            isLoggedInUser: true,
+          }),
+        );
 
-      // ✅ Save full response as JSON string
-// Save all admin/user data as JSON string
-localStorage.setItem("authData", JSON.stringify(res.data));
-      console.log("Your login response are :",res);
-      dispatch(
-        loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
-          isLoggedInUser: true,
-        })
-      );
+        localStorage.setItem("token", res.data.token);
 
-      localStorage.setItem("token", res.data.token);
-      
-      localStorage.setItem("role", res.data.user.Role);
-       
-      toast.success("Login successful!");
-    }
+        localStorage.setItem("role", res.data.user.Role);
+
+        toast.success("Login successful!");
+      }
       if (res.data.user.Role === "admin") {
         // localStorage.setItem("token", res.data.token);
         // localStorage.setItem("admin-data",res.data)
-        console.log("your login data response are :",res.data);
+        console.log("your login data response are :", res.data);
         const userId = res.data.user.id;
-      
-window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
-// window.location.href = `http://localhost:5174/${userId}`;
+
+        window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`;
+        // window.location.href = `http://localhost:5174/${userId}`;
       } else {
-       navigate("/dashboard", {
-  state: {
-    userData: res.data.user,
-  },
-});
- 
+        navigate("/dashboard", {
+          state: {
+            userData: res.data.user,
+          },
+        });
       }
     } catch (err) {
       toast.error(err.response?.data?.message || "Something went wrong");
@@ -111,7 +109,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             user: res.data.user,
             token: res.data.token,
             isLoggedInUser: true,
-          })
+          }),
         );
         // localStorage.setItem("token", res.data.token);
         toast.success("Google Login successful!");
@@ -133,7 +131,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
   const DISCORD_CLIENT_ID = "1423260002587639828";
   const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
-    REDIRECT_URI
+    REDIRECT_URI,
   )}&response_type=code&scope=identify%20email`;
 
   useEffect(() => {
@@ -150,7 +148,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
       try {
         const res = await axios.post(
           `${BACKEND_BASE_URL}/api/v1/user/discord`,
-          { code }
+          { code },
         );
 
         if (res.data.success && res.data.user) {
@@ -159,12 +157,12 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
               user: res.data.user,
               token: res.data.token,
               isLoggedInUser: true,
-            })
+            }),
           );
           // localStorage.setItem("token", res.data.token);
 
           toast.success(
-            `Discord login successful! Welcome ${res.data.user.FullName}`
+            `Discord login successful! Welcome ${res.data.user.FullName}`,
           );
           navigate("/dasbhoard");
         } else {
@@ -225,7 +223,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             <p>Check for MetaMask popup!</p>
             <p>If not showing, click the MetaMask icon in your browser.</p>
           </div>,
-          { duration: 10000 }
+          { duration: 10000 },
         );
       }, 1000);
 
@@ -239,11 +237,11 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             () =>
               reject(
                 new Error(
-                  "Signature timeout - Click MetaMask icon if popup not visible"
-                )
+                  "Signature timeout - Click MetaMask icon if popup not visible",
+                ),
               ),
-            20000
-          )
+            20000,
+          ),
         ),
       ]);
 
@@ -257,7 +255,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
           signature,
           message,
         },
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" } },
       );
 
       console.log("Backend response:", res.data);
@@ -267,7 +265,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
           user: res.data.user,
           token: res.data.token,
           isLoggedInUser: true,
-        })
+        }),
       );
       // localStorage.setItem("token", res.data.token);
 
@@ -287,7 +285,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             <br />
             3. Refresh the page and try again
           </div>,
-          { duration: 8000 }
+          { duration: 8000 },
         );
       } else if (err.code === 4001) {
         toast.error("Signature cancelled.");
@@ -313,7 +311,6 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
         <h1 className="text-white text-3xl sm:text-2xl font-bold text-center mb-8">
           Welcome Back!
         </h1>
-        
 
         {/* Email/Password Form */}
         <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -353,10 +350,7 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
             </button>
           </div>
           <div className="w-full text-right">
-            <Link
-              to="/forgot-password"
-              className="text-white text-sm "
-            >
+            <Link to="/forgot-password" className="text-white text-sm ">
               Forgot Password ?
             </Link>
           </div>
@@ -377,7 +371,6 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
         </form>
 
         <p className="text-white text-sm mb-2 text-center">
-         
           <Link to="/signup" className="text-white text-xl ">
             Sign Up
           </Link>
@@ -420,7 +413,3 @@ window.location.href = `https://admin-hyper-tek-game.deventiatech.com/${userId}`
 }
 
 export default Login;
-
-
-
-

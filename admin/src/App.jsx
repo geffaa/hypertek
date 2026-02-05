@@ -25,6 +25,9 @@ import Support from "./pages/Support";
 import ProtectedRoute from "./ProtectedRoute";
 import NotificationsPage from "./pages/Notifications";
 import EditAdminProfile from "./pages/EditProfile";
+import AddSubCollection from "./pages/AddSubCollection";
+import EditSubCollection from "./pages/EditSubCollection";
+
 
 function App() {
   return (
@@ -45,6 +48,8 @@ function App() {
             <Route path="creator-earning" element={<CreatorEarning />} />
             <Route path="collections" element={<AddCollection />} />
             <Route path="edit-collection-item" element={<EditCollection2 />} />
+            <Route path="add-sub-collection" element={<AddSubCollection />} />
+            <Route path="edit-sub-collection" element={<EditSubCollection />} />
             <Route path="character-collection" element={<Character />} />
             <Route path="land-collection" element={<Land />} />
             <Route

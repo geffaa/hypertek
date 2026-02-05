@@ -87,11 +87,16 @@ function Character() {
   if (loading) return <FullScreenLoader />;
 
   const handleEditCharacter = (char) => {
-    navigate(`/${adminId}/edit-collection-item`, {
+    navigate(`/${adminId}/edit-sub-collection`, {
       state: {
-        collection: char.collectionData,
-        collectionId: char.id,
+        subCollectionId: char.id,
         parentId: char.parentId,
+        existingData: {
+          name: char.name,
+          description: char.collectionData?.description || "",
+          priceETH: char.price,
+          image: char.image,
+        },
       },
     });
   };
@@ -142,18 +147,24 @@ function Character() {
     }
   };
 
-  const handleAddMore = () => {
-    navigate(`/${adminId}/edit-collection-item`, {
+  // Character.js میں handleAddMore فنکشن تبدیل کریں
+  const handleAddMore = (char) => {
+    if (!char.parentId) {
+      toast.error("Parent collection not found");
+      return;
+    }
+
+    navigate(`/${adminId}/add-sub-collection`, {
       state: {
-        parentCollectionId: adminId,
-        isCreatingSubCollection: true,
-        category: "characters",
+        parentId: char.parentId,
+        parentName:
+          char.collectionData?.collection?.name || "Parent Collection",
       },
     });
   };
 
   return (
-    <div className="pt-16 flex h-[700px] bg-black flex-col relative">
+    <div className="mt-8 flex h-[700px] bg-black flex-col">
       {/* Blur Backgrounds */}
       <div
         className="absolute rounded-full"
@@ -199,7 +210,7 @@ function Character() {
           </thead>
 
           <tbody className="divide-y divide-white/10">
-            {characters.slice(0, visibleCount).map((char) => (
+            {characters.map((char) => (
               <tr key={char.id} className="h-[70px] backdrop-blur-sm">
                 <td className="px-6 py-4 text-[#FFFFFFC4]">{char.name}</td>
                 <td className="px-6 py-4">
@@ -227,20 +238,41 @@ function Character() {
                     >
                       <img src={DeleteImage} className="w-3 h-4" alt="Delete" />
                     </button>
+                   
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-3">
                   <Switch
-                    checked={char.status}
-                    onChange={() => handleToggleStatus(char)}
+                    checked={true} // hamesha active rahe
+                    disabled // static (click nahi hoga)
                     sx={{
                       width: 47,
                       height: 20,
                       padding: 0,
-                      "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
-                        {
-                          backgroundColor: "#0860eeff",
+                      "& .MuiSwitch-switchBase": {
+                        padding: 0,
+                        margin: 0,
+                        transitionDuration: "300ms",
+                        "&.Mui-checked": {
+                          transform: "translateX(24px)",
+                          color: "#fff",
+                          "& + .MuiSwitch-track": {
+                            backgroundColor: "#0860eeff",
+                            opacity: 1,
+                            border: 0,
+                          },
                         },
+                      },
+                      "& .MuiSwitch-thumb": {
+                        width: 22,
+                        height: 20,
+                        backgroundColor: "#fff",
+                      },
+                      "& .MuiSwitch-track": {
+                        borderRadius: 17,
+                        backgroundColor: "#0860eeff", // active color
+                        opacity: 1,
+                      },
                     }}
                   />
                 </td>
@@ -250,17 +282,22 @@ function Character() {
         </table>
 
         {/* Footer */}
+        {/* Footer میں Add More بٹن تبدیل کریں */}
         <div className="flex justify-between items-center mt-8 px-6">
-          <button
-            onClick={handleAddMore}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-sm"
-          >
-            Add More
-          </button>
+          <div className="flex gap-4">
+            {/* یہ بٹن کسی ایک کریکٹر کے لئے ہوگا - آپ کو اپنے UI ڈیزائن کے مطابق منتخب کرنا ہوگا */}
+            {characters.length > 0 && (
+              <button
+                onClick={() => handleAddMore(characters[0])} // یا آپ یہ دکھائیں کہ کس کریکٹر کا اضافہ کرنا ہے
+                className="bg-blue-700  text-white px-6 py-2 rounded-md text-sm"
+              >
+                Add More
+              </button>
+            )}
+          </div>
 
           {visibleCount < characters.length && (
             <button onClick={() => setVisibleCount((v) => v + ITEMS_PER_PAGE)}>
-              {/* Replace with your ArrowIcon */}
               <span className="text-white text-xl">{">"}</span>
             </button>
           )}

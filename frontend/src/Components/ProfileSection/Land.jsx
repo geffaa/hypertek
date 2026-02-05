@@ -284,7 +284,7 @@ function Land() {
       toast.error("Please connect wallet first");
       return;
     }
-    navigate("/buy-nfa", { state: { item } });
+    navigate("/buy-land", { state: { item } });
   };
 
   /* ================= MINT NFT ================= */
