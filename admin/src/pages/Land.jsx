@@ -9,12 +9,11 @@ import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
-function Character() {
-  const ITEMS_PER_PAGE = 5;
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+function Land() {
   const navigate = useNavigate();
 
   const [characters, setCharacters] = useState([]);
+  const [parentCollections, setParentCollections] = useState([]); // ✅ add state
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -39,11 +38,12 @@ function Character() {
           return;
         }
 
-        const parentCollections = parentRes.data.collections || [];
+        const parents = parentRes.data.collections || [];
+        setParentCollections(parents); // ✅ save parents in state
 
         let allCharacters = [];
 
-        for (const parent of parentCollections) {
+        for (const parent of parents) {
           try {
             const subRes = await axios.get(
               `${Dashboard_Base_Url}/v1/nft/parent-collection/${parent._id}/sub-collections`,
@@ -100,26 +100,6 @@ function Character() {
       },
     });
   };
-  const handleToggleStatus = async (char) => {
-    try {
-      const newStatus = char.status ? "inactive" : "active";
-      const res = await axios.put(
-        `${Dashboard_Base_Url}/v1/nft/status/${char.id}`,
-        { status: newStatus },
-      );
-
-      setCharacters((prev) =>
-        prev.map((c) =>
-          c.id === char.id
-            ? { ...c, status: res.data.nft.status === "active" }
-            : c,
-        ),
-      );
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to update status");
-    }
-  };
 
   const handleDeleteCharacter = async () => {
     if (!selectedCharacter) return;
@@ -129,7 +109,6 @@ function Character() {
         `${Dashboard_Base_Url}/v1/nft/parent-collection/${selectedCharacter.parentId}/sub-collection/${selectedCharacter.id}`,
       );
 
-      // Remove from frontend state
       setCharacters((prev) =>
         prev.filter((c) => c.id !== selectedCharacter.id),
       );
@@ -146,18 +125,16 @@ function Character() {
     }
   };
 
-  // Character.js میں handleAddMore فنکشن تبدیل کریں
-  const handleAddMore = (char) => {
-    if (!char.parentId) {
+  const handleAddMore = (parent) => {
+    if (!parent?._id) {
       toast.error("Parent collection not found");
       return;
     }
 
     navigate(`/${adminId}/add-sub-collection`, {
       state: {
-        parentId: char.parentId,
-        parentName:
-          char.collectionData?.collection?.name || "Parent Collection",
+        parentId: parent._id,
+        parentName: parent.name || "Parent Collection",
       },
     });
   };
@@ -237,13 +214,12 @@ function Character() {
                     >
                       <img src={DeleteImage} className="w-3 h-4" alt="Delete" />
                     </button>
-                    
                   </div>
                 </td>
                 <td className="px-6 py-3">
                   <Switch
-                    checked={true} // hamesha active rahe
-                    disabled // static (click nahi hoga)
+                    checked={true} // always active
+                    disabled
                     sx={{
                       width: 47,
                       height: 20,
@@ -269,7 +245,7 @@ function Character() {
                       },
                       "& .MuiSwitch-track": {
                         borderRadius: 17,
-                        backgroundColor: "#0860eeff", // active color
+                        backgroundColor: "#0860eeff",
                         opacity: 1,
                       },
                     }}
@@ -281,25 +257,19 @@ function Character() {
         </table>
 
         {/* Footer */}
-        {/* Footer میں Add More بٹن تبدیل کریں */}
-        <div className="flex justify-between items-center mt-8 px-6">
-          <div className="flex gap-4">
-            {/* یہ بٹن کسی ایک کریکٹر کے لئے ہوگا - آپ کو اپنے UI ڈیزائن کے مطابق منتخب کرنا ہوگا */}
-            {characters.length > 0 && (
+        <div className="flex justify-start items-center mt-42 px-6 gap-4">
+          {parentCollections
+            .filter((parent) => parent.category === "land")
+            .slice(0, 1)
+            .map((parent) => (
               <button
-                onClick={() => handleAddMore(characters[0])} // یا آپ یہ دکھائیں کہ کس کریکٹر کا اضافہ کرنا ہے
-                className="bg-blue-700  text-white px-6 py-2 rounded-md text-sm"
+                key={parent._id}
+                onClick={() => handleAddMore(parent)}
+                className="bg-blue-700 text-white px-6 py-2 rounded-md text-sm"
               >
                 Add More
               </button>
-            )}
-          </div>
-
-          {visibleCount < characters.length && (
-            <button onClick={() => setVisibleCount((v) => v + ITEMS_PER_PAGE)}>
-              <span className="text-white text-xl">{">"}</span>
-            </button>
-          )}
+            ))}
         </div>
       </div>
 
@@ -332,4 +302,4 @@ function Character() {
   );
 }
 
-export default Character;
+export default Land;

@@ -118,112 +118,78 @@ function EditCollection2() {
     navigate(-1);
   };
 
-  // ✅ ALTERNATIVE: Try sending as JSON with base64 image
-const handleSubmit = async () => {
-  if (!Dashboard_Base_Url) {
-    toast.error("Base URL is required");
-    return;
-  }
-
-  if (!name || name.trim() === "") {
-    toast.error("Name is required");
-    return;
-  }
-  if (!symbol || symbol.trim() === "") {
-    toast.error("Symbol is required");
-    return;
-  }
-
-  setUpdating(true);
-
-  try {
-    let response;
-
-    if (collection && collection._id && parentCollectionId) {
-      // Editing existing sub-collection
-      console.log("Updating sub-collection:", collection._id);
-
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("symbol", symbol);
-      if (chain) formData.append("chain", chain);
-      if (royaltyPercent) formData.append("royaltyPercent", royaltyPercent);
-      if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
-      if (supply) formData.append("supply", supply);
-      if (priceETH) formData.append("price", priceETH);
-      if (collectionType) formData.append("Type", collectionType);
-
-      if (
-        selectedImage &&
-        typeof selectedImage === "string" &&
-        selectedImage.startsWith("data:")
-      ) {
-        const blob = await fetch(selectedImage).then((res) => res.blob());
-        formData.append("image", blob, "image.png");
-      }
-
-      response = await axios.put(
-        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentCollectionId}/sub-collection/${collection._id}`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      toast.success("Sub-collection updated successfully!");
-    } else if (parentCollectionId) {
-      // Creating new sub-collection
-      console.log("Creating new sub-collection under parent:", parentCollectionId);
-
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("symbol", symbol);
-      if (chain) formData.append("chain", chain);
-      if (royaltyPercent) formData.append("royaltyPercent", royaltyPercent);
-      if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
-      if (supply) formData.append("supply", supply);
-      if (priceETH) formData.append("price", priceETH);
-      if (collectionType) formData.append("Type", collectionType);
-      formData.append("category", category || "characters");
-      formData.append("owner", "admin");
-      formData.append("creator", "admin");
-
-      if (
-        selectedImage &&
-        typeof selectedImage === "string" &&
-        selectedImage.startsWith("data:")
-      ) {
-        const blob = await fetch(selectedImage).then((res) => res.blob());
-        formData.append("image", blob, "image.png");
-      }
-
-      response = await axios.post(
-        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentCollectionId}/sub-collection`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      toast.success("Sub-collection created successfully!");
-    } else {
-      toast.error("No parent collection ID provided");
-      setUpdating(false);
+  const handleSubmit = async () => {
+    if (!Dashboard_Base_Url) {
+      toast.error("Base URL is required");
       return;
     }
 
-    console.log("API Response:", response.data);
+    if (!name || name.trim() === "") {
+      toast.error("Name is required");
+      return;
+    }
 
-    setTimeout(() => navigate(-1), 1000);
-  } catch (error) {
-    console.error("Error in handleSubmit:", error);
-    const errorMessage =
-      error.response?.data?.message ||
-      error.response?.data?.error ||
-      error.message ||
-      "Failed to submit sub-collection";
-    toast.error(errorMessage);
-  } finally {
-    setUpdating(false);
-  }
-};
+    if (!collection?._id) {
+      toast.error("Collection ID is missing");
+      return;
+    }
 
+    setUpdating(true);
+
+    try {
+      console.log("Updating collection with ID:", collection._id);
+
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("symbol", symbol);
+      formData.append("Type", collectionType);
+      formData.append("chain", chain);
+      formData.append("royaltyPercent", royaltyPercent);
+      formData.append("royaltyWallet", royaltyWallet);
+      formData.append("supply", supply);
+      formData.append("priceETH", priceETH);
+
+      // convert base64 preview to file
+      if (
+        selectedImage &&
+        typeof selectedImage === "string" &&
+        selectedImage.startsWith("data:")
+      ) {
+        const blob = await fetch(selectedImage).then((r) => r.blob());
+        formData.append("image", blob, "collection.png");
+      }
+
+      const response = await axios.put(
+        `${Dashboard_Base_Url}/v1/nft/collection/update/${collection._id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      console.log("Update response:", response.data);
+
+      toast.success("Collection updated successfully");
+
+      setTimeout(() => {
+        navigate(-1);
+      }, 800);
+    } catch (error) {
+      console.error("Update error:", error);
+
+      const message =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Failed to update collection";
+
+      toast.error(message);
+    } finally {
+      setUpdating(false);
+    }
+  };
 
   // Place this right before your main return statement
   if (updating) {
