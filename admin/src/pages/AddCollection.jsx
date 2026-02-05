@@ -11,11 +11,11 @@ import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
   const navigate = useNavigate();
-    // ✅ Get adminId (same as Sidebar)
-    const adminDataString = localStorage.getItem("admin_data");
-    const adminData = adminDataString ? JSON.parse(adminDataString) : null;
-    const adminId = adminData?._id;
-  
+  // ✅ Get adminId (same as Sidebar)
+  const adminDataString = localStorage.getItem("admin_data");
+  const adminData = adminDataString ? JSON.parse(adminDataString) : null;
+  const adminId = adminData?._id;
+
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -31,35 +31,36 @@ function AddCollection() {
         toast.error("Sorry Base url is required");
         return;
       }
-  
+
       try {
         setLoading(true);
-  
+
         const response = await axios.get(
-          `${Dashboard_Base_Url}/v1/nft/parent-collections`
+          `${Dashboard_Base_Url}/v1/nft/parent-collections`,
         );
-  
+
         console.log("Parent Collections response:", response.data);
-  
+
         // Assuming API returns { success: true, collections: [...] }
         if (response.data.success && response.data.collections) {
-          const mappedCollections = response.data.collections.map((item, index) => ({
-            id: item._id,
-            indexId: index + 1,
-            name: item.collection?.name || "Unnamed Collection",
-          
-            // ✅ FIX IS HERE
-            category: item.category?.toLowerCase(), // <-- ADD THIS
-            type: item.category?.toLowerCase(),     // <-- USE BACKEND CATEGORY
-          
-            image: item.collection?.image || "",
-            supply: item.collection?.supply || 0,
-            status: true, // ✅ set active by default
+          const mappedCollections = response.data.collections.map(
+            (item, index) => ({
+              id: item._id,
+              indexId: index + 1,
+              name: item.collection?.name || "Unnamed Collection",
 
-            _id: item._id,
-          }));
-          
-  
+              // ✅ FIX IS HERE
+              category: item.category?.toLowerCase(), // <-- ADD THIS
+              type: item.category?.toLowerCase(), // <-- USE BACKEND CATEGORY
+
+              image: item.collection?.image || "",
+              supply: item.collection?.supply || 0,
+              status: true, // ✅ set active by default
+
+              _id: item._id,
+            }),
+          );
+
           setCollections(mappedCollections);
         } else {
           setCollections([]);
@@ -71,13 +72,15 @@ function AddCollection() {
         setLoading(false);
       }
     };
-  
+
     fetchCollections();
   }, []);
 
   const toggleStatus = (id) => {
     setCollections((prev) =>
-      prev.map((col) => (col.id === id ? { ...col, status: !col.status } : col))
+      prev.map((col) =>
+        col.id === id ? { ...col, status: !col.status } : col,
+      ),
     );
   };
 
@@ -107,15 +110,15 @@ function AddCollection() {
     navigate(`/${adminId}/create-collection`); // navigate when ID exists
   };
 
-    // ✅ Admin-based navigation helper (same as Sidebar)
-    const withAdmin = (path) => {
-      if (!adminId) {
-        toast.error("Admin not found");
-        return;
-      }
-      navigate(`/${adminId}${path}`);
-    };
-    
+  // ✅ Admin-based navigation helper (same as Sidebar)
+  const withAdmin = (path) => {
+    if (!adminId) {
+      toast.error("Admin not found");
+      return;
+    }
+    navigate(`/${adminId}${path}`);
+  };
+
   const handleEditCollection = (collection) => {
     const adminDataString = localStorage.getItem("admin_data");
     if (!adminDataString) {
@@ -138,7 +141,7 @@ function AddCollection() {
   };
 
   const filteredCollections = collections.filter((col) =>
-    col.name.toLowerCase().includes(searchTerm.toLowerCase())
+    col.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // Delete the item
@@ -153,13 +156,13 @@ function AddCollection() {
 
     try {
       const response = await axios.delete(
-        `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCollection._id}`
+        `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCollection._id}`,
       );
 
       if (response.data.success) {
         // Remove the deleted item from state
         setCollections((prev) =>
-          prev.filter((c) => c._id !== selectedCollection._id)
+          prev.filter((c) => c._id !== selectedCollection._id),
         );
         toast.success("Collection deleted successfully!");
         setShowDeleteModal(false);
@@ -190,7 +193,7 @@ function AddCollection() {
       // Call API to update status
       const response = await axios.put(
         `${Dashboard_Base_Url}/v1/nft/status/${collection._id}`,
-        { status: newStatus }
+        { status: newStatus },
       );
 
       // Update local state ONLY after API succeeds
@@ -198,15 +201,15 @@ function AddCollection() {
         prev.map((col) =>
           col._id === collection._id
             ? { ...col, status: response.data.nft.status === "active" } // store as boolean for Switch
-            : col
-        )
+            : col,
+        ),
       );
 
       toast.success(`NFT status updated to ${response.data.nft.status}!`);
     } catch (error) {
       console.error(error);
       toast.error(
-        error.response?.data?.message || "Failed to update collection status"
+        error.response?.data?.message || "Failed to update collection status",
       );
     }
   };
@@ -261,31 +264,27 @@ function AddCollection() {
               />
             </div>
             <div className="flex justify-end mt-4">
-            <div className="flex justify-end mt-2">
-          <button
-  type="button"
-  onClick={handleAddCollection}
-  className="text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-  style={{
-    width: "100px",      // reduced width
-    height: "30px",      // reduced height
-    borderRadius: "6px",
-    gap: "8px",
-    padding: "4px 8px",  // tighter padding
-    fontSize: "12px",    // smaller text
-    fontWeight: "500",
-    background: "rgba(255, 255, 255, 0.10)",
-    border: "1px solid rgba(255, 255, 255, 0.20)",
-    cursor: "pointer",
-  }}
->
-  Add Collection
-</button>
-
-</div>
-
-
-
+              <div className="flex justify-end mt-2">
+                <button
+                  type="button"
+                  onClick={handleAddCollection}
+                  className="text-white flex items-center justify-center backdrop-blur-sm transition-colors"
+                  style={{
+                    width: "100px", // reduced width
+                    height: "30px", // reduced height
+                    borderRadius: "6px",
+                    gap: "8px",
+                    padding: "4px 8px", // tighter padding
+                    fontSize: "12px", // smaller text
+                    fontWeight: "500",
+                    background: "rgba(255, 255, 255, 0.10)",
+                    border: "1px solid rgba(255, 255, 255, 0.20)",
+                    cursor: "pointer",
+                  }}
+                >
+                  Add Collection
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -298,22 +297,20 @@ function AddCollection() {
       </div>
     );
   }
-   // ✅ Matches Sidebar routing exactly
-   const handleTypeNavigation = (col) => {
+  // ✅ Matches Sidebar routing exactly
+  const handleTypeNavigation = (col) => {
     if (!adminId) {
       toast.error("Admin ID missing");
       return;
     }
-  
+
     if (col.category === "land") {
       withAdmin("/land-collection");
     } else if (col.category === "characters") {
       withAdmin("/character-collection");
     }
   };
-  
 
-  
   return (
     <div className="mt-12 flex h-[500px] bg-black flex-col">
       {/* Background blur divs */}
@@ -363,7 +360,6 @@ function AddCollection() {
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
             />
           </div>
-          
         </div>
       </div>
 
@@ -396,28 +392,25 @@ function AddCollection() {
           <tbody className="divide-y divide-white/10">
             {filteredCollections.map((col) => (
               <tr
-                key={col._id} // Use the actual _id as key
-                className="h-[70px] transition-all duration-200 backdrop-blur-sm"
+                key={col._id}
+                className="h-[70px] transition-all duration-200 backdrop-blur-sm cursor-pointer "
+                onClick={() => handleTypeNavigation(col)}
               >
                 {/* <td className="px-6 py-4 text-[#FFFFFFC4] font-medium">
                   {col.indexId}
                 </td> */}
-<td
-  className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
-  onClick={() => handleTypeNavigation(col)}
->
-  {{
-    land: "Land",
-    characters: "Character",
-    character: "Character",
-    nfa: "NFA",
-    other: "Other",
-  }[col.category] || "Unknown"}
-</td>
-
-
-
-
+                <td
+                  className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
+                  onClick={() => handleTypeNavigation(col)}
+                >
+                  {{
+                    land: "Land",
+                    characters: "Character",
+                    character: "Character",
+                    nfa: "NFA",
+                    other: "Other",
+                  }[col.category] || "Unknown"}
+                </td>
 
                 <td className="px-6 py-3">
                   {col.image ? (
@@ -440,21 +433,27 @@ function AddCollection() {
                     </div>
                   )}
                 </td>
-               <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
-  {Number(col.supply).toPrecision(1)}
-</td>
+                <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
+                  {Number(col.supply).toPrecision(1)}
+                </td>
 
                 <td className="px-6 py-3">
                   <div className="flex gap-4">
                     <button
-                      onClick={() => handleEditCollection(col)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditCollection(col);
+                      }}
                       className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
                     >
                       <img src={EditImage} alt="edit" className="w-4 h-4" />
                     </button>
 
                     <button
-                      onClick={() => handleOpenDeleteModal(col)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenDeleteModal(col);
+                      }}
                       className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
                     >
                       <img src={DeleteImage} alt="delete" className="w-3 h-4" />
@@ -463,7 +462,8 @@ function AddCollection() {
                 </td>
                 <td className="px-6 py-3">
                   <Switch
-                    checked={col.status} // boolean
+                    checked={col.status}
+                    onClick={(e) => e.stopPropagation()}
                     onChange={() => HandleCollectionStatus(col)}
                     sx={{
                       width: 47,
