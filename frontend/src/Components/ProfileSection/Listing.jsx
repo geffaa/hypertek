@@ -396,7 +396,7 @@ function UserListings() {
                           }}
                         >
                           <img
-                            src={`${BACKEND_BASE_URL}${item.collection?.image}`}
+                            src={`${BACKEND_BASE_URL}${item.image}`}
                             alt={item.collection?.name}
                             className="w-full h-full object-cover object-top"
                           />
