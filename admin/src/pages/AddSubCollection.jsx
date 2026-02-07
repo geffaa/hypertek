@@ -59,7 +59,7 @@ function AddSubCollection() {
       }
 
       await axios.post(
-        `http://localhost:4700/api/v1/nft/parent-collection/${parentId}/sub-collection`,
+        `https://api-hyper-tek-games.deventiatech.com/api/v1/nft/parent-collection/${parentId}/sub-collection`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
