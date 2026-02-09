@@ -101,7 +101,7 @@ function PopularCollections() {
                       <img src={TVector} alt="chain" className="w-3 h-3" />
                     </div>
                     <span className="font-semibold truncate">
-                      ${item?.collection?.chain}
+                      {item?.collection?.chain}
                     </span>
                   </div>
                 </div>
