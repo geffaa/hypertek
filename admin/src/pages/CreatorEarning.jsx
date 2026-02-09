@@ -22,6 +22,7 @@ function CreatorEarning() {
     symbol: "",
     chain: "",
     Type: "",
+    category: "", // ✅ Add category here
     imagePreview: null,
     selectedFile: null
   });
@@ -34,6 +35,7 @@ function CreatorEarning() {
         symbol: location.state.formData.symbol || "",
         chain: location.state.formData.chain || "",
         Type: location.state.formData.Type || "",
+        category: location.state.formData.category || "", // ✅ Get category from previous page
         imagePreview: location.state.formData.imagePreview || null,
         selectedFile: location.state.selectedFile || null
       });
@@ -54,13 +56,11 @@ function CreatorEarning() {
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-  // Only allow numbers for royaltyPercent and supply
-  if ((name === "royaltyPercent" || name === "supply") && value !== "") {
-    // Regex to allow only numbers
-    if (!/^\d*\.?\d*$/.test(value)) return; // ignore non-number input
-  }
-
-
+    // Only allow numbers for royaltyPercent and supply
+    if ((name === "royaltyPercent" || name === "supply") && value !== "") {
+      // Regex to allow only numbers
+      if (!/^\d*\.?\d*$/.test(value)) return; // ignore non-number input
+    }
 
     setFormData(prev => ({
       ...prev,
@@ -70,38 +70,22 @@ function CreatorEarning() {
 
   // Submit data to backend
   const handleSubmit = async () => {
-   if (!formData.royaltyPercent || !formData.royaltyWallet || !formData.supply) {
-  toast.error("All fields are required");
-  return;
-}
+    if (!formData.royaltyPercent || !formData.royaltyWallet || !formData.supply) {
+      toast.error("All fields are required");
+      return;
+    }
 
-if (formData.royaltyWallet.length !== 42) {
-  toast.error("Wallet address must be exactly 42 characters");
-  return;
-}
+    if (formData.royaltyWallet.length !== 42) {
+      toast.error("Wallet address must be exactly 42 characters");
+      return;
+    }
 
     setIsSubmitting(true);
     const loading = toast.loading("Creating collection...");
+    
     try {
-      // Map frontend Type to backend category enum
-      let category = "other"; // default
-      if (basicData.Type) {
-        switch (basicData.Type.toLowerCase()) {
-          case "characters":
-          case "character":
-          case "nfa": // if old NFA still appears
-            category = "characters";
-            break;
-          case "land":
-            category = "land";
-            break;
-          case "weapons":
-            category = "weapons";
-            break;
-          default:
-            category = "other";
-        }
-      }
+      // ✅ Use the category from CreateCollections.jsx (which is the collection name)
+      const category = basicData.category || basicData.name.toLowerCase().trim();
   
       // Combine data from both steps
       const combinedData = {
@@ -109,9 +93,8 @@ if (formData.royaltyWallet.length !== 42) {
         ...formData,
         owner: "admin",
         creator: "admin",
-        category, // ✅ properly mapped category
+        category, // ✅ Use collection name as category
       };
-
 
       const data = new FormData();
       data.append("name", combinedData.name);
@@ -123,8 +106,7 @@ if (formData.royaltyWallet.length !== 42) {
       data.append("supply", combinedData.supply);
       data.append("owner", combinedData.owner);
       data.append("creator", combinedData.creator);
-      data.append("category", combinedData.category); // <-- add this line
-
+      data.append("category", combinedData.category); // ✅ Add category
       
       // Add the image file if it exists
       if (basicData.selectedFile) {
@@ -132,19 +114,31 @@ if (formData.royaltyWallet.length !== 42) {
       }
 
       const res = await fetch(
-        `http://localhost:4700/api/v1/nft/parent-collection/create`,
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/create`,
         {
           method: "POST",
           body: data,
         }
       );
-      
 
       const result = await res.json();
 
       if (res.ok) {
         toast.success("Collection Created Successfully", { id: loading });
-        navigate("/collections");
+        
+        // 🔥 CRITICAL: Dispatch event to update sidebar categories
+        window.dispatchEvent(new Event('categoriesUpdated'));
+        
+        // Get admin ID for navigation
+        const adminDataString = localStorage.getItem("admin_data");
+        const adminId = adminDataString ? JSON.parse(adminDataString)._id : null;
+        
+        // Navigate to collections page
+        if (adminId) {
+          navigate(`/${adminId}/collections`);
+        } else {
+          navigate("/collections");
+        }
       } else {
         toast.error(result.error || "Failed to create collection", {
           id: loading,
@@ -160,7 +154,6 @@ if (formData.royaltyWallet.length !== 42) {
   const handleBackButton = () => {
     navigate(-1);
   };
-  
 
   if (isSubmitting) {
     return <FullScreenLoader />;
@@ -203,7 +196,6 @@ if (formData.royaltyWallet.length !== 42) {
       <div className="flex gap-10 mt-[80px] mx-8 relative z-50">
         {/* Left side - Preview and Basic Info */}
      
-
         {/* Right side - Form */}
         <div className="flex flex-col gap-6 p-6 w-[456px]">
           <span className="font-inter font-semibold text-[25px]">
@@ -250,15 +242,14 @@ if (formData.royaltyWallet.length !== 42) {
               Recipient Wallet Address
             </h1>
             <input
-  type="text"
-  name="royaltyWallet"
-  value={formData.royaltyWallet}
-  onChange={handleInputChange}
-  placeholder="Add wallet address"
-  maxLength={42}
-  className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
-/>
-
+              type="text"
+              name="royaltyWallet"
+              value={formData.royaltyWallet}
+              onChange={handleInputChange}
+              placeholder="Add wallet address"
+              maxLength={42}
+              className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
+            />
           </div>
 
           {/* Creator Earnings Info */}

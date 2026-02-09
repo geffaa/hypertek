@@ -281,10 +281,12 @@ function AddCollection() {
       return;
     }
 
-    if (col.category === "land") {
-      withAdmin("/land-collection");
-    } else if (col.category === "characters") {
-      withAdmin("/character-collection");
+    // Navigate to the dynamic category page for any category
+    const categoryKey = (col.category || "").toString().toLowerCase();
+    if (categoryKey) {
+      withAdmin(`/collections/${categoryKey}`);
+    } else {
+      withAdmin("/collections");
     }
   };
 
@@ -407,16 +409,12 @@ function AddCollection() {
                 <td className="px-6 py-3">
                   {col.image ? (
                     <img
-                      src={
-                        col.image
-                          ? `${Image_Base_Url}${col.image}`
-                          : `${Image_Base_Url}${col.image}`
-                      }
+                      src={`${Image_Base_Url}${col.image.startsWith("/") ? col.image : "/" + col.image}`}
                       alt={col.name}
                       className="w-12 h-12 object-cover border border-white/10 rounded"
                       onError={(e) => {
                         e.target.onerror = null;
-                        // e.target.src = "https://via.placeholder.com/48";
+                        console.error("Failed to load image:", e.target.src);
                       }}
                     />
                   ) : (

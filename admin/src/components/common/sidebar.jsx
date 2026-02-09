@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 import Logo from "../../assets/Sidebar/logo1.png";
 import DashboardImage from "../../assets/Sidebar/dashboard.png";
@@ -13,8 +15,7 @@ import TransactionImage from "../../assets/Sidebar/transaction.png";
 import SaleImage from "../../assets/Sidebar/sale.png";
 import SupportImage from "../../assets/Sidebar/support.png";
 import LogoutImage from "../../assets/Sidebar/logout.png";
-import { useSelector } from "react-redux";
-import axios from "axios";
+
 import { Dashboard_Base_Url } from "../../Config";
 
 const Sidebar = ({ onLogoutClick }) => {
@@ -23,539 +24,248 @@ const Sidebar = ({ onLogoutClick }) => {
 
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [openNews, setOpenNews] = useState(false);
   const [openTransaction, setOpenTransaction] = useState(false);
   const [openSale, setOpenSale] = useState(false);
   const [selectedItem, setSelectedItem] = useState("Dashboard");
+  const [categories, setCategories] = useState([]);
 
   const sidebarRef = useRef(null);
 
-  const toggleDropdown = (clickedDropdown, itemName) => {
-    setOpenCreate(clickedDropdown === "create" ? !openCreate : false);
-    setOpenCollection(
-      clickedDropdown === "collection" ? !openCollection : false,
-    );
-    setOpenNews(clickedDropdown === "news" ? !openNews : false);
-    setOpenTransaction(
-      clickedDropdown === "transaction" ? !openTransaction : false,
-    );
-    setOpenSale(clickedDropdown === "sale" ? !openSale : false); // <--- new
+  const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
 
-    setSelectedItem(itemName);
+  // Toggle dropdowns
+  const toggleDropdown = (type, name) => {
+    setOpenCreate(type === "create" ? !openCreate : false);
+    setOpenCollection(type === "collection" ? !openCollection : false);
+    setOpenNews(type === "news" ? !openNews : false);
+    setOpenTransaction(type === "transaction" ? !openTransaction : false);
+    setOpenSale(type === "sale" ? !openSale : false);
+    setSelectedItem(name);
   };
 
-  // Close dropdowns when clicking outside
+  // Close dropdowns if click outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
         setOpenCreate(false);
         setOpenCollection(false);
-        setOpenNews(false); // close News
+        setOpenNews(false);
+        setOpenTransaction(false);
+        setOpenSale(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Fetch parent collections and derive unique categories for sidebar
-  // Fetch parent collections and derive unique categories for sidebar
+  // Fetch categories from backend
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(
+        `${Dashboard_Base_Url}/v1/nft/parent-collections`
+      );
+
+      const parents = res.data.collections || [];
+
+      const unique = Array.from(
+        new Set(
+          parents
+            .map(
+              (p) =>
+                (p.category || p.collection?.name || "")
+                  .toLowerCase()
+                  .trim()
+            )
+            .filter(Boolean)
+        )
+      );
+
+      setCategories(
+        unique.map((c) => ({
+          key: c,
+          label: c.charAt(0).toUpperCase() + c.slice(1),
+        }))
+      );
+    } catch (err) {
+      console.error("Sidebar category fetch error:", err);
+    }
+  };
+
+  // Initial fetch + listen for dynamic updates
   useEffect(() => {
-    let mounted = true;
+    fetchCategories(); // first load
 
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(
-          `${Dashboard_Base_Url}/v1/nft/parent-collections`,
-        );
-        const parents = res.data.collections || [];
-
-        const unique = Array.from(
-          new Set(
-            parents
-              .map((p) =>
-                (p.category || p.collection?.name || "").toLowerCase().trim(),
-              )
-              .filter(Boolean),
-          ),
-        );
-
-        if (!mounted) return;
-
-        setCategories(
-          unique.map((c) => ({
-            key: c,
-            label: c.charAt(0).toUpperCase() + c.slice(1),
-            route:
-              c === "characters" || c === "character"
-                ? "/character-collection"
-                : c === "land"
-                  ? "/land-collection"
-                  : "/collections",
-          })),
-        );
-      } catch (err) {
-        console.error("Failed to fetch categories for sidebar:", err);
-      }
+    const handleUpdate = () => {
+      fetchCategories(); // refresh when event triggered
     };
 
-    fetchCategories();
-
-    // ✅ Listen for category update event
-    const handleCategoryUpdate = () => {
-      console.log("Categories updated - refreshing sidebar");
-      fetchCategories();
-    };
-
-    window.addEventListener("categoriesUpdated", handleCategoryUpdate);
+    window.addEventListener("categoriesUpdated", handleUpdate);
 
     return () => {
-      mounted = false;
-      window.removeEventListener("categoriesUpdated", handleCategoryUpdate);
+      window.removeEventListener("categoriesUpdated", handleUpdate);
     };
   }, []);
 
-  const handleItemClick = (itemName) => {
-    setSelectedItem(itemName);
-    setOpenCreate(false);
-    setOpenCollection(false);
-  };
-
-  const withAdmin = (path) => {
-    if (!adminId) return "#"; // prevent crash / bad navigation
-    return `/${adminId}${path}`;
-  };
-
   return (
-    <>
-      <div className="text-white p-4 bg-[#100F0F] z-50  left-0 top-0 h-screen w-[298px] shrink-0 overflow-y-scroll scrollbar-hide">
-        <div className="flex flex-col justify-between h-full">
-          <div className="flex-1">
-            {/* Logo */}
-            <div className="hidden lg:flex items-center absolute top-[25px] left-[83px] gap-1.5 w-[132px] h-[25px]">
-              <img src={Logo} alt="Logo" className="w-[25px] h-[25px]" />
-              <Link to="https://hyper-tek-games.deventiatech.com">
-                <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
-                  HYPER TEK
-                </span>
+    <div
+      ref={sidebarRef}
+      className="text-white bg-[#100F0F] h-screen w-[298px] overflow-y-auto scrollbar-hide"
+    >
+      <div className="flex flex-col justify-between h-full p-4">
+        {/* LOGO */}
+        <div className="hidden lg:flex items-center gap-2 mt-4 ml-16">
+          <img src={Logo} alt="logo" className="w-[25px]" />
+          <span className="font-bold text-lg">HYPER TEK</span>
+        </div>
+
+        {/* MENU */}
+        <ul className="flex flex-col items-center mt-8 space-y-4">
+          {/* Dashboard */}
+          <Link to={withAdmin("/dashboard")}>
+            <li
+              onClick={() => setSelectedItem("Dashboard")}
+              className={`menu-item ${
+                selectedItem === "Dashboard" && "bg-[#002AA8]"
+              }`}
+            >
+              <img src={DashboardImage} className="w-[22px]" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
+
+          {/* Create Collection */}
+          <Link to={withAdmin("/create-collection")}>
+            <li
+              onClick={() => toggleDropdown("create", "Create")}
+              className={`menu-item justify-between ${
+                selectedItem === "Create" && "bg-[#002AA8]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <img src={CreateCollection2} className="w-[18px]" />
+                <span>Create Collection</span>
+              </div>
+              {openCreate ? <FiChevronUp /> : <FiChevronDown />}
+            </li>
+          </Link>
+
+          {openCreate && (
+            <ul className="ml-8 space-y-2 text-sm">
+              <Link to={withAdmin("/edit-collection")}>
+                <li className="submenu">Collection Details</li>
               </Link>
-            </div>
-
-            {/* Menu */}
-            <ul className="flex flex-col items-center mt-24">
-              {/* Dashboard 1 */}
-              <Link to={withAdmin("/dashboard")}>
-                <li
-                  className={`flex items-center gap-2 rounded-md px-3 py-2 cursor-pointer ${
-                    selectedItem === "Dashboard" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => handleItemClick("Dashboard")}
-                >
-                  <img
-                    src={DashboardImage}
-                    alt="Dashboard Icon"
-                    style={{ width: "22px", height: "22px" }}
-                  />
-                  <h1
-                    className="text-white font-normal"
-                    style={{
-                      width: "100px",
-                      height: "17px",
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
-                  >
-                    Dashboard
-                  </h1>
-                </li>
-              </Link>
-
-              {/* Create Collection 2 */}
-              <Link to={withAdmin("/create-collection")}>
-                <li
-                  className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                    selectedItem === "Create Collection" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => toggleDropdown("create", "Create Collection")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={CreateCollection2}
-                        alt=""
-                        className="w-[16.5px] h-[16.5px]"
-                      />
-                      <img
-                        src={CreateCollection1}
-                        alt=""
-                        className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2"
-                      />
-                    </div>
-
-                    <h1
-                      className="text-white font-normal ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Create Collection
-                    </h1>
-                  </div>
-
-                  {openCreate ? (
-                    <FiChevronUp className="text-white" />
-                  ) : (
-                    <FiChevronDown className="text-white" />
-                  )}
-                </li>
-              </Link>
-
-              {/* Dropdown Options */}
-              {openCreate && (
-                <ul className="flex flex-col items-start w-[129px] h-[27px] mb-8  opacity-100 rounded mr-3 ">
-                  <div className="flex">
-                    <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-                    <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                      <Link to={withAdmin("/edit-collection")}>
-                        Collection Details
-                      </Link>
-                    </li>
-                  </div>
-                  <div className="flex">
-                    <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-                    <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal leading-none text-white hover:text-slate-300 cursor-pointer">
-                      <Link to={withAdmin("/creator-earning")}>
-                        Creator Earning
-                      </Link>
-                    </li>
-                  </div>
-                </ul>
-              )}
-
-              {/* Collections  3 */}
-              <Link to={withAdmin("/collections")}>
-                <li
-                  className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                    selectedItem === "Collection" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => toggleDropdown("collection", "Collection")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={CollectionImage}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-
-                    <h1
-                      className="text-white ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Collection
-                    </h1>
-                  </div>
-
-                  {openCollection ? (
-                    <FiChevronUp className="text-white" />
-                  ) : (
-                    <FiChevronDown className="text-white" />
-                  )}
-                </li>
-              </Link>
-
-              {/* Dropdown Options (dynamic from backend categories) */}
-              {openCollection && (
-                <ul className="flex flex-col items-start w-[200px] max-h-[300px] overflow-y-auto mb-8 opacity-100 rounded mr-3 ">
-                  {categories.length === 0 && (
-                    <li className="w-[160px] text-sm ps-1 pt-3 text-white">
-                      No categories
-                    </li>
-                  )}
-                  {categories.map((cat) => (
-                    <div className="flex" key={cat.key}>
-                      <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-                      <li className="w-[160px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                        <Link to={withAdmin(`/collections/${cat.key}`)}>
-                          {cat.label}
-                        </Link>
-                      </li>
-                    </div>
-                  ))}
-                </ul>
-              )}
-
-              {/* Edit User 4  */}
-              <Link to={withAdmin("/users")}>
-                <li
-                  className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-                    selectedItem === "users" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => handleItemClick("users")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={EditUser}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-                    <h1
-                      className="text-white font-normal ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Edit User
-                    </h1>
-                  </div>
-                </li>
-              </Link>
-
-              {/* News section 5  */}
-
-              {/* News section 5 */}
-              <Link to={withAdmin("/add-news")}>
-                <li
-                  className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                    selectedItem === "News" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => toggleDropdown("news", "News")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={NewsImage}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-
-                    <h1
-                      className="text-white ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Upload News
-                    </h1>
-                  </div>
-
-                  {openNews ? (
-                    <FiChevronUp className="text-white" />
-                  ) : (
-                    <FiChevronDown className="text-white" />
-                  )}
-                </li>
-              </Link>
-
-              {/* Dropdown Options */}
-              {openNews && (
-                <ul className="flex flex-col items-start w-[129px] h-[60px] mb-2   opacity-100 rounded mr-3 ">
-                  <div className="flex">
-                    <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-                    <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                      <Link to={withAdmin("/edit-news")}>Edit News</Link>
-                    </li>
-                  </div>
-                  <div className="flex">
-                    <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-                    <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                      <Link to={withAdmin("/other-news")}>Other-news</Link>
-                    </li>
-                  </div>
-                </ul>
-              )}
-
-              {/* Collection on sale  */}
-
-              <Link to={withAdmin("/collection-listed-sale")}>
-                <li
-                  className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-                    selectedItem === "Sale" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => toggleDropdown("sale", "Sale")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={SaleImage}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-                    <h1
-                      className="text-white font-normal ml-3"
-                      style={{
-                        width: "130px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Collection on Sale
-                    </h1>
-                  </div>
-
-                  {openSale ? (
-                    <FiChevronUp className="text-white" />
-                  ) : (
-                    <FiChevronDown className="text-white" />
-                  )}
-                </li>
-              </Link>
-
-              {/* Dropdown Options */}
-              {/* {openSale && (
-          <ul className="flex flex-col items-start w-[129px] h-[27px]   opacity-100 rounded mr-3 ">
-            <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/create-collection">Sale 1</Link>
-              </li>
-            </div>
-            <div className="flex">
-              <div className=" w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b-1 border-b-[#494A4C]"></div>
-              <li className="w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal  pt-2 leading-none text-white hover:text-slate-300 cursor-pointer">
-                <Link to="/create-collection">Sale 2</Link>
-              </li>
-            </div>
-          </ul>
-        )} */}
-
-              {/* Transaction News 6  */}
-              <Link to={withAdmin("/transactions")}>
-                <li
-                  className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-                    selectedItem === "Transaction" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => toggleDropdown("transaction", "Transaction")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={TransactionImage}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-                    <h1
-                      className="text-white font-normal ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Transaction
-                    </h1>
-                  </div>
-                </li>
-              </Link>
-
-              {/* Support 7  */}
-              <Link to={withAdmin("/support")}>
-                <li
-                  className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-                    selectedItem === "support" ? "bg-[#002AA8]" : ""
-                  }`}
-                  style={{ width: "222px", height: "42px", opacity: 1 }}
-                  onClick={() => handleItemClick("support")}
-                >
-                  <div className="flex items-center">
-                    <div className="relative">
-                      <img
-                        src={SupportImage}
-                        alt=""
-                        className="w-[22px] h-[22px]"
-                      />
-                    </div>
-                    <h1
-                      className="text-white font-normal ml-3"
-                      style={{
-                        width: "120px",
-                        height: "17px",
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        lineHeight: "17px",
-                      }}
-                    >
-                      Support
-                    </h1>
-                  </div>
-                </li>
+              <Link to={withAdmin("/creator-earning")}>
+                <li className="submenu">Creator Earning</li>
               </Link>
             </ul>
-          </div>
-          <button
-            onClick={onLogoutClick} // Use the prop instead of local state
-            className="
-      mx-auto
-      w-[122px] h-[48px]
-      rounded-[10px]
-      px-[15px] py-[12px]
-      flex items-center
-      cursor-pointer
-      opacity-100
-    "
-          >
-            <div className="flex items-center mt-16 mb-12">
-              <img src={LogoutImage} alt="" className="w-[22px] h-[22px]" />
-              <h1
-                className="text-white font-bold ml-1"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  lineHeight: "17px",
-                }}
-              >
-                Sign Out
-              </h1>
-            </div>
-          </button>
-        </div>
+          )}
+
+          {/* Collection */}
+          <Link to={withAdmin("/collections")}>
+            <li
+              onClick={() => toggleDropdown("collection", "Collection")}
+              className={`menu-item justify-between ${
+                selectedItem === "Collection" && "bg-[#002AA8]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <img src={CollectionImage} className="w-[22px]" />
+                <span>Collection</span>
+              </div>
+              {openCollection ? <FiChevronUp /> : <FiChevronDown />}
+            </li>
+          </Link>
+
+          {/* 🔥 Dynamic Categories */}
+          {openCollection && (
+            <ul className="ml-8 mt-1 space-y-2">
+              {categories.map((cat) => (
+                <Link key={cat.key} to={withAdmin(`/collections/${cat.key}`)}>
+                  <li className="submenu">{cat.label}</li>
+                </Link>
+              ))}
+            </ul>
+          )}
+
+          {/* Users */}
+          <Link to={withAdmin("/users")}>
+            <li className="menu-item">
+              <img src={EditUser} className="w-[22px]" />
+              <span>Edit User</span>
+            </li>
+          </Link>
+
+          {/* News */}
+          <Link to={withAdmin("/add-news")}>
+            <li
+              onClick={() => toggleDropdown("news", "News")}
+              className="menu-item justify-between"
+            >
+              <div className="flex items-center gap-3">
+                <img src={NewsImage} className="w-[22px]" />
+                <span>Upload News</span>
+              </div>
+              {openNews ? <FiChevronUp /> : <FiChevronDown />}
+            </li>
+          </Link>
+
+          {openNews && (
+            <ul className="ml-8 space-y-2 text-sm">
+              <Link to={withAdmin("/edit-news")}>
+                <li className="submenu">Edit News</li>
+              </Link>
+              <Link to={withAdmin("/other-news")}>
+                <li className="submenu">Other News</li>
+              </Link>
+            </ul>
+          )}
+
+          {/* Transaction */}
+          <Link to={withAdmin("/transactions")}>
+            <li className="menu-item">
+              <img src={TransactionImage} className="w-[22px]" />
+              <span>Transaction</span>
+            </li>
+          </Link>
+
+          {/* Support */}
+          <Link to={withAdmin("/support")}>
+            <li className="menu-item">
+              <img src={SupportImage} className="w-[22px]" />
+              <span>Support</span>
+            </li>
+          </Link>
+        </ul>
+
+        {/* LOGOUT */}
+        <button onClick={onLogoutClick} className="mx-auto mb-6 mt-8 flex gap-2">
+          <img src={LogoutImage} className="w-[22px]" />
+          <span className="font-bold">Sign Out</span>
+        </button>
       </div>
-    </>
+
+      {/* TAILWIND HELPERS */}
+      <style>{`
+        .menu-item {
+          width: 222px;
+          height: 42px;
+          padding: 0 12px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+        .submenu {
+          color: white;
+          cursor: pointer;
+        }
+        .submenu:hover {
+          color: #cbd5f5;
+        }
+      `}</style>
+    </div>
   );
 };
 
