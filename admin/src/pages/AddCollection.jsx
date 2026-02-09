@@ -233,7 +233,7 @@ function AddCollection() {
     return (
       <div className="mt-8 flex h-[700px] bg-black flex-col">
         {/* Background blur divs */}
-        <div
+        {/* <div
           style={{
             top: `120px`,
             left: `290px`,
@@ -246,7 +246,7 @@ function AddCollection() {
           shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
                   0_0_100px_50px_rgba(59,130,246,0.4),
                   0_0_200px_100px_rgba(59,130,246,0.2)]"
-        ></div>
+        ></div> */}
 
         <div className="flex flex-col w-[900px] h-[200px] gap-6 ml-12">
           <h1 className="font-inter font-semibold text-[25px] text-white z-50">
@@ -545,3 +545,4 @@ function AddCollection() {
 }
 
 export default AddCollection;
+
