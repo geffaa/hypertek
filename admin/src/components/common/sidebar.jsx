@@ -118,7 +118,11 @@ const Sidebar = ({ onLogoutClick }) => {
         {/* Logo */}
         <div className="hidden lg:flex items-center gap-2 mt-4 ml-16">
           <img src={Logo} alt="logo" className="w-[25px]" />
-          <span className="font-bold text-lg">HYPER TEK</span>
+          <Link to="https://hyper-tek-games.deventiatech.com">
+        <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
+          HYPER TEK
+        </span>
+        </Link>
         </div>
 
         {/* Menu */}
@@ -349,7 +353,7 @@ const Sidebar = ({ onLogoutClick }) => {
         </ul>
 
         {/* LOGOUT */}
-        <button onClick={onLogoutClick} className="mx-auto mb-6 flex gap-2">
+        <button onClick={onLogoutClick} className="mx-auto mb-6 mt-8 flex gap-2">
           <img src={LogoutImage} className="w-[22px]" alt="Logout" />
           <span className="font-bold">Sign Out</span>
         </button>
@@ -431,3 +435,4 @@ const Sidebar = ({ onLogoutClick }) => {
 };
 
 export default Sidebar;
+
