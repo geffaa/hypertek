@@ -107,7 +107,12 @@ function PopularCollections() {
                 </div>
 
                 {/* BUTTON */}
-                
+                <div className="flex justify-center items-center mt-8">
+
+                  <Link to="/market-place">
+                    <CustomButton4 text="Buy Now" />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
