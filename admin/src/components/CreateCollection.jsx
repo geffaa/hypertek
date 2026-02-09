@@ -23,7 +23,6 @@ function CreateCollections() {
     name: "",
     symbol: "",
     chain: "",
-    Type: "",
     priceETH: "",
   });
 
@@ -124,15 +123,9 @@ function CreateCollections() {
       newErrors.symbol = "Symbol must be at least 2 characters";
     }
 
-    if (!formData.Type) {
-      newErrors.Type = "Collection type is required";
-    }
-
     if (!formData.chain.trim()) {
       newErrors.chain = "Chain is required";
     }
-
-   
 
     setErrors(newErrors);
     return newErrors;
@@ -152,8 +145,10 @@ function CreateCollections() {
       state: {
         formData: {
           ...formData,
-          price: formData.priceETH, // mapping
+          price: formData.priceETH,
           imagePreview: selectedImage,
+          // Category will be the name itself (in lowercase for consistency)
+          category: formData.name.toLowerCase().trim(),
         },
         selectedFile,
       },
@@ -178,7 +173,7 @@ function CreateCollections() {
       {/* Content */}
       <div className="relative z-50">
         <div className="flex gap-10 mt-[80px] mx-2">
-          {/* left side preview / modal - FIXED: Single click handler */}
+          {/* left side preview / modal */}
           <div
             className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
             style={{
@@ -221,7 +216,7 @@ function CreateCollections() {
                   }}
                 />
 
-                {/* Hover overlay to change image - FIXED: Only this triggers file input */}
+                {/* Hover overlay to change image */}
                 <div
                   className="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-3 rounded-md cursor-pointer"
                   onClick={() => fileInputRef.current?.click()}
@@ -375,7 +370,7 @@ function CreateCollections() {
               <input
                 type="text"
                 id="name"
-                placeholder="Add Contract Name"
+                placeholder="Add Collection Name (e.g., Characters, Land, Weapons)"
                 value={formData.name}
                 onChange={(e) => {
                   setFormData({ ...formData, name: e.target.value });
@@ -412,7 +407,7 @@ function CreateCollections() {
               <input
                 type="text"
                 id="symbol"
-                placeholder="Create Name"
+                placeholder="Create Symbol"
                 value={formData.symbol}
                 onChange={(e) => {
                   setFormData({ ...formData, symbol: e.target.value });
@@ -428,51 +423,6 @@ function CreateCollections() {
                 <p className="text-red-500 text-sm">{errors.symbol}</p>
               )}
             </div>
-
-            {/* Collection Type with validation */}
-<div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
-  <label
-    htmlFor="type"
-    style={{
-      fontFamily: "Inter, sans-serif",
-      fontWeight: 400,
-      fontStyle: "normal",
-      fontSize: "18px",
-      lineHeight: "100%",
-      letterSpacing: "0%",
-      color: "#FFFFFF",
-    }}
-  >
-    Collection Type *
-  </label>
-
-  <select
-    id="Type"
-    value={formData.Type}
-    onChange={(e) => {
-      setFormData({ ...formData, Type: e.target.value });
-      if (errors.Type) {
-        setErrors((prev) => ({ ...prev, Type: "" }));
-      }
-    }}
-    className={`w-full h-10 px-3 rounded-md bg-transparent text-white border ${
-      errors.Type ? "border-red-500" : "border-gray-600"
-    } focus:outline-none focus:border-blue-500 focus:bg-gray-700 transition-colors`}
-  >
-    <option value="" className="text-black">
-      Select Type
-    </option>
-    <option value="characters" className="text-black">
-      Character
-    </option>
-    <option value="land" className="text-black">
-      Land
-    </option>
-    
-  </select>
-  {errors.Type && <p className="text-red-500 text-sm">{errors.Type}</p>}
-</div>
-
 
             {/* Chain with validation */}
             <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">

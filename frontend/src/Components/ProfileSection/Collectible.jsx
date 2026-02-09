@@ -34,6 +34,7 @@ function MarketPlace() {
   const [showMobileList, setShowMobileList] = useState({});
   const [connectingWallet, setConnectingWallet] = useState({});
   const [userHasInteracted, setUserHasInteracted] = useState({});
+  const [activeCategory, setActiveCategory] = useState("characters");
 
   /* ================= GET MINTED SUB COLLECTION NFTS ================= */
  const extractMintedNFTs = (data) => {
@@ -44,8 +45,8 @@ function MarketPlace() {
   const extracted = [];
 
   data.forEach((item, index) => {
-    // Only characters category
-    if (item.category !== "characters") return;
+    // Only items matching activeCategory
+    if ((item.category || "").toLowerCase() !== (activeCategory || "").toLowerCase()) return;
 
     // If parent collection with subCollections
     if (item.isParentCollection && Array.isArray(item.subCollections)) {
@@ -57,7 +58,7 @@ function MarketPlace() {
         return subOwner === walletLower && !subNft.listed;
       });
 
-      ownedUnlistedSubs.forEach((subNft) => {
+        ownedUnlistedSubs.forEach((subNft) => {
         extracted.push({
           _id: subNft._id,
           parentId: item._id,
@@ -84,7 +85,7 @@ function MarketPlace() {
     }
   });
 
-  console.log("✅ Characters NFTs extracted:", extracted.length);
+  console.log(`✅ ${activeCategory} NFTs extracted:`, extracted.length);
   return extracted;
 };
 
@@ -134,6 +135,13 @@ function MarketPlace() {
       window.ethereum?.removeListener("accountsChanged", handleAccountsChanged);
     };
   }, [token]);
+
+  // When NavLinks triggers a category selection, update activeCategory
+  const handleSelectCategory = (cat) => {
+    setActiveCategory(cat);
+    // Trigger a refetch if wallet connected
+    if (connectedWallet) fetchOwnedNFTs(connectedWallet);
+  };
 
   const handleAccountsChanged = (accounts) => {
     if (accounts.length > 0) {
@@ -296,7 +304,7 @@ function MarketPlace() {
 
           {/* ================= NAV ================= */}
           <div className="mt-6 max-w-7xl mx-auto px-4">
-            <NavLinks />
+            <NavLinks onSelectCategory={handleSelectCategory} selectedCategory={activeCategory} />
           </div>
 
           {/* ================= NFT CARDS ================= */}
