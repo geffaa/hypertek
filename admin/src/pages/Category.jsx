@@ -179,8 +179,40 @@ function Category() {
                     </button>
                   </div>
                 </td>
-                <td className="px-6 py-3">
-                  <Switch checked={item.listed} disabled sx={{ width: 47, height: 20 }} />
+<td className="px-6 py-3">
+                  <Switch
+                    checked={true} // always active
+                    disabled
+                    sx={{
+                      width: 47,
+                      height: 20,
+                      padding: 0,
+                      "& .MuiSwitch-switchBase": {
+                        padding: 0,
+                        margin: 0,
+                        transitionDuration: "300ms",
+                        "&.Mui-checked": {
+                          transform: "translateX(24px)",
+                          color: "#fff",
+                          "& + .MuiSwitch-track": {
+                            backgroundColor: "#0860eeff",
+                            opacity: 1,
+                            border: 0,
+                          },
+                        },
+                      },
+                      "& .MuiSwitch-thumb": {
+                        width: 22,
+                        height: 20,
+                        backgroundColor: "#fff",
+                      },
+                      "& .MuiSwitch-track": {
+                        borderRadius: 17,
+                        backgroundColor: "#0860eeff",
+                        opacity: 1,
+                      },
+                    }}
+                  />
                 </td>
               </tr>
             ))}
