@@ -10,6 +10,7 @@ import CollectionDetails from "./pages/CollectionDetails";
 import CreatorEarning from "./pages/CreatorEarning";
 import Character from "./pages/Character";
 import Land from "./pages/Land";
+import Category from "./pages/Category";
 import EditUsers from "./pages/EditUser";
 import UpdateNews from "./pages/UpdateNews";
 import CollectionListedForSale from "./pages/CollectionListedForSale";
@@ -50,6 +51,7 @@ function App() {
             <Route path="edit-collection-item" element={<EditCollection2 />} />
             <Route path="add-sub-collection" element={<AddSubCollection />} />
             <Route path="edit-sub-collection" element={<EditSubCollection />} />
+            <Route path="collections/:category" element={<Category />} />
             <Route path="character-collection" element={<Character />} />
             <Route path="land-collection" element={<Land />} />
             <Route

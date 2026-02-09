@@ -14,8 +14,8 @@ const saleSchema = new mongoose.Schema({
 
 // Sub-collection schema (NFTs within a collection category)
 const subCollectionSchema = new mongoose.Schema({
-  name: { type: String, required: true }, // agar name required chahiye
-  symbol: { type: String, required: false }, // optional
+  name: { type: String, required: true },
+  symbol: { type: String, required: false },
   image: String,
   description: String,
   tokenId: Number,
@@ -38,9 +38,8 @@ const nftSystemSchema = new mongoose.Schema(
 
     // Main collection information
     collection: {
-      name: String, // "Characters" or "Land"
+      name: String, // This will be used as the category name
       symbol: { type: String, required: false },
-      Type: String,
       chain: String,
       image: String,
       owner: String,
@@ -55,11 +54,10 @@ const nftSystemSchema = new mongoose.Schema(
       salesCount: { type: Number, default: 0 },
     },
 
-    // Category type for filtering
+    // Category type - automatically set from collection.name
     category: {
       type: String,
-      enum: ["characters", "land", "weapons", "other"],
-      default: "other",
+      required: false,
     },
 
     // Is this a parent collection or a single NFT?
@@ -102,5 +100,29 @@ const nftSystemSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+
+// Pre-save middleware to automatically set category from collection.name
+nftSystemSchema.pre("save", function (next) {
+  // Always set category from collection.name if collection exists
+  if (this.collection && this.collection.name) {
+    this.category = this.collection.name.toLowerCase().trim();
+  }
+  next();
+});
+
+// Also handle updates
+nftSystemSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+  
+  // If collection.name is being updated
+  if (update.$set && update.$set["collection.name"]) {
+    update.$set.category = update.$set["collection.name"].toLowerCase().trim();
+  } else if (update.collection && update.collection.name) {
+    if (!update.$set) update.$set = {};
+    update.$set.category = update.collection.name.toLowerCase().trim();
+  }
+  
+  next();
+});
 
 export default mongoose.model("NFTSystem", nftSystemSchema);

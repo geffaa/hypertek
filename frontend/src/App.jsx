@@ -21,6 +21,7 @@ import NewsAll from "./pages/NewsAll";
 import MarketPlace from "./pages/MarketPlace";
 import NFA from "./pages/NFA";
 import Land from "./pages/Land";
+import CategoryMarketplace from "./pages/CategoryMarketplace";
 import PersonalActivity from "./pages/PersonalActivity";
 import NoPersonalActivity from "./pages/NoPersonalActivity";
 import CreateEarning from "./pages/CreateEarning"
@@ -36,6 +37,7 @@ import Success from "./pages/Success";
 // Profile Section
 import Collect from "./Components/ProfileSection/Collectible";
 import Profile from "./Components/ProfileSection/Land";
+import ProfileCategory from "./Components/ProfileSection/ProfileCategory";
 import Activity from "./Components/ProfileSection/Activity";
 import List from "./Components/ProfileSection/Listing";
 import Edit from "./Components/ProfileSection/EditProfile";
@@ -131,6 +133,7 @@ function AppWrapper() {
 
             {/* Marketplace / NFA */}
             <Route path="/market-place" element={<MarketPlace />} />
+            <Route path="/collections/:category" element={<CategoryMarketplace />} />
             <Route path="/nfa-expand" element={<NFA />} />
             <Route path="/land" element={<Land />} />
             <Route path="/more-news" element={<HypeGamePage/>} />
@@ -163,6 +166,7 @@ function AppWrapper() {
 
             {/* Profile Section */}
             <Route path="/Profile" element={<Collect />} />
+            <Route path="/profile/:category" element={<ProfileCategory />} />
             <Route path="/Lands" element={<Profile />} />
             <Route path="/Activity" element={<Activity />} />
             <Route path="/List" element={<List />} />

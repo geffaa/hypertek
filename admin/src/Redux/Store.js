@@ -13,6 +13,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import sidebarReducer from "./sidebarSlice"; 
 
 // Persist config
 const persistConfig = {
@@ -27,6 +28,7 @@ const persistedAdminReducer = persistReducer(persistConfig, adminReducer);
 export const store = configureStore({
   reducer: {
     admin: persistedAdminReducer,
+    sidebar: sidebarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

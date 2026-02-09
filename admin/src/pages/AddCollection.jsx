@@ -263,7 +263,6 @@ function AddCollection() {
                 className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
               />
             </div>
-           
           </div>
         </div>
 
@@ -381,13 +380,28 @@ function AddCollection() {
                   className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
                   onClick={() => handleTypeNavigation(col)}
                 >
-                  {{
-                    land: "Land",
-                    characters: "Character",
-                    character: "Character",
-                    nfa: "NFA",
-                    other: "Other",
-                  }[col.category] || "Unknown"}
+                  {(() => {
+                    const categoryMap = {
+                      land: "Land",
+                      characters: "Character",
+                      character: "Character",
+                      nfa: "NFA",
+                      other: "Other",
+                    };
+
+                    const category = col.category?.toLowerCase();
+                    return (
+                      categoryMap[category] ||
+                      col.category
+                        ?.split(" ")
+                        .map(
+                          (word) =>
+                            word.charAt(0).toUpperCase() + word.slice(1),
+                        )
+                        .join(" ") ||
+                      "Unknown"
+                    );
+                  })()}
                 </td>
 
                 <td className="px-6 py-3">
