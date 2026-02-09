@@ -83,7 +83,7 @@ function Login() {
         if (token) {
           adminUrl.searchParams.set("token", token);
         }
-// 
+
         toast.success("Admin login successful!");
         window.location.href = adminUrl.toString();
         // For local dev:
