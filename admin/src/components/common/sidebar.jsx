@@ -118,11 +118,7 @@ const Sidebar = ({ onLogoutClick }) => {
         {/* Logo */}
         <div className="hidden lg:flex items-center gap-2 mt-4 ml-16">
           <img src={Logo} alt="logo" className="w-[25px]" />
-           <Link to="https://hyper-tek-games.deventiatech.com">
-        <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
-          HYPER TEK
-        </span>
-        </Link>
+          <span className="font-bold text-lg">HYPER TEK</span>
         </div>
 
         {/* Menu */}
