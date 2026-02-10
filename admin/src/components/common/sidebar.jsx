@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -21,53 +21,28 @@ import { Dashboard_Base_Url } from "../../Config";
 const Sidebar = ({ onLogoutClick }) => {
   const admin = useSelector((state) => state.admin.admin);
   const adminId = admin?._id;
-  const location = useLocation();
 
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
   const [openTransaction, setOpenTransaction] = useState(false);
   const [openSale, setOpenSale] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("Dashboard");
   const [categories, setCategories] = useState([]);
 
   const sidebarRef = useRef(null);
 
   const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
 
-  // Check if current path matches
-  const isActive = (path) => {
-    return location.pathname === withAdmin(path);
-  };
-
-  // Check if any submenu of a section is active
-  const isCreateActive = () => {
-    return isActive('/edit-collection') || isActive('/creator-earning') || isActive('/create-collection');
-  };
-
-  const isCollectionActive = () => {
-    if (isActive('/collections')) return true;
-    return categories.some(cat => isActive(`/collections/${cat.key}`));
-  };
-
-  const isNewsActive = () => {
-    return isActive('/add-news') || isActive('/edit-news') || isActive('/other-news');
-  };
-
   // Toggle dropdowns
-  const toggleDropdown = (type) => {
-    if (type === "create") setOpenCreate(!openCreate);
-    else if (type === "collection") setOpenCollection(!openCollection);
-    else if (type === "news") setOpenNews(!openNews);
-    else if (type === "transaction") setOpenTransaction(!openTransaction);
-    else if (type === "sale") setOpenSale(!openSale);
+  const toggleDropdown = (type, name) => {
+    setOpenCreate(type === "create" ? !openCreate : false);
+    setOpenCollection(type === "collection" ? !openCollection : false);
+    setOpenNews(type === "news" ? !openNews : false);
+    setOpenTransaction(type === "transaction" ? !openTransaction : false);
+    setOpenSale(type === "sale" ? !openSale : false);
+    setSelectedItem(name);
   };
-
-  // Auto-open dropdown if submenu is active
-  useEffect(() => {
-    if (isCreateActive()) setOpenCreate(true);
-    if (isCollectionActive()) setOpenCollection(true);
-    if (isNewsActive()) setOpenNews(true);
-  }, [location.pathname, categories]);
 
   // Close dropdowns if click outside
   useEffect(() => {
@@ -88,7 +63,7 @@ const Sidebar = ({ onLogoutClick }) => {
   const fetchCategories = async () => {
     try {
       const res = await axios.get(
-        `${Dashboard_Base_Url}/v1/nft/parent-collections`
+        `${Dashboard_Base_Url}/v1/nft/parent-collections`,
       );
 
       const parents = res.data.collections || [];
@@ -96,21 +71,18 @@ const Sidebar = ({ onLogoutClick }) => {
       const unique = Array.from(
         new Set(
           parents
-            .map(
-              (p) =>
-                (p.category || p.collection?.name || "")
-                  .toLowerCase()
-                  .trim()
+            .map((p) =>
+              (p.category || p.collection?.name || "").toLowerCase().trim(),
             )
-            .filter(Boolean)
-        )
+            .filter(Boolean),
+        ),
       );
 
       setCategories(
         unique.map((c) => ({
           key: c,
           label: c.charAt(0).toUpperCase() + c.slice(1),
-        }))
+        })),
       );
     } catch (err) {
       console.error("Sidebar category fetch error:", err);
@@ -119,10 +91,10 @@ const Sidebar = ({ onLogoutClick }) => {
 
   // Initial fetch + listen for dynamic updates
   useEffect(() => {
-    fetchCategories();
+    fetchCategories(); // first load
 
     const handleUpdate = () => {
-      fetchCategories();
+      fetchCategories(); // refresh when event triggered
     };
 
     window.addEventListener("categoriesUpdated", handleUpdate);
@@ -153,8 +125,9 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Dashboard */}
           <Link to={withAdmin("/dashboard")}>
             <li
+              onClick={() => setSelectedItem("Dashboard")}
               className={`menu-item ${
-                isActive('/dashboard') && "bg-[#002AA8]"
+                selectedItem === "Dashboard" && "bg-[#002AA8]"
               }`}
             >
               <img src={DashboardImage} className="w-[22px]" />
@@ -165,9 +138,9 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Create Collection */}
           <Link to={withAdmin("/create-collection")}>
             <li
-              onClick={() => toggleDropdown("create")}
+              onClick={() => toggleDropdown("create", "Create")}
               className={`menu-item justify-between ${
-                isCreateActive() && "bg-[#002AA8]"
+                selectedItem === "Create" && "bg-[#002AA8]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -204,9 +177,9 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Collection */}
           <Link to={withAdmin("/collections")}>
             <li
-              onClick={() => toggleDropdown("collection")}
+              onClick={() => toggleDropdown("collection", "Collection")}
               className={`menu-item justify-between ${
-                isCollectionActive() && "bg-[#002AA8]"
+                selectedItem === "Collection" && "bg-[#002AA8]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -217,14 +190,22 @@ const Sidebar = ({ onLogoutClick }) => {
             </li>
           </Link>
 
-          {/* Dynamic Categories */}
+          {/* 🔥 Dynamic Categories */}
           {openCollection && (
             <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[38px]">
               {categories.map((cat, index) => (
                 <Link key={cat.key} to={withAdmin(`/collections/${cat.key}`)}>
-                  <li className={`submenu-item ${index === categories.length - 1 ? 'submenu-item-last' : ''}`}>
+                  <li
+                    className={`submenu-item ${index === categories.length - 1 ? "submenu-item-last" : ""}`}
+                  >
                     <div className="submenu-line">
-                      <div className={index === categories.length - 1 ? 'line-vertical-short' : 'line-vertical'}></div>
+                      <div
+                        className={
+                          index === categories.length - 1
+                            ? "line-vertical-short"
+                            : "line-vertical"
+                        }
+                      ></div>
                       <div className="line-horizontal"></div>
                     </div>
                     <span>{cat.label}</span>
@@ -236,7 +217,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Users */}
           <Link to={withAdmin("/users")}>
-            <li className={`menu-item ${isActive('/users') && "bg-[#002AA8]"}`}>
+            <li className="menu-item">
               <img src={EditUser} className="w-[22px]" />
               <span>Edit User</span>
             </li>
@@ -245,10 +226,8 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* News */}
           <Link to={withAdmin("/add-news")}>
             <li
-              onClick={() => toggleDropdown("news")}
-              className={`menu-item justify-between ${
-                isNewsActive() && "bg-[#002AA8]"
-              }`}
+              onClick={() => toggleDropdown("news", "News")}
+              className="menu-item justify-between"
             >
               <div className="flex items-center gap-3">
                 <img src={NewsImage} className="w-[22px]" />
@@ -280,47 +259,44 @@ const Sidebar = ({ onLogoutClick }) => {
               </Link>
             </ul>
           )}
- <Link to={withAdmin("/collection-listed-sale")}>
-
-        <li
-          className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-            selectedItem === "Sale" ? "bg-[#002AA8]" : ""
-          }`}
-          style={{ width: "222px", height: "42px", opacity: 1 }}
-          onClick={() => toggleDropdown("sale", "Sale")}
-        >
-          <div className="flex items-center">
-            <div className="relative">
-              <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
-            </div>
-            <h1
-           className="text-white font-normal ml-3"
-
-              style={{
-                width: "130px",
-                height: "17px",
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 700,
-                fontSize: "14px",
-                lineHeight: "17px",
-              }}
+          <Link to={withAdmin("/collection-listed-sale")}>
+            <li
+              className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
+                selectedItem === "Sale" ? "bg-[#002AA8]" : ""
+              }`}
+              style={{ width: "222px", height: "42px", opacity: 1 }}
+              onClick={() => toggleDropdown("sale", "Sale")}
             >
-              Collection on Sale
-            </h1>
-          </div>
+              <div className="flex items-center">
+                <div className="relative">
+                  <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
+                </div>
+                <h1
+                  className="text-white font-normal ml-3"
+                  style={{
+                    width: "130px",
+                    height: "17px",
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    lineHeight: "17px",
+                  }}
+                >
+                  Collection on Sale
+                </h1>
+              </div>
 
-          {openSale ? (
-            <FiChevronUp className="text-white" />
-          ) : (
-            <FiChevronDown className="text-white" />
-          )}
-        </li>
-        
-        </Link>
+              {openSale ? (
+                <FiChevronUp className="text-white" />
+              ) : (
+                <FiChevronDown className="text-white" />
+              )}
+            </li>
+          </Link>
 
           {/* Transaction */}
           <Link to={withAdmin("/transactions")}>
-            <li className={`menu-item ${isActive('/transactions') && "bg-[#002AA8]"}`}>
+            <li className="menu-item">
               <img src={TransactionImage} className="w-[22px]" />
               <span>Transaction</span>
             </li>
@@ -328,7 +304,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Support */}
           <Link to={withAdmin("/support")}>
-            <li className={`menu-item ${isActive('/support') && "bg-[#002AA8]"}`}>
+            <li className="menu-item">
               <img src={SupportImage} className="w-[22px]" />
               <span>Support</span>
             </li>
@@ -336,7 +312,10 @@ const Sidebar = ({ onLogoutClick }) => {
         </ul>
 
         {/* LOGOUT */}
-        <button onClick={onLogoutClick} className="mx-auto mb-6 mt-8 flex gap-2">
+        <button
+          onClick={onLogoutClick}
+          className="mx-auto mb-6 mt-8 flex gap-2"
+        >
           <img src={LogoutImage} className="w-[22px]" />
           <span className="font-bold">Sign Out</span>
         </button>
@@ -377,6 +356,7 @@ const Sidebar = ({ onLogoutClick }) => {
           width: 24px;
         }
         
+        /* Vertical line that extends down */
         .line-vertical {
           position: absolute;
           left: 0;
@@ -386,6 +366,7 @@ const Sidebar = ({ onLogoutClick }) => {
           background-color: #666666;
         }
         
+        /* Vertical line for last item (shorter) */
         .line-vertical-short {
           position: absolute;
           left: 0;
@@ -395,6 +376,7 @@ const Sidebar = ({ onLogoutClick }) => {
           background-color: #666666;
         }
         
+        /* Horizontal line */
         .line-horizontal {
           position: absolute;
           left: 0;
@@ -405,6 +387,7 @@ const Sidebar = ({ onLogoutClick }) => {
           transform: translateY(-50%);
         }
         
+        /* Remove vertical line from last item to prevent overflow */
         .submenu-item-last .line-vertical {
           display: none;
         }
@@ -414,4 +397,3 @@ const Sidebar = ({ onLogoutClick }) => {
 };
 
 export default Sidebar;
-
