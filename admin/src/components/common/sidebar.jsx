@@ -280,6 +280,43 @@ const Sidebar = ({ onLogoutClick }) => {
               </Link>
             </ul>
           )}
+ <Link to={withAdmin("/collection-listed-sale")}>
+
+        <li
+          className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
+            selectedItem === "Sale" ? "bg-[#002AA8]" : ""
+          }`}
+          style={{ width: "222px", height: "42px", opacity: 1 }}
+          onClick={() => toggleDropdown("sale", "Sale")}
+        >
+          <div className="flex items-center">
+            <div className="relative">
+              <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
+            </div>
+            <h1
+           className="text-white font-normal ml-3"
+
+              style={{
+                width: "130px",
+                height: "17px",
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 700,
+                fontSize: "14px",
+                lineHeight: "17px",
+              }}
+            >
+              Collection on Sale
+            </h1>
+          </div>
+
+          {openSale ? (
+            <FiChevronUp className="text-white" />
+          ) : (
+            <FiChevronDown className="text-white" />
+          )}
+        </li>
+        
+        </Link>
 
           {/* Transaction */}
           <Link to={withAdmin("/transactions")}>
@@ -377,3 +414,4 @@ const Sidebar = ({ onLogoutClick }) => {
 };
 
 export default Sidebar;
+
