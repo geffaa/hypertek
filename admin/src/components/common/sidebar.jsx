@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -21,28 +21,53 @@ import { Dashboard_Base_Url } from "../../Config";
 const Sidebar = ({ onLogoutClick }) => {
   const admin = useSelector((state) => state.admin.admin);
   const adminId = admin?._id;
+  const location = useLocation();
 
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
   const [openTransaction, setOpenTransaction] = useState(false);
   const [openSale, setOpenSale] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("Dashboard");
   const [categories, setCategories] = useState([]);
 
   const sidebarRef = useRef(null);
 
   const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
 
-  // Toggle dropdowns
-  const toggleDropdown = (type, name) => {
-    setOpenCreate(type === "create" ? !openCreate : false);
-    setOpenCollection(type === "collection" ? !openCollection : false);
-    setOpenNews(type === "news" ? !openNews : false);
-    setOpenTransaction(type === "transaction" ? !openTransaction : false);
-    setOpenSale(type === "sale" ? !openSale : false);
-    setSelectedItem(name);
+  // Check if current path matches
+  const isActive = (path) => {
+    return location.pathname === withAdmin(path);
   };
+
+  // Check if any submenu of a section is active
+  const isCreateActive = () => {
+    return isActive('/edit-collection') || isActive('/creator-earning') || isActive('/create-collection');
+  };
+
+  const isCollectionActive = () => {
+    if (isActive('/collections')) return true;
+    return categories.some(cat => isActive(`/collections/${cat.key}`));
+  };
+
+  const isNewsActive = () => {
+    return isActive('/add-news') || isActive('/edit-news') || isActive('/other-news');
+  };
+
+  // Toggle dropdowns
+  const toggleDropdown = (type) => {
+    if (type === "create") setOpenCreate(!openCreate);
+    else if (type === "collection") setOpenCollection(!openCollection);
+    else if (type === "news") setOpenNews(!openNews);
+    else if (type === "transaction") setOpenTransaction(!openTransaction);
+    else if (type === "sale") setOpenSale(!openSale);
+  };
+
+  // Auto-open dropdown if submenu is active
+  useEffect(() => {
+    if (isCreateActive()) setOpenCreate(true);
+    if (isCollectionActive()) setOpenCollection(true);
+    if (isNewsActive()) setOpenNews(true);
+  }, [location.pathname, categories]);
 
   // Close dropdowns if click outside
   useEffect(() => {
@@ -94,10 +119,10 @@ const Sidebar = ({ onLogoutClick }) => {
 
   // Initial fetch + listen for dynamic updates
   useEffect(() => {
-    fetchCategories(); // first load
+    fetchCategories();
 
     const handleUpdate = () => {
-      fetchCategories(); // refresh when event triggered
+      fetchCategories();
     };
 
     window.addEventListener("categoriesUpdated", handleUpdate);
@@ -117,10 +142,10 @@ const Sidebar = ({ onLogoutClick }) => {
         <div className="hidden lg:flex items-center gap-2 mt-4 ml-16">
           <img src={Logo} alt="logo" className="w-[25px]" />
           <Link to="https://hyper-tek-games.deventiatech.com">
-        <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
-          HYPER TEK
-        </span>
-        </Link>
+            <span className="w-[101px] h-[22px] font-inter font-bold text-[18px] leading-[22px]">
+              HYPER TEK
+            </span>
+          </Link>
         </div>
 
         {/* MENU */}
@@ -128,9 +153,8 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Dashboard */}
           <Link to={withAdmin("/dashboard")}>
             <li
-              onClick={() => setSelectedItem("Dashboard")}
               className={`menu-item ${
-                selectedItem === "Dashboard" && "bg-[#002AA8]"
+                isActive('/dashboard') && "bg-[#002AA8]"
               }`}
             >
               <img src={DashboardImage} className="w-[22px]" />
@@ -141,9 +165,9 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Create Collection */}
           <Link to={withAdmin("/create-collection")}>
             <li
-              onClick={() => toggleDropdown("create", "Create")}
+              onClick={() => toggleDropdown("create")}
               className={`menu-item justify-between ${
-                selectedItem === "Create" && "bg-[#002AA8]"
+                isCreateActive() && "bg-[#002AA8]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -180,9 +204,9 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Collection */}
           <Link to={withAdmin("/collections")}>
             <li
-              onClick={() => toggleDropdown("collection", "Collection")}
+              onClick={() => toggleDropdown("collection")}
               className={`menu-item justify-between ${
-                selectedItem === "Collection" && "bg-[#002AA8]"
+                isCollectionActive() && "bg-[#002AA8]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -193,7 +217,7 @@ const Sidebar = ({ onLogoutClick }) => {
             </li>
           </Link>
 
-          {/* 🔥 Dynamic Categories */}
+          {/* Dynamic Categories */}
           {openCollection && (
             <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[38px]">
               {categories.map((cat, index) => (
@@ -212,7 +236,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Users */}
           <Link to={withAdmin("/users")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isActive('/users') && "bg-[#002AA8]"}`}>
               <img src={EditUser} className="w-[22px]" />
               <span>Edit User</span>
             </li>
@@ -221,8 +245,10 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* News */}
           <Link to={withAdmin("/add-news")}>
             <li
-              onClick={() => toggleDropdown("news", "News")}
-              className="menu-item justify-between"
+              onClick={() => toggleDropdown("news")}
+              className={`menu-item justify-between ${
+                isNewsActive() && "bg-[#002AA8]"
+              }`}
             >
               <div className="flex items-center gap-3">
                 <img src={NewsImage} className="w-[22px]" />
@@ -257,7 +283,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Transaction */}
           <Link to={withAdmin("/transactions")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isActive('/transactions') && "bg-[#002AA8]"}`}>
               <img src={TransactionImage} className="w-[22px]" />
               <span>Transaction</span>
             </li>
@@ -265,7 +291,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Support */}
           <Link to={withAdmin("/support")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isActive('/support') && "bg-[#002AA8]"}`}>
               <img src={SupportImage} className="w-[22px]" />
               <span>Support</span>
             </li>
@@ -314,7 +340,6 @@ const Sidebar = ({ onLogoutClick }) => {
           width: 24px;
         }
         
-        /* Vertical line that extends down */
         .line-vertical {
           position: absolute;
           left: 0;
@@ -324,7 +349,6 @@ const Sidebar = ({ onLogoutClick }) => {
           background-color: #666666;
         }
         
-        /* Vertical line for last item (shorter) */
         .line-vertical-short {
           position: absolute;
           left: 0;
@@ -334,7 +358,6 @@ const Sidebar = ({ onLogoutClick }) => {
           background-color: #666666;
         }
         
-        /* Horizontal line */
         .line-horizontal {
           position: absolute;
           left: 0;
@@ -345,7 +368,6 @@ const Sidebar = ({ onLogoutClick }) => {
           transform: translateY(-50%);
         }
         
-        /* Remove vertical line from last item to prevent overflow */
         .submenu-item-last .line-vertical {
           display: none;
         }
