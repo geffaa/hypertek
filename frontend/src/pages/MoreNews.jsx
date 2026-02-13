@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaArrowLeft, FaShareAlt } from "react-icons/fa";
-import { getImageUrl } from "../Config";
+import { NewsImage_Url } from "../Config";
 
 
 export default function NewsDetail() {
@@ -55,7 +55,7 @@ export default function NewsDetail() {
         <img
   src={
     newsItem.image
-      ? getImageUrl(newsItem.image)
+      ? `${NewsImage_Url}${newsItem.image.replace("/temp/", "/news/")}`
       : ""
   }
   alt={newsItem.heading}

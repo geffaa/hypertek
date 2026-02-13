@@ -8,7 +8,6 @@ import {
   formatEther,
   provider,
 } from "../Service/blockchain.js";
-import { getUploadedImageUrl } from "../Middleware/UploadMulter.js";
 
 /**
  * Create Parent Collection (Characters, Land, etc.)
@@ -30,7 +29,7 @@ export async function createParentCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = getUploadedImageUrl(req.file);
+      image = `/uploads/temp/${req.file.filename}`;
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -96,7 +95,7 @@ export async function addSubCollection(req, res) {
 
     // Handle image
     let image = req.file
-      ? getUploadedImageUrl(req.file)
+      ? `/uploads/temp/${req.file.filename}`
       : req.body.image || parent.collection.image;
 
     const subCollection = {
@@ -210,7 +209,7 @@ export async function updateSubCollection(req, res) {
     if (listed !== undefined) subCollection.listed = listed;
 
     if (req.file) {
-      subCollection.image = getUploadedImageUrl(req.file);
+      subCollection.image = `/uploads/temp/${req.file.filename}`;
     } else if (req.body.image) {
       subCollection.image = req.body.image;
     }
@@ -508,7 +507,7 @@ export async function createCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = getUploadedImageUrl(req.file);
+      image = `/uploads/temp/${req.file.filename}`;
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -1313,7 +1312,7 @@ export async function updateCollection(req, res) {
 
     let image = existing.collection.image;
     if (req.file) {
-      image = getUploadedImageUrl(req.file);
+      image = `/uploads/temp/${req.file.filename}`;
     }
 
     const updated = await NFTSystem.findByIdAndUpdate(

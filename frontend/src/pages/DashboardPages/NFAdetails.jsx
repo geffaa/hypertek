@@ -9,7 +9,7 @@ import { User_Dashboard_Url } from "../../Config";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import { getImageUrl } from "../../Config";
+import { NewsImage_Url } from "../../Config";
 import FullScreenLoader from "../../Components/Common/Spinner";
 
 function CollectionDetails() {
@@ -54,7 +54,7 @@ function CollectionDetails() {
             chain: item.collection.chain,
             creatorFee: item.collection.royaltyPercent,
             supply: item.collection.supply,
-            image: getImageUrl(item.collection.image),
+            image: `${NewsImage_Url}${item.collection.image}`,
             recipient: item.collection.owner,
             status: item.status === "active",
           }))
