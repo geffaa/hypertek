@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 
 function EditSubCollection() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function EditSubCollection() {
       setPriceETH(existingData.priceETH || existingData.price || "");
       
       if (existingData.image) {
-        setSelectedImage(`${Image_Base_Url}${existingData.image}`);
+        setSelectedImage(getImageUrl(existingData.image));
       }
     }
   }, [existingData]);

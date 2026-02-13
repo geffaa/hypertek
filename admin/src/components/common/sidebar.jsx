@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -21,27 +21,37 @@ import { Dashboard_Base_Url } from "../../Config";
 const Sidebar = ({ onLogoutClick }) => {
   const admin = useSelector((state) => state.admin.admin);
   const adminId = admin?._id;
+  const location = useLocation();
+  const path = location.pathname || "";
 
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
   const [openTransaction, setOpenTransaction] = useState(false);
   const [openSale, setOpenSale] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("Dashboard");
   const [categories, setCategories] = useState([]);
 
   const sidebarRef = useRef(null);
 
   const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
 
+  // Active state from URL (blue bg)
+  const isDashboard = path.endsWith("/dashboard");
+  const isCreate = path.includes("create-collection") || path.includes("edit-collection") || path.includes("creator-earning");
+  const isCollection = path.includes("/collections");
+  const isUsers = path.includes("/users");
+  const isNews = path.includes("add-news") || path.includes("edit-news") || path.includes("other-news");
+  const isSale = path.includes("collection-listed-sale");
+  const isTransaction = path.includes("/transactions");
+  const isSupport = path.includes("/support");
+
   // Toggle dropdowns
-  const toggleDropdown = (type, name) => {
+  const toggleDropdown = (type) => {
     setOpenCreate(type === "create" ? !openCreate : false);
     setOpenCollection(type === "collection" ? !openCollection : false);
     setOpenNews(type === "news" ? !openNews : false);
     setOpenTransaction(type === "transaction" ? !openTransaction : false);
     setOpenSale(type === "sale" ? !openSale : false);
-    setSelectedItem(name);
   };
 
   // Close dropdowns if click outside
@@ -124,12 +134,7 @@ const Sidebar = ({ onLogoutClick }) => {
         <ul className="flex flex-col items-center mt-8 space-y-4">
           {/* Dashboard */}
           <Link to={withAdmin("/dashboard")}>
-            <li
-              onClick={() => setSelectedItem("Dashboard")}
-              className={`menu-item ${
-                selectedItem === "Dashboard" && "bg-[#002AA8]"
-              }`}
-            >
+            <li className={`menu-item ${isDashboard ? "bg-[#002AA8]" : ""}`}>
               <img src={DashboardImage} className="w-[22px]" />
               <span>Dashboard</span>
             </li>
@@ -138,10 +143,8 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Create Collection */}
           <Link to={withAdmin("/create-collection")}>
             <li
-              onClick={() => toggleDropdown("create", "Create")}
-              className={`menu-item justify-between ${
-                selectedItem === "Create" && "bg-[#002AA8]"
-              }`}
+              onClick={() => toggleDropdown("create")}
+              className={`menu-item justify-between ${isCreate ? "bg-[#002AA8]" : ""}`}
             >
               <div className="flex items-center gap-3">
                 <img src={CreateCollection2} className="w-[18px]" />
@@ -177,10 +180,8 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* Collection */}
           <Link to={withAdmin("/collections")}>
             <li
-              onClick={() => toggleDropdown("collection", "Collection")}
-              className={`menu-item justify-between ${
-                selectedItem === "Collection" && "bg-[#002AA8]"
-              }`}
+              onClick={() => toggleDropdown("collection")}
+              className={`menu-item justify-between ${isCollection ? "bg-[#002AA8]" : ""}`}
             >
               <div className="flex items-center gap-3">
                 <img src={CollectionImage} className="w-[22px]" />
@@ -217,7 +218,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Users */}
           <Link to={withAdmin("/users")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isUsers ? "bg-[#002AA8]" : ""}`}>
               <img src={EditUser} className="w-[22px]" />
               <span>Edit User</span>
             </li>
@@ -226,8 +227,8 @@ const Sidebar = ({ onLogoutClick }) => {
           {/* News */}
           <Link to={withAdmin("/add-news")}>
             <li
-              onClick={() => toggleDropdown("news", "News")}
-              className="menu-item justify-between"
+              onClick={() => toggleDropdown("news")}
+              className={`menu-item justify-between ${isNews ? "bg-[#002AA8]" : ""}`}
             >
               <div className="flex items-center gap-3">
                 <img src={NewsImage} className="w-[22px]" />
@@ -261,11 +262,11 @@ const Sidebar = ({ onLogoutClick }) => {
           )}
           <Link to={withAdmin("/collection-listed-sale")}>
             <li
-              className={`flex items-center justify-between  px-3 mt-4 cursor-pointer ${
-                selectedItem === "Sale" ? "bg-[#002AA8]" : ""
+              className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${
+                isSale ? "bg-[#002AA8]" : ""
               }`}
               style={{ width: "222px", height: "42px", opacity: 1 }}
-              onClick={() => toggleDropdown("sale", "Sale")}
+              onClick={() => toggleDropdown("sale")}
             >
               <div className="flex items-center">
                 <div className="relative">
@@ -296,7 +297,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Transaction */}
           <Link to={withAdmin("/transactions")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isTransaction ? "bg-[#002AA8]" : ""}`}>
               <img src={TransactionImage} className="w-[22px]" />
               <span>Transaction</span>
             </li>
@@ -304,7 +305,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Support */}
           <Link to={withAdmin("/support")}>
-            <li className="menu-item">
+            <li className={`menu-item ${isSupport ? "bg-[#002AA8]" : ""}`}>
               <img src={SupportImage} className="w-[22px]" />
               <span>Support</span>
             </li>

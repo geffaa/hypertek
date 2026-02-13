@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL } from "../../Config";
-import { NewsImage_Url } from "../../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 
 function PopularCollections() {
   const [marketData, setMarketData] = useState([]);
@@ -80,7 +79,7 @@ function PopularCollections() {
                 <img
                   src={
                     data.collection.image
-                      ? `${NewsImage_Url}${data.collection.image}`
+                      ? getImageUrl(data.collection.image)
                       : popularCollections
                   }
                   alt={data.collection.name || "Collection"}

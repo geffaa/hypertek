@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import EditImage from "./assets/edit.png";
 import Switch from "@mui/material/Switch";
 import DeleteImage from "./assets/delete.png";
-import { Dashboard_Base_Url, Image_Base_Url } from "./Config";
+import { Dashboard_Base_Url, getImageUrl } from "./Config";
 import toast from "react-hot-toast";
 import FullScreenLoader from "./components/common/Spinner";
 
@@ -28,17 +28,10 @@ useEffect(() => {
       console.log("Your news response:", res.data.data);
 
       if (res.data) {
-     const newsData = res.data.data.map((item) => {
-  const imageName = item.image ? item.image.split("/").pop() : null;
-
-  const imageUrl = imageName
-    ? `${Image_Base_Url}/uploads/news/${imageName}`
-    : null;
-
-  return {
+     const newsData = res.data.data.map((item) => ({
     id: item._id,
     name: item.heading,
-    image: imageUrl,
+    image: item.image ? getImageUrl(item.image) : null,
     supply: new Date(item.createdAt).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
@@ -46,10 +39,7 @@ useEffect(() => {
     }),
     status: item.status === "active",
     description: item.description,
-  };
-});
-
-
+  }));
 
         console.log("Processed newsData:", newsData); // Full URLs with file names
         setCollections(newsData);

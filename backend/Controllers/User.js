@@ -6,6 +6,7 @@ import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
 import { ethers } from "ethers";
 import axios from "axios";
+import { getUploadedImageUrl } from "../Middleware/UploadMulter.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
@@ -535,8 +536,7 @@ const EditProfile = async (req, res) => {
     if (Bio) user.Bio = Bio;
 
     if (req.file) {
-      const avatarUrl = `/uploads/temp/${req.file.filename}`;
-      user.Avatar = avatarUrl;
+      user.Avatar = getUploadedImageUrl(req.file);
     }
 
     await user.save();
@@ -943,8 +943,7 @@ const EditUser = async (req, res) => {
 
     // Handle file upload
     if (req.file) {
-      // Save the file path (or filename) in DB
-      user.Avatar = `/uploads/temp/${req.file.filename}`;
+      user.Avatar = getUploadedImageUrl(req.file);
     }
 
     await user.save();

@@ -8,6 +8,7 @@ import {
   formatEther,
   provider,
 } from "../Service/blockchain.js";
+import { getUploadedImageUrl } from "../Middleware/UploadMulter.js";
 
 /**
  * Create Parent Collection (Characters, Land, etc.)
@@ -29,7 +30,7 @@ export async function createParentCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = getUploadedImageUrl(req.file);
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -95,7 +96,7 @@ export async function addSubCollection(req, res) {
 
     // Handle image
     let image = req.file
-      ? `/uploads/temp/${req.file.filename}`
+      ? getUploadedImageUrl(req.file)
       : req.body.image || parent.collection.image;
 
     const subCollection = {
@@ -209,7 +210,7 @@ export async function updateSubCollection(req, res) {
     if (listed !== undefined) subCollection.listed = listed;
 
     if (req.file) {
-      subCollection.image = `/uploads/temp/${req.file.filename}`;
+      subCollection.image = getUploadedImageUrl(req.file);
     } else if (req.body.image) {
       subCollection.image = req.body.image;
     }
@@ -507,7 +508,7 @@ export async function createCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = getUploadedImageUrl(req.file);
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -1312,7 +1313,7 @@ export async function updateCollection(req, res) {
 
     let image = existing.collection.image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = getUploadedImageUrl(req.file);
     }
 
     const updated = await NFTSystem.findByIdAndUpdate(
@@ -2044,6 +2045,176 @@ export async function getListedSubCollections(req, res) {
     return res.status(500).json({
       success: false,
       error: err.message,
+    });
+  }
+}
+
+
+
+// In nftController.js, add this function:
+
+/**
+ * Get Dashboard Statistics with Chart Data
+ * Total Buy = Minted NFTs (regular + sub-collections)
+ * Total Sell = Listed NFTs (regular + sub-collections)
+ */
+export async function getDashboardStats(req, res) {
+  try {
+    console.log("📊 Fetching Dashboard Stats...");
+
+    // ==================== TOTAL USERS ====================
+    let totalUsers = 0;
+    let usersData = [];
+    
+    // If you have User model, uncomment:
+    // try {
+    //   totalUsers = await User.countDocuments({});
+    //   usersData = await User.find({}).select('createdAt');
+    // } catch (err) {
+    //   console.log("⚠️ User model not available");
+    // }
+
+    // ==================== TOTAL BUY (Minted NFTs) ====================
+    
+    // 1. Regular NFTs (non-parent collections with tokenId)
+    const regularMintedNFTs = await NFTSystem.find({
+      tokenId: { $exists: true, $ne: null },
+      $or: [
+        { isParentCollection: { $exists: false } },
+        { isParentCollection: false }
+      ]
+    }).select('createdAt tokenId');
+
+    console.log("✅ Regular Minted NFTs:", regularMintedNFTs.length);
+
+    // 2. Sub-collections with tokenId (minted)
+    const parentsWithMintedSubs = await NFTSystem.aggregate([
+      { $match: { isParentCollection: true } },
+      { $unwind: "$subCollections" },
+      { 
+        $match: { 
+          "subCollections.tokenId": { $exists: true, $ne: null } 
+        } 
+      },
+      {
+        $project: {
+          createdAt: "$subCollections.createdAt",
+          tokenId: "$subCollections.tokenId"
+        }
+      }
+    ]);
+
+    console.log("✅ Minted Sub-Collections:", parentsWithMintedSubs.length);
+
+    // Combine both for Total Buy
+    const totalBuyCount = regularMintedNFTs.length + parentsWithMintedSubs.length;
+    const buyData = [
+      ...regularMintedNFTs.map(nft => ({ createdAt: nft.createdAt })),
+      ...parentsWithMintedSubs.map(sub => ({ createdAt: sub.createdAt }))
+    ];
+
+    console.log("💰 Total Buy Count:", totalBuyCount);
+
+    // ==================== TOTAL SELL (Listed NFTs) ====================
+    
+    // 1. Regular NFTs that are listed
+    const regularListedNFTs = await NFTSystem.find({
+      listed: true,
+      tokenId: { $exists: true, $ne: null },
+      $or: [
+        { isParentCollection: { $exists: false } },
+        { isParentCollection: false }
+      ]
+    }).select('createdAt tokenId priceETH');
+
+    console.log("✅ Regular Listed NFTs:", regularListedNFTs.length);
+
+    // 2. Sub-collections that are listed
+    const parentsWithListedSubs = await NFTSystem.aggregate([
+      { $match: { isParentCollection: true } },
+      { $unwind: "$subCollections" },
+      { 
+        $match: { 
+          "subCollections.listed": true,
+          "subCollections.tokenId": { $exists: true, $ne: null }
+        } 
+      },
+      {
+        $project: {
+          createdAt: "$subCollections.createdAt",
+          tokenId: "$subCollections.tokenId",
+          priceETH: "$subCollections.priceETH"
+        }
+      }
+    ]);
+
+    console.log("✅ Listed Sub-Collections:", parentsWithListedSubs.length);
+
+    // Combine both for Total Sell
+    const totalSellCount = regularListedNFTs.length + parentsWithListedSubs.length;
+    const sellData = [
+      ...regularListedNFTs.map(nft => ({ createdAt: nft.createdAt })),
+      ...parentsWithListedSubs.map(sub => ({ createdAt: sub.createdAt }))
+    ];
+
+    console.log("📈 Total Sell Count:", totalSellCount);
+
+    // ==================== TOTAL NFAs (Same as Total Buy) ====================
+    const totalNFACount = totalBuyCount;
+    const nfaData = buyData;
+
+    // ==================== TOTAL COLLECTIONS (Parent Collections only) ====================
+    const collections = await NFTSystem.find({
+      isParentCollection: true,
+      status: "active"
+    }).select('createdAt collection.name');
+
+    const totalCollectionCount = collections.length;
+    const collectionData = collections.map(col => ({ createdAt: col.createdAt }));
+
+    console.log("📦 Total Collections:", totalCollectionCount);
+
+    // ==================== TOTAL OFFERS ====================
+    // Placeholder - implement based on your Offer model
+    const totalOfferCount = 0;
+    const offerData = [];
+
+    // ==================== FINAL RESPONSE ====================
+    console.log("✅ Dashboard Stats Compiled Successfully");
+    console.log("Summary:", {
+      totalUsers,
+      totalBuy: totalBuyCount,
+      totalSell: totalSellCount,
+      totalNFAs: totalNFACount,
+      totalCollections: totalCollectionCount,
+      totalOffers: totalOfferCount
+    });
+
+    return res.json({
+      success: true,
+      stats: {
+        totalUsers,
+        totalBuy: totalBuyCount,
+        totalSell: totalSellCount,
+        totalNFAs: totalNFACount,
+        totalCollections: totalCollectionCount,
+        totalOffers: totalOfferCount
+      },
+      chartData: {
+        users: usersData,
+        buy: buyData,
+        sell: sellData,
+        nfas: nfaData,
+        collections: collectionData,
+        offers: offerData
+      }
+    });
+
+  } catch (err) {
+    console.error("❌ GET DASHBOARD STATS ERROR:", err);
+    return res.status(500).json({ 
+      success: false,
+      error: err.message 
     });
   }
 }

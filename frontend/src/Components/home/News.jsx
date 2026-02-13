@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomButton from "../Buttons/Button1";
 import GlowingOrb from "../Common/BgColoring";
 import { Link, useNavigate } from "react-router-dom";
-import { NewsImage_Url, BACKEND_BASE_URL } from "../../Config";
+import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
 
 export default function News() {
   const [news, setNews] = useState([]);
@@ -46,7 +46,7 @@ export default function News() {
     onClick={() => handleNewsClick(item)}
   >
     <img
-  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+  src={getImageUrl(item.image)}
   alt={item.heading}
   className="w-full h-[190px] object-cover block"
 />
@@ -74,7 +74,7 @@ export default function News() {
       onClick={() => handleNewsClick(item)}
     >
       <img
-        src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+        src={getImageUrl(item.image)}
         alt={item.heading}
         className="w-[90px] h-[65px] object-cover "
       />
@@ -125,7 +125,7 @@ export default function News() {
               onClick={() => handleNewsClick(item)}
             >
               <img
-                src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                src={getImageUrl(item.image)}
                 alt={item.heading}
                 className="w-full max-h-[350px] rounded-lg"
               />
@@ -148,7 +148,7 @@ export default function News() {
                 onClick={() => handleNewsClick(item)}
               >
                 <img
-                  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                  src={getImageUrl(item.image)}
                   className="w-full max-h-[200px] object-cover rounded-lg"
                   alt={item.heading}
                 />
@@ -180,7 +180,7 @@ export default function News() {
                 onClick={() => handleNewsClick(item)}
               >
                 <img
-                  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                  src={getImageUrl(item.image)}
                   className="w-[200px] h-[140px] object-cover"
                   alt={item.heading}
                 />

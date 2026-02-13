@@ -40,12 +40,25 @@ import {
   cancelSubCollectionListing,
   getOwnedSubCollectionsOnly,
   getListedSubCollections,
+  getDashboardStats,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const NFTRouter = express.Router();
+
+/*
+  MULTER (IMAGE UPLOAD) ROUTES – sab jahan image upload hai, uploadTemp.single("image") use hai.
+  Local disk ya Cloudinary dono isi middleware se handle hote hain (env se).
+  • /parent-collection/create
+  • /parent-collection/:parentId/sub-collection
+  • /parent-collection/:parentId/sub-collection/:subCollectionId (PUT)
+  • /admin/collection/create
+  • /collection/update/:id
+  • /collection/create (user auth)
+  • /user/collection/update/:id
+*/
 
 /* =====================================================
    PARENT COLLECTION ROUTES (NO AUTH)
@@ -94,7 +107,8 @@ NFTRouter.post(
 /* =====================================================
    PUBLIC ROUTES
 ===================================================== */
-
+// In your NFT routes file
+NFTRouter.get("/dashboard/stats", getDashboardStats);
 NFTRouter.get("/collection/get", getAllCollections);
 NFTRouter.get("/all", getAllNFTs);
 NFTRouter.get("/collections/popular", getPopularCollections);
