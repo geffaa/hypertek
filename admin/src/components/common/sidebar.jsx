@@ -159,7 +159,7 @@ const Sidebar = ({ onLogoutClick }) => {
                     <div className="line-vertical"></div>
                     <div className="line-horizontal"></div>
                   </div>
-                  <span>Collection Details</span>
+                  <span>Collection Detailshjsahjksahfjashfjkas</span>
                 </li>
               </Link>
               <Link to={withAdmin("/creator-earning")}>
