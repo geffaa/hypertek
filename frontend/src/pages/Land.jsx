@@ -11,7 +11,7 @@ import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import symbol from "../assets/images/login/Symbol.svg.png";
 
 import axios from "axios";
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import CustomButton4 from "../Components/Buttons/Button4";
 import { useSelector } from "react-redux";
@@ -351,7 +351,7 @@ function Land() {
     >
       <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26] ">
         <img
-          src={item.collection?.image ? `${BACKEND_BASE_URL}${item.collection.image}` : land1Image}
+          src={item.collection?.image ? getImageUrl(item.collection.image) : land1Image}
           alt={item.collection?.name || item.name || "Land Collection"}
           className="w-full h-full object-cover object-top"
         />
@@ -450,7 +450,7 @@ function Land() {
           <img
             src={
               item.collection?.image
-                ? `${BACKEND_BASE_URL}${item.collection.image}`
+                ? getImageUrl(item.collection.image)
                 : land1Image
             }
             alt={item.collection?.name || item.name}

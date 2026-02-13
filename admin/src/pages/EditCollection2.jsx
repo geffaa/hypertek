@@ -5,7 +5,7 @@ import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function EditCollection2() {
@@ -62,7 +62,7 @@ function EditCollection2() {
   }, [collection]);
 
   const [selectedImage, setSelectedImage] = useState(
-    collection?.collection?.image || null,
+    collection?.collection?.image ? getImageUrl(collection.collection.image) : null,
   );
   const [name, setName] = useState(collection?.collection?.name || "");
   const [symbol, setSymbol] = useState(collection?.collection?.symbol || "");

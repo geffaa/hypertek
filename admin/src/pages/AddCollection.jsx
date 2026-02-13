@@ -6,7 +6,7 @@ import DeleteImage from "../assets/delete.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function AddCollection() {
@@ -44,23 +44,24 @@ function AddCollection() {
         // Assuming API returns { success: true, collections: [...] }
         if (response.data.success && response.data.collections) {
           const mappedCollections = response.data.collections.map(
-            (item, index) => ({
-              id: item._id,
-              indexId: index + 1,
-              name: item.collection?.name || "Unnamed Collection",
-
-              // ✅ FIX IS HERE
-              category: item.category?.toLowerCase(), // <-- ADD THIS
-              type: item.category?.toLowerCase(), // <-- USE BACKEND CATEGORY
-
-              image: item.collection?.image || "",
-              supply: item.subCollections?.length || 0,
-              status: true, // ✅ set active by default
-
-              _id: item._id,
-            }),
+            (item, index) => {
+              const imagePath = item.collection?.image || "";
+              console.log(`Collection ${item.collection?.name}: image =`, imagePath);
+              return {
+                id: item._id,
+                indexId: index + 1,
+                name: item.collection?.name || "Unnamed Collection",
+                category: item.category?.toLowerCase(),
+                type: item.category?.toLowerCase(),
+                image: imagePath,
+                supply: item.subCollections?.length || 0,
+                status: true,
+                _id: item._id,
+              };
+            },
           );
 
+          console.log("Mapped collections:", mappedCollections);
           setCollections(mappedCollections);
         } else {
           setCollections([]);
@@ -409,12 +410,17 @@ function AddCollection() {
                 <td className="px-6 py-3">
                   {col.image ? (
                     <img
-                      src={`${Image_Base_Url}${col.image.startsWith("/") ? col.image : "/" + col.image}`}
+                      src={getImageUrl(col.image)}
                       alt={col.name}
                       className="w-12 h-12 object-cover border border-white/10 rounded"
                       onError={(e) => {
+                        console.error("❌ Image failed:", {
+                          src: e.target.src,
+                          original: col.image,
+                          name: col.name
+                        });
                         e.target.onerror = null;
-                        console.error("Failed to load image:", e.target.src);
+                        e.target.src = ""; // Prevent infinite loop
                       }}
                     />
                   ) : (

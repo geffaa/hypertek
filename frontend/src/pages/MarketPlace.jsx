@@ -14,7 +14,7 @@ import GlowingOrb from "../Components/Common/BgColoring";
 import FullScreenLoader from "../Components/Common/Spinner";
 import axios from "axios";
 
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 
 function MarketPlace() {
   const [marketData, setMarketData] = useState([]); // NFA (characters)
@@ -264,7 +264,7 @@ function MarketPlace() {
                               <img
                                 src={
                                   item.image
-                                    ? `${BACKEND_BASE_URL}${item.image}`
+                                    ? getImageUrl(item.image)
                                     : popularCollections
                                 }
                                 alt={item.name || "Collection"}
@@ -329,7 +329,7 @@ function MarketPlace() {
                               <img
                                 src={
                                   item.image
-                                    ? `${BACKEND_BASE_URL}${item.image}`
+                                    ? getImageUrl(item.image)
                                     : popularCollections
                                 }
                                 alt={item.name || "Collection"}
