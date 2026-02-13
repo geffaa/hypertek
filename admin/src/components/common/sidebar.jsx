@@ -145,7 +145,7 @@ const Sidebar = ({ onLogoutClick }) => {
             >
               <div className="flex items-center gap-3">
                 <img src={CreateCollection2} className="w-[18px]" />
-                <span>Create Collectionhfjsfhakjfhd</span>
+                <span>Create Collection</span>
               </div>
               {openCreate ? <FiChevronUp /> : <FiChevronDown />}
             </li>

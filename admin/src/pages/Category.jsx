@@ -7,7 +7,7 @@ import DeleteImage from "../assets/delete.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
-import { Dashboard_Base_Url, getImageUrl } from "../Config";
+import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 
 function Category() {
   const { category } = useParams();
@@ -70,10 +70,7 @@ function Category() {
                 allSubs.push(...mapped);
               }
             } catch (err) {
-              console.error(
-                `Failed to fetch subs for parent ${parent._id}:`,
-                err,
-              );
+              console.error(`Failed to fetch subs for parent ${parent._id}:`, err);
             }
           }
         }
@@ -139,10 +136,7 @@ function Category() {
     <div className="mt-8 flex h-[700px] bg-black flex-col">
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
         <h1 className="font-inter font-semibold text-[25px] text-white">
-          {category
-            ? category.charAt(0).toUpperCase() + category.slice(1)
-            : "Category"}{" "}
-          Collection
+          {category ? category.charAt(0).toUpperCase() + category.slice(1) : "Category"} Collection
         </h1>
       </div>
 
@@ -164,7 +158,7 @@ function Category() {
                 <td className="px-6 py-4 text-[#FFFFFFC4]">{item.name}</td>
                 <td className="px-6 py-4">
                   <img
-                    src={item.image ? getImageUrl(item.image) : Collectionimage}
+                    src={item.image ? `${Image_Base_Url}${item.image}` : Collectionimage}
                     className="w-12 h-12 rounded border border-white/10"
                     alt=""
                   />
@@ -227,11 +221,7 @@ function Category() {
 
         <div className="flex justify-start items-center mt-6 px-6 gap-4">
           {parentCollections.slice(0, 1).map((parent) => (
-            <button
-              key={parent._id}
-              onClick={() => handleAddMore(parent)}
-              className="bg-blue-700 text-white px-6 py-2 rounded-md text-sm"
-            >
+            <button key={parent._id} onClick={() => handleAddMore(parent)} className="bg-blue-700 text-white px-6 py-2 rounded-md text-sm">
               Add More
             </button>
           ))}
@@ -242,22 +232,10 @@ function Category() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-gray-800 p-6 rounded-lg w-[400px]">
             <h2 className="text-white mb-4">Confirm Deletion</h2>
-            <p className="text-gray-300 mb-6">
-              Delete <strong>{selectedItem?.name}</strong>?
-            </p>
+            <p className="text-gray-300 mb-6">Delete <strong>{selectedItem?.name}</strong>?</p>
             <div className="flex justify-end gap-4">
-              <button
-                onClick={() => setShowDeleteModal(false)}
-                className="border px-4 py-2 text-gray-300"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleDelete}
-                className="bg-red-600 px-4 py-2 text-white"
-              >
-                Delete
-              </button>
+              <button onClick={() => setShowDeleteModal(false)} className="border px-4 py-2 text-gray-300">Cancel</button>
+              <button onClick={handleDelete} className="bg-red-600 px-4 py-2 text-white">Delete</button>
             </div>
           </div>
         </div>

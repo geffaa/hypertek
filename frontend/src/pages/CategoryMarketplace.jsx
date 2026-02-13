@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import FullScreenLoader from "../Components/Common/Spinner";
-import { BACKEND_BASE_URL, getImageUrl } from "../Config";
+import { BACKEND_BASE_URL } from "../Config";
 import { FiSearch } from "react-icons/fi";
 import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
@@ -321,7 +321,7 @@ function CategoryMarketplace() {
                   <img
                     src={
                       item.collection?.image
-                        ? getImageUrl(item.collection.image)
+                        ? `${BACKEND_BASE_URL}${item.collection.image}`
                         : overview1
                     }
                     alt={item.collection?.name || item.name || "Item"}
@@ -414,7 +414,7 @@ function CategoryMarketplace() {
                   <img
                     src={
                       item.collection?.image
-                        ? getImageUrl(item.collection.image)
+                        ? `${BACKEND_BASE_URL}${item.collection.image}`
                         : overview1
                     }
                     alt={item.name}

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import CustomButton4 from "../Buttons/Button4";
 import GlowingOrb from "../Common/BgColoring";
-import { MarketPlace_Url, getImageUrl } from "../../Config";
+import { MarketPlace_Url, NewsImage_Url } from "../../Config";
 
 function PopularCollections() {
   const [landData, setLandData] = useState([]);
@@ -76,7 +76,7 @@ function PopularCollections() {
                   }}
                 >
                   <img
-                    src={getImageUrl(item?.collection?.image)}
+                    src={`${NewsImage_Url}${item?.collection?.image}`}
                     alt={item?.collection?.name}
                     className="w-full h-full object-cover"
                   />
@@ -123,4 +123,3 @@ function PopularCollections() {
 }
 
 export default PopularCollections;
-

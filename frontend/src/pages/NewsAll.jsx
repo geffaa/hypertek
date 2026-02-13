@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_BASE_URL, getImageUrl } from "../Config";
+import { BACKEND_BASE_URL, NewsImage_Url } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CustomButton5 from "../Components/Buttons/Button5";
 const ITEMS_PER_PAGE = 3;
@@ -54,7 +54,7 @@ export default function NewsList() {
             {/* Image */}
             <div className="relative w-full sm:w-[320px] h-[200px] overflow-hidden rounded-lg shrink-0">
               <img
-                src={getImageUrl(item.image)}
+                src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
                 alt={item.heading}
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
               />
@@ -85,17 +85,16 @@ export default function NewsList() {
           </div>
         ))}
       </div>
-{/* NEXT BUTTON */}
-{visibleCount < news.length && (
-  <div className="flex justify-center mt-16">
-    <CustomButton5
-      text="Next"
-      onClick={loadMore}
-      className="px-10 py-3"
-    />
-  </div>
-)}
-
+      {/* NEXT BUTTON */}
+      {visibleCount < news.length && (
+        <div className="flex justify-center mt-16">
+          <CustomButton5
+            text="Next"
+            onClick={loadMore}
+            className="px-10 py-3"
+          />
+        </div>
+      )}
     </div>
   );
 }
