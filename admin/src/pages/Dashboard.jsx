@@ -12,8 +12,7 @@ const Dashboard = () => {
       <GlowingOrb Xaxis={20} Yaxis={630} />
       <GlowingOrb Xaxis={730} Yaxis={1040} />
       <GlowingOrb Xaxis={60} Yaxis={1040} /> */}
-
-      <div className="flex-1 min-h-screen bg-black text-white flex justify-center overflow-x-hidden">
+<div className="flex-1 min-h-screen bg-gradient-to-b from-black to-[#002AA8] text-white flex justify-center overflow-x-hidden">
   <div className="w-full max-w-[1400px] px-6 mt-10">
     
     <Graph />
