@@ -17,7 +17,7 @@ import {
   NFT_ADDRESS,
   MARKETPLACE_ABI,
 } from "../../Web3/Config";
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { BACKEND_BASE_URL } from "../../Config";
 
 function UserListings() {
   const navigate = useNavigate();
@@ -396,7 +396,7 @@ function UserListings() {
                           }}
                         >
                           <img
-                            src={getImageUrl(item.image)}
+                            src={`${BACKEND_BASE_URL}${item.image}`}
                             alt={item.collection?.name}
                             className="w-full h-full object-cover object-top"
                           />
@@ -486,7 +486,7 @@ function UserListings() {
                 {/* Image */}
                 <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
                   <img
-                    src={getImageUrl(item.collection?.image)}
+                    src={`${BACKEND_BASE_URL}${item.collection?.image}`}
                     alt={item.collection?.name}
                     className="w-full h-full object-cover"
                   />

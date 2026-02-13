@@ -5,7 +5,7 @@ import DeleteImage from "../assets/delete.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url, getImageUrl } from "../Config";
+import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function Character() {
@@ -158,7 +158,7 @@ function Character() {
                   <td className="px-6 py-4">
                     {char.image ? (
                       <img
-                        src={getImageUrl(char.image)}
+                        src={`${Image_Base_Url}${char.image}`}
                         alt={char.name}
                         className="w-12 h-12 object-cover border border-white/10"
                       />

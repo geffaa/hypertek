@@ -17,7 +17,7 @@ import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
 import FullScreenLoader from "../Common/Spinner";
 
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { BACKEND_BASE_URL } from "../../Config";
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
@@ -487,7 +487,7 @@ function ProfileCategory() {
                     }}
                   >
                     <img
-                      src={getImageUrl(item.image)}
+                      src={`${BACKEND_BASE_URL}${item.image}`}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />

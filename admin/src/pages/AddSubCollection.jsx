@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Dashboard_Base_Url } from "../Config";
 
 function AddSubCollection() {
   const navigate = useNavigate();
@@ -60,7 +59,7 @@ function AddSubCollection() {
       }
 
       await axios.post(
-        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentId}/sub-collection`,
+        `https://api-hyper-tek-games.deventiatech.com/api/v1/nft/parent-collection/${parentId}/sub-collection`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

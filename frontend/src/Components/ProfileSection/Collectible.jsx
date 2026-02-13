@@ -10,7 +10,7 @@ import FaceTwo from "../../assets/images/noActivity2.png";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner";
 import { ethers } from "ethers";
@@ -351,7 +351,7 @@ function MarketPlace() {
                         }}
                       >
                         <img
-                          src={getImageUrl(item.image)}
+                          src={`${BACKEND_BASE_URL}${item.image}`}
                           alt={item.name}
                           className="w-full h-full object-cover"
                         />
