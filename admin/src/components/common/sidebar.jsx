@@ -283,7 +283,7 @@ const Sidebar = ({ onLogoutClick }) => {
                     lineHeight: "17px",
                   }}
                 >
-                  Collection on Salessssss
+                  Collection on Salessssssssss
                 </h1>
               </div>
 
