@@ -142,17 +142,26 @@ const Sidebar = ({ onLogoutClick }) => {
 
           {/* Create Collection */}
           <Link to={withAdmin("/create-collection")}>
-            <li
-              onClick={() => toggleDropdown("create")}
-              className={`menu-item justify-between ${isCreate ? "bg-[#002AA8]" : ""}`}
-            >
-              <div className="flex items-center gap-3">
-                <img src={CreateCollection2} className="w-[18px]" />
-                <span>Create Collection</span>
-              </div>
-              {openCreate ? <FiChevronUp /> : <FiChevronDown />}
-            </li>
-          </Link>
+  <li
+    onClick={() => toggleDropdown("create")}
+    className={`menu-item justify-between ${isCreate ? "bg-[#002AA8]" : ""}`}
+  >
+    <div className="flex items-center gap-3">
+      <div className="relative w-[20px] h-[20px]">
+        <img src={CreateCollection2} className="w-[20px] h-[20px]" />
+
+        <img
+          src={CreateCollection1}
+          className="w-[10px] h-[10px] absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+
+      <span>Create Collection</span>
+    </div>
+
+    {openCreate ? <FiChevronUp /> : <FiChevronDown />}
+  </li>
+</Link>
 
           {openCreate && (
             <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[38px]">
@@ -168,7 +177,7 @@ const Sidebar = ({ onLogoutClick }) => {
               <Link to={withAdmin("/creator-earning")}>
                 <li className="submenu-item submenu-item-last">
                   <div className="submenu-line">
-                    <div className="line-vertical-short"></div>
+                    <div className="line-vertical"></div>
                     <div className="line-horizontal"></div>
                   </div>
                   <span>Creator Earning</span>
