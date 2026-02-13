@@ -145,7 +145,7 @@ const Sidebar = ({ onLogoutClick }) => {
             >
               <div className="flex items-center gap-3">
                 <img src={CreateCollection2} className="w-[18px]" />
-                <span>Create Collection</span>
+                <span>Create Collectionhfjsfhakjfhd</span>
               </div>
               {openCreate ? <FiChevronUp /> : <FiChevronDown />}
             </li>
@@ -159,7 +159,7 @@ const Sidebar = ({ onLogoutClick }) => {
                     <div className="line-vertical"></div>
                     <div className="line-horizontal"></div>
                   </div>
-                  <span>Collection Detailshjsahjksahfjashfjkas</span>
+                  <span>Collection Details</span>
                 </li>
               </Link>
               <Link to={withAdmin("/creator-earning")}>

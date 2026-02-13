@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import News from "../Models/News.js";
-import { getUploadedImageUrl } from "../Middleware/UploadMulter.js";
 
 // ✅ CREATE NEWS
 export const createNews = async (req, res) => {
@@ -15,15 +14,17 @@ export const createNews = async (req, res) => {
       });
     }
 
-    let imagePath = getUploadedImageUrl(req.file);
+    const finalDir = path.join(process.cwd(), "uploads", "news");
 
-    if (imagePath && !imagePath.startsWith("http")) {
-      const finalDir = path.join(process.cwd(), "uploads", "news");
-      if (!fs.existsSync(finalDir)) fs.mkdirSync(finalDir, { recursive: true });
-      const newPath = path.join(finalDir, req.file.filename);
-      fs.renameSync(req.file.path, newPath);
-      imagePath = `/uploads/news/${req.file.filename}`;
+    if (!fs.existsSync(finalDir)) {
+      fs.mkdirSync(finalDir, { recursive: true });
     }
+
+    const oldPath = req.file.path;
+    const newPath = path.join(finalDir, req.file.filename);
+    fs.renameSync(oldPath, newPath);
+
+    const imagePath = `/uploads/temp/${req.file.filename}`;
 
     const news = await News.create({
       heading,
@@ -97,16 +98,16 @@ export const editNews = async (req, res) => {
 
     // Update image if new file uploaded
     if (req.file) {
-      const oldImagePath = news.image?.startsWith("/") ? path.join(process.cwd(), news.image) : null;
-      news.image = getUploadedImageUrl(req.file);
-      if (news.image && !news.image.startsWith("http")) {
-        const finalDir = path.join(process.cwd(), "uploads", "news");
-        if (!fs.existsSync(finalDir)) fs.mkdirSync(finalDir, { recursive: true });
-        const newPath = path.join(finalDir, req.file.filename);
-        fs.renameSync(req.file.path, newPath);
-        news.image = `/uploads/news/${req.file.filename}`;
-      }
-      if (oldImagePath && fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
+      const oldImagePath = path.join(process.cwd(), news.image);
+      if (fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
+
+      const finalDir = path.join(process.cwd(), "uploads", "news");
+      if (!fs.existsSync(finalDir)) fs.mkdirSync(finalDir, { recursive: true });
+
+      const newPath = path.join(finalDir, req.file.filename);
+      fs.renameSync(req.file.path, newPath);
+
+      news.image = `/uploads/news/${req.file.filename}`;
     }
 
     if (heading) news.heading = heading;
@@ -159,10 +160,8 @@ export const deleteNews = async (req, res) => {
       return res.status(404).json({ message: "News not found" });
     }
 
-    if (news.image && news.image.startsWith("/")) {
-      const imagePath = path.join(process.cwd(), news.image);
-      if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
-    }
+    const imagePath = path.join(process.cwd(), news.image);
+    if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
 
     await News.findByIdAndDelete(req.params.id);
 
@@ -171,5 +170,4 @@ export const deleteNews = async (req, res) => {
     res.status(500).json({ success: false });
   }
 };
-
 
