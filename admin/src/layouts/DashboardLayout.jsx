@@ -1,5 +1,7 @@
 // components/layouts/DashboardLayout.jsx
 import Sidebar from "../components/common/sidebar";
+
+import BgEffect2 from "../components/common/BgEffect2";
 import Header from "../components/common/header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../components/common/LogoutModel";
@@ -53,32 +55,31 @@ const DashboardLayout = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
-    <div className="flex w-full min-h-screen text-white relative bg-black overflow-hidden">
+    <div className="flex h-screen text-white relative max-w-[1400px] mx-auto overflow-hidden">
 
       {/* Global Blur Background Circles */}
 
       {/* Sidebar */}
       <Sidebar onLogoutClick={() => setShowLogoutModal(true)} />
-      
+
       {/* Main area */}
       <div className="flex flex-col flex-1 h-screen overflow-hidden">
         {/* Header: fixed on top */}
-        <div className="h-[35px] w-full z-20">
+        <div className="top-0 left-0 right-0 z-20">
           <Header />
         </div>
-        
-        {/* Scrollable main content */}
-     <main
-  className={`flex-1 pt-3 px-4 z-10 ${
-    shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
-  }`}
->
-  <Outlet />
-</main>
 
-         
+        {/* Scrollable main content */}
+        <main
+          className={`flex-1 pt-3 px-4 z-10 ${shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
+            }`}
+        >
+          <Outlet />
+        </main>
+
+
       </div>
-      
+
       {/* Logout Modal */}
       <LogoutModal
         isOpen={showLogoutModal}

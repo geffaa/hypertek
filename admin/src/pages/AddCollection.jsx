@@ -152,18 +152,24 @@ function AddCollection() {
     }
     if (!Dashboard_Base_Url) {
       toast.error("Base url is required");
+      return;
     }
-
+  
     try {
       const response = await axios.delete(
-        `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCollection._id}`,
+        `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCollection._id}`
       );
-
+  
       if (response.data.success) {
         // Remove the deleted item from state
-        setCollections((prev) =>
-          prev.filter((c) => c._id !== selectedCollection._id),
+        const updatedCollections = collections.filter(
+          (c) => c._id !== selectedCollection._id
         );
+        setCollections(updatedCollections);
+  
+        // 🔥 Dispatch event to update sidebar immediately
+        window.dispatchEvent(new Event("categoriesUpdated"));
+  
         toast.success("Collection deleted successfully!");
         setShowDeleteModal(false);
         setSelectedCollection(null);
@@ -172,10 +178,13 @@ function AddCollection() {
       }
     } catch (error) {
       console.error("Error deleting collection:", error);
-      toast.error(error.response?.data?.message || "Error deleting collection");
+      toast.error(
+        error.response?.data?.message || "Error deleting collection"
+      );
     }
   };
-
+  
+  
   /// handle collection status
   const HandleCollectionStatus = async (collection) => {
     if (!Dashboard_Base_Url || !collection?._id) return;

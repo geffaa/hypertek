@@ -5,8 +5,11 @@ import GlowingOrb from "../components/common/BgEffect";
 function CollectionDetails() {
   const navigate = useNavigate();
 
+  // Helper function to add /admin prefix
+  const withAdmin = (path) => `/admin${path}`;
+
   const handlePublish = () => {
-    navigate("/collections");
+    navigate(withAdmin("/collections"));
   };
 
   return (
