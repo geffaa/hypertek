@@ -56,3 +56,14 @@ body,
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out;
 }
+
+/* the sidebar scroller  */
+/* Chrome, Safari */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.sidebar {
+  scrollbar-width: none;
+}
