@@ -8,6 +8,8 @@ import { Image_Base_Url } from "../../Config";
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
+import BgEffect2 from "../common/BgEffect2";
+
 
 const Header = () => {
   const location = useLocation();
@@ -77,54 +79,55 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4 flex justify-end items-center z-50">
-      <div className="flex items-center justify-end gap-6 mr-8">
+    <header className="p-4 flex justify-end items-end z-50 ">
+      {/* Background Glowing Effects */}
+
+
+      <div className="flex items-center justify-end gap-6 mr-16">
 
         {/* 🔍 Animated Search Box */}
         {(location.pathname.match(/\/[a-f0-9]{24}\/dashboard$/) ||
           location.pathname.match(/\/[a-f0-9]{24}$/)) && (
-          <div className="relative">
-            <div
-              className={`
+            <div className="relative">
+              <div
+                className={`
                 flex items-center gap-2 rounded-xl px-4 py-3
                 transition-all duration-500 ease-out
                 backdrop-blur-sm
-                ${
-                  isSearchFocused
+                ${isSearchFocused
                     ? "bg-white shadow-2xl transform scale-105 ring-2 ring-blue-400/50"
                     : "bg-white/90 shadow-lg hover:shadow-xl hover:bg-white"
-                }
+                  }
               `}
-              style={{ width: "229px", height: "33.51px" }}
-            >
-              <FiSearch
-                className={`
+                style={{ width: "229px", height: "33.51px" }}
+              >
+                <FiSearch
+                  className={`
                   transition-all duration-500 ease-out
-                  ${
-                    isSearchFocused
+                  ${isSearchFocused
                       ? "text-blue-500 transform scale-110 rotate-12"
                       : "text-gray-500"
-                  }
+                    }
                 `}
-              />
-              <input
-                type="search"
-                placeholder="Search for something..."
-                className="bg-transparent w-full text-gray-800 placeholder-gray-500 text-sm outline-none"
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setIsSearchFocused(false)}
-              />
+                />
+                <input
+                  type="search"
+                  placeholder="Search for something..."
+                  className="bg-transparent w-full text-gray-800 placeholder-gray-500 text-sm outline-none"
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setIsSearchFocused(false)}
+                />
 
-              <div
-                className={`
+                <div
+                  className={`
                   absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400
                   transform origin-left transition-all duration-500 ease-out
                   ${isSearchFocused ? "scale-x-100" : "scale-x-0"}
                 `}
-              />
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* 🔔 Notification Bell */}
         <div
@@ -145,19 +148,17 @@ const Header = () => {
           onClick={handleEditProfile}
         >
           <div
-            className={`relative w-[44px] h-[44px] rounded-2xl transition-transform duration-700 ease-out ${
-              isProfileHovered ? "transform scale-110" : ""
-            }`}
+            className={`relative w-[44px] h-[44px] rounded-2xl transition-transform duration-700 ease-out ${isProfileHovered ? "transform scale-110" : ""
+              }`}
             onMouseEnter={() => setIsProfileHovered(true)}
             onMouseLeave={() => setIsProfileHovered(false)}
           >
             {userData?.Avatar ? (
               <img
-                src={`${Image_Base_Url}${
-                  userData.Avatar.startsWith("/")
-                    ? userData.Avatar
-                    : "/" + userData.Avatar
-                }`}
+                src={`${Image_Base_Url}${userData.Avatar.startsWith("/")
+                  ? userData.Avatar
+                  : "/" + userData.Avatar
+                  }`}
                 alt={userData?.FullName || "Profile"}
                 className="w-full h-full object-cover rounded-[50%]"
               />
