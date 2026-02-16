@@ -173,6 +173,8 @@ function EditCollection2() {
       console.log("Update response:", response.data);
 
       toast.success("Collection updated successfully");
+      // 🔥 update sidebar instantly
+window.dispatchEvent(new Event("categoriesUpdated"));
 
       setTimeout(() => {
         navigate(-1);

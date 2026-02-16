@@ -26,20 +26,18 @@ function Category() {
     const fetchByCategory = async () => {
       if (!category) return setLoading(false);
       setLoading(true);
-
+  
       try {
-        // Fetch parent collections filtered by category
         const res = await axios.get(
-          `${Dashboard_Base_Url}/v1/nft/parent-collections?category=${category}`,
+          `${Dashboard_Base_Url}/v1/nft/parent-collections?category=${category}`
         );
-
+  
         const parents = res.data.collections || [];
         setParentCollections(parents);
-
-        // For each parent, collect its subCollections
+  
         let allSubs = [];
+  
         for (const parent of parents) {
-          // If backend already returns subCollections in parent document, use it
           if (parent.subCollections && parent.subCollections.length) {
             const mapped = parent.subCollections.map((sub) => ({
               id: sub._id,
@@ -52,11 +50,11 @@ function Category() {
             }));
             allSubs.push(...mapped);
           } else {
-            // Fallback: call sub-collections endpoint
             try {
               const subRes = await axios.get(
-                `${Dashboard_Base_Url}/v1/nft/parent-collection/${parent._id}/sub-collections`,
+                `${Dashboard_Base_Url}/v1/nft/parent-collection/${parent._id}/sub-collections`
               );
+  
               if (subRes.data.subCollections) {
                 const mapped = subRes.data.subCollections.map((sub) => ({
                   id: sub._id,
@@ -70,21 +68,31 @@ function Category() {
                 allSubs.push(...mapped);
               }
             } catch (err) {
-              console.error(`Failed to fetch subs for parent ${parent._id}:`, err);
+              console.error("Sub fetch error:", err);
             }
           }
         }
-
+  
         setItems(allSubs);
       } catch (err) {
-        console.error("Error fetching category data:", err);
-        toast.error("Failed to load category data");
+        console.error(err);
+        toast.error("Failed to load category");
       } finally {
         setLoading(false);
       }
     };
-
+  
+    // First fetch on mount
     fetchByCategory();
+  
+    // 🔥 Listen for global updates
+    const handleUpdate = () => fetchByCategory();
+  
+    window.addEventListener("categoriesUpdated", handleUpdate);
+  
+    return () => {
+      window.removeEventListener("categoriesUpdated", handleUpdate);
+    };
   }, [category]);
 
   if (loading) return <FullScreenLoader />;
@@ -121,49 +129,51 @@ function Category() {
     if (!selectedItem) return;
     try {
       await axios.delete(
-        `${Dashboard_Base_Url}/v1/nft/parent-collection/${selectedItem.parentId}/sub-collection/${selectedItem.id}`,
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/${selectedItem.parentId}/sub-collection/${selectedItem.id}`
       );
-      setItems((prev) => prev.filter((i) => i.id !== selectedItem.id));
+  
       setShowDeleteModal(false);
       toast.success("Deleted successfully");
+  
+      // 🔥 Dispatch global update so Category page and sidebar refresh
+      window.dispatchEvent(new Event("categoriesUpdated"));
     } catch (err) {
       console.error("Delete failed:", err);
       toast.error("Delete failed");
     }
   };
-
   return (
     <div className="mt-12 flex h-[700px] bg-black flex-col relative">
-{/* Background blur divs */}
-<div
-  style={{
-    top: `120px`,
-    left: `290px`,
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full
+      {/* Background blur divs */}
+      <div
+        style={{
+          top: `120px`,
+          left: `290px`,
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full
     shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
             0_0_100px_50px_rgba(59,130,246,0.4),
             0_0_200px_100px_rgba(59,130,246,0.2)]"
-></div>
+      ></div>
 
-<div
-  style={{
-    top: `560px`,
-    left: `900px`,
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full
+      <div
+        style={{
+          top: `560px`,
+          left: `900px`,
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full
     shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
             0_0_100px_50px_rgba(59,130,246,0.4),
             0_0_200px_100px_rgba(59,130,246,0.2)]"
-></div>
+      ></div>
 
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
         <h1 className="font-inter font-semibold text-[25px] text-white">
@@ -210,7 +220,7 @@ function Category() {
                     </button>
                   </div>
                 </td>
-<td className="px-6 py-3">
+                <td className="px-6 py-3">
                   <Switch
                     checked={true} // always active
                     disabled
