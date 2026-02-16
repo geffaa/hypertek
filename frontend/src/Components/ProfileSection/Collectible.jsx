@@ -22,73 +22,75 @@ import {
 } from "../../Web3/Config";
 import CustomButton4 from "../Buttons/Button4";
 
+// RainbowKit imports
+import { useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+
 function MarketPlace() {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  // RainbowKit hooks
+  const { address: connectedWallet, isConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
+
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
   const [userData, setUserData] = useState(null);
-  const [connectedWallet, setConnectedWallet] = useState(null);
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [showMobileList, setShowMobileList] = useState({});
-  const [connectingWallet, setConnectingWallet] = useState({});
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [activeCategory, setActiveCategory] = useState("characters");
+  const [pendingItemId, setPendingItemId] = useState(null);
 
   /* ================= GET MINTED SUB COLLECTION NFTS ================= */
- const extractMintedNFTs = (data) => {
-  console.log("🔍 Raw data received:", data);
+  const extractMintedNFTs = (data) => {
+    console.log("🔍 Raw data received:", data);
 
-  if (!Array.isArray(data)) return [];
+    if (!Array.isArray(data)) return [];
 
-  const extracted = [];
+    const extracted = [];
 
-  data.forEach((item, index) => {
-    // Only items matching activeCategory
-    if ((item.category || "").toLowerCase() !== (activeCategory || "").toLowerCase()) return;
+    data.forEach((item) => {
+      // Only items matching activeCategory
+      if ((item.category || "").toLowerCase() !== (activeCategory || "").toLowerCase()) return;
 
-    // If parent collection with subCollections
-    if (item.isParentCollection && Array.isArray(item.subCollections)) {
-      const ownedUnlistedSubs = item.subCollections.filter((subNft) => {
-        const subOwner = subNft.owner?.toLowerCase();
-        const walletLower = connectedWallet?.toLowerCase();
+      // If parent collection with subCollections
+      if (item.isParentCollection && Array.isArray(item.subCollections)) {
+        const ownedUnlistedSubs = item.subCollections.filter((subNft) => {
+          const subOwner = subNft.owner?.toLowerCase();
+          const walletLower = connectedWallet?.toLowerCase();
 
-        // ✅ Must belong to current wallet AND not listed
-        return subOwner === walletLower && !subNft.listed;
-      });
+          // ✅ Must belong to current wallet AND not listed
+          return subOwner === walletLower && !subNft.listed;
+        });
 
         ownedUnlistedSubs.forEach((subNft) => {
-        extracted.push({
-          _id: subNft._id,
-          parentId: item._id,
-          name: subNft.name,
-          symbol: subNft.symbol,
-          image: subNft.image,
-          description: subNft.description,
-          owner: subNft.owner,
-          listed: subNft.listed || false,
-          priceETH: subNft.priceETH,
-          isFirstSale: subNft.isFirstSale,
-          tokenId: subNft.tokenId,
-          tokenURI: subNft.tokenURI,
-          createdAt: subNft.createdAt,
-
-          // Parent metadata
-          category: item.category,
-          chain: "ETH",
-
-          isSubCollection: true,
-          userOwns: true,
+          extracted.push({
+            _id: subNft._id,
+            parentId: item._id,
+            name: subNft.name,
+            symbol: subNft.symbol,
+            image: subNft.image,
+            description: subNft.description,
+            owner: subNft.owner,
+            listed: subNft.listed || false,
+            priceETH: subNft.priceETH,
+            isFirstSale: subNft.isFirstSale,
+            tokenId: subNft.tokenId,
+            tokenURI: subNft.tokenURI,
+            createdAt: subNft.createdAt,
+            category: item.category,
+            chain: "ETH",
+            isSubCollection: true,
+            userOwns: true,
+          });
         });
-      });
-    }
-  });
+      }
+    });
 
-  console.log(`✅ ${activeCategory} NFTs extracted:`, extracted.length);
-  return extracted;
-};
-
+    console.log(`✅ ${activeCategory} NFTs extracted:`, extracted.length);
+    return extracted;
+  };
 
   /* ================= PROFILE ================= */
   useEffect(() => {
@@ -101,64 +103,6 @@ function MarketPlace() {
       .catch(() => toast.error("Failed to fetch profile"));
   }, [token]);
 
-  /* ================= INITIAL WALLET CHECK ================= */
-  useEffect(() => {
-    if (!window.ethereum) {
-      setLoading(false);
-      return;
-    }
-
-    const checkInitialConnection = async () => {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_accounts",
-        });
-        if (accounts.length > 0) {
-          const wallet = accounts[0].toLowerCase();
-          setConnectedWallet(wallet);
-          setIsWalletConnected(true);
-          fetchOwnedNFTs(wallet);
-        } else {
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error("Error checking wallet:", err);
-        setLoading(false);
-      }
-    };
-
-    checkInitialConnection();
-
-    window.ethereum.on("accountsChanged", handleAccountsChanged);
-
-    return () => {
-      window.ethereum?.removeListener("accountsChanged", handleAccountsChanged);
-    };
-  }, [token]);
-
-  // When NavLinks triggers a category selection, update activeCategory
-  const handleSelectCategory = (cat) => {
-    setActiveCategory(cat);
-    // Trigger a refetch if wallet connected
-    if (connectedWallet) fetchOwnedNFTs(connectedWallet);
-  };
-
-  const handleAccountsChanged = (accounts) => {
-    if (accounts.length > 0) {
-      const wallet = accounts[0].toLowerCase();
-      setConnectedWallet(wallet);
-      setIsWalletConnected(true);
-      fetchOwnedNFTs(wallet);
-      // Reset interactions when wallet changes
-      setUserHasInteracted({});
-    } else {
-      setConnectedWallet(null);
-      setIsWalletConnected(false);
-      setMarketData([]);
-      setUserHasInteracted({});
-    }
-  };
-
   /* ================= FETCH OWNED NFTS ================= */
   const fetchOwnedNFTs = async (wallet) => {
     try {
@@ -166,80 +110,81 @@ function MarketPlace() {
 
       console.log("🔄 Fetching NFTs for wallet:", wallet);
 
-      // Fetch the user's owned NFTs (including sub-collections)
       const res = await axios.get(
         `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
       console.log("📡 Backend Response:", res.data);
-      console.log("📦 NFTs Array:", res.data?.nfts);
 
       if (res.data?.success) {
         console.log("✅ Success! Setting marketData with:", res.data.nfts);
         setMarketData(res.data.nfts);
-      } else {
-        console.log("⚠️ Response success is false");
       }
     } catch (err) {
       console.error("❌ Error fetching NFTs:", err);
-      console.error("Error details:", err.response?.data);
       toast.error("Failed to load NFTs");
     } finally {
       setLoading(false);
     }
   };
 
-  /* ================= CONNECT/INTERACT WITH WALLET FOR ITEM ================= */
-  const handleSellNowClick = async (itemId) => {
-    if (!window.ethereum) {
-      toast.error("Please install MetaMask!");
+  // Fetch NFTs when wallet connects or category changes
+  useEffect(() => {
+    if (isConnected && connectedWallet && token) {
+      fetchOwnedNFTs(connectedWallet.toLowerCase());
+    } else {
+      setMarketData([]);
+      setLoading(false);
+    }
+  }, [isConnected, connectedWallet, token, activeCategory]);
+
+  /* ================= HANDLE SELL NOW CLICK ================= */
+  const handleSellNowClick = (itemId) => {
+    console.log("🔘 Sell Now clicked for item:", itemId);
+    console.log("🔌 Is connected:", isConnected);
+    
+    if (!isConnected) {
+      // Not connected - open RainbowKit modal
+      console.log("❌ Not connected - opening RainbowKit modal");
+      setPendingItemId(itemId);
+      if (openConnectModal) {
+        openConnectModal();
+      }
       return;
     }
 
-    setConnectingWallet((prev) => ({ ...prev, [itemId]: true }));
+    // Already connected - mark as interacted
+    console.log("✅ Already connected - marking as interacted");
+    setUserHasInteracted((prev) => ({
+      ...prev,
+      [itemId]: true,
+    }));
 
-    try {
-      // 🔁 Force MetaMask to ask again every time
-      await window.ethereum.request({
-        method: "wallet_requestPermissions",
-        params: [{ eth_accounts: {} }],
-      });
+    toast.success("Wallet connected!");
+  };
 
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (!accounts || accounts.length === 0) {
-        toast.error("Wallet not connected");
-        return;
-      }
-
-      const wallet = accounts[0].toLowerCase();
-
-      setConnectedWallet(wallet);
-      setIsWalletConnected(true);
-
+  /* ================= WATCH FOR CONNECTION SUCCESS ================= */
+  useEffect(() => {
+    if (isConnected && pendingItemId) {
+      console.log("✅ Wallet connected! Pending item:", pendingItemId);
+      
+      // Wallet just connected - mark the pending item as interacted
       setUserHasInteracted((prev) => ({
         ...prev,
-        [itemId]: true,
+        [pendingItemId]: true,
       }));
 
-      // Refresh owned NFTs every time (safe + clean)
-      await fetchOwnedNFTs(wallet);
-
-      toast.success("Wallet connected!");
-    } catch (err) {
-      console.error("MetaMask popup error:", err);
-
-      if (err.code === 4001) {
-        toast.error("Connection cancelled");
-      } else {
-        toast.error("Wallet connection failed");
-      }
-    } finally {
-      setConnectingWallet((prev) => ({ ...prev, [itemId]: false }));
+      toast.success("Wallet connected successfully!");
+      
+      // Reset pending item
+      setPendingItemId(null);
     }
+  }, [isConnected, pendingItemId]);
+
+  // When NavLinks triggers a category selection, update activeCategory
+  const handleSelectCategory = (cat) => {
+    setActiveCategory(cat);
   };
 
   /* ================= NAVIGATE TO BUY-NFA ================= */
@@ -307,13 +252,17 @@ function MarketPlace() {
             <NavLinks onSelectCategory={handleSelectCategory} selectedCategory={activeCategory} />
           </div>
 
+       
+
           {/* ================= NFT CARDS ================= */}
           <section className="relative z-10 px-6 mt-10">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {filteredCollections.length === 0 ? (
               <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
-                <h2 className="text-lg font-semibold -mt-4">No Item</h2>
+                <h2 className="text-lg font-semibold -mt-4">
+                  {isConnected ? "No Items Available" : "Connect Wallet to View Your Items"}
+                </h2>
                 <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
                   <img src={FaceOne} alt="Face One" className="w-34 h-24" />
                   <img
@@ -322,16 +271,24 @@ function MarketPlace() {
                     className="absolute top-24 w-28 h-10"
                   />
                 </div>
-                <Link to="/market-place">
-                  <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
-                    Browse Collection
+                {!isConnected ? (
+                  <button
+                    onClick={() => openConnectModal && openConnectModal()}
+                    className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition"
+                  >
+                    Connect Wallet
                   </button>
-                </Link>
+                ) : (
+                  <Link to="/market-place">
+                    <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
+                      Browse Collection
+                    </button>
+                  </Link>
+                )}
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {filteredCollections.map((item) => {
-                  const isConnecting = connectingWallet[item._id];
                   const hasInteracted = userHasInteracted[item._id];
 
                   return (
@@ -386,15 +343,9 @@ function MarketPlace() {
                           <div className="flex justify-center items-center w-full mt-auto pt-6">
                             <button
                               onClick={() => handleSellNowClick(item._id)}
-                              disabled={isConnecting}
                               className="w-full flex justify-center"
                             >
-                              <CustomButton4
-                                text={
-                                  isConnecting ? "Connecting..." : "Sell Now"
-                                }
-                                disabled={isConnecting}
-                              />
+                              <CustomButton4 text="Sell Now" />
                             </button>
                           </div>
                         ) : (
@@ -423,15 +374,9 @@ function MarketPlace() {
                           <div className="flex justify-center items-center w-full mt-auto pt-6">
                             <button
                               onClick={() => handleSellNowClick(item._id)}
-                              disabled={isConnecting}
                               className="w-full flex justify-center"
                             >
-                              <CustomButton4
-                                text={
-                                  isConnecting ? "Connecting..." : "Sell Now"
-                                }
-                                disabled={isConnecting}
-                              />
+                              <CustomButton4 text="Sell Now" />
                             </button>
                           </div>
                         ) : !showMobileList[item._id] ? (
