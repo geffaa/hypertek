@@ -154,22 +154,22 @@ function AddCollection() {
       toast.error("Base url is required");
       return;
     }
-  
+
     try {
       const response = await axios.delete(
         `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedCollection._id}`
       );
-  
+
       if (response.data.success) {
         // Remove the deleted item from state
         const updatedCollections = collections.filter(
           (c) => c._id !== selectedCollection._id
         );
         setCollections(updatedCollections);
-  
+
         // 🔥 Dispatch event to update sidebar immediately
         window.dispatchEvent(new Event("categoriesUpdated"));
-  
+
         toast.success("Collection deleted successfully!");
         setShowDeleteModal(false);
         setSelectedCollection(null);
@@ -183,8 +183,8 @@ function AddCollection() {
       );
     }
   };
-  
-  
+
+
   /// handle collection status
   const HandleCollectionStatus = async (collection) => {
     if (!Dashboard_Base_Url || !collection?._id) return;
@@ -391,34 +391,14 @@ function AddCollection() {
                   className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
                   onClick={() => handleTypeNavigation(col)}
                 >
-                  {(() => {
-                    const categoryMap = {
-                      land: "Land",
-                      characters: "Character",
-                      character: "Character",
-                      nfa: "NFA",
-                      other: "Other",
-                    };
-
-                    const category = col.category?.toLowerCase();
-                    return (
-                      categoryMap[category] ||
-                      col.category
-                        ?.split(" ")
-                        .map(
-                          (word) =>
-                            word.charAt(0).toUpperCase() + word.slice(1),
-                        )
-                        .join(" ") ||
-                      "Unknown"
-                    );
-                  })()}
+                  {col.name}
                 </td>
+
 
                 <td className="px-6 py-3">
                   {col.image ? (
                     <img
-                      src={`${Image_Base_Url}${col.image.startsWith("/") ? col.image : "/" + col.image}`}
+                      src={col.image.startsWith("http") ? col.image : `${Image_Base_Url}${col.image.startsWith("/") ? col.image : "/" + col.image}`}
                       alt={col.name}
                       className="w-12 h-12 object-cover border border-white/10 rounded"
                       onError={(e) => {

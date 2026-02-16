@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -23,7 +23,7 @@ const Sidebar = ({ onLogoutClick }) => {
   const adminId = admin?._id;
   const location = useLocation();
   const path = location.pathname || "";
-
+  const navigate = useNavigate();
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
@@ -34,6 +34,17 @@ const Sidebar = ({ onLogoutClick }) => {
   const sidebarRef = useRef(null);
 
   const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
+  const handleCategoryClick = (cat) => {
+    if (!adminId) return;
+  
+    const categoryKey = (cat.key || "").toLowerCase();
+  
+    if (categoryKey) {
+      navigate(`/${adminId}/collections/${categoryKey}`);
+    } else {
+      navigate(`/${adminId}/collections`);
+    }
+  };
 
   // Active state from URL (blue bg)
   const isDashboard = path.endsWith("/dashboard");
@@ -69,30 +80,19 @@ const Sidebar = ({ onLogoutClick }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Fetch categories from backend
   const fetchCategories = async () => {
     try {
       const res = await axios.get(
-        `${Dashboard_Base_Url}/v1/nft/parent-collections`,
+        `${Dashboard_Base_Url}/v1/nft/parent-collections`
       );
-
+  
       const parents = res.data.collections || [];
-
-      const unique = Array.from(
-        new Set(
-          parents
-            .map((p) =>
-              (p.category || p.collection?.name || "").toLowerCase().trim(),
-            )
-            .filter(Boolean),
-        ),
-      );
-
+  
       setCategories(
-        unique.map((c) => ({
-          key: c,
-          label: c.charAt(0).toUpperCase() + c.slice(1),
-        })),
+        parents.map((p) => ({
+          key: (p.category || "").toLowerCase(),   // ⭐ important
+          label: p.collection?.name || "Unnamed Collection",
+        }))
       );
     } catch (err) {
       console.error("Sidebar category fetch error:", err);
@@ -206,28 +206,31 @@ const Sidebar = ({ onLogoutClick }) => {
 
             {/* 🔥 Dynamic Categories */}
             {openCollection && (
-              <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[50px]">
-                {categories.map((cat, index) => (
-                  <Link key={cat.key} to={withAdmin(`/collections/${cat.key}`)}>
-                    <li
-                      className={`submenu-item ${index === categories.length - 1 ? "submenu-item-last" : ""}`}
-                    >
-                      <div className="submenu-line">
-                        <div
-                          className={
-                            index === categories.length - 1
-                              ? "line-vertical-short"
-                              : "line-vertical"
-                          }
-                        ></div>
-                        <div className="line-horizontal"></div>
-                      </div>
-                      <span>{cat.label}</span>
-                    </li>
-                  </Link>
-                ))}
-              </ul>
-            )}
+  <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[50px]">
+    {categories.map((cat, index) => (
+      <li
+        key={cat.key}
+        onClick={() => handleCategoryClick(cat)}
+        className={`submenu-item ${
+          index === categories.length - 1 ? "submenu-item-last" : ""
+        }`}
+      >
+        <div className="submenu-line">
+          <div
+            className={
+              index === categories.length - 1
+                ? "line-vertical-short"
+                : "line-vertical"
+            }
+          ></div>
+          <div className="line-horizontal"></div>
+        </div>
+
+        <span>{cat.label}</span>
+      </li>
+    ))}
+  </ul>
+)}
 
             {/* Users */}
             <Link to={withAdmin("/users")}>
@@ -328,7 +331,7 @@ const Sidebar = ({ onLogoutClick }) => {
         {/* LOGOUT */}
         <button
           onClick={onLogoutClick}
-          className="mx-auto mb-2 mt-auto flex gap-2"
+          className="mx-auto mb-4 mt-auto flex gap-1"
         >
           <img src={LogoutImage} className="w-[22px]" />
           <span className="font-bold">Sign Out</span>
@@ -408,4 +411,3 @@ const Sidebar = ({ onLogoutClick }) => {
 };
 
 export default Sidebar;
-
