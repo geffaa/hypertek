@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ethers } from "ethers";
+import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 
@@ -22,43 +25,48 @@ function Buy1() {
   const location = useLocation();
 
   // Extract parent and subCollection properly
-  const { item, subCollection: passedSubCollection, parentId } = location.state || {};
+  const {
+    item,
+    subCollection: passedSubCollection,
+    parentId,
+  } = location.state || {};
 
   // Determine which is parent and which is sub-collection
   let parentCollection, subCollection;
 
   if (passedSubCollection) {
-    // If subCollection was passed separately
     parentCollection = item;
     subCollection = passedSubCollection;
   } else if (item?.isParentCollection) {
-    // If item is a parent collection, extract the first sub-collection
     parentCollection = item;
     subCollection = item.subCollections?.[0];
   } else if (item?.subCollection) {
-    // If item has subCollection nested
     subCollection = item.subCollection;
     parentCollection = item;
   } else {
-    // Fallback: treat item as the collection to display
     subCollection = item;
   }
 
-  // Use subCollection for display
   const collection = subCollection || item;
-
   const { token, user } = useSelector((state) => state.auth);
 
-  const [connectedWallet, setConnectedWallet] = useState(null);
+  // RainbowKit hooks
+  const { address: connectedWallet, isConnected, chain } = useAccount();
+  const { openConnectModal } = useConnectModal();
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
+  const { switchChain } = useSwitchChain();
+
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [onChainOwner, setOnChainOwner] = useState(null);
-
   const [isOpen, setIsOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
+
+  const SEPOLIA_CHAIN_ID = 11155111; // Sepolia chain ID in decimal
 
   /* ================================ INIT ================================ */
   useEffect(() => {
@@ -75,121 +83,92 @@ function Buy1() {
   }, [collection, navigate]);
 
   useEffect(() => {
-    checkWalletAndOwnership();
-
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", handleAccountsChanged);
-      window.ethereum.on("chainChanged", () => window.location.reload());
-    }
-
-    return () => {
-      if (window.ethereum) {
-        window.ethereum.removeListener(
-          "accountsChanged",
-          handleAccountsChanged
-        );
-      }
-    };
-  }, [collection]);
-
-  const handleAccountsChanged = (accounts) => {
-    if (accounts.length > 0) {
+    if (isConnected && connectedWallet && publicClient) {
       checkWalletAndOwnership();
-    } else {
-      setConnectedWallet(null);
-      setIsOwner(false);
-      setOnChainOwner(null);
     }
-  };
+  }, [collection, isConnected, connectedWallet, publicClient]);
 
   /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
     try {
-      if (!window.ethereum || !collection) return;
+      if (!publicClient || !collection || !connectedWallet) return;
 
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
+      const wallet = connectedWallet.toLowerCase();
+      console.log("✅ Connected wallet:", wallet);
+      console.log("📋 Collection owner from DB:", collection.owner);
 
-      if (accounts.length > 0) {
-        const wallet = accounts[0].toLowerCase();
-        setConnectedWallet(wallet);
-        console.log("✅ Connected wallet:", wallet);
-        console.log("📋 Collection owner from DB:", collection.owner);
+      // Check BLOCKCHAIN ownership if tokenId exists
+      if (collection.tokenId) {
+        try {
+          const nftContract = {
+            address: NFT_ADDRESS,
+            abi: NFT_ABI,
+          };
+          
+          const owner = await publicClient.readContract({
+            ...nftContract,
+            functionName: 'ownerOf',
+            args: [collection.tokenId],
+          });
+          
+          const ownerLower = owner.toLowerCase();
 
-        // Check BLOCKCHAIN ownership if tokenId exists
-        if (collection.tokenId) {
-          try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const nftContract = new ethers.Contract(
-              NFT_ADDRESS,
-              NFT_ABI,
-              provider
-            );
-            const owner = await nftContract.ownerOf(collection.tokenId);
-            const ownerLower = owner.toLowerCase();
+          setOnChainOwner(ownerLower);
+          console.log("⛓️ On-chain owner:", ownerLower);
 
-            setOnChainOwner(ownerLower);
-            console.log("⛓️ On-chain owner:", ownerLower);
-
-            if (collection.owner !== ownerLower) {
-              console.log("🔄 Updating collection.owner to match blockchain");
-              collection.owner = ownerLower;
-            }
-
-            const ownerMatch = wallet === ownerLower;
-            setIsOwner(ownerMatch);
-            console.log("🔍 Is owner (blockchain check):", ownerMatch);
-          } catch (err) {
-            console.error("❌ Error checking on-chain owner:", err);
-            if (collection.owner) {
-              const ownerMatch = wallet === collection.owner.toLowerCase();
-              setIsOwner(ownerMatch);
-              console.log("🔍 Is owner (DB fallback):", ownerMatch);
-            } else {
-              setIsOwner(false);
-            }
+          if (collection.owner !== ownerLower) {
+            console.log("🔄 Updating collection.owner to match blockchain");
+            collection.owner = ownerLower;
           }
-        } else {
-          // Not minted yet
+
+          const ownerMatch = wallet === ownerLower;
+          setIsOwner(ownerMatch);
+          console.log("🔍 Is owner (blockchain check):", ownerMatch);
+        } catch (err) {
+          console.error("❌ Error checking on-chain owner:", err);
           if (collection.owner) {
             const ownerMatch = wallet === collection.owner.toLowerCase();
             setIsOwner(ownerMatch);
-            console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
+            console.log("🔍 Is owner (DB fallback):", ownerMatch);
           } else {
-            setIsOwner(true);
-            console.log("🆕 No owner - user can mint");
+            setIsOwner(false);
           }
         }
-
-        if (collection.tokenId) {
-          await checkListingStatus();
+      } else {
+        // Not minted yet
+        if (collection.owner) {
+          const ownerMatch = wallet === collection.owner.toLowerCase();
+          setIsOwner(ownerMatch);
+          console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
+        } else {
+          setIsOwner(true);
+          console.log("🆕 No owner - user can mint");
         }
+      }
+
+      if (collection.tokenId) {
+        await checkListingStatus();
       }
     } catch (err) {
       console.error("❌ Error checking wallet:", err);
-      if (err.code === 4001) {
-        console.log("👤 User rejected wallet connection");
-      }
     }
   };
 
   /* ========================= CHECK LISTING ========================= */
   const checkListingStatus = async () => {
     try {
-      if (!collection.tokenId) return;
+      if (!collection.tokenId || !publicClient) return;
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
-        MARKETPLACE_ABI,
-        provider
-      );
+      const marketplaceContract = {
+        address: MARKETPLACE_ADDRESS,
+        abi: MARKETPLACE_ABI,
+      };
 
-      const listing = await marketplace.getListing(
-        NFT_ADDRESS,
-        collection.tokenId
-      );
+      const listing = await publicClient.readContract({
+        ...marketplaceContract,
+        functionName: 'getListing',
+        args: [NFT_ADDRESS, collection.tokenId],
+      });
 
       setListingData({
         seller: listing[0],
@@ -198,62 +177,33 @@ function Buy1() {
       });
 
       console.log("📊 Listing status:", listing[2] ? "Active" : "Inactive");
-
-      // Also update local collection state
       collection.listed = listing[2];
     } catch (err) {
       console.error("❌ Error checking listing:", err);
     }
   };
 
-  /* ======================== SWITCH SEPOLIA ======================== */
-  const switchToSepolia = async () => {
-    const SEPOLIA_CHAIN_ID = "0xaa36a7";
-    const toastId = toast.loading("🔄 Switching to Sepolia network...");
+  /* ======================== SWITCH TO SEPOLIA ======================== */
+  const ensureSepoliaNetwork = async () => {
+    if (chain?.id === SEPOLIA_CHAIN_ID) {
+      return true;
+    }
 
+    const toastId = toast.loading("🔄 Switching to Sepolia network...");
+    
     try {
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: SEPOLIA_CHAIN_ID }],
-      });
+      await switchChain({ chainId: SEPOLIA_CHAIN_ID });
       toast.success("✅ Switched to Sepolia", { id: toastId });
       return true;
-    } catch (switchError) {
-      if (switchError.code === 4902) {
-        try {
-          toast.loading("➕ Adding Sepolia network...", { id: toastId });
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: SEPOLIA_CHAIN_ID,
-                chainName: "Sepolia Testnet",
-                nativeCurrency: {
-                  name: "SepoliaETH",
-                  symbol: "ETH",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://sepolia.infura.io/v3/"],
-                blockExplorerUrls: ["https://sepolia.etherscan.io"],
-              },
-            ],
-          });
-          toast.success("✅ Sepolia network added", { id: toastId });
-          return true;
-        } catch (addError) {
-          console.error("❌ Failed to add Sepolia:", addError);
-          toast.error("❌ Failed to add Sepolia network", { id: toastId });
-          return false;
-        }
-      }
-      console.error("❌ Failed to switch to Sepolia:", switchError);
-      toast.error("❌ Failed to switch network", { id: toastId });
+    } catch (error) {
+      console.error("❌ Failed to switch network:", error);
+      toast.error("❌ Please switch to Sepolia network manually", { id: toastId });
       return false;
     }
   };
 
   /* ========================== BACKEND MINT ========================== */
-const mintNFTToWallet = async (buyerWallet) => {
+  const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
       toast.error("❌ Invalid user or item data");
       return null;
@@ -261,8 +211,8 @@ const mintNFTToWallet = async (buyerWallet) => {
 
     try {
       const payload = {
-        parentId: item.parentId, // Add this
-        subCollectionId: item._id, // Use this instead of docId
+        parentId: item.parentId,
+        subCollectionId: item._id,
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
@@ -296,42 +246,32 @@ const mintNFTToWallet = async (buyerWallet) => {
 
   /* ======================= CREATE LISTING ======================= */
   const handleCreateListing = async () => {
+    if (!isConnected) {
+      if (openConnectModal) {
+        openConnectModal();
+      }
+      return;
+    }
+
     const toastId = toast.loading("🔧 Preparing to list NFA...");
     setLoading(true);
 
     try {
-      // Check MetaMask
-      if (!window.ethereum) {
-        toast.error("❌ MetaMask not installed", { id: toastId });
+      if (!walletClient || !publicClient) {
+        toast.error("❌ Wallet not connected properly", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Check network
-      const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
-        toast.dismiss(toastId);
-        const switched = await switchToSepolia();
-        if (!switched) {
-          setLoading(false);
-          return;
-        }
-        toast.loading("🔧 Preparing to list NFA...", { id: toastId });
+      // Ensure we're on Sepolia
+      const networkOk = await ensureSepoliaNetwork();
+      if (!networkOk) {
+        setLoading(false);
+        return;
       }
 
-      // Get signer
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const walletAddress = await signer.getAddress();
+      const walletAddress = connectedWallet;
       console.log("👛 Wallet address:", walletAddress);
-
-      const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
-      const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
-        MARKETPLACE_ABI,
-        signer
-      );
 
       let tokenId = collection.tokenId;
 
@@ -359,12 +299,23 @@ const mintNFTToWallet = async (buyerWallet) => {
 
       // Verify ownership
       toast.loading("🔍 Verifying ownership...", { id: toastId });
+      
+      const nftContract = {
+        address: NFT_ADDRESS,
+        abi: NFT_ABI,
+      };
+
       let owner;
       let retries = 3;
 
       while (retries > 0) {
         try {
-          owner = await nftContract.ownerOf(tokenId);
+          owner = await publicClient.readContract({
+            ...nftContract,
+            functionName: 'ownerOf',
+            args: [tokenId],
+          });
+          
           console.log("⛓️ On-chain owner:", owner);
           console.log("👛 Your wallet:", walletAddress);
 
@@ -388,7 +339,7 @@ const mintNFTToWallet = async (buyerWallet) => {
           console.error("❌ Error getting owner:", err);
           if (retries > 1) {
             console.log(
-              `⏳ Retrying blockchain check... (${retries - 1} left)`
+              `⏳ Retrying blockchain check... (${retries - 1} left)`,
             );
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
@@ -403,19 +354,41 @@ const mintNFTToWallet = async (buyerWallet) => {
       }
 
       // Check approval
-      const approved = await nftContract.getApproved(tokenId);
+      toast.loading("✍️ Checking marketplace approval...", { id: toastId });
+      
+      const approved = await publicClient.readContract({
+        ...nftContract,
+        functionName: 'getApproved',
+        args: [tokenId],
+      });
+
       if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
-        const approveTx = await nftContract.approve(
-          MARKETPLACE_ADDRESS,
-          tokenId
-        );
-        await approveTx.wait();
+        
+        const { request } = await publicClient.simulateContract({
+          ...nftContract,
+          functionName: 'approve',
+          args: [MARKETPLACE_ADDRESS, tokenId],
+          account: walletAddress,
+        });
+        
+        const approveTx = await walletClient.writeContract(request);
+        await publicClient.waitForTransactionReceipt({ hash: approveTx });
         console.log("✅ Marketplace approved");
       }
 
       // Check if already listed
-      const listing = await marketplace.getListing(NFT_ADDRESS, tokenId);
+      const marketplaceContract = {
+        address: MARKETPLACE_ADDRESS,
+        abi: MARKETPLACE_ABI,
+      };
+
+      const listing = await publicClient.readContract({
+        ...marketplaceContract,
+        functionName: 'getListing',
+        args: [NFT_ADDRESS, tokenId],
+      });
+
       if (listing[2]) {
         toast.success("✅ Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
@@ -426,13 +399,16 @@ const mintNFTToWallet = async (buyerWallet) => {
       // Create listing on blockchain
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
       const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
-      const listTx = await marketplace.createListing(
-        NFT_ADDRESS,
-        tokenId,
-        priceWei,
-        { gasLimit: 300000 }
-      );
-      await listTx.wait();
+      
+      const { request } = await publicClient.simulateContract({
+        ...marketplaceContract,
+        functionName: 'createListing',
+        args: [NFT_ADDRESS, tokenId, priceWei],
+        account: walletAddress,
+      });
+      
+      const listTx = await walletClient.writeContract(request);
+      await publicClient.waitForTransactionReceipt({ hash: listTx });
       console.log("✅ Listing created on blockchain");
 
       // Record in backend
@@ -445,7 +421,6 @@ const mintNFTToWallet = async (buyerWallet) => {
         priceETH: collection.priceETH || 0.01,
       };
 
-      // Add parentId if available
       if (parentCollection?._id) {
         listingPayload.parentId = parentCollection._id;
       } else if (parentId) {
@@ -459,7 +434,7 @@ const mintNFTToWallet = async (buyerWallet) => {
         listingPayload,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       console.log("✅ Backend response:", response.data);
@@ -469,7 +444,7 @@ const mintNFTToWallet = async (buyerWallet) => {
         {
           id: toastId,
           duration: 5000,
-        }
+        },
       );
 
       setListingData({
@@ -478,20 +453,16 @@ const mintNFTToWallet = async (buyerWallet) => {
         active: true,
       });
 
-      // Update local state
       collection.listed = true;
-
       await checkListingStatus();
     } catch (err) {
       console.error("❌ Listing error:", err);
-      console.error("❌ Error response:", err.response?.data);
+      console.error("❌ Error details:", err);
 
       let msg = "❌ Listing failed";
-      if (err.response?.data?.error) {
-        msg = `❌ ${err.response.data.error}`;
-      } else if (err.message?.includes("insufficient funds")) {
+      if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient gas. Add Sepolia ETH";
-      } else if (err.message?.includes("user rejected")) {
+      } else if (err.message?.includes("user rejected") || err.code === 4001) {
         msg = "❌ Transaction rejected by user";
       }
       toast.error(msg, { id: toastId });
@@ -502,45 +473,40 @@ const mintNFTToWallet = async (buyerWallet) => {
 
   /* ============================ BUY NFT ============================ */
   const handleBuyNFT = async () => {
+    if (!isConnected) {
+      if (openConnectModal) {
+        openConnectModal();
+      }
+      return;
+    }
+
     const toastId = toast.loading("🛒 Preparing purchase...");
     setLoading(true);
 
     try {
-      // Check MetaMask
-      if (!window.ethereum) {
-        toast.error("❌ MetaMask not installed", { id: toastId });
+      if (!walletClient || !publicClient) {
+        toast.error("❌ Wallet not connected properly", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Check login
       if (!user?.id) {
         toast.error("❌ Please login first", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Check network
-      const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
-        toast.dismiss(toastId);
-        const switched = await switchToSepolia();
-        if (!switched) {
-          setLoading(false);
-          return;
-        }
-        toast.loading("🛒 Preparing purchase...", { id: toastId });
+      // Ensure we're on Sepolia
+      const networkOk = await ensureSepoliaNetwork();
+      if (!networkOk) {
+        setLoading(false);
+        return;
       }
 
-      // Get signer
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const buyer = await signer.getAddress();
+      const buyer = connectedWallet;
       console.log("👛 Buyer wallet:", buyer);
 
-      // Check balance
-      const balance = await provider.getBalance(buyer);
+      const balance = await publicClient.getBalance({ address: buyer });
       console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
@@ -548,13 +514,6 @@ const mintNFTToWallet = async (buyerWallet) => {
         setLoading(false);
         return;
       }
-
-      const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
-        MARKETPLACE_ABI,
-        signer
-      );
-      const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
@@ -569,25 +528,22 @@ const mintNFTToWallet = async (buyerWallet) => {
           return;
         }
 
-        // Update state
         collection.tokenId = mintedTokenId;
         collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
         console.log("✅ NFA prepared, Token ID:", mintedTokenId);
 
-        // Small delay
         toast.loading("⏳ Finalizing purchase...", { id: toastId });
         await new Promise((r) => setTimeout(r, 1500));
 
         toast.success(
           `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
-          { id: toastId, duration: 8000 }
+          { id: toastId, duration: 8000 },
         );
 
         setLoading(false);
 
-        // Redirect to marketplace profile after 2 seconds
         setTimeout(() => {
           navigate("/profile");
         }, 2000);
@@ -598,9 +554,18 @@ const mintNFTToWallet = async (buyerWallet) => {
       /* ================= SCENARIO 2: ALREADY MINTED ================= */
       toast.loading("🔍 Checking NFT ownership...", { id: toastId });
 
+      const nftContract = {
+        address: NFT_ADDRESS,
+        abi: NFT_ABI,
+      };
+
       let currentOwner;
       try {
-        currentOwner = await nftContract.ownerOf(collection.tokenId);
+        currentOwner = await publicClient.readContract({
+          ...nftContract,
+          functionName: 'ownerOf',
+          args: [collection.tokenId],
+        });
         currentOwner = currentOwner.toLowerCase();
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
@@ -610,16 +575,24 @@ const mintNFTToWallet = async (buyerWallet) => {
         return;
       }
 
-      // Prevent self-purchase
       if (buyer.toLowerCase() === currentOwner) {
         toast.error("❌ You already own this NFA!", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(NFT_ADDRESS, collection.tokenId);
+      
+      const marketplaceContract = {
+        address: MARKETPLACE_ADDRESS,
+        abi: MARKETPLACE_ABI,
+      };
+
+      const listing = await publicClient.readContract({
+        ...marketplaceContract,
+        functionName: 'getListing',
+        args: [NFT_ADDRESS, collection.tokenId],
+      });
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -630,49 +603,52 @@ const mintNFTToWallet = async (buyerWallet) => {
       const price = listing[1];
       console.log("💰 Listing price:", ethers.formatEther(price), "ETH");
 
-      // Check balance
       if (balance < price) {
         toast.error(
           `❌ Insufficient ETH\n\nNeed: ${ethers.formatEther(price)} ETH\nYou have: ${ethers.formatEther(balance)} ETH`,
-          { id: toastId, duration: 6000 }
+          { id: toastId, duration: 6000 },
         );
         setLoading(false);
         return;
       }
 
-      // Execute purchase
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, collection.tokenId, {
+      const { request } = await publicClient.simulateContract({
+        ...marketplaceContract,
+        functionName: 'buyNFT',
+        args: [NFT_ADDRESS, collection.tokenId],
         value: price,
-        gasLimit: 400000,
+        account: buyer,
       });
 
+      const buyTx = await walletClient.writeContract(request);
+      
       toast.loading("⏳ Waiting for transaction confirmation...", {
         id: toastId,
       });
-      const receipt = await buyTx.wait();
-      console.log("✅ Transaction confirmed:", receipt.hash);
+      
+      const receipt = await publicClient.waitForTransactionReceipt({ hash: buyTx });
+      console.log("✅ Transaction confirmed:", receipt.transactionHash);
 
-      // Record sale in backend
       toast.loading("💾 Recording purchase...", { id: toastId });
+      
       try {
         const salePayload = {
           tokenId: collection.tokenId,
           buyer: buyer.toLowerCase(),
           seller: listing[0].toLowerCase(),
           priceETH: ethers.formatEther(price),
-          txHash: receipt.hash,
+          txHash: receipt.transactionHash,
         };
 
-        // Add parent/sub-collection IDs if available
         if (parentCollection?._id) {
           salePayload.parentId = parentCollection._id;
         } else if (parentId) {
           salePayload.parentId = parentId;
         }
-        
+
         if (collection._id) {
           salePayload.subCollectionId = collection._id;
         }
@@ -684,7 +660,7 @@ const mintNFTToWallet = async (buyerWallet) => {
           salePayload,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         console.log("✅ Sale recorded in backend");
       } catch (recordErr) {
@@ -693,18 +669,16 @@ const mintNFTToWallet = async (buyerWallet) => {
       }
 
       toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
-        { id: toastId, duration: 8000 }
+        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.transactionHash.substring(0, 10)}...`,
+        { id: toastId, duration: 8000 },
       );
 
-      // Update state
       collection.owner = buyer.toLowerCase();
       setIsOwner(true);
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
       console.log("✅ Purchase complete!");
 
-      // Redirect to marketplace profile after 2 seconds
       setTimeout(() => {
         navigate("/profile");
       }, 1000);
@@ -714,10 +688,8 @@ const mintNFTToWallet = async (buyerWallet) => {
 
       if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient ETH for gas fees";
-      } else if (err.message?.includes("user rejected")) {
+      } else if (err.message?.includes("user rejected") || err.code === 4001) {
         msg = "❌ Transaction rejected by user";
-      } else if (err.code === "ACTION_REJECTED") {
-        msg = "❌ Transaction was rejected";
       } else if (err.response?.data?.error) {
         msg = `❌ ${err.response.data.error}`;
       }
@@ -761,23 +733,17 @@ const mintNFTToWallet = async (buyerWallet) => {
   const getButtonAction = () => {
     if (loading) return { text: "⏳ Processing...", disabled: true };
 
-    if (!connectedWallet) {
+    if (!isConnected) {
       return {
         text: "🔌 Connect Wallet",
-        action: async () => {
-          const toastId = toast.loading("🔌 Connecting wallet...");
-          try {
-            await window.ethereum.request({ method: "eth_requestAccounts" });
-            await checkWalletAndOwnership();
-            toast.success("✅ Wallet connected", { id: toastId });
-          } catch (err) {
-            toast.error("❌ Connection failed", { id: toastId });
+        action: () => {
+          if (openConnectModal) {
+            openConnectModal();
           }
         },
       };
     }
 
-    // If user is not owner, and NFT is listed OR platform-owned, show Buy button
     if (!isOwner && (listingData?.active || isPlatformOwned)) {
       return {
         text: "🛒 Buy Now",
@@ -785,7 +751,6 @@ const mintNFTToWallet = async (buyerWallet) => {
       };
     }
 
-    // If user is owner but not listed, allow them to list
     if (isOwner && !listingData?.active) {
       return {
         text: "📝 List Now",
@@ -793,7 +758,6 @@ const mintNFTToWallet = async (buyerWallet) => {
       };
     }
 
-    // If user is owner and listed, show listed status
     if (isOwner && listingData?.active) {
       return {
         text: "✅ Your NFA (Listed)",
@@ -801,7 +765,6 @@ const mintNFTToWallet = async (buyerWallet) => {
       };
     }
 
-    // Fallback
     return { text: "❌ Not Available", disabled: true };
   };
 
@@ -950,11 +913,15 @@ const mintNFTToWallet = async (buyerWallet) => {
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Platform Fee (10%)</span>
-                <span>{((collection.priceETH || 0.01) * 0.1).toFixed(4)} ETH</span>
+                <span>
+                  {((collection.priceETH || 0.01) * 0.1).toFixed(4)} ETH
+                </span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
                 <span>Total</span>
-                <span>{((collection.priceETH || 0.01) * 1.1).toFixed(4)} ETH</span>
+                <span>
+                  {((collection.priceETH || 0.01) * 1.1).toFixed(4)} ETH
+                </span>
               </div>
             </div>
             <div className="flex justify-between mt-6">
@@ -1005,7 +972,9 @@ const mintNFTToWallet = async (buyerWallet) => {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">Price</p>
-                <p className="text-white text-sm">{collection.priceETH || 0.01} ETH</p>
+                <p className="text-white text-sm">
+                  {collection.priceETH || 0.01} ETH
+                </p>
               </div>
             </div>
             <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">
@@ -1037,7 +1006,6 @@ const mintNFTToWallet = async (buyerWallet) => {
           style={{ alignItems: "flex-start", paddingTop: "100px" }}
         >
           <div className="bg-[#1f2937] w-[700px] relative p-6 text-white">
-            {/* Close */}
             <button
               onClick={() => setShowOffers(false)}
               className="absolute top-3 right-4 text-xl opacity-70 hover:opacity-100"
@@ -1045,17 +1013,15 @@ const mintNFTToWallet = async (buyerWallet) => {
               ×
             </button>
 
-            {/* Header */}
             <h2 className="text-lg font-semibold mb-4">{collection?.name}</h2>
 
-            {/* Tabs */}
             <div className="flex gap-6 border-b border-white/10 pb-2 mb-6">
               <span className="opacity-70">Overview</span>
               <span className="font-semibold border-b-2 border-blue-500">
                 Offers {offers.length}
               </span>
             </div>
-            {/* EMPTY STATE */}
+
             {offers.length === 0 && (
               <div className="relative flex flex-col justify-center items-center h-[420px] overflow-hidden">
                 <h1 className="text-center text-white font-bold text-3xl">
@@ -1070,7 +1036,6 @@ const mintNFTToWallet = async (buyerWallet) => {
                   <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
                 </div>
 
-                {/* Floating Faces */}
                 <div className="absolute top-[11rem] left-1/2 -translate-x-1/2 pointer-events-none z-10">
                   <img src={FaceOne} alt="Face One" className="w-28 h-24" />
                 </div>
@@ -1085,7 +1050,6 @@ const mintNFTToWallet = async (buyerWallet) => {
               </div>
             )}
 
-            {/* OFFERS LIST */}
             {offers.length > 0 && (
               <div className="w-full">
                 <div className="grid grid-cols-5 gap-4 text-sm opacity-70 mb-3">
