@@ -133,7 +133,38 @@ function Category() {
   };
 
   return (
-    <div className="mt-8 flex h-[700px] bg-black flex-col">
+    <div className="mt-12 flex h-[700px] bg-black flex-col relative">
+{/* Background blur divs */}
+<div
+  style={{
+    top: `120px`,
+    left: `290px`,
+    width: "250px",
+    height: "250px",
+    background: "#002AA8",
+    filter: "blur(180px)",
+  }}
+  className="absolute rounded-full
+    shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+            0_0_100px_50px_rgba(59,130,246,0.4),
+            0_0_200px_100px_rgba(59,130,246,0.2)]"
+></div>
+
+<div
+  style={{
+    top: `560px`,
+    left: `900px`,
+    width: "250px",
+    height: "250px",
+    background: "#002AA8",
+    filter: "blur(180px)",
+  }}
+  className="absolute rounded-full
+    shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
+            0_0_100px_50px_rgba(59,130,246,0.4),
+            0_0_200px_100px_rgba(59,130,246,0.2)]"
+></div>
+
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
         <h1 className="font-inter font-semibold text-[25px] text-white">
           {category ? category.charAt(0).toUpperCase() + category.slice(1) : "Category"} Collection
