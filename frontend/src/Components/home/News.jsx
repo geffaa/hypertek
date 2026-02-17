@@ -101,7 +101,7 @@ export default function News() {
 
 {/* VIEW MORE BUTTON — ORIGINAL */}
 <div className="flex justify-start pt-1">
-  <Link to="/news/all">
+  <Link to="/news">
     <CustomButton text="View More" />
   </Link>
 </div>
@@ -203,3 +203,4 @@ export default function News() {
     </section>
   );
 }
+
