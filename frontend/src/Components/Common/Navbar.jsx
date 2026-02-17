@@ -145,6 +145,9 @@ export default function Navbar() {
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Don't close dropdowns on click-outside for mobile screens
+      if (window.innerWidth < 768) return;
+
       if (shopRef.current && !shopRef.current.contains(event.target)) {
         setShopOpen(false);
       }
@@ -179,6 +182,11 @@ export default function Navbar() {
     setShopOpen(false);
     setSocialOpen(false);
   };
+
+  // Close mobile menu and dropdowns when location changes
+  useEffect(() => {
+    closeMobileMenu();
+  }, [location.pathname]);
 
   /// hide the signup button on the following pages
   // Paths where Sign Up button should be hidden
@@ -219,7 +227,7 @@ export default function Navbar() {
         <div className="w-full py-3 flex items-center justify-between">
           {/* Left: Logo + Desktop Menu */}
           <div className="flex items-center space-x-28">
-            <Link to="/" onClick={closeMobileMenu}>
+            <Link to="/">
               <img src={logo} alt="Logo" className="h-10 w-auto mt-2" />
             </Link>
             {/* Mobile Search */}
@@ -493,152 +501,117 @@ export default function Navbar() {
           <div className="md:hidden  bg-[#001554D9] text-white px-4 py-4 flex flex-col space-y-3 border-t border-white/20">
             {/* Shop */}
             <button
-  onClick={(e) => {
-    e.stopPropagation();
-    setShopOpen(!shopOpen);
-  }}
-  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
->
+              onClick={(e) => {
+                e.stopPropagation();
+                setShopOpen(!shopOpen);
+              }}
+              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+            >
 
               <span className="font-semibold">Shop</span>
               <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  shopOpen ? "rotate-180" : ""
-                }`}
+                className={`h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""
+                  }`}
               />
             </button>
             {shopOpen && (
-  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
 
-    <Link
-      to="/market-place"
-      onClick={() => {
-        setShopOpen(false);
-        closeMobileMenu();
-      }}
-      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
-    >
-      Overview
-    </Link>
+                <Link
+                  to="/market-place"
+                  className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+                >
+                  Overview
+                </Link>
 
-    <Link
-      to="/personal-activity"
-      onClick={() => {
-        setShopOpen(false);
-        closeMobileMenu();
-      }}
-      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
-    >
-      My Assets
-    </Link>
+                <Link
+                  to="/personal-activity"
+                  className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+                >
+                  My Assets
+                </Link>
 
-    <Link
-      to="/nfa-expand"
-      onClick={() => {
-        setShopOpen(false);
-        closeMobileMenu();
-      }}
-      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
-    >
-      Collectibles
-    </Link>
+                <Link
+                  to="/nfa-expand"
+                  className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+                >
+                  Collectibles
+                </Link>
 
-    <Link
-      to="/land"
-      onClick={() => {
-        setShopOpen(false);
-        closeMobileMenu();
-      }}
-      className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
-    >
-      Land
-    </Link>
+                <Link
+                  to="/land"
+                  className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
+                >
+                  Land
+                </Link>
 
-  </div>
-)}
+              </div>
+            )}
 
 
             {/* About & News */}
             <Link
               to="/about"
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-              onClick={closeMobileMenu}
             >
               About Us
             </Link>
             <Link
               to="/more-news"
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
-              onClick={closeMobileMenu}
             >
               News
             </Link>
 
-           {/* Social */}
-           <button
-  onClick={(e) => {
-    e.stopPropagation();
-    setSocialOpen(!socialOpen);
-  }}
-  className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
->
+            {/* Social */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSocialOpen(!socialOpen);
+              }}
+              className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
+            >
 
-  <span className="font-semibold">Social</span>
-  <ChevronDown
-    className={`h-4 w-4 transition-transform duration-200 ${
-      socialOpen ? "rotate-180" : ""
-    }`}
-  />
-</button>
+              <span className="font-semibold">Social</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""
+                  }`}
+              />
+            </button>
 
-{socialOpen && (
-  <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
-  <a
-  href="https://discord.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-  onClick={(e) => {
-    e.stopPropagation();
-    setSocialOpen(false);
-    closeMobileMenu();
-  }}
->
-      <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
-      Discord
-    </a>
+            {socialOpen && (
+              <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
+                <a
+                  href="https://discord.gg"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <img src={DiscordImg} alt="Discord" className="w-4 h-4" />
+                  Discord
+                </a>
 
-    <a
-      href="https://x.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-      onClick={(e) => {
-        e.stopPropagation();
-        setSocialOpen(false);
-        closeMobileMenu();
-      }}
-    >
-      <img src={XImg} alt="X.com" className="w-4 h-4" />
-      X.com
-    </a>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <img src={XImg} alt="X.com" className="w-4 h-4" />
+                  X.com
+                </a>
 
-    <a
-      href="https://t.me"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
-      onClick={(e) => {
-        e.stopPropagation();
-        setSocialOpen(false);
-        closeMobileMenu();
-      }}
-    >
-      <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
-      Telegram
-    </a>
-  </div>
-)}
+                <a
+                  href="https://t.me"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
+                  Telegram
+                </a>
+              </div>
+            )}
 
             {/* Logged-in Search + Profile */}
             {isLoggedIn ? (
@@ -668,7 +641,7 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex justify-center mt-4 pt-4 border-t border-white/20">
-                <Link to="/signup" onClick={closeMobileMenu}>
+                <Link to="/signup">
                   <CustomeButton text="Sign In" />
                 </Link>
               </div>
@@ -703,7 +676,7 @@ export default function Navbar() {
       <AnimatePresence>
         {showModal && (
           <motion.div
-            className="fixed inset-0 z-50 pt-32 flex items-start justify-center bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

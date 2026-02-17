@@ -1,5 +1,5 @@
 // components/common/header.jsx
-import { FiSearch, FiBell } from "react-icons/fi";
+import { FiSearch, FiBell, FiMenu } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import HeaderIcon from "../../assets/Sidebar/headerIcon.png";
 import NotificationIcon from "../../assets/notification.png";
@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import BgEffect2 from "../common/BgEffect2";
 
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -79,16 +79,20 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4 flex justify-end items-end z-50 ">
-      {/* Background Glowing Effects */}
+    <header className="p-4 flex justify-between lg:justify-end items-center lg:items-end z-50">
+      {/* Burger Menu for Mobile */}
+      <button
+        className="lg:hidden text-white p-2 focus:outline-none"
+        onClick={toggleSidebar}
+      >
+        <FiMenu size={24} />
+      </button>
 
-
-      <div className="flex items-center justify-end gap-6 mr-16">
-
+      <div className="flex items-center justify-end gap-6 lg:mr-16">
         {/* 🔍 Animated Search Box */}
         {(location.pathname.match(/\/[a-f0-9]{24}\/dashboard$/) ||
           location.pathname.match(/\/[a-f0-9]{24}$/)) && (
-            <div className="relative">
+            <div className="relative hidden sm:block">
               <div
                 className={`
                 flex items-center gap-2 rounded-xl px-4 py-3
