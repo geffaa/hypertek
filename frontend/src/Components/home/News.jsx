@@ -35,78 +35,70 @@ export default function News() {
       />
       <GlowingOrb Xaxis={250} Yaxis={400} />
 
- {/* ================= MOBILE NEWS (EXACT DESIGN) ================= */}
+{/* ================= MOBILE NEWS (EXACT DESIGN) ================= */}
 <div className="flex md:hidden flex-col w-full px-4 space-y-8">
-
-{/* TOP 3 NEWS — LAST 3 ITEMS */}
-{news.slice(-3).map((item) => (
-  <div
-    key={item._id}
-    className="flex flex-col space-y-3 cursor-pointer"
-    onClick={() => handleNewsClick(item)}
-  >
-    <img
-  src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
-  alt={item.heading}
-  className="w-full h-[190px] object-cover block"
-/>
-
-    <h3 className="text-white text-[15px] font-bold uppercase font-goldman leading-tight">
-      {item.heading.length > 38
-        ? item.heading.slice(0, 38) + "..."
-        : item.heading}
-    </h3>
-
-    <p className="text-gray-300 text-[12px] font-inter leading-[18px]">
-      {item.description.length > 90
-        ? item.description.slice(0, 90) + "..."
-        : item.description}
-    </p>
-  </div>
-))}
-
-{/* UPDATES — FIRST 3 ITEMS */}
-<div className="flex flex-col divide-y divide-white/10">
-  {news.slice(0, 3).map((item) => (
-    <div
-      key={item._id}
-      className="flex gap-3 py-4 cursor-pointer"
-      onClick={() => handleNewsClick(item)}
-    >
-      <img
-        src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
-        alt={item.heading}
-        className="w-[90px] h-[65px] object-cover "
-      />
-
-      {/* TEXT */}
-      <div className="flex flex-col gap-1">
-        {/* HEADING */}
-        <p className="text-white text-[11px] font-semibold uppercase leading-[14px]">
-          {item.heading.length > 35
-            ? item.heading.slice(0, 35) + "..."
-            : item.heading}
-        </p>
-
-        {/* DESCRIPTION */}
-        <p className="text-gray-300 text-[11px] leading-[15px]">
-          {item.description.length > 65
-            ? item.description.slice(0, 65) + "..."
-            : item.description}
-        </p>
+  {/* Sort news by date descending (latest first) */}
+  {news
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) // latest first
+    .map((item, index) => (
+      <div
+        key={item._id}
+        className={`flex flex-col ${index < 3 ? "space-y-3" : "gap-3 divide-y divide-white/10"} cursor-pointer`}
+        onClick={() => handleNewsClick(item)}
+      >
+        {index < 3 ? (
+          // LATEST 3 — larger display
+          <>
+            <img
+              src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+              alt={item.heading}
+              className="w-full h-[190px] object-cover block"
+            />
+            <h3 className="text-white text-[15px] font-bold uppercase font-goldman leading-tight">
+              {item.heading.length > 38
+                ? item.heading.slice(0, 38) + "..."
+                : item.heading}
+            </h3>
+            <p className="text-gray-300 text-[12px] font-inter leading-[18px]">
+              {item.description.length > 90
+                ? item.description.slice(0, 90) + "..."
+                : item.description}
+            </p>
+          </>
+        ) : (
+          // REST — smaller updates style
+          <div className="flex gap-3 py-4">
+            <img
+              src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+              alt={item.heading}
+              className="w-[90px] h-[65px] object-cover "
+            />
+            <div className="flex flex-col gap-1">
+              <p className="text-white text-[11px] font-semibold uppercase leading-[14px]">
+                {item.heading.length > 35
+                  ? item.heading.slice(0, 35) + "..."
+                  : item.heading}
+              </p>
+              <p className="text-gray-300 text-[11px] leading-[15px]">
+                {item.description.length > 65
+                  ? item.description.slice(0, 65) + "..."
+                  : item.description}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  ))}
+    ))}
 </div>
 
 {/* VIEW MORE BUTTON — ORIGINAL */}
 <div className="flex justify-start pt-1">
-  <Link to="/news/all">
+  <Link to="/news">
     <CustomButton text="View More" />
   </Link>
 </div>
 
-</div>
+
 {/* ================= END MOBILE ================= */}
 
 

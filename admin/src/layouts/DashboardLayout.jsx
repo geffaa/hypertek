@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 
 const DashboardLayout = () => {
   const [userData, setUserData] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const hideScrollPages = ["/collections"];
   const shouldHideScroll = hideScrollPages.some((page) =>
@@ -54,19 +55,34 @@ const DashboardLayout = () => {
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
     <div className="flex h-screen text-white relative max-w-[1400px] mx-auto overflow-hidden">
 
       {/* Global Blur Background Circles */}
 
+      {/* Backdrop for mobile */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+          onClick={closeSidebar}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar onLogoutClick={() => setShowLogoutModal(true)} />
+      <Sidebar
+        onLogoutClick={() => setShowLogoutModal(true)}
+        isOpen={isSidebarOpen}
+        onClose={closeSidebar}
+      />
 
       {/* Main area */}
-      <div className="flex flex-col flex-1 h-screen overflow-hidden">
+      <div className="flex flex-col flex-1 h-screen overflow-hidden w-full">
         {/* Header: fixed on top */}
         <div className="top-0 left-0 right-0 z-20">
-          <Header />
+          <Header toggleSidebar={toggleSidebar} />
         </div>
 
         {/* Scrollable main content */}
