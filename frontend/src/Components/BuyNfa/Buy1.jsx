@@ -9,7 +9,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
-
+// 
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
