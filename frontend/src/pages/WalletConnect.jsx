@@ -24,29 +24,29 @@ function WalletConnect() {
       alert("MetaMask is not installed");
       return;
     }
-  
+
     if (isConnecting) return;
-  
+
     try {
       setIsConnecting(true);
-  
+
       // 🔹 FORCE MetaMask popup EVERY time
       await window.ethereum.request({
         method: "wallet_requestPermissions",
         params: [{ eth_accounts: {} }],
       });
-  
+
       // 🔹 THEN request accounts
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-  
+
       if (accounts && accounts.length > 0) {
         setAccount(accounts[0]);
-  
+
         setIsVisible(false);
         setIsSecondModalView(true);
-  
+
         setTimeout(() => {
           setIsSecondModalView(false);
           navigate("/nfa-expand");
@@ -60,24 +60,24 @@ function WalletConnect() {
       setIsConnecting(false);
     }
   };
-  
-  
+
+
 
   return (
     <>
       {/* FIRST POPUP */}
       {isVisible && (
-        <div className="fixed inset-0 z-40 backdrop-blur-md bg-black/40 flex justify-center">
-          <div className="absolute top-[24%] md:top-[20%] left-1/2 -translate-x-1/2 bg-[#2b3442] w-[90%] sm:w-[350px] text-white shadow-xl">
+        <div className="fixed inset-0 z-40 backdrop-blur-md bg-black/40 flex flex-col items-center justify-center p-4">
+          <div className="relative bg-[#2b3442] w-full max-w-[350px] text-white shadow-xl rounded-xl overflow-hidden">
             <button
               onClick={closeAndGoToNfa}
-              className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100"
+              className="absolute top-3 right-3 text-lg opacity-80 hover:opacity-100 z-10"
             >
               ×
             </button>
 
-            <div className="px-5 py-5">
-              <h2 className="text-center font-semibold text-[16px]">
+            <div className="px-5 py-8">
+              <h2 className="text-center font-semibold text-[18px]">
                 Connect Wallet
               </h2>
 
@@ -85,28 +85,27 @@ function WalletConnect() {
 
               <button
                 onClick={connectMetaMask}
-                className="mx-auto flex items-center justify-center gap-2 border border-white/40 rounded-lg px-7 py-2 text-sm hover:bg-white/5 transition"
+                className="w-full flex items-center justify-center gap-3 border border-white/20 rounded-xl px-7 py-3 text-sm hover:bg-white/5 transition bg-white/5"
               >
-                <img src={symbol} alt="MetaMask" className="w-5 h-5" />
-                <span className="font-medium">MetaMask</span>
+                <img src={symbol} alt="MetaMask" className="w-6 h-6" />
+                <span className="font-semibold">MetaMask</span>
               </button>
             </div>
           </div>
 
           {/* Warning Box */}
-          <div className="absolute bottom-[22%] sm:bottom-[12%] md:bottom-[14%] left-1/2 -translate-x-1/2 w-[90%] md:w-[640px] p-4 md:p-6 text-white">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="mt-8 w-full max-w-[640px] text-white">
+            <div className="flex items-center gap-3 mb-4 justify-center">
               <img src={InfoIcon} alt="info" className="w-5 h-5" />
               <p className="text-sm text-blue-400">
                 HyperTek will never request your seed phrase or private key.
               </p>
             </div>
 
-            <div className="border border-blue-500 rounded-xl px-4 py-3">
+            <div className="border border-blue-500/30 bg-blue-500/5 rounded-2xl px-6 py-4 backdrop-blur-sm">
               <h3 className="font-semibold mb-1">What is a crypto wallet?</h3>
               <p className="text-sm text-gray-300 leading-relaxed">
                 A crypto wallet lets you interact with the blockchain.
-                <br />
                 We recommend MetaMask.
               </p>
             </div>
