@@ -5,13 +5,16 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 
-function NavLinks({ onSelectCategory, selectedCategory }) {
+function NavLinks({ onSelectCategory, selectedCategory, categories }) {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [globalCategories, setGlobalCategories] = useState([]);
   const [userCategories, setUserCategories] = useState([]);
+
+  const categoryNameCapitalized = (str) =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection";
 
   const staticTail = [
     { name: "Activities", path: "/Activity" },
@@ -20,30 +23,38 @@ function NavLinks({ onSelectCategory, selectedCategory }) {
   ];
 
   // ---------- GLOBAL CATEGORIES ----------
-  useEffect(() => {
-    const fetchGlobalCategories = async () => {
-      try {
-        const res = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`
-        );
+  // ---------- GLOBAL CATEGORIES ----------
+const fetchGlobalCategories = async () => {
+  try {
+    const res = await axios.get(
+      `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`
+    );
 
-        if (res.data?.success && Array.isArray(res.data.collections)) {
-          const cats = new Set();
+    if (res.data?.success && Array.isArray(res.data.collections)) {
+      const cats = new Set();
 
-          res.data.collections.forEach((c) => {
-            if (c.category) cats.add(c.category.toLowerCase().trim());
-          });
+      res.data.collections.forEach((c) => {
+        if (c.category) cats.add(c.category.toLowerCase().trim());
+      });
 
-          setGlobalCategories(Array.from(cats));
-        }
-      } catch (e) {
-        console.warn("Global categories failed", e);
-      }
-    };
+      setGlobalCategories(Array.from(cats));
+    }
+  } catch (e) {
+    console.warn("Global categories failed", e);
+  }
+};
 
-    fetchGlobalCategories();
-  }, []);
+useEffect(() => {
+  fetchGlobalCategories();
 
+  const handleUpdate = () => fetchGlobalCategories();
+
+  window.addEventListener("categoriesUpdated", handleUpdate);
+
+  return () => {
+    window.removeEventListener("categoriesUpdated", handleUpdate);
+  };
+}, []);
   // ---------- WALLET ----------
   useEffect(() => {
     if (!window.ethereum) return;
@@ -136,8 +147,20 @@ function NavLinks({ onSelectCategory, selectedCategory }) {
                   : "text-white hover:bg-white/10 font-medium"
               }`}
             >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </button>
+{(() => {
+  if (!categories || categories.length === 0) return categoryNameCapitalized(cat);
+
+  const match = categories.find(
+    ([categoryName, items]) => categoryName.toLowerCase().trim() === cat.toLowerCase().trim()
+  );
+
+  if (match && match[1]?.length > 0) {
+    const firstItem = match[1][0];
+    return firstItem.parentName || firstItem.collection?.name || categoryNameCapitalized(cat);
+  }
+
+  return categoryNameCapitalized(cat);
+})()}   </button>
           </li>
         );
       })}

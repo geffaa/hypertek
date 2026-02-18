@@ -676,7 +676,8 @@ export default function Navbar() {
       <AnimatePresence>
         {showModal && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          className="absolute top-0 left-0 w-screen h-screen z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
