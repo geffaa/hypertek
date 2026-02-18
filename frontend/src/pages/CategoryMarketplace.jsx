@@ -178,9 +178,13 @@ function CategoryMarketplace() {
           >
             {/* Text Content */}
             <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
-              <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
-                {category ? category.charAt(0).toUpperCase() + category.slice(1) : "Collection"}
-              </h1>
+            <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
+  {items.length > 0
+    ? items[0]?.parentName || items[0]?.collection?.name || "Collection"
+    : category
+      ? category.charAt(0).toUpperCase() + category.slice(1)
+      : "Collection"}
+</h1>
               <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
                 Explore all {category} items in the marketplace. Discover unique collections and start your journey.
               </p>
@@ -226,9 +230,13 @@ function CategoryMarketplace() {
       <section className="max-w-7xl mx-auto flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16 px-4 sm:px-6">
         {/* Heading */}
         <div className="flex flex-col gap-2 items-start">
-          <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-            {category ? category.charAt(0).toUpperCase() + category.slice(1) : "Items"}
-          </h1>
+         <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
+  {items.length > 0
+    ? items[0]?.parentName || items[0]?.collection?.name || "Collection"
+    : category
+      ? category.charAt(0).toUpperCase() + category.slice(1)
+      : "Category"}
+</h1>
           <div className="flex gap-2">
             <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
             <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
