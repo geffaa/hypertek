@@ -1,4 +1,3 @@
-// src/components/NavLinks.jsx
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -11,45 +10,54 @@ function NavLinks() {
   ]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ move fetchCategories outside useEffect so we can call it on event too
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
+      const parents = res.data.collections || res.data.nfts || [];
+
+      const dynamicLinks = parents.map((parent) => ({
+        name:
+          parent.parentName ||
+          parent.collection?.name ||
+          (parent.category
+            ? parent.category.charAt(0).toUpperCase() + parent.category.slice(1)
+            : "Collection"),
+        path: `/collections/${(parent.category || "").toLowerCase().trim()}`,
+      }));
+
+      setLinks([
+        { name: "Overview", path: "/market-place" },
+        ...dynamicLinks,
+        { name: "Activities", path: "/personal-activity" },
+      ]);
+    } catch (err) {
+      console.error("Failed to fetch categories for navbar:", err);
+      setLinks([
+        { name: "Overview", path: "/market-place" },
+        { name: "Collectibles", path: "/nfa-expand" },
+        { name: "Lands", path: "/land" },
+        { name: "Activities", path: "/personal-activity" },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
-        const parents = res.data.collections || res.data.nfts || [];
-
-        // Extract unique categories from parent collections
-        const categories = Array.from(
-          new Set(parents.map((p) => (p.category || "").toLowerCase().trim()).filter(Boolean))
-        );
-
-        // Build dynamic links for each category
-        const dynamicLinks = categories.map((cat) => ({
-          name: cat.charAt(0).toUpperCase() + cat.slice(1),
-          path: `/collections/${cat}`,
-        }));
-
-        // Combine Overview, dynamic categories, and Activities
-        setLinks([
-          { name: "Overview", path: "/market-place" },
-          ...dynamicLinks,
-          { name: "Activities", path: "/personal-activity" },
-        ]);
-      } catch (err) {
-        console.error("Failed to fetch categories for navbar:", err);
-        // Fallback to static links if fetch fails
-        setLinks([
-          { name: "Overview", path: "/market-place" },
-          { name: "Collectibles", path: "/nfa-expand" },
-          { name: "Lands", path: "/land" },
-          { name: "Activities", path: "/personal-activity" },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+    // Fetch initially
     fetchCategories();
+
+    // ✅ Listen to global update events
+    const handleUpdate = () => fetchCategories();
+    window.addEventListener("categoriesUpdated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("categoriesUpdated", handleUpdate);
+    };
   }, []);
+
+  if (loading) return null; // optional: show skeleton
 
   return (
     <ul className="flex flex-wrap gap-4 lg:gap-[50px] md:justify-center lg:justify-start">
