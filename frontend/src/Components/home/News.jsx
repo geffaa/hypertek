@@ -39,7 +39,7 @@ export default function News() {
 <div className="flex md:hidden flex-col w-full px-4 space-y-8">
 
 {/* TOP 3 NEWS — LAST 3 ITEMS */}
-{news.slice(-3).map((item) => (
+{news.slice(0, 3).map((item) => (
   <div
     key={item._id}
     className="flex flex-col space-y-3 cursor-pointer"
@@ -67,7 +67,7 @@ export default function News() {
 
 {/* UPDATES — FIRST 3 ITEMS */}
 <div className="flex flex-col divide-y divide-white/10">
-  {news.slice(0, 3).map((item) => (
+{news.slice(3, 6).map((item) => (
     <div
       key={item._id}
       className="flex gap-3 py-4 cursor-pointer"
