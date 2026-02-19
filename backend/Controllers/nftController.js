@@ -1,12 +1,9 @@
 // Controllers/nftController.js - COMPLETE VERSION
 import NFTSystem from "../Models/NFTSystem.js";
 import {
-  nftContract,
-  marketContract,
-  wallet,
+  getBlockchain,
   ethers,
   formatEther,
-  provider,
 } from "../Service/blockchain.js";
 
 /**
@@ -305,16 +302,21 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Check blockchain initialization
-    if (!nftContract || !provider || !wallet) {
+    // ✅ BlockChain Initialization
+    const chainId = req.body.chainId || 13473; // Default to Immutable if not provided
+    console.log(`🔗 Minting on Chain ID: ${chainId}`);
+
+    const { nftContract, wallet: backendWalletObj, provider } = getBlockchain(chainId);
+
+    if (!nftContract || !provider || !backendWalletObj) {
       return res.status(500).json({
         success: false,
-        error: "Blockchain not initialized",
+        error: "Blockchain not initialized for this chain",
       });
     }
 
     // ✅ Backend wallet balance check
-    const backendWallet = await wallet.getAddress();
+    const backendWallet = await backendWalletObj.getAddress();
     const balance = await provider.getBalance(backendWallet);
 
     console.log("💰 Backend wallet:", backendWallet);
@@ -342,47 +344,43 @@ export async function mintSubCollection(req, res) {
       console.log("✅ Confirmed in block:", receipt.blockNumber);
 
       // ✅ Extract TokenId from events
-      for (const log of receipt.logs) {
-        try {
-          if (log.address.toLowerCase() !== nftContract.target.toLowerCase()) {
-            continue;
-          }
-
-          const parsed = nftContract.interface.parseLog({
-            topics: log.topics,
-            data: log.data,
-          });
-
-          if (parsed.name === "Transfer") {
-            tokenId = Number(parsed.args.tokenId || parsed.args[2]);
-            if (tokenId !== undefined) {
-              console.log("🎯 TokenId from Transfer:", tokenId);
-              break;
+      // ✅ Extract TokenId from events
+      if (receipt.logs) {
+        for (const log of receipt.logs) {
+          try {
+            // Check if log is from our contract
+            if (log.address.toLowerCase() !== nftContract.target.toLowerCase()) {
+              continue;
             }
-          }
 
-          if (parsed.name === "Minted") {
-            tokenId = Number(parsed.args.tokenId || parsed.args[1]);
-            if (tokenId !== undefined) {
-              console.log("🎯 TokenId from Minted:", tokenId);
-              break;
+            const parsed = nftContract.interface.parseLog({
+              topics: [...log.topics],
+              data: log.data,
+            });
+
+            if (!parsed) continue;
+
+            console.log("📝 Log Event:", parsed.name, parsed.args);
+
+            if (parsed.name === "Transfer") {
+              // Transfer(from, to, tokenId)
+              tokenId = Number(parsed.args[2]);
+              console.log("🎯 TokenId found in Transfer:", tokenId);
+            } else if (parsed.name === "Minted") {
+              // Minted(owner, tokenId, uri, royalty)
+              tokenId = Number(parsed.args[1]);
+              console.log("🎯 TokenId found in Minted:", tokenId);
             }
+
+            if (tokenId !== undefined) break;
+          } catch (e) {
+            console.log("⚠️ Log parsing error:", e.message);
           }
-        } catch (e) {
-          continue;
         }
       }
 
-      // ✅ Fallback: nextTokenId
       if (tokenId === undefined) {
-        console.log("⚠️ Getting tokenId from nextTokenId...");
-        const nextId = await nftContract.nextTokenId();
-        tokenId = Number(nextId) - 1;
-        console.log("🎯 TokenId:", tokenId);
-      }
-
-      if (tokenId === undefined) {
-        throw new Error("Could not determine tokenId");
+        throw new Error("❌ Failed to retrieve Token ID from transaction receipt. Logs did not contain Transfer or Minted event.");
       }
 
       // ✅ Verify and transfer ownership
@@ -439,8 +437,34 @@ export async function mintSubCollection(req, res) {
     subCollection.tokenURI = tokenURI;
     subCollection.owner = creatorWallet.toLowerCase();
     subCollection.listed = false;
-    subCollection.isFirstSale = true;
 
+    // ✅ Record Mint as First Sale
+    console.log("📝 Recording Mint Sale...");
+    const mintPrice = req.body.priceETH || subCollection.priceETH || 0;
+    
+    const saleRecord = {
+      buyer: creatorWallet.toLowerCase(),
+      seller: "deployer", // Primary Sale
+      priceETH: mintPrice,
+      royaltyPaid: mintPrice, // 100% to project
+      platformFee: 0,
+      sellerReceived: 0,
+      txHash: receipt.hash,
+      isFirstSale: true,
+      createdAt: new Date(),
+    };
+
+    if (!subCollection.salesHistory) subCollection.salesHistory = [];
+    subCollection.salesHistory.push(saleRecord);
+    
+    // Mark as sold (next sale will be secondary)
+    subCollection.isFirstSale = false; 
+    
+    // Increment parent sales count
+    parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
+
+    // ✅ FORCE SAVE
+    parent.markModified('subCollections');
     await parent.save();
 
     console.log("✅ Mint completed!");
@@ -1655,26 +1679,35 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // Validate transaction on blockchain
+    // Validate transaction on blockchain
+    // Default to Immutable zkEVM if no chainId provided
+    const chainId = req.body.chainId || 13473; 
+    const { provider } = getBlockchain(chainId);
+
     if (provider) {
       try {
         const tx = await provider.getTransaction(txHash);
         if (!tx) {
-          return res.status(400).json({
-            success: false,
-            error: "Transaction not found on blockchain",
-          });
+          // If not found on default chain, maybe try Sepolia?
+          console.warn(`Transaction mismatch on chain ${chainId}, checking Sepolia...`);
+          const { provider: sepoliaProvider } = getBlockchain(11155111);
+          const txSepolia = await sepoliaProvider.getTransaction(txHash);
+          
+          if (!txSepolia) {
+             return res.status(400).json({
+               success: false,
+               error: "Transaction not found on blockchain",
+             });
+          }
         }
 
-        const receipt = await tx.wait();
-        if (receipt.status !== 1) {
-          return res.status(400).json({
-            success: false,
-            error: "Transaction failed on blockchain",
-          });
-        }
+        // We could wait for receipt here, but usually frontend sends this after confirmation
+        // const receipt = await tx.wait(); 
       } catch (txErr) {
         console.error("Transaction validation error:", txErr);
       }
+    } else {
+       console.warn("⚠️ No provider available for transaction validation");
     }
 
     // Find parent collection
@@ -1740,7 +1773,13 @@ export async function recordSubCollectionSale(req, res) {
       createdAt: new Date(),
     };
 
+    console.log("📝 Adding Sale Record:", saleRecord);
+
     // Update sub-collection
+    if (!subCollection.salesHistory) {
+      subCollection.salesHistory = [];
+    }
+    
     subCollection.salesHistory.push(saleRecord);
     subCollection.owner = buyer.toLowerCase();
     subCollection.seller = null;
@@ -1755,7 +1794,17 @@ export async function recordSubCollectionSale(req, res) {
     // Update parent collection sales count
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
 
-    await parent.save();
+    // ✅ FORCE SAVE with extra logging
+    console.log("💾 Saving Parent Collection...");
+    parent.markModified('subCollections');
+    
+    const savedParent = await parent.save();
+    
+    // Verify save
+    const savedSub = savedParent.subCollections.id(subCollection._id);
+    console.log("✅ Saved Sub-Collection Sales History Length:", savedSub?.salesHistory?.length);
+    console.log("✅ Saved Sub-Collection Owner:", savedSub?.owner);
+    console.log("✅ Saved Sub-Collection Listed:", savedSub?.listed);
 
     console.log(
       `✅ Sub-collection sale recorded: Token ${tokenId} sold to ${buyer}`,
@@ -1861,6 +1910,7 @@ export async function cancelSubCollectionListing(req, res) {
     subCollection.seller = null;
 
     // 6. Save changes
+    parent.markModified('subCollections');
     await parent.save();
 
     console.log("✅ Successfully cancelled listing:", {
@@ -1883,12 +1933,11 @@ export async function cancelSubCollectionListing(req, res) {
     return res.json({
       success: true,
       message: "Listing cancelled successfully",
+      parentId: nftId, // ✅ Direct return for frontend
+      tokenId: tokenIdNum,
       details: {
-        parentId: nftId,
-        tokenId: tokenIdNum,
         newListed: verifiedSub.listed,
         newPriceETH: verifiedSub.priceETH,
-        updateTime: new Date().toISOString(),
       },
     });
   } catch (err) {

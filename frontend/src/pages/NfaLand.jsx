@@ -13,10 +13,11 @@ import FaceTwo from "../assets/images/noActivity2.png";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 import { ethers } from "ethers";
 import {
-  MARKETPLACE_ADDRESS,
-  NFT_ADDRESS,
+  SEPOLIA_MARKETPLACE_ADDRESS,
+  SEPOLIA_NFT_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
+  SEPOLIA_CHAIN_ID,
 } from "../Web3/Config";
 
 function NfaLand() {
@@ -124,7 +125,7 @@ function NfaLand() {
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const nftContract = new ethers.Contract(
-              NFT_ADDRESS,
+              SEPOLIA_NFT_ADDRESS,
               NFT_ABI,
               provider
             );
@@ -183,13 +184,13 @@ function NfaLand() {
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
+        SEPOLIA_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         provider
       );
 
       const listing = await marketplace.getListing(
-        NFT_ADDRESS,
+        SEPOLIA_NFT_ADDRESS,
         collection.tokenId
       );
 
@@ -268,6 +269,7 @@ function NfaLand() {
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
+        chainId: SEPOLIA_CHAIN_ID,
       };
 
       console.log("🎨 Minting NFA with payload:", payload);
@@ -328,9 +330,9 @@ function NfaLand() {
       const walletAddress = await signer.getAddress();
       console.log("👛 Wallet address:", walletAddress);
 
-      const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
+      const nftContract = new ethers.Contract(SEPOLIA_NFT_ADDRESS, NFT_ABI, signer);
       const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
+        SEPOLIA_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
@@ -406,10 +408,10 @@ function NfaLand() {
 
       // Check approval
       const approved = await nftContract.getApproved(tokenId);
-      if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
+      if (approved.toLowerCase() !== SEPOLIA_MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
         const approveTx = await nftContract.approve(
-          MARKETPLACE_ADDRESS,
+          SEPOLIA_MARKETPLACE_ADDRESS,
           tokenId
         );
         await approveTx.wait();
@@ -417,7 +419,7 @@ function NfaLand() {
       }
 
       // Check if already listed
-      const listing = await marketplace.getListing(NFT_ADDRESS, tokenId);
+      const listing = await marketplace.getListing(SEPOLIA_NFT_ADDRESS, tokenId);
       if (listing[2]) {
         toast.success("✅ Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
@@ -429,7 +431,7 @@ function NfaLand() {
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
       const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
       const listTx = await marketplace.createListing(
-        NFT_ADDRESS,
+        SEPOLIA_NFT_ADDRESS,
         tokenId,
         priceWei,
         { gasLimit: 300000 }
@@ -554,11 +556,11 @@ function NfaLand() {
       }
 
       const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
+        SEPOLIA_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
-      const nftContract = new ethers.Contract(NFT_ADDRESS, NFT_ABI, provider);
+      const nftContract = new ethers.Contract(SEPOLIA_NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
@@ -621,7 +623,7 @@ function NfaLand() {
 
       // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(NFT_ADDRESS, collection.tokenId);
+      const listing = await marketplace.getListing(SEPOLIA_NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -646,7 +648,7 @@ function NfaLand() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(NFT_ADDRESS, collection.tokenId, {
+      const buyTx = await marketplace.buyNFT(SEPOLIA_NFT_ADDRESS, collection.tokenId, {
         value: price,
         gasLimit: 400000,
       });

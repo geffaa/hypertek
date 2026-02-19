@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -6,16 +6,24 @@ import toast from "react-hot-toast";
 import { ethers } from "ethers";
 import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet"; // Import Immutable hook
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 // 
 import {
-  MARKETPLACE_ADDRESS,
-  NFT_ADDRESS,
+  SEPOLIA_NFT_ADDRESS,
+  SEPOLIA_MARKETPLACE_ADDRESS,
+  IMMUTABLE_NFT_ADDRESS,
+  IMMUTABLE_MARKETPLACE_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
+  PLATFORM_WALLET_ADDRESS,
+  IMMUTABLE_CHAIN_ID,
+  SEPOLIA_CHAIN_ID,
 } from "../../Web3/Config";
+import { createWalletClient, createPublicClient, custom, http } from 'viem';
+import { sepolia, immutableZkEvmTestnet } from 'viem/chains';
 import { BACKEND_BASE_URL } from "../../Config";
 import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2 } from "react-icons/fi";
@@ -48,14 +56,59 @@ function Buy1() {
   }
 
   const collection = subCollection || item;
+  if (!collection) return null;
   const { token, user } = useSelector((state) => state.auth);
 
+  // Immutable Wallet Hook
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+    provider: immutableProvider,
+    connect: connectImmutable,
+    isConnecting: isImmutableConnecting,
+    balance,
+    logout
+  } = useImmutableWallet();
+
   // RainbowKit hooks
-  const { address: connectedWallet, isConnected, chain } = useAccount();
+  const { address: connectedWallet, isConnected, chain, connector } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient();
+
+  // Determine if using Immutable Passport
+  const isPassport = connector?.id === 'immutable' || connector?.name === 'Immutable Passport';
+
+  // Dynamic Chain Configuration
+  const isImmutableMode = immutableIsConnected;
+  const TARGET_CHAIN_ID = isImmutableMode ? 13473 : 11155111;
+  const publicClient = usePublicClient({ chainId: TARGET_CHAIN_ID });
   const { switchChain } = useSwitchChain();
+
+  // Dynamic Addresses based on Chain
+  const CURRENT_NFT_ADDRESS = isImmutableMode ? IMMUTABLE_NFT_ADDRESS : SEPOLIA_NFT_ADDRESS;
+  const CURRENT_MARKETPLACE_ADDRESS = isImmutableMode ? IMMUTABLE_MARKETPLACE_ADDRESS : SEPOLIA_MARKETPLACE_ADDRESS;
+
+
+
+  const [immutableWalletClient, setImmutableWalletClient] = useState(null);
+
+  useEffect(() => {
+    if (immutableProvider && immutableProvider.request && immutableAddress) {
+      const client = createWalletClient({
+        chain: immutableZkEvmTestnet,
+        transport: custom(immutableProvider),
+        account: immutableAddress
+      });
+      setImmutableWalletClient(client);
+    } else {
+      setImmutableWalletClient(null);
+    }
+  }, [immutableProvider, immutableAddress]);
+
+  const activeAddress = connectedWallet || immutableAddress;
+  const isAnyConnected = isConnected || immutableIsConnected;
+  // Prioritize Immutable client if connected, otherwise Wagmi client
+  const activeWalletClient = immutableWalletClient || walletClient;
 
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
@@ -65,8 +118,9 @@ function Buy1() {
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
-  const SEPOLIA_CHAIN_ID = 11155111; // Sepolia chain ID in decimal
+  const IMMUTABLE_CHAIN_ID = 13473; // Immutable zkEVM Testnet
 
   /* ================================ INIT ================================ */
   useEffect(() => {
@@ -82,26 +136,49 @@ function Buy1() {
     }
   }, [collection, navigate]);
 
+  // ✅ Fetch Fresh Data on Mount
   useEffect(() => {
-    if (isConnected && connectedWallet && publicClient) {
+    const fetchFreshData = async () => {
+      if (collection?._id) {
+        try {
+          // If it's a sub-collection, we might need a specific endpoint or parent lookup
+          // But for now, let's rely on checking ownership on-chain which we already do.
+          // Or if we have an endpoint for single sub-collection:
+          // const res = await axios.get(...) 
+          // Since we don't have a direct "get sub-collection by ID" easily exposed without parentId, 
+          // we will rely on on-chain data primarily.
+
+          // However, we can re-verify the owner from the backend if possible.
+        } catch (e) {
+          console.error("Refetch error", e);
+        }
+      }
+    };
+    fetchFreshData();
+  }, [collection?._id]);
+
+  useEffect(() => {
+    if (publicClient && collection) {
       checkWalletAndOwnership();
     }
-  }, [collection, isConnected, connectedWallet, publicClient]);
+  }, [collection, isAnyConnected, activeAddress, publicClient]);
 
   /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
     try {
-      if (!publicClient || !collection || !connectedWallet) return;
+      if (!publicClient || !collection) return;
 
-      const wallet = connectedWallet.toLowerCase();
-      console.log("✅ Connected wallet:", wallet);
+      const wallet = activeAddress ? activeAddress.toLowerCase() : null;
+      if (wallet) {
+        console.log("✅ Connected wallet:", wallet);
+      }
       console.log("📋 Collection owner from DB:", collection.owner);
 
       // Check BLOCKCHAIN ownership if tokenId exists
       if (collection.tokenId) {
         try {
           const nftContract = {
-            address: NFT_ADDRESS,
+            address: CURRENT_NFT_ADDRESS,
             abi: NFT_ABI,
           };
 
@@ -113,22 +190,43 @@ function Buy1() {
 
           const ownerLower = owner.toLowerCase();
 
-          setOnChainOwner(ownerLower);
-          console.log("⛓️ On-chain owner:", ownerLower);
+          // SMART CHECK: If on-chain owner is Platform (0x11dd...), but DB says it's a User (0x...),
+          // and we are on Sepolia (default), it likely means the item is actually on Immutable.
+          // In this case, we TRUST THE DB OWNER for display purposes.
 
-          if (collection.owner !== ownerLower) {
-            console.log("🔄 Updating collection.owner to match blockchain");
-            collection.owner = ownerLower;
+          const isPlatform = ownerLower === PLATFORM_WALLET_ADDRESS.toLowerCase();
+          const dbOwnerIsUser = collection.owner && collection.owner.toLowerCase() !== PLATFORM_WALLET_ADDRESS.toLowerCase();
+
+          if (isPlatform && dbOwnerIsUser) {
+            console.warn("⚠️ Chain mismatch detected! On-chain is Platform, but DB is User. Likely on Immutable.");
+            setOnChainOwner(collection.owner.toLowerCase());
+          } else {
+            setOnChainOwner(ownerLower);
           }
 
-          const ownerMatch = wallet === ownerLower;
+          if (collection.owner !== ownerLower) {
+            // Only update if we are sure? No, let's keep local state sync but be careful about overwriting if mismatch
+            if (isPlatform && dbOwnerIsUser) {
+              // Do NOT overwrite collection.owner with Platform address if DB says User
+            } else {
+              console.log("🔄 Updating collection.owner to match blockchain");
+              collection.owner = ownerLower;
+            }
+          }
+
+          const ownerToCompare = (isPlatform && dbOwnerIsUser) ? collection.owner.toLowerCase() : ownerLower;
+          const ownerMatch = wallet && wallet === ownerToCompare;
+
           setIsOwner(ownerMatch);
           console.log("🔍 Is owner (blockchain check):", ownerMatch);
         } catch (err) {
           console.error("❌ Error checking on-chain owner:", err);
+
+          // If read fails (e.g. wrong chain), trust DB
           if (collection.owner) {
-            const ownerMatch = wallet === collection.owner.toLowerCase();
+            const ownerMatch = wallet && wallet === collection.owner.toLowerCase();
             setIsOwner(ownerMatch);
+            setOnChainOwner(collection.owner.toLowerCase()); // Trust DB
             console.log("🔍 Is owner (DB fallback):", ownerMatch);
           } else {
             setIsOwner(false);
@@ -137,12 +235,12 @@ function Buy1() {
       } else {
         // Not minted yet
         if (collection.owner) {
-          const ownerMatch = wallet === collection.owner.toLowerCase();
+          const ownerMatch = wallet && wallet === collection.owner.toLowerCase();
           setIsOwner(ownerMatch);
           console.log("🔍 Is owner (not minted, DB check):", ownerMatch);
         } else {
-          setIsOwner(true);
-          console.log("🆕 No owner - user can mint");
+          setIsOwner(false);
+          console.log("🆕 No owner - treated as Platform owned (Buy Now)");
         }
       }
 
@@ -160,14 +258,14 @@ function Buy1() {
       if (!collection.tokenId || !publicClient) return;
 
       const marketplaceContract = {
-        address: MARKETPLACE_ADDRESS,
+        address: CURRENT_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
       };
 
       const listing = await publicClient.readContract({
         ...marketplaceContract,
         functionName: 'getListing',
-        args: [NFT_ADDRESS, collection.tokenId],
+        args: [CURRENT_NFT_ADDRESS, collection.tokenId],
       });
 
       setListingData({
@@ -183,21 +281,40 @@ function Buy1() {
     }
   };
 
-  /* ======================== SWITCH TO SEPOLIA ======================== */
-  const ensureSepoliaNetwork = async () => {
-    if (chain?.id === SEPOLIA_CHAIN_ID) {
+  /* ======================== ENSURE CORRECT NETWORK ======================== */
+  const ensureCorrectNetwork = async () => {
+    const targetChainId = TARGET_CHAIN_ID;
+    const targetChainName = isImmutableMode ? "Immutable zkEVM Testnet" : "Sepolia";
+
+    if (chain?.id === targetChainId) {
       return true;
     }
 
-    const toastId = toast.loading("🔄 Switching to Sepolia network...");
+    // Special handling for Immutable Passport
+    if (isPassport && immutableProvider) {
+      try {
+        const chainIdHex = await immutableProvider.request({ method: 'eth_chainId' });
+        const currentChainId = parseInt(chainIdHex, 16);
+        if (currentChainId === 13473) return true;
+      } catch (e) {
+        console.log("Immutable provider check failed", e);
+      }
+    }
+
+    const toastId = toast.loading(`🔄 Switching to ${targetChainName}...`);
 
     try {
-      await switchChain({ chainId: SEPOLIA_CHAIN_ID });
-      toast.success("✅ Switched to Sepolia", { id: toastId });
-      return true;
+      if (switchChain) {
+        await switchChain({ chainId: targetChainId });
+        toast.success(`✅ Switched to ${targetChainName}`, { id: toastId });
+        return true;
+      } else {
+        toast.error("❌ Network switch not supported by wallet", { id: toastId });
+        return false;
+      }
     } catch (error) {
       console.error("❌ Failed to switch network:", error);
-      toast.error("❌ Please switch to Sepolia network manually", { id: toastId });
+      toast.error(`❌ Please switch to ${targetChainName} manually`, { id: toastId });
       return false;
     }
   };
@@ -216,6 +333,7 @@ function Buy1() {
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
+        chainId: TARGET_CHAIN_ID,
       };
 
       console.log("🎨 Minting NFA with payload:", payload);
@@ -246,7 +364,7 @@ function Buy1() {
 
   /* ======================= CREATE LISTING ======================= */
   const handleCreateListing = async () => {
-    if (!isConnected) {
+    if (!isAnyConnected) {
       if (openConnectModal) {
         openConnectModal();
       }
@@ -257,20 +375,20 @@ function Buy1() {
     setLoading(true);
 
     try {
-      if (!walletClient || !publicClient) {
+      if (!activeWalletClient || !publicClient) {
         toast.error("❌ Wallet not connected properly", { id: toastId });
         setLoading(false);
         return;
       }
 
-      // Ensure we're on Sepolia
-      const networkOk = await ensureSepoliaNetwork();
+      // Ensure we're on the correct network
+      const networkOk = await ensureCorrectNetwork();
       if (!networkOk) {
         setLoading(false);
         return;
       }
 
-      const walletAddress = connectedWallet;
+      const walletAddress = activeAddress;
       console.log("👛 Wallet address:", walletAddress);
 
       let tokenId = collection.tokenId;
@@ -291,22 +409,26 @@ function Buy1() {
         setIsOwner(true);
         setOnChainOwner(walletAddress.toLowerCase());
 
-        toast.loading("⏳ Waiting for blockchain confirmation...", {
-          id: toastId,
-        });
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        toast.success("✅ NFT Minted! Indexing...", { id: toastId });
+
+        // Short wait to allow indexing
+        await new Promise((resolve) => setTimeout(resolve, 5000));
       }
 
       // Verify ownership
       toast.loading("🔍 Verifying ownership...", { id: toastId });
 
+      console.log("🔍 Checking ownership on Contract:", CURRENT_NFT_ADDRESS);
+      console.log("🔍 Token ID:", tokenId);
+      console.log("🔍 Expected Owner:", walletAddress);
+
       const nftContract = {
-        address: NFT_ADDRESS,
+        address: CURRENT_NFT_ADDRESS,
         abi: NFT_ABI,
       };
 
       let owner;
-      let retries = 3;
+      let retries = 15; // Increased retries
 
       while (retries > 0) {
         try {
@@ -316,8 +438,7 @@ function Buy1() {
             args: [tokenId],
           });
 
-          console.log("⛓️ On-chain owner:", owner);
-          console.log("👛 Your wallet:", walletAddress);
+          console.log("⛓️ On-chain owner result:", owner);
 
           if (owner.toLowerCase() === walletAddress.toLowerCase()) {
             collection.owner = owner.toLowerCase();
@@ -326,12 +447,13 @@ function Buy1() {
             console.log("✅ Ownership verified");
             break;
           } else if (retries > 1) {
-            console.log(`⏳ Owner mismatch, retrying... (${retries - 1} left)`);
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            console.log(`⏳ Owner mismatch/pending (${retries - 1} retries left)...`);
+            await new Promise((resolve) => setTimeout(resolve, 3000));
             retries--;
             continue;
           } else {
-            toast.error("❌ You don't own this NFA", { id: toastId });
+            // ... existing failure logic
+            toast.error("❌ Ownership mismatch after retries", { id: toastId });
             setLoading(false);
             return;
           }
@@ -353,40 +475,54 @@ function Buy1() {
         }
       }
 
-      // Check approval
+      // Check approval (Use setApprovalForAll for Marketplace)
       toast.loading("✍️ Checking marketplace approval...", { id: toastId });
 
-      const approved = await publicClient.readContract({
+      const isApprovedForAll = await publicClient.readContract({
         ...nftContract,
-        functionName: 'getApproved',
-        args: [tokenId],
+        functionName: 'isApprovedForAll',
+        args: [walletAddress, CURRENT_MARKETPLACE_ADDRESS],
       });
 
-      if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
-        toast.loading("✍️ Approving marketplace...", { id: toastId });
+      if (!isApprovedForAll) {
+        toast.loading("✍️ Approving marketplace (One-time)...", { id: toastId });
+        console.log("📝 sending setApprovalForAll tx...");
 
-        const { request } = await publicClient.simulateContract({
-          ...nftContract,
-          functionName: 'approve',
-          args: [MARKETPLACE_ADDRESS, tokenId],
-          account: walletAddress,
-        });
+        try {
+          const { request } = await publicClient.simulateContract({
+            ...nftContract,
+            functionName: 'setApprovalForAll',
+            args: [CURRENT_MARKETPLACE_ADDRESS, true],
+            account: walletAddress,
+          });
 
-        const approveTx = await walletClient.writeContract(request);
-        await publicClient.waitForTransactionReceipt({ hash: approveTx });
-        console.log("✅ Marketplace approved");
+          const approveTx = await activeWalletClient.writeContract(request);
+          toast.loading("⏳ Waiting for approval confirmation...", { id: toastId });
+          await publicClient.waitForTransactionReceipt({ hash: approveTx });
+          console.log("✅ Marketplace approved for all");
+        } catch (approveError) {
+          console.error("❌ Approval failed:", approveError);
+          // Special handling for user rejection
+          if (approveError.message.includes("User rejected")) {
+            toast.error("❌ Approval rejected by user", { id: toastId });
+          } else {
+            toast.error("❌ Approval transaction failed", { id: toastId });
+          }
+          setLoading(false);
+          return;
+        }
       }
 
       // Check if already listed
       const marketplaceContract = {
-        address: MARKETPLACE_ADDRESS,
+        address: CURRENT_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
       };
 
       const listing = await publicClient.readContract({
         ...marketplaceContract,
         functionName: 'getListing',
-        args: [NFT_ADDRESS, tokenId],
+        args: [CURRENT_NFT_ADDRESS, tokenId],
       });
 
       if (listing[2]) {
@@ -403,11 +539,11 @@ function Buy1() {
       const { request } = await publicClient.simulateContract({
         ...marketplaceContract,
         functionName: 'createListing',
-        args: [NFT_ADDRESS, tokenId, priceWei],
+        args: [CURRENT_NFT_ADDRESS, tokenId, priceWei],
         account: walletAddress,
       });
 
-      const listTx = await walletClient.writeContract(request);
+      const listTx = await activeWalletClient.writeContract(request);
       await publicClient.waitForTransactionReceipt({ hash: listTx });
       console.log("✅ Listing created on blockchain");
 
@@ -463,11 +599,14 @@ function Buy1() {
 
       let msg = "❌ Listing failed";
       if (err.message?.includes("insufficient funds")) {
-        msg = "⛽ Insufficient gas. Add Sepolia ETH";
+        msg = "⛽ Insufficient gas. Add Testnet IMX";
       } else if (err.message?.includes("user rejected") || err.code === 4001) {
         msg = "❌ Transaction rejected by user";
+      } else {
+        msg = `❌ Error: ${err.shortMessage || err.message?.substring(0, 50) || "Unknown"}`;
       }
-      toast.error(msg, { id: toastId });
+      console.error("Listing Error:", err);
+      toast.error(msg, { id: toastId, duration: 8000 });
     } finally {
       setLoading(false);
     }
@@ -475,7 +614,7 @@ function Buy1() {
 
   /* ============================ BUY NFT ============================ */
   const handleBuyNFT = async () => {
-    if (!isConnected) {
+    if (!isAnyConnected) {
       if (openConnectModal) {
         openConnectModal();
       }
@@ -486,7 +625,7 @@ function Buy1() {
     setLoading(true);
 
     try {
-      if (!walletClient || !publicClient) {
+      if (!activeWalletClient || !publicClient) {
         toast.error("❌ Wallet not connected properly", { id: toastId });
         setLoading(false);
         return;
@@ -498,21 +637,36 @@ function Buy1() {
         return;
       }
 
-      // Ensure we're on Sepolia
-      const networkOk = await ensureSepoliaNetwork();
+      // Ensure we're on the correct network
+      const networkOk = await ensureCorrectNetwork();
       if (!networkOk) {
         setLoading(false);
         return;
       }
 
-      const buyer = connectedWallet;
+      const buyer = activeAddress;
       console.log("👛 Buyer wallet:", buyer);
 
       const balance = await publicClient.getBalance({ address: buyer });
       console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error("❌ Your wallet has no ETH", { id: toastId });
+        if (isImmutableMode) {
+          toast.error(
+            <div>
+              ❌ Your Immutable Wallet has no ETH.
+              <br />
+              <button
+                onClick={() => window.open('https://hub.immutable.com/sandbox', '_blank')}
+                className="mt-2 bg-white text-black px-2 py-1 rounded text-xs font-bold"
+              >
+                💰 Add Funds (Faucet)
+              </button>
+            </div>
+            , { id: toastId, duration: 8000 });
+        } else {
+          toast.error("❌ Your wallet has no ETH", { id: toastId });
+        }
         setLoading(false);
         return;
       }
@@ -558,7 +712,7 @@ function Buy1() {
       toast.loading("🔍 Checking NFT ownership...", { id: toastId });
 
       const nftContract = {
-        address: NFT_ADDRESS,
+        address: CURRENT_NFT_ADDRESS,
         abi: NFT_ABI,
       };
 
@@ -587,14 +741,14 @@ function Buy1() {
       toast.loading("📋 Verifying listing...", { id: toastId });
 
       const marketplaceContract = {
-        address: MARKETPLACE_ADDRESS,
+        address: CURRENT_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
       };
 
       const listing = await publicClient.readContract({
         ...marketplaceContract,
         functionName: 'getListing',
-        args: [NFT_ADDRESS, collection.tokenId],
+        args: [CURRENT_NFT_ADDRESS, collection.tokenId],
       });
 
       if (!listing[2]) {
@@ -621,12 +775,12 @@ function Buy1() {
       const { request } = await publicClient.simulateContract({
         ...marketplaceContract,
         functionName: 'buyNFT',
-        args: [NFT_ADDRESS, collection.tokenId],
+        args: [CURRENT_NFT_ADDRESS, collection.tokenId],
         value: price,
-        account: buyer,
+        account: activeAddress, // Use activeAddress which should match the wallet client's account
       });
 
-      const buyTx = await walletClient.writeContract(request);
+      const buyTx = await activeWalletClient.writeContract(request);
 
       toast.loading("⏳ Waiting for transaction confirmation...", {
         id: toastId,
@@ -730,19 +884,22 @@ function Buy1() {
   };
 
   /* ======================== BUTTON LOGIC ======================== */
-  const isPlatformOwned = !collection.owner || collection.owner === "admin";
+  const isPlatformOwned =
+    !collection.owner ||
+    collection.owner === "admin" ||
+    (onChainOwner &&
+      onChainOwner === PLATFORM_WALLET_ADDRESS.toLowerCase()) ||
+    (collection.owner &&
+      collection.owner.toLowerCase() ===
+      PLATFORM_WALLET_ADDRESS.toLowerCase());
 
   const getButtonAction = () => {
     if (loading) return { text: "⏳ Processing...", disabled: true };
 
-    if (!isConnected) {
+    if (!isAnyConnected) {
       return {
         text: "🔌 Connect Wallet",
-        action: () => {
-          if (openConnectModal) {
-            openConnectModal();
-          }
-        },
+        action: () => setShowWalletModal(true),
       };
     }
 
@@ -799,7 +956,73 @@ function Buy1() {
             Offers <span>{offers.length}</span>
           </button>
         </div>
+
+        {/* OPENSEA STYLE WALLET WIDGET */}
+        {immutableIsConnected && (
+          <div className="absolute top-[95px] right-[134px] z-50">
+            <button
+              className="flex items-center gap-3 bg-[#1f2937]/90 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 hover:bg-[#2d3748] transition-all cursor-pointer group relative"
+            >
+              <div className="flex flex-col items-end leading-tight text-right">
+                <span className="font-bold text-sm text-white">
+                  {immutableProvider && balance ? Number(ethers.formatEther(balance)).toFixed(4) : "0.00"} ETH
+                </span>
+                <span className="text-[10px] text-gray-400 font-mono">
+                  {immutableAddress?.substring(0, 6)}...{immutableAddress?.substring(38)}
+                </span>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white/10">
+                IMX
+              </div>
+
+              {/* DROPDOWN MENU (Group Hover) */}
+              <div className="absolute top-full right-0 mt-2 w-72 bg-[#1f2937] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 transform origin-top-right overflow-hidden z-[60]">
+                <div className="p-5">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-gray-400 text-xs font-bold uppercase tracking-wider">My Wallet</h3>
+                    <span className="text-green-400 text-xs bg-green-400/10 px-2 py-0.5 rounded-full ring-1 ring-green-400/20">● Connected</span>
+                  </div>
+
+                  <div className="text-center mb-6 bg-white/5 p-4 rounded-lg">
+                    <div className="text-3xl font-bold text-white mb-1">
+                      {ethers.formatEther(balance || 0).substring(0, 6)}
+                      <span className="text-lg text-gray-500 ml-1">ETH</span>
+                    </div>
+                    <div className="text-xs text-gray-500 font-mono">Immutable zkEVM Testnet</div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <button
+                      onClick={(e) => { e.preventDefault(); window.open('https://hub.immutable.com/sandbox', '_blank'); }}
+                      className="bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-lg font-semibold text-sm transition-colors flex flex-col items-center gap-1 shadow-lg shadow-blue-900/20"
+                    >
+                      <span>💰 Add Funds</span>
+                    </button>
+                    <button
+                      onClick={(e) => { e.preventDefault(); window.open('https://hub.immutable.com/sandbox', '_blank'); }}
+                      className="bg-[#2d3748] hover:bg-[#374151] text-white py-2.5 rounded-lg font-semibold text-sm transition-colors flex flex-col items-center gap-1 border border-white/5"
+                    >
+                      <span>🏦 Withdraw</span>
+                    </button>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-3 mt-2">
+                    <button
+                      onClick={(e) => { e.preventDefault(); logout(); toast.success("Logged out"); }}
+                      className="w-full text-left text-red-400 hover:text-red-300 hover:bg-red-900/10 rounded px-2 py-2 text-sm flex items-center gap-2 transition-colors"
+                    >
+                      <span className="text-lg">↪</span> Log Out
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        )}
+
+
       </div>
+
 
       {/* Main Content */}
       <div className="max-w-[918px] mx-auto w-full mt-2 flex flex-col md:flex-row gap-8 px-4">
@@ -822,6 +1045,8 @@ function Buy1() {
                 {connectedWallet.substring(38)}
               </span>
             )}
+
+
 
             {listingData?.active && (
               <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">
@@ -1078,6 +1303,79 @@ function Buy1() {
                 ))}
               </div>
             )}
+          </div>
+        </div>
+      )}
+      {/* WALLET SELECTION MODAL */}
+      {showWalletModal && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center backdrop-blur-sm"
+          onClick={() => setShowWalletModal(false)}
+        >
+          <div
+            className="bg-[#1f2937] p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl transform transition-all scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-white">Connect Wallet</h2>
+              <button
+                onClick={() => setShowWalletModal(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <button
+                onClick={() => {
+                  setShowWalletModal(false);
+                  if (openConnectModal) openConnectModal();
+                }}
+                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-blue-500/50 group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-xl">
+                    🌐
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-white">Browser Wallet</div>
+                    <div className="text-xs text-gray-400 group-hover:text-gray-300">
+                      MetaMask, Rainbow, etc.
+                    </div>
+                  </div>
+                </div>
+                <div className="text-gray-500 group-hover:text-blue-400">→</div>
+              </button>
+
+              <button
+                onClick={() => {
+                  console.log("🖱️ Immutable button clicked in Modal");
+                  connectImmutable();
+                  setShowWalletModal(false);
+                }}
+                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-[#0D0D14] border-l-4 border-l-[#0D0D14]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#0D0D14] flex items-center justify-center text-xl border border-white/10">
+                    I
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-white">Immutable Passport</div>
+                    <div className="text-xs text-gray-400">
+                      Email login & gas-free
+                    </div>
+                  </div>
+                </div>
+                <div className="text-gray-500 group-hover:text-white">→</div>
+              </button>
+
+              <div className="text-center mt-2">
+                <a href="https://hub.immutable.com/sandbox" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
+                  Need Testnet ETH? 💰 Get it here
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       )}

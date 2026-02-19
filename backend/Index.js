@@ -25,6 +25,7 @@ import Dashboard from "./Routes/Dashboard.js";
 import NFTRouter from "./Routes/NFT.js";
 import News from "./Routes/News.js";
 import chatRoutes from "./Routes/chat.js";
+import WithdrawalRoute from "./Routes/WithdrawalRoute.js"; // Import Withdrawal Route
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -126,8 +127,10 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/offer", OfferRoute);
 app.use("/api/dashboard", Dashboard);
 app.use("/api/v1/nft", NFTRouter);
+// ... (existing app.use calls)
 app.use("/api/v1/news", News);
-app.use("/api/v1/chat", chatRoutes); // Chat routes
+app.use("/api/v1/chat", chatRoutes); 
+app.use("/api/v1/withdraw", WithdrawalRoute); // Register Withdrawal Route
 
 // Health check
 app.get("/health", (req, res) => {

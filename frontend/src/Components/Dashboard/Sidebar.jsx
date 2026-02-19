@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation , useNavigate } from "react-router-dom";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FiChevronDown, FiChevronUp, FiDollarSign } from "react-icons/fi";
 
 import Logo from "../../assets/logo1.png";
 import DashboardImage from "../../assets/images/Sidebar/dashboard.png";
@@ -29,10 +29,10 @@ const Sidebar = ({ onLogoutClick }) => {
   // Check current path on component mount and location change
   useEffect(() => {
     const path = location.pathname;
-    
+
     // Clear selected item first
     setSelectedItem("");
-    
+
     // Set selected item based on current route
     if (path.includes("/dashboard/create-nfa") || path.includes("/dashboard/nfa-details")) {
       setSelectedItem("Create Collection");
@@ -50,6 +50,8 @@ const Sidebar = ({ onLogoutClick }) => {
       setSelectedItem("Transaction");
     } else if (path.includes("/dashboard/support")) {
       setSelectedItem("support");
+    } else if (path.includes("/dashboard/withdraw")) {
+      setSelectedItem("withdraw");
     }
   }, [location.pathname]);
 
@@ -89,7 +91,7 @@ const Sidebar = ({ onLogoutClick }) => {
 
 
 
-  const handleClickBack = ()=>{
+  const handleClickBack = () => {
     navigate("/")
   }
 
@@ -142,15 +144,14 @@ const Sidebar = ({ onLogoutClick }) => {
                 </h1>
               </li> */}
             </Link>
-            
+
             {/* Create Collection 2 - Default blue only if no other item is selected */}
             <li
-              className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                selectedItem === "Create Collection" || 
-                (selectedItem === "" && isRouteActive("/dashboard"))
+              className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "Create Collection" ||
+                  (selectedItem === "" && isRouteActive("/dashboard"))
                   ? "bg-[#002AA8]"
                   : ""
-              }`}
+                }`}
               style={{ width: "222px", height: "42px", opacity: 1 }}
               onClick={() => toggleDropdown("create", "Create Collection")}
             >
@@ -207,11 +208,10 @@ const Sidebar = ({ onLogoutClick }) => {
                 <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${
-                      isRouteActive("/dashboard/nfa-details")
+                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/dashboard/nfa-details")
                         ? "text-blue-400 font-semibold"
                         : "text-white"
-                    }`}
+                      }`}
                   >
                     <Link to="/dashboard/nfa-details">NFA's Details</Link>
                   </li>
@@ -254,11 +254,10 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Edit User */}
             <Link to="/dashboard/edit-profile ">
               <li
-                className={`flex items-center justify-between px-3 mt-3  cursor-pointer ${
-                  selectedItem === "users"
+                className={`flex items-center justify-between px-3 mt-3  cursor-pointer ${selectedItem === "users"
                     ? "bg-[#002AA8]"
                     : ""
-                }`}
+                  }`}
                 style={{ width: "222px", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("users")}
               >
@@ -325,9 +324,8 @@ const Sidebar = ({ onLogoutClick }) => {
                 <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${
-                      isRouteActive("/add-news") ? "text-blue-400 font-semibold" : "text-white"
-                    }`}
+                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/add-news") ? "text-blue-400 font-semibold" : "text-white"
+                      }`}
                   >
                     <Link to="/add-news">Add News</Link>
                   </li>
@@ -335,9 +333,8 @@ const Sidebar = ({ onLogoutClick }) => {
                 <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${
-                      isRouteActive("/edit-news") ? "text-blue-400 font-semibold" : "text-white"
-                    }`}
+                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/edit-news") ? "text-blue-400 font-semibold" : "text-white"
+                      }`}
                   >
                     <Link to="/edit-news">Edit News</Link>
                   </li>
@@ -345,9 +342,8 @@ const Sidebar = ({ onLogoutClick }) => {
                 <div className="flex">
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${
-                      isRouteActive("/other-news") ? "text-blue-400 font-semibold" : "text-white"
-                    }`}
+                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/other-news") ? "text-blue-400 font-semibold" : "text-white"
+                      }`}
                   >
                     <Link to="/other-news">Other News</Link>
                   </li>
@@ -390,11 +386,10 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Transaction */}
             <Link to="/dashboard/transactions">
               <li
-                className={`flex items-center justify-between px-3 mt-3 cursor-pointer ${
-                  selectedItem === "Transaction"
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer ${selectedItem === "Transaction"
                     ? "bg-[#002AA8]"
                     : ""
-                }`}
+                  }`}
                 style={{ width: "222px", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("Transaction")}
               >
@@ -422,11 +417,10 @@ const Sidebar = ({ onLogoutClick }) => {
             {/* Support */}
             <Link to="/dashboard/support">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                  selectedItem === "support"
+                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "support"
                     ? "bg-[#002AA8]"
                     : ""
-                }`}
+                  }`}
                 style={{ width: "222px", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("support")}
               >
@@ -446,6 +440,38 @@ const Sidebar = ({ onLogoutClick }) => {
                     }}
                   >
                     Support
+                  </h1>
+                </div>
+              </li>
+            </Link>
+
+            {/* Withdraw */}
+            <Link to="/dashboard/withdraw">
+              <li
+                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "withdraw"
+                    ? "bg-[#002AA8]"
+                    : ""
+                  }`}
+                style={{ width: "222px", height: "42px", opacity: 1 }}
+                onClick={() => handleItemClick("withdraw")}
+              >
+                <div className="flex items-center">
+                  <div className="relative flex items-center justify-center w-[22px] h-[22px]">
+                    {/* Using Icon as we might not have specific asset */}
+                    <FiDollarSign className="text-white w-5 h-5" />
+                  </div>
+                  <h1
+                    className="text-white font-bold ml-3"
+                    style={{
+                      width: "120px",
+                      height: "17px",
+                      fontFamily: "Inter, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      lineHeight: "17px",
+                    }}
+                  >
+                    Withdraw
                   </h1>
                 </div>
               </li>
