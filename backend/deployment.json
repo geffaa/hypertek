@@ -1,11 +1,11 @@
 {
-  "network": "sepolia",
+  "network": "immutableZkevmTestnet",
   "deployer": "0x11Dd223303346021d21a72818c3188187eA07FD3",
   "contracts": {
-    "MyNFT": "0xC40f17FfF5591dbb12CD4279111C22bb33425244",
-    "Marketplace": "0x2E3Ae1bC661C170D009Cf3E9686dFFfF60AEDc0b"
+    "MyNFT": "0x0999bA9c3a1040BC04828a4Dda0C1EdFC2d78b7D",
+    "Marketplace": "0xaD41299bbcb527BBdD58b8126e6539871b0a874a"
   },
   "platformWallet": "0x11Dd223303346021d21a72818c3188187eA07FD3",
   "marketplaceAuthorized": true,
-  "timestamp": "2026-01-02T06:46:50.356Z"
+  "timestamp": "2026-02-18T07:31:34.410Z"
 }

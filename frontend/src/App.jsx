@@ -14,7 +14,7 @@ import Login from "./pages/Signin";
 import ForgotPasswor from "./pages/ForgotPasswor";
 import ResetPassword from "./pages/ResetPassword";
 import Loading from "./Components/Common/Loading";
-import  HypeGamePage from "./pages/MoreNews";
+import HypeGamePage from "./pages/MoreNews";
 import NewsAll from "./pages/NewsAll";
 
 
@@ -69,6 +69,9 @@ import AddCollection from "./pages/DashboardPages/AddCollection";
 import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
 import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
+import LoginCallback from "./pages/LoginCallback";
+import DebugImmutable from "./pages/DebugImmutable";
+import Withdraw from "./pages/DashboardPages/Withdraw";
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -94,7 +97,7 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
-   
+
     "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
@@ -120,7 +123,7 @@ function AppWrapper() {
         {!shouldHideLayout && <Navbar />}
 
         <div style={{ flex: 1 }}>
-        <Routes key={location.pathname}>
+          <Routes key={location.pathname}>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -136,8 +139,12 @@ function AppWrapper() {
             <Route path="/collections/:category" element={<CategoryMarketplace />} />
             <Route path="/nfa-expand" element={<NFA />} />
             <Route path="/land" element={<Land />} />
-            <Route path="/more-news" element={<HypeGamePage/>} />
+            <Route path="/more-news" element={<HypeGamePage />} />
             <Route path="/news" element={<NewsAll />} />
+
+
+            {/* Auth Callbacks */}
+            <Route path="/login/callback" element={<LoginCallback />} />
 
             {/* NFA Pages */}
             <Route path="/buy-nfa" element={<BuyNfa />} />
@@ -172,8 +179,11 @@ function AppWrapper() {
             <Route path="/List" element={<List />} />
             <Route path="/edit" element={<Edit />} />
 
+
+
             {/* Testing Routes  */}
             <Route path="/testing" element={<Testing />} />
+            <Route path="/debug-immutable" element={<DebugImmutable />} />
 
             {/* for payment options  */}
 
@@ -185,7 +195,7 @@ function AppWrapper() {
               element={
                 <ProtectedRoute>
                   <DashboardLayout />
-                </ProtectedRoute> 
+                </ProtectedRoute>
               }
             >
               {/* Default dashboard home */}
@@ -193,7 +203,7 @@ function AppWrapper() {
 
               {/* Dashboard pages */}
               <Route path="create-nfa" element={<CreateCollections />} />
-              <Route path="create-earning" element={< CreateEarning/>} />
+              <Route path="create-earning" element={< CreateEarning />} />
               <Route path="nfa-details" element={<NFAdetails />} />
               <Route path="edit-nfa" element={<EditNfa />} />
               <Route path="collections" element={<NFTs />} />
@@ -210,6 +220,7 @@ function AppWrapper() {
                 path="add-user-collection"
                 element={<AddUserCollection />}
               />
+              <Route path="withdraw" element={<Withdraw />} />
             </Route>
 
             {/* not found page  */}

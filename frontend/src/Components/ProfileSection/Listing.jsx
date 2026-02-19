@@ -11,11 +11,21 @@ import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton4 from "../Buttons/Button4";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet";
+import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
+import { createWalletClient, custom } from 'viem';
+import { immutableZkEvmTestnet } from 'viem/chains';
 
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
   MARKETPLACE_ABI,
+  SEPOLIA_MARKETPLACE_ADDRESS,
+  SEPOLIA_NFT_ADDRESS,
+  IMMUTABLE_MARKETPLACE_ADDRESS,
+  IMMUTABLE_NFT_ADDRESS,
+  IMMUTABLE_CHAIN_ID,
+  SEPOLIA_CHAIN_ID,
 } from "../../Web3/Config";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -26,18 +36,35 @@ function UserListings() {
   const [userData, setUserData] = useState({});
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  /* ================= HOOKS ================= */
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+    provider: immutableProvider,
+  } = useImmutableWallet();
+
+  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
+  const { switchChain } = useSwitchChain();
+
+  // Combine wallet state
+  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
+  const isConnected = immutableIsConnected || isWagmiConnected;
+
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [cancelling, setCancelling] = useState(false);
 
+  // Sync state
   useEffect(() => {
-    const initializePage = async () => {
-      await fetchProfile();
-      await checkWallet();
-    };
-    initializePage();
-  }, [token]);
+    if (activeAddress) {
+      setConnectedWallet(activeAddress.toLowerCase());
+    } else {
+      setConnectedWallet(null);
+    }
+  }, [activeAddress]);
 
   // Fetch listings when wallet is connected
   useEffect(() => {
@@ -45,6 +72,10 @@ function UserListings() {
       fetchUserListings();
     }
   }, [connectedWallet]);
+
+  useEffect(() => {
+    fetchProfile();
+  }, [token]);
 
   const fetchProfile = async () => {
     try {
@@ -57,38 +88,7 @@ function UserListings() {
     }
   };
 
-  const checkWallet = async () => {
-    try {
-      if (!window.ethereum) {
-        toast.error("Please install MetaMask");
-        setLoading(false);
-        return;
-      }
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (accounts.length > 0) {
-        setConnectedWallet(accounts[0].toLowerCase());
-        console.log("✅ Wallet connected:", accounts[0].toLowerCase());
-      }
-
-      window.ethereum.on("accountsChanged", handleAccountsChanged);
-    } catch (err) {
-      console.error("Wallet error:", err);
-      toast.error("Failed to connect wallet");
-      setLoading(false);
-    }
-  };
-
-  const handleAccountsChanged = (accounts) => {
-    if (accounts.length > 0) {
-      const newWallet = accounts[0].toLowerCase();
-      setConnectedWallet(newWallet);
-      console.log("🔄 Wallet changed:", newWallet);
-    }
-  };
+  // Legacy checkWallet removed in favor of hooks
 
   const fetchUserListings = async () => {
     try {
@@ -162,29 +162,61 @@ function UserListings() {
   };
 
   const handleConfirmCancel = async () => {
-    if (!window.ethereum) {
-      toast.error("MetaMask not installed");
+    if (!connectedWallet) {
+      toast.error("Please connect your wallet");
       return;
     }
 
-    const toastId = toast.loading("Cancelling listings...");
+    const toastId = toast.loading("Processing cancellation...");
     setCancelling(true);
 
     try {
-      const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
-        const switched = await switchToSepolia();
-        if (!switched) {
-          toast.error("Switch to Sepolia failed", { id: toastId });
-          setCancelling(false);
-          return;
-        }
+      let provider, signer, chainId;
+
+      // 1. Determine Provider/Signer based on connection type
+      if (immutableIsConnected && immutableProvider) {
+        // Immutable zkEVM
+        provider = new ethers.BrowserProvider(immutableProvider);
+        signer = await provider.getSigner();
+        chainId = IMMUTABLE_CHAIN_ID;
+        console.log("✅ Using Immutable Provider");
+      } else if (window.ethereum) {
+        // Standard Wallet (Sepolia)
+        provider = new ethers.BrowserProvider(window.ethereum);
+        signer = await provider.getSigner();
+        const network = await provider.getNetwork();
+        chainId = Number(network.chainId);
+        console.log("✅ Using Standard Provider (MetaMask setc)");
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
+      if (!signer) {
+        toast.error("Wallet provider not found", { id: toastId });
+        setCancelling(false);
+        return;
+      }
+
+      console.log("🔥 Current Chain ID:", chainId);
+
+      // 2. Select Addresses based on Chain
+      let targetMarketplaceAddress;
+      let targetNftAddress;
+
+      if (chainId === IMMUTABLE_CHAIN_ID) {
+        targetMarketplaceAddress = IMMUTABLE_MARKETPLACE_ADDRESS;
+        targetNftAddress = IMMUTABLE_NFT_ADDRESS;
+        console.log("✅ Detected Immutable zkEVM Constants");
+      } else if (chainId === SEPOLIA_CHAIN_ID) {
+        targetMarketplaceAddress = SEPOLIA_MARKETPLACE_ADDRESS;
+        targetNftAddress = SEPOLIA_NFT_ADDRESS;
+        console.log("✅ Detected Sepolia Constants");
+      } else {
+        toast.error(`❌ Wrong Network. Connected to ${chainId}`, { id: toastId });
+        setCancelling(false);
+        return;
+      }
+
       const marketplace = new ethers.Contract(
-        MARKETPLACE_ADDRESS,
+        targetMarketplaceAddress,
         MARKETPLACE_ABI,
         signer,
       );
@@ -202,6 +234,7 @@ function UserListings() {
             tokenId: listing.tokenId,
             parentId: listing.parentId,
             _id: listing._id,
+            chain: chainId
           });
 
           toast.loading(`Cancelling Token #${listing.tokenId}...`, {
@@ -210,18 +243,20 @@ function UserListings() {
 
           // Cancel on blockchain
           const tx = await marketplace.cancelListing(
-            NFT_ADDRESS,
+            targetNftAddress,
             listing.tokenId,
             { gasLimit: 200000 },
           );
 
-          await tx.wait();
+          await tx.wait(); // Wait for confirmation
+
+          console.log("✅ Blockchain cancel confirmed");
 
           // ✅ Update backend with CORRECT parentId
           const cancelResponse = await axios.post(
             `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
             {
-              nftId: listing.parentId, // ✅ PARENT ID
+              nftId: listing.parentId,
               tokenId: listing.tokenId,
             },
             {
@@ -230,13 +265,9 @@ function UserListings() {
           );
 
           console.log("✅ Backend response:", cancelResponse.data);
-
           successCount++;
         } catch (err) {
           console.error(`❌ Failed to cancel token ${listing.tokenId}:`, err);
-          if (err.response) {
-            console.error("Backend error:", err.response.data);
-          }
           failCount++;
         }
       }
@@ -249,21 +280,17 @@ function UserListings() {
       }
 
       if (failCount > 0) {
-        toast.error(`❌ Failed to cancel ${failCount} listing(s)`, {
-          duration: 5000,
-        });
+        setTimeout(() => {
+          toast.error(`❌ Failed: ${failCount}`, { duration: 5000 });
+        }, successCount > 0 ? 1000 : 0);
       }
 
       setShowModal(false);
       setSelectedItems([]);
-      await fetchUserListings(); // Refresh the list
+      await fetchUserListings();
     } catch (err) {
       console.error("Cancel error:", err);
-      let msg = "Failed to cancel listings";
-      if (err.message?.includes("user rejected")) {
-        msg = "Transaction rejected";
-      }
-      toast.error(msg, { id: toastId });
+      toast.error("Failed to cancel listings", { id: toastId });
     } finally {
       setCancelling(false);
     }
