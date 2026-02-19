@@ -5,7 +5,7 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 
-function NavLinks({ onSelectCategory, selectedCategory, categories }) {
+function NavLinks({ onSelectCategory, selectedCategory, categories, onCategoriesLoaded }) {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function NavLinks({ onSelectCategory, selectedCategory, categories }) {
   const [userCategories, setUserCategories] = useState([]);
 
   const categoryNameCapitalized = (str) =>
-  str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection";
+    str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection";
 
   const staticTail = [
     { name: "Activities", path: "/Activity" },
@@ -24,37 +24,37 @@ function NavLinks({ onSelectCategory, selectedCategory, categories }) {
 
   // ---------- GLOBAL CATEGORIES ----------
   // ---------- GLOBAL CATEGORIES ----------
-const fetchGlobalCategories = async () => {
-  try {
-    const res = await axios.get(
-      `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`
-    );
+  const fetchGlobalCategories = async () => {
+    try {
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/parent-collections`
+      );
 
-    if (res.data?.success && Array.isArray(res.data.collections)) {
-      const cats = new Set();
+      if (res.data?.success && Array.isArray(res.data.collections)) {
+        const cats = new Set();
 
-      res.data.collections.forEach((c) => {
-        if (c.category) cats.add(c.category.toLowerCase().trim());
-      });
+        res.data.collections.forEach((c) => {
+          if (c.category) cats.add(c.category.toLowerCase().trim());
+        });
 
-      setGlobalCategories(Array.from(cats));
+        setGlobalCategories(Array.from(cats));
+      }
+    } catch (e) {
+      console.warn("Global categories failed", e);
     }
-  } catch (e) {
-    console.warn("Global categories failed", e);
-  }
-};
-
-useEffect(() => {
-  fetchGlobalCategories();
-
-  const handleUpdate = () => fetchGlobalCategories();
-
-  window.addEventListener("categoriesUpdated", handleUpdate);
-
-  return () => {
-    window.removeEventListener("categoriesUpdated", handleUpdate);
   };
-}, []);
+
+  useEffect(() => {
+    fetchGlobalCategories();
+
+    const handleUpdate = () => fetchGlobalCategories();
+
+    window.addEventListener("categoriesUpdated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("categoriesUpdated", handleUpdate);
+    };
+  }, []);
   // ---------- WALLET ----------
   useEffect(() => {
     if (!window.ethereum) return;
@@ -123,6 +123,15 @@ useEffect(() => {
     return ordered;
   }, [userCategories, globalCategories]);
 
+  useEffect(() => {
+    if (categoryTabs.length > 0) {
+      // Tell parent what the categories are
+      if (typeof onCategoriesLoaded === "function") {
+        onCategoriesLoaded(categoryTabs);
+      }
+    }
+  }, [categoryTabs, onCategoriesLoaded]);
+
   // ---------- RENDER ----------
   return (
     <ul className="flex flex-wrap gap-4 px-4 mt-5 lg:gap-[50px]">
@@ -135,32 +144,31 @@ useEffect(() => {
           <li key={cat}>
             <button
               onClick={() => {
-                navigate("/profile");
+                navigate("/Profile", { state: { category: cat } });
                 onSelectCategory(cat);
               }}
               className={`px-2 py-2 lg:px-[14px] lg:py-[4px]
               rounded-[10px] font-inter text-sm lg:text-[16px]
               transition-colors
-              ${
-                isActive
+              ${isActive
                   ? "bg-[#002AA8] text-white font-semibold"
                   : "text-white hover:bg-white/10 font-medium"
-              }`}
+                }`}
             >
-{(() => {
-  if (!categories || categories.length === 0) return categoryNameCapitalized(cat);
+              {(() => {
+                if (!categories || categories.length === 0) return categoryNameCapitalized(cat);
 
-  const match = categories.find(
-    ([categoryName, items]) => categoryName.toLowerCase().trim() === cat.toLowerCase().trim()
-  );
+                const match = categories.find(
+                  ([categoryName, items]) => categoryName.toLowerCase().trim() === cat.toLowerCase().trim()
+                );
 
-  if (match && match[1]?.length > 0) {
-    const firstItem = match[1][0];
-    return firstItem.parentName || firstItem.collection?.name || categoryNameCapitalized(cat);
-  }
+                if (match && match[1]?.length > 0) {
+                  const firstItem = match[1][0];
+                  return firstItem.parentName || firstItem.collection?.name || categoryNameCapitalized(cat);
+                }
 
-  return categoryNameCapitalized(cat);
-})()}   </button>
+                return categoryNameCapitalized(cat);
+              })()}   </button>
           </li>
         );
       })}
@@ -174,10 +182,9 @@ useEffect(() => {
               `px-2 py-2 lg:px-[14px] lg:py-[4px]
               rounded-[10px] font-inter text-sm lg:text-[16px]
               transition-colors
-              ${
-                isActive
-                  ? "bg-[#002AA8] text-white font-semibold"
-                  : "text-white hover:bg-white/10 font-medium"
+              ${isActive
+                ? "bg-[#002AA8] text-white font-semibold"
+                : "text-white hover:bg-white/10 font-medium"
               }`
             }
           >

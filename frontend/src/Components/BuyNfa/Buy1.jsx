@@ -104,13 +104,13 @@ function Buy1() {
             address: NFT_ADDRESS,
             abi: NFT_ABI,
           };
-          
+
           const owner = await publicClient.readContract({
             ...nftContract,
             functionName: 'ownerOf',
             args: [collection.tokenId],
           });
-          
+
           const ownerLower = owner.toLowerCase();
 
           setOnChainOwner(ownerLower);
@@ -190,7 +190,7 @@ function Buy1() {
     }
 
     const toastId = toast.loading("🔄 Switching to Sepolia network...");
-    
+
     try {
       await switchChain({ chainId: SEPOLIA_CHAIN_ID });
       toast.success("✅ Switched to Sepolia", { id: toastId });
@@ -299,7 +299,7 @@ function Buy1() {
 
       // Verify ownership
       toast.loading("🔍 Verifying ownership...", { id: toastId });
-      
+
       const nftContract = {
         address: NFT_ADDRESS,
         abi: NFT_ABI,
@@ -315,7 +315,7 @@ function Buy1() {
             functionName: 'ownerOf',
             args: [tokenId],
           });
-          
+
           console.log("⛓️ On-chain owner:", owner);
           console.log("👛 Your wallet:", walletAddress);
 
@@ -355,7 +355,7 @@ function Buy1() {
 
       // Check approval
       toast.loading("✍️ Checking marketplace approval...", { id: toastId });
-      
+
       const approved = await publicClient.readContract({
         ...nftContract,
         functionName: 'getApproved',
@@ -364,14 +364,14 @@ function Buy1() {
 
       if (approved.toLowerCase() !== MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
-        
+
         const { request } = await publicClient.simulateContract({
           ...nftContract,
           functionName: 'approve',
           args: [MARKETPLACE_ADDRESS, tokenId],
           account: walletAddress,
         });
-        
+
         const approveTx = await walletClient.writeContract(request);
         await publicClient.waitForTransactionReceipt({ hash: approveTx });
         console.log("✅ Marketplace approved");
@@ -399,14 +399,14 @@ function Buy1() {
       // Create listing on blockchain
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
       const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
-      
+
       const { request } = await publicClient.simulateContract({
         ...marketplaceContract,
         functionName: 'createListing',
         args: [NFT_ADDRESS, tokenId, priceWei],
         account: walletAddress,
       });
-      
+
       const listTx = await walletClient.writeContract(request);
       await publicClient.waitForTransactionReceipt({ hash: listTx });
       console.log("✅ Listing created on blockchain");
@@ -455,6 +455,10 @@ function Buy1() {
 
       collection.listed = true;
       await checkListingStatus();
+
+      setTimeout(() => {
+        navigate("/List");
+      }, 2000);
     } catch (err) {
       console.error("❌ Listing error:", err);
       console.error("❌ Error details:", err);
@@ -544,8 +548,9 @@ function Buy1() {
 
         setLoading(false);
 
+        const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/Profile", { state: { category: targetCategory } });
         }, 2000);
 
         return;
@@ -582,7 +587,7 @@ function Buy1() {
       }
 
       toast.loading("📋 Verifying listing...", { id: toastId });
-      
+
       const marketplaceContract = {
         address: MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
@@ -624,16 +629,16 @@ function Buy1() {
       });
 
       const buyTx = await walletClient.writeContract(request);
-      
+
       toast.loading("⏳ Waiting for transaction confirmation...", {
         id: toastId,
       });
-      
+
       const receipt = await publicClient.waitForTransactionReceipt({ hash: buyTx });
       console.log("✅ Transaction confirmed:", receipt.transactionHash);
 
       toast.loading("💾 Recording purchase...", { id: toastId });
-      
+
       try {
         const salePayload = {
           tokenId: collection.tokenId,
@@ -679,9 +684,10 @@ function Buy1() {
       setListingData(null);
       console.log("✅ Purchase complete!");
 
+      const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
       setTimeout(() => {
-        navigate("/profile");
-      }, 1000);
+        navigate("/Profile", { state: { category: targetCategory } });
+      }, 2000);
     } catch (err) {
       console.error("❌ Purchase error:", err);
       let msg = "❌ Purchase failed";
@@ -843,8 +849,8 @@ function Buy1() {
                 Owner:{" "}
                 {onChainOwner || collection.owner
                   ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(
-                      onChainOwner || collection.owner
-                    ).substring(38)}`
+                    onChainOwner || collection.owner
+                  ).substring(38)}`
                   : "Platform"}
               </span>
             </div>
