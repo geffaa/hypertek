@@ -430,24 +430,23 @@ function ProfileCategory() {
 
       {/* ================= NAV LINKS ================= */}
       <div className="mt-6 max-w-7xl mx-auto px-4">
-      <NavLinks
-  categories={navCategories}
-  onSelectCategory={(cat) => navigate(`/profile/${cat}`)}
-  selectedCategory={category}
-/>
+        <NavLinks
+          onSelectCategory={(cat) => navigate(`/profile/${cat}`)}
+          selectedCategory={category}
+        />
       </div>
 
       {/* ================= CONTENT ================= */}
       <div className="mt-8 max-w-7xl mx-auto px-4 mb-20 relative z-10">
         <div className="flex flex-col gap-2 items-start mb-8">
-        <h1 className="text-white uppercase text-2xl lg:text-[30px] font-goldman font-bold">
-  {items.length > 0
-    ? items[0]?.parentName || "Collection"
-    : category
-    ? category.charAt(0).toUpperCase() + category.slice(1)
-    : "Category"}{" "}
-  Collection
-</h1>
+          <h1 className="text-white uppercase text-2xl lg:text-[30px] font-goldman font-bold">
+            {items.length > 0
+              ? items[0]?.parentName || "Collection"
+              : category
+                ? category.charAt(0).toUpperCase() + category.slice(1)
+                : "Category"}{" "}
+            Collection
+          </h1>
           <div className="flex gap-2">
             <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
             <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
