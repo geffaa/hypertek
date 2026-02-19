@@ -484,6 +484,10 @@ function NfaLand() {
       collection.listed = true;
 
       await checkListingStatus();
+
+      setTimeout(() => {
+        navigate("/List");
+      }, 2000);
     } catch (err) {
       console.error("❌ Listing error:", err);
       console.error("❌ Error response:", err.response?.data);
@@ -589,9 +593,9 @@ function NfaLand() {
 
         setLoading(false);
 
-        // Redirect to marketplace profile after 2 seconds
+        const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "land").toLowerCase().trim();
         setTimeout(() => {
-          navigate("/Lands");
+          navigate("/Profile", { state: { category: targetCategory } });
         }, 2000);
 
         return;
@@ -706,9 +710,9 @@ function NfaLand() {
       setListingData(null);
       console.log("✅ Purchase complete!");
 
-      // Redirect to marketplace profile after 2 seconds
+      const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "land").toLowerCase().trim();
       setTimeout(() => {
-        navigate("/Lands");
+        navigate("/Profile", { state: { category: targetCategory } });
       }, 1000);
     } catch (err) {
       console.error("❌ Purchase error:", err);

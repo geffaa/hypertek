@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
@@ -33,14 +33,23 @@ function MarketPlace() {
   // RainbowKit hooks
   const { address: connectedWallet, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
-
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
   const [userData, setUserData] = useState(null);
   const [showMobileList, setShowMobileList] = useState({});
   const [userHasInteracted, setUserHasInteracted] = useState({});
-  const [activeCategory, setActiveCategory] = useState("characters");
+  const [activeCategory, setActiveCategory] = useState(location.state?.category || "");
   const [pendingItemId, setPendingItemId] = useState(null);
+  const [hasDefaulted, setHasDefaulted] = useState(false);
+
+  useEffect(() => {
+    setActiveCategory(location.state?.category || "");
+    // Reset hasDefaulted so it can pick the first tab again if we navigated to a clean /Profile
+    if (!location.state?.category) {
+      setHasDefaulted(false);
+    }
+  }, [location.state]);
 
   /* ================= GET MINTED SUB COLLECTION NFTS ================= */
   const extractMintedNFTs = (data) => {
@@ -143,7 +152,7 @@ function MarketPlace() {
   const handleSellNowClick = (itemId) => {
     console.log("🔘 Sell Now clicked for item:", itemId);
     console.log("🔌 Is connected:", isConnected);
-    
+
     if (!isConnected) {
       // Not connected - open RainbowKit modal
       console.log("❌ Not connected - opening RainbowKit modal");
@@ -168,7 +177,7 @@ function MarketPlace() {
   useEffect(() => {
     if (isConnected && pendingItemId) {
       console.log("✅ Wallet connected! Pending item:", pendingItemId);
-      
+
       // Wallet just connected - mark the pending item as interacted
       setUserHasInteracted((prev) => ({
         ...prev,
@@ -176,7 +185,7 @@ function MarketPlace() {
       }));
 
       toast.success("Wallet connected successfully!");
-      
+
       // Reset pending item
       setPendingItemId(null);
     }
@@ -185,6 +194,13 @@ function MarketPlace() {
   // When NavLinks triggers a category selection, update activeCategory
   const handleSelectCategory = (cat) => {
     setActiveCategory(cat);
+  };
+
+  const handleCategoriesLoaded = (cats) => {
+    if (!activeCategory && cats.length > 0 && !hasDefaulted) {
+      setActiveCategory(cats[0]);
+      setHasDefaulted(true);
+    }
   };
 
   /* ================= NAVIGATE TO BUY-NFA ================= */
@@ -249,10 +265,14 @@ function MarketPlace() {
 
           {/* ================= NAV ================= */}
           <div className="mt-6 max-w-7xl mx-auto px-4">
-            <NavLinks onSelectCategory={handleSelectCategory} selectedCategory={activeCategory} />
+            <NavLinks
+              onSelectCategory={handleSelectCategory}
+              selectedCategory={activeCategory}
+              onCategoriesLoaded={handleCategoriesLoaded}
+            />
           </div>
 
-       
+
 
           {/* ================= NFT CARDS ================= */}
           <section className="relative z-10 px-6 mt-10">
