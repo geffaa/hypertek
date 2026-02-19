@@ -87,7 +87,7 @@ function NFA() {
         console.log("🎯 Unlisted character NFTs:", unlistedCharacterNFTs);
 
         if (unlistedCharacterNFTs.length > 0) {
-          navigate("/profile"); // ✅ characters found → go profile
+          navigate("/Profile", { state: { category: "characters" } }); // ✅ characters found → go profile
         } else {
           setShowNoItemMsg(true);
 
@@ -324,11 +324,10 @@ function NFA() {
 
             {showNoItemMsg && (
               <div
-                className={`bg-black text-white text-xs px-3 py-2 rounded-md shadow-xl transition-all duration-300 ${
-                  showNoItemMsg
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 -translate-y-2 pointer-events-none"
-                }`}
+                className={`bg-black text-white text-xs px-3 py-2 rounded-md shadow-xl transition-all duration-300 ${showNoItemMsg
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 -translate-y-2 pointer-events-none"
+                  }`}
               >
                 you don't have any item to sell
               </div>
