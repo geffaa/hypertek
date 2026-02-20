@@ -13,11 +13,11 @@ import FaceTwo from "../assets/images/noActivity2.png";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 import { ethers } from "ethers";
 import {
-  SEPOLIA_MARKETPLACE_ADDRESS,
-  SEPOLIA_NFT_ADDRESS,
+  IMMUTABLE_MARKETPLACE_ADDRESS,
+  IMMUTABLE_NFT_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
-  SEPOLIA_CHAIN_ID,
+  IMMUTABLE_CHAIN_ID,
 } from "../Web3/Config";
 
 function NfaLand() {
@@ -125,7 +125,7 @@ function NfaLand() {
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const nftContract = new ethers.Contract(
-              SEPOLIA_NFT_ADDRESS,
+              IMMUTABLE_NFT_ADDRESS,
               NFT_ABI,
               provider
             );
@@ -184,13 +184,13 @@ function NfaLand() {
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       const marketplace = new ethers.Contract(
-        SEPOLIA_MARKETPLACE_ADDRESS,
+        IMMUTABLE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         provider
       );
 
       const listing = await marketplace.getListing(
-        SEPOLIA_NFT_ADDRESS,
+        IMMUTABLE_NFT_ADDRESS,
         collection.tokenId
       );
 
@@ -209,47 +209,47 @@ function NfaLand() {
     }
   };
 
-  /* ======================== SWITCH SEPOLIA ======================== */
-  const switchToSepolia = async () => {
-    const SEPOLIA_CHAIN_ID = "0xaa36a7";
-    const toastId = toast.loading("🔄 Switching to Sepolia network...");
+  /* ======================== SWITCH IMMUTABLE ======================== */
+  const switchToImmutable = async () => {
+    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1"; // 13473
+    const toastId = toast.loading("🔄 Switching to Immutable network...");
 
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: SEPOLIA_CHAIN_ID }],
+        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
       });
-      toast.success("✅ Switched to Sepolia", { id: toastId });
+      toast.success("✅ Switched to Immutable", { id: toastId });
       return true;
     } catch (switchError) {
       if (switchError.code === 4902) {
         try {
-          toast.loading("➕ Adding Sepolia network...", { id: toastId });
+          toast.loading("➕ Adding Immutable network...", { id: toastId });
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: SEPOLIA_CHAIN_ID,
-                chainName: "Sepolia Testnet",
+                chainId: IMMUTABLE_CHAIN_ID_HEX,
+                chainName: "Immutable zkEVM Testnet",
                 nativeCurrency: {
-                  name: "SepoliaETH",
-                  symbol: "ETH",
+                  name: "IMX",
+                  symbol: "IMX",
                   decimals: 18,
                 },
-                rpcUrls: ["https://sepolia.infura.io/v3/"],
-                blockExplorerUrls: ["https://sepolia.etherscan.io"],
+                rpcUrls: ["https://rpc.testnet.immutable.com"],
+                blockExplorerUrls: ["https://explorer.testnet.immutable.com"],
               },
             ],
           });
-          toast.success("✅ Sepolia network added", { id: toastId });
+          toast.success("✅ Immutable network added", { id: toastId });
           return true;
         } catch (addError) {
-          console.error("❌ Failed to add Sepolia:", addError);
-          toast.error("❌ Failed to add Sepolia network", { id: toastId });
+          console.error("❌ Failed to add Immutable:", addError);
+          toast.error("❌ Failed to add Immutable network", { id: toastId });
           return false;
         }
       }
-      console.error("❌ Failed to switch to Sepolia:", switchError);
+      console.error("❌ Failed to switch to Immutable:", switchError);
       toast.error("❌ Failed to switch network", { id: toastId });
       return false;
     }
@@ -269,7 +269,7 @@ function NfaLand() {
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
-        chainId: SEPOLIA_CHAIN_ID,
+        chainId: IMMUTABLE_CHAIN_ID,
       };
 
       console.log("🎨 Minting NFA with payload:", payload);
@@ -313,9 +313,9 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
+      if (chainId !== "0x34a1") {
         toast.dismiss(toastId);
-        const switched = await switchToSepolia();
+        const switched = await switchToImmutable();
         if (!switched) {
           setLoading(false);
           return;
@@ -330,9 +330,9 @@ function NfaLand() {
       const walletAddress = await signer.getAddress();
       console.log("👛 Wallet address:", walletAddress);
 
-      const nftContract = new ethers.Contract(SEPOLIA_NFT_ADDRESS, NFT_ABI, signer);
+      const nftContract = new ethers.Contract(IMMUTABLE_NFT_ADDRESS, NFT_ABI, signer);
       const marketplace = new ethers.Contract(
-        SEPOLIA_MARKETPLACE_ADDRESS,
+        IMMUTABLE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
@@ -408,10 +408,10 @@ function NfaLand() {
 
       // Check approval
       const approved = await nftContract.getApproved(tokenId);
-      if (approved.toLowerCase() !== SEPOLIA_MARKETPLACE_ADDRESS.toLowerCase()) {
+      if (approved.toLowerCase() !== IMMUTABLE_MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
         const approveTx = await nftContract.approve(
-          SEPOLIA_MARKETPLACE_ADDRESS,
+          IMMUTABLE_MARKETPLACE_ADDRESS,
           tokenId
         );
         await approveTx.wait();
@@ -419,7 +419,7 @@ function NfaLand() {
       }
 
       // Check if already listed
-      const listing = await marketplace.getListing(SEPOLIA_NFT_ADDRESS, tokenId);
+      const listing = await marketplace.getListing(IMMUTABLE_NFT_ADDRESS, tokenId);
       if (listing[2]) {
         toast.success("✅ Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
@@ -431,7 +431,7 @@ function NfaLand() {
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
       const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
       const listTx = await marketplace.createListing(
-        SEPOLIA_NFT_ADDRESS,
+        IMMUTABLE_NFT_ADDRESS,
         tokenId,
         priceWei,
         { gasLimit: 300000 }
@@ -495,8 +495,7 @@ function NfaLand() {
       let msg = "❌ Listing failed";
       if (err.response?.data?.error) {
         msg = `❌ ${err.response.data.error}`;
-      } else if (err.message?.includes("insufficient funds")) {
-        msg = "⛽ Insufficient gas. Add Sepolia ETH";
+        msg = "⛽ Insufficient gas. Add Immutable IMX";
       } else if (err.message?.includes("user rejected")) {
         msg = "❌ Transaction rejected by user";
       }
@@ -528,9 +527,9 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
+      if (chainId !== "0x34a1") {
         toast.dismiss(toastId);
-        const switched = await switchToSepolia();
+        const switched = await switchToImmutable();
         if (!switched) {
           setLoading(false);
           return;
@@ -556,11 +555,11 @@ function NfaLand() {
       }
 
       const marketplace = new ethers.Contract(
-        SEPOLIA_MARKETPLACE_ADDRESS,
+        IMMUTABLE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
-      const nftContract = new ethers.Contract(SEPOLIA_NFT_ADDRESS, NFT_ABI, provider);
+      const nftContract = new ethers.Contract(IMMUTABLE_NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
@@ -623,7 +622,7 @@ function NfaLand() {
 
       // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(SEPOLIA_NFT_ADDRESS, collection.tokenId);
+      const listing = await marketplace.getListing(IMMUTABLE_NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -648,7 +647,7 @@ function NfaLand() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(SEPOLIA_NFT_ADDRESS, collection.tokenId, {
+      const buyTx = await marketplace.buyNFT(IMMUTABLE_NFT_ADDRESS, collection.tokenId, {
         value: price,
         gasLimit: 400000,
       });

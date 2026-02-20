@@ -189,13 +189,13 @@ function Land() {
     }
   };
 
-  /* ================= SWITCH TO SEPOLIA ================= */
-  const switchToSepolia = async () => {
-    const SEPOLIA_CHAIN_ID = "0xaa36a7";
+  /* ================= SWITCH TO IMMUTABLE ================= */
+  const switchToImmutable = async () => {
+    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1";
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: SEPOLIA_CHAIN_ID }],
+        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
       });
       return true;
     } catch (switchError) {
@@ -205,25 +205,25 @@ function Land() {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: SEPOLIA_CHAIN_ID,
-                chainName: "Sepolia Testnet",
+                chainId: IMMUTABLE_CHAIN_ID_HEX,
+                chainName: "Immutable zkEVM Testnet",
                 nativeCurrency: {
-                  name: "SepoliaETH",
-                  symbol: "ETH",
+                  name: "IMX",
+                  symbol: "IMX",
                   decimals: 18,
                 },
-                rpcUrls: ["https://sepolia.infura.io/v3/"],
-                blockExplorerUrls: ["https://sepolia.etherscan.io"],
+                rpcUrls: ["https://rpc.testnet.immutable.com"],
+                blockExplorerUrls: ["https://explorer.testnet.immutable.com"],
               },
             ],
           });
           return true;
         } catch (addError) {
-          console.error("Failed to add Sepolia:", addError);
+          console.error("Failed to add Immutable:", addError);
           return false;
         }
       }
-      console.error("Failed to switch to Sepolia:", switchError);
+      console.error("Failed to switch to Immutable:", switchError);
       return false;
     }
   };
@@ -340,10 +340,10 @@ function Land() {
       }
 
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0xaa36a7") {
-        const switched = await switchToSepolia();
+      if (chainId !== "0x34a1") {
+        const switched = await switchToImmutable();
         if (!switched) {
-          toast.error("Please switch to Sepolia", { id: toastId });
+          toast.error("Please switch to Immutable zkEVM Testnet", { id: toastId });
           setListingInProgress(false);
           return;
         }
@@ -488,7 +488,7 @@ function Land() {
       console.error("❌ Listing error:", err);
       let msg = "Listing failed";
       if (err.message?.includes("insufficient funds"))
-        msg = "⛽ Add Sepolia ETH";
+        msg = "⛽ Add Immutable IMX";
       else if (err.message?.includes("user rejected"))
         msg = "Transaction rejected";
       toast.error(msg, { id: toastId });

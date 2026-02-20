@@ -12,18 +12,15 @@ import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 // 
 import {
-  SEPOLIA_NFT_ADDRESS,
-  SEPOLIA_MARKETPLACE_ADDRESS,
   IMMUTABLE_NFT_ADDRESS,
   IMMUTABLE_MARKETPLACE_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
   PLATFORM_WALLET_ADDRESS,
   IMMUTABLE_CHAIN_ID,
-  SEPOLIA_CHAIN_ID,
 } from "../../Web3/Config";
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
-import { sepolia, immutableZkEvmTestnet } from 'viem/chains';
+import { immutableZkEvmTestnet } from 'viem/chains';
 import { BACKEND_BASE_URL } from "../../Config";
 import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2 } from "react-icons/fi";
@@ -79,14 +76,13 @@ function Buy1() {
   const isPassport = connector?.id === 'immutable' || connector?.name === 'Immutable Passport';
 
   // Dynamic Chain Configuration
-  const isImmutableMode = immutableIsConnected;
-  const TARGET_CHAIN_ID = isImmutableMode ? 13473 : 11155111;
+  const TARGET_CHAIN_ID = 13473; // Immutable zkEVM Testnet
   const publicClient = usePublicClient({ chainId: TARGET_CHAIN_ID });
   const { switchChain } = useSwitchChain();
 
-  // Dynamic Addresses based on Chain
-  const CURRENT_NFT_ADDRESS = isImmutableMode ? IMMUTABLE_NFT_ADDRESS : SEPOLIA_NFT_ADDRESS;
-  const CURRENT_MARKETPLACE_ADDRESS = isImmutableMode ? IMMUTABLE_MARKETPLACE_ADDRESS : SEPOLIA_MARKETPLACE_ADDRESS;
+  // Primary Addresses
+  const CURRENT_NFT_ADDRESS = IMMUTABLE_NFT_ADDRESS;
+  const CURRENT_MARKETPLACE_ADDRESS = IMMUTABLE_MARKETPLACE_ADDRESS;
 
 
 
@@ -191,7 +187,7 @@ function Buy1() {
           const ownerLower = owner.toLowerCase();
 
           // SMART CHECK: If on-chain owner is Platform (0x11dd...), but DB says it's a User (0x...),
-          // and we are on Sepolia (default), it likely means the item is actually on Immutable.
+          // and we are on Immutable (default), it likely means the item is actually on Immutable.
           // In this case, we TRUST THE DB OWNER for display purposes.
 
           const isPlatform = ownerLower === PLATFORM_WALLET_ADDRESS.toLowerCase();
@@ -281,10 +277,9 @@ function Buy1() {
     }
   };
 
-  /* ======================== ENSURE CORRECT NETWORK ======================== */
   const ensureCorrectNetwork = async () => {
     const targetChainId = TARGET_CHAIN_ID;
-    const targetChainName = isImmutableMode ? "Immutable zkEVM Testnet" : "Sepolia";
+    const targetChainName = "Immutable zkEVM Testnet";
 
     if (chain?.id === targetChainId) {
       return true;
@@ -651,22 +646,18 @@ function Buy1() {
       console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        if (isImmutableMode) {
-          toast.error(
-            <div>
-              ❌ Your Immutable Wallet has no ETH.
-              <br />
-              <button
-                onClick={() => window.open('https://hub.immutable.com/sandbox', '_blank')}
-                className="mt-2 bg-white text-black px-2 py-1 rounded text-xs font-bold"
-              >
-                💰 Add Funds (Faucet)
-              </button>
-            </div>
-            , { id: toastId, duration: 8000 });
-        } else {
-          toast.error("❌ Your wallet has no ETH", { id: toastId });
-        }
+        toast.error(
+          <div>
+            ❌ Your wallet has no IMX/ETH.
+            <br />
+            <button
+              onClick={() => window.open('https://hub.immutable.com/sandbox', '_blank')}
+              className="mt-2 bg-white text-black px-2 py-1 rounded text-xs font-bold"
+            >
+              💰 Add Funds (Faucet)
+            </button>
+          </div>
+          , { id: toastId, duration: 8000 });
         setLoading(false);
         return;
       }
@@ -991,20 +982,6 @@ function Buy1() {
                     <div className="text-xs text-gray-500 font-mono">Immutable zkEVM Testnet</div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 mb-4">
-                    <button
-                      onClick={(e) => { e.preventDefault(); window.open('https://hub.immutable.com/sandbox', '_blank'); }}
-                      className="bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-lg font-semibold text-sm transition-colors flex flex-col items-center gap-1 shadow-lg shadow-blue-900/20"
-                    >
-                      <span>💰 Add Funds</span>
-                    </button>
-                    <button
-                      onClick={(e) => { e.preventDefault(); window.open('https://hub.immutable.com/sandbox', '_blank'); }}
-                      className="bg-[#2d3748] hover:bg-[#374151] text-white py-2.5 rounded-lg font-semibold text-sm transition-colors flex flex-col items-center gap-1 border border-white/5"
-                    >
-                      <span>🏦 Withdraw</span>
-                    </button>
-                  </div>
 
                   <div className="border-t border-white/10 pt-3 mt-2">
                     <button

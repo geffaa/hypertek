@@ -1688,17 +1688,10 @@ export async function recordSubCollectionSale(req, res) {
       try {
         const tx = await provider.getTransaction(txHash);
         if (!tx) {
-          // If not found on default chain, maybe try Sepolia?
-          console.warn(`Transaction mismatch on chain ${chainId}, checking Sepolia...`);
-          const { provider: sepoliaProvider } = getBlockchain(11155111);
-          const txSepolia = await sepoliaProvider.getTransaction(txHash);
-          
-          if (!txSepolia) {
-             return res.status(400).json({
-               success: false,
-               error: "Transaction not found on blockchain",
-             });
-          }
+           return res.status(400).json({
+             success: false,
+             error: "Transaction not found on blockchain",
+           });
         }
 
         // We could wait for receipt here, but usually frontend sends this after confirmation

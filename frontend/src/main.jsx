@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider initialChain={config.chains[0]}>
           <Provider store={store}>
             <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
               <Toaster position="top-right" />
