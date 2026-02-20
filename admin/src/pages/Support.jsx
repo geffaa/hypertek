@@ -222,9 +222,8 @@ function Support() {
           <div
             key={chat._id}
             onClick={() => handleChatClick(chat)}
-            className={`flex items-center justify-between gap-2 my-2 p-2 rounded cursor-pointer ${
-              selectedChat?._id === chat._id ? "bg-gray-800" : ""
-            }`}
+            className={`flex items-center justify-between gap-2 my-2 p-2 rounded cursor-pointer ${selectedChat?._id === chat._id ? "bg-gray-800" : ""
+              }`}
           >
             <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
             <div className="flex flex-col flex-1 justify-center gap-0.5 min-w-0">

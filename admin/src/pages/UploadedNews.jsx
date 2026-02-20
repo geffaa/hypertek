@@ -1,4 +1,4 @@
-import React, { useState , useRef } from "react";
+import React, { useState, useRef } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import BgEffect2 from "../components/common/BgEffect2"
@@ -15,16 +15,16 @@ import toast from "react-hot-toast";
 function UpdateNewsItems() {
   const location = useLocation();
   // Add this with your other useState declarations
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { newsItem } = location.state || {};
-  console.log("your new itesm are :",newsItem);
+  console.log("your new itesm are :", newsItem);
   const [selectedImage, setSelectedImage] = useState(null);
-const [heading, setHeading] = useState(newsItem?.name || "");
-const [description, setDescription] = useState(newsItem?.description || "");
+  const [heading, setHeading] = useState(newsItem?.name || "");
+  const [description, setDescription] = useState(newsItem?.description || "");
 
 
-   
- const fileInputRef = useRef(null); // <-- ref for hidden input
+
+  const fileInputRef = useRef(null); // <-- ref for hidden input
 
   const handleDivClick = () => {
     fileInputRef.current.click(); // <-- triggers input click
@@ -60,68 +60,68 @@ const [description, setDescription] = useState(newsItem?.description || "");
     event.preventDefault(); // allow drop
   };
 
-const handleCancelButton = ()=>{
-  navigate("/edit-news")
-}
-
-
-
-const handleUpdateNews = async () => {
-  if (!heading || !description) {
-    alert("Please fill in all fields");
-    return;
+  const handleCancelButton = () => {
+    navigate("/edit-news")
   }
-setLoading(true); 
-  try {
-    const formData = new FormData();
-    formData.append("name", heading);
-    formData.append("description", description);
-    if (selectedImage) {
-      // If the user selected a new image, append it
-      const blob = await (await fetch(selectedImage)).blob(); // convert base64 to blob
-      formData.append("image", blob, "news-image.png");
-    }
 
-    if(!newsItem.id){
-      toast.error("News Id is required for testing ")
-    }
 
-    const response = await axios.put(
-      // `http://localhost:4700/api/v1/news/edit/${newsItem.id}`,
-      `${BACKEND_BASE_URL}/api/v1/news/edit/${newsItem.id}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+
+  const handleUpdateNews = async () => {
+    if (!heading || !description) {
+      alert("Please fill in all fields");
+      return;
+    }
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("name", heading);
+      formData.append("description", description);
+      if (selectedImage) {
+        // If the user selected a new image, append it
+        const blob = await (await fetch(selectedImage)).blob(); // convert base64 to blob
+        formData.append("image", blob, "news-image.png");
       }
-    );
 
-    if (response.status === 200) {
-      toast.success("News Updated Successfully")
-      navigate("/edit-news"); // redirect after success
+      if (!newsItem.id) {
+        toast.error("News Id is required for testing ")
+      }
+
+      const response = await axios.put(
+        // `http://localhost:4700/api/v1/news/edit/${newsItem.id}`,
+        `${BACKEND_BASE_URL}/api/v1/news/edit/${newsItem.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("News Updated Successfully")
+        navigate("/edit-news"); // redirect after success
+      }
+    } catch (error) {
+      console.error(error);
+      // alert("Failed to update news");
+      toast.error("Failed to update the news")
     }
-  } catch (error) {
-    console.error(error);
-    // alert("Failed to update news");
-    toast.error("Failed to update the news")
+    finally {
+      setLoading(false); // Stop loading always
+    }
+  };
+
+
+
+  if (loading) {
+    return <FullScreenLoader />;
   }
-   finally {
-    setLoading(false); // Stop loading always
-  }
-};
-
-
-
-if (loading) {
-  return <FullScreenLoader />;
-}
   return (
     <div className=" min-h-screen w-full bg-black   overflow-hidden">
       {/* Background Glowing Effects */}
-          <BgEffect2 Xaxis={950} Yaxis={10} />
-          <BgEffect2 Xaxis={400} Yaxis={650} />
-            {/* Content */}
+      <BgEffect2 Xaxis={950} Yaxis={10} />
+      <BgEffect2 Xaxis={400} Yaxis={650} />
+      {/* Content */}
       <div className="relative z-50">
         <div className="flex gap-10 mt-[80px] mx-8">
           {/* left side preview / modal */}
@@ -192,7 +192,7 @@ if (loading) {
                   <input
                     type="file"
                     id="file-upload"
-                     ref={fileInputRef} // <-- use the ref here
+                    ref={fileInputRef} // <-- use the ref here
                     style={{
                       opacity: 0,
                       width: "100%",
@@ -279,7 +279,7 @@ if (loading) {
                     wordBreak: "break-word",
                   }}
                 >
-                 Share important updates, announcements, or stories with your audience in real time.
+                  Share important updates, announcements, or stories with your audience in real time.
                 </p>
               </div>
             </div>
@@ -306,7 +306,7 @@ if (loading) {
                 type="text"
                 id="name"
                 value={heading}
-                 onChange={(e) => setHeading(e.target.value)}
+                onChange={(e) => setHeading(e.target.value)}
                 placeholder="Add Content"
                 className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
               />
@@ -315,37 +315,37 @@ if (loading) {
             {/* second  */}
 
             {/* Right side textarea */}
-          <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
-            <label
-              htmlFor="symbol"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Add News
-            </label>
+            <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
+              <label
+                htmlFor="symbol"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  color: "white",
+                }}
+              >
+                Add News
+              </label>
 
-            <textarea
-              id="symbol"
-              placeholder="Create Name"
-               value={description}
-               onChange={(e) => setDescription(e.target.value)}
-              className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
-              style={{
-                width: "451px",
-                height: "245px",
-                padding: "13px 15px",
-                opacity: 1,
-              }}
-            />
-          </div>
-        
+              <textarea
+                id="symbol"
+                placeholder="Create Name"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
+                style={{
+                  width: "451px",
+                  height: "245px",
+                  padding: "13px 15px",
+                  opacity: 1,
+                }}
+              />
+            </div>
+
           </div>
         </div>
 
@@ -412,15 +412,15 @@ if (loading) {
                 color: "white",
               }}
             >
-              Publish 
+              Publish
             </span>
           </button>
         </div>
       </div>
 
-      
 
-    
+
+
     </div>
   );
 }

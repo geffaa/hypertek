@@ -13,7 +13,7 @@ function Character() {
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedChar, setSelectedChar] = useState(null);
- 
+
   /* ================================
      Fetch Characters (API)
   ================================= */
@@ -98,9 +98,9 @@ function Character() {
     }
   };
 
- if (loading) {
-  return <FullScreenLoader />;
-}
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <>
@@ -179,7 +179,7 @@ function Character() {
 
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
-                      <Link  state={{ char }}>
+                      <Link state={{ char }}>
                         <img src={EditImage} className="w-4 h-4" />
                       </Link>
 
@@ -194,55 +194,55 @@ function Character() {
                       checked={char.status}
                       onChange={() => handleStatusChange(char)}
                     /> */}
-                     <Switch
-                                        checked={char.status}
-                                        onChange={() => handleStatusChange(char)}
-                                        sx={{
-                                          width: 47,
-                                          height: 20,
-                                          padding: 0,
-                                          "& .MuiSwitch-switchBase": {
-                                            padding: 0,
-                                            margin: 0,
-                                            transitionDuration: "300ms",
-                                            "&.Mui-checked": {
-                                              transform: "translateX(24px)",
-                                              color: "#fff",
-                                              "& + .MuiSwitch-track": {
-                                                backgroundColor: "#0860eeff",
-                                                opacity: 1,
-                                                border: 0,
-                                              },
-                                              "&.Mui-disabled + .MuiSwitch-track": {
-                                                opacity: 0.5,
-                                              },
-                                            },
-                                            "&.Mui-focusVisible .MuiSwitch-thumb": {
-                                              color: "#3b82f6",
-                                              border: "6px solid #fff",
-                                            },
-                                            "&.Mui-disabled .MuiSwitch-thumb": {
-                                              color: "gray",
-                                            },
-                                            "&.Mui-disabled + .MuiSwitch-track": {
-                                              opacity: 0.7,
-                                            },
-                                          },
-                                          "& .MuiSwitch-thumb": {
-                                            boxSizing: "border-box",
-                                            width: 22,
-                                            height: 20,
-                                            backgroundColor: "#fff",
-                                            boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-                                          },
-                                          "& .MuiSwitch-track": {
-                                            borderRadius: 34 / 2,
-                                            backgroundColor: "#9ca3af",
-                                            opacity: 1,
-                                            transition: "background-color 500ms",
-                                          },
-                                        }}
-                                      />
+                    <Switch
+                      checked={char.status}
+                      onChange={() => handleStatusChange(char)}
+                      sx={{
+                        width: 47,
+                        height: 20,
+                        padding: 0,
+                        "& .MuiSwitch-switchBase": {
+                          padding: 0,
+                          margin: 0,
+                          transitionDuration: "300ms",
+                          "&.Mui-checked": {
+                            transform: "translateX(24px)",
+                            color: "#fff",
+                            "& + .MuiSwitch-track": {
+                              backgroundColor: "#0860eeff",
+                              opacity: 1,
+                              border: 0,
+                            },
+                            "&.Mui-disabled + .MuiSwitch-track": {
+                              opacity: 0.5,
+                            },
+                          },
+                          "&.Mui-focusVisible .MuiSwitch-thumb": {
+                            color: "#3b82f6",
+                            border: "6px solid #fff",
+                          },
+                          "&.Mui-disabled .MuiSwitch-thumb": {
+                            color: "gray",
+                          },
+                          "&.Mui-disabled + .MuiSwitch-track": {
+                            opacity: 0.7,
+                          },
+                        },
+                        "& .MuiSwitch-thumb": {
+                          boxSizing: "border-box",
+                          width: 22,
+                          height: 20,
+                          backgroundColor: "#fff",
+                          boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
+                        },
+                        "& .MuiSwitch-track": {
+                          borderRadius: 34 / 2,
+                          backgroundColor: "#9ca3af",
+                          opacity: 1,
+                          transition: "background-color 500ms",
+                        },
+                      }}
+                    />
                   </td>
                 </tr>
               ))}

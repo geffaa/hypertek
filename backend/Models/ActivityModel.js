@@ -54,7 +54,7 @@ const activitySchema = new mongoose.Schema(
     itemId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      refPath: "itemType", 
+      refPath: "itemType",
       // When itemType = "land" → ref: "Land"
       // When itemType = "marketplace" → ref: "Marketplace"
     }
