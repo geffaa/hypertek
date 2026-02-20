@@ -8,14 +8,14 @@ function CreatorEarning() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // State for form data
   const [formData, setFormData] = useState({
     royaltyPercent: "",
     royaltyWallet: "",
     supply: "",
   });
-  
+
   // State for data from previous page
   const [basicData, setBasicData] = useState({
     name: "",
@@ -39,7 +39,7 @@ function CreatorEarning() {
         imagePreview: location.state.formData.imagePreview || null,
         selectedFile: location.state.selectedFile || null
       });
-      
+
       // Initialize form with any existing values
       setFormData({
         royaltyPercent: location.state.formData.royaltyPercent || "",
@@ -82,11 +82,11 @@ function CreatorEarning() {
 
     setIsSubmitting(true);
     const loading = toast.loading("Creating collection...");
-    
+
     try {
       // ✅ Use the category from CreateCollections.jsx (which is the collection name)
       const category = basicData.category || basicData.name.toLowerCase().trim();
-  
+
       // Combine data from both steps
       const combinedData = {
         ...basicData,
@@ -107,7 +107,7 @@ function CreatorEarning() {
       data.append("owner", combinedData.owner);
       data.append("creator", combinedData.creator);
       data.append("category", combinedData.category); // ✅ Add category
-      
+
       // Add the image file if it exists
       if (basicData.selectedFile) {
         data.append("image", basicData.selectedFile);
@@ -125,14 +125,14 @@ function CreatorEarning() {
 
       if (res.ok) {
         toast.success("Collection Created Successfully", { id: loading });
-        
+
         // 🔥 CRITICAL: Dispatch event to update sidebar categories
         window.dispatchEvent(new Event('categoriesUpdated'));
-        
+
         // Get admin ID for navigation
         const adminDataString = localStorage.getItem("admin_data");
         const adminId = adminDataString ? JSON.parse(adminDataString)._id : null;
-        
+
         // Navigate to collections page
         if (adminId) {
           navigate(`/${adminId}/collections`);
@@ -195,7 +195,7 @@ function CreatorEarning() {
       {/* Main Content */}
       <div className="flex gap-10 mt-[80px] mx-8 relative z-50">
         {/* Left side - Preview and Basic Info */}
-     
+
         {/* Right side - Form */}
         <div className="flex flex-col gap-6 p-6 w-[456px]">
           <span className="font-inter font-semibold text-[25px]">

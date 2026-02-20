@@ -7,30 +7,30 @@ function CollectionTable() {
 
   // Dummy data — replace with API data later
   const [collections, setCollections] = useState([
-    { 
-      id: 1, 
-      name: "My Art Collection", 
+    {
+      id: 1,
+      name: "My Art Collection",
       createdAt: "2025-11-21",
       items: 24,
       status: "Active"
     },
-    { 
-      id: 2, 
-      name: "Gaming Avatars", 
+    {
+      id: 2,
+      name: "Gaming Avatars",
       createdAt: "2025-11-20",
       items: 15,
       status: "Active"
     },
-    { 
-      id: 3, 
-      name: "Digital Posters", 
+    {
+      id: 3,
+      name: "Digital Posters",
       createdAt: "2025-11-19",
       items: 8,
       status: "Draft"
     },
-    { 
-      id: 4, 
-      name: "3D Models Pack", 
+    {
+      id: 4,
+      name: "3D Models Pack",
       createdAt: "2025-11-18",
       items: 32,
       status: "Active"
@@ -88,7 +88,7 @@ function CollectionTable() {
             </h1>
             <p className="text-gray-400 mt-2">Manage your digital collections</p>
           </div>
-          
+
           {/* <button
             onClick={() => navigate("/create-collection")}
             className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-lg transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
@@ -213,14 +213,13 @@ function CollectionTable() {
 
       {/* Animated Delete Confirmation Modal */}
       {isModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={closeModal}
         >
-          <div 
-            className={`bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl p-6 w-full max-w-md transform transition-all duration-300 ${
-              isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-            }`}
+          <div
+            className={`bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl p-6 w-full max-w-md transform transition-all duration-300 ${isModalOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+              }`}
             onClick={(e) => e.stopPropagation()}
             style={{
               animation: 'modalSlideIn 0.3s ease-out'

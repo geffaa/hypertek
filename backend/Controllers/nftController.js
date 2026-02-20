@@ -2064,7 +2064,7 @@ export async function getDashboardStats(req, res) {
     // ==================== TOTAL USERS ====================
     let totalUsers = 0;
     let usersData = [];
-    
+
     // If you have User model, uncomment:
     // try {
     //   totalUsers = await User.countDocuments({});
@@ -2074,7 +2074,7 @@ export async function getDashboardStats(req, res) {
     // }
 
     // ==================== TOTAL BUY (Minted NFTs) ====================
-    
+
     // 1. Regular NFTs (non-parent collections with tokenId)
     const regularMintedNFTs = await NFTSystem.find({
       tokenId: { $exists: true, $ne: null },
@@ -2090,10 +2090,10 @@ export async function getDashboardStats(req, res) {
     const parentsWithMintedSubs = await NFTSystem.aggregate([
       { $match: { isParentCollection: true } },
       { $unwind: "$subCollections" },
-      { 
-        $match: { 
-          "subCollections.tokenId": { $exists: true, $ne: null } 
-        } 
+      {
+        $match: {
+          "subCollections.tokenId": { $exists: true, $ne: null }
+        }
       },
       {
         $project: {
@@ -2115,7 +2115,7 @@ export async function getDashboardStats(req, res) {
     console.log("💰 Total Buy Count:", totalBuyCount);
 
     // ==================== TOTAL SELL (Listed NFTs) ====================
-    
+
     // 1. Regular NFTs that are listed
     const regularListedNFTs = await NFTSystem.find({
       listed: true,
@@ -2132,11 +2132,11 @@ export async function getDashboardStats(req, res) {
     const parentsWithListedSubs = await NFTSystem.aggregate([
       { $match: { isParentCollection: true } },
       { $unwind: "$subCollections" },
-      { 
-        $match: { 
+      {
+        $match: {
           "subCollections.listed": true,
           "subCollections.tokenId": { $exists: true, $ne: null }
-        } 
+        }
       },
       {
         $project: {
@@ -2211,9 +2211,9 @@ export async function getDashboardStats(req, res) {
 
   } catch (err) {
     console.error("❌ GET DASHBOARD STATS ERROR:", err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
-      error: err.message 
+      error: err.message
     });
   }
 }

@@ -105,49 +105,49 @@ function EditAdminProfile() {
   if (loading) return <FullScreenLoader />;
 
   return (
-    
+
     <div className="min-h-screen relative bg-black">
       {/* Hero Banner */}
 
-       {/* ✅ Header */}
-       {/* <Header /> */}
+      {/* ✅ Header */}
+      {/* <Header /> */}
 
-      
-<div
-  style={{
-    top: "400px",
-    left: "800px",
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full pointer-events-none z-0"
-></div>
 
-<div
-  style={{
-    top: "600px",
-    left: "220px",
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full pointer-events-none z-0"
-></div>
-<div
-  style={{
-    bottom: "0", // move to bottom
-    left: "80%", // center horizontally
-    transform: "translateX(-50%)", // center exactly
-    width: "250px",
-    height: "250px",
-    background: "#002AA8",
-    filter: "blur(180px)",
-  }}
-  className="absolute rounded-full pointer-events-none z-0"
-></div>
+      <div
+        style={{
+          top: "400px",
+          left: "800px",
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full pointer-events-none z-0"
+      ></div>
+
+      <div
+        style={{
+          top: "600px",
+          left: "220px",
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full pointer-events-none z-0"
+      ></div>
+      <div
+        style={{
+          bottom: "0", // move to bottom
+          left: "80%", // center horizontally
+          transform: "translateX(-50%)", // center exactly
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full pointer-events-none z-0"
+      ></div>
 
 
 

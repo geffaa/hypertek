@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
 import { FaUserCircle } from "react-icons/fa"; // Added for fallback avatar
 
-function AddCollection() { 
+function AddCollection() {
   const navigate = useNavigate();
   const [collections, setCollections] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -73,32 +73,32 @@ function AddCollection() {
     }
 
     const fetchUsers = async () => {
-  try {
-    setLoading(true);
-    const res = await axios.get(`${Dashboard_Base_Url}/v1/users`);
-    console.log("API response:", res.data.users);
+      try {
+        setLoading(true);
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/users`);
+        console.log("API response:", res.data.users);
 
-    if (res.data.success && res.data.users) {
-      // Filter out admin users first
-      const filteredUsers = res.data.users.filter(user => user.Role !== "admin");
+        if (res.data.success && res.data.users) {
+          // Filter out admin users first
+          const filteredUsers = res.data.users.filter(user => user.Role !== "admin");
 
-      const mapped = filteredUsers.map((user) => ({
-        id: user._id,
-        name: user.FullName || "No Name",
-        avatar: user.Avatar,
-        supply: user.Email,
-        status: user.isActive, // use database value
-        role: user.role || "user",
-      }));
+          const mapped = filteredUsers.map((user) => ({
+            id: user._id,
+            name: user.FullName || "No Name",
+            avatar: user.Avatar,
+            supply: user.Email,
+            status: user.isActive, // use database value
+            role: user.role || "user",
+          }));
 
-      setCollections(mapped);
-    }
-  } catch (err) {
-    console.log("Error fetching users:", err);
-  } finally {
-    setLoading(false);
-  }
-};
+          setCollections(mapped);
+        }
+      } catch (err) {
+        console.log("Error fetching users:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
 
     fetchUsers();
@@ -249,24 +249,24 @@ function AddCollection() {
                   )}
                 </td>
 
-               {/* Name Cell */}
-<td
-  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
-  onClick={() => handleViewProfile(col)}
->
-  {col.name}
-</td>
+                {/* Name Cell */}
+                <td
+                  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
+                  onClick={() => handleViewProfile(col)}
+                >
+                  {col.name}
+                </td>
 
-                
-               {/* UID Cell */}
-<td
-  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
-  onClick={() => handleViewProfile(col)}
->
-  {col.supply}
-</td>
 
-                
+                {/* UID Cell */}
+                <td
+                  className="px-6 py-4 text-[#FFFFFFC4] font-medium cursor-pointer"
+                  onClick={() => handleViewProfile(col)}
+                >
+                  {col.supply}
+                </td>
+
+
                 {/* Action Cell - Only show if user is not admin */}
                 {!isAdmin && (
                   <td className="px-6 py-4">
@@ -289,7 +289,7 @@ function AddCollection() {
                     </div>
                   </td>
                 )}
-                
+
                 {/* Status Cell */}
                 <td className="px-6 py-4">
                   <Switch
