@@ -58,7 +58,7 @@ function EditSubCollection() {
 
       setPriceETH(existingData.priceETH || existingData.price || "");
 
-      
+
 
       if (existingData.image) {
 
@@ -280,7 +280,7 @@ function EditSubCollection() {
 
       <h1 className="font-inter px-4 font-semibold text-[25px] text-white">
 
-        Edit Collection 
+        Edit Collection
 
       </h1>
 

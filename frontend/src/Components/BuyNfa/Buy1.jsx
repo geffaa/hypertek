@@ -456,9 +456,7 @@ function Buy1() {
       collection.listed = true;
       await checkListingStatus();
 
-      setTimeout(() => {
-        navigate("/List");
-      }, 2000);
+      navigate("/List");
     } catch (err) {
       console.error("❌ Listing error:", err);
       console.error("❌ Error details:", err);
@@ -539,7 +537,7 @@ function Buy1() {
         console.log("✅ NFA prepared, Token ID:", mintedTokenId);
 
         toast.loading("⏳ Finalizing purchase...", { id: toastId });
-        await new Promise((r) => setTimeout(r, 1500));
+
 
         toast.success(
           `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
@@ -685,9 +683,7 @@ function Buy1() {
       console.log("✅ Purchase complete!");
 
       const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
-      setTimeout(() => {
-        navigate("/Profile", { state: { category: targetCategory } });
-      }, 2000);
+      navigate("/Profile", { state: { category: targetCategory } });
     } catch (err) {
       console.error("❌ Purchase error:", err);
       let msg = "❌ Purchase failed";

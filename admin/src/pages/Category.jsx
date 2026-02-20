@@ -54,7 +54,7 @@ function Category() {
 
       setLoading(true);
 
-  
+
 
       try {
 
@@ -64,17 +64,17 @@ function Category() {
 
         );
 
-  
+
 
         const parents = res.data.collections || [];
 
         setParentCollections(parents);
 
-  
+
 
         let allSubs = [];
 
-  
+
 
         for (const parent of parents) {
 
@@ -110,7 +110,7 @@ function Category() {
 
               );
 
-  
+
 
               if (subRes.data.subCollections) {
 
@@ -146,7 +146,7 @@ function Category() {
 
         }
 
-  
+
 
         setItems(allSubs);
 
@@ -164,23 +164,23 @@ function Category() {
 
     };
 
-  
+
 
     // First fetch on mount
 
     fetchByCategory();
 
-  
+
 
     // 🔥 Listen for global updates
 
     const handleUpdate = () => fetchByCategory();
 
-  
+
 
     window.addEventListener("categoriesUpdated", handleUpdate);
 
-  
+
 
     return () => {
 
@@ -264,13 +264,13 @@ function Category() {
 
       );
 
-  
+
 
       setShowDeleteModal(false);
 
       toast.success("Deleted successfully");
 
-  
+
 
       // 🔥 Dispatch global update so Category page and sidebar refresh
 
@@ -356,7 +356,7 @@ function Category() {
 
         <h1 className="font-inter font-semibold text-[25px] text-white">
 
-          {parentCollections.length > 0 
+          {parentCollections.length > 0
 
             ? parentCollections[0].collection?.name || "Collection"
 
