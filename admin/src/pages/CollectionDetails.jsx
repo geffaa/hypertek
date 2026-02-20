@@ -14,21 +14,21 @@ function CollectionDetails() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col justify-between text-white overflow-hidden pt-16 pb-4">
-        {/* Background blur divs */}
-        <div
-          style={{
-            top: `120px`,
-            left: `290px`,
-            width: "250px",
-            height: "250px",
-            background: "#002AA8",
-            filter: "blur(180px)",
-          }}
-          className="absolute rounded-full
+      {/* Background blur divs */}
+      <div
+        style={{
+          top: `120px`,
+          left: `290px`,
+          width: "250px",
+          height: "250px",
+          background: "#002AA8",
+          filter: "blur(180px)",
+        }}
+        className="absolute rounded-full
           shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
                   0_0_100px_50px_rgba(59,130,246,0.4),
                   0_0_200px_100px_rgba(59,130,246,0.2)]"
-        ></div>
+      ></div>
       <div
         style={{
           top: "15px",

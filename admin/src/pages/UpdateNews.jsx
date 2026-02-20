@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
 import BgEffect2 from "../components/common/BgEffect2"
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
@@ -12,39 +12,39 @@ import FullScreenLoader from "../components/common/Spinner";
 function UpdateNews() {
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
-// Add this with your other useState declarations
-const [loading, setLoading] = useState(false);
+  // Add this with your other useState declarations
+  const [loading, setLoading] = useState(false);
   const [heading, setHeading] = useState("");
-const [description, setDescription] = useState("");
-const [file, setFile] = useState(null); // actual File object, not base64
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null); // actual File object, not base64
 
 
   // Handle file selection
-const handleFileChange = (event) => {
-  const selected = event.target.files[0];
-  if (selected) {
-    setFile(selected); // store file for API upload
+  const handleFileChange = (event) => {
+    const selected = event.target.files[0];
+    if (selected) {
+      setFile(selected); // store file for API upload
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setSelectedImage(reader.result); // preview
-    };
-    reader.readAsDataURL(selected);
-  }
-};
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result); // preview
+      };
+      reader.readAsDataURL(selected);
+    }
+  };
 
   // Handle drag and drop
- const handleDrop = (event) => {
-  event.preventDefault();
-  const selected = event.dataTransfer.files[0];
-  if (selected) {
-    setFile(selected);
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const selected = event.dataTransfer.files[0];
+    if (selected) {
+      setFile(selected);
 
-    const reader = new FileReader();
-    reader.onload = () => setSelectedImage(reader.result);
-    reader.readAsDataURL(selected);
-  }
-};
+      const reader = new FileReader();
+      reader.onload = () => setSelectedImage(reader.result);
+      reader.readAsDataURL(selected);
+    }
+  };
 
   const handleDragOver = (event) => {
     event.preventDefault(); // allow drop
@@ -53,113 +53,113 @@ const handleFileChange = (event) => {
 
   // handle cancel button 
 
-const handleCancelButton = ()=>{
-  navigate("/edit-news")
+  const handleCancelButton = () => {
+    navigate("/edit-news")
 
-}
-
-
-
-const handlePublish = async () => {
-  if (!heading || !description || !file) {
-    toast.error("Heading, description & image are required");
-    return;
-  }
- setLoading(true);
-  const formData = new FormData();
-  formData.append("heading", heading);
-  formData.append("description", description);
-  formData.append("image", file);
-
-  if(!Dashboard_Base_Url){
-    toast.error("Base url is required")
   }
 
-  try {
-    const res = await axios.post(
-      `${Dashboard_Base_Url}/v1/news/create`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
 
-    if (res.data.success) {
-      toast.success("News created successfully!");
-      navigate("/edit-news"); // redirect to your news listing page
-    } else {
-      toast.error(res.data.message || "Failed to create news");
+
+  const handlePublish = async () => {
+    if (!heading || !description || !file) {
+      toast.error("Heading, description & image are required");
+      return;
     }
-  } catch (error) {
-    console.log("Error creating news:", error);
-    toast.error("Server error");
-  }finally {
-    setLoading(false); // Stop loading always
-  }
-};
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("heading", heading);
+    formData.append("description", description);
+    formData.append("image", file);
 
-if (loading) {
-  return <FullScreenLoader />;
-}
+    if (!Dashboard_Base_Url) {
+      toast.error("Base url is required")
+    }
+
+    try {
+      const res = await axios.post(
+        `${Dashboard_Base_Url}/v1/news/create`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (res.data.success) {
+        toast.success("News created successfully!");
+        navigate("/edit-news"); // redirect to your news listing page
+      } else {
+        toast.error(res.data.message || "Failed to create news");
+      }
+    } catch (error) {
+      console.log("Error creating news:", error);
+      toast.error("Server error");
+    } finally {
+      setLoading(false); // Stop loading always
+    }
+  };
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <div className="  min-h-screen w-full bg-black   overflow-hidden">
       {/* Background Glowing Effects */}
-          <BgEffect2 Xaxis={950} Yaxis={10} />
-          <BgEffect2 Xaxis={400} Yaxis={650} />
-            {/* Content */}
+      <BgEffect2 Xaxis={950} Yaxis={10} />
+      <BgEffect2 Xaxis={400} Yaxis={650} />
+      {/* Content */}
       <div className="relative z-50">
         <div className="flex gap-10 mt-[80px] mx-3">
           {/* left side preview / modal */}
-      <div
-  className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
-  style={{
-    width: "456px",
-    height: "440px",
-    borderRadius: "6px",
-    borderStyle: "dashed",
-    boxSizing: "border-box",
-    position: "relative",
-    cursor: "pointer", // make cursor pointer
-  }}
-  onDrop={handleDrop}
-  onDragOver={handleDragOver}
->
-  <label
-    htmlFor="file-upload"
-    className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
-  >
-    {selectedImage ? (
-      <img
-        src={selectedImage}
-        alt="Preview"
-        style={{
-          // maxWidth: "100%",
-          width:"456px",
-          height:"440px",
-          // maxHeight: "100%",
-          borderRadius: "6px",
-        }}
-      />
-    ) : (
-      <div className="flex flex-col items-center gap-2">
-        <img src={uploadIcon} alt="" className="w-6 h-6" />
-       <p>
-         <span className="text-blue-400 font-bold">Click to upload </span> or drag and drop
-       </p>
-      </div>
-    )}
+          <div
+            className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
+            style={{
+              width: "456px",
+              height: "440px",
+              borderRadius: "6px",
+              borderStyle: "dashed",
+              boxSizing: "border-box",
+              position: "relative",
+              cursor: "pointer", // make cursor pointer
+            }}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+          >
+            <label
+              htmlFor="file-upload"
+              className="w-full h-full flex flex-col items-center justify-center cursor-pointer"
+            >
+              {selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt="Preview"
+                  style={{
+                    // maxWidth: "100%",
+                    width: "456px",
+                    height: "440px",
+                    // maxHeight: "100%",
+                    borderRadius: "6px",
+                  }}
+                />
+              ) : (
+                <div className="flex flex-col items-center gap-2">
+                  <img src={uploadIcon} alt="" className="w-6 h-6" />
+                  <p>
+                    <span className="text-blue-400 font-bold">Click to upload </span> or drag and drop
+                  </p>
+                </div>
+              )}
 
-    <input
-      type="file"
-      id="file-upload"
-      style={{ display: "none" }}
-      onChange={handleFileChange}
-    />
-  </label>
-</div>
+              <input
+                type="file"
+                id="file-upload"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+            </label>
+          </div>
 
           {/* right side - form */}
           <div
@@ -220,7 +220,7 @@ if (loading) {
                     wordBreak: "break-word",
                   }}
                 >
-                 Share important updates, announcements, or stories with your audience in real time.
+                  Share important updates, announcements, or stories with your audience in real time.
                 </p>
               </div>
             </div>
@@ -246,8 +246,8 @@ if (loading) {
               <input
                 type="text"
                 id="name"
-                 value={heading}
-  onChange={(e) => setHeading(e.target.value)}
+                value={heading}
+                onChange={(e) => setHeading(e.target.value)}
                 placeholder="Add Content"
                 className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
               />
@@ -256,37 +256,37 @@ if (loading) {
             {/* second  */}
 
             {/* Right side textarea */}
-          <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
-            <label
-              htmlFor="symbol"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Add News
-            </label>
+            <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
+              <label
+                htmlFor="symbol"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  fontSize: "18px",
+                  lineHeight: "100%",
+                  letterSpacing: "0%",
+                  color: "white",
+                }}
+              >
+                Add News
+              </label>
 
-            <textarea
-             value={description}
-  onChange={(e) => setDescription(e.target.value)}
-              id="symbol"
-              placeholder="Create Name"
-              className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
-              style={{
-                width: "451px",
-                height: "245px",
-                padding: "13px 15px",
-                opacity: 1,
-              }}
-            />
-          </div>
-        
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                id="symbol"
+                placeholder="Create Name"
+                className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
+                style={{
+                  width: "451px",
+                  height: "245px",
+                  padding: "13px 15px",
+                  opacity: 1,
+                }}
+              />
+            </div>
+
           </div>
         </div>
 
@@ -295,32 +295,32 @@ if (loading) {
           className="flex mt-16  justify-end mx-8 pt-16 pb-32 relative z-10"
           style={{
             fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "17.5px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
+            fontWeight: 400,
+            fontStyle: "normal",
+            fontSize: "17.5px",
+            lineHeight: "100%",
+            letterSpacing: "0%",
+            color: "white",
             opacity: 1,
             gap: "37px",
           }}
         >
-       <button
-  type="button"
-  onClick={handleCancelButton}
-  className="border border-white text-white hover:bg-white/10 transition-colors flex items-center justify-center"
-  style={{
-    width: "120px",
-    height: "36px",
-    borderRadius: "6px",
-    gap: "10px",
-    padding: "6px",
-    background: "transparent",
-    cursor: "pointer",
-  }}
->
-  Cancel
-</button>
+          <button
+            type="button"
+            onClick={handleCancelButton}
+            className="border border-white text-white hover:bg-white/10 transition-colors flex items-center justify-center"
+            style={{
+              width: "120px",
+              height: "36px",
+              borderRadius: "6px",
+              gap: "10px",
+              padding: "6px",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+          >
+            Cancel
+          </button>
 
           <button onClick={handlePublish}
             className="bg-blue-800 hover:bg-blue-700 transition-colors"
@@ -348,15 +348,15 @@ if (loading) {
                 color: "white",
               }}
             >
-              Publish 
+              Publish
             </span>
           </button>
         </div>
       </div>
 
-      
 
-    
+
+
     </div>
   );
 }
