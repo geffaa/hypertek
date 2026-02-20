@@ -398,7 +398,7 @@ function MarketPlace() {
 
               <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
 
-              <NavLinks categories={activityData} />
+                <NavLinks categories={activityData} />
 
                 <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
 
@@ -449,11 +449,11 @@ function MarketPlace() {
                       <div className="flex flex-col gap-2 items-start">
 
                         <h1 className="font-inter font-semibold text-[25px] text-white">
-                        {items.length > 0
-  ? items[0]?.parentName || items[0]?.collection?.name || "Collection"
-  : categoryName
-    ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
-    : "Category"} 
+                          {items.length > 0
+                            ? items[0]?.parentName || items[0]?.collection?.name || "Collection"
+                            : categoryName
+                              ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
+                              : "Category"}
 
                         </h1>
 

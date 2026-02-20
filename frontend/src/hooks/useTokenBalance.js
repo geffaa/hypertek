@@ -1,18 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAccount, useReadContract } from 'wagmi';
+// Wagmi hook removed because only Immutable is targeted.
 import { ethers } from 'ethers';
 import { passportInstance } from '../utils/immutablePassport';
-import { SEPOLIA_USDC_ADDRESS, IMMUTABLE_USDC_ADDRESS, ERC20_ABI } from '../Web3/Config';
+import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI } from '../Web3/Config';
 
 // Helper to get provider based on connection type
 // const getProvider = async (walletType) => { ... } // Removed unused helper causing v5 confusion
 
 
 export function useTokenBalance(tokenAddress) {
-    const { address: wagmiAddress, isConnected: isWagmiConnected, chainId } = useAccount();
-    // Assuming you have a way to know if Immutable is connected from your global state or context
-    // For now, we'll try to detect it or pass it in. 
-    // Ideally, this hook should integrate `useImmutableWallet` or similar context.
+    // Only target Immutable
     
     // We will maintain local state for balance
     const [balance, setBalance] = useState('0');
@@ -25,12 +22,6 @@ export function useTokenBalance(tokenAddress) {
 
     useEffect(() => {
         const checkConnection = async () => {
-            // Check Wagmi first
-            if (isWagmiConnected && wagmiAddress) {
-                setActiveWallet({ type: 'wagmi', address: wagmiAddress });
-                return;
-            }
-
             // Check Immutable
             try {
                  const user = await passportInstance.getUserInfo();
@@ -51,7 +42,7 @@ export function useTokenBalance(tokenAddress) {
             }
         };
         checkConnection();
-    }, [isWagmiConnected, wagmiAddress]);
+    }, []);
 
 
     const fetchBalance = useCallback(async () => {
@@ -65,11 +56,6 @@ export function useTokenBalance(tokenAddress) {
             if (activeWallet.type === 'immutable') {
                 const p = await passportInstance.connectEvm();
                 provider = new ethers.BrowserProvider(p);
-            } else {
-                 // Fallback for Wagmi/Window
-                 if(window.ethereum) {
-                    provider = new ethers.BrowserProvider(window.ethereum);
-                 }
             }
 
             if(!provider) throw new Error("No provider found");

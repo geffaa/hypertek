@@ -20,12 +20,9 @@ import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
   MARKETPLACE_ABI,
-  SEPOLIA_MARKETPLACE_ADDRESS,
-  SEPOLIA_NFT_ADDRESS,
   IMMUTABLE_MARKETPLACE_ADDRESS,
   IMMUTABLE_NFT_ADDRESS,
   IMMUTABLE_CHAIN_ID,
-  SEPOLIA_CHAIN_ID,
 } from "../../Web3/Config";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -147,16 +144,16 @@ function UserListings() {
     setShowModal(true);
   };
 
-  const switchToSepolia = async () => {
-    const SEPOLIA_CHAIN_ID = "0xaa36a7";
+  const switchToImmutable = async () => {
+    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1";
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: SEPOLIA_CHAIN_ID }],
+        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
       });
       return true;
     } catch (err) {
-      toast.error("Please switch to Sepolia network");
+      toast.error("Please switch to Immutable zkEVM Testnet");
       return false;
     }
   };
@@ -181,7 +178,7 @@ function UserListings() {
         chainId = IMMUTABLE_CHAIN_ID;
         console.log("✅ Using Immutable Provider");
       } else if (window.ethereum) {
-        // Standard Wallet (Sepolia)
+        // Standard Wallet (Immutable)
         provider = new ethers.BrowserProvider(window.ethereum);
         signer = await provider.getSigner();
         const network = await provider.getNetwork();
@@ -205,10 +202,6 @@ function UserListings() {
         targetMarketplaceAddress = IMMUTABLE_MARKETPLACE_ADDRESS;
         targetNftAddress = IMMUTABLE_NFT_ADDRESS;
         console.log("✅ Detected Immutable zkEVM Constants");
-      } else if (chainId === SEPOLIA_CHAIN_ID) {
-        targetMarketplaceAddress = SEPOLIA_MARKETPLACE_ADDRESS;
-        targetNftAddress = SEPOLIA_NFT_ADDRESS;
-        console.log("✅ Detected Sepolia Constants");
       } else {
         toast.error(`❌ Wrong Network. Connected to ${chainId}`, { id: toastId });
         setCancelling(false);

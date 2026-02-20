@@ -1,8 +1,9 @@
 import { useAccount, useConnect, useDisconnect, useSigner, useNetwork, useSwitchNetwork } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { sepolia } from 'wagmi/chains';
 import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
+
+const IMMUTABLE_CHAIN_ID = 13473;
 
 export const useRainbowWallet = () => {
   const { address, isConnected, isConnecting } = useAccount();
@@ -13,7 +14,7 @@ export const useRainbowWallet = () => {
   const { data: signer } = useSigner();
   
   const [walletAddress, setWalletAddress] = useState(null);
-  const [isSepolia, setIsSepolia] = useState(false);
+  const [isImmutable, setIsImmutable] = useState(false);
 
   // Update wallet address when connected
   useEffect(() => {
@@ -24,12 +25,12 @@ export const useRainbowWallet = () => {
     }
   }, [address]);
 
-  // Check if on Sepolia
+  // Check if on Immutable zkEVM
   useEffect(() => {
     if (chain) {
-      setIsSepolia(chain.id === sepolia.id);
+      setIsImmutable(chain.id === IMMUTABLE_CHAIN_ID);
     } else {
-      setIsSepolia(false);
+      setIsImmutable(false);
     }
   }, [chain]);
 
@@ -48,23 +49,23 @@ export const useRainbowWallet = () => {
     }
   }, [openConnectModal]);
 
-  // Switch to Sepolia network
-  const switchToSepolia = useCallback(async (showToast = true) => {
+  // Switch to Immutable network
+  const switchToImmutable = useCallback(async (showToast = true) => {
     if (!switchNetworkAsync) {
       if (showToast) toast.error('Network switching not available');
       return false;
     }
 
     try {
-      const toastId = showToast ? toast.loading('Switching to Sepolia...') : null;
-      await switchNetworkAsync(sepolia.id);
-      if (showToast) toast.success('Switched to Sepolia', { id: toastId });
+      const toastId = showToast ? toast.loading('Switching to Immutable...') : null;
+      await switchNetworkAsync(IMMUTABLE_CHAIN_ID);
+      if (showToast) toast.success('Switched to Immutable', { id: toastId });
       return true;
     } catch (error) {
       console.error('Error switching network:', error);
       if (showToast) {
         if (error.code === 4902) {
-          toast.error('Sepolia network not added to wallet');
+          toast.error('Immutable network not added to wallet');
         } else if (error.code === 4001) {
           toast.error('Network switch cancelled');
         } else {
@@ -75,19 +76,19 @@ export const useRainbowWallet = () => {
     }
   }, [switchNetworkAsync]);
 
-  // Ensure we're on Sepolia before transactions
-  const ensureSepoliaNetwork = useCallback(async (showToast = true) => {
+  // Ensure we're on Immutable before transactions
+  const ensureImmutableNetwork = useCallback(async (showToast = true) => {
     if (!isConnected) {
       if (showToast) toast.error('Please connect wallet first');
       return false;
     }
 
-    if (!isSepolia) {
-      return await switchToSepolia(showToast);
+    if (!isImmutable) {
+      return await switchToImmutable(showToast);
     }
 
     return true;
-  }, [isConnected, isSepolia, switchToSepolia]);
+  }, [isConnected, isImmutable, switchToImmutable]);
 
   // Disconnect wallet
   const disconnectWallet = useCallback(() => {
@@ -100,12 +101,12 @@ export const useRainbowWallet = () => {
     address: walletAddress,
     isConnected,
     isConnecting,
-    isSepolia,
+    isImmutable,
     chain,
     signer,
     connectWallet,
     disconnectWallet,
-    ensureSepoliaNetwork,
-    switchToSepolia,
+    ensureImmutableNetwork,
+    switchToImmutable,
   };
 };

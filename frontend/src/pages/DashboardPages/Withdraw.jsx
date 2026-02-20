@@ -1,41 +1,60 @@
 import React, { useState } from 'react';
 import { useTokenBalance } from '../../hooks/useTokenBalance';
-import { SEPOLIA_USDC_ADDRESS, IMMUTABLE_USDC_ADDRESS, SEPOLIA_CHAIN_ID } from '../../Web3/Config';
-import { useAccount, useSwitchChain } from 'wagmi';
+import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI } from '../../Web3/Config';
 import toast from 'react-hot-toast';
 import { ethers } from 'ethers';
 import { passportInstance } from '../../utils/immutablePassport';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 // Simple Icons
-import { FiDollarSign, FiCreditCard } from 'react-icons/fi';
+import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
 
 const Withdraw = () => {
-    const { chainId } = useAccount();
+    // Only target Immutable zkEVM Testnet
+    const tokenAddress = IMMUTABLE_USDC_ADDRESS;
 
-    // Determine Token Address based on Chain
-    // Default to Sepolia if not connected or unknown
-    const tokenAddress = chainId === SEPOLIA_CHAIN_ID ? SEPOLIA_USDC_ADDRESS : IMMUTABLE_USDC_ADDRESS;
-
-    const { balance: usdcBalance, loading: usdcLoading, error: usdcError, refresh: refreshUsdc, activeWallet } = useTokenBalance(tokenAddress);
+    const { balance: usdcBalance, loading: usdcLoading, refresh: refreshUsdc, activeWallet } = useTokenBalance(tokenAddress);
     const { balance: ethBalance, loading: ethLoading } = useTokenBalance(null); // Fetch Native ETH
 
-    const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto' or 'bank'
+    const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto', 'bank', or 'add'
     const [selectedToken, setSelectedToken] = useState('USDC'); // 'USDC' or 'ETH'
+
+    // Withdraw states
     const [amount, setAmount] = useState('');
     const [recipient, setRecipient] = useState('');
     const [processing, setProcessing] = useState(false);
-    const [bankDetails, setBankDetails] = useState({
-        bankName: '',
-        accountNumber: '',
-        ifsc: ''
+
+    // Add Funds states
+    const [addAmount, setAddAmount] = useState('');
+    const [selectedAddToken, setSelectedAddToken] = useState('USDC'); // 'USDC' or 'ETH'
+    const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+    const { writeContractAsync: writeWagmiContract } = useWriteContract();
+    const { sendTransactionAsync } = useSendTransaction();
+    const publicClient = usePublicClient();
+
+    // Fetch Immutable USDC balance from MetaMask (on Immutable zkEVM)
+    const { data: mmUsdcBalanceData } = useReadContract({
+        address: IMMUTABLE_USDC_ADDRESS,
+        abi: ERC20_ABI,
+        functionName: 'balanceOf',
+        args: wagmiAddress ? [wagmiAddress] : undefined,
+        query: { enabled: !!wagmiAddress }
     });
+    const mmUsdcBalance = mmUsdcBalanceData ? ethers.formatUnits(mmUsdcBalanceData, 6) : '0';
+
+    // Fetch Immutable Native ETH balance from MetaMask
+    const { data: mmEthBalanceData } = useBalance({
+        address: wagmiAddress,
+        query: { enabled: !!wagmiAddress }
+    });
+    const mmEthBalance = mmEthBalanceData ? Number(mmEthBalanceData.formatted).toFixed(4) : '0';
 
     const [withdrawals, setWithdrawals] = useState([]);
     const [historyLoading, setHistoryLoading] = useState(false);
 
-    // New State for USD Conversion
+    // New State for USD Conversion for ETH
     const [conversionRate, setConversionRate] = useState(null);
-    const [amountInUSD, setAmountInUSD] = useState('');
 
     // Fetch Price
     React.useEffect(() => {
@@ -89,23 +108,7 @@ const Withdraw = () => {
         fetchHistory();
     }, []);
 
-    const handleAmountChange = (val, type) => {
-        if (type === 'crypto') {
-            setAmount(val);
-            if (conversionRate && val) {
-                setAmountInUSD((parseFloat(val) * conversionRate).toFixed(2));
-            } else {
-                setAmountInUSD('');
-            }
-        } else {
-            setAmountInUSD(val);
-            if (conversionRate && val) {
-                setAmount((parseFloat(val) / conversionRate).toFixed(6));
-            } else {
-                setAmount('');
-            }
-        }
-    };
+    // Cleanup unused functions
 
     const handleCryptoWithdraw = async () => {
         if (!amount || !recipient) {
@@ -122,8 +125,6 @@ const Withdraw = () => {
             if (activeWallet.type === 'immutable') {
                 const p = await passportInstance.connectEvm();
                 provider = new ethers.BrowserProvider(p);
-            } else if (window.ethereum) {
-                provider = new ethers.BrowserProvider(window.ethereum);
             }
 
             if (!provider) throw new Error("No wallet provider found");
@@ -143,7 +144,7 @@ const Withdraw = () => {
                 } catch (e) {
                     decimals = 6;
                 }
-                const amountWei = ethers.parseUnits(amount, decimals);
+                const amountWei = ethers.parseUnits(amount, 6); // STRICTLY 6 DECIMALS FOR USDC
 
                 tx = await contract.transfer(recipient, amountWei);
                 toast.loading("USDC Transaction submitted...", { id: 'withdraw-tx' });
@@ -189,7 +190,6 @@ const Withdraw = () => {
             fetchHistory();
 
             setAmount('');
-            setAmountInUSD('');
 
         } catch (err) {
             console.error("Withdrawal Failed", err);
@@ -199,61 +199,90 @@ const Withdraw = () => {
         }
     };
 
-    const handleBankWithdraw = async () => {
-        if (!amount || !bankDetails.accountNumber) {
-            toast.error("Please fill in all fields");
+    const handleAddFunds = async () => {
+        if (!addAmount || parseFloat(addAmount) <= 0) {
+            toast.error("Please enter a valid amount");
             return;
         }
+
+        if (!isWagmiConnected || !wagmiAddress) {
+            toast.error("Please connect your MetaMask wallet first");
+            return;
+        }
+
+        if (!activeWallet.address) {
+            toast.error("Immutable wallet address not found. Please relogin.");
+            return;
+        }
+
         setProcessing(true);
+        const toastId = toast.loading("Initiating Add Funds...");
 
         try {
-            // Retrieve User from localStorage (Handle both 'user' and 'authData' keys)
-            let user = JSON.parse(localStorage.getItem('user'));
+            toast.loading("Please confirm the Transfer in MetaMask...", { id: toastId });
 
-            if (!user) {
-                const authData = JSON.parse(localStorage.getItem('authData'));
-                user = authData?.user;
-            }
+            let transferTxHash;
 
-            const userId = user?.id || user?._id;
-
-            if (!userId) {
-                toast.error("User not authenticated properly. Please re-login.");
-                setProcessing(false);
-                return;
-            }
-
-            console.log("Sending Withdrawal Request:", { userId, amount, type: 'bank' });
-
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4700'}/api/v1/withdraw/request`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userId: userId,
-                    amount: Number(amount),
-                    type: 'bank',
-                    bankDetails
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                toast.success("Bank Withdrawal Request Submitted!");
-                setAmount('');
-                setBankDetails({ bankName: '', accountNumber: '', ifsc: '' });
-                fetchHistory(); // Refresh History
+            if (selectedAddToken === 'USDC') {
+                const amountWei = ethers.parseUnits(addAmount, 6);
+                transferTxHash = await writeWagmiContract({
+                    address: IMMUTABLE_USDC_ADDRESS,
+                    abi: ERC20_ABI,
+                    functionName: 'transfer',
+                    args: [activeWallet.address, amountWei],
+                });
             } else {
-                toast.error(data.error || "Request Failed");
+                const amountWei = ethers.parseEther(addAmount);
+                transferTxHash = await sendTransactionAsync({
+                    to: activeWallet.address,
+                    value: amountWei,
+                });
             }
+
+            toast.loading("Waiting for Transfer confirmation...", { id: toastId });
+
+            if (publicClient) {
+                const receipt = await publicClient.waitForTransactionReceipt({ hash: transferTxHash });
+                if (receipt.status !== 'success') {
+                    throw new Error("Transfer Transaction reverted on chain.");
+                }
+            } else {
+                await new Promise(res => setTimeout(res, 4000));
+            }
+
+            toast.success("Successfully added funds! Balance will update shortly.", { id: toastId });
+            refreshUsdc();
+            setAddAmount('');
+            setProcessing(false);
+
         } catch (error) {
-            console.error("Bank Withdraw Error", error);
-            toast.error("Something went wrong");
-        } finally {
+            console.error("Add Funds Failed", error);
+            toast.error("Add Funds Failed: " + (error.shortMessage || error.message), { id: toastId });
             setProcessing(false);
         }
+    };
+
+    const handleBankWithdraw = () => {
+        if (!activeWallet.address) {
+            toast.error("Immutable wallet not connected.");
+            return;
+        }
+
+        // MoonPay Sandbox URL construction
+        // For production, use https://sell.moonpay.com
+        const moonPayUrl = new URL('https://sell-sandbox.moonpay.com');
+
+        // Append required parameters
+        const apiKey = 'pk_test_123'; // Placeholder
+        moonPayUrl.searchParams.append('apiKey', apiKey);
+        moonPayUrl.searchParams.append('baseCurrencyCode', 'usdc');
+        moonPayUrl.searchParams.append('refundWalletAddress', activeWallet.address);
+
+        // Open MoonPay in a new tab/window
+        window.open(moonPayUrl.toString(), '_blank', 'noopener,noreferrer');
+
+        toast.success("MoonPay interface opened!");
+        fetchHistory(); // Refresh custom history if you plan to log it
     };
 
     // Derived State for Display
@@ -272,18 +301,18 @@ const Withdraw = () => {
             <div className="flex gap-4 mb-8 flex-wrap">
                 {/* USDC/USD Balance Card */}
                 <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 inline-block min-w-[240px]">
-                    <p className="text-white/60 text-sm mb-1">Total Value (USD)</p>
+                    <p className="text-white/60 text-sm mb-1">USDC Balance</p>
                     <div className="flex items-end gap-2">
                         <h2 className="text-3xl font-bold">
-                            {ethLoading || !conversionRate ? "..." : `$${Number(displayUsdcBalance).toFixed(2)}`}
+                            {usdcLoading ? "..." : `$${Number(usdcBalance).toFixed(2)}`}
                         </h2>
-                        <span className="text-blue-400 mb-1.5 font-medium">USD</span>
+                        <span className="text-blue-400 mb-1.5 font-medium">USDC</span>
                     </div>
                 </div>
 
-                {/* ETH/Native Balance Card */}
+                {/* ETH/Native Balance Card - Optional Display */}
                 <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 inline-block min-w-[240px]">
-                    <p className="text-white/60 text-sm mb-1">Native Balance (ETH/IMX)</p>
+                    <p className="text-white/60 text-sm mb-1">Immutable Native Balance (IMX/ETH)</p>
                     <div className="flex flex-col">
                         <div className="flex items-end gap-2">
                             <h2 className="text-3xl font-bold">
@@ -298,7 +327,7 @@ const Withdraw = () => {
             {/* Debug Info */}
             <div className="mb-4 text-xs text-white/30 font-mono">
                 Connected: {activeWallet.type ? `${activeWallet.type} (${activeWallet.address?.slice(0, 6)}...${activeWallet.address?.slice(-4)})` : "None"} <br />
-                Chain: {chainId} | USDC Contract: {tokenAddress?.slice(0, 6)}...
+                Chain: Immutable zkEVM | USDC Contract: {tokenAddress?.slice(0, 6)}...
             </div>
 
 
@@ -310,9 +339,19 @@ const Withdraw = () => {
                 >
                     <div className="flex items-center gap-2">
                         <FiDollarSign className="text-lg" />
-                        Crypto Transfer
+                        Crypto Withdraw
                     </div>
                     {withdrawType === 'crypto' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
+                </button>
+                <button
+                    onClick={() => setWithdrawType('add')}
+                    className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'add' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
+                >
+                    <div className="flex items-center gap-2">
+                        <FiPlusCircle className="text-lg" />
+                        Add Funds
+                    </div>
+                    {withdrawType === 'add' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
                 </button>
                 <button
                     onClick={() => setWithdrawType('bank')}
@@ -320,14 +359,14 @@ const Withdraw = () => {
                 >
                     <div className="flex items-center gap-2">
                         <FiCreditCard className="text-lg" />
-                        Bank Transfer
+                        Bank Withdraw
                     </div>
                     {withdrawType === 'bank' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
                 </button>
             </div>
 
             <div className="max-w-2xl">
-                {withdrawType === 'crypto' ? (
+                {withdrawType === 'crypto' && (
                     <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
                         <h3 className="text-xl font-semibold mb-6">Withdraw to Crypto Wallet</h3>
 
@@ -361,7 +400,7 @@ const Withdraw = () => {
                                 />
                                 <div className="text-xs text-white/40 mt-1.5 text-right">
                                     Balance: {selectedToken === 'USDC'
-                                        ? `$${(Number(ethBalance) * (conversionRate || 0)).toFixed(2)} USD`
+                                        ? `${Number(usdcBalance).toFixed(4)} USDC`
                                         : `${Number(ethBalance).toFixed(4)} ETH`}
                                 </div>
                             </div>
@@ -375,7 +414,7 @@ const Withdraw = () => {
                                     placeholder="0x..."
                                     className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono"
                                 />
-                                <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Sepolia or Immutable Testnet</p>
+                                <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Immutable Testnet</p>
                             </div>
 
                             <button
@@ -388,63 +427,84 @@ const Withdraw = () => {
                             </button>
                         </div>
                     </div>
-                ) : (
+                )}
+
+                {withdrawType === 'add' && (
                     <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
-                        <h3 className="text-xl font-semibold mb-6">Withdraw to Bank Account</h3>
-                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-lg mb-6 text-sm text-yellow-200">
-                            <strong>Note:</strong> This is a simulation. In production, this would open a compliant off-ramp provider (e.g., Transak, MoonPay).
-                        </div>
+                        <h3 className="text-xl font-semibold mb-6">Add Funds to Immutable Wallet</h3>
+                        <p className="text-white/60 text-sm mb-6">Connect your external MetaMask wallet to transfer USDC into your primary Immutable account.</p>
 
                         <div className="space-y-6">
                             <div>
-                                <label className="block text-sm text-white/70 mb-2">Amount (USDC)</label>
-                                <input
-                                    type="number"
-                                    value={amount}
-                                    onChange={(e) => setAmount(e.target.value)}
-                                    placeholder="0.00"
-                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
-                                />
+                                <label className="block text-sm text-white/70 mb-2">Connect External Wallet</label>
+                                <ConnectButton />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm text-white/70 mb-2">Bank Name</label>
-                                    <input
-                                        type="text"
-                                        value={bankDetails.bankName}
-                                        onChange={(e) => setBankDetails({ ...bankDetails, bankName: e.target.value })}
-                                        className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm text-white/70 mb-2">IFSC / Routing</label>
-                                    <input
-                                        type="text"
-                                        value={bankDetails.ifsc}
-                                        onChange={(e) => setBankDetails({ ...bankDetails, ifsc: e.target.value })}
-                                        className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
-                                    />
+                            <div>
+                                <label className="block text-sm text-white/70 mb-2">Select Token</label>
+                                <div className="flex gap-4 mb-4">
+                                    <button
+                                        onClick={() => setSelectedAddToken('USDC')}
+                                        className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                    >
+                                        <span className="font-bold">USDC</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setSelectedAddToken('ETH')}
+                                        className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'ETH' ? 'bg-purple-600/20 border-purple-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                    >
+                                        <span className="font-bold">ETH</span>
+                                    </button>
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm text-white/70 mb-2">Account Number</label>
+                                <label className="block text-sm text-white/70 mb-2">Amount ({selectedAddToken})</label>
                                 <input
-                                    type="text"
-                                    value={bankDetails.accountNumber}
-                                    onChange={(e) => setBankDetails({ ...bankDetails, accountNumber: e.target.value })}
+                                    type="number"
+                                    value={addAmount}
+                                    onChange={(e) => setAddAmount(e.target.value)}
+                                    placeholder="0.00"
                                     className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
                                 />
+                                {isWagmiConnected && (
+                                    <div className="text-xs text-white/40 mt-1.5 text-right font-mono">
+                                        MetaMask Balance: {selectedAddToken === 'USDC' ? `${Number(mmUsdcBalance).toFixed(4)} USDC` : `${mmEthBalance} IMX/ETH`}
+                                    </div>
+                                )}
                             </div>
 
+                            <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg text-sm text-blue-200">
+                                <strong>Destination:</strong> Your Immutable Wallet ({activeWallet.address?.slice(0, 6)}...{activeWallet.address?.slice(-4)})
+                            </div>
+
+                            <button
+                                onClick={handleAddFunds}
+                                disabled={processing}
+                                className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+                                    }`}
+                            >
+                                {processing ? "Processing Transfer..." : "Transfer from MetaMask"}
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {withdrawType === 'bank' && (
+                    <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
+                        <h3 className="text-xl font-semibold mb-6">Withdraw to Bank Account</h3>
+                        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg mb-6 text-sm text-blue-200">
+                            <strong>Note:</strong> This process is securely handled by MoonPay. You will be prompted to complete identity verification if required, and enter your bank details securely via their checkout page.
+                        </div>
+
+                        <div className="space-y-6">
                             <button
                                 onClick={handleBankWithdraw}
                                 disabled={processing}
                                 className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
                                     }`}
                             >
-                                {processing ? "Submitting Request..." : "Request Bank Withdraw"}
+                                {processing ? "Handling Request..." : "Open MoonPay Off-Ramp"}
                             </button>
                         </div>
                     </div>
@@ -488,7 +548,7 @@ const Withdraw = () => {
                                             </td>
                                             <td className="px-6 py-4 text-xs font-mono text-white/40 max-w-[200px] truncate">
                                                 {tx.type === 'crypto' ? (
-                                                    <a href={`https://sepolia.etherscan.io/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
+                                                    <a href={`https://explorer.testnet.immutable.com/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
                                                         {tx.txHash?.slice(0, 10)}...
                                                     </a>
                                                 ) : (

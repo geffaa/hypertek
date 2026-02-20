@@ -37,18 +37,10 @@ const MarketplaceAbi = loadABI("Marketplace.json");
 
 // ---------- NETWORK CONFIGURATION ----------
 const NETWORKS = {
-  11155111: {
-    name: "Sepolia",
-    rpc: process.env.SEPOLIA_RPC_URL,
-    privateKey: process.env.SEPOLIA_PRIVATE_KEY,
-    nftAddress: process.env.SEPOLIA_NFT_ADDRESS || "0xC40f17FfF5591dbb12CD4279111C22bb33425244",
-    marketAddress: process.env.SEPOLIA_MARKETPLACE_ADDRESS || "0x2E3Ae1bC661C170D009Cf3E9686dFFfF60AEDc0b",
-  },
   13473: {
     name: "Immutable zkEVM Testnet",
     rpc: process.env.IMMUTABLE_RPC_URL,
-    rpc: process.env.IMMUTABLE_RPC_URL,
-    privateKey: process.env.IMMUTABLE_PRIVATE_KEY || process.env.PRIVATE_KEY || process.env.SEPOLIA_PRIVATE_KEY,
+    privateKey: process.env.IMMUTABLE_PRIVATE_KEY || process.env.PRIVATE_KEY,
     nftAddress: process.env.IMMUTABLE_NFT_ADDRESS || process.env.MYNFT_ADDRESS,
     marketAddress: process.env.IMMUTABLE_MARKETPLACE_ADDRESS || process.env.MARKETPLACE_ADDRESS,
   },
@@ -58,7 +50,7 @@ const NETWORKS = {
 const instances = {};
 
 function getBlockchain(chainId) {
-  // Default to Immutable if not specified or unknown (or Sepolia if preferred default)
+  // Default to Immutable if not specified or unknown
   const id = chainId || 13473; 
   const config = NETWORKS[id];
 
