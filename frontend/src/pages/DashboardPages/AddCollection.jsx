@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
 import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAnimate } from "framer-motion";
 
 function CreateCollections() {
@@ -20,7 +20,7 @@ function CreateCollections() {
     }
   };
 
-  const handleBackClick = ()=>{
+  const handleBackClick = () => {
     navigate("/dashboard/nfa-details")
   }
 
@@ -42,16 +42,14 @@ function CreateCollections() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden">
       {/* Content */}
-      <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-8">
+      <div className="relative z-50 w-full px-4 md:px-8">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 mt-20 md:mt-[80px]">
           {/* Left side: Image upload */}
           <div
-            className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 cursor-pointer"
+            className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 cursor-pointer w-full max-w-[456px] h-[300px] md:h-[440px] mx-auto lg:mx-0"
             style={{
-              width: "456px",
-              height: "440px",
               borderRadius: "6px",
               borderStyle: "dashed",
               position: "relative",
@@ -135,42 +133,28 @@ function CreateCollections() {
 
           {/* Right side: Form */}
           <div
-            className="z-50 relative rounded-lg p-6"
+            className="z-50 relative rounded-lg p-0 md:p-6 w-full max-w-[495px] mx-auto lg:mx-0"
             style={{
-              width: "456px",
               boxSizing: "border-box",
               position: "relative",
             }}
           >
-            <div
-              style={{
-                width: "495px",
-                height: "110px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "14px",
-                boxSizing: "border-box",
-              }}
-            >
+            <div className="flex flex-col gap-[14px] box-sizing-border-box">
               <div
-                className="flex flex-col justify-start"
+                className="flex flex-col justify-start gap-[8px]"
                 style={{
-                  width: "495px",
                   fontFamily: "Inter, sans-serif",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "8px",
                 }}
               >
                 <h2
-                  className="px-2 text-white font-semibold text-[25px]"
+                  className="text-white font-semibold text-[22px] md:text-[25px]"
                   style={{ margin: 0 }}
                 >
                   Create your own NFTs
                 </h2>
                 <p
-                  className="px-2 text-white/70 text-[18px] leading-[24px]"
-                  style={{ width: "490px", margin: 0, wordBreak: "break-word" }}
+                  className="text-white/70 text-[16px] md:text-[18px] leading-[22px] md:leading-[24px]"
+                  style={{ margin: 0, wordBreak: "break-word" }}
                 >
                   Create your own digital universe where every piece you mint
                   tells a story, carries emotion, and becomes part of something
@@ -180,7 +164,7 @@ function CreateCollections() {
             </div>
 
             {/* Input Fields */}
-            <div className="w-[430px] flex flex-col gap-4 mt-8 mx-2">
+            <div className="w-full flex flex-col gap-4 mt-8">
               <label className="text-white font-normal text-[18px]">Name</label>
               <input
                 type="text"
@@ -213,13 +197,9 @@ function CreateCollections() {
                 />
               </div>
 
-              <span className="font-inter font-semibold ml-1 text-[25px] mt-4">
-                Earnings
-              </span>
-
-              <div className="flex justify-between gap-6">
+              <div className="flex flex-col sm:flex-row justify-between gap-6">
                 {/* Creator Fee */}
-                <div className="flex flex-col gap-2 w-[180px]">
+                <div className="flex flex-col gap-2 w-full sm:w-[180px]">
                   <h1 className="text-white text-[18px] m-0">Creator Fee</h1>
                   <div className="flex items-center bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors border border-gray-600 rounded-md h-[48px] px-3">
                     <input
@@ -235,7 +215,7 @@ function CreateCollections() {
                 </div>
 
                 {/* Supply */}
-                <div className="flex flex-col gap-2 w-[180px]">
+                <div className="flex flex-col gap-2 w-full sm:w-[180px]">
                   <h1 className="text-white text-[18px] m-0">Supply</h1>
                   <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center border border-gray-600 rounded-md h-[48px] px-3">
                     <input
@@ -285,11 +265,11 @@ function CreateCollections() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex mt-16 justify-end mx-8 pt-16 pb-32 relative z-10 gap-6">
-          <button onClick={handleBackClick} className="w-[133px] h-[42px] rounded-md border border-white text-white hover:bg-white/10 transition-colors">
+        <div className="flex flex-col sm:flex-row mt-16 justify-end pt-16 pb-32 relative z-10 gap-4 sm:gap-6">
+          <button onClick={handleBackClick} className="w-full sm:w-[133px] h-[42px] rounded-md border border-white text-white hover:bg-white/10 transition-colors">
             Cancel
           </button>
-          <button className="w-[190px] h-[42px] rounded-md bg-blue-800 hover:bg-blue-700 text-white transition-colors">
+          <button className="w-full sm:w-[190px] h-[42px] rounded-md bg-blue-800 hover:bg-blue-700 text-white transition-colors">
             Publish Contract
           </button>
         </div>

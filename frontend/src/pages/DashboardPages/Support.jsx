@@ -129,14 +129,14 @@ function Support() {
     });
 
   return (
-    <div className="flex bg-black">
-      <div className="flex flex-col w-full max-w-[1100px] h-[480px] px-4">
-        
+    <div className="flex bg-black min-h-screen">
+      <div className="flex flex-col w-full max-w-[1100px] h-[calc(100vh-100px)] md:h-[480px] px-2 md:px-4">
+
         {/* Header */}
-        <div className="flex items-center gap-2 h-[50px] border-b border-white">
+        <div className="flex items-center gap-2 h-[50px] border-b border-white px-2">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
-             Online
+            Online
           </p>
         </div>
 
@@ -150,19 +150,19 @@ function Support() {
             messages.map((msg) =>
               msg.senderRole === "user" ? (
                 <div key={msg._id} className="flex justify-end gap-3 items-end">
-                  <div className="max-w-[401px] bg-[#1D7AD6] p-3 rounded-xl text-white">
-                    <p className="text-[12px] whitespace-pre-wrap">
+                  <div className="max-w-[85%] sm:max-w-[401px] bg-[#1D7AD6] p-3 rounded-xl text-white">
+                    <p className="text-[12px] whitespace-pre-wrap break-words">
                       {msg.message}
                     </p>
                     <p className="text-right text-[11px] mt-1">
                       {formatTime(msg.createdAt)}
                     </p>
                   </div>
-                  <img src={ChatImage} className="w-8 h-8 rounded-full" />
+                  <img src={ChatImage} className="w-8 h-8 rounded-full flex-shrink-0" />
                 </div>
               ) : (
-                <div key={msg._id} className="max-w-[401px] text-black bg-[#F3F4F6] p-3 rounded-xl">
-                  <p className="text-[12px] whitespace-pre-wrap">
+                <div key={msg._id} className="max-w-[85%] sm:max-w-[401px] text-black bg-[#F3F4F6] p-3 rounded-xl self-start">
+                  <p className="text-[12px] whitespace-pre-wrap break-words">
                     {msg.message}
                   </p>
                   <p className="text-right text-[11px] text-gray-500 mt-1">

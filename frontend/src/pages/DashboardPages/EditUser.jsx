@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import overview1 from "../../assets/images/Profile/Hero.png";
 import { FiCopy } from "react-icons/fi";
 import CustomButton from "../../Components/Buttons/Button1";
@@ -15,7 +15,7 @@ import { User_Dashboard_Url, BACKEND_BASE_URL } from "../../Config";
 function EditProfile() {
   const navigate = useNavigate();
 
-      const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
 
   const walletAddress = "0xc416a645...b21a";
   const [copied, setCopied] = useState(false);
@@ -59,19 +59,19 @@ function EditProfile() {
             quality
           );
         };
-      }; 
+      };
     });
   };
 
   const location = useLocation();
   const safeUserData = user || {};
-  
+
 
   const [userData, setUserData] = useState(null); // store backend user
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [bio, setBio] = useState("");
-const [userName, setUserName] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
+  const [userName, setUserName] = useState("");
 
 
   const [currentPass, setCurrentPass] = useState("");
@@ -92,33 +92,33 @@ const [userName, setUserName] = useState("");
 
 
 
- // Get the user profile 
-useEffect(() => {
-  const fetchProfile = async () => {
-    try {
-      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // Get the user profile 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/getProfile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const user = res.data.user;
-      console.log("your profile response :",user);
-      setUserData(user);
-      setProfileImage(user.Avatar ? `${BACKEND_BASE_URL}${user.Avatar}` : Profile);
-      setName(user.FullName || "");
-      setEmail(user.Email || "");
-      setBio(user.Bio || "");
-      setUserName(user.UserName || "");
-      
-    } catch (error) {
-      console.error("❌ Profile fetch error:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Failed to fetch profile");
-    }
-  };
+        const user = res.data.user;
+        console.log("your profile response :", user);
+        setUserData(user);
+        setProfileImage(user.Avatar ? `${BACKEND_BASE_URL}${user.Avatar}` : Profile);
+        setName(user.FullName || "");
+        setEmail(user.Email || "");
+        setBio(user.Bio || "");
+        setUserName(user.UserName || "");
 
-  if (token) fetchProfile();
-}, [token]);
+      } catch (error) {
+        console.error("❌ Profile fetch error:", error.response?.data || error.message);
+        toast.error(error.response?.data?.message || "Failed to fetch profile");
+      }
+    };
+
+    if (token) fetchProfile();
+  }, [token]);
 
 
 
@@ -188,7 +188,7 @@ useEffect(() => {
     "hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200";
 
   return (
-    <div className="min-h-screen bg-transparent px-4   relative z-10">
+    <div className="min-h-screen bg-transparent px-4 relative z-10 overflow-x-hidden">
       {/* Bg EFFECT */}
       <div
         style={{
@@ -230,7 +230,7 @@ useEffect(() => {
       <div className="mb-16 lg:mt-[1px]">
         <div className="w-full">
           <div
-            className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
+            className="relative h-32 sm:h-48 md:h-56 lg:h-[237px] -mx-4 sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-16 md:mb-24"
             style={{ backgroundImage: `url(${overview1})` }}
           ></div>
 
@@ -241,15 +241,15 @@ useEffect(() => {
               <div className="relative flex-shrink-0 cursor-pointer">
                 {profileImage && profileImage !== Profile ? (
                   <img
-  src={profileImage}
-  alt="Profile"
-  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
-  onError={(e) => {
-    e.target.onerror = null;
-    setProfileImage(Profile);
-  }}
-/>
-                 
+                    src={profileImage}
+                    alt="Profile"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      setProfileImage(Profile);
+                    }}
+                  />
+
                 ) : (
                   <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-24 h-24 md:w-28 md:h-28 border-2 border-white">
                     <FaUserCircle className="w-16 h-16 md:w-20 md:h-20" />
@@ -273,24 +273,26 @@ useEffect(() => {
                 />
               </div>
 
-              <div className="mt-3 text-white">
-                <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
-                <p className="text-xs sm:text-sm text-gray-400 break-words flex items-center gap-2">
-                  {safeUserData.DiscordId ||
-                    safeUserData.GoogleId ||
-                    safeUserData.id ||
-                    "null"}
+              <div className="mt-3 text-white max-w-full px-4">
+                <h2 className="text-lg md:text-xl font-semibold truncate">{name}</h2>
+                <div className="text-xs sm:text-sm text-gray-400 flex items-center justify-center gap-2 mt-1">
+                  <span className="truncate max-w-[150px] sm:max-w-none">
+                    {safeUserData.DiscordId ||
+                      safeUserData.GoogleId ||
+                      safeUserData.id ||
+                      "null"}
+                  </span>
                   <button
                     onClick={handleCopy}
-                    className="text-gray-400 hover:text-white transition"
+                    className="text-gray-400 hover:text-white transition flex-shrink-0"
                     title="Copy to clipboard"
                   >
                     <FiCopy className="w-4 h-4" />
                   </button>
                   {copied && (
-                    <span className="text-green-400 text-[10px]">Copied!</span>
+                    <span className="text-green-400 text-[10px] whitespace-nowrap">Copied!</span>
                   )}
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -307,9 +309,9 @@ useEffect(() => {
             {loading && <FullScreenLoader />}
 
             {/* Name */}
-            <div className="w-[369px] max-w-md z-10">
+            <div className="w-full max-w-md z-10">
               <label
-                className="block text-[20.97px] text-white font-bold leading-[100%] mb-8 "
+                className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-4 md:mb-8"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Enter your details
@@ -354,9 +356,9 @@ useEffect(() => {
             </div>
 
             {/* Email */}
-            <div className="w-[369px] max-w-md mt-2">
+            <div className="w-full max-w-md mt-2">
               <label
-                className="block text-white font-bold text-[20.97px] leading-[100%] my-5"
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Enter your email
@@ -373,9 +375,9 @@ useEffect(() => {
             </div>
 
             {/* Bio */}
-            <div className="w-[369px] max-w-md mt-4">
+            <div className="w-full max-w-md mt-4">
               <label
-                className="block text-white font-bold text-[20.97px] leading-[100%] my-5"
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
                 style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
               >
                 Enter Your Bio
@@ -392,47 +394,43 @@ useEffect(() => {
 
             {/* Reset Password */}
             {/* {safeUserData.Password && ( */}
-              <div className="w-[369px] max-w-md flex flex-col gap-4">
-                <label className="block text-[#FFFFFF] text-[25px] font-medium">
-                  Reset Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Current Password"
-                  value={currentPass}
-                  onChange={(e) => setCurrentPass(e.target.value)}
-                  className={inputClass}
-                />
-                <input
-                  type="password"
-                  placeholder="New Password"
-                  value={newPass}
-                  onChange={(e) => setNewPass(e.target.value)}
-                  className={inputClass}
-                />
-                <input
-                  type="password"
-                  placeholder="Confirm New Password"
-                  value={confirmPass}
-                  onChange={(e) => setConfirmPass(e.target.value)}
-                  className={inputClass}
-                />
-              </div>
-            {/* )} */}
+            {/* Reset Password */}
+            <div className="w-full max-w-md flex flex-col gap-4">
+              <label className="block text-white text-[20px] md:text-[25px] font-medium">
+                Reset Password
+              </label>
+              <input
+                type="password"
+                placeholder="Current Password"
+                value={currentPass}
+                onChange={(e) => setCurrentPass(e.target.value)}
+                className={inputClass}
+              />
+              <input
+                type="password"
+                placeholder="New Password"
+                value={newPass}
+                onChange={(e) => setNewPass(e.target.value)}
+                className={inputClass}
+              />
+              <input
+                type="password"
+                placeholder="Confirm New Password"
+                value={confirmPass}
+                onChange={(e) => setConfirmPass(e.target.value)}
+                className={inputClass}
+              />
+            </div>
 
-            <div className="flex justify-center w-full my-16">
-              <div className="max-w-md w-full">
-                {/* <button type="submit" className="mx-auto block">
-                  <CustomButton text="Save" />
-                </button> */}
-                 <button 
-           
-            className=" mx-auto block bg-[#002AA8]  transition-colors w-[190px] h-[42px] rounded-md font-medium text-white"
-          >
-            Save
-          </button>
-              </div>{" "}
-              {/* Save Button */}
+            <div className="flex justify-center w-full my-12 md:my-16">
+              <div className="w-full max-w-md">
+                <button
+                  type="submit"
+                  className="mx-auto block bg-[#002AA8] hover:bg-[#001f7a] transition-colors w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </form>
         </div>
