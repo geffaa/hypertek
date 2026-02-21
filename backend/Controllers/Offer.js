@@ -61,9 +61,7 @@ const createOffer = async (req, res) => {
       !userId ||
       !userName ||
       !userEmail ||
-      !ownerId ||
-      !ownerName ||
-      !ownerEmail
+      !ownerId
     ) {
       return res.status(400).json({
         success: false,
@@ -73,7 +71,7 @@ const createOffer = async (req, res) => {
 
     const offer = new Offer({
       serialNumber,
-      gameId,
+      gameId: String(gameId),       // always store as string — NFT ID, not Game ObjectId
       gameTitle,
       gameActualPrice,
       offerPrice,
@@ -81,9 +79,9 @@ const createOffer = async (req, res) => {
       userId,
       userName,
       userEmail,
-      ownerId,
-      ownerName,
-      ownerEmail,
+      ownerId: String(ownerId),      // can be wallet address, "platform", or userId string
+      ownerName: ownerName || "Platform",
+      ownerEmail: ownerEmail || "",
       requestStatus: requestStatus || "pending",
       paymentStatus: paymentStatus || "unpaid",
     });

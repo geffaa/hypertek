@@ -17,6 +17,7 @@ import {
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
+import { adminAuth } from "../Middleware/adminAuth.js";
 import upload from "../Middleware/UploadMulter.js";
 import express from "express";
 const Route = express.Router();
@@ -38,17 +39,18 @@ Route.post("/user/MetaMask", MetaMaskAuth);
 Route.post("/user/twitter", TwitterAuth);
 // :bust_in_silhouette: Get user profile (protected route)
 Route.get("/getProfile", auth, GetProfile);
-Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
-Route.delete("/delete/:userId", DeleteUser);
+Route.put("/edit/:userId", adminAuth, upload.single("Avatar"), EditUser);
+Route.delete("/delete/:userId", adminAuth, DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
-// :white_check_mark: Get all users (admin only)
-Route.get("/users", GetAllUsers);
-// :white_check_mark: NEW ROUTE: Toggle user active/inactive status (admin only)
-Route.patch("/user/status/:userId",  ToggleUserStatus);
+// ✅ Get all users (admin only)
+Route.get("/users", adminAuth, GetAllUsers);
+// ✅ Toggle user active/inactive status (admin only)
+Route.patch("/user/status/:userId", adminAuth, ToggleUserStatus);
 
 Route.get(
-  "/admin/:adminId", // only admin can access
+  "/admin/:adminId",
+  adminAuth,
   GetAdminByAdminId
 );
 
