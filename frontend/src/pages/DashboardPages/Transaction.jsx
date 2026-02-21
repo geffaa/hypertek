@@ -81,34 +81,7 @@ function Transactions() {
   );
 
   return (
-    <div className="w-full min-h-screen bg-black text-white p-6 md:p-16 overflow-x-hidden relative">
-      {/* Background Blurs */}
-      <div
-        style={{
-          top: "0px",
-          left: "330px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
-
-      <div
-        style={{
-          bottom: "10%",
-          right: "10%",
-          width: "200px",
-          height: "200px",
-          background: "#002AA8",
-          filter: "blur(150px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full z-0"
-      ></div>
-
+    <div className="w-full flex flex-col relative z-10">
       {/* Header */}
       <div className="w-full max-w-[426px] z-10 relative">
         <h1

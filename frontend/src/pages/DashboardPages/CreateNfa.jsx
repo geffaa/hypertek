@@ -37,7 +37,7 @@ function CreateCollections() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-transparent overflow-x-hidden">
       <div
         style={{
           top: `20px`,
@@ -53,22 +53,9 @@ function CreateCollections() {
                 0_0_200px_100px_rgba(59,130,246,0.2)]"
       ></div>
 
-      <div
-        style={{
-          top: `540px`,
-          left: `650px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
 
       {/* Content */}
+
       <div className="relative z-50 w-full px-4 md:px-8">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 mt-20 md:mt-[80px]">
           {/* left side preview / modal */}

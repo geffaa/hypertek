@@ -130,22 +130,12 @@ function CollectionDetails() {
 
 
   return (
-    <div className="mt-12 flex min-h-screen bg-black flex-col overflow-x-hidden">
+    <div className="flex flex-col w-full">
       {loading && <FullScreenLoader size={4} color="white" />}
-
-      {/* Background blurs */}
-      <div
-        className="absolute rounded-full z-0"
-        style={{ top: "120px", left: "10%", width: "200px", height: "200px", background: "#002AA8", filter: "blur(150px)" }}
-      ></div>
-      <div
-        className="absolute rounded-full z-0"
-        style={{ bottom: "10%", right: "10%", width: "200px", height: "200px", background: "#002AA8", filter: "blur(150px)" }}
-      ></div>
 
       {/* Header */}
       <div className="flex flex-col w-full max-w-[900px] gap-6 px-4 md:ml-12 z-10">
-        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">NFA Details</h1>
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">Collection Management</h1>
         <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 w-full sm:max-w-xs">
             <img src={searchImage} alt="search" className="w-4 h-4 flex-shrink-0" />
@@ -157,12 +147,7 @@ function CollectionDetails() {
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
             />
           </div>
-          <Link
-            to="/dashboard"
-            className="w-full sm:w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-[#002AA8] sm:bg-white/10 backdrop-blur-sm border border-white/20"
-          >
-            Create NFA
-          </Link>
+
         </div>
       </div>
 

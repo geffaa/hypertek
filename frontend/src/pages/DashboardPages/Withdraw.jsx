@@ -294,7 +294,7 @@ const Withdraw = () => {
     const displayNativeBalance = ethBalance;
 
     return (
-        <div className="p-4 md:p-8 text-white min-h-full overflow-x-hidden">
+        <div className="p-4 md:p-8 text-white relative z-10">
             <h1 className="text-2xl md:text-3xl font-bold mb-2">Withdraw Funds</h1>
             <p className="text-white/60 text-sm md:text-base mb-8">Manage your earnings and withdraw to your preferred destination.</p>
 
