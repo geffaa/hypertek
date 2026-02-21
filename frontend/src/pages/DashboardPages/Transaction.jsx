@@ -3,7 +3,7 @@ import SearchImage from "../../assets/search.png";
 
 function Transactions() {
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   // Static transaction data
   const transactionsData = [
     {
@@ -81,160 +81,75 @@ function Transactions() {
   );
 
   return (
-    <div className="w-full h-[950px] bg-black text-white p-16  overflow-hidden">
-      {/* Background Blurs */}
-      <div
-        style={{
-          top: "0px",
-          left: "330px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
-
-      <div
-        style={{
-          top: "610px",
-          left: "860px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
-
+    <div className="w-full flex flex-col relative z-10">
       {/* Header */}
-      <div style={{ width: "426px", height: "95px", gap: "22px" }}>
+      <div className="w-full max-w-[426px] z-10 relative">
         <h1
-          style={{
-            width: "426px",
-            height: "30px",
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 600,
-            fontSize: "25px",
-            color: "white",
-            marginBottom: "22px",
-          }}
+          className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-6"
         >
           Transaction History
         </h1>
 
         {/* Search Box */}
         <div
-          className="flex items-center"
-          style={{
-            width: "426px",
-            height: "43px",
-            borderRadius: "6px",
-            gap: "15px",
-            padding: "5px 36px",
-            background: "#FFFFFF1C",
-          }}
+          className="flex items-center w-full h-[43px] rounded-md gap-[15px] px-4 md:px-6 bg-[#FFFFFF1C] backdrop-blur-sm"
         >
           <img
             src={SearchImage}
             alt="search"
-            className="w-[16px] h-[16px]"
+            className="w-[16px] h-[16px] flex-shrink-0"
           />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search transactions, addresses, amounts..."
-            style={{
-              width: "100%",
-              height: "17px",
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              color: "white",
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: "14px",
-            }}
+            placeholder="Search transactions..."
+            className="w-full bg-transparent border-none outline-none color-white font-inter font-medium text-[14px]"
           />
         </div>
       </div>
 
       {/* Transactions List */}
-      <div className="mt-8 space-y-4">
+      <div className="mt-8 space-y-4 z-10 relative">
         {filteredTransactions.length > 0 ? (
           filteredTransactions.map((transaction) => (
             <div
               key={transaction.id}
-              className="flex items-center w-full max-w-[954px] gap-5"
+              className="flex flex-col md:flex-row items-start md:items-center w-full max-w-[954px] gap-4 p-4 md:p-0 bg-white/5 md:bg-transparent rounded-lg"
             >
               {/* Left */}
-              <div className="flex items-center gap-3 w-[209px] h-[49px]">
+              <div className="flex items-center gap-3 w-full md:w-[209px]">
                 <div
-                  className="flex items-center justify-center rounded-full"
+                  className="flex items-center justify-center rounded-full flex-shrink-0"
                   style={{
                     width: "48px",
                     height: "49px",
-                    padding: "15px 14px",
                     background: "#C5C3C3",
                   }}
                 >
                   <p className="text-[#7A7676C4]">Tx</p>
                 </div>
-                <div className="flex flex-col gap-1 w-[132px] h-[38px]">
-                  <h2
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 400,
-                      fontSize: "14px",
-                      color: "#FFFFFFAB",
-                      margin: 0,
-                    }}
-                  >
+                <div className="flex flex-col gap-1">
+                  <h2 className="font-inter font-normal text-[14px] text-white/70 m-0">
                     {transaction.shortHash}
                   </h2>
-                  <p
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 400,
-                      fontSize: "14px",
-                      color: "#FFFFFFAB",
-                      margin: 0,
-                    }}
-                  >
+                  <p className="font-inter font-normal text-[14px] text-white/50 m-0">
                     {transaction.timeAgo}
                   </p>
                 </div>
               </div>
 
               {/* Center */}
-              <div className="flex-1 flex justify-center">
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "14px",
-                    margin: 0,
-                    color: "#FFFFFFAB",
-                  }}
-                >
+              <div className="flex-1 w-full overflow-hidden">
+                <p className="font-inter font-normal text-[14px] text-white/70 m-0 truncate">
                   {transaction.recipientAddress}
                 </p>
               </div>
 
               {/* Right */}
-              <div>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "14px",
-                    margin: 0,
-                    color: "#FFFFFFAB",
-                  }}
-                >
+              <div className="w-full md:w-auto flex justify-between md:block">
+                <span className="md:hidden text-white/50 text-[14px]">Amount:</span>
+                <p className="font-inter font-normal text-[14px] text-white/70 m-0">
                   {transaction.amount}
                 </p>
               </div>
@@ -256,7 +171,7 @@ function Transactions() {
         )}
       </div>
 
-    
+
     </div>
   );
 }

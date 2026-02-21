@@ -42,7 +42,7 @@ function CollectionDetails() {
     async function fetchCollections() {
       try {
 
-         setLoading(true); // show loader
+        setLoading(true); // show loader
         const res = await api.get(`/nft/user/collection/get/${user.id}`);
         console.log("User Dashboard data:", res);
 
@@ -64,8 +64,8 @@ function CollectionDetails() {
         toast.error(err.response?.data?.message || "Failed to fetch collections");
       }
       finally {
-    setLoading(false); // hide loader
-  }
+        setLoading(false); // hide loader
+      }
     }
 
     fetchCollections();
@@ -85,20 +85,20 @@ function CollectionDetails() {
 
 
 
-const handleCopyWallet = async (address) => {
-  try {
-    await navigator.clipboard.writeText(address);
-    toast.success("Wallet address copied!");
-  } catch (err) {
-    toast.error("Failed to copy wallet address");
-  }
-};
+  const handleCopyWallet = async (address) => {
+    try {
+      await navigator.clipboard.writeText(address);
+      toast.success("Wallet address copied!");
+    } catch (err) {
+      toast.error("Failed to copy wallet address");
+    }
+  };
 
 
-const shortenAddress = (address) => {
-  if (!address) return "";
-  return `${address.slice(0, 6)}...${address.slice(-4)}`;
-};
+  const shortenAddress = (address) => {
+    if (!address) return "";
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
 
 
 
@@ -125,54 +125,39 @@ const shortenAddress = (address) => {
 
 
   const filteredCollections = collections.filter((col) =>
-  col.name.toLowerCase().includes(searchQuery.toLowerCase())
-);
+    col.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
 
   return (
-    <div className="mt-12 flex h-[400px] bg-black flex-col">
-        {loading && <FullScreenLoader size={4} color="white" />}
-
-      {/* Background blurs */}
-      <div
-        style={{ top: "120px", left: "290px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-      <div
-        style={{ top: "560px", left: "900px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
+    <div className="flex flex-col w-full">
+      {loading && <FullScreenLoader size={4} color="white" />}
 
       {/* Header */}
-      <div className="flex flex-col w-[900px] gap-6 ml-12">
-        <h1 className="font-inter font-semibold text-[25px] text-white z-10">NFA Details</h1>
-        <div className="flex justify-between">
-          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
-            <img src={searchImage} alt="search" className="w-4 h-4" />
+      <div className="flex flex-col w-full max-w-[900px] gap-6 px-4 md:ml-12 z-10">
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">Collection Management</h1>
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
+          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 w-full sm:max-w-xs">
+            <img src={searchImage} alt="search" className="w-4 h-4 flex-shrink-0" />
             <input
               type="text"
-               value={searchQuery}
-  onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search collections"
               className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
             />
           </div>
-          <Link
-            to="/dashboard"
-            className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
-          >
-            Create NFA
-          </Link>
+
         </div>
       </div>
 
-      {/* Table */}
-<div className="w-[900px] ml-12 mt-12 max-h-[400px] overflow-y-auto custom-scrollbar">
-<table className="min-w-[800px] text-left rounded-lg border-collapse border-spacing-0">
+      {/* Table Container with overflow for mobile */}
+      <div className="w-full max-w-[900px] px-4 md:ml-12 mt-12 max-h-[400px] overflow-x-auto custom-scrollbar z-10">
+        <table className="min-w-[800px] w-full text-left rounded-lg border-collapse border-spacing-0">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
               {/* {["Name","Image","Symbol","Chain","Creator Fee","Supply","Wallet Address","Action","Status"].map((title) => ( */}
-              {["Name","Image","Creator Fee","Wallet Address","Action","Status"].map((title) => (
+              {["Name", "Image", "Creator Fee", "Wallet Address", "Action", "Status"].map((title) => (
                 <th key={title} className=" py-3 text-white font-semibold text-sm tracking-wider">{title}</th>
               ))}
             </tr>
@@ -189,21 +174,21 @@ const shortenAddress = (address) => {
                 {/* <td className="px-6 py-4 text-white/80 font-medium">{col.chain}</td> */}
                 <td className="px-6 py-4 text-white/80 font-medium">{col.creatorFee}%</td>
                 {/* <td className="px-6 py-4 text-white/80 font-medium">{col.supply}</td> */}
-<td className="text-white/80 font-medium">
-  <div className="flex items-center gap-2">
-    <span className="text-sm">
-      {shortenAddress(col.recipient)}
-    </span>
+                <td className="text-white/80 font-medium">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">
+                      {shortenAddress(col.recipient)}
+                    </span>
 
-    <button
-      onClick={() => handleCopyWallet(col.recipient)}
-      className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 border border-white/20 transition"
-      title="Copy wallet address"
-    >
-      Copy
-    </button>
-  </div>
-</td>
+                    <button
+                      onClick={() => handleCopyWallet(col.recipient)}
+                      className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 border border-white/20 transition"
+                      title="Copy wallet address"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </td>
                 <td className=" py-4 mt-3 flex gap-4">
                   <Link to="/dashboard/edit-nfa" state={{ collection: col }}>
                     <img src={EditImage} alt="edit" className="w-4 h-4 cursor-pointer" />
@@ -220,9 +205,13 @@ const shortenAddress = (address) => {
                       width: 47,
                       height: 20,
                       padding: 0,
-                      "& .MuiSwitch-switchBase": { padding: 0, margin: 0, transitionDuration: "300ms",
-                        "&.Mui-checked": { transform: "translateX(24px)", color: "#fff",
-                          "& + .MuiSwitch-track": { backgroundColor: "#0860eeff", opacity: 1, border: 0 } } },
+                      "& .MuiSwitch-switchBase": {
+                        padding: 0, margin: 0, transitionDuration: "300ms",
+                        "&.Mui-checked": {
+                          transform: "translateX(24px)", color: "#fff",
+                          "& + .MuiSwitch-track": { backgroundColor: "#0860eeff", opacity: 1, border: 0 }
+                        }
+                      },
                       "& .MuiSwitch-thumb": { boxSizing: "border-box", width: 22, height: 20, backgroundColor: "#fff" },
                       "& .MuiSwitch-track": { borderRadius: 34 / 2, backgroundColor: "#9ca3af", opacity: 1, transition: "background-color 500ms" },
                     }}
@@ -253,6 +242,20 @@ const shortenAddress = (address) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Custom Scrollbar Styles */}
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
+      `}</style>
     </div>
   );
 }

@@ -13,27 +13,27 @@ import { useNavigate } from "react-router-dom";
 import FullScreenLoader from "../components/common/Spinner";
 
 function EditUser() {
-   const location = useLocation();
-   const navigate = useNavigate()
-  const userData = location.state?.userData || {}; 
-  console.log("your recieved data are :",userData);
+  const location = useLocation();
+  const navigate = useNavigate()
+  const userData = location.state?.userData || {};
+  console.log("your recieved data are :", userData);
 
 
-  console.log("your recieved data is here :",userData
+  console.log("your recieved data is here :", userData
   );
 
-const [name, setName] = useState(userData.name || "");
-const [email, setEmail] = useState(userData.supply || "");
+  const [name, setName] = useState(userData.name || "");
+  const [email, setEmail] = useState(userData.supply || "");
   const [currentPass, setCurrentPass] = useState("");
   const [bio, setBio] = useState(userData.bio || "");
   const [profileImage, setProfileImage] = useState(
-  userData.Avatar ? `${Image_Base_Url}${userData.Avatar}` : null
-);
+    userData.Avatar ? `${Image_Base_Url}${userData.Avatar}` : null
+  );
 
 
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  
+
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -44,7 +44,7 @@ const [email, setEmail] = useState(userData.supply || "");
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
 
- 
+
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (selected) {
@@ -62,59 +62,59 @@ const [email, setEmail] = useState(userData.supply || "");
 
 
   const handleSubmit = async () => {
-  if (newPass !== confirmPass) {
-    alert("New password and confirm password do not match");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("FullName", name);
-  formData.append("Email", email);
-  formData.append("Bio", bio);
-
-  if (newPass) {
-    formData.append("Password", newPass);
-  }
-
-  if (file) {
-    formData.append("Avatar", file);
-  }
-
-  try {
-    setLoading(true);
-    const res = await fetch(`${Dashboard_Base_Url}/v1/edit/${userData.id}`, {
-      method: "PUT",
-      body: formData,
-    });
-
-    const data = await res.json();
-    setLoading(false);
-
-    if (data.success) {
-      navigate("/users")
-     toast.success("User Profle Update Succesfully")
-    } else {
-      toast.error("There is some error while updating user profile")
+    if (newPass !== confirmPass) {
+      alert("New password and confirm password do not match");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    setLoading(false);
-    toast.error(err)
-  }
-};
+
+    const formData = new FormData();
+    formData.append("FullName", name);
+    formData.append("Email", email);
+    formData.append("Bio", bio);
+
+    if (newPass) {
+      formData.append("Password", newPass);
+    }
+
+    if (file) {
+      formData.append("Avatar", file);
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${Dashboard_Base_Url}/v1/edit/${userData.id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (data.success) {
+        navigate("/users")
+        toast.success("User Profle Update Succesfully")
+      } else {
+        toast.error("There is some error while updating user profile")
+      }
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      toast.error(err)
+    }
+  };
 
 
 
   const handleCopy = () => {
-  navigator.clipboard.writeText(userData._id || ""); // copy user ID or whatever field you want
-  setCopied(true);
-  setTimeout(() => setCopied(false), 2000);
-};
+    navigator.clipboard.writeText(userData._id || ""); // copy user ID or whatever field you want
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
 
-if (loading) {
-  return <FullScreenLoader />;
-}
+  if (loading) {
+    return <FullScreenLoader />;
+  }
   return (
     <>
       <div className="min-h-screen bg-transparent relative z-10">
@@ -166,9 +166,9 @@ if (loading) {
             <div className="mt-3 text-white">
               <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
               <p className="text-xs sm:text-sm text-gray-400 break-words flex items-center gap-2">
-                {userData.id  || "null"}
+                {userData.id || "null"}
 
-               
+
                 <button
                   onClick={handleCopy}
                   className="text-gray-400 hover:text-white transition"
@@ -187,7 +187,7 @@ if (loading) {
         {/* the input field  */}
         <div className="flex justify-center mt-8 pb-24"> {/* Added pb-16 for bottom padding */}
           <div
-            className=" justify-center mb-12" 
+            className=" justify-center mb-12"
             style={{
               width: "369px",
               height: "1076.93px",
@@ -229,8 +229,8 @@ if (loading) {
                 <div className="w-[345.52px] h-[46.96px] flex items-center px-2 rounded-[10px] border border-white">
                   <input
                     type="text"
-                     value={name}                // <-- use state here
-  onChange={(e) => setName(e.target.value)} // <-- update state on change
+                    value={name}                // <-- use state here
+                    onChange={(e) => setName(e.target.value)} // <-- update state on change
                     placeholder="Name"
                     className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base"
                   />
@@ -281,7 +281,7 @@ if (loading) {
                     type="email"
                     placeholder="Email"
                     value={email}
-  onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base"
                   />
                 </div>
@@ -326,8 +326,8 @@ if (loading) {
                 <textarea
                   className="bg-transparent text-white outline-none font-inter"
                   placeholder="Enter your text here"
-                   value={bio}
-  onChange={(e) => setBio(e.target.value)}
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
                   style={{
                     width: "345.52px",
                     height: "233.14px",
@@ -421,7 +421,7 @@ if (loading) {
               </div>
             </div>
 
-            <div className="flex justify-center my-16 mb-24"  onClick={handleSubmit}> 
+            <div className="flex justify-center my-16 mb-24" onClick={handleSubmit}>
               <div
                 className="
         flex items-center 

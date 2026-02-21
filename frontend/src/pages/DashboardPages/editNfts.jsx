@@ -3,7 +3,7 @@ import React from "react";
 
 function CollectionDetails() {
   return (
-<div className="min-h-screen bg-black  flex flex-col justify-between text-white overflow-hidden pt-16 pb-5">
+<div className="min-h-screen bg-black flex flex-col justify-between text-white overflow-x-hidden pt-16 pb-5">
 
 
      {/* <div
@@ -33,9 +33,8 @@ function CollectionDetails() {
       {/* MAIN CONTENT - Centered vertically */}
       <div className="flex-1 flex items-center justify-center">
         <div
-          className="z-10"
+          className="z-10 w-full max-w-[495px] px-6"
           style={{
-            width: "495px",
             display: "flex",
             flexDirection: "column",
             gap: "42px",
@@ -45,55 +44,25 @@ function CollectionDetails() {
 
        
           {/* Header */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            <h1
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontSize: "25px",
-                margin: 0,
-              }}
-            >
+          <div className="flex flex-col gap-[14px]">
+            <h1 className="font-inter font-semibold text-[22px] md:text-[25px] m-0 text-white">
               NFT's Details
             </h1>
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontSize: "18px",
-                color: "#FFFFFFAB",
-                margin: 0,
-              }}
-            >
+            <p className="font-inter font-normal text-[16px] md:text-[18px] text-white/70 m-0">
               Create your own collection.
             </p>
           </div>
 
           {/* Form */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "25px" }}>
+          <div className="flex flex-col gap-[25px]">
             {["Name", "URL", "Twitter", "Discord"].map((label) => (
-              <div key={label} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <label
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "18px",
-                  }}
-                >
+              <div key={label} className="flex flex-col gap-[6px]">
+                <label className="font-inter font-normal text-[16px] md:text-[18px] text-white">
                   {label}
                 </label>
                 <input
                   placeholder={`Add ${label}`}
-                  className="transition-all duration-200 focus:outline-none focus:border-blue-500 hover:border-gray-400"
-                  style={{
-                    width: "430px",
-                    height: "48px",
-                    borderRadius: "4px",
-                    border: "1px solid #555",
-                    padding: "13px 15px",
-                    color: "white",
-                    background: "transparent",
-                  }}
+                  className="w-full h-[48px] rounded-[4px] border border-gray-600 px-4 py-2 text-white bg-transparent outline-none focus:border-blue-500 hover:border-gray-400 transition-all"
                 />
               </div>
             ))}
@@ -119,24 +88,9 @@ function CollectionDetails() {
     ></div> */}
 
       {/* Publish Button - Fixed at bottom */}
-      <div className="w-full flex justify-end pt-8 mb-12 z-10">
+      <div className="w-full flex justify-center sm:justify-end pt-8 mb-12 z-10 px-6 sm:px-0">
         <button
-          className="mx-8 transition-all duration-200 hover:bg-blue-700 hover:scale-105 active:scale-95 shadow-lg hover:shadow-blue-500/25"
-          style={{
-            width: "190px",
-            height: "42px",
-            borderRadius: "6px",
-            padding: "10px",
-            background: "#002AA8",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "18px",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className="w-full sm:w-[190px] h-[42px] rounded-[6px] bg-[#002AA8] text-white font-inter text-[18px] border-none cursor-pointer transition-all duration-200 hover:bg-blue-700 hover:scale-105 active:scale-95 shadow-lg hover:shadow-blue-500/25 sm:mx-8"
         >
           Publish
         </button>

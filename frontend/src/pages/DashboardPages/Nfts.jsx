@@ -33,68 +33,61 @@ function NFTs() {
   };
 
   return (
-    <div className="  flex h-[700px] bg-black flex-col">
+    <div className="flex min-h-screen bg-black flex-col overflow-x-hidden">
 
-        <div
+      {/* Background blurs */}
+      <div
+        className="absolute rounded-full z-0"
         style={{
           top: `100px`,
-          left: `400px`,
-          width: "250px",
-          height: "250px",
+          left: `10%`,
+          width: "200px",
+          height: "200px",
           background: "#002AA8",
-          filter: "blur(180px)",
+          filter: "blur(150px)",
         }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
       ></div>
 
-        <div
+      <div
+        className="absolute rounded-full z-0"
         style={{
-          top: `550px`,
-          left: `880px`,
-          width: "250px",
-          height: "250px",
+          bottom: `10%`,
+          right: `10%`,
+          width: "200px",
+          height: "200px",
           background: "#002AA8",
-          filter: "blur(180px)",
+          filter: "blur(150px)",
         }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
       ></div>
-  
-   
+
+
 
       {/* Header */}
-      <div className="flex flex-col w-[900px] gap-6 ml-12">
-        <h1 className="font-inter font-semibold text-[25px] text-white">
+      <div className="flex flex-col w-full max-w-[900px] gap-6 px-4 md:ml-12 z-10">
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">
           Collection Management
         </h1>
-        <div className="flex justify-between">
-          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
-            <img src={searchImage} alt="search" className="w-4 h-4 " />
-           <input
-  type="text"
-  placeholder="Search collections"
-  className="bg-transparent text-white px-2 py-1 rounded w-full placeholder-gray-300 outline-none focus:ring-0 focus:outline-none"
-/>
-
+        <div className="flex flex-col sm:flex-row justify-between gap-4">
+          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 w-full sm:max-w-xs">
+            <img src={searchImage} alt="search" className="w-4 h-4 flex-shrink-0" />
+            <input
+              type="text"
+              placeholder="Search collections"
+              className="bg-transparent text-white px-2 py-1 rounded w-full placeholder-gray-300 outline-none focus:ring-0 focus:outline-none"
+            />
           </div>
-         <Link
-  to="/dashboard/add-user-collection"
-  className="w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-white/10 backdrop-blur-sm border border-white/20"
->
-  Add Collection
-</Link>
-
+          <Link
+            to="/dashboard/add-user-collection"
+            className="w-full sm:w-[150px] h-[40px] flex items-center justify-center text-white text-[16px] rounded-md bg-[#002AA8] sm:bg-white/10 backdrop-blur-sm border border-white/20"
+          >
+            Add Collection
+          </Link>
         </div>
       </div>
 
-      {/* Table */}
-      <div className="pl-24 mt-12 ">
-        <table className="min-w-[897px] text-left rounded-lg overflow-hidden">
+      {/* Table Container with overflow for mobile */}
+      <div className="px-4 md:pl-24 mt-12 overflow-x-auto custom-scrollbar z-10 w-full relative">
+        <table className="min-w-[897px] w-full text-left rounded-lg overflow-hidden">
           <thead>
             <tr className=" h-[50px] backdrop-blur-sm">
               <th className="px-6 py-3 text-white font-semibold text-sm  tracking-wider">
@@ -203,18 +196,25 @@ function NFTs() {
         </table>
       </div>
 
-      {/* Add some responsive design */}
+      {/* Custom Scrollbar and Responsive Styles */}
       <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
         @media (max-width: 768px) {
-          .ml-16 {
-            margin-left: 1rem;
-          }
-          .mt-16 {
-            margin-top: 1rem;
+          .mt-12 {
+            margin-top: 1.5rem;
           }
         }
       `}</style>
-    </div>
+    </div >
   );
 }
 

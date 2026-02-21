@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import ReactDOM from "react-dom";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -1284,13 +1285,13 @@ function Buy1() {
         </div>
       )}
       {/* WALLET SELECTION MODAL */}
-      {showWalletModal && (
+      {showWalletModal && ReactDOM.createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center backdrop-blur-sm"
+          className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-black/80 flex items-center justify-center backdrop-blur-sm px-4"
           onClick={() => setShowWalletModal(false)}
         >
           <div
-            className="bg-[#1f2937] p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl transform transition-all scale-100"
+            className="bg-[#1f2937] p-8 rounded-2xl w-full max-w-sm mx-4 border border-white/10 shadow-2xl transform transition-all scale-100"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
@@ -1354,7 +1355,8 @@ function Buy1() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
