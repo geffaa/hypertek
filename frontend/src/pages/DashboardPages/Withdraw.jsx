@@ -6,9 +6,11 @@ import { ethers } from 'ethers';
 import { passportInstance } from '../../utils/immutablePassport';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { Transak } from '@transak/ui-js-sdk';
 
 // Simple Icons
 import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
+
 
 const Withdraw = () => {
     // Only target Immutable zkEVM Testnet
@@ -18,6 +20,8 @@ const Withdraw = () => {
     const { balance: ethBalance, loading: ethLoading } = useTokenBalance(null); // Fetch Native ETH
 
     const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto', 'bank', or 'add'
+    const [showTransak, setShowTransak] = useState(false);
+    const [transakUrl, setTransakUrl] = useState('');
     const [selectedToken, setSelectedToken] = useState('USDC'); // 'USDC' or 'ETH'
 
     // Withdraw states
@@ -311,27 +315,32 @@ const Withdraw = () => {
         }
     };
 
+    // ── Transak Bank Withdrawal (popup — works with VPN) ───────────
     const handleBankWithdraw = () => {
-        if (!activeWallet.address) {
-            toast.error("Immutable wallet not connected.");
-            return;
+        const walletAddress = activeWallet?.address || wagmiAddress;
+        const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
+
+        const params = new URLSearchParams({
+            productsAvailed: 'SELL',
+            cryptoCurrencyCode: 'USDC',
+            defaultFiatCurrency: 'USD',
+            themeColor: '3b82f6',
+        });
+
+        if (apiKey) {
+            params.set('apiKey', apiKey);
+            params.set('environment', 'staging');
         }
+        if (walletAddress) params.set('walletAddress', walletAddress);
 
-        // MoonPay Sandbox URL construction
-        // For production, use https://sell.moonpay.com
-        const moonPayUrl = new URL('https://sell-sandbox.moonpay.com');
+        const url = `https://global.transak.com/?${params.toString()}`;
 
-        // Append required parameters
-        const apiKey = 'pk_test_123'; // Placeholder
-        moonPayUrl.searchParams.append('apiKey', apiKey);
-        moonPayUrl.searchParams.append('baseCurrencyCode', 'usdc');
-        moonPayUrl.searchParams.append('refundWalletAddress', activeWallet.address);
-
-        // Open MoonPay in a new tab/window
-        window.open(moonPayUrl.toString(), '_blank', 'noopener,noreferrer');
-
-        toast.success("MoonPay interface opened!");
-        fetchHistory(); // Refresh custom history if you plan to log it
+        // Transak blocks iframe (X-Frame-Options) — use popup window instead
+        // With VPN this opens the full KYC/sell flow
+        const w = 460, h = 700;
+        const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
+        const top = Math.round(window.screenY + (window.outerHeight - h) / 2);
+        window.open(url, 'transak_sell', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
     };
 
     // Derived State for Display
@@ -343,312 +352,336 @@ const Withdraw = () => {
     const displayNativeBalance = ethBalance;
 
     return (
-        <div className="p-4 md:p-8 text-white relative z-10">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">Withdraw Funds</h1>
-            <p className="text-white/60 text-sm md:text-base mb-8">Manage your earnings and withdraw to your preferred destination.</p>
+        <>
+            <div className="p-4 md:p-8 text-white relative z-10">
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">Withdraw Funds</h1>
+                <p className="text-white/60 text-sm md:text-base mb-8">Manage your earnings and withdraw to your preferred destination.</p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                {/* USDC/USD Balance Card */}
-                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
-                    <p className="text-white/60 text-sm mb-1">USDC Balance</p>
-                    <div className="flex items-end gap-2">
-                        <h2 className="text-2xl md:text-3xl font-bold">
-                            {usdcLoading ? "..." : `$${Number(usdcBalance).toFixed(2)}`}
-                        </h2>
-                        <span className="text-blue-400 mb-1.5 font-medium">USDC</span>
-                    </div>
-                </div>
-
-                {/* ETH/Native Balance Card - Optional Display */}
-                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
-                    <p className="text-white/60 text-sm mb-1">Immutable Native Balance</p>
-                    <div className="flex flex-col">
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    {/* USDC/USD Balance Card */}
+                    <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
+                        <p className="text-white/60 text-sm mb-1">USDC Balance</p>
                         <div className="flex items-end gap-2">
                             <h2 className="text-2xl md:text-3xl font-bold">
-                                {ethLoading ? "..." : `${Number(displayNativeBalance).toFixed(4)}`}
+                                {usdcLoading ? "..." : `$${Number(usdcBalance).toFixed(2)}`}
                             </h2>
-                            <span className="text-purple-400 mb-1.5 font-medium">ETH</span>
+                            <span className="text-blue-400 mb-1.5 font-medium">USDC</span>
                         </div>
                     </div>
-                </div>
-                {/* Marketplace Earnings Card */}
-                {(Number(sellerBalance) > 0 || Number(creatorBalance) > 0) && (
-                    <div className="bg-[#1C1C1E] p-6 rounded-xl border border-green-500/30 inline-block min-w-[240px]">
-                        <p className="text-white/60 text-sm mb-1 text-green-400">Marketplace Earnings Available</p>
-                        <div className="flex flex-col gap-3 mt-4">
-                            {Number(sellerBalance) > 0 && (
-                                <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
-                                    <div>
-                                        <p className="text-sm text-white/50">Seller Earnings</p>
-                                        <p className="font-bold text-lg">{Number(sellerBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
+
+                    {/* ETH/Native Balance Card - Optional Display */}
+                    <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
+                        <p className="text-white/60 text-sm mb-1">Immutable Native Balance</p>
+                        <div className="flex flex-col">
+                            <div className="flex items-end gap-2">
+                                <h2 className="text-2xl md:text-3xl font-bold">
+                                    {ethLoading ? "..." : `${Number(displayNativeBalance).toFixed(4)}`}
+                                </h2>
+                                <span className="text-purple-400 mb-1.5 font-medium">ETH</span>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Marketplace Earnings Card */}
+                    {(Number(sellerBalance) > 0 || Number(creatorBalance) > 0) && (
+                        <div className="bg-[#1C1C1E] p-6 rounded-xl border border-green-500/30 inline-block min-w-[240px]">
+                            <p className="text-white/60 text-sm mb-1 text-green-400">Marketplace Earnings Available</p>
+                            <div className="flex flex-col gap-3 mt-4">
+                                {Number(sellerBalance) > 0 && (
+                                    <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
+                                        <div>
+                                            <p className="text-sm text-white/50">Seller Earnings</p>
+                                            <p className="font-bold text-lg">{Number(sellerBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
+                                        </div>
+                                        <button
+                                            onClick={() => handleWithdrawEarnings('seller')}
+                                            className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
+                                        >
+                                            Claim
+                                        </button>
                                     </div>
-                                    <button
-                                        onClick={() => handleWithdrawEarnings('seller')}
-                                        className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
-                                    >
-                                        Claim
-                                    </button>
-                                </div>
-                            )}
-                            {Number(creatorBalance) > 0 && (
-                                <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
-                                    <div>
-                                        <p className="text-sm text-white/50">Creator Fees</p>
-                                        <p className="font-bold text-lg">{Number(creatorBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
-                                    </div>
-                                    <button
-                                        onClick={() => handleWithdrawEarnings('creator')}
-                                        className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
-                                    >
-                                        Claim
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {/* Debug Info */}
-            <div className="mb-4 text-xs text-white/30 font-mono">
-                Connected: {activeWallet.type ? `${activeWallet.type} (${activeWallet.address?.slice(0, 6)}...${activeWallet.address?.slice(-4)})` : "None"} <br />
-                Chain: Immutable zkEVM | USDC Contract: {tokenAddress?.slice(0, 6)}...
-            </div>
-
-
-            {/* Toggle Switch */}
-            <div className="flex flex-wrap gap-4 mb-8 border-b border-white/10 pb-1">
-                <button
-                    onClick={() => setWithdrawType('crypto')}
-                    className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'crypto' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
-                >
-                    <div className="flex items-center gap-2">
-                        <FiDollarSign className="text-lg" />
-                        Crypto
-                    </div>
-                    {withdrawType === 'crypto' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
-                </button>
-                <button
-                    onClick={() => setWithdrawType('add')}
-                    className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'add' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
-                >
-                    <div className="flex items-center gap-2">
-                        <FiPlusCircle className="text-lg" />
-                        Add Funds
-                    </div>
-                    {withdrawType === 'add' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
-                </button>
-                <button
-                    onClick={() => setWithdrawType('bank')}
-                    className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'bank' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
-                >
-                    <div className="flex items-center gap-2">
-                        <FiCreditCard className="text-lg" />
-                        Bank
-                    </div>
-                    {withdrawType === 'bank' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
-                </button>
-            </div>
-
-            <div className="max-w-2xl">
-                {withdrawType === 'crypto' && (
-                    <div className="bg-[#1C1C1E] p-4 md:p-8 rounded-xl border border-white/10">
-                        <h3 className="text-lg md:text-xl font-semibold mb-6">Withdraw to Crypto Wallet</h3>
-
-                        <div className="space-y-6">
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Select Token</label>
-                                <div className="flex gap-3 md:gap-4">
-                                    <button
-                                        onClick={() => setSelectedToken('USDC')}
-                                        className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
-                                    >
-                                        <span className="font-bold">USDC</span>
-                                    </button>
-                                    <button
-                                        onClick={() => setSelectedToken('ETH')}
-                                        className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedToken === 'ETH' ? 'bg-purple-600/20 border-purple-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
-                                    >
-                                        <span className="font-bold">ETH</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Amount ({selectedToken})</label>
-                                <input
-                                    type="number"
-                                    value={amount}
-                                    onChange={(e) => setAmount(e.target.value)}
-                                    placeholder="0.00"
-                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
-                                />
-                                <div className="text-xs text-white/40 mt-1.5 text-right">
-                                    Balance: {selectedToken === 'USDC'
-                                        ? `${Number(usdcBalance).toFixed(4)} USDC`
-                                        : `${Number(ethBalance).toFixed(4)} ETH`}
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Recipient Address</label>
-                                <input
-                                    type="text"
-                                    value={recipient}
-                                    onChange={(e) => setRecipient(e.target.value)}
-                                    placeholder="0x..."
-                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono text-sm"
-                                />
-                                <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Immutable Testnet</p>
-                            </div>
-
-                            <button
-                                onClick={handleCryptoWithdraw}
-                                disabled={processing || (selectedToken === 'USDC' ? usdcLoading : ethLoading)}
-                                className={`w-full py-4 rounded-lg font-bold text-base md:text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
-                                    }`}
-                            >
-                                {processing ? "Processing Transaction..." : `Withdraw ${selectedToken}`}
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {withdrawType === 'add' && (
-                    <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
-                        <h3 className="text-xl font-semibold mb-6">Add Funds to Immutable Wallet</h3>
-                        <p className="text-white/60 text-sm mb-6">Connect your external MetaMask wallet to transfer USDC into your primary Immutable account.</p>
-
-                        <div className="space-y-6">
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Connect External Wallet</label>
-                                <ConnectButton />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Select Token</label>
-                                <div className="flex gap-4 mb-4">
-                                    <button
-                                        onClick={() => setSelectedAddToken('USDC')}
-                                        className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
-                                    >
-                                        <span className="font-bold">USDC</span>
-                                    </button>
-                                    <button
-                                        onClick={() => setSelectedAddToken('ETH')}
-                                        className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'ETH' ? 'bg-purple-600/20 border-purple-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
-                                    >
-                                        <span className="font-bold">ETH</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm text-white/70 mb-2">Amount ({selectedAddToken})</label>
-                                <input
-                                    type="number"
-                                    value={addAmount}
-                                    onChange={(e) => setAddAmount(e.target.value)}
-                                    placeholder="0.00"
-                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
-                                />
-                                {isWagmiConnected && (
-                                    <div className="text-xs text-white/40 mt-1.5 text-right font-mono">
-                                        MetaMask Balance: {selectedAddToken === 'USDC' ? `${Number(mmUsdcBalance).toFixed(4)} USDC` : `${mmEthBalance} IMX/ETH`}
+                                )}
+                                {Number(creatorBalance) > 0 && (
+                                    <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
+                                        <div>
+                                            <p className="text-sm text-white/50">Creator Fees</p>
+                                            <p className="font-bold text-lg">{Number(creatorBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
+                                        </div>
+                                        <button
+                                            onClick={() => handleWithdrawEarnings('creator')}
+                                            className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
+                                        >
+                                            Claim
+                                        </button>
                                     </div>
                                 )}
                             </div>
+                        </div>
+                    )}
+                </div>
 
-                            <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg text-sm text-blue-200">
-                                <strong>Destination:</strong> Your Immutable Wallet ({activeWallet.address?.slice(0, 6)}...{activeWallet.address?.slice(-4)})
+                {/* Debug Info */}
+                <div className="mb-4 text-xs text-white/30 font-mono">
+                    Connected: {activeWallet.type ? `${activeWallet.type} (${activeWallet.address?.slice(0, 6)}...${activeWallet.address?.slice(-4)})` : "None"} <br />
+                    Chain: Immutable zkEVM | USDC Contract: {tokenAddress?.slice(0, 6)}...
+                </div>
+
+
+                {/* Toggle Switch */}
+                <div className="flex flex-wrap gap-4 mb-8 border-b border-white/10 pb-1">
+                    <button
+                        onClick={() => setWithdrawType('crypto')}
+                        className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'crypto' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-2">
+                            <FiDollarSign className="text-lg" />
+                            Crypto
+                        </div>
+                        {withdrawType === 'crypto' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
+                    </button>
+                    <button
+                        onClick={() => setWithdrawType('add')}
+                        className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'add' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-2">
+                            <FiPlusCircle className="text-lg" />
+                            Add Funds
+                        </div>
+                        {withdrawType === 'add' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
+                    </button>
+                    <button
+                        onClick={() => setWithdrawType('bank')}
+                        className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'bank' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-2">
+                            <FiCreditCard className="text-lg" />
+                            Bank
+                        </div>
+                        {withdrawType === 'bank' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
+                    </button>
+                </div>
+
+                <div className="max-w-2xl">
+                    {withdrawType === 'crypto' && (
+                        <div className="bg-[#1C1C1E] p-4 md:p-8 rounded-xl border border-white/10">
+                            <h3 className="text-lg md:text-xl font-semibold mb-6">Withdraw to Crypto Wallet</h3>
+
+                            <div className="space-y-6">
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Select Token</label>
+                                    <div className="flex gap-3 md:gap-4">
+                                        <button
+                                            onClick={() => setSelectedToken('USDC')}
+                                            className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                        >
+                                            <span className="font-bold">USDC</span>
+                                        </button>
+                                        <button
+                                            onClick={() => setSelectedToken('ETH')}
+                                            className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedToken === 'ETH' ? 'bg-purple-600/20 border-purple-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                        >
+                                            <span className="font-bold">ETH</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Amount ({selectedToken})</label>
+                                    <input
+                                        type="number"
+                                        value={amount}
+                                        onChange={(e) => setAmount(e.target.value)}
+                                        placeholder="0.00"
+                                        className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
+                                    />
+                                    <div className="text-xs text-white/40 mt-1.5 text-right">
+                                        Balance: {selectedToken === 'USDC'
+                                            ? `${Number(usdcBalance).toFixed(4)} USDC`
+                                            : `${Number(ethBalance).toFixed(4)} ETH`}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Recipient Address</label>
+                                    <input
+                                        type="text"
+                                        value={recipient}
+                                        onChange={(e) => setRecipient(e.target.value)}
+                                        placeholder="0x..."
+                                        className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono text-sm"
+                                    />
+                                    <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Immutable Testnet</p>
+                                </div>
+
+                                <button
+                                    onClick={handleCryptoWithdraw}
+                                    disabled={processing || (selectedToken === 'USDC' ? usdcLoading : ethLoading)}
+                                    className={`w-full py-4 rounded-lg font-bold text-base md:text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+                                        }`}
+                                >
+                                    {processing ? "Processing Transaction..." : `Withdraw ${selectedToken}`}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {withdrawType === 'add' && (
+                        <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
+                            <h3 className="text-xl font-semibold mb-6">Add Funds to Immutable Wallet</h3>
+                            <p className="text-white/60 text-sm mb-6">Connect your external MetaMask wallet to transfer USDC into your primary Immutable account.</p>
+
+                            <div className="space-y-6">
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Connect External Wallet</label>
+                                    <ConnectButton />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Select Token</label>
+                                    <div className="flex gap-4 mb-4">
+                                        <button
+                                            onClick={() => setSelectedAddToken('USDC')}
+                                            className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                        >
+                                            <span className="font-bold">USDC</span>
+                                        </button>
+                                        <button
+                                            onClick={() => setSelectedAddToken('ETH')}
+                                            className={`flex-1 py-2 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedAddToken === 'ETH' ? 'bg-purple-600/20 border-purple-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
+                                        >
+                                            <span className="font-bold">ETH</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm text-white/70 mb-2">Amount ({selectedAddToken})</label>
+                                    <input
+                                        type="number"
+                                        value={addAmount}
+                                        onChange={(e) => setAddAmount(e.target.value)}
+                                        placeholder="0.00"
+                                        className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors"
+                                    />
+                                    {isWagmiConnected && (
+                                        <div className="text-xs text-white/40 mt-1.5 text-right font-mono">
+                                            MetaMask Balance: {selectedAddToken === 'USDC' ? `${Number(mmUsdcBalance).toFixed(4)} USDC` : `${mmEthBalance} IMX/ETH`}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg text-sm text-blue-200">
+                                    <strong>Destination:</strong> Your Immutable Wallet ({activeWallet.address?.slice(0, 6)}...{activeWallet.address?.slice(-4)})
+                                </div>
+
+                                <button
+                                    onClick={handleAddFunds}
+                                    disabled={processing}
+                                    className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+                                        }`}
+                                >
+                                    {processing ? "Processing Transfer..." : "Transfer from MetaMask"}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {withdrawType === 'bank' && (
+                        <div className="bg-[#1C1C1E] p-4 md:p-8 rounded-xl border border-white/10">
+                            <h3 className="text-lg md:text-xl font-semibold mb-2">Withdraw to Bank Account</h3>
+                            <p className="text-white/50 text-sm mb-6">
+                                Sell your USDC and receive funds directly in your bank account via Transak.
+                            </p>
+
+                            <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg mb-6 text-sm text-blue-200">
+                                Transak will handle KYC verification and bank details securely.
                             </div>
 
-                            <button
-                                onClick={handleAddFunds}
-                                disabled={processing}
-                                className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
-                                    }`}
-                            >
-                                {processing ? "Processing Transfer..." : "Transfer from MetaMask"}
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                {withdrawType === 'bank' && (
-                    <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
-                        <h3 className="text-xl font-semibold mb-6">Withdraw to Bank Account</h3>
-                        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg mb-6 text-sm text-blue-200">
-                            <strong>Note:</strong> This process is securely handled by MoonPay. You will be prompted to complete identity verification if required, and enter your bank details securely via their checkout page.
-                        </div>
-
-                        <div className="space-y-6">
                             <button
                                 onClick={handleBankWithdraw}
-                                disabled={processing}
-                                className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
-                                    }`}
+                                className="w-full py-4 rounded-lg font-bold text-base md:text-lg bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20 transition-all"
                             >
-                                {processing ? "Handling Request..." : "Open MoonPay Off-Ramp"}
+                                Withdraw via Transak
                             </button>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
 
-            {/* Withdrawal History */}
-            <div className="mt-12 w-full max-w-4xl z-10 relative">
-                <h3 className="text-lg md:text-xl font-semibold mb-6">Withdrawal History</h3>
-                <div className="bg-[#1C1C1E] rounded-xl border border-white/10 overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left min-w-[600px]">
-                            <thead className="bg-white/5 text-xs uppercase text-white/50">
-                                <tr>
-                                    <th className="px-6 py-4">Type</th>
-                                    <th className="px-6 py-4">Amount</th>
-                                    {/* Status removed */}
-                                    <th className="px-6 py-4">Date</th>
-                                    <th className="px-6 py-4">Details</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/10">
-                                {historyLoading ? (
-                                    <tr><td colSpan="4" className="px-6 py-8 text-center text-white/40">Loading history...</td></tr>
-                                ) : withdrawals.length === 0 ? (
-                                    <tr><td colSpan="4" className="px-6 py-8 text-center text-white/40">No withdrawal history found.</td></tr>
-                                ) : (
-                                    withdrawals.map((tx) => (
-                                        <tr key={tx._id} className="hover:bg-white/5 transition-colors">
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${tx.type === 'crypto' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
-                                                    {tx.type === 'crypto' ? 'Crypto' : 'Bank'}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 font-mono">
-                                                {tx.amount} {tx.token || 'USD'}
-                                            </td>
-                                            {/* Status cell removed */}
-                                            <td className="px-6 py-4 text-sm text-white/60">
-                                                {new Date(tx.createdAt).toLocaleDateString()}
-                                            </td>
-                                            <td className="px-6 py-4 text-xs font-mono text-white/40 max-w-[200px] truncate">
-                                                {tx.type === 'crypto' ? (
-                                                    <a href={`https://explorer.testnet.immutable.com/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
-                                                        {tx.txHash?.slice(0, 10)}...
-                                                    </a>
-                                                ) : (
-                                                    `${tx.bankDetails?.bankName} (***${tx.bankDetails?.accountNumber?.slice(-4)})`
-                                                )}
-                                            </td>
-                                        </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
+                {/* Withdrawal History */}
+                <div className="mt-12 w-full max-w-4xl z-10 relative">
+                    <h3 className="text-lg md:text-xl font-semibold mb-6">Withdrawal History</h3>
+                    <div className="bg-[#1C1C1E] rounded-xl border border-white/10 overflow-hidden">
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left min-w-[600px]">
+                                <thead className="bg-white/5 text-xs uppercase text-white/50">
+                                    <tr>
+                                        <th className="px-6 py-4">Type</th>
+                                        <th className="px-6 py-4">Amount</th>
+                                        {/* Status removed */}
+                                        <th className="px-6 py-4">Date</th>
+                                        <th className="px-6 py-4">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-white/10">
+                                    {historyLoading ? (
+                                        <tr><td colSpan="4" className="px-6 py-8 text-center text-white/40">Loading history...</td></tr>
+                                    ) : withdrawals.length === 0 ? (
+                                        <tr><td colSpan="4" className="px-6 py-8 text-center text-white/40">No withdrawal history found.</td></tr>
+                                    ) : (
+                                        withdrawals.map((tx) => (
+                                            <tr key={tx._id} className="hover:bg-white/5 transition-colors">
+                                                <td className="px-6 py-4">
+                                                    <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${tx.type === 'crypto' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                                                        {tx.type === 'crypto' ? 'Crypto' : 'Bank'}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4 font-mono">
+                                                    {tx.amount} {tx.token || 'USD'}
+                                                </td>
+                                                {/* Status cell removed */}
+                                                <td className="px-6 py-4 text-sm text-white/60">
+                                                    {new Date(tx.createdAt).toLocaleDateString()}
+                                                </td>
+                                                <td className="px-6 py-4 text-xs font-mono text-white/40 max-w-[200px] truncate">
+                                                    {tx.type === 'crypto' ? (
+                                                        <a href={`https://explorer.testnet.immutable.com/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
+                                                            {tx.txHash?.slice(0, 10)}...
+                                                        </a>
+                                                    ) : (
+                                                        `${tx.bankDetails?.bankName} (***${tx.bankDetails?.accountNumber?.slice(-4)})`
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            {showTransak && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={(e) => { if (e.target === e.currentTarget) setShowTransak(false); }}
+                >
+                    <div className="relative w-full max-w-md h-[680px] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                        <button
+                            onClick={() => setShowTransak(false)}
+                            className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition-colors text-lg"
+                        >
+                            ✕
+                        </button>
+                        <iframe
+                            src={transakUrl}
+                            allow="camera;microphone;payment"
+                            className="w-full h-full border-0"
+                            title="Transak Bank Withdrawal"
+                        />
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 
