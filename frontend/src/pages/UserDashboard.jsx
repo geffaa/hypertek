@@ -88,7 +88,7 @@ function CollectionBasicInfo() {
   const handleDragOver = (event) => event.preventDefault();
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-transparent overflow-hidden">
       {loading && <FullScreenLoader size={4} color="white" />}
 
       {/* Background Blurs */}
@@ -103,26 +103,14 @@ function CollectionBasicInfo() {
           filter: "blur(180px)",
         }}
       />
-      <div
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-        style={{
-          top: "540px",
-          left: "650px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-      />
 
       {/* Content */}
       <div className="relative z-50 mb-24 ">
         <div className="flex gap-16 mt-16 mx-8 ">
           {/* Left Side: Image Upload */}
           <div
-            className={`flex items-center justify-center cursor-pointer backdrop-blur-sm bg-white/5 border rounded-md ${
-              errors.image ? "border-red-500" : "border-white/30"
-            }`}
+            className={`flex items-center justify-center cursor-pointer backdrop-blur-sm bg-white/5 border rounded-md ${errors.image ? "border-red-500" : "border-white/30"
+              }`}
             style={{
               width: "456px",
               height: "440px",
@@ -207,9 +195,8 @@ function CollectionBasicInfo() {
                   if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                 }}
                 placeholder="Add Contract Name"
-                className={`w-full h-12 px-3 rounded-md bg-white/10 border text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${
-                  errors.name ? "border-red-500" : "border-gray-600"
-                }`}
+                className={`w-full h-12 px-3 rounded-md bg-white/10 border text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${errors.name ? "border-red-500" : "border-gray-600"
+                  }`}
               />
               {errors.name && (
                 <p className="text-red-500 text-sm mt-1">{errors.name}</p>
@@ -231,9 +218,8 @@ function CollectionBasicInfo() {
                     setErrors((prev) => ({ ...prev, symbol: "" }));
                 }}
                 placeholder="Create Name"
-                className={`w-full h-12 px-3 rounded-md bg-white/10 border text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${
-                  errors.symbol ? "border-red-500" : "border-gray-600"
-                }`}
+                className={`w-full h-12 px-3 rounded-md bg-white/10 border text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${errors.symbol ? "border-red-500" : "border-gray-600"
+                  }`}
               />
               {errors.symbol && (
                 <p className="text-red-500 text-sm mt-1">{errors.symbol}</p>
@@ -244,9 +230,8 @@ function CollectionBasicInfo() {
             <div className="flex flex-col gap-2 w-[451px] h-[84px] gap-[14px]">
               <label className="text-white text-base font-normal">Chain</label>
               <div
-                className={`flex items-center gap-2 px-2 h-12 border rounded-md bg-white/10 focus-within:bg-white/15 transition ${
-                  errors.chain ? "border-red-500" : "border-gray-600"
-                }`}
+                className={`flex items-center gap-2 px-2 h-12 border rounded-md bg-white/10 focus-within:bg-white/15 transition ${errors.chain ? "border-red-500" : "border-gray-600"
+                  }`}
               >
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center"

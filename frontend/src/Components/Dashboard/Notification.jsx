@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 
 const NotificationDropdown = ({ isOpen, onClose }) => {
   const dropdownRef = useRef(null);
-  
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -11,16 +11,16 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
         onClose();
       }
     };
-    
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
-  
+
   // Sample notification data
   const notifications = [
     {
@@ -52,14 +52,14 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
       read: true
     }
   ];
-  
+
   if (!isOpen) return null;
-  
+
   return (
-    <div 
+    <div
       ref={dropdownRef}
-      className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50 overflow-hidden"
-      style={{ top: '100%' }}
+      className="absolute right-0 mt-2 w-[280px] xs:w-80 bg-white rounded-lg shadow-lg z-50 overflow-hidden"
+      style={{ top: '100%', maxWidth: 'calc(100vw - 2rem)' }}
     >
       <div className="p-4 border-b border-gray-200">
         <div className="flex justify-between items-center">
@@ -69,12 +69,12 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
           </button>
         </div>
       </div>
-      
+
       <div className="max-h-96 overflow-y-auto">
         {notifications.length > 0 ? (
           notifications.map(notification => (
-            <div 
-              key={notification.id} 
+            <div
+              key={notification.id}
               className={`p-4 border-b border-gray-100 hover:bg-gray-50 ${notification.read ? 'bg-white' : 'bg-blue-50'}`}
             >
               <div className="flex justify-between items-start">
@@ -90,7 +90,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
           </div>
         )}
       </div>
-      
+
       <div className="p-2 bg-gray-50 text-center">
         <button className="text-blue-500 text-sm hover:text-blue-600">
           View all notifications

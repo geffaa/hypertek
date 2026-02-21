@@ -1,4 +1,3 @@
-
 /* In your global CSS (e.g., globals.css) */
 @import url('https://fonts.googleapis.com/css2?family=Goldman:wght@700&display=swap');
 
@@ -14,7 +13,8 @@
 /* how its work css  */
 
 .custom-border {
-  border-left: 3px solid #23478e; /* Solid left border */
+  border-left: 3px solid #23478e;
+  /* Solid left border */
   position: relative;
 }
 
@@ -23,9 +23,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 70%; 
+  width: 70%;
   height: 3px;
-   background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
+  background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
 }
 
 .custom-border::after {
@@ -33,15 +33,15 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 20%; 
+  width: 20%;
   height: 3px;
-   background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
+  background: linear-gradient(119.66deg, #002AA8 41.9%, #3b435b 91.51%);
 }
 
 
 /* for the tab logo  */
-#tab-logo{
-   color: "black";
+#tab-logo {
+  color: "black";
 }
 
 
@@ -50,6 +50,7 @@
 /* Desktop will NOT change */
 /* ========================= */
 @media (max-width: 768px) {
+
   html,
   body {
     width: 100%;
@@ -58,7 +59,8 @@
   }
 
   body {
-    background-color: #000; /* match your app background */
+    background-color: #000;
+    /* match your app background */
   }
 
   section,
@@ -75,5 +77,18 @@
   .custom-border::before,
   .custom-border::after {
     max-width: 100%;
+  }
+
+  /* RainbowKit v2 Mobile Fixes */
+  div[data-rk] [role="dialog"] {
+    max-width: 92vw !important;
+    width: 92vw !important;
+    margin: 0 auto !important;
+    padding: 10px !important;
+  }
+
+  div[data-rk] [role="dialog"]>div {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }

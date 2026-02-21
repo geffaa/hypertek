@@ -113,6 +113,7 @@ function AppWrapper() {
     "/dashboard/edit-nfa",
     "/dashboard/add-nfts",
     "/dashboard/add-user-collection",
+    "/dashboard/withdraw",
   ];
 
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
