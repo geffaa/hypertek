@@ -129,7 +129,7 @@ function Support() {
     });
 
   return (
-    <div className="flex bg-black min-h-screen">
+    <div className="flex w-full">
       <div className="flex flex-col w-full max-w-[1100px] h-[calc(100vh-100px)] md:h-[480px] px-2 md:px-4">
 
         {/* Header */}

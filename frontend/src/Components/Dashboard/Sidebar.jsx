@@ -171,7 +171,10 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 : "hover:bg-white/5"
                 }`}
               style={{ width: "100%", maxWidth: "222px", height: "42px", opacity: 1 }}
-              onClick={() => toggleDropdown("create", "Create Collection")}
+              onClick={() => {
+                toggleDropdown("create", "Create Collection");
+                navigate("/dashboard");
+              }}
             >
               <div className="flex items-center">
                 <div className="relative">

@@ -15,6 +15,14 @@ const DashboardLayout = () => {
   return (
     <div className="flex h-screen text-white relative bg-[#100F0F] max-w-[1400px] mx-auto overflow-hidden">
 
+      {/* Global Background Effects */}
+      <div
+        className="fixed top-[120px] left-[10%] w-[300px] h-[300px] bg-[#002AA8] rounded-full blur-[150px] opacity-40 pointer-events-none z-0"
+      ></div>
+      <div
+        className="fixed bottom-[10%] right-[10%] w-[300px] h-[300px] bg-[#002AA8] rounded-full blur-[150px] opacity-40 pointer-events-none z-0"
+      ></div>
+
       {/* Sidebar Overlay for Mobile */}
       {isSidebarOpen && (
         <div
@@ -31,7 +39,7 @@ const DashboardLayout = () => {
       />
 
       {/* Main area */}
-      <div className="flex flex-col flex-1 h-screen relative">
+      <div className="flex flex-col flex-1 h-screen relative z-10">
 
         {/* Header: fixed on top with transparent bg */}
         <div className="top-0 left-0 right-0 z-30">
@@ -39,7 +47,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* Scrollable main content */}
-        <main className="flex-1 mt-[1px] overflow-y-auto p-4 md:p-6 z-10 custom-scrollbar">
+        <main className="flex-1 mt-[1px] overflow-y-auto p-4 md:p-6 custom-scrollbar">
           <Outlet />
         </main>
       </div>

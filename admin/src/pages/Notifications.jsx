@@ -67,9 +67,9 @@ export default function NotificationsPage() {
                 {/* Avatar */}
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src={notification.avatar} 
-                      alt="User avatar" 
+                    <img
+                      src={notification.avatar}
+                      alt="User avatar"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -109,7 +109,7 @@ export default function NotificationsPage() {
         </div>
 
         {/* Filter Dropdown */}
-      
+
 
         {/* Mark All as Read Button */}
         <div className="mt-8 flex justify-between items-center">

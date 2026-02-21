@@ -162,9 +162,8 @@ function CollectionDetails() {
                   Creator Fee
                 </label>
                 <div
-                  className={`flex items-center h-12 px-3 border rounded-md bg-white/10 ${
-                    errors.royaltyPercent ? "border-red-500" : "border-gray-600"
-                  } focus-within:border-blue-500 hover:border-blue-500`}
+                  className={`flex items-center h-12 px-3 border rounded-md bg-white/10 ${errors.royaltyPercent ? "border-red-500" : "border-gray-600"
+                    } focus-within:border-blue-500 hover:border-blue-500`}
                 >
                   <input
                     type="number"
@@ -203,9 +202,8 @@ function CollectionDetails() {
                   if (errors.collectionType)
                     setErrors((prev) => ({ ...prev, collectionType: "" }));
                 }}
-                className={`w-full h-12 px-3 rounded-md text-white bg-transparent border ${
-                  errors.collectionType ? "border-red-500" : "border-gray-600"
-                } focus:outline-none focus:border-blue-500 focus:bg-transparent transition`}
+                className={`w-full h-12 px-3 rounded-md text-white bg-transparent border ${errors.collectionType ? "border-red-500" : "border-gray-600"
+                  } focus:outline-none focus:border-blue-500 focus:bg-transparent transition`}
               >
                 <option value="" className="bg-gray-700 text-white">
                   Select Type
@@ -246,9 +244,8 @@ function CollectionDetails() {
                 type="text"
                 maxLength={42}
                 placeholder="Add wallet address"
-                className={`w-full h-12 px-3 rounded-md border bg-white/10 text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${
-                  errors.recipientWallet ? "border-red-500" : "border-gray-600"
-                }`}
+                className={`w-full h-12 px-3 rounded-md border bg-white/10 text-white placeholder-white/60 focus:outline-none focus:bg-white/15 transition ${errors.recipientWallet ? "border-red-500" : "border-gray-600"
+                  }`}
               />
 
               {errors.recipientWallet && (

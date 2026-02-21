@@ -188,44 +188,7 @@ function EditProfile() {
     "hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200";
 
   return (
-    <div className="min-h-screen bg-transparent px-4 relative z-10 overflow-x-hidden">
-      {/* Bg EFFECT */}
-      <div
-        style={{
-          top: `130px`,
-          left: `130px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `430px`,
-          left: `730px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `930px`,
-          left: `130px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
+    <div className="flex flex-col w-full relative z-10">
       {/* Hero Section */}
       <div className="mb-16 lg:mt-[1px]">
         <div className="w-full">

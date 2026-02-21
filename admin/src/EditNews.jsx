@@ -14,79 +14,79 @@ import FullScreenLoader from "./components/common/Spinner";
 
 function EditNews() {
   const navigate = useNavigate()
- const [collections, setCollections] = useState([]);
- const [searchQuery, setSearchQuery] = useState("");
+  const [collections, setCollections] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
- // Add this with your other useState declarations
-const [loading, setLoading] = useState(true);
-useEffect(() => {
-  const fetchNews = async () => {
-    try {
-       setLoading(true); // Start loading
-      const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
+  // Add this with your other useState declarations
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true); // Start loading
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/news/admin`);
 
-      console.log("Your news response:", res.data.data);
+        console.log("Your news response:", res.data.data);
 
-      if (res.data) {
-     const newsData = res.data.data.map((item) => {
-  const imageName = item.image ? item.image.split("/").pop() : null;
+        if (res.data) {
+          const newsData = res.data.data.map((item) => {
+            const imageName = item.image ? item.image.split("/").pop() : null;
 
-  const imageUrl = imageName
-    ? `${Image_Base_Url}/uploads/news/${imageName}`
-    : null;
+            const imageUrl = imageName
+              ? `${Image_Base_Url}/uploads/news/${imageName}`
+              : null;
 
-  return {
-    id: item._id,
-    name: item.heading,
-    image: imageUrl,
-    supply: new Date(item.createdAt).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }),
-    status: item.status === "active",
-    description: item.description,
-  };
-});
+            return {
+              id: item._id,
+              name: item.heading,
+              image: imageUrl,
+              supply: new Date(item.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              }),
+              status: item.status === "active",
+              description: item.description,
+            };
+          });
 
 
 
-        console.log("Processed newsData:", newsData); // Full URLs with file names
-        setCollections(newsData);
+          console.log("Processed newsData:", newsData); // Full URLs with file names
+          setCollections(newsData);
+        }
+      } catch (error) {
+        console.log("Error fetching news:", error);
       }
-    } catch (error) {
-      console.log("Error fetching news:", error);
+      finally {
+        setLoading(false); // Stop loading always
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+
+
+
+  const handleEditNews = (news) => {
+    const adminDataString = localStorage.getItem("admin_data");
+    if (!adminDataString) {
+      toast.error("Admin ID not found. Please try again.");
+      return;
     }
-    finally {
-      setLoading(false); // Stop loading always
+
+    const adminData = JSON.parse(adminDataString);
+    const adminId = adminData._id;
+
+    if (!adminId) {
+      toast.error("Admin ID not found. Please try again.");
+      return;
     }
+    console.log("your news data are :", news);
+
+    // Navigate to UpdateNews page with news data
+    navigate(`/${adminId}/edit-news-item`, { state: { newsItem: news } });
   };
-
-  fetchNews();
-}, []);
-
-
-
-
-const handleEditNews = (news) => {
-  const adminDataString = localStorage.getItem("admin_data");
-  if (!adminDataString) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
-
-  const adminData = JSON.parse(adminDataString);
-  const adminId = adminData._id;
-
-  if (!adminId) {
-    toast.error("Admin ID not found. Please try again.");
-    return;
-  }
-  console.log("your news data are :",news);
-
-  // Navigate to UpdateNews page with news data
-  navigate(`/${adminId}/edit-news-item`, { state: { newsItem: news } });
-};
   // const [collections, setCollections] = useState([]);
   // useEffect(() => {
   //   const fetchNews = async () => {
@@ -136,8 +136,8 @@ const handleEditNews = (news) => {
 
 
   const filteredCollections = collections.filter((col) =>
-  col.name.toLowerCase().includes(searchQuery.toLowerCase())
-);
+    col.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
 
   const toggleStatus = async (id, currentStatus) => {
@@ -246,8 +246,8 @@ const handleEditNews = (news) => {
 
 
   if (loading) {
-  return <FullScreenLoader />;
-}
+    return <FullScreenLoader />;
+  }
 
   return (
     <div className="min-h-screen w-full bg-black text-white p-8 h-[850px]">
@@ -281,19 +281,19 @@ const handleEditNews = (news) => {
       ></div>
 
 
-<h1 className="text-white font-semibold text-[25px] mb-8 w-[426px] h-[30px]">
-  Edit News
-</h1>
+      <h1 className="text-white font-semibold text-[25px] mb-8 w-[426px] h-[30px]">
+        Edit News
+      </h1>
       <div className="flex items-center mb-6 w-[400px] gap-3 px-3 py-2 rounded-md bg-white/10">
-  <img src={SearchIcon} alt="search" className="w-4 h-4" />
-  <input
-    type="text"
-    placeholder="Search news..."
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-    className="bg-transparent outline-none border-none text-white w-full"
-  />
-</div>
+        <img src={SearchIcon} alt="search" className="w-4 h-4" />
+        <input
+          type="text"
+          placeholder="Search news..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="bg-transparent outline-none border-none text-white w-full"
+        />
+      </div>
 
 
       <div className="">
@@ -323,7 +323,7 @@ const handleEditNews = (news) => {
             </thead>
 
             <tbody className="divide-y divide-white/10">
-             {filteredCollections.map((col) => (
+              {filteredCollections.map((col) => (
                 <tr
                   key={col.id}
                   className="h-[70px]  transition-all duration-200 backdrop-blur-sm"
@@ -353,9 +353,9 @@ const handleEditNews = (news) => {
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
                       <button onClick={() => handleEditNews(col)} className="p-2  cursor-pointer transition-colors duration-200">
-                       
-                          <img src={EditImage} alt="edit" className="w-4 h-4" />
-                        
+
+                        <img src={EditImage} alt="edit" className="w-4 h-4" />
+
                       </button>
                       <button
                         className="p-2  cursor-pointer  transition-colors duration-200"
