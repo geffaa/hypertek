@@ -294,16 +294,16 @@ const Withdraw = () => {
     const displayNativeBalance = ethBalance;
 
     return (
-        <div className="p-8 text-white min-h-full">
-            <h1 className="text-3xl font-bold mb-2">Withdraw Funds</h1>
-            <p className="text-white/60 mb-8">Manage your earnings and withdraw to your preferred destination.</p>
+        <div className="p-4 md:p-8 text-white min-h-full overflow-x-hidden">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Withdraw Funds</h1>
+            <p className="text-white/60 text-sm md:text-base mb-8">Manage your earnings and withdraw to your preferred destination.</p>
 
-            <div className="flex gap-4 mb-8 flex-wrap">
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 {/* USDC/USD Balance Card */}
-                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 inline-block min-w-[240px]">
+                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
                     <p className="text-white/60 text-sm mb-1">USDC Balance</p>
                     <div className="flex items-end gap-2">
-                        <h2 className="text-3xl font-bold">
+                        <h2 className="text-2xl md:text-3xl font-bold">
                             {usdcLoading ? "..." : `$${Number(usdcBalance).toFixed(2)}`}
                         </h2>
                         <span className="text-blue-400 mb-1.5 font-medium">USDC</span>
@@ -311,11 +311,11 @@ const Withdraw = () => {
                 </div>
 
                 {/* ETH/Native Balance Card - Optional Display */}
-                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 inline-block min-w-[240px]">
-                    <p className="text-white/60 text-sm mb-1">Immutable Native Balance (IMX/ETH)</p>
+                <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
+                    <p className="text-white/60 text-sm mb-1">Immutable Native Balance</p>
                     <div className="flex flex-col">
                         <div className="flex items-end gap-2">
-                            <h2 className="text-3xl font-bold">
+                            <h2 className="text-2xl md:text-3xl font-bold">
                                 {ethLoading ? "..." : `${Number(displayNativeBalance).toFixed(4)}`}
                             </h2>
                             <span className="text-purple-400 mb-1.5 font-medium">ETH</span>
@@ -332,14 +332,14 @@ const Withdraw = () => {
 
 
             {/* Toggle Switch */}
-            <div className="flex gap-4 mb-8 border-b border-white/10 pb-1">
+            <div className="flex flex-wrap gap-4 mb-8 border-b border-white/10 pb-1">
                 <button
                     onClick={() => setWithdrawType('crypto')}
                     className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'crypto' ? 'text-blue-500' : 'text-white/60 hover:text-white'}`}
                 >
                     <div className="flex items-center gap-2">
                         <FiDollarSign className="text-lg" />
-                        Crypto Withdraw
+                        Crypto
                     </div>
                     {withdrawType === 'crypto' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
                 </button>
@@ -359,7 +359,7 @@ const Withdraw = () => {
                 >
                     <div className="flex items-center gap-2">
                         <FiCreditCard className="text-lg" />
-                        Bank Withdraw
+                        Bank
                     </div>
                     {withdrawType === 'bank' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
                 </button>
@@ -367,13 +367,13 @@ const Withdraw = () => {
 
             <div className="max-w-2xl">
                 {withdrawType === 'crypto' && (
-                    <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
-                        <h3 className="text-xl font-semibold mb-6">Withdraw to Crypto Wallet</h3>
+                    <div className="bg-[#1C1C1E] p-4 md:p-8 rounded-xl border border-white/10">
+                        <h3 className="text-lg md:text-xl font-semibold mb-6">Withdraw to Crypto Wallet</h3>
 
                         <div className="space-y-6">
                             <div>
                                 <label className="block text-sm text-white/70 mb-2">Select Token</label>
-                                <div className="flex gap-4">
+                                <div className="flex gap-3 md:gap-4">
                                     <button
                                         onClick={() => setSelectedToken('USDC')}
                                         className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${selectedToken === 'USDC' ? 'bg-blue-600/20 border-blue-500 text-white' : 'bg-[#100F0F] border-white/10 text-white/60 hover:border-white/30'}`}
@@ -412,7 +412,7 @@ const Withdraw = () => {
                                     value={recipient}
                                     onChange={(e) => setRecipient(e.target.value)}
                                     placeholder="0x..."
-                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono"
+                                    className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono text-sm"
                                 />
                                 <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Immutable Testnet</p>
                             </div>
@@ -420,7 +420,7 @@ const Withdraw = () => {
                             <button
                                 onClick={handleCryptoWithdraw}
                                 disabled={processing || (selectedToken === 'USDC' ? usdcLoading : ethLoading)}
-                                className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
+                                className={`w-full py-4 rounded-lg font-bold text-base md:text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
                                     }`}
                             >
                                 {processing ? "Processing Transaction..." : `Withdraw ${selectedToken}`}
@@ -512,11 +512,11 @@ const Withdraw = () => {
             </div>
 
             {/* Withdrawal History */}
-            <div className="mt-12 max-w-4xl">
-                <h3 className="text-xl font-semibold mb-6">Withdrawal History</h3>
+            <div className="mt-12 w-full max-w-4xl z-10 relative">
+                <h3 className="text-lg md:text-xl font-semibold mb-6">Withdrawal History</h3>
                 <div className="bg-[#1C1C1E] rounded-xl border border-white/10 overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left">
+                        <table className="w-full text-left min-w-[600px]">
                             <thead className="bg-white/5 text-xs uppercase text-white/50">
                                 <tr>
                                     <th className="px-6 py-4">Type</th>

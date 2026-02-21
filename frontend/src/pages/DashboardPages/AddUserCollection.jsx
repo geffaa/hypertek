@@ -37,40 +37,34 @@ function AddUserCollection() {
   };
 
   return (
-    <div className="p-8 bg-black h-[850px] pb-12 flex flex-col gap-6">
+    <div className="p-4 md:p-8 bg-black min-h-screen pb-12 flex flex-col gap-6 overflow-x-hidden">
       <div
         style={{
           top: `120px`,
-          left: `320px`,
-          width: "300px",
-          height: "300px",
+          left: `10%`,
+          width: "200px",
+          height: "200px",
           background: "#002AA8",
-          filter: "blur(230px)",
+          filter: "blur(150px)",
         }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
+        className="absolute rounded-full z-0"
       ></div>
 
       <div
         style={{
-          top: `520px`,
-          left: `950px`,
-          width: "300px",
-          height: "300px",
+          bottom: `10%`,
+          right: `10%`,
+          width: "200px",
+          height: "200px",
           background: "#002AA8",
-          filter: "blur(230px)",
+          filter: "blur(150px)",
         }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
+        className="absolute rounded-full z-0"
       ></div>
 
       {/* Header */}
       <h1
-        className="font-inter px-4 font-semibold text-[25px] text-white"
+        className="font-inter px-2 md:px-4 font-semibold text-[22px] md:text-[25px] text-white z-10"
         style={{
           lineHeight: "30px",
           letterSpacing: "0%",
@@ -79,17 +73,15 @@ function AddUserCollection() {
         Add Your Collection
       </h1>
 
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
         <div>
           {/* Name Field */}
           <div
-            className="rounded-md p-4 flex flex-col gap-2 relative z-50"
-            style={{ width: "434px" }}
+            className="rounded-md p-2 md:p-4 flex flex-col gap-2 relative z-50 w-full max-w-[434px]"
           >
             <label
               htmlFor="name"
               className="font-inter font-normal text-[18px] text-white"
-              style={{ lineHeight: "22px", letterSpacing: "0%" }}
             >
               Name
             </label>
@@ -97,13 +89,7 @@ function AddUserCollection() {
               type="text"
               id="name"
               placeholder="Add Name"
-              className="text-white placeholder-[#FFFFFFAB] bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors  border-gray-600 bg-transparent rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none"
-              style={{
-                width: "400px",
-                height: "40px",
-                borderRadius: "4px",
-                letterSpacing: "0%",
-              }}
+              className="text-white placeholder-[#FFFFFFAB] bg-white/10 border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors rounded px-4 h-10 w-full focus:outline-none"
             />
           </div>
 
@@ -128,7 +114,7 @@ function AddUserCollection() {
     />
   </div> */}
 
-          <div className="w-[405px] h-[84px] ml-3 flex flex-col gap-[14px] mt-8 mx-2 z-10">
+          <div className="w-full max-w-[405px] h-auto flex flex-col gap-[14px] mt-4 md:mt-8 mx-2 z-10">
             <label
               htmlFor="symbol"
               style={{
@@ -152,7 +138,7 @@ function AddUserCollection() {
             />
           </div>
 
-          <div className="w-[405px] ml-3 h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+          <div className="w-full max-w-[405px] h-auto flex flex-col gap-[14px] mt-4 md:mt-8 mx-2">
             <label
               htmlFor="chain"
               style={{
@@ -192,13 +178,13 @@ function AddUserCollection() {
             </div>
           </div>
 
-          <div className="flex m-3 justify-between  mt-5">
+          <div className="flex flex-col sm:flex-row m-2 md:m-3 justify-between gap-4 mt-5">
             {/* Creator Fee */}
-            <div className="flex flex-col gap-2 w-[170px]">
-              <h1 className="font-inter font-normal text-[18px] m-0">
+            <div className="flex flex-col gap-2 w-full sm:w-[170px]">
+              <h1 className="font-inter font-normal text-[18px] m-0 text-white">
                 Creator Fee
               </h1>
-              <div className="flex z-10 bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center border border-[#555] rounded-md h-[48px] px-3">
+              <div className="flex z-10 bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center rounded-md h-[48px] px-3">
                 <input
                   type="text"
                   defaultValue="0"
@@ -212,9 +198,9 @@ function AddUserCollection() {
             </div>
 
             {/* Supply */}
-            <div className="flex flex-col gap-2 w-[170px]">
-              <h1 className="font-inter font-normal text-[18px] m-0">Supply</h1>
-              <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center border border-[#555] rounded-md h-[48px] px-3">
+            <div className="flex flex-col gap-2 w-full sm:w-[170px]">
+              <h1 className="font-inter font-normal text-[18px] m-0 text-white">Supply</h1>
+              <div className="flex bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors items-center rounded-md h-[48px] px-3">
                 <input
                   type="text"
                   defaultValue="0"
@@ -226,13 +212,11 @@ function AddUserCollection() {
 
           {/* Price Field */}
           <div
-            className="rounded-md p-4 flex flex-col gap-2"
-            style={{ width: "434px" }}
+            className="rounded-md p-2 md:p-4 flex flex-col gap-2 w-full max-w-[434px]"
           >
             <label
               htmlFor="price"
               className="font-inter font-normal text-[18px] text-white"
-              style={{ lineHeight: "22px", letterSpacing: "0%" }}
             >
               Price
             </label>
@@ -240,26 +224,18 @@ function AddUserCollection() {
               type="text"
               id="price"
               placeholder="Add Price"
-              className="text-white  bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
-              style={{
-                width: "400px",
-                height: "40px",
-                borderRadius: "4px",
-                letterSpacing: "0%",
-              }}
+              className="text-white bg-white/10 border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors placeholder-[#FFFFFFAB] rounded px-4 h-10 w-full focus:outline-none bg-transparent"
             />
           </div>
         </div>
 
         {/* right side - image upload */}
         <div
-          className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 rounded-md"
+          className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 rounded-md w-full max-w-[324px] h-[312px] mx-auto lg:mx-0"
           style={{
-            width: "324px",
-            height: "312px",
             borderStyle: "dashed",
             position: "relative",
-            cursor: "pointer", // indicate clickable
+            cursor: "pointer",
           }}
           onDrop={handleDrop}
           onDragOver={handleDragOver}
@@ -291,61 +267,29 @@ function AddUserCollection() {
         </div>
       </div>
 
-      <div className="w-full flex justify-between px-12 items-center pt-24">
+      <div className="w-full flex flex-col sm:flex-row justify-between px-4 md:px-12 items-center gap-4 pt-12 md:pt-24 z-10">
         <button
           onClick={handleNavigate}
-          className="flex items-center justify-center rounded-[6px] px-4 py-2"
-          style={{
-            width: "190px",
-            height: "42px",
-            gap: "10px",
-            borderRadius: "6px",
-            padding: "10px",
-            background: "#002AA8",
-            opacity: 1,
-            transform: "rotate(0deg)",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className="flex items-center justify-center rounded-[6px] px-4 py-2 w-full sm:w-[190px] h-[42px] bg-[#002AA8] text-white border-none cursor-pointer"
         >
           <span
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: 400,
-              fontStyle: "normal",
               fontSize: "18px",
-              lineHeight: "22px",
-              letterSpacing: "0%",
-              color: "#FFFFFF",
             }}
           >
             Back
           </span>
         </button>
         <button
-          className="flex items-center justify-center rounded-[6px] px-4 py-2"
-          style={{
-            width: "190px",
-            height: "42px",
-            gap: "10px",
-            borderRadius: "6px",
-            padding: "10px",
-            background: "#002AA8",
-            opacity: 1,
-            transform: "rotate(0deg)",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className="flex items-center justify-center rounded-[6px] px-4 py-2 w-full sm:w-[190px] h-[42px] bg-[#002AA8] text-white border-none cursor-pointer"
         >
           <span
             style={{
               fontFamily: "Inter, sans-serif",
               fontWeight: 400,
-              fontStyle: "normal",
               fontSize: "18px",
-              lineHeight: "22px",
-              letterSpacing: "0%",
-              color: "#FFFFFF",
             }}
           >
             Add to Collection

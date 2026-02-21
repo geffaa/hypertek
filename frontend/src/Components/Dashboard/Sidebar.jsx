@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiChevronDown, FiChevronUp, FiDollarSign } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiDollarSign, FiX } from "react-icons/fi";
 
 import Logo from "../../assets/logo1.png";
 import DashboardImage from "../../assets/images/Sidebar/dashboard.png";
@@ -14,7 +14,7 @@ import SaleImage from "../../assets/images/Sidebar/sale.png";
 import SupportImage from "../../assets/images/Sidebar/support.png";
 import LogoutImage from "../../assets/images/Sidebar/logout.png";
 
-const Sidebar = ({ onLogoutClick }) => {
+const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
   const navigate = useNavigate()
   const location = useLocation();
   const [openCreate, setOpenCreate] = useState(false);
@@ -52,6 +52,11 @@ const Sidebar = ({ onLogoutClick }) => {
       setSelectedItem("support");
     } else if (path.includes("/dashboard/withdraw")) {
       setSelectedItem("withdraw");
+    }
+
+    // Close sidebar on mobile when navigating
+    if (window.innerWidth < 1024) {
+      onClose?.();
     }
   }, [location.pathname]);
 
@@ -101,17 +106,30 @@ const Sidebar = ({ onLogoutClick }) => {
   };
 
   return (
-    <div className="sidebar text-white p-4 bg-[#100F0F] z-50 h-screen w-[298px] overflow-y-auto" ref={sidebarRef}>
+    <div
+      className={`sidebar text-white p-4 bg-[#100F0F] z-50 h-screen fixed lg:relative transition-all duration-300 ease-in-out overflow-y-auto border-r border-white/5
+        ${isOpen ? 'left-0' : '-left-full lg:left-0'} 
+        w-[280px] sm:w-[298px]`}
+      ref={sidebarRef}
+    >
       <div className="flex flex-col justify-between h-full">
         <div className="flex-1">
-          {/* Logo - Centered */}
-          <div className="flex justify-center mt-12 mb-12">
-            <div className="hidden lg:flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
-              <img src={Logo} alt="Logo" className="w-[35px] h-[35px]" />
-              <span className="font-inter font-bold text-[18px] leading-[22px]">
+          {/* Logo & Close Button - Header */}
+          <div className="flex items-center justify-between lg:justify-center mt-4 lg:mt-12 mb-8 lg:mb-12">
+            <div className="flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
+              <img src={Logo} alt="Logo" className="w-[30px] h-[30px] lg:w-[35px] lg:h-[35px]" />
+              <span className="font-inter font-bold text-[16px] lg:text-[18px] leading-[22px]">
                 HYPER TEK
               </span>
             </div>
+
+            {/* Close Button - Mobile Only */}
+            <button
+              className="lg:hidden p-2 text-white/60 hover:text-white transition-colors"
+              onClick={onClose}
+            >
+              <FiX size={24} />
+            </button>
           </div>
 
           {/* Menu */}
@@ -147,12 +165,12 @@ const Sidebar = ({ onLogoutClick }) => {
 
             {/* Create Collection 2 - Default blue only if no other item is selected */}
             <li
-              className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "Create Collection" ||
-                  (selectedItem === "" && isRouteActive("/dashboard"))
-                  ? "bg-[#002AA8]"
-                  : ""
+              className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${selectedItem === "Create Collection" ||
+                (selectedItem === "" && isRouteActive("/dashboard"))
+                ? "bg-[#002AA8]"
+                : "hover:bg-white/5"
                 }`}
-              style={{ width: "222px", height: "42px", opacity: 1 }}
+              style={{ width: "100%", maxWidth: "222px", height: "42px", opacity: 1 }}
               onClick={() => toggleDropdown("create", "Create Collection")}
             >
               <div className="flex items-center">
@@ -209,8 +227,8 @@ const Sidebar = ({ onLogoutClick }) => {
                   <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
                   <li
                     className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/dashboard/nfa-details")
-                        ? "text-blue-400 font-semibold"
-                        : "text-white"
+                      ? "text-blue-400 font-semibold"
+                      : "text-white"
                       }`}
                   >
                     <Link to="/dashboard/nfa-details">NFA's Details</Link>
@@ -252,13 +270,13 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link> */}
 
             {/* Edit User */}
-            <Link to="/dashboard/edit-profile ">
+            <Link to="/dashboard/edit-profile " className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-3  cursor-pointer ${selectedItem === "users"
-                    ? "bg-[#002AA8]"
-                    : ""
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "users"
+                  ? "bg-[#002AA8]"
+                  : "hover:bg-white/5"
                   }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
+                style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("users")}
               >
                 <div className="flex items-center">
@@ -384,13 +402,13 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link> */}
 
             {/* Transaction */}
-            <Link to="/dashboard/transactions">
+            <Link to="/dashboard/transactions" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-3 cursor-pointer ${selectedItem === "Transaction"
-                    ? "bg-[#002AA8]"
-                    : ""
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "Transaction"
+                  ? "bg-[#002AA8]"
+                  : "hover:bg-white/5"
                   }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
+                style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("Transaction")}
               >
                 <div className="flex items-center">
@@ -415,13 +433,13 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link>
 
             {/* Support */}
-            <Link to="/dashboard/support">
+            <Link to="/dashboard/support" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "support"
-                    ? "bg-[#002AA8]"
-                    : ""
+                className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${selectedItem === "support"
+                  ? "bg-[#002AA8]"
+                  : "hover:bg-white/5"
                   }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
+                style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("support")}
               >
                 <div className="flex items-center">
@@ -446,13 +464,13 @@ const Sidebar = ({ onLogoutClick }) => {
             </Link>
 
             {/* Withdraw */}
-            <Link to="/dashboard/withdraw">
+            <Link to="/dashboard/withdraw" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${selectedItem === "withdraw"
-                    ? "bg-[#002AA8]"
-                    : ""
+                className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${selectedItem === "withdraw"
+                  ? "bg-[#002AA8]"
+                  : "hover:bg-white/5"
                   }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
+                style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("withdraw")}
               >
                 <div className="flex items-center">

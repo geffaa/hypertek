@@ -30,9 +30,9 @@ const CustomButton = ({ text }) => {
         className="
     flex items-center justify-center 
     text-white font-inter font-medium 
-    text-[16px] leading-[1] tracking-[0] text-center capitalize
-    md:w-[160px] w-[120px]
-    py-[6px] md:py-[8px]        /* vertical padding added */
+    text-[14px] md:text-[16px] leading-[1.2] tracking-[0] text-center capitalize
+    md:w-[160px] w-[140px]
+    py-[8px] md:py-[8px]        /* vertical padding added */
     transition-all duration-300 ease-in-out
     group-hover:bg-[linear-gradient(180deg,_#0034D6_0%,_#001B70_100%)]
   "

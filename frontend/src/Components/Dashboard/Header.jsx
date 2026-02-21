@@ -1,5 +1,5 @@
 // components/common/header.jsx
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiMenu } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import NotificationIcon from "../../assets/notification.png";
 
-const Header = () => {
+const Header = ({ onMenuClick }) => {
   const navigate = useNavigate();
 
   // States
@@ -67,40 +67,47 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4 flex justify-end items-end z-50">
-      <div className="flex items-center justify-end gap-[20px] mr-16">
+    <header className="p-4 flex justify-between lg:justify-end items-center z-50">
+      <div
+        className="lg:hidden p-2 text-white bg-white/10 rounded-lg cursor-pointer hover:bg-white/20 transition-colors"
+        onClick={onMenuClick}
+      >
+        <FiMenu size={24} />
+      </div>
+
+      <div className="flex items-center justify-end gap-[12px] md:gap-[20px] lg:mr-16">
 
         {/* 🔍 Search Box */}
         <div
           className={`
             flex items-center gap-2 px-3 py-2 rounded-lg
             transition-all duration-300
-            ${isSearchFocused ? "bg-white shadow-lg" : "bg-white/90"}
+            ${isSearchFocused ? "bg-white shadow-lg w-[160px] md:w-[220px]" : "bg-white/90 w-[36px] md:w-[220px]"}
           `}
-          style={{ width: "220px", height: "32px" }}
+          style={{ height: "32px" }}
         >
-          <FiSearch className="text-gray-500 text-sm" />
+          <FiSearch className="text-gray-500 text-sm flex-shrink-0" />
           <input
             type="text"
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="bg-transparent w-full text-sm text-gray-800 placeholder-gray-500 outline-none"
+            className={`bg-transparent w-full text-sm text-gray-800 placeholder-gray-500 outline-none ${!isSearchFocused && 'hidden md:block'}`}
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
           />
         </div>
 
         {/* 🔔 Notification */}
-        <div className="bg-white flex items-center justify-center rounded-full cursor-pointer w-[32px] h-[32px]">
+        <div className="bg-white flex items-center justify-center rounded-full cursor-pointer w-[32px] h-[32px] flex-shrink-0">
           <img src={NotificationIcon} alt="Notifications" className="w-[13px]" />
         </div>
 
         {/* 👤 Animated Profile Picture */}
         <div
           className={`
-            relative w-[44px] h-[44px] rounded-3xl cursor-pointer
+            relative w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl cursor-pointer
             p-0.5 transition-all duration-700 ease-out
             ${isProfileHovered ? "scale-110 rotate-3" : "shadow-lg"}
           `}
@@ -108,30 +115,27 @@ const Header = () => {
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
         >
-          <div className="w-full h-full overflow-hidden flex items-center justify-center">
+          <div className="w-full h-full overflow-hidden flex items-center justify-center rounded-full md:rounded-3xl">
             {userData?.Avatar && !imageError ? (
               <img
                 src={`${BACKEND_BASE_URL}${userData.Avatar}`}
                 alt="Profile"
-                className={`w-full h-full object-cover rounded-3xl transition-all duration-700 ${
-                  isProfileHovered ? "scale-110" : ""
-                }`}
+                className={`w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? "scale-110" : ""
+                  }`}
                 onError={handleImageError}
               />
             ) : (
               <FaUserCircle
-                className={`w-8 h-8 text-gray-400 transition-all duration-700 ${
-                  isProfileHovered ? "scale-110 text-blue-500" : ""
-                }`}
+                className={`w-8 h-8 text-gray-400 transition-all duration-700 ${isProfileHovered ? "scale-110 text-blue-500" : ""
+                  }`}
               />
             )}
           </div>
 
           <div
-            className={`absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
-            opacity-0 transition-all duration-1000 ${
-              isProfileHovered ? "opacity-100 animate-pulse" : ""
-            }`}
+            className={`absolute -inset-1 rounded-full md:rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
+            opacity-0 transition-all duration-1000 ${isProfileHovered ? "opacity-100 animate-pulse" : ""
+              }`}
           />
         </div>
 
