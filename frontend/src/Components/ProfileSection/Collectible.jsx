@@ -351,7 +351,7 @@ function MarketPlace() {
                             />
                           </div>
                           <span className="font-semibold truncate">
-                            ${item.priceETH}
+                            {item.priceETH} USDC
                           </span>
                         </div>
                       </div>

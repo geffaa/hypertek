@@ -18,6 +18,8 @@ import {
   MARKETPLACE_ABI,
   NFT_ABI,
   IMMUTABLE_CHAIN_ID,
+  IMMUTABLE_USDC_ADDRESS,
+  ERC20_ABI,
 } from "../Web3/Config";
 
 function NfaLand() {
@@ -429,7 +431,7 @@ function NfaLand() {
 
       // Create listing on blockchain
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
-      const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
+      const priceWei = ethers.parseUnits(String(collection.priceETH || "0.01"), 6);
       const listTx = await marketplace.createListing(
         IMMUTABLE_NFT_ADDRESS,
         tokenId,
@@ -469,7 +471,7 @@ function NfaLand() {
       console.log("✅ Backend response:", response.data);
 
       toast.success(
-        `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} ETH!`,
+        `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} USDC!`,
         {
           id: toastId,
           duration: 5000,
@@ -546,13 +548,17 @@ function NfaLand() {
 
       // Check balance
       const balance = await provider.getBalance(buyer);
-      console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
+      console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error("❌ Your wallet has no ETH", { id: toastId });
+        toast.error("❌ Your wallet has no ETH for gas", { id: toastId });
         setLoading(false);
         return;
       }
+
+      const usdcContract = new ethers.Contract(IMMUTABLE_USDC_ADDRESS, ERC20_ABI, provider);
+      const usdcBalance = await usdcContract.balanceOf(buyer);
+      console.log("💰 USDC Balance:", ethers.formatUnits(usdcBalance, 6), "USDC");
 
       const marketplace = new ethers.Contract(
         IMMUTABLE_MARKETPLACE_ADDRESS,
@@ -586,16 +592,18 @@ function NfaLand() {
 
 
         toast.success(
-          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
+          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} USDC\n\n⛓️ Blockchain confirmation in progress...`,
           { id: toastId, duration: 8000 }
         );
 
         setLoading(false);
 
         const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "land").toLowerCase().trim();
-        navigate("/Profile", { state: { category: targetCategory } });
+        setTimeout(() => {
+          navigate("/Profile", { state: { category: targetCategory } });
+        }, 2000);
 
-        return;
+        return; // Scenario 1 processes mint & sale simultaneously on the backend!
       }
 
       /* ================= SCENARIO 2: ALREADY MINTED ================= */
@@ -631,16 +639,35 @@ function NfaLand() {
       }
 
       const price = listing[1];
-      console.log("💰 Listing price:", ethers.formatEther(price), "ETH");
+      console.log("💰 Listing price:", ethers.formatEther(price), "USDC/ETH Equivalent");
 
       // Check balance
-      if (balance < price) {
+      if (usdcBalance < price) {
         toast.error(
-          `❌ Insufficient ETH\n\nNeed: ${ethers.formatEther(price)} ETH\nYou have: ${ethers.formatEther(balance)} ETH`,
+          `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(price, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
           { id: toastId, duration: 6000 }
         );
         setLoading(false);
         return;
+      }
+
+      toast.loading("🔒 Checking USDC allowance...", { id: toastId });
+
+      const allowance = await usdcContract.allowance(buyer, IMMUTABLE_MARKETPLACE_ADDRESS);
+
+      if (allowance < price) {
+        toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
+        try {
+          const usdcWithSigner = usdcContract.connect(signer);
+          const approveTx = await usdcWithSigner.approve(IMMUTABLE_MARKETPLACE_ADDRESS, price);
+          await approveTx.wait();
+          console.log("✅ USDC Approved!");
+        } catch (approveErr) {
+          console.error("❌ Approval failed:", approveErr);
+          toast.error("❌ USDC Approval failed", { id: toastId });
+          setLoading(false);
+          return;
+        }
       }
 
       // Execute purchase
@@ -648,8 +675,7 @@ function NfaLand() {
       console.log("🛒 Executing buyNFT...");
 
       const buyTx = await marketplace.buyNFT(IMMUTABLE_NFT_ADDRESS, collection.tokenId, {
-        value: price,
-        gasLimit: 400000,
+        gasLimit: 400000, // value removed, using USDC now
       });
 
       toast.loading("⏳ Waiting for transaction confirmation...", {
@@ -665,7 +691,7 @@ function NfaLand() {
           tokenId: collection.tokenId,
           buyer: buyer.toLowerCase(),
           seller: listing[0].toLowerCase(),
-          priceETH: ethers.formatEther(price),
+          priceETH: ethers.formatUnits(price, 6),
           txHash: receipt.hash,
         };
 
@@ -696,7 +722,7 @@ function NfaLand() {
       }
 
       toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
+        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatUnits(price, 6)} USDC\n📜 TX: ${receipt.hash.substring(0, 10)}...`,
         { id: toastId, duration: 8000 }
       );
 
@@ -715,12 +741,12 @@ function NfaLand() {
 
       if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient ETH for gas fees";
-      } else if (err.message?.includes("user rejected")) {
+      } else if (err.message?.includes("user rejected") || err.code === 4001 || err.code === "ACTION_REJECTED") {
         msg = "❌ Transaction rejected by user";
-      } else if (err.code === "ACTION_REJECTED") {
-        msg = "❌ Transaction was rejected";
       } else if (err.response?.data?.error) {
         msg = `❌ ${err.response.data.error}`;
+      } else {
+        msg = `❌ ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
       }
 
       toast.error(msg, { id: toastId });
@@ -890,8 +916,8 @@ bg-gradient-to-b from-[#977C34] to-[#493F26] "
 
             <h2 className="text-xl mt-3">
               {listingData?.active
-                ? `${ethers.formatEther(listingData.price)} ETH`
-                : `${item.priceETH || 0.01} ETH`}
+                ? `${ethers.formatUnits(listingData.price, 6)} USDC`
+                : `${item.priceETH || 0.01} USDC`}
             </h2>
 
             <div className="flex justify-end mt-3">

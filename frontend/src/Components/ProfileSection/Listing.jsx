@@ -435,7 +435,7 @@ function UserListings() {
                     </td>
 
                     <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
-                      {item.priceETH || 0.01} ETH
+                      {item.priceETH || 0.01} USDC
                     </td>
 
                     <td className="px-2 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm">
@@ -524,7 +524,7 @@ function UserListings() {
 
                 {/* Price */}
                 <p className="text-sm font-medium text-gray-300">
-                  {item.priceETH} ETH
+                  {item.priceETH} USDC
                 </p>
               </div>
             ))}

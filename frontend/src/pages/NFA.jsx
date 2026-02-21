@@ -379,7 +379,7 @@ function NFA() {
                       className="w-2 h-2 lg:w-[10px] lg:h-[9px]"
                     />
                     <h3 className="pl-1 sm:pl-2 text-xs sm:text-sm font-semibold">
-                      ${item.priceETH || item.chain || item.Type || "ETH"}
+                      ${item.priceETH || item.chain || item.Type || "USDC"}
                     </h3>
                   </div>
                 </div>
@@ -489,7 +489,7 @@ function NFA() {
                       <img src={TVector} alt="" className="w-3 h-3" />
                     </div>
                     <span className="font-semibold truncate">
-                      ${item.priceETH || item.chain || item.Type || "ETH"}
+                      ${item.priceETH || item.chain || item.Type || "USDC"}
                     </span>
                   </div>
                 </div>

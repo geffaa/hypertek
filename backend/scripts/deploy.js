@@ -29,8 +29,9 @@ async function main() {
   // 2. Deploy Marketplace Contract
   // ========================================
   console.log("\n📦 Deploying Marketplace contract...");
+  const usdcAddress = process.env.IMMUTABLE_USDC_ADDRESS || "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE"; // Mock USDC for Testing
   const Marketplace = await ethers.getContractFactory("Marketplace");
-  const marketplace = await Marketplace.deploy(deployer.address); // Platform wallet
+  const marketplace = await Marketplace.deploy(deployer.address, usdcAddress); // Platform wallet, USDC address
   await marketplace.waitForDeployment();
   const marketplaceAddress = await marketplace.getAddress();
   console.log("✅ Marketplace deployed to:", marketplaceAddress);
