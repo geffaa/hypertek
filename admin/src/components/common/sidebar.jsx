@@ -183,15 +183,19 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
             {/* Dashboard */}
 
             <Link to={withAdmin("/dashboard")} onClick={handleLinkClick}>
-
               <li className={`menu-item ${isDashboard ? "bg-[#002AA8]" : ""}`}>
-
                 <img src={DashboardImage} className="w-[22px]" />
-
                 <span>Dashboard</span>
-
               </li>
+            </Link>
 
+            {/* Platform Earnings Tab */}
+            <Link to={withAdmin("/platform-earnings")} onClick={handleLinkClick}>
+              <li className={`menu-item ${path.includes("platform-earnings") ? "bg-[#002AA8]" : ""}`}>
+                {/* Re-using dashboard image or simple wallet icon */}
+                <span style={{ fontSize: "20px", marginLeft: "4px" }}>💸</span>
+                <span>Platform Earnings</span>
+              </li>
             </Link>
 
 

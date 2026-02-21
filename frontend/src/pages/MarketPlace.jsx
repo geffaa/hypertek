@@ -575,7 +575,7 @@ function MarketPlace() {
 
                                 <h3 className="pl-1 lg:pl-2 text-xs lg:text-sm font-semibold">
 
-                                  {item.priceETH || ""} ETH
+                                  {item.priceETH || ""} USDC
 
                                 </h3>
 
@@ -707,7 +707,7 @@ function MarketPlace() {
 
                                 <span className="font-semibold truncate">
 
-                                  {item.priceETH || ""} ETH
+                                  {item.priceETH || ""} USDC
 
                                 </span>
 

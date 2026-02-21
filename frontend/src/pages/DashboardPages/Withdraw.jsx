@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTokenBalance } from '../../hooks/useTokenBalance';
-import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI } from '../../Web3/Config';
+import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI, IMMUTABLE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from '../../Web3/Config';
 import toast from 'react-hot-toast';
 import { ethers } from 'ethers';
 import { passportInstance } from '../../utils/immutablePassport';
@@ -55,6 +55,55 @@ const Withdraw = () => {
 
     // New State for USD Conversion for ETH
     const [conversionRate, setConversionRate] = useState(null);
+
+    // Read internal balances from Marketplace Contract
+    const { data: rawSellerBalance, refetch: refetchSeller } = useReadContract({
+        address: IMMUTABLE_MARKETPLACE_ADDRESS,
+        abi: MARKETPLACE_ABI,
+        functionName: 'sellerBalance',
+        args: wagmiAddress ? [wagmiAddress] : undefined,
+        query: { enabled: !!wagmiAddress }
+    });
+
+    const { data: rawCreatorBalance, refetch: refetchCreator } = useReadContract({
+        address: IMMUTABLE_MARKETPLACE_ADDRESS,
+        abi: MARKETPLACE_ABI,
+        functionName: 'creatorBalance',
+        args: wagmiAddress ? [wagmiAddress] : undefined,
+        query: { enabled: !!wagmiAddress }
+    });
+
+    const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
+    const creatorBalance = rawCreatorBalance ? ethers.formatUnits(rawCreatorBalance, 6) : '0';
+
+    const handleWithdrawEarnings = async (type) => {
+        if (!isWagmiConnected || !wagmiAddress) {
+            toast.error("Please connect your wallet");
+            return;
+        }
+
+        const toastId = toast.loading(`Initiating ${type} withdrawal...`);
+        try {
+            const functionName = type === 'seller' ? 'withdrawSeller' : 'withdrawCreator';
+            const txHash = await writeWagmiContract({
+                address: IMMUTABLE_MARKETPLACE_ADDRESS,
+                abi: MARKETPLACE_ABI,
+                functionName: functionName,
+            });
+
+            toast.loading("Waiting for confirmation...", { id: toastId });
+            await publicClient.waitForTransactionReceipt({ hash: txHash });
+
+            toast.success(`Successfully withdrew ${type} earnings!`, { id: toastId });
+
+            if (type === 'seller') refetchSeller();
+            if (type === 'creator') refetchCreator();
+            refreshUsdc();
+        } catch (error) {
+            console.error(`${type} withdrawal Failed:`, error);
+            toast.error(`${type} withdrawal Failed: ` + (error.shortMessage || error.message), { id: toastId });
+        }
+    };
 
     // Fetch Price
     React.useEffect(() => {
@@ -322,6 +371,42 @@ const Withdraw = () => {
                         </div>
                     </div>
                 </div>
+                {/* Marketplace Earnings Card */}
+                {(Number(sellerBalance) > 0 || Number(creatorBalance) > 0) && (
+                    <div className="bg-[#1C1C1E] p-6 rounded-xl border border-green-500/30 inline-block min-w-[240px]">
+                        <p className="text-white/60 text-sm mb-1 text-green-400">Marketplace Earnings Available</p>
+                        <div className="flex flex-col gap-3 mt-4">
+                            {Number(sellerBalance) > 0 && (
+                                <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
+                                    <div>
+                                        <p className="text-sm text-white/50">Seller Earnings</p>
+                                        <p className="font-bold text-lg">{Number(sellerBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
+                                    </div>
+                                    <button
+                                        onClick={() => handleWithdrawEarnings('seller')}
+                                        className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
+                                    >
+                                        Claim
+                                    </button>
+                                </div>
+                            )}
+                            {Number(creatorBalance) > 0 && (
+                                <div className="flex items-center justify-between border border-white/10 p-3 rounded-lg bg-black/20">
+                                    <div>
+                                        <p className="text-sm text-white/50">Creator Fees</p>
+                                        <p className="font-bold text-lg">{Number(creatorBalance).toFixed(2)} <span className="text-xs text-blue-400 font-normal">USDC</span></p>
+                                    </div>
+                                    <button
+                                        onClick={() => handleWithdrawEarnings('creator')}
+                                        className="bg-green-600 hover:bg-green-500 text-white text-xs px-4 py-2 rounded font-bold transition-colors"
+                                    >
+                                        Claim
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Debug Info */}

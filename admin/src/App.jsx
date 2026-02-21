@@ -12,6 +12,7 @@ import Character from "./pages/Character";
 import Land from "./pages/Land";
 import Category from "./pages/Category";
 import EditUsers from "./pages/EditUser";
+import PlatformEarnings from "./pages/PlatformEarnings";
 import UpdateNews from "./pages/UpdateNews";
 import CollectionListedForSale from "./pages/CollectionListedForSale";
 import CollectionDetails2 from "./pages/CollectionDetails2";
@@ -48,6 +49,7 @@ function App() {
             <Route path="edit-collection" element={<CollectionDetails />} />
             <Route path="creator-earning" element={<CreatorEarning />} />
             <Route path="collections" element={<AddCollection />} />
+            <Route path="platform-earnings" element={<PlatformEarnings />} />
             <Route path="edit-collection-item" element={<EditCollection2 />} />
             <Route path="add-sub-collection" element={<AddSubCollection />} />
             <Route path="edit-sub-collection" element={<EditSubCollection />} />

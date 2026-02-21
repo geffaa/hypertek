@@ -19,6 +19,8 @@ import {
   NFT_ABI,
   PLATFORM_WALLET_ADDRESS,
   IMMUTABLE_CHAIN_ID,
+  IMMUTABLE_USDC_ADDRESS,
+  ERC20_ABI,
 } from "../../Web3/Config";
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { immutableZkEvmTestnet } from 'viem/chains';
@@ -116,6 +118,8 @@ function Buy1() {
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
   const [showWalletModal, setShowWalletModal] = useState(false);
+  const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
+  const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
 
   const IMMUTABLE_CHAIN_ID = 13473; // Immutable zkEVM Testnet
 
@@ -528,9 +532,11 @@ function Buy1() {
         return;
       }
 
-      // Create listing on blockchain
-      toast.loading("📝 Creating marketplace listing...", { id: toastId });
-      const priceWei = ethers.parseEther(String(collection.priceETH || "0.01"));
+      // Use custom listing price if owner set one, otherwise fallback to collection price
+      const finalPrice = listingPrice && parseFloat(listingPrice) > 0
+        ? listingPrice
+        : String(collection.priceETH || "1");
+      const priceWei = ethers.parseUnits(finalPrice, 6);
 
       const { request } = await publicClient.simulateContract({
         ...marketplaceContract,
@@ -550,7 +556,7 @@ function Buy1() {
         subCollectionId: collection._id,
         tokenId,
         seller: walletAddress.toLowerCase(),
-        priceETH: collection.priceETH || 0.01,
+        priceETH: parseFloat(finalPrice),
       };
 
       if (parentCollection?._id) {
@@ -572,7 +578,7 @@ function Buy1() {
       console.log("✅ Backend response:", response.data);
 
       toast.success(
-        `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} ETH!`,
+        `🎉 NFA listed for sale @ ${finalPrice} USDC!`,
         {
           id: toastId,
           duration: 5000,
@@ -644,12 +650,12 @@ function Buy1() {
       console.log("👛 Buyer wallet:", buyer);
 
       const balance = await publicClient.getBalance({ address: buyer });
-      console.log("💰 Balance:", ethers.formatEther(balance), "ETH");
+      console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
         toast.error(
           <div>
-            ❌ Your wallet has no IMX/ETH.
+            ❌ Your wallet has no IMX/ETH for gas fees.
             <br />
             <button
               onClick={() => window.open('https://hub.immutable.com/sandbox', '_blank')}
@@ -662,6 +668,18 @@ function Buy1() {
         setLoading(false);
         return;
       }
+
+      const usdcContractOptions = {
+        address: IMMUTABLE_USDC_ADDRESS,
+        abi: ERC20_ABI,
+      };
+
+      const usdcBalance = await publicClient.readContract({
+        ...usdcContractOptions,
+        functionName: 'balanceOf',
+        args: [buyer],
+      });
+      console.log("💰 USDC Balance:", ethers.formatUnits(usdcBalance, 6), "USDC");
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
@@ -686,7 +704,7 @@ function Buy1() {
 
 
         toast.success(
-          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} ETH\n\n⛓️ Blockchain confirmation in progress...`,
+          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} USDC\n\n⛓️ Blockchain confirmation in progress...`,
           { id: toastId, duration: 8000 },
         );
 
@@ -697,7 +715,7 @@ function Buy1() {
           navigate("/Profile", { state: { category: targetCategory } });
         }, 2000);
 
-        return;
+        return; // Scenario 1 already processed the sale on the backend during minting!
       }
 
       /* ================= SCENARIO 2: ALREADY MINTED ================= */
@@ -750,15 +768,44 @@ function Buy1() {
       }
 
       const price = listing[1];
-      console.log("💰 Listing price:", ethers.formatEther(price), "ETH");
+      console.log("💰 Listing price:", ethers.formatEther(price), "USDC/ETH Equivalent");
 
-      if (balance < price) {
+      if (usdcBalance < price) {
         toast.error(
-          `❌ Insufficient ETH\n\nNeed: ${ethers.formatEther(price)} ETH\nYou have: ${ethers.formatEther(balance)} ETH`,
+          `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(price, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
           { id: toastId, duration: 6000 },
         );
         setLoading(false);
         return;
+      }
+
+      toast.loading("🔒 Checking USDC allowance...", { id: toastId });
+
+      const allowance = await publicClient.readContract({
+        ...usdcContractOptions,
+        functionName: 'allowance',
+        args: [buyer, CURRENT_MARKETPLACE_ADDRESS],
+      });
+
+      if (allowance < price) {
+        toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
+        try {
+          const { request: approveReq } = await publicClient.simulateContract({
+            ...usdcContractOptions,
+            functionName: 'approve',
+            args: [CURRENT_MARKETPLACE_ADDRESS, price],
+            account: activeAddress,
+          });
+          const approveTxHash = await activeWalletClient.writeContract(approveReq);
+          toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
+          await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
+          console.log("✅ USDC Approved!");
+        } catch (approveErr) {
+          console.error("❌ Approval failed:", approveErr);
+          toast.error("❌ USDC Approval failed", { id: toastId });
+          setLoading(false);
+          return;
+        }
       }
 
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
@@ -768,8 +815,7 @@ function Buy1() {
         ...marketplaceContract,
         functionName: 'buyNFT',
         args: [CURRENT_NFT_ADDRESS, collection.tokenId],
-        value: price,
-        account: activeAddress, // Use activeAddress which should match the wallet client's account
+        account: activeAddress, // value removed, using USDC now
       });
 
       const buyTx = await activeWalletClient.writeContract(request);
@@ -788,7 +834,7 @@ function Buy1() {
           tokenId: collection.tokenId,
           buyer: buyer.toLowerCase(),
           seller: listing[0].toLowerCase(),
-          priceETH: ethers.formatEther(price),
+          priceETH: ethers.formatUnits(price, 6),
           txHash: receipt.transactionHash,
         };
 
@@ -818,7 +864,7 @@ function Buy1() {
       }
 
       toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatEther(price)} ETH\n📜 TX: ${receipt.transactionHash.substring(0, 10)}...`,
+        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatUnits(price, 6)} USDC\n📜 TX: ${receipt.transactionHash.substring(0, 10)}...`,
         { id: toastId, duration: 8000 },
       );
 
@@ -840,6 +886,8 @@ function Buy1() {
         msg = "❌ Transaction rejected by user";
       } else if (err.response?.data?.error) {
         msg = `❌ ${err.response.data.error}`;
+      } else {
+        msg = `❌ ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
       }
 
       toast.error(msg, { id: toastId });
@@ -957,7 +1005,7 @@ function Buy1() {
             >
               <div className="flex flex-col items-end leading-tight text-right">
                 <span className="font-bold text-sm text-white">
-                  {immutableProvider && balance ? Number(ethers.formatEther(balance)).toFixed(4) : "0.00"} ETH
+                  {immutableProvider && balance ? Number(ethers.formatEther(balance)).toFixed(4) : "0.00"} IMX
                 </span>
                 <span className="text-[10px] text-gray-400 font-mono">
                   {immutableAddress?.substring(0, 6)}...{immutableAddress?.substring(38)}
@@ -1039,7 +1087,7 @@ function Buy1() {
           </div>
 
           <div className="p-6 rounded-lg">
-            <div className="flex justify-between opacity-70 w-full">
+            <div className="flex justify-between items-center opacity-70 w-full mb-2">
               <span>Price</span>
               <span
                 className="truncate max-w-[150px]"
@@ -1054,11 +1102,51 @@ function Buy1() {
               </span>
             </div>
 
-            <h2 className="text-xl mt-3">
-              {listingData?.active
-                ? `${ethers.formatEther(listingData.price)} ETH`
-                : `${collection.priceETH || 0.01} ETH`}
-            </h2>
+            {/* Price — double-click to edit when owner */}
+            {isOwner && !listingData?.active ? (
+              isEditingPrice ? (
+                // Editing mode — small inline input
+                <div className="flex items-center gap-2 mt-1">
+                  <input
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    autoFocus
+                    value={listingPrice}
+                    onChange={(e) => setListingPrice(e.target.value)}
+                    placeholder={String(collection.priceETH || '1')}
+                    onBlur={() => setIsEditingPrice(false)}
+                    onKeyDown={(e) => e.key === 'Enter' && setIsEditingPrice(false)}
+                    className="bg-white/10 border border-blue-500 rounded-lg px-3 py-1 text-white text-xl font-bold w-36 outline-none"
+                  />
+                  <span className="text-blue-400 font-bold text-sm">USDC</span>
+                  <button
+                    onClick={() => setIsEditingPrice(false)}
+                    className="text-green-400 text-xs hover:text-green-300"
+                  >✓ Done</button>
+                </div>
+              ) : (
+                // Display mode — price + pencil icon
+                <div
+                  className="flex items-center gap-2 mt-1 cursor-pointer group w-fit"
+                  onDoubleClick={() => setIsEditingPrice(true)}
+                  title="Double-click to edit price"
+                >
+                  <h2 className="text-xl font-bold">
+                    {listingPrice && parseFloat(listingPrice) > 0
+                      ? `${parseFloat(listingPrice).toFixed(2)} USDC`
+                      : `${collection.priceETH || 0.01} USDC`}
+                  </h2>
+                  <span className="text-white/30 group-hover:text-blue-400 transition-colors text-sm" title="Double-click to edit">✏️</span>
+                </div>
+              )
+            ) : (
+              <h2 className="text-xl font-bold mt-1">
+                {listingData?.active
+                  ? `${ethers.formatUnits(listingData.price, 6)} USDC`
+                  : `${collection.priceETH || 0.01} USDC`}
+              </h2>
+            )}
 
             <div className="flex justify-end mt-3">
               <FiEye /> <span className="ml-2">505 Views</span>
@@ -1114,18 +1202,18 @@ function Buy1() {
             <div className="mt-4 space-y-2">
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>List Price</span>
-                <span>{collection.priceETH || 0.01} ETH</span>
+                <span>{collection.priceETH || 0.01} USDC</span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Platform Fee (10%)</span>
                 <span>
-                  {((collection.priceETH || 0.01) * 0.1).toFixed(4)} ETH
+                  {((collection.priceETH || 0.01) * 0.1).toFixed(4)} USDC
                 </span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
                 <span>Total</span>
                 <span>
-                  {((collection.priceETH || 0.01) * 1.1).toFixed(4)} ETH
+                  {((collection.priceETH || 0.01) * 1.1).toFixed(4)} USDC
                 </span>
               </div>
             </div>
@@ -1175,12 +1263,35 @@ function Buy1() {
             </div>
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
             <div className="w-[90%] mb-3">
-              <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                <p className="text-gray-400 text-sm">Price</p>
-                <p className="text-white text-sm">
-                  {collection.priceETH || 0.01} ETH
-                </p>
-              </div>
+              {isOwner ? (
+                // ✅ Owner: Editable Price Input
+                <div className="flex flex-col gap-1">
+                  <label className="text-gray-400 text-xs px-1">Set Your Listing Price (USDC)</label>
+                  <div className="flex items-center rounded px-4 h-10 bg-white/10 border border-white/20 focus-within:border-blue-400 transition-colors">
+                    <input
+                      type="number"
+                      min="0.01"
+                      step="0.01"
+                      value={listingPrice}
+                      onChange={(e) => setListingPrice(e.target.value)}
+                      placeholder={String(collection.priceETH || '1')}
+                      className="bg-transparent text-white text-sm w-full outline-none"
+                    />
+                    <span className="text-blue-400 text-xs font-bold ml-2">USDC</span>
+                  </div>
+                  {listingPrice && parseFloat(listingPrice) > 0 && (
+                    <p className="text-xs text-green-400 px-1">
+                      ✓ Will list at {parseFloat(listingPrice).toFixed(2)} USDC
+                    </p>
+                  )}
+                </div>
+              ) : (
+                // Buyer: Static price display
+                <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
+                  <p className="text-gray-400 text-sm">Price</p>
+                  <p className="text-white text-sm">{collection.priceETH || 0.01} USDC</p>
+                </div>
+              )}
             </div>
             <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">
               <button onClick={() => setIsSecondOpen(false)}>

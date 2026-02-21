@@ -356,7 +356,7 @@ function ProfileCategory() {
 
       // Create listing
       toast.loading("Creating listing on marketplace...", { id: toastId });
-      const priceWei = ethers.parseEther("0.01");
+      const priceWei = ethers.parseUnits("0.01", 6);
       const listTx = await marketplace.createListing(
         NFT_ADDRESS,
         tokenId,

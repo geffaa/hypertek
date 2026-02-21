@@ -442,11 +442,12 @@ export async function mintSubCollection(req, res) {
     console.log("📝 Recording Mint Sale...");
     const mintPrice = req.body.priceETH || subCollection.priceETH || 0;
     
+    const deployerWallet = (process.env.PLATFORM_WALLET_ADDRESS || "").toLowerCase();
     const saleRecord = {
       buyer: creatorWallet.toLowerCase(),
-      seller: "deployer", // Primary Sale
-      priceETH: mintPrice,
-      royaltyPaid: mintPrice, // 100% to project
+      seller: deployerWallet || "unknown", // Actual deployer wallet address
+      priceETH: String(mintPrice || "0"), // Already human-readable decimal
+      royaltyPaid: String(mintPrice || "0"), // 100% to creator/project on first sale
       platformFee: 0,
       sellerReceived: 0,
       txHash: receipt.hash,
@@ -894,11 +895,24 @@ export async function recordOnchainSale(req, res) {
       });
     }
 
+    // ✅ CRITICAL: Sanitize priceETH — parseFloat to ensure clean number, never scientific notation
+    const cleanPrice = parseFloat(String(priceETH));
+    if (isNaN(cleanPrice) || cleanPrice <= 0) {
+      return res.status(400).json({
+        success: false,
+        error: `Invalid priceETH value: ${priceETH}`,
+      });
+    }
+
+    // Convert to fixed decimal string (max 6 decimal places for USDC)
+    const priceUSDC = parseFloat(cleanPrice.toFixed(6));
+    console.log(`💰 Processing sale: ${priceUSDC} USDC (received raw: ${priceETH})`);
+
     const creatorWallet = nft.collection?.royaltyWallet || nft.creator;
 
     // Calculate payment distribution
     const distribution = calculatePaymentDistribution(
-      priceETH,
+      priceUSDC,
       nft.isFirstSale,
       creatorWallet,
       seller,
@@ -908,10 +922,10 @@ export async function recordOnchainSale(req, res) {
     const saleRecord = {
       buyer: buyer.toLowerCase(),
       seller: seller.toLowerCase(),
-      priceETH: priceETH,
-      royaltyPaid: distribution.creatorAmount,
-      platformFee: distribution.platformAmount,
-      sellerReceived: distribution.sellerAmount,
+      priceETH: priceUSDC,
+      royaltyPaid: parseFloat(distribution.creatorAmount.toFixed(6)),
+      platformFee: parseFloat(distribution.platformAmount.toFixed(6)),
+      sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
       txHash: txHash,
       isFirstSale: nft.isFirstSale,
       createdAt: new Date(),
@@ -928,7 +942,7 @@ export async function recordOnchainSale(req, res) {
 
     await nft.save();
 
-    console.log(`✅ Sale recorded: Token ${tokenId} sold to ${buyer}`);
+    console.log(`✅ Sale recorded: Token ${tokenId} sold to ${buyer} for ${priceUSDC} USDC`);
 
     return res.json({
       success: true,
@@ -947,6 +961,7 @@ export async function recordOnchainSale(req, res) {
     return res.status(500).json({
       success: false,
       error: err.message,
+      details: err.toString(),
     });
   }
 }
@@ -1745,9 +1760,14 @@ export async function recordSubCollectionSale(req, res) {
     const creatorWallet =
       parent.collection?.royaltyWallet || parent.collection?.owner;
 
+    // ✅ Sanitize priceETH to prevent scientific notation in DB (e.g. 2e-10 → 200)
+    const cleanPrice = parseFloat(String(priceETH));
+    const priceUSDC = isNaN(cleanPrice) ? 0 : parseFloat(cleanPrice.toFixed(6));
+    console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (raw received: ${priceETH})`);
+
     // Calculate payment distribution
     const distribution = calculatePaymentDistribution(
-      priceETH,
+      priceUSDC,
       subCollection.isFirstSale,
       creatorWallet,
       seller,
@@ -1757,10 +1777,10 @@ export async function recordSubCollectionSale(req, res) {
     const saleRecord = {
       buyer: buyer.toLowerCase(),
       seller: seller.toLowerCase(),
-      priceETH: priceETH,
-      royaltyPaid: distribution.creatorAmount,
-      platformFee: distribution.platformAmount,
-      sellerReceived: distribution.sellerAmount,
+      priceETH: priceUSDC,
+      royaltyPaid: parseFloat(distribution.creatorAmount.toFixed(6)),
+      platformFee: parseFloat(distribution.platformAmount.toFixed(6)),
+      sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
       txHash: txHash,
       isFirstSale: subCollection.isFirstSale,
       createdAt: new Date(),

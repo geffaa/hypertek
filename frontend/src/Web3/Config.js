@@ -5,11 +5,11 @@
 // ✅ Addresses from your deployment
 
 // Immutable zkEVM Testnet
-export const IMMUTABLE_NFT_ADDRESS = "0x0999bA9c3a1040BC04828a4Dda0C1EdFC2d78b7D";
-export const IMMUTABLE_MARKETPLACE_ADDRESS = "0xaD41299bbcb527BBdD58b8126e6539871b0a874a";
+export const IMMUTABLE_NFT_ADDRESS = "0x6663D00942E9F333B67431f7930a3f9DE2312aAA";
+export const IMMUTABLE_MARKETPLACE_ADDRESS = "0x41E374A11391AfE9920c3c107CA8F578e34B6006";
 
 // USDC Addresses (Testnet Placeholders - Replace with actual if different)
-export const IMMUTABLE_USDC_ADDRESS = "0x3B2d8A1931736Fc321C24864BceEe981B11c3c57"; // Immutable zkEVM Testnet USDC
+export const IMMUTABLE_USDC_ADDRESS = "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE"; // Mock USDC for Testing
 
 export const ERC20_ABI = [
   {
@@ -51,6 +51,16 @@ export const ERC20_ABI = [
     "name": "approve",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" },
+      { "internalType": "address", "name": "spender", "type": "address" }
+    ],
+    "name": "allowance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
     "type": "function"
   }
 ];
@@ -137,49 +147,5 @@ export const NFT_ABI = [
 
 // ---------------- Marketplace ABI ----------------
 export const MARKETPLACE_ABI = [
-  {
-    "inputs": [
-      { "internalType": "address", "name": "nftAddress", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "internalType": "uint256", "name": "price", "type": "uint256" }
-    ],
-    "name": "createListing",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "nftAddress", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "buyNFT",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "nftAddress", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "cancelListing",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "nftAddress", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "getListing",
-    "outputs": [
-      { "internalType": "address", "name": "seller", "type": "address" },
-      { "internalType": "uint256", "name": "price", "type": "uint256" },
-      { "internalType": "bool", "name": "active", "type": "bool" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+  {"inputs":[{"internalType":"address","name":"_platformWallet","type":"address"},{"internalType":"address","name":"_usdcAddress","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ReentrancyGuardReentrantCall","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"seller","type":"address"},{"indexed":true,"internalType":"address","name":"nftAddress","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ListingCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"seller","type":"address"},{"indexed":true,"internalType":"address","name":"nftAddress","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"ListingCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"buyer","type":"address"},{"indexed":true,"internalType":"address","name":"seller","type":"address"},{"indexed":true,"internalType":"address","name":"nftAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"creatorAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"platformAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"sellerAmount","type":"uint256"},{"indexed":false,"internalType":"bool","name":"isFirstSale","type":"bool"}],"name":"NFTSold","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"string","name":"role","type":"string"}],"name":"Withdrawn","type":"event"},{"inputs":[],"name":"PLATFORM_FEE_BPS","outputs":[{"internalType":"uint16","name":"","type":"uint16"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"nftAddress","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"buyNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"nftAddress","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"cancelListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"nftAddress","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"name":"createListing","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"creatorBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"nftAddress","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getListing","outputs":[{"internalType":"address","name":"seller","type":"address"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bool","name":"active","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"listings","outputs":[{"internalType":"address","name":"seller","type":"address"},{"internalType":"uint256","name":"price","type":"uint256"},{"internalType":"bool","name":"active","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"platformBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"platformWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"sellerBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newWallet","type":"address"}],"name":"updatePlatformWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"usdc","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdrawCreator","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawPlatformFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawSeller","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
