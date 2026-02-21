@@ -7,9 +7,9 @@ const offerSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    // gameId stored as String (references NFT _id, not a separate Game collection)
     gameId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Game",
+      type: String,
       required: true,
     },
     gameTitle: {
@@ -25,7 +25,7 @@ const offerSchema = new mongoose.Schema(
       required: true,
     },
     priceDuration: {
-      type: String, // e.g. "3 days", "1 week"
+      type: String,
       required: true,
     },
 
@@ -44,22 +44,20 @@ const offerSchema = new mongoose.Schema(
       required: true,
     },
 
-    // Game Owner Info
+    // Game/NFT Owner Info — ownerId can be a wallet address or "platform"
     ownerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
       required: true,
     },
     ownerName: {
       type: String,
-      required: true,
+      default: "Platform",
     },
     ownerEmail: {
       type: String,
-      required: true,
+      default: "",
     },
 
-    // ✅ Added Fields
     requestStatus: {
       type: String,
       enum: ["pending", "accepted", "rejected", "cancelled"],

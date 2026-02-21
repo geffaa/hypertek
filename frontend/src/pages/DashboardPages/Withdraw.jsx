@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import { passportInstance } from '../../utils/immutablePassport';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Transak } from '@transak/ui-js-sdk';
+import { BACKEND_BASE_URL } from '../../Config';
 
 // Simple Icons
 import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
@@ -169,84 +169,108 @@ const Withdraw = () => {
             return;
         }
 
+        if (!ethers.isAddress(recipient)) {
+            toast.error("Invalid recipient address");
+            return;
+        }
+
+        setProcessing(true);
+        const toastId = toast.loading("Preparing withdrawal...");
+
         try {
-            // Logic to send USDC
-            // 1. Get Provider/Signer (Ethers v6)
-            let provider, signer;
-            let tx;
+            let txHash;
 
-            if (activeWallet.type === 'immutable') {
+            // ── PATH 1: Wagmi / MetaMask / RainbowKit ──────────────────
+            if (isWagmiConnected && wagmiAddress) {
+                toast.loading("Please confirm in your wallet...", { id: toastId });
+
+                if (selectedToken === 'USDC') {
+                    const amountWei = ethers.parseUnits(amount, 6);
+                    txHash = await writeWagmiContract({
+                        address: IMMUTABLE_USDC_ADDRESS,
+                        abi: ERC20_ABI,
+                        functionName: 'transfer',
+                        args: [recipient, amountWei],
+                    });
+                } else {
+                    // ETH / native
+                    const amountWei = ethers.parseEther(amount);
+                    txHash = await sendTransactionAsync({
+                        to: recipient,
+                        value: amountWei,
+                    });
+                }
+
+                if (publicClient) {
+                    toast.loading("Waiting for confirmation...", { id: toastId });
+                    await publicClient.waitForTransactionReceipt({ hash: txHash });
+                }
+
+                // ── PATH 2: Immutable Passport ─────────────────────────────
+            } else if (activeWallet?.type === 'immutable') {
                 const p = await passportInstance.connectEvm();
-                provider = new ethers.BrowserProvider(p);
-            }
+                const provider = new ethers.BrowserProvider(p);
+                const signer = await provider.getSigner();
 
-            if (!provider) throw new Error("No wallet provider found");
-            signer = await provider.getSigner();
-
-            if (selectedToken === 'USDC') {
-                if (!tokenAddress || tokenAddress === ethers.ZeroAddress) {
-                    throw new Error("USDC not supported on this network yet.");
+                if (selectedToken === 'USDC') {
+                    const abi = ["function transfer(address to, uint amount) returns (bool)"];
+                    const contract = new ethers.Contract(IMMUTABLE_USDC_ADDRESS, abi, signer);
+                    const amountWei = ethers.parseUnits(amount, 6);
+                    const tx = await contract.transfer(recipient, amountWei);
+                    toast.loading("Waiting for confirmation...", { id: toastId });
+                    await tx.wait();
+                    txHash = tx.hash;
+                } else {
+                    const amountWei = ethers.parseEther(amount);
+                    const tx = await signer.sendTransaction({ to: recipient, value: amountWei });
+                    toast.loading("Waiting for confirmation...", { id: toastId });
+                    await tx.wait();
+                    txHash = tx.hash;
                 }
 
-                const abi = ["function transfer(address to, uint amount) returns (bool)", "function decimals() view returns (uint8)"];
-                const contract = new ethers.Contract(tokenAddress, abi, signer);
-
-                let decimals = 18;
-                try {
-                    decimals = await contract.decimals();
-                } catch (e) {
-                    decimals = 6;
-                }
-                const amountWei = ethers.parseUnits(amount, 6); // STRICTLY 6 DECIMALS FOR USDC
-
-                tx = await contract.transfer(recipient, amountWei);
-                toast.loading("USDC Transaction submitted...", { id: 'withdraw-tx' });
-
-                await tx.wait();
-                refreshUsdc();
             } else {
-                const amountWei = ethers.parseEther(amount);
-                tx = await signer.sendTransaction({
-                    to: recipient,
-                    value: amountWei
-                });
-                toast.loading("ETH Transaction submitted...", { id: 'withdraw-tx' });
-                await tx.wait();
+                toast.error("Please connect your wallet first", { id: toastId });
+                setProcessing(false);
+                return;
             }
 
-            toast.success("Withdrawal Successful!", { id: 'withdraw-tx' });
+            toast.success("✅ Withdrawal Successful!", { id: toastId });
+            refreshUsdc();
 
-            // Log to Backend (Fire and Forget)
+            // ── Log to Backend ─────────────────────────────────────────
             let user = JSON.parse(localStorage.getItem('user'));
             if (!user) {
                 const authData = JSON.parse(localStorage.getItem('authData'));
                 user = authData?.user;
             }
             const userId = user?.id || user?._id;
+            const authToken = user?.token || localStorage.getItem('token');
 
             if (userId) {
-                fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4700'}/api/v1/withdraw/request`, {
+                fetch(`${BACKEND_BASE_URL}/api/v1/withdraw/request`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(authToken ? { 'Authorization': `Bearer ${authToken}` } : {}),
+                    },
                     body: JSON.stringify({
-                        userId: userId,
+                        userId,
                         amount: Number(amount),
                         type: 'crypto',
                         token: selectedToken,
                         recipientAddress: recipient,
-                        txHash: tx.hash
-                    })
+                        txHash,
+                    }),
                 }).catch(e => console.error("Failed to log withdrawal", e));
             }
 
-            // Refresh History
             fetchHistory();
-
             setAmount('');
+            setRecipient('');
 
         } catch (err) {
             console.error("Withdrawal Failed", err);
-            toast.error("Withdrawal Failed: " + (err.reason || err.message));
+            toast.error("❌ Withdrawal Failed: " + (err.shortMessage || err.reason || err.message), { id: toastId });
         } finally {
             setProcessing(false);
         }
@@ -335,12 +359,36 @@ const Withdraw = () => {
 
         const url = `https://global.transak.com/?${params.toString()}`;
 
-        // Transak blocks iframe (X-Frame-Options) — use popup window instead
-        // With VPN this opens the full KYC/sell flow
         const w = 460, h = 700;
         const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
         const top = Math.round(window.screenY + (window.outerHeight - h) / 2);
         window.open(url, 'transak_sell', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+    };
+
+    // ── Transak On-Ramp (Buy crypto with fiat) ─────────────────────
+    const handleTransakOnRamp = () => {
+        const walletAddress = activeWallet?.address || wagmiAddress;
+        const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
+
+        const params = new URLSearchParams({
+            productsAvailed: 'BUY',
+            cryptoCurrencyCode: 'USDC',
+            defaultFiatCurrency: 'USD',
+            themeColor: '3b82f6',
+        });
+
+        if (apiKey) {
+            params.set('apiKey', apiKey);
+            params.set('environment', 'staging');
+        }
+        if (walletAddress) params.set('walletAddress', walletAddress);
+
+        const url = `https://global.transak.com/?${params.toString()}`;
+
+        const w = 460, h = 700;
+        const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
+        const top = Math.round(window.screenY + (window.outerHeight - h) / 2);
+        window.open(url, 'transak_buy', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
     };
 
     // Derived State for Display
@@ -581,9 +629,22 @@ const Withdraw = () => {
                                 >
                                     {processing ? "Processing Transfer..." : "Transfer from MetaMask"}
                                 </button>
+
+                                {/* Transak On-Ramp */}
+                                <div className="border-t border-white/10 pt-4">
+                                    <p className="text-white/40 text-xs text-center mb-3">— or buy USDC directly with fiat —</p>
+                                    <button
+                                        onClick={handleTransakOnRamp}
+                                        className="w-full py-4 rounded-lg font-bold text-lg bg-gradient-to-r from-blue-700 to-purple-700 hover:from-blue-600 hover:to-purple-600 text-white shadow-lg transition-all"
+                                    >
+                                        💳 Buy USDC via Transak
+                                    </button>
+                                    <p className="text-xs text-white/30 mt-2 text-center">Card, bank transfer & more · Powered by Transak</p>
+                                </div>
                             </div>
                         </div>
                     )}
+
 
                     {withdrawType === 'bank' && (
                         <div className="bg-[#1C1C1E] p-4 md:p-8 rounded-xl border border-white/10">
@@ -616,7 +677,7 @@ const Withdraw = () => {
                                     <tr>
                                         <th className="px-6 py-4">Type</th>
                                         <th className="px-6 py-4">Amount</th>
-                                        {/* Status removed */}
+                                        <th className="px-6 py-4">Status</th>
                                         <th className="px-6 py-4">Date</th>
                                         <th className="px-6 py-4">Details</th>
                                     </tr>
@@ -637,7 +698,14 @@ const Withdraw = () => {
                                                 <td className="px-6 py-4 font-mono">
                                                     {tx.amount} {tx.token || 'USD'}
                                                 </td>
-                                                {/* Status cell removed */}
+                                                <td className="px-6 py-4">
+                                                    <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-semibold ${tx.status === 'completed' ? 'bg-green-500/15 text-green-400' :
+                                                        tx.status === 'rejected' ? 'bg-red-500/15 text-red-400' :
+                                                            'bg-yellow-500/15 text-yellow-400'
+                                                        }`}>
+                                                        {tx.status === 'completed' ? '✅ Completed' : tx.status === 'rejected' ? '❌ Rejected' : '⏳ Pending'}
+                                                    </span>
+                                                </td>
                                                 <td className="px-6 py-4 text-sm text-white/60">
                                                     {new Date(tx.createdAt).toLocaleDateString()}
                                                 </td>
