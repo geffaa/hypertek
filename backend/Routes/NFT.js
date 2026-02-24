@@ -97,6 +97,7 @@ NFTRouter.post(
 ===================================================== */
 // In your NFT routes file
 NFTRouter.get("/dashboard/stats", getDashboardStats);
+// NFTRouter.get("/contract-balances", getContractBalances); // REST view of contract escrow
 NFTRouter.get("/collection/get", getAllCollections);
 NFTRouter.get("/all", getAllNFTs);
 NFTRouter.get("/collections/popular", getPopularCollections);

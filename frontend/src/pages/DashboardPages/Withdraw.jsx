@@ -351,13 +351,17 @@ const Withdraw = () => {
             themeColor: '3b82f6',
         });
 
+        const isStaging = (import.meta.env.VITE_TRANSAK_ENVIRONMENT || 'STAGING').toUpperCase() === 'STAGING';
+
         if (apiKey) {
             params.set('apiKey', apiKey);
-            params.set('environment', 'staging');
+            params.set('environment', isStaging ? 'STAGING' : 'PRODUCTION');
+            // params.set('network', 'immutablezkevm');
         }
         if (walletAddress) params.set('walletAddress', walletAddress);
 
-        const url = `https://global.transak.com/?${params.toString()}`;
+        const baseUrl = isStaging ? 'https://global-stg.transak.com/' : 'https://global.transak.com/';
+        const url = `${baseUrl}?${params.toString()}`;
 
         const w = 460, h = 700;
         const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
@@ -377,13 +381,17 @@ const Withdraw = () => {
             themeColor: '3b82f6',
         });
 
+        const isStaging = (import.meta.env.VITE_TRANSAK_ENVIRONMENT || 'STAGING').toUpperCase() === 'STAGING';
+
         if (apiKey) {
             params.set('apiKey', apiKey);
-            params.set('environment', 'staging');
+            params.set('environment', isStaging ? 'STAGING' : 'PRODUCTION');
+            // params.set('network', 'immutablezkevm');
         }
         if (walletAddress) params.set('walletAddress', walletAddress);
 
-        const url = `https://global.transak.com/?${params.toString()}`;
+        const baseUrl = isStaging ? 'https://global-stg.transak.com/' : 'https://global.transak.com/';
+        const url = `${baseUrl}?${params.toString()}`;
 
         const w = 460, h = 700;
         const left = Math.round(window.screenX + (window.outerWidth - w) / 2);

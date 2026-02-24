@@ -2,10 +2,10 @@
   "network": "immutableZkevmTestnet",
   "deployer": "0x11Dd223303346021d21a72818c3188187eA07FD3",
   "contracts": {
-    "MyNFT": "0xA529f6F4E44918CA6551B9028edDf5968327851c",
-    "Marketplace": "0x214E62DD99729d2575A8B44Af64950Ad5079e925"
+    "MyNFT": "0x264a13FeF8D996a13C51205CfE62E1888ED69992",
+    "Marketplace": "0x2D020E2C7859eb69D03f6aC09F4A08E9a370C540"
   },
   "platformWallet": "0x11Dd223303346021d21a72818c3188187eA07FD3",
   "marketplaceAuthorized": true,
-  "timestamp": "2026-02-21T14:38:47.902Z"
+  "timestamp": "2026-02-24T09:33:54.086Z"
 }
