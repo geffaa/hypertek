@@ -27,7 +27,7 @@ contract Marketplace is ReentrancyGuard {
     
     mapping(address => mapping(uint256 => Listing)) public listings;
     
-    // Internal Balance Storage
+    // Internal Balance Storage — all funds held in escrow
     mapping(address => uint256) public sellerBalance;
     mapping(address => uint256) public creatorBalance;
     uint256 public platformBalance;
@@ -63,11 +63,33 @@ contract Marketplace is ReentrancyGuard {
         string role
     );
     
+    // ✅ Emitted when a minter pays the mint price directly to the creator's escrow
+    event FirstSaleDeposited(
+        address indexed buyer,
+        address indexed creator,
+        uint256 amount
+    );
+    
     constructor(address _platformWallet, address _usdcAddress) {
         require(_platformWallet != address(0), "Invalid platform wallet");
         require(_usdcAddress != address(0), "Invalid USDC address");
         platformWallet = _platformWallet;
         usdc = IERC20(_usdcAddress);
+    }
+
+    // ✅ NEW: Called when someone mints an NFT — they pay the mint price directly.
+    // 100% of the payment goes into creatorBalance[creator] in escrow.
+    // No listing required. The minter/buyer calls this right after mint.
+    function depositFirstSalePayment(address creator, uint256 amount) external nonReentrant {
+        require(amount > 0, "Amount must be greater than 0");
+        require(creator != address(0), "Invalid creator address");
+        
+        require(usdc.transferFrom(msg.sender, address(this), amount), "USDC transfer failed");
+        
+        // 100% to creator balance — creator can withdraw via withdrawCreator()
+        creatorBalance[creator] += amount;
+        
+        emit FirstSaleDeposited(msg.sender, creator, amount);
     }
     
     function createListing(
@@ -103,6 +125,15 @@ contract Marketplace is ReentrancyGuard {
         
         emit ListingCancelled(msg.sender, nftAddress, tokenId);
     }
+
+    // ✅ Admin emergency cancel
+    function emergencyCancelListing(address nftAddress, uint256 tokenId) external {
+        require(msg.sender == platformWallet, "Only platform wallet");
+        Listing storage listing = listings[nftAddress][tokenId];
+        require(listing.active, "Listing not active");
+        listing.active = false;
+        emit ListingCancelled(listing.seller, nftAddress, tokenId);
+    }
     
     function buyNFT(
         address nftAddress,
@@ -130,12 +161,12 @@ contract Marketplace is ReentrancyGuard {
         uint256 sellerAmount;
 
         if (isFirstSale) {
-            // First sale: 100% to creator — held in creatorBalance (same escrow as royalties)
+            // First sale via listing: 100% to creator
             creatorAmount = price;
             platformAmount = 0;
             sellerAmount = 0;
         } else {
-            // Secondary sales: 5% creator royalty, 10% platform fee, 85% seller
+            // Secondary sales: royaltyBps% to creator, 10% platform fee, rest to seller
             creatorAmount = (price * uint256(royaltyBps)) / 10000;
             platformAmount = (price * uint256(PLATFORM_FEE_BPS)) / 10000;
             sellerAmount = price - creatorAmount - platformAmount;

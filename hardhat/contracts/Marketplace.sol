@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 interface IMyNFT {
@@ -15,6 +16,7 @@ interface IMyNFT {
 
 contract Marketplace is ReentrancyGuard {
     address public platformWallet;
+    IERC20 public usdc;
     uint16 public constant PLATFORM_FEE_BPS = 1000; // 10%
     
     struct Listing {
@@ -24,6 +26,11 @@ contract Marketplace is ReentrancyGuard {
     }
     
     mapping(address => mapping(uint256 => Listing)) public listings;
+    
+    // Internal Balance Storage
+    mapping(address => uint256) public sellerBalance;
+    mapping(address => uint256) public creatorBalance;
+    uint256 public platformBalance;
     
     event ListingCreated(
         address indexed seller,
@@ -50,9 +57,23 @@ contract Marketplace is ReentrancyGuard {
         bool isFirstSale
     );
     
-    constructor(address _platformWallet) {
+    event Withdrawn(
+        address indexed user,
+        uint256 amount,
+        string role
+    );
+    
+    event FirstSaleDeposited(
+        address indexed buyer,
+        address indexed creator,
+        uint256 amount
+    );
+    
+    constructor(address _platformWallet, address _usdcAddress) {
         require(_platformWallet != address(0), "Invalid platform wallet");
+        require(_usdcAddress != address(0), "Invalid USDC address");
         platformWallet = _platformWallet;
+        usdc = IERC20(_usdcAddress);
     }
     
     function createListing(
@@ -89,14 +110,25 @@ contract Marketplace is ReentrancyGuard {
         emit ListingCancelled(msg.sender, nftAddress, tokenId);
     }
     
-    // ✅ FIXED: Proper order of operations and first sale handling
+    // ✅ NEW: Handle first sale payments BEFORE minting is completed on backend
+    function depositFirstSalePayment(address creator, uint256 amount) external nonReentrant {
+        require(amount > 0, "Amount must be greater than 0");
+        require(creator != address(0), "Invalid creator address");
+        
+        require(usdc.transferFrom(msg.sender, address(this), amount), "USDC transfer failed");
+        
+        // Correct attribution for first sale (100% to creator balance)
+        creatorBalance[creator] += amount;
+        
+        emit FirstSaleDeposited(msg.sender, creator, amount);
+    }
+    
     function buyNFT(
         address nftAddress,
         uint256 tokenId
-    ) external payable nonReentrant {
+    ) external nonReentrant {
         Listing storage listing = listings[nftAddress][tokenId];
         require(listing.active, "Listing not active");
-        require(msg.value == listing.price, "Incorrect payment amount");
         require(msg.sender != listing.seller, "Cannot buy your own NFT");
 
         address seller = listing.seller;
@@ -104,6 +136,9 @@ contract Marketplace is ReentrancyGuard {
 
         // Mark as inactive immediately
         listing.active = false;
+
+        // Transfer USDC from buyer to this contract
+        require(usdc.transferFrom(msg.sender, address(this), price), "USDC transfer failed");
 
         // Get royalty info from NFT contract
         IMyNFT nft = IMyNFT(nftAddress);
@@ -113,41 +148,29 @@ contract Marketplace is ReentrancyGuard {
         uint256 platformAmount;
         uint256 sellerAmount;
 
-        // ✅ FIX: Correct payment distribution based on sale type
         if (isFirstSale) {
-            // First sale: 100% to creator
+            // First sale: 100% to creator — held in creatorBalance (same escrow as royalties)
             creatorAmount = price;
             platformAmount = 0;
             sellerAmount = 0;
         } else {
-            // Secondary sales: royalty to creator, platform fee, rest to seller
+            // Secondary sales: 5% creator royalty, 10% platform fee, 85% seller
             creatorAmount = (price * uint256(royaltyBps)) / 10000;
             platformAmount = (price * uint256(PLATFORM_FEE_BPS)) / 10000;
             sellerAmount = price - creatorAmount - platformAmount;
         }
 
-        // ✅ FIX: Mark as sold BEFORE transferring NFT (while seller still owns it)
+        // ✅ All amounts held in contract escrow — claim via withdraw functions
+        if (creatorAmount > 0) creatorBalance[creator] += creatorAmount;
+        if (platformAmount > 0) platformBalance += platformAmount;
+        if (sellerAmount > 0) sellerBalance[seller] += sellerAmount;
+
+        // Mark first sale as done
         if (isFirstSale) {
             nft.markAsSold(tokenId);
         }
 
-        // Transfer payments in order: creator -> platform -> seller
-        if (creatorAmount > 0) {
-            (bool successCreator, ) = creator.call{value: creatorAmount}("");
-            require(successCreator, "Creator payment failed");
-        }
-
-        if (platformAmount > 0) {
-            (bool successPlatform, ) = platformWallet.call{value: platformAmount}("");
-            require(successPlatform, "Platform payment failed");
-        }
-
-        if (sellerAmount > 0) {
-            (bool successSeller, ) = seller.call{value: sellerAmount}("");
-            require(successSeller, "Seller payment failed");
-        }
-
-        // Transfer NFT to buyer (after all payments and marking)
+        // Transfer NFT to buyer
         IERC721(nftAddress).safeTransferFrom(seller, msg.sender, tokenId);
 
         emit NFTSold(
@@ -161,6 +184,37 @@ contract Marketplace is ReentrancyGuard {
             sellerAmount,
             isFirstSale
         );
+    }
+    
+    function withdrawSeller() external nonReentrant {
+        uint256 amount = sellerBalance[msg.sender];
+        require(amount > 0, "No seller balance to withdraw");
+        
+        sellerBalance[msg.sender] = 0;
+        require(usdc.transfer(msg.sender, amount), "USDC transfer failed");
+        
+        emit Withdrawn(msg.sender, amount, "seller");
+    }
+    
+    function withdrawCreator() external nonReentrant {
+        uint256 amount = creatorBalance[msg.sender];
+        require(amount > 0, "No creator balance to withdraw");
+        
+        creatorBalance[msg.sender] = 0;
+        require(usdc.transfer(msg.sender, amount), "USDC transfer failed");
+        
+        emit Withdrawn(msg.sender, amount, "creator");
+    }
+    
+    function withdrawPlatformFees() external nonReentrant {
+        require(msg.sender == platformWallet, "Only platform wallet can withdraw fees");
+        uint256 amount = platformBalance;
+        require(amount > 0, "No platform balance to withdraw");
+        
+        platformBalance = 0;
+        require(usdc.transfer(platformWallet, amount), "USDC transfer failed");
+        
+        emit Withdrawn(platformWallet, amount, "platform");
     }
     
     function getListing(address nftAddress, uint256 tokenId)

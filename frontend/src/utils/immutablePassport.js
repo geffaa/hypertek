@@ -3,8 +3,8 @@ import { config, passport } from '@imtbl/sdk';
 // TODO: Replace these with your actual Immutable Client ID and Redirect URIs
 // You can get these from the Immutable Developer Hub: https://hub.immutable.com/
 const CLIENT_ID = '06m2JNmyOCLTb1brTzQBt7HgveN69ORw';
-const REDIRECT_URI = 'https://hyper-tek-games.deventiatech.com/login/callback';
-const LOGOUT_REDIRECT_URI = 'https://hyper-tek-games.deventiatech.com/logout/callback'; // Optional, but recommended
+const REDIRECT_URI = 'http://localhost:5173/login/callback';
+const LOGOUT_REDIRECT_URI = 'http://localhost:5173/logout/callback'; // Optional, but recommended
 
 const baseConfig = new config.ImmutableConfiguration({
   environment: config.Environment.SANDBOX, // Change to PRODUCTION when ready
