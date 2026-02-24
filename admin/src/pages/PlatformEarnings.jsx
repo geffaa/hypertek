@@ -177,101 +177,133 @@ function PlatformEarnings() {
 
 
     return (
-        <div className="bg-black pt-12 overflow-hidden min-h-screen text-white relative">
-            {/* Bg Effect */}
-            <div
-                style={{
-                    top: `20px`,
-                    left: `950px`,
-                    width: "300px",
-                    height: "300px",
-                    background: "#002AA8",
-                    filter: "blur(180px)",
-                }}
-                className="absolute rounded-full pointer-events-none"
-            ></div>
+        <div className="w-full min-h-[950px] bg-black text-white px-16 pb-16 relative">
+      
+          {/* Background circles */}
+          <div
+            style={{
+              top: "20px",
+              left: "360px",
+              width: "250px",
+              height: "250px",
+              background: "#002AA8",
+              filter: "blur(180px)",
+              pointerEvents: "none",
+            }}
+            className="absolute rounded-full"
+          ></div>
+      
+          <div
+            style={{
+              top: "610px",
+              left: "860px",
+              width: "250px",
+              height: "250px",
+              background: "#002AA8",
+              filter: "blur(180px)",
+              pointerEvents: "none",
+            }}
+            className="absolute rounded-full"
+          ></div>
+      
+          {/* Header */}
+          <div style={{ width: "426px", height: "95px", gap: "22px" }}>
+            <h1
+              style={{
+                width: "426px",
+                height: "30px",
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 600,
+                fontSize: "25px",
+                color: "white",
+                marginBottom: "22px",
+              }}
+            >
+              Platform Treasury
+            </h1>
+      
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: "14px",
+                color: "#FFFFFFAB",
+              }}
+            >
+              Manage platform fees and creator earnings directly from the smart contract.
+            </p>
+          </div>
+      
+          {/* Wallet Status */}
+          <div className="mt-10 w-full max-w-[954px] bg-[#FFFFFF1C] rounded-md p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+  <div className="text-center sm:text-left">
+    {isConnected ? (
+      <p className="text-sm text-[#FFFFFFAB] font-mono break-all">
+        Connected: {address.slice(0, 10)}...{address.slice(-8)}
+      </p>
+    ) : (
+      <p className="text-sm text-[#FFFFFFAB]">
+        Wallet not connected
+      </p>
+    )}
+  </div>
 
-            <div className="flex flex-col gap-6 p-10 max-w-4xl mx-auto relative z-10 mt-[80px]">
-                <h1 className="text-4xl font-bold font-inter mb-2">Platform Treasury</h1>
-                <p className="text-white/60 mb-8 max-w-2xl">
-                    This dashboard interfaces directly with the Immutable Marketplace Smart Contract.
-                    All marketplace fees are held in decentralized escrow and can only be withdrawn by the authorized Platform Wallet.
-                </p>
-
-                {/* Security / Connection Panel */}
-                <div className="bg-[#1C1C1E] border border-white/10 rounded-xl p-6 mb-4 flex justify-between items-center">
-                    <div className="flex flex-col gap-1">
-                        <h3 className="text-lg font-semibold mb-1">Network Status</h3>
-                        {isConnected ? (
-                            <div className="flex flex-col">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                    <span className="text-sm font-mono text-white/70">{address.slice(0, 10)}...{address.slice(-8)}</span>
-                                </div>
-                                {walletUsdcBalance !== undefined && (
-                                    <span className="text-xs text-blue-400 mt-1">Wallet USDC: {ethers.formatUnits(walletUsdcBalance, 6)}</span>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                                <span className="text-sm text-white/70">Wallet not connected</span>
-                            </div>
-                        )}
-                    </div>
-
-                    <ConnectButton />
-                </div>
-
-                {/* Financials Card - Platform Fees */}
-                <div className="bg-[#1C1C1E] border border-green-500/30 rounded-xl p-8 shadow-[0_0_30px_rgba(34,197,94,0.1)]">
-                    <h2 className="text-white/60 text-sm font-semibold uppercase tracking-wider mb-2">Accumulated Platform Fees (10% fee)</h2>
-                    <div className="flex items-end gap-3 mb-6 border-b border-white/10 pb-6">
-                        <span className="text-6xl font-bold font-mono">{isReading ? "..." : balanceDisplay}</span>
-                        <span className="text-2xl text-blue-400 font-bold mb-1">USDC</span>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="bg-black/30 p-4 rounded-lg border border-white/5">
-                            <p className="text-sm text-white/50 mb-1">Authorized Platform Wallet:</p>
-                            <p className="font-mono text-sm text-white/80 break-all">
-                                {isWalletLoading ? "Loading..." : authorizedWallet || "Not Set"}
-                            </p>
-                            {walletError && <p className="text-[10px] text-red-500 mt-1">Error fetching wallet address</p>}
-                        </div>
-                        <button
-                            onClick={handleWithdraw}
-                            disabled={!isConnected || isReading || Number(balanceDisplay) <= 0}
-                            className="mt-2 w-full bg-green-600 hover:bg-green-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-4 rounded-lg font-bold text-lg transition-colors"
-                        >
-                            Withdraw Platform Fees
-                        </button>
-                    </div>
-                </div>
-
-                {/* Creator Earnings Card */}
-                <div className="bg-[#1C1C1E] border border-yellow-500/30 rounded-xl p-8 shadow-[0_0_30px_rgba(234,179,8,0.1)]">
-                    <h2 className="text-white/60 text-sm font-semibold uppercase tracking-wider mb-2">Creator Earnings (First sales + Royalties)</h2>
-                    <div className="flex items-end gap-3 mb-6 border-b border-white/10 pb-6">
-                        <span className="text-6xl font-bold font-mono text-yellow-400">{creatorDisplay}</span>
-                        <span className="text-2xl text-yellow-400 font-bold mb-1">USDC</span>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="bg-black/30 p-3 rounded-lg border border-white/5 text-sm text-white/50">
-                            ℹ️ This is the creator royalty balance for wallet <span className="font-mono text-yellow-300">{address?.slice(0, 10)}...</span>
-                        </div>
-                        <button
-                            onClick={handleCreatorWithdraw}
-                            disabled={!isConnected || Number(creatorDisplay) <= 0}
-                            className="mt-2 w-full bg-yellow-600 hover:bg-yellow-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-4 rounded-lg font-bold text-lg transition-colors"
-                        >
-                            Withdraw Creator Earnings
-                        </button>
-                    </div>
-                </div>
-
+  <div className="flex justify-center sm:justify-end">
+    <ConnectButton />
+  </div>
+</div>
+      
+          {/* Platform Fees Section */}
+          <div className="mt-12 w-full max-w-[954px] space-y-6">
+      
+            <div className="flex justify-between items-center border-b border-white/20 pb-6">
+              <div>
+                <p className="text-[#FFFFFFAB] text-sm">Accumulated Platform Fees</p>
+                <h2 className="text-4xl font-semibold mt-2">
+                  {isReading ? "..." : balanceDisplay} USDC
+                </h2>
+              </div>
+      
+              <button
+                onClick={handleWithdraw}
+                disabled={!isConnected || isReading || Number(balanceDisplay) <= 0}
+                className="px-8 py-3 bg-white text-black rounded-md font-medium disabled:opacity-40"
+              >
+                Withdraw
+              </button>
             </div>
+      
+            {/* Authorized Wallet */}
+            <div className="bg-[#FFFFFF1C] p-4 rounded-md">
+              <p className="text-sm text-[#FFFFFFAB] mb-1">
+                Authorized Platform Wallet
+              </p>
+              <p className="text-sm font-mono break-all">
+                {isWalletLoading ? "Loading..." : authorizedWallet || "Not Set"}
+              </p>
+            </div>
+      
+            {/* Creator Earnings */}
+            <div className="flex justify-between items-center border-b border-white/20 pb-6 mt-10">
+              <div>
+                <p className="text-[#FFFFFFAB] text-sm">Creator Earnings</p>
+                <h2 className="text-4xl font-semibold mt-2">
+                  {creatorDisplay} USDC
+                </h2>
+              </div>
+      
+              <button
+                onClick={handleCreatorWithdraw}
+                disabled={!isConnected || Number(creatorDisplay) <= 0}
+                className="px-8 py-3 bg-white text-black rounded-md font-medium disabled:opacity-40"
+              >
+                Withdraw
+              </button>
+            </div>
+      
+          </div>
         </div>
-    );
+      );
 }
 
 export default PlatformEarnings;

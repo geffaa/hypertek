@@ -1,42 +1,22 @@
 import { useState, useEffect, useRef } from "react";
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-
 import { useSelector } from "react-redux";
-
 import axios from "axios";
 
-
-
 import Logo from "../../assets/Sidebar/logo1.png";
-
 import DashboardImage from "../../assets/Sidebar/dashboard.png";
-
 import CreateCollection1 from "../../assets/Sidebar/create1.png";
-
 import CreateCollection2 from "../../assets/Sidebar/create2.png";
-
 import CollectionImage from "../../assets/Sidebar/collections.png";
-
 import EditUser from "../../assets/Sidebar/editUser.png";
-
 import NewsImage from "../../assets/Sidebar/news.png";
-
 import TransactionImage from "../../assets/Sidebar/transaction.png";
-
 import SaleImage from "../../assets/Sidebar/sale.png";
-
 import SupportImage from "../../assets/Sidebar/support.png";
-
 import LogoutImage from "../../assets/Sidebar/logout.png";
 
-
-
 import { Dashboard_Base_Url } from "../../Config";
-
-
 
 const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const admin = useSelector((state) => state.admin.admin);
@@ -44,6 +24,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const location = useLocation();
   const path = location.pathname || "";
   const navigate = useNavigate();
+
   const [openCreate, setOpenCreate] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openNews, setOpenNews] = useState(false);
@@ -64,29 +45,30 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const handleCategoryClick = (cat) => {
     if (!adminId) return;
     const categoryKey = (cat.key || "").toLowerCase();
+    if (window.innerWidth < 1024) onClose && onClose();
 
-    if (window.innerWidth < 1024) {
-      onClose && onClose();
-    }
-
-    if (categoryKey) {
-      navigate(`/${adminId}/collections/${categoryKey}`);
-    } else {
-      navigate(`/${adminId}/collections`);
-    }
+    navigate(
+      categoryKey
+        ? `/${adminId}/collections/${categoryKey}`
+        : `/${adminId}/collections`
+    );
   };
 
-  // Active state from URL (blue bg)
   const isDashboard = path.endsWith("/dashboard");
-  const isCreate = path.includes("create-collection") || path.includes("edit-collection") || path.includes("creator-earning");
+  const isCreate =
+    path.includes("create-collection") ||
+    path.includes("edit-collection") ||
+    path.includes("creator-earning");
   const isCollection = path.includes("/collections");
   const isUsers = path.includes("/users");
-  const isNews = path.includes("add-news") || path.includes("edit-news") || path.includes("other-news");
+  const isNews =
+    path.includes("add-news") ||
+    path.includes("edit-news") ||
+    path.includes("other-news");
   const isSale = path.includes("collection-listed-sale");
   const isTransaction = path.includes("/transactions");
   const isSupport = path.includes("/support");
 
-  // Toggle dropdowns
   const toggleDropdown = (type) => {
     setOpenCreate(type === "create" ? !openCreate : false);
     setOpenCollection(type === "collection" ? !openCollection : false);
@@ -95,7 +77,6 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
     setOpenSale(type === "sale" ? !openSale : false);
   };
 
-  // Close dropdowns if click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
@@ -118,7 +99,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
       const parents = res.data.collections || [];
       setCategories(
         parents.map((p) => ({
-          key: (p.category || "").toLowerCase(),   // ⭐ important
+          key: (p.category || "").toLowerCase(),
           label: p.collection?.name || "Unnamed Collection",
         }))
       );
@@ -127,73 +108,48 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
     }
   };
 
-  // Initial fetch + listen for dynamic updates
   useEffect(() => {
-    fetchCategories(); // first load
-
-    const handleUpdate = () => {
-      fetchCategories(); // refresh when event triggered
-    };
-
-    window.addEventListener("categoriesUpdated", handleUpdate);
-    return () => {
-      window.removeEventListener("categoriesUpdated", handleUpdate);
-    };
+    fetchCategories();
+    window.addEventListener("categoriesUpdated", fetchCategories);
+    return () =>
+      window.removeEventListener("categoriesUpdated", fetchCategories);
   }, []);
 
   return (
     <div
-      className={`sidebar text-white p-4 bg-[#100F0F] z-50 h-screen w-[298px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+      className={`sidebar text-white p-3 bg-[#100F0F] z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${
+        isOpen
+          ? "translate-x-0"
+          : "-translate-x-full lg:translate-x-0"
+      }`}
       ref={sidebarRef}
     >
-
       <div className="flex flex-col justify-between h-full">
-
         <div className="flex-1">
-
-          {/* LOGO - Centered */}
-
-          <div className="flex justify-center mt-12 mb-12">
-
+          {/* LOGO */}
+          <div className="flex justify-center mt-10 mb-10">
             <div className="hidden lg:flex items-center gap-1.5 cursor-pointer">
-
-              <img src={Logo} alt="logo" className="w-[35px] h-[35px]" />
-
+              <img src={Logo} alt="logo" className="w-[30px] h-[30px]" />
               <Link to="https://hyper-tek-games.deventiatech.com">
-
-                <span className="font-inter font-bold text-[18px] leading-[22px]">
-
+                <span className="font-inter font-bold text-[16px] leading-[20px]">
                   HYPER TEK
-
                 </span>
-
               </Link>
-
             </div>
-
           </div>
 
-
-
           {/* MENU */}
-
-          <ul className="flex flex-col items-center space-y-4">
-
-            {/* Dashboard */}
-
+          <ul className="flex flex-col items-center space-y-3">
             <Link to={withAdmin("/dashboard")} onClick={handleLinkClick}>
               <li className={`menu-item ${isDashboard ? "bg-[#002AA8]" : ""}`}>
-                <img src={DashboardImage} className="w-[22px]" />
+                <img src={DashboardImage} className="w-[20px]" />
                 <span>Dashboard</span>
               </li>
             </Link>
 
-            {/* Platform Earnings Tab */}
             <Link to={withAdmin("/platform-earnings")} onClick={handleLinkClick}>
               <li className={`menu-item ${path.includes("platform-earnings") ? "bg-[#002AA8]" : ""}`}>
-                {/* Re-using dashboard image or simple wallet icon */}
-                <span style={{ fontSize: "20px", marginLeft: "4px" }}>💸</span>
+                <img src={CreateCollection2} className="w-[18px]" />
                 <span>Platform Earnings</span>
               </li>
             </Link>
@@ -597,139 +553,79 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
       {/* TAILWIND HELPERS */}
 
       <style>{`
-
-        .menu-item {
-
-          width: 222px;
-
-          height: 42px;
-
-          padding: 0 12px;
-
-          display: flex;
-
-          align-items: center;
-
-          gap: 12px;
-
-          border-radius: 6px;
-
-          cursor: pointer;
-
-        }
-
-        
-
-        .submenu-item {
-
-          position: relative;
-
-          padding-left: 28px;
-
-          color: white;
-
-          cursor: pointer;
-
-          display: flex;
-
-          align-items: center;
-
-          min-height: 28px;
-
-        }
-
-        
-
-        
-
-        .submenu-line {
-
-          position: absolute;
-
-          left: 0px;              /* Changed from -7px to 0px (7px shift right) */
-
-          top: 0;
-
-          height: 100%;
-
-          width: 24px;
-
-        }
-
-        
-
-        /* Vertical line that extends down */
-
-        .line-vertical {
-
-          position: absolute;
-
-          left: 0;
-
-          top: -8px;
-
-          width: 1.5px;
-
-          height: calc(100% + 8px);
-
-          background-color: #666666;
-
-        }
-
-        
-
-        /* Vertical line for last item - starts from above and stops at middle */
-
-        .line-vertical-short {
-
-          position: absolute;
-
-          left: 0;
-
-          top: -8px;
-
-          width: 1.5px;
-
-          height: calc(50% + 8px);
-
-          background-color: #666666;
-
-        }
-
-        
-
-        /* Horizontal line */
-
-        .line-horizontal {
-
-          position: absolute;
-
-          left: 0;
-
-          top: 50%;
-
-          width: 24px;
-
-          height: 1.5px;
-
-          background-color: #666666;
-
-          transform: translateY(-50%);
-
-        }
-
-        
-
-        /* Remove vertical line from last item to prevent overflow */
-
-        .submenu-item-last .line-vertical {
-
-          display: none;
-
-        }
-
-      `}</style>
-
+.menu-item {
+  width: 200px;
+  height: 38px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.submenu-item {
+  position: relative;
+  padding-left: 24px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.submenu-line {
+  position: absolute;
+  left: 0px;
+  top: 0;
+  height: 100%;
+  width: 20px;
+}
+
+.line-vertical {
+  position: absolute;
+  left: 0;
+  top: -6px;
+  width: 1.5px;
+  height: calc(100% + 6px);
+  background-color: #666666;
+}
+
+.line-vertical-short {
+  position: absolute;
+  left: 0;
+  top: -6px;
+  width: 1.5px;
+  height: calc(50% + 6px);
+  background-color: #666666;
+}
+
+.line-horizontal {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 1.5px;
+  background-color: #666666;
+  transform: translateY(-50%);
+}
+
+.submenu-item-last .line-vertical {
+  display: none;
+}
+`}</style>
     </div>
 
   );
