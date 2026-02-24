@@ -18,7 +18,7 @@ const DashboardLayout = () => {
   const [userData, setUserData] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const hideScrollPages = ["/collections"];
+  const hideScrollPages = [];
   const shouldHideScroll = hideScrollPages.some((page) =>
     location.pathname.includes(page)
   );

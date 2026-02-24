@@ -3,10 +3,6 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import ChatImage from "../assets/icon.png";
-import Icon1 from "../assets/Support/icon1.png";
-import Icon2 from "../assets/Support/icon2.png";
-import Icon3 from "../assets/Support/icon3.png";
-import Icon4 from "../assets/Support/icon4.png";
 import SendIcon from "../assets/Support/sendIcon.png";
 
 function Support() {
@@ -65,15 +61,7 @@ function Support() {
       auth: { token: token, adminId: adminInfo._id, role: adminInfo.Role },
     });
 
-    newSocket.on("connect", () =>
-      console.log("✅ Socket connected:", newSocket.id)
-    );
-    newSocket.on("connect_error", (err) =>
-      console.error("❌ Socket error:", err.message)
-    );
-
     setSocket(newSocket);
-
     return () => newSocket.disconnect();
   }, [adminInfo, token]);
 
@@ -101,7 +89,6 @@ function Support() {
         );
         setChats(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
-        console.error(err.response?.data || err.message);
         setChats([]);
       }
     };
@@ -123,10 +110,9 @@ function Support() {
           }
         );
         setMessages(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error(err.response?.data || err.message);
-      }
+      } catch (err) {}
     };
+
     fetchMessages();
 
     socket.emit("joinRoom", {
@@ -137,14 +123,14 @@ function Support() {
 
   useEffect(() => {
     if (!socket) return;
+
     socket.on("receiveMessage", (msg) => {
       if (msg.roomId === selectedChat?._id)
         setMessages((prev) => [...prev, msg]);
     });
-    socket.on("roomJoined", (roomId) => console.log("✅ Room joined:", roomId));
+
     return () => {
       socket.off("receiveMessage");
-      socket.off("roomJoined");
     };
   }, [socket, selectedChat]);
 
@@ -170,7 +156,7 @@ function Support() {
 
   if (!adminInfo) {
     return (
-      <div className="flex bg-black items-center justify-center">
+      <div className="flex bg-black items-center justify-center h-screen">
         <div className="text-white text-center">
           <h1 className="text-2xl mb-4">⚠️ Authentication Required</h1>
           <p>Please login as admin to access support chat.</p>
@@ -180,33 +166,10 @@ function Support() {
   }
 
   return (
-    <div className="flex bg-black p-4 h-[80vh] gap-4 relative overflow-hidden">
-      {/* Background Blurs */}
-      <div
-        style={{
-          top: "20px",
-          left: "360px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full pointer-events-none"
-      ></div>
-      <div
-        style={{
-          top: "810px",
-          left: "960px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full pointer-events-none"
-      ></div>
-
+    <div className="flex flex-col lg:flex-row bg-black p-2 sm:p-4 h-screen lg:h-[80vh] gap-4 relative overflow-hidden">
+      
       {/* Sidebar */}
-      <div className="flex flex-col w-[304px]  p-2 overflow-y-auto bg-black">
+      <div className="flex flex-col w-full lg:w-[304px] max-h-[200px] lg:max-h-full p-2 overflow-y-auto bg-black">
         <div className="text-white text-xs p-2 bg-gray-800 rounded mb-2">
           <p>👤 Admin: {adminInfo.FullName}</p>
           <p className="text-gray-400">{adminInfo.Email}</p>
@@ -222,15 +185,16 @@ function Support() {
           <div
             key={chat._id}
             onClick={() => handleChatClick(chat)}
-            className={`flex items-center justify-between gap-2 my-2 p-2 rounded cursor-pointer ${selectedChat?._id === chat._id ? "bg-gray-800" : ""
-              }`}
+            className={`flex items-center gap-2 my-2 p-2 rounded cursor-pointer ${
+              selectedChat?._id === chat._id ? "bg-gray-800" : ""
+            }`}
           >
             <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
-            <div className="flex flex-col flex-1 justify-center gap-0.5 min-w-0">
-              <h1 className="font-semibold text-[14px] text-[#414651] m-0">
+            <div className="flex flex-col flex-1 min-w-0">
+              <h1 className="font-semibold text-[14px] text-white truncate">
                 {chat.userId?.FullName || "User"}
               </h1>
-              <p className="text-[12px] text-[#757285] truncate">
+              <p className="text-[12px] text-gray-400 truncate">
                 {chat.userId?.Email || ""}
               </p>
             </div>
@@ -239,7 +203,8 @@ function Support() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex flex-col flex-1 h-full  rounded">
+      <div className="flex flex-col flex-1 h-full rounded min-h-0">
+        
         {/* Header */}
         <div className="flex items-center gap-2 w-full min-h-[50px] border-b border-white p-2 bg-black">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
@@ -267,22 +232,18 @@ function Support() {
             messages.map((msg) =>
               msg.senderRole === "admin" ? (
                 <div key={msg._id} className="flex justify-end gap-3 items-end">
-                  <div className="flex flex-col max-w-[401px] gap-2 p-2.5 bg-[#1D7AD6] rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] text-white">
+                  <div className="flex flex-col max-w-[80%] sm:max-w-[401px] gap-2 p-2.5 bg-[#1D7AD6] rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] text-white">
                     <p className="text-[12px] break-words">{msg.message}</p>
                     <p className="text-right text-[12px]">
                       {formatTime(msg.createdAt)}
                     </p>
                   </div>
-                  <img
-                    src={ChatImage}
-                    alt=""
-                    className="w-8 h-8 rounded-full"
-                  />
+                  <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
                 </div>
               ) : (
                 <div
                   key={msg._id}
-                  className="flex flex-col max-w-[401px] bg-[#F3F4F6] rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px] p-3 gap-2"
+                  className="flex flex-col max-w-[80%] sm:max-w-[401px] bg-[#F3F4F6] rounded-tr-[12px] rounded-tl-[12px] rounded-br-[12px] p-3 gap-2"
                 >
                   <p className="text-[12px] text-black break-words">
                     {msg.message}
@@ -298,7 +259,7 @@ function Support() {
 
         {/* Input */}
         {selectedChat && (
-          <div className="flex flex-col bg-gray-50 border-t border-[#EDEDED] p-2 gap-2 rounded-xl">
+          <div className="flex flex-col bg-gray-50 border-t border-[#EDEDED] p-2 gap-2 rounded-xl w-full">
             <input
               type="text"
               value={text}
@@ -307,8 +268,7 @@ function Support() {
               placeholder="Type your message..."
               className="w-full text-black text-[12px] rounded px-2 py-1 outline-none"
             />
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2">{/* Add any icons here */}</div>
+            <div className="flex justify-end">
               <button
                 onClick={handleSendMessage}
                 className="flex items-center gap-2 bg-[#1D7AD6] px-3 py-1 rounded text-white text-[12px]"
@@ -321,8 +281,8 @@ function Support() {
         )}
       </div>
 
-      {/* Right Side */}
-      <div className="w-[160px] p-2 flex-shrink-0">
+      {/* Right Panel (Desktop Only) */}
+      <div className="hidden lg:block w-[160px] p-2 flex-shrink-0">
         {selectedChat && (
           <>
             <h1 className="text-white text-[12px] mb-2">User Details</h1>

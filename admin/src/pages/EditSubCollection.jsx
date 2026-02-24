@@ -364,13 +364,11 @@ function EditSubCollection() {
 
               min="0"
 
-              step="0.0001"
-
               value={priceETH}
 
               onChange={(e) => setPriceETH(e.target.value)}
 
-              placeholder="0.0000"
+              placeholder="Enter Price"
 
               className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
 
