@@ -368,7 +368,7 @@ function Category() {
 
 
 
-      <div className="pl-7 mt-12 z-10 relative h-[500px] ml-12 overflow-x-auto">
+      <div className="pl-7 mt-12 z-10 relative ml-12">
 
         <table className="min-w-[950px] text-left rounded-lg overflow-hidden">
 
@@ -526,20 +526,14 @@ function Category() {
 
 
 
-        <div className="flex justify-start items-center mt-6 px-6 gap-4">
+      </div>
 
-          {parentCollections.slice(0, 1).map((parent) => (
-
-            <button key={parent._id} onClick={() => handleAddMore(parent)} className="bg-blue-700 text-white px-6 py-2 rounded-md text-sm">
-
-              Add More
-
-            </button>
-
-          ))}
-
-        </div>
-
+      <div className="flex justify-start items-center mt-6 px-6 ml-12 gap-4 pb-20">
+        {parentCollections.slice(0, 1).map((parent) => (
+          <button key={parent._id} onClick={() => handleAddMore(parent)} className="bg-blue-700 text-white px-6 py-2 rounded-md text-sm">
+            Add More
+          </button>
+        ))}
       </div>
 
 
