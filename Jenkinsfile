@@ -32,17 +32,36 @@ pipeline {
             }
         }
 
-        stage('Prepare Deployment Directory') {
-            steps {
-                echo ":file_folder: Preparing deployment directory..."
-                sh """
-                    sudo rm -rf $DEPLOY_DIR
-                    sudo mkdir -p $DEPLOY_DIR
-                    sudo cp -r . $DEPLOY_DIR
-                    sudo chown -R \$(whoami):\$(whoami) $DEPLOY_DIR
-                """
-            }
-        }
+stage('Prepare Deployment Directory') {
+    steps {
+        echo ":file_folder: Preparing deployment directory..."
+
+        sh """
+            # Stop backend before touching files
+            if pm2 describe hyper-tek-backend >/dev/null 2>&1; then
+                pm2 stop hyper-tek-backend || true
+            fi
+
+            # Remove immutable flags if any
+            sudo chattr -R -i $DEPLOY_DIR || true
+
+            # Fix ownership before delete
+            sudo chown -R jenkins:jenkins $DEPLOY_DIR || true
+
+            # Delete safely (ignore minor errors)
+            sudo rm -rf $DEPLOY_DIR || true
+
+            # Recreate directory
+            sudo mkdir -p $DEPLOY_DIR
+
+            # Copy new source
+            sudo cp -r . $DEPLOY_DIR
+
+            # Set correct ownership
+            sudo chown -R jenkins:jenkins $DEPLOY_DIR
+        """
+    }
+}
 
         stage('Build User Frontend') {
             steps {
@@ -160,6 +179,7 @@ stage('Restart Backend') {
     }
 }
  
+
 
 
 
