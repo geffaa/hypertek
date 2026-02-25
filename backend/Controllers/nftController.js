@@ -410,6 +410,11 @@ export async function mintSubCollection(req, res) {
       } else {
         console.log("✅ NFT already owned by creator");
       }
+
+      // ✅ Mark as sold so smart contract treats next sale as secondary
+      const markTx = await nftContract.markAsSold(tokenId);
+      await markTx.wait();
+      console.log("✅ Marked as sold on contract (isFirstSale = false)");
     } catch (mintErr) {
       console.error("❌ Mint error:", mintErr);
 

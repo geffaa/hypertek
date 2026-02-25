@@ -684,12 +684,99 @@ function Buy1() {
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
         toast.loading("🛒 Processing purchase...", { id: toastId });
-        console.log("🆕 NFA not minted yet, minting to buyer...");
+        console.log("🆕 NFA not minted yet, processing first sale...");
 
+        const mintPrice = collection.priceETH || 0.01;
+        const priceWei = ethers.parseUnits(String(mintPrice), 6); // USDC uses 6 decimals
+
+        if (usdcBalance < priceWei) {
+          toast.error(
+            `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(priceWei, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
+            { id: toastId, duration: 6000 },
+          );
+          setLoading(false);
+          return;
+        }
+
+        // Check allowance
+        toast.loading("🔒 Checking USDC allowance...", { id: toastId });
+        const allowance = await publicClient.readContract({
+          ...usdcContractOptions,
+          functionName: 'allowance',
+          args: [buyer, CURRENT_MARKETPLACE_ADDRESS],
+        });
+
+        if (allowance < priceWei) {
+          toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
+          try {
+            const { request: approveReq } = await publicClient.simulateContract({
+              ...usdcContractOptions,
+              functionName: 'approve',
+              args: [CURRENT_MARKETPLACE_ADDRESS, priceWei],
+              account: activeAddress,
+            });
+            const approveTxHash = await activeWalletClient.writeContract(approveReq);
+            toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
+            await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
+            console.log("✅ USDC Approved for Marketplace (First Sale)");
+          } catch (approveErr) {
+            console.error("❌ USDC Approval failed:", approveErr);
+            let msg = "❌ USDC Approval failed";
+            if (approveErr.message?.includes("user rejected") || approveErr.code === 4001) {
+              msg = "❌ Transaction rejected by user";
+            } else {
+              msg = `❌ Error: ${approveErr.shortMessage || approveErr.message?.substring(0, 50) || "Unknown"}`;
+            }
+            toast.error(msg, { id: toastId, duration: 8000 });
+            setLoading(false);
+            return;
+          }
+        }
+
+        // Determine creator to pay
+        // We fallback to PLATFORM_WALLET_ADDRESS if no known creator address
+        const creatorWalletRaw = collection.creator || collection.owner;
+        const creatorWallet = (creatorWalletRaw && creatorWalletRaw.toLowerCase() !== "admin" && ethers.isAddress(creatorWalletRaw))
+          ? creatorWalletRaw.toLowerCase()
+          : PLATFORM_WALLET_ADDRESS.toLowerCase();
+
+        // Call depositFirstSalePayment on Marketplace contract
+        toast.loading("💸 Depositing payment to smart contract...", { id: toastId });
+        try {
+          const marketplaceContract = {
+            address: CURRENT_MARKETPLACE_ADDRESS,
+            abi: MARKETPLACE_ABI,
+          };
+
+          const { request: depositReq } = await publicClient.simulateContract({
+            ...marketplaceContract,
+            functionName: 'depositFirstSalePayment',
+            args: [creatorWallet, priceWei],
+            account: activeAddress,
+          });
+          const depositTxHash = await activeWalletClient.writeContract(depositReq);
+
+          toast.loading("⏳ Finalizing payment...", { id: toastId });
+          await publicClient.waitForTransactionReceipt({ hash: depositTxHash });
+          console.log("✅ First sale payment deposited to creator:", creatorWallet);
+        } catch (depositErr) {
+          console.error("❌ Payment failed:", depositErr);
+          let msg = "❌ Payment failed during deposit";
+          if (depositErr.message?.includes("user rejected") || depositErr.code === 4001) {
+            msg = "❌ Transaction rejected by user";
+          } else {
+            msg = `❌ Error: ${depositErr.shortMessage || depositErr.message?.substring(0, 50) || "Unknown"}`;
+          }
+          toast.error(msg, { id: toastId, duration: 8000 });
+          setLoading(false);
+          return;
+        }
+
+        toast.loading("🚀 Minting NFT to your wallet...", { id: toastId });
         const mintedTokenId = await mintNFTToWallet(buyer);
 
         if (!mintedTokenId) {
-          toast.error("❌ Failed to process purchase", { id: toastId });
+          toast.error("❌ Payment succeeded but failed to mint NFT. Please contact support.", { id: toastId });
           setLoading(false);
           return;
         }
@@ -700,11 +787,8 @@ function Buy1() {
         setOnChainOwner(buyer.toLowerCase());
         console.log("✅ NFA prepared, Token ID:", mintedTokenId);
 
-        toast.loading("⏳ Finalizing purchase...", { id: toastId });
-
-
         toast.success(
-          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${collection.priceETH || 0.01} USDC\n\n⛓️ Blockchain confirmation in progress...`,
+          `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${mintPrice} USDC\n\n⛓️ Blockchain confirmation in progress...`,
           { id: toastId, duration: 8000 },
         );
 
@@ -715,7 +799,7 @@ function Buy1() {
           navigate("/Profile", { state: { category: targetCategory } });
         }, 2000);
 
-        return; // Scenario 1 already processed the sale on the backend during minting!
+        return; // Scenario 1 completed
       }
 
       /* ================= SCENARIO 2: ALREADY MINTED ================= */

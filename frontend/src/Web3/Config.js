@@ -3,8 +3,8 @@
 // ✅ Addresses from your deployment
 
 // Immutable zkEVM Testnet
-export const IMMUTABLE_NFT_ADDRESS = "0x6663D00942E9F333B67431f7930a3f9DE2312aAA";
-export const IMMUTABLE_MARKETPLACE_ADDRESS = "0x41E374A11391AfE9920c3c107CA8F578e34B6006";
+export const IMMUTABLE_NFT_ADDRESS = "0x70A6f0EFE23aD7f3dC981b1517D6637E13462dBb";
+export const IMMUTABLE_MARKETPLACE_ADDRESS = "0xD40544ff822b29762cFE690b90261fD54A31386F";
 
 // USDC Addresses (Testnet Placeholders - Replace with actual if different)
 export const IMMUTABLE_USDC_ADDRESS = "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE"; // Mock USDC for Testing
