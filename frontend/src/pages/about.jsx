@@ -163,81 +163,81 @@ function About() {
           </div>
         </div>
 
-     {/* ---------------- Second Section ---------------- */}
-<div className="relative w-full z-10 min-h-[750px] rounded-xl overflow-hidden bg-[#00114280]
+        {/* ---------------- Second Section ---------------- */}
+        <div className="relative w-full z-10 min-h-[750px] rounded-xl overflow-hidden bg-[#00114280]
 ">
-  {/* Background Image Layer */}
-  <div className="absolute inset-0">
-    {/* Full Background Image (shows full image, no scroll) */}
-    <div
-      className="absolute inset-0 "
-      style={{
-        backgroundImage: `url(${aboutsecond})`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain", // show the entire image (no cropping)
-      }}
-    ></div>
+          {/* Background Image Layer */}
+          <div className="absolute inset-0">
+            {/* Full Background Image (shows full image, no scroll) */}
+            <div
+              className="absolute inset-0 "
+              style={{
+                backgroundImage: `url(${aboutsecond})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain", // show the entire image (no cropping)
+              }}
+            ></div>
 
-    {/* Blue Semi-Transparent Overlay */}
-    <div
-      className="absolute inset-0 bg-[#00114280]"
-    ></div>
-  </div>
+            {/* Blue Semi-Transparent Overlay */}
+            <div
+              className="absolute inset-0 bg-[#00114280]"
+            ></div>
+          </div>
 
-  {/* Foreground Content */}
-  <div className="relative z-10 h-full py-12 md:py-16">
-    <GlowingOrb Xaxis={1100} Yaxis={700} />
+          {/* Foreground Content */}
+          <div className="relative z-10 h-full py-12 md:py-16">
+            <GlowingOrb Xaxis={1100} Yaxis={700} />
 
-    {/* Story Section */}
-    <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-4 max-w-[1020px] mx-auto text-white px-4">
-      <img
-        src={RightImage}
-        alt="About Hyper Tek Story"
-        className="w-full max-w-[400px] h-auto shadow-lg rounded-xl object-contain order-1 md:order-2"
-      />
-      <div className="order-2 md:order-1">
-        <h2 className="font-inter font-semibold text-lg md:text-xl mb-4">
-          The year in 2117
-        </h2>
-        <p className="font-inter text-sm md:text-base leading-relaxed">
-          The year is 2117. Humanity didn't conquer the stars — it fractured into them. 
-          After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, 
-          enhanced genomes, and prototypes across thousands of seed worlds. Each evolved 
-          in isolation forming new species, cultures, and technologies. At the center of it 
-          all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. 
-          It awakens you — a reborn Overlord, forged by legacy and technology.
-        </p>
-      </div>
-    </div>
+            {/* Story Section */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-4 max-w-[1020px] mx-auto text-white px-4">
+              <img
+                src={RightImage}
+                alt="About Hyper Tek Story"
+                className="w-full max-w-[400px] h-auto shadow-lg rounded-xl object-contain order-1 md:order-2"
+              />
+              <div className="order-2 md:order-1">
+                <h2 className="font-inter font-semibold text-lg md:text-xl mb-4">
+                  The year in 2117
+                </h2>
+                <p className="font-inter text-sm md:text-base leading-relaxed">
+                  The year is 2117. Humanity didn't conquer the stars — it fractured into them.
+                  After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI,
+                  enhanced genomes, and prototypes across thousands of seed worlds. Each evolved
+                  in isolation forming new species, cultures, and technologies. At the center of it
+                  all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power.
+                  It awakens you — a reborn Overlord, forged by legacy and technology.
+                </p>
+              </div>
+            </div>
 
-    {/* War Section */}
-    <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12 md:mt-16 max-w-[1020px] mx-auto text-white px-4 pb-12 md:pb-16">
-      <img
-        src={RightImage}
-        alt="About Hyper Tek War"
-        className="w-full max-w-[400px] h-auto shadow-lg rounded-xl object-contain order-1 md:order-1"
-      />
-      <div className="text-white order-2 md:order-2">
-        <h2 className="font-inter font-semibold text-lg md:text-xl mb-4">
-          Three Fronts of War
-        </h2>
-        <p className="font-inter text-sm md:text-base mb-3 leading-relaxed">
-          <span className="font-semibold">HyperQuest 100 | The Awakening</span> — Explore ruins, clash with factions, and uncover ancient tech.
-          Your choices shape your skills, species loyalty, and path: liberator or dominator, relic hunter or techno savant.
-        </p>
-        <p className="font-inter text-sm md:text-base mb-3 leading-relaxed">
-          <span className="font-semibold">Hyper Racing 100</span> — The Velocity Wars: On Blacktrack Circuits, speed is war. Factions battle at 900 kph for control of energy routes and warp towers. Your vehicle is your weapon and your rise rewrites the map.
-        </p>
-        <p className="font-inter text-sm md:text-base leading-relaxed">
-          <span className="font-semibold">Overlord Realm | The Final Ascent</span>
-          <br />
-          Establish dominion across stars. Conquer with armies, alliances, or fear. Deploy psychic storms, orbital AI, and propaganda to bend entire systems to your rule.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+            {/* War Section */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 mt-12 md:mt-16 max-w-[1020px] mx-auto text-white px-4 pb-12 md:pb-16">
+              <img
+                src={RightImage}
+                alt="About Hyper Tek War"
+                className="w-full max-w-[400px] h-auto shadow-lg rounded-xl object-contain order-1 md:order-1"
+              />
+              <div className="text-white order-2 md:order-2">
+                <h2 className="font-inter font-semibold text-lg md:text-xl mb-4">
+                  Three Fronts of War
+                </h2>
+                <p className="font-inter text-sm md:text-base mb-3 leading-relaxed">
+                  <span className="font-semibold">HyperQuest 100 | The Awakening</span> — Explore ruins, clash with factions, and uncover ancient tech.
+                  Your choices shape your skills, species loyalty, and path: liberator or dominator, relic hunter or techno savant.
+                </p>
+                <p className="font-inter text-sm md:text-base mb-3 leading-relaxed">
+                  <span className="font-semibold">Hyper Racing 100</span> — The Velocity Wars: On Blacktrack Circuits, speed is war. Factions battle at 900 kph for control of energy routes and warp towers. Your vehicle is your weapon and your rise rewrites the map.
+                </p>
+                <p className="font-inter text-sm md:text-base leading-relaxed">
+                  <span className="font-semibold">Overlord Realm | The Final Ascent</span>
+                  <br />
+                  Establish dominion across stars. Conquer with armies, alliances, or fear. Deploy psychic storms, orbital AI, and propaganda to bend entire systems to your rule.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
         {/* ---------------- Ecosystem Section ---------------- */}
@@ -258,7 +258,7 @@ function About() {
               <img
                 src={vector}
                 alt="NFA"
-                className="w-[93.97px] h-[89.43px] mb-8 object-contain"
+                className="w-[95px] h-[95px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 NFA
@@ -273,7 +273,7 @@ function About() {
               <img
                 src={game}
                 alt="Game"
-                className="w-[95px] h-[62px] mb-8 object-contain"
+                className="w-[130px] h-[90px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 Game
@@ -289,7 +289,7 @@ function About() {
               <img
                 src={exchange}
                 alt="Marketplace"
-                className="w-[80px] h-[80px] mb-8 object-contain"
+                className="w-[65px] h-[65px] mb-8 object-contain"
               />
               <h1 className="font-inter font-semibold text-xl mb-2 text-white">
                 MarketPlace
