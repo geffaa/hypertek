@@ -826,10 +826,8 @@ function AddCollection() {
 
                 </td>
 
-                <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
-
-                  {Number(col.supply).toPrecision(1)}
-
+                 <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
+                  {col.supply}
                 </td>
 
 
@@ -1065,6 +1063,7 @@ function AddCollection() {
   );
 
 }
+
 
 
 
