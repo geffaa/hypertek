@@ -795,12 +795,9 @@ function Buy1() {
         setLoading(false);
 
         const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
-        setTimeout(() => {
-          navigate("/Profile", { state: { category: targetCategory } });
-        }, 2000);
+       navigate("/Profile", { state: { category: targetCategory } });
 
-        return; // Scenario 1 completed
-      }
+       return; // Scenario 1 completed
 
       /* ================= SCENARIO 2: ALREADY MINTED ================= */
       toast.loading("🔍 Checking NFT ownership...", { id: toastId });
@@ -1559,3 +1556,4 @@ function Buy1() {
 
 
 export default Buy1;
+
