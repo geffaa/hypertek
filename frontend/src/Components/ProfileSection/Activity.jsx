@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 import ManImage from "../../assets/images/Overview/man.png";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import { Link } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";

@@ -272,7 +272,7 @@ function AddCollection() {
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
                       <button
-                        onClick={() => handleEditUser(col)}
+                        onClick={() => handleViewProfile(col)}
                         className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
                       >
                         <img src={EditImage} alt="edit" className="w-4 h-4" />

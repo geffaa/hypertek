@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { ethers } from "ethers";
 import { FaUserCircle } from "react-icons/fa";
 import NavLinks from "../ProfileSection/Navlinks";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";

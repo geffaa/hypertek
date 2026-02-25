@@ -179,7 +179,7 @@ function Character() {
 
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
-                      <Link state={{ char }}>
+                      <Link to="../edit-collection-item" state={{ collection: char }}>
                         <img src={EditImage} className="w-4 h-4" />
                       </Link>
 
