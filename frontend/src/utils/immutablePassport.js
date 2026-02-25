@@ -2,7 +2,7 @@ import { config, passport } from '@imtbl/sdk';
 
 // TODO: Replace these with your actual Immutable Client ID and Redirect URIs
 // You can get these from the Immutable Developer Hub: https://hub.immutable.com/
-const CLIENT_ID = 'IWdwTAud9lBk88Mc7ZQ3MRQHJQl7d2n7';
+const CLIENT_ID = 'ltm2jrSlPoODLBTHM4nfHQfM3qjF1kod';
 const REDIRECT_URI = 'https://hyper-tek-games.deventiatech.com/login/callback';
 const LOGOUT_REDIRECT_URI = 'https://hyper-tek-games.deventiatech.com/logout/callback'; // Optional, but recommended
 
