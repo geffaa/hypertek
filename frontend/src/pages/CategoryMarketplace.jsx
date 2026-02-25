@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -11,11 +12,21 @@ import overview1 from "../assets/images/Overview/overview1.jpg";
 import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import CustomButton from "../Components/Buttons/Button1";
+import { useAccount } from "wagmi";
+import { useImmutableWallet } from "../hooks/useImmutableWallet";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 function CategoryMarketplace() {
   const { category } = useParams();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
+
+  const { address: wagmiAddress } = useAccount();
+  const { address: immutableAddress, connect: connectImmutable } = useImmutableWallet();
+  const activeAddress = wagmiAddress || immutableAddress;
+  const { openConnectModal } = useConnectModal();
+
+  const [showWalletModal, setShowWalletModal] = useState(false);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,21 +41,12 @@ function CategoryMarketplace() {
         return;
       }
 
-      if (!window.ethereum) {
-        toast.error("Please install MetaMask");
+      if (!activeAddress) {
+        setShowWalletModal(true);
         return;
       }
 
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-
-      if (!accounts.length) {
-        toast.error("Please connect your wallet first");
-        return;
-      }
-
-      const wallet = accounts[0].toLowerCase();
+      const wallet = activeAddress.toLowerCase();
 
       // Fetch user's owned NFTs
       const res = await axios.get(
@@ -455,6 +457,74 @@ function CategoryMarketplace() {
           )}
         </div>
       </section>
+
+      {/* WALLET SELECTION MODAL */}
+      {showWalletModal && ReactDOM.createPortal(
+        <div
+          className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-black/80 flex items-center justify-center backdrop-blur-sm px-4"
+          onClick={() => setShowWalletModal(false)}
+        >
+          <div
+            className="bg-[#1f2937] p-8 rounded-2xl w-full max-w-sm mx-4 border border-white/10 shadow-2xl transform transition-all scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-white">Connect Wallet</h2>
+              <button
+                onClick={() => setShowWalletModal(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <button
+                onClick={() => {
+                  setShowWalletModal(false);
+                  if (openConnectModal) openConnectModal();
+                }}
+                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-blue-500/50 group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-xl">
+                    🌐
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-white">Browser Wallet</div>
+                    <div className="text-xs text-gray-400 group-hover:text-gray-300">
+                      MetaMask, Rainbow, etc.
+                    </div>
+                  </div>
+                </div>
+                <div className="text-gray-500 group-hover:text-blue-400">→</div>
+              </button>
+
+              <button
+                onClick={() => {
+                  connectImmutable();
+                  setShowWalletModal(false);
+                }}
+                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-[#0D0D14] border-l-4 border-l-[#0D0D14]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#0D0D14] flex items-center justify-center text-xl border border-white/10">
+                    I
+                  </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-white">Immutable Passport</div>
+                    <div className="text-xs text-gray-400">
+                      Email login & gas-free
+                    </div>
+                  </div>
+                </div>
+                <div className="text-gray-500 group-hover:text-white">→</div>
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
