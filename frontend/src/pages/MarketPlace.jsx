@@ -400,7 +400,7 @@ function MarketPlace() {
 
                 <NavLinks categories={activityData} />
 
-                <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
+                <div className="hidden mr-16 md:flex lg:w-[280px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
 
                   <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
 

@@ -217,7 +217,7 @@ function CategoryMarketplace() {
         {/* NavLinks & Search Section */}
         <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
           <NavLinks />
-          <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
+          <div className="hidden mr-16 md:flex lg:w-[280px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
             <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
             <input
               type="text"

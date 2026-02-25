@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import Profile from "../../assets/images/Profile/Profile.png";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
@@ -15,7 +15,7 @@ function EditProfile() {
   const token = useSelector((state) => state.auth.token) || JSON.parse(localStorage.getItem("auth"))?.token;
 
   const userData = location.state?.userData || {};
-  console.log("your recieved data are :",userData);
+  console.log("your recieved data are :", userData);
 
   const [name, setName] = useState(userData.FullName || "");
   const [email, setEmail] = useState(userData.Email || "");
@@ -52,41 +52,41 @@ function EditProfile() {
   };
 
   const handleSubmit = async () => {
-  if (newPass && newPass !== confirmPass) {
-    toast.error("New password and confirm password do not match");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("FullName", name);
-  formData.append("Email", email);
-  formData.append("Bio", bio);
-  if (newPass) formData.append("Password", currentPass); // current password
-  if (newPass) formData.append("NewPassword", newPass);  // new password
-  if (file) formData.append("Avatar", file);
-
-  try {
-    setLoading(true);
-    const res = await fetch(`${BACKEND_BASE_URL}/api/v1/profile`, { // updated route
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-    const data = await res.json();
-    setLoading(false);
-
-    if (data.message === "Profile updated successfully") {
-      toast.success("Profile updated successfully!");
-      navigate("/profile", { state: { userData: data.user } });
-    } else {
-      toast.error(data.message || "Error updating profile");
+    if (newPass && newPass !== confirmPass) {
+      toast.error("New password and confirm password do not match");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    setLoading(false);
-    toast.error(err.message || "Something went wrong");
-  }
-};
+
+    const formData = new FormData();
+    formData.append("FullName", name);
+    formData.append("Email", email);
+    formData.append("Bio", bio);
+    if (newPass) formData.append("Password", currentPass); // current password
+    if (newPass) formData.append("NewPassword", newPass);  // new password
+    if (file) formData.append("Avatar", file);
+
+    try {
+      setLoading(true);
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/profile`, { // updated route
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      const data = await res.json();
+      setLoading(false);
+
+      if (data.message === "Profile updated successfully") {
+        toast.success("Profile updated successfully!");
+        navigate("/profile", { state: { userData: data.user } });
+      } else {
+        toast.error(data.message || "Error updating profile");
+      }
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      toast.error(err.message || "Something went wrong");
+    }
+  };
 
 
 
@@ -100,7 +100,7 @@ function EditProfile() {
         className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
         style={{ backgroundImage: `url(${overview1})` }}
       ></div>
-   
+
 
 
 
