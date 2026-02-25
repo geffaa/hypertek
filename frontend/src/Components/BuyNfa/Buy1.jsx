@@ -772,7 +772,7 @@ function Buy1() {
           return;
         }
 
-        toast.loading("🚀 Minting NFT to your wallet...", { id: toastId });
+        toast.loading("🚀 Processing NFA to your wallet...", { id: toastId });
         const mintedTokenId = await mintNFTToWallet(buyer);
 
         if (!mintedTokenId) {
@@ -1556,5 +1556,6 @@ function Buy1() {
     </div>
   );
 }
+
 
 export default Buy1;
