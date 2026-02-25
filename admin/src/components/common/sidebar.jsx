@@ -117,11 +117,10 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
   return (
     <div
-      className={`sidebar text-white p-3 bg-[#100F0F] z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${
-        isOpen
-          ? "translate-x-0"
-          : "-translate-x-full lg:translate-x-0"
-      }`}
+      className={`sidebar text-white p-3 bg-[#100F0F] z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
+        ? "translate-x-0"
+        : "-translate-x-full lg:translate-x-0"
+        }`}
       ref={sidebarRef}
     >
       <div className="flex flex-col justify-between h-full">
@@ -597,18 +596,18 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 .line-vertical {
   position: absolute;
   left: 0;
-  top: -6px;
+  top: -12px;
   width: 1.5px;
-  height: calc(100% + 6px);
+  height: calc(100% + 12px);
   background-color: #666666;
 }
 
 .line-vertical-short {
   position: absolute;
   left: 0;
-  top: -6px;
+  top: -12px;
   width: 1.5px;
-  height: calc(50% + 6px);
+  height: calc(50% + 12px);
   background-color: #666666;
 }
 
@@ -624,6 +623,13 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
 .submenu-item-last .line-vertical {
   display: none;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+.sidebar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 `}</style>
     </div>

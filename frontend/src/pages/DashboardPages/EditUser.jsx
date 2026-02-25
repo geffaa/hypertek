@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import { FiCopy } from "react-icons/fi";
 import CustomButton from "../../Components/Buttons/Button1";
 import Profile from "../../assets/images/Profile/Profile.png";
