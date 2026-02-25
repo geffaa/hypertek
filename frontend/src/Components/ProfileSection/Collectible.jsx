@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";

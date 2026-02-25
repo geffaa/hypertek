@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 
 import TVector from "../../assets/images/popular/vector.png";
-import overview1 from "../../assets/images/Profile/Hero.png";
+import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton4 from "../Buttons/Button4";
@@ -391,7 +391,7 @@ function ProfileCategory() {
       {/* ================= HERO SECTION ================= */}
       <div className="relative">
         <div
-          className="absolute inset-0 h-[200px] sm:h-[250px] lg:h-[400px] bg-cover bg-center"
+          className="absolute inset-0 h-[200px] sm:h-[250px] lg:h-[400px] bg-contain bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${overview1})`,
             backgroundPosition: "center",
