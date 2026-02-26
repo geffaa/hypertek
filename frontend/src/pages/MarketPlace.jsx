@@ -396,11 +396,9 @@ function MarketPlace() {
 
 
 
-              <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
-
+              <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
                 <NavLinks categories={activityData} />
-
-                <div className="hidden mr-16 md:flex lg:w-[280px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
+                <div className="hidden mr-20 md:flex lg:w-[280px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-1.5 lg:py-1.5 border border-white/50 rounded-[12px] backdrop-blur-sm">
 
                   <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
 
@@ -426,9 +424,8 @@ function MarketPlace() {
 
           {/* Collections Section */}
 
-          <div className="w-full max-w-[1400px] mx-auto px-2 sm:px-6 md:px-8">
-
-            <div className="md:px-8 px-5">
+          <div className="w-full max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8">
+            <div className="">
 
               {/* DYNAMIC CATEGORIES SECTIONS */}
 
@@ -444,9 +441,9 @@ function MarketPlace() {
 
                   >
 
-                    <div className="flex flex-row justify-between items-center gap-3 sm:gap-4">
+                    <div className="flex flex-row justify-between items-end pr-0 gap-3 sm:gap-4">
 
-                      <div className="flex flex-col gap-2 items-start">
+                      <div className="flex flex-col gap-2 items-start pl-1 lg:pl-[14px]">
 
                         <h1 className="font-inter font-semibold text-[25px] text-white">
                           {items.length > 0
@@ -471,30 +468,18 @@ function MarketPlace() {
 
                       </div>
 
-                      <div className="flex justify-end items-center text-white">
-
+                      <div className="flex justify-end items-center text-white translate-y-3 lg:translate-y-4 -mr-2 lg:-mr-4">
                         <Link
-
                           to={`/collections/${categoryName}`}
-
-                          className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
-
+                          className="ml-2 flex items-center gap-1 sm:gap-2 hover:text-gray-300 transition text-xs sm:text-sm md:text-base"
                         >
-
                           <span>Explore All</span>
-
                           <ArrowRight
-
                             size={16}
-
                             className="sm:w-5 sm:h-5"
-
                             strokeWidth={2}
-
                           />
-
                         </Link>
-
                       </div>
 
                     </div>
