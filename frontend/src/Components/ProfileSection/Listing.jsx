@@ -12,7 +12,7 @@ import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton4 from "../Buttons/Button4";
 import { useImmutableWallet } from "../../hooks/useImmutableWallet";
-import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
+import { useAccount, useWalletClient, usePublicClient, useSwitchChain, useReadContract } from "wagmi";
 import { createWalletClient, custom } from 'viem';
 import { immutableZkEvmTestnet } from 'viem/chains';
 
@@ -53,6 +53,16 @@ function UserListings() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [cancelling, setCancelling] = useState(false);
+
+  // Read internal balances from Marketplace Contract
+  const { data: rawSellerBalance } = useReadContract({
+    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    abi: MARKETPLACE_ABI,
+    functionName: 'sellerBalance',
+    args: connectedWallet ? [connectedWallet] : undefined,
+    query: { enabled: !!connectedWallet }
+  });
+  const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
 
   // Sync state
   useEffect(() => {
@@ -329,17 +339,35 @@ function UserListings() {
                   )}
                 </div>
 
-                <div className="mt-3 text-left text-white">
-                  <h2 className="text-base sm:text-lg md:text-xl font-semibold">
+                <div className="mt-4 text-left text-white">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
                     {userData.FullName?.replace(/[0-9]/g, "") ||
                       userData.Email?.split("@")[0].replace(/[0-9]/g, "") ||
                       "Guest"}
                   </h2>
-                  <p className="text-xs sm:text-sm text-gray-400 break-words">
-                    {connectedWallet
-                      ? `${connectedWallet.substring(0, 6)}...${connectedWallet.substring(38)}`
-                      : "Not connected"}
-                  </p>
+                  <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                    <span className="font-mono">
+                      {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                    </span>
+                    <Link
+                      to="/edit"
+                      state={{ userData }}
+                      className="flex items-center gap-1 hover:text-white transition-colors"
+                    >
+                      <span>Edit Profile</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                      </svg>
+                    </Link>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                      <span className="text-black font-bold text-xs p-1">₮</span>
+                    </div>
+                    <span className="text-lg font-bold text-white font-mono">
+                      ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

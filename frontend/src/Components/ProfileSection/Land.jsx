@@ -5,6 +5,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
+import { useAccount, useReadContract } from 'wagmi';
+import { IMMUTABLE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet";
 
 import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
@@ -28,6 +31,27 @@ import {
 function Land() {
   const { token } = useSelector((state) => state.auth);
 
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+  } = useImmutableWallet();
+
+  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+
+  // Combine wallet state
+  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
+  const isConnected = immutableIsConnected || isWagmiConnected;
+
+  // Read internal balances from Marketplace Contract
+  const { data: rawSellerBalance } = useReadContract({
+    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    abi: MARKETPLACE_ABI,
+    functionName: 'sellerBalance',
+    args: activeAddress ? [activeAddress] : undefined,
+    query: { enabled: !!activeAddress }
+  });
+  const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
+
   const [userData, setUserData] = useState(null);
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,6 +65,14 @@ function Land() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [showMobileList, setShowMobileList] = useState({});
   const navigate = useNavigate();
+
+  // Sync state
+  useEffect(() => {
+    if (activeAddress) {
+      setConnectedWallet(activeAddress.toLowerCase());
+    }
+  }, [activeAddress]);
+
   const extractMintedNFTs = (data) => {
     console.log("🔍 Raw data received:", data);
 
@@ -529,18 +561,34 @@ function Land() {
                   <FaUserCircle className="w-28 h-28 text-gray-400" />
                 )}
               </div>
-              <h2 className="mt-3 text-xl font-semibold">
+              <h2 className="mt-4 text-xl sm:text-2xl font-semibold mb-1">
                 {userData?.FullName ||
                   userData?.Email?.split("@")[0] ||
                   "Guest"}
               </h2>
-              <Link
-                to="/edit"
-                state={{ userData }}
-                className="text-sm underline text-gray-400 hover:text-white"
-              >
-                Edit Profile
-              </Link>
+              <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                <span className="font-mono">
+                  {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                </span>
+                <Link
+                  to="/edit"
+                  state={{ userData }}
+                  className="flex items-center gap-1 hover:text-white transition-colors"
+                >
+                  <span>Edit Profile</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                  <img src={TVector} className="w-3 h-3" alt="chain" />
+                </div>
+                <span className="text-lg font-bold text-white font-mono">
+                  ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                </span>
+              </div>
             </div>
           </div>
 

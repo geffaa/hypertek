@@ -5,6 +5,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
+import { useAccount, useReadContract, useWriteContract, usePublicClient, useBalance, useSendTransaction } from 'wagmi';
+import { IMMUTABLE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet";
 
 import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
@@ -31,6 +34,27 @@ function ProfileCategory() {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+  } = useImmutableWallet();
+
+  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+
+  // Combine wallet state
+  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
+  const isConnected = immutableIsConnected || isWagmiConnected;
+
+  // Read internal balances from Marketplace Contract
+  const { data: rawSellerBalance } = useReadContract({
+    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    abi: MARKETPLACE_ABI,
+    functionName: 'sellerBalance',
+    args: activeAddress ? [activeAddress] : undefined,
+    query: { enabled: !!activeAddress }
+  });
+  const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
+
   const [userData, setUserData] = useState(null);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,6 +66,13 @@ function ProfileCategory() {
   const [connectingWallet, setConnectingWallet] = useState({});
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [showMobileList, setShowMobileList] = useState({});
+
+  // Sync state
+  useEffect(() => {
+    if (activeAddress) {
+      setConnectedWallet(activeAddress.toLowerCase());
+    }
+  }, [activeAddress]);
 
   // Extract items by category
   const extractItemsByCategory = (data, targetCategory) => {
@@ -415,14 +446,28 @@ function ProfileCategory() {
               )}
             </div>
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white">
+              <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-1">
                 {userData?.name || "Profile"}
               </h1>
-              <Link to="/edit">
-                <button className="mt-2 text-sm underline text-gray-400 hover:text-white">
-                  Edit Profile
-                </button>
-              </Link>
+              <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                <span>
+                  {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                </span>
+                <Link to="/edit" className="flex items-center gap-1 hover:text-white transition-colors">
+                  <span>Edit Profile</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                  <img src={TVector} className="w-3 h-3" alt="chain" />
+                </div>
+                <span className="text-lg font-bold text-white font-mono">
+                  ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                </span>
+              </div>
             </div>
           </div>
         </div>
