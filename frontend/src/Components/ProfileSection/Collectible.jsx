@@ -19,20 +19,53 @@ import {
   NFT_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
+  IMMUTABLE_MARKETPLACE_ADDRESS,
 } from "../../Web3/Config";
 import CustomButton4 from "../Buttons/Button4";
 
 // RainbowKit imports
-import { useAccount } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet";
 
 function MarketPlace() {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // RainbowKit hooks
-  const { address: connectedWallet, isConnected } = useAccount();
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+  } = useImmutableWallet();
+
+  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
+
+  // Combine wallet state
+  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
+  const isConnected = immutableIsConnected || isWagmiConnected;
+
+  const [connectedWallet, setConnectedWallet] = useState(null);
+
+  // Sync state
+  useEffect(() => {
+    if (activeAddress) {
+      setConnectedWallet(activeAddress.toLowerCase());
+    } else {
+      setConnectedWallet(null);
+    }
+  }, [activeAddress]);
+
+  // Read internal balances from Marketplace Contract
+  const { data: rawSellerBalance } = useReadContract({
+    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    abi: MARKETPLACE_ABI,
+    functionName: 'sellerBalance',
+    args: connectedWallet ? [connectedWallet] : undefined,
+    query: { enabled: !!connectedWallet }
+  });
+  const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
+
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
@@ -248,18 +281,34 @@ function MarketPlace() {
                   <FaUserCircle className="w-28 h-28 text-gray-400" />
                 )}
               </div>
-              <h2 className="mt-3 text-xl font-semibold">
+              <h2 className="mt-4 text-xl sm:text-2xl font-semibold mb-1">
                 {userData?.FullName ||
                   userData?.Email?.split("@")[0] ||
                   "Guest"}
               </h2>
-              <Link
-                to="/edit"
-                state={{ userData }}
-                className="text-sm underline text-gray-400 hover:text-white"
-              >
-                Edit Profile
-              </Link>
+              <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                <span className="font-mono">
+                  {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                </span>
+                <Link
+                  to="/edit"
+                  state={{ userData }}
+                  className="flex items-center gap-1 hover:text-white transition-colors"
+                >
+                  <span>Edit Profile</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                  <img src={TVector} className="w-3 h-3" alt="chain" />
+                </div>
+                <span className="text-lg font-bold text-white font-mono">
+                  ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                </span>
+              </div>
             </div>
           </div>
 

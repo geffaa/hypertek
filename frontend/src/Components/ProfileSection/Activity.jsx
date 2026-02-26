@@ -12,6 +12,11 @@ import { useSelector } from "react-redux";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner"
+import { useAccount, useReadContract } from 'wagmi';
+import { IMMUTABLE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../../Web3/Config";
+import TVector from "../../assets/images/popular/vector.png";
+import { ethers } from "ethers";
+import { useImmutableWallet } from "../../hooks/useImmutableWallet";
 
 
 function PersonalActivity() {
@@ -21,6 +26,38 @@ function PersonalActivity() {
   const [userData, setUserData] = useState({});
   const loginUserId = user.id;
   const [loading, setLoading] = useState(true); // ✅ loader state
+
+  const {
+    address: immutableAddress,
+    isConnected: immutableIsConnected,
+  } = useImmutableWallet();
+
+  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+
+  // Combine wallet state
+  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
+  const isConnected = immutableIsConnected || isWagmiConnected;
+
+  const [connectedWallet, setConnectedWallet] = useState(null);
+
+  // Sync state
+  useEffect(() => {
+    if (activeAddress) {
+      setConnectedWallet(activeAddress.toLowerCase());
+    } else {
+      setConnectedWallet(null);
+    }
+  }, [activeAddress]);
+
+  // Read internal balances from Marketplace Contract
+  const { data: rawSellerBalance } = useReadContract({
+    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    abi: MARKETPLACE_ABI,
+    functionName: 'sellerBalance',
+    args: connectedWallet ? [connectedWallet] : undefined,
+    query: { enabled: !!connectedWallet }
+  });
+  const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
 
 
   useEffect(() => {
@@ -142,28 +179,33 @@ function PersonalActivity() {
                 </div>
 
                 {/* Profile Info */}
-                <div className="mt-3 text-left text-white">
-                  <h2 className="text-base sm:text-lg md:text-xl font-semibold">
+                <div className="mt-4 text-left text-white">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
                     {userData.FullName
                       ? userData.FullName.replace(/[0-9]/g, "") || ""
                       : userData.Email
                         ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
                         : "Guest"}
                   </h2>
-                  <p className="text-xs sm:text-sm text-gray-400 break-words">
-                    {userData.DiscordId ||
-                      userData.GoogleId ||
-                      userData._id ||
-                      "null"}
-                    <Link to="/edit" state={{ userData }}>
-                      <span className="ml-1 sm:ml-2 cursor-pointer underline hover:text-white transition-colors">
-                        Edit Profile
-                      </span>
+                  <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                    <span className="font-mono">
+                      {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                    </span>
+                    <Link to="/edit" state={{ userData }} className="flex items-center gap-1 hover:text-white transition-colors">
+                      <span>Edit Profile</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                      </svg>
                     </Link>
-                  </p>
-                  <p className="text-green-400 font-semibold mt-1 text-sm sm:text-base md:text-lg">
-
-                  </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                      <img src={TVector} className="w-3 h-3" alt="chain" />
+                    </div>
+                    <span className="text-lg font-bold text-white font-mono">
+                      ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
