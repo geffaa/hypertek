@@ -127,10 +127,10 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
         <div className="flex-1">
           {/* LOGO */}
           <div className="flex justify-center mt-10 mb-10">
-            <div className="hidden lg:flex items-center gap-1.5 cursor-pointer">
-              <img src={Logo} alt="logo" className="w-[30px] h-[30px]" />
-              <Link to="https://hyper-tek-games.deventiatech.com">
-                <span className="font-inter font-bold text-[16px] leading-[20px]">
+            <div className="hidden lg:flex items-center gap-2 cursor-pointer">
+              <img src={Logo} alt="logo" className="w-[28px] h-[28px] object-contain flex-shrink-0" />
+              <Link to="https://hyper-tek-games.deventiatech.com" className="flex items-center">
+                <span className="font-inter font-bold text-[15px] pt-[1px]">
                   HYPER TEK
                 </span>
               </Link>
@@ -141,15 +141,15 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
           <ul className="flex flex-col items-center space-y-3">
             <Link to={withAdmin("/dashboard")} onClick={handleLinkClick}>
               <li className={`menu-item ${isDashboard ? "bg-[#002AA8]" : ""}`}>
-                <img src={DashboardImage} className="w-[20px]" />
-                <span>Dashboard</span>
+                <img src={DashboardImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Dashboard</span>
               </li>
             </Link>
 
             <Link to={withAdmin("/platform-earnings")} onClick={handleLinkClick}>
               <li className={`menu-item ${path.includes("platform-earnings") ? "bg-[#002AA8]" : ""}`}>
-                <img src={CreateCollection2} className="w-[18px]" />
-                <span>Platform Earnings</span>
+                <img src={CreateCollection2} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Platform Earnings</span>
               </li>
             </Link>
 
@@ -168,27 +168,14 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
               >
 
                 <div className="flex items-center gap-3">
-
-                  <div className="relative w-[20px] h-[20px]">
-
-                    <img src={CreateCollection2} className="w-[20px] h-[20px]" />
-
-
-
+                  <div className="relative w-[20px] h-[20px] flex-shrink-0">
+                    <img src={CreateCollection2} className="w-[20px] h-[20px] object-contain" />
                     <img
-
                       src={CreateCollection1}
-
-                      className="w-[10px] h-[10px] absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2"
-
+                      className="w-[10px] h-[10px] absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2 object-contain"
                     />
-
                   </div>
-
-
-
-                  <span>Create Collection</span>
-
+                  <span className="pt-[2px]">Create Collection</span>
                 </div>
 
 
@@ -256,29 +243,17 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
 
             {/* Collection */}
-
             <Link to={withAdmin("/collections")} onClick={(e) => handleLinkClick(e, true)}>
-
               <li
-
                 onClick={() => toggleDropdown("collection")}
-
                 className={`menu-item justify-between ${isCollection ? "bg-[#002AA8]" : ""}`}
-
               >
-
                 <div className="flex items-center gap-3">
-
-                  <img src={CollectionImage} className="w-[22px]" />
-
-                  <span>Collection</span>
-
+                  <img src={CollectionImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                  <span className="pt-[2px]">Collection</span>
                 </div>
-
                 {openCollection ? <FiChevronUp /> : <FiChevronDown />}
-
               </li>
-
             </Link>
 
 
@@ -338,45 +313,27 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
 
             {/* Users */}
-
             <Link to={withAdmin("/users")} onClick={handleLinkClick}>
-
               <li className={`menu-item ${isUsers ? "bg-[#002AA8]" : ""}`}>
-
-                <img src={EditUser} className="w-[22px]" />
-
-                <span>Edit User</span>
-
+                <img src={EditUser} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Edit User</span>
               </li>
-
             </Link>
 
 
 
             {/* News */}
-
             <Link to={withAdmin("/add-news")} onClick={(e) => handleLinkClick(e, true)}>
-
               <li
-
                 onClick={() => toggleDropdown("news")}
-
                 className={`menu-item justify-between ${isNews ? "bg-[#002AA8]" : ""}`}
-
               >
-
                 <div className="flex items-center gap-3">
-
-                  <img src={NewsImage} className="w-[22px]" />
-
-                  <span>Upload News</span>
-
+                  <img src={NewsImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                  <span className="pt-[2px]">Upload News</span>
                 </div>
-
                 {openNews ? <FiChevronUp /> : <FiChevronDown />}
-
               </li>
-
             </Link>
 
 
@@ -426,101 +383,34 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
             )}
 
             <Link to={withAdmin("/collection-listed-sale")} onClick={(e) => handleLinkClick(e, true)}>
-
               <li
-
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${isSale ? "bg-[#002AA8]" : ""
-
-                  }`}
-
-                style={{ width: "222px", height: "42px", opacity: 1 }}
-
+                className={`menu-item justify-between ${isSale ? "bg-[#002AA8]" : ""}`}
                 onClick={() => toggleDropdown("sale")}
-
               >
-
-                <div className="flex items-center">
-
-                  <div className="relative">
-
-                    <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
-
-                  </div>
-
-                  <h1
-
-                    className="text-white font-normal ml-3"
-
-                    style={{
-
-                      width: "130px",
-
-                      height: "17px",
-
-                      fontFamily: "Inter, sans-serif",
-
-                      fontWeight: 700,
-
-                      fontSize: "14px",
-
-                      lineHeight: "17px",
-
-                    }}
-
-                  >
-
-                    Collection on Sale
-
-                  </h1>
-
+                <div className="flex items-center gap-3">
+                  <img src={SaleImage} alt="" className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                  <span className="pt-[2px]">Collection on Sale</span>
                 </div>
-
-
-
-                {openSale ? (
-
-                  <FiChevronUp className="text-white" />
-
-                ) : (
-
-                  <FiChevronDown className="text-white" />
-
-                )}
-
+                {openSale ? <FiChevronUp /> : <FiChevronDown />}
               </li>
-
             </Link>
 
 
 
             {/* Transaction */}
-
             <Link to={withAdmin("/transactions")} onClick={handleLinkClick}>
-
               <li className={`menu-item ${isTransaction ? "bg-[#002AA8]" : ""}`}>
-
-                <img src={TransactionImage} className="w-[22px]" />
-
-                <span>Transaction</span>
-
+                <img src={TransactionImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Transaction</span>
               </li>
-
             </Link>
 
-
-
             {/* Support */}
-
             <Link to={withAdmin("/support")} onClick={handleLinkClick}>
-
               <li className={`menu-item ${isSupport ? "bg-[#002AA8]" : ""}`}>
-
-                <img src={SupportImage} className="w-[22px]" />
-
-                <span>Support</span>
-
+                <img src={SupportImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Support</span>
               </li>
-
             </Link>
 
           </ul>
@@ -531,19 +421,15 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
         {/* LOGOUT */}
 
-        <button
-
-          onClick={onLogoutClick}
-
-          className="mx-auto mb-4 mt-auto flex gap-1"
-
-        >
-
-          <img src={LogoutImage} className="w-[22px]" />
-
-          <span className="font-bold">Sign Out</span>
-
-        </button>
+        <div className="mt-auto mb-6 flex justify-center w-full">
+          <button
+            onClick={onLogoutClick}
+            className="flex items-center gap-3 text-white cursor-pointer"
+          >
+            <img src={LogoutImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+            <span className="font-bold text-[14px] pt-[1px]">Sign out</span>
+          </button>
+        </div>
 
       </div>
 
@@ -553,19 +439,20 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
       <style>{`
 .menu-item {
-  width: 200px;
-  height: 38px;
-  padding: 0 10px;
+  width: 222px;
+  height: 42px;
+  padding: 0 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  border-radius: 6px;
+  gap: 12px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 14px;
-  line-height: 100%;
+  line-height: normal;
   letter-spacing: 0%;
 }
 

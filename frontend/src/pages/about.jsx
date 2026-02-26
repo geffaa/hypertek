@@ -254,13 +254,14 @@ function About() {
 
           <div className="flex flex-col md:flex-row w-full max-w-[1161px] gap-6 md:gap-[60px] mx-auto mt-5 p-6">
             {/* NFA Card */}
-            <div className="w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
+            <div className="relative w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
               <img
                 src={vector}
                 alt="NFA"
-                className="w-[95px] h-[95px] mb-8 object-contain"
+                className="absolute w-[97px] h-[97px] top-[61px] left-1/2 -translate-x-1/2 opacity-100 object-contain"
+                style={{ transform: "translateX(-50%) rotate(0deg)" }}
               />
-              <h1 className="font-inter font-semibold text-xl mb-2 text-white">
+              <h1 className="font-inter font-semibold text-xl mb-2 text-white mt-36">
                 NFA
               </h1>
               <h4 className="font-inter text-base text-white/90">
@@ -269,13 +270,14 @@ function About() {
             </div>
 
             {/* Game Card */}
-            <div className="w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
+            <div className="relative w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
               <img
                 src={game}
                 alt="Game"
-                className="w-[130px] h-[90px] mb-8 object-contain"
+                className="absolute w-[127px] h-[127px] top-[37px] left-1/2 -translate-x-1/2 opacity-100 object-contain"
+                style={{ transform: "translateX(-50%) rotate(0deg)" }}
               />
-              <h1 className="font-inter font-semibold text-xl mb-2 text-white">
+              <h1 className="font-inter font-semibold text-xl mb-2 text-white mt-36">
                 Game
               </h1>
               <h4 className="font-inter text-base text-white/90">
@@ -284,14 +286,14 @@ function About() {
               </h4>
             </div>
 
-            {/* Marketplace Card */}
-            <div className="w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
+            <div className="relative w-full md:w-[347px] h-[346px] rounded-[16px] bg-[#080E26] flex flex-col items-center justify-center p-4 text-center">
               <img
                 src={exchange}
                 alt="Marketplace"
-                className="w-[65px] h-[65px] mb-8 object-contain"
+                className="absolute w-[80px] h-[80px] top-[69px] left-1/2 -translate-x-1/2 opacity-100 object-contain"
+                style={{ transform: "translateX(-50%) rotate(0deg)" }}
               />
-              <h1 className="font-inter font-semibold text-xl mb-2 text-white">
+              <h1 className="font-inter font-semibold text-xl mb-2 text-white mt-36">
                 MarketPlace
               </h1>
               <h4 className="font-inter text-base text-white/90">

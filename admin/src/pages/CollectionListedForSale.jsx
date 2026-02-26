@@ -9,35 +9,42 @@ import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function Character() {
+  const [view, setView] = useState("list"); // "list" | "details"
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedChar, setSelectedChar] = useState(null);
 
   /* ================================
-     Fetch Characters (API)
+     Fetch Sub-Collections from All Parent Collections (API)
   ================================= */
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${Dashboard_Base_Url}/v1/nft/all`);
+        const res = await axios.get(`${Dashboard_Base_Url}/v1/nft/parent-collections`);
 
-        if (res.data.success && res.data.nfts) {
-          const mapped = res.data.nfts.map((item) => ({
-            _id: item._id,
-            name: item.collection?.name || "Unnamed",
-            image: item.collection?.image || "",
-            price: item.price || 0,
-            address: item.ownerAddress || "N/A",
-            status: item.status === "active",
-          }));
-          setCharacters(mapped);
+        if (res.data.success && res.data.collections) {
+          const allSubs = [];
+          res.data.collections.forEach((parent) => {
+            (parent.subCollections || []).forEach((sub) => {
+              allSubs.push({
+                _id: sub._id,
+                parentId: parent._id,
+                name: sub.name || sub.symbol || "Unnamed",
+                image: sub.image || parent.collection?.image || "",
+                price: sub.priceETH || 0,
+                address: sub.owner || "N/A",
+                status: true,
+              });
+            });
+          });
+          setCharacters(allSubs);
         } else {
           setCharacters([]);
         }
       } catch (err) {
-        toast.error("Failed to fetch characters");
+        toast.error("Failed to fetch sub-collections");
       } finally {
         setLoading(false);
       }
@@ -98,8 +105,83 @@ function Character() {
     }
   };
 
+  const openDetails = (char) => {
+    setSelectedChar(char);
+    setView("details");
+  };
+
+  const handleEditClick = (e, char) => {
+    e.stopPropagation();
+    setSelectedChar(char);
+    setView("details");
+  };
+
   if (loading) {
     return <FullScreenLoader />;
+  }
+
+  if (view === "details" && selectedChar) {
+    return (
+      <div className="bg-black mt-12 relative pb-0">
+        {/* Blur backgrounds */}
+        <div style={{ top: "15px", left: "210px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }} className="absolute rounded-full" />
+        <div style={{ top: "400px", left: "620px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }} className="absolute rounded-full" />
+
+        {/* Content stretches to fill page */}
+        <div className="z-10 ml-12 flex flex-col">
+          <h1 className="font-inter font-semibold text-[25px] text-white mb-6">Details</h1>
+
+          {/* Detail Card — matches image: dark navy bg, compact, image + inline text */}
+          <div
+            className="flex gap-7 items-center p-5 rounded-xl w-fit"
+            style={{
+
+              border: "1px solid rgba(255,255,255,0.12)",
+              minWidth: "380px",
+            }}
+          >
+            {/* Circular Image */}
+            <img
+              src={`${Image_Base_Url}${selectedChar.image}`}
+              alt={selectedChar.name}
+              className="w-[72px] h-[72px] rounded-full object-cover flex-shrink-0"
+              onError={(e) => (e.target.src = "https://via.placeholder.com/72")}
+            />
+
+            {/* Info — inline label + value, matching image font size */}
+            <div className="flex flex-col gap-1.5 font-inter">
+              <p className="text-white text-[13px]">
+                <span className="font-semibold">Owner Address:</span>
+                <span className="text-white/75 ml-1">
+                  {selectedChar.address && selectedChar.address !== "N/A" && selectedChar.address.length > 10
+                    ? `${selectedChar.address.slice(0, 10)}...${selectedChar.address.slice(-4)}`
+                    : selectedChar.address}
+                </span>
+              </p>
+              <p className="text-white text-[13px]">
+                <span className="font-semibold">Price:</span>
+                <span className="text-white/75 ml-1">${selectedChar.price}</span>
+              </p>
+              <p className="text-white text-[13px]">
+                <span className="font-semibold">Description:</span>
+                <span className="text-white/75 ml-1">{selectedChar.description || ""}</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Back Button — fixed margin below card */}
+          <div className="mt-20">
+            <button
+              className="bg-[#002AA8] font-inter text-white text-sm rounded-md transition-colors"
+              style={{ width: "120px", height: "38px" }}
+              onClick={() => setView("list")}
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -154,7 +236,7 @@ function Character() {
 
             <tbody className="divide-y divide-white/10">
               {characters.map((char) => (
-                <tr key={char._id} className="h-[70px]">
+                <tr key={char._id} className="h-[70px] cursor-pointer hover:bg-white/5 transition-colors" onClick={() => openDetails(char)}>
                   <td className="px-6 py-4">
                     {char.image ? (
                       <img
@@ -174,22 +256,24 @@ function Character() {
                     ${char.price}
                   </td>
                   <td className="px-6 py-4 text-[#FFFFFFC4]">
-                    {char.address}
+                    {char.address && char.address !== "N/A" && char.address.length > 10
+                      ? `${char.address.slice(0, 6)}...${char.address.slice(-4)}`
+                      : char.address}
                   </td>
 
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
-                      <Link to="../edit-collection-item" state={{ collection: char }}>
+                      <button onClick={(e) => handleEditClick(e, char)}>
                         <img src={EditImage} className="w-4 h-4" />
-                      </Link>
+                      </button>
 
-                      <button onClick={() => openDeleteModal(char)}>
+                      <button onClick={(e) => { e.stopPropagation(); openDeleteModal(char); }}>
                         <img src={DeleteImage} className="w-3 h-4" />
                       </button>
                     </div>
                   </td>
 
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
                     {/* <Switch
                       checked={char.status}
                       onChange={() => handleStatusChange(char)}
