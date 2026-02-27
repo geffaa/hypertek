@@ -141,81 +141,144 @@ function EditProfile() {
         </div>
       </div>
 
-      {/* Form */}
-      <div className="flex flex-col items-center mt-8 gap-6 px-4 sm:px-6 lg:px-12">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-          className="w-full max-w-md bg-transparent border border-white rounded-xl px-3 py-2 text-white"
-        />
+      {/* Form ported from EditUser.jsx */}
+      <section className="max-w-3xl mx-auto mb-10 px-4">
+        <div className="p-6 sm:p-10 bg-transparent rounded-2xl">
+          <form
+            className="flex flex-col gap-6 items-center"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            {/* Name */}
+            <div className="w-full max-w-md z-10">
+              <label
+                className="block text-[18px] md:text-[20.97px] text-white font-bold leading-[100%] mb-4 md:mb-8"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Enter your details
+              </label>
 
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="w-full max-w-md bg-transparent border border-white rounded-xl px-3 py-2 text-white"
-        />
-
-        <textarea
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          placeholder="Bio"
-          rows={4}
-          className="w-full max-w-md bg-transparent border border-white rounded-xl px-3 py-2 text-white"
-        />
-
-        {/* Passwords */}
-        <div className="flex flex-col gap-4 w-full max-w-md">
-          <div className="relative">
-            <input
-              type={showCurrent ? "text" : "password"}
-              value={currentPass}
-              onChange={(e) => setCurrentPass(e.target.value)}
-              placeholder="Current Password"
-              className="w-full bg-transparent border border-white rounded-lg px-3 py-2 pr-10 text-white"
-            />
-            <div className="absolute right-2 top-2 cursor-pointer" onClick={() => setShowCurrent(!showCurrent)}>
-              {showCurrent ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
+              <div className="w-full space-y-8 max-w-md">
+                <div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value.length <= 30 && /^[a-zA-Z\s]*$/.test(value)) {
+                        setName(value);
+                      }
+                    }}
+                    placeholder={userData?.FullName || "Full Name"}
+                    className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+                  />
+                  {name.length >= 30 && (
+                    <p className="text-yellow-400 text-xs mt-1">
+                      Maximum 30 characters allowed
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div className="relative">
-            <input
-              type={showNew ? "text" : "password"}
-              value={newPass}
-              onChange={(e) => setNewPass(e.target.value)}
-              placeholder="New Password"
-              className="w-full bg-transparent border border-white rounded-lg px-3 py-2 pr-10 text-white"
-            />
-            <div className="absolute right-2 top-2 cursor-pointer" onClick={() => setShowNew(!showNew)}>
-              {showNew ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
-            </div>
-          </div>
+            {/* Email */}
+            <div className="w-full max-w-md mt-2">
+              <label
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Enter your email
+              </label>
 
-          <div className="relative">
-            <input
-              type={showConfirm ? "text" : "password"}
-              value={confirmPass}
-              onChange={(e) => setConfirmPass(e.target.value)}
-              placeholder="Confirm New Password"
-              className="w-full bg-transparent border border-white rounded-lg px-3 py-2 pr-10 text-white"
-            />
-            <div className="absolute right-2 top-2 cursor-pointer" onClick={() => setShowConfirm(!showConfirm)}>
-              {showConfirm ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
+              <input
+                type="email"
+                value={email}
+                disabled
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={userData?.Email || "Email"}
+                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white opacity-60 cursor-not-allowed transition-all duration-200"
+              />
             </div>
-          </div>
+
+            {/* Bio */}
+            <div className="w-full max-w-md mt-4">
+              <label
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5"
+                style={{ fontFamily: "Inter, sans-serif", opacity: 1 }}
+              >
+                Enter Your Bio
+              </label>
+
+              <textarea
+                rows="4"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                placeholder="Enter Your Bio"
+                className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+              ></textarea>
+            </div>
+
+            {/* Reset Password */}
+            <div className="w-full max-w-md flex flex-col gap-4 mt-6">
+              <label className="block text-white text-[20px] md:text-[25px] font-medium mb-2">
+                Reset Password
+              </label>
+
+              <div className="relative">
+                <input
+                  type={showCurrent ? "text" : "password"}
+                  placeholder="Current Password"
+                  value={currentPass}
+                  onChange={(e) => setCurrentPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowCurrent(!showCurrent)}>
+                  {showCurrent ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showNew ? "text" : "password"}
+                  placeholder="New Password"
+                  value={newPass}
+                  onChange={(e) => setNewPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowNew(!showNew)}>
+                  {showNew ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  placeholder="Confirm New Password"
+                  value={confirmPass}
+                  onChange={(e) => setConfirmPass(e.target.value)}
+                  className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 pr-10"
+                />
+                <div className="absolute right-3 top-2.5 cursor-pointer text-gray-400 hover:text-white" onClick={() => setShowConfirm(!showConfirm)}>
+                  {showConfirm ? <FiEyeOff /> : <FiEye />}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-center w-full my-12 md:my-16">
+              <div className="w-full max-w-md">
+                <button
+                  type="submit"
+                  className="mx-auto block bg-[#002AA8] hover:bg-[#001f7a] transition-colors w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-
-        <button
-          onClick={handleSubmit}
-          className="w-full max-w-md bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl"
-        >
-          Save
-        </button>
-      </div>
+      </section>
     </div>
   );
 }

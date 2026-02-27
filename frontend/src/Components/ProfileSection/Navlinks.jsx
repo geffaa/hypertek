@@ -134,7 +134,7 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
 
   // ---------- RENDER ----------
   return (
-    <ul className="flex flex-wrap gap-4 mt-5 lg:gap-10 -ml-6">
+    <ul className="flex flex-wrap gap-4 mt-5 lg:gap-10">
       {/* CATEGORY TABS */}
       {categoryTabs.map((cat) => {
         const isActive =

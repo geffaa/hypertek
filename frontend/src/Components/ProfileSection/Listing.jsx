@@ -313,7 +313,7 @@ function UserListings() {
       {/* Hero Section */}
       <div className="mx-auto mt-18 lg:mt-[68px] max-w-[2000px]">
         <div className="w-full overflow-x-hidden">
-          <div className="relative w-full max-w-[1400px] mx-auto h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] mb-20 md:mb-24 overflow-hidden">
+          <div className="relative w-full max-w-[1400px] mx-auto h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] overflow-hidden">
             <img
               src={overview1}
               alt="Hero background"
@@ -322,64 +322,60 @@ function UserListings() {
           </div>
 
           {/* Profile Section */}
-          <div className="relative -mt-20 sm:-mt-24 md:-mt-24 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col items-start">
-                <div className="relative flex-shrink-0">
-                  {userData?.Avatar ? (
-                    <img
-                      src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-                      alt="Profile"
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 object-cover border-4 border-gray-900"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 border-4 border-gray-900">
-                      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-                    </div>
-                  )}
-                </div>
+          <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+            <div className="flex flex-col items-start">
+              <div className="relative flex-shrink-0">
+                {userData?.Avatar ? (
+                  <img
+                    src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                    alt="Profile"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-10 sm:-mt-12 md:-mt-14 xl:-mt-16 2xl:-mt-18 object-cover border-4 border-gray-900"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-10 sm:-mt-12 md:-mt-14 xl:-mt-16 2xl:-mt-18 border-4 border-gray-900">
+                    <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                  </div>
+                )}
+              </div>
 
-                <div className="mt-4 text-left text-white">
-                  <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
-                    {userData.FullName?.replace(/[0-9]/g, "") ||
-                      userData.Email?.split("@")[0].replace(/[0-9]/g, "") ||
-                      "Guest"}
-                  </h2>
-                  <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
-                    <span className="font-mono">
-                      {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
-                    </span>
-                    <Link
-                      to="/edit"
-                      state={{ userData }}
-                      className="flex items-center gap-1 hover:text-white transition-colors"
-                    >
-                      <span>Edit Profile</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                      </svg>
-                    </Link>
+              <div className="mt-4 text-left text-white">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
+                  {userData.FullName?.replace(/[0-9]/g, "") ||
+                    userData.Email?.split("@")[0].replace(/[0-9]/g, "") ||
+                    "Guest"}
+                </h2>
+                <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                  <span className="font-mono">
+                    {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                  </span>
+                  <Link
+                    to="/edit"
+                    state={{ userData }}
+                    className="flex items-center gap-1 hover:text-white transition-colors"
+                  >
+                    <span>Edit Profile</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                  </Link>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                    <span className="text-black font-bold text-xs p-1">₮</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                      <span className="text-black font-bold text-xs p-1">₮</span>
-                    </div>
-                    <span className="text-lg font-bold text-white font-mono">
-                      ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
-                    </span>
-                  </div>
+                  <span className="text-lg font-bold text-white font-mono">
+                    ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Navigation */}
-        <div className="relative flex flex-row md:mr-24 lg:flex-row md:justify-center justify-start items-start gap-4 lg:gap-0 mb-4 lg:mb-8">
-          <div className="w-full max-w-7xl md:px-4 px-2 lg:px-8">
-            <NavLinks />
-          </div>
-        </div>
+      {/* Navigation */}
+      <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 mt-4 mb-4 lg:mb-8">
+        <NavLinks />
       </div>
 
       {/* Listings Section */}
@@ -503,109 +499,111 @@ function UserListings() {
       </section>
 
       {/* Cancel Listing Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div
-            className="bg-[#1F2633] p-5 w-[400px] h-[400px] relative text-white"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close */}
-            <button
-              onClick={() => !cancelling && setShowModal(false)}
-              className="absolute top-3 right-3 text-white font-bold text-lg hover:text-gray-300"
-              disabled={cancelling}
+      {
+        showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+            <div
+              className="bg-[#1F2633] p-5 w-[400px] h-[400px] relative text-white"
+              onClick={(e) => e.stopPropagation()}
             >
-              ×
-            </button>
-
-            {/* Title */}
-            <h2 className="font-inter font-semibold text-[20px] leading-[100%] text-white text-center mb-6">
-              Cancel Listing
-            </h2>
-
-            <div className="h-px bg-white/20 mb-4" />
-
-            {/* Item Row */}
-            {selectedListings.map((item) => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between  p-3 rounded-md"
+              {/* Close */}
+              <button
+                onClick={() => !cancelling && setShowModal(false)}
+                className="absolute top-3 right-3 text-white font-bold text-lg hover:text-gray-300"
+                disabled={cancelling}
               >
-                {/* Image */}
-                <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
-                  <img
-                    src={`${BACKEND_BASE_URL}${item.collection?.image}`}
-                    alt={item.collection?.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                ×
+              </button>
 
-                {/* Name */}
-                <div className="flex-1 ml-3 space-y-2">
-                  <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
-                    {item.name}
-                  </p>
-                  <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
-                    Token #{item.tokenId}
-                  </p>
-                </div>
+              {/* Title */}
+              <h2 className="font-inter font-semibold text-[20px] leading-[100%] text-white text-center mb-6">
+                Cancel Listing
+              </h2>
 
-                {/* Price */}
-                <p className="text-sm font-medium text-gray-300">
-                  {item.priceETH} USDC
-                </p>
-              </div>
-            ))}
+              <div className="h-px bg-white/20 mb-4" />
 
-            {/* Buttons */}
-            <div className="flex justify-center gap-8  mt-40">
-              {/* Cancel – Bracket */}
-              <button onClick={() => setShowModal(false)} disabled={cancelling}>
-                <div className="flex items-center">
-                  <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
-                  <div
-                    className="border-[#002AA8]"
-                    style={{
-                      width: "0.5rem",
-                      height: "2.1rem",
-                      borderStyle: "solid",
-                      borderWidth: "0.375rem 0.25rem 0.375rem 0",
-                    }}
-                  />
-                  <div
-                    className="flex items-center justify-center text-white text-sm font-medium"
-                    style={{
-                      width: "6.5rem",
-                      height: "2rem",
-                      border: "0.15rem solid #002AA8",
-                    }}
-                  >
-                    Cancel
+              {/* Item Row */}
+              {selectedListings.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex items-center justify-between  p-3 rounded-md"
+                >
+                  {/* Image */}
+                  <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
+                    <img
+                      src={`${BACKEND_BASE_URL}${item.collection?.image}`}
+                      alt={item.collection?.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div
-                    className="border-[#002AA8]"
-                    style={{
-                      width: "0.5rem",
-                      height: "2.1rem",
-                      borderStyle: "solid",
-                      borderWidth: "0.25rem 0 0.375rem 0.25rem",
-                    }}
-                  />
-                  <div className="bg-[#002AA8] w-1 h-5"></div>
-                </div>
-              </button>
 
-              {/* Delist */}
-              <button onClick={handleConfirmCancel} disabled={cancelling}>
-                <CustomButton4
-                  text={cancelling ? "Processing..." : "Delist Item"}
-                />
-              </button>
+                  {/* Name */}
+                  <div className="flex-1 ml-3 space-y-2">
+                    <p className="font-medium text-[18px] leading-[100%] tracking-[0.05em] capitalize text-white -mt-4">
+                      {item.name}
+                    </p>
+                    <p className="font-inter font-medium text-[12px] leading-[100%] tracking-[0.05em] capitalize text-gray-400">
+                      Token #{item.tokenId}
+                    </p>
+                  </div>
+
+                  {/* Price */}
+                  <p className="text-sm font-medium text-gray-300">
+                    {item.priceETH} USDC
+                  </p>
+                </div>
+              ))}
+
+              {/* Buttons */}
+              <div className="flex justify-center gap-8  mt-40">
+                {/* Cancel – Bracket */}
+                <button onClick={() => setShowModal(false)} disabled={cancelling}>
+                  <div className="flex items-center">
+                    <div className="bg-[#002AA8] mr-0.5 w-1 h-5"></div>
+                    <div
+                      className="border-[#002AA8]"
+                      style={{
+                        width: "0.5rem",
+                        height: "2.1rem",
+                        borderStyle: "solid",
+                        borderWidth: "0.375rem 0.25rem 0.375rem 0",
+                      }}
+                    />
+                    <div
+                      className="flex items-center justify-center text-white text-sm font-medium"
+                      style={{
+                        width: "6.5rem",
+                        height: "2rem",
+                        border: "0.15rem solid #002AA8",
+                      }}
+                    >
+                      Cancel
+                    </div>
+                    <div
+                      className="border-[#002AA8]"
+                      style={{
+                        width: "0.5rem",
+                        height: "2.1rem",
+                        borderStyle: "solid",
+                        borderWidth: "0.25rem 0 0.375rem 0.25rem",
+                      }}
+                    />
+                    <div className="bg-[#002AA8] w-1 h-5"></div>
+                  </div>
+                </button>
+
+                {/* Delist */}
+                <button onClick={handleConfirmCancel} disabled={cancelling}>
+                  <CustomButton4
+                    text={cancelling ? "Processing..." : "Delist Item"}
+                  />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }
 
