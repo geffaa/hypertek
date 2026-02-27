@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 
-function NavLinks() {
+function NavLinks({ className = "" }) {
   const [links, setLinks] = useState([
     { name: "Overview", path: "/market-place" },
     { name: "Activities", path: "/personal-activity" },
@@ -60,13 +60,13 @@ function NavLinks() {
   if (loading) return null; // optional: show skeleton
 
   return (
-    <ul className="flex flex-wrap gap-4 lg:gap-3 md:justify-center lg:justify-start">
+    <ul className={`flex flex-wrap gap-4 lg:gap-8 justify-start items-center ${className}`}>
       {links.map((link, i) => (
         <li key={i}>
           <NavLink
             to={link.path}
             className={({ isActive }) =>
-              `px-1 md:ml-0  py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
+              `px-1 py-2 lg:px-[14px] lg:py-[4px] rounded-[10px] font-inter text-sm lg:text-[16px] 
               transition-colors ${isActive
                 ? " bg-[#002AA8] text-white font-semibold"
                 : "text-white hover:bg-white/10 font-medium"
