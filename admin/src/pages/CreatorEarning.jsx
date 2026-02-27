@@ -160,7 +160,7 @@ function CreatorEarning() {
   }
 
   return (
-    <div className="bg-black pt-12 overflow-hidden h-[850px]">
+    <div className="bg-black pt-4 overflow-hidden h-screen">
       {/* Bg Effect */}
       <div
         style={{
@@ -193,20 +193,20 @@ function CreatorEarning() {
       ></div>
 
       {/* Main Content */}
-      <div className="flex gap-10 mt-[80px] mx-8 relative z-50">
+      <div className="flex gap-10 mt-6 mx-8 relative z-50">
         {/* Left side - Preview and Basic Info */}
 
         {/* Right side - Form */}
-        <div className="flex flex-col gap-6 p-6 w-[456px]">
+        <div className="flex flex-col gap-4 p-4 w-[456px]">
           <span className="font-inter font-semibold text-[25px]">
             Earnings
           </span>
 
-          <div className="flex justify-between gap-6 mt-5">
+          <div className="flex justify-between gap-6 mt-2">
             {/* Creator Fee */}
             <div className="flex flex-col gap-2 w-[180px]">
               <h1 className="font-inter font-normal text-[18px] m-0">Creator Fee</h1>
-              <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
+              <div className="flex items-center border border-[#555] rounded-md h-[40px] px-3">
                 <input
                   type="text"
                   name="royaltyPercent"
@@ -224,7 +224,7 @@ function CreatorEarning() {
             {/* Supply */}
             <div className="flex flex-col gap-2 w-[180px]">
               <h1 className="font-inter font-normal text-[18px] m-0">Supply</h1>
-              <div className="flex items-center border border-[#555] rounded-md h-[48px] px-3">
+              <div className="flex items-center border border-[#555] rounded-md h-[40px] px-3">
                 <input
                   type="text"
                   name="supply"
@@ -237,7 +237,7 @@ function CreatorEarning() {
           </div>
 
           {/* Recipient Wallet Address */}
-          <div className="flex flex-col gap-2 mt-8 w-full">
+          <div className="flex flex-col gap-2 mt-4 w-full">
             <h1 className="font-inter font-normal text-[18px] m-0">
               Recipient Wallet Address
             </h1>
@@ -248,14 +248,14 @@ function CreatorEarning() {
               onChange={handleInputChange}
               placeholder="Add wallet address"
               maxLength={42}
-              className="w-full h-[48px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
+              className="w-full h-[40px] px-4 rounded-md border border-white/70 bg-transparent text-[18px] text-white/70 font-inter outline-none"
             />
           </div>
 
           {/* Creator Earnings Info */}
-          <div className="flex flex-col gap-2 mt-8 w-full">
+          <div className="flex flex-col gap-2 mt-4 w-full">
             <h1 className="font-inter font-normal text-[18px] m-0">Creator Earnings</h1>
-            <p className="text-[14px] text-white/70 font-inter leading-[100%] m-0">
+            <p className="text-[14px] text-white/70 font-inter leading-[120%] m-0">
               orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
               nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{" "}
@@ -268,16 +268,16 @@ function CreatorEarning() {
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-end mt-12 mr-12">
+      <div className="flex justify-end mt-4 mr-12">
         <button
           onClick={handleBackButton}
-          className="border border-white text-white hover:bg-white/10 transition-colors w-[133px] h-[42px] rounded-md font-medium text-[16px] flex items-center justify-center cursor-pointer mr-4"
+          className="border border-white text-white hover:bg-white/10 transition-colors w-[133px] h-[36px] rounded-md font-medium text-[16px] flex items-center justify-center cursor-pointer mr-4"
         >
           Back
         </button>
         <button
           onClick={handleSubmit}
-          className="w-[190px] h-[42px] rounded-md bg-blue-700 text-white font-medium text-[16px] flex items-center justify-center cursor-pointer"
+          className="w-[190px] h-[36px] rounded-md bg-blue-700 text-white font-medium text-[16px] flex items-center justify-center cursor-pointer"
         >
           Create Collection
         </button>
