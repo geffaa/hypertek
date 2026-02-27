@@ -777,15 +777,9 @@ function AddCollection() {
                 </td> */}
 
                 <td
-
-                  className="px-6 py-3 text-[#FFFFFFC4] font-medium cursor-pointer hover:text-white transition"
-
-                  onClick={() => handleTypeNavigation(col)}
-
+                  className="px-6 py-3 text-[#FFFFFFC4] font-medium transition"
                 >
-
                   {col.name}
-
                 </td>
 
 
@@ -826,7 +820,7 @@ function AddCollection() {
 
                 </td>
 
-                 <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
+                <td className="px-6 py-3 text-[#FFFFFFC4] font-medium">
                   {col.supply}
                 </td>
 
@@ -837,21 +831,13 @@ function AddCollection() {
                   <div className="flex gap-4">
 
                     <button
-
                       onClick={(e) => {
-
                         e.stopPropagation();
-
-                        handleEditCollection(col);
-
+                        handleTypeNavigation(col);
                       }}
-
                       className="p-2 cursor-pointer transition-colors duration-200 hover:bg-white/10 rounded"
-
                     >
-
                       <img src={EditImage} alt="edit" className="w-4 h-4" />
-
                     </button>
 
 
