@@ -35,6 +35,7 @@ function Character() {
                 image: sub.image || parent.collection?.image || "",
                 price: sub.priceETH || 0,
                 address: sub.owner || "N/A",
+                 description: sub.description || parent.collection?.description || "",
                 status: true,
               });
             });
@@ -363,5 +364,6 @@ function Character() {
     </>
   );
 }
+
 
 export default Character;
