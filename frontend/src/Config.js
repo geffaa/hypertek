@@ -11,5 +11,3 @@ const User_Dashboard_Url ="https://api-hyper-tek-games.deventiatech.com/api/v1"
 const MarketPlace_Url ="https://api-hyper-tek-games.deventiatech.com/api/v1"
 const NewsImage_Url = "https://api-hyper-tek-games.deventiatech.com";
 export { User_Dashboard_Url , NewsImage_Url , MarketPlace_Url}
-
-// 
