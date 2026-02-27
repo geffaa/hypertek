@@ -158,7 +158,7 @@ function CreateCollections() {
   const handleBackButton = () => {
     navigate(-1);
   };
-  
+
 
   if (isSubmitting) {
     return <FullScreenLoader />;
@@ -172,7 +172,7 @@ function CreateCollections() {
 
       {/* Content */}
       <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-2">
+        <div className="flex gap-10 mt-[40px] mx-2">
           {/* left side preview / modal */}
           <div
             className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
@@ -351,7 +351,7 @@ function CreateCollections() {
             </div>
 
             {/* Name Field with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-4 mx-2">
               <label
                 htmlFor="name"
                 style={{
@@ -378,9 +378,8 @@ function CreateCollections() {
                     setErrors((prev) => ({ ...prev, name: "" }));
                   }
                 }}
-                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
-                  errors.name ? "border-red-500" : "border-gray-600"
-                } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
+                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${errors.name ? "border-red-500" : "border-gray-600"
+                  } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
               />
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name}</p>
@@ -388,7 +387,7 @@ function CreateCollections() {
             </div>
 
             {/* Token Symbol with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-4 mx-2">
               <label
                 htmlFor="symbol"
                 style={{
@@ -415,9 +414,8 @@ function CreateCollections() {
                     setErrors((prev) => ({ ...prev, symbol: "" }));
                   }
                 }}
-                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${
-                  errors.symbol ? "border-red-500" : "border-gray-600"
-                } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
+                className={`w-full h-10 px-3 rounded-md bg-white/10 text-white border ${errors.symbol ? "border-red-500" : "border-gray-600"
+                  } focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors`}
               />
               {errors.symbol && (
                 <p className="text-red-500 text-sm">{errors.symbol}</p>
@@ -425,7 +423,7 @@ function CreateCollections() {
             </div>
 
             {/* Chain with validation */}
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-6 mx-2">
+            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-4 mx-2">
               <label
                 htmlFor="chain"
                 style={{
@@ -442,9 +440,8 @@ function CreateCollections() {
               </label>
 
               <div
-                className={`flex items-center rounded-md bg-white/10 text-white border px-2 ${
-                  errors.chain ? "border-red-500" : "border-gray-600"
-                } focus-within:border-blue-500 focus-within:bg-white/15 transition-colors`}
+                className={`flex items-center rounded-md bg-white/10 text-white border px-2 ${errors.chain ? "border-red-500" : "border-gray-600"
+                  } focus-within:border-blue-500 focus-within:bg-white/15 transition-colors`}
               >
                 <div
                   className="w-[17px] h-[17px] rounded-2xl flex items-center justify-center"
@@ -478,13 +475,13 @@ function CreateCollections() {
                 <p className="text-red-500 text-sm">{errors.chain}</p>
               )}
             </div>
-          
+
           </div>
         </div>
 
         {/* last buttons div  */}
         <div
-          className="flex mt-8 justify-end mx-8 pt-16 pb-32 relative z-10"
+          className="flex mt-4 justify-end mx-8 pt-8 pb-4 relative z-10"
           style={{
             opacity: 1,
             gap: "37px",
