@@ -539,66 +539,65 @@ function Land() {
       <div className="min-h-screen bg-transparent">
         <div className="mx-auto mt-[68px] max-w-[2000px]">
           {/* ================= HERO ================= */}
-          <div className="relative w-full max-w-[1400px] mx-auto h-[260px] mb-20 overflow-hidden">
+          <div className="relative w-full max-w-[1400px] mx-auto h-[260px] overflow-hidden">
             <img
               src={overview1}
               alt="Hero"
-              className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
 
           {/* ================= PROFILE ================= */}
-          <div className="relative -mt-24 px-6">
-            <div className="max-w-7xl mx-auto flex flex-col items-start text-white">
-              <div className="relative">
-                {userData?.Avatar ? (
-                  <img
-                    src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-                    alt="Avatar"
-                    className="w-28 h-28 rounded-full border-4 border-gray-900 object-cover"
-                  />
-                ) : (
-                  <FaUserCircle className="w-28 h-28 text-gray-400" />
-                )}
-              </div>
-              <h2 className="mt-4 text-xl sm:text-2xl font-semibold mb-1">
-                {userData?.FullName ||
-                  userData?.Email?.split("@")[0] ||
-                  "Guest"}
-              </h2>
-              <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
-                <span className="font-mono">
-                  {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
-                </span>
-                <Link
-                  to="/edit"
-                  state={{ userData }}
-                  className="flex items-center gap-1 hover:text-white transition-colors"
-                >
-                  <span>Edit Profile</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                  </svg>
-                </Link>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                  <img src={TVector} className="w-3 h-3" alt="chain" />
+          <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex flex-col items-start text-white">
+            <div className="relative">
+              {userData?.Avatar ? (
+                <img
+                  src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                  alt="Avatar"
+                  className="w-28 h-28 rounded-full border-4 border-gray-900 object-cover -mt-14"
+                />
+              ) : (
+                <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-28 h-28 border-4 border-gray-900 -mt-14">
+                  <FaUserCircle className="w-16 h-16 text-white" />
                 </div>
-                <span className="text-lg font-bold text-white font-mono">
-                  ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
-                </span>
+              )}
+            </div>
+            <h2 className="mt-4 text-xl sm:text-2xl font-semibold mb-1">
+              {userData?.FullName ||
+                userData?.Email?.split("@")[0] ||
+                "Guest"}
+            </h2>
+            <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+              <span className="font-mono">
+                {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+              </span>
+              <Link
+                to="/edit"
+                state={{ userData }}
+                className="flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span>Edit Profile</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                <img src={TVector} className="w-3 h-3" alt="chain" />
               </div>
+              <span className="text-lg font-bold text-white font-mono">
+                ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+              </span>
             </div>
           </div>
 
           {/* ================= NAV ================= */}
-          <div className="mt-6 max-w-7xl mx-auto px-4">
+          <div className="mt-6 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
             <NavLinks />
           </div>
 
           {/* ================= NFT CARDS ================= */}
-          <section className="relative z-10 px-6 mt-10">
+          <section className="relative z-10 mt-10">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {filteredLandCollections.length === 0 ? (
@@ -619,7 +618,7 @@ function Land() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                 {filteredLandCollections.map((item) => {
                   const isConnecting = connectingWallet[item._id];
                   const hasInteracted = userHasInteracted[item._id];
@@ -754,7 +753,7 @@ function Land() {
             )}
           </section>
         </div>
-      </div>
+      </div >
     </>
   );
 }

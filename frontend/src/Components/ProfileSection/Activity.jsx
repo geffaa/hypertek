@@ -149,7 +149,7 @@ function PersonalActivity() {
           <div
             className="relative w-full max-w-[1400px] mx-auto 
     h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] 
-    mb-20 md:mb-24 overflow-hidden"
+    overflow-hidden"
           >
             <img
               src={overview1}
@@ -159,66 +159,61 @@ function PersonalActivity() {
           </div>
 
           {/* Profile Section - aligned properly with banner */}
-          <div className="relative -mt-20 sm:-mt-24 md:-mt-24 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col items-start">
-                {/* Profile Image */}
-                <div className="relative flex-shrink-0">
-                  {userData?.Avatar ? (
-                    <img
-                      src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
-                      alt="Profile"
-                      className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 object-cover border-4 border-gray-900"
-                      onError={() => setImageError(true)}
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-12 sm:-mt-16 md:-mt-16 xl:-mt-20 border-4 border-gray-900">
-                      <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
-                    </div>
-                  )}
-                </div>
+          <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+            <div className="flex flex-col items-start">
+              {/* Profile Image */}
+              <div className="relative flex-shrink-0">
+                {userData?.Avatar ? (
+                  <img
+                    src={`https://api-hyper-tek-games.deventiatech.com${userData.Avatar}`}
+                    alt="Profile"
+                    className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 rounded-full shadow-lg -mt-10 sm:-mt-12 md:-mt-14 xl:-mt-16 2xl:-mt-18 object-cover border-4 border-gray-900"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 xl:w-32 xl:h-32 2xl:w-36 2xl:h-36 -mt-10 sm:-mt-12 md:-mt-14 xl:-mt-16 2xl:-mt-18 border-4 border-gray-900">
+                    <FaUserCircle className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" />
+                  </div>
+                )}
+              </div>
 
-                {/* Profile Info */}
-                <div className="mt-4 text-left text-white">
-                  <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
-                    {userData.FullName
-                      ? userData.FullName.replace(/[0-9]/g, "") || ""
-                      : userData.Email
-                        ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
-                        : "Guest"}
-                  </h2>
-                  <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
-                    <span className="font-mono">
-                      {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
-                    </span>
-                    <Link to="/edit" state={{ userData }} className="flex items-center gap-1 hover:text-white transition-colors">
-                      <span>Edit Profile</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                      </svg>
-                    </Link>
+              {/* Profile Info */}
+              <div className="mt-4 text-left text-white">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-1">
+                  {userData.FullName
+                    ? userData.FullName.replace(/[0-9]/g, "") || ""
+                    : userData.Email
+                      ? userData.Email.split("@")[0].replace(/[0-9]/g, "")
+                      : "Guest"}
+                </h2>
+                <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
+                  <span className="font-mono">
+                    {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
+                  </span>
+                  <Link to="/edit" state={{ userData }} className="flex items-center gap-1 hover:text-white transition-colors">
+                    <span>Edit Profile</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                  </Link>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
+                    <img src={TVector} className="w-3 h-3" alt="chain" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                      <img src={TVector} className="w-3 h-3" alt="chain" />
-                    </div>
-                    <span className="text-lg font-bold text-white font-mono">
-                      ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
-                    </span>
-                  </div>
+                  <span className="text-lg font-bold text-white font-mono">
+                    ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Navigation */}
-        {/* Navigation */}
-        <div className="relative flex flex-row md:mr-24 lg:flex-row md:justify-center justify-start items-start gap-4 lg:gap-0 mb-4 lg:mb-8">
-          <div className="w-full max-w-7xl md:px-4 px-2 lg:px-8">
-            <NavLinks />
-          </div>
-        </div>
+      {/* Navigation */}
+      <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 mt-4 mb-4 lg:mb-8">
+        <NavLinks />
       </div>
 
 
@@ -284,7 +279,7 @@ function PersonalActivity() {
         </div>
       </section>
 
-    </div>
+    </div >
   );
 }
 
