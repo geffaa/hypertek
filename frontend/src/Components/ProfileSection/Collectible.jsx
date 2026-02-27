@@ -268,7 +268,7 @@ function MarketPlace() {
           </div>
 
           {/* ================= PROFILE ================= */}
-          <div className="relative -mt-24 px-6">
+          <div className="relative -mt-24 px-4 sm:px-6 md:px-8">
             <div className="max-w-7xl mx-auto flex flex-col items-start text-white">
               <div className="relative">
                 {userData?.Avatar ? (
@@ -313,7 +313,7 @@ function MarketPlace() {
           </div>
 
           {/* ================= NAV ================= */}
-          <div className="mt-6 max-w-7xl mx-auto px-4">
+          <div className="mt-6 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
             <NavLinks
               onSelectCategory={handleSelectCategory}
               selectedCategory={activeCategory}
