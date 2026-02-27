@@ -115,6 +115,18 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
       window.removeEventListener("categoriesUpdated", fetchCategories);
   }, []);
 
+  // ✅ Auto-open dropdown on category pages, close on main collections page
+  useEffect(() => {
+    const isMainCollections = path.endsWith("/collections");
+    const isSpecificCategory = path.includes("/collections/") && path.split("/").length > 3;
+
+    if (isSpecificCategory) {
+      setOpenCollection(true);
+    } else if (isMainCollections) {
+      setOpenCollection(false);
+    }
+  }, [path]);
+
   return (
     <div
       className={`sidebar text-white p-3 bg-[#100F0F] z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
@@ -245,7 +257,6 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
             {/* Collection */}
             <Link to={withAdmin("/collections")} onClick={(e) => handleLinkClick(e, true)}>
               <li
-                onClick={() => toggleDropdown("collection")}
                 className={`menu-item justify-between ${isCollection ? "bg-[#002AA8]" : ""}`}
               >
                 <div className="flex items-center gap-3">
@@ -274,7 +285,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
                     className={`submenu-item ${index === categories.length - 1 ? "submenu-item-last" : ""
 
-                      }`}
+                      } ${path.includes(`/collections/${cat.key}`) ? "text-white" : "text-[#FFFFFFC4] hover:text-white"}`}
 
                   >
 
@@ -459,11 +470,11 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 .submenu-item {
   position: relative;
   padding-left: 24px;
-  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   min-height: 24px;
+  transition: all 0.2s ease;
 
   font-family: 'Inter', sans-serif;
   font-weight: 700;
