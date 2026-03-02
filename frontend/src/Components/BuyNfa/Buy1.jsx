@@ -26,7 +26,7 @@ import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { immutableZkEvmTestnet } from 'viem/chains';
 import { BACKEND_BASE_URL } from "../../Config";
 import CustomButton from "../Buttons/Button1";
-import { FiEye, FiEdit2 } from "react-icons/fi";
+import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 
 function Buy1() {
   const navigate = useNavigate();
@@ -795,9 +795,9 @@ function Buy1() {
         setLoading(false);
 
         const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
-        
-          navigate("/Profile", { state: { category: targetCategory } });
-        
+
+        navigate("/Profile", { state: { category: targetCategory } });
+
 
         return; // Scenario 1 completed
       }
@@ -1111,7 +1111,29 @@ function Buy1() {
                       {ethers.formatEther(balance || 0).substring(0, 6)}
                       <span className="text-lg text-gray-500 ml-1">ETH</span>
                     </div>
-                    <div className="text-xs text-gray-500 font-mono">Immutable zkEVM Testnet</div>
+                    <div className="text-xs text-gray-500 font-mono pb-2">Immutable zkEVM Testnet</div>
+                  </div>
+
+                  {/* Copyable Wallet Address */}
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (immutableAddress) {
+                        navigator.clipboard.writeText(immutableAddress);
+                        toast.success("Wallet address copied!", { position: "bottom-center" });
+                      }
+                    }}
+                    className="mt-3 flex items-center justify-between bg-black/20 hover:bg-black/40 cursor-pointer px-3 py-2.5 rounded-lg transition-colors border border-white/5 active:scale-95 group/copy"
+                    title="Copy Wallet Address"
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">Address</span>
+                      <span className="text-xs text-gray-300 font-mono group-hover/copy:text-white transition-colors">
+                        {immutableAddress ? `${immutableAddress.substring(0, 8)}...${immutableAddress.substring(34)}` : "Not Found"}
+                      </span>
+                    </div>
+                    <FiCopy className="text-gray-400 group-hover/copy:text-white transition-colors" size={16} />
                   </div>
 
 
