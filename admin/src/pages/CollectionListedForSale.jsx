@@ -35,11 +35,7 @@ function Character() {
                 image: sub.image || parent.collection?.image || "",
                 price: sub.priceETH || 0,
                 address: sub.owner || "N/A",
-<<<<<<< HEAD
                 description: sub.description || parent.collection?.description || "",
-=======
-                 description: sub.description || parent.collection?.description || "",
->>>>>>> 06c0cee495fd6aeb2404bc3c02935d88bf030c8b
                 status: true,
               });
             });

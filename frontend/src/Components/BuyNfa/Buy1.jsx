@@ -283,8 +283,7 @@ function Buy1() {
   /* ========================== BACKEND MINT ========================== */
   const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
-      toast.error("❌ Invalid user or item data");
-      return null;
+      throw new Error("Invalid user or item data");
     }
 
     try {
@@ -315,11 +314,14 @@ function Buy1() {
         return res.data.tokenId;
       } else {
         console.error("❌ Mint response invalid:", res.data);
-        return null;
+        throw new Error(res.data?.error || res.data?.message || "Mint response invalid");
       }
     } catch (err) {
       console.error("❌ Mint error:", err.response?.data || err);
-      return null;
+      if (err.response?.data?.error) {
+        throw new Error(err.response.data.error);
+      }
+      throw err;
     }
   };
 
@@ -357,10 +359,16 @@ function Buy1() {
       // Mint if not exists
       if (!tokenId) {
         toast.loading("🔧 Processing listing...", { id: toastId });
-        tokenId = await mintNFTToWallet(walletAddress);
-
-        if (!tokenId) {
-          toast.error("❌ Failed to prepare NFA", { id: toastId });
+        try {
+          tokenId = await mintNFTToWallet(walletAddress);
+        } catch (mintErr) {
+          console.error("❌ Minting error:", mintErr);
+          const errMsg = mintErr.message || "";
+          if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
+            toast.error("❌ Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
+          } else {
+            toast.error(`❌ Minting Failed: ${errMsg}`, { id: toastId, duration: 8000 });
+          }
           setLoading(false);
           return;
         }
@@ -725,6 +733,8 @@ function Buy1() {
           let msg = "❌ Payment failed during deposit";
           if (depositErr.message?.includes("user rejected") || depositErr.code === 4001) {
             msg = "❌ Transaction rejected by user";
+          } else if (depositErr.message?.includes("0xfb8f41b2") || depositErr.message?.includes("ERC20InsufficientAllowance")) {
+            msg = "❌ Allowance pending. Please wait a few seconds and try again.";
           } else {
             msg = `❌ Error: ${depositErr.shortMessage || depositErr.message?.substring(0, 50) || "Unknown"}`;
           }
@@ -734,10 +744,17 @@ function Buy1() {
         }
 
         toast.loading("🚀 Processing NFA to your wallet...", { id: toastId });
-        const mintedTokenId = await mintNFTToWallet(buyer);
-
-        if (!mintedTokenId) {
-          toast.error("❌ Payment succeeded but failed to mint NFT. Please contact support.", { id: toastId });
+        let mintedTokenId;
+        try {
+          mintedTokenId = await mintNFTToWallet(buyer);
+        } catch (mintErr) {
+          console.error("❌ Minting error:", mintErr);
+          const errMsg = mintErr.message || "";
+          if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
+            toast.error("❌ Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
+          } else {
+            toast.error(`❌ Payment succeeded but minting failed: ${errMsg}. Please contact support.`, { id: toastId, duration: 8000 });
+          }
           setLoading(false);
           return;
         }
