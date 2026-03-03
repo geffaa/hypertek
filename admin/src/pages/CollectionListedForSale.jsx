@@ -35,7 +35,11 @@ function Character() {
                 image: sub.image || parent.collection?.image || "",
                 price: sub.priceETH || 0,
                 address: sub.owner || "N/A",
+<<<<<<< HEAD
                 description: sub.description || parent.collection?.description || "",
+=======
+                 description: sub.description || parent.collection?.description || "",
+>>>>>>> 06c0cee495fd6aeb2404bc3c02935d88bf030c8b
                 status: true,
               });
             });
@@ -134,24 +138,24 @@ function Character() {
 
           {/* Detail Card — matches image: dark navy bg, compact, image + inline text */}
           <div
-            className="flex gap-7 items-center p-5 rounded-xl w-fit"
+            className="flex gap-10 items-center p-8 rounded-xl w-fit"
             style={{
 
               border: "1px solid rgba(255,255,255,0.12)",
-              minWidth: "380px",
+              minWidth: "550px",
             }}
           >
             {/* Circular Image */}
             <img
               src={`${Image_Base_Url}${selectedChar.image}`}
               alt={selectedChar.name}
-              className="w-[72px] h-[72px] rounded-full object-cover flex-shrink-0"
-              onError={(e) => (e.target.src = "https://via.placeholder.com/72")}
+              className="w-[120px] h-[120px] rounded-full object-cover flex-shrink-0"
+              onError={(e) => (e.target.src = "https://via.placeholder.com/120")}
             />
 
             {/* Info — inline label + value, matching image font size */}
             <div className="flex flex-col gap-1.5 font-inter">
-              <p className="text-white text-[13px]">
+              <p className="text-white text-[16px]">
                 <span className="font-semibold">Owner Address:</span>
                 <span className="text-white/75 ml-1">
                   {selectedChar.address && selectedChar.address !== "N/A" && selectedChar.address.length > 10
@@ -159,11 +163,11 @@ function Character() {
                     : selectedChar.address}
                 </span>
               </p>
-              <p className="text-white text-[13px]">
+              <p className="text-white text-[16px]">
                 <span className="font-semibold">Price:</span>
                 <span className="text-white/75 ml-1">${selectedChar.price}</span>
               </p>
-              <p className="text-white text-[13px]">
+              <p className="text-white text-[16px]">
                 <span className="font-semibold">Description:</span>
                 <span className="text-white/75 ml-1">{selectedChar.description || ""}</span>
               </p>
@@ -364,5 +368,6 @@ function Character() {
     </>
   );
 }
+
 
 export default Character;
