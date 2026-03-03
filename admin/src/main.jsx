@@ -12,26 +12,15 @@ import { getDefaultConfig, RainbowKitProvider, darkTheme } from '@rainbow-me/rai
 import { WagmiProvider, http } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-// Define Immutable Testnet
-const immutableZkEVMTestnet = {
-  id: 13473,
-  name: 'Immutable zkEVM Testnet',
-  nativeCurrency: { name: 'IMX', symbol: 'IMX', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://rpc.testnet.immutable.com'] },
-  },
-  blockExplorers: {
-    default: { name: 'Immutable Testnet Explorer', url: 'https://explorer.testnet.immutable.com' },
-  },
-  testnet: true,
-};
+// Define Base Sepolia Testnet
+import { baseSepolia } from 'wagmi/chains';
 
 const wagmiConfig = getDefaultConfig({
   appName: 'HyperTek Admin Dashboard',
   projectId: '298db395e54d6f83652ce8a16db3ac79',
-  chains: [immutableZkEVMTestnet],
+  chains: [baseSepolia],
   transports: {
-    [immutableZkEVMTestnet.id]: http('https://rpc.testnet.immutable.com'),
+    [baseSepolia.id]: http(),
   },
 });
 

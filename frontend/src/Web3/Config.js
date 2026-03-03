@@ -2,12 +2,12 @@
 
 // ✅ Addresses from your deployment
 
-// Immutable zkEVM Testnet
-export const IMMUTABLE_NFT_ADDRESS = "0x70A6f0EFE23aD7f3dC981b1517D6637E13462dBb";
-export const IMMUTABLE_MARKETPLACE_ADDRESS = "0xD40544ff822b29762cFE690b90261fD54A31386F";
+// Base Sepolia Testnet
+export const BASE_NFT_ADDRESS = "0x28fAB54b4015acbAf4210594135da444AFA8C0F9"; // To be updated later if needed
+export const BASE_MARKETPLACE_ADDRESS = "0xdA15EE73581D45F08A950Bb9E2c5F22015bE4844"; // To be updated later if needed
 
-// USDC Addresses (Testnet Placeholders - Replace with actual if different)
-export const IMMUTABLE_USDC_ADDRESS = "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE"; // Mock USDC for Testing
+// USDC Addresses 
+export const BASE_USDC_ADDRESS = "0x9C054917d3F8ca12E2eAF97eba1Ce6eDa88D0C85"; // Mock USDC for Testing
 
 export const ERC20_ABI = [
   {
@@ -64,12 +64,12 @@ export const ERC20_ABI = [
 ];
 
 // Default exports (Used as fallback or legacy)
-export const NFT_ADDRESS = IMMUTABLE_NFT_ADDRESS; 
-export const MARKETPLACE_ADDRESS = IMMUTABLE_MARKETPLACE_ADDRESS;
+export const NFT_ADDRESS = BASE_NFT_ADDRESS; 
+export const MARKETPLACE_ADDRESS = BASE_MARKETPLACE_ADDRESS;
 
 // ✅ CHAIN IDs
-export const IMMUTABLE_CHAIN_ID = 13473;
-export const PLATFORM_WALLET_ADDRESS = "0x11Dd223303346021d21a72818c3188187eA07FD3";
+export const BASE_CHAIN_ID = 84532; // Base Sepolia
+export const PLATFORM_WALLET_ADDRESS = "0x7e9677AD1D837DD31b094c0B4484bB189b2739F5";
 
 // ---------------- NFT ABI ----------------
 export const NFT_ABI = [

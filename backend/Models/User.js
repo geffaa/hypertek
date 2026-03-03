@@ -69,6 +69,17 @@ const UserSchema = new mongoose.Schema(
       lowercase: true,
     },
 
+    // ✅ Built-in Wallet Fields for Email/Social Users
+    WalletAddress: {
+      type: String,
+      sparse: true,
+      lowercase: true,
+    },
+
+    EncryptedPrivateKey: {
+      type: String,
+    },
+
     Avatar: {
       type: String,
       default: "",

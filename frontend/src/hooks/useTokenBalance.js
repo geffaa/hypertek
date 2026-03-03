@@ -1,83 +1,39 @@
 import { useState, useEffect, useCallback } from 'react';
-// Wagmi hook removed because only Immutable is targeted.
 import { ethers } from 'ethers';
-import { passportInstance } from '../utils/immutablePassport';
-import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI } from '../Web3/Config';
-
-// Helper to get provider based on connection type
-// const getProvider = async (walletType) => { ... } // Removed unused helper causing v5 confusion
-
+import { useAccount } from 'wagmi';
+import { useEmailWallet } from './useEmailWallet';
+import { ERC20_ABI } from '../Web3/Config';
 
 export function useTokenBalance(tokenAddress) {
-    // Only target Immutable
-    
-    // We will maintain local state for balance
     const [balance, setBalance] = useState('0');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Determines active wallet info
-    // In a real app, this might come from a unified "useWallet" hook
-    const [activeWallet, setActiveWallet] = useState({ type: null, address: null });
-
-    useEffect(() => {
-        const checkConnection = async () => {
-            // Check Immutable
-            try {
-                 const user = await passportInstance.getUserInfo();
-                 if(user){
-                    try {
-                        const provider = await passportInstance.connectEvm();
-                        const accounts = await provider.request({ method: 'eth_requestAccounts' });
-                        if(accounts[0]){
-                            setActiveWallet({ type: 'immutable', address: accounts[0] });
-                        }
-                    } catch (innerErr) {
-                         console.warn("Immutable EVM connection failed (likely not logged in to EVM or network issue):", innerErr);
-                    }
-                 }
-            } catch (e) {
-                // Not connected to immutable
-                console.log("Not connected to Immutable in hook");
-            }
-        };
-        checkConnection();
-    }, []);
-
+    const { emailWalletAddress } = useEmailWallet();
+    const { address: wagmiAddress } = useAccount();
+    const activeAddress = wagmiAddress || emailWalletAddress;
 
     const fetchBalance = useCallback(async () => {
-        if (!activeWallet.address) return;
+        if (!activeAddress) {
+            setBalance('0');
+            return;
+        }
         setLoading(true);
         try {
             let bal;
-            let provider;
+            // Best-effort provider: window.ethereum or public RPC
+            const provider = window.ethereum ? new ethers.BrowserProvider(window.ethereum) : new ethers.JsonRpcProvider('https://sepolia.base.org');
             
-            // Determine Provider (Ethers v6)
-            if (activeWallet.type === 'immutable') {
-                const p = await passportInstance.connectEvm();
-                provider = new ethers.BrowserProvider(p);
-            }
+            console.log(`[useTokenBalance] Address: ${activeAddress}, Token: ${tokenAddress}`);
 
-            if(!provider) throw new Error("No provider found");
-            
-            console.log(`[useTokenBalance] Wallet: ${activeWallet.type}, Address: ${activeWallet.address}, Token: ${tokenAddress}`);
-
-            // Fetch Token Balance (ERC20)
             if (tokenAddress && tokenAddress !== "0x0000000000000000000000000000000000000000") {
-                try {
-                    const contract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
-                    const rawBal = await contract.balanceOf(activeWallet.address);
-                    const decimals = await contract.decimals();
-                    bal = ethers.formatUnits(rawBal, decimals);
-                } catch (contractErr) {
-                    console.error("[useTokenBalance] Contract Call Failed:", contractErr);
-                    // If contract call fails (e.g. wrong network), fallback to 0 but keep error for debugging if needed
-                    throw contractErr; 
-                }
+                const contract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
+                const rawBal = await contract.balanceOf(activeAddress);
+                const decimals = await contract.decimals();
+                bal = ethers.formatUnits(rawBal, decimals);
             } else {
                 console.warn("[useTokenBalance] No valid token address or using native ETH");
-                // Fetch Native Balance (ETH) if no specific token or fallback
-                const rawBal = await provider.getBalance(activeWallet.address);
+                const rawBal = await provider.getBalance(activeAddress);
                 bal = ethers.formatEther(rawBal);
             }
 
@@ -90,15 +46,13 @@ export function useTokenBalance(tokenAddress) {
         } finally {
             setLoading(false);
         }
-    }, [activeWallet, tokenAddress]);
+    }, [activeAddress, tokenAddress]);
 
-    // Poll balance every 15 seconds
     useEffect(() => {
         fetchBalance();
         const interval = setInterval(fetchBalance, 15000);
         return () => clearInterval(interval);
     }, [fetchBalance]);
 
-
-    return { balance, loading, error, refresh: fetchBalance, activeWallet };
+    return { balance, loading, error, refresh: fetchBalance, activeWallet: { address: activeAddress } };
 }

@@ -6,6 +6,7 @@ import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
 import { ethers } from "ethers";
 import axios from "axios";
+import { generateWallet, decryptPrivateKey } from "../utils/walletUtils.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
@@ -45,10 +46,14 @@ const SignupUser = async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
+    const { address, encryptedPrivateKey } = generateWallet();
+
     const newUser = new UserModel({
       Email,
       Password,
       isActive: true, // ✅ New users are active by default
+      WalletAddress: address,
+      EncryptedPrivateKey: encryptedPrivateKey,
     });
     await newUser.save();
 
@@ -70,6 +75,7 @@ const SignupUser = async (req, res) => {
         Email: newUser.Email,
         Role: newUser.Role,
         isActive: newUser.isActive,
+        WalletAddress: newUser.WalletAddress
       },
     });
   } catch (error) {
@@ -129,6 +135,7 @@ const LoginUser = async (req, res) => {
         Email: user.Email,
         Role: user.Role,
         isActive: user.isActive,
+        WalletAddress: user.WalletAddress
       },
     });
   } catch (err) {
@@ -284,11 +291,15 @@ const GoogleAuth = async (req, res) => {
         await user.save();
       }
     } else {
+      const { address, encryptedPrivateKey } = generateWallet();
+
       user = new UserModel({
         Email: email,
         FullName: name || "",
         GoogleId: googleId,
         isActive: true, // ✅ New users active by default
+        WalletAddress: address,
+        EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
     }
@@ -313,6 +324,7 @@ const GoogleAuth = async (req, res) => {
         picture,
         Role: user.Role, // ✅ ADD THIS
         isActive: user.isActive,
+        WalletAddress: user.WalletAddress
       },
     });
   } catch (err) {
@@ -406,12 +418,16 @@ const DiscordAuth = async (req, res) => {
           discriminator && discriminator !== "0" ? `#${discriminator}` : ""
         }`;
 
+      const { address, encryptedPrivateKey } = generateWallet();
+      
       user = new UserModel({
         DiscordId: discordId,
         Email: email ? email.toLowerCase() : `${username}@discord.user`,
         FullName: fullName,
         Password: null,
         isActive: true, // ✅ New users active by default
+        WalletAddress: address,
+        EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
     } else {
@@ -447,6 +463,7 @@ const DiscordAuth = async (req, res) => {
         DiscordId: user.DiscordId,
         Role: user.Role, // ✅ MUST
         isActive: user.isActive,
+        WalletAddress: user.WalletAddress
       },
     });
   } catch (err) {
@@ -1002,7 +1019,36 @@ const DeleteUser = async (req, res) => {
   }
 };
 
-// ------------------ GET ADMIN BY ID ------------------
+// ------------------ EXPORT WALLET ------------------
+export const ExportWallet = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.EncryptedPrivateKey) {
+      return res.status(400).json({ message: "No auto-generated wallet found for this user." });
+    }
+
+    // Decrypt the private key
+    // We import decryptPrivateKey from walletUtils.js at the top of the file
+    const privateKey = decryptPrivateKey(user.EncryptedPrivateKey);
+
+    res.status(200).json({
+      success: true,
+      WalletAddress: user.WalletAddress,
+      PrivateKey: privateKey,
+    });
+
+  } catch (err) {
+    console.error("ExportWallet error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
 // ------------------ GET ADMIN BY ADMIN ID ------------------
 const GetAdminByAdminId = async (req, res) => {
   try {

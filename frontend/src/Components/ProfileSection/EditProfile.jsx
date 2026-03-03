@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import FullScreenLoader from "../Common/Spinner";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function EditProfile() {
   const location = useLocation();
@@ -32,6 +33,10 @@ function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+
+  const [privateKey, setPrivateKey] = useState("");
+  const [exportingKey, setExportingKey] = useState(false);
+  const [showPrivateKey, setShowPrivateKey] = useState(false);
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
@@ -200,6 +205,81 @@ function EditProfile() {
                 placeholder={userData?.Email || "Email"}
                 className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white opacity-60 cursor-not-allowed transition-all duration-200"
               />
+            </div>
+
+            {/* Wallet Export (Only for Auto-Generated Wallets) */}
+            <div className="w-full max-w-md mt-4">
+              <label
+                className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-4"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Export Wallet Key
+              </label>
+
+              <div className="bg-[#1C1C1E] border border-white/10 rounded-xl p-4">
+                <p className="text-sm text-gray-400 mb-4">
+                  If you created your account via Email or Social Login, a secure Base network wallet was generated for you. You can export the private key to import it into MetaMask or another external wallet.
+                </p>
+
+                {!privateKey ? (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setExportingKey(true);
+                      try {
+                        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/user/export-wallet`, {
+                          headers: { Authorization: `Bearer ${token}` }
+                        });
+                        setPrivateKey(res.data.PrivateKey);
+                        toast.success("Wallet key exported securely.");
+                      } catch (err) {
+                        toast.error(err.response?.data?.message || "Failed to export wallet key.");
+                      } finally {
+                        setExportingKey(false);
+                      }
+                    }}
+                    disabled={exportingKey}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex justify-center items-center"
+                  >
+                    {exportingKey ? "Exporting..." : "Reveal Private Key"}
+                  </button>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="relative">
+                      <input
+                        type={showPrivateKey ? "text" : "password"}
+                        value={privateKey}
+                        readOnly
+                        className="w-full bg-transparent border border-white/20 rounded-lg px-3 py-2 text-sm text-white pr-20 font-mono"
+                      />
+                      <div className="absolute right-2 top-2 flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setShowPrivateKey(!showPrivateKey)}
+                          className="text-gray-400 hover:text-white"
+                          title="Toggle visibility"
+                        >
+                          {showPrivateKey ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(privateKey);
+                            toast.success("Private key copied to clipboard!");
+                          }}
+                          className="text-gray-400 hover:text-white"
+                          title="Copy to clipboard"
+                        >
+                          <FiCopy size={16} />
+                        </button>
+                      </div>
+                    </div>
+                    <p className="text-xs text-red-400 bg-red-400/10 border border-red-400/20 p-2 rounded">
+                      ⚠️ Never share this key with anyone. Anyone with this key controls your assets.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Bio */}

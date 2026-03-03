@@ -37,12 +37,12 @@ const MarketplaceAbi = loadABI("Marketplace.json");
 
 // ---------- NETWORK CONFIGURATION ----------
 const NETWORKS = {
-  13473: {
-    name: "Immutable zkEVM Testnet",
-    rpc: process.env.IMMUTABLE_RPC_URL,
-    privateKey: process.env.IMMUTABLE_PRIVATE_KEY || process.env.PRIVATE_KEY,
-    nftAddress: process.env.IMMUTABLE_NFT_ADDRESS || process.env.MYNFT_ADDRESS,
-    marketAddress: process.env.IMMUTABLE_MARKETPLACE_ADDRESS || process.env.MARKETPLACE_ADDRESS,
+  84532: {
+    name: "Base Sepolia Testnet",
+    rpc: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
+    privateKey: process.env.PRIVATE_KEY,
+    nftAddress: process.env.MYNFT_ADDRESS,
+    marketAddress: process.env.MARKETPLACE_ADDRESS,
   },
 };
 
@@ -50,8 +50,8 @@ const NETWORKS = {
 const instances = {};
 
 function getBlockchain(chainId) {
-  // Default to Immutable if not specified or unknown
-  const id = chainId || 13473; 
+  // Default to Base Sepolia if not specified or unknown
+  const id = chainId || 84532; 
   const config = NETWORKS[id];
 
   if (!config) {
@@ -86,9 +86,9 @@ function getBlockchain(chainId) {
   return instances[id];
 }
 
-// Initialize default (Immutable) on startup to catch errors early
+// Initialize default (Base) on startup to catch errors early
 try {
-  getBlockchain(13473);
+  getBlockchain(84532);
 } catch (e) {
   console.error("⚠️ Failed to initialize default network:", e.message);
 }

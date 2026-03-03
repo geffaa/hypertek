@@ -11,18 +11,15 @@ import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton4 from "../Buttons/Button4";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet";
-import { useAccount, useWalletClient, usePublicClient, useSwitchChain, useReadContract } from "wagmi";
-import { createWalletClient, custom } from 'viem';
-import { immutableZkEvmTestnet } from 'viem/chains';
+import { useAccount, useWalletClient, usePublicClient, useSwitchChain, useReadContract, useWriteContract } from "wagmi";
 
 import {
   MARKETPLACE_ADDRESS,
   NFT_ADDRESS,
   MARKETPLACE_ABI,
-  IMMUTABLE_MARKETPLACE_ADDRESS,
-  IMMUTABLE_NFT_ADDRESS,
-  IMMUTABLE_CHAIN_ID,
+  BASE_MARKETPLACE_ADDRESS,
+  BASE_NFT_ADDRESS,
+  BASE_CHAIN_ID,
 } from "../../Web3/Config";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -34,29 +31,22 @@ function UserListings() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   /* ================= HOOKS ================= */
-  const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-    provider: immutableProvider,
-  } = useImmutableWallet();
-
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
-  const { switchChain } = useSwitchChain();
+  const { writeContractAsync } = useWriteContract();
 
-  // Combine wallet state
-  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
-  const isConnected = immutableIsConnected || isWagmiConnected;
+  // Combine wallet state (Only Wagmi now)
+  const connectedWallet = wagmiAddress?.toLowerCase() || null;
+  const isConnected = isWagmiConnected;
 
-  const [connectedWallet, setConnectedWallet] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [cancelling, setCancelling] = useState(false);
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
-    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    address: BASE_MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'sellerBalance',
     args: connectedWallet ? [connectedWallet] : undefined,
@@ -64,14 +54,7 @@ function UserListings() {
   });
   const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
 
-  // Sync state
-  useEffect(() => {
-    if (activeAddress) {
-      setConnectedWallet(activeAddress.toLowerCase());
-    } else {
-      setConnectedWallet(null);
-    }
-  }, [activeAddress]);
+
 
   // Fetch listings when wallet is connected
   useEffect(() => {
@@ -154,19 +137,7 @@ function UserListings() {
     setShowModal(true);
   };
 
-  const switchToImmutable = async () => {
-    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1";
-    try {
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
-      });
-      return true;
-    } catch (err) {
-      toast.error("Please switch to Immutable zkEVM Testnet");
-      return false;
-    }
-  };
+
 
   const handleConfirmCancel = async () => {
     if (!connectedWallet) {
@@ -180,49 +151,9 @@ function UserListings() {
     try {
       let provider, signer, chainId;
 
-      // 1. Determine Provider/Signer based on connection type
-      if (immutableIsConnected && immutableProvider) {
-        // Immutable zkEVM
-        provider = new ethers.BrowserProvider(immutableProvider);
-        signer = await provider.getSigner();
-        chainId = IMMUTABLE_CHAIN_ID;
-        console.log("✅ Using Immutable Provider");
-      } else if (window.ethereum) {
-        // Standard Wallet (Immutable)
-        provider = new ethers.BrowserProvider(window.ethereum);
-        signer = await provider.getSigner();
-        const network = await provider.getNetwork();
-        chainId = Number(network.chainId);
-        console.log("✅ Using Standard Provider (MetaMask setc)");
-      }
-
-      if (!signer) {
-        toast.error("Wallet provider not found", { id: toastId });
-        setCancelling(false);
-        return;
-      }
-
-      console.log("🔥 Current Chain ID:", chainId);
-
-      // 2. Select Addresses based on Chain
-      let targetMarketplaceAddress;
-      let targetNftAddress;
-
-      if (chainId === IMMUTABLE_CHAIN_ID) {
-        targetMarketplaceAddress = IMMUTABLE_MARKETPLACE_ADDRESS;
-        targetNftAddress = IMMUTABLE_NFT_ADDRESS;
-        console.log("✅ Detected Immutable zkEVM Constants");
-      } else {
-        toast.error(`❌ Wrong Network. Connected to ${chainId}`, { id: toastId });
-        setCancelling(false);
-        return;
-      }
-
-      const marketplace = new ethers.Contract(
-        targetMarketplaceAddress,
-        MARKETPLACE_ABI,
-        signer,
-      );
+      // Proceed solely with Wagmi writeContract logic
+      const targetMarketplaceAddress = BASE_MARKETPLACE_ADDRESS;
+      const targetNftAddress = BASE_NFT_ADDRESS;
 
       const selectedListings = listings.filter((item) =>
         selectedItems.includes(item._id),
@@ -244,14 +175,15 @@ function UserListings() {
             id: toastId,
           });
 
-          // Cancel on blockchain
-          const tx = await marketplace.cancelListing(
-            targetNftAddress,
-            listing.tokenId,
-            { gasLimit: 200000 },
-          );
+          // Cancel on blockchain via viem/wagmi
+          const txHash = await writeContractAsync({
+            address: targetMarketplaceAddress,
+            abi: MARKETPLACE_ABI,
+            functionName: "cancelListing",
+            args: [targetNftAddress, listing.tokenId],
+          });
 
-          await tx.wait(); // Wait for confirmation
+          await publicClient.waitForTransactionReceipt({ hash: txHash });
 
           console.log("✅ Blockchain cancel confirmed");
 
@@ -603,7 +535,7 @@ function UserListings() {
           </div>
         )
       }
-    </div >
+    </div>
   );
 }
 

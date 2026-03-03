@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { useAccount, useReadContract, useWriteContract, usePublicClient, useBalance, useSendTransaction } from 'wagmi';
-import { IMMUTABLE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet";
+import { BASE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
@@ -35,19 +35,19 @@ function ProfileCategory() {
   const navigate = useNavigate();
 
   const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-  } = useImmutableWallet();
+    emailWalletAddress,
+    isEmailWalletConnected,
+  } = useEmailWallet();
 
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
 
   // Combine wallet state
-  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
-  const isConnected = immutableIsConnected || isWagmiConnected;
+  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
+  const isConnected = isEmailWalletConnected || isWagmiConnected;
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
-    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    address: BASE_MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'sellerBalance',
     args: activeAddress ? [activeAddress] : undefined,

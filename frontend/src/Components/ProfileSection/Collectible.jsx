@@ -19,14 +19,14 @@ import {
   NFT_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
-  IMMUTABLE_MARKETPLACE_ADDRESS,
+  BASE_MARKETPLACE_ADDRESS,
 } from "../../Web3/Config";
 import CustomButton4 from "../Buttons/Button4";
 
 // RainbowKit imports
 import { useAccount, useReadContract } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 function MarketPlace() {
   const { token } = useSelector((state) => state.auth);
@@ -34,16 +34,16 @@ function MarketPlace() {
 
   // RainbowKit hooks
   const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-  } = useImmutableWallet();
+    emailWalletAddress,
+    isEmailWalletConnected,
+  } = useEmailWallet();
 
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
   // Combine wallet state
-  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
-  const isConnected = immutableIsConnected || isWagmiConnected;
+  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
+  const isConnected = isEmailWalletConnected || isWagmiConnected;
 
   const [connectedWallet, setConnectedWallet] = useState(null);
 
@@ -58,7 +58,7 @@ function MarketPlace() {
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
-    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    address: BASE_MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'sellerBalance',
     args: connectedWallet ? [connectedWallet] : undefined,

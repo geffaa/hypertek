@@ -13,10 +13,10 @@ import { BACKEND_BASE_URL } from "../../Config";
 import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner"
 import { useAccount, useReadContract } from 'wagmi';
-import { IMMUTABLE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../../Web3/Config";
+import { BASE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from "../../Web3/Config";
 import TVector from "../../assets/images/popular/vector.png";
 import { ethers } from "ethers";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 
 function PersonalActivity() {
@@ -28,15 +28,15 @@ function PersonalActivity() {
   const [loading, setLoading] = useState(true); // ✅ loader state
 
   const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-  } = useImmutableWallet();
+    emailWalletAddress,
+    isEmailWalletConnected,
+  } = useEmailWallet();
 
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
 
   // Combine wallet state
-  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
-  const isConnected = immutableIsConnected || isWagmiConnected;
+  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
+  const isConnected = isEmailWalletConnected || isWagmiConnected;
 
   const [connectedWallet, setConnectedWallet] = useState(null);
 
@@ -51,7 +51,7 @@ function PersonalActivity() {
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
-    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    address: BASE_MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'sellerBalance',
     args: connectedWallet ? [connectedWallet] : undefined,

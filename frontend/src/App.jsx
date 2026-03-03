@@ -69,8 +69,6 @@ import AddCollection from "./pages/DashboardPages/AddCollection";
 import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
 import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
-import LoginCallback from "./pages/LoginCallback";
-import DebugImmutable from "./pages/DebugImmutable";
 import Withdraw from "./pages/DashboardPages/Withdraw";
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
@@ -144,9 +142,6 @@ function AppWrapper() {
             <Route path="/news" element={<NewsAll />} />
 
 
-            {/* Auth Callbacks */}
-            <Route path="/login/callback" element={<LoginCallback />} />
-
             {/* NFA Pages */}
             <Route path="/buy-nfa" element={<BuyNfa />} />
             <Route path="/buy-land" element={<NfaLand />} />
@@ -184,7 +179,6 @@ function AppWrapper() {
 
             {/* Testing Routes  */}
             <Route path="/testing" element={<Testing />} />
-            <Route path="/debug-immutable" element={<DebugImmutable />} />
 
             {/* for payment options  */}
 
