@@ -13,7 +13,7 @@ import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import CustomButton from "../Components/Buttons/Button1";
 import { useAccount } from "wagmi";
-import { useImmutableWallet } from "../hooks/useImmutableWallet";
+import { useEmailWallet } from "../hooks/useEmailWallet";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 function CategoryMarketplace() {
@@ -22,8 +22,8 @@ function CategoryMarketplace() {
   const { token } = useSelector((state) => state.auth);
 
   const { address: wagmiAddress } = useAccount();
-  const { address: immutableAddress, connect: connectImmutable } = useImmutableWallet();
-  const activeAddress = wagmiAddress || immutableAddress;
+  const { emailWalletAddress } = useEmailWallet();
+  const activeAddress = wagmiAddress || emailWalletAddress;
   const { openConnectModal } = useConnectModal();
 
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -498,27 +498,6 @@ function CategoryMarketplace() {
                   </div>
                 </div>
                 <div className="text-gray-500 group-hover:text-blue-400">→</div>
-              </button>
-
-              <button
-                onClick={() => {
-                  connectImmutable();
-                  setShowWalletModal(false);
-                }}
-                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-[#0D0D14] border-l-4 border-l-[#0D0D14]"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#0D0D14] flex items-center justify-center text-xl border border-white/10">
-                    I
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-white">Immutable Passport</div>
-                    <div className="text-xs text-gray-400">
-                      Email login & gas-free
-                    </div>
-                  </div>
-                </div>
-                <div className="text-gray-500 group-hover:text-white">→</div>
               </button>
             </div>
           </div>

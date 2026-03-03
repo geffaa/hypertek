@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useTokenBalance } from '../../hooks/useTokenBalance';
-import { IMMUTABLE_USDC_ADDRESS, ERC20_ABI, IMMUTABLE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from '../../Web3/Config';
+import { BASE_USDC_ADDRESS, ERC20_ABI, BASE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from '../../Web3/Config';
 import toast from 'react-hot-toast';
 import { ethers } from 'ethers';
-import { passportInstance } from '../../utils/immutablePassport';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useEmailWallet } from '../../hooks/useEmailWallet';
 import { BACKEND_BASE_URL } from '../../Config';
 
 // Simple Icons
@@ -13,10 +13,10 @@ import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
 
 
 const Withdraw = () => {
-    // Only target Immutable zkEVM Testnet
-    const tokenAddress = IMMUTABLE_USDC_ADDRESS;
+    // Only target Base Testnet
+    const tokenAddress = BASE_USDC_ADDRESS;
 
-    const { balance: usdcBalance, loading: usdcLoading, refresh: refreshUsdc, activeWallet } = useTokenBalance(tokenAddress);
+    const { balance: usdcBalance, loading: usdcLoading, refresh: refreshUsdc } = useTokenBalance(tokenAddress);
     const { balance: ethBalance, loading: ethLoading } = useTokenBalance(null); // Fetch Native ETH
 
     const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto', 'bank', or 'add'
@@ -33,13 +33,23 @@ const Withdraw = () => {
     const [addAmount, setAddAmount] = useState('');
     const [selectedAddToken, setSelectedAddToken] = useState('USDC'); // 'USDC' or 'ETH'
     const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+
+    const {
+        emailWalletAddress,
+        emailWalletClient,
+        isEmailWalletConnected
+    } = useEmailWallet();
+
+    const activeAddress = wagmiAddress || emailWalletAddress;
+    const isAnyConnected = isWagmiConnected || isEmailWalletConnected;
+
     const { writeContractAsync: writeWagmiContract } = useWriteContract();
     const { sendTransactionAsync } = useSendTransaction();
     const publicClient = usePublicClient();
 
-    // Fetch Immutable USDC balance from MetaMask (on Immutable zkEVM)
+    // Fetch Base USDC balance from MetaMask (on Base Sepolia)
     const { data: mmUsdcBalanceData } = useReadContract({
-        address: IMMUTABLE_USDC_ADDRESS,
+        address: BASE_USDC_ADDRESS,
         abi: ERC20_ABI,
         functionName: 'balanceOf',
         args: wagmiAddress ? [wagmiAddress] : undefined,
@@ -47,7 +57,7 @@ const Withdraw = () => {
     });
     const mmUsdcBalance = mmUsdcBalanceData ? ethers.formatUnits(mmUsdcBalanceData, 6) : '0';
 
-    // Fetch Immutable Native ETH balance from MetaMask
+    // Fetch Base Native ETH balance from MetaMask
     const { data: mmEthBalanceData } = useBalance({
         address: wagmiAddress,
         query: { enabled: !!wagmiAddress }
@@ -62,7 +72,7 @@ const Withdraw = () => {
 
     // Read internal balances from Marketplace Contract
     const { data: rawSellerBalance, refetch: refetchSeller } = useReadContract({
-        address: IMMUTABLE_MARKETPLACE_ADDRESS,
+        address: BASE_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
         functionName: 'sellerBalance',
         args: wagmiAddress ? [wagmiAddress] : undefined,
@@ -70,7 +80,7 @@ const Withdraw = () => {
     });
 
     const { data: rawCreatorBalance, refetch: refetchCreator } = useReadContract({
-        address: IMMUTABLE_MARKETPLACE_ADDRESS,
+        address: BASE_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
         functionName: 'creatorBalance',
         args: wagmiAddress ? [wagmiAddress] : undefined,
@@ -90,7 +100,7 @@ const Withdraw = () => {
         try {
             const functionName = type === 'seller' ? 'withdrawSeller' : 'withdrawCreator';
             const txHash = await writeWagmiContract({
-                address: IMMUTABLE_MARKETPLACE_ADDRESS,
+                address: BASE_MARKETPLACE_ADDRESS,
                 abi: MARKETPLACE_ABI,
                 functionName: functionName,
             });
@@ -132,7 +142,6 @@ const Withdraw = () => {
         return () => clearInterval(interval);
     }, []);
 
-    // Fetch Withdrawal History
     const fetchHistory = async () => {
         try {
             let user = JSON.parse(localStorage.getItem('user'));
@@ -141,14 +150,21 @@ const Withdraw = () => {
                 user = authData?.user;
             }
             const userId = user?.id || user?._id;
+            const authToken = user?.token || localStorage.getItem('token');
 
             if (!userId) return;
 
             setHistoryLoading(true);
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4700'}/api/v1/withdraw/history/${userId}`);
+            const response = await fetch(`${BACKEND_BASE_URL}/api/v1/withdraw/history/${userId}`, {
+                headers: {
+                    ...(authToken ? { 'Authorization': `Bearer ${authToken}` } : {}),
+                }
+            });
             if (response.ok) {
                 const data = await response.json();
                 setWithdrawals(data);
+            } else {
+                console.error("Failed to fetch history:", await response.text());
             }
         } catch (error) {
             console.error("Failed to fetch history", error);
@@ -187,7 +203,7 @@ const Withdraw = () => {
                 if (selectedToken === 'USDC') {
                     const amountWei = ethers.parseUnits(amount, 6);
                     txHash = await writeWagmiContract({
-                        address: IMMUTABLE_USDC_ADDRESS,
+                        address: BASE_USDC_ADDRESS,
                         abi: ERC20_ABI,
                         functionName: 'transfer',
                         args: [recipient, amountWei],
@@ -205,29 +221,6 @@ const Withdraw = () => {
                     toast.loading("Waiting for confirmation...", { id: toastId });
                     await publicClient.waitForTransactionReceipt({ hash: txHash });
                 }
-
-                // ── PATH 2: Immutable Passport ─────────────────────────────
-            } else if (activeWallet?.type === 'immutable') {
-                const p = await passportInstance.connectEvm();
-                const provider = new ethers.BrowserProvider(p);
-                const signer = await provider.getSigner();
-
-                if (selectedToken === 'USDC') {
-                    const abi = ["function transfer(address to, uint amount) returns (bool)"];
-                    const contract = new ethers.Contract(IMMUTABLE_USDC_ADDRESS, abi, signer);
-                    const amountWei = ethers.parseUnits(amount, 6);
-                    const tx = await contract.transfer(recipient, amountWei);
-                    toast.loading("Waiting for confirmation...", { id: toastId });
-                    await tx.wait();
-                    txHash = tx.hash;
-                } else {
-                    const amountWei = ethers.parseEther(amount);
-                    const tx = await signer.sendTransaction({ to: recipient, value: amountWei });
-                    toast.loading("Waiting for confirmation...", { id: toastId });
-                    await tx.wait();
-                    txHash = tx.hash;
-                }
-
             } else {
                 toast.error("Please connect your wallet first", { id: toastId });
                 setProcessing(false);
@@ -287,11 +280,6 @@ const Withdraw = () => {
             return;
         }
 
-        if (!activeWallet.address) {
-            toast.error("Immutable wallet address not found. Please relogin.");
-            return;
-        }
-
         setProcessing(true);
         const toastId = toast.loading("Initiating Add Funds...");
 
@@ -303,15 +291,15 @@ const Withdraw = () => {
             if (selectedAddToken === 'USDC') {
                 const amountWei = ethers.parseUnits(addAmount, 6);
                 transferTxHash = await writeWagmiContract({
-                    address: IMMUTABLE_USDC_ADDRESS,
+                    address: BASE_USDC_ADDRESS,
                     abi: ERC20_ABI,
                     functionName: 'transfer',
-                    args: [activeWallet.address, amountWei],
+                    args: [wagmiAddress, amountWei],
                 });
             } else {
                 const amountWei = ethers.parseEther(addAmount);
                 transferTxHash = await sendTransactionAsync({
-                    to: activeWallet.address,
+                    to: wagmiAddress,
                     value: amountWei,
                 });
             }
@@ -330,6 +318,35 @@ const Withdraw = () => {
             toast.success("Successfully added funds! Balance will update shortly.", { id: toastId });
             refreshUsdc();
             setAddAmount('');
+
+            // ── Log to Backend ─────────────────────────────────────────
+            let user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                const authData = JSON.parse(localStorage.getItem('authData'));
+                user = authData?.user;
+            }
+            const userId = user?.id || user?._id;
+            const authToken = user?.token || localStorage.getItem('token');
+
+            if (userId) {
+                fetch(`${BACKEND_BASE_URL}/api/v1/withdraw/request`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(authToken ? { 'Authorization': `Bearer ${authToken}` } : {}),
+                    },
+                    body: JSON.stringify({
+                        userId,
+                        amount: Number(addAmount),
+                        type: 'deposit', // Flag as deposit instead of crypto withdrawal
+                        token: selectedAddToken,
+                        recipientAddress: wagmiAddress,
+                        txHash: transferTxHash,
+                    }),
+                }).catch(e => console.error("Failed to log add funds", e));
+            }
+
+            fetchHistory();
             setProcessing(false);
 
         } catch (error) {
@@ -341,7 +358,7 @@ const Withdraw = () => {
 
     // ── Transak Bank Withdrawal (popup — works with VPN) ───────────
     const handleBankWithdraw = () => {
-        const walletAddress = activeWallet?.address || wagmiAddress;
+        const walletAddress = wagmiAddress;
         const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
 
         const params = new URLSearchParams({
@@ -371,7 +388,7 @@ const Withdraw = () => {
 
     // ── Transak On-Ramp (Buy crypto with fiat) ─────────────────────
     const handleTransakOnRamp = () => {
-        const walletAddress = activeWallet?.address || wagmiAddress;
+        const walletAddress = wagmiAddress;
         const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
 
         const params = new URLSearchParams({
@@ -401,11 +418,11 @@ const Withdraw = () => {
 
     // Derived State for Display
     // Unified Logic for ALL Wallets (MetaMask, Immutable, etc.)
-    // Card 1: Shows USD Value of Native Balance.
-    // Card 2: Shows Native Balance Amount.
+    const effectiveUsdcBalance = isWagmiConnected ? mmUsdcBalance : usdcBalance;
+    const effectiveEthBalance = isWagmiConnected ? mmEthBalance : ethBalance;
 
     const displayUsdcBalance = (Number(ethBalance) * (conversionRate || 0)).toString();
-    const displayNativeBalance = ethBalance;
+    const displayNativeBalance = effectiveEthBalance;
 
     return (
         <>
@@ -414,12 +431,12 @@ const Withdraw = () => {
                 <p className="text-white/60 text-sm md:text-base mb-8">Manage your earnings and withdraw to your preferred destination.</p>
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    {/* USDC/USD Balance Card */}
+                    {/* USDC Balance Card */}
                     <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
                         <p className="text-white/60 text-sm mb-1">USDC Balance</p>
                         <div className="flex items-end gap-2">
                             <h2 className="text-2xl md:text-3xl font-bold">
-                                {usdcLoading ? "..." : `$${Number(usdcBalance).toFixed(2)}`}
+                                {usdcLoading && !isWagmiConnected ? "..." : `${Number(effectiveUsdcBalance).toFixed(2)}`}
                             </h2>
                             <span className="text-blue-400 mb-1.5 font-medium">USDC</span>
                         </div>
@@ -427,11 +444,11 @@ const Withdraw = () => {
 
                     {/* ETH/Native Balance Card - Optional Display */}
                     <div className="bg-[#1C1C1E] p-6 rounded-xl border border-white/10 w-full sm:min-w-[240px] sm:w-auto">
-                        <p className="text-white/60 text-sm mb-1">Immutable Native Balance</p>
+                        <p className="text-white/60 text-sm mb-1">Base Native Balance</p>
                         <div className="flex flex-col">
                             <div className="flex items-end gap-2">
                                 <h2 className="text-2xl md:text-3xl font-bold">
-                                    {ethLoading ? "..." : `${Number(displayNativeBalance).toFixed(4)}`}
+                                    {ethLoading && !isWagmiConnected ? "..." : `${Number(effectiveEthBalance).toFixed(4)}`}
                                 </h2>
                                 <span className="text-purple-400 mb-1.5 font-medium">ETH</span>
                             </div>
@@ -477,8 +494,8 @@ const Withdraw = () => {
 
                 {/* Debug Info */}
                 <div className="mb-4 text-xs text-white/30 font-mono">
-                    Connected: {activeWallet.type ? `${activeWallet.type} (${activeWallet.address?.slice(0, 6)}...${activeWallet.address?.slice(-4)})` : "None"} <br />
-                    Chain: Immutable zkEVM | USDC Contract: {tokenAddress?.slice(0, 6)}...
+                    Connected: {wagmiAddress ? `Wallet (${wagmiAddress?.slice(0, 6)}...${wagmiAddress?.slice(-4)})` : "None"} <br />
+                    Chain: Base Sepolia Testnet | USDC Contract: {tokenAddress?.slice(0, 6)}...
                 </div>
 
 
@@ -551,8 +568,8 @@ const Withdraw = () => {
                                     />
                                     <div className="text-xs text-white/40 mt-1.5 text-right">
                                         Balance: {selectedToken === 'USDC'
-                                            ? `${Number(usdcBalance).toFixed(4)} USDC`
-                                            : `${Number(ethBalance).toFixed(4)} ETH`}
+                                            ? `${Number(effectiveUsdcBalance).toFixed(4)} USDC`
+                                            : `${Number(effectiveEthBalance).toFixed(4)} ETH`}
                                     </div>
                                 </div>
 
@@ -565,12 +582,12 @@ const Withdraw = () => {
                                         placeholder="0x..."
                                         className="w-full bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-blue-500 outline-none transition-colors font-mono text-sm"
                                     />
-                                    <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Immutable Testnet</p>
+                                    <p className="text-xs text-white/40 mt-1.5 ml-1">Double check network: Base Sepolia Testnet</p>
                                 </div>
 
                                 <button
                                     onClick={handleCryptoWithdraw}
-                                    disabled={processing || (selectedToken === 'USDC' ? usdcLoading : ethLoading)}
+                                    disabled={processing || (!isWagmiConnected && (selectedToken === 'USDC' ? usdcLoading : ethLoading))}
                                     className={`w-full py-4 rounded-lg font-bold text-base md:text-lg transition-all ${processing ? 'bg-blue-900 text-white/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20'
                                         }`}
                                 >
@@ -582,8 +599,8 @@ const Withdraw = () => {
 
                     {withdrawType === 'add' && (
                         <div className="bg-[#1C1C1E] p-8 rounded-xl border border-white/10">
-                            <h3 className="text-xl font-semibold mb-6">Add Funds to Immutable Wallet</h3>
-                            <p className="text-white/60 text-sm mb-6">Connect your external MetaMask wallet to transfer USDC into your primary Immutable account.</p>
+                            <h3 className="text-xl font-semibold mb-6">Add Funds to Base Wallet</h3>
+                            <p className="text-white/60 text-sm mb-6">Connect your external MetaMask wallet to transfer USDC into your primary Base account.</p>
 
                             <div className="space-y-6">
                                 <div>
@@ -620,13 +637,13 @@ const Withdraw = () => {
                                     />
                                     {isWagmiConnected && (
                                         <div className="text-xs text-white/40 mt-1.5 text-right font-mono">
-                                            MetaMask Balance: {selectedAddToken === 'USDC' ? `${Number(mmUsdcBalance).toFixed(4)} USDC` : `${mmEthBalance} IMX/ETH`}
+                                            MetaMask Balance: {selectedAddToken === 'USDC' ? `${Number(mmUsdcBalance).toFixed(4)} USDC` : `${mmEthBalance} ETH/ETH`}
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg text-sm text-blue-200">
-                                    <strong>Destination:</strong> Your Immutable Wallet ({activeWallet.address?.slice(0, 6)}...{activeWallet.address?.slice(-4)})
+                                    <strong>Destination:</strong> Your Base Wallet ({wagmiAddress?.slice(0, 6)}...{wagmiAddress?.slice(-4)})
                                 </div>
 
                                 <button
@@ -685,7 +702,6 @@ const Withdraw = () => {
                                     <tr>
                                         <th className="px-6 py-4">Type</th>
                                         <th className="px-6 py-4">Amount</th>
-                                        <th className="px-6 py-4">Status</th>
                                         <th className="px-6 py-4">Date</th>
                                         <th className="px-6 py-4">Details</th>
                                     </tr>
@@ -699,27 +715,19 @@ const Withdraw = () => {
                                         withdrawals.map((tx) => (
                                             <tr key={tx._id} className="hover:bg-white/5 transition-colors">
                                                 <td className="px-6 py-4">
-                                                    <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${tx.type === 'crypto' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
-                                                        {tx.type === 'crypto' ? 'Crypto' : 'Bank'}
+                                                    <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${tx.type === 'crypto' || tx.type === 'deposit' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                                                        {tx.type === 'crypto' ? 'Crypto' : tx.type === 'deposit' ? 'Deposit' : 'Bank'}
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 font-mono">
                                                     {tx.amount} {tx.token || 'USD'}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-semibold ${tx.status === 'completed' ? 'bg-green-500/15 text-green-400' :
-                                                        tx.status === 'rejected' ? 'bg-red-500/15 text-red-400' :
-                                                            'bg-yellow-500/15 text-yellow-400'
-                                                        }`}>
-                                                        {tx.status === 'completed' ? '✅ Completed' : tx.status === 'rejected' ? '❌ Rejected' : '⏳ Pending'}
-                                                    </span>
                                                 </td>
                                                 <td className="px-6 py-4 text-sm text-white/60">
                                                     {new Date(tx.createdAt).toLocaleDateString()}
                                                 </td>
                                                 <td className="px-6 py-4 text-xs font-mono text-white/40 max-w-[200px] truncate">
                                                     {tx.type === 'crypto' ? (
-                                                        <a href={`https://explorer.testnet.immutable.com/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
+                                                        <a href={`https://sepolia.basescan.org/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
                                                             {tx.txHash?.slice(0, 10)}...
                                                         </a>
                                                     ) : (

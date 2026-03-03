@@ -7,26 +7,24 @@ import toast from "react-hot-toast";
 import { ethers } from "ethers";
 import { useAccount, useWalletClient, usePublicClient, useSwitchChain } from "wagmi";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet"; // Import Immutable hook
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
-// 
 import {
-  IMMUTABLE_NFT_ADDRESS,
-  IMMUTABLE_MARKETPLACE_ADDRESS,
+  BASE_NFT_ADDRESS,
+  BASE_MARKETPLACE_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
   PLATFORM_WALLET_ADDRESS,
-  IMMUTABLE_CHAIN_ID,
-  IMMUTABLE_USDC_ADDRESS,
+  BASE_CHAIN_ID,
+  BASE_USDC_ADDRESS,
   ERC20_ABI,
 } from "../../Web3/Config";
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
-import { immutableZkEvmTestnet } from 'viem/chains';
 import { BACKEND_BASE_URL } from "../../Config";
 import CustomButton from "../Buttons/Button1";
-import { FiEye, FiEdit2 } from "react-icons/fi";
+import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 
 function Buy1() {
   const navigate = useNavigate();
@@ -59,55 +57,31 @@ function Buy1() {
   if (!collection) return null;
   const { token, user } = useSelector((state) => state.auth);
 
-  // Immutable Wallet Hook
-  const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-    provider: immutableProvider,
-    connect: connectImmutable,
-    isConnecting: isImmutableConnecting,
-    balance,
-    logout
-  } = useImmutableWallet();
-
   // RainbowKit hooks
   const { address: connectedWallet, isConnected, chain, connector } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { data: walletClient } = useWalletClient();
 
-  // Determine if using Immutable Passport
-  const isPassport = connector?.id === 'immutable' || connector?.name === 'Immutable Passport';
-
   // Dynamic Chain Configuration
-  const TARGET_CHAIN_ID = 13473; // Immutable zkEVM Testnet
+  const TARGET_CHAIN_ID = BASE_CHAIN_ID;
   const publicClient = usePublicClient({ chainId: TARGET_CHAIN_ID });
   const { switchChain } = useSwitchChain();
 
   // Primary Addresses
-  const CURRENT_NFT_ADDRESS = IMMUTABLE_NFT_ADDRESS;
-  const CURRENT_MARKETPLACE_ADDRESS = IMMUTABLE_MARKETPLACE_ADDRESS;
+  const CURRENT_NFT_ADDRESS = BASE_NFT_ADDRESS;
+  const CURRENT_MARKETPLACE_ADDRESS = BASE_MARKETPLACE_ADDRESS;
 
+  // Email Wallet Hook (Fallback for Email/Social Logins)
+  const {
+    emailWalletAddress,
+    emailWalletClient,
+    isEmailWalletConnected,
+  } = useEmailWallet();
 
-
-  const [immutableWalletClient, setImmutableWalletClient] = useState(null);
-
-  useEffect(() => {
-    if (immutableProvider && immutableProvider.request && immutableAddress) {
-      const client = createWalletClient({
-        chain: immutableZkEvmTestnet,
-        transport: custom(immutableProvider),
-        account: immutableAddress
-      });
-      setImmutableWalletClient(client);
-    } else {
-      setImmutableWalletClient(null);
-    }
-  }, [immutableProvider, immutableAddress]);
-
-  const activeAddress = connectedWallet || immutableAddress;
-  const isAnyConnected = isConnected || immutableIsConnected;
-  // Prioritize Immutable client if connected, otherwise Wagmi client
-  const activeWalletClient = immutableWalletClient || walletClient;
+  // Unified Address & Client Priority: standard Wagmi > local Email Wallet
+  const activeAddress = connectedWallet || emailWalletAddress;
+  const isAnyConnected = isConnected || isEmailWalletConnected;
+  const activeWalletClient = walletClient || emailWalletClient;
 
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
@@ -120,8 +94,6 @@ function Buy1() {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
   const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
-
-  const IMMUTABLE_CHAIN_ID = 13473; // Immutable zkEVM Testnet
 
   /* ================================ INIT ================================ */
   useEffect(() => {
@@ -284,21 +256,10 @@ function Buy1() {
 
   const ensureCorrectNetwork = async () => {
     const targetChainId = TARGET_CHAIN_ID;
-    const targetChainName = "Immutable zkEVM Testnet";
+    const targetChainName = "Base Sepolia Testnet";
 
     if (chain?.id === targetChainId) {
       return true;
-    }
-
-    // Special handling for Immutable Passport
-    if (isPassport && immutableProvider) {
-      try {
-        const chainIdHex = await immutableProvider.request({ method: 'eth_chainId' });
-        const currentChainId = parseInt(chainIdHex, 16);
-        if (currentChainId === 13473) return true;
-      } catch (e) {
-        console.log("Immutable provider check failed", e);
-      }
     }
 
     const toastId = toast.loading(`🔄 Switching to ${targetChainName}...`);
@@ -655,10 +616,10 @@ function Buy1() {
       if (balance === 0n) {
         toast.error(
           <div>
-            ❌ Your wallet has no IMX/ETH for gas fees.
+            ❌ Your wallet has no ETH for gas fees.
             <br />
             <button
-              onClick={() => window.open('https://hub.immutable.com/sandbox', '_blank')}
+              onClick={() => window.open('https://faucet.quicknode.com/base/sepolia', '_blank')}
               className="mt-2 bg-white text-black px-2 py-1 rounded text-xs font-bold"
             >
               💰 Add Funds (Faucet)
@@ -670,7 +631,7 @@ function Buy1() {
       }
 
       const usdcContractOptions = {
-        address: IMMUTABLE_USDC_ADDRESS,
+        address: BASE_USDC_ADDRESS,
         abi: ERC20_ABI,
       };
 
@@ -795,9 +756,9 @@ function Buy1() {
         setLoading(false);
 
         const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
-        
-          navigate("/Profile", { state: { category: targetCategory } });
-        
+
+        navigate("/Profile", { state: { category: targetCategory } });
+
 
         return; // Scenario 1 completed
       }
@@ -1080,54 +1041,7 @@ function Buy1() {
           </button>
         </div>
 
-        {/* OPENSEA STYLE WALLET WIDGET */}
-        {immutableIsConnected && (
-          <div className="absolute top-[95px] right-[134px] z-50">
-            <button
-              className="flex items-center gap-3 bg-[#1f2937]/90 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 hover:bg-[#2d3748] transition-all cursor-pointer group relative"
-            >
-              <div className="flex flex-col items-end leading-tight text-right">
-                <span className="font-bold text-sm text-white">
-                  {immutableProvider && balance ? Number(ethers.formatEther(balance)).toFixed(4) : "0.00"} IMX
-                </span>
-                <span className="text-[10px] text-gray-400 font-mono">
-                  {immutableAddress?.substring(0, 6)}...{immutableAddress?.substring(38)}
-                </span>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white/10">
-                IMX
-              </div>
 
-              {/* DROPDOWN MENU (Group Hover) */}
-              <div className="absolute top-full right-0 mt-2 w-72 bg-[#1f2937] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 transform origin-top-right overflow-hidden z-[60]">
-                <div className="p-5">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-gray-400 text-xs font-bold uppercase tracking-wider">My Wallet</h3>
-                    <span className="text-green-400 text-xs bg-green-400/10 px-2 py-0.5 rounded-full ring-1 ring-green-400/20">● Connected</span>
-                  </div>
-
-                  <div className="text-center mb-6 bg-white/5 p-4 rounded-lg">
-                    <div className="text-3xl font-bold text-white mb-1">
-                      {ethers.formatEther(balance || 0).substring(0, 6)}
-                      <span className="text-lg text-gray-500 ml-1">ETH</span>
-                    </div>
-                    <div className="text-xs text-gray-500 font-mono">Immutable zkEVM Testnet</div>
-                  </div>
-
-
-                  <div className="border-t border-white/10 pt-3 mt-2">
-                    <button
-                      onClick={(e) => { e.preventDefault(); logout(); toast.success("Logged out"); }}
-                      className="w-full text-left text-red-400 hover:text-red-300 hover:bg-red-900/10 rounded px-2 py-2 text-sm flex items-center gap-2 transition-colors"
-                    >
-                      <span className="text-lg">↪</span> Log Out
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </button>
-          </div>
-        )}
 
 
       </div>
@@ -1520,30 +1434,8 @@ function Buy1() {
                 <div className="text-gray-500 group-hover:text-blue-400">→</div>
               </button>
 
-              <button
-                onClick={() => {
-                  console.log("🖱️ Immutable button clicked in Modal");
-                  connectImmutable();
-                  setShowWalletModal(false);
-                }}
-                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-[#0D0D14] border-l-4 border-l-[#0D0D14]"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#0D0D14] flex items-center justify-center text-xl border border-white/10">
-                    I
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-white">Immutable Passport</div>
-                    <div className="text-xs text-gray-400">
-                      Email login & gas-free
-                    </div>
-                  </div>
-                </div>
-                <div className="text-gray-500 group-hover:text-white">→</div>
-              </button>
-
               <div className="text-center mt-2">
-                <a href="https://hub.immutable.com/sandbox" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
+                <a href="https://faucet.quicknode.com/base/sepolia" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
                   Need Testnet ETH? 💰 Get it here
                 </a>
               </div>

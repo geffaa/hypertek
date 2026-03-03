@@ -14,6 +14,7 @@ import {
   EditUser,
   DeleteUser,
   GetAdminByAdminId,
+  ExportWallet,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
@@ -42,6 +43,8 @@ Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
 Route.delete("/delete/:userId", DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
+// ✅ Export private key (protected route)
+Route.get("/user/export-wallet", auth, ExportWallet);
 // ✅ Get all users (admin only)
 Route.get("/users", GetAllUsers);
 // ✅ Toggle user active/inactive status (admin only)

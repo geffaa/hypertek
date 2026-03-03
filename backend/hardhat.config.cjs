@@ -12,9 +12,9 @@ module.exports = {
     },
   },
   networks: {
-    immutableZkevmTestnet: {
-      url: process.env.IMMUTABLE_RPC_URL || "https://rpc.testnet.immutable.com",
-      accounts: process.env.IMMUTABLE_PRIVATE_KEY ? [process.env.IMMUTABLE_PRIVATE_KEY] : [],
+    baseSepolia: {
+      url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
   },
 };

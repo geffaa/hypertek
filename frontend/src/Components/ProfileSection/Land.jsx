@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { useAccount, useReadContract } from 'wagmi';
-import { IMMUTABLE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
-import { useImmutableWallet } from "../../hooks/useImmutableWallet";
+import { BASE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
@@ -32,19 +32,19 @@ function Land() {
   const { token } = useSelector((state) => state.auth);
 
   const {
-    address: immutableAddress,
-    isConnected: immutableIsConnected,
-  } = useImmutableWallet();
+    emailWalletAddress,
+    isEmailWalletConnected,
+  } = useEmailWallet();
 
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
 
   // Combine wallet state
-  const activeAddress = immutableIsConnected ? immutableAddress : wagmiAddress;
-  const isConnected = immutableIsConnected || isWagmiConnected;
+  const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
+  const isConnected = isEmailWalletConnected || isWagmiConnected;
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
-    address: IMMUTABLE_MARKETPLACE_ADDRESS,
+    address: BASE_MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'sellerBalance',
     args: activeAddress ? [activeAddress] : undefined,
@@ -222,12 +222,12 @@ function Land() {
   };
 
   /* ================= SWITCH TO IMMUTABLE ================= */
-  const switchToImmutable = async () => {
-    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1";
+  const switchToBase = async () => {
+    const BASE_CHAIN_ID_HEX = "0x14a34";
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
+        params: [{ chainId: BASE_CHAIN_ID_HEX }],
       });
       return true;
     } catch (switchError) {
@@ -237,15 +237,15 @@ function Land() {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: IMMUTABLE_CHAIN_ID_HEX,
-                chainName: "Immutable zkEVM Testnet",
+                chainId: BASE_CHAIN_ID_HEX,
+                chainName: "Base Sepolia",
                 nativeCurrency: {
-                  name: "IMX",
-                  symbol: "IMX",
+                  name: "ETH",
+                  symbol: "ETH",
                   decimals: 18,
                 },
-                rpcUrls: ["https://rpc.testnet.immutable.com"],
-                blockExplorerUrls: ["https://explorer.testnet.immutable.com"],
+                rpcUrls: ["https://sepolia.base.org"],
+                blockExplorerUrls: ["https://sepolia.basescan.org"],
               },
             ],
           });
@@ -372,10 +372,10 @@ function Land() {
       }
 
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x34a1") {
-        const switched = await switchToImmutable();
+      if (chainId !== "0x14a34") {
+        const switched = await switchToBase();
         if (!switched) {
-          toast.error("Please switch to Immutable zkEVM Testnet", { id: toastId });
+          toast.error("Please switch to Base Sepolia", { id: toastId });
           setListingInProgress(false);
           return;
         }
@@ -520,7 +520,7 @@ function Land() {
       console.error("❌ Listing error:", err);
       let msg = "Listing failed";
       if (err.message?.includes("insufficient funds"))
-        msg = "⛽ Add Immutable IMX";
+        msg = "⛽ Add Immutable ETH";
       else if (err.message?.includes("user rejected"))
         msg = "Transaction rejected";
       toast.error(msg, { id: toastId });

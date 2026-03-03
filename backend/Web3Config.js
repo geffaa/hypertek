@@ -3,7 +3,7 @@
 
 export const NFT_ADDRESS = "0xC40f17FfF5591dbb12CD4279111C22bb33425244";
 export const MARKETPLACE_ADDRESS = "0x2E3Ae1bC661C170D009Cf3E9686dFFfF60AEDc0b";
-export const CHAIN_ID = 13473; // immutable
+export const CHAIN_ID = 84532; // Base Sepolia
 
 // NFT ABI (Essential functions only)
 export const NFT_ABI = [

@@ -13,12 +13,12 @@ import FaceTwo from "../assets/images/noActivity2.png";
 import BuyNfa2 from "../Components/BuyNfa/BuyNfa2";
 import { ethers } from "ethers";
 import {
-  IMMUTABLE_MARKETPLACE_ADDRESS,
-  IMMUTABLE_NFT_ADDRESS,
+  BASE_MARKETPLACE_ADDRESS,
+  BASE_NFT_ADDRESS,
   MARKETPLACE_ABI,
   NFT_ABI,
-  IMMUTABLE_CHAIN_ID,
-  IMMUTABLE_USDC_ADDRESS,
+  BASE_CHAIN_ID,
+  BASE_USDC_ADDRESS,
   ERC20_ABI,
 } from "../Web3/Config";
 
@@ -127,7 +127,7 @@ function NfaLand() {
           try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const nftContract = new ethers.Contract(
-              IMMUTABLE_NFT_ADDRESS,
+              BASE_NFT_ADDRESS,
               NFT_ABI,
               provider
             );
@@ -186,13 +186,13 @@ function NfaLand() {
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       const marketplace = new ethers.Contract(
-        IMMUTABLE_MARKETPLACE_ADDRESS,
+        BASE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         provider
       );
 
       const listing = await marketplace.getListing(
-        IMMUTABLE_NFT_ADDRESS,
+        BASE_NFT_ADDRESS,
         collection.tokenId
       );
 
@@ -212,14 +212,14 @@ function NfaLand() {
   };
 
   /* ======================== SWITCH IMMUTABLE ======================== */
-  const switchToImmutable = async () => {
-    const IMMUTABLE_CHAIN_ID_HEX = "0x34a1"; // 13473
+  const switchToBase = async () => {
+    const BASE_CHAIN_ID_HEX = "0x14a34"; // 13473
     const toastId = toast.loading("🔄 Switching to Immutable network...");
 
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: IMMUTABLE_CHAIN_ID_HEX }],
+        params: [{ chainId: BASE_CHAIN_ID_HEX }],
       });
       toast.success("✅ Switched to Immutable", { id: toastId });
       return true;
@@ -231,15 +231,15 @@ function NfaLand() {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: IMMUTABLE_CHAIN_ID_HEX,
-                chainName: "Immutable zkEVM Testnet",
+                chainId: BASE_CHAIN_ID_HEX,
+                chainName: "Base Sepolia",
                 nativeCurrency: {
-                  name: "IMX",
-                  symbol: "IMX",
+                  name: "ETH",
+                  symbol: "ETH",
                   decimals: 18,
                 },
-                rpcUrls: ["https://rpc.testnet.immutable.com"],
-                blockExplorerUrls: ["https://explorer.testnet.immutable.com"],
+                rpcUrls: ["https://sepolia.base.org"],
+                blockExplorerUrls: ["https://sepolia.basescan.org"],
               },
             ],
           });
@@ -271,7 +271,7 @@ function NfaLand() {
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
-        chainId: IMMUTABLE_CHAIN_ID,
+        chainId: BASE_CHAIN_ID,
       };
 
       console.log("🎨 Minting NFA with payload:", payload);
@@ -315,9 +315,9 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x34a1") {
+      if (chainId !== "0x14a34") {
         toast.dismiss(toastId);
-        const switched = await switchToImmutable();
+        const switched = await switchToBase();
         if (!switched) {
           setLoading(false);
           return;
@@ -332,9 +332,9 @@ function NfaLand() {
       const walletAddress = await signer.getAddress();
       console.log("👛 Wallet address:", walletAddress);
 
-      const nftContract = new ethers.Contract(IMMUTABLE_NFT_ADDRESS, NFT_ABI, signer);
+      const nftContract = new ethers.Contract(BASE_NFT_ADDRESS, NFT_ABI, signer);
       const marketplace = new ethers.Contract(
-        IMMUTABLE_MARKETPLACE_ADDRESS,
+        BASE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
@@ -410,10 +410,10 @@ function NfaLand() {
 
       // Check approval
       const approved = await nftContract.getApproved(tokenId);
-      if (approved.toLowerCase() !== IMMUTABLE_MARKETPLACE_ADDRESS.toLowerCase()) {
+      if (approved.toLowerCase() !== BASE_MARKETPLACE_ADDRESS.toLowerCase()) {
         toast.loading("✍️ Approving marketplace...", { id: toastId });
         const approveTx = await nftContract.approve(
-          IMMUTABLE_MARKETPLACE_ADDRESS,
+          BASE_MARKETPLACE_ADDRESS,
           tokenId
         );
         await approveTx.wait();
@@ -421,7 +421,7 @@ function NfaLand() {
       }
 
       // Check if already listed
-      const listing = await marketplace.getListing(IMMUTABLE_NFT_ADDRESS, tokenId);
+      const listing = await marketplace.getListing(BASE_NFT_ADDRESS, tokenId);
       if (listing[2]) {
         toast.success("✅ Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
@@ -433,7 +433,7 @@ function NfaLand() {
       toast.loading("📝 Creating marketplace listing...", { id: toastId });
       const priceWei = ethers.parseUnits(String(collection.priceETH || "0.01"), 6);
       const listTx = await marketplace.createListing(
-        IMMUTABLE_NFT_ADDRESS,
+        BASE_NFT_ADDRESS,
         tokenId,
         priceWei,
         { gasLimit: 300000 }
@@ -497,7 +497,7 @@ function NfaLand() {
       let msg = "❌ Listing failed";
       if (err.response?.data?.error) {
         msg = `❌ ${err.response.data.error}`;
-        msg = "⛽ Insufficient gas. Add Immutable IMX";
+        msg = "⛽ Insufficient gas. Add Immutable ETH";
       } else if (err.message?.includes("user rejected")) {
         msg = "❌ Transaction rejected by user";
       }
@@ -529,9 +529,9 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x34a1") {
+      if (chainId !== "0x14a34") {
         toast.dismiss(toastId);
-        const switched = await switchToImmutable();
+        const switched = await switchToBase();
         if (!switched) {
           setLoading(false);
           return;
@@ -556,16 +556,16 @@ function NfaLand() {
         return;
       }
 
-      const usdcContract = new ethers.Contract(IMMUTABLE_USDC_ADDRESS, ERC20_ABI, provider);
+      const usdcContract = new ethers.Contract(BASE_USDC_ADDRESS, ERC20_ABI, provider);
       const usdcBalance = await usdcContract.balanceOf(buyer);
       console.log("💰 USDC Balance:", ethers.formatUnits(usdcBalance, 6), "USDC");
 
       const marketplace = new ethers.Contract(
-        IMMUTABLE_MARKETPLACE_ADDRESS,
+        BASE_MARKETPLACE_ADDRESS,
         MARKETPLACE_ABI,
         signer
       );
-      const nftContract = new ethers.Contract(IMMUTABLE_NFT_ADDRESS, NFT_ABI, provider);
+      const nftContract = new ethers.Contract(BASE_NFT_ADDRESS, NFT_ABI, provider);
 
       /* ==================== SCENARIO 1: NOT MINTED ==================== */
       if (!collection.tokenId) {
@@ -630,7 +630,7 @@ function NfaLand() {
 
       // Check listing
       toast.loading("📋 Verifying listing...", { id: toastId });
-      const listing = await marketplace.getListing(IMMUTABLE_NFT_ADDRESS, collection.tokenId);
+      const listing = await marketplace.getListing(BASE_NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
         toast.error("❌ This NFA is not listed for sale", { id: toastId });
@@ -653,13 +653,13 @@ function NfaLand() {
 
       toast.loading("🔒 Checking USDC allowance...", { id: toastId });
 
-      const allowance = await usdcContract.allowance(buyer, IMMUTABLE_MARKETPLACE_ADDRESS);
+      const allowance = await usdcContract.allowance(buyer, BASE_MARKETPLACE_ADDRESS);
 
       if (allowance < price) {
         toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
         try {
           const usdcWithSigner = usdcContract.connect(signer);
-          const approveTx = await usdcWithSigner.approve(IMMUTABLE_MARKETPLACE_ADDRESS, price);
+          const approveTx = await usdcWithSigner.approve(BASE_MARKETPLACE_ADDRESS, price);
           await approveTx.wait();
           console.log("✅ USDC Approved!");
         } catch (approveErr) {
@@ -674,7 +674,7 @@ function NfaLand() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const buyTx = await marketplace.buyNFT(IMMUTABLE_NFT_ADDRESS, collection.tokenId, {
+      const buyTx = await marketplace.buyNFT(BASE_NFT_ADDRESS, collection.tokenId, {
         gasLimit: 400000, // value removed, using USDC now
       });
 

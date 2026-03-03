@@ -303,7 +303,7 @@ export async function mintSubCollection(req, res) {
     }
 
     // ✅ BlockChain Initialization
-    const chainId = req.body.chainId || 13473; // Default to Immutable if not provided
+    const chainId = req.body.chainId || 84532; // Default to Base Sepolia if not provided
     console.log(`🔗 Minting on Chain ID: ${chainId}`);
 
     const { nftContract, wallet: backendWalletObj, provider } = getBlockchain(chainId);
@@ -332,18 +332,22 @@ export async function mintSubCollection(req, res) {
     let tx, receipt, tokenId;
 
     try {
+      // ✅ Fetch the latest confirmed nonce to avoid NONCE_EXPIRED errors
+      let currentNonce = await provider.getTransactionCount(backendWallet, "latest");
+      console.log(`📡 Current Nonce: ${currentNonce}`);
+
       // ✅ Mint NFT on blockchain
       console.log("🎨 Minting NFT...");
       console.log("- TokenURI:", tokenURI);
       console.log("- RoyaltyBps:", royaltyBps || 500);
 
-      tx = await nftContract.mint(tokenURI, royaltyBps || 500);
-      console.log("📤 Transaction sent:", tx.hash);
+      tx = await nftContract.mint(tokenURI, royaltyBps || 500, { nonce: currentNonce });
+      console.log("📤 Mint Transaction sent:", tx.hash);
 
       receipt = await tx.wait();
       console.log("✅ Confirmed in block:", receipt.blockNumber);
+      currentNonce++; // Increment nonce for next tx
 
-      // ✅ Extract TokenId from events
       // ✅ Extract TokenId from events
       if (receipt.logs) {
         for (const log of receipt.logs) {
@@ -383,36 +387,41 @@ export async function mintSubCollection(req, res) {
         throw new Error("❌ Failed to retrieve Token ID from transaction receipt. Logs did not contain Transfer or Minted event.");
       }
 
-      // ✅ Verify and transfer ownership
-      const chainOwner = await nftContract.ownerOf(tokenId);
-      console.log("✅ Current on-chain owner:", chainOwner);
-
-      const expectedOwner = creatorWallet.toLowerCase();
-      const actualOwner = chainOwner.toLowerCase();
-      const backendLower = backendWallet.toLowerCase();
-
-      if (actualOwner !== expectedOwner) {
-        console.log("⚠️ Ownership mismatch - transferring...");
-
-        if (actualOwner === backendLower) {
-          const transferTx = await nftContract.transferFrom(
-            backendWallet,
-            creatorWallet,
-            tokenId,
-          );
-          await transferTx.wait();
-          console.log("✅ NFT transferred to:", creatorWallet);
-        } else {
-          throw new Error(
-            `Cannot transfer - owned by unexpected wallet: ${actualOwner}`,
-          );
+      // ✅ Transfer ownership (with L2 node indexing retry loop)
+      let owner;
+      let retries = 20;
+      while (retries > 0) {
+        try {
+          // If this succeeds, the node has indexed the token!
+          owner = await nftContract.ownerOf(tokenId);
+          if (owner) {
+             console.log(`✅ Node indexed Token #${tokenId}. Owner is ${owner}.`);
+             break;
+          }
+        } catch (err) {
+          console.log(`⏳ Node hasn't indexed Token #${tokenId} yet... (${retries - 1} left)`);
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          retries--;
         }
-      } else {
-        console.log("✅ NFT already owned by creator");
       }
 
+      if (retries === 0) {
+        throw new Error(`❌ Blockchain node failed to index NFT #${tokenId} after 60 seconds.`);
+      }
+
+      console.log(`⚠️ Transferring token ${tokenId} from backend to ${creatorWallet}...`);
+      const transferTx = await nftContract.transferFrom(
+        backendWallet,
+        creatorWallet,
+        tokenId,
+        { nonce: currentNonce }
+      );
+      await transferTx.wait();
+      console.log("✅ NFT transferred to:", creatorWallet);
+      currentNonce++;
+
       // ✅ Mark as sold so smart contract treats next sale as secondary
-      const markTx = await nftContract.markAsSold(tokenId);
+      const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce });
       await markTx.wait();
       console.log("✅ Marked as sold on contract (isFirstSale = false)");
     } catch (mintErr) {
@@ -1700,8 +1709,8 @@ export async function recordSubCollectionSale(req, res) {
 
     // Validate transaction on blockchain
     // Validate transaction on blockchain
-    // Default to Immutable zkEVM if no chainId provided
-    const chainId = req.body.chainId || 13473; 
+    // Default to Base Sepolia if no chainId provided
+    const chainId = req.body.chainId || 84532; 
     const { provider } = getBlockchain(chainId);
 
     if (provider) {
