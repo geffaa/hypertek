@@ -111,7 +111,7 @@ function UpdateNews() {
       <BgEffect2 Xaxis={400} Yaxis={650} />
       {/* Content */}
       <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-3">
+        <div className="flex gap-10 mt-6 mx-3">
           {/* left side preview / modal */}
           <div
             className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
@@ -227,7 +227,7 @@ function UpdateNews() {
 
             {/* input fields  */}
 
-            <div className="w-[451px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
+            <div className="w-[451px] h-[84px] flex flex-col gap-[14px] mt-4 mx-2">
               <label
                 htmlFor="name"
                 style={{
@@ -256,7 +256,7 @@ function UpdateNews() {
             {/* second  */}
 
             {/* Right side textarea */}
-            <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
+            <div className="w-[430px] mt-4 mx-2 flex flex-col gap-[14px]">
               <label
                 htmlFor="symbol"
                 style={{
@@ -280,7 +280,7 @@ function UpdateNews() {
                 className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
                 style={{
                   width: "451px",
-                  height: "245px",
+                  height: "180px",
                   padding: "13px 15px",
                   opacity: 1,
                 }}
@@ -292,7 +292,7 @@ function UpdateNews() {
 
         {/* last buttons div  */}
         <div
-          className="flex mt-16  justify-end mx-8 pt-16 pb-32 relative z-10"
+          className="flex mt-4 justify-end mx-8 pt-8 pb-4 relative z-10"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 400,
