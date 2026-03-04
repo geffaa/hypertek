@@ -35,6 +35,11 @@ function Buy1() {
     item,
     subCollection: passedSubCollection,
     parentId,
+    subCollectionId,
+    buyerWallet,
+    priceETH,
+    itemType,
+    tokenId
   } = location.state || {};
 
   // Determine which is parent and which is sub-collection
@@ -967,20 +972,42 @@ function Buy1() {
     const toastId = toast.loading("💳 Processing card payment...");
 
     try {
+      if (!isAnyConnected || !activeAddress) {
+        toast.error("❌ Please connect your wallet first to receive the NFT", { id: toastId });
+        setLoading(false);
+        return;
+      }
+
+      console.log("💳 Starting card purchase check for product:", productId);
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
-        userId: user.id,
+        userId: user.id || user._id,
         productId,
+        priceETH: collection.priceETH || 0.01, // Use collection's price as fallback
+        itemType: itemType || "nft",
+        tokenId: tokenId || collection.tokenId, // Use tokenId from state or collection
       });
 
       if (res.data?.exist === "no") {
         toast.success("✅ Payment initiated", { id: toastId });
-        navigate("/offer", { state: { item: collection } });
+        navigate("/offer", {
+          state: {
+            item: collection,
+            parentId: parentCollection?._id || parentId || item?.parentId || collection.parentId,
+            subCollectionId: collection._id,
+            buyerWallet: activeAddress,
+            priceETH: collection.priceETH || 0.01,
+            itemType: "nft",
+            tokenId: collection.tokenId || item?.tokenId
+          }
+        });
       } else {
         toast.error("❌ Already purchased", { id: toastId });
       }
     } catch (err) {
       console.error("❌ Card payment error:", err);
-      toast.error("❌ Payment failed", { id: toastId });
+      toast.error("❌ Payment check failed", { id: toastId });
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -22,7 +22,7 @@ function CardPayment() {
   const stripe = useStripe();
   const elements = useElements();
   const location = useLocation();
-  const { item } = location.state || {};
+  const { item, parentId, subCollectionId, buyerWallet, priceETH, itemType, tokenId } = location.state || {};
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   console.log("your login user data are :", user);
@@ -63,36 +63,44 @@ function CardPayment() {
       }
 
       const paymentData = {
-        userId: user?.id,
-        userInfo: { name: user.Fullname, email: user?.email },
+        userId: user?.id || user?._id,
+        userInfo: { name: user.Fullname || user.FullName, email: user?.Email || user?.email },
         gameDetails: {
           gameId: item?.id || item._id,
           serialNumber: item.serialNumber || item.code,
           title: item.title || item.name,
-          price: item.price,
+          price: priceETH || item.price,
         },
         paymentDetails: {
-          amount: item.price * 100,
+          amount: (priceETH || item.price) * 100,
           payment_method_id: paymentMethod.id,
           currency: "usd",
         },
-        provider: "card", // ✅ Add here
-        productId: item?._id, // ✅ Add here
+        provider: "card",
+        productId: item?._id,
+        parentId,
+        subCollectionId,
+        buyerWallet,
+        priceETH,
+        itemType: itemType || "nft",
+        tokenId: tokenId || item?.tokenId,
       };
 
       if (!BACKEND_BASE_URL) {
         toast.error("Base Url is requried");
       }
 
-      const response = await axios.post("http://localhost:4700/api/v1/card/pay-with-card", paymentData);
-      // const response = await axios.post(
-      //   `${BACKEND_BASE_URL}/api/v1/card/pay-with-card`,
-      //   paymentData
-      // );
+      const response = await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/card/pay-with-card`,
+        paymentData
+      );
       console.log("your responsve :", response);
       if (response.data.success) {
-        toast.success("Payment Successful!");
-        navigate("/success", { state: { payment: response.data } });
+        toast.success("🎉 Payment Successful! Your NFT is being processed.", { duration: 5000 });
+        // Navigate back to the NFT page after a short delay to allow webhook to finish
+        setTimeout(() => {
+          navigate(-1); // Go back to Buy1.jsx
+        }, 3000);
       } else {
         setError("Payment failed. Please try again.");
       }
@@ -106,61 +114,29 @@ function CardPayment() {
 
   return (
     <>
-     <div className="max-w-[1300px] w-full mx-auto">
+      <div className="max-w-[1300px] w-full mx-auto">
 
-       <button
-        onClick={() => navigate(-1)}
-        className="hidden md:block  pt-[5rem] pl-[4rem] text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
-      >
-        <FaArrowLeft />
-      </button>
+        <button
+          onClick={() => navigate(-1)}
+          className="hidden md:block  pt-[5rem] pl-[4rem] text-white text-lg p-2 hover:bg-gray-800 rounded-full transition-colors duration-200"
+        >
+          <FaArrowLeft />
+        </button>
 
-      <form
-        onSubmit={handlePayment}
-        className="flex flex-col gap-5 p-4 mx-auto mt-24 relative text-white"
-        style={{
-          maxWidth: "409px",
-          width: "100%",
-          fontFamily: "Inter, sans-serif",
-        }}
-      >
-        {/* Card Number */}
-        <div className="flex flex-col gap-2 relative">
-          <label className="text-sm font-medium">Card number</label>
-          <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
-            <CardNumberElement
-              options={{
-                style: {
-                  base: {
-                    color: "#fff",
-                    fontSize: "16px",
-                    "::placeholder": { color: "#999" },
-                  },
-                },
-              }}
-              className="w-full outline-none bg-transparent"
-            />
-            <div className="flex gap-2 ml-2 pointer-events-none">
-              <img
-                src={VisaImage}
-                alt="Visa"
-                className="w-6 h-4 object-contain"
-              />
-              <img
-                src={MasterCard}
-                alt="MasterCard"
-                className="w-6 h-4 object-contain"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Expiry + CVV */}
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="text-sm font-medium">Expiry date</label>
+        <form
+          onSubmit={handlePayment}
+          className="flex flex-col gap-5 p-4 mx-auto mt-24 relative text-white"
+          style={{
+            maxWidth: "409px",
+            width: "100%",
+            fontFamily: "Inter, sans-serif",
+          }}
+        >
+          {/* Card Number */}
+          <div className="flex flex-col gap-2 relative">
+            <label className="text-sm font-medium">Card number</label>
             <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
-              <CardExpiryElement
+              <CardNumberElement
                 options={{
                   style: {
                     base: {
@@ -172,58 +148,90 @@ function CardPayment() {
                 }}
                 className="w-full outline-none bg-transparent"
               />
+              <div className="flex gap-2 ml-2 pointer-events-none">
+                <img
+                  src={VisaImage}
+                  alt="Visa"
+                  className="w-6 h-4 object-contain"
+                />
+                <img
+                  src={MasterCard}
+                  alt="MasterCard"
+                  className="w-6 h-4 object-contain"
+                />
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 w-1/2">
-            <label className="text-sm font-medium">CVV/CVC</label>
-            <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
-              <CardCvcElement
-                options={{
-                  style: {
-                    base: {
-                      color: "#fff",
-                      fontSize: "16px",
-                      "::placeholder": { color: "#999" },
+
+          {/* Expiry + CVV */}
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-2 w-1/2">
+              <label className="text-sm font-medium">Expiry date</label>
+              <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
+                <CardExpiryElement
+                  options={{
+                    style: {
+                      base: {
+                        color: "#fff",
+                        fontSize: "16px",
+                        "::placeholder": { color: "#999" },
+                      },
                     },
-                  },
-                }}
-                className="w-full outline-none bg-transparent"
-              />
+                  }}
+                  className="w-full outline-none bg-transparent"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 w-1/2">
+              <label className="text-sm font-medium">CVV/CVC</label>
+              <div className="w-full h-[46px] px-3 border rounded bg-transparent flex items-center">
+                <CardCvcElement
+                  options={{
+                    style: {
+                      base: {
+                        color: "#fff",
+                        fontSize: "16px",
+                        "::placeholder": { color: "#999" },
+                      },
+                    },
+                  }}
+                  className="w-full outline-none bg-transparent"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Name on Card */}
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-medium">Name on card</label>
-          <input
-            type="text"
-            placeholder="Name on card"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full h-[46px] px-3 border rounded text-white placeholder-gray-400 bg-transparent outline-none"
-            required
-          />
-        </div>
-
-        {/* General Error */}
-        {error && (
-          <div className="text-red-500 text-center bg-red-100 bg-opacity-10 py-2 px-3 rounded">
-            {error}
-          </div>
-        )}
-
-        {/* Purchase Button */}
-        <div className="flex justify-center mt-4">
-          <button>
-            <CustomButton
-              text={loading ? "Processing..." : "Purchase Now"}
-              disabled={loading}
+          {/* Name on Card */}
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium">Name on card</label>
+            <input
+              type="text"
+              placeholder="Name on card"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full h-[46px] px-3 border rounded text-white placeholder-gray-400 bg-transparent outline-none"
+              required
             />
-          </button>
-        </div>
-      </form>
-     </div>
+          </div>
+
+          {/* General Error */}
+          {error && (
+            <div className="text-red-500 text-center bg-red-100 bg-opacity-10 py-2 px-3 rounded">
+              {error}
+            </div>
+          )}
+
+          {/* Purchase Button */}
+          <div className="flex justify-center mt-4">
+            <button>
+              <CustomButton
+                text={loading ? "Processing..." : "Purchase Now"}
+                disabled={loading}
+              />
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

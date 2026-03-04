@@ -14,6 +14,25 @@ const PaymentSchema = new mongoose.Schema({
     required: false, // Make required if you always have a game
   },
 
+  // NFT / NFA Information
+  parentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "NFTSystem",
+    required: false,
+  },
+  subCollectionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+  },
+  tokenId: {
+    type: Number,
+    required: false,
+  },
+  buyerWallet: {
+    type: String,
+    required: false,
+  },
+
   productId:{
     required:[true,"product Id is required"],
      type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +55,7 @@ const PaymentSchema = new mongoose.Schema({
   // Purchase Details
   itemType: {
     type: String,
-    enum: ["game", "in_game_item", "subscription", "dlc", "other","land"],
+    enum: ["game", "in_game_item", "subscription", "dlc", "other", "land", "nft"],
     default: "game"
   },
 
