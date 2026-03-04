@@ -11,7 +11,7 @@ export const CreatePaymentIntent = async (req, res) => {
   console.log("CreatePaymentIntent payload:", req.body);
 
   try {
-    const { amount, userId, email, description, productId } = req.body;
+    const { amount, userId, email, description, productId, parentId, subCollectionId, buyerWallet, priceETH } = req.body;
     if (!stripe) {
       return res.status(400).json({
         message: "Your stripe key is required",
@@ -30,9 +30,13 @@ export const CreatePaymentIntent = async (req, res) => {
         userId: userId, // MongoDB ObjectId
         email: email || "unknown",
         provider: "stripe", // required by schema
-        gameTitle: req.body.gameTitle, // required by schema
+        gameTitle: req.body.gameTitle || "NFT Purchase", // required by schema
         transactionId: "",
-        productId: productId,
+        productId: productId || "nft",
+        parentId: parentId || "",
+        subCollectionId: subCollectionId || "",
+        buyerWallet: buyerWallet || "",
+        priceETH: priceETH || "",
       },
     });
 
