@@ -341,7 +341,7 @@ export async function mintSubCollection(req, res) {
       console.log("- TokenURI:", tokenURI);
       console.log("- RoyaltyBps:", royaltyBps || 500);
 
-      tx = await nftContract.mint(tokenURI, royaltyBps || 500, { nonce: currentNonce });
+      tx = await nftContract.mint(creatorWallet, tokenURI, royaltyBps || 500, { nonce: currentNonce });
       console.log("📤 Mint Transaction sent:", tx.hash);
 
       receipt = await tx.wait();
@@ -665,7 +665,7 @@ export async function serverMint(req, res) {
       console.log("- RoyaltyBps:", royaltyBps || 500);
 
       // Try to mint
-      tx = await nftContract.mint(tokenURI, royaltyBps || 500);
+      tx = await nftContract.mint(creatorWallet, tokenURI, royaltyBps || 500);
       console.log("📤 Transaction sent:", tx.hash);
 
       receipt = await tx.wait();

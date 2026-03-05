@@ -5,7 +5,7 @@ import { ethers } from 'ethers';
 import toast from "react-hot-toast";
 
 // Use the existing config logic copied from frontend
-const MARKETPLACE_ADDRESS = "0xdA15EE73581D45F08A950Bb9E2c5F22015bE4844"; // Active contract with accumulated balances
+const MARKETPLACE_ADDRESS = "0x08C05937428c53b6fE248fd96C6DADD511cBC1b3"; // Active contract with accumulated balances
 const MARKETPLACE_ABI = [
   {
     "functionName": "platformBalance",
