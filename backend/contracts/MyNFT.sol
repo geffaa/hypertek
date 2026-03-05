@@ -39,6 +39,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
     }
     
     function mint(
+        address creator,
         string memory tokenURI,
         uint16 royaltyBps
     ) external returns (uint256) {
@@ -52,7 +53,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
         _setTokenURI(tokenId, tokenURI);
         
         tokenRoyalties[tokenId] = NFTRoyalty({
-            creator: msg.sender,
+            creator: creator,
             royaltyBps: royaltyBps
         });
         

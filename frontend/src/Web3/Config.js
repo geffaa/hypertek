@@ -3,8 +3,8 @@
 // ✅ Addresses from your deployment
 
 // Base Sepolia Testnet
-export const BASE_NFT_ADDRESS = "0x28fAB54b4015acbAf4210594135da444AFA8C0F9"; // To be updated later if needed
-export const BASE_MARKETPLACE_ADDRESS = "0xdA15EE73581D45F08A950Bb9E2c5F22015bE4844"; // To be updated later if needed
+export const BASE_NFT_ADDRESS = "0x9943ADE61Eba288cc0c8F6c3e35dc0D0D886Fa60"; // To be updated later if needed
+export const BASE_MARKETPLACE_ADDRESS = "0x08C05937428c53b6fE248fd96C6DADD511cBC1b3"; // To be updated later if needed
 
 // USDC Addresses 
 export const BASE_USDC_ADDRESS = "0x9C054917d3F8ca12E2eAF97eba1Ce6eDa88D0C85"; // Mock USDC for Testing
