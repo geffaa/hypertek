@@ -7,7 +7,7 @@ export const config = getDefaultConfig({
   projectId: '7e0cd9b7bbfcc58fa687ceca07852807', // WalletConnect Project ID
   chains: [baseSepolia, base],
   transports: {
-    [baseSepolia.id]: http(),
+    [baseSepolia.id]: http('https://base-sepolia-rpc.publicnode.com'),
     [base.id]: http(),
   },
   ssr: false,

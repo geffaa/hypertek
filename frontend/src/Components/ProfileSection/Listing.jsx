@@ -12,6 +12,8 @@ import FaceTwo from "../../assets/images/noActivity2.png";
 import CustomButton from "../Buttons/Button1";
 import CustomButton4 from "../Buttons/Button4";
 import { useAccount, useWalletClient, usePublicClient, useSwitchChain, useReadContract, useWriteContract } from "wagmi";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
+import { Wallet, Copy } from "lucide-react";
 
 import {
   MARKETPLACE_ADDRESS,
@@ -33,16 +35,31 @@ function UserListings() {
   /* ================= HOOKS ================= */
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient();
-  const { writeContractAsync } = useWriteContract();
+  const publicClient = usePublicClient({ chainId: BASE_CHAIN_ID });
+  const { writeContractAsync } = useWriteContract(); // Legacy
 
-  // Combine wallet state (Only Wagmi now)
-  const connectedWallet = wagmiAddress?.toLowerCase() || null;
-  const isConnected = isWagmiConnected;
+  const {
+    emailWalletAddress,
+    emailWalletClient,
+    isEmailWalletConnected,
+  } = useEmailWallet() || {};
+
+  // Combine wallet state
+  const connectedWallet = wagmiAddress?.toLowerCase() || emailWalletAddress?.toLowerCase() || null;
+  const isConnected = isWagmiConnected || isEmailWalletConnected;
+  const activeWalletClient = walletClient || emailWalletClient;
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [cancelling, setCancelling] = useState(false);
+  const [walletCopied, setWalletCopied] = useState(false);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setWalletCopied(true);
+    toast.success("Address copied!", { id: "copy-toast", duration: 2000 });
+    setTimeout(() => setWalletCopied(false), 2000);
+  };
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
@@ -176,11 +193,12 @@ function UserListings() {
           });
 
           // Cancel on blockchain via viem/wagmi
-          const txHash = await writeContractAsync({
+          const txHash = await activeWalletClient.writeContract({
             address: targetMarketplaceAddress,
             abi: MARKETPLACE_ABI,
             functionName: "cancelListing",
             args: [targetNftAddress, listing.tokenId],
+            account: activeWalletClient?.account || connectedWallet,
           });
 
           await publicClient.waitForTransactionReceipt({ hash: txHash });

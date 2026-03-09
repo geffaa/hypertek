@@ -22,8 +22,8 @@ export function useTokenBalance(tokenAddress) {
         try {
             let bal;
             // Best-effort provider: window.ethereum or public RPC
-            const provider = window.ethereum ? new ethers.BrowserProvider(window.ethereum) : new ethers.JsonRpcProvider('https://sepolia.base.org');
-            
+            const provider = window.ethereum ? new ethers.BrowserProvider(window.ethereum) : new ethers.JsonRpcProvider('https://base-sepolia-rpc.publicnode.com');
+
             console.log(`[useTokenBalance] Address: ${activeAddress}, Token: ${tokenAddress}`);
 
             if (tokenAddress && tokenAddress !== "0x0000000000000000000000000000000000000000") {

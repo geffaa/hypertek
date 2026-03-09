@@ -100,7 +100,9 @@ function Login() {
         });
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong");
+      console.error("Login error:", err);
+      const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during login.");
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -130,13 +132,14 @@ function Login() {
         navigate("/dashboard");
       } catch (err) {
         console.error("Google login error:", err);
-        toast.error(err.response?.data?.message || "Google login failed!");
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Google login.");
+        toast.error(errorMessage);
       } finally {
         setLoading(false); // hide loader in all cases
       }
     },
     onError: () => {
-      toast.error("Google login failed!");
+      toast.error("Google login was unsuccessful or cancelled.");
       setLoading(false); // make sure loader stops if Google login fails
     },
   });
@@ -180,11 +183,12 @@ function Login() {
           );
           navigate("/dasbhoard");
         } else {
-          toast.error(res.data.message || "Discord login failed!");
+          toast.error(res.data.message || "Discord login failed. Please try again.");
         }
       } catch (err) {
         console.error("Discord login error:", err);
-        toast.error(err.response?.data?.message || "Discord login failed!");
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Discord login.");
+        toast.error(errorMessage);
       } finally {
         setLoading(false); // stop loader in all cases
       }
@@ -302,9 +306,10 @@ function Login() {
           { duration: 8000 },
         );
       } else if (err.code === 4001) {
-        toast.error("Signature cancelled.");
+        toast.error("Signature cancelled. Please approve the request to continue.");
       } else {
-        toast.error("Login failed: " + (err.message || "Unknown error"));
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : err.message || "Unknown error occurred.");
+        toast.error("Login failed: " + errorMessage);
       }
     } finally {
       setLoading(false); // stop loader no matter what

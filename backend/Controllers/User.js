@@ -38,12 +38,12 @@ const SignupUser = async (req, res) => {
 
     if (!Email || !Password || !ConfirmPassword) {
       return res.status(400).json({
-        message: "Email, Password, and ConfirmPassword are required",
+        message: "Please fill in all fields (Email, Password, Confirm Password).",
       });
     }
 
     if (Password !== ConfirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
+      return res.status(400).json({ message: "The passwords you entered do not match. Please try again." });
     }
 
     const { address, encryptedPrivateKey } = generateWallet();
@@ -80,9 +80,9 @@ const SignupUser = async (req, res) => {
     });
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).json({ message: "Email already exists" });
+      return res.status(400).json({ message: "This email address is already registered. Please login instead." });
     }
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "An unexpected error occurred during signup. Please try again later.", error: error.message });
   }
 };
 
@@ -95,12 +95,12 @@ const LoginUser = async (req, res) => {
     if (!Email || !Password) {
       return res
         .status(400)
-        .json({ message: "Email and Password are required" });
+        .json({ message: "Email and Password are required to log in." });
     }
 
     const user = await UserModel.findOne({ Email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "No account found with this email address. Please sign up first." });
     }
 
     // ✅ CHECK IF USER IS ACTIVE
@@ -114,7 +114,7 @@ const LoginUser = async (req, res) => {
 
     const isMatch = await bcrypt.compare(Password, user.Password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "Incorrect password. Please check and try again." });
     }
 
     const token = jwt.sign(
@@ -139,7 +139,7 @@ const LoginUser = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    res.status(500).json({ message: "An unexpected server error occurred during login. Please try again later.", error: err.message });
   }
 };
 
@@ -414,12 +414,11 @@ const DiscordAuth = async (req, res) => {
     if (!user) {
       const fullName =
         global_name ||
-        `${username}${
-          discriminator && discriminator !== "0" ? `#${discriminator}` : ""
+        `${username}${discriminator && discriminator !== "0" ? `#${discriminator}` : ""
         }`;
 
       const { address, encryptedPrivateKey } = generateWallet();
-      
+
       user = new UserModel({
         DiscordId: discordId,
         Email: email ? email.toLowerCase() : `${username}@discord.user`,

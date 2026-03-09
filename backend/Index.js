@@ -43,10 +43,11 @@ const server = http.createServer(app);
 // ✅ FIXED: Changed https to http for localhost
 const io = new Server(server, {
   cors: {
-    origin: [
+   origin: [
       "https://hyper-tek-games.deventiatech.com",  // ✅ Changed from https
       "https://admin-hyper-tek-game.deventiatech.com",  // ✅ Changed from https
       "http://localhost:3000",  // Additional common port
+      "https://hypertek100.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
