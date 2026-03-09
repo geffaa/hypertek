@@ -21,9 +21,10 @@ import { useDispatch } from "react-redux";
 import logoutImage from "../../assets/images/login/logout.png";
 // Social dropdown images
 import DiscordImg from "../../assets/images/discard.png";
-import XImg from "../../assets/images/skipe.png";
-import TelegramImg from "../../assets/images/telegram.png";
+import xImg from "../../assets/images/skipe.png";
+import telegramImg from "../../assets/images/telegram.png";
 import { logout } from "../../Redux/AuthSlice";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -46,6 +47,8 @@ export default function Navbar() {
   const dropdownRef = useRef(null);
   const [query, setQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+
 
   // Fetch search results when query changes
   useEffect(() => {
@@ -371,7 +374,7 @@ export default function Navbar() {
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
                     >
                       <img
-                        src={XImg}
+                        src={xImg}
                         alt="X.com"
                         className="w-[18px] h-[18px]"
                       />
@@ -387,7 +390,7 @@ export default function Navbar() {
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
                     >
                       <img
-                        src={TelegramImg}
+                        src={telegramImg}
                         alt="Telegram"
                         className="w-[15px] h-[15px]"
                       />
@@ -468,6 +471,7 @@ export default function Navbar() {
                     />
                   </Link>
                 </div>
+
                 <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
                   <button
                     className="flex items-center justify-center w-full h-full"
@@ -597,7 +601,7 @@ export default function Navbar() {
                   rel="noreferrer"
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
                 >
-                  <img src={XImg} alt="X.com" className="w-4 h-4" />
+                  <img src={xImg} alt="X.com" className="w-4 h-4" />
                   X.com
                 </a>
 
@@ -607,7 +611,7 @@ export default function Navbar() {
                   rel="noreferrer"
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
                 >
-                  <img src={TelegramImg} alt="Telegram" className="w-4 h-4" />
+                  <img src={telegramImg} alt="Telegram" className="w-4 h-4" />
                   Telegram
                 </a>
               </div>
@@ -676,7 +680,7 @@ export default function Navbar() {
       <AnimatePresence>
         {showModal && (
           <motion.div
-          className="absolute top-0 left-0 w-screen h-screen z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            className="absolute top-0 left-0 w-screen h-screen z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -26,8 +26,8 @@ function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,58 +39,59 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    toast.error("Please enter a valid email address");
-    setLoading(false); // stop loader
-    return;
-  }
-  if (formData.password.length < 8 || formData.password.length > 20) {
-    toast.error("Password must be between 8 and 20 characters");
-    setLoading(false); // stop loader
-    return;
-  }
-  if (formData.password !== formData.confirmPassword) {
-    toast.error("Passwords do not match");
-    setLoading(false); // stop loader
-    return;
-  }
-
-  try {
-    const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
-      Email: formData.email,
-      Password: formData.password,
-      ConfirmPassword: formData.confirmPassword,
-    });
-
-    if (res.status === 201) {
-      dispatch(
-        loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
-          isLoggedInUser: true,
-        })
-      );
-      localStorage.setItem("token", res.data.token);
-      toast.success("Signup successful!");
-      navigate("/");
-    } else {
-      toast.error(res.data.message || "Signup failed");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      setLoading(false); // stop loader
+      return;
     }
-  } catch (error) {
-    console.error("Signup error:", error.response?.data || error.message);
-    toast.error(error.response?.data?.message || "Something went wrong");
-  } finally {
-    setLoading(false); // stop loader no matter what
-  }
-};
+    if (formData.password.length < 8 || formData.password.length > 20) {
+      toast.error("Password must be between 8 and 20 characters");
+      setLoading(false); // stop loader
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match");
+      setLoading(false); // stop loader
+      return;
+    }
+
+    try {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
+        Email: formData.email,
+        Password: formData.password,
+        ConfirmPassword: formData.confirmPassword,
+      });
+
+      if (res.status === 201) {
+        dispatch(
+          loginSuccess({
+            user: res.data.user,
+            token: res.data.token,
+            isLoggedInUser: true,
+          })
+        );
+        localStorage.setItem("token", res.data.token);
+        toast.success("Signup successful!");
+        navigate("/");
+      } else {
+        toast.error(res.data.message || "Signup failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      const errorMessage = error.response?.data?.message || (error.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during signup.");
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false); // stop loader no matter what
+    }
+  };
 
 
-  
- 
+
+
   // ---------------- Discord Signup ----------------
   const DISCORD_CLIENT_ID = "1423260002587639828";
   const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
@@ -126,15 +127,16 @@ function Signup() {
           );
           navigate("/");
         } else {
-          toast.error(res.data.message || "Discord login failed!");
+          toast.error(res.data.message || "Discord signup failed. Please try again.");
         }
       } catch (err) {
-        console.error("Discord login error:", err);
-        toast.error(err.response?.data?.message || "Discord login failed!");
+        console.error("Discord signup error:", err);
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Discord signup.");
+        toast.error(errorMessage);
       }
       finally {
-      setLoading(false); // stop loader in all cases
-    }
+        setLoading(false); // stop loader in all cases
+      }
     };
 
     fetchDiscordUser();
@@ -142,7 +144,7 @@ function Signup() {
 
   // ---------------------- signup with MetaMask -------------------------
   const handleLogin = async () => {
-      setLoading(true); // start loader
+    setLoading(true); // start loader
     try {
       if (!window.ethereum) {
         toast.error("MetaMask is not installed!");
@@ -154,7 +156,7 @@ function Signup() {
           method: "wallet_revokePermissions",
           params: [{ eth_accounts: {} }],
         });
-      } catch {}
+      } catch { }
 
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -223,14 +225,15 @@ function Signup() {
           { duration: 8000 }
         );
       } else if (err.code === 4001) {
-        toast.error("Signature cancelled.");
+        toast.error("Signature cancelled. Please approve the request to continue.");
       } else {
-        toast.error("Login failed: " + (err.message || "Unknown error"));
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : err.message || "Unknown error occurred.");
+        toast.error("Login failed: " + errorMessage);
       }
-      
+
     } finally {
-    setLoading(false); // stop loader no matter what
-  }
+      setLoading(false); // stop loader no matter what
+    }
   };
 
   // ---------------- Twitter Login ----------------
@@ -244,7 +247,7 @@ function Signup() {
   /// signup with google 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-       setLoading(true); // start loader
+      setLoading(true); // start loader
       try {
         // tokenResponse.access_token is what Google returns
         // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
@@ -268,17 +271,18 @@ function Signup() {
         toast.success("Google Signup successful!");
         navigate("/profile");
       } catch (err) {
-        console.error("Google login error:", err);
-        toast.error(err.response?.data?.message || "Google login failed!");
+        console.error("Google signup error:", err);
+        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Google signup.");
+        toast.error(errorMessage);
       }
-       finally {
-      setLoading(false); // stop loader in all cases
-    }
+      finally {
+        setLoading(false); // stop loader in all cases
+      }
     },
     onError: () => {
-    setLoading(false);
-    toast.error("Google signup failed!");
-  },
+      setLoading(false);
+      toast.error("Google signup was unsuccessful or cancelled.");
+    },
   });
 
   return (
@@ -352,7 +356,7 @@ function Signup() {
               required
             />
             <button
-              type="button" 
+              type="button"
 
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70"
@@ -363,7 +367,7 @@ function Signup() {
 
           <button
             type="submit"
-              disabled={loading} // prevent multiple clicks
+            disabled={loading} // prevent multiple clicks
             className="w-full py-3 mt-4 flex items-center justify-center text-white font-semibold rounded-lg transition"
           >
             <CustomButtonLarge text="Sign Up" />
@@ -397,7 +401,7 @@ function Signup() {
           </button> */}
 
           {/* Google */}
-       
+
           <button
             onClick={() => login()}
             className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
@@ -405,7 +409,7 @@ function Signup() {
             <img
               src={google}
               alt="Google"
-              className="w-6 h-6" 
+              className="w-6 h-6"
             />
           </button>
 

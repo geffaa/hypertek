@@ -3,7 +3,7 @@ import { useTokenBalance } from '../../hooks/useTokenBalance';
 import { BASE_USDC_ADDRESS, ERC20_ABI, BASE_MARKETPLACE_ADDRESS, MARKETPLACE_ABI } from '../../Web3/Config';
 import toast from 'react-hot-toast';
 import { ethers } from 'ethers';
-import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction } from 'wagmi';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicClient, useReadContract, useBalance, useSendTransaction, useWalletClient } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEmailWallet } from '../../hooks/useEmailWallet';
 import { BACKEND_BASE_URL } from '../../Config';
@@ -43,24 +43,25 @@ const Withdraw = () => {
     const activeAddress = wagmiAddress || emailWalletAddress;
     const isAnyConnected = isWagmiConnected || isEmailWalletConnected;
 
-    const { writeContractAsync: writeWagmiContract } = useWriteContract();
-    const { sendTransactionAsync } = useSendTransaction();
+    const { sendTransactionAsync: sendWagmiTransaction } = useSendTransaction();
     const publicClient = usePublicClient();
+    const { data: walletClient } = useWalletClient();
 
-    // Fetch Base USDC balance from MetaMask (on Base Sepolia)
+    const activeWalletClient = walletClient || emailWalletClient;
+    // Fetch Base USDC balance from the active address
     const { data: mmUsdcBalanceData } = useReadContract({
         address: BASE_USDC_ADDRESS,
         abi: ERC20_ABI,
         functionName: 'balanceOf',
-        args: wagmiAddress ? [wagmiAddress] : undefined,
-        query: { enabled: !!wagmiAddress }
+        args: activeAddress ? [activeAddress] : undefined,
+        query: { enabled: !!activeAddress }
     });
     const mmUsdcBalance = mmUsdcBalanceData ? ethers.formatUnits(mmUsdcBalanceData, 6) : '0';
 
-    // Fetch Base Native ETH balance from MetaMask
+    // Fetch Base Native ETH balance from the active address
     const { data: mmEthBalanceData } = useBalance({
-        address: wagmiAddress,
-        query: { enabled: !!wagmiAddress }
+        address: activeAddress,
+        query: { enabled: !!activeAddress }
     });
     const mmEthBalance = mmEthBalanceData ? Number(mmEthBalanceData.formatted).toFixed(4) : '0';
 
@@ -70,28 +71,28 @@ const Withdraw = () => {
     // New State for USD Conversion for ETH
     const [conversionRate, setConversionRate] = useState(null);
 
-    // Read internal balances from Marketplace Contract
+    // Read internal balances from Marketplace Contract for the active address
     const { data: rawSellerBalance, refetch: refetchSeller } = useReadContract({
         address: BASE_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
         functionName: 'sellerBalance',
-        args: wagmiAddress ? [wagmiAddress] : undefined,
-        query: { enabled: !!wagmiAddress }
+        args: activeAddress ? [activeAddress] : undefined,
+        query: { enabled: !!activeAddress }
     });
 
     const { data: rawCreatorBalance, refetch: refetchCreator } = useReadContract({
         address: BASE_MARKETPLACE_ADDRESS,
         abi: MARKETPLACE_ABI,
         functionName: 'creatorBalance',
-        args: wagmiAddress ? [wagmiAddress] : undefined,
-        query: { enabled: !!wagmiAddress }
+        args: activeAddress ? [activeAddress] : undefined,
+        query: { enabled: !!activeAddress }
     });
 
     const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
     const creatorBalance = rawCreatorBalance ? ethers.formatUnits(rawCreatorBalance, 6) : '0';
 
     const handleWithdrawEarnings = async (type) => {
-        if (!isWagmiConnected || !wagmiAddress) {
+        if (!isAnyConnected || !activeAddress) {
             toast.error("Please connect your wallet");
             return;
         }
@@ -99,10 +100,13 @@ const Withdraw = () => {
         const toastId = toast.loading(`Initiating ${type} withdrawal...`);
         try {
             const functionName = type === 'seller' ? 'withdrawSeller' : 'withdrawCreator';
-            const txHash = await writeWagmiContract({
+
+            // Use activeWalletClient which handles both MetaMask and Email Wallet
+            const txHash = await activeWalletClient.writeContract({
                 address: BASE_MARKETPLACE_ADDRESS,
                 abi: MARKETPLACE_ABI,
                 functionName: functionName,
+                account: activeWalletClient.account || activeAddress,
             });
 
             toast.loading("Waiting for confirmation...", { id: toastId });
@@ -196,39 +200,52 @@ const Withdraw = () => {
         try {
             let txHash;
 
-            // ── PATH 1: Wagmi / MetaMask / RainbowKit ──────────────────
-            if (isWagmiConnected && wagmiAddress) {
-                toast.loading("Please confirm in your wallet...", { id: toastId });
-
-                if (selectedToken === 'USDC') {
-                    const amountWei = ethers.parseUnits(amount, 6);
-                    txHash = await writeWagmiContract({
-                        address: BASE_USDC_ADDRESS,
-                        abi: ERC20_ABI,
-                        functionName: 'transfer',
-                        args: [recipient, amountWei],
-                    });
-                } else {
-                    // ETH / native
-                    const amountWei = ethers.parseEther(amount);
-                    txHash = await sendTransactionAsync({
-                        to: recipient,
-                        value: amountWei,
-                    });
-                }
-
-                if (publicClient) {
-                    toast.loading("Waiting for confirmation...", { id: toastId });
-                    await publicClient.waitForTransactionReceipt({ hash: txHash });
-                }
-            } else {
+            if (!isAnyConnected || !activeWalletClient) {
                 toast.error("Please connect your wallet first", { id: toastId });
                 setProcessing(false);
                 return;
             }
 
+            toast.loading("Please confirm in your wallet...", { id: toastId });
+
+            if (selectedToken === 'USDC') {
+                const amountWei = ethers.parseUnits(amount, 6);
+                txHash = await activeWalletClient.writeContract({
+                    address: BASE_USDC_ADDRESS,
+                    abi: ERC20_ABI,
+                    functionName: 'transfer',
+                    args: [recipient, amountWei],
+                    account: activeWalletClient.account || activeAddress,
+                });
+            } else {
+                // ETH / native
+                const amountWei = ethers.parseEther(amount);
+
+                if (isWagmiConnected) {
+                    txHash = await sendWagmiTransaction({
+                        to: recipient,
+                        value: amountWei,
+                    });
+                } else {
+                    // Email Wallet (Viem)
+                    txHash = await activeWalletClient.sendTransaction({
+                        to: recipient,
+                        value: amountWei,
+                        account: activeWalletClient.account,
+                        chain: activeWalletClient.chain
+                    });
+                }
+            }
+
+            if (publicClient) {
+                toast.loading("Waiting for confirmation...", { id: toastId });
+                await publicClient.waitForTransactionReceipt({ hash: txHash });
+            }
+
             toast.success("✅ Withdrawal Successful!", { id: toastId });
             refreshUsdc();
+
+            // ... (rest of the history logging logic remains the same)
 
             // ── Log to Backend ─────────────────────────────────────────
             let user = JSON.parse(localStorage.getItem('user'));
@@ -290,18 +307,27 @@ const Withdraw = () => {
 
             if (selectedAddToken === 'USDC') {
                 const amountWei = ethers.parseUnits(addAmount, 6);
-                transferTxHash = await writeWagmiContract({
+                transferTxHash = await activeWalletClient.writeContract({
                     address: BASE_USDC_ADDRESS,
                     abi: ERC20_ABI,
                     functionName: 'transfer',
-                    args: [wagmiAddress, amountWei],
+                    args: [activeAddress, amountWei],
+                    account: activeWalletClient.account || wagmiAddress,
                 });
             } else {
                 const amountWei = ethers.parseEther(addAmount);
-                transferTxHash = await sendTransactionAsync({
-                    to: wagmiAddress,
-                    value: amountWei,
-                });
+                if (isWagmiConnected) {
+                    transferTxHash = await sendWagmiTransaction({
+                        to: activeAddress,
+                        value: amountWei,
+                    });
+                } else {
+                    transferTxHash = await activeWalletClient.sendTransaction({
+                        to: activeAddress,
+                        value: amountWei,
+                        account: activeWalletClient.account
+                    });
+                }
             }
 
             toast.loading("Waiting for Transfer confirmation...", { id: toastId });
@@ -494,7 +520,7 @@ const Withdraw = () => {
 
                 {/* Debug Info */}
                 <div className="mb-4 text-xs text-white/30 font-mono">
-                    Connected: {wagmiAddress ? `Wallet (${wagmiAddress?.slice(0, 6)}...${wagmiAddress?.slice(-4)})` : "None"} <br />
+                    Connected: {activeAddress ? `${isEmailWalletConnected ? 'Embedded' : 'External'} Wallet (${activeAddress?.slice(0, 6)}...${activeAddress?.slice(-4)})` : "None"} <br />
                     Chain: Base Sepolia Testnet | USDC Contract: {tokenAddress?.slice(0, 6)}...
                 </div>
 
@@ -641,9 +667,8 @@ const Withdraw = () => {
                                         </div>
                                     )}
                                 </div>
-
                                 <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-lg text-sm text-blue-200">
-                                    <strong>Destination:</strong> Your Base Wallet ({wagmiAddress?.slice(0, 6)}...{wagmiAddress?.slice(-4)})
+                                    <strong>Destination:</strong> Your {isEmailWalletConnected ? "Email Wallet" : "Base Wallet"} ({activeAddress?.slice(0, 6)}...{activeAddress?.slice(-4)})
                                 </div>
 
                                 <button
@@ -742,7 +767,7 @@ const Withdraw = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             {showTransak && (
                 <div
@@ -764,7 +789,8 @@ const Withdraw = () => {
                         />
                     </div>
                 </div>
-            )}
+            )
+            }
         </>
     );
 };

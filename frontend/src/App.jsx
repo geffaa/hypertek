@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import ProtectedRoute from "./Components/ProtectRoutes";
+import { EmailWalletProvider } from "./context/EmailWalletContext";
 
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -246,7 +247,9 @@ function App() {
       }}
     >
       <BrowserRouter>
-        <AppWrapper />
+        <EmailWalletProvider>
+          <AppWrapper />
+        </EmailWalletProvider>
       </BrowserRouter>
     </div>
   );

@@ -25,6 +25,8 @@ import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { BACKEND_BASE_URL } from "../../Config";
 import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
+import { useTokenBalance } from "../../hooks/useTokenBalance";
+import { Wallet, Copy } from "lucide-react";
 
 function Buy1() {
   const navigate = useNavigate();
@@ -99,6 +101,16 @@ function Buy1() {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
   const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
+  const [walletCopied, setWalletCopied] = useState(false);
+
+  // Fetch Native ETH Balance for Embedded Wallet display
+  const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setWalletCopied(true);
+    setTimeout(() => setWalletCopied(false), 2000);
+  };
 
   /* ================================ INIT ================================ */
   useEffect(() => {
@@ -463,14 +475,12 @@ function Buy1() {
         console.log("📝 sending setApprovalForAll tx...");
 
         try {
-          const { request } = await publicClient.simulateContract({
+          const approveTx = await activeWalletClient.writeContract({
             ...nftContract,
             functionName: 'setApprovalForAll',
             args: [CURRENT_MARKETPLACE_ADDRESS, true],
-            account: walletAddress,
+            account: activeWalletClient.account || walletAddress,
           });
-
-          const approveTx = await activeWalletClient.writeContract(request);
           toast.loading("⏳ Waiting for approval confirmation...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTx });
           console.log("✅ Marketplace approved for all");
@@ -512,14 +522,12 @@ function Buy1() {
         : String(collection.priceETH || "1");
       const priceWei = ethers.parseUnits(finalPrice, 6);
 
-      const { request } = await publicClient.simulateContract({
+      const listTx = await activeWalletClient.writeContract({
         ...marketplaceContract,
         functionName: 'createListing',
         args: [CURRENT_NFT_ADDRESS, tokenId, priceWei],
-        account: walletAddress,
+        account: activeWalletClient.account || walletAddress,
       });
-
-      const listTx = await activeWalletClient.writeContract(request);
       await publicClient.waitForTransactionReceipt({ hash: listTx });
       console.log("✅ Listing created on blockchain");
 
@@ -683,13 +691,12 @@ function Buy1() {
         if (allowance < priceWei) {
           toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
           try {
-            const { request: approveReq } = await publicClient.simulateContract({
+            const approveTxHash = await activeWalletClient.writeContract({
               ...usdcContractOptions,
               functionName: 'approve',
               args: [CURRENT_MARKETPLACE_ADDRESS, priceWei],
-              account: activeAddress,
+              account: activeWalletClient.account || activeAddress,
             });
-            const approveTxHash = await activeWalletClient.writeContract(approveReq);
             toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
             await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
             console.log("✅ USDC Approved for Marketplace (First Sale)");
@@ -722,13 +729,12 @@ function Buy1() {
             abi: MARKETPLACE_ABI,
           };
 
-          const { request: depositReq } = await publicClient.simulateContract({
+          const depositTxHash = await activeWalletClient.writeContract({
             ...marketplaceContract,
             functionName: 'depositFirstSalePayment',
             args: [creatorWallet, priceWei],
-            account: activeAddress,
+            account: activeWalletClient.account || activeAddress,
           });
-          const depositTxHash = await activeWalletClient.writeContract(depositReq);
 
           toast.loading("⏳ Finalizing payment...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: depositTxHash });
@@ -856,13 +862,12 @@ function Buy1() {
       if (allowance < price) {
         toast.loading("✍️ Approving USDC for purchase...", { id: toastId });
         try {
-          const { request: approveReq } = await publicClient.simulateContract({
+          const approveTxHash = await activeWalletClient.writeContract({
             ...usdcContractOptions,
             functionName: 'approve',
             args: [CURRENT_MARKETPLACE_ADDRESS, price],
-            account: activeAddress,
+            account: activeWalletClient.account || activeAddress,
           });
-          const approveTxHash = await activeWalletClient.writeContract(approveReq);
           toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
           console.log("✅ USDC Approved!");
@@ -877,14 +882,12 @@ function Buy1() {
       toast.loading("💳 Processing purchase transaction...", { id: toastId });
       console.log("🛒 Executing buyNFT...");
 
-      const { request } = await publicClient.simulateContract({
+      const buyTx = await activeWalletClient.writeContract({
         ...marketplaceContract,
         functionName: 'buyNFT',
         args: [CURRENT_NFT_ADDRESS, collection.tokenId],
-        account: activeAddress, // value removed, using USDC now
+        account: activeWalletClient.account || activeAddress, // value removed, using USDC now
       });
-
-      const buyTx = await activeWalletClient.writeContract(request);
 
       toast.loading("⏳ Waiting for transaction confirmation...", {
         id: toastId,
@@ -1192,6 +1195,29 @@ function Buy1() {
             <div className="flex justify-end mt-3">
               <FiEye /> <span className="ml-2">505 Views</span>
             </div>
+
+            {/* --- EMBEDDED WALLET DISPLAY (CHECKOUT VIEW) --- */}
+            {isEmailWalletConnected && emailWalletAddress && (
+              <div className="mt-4 mb-2 w-full flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition cursor-pointer"
+                onClick={() => copyToClipboard(emailWalletAddress)}
+                title="Copy Wallet Address to Fund"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-500/20 rounded-lg">
+                    <Wallet className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-xs font-mono text-gray-300 flex items-center gap-2">
+                      {emailWalletAddress.slice(0, 6)}...{emailWalletAddress.slice(-4)}
+                      {walletCopied ? <span className="text-[10px] text-green-400">Copied!</span> : <Copy className="w-3 h-3 text-gray-500" />}
+                    </div>
+                    <div className="text-sm font-semibold text-white mt-0.5">
+                      {Number(ethBalance).toFixed(4)} ETH
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="flex gap-4 mt-6">
               <button

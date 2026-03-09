@@ -244,7 +244,7 @@ function Land() {
                   symbol: "ETH",
                   decimals: 18,
                 },
-                rpcUrls: ["https://sepolia.base.org"],
+                rpcUrls: ["https://base-sepolia-rpc.publicnode.com"],
                 blockExplorerUrls: ["https://sepolia.basescan.org"],
               },
             ],
