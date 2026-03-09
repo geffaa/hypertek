@@ -5,6 +5,9 @@ import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
 import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
+import Maintenance from "./pages/Maintenance";
+
+const MAINTENANCE_MODE = false;
 
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -231,6 +234,20 @@ function AppWrapper() {
 }
 
 function App() {
+  if (MAINTENANCE_MODE) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Maintenance />
+      </div>
+    );
+  }
+
   return (
     <div
       style={{

@@ -8,8 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         goldman: ["Goldman", "sans-serif"],
-
-        // ⚠️ WEB FIX — do NOT use Inter_400Regular here
+        orbitron: ["Orbitron", "sans-serif"],
         inter: ["Inter", "sans-serif"],
       },
 
