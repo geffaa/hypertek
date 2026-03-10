@@ -7,7 +7,7 @@ import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
 import Maintenance from "./pages/Maintenance";
 
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 import Home from "./pages/home";
 import About from "./pages/about";
