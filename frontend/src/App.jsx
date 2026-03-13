@@ -6,8 +6,20 @@ import { store } from "./Redux/Store";
 import ProtectedRoute from "./Components/ProtectRoutes";
 import { EmailWalletProvider } from "./context/EmailWalletContext";
 import Maintenance from "./pages/Maintenance";
+import SplashScreen from "./Components/Common/SplashScreen";
 
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
+
+const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
+
+// Returns true if splash should show (inactive for >= 1 hour or never visited).
+// Sets window.__splashComplete immediately when splash is NOT needed.
+function shouldShowSplash() {
+  const last = parseInt(localStorage.getItem("ht_lastActivity") || "0", 10);
+  const inactive = Date.now() - last >= SPLASH_COOLDOWN_MS;
+  if (!inactive) window.__splashComplete = true;
+  return inactive;
+}
 
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -46,6 +58,8 @@ import Activity from "./Components/ProfileSection/Activity";
 import List from "./Components/ProfileSection/Listing";
 import Edit from "./Components/ProfileSection/EditProfile";
 import NotFound from "./pages/NotFound";
+import Waitlist from "./pages/Waitlist";
+import WaitlistForm from "./pages/WaitlistForm";
 import Testing from "./pages/Testing";
 import UserDashboard from "./pages/UserDashboard";
 import OfferedReceived from "./pages/OfferedReceived";
@@ -99,7 +113,8 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
-
+    "/waitlist",
+    "/join-waitlist",
     "/dashboard/create-earning",
     "/stripe-payment",
     "/dashboard",
@@ -125,7 +140,7 @@ function AppWrapper() {
       <Elements stripe={stripePromise}>
         {!shouldHideLayout && <Navbar />}
 
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, position: "relative", zIndex: 1 }}>
           <Routes key={location.pathname}>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />
@@ -138,6 +153,8 @@ function AppWrapper() {
             <Route path="/reset-password/:token" element={<ResetPassword />} />
 
             {/* Marketplace / NFA */}
+            <Route path="/waitlist" element={<Waitlist />} />
+            <Route path="/join-waitlist" element={<WaitlistForm />} />
             <Route path="/market-place" element={<MarketPlace />} />
             <Route path="/collections/:category" element={<CategoryMarketplace />} />
             <Route path="/nfa-expand" element={<NFA />} />
@@ -234,6 +251,31 @@ function AppWrapper() {
 }
 
 function App() {
+  const [scrollY, setScrollY] = useState(0);
+  const [showSplash, setShowSplash] = useState(() => shouldShowSplash());
+
+  // Track user activity to reset the 1-hour inactivity cooldown
+  useEffect(() => {
+    const updateActivity = () =>
+      localStorage.setItem("ht_lastActivity", Date.now().toString());
+    const events = ["click", "scroll", "keydown", "touchstart"];
+    events.forEach((e) => window.addEventListener(e, updateActivity, { passive: true }));
+    return () => events.forEach((e) => window.removeEventListener(e, updateActivity));
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleSplashDone = () => {
+    localStorage.setItem("ht_lastActivity", Date.now().toString());
+    window.__splashComplete = true;
+    window.dispatchEvent(new Event("splashComplete"));
+    setShowSplash(false);
+  };
+
   if (MAINTENANCE_MODE) {
     return (
       <div
@@ -248,21 +290,56 @@ function App() {
     );
   }
 
+  // Subtle parallax: orbs slowly drift as user scrolls
+  const driftX = scrollY * 0.04;
+  const driftY = scrollY * 0.06;
+
   return (
     <div
       style={{
-        background: `
-      radial-gradient(circle at 10% 30%, rgba(8, 1, 33, 0.9) 0%, transparent 70%),
-      radial-gradient(circle at 70% 50%, rgba(13, 7, 22, 0.93) 0%, transparent 60%),
-      radial-gradient(circle at 50% 90%, rgba(5, 4, 17, 0.96) 0%, transparent 90%),
-      #0d0d14
-    `,
-        backdropFilter: "blur(500px)",
+        background: "#060610",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Glow orb top-left — drifts right+down on scroll */}
+      <div
+        style={{
+          position: "fixed",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background: "rgba(0, 42, 168, 0.25)",
+          filter: "blur(500px)",
+          top: "-10%",
+          left: "-10%",
+          pointerEvents: "none",
+          zIndex: 0,
+          transform: `translate(${driftX}px, ${driftY}px)`,
+          transition: "transform 0.1s linear",
+        }}
+      />
+      {/* Glow orb bottom-right — drifts left+up on scroll */}
+      <div
+        style={{
+          position: "fixed",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background: "rgba(0, 42, 168, 0.25)",
+          filter: "blur(500px)",
+          bottom: "-10%",
+          right: "-10%",
+          pointerEvents: "none",
+          zIndex: 0,
+          transform: `translate(-${driftX}px, -${driftY}px)`,
+          transition: "transform 0.1s linear",
+        }}
+      />
+      {showSplash && <SplashScreen onDone={handleSplashDone} />}
       <BrowserRouter>
         <EmailWalletProvider>
           <AppWrapper />

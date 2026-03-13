@@ -215,7 +215,7 @@ function BarCard({
   const renderFlexibleGroupedChart = (groupedData, maxValue) =>
     groupedData.length > 0 ? (
       groupedData.map((group, index) => {
-        const filledHeight = (group.sum / maxValue) * maxHeight;
+        const filledHeight = (group.sum / maxValue) * maxHeight * 0.78;
 
         // Adjust bar width based on number of groups
         const barWidth =
@@ -245,7 +245,7 @@ function BarCard({
         );
       })
     ) : (
-      <div className="text-white text-sm">No data for this month</div>
+      <div className="text-white/40 text-xs text-center">No data for this month</div>
     );
 
   // -------------------- Get Average Group Size --------------------
@@ -259,7 +259,7 @@ function BarCard({
   return (
     <>
       {/* Total Users */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -269,19 +269,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total Users
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               1.98%
             </h2>
           </div>
@@ -289,18 +289,18 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(userGroupedData, maxValueUsers)}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {userDisplayCount}
           </h1>
 
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-users`)?.showPicker()
@@ -311,7 +311,7 @@ function BarCard({
               type="month"
               value={selectedMonthUsers}
               onChange={(e) => setSelectedMonthUsers(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}
@@ -323,7 +323,7 @@ function BarCard({
       </div>
 
       {/* Total Buy */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between ">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -333,19 +333,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total Buy
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               2.15%
             </h2>
           </div>
@@ -353,18 +353,18 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(buyGroupedData, maxValueBuy)}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {buyDisplayCount}
           </h1>
 
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-buy`)?.showPicker()
@@ -375,7 +375,7 @@ function BarCard({
               type="month"
               value={selectedMonthBuy}
               onChange={(e) => setSelectedMonthBuy(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}
@@ -387,7 +387,7 @@ function BarCard({
       </div>
 
       {/* Total Sell */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -397,19 +397,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total Sell
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               2.15%
             </h2>
           </div>
@@ -417,18 +417,18 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(sellGroupedData, maxValueSell)}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {sellDisplayCount}
           </h1>
 
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-sell`)?.showPicker()
@@ -439,7 +439,7 @@ function BarCard({
               type="month"
               value={selectedMonthSell}
               onChange={(e) => setSelectedMonthSell(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}
@@ -451,7 +451,7 @@ function BarCard({
       </div>
 
       {/* Total NFA */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -461,19 +461,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total NFA
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               2.15%
             </h2>
           </div>
@@ -481,18 +481,18 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(nfaGroupedData, maxValueNfa)}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {nfaDisplayCount}
           </h1>
 
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-nfa`)?.showPicker()
@@ -503,7 +503,7 @@ function BarCard({
               type="month"
               value={selectedMonthNfa}
               onChange={(e) => setSelectedMonthNfa(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}
@@ -515,7 +515,7 @@ function BarCard({
       </div>
 
       {/* Total Collections */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -525,19 +525,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total Collections
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               2.15%
             </h2>
           </div>
@@ -545,7 +545,7 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(
             collectionGroupedData,
@@ -553,8 +553,8 @@ function BarCard({
           )}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {collectionDisplayCount}
           </h1>
           {/* <div className="text-xs text-gray-400 text-center">
@@ -562,7 +562,7 @@ function BarCard({
             ~{getAverageGroupSize(collectionGroupedData)} days/bar
           </div> */}
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-collection`)?.showPicker()
@@ -573,7 +573,7 @@ function BarCard({
               type="month"
               value={selectedMonthCollection}
               onChange={(e) => setSelectedMonthCollection(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}
@@ -585,7 +585,7 @@ function BarCard({
       </div>
 
       {/* Total Offers */}
-      <div className="card relative w-[311px] pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
+      <div className="card relative w-full pb-5 h-[239px] rounded-[10px] bg-[#100F0F] pt-[19px] px-4 flex flex-col justify-between">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-[38px] h-[38px] rounded-2xl bg-[#002AA8] flex items-center justify-center">
@@ -595,19 +595,19 @@ function BarCard({
                 className="w-[16.72px] h-[16.72px] filter brightness-0 invert"
               />
             </div>
-            <div className="w-[140px] h-[23px]">
-              <h1 className="font-inter font-semibold text-[18px] text-white">
+            <div className="flex-1 overflow-hidden min-w-0">
+              <h1 className="font-inter font-semibold text-[15px] text-white whitespace-nowrap overflow-hidden text-ellipsis">
                 Total Offers
               </h1>
             </div>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center gap-1 bg-[#00A843]/10 rounded-full px-2 py-0.5">
             <img
               src={IncreaseIcon}
               alt="Increase"
-              className="w-[6.58px] h-[8.46px]"
+              className="w-[7px] h-[9px]"
             />
-            <h2 className="font-inter font-medium text-[10.18px] text-[#00A843]">
+            <h2 className="font-inter font-medium text-[10px] text-[#00A843]">
               2.15%
             </h2>
           </div>
@@ -615,13 +615,13 @@ function BarCard({
 
         <div
           className="flex-1 px-3 mt-4 flex items-end justify-center my-5"
-          style={{ width: "253px", height: `${maxHeight}px`, gap: "6px" }}
+          style={{ width: "100%", height: `${maxHeight}px`, gap: "6px" }}
         >
           {renderFlexibleGroupedChart(offerGroupedData, maxValueOffer)}
         </div>
 
-        <div className="flex items-center justify-around mb-4">
-          <h1 className="font-inter font-medium text-[14px] text-white">
+        <div className="flex items-center justify-between px-1 mb-4">
+          <h1 className="font-inter font-bold text-[18px] text-white">
             {offerDisplayCount}
           </h1>
           {/* <div className="text-xs text-gray-400 text-center">
@@ -629,7 +629,7 @@ function BarCard({
             ~{getAverageGroupSize(offerGroupedData)} days/bar
           </div> */}
           <div
-            className="flex items-center rounded-[6px] border border-white/60 px-2 cursor-pointer"
+            className="flex items-center rounded-[6px] border border-white/20 bg-white/5 hover:bg-white/10 px-2 cursor-pointer transition-colors"
             style={{ height: "23.08px" }}
             onClick={() =>
               document.getElementById(`monthInput-offer`)?.showPicker()
@@ -640,7 +640,7 @@ function BarCard({
               type="month"
               value={selectedMonthOffer}
               onChange={(e) => setSelectedMonthOffer(e.target.value)}
-              className="flex-1 text-sm outline-none cursor-pointer h-full text-white appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+              className="flex-1 text-[11px] outline-none cursor-pointer h-full text-white/80 appearance-none [&::-webkit-calendar-picker-indicator]:hidden bg-transparent w-[58px]"
             />
             <img
               src={CalanderImage}

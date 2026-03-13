@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import overview1 from "../../assets/images/Profile/Hero1.jpeg";
+import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import TVector from "../../assets/images/popular/vector.png";
 import NavLinks from "../ProfileSection/Navlinks";
@@ -259,13 +259,7 @@ function MarketPlace() {
       <div className="min-h-screen bg-transparent">
         <div className="mx-auto mt-[68px] max-w-[2000px]">
           {/* ================= HERO ================= */}
-          <div className="relative w-full max-w-[1400px] mx-auto h-[260px] overflow-hidden">
-            <img
-              src={overview1}
-              alt="Hero"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
+          <ProfileBanner />
 
           {/* ================= PROFILE ================= */}
           <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex flex-col items-start text-white">

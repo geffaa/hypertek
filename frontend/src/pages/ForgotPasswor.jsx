@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logo1.png";
+const Logo = "/logo-white.png";
 import { FaArrowLeft, FaEnvelope } from "react-icons/fa";
-import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import {  BACKEND_BASE_URL } from "../Config"
@@ -50,9 +49,6 @@ function ForgotPassword() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-transparent mt-8">
-      <GlowingOrb Xaxis={70} Yaxis={150}/>
-      <GlowingOrb Xaxis={950} Yaxis={400}/>
-      
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[420px] max-w-md sm:max-w-sm">
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] sm:w-[50px] sm:h-[50px]" />
         <h1 className="text-white text-3xl sm:text-2xl font-bold text-center whitespace-nowrap">Forgotten Password</h1>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../assets/logo1.png";
+const Logo = "/logo-white.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
 import CustomButton4 from "../Components/Buttons/Button4";
-import GlowingOrb from "../Components/Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
@@ -93,8 +92,8 @@ function Signup() {
 
 
   // ---------------- Discord Signup ----------------
-  const DISCORD_CLIENT_ID = "1423260002587639828";
-  const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
+  const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID || "1423260002587639828";
+  const REDIRECT_URI = `${window.location.origin}/signin`;
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
     REDIRECT_URI
   )}&response_type=code&scope=identify%20email`;
@@ -287,9 +286,6 @@ function Signup() {
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
-      <GlowingOrb Xaxis={70} Yaxis={150} />
-      <GlowingOrb Xaxis={950} Yaxis={430} />
-
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] max-w-md sm:max-w-sm">
         <img src={Logo} alt="Logo" className="w-[67px] h-[67px] mb-4" />
 

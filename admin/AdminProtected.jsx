@@ -4,15 +4,17 @@ export default function AdminProtected({ children }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
+  const frontendUrl = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173";
+
   useEffect(() => {
     if (!token) {
-      window.location.href = "http://localhost:5173/signin"; // user login
+      window.location.href = `${frontendUrl}/signin`;
     } else if (role !== "admin") {
-      window.location.href = "http://localhost:5173/dashboard"; // user dashboard
+      window.location.href = `${frontendUrl}/dashboard`;
     }
   }, [token, role]);
 
-  if (!token || role !== "admin") return null; // wait for redirect
+  if (!token || role !== "admin") return null;
 
   return children;
 }

@@ -250,35 +250,7 @@ function EditNews() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-black text-white p-8 h-[850px]">
-      {/* Background effect */}
-      <div
-        style={{
-          top: `${20}px`,
-          left: `${940}px`,
-          position: "absolute",
-          width: "250px",
-          height: "200px",
-          background: "#002AA8",
-          opacity: 1,
-          filter: "blur(160px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `${620}px`,
-          left: `${760}px`,
-          position: "absolute",
-          width: "250px",
-          height: "200px",
-          background: "#002AA8",
-          opacity: 1,
-          filter: "blur(160px)",
-        }}
-        className="absolute rounded-full shadow-[0_0_40px_20px_rgba(59,130,246,0.6),0_0_100px_50px_rgba(59,130,246,0.4),0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
+    <div className="min-h-screen w-full text-white p-8">
 
 
       <h1 className="text-white font-semibold text-[25px] mb-8 w-[426px] h-[30px]">

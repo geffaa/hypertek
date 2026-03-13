@@ -177,34 +177,7 @@ function PlatformEarnings() {
 
 
   return (
-    <div className="w-full min-h-[950px] bg-black text-white px-16 pb-16 relative">
-
-      {/* Background circles */}
-      <div
-        style={{
-          top: "20px",
-          left: "360px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
-
-      <div
-        style={{
-          top: "610px",
-          left: "860px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-          pointerEvents: "none",
-        }}
-        className="absolute rounded-full"
-      ></div>
+    <div className="w-full min-h-[950px] text-white px-16 pb-16 relative">
 
       {/* Header */}
       <div style={{ width: "426px", height: "95px", gap: "22px" }}>

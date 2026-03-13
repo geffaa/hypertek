@@ -4,9 +4,13 @@ export default function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
-  if (!token) return <Navigate to="/signin" />; // not logged in
-  if (role === "admin") return <Navigate to="https://admin-hyper-tek-game.deventiatech.com" />; // redirect admin to admin frontend
-  if (role !== "user") return <Navigate to="/signin" />; // invalid role
+  if (!token) return <Navigate to="/signin" />;
+  if (role === "admin") {
+    const adminUrl = import.meta.env.VITE_ADMIN_URL || "http://localhost:5174";
+    window.location.href = adminUrl;
+    return null;
+  }
+  if (role !== "user") return <Navigate to="/signin" />;
 
   return children;
 }

@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
-import BgEffect2 from "../components/common/BgEffect2";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url } from "../Config";
@@ -165,11 +164,7 @@ function CreateCollections() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-hidden">
-      {/* Background Glowing Effects */}
-      <BgEffect2 Xaxis={950} Yaxis={30} />
-      <BgEffect2 Xaxis={750} Yaxis={450} />
-
+    <div className="flex flex-col min-h-screen overflow-hidden">
       {/* Content */}
       <div className="relative z-50">
         <div className="flex gap-10 mt-[40px] mx-2">

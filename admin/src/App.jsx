@@ -29,6 +29,7 @@ import NotificationsPage from "./pages/Notifications";
 import EditAdminProfile from "./pages/EditProfile";
 import AddSubCollection from "./pages/AddSubCollection";
 import EditSubCollection from "./pages/EditSubCollection";
+import WebsiteEditor from "./pages/WebsiteEditor";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             <Route path="support" element={<Support />} />
             <Route path="notification" element={<NotificationsPage />} />
             <Route path="edit-profile" element={<EditAdminProfile />} />
+            <Route path="website-editor" element={<WebsiteEditor />} />
           </Route>
         </Route>
 

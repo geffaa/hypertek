@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 import ManImage from "../../assets/images/Overview/man.png";
-import overview1 from "../../assets/images/Profile/Hero1.jpeg";
+import ProfileBanner from "./ProfileBanner";
 import { Link } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";
@@ -145,18 +145,8 @@ function PersonalActivity() {
       {/* Hero Section */}
       <div className="mx-auto mt-18 lg:mt-[68px] max-w-[2000px]">
         <div className="w-full overflow-x-hidden">
-          {/* Hero Banner - Fixed height for laptop screens */}
-          <div
-            className="relative w-full max-w-[1400px] mx-auto 
-    h-[250px] sm:h-[300px] md:h-[269px] lg:h-[269px] xl:h-[269px] 2xl:h-[300px] 
-    overflow-hidden"
-          >
-            <img
-              src={overview1}
-              alt="Hero background"
-              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-            />
-          </div>
+          {/* Hero Banner */}
+          <ProfileBanner />
 
           {/* Profile Section - aligned properly with banner */}
           <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">

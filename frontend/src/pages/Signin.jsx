@@ -6,12 +6,11 @@ import { useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import Logo from "../assets/logo1.png";
+const Logo = "/logo-white.png";
 import discard from "../assets/images/login/discard.png";
 import skype from "../assets/images/login/skipe.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import CustomButtonLarge from "../Components/Buttons/SignupButton";
-import GlowingOrb from "../Components/Common/BgColoring";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import google from "../assets/images/login/google.png";
@@ -77,8 +76,9 @@ function Login() {
       if (user?.Role === "admin") {
         // Admin: redirect to admin panel AND pass token so admin origin can store it
         const userId = user.id;
+        const adminBaseUrl = import.meta.env.VITE_ADMIN_URL || "http://localhost:5174";
         const adminUrl = new URL(
-          `https://admin-hyper-tek-game.deventiatech.com/${userId}`,
+          `${adminBaseUrl}/${userId}`,
         );
         if (token) {
           adminUrl.searchParams.set("token", token);
@@ -86,10 +86,6 @@ function Login() {
 
         toast.success("Admin login successful!");
         window.location.href = adminUrl.toString();
-        // For local dev:
-        // const adminUrl = new URL(`http://localhost:5174/${userId}`);
-        // if (token) adminUrl.searchParams.set("token", token);
-        // window.location.href = adminUrl.toString();
       } else {
         // Normal user flow
         toast.success("Login successful!");
@@ -145,8 +141,8 @@ function Login() {
   });
 
   // ---------------- Discord Login ----------------
-  const DISCORD_CLIENT_ID = "1423260002587639828";
-  const REDIRECT_URI = "https://hyper-tek-games.deventiatech.com/signin";
+  const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID || "1423260002587639828";
+  const REDIRECT_URI = `${window.location.origin}/signin`;
   const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
     REDIRECT_URI,
   )}&response_type=code&scope=identify%20email`;
@@ -318,9 +314,6 @@ function Login() {
 
   return (
     <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-8">
-      <GlowingOrb Xaxis={70} Yaxis={150} />
-      <GlowingOrb Xaxis={950} Yaxis={450} />
-
       <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] h-[550px] max-w-md sm:max-w-sm">
         <img
           src={Logo}
@@ -390,7 +383,8 @@ function Login() {
         </form>
 
         <p className="text-white text-sm mb-2 text-center">
-          <Link to="/signup" className="text-white text-xl ">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-400 hover:underline font-semibold">
             Sign Up
           </Link>
         </p>

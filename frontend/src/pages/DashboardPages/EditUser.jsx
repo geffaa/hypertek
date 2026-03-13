@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import overview1 from "../../assets/images/Profile/Hero1.jpeg";
+import Hero1 from "../../assets/images/Profile/Hero1.jpeg";
+import useSiteContent from "../../hooks/useSiteContent";
 import { FiCopy } from "react-icons/fi";
 import CustomButton from "../../Components/Buttons/Button1";
 import Profile from "../../assets/images/Profile/Profile.png";
@@ -14,6 +15,7 @@ import { User_Dashboard_Url, BACKEND_BASE_URL } from "../../Config";
 
 function EditProfile() {
   const navigate = useNavigate();
+  const { data: bannerCms } = useSiteContent("profile_banner");
 
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
 
@@ -189,12 +191,20 @@ function EditProfile() {
 
   return (
     <div className="flex flex-col w-full relative z-10">
-      {/* Hero Section */}
+      {/* Hero Banner — full-width, CMS-driven */}
       <div className="mb-16 lg:mt-[1px]">
         <div className="w-full">
           <div
-            className="relative h-32 sm:h-48 md:h-56 lg:h-[237px] -mx-4 sm:-mx-6 lg:-mx-8 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-16 md:mb-24"
-            style={{ backgroundImage: `url(${overview1})` }}
+            className="relative h-32 sm:h-48 md:h-56 lg:h-[237px] -mx-4 md:-mx-6 bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-16 md:mb-24"
+            style={{
+              backgroundImage: `url(${
+                bannerCms.background_image
+                  ? bannerCms.background_image.startsWith("http")
+                    ? bannerCms.background_image
+                    : `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4700"}${bannerCms.background_image}`
+                  : Hero1
+              })`,
+            }}
           ></div>
 
           {/* Profile Info */}
