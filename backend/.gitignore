@@ -32,6 +32,10 @@ Thumbs.db
 # Debug
 *.tgz
 
+# Uploaded files (served by express.static, not tracked in git)
+uploads/news/
+uploads/temp/
+
 
 
 
