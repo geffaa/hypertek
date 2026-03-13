@@ -478,12 +478,21 @@ export default function Navbar() {
 
                 {/* ---------------------------- search end ------------------  */}
 
-                <Link
-                  to="/dashboard"
-                  className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
-                >
-                  Panel
-                </Link>
+                {user?.Role === "admin" ? (
+                  <a
+                    href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
+                    className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
+                  >
+                    Panel
+                  </a>
+                ) : (
+                  <Link
+                    to="/dashboard"
+                    className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
+                  >
+                    Panel
+                  </Link>
+                )}
 
                 <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">
                   <Link to="/profile">
