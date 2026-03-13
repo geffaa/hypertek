@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Collectionimage from "../assets/CreateCollection/collection.png";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Image_Base_Url, Dashboard_Base_Url } from "../Config";
+import { getImageUrl, Dashboard_Base_Url } from "../Config";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -16,7 +16,7 @@ function CollectionCard({ collection }) {
       }}
     >
       <img
-        src={collection.collection?.image ? `${Image_Base_Url}${collection.collection.image}` : Collectionimage}
+        src={getImageUrl(collection.collection?.image) || Collectionimage}
         alt={collection.collection?.name || "Collection"}
         className="w-[117px] h-[122px] rounded-full object-cover"
       />
