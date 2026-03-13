@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_BASE_URL, NewsImage_Url } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 import CustomButton5 from "../Components/Buttons/Button5";
 const ITEMS_PER_PAGE = 3;

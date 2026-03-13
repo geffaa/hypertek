@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
@@ -8,7 +8,8 @@ import { EmailWalletProvider } from "./context/EmailWalletContext";
 import Maintenance from "./pages/Maintenance";
 import SplashScreen from "./Components/Common/SplashScreen";
 
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
+const MAINTENANCE_BYPASS_PATH = "/fixbugaccess";
 
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -239,6 +240,9 @@ function AppWrapper() {
               <Route path="withdraw" element={<Withdraw />} />
             </Route>
 
+            {/* Maintenance bypass — accessible even when maintenance mode is on */}
+            <Route path="/fixbugaccess" element={<Navigate to="/" replace />} />
+
             {/* not found page  */}
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -276,7 +280,11 @@ function App() {
     setShowSplash(false);
   };
 
-  if (MAINTENANCE_MODE) {
+  const isBypassPath = window.location.pathname.startsWith(MAINTENANCE_BYPASS_PATH);
+  if (isBypassPath) sessionStorage.setItem("maintenance_bypass", "1");
+  const isBypassed = isBypassPath || sessionStorage.getItem("maintenance_bypass") === "1";
+
+  if (MAINTENANCE_MODE && !isBypassed) {
     return (
       <div
         style={{

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import CustomButton from "../Buttons/Button1";
 import { Link, useNavigate } from "react-router-dom";
-import { NewsImage_Url, BACKEND_BASE_URL } from "../../Config";
+import { getImageUrl } from "../../Config";
 import { useEffect, useState } from "react";
 
 const fadeUp = {
