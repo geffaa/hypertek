@@ -54,7 +54,7 @@ export default function NewsList() {
             {/* Image */}
             <div className="relative w-full sm:w-[320px] h-[200px] overflow-hidden rounded-lg shrink-0">
               <img
-                src={`${NewsImage_Url}${item.image.replace("/temp/", "/news/")}`}
+                src={getImageUrl(item.image)}
                 alt={item.heading}
                 className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
               />
