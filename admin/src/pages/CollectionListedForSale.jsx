@@ -5,7 +5,7 @@ import DeleteImage from "../assets/delete.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
 
 function Character() {
@@ -140,7 +140,7 @@ function Character() {
           >
             {/* Circular Image */}
             <img
-              src={`${Image_Base_Url}${selectedChar.image}`}
+              src={getImageUrl(selectedChar.image)}
               alt={selectedChar.name}
               className="w-[120px] h-[120px] rounded-full object-cover flex-shrink-0"
               onError={(e) => (e.target.src = "https://via.placeholder.com/120")}
@@ -213,7 +213,7 @@ function Character() {
                   <td className="px-6 py-4">
                     {char.image ? (
                       <img
-                        src={`${Image_Base_Url}${char.image}`}
+                        src={getImageUrl(char.image)}
                         alt={char.name}
                         className="w-12 h-12 object-cover border border-white/10"
                       />

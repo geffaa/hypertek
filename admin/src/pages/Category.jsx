@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 import FullScreenLoader from "../components/common/Spinner";
 
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 
 
 
@@ -344,7 +344,7 @@ function Category() {
 
                   <img
 
-                    src={item.image ? `${Image_Base_Url}${item.image}` : Collectionimage}
+                    src={getImageUrl(item.image) || Collectionimage}
 
                     className="w-12 h-12 rounded border border-white/10"
 
