@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import TVector from "../../assets/images/popular/vector.png";
 import CustomButton4 from "../Buttons/Button4";
-import { MarketPlace_Url, NewsImage_Url } from "../../Config";
+import { MarketPlace_Url, getImageUrl } from "../../Config";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -90,7 +90,7 @@ function PopularCollections() {
                   style={{ background: "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)" }}
                 >
                   <img
-                    src={`${NewsImage_Url}${item?.collection?.image}`}
+                    src={getImageUrl(item?.collection?.image)}
                     alt={item?.collection?.name}
                     className="w-full h-full object-cover"
                   />

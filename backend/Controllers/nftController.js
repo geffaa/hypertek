@@ -1,10 +1,37 @@
 // Controllers/nftController.js - COMPLETE VERSION
+import fs from "fs";
+import path from "path";
 import NFTSystem from "../Models/NFTSystem.js";
 import {
   getBlockchain,
   ethers,
   formatEther,
 } from "../Service/blockchain.js";
+import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
+
+// Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
+async function saveImagePermanently(filePath, filename) {
+  if (getIsCloudinaryEnabled()) {
+    try {
+      const result = await getCloudinary().uploader.upload(filePath, {
+        folder: "hyper-tek/nft",
+        transformation: [
+          { width: 1200, crop: "limit" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
+      });
+      return result.secure_url;
+    } finally {
+      fs.unlink(filePath, () => {});
+    }
+  } else {
+    const finalDir = path.join(process.cwd(), "uploads", "nft");
+    if (!fs.existsSync(finalDir)) fs.mkdirSync(finalDir, { recursive: true });
+    fs.renameSync(filePath, path.join(finalDir, filename));
+    return `/uploads/nft/${filename}`;
+  }
+}
 
 /**
  * Create Parent Collection (Characters, Land, etc.)
@@ -26,7 +53,7 @@ export async function createParentCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = await saveImagePermanently(req.file.path, req.file.filename);
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -92,7 +119,7 @@ export async function addSubCollection(req, res) {
 
     // Handle image
     let image = req.file
-      ? `/uploads/temp/${req.file.filename}`
+      ? await saveImagePermanently(req.file.path, req.file.filename)
       : req.body.image || parent.collection.image;
 
     const subCollection = {
@@ -206,7 +233,7 @@ export async function updateSubCollection(req, res) {
     if (listed !== undefined) subCollection.listed = listed;
 
     if (req.file) {
-      subCollection.image = `/uploads/temp/${req.file.filename}`;
+      subCollection.image = await saveImagePermanently(req.file.path, req.file.filename);
     } else if (req.body.image) {
       subCollection.image = req.body.image;
     }
@@ -546,7 +573,7 @@ export async function createCollection(req, res) {
 
     let image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = await saveImagePermanently(req.file.path, req.file.filename);
     } else if (req.body.image) {
       image = req.body.image;
     } else {
@@ -1365,7 +1392,7 @@ export async function updateCollection(req, res) {
 
     let image = existing.collection.image;
     if (req.file) {
-      image = `/uploads/temp/${req.file.filename}`;
+      image = await saveImagePermanently(req.file.path, req.file.filename);
     }
 
     const updated = await NFTSystem.findByIdAndUpdate(

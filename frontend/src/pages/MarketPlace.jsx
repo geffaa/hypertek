@@ -29,7 +29,7 @@ import axios from "axios";
 
 
 
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 
 
 
@@ -407,11 +407,7 @@ function MarketPlace() {
 
                                 src={
 
-                                  item.image
-
-                                    ? `${BACKEND_BASE_URL}${item.image}`
-
-                                    : popularCollections
+                                  getImageUrl(item.image) || popularCollections
 
                                 }
 
@@ -537,11 +533,7 @@ function MarketPlace() {
 
                                 src={
 
-                                  item.image
-
-                                    ? `${BACKEND_BASE_URL}${item.image}`
-
-                                    : popularCollections
+                                  getImageUrl(item.image) || popularCollections
 
                                 }
 

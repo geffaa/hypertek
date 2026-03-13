@@ -23,7 +23,7 @@ import {
   BASE_NFT_ADDRESS,
   BASE_CHAIN_ID,
 } from "../../Web3/Config";
-import { BACKEND_BASE_URL } from "../../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 
 function UserListings() {
   const navigate = useNavigate();
@@ -385,7 +385,7 @@ function UserListings() {
                           }}
                         >
                           <img
-                            src={`${BACKEND_BASE_URL}${item.image}`}
+                            src={getImageUrl(item.image)}
                             alt={item.collection?.name}
                             className="w-full h-full object-cover object-top"
                           />
@@ -476,7 +476,7 @@ function UserListings() {
                   {/* Image */}
                   <div className="w-12 h-12  overflow-hidden bg-gradient-to-b from-[#9B7C2F] to-[#4A3E22]">
                     <img
-                      src={`${BACKEND_BASE_URL}${item.collection?.image}`}
+                      src={getImageUrl(item.collection?.image)}
                       alt={item.collection?.name}
                       className="w-full h-full object-cover"
                     />
