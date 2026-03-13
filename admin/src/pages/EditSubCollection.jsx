@@ -228,52 +228,6 @@ function EditSubCollection() {
 
     <div className="mt-8 flex h-[700px] bg-black flex-col">
 
-      {/* Blur background circles */}
-
-      <div
-
-        style={{
-
-          top: `120px`,
-
-          left: `320px`,
-
-          width: "300px",
-
-          height: "300px",
-
-          background: "#002AA8",
-
-          filter: "blur(230px)",
-
-        }}
-
-        className="absolute rounded-full"
-
-      ></div>
-
-      <div
-
-        style={{
-
-          top: `520px`,
-
-          left: `950px`,
-
-          width: "300px",
-
-          height: "300px",
-
-          background: "#002AA8",
-
-          filter: "blur(230px)",
-
-        }}
-
-        className="absolute rounded-full"
-
-      ></div>
-
 
 
       {/* Header */}

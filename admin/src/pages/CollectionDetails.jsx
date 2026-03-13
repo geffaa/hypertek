@@ -1,7 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import GlowingOrb from "../components/common/BgEffect";
-
 function CollectionDetails() {
   const navigate = useNavigate();
 
@@ -13,40 +11,7 @@ function CollectionDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-between text-white overflow-hidden pt-16 pb-4">
-      {/* Background blur divs */}
-      <div
-        style={{
-          top: `120px`,
-          left: `290px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-          shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                  0_0_100px_50px_rgba(59,130,246,0.4),
-                  0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-      <div
-        style={{
-          top: "15px",
-          left: "60px",
-          position: "absolute",
-          width: "250px",
-          height: "200px",
-          background: "#002AA8",
-          opacity: 1,
-          filter: "blur(160px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div className="absolute inset-0 -z-10 overflow-hidden"></div>
+    <div className="min-h-screen flex flex-col justify-between text-white overflow-hidden pt-16 pb-4">
 
       <div className="flex-1 flex items-center justify-center">
         <div
@@ -112,23 +77,6 @@ function CollectionDetails() {
           </div>
         </div>
       </div>
-
-      <div
-        style={{
-          top: "660px",
-          left: "420px",
-          position: "absolute",
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          opacity: 1,
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
 
       <div className="w-full flex justify-end pt-8 mb-12 z-10">
         <button

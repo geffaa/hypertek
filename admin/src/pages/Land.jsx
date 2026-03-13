@@ -141,29 +141,6 @@ function Land() {
 
   return (
     <div className="mt-8 flex h-[700px] bg-black flex-col">
-      {/* Blur Backgrounds */}
-      <div
-        className="absolute rounded-full"
-        style={{
-          top: "10px",
-          left: "20px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-      />
-      <div
-        className="absolute rounded-full"
-        style={{
-          top: "400px",
-          left: "620px",
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-      />
 
       {/* Header */}
       <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">

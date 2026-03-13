@@ -1,9 +1,11 @@
 import React from "react";
-import Logo from "../../assets/logo1.png";
+const Logo = "/logo-white.png";
 import TelegramImg from "../../assets/images/telegram.png";
 import SkypeImg from "../../assets/images/skipe.png";
 import DiscordImg from "../../assets/images/discard.png";
 import { Link } from "react-router-dom";
+
+const currentYear = new Date().getFullYear();
 
 function Footer() {
   const menuItems = [
@@ -17,18 +19,9 @@ function Footer() {
 
   return (
     <footer className="w-full text-white relative z-10 overflow-hidden">
-      {/* ===== Background Glow (same as News) ===== */}
-      <div
-        className="pointer-events-none absolute bottom-0 right-1/4
-        w-[180px] h-[180px] rounded-full
-        bg-gradient-to-b from-black-500/70 via-blue-600/80 to-white/30
-        blur-[120px]
-        "
-      />
-
       <div className="mx-auto max-w-[1500px] px-6">
         {/* Divider */}
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600 to-transparent mt-20 mb-10" />
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600 to-transparent mt-10 mb-8" />
 
         {/* ================= DESKTOP ================= */}
         <div className="hidden sm:flex justify-between items-start">
@@ -60,17 +53,13 @@ function Footer() {
                   alt="Discord"
                 />
               </a>
-
               <a href="https://x.com" target="_blank" rel="noreferrer">
-  <img
-    src={SkypeImg}
-    className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
-    alt="X.com"
-  />
-</a>
-
-
-
+                <img
+                  src={SkypeImg}
+                  className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
+                  alt="X.com"
+                />
+              </a>
               <a href="https://telegram.org" target="_blank" rel="noreferrer">
                 <img
                   src={TelegramImg}
@@ -83,8 +72,8 @@ function Footer() {
         </div>
 
         {/* Desktop copyright */}
-        <div className="hidden sm:block text-center text-xs text-gray-300 mt-10 mb-6">
-          © 2025. All Right Reserved
+        <div className="hidden sm:block text-center text-xs text-gray-300 mt-6 mb-4">
+          © {currentYear}. All Right Reserved
         </div>
 
         {/* ================= MOBILE ================= */}
@@ -105,51 +94,33 @@ function Footer() {
 
           {/* RIGHT SIDE */}
           <div className="flex flex-col items-end gap-4">
-            {/* Copyright */}
-            <p className="text-xs text-gray-400">© 2025. All Right Reserved</p>
-{/* Social Icons */}
-<div className="flex gap-4">
-  <a
-    href="https://discord.com"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <img
-      src={DiscordImg}
-      className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-      alt="Discord"
-    />
-  </a>
-
-  <a
-    href="https://x.com"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <img
-      src={SkypeImg}
-      className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer"
-      alt="X.com"
-    />
-  </a>
-
-  <a
-    href="https://t.me.com"
-    target="_blank"
-    rel="noreferrer"
-  >
-    <img
-      src={TelegramImg}
-      className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-      alt="Telegram"
-    />
-  </a>
-</div>
-
- {/* Logo */}
- <Link to="/" className="flex-shrink-0">
-            <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
-          </Link>
+            <p className="text-xs text-gray-400">© {currentYear}. All Right Reserved</p>
+            <div className="flex gap-4">
+              <a href="https://discord.com" target="_blank" rel="noreferrer">
+                <img
+                  src={DiscordImg}
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="Discord"
+                />
+              </a>
+              <a href="https://x.com" target="_blank" rel="noreferrer">
+                <img
+                  src={SkypeImg}
+                  className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="X.com"
+                />
+              </a>
+              <a href="https://t.me.com" target="_blank" rel="noreferrer">
+                <img
+                  src={TelegramImg}
+                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
+                  alt="Telegram"
+                />
+              </a>
+            </div>
+            <Link to="/" className="flex-shrink-0">
+              <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
+            </Link>
           </div>
         </div>
       </div>

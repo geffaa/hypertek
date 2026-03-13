@@ -48,7 +48,9 @@ function CreatorEarning() {
       });
     } else {
       // If no state, redirect back to the first step
-      navigate("/create-collection");
+      const adminDataString = localStorage.getItem("admin_data");
+      const adminId = adminDataString ? JSON.parse(adminDataString)?._id : null;
+      navigate(adminId ? `/${adminId}/create-collection` : "/");
       toast.error("Please complete the basic information first");
     }
   }, [location.state, navigate]);
@@ -161,36 +163,6 @@ function CreatorEarning() {
 
   return (
     <div className="bg-black pt-4 overflow-hidden h-screen">
-      {/* Bg Effect */}
-      <div
-        style={{
-          top: `20px`,
-          left: `950px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `600px`,
-          left: `100px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
 
       {/* Main Content */}
       <div className="flex gap-10 mt-6 mx-8 relative z-50">

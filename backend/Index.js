@@ -26,6 +26,8 @@ import NFTRouter from "./Routes/NFT.js";
 import News from "./Routes/News.js";
 import chatRoutes from "./Routes/chat.js";
 import WithdrawalRoute from "./Routes/WithdrawalRoute.js"; // Import Withdrawal Route
+import ContentRoute from "./Routes/ContentRoute.js";
+import WaitlistRouter from "./Routes/WaitlistRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -33,8 +35,9 @@ import http from "http";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables
+// Load environment variables: Config/.env first, then .env.local overrides
 dotenv.config({ path: path.join(__dirname, "Config", ".env") });
+dotenv.config({ path: path.join(__dirname, ".env.local"), override: true });
 const app = express();
 
 // ✨ Create HTTP server for Socket.IO
@@ -43,10 +46,12 @@ const server = http.createServer(app);
 // ✅ FIXED: Changed https to http for localhost
 const io = new Server(server, {
   cors: {
-   origin: [
-      "https://hyper-tek-games.deventiatech.com",  // ✅ Changed from https
-      "https://admin-hyper-tek-game.deventiatech.com",  // ✅ Changed from https
-      "http://localhost:3000",  // Additional common port
+    origin: [
+      process.env.FRONTEND_URL || "http://localhost:5173",
+      process.env.ADMIN_URL || "http://localhost:5174",
+      "http://localhost:3000",
+      "https://hyper-tek-games.deventiatech.com",
+      "https://admin-hyper-tek-game.deventiatech.com",
       "https://hypertek100.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -67,15 +72,13 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        "http://localhost:5173",
-        "http://localhost:5174",
+        process.env.FRONTEND_URL || "http://localhost:5173",
+        process.env.ADMIN_URL || "http://localhost:5174",
         "http://localhost:3000",
         "https://hypertek100.com",
         "https://hyper-tek-games.deventiatech.com",
         "https://www.hyper-tek-games.deventiatech.com",
         "https://admin-hyper-tek-game.deventiatech.com",
-        "https://frontend-21msmlhc7-hazrat-usmans-projects.vercel.app",
-        "https://frontend-qhftc02lt-hazrat-usmans-projects.vercel.app",
       ];
       // Allow requests with no origin (mobile apps, curl, etc)
       if (!origin || allowedOrigins.includes(origin)) {
@@ -90,12 +93,13 @@ app.use(
 );
 
 // Database connection
-try {
-  DBConnections();
-  console.log("✅ Database connected");
-} catch (error) {
-  console.error("❌ Database connection error:", error);
-}
+(async () => {
+  try {
+    await DBConnections();
+  } catch (error) {
+    console.error("❌ Database connection error:", error);
+  }
+})();
 
 // Stripe webhook (before express.json)
 app.post(
@@ -130,8 +134,10 @@ app.use("/api/dashboard", Dashboard);
 app.use("/api/v1/nft", NFTRouter);
 // ... (existing app.use calls)
 app.use("/api/v1/news", News);
-app.use("/api/v1/chat", chatRoutes); 
+app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/withdraw", WithdrawalRoute); // Register Withdrawal Route
+app.use("/api/v1/site-content", ContentRoute);
+app.use("/api/v1/waitlist", WaitlistRouter);
 
 // Health check
 app.get("/health", (req, res) => {

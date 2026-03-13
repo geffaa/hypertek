@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import ChatImage from "../assets/icon.png";
 import SendIcon from "../assets/Support/sendIcon.png";
+import { BACKEND_BASE_URL, Dashboard_Base_Url } from "../Config";
 
 function Support() {
   const [chats, setChats] = useState([]);
@@ -57,7 +58,7 @@ function Support() {
 
   useEffect(() => {
     if (!adminInfo) return;
-    const newSocket = io("https://api-hyper-tek-games.deventiatech.com", {
+    const newSocket = io(BACKEND_BASE_URL, {
       auth: { token: token, adminId: adminInfo._id, role: adminInfo.Role },
     });
 
@@ -79,7 +80,7 @@ function Support() {
       if (!token || !adminInfo) return;
       try {
         const res = await axios.get(
-          "https://api-hyper-tek-games.deventiatech.com/api/v1/chat/admin/chats",
+          `${Dashboard_Base_Url}/v1/chat/admin/chats`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -101,7 +102,7 @@ function Support() {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          `https://api-hyper-tek-games.deventiatech.com/api/v1/chat/messages/${selectedChat._id}`,
+          `${Dashboard_Base_Url}/v1/chat/messages/${selectedChat._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -110,7 +111,7 @@ function Support() {
           }
         );
         setMessages(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {}
+      } catch (err) { }
     };
 
     fetchMessages();
@@ -167,7 +168,7 @@ function Support() {
 
   return (
     <div className="flex flex-col lg:flex-row bg-black p-2 sm:p-4 h-screen lg:h-[80vh] gap-4 relative overflow-hidden">
-      
+
       {/* Sidebar */}
       <div className="flex flex-col w-full lg:w-[304px] max-h-[200px] lg:max-h-full p-2 overflow-y-auto bg-black">
         <div className="text-white text-xs p-2 bg-gray-800 rounded mb-2">
@@ -185,9 +186,8 @@ function Support() {
           <div
             key={chat._id}
             onClick={() => handleChatClick(chat)}
-            className={`flex items-center gap-2 my-2 p-2 rounded cursor-pointer ${
-              selectedChat?._id === chat._id ? "bg-gray-800" : ""
-            }`}
+            className={`flex items-center gap-2 my-2 p-2 rounded cursor-pointer ${selectedChat?._id === chat._id ? "bg-gray-800" : ""
+              }`}
           >
             <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
             <div className="flex flex-col flex-1 min-w-0">
@@ -204,7 +204,7 @@ function Support() {
 
       {/* Chat Area */}
       <div className="flex flex-col flex-1 h-full rounded min-h-0">
-        
+
         {/* Header */}
         <div className="flex items-center gap-2 w-full min-h-[50px] border-b border-white p-2 bg-black">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />

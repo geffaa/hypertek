@@ -1,13 +1,11 @@
 // src/services/socket.js
 import { io } from "socket.io-client";
-
-const SERVER_URL = "https://api.hypertek100.com"; // backend server URL
+import { BACKEND_BASE_URL } from "../Config";
 
 let socket;
 
-
 export const initiateSocket = (token) => {
-  socket = io(SERVER_URL, {
+  socket = io(BACKEND_BASE_URL, {
     auth: { token }
   });
 

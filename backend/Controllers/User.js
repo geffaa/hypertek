@@ -15,8 +15,8 @@ const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "wahabnadeem311@gmail.com",
-    pass: "aceu vgyd azni ngoq",
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASS?.replace(/"/g, ""),
   },
 });
 
@@ -171,7 +171,8 @@ const ForgotPassword = async (req, res) => {
       { expiresIn: "3h" }
     );
 
-    const resetLink = `https://hyper-tek-games.deventiatech.com/reset-password/${resetToken}`;
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+    const resetLink = `${frontendUrl}/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       from: `"Support" <${process.env.SMTP_EMAIL}>`,

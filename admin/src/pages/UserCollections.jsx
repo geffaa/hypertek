@@ -120,9 +120,6 @@ function UserDetails() {
 
   return (
     <div className="bg-black min-h-screen flex flex-col">
-      {/* BG Effects */}
-      <div className="absolute rounded-full" style={{ top: "150px", left: "320px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)", pointerEvents: "none" }} />
-      <div className="absolute rounded-full" style={{ top: "500px", left: "900px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)", pointerEvents: "none" }} />
 
       <div className="m-12 flex-1">
         {/* Tabs */}

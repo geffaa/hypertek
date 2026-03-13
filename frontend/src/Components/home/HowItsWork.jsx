@@ -1,95 +1,128 @@
 import React from "react";
-import connect from "../../assets/images/howItsWork/connect.png";
-import wallet from "../../assets/images/howItsWork/wallet.png";
-import card from "../../assets/images/howItsWork/card.png";
-import earn from "../../assets/images/howItsWork/earn.png";
+import { motion } from "framer-motion";
+import connectIcon from "../../assets/images/howItsWork/connect.png";
+import walletIcon from "../../assets/images/howItsWork/wallet.png";
+import cardIcon from "../../assets/images/howItsWork/card.png";
+import earnIcon from "../../assets/images/howItsWork/earn.png";
 import "../../index.css";
-import PageBackground from "../Common/BgEffect";
-import GlowingOrb from "../Common/BgColoring";
+import useSiteContent from "../../hooks/useSiteContent";
+
+const DEFAULT_STEPS = [
+  {
+    title: "Connect Wallet",
+    description:
+      "Securely connect your crypto wallet to start buying, selling, and collecting NFTs.",
+  },
+  {
+    title: "Explore Collections",
+    description:
+      "Browse trending collections and discover rare digital artworks from top creators.",
+  },
+  {
+    title: "Collect & Trade",
+    description:
+      "Buy your favorite NFTs and showcase or trade them on your profile anytime.",
+  },
+  {
+    title: "Earn & Grow",
+    description:
+      "Earn by selling your collections or gaining popularity in the NFT space.",
+  },
+];
+
+const STEP_ICONS = [connectIcon, walletIcon, cardIcon, earnIcon];
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
+  }),
+};
 
 function HowItsWork() {
-  const steps = [
-    {
-      icon: connect,
-      title: "Connect Wallet",
-      description:
-        "Securely connect your crypto wallet to start buying, selling, and collecting NFTs.",
-    },
-    {
-      icon: wallet,
-      title: "Explore Collections",
-      description:
-        "Browse trending collections and discover rare digital artworks from top creators.",
-    },
-    {
-      icon: card,
-      title: "Collect & Trade",
-      description:
-        "Buy your favorite NFTs and showcase or trade them on your profile anytime.",
-    },
-    {
-      icon: earn,
-      title: "Earn & Grow",
-      description:
-        "Earn by selling your collections or gaining popularity in the NFT space.",
-    },
-  ];
+  const { data: cms } = useSiteContent("home_how_it_works");
+
+  const sectionTitle = cms.section_title || "How It Works";
+  const sectionSubtitle =
+    cms.section_subtitle ||
+    "Get started in just a few steps and unlock the world of digital collectibles.";
+
+  const steps = Array.isArray(cms.steps) ? cms.steps : DEFAULT_STEPS;
 
   return (
-    <section className="flex flex-col lg:flex-row gap-16 px-11 sm:px-8 md:px-16 py-16 lg:py-20 items-start justify-center relative z-10">
+    <section className="relative z-10 w-full px-8 md:px-16 py-16 lg:py-20">
+      <div className="max-w-[1480px] mx-auto grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-16 items-center">
 
-      <GlowingOrb Xaxis={70} Yaxis={190} />
-      {/* Left side */}
-      <div className="w-full lg:w-[370px] flex flex-col my-auto gap-6 text-white text-center lg:text-left">
-        <h2
-          className="text-3xl z-10 sm:text-4xl lg:text-[42px] font-bold leading-[120%] tracking-normal"
-          style={{ fontFamily: "Goldman" }}
+        {/* Left Section */}
+        <motion.div
+          className="flex flex-col gap-8 text-white text-center lg:text-left"
+          variants={fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
         >
-          How It Works
-        </h2>
-        <p className="z-10 sm:text-lg font-normal leading-[150%]">
-          Get started in just a few steps <br />
-          and unlock the world of <br />
-          digital collectibles.
-        </p>
-      </div>
-
-      {/* Right side */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-14 w-full lg:w-[716px]">
-
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="relative flex flex-col items-start p-6 rounded-[40px] shadow-md  overflow-hidden custom-border w-full sm:w-[334px] h-auto sm:h-[252px]"
+          <h2
+            className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-[120%]"
+            style={{ fontFamily: "Goldman" }}
           >
-            <img
-              src={step.icon}
-              alt={step.title}
-              className="w-12 h-12 mb-4 bg-blue-800 rounded-2xl text-white p-2"
-            />
-            <h3
-              className="text-xl sm:text-xl lg:text-xl font-bold mb-2 text-white"
-              style={{
-                fontFamily: "Goldman",
-                width: "100%",
-                maxWidth: "220px",
-                height: "auto",
-              }}
+            {sectionTitle}
+          </h2>
+
+          <p className="text-gray-200 sm:text-lg leading-[150%]">
+            {sectionSubtitle}
+          </p>
+        </motion.div>
+
+        {/* Right Section - Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 lg:ml-32 max-w-[820px]">
+
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              className="relative flex flex-col items-start p-6 rounded-[40px] shadow-md overflow-hidden custom-border w-full sm:h-[252px]"
+              variants={fadeUp}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
             >
-              {step.title}
-            </h3>
-            <p
-              className="text-sm sm:text-sm lg:text-sm text-white leading-[150%]"
-              style={{
-                width: "100%",
-                maxWidth: "254px",
-                height: "auto",
-              }}
-            >
-              {step.description}
-            </p>
-          </div>
-        ))}
+              {/* Icon */}
+              <img
+                src={STEP_ICONS[index] || STEP_ICONS[0]}
+                alt={step.title}
+                className="w-12 h-12 mb-4 bg-blue-800 rounded-2xl p-2"
+              />
+
+              {/* Title */}
+              <h3
+                className="text-xl font-bold mb-2 text-white"
+                style={{ fontFamily: "Goldman", maxWidth: "220px" }}
+              >
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p
+                className="text-sm text-white leading-[150%]"
+                style={{ maxWidth: "254px" }}
+              >
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+
+        </div>
       </div>
     </section>
   );

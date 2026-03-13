@@ -199,35 +199,6 @@ function EditCollection2() {
   }
   return (
     <div className="p-8 bg-black h-[980px] py-12  flex flex-col gap-6">
-      <div
-        style={{
-          top: `120px`,
-          left: `320px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(230px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `520px`,
-          left: `950px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(230px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
 
       {/* Header */}
       <h1

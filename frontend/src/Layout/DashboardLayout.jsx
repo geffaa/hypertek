@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
-    <div className="flex h-screen text-white relative bg-[#100F0F] max-w-[1400px] mx-auto overflow-hidden">
+    <div className="flex h-screen text-white relative bg-[#100F0F] w-full overflow-hidden">
 
       {/* Global Background Effects */}
       <div

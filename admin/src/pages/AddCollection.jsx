@@ -482,79 +482,41 @@ function AddCollection() {
 
     return (
 
-      <div className="mt-8 flex h-[700px] bg-black flex-col">
+      <div className="flex flex-col min-h-full">
 
-        {/* Background blur divs */}
+        <div className="flex flex-col gap-4 mb-8">
 
-        {/* <div
-
-          style={{
-
-            top: `120px`,
-
-            left: `290px`,
-
-            width: "250px",
-
-            height: "250px",
-
-            background: "#002AA8",
-
-            filter: "blur(180px)",
-
-          }}
-
-          className="absolute rounded-full
-
-          shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-
-                  0_0_100px_50px_rgba(59,130,246,0.4),
-
-                  0_0_200px_100px_rgba(59,130,246,0.2)]"
-
-        ></div> */}
-
-
-
-        <div className="flex flex-col w-[900px] h-[200px] gap-6 ml-12">
-
-          <h1 className="font-inter font-semibold text-[25px] text-white z-50">
+          <h1 className="font-inter font-semibold text-[25px] text-white">
 
             Collection Management
 
           </h1>
 
-          <div className="flex justify-between">
+          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 w-[280px]">
 
-            <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
+            <img src={searchImage} alt="search" className="w-4 h-4" />
 
-              <img src={searchImage} alt="search" className="w-4 h-4" />
+            <input
 
-              <input
+              type="text"
 
-                type="text"
+              placeholder="Search collections"
 
-                placeholder="Search collections"
+              value={searchTerm}
 
-                value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
 
-                onChange={(e) => setSearchTerm(e.target.value)}
+              className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
 
-                className="bg-transparent text-white px-2 py-1 outline-none rounded w-full placeholder-gray-300"
-
-              />
-
-            </div>
+            />
 
           </div>
 
         </div>
 
+        <div className="flex items-center justify-center py-20">
 
-
-        <div className="flex items-center justify-center h-full">
-
-          <div className="text-white text-lg">
+          <div className="text-white/60 text-lg">
 
             No collections found. Create your first collection!
 
@@ -602,73 +564,11 @@ function AddCollection() {
 
   return (
 
-    <div className="mt-12 flex h-[500px] bg-black flex-col">
-
-      {/* Background blur divs */}
-
-      <div
-
-        style={{
-
-          top: `120px`,
-
-          left: `290px`,
-
-          width: "250px",
-
-          height: "250px",
-
-          background: "#002AA8",
-
-          filter: "blur(180px)",
-
-        }}
-
-        className="absolute rounded-full
-
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-
-                0_0_100px_50px_rgba(59,130,246,0.4),
-
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-
-      ></div>
-
-
-
-      <div
-
-        style={{
-
-          top: `560px`,
-
-          left: `900px`,
-
-          width: "250px",
-
-          height: "250px",
-
-          background: "#002AA8",
-
-          filter: "blur(180px)",
-
-        }}
-
-        className="absolute rounded-full
-
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-
-                0_0_100px_50px_rgba(59,130,246,0.4),
-
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-
-      ></div>
-
-
+    <div className="flex flex-col min-h-full">
 
       {/* Header */}
 
-      <div className="flex flex-col w-[900px] gap-6 ml-12">
+      <div className="flex flex-col gap-4 mb-8">
 
         <h1 className="font-inter font-semibold text-[25px] text-white">
 
@@ -678,7 +578,7 @@ function AddCollection() {
 
         <div className="flex justify-between">
 
-          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20">
+          <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 w-[280px]">
 
             <img src={searchImage} alt="search" className="w-4 h-4" />
 
@@ -706,9 +606,9 @@ function AddCollection() {
 
       {/* Table */}
 
-      <div className="pl-7 mt-12 overflow-x-auto">
+      <div className="overflow-x-auto w-full">
 
-        <table className="min-w-[897px] text-left rounded-lg overflow-hidden ml-12">
+        <table className="w-full text-left">
 
           <thead>
 

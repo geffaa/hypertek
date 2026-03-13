@@ -11,6 +11,7 @@ import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
 import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
+import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import CustomButton from "../Components/Buttons/Button1";
 import { useAccount } from "wagmi";
 import { useEmailWallet } from "../hooks/useEmailWallet";
@@ -160,60 +161,25 @@ function CategoryMarketplace() {
 
   return (
     <div className="min-h-screen bg-transparent relative z-10">
-      {/* Hero Section */}
-      <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
-        <div className="mt-20 lg:mt-[92px]">
-          <div
-            className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24"
-            style={{
-              backgroundImage: `
-                linear-gradient(
-                  to right,
-                  rgba(0, 0, 0, 0.85) 0%,
-                  rgba(0, 0, 0, 0.55) 40%,
-                  rgba(0, 0, 0, 0.15) 65%,
-                  rgba(0, 0, 0, 0) 100%
-                ),
-                url(${overview1})
-              `,
-              backgroundPosition: "50% 8.5%",
-              backgroundSize: "cover",
-            }}
-          >
-            {/* Text Content */}
-            <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
-              <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
-                {items.length > 0
-                  ? items[0]?.parentName || items[0]?.collection?.name || "Collection"
-                  : category
-                    ? category.charAt(0).toUpperCase() + category.slice(1)
-                    : "Collection"}
-              </h1>
-              <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
-                Explore all {category} items in the marketplace. Discover unique collections and start your journey.
-              </p>
-            </div>
+      {/* Full-width Banner */}
+      <div className="mt-16">
+        <MarketplaceBanner
+          titleOverride={
+            items.length > 0
+              ? items[0]?.parentName || items[0]?.collection?.name || undefined
+              : category ? category.charAt(0).toUpperCase() + category.slice(1) : undefined
+          }
+          descOverride={`Explore all ${category || ""} items in the marketplace. Discover unique collections and start your journey.`}
+          stats={[
+            { num: filteredItems.length, label: "Total Items" },
+            { num: filteredItems.filter((i) => i.listed).length, label: "Listed" },
+            { num: filteredItems.filter((i) => !i.listed).length, label: "Unlisted" },
+          ]}
+        />
+      </div>
 
-            {/* Stats Section */}
-            <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
-              {[
-                { num: filteredItems.length, label: "Total Items" },
-                { num: filteredItems.filter((i) => i.listed).length, label: "Listed" },
-                { num: filteredItems.filter((i) => !i.listed).length, label: "Unlisted" },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col gap-1">
-                  <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
-                    {stat.num}
-                  </h1>
-                  <p className="text-xs md:text-[12px] font-normal text-white">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
+      {/* Nav + Content */}
+      <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8">
         {/* NavLinks & Search Section */}
         <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
           <NavLinks />

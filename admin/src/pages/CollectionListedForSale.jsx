@@ -124,9 +124,6 @@ function Character() {
   if (view === "details" && selectedChar) {
     return (
       <div className="bg-black mt-12 relative pb-0">
-        {/* Blur backgrounds */}
-        <div style={{ top: "15px", left: "210px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }} className="absolute rounded-full" />
-        <div style={{ top: "400px", left: "620px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)" }} className="absolute rounded-full" />
 
         {/* Content stretches to fill page */}
         <div className="z-10 ml-12 flex flex-col">
@@ -187,43 +184,18 @@ function Character() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-black mt-12">
-
-        {/* ===== SAME BLUR DESIGN ===== */}
-        <div
-          style={{
-            top: "15px",
-            left: "210px",
-            width: "250px",
-            height: "250px",
-            background: "#002AA8",
-            filter: "blur(180px)",
-          }}
-          className="absolute rounded-full"
-        ></div>
-
-        <div
-          style={{
-            top: "400px",
-            left: "620px",
-            width: "250px",
-            height: "250px",
-            background: "#002AA8",
-            filter: "blur(180px)",
-          }}
-          className="absolute rounded-full"
-        ></div>
+      <div className="flex flex-col min-h-full">
 
         {/* ===== HEADER ===== */}
-        <div className="flex flex-col w-[426px] gap-6 ml-12 z-10">
+        <div className="flex flex-col gap-4 mb-8">
           <h1 className="font-inter font-semibold text-[25px] text-white">
             Collection On Sale
           </h1>
         </div>
 
-        {/* ===== TABLE (DESIGN SAME) ===== */}
-        <div className="pl-7 mt-12 z-10 relative">
-          <table className="w-[927px] text-left rounded-lg overflow-hidden">
+        {/* ===== TABLE ===== */}
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left">
             <thead>
               <tr className="h-[50px]">
                 <th className="px-6 py-3 text-[#FFFFFFC4]">Image</th>

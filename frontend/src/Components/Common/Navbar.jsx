@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo1.png";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
 import CustomeButton from "../Buttons/Button1";
@@ -36,6 +35,14 @@ export default function Navbar() {
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const logo = "/logo-white.png";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   console.log("your user from redux store :", user);
   console.log("your user from redux token :", token);
@@ -223,15 +230,23 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full bg-[#001142CC] md:bg-transparent">
+    <nav
+      className="fixed top-0 left-0 z-50 w-full transition-all duration-300"
+      style={{
+        background: scrolled
+          ? "rgba(0, 17, 66, 0.55)"
+          : "rgba(0, 17, 66, 0.25)",
+        backdropFilter: scrolled ? "blur(20px)" : "blur(4px)",
+      }}
+    >
       {/* Container with max-width and centered */}
-      <div className="w-full mx-auto max-w-[1300px] px-4 sm:px-6 md:px-2">
+      <div className="w-full mx-auto max-w-[1500px] px-6 sm:px-8 md:px-10">
         {/* Top Section */}
         <div className="w-full py-3 flex items-center justify-between">
           {/* Left: Logo + Desktop Menu */}
           <div className="flex items-center space-x-28">
             <Link to="/">
-              <img src={logo} alt="Logo" className="h-10 w-auto mt-2" />
+              <img src={logo} alt="Logo" className="h-12 w-auto" />
             </Link>
             {/* Mobile Search */}
             {isLoggedIn && showSearchBar && (
@@ -462,6 +477,13 @@ export default function Navbar() {
                 </div>
 
                 {/* ---------------------------- search end ------------------  */}
+
+                <Link
+                  to="/dashboard"
+                  className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
+                >
+                  Panel
+                </Link>
 
                 <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">
                   <Link to="/profile">

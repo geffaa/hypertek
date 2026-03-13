@@ -37,30 +37,7 @@ function AddUserCollection() {
   };
 
   return (
-    <div className="p-4 md:p-8 bg-black min-h-screen pb-12 flex flex-col gap-6 overflow-x-hidden">
-      <div
-        style={{
-          top: `120px`,
-          left: `10%`,
-          width: "200px",
-          height: "200px",
-          background: "#002AA8",
-          filter: "blur(150px)",
-        }}
-        className="absolute rounded-full z-0"
-      ></div>
-
-      <div
-        style={{
-          bottom: `10%`,
-          right: `10%`,
-          width: "200px",
-          height: "200px",
-          background: "#002AA8",
-          filter: "blur(150px)",
-        }}
-        className="absolute rounded-full z-0"
-      ></div>
+    <div className="p-4 md:p-8 pb-12 flex flex-col gap-6 overflow-x-hidden">
 
       {/* Header */}
       <h1

@@ -1,7 +1,6 @@
 // components/layouts/DashboardLayout.jsx
 import Sidebar from "../components/common/sidebar";
 
-import BgEffect2 from "../components/common/BgEffect2";
 import Header from "../components/common/header";
 import { Outlet } from "react-router-dom";
 import LogoutModal from "../components/common/LogoutModel";
@@ -18,7 +17,7 @@ const DashboardLayout = () => {
   const [userData, setUserData] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const hideScrollPages = ["create-collection", "creator-earning", "add-news"];
+  const hideScrollPages = ["create-collection", "creator-earning"];
   const shouldHideScroll = hideScrollPages.some((page) =>
     location.pathname.includes(page)
   );
@@ -59,9 +58,11 @@ const DashboardLayout = () => {
   const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
-    <div className="flex h-screen text-white relative max-w-[1400px] mx-auto overflow-hidden">
+    <div className="flex h-screen text-white relative w-full overflow-hidden" style={{ background: "#060610" }}>
 
-      {/* Global Blur Background Circles */}
+      {/* Global background glow orbs */}
+      <div style={{ position: "fixed", width: "700px", height: "700px", borderRadius: "50%", background: "rgba(0,42,168,0.2)", filter: "blur(500px)", top: "-10%", left: "-10%", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "fixed", width: "700px", height: "700px", borderRadius: "50%", background: "rgba(0,42,168,0.2)", filter: "blur(500px)", bottom: "-10%", right: "-10%", pointerEvents: "none", zIndex: 0 }} />
 
       {/* Backdrop for mobile */}
       {isSidebarOpen && (
@@ -87,7 +88,7 @@ const DashboardLayout = () => {
 
         {/* Scrollable main content */}
         <main
-          className={`flex-1 pt-3 px-4 z-10 ${shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
+          className={`flex-1 pt-3 px-6 z-10 ${shouldHideScroll ? "overflow-hidden" : "overflow-y-auto"
             }`}
         >
           <Outlet />
@@ -104,7 +105,7 @@ const DashboardLayout = () => {
           localStorage.clear();
           sessionStorage.clear();
           window.location.href =
-            "https://hyper-tek-games.deventiatech.com/signin";
+            `${import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}/signin`;
           setShowLogoutModal(false);
         }}
       />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import land1Image from "../assets/images/Overview/land1.jpg";
 import ManImage from "../assets/images/Overview/man.png";
-import overview1 from "../assets/images/Overview/overview1.jpg";
 import { Link } from "react-router-dom";
+import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import { FiSearch } from "react-icons/fi";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import axios from "axios";
@@ -97,62 +97,21 @@ function PersonalActivity() {
 
   return (
     <div className="min-h-screen bg-transparent relative z-10">
-      {/* Hero Section */}
-      <div className="mt-20 lg:mt-[92px] px-4 sm:px-6 md:px-8 max-w-[1450px] mx-auto">
-        <div className="mt-20 lg:mt-[92px]">
-          <div
-            className="relative h-60 md:h-72 lg:h-[280px] w-[1500px] max-w-full bg-cover bg-no-repeat shadow-lg mb-24 rounded-lg"
-            style={{
-              backgroundImage: `
-              linear-gradient(
-                to right,
-                rgba(0, 0, 0, 0.85) 0%,
-                rgba(0, 0, 0, 0.55) 40%,
-                rgba(0, 0, 0, 0.15) 65%,
-                rgba(0, 0, 0, 0) 100%
-              ),
-              url(${overview1})
-            `,
-              backgroundPosition: '50% 8.5%',
-              backgroundSize: 'cover',
-            }}
-          >
-            {/* Text Content */}
-            <div className="absolute top-4 left-4 lg:top-[20px] lg:left-[48px] w-full lg:w-[902px] max-w-[90%]">
-              <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
-                A New Era Dawns in Hyper Tek
-              </h1>
-              <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white">
-                It's the start of a living, breathing universe where every
-                decision shapes the journey. Whether you're racing at light speed,
-                forging alliances in the Overlord Realm, or uncovering secrets in
-                HyperQuest, this is your chance to leave your mark on the story.
-              </p>
-            </div>
+      {/* Full-width Banner */}
+      <div className="mt-20 lg:mt-[92px]">
+        <MarketplaceBanner
+          titleOverride="My Assets"
+          stats={[
+            { num: "5K", label: "Total Item" },
+            { num: "50.5K", label: "Total Volume" },
+            { num: "3.5K", label: "Listed" },
+            { num: "2.6K", label: "Owners" },
+          ]}
+        />
+      </div>
 
-            {/* Stats Section */}
-            <div className="absolute bottom-6 left-4 lg:top-[185px] lg:left-[48px] w-full lg:w-[497px] flex flex-wrap gap-4 lg:gap-[18px]">
-              {[
-                { num: "5K", label: "Total Item" },
-                { num: "50.5K", label: "Total Volume" },
-                { num: "3.5K", label: "Listed" },
-                { num: "2.6K", label: "Owners" },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col gap-1">
-                  <h1 className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
-                    {stat.num}
-                  </h1>
-                  <p className="text-xs md:text-[12px] font-normal text-white">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-
-
+      {/* Nav + Content */}
+      <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8">
         {/* Navigation and Search */}
         <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
           <NavLinks />

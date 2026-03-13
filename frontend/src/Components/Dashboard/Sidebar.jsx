@@ -1,16 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiChevronDown, FiChevronUp, FiDollarSign, FiX } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiX } from "react-icons/fi";
 
-import Logo from "../../assets/logo1.png";
+import Logo from "../../assets/logo-t-white.png";
 import DashboardImage from "../../assets/images/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
 import CreateCollection2 from "../../assets/images/Sidebar/create2.png";
 import CollectionImage from "../../assets/images/Sidebar/collections.png";
-import EditUser from "../../assets/images/Sidebar/editUser.png";
-import NewsImage from "../../assets/images/Sidebar/news.png";
-import TransactionImage from "../../assets/images/Sidebar/transaction.png";
-import SaleImage from "../../assets/images/Sidebar/sale.png";
 import SupportImage from "../../assets/images/Sidebar/support.png";
 import LogoutImage from "../../assets/images/Sidebar/logout.png";
 
@@ -18,10 +14,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
   const navigate = useNavigate()
   const location = useLocation();
   const [openCreate, setOpenCreate] = useState(false);
-  const [openCollection, setOpenCollection] = useState(false);
-  const [openNews, setOpenNews] = useState(false);
-  const [openTransaction, setOpenTransaction] = useState(false);
-  const [openSale, setOpenSale] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
 
   const sidebarRef = useRef(null);
@@ -39,19 +31,8 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
       setOpenCreate(true);
     } else if (path.includes("/dashboard/collections")) {
       setSelectedItem("Collection");
-    } else if (path.includes("/dashboard/edit-profile")) {
-      setSelectedItem("users");
-    } else if (path.includes("/add-news") || path.includes("/edit-news") || path.includes("/other-news")) {
-      setSelectedItem("News");
-      setOpenNews(true);
-    } else if (path.includes("/collection-listed-sale") || path.includes("/dashboard/collection-on-sale")) {
-      setSelectedItem("Sale");
-    } else if (path.includes("/dashboard/transactions")) {
-      setSelectedItem("Transaction");
     } else if (path.includes("/dashboard/support")) {
       setSelectedItem("support");
-    } else if (path.includes("/dashboard/withdraw")) {
-      setSelectedItem("withdraw");
     }
 
     // Close sidebar on mobile when navigating
@@ -62,15 +43,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
 
   const toggleDropdown = (clickedDropdown, itemName) => {
     setOpenCreate(clickedDropdown === "create" ? !openCreate : false);
-    setOpenCollection(
-      clickedDropdown === "collection" ? !openCollection : false
-    );
-    setOpenNews(clickedDropdown === "news" ? !openNews : false);
-    setOpenTransaction(
-      clickedDropdown === "transaction" ? !openTransaction : false
-    );
-    setOpenSale(clickedDropdown === "sale" ? !openSale : false);
-
     setSelectedItem(itemName);
   };
 
@@ -79,8 +51,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setOpenCreate(false);
-        setOpenCollection(false);
-        setOpenNews(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -90,8 +60,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
   const handleItemClick = (itemName) => {
     setSelectedItem(itemName);
     setOpenCreate(false);
-    setOpenCollection(false);
-    setOpenNews(false);
   };
 
 
@@ -117,10 +85,9 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
           {/* Logo & Close Button - Header */}
           <div className="flex items-center justify-between lg:justify-center mt-4 lg:mt-12 mb-8 lg:mb-12">
             <div className="flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
-              <img src={Logo} alt="Logo" className="w-[30px] h-[30px] lg:w-[35px] lg:h-[35px]" />
-              <span className="font-inter font-bold text-[16px] lg:text-[18px] leading-[22px]">
-                HYPER TEK
-              </span>
+              <Link to={import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}>
+                <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
+              </Link>
             </div>
 
             {/* Close Button - Mobile Only */}
@@ -241,14 +208,13 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
             )}
 
             {/* NFA's Collection */}
-            {/* <Link to="/dashboard/collections">
+            <Link to="/dashboard/collections" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                  selectedItem === "Collection"
-                    ? "bg-[#002AA8]"
-                    : ""
-                }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "Collection"
+                  ? "bg-[#002AA8]"
+                  : "hover:bg-white/5"
+                  }`}
+                style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("Collection")}
               >
                 <div className="flex items-center">
@@ -258,8 +224,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                   <h1
                     className="text-white font-bold ml-3"
                     style={{
-                      width: "120px",
-                      height: "17px",
                       fontFamily: "Inter, sans-serif",
                       fontWeight: 700,
                       fontSize: "14px",
@@ -270,175 +234,12 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                   </h1>
                 </div>
               </li>
-            </Link> */}
-
-            {/* Edit User */}
-            <Link to="/dashboard/edit-profile " className="w-full max-w-[222px]">
-              <li
-                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "users"
-                  ? "bg-[#002AA8]"
-                  : "hover:bg-white/5"
-                  }`}
-                style={{ width: "100%", height: "42px", opacity: 1 }}
-                onClick={() => handleItemClick("users")}
-              >
-                <div className="flex items-center">
-                  <div className="relative">
-                    <img src={EditUser} alt="" className="w-[22px] h-[22px]" />
-                  </div>
-                  <h1
-                    className="text-white font-bold ml-3"
-                    style={{
-                      width: "120px",
-                      height: "17px",
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
-                  >
-                    Edit User
-                  </h1>
-                </div>
-              </li>
-            </Link>
-
-            {/* Update News */}
-            {/* <li
-              className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                selectedItem === "News"
-                  ? "bg-[#002AA8]"
-                  : ""
-              }`}
-              style={{ width: "222px", height: "42px", opacity: 1 }}
-              onClick={() => toggleDropdown("news", "News")}
-            >
-              <div className="flex items-center">
-                <div className="relative">
-                  <img src={NewsImage} alt="" className="w-[22px] h-[22px]" />
-                </div>
-                <h1
-                  className="text-white font-bold ml-3"
-                  style={{
-                    width: "120px",
-                    height: "17px",
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    lineHeight: "17px",
-                  }}
-                >
-                  Update News
-                </h1>
-              </div>
-
-              {openNews ? (
-                <FiChevronUp className="text-white" />
-              ) : (
-                <FiChevronDown className="text-white" />
-              )}
-            </li> */}
-
-            {/* Dropdown Options for News */}
-            {openNews && (
-              <ul className="flex flex-col items-start w-[129px] h-[60px] mb-2 opacity-100 rounded mr-3">
-                <div className="flex">
-                  <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
-                  <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/add-news") ? "text-blue-400 font-semibold" : "text-white"
-                      }`}
-                  >
-                    <Link to="/add-news">Add News</Link>
-                  </li>
-                </div>
-                <div className="flex">
-                  <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
-                  <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/edit-news") ? "text-blue-400 font-semibold" : "text-white"
-                      }`}
-                  >
-                    <Link to="/edit-news">Edit News</Link>
-                  </li>
-                </div>
-                <div className="flex">
-                  <div className="w-[16px] h-[22.21px] border-l border-l-[#494A4C] border-b border-b-[#494A4C]"></div>
-                  <li
-                    className={`w-[120px] h-[17px] font-inter text-sm ps-1 items-end pt-3 font-normal pt-2 leading-none hover:text-slate-300 cursor-pointer ${isRouteActive("/other-news") ? "text-blue-400 font-semibold" : "text-white"
-                      }`}
-                  >
-                    <Link to="/other-news">Other News</Link>
-                  </li>
-                </div>
-              </ul>
-            )}
-
-            {/* Collection on Sale */}
-            {/* <Link to="/dashboard/collection-on-sale">
-              <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer ${
-                  selectedItem === "Sale"
-                    ? "bg-[#002AA8]"
-                    : ""
-                }`}
-                style={{ width: "222px", height: "42px", opacity: 1 }}
-                onClick={() => handleItemClick("Sale")}
-              >
-                <div className="flex items-center">
-                  <div className="relative">
-                    <img src={SaleImage} alt="" className="w-[22px] h-[22px]" />
-                  </div>
-                  <h1
-                    className="text-white font-bold ml-3"
-                    style={{
-                      width: "130px",
-                      height: "17px",
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
-                  >
-                    Collection on Sale
-                  </h1>
-                </div>
-              </li>
-            </Link> */}
-
-            {/* Transaction */}
-            <Link to="/dashboard/transactions" className="w-full max-w-[222px]">
-              <li
-                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "Transaction"
-                  ? "bg-[#002AA8]"
-                  : "hover:bg-white/5"
-                  }`}
-                style={{ width: "100%", height: "42px", opacity: 1 }}
-                onClick={() => handleItemClick("Transaction")}
-              >
-                <div className="flex items-center">
-                  <div className="relative">
-                    <img src={TransactionImage} alt="" className="w-[22px] h-[22px]" />
-                  </div>
-                  <h1
-                    className="text-white font-bold ml-3"
-                    style={{
-                      width: "120px",
-                      height: "17px",
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
-                  >
-                    Transaction
-                  </h1>
-                </div>
-              </li>
             </Link>
 
             {/* Support */}
             <Link to="/dashboard/support" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${selectedItem === "support"
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "support"
                   ? "bg-[#002AA8]"
                   : "hover:bg-white/5"
                   }`}
@@ -452,8 +253,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                   <h1
                     className="text-white font-bold ml-3"
                     style={{
-                      width: "120px",
-                      height: "17px",
                       fontFamily: "Inter, sans-serif",
                       fontWeight: 700,
                       fontSize: "14px",
@@ -461,38 +260,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                     }}
                   >
                     Support
-                  </h1>
-                </div>
-              </li>
-            </Link>
-
-            {/* Withdraw */}
-            <Link to="/dashboard/withdraw" className="w-full max-w-[222px]">
-              <li
-                className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${selectedItem === "withdraw"
-                  ? "bg-[#002AA8]"
-                  : "hover:bg-white/5"
-                  }`}
-                style={{ width: "100%", height: "42px", opacity: 1 }}
-                onClick={() => handleItemClick("withdraw")}
-              >
-                <div className="flex items-center">
-                  <div className="relative flex items-center justify-center w-[22px] h-[22px]">
-                    {/* Using Icon as we might not have specific asset */}
-                    <FiDollarSign className="text-white w-5 h-5" />
-                  </div>
-                  <h1
-                    className="text-white font-bold ml-3"
-                    style={{
-                      width: "120px",
-                      height: "17px",
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
-                  >
-                    Withdraw
                   </h1>
                 </div>
               </li>

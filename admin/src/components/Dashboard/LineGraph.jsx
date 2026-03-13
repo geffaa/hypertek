@@ -331,30 +331,28 @@ function LineGraph() {
 };
 
   return (
-    <div className="flex mx-auto space-x-3 relative">
+    <div className="flex gap-4 w-full">
       {/* Left Side Graph */}
-      <div className="space-y-5">
-        <div className="flex items-center" style={{ width: "100%" }}>
+      <div className="flex flex-col gap-4 flex-1 min-w-0">
+        <div className="flex items-center gap-4 flex-wrap">
           <h1
             style={{
-              width: "230px",
-              height: "23px",
               fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
+              fontWeight: 700,
+              fontSize: "20px",
               color: "white",
+              flexShrink: 0,
             }}
           >
             Transaction Overview
           </h1>
-          <ul style={{ display: "flex", gap: "10px", margin: 0, padding: 0 }}>
+          <ul style={{ display: "flex", gap: "6px", margin: 0, padding: 0, listStyle: "none", backgroundColor: "rgba(255,255,255,0.04)", borderRadius: "8px", padding: "4px" }}>
             {periods.map((period) => (
               <li
                 key={period}
                 onClick={() => setSelectedPeriod(period)}
                 style={{
-                  width: "56px",
-                  height: "28px",
+                  padding: "4px 14px",
                   borderRadius: "6px",
                   display: "flex",
                   alignItems: "center",
@@ -363,8 +361,10 @@ function LineGraph() {
                   background:
                     selectedPeriod === period ? "#002AA8" : "transparent",
                   color: "#FFFFFF",
+                  fontFamily: "Inter, sans-serif",
                   fontWeight: selectedPeriod === period ? 600 : 400,
-                  transition: "0.2s",
+                  fontSize: "13px",
+                  transition: "background 0.2s",
                 }}
               >
                 {period}
@@ -374,12 +374,8 @@ function LineGraph() {
         </div>
 
         <div
-          className="bg-[#100F0F] p-4 rounded-lg"
-          style={{
-            width: "543.68px",
-            height: "236.31px",
-            position: "relative",
-          }}
+          className="bg-[#100F0F] p-4 rounded-lg w-full"
+          style={{ height: "236px", position: "relative" }}
         >
           <div
             ref={containerRef}
@@ -426,30 +422,15 @@ function LineGraph() {
 
       {/* Right Side Table */}
       <div
-        className="flex flex-col items-center"
-        style={{
-          width: "431px",
-          height: "310px",
-          borderRadius: "10px",
-          color: "white",
-          backgroundColor: "#100F0F",
-        }}
+        className="flex flex-col items-center w-[400px] flex-shrink-0 rounded-[10px]"
+        style={{ backgroundColor: "#100F0F", color: "white" }}
       >
         {/* Header Filters */}
-        <div
-          className="my-3"
-          style={{
-            width: "385px",
-            display: "flex",
-            gap: "6px",
-            alignItems: "center",
-          }}
-        >
+        <div className="pt-4 px-4 w-full flex flex-col gap-3">
           <h1
             style={{
-              width: "128px",
               fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: "16px",
               color: "white",
             }}
@@ -458,14 +439,13 @@ function LineGraph() {
           </h1>
           <ul
             style={{
-              width: "251px",
-              height: "28px",
+              width: "100%",
+              height: "32px",
               borderRadius: "8px",
-              backgroundColor: "#181717",
+              backgroundColor: "rgba(255,255,255,0.04)",
               display: "flex",
-              gap: "5px",
-              paddingLeft: "11px",
-              paddingRight: "11px",
+              gap: "4px",
+              padding: "4px",
               margin: 0,
               listStyle: "none",
               alignItems: "center",
@@ -480,16 +460,17 @@ function LineGraph() {
                   textAlign: "center",
                   cursor: "pointer",
                   borderRadius: "6px",
-                  padding: "3px 10px",
+                  padding: "3px 6px",
                   backgroundColor:
                     selectedFilter === filter ? "#002AA8" : "transparent",
                   color: "white",
                   fontFamily: "Inter, sans-serif",
                   fontWeight: 500,
-                  fontSize: "12px",
+                  fontSize: "11px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  transition: "background 0.2s",
                 }}
               >
                 {filter}
@@ -499,8 +480,8 @@ function LineGraph() {
         </div>
 
         {/* Table */}
-        <div className="">
-        <table className="w-[387px] text-white rounded-lg border-separate border-spacing-y-3">
+        <div className="px-4 w-full">
+        <table className="w-full text-white rounded-lg border-separate border-spacing-y-3">
 
             <thead>
               <tr>
@@ -568,27 +549,18 @@ function LineGraph() {
           </table>
         </div>
 
-        <div className="flex justify-end w-full pr-12 mt-[18px] mb-8">
+        <div className="flex justify-end w-full px-4 mt-3 mb-4">
           <button onClick={handleViewAllTransaction}
-            className="border border-white rounded-md flex justify-end items-center ml-5 cursor-pointer"
-            style={{
-              width: "90px",
-              height: "20px",
-              padding: "10px",
-              gap: "10px",
-            }}
+            className="border border-white/30 hover:border-white/60 rounded-md flex items-center gap-2 cursor-pointer transition-colors bg-white/5 hover:bg-white/10"
+            style={{ padding: "6px 14px" }}
           >
-
-
-
-              <h1 className="text-white font-normal text-xs">View All</h1>
-
+            <h1 className="text-white font-normal text-xs">View All</h1>
             <img
               src={ViewAll}
               alt="View All"
               style={{ width: "8.67px", height: "8.67px" }}
             />
-          </button> 
+          </button>
         </div>
       </div>
     </div>

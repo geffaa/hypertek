@@ -1,74 +1,54 @@
 import React, { useState, useRef } from "react";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
-import ChainIcon from "../assets/CreateCollection/ChainIcon.png";
-import BgEffect2 from "../components/common/BgEffect2"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_BASE_URL } from "../../../frontend/src/Config";
+import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 import FullScreenLoader from "../components/common/Spinner";
-
-import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-
-
 
 function UpdateNewsItems() {
   const location = useLocation();
-  // Add this with your other useState declarations
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { newsItem } = location.state || {};
-  console.log("your new itesm are :", newsItem);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [heading, setHeading] = useState(newsItem?.name || "");
+  const [heading, setHeading] = useState(newsItem?.name || newsItem?.heading || "");
   const [description, setDescription] = useState(newsItem?.description || "");
 
+  const fileInputRef = useRef(null);
 
+  const handleDivClick = () => fileInputRef.current?.click();
 
-  const fileInputRef = useRef(null); // <-- ref for hidden input
-
-  const handleDivClick = () => {
-    fileInputRef.current.click(); // <-- triggers input click
-  };
-  const navigate = useNavigate()
-
-  // Handle file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImage(reader.result); // base64 string
-      };
+      reader.onload = () => setSelectedImage(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
-  // Handle drag and drop
   const handleDrop = (event) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImage(reader.result);
-      };
+      reader.onload = () => setSelectedImage(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault(); // allow drop
-  };
+  const handleDragOver = (event) => event.preventDefault();
 
-  const handleCancelButton = () => {
-    navigate("/edit-news")
-  }
-
-
+  const handleCancelButton = () => navigate(-1);
 
   const handleUpdateNews = async () => {
     if (!heading || !description) {
-      alert("Please fill in all fields");
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (!newsItem?._id && !newsItem?.id) {
+      toast.error("News ID is required");
       return;
     }
     setLoading(true);
@@ -77,350 +57,117 @@ function UpdateNewsItems() {
       formData.append("name", heading);
       formData.append("description", description);
       if (selectedImage) {
-        // If the user selected a new image, append it
-        const blob = await (await fetch(selectedImage)).blob(); // convert base64 to blob
+        const blob = await (await fetch(selectedImage)).blob();
         formData.append("image", blob, "news-image.png");
       }
 
-      if (!newsItem.id) {
-        toast.error("News Id is required for testing ")
-      }
-
+      const newsId = newsItem._id || newsItem.id;
       const response = await axios.put(
-        // `http://localhost:4700/api/v1/news/edit/${newsItem.id}`,
-        `${BACKEND_BASE_URL}/api/v1/news/edit/${newsItem.id}`,
+        `${Dashboard_Base_Url}/v1/news/edit/${newsId}`,
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       if (response.status === 200) {
-        toast.success("News Updated Successfully")
-        navigate("/edit-news"); // redirect after success
+        toast.success("News updated successfully");
+        navigate(-1);
       }
     } catch (error) {
       console.error(error);
-      // alert("Failed to update news");
-      toast.error("Failed to update the news")
-    }
-    finally {
-      setLoading(false); // Stop loading always
+      toast.error("Failed to update news");
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (loading) return <FullScreenLoader />;
 
-
-  if (loading) {
-    return <FullScreenLoader />;
-  }
   return (
-    <div className=" min-h-screen w-full bg-black   overflow-hidden">
-      {/* Background Glowing Effects */}
-      <BgEffect2 Xaxis={950} Yaxis={10} />
-      <BgEffect2 Xaxis={400} Yaxis={650} />
-      {/* Content */}
-      <div className="relative z-50">
-        <div className="flex gap-10 mt-[80px] mx-8">
-          {/* left side preview / modal */}
-          <div
-            className="flex  cursor-pointer items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30"
-            style={{
-              width: "456px",
-              height: "440px",
-              borderRadius: "6px",
-              borderStyle: "dashed",
-              boxSizing: "border-box",
-              position: "relative",
-            }}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-            onClick={handleDivClick}
-          >
-            {selectedImage ? (
-              <img
-                src={selectedImage}
-                alt="Preview"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  borderRadius: "6px",
-                }}
-              />
-            ) : (
-              <div
-                style={{
-                  width: "260px",
-                  height: "40px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "0px",
-                }}
-              >
-                {/* icon */}
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "24px",
-                    height: "24px",
-                    borderRadius: "4px",
-                    marginBottom: "1px",
-                  }}
-                >
-                  <img src={uploadIcon} alt="" className="w-[16px] h-[16px]" />
-                </div>
-
-                {/* file input */}
-                <div
-                  style={{
-                    width: "240px",
-                    height: "49px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: "6px",
-                    cursor: "pointer",
-                    position: "relative",
-                  }}
-                >
-                  <input
-                    type="file"
-                    id="file-upload"
-                    ref={fileInputRef} // <-- use the ref here
-                    style={{
-                      opacity: 0,
-                      width: "100%",
-                      height: "100%",
-                      position: "absolute",
-                      cursor: "pointer",
-                    }}
-                    onChange={handleFileChange}
-                  />
-                  <label
-                    htmlFor="file-upload"
-                    style={{
-                      pointerEvents: "none",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    <span className="font-bold text-blue-400">
-                      Click to upload
-                    </span>{" "}
-                    or drag and drop
-                  </label>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* right side - form */}
-          <div
-            className="z-50 relative rounded-lg p-6"
-            style={{
-              width: "456px",
-              // height: "440px",
-              boxSizing: "border-box",
-              position: "relative",
-            }}
-          >
-            <div
-              style={{
-                width: "495px",
-                height: "110px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "14px",
-                boxSizing: "border-box",
-              }}
-            >
-              <div
-                className="flex flex-col justify-start"
-                style={{
-                  width: "495px",
-                  fontFamily: "Inter, sans-serif",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "8px",
-                }}
-              >
-                <h2
-                  className="px-2"
-                  style={{
-                    fontWeight: 600,
-                    fontStyle: "normal",
-                    fontSize: "25px",
-                    lineHeight: "30px",
-                    letterSpacing: "0%",
-                    color: "white",
-                    margin: 0,
-                  }}
-                >
-                  Edit News
-                </h2>
-
-                <p
-                  className="px-2"
-                  style={{
-                    width: "490px",
-                    color: "#FFFFFFAB",
-                    fontWeight: 400,
-                    fontStyle: "normal",
-                    fontSize: "18px",
-                    lineHeight: "24px",
-                    letterSpacing: "0%",
-                    margin: 0,
-                    wordBreak: "break-word",
-                  }}
-                >
-                  Share important updates, announcements, or stories with your audience in real time.
-                </p>
-              </div>
+    <div className="w-full">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Left side — image upload */}
+        <div
+          className="flex items-center justify-center bg-white/5 backdrop-blur-sm border border-dashed border-white/30 rounded-md cursor-pointer flex-shrink-0"
+          style={{ width: "min(456px, 100%)", height: "440px" }}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={handleDivClick}
+        >
+          {selectedImage ? (
+            <img src={selectedImage} alt="Preview" className="w-full h-full object-cover rounded-md" />
+          ) : newsItem?.image ? (
+            <img
+              src={newsItem.image.startsWith("http") ? newsItem.image : `${Image_Base_Url}${newsItem.image}`}
+              alt="Current"
+              className="w-full h-full object-cover rounded-md"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-2">
+              <img src={uploadIcon} alt="" className="w-6 h-6" />
+              <p className="text-white/80 text-sm">
+                <span className="text-blue-400 font-bold">Click to upload</span> or drag and drop
+              </p>
             </div>
-
-            {/* input fields  */}
-
-            <div className="w-[430px] h-[84px] flex flex-col gap-[14px] mt-8 mx-2">
-              <label
-                htmlFor="name"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0%",
-                  color: "white",
-                }}
-              >
-                Heading
-              </label>
-
-              <input
-                type="text"
-                id="name"
-                value={heading}
-                onChange={(e) => setHeading(e.target.value)}
-                placeholder="Add Content"
-                className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
-              />
-            </div>
-
-            {/* second  */}
-
-            {/* Right side textarea */}
-            <div className="w-[430px] mt-8 mx-2 flex flex-col gap-[14px]">
-              <label
-                htmlFor="symbol"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  fontSize: "18px",
-                  lineHeight: "100%",
-                  letterSpacing: "0%",
-                  color: "white",
-                }}
-              >
-                Add News
-              </label>
-
-              <textarea
-                id="symbol"
-                placeholder="Create Name"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="bg-white/10 text-white border border-gray-600 rounded-[4px] focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
-                style={{
-                  width: "451px",
-                  height: "245px",
-                  padding: "13px 15px",
-                  opacity: 1,
-                }}
-              />
-            </div>
-
-          </div>
+          )}
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleFileChange}
+          />
         </div>
 
-        {/* last buttons div  */}
-        <div
-          className="flex mt-16  justify-end mx-8 pt-16 pb-32 relative z-10"
-          style={{
-            opacity: 1,
-            gap: "37px",
-          }}
-        >
-          <button onClick={handleCancelButton}
-            className="border border-white text-white hover:bg-white/10 transition-colors"
-            style={{
-              width: "133px",
-              height: "42px",
-              borderRadius: "6px",
-              gap: "10px",
-              padding: "10px",
-              background: "transparent",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Cancel
-            </span>
-          </button>
-          <button onClick={handleUpdateNews} // add this
-            className="bg-blue-800 hover:bg-blue-700 transition-colors"
-            style={{
-              width: "190px",
-              height: "42px",
-              borderRadius: "6px",
-              gap: "10px",
-              padding: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontStyle: "normal",
-                fontSize: "18px",
-                lineHeight: "100%",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Publish
-            </span>
-          </button>
+        {/* Right side — form */}
+        <div className="flex flex-col gap-5 flex-1 min-w-0">
+          <div>
+            <h2 className="text-white font-semibold text-[25px] leading-tight mb-1">Edit News</h2>
+            <p className="text-white/70 text-[15px]">
+              Update your news content below and publish changes.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="news-heading" className="text-white text-[16px]">Heading</label>
+            <input
+              type="text"
+              id="news-heading"
+              value={heading}
+              onChange={(e) => setHeading(e.target.value)}
+              placeholder="Add Content"
+              className="w-full h-10 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="news-desc" className="text-white text-[16px]">News Content</label>
+            <textarea
+              id="news-desc"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Write news content..."
+              rows={7}
+              className="w-full px-3 py-3 bg-white/10 text-white border border-gray-600 rounded-md focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors resize-none"
+            />
+          </div>
         </div>
       </div>
 
-
-
-
+      {/* Buttons */}
+      <div className="flex justify-end gap-6 mt-8 pb-4">
+        <button
+          type="button"
+          onClick={handleCancelButton}
+          className="border border-white text-white hover:bg-white/10 transition-colors w-[120px] h-[36px] rounded-md cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleUpdateNews}
+          className="bg-blue-800 hover:bg-blue-700 transition-colors text-white w-[120px] h-[36px] rounded-md cursor-pointer"
+        >
+          Update
+        </button>
+      </div>
     </div>
   );
 }

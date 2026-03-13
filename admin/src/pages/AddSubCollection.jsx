@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Dashboard_Base_Url } from "../Config";
 
 function AddSubCollection() {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ function AddSubCollection() {
       }
 
       await axios.post(
-        `https://api-hyper-tek-games.deventiatech.com/api/v1/nft/parent-collection/${parentId}/sub-collection`,
+        `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentId}/sub-collection`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -74,35 +75,6 @@ function AddSubCollection() {
 
   return (
     <div className="mt-8 flex h-[700px] bg-black flex-col">
-      {/* Blur background circles */}
-      <div
-        style={{
-          top: `120px`,
-          left: `320px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(230px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-      <div
-        style={{
-          top: `520px`,
-          left: `950px`,
-          width: "300px",
-          height: "300px",
-          background: "#002AA8",
-          filter: "blur(230px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
 
       {/* Header */}
       <h1 className="font-inter px-4 font-semibold text-[25px] text-white">

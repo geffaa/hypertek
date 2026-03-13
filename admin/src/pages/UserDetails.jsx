@@ -163,48 +163,18 @@ function AddCollection() {
   const isAdmin = userRole === "admin";
 
   return (
-    <div className="flex flex-col min-h-screen bg-black overflow-hidden relative">
-      {/* Background Effects */}
-      <div
-        style={{
-          top: `200px`,
-          left: `400px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
-
-      <div
-        style={{
-          top: `560px`,
-          left: `900px`,
-          width: "250px",
-          height: "250px",
-          background: "#002AA8",
-          filter: "blur(180px)",
-        }}
-        className="absolute rounded-full
-        shadow-[0_0_40px_20px_rgba(59,130,246,0.6),
-                0_0_100px_50px_rgba(59,130,246,0.4),
-                0_0_200px_100px_rgba(59,130,246,0.2)]"
-      ></div>
+    <div className="flex flex-col min-h-full">
 
       {/* Header */}
-      <div className="flex flex-col w-full gap-6 p-6 z-10">
+      <div className="flex flex-col gap-4 mb-8">
         <h1 className="font-inter font-semibold text-[25px] text-white">
           User Details
         </h1>
       </div>
 
       {/* Table Container */}
-      <div className="flex-1 overflow-x-auto p-6 z-10">
-        <table className="min-w-full text-left rounded-lg overflow-hidden">
+      <div className="overflow-x-auto w-full">
+        <table className="w-full text-left">
           <thead>
             <tr className="h-[50px] backdrop-blur-sm">
               <th className="px-6 py-3 text-white font-semibold text-sm tracking-wider">Image</th>

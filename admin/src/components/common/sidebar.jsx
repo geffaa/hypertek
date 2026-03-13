@@ -4,7 +4,6 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import Logo from "../../assets/Sidebar/logo1.png";
 import DashboardImage from "../../assets/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/Sidebar/create1.png";
 import CreateCollection2 from "../../assets/Sidebar/create2.png";
@@ -15,6 +14,8 @@ import TransactionImage from "../../assets/Sidebar/transaction.png";
 import SaleImage from "../../assets/Sidebar/sale.png";
 import SupportImage from "../../assets/Sidebar/support.png";
 import LogoutImage from "../../assets/Sidebar/logout.png";
+
+const Logo = "/logo-t-white.png";
 
 import { Dashboard_Base_Url } from "../../Config";
 
@@ -54,7 +55,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
     );
   };
 
-  const isDashboard = path.endsWith("/dashboard");
+  const isDashboard = path.endsWith("/dashboard") || (adminId && (path === `/${adminId}` || path === `/${adminId}/`));
   const isCreate =
     path.includes("create-collection") ||
     path.includes("edit-collection") ||
@@ -129,22 +130,20 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
   return (
     <div
-      className={`sidebar text-white p-3 bg-[#100F0F] z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
+      className={`sidebar text-white p-3 z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
         ? "translate-x-0"
         : "-translate-x-full lg:translate-x-0"
         }`}
+      style={{ background: "#0a0b18", borderRight: "1px solid rgba(255,255,255,0.06)" }}
       ref={sidebarRef}
     >
       <div className="flex flex-col justify-between h-full">
         <div className="flex-1">
           {/* LOGO */}
           <div className="flex justify-center mt-10 mb-10">
-            <div className="hidden lg:flex items-center gap-2 cursor-pointer">
-              <img src={Logo} alt="logo" className="w-[28px] h-[28px] object-contain flex-shrink-0" />
-              <Link to="https://hyper-tek-games.deventiatech.com" className="flex items-center">
-                <span className="font-inter font-bold text-[15px] pt-[1px]">
-                  HYPER TEK
-                </span>
+            <div className="hidden lg:flex items-center justify-center cursor-pointer">
+              <Link to={import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}>
+                <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
               </Link>
             </div>
           </div>
@@ -424,6 +423,16 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
               </li>
             </Link>
 
+            {/* Website Editor */}
+            <Link to={withAdmin("/website-editor")} onClick={handleLinkClick}>
+              <li className={`menu-item ${path.includes("website-editor") ? "bg-[#002AA8]" : ""}`}>
+                <svg className="w-[20px] h-[20px] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                <span className="pt-[2px]">Website Editor</span>
+              </li>
+            </Link>
+
           </ul>
 
         </div>
@@ -459,12 +468,14 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: normal;
   letter-spacing: 0%;
+}
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .submenu-item {

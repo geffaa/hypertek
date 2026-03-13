@@ -8,9 +8,6 @@ import { Image_Base_Url } from "../../Config";
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
-import BgEffect2 from "../common/BgEffect2";
-
-
 const Header = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();

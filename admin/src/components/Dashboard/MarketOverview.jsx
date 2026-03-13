@@ -45,41 +45,35 @@ function MarketOverview() {
   const filteredRows = allData[filterType];
 
   return (
-    <div className="mt-12 flex my-8 ">
+    <div className="mt-8 flex gap-6 my-8 w-full">
       {/* Left side */}
-      <div className="px-8">
+      <div className="min-w-0" style={{ flex: "0 1 55%" }}>
         {/* Header */}
-        <div
-          className="my-3 flex gap-6 items-center z-50"
-          style={{ width: "431px", height: "28px" }}
-        >
+        <div className="my-3 flex gap-4 items-center flex-wrap">
           <h1
             className="z-10"
             style={{
-              width: "150px",
-              height: "23px",
               fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: "16px",
+              fontWeight: 700,
+              fontSize: "20px",
               color: "white",
+              flexShrink: 0,
             }}
           >
-            Market OverView
+            Market Overview
           </h1>
 
           <ul
             className="relative z-50"
             style={{
-              width: "251px",
-              height: "28px",
-              borderRadius: "8px",
               display: "flex",
-              gap: "5px",
-              paddingLeft: "11px",
-              paddingRight: "11px",
+              gap: "4px",
+              padding: "4px",
               margin: 0,
               listStyle: "none",
               alignItems: "center",
+              backgroundColor: "rgba(255,255,255,0.04)",
+              borderRadius: "8px",
             }}
           >
             {["today", "week", "month", "year"].map((type) => (
@@ -110,8 +104,8 @@ function MarketOverview() {
         </div>
 
         {/* Main Table */}
-     <div className="w-[544px] h-[332px] rounded-[10px] bg-[#100F0F] mt-5 z-50 relative px-8 py-3 opacity-100">
-  <table className="w-[461px] text-white text-sm border-separate border-spacing-y-4">
+     <div className="w-full rounded-[10px] bg-[#100F0F] mt-5 z-50 relative px-6 py-3">
+  <table className="w-full text-white text-sm border-separate border-spacing-y-4">
     <thead>
       <tr className="w-[461px] h-4 opacity-100 gap-[82px]">
         <th className="text-left w-[83px] font-inter font-semibold text-[11px]">
@@ -152,122 +146,28 @@ function MarketOverview() {
       </div>
 
       {/* Right Side */}
-      <div className="flex flex-col gap-10">
-        <div
-          className="flex flex-col justify-center space-y-5 items-center"
-          style={{
-            width: "365px",
-            height: "177px",
-            background: "#100F0F",
-            transform: "rotate(0deg)",
-            opacity: 1,
-          }}
-        >
-          <img
-            src={CreateNews}
-            alt="Create News"
-            style={{
-              width: "231px",
-              height: "108px",
-
-              transform: "rotate(0deg)",
-              opacity: 1,
-            }}
-          />
+      <div className="flex flex-col gap-4 flex-1 flex-shrink-0">
+        {/* Create News card */}
+        <div className="flex flex-col items-center justify-between rounded-[10px] p-4 gap-3" style={{ background: "#100F0F" }}>
+          <img src={CreateNews} alt="Create News" className="w-full max-h-[100px] object-contain" />
           <Link
             to={`/${userData._id}/add-news`}
-            style={{
-              width: "175px",
-              height: "26px",
-              position: "absolute",
-              top: "133px",
-              left: "95px",
-              borderRadius: "4px",
-              backgroundColor: "#002AA8",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              padding: "10px",
-              opacity: 1,
-              transform: "rotate(0deg)",
-              cursor: "pointer",
-            }}
+            className="w-full flex items-center justify-center rounded py-1.5 text-white text-xs font-semibold hover:bg-blue-700 transition"
+            style={{ backgroundColor: "#002AA8", fontFamily: "Inter, sans-serif" }}
           >
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontStyle: "normal", // Semi Bold is handled via weight
-                fontSize: "11px",
-                lineHeight: "16px",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Create News
-            </span>
+            Create News
           </Link>
         </div>
 
-        {/* second card  */}
-        <div
-          className="flex flex-col justify-center items-center"
-          style={{
-            width: "370px",
-            height: "177px",
-            background: "#100F0F",
-            transform: "rotate(0deg)",
-            opacity: 1,
-          }}
-        >
-          <img
-            src={SupportImage}
-            alt="Support"
-            style={{
-              width: "105px",
-              height: "102.9px",
-              position: "absolute",
-              top: "21.12px",
-              left: "132px",
-              transform: "rotate(0deg)",
-              opacity: 1,
-            }}
-          />
-
+        {/* Support card */}
+        <div className="flex flex-col items-center justify-between rounded-[10px] p-4 gap-3" style={{ background: "#100F0F" }}>
+          <img src={SupportImage} alt="Support" className="w-full max-h-[100px] object-contain" />
           <Link
             to={`/${userData._id}/support`}
-            style={{
-              width: "175px",
-              height: "26px",
-              position: "absolute",
-              top: "133px",
-              left: "95px",
-              borderRadius: "4px",
-              backgroundColor: "#002AA8",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              padding: "10px",
-              opacity: 1,
-              transform: "rotate(0deg)",
-              cursor: "pointer",
-            }}
+            className="w-full flex items-center justify-center rounded py-1.5 text-white text-xs font-semibold hover:bg-blue-700 transition"
+            style={{ backgroundColor: "#002AA8", fontFamily: "Inter, sans-serif" }}
           >
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontStyle: "normal", // Semi Bold is handled via weight
-                fontSize: "11px",
-                lineHeight: "16px",
-                letterSpacing: "0%",
-                color: "white",
-              }}
-            >
-              Support
-            </span>
+            Support
           </Link>
         </div>
       </div>
