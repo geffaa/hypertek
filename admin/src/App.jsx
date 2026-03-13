@@ -30,6 +30,7 @@ import EditAdminProfile from "./pages/EditProfile";
 import AddSubCollection from "./pages/AddSubCollection";
 import EditSubCollection from "./pages/EditSubCollection";
 import WebsiteEditor from "./pages/WebsiteEditor";
+import WaitlistPage from "./pages/WaitlistPage";
 
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
             <Route path="notification" element={<NotificationsPage />} />
             <Route path="edit-profile" element={<EditAdminProfile />} />
             <Route path="website-editor" element={<WebsiteEditor />} />
+            <Route path="waitlist" element={<WaitlistPage />} />
           </Route>
         </Route>
 

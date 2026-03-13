@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import FullScreenLoader from "../Components/Common/Spinner";
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import { FiSearch } from "react-icons/fi";
 import TVector from "../assets/images/popular/vector.png";
 import overview1 from "../assets/images/Overview/overview1.jpg";
@@ -297,9 +297,7 @@ function CategoryMarketplace() {
                 <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                   <img
                     src={
-                      item.collection?.image
-                        ? `${BACKEND_BASE_URL}${item.collection.image}`
-                        : overview1
+                      getImageUrl(item.collection?.image) || overview1
                     }
                     alt={item.collection?.name || item.name || "Item"}
                     className="w-full h-full object-cover object-top"
@@ -390,9 +388,7 @@ function CategoryMarketplace() {
                 <div className="w-full h-[160px] overflow-hidden rounded-[12px] bg-gradient-to-b from-[#977C34] to-[#493F26] mb-2">
                   <img
                     src={
-                      item.collection?.image
-                        ? `${BACKEND_BASE_URL}${item.collection.image}`
-                        : overview1
+                      getImageUrl(item.collection?.image) || overview1
                     }
                     alt={item.name}
                     className="w-full h-full object-cover object-top"

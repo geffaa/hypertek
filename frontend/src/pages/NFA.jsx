@@ -10,7 +10,7 @@ import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import symbol from "../assets/images/login/Symbol.svg.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -315,9 +315,7 @@ function NFA() {
                 <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
                   <img
                     src={
-                      item.collection?.image
-                        ? `${BACKEND_BASE_URL}${item.collection.image}`
-                        : popularCollections
+                      getImageUrl(item.collection?.image) || popularCollections
                     }
                     alt={item.collection?.name || "NFA Collection"}
                     className="w-full h-full object-cover object-top "
@@ -426,9 +424,7 @@ function NFA() {
                 >
                   <img
                     src={
-                      item.collection?.image
-                        ? `${BACKEND_BASE_URL}${item.collection.image}`
-                        : popularCollections
+                      getImageUrl(item.collection?.image) || popularCollections
                     }
                     alt={item.collection?.name || item.name}
                     className="w-full h-full object-cover"

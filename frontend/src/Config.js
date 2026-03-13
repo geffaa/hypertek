@@ -15,8 +15,7 @@ const NewsImage_Url = BACKEND_BASE_URL;
 function getImageUrl(imagePath) {
   if (!imagePath) return "";
   if (imagePath.startsWith("http")) return imagePath;
-  // Legacy: /uploads/temp/ paths saved before Cloudinary migration
-  return `${BACKEND_BASE_URL}${imagePath.replace("/uploads/temp/", "/uploads/news/")}`;
+  return `${BACKEND_BASE_URL}${imagePath}`;
 }
 
 export { BACKEND_BASE_URL, STRIPE_PUBLISHABLE_KEY, User_Dashboard_Url, NewsImage_Url, MarketPlace_Url, getImageUrl };

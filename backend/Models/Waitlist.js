@@ -8,6 +8,7 @@ const waitlistSchema = new mongoose.Schema(
     interest:     { type: String, trim: true },
     mustPlay:     { type: String, trim: true },
     crowdfunding: { type: String, enum: ["Yes", "No"] },
+    role: { type: String, enum: ["standard", "early_access", "investor", "crowdfund"], default: "standard" },
   },
   { timestamps: true }
 );

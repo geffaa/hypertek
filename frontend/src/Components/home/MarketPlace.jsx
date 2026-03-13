@@ -5,7 +5,7 @@ import CustomButton4 from "../Buttons/Button4";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { BACKEND_BASE_URL, NewsImage_Url } from "../../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -88,9 +88,7 @@ function PopularCollections() {
               >
                 <img
                   src={
-                    data.collection.image
-                      ? `${NewsImage_Url}${data.collection.image}`
-                      : popularCollections
+                    getImageUrl(data.collection.image) || popularCollections
                   }
                   alt={data.collection.name || "Collection"}
                   className="w-full h-full object-cover"

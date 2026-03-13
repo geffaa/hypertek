@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { BACKEND_BASE_URL } from "../Config";
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import FaceOne from "../assets/images/noActivity1.png";
 import FaceTwo from "../assets/images/noActivity2.png";
 
@@ -864,7 +864,7 @@ function NfaLand() {
       {/* Main Content */}
       <div className="max-w-[918px] mx-auto w-full mt-10 flex flex-col md:flex-row gap-8 px-4">
         <img
-          src={`${BACKEND_BASE_URL}${collection?.image}`}
+          src={getImageUrl(collection?.image)}
           alt={collection?.name}
           className="w-full md:w-[365px] h-[330px] rounded-lg object-cover 
 bg-gradient-to-b from-[#977C34] to-[#493F26] "
@@ -967,7 +967,7 @@ bg-gradient-to-b from-[#977C34] to-[#493F26] "
           >
             <h2 className="text-xl font-bold text-center">Confirm Action</h2>
             <img
-              src={`${BACKEND_BASE_URL}${collection?.image}`}
+              src={getImageUrl(collection?.image)}
               alt={collection?.name}
               className="w-40 h-36 mx-auto my-4 rounded object-cover"
             />
@@ -1025,7 +1025,7 @@ bg-gradient-to-b from-[#977C34] to-[#493F26] "
             <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
             <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
               <img
-                src={`${BACKEND_BASE_URL}${collection?.image}`}
+                src={getImageUrl(collection?.image)}
                 alt={collection?.name}
                 className="w-full h-full object-cover"
               />
