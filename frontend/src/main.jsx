@@ -16,7 +16,7 @@ import { config } from './Wagmi.config.js';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from 'react-hot-toast';
 
-const GOOGLE_CLIENT_ID = "338330586933-u9j6r5kre5a8tbht14pp2jokh7d32qi5.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(

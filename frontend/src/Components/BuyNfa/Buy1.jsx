@@ -23,6 +23,7 @@ import {
 } from "../../Web3/Config";
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import { openTransakOnRamp } from "../../utils/transakUtils";
 import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
@@ -102,6 +103,7 @@ function Buy1() {
   const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
   const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
   const [walletCopied, setWalletCopied] = useState(false);
+  const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
 
   // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
@@ -672,10 +674,12 @@ function Buy1() {
         const priceWei = ethers.parseUnits(String(mintPrice), 6); // USDC uses 6 decimals
 
         if (usdcBalance < priceWei) {
-          toast.error(
-            `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(priceWei, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
-            { id: toastId, duration: 6000 },
-          );
+          toast.dismiss(toastId);
+          setFundModal({
+            needed: ethers.formatUnits(priceWei, 6),
+            have: ethers.formatUnits(usdcBalance, 6),
+            priceUsdc: ethers.formatUnits(priceWei, 6),
+          });
           setLoading(false);
           return;
         }
@@ -843,10 +847,12 @@ function Buy1() {
       console.log("💰 Listing price:", ethers.formatEther(price), "USDC/ETH Equivalent");
 
       if (usdcBalance < price) {
-        toast.error(
-          `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(price, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
-          { id: toastId, duration: 6000 },
-        );
+        toast.dismiss(toastId);
+        setFundModal({
+          needed: ethers.formatUnits(price, 6),
+          have: ethers.formatUnits(usdcBalance, 6),
+          priceUsdc: ethers.formatUnits(price, 6),
+        });
         setLoading(false);
         return;
       }
@@ -1065,6 +1071,44 @@ function Buy1() {
 
   return (
     <div className="flex flex-col w-full mt-14 md:px-24 text-white">
+
+      {/* ── Insufficient USDC — Fund with Card Modal ── */}
+      {fundModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <h3 className="text-lg font-bold text-white mb-2">Insufficient USDC</h3>
+            <p className="text-sm text-gray-400 mb-4">
+              You need <span className="text-white font-semibold">{fundModal.needed} USDC</span> but your wallet only has{" "}
+              <span className="text-white font-semibold">{fundModal.have} USDC</span>.
+            </p>
+            <p className="text-sm text-gray-400 mb-6">
+              Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.
+            </p>
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => {
+                  openTransakOnRamp({
+                    walletAddress: activeAddress,
+                    fiatAmount: String(Math.ceil(parseFloat(fundModal.priceUsdc) * 1.05)),
+                    network: "base",
+                  });
+                  setFundModal(null);
+                }}
+                className="w-full bg-[#002AA8] hover:bg-[#0038d4] transition-colors text-white font-semibold py-3 rounded-xl"
+              >
+                Fund Wallet with Card (Transak)
+              </button>
+              <button
+                onClick={() => setFundModal(null)}
+                className="w-full text-gray-400 hover:text-white transition text-sm py-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Tabs */}
       <div className="flex flex-col w-full mt-14 md:px-24 text-white">
         <div

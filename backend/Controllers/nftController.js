@@ -1016,8 +1016,8 @@ function calculatePaymentDistribution(
   creatorWallet,
   sellerWallet,
 ) {
-  const PLATFORM_FEE_PERCENT = 10;
-  const CREATOR_ROYALTY_PERCENT = 5;
+  const PLATFORM_FEE_PERCENT = 20;
+  const CREATOR_ROYALTY_PERCENT = 4;
   const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
 
   let distribution = {
@@ -1037,7 +1037,7 @@ function calculatePaymentDistribution(
       type: "creator_first_sale",
     });
   } else {
-    // Secondary sales: 5% creator royalty, 10% platform fee, 85% to seller
+    // Secondary sales: 4% creator royalty, 20% platform fee, 76% to seller
     distribution.creatorAmount = (priceETH * CREATOR_ROYALTY_PERCENT) / 100;
     distribution.platformAmount = (priceETH * PLATFORM_FEE_PERCENT) / 100;
     distribution.sellerAmount =
@@ -1047,19 +1047,19 @@ function calculatePaymentDistribution(
       {
         recipient: creatorWallet,
         amount: distribution.creatorAmount,
-        percentage: 5,
+        percentage: 4,
         type: "creator_royalty",
       },
       {
         recipient: platformWallet,
         amount: distribution.platformAmount,
-        percentage: 10,
+        percentage: 20,
         type: "platform_fee",
       },
       {
         recipient: sellerWallet,
         amount: distribution.sellerAmount,
-        percentage: 85,
+        percentage: 76,
         type: "seller_proceeds",
       },
     );
@@ -2318,5 +2318,68 @@ export async function getDashboardStats(req, res) {
       success: false,
       error: err.message
     });
+  }
+}
+
+/**
+ * User NFC Upload
+ * POST /api/v1/nft/user-upload
+ * Allows a logged-in user to upload an NFC into an existing parent collection (category).
+ * No blockchain mint — no royalty rules. No in-game bonus without license (Phase 3).
+ */
+export async function userUploadNFC(req, res) {
+  try {
+    const { parentId, name, description, priceETH } = req.body;
+    const userId = req.user?._id || req.user?.id;
+    const walletAddress = req.user?.WalletAddress;
+
+    if (!parentId || !name) {
+      return res.status(400).json({ success: false, error: "parentId and name are required" });
+    }
+
+    const parent = await NFTSystem.findById(parentId);
+    if (!parent || !parent.isParentCollection) {
+      return res.status(404).json({ success: false, error: "Parent collection not found" });
+    }
+
+    let image;
+    if (req.file) {
+      image = await saveImagePermanently(req.file.path, req.file.filename);
+    } else if (req.body.image) {
+      image = req.body.image;
+    }
+
+    const subCollection = {
+      name,
+      description: description || "",
+      image: image || "",
+      owner: walletAddress || "",
+      listed: false,
+      priceETH: priceETH ? parseFloat(priceETH) : 0,
+      isFirstSale: true,
+      salesHistory: [],
+    };
+
+    parent.subCollections.push(subCollection);
+    await parent.save();
+
+    const added = parent.subCollections[parent.subCollections.length - 1];
+
+    console.log(`✅ User NFC uploaded: ${name} into collection ${parent.collection.name} by ${walletAddress || userId}`);
+
+    return res.status(201).json({
+      success: true,
+      message: "NFC uploaded successfully. It will be visible in the collection. No in-game bonus until license is assigned.",
+      data: {
+        parentId: parent._id,
+        category: parent.category,
+        subCollectionId: added._id,
+        name: added.name,
+        image: added.image,
+      },
+    });
+  } catch (err) {
+    console.error("❌ USER UPLOAD NFC ERROR:", err);
+    return res.status(500).json({ success: false, error: err.message });
   }
 }

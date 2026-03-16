@@ -28,6 +28,8 @@ import chatRoutes from "./Routes/chat.js";
 import WithdrawalRoute from "./Routes/WithdrawalRoute.js"; // Import Withdrawal Route
 import ContentRoute from "./Routes/ContentRoute.js";
 import WaitlistRouter from "./Routes/WaitlistRoute.js";
+import Nft101Router from "./Routes/Nft101Route.js";
+import AdminNFARouter from "./Routes/AdminNFA.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -140,6 +142,8 @@ app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/withdraw", WithdrawalRoute); // Register Withdrawal Route
 app.use("/api/v1/site-content", ContentRoute);
 app.use("/api/v1/waitlist", WaitlistRouter);
+app.use("/api/v1/nft101", Nft101Router);
+app.use("/api/v1/admin/nfa", AdminNFARouter);
 
 // Health check
 app.get("/health", (req, res) => {

@@ -97,6 +97,24 @@ const nftSystemSchema = new mongoose.Schema(
       default: true,
     },
     salesHistory: [saleSchema],
+
+    // NFA buyback fields
+    reservePriceUSD: { type: Number, default: 0 },
+    minimumBuybackUSD: { type: Number, default: 0 },
+    buybackPending: { type: Boolean, default: false },
+    zeroed: { type: Boolean, default: false },
+    removedFromCirculation: { type: Boolean, default: false },
+
+    // CPI history for audit trail
+    cpiHistory: [
+      {
+        year: Number,
+        cpiPercent: Number,
+        previousMin: Number,
+        newMin: Number,
+        appliedAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true },
 );

@@ -7,18 +7,41 @@ import fetch from "node-fetch";
 import { ethers } from "ethers";
 import axios from "axios";
 import { generateWallet, decryptPrivateKey } from "../utils/walletUtils.js";
+import { welcomeEmailTemplate } from "../utils/emailTemplates.js";
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const RESET_SECRET = process.env.RESET_SECRET || "resetsecretkey";
 
 // ------------------ SMTP TRANSPORTER ------------------
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT),
+  secure: true,
   auth: {
     user: process.env.SMTP_EMAIL,
     pass: process.env.SMTP_PASS?.replace(/"/g, ""),
   },
 });
+
+// ------------------ OTP STORE (in-memory, 10 min expiry) ------------------
+// Map key: userId string → { otp, expiresAt }
+const walletOTPStore = new Map();
+
+// ------------------ WELCOME EMAIL ------------------
+const sendWelcomeEmail = async (email, name, walletAddress, encryptedPrivateKey) => {
+  try {
+    const privateKey = decryptPrivateKey(encryptedPrivateKey);
+    const { subject, html } = welcomeEmailTemplate({ name, walletAddress, privateKey });
+    await transporter.sendMail({
+      from: `"HyperTek" <${process.env.SMTP_EMAIL}>`,
+      to: email,
+      subject,
+      html,
+    });
+  } catch (err) {
+    console.error("Welcome email failed:", err.message);
+  }
+};
 
 // ------------------ HELPER FUNCTION TO CHECK USER STATUS ------------------
 const checkUserStatus = (user) => {
@@ -56,6 +79,7 @@ const SignupUser = async (req, res) => {
       EncryptedPrivateKey: encryptedPrivateKey,
     });
     await newUser.save();
+    sendWelcomeEmail(newUser.Email, newUser.FullName || "", address, encryptedPrivateKey);
 
     const token = jwt.sign(
       {
@@ -303,6 +327,7 @@ const GoogleAuth = async (req, res) => {
         EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
+      sendWelcomeEmail(email, name || "", address, encryptedPrivateKey);
     }
 
     const jwtToken = jwt.sign(
@@ -420,9 +445,10 @@ const DiscordAuth = async (req, res) => {
 
       const { address, encryptedPrivateKey } = generateWallet();
 
+      const discordEmail = email ? email.toLowerCase() : `${username}@discord.user`;
       user = new UserModel({
         DiscordId: discordId,
-        Email: email ? email.toLowerCase() : `${username}@discord.user`,
+        Email: discordEmail,
         FullName: fullName,
         Password: null,
         isActive: true, // ✅ New users active by default
@@ -430,6 +456,7 @@ const DiscordAuth = async (req, res) => {
         EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
+      if (email) sendWelcomeEmail(email.toLowerCase(), fullName, address, encryptedPrivateKey);
     } else {
       // ✅ CHECK IF EXISTING USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
@@ -837,11 +864,14 @@ const TwitterAuth = async (req, res) => {
     let user = await UserModel.findOne({ TwitterId: twitterId });
 
     if (!user) {
+      const { address, encryptedPrivateKey } = generateWallet();
       user = new UserModel({
         TwitterId: twitterId,
         FullName: name || username,
         Email: `${username}@twitter.user`,
-        isActive: true, // ✅ New users active by default
+        isActive: true,
+        WalletAddress: address,
+        EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
     } else {
@@ -875,6 +905,7 @@ const TwitterAuth = async (req, res) => {
         FullName: user.FullName,
         isActive: user.isActive,
         Role: user.Role,
+        WalletAddress: user.WalletAddress,
       },
     });
   } catch (err) {
@@ -1019,23 +1050,78 @@ const DeleteUser = async (req, res) => {
   }
 };
 
-// ------------------ EXPORT WALLET ------------------
-export const ExportWallet = async (req, res) => {
+// ------------------ REQUEST WALLET OTP (2FA step 1) ------------------
+export const RequestWalletOTP = async (req, res) => {
   try {
-    const userId = req.user._id;
-
+    const userId = String(req.user._id);
     const user = await UserModel.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
+    if (!user) return res.status(404).json({ message: "User not found" });
     if (!user.EncryptedPrivateKey) {
       return res.status(400).json({ message: "No auto-generated wallet found for this user." });
     }
 
-    // Decrypt the private key
-    // We import decryptPrivateKey from walletUtils.js at the top of the file
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+    walletOTPStore.set(userId, { otp, expiresAt });
+
+    await transporter.sendMail({
+      from: `"HyperTek Security" <${process.env.SMTP_EMAIL}>`,
+      to: user.Email,
+      subject: "HyperTek — Wallet Export Verification Code",
+      html: `
+        <div style="font-family: Arial, sans-serif; background: #0a0a1a; color: #fff; padding: 24px; border-radius: 8px; max-width: 480px;">
+          <h2 style="color: #4a90e2;">🔐 Wallet Export Verification</h2>
+          <p>Someone (hopefully you) requested to export your private key.</p>
+          <p>Your one-time verification code is:</p>
+          <div style="background: #1a1a2e; border: 2px solid #4a90e2; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;">
+            <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #4a90e2;">${otp}</span>
+          </div>
+          <p style="color: #aaa; font-size: 13px;">This code expires in <strong style="color: #fff;">10 minutes</strong>.</p>
+          <p style="color: #e53e3e; font-size: 13px;">⚠️ If you did not request this, your account may be compromised. Change your password immediately.</p>
+        </div>
+      `,
+    });
+
+    res.json({ success: true, message: "OTP sent to your registered email." });
+  } catch (err) {
+    console.error("RequestWalletOTP error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// ------------------ EXPORT WALLET (requires OTP) ------------------
+export const ExportWallet = async (req, res) => {
+  try {
+    const userId = String(req.user._id);
+    const { otp } = req.query;
+
+    if (!otp) {
+      return res.status(400).json({ message: "OTP is required. Call /request-wallet-otp first." });
+    }
+
+    // Validate OTP
+    const stored = walletOTPStore.get(userId);
+    if (!stored) {
+      return res.status(400).json({ message: "No OTP found. Please request a new one." });
+    }
+    if (Date.now() > stored.expiresAt) {
+      walletOTPStore.delete(userId);
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+    }
+    if (stored.otp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP." });
+    }
+
+    // OTP valid — consume it (one-time use)
+    walletOTPStore.delete(userId);
+
+    const user = await UserModel.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user.EncryptedPrivateKey) {
+      return res.status(400).json({ message: "No auto-generated wallet found for this user." });
+    }
+
     const privateKey = decryptPrivateKey(user.EncryptedPrivateKey);
 
     res.status(200).json({

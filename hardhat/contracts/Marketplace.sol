@@ -17,7 +17,7 @@ interface IMyNFT {
 contract Marketplace is ReentrancyGuard {
     address public platformWallet;
     IERC20 public usdc;
-    uint16 public constant PLATFORM_FEE_BPS = 1000; // 10%
+    uint16 public constant PLATFORM_FEE_BPS = 2000; // 20% — HyperTek marketplace commission
     
     struct Listing {
         address seller;
