@@ -13,15 +13,21 @@ if (!to) {
 }
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT),
+  secure: true,
   auth: {
-    user: process.env.SMTP_EMAIL,
+    user: process.env.SMTP_USER || process.env.SMTP_EMAIL,
     pass: process.env.SMTP_PASS?.replace(/"/g, ""),
   },
 });
 
+const smtpPass = process.env.SMTP_PASS?.replace(/"/g, "");
 console.log("🔧 SMTP config:");
+console.log("   Host:", process.env.SMTP_HOST);
+console.log("   Port:", process.env.SMTP_PORT);
 console.log("   From:", process.env.SMTP_EMAIL);
+console.log("   Pass length:", smtpPass?.length, "| First char:", smtpPass?.[0]);
 console.log("   To:", to);
 console.log("");
 

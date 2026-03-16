@@ -15,6 +15,7 @@
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -27,6 +28,11 @@ import SiteContent from "../Models/SiteContent.js";
 import News        from "../Models/News.js";
 import NFTSystem   from "../Models/NFTSystem.js";
 import Nft101      from "../Models/Nft101.js";
+import User        from "../Models/User.js";
+import { Offer }   from "../Models/Offer.js";
+import { Withdrawal } from "../Models/WithdrawalModel.js";
+import { Payment } from "../Models/Payment.js";
+import Activity    from "../Models/ActivityModel.js";
 
 // ─── SiteContent ─────────────────────────────────────────────────────────────
 const SITE_CONTENT = [
@@ -257,9 +263,9 @@ async function seed() {
     const existing = await News.findOne({ heading: article.heading });
     if (existing) { news_skipped++; continue; }
     await News.create(article);
-    console.log(`✅ News: ${article.heading.substring(0, 50)}...`);
     news_created++;
   }
+  if (news_created > 0) console.log(`✅ News: ${news_created} articles created`);
 
   // 3. NFT Collections
   let nft_created = 0, nft_skipped = 0;
@@ -289,15 +295,253 @@ async function seed() {
   }
   if (edu_created > 0) console.log(`✅ NFT 101: ${edu_created} cards created`);
 
+  // 5. Users
+  let users_created = 0, users_skipped = 0;
+  const USERS = [
+    { Email: "alice@hypertek.com",   FullName: "Alice Walker",   Password: "User@1234", Role: "user", Bio: "NFT collector and gaming enthusiast." },
+    { Email: "bob@hypertek.com",     FullName: "Bob Martinez",   Password: "User@1234", Role: "user", Bio: "Blockchain developer and digital artist." },
+    { Email: "charlie@hypertek.com", FullName: "Charlie Kim",    Password: "User@1234", Role: "user", Bio: "Play-to-earn gamer and crypto investor." },
+  ];
+  const createdUsers = [];
+  for (const u of USERS) {
+    const existing = await User.findOne({ Email: u.Email });
+    if (existing) { users_skipped++; createdUsers.push(existing); continue; }
+    const hashed = await bcrypt.hash(u.Password, 10);
+    const user = await User.create({ ...u, Password: hashed });
+    createdUsers.push(user);
+    users_created++;
+  }
+  if (users_created > 0) console.log(`✅ Users: ${users_created} created`);
+
+  // 6. Offers
+  let offers_created = 0, offers_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const nfts = await NFTSystem.find({ isParentCollection: true }).limit(3);
+    const OFFERS = [
+      {
+        serialNumber: "OFFER-001",
+        gameId: nfts[0]?._id?.toString() || "000000000000000000000001",
+        gameTitle: nfts[0]?.collection?.name || "Desert Storm Skin",
+        gameActualPrice: 45,
+        offerPrice: 38,
+        priceDuration: "7 days",
+        userId: createdUsers[0]._id,
+        userName: createdUsers[0].FullName,
+        userEmail: createdUsers[0].Email,
+        ownerId: createdUsers[1]._id?.toString(),
+        ownerName: createdUsers[1].FullName,
+        ownerEmail: createdUsers[1].Email,
+        requestStatus: "pending",
+        paymentStatus: "unpaid",
+      },
+      {
+        serialNumber: "OFFER-002",
+        gameId: nfts[1]?._id?.toString() || "000000000000000000000002",
+        gameTitle: nfts[1]?.collection?.name || "Hyper Assault Rifle",
+        gameActualPrice: 120,
+        offerPrice: 100,
+        priceDuration: "3 days",
+        userId: createdUsers[1]._id,
+        userName: createdUsers[1].FullName,
+        userEmail: createdUsers[1].Email,
+        ownerId: createdUsers[2]._id?.toString(),
+        ownerName: createdUsers[2].FullName,
+        ownerEmail: createdUsers[2].Email,
+        requestStatus: "accepted",
+        paymentStatus: "paid",
+      },
+      {
+        serialNumber: "OFFER-003",
+        gameId: nfts[2]?._id?.toString() || "000000000000000000000003",
+        gameTitle: nfts[2]?.collection?.name || "Commander's Cross",
+        gameActualPrice: 300,
+        offerPrice: 270,
+        priceDuration: "5 days",
+        userId: createdUsers[2]._id,
+        userName: createdUsers[2].FullName,
+        userEmail: createdUsers[2].Email,
+        ownerId: createdUsers[0]._id?.toString(),
+        ownerName: createdUsers[0].FullName,
+        ownerEmail: createdUsers[0].Email,
+        requestStatus: "rejected",
+        paymentStatus: "unpaid",
+      },
+    ];
+    for (const o of OFFERS) {
+      const existing = await Offer.findOne({ serialNumber: o.serialNumber });
+      if (existing) { offers_skipped++; continue; }
+      await Offer.create(o);
+      offers_created++;
+    }
+    if (offers_created > 0) console.log(`✅ Offers: ${offers_created} created`);
+  }
+
+  // 7. Withdrawals
+  let wd_created = 0, wd_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const WITHDRAWALS = [
+      {
+        user: createdUsers[0]._id,
+        amount: 150,
+        type: "crypto",
+        status: "pending",
+        recipientAddress: "0xAbC123456789DeF0000000000000000000000001",
+        token: "USDC",
+        currency: "USD",
+      },
+      {
+        user: createdUsers[1]._id,
+        amount: 500,
+        type: "bank",
+        status: "completed",
+        bankDetails: {
+          accountHolderName: "Bob Martinez",
+          bankName: "Commonwealth Bank",
+          accountNumber: "1234567890",
+          swift: "CTBAAU2S",
+          country: "Australia",
+        },
+        currency: "USD",
+      },
+      {
+        user: createdUsers[2]._id,
+        amount: 80,
+        type: "crypto",
+        status: "rejected",
+        recipientAddress: "0xDeF987654321AbC0000000000000000000000003",
+        token: "USDC",
+        currency: "USD",
+      },
+    ];
+    for (const w of WITHDRAWALS) {
+      const existing = await Withdrawal.findOne({ user: w.user, amount: w.amount, type: w.type });
+      if (existing) { wd_skipped++; continue; }
+      await Withdrawal.create(w);
+      wd_created++;
+    }
+    if (wd_created > 0) console.log(`✅ Withdrawals: ${wd_created} created`);
+  }
+
+  // 8. Payments
+  let pay_created = 0, pay_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const nfts = await NFTSystem.find({ isParentCollection: true }).limit(2);
+    const PAYMENTS = [
+      {
+        userId: createdUsers[0]._id,
+        productId: nfts[0]?._id || new mongoose.Types.ObjectId(),
+        gameTitle: nfts[0]?.collection?.name || "Desert Storm Skin",
+        amount: 4500,
+        currency: "usd",
+        provider: "stripe",
+        transactionId: "pi_seed_001_test",
+        referenceId: "pi_seed_001_test",
+        paymentMethod: "card",
+        status: "succeeded",
+        itemType: "nft",
+        serialNumber: "PAY-SEED-001",
+      },
+      {
+        userId: createdUsers[1]._id,
+        productId: nfts[1]?._id || new mongoose.Types.ObjectId(),
+        gameTitle: nfts[1]?.collection?.name || "Hyper Assault Rifle",
+        amount: 12000,
+        currency: "usd",
+        provider: "crypto",
+        transactionId: "0xSEED_TX_002_HASH",
+        referenceId: "0xSEED_TX_002_HASH",
+        paymentMethod: "USDC",
+        status: "succeeded",
+        itemType: "nft",
+        serialNumber: "PAY-SEED-002",
+      },
+      {
+        userId: createdUsers[2]._id,
+        productId: new mongoose.Types.ObjectId(),
+        gameTitle: "Ghost Recon Operator",
+        amount: 40000,
+        currency: "usd",
+        provider: "stripe",
+        transactionId: "pi_seed_003_test",
+        referenceId: "pi_seed_003_test",
+        paymentMethod: "card",
+        status: "pending",
+        itemType: "nft",
+        serialNumber: "PAY-SEED-003",
+      },
+    ];
+    for (const p of PAYMENTS) {
+      const existing = await Payment.findOne({ transactionId: p.transactionId });
+      if (existing) { pay_skipped++; continue; }
+      await Payment.create(p);
+      pay_created++;
+    }
+    if (pay_created > 0) console.log(`✅ Payments: ${pay_created} created`);
+  }
+
+  // 9. Activities
+  let act_created = 0, act_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const nfts = await NFTSystem.find({ isParentCollection: true }).limit(3);
+    const ACTIVITIES = [
+      {
+        userId: createdUsers[0]._id,
+        name: nfts[0]?.collection?.name || "Desert Storm Skin",
+        type: "buy",
+        buyer: createdUsers[0].FullName,
+        seller: createdUsers[1].FullName,
+        price: 45,
+        itemType: "NFA",
+        itemId: nfts[0]?._id || new mongoose.Types.ObjectId(),
+      },
+      {
+        userId: createdUsers[1]._id,
+        name: nfts[1]?.collection?.name || "Hyper Assault Rifle",
+        type: "sell",
+        buyer: createdUsers[2].FullName,
+        seller: createdUsers[1].FullName,
+        price: 120,
+        itemType: "NFA",
+        itemId: nfts[1]?._id || new mongoose.Types.ObjectId(),
+      },
+      {
+        userId: createdUsers[2]._id,
+        name: nfts[2]?.collection?.name || "Commander's Cross",
+        type: "buy",
+        buyer: createdUsers[2].FullName,
+        seller: createdUsers[0].FullName,
+        price: 300,
+        itemType: "NFA",
+        itemId: nfts[2]?._id || new mongoose.Types.ObjectId(),
+      },
+    ];
+    for (const a of ACTIVITIES) {
+      const existing = await Activity.findOne({ userId: a.userId, name: a.name, type: a.type });
+      if (existing) { act_skipped++; continue; }
+      await Activity.create(a);
+      act_created++;
+    }
+    if (act_created > 0) console.log(`✅ Activities: ${act_created} created`);
+  }
+
   console.log("\n── Summary ──────────────────────────────────────────────────");
   console.log(`📄 SiteContent:    ${sc_created} created,  ${sc_skipped} skipped`);
   console.log(`📰 News:           ${news_created} created,  ${news_skipped} skipped`);
   console.log(`📦 NFT Collections:${nft_created} created,  ${nft_skipped} skipped`);
   console.log(`📚 NFT 101 cards:  ${edu_created} created,  ${edu_skipped} skipped`);
+  console.log(`👤 Users:          ${users_created} created,  ${users_skipped} skipped`);
+  console.log(`📝 Offers:         ${offers_created} created,  ${offers_skipped} skipped`);
+  console.log(`💸 Withdrawals:    ${wd_created} created,  ${wd_skipped} skipped`);
+  console.log(`💳 Payments:       ${pay_created} created,  ${pay_skipped} skipped`);
+  console.log(`📊 Activities:     ${act_created} created,  ${act_skipped} skipped`);
   console.log("─────────────────────────────────────────────────────────────\n");
+  console.log("🔑 Test user credentials:");
+  console.log("   alice@hypertek.com   / User@1234");
+  console.log("   bob@hypertek.com     / User@1234");
+  console.log("   charlie@hypertek.com / User@1234");
 
   await mongoose.disconnect();
-  console.log("✅ Done.");
+  console.log("\n✅ Done.");
 }
 
 seed().catch((err) => {
