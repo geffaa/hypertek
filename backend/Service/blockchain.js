@@ -37,6 +37,13 @@ const MarketplaceAbi = loadABI("Marketplace.json");
 
 // ---------- NETWORK CONFIGURATION ----------
 const NETWORKS = {
+  8453: {
+    name: "Base Mainnet",
+    rpc: process.env.BASE_RPC_URL || "https://mainnet.base.org",
+    privateKey: process.env.PRIVATE_KEY,
+    nftAddress: process.env.MYNFT_ADDRESS,
+    marketAddress: process.env.MARKETPLACE_ADDRESS,
+  },
   84532: {
     name: "Base Sepolia Testnet",
     rpc: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
@@ -50,8 +57,8 @@ const NETWORKS = {
 const instances = {};
 
 function getBlockchain(chainId) {
-  // Default to Base Sepolia if not specified or unknown
-  const id = chainId || 84532; 
+  // Default to Base Mainnet if not specified or unknown
+  const id = chainId || parseInt(process.env.BASE_CHAIN_ID) || 8453;
   const config = NETWORKS[id];
 
   if (!config) {
@@ -86,9 +93,9 @@ function getBlockchain(chainId) {
   return instances[id];
 }
 
-// Initialize default (Base) on startup to catch errors early
+// Initialize default (Base Mainnet) on startup to catch errors early
 try {
-  getBlockchain(84532);
+  getBlockchain(parseInt(process.env.BASE_CHAIN_ID) || 8453);
 } catch (e) {
   console.error("⚠️ Failed to initialize default network:", e.message);
 }
