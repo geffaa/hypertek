@@ -23,6 +23,11 @@ const NEWS_IMAGES = [
   "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
   "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
   "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
+  "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&q=80",
+  "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
+  "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80",
+  "https://images.unsplash.com/photo-1568772585407-9f217f0d0a5a?w=800&q=80",
+  "https://images.unsplash.com/photo-1568772585407-9f217f0d0a5a?w=800&q=80",
 ];
 
 // ── Category images (parent collection banners) ───────────────────────────────
