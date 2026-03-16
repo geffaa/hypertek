@@ -17,6 +17,13 @@ dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
 
 import NFTSystem from "../Models/NFTSystem.js";
+import News from "../Models/News.js";
+
+const NEWS_IMAGES = [
+  "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+  "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
+];
 
 // ── Category images (parent collection banners) ───────────────────────────────
 const CATEGORY_IMAGES = {
@@ -137,9 +144,20 @@ async function patchImages() {
     }
   }
 
+  // ── Patch News images ──
+  const newsDocs = await News.find({});
+  let newsUpdated = 0;
+  for (const [i, doc] of newsDocs.entries()) {
+    if (!doc.image || doc.image.startsWith("/uploads/")) {
+      doc.image = NEWS_IMAGES[i % NEWS_IMAGES.length];
+      await doc.save();
+      newsUpdated++;
+    }
+  }
+
   console.log(`\n── Summary ───────────────────────────────────`);
-  console.log(`📸 Updated: ${updated} collections`);
-  console.log(`⏭️  Skipped: ${skipped} collections`);
+  console.log(`📸 NFT collections updated: ${updated}, skipped: ${skipped}`);
+  console.log(`📰 News images updated: ${newsUpdated}`);
   console.log(`──────────────────────────────────────────────\n`);
 
   await mongoose.disconnect();
