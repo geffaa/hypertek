@@ -15,6 +15,7 @@ import {
   DeleteUser,
   GetAdminByAdminId,
   ExportWallet,
+  RequestWalletOTP,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
@@ -43,7 +44,9 @@ Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
 Route.delete("/delete/:userId", DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
-// ✅ Export private key (protected route)
+// ✅ Step 1: Request OTP for wallet export (sends email)
+Route.post("/user/request-wallet-otp", auth, RequestWalletOTP);
+// ✅ Step 2: Export private key — requires ?otp=XXXXXX
 Route.get("/user/export-wallet", auth, ExportWallet);
 // ✅ Get all users (admin only)
 Route.get("/users", GetAllUsers);

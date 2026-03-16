@@ -41,6 +41,7 @@ import {
   getOwnedSubCollectionsOnly,
   getListedSubCollections,
   getDashboardStats,
+  userUploadNFC,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -190,6 +191,14 @@ NFTRouter.get(
   "/user/listed-subs/:walletAddress",
   authMiddleware(),
   getListedSubCollections
+);
+
+// User NFC upload (no mint, no license, no in-game bonus until Phase 3)
+NFTRouter.post(
+  "/user-upload",
+  authMiddleware("user"),
+  uploadTemp.single("image"),
+  userUploadNFC
 );
 
 export default NFTRouter;

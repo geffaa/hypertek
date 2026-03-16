@@ -19,7 +19,6 @@ function EditProfile() {
 
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
 
-  const walletAddress = "0xc416a645...b21a";
   const [copied, setCopied] = useState(false);
 
   console.log("your login user in profile :", user);
@@ -85,6 +84,8 @@ function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+
+  const walletAddress = userData?.WalletAddress || safeUserData?.WalletAddress || "";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(walletAddress);
@@ -248,24 +249,23 @@ function EditProfile() {
 
               <div className="mt-3 text-white max-w-full px-4">
                 <h2 className="text-lg md:text-xl font-semibold truncate">{name}</h2>
-                <div className="text-xs sm:text-sm text-gray-400 flex items-center justify-center gap-2 mt-1">
-                  <span className="truncate max-w-[150px] sm:max-w-none">
-                    {safeUserData.DiscordId ||
-                      safeUserData.GoogleId ||
-                      safeUserData.id ||
-                      "null"}
-                  </span>
-                  <button
-                    onClick={handleCopy}
-                    className="text-gray-400 hover:text-white transition flex-shrink-0"
-                    title="Copy to clipboard"
-                  >
-                    <FiCopy className="w-4 h-4" />
-                  </button>
-                  {copied && (
-                    <span className="text-green-400 text-[10px] whitespace-nowrap">Copied!</span>
-                  )}
-                </div>
+                {walletAddress && (
+                  <div className="mt-2 flex items-center justify-center gap-2">
+                    <span className="text-xs text-gray-400 font-mono">
+                      {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+                    </span>
+                    <button
+                      onClick={handleCopy}
+                      className="text-gray-400 hover:text-white transition flex-shrink-0"
+                      title="Copy wallet address"
+                    >
+                      <FiCopy className="w-4 h-4" />
+                    </button>
+                    {copied && (
+                      <span className="text-green-400 text-[10px] whitespace-nowrap">Copied!</span>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -394,6 +394,40 @@ function EditProfile() {
                 className={inputClass}
               />
             </div>
+
+            {/* Wallet Section */}
+            {walletAddress && (
+              <div className="w-full max-w-md">
+                <label className="block text-white font-bold text-[18px] md:text-[20.97px] leading-[100%] my-5">
+                  Your Wallet
+                </label>
+                <div className="bg-[#0a0a1a] border border-white/10 rounded-lg p-4 space-y-3">
+                  <div>
+                    <p className="text-xs text-gray-400 mb-1">Wallet Address</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-white font-mono break-all">{walletAddress}</span>
+                      <button
+                        type="button"
+                        onClick={handleCopy}
+                        className="text-gray-400 hover:text-white transition flex-shrink-0"
+                        title="Copy address"
+                      >
+                        <FiCopy className="w-4 h-4" />
+                      </button>
+                      {copied && <span className="text-green-400 text-xs">Copied!</span>}
+                    </div>
+                  </div>
+                  <a
+                    href={`https://basescan.org/address/${walletAddress}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-400 hover:text-blue-300 transition"
+                  >
+                    View on BaseScan →
+                  </a>
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-center w-full my-12 md:my-16">
               <div className="w-full max-w-md">

@@ -4,7 +4,9 @@ import nodemailer from "nodemailer";
 
 // ─── Email helper ──────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT),
+  secure: true,
   auth: {
     user: process.env.SMTP_EMAIL,
     pass: process.env.SMTP_PASS?.replace(/"/g, ""),

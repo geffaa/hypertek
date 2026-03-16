@@ -12,7 +12,7 @@ async function main() {
   console.log("🚀 Starting deployment...\n");
 
   const [deployer] = await ethers.getSigners();
-  const PLATFORM_WALLET = "0x7e9677AD1D837DD31b094c0B4484bB189b2739F5";
+  const PLATFORM_WALLET = process.env.BASE_PLATFORM_WALLET;
   console.log("📍 Deploying contracts with account:", deployer.address);
   console.log("💰 Account balance:", ethers.formatEther(await ethers.provider.getBalance(deployer.address)), "ETH\n");
 
@@ -30,7 +30,7 @@ async function main() {
   // 2. Deploy Marketplace Contract
   // ========================================
   console.log("\n📦 Deploying Marketplace contract...");
-  const usdcAddress = process.env.IMMUTABLE_USDC_ADDRESS || "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE"; // Mock USDC for Testing
+  const usdcAddress = process.env.USDC_ADDRESS;
   const Marketplace = await ethers.getContractFactory("Marketplace");
   const marketplace = await Marketplace.deploy(PLATFORM_WALLET, usdcAddress); // Platform wallet, USDC address
   await marketplace.waitForDeployment();

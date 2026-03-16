@@ -89,6 +89,7 @@ import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
 import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
 import Withdraw from "./pages/DashboardPages/Withdraw";
+import UploadNFC from "./pages/DashboardPages/UploadNFC";
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -132,6 +133,7 @@ function AppWrapper() {
     "/dashboard/add-nfts",
     "/dashboard/add-user-collection",
     "/dashboard/withdraw",
+    "/dashboard/upload-nfc",
   ];
 
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
@@ -238,6 +240,7 @@ function AppWrapper() {
                 element={<AddUserCollection />}
               />
               <Route path="withdraw" element={<Withdraw />} />
+              <Route path="upload-nfc" element={<UploadNFC />} />
             </Route>
 
             {/* Maintenance bypass — accessible even when maintenance mode is on */}
