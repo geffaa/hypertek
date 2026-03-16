@@ -127,7 +127,37 @@ const NEWS_DATA = [
   {
     heading: "Understanding the HyperTek Buy-Back Guarantee",
     description: "Every NFA (Non-Fungible Asset) on HyperTek comes with a guaranteed minimum buy-back value. This means if you can't sell your asset at or above its reserve price, HyperTek will buy it back at the guaranteed minimum, adjusted for CPI each year.",
-    image: "/uploads/news/news-placeholder.jpg",
+    image: "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=800&q=80",
+    status: "active",
+  },
+  {
+    heading: "Season 1 Specialists Collection — Limited Supply",
+    description: "The first wave of Specialist NFAs is now live. Ghost Recon Operators, Cyber Medics, and Sniper Aces are available in limited quantities. Each Specialist comes with unique in-game abilities and full buy-back protection.",
+    image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&q=80",
+    status: "active",
+  },
+  {
+    heading: "HyperTek Integrates Transak for Easy Crypto On-Ramp",
+    description: "No crypto wallet? No problem. HyperTek now supports Transak — purchase USDC directly with your credit or debit card and start buying NFAs instantly. Your wallet is created automatically when you sign up.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
+    status: "active",
+  },
+  {
+    heading: "Spaceships Category Now Open — Own Your Fleet",
+    description: "Command the skies with HyperTek's Spaceship NFAs. From the Viper Fighter Mk1 to the Phantom Stealth Ship, each vessel is a tradeable asset with real value and guaranteed buy-back protection for NFA holders.",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80",
+    status: "active",
+  },
+  {
+    heading: "Annual CPI Adjustment: Protecting Your Asset Value",
+    description: "HyperTek announces its commitment to annual CPI-based adjustments on all NFA minimum buy-back values. This ensures your assets retain real purchasing power over time, making HyperTek NFAs a store of value as well as a gaming asset.",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&q=80",
+    status: "active",
+  },
+  {
+    heading: "Racing Vehicles Drop: Build Your Championship Team",
+    description: "Five new Racing Vehicle NFCs are now on the marketplace — from the HyperBike GT to the Combat Trike. Collect, trade, and race your way to the top of the HyperTek championship leaderboard.",
+    image: "https://images.unsplash.com/photo-1568772585407-9f217f0d0a5a?w=800&q=80",
     status: "active",
   },
 ];
