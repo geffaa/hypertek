@@ -54,6 +54,7 @@ const io = new Server(server, {
       "http://localhost:3000",
       "https://hyper-tek-games.deventiatech.com",
       "https://admin-hyper-tek-game.deventiatech.com",
+      "https://admin.hypertek100.com",
       "https://hypertek100.com",
       "https://www.hypertek100.com",
     ],
@@ -83,6 +84,7 @@ app.use(
         "https://hyper-tek-games.deventiatech.com",
         "https://www.hyper-tek-games.deventiatech.com",
         "https://admin-hyper-tek-game.deventiatech.com",
+        "https://admin.hypertek100.com",
       ];
       // Allow requests with no origin (mobile apps, curl, etc)
       if (!origin || allowedOrigins.includes(origin)) {
