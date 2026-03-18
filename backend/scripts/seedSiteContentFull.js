@@ -72,7 +72,7 @@ const SECTIONS = [
     {
         sectionKey: "marketplace_banner",
         sectionLabel: "Marketplace Banner",
-        pageGroup: "home",
+        pageGroup: "marketplace",
         fields: [
             { key: "heading", label: "Banner Heading", type: "text", value: "A New Era Dawns in Hyper Tek" },
             {
@@ -89,7 +89,7 @@ const SECTIONS = [
     {
         sectionKey: "profile_banner",
         sectionLabel: "Profile Banner",
-        pageGroup: "home",
+        pageGroup: "profile",
         fields: [
             { key: "background_image", label: "Banner Background Image", type: "image", value: "" },
         ],
