@@ -49,6 +49,10 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
+          VITE_BACKEND_URL: https://api.hypertek100.com
+          VITE_FRONTEND_URL: https://www.hypertek100.com
+          VITE_ADMIN_URL: https://admin.hypertek100.com
+          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
 
       # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
@@ -60,6 +64,9 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
+          VITE_BACKEND_URL: https://api.hypertek100.com
+          VITE_FRONTEND_URL: https://www.hypertek100.com
+          VITE_ADMIN_URL: https://admin.hypertek100.com
 
       # ── Upload build artifacts for deploy job ──
       - name: 📤 Upload frontend build
