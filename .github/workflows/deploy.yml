@@ -15,7 +15,7 @@ on:
 
 env:
   NODE_VERSION: "20"
-  DEPLOY_DIR: /var/www/hyper-tek-game
+  DEPLOY_DIR: /var/www/hypertek
   FRONTEND_WEB_ROOT: /usr/share/nginx/html/hyper-tekgame
   ADMIN_WEB_ROOT: /usr/share/nginx/html/hyper-tekgame-admin
   BACKEND_PORT: 4700
