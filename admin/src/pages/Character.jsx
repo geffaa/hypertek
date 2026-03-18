@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import FullScreenLoader from "../components/common/Spinner";
-import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
+import { Dashboard_Base_Url, getImageUrl } from "../Config";
 
 function Character() {
   const navigate = useNavigate();
@@ -169,9 +169,7 @@ function Character() {
                 <td className="px-6 py-4">
                   <img
                     src={
-                      char.image
-                        ? `${Image_Base_Url}${char.image}`
-                        : Collectionimage
+                      getImageUrl(char.image) || Collectionimage
                     }
                     className="w-12 h-12 rounded border border-white/10"
                     alt=""

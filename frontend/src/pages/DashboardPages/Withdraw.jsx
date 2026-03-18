@@ -7,6 +7,7 @@ import { useAccount, useWriteContract, useWaitForTransactionReceipt, usePublicCl
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEmailWallet } from '../../hooks/useEmailWallet';
 import { BACKEND_BASE_URL } from '../../Config';
+import { openTransakOnRamp, openTransakOffRamp } from '../../utils/transakUtils';
 
 // Simple Icons
 import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
@@ -382,65 +383,11 @@ const Withdraw = () => {
         }
     };
 
-    // ── Transak Bank Withdrawal (popup — works with VPN) ───────────
-    const handleBankWithdraw = () => {
-        const walletAddress = wagmiAddress;
-        const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
-
-        const params = new URLSearchParams({
-            productsAvailed: 'SELL',
-            cryptoCurrencyCode: 'USDC',
-            defaultFiatCurrency: 'USD',
-            themeColor: '3b82f6',
-        });
-
-        const isStaging = (import.meta.env.VITE_TRANSAK_ENVIRONMENT || 'STAGING').toUpperCase() === 'STAGING';
-
-        if (apiKey) {
-            params.set('apiKey', apiKey);
-            params.set('environment', isStaging ? 'STAGING' : 'PRODUCTION');
-            // params.set('network', 'immutablezkevm');
-        }
-        if (walletAddress) params.set('walletAddress', walletAddress);
-
-        const baseUrl = isStaging ? 'https://global-stg.transak.com/' : 'https://global.transak.com/';
-        const url = `${baseUrl}?${params.toString()}`;
-
-        const w = 460, h = 700;
-        const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
-        const top = Math.round(window.screenY + (window.outerHeight - h) / 2);
-        window.open(url, 'transak_sell', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
-    };
+    // ── Transak Bank Withdrawal (popup) ────────────────────────────
+    const handleBankWithdraw = () => openTransakOffRamp({ walletAddress: wagmiAddress });
 
     // ── Transak On-Ramp (Buy crypto with fiat) ─────────────────────
-    const handleTransakOnRamp = () => {
-        const walletAddress = wagmiAddress;
-        const apiKey = import.meta.env.VITE_TRANSAK_API_KEY;
-
-        const params = new URLSearchParams({
-            productsAvailed: 'BUY',
-            cryptoCurrencyCode: 'USDC',
-            defaultFiatCurrency: 'USD',
-            themeColor: '3b82f6',
-        });
-
-        const isStaging = (import.meta.env.VITE_TRANSAK_ENVIRONMENT || 'STAGING').toUpperCase() === 'STAGING';
-
-        if (apiKey) {
-            params.set('apiKey', apiKey);
-            params.set('environment', isStaging ? 'STAGING' : 'PRODUCTION');
-            // params.set('network', 'immutablezkevm');
-        }
-        if (walletAddress) params.set('walletAddress', walletAddress);
-
-        const baseUrl = isStaging ? 'https://global-stg.transak.com/' : 'https://global.transak.com/';
-        const url = `${baseUrl}?${params.toString()}`;
-
-        const w = 460, h = 700;
-        const left = Math.round(window.screenX + (window.outerWidth - w) / 2);
-        const top = Math.round(window.screenY + (window.outerHeight - h) / 2);
-        window.open(url, 'transak_buy', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
-    };
+    const handleTransakOnRamp = () => openTransakOnRamp({ walletAddress: wagmiAddress });
 
     // Derived State for Display
     // Unified Logic for ALL Wallets (MetaMask, Immutable, etc.)

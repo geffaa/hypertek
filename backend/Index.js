@@ -28,6 +28,8 @@ import chatRoutes from "./Routes/chat.js";
 import WithdrawalRoute from "./Routes/WithdrawalRoute.js"; // Import Withdrawal Route
 import ContentRoute from "./Routes/ContentRoute.js";
 import WaitlistRouter from "./Routes/WaitlistRoute.js";
+import Nft101Router from "./Routes/Nft101Route.js";
+import AdminNFARouter from "./Routes/AdminNFA.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -52,6 +54,7 @@ const io = new Server(server, {
       "http://localhost:3000",
       "https://hyper-tek-games.deventiatech.com",
       "https://admin-hyper-tek-game.deventiatech.com",
+      "https://admin.hypertek100.com",
       "https://hypertek100.com",
       "https://www.hypertek100.com",
     ],
@@ -81,6 +84,7 @@ app.use(
         "https://hyper-tek-games.deventiatech.com",
         "https://www.hyper-tek-games.deventiatech.com",
         "https://admin-hyper-tek-game.deventiatech.com",
+        "https://admin.hypertek100.com",
       ];
       // Allow requests with no origin (mobile apps, curl, etc)
       if (!origin || allowedOrigins.includes(origin)) {
@@ -140,6 +144,8 @@ app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/withdraw", WithdrawalRoute); // Register Withdrawal Route
 app.use("/api/v1/site-content", ContentRoute);
 app.use("/api/v1/waitlist", WaitlistRouter);
+app.use("/api/v1/nft101", Nft101Router);
+app.use("/api/v1/admin/nfa", AdminNFARouter);
 
 // Health check
 app.get("/health", (req, res) => {

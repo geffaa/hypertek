@@ -18,3 +18,8 @@
 
 # Hardhat coverage reports
 /coverage
+
+# Sensitive — never commit
+.env
+deployment.json
+/abis
