@@ -53,6 +53,7 @@ jobs:
           VITE_FRONTEND_URL: https://www.hypertek100.com
           VITE_ADMIN_URL: https://admin.hypertek100.com
           VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
 
       # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
@@ -122,12 +123,13 @@ jobs:
           ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
             "sudo chown -R ubuntu:ubuntu /var/www/hypertek"
 
-      # ── Deploy backend code (excluding node_modules and .env) ──
+      # ── Deploy backend code (excluding node_modules, .env, and uploads) ──
       - name: 📤 Deploy backend code to EC2
         run: |
           rsync -avz --delete \
             --exclude 'node_modules' \
             --exclude 'Config/.env' \
+            --exclude 'uploads' \
             -e "ssh -i ~/.ssh/deploy_key" \
             backend/ \
             ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/hypertek/backend/
