@@ -138,6 +138,7 @@ jobs:
           rsync -avz --delete \
             --exclude 'node_modules' \
             --exclude 'Config/.env' \
+            --exclude '.env' \
             --exclude 'uploads' \
             -e "ssh -i ~/.ssh/deploy_key" \
             backend/ \
