@@ -107,11 +107,12 @@ jobs:
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
       # ── Pull latest backend code on server ──
-      - name: � Pull latest code on EC2
+      - name: 📥 Pull latest code on EC2
         run: |
           ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             set -e
-            echo "📥 Pulling latest code..."
+            echo "📥 Fixing permissions & pulling latest code..."
+            sudo chown -R ubuntu:ubuntu /var/www/hypertek
             cd /var/www/hypertek
             git fetch origin main
             git reset --hard origin/main
