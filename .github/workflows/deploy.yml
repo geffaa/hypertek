@@ -1,9 +1,8 @@
 # =============================================================
 # HyperTek — GitHub Actions CI/CD Pipeline
-# Replaces old Jenkinsfile from previous developer
 # =============================================================
-# Trigger: Push to 'main' branch
-# Strategy: Build on GitHub runner → Deploy to AWS EC2
+# Trigger: Push to 'main' branch or manual
+# Strategy: Build frontend/admin on GitHub runner → Deploy to EC2
 # =============================================================
 
 name: 🚀 Deploy HyperTek
@@ -16,13 +15,11 @@ on:
 env:
   NODE_VERSION: "20"
   DEPLOY_DIR: /var/www/hypertek
-  FRONTEND_WEB_ROOT: /usr/share/nginx/html/hyper-tekgame
-  ADMIN_WEB_ROOT: /usr/share/nginx/html/hyper-tekgame-admin
-  BACKEND_PORT: 4700
 
 jobs:
   # ─────────────────────────────────────────────
   # Job 1: Build Frontend & Admin on GitHub Runner
+  # (saves EC2 RAM — t3.small only has 2GB)
   # ─────────────────────────────────────────────
   build:
     name: 🔨 Build Frontend & Admin
@@ -53,7 +50,7 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
 
-      # ── Build Admin Frontend ──
+      # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
         working-directory: admin
         run: npm ci --legacy-peer-deps
@@ -64,7 +61,7 @@ jobs:
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
 
-      # ── Upload build artifacts ──
+      # ── Upload build artifacts for deploy job ──
       - name: 📤 Upload frontend build
         uses: actions/upload-artifact@v4
         with:
@@ -89,9 +86,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-
       - name: 📥 Download frontend build
         uses: actions/download-artifact@v4
         with:
@@ -112,99 +106,84 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
-      # ── Deploy Frontend builds via SCP ──
-      - name: 📤 Upload frontend build to EC2
+      # ── Pull latest backend code on server ──
+      - name: � Pull latest code on EC2
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "sudo mkdir -p ${{ env.FRONTEND_WEB_ROOT }} && sudo chown -R ${{ secrets.EC2_USER }}:${{ secrets.EC2_USER }} ${{ env.FRONTEND_WEB_ROOT }}"
+          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            set -e
+            echo "📥 Pulling latest code..."
+            cd /var/www/hypertek
+            git fetch origin main
+            git reset --hard origin/main
+          EOF
+
+      # ── Upload frontend dist → /var/www/hypertek/frontend/dist ──
+      - name: 📤 Deploy frontend build to EC2
+        run: |
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
             frontend-dist/ \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ env.FRONTEND_WEB_ROOT }}/
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/hypertek/frontend/dist/
 
-      - name: 📤 Upload admin build to EC2
+      # ── Upload admin dist → /var/www/hypertek/admin/dist ──
+      - name: 📤 Deploy admin build to EC2
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-            "sudo mkdir -p ${{ env.ADMIN_WEB_ROOT }} && sudo chown -R ${{ secrets.EC2_USER }}:${{ secrets.EC2_USER }} ${{ env.ADMIN_WEB_ROOT }}"
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
             admin-dist/ \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:${{ env.ADMIN_WEB_ROOT }}/
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/hypertek/admin/dist/
 
-      # ── Deploy Backend ──
-      - name: 🔧 Deploy backend & restart services
+      # ── Install backend deps & restart services ──
+      - name: 🔧 Install backend & restart services
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'DEPLOY_SCRIPT'
+          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             set -e
 
             echo "═══════════════════════════════════════"
-            echo "  🚀 HyperTek Deployment Starting..."
+            echo "  🚀 HyperTek Deployment"
             echo "═══════════════════════════════════════"
-
-            DEPLOY_DIR="${{ env.DEPLOY_DIR }}"
-            BACKEND_DIR="$DEPLOY_DIR/backend"
-
-            # ── Ensure deploy directory exists ──
-            sudo mkdir -p $DEPLOY_DIR
-            sudo chown -R $USER:$USER $DEPLOY_DIR
-
-            # ── Pull latest code ──
-            if [ -d "$DEPLOY_DIR/.git" ]; then
-              echo "📥 Pulling latest code..."
-              cd $DEPLOY_DIR
-              git fetch origin main
-              git reset --hard origin/main
-            else
-              echo "📥 Cloning repository..."
-              git clone --branch main --single-branch git@github.com:${{ github.repository }}.git $DEPLOY_DIR
-            fi
 
             # ── Install backend dependencies ──
             echo "📦 Installing backend dependencies..."
-            cd $BACKEND_DIR
+            cd /var/www/hypertek/backend
             npm ci --legacy-peer-deps --omit=dev || npm install --legacy-peer-deps --omit=dev
 
             # ── Restart backend with PM2 ──
             echo "🔄 Restarting backend..."
-            if pm2 describe hyper-tek-backend > /dev/null 2>&1; then
-              pm2 restart hyper-tek-backend
+            if pm2 describe hypertek-backend > /dev/null 2>&1; then
+              pm2 restart hypertek-backend
             else
-              cd $BACKEND_DIR
-              PORT=${{ env.BACKEND_PORT }} NODE_ENV=production pm2 start index.js --name hyper-tek-backend
+              PORT=4700 NODE_ENV=production pm2 start index.js --name hypertek-backend
               pm2 save
             fi
 
-            # ── Fix ownership for nginx ──
-            echo "🔧 Fixing file permissions..."
-            sudo chown -R www-data:www-data ${{ env.FRONTEND_WEB_ROOT }} || true
-            sudo chown -R www-data:www-data ${{ env.ADMIN_WEB_ROOT }} || true
-
-            # ── Reload Nginx (graceful, no downtime) ──
+            # ── Reload Nginx ──
             echo "🔄 Reloading Nginx..."
             sudo nginx -t && sudo systemctl reload nginx
 
             echo ""
             echo "═══════════════════════════════════════"
-            echo "  ✅ Deployment completed successfully!"
+            echo "  ✅ Deployment completed!"
             echo "═══════════════════════════════════════"
-          DEPLOY_SCRIPT
+          EOF
 
       # ── Health Check ──
       - name: 🏥 Health check
         run: |
-          echo "Waiting 10 seconds for services to stabilize..."
+          echo "Waiting 10s for services to stabilize..."
           sleep 10
 
-          # Check frontend
-          FRONTEND_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://www.hypertek100.com || echo "000")
-          echo "Frontend status: $FRONTEND_STATUS"
+          FRONTEND=$(curl -s -o /dev/null -w "%{http_code}" https://www.hypertek100.com || echo "000")
+          ADMIN=$(curl -s -o /dev/null -w "%{http_code}" https://admin.hypertek100.com || echo "000")
+          API=$(curl -s -o /dev/null -w "%{http_code}" https://api.hypertek100.com || echo "000")
 
-          # Check backend API
-          BACKEND_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.hypertek100.com || echo "000")
-          echo "Backend API status: $BACKEND_STATUS"
+          echo "Frontend:  $FRONTEND"
+          echo "Admin:     $ADMIN"
+          echo "API:       $API"
 
-          if [ "$FRONTEND_STATUS" = "000" ] && [ "$BACKEND_STATUS" = "000" ]; then
-            echo "⚠️ Warning: Both services unreachable. Check DNS/SSL configuration."
+          if [ "$FRONTEND" = "000" ] && [ "$API" = "000" ]; then
+            echo "⚠️  Services unreachable — check server"
+            exit 1
           else
-            echo "✅ Services are responding"
+            echo "✅ Services are responding!"
           fi
 
       - name: 🧹 Cleanup SSH key
