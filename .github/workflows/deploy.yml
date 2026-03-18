@@ -159,7 +159,7 @@ jobs:
             # ── Install backend dependencies ──
             echo "📦 Installing backend dependencies..."
             cd /var/www/hypertek/backend
-            npm ci --legacy-peer-deps --omit=dev || npm install --legacy-peer-deps --omit=dev
+            npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
             # ── Restart backend with PM2 ──
             echo "🔄 Restarting backend..."
