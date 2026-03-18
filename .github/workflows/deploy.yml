@@ -113,6 +113,7 @@ jobs:
             set -e
             echo "📥 Fixing permissions & pulling latest code..."
             sudo chown -R ubuntu:ubuntu /var/www/hypertek
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2>/dev/null
             cd /var/www/hypertek
             git fetch origin main
             git reset --hard origin/main
