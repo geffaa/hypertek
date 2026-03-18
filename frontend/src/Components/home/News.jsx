@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import CustomButton from "../Buttons/Button1";
 import { Link, useNavigate } from "react-router-dom";
 import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
 import { useEffect, useState } from "react";
@@ -118,7 +117,9 @@ export default function News() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <Link to="/news">
-            <CustomButton text="View More" />
+            <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
+              View More
+            </button>
           </Link>
         </motion.div>
 
@@ -234,7 +235,9 @@ export default function News() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <Link to="/news">
-              <CustomButton text="More News" />
+              <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
+                More News
+              </button>
             </Link>
           </motion.div>
         </div>

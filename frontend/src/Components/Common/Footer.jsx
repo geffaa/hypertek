@@ -1,129 +1,102 @@
 import React from "react";
-const Logo = "/logo-white.png";
-import TelegramImg from "../../assets/images/telegram.png";
-import SkypeImg from "../../assets/images/skipe.png";
-import DiscordImg from "../../assets/images/discard.png";
 import { Link } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaTiktok, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
+const Logo = "/logo-white.png";
 const currentYear = new Date().getFullYear();
 
-function Footer() {
-  const menuItems = [
-    { name: "Market Place", path: "/market-place" },
-    { name: "News", path: "/news" },
-    { name: "WhitePapers", path: "/whitepapers" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Disclaimer", path: "/disclaimer" },
-    { name: "Terms and Conditions", path: "/terms" },
-  ];
+const menuItems = [
+  { name: "Marketplace", path: "/market-place" },
+  { name: "News", path: "/news" },
+  { name: "Whitepaper", path: "/whitepapers" },
+  { name: "About", path: "/about" },
+  { name: "Profile", path: "/profile" },
+  { name: "Terms & Conditions", path: "/terms" },
+];
 
+const socials = [
+  { icon: FaFacebook, href: "https://facebook.com", label: "Facebook" },
+  { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: FaXTwitter, href: "https://x.com", label: "X" },
+  { icon: FaTiktok, href: "https://tiktok.com", label: "TikTok" },
+  { icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
+];
+
+function Footer() {
   return (
     <footer className="w-full text-white relative z-10 overflow-hidden">
-      <div className="mx-auto max-w-[1500px] px-6">
-        {/* Divider */}
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600 to-transparent mt-10 mb-8" />
+      {/* Top divider */}
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600/60 to-transparent" />
 
-        {/* ================= DESKTOP ================= */}
-        <div className="hidden sm:flex justify-between items-start">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
-          </Link>
+      <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-6 flex flex-col items-center gap-6">
 
-          {/* Menu + Socials */}
-          <div className="flex flex-col items-end gap-5">
-            <nav className="flex gap-8 text-sm font-medium">
-              {menuItems.map((item, idx) => (
-                <Link
-                  key={idx}
-                  to={item.path}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="hover:text-gray-400 transition"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+        {/* Logo + brand name */}
+        <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
+          <img src={Logo} alt="Hypertek Logo" className="h-9 w-auto object-contain" />
+          <span className="text-white font-[Goldman] font-bold text-lg tracking-widest uppercase">
+            Hypertek
+          </span>
+        </Link>
 
-            <div className="flex gap-4 items-center">
-              <a href="https://discord.com" target="_blank" rel="noreferrer">
-                <img
-                  src={DiscordImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
-                  alt="Discord"
-                />
-              </a>
-              <a href="https://x.com" target="_blank" rel="noreferrer">
-                <img
-                  src={SkypeImg}
-                  className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
-                  alt="X.com"
-                />
-              </a>
-              <a href="https://telegram.org" target="_blank" rel="noreferrer">
-                <img
-                  src={TelegramImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer translate-y-0.5"
-                  alt="Telegram"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Desktop copyright */}
-        <div className="hidden sm:block text-center text-xs text-gray-300 mt-6 mb-4">
-          © {currentYear}. All Right Reserved
-        </div>
-
-        {/* ================= MOBILE ================= */}
-        <div className="sm:hidden flex justify-between items-start pb-8 text-sm">
-          {/* LEFT MENU */}
-          <div className="flex flex-col gap-2">
-            {menuItems.map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.path}
-                onClick={() => window.scrollTo(0, 0)}
-                className="text-gray-300 hover:text-white transition"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* RIGHT SIDE */}
-          <div className="flex flex-col items-end gap-4">
-            <p className="text-xs text-gray-400">© {currentYear}. All Right Reserved</p>
-            <div className="flex gap-4">
-              <a href="https://discord.com" target="_blank" rel="noreferrer">
-                <img
-                  src={DiscordImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-                  alt="Discord"
-                />
-              </a>
-              <a href="https://x.com" target="_blank" rel="noreferrer">
-                <img
-                  src={SkypeImg}
-                  className="w-3.2 h-3 opacity-80 hover:opacity-100 cursor-pointer"
-                  alt="X.com"
-                />
-              </a>
-              <a href="https://t.me.com" target="_blank" rel="noreferrer">
-                <img
-                  src={TelegramImg}
-                  className="w-4 h-4 opacity-80 hover:opacity-100 cursor-pointer"
-                  alt="Telegram"
-                />
-              </a>
-            </div>
-            <Link to="/" className="flex-shrink-0">
-              <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
+        {/* Nav links */}
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/80">
+          {menuItems.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.path}
+              onClick={() => window.scrollTo(0, 0)}
+              className="hover:text-white transition-colors duration-200"
+            >
+              {item.name}
             </Link>
-          </div>
+          ))}
+        </nav>
+
+        {/* Copyright */}
+        <p className="text-white/50 text-xs tracking-wide">
+          @ {currentYear}. All Right Reserved
+        </p>
+
+      </div>
+
+      {/* Social icons — full width with blue pills */}
+      <div className="relative flex items-center justify-center w-full h-[52px]">
+
+        {/* Left blue pill — full from edge to center */}
+        <div
+          className="absolute left-0 top-0 h-full w-[calc(50%-120px)]"
+          style={{
+            background: "linear-gradient(90deg, rgba(0,21,84,0.95) 0%, rgba(0,42,168,0.7) 100%)",
+            borderTopRightRadius: "9999px",
+          }}
+        />
+
+        {/* Right blue pill — full from edge to center */}
+        <div
+          className="absolute right-0 top-0 h-full w-[calc(50%-120px)]"
+          style={{
+            background: "linear-gradient(270deg, rgba(0,21,84,0.95) 0%, rgba(0,42,168,0.7) 100%)",
+            borderTopLeftRadius: "9999px",
+          }}
+        />
+
+        {/* Icons centered */}
+        <div className="relative z-10 flex items-center gap-5">
+          {socials.map(({ icon: Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={label}
+              className="text-white/80 hover:text-white transition-colors duration-200 text-lg"
+            >
+              <Icon />
+            </a>
+          ))}
         </div>
       </div>
+
     </footer>
   );
 }

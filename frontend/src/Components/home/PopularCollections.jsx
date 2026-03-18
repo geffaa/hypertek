@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-import TVector from "../../assets/images/popular/vector.png";
-import CustomButton4 from "../Buttons/Button4";
 import { MarketPlace_Url, getImageUrl } from "../../Config";
 
 const fadeUp = {
@@ -36,59 +33,56 @@ function PopularCollections() {
         setLoading(false);
       }
     };
-
     fetchCollections();
   }, []);
 
   return (
-    <section className="relative z-10 w-full px-6 pb-20">
-      <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
+    <section className="relative z-10 w-full px-6 pb-16">
+      <div className="mx-auto max-w-[1400px] flex flex-col gap-8">
 
         {/* Heading */}
         <motion.div
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-2"
           variants={fadeUp}
           custom={0}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h1 className="text-white font-goldman font-bold text-[20px] sm:text-[30px] uppercase truncate">
-            Popular Collections
-          </h1>
-          <div className="flex gap-2">
-            <div className="h-[3px] w-14 bg-white" />
-            <div className="h-[3px] w-20 bg-white" />
-            <div className="h-[3px] w-10 bg-white" />
-            <div className="h-[3px] w-44 bg-gradient-to-r from-white to-transparent" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-[2px] bg-white/50" />
+            <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Collections</span>
           </div>
+          <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
+            Popular Collections
+          </h2>
         </motion.div>
 
         {/* Content */}
-        {loading && <p className="text-white">Loading collections...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+        {loading && <p className="text-white/60 text-sm">Loading collections...</p>}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
 
         {!loading && !error && (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10">
-            {landData.slice(0, 4).map((item, index) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {landData.slice(0, 5).map((item, index) => (
               <motion.div
                 key={item?._id}
-                className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
+                className="relative rounded-xl overflow-hidden flex flex-col text-white"
                 style={{
-                  background: "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                  background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1px solid rgba(255,255,255,0.1)",
                 }}
                 variants={fadeUp}
                 custom={index + 1}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
-                {/* IMAGE */}
-                <div
-                  className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                  style={{ background: "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)" }}
-                >
+                {/* Image */}
+                <div className="h-[110px] sm:h-[130px] lg:h-[150px] overflow-hidden">
                   <img
                     src={getImageUrl(item?.collection?.image)}
                     alt={item?.collection?.name}
@@ -96,29 +90,35 @@ function PopularCollections() {
                   />
                 </div>
 
-                {/* TITLE */}
-                <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                  {item?.collection?.name}
-                </h2>
+                {/* Body */}
+                <div className="flex flex-col gap-1.5 p-2.5 sm:p-3 flex-1">
+                  {/* Title */}
+                  <h3 className="text-white font-semibold text-xs sm:text-sm truncate">
+                    {item?.collection?.name}
+                  </h3>
 
-                {/* INFO */}
-                <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-                  <span className="font-medium text-gray-300 truncate">
-                    {item?.collection?.symbol} 🔥
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                      <img src={TVector} alt="chain" className="w-3 h-3" />
-                    </div>
-                    <span className="font-semibold truncate">{item?.collection?.chain}</span>
+                  {/* Price row */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-[10px]">Floor Price</span>
+                    <span className="text-white font-semibold text-[10px] sm:text-xs">
+                      {item?.floorPrice ?? "—"}
+                    </span>
                   </div>
-                </div>
 
-                {/* BUTTON */}
-                <div className="flex justify-center items-center mt-8">
-                  <Link to="/market-place">
-                    <CustomButton4 text="Buy Now" />
-                  </Link>
+                  {/* Chain badge */}
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex-shrink-0" />
+                    <span className="text-white/60 text-[10px] truncate">{item?.collection?.chain}</span>
+                  </div>
+
+                  {/* Button */}
+                  <div className="mt-auto pt-2">
+                    <Link to="/market-place" className="block w-full">
+                      <button className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20">
+                        Buy Now
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}

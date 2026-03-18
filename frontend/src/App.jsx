@@ -136,7 +136,10 @@ function AppWrapper() {
     "/dashboard/upload-nfc",
   ];
 
-  const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
+  const shouldHideLayout =
+    hideLayoutRoutes.includes(location.pathname) ||
+    ["/signin", "/signup", "/forgot-password"].includes(location.pathname) ||
+    location.pathname.startsWith("/reset-password");
 
   return (
     <>

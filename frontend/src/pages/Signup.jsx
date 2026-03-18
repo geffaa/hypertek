@@ -1,78 +1,55 @@
 import React, { useState, useEffect } from "react";
-const Logo = "/logo-white.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import CustomButtonLarge from "../Components/Buttons/SignupButton";
-import CustomButton4 from "../Components/Buttons/Button4";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
-
-
-import symbol from "../assets/images/login/Symbol.svg.png";
-import google from "../assets/images/login/google.png";
-import skype from "../assets/images/login/skipe.png";
-import discard from "../assets/images/login/discard.png";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
+import AuthLayout from "../Components/Common/AuthLayout";
 
+import symbol from "../assets/images/login/Symbol.svg.png";
+import google from "../assets/images/login/google.png";
+import discard from "../assets/images/login/discard.png";
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  // Handle input change
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     if (!/\S+@\S+\.\S+/.test(formData.email)) {
       toast.error("Please enter a valid email address");
-      setLoading(false); // stop loader
+      setLoading(false);
       return;
     }
     if (formData.password.length < 8 || formData.password.length > 20) {
       toast.error("Password must be between 8 and 20 characters");
-      setLoading(false); // stop loader
+      setLoading(false);
       return;
     }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
-      setLoading(false); // stop loader
+      setLoading(false);
       return;
     }
-
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
         Email: formData.email,
         Password: formData.password,
         ConfirmPassword: formData.confirmPassword,
       });
-
       if (res.status === 201) {
-        dispatch(
-          loginSuccess({
-            user: res.data.user,
-            token: res.data.token,
-            isLoggedInUser: true,
-          })
-        );
+        dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
         localStorage.setItem("token", res.data.token);
         toast.success("Signup successful!");
         navigate("/");
@@ -80,345 +57,212 @@ function Signup() {
         toast.error(res.data.message || "Signup failed. Please try again.");
       }
     } catch (error) {
-      console.error("Signup error:", error);
       const errorMessage = error.response?.data?.message || (error.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during signup.");
       toast.error(errorMessage);
     } finally {
-      setLoading(false); // stop loader no matter what
+      setLoading(false);
     }
   };
 
-
-
-
-  // ---------------- Discord Signup ----------------
+  // Discord
   const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID || "1423260002587639828";
   const REDIRECT_URI = `${window.location.origin}/signin`;
-  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(
-    REDIRECT_URI
-  )}&response_type=code&scope=identify%20email`;
+  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20email`;
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (!code) return;
-
     window.history.replaceState({}, document.title, "/signin");
-
     const fetchDiscordUser = async () => {
-      setLoading(true); // start loader
+      setLoading(true);
       try {
-        const res = await axios.post(
-          `${BACKEND_BASE_URL}/api/v1/user/discord`,
-          { code }
-        );
+        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/discord`, { code });
         if (res.data.success && res.data.user) {
-          dispatch(
-            loginSuccess({
-              user: res.data.user,
-              token: res.data.token,
-              isLoggedInUser: true,
-            })
-          );
+          dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
           localStorage.setItem("token", res.data.token);
-          toast.success(
-            `Discord Signup successful! Welcome ${res.data.user.FullName}`
-          );
+          toast.success(`Discord Signup successful! Welcome ${res.data.user.FullName}`);
           navigate("/");
         } else {
-          toast.error(res.data.message || "Discord signup failed. Please try again.");
+          toast.error(res.data.message || "Discord signup failed.");
         }
       } catch (err) {
-        console.error("Discord signup error:", err);
-        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Discord signup.");
-        toast.error(errorMessage);
-      }
-      finally {
-        setLoading(false); // stop loader in all cases
+        toast.error(err.response?.data?.message || "An unexpected error occurred during Discord signup.");
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchDiscordUser();
   }, [dispatch, navigate]);
 
-  // ---------------------- signup with MetaMask -------------------------
-  const handleLogin = async () => {
-    setLoading(true); // start loader
+  // MetaMask
+  const handleMetaMask = async () => {
+    setLoading(true);
     try {
-      if (!window.ethereum) {
-        toast.error("MetaMask is not installed!");
-        return;
-      }
-
-      try {
-        await window.ethereum.request({
-          method: "wallet_revokePermissions",
-          params: [{ eth_accounts: {} }],
-        });
-      } catch { }
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
+      if (!window.ethereum) { toast.error("MetaMask is not installed!"); return; }
+      try { await window.ethereum.request({ method: "wallet_revokePermissions", params: [{ eth_accounts: {} }] }); } catch {}
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       const address = accounts[0];
       const message = `Login to MyApp - ${Date.now()}`;
-
-      setTimeout(() => {
-        toast.info(
-          <div>
-            <p>Check for MetaMask popup!</p>
-            <p>If not showing, click the MetaMask icon in your browser.</p>
-          </div>,
-          { duration: 10000 }
-        );
-      }, 1000);
-
+      setTimeout(() => toast.info("Check for MetaMask popup!", { duration: 10000 }), 1000);
       const signature = await Promise.race([
-        window.ethereum.request({
-          method: "personal_sign",
-          params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address],
-        }),
-        new Promise((_, reject) =>
-          setTimeout(
-            () =>
-              reject(
-                new Error(
-                  "Signature timeout - Click MetaMask icon if popup not visible"
-                )
-              ),
-            20000
-          )
-        ),
+        window.ethereum.request({ method: "personal_sign", params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address] }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Signature timeout")), 20000)),
       ]);
-
-      const res = await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/user/MetaMask`,
-        { address: address.toLowerCase(), signature, message },
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      dispatch(
-        loginSuccess({
-          user: res.data.user,
-          token: res.data.token,
-          isLoggedInUser: true,
-        })
-      );
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/MetaMask`, { address: address.toLowerCase(), signature, message }, { headers: { "Content-Type": "application/json" } });
+      dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
       localStorage.setItem("token", res.data.token);
       toast.success("MetaMask Signup successful!");
       navigate("/profile");
     } catch (err) {
-      console.error("MetaMask login error:", err);
-      if (err.message?.includes("timeout")) {
-        toast.error(
-          <div>
-            <strong>MetaMask Popup Issue!</strong>
-            <br />
-            1. Click the MetaMask icon in your browser
-            <br />
-            2. Look for pending signature requests
-            <br />
-            3. Refresh the page and try again
-          </div>,
-          { duration: 8000 }
-        );
-      } else if (err.code === 4001) {
-        toast.error("Signature cancelled. Please approve the request to continue.");
-      } else {
-        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : err.message || "Unknown error occurred.");
-        toast.error("Login failed: " + errorMessage);
-      }
-
+      if (err.code === 4001) toast.error("Signature cancelled.");
+      else toast.error(err.response?.data?.message || err.message || "MetaMask error occurred.");
     } finally {
-      setLoading(false); // stop loader no matter what
+      setLoading(false);
     }
   };
 
-  // ---------------- Twitter Login ----------------
-  const handleTwitterLogin = async () => {
-    // Placeholder: implement Twitter OAuth flow if needed
-    toast.info("Twitter login clicked!");
-  };
-
-
-
-  /// signup with google 
-  const login = useGoogleLogin({
+  // Google
+  const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      setLoading(true); // start loader
+      setLoading(true);
       try {
-        // tokenResponse.access_token is what Google returns
-        // const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, {
-        const res = await axios.post(
-          // `http://localhost:4700/api/v1/user/google`,
-          `${BACKEND_BASE_URL}/api/v1/user/google`,
-
-          {
-            token: tokenResponse.access_token, // or response.credential for ID token version
-          }
-        );
-
-        dispatch(
-          loginSuccess({
-            user: res.data.user,
-            token: res.data.token,
-            isLoggedInUser: true,
-          })
-        );
+        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, { token: tokenResponse.access_token });
+        dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
         localStorage.setItem("token", res.data.token);
         toast.success("Google Signup successful!");
         navigate("/profile");
       } catch (err) {
-        console.error("Google signup error:", err);
-        const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during Google signup.");
-        toast.error(errorMessage);
-      }
-      finally {
-        setLoading(false); // stop loader in all cases
+        toast.error(err.response?.data?.message || "An unexpected error occurred during Google signup.");
+      } finally {
+        setLoading(false);
       }
     },
-    onError: () => {
-      setLoading(false);
-      toast.error("Google signup was unsuccessful or cancelled.");
-    },
+    onError: () => { setLoading(false); toast.error("Google signup was unsuccessful or cancelled."); },
   });
 
   return (
-    <div className="flex flex-col relative z-10 items-center justify-center min-h-screen px-4 bg-transparent mt-12">
-      <div className="rounded-lg flex flex-col items-center justify-center p-8 gap-4 md:w-[412px] max-w-md sm:max-w-sm">
-        <img src={Logo} alt="Logo" className="w-[67px] h-[67px] mb-4" />
+    <AuthLayout>
+      {loading && <FullScreenLoader />}
 
-        <h1 className="text-white text-3xl sm:text-2xl font-bold text-center">
-          Create Account
-        </h1>
-
-        <p className="text-white text-sm mb-6 text-center">
-          Already have an account?{" "}
-          <Link to="/signin" className="text-blue-400 hover:underline">
-            Log in
-          </Link>
-        </p>
-
-        {/* Signup Form */}
-        <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
-          {loading && <FullScreenLoader />}
-
-          {/* Email */}
-          <div className="relative">
-            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email"
-              className="w-full pl-10 pr-3 py-3 rounded-2xl border border-white text-white focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Password"
-              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-          </div>
-
-          {/* Confirm Password */}
-          <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/70" />
-            <input
-              type={showPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              className="w-full pl-10 pr-10 py-3 rounded-2xl border border-white text-white focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
-              required
-            />
-            <button
-              type="button"
-
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading} // prevent multiple clicks
-            className="w-full py-3 mt-4 flex items-center justify-center text-white font-semibold rounded-lg transition"
-          >
-            <CustomButtonLarge text="Sign Up" />
-          </button>
-        </form>
-
-        {/* Divider */}
-        <div className="flex items-center w-full my-4">
-          <hr className="flex-grow border-t border-white/40" />
-          <span className="mx-2 text-white/70 text-sm">or continue with</span>
-          <hr className="flex-grow border-t border-white/40" />
-        </div>
-
-        {/* Social Buttons */}
-        <div className="flex justify-center gap-4">
-          {/* MetaMask */}
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
-            onClick={handleLogin}
-          >
-            <img src={symbol} alt="MetaMask" className="w-[23px] h-[22px]" />
-          </button>
-
-          {/* Twitter */}
-          {/* <button
-            className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
-            onClick={handleTwitterLogin}
-          >
-            <img src={skype} alt="Skype" className="w-6 h-6" />
-          </button> */}
-
-          {/* Google */}
-
-          <button
-            onClick={() => login()}
-            className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition cursor-pointer"
-          >
-            <img
-              src={google}
-              alt="Google"
-              className="w-6 h-6"
-            />
-          </button>
-
-          {/* Discord */}
-          <button
-            className="flex items-center justify-center rounded-full border border-white w-[44px] h-[44px] transition"
-            onClick={() => (window.location.href = discordAuthUrl)}
-          >
-            <img src={discard} alt="Discord" className="w-[23px] h-[22px]" />
-          </button>
-        </div>
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-white text-3xl font-bold">Sign up</h1>
       </div>
-    </div>
+
+      {/* Form */}
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        {/* Name */}
+        <div className="relative">
+          <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm" />
+          <input
+            type="text"
+            placeholder="Name"
+            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all text-sm"
+          />
+        </div>
+
+        {/* Email */}
+        <div className="relative">
+          <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm" />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
+            required
+          />
+        </div>
+
+        {/* Password */}
+        <div className="relative">
+          <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm" />
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
+            required
+          />
+          <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70">
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+
+        {/* Confirm Password */}
+        <div className="relative">
+          <FaLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm" />
+          <input
+            type={showPassword ? "text" : "password"}
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="Confirm Password"
+            className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
+            required
+          />
+          <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70">
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-3 mt-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold rounded-lg transition-all duration-300 border border-white/10 text-sm"
+        >
+          {loading ? "Creating Account..." : "Sign Up"}
+        </button>
+      </form>
+
+      {/* Already have account */}
+      <p className="text-white/50 text-sm text-center mt-4">
+        Already have an account?{" "}
+        <Link to="/signin" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+          Sign in
+        </Link>
+      </p>
+
+      {/* Divider */}
+      <div className="flex items-center gap-3 my-6">
+        <div className="flex-1 h-px bg-white/10" />
+        <span className="text-white/40 text-xs">Or continue with</span>
+        <div className="flex-1 h-px bg-white/10" />
+      </div>
+
+      {/* OAuth buttons */}
+      <div className="flex justify-center gap-4">
+        <button
+          type="button"
+          onClick={handleMetaMask}
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
+          title="MetaMask"
+        >
+          <img src={symbol} alt="MetaMask" className="w-5 h-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => loginWithGoogle()}
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
+          title="Google"
+        >
+          <img src={google} alt="Google" className="w-5 h-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => (window.location.href = discordAuthUrl)}
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
+          title="Discord"
+        >
+          <img src={discard} alt="Discord" className="w-5 h-5" />
+        </button>
+      </div>
+    </AuthLayout>
   );
 }
 

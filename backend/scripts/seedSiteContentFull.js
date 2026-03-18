@@ -46,28 +46,6 @@ const SECTIONS = [
         ],
     },
 
-    // ─── HOME: How It Works ───
-    {
-        sectionKey: "home_how_it_works",
-        sectionLabel: "How It Works",
-        pageGroup: "home",
-        fields: [
-            { key: "heading", label: "Section Title", type: "text", value: "How It Works" },
-            { key: "subtitle", label: "Section Subtitle", type: "text", value: "Get started in just a few steps and unlock the world of digital collectibles." },
-            {
-                key: "steps",
-                label: "Steps",
-                type: "list",
-                value: [
-                    { title: "Connect Wallet", description: "Securely connect your crypto wallet to start buying, selling, and collecting NFTs." },
-                    { title: "Explore Collections", description: "Browse trending collections and discover rare digital artworks from top creators." },
-                    { title: "Collect & Trade", description: "Buy your favorite NFTs and showcase or trade them on your profile anytime." },
-                    { title: "Earn & Grow", description: "Earn by selling your collections or gaining popularity in the NFT space." },
-                ],
-            },
-        ],
-    },
-
     // ─── HOME: Marketplace Banner ───
     {
         sectionKey: "marketplace_banner",
@@ -92,6 +70,34 @@ const SECTIONS = [
         pageGroup: "profile",
         fields: [
             { key: "background_image", label: "Banner Background Image", type: "image", value: "" },
+        ],
+    },
+
+    // ─── HOME: Story Section ───
+    {
+        sectionKey: "home_story",
+        sectionLabel: "Story Section",
+        pageGroup: "home",
+        fields: [
+            { key: "background_image", label: "Background Image", type: "image", value: "" },
+            { key: "character_image", label: "Character Image (Center)", type: "image", value: "" },
+            { key: "left_heading", label: "Left Heading", type: "text", value: "STORY" },
+            { key: "left_subheading", label: "Left Subheading", type: "text", value: "The year is 2117." },
+            {
+                key: "left_body",
+                label: "Left Body Text",
+                type: "textarea",
+                value: "Humanity didn't conquer the stars it fractured into them. After Earth collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you a reborn Overlord, forged by legacy and technology.",
+            },
+            { key: "right_heading", label: "Right Heading", type: "text", value: "STORY" },
+            { key: "right_subheading", label: "Right Subheading", type: "text", value: "The year is 2117." },
+            {
+                key: "right_body",
+                label: "Right Body Text",
+                type: "textarea",
+                value: "Humanity didn't conquer the stars it fractured into them. After Earth collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you a reborn Overlord, forged by legacy and technology.",
+            },
+            { key: "accent_color", label: "Accent Color (hex, e.g. #b89a00)", type: "text", value: "#b89a00" },
         ],
     },
 
@@ -181,6 +187,18 @@ const SECTIONS = [
                     { title: "MarketPlace", description: "The Hyper Tek Marketplace is your gateway to rare gear, powerful NFAs, and exclusive upgrades that shape your journey." },
                 ],
             },
+        ],
+    },
+
+    // ─── AUTH: Left Panel ───
+    {
+        sectionKey: "auth_panel",
+        sectionLabel: "Auth Left Panel",
+        pageGroup: "auth",
+        fields: [
+            { key: "tagline", label: "Tagline (Heading)", type: "text", value: "Explore Ruins, Clash With Factions, And Uncover Ancient Tech." },
+            { key: "subtitle", label: "Subtitle", type: "textarea", value: "Your Choices Shape Your Skills, Species Loyalty, And Path — Liberator Or Dominator, Relic Hunter Or Techno Savant." },
+            { key: "background_image", label: "Background Image", type: "image", value: "" },
         ],
     },
 ];

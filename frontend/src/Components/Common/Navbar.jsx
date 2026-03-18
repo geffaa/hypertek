@@ -274,8 +274,8 @@ export default function Navbar() {
                 onMouseEnter={() => setShopOpen(true)}
                 onMouseLeave={() => setShopOpen(false)}
               >
-                <button className="flex items-center hover:text-blue-300 transition-colors duration-200">
-                  Shop <ChevronDown className="ml-1 h-4 w-4" />
+                <button className="flex items-center hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm">
+                  Shops <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
 
                 {shopOpen && (
@@ -342,13 +342,13 @@ export default function Navbar() {
 
               <Link
                 to="/about"
-                className="hover:text-blue-300 transition-colors duration-200"
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
               >
                 About Us
               </Link>
               <Link
                 to="/news"
-                className="hover:text-blue-300 transition-colors duration-200"
+                className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
               >
                 News
               </Link>
@@ -360,8 +360,8 @@ export default function Navbar() {
                 onMouseEnter={() => setSocialOpen(true)}
                 onMouseLeave={() => setSocialOpen(false)}
               >
-                <button className="flex items-center hover:text-blue-300 transition-colors duration-200">
-                  Social <ChevronDown className="h-4 w-4" />
+                <button className="flex items-center hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm">
+                  Socials <ChevronDown className="h-4 w-4" />
                 </button>
 
                 {socialOpen && (
@@ -523,7 +523,9 @@ export default function Navbar() {
               ) && (
                 <div className="hidden md:block">
                   <Link to="/signup">
-                    <CustomeButtonLarge text="Sign Up" />
+                    <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
+                      Sign Up
+                    </button>
                   </Link>
                 </div>
               )
@@ -752,6 +754,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </nav >
   );
 }
