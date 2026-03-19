@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TVector from "../assets/images/popular/vector.png";
 import popularCollections from "../assets/images/popular/popolar.png";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
+import LazyImage from "../Components/Common/LazyImage";
 import { FiSearch } from "react-icons/fi";
 import CustomButton from "../Components/Buttons/Button1";
 import CustomButton4 from "../Components/Buttons/Button4";
@@ -312,15 +313,13 @@ function NFA() {
                     "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
               >
-                <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                  <img
-                    src={
-                      getImageUrl(item.collection?.image) || popularCollections
-                    }
-                    alt={item.collection?.name || "NFA Collection"}
-                    className="w-full h-full object-cover object-top "
-                  />
-                </div>
+                <LazyImage
+                  src={getImageUrl(item.collection?.image)}
+                  alt={item.collection?.name || "NFA Collection"}
+                  fallback={popularCollections}
+                  className="w-full h-[210px] rounded-[16px]"
+                  imgClassName="object-cover object-top"
+                />
 
                 <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
                   {item.collection?.name || item.name || "Unnamed"}
@@ -415,21 +414,13 @@ function NFA() {
                     "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                 }}
               >
-                <div
-                  className="h-[150px] rounded-[14px] overflow-hidden"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-                  }}
-                >
-                  <img
-                    src={
-                      getImageUrl(item.collection?.image) || popularCollections
-                    }
-                    alt={item.collection?.name || item.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <LazyImage
+                  src={getImageUrl(item.collection?.image)}
+                  alt={item.collection?.name || item.name}
+                  fallback={popularCollections}
+                  className="h-[150px] rounded-[14px]"
+                  imgClassName="object-cover"
+                />
 
                 <h2 className="text-[14px] font-semibold mt-4 truncate">
                   {item.collection?.name || item.name || "Unnamed"}

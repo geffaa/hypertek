@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import popularCollections from "../../assets/images/popular/popolar.png";
-import TVector from "../../assets/images/popular/vector.png";
-import CustomButton4 from "../Buttons/Button4";
+import popularFallback from "../../assets/images/popular/popolar.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import LazyImage from "../Common/LazyImage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -26,8 +25,6 @@ function PopularCollections() {
       );
       if (res.data.success) {
         setMarketData(res.data.collections);
-      } else {
-        console.error("Failed to fetch market data:", res.data.message);
       }
     } catch (error) {
       console.error("Error fetching market data:", error);
@@ -43,85 +40,88 @@ function PopularCollections() {
 
   return (
     <section className="relative z-10 w-full px-6 pb-20">
-      <div className="mx-auto max-w-[1400px] flex flex-col gap-10">
+      <div className="mx-auto max-w-[1400px] flex flex-col gap-8">
 
         {/* Heading */}
         <motion.div
-          className="flex flex-col gap-3 items-center sm:items-start"
+          className="flex flex-col gap-2"
           variants={fadeUp}
           custom={0}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h1 className="text-white uppercase text-[20px] sm:text-[30px] font-goldman font-bold text-center sm:text-left">
-            MarketPlace
-          </h1>
-          <div className="flex gap-2 justify-center sm:justify-start w-full sm:w-auto">
-            <div className="h-[3px] w-14 bg-white" />
-            <div className="h-[3px] w-20 bg-white" />
-            <div className="h-[3px] w-10 bg-white" />
-            <div className="h-[3px] w-44 bg-gradient-to-r from-white to-transparent" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-[2px] bg-white/50" />
+            <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">
+              Featured
+            </span>
           </div>
+          <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
+            MarketPlace
+          </h2>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10">
-          {marketData?.slice(0, 4).map((data, index) => (
+        {/* Mobile: horizontal scroll | sm+: 3-col grid | lg+: 6-col grid */}
+        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6">
+          {marketData?.slice(0, 6).map((data, index) => (
             <motion.div
-              key={index}
-              className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
+              key={data._id}
+              className="snap-start flex-shrink-0 w-[45vw] sm:w-auto rounded-xl overflow-hidden flex flex-col text-white"
               style={{
-                background: "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.1)",
               }}
               variants={fadeUp}
               custom={index + 1}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               {/* Image */}
-              <div
-                className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                style={{ background: "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)" }}
-              >
-                <img
-                  src={
-                    getImageUrl(data.collection.image) || popularCollections
-                  }
-                  alt={data.collection.name || "Collection"}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <LazyImage
+                src={getImageUrl(data.collection.image)}
+                alt={data.collection.name || "Collection"}
+                fallback={popularFallback}
+                className="h-[110px] sm:h-[130px] lg:h-[150px]"
+                imgClassName="object-cover"
+              />
 
-              {/* Title */}
-              <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                {data.collection.name || "Collection"}
-              </h2>
+              {/* Body */}
+              <div className="flex flex-col gap-1.5 p-2.5 sm:p-3 flex-1">
+                <h3 className="text-white font-semibold text-xs sm:text-sm truncate">
+                  {data.collection.name || "Collection"}
+                </h3>
 
-              {/* Info */}
-              <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-                <span className="font-medium text-gray-300 truncate">
-                  {data._id.slice(0, 6)} 🔥
-                </span>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                    <img src={TVector} className="w-3 h-3" alt="chain" />
-                  </div>
-                  <span className="font-semibold truncate">{data.collection.chain}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-white/50 text-[10px]">Items</span>
+                  <span className="text-white font-semibold text-[10px] sm:text-xs">
+                    {data.subCollections?.length ?? "—"}
+                  </span>
                 </div>
-              </div>
 
-              {/* Button */}
-              <div className="flex justify-center items-center mt-8">
-                <Link to="/market-place">
-                  <CustomButton4 text="Buy Now" />
-                </Link>
+                <div className="flex items-center gap-1 mt-0.5">
+                  <div className="w-3 h-3 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex-shrink-0" />
+                  <span className="text-white/60 text-[10px] truncate">
+                    {data.collection.chain}
+                  </span>
+                </div>
+
+                <div className="mt-auto pt-2">
+                  <Link to="/market-place" className="block w-full">
+                    <button className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20">
+                      Buy Now
+                    </button>
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

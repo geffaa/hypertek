@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
+import LazyImage from "../Common/LazyImage";
 import { FaUserCircle } from "react-icons/fa";
 import FullScreenLoader from "../Common/Spinner";
 import { ethers } from "ethers";
@@ -363,19 +364,12 @@ function MarketPlace() {
                           "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                       }}
                     >
-                      <div
-                        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #9B7C2F 0%, #4A3E22 100%)",
-                        }}
-                      >
-                        <img
-                          src={getImageUrl(item.image)}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <LazyImage
+                        src={getImageUrl(item.image)}
+                        alt={item.name}
+                        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px]"
+                        imgClassName="object-cover"
+                      />
 
                       <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
                         {item.name}

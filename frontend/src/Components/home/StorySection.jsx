@@ -91,16 +91,16 @@ export default function StorySection() {
                     {/* Two-column layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
 
-                        {/* LEFT: Character with glass accent */}
+                        {/* LEFT: Character — hidden on mobile */}
                         <motion.div
-                            className="relative flex items-center justify-center lg:justify-end"
+                            className="hidden lg:flex relative items-center justify-end"
                             variants={scaleIn}
                         >
-                            {/* Character */}
                             <img
                                 src={charImage}
                                 alt="Character"
-                                className="relative z-[2] w-[300px] md:w-[420px] lg:w-[600px] 2xl:w-[680px] h-auto object-contain"
+                                loading="lazy"
+                                className="relative z-[2] w-[420px] lg:w-[600px] 2xl:w-[680px] h-auto object-contain"
                                 style={{ filter: "drop-shadow(0 0 50px rgba(255,255,255,0.1))" }}
                             />
                         </motion.div>

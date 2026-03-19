@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
+import LazyImage from "../Components/Common/LazyImage";
 import FaceOne from "../assets/images/noActivity1.png";
 import FaceTwo from "../assets/images/noActivity2.png";
 
@@ -863,11 +864,11 @@ function NfaLand() {
       </div>
       {/* Main Content */}
       <div className="max-w-[918px] mx-auto w-full mt-10 flex flex-col md:flex-row gap-8 px-4">
-        <img
+        <LazyImage
           src={getImageUrl(collection?.image)}
           alt={collection?.name}
-          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover 
-bg-gradient-to-b from-[#977C34] to-[#493F26] "
+          className="w-full md:w-[365px] h-[330px] rounded-lg flex-shrink-0"
+          imgClassName="object-cover"
         />
         <div className="flex-1 space-y-4">
           <div className="flex items-center gap-2">

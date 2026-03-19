@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MarketPlace_Url, getImageUrl } from "../../Config";
 import LazyImage from "../Common/LazyImage";
+import popularFallback from "../../assets/images/popular/popolar.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -64,11 +65,12 @@ function PopularCollections() {
         {error && <p className="text-red-400 text-sm">{error}</p>}
 
         {!loading && !error && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {landData.slice(0, 5).map((item, index) => (
+          /* Mobile: horizontal scroll | sm+: 3-col grid | lg+: 6-col grid */
+          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6">
+            {landData.slice(0, 6).map((item, index) => (
               <motion.div
                 key={item?._id}
-                className="relative rounded-xl overflow-hidden flex flex-col text-white"
+                className="snap-start flex-shrink-0 w-[45vw] sm:w-auto rounded-xl overflow-hidden flex flex-col text-white"
                 style={{
                   background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
                   backdropFilter: "blur(16px)",
@@ -86,18 +88,17 @@ function PopularCollections() {
                 <LazyImage
                   src={getImageUrl(item?.collection?.image)}
                   alt={item?.collection?.name}
+                  fallback={popularFallback}
                   className="h-[110px] sm:h-[130px] lg:h-[150px]"
                   imgClassName="object-cover"
                 />
 
                 {/* Body */}
                 <div className="flex flex-col gap-1.5 p-2.5 sm:p-3 flex-1">
-                  {/* Title */}
                   <h3 className="text-white font-semibold text-xs sm:text-sm truncate">
                     {item?.collection?.name}
                   </h3>
 
-                  {/* Price row */}
                   <div className="flex items-center justify-between">
                     <span className="text-white/50 text-[10px]">Floor Price</span>
                     <span className="text-white font-semibold text-[10px] sm:text-xs">
@@ -105,13 +106,11 @@ function PopularCollections() {
                     </span>
                   </div>
 
-                  {/* Chain badge */}
                   <div className="flex items-center gap-1 mt-0.5">
                     <div className="w-3 h-3 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex-shrink-0" />
                     <span className="text-white/60 text-[10px] truncate">{item?.collection?.chain}</span>
                   </div>
 
-                  {/* Button */}
                   <div className="mt-auto pt-2">
                     <Link to="/market-place" className="block w-full">
                       <button className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20">

@@ -173,6 +173,11 @@ jobs:
             cd /var/www/hypertek/backend
             npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
+            # ── Run database seed (safe: skips existing data) ──
+            echo "🌱 Running database seed..."
+            node --env-file=Config/.env scripts/seed.js
+            echo "✅ Seed complete"
+
             # ── Restart backend with PM2 ──
             echo "🔄 Restarting backend..."
             if pm2 describe hypertek-backend > /dev/null 2>&1; then

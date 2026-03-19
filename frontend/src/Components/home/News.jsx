@@ -111,7 +111,7 @@ export default function News() {
         </div>
 
         <motion.div
-          className="flex justify-start pt-1"
+          className="flex justify-center pt-1"
           variants={fadeUp}
           custom={6}
           initial="hidden"

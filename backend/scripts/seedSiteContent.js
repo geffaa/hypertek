@@ -221,45 +221,23 @@ const SECTIONS = [
         sectionLabel: "About Page — Top Section",
         pageGroup: "about",
         fields: [
-            {
-                key: "heading",
-                label: "Page Heading",
-                type: "text",
-                value: "About Us",
-            },
-            {
-                key: "subtitle",
-                label: "Subtitle",
-                type: "textarea",
-                value:
-                    "Empowering creators and collectors through blockchain technology. Hyper Tek is where innovation meets art.",
-            },
+            { key: "heading",    label: "Page Heading", type: "text",     value: "About Us" },
+            { key: "subtitle",   label: "Subtitle",     type: "textarea", value: "The year is 2117. Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\n\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
+            { key: "bg_image",   label: "Background Image (about_bg.jpg)", type: "image", value: "" },
+            { key: "char_image", label: "Character Image (char.png)",       type: "image", value: "" },
         ],
     },
     {
         sectionKey: "about_story",
-        sectionLabel: "About Page — Story Section",
+        sectionLabel: "About Page — Our Story",
         pageGroup: "about",
         fields: [
-            {
-                key: "title",
-                label: "Story Title",
-                type: "text",
-                value: "The year in 2117",
-            },
-            {
-                key: "body",
-                label: "Story Body",
-                type: "textarea",
-                value:
-                    "The year is 2117. Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology.",
-            },
-            {
-                key: "story_image",
-                label: "Story Image",
-                type: "image",
-                value: "",
-            },
+            { key: "story_image",  label: "Story 1 — Image", type: "image",    value: "" },
+            { key: "body",         label: "Story 1 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story2_image", label: "Story 2 — Image", type: "image",    value: "" },
+            { key: "story2_body",  label: "Story 2 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story3_image", label: "Story 3 — Image", type: "image",    value: "" },
+            { key: "story3_body",  label: "Story 3 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
         ],
     },
     {
@@ -356,15 +334,26 @@ async function seed() {
         console.log("✅ Connected to MongoDB");
 
         let created = 0;
+        let updated = 0;
         let skipped = 0;
 
         for (const section of SECTIONS) {
-            const exists = await SiteContent.findOne({
-                sectionKey: section.sectionKey,
-            });
+            const exists = await SiteContent.findOne({ sectionKey: section.sectionKey });
             if (exists) {
-                console.log(`⏭  Skipping "${section.sectionKey}" (already exists)`);
-                skipped++;
+                // Add any fields that don't exist yet (keeps existing values intact)
+                const existingKeys = exists.fields.map((f) => f.key);
+                const newFields = section.fields.filter((f) => !existingKeys.includes(f.key));
+                if (newFields.length > 0) {
+                    await SiteContent.updateOne(
+                        { sectionKey: section.sectionKey },
+                        { $push: { fields: { $each: newFields } } }
+                    );
+                    console.log(`🔄 Updated "${section.sectionKey}" — added ${newFields.length} new field(s): ${newFields.map((f) => f.key).join(", ")}`);
+                    updated++;
+                } else {
+                    console.log(`⏭  Skipping "${section.sectionKey}" (no new fields)`);
+                    skipped++;
+                }
             } else {
                 await SiteContent.create(section);
                 console.log(`✅ Created "${section.sectionKey}"`);
@@ -372,7 +361,7 @@ async function seed() {
             }
         }
 
-        console.log(`\n📊 Done! Created: ${created}, Skipped: ${skipped}`);
+        console.log(`\n📊 Done! Created: ${created}, Updated: ${updated}, Skipped: ${skipped}`);
         await mongoose.disconnect();
         process.exit(0);
     } catch (err) {

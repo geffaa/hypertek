@@ -104,89 +104,28 @@ const SECTIONS = [
     // ─── ABOUT: Top Section ───
     {
         sectionKey: "about_top",
-        sectionLabel: "About Page — Top Section",
+        sectionLabel: "About Page — Hero Section",
         pageGroup: "about",
         fields: [
-            { key: "heading", label: "Page Heading", type: "text", value: "About Us" },
-            {
-                key: "subtitle",
-                label: "Subtitle",
-                type: "textarea",
-                value: "Empowering creators and collectors through blockchain technology. Hyper Tek is where innovation meets art.",
-            },
+            { key: "heading",    label: "Heading (e.g. About Us)",     type: "text",     value: "About Us" },
+            { key: "subtitle",   label: "Text bawah judul",            type: "textarea", value: "The year is 2117. Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
+            { key: "bg_image",   label: "Background Image (about_bg)", type: "image",    value: "" },
+            { key: "char_image", label: "Character Image (char.png)",  type: "image",    value: "" },
         ],
     },
 
-    // ─── ABOUT: Story Section ───
+    // ─── ABOUT: Our Story ───
     {
         sectionKey: "about_story",
-        sectionLabel: "About Page — Story Section",
+        sectionLabel: "About Page — Our Story",
         pageGroup: "about",
         fields: [
-            { key: "heading", label: "Story Title", type: "text", value: "The year in 2117" },
-            {
-                key: "body",
-                label: "Story Body",
-                type: "textarea",
-                value: "The year is 2117. Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology.",
-            },
-            { key: "story_image", label: "Story Image", type: "image", value: "" },
-        ],
-    },
-
-    // ─── ABOUT: Three Fronts of War ───
-    {
-        sectionKey: "about_war",
-        sectionLabel: "About Page — Three Fronts of War",
-        pageGroup: "about",
-        fields: [
-            { key: "heading", label: "War Title", type: "text", value: "Three Fronts of War" },
-            {
-                key: "war_items",
-                label: "War Items",
-                type: "list",
-                value: [
-                    {
-                        title: "HyperQuest 100 | The Awakening",
-                        description: "Explore ruins, clash with factions, and uncover ancient tech. Your choices shape your skills, species loyalty, and path: liberator or dominator, relic hunter or techno savant.",
-                    },
-                    {
-                        title: "Hyper Racing 100 — The Velocity Wars",
-                        description: "On Blacktrack Circuits, speed is war. Factions battle at 900 kph for control of energy routes and warp towers. Your vehicle is your weapon and your rise rewrites the map.",
-                    },
-                    {
-                        title: "Overlord Realm | The Final Ascent",
-                        description: "Establish dominion across stars. Conquer with armies, alliances, or fear. Deploy psychic storms, orbital AI, and propaganda to bend entire systems to your rule.",
-                    },
-                ],
-            },
-            { key: "war_image", label: "War Image", type: "image", value: "" },
-        ],
-    },
-
-    // ─── ABOUT: Our Ecosystem ───
-    {
-        sectionKey: "about_ecosystem",
-        sectionLabel: "About Page — Our Ecosystem",
-        pageGroup: "about",
-        fields: [
-            { key: "heading", label: "Heading", type: "text", value: "Our Ecosystem" },
-            {
-                key: "subtitle",
-                label: "Subtitle",
-                type: "text",
-                value: "Trusted by millions, we bring you a world-class suite of financial products in one platform.",
-            },
-            {
-                key: "cards",
-                label: "Ecosystem Cards",
-                type: "list",
-                value: [
-                    { title: "NFA", description: "Discover and own NFAs that are as rare as they are valuable." },
-                    { title: "Game", description: "Step into Hyper Tek and be part of a living universe where racing, quests, and realms collide." },
-                    { title: "MarketPlace", description: "The Hyper Tek Marketplace is your gateway to rare gear, powerful NFAs, and exclusive upgrades that shape your journey." },
-                ],
-            },
+            { key: "story_image",  label: "Our Story 1 — Gambar", type: "image",    value: "" },
+            { key: "body",         label: "Our Story 1 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story2_image", label: "Our Story 2 — Gambar", type: "image",    value: "" },
+            { key: "story2_body",  label: "Our Story 2 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story3_image", label: "Our Story 3 — Gambar", type: "image",    value: "" },
+            { key: "story3_body",  label: "Our Story 3 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
         ],
     },
 

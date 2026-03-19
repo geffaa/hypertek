@@ -12,6 +12,7 @@ import overview1 from "../assets/images/Overview/overview1.jpg";
 import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
+import LazyImage from "../Components/Common/LazyImage";
 import CustomButton from "../Components/Buttons/Button1";
 import { useAccount } from "wagmi";
 import { useEmailWallet } from "../hooks/useEmailWallet";
@@ -294,15 +295,13 @@ function CategoryMarketplace() {
                     "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
               >
-                <div className="w-full h-[210px] overflow-hidden rounded-[16px] bg-gradient-to-b from-[#977C34] to-[#493F26]">
-                  <img
-                    src={
-                      getImageUrl(item.collection?.image) || overview1
-                    }
-                    alt={item.collection?.name || item.name || "Item"}
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
+                <LazyImage
+                  src={getImageUrl(item.collection?.image)}
+                  alt={item.collection?.name || item.name || "Item"}
+                  fallback={overview1}
+                  className="w-full h-[210px] rounded-[16px]"
+                  imgClassName="object-cover object-top"
+                />
 
                 <h2 className="text-sm sm:text-base lg:text-lg font-bold mt-2 sm:mt-3 lg:mt-4">
                   {item.collection?.name || item.name || "Unnamed"}
@@ -385,15 +384,13 @@ function CategoryMarketplace() {
                     "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                 }}
               >
-                <div className="w-full h-[160px] overflow-hidden rounded-[12px] bg-gradient-to-b from-[#977C34] to-[#493F26] mb-2">
-                  <img
-                    src={
-                      getImageUrl(item.collection?.image) || overview1
-                    }
-                    alt={item.name}
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
+                <LazyImage
+                  src={getImageUrl(item.collection?.image)}
+                  alt={item.name}
+                  fallback={overview1}
+                  className="w-full h-[160px] rounded-[12px] mb-2"
+                  imgClassName="object-cover object-top"
+                />
 
                 <h3 className="text-xs font-semibold truncate">
                   {item.collection?.name || item.name || "Unnamed"}

@@ -387,6 +387,7 @@ function UserListings() {
                           <img
                             src={getImageUrl(item.image)}
                             alt={item.collection?.name}
+                            loading="lazy"
                             className="w-full h-full object-cover object-top"
                           />
                         </div>
@@ -478,6 +479,7 @@ function UserListings() {
                     <img
                       src={getImageUrl(item.collection?.image)}
                       alt={item.collection?.name}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>
