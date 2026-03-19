@@ -287,8 +287,9 @@ function App() {
   };
 
   const isBypassPath = window.location.pathname.startsWith(MAINTENANCE_BYPASS_PATH);
-  if (isBypassPath) sessionStorage.setItem("maintenance_bypass", "1");
-  const isBypassed = isBypassPath || sessionStorage.getItem("maintenance_bypass") === "1";
+  if (isBypassPath) localStorage.setItem("maintenance_bypass", "1");
+  const isLoggedIn = !!localStorage.getItem("token");
+  const isBypassed = isBypassPath || localStorage.getItem("maintenance_bypass") === "1" || isLoggedIn;
 
   if (MAINTENANCE_MODE && !isBypassed) {
     return (
