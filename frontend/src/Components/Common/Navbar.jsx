@@ -486,12 +486,14 @@ export default function Navbar() {
                     Panel
                   </a>
                 ) : (
-                  <Link
-                    to="/dashboard"
+                  <a
+                    href="/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
                   >
                     Panel
-                  </Link>
+                  </a>
                 )}
 
                 <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">

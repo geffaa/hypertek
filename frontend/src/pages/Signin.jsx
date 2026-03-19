@@ -57,7 +57,7 @@ function Login() {
         window.location.href = adminUrl.toString();
       } else {
         toast.success("Login successful!");
-        navigate("/dashboard", { state: { userData: user } });
+        navigate("/");
       }
     } catch (err) {
       const errorMessage = err.response?.data?.message || (err.message === "Network Error" ? "Network Error: Could not connect to the server." : "An unexpected error occurred during login.");
@@ -75,7 +75,7 @@ function Login() {
         const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, { token: tokenResponse.access_token });
         dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
         toast.success("Google Login successful!");
-        navigate("/dashboard");
+        navigate("/");
       } catch (err) {
         toast.error(err.response?.data?.message || "An unexpected error occurred during Google login.");
       } finally {
@@ -102,7 +102,7 @@ function Login() {
         if (res.data.success && res.data.user) {
           dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
           toast.success(`Discord login successful! Welcome ${res.data.user.FullName}`);
-          navigate("/dashboard");
+          navigate("/");
         } else {
           toast.error(res.data.message || "Discord login failed.");
         }
@@ -132,7 +132,7 @@ function Login() {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/MetaMask`, { address: address.toLowerCase(), signature, message }, { headers: { "Content-Type": "application/json" } });
       dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
       toast.success("MetaMask login successful!");
-      navigate("/profile");
+      navigate("/");
     } catch (err) {
       if (err.code === 4001) toast.error("Signature cancelled.");
       else toast.error(err.response?.data?.message || err.message || "MetaMask error occurred.");

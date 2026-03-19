@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiChevronDown, FiChevronUp, FiX } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
-import DashboardImage from "../../assets/images/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
 import CreateCollection2 from "../../assets/images/Sidebar/create2.png";
 import CollectionImage from "../../assets/images/Sidebar/collections.png";
@@ -64,10 +63,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
 
 
 
-  const handleClickBack = () => {
-    navigate("/")
-  }
-
   // Check if a route is active
   const isRouteActive = (routePath) => {
     return location.pathname === routePath || location.pathname.startsWith(routePath + "/");
@@ -84,9 +79,15 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
         <div className="flex-1">
           {/* Logo & Close Button - Header */}
           <div className="flex items-center justify-between lg:justify-center mt-4 lg:mt-12 mb-8 lg:mb-12">
-            <div className="flex items-center gap-1.5 cursor-pointer" onClick={handleClickBack}>
-              <Link to={import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}>
+            <div className="flex flex-col items-center gap-3">
+              <Link to="/">
                 <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
+              </Link>
+              <Link
+                to="/"
+                className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/90 transition-colors"
+              >
+                ← Back to Website
               </Link>
             </div>
 
