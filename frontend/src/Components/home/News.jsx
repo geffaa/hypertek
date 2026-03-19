@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
-import { useEffect, useState } from "react";
+import LazyImage from "../Common/LazyImage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -65,10 +65,11 @@ export default function News() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <img
+            <LazyImage
               src={getImageUrl(item.image)}
               alt={item.heading}
-              className="w-full h-[190px] object-cover block"
+              className="w-full h-[190px]"
+              imgClassName="object-cover"
             />
             <h3 className="text-white text-[15px] font-bold uppercase font-goldman leading-tight">
               {item.heading.length > 38 ? item.heading.slice(0, 38) + "..." : item.heading}
@@ -91,10 +92,11 @@ export default function News() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <img
+              <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-[90px] h-[65px] object-cover"
+                className="w-[90px] h-[65px] flex-shrink-0"
+                imgClassName="object-cover"
               />
               <div className="flex flex-col gap-1">
                 <p className="text-white text-[11px] font-semibold uppercase leading-[14px]">
@@ -142,10 +144,11 @@ export default function News() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <img
+              <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-full max-h-[350px] rounded-lg object-cover"
+                className="w-full h-[350px] rounded-lg"
+                imgClassName="object-cover"
               />
               <div className="flex flex-col gap-3 pt-2">
                 <h3 className="text-white text-2xl font-bold uppercase font-goldman">
@@ -170,10 +173,11 @@ export default function News() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
               >
-                <img
+                <LazyImage
                   src={getImageUrl(item.image)}
-                  className="w-full max-h-[200px] object-cover rounded-lg"
                   alt={item.heading}
+                  className="w-full h-[200px] rounded-lg"
+                  imgClassName="object-cover"
                 />
                 <h3 className="text-white text-xl font-bold uppercase font-goldman">
                   {item.heading.length > 30 ? item.heading.slice(0, 30) + "..." : item.heading}
@@ -214,10 +218,11 @@ export default function News() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
               >
-                <img
+                <LazyImage
                   src={getImageUrl(item.image)}
-                  className="w-[200px] h-[140px] object-cover"
                   alt={item.heading}
+                  className="w-[200px] h-[140px] flex-shrink-0"
+                  imgClassName="object-cover"
                 />
                 <p className="text-white text-base">
                   {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}

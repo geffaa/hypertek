@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { FiChevronDown, FiStar, FiFilter } from "react-icons/fi";
 import { ArrowRight } from "lucide-react";
 import popularCollections from "../assets/images/popular/popolar.png";
+import LazyImage from "../Components/Common/LazyImage";
 import MarketNavBar from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import OverviewTab from "../Components/MarketPlaceCom/OverviewTab";
@@ -68,13 +69,13 @@ function ProductCard({ item, index }) {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
       {/* Image */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#0a1a4a] to-[#050d28]">
-        <img
-          src={imgSrc}
-          alt={name}
-          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          onError={(e) => { e.target.src = popularCollections; }}
-        />
+      <LazyImage
+        src={imgSrc}
+        alt={name}
+        fallback={popularCollections}
+        className="w-full aspect-[4/3] bg-gradient-to-br from-[#0a1a4a] to-[#050d28]"
+        imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      >
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
@@ -95,7 +96,7 @@ function ProductCard({ item, index }) {
         >
           {label}
         </div>
-      </div>
+      </LazyImage>
 
       {/* Info */}
       <div className="flex flex-col gap-2 p-3.5 flex-1">

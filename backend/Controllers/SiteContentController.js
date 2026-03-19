@@ -1,6 +1,6 @@
 import fs from "fs";
+import path from "path";
 import SiteContent from "../Models/SiteContent.js";
-import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
 
 /**
  * GET /api/v1/site-content
@@ -99,12 +99,6 @@ export const updateSection = async (req, res) => {
  */
 export const uploadSectionImage = async (req, res) => {
     try {
-        if (!getIsCloudinaryEnabled()) {
-            return res
-                .status(500)
-                .json({ success: false, error: "Cloudinary not configured" });
-        }
-
         const { fieldKey } = req.body;
         if (!fieldKey) {
             return res
@@ -122,49 +116,37 @@ export const uploadSectionImage = async (req, res) => {
             sectionKey: req.params.sectionKey,
         });
         if (!section) {
+            fs.unlink(req.file.path, () => {});
             return res.status(404).json({ success: false, error: "Section not found" });
         }
 
-        // Upload to Cloudinary with auto transformation
-        let result;
-        try {
-            result = await getCloudinary().uploader.upload(req.file.path, {
-                folder: `hyper-tek/site-content/${req.params.sectionKey}`,
-                transformation: [
-                    { width: 1200, crop: "limit" },
-                    { quality: "auto" },
-                    { fetch_format: "auto" },
-                ],
-            });
-        } finally {
-            // Always delete the temp file, even on Cloudinary error
-            fs.unlink(req.file.path, () => {});
-        }
-
-        // Update field value with Cloudinary URL
         const field = section.fields.find((f) => f.key === fieldKey);
         if (!field) {
+            fs.unlink(req.file.path, () => {});
             return res
                 .status(400)
                 .json({ success: false, error: `Field "${fieldKey}" not found in section` });
         }
 
-        field.value = result.secure_url;
+        // Move file from temp to permanent location
+        const destDir = path.join(process.cwd(), "uploads", "site-content");
+        if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+        const ext = path.extname(req.file.originalname);
+        const filename = `${req.params.sectionKey}_${fieldKey}_${Date.now()}${ext}`;
+        const destPath = path.join(destDir, filename);
+        fs.renameSync(req.file.path, destPath);
+
+        const imageUrl = `${process.env.BACKEND_URL || "https://api.hypertek100.com"}/uploads/site-content/${filename}`;
+
+        field.value = imageUrl;
         section.markModified("fields");
         await section.save();
 
-        res.json({
-            success: true,
-            imageUrl: result.secure_url,
-            section,
-        });
+        res.json({ success: true, imageUrl, section });
     } catch (err) {
+        if (req.file?.path) fs.unlink(req.file.path, () => {});
         console.error("uploadSectionImage error:", err);
-        res.status(500).json({
-            success: false,
-            error: "Upload failed",
-            // Expose real error in dev so it shows in the browser console
-            ...(process.env.NODE_ENV !== "production" && { detail: err.message }),
-        });
+        res.status(500).json({ success: false, error: "Upload failed" });
     }
 };

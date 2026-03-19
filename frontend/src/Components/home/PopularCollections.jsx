@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MarketPlace_Url, getImageUrl } from "../../Config";
+import LazyImage from "../Common/LazyImage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -82,13 +83,12 @@ function PopularCollections() {
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
                 {/* Image */}
-                <div className="h-[110px] sm:h-[130px] lg:h-[150px] overflow-hidden">
-                  <img
-                    src={getImageUrl(item?.collection?.image)}
-                    alt={item?.collection?.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <LazyImage
+                  src={getImageUrl(item?.collection?.image)}
+                  alt={item?.collection?.name}
+                  className="h-[110px] sm:h-[130px] lg:h-[150px]"
+                  imgClassName="object-cover"
+                />
 
                 {/* Body */}
                 <div className="flex flex-col gap-1.5 p-2.5 sm:p-3 flex-1">
