@@ -89,6 +89,33 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+
+    // Hyper Bucks — in-game currency (250 HB = $1 USD)
+    hyperBucks: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    // Preferred payout method for sales proceeds + HB cashout
+    preferredPayout: {
+      type: String,
+      enum: ["usdc", "balance", "bank", "hb"],
+      default: "usdc",
+    },
+
+    // Bank details for fiat withdrawals (encrypted at rest via application layer)
+    bankDetails: {
+      accountHolderName: String,
+      bankName:          String,
+      accountNumber:     String,
+      iban:              String,
+      swift:             String,
+      routingNumber:     String,
+      country:           String,
+      currency:          { type: String, default: "USD" },
+      verified:          { type: Boolean, default: false }, // $0 test deposit verification
+    },
   },
   {
     timestamps: true,

@@ -1,215 +1,197 @@
-import React, { useState, useEffect } from "react";
-import land1Image from "../assets/images/Overview/land1.jpg";
-import ManImage from "../assets/images/Overview/man.png";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ArrowUpRight, ArrowDownLeft, RefreshCw, Clock } from "lucide-react";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
-import { FiSearch } from "react-icons/fi";
-import NavLinks from "../Components/MarketPlaceCom/NavLinks";
+import LazyImage from "../Components/Common/LazyImage";
+import popularFallback from "../assets/images/popular/popolar.png";
 import axios from "axios";
-import { BACKEND_BASE_URL } from "../Config"
-import FullScreenLoader from "../Components/Common/Spinner"; // ✅ your loader
+import { BACKEND_BASE_URL, getImageUrl } from "../Config";
+import FullScreenLoader from "../Components/Common/Spinner";
 
+const TYPE_ICON = {
+  Sale:        <ArrowUpRight  className="w-3.5 h-3.5 text-green-400" />,
+  Buy:         <ArrowDownLeft className="w-3.5 h-3.5 text-blue-400" />,
+  Trade:       <RefreshCw     className="w-3.5 h-3.5 text-amber-400" />,
+  NFT:         <ArrowUpRight  className="w-3.5 h-3.5 text-purple-400" />,
+  Collectible: <ArrowUpRight  className="w-3.5 h-3.5 text-pink-400" />,
+  Land:        <ArrowUpRight  className="w-3.5 h-3.5 text-emerald-400" />,
+};
 
+const TYPE_COLOR = {
+  Sale:        "text-green-400  bg-green-400/10  border-green-400/20",
+  Buy:         "text-blue-400   bg-blue-400/10   border-blue-400/20",
+  Trade:       "text-amber-400  bg-amber-400/10  border-amber-400/20",
+  NFT:         "text-purple-400 bg-purple-400/10 border-purple-400/20",
+  Collectible: "text-pink-400   bg-pink-400/10   border-pink-400/20",
+  Land:        "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+};
 
-function PersonalActivity() {
-  const [activityData, setActivityData] = useState([]);
-  const [loading, setLoading] = useState(true); // ✅ loader state
+function timeAgo(dateStr) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  if (diff < 60000)   return "just now";
+  if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+  if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+  return `${Math.floor(diff / 86400000)}d ago`;
+}
 
+function shortAddr(addr) {
+  if (!addr || addr.length < 10) return addr || "—";
+  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+}
 
+const FILTERS = ["All", "Sale", "Buy", "Trade", "NFT", "Land", "Collectible"];
 
-
-  const staticActivityData = [
-    {
-      name: "Monkey Ape",
-      type: "Land",
-      buyer: "John Doe",
-      seller: "Jane Doe",
-      price: 1800,
-      time: new Date(), // fallback to current date
-      image: null,      // optional, you can use land1Image
-    },
-    {
-      name: "Crypto Kitty",
-      type: "NFT",
-      buyer: "Alice",
-      seller: "Bob",
-      price: 2500,
-      time: new Date(),
-      image: null,
-    },
-    {
-      name: "Pixel Dragon",
-      type: "Collectible",
-      buyer: "Charlie",
-      seller: "Dave",
-      price: 3200,
-      time: new Date(),
-      image: null,
-    },
-  ];
-
+export default function PersonalActivity() {
+  const [rows, setRows]       = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter]   = useState("All");
+  const [page, setPage]       = useState(1);
+  const PER_PAGE = 15;
 
   useEffect(() => {
-    const fetchMarketData = async () => {
-      try {
-        const activity = await axios.get(
-          `${BACKEND_BASE_URL}/api/v1/activity/getActivity`
-        );
-        console.log("API activity data:", activity.data);
-
-        // if API data is empty, use static data
-        if (activity.data && activity.data.length > 0) {
-          setActivityData(activity.data);
-        } else {
-          setActivityData(staticActivityData);
-        }
-      } catch (error) {
-        console.error("Error fetching activity data:", error);
-        // fallback to static data if API fails
-        setActivityData(staticActivityData);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMarketData();
+    axios.get(`${BACKEND_BASE_URL}/api/v1/activity/getActivity`)
+      .then(r => setRows(r.data?.length ? r.data : []))
+      .catch(() => setRows([]))
+      .finally(() => setLoading(false));
   }, []);
 
+  if (loading) return <FullScreenLoader />;
 
+  const filtered = filter === "All"
+    ? rows
+    : rows.filter(r => (r.type || "").toLowerCase() === filter.toLowerCase());
 
-
-  const getDaysAgo = (dateString) => {
-    const created = new Date(dateString);
-    const now = new Date();
-
-    // Difference in milliseconds
-    const diffInMs = now.getTime() - created.getTime();
-
-    // If the time is in the future, return "0d"
-    if (diffInMs < 0) return "0d";
-
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    return `${diffInDays}d`;
-  };
-  if (loading) {
-    return <FullScreenLoader />;
-  }
+  const pages   = Math.ceil(filtered.length / PER_PAGE);
+  const visible = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   return (
     <div className="min-h-screen bg-transparent relative z-10">
-      {/* Full-width Banner */}
-      <div className="mt-20 lg:mt-[92px]">
+      <div className="mt-[72px]">
         <MarketplaceBanner
-          titleOverride="My Assets"
+          titleOverride="Transaction History"
+          descOverride="A full record of all marketplace activity across your account."
           stats={[
-            { num: "5K", label: "Total Item" },
-            { num: "50.5K", label: "Total Volume" },
-            { num: "3.5K", label: "Listed" },
-            { num: "2.6K", label: "Owners" },
+            { num: rows.length,                                 label: "Total Transactions" },
+            { num: rows.filter(r => r.type === "Sale").length,  label: "Sales"  },
+            { num: rows.filter(r => r.type === "Buy").length,   label: "Buys"   },
+            { num: rows.filter(r => r.type === "Trade").length, label: "Trades" },
           ]}
         />
       </div>
 
-      {/* Nav + Content */}
-      <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8">
-        {/* Navigation and Search */}
-        <div className="relative flex md:px-8 px-2 flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0 mb-4 lg:mb-8">
-          <NavLinks />
-          <div className="hidden mr-16 md:flex lg:w-[550px] items-center gap-3 lg:gap-[17px] px-4 lg:px-[16px] py-3 lg:py-[12px] border border-white/50 rounded-[12px] backdrop-blur-sm">
-            <FiSearch className="text-white w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="flex-1 bg-transparent pl-1 text-white placeholder-gray-300 outline-none text-sm lg:text-[16px] font-inter w-full"
-            />
-          </div>
-        </div>
-      </div>
+      <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-8">
 
-
-      {/* Activities Section */}
-      <section className="max-w-7xl mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-4 sm:px-6 lg:px-0">
-        {/* Section Title */}
-        <div className="flex flex-col gap-2 items-start">
-          <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
-            ACTIVITIES
-          </h1>
-          <div className="flex gap-2">
-            <div className="h-[3px] w-8 lg:w-12 bg-white"></div>
-            <div className="h-[3px] w-12 lg:w-20 bg-white"></div>
-            <div className="h-[3px] w-6 lg:w-8 bg-white"></div>
-            <div className="h-[3px] w-20 lg:w-40 bg-gradient-to-r from-white to-transparent"></div>
-          </div>
+        {/* Filter pills */}
+        <div className="flex items-center gap-2 flex-wrap mb-6">
+          {FILTERS.map(f => (
+            <button
+              key={f}
+              onClick={() => { setFilter(f); setPage(1); }}
+              className="px-3 py-1 rounded-full text-xs font-semibold transition-all"
+              style={filter === f
+                ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
+                : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.45)" }
+              }
+            >{f}</button>
+          ))}
+          <span className="ml-auto text-white/25 text-xs">{filtered.length} transactions</span>
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto rounded-lg ">
-          <table className="w-full min-w-[800px] text-white">
-            <thead className="bg-[#00134C]">
-              <tr className="text-left">
-                {["Name", "Type", "Buyer", "Seller", "Price", "Time"].map(
-                  (h, i) => (
-                    <th
-                      key={i}
-                      className="px-4 lg:px-6 py-3 lg:py-4 text-sm lg:text-[16px] font-inter font-medium"
-                    >
-                      {h}
-                    </th>
-                  )
-                )}
-              </tr>
-            </thead>
+        {visible.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-24 text-white/25 gap-3">
+            <Clock className="w-10 h-10 opacity-30" />
+            <p className="text-sm">No transactions yet</p>
+            <Link to="/market-place" className="mt-2 px-4 py-2 rounded-lg text-xs text-white"
+              style={{ background: "rgba(0,42,168,0.6)" }}>
+              Go to Marketplace
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+              {/* Header */}
+              <div className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1fr_1fr] gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/30"
+                style={{ background: "rgba(0,20,80,0.5)" }}>
+                <span>Item</span>
+                <span>Type</span>
+                <span>From</span>
+                <span>To</span>
+                <span className="text-right">Price</span>
+                <span className="text-right">Time</span>
+              </div>
 
-            <tbody>
-              {/* Example Row with Full Image */}
-              {activityData.slice(0, 5).map((item, index) => (
-                <tr key={index} className="transition-colors border-b border-[#0B2A6F]">
-                  <td className="px-4 lg:px-6 py-3 align-middle">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden">
-                        <img
-                          src={land1Image}
-                          alt="Avatar"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <span className="text-sm lg:text-[16px] font-inter font-normal">
-                        {item.name}
+              {/* Rows */}
+              {visible.map((item, i) => {
+                const typeCls = TYPE_COLOR[item.type] || "text-white/40 bg-white/5 border-white/10";
+                const icon    = TYPE_ICON[item.type];
+                const imgSrc  = item.image ? getImageUrl(item.image) : null;
+
+                return (
+                  <div
+                    key={i}
+                    className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1fr_1fr] gap-4 px-5 py-3 items-center text-sm transition-colors"
+                    style={{
+                      background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                      borderTop: "1px solid rgba(255,255,255,0.04)",
+                    }}
+                  >
+                    {/* Item */}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <LazyImage
+                        src={imgSrc}
+                        fallback={popularFallback}
+                        alt={item.name}
+                        className="w-9 h-9 rounded-lg flex-shrink-0"
+                        imgClassName="object-cover"
+                      />
+                      <span className="text-white/85 text-[13px] font-medium truncate">{item.name || "—"}</span>
+                    </div>
+
+                    {/* Type badge */}
+                    <div>
+                      <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${typeCls}`}>
+                        {icon}{item.type || "—"}
                       </span>
                     </div>
-                  </td>
 
-                  <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
-                    {item.type}
-                  </td>
+                    {/* From (seller) */}
+                    <span className="text-white/45 text-[12px] font-mono truncate"
+                      title={item.seller}>{shortAddr(item.seller)}</span>
 
-                  <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
-                    {item.buyer}
-                  </td>
+                    {/* To (buyer) */}
+                    <span className="text-white/45 text-[12px] font-mono truncate"
+                      title={item.buyer}>{shortAddr(item.buyer)}</span>
 
-                  <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
-                    {item.seller}
-                  </td>
+                    {/* Price */}
+                    <span className="text-white/80 text-[13px] font-semibold text-right">
+                      {item.price ? `$${Number(item.price).toLocaleString()}` : "—"}
+                    </span>
 
-                  <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
-                    ${item.price}
-                  </td>
+                    {/* Time */}
+                    <span className="text-white/30 text-[11px] text-right whitespace-nowrap">
+                      {item.time ? timeAgo(item.time) : "—"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
 
-                  <td className="px-4 lg:px-6 py-3 text-sm lg:text-[14px] font-inter font-normal align-middle">
-                    {getDaysAgo(item.time)}
-                  </td>
-                </tr>
-              ))}
-
-              {/* Example Row with Cropped Head Image */}
-
-            </tbody>
-          </table>
-        </div>
-      </section>
+            {/* Pagination */}
+            {pages > 1 && (
+              <div className="flex items-center justify-center gap-3 mt-6">
+                <button disabled={page === 1} onClick={() => setPage(p => p - 1)}
+                  className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
+                  style={{ background: "rgba(255,255,255,0.07)" }}>Prev</button>
+                <span className="text-white/30 text-xs">Page {page} of {pages}</span>
+                <button disabled={page >= pages} onClick={() => setPage(p => p + 1)}
+                  className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
+                  style={{ background: "rgba(255,255,255,0.07)" }}>Next</button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
-
   );
 }
-
-export default PersonalActivity;

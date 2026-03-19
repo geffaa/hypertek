@@ -1,5 +1,6 @@
 import NFTSystem from "../Models/NFTSystem.js";
 import { getBlockchain, ethers } from "./blockchain.js";
+import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
@@ -72,7 +73,7 @@ export async function finalizeNFAPurchase({
 
   if (!tokenId) {
     console.log("🎨 Minting NFT for purchase...");
-    const chainId = 84532; // Default to Base Sepolia
+    const chainId = 8453; // Base Mainnet
     const { nftContract, wallet: backendWalletObj, provider } = getBlockchain(chainId);
     
     const backendWallet = await backendWalletObj.getAddress();
@@ -151,22 +152,39 @@ export async function finalizeNFAPurchase({
 
   const cleanPrice = parseFloat(String(priceETH || subCollection.priceETH || 0));
   
-  // Calculate distribution based on recordSubCollectionSale logic
-  const PLATFORM_FEE_PERCENT = 10;
-  const CREATOR_ROYALTY_PERCENT = 5;
-  
-  let royaltyPaid = 0;
-  let platformFee = 0;
+  // Distribution — NFA: 4% artist + 5% buyback + 11% company | NFC: 4% creator + 16% company
+  const wasFirstSale = subCollection.isFirstSale;
+  const isNFA = subCollection.isNFA === true;
+
+  let royaltyPaid    = 0;
+  let platformFee    = 0;
+  let buybackAmount  = 0;
+  let companyAmount  = 0;
   let sellerReceived = 0;
 
-  if (subCollection.isFirstSale) {
-    royaltyPaid = cleanPrice;
-    platformFee = 0;
-    sellerReceived = 0;
+  if (wasFirstSale) {
+    royaltyPaid = cleanPrice; // 100% to creator on first sale
+  } else if (isNFA) {
+    // NFA: seller 80% | artist 4% | buyback 5% | company 11%
+    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
+    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6));
+    companyAmount  = parseFloat((cleanPrice * 0.11).toFixed(6));
+    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
   } else {
-    royaltyPaid = (cleanPrice * CREATOR_ROYALTY_PERCENT) / 100;
-    platformFee = (cleanPrice * PLATFORM_FEE_PERCENT) / 100;
-    sellerReceived = cleanPrice - royaltyPaid - platformFee;
+    // NFC: seller 80% | creator 4% | company 16%
+    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
+    companyAmount  = parseFloat((cleanPrice * 0.16).toFixed(6));
+    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+  }
+
+  // NFA buyback auto-increment
+  if (isNFA && !wasFirstSale && cleanPrice > 0) {
+    subCollection.minimumBuybackUSD = parseFloat(
+      ((subCollection.minimumBuybackUSD || 0) + buybackAmount).toFixed(2)
+    );
+    console.log(`🏦 [Buyback] NFA minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
   }
 
   const saleRecord = {
@@ -198,6 +216,17 @@ export async function finalizeNFAPurchase({
   await parent.save();
 
   console.log(`✅ [finalizeNFAPurchase] COMPLETED! Token #${tokenId} owner is now ${buyerWallet}`);
+
+  // Dispatch creator royalty (async, non-blocking — sale is already finalised)
+  if (royaltyPaid > 0 && creatorWallet && creatorWallet !== "admin") {
+    dispatchRoyalty({
+      subCollectionId: cleanSubId,
+      parentId:        cleanParentId,
+      creatorWallet,
+      amount:          royaltyPaid,
+      saleRecordId:    receiptHash || paymentIntentId,
+    }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
+  }
 
   console.log("✅ NFA Purchase Finalized for Token #", tokenId);
   return { success: true, tokenId, subCollection };

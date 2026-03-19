@@ -30,6 +30,11 @@ import ContentRoute from "./Routes/ContentRoute.js";
 import WaitlistRouter from "./Routes/WaitlistRoute.js";
 import Nft101Router from "./Routes/Nft101Route.js";
 import AdminNFARouter from "./Routes/AdminNFA.js";
+import AuctionRouter from "./Routes/AuctionRoute.js";
+import TradeRouter from "./Routes/TradeRoute.js";
+import HireRentRouter from "./Routes/HireRentRoute.js";
+import BountyRouter from "./Routes/BountyRoute.js";
+import HBRouter from "./Routes/HBRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -146,6 +151,11 @@ app.use("/api/v1/site-content", ContentRoute);
 app.use("/api/v1/waitlist", WaitlistRouter);
 app.use("/api/v1/nft101", Nft101Router);
 app.use("/api/v1/admin/nfa", AdminNFARouter);
+app.use("/api/v1/auction", AuctionRouter);
+app.use("/api/v1/trade", TradeRouter);
+app.use("/api/v1/hire", HireRentRouter);
+app.use("/api/v1/bounty", BountyRouter);
+app.use("/api/v1/hb", HBRouter);
 
 // Health check
 app.get("/health", (req, res) => {

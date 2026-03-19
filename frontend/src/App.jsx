@@ -146,7 +146,7 @@ function AppWrapper() {
       <Elements stripe={stripePromise}>
         {!shouldHideLayout && <Navbar />}
 
-        <div style={{ flex: 1, position: "relative", zIndex: 1 }}>
+        <div style={{ flex: 1, position: "relative", zIndex: 20 }}>
           <Routes key={location.pathname}>
             {/* Main Pages */}
             <Route path="/" element={<Home />} />

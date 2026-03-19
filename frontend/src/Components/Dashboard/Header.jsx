@@ -24,6 +24,7 @@ const Header = ({ onMenuClick }) => {
 
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const bellRef = useRef(null);
+  const [hbBalance, setHbBalance] = useState(null);
 
   // Bell animation
   const triggerBellAnimation = () => {
@@ -56,6 +57,22 @@ const Header = ({ onMenuClick }) => {
     if (token) fetchProfile();
   }, [token]);
 
+  // Fetch HB balance
+  useEffect(() => {
+    const fetchHBBalance = async () => {
+      try {
+        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/hb/balance`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setHbBalance(res.data);
+      } catch (error) {
+        // Non-fatal — HB balance is supplemental
+        console.warn("Failed to fetch HB balance:", error?.response?.data?.error || error.message);
+      }
+    };
+    if (token) fetchHBBalance();
+  }, [token]);
+
   const handleImageError = () => setImageError(true);
 
   // Search handler
@@ -77,7 +94,23 @@ const Header = ({ onMenuClick }) => {
 
       <div className="flex items-center justify-end gap-[12px] md:gap-[20px] lg:mr-16">
 
-        {/* 🔍 Search Box */}
+        {/* HB Balance Pill */}
+        {hbBalance !== null && (
+          <button
+            onClick={() => navigate("/dashboard/withdraw")}
+            className="flex flex-col items-center justify-center bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/40 hover:border-yellow-400/70 rounded-lg px-3 py-1 transition-all duration-200 hover:scale-105 flex-shrink-0"
+            title="Hyper Bucks — click to cashout"
+          >
+            <span className="text-yellow-300 text-xs font-bold leading-tight whitespace-nowrap">
+              ⚡ {hbBalance.hyperBucks} HB
+            </span>
+            <span className="text-yellow-500/70 text-[10px] leading-tight">
+              ${hbBalance.usdEquivalent} USD
+            </span>
+          </button>
+        )}
+
+        {/* Search Box */}
         <div
           className={`
             flex items-center gap-2 px-3 py-2 rounded-lg

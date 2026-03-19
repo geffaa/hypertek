@@ -8,6 +8,7 @@ import {
   formatEther,
 } from "../Service/blockchain.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
+import { dispatchRoyalty } from "../services/RoyaltyService.js";
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
 async function saveImagePermanently(filePath, filename) {
@@ -214,7 +215,10 @@ export async function getSubCollections(req, res) {
 export async function updateSubCollection(req, res) {
   try {
     const { parentId, subCollectionId } = req.params;
-    const { name, symbol, description, priceETH, listed } = req.body;
+    const {
+      name, symbol, description, priceETH, listed,
+      isNFA, nfaFrame, minimumBuybackUSD, royaltyWallet,
+    } = req.body;
 
     const parent = await NFTSystem.findById(parentId);
     if (!parent) {
@@ -226,11 +230,19 @@ export async function updateSubCollection(req, res) {
       return res.status(404).json({ error: "Sub-collection not found" });
     }
 
-    if (name) subCollection.name = name;
-    if (symbol) subCollection.symbol = symbol;
-    if (description !== undefined) subCollection.description = description;
-    if (priceETH !== undefined) subCollection.priceETH = priceETH;
-    if (listed !== undefined) subCollection.listed = listed;
+    if (name)                        subCollection.name        = name;
+    if (symbol)                      subCollection.symbol      = symbol;
+    if (description !== undefined)   subCollection.description = description;
+    if (priceETH !== undefined)      subCollection.priceETH    = priceETH;
+    if (listed !== undefined)        subCollection.listed      = listed;
+    // NFA fields — admin-only
+    if (isNFA !== undefined)         subCollection.isNFA       = isNFA === "true" || isNFA === true;
+    if (nfaFrame !== undefined)      subCollection.nfaFrame    = nfaFrame || null;
+    if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "")
+      subCollection.minimumBuybackUSD = parseFloat(minimumBuybackUSD);
+    // Royalty wallet — stored on parent collection for this sub
+    if (royaltyWallet !== undefined && royaltyWallet !== "")
+      parent.collection.royaltyWallet = royaltyWallet;
 
     if (req.file) {
       subCollection.image = await saveImagePermanently(req.file.path, req.file.filename);
@@ -1015,53 +1027,54 @@ function calculatePaymentDistribution(
   isFirstSale,
   creatorWallet,
   sellerWallet,
+  isNFA = false,
 ) {
-  const PLATFORM_FEE_PERCENT = 20;
-  const CREATOR_ROYALTY_PERCENT = 4;
   const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
 
   let distribution = {
-    sellerAmount: 0,
-    creatorAmount: 0,
+    sellerAmount:   0,
+    creatorAmount:  0,
     platformAmount: 0,
+    buybackAmount:  0,  // NFA only — 5% to buyback fund
+    companyAmount:  0,  // 11% (NFA) or 16% (NFC) to company account
     payments: [],
   };
 
   if (isFirstSale) {
-    // First sale: 100% to creator
+    // First sale: 100% to creator, no platform cut
     distribution.creatorAmount = priceETH;
     distribution.payments.push({
       recipient: creatorWallet,
-      amount: priceETH,
+      amount:     priceETH,
       percentage: 100,
-      type: "creator_first_sale",
+      type:       "creator_first_sale",
     });
-  } else {
-    // Secondary sales: 4% creator royalty, 20% platform fee, 76% to seller
-    distribution.creatorAmount = (priceETH * CREATOR_ROYALTY_PERCENT) / 100;
-    distribution.platformAmount = (priceETH * PLATFORM_FEE_PERCENT) / 100;
-    distribution.sellerAmount =
-      priceETH - distribution.creatorAmount - distribution.platformAmount;
+  } else if (isNFA) {
+    // NFA: seller 80% | artist 4% | buyback fund 5% | company 11% — all from total price
+    // 4% + 5% + 11% = 20% platform (from seller's gross), seller nets 80%
+    distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
+    distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
+    distribution.buybackAmount  = parseFloat((priceETH * 0.05).toFixed(6));
+    distribution.companyAmount  = parseFloat((priceETH * 0.11).toFixed(6));
+    distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
 
     distribution.payments.push(
-      {
-        recipient: creatorWallet,
-        amount: distribution.creatorAmount,
-        percentage: 4,
-        type: "creator_royalty",
-      },
-      {
-        recipient: platformWallet,
-        amount: distribution.platformAmount,
-        percentage: 20,
-        type: "platform_fee",
-      },
-      {
-        recipient: sellerWallet,
-        amount: distribution.sellerAmount,
-        percentage: 76,
-        type: "seller_proceeds",
-      },
+      { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
+      { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "artist_royalty"  },
+      { recipient: "buyback_fund", amount: distribution.buybackAmount,  percentage: 5,  type: "buyback_fund"    },
+      { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 11, type: "company_account" },
+    );
+  } else {
+    // NFC: seller 80% | creator 4% | company 16% — all from total price
+    distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
+    distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
+    distribution.companyAmount  = parseFloat((priceETH * 0.16).toFixed(6));
+    distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
+
+    distribution.payments.push(
+      { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
+      { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "creator_royalty" },
+      { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 16, type: "company_account" },
     );
   }
 
@@ -1806,12 +1819,14 @@ export async function recordSubCollectionSale(req, res) {
     const priceUSDC = isNaN(cleanPrice) ? 0 : parseFloat(cleanPrice.toFixed(6));
     console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (raw received: ${priceETH})`);
 
-    // Calculate payment distribution
+    // Calculate payment distribution (NFA vs NFC split)
+    const wasFirstSale = subCollection.isFirstSale;
     const distribution = calculatePaymentDistribution(
       priceUSDC,
-      subCollection.isFirstSale,
+      wasFirstSale,
       creatorWallet,
       seller,
+      subCollection.isNFA === true,
     );
 
     // Create sale record
@@ -1845,6 +1860,14 @@ export async function recordSubCollectionSale(req, res) {
       subCollection.isFirstSale = false;
     }
 
+    // NFA buyback auto-increment: minimumBuybackUSD += salePrice * 5%
+    if (subCollection.isNFA && !wasFirstSale && priceUSDC > 0) {
+      subCollection.minimumBuybackUSD = parseFloat(
+        ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
+      );
+      console.log(`🏦 [Buyback] NFA minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
+    }
+
     // Update parent collection sales count
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
 
@@ -1863,6 +1886,16 @@ export async function recordSubCollectionSale(req, res) {
     console.log(
       `✅ Sub-collection sale recorded: Token ${tokenId} sold to ${buyer}`,
     );
+
+    // Dispatch creator royalty (non-blocking — sale already saved)
+    if (distribution.creatorAmount > 0 && creatorWallet && creatorWallet !== "admin") {
+      dispatchRoyalty({
+        subCollectionId: subCollection._id.toString(),
+        parentId:        parent._id.toString(),
+        creatorWallet,
+        amount:          distribution.creatorAmount,
+      }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
+    }
 
     return res.json({
       success: true,

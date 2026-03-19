@@ -1,0 +1,21 @@
+import express from "express";
+import {
+  earnHB,
+  spendHB,
+  cashoutHB,
+  getHBBalance,
+  getHBHistory,
+  saveBankDetails,
+} from "../Controllers/HBController.js";
+import { authMiddleware } from "../Middleware/googleMiddle.js";
+
+const router = express.Router();
+
+router.post("/earn", earnHB);                             // called by game server (no auth — internal)
+router.post("/spend", spendHB);                           // called by marketplace (no auth — internal)
+router.post("/cashout", authMiddleware(), cashoutHB);
+router.get("/balance", authMiddleware(), getHBBalance);
+router.get("/history", authMiddleware(), getHBHistory);
+router.put("/bank-details", authMiddleware(), saveBankDetails);
+
+export default router;

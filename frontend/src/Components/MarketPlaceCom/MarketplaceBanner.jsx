@@ -1,23 +1,24 @@
-import React from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import overview1 from "../../assets/images/Overview/overview1.jpg";
 import useSiteContent from "../../hooks/useSiteContent";
 import { BACKEND_BASE_URL } from "../../Config";
 
 /**
- * Full-width marketplace banner — driven by CMS (marketplace_banner section).
+ * Full-width marketplace hero banner — driven by CMS (marketplace_banner section).
  *
  * Props:
  *   stats        — array of { num, label } shown at the bottom-left
  *   titleOverride — if provided, replaces the CMS heading (used for category pages)
  *   descOverride  — if provided, replaces the CMS description
+ *   playing       — boolean, current audio state (controlled by parent)
+ *   onToggleAudio — callback to toggle ambient sound
  */
-function MarketplaceBanner({ stats = [], titleOverride, descOverride }) {
+function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = false, onToggleAudio, noMargin = false }) {
   const { data: cms } = useSiteContent("marketplace_banner");
 
-  const heading  = titleOverride  || cms.heading      || "A New Era Dawns in Hyper Tek";
-  const desc     = descOverride   || cms.description  || "It's the start of a living, breathing universe where every decision shapes the journey.";
+  const heading = titleOverride || cms.heading     || "A New Era Dawns in Hyper Tek";
+  const desc    = descOverride  || cms.description || "It's the start of a living, breathing universe where every decision shapes the journey.";
 
-  // CMS image takes precedence; fall back to the bundled asset
   let bgImage = overview1;
   if (cms.background_image) {
     bgImage = cms.background_image.startsWith("http")
@@ -27,7 +28,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride }) {
 
   return (
     <div
-      className="relative w-full h-60 md:h-72 lg:h-[280px] shadow-lg mb-8"
+      className={`relative w-full h-60 md:h-72 lg:h-[280px] shadow-lg ${noMargin ? "" : "mb-8"}`}
       style={{
         backgroundImage: `
           linear-gradient(
@@ -53,6 +54,26 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride }) {
           {desc}
         </p>
       </div>
+
+      {/* Audio toggle — top right */}
+      {onToggleAudio && (
+        <button
+          onClick={onToggleAudio}
+          className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 hover:text-white transition-all duration-200"
+          style={{
+            background: "rgba(0,0,0,0.45)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            backdropFilter: "blur(8px)",
+          }}
+          title={playing ? "Mute ambient sound" : "Play ambient sound"}
+        >
+          {playing
+            ? <Volume2 className="w-4 h-4" />
+            : <VolumeX className="w-4 h-4" />
+          }
+          <span className="hidden sm:inline">{playing ? "Sound On" : "Sound Off"}</span>
+        </button>
+      )}
 
       {/* Stats */}
       {stats.length > 0 && (

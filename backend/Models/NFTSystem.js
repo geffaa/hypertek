@@ -25,6 +25,23 @@ const subCollectionSchema = new mongoose.Schema({
   priceETH: { type: Number, default: 0 },
   isFirstSale: { type: Boolean, default: true },
   salesHistory: [saleSchema],
+  // NFA designation — set by admin only
+  isNFA: { type: Boolean, default: false },
+  nfaFrame: { type: String, default: null },
+  // Per-item buyback tracking (NFA only)
+  minimumBuybackUSD:  { type: Number, default: 0 },
+  reservePriceUSD:    { type: Number, default: 0 },
+  buybackPending:     { type: Boolean, default: false },
+  // Artist royalty payout preference (set by admin per item/collection)
+  royaltyPaymentPreference: { type: String, enum: ["crypto", "bank"], default: "crypto" },
+  royaltyBankDetails: {
+    accountHolderName: String,
+    bankName:          String,
+    accountNumber:     String,
+    iban:              String,
+    swift:             String,
+    country:           String,
+  },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -97,6 +114,10 @@ const nftSystemSchema = new mongoose.Schema(
       default: true,
     },
     salesHistory: [saleSchema],
+
+    // NFA designation — applied by admin, any item in any category can be an NFA
+    isNFA: { type: Boolean, default: false },
+    nfaFrame: { type: String, default: null }, // frame style key for visual distinction
 
     // NFA buyback fields
     reservePriceUSD: { type: Number, default: 0 },

@@ -351,113 +351,75 @@ function MarketPlace() {
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                 {filteredCollections.map((item) => {
                   const hasInteracted = userHasInteracted[item._id];
+                  const isNFA = item.isNFA || item.type === "NFA";
 
                   return (
                     <div
                       key={item._id}
-                      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
+                      className="relative rounded-xl overflow-hidden flex flex-col text-white"
                       style={{
-                        background:
-                          "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
+                        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
+                        border: isNFA ? "1px solid rgba(0,80,255,0.45)" : "1px solid rgba(255,255,255,0.09)",
                       }}
                     >
-                      <LazyImage
-                        src={getImageUrl(item.image)}
-                        alt={item.name}
-                        className="h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px]"
-                        imgClassName="object-cover"
-                      />
-
-                      <h2 className="text-[14px] sm:text-[16px] lg:text-[18px] font-semibold mt-4 truncate">
-                        {item.name}
-                      </h2>
-
-                      <div className="flex justify-between items-center mt-3 text-[11px] sm:text-[13px] lg:text-sm">
-                        <span className="font-medium text-gray-300 truncate">
-                          {item.symbol} 🔥
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                            <img
-                              src={TVector}
-                              className="w-3 h-3"
-                              alt="chain"
-                            />
-                          </div>
-                          <span className="font-semibold truncate">
-                            {item.priceETH} USDC
-                          </span>
+                      {/* Image */}
+                      <div className="relative">
+                        <LazyImage
+                          src={getImageUrl(item.image)}
+                          alt={item.name}
+                          className="w-full h-[120px] sm:h-[130px]"
+                          imgClassName="object-cover"
+                        />
+                        {isNFA && (
+                          <>
+                            <div className="absolute inset-0 ring-2 ring-inset ring-[#002AA8] pointer-events-none rounded-none" />
+                            <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
+                              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>
+                              NFA
+                            </div>
+                          </>
+                        )}
+                        {/* Unlisted badge */}
+                        <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase"
+                          style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.5)" }}>
+                          Unlisted
                         </div>
                       </div>
 
-                      {/* ================= DESKTOP VIEW ================= */}
-                      <div className="hidden md:block mt-auto pt-6 text-center relative group focus-within:outline-none">
-                        {/* Always show Sell Now button first, unless user has interacted */}
-                        {!hasInteracted ? (
-                          <div className="flex justify-center items-center w-full mt-auto pt-6">
+                      {/* Info */}
+                      <div className="p-3 flex flex-col gap-2 flex-1">
+                        <p className="text-white/90 text-sm font-semibold truncate">{item.name}</p>
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-white/35 text-[10px] uppercase tracking-wide">{item.symbol}</span>
+                          <span className="text-white/75 text-[12px] font-semibold">
+                            {item.priceETH ? `${item.priceETH} USDC` : "—"}
+                          </span>
+                        </div>
+
+                        {/* CTA */}
+                        <div className="mt-auto pt-2">
+                          {!hasInteracted ? (
                             <button
                               onClick={() => handleSellNowClick(item._id)}
-                              className="w-full flex justify-center"
+                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all"
+                              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}
                             >
-                              <CustomButton4 text="Sell Now" />
+                              Connect &amp; List
                             </button>
-                          </div>
-                        ) : (
-                          /* After interaction, show Not Listed with hover effect */
-                          <div className="relative group">
-                            {/* Default view - Not Listed */}
-                            <div className="text-sm text-white py-2 transition-opacity duration-300 group-hover:opacity-0">
-                              Not Listed
-                            </div>
-
-                            {/* Hover view - List Now button */}
-                            <div
+                          ) : (
+                            <button
                               onClick={() => navigateToBuyNFA(item)}
-                              className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all"
+                              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}
                             >
-                              <CustomButton4 text="List Now" />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* ================= MOBILE VIEW ================= */}
-                      <div className="md:hidden mt-auto pt-6 text-center">
-                        {!hasInteracted ? (
-                          /* Mobile: Always show Sell Now first */
-                          <div className="flex justify-center items-center w-full mt-auto pt-6">
-                            <button
-                              onClick={() => handleSellNowClick(item._id)}
-                              className="w-full flex justify-center"
-                            >
-                              <CustomButton4 text="Sell Now" />
+                              List for Sale
                             </button>
-                          </div>
-                        ) : !showMobileList[item._id] ? (
-                          /* Mobile: After interaction, show Not Listed initially */
-                          <button
-                            onClick={() =>
-                              setShowMobileList((prev) => ({
-                                ...prev,
-                                [item._id]: true,
-                              }))
-                            }
-                            className="text-sm text-white w-full py-2"
-                          >
-                            Not Listed
-                          </button>
-                        ) : (
-                          /* Mobile: Tapped - show List Now button */
-                          <button
-                            onClick={() => navigateToBuyNFA(item)}
-                            className="w-full"
-                          >
-                            <CustomButton4 text="List Now" />
-                          </button>
-                        )}
+                          )}
+                        </div>
                       </div>
                     </div>
                   );

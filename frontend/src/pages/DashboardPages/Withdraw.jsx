@@ -10,7 +10,8 @@ import { BACKEND_BASE_URL } from '../../Config';
 import { openTransakOnRamp, openTransakOffRamp } from '../../utils/transakUtils';
 
 // Simple Icons
-import { FiDollarSign, FiCreditCard, FiPlusCircle } from 'react-icons/fi';
+import { FiDollarSign, FiCreditCard, FiPlusCircle, FiZap } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
 
 
 const Withdraw = () => {
@@ -20,7 +21,7 @@ const Withdraw = () => {
     const { balance: usdcBalance, loading: usdcLoading, refresh: refreshUsdc } = useTokenBalance(tokenAddress);
     const { balance: ethBalance, loading: ethLoading } = useTokenBalance(null); // Fetch Native ETH
 
-    const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto', 'bank', or 'add'
+    const [withdrawType, setWithdrawType] = useState('crypto'); // 'crypto', 'bank', 'add', or 'hb'
     const [showTransak, setShowTransak] = useState(false);
     const [transakUrl, setTransakUrl] = useState('');
     const [selectedToken, setSelectedToken] = useState('USDC'); // 'USDC' or 'ETH'
@@ -68,6 +69,15 @@ const Withdraw = () => {
 
     const [withdrawals, setWithdrawals] = useState([]);
     const [historyLoading, setHistoryLoading] = useState(false);
+
+    // HB states
+    const { token: authToken } = useSelector((state) => state.auth);
+    const [hbBalance, setHbBalance] = useState(null);
+    const [hbHistory, setHbHistory] = useState([]);
+    const [hbHistoryLoading, setHbHistoryLoading] = useState(false);
+    const [hbCashoutAmountUsdc, setHbCashoutAmountUsdc] = useState('');
+    const [hbCashoutAmountBank, setHbCashoutAmountBank] = useState('');
+    const [hbProcessing, setHbProcessing] = useState(false);
 
     // New State for USD Conversion for ETH
     const [conversionRate, setConversionRate] = useState(null);
@@ -389,6 +399,88 @@ const Withdraw = () => {
     // ── Transak On-Ramp (Buy crypto with fiat) ─────────────────────
     const handleTransakOnRamp = () => openTransakOnRamp({ walletAddress: wagmiAddress });
 
+    // ── HB balance fetch ────────────────────────────────────────────
+    const fetchHBBalance = React.useCallback(async () => {
+        if (!authToken) return;
+        try {
+            const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/balance`, {
+                headers: { Authorization: `Bearer ${authToken}` },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setHbBalance(data);
+            }
+        } catch (err) {
+            console.warn("Failed to fetch HB balance", err);
+        }
+    }, [authToken]);
+
+    const fetchHBHistory = React.useCallback(async () => {
+        if (!authToken) return;
+        setHbHistoryLoading(true);
+        try {
+            const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/history?limit=20`, {
+                headers: { Authorization: `Bearer ${authToken}` },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setHbHistory(data.entries || []);
+            }
+        } catch (err) {
+            console.warn("Failed to fetch HB history", err);
+        } finally {
+            setHbHistoryLoading(false);
+        }
+    }, [authToken]);
+
+    React.useEffect(() => {
+        if (withdrawType === 'hb') {
+            fetchHBBalance();
+            fetchHBHistory();
+        }
+    }, [withdrawType, fetchHBBalance, fetchHBHistory]);
+
+    const handleHBCashout = async (method) => {
+        const rawAmount = method === 'usdc' ? hbCashoutAmountUsdc : hbCashoutAmountBank;
+        const hbAmount = parseInt(rawAmount, 10);
+
+        if (!hbAmount || hbAmount <= 0) {
+            toast.error("Please enter a valid HB amount");
+            return;
+        }
+
+        setHbProcessing(true);
+        const toastId = toast.loading(`Processing HB cashout via ${method.toUpperCase()}...`);
+
+        try {
+            const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${authToken}`,
+                },
+                body: JSON.stringify({ amount: hbAmount, method }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                toast.error(data.error || "Cashout failed", { id: toastId });
+                return;
+            }
+
+            toast.success(`Cashout of ${hbAmount} HB ($${data.usdAmount}) submitted!`, { id: toastId });
+            if (method === 'usdc') setHbCashoutAmountUsdc('');
+            else setHbCashoutAmountBank('');
+            fetchHBBalance();
+            fetchHBHistory();
+        } catch (err) {
+            toast.error("Cashout failed: " + err.message, { id: toastId });
+        } finally {
+            setHbProcessing(false);
+        }
+    };
+
     // Derived State for Display
     // Unified Logic for ALL Wallets (MetaMask, Immutable, etc.)
     const effectiveUsdcBalance = isWagmiConnected ? mmUsdcBalance : usdcBalance;
@@ -503,6 +595,16 @@ const Withdraw = () => {
                             Bank
                         </div>
                         {withdrawType === 'bank' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-blue-500 rounded-t-full"></div>}
+                    </button>
+                    <button
+                        onClick={() => setWithdrawType('hb')}
+                        className={`pb-3 px-2 text-sm font-semibold transition-colors relative ${withdrawType === 'hb' ? 'text-yellow-400' : 'text-white/60 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-2">
+                            <FiZap className="text-lg" />
+                            Hyper Bucks
+                        </div>
+                        {withdrawType === 'hb' && <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-yellow-400 rounded-t-full"></div>}
                     </button>
                 </div>
 
@@ -660,6 +762,144 @@ const Withdraw = () => {
                             >
                                 Withdraw via Transak
                             </button>
+                        </div>
+                    )}
+
+                    {withdrawType === 'hb' && (
+                        <div className="space-y-6">
+                            {/* HB Balance Card */}
+                            <div className="bg-[#1C1C1E] p-6 rounded-xl border border-yellow-500/30">
+                                <p className="text-white/60 text-sm mb-1">Hyper Bucks Balance</p>
+                                <div className="flex items-end gap-2 mb-1">
+                                    <h2 className="text-3xl font-bold text-yellow-300">
+                                        {hbBalance ? hbBalance.hyperBucks : '—'}
+                                    </h2>
+                                    <span className="text-yellow-500 mb-1.5 font-medium">HB</span>
+                                </div>
+                                <p className="text-white/40 text-sm">
+                                    ${hbBalance ? hbBalance.usdEquivalent : '0.00'} USD equivalent
+                                </p>
+                            </div>
+
+                            {/* Info Card */}
+                            <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-lg text-sm text-yellow-200">
+                                <p className="font-semibold mb-1">About Hyper Bucks (HB)</p>
+                                <p className="text-yellow-200/70 mb-2">250 HB = $1 USD. Earn HB by playing games and spend on the marketplace.</p>
+                                <p className="text-yellow-200/70">Set up a crypto wallet to convert HB instantly at point of sale. Or withdraw to your bank account (min $10).</p>
+                            </div>
+
+                            {/* USDC Cashout */}
+                            <div className="bg-[#1C1C1E] p-4 md:p-6 rounded-xl border border-white/10">
+                                <h3 className="text-base font-semibold mb-1">Cashout to USDC Wallet</h3>
+                                <p className="text-white/50 text-sm mb-4">Minimum: 250 HB ($1.00) · ~$0.01 gas fee</p>
+                                <div className="flex gap-3">
+                                    <input
+                                        type="number"
+                                        value={hbCashoutAmountUsdc}
+                                        onChange={(e) => setHbCashoutAmountUsdc(e.target.value)}
+                                        placeholder="Amount in HB (min 250)"
+                                        className="flex-1 bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-yellow-500 outline-none transition-colors"
+                                    />
+                                    <button
+                                        onClick={() => handleHBCashout('usdc')}
+                                        disabled={hbProcessing}
+                                        className={`px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
+                                    >
+                                        {hbProcessing ? 'Processing...' : 'Cashout to Wallet'}
+                                    </button>
+                                </div>
+                                {hbCashoutAmountUsdc && Number(hbCashoutAmountUsdc) > 0 && (
+                                    <p className="text-xs text-white/40 mt-2">
+                                        ≈ ${(Number(hbCashoutAmountUsdc) / 250).toFixed(2)} USD
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Bank Cashout */}
+                            <div className="bg-[#1C1C1E] p-4 md:p-6 rounded-xl border border-white/10">
+                                <h3 className="text-base font-semibold mb-1">Bank Transfer</h3>
+                                <p className="text-white/50 text-sm mb-4">Minimum: 2500 HB ($10.00) · Bank details required</p>
+                                <div className="flex gap-3">
+                                    <input
+                                        type="number"
+                                        value={hbCashoutAmountBank}
+                                        onChange={(e) => setHbCashoutAmountBank(e.target.value)}
+                                        placeholder="Amount in HB (min 2500)"
+                                        className="flex-1 bg-[#100F0F] border border-white/10 rounded-lg px-4 py-3 text-white focus:border-yellow-500 outline-none transition-colors"
+                                    />
+                                    <button
+                                        onClick={() => handleHBCashout('bank')}
+                                        disabled={hbProcessing}
+                                        className={`px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
+                                    >
+                                        {hbProcessing ? 'Processing...' : 'Cashout to Bank'}
+                                    </button>
+                                </div>
+                                {hbCashoutAmountBank && Number(hbCashoutAmountBank) > 0 && (
+                                    <p className="text-xs text-white/40 mt-2">
+                                        ≈ ${(Number(hbCashoutAmountBank) / 250).toFixed(2)} USD
+                                    </p>
+                                )}
+                                <p className="text-xs text-white/30 mt-3">
+                                    Need to add bank details?{' '}
+                                    <a href="/dashboard/edit-profile" className="text-yellow-400 underline hover:text-yellow-300">
+                                        Go to Profile Settings
+                                    </a>
+                                </p>
+                            </div>
+
+                            {/* HB Transaction History */}
+                            <div className="mt-4">
+                                <h3 className="text-base font-semibold mb-4">HB Transaction History</h3>
+                                <div className="bg-[#1C1C1E] rounded-xl border border-white/10 overflow-hidden">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left min-w-[500px]">
+                                            <thead className="bg-white/5 text-xs uppercase text-white/50">
+                                                <tr>
+                                                    <th className="px-4 py-3">Type</th>
+                                                    <th className="px-4 py-3">Amount (HB)</th>
+                                                    <th className="px-4 py-3">Balance After</th>
+                                                    <th className="px-4 py-3">Date</th>
+                                                    <th className="px-4 py-3">Description</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-white/10">
+                                                {hbHistoryLoading ? (
+                                                    <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40">Loading history...</td></tr>
+                                                ) : hbHistory.length === 0 ? (
+                                                    <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40">No HB transactions yet.</td></tr>
+                                                ) : (
+                                                    hbHistory.map((tx) => (
+                                                        <tr key={tx._id} className="hover:bg-white/5 transition-colors">
+                                                            <td className="px-4 py-3">
+                                                                <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
+                                                                    tx.type === 'earn' || tx.type === 'prize'
+                                                                        ? 'bg-green-500/10 text-green-400'
+                                                                        : tx.type === 'cashout'
+                                                                        ? 'bg-yellow-500/10 text-yellow-400'
+                                                                        : 'bg-red-500/10 text-red-400'
+                                                                }`}>
+                                                                    {tx.type}
+                                                                </span>
+                                                            </td>
+                                                            <td className={`px-4 py-3 font-mono font-semibold ${tx.amount > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                                                {tx.amount > 0 ? '+' : ''}{tx.amount}
+                                                            </td>
+                                                            <td className="px-4 py-3 font-mono text-white/60">{tx.balanceAfter}</td>
+                                                            <td className="px-4 py-3 text-sm text-white/50">
+                                                                {new Date(tx.createdAt).toLocaleDateString()}
+                                                            </td>
+                                                            <td className="px-4 py-3 text-xs text-white/40 max-w-[160px] truncate">
+                                                                {tx.description || '—'}
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>

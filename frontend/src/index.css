@@ -18,6 +18,21 @@
   100% { background-position: -200% 0; }
 }
 
+/* ── Marketplace line-layout auto-scroll ──────────────────────────────────── */
+@keyframes scrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollRight {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+/* Odd rows scroll left, even rows scroll right — zig-zag visual effect */
+.animate-scroll-left  { animation: scrollLeft  32s linear infinite; }
+.animate-scroll-right { animation: scrollRight 32s linear infinite; }
+.animate-scroll-left:hover,
+.animate-scroll-right:hover { animation-play-state: paused; }
+
 
 
 
