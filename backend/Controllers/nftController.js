@@ -1024,7 +1024,7 @@ export async function recordOnchainSale(req, res) {
  */
 function calculatePaymentDistribution(
   priceETH,
-  isFirstSale,
+  isFirstSale,   // kept for signature compatibility — no longer affects split
   creatorWallet,
   sellerWallet,
   isNFA = false,
@@ -1040,16 +1040,9 @@ function calculatePaymentDistribution(
     payments: [],
   };
 
-  if (isFirstSale) {
-    // First sale: 100% to creator, no platform cut
-    distribution.creatorAmount = priceETH;
-    distribution.payments.push({
-      recipient: creatorWallet,
-      amount:     priceETH,
-      percentage: 100,
-      type:       "creator_first_sale",
-    });
-  } else if (isNFA) {
+  // NOTE: No special first-sale case — Don's brief defines the same split for ALL sales.
+  // On first sale, HyperTek is the seller (gets 80%). Artist still gets 4%.
+  if (isNFA) {
     // NFA: seller 80% | artist 4% | buyback fund 5% | company 11% — all from total price
     // 4% + 5% + 11% = 20% platform (from seller's gross), seller nets 80%
     distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
@@ -1861,7 +1854,8 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // NFA buyback auto-increment: minimumBuybackUSD += salePrice * 5%
-    if (subCollection.isNFA && !wasFirstSale && priceUSDC > 0) {
+    // Applies to ALL NFA sales — Don's brief: "after the first sale, minimum increases by 5%"
+    if (subCollection.isNFA && priceUSDC > 0) {
       subCollection.minimumBuybackUSD = parseFloat(
         ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
       );

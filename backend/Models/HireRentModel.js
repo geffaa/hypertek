@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Duration options per Don's brief: 8h, 1d, 3d, 1w, max 1 month
 const VALID_DURATIONS = [8, 24, 72, 168, 720]; // hours
@@ -55,4 +55,4 @@ const hireRentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("HireRent", hireRentSchema);
+export default mongoose.model("HireRent", hireRentSchema);

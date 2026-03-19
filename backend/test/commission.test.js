@@ -13,15 +13,8 @@ function calculatePaymentDistribution(priceETH, isFirstSale, creatorWallet, sell
     payments: [],
   };
 
-  if (isFirstSale) {
-    distribution.creatorAmount = priceETH;
-    distribution.payments.push({
-      recipient: creatorWallet,
-      amount:     priceETH,
-      percentage: 100,
-      type:       "creator_first_sale",
-    });
-  } else if (isNFA) {
+  // No special first-sale case — same split for all sales per Don's brief
+  if (isNFA) {
     // NFA: seller 80% | artist 4% | buyback 5% | company 11% — all from total price
     // The 20% platform split is: 4% artist + 5% buyback + 11% company = 20%
     distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
@@ -62,29 +55,27 @@ describe("calculatePaymentDistribution", () => {
   const SELLER   = "0xSELLER";
   const PLATFORM = "0xPLATFORM";
 
-  // ── First sale ──────────────────────────────────────────────────
-  describe("First sale", () => {
-    test("100% goes to creator on first sale", () => {
-      const dist = calculatePaymentDistribution(1.0, true, CREATOR, SELLER);
-      expect(dist.creatorAmount).toBe(1.0);
-      expect(dist.sellerAmount).toBe(0);
-      expect(dist.platformAmount).toBe(0);
-      expect(dist.payments).toHaveLength(1);
-      expect(dist.payments[0].type).toBe("creator_first_sale");
-      expect(dist.payments[0].percentage).toBe(100);
-      expect(dist.payments[0].recipient).toBe(CREATOR);
+  // ── First sale — same split as secondary (no special case per Don's brief) ──
+  describe("First sale (isFirstSale flag ignored — same split as resale)", () => {
+    test("NFC first sale: seller still gets 80%, not 100%", () => {
+      const dist = calculatePaymentDistribution(1.0, true, CREATOR, SELLER, false);
+      expect(dist.sellerAmount).toBeCloseTo(0.80, 6);
+      expect(dist.creatorAmount).toBeCloseTo(0.04, 6);
+      expect(dist.companyAmount).toBeCloseTo(0.16, 6);
     });
 
-    test("First sale percentages sum to 100", () => {
-      const dist = calculatePaymentDistribution(5.0, true, CREATOR, SELLER);
+    test("NFA first sale: seller 80% + artist 4% + buyback 5% + company 11%", () => {
+      const dist = calculatePaymentDistribution(1.0, true, CREATOR, SELLER, true);
+      expect(dist.sellerAmount).toBeCloseTo(0.80, 6);
+      expect(dist.creatorAmount).toBeCloseTo(0.04, 6);
+      expect(dist.buybackAmount).toBeCloseTo(0.05, 6);
+      expect(dist.companyAmount).toBeCloseTo(0.11, 6);
+    });
+
+    test("First sale percentages sum to 100 (NFC)", () => {
+      const dist = calculatePaymentDistribution(5.0, true, CREATOR, SELLER, false);
       const total = dist.payments.reduce((sum, p) => sum + p.percentage, 0);
       expect(total).toBe(100);
-    });
-
-    test("First sale with zero price", () => {
-      const dist = calculatePaymentDistribution(0, true, CREATOR, SELLER);
-      expect(dist.creatorAmount).toBe(0);
-      expect(dist.payments[0].amount).toBe(0);
     });
   });
 

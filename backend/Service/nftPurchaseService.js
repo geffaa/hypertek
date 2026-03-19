@@ -153,7 +153,8 @@ export async function finalizeNFAPurchase({
   const cleanPrice = parseFloat(String(priceETH || subCollection.priceETH || 0));
   
   // Distribution — NFA: 4% artist + 5% buyback + 11% company | NFC: 4% creator + 16% company
-  const wasFirstSale = subCollection.isFirstSale;
+  // No special first-sale case — same split applies to all sales per Don's brief.
+  // On first sale, HyperTek is the seller and receives the 80% seller proceeds.
   const isNFA = subCollection.isNFA === true;
 
   let royaltyPaid    = 0;
@@ -162,9 +163,7 @@ export async function finalizeNFAPurchase({
   let companyAmount  = 0;
   let sellerReceived = 0;
 
-  if (wasFirstSale) {
-    royaltyPaid = cleanPrice; // 100% to creator on first sale
-  } else if (isNFA) {
+  if (isNFA) {
     // NFA: seller 80% | artist 4% | buyback 5% | company 11%
     sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
     royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
@@ -179,8 +178,8 @@ export async function finalizeNFAPurchase({
     platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
   }
 
-  // NFA buyback auto-increment
-  if (isNFA && !wasFirstSale && cleanPrice > 0) {
+  // NFA buyback auto-increment — applies to ALL NFA sales
+  if (isNFA && cleanPrice > 0) {
     subCollection.minimumBuybackUSD = parseFloat(
       ((subCollection.minimumBuybackUSD || 0) + buybackAmount).toFixed(2)
     );

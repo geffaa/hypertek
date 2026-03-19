@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const bidSchema = new mongoose.Schema({
   bidder:        { type: mongoose.Schema.Types.ObjectId, ref: "User" },
@@ -60,4 +60,4 @@ auctionSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Auction", auctionSchema);
+export default mongoose.model("Auction", auctionSchema);
