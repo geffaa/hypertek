@@ -86,8 +86,9 @@ export async function finalizeNFAPurchase({
     // Fetch latest nonce
     const currentNonce = await provider.getTransactionCount(backendWallet, "latest");
     
-    // Mint
-    const tx = await nftContract.mint(tokenURI, royaltyBps, { nonce: currentNonce });
+    // Mint — contract signature: mint(address creator, string tokenURI, uint16 royaltyBps)
+    const creatorAddress = creatorWallet && creatorWallet !== "admin" ? creatorWallet : backendWallet;
+    const tx = await nftContract.mint(creatorAddress, tokenURI, royaltyBps, { nonce: currentNonce });
     const receipt = await tx.wait();
     receiptHash = receipt.hash; // Use this as txHash if it was a new mint
 
@@ -216,7 +217,7 @@ export async function finalizeNFAPurchase({
 
   console.log(`✅ [finalizeNFAPurchase] COMPLETED! Token #${tokenId} owner is now ${buyerWallet}`);
 
-  // Dispatch creator royalty (async, non-blocking — sale is already finalised)
+  // Dispatch creator/artist royalty (4%) — async, non-blocking
   if (royaltyPaid > 0 && creatorWallet && creatorWallet !== "admin") {
     dispatchRoyalty({
       subCollectionId: cleanSubId,
@@ -224,7 +225,25 @@ export async function finalizeNFAPurchase({
       creatorWallet,
       amount:          royaltyPaid,
       saleRecordId:    receiptHash || paymentIntentId,
-    }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
+    }).catch(err => console.warn("⚠️ [RoyaltyService] royalty dispatch error:", err.message));
+  }
+
+  // Dispatch buyback fund (5% of NFA sales) → BUYBACK_WALLET_ADDRESS — async, non-blocking
+  if (isNFA && buybackAmount > 0) {
+    const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
+    if (buybackWallet) {
+      dispatchRoyalty({
+        subCollectionId: cleanSubId,
+        parentId:        cleanParentId,
+        creatorWallet:   buybackWallet,
+        amount:          buybackAmount,
+        saleRecordId:    receiptHash || paymentIntentId,
+        note:            "NFA buyback fund 5%",
+      }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
+      console.log(`🏦 [Buyback] Dispatching $${buybackAmount} USDC → ${buybackWallet}`);
+    } else {
+      console.warn("⚠️ [Buyback] BUYBACK_WALLET_ADDRESS not set — skipping dispatch");
+    }
   }
 
   console.log("✅ NFA Purchase Finalized for Token #", tokenId);

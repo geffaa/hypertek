@@ -1,10 +1,65 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import heroImage from "../../assets/images/hero.jpg";
 import Logo from "../../assets/logo.png";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import useSiteContent from "../../hooks/useSiteContent";
+import { X } from "lucide-react";
+
+function VideoModal({ onClose }) {
+  const videoRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger fade-in on next frame
+    requestAnimationFrame(() => setVisible(true));
+    const handleKey = (e) => { if (e.key === "Escape") handleClose(); };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
+  function handleClose() {
+    setVisible(false);
+    setTimeout(onClose, 250);
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{
+        background: "rgba(0,0,0,0.88)",
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.25s ease",
+      }}
+      onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
+    >
+      <div
+        className="relative w-full max-w-4xl"
+        style={{
+          transform: visible ? "scale(1) translateY(0)" : "scale(0.95) translateY(16px)",
+          transition: "transform 0.3s ease, opacity 0.3s ease",
+          opacity: visible ? 1 : 0,
+        }}
+      >
+        <button
+          onClick={handleClose}
+          className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors flex items-center gap-1.5 text-sm"
+        >
+          <X className="w-4 h-4" /> Close
+        </button>
+        <video
+          ref={videoRef}
+          src="/video/download_page.mp4"
+          autoPlay
+          playsInline
+          className="w-full rounded-xl"
+          style={{ maxHeight: "80vh", background: "#000" }}
+        />
+      </div>
+    </div>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -17,6 +72,7 @@ const fadeUp = {
 
 export default function Hero() {
   const { data: cms } = useSiteContent("home_hero");
+  const [showVideo, setShowVideo] = useState(false);
 
   // Wait for splash screen to finish before starting entry animations
   const [animReady, setAnimReady] = useState(() => window.__splashComplete === true);
@@ -32,7 +88,6 @@ export default function Hero() {
   const btn1Text = cms.button1_text || cms.cta_button_1_text || "Marketplace";
   const btn1Link = cms.button1_link || cms.cta_button_1_link || "/market-place";
   const btn2Text = cms.button2_text || cms.cta_button_2_text || "Download Game";
-  const btn2Link = cms.button2_link || cms.cta_button_2_link || "#";
   const bgImage = cms.background_image || heroImage;
 
   // Render heading line 2 with the 2nd word (LEGENDS) as outline
@@ -60,6 +115,7 @@ export default function Hero() {
   const logoItems = Array(20).fill({ text: "HYPER TEK" });
 
   return (
+    <>
     <div
       className="w-full h-screen relative overflow-hidden"
       style={{
@@ -109,16 +165,12 @@ export default function Hero() {
               {btn1Text}
             </button>
           </Link>
-          <Link
-            to={btn2Link}
-            onClick={(e) => {
-              if (btn2Link === "#") e.preventDefault();
-            }}
+          <button
+            onClick={() => setShowVideo(true)}
+            className="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/40 hover:border-white/70"
           >
-            <button className="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/40 hover:border-white/70">
-              {btn2Text}
-            </button>
-          </Link>
+            {btn2Text}
+          </button>
         </motion.div>
       </div>
 
@@ -144,5 +196,7 @@ export default function Hero() {
         </div>
       </motion.div>
     </div>
+    {showVideo && <VideoModal onClose={() => setShowVideo(false)} />}
+    </>
   );
 }

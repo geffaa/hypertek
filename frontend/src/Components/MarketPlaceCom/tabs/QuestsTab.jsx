@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Swords, Package, Plus, X, Clock, CheckCircle2, Circle } from "lucide-react";
+import { Swords, Package, Plus, X, Clock, CheckCircle2, Circle, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
@@ -150,6 +150,38 @@ function CreateModal({ onClose, onSuccess, wallet }) {
   );
 }
 
+// ── Investor Note Banner ──────────────────────────────────────────────────────
+function InvestorBanner() {
+  return (
+    <div className="mb-6 rounded-xl overflow-hidden relative"
+      style={{
+        background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
+        border: "1px solid rgba(180,120,0,0.15)",
+      }}>
+      <div className="px-4 py-3 flex items-center gap-3">
+        <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-amber-300/90 text-xs font-semibold">In-Game Feature Preview</p>
+          <p className="text-white/40 text-[11px] leading-snug">
+            The Quests & Trades system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase.
+          </p>
+        </div>
+        <Info className="w-4 h-4 text-white/20 flex-shrink-0" />
+      </div>
+    </div>
+  );
+}
+
+// ── Static preview data ───────────────────────────────────────────────────────
+const PREVIEW_TRADES = [
+  { _id: "pt-1", type: "quest", status: "open", title: "Retrieve the Lost Data Core", description: "Infiltrate Sector 7 and recover the encrypted data core. Beware of AI sentinels.", reward: 250, posterName: "Commander Alpha", offering: "", requesting: "" },
+  { _id: "pt-2", type: "trade", status: "open", title: "Shadow Ops Skin for Plasma Pistol", description: "Offering my Shadow Ops Skin in exchange for a Plasma Pistol Mk2.", offering: "Shadow Ops Skin (NFT)", requesting: "Plasma Pistol Mk2 (NFT)", reward: 0, posterName: "ShadowTrader_99" },
+  { _id: "pt-3", type: "quest", status: "open", title: "Arctic Recon Mission", description: "Complete a full sweep of the Arctic Station Omega map. Screenshot proof required.", reward: 180, posterName: "IceCommander", offering: "", requesting: "" },
+  { _id: "pt-4", type: "trade", status: "open", title: "Nano-Mesh Vest for HyperBike GT", description: "Fair swap — my Nano-Mesh Vest + 50 USDC for a HyperBike GT.", offering: "Nano-Mesh Vest + 50 USDC", requesting: "HyperBike GT", reward: 0, posterName: "TradeKing77" },
+  { _id: "pt-5", type: "quest", status: "open", title: "Take Down the Champion", description: "Defeat the current PvP leaderboard champion in 3 consecutive matches.", reward: 500, posterName: "BountyHunterX", offering: "", requesting: "" },
+  { _id: "pt-6", type: "trade", status: "open", title: "Exo-Skeleton for Viper Fighter", description: "Looking for a spaceship upgrade. Offering Exo-Skeleton Mk3 + HyperBucks.", offering: "Exo-Skeleton Mk3 + 200 HB", requesting: "Viper Fighter Mk1", reward: 0, posterName: "SpacePilot_44" },
+];
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 const TYPE_FILTERS = ["all", "trade", "quest"];
 const STATUS_FILTERS = ["open", "accepted", "completed"];
@@ -159,6 +191,7 @@ export default function QuestsTab() {
   const wallet = user?.walletAddress || user?.wallet || "";
 
   const [trades, setTrades] = useState([]);
+  const [usingPreview, setUsingPreview] = useState(false);
   const [loading, setLoading] = useState(true);
   const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("open");
@@ -174,9 +207,19 @@ export default function QuestsTab() {
       if (typeFilter !== "all") params.set("type", typeFilter);
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade?${params}`);
       const data = await r.json();
-      setTrades(data.trades || []);
-      setTotal(data.total || 0);
-    } catch { setTrades([]); }
+      const fetched = data.trades || [];
+      if (fetched.length > 0) {
+        setTrades(fetched); setTotal(data.total || 0); setUsingPreview(false);
+      } else if (statusFilter === "open" && page === 1) {
+        setTrades(PREVIEW_TRADES); setTotal(PREVIEW_TRADES.length); setUsingPreview(true);
+      } else {
+        setTrades([]); setTotal(0); setUsingPreview(false);
+      }
+    } catch {
+      if (statusFilter === "open" && page === 1) {
+        setTrades(PREVIEW_TRADES); setTotal(PREVIEW_TRADES.length); setUsingPreview(true);
+      } else { setTrades([]); }
+    }
     finally { setLoading(false); }
   }, [typeFilter, statusFilter, page]);
 
@@ -268,6 +311,9 @@ export default function QuestsTab() {
           )}
         </div>
       </div>
+
+      {/* Investor note */}
+      <InvestorBanner />
 
       {/* Info row */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"

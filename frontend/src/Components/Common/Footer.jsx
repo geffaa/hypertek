@@ -15,11 +15,11 @@ const menuItems = [
 ];
 
 const socials = [
-  { icon: FaFacebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: FaXTwitter, href: "https://x.com", label: "X" },
-  { icon: FaTiktok, href: "https://tiktok.com", label: "TikTok" },
-  { icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: FaFacebook,   href: "https://www.facebook.com/HyperTekProject",           label: "Facebook"  },
+  { icon: FaInstagram,  href: "https://www.instagram.com/hypertekproject",           label: "Instagram" },
+  { icon: FaXTwitter,   href: "https://x.com/HyperTek100",                          label: "X"         },
+  { icon: FaTiktok,     href: "https://www.tiktok.com/@hypertek100",                 label: "TikTok"    },
+  { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/81534707",           label: "LinkedIn"  },
 ];
 
 function Footer() {

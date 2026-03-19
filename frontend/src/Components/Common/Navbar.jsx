@@ -367,7 +367,7 @@ export default function Navbar() {
                 {socialOpen && (
                   <div className="absolute top-full left-0 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
                     <a
-                      href="https://discord.gg"
+                      href="https://discord.gg/XGvE2nFe"
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
@@ -383,7 +383,7 @@ export default function Navbar() {
                     </a>
 
                     <a
-                      href="https://x.com"
+                      href="https://x.com/HyperTek100"
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
@@ -619,7 +619,7 @@ export default function Navbar() {
             {socialOpen && (
               <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
                 <a
-                  href="https://discord.gg"
+                  href="https://discord.gg/XGvE2nFe"
                   target="_blank"
                   rel="noreferrer"
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"
@@ -629,7 +629,7 @@ export default function Navbar() {
                 </a>
 
                 <a
-                  href="https://x.com"
+                  href="https://x.com/HyperTek100"
                   target="_blank"
                   rel="noreferrer"
                   className="py-2 hover:text-blue-300 transition-colors duration-200 flex items-center gap-2"

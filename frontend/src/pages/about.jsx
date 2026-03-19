@@ -154,7 +154,7 @@ function About() {
               src={charImage}
               alt="Character"
               fallback={charImg}
-              className="h-[500px] xl:h-[700px] w-[280px] xl:w-[420px]"
+              className="h-[320px] md:h-[420px] lg:h-[540px] xl:h-[680px] 2xl:h-[760px] w-auto"
               imgClassName="object-contain drop-shadow-2xl"
             />
           </motion.div>

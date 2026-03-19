@@ -49,8 +49,13 @@ AdminNFARouter.get("/buybacks", async (req, res) => {
  */
 AdminNFARouter.post("/:id/buyback", async (req, res) => {
   try {
-    const nfa = await executeBuyback(req.params.id);
-    res.json({ success: true, message: "Buyback executed. NFA removed from circulation.", data: nfa });
+    const { nft, payoutAmount, ownerWallet } = await executeBuyback(req.params.id);
+    res.json({
+      success: true,
+      message: `Buyback executed. NFA removed from circulation. $${(payoutAmount || 0).toFixed(2)} USDC dispatched to ${ownerWallet || "unknown"}.`,
+      data: nft,
+      payout: { amount: payoutAmount, recipient: ownerWallet },
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

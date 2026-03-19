@@ -9,6 +9,7 @@
 
 import nodemailer from "nodemailer";
 import NFTSystem from "../Models/NFTSystem.js";
+import { dispatchRoyalty } from "./RoyaltyService.js";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -101,7 +102,15 @@ async function notifyAdminBuyback(nft, salePriceUSD) {
  * @returns {object} updated NFA document
  */
 export async function executeBuyback(nftId) {
-  const nft = await NFTSystem.findByIdAndUpdate(
+  // Read first to get owner and payout amount before zeroing
+  const nft = await NFTSystem.findById(nftId);
+  if (!nft) throw new Error("NFA not found");
+
+  const ownerWallet = nft.owner;
+  const payoutAmount = nft.minimumBuybackUSD || 0;
+
+  // Zero out the NFA
+  const updated = await NFTSystem.findByIdAndUpdate(
     nftId,
     {
       buybackPending: false,
@@ -112,9 +121,25 @@ export async function executeBuyback(nftId) {
     },
     { new: true }
   );
-  if (!nft) throw new Error("NFA not found");
+
   console.log(`✅ NFA ${nftId}: buyback executed, removed from circulation`);
-  return nft;
+
+  // Dispatch payout to current owner from buyback reserve fund
+  if (payoutAmount > 0 && ownerWallet && ownerWallet !== "admin") {
+    dispatchRoyalty({
+      subCollectionId: String(nftId),
+      parentId:        String(nftId),
+      creatorWallet:   ownerWallet,
+      amount:          payoutAmount,
+      saleRecordId:    `buyback_${nftId}`,
+      note:            `NFA buyback payout — HyperTek guarantee ($${payoutAmount.toFixed(2)} USDC)`,
+    }).catch(err => console.warn("⚠️ [NFAService] buyback payout dispatch error:", err.message));
+    console.log(`💸 [Buyback] Dispatching $${payoutAmount.toFixed(2)} USDC → ${ownerWallet}`);
+  } else {
+    console.warn(`⚠️ [Buyback] No payout dispatched — ownerWallet: ${ownerWallet}, amount: ${payoutAmount}`);
+  }
+
+  return { nft: updated, payoutAmount, ownerWallet };
 }
 
 /**

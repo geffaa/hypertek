@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert } from "lucide-react";
+import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
 
 const DURATION_LABELS = { 8: "8 hours", 24: "1 day", 72: "3 days", 168: "1 week", 720: "1 month" };
+
 
 // ── Listing card ──────────────────────────────────────────────────────────────
 function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
@@ -39,6 +40,7 @@ function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
             style={{ background: isHire ? "rgba(0,120,60,0.85)" : "rgba(60,60,180,0.85)" }}>
             {listing.type}
           </span>
+
         </div>
         <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{listing.status}</span>
       </div>
@@ -166,6 +168,40 @@ function CreateModal({ onClose, onSuccess, wallet }) {
   );
 }
 
+// ── Investor Note Banner ──────────────────────────────────────────────────────
+function InvestorBanner() {
+  return (
+    <div className="mb-6 rounded-xl overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, rgba(0,180,80,0.08) 0%, rgba(0,42,168,0.06) 100%)",
+        border: "1px solid rgba(0,180,80,0.15)",
+      }}>
+      <div className="px-4 py-3 flex items-center gap-3">
+        <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-amber-300/90 text-xs font-semibold">In-Game Feature Preview</p>
+          <p className="text-white/40 text-[11px] leading-snug">
+            The Hire & Rent system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase.
+          </p>
+        </div>
+        <Info className="w-4 h-4 text-white/20 flex-shrink-0" />
+      </div>
+    </div>
+  );
+}
+
+// ── Static preview data ───────────────────────────────────────────────────────
+const PREVIEW_LISTINGS = [
+  { _id: "ph-1", type: "hire", status: "available", itemTitle: "Ghost Recon Operator", itemDescription: "Elite recon specialist with ghost cloak ability.", category: "Specialists", ownerName: "CommanderAlpha", pricePerDuration: 45, durationHours: 24 },
+  { _id: "ph-2", type: "rent", status: "available", itemTitle: "Rail Sniper X90", itemDescription: "Long-range rail gun sniper with electro-targeting.", category: "Weapons", ownerName: "SnipeMaster", pricePerDuration: 20, durationHours: 8 },
+  { _id: "ph-3", type: "hire", status: "available", itemTitle: "Cyber Medic", itemDescription: "Field medic with advanced cybernetic healing tools.", category: "Specialists", ownerName: "MedicForce", pricePerDuration: 35, durationHours: 72 },
+  { _id: "ph-4", type: "rent", status: "available", itemTitle: "HyperBike GT", itemDescription: "Ultra-fast racing bike built for gravity tracks.", category: "Vehicles", ownerName: "SpeedKing99", pricePerDuration: 55, durationHours: 24 },
+  { _id: "ph-5", type: "hire", status: "available", itemTitle: "AI Drone Handler", itemDescription: "Controls a squad of tactical AI combat drones.", category: "Specialists", ownerName: "DronePilot_X", pricePerDuration: 60, durationHours: 168 },
+  { _id: "ph-6", type: "rent", status: "available", itemTitle: "Viper Fighter Mk1", itemDescription: "Fast single-pilot fighter with twin plasma cannons.", category: "Spaceships", ownerName: "AcePilot77", pricePerDuration: 120, durationHours: 24 },
+  { _id: "ph-7", type: "rent", status: "available", itemTitle: "Exo-Skeleton Mk3", itemDescription: "Full exoskeleton suit with powered joints.", category: "Body Armour", ownerName: "IronMech", pricePerDuration: 80, durationHours: 72 },
+  { _id: "ph-8", type: "hire", status: "available", itemTitle: "Sniper Ace", itemDescription: "Long-range marksman with zero-wind precision targeting.", category: "Specialists", ownerName: "Marksman_Pro", pricePerDuration: 90, durationHours: 168 },
+];
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 const TYPE_FILTERS = ["all", "rent", "hire"];
 const STATUS_FILTERS = ["available", "rented", "cooldown"];
@@ -175,6 +211,7 @@ export default function HireRentTab() {
   const wallet = user?.walletAddress || user?.wallet || "";
 
   const [listings, setListings] = useState([]);
+  const [usingPreview, setUsingPreview] = useState(false);
   const [loading, setLoading] = useState(true);
   const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("available");
@@ -190,9 +227,19 @@ export default function HireRentTab() {
       if (typeFilter !== "all") params.set("type", typeFilter);
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/hire?${params}`);
       const data = await r.json();
-      setListings(data.listings || []);
-      setTotal(data.total || 0);
-    } catch { setListings([]); }
+      const fetched = data.listings || [];
+      if (fetched.length > 0) {
+        setListings(fetched); setTotal(data.total || 0); setUsingPreview(false);
+      } else if (statusFilter === "available" && page === 1) {
+        setListings(PREVIEW_LISTINGS); setTotal(PREVIEW_LISTINGS.length); setUsingPreview(true);
+      } else {
+        setListings([]); setTotal(0); setUsingPreview(false);
+      }
+    } catch {
+      if (statusFilter === "available" && page === 1) {
+        setListings(PREVIEW_LISTINGS); setTotal(PREVIEW_LISTINGS.length); setUsingPreview(true);
+      } else { setListings([]); }
+    }
     finally { setLoading(false); }
   }, [typeFilter, statusFilter, page]);
 
@@ -268,6 +315,9 @@ export default function HireRentTab() {
         </div>
       </div>
 
+      {/* Investor note */}
+      <InvestorBanner />
+
       {/* Rules */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
@@ -284,7 +334,7 @@ export default function HireRentTab() {
       ) : listings.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-white/25">
           <Users className="w-10 h-10 mb-3 opacity-30" />
-          <p className="text-sm">No {statusFilter} {typeFilter !== "all" ? typeFilter : ""} listings</p>
+          <p className="text-sm">No {statusFilter} listings</p>
           {isLoggedInUser && statusFilter === "available" && (
             <button onClick={() => setShowCreate(true)} className="mt-4 px-4 py-2 rounded-lg text-xs text-white"
               style={{ background: "rgba(0,42,168,0.6)" }}>Create a listing</button>

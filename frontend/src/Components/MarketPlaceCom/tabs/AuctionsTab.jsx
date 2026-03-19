@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap } from "lucide-react";
+import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
@@ -229,6 +229,40 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
   );
 }
 
+// ── Investor Note Banner ──────────────────────────────────────────────────────
+function InvestorBanner() {
+  return (
+    <div className="mb-6 rounded-xl overflow-hidden relative"
+      style={{
+        background: "linear-gradient(135deg, rgba(0,42,168,0.12) 0%, rgba(180,120,0,0.06) 100%)",
+        border: "1px solid rgba(0,80,255,0.15)",
+      }}>
+      <div className="px-4 py-3 flex items-center gap-3">
+        <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-amber-300/90 text-xs font-semibold">In-Game Feature Preview</p>
+          <p className="text-white/40 text-[11px] leading-snug">
+            The Auction system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase.
+          </p>
+        </div>
+        <Info className="w-4 h-4 text-white/20 flex-shrink-0" />
+      </div>
+    </div>
+  );
+}
+
+// ── Static preview data (shown when backend is empty) ─────────────────────────
+const PREVIEW_AUCTIONS = [
+  { _id: "pa-1", title: "Shadow Ops Skin — Legendary", category: "Skins", isNFA: true, status: "active", startPrice: 250, currentBid: 320, instantBuyPrice: 500, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-2", title: "Rail Sniper X90 — Gold Edition", category: "Weapons", isNFA: false, status: "active", startPrice: 150, currentBid: 180, instantBuyPrice: null, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-3", title: "Viper Fighter Mk1 — Commander", category: "Spaceships", isNFA: true, status: "active", startPrice: 1200, currentBid: 1800, instantBuyPrice: 2500, endTime: new Date(Date.now() + 24 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-4", title: "Desert Outpost Alpha — Fortified", category: "Land & Bases", isNFA: true, status: "active", startPrice: 3000, currentBid: 4500, instantBuyPrice: 6000, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-5", title: "Ghost Recon Operator — Elite", category: "Specialists", isNFA: false, status: "active", startPrice: 380, currentBid: 420, instantBuyPrice: 600, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-6", title: "HyperBike GT — Neon Circuit", category: "Vehicles", isNFA: false, status: "active", startPrice: 550, currentBid: 660, instantBuyPrice: 900, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-7", title: "Star of Honour — Genesis", category: "Badges", isNFA: true, status: "active", startPrice: 1500, currentBid: 2100, instantBuyPrice: 3000, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-8", title: "Cosmic Battle Scene — 1/1", category: "Artwork", isNFA: true, status: "active", startPrice: 4000, currentBid: 5200, instantBuyPrice: 8000, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
+];
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 const FILTERS = ["active", "ended", "sold"];
 
@@ -237,6 +271,7 @@ export default function AuctionsTab() {
   const wallet = user?.walletAddress || user?.wallet || "";
 
   const [auctions, setAuctions] = useState([]);
+  const [usingPreview, setUsingPreview] = useState(false);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("active");
   const [showCreate, setShowCreate] = useState(false);
@@ -250,9 +285,29 @@ export default function AuctionsTab() {
     try {
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction?status=${filter}&page=${page}&limit=${LIMIT}`);
       const data = await r.json();
-      setAuctions(data.auctions || []);
-      setTotal(data.total || 0);
-    } catch { setAuctions([]); }
+      const fetched = data.auctions || [];
+      if (fetched.length > 0) {
+        setAuctions(fetched);
+        setTotal(data.total || 0);
+        setUsingPreview(false);
+      } else if (filter === "active" && page === 1) {
+        setAuctions(PREVIEW_AUCTIONS);
+        setTotal(PREVIEW_AUCTIONS.length);
+        setUsingPreview(true);
+      } else {
+        setAuctions([]);
+        setTotal(0);
+        setUsingPreview(false);
+      }
+    } catch {
+      if (filter === "active" && page === 1) {
+        setAuctions(PREVIEW_AUCTIONS);
+        setTotal(PREVIEW_AUCTIONS.length);
+        setUsingPreview(true);
+      } else {
+        setAuctions([]);
+      }
+    }
     finally { setLoading(false); }
   }, [filter, page]);
 
@@ -305,6 +360,9 @@ export default function AuctionsTab() {
           )}
         </div>
       </div>
+
+      {/* Investor note */}
+      <InvestorBanner />
 
       {/* Rules bar */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"

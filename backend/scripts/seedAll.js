@@ -33,6 +33,10 @@ import { Offer }   from "../Models/Offer.js";
 import { Withdrawal } from "../Models/WithdrawalModel.js";
 import { Payment } from "../Models/Payment.js";
 import Activity    from "../Models/ActivityModel.js";
+import Auction     from "../Models/AuctionModel.js";
+import Trade       from "../Models/TradeModel.js";
+import HireRent    from "../Models/HireRentModel.js";
+import Bounty      from "../Models/BountyModel.js";
 
 // ─── SiteContent ─────────────────────────────────────────────────────────────
 const SITE_CONTENT = [
@@ -554,6 +558,407 @@ async function seed() {
     if (act_created > 0) console.log(`✅ Activities: ${act_created} created`);
   }
 
+  // 10. Sample Auctions (in-game feature preview)
+  let auc_created = 0, auc_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const SAMPLE_AUCTIONS = [
+      {
+        title: "Shadow Ops Skin — Legendary",
+        description: "Jet black covert operations skin with night-vision accents. Extremely rare limited edition.",
+        category: "Skins",
+        isNFA: true,
+        startPrice: 250,
+        currentBid: 320,
+        reservePrice: 200,
+        instantBuyPrice: 500,
+        durationHours: 72,
+        seller: createdUsers[0]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_001", bidderName: "WarriorX", amount: 260, placedAt: new Date(Date.now() - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_002", bidderName: "SniperElite", amount: 280, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_003", bidderName: "GhostOps", amount: 320, placedAt: new Date(Date.now() - 3600000) },
+        ],
+      },
+      {
+        title: "Rail Sniper X90 — Gold Edition",
+        description: "Long-range rail gun sniper with electro-targeting. Gold-plated collector's edition.",
+        category: "Weapons",
+        isNFA: false,
+        startPrice: 150,
+        currentBid: 180,
+        instantBuyPrice: null,
+        durationHours: 168,
+        seller: createdUsers[1]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_004", bidderName: "DarkHunter", amount: 160, placedAt: new Date(Date.now() - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_005", bidderName: "IronWill", amount: 180, placedAt: new Date(Date.now() - 86400000) },
+        ],
+      },
+      {
+        title: "Viper Fighter Mk1 — Commander",
+        description: "Fast single-pilot fighter with twin plasma cannons. Commander edition with custom paint.",
+        category: "Spaceships",
+        isNFA: true,
+        startPrice: 1200,
+        currentBid: 1800,
+        instantBuyPrice: 2500,
+        durationHours: 24,
+        seller: createdUsers[0]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_006", bidderName: "PilotAce", amount: 1400, placedAt: new Date(Date.now() - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_007", bidderName: "StarCommand", amount: 1600, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_008", bidderName: "NovaPilot", amount: 1800, placedAt: new Date(Date.now() - 7200000) },
+        ],
+      },
+      {
+        title: "Desert Outpost Alpha — Fortified",
+        description: "Strategic desert base with resource extraction facilities. Fully fortified with defensive turrets.",
+        category: "Land & Bases",
+        isNFA: true,
+        startPrice: 3000,
+        currentBid: 4500,
+        instantBuyPrice: 6000,
+        durationHours: 72,
+        seller: createdUsers[1]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_009", bidderName: "LandBaron", amount: 3500, placedAt: new Date(Date.now() - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_010", bidderName: "Conqueror", amount: 4000, placedAt: new Date(Date.now() - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_011", bidderName: "TerraFormer", amount: 4500, placedAt: new Date(Date.now() - 86400000) },
+        ],
+      },
+      {
+        title: "Ghost Recon Operator — Elite",
+        description: "Elite recon specialist with ghost cloak ability. Maximum stealth rating.",
+        category: "Specialists",
+        isNFA: false,
+        startPrice: 380,
+        currentBid: 420,
+        instantBuyPrice: 600,
+        durationHours: 168,
+        seller: createdUsers[0]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_012", bidderName: "StealthKing", amount: 400, placedAt: new Date(Date.now() - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_013", bidderName: "NightOwl", amount: 420, placedAt: new Date(Date.now() - 86400000) },
+        ],
+      },
+      {
+        title: "HyperBike GT — Neon Circuit",
+        description: "Ultra-fast racing bike built for gravity tracks. Neon Circuit limited edition.",
+        category: "Vehicles",
+        isNFA: false,
+        startPrice: 550,
+        currentBid: 660,
+        instantBuyPrice: 900,
+        durationHours: 72,
+        seller: createdUsers[1]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_014", bidderName: "SpeedDemon", amount: 600, placedAt: new Date(Date.now() - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_015", bidderName: "RacerX", amount: 660, placedAt: new Date(Date.now() - 86400000) },
+        ],
+      },
+      {
+        title: "Star of Honour — Genesis",
+        description: "The highest honour awarded in the HyperTek universe. Genesis edition — first batch ever minted.",
+        category: "Badges",
+        isNFA: true,
+        startPrice: 1500,
+        currentBid: 2100,
+        instantBuyPrice: 3000,
+        durationHours: 168,
+        seller: createdUsers[0]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_016", bidderName: "Collector1", amount: 1700, placedAt: new Date(Date.now() - 86400000 * 5) },
+          { bidderWallet: "0xBIDDER_017", bidderName: "MedalHunter", amount: 1900, placedAt: new Date(Date.now() - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_018", bidderName: "PrestigeMax", amount: 2100, placedAt: new Date(Date.now() - 86400000) },
+        ],
+      },
+      {
+        title: "Cosmic Battle Scene — 1/1",
+        description: "Epic deep-space battle, hand-painted in 8K resolution. One-of-one artwork.",
+        category: "Artwork",
+        isNFA: true,
+        startPrice: 4000,
+        currentBid: 5200,
+        instantBuyPrice: 8000,
+        durationHours: 168,
+        seller: createdUsers[1]._id,
+        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        bidHistory: [
+          { bidderWallet: "0xBIDDER_019", bidderName: "ArtLover", amount: 4500, placedAt: new Date(Date.now() - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_020", bidderName: "DigitalGallery", amount: 5200, placedAt: new Date(Date.now() - 86400000 * 2) },
+        ],
+      },
+    ];
+    for (const a of SAMPLE_AUCTIONS) {
+      const existing = await Auction.findOne({ title: a.title });
+      if (existing) { auc_skipped++; continue; }
+      const endTime = new Date(Date.now() + a.durationHours * 60 * 60 * 1000);
+      await Auction.create({ ...a, endTime, status: "active" });
+      auc_created++;
+    }
+    if (auc_created > 0) console.log(`✅ Auctions: ${auc_created} created`);
+  }
+
+  // 11. Sample Trades & Quests (in-game feature preview)
+  let trade_created = 0, trade_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const SAMPLE_TRADES = [
+      {
+        type: "quest",
+        title: "Retrieve the Lost Data Core",
+        description: "Infiltrate the abandoned tech facility in Sector 7 and recover the encrypted data core. Beware of AI sentinels guarding the perimeter.",
+        reward: 250,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "Commander Alpha",
+        category: "retrieval",
+      },
+      {
+        type: "trade",
+        title: "Assault Rifle ↔ Stealth Kit",
+        description: "Looking to trade my Hyper Assault Rifle for a Stealth Composite Vest. Willing to negotiate.",
+        offering: "Hyper Assault Rifle (120 USDC)",
+        requesting: "Stealth Composite Vest",
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "ShadowTrader_99",
+        category: "equipment",
+      },
+      {
+        type: "quest",
+        title: "Defend Outpost Alpha — Wave Survival",
+        description: "Hold Outpost Alpha for 10 waves against enemy forces. Minimum squad of 3 required. Bonus reward for zero casualties.",
+        reward: 500,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "General Haze",
+        category: "defense",
+      },
+      {
+        type: "trade",
+        title: "Viper Fighter for Land Plot",
+        description: "Offering my Viper Fighter Mk1 spaceship in exchange for a strategic land plot. Desert or Arctic locations preferred.",
+        offering: "Viper Fighter Mk1 (600 USDC)",
+        requesting: "Any Land Plot (Desert/Arctic)",
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "PilotZero",
+        category: "vehicles",
+      },
+      {
+        type: "quest",
+        title: "Hunt the Rogue AI — Intel Required",
+        description: "Track down the rogue AI entity 'NEXUS-7' across three map zones. Deliver location coordinates for reward. Time-limited mission.",
+        reward: 800,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "Intel Division",
+        category: "intel",
+      },
+      {
+        type: "trade",
+        title: "Dual Badge Swap",
+        description: "Have Commander's Cross and Iron Shield Badge. Looking for Star of Honour. Will offer both badges plus 100 USDC.",
+        offering: "Commander's Cross + Iron Shield Badge + 100 USDC",
+        requesting: "Star of Honour",
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "MedalCollector",
+        category: "badges",
+      },
+    ];
+    for (const t of SAMPLE_TRADES) {
+      const existing = await Trade.findOne({ title: t.title });
+      if (existing) { trade_skipped++; continue; }
+      await Trade.create({ ...t, status: "open" });
+      trade_created++;
+    }
+    if (trade_created > 0) console.log(`✅ Trades/Quests: ${trade_created} created`);
+  }
+
+  // 12. Sample Hire/Rent listings (in-game feature preview)
+  let hire_created = 0, hire_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const SAMPLE_HIRE_RENT = [
+      {
+        type: "hire",
+        itemTitle: "Ghost Recon Operator — S-Tier",
+        itemDescription: "Elite recon specialist with ghost cloak ability. Ideal for stealth missions and intel gathering operations.",
+        pricePerDuration: 45,
+        durationHours: 24,
+        owner: createdUsers[0]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_001",
+        ownerName: "CommanderX",
+        category: "specialists",
+      },
+      {
+        type: "rent",
+        itemTitle: "Rail Sniper X90 — Gold Edition",
+        itemDescription: "Long-range rail gun sniper with electro-targeting. Perfect for overwatch and defensive positions.",
+        pricePerDuration: 25,
+        durationHours: 72,
+        owner: createdUsers[1]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_002",
+        ownerName: "ArmsDealer_42",
+        category: "weapons",
+      },
+      {
+        type: "hire",
+        itemTitle: "AI Drone Handler — Advanced",
+        itemDescription: "Controls a squad of tactical AI combat drones. Provides aerial support and reconnaissance capabilities.",
+        pricePerDuration: 60,
+        durationHours: 168,
+        owner: createdUsers[0]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_001",
+        ownerName: "DroneOps",
+        category: "specialists",
+      },
+      {
+        type: "rent",
+        itemTitle: "Turbo Hovercar X — Competition",
+        itemDescription: "Anti-gravity hovercar with turbo boost module. Dominate the racing circuit with this speed machine.",
+        pricePerDuration: 80,
+        durationHours: 24,
+        owner: createdUsers[1]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_002",
+        ownerName: "SpeedKing",
+        category: "vehicles",
+      },
+      {
+        type: "rent",
+        itemTitle: "Exo-Skeleton Mk3 — Tactical",
+        itemDescription: "Full exoskeleton suit with powered joints. Provides superhuman strength and ballistic protection.",
+        pricePerDuration: 55,
+        durationHours: 72,
+        owner: createdUsers[0]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_001",
+        ownerName: "HeavyArms",
+        category: "body armour",
+      },
+      {
+        type: "hire",
+        itemTitle: "Cyber Medic — Field Support",
+        itemDescription: "Field medic with advanced cybernetic healing tools. Essential for squad survival in prolonged missions.",
+        pricePerDuration: 35,
+        durationHours: 24,
+        owner: createdUsers[1]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_002",
+        ownerName: "MedCorps",
+        category: "specialists",
+      },
+      {
+        type: "rent",
+        itemTitle: "Phantom Stealth Ship — Covert",
+        itemDescription: "Radar-invisible stealth spacecraft for covert ops. Silent approach and extraction capability.",
+        pricePerDuration: 120,
+        durationHours: 168,
+        owner: createdUsers[0]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_001",
+        ownerName: "NavalCommander",
+        category: "spaceships",
+      },
+      {
+        type: "hire",
+        itemTitle: "Sniper Ace — Long Range",
+        itemDescription: "Long-range marksman with zero-wind precision targeting. Maximum effective range specialist.",
+        pricePerDuration: 50,
+        durationHours: 72,
+        owner: createdUsers[1]._id,
+        ownerWallet: "0xSEED_WALLET_OWNER_002",
+        ownerName: "LongShot",
+        category: "specialists",
+      },
+    ];
+    for (const h of SAMPLE_HIRE_RENT) {
+      const existing = await HireRent.findOne({ itemTitle: h.itemTitle });
+      if (existing) { hire_skipped++; continue; }
+      await HireRent.create({ ...h, status: "available" });
+      hire_created++;
+    }
+    if (hire_created > 0) console.log(`✅ Hire/Rent: ${hire_created} created`);
+  }
+
+  // 13. Sample Bounties (in-game feature preview)
+  let bounty_created = 0, bounty_skipped = 0;
+  if (createdUsers.length >= 2) {
+    const SAMPLE_BOUNTIES = [
+      {
+        title: "Eliminate Rogue Commander Vex",
+        targetName: "Commander Vex",
+        description: "High-priority target operating in Sector 9. Known for ambushing supply convoys. Eliminate and provide proof of defeat.",
+        reward: 500,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "HQ Command",
+        category: "pvp",
+      },
+      {
+        title: "Destroy Rogue AI Nexus-7",
+        targetName: "NEXUS-7 AI Entity",
+        description: "Rogue artificial intelligence has taken control of the Eastern Grid. Locate and neutralise its core processor.",
+        reward: 1200,
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "Intel Division",
+        category: "raid",
+      },
+      {
+        title: "Capture Enemy Officer — Intel",
+        targetName: "Lt. Shadow Wolf",
+        description: "Capture the enemy intelligence officer alive. Prisoner must be delivered to forward operating base for interrogation.",
+        reward: 800,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "Special Ops Unit",
+        category: "intel",
+      },
+      {
+        title: "Raid Supply Depot — Sector 4",
+        targetName: "Supply Depot Echo",
+        description: "Enemy supply depot in Sector 4 must be destroyed. Destroy at least 80% of stored materials for full reward.",
+        reward: 350,
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "Resistance HQ",
+        category: "raid",
+      },
+      {
+        title: "Intercept Communications Array",
+        targetName: "Comm Array Delta",
+        description: "Hack into the enemy communications array in the northern mountains. Extract encryption keys and disable the system.",
+        reward: 650,
+        poster: createdUsers[0]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_001",
+        posterName: "Cyber Division",
+        category: "intel",
+      },
+      {
+        title: "Escort VIP Through Warzone",
+        targetName: "Dr. Elara Chen",
+        description: "Safely escort Dr. Chen through contested Sector 12 to the extraction point. Priority one protection — no casualties.",
+        reward: 900,
+        poster: createdUsers[1]._id,
+        posterWallet: "0xSEED_WALLET_POSTER_002",
+        posterName: "Defence Ministry",
+        category: "escort",
+      },
+    ];
+    for (const b of SAMPLE_BOUNTIES) {
+      const existing = await Bounty.findOne({ title: b.title });
+      if (existing) { bounty_skipped++; continue; }
+      await Bounty.create({ ...b, status: "open" });
+      bounty_created++;
+    }
+    if (bounty_created > 0) console.log(`✅ Bounties: ${bounty_created} created`);
+  }
+
   console.log("\n── Summary ──────────────────────────────────────────────────");
   console.log(`📄 SiteContent:    ${sc_created} created,  ${sc_skipped} skipped`);
   console.log(`📰 News:           ${news_created} created,  ${news_skipped} skipped`);
@@ -564,6 +969,10 @@ async function seed() {
   console.log(`💸 Withdrawals:    ${wd_created} created,  ${wd_skipped} skipped`);
   console.log(`💳 Payments:       ${pay_created} created,  ${pay_skipped} skipped`);
   console.log(`📊 Activities:     ${act_created} created,  ${act_skipped} skipped`);
+  console.log(`🔨 Auctions:       ${auc_created} created,  ${auc_skipped} skipped`);
+  console.log(`⚔️  Trades/Quests:  ${trade_created} created,  ${trade_skipped} skipped`);
+  console.log(`👥 Hire/Rent:      ${hire_created} created,  ${hire_skipped} skipped`);
+  console.log(`🎯 Bounties:       ${bounty_created} created,  ${bounty_skipped} skipped`);
   console.log("─────────────────────────────────────────────────────────────\n");
   console.log("🔑 Test user credentials:");
   console.log("   alice@hypertek.com   / User@1234");

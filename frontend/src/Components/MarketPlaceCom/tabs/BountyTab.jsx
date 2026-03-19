@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Target, Plus, X, Clock, DollarSign, CheckCircle2 } from "lucide-react";
+import { Target, Plus, X, Clock, DollarSign, CheckCircle2, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
+
 
 // ── Bounty card ───────────────────────────────────────────────────────────────
 function BountyCard({ bounty, onClaim, onComplete, onCancel, currentWallet }) {
@@ -31,10 +32,13 @@ function BountyCard({ bounty, onClaim, onComplete, onCancel, currentWallet }) {
       )}
       <div className="p-3 flex flex-col gap-1.5 flex-1">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase text-red-400"
-            style={{ background: "rgba(255,0,0,0.12)", border: "1px solid rgba(255,0,0,0.2)" }}>
-            BOUNTY
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase text-red-400"
+              style={{ background: "rgba(255,0,0,0.12)", border: "1px solid rgba(255,0,0,0.2)" }}>
+              BOUNTY
+            </span>
+
+          </div>
           <span className={`text-[10px] font-bold uppercase ${statusColor}`}>{bounty.status}</span>
         </div>
 
@@ -155,6 +159,38 @@ function CreateModal({ onClose, onSuccess, wallet }) {
   );
 }
 
+// ── Investor Note Banner ──────────────────────────────────────────────────────
+function InvestorBanner() {
+  return (
+    <div className="mb-6 rounded-xl overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, rgba(160,30,30,0.1) 0%, rgba(0,42,168,0.06) 100%)",
+        border: "1px solid rgba(255,60,60,0.15)",
+      }}>
+      <div className="px-4 py-3 flex items-center gap-3">
+        <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-amber-300/90 text-xs font-semibold">In-Game Feature Preview</p>
+          <p className="text-white/40 text-[11px] leading-snug">
+            The Bounty Board will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase.
+          </p>
+        </div>
+        <Info className="w-4 h-4 text-white/20 flex-shrink-0" />
+      </div>
+    </div>
+  );
+}
+
+// ── Static preview data ───────────────────────────────────────────────────────
+const PREVIEW_BOUNTIES = [
+  { _id: "pb-1", status: "open", title: "Eliminate ShadowWarlord_7", targetName: "ShadowWarlord_7", description: "Defeat this player in the Grand Arena PvP tournament. Screenshot proof required.", reward: 300, commission: 0.2, expiresAt: new Date(Date.now() + 30 * 86400000).toISOString(), posterName: "BountyKing" },
+  { _id: "pb-2", status: "open", title: "Intel Gathering — Arctic Station", targetName: "ArcticBase_Command", description: "Infiltrate Arctic Station Omega and extract the command codes. Full report required.", reward: 500, commission: 0.2, expiresAt: new Date(Date.now() + 25 * 86400000).toISOString(), posterName: "SpyMaster_9" },
+  { _id: "pb-3", status: "open", title: "Racing Champion Takedown", targetName: "NeonRacer_Pro", description: "Beat the current racing champion in 5 consecutive races on the Neon Circuit.", reward: 200, commission: 0.2, expiresAt: new Date(Date.now() + 28 * 86400000).toISOString(), posterName: "TrackOwner_1" },
+  { _id: "pb-4", status: "open", title: "Steal the Supply Convoy", targetName: "ConvoyGuard_Alpha", description: "Intercept and steal the supply convoy headed for the Eastern base.", reward: 450, commission: 0.2, expiresAt: new Date(Date.now() + 20 * 86400000).toISOString(), posterName: "Renegade_X" },
+  { _id: "pb-5", status: "open", title: "Capture the Flag — Zone 9", targetName: "FlagDefender_9", description: "Capture the enemy flag at Zone 9 and hold it for 10 minutes. Video proof required.", reward: 350, commission: 0.2, expiresAt: new Date(Date.now() + 15 * 86400000).toISOString(), posterName: "TacticalOps" },
+  { _id: "pb-6", status: "open", title: "Destroy the Weapon Cache", targetName: "WeaponCache_East", description: "Locate and destroy the hidden weapon cache in the Eastern jungle sector.", reward: 600, commission: 0.2, expiresAt: new Date(Date.now() + 22 * 86400000).toISOString(), posterName: "WarCommander" },
+];
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 const STATUS_FILTERS = ["open", "claimed", "completed"];
 
@@ -163,6 +199,7 @@ export default function BountyTab() {
   const wallet = user?.walletAddress || user?.wallet || "";
 
   const [bounties, setBounties] = useState([]);
+  const [usingPreview, setUsingPreview] = useState(false);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("open");
   const [showCreate, setShowCreate] = useState(false);
@@ -175,9 +212,19 @@ export default function BountyTab() {
     try {
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/bounty?status=${statusFilter}&page=${page}&limit=${LIMIT}`);
       const data = await r.json();
-      setBounties(data.bounties || []);
-      setTotal(data.total || 0);
-    } catch { setBounties([]); }
+      const fetched = data.bounties || [];
+      if (fetched.length > 0) {
+        setBounties(fetched); setTotal(data.total || 0); setUsingPreview(false);
+      } else if (statusFilter === "open" && page === 1) {
+        setBounties(PREVIEW_BOUNTIES); setTotal(PREVIEW_BOUNTIES.length); setUsingPreview(true);
+      } else {
+        setBounties([]); setTotal(0); setUsingPreview(false);
+      }
+    } catch {
+      if (statusFilter === "open" && page === 1) {
+        setBounties(PREVIEW_BOUNTIES); setTotal(PREVIEW_BOUNTIES.length); setUsingPreview(true);
+      } else { setBounties([]); }
+    }
     finally { setLoading(false); }
   }, [statusFilter, page]);
 
@@ -257,6 +304,9 @@ export default function BountyTab() {
           )}
         </div>
       </div>
+
+      {/* Investor note */}
+      <InvestorBanner />
 
       {/* Info bar */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"
