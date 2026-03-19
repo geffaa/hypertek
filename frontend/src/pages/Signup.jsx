@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
-import { useGoogleLogin } from "@react-oauth/google";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
 
 import symbol from "../assets/images/login/Symbol.svg.png";
-import google from "../assets/images/login/google.png";
-import discard from "../assets/images/login/discard.png";
 
 function Signup() {
   const dispatch = useDispatch();
@@ -64,37 +61,6 @@ function Signup() {
     }
   };
 
-  // Discord
-  const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID || "1423260002587639828";
-  const REDIRECT_URI = `${window.location.origin}/signin`;
-  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20email`;
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-    if (!code) return;
-    window.history.replaceState({}, document.title, "/signin");
-    const fetchDiscordUser = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/discord`, { code });
-        if (res.data.success && res.data.user) {
-          dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
-          localStorage.setItem("token", res.data.token);
-          toast.success(`Discord Signup successful! Welcome ${res.data.user.FullName}`);
-          navigate("/");
-        } else {
-          toast.error(res.data.message || "Discord signup failed.");
-        }
-      } catch (err) {
-        toast.error(err.response?.data?.message || "An unexpected error occurred during Discord signup.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDiscordUser();
-  }, [dispatch, navigate]);
-
   // MetaMask
   const handleMetaMask = async () => {
     setLoading(true);
@@ -122,24 +88,6 @@ function Signup() {
     }
   };
 
-  // Google
-  const loginWithGoogle = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setLoading(true);
-      try {
-        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, { token: tokenResponse.access_token });
-        dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
-        localStorage.setItem("token", res.data.token);
-        toast.success("Google Signup successful!");
-        navigate("/profile");
-      } catch (err) {
-        toast.error(err.response?.data?.message || "An unexpected error occurred during Google signup.");
-      } finally {
-        setLoading(false);
-      }
-    },
-    onError: () => { setLoading(false); toast.error("Google signup was unsuccessful or cancelled."); },
-  });
 
   return (
     <AuthLayout>
@@ -245,22 +193,16 @@ function Signup() {
         >
           <img src={symbol} alt="MetaMask" className="w-5 h-5" />
         </button>
-        <button
-          type="button"
-          onClick={() => loginWithGoogle()}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
-          title="Google"
-        >
+        {/* Google & Discord — coming soon
+        <button type="button" onClick={() => loginWithGoogle()} title="Google"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
           <img src={google} alt="Google" className="w-5 h-5" />
         </button>
-        <button
-          type="button"
-          onClick={() => (window.location.href = discordAuthUrl)}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
-          title="Discord"
-        >
+        <button type="button" onClick={() => (window.location.href = discordAuthUrl)} title="Discord"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
           <img src={discard} alt="Discord" className="w-5 h-5" />
         </button>
+        */}
       </div>
     </AuthLayout>
   );

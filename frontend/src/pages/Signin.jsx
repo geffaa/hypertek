@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -6,15 +6,12 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useGoogleLogin } from "@react-oauth/google";
 import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
 
-import discard from "../assets/images/login/discard.png";
 import symbol from "../assets/images/login/Symbol.svg.png";
-import google from "../assets/images/login/google.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -66,54 +63,6 @@ function Login() {
       setLoading(false);
     }
   };
-
-  // Google
-  const loginWithGoogle = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setLoading(true);
-      try {
-        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/google`, { token: tokenResponse.access_token });
-        dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
-        toast.success("Google Login successful!");
-        navigate("/");
-      } catch (err) {
-        toast.error(err.response?.data?.message || "An unexpected error occurred during Google login.");
-      } finally {
-        setLoading(false);
-      }
-    },
-    onError: () => { toast.error("Google login was unsuccessful or cancelled."); setLoading(false); },
-  });
-
-  // Discord
-  const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID || "1423260002587639828";
-  const REDIRECT_URI = `${window.location.origin}/signin`;
-  const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify%20email`;
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-    if (!code) return;
-    window.history.replaceState({}, document.title, "/signin");
-    const fetchDiscordUser = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/discord`, { code });
-        if (res.data.success && res.data.user) {
-          dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
-          toast.success(`Discord login successful! Welcome ${res.data.user.FullName}`);
-          navigate("/");
-        } else {
-          toast.error(res.data.message || "Discord login failed.");
-        }
-      } catch (err) {
-        toast.error(err.response?.data?.message || "An unexpected error occurred during Discord login.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDiscordUser();
-  }, [dispatch, navigate]);
 
   // MetaMask
   const handleMetaMask = async () => {
@@ -225,22 +174,16 @@ function Login() {
         >
           <img src={symbol} alt="MetaMask" className="w-5 h-5" />
         </button>
-        <button
-          type="button"
-          onClick={() => loginWithGoogle()}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
-          title="Google"
-        >
+        {/* Google & Discord — coming soon
+        <button type="button" onClick={() => loginWithGoogle()} title="Google"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
           <img src={google} alt="Google" className="w-5 h-5" />
         </button>
-        <button
-          type="button"
-          onClick={() => (window.location.href = discordAuthUrl)}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
-          title="Discord"
-        >
+        <button type="button" onClick={() => (window.location.href = discordAuthUrl)} title="Discord"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
           <img src={discard} alt="Discord" className="w-5 h-5" />
         </button>
+        */}
       </div>
     </AuthLayout>
   );
