@@ -2,19 +2,27 @@
  * RoyaltyService.js
  * Records and dispatches royalty payments to artists/creators after each sale.
  *
- * Current behaviour:
- *   - Creates a RoyaltyPayout record (status: "pending")
- *   - Crypto dispatch: queued — requires platform wallet private key (Phase 2)
- *   - Bank dispatch: marked pending for admin to process via Wise
- *
- * Phase 2: once platform wallet key is available, add USDC transfer here.
+ * Behaviour:
+ *   - Creates a RoyaltyPayout record
+ *   - Crypto dispatch: sends USDC on-chain from backend wallet → creator wallet
+ *     Requires: PRIVATE_KEY wallet holds USDC on Base Mainnet.
+ *     Fund it with USDC from platform revenue (0xb0EB...) periodically.
+ *   - Bank dispatch: marked pending — admin processes via email notification
+ *   - Falls back gracefully: on-chain tx failure → status "failed", admin notified
  */
 
 import mongoose from "mongoose";
 import nodemailer from "nodemailer";
+import { ethers } from "ethers";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+
+// Minimal ERC-20 ABI — only transfer + balanceOf needed
+const ERC20_ABI = [
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function balanceOf(address account) view returns (uint256)",
+];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -114,18 +122,60 @@ export async function dispatchRoyalty({
     `💰 [RoyaltyService] Payout queued: ${amount} USDC → ${creatorWallet} (ID: ${payout._id})`
   );
 
-  // ── Phase 2 placeholder: auto-dispatch USDC on-chain ──────────────────────
-  // When platform wallet private key is available:
-  //   const { ethers } = await import("../Service/blockchain.js");
-  //   const provider   = new ethers.JsonRpcProvider(process.env.BASE_RPC_URL);
-  //   const signer     = new ethers.Wallet(process.env.PLATFORM_PRIVATE_KEY, provider);
-  //   const usdc       = new ethers.Contract(process.env.BASE_USDC_ADDRESS, ERC20_ABI, signer);
-  //   const tx         = await usdc.transfer(creatorWallet, ethers.parseUnits(amount.toString(), 6));
-  //   await tx.wait();
-  //   await RoyaltyPayout.findByIdAndUpdate(payout._id, { status: "dispatched", txHash: tx.hash });
+  // ── Auto-dispatch USDC on-chain (crypto payouts) ────────────────────────────
+  // Requires: process.env.PRIVATE_KEY wallet holds USDC on Base Mainnet.
+  // Fund the backend wallet with USDC from platform revenue periodically.
+  if (paymentType === "crypto" && creatorWallet && creatorWallet !== "admin") {
+    try {
+      const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+      const privateKey = process.env.PRIVATE_KEY;
+      const usdcAddr   = process.env.BASE_USDC_ADDRESS;
+
+      if (!privateKey || !usdcAddr) {
+        throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not set in env");
+      }
+
+      const provider   = new ethers.JsonRpcProvider(rpcUrl);
+      const signer     = new ethers.Wallet(privateKey, provider);
+      const usdc       = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
+
+      // USDC has 6 decimals
+      const amountUnits = ethers.parseUnits(amount.toFixed(6), 6);
+
+      // Check backend wallet USDC balance before attempting
+      const balance = await usdc.balanceOf(await signer.getAddress());
+      if (balance < amountUnits) {
+        throw new Error(
+          `Backend wallet USDC balance insufficient. Has: ${ethers.formatUnits(balance, 6)}, needs: ${amount}`
+        );
+      }
+
+      const tx = await usdc.transfer(creatorWallet, amountUnits);
+      await tx.wait();
+
+      await RoyaltyPayout.findByIdAndUpdate(payout._id, {
+        status:  "dispatched",
+        txHash:  tx.hash,
+        note:    `Auto-dispatched on-chain at ${new Date().toISOString()}`,
+      });
+
+      console.log(
+        `✅ [RoyaltyService] USDC dispatched on-chain: ${amount} USDC → ${creatorWallet} | tx: ${tx.hash}`
+      );
+
+      return await RoyaltyPayout.findById(payout._id);
+    } catch (dispatchErr) {
+      console.error("❌ [RoyaltyService] On-chain USDC dispatch failed:", dispatchErr.message);
+      await RoyaltyPayout.findByIdAndUpdate(payout._id, {
+        status: "failed",
+        note:   `Auto-dispatch failed: ${dispatchErr.message}`,
+      });
+      // Fall through to notify admin
+    }
+  }
   // ──────────────────────────────────────────────────────────────────────────
 
-  // Notify admin to process manually until Phase 2
+  // Notify admin (always for bank payouts; for crypto only on failure)
   await notifyAdmin(payout);
 
   return payout;

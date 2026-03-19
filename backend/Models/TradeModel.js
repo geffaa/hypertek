@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const tradeSchema = new mongoose.Schema(
   {
@@ -16,9 +16,14 @@ const tradeSchema = new mongoose.Schema(
     title:        { type: String, required: true },
     description:  { type: String, default: "" },
 
-    // Trade: what they offer and what they want
-    offering:     { type: String, default: "" }, // text description of items offered
-    requesting:   { type: String, default: "" }, // text description of items wanted
+    // Trade: what they offer and what they want (text description)
+    offering:     { type: String, default: "" },
+    requesting:   { type: String, default: "" },
+
+    // HB components of the trade offer/request
+    // e.g. "I'll give 500 HB + my Skin NFT for your Weapon NFT"
+    offeringHB:   { type: Number, default: 0, min: 0 },  // HB poster offers
+    requestingHB: { type: Number, default: 0, min: 0 },  // HB poster wants in return
 
     // Quest: reward amount in USDC
     reward:       { type: Number, default: 0 },
@@ -36,9 +41,9 @@ const tradeSchema = new mongoose.Schema(
       default: "open",
     },
 
-    expiresAt:    { type: Date },       // 30 days from creation per brief
-    listingFee:   { type: Number, default: 2 }, // $2 / 500 HB per brief
-    category:     { type: String, default: "" }, // optional category tag
+    expiresAt:  { type: Date },
+    listingFee: { type: Number, default: 2 }, // $2 / 500 HB per brief
+    category:   { type: String, default: "" },
   },
   { timestamps: true }
 );
@@ -51,4 +56,4 @@ tradeSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Trade", tradeSchema);
+export default mongoose.model("Trade", tradeSchema);

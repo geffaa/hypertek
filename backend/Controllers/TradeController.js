@@ -1,4 +1,6 @@
 import Trade from "../Models/TradeModel.js";
+import User from "../Models/User.js";
+import HBLedger from "../Models/HBLedger.js";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 async function expireTrades() {
@@ -47,6 +49,7 @@ export async function createTrade(req, res) {
     const {
       type, posterWallet, posterName,
       title, description, offering, requesting,
+      offeringHB, requestingHB,
       reward, image, category,
     } = req.body;
 
@@ -63,10 +66,23 @@ export async function createTrade(req, res) {
       return res.status(400).json({ error: "Trade requires offering and requesting fields" });
     }
 
+    // If poster is offering HB, validate they have enough
+    const hbOffered = Number(offeringHB) || 0;
+    if (hbOffered > 0) {
+      const poster = await User.findById(userId).select("hyperBucks");
+      if (!poster || (poster.hyperBucks || 0) < hbOffered) {
+        return res.status(400).json({
+          error: `Insufficient HB balance. You have ${poster?.hyperBucks || 0} HB, offering ${hbOffered} HB.`,
+        });
+      }
+    }
+
     const trade = await Trade.create({
       type, poster: userId, posterWallet, posterName: posterName || "Anonymous",
       title, description, offering, requesting,
-      reward: type === "quest" ? Number(reward) : 0,
+      offeringHB:   hbOffered,
+      requestingHB: Number(requestingHB) || 0,
+      reward:       type === "quest" ? Number(reward) : 0,
       image, category,
     });
     res.status(201).json(trade);
@@ -103,17 +119,111 @@ export async function acceptTrade(req, res) {
 export async function completeTrade(req, res) {
   try {
     const userId = req.user?._id || req.user?.id;
-    const trade = await Trade.findById(req.params.id);
+    const trade = await Trade.findById(req.params.id).populate("poster acceptedBy");
     if (!trade) return res.status(404).json({ error: "Trade/Quest not found" });
-    if (String(trade.poster) !== String(userId)) {
+
+    const posterId     = trade.poster?._id || trade.poster;
+    const acceptedById = trade.acceptedBy?._id || trade.acceptedBy;
+
+    if (String(posterId) !== String(userId)) {
       return res.status(403).json({ error: "Only the poster can mark as completed" });
     }
     if (trade.status !== "accepted") {
       return res.status(400).json({ error: "Trade must be accepted before completion" });
     }
+
+    // ── HB settlement ──────────────────────────────────────────────────────
+    // offeringHB:   poster gives HB → acceptedBy receives
+    // requestingHB: acceptedBy gives HB → poster receives
+    const hbErrors = [];
+
+    if (trade.offeringHB > 0 && acceptedById) {
+      try {
+        // Debit from poster
+        const poster = await User.findById(posterId);
+        if (!poster || (poster.hyperBucks || 0) < trade.offeringHB) {
+          hbErrors.push(`Poster has insufficient HB (${poster?.hyperBucks || 0} < ${trade.offeringHB})`);
+        } else {
+          poster.hyperBucks -= trade.offeringHB;
+          await poster.save();
+          await HBLedger.create({
+            userId:       posterId,
+            type:         "spend",
+            amount:       -trade.offeringHB,
+            balanceAfter: poster.hyperBucks,
+            description:  `Trade HB payment: "${trade.title}"`,
+            reference:    String(trade._id),
+          });
+
+          // Credit acceptedBy
+          const acceptor = await User.findById(acceptedById);
+          if (acceptor) {
+            acceptor.hyperBucks = (acceptor.hyperBucks || 0) + trade.offeringHB;
+            await acceptor.save();
+            await HBLedger.create({
+              userId:       acceptedById,
+              type:         "earn",
+              amount:       trade.offeringHB,
+              balanceAfter: acceptor.hyperBucks,
+              description:  `Trade HB received: "${trade.title}"`,
+              reference:    String(trade._id),
+            });
+          }
+        }
+      } catch (hbErr) {
+        hbErrors.push(`offeringHB transfer error: ${hbErr.message}`);
+      }
+    }
+
+    if (trade.requestingHB > 0 && acceptedById) {
+      try {
+        // Debit from acceptedBy
+        const acceptor = await User.findById(acceptedById);
+        if (!acceptor || (acceptor.hyperBucks || 0) < trade.requestingHB) {
+          hbErrors.push(`Acceptor has insufficient HB (${acceptor?.hyperBucks || 0} < ${trade.requestingHB})`);
+        } else {
+          acceptor.hyperBucks -= trade.requestingHB;
+          await acceptor.save();
+          await HBLedger.create({
+            userId:       acceptedById,
+            type:         "spend",
+            amount:       -trade.requestingHB,
+            balanceAfter: acceptor.hyperBucks,
+            description:  `Trade HB payment: "${trade.title}"`,
+            reference:    String(trade._id),
+          });
+
+          // Credit poster
+          const poster = await User.findById(posterId);
+          if (poster) {
+            poster.hyperBucks = (poster.hyperBucks || 0) + trade.requestingHB;
+            await poster.save();
+            await HBLedger.create({
+              userId:       posterId,
+              type:         "earn",
+              amount:       trade.requestingHB,
+              balanceAfter: poster.hyperBucks,
+              description:  `Trade HB received: "${trade.title}"`,
+              reference:    String(trade._id),
+            });
+          }
+        }
+      } catch (hbErr) {
+        hbErrors.push(`requestingHB transfer error: ${hbErr.message}`);
+      }
+    }
+    // ──────────────────────────────────────────────────────────────────────
+
     trade.status = "completed";
     await trade.save();
-    res.json({ message: "Trade completed", trade });
+
+    res.json({
+      message: "Trade completed",
+      trade,
+      hbSettlement: hbErrors.length > 0
+        ? { status: "partial", errors: hbErrors }
+        : { status: "ok", offeringHBTransferred: trade.offeringHB, requestingHBTransferred: trade.requestingHB },
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

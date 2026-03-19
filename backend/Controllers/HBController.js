@@ -1,9 +1,17 @@
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+import { ethers } from "ethers";
+import Stripe from "stripe";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
 dotenv.config({ path: "./Config/.env" });
+
+// Minimal ERC-20 ABI for USDC transfer
+const ERC20_ABI = [
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function balanceOf(address account) view returns (uint256)",
+];
 
 // HB conversion constant
 const HB_TO_USD = 250; // 250 HB = $1 USD
@@ -112,12 +120,18 @@ export async function spendHB(req, res) {
 
 // ------------------ CASHOUT HB ------------------
 // POST /api/v1/hb/cashout
-// Auth required. Body: { amount (in HB), method ("usdc"|"bank") }
-// NOTE: Actual USDC on-chain transfer is Phase 2. For now: create pending record + send admin notification.
+// Auth required. Body: { amount (in HB), method ("usdc"|"bank"), walletAddress? }
+//
+// USDC method: on-chain USDC transfer from backend wallet → user's walletAddress
+//   Requires: PRIVATE_KEY wallet holds USDC on Base Mainnet.
+//
+// Bank method: Stripe payout from platform Stripe balance to platform bank,
+//   then manual admin disbursement to user. Full user-direct bank transfer
+//   requires Stripe Connect (future implementation).
 export async function cashoutHB(req, res) {
   try {
     const userId = req.user._id;
-    const { amount, method } = req.body;
+    const { amount, method, walletAddress } = req.body;
 
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: "Amount must be positive" });
@@ -144,10 +158,15 @@ export async function cashoutHB(req, res) {
     }
 
     // Validate minimums
-    if (method === "usdc" && amount < MIN_USDC_CASHOUT_HB) {
-      return res.status(400).json({
-        error: `Minimum USDC cashout is ${MIN_USDC_CASHOUT_HB} HB ($${MIN_USDC_CASHOUT_HB / HB_TO_USD})`,
-      });
+    if (method === "usdc") {
+      if (amount < MIN_USDC_CASHOUT_HB) {
+        return res.status(400).json({
+          error: `Minimum USDC cashout is ${MIN_USDC_CASHOUT_HB} HB ($${MIN_USDC_CASHOUT_HB / HB_TO_USD})`,
+        });
+      }
+      if (!walletAddress) {
+        return res.status(400).json({ error: "walletAddress required for USDC cashout" });
+      }
     }
 
     if (method === "bank") {
@@ -172,54 +191,149 @@ export async function cashoutHB(req, res) {
     // Create pending ledger entry
     const ledgerEntry = await HBLedger.create({
       userId,
-      type: "cashout",
-      amount: -amount, // negative = debit
-      balanceAfter: user.hyperBucks,
-      description: `HB cashout via ${method.toUpperCase()}`,
+      type:          "cashout",
+      amount:        -amount,
+      balanceAfter:  user.hyperBucks,
+      description:   `HB cashout via ${method.toUpperCase()}`,
       cashoutMethod: method,
       cashoutStatus: "pending",
-      cashoutUSD: usdAmount,
+      cashoutUSD:    usdAmount,
     });
 
-    // Send admin notification email (Phase 1: manual processing)
-    const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL;
-    if (adminEmail) {
+    let cashoutResult = { status: "pending", detail: null };
+
+    // ── USDC: on-chain transfer ──────────────────────────────────────────────
+    if (method === "usdc") {
       try {
-        await transporter.sendMail({
-          from: process.env.SMTP_USER || process.env.SMTP_EMAIL,
-          to: adminEmail,
-          subject: `[HyperTek] HB Cashout Request — $${usdAmount} USD via ${method.toUpperCase()}`,
-          html: `
-            <h2>Hyper Bucks Cashout Request</h2>
-            <table>
-              <tr><td><strong>User ID:</strong></td><td>${userId}</td></tr>
-              <tr><td><strong>User Email:</strong></td><td>${user.Email || "N/A"}</td></tr>
-              <tr><td><strong>HB Amount:</strong></td><td>${amount} HB</td></tr>
-              <tr><td><strong>USD Equivalent:</strong></td><td>$${usdAmount}</td></tr>
-              <tr><td><strong>Method:</strong></td><td>${method.toUpperCase()}</td></tr>
-              <tr><td><strong>Ledger Entry ID:</strong></td><td>${ledgerEntry._id}</td></tr>
-              <tr><td><strong>Status:</strong></td><td>PENDING — requires Phase 2 automation</td></tr>
-              ${method === "bank" ? `
-              <tr><td><strong>Bank Name:</strong></td><td>${user.bankDetails?.bankName || "N/A"}</td></tr>
-              <tr><td><strong>Account Holder:</strong></td><td>${user.bankDetails?.accountHolderName || "N/A"}</td></tr>
-              <tr><td><strong>Account Number:</strong></td><td>***${user.bankDetails?.accountNumber?.slice(-4) || "N/A"}</td></tr>
-              ` : ""}
-            </table>
-            <p><em>Phase 2: Automated USDC on-chain transfer pending platform wallet integration.</em></p>
-          `,
+        const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+        const privateKey = process.env.PRIVATE_KEY;
+        const usdcAddr   = process.env.BASE_USDC_ADDRESS;
+
+        if (!privateKey || !usdcAddr) throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not configured");
+
+        const provider    = new ethers.JsonRpcProvider(rpcUrl);
+        const signer      = new ethers.Wallet(privateKey, provider);
+        const usdc        = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
+        const amountUnits = ethers.parseUnits(usdAmount.toFixed(6), 6);
+
+        const balance = await usdc.balanceOf(await signer.getAddress());
+        if (balance < amountUnits) {
+          throw new Error(
+            `Backend wallet USDC insufficient. Has: ${ethers.formatUnits(balance, 6)} USDC, needs: ${usdAmount}`
+          );
+        }
+
+        const tx = await usdc.transfer(walletAddress, amountUnits);
+        await tx.wait();
+
+        await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+          cashoutStatus: "completed",
+          cashoutTxHash: tx.hash,
         });
-      } catch (emailErr) {
-        console.error("Admin notification email failed:", emailErr.message);
-        // Non-fatal — cashout record is still created
+
+        cashoutResult = { status: "completed", txHash: tx.hash };
+        console.log(`✅ [HB Cashout] USDC sent: $${usdAmount} → ${walletAddress} | tx: ${tx.hash}`);
+      } catch (usdcErr) {
+        console.error("❌ [HB Cashout] USDC on-chain transfer failed:", usdcErr.message);
+        await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+          cashoutStatus: "failed",
+          cashoutTxHash: `error: ${usdcErr.message}`,
+        });
+        cashoutResult = { status: "failed", error: usdcErr.message };
       }
     }
 
+    // ── Bank: Stripe payout attempt + admin email ────────────────────────────
+    if (method === "bank") {
+      let stripePayoutId = null;
+      try {
+        // stripe.payouts.create() sends from Stripe platform balance → platform bank account.
+        // Admin then manually transfers to the user.
+        // Full user-direct payout requires Stripe Connect (see docs/remaining-implementation.md).
+        const stripeKey = process.env.STRIPE_SECRET_KEY;
+        if (!stripeKey) throw new Error("STRIPE_SECRET_KEY not configured");
+        const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
+
+        const stripePayout = await stripe.payouts.create({
+          amount:                Math.round(usdAmount * 100), // cents
+          currency:              "usd",
+          statement_descriptor:  "HYPERTEK HB",
+          metadata: {
+            userId:      String(userId),
+            hbAmount:    String(amount),
+            ledgerId:    String(ledgerEntry._id),
+            userBank:    user.bankDetails?.bankName || "",
+            userAccount: user.bankDetails?.accountHolderName || "",
+          },
+        });
+
+        stripePayoutId = stripePayout.id;
+        await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+          cashoutStatus: "processing",
+          cashoutTxHash: stripePayout.id,
+        });
+
+        cashoutResult = { status: "processing", stripePayoutId };
+        console.log(`✅ [HB Cashout] Stripe payout created: ${stripePayout.id} — $${usdAmount}`);
+      } catch (stripeErr) {
+        console.warn("⚠️ [HB Cashout] Stripe payout failed:", stripeErr.message);
+        // Keep as "pending" — admin processes manually
+        cashoutResult = { status: "pending", error: stripeErr.message };
+      }
+
+      // Always send admin email for bank cashouts with full bank details
+      const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER || process.env.SMTP_EMAIL;
+      if (adminEmail) {
+        try {
+          await transporter.sendMail({
+            from:    process.env.SMTP_USER || process.env.SMTP_EMAIL,
+            to:      adminEmail,
+            subject: `[HyperTek] HB Bank Cashout — $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
+            html: `
+              <h2>Hyper Bucks Bank Cashout ${cashoutResult.status === "processing" ? "✅ Stripe Payout Created" : "⏳ Pending Manual Processing"}</h2>
+              <table border="1" cellpadding="6" cellspacing="0">
+                <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
+                <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
+                <tr><td><strong>HB Amount</strong></td><td>${amount} HB</td></tr>
+                <tr><td><strong>USD Amount</strong></td><td>$${usdAmount}</td></tr>
+                <tr><td><strong>Ledger Entry ID</strong></td><td>${ledgerEntry._id}</td></tr>
+                <tr><td><strong>Stripe Payout ID</strong></td><td>${stripePayoutId || "N/A — manual processing required"}</td></tr>
+                <tr><td><strong>Status</strong></td><td>${cashoutResult.status}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Account Holder</strong></td><td>${user.bankDetails?.accountHolderName || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Bank Name</strong></td><td>${user.bankDetails?.bankName || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Account Number</strong></td><td>${user.bankDetails?.accountNumber || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>IBAN</strong></td><td>${user.bankDetails?.iban || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>SWIFT/BIC</strong></td><td>${user.bankDetails?.swift || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Routing Number</strong></td><td>${user.bankDetails?.routingNumber || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Country</strong></td><td>${user.bankDetails?.country || "N/A"}</td></tr>
+                <tr style="background:#fff3cd"><td><strong>Currency</strong></td><td>${user.bankDetails?.currency || "USD"}</td></tr>
+              </table>
+              ${cashoutResult.status === "pending" ? '<p style="color:red"><strong>ACTION REQUIRED:</strong> Stripe payout failed — please process this transfer manually via your banking system or Wise.</p>' : ''}
+              <p style="color:#888;font-size:12px">For full automated user payouts, implement Stripe Connect (see backend/docs/remaining-implementation.md).</p>
+            `,
+          });
+        } catch (emailErr) {
+          console.error("Admin notification email failed:", emailErr.message);
+        }
+      }
+    }
+
+    const finalStatus = cashoutResult.status;
+    const messageMap = {
+      completed:  `${amount} HB ($${usdAmount}) sent as USDC on-chain successfully.`,
+      processing: `${amount} HB ($${usdAmount}) bank payout initiated via Stripe. Admin will process transfer to your account.`,
+      pending:    `${amount} HB ($${usdAmount}) cashout request submitted. Admin will process manually.`,
+      failed:     `Cashout of ${amount} HB failed: ${cashoutResult.error}. Please contact support — your HB may not have been deducted.`,
+    };
+
     return res.status(200).json({
-      success: true,
+      success: finalStatus !== "failed",
       ledgerEntry,
       usdAmount,
-      newBalance: user.hyperBucks,
-      message: `Cashout request of ${amount} HB ($${usdAmount}) submitted. Processing is pending.`,
+      newBalance:     user.hyperBucks,
+      cashoutStatus:  finalStatus,
+      cashoutTxHash:  cashoutResult.txHash || cashoutResult.stripePayoutId || null,
+      message:        messageMap[finalStatus] || "Cashout submitted.",
     });
   } catch (error) {
     console.error("cashoutHB error:", error);

@@ -449,6 +449,11 @@ const Withdraw = () => {
             return;
         }
 
+        if (method === 'usdc' && !activeAddress) {
+            toast.error("Connect a wallet to receive USDC");
+            return;
+        }
+
         setHbProcessing(true);
         const toastId = toast.loading(`Processing HB cashout via ${method.toUpperCase()}...`);
 
@@ -459,7 +464,11 @@ const Withdraw = () => {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${authToken}`,
                 },
-                body: JSON.stringify({ amount: hbAmount, method }),
+                body: JSON.stringify({
+                    amount: hbAmount,
+                    method,
+                    ...(method === 'usdc' ? { walletAddress: activeAddress } : {}),
+                }),
             });
 
             const data = await res.json();
@@ -792,7 +801,7 @@ const Withdraw = () => {
                             <div className="bg-[#1C1C1E] p-4 md:p-6 rounded-xl border border-white/10">
                                 <h3 className="text-base font-semibold mb-1">Cashout to USDC Wallet</h3>
                                 <p className="text-white/50 text-sm mb-4">Minimum: 250 HB ($1.00) · ~$0.01 gas fee</p>
-                                <div className="flex gap-3">
+                                <div className="flex flex-col sm:flex-row gap-3">
                                     <input
                                         type="number"
                                         value={hbCashoutAmountUsdc}
@@ -803,7 +812,7 @@ const Withdraw = () => {
                                     <button
                                         onClick={() => handleHBCashout('usdc')}
                                         disabled={hbProcessing}
-                                        className={`px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
+                                        className={`w-full sm:w-auto px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
                                     >
                                         {hbProcessing ? 'Processing...' : 'Cashout to Wallet'}
                                     </button>
@@ -819,7 +828,7 @@ const Withdraw = () => {
                             <div className="bg-[#1C1C1E] p-4 md:p-6 rounded-xl border border-white/10">
                                 <h3 className="text-base font-semibold mb-1">Bank Transfer</h3>
                                 <p className="text-white/50 text-sm mb-4">Minimum: 2500 HB ($10.00) · Bank details required</p>
-                                <div className="flex gap-3">
+                                <div className="flex flex-col sm:flex-row gap-3">
                                     <input
                                         type="number"
                                         value={hbCashoutAmountBank}
@@ -830,7 +839,7 @@ const Withdraw = () => {
                                     <button
                                         onClick={() => handleHBCashout('bank')}
                                         disabled={hbProcessing}
-                                        className={`px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
+                                        className={`w-full sm:w-auto px-5 py-3 rounded-lg font-bold text-sm transition-all whitespace-nowrap ${hbProcessing ? 'bg-yellow-900 text-white/50 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg'}`}
                                     >
                                         {hbProcessing ? 'Processing...' : 'Cashout to Bank'}
                                     </button>
