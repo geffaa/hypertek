@@ -150,10 +150,12 @@ function About() {
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           >
-            <img
+            <LazyImage
               src={charImage}
               alt="Character"
-              className="h-[500px] xl:h-[700px] w-auto object-contain drop-shadow-2xl"
+              fallback={charImg}
+              className="h-[500px] xl:h-[700px] w-[280px] xl:w-[420px]"
+              imgClassName="object-contain drop-shadow-2xl"
             />
           </motion.div>
 

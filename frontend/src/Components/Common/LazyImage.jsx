@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * LazyImage — drop-in wrapper untuk gambar dengan:
@@ -28,15 +28,16 @@ export default function LazyImage({
   children,
   ...imgProps
 }) {
-  const [status, setStatus] = useState("loading"); // "loading" | "loaded" | "error"
+  const [status, setStatus] = useState(src ? "loading" : "error");
 
-  // Reset status kalau src berubah
+  // Skip reset on first mount — only reset when src actually changes
+  const isFirstMount = useRef(true);
   useEffect(() => {
-    if (!src) {
-      setStatus("error");
-    } else {
-      setStatus("loading");
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
     }
+    setStatus(src ? "loading" : "error");
   }, [src]);
 
   const effectiveSrc =
@@ -69,13 +70,13 @@ export default function LazyImage({
         onError={(e) => {
           if (fallback && e.target.src !== fallback) {
             e.target.src = fallback;
+          } else {
+            setStatus("error");
           }
-          setStatus("error");
         }}
         {...imgProps}
       />
 
-      {/* Optional overlay children (badges, gradient, dll.) */}
       {children}
     </div>
   );
