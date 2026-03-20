@@ -5,7 +5,7 @@ import { ethers } from 'ethers';
 import toast from "react-hot-toast";
 
 // Use the existing config logic copied from frontend
-const MARKETPLACE_ADDRESS = "0x08C05937428c53b6fE248fd96C6DADD511cBC1b3"; // Active contract with accumulated balances
+const MARKETPLACE_ADDRESS = "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df"; // Deployed Base Mainnet Marketplace
 const MARKETPLACE_ABI = [
   {
     "functionName": "platformBalance",
@@ -50,7 +50,7 @@ const MARKETPLACE_ABI = [
 ];
 
 // USDC for balance check of the wallet itself (optional but helpful)
-const USDC_ADDRESS = "0x595BdF23a1e9B945e18ffBe4316572ACCC694aDE";
+const USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const USDC_ABI = [
   {
     "name": "balanceOf",

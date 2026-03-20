@@ -6,6 +6,7 @@
  */
 import express from "express";
 import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
+import { RoyaltyPayout } from "../services/RoyaltyService.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
 const AdminNFARouter = express.Router();
@@ -56,6 +57,39 @@ AdminNFARouter.post("/:id/buyback", async (req, res) => {
       data: nft,
       payout: { amount: payoutAmount, recipient: ownerWallet },
     });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * GET /api/v1/admin/nfa/royalty-payouts?status=pending
+ * Returns royalty payout records (filterable by status)
+ */
+AdminNFARouter.get("/royalty-payouts", async (req, res) => {
+  try {
+    const { status } = req.query;
+    const filter = status ? { status } : {};
+    const payouts = await RoyaltyPayout.find(filter).sort({ createdAt: -1 }).limit(200);
+    res.json({ success: true, count: payouts.length, data: payouts });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * PUT /api/v1/admin/nfa/royalty-payouts/:id/mark-dispatched
+ * Admin marks a bank payout as processed manually
+ */
+AdminNFARouter.put("/royalty-payouts/:id/mark-dispatched", async (req, res) => {
+  try {
+    const payout = await RoyaltyPayout.findByIdAndUpdate(
+      req.params.id,
+      { status: "dispatched", note: `Manually marked dispatched by admin on ${new Date().toISOString()}` },
+      { new: true }
+    );
+    if (!payout) return res.status(404).json({ success: false, message: "Payout not found" });
+    res.json({ success: true, data: payout });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

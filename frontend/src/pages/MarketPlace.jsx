@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import axios from "axios";
 import MarketNavBar      from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
@@ -123,8 +124,6 @@ function MarketPlace() {
       <div ref={bannerRef} className="mt-[72px]">
         <MarketplaceBanner
           noMargin
-          playing={playing}
-          onToggleAudio={toggleAudio}
           stats={[
             { num: bannerStats.totalItems,  label: "Total Items"  },
             { num: bannerStats.totalVolume, label: "Total Buys"   },
@@ -136,13 +135,28 @@ function MarketPlace() {
 
       {/* ── C: Marketplace Nav — fixed once banner scrolls past */}
       <div ref={navRef} style={navStyle}>
-        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2">
+        <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
           <MarketNavBar
             activeTab={activeTab}
             onTabChange={(tab) => { setActiveTab(tab); setSearch(""); }}
             search={search}
             onSearch={setSearch}
+            className="flex-1 min-w-0"
           />
+          {/* Sound toggle — always visible in sticky nav */}
+          <button
+            onClick={toggleAudio}
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200"
+            style={{
+              background: "rgba(255,255,255,0.07)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              color: playing ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.4)",
+            }}
+            title={playing ? "Mute ambient sound" : "Play ambient sound"}
+          >
+            {playing ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            <span className="hidden sm:inline">{playing ? "Sound On" : "Sound Off"}</span>
+          </button>
         </div>
       </div>
 

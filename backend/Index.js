@@ -35,6 +35,7 @@ import TradeRouter from "./Routes/TradeRoute.js";
 import HireRentRouter from "./Routes/HireRentRoute.js";
 import BountyRouter from "./Routes/BountyRoute.js";
 import HBRouter from "./Routes/HBRoute.js";
+import ArtistRouter from "./Routes/ArtistRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -156,6 +157,7 @@ app.use("/api/v1/trade", TradeRouter);
 app.use("/api/v1/hire", HireRentRouter);
 app.use("/api/v1/bounty", BountyRouter);
 app.use("/api/v1/hb", HBRouter);
+app.use("/api/v1/admin/artists", ArtistRouter);
 
 // Health check
 app.get("/health", (req, res) => {

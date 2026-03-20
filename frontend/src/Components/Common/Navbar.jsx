@@ -3,7 +3,6 @@ import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SearchImg from "../../assets/images/Search.png";
 import ProfileImg from "../../assets/images/login.png";
-import CustomeButton from "../Buttons/Button1";
 import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -36,6 +35,7 @@ export default function Navbar() {
   const [socialOpen, setSocialOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isHome = location.pathname === "/";
   const logo = "/logo-white.png";
 
   useEffect(() => {
@@ -232,12 +232,17 @@ export default function Navbar() {
   return (
     <nav
       className="fixed top-0 left-0 z-50 w-full transition-all duration-300"
-      style={{
-        background: scrolled
-          ? "rgba(0, 17, 66, 0.55)"
-          : "rgba(0, 17, 66, 0.25)",
-        backdropFilter: scrolled ? "blur(20px)" : "blur(4px)",
-      }}
+      style={
+        isHome
+          ? {
+              background: scrolled ? "rgba(0, 17, 66, 0.55)" : "transparent",
+              backdropFilter: scrolled ? "blur(20px)" : "none",
+            }
+          : {
+              background: "rgba(0, 17, 66, 0.85)",
+              backdropFilter: "blur(20px)",
+            }
+      }
     >
       {/* Container with max-width and centered */}
       <div className="w-full mx-auto max-w-[1500px] px-6 sm:px-8 md:px-10">
@@ -421,6 +426,19 @@ export default function Navbar() {
 
           {/* Right Section */}
           <div className="flex items-center space-x-4">
+            {/* Mobile: Back button (only when not on home) */}
+            {location.pathname !== "/" && (
+              <button
+                className="flex items-center md:hidden text-white/70 hover:text-white transition-colors duration-200"
+                onClick={() => navigate(-1)}
+                aria-label="Go back"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+
             {/* Mobile Menu Button */}
             <div className="flex items-center md:hidden z-50">
               <button
@@ -523,7 +541,12 @@ export default function Navbar() {
               !["/signup", "/signin", "/forgot-password"].includes(
                 location.pathname
               ) && (
-                <div className="hidden md:block">
+                <div className="hidden md:flex items-center gap-3">
+                  <Link to="/waitlist">
+                    <button className="px-5 py-2.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/30">
+                      Waitlist
+                    </button>
+                  </Link>
                   <Link to="/signup">
                     <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
                       Sign Up
@@ -679,9 +702,15 @@ export default function Navbar() {
                 </div>
               </>
             ) : (
-              <div className="flex justify-center mt-4 pt-4 border-t border-white/20">
-                <Link to="/signup">
-                  <CustomeButton text="Sign In" />
+              <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/20">
+                <Link to="/waitlist" onClick={closeMobileMenu}
+                  className="w-full text-center py-2.5 rounded-lg font-semibold text-sm text-white border border-white/30 hover:bg-white/10 transition-colors">
+                  Join Waitlist
+                </Link>
+                <Link to="/signup" onClick={closeMobileMenu} className="w-full">
+                  <button className="w-full py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
+                    Sign Up
+                  </button>
                 </Link>
               </div>
             )}

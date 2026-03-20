@@ -66,16 +66,26 @@ export async function createTrade(req, res) {
       return res.status(400).json({ error: "Trade requires offering and requesting fields" });
     }
 
-    // If poster is offering HB, validate they have enough
+    // Deduct 500 HB listing fee + validate HB offering
+    const LISTING_FEE_HB = 500;
     const hbOffered = Number(offeringHB) || 0;
-    if (hbOffered > 0) {
-      const poster = await User.findById(userId).select("hyperBucks");
-      if (!poster || (poster.hyperBucks || 0) < hbOffered) {
-        return res.status(400).json({
-          error: `Insufficient HB balance. You have ${poster?.hyperBucks || 0} HB, offering ${hbOffered} HB.`,
-        });
-      }
+    const totalHBNeeded = LISTING_FEE_HB + hbOffered;
+
+    const poster = await User.findById(userId).select("hyperBucks");
+    if (!poster || (poster.hyperBucks || 0) < totalHBNeeded) {
+      return res.status(400).json({
+        error: `Insufficient HB. You need ${totalHBNeeded} HB (${LISTING_FEE_HB} listing fee + ${hbOffered} offered). You have ${poster?.hyperBucks || 0} HB.`,
+      });
     }
+
+    // Deduct listing fee
+    poster.hyperBucks -= LISTING_FEE_HB;
+    await poster.save();
+    await HBLedger.create({
+      userId, type: "spend", amount: -LISTING_FEE_HB,
+      balanceAfter: poster.hyperBucks,
+      description: `${type === "quest" ? "Quest" : "Trade"} listing fee`,
+    });
 
     const trade = await Trade.create({
       type, poster: userId, posterWallet, posterName: posterName || "Anonymous",

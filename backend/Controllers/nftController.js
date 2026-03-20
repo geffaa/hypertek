@@ -500,7 +500,7 @@ export async function mintSubCollection(req, res) {
       buyer: creatorWallet.toLowerCase(),
       seller: deployerWallet || "unknown", // Actual deployer wallet address
       priceETH: String(mintPrice || "0"), // Already human-readable decimal
-      royaltyPaid: String(mintPrice || "0"), // 100% to creator/project on first sale
+      royaltyPaid: "0", // Mint record — no royalty split on initial mint
       platformFee: 0,
       sellerReceived: 0,
       txHash: receipt.hash,

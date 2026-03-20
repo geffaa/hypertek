@@ -57,7 +57,7 @@ const checkUserStatus = (user) => {
 // ------------------ SIGNUP ------------------
 const SignupUser = async (req, res) => {
   try {
-    const { Email, Password, ConfirmPassword } = req.body;
+    const { FullName, Email, Password, ConfirmPassword } = req.body;
 
     if (!Email || !Password || !ConfirmPassword) {
       return res.status(400).json({
@@ -72,9 +72,10 @@ const SignupUser = async (req, res) => {
     const { address, encryptedPrivateKey } = generateWallet();
 
     const newUser = new UserModel({
+      FullName: FullName || "",
       Email,
       Password,
-      isActive: true, // ✅ New users are active by default
+      isActive: true,
       WalletAddress: address,
       EncryptedPrivateKey: encryptedPrivateKey,
     });
@@ -96,10 +97,11 @@ const SignupUser = async (req, res) => {
       token,
       user: {
         id: newUser._id,
+        FullName: newUser.FullName,
         Email: newUser.Email,
         Role: newUser.Role,
         isActive: newUser.isActive,
-        WalletAddress: newUser.WalletAddress
+        WalletAddress: newUser.WalletAddress,
       },
     });
   } catch (error) {
@@ -156,10 +158,11 @@ const LoginUser = async (req, res) => {
       token,
       user: {
         id: user._id,
+        FullName: user.FullName,
         Email: user.Email,
         Role: user.Role,
         isActive: user.isActive,
-        WalletAddress: user.WalletAddress
+        WalletAddress: user.WalletAddress,
       },
     });
   } catch (err) {

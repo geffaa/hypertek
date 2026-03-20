@@ -52,6 +52,16 @@ function Footer() {
           ))}
         </nav>
 
+        {/* Waitlist CTA */}
+        <Link
+          to="/waitlist"
+          onClick={() => window.scrollTo(0, 0)}
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:opacity-90"
+          style={{ background: "#002AA8", border: "1px solid rgba(255,255,255,0.15)" }}
+        >
+          Join the Waitlist
+        </Link>
+
         {/* Copyright */}
         <p className="text-white/50 text-xs tracking-wide">
           @ {currentYear}. All Right Reserved

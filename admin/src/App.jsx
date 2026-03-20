@@ -31,6 +31,9 @@ import AddSubCollection from "./pages/AddSubCollection";
 import EditSubCollection from "./pages/EditSubCollection";
 import WebsiteEditor from "./pages/WebsiteEditor";
 import WaitlistPage from "./pages/WaitlistPage";
+import Artists from "./pages/Artists";
+import ArtistForm from "./pages/ArtistForm";
+import RoyaltyPayouts from "./pages/RoyaltyPayouts";
 
 
 function App() {
@@ -78,6 +81,9 @@ function App() {
             <Route path="edit-profile" element={<EditAdminProfile />} />
             <Route path="website-editor" element={<WebsiteEditor />} />
             <Route path="waitlist" element={<WaitlistPage />} />
+            <Route path="artists" element={<Artists />} />
+            <Route path="artist-form" element={<ArtistForm />} />
+            <Route path="royalty-payouts" element={<RoyaltyPayouts />} />
           </Route>
         </Route>
 

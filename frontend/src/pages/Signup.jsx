@@ -17,7 +17,7 @@ function Signup() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
+  const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -41,6 +41,7 @@ function Signup() {
     }
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/signup`, {
+        FullName: formData.fullName,
         Email: formData.email,
         Password: formData.password,
         ConfirmPassword: formData.confirmPassword,
@@ -105,8 +106,12 @@ function Signup() {
           <FaUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-sm" />
           <input
             type="text"
-            placeholder="Name"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            placeholder="Full Name"
             className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all text-sm"
+            required
           />
         </div>
 

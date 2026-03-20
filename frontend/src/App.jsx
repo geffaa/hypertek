@@ -61,6 +61,8 @@ import Edit from "./Components/ProfileSection/EditProfile";
 import NotFound from "./pages/NotFound";
 import Waitlist from "./pages/Waitlist";
 import WaitlistForm from "./pages/WaitlistForm";
+import WhitepaperPage from "./pages/WhitepaperPage";
+import TermsPage from "./pages/TermsPage";
 import Testing from "./pages/Testing";
 import UserDashboard from "./pages/UserDashboard";
 import OfferedReceived from "./pages/OfferedReceived";
@@ -115,6 +117,7 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
+    "/terms",
     "/waitlist",
     "/join-waitlist",
     "/dashboard/create-earning",
@@ -161,6 +164,8 @@ function AppWrapper() {
             {/* Marketplace / NFA */}
             <Route path="/waitlist" element={<Waitlist />} />
             <Route path="/join-waitlist" element={<WaitlistForm />} />
+            <Route path="/whitepapers" element={<WhitepaperPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             <Route path="/market-place" element={<MarketPlace />} />
             <Route path="/collections/:category" element={<CategoryMarketplace />} />
             <Route path="/nfa-expand" element={<NFA />} />
@@ -317,7 +322,7 @@ function App() {
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        overflow: "hidden",
+        overflowX: "hidden",
       }}
     >
       {/* Glow orb top-left — drifts right+down on scroll */}

@@ -152,11 +152,19 @@ export async function finalizeNFAPurchase({
     : (process.env.PLATFORM_WALLET_ADDRESS || "admin");
 
   const cleanPrice = parseFloat(String(priceETH || subCollection.priceETH || 0));
-  
+
+  // Enforce NFA reserve price: block purchases below minimumBuybackUSD
+  const isNFA = subCollection.isNFA === true;
+  if (isNFA && subCollection.minimumBuybackUSD > 0 && cleanPrice < subCollection.minimumBuybackUSD) {
+    throw Object.assign(
+      new Error(`Price $${cleanPrice} is below this NFA's minimum buyback reserve of $${subCollection.minimumBuybackUSD}. The item cannot be sold below its guaranteed value.`),
+      { code: "BELOW_RESERVE", minimumBuybackUSD: subCollection.minimumBuybackUSD }
+    );
+  }
+
   // Distribution — NFA: 4% artist + 5% buyback + 11% company | NFC: 4% creator + 16% company
   // No special first-sale case — same split applies to all sales per Don's brief.
   // On first sale, HyperTek is the seller and receives the 80% seller proceeds.
-  const isNFA = subCollection.isNFA === true;
 
   let royaltyPaid    = 0;
   let platformFee    = 0;
