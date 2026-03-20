@@ -654,6 +654,9 @@ async function seed() {
         [{ $set: { offering: { $replaceAll: { input: "$offering", find: " (600 USDC)", replacement: "" } } } }]
     );
 
+    // Placeholder ObjectId for seed records (satisfies required poster field)
+    const SEED_POSTER_ID = new mongoose.Types.ObjectId("000000000000000000000001");
+
     // Add former bounty missions as quest records (if not already there)
     const QUEST_MIGRATIONS = [
         { title: "Destroy Rogue AI Nexus-7",        type: "quest", description: "Rogue artificial intelligence has taken control of the Eastern Grid. Locate and neutralise its core processor.", posterName: "Intel Division",    posterWallet: "0xSEED_WALLET_POSTER_001" },
@@ -666,7 +669,7 @@ async function seed() {
     let qm_created = 0;
     for (const q of QUEST_MIGRATIONS) {
         const exists = await Trade.findOne({ title: q.title });
-        if (!exists) { await Trade.create({ ...q, status: "open" }); qm_created++; }
+        if (!exists) { await Trade.create({ ...q, poster: SEED_POSTER_ID, status: "open" }); qm_created++; }
     }
     if (qm_created > 0) console.log(`✅ Quest migration: ${qm_created} former bounty items added to Quests/Trades`);
 
@@ -690,7 +693,7 @@ async function seed() {
     for (const hc of HIT_CONTRACTS) {
         const exists = await Bounty.findOne({ title: hc.title });
         if (!exists) {
-            await Bounty.create({ ...hc, status: "open", expiresAt: new Date(Date.now() + 30 * 86400000) });
+            await Bounty.create({ ...hc, poster: SEED_POSTER_ID, status: "open", expiresAt: new Date(Date.now() + 30 * 86400000) });
             hc_created++;
         }
     }
