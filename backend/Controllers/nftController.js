@@ -167,7 +167,7 @@ export async function getParentCollections(req, res) {
     }
 
     const collections = await NFTSystem.find(query)
-      .select("collection category subCollections createdAt")
+      .select("collection category subCollections createdAt isDummy")
       .sort({ createdAt: -1 });
 
     return res.json({

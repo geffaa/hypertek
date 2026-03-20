@@ -443,10 +443,11 @@ async function seed() {
     }
 
     // Mark all existing seeded parent collections as isDummy=true (migration)
-    await NFTSystem.updateMany(
+    const migrated = await NFTSystem.updateMany(
         { isParentCollection: true },
         { $set: { isDummy: true } }
     );
+    console.log(`🏷️  isDummy migration: ${migrated.modifiedCount} collections updated`);
 
     // ── 4. NFT 101 ──────────────────────────────────────────────────────────
     let edu_created = 0, edu_skipped = 0;
