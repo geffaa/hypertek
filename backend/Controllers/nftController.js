@@ -2410,3 +2410,58 @@ export async function userUploadNFC(req, res) {
     return res.status(500).json({ success: false, error: err.message });
   }
 }
+/**
+ * Get Transaction History for a wallet
+ * Aggregates salesHistory entries where buyer or seller === walletAddress
+ */
+export async function getUserTransactions(req, res) {
+  try {
+    const { walletAddress } = req.params;
+    if (!walletAddress) {
+      return res.status(400).json({ success: false, error: "walletAddress is required" });
+    }
+    const walletLower = walletAddress.toLowerCase();
+
+    // Find all parent collections that have sub-collections with matching salesHistory
+    const parents = await NFTSystem.find({
+      isParentCollection: true,
+      $or: [
+        { "subCollections.salesHistory.buyer": walletLower },
+        { "subCollections.salesHistory.seller": walletLower },
+      ],
+    }).select("collection.name category subCollections.name subCollections.salesHistory");
+
+    const transactions = [];
+    parents.forEach((parent) => {
+      parent.subCollections.forEach((sub) => {
+        if (!sub.salesHistory?.length) return;
+        sub.salesHistory.forEach((sale) => {
+          const buyerLow  = (sale.buyer  || "").toLowerCase();
+          const sellerLow = (sale.seller || "").toLowerCase();
+          if (buyerLow !== walletLower && sellerLow !== walletLower) return;
+          transactions.push({
+            txHash:         sale.txHash || null,
+            itemName:       sub.name,
+            collectionName: parent.collection?.name || "",
+            category:       parent.category || "",
+            priceETH:       sale.priceETH,
+            buyer:          sale.buyer,
+            seller:         sale.seller,
+            type:           buyerLow === walletLower ? "buy" : "sell",
+            royaltyPaid:    sale.royaltyPaid,
+            sellerReceived: sale.sellerReceived,
+            createdAt:      sale.createdAt,
+          });
+        });
+      });
+    });
+
+    // Sort newest first
+    transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    return res.json({ success: true, transactions, count: transactions.length });
+  } catch (err) {
+    console.error("❌ GET USER TRANSACTIONS ERROR:", err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+}

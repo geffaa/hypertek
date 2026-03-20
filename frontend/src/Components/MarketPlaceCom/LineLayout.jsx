@@ -22,7 +22,15 @@ function LineCard({ item }) {
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
         border: isNFA ? "1px solid rgba(0,80,255,0.5)" : "1px solid rgba(255,255,255,0.09)",
       }}
-      onClick={() => navigate(`/collections/${encodeURIComponent(category)}`)}
+      onClick={() => {
+        if (isDummy) {
+          navigate(`/collections/${encodeURIComponent(category)}`);
+        } else {
+          navigate("/buy-nfa", {
+            state: { subCollectionId: item._id, parentId: item.parentId, item },
+          });
+        }
+      }}
     >
       <div className="relative">
         <LazyImage

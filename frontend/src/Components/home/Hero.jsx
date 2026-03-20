@@ -167,7 +167,7 @@ export default function Hero() {
           </Link>
           <button
             onClick={() => setShowVideo(true)}
-            className="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/40 hover:border-white/70"
+            className="px-8 py-3 bg-[#002AA8] hover:bg-[#003BD4] text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/20 hover:border-white/40"
           >
             {btn2Text}
           </button>

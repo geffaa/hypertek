@@ -2,7 +2,7 @@
  * Welcome email sent to every new user on signup.
  * Includes their wallet address and private key backup warning.
  */
-export const welcomeEmailTemplate = ({ name, walletAddress, privateKey }) => ({
+export const welcomeEmailTemplate = ({ name, walletAddress, encryptedPrivateKey }) => ({
   subject: "Welcome to HyperTek — Your Wallet is Ready",
   html: `
 <!DOCTYPE html>
@@ -46,14 +46,17 @@ export const welcomeEmailTemplate = ({ name, walletAddress, privateKey }) => ({
             </td>
           </tr>
 
-          <!-- Private Key Warning -->
+          <!-- Private Key Backup (encrypted) -->
           <tr>
             <td style="padding:0 40px 24px;">
               <div style="background-color:#1a0a0a;border:1px solid #6b2020;border-radius:8px;padding:20px;">
-                <p style="margin:0 0 8px;font-size:12px;color:#f87171;font-weight:700;letter-spacing:1px;text-transform:uppercase;">⚠️ Private Key Backup — Keep This Secret</p>
-                <p style="margin:0 0 12px;font-size:13px;color:#e2e8f0;font-family:'Courier New',monospace;word-break:break-all;background-color:#0f0505;padding:12px;border-radius:4px;">${privateKey}</p>
-                <p style="margin:0;font-size:13px;color:#fca5a5;line-height:1.6;">
-                  <strong>Anyone with this key controls your wallet.</strong> Copy it now and store it somewhere safe — a password manager, USB drive, or printed paper kept offline. HyperTek cannot recover this key if you lose it.
+                <p style="margin:0 0 8px;font-size:12px;color:#f87171;font-weight:700;letter-spacing:1px;text-transform:uppercase;">⚠️ Encrypted Private Key Backup</p>
+                <p style="margin:0 0 12px;font-size:13px;color:#e2e8f0;font-family:'Courier New',monospace;word-break:break-all;background-color:#0f0505;padding:12px;border-radius:4px;">${encryptedPrivateKey}</p>
+                <p style="margin:0 0 8px;font-size:13px;color:#fca5a5;line-height:1.6;">
+                  This is your <strong>encrypted</strong> private key backup. It cannot be used directly — you must decrypt it using your account password via your HyperTek dashboard.
+                </p>
+                <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.5;">
+                  Store this string safely (password manager, USB drive, or offline). HyperTek cannot recover your wallet if both this backup and your dashboard access are lost.
                 </p>
               </div>
             </td>

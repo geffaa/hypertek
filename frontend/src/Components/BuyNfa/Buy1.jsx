@@ -1,5 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import ReactDOM from "react-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { STRIPE_PUBLISHABLE_KEY } from "../../Config";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -28,6 +31,65 @@ import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy } from "lucide-react";
+
+// ── Stripe NFT Payment Modal ─────────────────────────────────────────────────
+const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
+
+function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setLoading(true);
+    setError("");
+
+    const { error: submitErr } = await elements.submit();
+    if (submitErr) { setError(submitErr.message); setLoading(false); return; }
+
+    const { error: confirmErr, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      redirect: "if_required",
+    });
+
+    if (confirmErr) {
+      setError(confirmErr.message);
+    } else if (paymentIntent?.status === "succeeded") {
+      toast.success("💳 Card payment successful! NFT transfer in progress...");
+      onSuccess(paymentIntent);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+      <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-bold text-white">💳 Pay with Card</h3>
+          <button onClick={onClose} className="text-white/50 hover:text-white text-xl">×</button>
+        </div>
+        <p className="text-sm text-white/50 mb-4">Amount: <span className="text-white font-semibold">${amount} USD</span></p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <PaymentElement />
+          {error && <p className="text-red-400 text-xs">{error}</p>}
+          <div className="flex gap-3 mt-2">
+            <button type="button" onClick={onClose}
+              className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm transition-colors">
+              Cancel
+            </button>
+            <button type="submit" disabled={!stripe || loading}
+              className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#0038d4] disabled:opacity-50 text-white font-semibold text-sm transition-colors">
+              {loading ? "Processing..." : `Pay $${amount}`}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 function Buy1() {
   const navigate = useNavigate();
@@ -104,6 +166,7 @@ function Buy1() {
   const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
   const [walletCopied, setWalletCopied] = useState(false);
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
+  const [stripeModal, setStripeModal] = useState(null); // { clientSecret, amount }
 
   // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
@@ -972,51 +1035,38 @@ function Buy1() {
   };
 
   /* ======================== CARD PAYMENT ======================== */
-  const handlePaymentCard = async (productId) => {
-    if (!user?.id) {
-      toast.error("❌ Please login first");
+  const handlePaymentCard = async () => {
+    if (!user?.id) { toast.error("❌ Please login first"); return; }
+    if (!stripePromise) { toast.error("❌ Card payments not configured"); return; }
+    if (!isAnyConnected || !activeAddress) {
+      toast.error("❌ Connect wallet first to receive the NFT");
       return;
     }
 
-    const toastId = toast.loading("💳 Processing card payment...");
+    const priceUsdc = parseFloat(collection.priceETH || 0.01);
+    const amountCents = Math.round(priceUsdc * 100);
+    const toastId = toast.loading("💳 Preparing card payment...");
 
     try {
-      if (!isAnyConnected || !activeAddress) {
-        toast.error("❌ Please connect your wallet first to receive the NFT", { id: toastId });
-        setLoading(false);
-        return;
-      }
-
-      console.log("💳 Starting card purchase check for product:", productId);
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/game/create`, {
+      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/payment/create-payment-intent`, {
+        amount: amountCents,
         userId: user.id || user._id,
-        productId,
-        priceETH: collection.priceETH || 0.01, // Use collection's price as fallback
-        itemType: itemType || "nft",
-        tokenId: tokenId || collection.tokenId, // Use tokenId from state or collection
+        email: user.Email || user.email || "",
+        parentId: parentCollection?._id || parentId || collection.parentId || "",
+        subCollectionId: collection._id,
+        buyerWallet: activeAddress,
+        priceETH: priceUsdc,
+        gameTitle: collection.name || "NFT Purchase",
       });
 
-      if (res.data?.exist === "no") {
-        toast.success("✅ Payment initiated", { id: toastId });
-        navigate("/offer", {
-          state: {
-            item: collection,
-            parentId: parentCollection?._id || parentId || item?.parentId || collection.parentId,
-            subCollectionId: collection._id,
-            buyerWallet: activeAddress,
-            priceETH: collection.priceETH || 0.01,
-            itemType: "nft",
-            tokenId: collection.tokenId || item?.tokenId
-          }
-        });
+      toast.dismiss(toastId);
+      if (res.data?.clientSecret) {
+        setStripeModal({ clientSecret: res.data.clientSecret, amount: priceUsdc });
       } else {
-        toast.error("❌ Already purchased", { id: toastId });
+        toast.error("❌ Could not initiate card payment");
       }
     } catch (err) {
-      console.error("❌ Card payment error:", err);
-      toast.error("❌ Payment check failed", { id: toastId });
-    } finally {
-      setLoading(false);
+      toast.error("❌ Card payment setup failed", { id: toastId });
     }
   };
 
@@ -1107,6 +1157,23 @@ function Buy1() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Stripe Card Payment Modal */}
+      {stripeModal && stripePromise && (
+        <Elements
+          stripe={stripePromise}
+          options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" } }}
+        >
+          <StripeNFTCheckoutForm
+            amount={stripeModal.amount}
+            onClose={() => setStripeModal(null)}
+            onSuccess={() => {
+              setStripeModal(null);
+              toast.success("Payment received — NFT transfer processing via webhook.");
+            }}
+          />
+        </Elements>
       )}
 
       {/* Tabs */}
@@ -1275,7 +1342,7 @@ function Buy1() {
               </button>
 
               <button
-                onClick={() => handlePaymentCard(collection._id)}
+                onClick={() => handlePaymentCard()}
                 disabled={loading}
               >
                 <CustomButton text="Buy With Card" />

@@ -1,177 +1,130 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import SearchImage from "../../assets/search.png";
+import { BACKEND_BASE_URL } from "../../Config";
 
 function Transactions() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { user, token } = useSelector((state) => state.auth);
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading]           = useState(true);
+  const [searchTerm, setSearchTerm]     = useState("");
 
-  // Static transaction data
-  const transactionsData = [
-    {
-      id: 1,
-      transactionHash: "0xc4c16a645427a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5",
-      shortHash: "0xc4c16a645427....",
-      timeAgo: "1 hour ago",
-      recipientAddress: "0xc4c16b46r56848939b836457373829bnbeee567bb",
-      amount: "$5,000",
-    },
-    {
-      id: 2,
-      transactionHash: "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0",
-      shortHash: "0xa1b2c3d4e5f6....",
-      timeAgo: "2 hours ago",
-      recipientAddress: "0x1234567890abcdef1234567890abcdef12345678",
-      amount: "$3,200",
-    },
-    {
-      id: 3,
-      transactionHash: "0x9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0",
-      shortHash: "0x9e8d7c6b5a4f....",
-      timeAgo: "3 hours ago",
-      recipientAddress: "0xfedcba0987654321fedcba0987654321fedcba09",
-      amount: "$12,500",
-    },
-    {
-      id: 4,
-      transactionHash: "0x5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4",
-      shortHash: "0x5f6e7d8c9b0a....",
-      timeAgo: "5 hours ago",
-      recipientAddress: "0x567890abcdef1234567890abcdef1234567890ab",
-      amount: "$800",
-    },
-    {
-      id: 5,
-      transactionHash: "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
-      shortHash: "0x1a2b3c4d5e6f....",
-      timeAgo: "1 day ago",
-      recipientAddress: "0x9876543210fedcba9876543210fedcba98765432",
-      amount: "$45,000",
-    },
-    {
-      id: 6,
-      transactionHash: "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2",
-      shortHash: "0x3c4d5e6f7a8b....",
-      timeAgo: "2 days ago",
-      recipientAddress: "0xabcdef1234567890abcdef1234567890abcdef12",
-      amount: "$2,300",
-    },
-    {
-      id: 7,
-      transactionHash: "0x7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
-      shortHash: "0x7e8f9a0b1c2d....",
-      timeAgo: "3 days ago",
-      recipientAddress: "0x34567890abcdef1234567890abcdef1234567890",
-      amount: "$15,750",
-    },
-    {
-      id: 8,
-      transactionHash: "0xb0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9",
-      shortHash: "0xb0c1d2e3f4a5....",
-      timeAgo: "1 week ago",
-      recipientAddress: "0xdefabc1234567890defabc1234567890defabc12",
-      amount: "$9,999",
-    },
-  ];
+  const wallet = user?.WalletAddress || user?.MetaMaskAddress || "";
 
-  // Filter transactions based on search term
-  const filteredTransactions = transactionsData.filter(transaction =>
-    transaction.transactionHash.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.shortHash.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.recipientAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.amount.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    if (!wallet) { setLoading(false); return; }
+    const fetch = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${BACKEND_BASE_URL}/api/v1/nft/user/transactions/${encodeURIComponent(wallet)}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setTransactions(res.data.transactions || []);
+      } catch {
+        setTransactions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetch();
+  }, [wallet]);
+
+  const filtered = transactions.filter((tx) => {
+    const q = searchTerm.toLowerCase();
+    return (
+      (tx.txHash || "").toLowerCase().includes(q) ||
+      (tx.itemName || "").toLowerCase().includes(q) ||
+      (tx.buyer || "").toLowerCase().includes(q) ||
+      (tx.seller || "").toLowerCase().includes(q)
+    );
+  });
+
+  const shortHash = (hash) => hash ? `${hash.slice(0, 14)}....` : "—";
+  const formatDate = (d) => d ? new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
 
   return (
     <div className="w-full flex flex-col relative z-10">
       {/* Header */}
       <div className="w-full max-w-[426px] z-10 relative">
-        <h1
-          className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-6"
-        >
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-6">
           Transaction History
         </h1>
 
         {/* Search Box */}
-        <div
-          className="flex items-center w-full h-[43px] rounded-md gap-[15px] px-4 md:px-6 bg-[#FFFFFF1C] backdrop-blur-sm"
-        >
-          <img
-            src={SearchImage}
-            alt="search"
-            className="w-[16px] h-[16px] flex-shrink-0"
-          />
+        <div className="flex items-center w-full h-[43px] rounded-md gap-[15px] px-4 md:px-6 bg-[#FFFFFF1C] backdrop-blur-sm">
+          <img src={SearchImage} alt="search" className="w-[16px] h-[16px] flex-shrink-0" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search transactions..."
-            className="w-full bg-transparent border-none outline-none color-white font-inter font-medium text-[14px]"
+            placeholder="Search by item, tx hash, wallet..."
+            className="w-full bg-transparent border-none outline-none text-white font-inter font-medium text-[14px]"
           />
         </div>
       </div>
 
-      {/* Transactions List */}
+      {/* List */}
       <div className="mt-8 space-y-4 z-10 relative">
-        {filteredTransactions.length > 0 ? (
-          filteredTransactions.map((transaction) => (
+        {loading ? (
+          <p className="text-white/50 text-sm text-center py-12">Loading transactions...</p>
+        ) : !wallet ? (
+          <p className="text-white/50 text-sm text-center py-12">Connect your wallet to see your transaction history.</p>
+        ) : filtered.length === 0 ? (
+          <p className="text-white/50 text-sm text-center py-12">
+            {searchTerm ? `No transactions found matching "${searchTerm}"` : "No transactions yet."}
+          </p>
+        ) : (
+          filtered.map((tx, i) => (
             <div
-              key={transaction.id}
+              key={i}
               className="flex flex-col md:flex-row items-start md:items-center w-full max-w-[954px] gap-4 p-4 md:p-0 bg-white/5 md:bg-transparent rounded-lg"
             >
-              {/* Left */}
+              {/* Left — tx hash + date */}
               <div className="flex items-center gap-3 w-full md:w-[209px]">
                 <div
                   className="flex items-center justify-center rounded-full flex-shrink-0"
-                  style={{
-                    width: "48px",
-                    height: "49px",
-                    background: "#C5C3C3",
-                  }}
+                  style={{ width: "48px", height: "49px", background: tx.type === "buy" ? "#1a3a1a" : "#2a1a2a" }}
                 >
-                  <p className="text-[#7A7676C4]">Tx</p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <h2 className="font-inter font-normal text-[14px] text-white/70 m-0">
-                    {transaction.shortHash}
-                  </h2>
-                  <p className="font-inter font-normal text-[14px] text-white/50 m-0">
-                    {transaction.timeAgo}
+                  <p className="text-sm font-bold" style={{ color: tx.type === "buy" ? "#4ade80" : "#c084fc" }}>
+                    {tx.type === "buy" ? "BUY" : "SELL"}
                   </p>
                 </div>
+                <div className="flex flex-col gap-1">
+                  {tx.txHash ? (
+                    <a
+                      href={`https://basescan.org/tx/${tx.txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-inter font-normal text-[14px] text-blue-400 hover:text-blue-300 underline m-0"
+                    >
+                      {shortHash(tx.txHash)}
+                    </a>
+                  ) : (
+                    <span className="font-inter font-normal text-[14px] text-white/50">{tx.itemName}</span>
+                  )}
+                  <p className="font-inter font-normal text-[14px] text-white/50 m-0">{formatDate(tx.createdAt)}</p>
+                </div>
               </div>
 
-              {/* Center */}
+              {/* Center — item name + collection */}
               <div className="flex-1 w-full overflow-hidden">
-                <p className="font-inter font-normal text-[14px] text-white/70 m-0 truncate">
-                  {transaction.recipientAddress}
-                </p>
+                <p className="font-inter font-normal text-[14px] text-white/70 m-0 truncate">{tx.itemName}</p>
+                <p className="font-inter font-normal text-[12px] text-white/40 m-0 truncate">{tx.collectionName}</p>
               </div>
 
-              {/* Right */}
+              {/* Right — price */}
               <div className="w-full md:w-auto flex justify-between md:block">
                 <span className="md:hidden text-white/50 text-[14px]">Amount:</span>
                 <p className="font-inter font-normal text-[14px] text-white/70 m-0">
-                  {transaction.amount}
+                  {tx.priceETH != null ? `${tx.priceETH} USDC` : "—"}
                 </p>
               </div>
             </div>
           ))
-        ) : (
-          <div className="text-center py-8">
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 400,
-                fontSize: "16px",
-                color: "#FFFFFFAB",
-              }}
-            >
-              No transactions found matching "{searchTerm}"
-            </p>
-          </div>
         )}
       </div>
-
-
     </div>
   );
 }

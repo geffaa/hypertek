@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaXTwitter, FaDiscord } from "react-icons/fa6";
-import { FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FiArrowRight, FiCheck, FiX } from "react-icons/fi";
+import { FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FiArrowRight, FiCheck, FiX, FiArrowLeft } from "react-icons/fi";
 import bgHero from "../assets/images/waitlist/bg-hero.png";
 import { BACKEND_BASE_URL } from "../Config";
 
@@ -203,6 +203,15 @@ export default function WaitlistForm() {
 
   return (
     <div className="min-h-screen w-full relative flex items-center justify-center overflow-hidden">
+
+      {/* Back to Waitlist button — top left */}
+      <button
+        onClick={() => navigate("/waitlist")}
+        className="absolute top-5 left-5 z-20 flex items-center gap-1.5 text-white/50 hover:text-white transition-colors text-sm"
+      >
+        <FiArrowLeft size={15} /> Back to Waitlist
+      </button>
+
       <div className="absolute inset-0">
         <img
           src={bgHero}

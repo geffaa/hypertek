@@ -42,6 +42,7 @@ import {
   getListedSubCollections,
   getDashboardStats,
   userUploadNFC,
+  getUserTransactions,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -199,6 +200,13 @@ NFTRouter.post(
   authMiddleware("user"),
   uploadTemp.single("image"),
   userUploadNFC
+);
+
+// User transaction history (buy/sell from salesHistory)
+NFTRouter.get(
+  "/user/transactions/:walletAddress",
+  authMiddleware(),
+  getUserTransactions
 );
 
 export default NFTRouter;

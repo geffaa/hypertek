@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FaXTwitter, FaDiscord } from "react-icons/fa6";
-import Logo from "../assets/logo1.png";
+import Navbar from "../Components/Common/Navbar";
+import Footer from "../Components/Common/Footer";
 import bgHero from "../assets/images/waitlist/bg-hero.png";
 import alphabetImg from "../assets/images/waitlist/alphabet.png";
 import character1 from "../assets/images/waitlist/character1.png";
@@ -19,33 +19,7 @@ function Waitlist() {
   return (
     <div className="min-h-screen bg-[#060610] text-white overflow-x-hidden">
 
-      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-[1100px] flex items-center gap-3">
-          <nav className="flex-1 flex items-center h-[52px] rounded-full bg-white/10 backdrop-blur-xl border border-white/20 px-5 overflow-hidden">
-            <img src={Logo} alt="Hyper Tek" className="w-7 h-7 flex-shrink-0" />
-            <span className="flex-1 text-center font-bold text-[15px] tracking-[0.25em] text-white">
-              HYPER TEK
-            </span>
-            <div className="flex items-center gap-4 flex-shrink-0">
-              <a href="#" aria-label="X / Twitter" className="text-white/70 hover:text-white transition-colors">
-                <FaXTwitter size={17} />
-              </a>
-              <a href="#" aria-label="Discord" className="text-white/70 hover:text-white transition-colors">
-                <FaDiscord size={19} />
-              </a>
-            </div>
-          </nav>
-          <div className="flex-shrink-0 h-[52px] px-6 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center">
-            <a href="#" className="text-sm font-medium text-white hover:text-white/80 transition-colors">
-              Docs
-            </a>
-          </div>
-          <div className="hidden sm:flex flex-shrink-0 h-[52px] px-5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 items-center gap-1.5">
-            <span className="text-[22px] font-extrabold text-white leading-none">2000</span>
-            <span className="text-xs font-medium text-white/70 whitespace-nowrap">early movers</span>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -216,21 +190,7 @@ function Waitlist() {
         </div>
       </section>
 
-      <footer className="bg-[#060610] border-t border-white/5 px-6 md:px-12 py-8">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <img src={Logo} alt="Logo" className="w-12 h-12 opacity-60" />
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-white/50 text-xs">
-            {["Marketplace", "News", "Whitepaper", "FAQ", "Disclaimer", "Terms & Conditions"].map((item) => (
-              <a key={item} href="#" className="hover:text-white transition-colors">{item}</a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-4">
-            <a href="#" className="text-white/50 hover:text-white transition-colors"><FaDiscord size={16} /></a>
-            <a href="#" className="text-white/50 hover:text-white transition-colors"><FaXTwitter size={15} /></a>
-          </div>
-        </div>
-        <p className="text-center text-white/25 text-xs mt-6">© 2025. All Right Reserved</p>
-      </footer>
+      <Footer />
 
     </div>
   );

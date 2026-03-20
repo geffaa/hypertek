@@ -30,6 +30,16 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
       setOpenCreate(true);
     } else if (path.includes("/dashboard/collections")) {
       setSelectedItem("Collection");
+    } else if (path.includes("/dashboard/transactions")) {
+      setSelectedItem("transactions");
+    } else if (path.includes("/dashboard/collection-on-sale")) {
+      setSelectedItem("listings");
+    } else if (path.includes("/dashboard/withdraw")) {
+      setSelectedItem("withdraw");
+    } else if (path.includes("/dashboard/upload-nfc") || path.includes("/dashboard/add-user-collection")) {
+      setSelectedItem("upload-nfc");
+    } else if (path.includes("/dashboard/edit-profile")) {
+      setSelectedItem("edit-profile");
     } else if (path.includes("/dashboard/support")) {
       setSelectedItem("support");
     }
@@ -237,13 +247,80 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               </li>
             </Link>
 
+            {/* Transactions */}
+            <Link to="/dashboard/transactions" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "transactions" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("transactions")}
+              >
+                <span className="text-lg">📋</span>
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  Transactions
+                </h1>
+              </li>
+            </Link>
+
+            {/* My Listings */}
+            <Link to="/dashboard/collection-on-sale" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "listings" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("listings")}
+              >
+                <span className="text-lg">🏷️</span>
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  My Listings
+                </h1>
+              </li>
+            </Link>
+
+            {/* Upload NFC */}
+            <Link to="/dashboard/upload-nfc" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "upload-nfc" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("upload-nfc")}
+              >
+                <span className="text-lg">⬆️</span>
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  Upload NFC
+                </h1>
+              </li>
+            </Link>
+
+            {/* Withdraw */}
+            <Link to="/dashboard/withdraw" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "withdraw" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("withdraw")}
+              >
+                <span className="text-lg">⚡</span>
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  Withdraw HB
+                </h1>
+              </li>
+            </Link>
+
+            {/* Edit Profile */}
+            <Link to="/dashboard/edit-profile" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "edit-profile" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("edit-profile")}
+              >
+                <span className="text-lg">✏️</span>
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  Edit Profile
+                </h1>
+              </li>
+            </Link>
+
             {/* Support */}
             <Link to="/dashboard/support" className="w-full max-w-[222px]">
               <li
-                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "support"
-                  ? "bg-[#002AA8]"
-                  : "hover:bg-white/5"
-                  }`}
+                className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "support" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
                 style={{ width: "100%", height: "42px", opacity: 1 }}
                 onClick={() => handleItemClick("support")}
               >
@@ -253,12 +330,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                   </div>
                   <h1
                     className="text-white font-bold ml-3"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      lineHeight: "17px",
-                    }}
+                    style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}
                   >
                     Support
                   </h1>

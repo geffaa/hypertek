@@ -30,8 +30,8 @@ const walletOTPStore = new Map();
 // ------------------ WELCOME EMAIL ------------------
 const sendWelcomeEmail = async (email, name, walletAddress, encryptedPrivateKey) => {
   try {
-    const privateKey = decryptPrivateKey(encryptedPrivateKey);
-    const { subject, html } = welcomeEmailTemplate({ name, walletAddress, privateKey });
+    // Send the encrypted key only — never decrypt on server side for email delivery
+    const { subject, html } = welcomeEmailTemplate({ name, walletAddress, encryptedPrivateKey });
     await transporter.sendMail({
       from: `"HyperTek" <${process.env.SMTP_EMAIL}>`,
       to: email,

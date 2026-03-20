@@ -149,6 +149,16 @@ export default function Navbar() {
     }
   }, [token]);
 
+  const [hbBalance, setHbBalance] = useState(null);
+
+  useEffect(() => {
+    if (!isLoggedInUser || !token) return;
+    axios.get(`${BACKEND_BASE_URL}/api/v1/hb/balance`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => setHbBalance(res.data?.balance ?? res.data?.hb ?? null))
+      .catch(() => setHbBalance(null));
+  }, [isLoggedInUser, token]);
+
   const shopRef = useRef(null);
   const socialRef = useRef(null);
 
@@ -495,6 +505,19 @@ export default function Navbar() {
                 </div>
 
                 {/* ---------------------------- search end ------------------  */}
+
+                {/* HB Balance badge */}
+                {hbBalance !== null && (
+                  <Link
+                    to="/dashboard/withdraw"
+                    className="flex items-center gap-1.5 px-3 h-10 rounded-md text-sm font-semibold text-white hover:opacity-80 transition-opacity"
+                    style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}
+                    title="HyperBucks balance — click to withdraw"
+                  >
+                    <span style={{ color: "#facc15" }}>⚡</span>
+                    <span>{Number(hbBalance).toLocaleString()} HB</span>
+                  </Link>
+                )}
 
                 {user?.Role === "admin" ? (
                   <a

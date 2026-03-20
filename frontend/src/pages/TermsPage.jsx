@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const LAST_UPDATED = "March 2025";
+const LAST_UPDATED = "20.03.2026";
 
 const SIDEBAR_LINKS = [
   { label: "Terms of Service", href: "/terms",       active: true },
@@ -10,7 +10,7 @@ const SIDEBAR_LINKS = [
 const SECTIONS = [
   { id: "s1",  title: "1. Agreement to Terms" },
   { id: "s2",  title: "2. Privacy Policy" },
-  { id: "s3",  title: "3. Changes to Terms or Services" },
+  { id: "s3",  title: "3. Changes to these Terms or the Services" },
   { id: "s4",  title: "4. Who May Use the Services" },
   { id: "s5",  title: "5. The HyperTek Platform" },
   { id: "s6",  title: "6. Digital Assets — NFAs and NFCs" },
@@ -34,7 +34,7 @@ function S({ id, title, children }) {
   return (
     <div id={id} className="mb-10 scroll-mt-24">
       <h2 className="font-semibold text-sm text-white mb-3">{title}</h2>
-      <div className="text-white/60 text-sm leading-relaxed space-y-3">{children}</div>
+      <div className="text-white/60 text-sm leading-relaxed space-y-3 text-justify">{children}</div>
     </div>
   );
 }
@@ -100,20 +100,39 @@ export default function TermsPage() {
           <h1 className="font-bold text-2xl md:text-3xl mb-1">Terms of Service</h1>
           <p className="text-white/35 text-xs mb-8">Last Updated: {LAST_UPDATED}</p>
 
-          <p className="text-white/60 text-sm leading-relaxed mb-8">
+          <p className="text-white/60 text-sm leading-relaxed mb-8 text-justify">
             Please read these Terms of Service (the{" "}
-            <strong className="text-white/85">"Terms"</strong>) carefully because they govern
-            your use of the website and platform located at{" "}
-            <span className="text-blue-400">hypertek100.com</span> (the{" "}
-            <strong className="text-white/85">"HyperTek Platform"</strong>), a gaming and
-            digital asset marketplace that facilitates the creation, purchase, and sale of
-            Non-Fungible Assets (NFAs), Non-Fungible Collectibles (NFCs), and in-game
-            materials on decentralised blockchain networks. HyperTek is not a bank or
-            financial institution and does not provide investment or financial advice.
+            <strong className="text-white/85">"Terms"</strong>) and our Privacy Policy (
+            <strong className="text-white/85">"Privacy Policy"</strong>) carefully because they
+            govern your use of the website and interface located at{" "}
+            <span className="text-blue-400">https://hypertek100.com</span> (the{" "}
+            <strong className="text-white/85">"Site"</strong> or the{" "}
+            <strong className="text-white/85">"Hyper Tek Platform"</strong>), the blockchain
+            currency management software that is downloadable from the site (the{" "}
+            <strong className="text-white/85">"Software"</strong>), corresponding mobile
+            applications (<strong className="text-white/85">"Apps"</strong>), and other
+            services and resources that are available, enabled or offered by Hyper Tek or Head
+            Tech P/L (<strong className="text-white/85">"HT"</strong>,{" "}
+            <strong className="text-white/85">"we,"</strong>{" "}
+            <strong className="text-white/85">"our"</strong>), which facilitates interaction
+            with certain decentralised cryptographic protocols, which are either open-sourced
+            or may become open-sourced (collectively, the{" "}
+            <strong className="text-white/85">"Protocols"</strong>) to effectuate the creation
+            and deployment (aka "minting") of Non-Fungible Assets/Non-Fungible Collectables
+            (<strong className="text-white/85">"NFAs/NFCs"</strong>), support sale and
+            distribution of such NFAs/NFCs on the decentralised blockchains on which the
+            NFAs/NFCs are recorded (<strong className="text-white/85">"Blockchains"</strong>),
+            and support the management of cryptographic currencies. To make these Terms easier
+            to read, the Site, Software, Apps and our services are collectively called the{" "}
+            <strong className="text-white/85">"Services"</strong>. These Terms do not govern
+            any interactions you may have with our third-party API providers, each of which has
+            its own terms. HT is not a bank or financial institution and does not provide
+            investment or financial advice to users of the Services. We are solely the provider
+            of the Services.
           </p>
 
           <div
-            className="rounded-xl p-5 mb-10 text-xs leading-relaxed"
+            className="rounded-xl p-5 mb-10 text-xs leading-relaxed text-justify"
             style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}
           >
             <strong className="text-white block mb-1 uppercase tracking-wider">
@@ -121,28 +140,26 @@ export default function TermsPage() {
             </strong>
             <span className="text-white/60">
               WHEN YOU AGREE TO THESE TERMS YOU ARE AGREEING (WITH LIMITED EXCEPTION) TO
-              RESOLVE ANY DISPUTE BETWEEN YOU AND HYPERTEK THROUGH BINDING, INDIVIDUAL
-              ARBITRATION RATHER THAN IN COURT. PLEASE REVIEW SECTION 17 "DISPUTE
-              RESOLUTION" BELOW FOR DETAILS.
+              RESOLVE ANY DISPUTE BETWEEN YOU AND HT THROUGH BINDING, INDIVIDUAL ARBITRATION
+              RATHER THAN IN COURT. PLEASE REVIEW CAREFULLY SECTION 18 "DISPUTE RESOLUTION"
+              BELOW FOR DETAILS REGARDING ARBITRATION.
             </span>
           </div>
 
           <S id="s1" title="1. Agreement to Terms">
-            <p>By using the Services, you agree to be bound by these Terms. If you don't agree, you are not authorised to use the Services.</p>
+            <p>By using the Services, you agree to be bound by these Terms. If you don't agree to be bound by these Terms, you are not authorised to use the Services.</p>
           </S>
 
           <S id="s2" title="2. Privacy Policy">
-            <p>HyperTek collects and processes personal data in connection with your use of the Services, including account registration information, wallet addresses, and transaction history. This data is used solely to operate the platform and is not sold to third parties. A full Privacy Policy will be published at <span className="text-blue-400">hypertek100.com/privacy</span>.</p>
+            <p>Please review our Privacy Policy, which also governs your use of the Services, for information on how we collect, use and share your information.</p>
           </S>
 
-          <S id="s3" title="3. Changes to Terms or Services">
-            <p>We may update the Terms from time to time at our sole discretion. We'll let you know by posting the updated Terms on the Site. If you continue to use the Services after updates, it means you accept the changes.</p>
-            <p>We may change or discontinue all or any part of the Services at any time and without notice, at our sole discretion.</p>
+          <S id="s3" title="3. Changes to these Terms or the Services">
+            <p>We may update the Terms from time to time at our sole discretion. If we do, we'll let you know by posting the updated Terms on the Site, to the Apps and/or may also send other communications. It's important that you review the Terms whenever we update them or you use the Services. If you continue to use the Services after we have posted updated Terms, it means that you accept and agree to the changes. If you don't agree to be bound by the changes, you may not use the Services anymore. Because the Services are evolving over time, we may change or discontinue all or any part of the Services, at any time and without notice, at our sole discretion.</p>
           </S>
 
           <S id="s4" title="4. Who May Use the Services">
-            <p><strong className="text-white/85">Eligibility.</strong> YOU MAY USE THE SERVICES ONLY IF YOU ARE 18 YEARS OR OLDER AND CAPABLE OF FORMING A BINDING CONTRACT WITH HYPERTEK, AND NOT OTHERWISE BARRED FROM USING THE SERVICES UNDER APPLICABLE LAW.</p>
-            <p><strong className="text-white/85">Compliance.</strong> The Services are only available to users in certain jurisdictions. You certify you will comply with all applicable laws. We will not knowingly collect personal information from any user under the age of 13.</p>
+            <p><strong className="text-white/85">Eligibility.</strong> YOU MAY USE THE SERVICES ONLY IF YOU ARE 18 YEARS OR OLDER AND CAPABLE OF FORMING A BINDING CONTRACT WITH HT, AND NOT OTHERWISE BARRED FROM USING THE SERVICES UNDER APPLICABLE LAW. THE SERVICES ARE NOT AVAILABLE TO RESIDENTS OF THE UNITED STATES. We will not knowingly solicit or collect personal information from any user under the age of 13. Do not attempt to use the Services if you are under the age of 13. If we become aware that a user is under the age of 13, we will promptly delete all personal information of the user. If you have information that suggests that a user of the Service could be under the age of 13, please send an email to <span className="text-blue-400">info@hypertek100.com</span>.</p>
           </S>
 
           <S id="s5" title="5. The HyperTek Platform">
