@@ -42,6 +42,8 @@ import { Offer }    from "../Models/Offer.js";
 import { Withdrawal } from "../Models/WithdrawalModel.js";
 import { Payment }  from "../Models/Payment.js";
 import Activity     from "../Models/ActivityModel.js";
+import Trade        from "../Models/TradeModel.js";
+import Bounty       from "../Models/BountyModel.js";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // 1. SITE CONTENT (CMS)
@@ -636,6 +638,63 @@ async function seed() {
         }
     }
     if (img_updated > 0) console.log(`✅ NFT images patched: ${img_updated} collections`);
+
+    // ── Trade/Quest content migration ───────────────────────────────────────
+    // Remove dollar figures from trade offering fields (Don's brief)
+    await Trade.updateMany(
+        { offering: /USDC/ },
+        [{ $set: { offering: { $replaceAll: { input: "$offering", find: " (120 USDC)", replacement: "" } } } }]
+    );
+    await Trade.updateMany(
+        { offering: /\+ 100 USDC/ },
+        [{ $set: { offering: { $replaceAll: { input: "$offering", find: " + 100 USDC", replacement: "" } } } }]
+    );
+    await Trade.updateMany(
+        { offering: /\(600 USDC\)/ },
+        [{ $set: { offering: { $replaceAll: { input: "$offering", find: " (600 USDC)", replacement: "" } } } }]
+    );
+
+    // Add former bounty missions as quest records (if not already there)
+    const QUEST_MIGRATIONS = [
+        { title: "Destroy Rogue AI Nexus-7",        type: "quest", description: "Rogue artificial intelligence has taken control of the Eastern Grid. Locate and neutralise its core processor.", posterName: "Intel Division",    posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Escort VIP Through Warzone",       type: "quest", description: "Safely escort Dr. Chen through contested Sector 12 to the extraction point. Priority one mission — no casualties.", posterName: "Defence Ministry", posterWallet: "0xSEED_WALLET_POSTER_002" },
+        { title: "Capture Enemy Officer — Intel",    type: "quest", description: "Track down Lt. Shadow Wolf and capture the enemy intelligence officer. Prisoner must be delivered to forward operating base.", posterName: "Special Ops Unit",  posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Intercept Communications Array",   type: "quest", description: "Hack into the enemy communications array in the northern mountains. Extract encryption keys and disable the system.", posterName: "Cyber Division",    posterWallet: "0xSEED_WALLET_POSTER_002" },
+        { title: "Eliminate Rogue Commander Vex",    type: "quest", description: "High-priority target operating in Sector 9. Known for ambushing supply convoys. Eliminate and provide proof of defeat.", posterName: "HQ Command",        posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Raid Supply Depot — Sector 4",     type: "quest", description: "Enemy supply depot in Sector 4 must be destroyed. Destroy at least 80% of stored materials for full reward.", posterName: "Resistance HQ",    posterWallet: "0xSEED_WALLET_POSTER_002" },
+    ];
+    let qm_created = 0;
+    for (const q of QUEST_MIGRATIONS) {
+        const exists = await Trade.findOne({ title: q.title });
+        if (!exists) { await Trade.create({ ...q, status: "open" }); qm_created++; }
+    }
+    if (qm_created > 0) console.log(`✅ Quest migration: ${qm_created} former bounty items added to Quests/Trades`);
+
+    // Replace bounty records with hit contract themed content
+    await Bounty.deleteMany({
+        title: { $in: [
+            "Eliminate Rogue Commander Vex", "Destroy Rogue AI Nexus-7",
+            "Capture Enemy Officer — Intel", "Raid Supply Depot — Sector 4",
+            "Intercept Communications Array", "Escort VIP Through Warzone",
+        ]}
+    });
+    const HIT_CONTRACTS = [
+        { title: "Hit Contract: IronFist_99",      targetName: "IronFist_99",      description: "This player raided our base and eliminated our best officers. Post a hit and send your 3-4 best officers into battle. Animated battle result provided.", reward: 1200, commission: 0.2, posterName: "Intel Division",    posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Hit Contract: Lt. Shadow Wolf",  targetName: "Lt. Shadow Wolf",   description: "A former ally turned rogue — attacking smaller factions unprovoked. Your officers vs theirs in a battle of power and strength.", reward: 900,  commission: 0.2, posterName: "Defence Ministry", posterWallet: "0xSEED_WALLET_POSTER_002" },
+        { title: "Hit Contract: WarHawk_Prime",    targetName: "WarHawk_Prime",     description: "A large faction bully targeting new players. Accept this contract and your 3-4 best officers will battle their squad. Video battle log returned.", reward: 800,  commission: 0.2, posterName: "Special Ops Unit",  posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Hit Contract: Commander Vex",    targetName: "Commander Vex",     description: "High-priority player target in Sector 9. Accept the contract and your best officers engage theirs in an animated strength battle. Proof of win required.", reward: 650,  commission: 0.2, posterName: "HQ Command",        posterWallet: "0xSEED_WALLET_POSTER_002" },
+        { title: "Hit Contract: NeonRacer_Pro",    targetName: "NeonRacer_Pro",     description: "Racing champion who has been sabotaging rivals. Your officers will challenge their squad in a battle of power. Accept to engage.", reward: 500,  commission: 0.2, posterName: "TrackOwner_1",     posterWallet: "0xSEED_WALLET_POSTER_001" },
+        { title: "Hit Contract: Renegade_Echo",    targetName: "Renegade_Echo",     description: "Disrupting trade routes and raiding merchant factions. Any bounty hunter who defeats their officers in battle earns this reward. Proof of victory required.", reward: 350,  commission: 0.2, posterName: "Resistance HQ",    posterWallet: "0xSEED_WALLET_POSTER_002" },
+    ];
+    let hc_created = 0;
+    for (const hc of HIT_CONTRACTS) {
+        const exists = await Bounty.findOne({ title: hc.title });
+        if (!exists) {
+            await Bounty.create({ ...hc, status: "open", expiresAt: new Date(Date.now() + 30 * 86400000) });
+            hc_created++;
+        }
+    }
+    if (hc_created > 0) console.log(`✅ Bounty migration: ${hc_created} hit contracts seeded`);
 
     // ── Summary ─────────────────────────────────────────────────────────────
     console.log("\n── Summary ─────────────────────────────────────────────────────");
