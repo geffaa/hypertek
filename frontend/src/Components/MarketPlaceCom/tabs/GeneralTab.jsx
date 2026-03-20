@@ -221,6 +221,7 @@ export default function GeneralTab() {
                   icon={cat.icon}
                   items={items}
                   direction={i % 2 === 0 ? "left" : "right"}
+                  isDummy={usingFallback}
                 />
                 {/* Gap section between every two lines */}
                 {i < CATEGORIES.length - 1 && <Gap />}

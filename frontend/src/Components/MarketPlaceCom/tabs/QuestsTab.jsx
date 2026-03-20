@@ -34,9 +34,7 @@ function TradeCard({ trade, onAccept, onComplete, onCancel, currentWallet }) {
         <p className="text-white/90 text-sm font-semibold truncate">{trade.title}</p>
         <p className="text-white/40 text-[11px] leading-snug line-clamp-2">{trade.description}</p>
 
-        {isQuest ? (
-          <p className="text-amber-300 font-bold text-sm">Reward: {trade.reward} USDC</p>
-        ) : (
+        {!isQuest && (
           <div className="text-xs space-y-0.5">
             <p className="text-white/40">Offering: <span className="text-white/70">{trade.offering}</span></p>
             <p className="text-white/40">Wanting: <span className="text-white/70">{trade.requesting}</span></p>
@@ -49,7 +47,9 @@ function TradeCard({ trade, onAccept, onComplete, onCancel, currentWallet }) {
         <div className="flex gap-2 mt-auto pt-1">
           {trade.status === "open" && !isPoster && (
             <button onClick={() => onAccept(trade)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-white"
-              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
+              style={isQuest
+                ? { background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }
+                : { background: "rgba(160,30,30,0.7)", border: "1px solid rgba(255,60,60,0.4)" }}>
               {isQuest ? "Accept Quest" : "Accept Trade"}
             </button>
           )}
@@ -174,12 +174,15 @@ function InvestorBanner() {
 
 // ── Static preview data ───────────────────────────────────────────────────────
 const PREVIEW_TRADES = [
-  { _id: "pt-1", type: "quest", status: "open", title: "Retrieve the Lost Data Core", description: "Infiltrate Sector 7 and recover the encrypted data core. Beware of AI sentinels.", reward: 250, posterName: "Commander Alpha", offering: "", requesting: "" },
-  { _id: "pt-2", type: "trade", status: "open", title: "Shadow Ops Skin for Plasma Pistol", description: "Offering my Shadow Ops Skin in exchange for a Plasma Pistol Mk2.", offering: "Shadow Ops Skin (NFT)", requesting: "Plasma Pistol Mk2 (NFT)", reward: 0, posterName: "ShadowTrader_99" },
-  { _id: "pt-3", type: "quest", status: "open", title: "Arctic Recon Mission", description: "Complete a full sweep of the Arctic Station Omega map. Screenshot proof required.", reward: 180, posterName: "IceCommander", offering: "", requesting: "" },
-  { _id: "pt-4", type: "trade", status: "open", title: "Nano-Mesh Vest for HyperBike GT", description: "Fair swap — my Nano-Mesh Vest + 50 USDC for a HyperBike GT.", offering: "Nano-Mesh Vest + 50 USDC", requesting: "HyperBike GT", reward: 0, posterName: "TradeKing77" },
-  { _id: "pt-5", type: "quest", status: "open", title: "Take Down the Champion", description: "Defeat the current PvP leaderboard champion in 3 consecutive matches.", reward: 500, posterName: "BountyHunterX", offering: "", requesting: "" },
-  { _id: "pt-6", type: "trade", status: "open", title: "Exo-Skeleton for Viper Fighter", description: "Looking for a spaceship upgrade. Offering Exo-Skeleton Mk3 + HyperBucks.", offering: "Exo-Skeleton Mk3 + 200 HB", requesting: "Viper Fighter Mk1", reward: 0, posterName: "SpacePilot_44" },
+  { _id: "pt-1", type: "quest", status: "open", title: "Retrieve the Lost Data Core", description: "Infiltrate the abandoned tech facility in Sector 7 and recover the encrypted data core. Beware of AI sentinels guarding the perimeter.", reward: 0, posterName: "Commander Alpha", offering: "", requesting: "" },
+  { _id: "pt-2", type: "trade", status: "open", title: "Dual Badge Swap", description: "Have Commander's Cross and Iron Shield Badge. Looking for Star of Honour. Will offer both badges.", offering: "Commander's Cross + Iron Shield Badge", requesting: "Star of Honour", reward: 0, posterName: "MedalCollector" },
+  { _id: "pt-3", type: "quest", status: "open", title: "Hunt the Rogue AI — Intel Required", description: "Track down the rogue AI entity 'NEXUS-7' across three map zones. Deliver location coordinates for reward. Time-limited mission.", reward: 0, posterName: "Intel Division", offering: "", requesting: "" },
+  { _id: "pt-4", type: "trade", status: "open", title: "Viper Fighter for Land Plot", description: "Infiltrating my Viper Fighter Mk1 spaceship in exchange for a strategic land plot. Desert or Arctic locations preferred.", offering: "Viper Fighter Mk1", requesting: "Any Land Plot (Desert/Arctic)", reward: 0, posterName: "PilotZero" },
+  { _id: "pt-5", type: "quest", status: "open", title: "Defend Outpost Alpha — Wave Survival", description: "Hold Outpost Alpha for 10 waves against enemy forces. Minimum squad of 3 required. Bonus reward for zero casualties.", reward: 0, posterName: "General Haze", offering: "", requesting: "" },
+  { _id: "pt-6", type: "trade", status: "open", title: "Assault Rifle for Stealth Kit", description: "Looking to trade my Hyper Assault Rifle for a Stealth Composite Vest. Willing to negotiate.", offering: "Hyper Assault Rifle", requesting: "Stealth Composite Vest", reward: 0, posterName: "ShadowTrader_99" },
+  { _id: "pt-7", type: "quest", status: "open", title: "Eliminate Rogue Commander Vex", description: "High-priority target operating in Sector 9. Known for ambushing supply convoys. Eliminate and provide proof of defeat.", reward: 0, posterName: "HQ Command", offering: "", requesting: "" },
+  { _id: "pt-8", type: "quest", status: "open", title: "Escort VIP Through Warzone", description: "Safely escort Dr. Chen through contested Sector 12 to the extraction point. Priority one mission — no casualties.", reward: 0, posterName: "Defence Ministry", offering: "", requesting: "" },
+  { _id: "pt-9", type: "quest", status: "open", title: "Destroy Rogue AI Nexus-7", description: "Rogue artificial intelligence has taken control of the Eastern Grid. Locate and neutralise its core processor.", reward: 0, posterName: "Intel Division", offering: "", requesting: "" },
 ];
 
 // ── Main ──────────────────────────────────────────────────────────────────────

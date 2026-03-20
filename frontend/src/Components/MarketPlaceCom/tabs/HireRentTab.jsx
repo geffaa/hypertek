@@ -30,17 +30,16 @@ function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
     <div className="rounded-xl overflow-hidden flex flex-col"
       style={{
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
-        border: `1px solid ${isHire ? "rgba(0,180,80,0.3)" : "rgba(255,255,255,0.09)"}`,
+        border: `1px solid ${isHire ? "rgba(0,180,80,0.3)" : "rgba(120,60,220,0.3)"}`,
       }}>
       <div className="relative">
         <LazyImage src={listing.image ? getImageUrl(listing.image) : null} alt={listing.itemTitle}
           fallback={popularFallback} className="w-full h-36" imgClassName="object-cover" />
         <div className="absolute top-2 left-2 flex gap-1.5">
           <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-white uppercase"
-            style={{ background: isHire ? "rgba(0,120,60,0.85)" : "rgba(60,60,180,0.85)" }}>
-            {listing.type}
+            style={{ background: isHire ? "rgba(0,120,60,0.85)" : "rgba(100,40,200,0.85)" }}>
+            {isHire ? "FOR HIRE" : "WANTING TO HIRE"}
           </span>
-
         </div>
         <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{listing.status}</span>
       </div>
@@ -56,7 +55,7 @@ function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
             <p className="text-white font-bold text-sm">{listing.pricePerDuration} USDC</p>
           </div>
           <div className="text-right">
-            <p className="text-white/40 text-[10px]">Duration</p>
+            <p className="text-white/40 text-[10px]">Max Duration</p>
             <p className="text-white/80 text-xs">{DURATION_LABELS[listing.durationHours] || `${listing.durationHours}h`}</p>
           </div>
         </div>
@@ -72,7 +71,7 @@ function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
           {listing.status === "available" && !isOwner && (
             <button onClick={() => onRent(listing)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              {isHire ? "Hire" : "Rent"}
+              {isHire ? "For Hire" : "Wanting to Hire"}
             </button>
           )}
           {listing.status === "rented" && isRenter && (
@@ -95,7 +94,7 @@ function ListingCard({ listing, onRent, onReturn, onCancel, currentWallet }) {
 
 // ── Create modal ──────────────────────────────────────────────────────────────
 function CreateModal({ onClose, onSuccess, wallet }) {
-  const [type, setType] = useState("rent");
+  const [type, setType] = useState("hire");
   const [form, setForm] = useState({ itemTitle: "", itemDescription: "", image: "", category: "", pricePerDuration: "", durationHours: "24" });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -126,18 +125,18 @@ function CreateModal({ onClose, onSuccess, wallet }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" style={{ background: "rgba(0,0,0,0.75)" }}>
       <div className="w-full max-w-md rounded-2xl p-6 relative my-auto" style={{ background: "#0a0b1a", border: "1px solid rgba(255,255,255,0.12)" }}>
         <button onClick={onClose} className="absolute top-4 right-4 text-white/40 hover:text-white"><X className="w-4 h-4" /></button>
-        <h3 className="text-white font-bold mb-4">List for {type === "hire" ? "Hire" : "Rent"}</h3>
+        <h3 className="text-white font-bold mb-4">{type === "hire" ? "List For Hire" : "Post Wanting to Hire"}</h3>
         <div className="flex gap-2 mb-4">
-          {["rent", "hire"].map(t => (
-            <button key={t} onClick={() => setType(t)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold capitalize"
-              style={type === t
+          {[{ val: "hire", label: "For Hire" }, { val: "rent", label: "Wanting to Hire" }].map(({ val, label }) => (
+            <button key={val} onClick={() => setType(val)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold"
+              style={type === val
                 ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
                 : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.4)" }
-              }>{t}</button>
+              }>{label}</button>
           ))}
         </div>
         <form onSubmit={submit} className="flex flex-col gap-3">
-          <input required placeholder={type === "hire" ? "Specialist name *" : "Item name *"} value={form.itemTitle} onChange={e => set("itemTitle", e.target.value)} className={iCls} style={iSt} />
+          <input required placeholder={type === "hire" ? "Specialist / item name *" : "What you want to hire *"} value={form.itemTitle} onChange={e => set("itemTitle", e.target.value)} className={iCls} style={iSt} />
           <textarea placeholder="Description" value={form.itemDescription} onChange={e => set("itemDescription", e.target.value)} rows={2} className={iCls} style={iSt} />
           <input placeholder="Image URL (optional)" value={form.image} onChange={e => set("image", e.target.value)} className={iCls} style={iSt} />
           <input placeholder="Category (optional)" value={form.category} onChange={e => set("category", e.target.value)} className={iCls} style={iSt} />
@@ -192,18 +191,20 @@ function InvestorBanner() {
 
 // ── Static preview data ───────────────────────────────────────────────────────
 const PREVIEW_LISTINGS = [
-  { _id: "ph-1", type: "hire", status: "available", itemTitle: "Ghost Recon Operator", itemDescription: "Elite recon specialist with ghost cloak ability.", category: "Specialists", ownerName: "CommanderAlpha", pricePerDuration: 45, durationHours: 24 },
-  { _id: "ph-2", type: "rent", status: "available", itemTitle: "Rail Sniper X90", itemDescription: "Long-range rail gun sniper with electro-targeting.", category: "Weapons", ownerName: "SnipeMaster", pricePerDuration: 20, durationHours: 8 },
-  { _id: "ph-3", type: "hire", status: "available", itemTitle: "Cyber Medic", itemDescription: "Field medic with advanced cybernetic healing tools.", category: "Specialists", ownerName: "MedicForce", pricePerDuration: 35, durationHours: 72 },
-  { _id: "ph-4", type: "rent", status: "available", itemTitle: "HyperBike GT", itemDescription: "Ultra-fast racing bike built for gravity tracks.", category: "Vehicles", ownerName: "SpeedKing99", pricePerDuration: 55, durationHours: 24 },
-  { _id: "ph-5", type: "hire", status: "available", itemTitle: "AI Drone Handler", itemDescription: "Controls a squad of tactical AI combat drones.", category: "Specialists", ownerName: "DronePilot_X", pricePerDuration: 60, durationHours: 168 },
-  { _id: "ph-6", type: "rent", status: "available", itemTitle: "Viper Fighter Mk1", itemDescription: "Fast single-pilot fighter with twin plasma cannons.", category: "Spaceships", ownerName: "AcePilot77", pricePerDuration: 120, durationHours: 24 },
-  { _id: "ph-7", type: "rent", status: "available", itemTitle: "Exo-Skeleton Mk3", itemDescription: "Full exoskeleton suit with powered joints.", category: "Body Armour", ownerName: "IronMech", pricePerDuration: 80, durationHours: 72 },
-  { _id: "ph-8", type: "hire", status: "available", itemTitle: "Sniper Ace", itemDescription: "Long-range marksman with zero-wind precision targeting.", category: "Specialists", ownerName: "Marksman_Pro", pricePerDuration: 90, durationHours: 168 },
+  // For Hire — owners offering their specialists/items
+  { _id: "ph-1", type: "hire", status: "available", itemTitle: "Ghost Recon Operator", itemDescription: "Elite recon specialist with ghost cloak ability. Available for short missions.", category: "Specialists", ownerName: "CommanderAlpha", pricePerDuration: 45, durationHours: 24 },
+  { _id: "ph-3", type: "hire", status: "available", itemTitle: "Cyber Medic — Field Support", itemDescription: "Field medic with advanced cybernetic healing tools. Essential for squad survival.", category: "Specialists", ownerName: "MedCorps", pricePerDuration: 35, durationHours: 72 },
+  { _id: "ph-5", type: "hire", status: "available", itemTitle: "AI Drone Handler", itemDescription: "Controls a squad of tactical AI combat drones. High value target suppression.", category: "Specialists", ownerName: "DronePilot_X", pricePerDuration: 60, durationHours: 168 },
+  { _id: "ph-8", type: "hire", status: "available", itemTitle: "Sniper Ace — Long Range", itemDescription: "Long-range marksman with zero-wind precision targeting. Maximum effective range specialist.", category: "Specialists", ownerName: "LongShot", pricePerDuration: 90, durationHours: 168 },
+  { _id: "ph-9", type: "hire", status: "available", itemTitle: "Phantom Stealth Ship — Covert", itemDescription: "Radar-invisible stealth spacecraft for covert ops. Silent approach and extraction capability.", category: "Spaceships", ownerName: "NavalCommander", pricePerDuration: 120, durationHours: 168 },
+  // Wanting to Hire — players looking to hire
+  { _id: "ph-2", type: "rent", status: "available", itemTitle: "Sniper Specialist — Wanted", itemDescription: "Looking for a precision sniper for a 3-day extraction mission. Must have long-range capability.", category: "Specialists", ownerName: "MissionControl_X", pricePerDuration: 50, durationHours: 72 },
+  { _id: "ph-4", type: "rent", status: "available", itemTitle: "Spaceship Pilot — Wanted", itemDescription: "Seeking an experienced spaceship pilot for escort mission. Flexible on ship type.", category: "Spaceships", ownerName: "RaidLeader_7", pricePerDuration: 100, durationHours: 24 },
+  { _id: "ph-6", type: "rent", status: "available", itemTitle: "Heavy Exo-Suit — Wanted", itemDescription: "Need a heavy exoskeleton for an upcoming raid operation. Will pay top rate for best gear.", category: "Body Armour", ownerName: "SquadCommander", pricePerDuration: 80, durationHours: 72 },
+  { _id: "ph-7", type: "rent", status: "available", itemTitle: "Combat Medic — Wanted", itemDescription: "Squad urgently needs a combat medic for prolonged campaign. Prefer cybernetic specialist.", category: "Specialists", ownerName: "BattleGroup_9", pricePerDuration: 40, durationHours: 168 },
 ];
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-const TYPE_FILTERS = ["all", "rent", "hire"];
 const STATUS_FILTERS = ["available", "rented", "cooldown"];
 
 export default function HireRentTab() {
@@ -213,7 +214,6 @@ export default function HireRentTab() {
   const [listings, setListings] = useState([]);
   const [usingPreview, setUsingPreview] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("available");
   const [showCreate, setShowCreate] = useState(false);
   const [page, setPage] = useState(1);
@@ -224,7 +224,6 @@ export default function HireRentTab() {
     setLoading(true);
     try {
       const params = new URLSearchParams({ status: statusFilter, page, limit: LIMIT });
-      if (typeFilter !== "all") params.set("type", typeFilter);
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/hire?${params}`);
       const data = await r.json();
       const fetched = data.listings || [];
@@ -241,10 +240,10 @@ export default function HireRentTab() {
       } else { setListings([]); }
     }
     finally { setLoading(false); }
-  }, [typeFilter, statusFilter, page]);
+  }, [statusFilter, page]);
 
   useEffect(() => { fetchListings(); }, [fetchListings]);
-  useEffect(() => { setPage(1); }, [typeFilter, statusFilter]);
+  useEffect(() => { setPage(1); }, [statusFilter]);
 
   async function authFetch(method, url, body) {
     const token = localStorage.getItem("token");
@@ -284,19 +283,10 @@ export default function HireRentTab() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Users className="w-5 h-5 text-white/60" />
-          <h2 className="text-white font-bold text-lg">Hire / Rent</h2>
+          <h2 className="text-white font-bold text-lg">For Hire / Wanting to Hire</h2>
           <span className="text-white/30 text-sm">{total} listings</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <div className="flex gap-1">
-            {TYPE_FILTERS.map(f => (
-              <button key={f} onClick={() => setTypeFilter(f)} className="px-2.5 py-1 rounded-full text-xs capitalize"
-                style={typeFilter === f
-                  ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
-                  : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
-                }>{f}</button>
-            ))}
-          </div>
           <div className="flex gap-1">
             {STATUS_FILTERS.map(f => (
               <button key={f} onClick={() => setStatusFilter(f)} className="px-2.5 py-1 rounded-full text-xs capitalize"
@@ -326,7 +316,7 @@ export default function HireRentTab() {
         <span><Package className="w-3 h-3 inline mr-1" />Commission: 20%</span>
       </div>
 
-      {/* Grid */}
+      {/* Grid — split into For Hire and Wanting to Hire */}
       {loading ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {Array.from({ length: 8 }).map((_, i) => <div key={i} className="rounded-xl h-56 animate-pulse" style={{ background: "rgba(255,255,255,0.04)" }} />)}
@@ -340,14 +330,48 @@ export default function HireRentTab() {
               style={{ background: "rgba(0,42,168,0.6)" }}>Create a listing</button>
           )}
         </div>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {listings.map(l => (
-            <ListingCard key={l._id} listing={l} currentWallet={wallet}
-              onRent={handleRent} onReturn={handleReturn} onCancel={handleCancel} />
-          ))}
-        </div>
-      )}
+      ) : (() => {
+        const hireListings    = listings.filter(l => l.type === "hire");
+        const wantingListings = listings.filter(l => l.type !== "hire");
+        return (
+          <div className="flex flex-col gap-10">
+            {hireListings.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-bold text-white uppercase"
+                    style={{ background: "rgba(0,120,60,0.5)", border: "1px solid rgba(0,180,80,0.3)" }}>
+                    For Hire
+                  </span>
+                  <span className="text-white/25 text-xs">{hireListings.length} listings</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {hireListings.map(l => (
+                    <ListingCard key={l._id} listing={l} currentWallet={wallet}
+                      onRent={handleRent} onReturn={handleReturn} onCancel={handleCancel} />
+                  ))}
+                </div>
+              </div>
+            )}
+            {wantingListings.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-2.5 py-1 rounded-lg text-xs font-bold text-white uppercase"
+                    style={{ background: "rgba(100,40,200,0.5)", border: "1px solid rgba(120,60,220,0.3)" }}>
+                    Wanting to Hire
+                  </span>
+                  <span className="text-white/25 text-xs">{wantingListings.length} listings</span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {wantingListings.map(l => (
+                    <ListingCard key={l._id} listing={l} currentWallet={wallet}
+                      onRent={handleRent} onReturn={handleReturn} onCancel={handleCancel} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Pagination */}
       {pages > 1 && (

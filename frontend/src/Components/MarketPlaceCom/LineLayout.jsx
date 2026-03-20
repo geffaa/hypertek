@@ -6,7 +6,7 @@ import popularFallback from "../../assets/images/popular/popolar.png";
 import { getImageUrl } from "../../Config";
 
 // ── Item card ─────────────────────────────────────────────────────────────────
-function LineCard({ item }) {
+function LineCard({ item, isDummy }) {
   const navigate = useNavigate();
   const name     = item.name || "Unnamed";
   const price    = item.priceETH ?? item.price ?? null;
@@ -41,6 +41,15 @@ function LineCard({ item }) {
               NFA
             </div>
           </>
+        )}
+        {isDummy && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            style={{ background: "rgba(0,0,0,0.30)" }}>
+            <span className="text-white/60 text-[9px] font-bold uppercase tracking-widest select-none"
+              style={{ transform: "rotate(-30deg)", textShadow: "0 1px 4px rgba(0,0,0,0.9)", whiteSpace: "nowrap" }}>
+              Dummy Content
+            </span>
+          </div>
         )}
       </div>
       <div className="flex flex-col gap-1 p-2 flex-1">
@@ -127,7 +136,7 @@ function LabelPanel({ category, label, icon, sortDesc, setSortDesc, showSearch, 
 // direction="left"  → scrollLeft  animation  (items flow right→left, exit on right)
 // direction="right" → scrollRight animation  (items flow left→right, exit on left)
 // Icon panel is ALWAYS on the LEFT for both directions — zig-zag is scroll direction only.
-export default function LineLayout({ category, label, icon, items, direction = "left" }) {
+export default function LineLayout({ category, label, icon, items, direction = "left", isDummy = false }) {
   const scrollRight = direction === "right";
 
   const [search, setSearch]         = useState("");
@@ -181,7 +190,7 @@ export default function LineLayout({ category, label, icon, items, direction = "
             style={{ width: "max-content" }}
           >
             {track.map((item, i) => (
-              <LineCard key={`${item._id || i}-${i}`} item={item} />
+              <LineCard key={`${item._id || i}-${i}`} item={item} isDummy={isDummy} />
             ))}
           </div>
         )}
