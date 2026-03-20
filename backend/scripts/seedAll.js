@@ -309,6 +309,7 @@ async function seed() {
     await NFTSystem.create({
       collection: { name: cat.name, symbol: cat.symbol, chain: cat.chain, image: "", royaltyPercent: 5, supply: cat.items.length, creator: "admin" },
       isParentCollection: true,
+      isDummy: true,
       status: "active",
       subCollections: cat.items.map((item, i) => ({
         name: item.name, symbol: item.symbol, description: item.description,
@@ -318,6 +319,14 @@ async function seed() {
     console.log(`✅ NFT Collection: ${cat.name} (${cat.items.length} items)`);
     nft_created++;
   }
+
+  // Mark all existing seeded parent collections as isDummy=true.
+  // Any collection created by a real user/admin via the panel will be created with isDummy:false by default.
+  const migrated = await NFTSystem.updateMany(
+    { isParentCollection: true },
+    { $set: { isDummy: true } }
+  );
+  console.log(`✅ Migration: ${migrated.modifiedCount} collections marked isDummy=true`);
 
   // 4. NFT 101
   let edu_created = 0, edu_skipped = 0;

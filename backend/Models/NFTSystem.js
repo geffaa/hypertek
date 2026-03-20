@@ -83,6 +83,12 @@ const nftSystemSchema = new mongoose.Schema(
       default: false,
     },
 
+    // Marks collections created by the seed script (not by real users/admins)
+    isDummy: {
+      type: Boolean,
+      default: false,
+    },
+
     // Sub-collections (NFTs within this category)
     subCollections: [subCollectionSchema],
 

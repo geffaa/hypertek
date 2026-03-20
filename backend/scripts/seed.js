@@ -429,6 +429,7 @@ async function seed() {
                 supply: cat.items.length, creator: "admin",
             },
             isParentCollection: true,
+            isDummy: true,
             status: "active",
             subCollections: cat.items.map((item, i) => ({
                 name: item.name, symbol: item.symbol,
@@ -440,6 +441,12 @@ async function seed() {
         console.log(`✅ NFT Collection: ${cat.name} (${cat.items.length} items)`);
         nft_created++;
     }
+
+    // Mark all existing seeded parent collections as isDummy=true (migration)
+    await NFTSystem.updateMany(
+        { isParentCollection: true },
+        { $set: { isDummy: true } }
+    );
 
     // ── 4. NFT 101 ──────────────────────────────────────────────────────────
     let edu_created = 0, edu_skipped = 0;

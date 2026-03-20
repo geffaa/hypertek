@@ -6,7 +6,8 @@ import popularFallback from "../../assets/images/popular/popolar.png";
 import { getImageUrl } from "../../Config";
 
 // ── Item card ─────────────────────────────────────────────────────────────────
-function LineCard({ item, isDummy }) {
+function LineCard({ item }) {
+  const isDummy = item.isDummy === true;
   const navigate = useNavigate();
   const name     = item.name || "Unnamed";
   const price    = item.priceETH ?? item.price ?? null;
@@ -136,7 +137,7 @@ function LabelPanel({ category, label, icon, sortDesc, setSortDesc, showSearch, 
 // direction="left"  → scrollLeft  animation  (items flow right→left, exit on right)
 // direction="right" → scrollRight animation  (items flow left→right, exit on left)
 // Icon panel is ALWAYS on the LEFT for both directions — zig-zag is scroll direction only.
-export default function LineLayout({ category, label, icon, items, direction = "left", isDummy = false }) {
+export default function LineLayout({ category, label, icon, items, direction = "left" }) {
   const scrollRight = direction === "right";
 
   const [search, setSearch]         = useState("");
@@ -190,7 +191,7 @@ export default function LineLayout({ category, label, icon, items, direction = "
             style={{ width: "max-content" }}
           >
             {track.map((item, i) => (
-              <LineCard key={`${item._id || i}-${i}`} item={item} isDummy={isDummy} />
+              <LineCard key={`${item._id || i}-${i}`} item={item} />
             ))}
           </div>
         )}

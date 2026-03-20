@@ -128,6 +128,7 @@ export default function GeneralTab() {
                     parentId:       parent._id,
                     parentCategory: catKey,
                     parentName:     parent.collection?.name || "",
+                    isDummy:        parent.isDummy === true,
                   }))
                 );
               }
@@ -221,7 +222,6 @@ export default function GeneralTab() {
                   icon={cat.icon}
                   items={items}
                   direction={i % 2 === 0 ? "left" : "right"}
-                  isDummy={usingFallback}
                 />
                 {/* Gap section between every two lines */}
                 {i < CATEGORIES.length - 1 && <Gap />}
