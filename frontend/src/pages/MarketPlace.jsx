@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Volume2, VolumeX } from "lucide-react";
 import axios from "axios";
 import MarketNavBar      from "../Components/MarketPlaceCom/NavLinks";
@@ -18,7 +19,8 @@ import { BACKEND_BASE_URL } from "../Config";
 const HEADER_H = 72;
 
 function MarketPlace() {
-  const [activeTab, setActiveTab] = useState("general");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
   // ── Ambient audio (default: play on mount, loop) ───────────────────────────

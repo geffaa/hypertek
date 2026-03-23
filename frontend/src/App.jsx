@@ -76,6 +76,7 @@ import { STRIPE_PUBLISHABLE_KEY } from "./Config";
 import { Elements } from "@stripe/react-stripe-js";
 import Stripe from "./pages/Stripe";
 import Funnel from "./pages/Funnel";
+import Gaming from "./pages/Gaming";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 
@@ -137,6 +138,7 @@ function AppWrapper() {
     "/dashboard/add-user-collection",
     "/dashboard/withdraw",
     "/dashboard/upload-nfc",
+    "/gaming",
   ];
 
   const shouldHideLayout =
@@ -208,6 +210,9 @@ function AppWrapper() {
             <Route path="/edit" element={<Edit />} />
 
 
+
+            {/* Gaming Interface */}
+            <Route path="/gaming" element={<Gaming />} />
 
             {/* Testing Routes  */}
             <Route path="/testing" element={<Testing />} />
