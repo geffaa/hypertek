@@ -9,6 +9,7 @@
  */
 
 import RacingControls from "./RacingControls";
+import LazyImage      from "./LazyImage";
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const CSS = `
@@ -52,16 +53,8 @@ function TrackView() {
       overflow: "hidden",
     }}>
       {/* ── Background image ── */}
-      <img
-        src="/race_track.png"
-        alt=""
-        style={{
-          position: "absolute", inset: 0,
-          width: "100%", height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
-        }}
-      />
+      <LazyImage src="/race_track.png" spinnerColor="#22c55e"
+        style={{ objectPosition: "center" }} />
 
       {/* ── Dark vignette overlay ── */}
       <div style={{
@@ -116,16 +109,8 @@ function GarageView() {
       overflow: "hidden",
     }}>
       {/* ── Background image ── */}
-      <img
-        src="/garage.png"
-        alt=""
-        style={{
-          position: "absolute", inset: 0,
-          width: "100%", height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
-        }}
-      />
+      <LazyImage src="/garage.png" spinnerColor="#22c55e"
+        style={{ objectPosition: "center" }} />
 
       {/* ── Dark vignette overlay ── */}
       <div style={{

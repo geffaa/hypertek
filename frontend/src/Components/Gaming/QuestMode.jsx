@@ -8,6 +8,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import LazyImage from "./LazyImage";
 
 const C = "#38bdf8";   // quest cyan-blue accent
 
@@ -285,9 +286,8 @@ function SpaceView() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#020612" }}>
 
-      {/* Background image if available, else CSS stars */}
-      <img src="/quest_space.png" alt="" onError={e => { e.currentTarget.style.display = "none"; }}
-        style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
+      {/* Background image */}
+      <LazyImage src="/quest_space.png" spinnerColor="#38bdf8" />
 
       {/* Overlay / stars fallback */}
       <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 50% at 50% 40%, rgba(30,15,60,0.6), transparent)" }} />
@@ -384,9 +384,8 @@ function GroundView() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#080c06" }}>
 
-      {/* Background image if available */}
-      <img src="/quest_ground.png" alt="" onError={e => { e.currentTarget.style.display = "none"; }}
-        style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
+      {/* Background image */}
+      <LazyImage src="/quest_ground.png" spinnerColor="#38bdf8" />
 
       {/* Vignette */}
       <div style={{

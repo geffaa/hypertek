@@ -130,6 +130,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
             <img
               src={gameImgSrc}
               alt={gameSub}
+              loading="lazy"
               style={{
                 width: "clamp(90px, 13vh, 130px)",
                 height: "clamp(90px, 13vh, 130px)",

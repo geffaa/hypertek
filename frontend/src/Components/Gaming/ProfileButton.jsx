@@ -71,6 +71,7 @@ export default function ProfileButton() {
           className="profile-circle"
           src={avatarSrc}
           alt="Profile"
+          loading="lazy"
           onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
           onClick={() => navigate("/Profile")}
           style={{

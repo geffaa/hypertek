@@ -9,6 +9,7 @@
  */
 
 import { useState } from "react";
+import LazyImage from "./LazyImage";
 
 const C = "#f87171";   // overlord red accent
 const CG = "rgba(248,113,113,0.55)";
@@ -176,8 +177,7 @@ function SpaceView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#04010a" }}>
 
       {/* Background image */}
-      <img src="/overlord_space.png" alt="" onError={e => { e.currentTarget.style.display = "none"; }}
-        style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
+      <LazyImage src="/overlord_space.png" spinnerColor="#f87171" />
 
       {/* Stars */}
       {Array.from({ length: 150 }, (_, i) => (
@@ -287,8 +287,7 @@ function WorldView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#060208" }}>
 
       {/* Background image */}
-      <img src="/overlord_world.png" alt="" onError={e => { e.currentTarget.style.display = "none"; }}
-        style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
+      <LazyImage src="/overlord_world.png" spinnerColor="#f87171" />
 
       {/* Dark vignette */}
       <div style={{
