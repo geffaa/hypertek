@@ -1,10 +1,10 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const LAST_UPDATED = "20.03.2026";
 
 const SIDEBAR_LINKS = [
-  { label: "Terms of Service", href: "/terms",       active: true },
-  { label: "Whitepaper",       href: "/whitepapers", active: false },
+  { label: "Terms of Service", href: "/terms", active: true },
 ];
 
 const SECTIONS = [
@@ -40,12 +40,39 @@ function S({ id, title, children }) {
 }
 
 export default function TermsPage() {
-  const goTo = (id) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const [activeSection, setActiveSection] = useState("s1");
+
+  useEffect(() => {
+    const onScroll = () => {
+      // If scrolled to bottom, activate last section
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 60) {
+        setActiveSection(SECTIONS[SECTIONS.length - 1].id);
+        return;
+      }
+      const offset = window.scrollY + 140;
+      let current = SECTIONS[0].id;
+      for (const { id } of SECTIONS) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= offset) current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const goTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 88, behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen text-white pt-[72px]">
-      <div className="flex max-w-[1200px] mx-auto px-4">
+      <div className="flex px-4">
 
         {/* ── SPACER — reserves space for the fixed sidebar ── */}
         <div className="hidden md:block shrink-0 w-[220px]" />
@@ -63,18 +90,15 @@ export default function TermsPage() {
             padding: "32px 16px 32px 0",
           }}
         >
-          <p className="text-white/30 text-[10px] uppercase tracking-widest font-semibold mb-3">
-            Legal
-          </p>
           {SIDEBAR_LINKS.map((l) => (
             <Link
               key={l.label}
               to={l.href}
               className="block px-3 py-2 rounded-lg text-sm mb-0.5 transition-colors"
               style={{
-                background:  l.active ? "rgba(0,42,168,0.35)"        : "transparent",
-                color:       l.active ? "#fff"                        : "rgba(255,255,255,0.45)",
-                borderLeft:  l.active ? "2px solid #002AA8"           : "2px solid transparent",
+                background:  l.active ? "rgba(0,42,168,0.35)"  : "transparent",
+                color:       l.active ? "#fff"                  : "rgba(255,255,255,0.45)",
+                borderLeft:  l.active ? "2px solid #002AA8"    : "2px solid transparent",
               }}
             >
               {l.label}
@@ -88,7 +112,11 @@ export default function TermsPage() {
             <button
               key={id}
               onClick={() => goTo(id)}
-              className="w-full text-left px-3 py-1.5 rounded text-xs text-white/35 hover:text-white transition-colors"
+              className={`w-full text-left px-3 py-1.5 rounded text-xs transition-colors ${
+                activeSection === id
+                  ? "text-white bg-blue-900/40 border-l-2 border-blue-500"
+                  : "text-white/35 hover:text-white"
+              }`}
             >
               {title}
             </button>

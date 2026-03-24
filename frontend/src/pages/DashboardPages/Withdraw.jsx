@@ -948,7 +948,7 @@ const Withdraw = () => {
                                                 </td>
                                                 <td className="px-6 py-4 text-xs font-mono text-white/40 max-w-[200px] truncate">
                                                     {tx.type === 'crypto' ? (
-                                                        <a href={`https://sepolia.basescan.org/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
+                                                        <a href={`https://basescan.org/tx/${tx.txHash}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 underline">
                                                             {tx.txHash?.slice(0, 10)}...
                                                         </a>
                                                     ) : (

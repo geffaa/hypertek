@@ -700,18 +700,7 @@ function Buy1() {
       console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error(
-          <div>
-            ❌ Your wallet has no ETH for gas fees.
-            <br />
-            <button
-              onClick={() => window.open('https://faucet.quicknode.com/base/sepolia', '_blank')}
-              className="mt-2 bg-white text-black px-2 py-1 rounded text-xs font-bold"
-            >
-              💰 Add Funds (Faucet)
-            </button>
-          </div>
-          , { id: toastId, duration: 8000 });
+        toast.error('❌ Your wallet has no ETH for gas fees.', { id: toastId, duration: 8000 });
         setLoading(false);
         return;
       }
@@ -1615,11 +1604,6 @@ function Buy1() {
                 <div className="text-gray-500 group-hover:text-blue-400">→</div>
               </button>
 
-              <div className="text-center mt-2">
-                <a href="https://faucet.quicknode.com/base/sepolia" target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300">
-                  Need Testnet ETH? 💰 Get it here
-                </a>
-              </div>
             </div>
           </div>
         </div>,

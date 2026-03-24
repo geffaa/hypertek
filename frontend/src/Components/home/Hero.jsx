@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import heroImage from "../../assets/images/hero.jpg";
-import Logo from "../../assets/logo.png";
+import Logo from "/logo-white.png";
 import "../../App.css";
 import { Link } from "react-router-dom";
 import useSiteContent from "../../hooks/useSiteContent";

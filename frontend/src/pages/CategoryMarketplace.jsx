@@ -13,7 +13,6 @@ import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import LazyImage from "../Components/Common/LazyImage";
-import CustomButton from "../Components/Buttons/Button1";
 import { useAccount } from "wagmi";
 import { useEmailWallet } from "../hooks/useEmailWallet";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
@@ -279,9 +278,9 @@ function CategoryMarketplace() {
 
             <button
               onClick={checkAndNavigate}
-              className="flex justify-center items-center mt-6"
+              className="mt-6 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full"
             >
-              <CustomButton text="Sell Now" />
+              Sell Now
             </button>
           </div>
 
@@ -321,7 +320,9 @@ function CategoryMarketplace() {
 
                 <div className="flex justify-center items-center mt-4">
                   <Link to="/buy-nfa" state={{ item }} className="cursor-pointer flex justify-center w-full">
-                    <CustomButton text="Buy Now" className="!text-xs sm:!text-sm lg:!text-base !py-1.5 sm:!py-2 lg:!py-2.5 !px-4 sm:!px-6 lg:!px-8" />
+                    <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                      Buy Now
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -367,9 +368,9 @@ function CategoryMarketplace() {
 
               <button
                 onClick={checkAndNavigate}
-                className="flex justify-center items-center mt-6"
+                className="mt-6 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full"
               >
-                <CustomButton text="Sell Now" />
+                Sell Now
               </button>
             </div>
           </div>
@@ -405,7 +406,9 @@ function CategoryMarketplace() {
                 </div>
 
                 <Link to="/buy-nfa" state={{ item }} className="cursor-pointer mt-auto">
-                  <CustomButton text="View" className="!text-xs !py-1 !px-2 w-full" />
+                  <button className="px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20 w-full">
+                    View
+                  </button>
                 </Link>
               </div>
             ))

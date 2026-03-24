@@ -22,7 +22,7 @@ export function useTokenBalance(tokenAddress) {
         try {
             let bal;
             // Best-effort provider: window.ethereum or public RPC
-            const provider = window.ethereum ? new ethers.BrowserProvider(window.ethereum) : new ethers.JsonRpcProvider('https://base-sepolia-rpc.publicnode.com');
+            const provider = window.ethereum ? new ethers.BrowserProvider(window.ethereum) : new ethers.JsonRpcProvider('https://mainnet.base.org');
 
             console.log(`[useTokenBalance] Address: ${activeAddress}, Token: ${tokenAddress}`);
 

@@ -72,21 +72,21 @@ function Footer() {
       {/* Social icons — full width with blue pills */}
       <div className="relative flex items-center justify-center w-full h-[52px]">
 
-        {/* Left blue pill — full from edge to center */}
+        {/* Left blue pill */}
         <div
-          className="absolute left-0 top-0 h-full w-[calc(50%-120px)]"
+          className="absolute left-0 top-1/2 -translate-y-1/2 h-[36px] w-[calc(50%-120px)]"
           style={{
             background: "linear-gradient(90deg, rgba(0,21,84,0.95) 0%, rgba(0,42,168,0.7) 100%)",
-            borderTopRightRadius: "9999px",
+            borderTopRightRadius: "9999px"
           }}
         />
 
-        {/* Right blue pill — full from edge to center */}
+        {/* Right blue pill */}
         <div
-          className="absolute right-0 top-0 h-full w-[calc(50%-120px)]"
+          className="absolute right-0 top-1/2 -translate-y-1/2 h-[36px] w-[calc(50%-120px)]"
           style={{
             background: "linear-gradient(270deg, rgba(0,21,84,0.95) 0%, rgba(0,42,168,0.7) 100%)",
-            borderTopLeftRadius: "9999px",
+            borderTopLeftRadius: "9999px"
           }}
         />
 

@@ -22,7 +22,6 @@ import {
   NFT_ABI,
   BASE_MARKETPLACE_ADDRESS,
 } from "../../Web3/Config";
-import CustomButton4 from "../Buttons/Button4";
 
 // RainbowKit imports
 import { useAccount, useReadContract } from "wagmi";
@@ -351,7 +350,7 @@ function MarketPlace() {
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                 {filteredCollections.map((item) => {
                   const hasInteracted = userHasInteracted[item._id];
                   const isNFA = item.isNFA || item.type === "NFA";
@@ -359,67 +358,75 @@ function MarketPlace() {
                   return (
                     <div
                       key={item._id}
-                      className="relative rounded-xl overflow-hidden flex flex-col text-white"
+                      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
                       style={{
-                        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
-                        border: isNFA ? "1px solid rgba(0,80,255,0.45)" : "1px solid rgba(255,255,255,0.09)",
+                        background: "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                       }}
                     >
                       {/* Image */}
-                      <div className="relative">
+                      <div className="relative h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
+                        style={{ background: "linear-gradient(180deg, #1a2a5e 0%, #0d1632 100%)" }}>
                         <LazyImage
                           src={getImageUrl(item.image)}
                           alt={item.name}
-                          className="w-full h-[120px] sm:h-[130px]"
+                          className="w-full h-full"
                           imgClassName="object-cover"
                         />
                         {isNFA && (
-                          <>
-                            <div className="absolute inset-0 ring-2 ring-inset ring-[#002AA8] pointer-events-none rounded-none" />
-                            <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
-                              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>
-                              NFA
-                            </div>
-                          </>
+                          <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
+                            style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>
+                            NFA
+                          </div>
                         )}
-                        {/* Unlisted badge */}
-                        <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase"
-                          style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.5)" }}>
-                          Unlisted
-                        </div>
                       </div>
 
                       {/* Info */}
-                      <div className="p-3 flex flex-col gap-2 flex-1">
-                        <p className="text-white/90 text-sm font-semibold truncate">{item.name}</p>
+                      <div className="flex-1 flex flex-col">
+                        <h3 className="mt-3 text-sm lg:text-base font-semibold text-white truncate">{item.name}</h3>
+                        <p className="mt-1 text-xs lg:text-sm text-gray-300 line-clamp-2">
+                          {item.description || "No description"}
+                        </p>
+                      </div>
 
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/35 text-[10px] uppercase tracking-wide">{item.symbol}</span>
-                          <span className="text-white/75 text-[12px] font-semibold">
-                            {item.priceETH ? `${item.priceETH} USDC` : "—"}
-                          </span>
+                      {/* CTA — Desktop */}
+                      {!hasInteracted ? (
+                        <div className="hidden md:flex justify-center items-center w-full mt-auto pt-4">
+                          <button onClick={() => handleSellNowClick(item._id)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            Sell Now
+                          </button>
                         </div>
+                      ) : (
+                        <div className="relative group hidden md:block mt-auto pt-4">
+                          <button className="px-6 py-2.5 bg-[#002AA8] text-white font-semibold text-sm rounded-lg border border-white/20 w-full group-hover:opacity-0 transition-opacity duration-300">
+                            Not Listed
+                          </button>
+                          <button
+                            onClick={() => navigateToBuyNFA(item)}
+                            className="absolute inset-0 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg border border-white/20 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          >
+                            List Now
+                          </button>
+                        </div>
+                      )}
 
-                        {/* CTA */}
-                        <div className="mt-auto pt-2">
-                          {!hasInteracted ? (
-                            <button
-                              onClick={() => handleSellNowClick(item._id)}
-                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all"
-                              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}
-                            >
-                              Connect &amp; List
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => navigateToBuyNFA(item)}
-                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all"
-                              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}
-                            >
-                              List for Sale
-                            </button>
-                          )}
-                        </div>
+                      {/* CTA — Mobile */}
+                      <div className="md:hidden mt-auto pt-4 text-center">
+                        {!hasInteracted ? (
+                          <button onClick={() => handleSellNowClick(item._id)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            Sell Now
+                          </button>
+                        ) : !showMobileList[item._id] ? (
+                          <button
+                            onClick={() => setShowMobileList((prev) => ({ ...prev, [item._id]: true }))}
+                            className="px-6 py-2 bg-white/10 text-white font-semibold text-sm rounded-lg border border-white/20 w-full"
+                          >
+                            Not Listed
+                          </button>
+                        ) : (
+                          <button onClick={() => navigateToBuyNFA(item)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            List Now
+                          </button>
+                        )}
                       </div>
                     </div>
                   );

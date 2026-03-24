@@ -327,7 +327,7 @@ function App() {
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        overflowX: "hidden",
+        overflowX: "clip",
       }}
     >
       {/* Glow orb top-left — drifts right+down on scroll */}

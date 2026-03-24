@@ -1,0 +1,11 @@
+{
+  "network": "baseSepolia",
+  "deployer": "0x89eD8201B0448B2C94ae0e4D380f08b7aD558Ce6",
+  "contracts": {
+    "MockUSDC": "0x59b47ddcbfd04bd5796332B38E1A62445Eb3985B",
+    "MyNFT": "0x6eb2b30367eC03180De7138a29448F8B11cCED8a",
+    "Marketplace": "0xA5eb9E9738eF948DCFcF8e5146e3a87545879564"
+  },
+  "platformWallet": "0x89eD8201B0448B2C94ae0e4D380f08b7aD558Ce6",
+  "timestamp": "2026-03-24T12:43:51.122Z"
+}

@@ -699,6 +699,38 @@ async function seed() {
     }
     if (hc_created > 0) console.log(`✅ Bounty migration: ${hc_created} hit contracts seeded`);
 
+    // ── 11. Profile NFT ownership — Collectibles & Land ─────────────────────
+    // Assigns `owner` on un-owned sub-items so they appear in the
+    // /profile/collectibles and /profile/land pages for the seed wallet.
+    const SEED_WALLET = (process.env.PLATFORM_WALLET_ADDRESS || "0x89eD8201B0448B2C94ae0e4D380f08b7aD558Ce6").toLowerCase();
+    const PROFILE_ITEMS_PER_CAT = 3;
+    const COLLECTIBLE_CATS = [
+        "military badges and collectables", "artwork", "skins",
+        "weapons", "body armour", "specialists", "spaceships", "racing vehicles",
+    ];
+    const LAND_CATS = ["land and bases"];
+    let profile_seeded = 0;
+
+    for (const cat of [...COLLECTIBLE_CATS, ...LAND_CATS]) {
+        const parent = await NFTSystem.findOne({ isParentCollection: true, category: cat });
+        if (!parent) continue;
+
+        let count = 0;
+        for (const sub of parent.subCollections) {
+            if (count >= PROFILE_ITEMS_PER_CAT) break;
+            if (sub.owner) continue; // already owned
+            sub.owner       = SEED_WALLET;
+            sub.listed      = false;
+            sub.tokenId     = sub.tokenId || (count + 1);
+            sub.tokenURI    = sub.tokenURI || `ipfs://seed-${cat.replace(/\s+/g, "-")}-${count + 1}`;
+            sub.isFirstSale = true;
+            count++;
+            profile_seeded++;
+        }
+        if (count > 0) await parent.save();
+    }
+    if (profile_seeded > 0) console.log(`✅ Profile NFTs: ${profile_seeded} items assigned to seed wallet (${SEED_WALLET})`);
+
     // ── Summary ─────────────────────────────────────────────────────────────
     console.log("\n── Summary ─────────────────────────────────────────────────────");
     console.log(`📄 SiteContent:     ${sc_created} created, ${sc_updated} updated, ${sc_skipped} skipped`);
@@ -711,6 +743,7 @@ async function seed() {
     console.log(`💳 Payments:        ${pay_created} created, ${pay_skipped} skipped`);
     console.log(`📊 Activities:      ${act_created} created, ${act_skipped} skipped`);
     console.log(`🖼️  NFT images:      ${img_updated} patched, ${img_skipped} already set`);
+    console.log(`🏷️  Profile NFTs:    ${profile_seeded} items owned by seed wallet`);
     console.log("────────────────────────────────────────────────────────────────");
     console.log("\n🔑 Test user credentials:");
     console.log("   alice@hypertek.com   / User@1234");

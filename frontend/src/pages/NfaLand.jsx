@@ -214,7 +214,7 @@ function NfaLand() {
 
   /* ======================== SWITCH IMMUTABLE ======================== */
   const switchToBase = async () => {
-    const BASE_CHAIN_ID_HEX = "0x14a34"; // 13473
+    const BASE_CHAIN_ID_HEX = "0x2105"; // 8453 Base Mainnet
     const toastId = toast.loading("🔄 Switching to Immutable network...");
 
     try {
@@ -233,14 +233,14 @@ function NfaLand() {
             params: [
               {
                 chainId: BASE_CHAIN_ID_HEX,
-                chainName: "Base Sepolia",
+                chainName: "Base",
                 nativeCurrency: {
                   name: "ETH",
                   symbol: "ETH",
                   decimals: 18,
                 },
-                rpcUrls: ["https://base-sepolia-rpc.publicnode.com"],
-                blockExplorerUrls: ["https://sepolia.basescan.org"],
+                rpcUrls: ["https://mainnet.base.org"],
+                blockExplorerUrls: ["https://basescan.org"],
               },
             ],
           });
@@ -316,7 +316,7 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x14a34") {
+      if (chainId !== "0x2105") {
         toast.dismiss(toastId);
         const switched = await switchToBase();
         if (!switched) {
@@ -530,7 +530,7 @@ function NfaLand() {
 
       // Check network
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x14a34") {
+      if (chainId !== "0x2105") {
         toast.dismiss(toastId);
         const switched = await switchToBase();
         if (!switched) {

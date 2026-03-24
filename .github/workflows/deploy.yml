@@ -51,13 +51,15 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=4096"
           VITE_BACKEND_URL: https://api.hypertek100.com
           VITE_ADMIN_URL: https://admin.hypertek100.com
-          VITE_MY_NFT_ADDRESS: "0x1ffDD94F595C0ea659C6C363a6b2a25E9b8aC88C"
-          VITE_MARKETPLACE_ADDRESS: "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df"
-          VITE_CHAIN_ID: "8453"
+          VITE_MY_NFT_ADDRESS: "0x6eb2b30367eC03180De7138a29448F8B11cCED8a"
+          VITE_MARKETPLACE_ADDRESS: "0xA5eb9E9738eF948DCFcF8e5146e3a87545879564"
+          VITE_USDC_ADDRESS: "0x59b47ddcbfd04bd5796332B38E1A62445Eb3985B"
+          VITE_PLATFORM_WALLET: "0x89eD8201B0448B2C94ae0e4D380f08b7aD558Ce6"
+          VITE_CHAIN_ID: "84532"
           VITE_TRANSAK_API_KEY: a5b83d94-8b71-4ff1-ac8a-0cc88c6ae5e0
-          VITE_TRANSAK_ENVIRONMENT: PRODUCTION
+          VITE_TRANSAK_ENVIRONMENT: STAGING
           VITE_GOOGLE_CLIENT_ID: 338330586933-u9j6r5kre5a8tbht14pp2jokh7d32qi5.apps.googleusercontent.com
-          VITE_STRIPE_PUBLISHABLE_KEY: pk_live_51TAuP2HmimaXloVsJBmxhyNzwKDNwrlsOFh2GSx2Ir8CRhiipokwMFkld7eBwey2IdtOw53Q9XFuVTdT2gM8aGAn00dfg1iNUJ
+          VITE_STRIPE_PUBLISHABLE_KEY: pk_test_51SHewG3UIHQiuHTy62JP9SiQzYm4kVI8uDg158N2RxzmQMUKU0tr5zSVlrSwOCaGmIxFTwEJL59vKJ9cVDzWdUxH005IuFlux3
 
       # ── Build Admin Panel ──
       - name: 📦 Install admin dependencies
@@ -72,11 +74,12 @@ jobs:
           VITE_BACKEND_URL: https://api.hypertek100.com
           VITE_FRONTEND_URL: https://www.hypertek100.com
           VITE_ADMIN_URL: https://admin.hypertek100.com
-          VITE_MY_NFT_ADDRESS: "0x1ffDD94F595C0ea659C6C363a6b2a25E9b8aC88C"
-          VITE_MARKETPLACE_ADDRESS: "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df"
-          VITE_CHAIN_ID: "8453"
+          VITE_MY_NFT_ADDRESS: "0x6eb2b30367eC03180De7138a29448F8B11cCED8a"
+          VITE_MARKETPLACE_ADDRESS: "0xA5eb9E9738eF948DCFcF8e5146e3a87545879564"
+          VITE_USDC_ADDRESS: "0x59b47ddcbfd04bd5796332B38E1A62445Eb3985B"
+          VITE_CHAIN_ID: "84532"
           VITE_TRANSAK_API_KEY: a5b83d94-8b71-4ff1-ac8a-0cc88c6ae5e0
-          VITE_TRANSAK_ENVIRONMENT: PRODUCTION
+          VITE_TRANSAK_ENVIRONMENT: STAGING
 
       # ── Upload build artifacts for deploy job ──
       - name: 📤 Upload frontend build

@@ -13,7 +13,6 @@ import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
-import CustomButton4 from "../Buttons/Button4";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 
 import NavLinks from "../ProfileSection/Navlinks";
@@ -81,8 +80,8 @@ function Land() {
     const extracted = [];
 
     data.forEach((item, index) => {
-      // Only characters category
-      if (item.category !== "land") return;
+      // Only land category
+      if (!item.category?.includes("land")) return;
 
       // If parent collection with subCollections
       if (item.isParentCollection && Array.isArray(item.subCollections)) {
@@ -223,7 +222,7 @@ function Land() {
 
   /* ================= SWITCH TO IMMUTABLE ================= */
   const switchToBase = async () => {
-    const BASE_CHAIN_ID_HEX = "0x14a34";
+    const BASE_CHAIN_ID_HEX = "0x2105"; // 8453 Base Mainnet
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -238,14 +237,14 @@ function Land() {
             params: [
               {
                 chainId: BASE_CHAIN_ID_HEX,
-                chainName: "Base Sepolia",
+                chainName: "Base",
                 nativeCurrency: {
                   name: "ETH",
                   symbol: "ETH",
                   decimals: 18,
                 },
-                rpcUrls: ["https://base-sepolia-rpc.publicnode.com"],
-                blockExplorerUrls: ["https://sepolia.basescan.org"],
+                rpcUrls: ["https://mainnet.base.org"],
+                blockExplorerUrls: ["https://basescan.org"],
               },
             ],
           });
@@ -372,10 +371,10 @@ function Land() {
       }
 
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
-      if (chainId !== "0x14a34") {
+      if (chainId !== "0x2105") {
         const switched = await switchToBase();
         if (!switched) {
-          toast.error("Please switch to Base Sepolia", { id: toastId });
+          toast.error("Please switch to Base network", { id: toastId });
           setListingInProgress(false);
           return;
         }
@@ -618,7 +617,7 @@ function Land() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
                 {filteredLandCollections.map((item) => {
                   const isConnecting = connectingWallet[item._id];
                   const hasInteracted = userHasInteracted[item._id];
@@ -626,63 +625,72 @@ function Land() {
                   return (
                     <div
                       key={item._id}
-                      className="relative rounded-xl overflow-hidden flex flex-col text-white"
+                      className="relative rounded-[16px] p-3 sm:p-4 lg:p-5 text-white flex flex-col h-[360px] sm:h-[390px] lg:h-[420px]"
                       style={{
-                        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
-                        border: "1px solid rgba(50,120,60,0.35)",
+                        background: "linear-gradient(150deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04))",
                       }}
                     >
                       {/* Image */}
-                      <div className="relative">
+                      <div className="relative h-[150px] sm:h-[180px] lg:h-[210px] rounded-[14px] overflow-hidden"
+                        style={{ background: "linear-gradient(180deg, #1a3a1a 0%, #0d1f0d 100%)" }}>
                         <img
                           src={getImageUrl(item.image)}
                           alt={item.name}
-                          className="w-full h-[120px] sm:h-[130px] object-cover"
+                          className="w-full h-full object-cover"
                         />
-                        {/* Land badge */}
                         <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-white uppercase"
                           style={{ background: "rgba(0,80,30,0.85)", border: "1px solid rgba(50,160,60,0.5)" }}>
                           🌍 Land
                         </div>
-                        {/* Unlisted badge */}
-                        <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase"
-                          style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.5)" }}>
-                          Unlisted
-                        </div>
                       </div>
 
                       {/* Info */}
-                      <div className="p-3 flex flex-col gap-2 flex-1">
-                        <p className="text-white/90 text-sm font-semibold truncate">{item.name}</p>
+                      <div className="flex-1 flex flex-col">
+                        <h3 className="mt-3 text-sm lg:text-base font-semibold text-white truncate">{item.name}</h3>
+                        <p className="mt-1 text-xs lg:text-sm text-gray-300 line-clamp-2">
+                          {item.description || "No description"}
+                        </p>
+                      </div>
 
-                        <div className="flex items-center justify-between">
-                          <span className="text-white/35 text-[10px] uppercase tracking-wide">{item.symbol}</span>
-                          <span className="text-white/75 text-[12px] font-semibold">
-                            {item.priceETH ? `${item.priceETH} USDC` : "—"}
-                          </span>
+                      {/* CTA — Desktop */}
+                      {!hasInteracted ? (
+                        <div className="hidden md:flex justify-center items-center w-full mt-auto pt-4">
+                          <button onClick={() => handleSellNowClick(item._id)} disabled={isConnecting} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full disabled:opacity-50">
+                            {isConnecting ? "Connecting..." : "Sell Now"}
+                          </button>
                         </div>
+                      ) : (
+                        <div className="relative group hidden md:block mt-auto pt-4">
+                          <button className="px-6 py-2.5 bg-[#002AA8] text-white font-semibold text-sm rounded-lg border border-white/20 w-full group-hover:opacity-0 transition-opacity duration-300">
+                            Not Listed
+                          </button>
+                          <button
+                            onClick={() => navigateToBuyNFA(item)}
+                            className="absolute inset-0 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg border border-white/20 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          >
+                            List Now
+                          </button>
+                        </div>
+                      )}
 
-                        {/* CTA */}
-                        <div className="mt-auto pt-2">
-                          {!hasInteracted ? (
-                            <button
-                              onClick={() => handleSellNowClick(item._id)}
-                              disabled={isConnecting}
-                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all disabled:opacity-50"
-                              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}
-                            >
-                              {isConnecting ? "Connecting…" : "Connect & List"}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => navigateToBuyNFA(item)}
-                              className="w-full py-2 rounded-lg text-xs font-semibold text-white transition-all"
-                              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}
-                            >
-                              List for Sale
-                            </button>
-                          )}
-                        </div>
+                      {/* CTA — Mobile */}
+                      <div className="md:hidden mt-auto pt-4 text-center">
+                        {!hasInteracted ? (
+                          <button onClick={() => handleSellNowClick(item._id)} disabled={isConnecting} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full disabled:opacity-50">
+                            {isConnecting ? "Connecting..." : "Sell Now"}
+                          </button>
+                        ) : !showMobileList[item._id] ? (
+                          <button
+                            onClick={() => setShowMobileList((prev) => ({ ...prev, [item._id]: true }))}
+                            className="px-6 py-2 bg-white/10 text-white font-semibold text-sm rounded-lg border border-white/20 w-full"
+                          >
+                            Not Listed
+                          </button>
+                        ) : (
+                          <button onClick={() => navigateToBuyNFA(item)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            List Now
+                          </button>
+                        )}
                       </div>
                     </div>
                   );

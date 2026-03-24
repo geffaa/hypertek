@@ -2,7 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { baseSepolia } from 'viem/chains';
+import { base, baseSepolia } from 'viem/chains';
+
+const chainId = Number(import.meta.env.VITE_CHAIN_ID) || 8453;
+const activeChain = chainId === 84532 ? baseSepolia : base;
+const activeRpc = chainId === 84532 ? 'https://base-sepolia-rpc.publicnode.com' : 'https://mainnet.base.org';
 import axios from 'axios';
 import { BACKEND_BASE_URL } from '../Config.js';
 
@@ -45,8 +49,8 @@ export const EmailWalletProvider = ({ children }) => {
 
                     const client = createWalletClient({
                         account,
-                        chain: baseSepolia,
-                        transport: http('https://base-sepolia-rpc.publicnode.com')
+                        chain: activeChain,
+                        transport: http(activeRpc)
                     });
 
                     setEmailWalletAddress(account.address);

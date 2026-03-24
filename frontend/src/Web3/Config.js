@@ -1,13 +1,9 @@
 // src/Web3/Config.js
 
-// ✅ Addresses from your deployment
-
-// Base Sepolia Testnet
-export const BASE_NFT_ADDRESS = "0x9943ADE61Eba288cc0c8F6c3e35dc0D0D886Fa60"; // To be updated later if needed
-export const BASE_MARKETPLACE_ADDRESS = "0x08C05937428c53b6fE248fd96C6DADD511cBC1b3"; // To be updated later if needed
-
-// USDC Addresses 
-export const BASE_USDC_ADDRESS = "0x9C054917d3F8ca12E2eAF97eba1Ce6eDa88D0C85"; // Mock USDC for Testing
+// ✅ Addresses — read from env vars (VITE_ prefix for Vite)
+export const BASE_NFT_ADDRESS = import.meta.env.VITE_MY_NFT_ADDRESS || "0x1ffDD94F595C0ea659C6C363a6b2a25E9b8aC88C";
+export const BASE_MARKETPLACE_ADDRESS = import.meta.env.VITE_MARKETPLACE_ADDRESS || "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df";
+export const BASE_USDC_ADDRESS = import.meta.env.VITE_USDC_ADDRESS || "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 
 export const ERC20_ABI = [
   {
@@ -68,8 +64,8 @@ export const NFT_ADDRESS = BASE_NFT_ADDRESS;
 export const MARKETPLACE_ADDRESS = BASE_MARKETPLACE_ADDRESS;
 
 // ✅ CHAIN IDs
-export const BASE_CHAIN_ID = 84532; // Base Sepolia
-export const PLATFORM_WALLET_ADDRESS = "0x7e9677AD1D837DD31b094c0B4484bB189b2739F5";
+export const BASE_CHAIN_ID = Number(import.meta.env.VITE_CHAIN_ID) || 8453;
+export const PLATFORM_WALLET_ADDRESS = import.meta.env.VITE_PLATFORM_WALLET || "0xb0EBB8CB24b663f99fcF8Ee12dEd7bf5201c4b6b";
 
 // ---------------- NFT ABI ----------------
 export const NFT_ABI = [
