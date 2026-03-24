@@ -151,8 +151,9 @@ export const editNews = async (req, res) => {
       data: news,
     });
   } catch (error) {
-    console.log("Edit News Error:", error);
-    res.status(500).json({ success: false });
+    console.error("Edit News Error:", error?.message || error);
+    if (req.file?.path) fs.unlink(req.file.path, () => {});
+    res.status(500).json({ success: false, message: error?.message || "Server error" });
   }
 };
 

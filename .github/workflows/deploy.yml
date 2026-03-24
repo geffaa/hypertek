@@ -176,6 +176,10 @@ jobs:
             cd /var/www/hypertek/backend
             npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
+            # ── Ensure uploads directories exist ──
+            mkdir -p uploads/temp uploads/news
+            chmod 755 uploads uploads/temp uploads/news
+
             # ── Run database seed (safe: skips existing data) ──
             echo "🌱 Running database seed..."
             node --env-file=Config/.env scripts/seed.js

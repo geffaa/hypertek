@@ -134,25 +134,24 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
   return (
     <div
-      className={`sidebar text-white p-3 z-50 h-screen w-[270px] overflow-y-auto fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
+      className={`sidebar text-white z-50 h-screen w-[270px] flex flex-col fixed lg:sticky top-0 transition-transform duration-300 ease-in-out ${isOpen
         ? "translate-x-0"
         : "-translate-x-full lg:translate-x-0"
         }`}
       style={{ background: "#0a0b18", borderRight: "1px solid rgba(255,255,255,0.06)" }}
       ref={sidebarRef}
     >
-      <div className="flex flex-col justify-between h-full">
-        <div className="flex-1">
-          {/* LOGO */}
-          <div className="flex justify-center mt-10 mb-10">
-            <div className="hidden lg:flex items-center justify-center cursor-pointer">
-              <Link to={import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}>
-                <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
-              </Link>
-            </div>
-          </div>
+      {/* ── LOGO — fixed top ── */}
+      <div className="shrink-0 flex justify-center pt-8 pb-6 px-3">
+        <div className="hidden lg:flex items-center justify-center cursor-pointer">
+          <Link to={import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173"}>
+            <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
+          </Link>
+        </div>
+      </div>
 
-          {/* MENU */}
+      {/* ── MENU — scrollable ── */}
+      <div className="flex-1 overflow-y-auto px-3 pb-4">
           <ul className="flex flex-col items-center space-y-3">
             <Link to={withAdmin("/dashboard")} onClick={handleLinkClick}>
               <li className={`menu-item ${isDashboard ? "bg-[#002AA8]" : ""}`}>
@@ -479,22 +478,20 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
           </ul>
 
-        </div>
+      </div>
 
-
-
-        {/* LOGOUT */}
-
-        <div className="mt-auto mb-6 flex justify-center w-full">
-          <button
-            onClick={onLogoutClick}
-            className="flex items-center gap-3 text-white cursor-pointer"
-          >
-            <img src={LogoutImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
-            <span className="font-bold text-[14px] pt-[1px]">Sign out</span>
-          </button>
-        </div>
-
+      {/* ── LOGOUT — fixed bottom ── */}
+      <div
+        className="shrink-0 flex items-center px-6 py-4"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        <button
+          onClick={onLogoutClick}
+          className="flex items-center gap-3 text-white/70 hover:text-white transition-colors cursor-pointer w-full"
+        >
+          <img src={LogoutImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+          <span className="font-bold text-[14px]">Sign out</span>
+        </button>
       </div>
 
 
@@ -577,10 +574,12 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 .submenu-item-last .line-vertical {
   display: none;
 }
-.sidebar::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar,
+.sidebar > div::-webkit-scrollbar {
   display: none;
 }
-.sidebar {
+.sidebar,
+.sidebar > div {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

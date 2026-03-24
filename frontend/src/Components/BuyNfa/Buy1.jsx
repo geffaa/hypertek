@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import ReactDOM from "react-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { STRIPE_PUBLISHABLE_KEY } from "../../Config";
@@ -13,7 +12,6 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 import FaceOne from "../../assets/images/noActivity1.png";
-import FaceTwo from "../../assets/images/noActivity2.png";
 import {
   BASE_NFT_ADDRESS,
   BASE_MARKETPLACE_ADDRESS,
@@ -27,7 +25,6 @@ import {
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { openTransakOnRamp } from "../../utils/transakUtils";
-import CustomButton from "../Buttons/Button1";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy } from "lucide-react";
@@ -161,7 +158,6 @@ function Buy1() {
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
-  const [showWalletModal, setShowWalletModal] = useState(false);
   const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
   const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
   const [walletCopied, setWalletCopied] = useState(false);
@@ -1109,38 +1105,31 @@ function Buy1() {
   if (!collection) return null;
 
   return (
-    <div className="flex flex-col w-full mt-14 md:px-24 text-white">
+    <div className="min-h-screen text-white px-4 sm:px-8 lg:px-16 pb-16 max-w-5xl mx-auto">
 
-      {/* ── Insufficient USDC — Fund with Card Modal ── */}
+      {/* ── Insufficient USDC Modal ── */}
       {fundModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
             <h3 className="text-lg font-bold text-white mb-2">Insufficient USDC</h3>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-white/50 mb-3">
               You need <span className="text-white font-semibold">{fundModal.needed} USDC</span> but your wallet only has{" "}
               <span className="text-white font-semibold">{fundModal.have} USDC</span>.
             </p>
-            <p className="text-sm text-gray-400 mb-6">
+            <p className="text-sm text-white/50 mb-6">
               Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.
             </p>
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => {
-                  openTransakOnRamp({
-                    walletAddress: activeAddress,
-                    fiatAmount: String(Math.ceil(parseFloat(fundModal.priceUsdc) * 1.05)),
-                    network: "base",
-                  });
+                  openTransakOnRamp({ walletAddress: activeAddress, fiatAmount: String(Math.ceil(parseFloat(fundModal.priceUsdc) * 1.05)), network: "base" });
                   setFundModal(null);
                 }}
-                className="w-full bg-[#002AA8] hover:bg-[#0038d4] transition-colors text-white font-semibold py-3 rounded-xl"
+                className="w-full bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
               >
                 Fund Wallet with Card (Transak)
               </button>
-              <button
-                onClick={() => setFundModal(null)}
-                className="w-full text-gray-400 hover:text-white transition text-sm py-2"
-              >
+              <button onClick={() => setFundModal(null)} className="w-full text-white/40 hover:text-white transition text-sm py-2">
                 Cancel
               </button>
             </div>
@@ -1148,168 +1137,161 @@ function Buy1() {
         </div>
       )}
 
-      {/* Stripe Card Payment Modal */}
+      {/* ── Stripe Card Payment Modal ── */}
       {stripeModal && stripePromise && (
-        <Elements
-          stripe={stripePromise}
-          options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" } }}
-        >
+        <Elements stripe={stripePromise} options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" } }}>
           <StripeNFTCheckoutForm
             amount={stripeModal.amount}
             onClose={() => setStripeModal(null)}
-            onSuccess={() => {
-              setStripeModal(null);
-              toast.success("Payment received — NFT transfer processing via webhook.");
-            }}
+            onSuccess={() => { setStripeModal(null); toast.success("Payment received — NFT transfer processing via webhook."); }}
           />
         </Elements>
       )}
 
-      {/* Tabs */}
-      <div className="flex flex-col w-full mt-14 md:px-24 text-white">
-        <div
-          className="flex justify-between items-center text-white"
-          style={{
-            width: "200px",
-            height: "28px",
-            position: "absolute",
-            top: "100px",
-            left: "134px",
-          }}
+      {/* ── Breadcrumb / Tabs ── */}
+      <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
+        <Link
+          to="/market-place"
+          className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
         >
-          <Link to="/market-place" className="text-white font-medium">
-            Overview
-          </Link>
-          <button
-            onClick={() => setShowOffers(true)}
-            className="text-white font-medium"
-          >
-            Offers <span>{offers.length}</span>
-          </button>
-        </div>
-
-
-
-
+          Overview
+        </Link>
+        <button
+          onClick={() => setShowOffers(true)}
+          className="pb-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px"
+        >
+          Offers <span className="ml-1 text-white/40">{offers.length}</span>
+        </button>
       </div>
 
+      {/* ── Main Content ── */}
+      <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
 
-      {/* Main Content */}
-      <div className="max-w-[918px] mx-auto w-full mt-2 flex flex-col md:flex-row gap-8 px-4">
-        <img
-          src={getImageUrl(collection?.image)}
-          alt={collection?.name}
-          className="w-full md:w-[365px] h-[330px] rounded-lg object-cover bg-gradient-to-b from-[#977C34] to-[#493F26] "
-        />
-        <div className="flex-1 space-y-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">{collection?.name}</h1>
-            <p>{collection?.symbol || "NFA"} 🔥</p>
-          </div>
+        {/* Left — Image */}
+        <div className="w-full md:w-[360px] shrink-0">
+          <img
+            src={getImageUrl(collection?.image)}
+            alt={collection?.name}
+            className="w-full aspect-square rounded-2xl object-cover"
+            style={{ background: "linear-gradient(135deg, #977C34, #493F26)" }}
+          />
+        </div>
 
-          {/* Status badges */}
-          <div className="flex gap-2 flex-wrap">
-            {connectedWallet && (
-              <span className="px-3 py-1 bg-gray-500/20 text-gray-400 rounded-full text-sm">
-                Connected: {connectedWallet.substring(0, 6)}...
-                {connectedWallet.substring(38)}
-              </span>
-            )}
+        {/* Right — Details */}
+        <div className="flex-1 flex flex-col gap-5">
 
-
-
-            {listingData?.active && (
-              <span className="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">
-                Listed
-              </span>
-            )}
-            {isOwner && collection.tokenId && (
-              <span className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">
-                You Own This
-              </span>
-            )}
-          </div>
-
-          <div className="p-6 rounded-lg">
-            <div className="flex justify-between items-center opacity-70 w-full mb-2">
-              <span>Price</span>
-              <span
-                className="truncate max-w-[150px]"
-                title={onChainOwner || collection.owner}
-              >
-                Owner:{" "}
-                {onChainOwner || collection.owner
-                  ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(
-                    onChainOwner || collection.owner
-                  ).substring(38)}`
-                  : "Platform"}
-              </span>
+          {/* Badges + Name */}
+          <div>
+            <div className="flex items-center gap-2 flex-wrap mb-2">
+              {listingData?.active && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                  Listed
+                </span>
+              )}
+              {isOwner && collection.tokenId && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  You Own This
+                </span>
+              )}
             </div>
+            <h1 className="text-3xl font-bold text-white">{collection?.name}</h1>
+            <p className="text-white/40 text-sm mt-1">
+              {collection?.symbol || "NFA"} · No{collection?.tokenId || "—"}
+            </p>
+          </div>
 
-            {/* Price — double-click to edit when owner */}
-            {isOwner && !listingData?.active ? (
-              isEditingPrice ? (
-                // Editing mode — small inline input
-                <div className="flex items-center gap-2 mt-1">
-                  <input
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    autoFocus
-                    value={listingPrice}
-                    onChange={(e) => setListingPrice(e.target.value)}
-                    placeholder={String(collection.priceETH || '1')}
-                    onBlur={() => setIsEditingPrice(false)}
-                    onKeyDown={(e) => e.key === 'Enter' && setIsEditingPrice(false)}
-                    className="bg-white/10 border border-blue-500 rounded-lg px-3 py-1 text-white text-xl font-bold w-36 outline-none"
-                  />
-                  <span className="text-blue-400 font-bold text-sm">USDC</span>
-                  <button
-                    onClick={() => setIsEditingPrice(false)}
-                    className="text-green-400 text-xs hover:text-green-300"
-                  >✓ Done</button>
-                </div>
+          {/* Owner */}
+          <div className="flex items-center gap-2 text-sm">
+            <span className="text-white/40">Owned by</span>
+            <span className="text-blue-400 font-medium">
+              {onChainOwner || collection.owner
+                ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
+                : "Platform"}
+            </span>
+          </div>
+
+          {/* Description */}
+          {(collection?.description || collection?.name) && (
+            <div>
+              <p className="text-white/60 text-sm leading-relaxed">
+                {collection?.description ||
+                  "Humanity didn't conquer the stars it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies."}
+              </p>
+            </div>
+          )}
+
+          {/* Price Card */}
+          <div
+            className="rounded-2xl p-5 flex flex-col gap-4"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            {/* Price row */}
+            <div>
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">Price</p>
+
+              {isOwner && !listingData?.active ? (
+                isEditingPrice ? (
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number" min="0.01" step="0.01" autoFocus
+                      value={listingPrice}
+                      onChange={(e) => setListingPrice(e.target.value)}
+                      placeholder={String(collection.priceETH || "1")}
+                      onBlur={() => setIsEditingPrice(false)}
+                      onKeyDown={(e) => e.key === "Enter" && setIsEditingPrice(false)}
+                      className="bg-white/10 border border-blue-500 rounded-lg px-3 py-1.5 text-white text-2xl font-bold w-40 outline-none"
+                    />
+                    <span className="text-blue-400 font-semibold">USDC</span>
+                    <button onClick={() => setIsEditingPrice(false)} className="text-green-400 text-sm hover:text-green-300">✓ Done</button>
+                  </div>
+                ) : (
+                  <div
+                    className="flex items-center gap-2 cursor-pointer group w-fit"
+                    onDoubleClick={() => setIsEditingPrice(true)}
+                    title="Double-click to edit price"
+                  >
+                    <span className="text-3xl font-bold">
+                      {listingPrice && parseFloat(listingPrice) > 0
+                        ? parseFloat(listingPrice).toFixed(2)
+                        : (collection.priceETH || 0.01)}
+                    </span>
+                    <span className="text-blue-400 font-semibold">USDC</span>
+                    <FiEdit2 className="text-white/30 group-hover:text-blue-400 transition-colors" size={14} />
+                  </div>
+                )
               ) : (
-                // Display mode — price + pencil icon
-                <div
-                  className="flex items-center gap-2 mt-1 cursor-pointer group w-fit"
-                  onDoubleClick={() => setIsEditingPrice(true)}
-                  title="Double-click to edit price"
-                >
-                  <h2 className="text-xl font-bold">
-                    {listingPrice && parseFloat(listingPrice) > 0
-                      ? `${parseFloat(listingPrice).toFixed(2)} USDC`
-                      : `${collection.priceETH || 0.01} USDC`}
-                  </h2>
-                  <span className="text-white/30 group-hover:text-blue-400 transition-colors text-sm" title="Double-click to edit">✏️</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold">
+                    {listingData?.active
+                      ? ethers.formatUnits(listingData.price, 6)
+                      : (collection.priceETH || 0.01)}
+                  </span>
+                  <span className="text-blue-400 font-semibold">USDC</span>
                 </div>
-              )
-            ) : (
-              <h2 className="text-xl font-bold mt-1">
-                {listingData?.active
-                  ? `${ethers.formatUnits(listingData.price, 6)} USDC`
-                  : `${collection.priceETH || 0.01} USDC`}
-              </h2>
-            )}
+              )}
 
-            <div className="flex justify-end mt-3">
-              <FiEye /> <span className="ml-2">505 Views</span>
+              <div className="flex items-center gap-1 text-white/30 text-xs mt-1">
+                <FiEye size={11} /> <span>505 views</span>
+              </div>
             </div>
 
-            {/* --- EMBEDDED WALLET DISPLAY (CHECKOUT VIEW) --- */}
+            {/* Embedded wallet display */}
             {isEmailWalletConnected && emailWalletAddress && (
-              <div className="mt-4 mb-2 w-full flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition cursor-pointer"
+              <div
+                className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition"
                 onClick={() => copyToClipboard(emailWalletAddress)}
-                title="Copy Wallet Address to Fund"
+                title="Copy wallet address"
               >
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-500/20 rounded-lg">
                     <Wallet className="w-5 h-5 text-blue-400" />
                   </div>
-                  <div className="flex flex-col">
-                    <div className="text-xs font-mono text-gray-300 flex items-center gap-2">
+                  <div>
+                    <div className="text-xs font-mono text-white/60 flex items-center gap-2">
                       {emailWalletAddress.slice(0, 6)}...{emailWalletAddress.slice(-4)}
-                      {walletCopied ? <span className="text-[10px] text-green-400">Copied!</span> : <Copy className="w-3 h-3 text-gray-500" />}
+                      {walletCopied
+                        ? <span className="text-green-400 text-[10px]">Copied!</span>
+                        : <Copy className="w-3 h-3 text-white/30" />}
                     </div>
                     <div className="text-sm font-semibold text-white mt-0.5">
                       {Number(ethBalance).toFixed(4)} ETH
@@ -1319,241 +1301,205 @@ function Buy1() {
               </div>
             )}
 
-            <div className="flex gap-4 mt-6">
+            {/* Action buttons */}
+            <div className="flex gap-3">
               <button
                 onClick={buttonConfig.action || (() => setIsOpen(true))}
                 disabled={buttonConfig.disabled || loading}
-                className={
-                  buttonConfig.disabled ? "opacity-50 cursor-not-allowed" : ""
-                }
+                className="flex-1 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
               >
-                <CustomButton text={buttonConfig.text} />
+                {buttonConfig.text}
               </button>
-
               <button
-                onClick={() => handlePaymentCard()}
+                onClick={handlePaymentCard}
                 disabled={loading}
+                className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
               >
-                <CustomButton text="Buy With Card" />
+                Buy With Card
               </button>
             </div>
 
+            {/* Make Offer */}
             <Link
               to="/payment"
               state={{ item: collection }}
-              className="flex items-center gap-2 mt-4 hover:text-blue-400"
+              className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
             >
-              Make Offer <FiEdit2 />
+              Make Offer <FiEdit2 size={12} />
             </Link>
           </div>
+
         </div>
       </div>
 
-      {/* Confirmation Modal */}
+      {/* ── Confirmation Modal 1 ── */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="bg-[#252B37] p-6 rounded-lg w-full max-w-[480px]"
+            className="bg-[#0f0f2a] border border-white/10 p-6 rounded-2xl w-full max-w-[480px] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-xl font-bold text-center">Confirm Action</h2>
+            <h2 className="text-lg font-bold text-center mb-4">Confirm Action</h2>
             <img
               src={getImageUrl(collection?.image)}
               alt={collection?.name}
-              className="w-40 h-36 mx-auto my-4 rounded object-cover"
+              className="w-32 h-28 mx-auto mb-3 rounded-xl object-cover"
             />
-            <h3 className="text-center font-semibold">{collection?.name}</h3>
-            <div className="mt-4 space-y-2">
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-                <span>List Price</span>
-                <span>{collection.priceETH || 0.01} USDC</span>
+            <h3 className="text-center font-semibold mb-4">{collection?.name}</h3>
+            <div className="space-y-2 mb-6">
+              <div className="flex justify-between bg-white/5 border border-white/08 px-4 py-2.5 rounded-lg text-sm">
+                <span className="text-white/50">List Price</span>
+                <span className="text-white font-medium">{collection.priceETH || 0.01} USDC</span>
               </div>
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
-                <span>Platform Fee (10%)</span>
-                <span>
-                  {((collection.priceETH || 0.01) * 0.1).toFixed(4)} USDC
-                </span>
+              <div className="flex justify-between bg-white/5 border border-white/08 px-4 py-2.5 rounded-lg text-sm">
+                <span className="text-white/50">Platform Fee (10%)</span>
+                <span className="text-white font-medium">{((collection.priceETH || 0.01) * 0.1).toFixed(4)} USDC</span>
               </div>
-              <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
-                <span>Total</span>
-                <span>
-                  {((collection.priceETH || 0.01) * 1.1).toFixed(4)} USDC
-                </span>
+              <div className="flex justify-between bg-[#002AA8]/20 border border-blue-500/30 px-4 py-2.5 rounded-lg text-sm">
+                <span className="text-white font-semibold">Total</span>
+                <span className="text-white font-bold">{((collection.priceETH || 0.01) * 1.1).toFixed(4)} USDC</span>
               </div>
             </div>
-            <div className="flex justify-between mt-6">
-              <button onClick={() => setIsOpen(false)}>
-                <CustomButton text="Cancel" />
+            <div className="flex gap-3">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm font-semibold transition-colors"
+              >
+                Cancel
               </button>
               <button
-                onClick={() => {
-                  setIsOpen(false);
-                  setIsSecondOpen(true);
-                }}
+                onClick={() => { setIsOpen(false); setIsSecondOpen(true); }}
+                className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm transition-colors"
               >
-                <CustomButton text="Continue" />
+                Continue
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Final Confirmation Modal */}
+      {/* ── Confirmation Modal 2 ── */}
       {isSecondOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
           onClick={() => setIsSecondOpen(false)}
         >
           <div
-            className="bg-[#252B37] rounded-lg p-6 flex flex-col items-center relative w-full max-w-md md:max-w-lg h-auto mt-12"
+            className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setIsSecondOpen(false)}
-              className="absolute top-3 right-3 text-white text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700"
-            >
-              &times;
-            </button>
-            <h1 className="text-white font-bold text-lg md:text-xl">
-              {isOwner ? "List NFT" : "Buy NFT"}
-            </h1>
-            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
-            <div className="w-[150px] h-[140px] rounded-lg overflow-hidden mb-4">
-              <img
-                src={getImageUrl(collection?.image)}
-                alt={collection?.name}
-                className="w-full h-full object-cover"
-              />
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-lg font-bold text-white">{isOwner ? "List NFA" : "Buy NFA"}</h1>
+              <button onClick={() => setIsSecondOpen(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
             </div>
-            <div className="w-[90%] h-[1px] bg-gray-300 my-4"></div>
-            <div className="w-[90%] mb-3">
+
+            <div className="border-t border-white/08 mb-4" />
+
+            <img
+              src={getImageUrl(collection?.image)}
+              alt={collection?.name}
+              className="w-28 h-24 rounded-xl object-cover mx-auto mb-4"
+            />
+
+            <div className="border-t border-white/08 mb-4" />
+
+            <div className="mb-4">
               {isOwner ? (
-                // ✅ Owner: Editable Price Input
                 <div className="flex flex-col gap-1">
-                  <label className="text-gray-400 text-xs px-1">Set Your Listing Price (USDC)</label>
-                  <div className="flex items-center rounded px-4 h-10 bg-white/10 border border-white/20 focus-within:border-blue-400 transition-colors">
+                  <label className="text-white/40 text-xs px-1">Set Your Listing Price (USDC)</label>
+                  <div className="flex items-center rounded-lg px-4 h-11 bg-white/5 border border-white/15 focus-within:border-blue-400 transition-colors">
                     <input
-                      type="number"
-                      min="0.01"
-                      step="0.01"
+                      type="number" min="0.01" step="0.01"
                       value={listingPrice}
                       onChange={(e) => setListingPrice(e.target.value)}
-                      placeholder={String(collection.priceETH || '1')}
+                      placeholder={String(collection.priceETH || "1")}
                       className="bg-transparent text-white text-sm w-full outline-none"
                     />
                     <span className="text-blue-400 text-xs font-bold ml-2">USDC</span>
                   </div>
                   {listingPrice && parseFloat(listingPrice) > 0 && (
-                    <p className="text-xs text-green-400 px-1">
-                      ✓ Will list at {parseFloat(listingPrice).toFixed(2)} USDC
-                    </p>
+                    <p className="text-xs text-green-400 px-1">✓ Will list at {parseFloat(listingPrice).toFixed(2)} USDC</p>
                   )}
                 </div>
               ) : (
-                // Buyer: Static price display
-                <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
-                  <p className="text-gray-400 text-sm">Price</p>
-                  <p className="text-white text-sm">{collection.priceETH || 0.01} USDC</p>
+                <div className="flex justify-between items-center bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+                  <span className="text-white/50 text-sm">Price</span>
+                  <span className="text-white font-semibold text-sm">{collection.priceETH || 0.01} USDC</span>
                 </div>
               )}
             </div>
-            <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">
-              <button onClick={() => setIsSecondOpen(false)}>
-                <CustomButton text="Cancel" />
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setIsSecondOpen(false)}
+                className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm font-semibold transition-colors"
+              >
+                Cancel
               </button>
               <button
                 onClick={() => {
                   setIsSecondOpen(false);
-                  if (isOwner) {
-                    handleCreateListing();
-                  } else {
-                    handleBuyNFT();
-                  }
+                  if (isOwner) { handleCreateListing(); } else { handleBuyNFT(); }
                 }}
                 disabled={loading}
+                className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold text-sm transition-colors"
               >
-                <CustomButton text={loading ? "Processing..." : "Confirm"} />
+                {loading ? "Processing..." : "Confirm"}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* OFFERS POPUP */}
+      {/* ── Offers Modal ── */}
       {showOffers && (
         <div
-          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"
-          style={{ alignItems: "flex-start", paddingTop: "100px" }}
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
+          onClick={() => setShowOffers(false)}
         >
-          <div className="bg-[#1f2937] w-[700px] relative p-6 text-white">
-            <button
-              onClick={() => setShowOffers(false)}
-              className="absolute top-3 right-4 text-xl opacity-70 hover:opacity-100"
-            >
-              ×
-            </button>
+          <div
+            className="bg-[#0f0f2a] border border-white/10 rounded-2xl w-full max-w-2xl p-6 text-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold">{collection?.name}</h2>
+              <button onClick={() => setShowOffers(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
+            </div>
 
-            <h2 className="text-lg font-semibold mb-4">{collection?.name}</h2>
-
-            <div className="flex gap-6 border-b border-white/10 pb-2 mb-6">
-              <span className="opacity-70">Overview</span>
-              <span className="font-semibold border-b-2 border-blue-500">
-                Offers {offers.length}
+            <div className="flex gap-6 border-b border-white/10 pb-3 mb-6">
+              <span className="text-white/40 text-sm">Overview</span>
+              <span className="text-white text-sm font-semibold border-b-2 border-blue-500 pb-3 -mb-3">
+                Offers <span className="text-white/40 ml-1">{offers.length}</span>
               </span>
             </div>
 
-            {offers.length === 0 && (
-              <div className="relative flex flex-col justify-center items-center h-[420px] overflow-hidden">
-                <h1 className="text-center text-white font-bold text-3xl">
-                  No offers right now
-                </h1>
-
-                <div className="flex text-center mt-4">
-                  <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
-                  <h1 className="text-[#8C9ED8] font-bold text-[160px] mx-2">
-                    0
-                  </h1>
-                  <h1 className="text-[#8C9ED8] font-bold text-[160px]">4</h1>
+            {offers.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-16 gap-3">
+                <div className="relative">
+                  <h1 className="text-[#8C9ED8] font-bold text-8xl tracking-widest opacity-30">404</h1>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <img src={FaceOne} alt="" className="w-20 h-16" />
+                  </div>
                 </div>
-
-                <div className="absolute top-[11rem] left-1/2 -translate-x-1/2 pointer-events-none z-10">
-                  <img src={FaceOne} alt="Face One" className="w-28 h-24" />
-                </div>
-
-                <div className="absolute top-[15rem] left-1/2 -translate-x-1/2 pointer-events-none z-10">
-                  <img
-                    src={FaceTwo}
-                    alt="Face Two"
-                    className="w-16 h-10 pb-3"
-                  />
-                </div>
+                <p className="text-white font-bold text-xl mt-2">No offers right now</p>
+                <p className="text-white/40 text-sm">Be the first to make an offer</p>
               </div>
-            )}
-
-            {offers.length > 0 && (
+            ) : (
               <div className="w-full">
-                <div className="grid grid-cols-5 gap-4 text-sm opacity-70 mb-3">
-                  <span>Price</span>
-                  <span>Offers</span>
-                  <span>From</span>
-                  <span>Expire In</span>
-                  <span>Action</span>
+                <div className="grid grid-cols-5 gap-4 text-xs font-semibold text-white/40 uppercase tracking-widest mb-3 px-3">
+                  <span>Price</span><span>Offers</span><span>From</span><span>Expire In</span><span>Action</span>
                 </div>
-
                 {offers.map((offer, index) => (
-                  <div
-                    key={index}
-                    className="grid grid-cols-5 gap-4 items-center bg-white/5 p-3 rounded"
-                  >
-                    <span>{offer.price} USDT</span>
-                    <span>Collection</span>
-                    <span>{offer.from}</span>
-                    <span>{offer.expire}</span>
-                    <button className="bg-blue-600 px-3 py-1 rounded text-sm">
-                      Accept Offer
+                  <div key={index} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/06 p-3 rounded-lg mb-2 text-sm">
+                    <span className="text-white font-medium">{offer.price} USDT</span>
+                    <span className="text-white/50">Collection</span>
+                    <span className="text-white/50 truncate">{offer.from}</span>
+                    <span className="text-white/50">{offer.expire}</span>
+                    <button className="px-3 py-1.5 bg-[#002AA8] hover:bg-[#003BD4] rounded-lg text-xs font-semibold transition-colors">
+                      Accept
                     </button>
                   </div>
                 ))}
@@ -1562,58 +1508,9 @@ function Buy1() {
           </div>
         </div>
       )}
-      {/* WALLET SELECTION MODAL */}
-      {showWalletModal && ReactDOM.createPortal(
-        <div
-          className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-black/80 flex items-center justify-center backdrop-blur-sm px-4"
-          onClick={() => setShowWalletModal(false)}
-        >
-          <div
-            className="bg-[#1f2937] p-8 rounded-2xl w-full max-w-sm mx-4 border border-white/10 shadow-2xl transform transition-all scale-100"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white">Connect Wallet</h2>
-              <button
-                onClick={() => setShowWalletModal(false)}
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                ✕
-              </button>
-            </div>
 
-            <div className="space-y-4">
-              <button
-                onClick={() => {
-                  setShowWalletModal(false);
-                  if (openConnectModal) openConnectModal();
-                }}
-                className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 hover:border-blue-500/50 group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-xl">
-                    🌐
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-white">Browser Wallet</div>
-                    <div className="text-xs text-gray-400 group-hover:text-gray-300">
-                      MetaMask, Rainbow, etc.
-                    </div>
-                  </div>
-                </div>
-                <div className="text-gray-500 group-hover:text-blue-400">→</div>
-              </button>
-
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
     </div>
   );
 }
 
-
 export default Buy1;
-
-
