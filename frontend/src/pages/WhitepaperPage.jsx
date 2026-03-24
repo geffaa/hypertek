@@ -153,54 +153,7 @@ export default function WhitepaperPage() {
   };
 
   return (
-    <div className="min-h-screen text-white">
-      {/* ── Hero ── */}
-      <div
-        className="relative w-full py-24 px-6 flex flex-col items-center justify-center text-center overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #000d30 0%, #000820 100%)" }}
-      >
-        <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, #002AA8, transparent)" }} />
-        <div className="relative z-10 max-w-3xl">
-          <p className="text-blue-400 font-semibold text-sm tracking-[0.2em] uppercase mb-4">Official Document</p>
-          <h1 className="font-[Goldman] font-bold text-5xl md:text-7xl text-white mb-4">
-            WHITE<span style={{ WebkitTextStroke: "2px white", color: "transparent" }}>PAPER</span>
-          </h1>
-          <p className="text-white/50 text-lg mb-2 font-[Goldman] tracking-widest uppercase">Hyper Tek 100</p>
-          <p className="text-white/40 text-sm max-w-xl mx-auto mb-10 leading-relaxed">
-            Overview of the gaming industry, Hyper Tek, and the way forward. A 3-in-1 interconnected gaming universe built on blockchain ownership and fair-play economics.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/whitepaper.pdf"
-              download="HyperTek-Whitepaper.pdf"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
-              style={{ background: "#002AA8" }}
-            >
-              ↓ Download PDF
-            </a>
-            <button
-              onClick={() => scrollTo("executive-summary")}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white/70 hover:text-white transition-colors border border-white/10 hover:border-white/30"
-            >
-              Read Online ↓
-            </button>
-          </div>
-        </div>
-
-        {/* Stats bar */}
-        <div className="relative z-10 mt-14 w-full max-w-3xl grid grid-cols-3 gap-4">
-          {[
-            { value: "104", label: "Pages" },
-            { value: "$307K+", label: "Invested" },
-            { value: "3", label: "Game Worlds" },
-          ].map(({ value, label }) => (
-            <div key={label} className="text-center">
-              <div className="font-[Goldman] text-3xl font-bold text-white">{value}</div>
-              <div className="text-white/40 text-xs mt-1 uppercase tracking-widest">{label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="min-h-screen text-white mt-12">
 
       {/* ── Mobile TOC toggle ── */}
       <div className="lg:hidden sticky top-[68px] z-40 px-4 py-3" style={{ background: "rgba(0,8,32,0.95)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
@@ -219,25 +172,19 @@ export default function WhitepaperPage() {
       </div>
 
       {/* ── Body ── */}
-      <div className="flex">
+      <div className="flex items-start">
 
-        {/* Spacer reserves space taken by the fixed sidebar */}
-        <div className="hidden lg:block shrink-0 w-[260px]" />
-
-        {/* Sidebar TOC — fixed (same approach as TermsPage) */}
+        {/* Sidebar TOC — sticky, stays within document flow (won't cover footer) */}
         <aside
-          className="hidden lg:flex flex-col"
+          className="hidden lg:flex flex-col shrink-0 w-[260px]"
           style={{
-            position: "fixed",
+            position: "sticky",
             top: 68,
-            left: 0,
-            width: 260,
+            alignSelf: "flex-start",
             height: "calc(100vh - 68px)",
             overflowY: "auto",
             borderRight: "1px solid rgba(255,255,255,0.08)",
             padding: "32px 20px",
-            zIndex: 30,
-            background: "rgba(0,4,20,0.98)",
           }}
         >
           <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-4">Contents</p>
