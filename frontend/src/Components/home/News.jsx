@@ -249,14 +249,9 @@ export default function News() {
                   className="w-[90px] h-[65px] flex-shrink-0"
                   imgClassName="object-cover"
                 />
-                <div className="flex flex-col gap-1 pt-0.5">
-                  <p className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "11px" }}>
-                    {item.heading.length > 45 ? item.heading.slice(0, 45) + "..." : item.heading}
-                  </p>
-                  <p className="text-gray-300" style={{ fontSize: "11px", lineHeight: "1.5" }}>
-                    {item.description.length > 70 ? item.description.slice(0, 70) + "..." : item.description}
-                  </p>
-                </div>
+                <p className="text-white self-center" style={{ fontSize: "12px", lineHeight: "1.5" }}>
+                  {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}
+                </p>
               </motion.div>
             ))}
           </div>
