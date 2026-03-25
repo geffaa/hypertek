@@ -85,7 +85,7 @@ export default function Hero() {
 
   const headingLine1 = cms.heading_line1 || "HYPERTEK";
   const headingLine2 = cms.heading_line2 || "WHERE LEGENDS ARE FORGED.";
-  const btn1Text = cms.button1_text || cms.cta_button_1_text || "Marketplace";
+  const btn1Text = cms.button1_text || cms.cta_button_1_text || "marketplace";
   const btn1Link = cms.button1_link || cms.cta_button_1_link || "/market-place";
   const btn2Text = cms.button2_text || cms.cta_button_2_text || "Download Game";
   const bgImage = cms.background_image || heroImage;
@@ -167,7 +167,7 @@ export default function Hero() {
           </Link>
           <button
             onClick={() => setShowVideo(true)}
-            className="px-8 py-3 bg-[#002AA8] hover:bg-[#003BD4] text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/20 hover:border-white/40"
+            className="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium text-[15px] md:text-[16px] rounded-md transition-all duration-300 border border-white/30"
           >
             {btn2Text}
           </button>

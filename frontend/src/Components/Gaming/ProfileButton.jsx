@@ -1,11 +1,12 @@
 /**
- * ProfileButton — avatar + name card, anchored at top-left frame notch.
- * Avatar and username pulled from Redux auth session + profile API.
+ * ProfileButton — avatar card top-left.
+ * Clicking opens the Avatar Equipment panel (Don's brief):
+ *   • 5 slots around character: Helmet, Weapon, Gloves, Suit, Boots
+ *   • 4 slots below: Flag, Staff, Badge, Power
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -24,12 +25,56 @@ const CSS = `
       0 0 24px rgba(0,212,255,0.65),
       0 0 6px rgba(0,0,0,0.9) !important;
   }
+  .equip-slot {
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+  .equip-slot:hover {
+    border-color: rgba(0,212,255,0.7) !important;
+    box-shadow: 0 0 12px rgba(0,212,255,0.35) !important;
+    background: rgba(0,212,255,0.08) !important;
+  }
+  @keyframes avatarPanelIn {
+    from { opacity:0; transform: translateY(-10px) scale(0.97); }
+    to   { opacity:1; transform: translateY(0)    scale(1); }
+  }
+  .avatar-panel { animation: avatarPanelIn 0.2s ease both; }
 `;
 
+/* ── Equipment slot component ── */
+function Slot({ label, size = 54, icon = null }) {
+  return (
+    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+      <div className="equip-slot" style={{
+        width: size, height: size,
+        border: "1.5px solid rgba(0,212,255,0.25)",
+        borderRadius: 5,
+        background: "rgba(3,10,28,0.85)",
+        backdropFilter: "blur(6px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        boxShadow: "0 0 6px rgba(0,212,255,0.08)",
+        fontSize: 20,
+      }}>
+        {icon || (
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <rect x="4" y="4" width="16" height="16" rx="2"
+              stroke="rgba(0,212,255,0.2)" strokeWidth="1" strokeDasharray="3 2"/>
+          </svg>
+        )}
+      </div>
+      <span style={{
+        fontFamily: "Orbitron,sans-serif", fontSize: 6, fontWeight: "bold",
+        letterSpacing: "0.1em", color: "rgba(157,216,240,0.55)",
+      }}>{label.toUpperCase()}</span>
+    </div>
+  );
+}
+
 export default function ProfileButton() {
-  const navigate  = useNavigate();
-  const { token } = useSelector((s) => s.auth);
-  const [profile, setProfile] = useState(null);
+  const { token }   = useSelector((s) => s.auth);
+  const [profile,   setProfile]   = useState(null);
+  const [open,      setOpen]      = useState(false);
+  const panelRef = useRef(null);
 
   useEffect(() => {
     if (!token) return;
@@ -41,10 +86,17 @@ export default function ProfileButton() {
       .catch(() => {});
   }, [token]);
 
-  const avatarSrc = profile?.Avatar
-    ? `${BACKEND_BASE_URL}${profile.Avatar}`
-    : "/avatar.png";
+  /* close panel on outside click */
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => {
+      if (panelRef.current && !panelRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
+  const avatarSrc   = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar.png";
   const displayName = profile?.Email
     ? profile.Email.split("@")[0].replace(/[0-9]/g, "").toUpperCase() || "COMMANDER"
     : "COMMANDER";
@@ -53,16 +105,12 @@ export default function ProfileButton() {
     <>
       <style>{CSS}</style>
 
-      <div style={{
+      <div ref={panelRef} style={{
         position: "absolute",
-        left: "6vw",
-        top:  "5.5vh",
+        left: "6vw", top: "5.5vh",
         transform: "translate(-50%, -35%)",
         zIndex: 30,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "5px",
+        display: "flex", flexDirection: "column", alignItems: "center", gap: "5px",
         pointerEvents: "auto",
       }}>
 
@@ -73,13 +121,10 @@ export default function ProfileButton() {
           alt="Profile"
           loading="lazy"
           onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
-          onClick={() => navigate("/Profile")}
+          onClick={() => setOpen(o => !o)}
           style={{
-            width:  SIZE,
-            height: SIZE,
-            borderRadius: "50%",
-            objectFit: "cover",
-            objectPosition: "center 10%",
+            width: SIZE, height: SIZE, borderRadius: "50%",
+            objectFit: "cover", objectPosition: "center 10%",
             border: "2px solid rgba(0,212,255,0.7)",
             boxShadow: `
               0 0 0 1px rgba(0,212,255,0.2),
@@ -90,36 +135,120 @@ export default function ProfileButton() {
         />
 
         {/* ── Name card ── */}
-        <div
-          onClick={() => navigate("/Profile")}
-          style={{
-            background: "rgba(3,8,20,0.92)",
-            border: "1px solid rgba(0,212,255,0.35)",
-            borderRadius: "3px",
-            padding: "4px 10px",
-            textAlign: "center",
-            backdropFilter: "blur(10px)",
-            boxShadow: "0 0 10px rgba(0,212,255,0.12)",
-            minWidth: "max-content",
-            cursor: "pointer",
-          }}>
+        <div onClick={() => setOpen(o => !o)} style={{
+          background: "rgba(3,8,20,0.92)",
+          border: "1px solid rgba(0,212,255,0.35)",
+          borderRadius: "3px", padding: "4px 10px",
+          textAlign: "center", backdropFilter: "blur(10px)",
+          boxShadow: "0 0 10px rgba(0,212,255,0.12)",
+          minWidth: "max-content", cursor: "pointer",
+        }}>
           <div style={{
             fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(4px,0.45vw,6px)",
-            fontWeight: "bold",
-            letterSpacing: "0.14em",
-            color: "#00D4FF",
-            textShadow: "0 0 8px rgba(0,212,255,0.6)",
-            lineHeight: 1.3,
+            fontSize: "clamp(4px,0.45vw,6px)", fontWeight: "bold",
+            letterSpacing: "0.14em", color: "#00D4FF",
+            textShadow: "0 0 8px rgba(0,212,255,0.6)", lineHeight: 1.3,
           }}>{displayName}</div>
           <div style={{
             fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(5px,0.5vw,6.5px)",
-            letterSpacing: "0.1em",
-            color: "rgba(148,192,210,0.65)",
-            lineHeight: 1.3,
+            fontSize: "clamp(5px,0.5vw,6.5px)", letterSpacing: "0.1em",
+            color: "rgba(148,192,210,0.65)", lineHeight: 1.3,
           }}>HYPER-TEK PLAYER</div>
         </div>
+
+        {/* ══════════════════════════════════════════
+            AVATAR EQUIPMENT PANEL (dropdown)
+            ══════════════════════════════════════════ */}
+        {open && (
+          <div className="avatar-panel" style={{
+            position: "absolute",
+            top: "calc(100% + 10px)",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 260,
+            background: "rgba(4,10,26,0.97)",
+            border: "1px solid rgba(0,212,255,0.25)",
+            borderRadius: 8,
+            backdropFilter: "blur(18px)",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.7), 0 0 20px rgba(0,212,255,0.08)",
+            padding: "14px 12px 12px",
+            zIndex: 40,
+          }}>
+
+            {/* Header */}
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
+              <span style={{
+                fontFamily:"Orbitron,sans-serif", fontSize:7.5, fontWeight:"bold",
+                letterSpacing:"0.14em", color:"#00D4FF",
+                textShadow:"0 0 8px rgba(0,212,255,0.5)",
+              }}>AVATAR</span>
+              <button onClick={() => setOpen(false)} style={{
+                background:"none", border:"none", color:"rgba(157,216,240,0.4)",
+                fontSize:15, cursor:"pointer", lineHeight:1, padding:"0 2px",
+              }}>×</button>
+            </div>
+
+            {/* ── Equipment layout ── */}
+            {/* Row: Left col (Weapon, Suit, Boots) | Character | Right col (Helmet, Gloves) */}
+            <div style={{ display:"flex", gap:8, alignItems:"center", justifyContent:"center" }}>
+
+              {/* Left: Weapon / Suit / Boots */}
+              <div style={{ display:"flex", flexDirection:"column", gap:8, alignItems:"center" }}>
+                <Slot label="Weapon" size={52} />
+                <Slot label="Suit"   size={52} />
+                <Slot label="Boots"  size={52} />
+              </div>
+
+              {/* Center: Character / Avatar */}
+              <div style={{
+                width: 80, flexShrink:0,
+                display:"flex", flexDirection:"column", alignItems:"center", gap:6,
+              }}>
+                <div style={{
+                  width: 80, height: 120,
+                  background: "radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.1), transparent 70%)",
+                  border: "1px solid rgba(0,212,255,0.15)",
+                  borderRadius: 6,
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  overflow:"hidden",
+                }}>
+                  <img
+                    src={avatarSrc}
+                    alt="avatar"
+                    onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                    style={{
+                      width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center top",
+                    }}
+                  />
+                </div>
+                <span style={{
+                  fontFamily:"Orbitron,sans-serif", fontSize:5.5, fontWeight:"bold",
+                  letterSpacing:"0.1em", color:"rgba(0,212,255,0.6)",
+                  textAlign:"center",
+                }}>{displayName}</span>
+              </div>
+
+              {/* Right: Helmet / Gloves */}
+              <div style={{ display:"flex", flexDirection:"column", gap:8, alignItems:"center", justifyContent:"center" }}>
+                <Slot label="Helmet" size={52} />
+                <Slot label="Gloves" size={52} />
+              </div>
+
+            </div>
+
+            {/* Divider */}
+            <div style={{ height:1, background:"rgba(0,212,255,0.1)", margin:"12px 0 10px" }}/>
+
+            {/* ── Bottom row: Flag / Staff / Badge / Power ── */}
+            <div style={{ display:"flex", justifyContent:"space-between", gap:6 }}>
+              {["Flag","Staff","Badge","Power"].map(label => (
+                <Slot key={label} label={label} size={48} />
+              ))}
+            </div>
+
+          </div>
+        )}
 
       </div>
     </>

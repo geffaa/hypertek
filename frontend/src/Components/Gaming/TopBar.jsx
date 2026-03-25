@@ -10,97 +10,60 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
 import symbol from "../../assets/images/login/Symbol.svg.png";
 
+// 5 resources per Don's brief — each has open/stored for dropdown
 const RESOURCES = [
+  { id: "FOOD",     label: "Food",            value: "61.7M",   color: "#6ee7b7", img: "/icon_food.png",   open: "61.7M",  stored: "5.3B"  },
+  { id: "OIL",      label: "Oil",             value: "59.8M",   color: "#94a3b8", img: "/icon_oil.png",    open: "59.8M",  stored: "1.4B"  },
+  { id: "CRYSTALS", label: "Energy Crystals", value: "3.4M",    color: "#c4b5fd", img: "/icon_energy.png", open: "3.4M",   stored: "39M"   },
+  { id: "FUEL",     label: "Fuel",            value: "102.6M",  color: "#fb923c", img: "/icon_fuel.png",   open: "102.6M", stored: "766M"  },
+  { id: "ORE",      label: "Ore",             value: "73.5M",   color: "#cbd5e1", img: "/icon_ore.png",    open: "73.5M",  stored: "821M"  },
+];
+
+// Resources panel categories per Don's brief
+const RES_CATEGORIES = [
   {
-    id: "FOOD", label: "Food", value: "61.7M", color: "#6ee7b7",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <line x1="16" y1="28" x2="16" y2="8" stroke="#6ee7b7" strokeWidth="2" strokeLinecap="round"/>
-        <ellipse cx="16" cy="7"  rx="3" ry="5" fill="#6ee7b7" fillOpacity="0.85" transform="rotate(-20,16,7)"/>
-        <ellipse cx="11" cy="12" rx="2.5" ry="4.5" fill="#6ee7b7" fillOpacity="0.7" transform="rotate(-40,11,12)"/>
-        <ellipse cx="21" cy="12" rx="2.5" ry="4.5" fill="#6ee7b7" fillOpacity="0.7" transform="rotate(40,21,12)"/>
-        <ellipse cx="13" cy="17" rx="2" ry="3.5" fill="#6ee7b7" fillOpacity="0.5" transform="rotate(-30,13,17)"/>
-        <ellipse cx="19" cy="17" rx="2" ry="3.5" fill="#6ee7b7" fillOpacity="0.5" transform="rotate(30,19,17)"/>
-      </svg>
-    ),
+    id: "endurance", label: "Endurance", locked: false,
+    items: [{ label: "Endurance", val: "8825" }, { label: "Water", val: "24.5M" }, { label: "Water Heavy", val: "3.8M" }],
   },
   {
-    id: "OIL", label: "Oil", value: "59.8M", color: "#94a3b8",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <rect x="8"  y="12" width="14" height="14" rx="2" fill="#1e293b" stroke="#94a3b8" strokeWidth="1.5"/>
-        <rect x="11" y="8"  width="8"  height="5"  rx="1" fill="#0f172a" stroke="#94a3b8" strokeWidth="1.2"/>
-        <path d="M15 6 H22 V10" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        <text x="15" y="23" textAnchor="middle" fill="#94a3b8" fontSize="7" fontWeight="bold">OIL</text>
-      </svg>
-    ),
+    id: "water", label: "Water", locked: false,
+    items: [{ label: "Water", val: "24.5M" }, { label: "Water Heavy", val: "3.8M" }],
   },
   {
-    id: "CRYSTALS", label: "Crystals", value: "3.4M", color: "#c4b5fd",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <polygon points="16,3 24,10 24,22 16,29 8,22 8,10" fill="#4c1d95" fillOpacity="0.5" stroke="#c4b5fd" strokeWidth="1.5"/>
-        <polygon points="16,3  24,10 16,16" fill="#c4b5fd" fillOpacity="0.28"/>
-        <polygon points="8,10  16,16 16,29" fill="#7c3aed" fillOpacity="0.2"/>
-        <line x1="8" y1="10" x2="24" y2="10" stroke="#c4b5fd" strokeOpacity="0.5" strokeWidth="0.8"/>
-        <circle cx="16" cy="16" r="1.5" fill="#c4b5fd" fillOpacity="0.7"/>
-      </svg>
-    ),
+    id: "furuseth", label: "Furuseth Crystals", locked: false,
+    items: [
+      { label: "F Crystals lvl 1", val: "" }, { label: "F Crystals lvl 2", val: "" },
+      { label: "F Crystals lvl 3", val: "" }, { label: "F Crystals lvl 4", val: "" },
+      { label: "F Crystals lvl 5", val: "" },
+    ],
   },
   {
-    id: "FUEL", label: "Fuel", value: "102.6M", color: "#fb923c",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <rect x="7"  y="10" width="13" height="18" rx="2" fill="#431407" stroke="#fb923c" strokeWidth="1.5"/>
-        <rect x="20" y="14" width="5"  height="8"  rx="1.5" fill="#431407" stroke="#fb923c" strokeWidth="1.2"/>
-        <path d="M13 10 V6 H18 V10" stroke="#fb923c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        <rect x="9" y="14" width="9" height="4" rx="1" fill="#fb923c" fillOpacity="0.25"/>
-      </svg>
-    ),
+    id: "gems", label: "Gems", locked: true,
+    items: [],
   },
   {
-    id: "ALLOYS", label: "Alloys", value: "73.5M", color: "#cbd5e1",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <polygon points="16,4 27,10 27,22 16,28 5,22 5,10" fill="#1e293b" stroke="#cbd5e1" strokeWidth="1.5"/>
-        <polygon points="16,9 23,13 23,19 16,23 9,19 9,13" fill="#334155" stroke="#cbd5e1" strokeOpacity="0.5" strokeWidth="1"/>
-        <circle cx="16" cy="16" r="3" fill="#cbd5e1" fillOpacity="0.75"/>
-      </svg>
-    ),
+    id: "minerals", label: "Minerals", locked: false,
+    items: [
+      { label: "Cloth", val: "" }, { label: "Silk", val: "" }, { label: "Wood", val: "" },
+      { label: "Carbon", val: "" }, { label: "Silica", val: "" },
+    ],
   },
   {
-    id: "GOLD", label: "Gold", value: "1.3B", color: "#fcd34d",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="11" fill="#78350f" stroke="#fcd34d" strokeWidth="1.5"/>
-        <circle cx="16" cy="16" r="7.5" fill="#92400e" stroke="#fcd34d" strokeOpacity="0.4" strokeWidth="0.8"/>
-        <text x="16" y="21" textAnchor="middle" fill="#fcd34d" fontSize="11" fontWeight="bold" fontFamily="Georgia,serif">G</text>
-      </svg>
-    ),
+    id: "crystals", label: "Crystals", locked: false,
+    items: [
+      { label: "White Crystals", val: "" }, { label: "Green Crystals", val: "" },
+      { label: "Blue Crystals", val: "" }, { label: "Red Crystals", val: "" },
+      { label: "Clear Crystals", val: "" },
+    ],
   },
   {
-    id: "DIAMONDS", label: "Diamonds", value: "6.6M", color: "#67e8f9",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <polygon points="16,3 27,13 16,29 5,13" fill="#0e7490" fillOpacity="0.4" stroke="#67e8f9" strokeWidth="1.5"/>
-        <polygon points="16,3  27,13 16,16" fill="#67e8f9" fillOpacity="0.22"/>
-        <polygon points="5,13  16,16 16,29" fill="#0891b2" fillOpacity="0.18"/>
-        <line x1="5" y1="13" x2="27" y2="13" stroke="#67e8f9" strokeWidth="1" strokeOpacity="0.55"/>
-        <circle cx="16" cy="12" r="1.5" fill="#67e8f9" fillOpacity="0.9"/>
-      </svg>
-    ),
-  },
-  {
-    id: "H-BUCKS", label: "H-Bucks", value: "$139,845", color: "#86efac",
-    svg: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <rect x="4"  y="9"  width="24" height="15" rx="3" fill="#14532d" stroke="#86efac" strokeWidth="1.5"/>
-        <rect x="4"  y="13" width="24" height="1.5" fill="#86efac" fillOpacity="0.12"/>
-        <rect x="4"  y="19" width="24" height="1.5" fill="#86efac" fillOpacity="0.12"/>
-        <circle cx="16" cy="16.5" r="4" fill="#166534" stroke="#86efac" strokeWidth="0.8"/>
-        <text x="16" y="20" textAnchor="middle" fill="#86efac" fontSize="8" fontWeight="bold" fontFamily="monospace">$</text>
-      </svg>
-    ),
+    id: "timeclocks", label: "Time Clocks", locked: false,
+    items: [
+      { label: "5-minute Time Clock", val: "55056" }, { label: "15-minute Time Clock", val: "25648" },
+      { label: "30-minute Time Clock", val: "9878" }, { label: "1Hour Time Clock", val: "54569" },
+      { label: "3 Hour Time Clock", val: "42123" }, { label: "8 Hour Time Clock", val: "3212" },
+      { label: "12 Hour Time Clock", val: "1247" }, { label: "24 Hour Time Clock", val: "947" },
+    ],
   },
 ];
 
@@ -177,9 +140,17 @@ const NAV_BTN = {
 };
 
 export default function TopBar() {
-  const ICON_SIZE = "3.2vh";
   const navigate  = useNavigate();
   const dispatch  = useDispatch();
+
+  // ── Resource dropdown ────────────────────────────────────────────
+  const [activeRes, setActiveRes] = useState(null);  // resource id with open dropdown
+  const resBarRef = useRef(null);
+
+  // ── Resources panel (RESOURCES button) ───────────────────────────
+  const [resPanelOpen, setResPanelOpen]   = useState(false);
+  const [activeCat,    setActiveCat]      = useState(null);
+  const resPanelRef = useRef(null);
 
   // ── Marketplace dropdown ─────────────────────────────────────────
   const [marketOpen, setMarketOpen] = useState(false);
@@ -191,12 +162,17 @@ export default function TopBar() {
   const [isConnecting,  setIsConnecting]  = useState(false);
   const [connected,     setConnected]     = useState(false);
 
-  // Close dropdown when clicking outside
+  // Close all dropdowns when clicking outside
   useEffect(() => {
     const handler = (e) => {
-      if (marketRef.current && !marketRef.current.contains(e.target)) {
+      if (marketRef.current && !marketRef.current.contains(e.target))
         setMarketOpen(false);
+      if (resPanelRef.current && !resPanelRef.current.contains(e.target)) {
+        setResPanelOpen(false);
+        setActiveCat(null);
       }
+      if (resBarRef.current && !resBarRef.current.contains(e.target))
+        setActiveRes(null);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -257,57 +233,190 @@ export default function TopBar() {
         gap: "8px",
       }}>
 
-        {/* 1. RESOURCES label */}
-        <button className="res-slot" style={{ ...NAV_BTN, flexShrink: 0 }}>RESOURCES</button>
+        {/* 1. RESOURCES label — opens category panel */}
+        <div ref={resPanelRef} style={{ position: "relative", flexShrink: 0 }}>
+          <button
+            className="res-slot"
+            onClick={() => { setResPanelOpen(o => !o); setActiveCat(null); }}
+            style={{
+              ...NAV_BTN,
+              borderColor: resPanelOpen ? "rgba(0,212,255,0.9)" : "rgba(0,212,255,0.55)",
+              display: "flex", alignItems: "center", gap: "6px",
+            }}
+          >
+            RESOURCES
+            <span style={{
+              fontSize: "8px", display: "inline-block",
+              transition: "transform 0.18s",
+              transform: resPanelOpen ? "rotate(180deg)" : "rotate(0deg)",
+            }}>▼</span>
+          </button>
+
+          {resPanelOpen && (
+            <div className="market-dropdown" style={{
+              position: "absolute", top: "calc(100% + 6px)", left: 0,
+              minWidth: 180,
+              background: "rgba(3,10,24,0.97)",
+              border: "1px solid rgba(0,212,255,0.35)",
+              borderRadius: 4,
+              backdropFilter: "blur(16px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.7), 0 0 20px rgba(0,212,255,0.08)",
+              zIndex: 100, overflow: "visible",
+            }}>
+              {RES_CATEGORIES.map((cat, i) => (
+                <div key={cat.id} style={{ position: "relative" }}>
+                  <div
+                    className="market-dropdown-item"
+                    onClick={() => !cat.locked && setActiveCat(activeCat === cat.id ? null : cat.id)}
+                    style={{
+                      padding: "9px 14px",
+                      fontFamily: "Orbitron,sans-serif",
+                      fontSize: "clamp(6px,0.6vw,8px)",
+                      fontWeight: "bold",
+                      letterSpacing: "0.12em",
+                      color: cat.locked ? "rgba(148,192,210,0.3)" : (activeCat === cat.id ? "#00D4FF" : "#7dd3fc"),
+                      borderBottom: i < RES_CATEGORIES.length - 1 ? "1px solid rgba(0,212,255,0.08)" : "none",
+                      display: "flex", justifyContent: "space-between", alignItems: "center",
+                      cursor: cat.locked ? "not-allowed" : "pointer",
+                      background: activeCat === cat.id ? "rgba(0,212,255,0.07)" : "transparent",
+                    }}
+                  >
+                    {cat.label}
+                    <span style={{ fontSize: 8, opacity: 0.6 }}>
+                      {cat.locked ? "🔒" : (activeCat === cat.id ? "▶" : "▷")}
+                    </span>
+                  </div>
+
+                  {/* Sub-items */}
+                  {activeCat === cat.id && cat.items.length > 0 && (
+                    <div className="market-dropdown" style={{
+                      position: "absolute", top: 0, left: "calc(100% + 2px)",
+                      minWidth: 200,
+                      background: "rgba(3,10,24,0.97)",
+                      border: "1px solid rgba(0,212,255,0.25)",
+                      borderRadius: 4,
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.7)",
+                      zIndex: 110,
+                    }}>
+                      {cat.items.map((item, j) => (
+                        <div key={j} style={{
+                          padding: "8px 14px",
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: "clamp(6px,0.55vw,7.5px)",
+                          fontWeight: "bold",
+                          letterSpacing: "0.1em",
+                          color: "#7dd3fc",
+                          borderBottom: j < cat.items.length - 1 ? "1px solid rgba(0,212,255,0.07)" : "none",
+                          display: "flex", justifyContent: "space-between",
+                          cursor: "pointer",
+                        }}
+                        className="market-dropdown-item"
+                        >
+                          <span>{item.label}</span>
+                          {item.val && <span style={{ color: "#facc15", marginLeft: 12 }}>{item.val}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* 2. Resource slots */}
-        <div style={{
-          flex: 1,
-          height: "3.6vh",
-          display: "flex",
-          alignItems: "stretch",
+        <div ref={resBarRef} style={{
+          flex: 1, height: "3.6vh",
+          display: "flex", alignItems: "stretch",
           background: "rgba(3,8,18,0.92)",
           border: "1px solid rgba(0,212,255,0.18)",
           borderRadius: "3px",
           backdropFilter: "blur(14px)",
-          overflow: "hidden",
-          minWidth: 0,
+          overflow: "visible",
+          minWidth: 0, position: "relative",
         }}>
           {RESOURCES.map((r, i) => (
-            <div key={r.id} className="res-slot" title={r.label} style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              padding: "0 8px",
-              borderRight: i < RESOURCES.length - 1 ? "1px solid rgba(0,212,255,0.1)" : "none",
-              minWidth: 0,
-            }}>
-              <div style={{ flexShrink: 0, width: ICON_SIZE, height: ICON_SIZE, minWidth: "14px" }}>
-                {r.svg}
+            <div key={r.id} style={{ flex: 1, position: "relative", minWidth: 0 }}>
+              {/* slot button */}
+              <div
+                className="res-slot"
+                title={r.label}
+                onClick={() => setActiveRes(activeRes === r.id ? null : r.id)}
+                style={{
+                  height: "100%", display: "flex", alignItems: "center",
+                  gap: "5px", padding: "0 8px", cursor: "pointer",
+                  borderRight: i < RESOURCES.length - 1 ? "1px solid rgba(0,212,255,0.1)" : "none",
+                  background: activeRes === r.id ? "rgba(0,212,255,0.09)" : "transparent",
+                }}
+              >
+                <img
+                  src={r.img} alt={r.label}
+                  style={{
+                    width: "clamp(20px,2.2vh,28px)",
+                    height: "clamp(20px,2.2vh,28px)",
+                    objectFit: "contain", flexShrink: 0,
+                    imageRendering: "crisp-edges",
+                  }}
+                />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: "clamp(4px,0.38vw,5px)",
+                    letterSpacing: "0.08em",
+                    color: "rgba(148,192,210,0.5)",
+                    textTransform: "uppercase",
+                    lineHeight: 1, marginBottom: "2px",
+                    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                  }}>{r.label}</div>
+                  <div style={{
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: "clamp(7px,0.65vw,9px)",
+                    fontWeight: "bold", letterSpacing: "0.05em",
+                    color: r.color, textShadow: `0 0 6px ${r.color}88`,
+                    whiteSpace: "nowrap", lineHeight: 1,
+                  }}>{r.value}</div>
+                </div>
               </div>
-              <div style={{ minWidth: 0 }}>
-                <div style={{
-                  fontFamily: "Orbitron,sans-serif",
-                  fontSize: "clamp(4px,0.42vw,5.5px)",
-                  letterSpacing: "0.08em",
-                  color: "rgba(148,192,210,0.5)",
-                  textTransform: "uppercase",
-                  lineHeight: 1,
-                  marginBottom: "2px",
-                  whiteSpace: "nowrap",
-                }}>{r.label}</div>
-                <div style={{
-                  fontFamily: "Orbitron,sans-serif",
-                  fontSize: "clamp(7px,0.7vw,9px)",
-                  fontWeight: "bold",
-                  letterSpacing: "0.05em",
-                  color: r.color,
-                  textShadow: `0 0 6px ${r.color}88`,
-                  whiteSpace: "nowrap",
-                  lineHeight: 1,
-                }}>{r.value}</div>
-              </div>
+
+              {/* dropdown */}
+              {activeRes === r.id && (
+                <div className="market-dropdown" style={{
+                  position: "absolute", top: "calc(100% + 4px)", left: "50%",
+                  transform: "translateX(-50%)",
+                  minWidth: 130,
+                  background: "rgba(3,10,24,0.97)",
+                  border: `1px solid ${r.color}55`,
+                  borderRadius: 4,
+                  backdropFilter: "blur(16px)",
+                  boxShadow: `0 8px 24px rgba(0,0,0,0.7), 0 0 12px ${r.color}18`,
+                  zIndex: 100, padding: "8px 12px",
+                }}>
+                  <div style={{
+                    fontFamily: "Orbitron,sans-serif", fontSize: 6.5, fontWeight: "bold",
+                    color: r.color, letterSpacing: "0.12em", marginBottom: 6,
+                    textShadow: `0 0 6px ${r.color}88`,
+                  }}>{r.label.toUpperCase()}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                    {[
+                      { label: "OPEN",   val: r.open   },
+                      { label: "STORED", val: r.stored },
+                    ].map(row => (
+                      <div key={row.label} style={{
+                        display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
+                      }}>
+                        <span style={{
+                          fontFamily: "Orbitron,sans-serif", fontSize: 6,
+                          color: "rgba(157,216,240,0.5)", letterSpacing: "0.1em",
+                        }}>{row.label}</span>
+                        <span style={{
+                          fontFamily: "Orbitron,sans-serif", fontSize: 8, fontWeight: "bold",
+                          color: r.color, letterSpacing: "0.05em",
+                        }}>{row.val}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

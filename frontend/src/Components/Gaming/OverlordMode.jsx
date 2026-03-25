@@ -11,8 +11,6 @@
 import { useState } from "react";
 import LazyImage from "./LazyImage";
 
-const C = "#f87171";   // overlord red accent
-const CG = "rgba(248,113,113,0.55)";
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const CSS = `
@@ -65,50 +63,46 @@ const CSS = `
 `;
 
 /* ══════════════════════════════════════════════════════════════════
-   ACTION BUTTONS — Fire / Scope / Weapon (no joystick)
+   ACTION BUTTONS — Fire / Scope / Kneel / Weapon
+   Layout mirrors Quest mode (manual top/left per button)
    ══════════════════════════════════════════════════════════════════ */
+const OVL_BTN_SIZE = 82;
 const OVERLORD_ACTIONS = [
   {
-    id: "FIRE", label: "Fire",
+    id: "FIRE",
     icon: (
-      <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-        <circle cx="16" cy="16" r="11" fill="rgba(248,113,113,0.18)" stroke="#f87171" strokeWidth="1.5" strokeOpacity="0.9"/>
-        <circle cx="16" cy="16" r="5"  fill="#f87171" fillOpacity="0.8"/>
-        <line x1="16" y1="5"  x2="16" y2="9"  stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.6"/>
-        <line x1="16" y1="23" x2="16" y2="27" stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.6"/>
-        <line x1="5"  y1="16" x2="9"  y2="16" stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.6"/>
-        <line x1="23" y1="16" x2="27" y2="16" stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.6"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <circle cx="16" cy="16" r="12" fill="rgba(248,113,113,0.15)" stroke="#f87171" strokeWidth="1.8" strokeOpacity="0.9"/>
+        <circle cx="16" cy="16" r="6"  fill="#f87171" fillOpacity="0.85"/>
       </svg>
     ),
     color: "#f87171", glow: "rgba(248,113,113,0.55)",
+    top: -50, left: 50,     // Fire — top-right
   },
   {
-    id: "SCOPE", label: "Scope",
+    id: "SCOPE",
     icon: (
-      <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-        <circle cx="16" cy="16" r="11" stroke="#fbbf24" strokeWidth="1.5" strokeOpacity="0.85"/>
-        <line x1="16" y1="5"  x2="16" y2="27" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.7"/>
-        <line x1="5"  y1="16" x2="27" y2="16" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.7"/>
-        <circle cx="16" cy="16" r="3" fill="#fbbf24" fillOpacity="0.7"/>
-        <circle cx="16" cy="16" r="6" stroke="#fbbf24" strokeWidth="0.6" strokeOpacity="0.4"/>
-        {/* Zoom arrow */}
-        <path d="M23 9 L27 5 M25 5 L27 5 L27 7" stroke="#fbbf24" strokeWidth="1" strokeOpacity="0.7" strokeLinecap="round"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <circle cx="16" cy="16" r="12" stroke="#fbbf24" strokeWidth="1.8" strokeOpacity="0.9"/>
+        <line x1="16" y1="2"  x2="16" y2="30" stroke="#fbbf24" strokeWidth="1.4" strokeOpacity="0.85"/>
+        <line x1="2"  y1="16" x2="30" y2="16" stroke="#fbbf24" strokeWidth="1.4" strokeOpacity="0.85"/>
       </svg>
     ),
     color: "#fbbf24", glow: "rgba(251,191,36,0.55)",
+    top: 60, left: 50,      // Scope — mid-right
   },
   {
-    id: "WEAPON", label: "Weapon",
+    id: "WEAPON",
     icon: (
-      <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-        <rect x="3"  y="13" width="19" height="7" rx="2" fill="#1e0a0a" stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.85"/>
-        <rect x="22" y="15" width="8"  height="3" rx="1.5" fill="#f87171" fillOpacity="0.65"/>
-        <rect x="9"  y="10" width="6"  height="3" rx="1"   fill="#f87171" fillOpacity="0.5"/>
-        <circle cx="7" cy="16.5" r="2" fill="#f87171" fillOpacity="0.45"/>
-        <line x1="15" y1="13" x2="15" y2="10" stroke="#f87171" strokeWidth="0.8" strokeOpacity="0.5"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <rect x="3"  y="12" width="20" height="8" rx="2" fill="#1e0a0a" stroke="#f87171" strokeWidth="1.5" strokeOpacity="0.9"/>
+        <rect x="23" y="14" width="7"  height="4" rx="1" fill="#f87171" fillOpacity="0.7"/>
+        <rect x="9"  y="9"  width="6"  height="3" rx="1" fill="#f87171" fillOpacity="0.6"/>
+        <circle cx="7" cy="16" r="2.5" fill="#f87171" fillOpacity="0.5"/>
       </svg>
     ),
     color: "#f87171", glow: "rgba(248,113,113,0.5)",
+    top: 140, left: -70,    // Weapon — bottom-left
   },
 ];
 
@@ -118,13 +112,11 @@ function OverlordActionButtons() {
   return (
     <div style={{
       position: "absolute",
-      right: "10%",
-      top: "50%",
-      transform: "translateY(-50%)",
+      right: "9%",
+      bottom: "14%",
       zIndex: 35,
-      display: "flex",
-      flexDirection: "column",
-      gap: 16,
+      width: 174,
+      height: 176,
       userSelect: "none",
     }}>
       {OVERLORD_ACTIONS.map(a => (
@@ -134,9 +126,12 @@ function OverlordActionButtons() {
           onMouseDown={() => setActive(a.id)}
           onMouseUp={() => setActive(null)}
           onMouseLeave={() => setActive(null)}
-          title={a.label}
+          title={a.id}
           style={{
-            width: 62, height: 62,
+            position: "absolute",
+            top:  a.top,
+            left: a.left,
+            width: OVL_BTN_SIZE, height: OVL_BTN_SIZE,
             borderRadius: "50%",
             background: active === a.id
               ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
@@ -148,21 +143,11 @@ function OverlordActionButtons() {
             backdropFilter: "blur(8px)",
             cursor: "pointer",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 3,
           }}
         >
           {a.icon}
-          <span style={{
-            fontFamily: "Orbitron, sans-serif",
-            fontSize: "clamp(4px, 0.45vw, 6px)",
-            fontWeight: "bold",
-            letterSpacing: "0.08em",
-            color: a.color,
-            textShadow: `0 0 6px ${a.glow}`,
-          }}>{a.label}</span>
         </button>
       ))}
     </div>
@@ -254,7 +239,7 @@ function SpaceView() {
 
       {/* Target HUD — scanning */}
       <div style={{
-        position: "absolute", bottom: "22%", right: "18%",
+        position: "absolute", bottom: "36%", right: "18%",
         width: 130, padding: "8px 12px",
         background: "rgba(28,4,4,0.85)",
         border: "1px solid rgba(248,113,113,0.3)",

@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 /* ── Event data ───────────────────────────────────────────────── */
+// locked: true = coming soon (game not yet created)
 const EVENT_DATA = {
   Limited: [
-    { title: "Invite Friends",           sub: "Event Ongoing",  time: null },
-    { title: "Cultural Subordinate City", sub: "Event Ongoing", time: "1d 18:17" },
-    { title: "Ranger Knight Order",      sub: "Event Ongoing",  time: null },
-    { title: "Auction House",            sub: "Ends in",        time: "1d 18:17" },
-    { title: "Lost Treasures",           sub: "Ends in",        time: "2d 18:17" },
-    { title: "Feasting Revelry",         sub: "Ends in",        time: "2d 18:17" },
-    { title: "Grace of Star Trail",      sub: "Event Ongoing",  time: null },
+    { title: "Invite Friends",      status: "Event Ongoing", time: null,       locked: false },
+    { title: "Land Base Oversight", status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Quests Trail",        status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Contract Killer",     status: "Event Ongoing", time: null,       locked: true  },
+    { title: "Mazed Mission",       status: "Ends in",       time: "1d 18:17", locked: true  },
+    { title: "Flaming Asteroid",    status: "Ends in",       time: "2d 06:17", locked: true  },
+    { title: "Refining Master",     status: "Ends in",       time: "2d 06:17", locked: true  },
+    { title: "Star Gaze",           status: "Ends in",       time: "6d 18:17", locked: true  },
   ],
   Activities: [
-    { title: "Daily Login Bonus",        sub: "Resets daily",   time: null },
-    { title: "Battle Pass",              sub: "Season ends in", time: "12d 04:00" },
-    { title: "Alliance War",             sub: "Event Ongoing",  time: null },
-    { title: "Weekly Challenge",         sub: "Ends in",        time: "4d 10:30" },
+    { title: "Daily Login Bonus",       status: "Resets daily",   time: null,        locked: false },
+    { title: "Battle Pass",             status: "Season ends in", time: "12d 04:00", locked: true  },
+    { title: "Alliance War",            status: "Event Ongoing",  time: null,        locked: true  },
+    { title: "Weekly Challenge",        status: "Ends in",        time: "4d 10:30",  locked: true  },
   ],
   Competition: [
-    { title: "Galactic Cup",             sub: "Starts in",      time: "3d 00:00" },
-    { title: "Speed Racing Tournament",  sub: "Ends in",        time: "5d 12:00" },
-    { title: "Overlord Championship",    sub: "Event Ongoing",  time: null },
+    { title: "Galactic Cup",            status: "Starts in",      time: "3d 00:00",  locked: true  },
+    { title: "Speed Racing Tournament", status: "Ends in",        time: "5d 12:00",  locked: true  },
+    { title: "Overlord Championship",   status: "Event Ongoing",  time: null,        locked: true  },
   ],
 };
 
@@ -30,28 +32,32 @@ const ITEM_TABS = ["Inventory", "Weapons", "Rewards", "Specialists"];
 
 const ITEM_DATA = {
   Inventory: [
-    { name: "H-Crystal",   qty: 24,  color: "#c4b5fd", icon: "💎" },
-    { name: "Fuel Cell",   qty: 8,   color: "#fb923c", icon: "⚡" },
-    { name: "Shield Ore",  qty: 15,  color: "#94a3b8", icon: "🪨" },
-    { name: "Gold Bar",    qty: 3,   color: "#fcd34d", icon: "🟡" },
-    { name: "Nano Alloy",  qty: 50,  color: "#cbd5e1", icon: "⚙️" },
-    { name: "Stasis Pod",  qty: 2,   color: "#67e8f9", icon: "🧊" },
-    { name: "Food Pack",   qty: 120, color: "#6ee7b7", icon: "🌿" },
-    { name: "Repair Kit",  qty: 7,   color: "#f87171", icon: "🔧" },
-    { name: "Star Map",    qty: 1,   color: "#e2e8f0", icon: "🗺️" },
-    { name: "Dark Matter", qty: 4,   color: "#a78bfa", icon: "🌀" },
-    { name: "Plasma Core", qty: 6,   color: "#38bdf8", icon: "🔵" },
-    { name: "Credits",     qty: 999, color: "#fcd34d", icon: "💰" },
+    { name: "Quest Items",   qty: 0, color: "#c4b5fd", icon: "📜", locked: true },
+    { name: "Banners",       qty: 0, color: "#fcd34d", icon: "🚩", locked: true },
+    { name: "Medals",        qty: 0, color: "#fb923c", icon: "🏅", locked: true },
+    { name: "Skins",         qty: 0, color: "#38bdf8", icon: "🎨", locked: true },
+    { name: "Anti-Gravity",  qty: 0, color: "#a78bfa", icon: "🔮", locked: true },
+    { name: "Plasma Rods",   qty: 0, color: "#f87171", icon: "⚡", locked: true },
+    { name: "Dark Matter",   qty: 0, color: "#818cf8", icon: "🌀", locked: true },
+    { name: "Tech Books",    qty: 0, color: "#67e8f9", icon: "📗", locked: true },
+    { name: "Engines",       qty: 0, color: "#fb923c", icon: "⚙️", locked: true },
+    { name: "Vehicles",      qty: 0, color: "#6ee7b7", icon: "🚗", locked: true },
+    { name: "Tools",         qty: 0, color: "#94a3b8", icon: "🔧", locked: true },
+    { name: "Aid Packs",     qty: 0, color: "#f87171", icon: "🩹", locked: true },
   ],
   Weapons: [
-    { name: "Plasma Rifle",   qty: 1, color: "#38bdf8", icon: "🔫", rarity: "RARE"    },
-    { name: "Ion Cannon",     qty: 1, color: "#f87171", icon: "🚀", rarity: "EPIC"    },
-    { name: "Nano Blade",     qty: 2, color: "#a78bfa", icon: "⚔️",  rarity: "UNCOMMON"},
-    { name: "Void Sniper",    qty: 1, color: "#fcd34d", icon: "🎯", rarity: "LEGEND"  },
-    { name: "EMP Grenade",    qty: 5, color: "#6ee7b7", icon: "💥", rarity: "COMMON"  },
-    { name: "Shield Gauntlet",qty: 1, color: "#67e8f9", icon: "🛡️",  rarity: "RARE"    },
-    { name: "Flare Gun",      qty: 3, color: "#fb923c", icon: "🔦", rarity: "COMMON"  },
-    { name: "Gravity Mine",   qty: 2, color: "#c4b5fd", icon: "🪤", rarity: "UNCOMMON"},
+    { name: "Blades",      color: "#38bdf8", icon: "⚔️",  locked: true },
+    { name: "Guns",        color: "#f87171", icon: "🔫", locked: true },
+    { name: "Mines",       color: "#6ee7b7", icon: "💣", locked: true },
+    { name: "Grenades",    color: "#fb923c", icon: "💥", locked: true },
+    { name: "Helmet",      color: "#c4b5fd", icon: "⛑️",  locked: true },
+    { name: "Suits",       color: "#67e8f9", icon: "🥋", locked: true },
+    { name: "Gloves",      color: "#a78bfa", icon: "🧤", locked: true },
+    { name: "Boots",       color: "#fcd34d", icon: "👢", locked: true },
+    { name: "Banners",     color: "#f87171", icon: "🚩", locked: true },
+    { name: "Medals",      color: "#fcd34d", icon: "🏅", locked: true },
+    { name: "Shield",      color: "#38bdf8", icon: "🛡️",  locked: true },
+    { name: "Ammo Packs",  color: "#94a3b8", icon: "📦", locked: true },
   ],
   Rewards: [
     { name: "Battle Chest",   qty: 2,  color: "#fcd34d", icon: "📦", status: "OPEN"    },
@@ -61,14 +67,36 @@ const ITEM_DATA = {
     { name: "Quest Token",    qty: 12, color: "#a78bfa", icon: "🪙", status: "OPEN"    },
     { name: "Race Medal",     qty: 1,  color: "#fb923c", icon: "🥇", status: "CLAIMED" },
   ],
-  Specialists: [
-    { name: "Commander Rex",  role: "COMBAT",    lvl: 14, color: "#f87171", icon: "⚔️"  },
-    { name: "Dr. Nova",       role: "SCIENCE",   lvl: 9,  color: "#38bdf8", icon: "🔬" },
-    { name: "Warden-7",       role: "DEFENSE",   lvl: 11, color: "#94a3b8", icon: "🛡️"  },
-    { name: "Pilot Zara",     role: "RACING",    lvl: 16, color: "#22c55e", icon: "🚗" },
-    { name: "Oracle",         role: "STRATEGY",  lvl: 8,  color: "#c4b5fd", icon: "🔮" },
-    { name: "Mechanic Kole",  role: "ENGINEER",  lvl: 12, color: "#fb923c", icon: "🔧" },
-  ],
+};
+
+/* ── Specialist categories & data ─────────────────────────────── */
+const SPECIALIST_CATEGORIES = [
+  "Offence", "Defence", "Racing", "Pilot",
+  "Weapons", "Engineering", "Science", "Hospital", "Food",
+];
+
+// locked = game not yet created; set to false when game is live
+const CATEGORY_LOCKED = {
+  Offence: true, Defence: true, Racing: true, Pilot: true,
+  Weapons: true, Engineering: true, Science: true, Hospital: true, Food: true,
+};
+
+const CATEGORY_COLOR = {
+  Offence: "#f87171", Defence: "#94a3b8", Racing: "#22c55e", Pilot: "#38bdf8",
+  Weapons: "#fb923c", Engineering: "#fcd34d", Science: "#a78bfa", Hospital: "#f0abfc", Food: "#6ee7b7",
+};
+
+const SPECIALISTS_BY_CATEGORY = {
+  Offence:     [{ name: "Commander Rex", role: "COMBAT",    color: "#f87171", icon: "⚔️"  }],
+  Defence:     [{ name: "Warden-7",      role: "DEFENSE",   color: "#94a3b8", icon: "🛡️"  }],
+  Racing:      [{ name: "Pilot Zara",    role: "RACING",    color: "#22c55e", icon: "🚗"  }],
+  Pilot:       [{ name: "Ace Vega",      role: "PILOT",     color: "#38bdf8", icon: "✈️"  }],
+  Weapons:     [{ name: "Iron Mace",     role: "WEAPONS",   color: "#fb923c", icon: "🔫"  }],
+  Engineering: [{ name: "Mechanic Kole", role: "ENGINEER",  color: "#fcd34d", icon: "🔧"  }],
+  Science:     [{ name: "Dr. Nova",      role: "SCIENCE",   color: "#a78bfa", icon: "🔬"  },
+                { name: "Oracle",        role: "STRATEGY",  color: "#c4b5fd", icon: "🔮"  }],
+  Hospital:    [{ name: "Medic Ryn",     role: "MEDIC",     color: "#f0abfc", icon: "💊"  }],
+  Food:        [{ name: "Chef Arak",     role: "SUPPLY",    color: "#6ee7b7", icon: "🌿"  }],
 };
 
 const RARITY_COLOR = {
@@ -172,187 +200,329 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children }) {
 
 /* ── Events panel ────────────────────────────────────────────── */
 function EventsPanel({ onClose }) {
-  const [tab, setTab] = useState("Limited");
+  const [tab,    setTab]    = useState("Limited");
+  const [detail, setDetail] = useState(null);   // event being viewed
+
   return (
     <SidePanel title="EVENT CENTER" onClose={onClose}>
+
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)" }}>
         {["Limited","Activities","Competition"].map(t => (
-          <button key={t} className="hud-panel-tab" onClick={() => setTab(t)} style={{
-            flex:1, padding:"7px 4px", background:"none", border:"none",
-            borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
-            fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
-            letterSpacing:"0.08em",
-            color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.5)",
-            whiteSpace:"nowrap",
-          }}>{t}</button>
+          <button key={t} className="hud-panel-tab"
+            onClick={() => { setTab(t); setDetail(null); }}
+            style={{
+              flex:1, padding:"7px 4px", background:"none", border:"none",
+              borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
+              fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+              letterSpacing:"0.08em",
+              color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.5)",
+              whiteSpace:"nowrap",
+            }}>{t}</button>
         ))}
       </div>
-      {/* List */}
-      <div style={{ overflowY:"auto", flex:1 }}>
-        {EVENT_DATA[tab].map((ev, i) => (
-          <div key={i} className="hud-event-row" style={{
-            padding:"9px 14px",
-            borderBottom:"1px solid rgba(0,229,255,0.06)",
-          }}>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold",
-              letterSpacing:"0.08em", color:"#c7e9f7", marginBottom:3 }}>{ev.title}</div>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
-              color: ev.time ? "#facc15" : "rgba(0,229,255,0.5)", letterSpacing:"0.06em" }}>
-              {ev.time ? `⏱ ${ev.sub} ${ev.time}` : `● ${ev.sub}`}
+
+      {/* ── Event list ── */}
+      {!detail && (
+        <div style={{ overflowY:"auto", flex:1 }}>
+          {EVENT_DATA[tab].map((ev, i) => (
+            <div key={i} className="hud-event-row"
+              onClick={() => !ev.locked && setDetail(ev)}
+              style={{
+                padding:"9px 14px",
+                borderBottom:"1px solid rgba(0,229,255,0.06)",
+                opacity: ev.locked ? 0.45 : 1,
+                cursor: ev.locked ? "not-allowed" : "pointer",
+                display:"flex", alignItems:"center", justifyContent:"space-between",
+              }}>
+              <div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold",
+                  letterSpacing:"0.08em", color: ev.locked ? "rgba(157,216,240,0.5)" : "#c7e9f7",
+                  marginBottom:3,
+                }}>{ev.title}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
+                  color: ev.time ? "#facc15" : "rgba(0,229,255,0.5)", letterSpacing:"0.06em",
+                }}>
+                  {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
+                </div>
+              </div>
+              {ev.locked
+                ? <span style={{ fontSize:11, opacity:0.5 }}>🔒</span>
+                : <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
+                    color:"rgba(0,229,255,0.4)", letterSpacing:"0.06em",
+                  }}>VIEW →</span>
+              }
             </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Event detail view ── */}
+      {detail && (
+        <div style={{ overflowY:"auto", flex:1, padding:"12px 14px" }}>
+          <button onClick={() => setDetail(null)} style={{
+            background:"none", border:"none", cursor:"pointer", padding:"0 0 10px 0",
+            fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(0,229,255,0.6)",
+            letterSpacing:"0.1em",
+          }}>← BACK</button>
+
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold",
+            color:"#c7e9f7", letterSpacing:"0.1em", marginBottom:6,
+          }}>{detail.title}</div>
+
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
+            color: detail.time ? "#facc15" : "rgba(0,229,255,0.6)",
+            letterSpacing:"0.06em", marginBottom:14,
+          }}>
+            {detail.time ? `⏱ ${detail.status} ${detail.time}` : `● ${detail.status}`}
           </div>
-        ))}
-      </div>
+
+          <div style={{ height:1, background:"rgba(0,229,255,0.1)", marginBottom:12 }}/>
+
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
+            color:"rgba(157,216,240,0.45)", lineHeight:1.7,
+          }}>
+            Full event details, rewards, and participation options will be available when this event launches.
+          </div>
+        </div>
+      )}
+
     </SidePanel>
   );
 }
 
 /* ── Items panel ─────────────────────────────────────────────── */
 function ItemsPanel({ onClose }) {
-  const [tab, setTab] = useState("Inventory");
-  const items = ITEM_DATA[tab];
+  const [tab,          setTab]          = useState("Inventory");
+  const [specCategory, setSpecCategory] = useState(null);   // selected specialist category
+  const [profile,      setProfile]      = useState(null);   // specialist being viewed
+  const items = ITEM_DATA[tab] || [];
 
   return (
     <SidePanel title="ITEMS" accentColor="#38bdf8" onClose={onClose}>
-      {/* Tabs */}
-      <div style={{
-        display:"flex", borderBottom:"1px solid rgba(56,189,248,0.1)",
-        overflowX:"auto",
-      }}>
+
+      {/* ── Tabs ── */}
+      <div style={{ display:"flex", borderBottom:"1px solid rgba(56,189,248,0.1)", overflowX:"auto" }}>
         {ITEM_TABS.map(t => (
-          <button key={t} className="hud-panel-tab" onClick={() => setTab(t)} style={{
-            flex:1, padding:"7px 6px", background:"none", border:"none",
-            borderBottom: tab === t ? "2px solid #38bdf8" : "2px solid transparent",
-            fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold",
-            letterSpacing:"0.06em",
-            color: tab === t ? "#38bdf8" : "rgba(100,170,210,0.5)",
-            whiteSpace:"nowrap", minWidth:0,
-          }}>{t}</button>
+          <button key={t} className="hud-panel-tab"
+            onClick={() => { setTab(t); setSpecCategory(null); setProfile(null); }}
+            style={{
+              flex:1, padding:"7px 6px", background:"none", border:"none",
+              borderBottom: tab === t ? "2px solid #38bdf8" : "2px solid transparent",
+              fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold",
+              letterSpacing:"0.06em",
+              color: tab === t ? "#38bdf8" : "rgba(100,170,210,0.5)",
+              whiteSpace:"nowrap", minWidth:0,
+            }}>{t}</button>
         ))}
       </div>
 
-      {/* Grid */}
-      <div style={{
-        overflowY:"auto", flex:1, padding:"10px",
-        display:"grid",
-        gridTemplateColumns: tab === "Specialists" ? "1fr" : "repeat(4, 1fr)",
-        gap: tab === "Specialists" ? "6px" : "6px",
-        alignContent:"start",
-      }}>
+      {/* ── Content ── */}
+      <div style={{ overflowY:"auto", flex:1, padding:"10px", alignContent:"start" }}>
 
-        {tab === "Inventory" && items.map((item, i) => (
-          <div key={i} className="hud-item-cell" style={{
-            background:"rgba(3,10,28,0.88)",
-            border:`1px solid ${item.color}33`,
-            borderRadius:4,
-            padding:"8px 4px 5px",
-            display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-            boxShadow:`0 0 8px ${item.color}18`,
-            position:"relative",
-          }}>
-            <div style={{ fontSize:18, lineHeight:1 }}>{item.icon}</div>
-            <div style={{
-              fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
-              color: item.color, textAlign:"center", letterSpacing:"0.05em",
-              lineHeight:1.2,
-            }}>{item.name}</div>
-            {/* Qty badge */}
-            <div style={{
-              position:"absolute", top:3, right:4,
-              fontFamily:"Orbitron,sans-serif", fontSize:6, fontWeight:"bold",
-              color:"rgba(255,255,255,0.6)",
-            }}>{item.qty}</div>
+        {/* INVENTORY */}
+        {tab === "Inventory" && (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+            {items.map((item, i) => (
+              <div key={i} className="hud-item-cell" style={{
+                background: item.locked ? "rgba(3,10,28,0.5)" : "rgba(3,10,28,0.88)",
+                border:`1px solid ${item.color}${item.locked ? "22" : "33"}`,
+                borderRadius:4, padding:"8px 4px 5px",
+                display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+                boxShadow:`0 0 8px ${item.color}${item.locked ? "00" : "18"}`,
+                position:"relative", opacity: item.locked ? 0.55 : 1,
+                cursor: item.locked ? "not-allowed" : "pointer",
+              }}>
+                <div style={{ fontSize:18, lineHeight:1, filter: item.locked ? "grayscale(1)" : "none" }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
+                  color: item.locked ? "rgba(148,192,210,0.4)" : item.color,
+                  textAlign:"center", letterSpacing:"0.05em", lineHeight:1.2,
+                }}>{item.name}</div>
+                {item.locked
+                  ? <div style={{ fontSize:8, position:"absolute", top:3, right:4 }}>🔒</div>
+                  : <div style={{ position:"absolute", top:3, right:4,
+                      fontFamily:"Orbitron,sans-serif", fontSize:6, fontWeight:"bold",
+                      color:"rgba(255,255,255,0.6)",
+                    }}>{item.qty}</div>
+                }
+              </div>
+            ))}
           </div>
-        ))}
+        )}
 
-        {tab === "Weapons" && items.map((item, i) => (
-          <div key={i} className="hud-item-cell" style={{
-            background:"rgba(3,10,28,0.88)",
-            border:`1px solid ${RARITY_COLOR[item.rarity]}44`,
-            borderRadius:4,
-            padding:"8px 4px 5px",
-            display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-            boxShadow:`0 0 8px ${RARITY_COLOR[item.rarity]}18`,
-            position:"relative",
-          }}>
-            <div style={{ fontSize:18, lineHeight:1 }}>{item.icon}</div>
-            <div style={{
-              fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
-              color:"#c7e9f7", textAlign:"center", lineHeight:1.2,
-            }}>{item.name}</div>
-            <div style={{
-              fontFamily:"Orbitron,sans-serif", fontSize:5,
-              color: RARITY_COLOR[item.rarity], letterSpacing:"0.08em",
-            }}>{item.rarity}</div>
+        {/* WEAPONS */}
+        {tab === "Weapons" && (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+            {items.map((item, i) => (
+              <div key={i} className="hud-item-cell" style={{
+                background:"rgba(3,10,28,0.5)",
+                border:`1px solid ${item.color}22`,
+                borderRadius:4, padding:"8px 4px 5px",
+                display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+                position:"relative", opacity:0.55, cursor:"not-allowed",
+              }}>
+                <div style={{ fontSize:18, lineHeight:1, filter:"grayscale(1)" }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
+                  color:"rgba(148,192,210,0.4)", textAlign:"center", lineHeight:1.2,
+                }}>{item.name}</div>
+                <div style={{ fontSize:8, position:"absolute", top:3, right:4 }}>🔒</div>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
 
-        {tab === "Rewards" && items.map((item, i) => (
-          <div key={i} className="hud-item-cell" style={{
-            background:"rgba(3,10,28,0.88)",
-            border:`1px solid ${item.color}33`,
-            borderRadius:4,
-            padding:"8px 4px 5px",
-            display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-            position:"relative", opacity: item.status === "CLAIMED" ? 0.45 : 1,
-          }}>
-            <div style={{ fontSize:20, lineHeight:1 }}>{item.icon}</div>
-            <div style={{
-              fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
-              color:"#c7e9f7", textAlign:"center", lineHeight:1.2,
-            }}>{item.name}</div>
-            {item.status !== "CLAIMED" && (
-              <div style={{
-                fontFamily:"Orbitron,sans-serif", fontSize:5,
-                color: item.status === "OPEN" ? "#fcd34d" : "#4ade80",
-                fontWeight:"bold", letterSpacing:"0.08em",
-              }}>{item.status}</div>
-            )}
-            {item.qty > 1 && (
-              <div style={{
-                position:"absolute", top:3, right:4,
-                fontFamily:"Orbitron,sans-serif", fontSize:6,
-                color:"rgba(255,255,255,0.55)",
-              }}>{item.qty}</div>
-            )}
+        {/* REWARDS */}
+        {tab === "Rewards" && (
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+            {items.map((item, i) => (
+              <div key={i} className="hud-item-cell" style={{
+                background:"rgba(3,10,28,0.88)", border:`1px solid ${item.color}33`,
+                borderRadius:4, padding:"8px 4px 5px",
+                display:"flex", flexDirection:"column", alignItems:"center", gap:3,
+                position:"relative", opacity: item.status === "CLAIMED" ? 0.45 : 1,
+              }}>
+                <div style={{ fontSize:20, lineHeight:1 }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
+                  color:"#c7e9f7", textAlign:"center", lineHeight:1.2,
+                }}>{item.name}</div>
+                {item.status !== "CLAIMED" && (
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5,
+                    color: item.status === "OPEN" ? "#fcd34d" : "#4ade80",
+                    fontWeight:"bold", letterSpacing:"0.08em",
+                  }}>{item.status}</div>
+                )}
+                {item.qty > 1 && (
+                  <div style={{ position:"absolute", top:3, right:4,
+                    fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.55)",
+                  }}>{item.qty}</div>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
+        )}
 
-        {tab === "Specialists" && items.map((item, i) => (
-          <div key={i} className="hud-item-cell" style={{
-            background:"rgba(3,10,28,0.88)",
-            border:`1px solid ${item.color}33`,
-            borderRadius:4,
-            padding:"8px 10px",
-            display:"flex", alignItems:"center", gap:10,
-          }}>
+        {/* SPECIALISTS */}
+        {tab === "Specialists" && !specCategory && !profile && (
+          <>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.5)",
+              letterSpacing:"0.12em", marginBottom:8,
+            }}>SELECT CATEGORY</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:6 }}>
+              {SPECIALIST_CATEGORIES.map(cat => {
+                const locked = CATEGORY_LOCKED[cat];
+                const color  = CATEGORY_COLOR[cat];
+                return (
+                  <button key={cat} className="hud-item-cell"
+                    onClick={() => !locked && setSpecCategory(cat)}
+                    style={{
+                      background: locked ? "rgba(3,10,28,0.6)" : "rgba(3,10,28,0.88)",
+                      border:`1px solid ${color}${locked ? "22" : "55"}`,
+                      borderRadius:4, padding:"10px 6px",
+                      display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+                      cursor: locked ? "not-allowed" : "pointer",
+                      opacity: locked ? 0.55 : 1,
+                      position:"relative",
+                    }}>
+                    <div style={{ fontSize:16 }}>
+                      {locked ? "🔒" : "👤"}
+                    </div>
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, fontWeight:"bold",
+                      color: locked ? "rgba(157,216,240,0.4)" : color,
+                      letterSpacing:"0.06em", textAlign:"center",
+                    }}>{cat.toUpperCase()}</div>
+                    {locked && (
+                      <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:4.5,
+                        color:"rgba(157,216,240,0.3)", letterSpacing:"0.1em",
+                      }}>COMING SOON</div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {/* SPECIALISTS — category grid */}
+        {tab === "Specialists" && specCategory && !profile && (
+          <>
+            <button onClick={() => setSpecCategory(null)} style={{
+              background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
+              fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.6)",
+              letterSpacing:"0.1em",
+            }}>← BACK</button>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+              color: CATEGORY_COLOR[specCategory], letterSpacing:"0.12em", marginBottom:8,
+            }}>{specCategory.toUpperCase()}</div>
+            <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
+              {(SPECIALISTS_BY_CATEGORY[specCategory] || []).map((s, i) => (
+                <div key={i} className="hud-item-cell"
+                  onClick={() => setProfile(s)}
+                  style={{
+                    background:"rgba(3,10,28,0.88)", border:`1px solid ${s.color}33`,
+                    borderRadius:4, padding:"8px 10px",
+                    display:"flex", alignItems:"center", gap:10, cursor:"pointer",
+                  }}>
+                  <div style={{
+                    width:36, height:36, borderRadius:"50%",
+                    background:`radial-gradient(circle at 35% 30%, ${s.color}44, ${s.color}18)`,
+                    border:`1.5px solid ${s.color}88`,
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    fontSize:18, flexShrink:0,
+                  }}>{s.icon}</div>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+                      color:"#c7e9f7", letterSpacing:"0.06em",
+                      whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
+                    }}>{s.name}</div>
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:s.color,
+                      letterSpacing:"0.06em", marginTop:3,
+                    }}>{s.role}</div>
+                  </div>
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
+                    color:"rgba(56,189,248,0.4)", letterSpacing:"0.06em",
+                  }}>VIEW →</div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* SPECIALISTS — profile view */}
+        {tab === "Specialists" && profile && (
+          <>
+            <button onClick={() => setProfile(null)} style={{
+              background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
+              fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.6)",
+              letterSpacing:"0.1em",
+            }}>← BACK</button>
             <div style={{
-              width:36, height:36, borderRadius:"50%",
-              background:`radial-gradient(circle at 35% 30%, ${item.color}44, ${item.color}18)`,
-              border:`1.5px solid ${item.color}88`,
-              display:"flex", alignItems:"center", justifyContent:"center",
-              fontSize:18, flexShrink:0,
-            }}>{item.icon}</div>
-            <div style={{ flex:1, minWidth:0 }}>
+              background:"rgba(3,10,28,0.92)", border:`1px solid ${profile.color}44`,
+              borderRadius:6, padding:"16px 14px",
+              display:"flex", flexDirection:"column", alignItems:"center", gap:10,
+              boxShadow:`0 0 24px ${profile.color}22`,
+            }}>
               <div style={{
-                fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
-                color:"#c7e9f7", letterSpacing:"0.06em",
-                whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
-              }}>{item.name}</div>
-              <div style={{ display:"flex", justifyContent:"space-between", marginTop:3 }}>
-                <span style={{
-                  fontFamily:"Orbitron,sans-serif", fontSize:6, color: item.color,
-                  letterSpacing:"0.06em",
-                }}>{item.role}</span>
-                <span style={{
-                  fontFamily:"Orbitron,sans-serif", fontSize:6,
-                  color:"rgba(157,216,240,0.55)",
-                }}>LVL {item.lvl}</span>
+                width:64, height:64, borderRadius:"50%",
+                background:`radial-gradient(circle at 35% 30%, ${profile.color}55, ${profile.color}22)`,
+                border:`2px solid ${profile.color}99`,
+                display:"flex", alignItems:"center", justifyContent:"center",
+                fontSize:32,
+              }}>{profile.icon}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold",
+                color:"#c7e9f7", letterSpacing:"0.1em", textAlign:"center",
+              }}>{profile.name}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7,
+                color:profile.color, letterSpacing:"0.12em",
+              }}>{profile.role}</div>
+              <div style={{ width:"100%", height:1, background:`${profile.color}22`, margin:"4px 0" }}/>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
+                color:"rgba(157,216,240,0.45)", textAlign:"center", lineHeight:1.6,
+              }}>
+                Specialist profile — full stats and abilities will be available when the game launches.
               </div>
             </div>
-          </div>
-        ))}
+          </>
+        )}
 
       </div>
     </SidePanel>
@@ -989,24 +1159,36 @@ function ChatPanel({ onClose }) {
 /* ── Main component ──────────────────────────────────────────── */
 export default function SidebarPanel() {
   const [openPanel, setOpenPanel] = useState(null);
+  const sidebarRef = useRef(null);
 
   const toggle = (key) => setOpenPanel(p => p === key ? null : key);
+
+  // Close panel when clicking anywhere outside the sidebar area
+  useEffect(() => {
+    const handler = (e) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+        setOpenPanel(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const activeStyle = (key) => openPanel === key
     ? { background: "rgba(0,229,255,0.12)", borderLeftColor: "#00ffff", color: "#fff" }
     : {};
 
   return (
-    <>
+    <div ref={sidebarRef}>
       <style>{CSS}</style>
 
       {/* ── Buttons ── */}
       <div style={{
         position: "absolute",
         left: "91.5vw", right: "2.5vw",
-        top: "21vh", bottom: "21vh",
+        top: "18vh",
         display: "flex", flexDirection: "column",
-        justifyContent: "space-evenly",
+        gap: 4,
         zIndex: 30, padding: "0 4px",
       }}>
         <button className="hud-sidebar-btn" onClick={() => toggle("events")}
@@ -1035,6 +1217,6 @@ export default function SidebarPanel() {
       {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} onOpenMail={() => setOpenPanel("mail")} />}
       {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} />}
       {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} />}
-    </>
+    </div>
   );
 }

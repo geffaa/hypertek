@@ -28,15 +28,25 @@ function Footer() {
       {/* Top divider */}
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blue-600/60 to-transparent" />
 
-      <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-6 flex flex-col items-center gap-6">
+      <div className="mx-auto max-w-[1400px] px-6 pt-10 pb-3 flex flex-col items-center gap-4">
 
-        {/* Logo + brand name */}
-        <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
-          <img src={Logo} alt="Hypertek Logo" className="h-9 w-auto object-contain" />
-          <span className="text-white font-[Goldman] font-bold text-lg tracking-widest uppercase">
-            Hypertek
-          </span>
-        </Link>
+        {/* Logo + brand name + Waitlist button inline */}
+        <div className="flex items-center gap-4 flex-wrap justify-center">
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-3">
+            <img src={Logo} alt="Hypertek Logo" className="h-9 w-auto object-contain" />
+            <span className="text-white font-[Goldman] font-bold text-lg tracking-widest uppercase">
+              Hypertek
+            </span>
+          </Link>
+          <Link
+            to="/waitlist"
+            onClick={() => window.scrollTo(0, 0)}
+            className="inline-flex items-center px-4 py-1.5 rounded-lg font-semibold text-xs text-white transition-all duration-200 hover:opacity-90"
+            style={{ background: "#002AA8", border: "1px solid rgba(255,255,255,0.15)" }}
+          >
+            Join the Waitlist
+          </Link>
+        </div>
 
         {/* Nav links */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/80">
@@ -52,25 +62,15 @@ function Footer() {
           ))}
         </nav>
 
-        {/* Waitlist CTA */}
-        <Link
-          to="/waitlist"
-          onClick={() => window.scrollTo(0, 0)}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:opacity-90"
-          style={{ background: "#002AA8", border: "1px solid rgba(255,255,255,0.15)" }}
-        >
-          Join the Waitlist
-        </Link>
-
         {/* Copyright */}
         <p className="text-white/50 text-xs tracking-wide">
-          @ {currentYear}. All Right Reserved
+          @ {currentYear}. All Rights Reserved
         </p>
 
       </div>
 
       {/* Social icons — full width with blue pills */}
-      <div className="relative flex items-center justify-center w-full h-[52px]">
+      <div className="relative flex items-center justify-center w-full h-[52px] mt-0">
 
         {/* Left blue pill */}
         <div

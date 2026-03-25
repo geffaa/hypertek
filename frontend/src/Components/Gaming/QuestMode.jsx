@@ -10,7 +10,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import LazyImage from "./LazyImage";
 
-const C = "#38bdf8";   // quest cyan-blue accent
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const CSS = `
@@ -176,50 +175,70 @@ function Joystick2D({ accentColor = "#38bdf8" }) {
    ══════════════════════════════════════════════════════════════════ */
 const ACTIONS = [
   {
-    id: "SCOPE", label: "Scope",
+    id: "SCOPE",
     icon: (
-      <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-        <circle cx="16" cy="16" r="11" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.8"/>
-        <line x1="16" y1="5"  x2="16" y2="27" stroke="#38bdf8" strokeWidth="1" strokeOpacity="0.7"/>
-        <line x1="5"  y1="16" x2="27" y2="16" stroke="#38bdf8" strokeWidth="1" strokeOpacity="0.7"/>
-        <circle cx="16" cy="16" r="2.5" fill="#38bdf8" fillOpacity="0.8"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <circle cx="16" cy="16" r="12" stroke="#38bdf8" strokeWidth="1.8" strokeOpacity="0.9"/>
+        <line x1="16" y1="2"  x2="16" y2="30" stroke="#38bdf8" strokeWidth="1.4" strokeOpacity="0.85"/>
+        <line x1="2"  y1="16" x2="30" y2="16" stroke="#38bdf8" strokeWidth="1.4" strokeOpacity="0.85"/>
       </svg>
     ),
     color: "#38bdf8", glow: "rgba(56,189,248,0.5)",
   },
   {
-    id: "FIRE", label: "Fire",
+    id: "FIRE",
     icon: (
-      <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-        <circle cx="16" cy="16" r="11" fill="rgba(248,113,113,0.15)" stroke="#f87171" strokeWidth="1.5" strokeOpacity="0.8"/>
-        <circle cx="16" cy="16" r="5"  fill="#f87171" fillOpacity="0.7"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <circle cx="16" cy="16" r="12" fill="rgba(248,113,113,0.15)" stroke="#f87171" strokeWidth="1.8" strokeOpacity="0.9"/>
+        <circle cx="16" cy="16" r="6"  fill="#f87171" fillOpacity="0.85"/>
       </svg>
     ),
     color: "#f87171", glow: "rgba(248,113,113,0.5)",
   },
   {
-    id: "KNEEL", label: "Kneel",
+    id: "KNEEL",
     icon: (
-      <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-        <circle cx="16" cy="8"  r="4"   fill="#a78bfa" fillOpacity="0.7"/>
-        <path d="M12 14 Q10 20 8 26 M20 14 Q22 20 24 26 M10 26 Q16 28 22 26" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.8"/>
-        <path d="M12 14 L20 14 Q20 18 16 20 Q12 18 12 14Z" fill="#a78bfa" fillOpacity="0.4" stroke="#a78bfa" strokeWidth="1"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <circle cx="16" cy="7" r="4.5" fill="#a78bfa" fillOpacity="0.8"/>
+        <path d="M13 13 Q11 19 9 26 M19 13 Q21 19 23 26 M9 26 Q16 29 23 26" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeOpacity="0.9"/>
+        <path d="M13 13 L19 13 Q19 18 16 20 Q13 18 13 13Z" fill="#a78bfa" fillOpacity="0.5" stroke="#a78bfa" strokeWidth="1.2"/>
       </svg>
     ),
     color: "#a78bfa", glow: "rgba(167,139,250,0.5)",
   },
   {
-    id: "WEAPON", label: "Weapon",
+    id: "WEAPON",
     icon: (
-      <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-        <rect x="4"  y="13" width="18" height="7" rx="2" fill="#1e293b" stroke="#facc15" strokeWidth="1.2" strokeOpacity="0.8"/>
-        <rect x="22" y="15" width="7"  height="3" rx="1" fill="#facc15" fillOpacity="0.6"/>
-        <rect x="10" y="10" width="5"  height="3" rx="1" fill="#facc15" fillOpacity="0.5"/>
-        <circle cx="8" cy="16.5" r="2" fill="#facc15" fillOpacity="0.4"/>
+      <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
+        <rect x="3"  y="12" width="20" height="8" rx="2" fill="#1e293b" stroke="#facc15" strokeWidth="1.5" strokeOpacity="0.9"/>
+        <rect x="23" y="14" width="7"  height="4" rx="1" fill="#facc15" fillOpacity="0.7"/>
+        <rect x="9"  y="9"  width="6"  height="3" rx="1" fill="#facc15" fillOpacity="0.6"/>
+        <circle cx="7" cy="16" r="2.5" fill="#facc15" fillOpacity="0.5"/>
       </svg>
     ),
     color: "#facc15", glow: "rgba(250,204,21,0.5)",
   },
+];
+
+/*
+ * Layout (matches Don's reference):
+ *
+ *   [      ] [ Fire  ]
+ *   [ Kneel] [ Scope ]
+ *   [Weapon] [       ]
+ *
+ * Positioned bottom-right, above the VIEW button,
+ * below the sidebar buttons so they don't interfere.
+ *
+ * pos: { top, left } — px offset inside a 160×180 container
+ */
+const BTN_SIZE = 82;
+const ACTION_LAYOUT = [
+  // Don's layout: Fire top-right, Scope mid-right, Kneel mid-left, Weapon bottom-left
+  { ...ACTIONS[1], top:   -50, left: 80 },   // Fire   — top-right
+  { ...ACTIONS[0], top:  60, left: 80 },   // Scope  — mid-right
+  { ...ACTIONS[2], top:  30, left:   -30 },   // Kneel  — mid-left
+  { ...ACTIONS[3], top: 140, left:   -70 },   // Weapon — bottom-left
 ];
 
 function ActionButtons() {
@@ -228,25 +247,26 @@ function ActionButtons() {
   return (
     <div style={{
       position: "absolute",
-      right: "10%",
-      top: "50%",
-      transform: "translateY(-50%)",
+      right: "9%",
+      bottom: "14%",
       zIndex: 35,
-      display: "flex",
-      flexDirection: "column",
-      gap: 14,
+      width: 204,
+      height: 234,
       userSelect: "none",
     }}>
-      {ACTIONS.map(a => (
+      {ACTION_LAYOUT.map(a => (
         <button
           key={a.id}
           className="quest-action-btn"
           onMouseDown={() => setActive(a.id)}
           onMouseUp={() => setActive(null)}
           onMouseLeave={() => setActive(null)}
-          title={a.label}
+          title={a.id}
           style={{
-            width: 58, height: 58,
+            position: "absolute",
+            top:  a.top,
+            left: a.left,
+            width: BTN_SIZE, height: BTN_SIZE,
             borderRadius: "50%",
             background: active === a.id
               ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
@@ -258,21 +278,11 @@ function ActionButtons() {
             backdropFilter: "blur(8px)",
             cursor: "pointer",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 3,
           }}
         >
           {a.icon}
-          <span style={{
-            fontFamily: "Orbitron, sans-serif",
-            fontSize: "clamp(4px, 0.45vw, 6px)",
-            fontWeight: "bold",
-            letterSpacing: "0.08em",
-            color: a.color,
-            textShadow: `0 0 6px ${a.glow}`,
-          }}>{a.label}</span>
         </button>
       ))}
     </div>
