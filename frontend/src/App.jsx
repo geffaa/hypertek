@@ -323,7 +323,7 @@ function App() {
     <div
       style={{
         background: "#060610",
-        minHeight: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         position: "relative",

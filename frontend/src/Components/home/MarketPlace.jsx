@@ -58,7 +58,7 @@ function PopularCollections() {
             </span>
           </div>
           <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
-            MarketPlace
+            Marketplace
           </h2>
         </motion.div>
 

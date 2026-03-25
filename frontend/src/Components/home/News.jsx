@@ -129,14 +129,14 @@ export default function News() {
       {/* ================= END MOBILE ================= */}
 
       {/* ================= DESKTOP LAYOUT ================= */}
-      <div className="hidden md:flex flex-col md:flex-row gap-20 w-full max-w-[1480px] mx-auto px-16">
+      <div className="hidden md:flex flex-col md:flex-row gap-10 w-full max-w-[1480px] mx-auto px-10">
 
         {/* Left Column */}
-        <div className="flex flex-col gap-8 w-full md:w-[680px]">
+        <div className="flex flex-col gap-5 w-full md:w-[680px]">
           {news.slice(0, 1).map((item, i) => (
             <motion.div
               key={item._id}
-              className="flex flex-col gap-5 cursor-pointer"
+              className="flex flex-col gap-3 cursor-pointer"
               onClick={() => handleNewsClick(item)}
               variants={fadeLeft}
               custom={0}
@@ -147,25 +147,25 @@ export default function News() {
               <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-full h-[350px] rounded-lg"
+                className="w-full h-[320px]"
                 imgClassName="object-cover"
               />
-              <div className="flex flex-col gap-3 pt-2">
-                <h3 className="text-white text-2xl font-bold uppercase font-goldman">
-                  {item.heading.length > 50 ? item.heading.slice(0, 50) + "..." : item.heading}
+              <div className="flex flex-col gap-2 pt-1">
+                <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "15px" }}>
+                  {item.heading.length > 60 ? item.heading.slice(0, 60) + "..." : item.heading}
                 </h3>
-                <p className="text-white text-base font-inter md:w-[400px]">
-                  {item.description.length > 120 ? item.description.slice(0, 120) + "..." : item.description}
+                <p className="text-gray-300" style={{ fontSize: "12px", lineHeight: "1.6" }}>
+                  {item.description.length > 130 ? item.description.slice(0, 130) + "..." : item.description}
                 </p>
               </div>
             </motion.div>
           ))}
 
-          <div className="flex gap-6">
+          <div className="flex gap-4">
             {news.slice(1, 3).map((item, i) => (
               <motion.div
                 key={item._id}
-                className="flex flex-col gap-4 w-1/2 cursor-pointer"
+                className="flex flex-col gap-2 w-1/2 cursor-pointer"
                 onClick={() => handleNewsClick(item)}
                 variants={fadeLeft}
                 custom={i + 1}
@@ -176,13 +176,13 @@ export default function News() {
                 <LazyImage
                   src={getImageUrl(item.image)}
                   alt={item.heading}
-                  className="w-full h-[200px] rounded-lg"
+                  className="w-full h-[180px]"
                   imgClassName="object-cover"
                 />
-                <h3 className="text-white text-xl font-bold uppercase font-goldman">
-                  {item.heading.length > 30 ? item.heading.slice(0, 30) + "..." : item.heading}
+                <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "13px" }}>
+                  {item.heading.length > 35 ? item.heading.slice(0, 35) + "..." : item.heading}
                 </h3>
-                <p className="text-white text-sm">
+                <p className="text-gray-300" style={{ fontSize: "11px", lineHeight: "1.5" }}>
                   {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}
                 </p>
               </motion.div>
@@ -191,26 +191,26 @@ export default function News() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-6 w-full md:w-[450px]">
+        <div className="flex flex-col gap-4 w-full md:w-[420px]">
           <motion.div
-            className="flex items-center"
+            className="flex items-center mb-1"
             variants={fadeRight}
             custom={0}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h2 className="text-white text-3xl font-goldman uppercase border-b-2 border-white pb-1">
-              News
+            <h2 className="text-white font-goldman uppercase border-b-2 border-white pb-1" style={{ fontSize: "22px" }}>
+              NEWS
             </h2>
-            <div className="flex-1 ml-3 mt-10 h-[2px] bg-gradient-to-r from-white to-transparent"></div>
+            <div className="flex-1 ml-3 mt-7 h-[2px] bg-gradient-to-r from-white to-transparent" />
           </motion.div>
 
           {/* Featured Card */}
           {news.slice(3, 4).map((item, i) => (
             <motion.div
               key={item._id}
-              className="flex flex-col gap-3 cursor-pointer"
+              className="flex flex-col gap-2 cursor-pointer"
               onClick={() => handleNewsClick(item)}
               variants={fadeRight}
               custom={1}
@@ -221,11 +221,11 @@ export default function News() {
               <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-full h-[200px]"
+                className="w-full h-[180px]"
                 imgClassName="object-cover"
               />
-              <h3 className="text-white text-base font-bold uppercase font-goldman leading-tight">
-                {item.heading.length > 60 ? item.heading.slice(0, 60) + "..." : item.heading}
+              <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "13px" }}>
+                {item.heading.length > 65 ? item.heading.slice(0, 65) + "..." : item.heading}
               </h3>
             </motion.div>
           ))}
@@ -246,18 +246,23 @@ export default function News() {
                 <LazyImage
                   src={getImageUrl(item.image)}
                   alt={item.heading}
-                  className="w-[120px] h-[80px] flex-shrink-0"
+                  className="w-[90px] h-[65px] flex-shrink-0"
                   imgClassName="object-cover"
                 />
-                <p className="text-white text-sm leading-tight pt-1">
-                  {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}
-                </p>
+                <div className="flex flex-col gap-1 pt-0.5">
+                  <p className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "11px" }}>
+                    {item.heading.length > 45 ? item.heading.slice(0, 45) + "..." : item.heading}
+                  </p>
+                  <p className="text-gray-300" style={{ fontSize: "11px", lineHeight: "1.5" }}>
+                    {item.description.length > 70 ? item.description.slice(0, 70) + "..." : item.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            className="flex justify-center mt-2"
+            className="flex justify-center mt-1"
             variants={fadeRight}
             custom={5}
             initial="hidden"

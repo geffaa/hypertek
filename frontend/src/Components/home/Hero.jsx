@@ -85,7 +85,7 @@ export default function Hero() {
 
   const headingLine1 = cms.heading_line1 || "HYPERTEK";
   const headingLine2 = cms.heading_line2 || "WHERE LEGENDS ARE FORGED.";
-  const btn1Text = cms.button1_text || cms.cta_button_1_text || "marketplace";
+  const btn1Text = cms.button1_text || cms.cta_button_1_text || "Marketplace";
   const btn1Link = cms.button1_link || cms.cta_button_1_link || "/market-place";
   const btn2Text = cms.button2_text || cms.cta_button_2_text || "Download Game";
   const bgImage = cms.background_image || heroImage;

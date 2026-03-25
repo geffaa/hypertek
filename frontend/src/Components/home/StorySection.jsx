@@ -2,9 +2,7 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import useSiteContent from "../../hooks/useSiteContent";
 
-// Fallback assets
 import storyBg from "../../assets/images/herostory/story_bg.jpg";
-import charStory from "../../assets/images/herostory/char_story1.png";
 import lineRight from "../../assets/images/herostory/line_right.png";
 import lineLeft from "../../assets/images/herostory/line_left.png";
 
@@ -17,22 +15,17 @@ const containerVariants = {
 };
 
 const fadeLeft = {
-    hidden: { opacity: 0, x: -80 },
+    hidden: { opacity: 0, x: -60 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease: "easeOut" } },
 };
 
 const fadeRight = {
-    hidden: { opacity: 0, x: 80 },
+    hidden: { opacity: 0, x: 60 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease: "easeOut" } },
 };
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
-
 const scaleIn = {
-    hidden: { opacity: 0, scale: 0.8, y: 40 },
+    hidden: { opacity: 0, scale: 0.85, y: 40 },
     visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } },
 };
 
@@ -43,7 +36,6 @@ export default function StorySection() {
     const { data: cms } = useSiteContent("home_story");
 
     const bgImage = cms.background_image || storyBg;
-    const charImage = cms.character_image || charStory;
     const leftHeading = cms.left_heading || "STORY";
     const leftSubheading = cms.left_subheading || "The year is 2117.";
     const leftBody =
@@ -82,96 +74,128 @@ export default function StorySection() {
             />
 
             <motion.div
-                className="relative z-10 h-full min-h-screen flex items-center"
+                className="relative z-10 min-h-screen flex items-center w-full"
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={containerVariants}
             >
-                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 py-16">
-                    {/* Two-column layout */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
+                {/* ── MOBILE layout (< lg) ── */}
+                <div className="flex lg:hidden w-full flex-col gap-4 px-5 py-14">
+                    {/* Card 1 */}
+                    <motion.div
+                        className="w-full flex flex-col gap-3"
+                        variants={fadeLeft}
+                        style={{
+                            background: "rgba(0,0,0,0.55)",
+                            backdropFilter: "blur(8px)",
+                            WebkitBackdropFilter: "blur(8px)",
+                            padding: "24px 20px",
+                        }}
+                    >
+                        <span className="text-white font-bold tracking-[0.3em] uppercase block" style={{ fontSize: "16px" }}>
+                            {leftHeading}
+                        </span>
+                        <h2 className="text-white font-[Goldman] font-bold" style={{ fontSize: "15px", lineHeight: "1.4" }}>
+                            {leftSubheading}
+                        </h2>
+                        <p className="text-gray-300 text-justify" style={{ fontSize: "14px", lineHeight: "1.7" }}>
+                            {leftBody}
+                        </p>
+                    </motion.div>
 
-                        {/* LEFT: Character — hidden on mobile */}
-                        <motion.div
-                            className="hidden lg:flex relative items-center justify-end"
-                            variants={scaleIn}
-                        >
-                            <img
-                                src={charImage}
-                                alt="Character"
-                                loading="lazy"
-                                className="relative z-[2] w-[420px] lg:w-[600px] 2xl:w-[680px] h-auto object-contain"
-                                style={{ filter: "drop-shadow(0 0 50px rgba(255,255,255,0.1))" }}
-                            />
-                        </motion.div>
+                    {/* Card 2 */}
+                    <motion.div
+                        className="w-full flex flex-col gap-3"
+                        variants={fadeRight}
+                        style={{
+                            background: "rgba(0,0,0,0.55)",
+                            backdropFilter: "blur(8px)",
+                            WebkitBackdropFilter: "blur(8px)",
+                            padding: "24px 20px",
+                        }}
+                    >
+                        <span className="text-white font-bold tracking-[0.3em] uppercase block" style={{ fontSize: "16px" }}>
+                            {rightHeading}
+                        </span>
+                        <h2 className="text-white font-[Goldman] font-bold" style={{ fontSize: "15px", lineHeight: "1.4" }}>
+                            {rightSubheading}
+                        </h2>
+                        <p className="text-gray-300 text-justify" style={{ fontSize: "14px", lineHeight: "1.7" }}>
+                            {rightBody}
+                        </p>
+                    </motion.div>
+                </div>
 
-                        {/* RIGHT: Story text blocks */}
-                        <div className="flex flex-col gap-6 lg:pl-8">
-                            {/* Title */}
-                            <motion.div variants={fadeRight}>
-                                <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-10 h-[2px] bg-white/50" />
-                                    <span className="text-white/70 font-bold text-sm tracking-[0.3em] uppercase">
-                                        {leftHeading}
-                                    </span>
-                                </div>
-                                <h2 className="text-white font-[Goldman] font-bold text-3xl md:text-4xl lg:text-5xl leading-tight">
-                                    {leftSubheading}
-                                </h2>
-                            </motion.div>
+                {/* ── DESKTOP layout (≥ lg) ── */}
+                <div className="hidden lg:grid w-full grid-cols-[1fr_auto_1fr] items-center">
 
-                            {/* Left story block — glass card */}
-                            <motion.div
-                                className="rounded-xl p-6"
-                                style={{
-                                    background: "rgba(255,255,255,0.05)",
-                                    backdropFilter: "blur(16px)",
-                                    WebkitBackdropFilter: "blur(16px)",
-                                    border: "1px solid rgba(255,255,255,0.1)",
-                                }}
-                                variants={fadeRight}
-                            >
-                                <p className="text-gray-300 text-sm md:text-[15px] leading-relaxed text-justify">
-                                    {leftBody}
-                                </p>
-                            </motion.div>
+                    {/* LEFT text */}
+                    <motion.div
+                        className="flex flex-col justify-center px-10 xl:px-28 py-20"
+                        variants={fadeLeft}
+                        style={{
+                            background: "rgba(0,0,0,0.45)",
+                            backdropFilter: "blur(6px)",
+                            WebkitBackdropFilter: "blur(6px)",
+                            marginRight: "-180px",
+                            zIndex: 1,
+                            alignSelf: "center",
+                            marginTop: "300px",
+                        }}
+                    >
+                        <span className="text-white font-bold tracking-[0.3em] uppercase mb-3 block" style={{ fontSize: "18px" }}>
+                            {leftHeading}
+                        </span>
+                        <h2 className="text-white font-[Goldman] font-bold mb-4" style={{ fontSize: "16px", lineHeight: "1.4" }}>
+                            {leftSubheading}
+                        </h2>
+                        <p className="text-gray-300 text-justify" style={{ fontSize: "16px", lineHeight: "1.6" }}>
+                            {leftBody}
+                        </p>
+                    </motion.div>
 
-                            {/* Right story block — glass card variant */}
-                            <motion.div
-                                className="rounded-xl p-6"
-                                style={{
-                                    background: "linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02))",
-                                    backdropFilter: "blur(16px)",
-                                    WebkitBackdropFilter: "blur(16px)",
-                                    border: "1px solid rgba(255,255,255,0.08)",
-                                }}
-                                variants={fadeRight}
-                            >
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-8 h-[2px] bg-white/30" />
-                                    <span className="text-white/50 font-semibold text-xs tracking-[0.2em] uppercase">
-                                        {rightHeading}
-                                    </span>
-                                </div>
-                                <h4 className="text-white font-bold text-lg mb-2">{rightSubheading}</h4>
-                                <p className="text-gray-400 text-sm leading-relaxed text-justify">
-                                    {rightBody}
-                                </p>
-                            </motion.div>
+                    {/* CENTER character image */}
+                    <motion.div
+                        className="flex items-end justify-center"
+                        variants={scaleIn}
+                        style={{ width: "680px", minWidth: "560px", zIndex: 2, position: "relative" }}
+                    >
+                        <img
+                            src="/char_frame.png"
+                            alt="Character"
+                            loading="lazy"
+                            className="w-full h-auto object-contain object-bottom"
+                            style={{
+                                filter: "drop-shadow(0 0 50px rgba(255,255,255,0.1))",
+                                maxHeight: "100vh",
+                            }}
+                        />
+                    </motion.div>
 
-                            {/* Decorative bottom line */}
-                            <motion.div
-                                className="flex items-center gap-4 mt-2"
-                                variants={fadeUp}
-                            >
-                                <div className="flex-1 h-[1px] bg-gradient-to-r from-white/30 to-transparent" />
-                                <span className="text-white/20 text-xs tracking-[0.5em] uppercase font-bold">
-                                    Hyper Tek 100
-                                </span>
-                                <div className="flex-1 h-[1px] bg-gradient-to-l from-white/30 to-transparent" />
-                            </motion.div>
-                        </div>
-                    </div>
+                    {/* RIGHT text */}
+                    <motion.div
+                        className="flex flex-col justify-center px-10 xl:px-28 py-20"
+                        variants={fadeRight}
+                        style={{
+                            background: "rgba(0,0,0,0.45)",
+                            backdropFilter: "blur(6px)",
+                            WebkitBackdropFilter: "blur(6px)",
+                            marginLeft: "-180px",
+                            alignSelf: "center",
+                            marginTop: "300px",
+                            zIndex: 1,
+                        }}
+                    >
+                        <span className="text-white font-bold tracking-[0.3em] uppercase mb-3 block" style={{ fontSize: "18px" }}>
+                            {rightHeading}
+                        </span>
+                        <h2 className="text-white font-[Goldman] font-bold mb-4" style={{ fontSize: "16px", lineHeight: "1.4" }}>
+                            {rightSubheading}
+                        </h2>
+                        <p className="text-gray-300 text-justify" style={{ fontSize: "16px", lineHeight: "1.6" }}>
+                            {rightBody}
+                        </p>
+                    </motion.div>
                 </div>
             </motion.div>
         </section>
