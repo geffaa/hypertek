@@ -6,7 +6,8 @@
  * - Click + drag on the map to simulate rotation (demo)
  */
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 const C  = "#00D4FF";
 const CG = "#00EEFF";
@@ -112,8 +113,9 @@ function Terrain() {
 }
 
 export default function MiniMap({ rotation: externalRotation }) {
-  const [rotation, setRotation]   = useState(externalRotation ?? 0);
-  const dragRef  = useRef(null);
+  const isMobile = useMobileLandscape();
+  const [rotation, setRotation] = useState(externalRotation ?? 0);
+  const sz = isMobile ? 90 : SZ;
 
   // Click-drag to manually rotate the map (demo interaction)
   const onMouseDown = useCallback((e) => {
@@ -146,16 +148,16 @@ export default function MiniMap({ rotation: externalRotation }) {
         style={{
           position: "absolute",
           left:  "4%",
-          top:   "22vh",
-          width:  `${SZ}px`,
-          height: `${SZ}px`,
+          top:   isMobile ? "80px" : "22vh",
+          width:  `${sz}px`,
+          height: `${sz}px`,
           zIndex: 20,
           userSelect: "none",
           filter: "drop-shadow(0 0 8px rgba(0,212,255,0.3))",
         }}
       >
         <svg
-          width={SZ} height={SZ}
+          width={sz} height={sz}
           viewBox={`0 0 ${SZ} ${SZ}`}
           style={{ display: "block", overflow: "visible" }}
         >

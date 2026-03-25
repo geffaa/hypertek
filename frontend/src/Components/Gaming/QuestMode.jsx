@@ -9,6 +9,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import LazyImage from "./LazyImage";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
@@ -242,17 +243,20 @@ const ACTION_LAYOUT = [
 ];
 
 function ActionButtons() {
+  const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
 
   return (
     <div style={{
       position: "absolute",
-      right: "9%",
+      right: isMobile ? "20%" : "9%",
       bottom: "14%",
       zIndex: 35,
       width: 204,
       height: 234,
       userSelect: "none",
+      transform: isMobile ? "scale(0.58)" : "none",
+      transformOrigin: "bottom right",
     }}>
       {ACTION_LAYOUT.map(a => (
         <button

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 import { useNavigate } from "react-router-dom";
 
 /* ── Event data ───────────────────────────────────────────────── */
@@ -158,14 +159,14 @@ const BTN_BASE = {
 };
 
 /* ── Shared panel shell ──────────────────────────────────────── */
-function SidePanel({ title, accentColor = "#00E5FF", onClose, children }) {
+function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile = false }) {
   return (
     <div className="hud-side-panel" style={{
       position: "absolute",
-      right: "calc(8.5vw + 4px)",
-      top: "21vh",
-      width: 280,
-      maxHeight: "58vh",
+      right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
+      top:       isMobile ? "60px"  : "21vh",
+      width:     isMobile ? 190     : 280,
+      maxHeight: isMobile ? "62vh"  : "58vh",
       zIndex: 29,
       background: "rgba(5,12,28,0.97)",
       border: `1px solid ${accentColor}40`,
@@ -199,12 +200,12 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children }) {
 }
 
 /* ── Events panel ────────────────────────────────────────────── */
-function EventsPanel({ onClose }) {
+function EventsPanel({ onClose, isMobile }) {
   const [tab,    setTab]    = useState("Limited");
   const [detail, setDetail] = useState(null);   // event being viewed
 
   return (
-    <SidePanel title="EVENT CENTER" onClose={onClose}>
+    <SidePanel title="EVENT CENTER" onClose={onClose} isMobile={isMobile}>
 
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)" }}>
@@ -292,14 +293,14 @@ function EventsPanel({ onClose }) {
 }
 
 /* ── Items panel ─────────────────────────────────────────────── */
-function ItemsPanel({ onClose }) {
+function ItemsPanel({ onClose, isMobile }) {
   const [tab,          setTab]          = useState("Inventory");
   const [specCategory, setSpecCategory] = useState(null);   // selected specialist category
   const [profile,      setProfile]      = useState(null);   // specialist being viewed
   const items = ITEM_DATA[tab] || [];
 
   return (
-    <SidePanel title="ITEMS" accentColor="#38bdf8" onClose={onClose}>
+    <SidePanel title="ITEMS" accentColor="#38bdf8" onClose={onClose} isMobile={isMobile}>
 
       {/* ── Tabs ── */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(56,189,248,0.1)", overflowX:"auto" }}>
@@ -530,7 +531,7 @@ function ItemsPanel({ onClose }) {
 }
 
 /* ── Settings panel ─────────────────────────────────────────── */
-function SettingsPanel({ onClose }) {
+function SettingsPanel({ onClose, isMobile }) {
   const navigate = useNavigate();
   const [sound, setSound]   = useState(true);
   const [music, setMusic]   = useState(true);
@@ -567,7 +568,7 @@ function SettingsPanel({ onClose }) {
   );
 
   return (
-    <SidePanel title="SETTINGS" accentColor="#a78bfa" onClose={onClose}>
+    <SidePanel title="SETTINGS" accentColor="#a78bfa" onClose={onClose} isMobile={isMobile}>
       <div style={{ overflowY:"auto", flex:1 }}>
 
         {/* Sound & Music */}
@@ -667,11 +668,11 @@ const ALLIANCE_MENU = [
 
 const ALLIANCE_BOTTOM = ["Mail", "Members", "Manage"];
 
-function AlliancePanel({ onClose, onOpenMail }) {
+function AlliancePanel({ onClose, onOpenMail, isMobile }) {
   const [activeBottom, setActiveBottom] = useState("Members");
 
   return (
-    <SidePanel title="ALLIANCE" accentColor="#fbbf24" onClose={onClose}>
+    <SidePanel title="ALLIANCE" accentColor="#fbbf24" onClose={onClose} isMobile={isMobile}>
       <div style={{ overflowY:"auto", flex:1 }}>
 
         {/* Alliance info card */}
@@ -840,17 +841,17 @@ const MAIL_MESSAGES = {
   ],
 };
 
-function MailPanel({ onClose }) {
+function MailPanel({ onClose, isMobile }) {
   const [activeKey, setActiveKey] = useState("inbox");
   const messages = MAIL_MESSAGES[activeKey] || [];
 
   return (
     <div className="hud-side-panel" style={{
       position: "absolute",
-      right: "calc(8.5vw + 4px)",
-      top: "21vh",
-      width: 360,          // wider — has two-column layout
-      maxHeight: "58vh",
+      right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
+      top:       isMobile ? "60px" : "21vh",
+      width:     isMobile ? 200    : 360,
+      maxHeight: isMobile ? "62vh" : "58vh",
       zIndex: 29,
       background: "rgba(5,12,28,0.97)",
       border: "1px solid rgba(0,229,255,0.25)",
@@ -990,7 +991,7 @@ const MSG_TYPE_COLOR = {
   player: "#c7e9f7",
 };
 
-function ChatPanel({ onClose }) {
+function ChatPanel({ onClose, isMobile }) {
   const [tab, setTab]       = useState("World");
   const [input, setInput]   = useState("");
   const [messages, setMessages] = useState(CHAT_MESSAGES);
@@ -1022,10 +1023,10 @@ function ChatPanel({ onClose }) {
   return (
     <div className="hud-side-panel" style={{
       position: "absolute",
-      right: "calc(8.5vw + 4px)",
-      top: "21vh",
-      width: 320,
-      maxHeight: "58vh",
+      right: isMobile ? "18vw" : "calc(8.5vw + 7px)",
+      top:       isMobile ? "60px" : "21vh",
+      width:     isMobile ? 200    : 320,
+      maxHeight: isMobile ? "62vh" : "58vh",
       zIndex: 29,
       background: "rgba(5,12,28,0.97)",
       border: "1px solid rgba(0,229,255,0.25)",
@@ -1158,6 +1159,7 @@ function ChatPanel({ onClose }) {
 
 /* ── Main component ──────────────────────────────────────────── */
 export default function SidebarPanel() {
+  const isMobile = useMobileLandscape();
   const [openPanel, setOpenPanel] = useState(null);
   const sidebarRef = useRef(null);
 
@@ -1185,38 +1187,33 @@ export default function SidebarPanel() {
       {/* ── Buttons ── */}
       <div style={{
         position: "absolute",
-        left: "91.5vw", right: "2.5vw",
-        top: "18vh",
+        left: isMobile ? "85vw" : "91.5vw", right: isMobile ? "3vw" : "2.5vw",
+        top: isMobile ? "60px" : "18vh",
         display: "flex", flexDirection: "column",
-        gap: 4,
+        gap: isMobile ? 2 : 4,
         zIndex: 30, padding: "0 4px",
       }}>
-        <button className="hud-sidebar-btn" onClick={() => toggle("events")}
-          style={{ ...BTN_BASE, ...activeStyle("events") }}>EVENTS</button>
-
-        <button className="hud-sidebar-btn" onClick={() => toggle("items")}
-          style={{ ...BTN_BASE, ...activeStyle("items") }}>ITEMS</button>
-
-        <button className="hud-sidebar-btn" onClick={() => toggle("settings")}
-          style={{ ...BTN_BASE, ...activeStyle("settings") }}>SETTINGS</button>
-
-        <button className="hud-sidebar-btn" onClick={() => toggle("alliance")}
-          style={{ ...BTN_BASE, ...activeStyle("alliance") }}>ALLIANCE</button>
-
-        <button className="hud-sidebar-btn" onClick={() => toggle("mail")}
-          style={{ ...BTN_BASE, ...activeStyle("mail") }}>MAIL</button>
-
-        <button className="hud-sidebar-btn" onClick={() => toggle("chat")}
-          style={{ ...BTN_BASE, ...activeStyle("chat") }}>CHAT</button>
+        {["events","items","settings","alliance","mail","chat"].map(key => (
+          <button key={key} className="hud-sidebar-btn" onClick={() => toggle(key)}
+            style={{
+              ...BTN_BASE,
+              ...activeStyle(key),
+              padding:   isMobile ? "5px 8px" : BTN_BASE.padding,
+              fontSize:  isMobile ? 7 : BTN_BASE.fontSize,
+              letterSpacing: isMobile ? "0.06em" : BTN_BASE.letterSpacing,
+            }}>
+            {key.toUpperCase()}
+          </button>
+        ))}
       </div>
 
       {/* ── Panels ── */}
-      {openPanel === "events"   && <EventsPanel   onClose={() => setOpenPanel(null)} />}
-      {openPanel === "items"    && <ItemsPanel    onClose={() => setOpenPanel(null)} />}
-      {openPanel === "settings" && <SettingsPanel onClose={() => setOpenPanel(null)} />}
-      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} onOpenMail={() => setOpenPanel("mail")} />}
-      {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} />}
-      {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} />}
+      {openPanel === "events"   && <EventsPanel   onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
+      {openPanel === "items"    && <ItemsPanel    onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
+      {openPanel === "settings" && <SettingsPanel onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
+      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} isMobile={isMobile} onOpenMail={() => setOpenPanel("mail")} />}
+      {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
+      {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
     </div>
   );
 }

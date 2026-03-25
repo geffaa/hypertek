@@ -10,6 +10,7 @@
 
 import { useState } from "react";
 import LazyImage from "./LazyImage";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
@@ -107,17 +108,20 @@ const OVERLORD_ACTIONS = [
 ];
 
 function OverlordActionButtons() {
+  const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
 
   return (
     <div style={{
       position: "absolute",
-      right: "9%",
+      right: isMobile ? "20%" : "9%",
       bottom: "14%",
       zIndex: 35,
       width: 174,
       height: 176,
       userSelect: "none",
+      transform: isMobile ? "scale(0.58)" : "none",
+      transformOrigin: "bottom right",
     }}>
       {OVERLORD_ACTIONS.map(a => (
         <button

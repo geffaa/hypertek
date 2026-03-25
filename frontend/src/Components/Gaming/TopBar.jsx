@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
 import symbol from "../../assets/images/login/Symbol.svg.png";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 // 5 resources per Don's brief — each has open/stored for dropdown
 const RESOURCES = [
@@ -120,15 +121,12 @@ const CSS = `
   .wallet-spinner { animation: spinLoader 0.9s linear infinite; }
 `;
 
-const NAV_BTN = {
-  height: "3.6vh",
-  padding: "0 16px",
+const NAV_BTN_BASE = {
   background: "linear-gradient(180deg, rgba(0,30,55,0.95) 0%, rgba(0,15,35,0.98) 100%)",
   border: "1px solid rgba(0,212,255,0.55)",
   borderRadius: "3px",
   color: "#00D4FF",
   fontFamily: "Orbitron,sans-serif",
-  fontSize: "clamp(7px,0.65vw,9px)",
   fontWeight: "bold",
   letterSpacing: "0.14em",
   cursor: "pointer",
@@ -142,6 +140,14 @@ const NAV_BTN = {
 export default function TopBar() {
   const navigate  = useNavigate();
   const dispatch  = useDispatch();
+  const isMobile  = useMobileLandscape();
+
+  const NAV_BTN = {
+    ...NAV_BTN_BASE,
+    height:   isMobile ? "22px" : "3.6vh",
+    padding:  isMobile ? "0 8px" : "0 16px",
+    fontSize: isMobile ? "clamp(5px,0.55vw,7px)" : "clamp(7px,0.65vw,9px)",
+  };
 
   // ── Resource dropdown ────────────────────────────────────────────
   const [activeRes, setActiveRes] = useState(null);  // resource id with open dropdown
@@ -224,13 +230,13 @@ export default function TopBar() {
       {/* ── Full-width HUD row ── */}
       <div style={{
         position: "absolute",
-        top: "20px",
-        left: "15%",
-        right: "13%",
+        top: isMobile ? "6px" : "20px",
+        left: isMobile ? "13%" : "15%",
+        right: isMobile ? "11%" : "13%",
         zIndex: 25,
         display: "flex",
         alignItems: "center",
-        gap: "8px",
+        gap: isMobile ? "4px" : "8px",
       }}>
 
         {/* 1. RESOURCES label — opens category panel */}
@@ -326,7 +332,7 @@ export default function TopBar() {
 
         {/* 2. Resource slots */}
         <div ref={resBarRef} style={{
-          flex: 1, height: "3.6vh",
+          flex: 1, height: isMobile ? "22px" : "3.6vh",
           display: "flex", alignItems: "stretch",
           background: "rgba(3,8,18,0.92)",
           border: "1px solid rgba(0,212,255,0.18)",
@@ -352,25 +358,27 @@ export default function TopBar() {
                 <img
                   src={r.img} alt={r.label}
                   style={{
-                    width: "clamp(20px,2.2vh,28px)",
-                    height: "clamp(20px,2.2vh,28px)",
+                    width:  isMobile ? "14px" : "clamp(20px,2.2vh,28px)",
+                    height: isMobile ? "14px" : "clamp(20px,2.2vh,28px)",
                     objectFit: "contain", flexShrink: 0,
                     imageRendering: "crisp-edges",
                   }}
                 />
                 <div style={{ minWidth: 0 }}>
+                  {!isMobile && (
+                    <div style={{
+                      fontFamily: "Orbitron,sans-serif",
+                      fontSize: "clamp(4px,0.38vw,5px)",
+                      letterSpacing: "0.08em",
+                      color: "rgba(148,192,210,0.5)",
+                      textTransform: "uppercase",
+                      lineHeight: 1, marginBottom: "2px",
+                      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                    }}>{r.label}</div>
+                  )}
                   <div style={{
                     fontFamily: "Orbitron,sans-serif",
-                    fontSize: "clamp(4px,0.38vw,5px)",
-                    letterSpacing: "0.08em",
-                    color: "rgba(148,192,210,0.5)",
-                    textTransform: "uppercase",
-                    lineHeight: 1, marginBottom: "2px",
-                    whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                  }}>{r.label}</div>
-                  <div style={{
-                    fontFamily: "Orbitron,sans-serif",
-                    fontSize: "clamp(7px,0.65vw,9px)",
+                    fontSize: isMobile ? "clamp(5px,0.55vw,7px)" : "clamp(7px,0.65vw,9px)",
                     fontWeight: "bold", letterSpacing: "0.05em",
                     color: r.color, textShadow: `0 0 6px ${r.color}88`,
                     whiteSpace: "nowrap", lineHeight: 1,
@@ -497,11 +505,11 @@ export default function TopBar() {
       {/* ── LOG OUT button ── */}
       <button className="logout-btn" style={{
         position: "absolute",
-        top: "1vh",
-        right: "2%",
+        top:    isMobile ? "4px"  : "1vh",
+        right:  isMobile ? "1.5%" : "2%",
         zIndex: 30,
-        width:  "8vh",
-        height: "8vh",
+        width:  isMobile ? "32px" : "8vh",
+        height: isMobile ? "32px" : "8vh",
         borderRadius: "50%",
         background: "radial-gradient(circle at 38% 32%, rgba(200,40,40,0.9), rgba(70,6,6,0.97))",
         border: "2px solid rgba(248,113,113,0.65)",

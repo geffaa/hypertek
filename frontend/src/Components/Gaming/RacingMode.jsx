@@ -10,6 +10,7 @@
 
 import RacingControls from "./RacingControls";
 import LazyImage      from "./LazyImage";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const CSS = `
@@ -103,6 +104,7 @@ function TrackView() {
    GARAGE VIEW — spaceship hangar / workshop
    ══════════════════════════════════════════════════════════════════ */
 function GarageView() {
+  const isMobile = useMobileLandscape();
   return (
     <div style={{
       position: "absolute", inset: 0,
@@ -122,8 +124,8 @@ function GarageView() {
       {/* ── Holographic vehicle status panel ── */}
       <div style={{
         position: "absolute",
-        top: "38%", right: "8%",
-        width: 160, padding: "10px 14px",
+        top: isMobile ? "28%" : "38%", right: isMobile ? "23%" : "8%",
+        width: isMobile ? 140 : 160, padding: "10px 14px",
         background: "rgba(3,15,30,0.85)",
         border: "1px solid rgba(56,189,248,0.35)",
         borderRadius: 4,

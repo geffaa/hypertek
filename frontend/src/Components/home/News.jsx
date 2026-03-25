@@ -191,7 +191,7 @@ export default function News() {
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-16 w-full md:w-[450px]">
+        <div className="flex flex-col gap-6 w-full md:w-[450px]">
           <motion.div
             className="flex items-center"
             variants={fadeRight}
@@ -206,14 +206,39 @@ export default function News() {
             <div className="flex-1 ml-3 mt-10 h-[2px] bg-gradient-to-r from-white to-transparent"></div>
           </motion.div>
 
-          <div className="flex flex-col gap-4">
-            {news.slice(3, 6).map((item, i) => (
+          {/* Featured Card */}
+          {news.slice(3, 4).map((item, i) => (
+            <motion.div
+              key={item._id}
+              className="flex flex-col gap-3 cursor-pointer"
+              onClick={() => handleNewsClick(item)}
+              variants={fadeRight}
+              custom={1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <LazyImage
+                src={getImageUrl(item.image)}
+                alt={item.heading}
+                className="w-full h-[200px]"
+                imgClassName="object-cover"
+              />
+              <h3 className="text-white text-base font-bold uppercase font-goldman leading-tight">
+                {item.heading.length > 60 ? item.heading.slice(0, 60) + "..." : item.heading}
+              </h3>
+            </motion.div>
+          ))}
+
+          {/* 3 Small Cards */}
+          <div className="flex flex-col divide-y divide-white/10">
+            {news.slice(4, 7).map((item, i) => (
               <motion.div
                 key={item._id}
-                className="flex gap-3 cursor-pointer"
+                className="flex gap-3 py-3 cursor-pointer"
                 onClick={() => handleNewsClick(item)}
                 variants={fadeRight}
-                custom={i + 1}
+                custom={i + 2}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
@@ -221,10 +246,10 @@ export default function News() {
                 <LazyImage
                   src={getImageUrl(item.image)}
                   alt={item.heading}
-                  className="w-[200px] h-[140px] flex-shrink-0"
+                  className="w-[120px] h-[80px] flex-shrink-0"
                   imgClassName="object-cover"
                 />
-                <p className="text-white text-base">
+                <p className="text-white text-sm leading-tight pt-1">
                   {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}
                 </p>
               </motion.div>
@@ -232,9 +257,9 @@ export default function News() {
           </div>
 
           <motion.div
-            className="flex justify-center mt-4"
+            className="flex justify-center mt-2"
             variants={fadeRight}
-            custom={4}
+            custom={5}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}

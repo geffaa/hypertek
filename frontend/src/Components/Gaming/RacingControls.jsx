@@ -5,6 +5,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 /* ─── colours ────────────────────────────────────────── */
 const C_GREEN  = "#22c55e";
@@ -170,6 +171,7 @@ function Joystick() {
    Speed Slider (vertical)
    ══════════════════════════════════════════════════════ */
 function SpeedSlider() {
+  const isMobile = useMobileLandscape();
   /* 0 = full stop, 1 = full speed  (handle top = full speed) */
   const [speed, setSpeed]       = useState(0.4);
   const [dragging, setDragging] = useState(false);
@@ -209,10 +211,10 @@ function SpeedSlider() {
     window.addEventListener("touchend",  onEnd);
   }, [getSpeed]);
 
-  const TRACK_H  = 160;
-  const TRACK_W  = 24;
-  const HANDLE_H = 22;
-  const HANDLE_W = 38;
+  const TRACK_H  = isMobile ? 100 : 160;
+  const TRACK_W  = isMobile ? 18  : 24;
+  const HANDLE_H = isMobile ? 16  : 22;
+  const HANDLE_W = isMobile ? 28  : 38;
   const fillH    = Math.round(TRACK_H * speed);
   const knobTop  = (TRACK_H - HANDLE_H) * (1 - speed);
 
@@ -226,8 +228,8 @@ function SpeedSlider() {
   return (
     <div className="rc-speed-wrap" style={{
       position: "absolute",
-      right:  "10.5%",
-      top:    "36%",
+      right:  isMobile ? "23%" : "10.5%",
+      top:    isMobile ? "25%" : "36%",
       zIndex: 30,
       display: "flex",
       flexDirection: "column",

@@ -9,8 +9,8 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
+import useMobileLandscape from "../../hooks/useMobileLandscape";
 
-const SIZE = "8.5vh";
 
 const CSS = `
   .profile-circle {
@@ -71,6 +71,9 @@ function Slot({ label, size = 54, icon = null }) {
 }
 
 export default function ProfileButton() {
+  const isMobile = useMobileLandscape();
+  const SIZE = isMobile ? "36px" : "8.5vh";
+
   const { token }   = useSelector((s) => s.auth);
   const [profile,   setProfile]   = useState(null);
   const [open,      setOpen]      = useState(false);
@@ -107,10 +110,11 @@ export default function ProfileButton() {
 
       <div ref={panelRef} style={{
         position: "absolute",
-        left: "6vw", top: "5.5vh",
-        transform: "translate(-50%, -35%)",
+        left: isMobile ? "5vw" : "6vw",
+        top:  isMobile ? "4px" : "5.5vh",
+        transform: isMobile ? "none" : "translate(-50%, -35%)",
         zIndex: 30,
-        display: "flex", flexDirection: "column", alignItems: "center", gap: "5px",
+        display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
         pointerEvents: "auto",
       }}>
 
@@ -134,8 +138,8 @@ export default function ProfileButton() {
           }}
         />
 
-        {/* ── Name card ── */}
-        <div onClick={() => setOpen(o => !o)} style={{
+        {/* ── Name card — hidden on mobile landscape ── */}
+        {!isMobile && <div onClick={() => setOpen(o => !o)} style={{
           background: "rgba(3,8,20,0.92)",
           border: "1px solid rgba(0,212,255,0.35)",
           borderRadius: "3px", padding: "4px 10px",
@@ -154,7 +158,7 @@ export default function ProfileButton() {
             fontSize: "clamp(5px,0.5vw,6.5px)", letterSpacing: "0.1em",
             color: "rgba(148,192,210,0.65)", lineHeight: 1.3,
           }}>HYPER-TEK PLAYER</div>
-        </div>
+        </div>}
 
         {/* ══════════════════════════════════════════
             AVATAR EQUIPMENT PANEL (dropdown)
@@ -162,50 +166,49 @@ export default function ProfileButton() {
         {open && (
           <div className="avatar-panel" style={{
             position: "absolute",
-            top: "calc(100% + 10px)",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 260,
+            top: "calc(100% + 8px)",
+            left: isMobile ? "0" : "50%",
+            transform: isMobile ? "none" : "translateX(-50%)",
+            width: isMobile ? 185 : 260,
             background: "rgba(4,10,26,0.97)",
             border: "1px solid rgba(0,212,255,0.25)",
             borderRadius: 8,
             backdropFilter: "blur(18px)",
             boxShadow: "0 8px 40px rgba(0,0,0,0.7), 0 0 20px rgba(0,212,255,0.08)",
-            padding: "14px 12px 12px",
+            padding: isMobile ? "8px 8px 8px" : "14px 12px 12px",
             zIndex: 40,
           }}>
 
             {/* Header */}
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom: isMobile ? 6 : 12 }}>
               <span style={{
-                fontFamily:"Orbitron,sans-serif", fontSize:7.5, fontWeight:"bold",
+                fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7.5, fontWeight:"bold",
                 letterSpacing:"0.14em", color:"#00D4FF",
                 textShadow:"0 0 8px rgba(0,212,255,0.5)",
               }}>AVATAR</span>
               <button onClick={() => setOpen(false)} style={{
                 background:"none", border:"none", color:"rgba(157,216,240,0.4)",
-                fontSize:15, cursor:"pointer", lineHeight:1, padding:"0 2px",
+                fontSize: isMobile ? 12 : 15, cursor:"pointer", lineHeight:1, padding:"0 2px",
               }}>×</button>
             </div>
 
             {/* ── Equipment layout ── */}
-            {/* Row: Left col (Weapon, Suit, Boots) | Character | Right col (Helmet, Gloves) */}
-            <div style={{ display:"flex", gap:8, alignItems:"center", justifyContent:"center" }}>
+            <div style={{ display:"flex", gap: isMobile ? 5 : 8, alignItems:"center", justifyContent:"center" }}>
 
               {/* Left: Weapon / Suit / Boots */}
-              <div style={{ display:"flex", flexDirection:"column", gap:8, alignItems:"center" }}>
-                <Slot label="Weapon" size={52} />
-                <Slot label="Suit"   size={52} />
-                <Slot label="Boots"  size={52} />
+              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 5 : 8, alignItems:"center" }}>
+                <Slot label="Weapon" size={isMobile ? 36 : 52} />
+                <Slot label="Suit"   size={isMobile ? 36 : 52} />
+                <Slot label="Boots"  size={isMobile ? 36 : 52} />
               </div>
 
               {/* Center: Character / Avatar */}
               <div style={{
-                width: 80, flexShrink:0,
-                display:"flex", flexDirection:"column", alignItems:"center", gap:6,
+                width: isMobile ? 55 : 80, flexShrink:0,
+                display:"flex", flexDirection:"column", alignItems:"center", gap: isMobile ? 4 : 6,
               }}>
                 <div style={{
-                  width: 80, height: 120,
+                  width: isMobile ? 55 : 80, height: isMobile ? 82 : 120,
                   background: "radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.1), transparent 70%)",
                   border: "1px solid rgba(0,212,255,0.15)",
                   borderRadius: 6,
@@ -223,27 +226,27 @@ export default function ProfileButton() {
                   />
                 </div>
                 <span style={{
-                  fontFamily:"Orbitron,sans-serif", fontSize:5.5, fontWeight:"bold",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 4.5 : 5.5, fontWeight:"bold",
                   letterSpacing:"0.1em", color:"rgba(0,212,255,0.6)",
                   textAlign:"center",
                 }}>{displayName}</span>
               </div>
 
               {/* Right: Helmet / Gloves */}
-              <div style={{ display:"flex", flexDirection:"column", gap:8, alignItems:"center", justifyContent:"center" }}>
-                <Slot label="Helmet" size={52} />
-                <Slot label="Gloves" size={52} />
+              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 5 : 8, alignItems:"center", justifyContent:"center" }}>
+                <Slot label="Helmet" size={isMobile ? 36 : 52} />
+                <Slot label="Gloves" size={isMobile ? 36 : 52} />
               </div>
 
             </div>
 
             {/* Divider */}
-            <div style={{ height:1, background:"rgba(0,212,255,0.1)", margin:"12px 0 10px" }}/>
+            <div style={{ height:1, background:"rgba(0,212,255,0.1)", margin: isMobile ? "6px 0 6px" : "12px 0 10px" }}/>
 
             {/* ── Bottom row: Flag / Staff / Badge / Power ── */}
-            <div style={{ display:"flex", justifyContent:"space-between", gap:6 }}>
+            <div style={{ display:"flex", justifyContent:"space-between", gap: isMobile ? 4 : 6 }}>
               {["Flag","Staff","Badge","Power"].map(label => (
-                <Slot key={label} label={label} size={48} />
+                <Slot key={label} label={label} size={isMobile ? 30 : 48} />
               ))}
             </div>
 

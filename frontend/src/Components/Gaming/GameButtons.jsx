@@ -2,6 +2,8 @@
 // Frame bottom y=488, bar center y=482 → 96.4%; buttons raised to ~91%
 // DIV1 bottom x=280, DIV2 bottom x=695
 // Panel bottom centers: RACING (15+280)/2=147→14.7vw, QUEST (280+695)/2=487→48.7vw, OVERLORD (695+860)/2=777→77.7vw
+import useMobileLandscape from "../../hooks/useMobileLandscape";
+
 const GAMES = [
   {
     label: "RACING",
@@ -44,11 +46,13 @@ const CSS = `
 `;
 
 export default function GameButtons({ activeGame, onSelect }) {
+  const isMobile = useMobileLandscape();
   return (
     <>
       <style>{CSS}</style>
       {GAMES.map(g => {
         const isActive = activeGame === g.label;
+        const isOverlord = g.label === "OVERLORD";
         return (
           <button
             key={g.label}
@@ -59,7 +63,8 @@ export default function GameButtons({ activeGame, onSelect }) {
               left: g.left,
               top:  "91%",
               transform:"translateX(-50%) translateY(-50%)",
-              padding:"7px 0", width:g.width,
+              padding:"7px 0",
+              width: isMobile && isOverlord ? "15vw" : g.width,
               background: isActive ? g.accent : g.bg,
               border:`1px solid ${g.accent}`,
               borderTop:`2px solid ${g.accent}`,
@@ -67,7 +72,9 @@ export default function GameButtons({ activeGame, onSelect }) {
               clipPath:"polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
               color: isActive ? "#000" : "#fff",
               fontFamily:"Orbitron,sans-serif",
-              fontSize:10, fontWeight:"bold", letterSpacing:"0.15em",
+              fontSize: isMobile && isOverlord ? 8 : 10,
+              fontWeight:"bold",
+              letterSpacing: isMobile && isOverlord ? "0.08em" : "0.15em",
               cursor:"pointer", zIndex:20, whiteSpace:"nowrap", textAlign:"center",
               boxShadow: isActive
                 ? `0 0 32px ${g.glow}, 0 0 8px ${g.accent}, inset 0 1px 0 rgba(255,255,255,0.3)`
