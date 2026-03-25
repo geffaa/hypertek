@@ -63,9 +63,9 @@ export default function News() {
       <div className="flex md:hidden flex-col w-full px-5 gap-0">
 
         {/* Mobile: NEWS heading */}
-        <div className="flex items-center mb-6">
-          <h2 className="text-white font-goldman uppercase border-b-2 border-white pb-1 text-xl">NEWS</h2>
-          <div className="flex-1 ml-3 mt-6 h-[2px] bg-gradient-to-r from-white to-transparent" />
+        <div className="flex items-end mb-6">
+          <h2 className="text-white font-goldman uppercase text-xl pb-1 border-b-2 border-white">NEWS</h2>
+          <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
         </div>
 
         {/* Mobile featured articles — top 3 */}
@@ -199,13 +199,13 @@ export default function News() {
         <div className="flex flex-col gap-4 w-[42%]">
 
           {/* NEWS heading */}
-          <motion.div className="flex items-center"
+          <motion.div className="flex items-end"
             variants={fadeRight} custom={0} initial="hidden"
             whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-            <h2 className="text-white font-goldman uppercase border-b-2 border-white pb-1 text-[22px]">
+            <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
               NEWS
             </h2>
-            <div className="flex-1 ml-3 mt-6 h-[2px] bg-gradient-to-r from-white to-transparent" />
+            <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
           </motion.div>
 
           {/* Right featured article */}
