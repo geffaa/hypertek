@@ -129,14 +129,15 @@ export default function News() {
       {/* ================= END MOBILE ================= */}
 
       {/* ================= DESKTOP LAYOUT ================= */}
-      <div className="hidden md:flex flex-col md:flex-row gap-10 w-full max-w-[1480px] mx-auto px-10">
+      <div className="hidden md:flex flex-row gap-20 w-full max-w-[1520px] mx-auto">
 
-        {/* Left Column */}
-        <div className="flex flex-col gap-5 w-full md:w-[680px]">
+        {/* Left Column — 60% */}
+        <div className="flex flex-col gap-6 w-[60%]">
+          {/* Featured large image: 680x405 ratio = ~59.6% height of width */}
           {news.slice(0, 1).map((item, i) => (
             <motion.div
               key={item._id}
-              className="flex flex-col gap-3 cursor-pointer"
+              className="flex flex-col gap-6 cursor-pointer"
               onClick={() => handleNewsClick(item)}
               variants={fadeLeft}
               custom={0}
@@ -147,8 +148,9 @@ export default function News() {
               <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-full h-[320px]"
+                className="w-full"
                 imgClassName="object-cover"
+                style={{ aspectRatio: "680/405" }}
               />
               <div className="flex flex-col gap-2 pt-1">
                 <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "15px" }}>
@@ -161,7 +163,8 @@ export default function News() {
             </motion.div>
           ))}
 
-          <div className="flex gap-4">
+          {/* 2 smaller images: 330x262 ratio = ~79.4% height of width */}
+          <div className="flex gap-6">
             {news.slice(1, 3).map((item, i) => (
               <motion.div
                 key={item._id}
@@ -176,8 +179,9 @@ export default function News() {
                 <LazyImage
                   src={getImageUrl(item.image)}
                   alt={item.heading}
-                  className="w-full h-[180px]"
+                  className="w-full"
                   imgClassName="object-cover"
+                  style={{ aspectRatio: "330/262" }}
                 />
                 <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "13px" }}>
                   {item.heading.length > 35 ? item.heading.slice(0, 35) + "..." : item.heading}
@@ -190,8 +194,8 @@ export default function News() {
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="flex flex-col gap-4 w-full md:w-[420px]">
+        {/* Right Column — 40% */}
+        <div className="flex flex-col gap-3 w-[40%]">
           <motion.div
             className="flex items-center mb-1"
             variants={fadeRight}
@@ -221,8 +225,9 @@ export default function News() {
               <LazyImage
                 src={getImageUrl(item.image)}
                 alt={item.heading}
-                className="w-full h-[180px]"
+                className="w-full"
                 imgClassName="object-cover"
+                style={{ aspectRatio: "462/209" }}
               />
               <h3 className="text-white font-bold uppercase font-goldman leading-tight" style={{ fontSize: "13px" }}>
                 {item.heading.length > 65 ? item.heading.slice(0, 65) + "..." : item.heading}
@@ -246,8 +251,9 @@ export default function News() {
                 <LazyImage
                   src={getImageUrl(item.image)}
                   alt={item.heading}
-                  className="w-[90px] h-[65px] flex-shrink-0"
+                  className="flex-shrink-0"
                   imgClassName="object-cover"
+                  style={{ width: "229px", aspectRatio: "229/157" }}
                 />
                 <p className="text-white self-center" style={{ fontSize: "12px", lineHeight: "1.5" }}>
                   {item.description.length > 80 ? item.description.slice(0, 80) + "..." : item.description}
