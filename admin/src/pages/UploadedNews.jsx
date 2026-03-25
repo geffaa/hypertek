@@ -54,7 +54,7 @@ function UpdateNewsItems() {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append("name", heading);
+      formData.append("heading", heading);
       formData.append("description", description);
       if (selectedImage) {
         const blob = await (await fetch(selectedImage)).blob();
