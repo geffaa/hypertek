@@ -30,9 +30,9 @@ const CSS = `
     cursor: pointer;
   }
   .equip-slot:hover {
-    border-color: rgba(0,212,255,0.7) !important;
-    box-shadow: 0 0 12px rgba(0,212,255,0.35) !important;
-    background: rgba(0,212,255,0.08) !important;
+    border-color: rgba(0,212,255,0.85) !important;
+    box-shadow: 0 0 20px rgba(0,212,255,0.5), 0 0 8px rgba(0,212,255,0.3) !important;
+    transform: scale(1.06);
   }
   @keyframes avatarPanelIn {
     from { opacity:0; transform: translateY(-10px) scale(0.97); }
@@ -41,30 +41,50 @@ const CSS = `
   .avatar-panel { animation: avatarPanelIn 0.2s ease both; }
 `;
 
+/* ── Slot icons map ── */
+const SLOT_ICONS = {
+  Weapon:  { emoji: "⚔️",  color: "#f87171" },
+  Suit:    { emoji: "🥋",  color: "#38bdf8" },
+  Boots:   { emoji: "👢",  color: "#fb923c" },
+  Helmet:  { emoji: "⛑️",  color: "#fcd34d" },
+  Gloves:  { emoji: "🧤",  color: "#a78bfa" },
+  Flag:    { emoji: "🚩",  color: "#f87171" },
+  Staff:   { emoji: "🪄",  color: "#c4b5fd" },
+  Badge:   { emoji: "🏅",  color: "#fcd34d" },
+  Power:   { emoji: "⚡",  color: "#38bdf8" },
+};
+
 /* ── Equipment slot component ── */
-function Slot({ label, size = 54, icon = null }) {
+function Slot({ label, size = 54 }) {
+  const slot = SLOT_ICONS[label] || { emoji: "❓", color: "#00D4FF" };
+  const iconSize = Math.round(size * 0.52);
   return (
-    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:5 }}>
       <div className="equip-slot" style={{
         width: size, height: size,
-        border: "1.5px solid rgba(0,212,255,0.25)",
-        borderRadius: 5,
-        background: "rgba(3,10,28,0.85)",
+        border: `1.5px solid ${slot.color}55`,
+        borderRadius: 6,
+        background: `radial-gradient(circle at 40% 35%, ${slot.color}18, rgba(3,10,28,0.92))`,
         backdropFilter: "blur(6px)",
         display: "flex", alignItems: "center", justifyContent: "center",
-        boxShadow: "0 0 6px rgba(0,212,255,0.08)",
-        fontSize: 20,
+        boxShadow: `0 0 10px ${slot.color}22, inset 0 1px 0 rgba(255,255,255,0.06)`,
+        fontSize: iconSize,
+        lineHeight: 1,
+        position: "relative",
       }}>
-        {icon || (
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-            <rect x="4" y="4" width="16" height="16" rx="2"
-              stroke="rgba(0,212,255,0.2)" strokeWidth="1" strokeDasharray="3 2"/>
-          </svg>
-        )}
+        {slot.emoji}
+        {/* locked overlay */}
+        <div style={{
+          position:"absolute", inset:0, borderRadius:6,
+          background:"rgba(0,0,0,0.45)",
+          display:"flex", alignItems:"center", justifyContent:"center",
+          fontSize: Math.round(size * 0.3),
+        }}>🔒</div>
       </div>
       <span style={{
-        fontFamily: "Orbitron,sans-serif", fontSize: 6, fontWeight: "bold",
-        letterSpacing: "0.1em", color: "rgba(157,216,240,0.55)",
+        fontFamily: "Orbitron,sans-serif", fontSize: size >= 48 ? 9 : 7, fontWeight: "bold",
+        letterSpacing: "0.08em", color: slot.color,
+        textShadow: `0 0 6px ${slot.color}66`,
       }}>{label.toUpperCase()}</span>
     </div>
   );
@@ -99,10 +119,22 @@ export default function ProfileButton() {
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
 
-  const avatarSrc   = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar.png";
-  const displayName = profile?.Email
-    ? profile.Email.split("@")[0].replace(/[0-9]/g, "").toUpperCase() || "COMMANDER"
-    : "COMMANDER";
+  const avatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar.png";
+
+  const getDisplayName = () =>
+    localStorage.getItem("hypertek_display_name") ||
+    (profile?.Email ? profile.Email.split("@")[0].replace(/[0-9]/g, "").toUpperCase() || "COMMANDER" : "COMMANDER");
+
+  const [displayName, setDisplayName] = useState(getDisplayName);
+
+  // Update name when profile loads or when changed from Settings
+  useEffect(() => { setDisplayName(getDisplayName()); }, [profile]);
+
+  useEffect(() => {
+    const handler = (e) => setDisplayName(e.detail || getDisplayName());
+    window.addEventListener("hypertek_name_changed", handler);
+    return () => window.removeEventListener("hypertek_name_changed", handler);
+  }, []);
 
   return (
     <>
@@ -149,14 +181,14 @@ export default function ProfileButton() {
         }}>
           <div style={{
             fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(4px,0.45vw,6px)", fontWeight: "bold",
+            fontSize: "clamp(8px,0.7vw,11px)", fontWeight: "bold",
             letterSpacing: "0.14em", color: "#00D4FF",
             textShadow: "0 0 8px rgba(0,212,255,0.6)", lineHeight: 1.3,
           }}>{displayName}</div>
           <div style={{
             fontFamily: "Orbitron,sans-serif",
-            fontSize: "clamp(5px,0.5vw,6.5px)", letterSpacing: "0.1em",
-            color: "rgba(148,192,210,0.65)", lineHeight: 1.3,
+            fontSize: "clamp(7px,0.6vw,9px)", letterSpacing: "0.1em",
+            color: "rgba(255,255,255,0.75)", lineHeight: 1.3,
           }}>HYPER-TEK PLAYER</div>
         </div>}
 
@@ -169,26 +201,26 @@ export default function ProfileButton() {
             top: "calc(100% + 8px)",
             left: isMobile ? "0" : "50%",
             transform: isMobile ? "none" : "translateX(-50%)",
-            width: isMobile ? 185 : 260,
+            width: isMobile ? 240 : 360,
             background: "rgba(4,10,26,0.97)",
-            border: "1px solid rgba(0,212,255,0.25)",
-            borderRadius: 8,
+            border: "1px solid rgba(0,212,255,0.3)",
+            borderRadius: 10,
             backdropFilter: "blur(18px)",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.7), 0 0 20px rgba(0,212,255,0.08)",
-            padding: isMobile ? "8px 8px 8px" : "14px 12px 12px",
+            boxShadow: "0 12px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.1)",
+            padding: isMobile ? "10px 10px 10px" : "18px 16px 14px",
             zIndex: 40,
           }}>
 
             {/* Header */}
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom: isMobile ? 6 : 12 }}>
               <span style={{
-                fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7.5, fontWeight:"bold",
+                fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
                 letterSpacing:"0.14em", color:"#00D4FF",
-                textShadow:"0 0 8px rgba(0,212,255,0.5)",
+                textShadow:"0 0 10px rgba(0,212,255,0.7)",
               }}>AVATAR</span>
               <button onClick={() => setOpen(false)} style={{
-                background:"none", border:"none", color:"rgba(157,216,240,0.4)",
-                fontSize: isMobile ? 12 : 15, cursor:"pointer", lineHeight:1, padding:"0 2px",
+                background:"none", border:"none", color:"rgba(255,255,255,0.65)",
+                fontSize: isMobile ? 14 : 18, cursor:"pointer", lineHeight:1, padding:"0 2px",
               }}>×</button>
             </div>
 
@@ -196,24 +228,25 @@ export default function ProfileButton() {
             <div style={{ display:"flex", gap: isMobile ? 5 : 8, alignItems:"center", justifyContent:"center" }}>
 
               {/* Left: Weapon / Suit / Boots */}
-              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 5 : 8, alignItems:"center" }}>
-                <Slot label="Weapon" size={isMobile ? 36 : 52} />
-                <Slot label="Suit"   size={isMobile ? 36 : 52} />
-                <Slot label="Boots"  size={isMobile ? 36 : 52} />
+              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 6 : 10, alignItems:"center" }}>
+                <Slot label="Weapon" size={isMobile ? 46 : 68} />
+                <Slot label="Suit"   size={isMobile ? 46 : 68} />
+                <Slot label="Boots"  size={isMobile ? 46 : 68} />
               </div>
 
               {/* Center: Character / Avatar */}
               <div style={{
-                width: isMobile ? 55 : 80, flexShrink:0,
-                display:"flex", flexDirection:"column", alignItems:"center", gap: isMobile ? 4 : 6,
+                flex: 1, flexShrink:0,
+                display:"flex", flexDirection:"column", alignItems:"center", gap: isMobile ? 5 : 8,
               }}>
                 <div style={{
-                  width: isMobile ? 55 : 80, height: isMobile ? 82 : 120,
-                  background: "radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.1), transparent 70%)",
-                  border: "1px solid rgba(0,212,255,0.15)",
-                  borderRadius: 6,
+                  width: isMobile ? 70 : 110, height: isMobile ? 100 : 160,
+                  background: "radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.15), transparent 70%)",
+                  border: "1px solid rgba(0,212,255,0.25)",
+                  borderRadius: 8,
                   display:"flex", alignItems:"center", justifyContent:"center",
                   overflow:"hidden",
+                  boxShadow: "0 0 20px rgba(0,212,255,0.1)",
                 }}>
                   <img
                     src={avatarSrc}
@@ -226,16 +259,16 @@ export default function ProfileButton() {
                   />
                 </div>
                 <span style={{
-                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 4.5 : 5.5, fontWeight:"bold",
-                  letterSpacing:"0.1em", color:"rgba(0,212,255,0.6)",
-                  textAlign:"center",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, fontWeight:"bold",
+                  letterSpacing:"0.1em", color:"#00D4FF",
+                  textAlign:"center", textShadow:"0 0 8px rgba(0,212,255,0.5)",
                 }}>{displayName}</span>
               </div>
 
               {/* Right: Helmet / Gloves */}
-              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 5 : 8, alignItems:"center", justifyContent:"center" }}>
-                <Slot label="Helmet" size={isMobile ? 36 : 52} />
-                <Slot label="Gloves" size={isMobile ? 36 : 52} />
+              <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 6 : 10, alignItems:"center", justifyContent:"center" }}>
+                <Slot label="Helmet" size={isMobile ? 46 : 68} />
+                <Slot label="Gloves" size={isMobile ? 46 : 68} />
               </div>
 
             </div>
@@ -244,9 +277,9 @@ export default function ProfileButton() {
             <div style={{ height:1, background:"rgba(0,212,255,0.1)", margin: isMobile ? "6px 0 6px" : "12px 0 10px" }}/>
 
             {/* ── Bottom row: Flag / Staff / Badge / Power ── */}
-            <div style={{ display:"flex", justifyContent:"space-between", gap: isMobile ? 4 : 6 }}>
+            <div style={{ display:"flex", justifyContent:"space-around", gap: isMobile ? 4 : 8 }}>
               {["Flag","Staff","Badge","Power"].map(label => (
-                <Slot key={label} label={label} size={isMobile ? 30 : 48} />
+                <Slot key={label} label={label} size={isMobile ? 44 : 64} />
               ))}
             </div>
 

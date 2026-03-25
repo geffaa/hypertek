@@ -129,11 +129,12 @@ const CSS = `
   .hud-panel-tab:hover { background: rgba(0,229,255,0.1) !important; color:#fff !important; }
   .hud-event-row { transition: background 0.13s; cursor: pointer; }
   .hud-event-row:hover { background: rgba(0,229,255,0.07) !important; }
-  .hud-item-cell { transition: transform 0.14s, box-shadow 0.14s, background 0.14s; cursor: pointer; }
+  .hud-item-cell { transition: transform 0.14s, box-shadow 0.14s, background 0.14s, border-color 0.14s; cursor: pointer; }
   .hud-item-cell:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 14px rgba(0,212,255,0.35) !important;
-    background: rgba(0,229,255,0.12) !important;
+    transform: scale(1.08);
+    box-shadow: 0 0 22px rgba(0,212,255,0.65) !important;
+    background: rgba(0,229,255,0.18) !important;
+    border-color: rgba(0,229,255,0.7) !important;
   }
   .hud-item-cell:active { transform: scale(0.95); }
   @keyframes panelSlideIn {
@@ -165,8 +166,8 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
       position: "absolute",
       right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
       top:       isMobile ? "60px"  : "21vh",
-      width:     isMobile ? 190     : 280,
-      maxHeight: isMobile ? "62vh"  : "58vh",
+      width:     isMobile ? 220     : 340,
+      maxHeight: isMobile ? "70vh"  : "65vh",
       zIndex: 29,
       background: "rgba(5,12,28,0.97)",
       border: `1px solid ${accentColor}40`,
@@ -180,17 +181,17 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
       {/* Header */}
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "10px 14px 8px",
+        padding: isMobile ? "7px 10px 6px" : "10px 14px 8px",
         borderBottom: `1px solid ${accentColor}20`,
       }}>
         <span style={{
-          fontFamily: "Orbitron,sans-serif", fontSize: 9,
+          fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
           fontWeight: "bold", letterSpacing: "0.18em",
-          color: accentColor, textShadow: `0 0 8px ${accentColor}99`,
+          color: accentColor, textShadow: `0 0 10px ${accentColor}cc`,
         }}>{title}</span>
         <button onClick={onClose} style={{
           background: "none", border: "none",
-          color: "rgba(157,216,240,0.5)", fontSize: 16,
+          color: "rgba(157,216,240,0.5)", fontSize: isMobile ? 13 : 16,
           cursor: "pointer", lineHeight: 1, padding: "0 2px",
         }}>×</button>
       </div>
@@ -201,8 +202,19 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
 
 /* ── Events panel ────────────────────────────────────────────── */
 function EventsPanel({ onClose, isMobile }) {
-  const [tab,    setTab]    = useState("Limited");
-  const [detail, setDetail] = useState(null);   // event being viewed
+  const [tab,      setTab]      = useState("Limited");
+  const [detail,   setDetail]   = useState(null);
+  const [selected, setSelected] = useState(null); // highlighted row for Activities/Competition
+
+  const handleRowClick = (ev) => {
+    if (ev.locked) return;
+    if (tab === "Limited") {
+      setDetail(ev);
+    } else {
+      // Activities & Competition: just highlight, no detail view
+      setSelected(prev => prev === ev.title ? null : ev.title);
+    }
+  };
 
   return (
     <SidePanel title="EVENT CENTER" onClose={onClose} isMobile={isMobile}>
@@ -211,11 +223,11 @@ function EventsPanel({ onClose, isMobile }) {
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)" }}>
         {["Limited","Activities","Competition"].map(t => (
           <button key={t} className="hud-panel-tab"
-            onClick={() => { setTab(t); setDetail(null); }}
+            onClick={() => { setTab(t); setDetail(null); setSelected(null); }}
             style={{
-              flex:1, padding:"7px 4px", background:"none", border:"none",
+              flex:1, padding: isMobile ? "5px 2px" : "7px 4px", background:"none", border:"none",
               borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
-              fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
               letterSpacing:"0.08em",
               color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.5)",
               whiteSpace:"nowrap",
@@ -226,52 +238,61 @@ function EventsPanel({ onClose, isMobile }) {
       {/* ── Event list ── */}
       {!detail && (
         <div style={{ overflowY:"auto", flex:1 }}>
-          {EVENT_DATA[tab].map((ev, i) => (
-            <div key={i} className="hud-event-row"
-              onClick={() => !ev.locked && setDetail(ev)}
-              style={{
-                padding:"9px 14px",
-                borderBottom:"1px solid rgba(0,229,255,0.06)",
-                opacity: ev.locked ? 0.45 : 1,
-                cursor: ev.locked ? "not-allowed" : "pointer",
-                display:"flex", alignItems:"center", justifyContent:"space-between",
-              }}>
-              <div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold",
-                  letterSpacing:"0.08em", color: ev.locked ? "rgba(157,216,240,0.5)" : "#c7e9f7",
-                  marginBottom:3,
-                }}>{ev.title}</div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
-                  color: ev.time ? "#facc15" : "rgba(0,229,255,0.5)", letterSpacing:"0.06em",
+          {EVENT_DATA[tab].map((ev, i) => {
+            const isSelected = selected === ev.title;
+            const isActive   = !ev.locked;
+            return (
+              <div key={i} className="hud-event-row"
+                onClick={() => handleRowClick(ev)}
+                style={{
+                  padding: isMobile ? "7px 10px" : "9px 14px",
+                  borderBottom:"1px solid rgba(0,229,255,0.06)",
+                  opacity: ev.locked ? 0.45 : 1,
+                  cursor: ev.locked ? "not-allowed" : "pointer",
+                  display:"flex", alignItems:"center", justifyContent:"space-between",
+                  background: isSelected ? "rgba(0,229,255,0.08)" : undefined,
                 }}>
-                  {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
+                <div>
+                  <div style={{
+                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
+                    letterSpacing:"0.08em",
+                    color: ev.locked ? "rgba(157,216,240,0.5)" : isSelected ? "#00E5FF" : "#c7e9f7",
+                    marginBottom:3,
+                  }}>{ev.title}</div>
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
+                    color: ev.time ? "#facc15" : "rgba(0,229,255,0.5)", letterSpacing:"0.06em",
+                  }}>
+                    {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
+                  </div>
                 </div>
+                {ev.locked
+                  ? <span style={{ fontSize: isMobile ? 9 : 11, opacity:0.5 }}>🔒</span>
+                  : tab === "Limited"
+                    ? <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
+                        color:"rgba(0,229,255,0.4)", letterSpacing:"0.06em",
+                      }}>VIEW →</span>
+                    : null
+                }
               </div>
-              {ev.locked
-                ? <span style={{ fontSize:11, opacity:0.5 }}>🔒</span>
-                : <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                    color:"rgba(0,229,255,0.4)", letterSpacing:"0.06em",
-                  }}>VIEW →</span>
-              }
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
       {/* ── Event detail view ── */}
       {detail && (
-        <div style={{ overflowY:"auto", flex:1, padding:"12px 14px" }}>
+        <div style={{ overflowY:"auto", flex:1, padding: isMobile ? "8px 10px" : "12px 14px" }}>
           <button onClick={() => setDetail(null)} style={{
             background:"none", border:"none", cursor:"pointer", padding:"0 0 10px 0",
-            fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(0,229,255,0.6)",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"rgba(0,229,255,0.6)",
             letterSpacing:"0.1em",
           }}>← BACK</button>
 
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold",
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
             color:"#c7e9f7", letterSpacing:"0.1em", marginBottom:6,
           }}>{detail.title}</div>
 
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
             color: detail.time ? "#facc15" : "rgba(0,229,255,0.6)",
             letterSpacing:"0.06em", marginBottom:14,
           }}>
@@ -280,7 +301,7 @@ function EventsPanel({ onClose, isMobile }) {
 
           <div style={{ height:1, background:"rgba(0,229,255,0.1)", marginBottom:12 }}/>
 
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
             color:"rgba(157,216,240,0.45)", lineHeight:1.7,
           }}>
             Full event details, rewards, and participation options will be available when this event launches.
@@ -308,42 +329,42 @@ function ItemsPanel({ onClose, isMobile }) {
           <button key={t} className="hud-panel-tab"
             onClick={() => { setTab(t); setSpecCategory(null); setProfile(null); }}
             style={{
-              flex:1, padding:"7px 6px", background:"none", border:"none",
+              flex:1, padding: isMobile ? "5px 3px" : "7px 6px", background:"none", border:"none",
               borderBottom: tab === t ? "2px solid #38bdf8" : "2px solid transparent",
-              fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
               letterSpacing:"0.06em",
-              color: tab === t ? "#38bdf8" : "rgba(100,170,210,0.5)",
+              color: tab === t ? "#38bdf8" : "rgba(157,216,240,0.7)",
               whiteSpace:"nowrap", minWidth:0,
             }}>{t}</button>
         ))}
       </div>
 
       {/* ── Content ── */}
-      <div style={{ overflowY:"auto", flex:1, padding:"10px", alignContent:"start" }}>
+      <div style={{ overflowY:"auto", flex:1, padding: isMobile ? "7px" : "10px", alignContent:"start" }}>
 
         {/* INVENTORY */}
         {tab === "Inventory" && (
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+          <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(3,1fr)" : "repeat(4,1fr)", gap: isMobile ? 5 : 6 }}>
             {items.map((item, i) => (
               <div key={i} className="hud-item-cell" style={{
-                background: item.locked ? "rgba(3,10,28,0.5)" : "rgba(3,10,28,0.88)",
-                border:`1px solid ${item.color}${item.locked ? "22" : "33"}`,
-                borderRadius:4, padding:"8px 4px 5px",
+                background: item.locked ? "rgba(3,10,28,0.7)" : "rgba(3,10,28,0.88)",
+                border:`1px solid ${item.color}55`,
+                borderRadius:4, padding: isMobile ? "6px 3px 4px" : "8px 4px 5px",
                 display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-                boxShadow:`0 0 8px ${item.color}${item.locked ? "00" : "18"}`,
-                position:"relative", opacity: item.locked ? 0.55 : 1,
+                boxShadow:`0 0 8px ${item.color}${item.locked ? "25" : "30"}`,
+                position:"relative", opacity: item.locked ? 0.88 : 1,
                 cursor: item.locked ? "not-allowed" : "pointer",
               }}>
-                <div style={{ fontSize:18, lineHeight:1, filter: item.locked ? "grayscale(1)" : "none" }}>{item.icon}</div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
-                  color: item.locked ? "rgba(148,192,210,0.4)" : item.color,
+                <div style={{ fontSize: isMobile ? 15 : 18, lineHeight:1, filter: item.locked ? "grayscale(0.5)" : "none" }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, fontWeight:"bold",
+                  color: item.locked ? "rgba(157,216,240,0.85)" : item.color,
                   textAlign:"center", letterSpacing:"0.05em", lineHeight:1.2,
                 }}>{item.name}</div>
                 {item.locked
-                  ? <div style={{ fontSize:8, position:"absolute", top:3, right:4 }}>🔒</div>
+                  ? <div style={{ fontSize: isMobile ? 7 : 9, position:"absolute", top:3, right:4 }}>🔒</div>
                   : <div style={{ position:"absolute", top:3, right:4,
-                      fontFamily:"Orbitron,sans-serif", fontSize:6, fontWeight:"bold",
-                      color:"rgba(255,255,255,0.6)",
+                      fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
+                      color:"rgba(255,255,255,0.8)",
                     }}>{item.qty}</div>
                 }
               </div>
@@ -353,20 +374,21 @@ function ItemsPanel({ onClose, isMobile }) {
 
         {/* WEAPONS */}
         {tab === "Weapons" && (
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+          <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(3,1fr)" : "repeat(4,1fr)", gap: isMobile ? 5 : 6 }}>
             {items.map((item, i) => (
               <div key={i} className="hud-item-cell" style={{
-                background:"rgba(3,10,28,0.5)",
-                border:`1px solid ${item.color}22`,
-                borderRadius:4, padding:"8px 4px 5px",
+                background:"rgba(3,10,28,0.7)",
+                border:`1px solid ${item.color}55`,
+                borderRadius:4, padding: isMobile ? "6px 3px 4px" : "8px 4px 5px",
                 display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-                position:"relative", opacity:0.55, cursor:"not-allowed",
+                position:"relative", opacity:0.88, cursor:"not-allowed",
+                boxShadow:`0 0 8px ${item.color}25`,
               }}>
-                <div style={{ fontSize:18, lineHeight:1, filter:"grayscale(1)" }}>{item.icon}</div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
-                  color:"rgba(148,192,210,0.4)", textAlign:"center", lineHeight:1.2,
+                <div style={{ fontSize: isMobile ? 15 : 18, lineHeight:1, filter:"grayscale(0.5)" }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, fontWeight:"bold",
+                  color:"rgba(157,216,240,0.85)", textAlign:"center", lineHeight:1.2,
                 }}>{item.name}</div>
-                <div style={{ fontSize:8, position:"absolute", top:3, right:4 }}>🔒</div>
+                <div style={{ fontSize: isMobile ? 7 : 9, position:"absolute", top:3, right:4 }}>🔒</div>
               </div>
             ))}
           </div>
@@ -374,27 +396,27 @@ function ItemsPanel({ onClose, isMobile }) {
 
         {/* REWARDS */}
         {tab === "Rewards" && (
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6 }}>
+          <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(3,1fr)" : "repeat(4,1fr)", gap: isMobile ? 5 : 6 }}>
             {items.map((item, i) => (
               <div key={i} className="hud-item-cell" style={{
                 background:"rgba(3,10,28,0.88)", border:`1px solid ${item.color}33`,
-                borderRadius:4, padding:"8px 4px 5px",
+                borderRadius:4, padding: isMobile ? "6px 3px 4px" : "8px 4px 5px",
                 display:"flex", flexDirection:"column", alignItems:"center", gap:3,
-                position:"relative", opacity: item.status === "CLAIMED" ? 0.45 : 1,
+                position:"relative", opacity: item.status === "CLAIMED" ? 0.75 : 1,
               }}>
-                <div style={{ fontSize:20, lineHeight:1 }}>{item.icon}</div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5, fontWeight:"bold",
+                <div style={{ fontSize: isMobile ? 16 : 20, lineHeight:1 }}>{item.icon}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, fontWeight:"bold",
                   color:"#c7e9f7", textAlign:"center", lineHeight:1.2,
                 }}>{item.name}</div>
                 {item.status !== "CLAIMED" && (
-                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5,
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                     color: item.status === "OPEN" ? "#fcd34d" : "#4ade80",
                     fontWeight:"bold", letterSpacing:"0.08em",
                   }}>{item.status}</div>
                 )}
                 {item.qty > 1 && (
                   <div style={{ position:"absolute", top:3, right:4,
-                    fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.55)",
+                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(255,255,255,0.8)",
                   }}>{item.qty}</div>
                 )}
               </div>
@@ -405,10 +427,10 @@ function ItemsPanel({ onClose, isMobile }) {
         {/* SPECIALISTS */}
         {tab === "Specialists" && !specCategory && !profile && (
           <>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.5)",
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.12em", marginBottom:8,
             }}>SELECT CATEGORY</div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:6 }}>
+            <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: isMobile ? 5 : 6 }}>
               {SPECIALIST_CATEGORIES.map(cat => {
                 const locked = CATEGORY_LOCKED[cat];
                 const color  = CATEGORY_COLOR[cat];
@@ -416,24 +438,25 @@ function ItemsPanel({ onClose, isMobile }) {
                   <button key={cat} className="hud-item-cell"
                     onClick={() => !locked && setSpecCategory(cat)}
                     style={{
-                      background: locked ? "rgba(3,10,28,0.6)" : "rgba(3,10,28,0.88)",
-                      border:`1px solid ${color}${locked ? "22" : "55"}`,
-                      borderRadius:4, padding:"10px 6px",
+                      background: locked ? "rgba(3,10,28,0.75)" : "rgba(3,10,28,0.88)",
+                      border:`1px solid ${color}${locked ? "55" : "66"}`,
+                      borderRadius:4, padding: isMobile ? "8px 4px" : "10px 6px",
                       display:"flex", flexDirection:"column", alignItems:"center", gap:4,
                       cursor: locked ? "not-allowed" : "pointer",
-                      opacity: locked ? 0.55 : 1,
+                      opacity: locked ? 0.88 : 1,
                       position:"relative",
+                      boxShadow: locked ? `0 0 8px ${color}20` : `0 0 10px ${color}30`,
                     }}>
-                    <div style={{ fontSize:16 }}>
+                    <div style={{ fontSize: isMobile ? 15 : 18, filter: locked ? "grayscale(0.4)" : "none" }}>
                       {locked ? "🔒" : "👤"}
                     </div>
-                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, fontWeight:"bold",
-                      color: locked ? "rgba(157,216,240,0.4)" : color,
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, fontWeight:"bold",
+                      color: locked ? "rgba(157,216,240,0.9)" : color,
                       letterSpacing:"0.06em", textAlign:"center",
                     }}>{cat.toUpperCase()}</div>
                     {locked && (
-                      <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:4.5,
-                        color:"rgba(157,216,240,0.3)", letterSpacing:"0.1em",
+                      <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 5 : 7,
+                        color:"rgba(157,216,240,0.75)", letterSpacing:"0.1em",
                       }}>COMING SOON</div>
                     )}
                   </button>
@@ -448,39 +471,39 @@ function ItemsPanel({ onClose, isMobile }) {
           <>
             <button onClick={() => setSpecCategory(null)} style={{
               background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
-              fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.6)",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.1em",
             }}>← BACK</button>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
               color: CATEGORY_COLOR[specCategory], letterSpacing:"0.12em", marginBottom:8,
             }}>{specCategory.toUpperCase()}</div>
-            <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
+            <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 4 : 6 }}>
               {(SPECIALISTS_BY_CATEGORY[specCategory] || []).map((s, i) => (
                 <div key={i} className="hud-item-cell"
                   onClick={() => setProfile(s)}
                   style={{
                     background:"rgba(3,10,28,0.88)", border:`1px solid ${s.color}33`,
-                    borderRadius:4, padding:"8px 10px",
-                    display:"flex", alignItems:"center", gap:10, cursor:"pointer",
+                    borderRadius:4, padding: isMobile ? "6px 8px" : "8px 10px",
+                    display:"flex", alignItems:"center", gap: isMobile ? 7 : 10, cursor:"pointer",
                   }}>
                   <div style={{
-                    width:36, height:36, borderRadius:"50%",
+                    width: isMobile ? 28 : 36, height: isMobile ? 28 : 36, borderRadius:"50%",
                     background:`radial-gradient(circle at 35% 30%, ${s.color}44, ${s.color}18)`,
                     border:`1.5px solid ${s.color}88`,
                     display:"flex", alignItems:"center", justifyContent:"center",
-                    fontSize:18, flexShrink:0,
+                    fontSize: isMobile ? 14 : 18, flexShrink:0,
                   }}>{s.icon}</div>
                   <div style={{ flex:1, minWidth:0 }}>
-                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
                       color:"#c7e9f7", letterSpacing:"0.06em",
                       whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
                     }}>{s.name}</div>
-                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:s.color,
+                    <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:s.color,
                       letterSpacing:"0.06em", marginTop:3,
                     }}>{s.role}</div>
                   </div>
-                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                    color:"rgba(56,189,248,0.4)", letterSpacing:"0.06em",
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                    color:"rgba(56,189,248,0.7)", letterSpacing:"0.06em",
                   }}>VIEW →</div>
                 </div>
               ))}
@@ -493,31 +516,31 @@ function ItemsPanel({ onClose, isMobile }) {
           <>
             <button onClick={() => setProfile(null)} style={{
               background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
-              fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.6)",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.1em",
             }}>← BACK</button>
             <div style={{
               background:"rgba(3,10,28,0.92)", border:`1px solid ${profile.color}44`,
-              borderRadius:6, padding:"16px 14px",
-              display:"flex", flexDirection:"column", alignItems:"center", gap:10,
+              borderRadius:6, padding: isMobile ? "12px 10px" : "16px 14px",
+              display:"flex", flexDirection:"column", alignItems:"center", gap: isMobile ? 7 : 10,
               boxShadow:`0 0 24px ${profile.color}22`,
             }}>
               <div style={{
-                width:64, height:64, borderRadius:"50%",
+                width: isMobile ? 48 : 64, height: isMobile ? 48 : 64, borderRadius:"50%",
                 background:`radial-gradient(circle at 35% 30%, ${profile.color}55, ${profile.color}22)`,
                 border:`2px solid ${profile.color}99`,
                 display:"flex", alignItems:"center", justifyContent:"center",
-                fontSize:32,
+                fontSize: isMobile ? 24 : 32,
               }}>{profile.icon}</div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold",
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
                 color:"#c7e9f7", letterSpacing:"0.1em", textAlign:"center",
               }}>{profile.name}</div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7,
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
                 color:profile.color, letterSpacing:"0.12em",
               }}>{profile.role}</div>
               <div style={{ width:"100%", height:1, background:`${profile.color}22`, margin:"4px 0" }}/>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                color:"rgba(157,216,240,0.45)", textAlign:"center", lineHeight:1.6,
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                color:"rgba(157,216,240,0.7)", textAlign:"center", lineHeight:1.6,
               }}>
                 Specialist profile — full stats and abilities will be available when the game launches.
               </div>
@@ -535,19 +558,22 @@ function SettingsPanel({ onClose, isMobile }) {
   const navigate = useNavigate();
   const [sound, setSound]   = useState(true);
   const [music, setMusic]   = useState(true);
-  const [name,  setName]    = useState("");
+  const [name,  setName]    = useState(localStorage.getItem("hypertek_display_name") || "");
   const [saved, setSaved]   = useState(false);
 
   const handleSaveName = () => {
     if (!name.trim()) return;
+    const upper = name.trim().toUpperCase();
+    localStorage.setItem("hypertek_display_name", upper);
+    window.dispatchEvent(new CustomEvent("hypertek_name_changed", { detail: upper }));
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
 
   const Toggle = ({ label, value, onChange }) => (
     <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center",
-      padding:"10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
-      <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, letterSpacing:"0.1em",
+      padding: isMobile ? "7px 10px" : "10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
+      <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, letterSpacing:"0.1em",
         color:"#c7e9f7" }}>{label}</span>
       <div onClick={() => onChange(!value)} style={{
         width:38, height:20, borderRadius:10, cursor:"pointer",
@@ -572,40 +598,40 @@ function SettingsPanel({ onClose, isMobile }) {
       <div style={{ overflowY:"auto", flex:1 }}>
 
         {/* Sound & Music */}
-        <div style={{ padding:"8px 14px 4px", fontFamily:"Orbitron,sans-serif",
-          fontSize:6.5, letterSpacing:"0.15em", color:"rgba(167,139,250,0.6)",
-          borderBottom:"1px solid rgba(167,139,250,0.12)" }}>AUDIO</div>
+        <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", fontFamily:"Orbitron,sans-serif",
+          fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>AUDIO</div>
         <Toggle label="Sound Effects" value={sound} onChange={setSound} />
         <Toggle label="Music"         value={music} onChange={setMusic} />
 
         {/* Profile */}
-        <div style={{ padding:"8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
-          fontSize:6.5, letterSpacing:"0.15em", color:"rgba(167,139,250,0.6)",
-          borderBottom:"1px solid rgba(167,139,250,0.12)" }}>PROFILE</div>
+        <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
+          fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>PROFILE</div>
 
-        <div style={{ padding:"10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"#c7e9f7",
+        <div style={{ padding: isMobile ? "7px 10px" : "10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, color:"#c7e9f7",
             letterSpacing:"0.1em", marginBottom:8 }}>CHANGE NAME</div>
           <div style={{ display:"flex", gap:6 }}>
             <input
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder="New name..."
+              placeholder={localStorage.getItem("hypertek_display_name") || "Enter your name..."}
               maxLength={20}
               style={{
                 flex:1, background:"rgba(0,12,30,0.9)",
                 border:"1px solid rgba(167,139,250,0.35)", borderRadius:4,
-                padding:"5px 8px", color:"#e2e8f0",
-                fontFamily:"Orbitron,sans-serif", fontSize:8,
+                padding: isMobile ? "4px 6px" : "5px 8px", color:"#e2e8f0",
+                fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
                 outline:"none",
               }}
             />
             <button onClick={handleSaveName} style={{
-              padding:"5px 10px",
+              padding: isMobile ? "4px 7px" : "5px 10px",
               background: saved ? "rgba(74,222,128,0.2)" : "rgba(167,139,250,0.15)",
               border:`1px solid ${saved ? "#4ade80" : "rgba(167,139,250,0.5)"}`,
               borderRadius:4, cursor:"pointer",
-              fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
               color: saved ? "#4ade80" : "#c4b5fd", letterSpacing:"0.08em",
               transition:"all 0.2s",
             }}>{saved ? "✓ SAVED" : "SAVE"}</button>
@@ -613,7 +639,7 @@ function SettingsPanel({ onClose, isMobile }) {
         </div>
 
         <div onClick={() => navigate("/Profile")} style={{
-          padding:"10px 14px", cursor:"pointer",
+          padding: isMobile ? "7px 10px" : "10px 14px", cursor:"pointer",
           borderBottom:"1px solid rgba(0,229,255,0.07)",
           display:"flex", justifyContent:"space-between", alignItems:"center",
           transition:"background 0.15s",
@@ -621,32 +647,32 @@ function SettingsPanel({ onClose, isMobile }) {
           onMouseEnter={e => e.currentTarget.style.background="rgba(167,139,250,0.08)"}
           onMouseLeave={e => e.currentTarget.style.background="transparent"}
         >
-          <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:8,
+          <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
             color:"#c7e9f7", letterSpacing:"0.1em" }}>PROFILE DETAILS</span>
-          <span style={{ color:"rgba(167,139,250,0.6)", fontSize:10 }}>›</span>
+          <span style={{ color:"rgba(167,139,250,0.6)", fontSize: isMobile ? 8 : 10 }}>›</span>
         </div>
 
         {/* Support */}
-        <div style={{ padding:"8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
-          fontSize:6.5, letterSpacing:"0.15em", color:"rgba(167,139,250,0.6)",
-          borderBottom:"1px solid rgba(167,139,250,0.12)" }}>SUPPORT</div>
+        <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
+          fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>SUPPORT</div>
 
         <div onClick={() => window.open("mailto:support@hyper-tek.io", "_blank")} style={{
-          padding:"10px 14px", cursor:"pointer",
+          padding: isMobile ? "7px 10px" : "10px 14px", cursor:"pointer",
           borderBottom:"1px solid rgba(0,229,255,0.07)",
           display:"flex", justifyContent:"space-between", alignItems:"center",
         }}
           onMouseEnter={e => e.currentTarget.style.background="rgba(167,139,250,0.08)"}
           onMouseLeave={e => e.currentTarget.style.background="transparent"}
         >
-          <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:8,
+          <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
             color:"#c7e9f7", letterSpacing:"0.1em" }}>CONTACT SUPPORT</span>
-          <span style={{ color:"rgba(167,139,250,0.6)", fontSize:10 }}>›</span>
+          <span style={{ color:"rgba(167,139,250,0.6)", fontSize: isMobile ? 8 : 10 }}>›</span>
         </div>
 
-        <div style={{ padding:"12px 14px", textAlign:"center" }}>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-            color:"rgba(100,140,180,0.4)", letterSpacing:"0.08em" }}>
+        <div style={{ padding: isMobile ? "8px 10px" : "12px 14px", textAlign:"center" }}>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+            color:"rgba(100,140,180,0.6)", letterSpacing:"0.08em" }}>
             HYPER-TEK v1.0.0
           </div>
         </div>
@@ -684,28 +710,28 @@ function AlliancePanel({ onClose, onOpenMail, isMobile }) {
         }}>
           <div style={{ display:"flex", alignItems:"center", gap:10 }}>
             <div style={{
-              width:40, height:40, borderRadius:"50%",
+              width: isMobile ? 32 : 40, height: isMobile ? 32 : 40, borderRadius:"50%",
               background:"radial-gradient(circle at 35% 30%, rgba(251,191,36,0.4), rgba(120,80,0,0.8))",
               border:"2px solid rgba(251,191,36,0.5)",
               display:"flex", alignItems:"center", justifyContent:"center",
-              fontSize:20, flexShrink:0,
+              fontSize: isMobile ? 16 : 20, flexShrink:0,
             }}>🦅</div>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold",
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
                 color:"#fbbf24", letterSpacing:"0.1em" }}>[HTK] HyperTek</div>
               <div style={{ display:"flex", gap:8, marginTop:3 }}>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                  color:"rgba(251,191,36,0.6)" }}>⚡ 117.5B</span>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                  color:"rgba(157,216,240,0.5)" }}>👥 128 / 150</span>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                  color:"rgba(251,191,36,0.85)" }}>⚡ 117.5B</span>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                  color:"rgba(157,216,240,0.75)" }}>👥 128 / 150</span>
               </div>
             </div>
           </div>
           <div style={{
             marginTop:8, padding:"5px 8px",
             background:"rgba(0,0,0,0.3)", borderRadius:3,
-            fontFamily:"Orbitron,sans-serif", fontSize:6.5,
-            color:"rgba(200,180,130,0.7)", fontStyle:"italic",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+            color:"rgba(200,180,130,0.85)", fontStyle:"italic",
           }}>
             "United we conquer the 7 Realms"
           </div>
@@ -715,8 +741,8 @@ function AlliancePanel({ onClose, onOpenMail, isMobile }) {
         <div style={{ marginTop:8 }}>
           {ALLIANCE_MENU.map((item, i) => (
             <div key={i} style={{
-              display:"flex", alignItems:"center", gap:10,
-              padding:"9px 12px",
+              display:"flex", alignItems:"center", gap: isMobile ? 7 : 10,
+              padding: isMobile ? "7px 10px" : "9px 12px",
               borderBottom:"1px solid rgba(251,191,36,0.07)",
               cursor:"pointer", transition:"background 0.14s",
             }}
@@ -724,33 +750,33 @@ function AlliancePanel({ onClose, onOpenMail, isMobile }) {
               onMouseLeave={e => e.currentTarget.style.background="transparent"}
             >
               <div style={{
-                width:30, height:30, borderRadius:6, flexShrink:0,
+                width: isMobile ? 24 : 30, height: isMobile ? 24 : 30, borderRadius:6, flexShrink:0,
                 background:"rgba(30,15,0,0.8)",
                 border:"1px solid rgba(251,191,36,0.25)",
                 display:"flex", alignItems:"center", justifyContent:"center",
-                fontSize:15,
+                fontSize: isMobile ? 12 : 15,
               }}>{item.icon}</div>
               <div style={{ flex:1, minWidth:0 }}>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5,
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
                   fontWeight:"bold", color:"#fbbf24", letterSpacing:"0.07em" }}>
                   {item.label}
                 </div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                  color:"rgba(200,180,130,0.5)", marginTop:1.5 }}>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                  color:"rgba(200,180,130,0.75)", marginTop:1.5 }}>
                   {item.desc}
                 </div>
               </div>
               <div style={{ display:"flex", alignItems:"center", gap:6, flexShrink:0 }}>
                 {item.badge > 0 && (
                   <div style={{
-                    width:18, height:18, borderRadius:"50%",
+                    width: isMobile ? 14 : 18, height: isMobile ? 14 : 18, borderRadius:"50%",
                     background:"#dc2626", display:"flex", alignItems:"center",
                     justifyContent:"center",
-                    fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
                     color:"#fff",
                   }}>{item.badge}</div>
                 )}
-                <span style={{ color:"rgba(251,191,36,0.5)", fontSize:12 }}>›</span>
+                <span style={{ color:"rgba(251,191,36,0.5)", fontSize: isMobile ? 10 : 12 }}>›</span>
               </div>
             </div>
           ))}
@@ -764,11 +790,11 @@ function AlliancePanel({ onClose, onOpenMail, isMobile }) {
       }}>
         {ALLIANCE_BOTTOM.map(t => (
           <button key={t} onClick={() => t === "Mail" ? onOpenMail?.() : setActiveBottom(t)} style={{
-            flex:1, padding:"8px 4px", background:"none", border:"none",
+            flex:1, padding: isMobile ? "6px 2px" : "8px 4px", background:"none", border:"none",
             borderTop: activeBottom === t ? "2px solid #fbbf24" : "2px solid transparent",
-            fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
             letterSpacing:"0.08em",
-            color: activeBottom === t ? "#fbbf24" : "rgba(200,170,80,0.45)",
+            color: activeBottom === t ? "#fbbf24" : "rgba(200,170,80,0.7)",
             cursor:"pointer", transition:"color 0.15s",
           }}>{t}</button>
         ))}
@@ -850,8 +876,8 @@ function MailPanel({ onClose, isMobile }) {
       position: "absolute",
       right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
       top:       isMobile ? "60px" : "21vh",
-      width:     isMobile ? 200    : 360,
-      maxHeight: isMobile ? "62vh" : "58vh",
+      width:     isMobile ? 240    : 440,
+      maxHeight: isMobile ? "70vh" : "65vh",
       zIndex: 29,
       background: "rgba(5,12,28,0.97)",
       border: "1px solid rgba(0,229,255,0.25)",
@@ -865,15 +891,15 @@ function MailPanel({ onClose, isMobile }) {
       {/* Header */}
       <div style={{
         display:"flex", alignItems:"center", justifyContent:"space-between",
-        padding:"10px 14px 8px",
+        padding: isMobile ? "7px 10px 6px" : "10px 14px 8px",
         borderBottom:"1px solid rgba(0,229,255,0.15)",
         flexShrink:0,
       }}>
-        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:9,
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
           fontWeight:"bold", letterSpacing:"0.18em",
-          color:"#00E5FF", textShadow:"0 0 8px rgba(0,229,255,0.6)" }}>MAIL</span>
+          color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>MAIL</span>
         <button onClick={onClose} style={{ background:"none", border:"none",
-          color:"rgba(157,216,240,0.5)", fontSize:16, cursor:"pointer", lineHeight:1 }}>×</button>
+          color:"rgba(157,216,240,0.5)", fontSize: isMobile ? 13 : 16, cursor:"pointer", lineHeight:1 }}>×</button>
       </div>
 
       {/* Body: category sidebar + message list */}
@@ -881,14 +907,14 @@ function MailPanel({ onClose, isMobile }) {
 
         {/* Left: categories */}
         <div style={{
-          width:105, flexShrink:0,
+          width: isMobile ? 90 : 140, flexShrink:0,
           borderRight:"1px solid rgba(0,229,255,0.1)",
           overflowY:"auto",
           background:"rgba(0,8,20,0.5)",
         }}>
           {MAIL_CATEGORIES.map(cat => (
             <div key={cat.key} onClick={() => setActiveKey(cat.key)} style={{
-              padding:"8px 10px",
+              padding: isMobile ? "7px 8px" : "10px 14px",
               borderBottom:"1px solid rgba(0,229,255,0.06)",
               cursor:"pointer",
               background: activeKey === cat.key ? "rgba(0,229,255,0.1)" : "transparent",
@@ -899,17 +925,17 @@ function MailPanel({ onClose, isMobile }) {
               onMouseEnter={e => { if(activeKey !== cat.key) e.currentTarget.style.background="rgba(0,229,255,0.05)"; }}
               onMouseLeave={e => { if(activeKey !== cat.key) e.currentTarget.style.background="transparent"; }}
             >
-              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:7,
+              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
                 fontWeight: activeKey === cat.key ? "bold" : "normal",
-                color: activeKey === cat.key ? "#00E5FF" : "rgba(157,216,240,0.6)",
+                color: activeKey === cat.key ? "#00E5FF" : "rgba(157,216,240,0.75)",
                 letterSpacing:"0.06em",
               }}>{cat.label}</span>
               {cat.badge > 0 && (
                 <div style={{
-                  minWidth:16, height:16, borderRadius:"50%",
+                  minWidth: isMobile ? 13 : 16, height: isMobile ? 13 : 16, borderRadius:"50%",
                   background:"#dc2626",
                   display:"flex", alignItems:"center", justifyContent:"center",
-                  fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
                   color:"#fff", paddingTop:1,
                 }}>{cat.badge}</div>
               )}
@@ -921,29 +947,29 @@ function MailPanel({ onClose, isMobile }) {
         <div style={{ flex:1, overflowY:"auto" }}>
           {messages.length === 0 ? (
             <div style={{ padding:"24px 16px", textAlign:"center",
-              fontFamily:"Orbitron,sans-serif", fontSize:7,
-              color:"rgba(157,216,240,0.35)", letterSpacing:"0.1em" }}>
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+              color:"rgba(157,216,240,0.5)", letterSpacing:"0.1em" }}>
               NO MESSAGES
             </div>
           ) : messages.map((msg, i) => (
             <div key={i} className="hud-event-row" style={{
-              padding:"9px 12px",
+              padding: isMobile ? "7px 8px" : "9px 12px",
               borderBottom:"1px solid rgba(0,229,255,0.06)",
               borderLeft: msg.unread ? "2px solid #00E5FF" : "2px solid transparent",
             }}>
               <div style={{ display:"flex", justifyContent:"space-between", marginBottom:3 }}>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5,
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
                   fontWeight: msg.unread ? "bold" : "normal",
-                  color: msg.unread ? "#c7e9f7" : "rgba(157,216,240,0.6)",
+                  color: msg.unread ? "#c7e9f7" : "rgba(157,216,240,0.8)",
                   letterSpacing:"0.06em",
                 }}>{msg.from}</span>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                  color:"rgba(100,140,180,0.45)", flexShrink:0, marginLeft:6 }}>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                  color:"rgba(100,140,180,0.7)", flexShrink:0, marginLeft:6 }}>
                   {msg.time}
                 </span>
               </div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5,
-                color:"rgba(157,216,240,0.45)",
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                color:"rgba(157,216,240,0.65)",
                 whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
               }}>{msg.preview}</div>
             </div>
@@ -1041,26 +1067,26 @@ function ChatPanel({ onClose, isMobile }) {
       {/* Header */}
       <div style={{
         display:"flex", alignItems:"center", justifyContent:"space-between",
-        padding:"10px 14px 8px",
+        padding: isMobile ? "7px 10px 6px" : "10px 14px 8px",
         borderBottom:"1px solid rgba(0,229,255,0.15)",
         flexShrink:0,
       }}>
-        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:9,
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
           fontWeight:"bold", letterSpacing:"0.18em",
-          color:"#00E5FF", textShadow:"0 0 8px rgba(0,229,255,0.6)" }}>CHAT</span>
+          color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>CHAT</span>
         <button onClick={onClose} style={{ background:"none", border:"none",
-          color:"rgba(157,216,240,0.5)", fontSize:16, cursor:"pointer", lineHeight:1 }}>×</button>
+          color:"rgba(157,216,240,0.5)", fontSize: isMobile ? 13 : 16, cursor:"pointer", lineHeight:1 }}>×</button>
       </div>
 
       {/* Tabs: World / Alliance / Private */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)", flexShrink:0 }}>
         {CHAT_TABS.map(t => (
           <button key={t} className="hud-panel-tab" onClick={() => setTab(t)} style={{
-            flex:1, padding:"7px 4px", background:"none", border:"none",
+            flex:1, padding: isMobile ? "5px 2px" : "7px 4px", background:"none", border:"none",
             borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
-            fontFamily:"Orbitron,sans-serif", fontSize:7.5, fontWeight:"bold",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
             letterSpacing:"0.1em",
-            color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.45)",
+            color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.7)",
             cursor:"pointer",
           }}>{t}</button>
         ))}
@@ -1070,12 +1096,12 @@ function ChatPanel({ onClose, isMobile }) {
       <div style={{ flex:1, overflowY:"auto", padding:"8px 0" }}>
         {msgs.map((msg, i) => (
           <div key={i} style={{
-            padding:"7px 12px",
+            padding: isMobile ? "5px 8px" : "7px 12px",
             borderBottom:"1px solid rgba(0,229,255,0.04)",
           }}>
             {/* Sender + time */}
             <div style={{ display:"flex", justifyContent:"space-between", marginBottom:3, gap:6 }}>
-              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:7,
+              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10,
                 fontWeight:"bold", letterSpacing:"0.06em",
                 color: msg.sender === "YOU" ? "#4ade80"
                   : msg.type === "system" ? "#38bdf8"
@@ -1084,12 +1110,12 @@ function ChatPanel({ onClose, isMobile }) {
               }}>
                 {msg.alliance ? `[${msg.alliance}] ` : ""}{msg.sender}
               </span>
-              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize:6,
-                color:"rgba(100,140,180,0.4)", flexShrink:0 }}>{msg.time}</span>
+              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 9,
+                color:"rgba(100,140,180,0.65)", flexShrink:0 }}>{msg.time}</span>
             </div>
             {/* Message text */}
             <div style={{
-              fontFamily:"Orbitron,sans-serif", fontSize:7,
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10,
               color: MSG_TYPE_COLOR[msg.type],
               lineHeight:1.5,
               wordBreak:"break-word",
@@ -1108,7 +1134,7 @@ function ChatPanel({ onClose, isMobile }) {
         background:"rgba(0,8,20,0.6)",
       }}>
         {/* Emoji hint */}
-        <span style={{ fontSize:14, cursor:"pointer", opacity:0.6, flexShrink:0, lineHeight:"28px" }}
+        <span style={{ fontSize: isMobile ? 11 : 14, cursor:"pointer", opacity:0.6, flexShrink:0, lineHeight:"28px" }}
           title="Emoji">😊</span>
 
         <textarea
@@ -1123,10 +1149,10 @@ function ChatPanel({ onClose, isMobile }) {
             background:"rgba(0,15,35,0.9)",
             border:"1px solid rgba(0,229,255,0.25)",
             borderRadius:4,
-            padding:"5px 8px",
+            padding: isMobile ? "4px 6px" : "5px 8px",
             color:"#e2e8f0",
             fontFamily:"Orbitron,sans-serif",
-            fontSize:7.5,
+            fontSize: isMobile ? 8 : 10,
             outline:"none",
             resize:"none",
             lineHeight:1.5,
@@ -1140,13 +1166,13 @@ function ChatPanel({ onClose, isMobile }) {
           onClick={sendMessage}
           disabled={!input.trim()}
           style={{
-            padding:"5px 10px",
+            padding: isMobile ? "4px 7px" : "5px 10px",
             background: input.trim() ? "rgba(0,212,255,0.2)" : "rgba(0,212,255,0.05)",
             border:`1px solid ${input.trim() ? "rgba(0,212,255,0.6)" : "rgba(0,212,255,0.15)"}`,
             borderRadius:4,
             cursor: input.trim() ? "pointer" : "default",
-            fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold",
-            color: input.trim() ? "#00D4FF" : "rgba(0,212,255,0.3)",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
+            color: input.trim() ? "#00D4FF" : "rgba(0,212,255,0.4)",
             letterSpacing:"0.08em",
             flexShrink:0,
             transition:"all 0.15s",

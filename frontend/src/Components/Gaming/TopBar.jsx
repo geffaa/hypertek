@@ -24,7 +24,7 @@ const RESOURCES = [
 const RES_CATEGORIES = [
   {
     id: "endurance", label: "Endurance", locked: false,
-    items: [{ label: "Endurance", val: "8825" }, { label: "Water", val: "24.5M" }, { label: "Water Heavy", val: "3.8M" }],
+    items: [{ label: "Endurance", val: "8825" }],
   },
   {
     id: "water", label: "Water", locked: false,
@@ -39,8 +39,8 @@ const RES_CATEGORIES = [
     ],
   },
   {
-    id: "gems", label: "Gems", locked: true,
-    items: [],
+    id: "gems", label: "Gems", locked: false,
+    items: [{ label: "Gems", val: "57,231" }],
   },
   {
     id: "minerals", label: "Minerals", locked: false,
@@ -144,9 +144,9 @@ export default function TopBar() {
 
   const NAV_BTN = {
     ...NAV_BTN_BASE,
-    height:   isMobile ? "22px" : "3.6vh",
+    height:   isMobile ? "26px" : "4.8vh",
     padding:  isMobile ? "0 8px" : "0 16px",
-    fontSize: isMobile ? "clamp(5px,0.55vw,7px)" : "clamp(7px,0.65vw,9px)",
+    fontSize: isMobile ? "clamp(7px,0.7vw,9px)" : "clamp(10px,0.9vw,13px)",
   };
 
   // ── Resource dropdown ────────────────────────────────────────────
@@ -157,6 +157,11 @@ export default function TopBar() {
   const [resPanelOpen, setResPanelOpen]   = useState(false);
   const [activeCat,    setActiveCat]      = useState(null);
   const resPanelRef = useRef(null);
+
+  // ── Ships dropdown + floor plan modal ────────────────────────────
+  const [shipsOpen,  setShipsOpen]  = useState(false);
+  const [shipLevel,  setShipLevel]  = useState(null);   // null = closed, 1-4 = show floor plan
+  const shipsRef = useRef(null);
 
   // ── Marketplace dropdown ─────────────────────────────────────────
   const [marketOpen, setMarketOpen] = useState(false);
@@ -171,6 +176,8 @@ export default function TopBar() {
   // Close all dropdowns when clicking outside
   useEffect(() => {
     const handler = (e) => {
+      if (shipsRef.current && !shipsRef.current.contains(e.target))
+        setShipsOpen(false);
       if (marketRef.current && !marketRef.current.contains(e.target))
         setMarketOpen(false);
       if (resPanelRef.current && !resPanelRef.current.contains(e.target)) {
@@ -239,7 +246,62 @@ export default function TopBar() {
         gap: isMobile ? "4px" : "8px",
       }}>
 
-        {/* 1. RESOURCES label — opens category panel */}
+        {/* 1. SHIPS — dropdown + floor plan modal */}
+        <div ref={shipsRef} style={{ position: "relative", flexShrink: 0 }}>
+          <button
+            className="res-slot"
+            onClick={() => setShipsOpen(o => !o)}
+            style={{
+              ...NAV_BTN,
+              borderColor: shipsOpen ? "rgba(251,191,36,0.9)" : "rgba(251,191,36,0.55)",
+              color: "#fbbf24",
+              textShadow: "0 0 8px rgba(251,191,36,0.6)",
+              display: "flex", alignItems: "center", gap: "6px",
+            }}
+          >
+            🚀 SHIPS
+            <span style={{
+              fontSize: "8px", display: "inline-block",
+              transition: "transform 0.18s",
+              transform: shipsOpen ? "rotate(180deg)" : "rotate(0deg)",
+            }}>▼</span>
+          </button>
+
+          {shipsOpen && (
+            <div className="market-dropdown" style={{
+              position: "absolute", top: "calc(100% + 6px)", left: 0,
+              minWidth: 140,
+              background: "rgba(3,10,24,0.97)",
+              border: "1px solid rgba(251,191,36,0.35)",
+              borderRadius: 4,
+              backdropFilter: "blur(16px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.7), 0 0 20px rgba(251,191,36,0.08)",
+              zIndex: 100, overflow: "hidden",
+            }}>
+              {[1, 2, 3, 4].map(lvl => (
+                <div
+                  key={lvl}
+                  className="market-dropdown-item"
+                  onClick={() => { setShipLevel(lvl); setShipsOpen(false); }}
+                  style={{
+                    padding: "9px 16px",
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: "clamp(10px,0.85vw,13px)",
+                    fontWeight: "bold",
+                    letterSpacing: "0.12em",
+                    color: "#fbbf24",
+                    borderBottom: lvl < 4 ? "1px solid rgba(251,191,36,0.08)" : "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  SHIP LVL {lvl}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* 2. RESOURCES label — opens category panel */}
         <div ref={resPanelRef} style={{ position: "relative", flexShrink: 0 }}>
           <button
             className="res-slot"
@@ -277,10 +339,10 @@ export default function TopBar() {
                     style={{
                       padding: "9px 14px",
                       fontFamily: "Orbitron,sans-serif",
-                      fontSize: "clamp(6px,0.6vw,8px)",
+                      fontSize: "clamp(10px,0.85vw,13px)",
                       fontWeight: "bold",
                       letterSpacing: "0.12em",
-                      color: cat.locked ? "rgba(148,192,210,0.3)" : (activeCat === cat.id ? "#00D4FF" : "#7dd3fc"),
+                      color: cat.locked ? "rgba(200,220,235,0.55)" : (activeCat === cat.id ? "#00D4FF" : "#ffffff"),
                       borderBottom: i < RES_CATEGORIES.length - 1 ? "1px solid rgba(0,212,255,0.08)" : "none",
                       display: "flex", justifyContent: "space-between", alignItems: "center",
                       cursor: cat.locked ? "not-allowed" : "pointer",
@@ -308,10 +370,10 @@ export default function TopBar() {
                         <div key={j} style={{
                           padding: "8px 14px",
                           fontFamily: "Orbitron,sans-serif",
-                          fontSize: "clamp(6px,0.55vw,7.5px)",
+                          fontSize: "clamp(10px,0.8vw,12px)",
                           fontWeight: "bold",
                           letterSpacing: "0.1em",
-                          color: "#7dd3fc",
+                          color: "#ffffff",
                           borderBottom: j < cat.items.length - 1 ? "1px solid rgba(0,212,255,0.07)" : "none",
                           display: "flex", justifyContent: "space-between",
                           cursor: "pointer",
@@ -332,7 +394,7 @@ export default function TopBar() {
 
         {/* 2. Resource slots */}
         <div ref={resBarRef} style={{
-          flex: 1, height: isMobile ? "22px" : "3.6vh",
+          flex: 1, height: isMobile ? "26px" : "4.8vh",
           display: "flex", alignItems: "stretch",
           background: "rgba(3,8,18,0.92)",
           border: "1px solid rgba(0,212,255,0.18)",
@@ -358,19 +420,20 @@ export default function TopBar() {
                 <img
                   src={r.img} alt={r.label}
                   style={{
-                    width:  isMobile ? "14px" : "clamp(20px,2.2vh,28px)",
-                    height: isMobile ? "14px" : "clamp(20px,2.2vh,28px)",
+                    width:  isMobile ? "22px" : "clamp(32px,4vh,52px)",
+                    height: isMobile ? "22px" : "clamp(32px,4vh,52px)",
                     objectFit: "contain", flexShrink: 0,
                     imageRendering: "crisp-edges",
+                    filter: "drop-shadow(0 0 4px currentColor)",
                   }}
                 />
                 <div style={{ minWidth: 0 }}>
                   {!isMobile && (
                     <div style={{
                       fontFamily: "Orbitron,sans-serif",
-                      fontSize: "clamp(4px,0.38vw,5px)",
+                      fontSize: "clamp(6px,0.55vw,8px)",
                       letterSpacing: "0.08em",
-                      color: "rgba(148,192,210,0.5)",
+                      color: "rgba(255,255,255,0.75)",
                       textTransform: "uppercase",
                       lineHeight: 1, marginBottom: "2px",
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
@@ -378,7 +441,7 @@ export default function TopBar() {
                   )}
                   <div style={{
                     fontFamily: "Orbitron,sans-serif",
-                    fontSize: isMobile ? "clamp(5px,0.55vw,7px)" : "clamp(7px,0.65vw,9px)",
+                    fontSize: isMobile ? "clamp(7px,0.7vw,9px)" : "clamp(10px,0.9vw,13px)",
                     fontWeight: "bold", letterSpacing: "0.05em",
                     color: r.color, textShadow: `0 0 6px ${r.color}88`,
                     whiteSpace: "nowrap", lineHeight: 1,
@@ -400,11 +463,11 @@ export default function TopBar() {
                   zIndex: 100, padding: "8px 12px",
                 }}>
                   <div style={{
-                    fontFamily: "Orbitron,sans-serif", fontSize: 6.5, fontWeight: "bold",
-                    color: r.color, letterSpacing: "0.12em", marginBottom: 6,
+                    fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold",
+                    color: r.color, letterSpacing: "0.12em", marginBottom: 8,
                     textShadow: `0 0 6px ${r.color}88`,
                   }}>{r.label.toUpperCase()}</div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     {[
                       { label: "OPEN",   val: r.open   },
                       { label: "STORED", val: r.stored },
@@ -413,11 +476,11 @@ export default function TopBar() {
                         display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
                       }}>
                         <span style={{
-                          fontFamily: "Orbitron,sans-serif", fontSize: 6,
-                          color: "rgba(157,216,240,0.5)", letterSpacing: "0.1em",
+                          fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                          color: "rgba(255,255,255,0.8)", letterSpacing: "0.1em",
                         }}>{row.label}</span>
                         <span style={{
-                          fontFamily: "Orbitron,sans-serif", fontSize: 8, fontWeight: "bold",
+                          fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold",
                           color: r.color, letterSpacing: "0.05em",
                         }}>{row.val}</span>
                       </div>
@@ -429,7 +492,7 @@ export default function TopBar() {
           ))}
         </div>
 
-        {/* 3. MARKETPLACE — dropdown */}
+        {/* 4. MARKETPLACE — dropdown */}
         <div ref={marketRef} style={{ position: "relative", flexShrink: 0 }}>
           <button
             className="res-slot"
@@ -471,10 +534,10 @@ export default function TopBar() {
                   style={{
                     padding: "9px 16px",
                     fontFamily: "Orbitron,sans-serif",
-                    fontSize: "clamp(6px,0.6vw,8px)",
+                    fontSize: "clamp(10px,0.85vw,13px)",
                     fontWeight: "bold",
                     letterSpacing: "0.12em",
-                    color: "#7dd3fc",
+                    color: "#ffffff",
                     borderBottom: i < MARKET_ITEMS.length - 1 ? "1px solid rgba(0,212,255,0.08)" : "none",
                   }}
                 >
@@ -670,6 +733,123 @@ export default function TopBar() {
                 </div>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════
+          SHIP FLOOR PLAN MODAL
+          ══════════════════════════════════════════════════════════════ */}
+      {shipLevel && (
+        <div
+          onClick={(e) => { if (e.target === e.currentTarget) setShipLevel(null); }}
+          style={{
+            position: "fixed", inset: 0, zIndex: 200,
+            background: "rgba(0,0,0,0.92)",
+            backdropFilter: "blur(4px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <div style={{
+            position: "relative",
+            width: "min(94vw, 1200px)",
+            background: "#000",
+            border: "1px solid rgba(180,90,20,0.6)",
+            borderRadius: 6,
+            boxShadow: "0 0 80px rgba(0,0,0,0.9)",
+            overflow: "hidden",
+            display: "flex", flexDirection: "column",
+          }}>
+
+            {/* ── Top orange bar with LEVEL label */}
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              background: "linear-gradient(90deg, #1a0a00, #7a3a0a 40%, #5a2a05)",
+              padding: isMobile ? "6px 10px" : "10px 20px",
+              borderBottom: "2px solid #b85c14",
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 6 : 16 }}>
+                {[1, 2, 3, 4].map(lvl => (
+                  <button key={lvl} onClick={() => setShipLevel(lvl)} style={{
+                    padding: isMobile ? "3px 8px" : "5px 16px",
+                    background: shipLevel === lvl ? "rgba(251,191,36,0.25)" : "rgba(0,0,0,0.35)",
+                    border: `1.5px solid ${shipLevel === lvl ? "#fbbf24" : "rgba(251,191,36,0.3)"}`,
+                    borderRadius: 3, cursor: "pointer",
+                    fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 11, fontWeight: "bold",
+                    color: shipLevel === lvl ? "#fbbf24" : "rgba(251,191,36,0.45)",
+                    letterSpacing: "0.1em", transition: "all 0.15s",
+                    boxShadow: shipLevel === lvl ? "0 0 10px rgba(251,191,36,0.3)" : "none",
+                  }}>LVL {lvl}</button>
+                ))}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 20 }}>
+                <span style={{
+                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 12 : 20, fontWeight: "900",
+                  color: "#1a0a00", letterSpacing: "0.2em",
+                  textShadow: "0 1px 0 rgba(255,180,80,0.3)",
+                }}>LEVEL- {shipLevel}</span>
+                <button onClick={() => setShipLevel(null)} style={{
+                  background: "rgba(0,0,0,0.4)", border: "1px solid rgba(251,191,36,0.3)",
+                  borderRadius: 3, color: "rgba(251,191,36,0.7)", fontSize: isMobile ? 12 : 16,
+                  cursor: "pointer", lineHeight: 1, padding: isMobile ? "2px 6px" : "2px 8px",
+                }}>×</button>
+              </div>
+            </div>
+
+            {/* ── Main content: left strip + ship image */}
+            <div style={{ display: "flex", flex: 1 }}>
+
+              {/* Left strip — hidden on mobile to save space */}
+              {!isMobile && (
+                <div style={{
+                  width: 36, flexShrink: 0, background: "#000",
+                  display: "flex", flexDirection: "column",
+                  borderRight: "2px solid #b85c14",
+                }}>
+                  <div style={{ height: 60, background: "#7a3a0a", borderBottom: "2px solid #b85c14" }} />
+                  <div style={{
+                    flex: 1, background: "#1a3a5c", borderBottom: "2px solid #b85c14",
+                    display: "flex", flexDirection: "column", alignItems: "center",
+                    justifyContent: "center", gap: 10, padding: "12px 0",
+                  }}>
+                    {[...Array(8)].map((_, i) => (
+                      <div key={i} style={{
+                        width: 10, height: 10, borderRadius: "50%",
+                        background: "#e08820", boxShadow: "0 0 6px rgba(224,136,32,0.8)",
+                      }} />
+                    ))}
+                  </div>
+                  <div style={{ height: 60, background: "#7a3a0a" }} />
+                </div>
+              )}
+
+              {/* Ship image */}
+              <div style={{
+                flex: 1, background: "#000",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                padding: isMobile ? "6px 8px" : "8px 16px",
+              }}>
+                <img
+                  key={shipLevel}
+                  src={`/ships/level${shipLevel}.png`}
+                  alt={`Ship Level ${shipLevel}`}
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: isMobile ? "55vh" : "70vh",
+                    objectFit: "contain",
+                    display: "block",
+                    transition: "opacity 0.2s",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* ── Bottom orange bar */}
+            <div style={{
+              height: isMobile ? 10 : 18,
+              background: "linear-gradient(90deg, #000 0%, #7a3a0a 30%, #5a2a05 70%, #000 100%)",
+              borderTop: "2px solid #b85c14",
+            }} />
           </div>
         </div>
       )}

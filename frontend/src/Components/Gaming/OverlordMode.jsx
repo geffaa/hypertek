@@ -124,35 +124,43 @@ function OverlordActionButtons() {
       transformOrigin: "bottom right",
     }}>
       {OVERLORD_ACTIONS.map(a => (
-        <button
-          key={a.id}
-          className="overlord-action-btn"
-          onMouseDown={() => setActive(a.id)}
-          onMouseUp={() => setActive(null)}
-          onMouseLeave={() => setActive(null)}
-          title={a.id}
-          style={{
-            position: "absolute",
-            top:  a.top,
-            left: a.left,
-            width: OVL_BTN_SIZE, height: OVL_BTN_SIZE,
-            borderRadius: "50%",
-            background: active === a.id
-              ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
-              : "rgba(28,4,4,0.88)",
-            border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
-            boxShadow: active === a.id
-              ? `0 0 24px ${a.glow}, 0 0 48px ${a.glow}`
-              : `0 0 12px ${a.color}22`,
-            backdropFilter: "blur(8px)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {a.icon}
-        </button>
+        <div key={a.id} style={{ position:"absolute", top: a.top, left: a.left,
+          display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+          <button
+            className="overlord-action-btn"
+            onMouseDown={() => setActive(a.id)}
+            onMouseUp={() => setActive(null)}
+            onMouseLeave={() => setActive(null)}
+            style={{
+              width: OVL_BTN_SIZE, height: OVL_BTN_SIZE,
+              borderRadius: "50%",
+              background: active === a.id
+                ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
+                : "rgba(28,4,4,0.88)",
+              border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
+              boxShadow: active === a.id
+                ? `0 0 24px ${a.glow}, 0 0 48px ${a.glow}`
+                : `0 0 12px ${a.color}22`,
+              backdropFilter: "blur(8px)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {a.icon}
+          </button>
+          <span style={{
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: 8,
+            fontWeight: "bold",
+            letterSpacing: "0.1em",
+            color: active === a.id ? a.color : `${a.color}cc`,
+            textShadow: active === a.id ? `0 0 8px ${a.glow}` : "none",
+            userSelect: "none",
+            pointerEvents: "none",
+          }}>{a.id}</span>
+        </div>
       ))}
     </div>
   );

@@ -49,6 +49,9 @@ function Signup() {
       if (res.status === 201) {
         dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
         localStorage.setItem("token", res.data.token);
+        if (formData.fullName.trim()) {
+          localStorage.setItem("hypertek_display_name", formData.fullName.trim().toUpperCase());
+        }
         toast.success("Signup successful!");
         navigate("/");
       } else {

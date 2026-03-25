@@ -45,6 +45,9 @@ function Login() {
       dispatch(loginSuccess({ user, token, isLoggedInUser: true }));
       if (token) localStorage.setItem("token", token);
       if (user?.Role) localStorage.setItem("role", user.Role);
+      if (user?.FullName && !localStorage.getItem("hypertek_display_name")) {
+        localStorage.setItem("hypertek_display_name", user.FullName.trim().toUpperCase());
+      }
 
       if (user?.Role === "admin") {
         const adminBaseUrl = import.meta.env.VITE_ADMIN_URL || "http://localhost:5174";

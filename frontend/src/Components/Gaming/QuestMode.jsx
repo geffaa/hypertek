@@ -259,35 +259,43 @@ function ActionButtons() {
       transformOrigin: "bottom right",
     }}>
       {ACTION_LAYOUT.map(a => (
-        <button
-          key={a.id}
-          className="quest-action-btn"
-          onMouseDown={() => setActive(a.id)}
-          onMouseUp={() => setActive(null)}
-          onMouseLeave={() => setActive(null)}
-          title={a.id}
-          style={{
-            position: "absolute",
-            top:  a.top,
-            left: a.left,
-            width: BTN_SIZE, height: BTN_SIZE,
-            borderRadius: "50%",
-            background: active === a.id
-              ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
-              : "rgba(4,12,28,0.88)",
-            border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
-            boxShadow: active === a.id
-              ? `0 0 20px ${a.glow}, 0 0 40px ${a.glow}`
-              : `0 0 10px ${a.color}22`,
-            backdropFilter: "blur(8px)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {a.icon}
-        </button>
+        <div key={a.id} style={{ position:"absolute", top: a.top, left: a.left,
+          display:"flex", flexDirection:"column", alignItems:"center", gap:4 }}>
+          <button
+            className="quest-action-btn"
+            onMouseDown={() => setActive(a.id)}
+            onMouseUp={() => setActive(null)}
+            onMouseLeave={() => setActive(null)}
+            style={{
+              width: BTN_SIZE, height: BTN_SIZE,
+              borderRadius: "50%",
+              background: active === a.id
+                ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
+                : "rgba(4,12,28,0.88)",
+              border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
+              boxShadow: active === a.id
+                ? `0 0 20px ${a.glow}, 0 0 40px ${a.glow}`
+                : `0 0 10px ${a.color}22`,
+              backdropFilter: "blur(8px)",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {a.icon}
+          </button>
+          <span style={{
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: 8,
+            fontWeight: "bold",
+            letterSpacing: "0.1em",
+            color: active === a.id ? a.color : `${a.color}cc`,
+            textShadow: active === a.id ? `0 0 8px ${a.glow}` : "none",
+            userSelect: "none",
+            pointerEvents: "none",
+          }}>{a.id}</span>
+        </div>
       ))}
     </div>
   );
