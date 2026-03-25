@@ -121,6 +121,51 @@ const CSS = `
   .wallet-spinner { animation: spinLoader 0.9s linear infinite; }
 `;
 
+// Ship room data — positions as % of each level's PNG image (x, y, w, h)
+const SHIP_ROOMS = {
+  1: [
+    { id: "process_ref",   name: "Process Refinement", x:30, y:40, w:8, h:14 },
+    { id: "mining_top",    name: "Mining Plant",        x:38, y:33, w:8, h:14 },
+    { id: "mining_bot",    name: "Mining Plant",        x:38, y:46, w:8, h:14 },
+    { id: "workshop",      name: "Workshop",            x:55, y:33, w:8, h:14 },
+    { id: "racing",        name: "Racing Hanger",       x:55, y:46, w:8, h:14 },
+    { id: "fuel",          name: "Fuel Processing",     x:70, y:38, w:12, h:24 },
+  ],
+  2: [
+    { id: "armory",        name: "Armory",                   x:30, y:40, w:8, h:14 },
+    { id: "fwd_shield",    name: "Forward Shield Generator", x:40, y:40, w:8,  h:14 },
+    { id: "teleport",      name: "Teleportation",            x:51, y:34, w:6,  h:13 },
+    { id: "security",      name: "Security",                 x:51, y:48, w:6,  h:13 },
+    { id: "barracks_top",  name: "Barracks",                 x:56, y:32, w:12, h:6 },
+    { id: "power_plant",   name: "Power Plant",              x:57, y:41, w:9,  h:14 },
+    { id: "eng_systems",   name: "Engineering Systems",      x:66, y:41, w:6,  h:14 },
+    { id: "barracks_bot",  name: "Barracks",                 x:56, y:58, w:12, h:6 },
+    { id: "engineering",   name: "Engineering",              x:72, y:41, w:9, h:14 },
+  ],
+  3: [
+    { id: "flight_deck",   name: "Flight Deck",       x:40, y:40, w:5, h:14 },
+    { id: "mess_hall",     name: "Mess Hall",          x:51, y:40, w:5, h:7 },
+    { id: "capt_quarters", name: "Capt. Quarters",     x:46, y:51, w:5, h:6 },
+    { id: "medical",       name: "Medical",            x:52, y:49, w:4, h:8 },
+    { id: "hydro_bays",    name: "Hydro Bays",         x:57, y:35, w:14, h:24 },
+    { id: "storage_top",   name: "Storage Hold",       x:71, y:34, w:7, h:8 },
+    { id: "storage_bot",   name: "Storage Hold",       x:71, y:53, w:7, h:8 },
+    { id: "sec_power",     name: "Sec. Power Upper",   x:74, y:44, w:6, h:8 },
+    { id: "rear_cargo",    name: "Rear Cargo Hold",    x:80, y:34, w:7, h:26 },
+  ],
+  4: [
+    { id: "navigation",    name: "Navigation",         x:42, y:42, w:2, h:12 },
+    { id: "academy",       name: "Academy",            x:44, y:45, w:2,  h:6 },
+    { id: "holo_deck",     name: "Holo Deck",          x:52, y:45, w:6, h:5 },
+    { id: "cryo_lab",      name: "Cryo Lab",           x:61, y:41, w:6, h:5 },
+    { id: "dna_lab",       name: "DNA Lab",            x:61, y:50, w:6, h:5 },
+    { id: "cryostasis",    name: "Cryostasis",         x:67, y:41, w:7, h:6 },
+    { id: "dna_chambers",  name: "DNA Chambers",       x:67, y:49, w:7, h:6 },
+    { id: "shield_gen",    name: "Shield Generators",  x:75, y:44, w:6,  h:8 },
+    { id: "comms_tower",   name: "Comm Towers",        x:81, y:41, w:6, h:14 },
+  ],
+};
+
 const NAV_BTN_BASE = {
   background: "linear-gradient(180deg, rgba(0,30,55,0.95) 0%, rgba(0,15,35,0.98) 100%)",
   border: "1px solid rgba(0,212,255,0.55)",
@@ -159,9 +204,38 @@ export default function TopBar() {
   const resPanelRef = useRef(null);
 
   // ── Ships dropdown + floor plan modal ────────────────────────────
-  const [shipsOpen,  setShipsOpen]  = useState(false);
-  const [shipLevel,  setShipLevel]  = useState(null);   // null = closed, 1-4 = show floor plan
-  const shipsRef = useRef(null);
+  const [shipsOpen,    setShipsOpen]    = useState(false);
+  const [shipLevel,    setShipLevel]    = useState(null);
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [hoveredRoom,  setHoveredRoom]  = useState(null);
+  const [shipLine,     setShipLine]     = useState(null);
+  const shipsRef       = useRef(null);
+  const shipContentRef = useRef(null);
+  const shipImgRef     = useRef(null);
+  const shipItemRefs   = useRef({});
+
+  // ── Ship modal: reset room selection when level changes ──────────
+  useEffect(() => { setSelectedRoom(null); setHoveredRoom(null); setShipLine(null); }, [shipLevel]);
+
+  // ── Ship modal: compute SVG line from sidebar item → room box ────
+  useEffect(() => {
+    if (!selectedRoom || !shipImgRef.current || !shipContentRef.current) {
+      setShipLine(null); return;
+    }
+    const room = (SHIP_ROOMS[shipLevel] || []).find(r => r.id === selectedRoom);
+    const itemEl = shipItemRefs.current[selectedRoom];
+    if (!room || !itemEl) { setShipLine(null); return; }
+
+    const cRect   = shipContentRef.current.getBoundingClientRect();
+    const imgRect = shipImgRef.current.getBoundingClientRect();
+    const iRect   = itemEl.getBoundingClientRect();
+
+    const x1 = iRect.right  - cRect.left;
+    const y1 = iRect.top + iRect.height / 2 - cRect.top;
+    const x2 = imgRect.left - cRect.left + imgRect.width  * (room.x / 100);
+    const y2 = imgRect.top  - cRect.top  + imgRect.height * ((room.y + room.h / 2) / 100);
+    setShipLine({ x1, y1, x2, y2 });
+  }, [selectedRoom, shipLevel]);
 
   // ── Marketplace dropdown ─────────────────────────────────────────
   const [marketOpen, setMarketOpen] = useState(false);
@@ -745,23 +819,18 @@ export default function TopBar() {
           onClick={(e) => { if (e.target === e.currentTarget) setShipLevel(null); }}
           style={{
             position: "fixed", inset: 0, zIndex: 200,
-            background: "rgba(0,0,0,0.92)",
-            backdropFilter: "blur(4px)",
+            background: "rgba(0,0,0,0.92)", backdropFilter: "blur(4px)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}
         >
           <div style={{
-            position: "relative",
-            width: "min(94vw, 1200px)",
-            background: "#000",
-            border: "1px solid rgba(180,90,20,0.6)",
-            borderRadius: 6,
-            boxShadow: "0 0 80px rgba(0,0,0,0.9)",
-            overflow: "hidden",
-            display: "flex", flexDirection: "column",
+            position: "relative", width: "min(96vw, 1280px)",
+            background: "#000", border: "1px solid rgba(180,90,20,0.6)",
+            borderRadius: 6, boxShadow: "0 0 80px rgba(0,0,0,0.9)",
+            overflow: "hidden", display: "flex", flexDirection: "column",
           }}>
 
-            {/* ── Top orange bar with LEVEL label */}
+            {/* ── Header */}
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
               background: "linear-gradient(90deg, #1a0a00, #7a3a0a 40%, #5a2a05)",
@@ -769,7 +838,7 @@ export default function TopBar() {
               borderBottom: "2px solid #b85c14",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 6 : 16 }}>
-                {[1, 2, 3, 4].map(lvl => (
+                {[1,2,3,4].map(lvl => (
                   <button key={lvl} onClick={() => setShipLevel(lvl)} style={{
                     padding: isMobile ? "3px 8px" : "5px 16px",
                     background: shipLevel === lvl ? "rgba(251,191,36,0.25)" : "rgba(0,0,0,0.35)",
@@ -785,8 +854,7 @@ export default function TopBar() {
               <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 20 }}>
                 <span style={{
                   fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 12 : 20, fontWeight: "900",
-                  color: "#1a0a00", letterSpacing: "0.2em",
-                  textShadow: "0 1px 0 rgba(255,180,80,0.3)",
+                  color: "#fbbf24", letterSpacing: "0.2em",
                 }}>LEVEL- {shipLevel}</span>
                 <button onClick={() => setShipLevel(null)} style={{
                   background: "rgba(0,0,0,0.4)", border: "1px solid rgba(251,191,36,0.3)",
@@ -796,17 +864,16 @@ export default function TopBar() {
               </div>
             </div>
 
-            {/* ── Main content: left strip + ship image */}
-            <div style={{ display: "flex", flex: 1 }}>
+            {/* ── Body: left strip + sidebar + image */}
+            <div ref={shipContentRef} style={{ display: "flex", flex: 1, position: "relative", minHeight: 0 }}>
 
-              {/* Left strip — hidden on mobile to save space */}
+              {/* Left decorative strip */}
               {!isMobile && (
                 <div style={{
                   width: 36, flexShrink: 0, background: "#000",
-                  display: "flex", flexDirection: "column",
-                  borderRight: "2px solid #b85c14",
+                  display: "flex", flexDirection: "column", borderRight: "2px solid #b85c14",
                 }}>
-                  <div style={{ height: 60, background: "#7a3a0a", borderBottom: "2px solid #b85c14" }} />
+                  <div style={{ height: 50, background: "#7a3a0a", borderBottom: "2px solid #b85c14" }} />
                   <div style={{
                     flex: 1, background: "#1a3a5c", borderBottom: "2px solid #b85c14",
                     display: "flex", flexDirection: "column", alignItems: "center",
@@ -819,32 +886,189 @@ export default function TopBar() {
                       }} />
                     ))}
                   </div>
-                  <div style={{ height: 60, background: "#7a3a0a" }} />
+                  <div style={{ height: 50, background: "#7a3a0a" }} />
                 </div>
               )}
 
-              {/* Ship image */}
+              {/* Room sidebar */}
               <div style={{
-                flex: 1, background: "#000",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                padding: isMobile ? "6px 8px" : "8px 16px",
+                width: isMobile ? 100 : 155, flexShrink: 0,
+                background: "#0a0500", borderRight: "1px solid rgba(180,90,20,0.4)",
+                overflowY: "auto", display: "flex", flexDirection: "column",
               }}>
-                <img
-                  key={shipLevel}
-                  src={`/ships/level${shipLevel}.png`}
-                  alt={`Ship Level ${shipLevel}`}
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: isMobile ? "55vh" : "70vh",
-                    objectFit: "contain",
-                    display: "block",
-                    transition: "opacity 0.2s",
-                  }}
-                />
+                <div style={{
+                  padding: isMobile ? "6px 8px" : "8px 12px",
+                  borderBottom: "1px solid rgba(180,90,20,0.4)",
+                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                  color: "rgba(251,191,36,0.5)", letterSpacing: "0.12em",
+                }}>ROOMS</div>
+                {(SHIP_ROOMS[shipLevel] || []).map(room => (
+                  <div
+                    key={room.id}
+                    ref={el => { if (el) shipItemRefs.current[room.id] = el; }}
+                    onClick={() => setSelectedRoom(prev => prev === room.id ? null : room.id)}
+                    onMouseEnter={() => setHoveredRoom(room.id)}
+                    onMouseLeave={() => setHoveredRoom(null)}
+                    style={{
+                      display: "flex", alignItems: "center", justifyContent: "space-between",
+                      padding: isMobile ? "7px 8px" : "9px 12px",
+                      borderBottom: "1px solid rgba(180,90,20,0.2)",
+                      cursor: "pointer",
+                      background: selectedRoom === room.id || hoveredRoom === room.id
+                        ? "rgba(251,191,36,0.1)" : "transparent",
+                      transition: "background 0.15s",
+                    }}
+                  >
+                    <span style={{
+                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight: "bold",
+                      letterSpacing: "0.06em",
+                      color: selectedRoom === room.id || hoveredRoom === room.id ? "#fbbf24" : "rgba(220,180,120,0.8)",
+                    }}>{room.name}</span>
+                    <div style={{
+                      width: isMobile ? 7 : 9, height: isMobile ? 7 : 9,
+                      borderRadius: "50%", flexShrink: 0, marginLeft: 6,
+                      background: selectedRoom === room.id || hoveredRoom === room.id ? "#fbbf24" : "#e08820",
+                      boxShadow: selectedRoom === room.id || hoveredRoom === room.id
+                        ? "0 0 8px #fbbf24" : "0 0 4px rgba(224,136,32,0.6)",
+                    }} />
+                  </div>
+                ))}
               </div>
+
+              {/* Ship image + overlays */}
+              <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", position: "relative" }}>
+                <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+                  <img
+                    ref={shipImgRef}
+                    key={shipLevel}
+                    src={`/ships/level${shipLevel}-plain.png`}
+                    alt={`Ship Level ${shipLevel}`}
+                    onLoad={() => {
+                      if (!selectedRoom) return;
+                      const room = (SHIP_ROOMS[shipLevel] || []).find(r => r.id === selectedRoom);
+                      const itemEl = shipItemRefs.current[selectedRoom];
+                      if (!room || !itemEl || !shipImgRef.current || !shipContentRef.current) return;
+                      const cRect   = shipContentRef.current.getBoundingClientRect();
+                      const imgRect = shipImgRef.current.getBoundingClientRect();
+                      const iRect   = itemEl.getBoundingClientRect();
+                      setShipLine({
+                        x1: iRect.right - cRect.left,
+                        y1: iRect.top + iRect.height / 2 - cRect.top,
+                        x2: imgRect.left - cRect.left + imgRect.width  * (room.x / 100),
+                        y2: imgRect.top  - cRect.top  + imgRect.height * ((room.y + room.h / 2) / 100),
+                      });
+                    }}
+                    style={{ width: "100%", height: "auto", display: "block", maxHeight: isMobile ? "52vh" : "66vh", objectFit: "contain" }}
+                  />
+                  {/* Room highlight boxes — only visible on hover or select */}
+                  {(SHIP_ROOMS[shipLevel] || []).map(room => {
+                    const active = selectedRoom === room.id || hoveredRoom === room.id;
+                    return (
+                      <div
+                        key={room.id}
+                        onMouseEnter={() => setHoveredRoom(room.id)}
+                        onMouseLeave={() => setHoveredRoom(null)}
+                        onClick={() => setSelectedRoom(prev => prev === room.id ? null : room.id)}
+                        style={{
+                          position: "absolute",
+                          left: `${room.x}%`, top: `${room.y}%`,
+                          width: `${room.w}%`, height: `${room.h}%`,
+                          border: active ? "2px solid #fbbf24" : "2px solid transparent",
+                          boxShadow: active ? "0 0 16px rgba(251,191,36,0.6), inset 0 0 10px rgba(251,191,36,0.08)" : "none",
+                          background: active ? "rgba(251,191,36,0.04)" : "transparent",
+                          borderRadius: 3, cursor: "pointer", transition: "all 0.18s",
+                        }}
+                      />
+                    );
+                  })}
+
+                  {/* Room action popup — appears on click */}
+                  {selectedRoom && (() => {
+                    const room = (SHIP_ROOMS[shipLevel] || []).find(r => r.id === selectedRoom);
+                    if (!room) return null;
+                    const toLeft = (room.x + room.w) > 68;
+                    const anchorLeft = toLeft
+                      ? `${room.x}%`
+                      : `${room.x + room.w}%`;
+                    const anchorTop = `${room.y}%`;
+                    const popupW = isMobile ? 100 : 130;
+                    return (
+                      <div style={{
+                        position: "absolute",
+                        left: anchorLeft, top: anchorTop,
+                        transform: toLeft ? `translateX(-${popupW}px)` : "translateX(8px)",
+                        zIndex: 30, width: popupW,
+                        background: "linear-gradient(160deg, #0d1a2e, #060d1a)",
+                        border: "1.5px solid #fbbf24",
+                        borderRadius: 5,
+                        boxShadow: "0 6px 28px rgba(0,0,0,0.95), 0 0 16px rgba(251,191,36,0.2)",
+                        overflow: "hidden",
+                        pointerEvents: "auto",
+                      }}>
+                        {/* Room name header */}
+                        <div style={{
+                          background: "linear-gradient(90deg, #7a3a0a, #3a1a02)",
+                          borderBottom: "1px solid #fbbf24",
+                          padding: isMobile ? "5px 8px" : "6px 10px",
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: isMobile ? 7 : 8,
+                          fontWeight: "bold", letterSpacing: "0.1em",
+                          color: "#fbbf24", textTransform: "uppercase",
+                        }}>{room.name}</div>
+
+                        {/* Action buttons */}
+                        {[
+                          { label: "Detail",  color: "#fbbf24", locked: false },
+                          { label: "Upgrade", color: "#7dd3fc", locked: true  },
+                          { label: "Officer", color: "#a78bfa", locked: true  },
+                        ].map(({ label, color, locked }, i) => (
+                          <div key={label} style={{
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                            padding: isMobile ? "7px 10px" : "9px 12px",
+                            borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                            cursor: locked ? "default" : "pointer",
+                            background: "transparent",
+                            transition: "background 0.12s",
+                          }}
+                            onMouseEnter={e => !locked && (e.currentTarget.style.background = "rgba(251,191,36,0.08)")}
+                            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                          >
+                            <span style={{
+                              fontFamily: "Orbitron,sans-serif",
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: "bold", letterSpacing: "0.1em",
+                              color: locked ? "rgba(200,200,200,0.4)" : color,
+                            }}>{label}</span>
+                            {locked && (
+                              <span style={{ fontSize: isMobile ? 9 : 11, opacity: 0.35 }}>🔒</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* SVG connection line — covers full body area */}
+              {shipLine && (
+                <svg style={{
+                  position: "absolute", inset: 0, width: "100%", height: "100%",
+                  pointerEvents: "none", zIndex: 10, overflow: "visible",
+                }}>
+                  <line
+                    x1={shipLine.x1} y1={shipLine.y1}
+                    x2={shipLine.x2} y2={shipLine.y2}
+                    stroke="#fbbf24" strokeWidth="1.5"
+                    strokeDasharray="6 3" opacity="0.85"
+                  />
+                  <circle cx={shipLine.x1} cy={shipLine.y1} r="3" fill="#fbbf24" opacity="0.9" />
+                  <circle cx={shipLine.x2} cy={shipLine.y2} r="3" fill="#fbbf24" opacity="0.9" />
+                </svg>
+              )}
             </div>
 
-            {/* ── Bottom orange bar */}
+            {/* ── Bottom bar */}
             <div style={{
               height: isMobile ? 10 : 18,
               background: "linear-gradient(90deg, #000 0%, #7a3a0a 30%, #5a2a05 70%, #000 100%)",

@@ -261,7 +261,7 @@ function SpaceView() {
 
       {/* Target HUD — scanning */}
       <div style={{
-        position: "absolute", bottom: "36%", right: "18%",
+        position: "absolute", bottom: "50%", right: "9%",
         width: 130, padding: "8px 12px",
         background: "rgba(28,4,4,0.85)",
         border: "1px solid rgba(248,113,113,0.3)",
