@@ -7,9 +7,10 @@ import TopBar         from "../Components/Gaming/TopBar";
 import ProfileButton  from "../Components/Gaming/ProfileButton";
 import MiniMap        from "../Components/Gaming/MiniMap";
 import ViewButton     from "../Components/Gaming/ViewButton";
-import RacingMode   from "../Components/Gaming/RacingMode";
-import QuestMode    from "../Components/Gaming/QuestMode";
-import OverlordMode from "../Components/Gaming/OverlordMode";
+import RacingMode     from "../Components/Gaming/RacingMode";
+import QuestMode      from "../Components/Gaming/QuestMode";
+import OverlordMode   from "../Components/Gaming/OverlordMode";
+import RotatePrompt   from "../Components/Gaming/RotatePrompt";
 
 export default function Gaming() {
   const [loading,     setLoading]     = useState(true);
@@ -32,6 +33,8 @@ export default function Gaming() {
   if (loading) return <LoadingScreen onDone={handleDone} />;
 
   return (
+    <>
+    <RotatePrompt />
     <div style={{
       width:"100vw", height:"100vh", background:"#060610",
       overflow:"hidden", position:"relative", userSelect:"none",
@@ -73,5 +76,6 @@ export default function Gaming() {
         />
       )}
     </div>
+    </>
   );
 }
