@@ -129,7 +129,7 @@ export default function News() {
       {/* ================= END MOBILE ================= */}
 
       {/* ================= DESKTOP LAYOUT ================= */}
-      <div className="hidden md:flex flex-row gap-20 w-full max-w-[1520px] mx-auto">
+      <div className="hidden md:flex flex-row gap-20 w-full max-w-[1520px] mx-auto px-10 lg:px-16 xl:px-20 2xl:px-20">
 
         {/* Left Column — 60% */}
         <div className="flex flex-col gap-6 w-[60%]">
