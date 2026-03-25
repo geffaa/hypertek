@@ -234,31 +234,34 @@ const ACTIONS = [
  * pos: { top, left } — px offset inside a 160×180 container
  */
 const BTN_SIZE = 82;
-const ACTION_LAYOUT = [
-  // Don's layout: Fire top-right, Scope mid-right, Kneel mid-left, Weapon bottom-left
-  { ...ACTIONS[1], top:   -50, left: 80 },   // Fire   — top-right
-  { ...ACTIONS[0], top:  60, left: 80 },   // Scope  — mid-right
-  { ...ACTIONS[2], top:  30, left:   -30 },   // Kneel  — mid-left
-  { ...ACTIONS[3], top: 140, left:   -70 },   // Weapon — bottom-left
+// Quarter-circle arc: R=42vh, center at bottom-right corner, spanning 105°→165°
+// Each button sits on the same circle radius, creating a true arc curve
+const ARC_3 = [
+  { id: "FIRE",   right: "11vh", bottom: "40vh" },  // 105° — nearly vertical
+  { id: "SCOPE",  right: "30vh", bottom: "30vh" },  // 135° — 45° midpoint
+  { id: "WEAPON", right: "40vh", bottom: "11vh" },  // 165° — nearly horizontal
+];
+const ARC_4 = [
+  { id: "FIRE",   right: "11vh", bottom: "40vh" },  // top of arc
+  { id: "SCOPE",  right: "35vh", bottom: "32vh" },  // arc — pushed further left
+  { id: "KNEEL",  right: "24vh", bottom: "22vh" },  // satellite: diagonal right-below SCOPE
+  { id: "WEAPON", right: "40vh", bottom: "11vh" },  // bottom of arc
 ];
 
-function ActionButtons() {
+function ActionButtons({ includeKneel = false }) {
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
+  const arc = includeKneel ? ARC_4 : ARC_3;
+  const sz = isMobile ? 52 : BTN_SIZE;
+  // Scale arc radius down on mobile so buttons don't overflow small screens
+  const s = isMobile ? 0.65 : 1;
+  const pos2 = (v) => `${parseFloat(v) * s}vh`;
 
   return (
-    <div style={{
-      position: "absolute",
-      right: isMobile ? "20%" : "9%",
-      bottom: "14%",
-      zIndex: 35,
-      width: 204,
-      height: 234,
-      userSelect: "none",
-      transform: isMobile ? "scale(0.58)" : "none",
-      transformOrigin: "bottom right",
-    }}>
-      {ACTION_LAYOUT.map(a => (
+    <>
+      {arc.map(pos => {
+        const a = ACTIONS.find(x => x.id === pos.id);
+        return (
         <button
           key={a.id}
           className="quest-action-btn"
@@ -266,8 +269,10 @@ function ActionButtons() {
           onMouseUp={() => setActive(null)}
           onMouseLeave={() => setActive(null)}
           style={{
-            position: "absolute", top: a.top, left: a.left,
-            width: BTN_SIZE, height: BTN_SIZE,
+            position: "absolute",
+            right: pos2(pos.right), bottom: pos2(pos.bottom),
+            zIndex: 35,
+            width: sz, height: sz,
             borderRadius: "50%",
             background: active === a.id
               ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
@@ -282,7 +287,7 @@ function ActionButtons() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            paddingBottom: 18,
+            paddingBottom: isMobile ? 12 : 18,
             overflow: "hidden",
           }}
         >
@@ -304,8 +309,9 @@ function ActionButtons() {
             pointerEvents: "none",
           }}>{a.id}</span>
         </button>
-      ))}
-    </div>
+        );
+      })}
+    </>
   );
 }
 
@@ -403,6 +409,9 @@ function SpaceView() {
       <div style={{ position:"absolute", left:"4%", bottom:"16%", zIndex:35 }}>
         <Joystick2D accentColor="#38bdf8" />
       </div>
+
+      {/* Action buttons — right, no Kneel in space */}
+      <ActionButtons includeKneel={false} />
     </div>
   );
 }
@@ -441,8 +450,8 @@ function GroundView() {
         <Joystick2D accentColor="#38bdf8" />
       </div>
 
-      {/* Action buttons — right */}
-      <ActionButtons />
+      {/* Action buttons — right, Kneel included for ground */}
+      <ActionButtons includeKneel={true} />
     </div>
   );
 }

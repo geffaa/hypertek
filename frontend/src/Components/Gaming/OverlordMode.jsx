@@ -68,6 +68,12 @@ const CSS = `
    Layout mirrors Quest mode (manual top/left per button)
    ══════════════════════════════════════════════════════════════════ */
 const OVL_BTN_SIZE = 82;
+// Quarter-circle arc: R=42vh, center at bottom-right corner, same as Quest for consistency
+const OVL_ARC = [
+  { id: "FIRE",   right: "11vh", bottom: "40vh" },
+  { id: "SCOPE",  right: "30vh", bottom: "30vh" },
+  { id: "WEAPON", right: "40vh", bottom: "11vh" },
+];
 const OVERLORD_ACTIONS = [
   {
     id: "FIRE",
@@ -78,7 +84,6 @@ const OVERLORD_ACTIONS = [
       </svg>
     ),
     color: "#f87171", glow: "rgba(248,113,113,0.55)",
-    top: -50, left: 50,     // Fire — top-right
   },
   {
     id: "SCOPE",
@@ -90,7 +95,6 @@ const OVERLORD_ACTIONS = [
       </svg>
     ),
     color: "#fbbf24", glow: "rgba(251,191,36,0.55)",
-    top: 60, left: 50,      // Scope — mid-right
   },
   {
     id: "WEAPON",
@@ -103,7 +107,6 @@ const OVERLORD_ACTIONS = [
       </svg>
     ),
     color: "#f87171", glow: "rgba(248,113,113,0.5)",
-    top: 140, left: -70,    // Weapon — bottom-left
   },
 ];
 
@@ -111,66 +114,65 @@ function OverlordActionButtons() {
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
 
+  const sz = isMobile ? 52 : OVL_BTN_SIZE;
+  const s = isMobile ? 0.65 : 1;
+  const pos2 = (v) => `${parseFloat(v) * s}vh`;
+
   return (
-    <div style={{
-      position: "absolute",
-      right: isMobile ? "20%" : "9%",
-      bottom: "14%",
-      zIndex: 35,
-      width: 174,
-      height: 176,
-      userSelect: "none",
-      transform: isMobile ? "scale(0.58)" : "none",
-      transformOrigin: "bottom right",
-    }}>
-      {OVERLORD_ACTIONS.map(a => (
-        <button
-          key={a.id}
-          className="overlord-action-btn"
-          onMouseDown={() => setActive(a.id)}
-          onMouseUp={() => setActive(null)}
-          onMouseLeave={() => setActive(null)}
-          style={{
-            position: "absolute", top: a.top, left: a.left,
-            width: OVL_BTN_SIZE, height: OVL_BTN_SIZE,
-            borderRadius: "50%",
-            background: active === a.id
-              ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
-              : "rgba(28,4,4,0.88)",
-            border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
-            boxShadow: active === a.id
-              ? `0 0 24px ${a.glow}, 0 0 48px ${a.glow}`
-              : `0 0 12px ${a.color}22`,
-            backdropFilter: "blur(8px)",
-            cursor: "pointer",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: 18,
-            overflow: "hidden",
-          }}
-        >
-          {a.icon}
-          <span style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0, right: 0,
-            textAlign: "center",
-            paddingBottom: 12,
-            fontFamily: "Orbitron,sans-serif",
-            fontSize: 7,
-            fontWeight: "bold",
-            letterSpacing: "0.08em",
-            color: active === a.id ? a.color : "#ffffff",
-            textShadow: active === a.id ? `0 0 8px ${a.glow}` : "0 1px 3px rgba(0,0,0,0.9)",
-            background: "linear-gradient(to top, rgba(0,0,0,0.55) 100%, transparent)",
-            userSelect: "none",
-            pointerEvents: "none",
-          }}>{a.id}</span>
-        </button>
-      ))}
-    </div>
+    <>
+      {OVL_ARC.map(pos => {
+        const a = OVERLORD_ACTIONS.find(x => x.id === pos.id);
+        return (
+          <button
+            key={a.id}
+            className="overlord-action-btn"
+            onMouseDown={() => setActive(a.id)}
+            onMouseUp={() => setActive(null)}
+            onMouseLeave={() => setActive(null)}
+            style={{
+              position: "absolute",
+              right: pos2(pos.right), bottom: pos2(pos.bottom),
+              zIndex: 35,
+              width: sz, height: sz,
+              borderRadius: "50%",
+              background: active === a.id
+                ? `radial-gradient(circle at 40% 35%, ${a.color}44, ${a.color}18)`
+                : "rgba(28,4,4,0.88)",
+              border: `1.5px solid ${a.color}${active === a.id ? "cc" : "66"}`,
+              boxShadow: active === a.id
+                ? `0 0 24px ${a.glow}, 0 0 48px ${a.glow}`
+                : `0 0 12px ${a.color}22`,
+              backdropFilter: "blur(8px)",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingBottom: isMobile ? 12 : 18,
+              overflow: "hidden",
+            }}
+          >
+            {a.icon}
+            <span style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0, right: 0,
+              textAlign: "center",
+              paddingBottom: 12,
+              fontFamily: "Orbitron,sans-serif",
+              fontSize: 7,
+              fontWeight: "bold",
+              letterSpacing: "0.08em",
+              color: active === a.id ? a.color : "#ffffff",
+              textShadow: active === a.id ? `0 0 8px ${a.glow}` : "0 1px 3px rgba(0,0,0,0.9)",
+              background: "linear-gradient(to top, rgba(0,0,0,0.55) 100%, transparent)",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}>{a.id}</span>
+          </button>
+        );
+      })}
+    </>
   );
 }
 

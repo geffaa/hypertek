@@ -229,7 +229,7 @@ function EventsPanel({ onClose, isMobile }) {
               borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
               letterSpacing:"0.08em",
-              color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.5)",
+              color: tab === t ? "#00E5FF" : "#cceeff",
               whiteSpace:"nowrap",
             }}>{t}</button>
         ))}
@@ -246,8 +246,8 @@ function EventsPanel({ onClose, isMobile }) {
                 onClick={() => handleRowClick(ev)}
                 style={{
                   padding: isMobile ? "7px 10px" : "9px 14px",
-                  borderBottom:"1px solid rgba(0,229,255,0.06)",
-                  opacity: ev.locked ? 0.45 : 1,
+                  borderBottom:"1px solid rgba(0,229,255,0.15)",
+                  opacity: ev.locked ? 0.75 : 1,
                   cursor: ev.locked ? "not-allowed" : "pointer",
                   display:"flex", alignItems:"center", justifyContent:"space-between",
                   background: isSelected ? "rgba(0,229,255,0.08)" : undefined,
@@ -256,20 +256,20 @@ function EventsPanel({ onClose, isMobile }) {
                   <div style={{
                     fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
                     letterSpacing:"0.08em",
-                    color: ev.locked ? "rgba(157,216,240,0.5)" : isSelected ? "#00E5FF" : "#c7e9f7",
+                    color: ev.locked ? "#aad4ee" : isSelected ? "#00E5FF" : "#ffffff",
                     marginBottom:3,
                   }}>{ev.title}</div>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-                    color: ev.time ? "#facc15" : "rgba(0,229,255,0.5)", letterSpacing:"0.06em",
+                    color: ev.time ? "#fde047" : "#00E5FF", letterSpacing:"0.06em",
                   }}>
                     {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
                   </div>
                 </div>
                 {ev.locked
-                  ? <span style={{ fontSize: isMobile ? 9 : 11, opacity:0.5 }}>🔒</span>
+                  ? <span style={{ fontSize: isMobile ? 9 : 11, opacity:0.75 }}>🔒</span>
                   : tab === "Limited"
                     ? <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-                        color:"rgba(0,229,255,0.4)", letterSpacing:"0.06em",
+                        color:"#00E5FF", letterSpacing:"0.06em",
                       }}>VIEW →</span>
                     : null
                 }
@@ -284,25 +284,25 @@ function EventsPanel({ onClose, isMobile }) {
         <div style={{ overflowY:"auto", flex:1, padding: isMobile ? "8px 10px" : "12px 14px" }}>
           <button onClick={() => setDetail(null)} style={{
             background:"none", border:"none", cursor:"pointer", padding:"0 0 10px 0",
-            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"rgba(0,229,255,0.6)",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"#00E5FF",
             letterSpacing:"0.1em",
           }}>← BACK</button>
 
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
-            color:"#c7e9f7", letterSpacing:"0.1em", marginBottom:6,
+            color:"#ffffff", letterSpacing:"0.1em", marginBottom:6,
           }}>{detail.title}</div>
 
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-            color: detail.time ? "#facc15" : "rgba(0,229,255,0.6)",
+            color: detail.time ? "#fde047" : "#00E5FF",
             letterSpacing:"0.06em", marginBottom:14,
           }}>
             {detail.time ? `⏱ ${detail.status} ${detail.time}` : `● ${detail.status}`}
           </div>
 
-          <div style={{ height:1, background:"rgba(0,229,255,0.1)", marginBottom:12 }}/>
+          <div style={{ height:1, background:"rgba(0,229,255,0.3)", marginBottom:12 }}/>
 
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-            color:"rgba(157,216,240,0.45)", lineHeight:1.7,
+            color:"#cce8f8", lineHeight:1.7,
           }}>
             Full event details, rewards, and participation options will be available when this event launches.
           </div>
