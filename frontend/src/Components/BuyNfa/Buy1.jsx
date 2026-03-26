@@ -1494,7 +1494,7 @@ function Buy1() {
                 </div>
                 {offers.map((offer, index) => (
                   <div key={index} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/06 p-3 rounded-lg mb-2 text-sm">
-                    <span className="text-white font-medium">{offer.price} USDT</span>
+                    <span className="text-white font-medium">{offer.price} USDC</span>
                     <span className="text-white/50">Collection</span>
                     <span className="text-white/50 truncate">{offer.from}</span>
                     <span className="text-white/50">{offer.expire}</span>

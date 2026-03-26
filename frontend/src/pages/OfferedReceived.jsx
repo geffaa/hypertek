@@ -44,7 +44,7 @@ function OfferedReceived() {
           <tbody>
             <tr className="hover:bg-[#2A2A2A] transition">
               <td className="px-4 py-2 border-b border-gray-700 whitespace-nowrap">
-                1600.2 USDT
+                1600.2 USDC
               </td>
               <td className="px-4 py-2 border-b border-gray-700 whitespace-nowrap">
                 Collection

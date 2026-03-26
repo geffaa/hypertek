@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
 import { Users, Package, Plus, X, Clock, RotateCcw, ShieldAlert, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
@@ -209,7 +210,8 @@ const STATUS_FILTERS = ["available", "rented", "cooldown"];
 
 export default function HireRentTab() {
   const { user, isLoggedInUser } = useSelector(s => s.auth);
-  const wallet = user?.walletAddress || user?.wallet || "";
+  const { address: wagmiAddress } = useAccount();
+  const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
 
   const [listings, setListings] = useState([]);
   const [usingPreview, setUsingPreview] = useState(false);

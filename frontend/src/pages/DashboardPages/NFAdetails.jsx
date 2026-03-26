@@ -34,8 +34,9 @@ function CollectionDetails() {
   });
 
   useEffect(() => {
-    if (!user?.id) {
-      toast.error("User id is required");
+    const userId = user?._id || user?.id;
+    if (!userId) {
+      toast.error("User not found. Please log in again.");
       return;
     }
 
@@ -43,7 +44,7 @@ function CollectionDetails() {
       try {
 
         setLoading(true); // show loader
-        const res = await api.get(`/nft/user/collection/get/${user.id}`);
+        const res = await api.get(`/nft/user/collection/get/${userId}`);
         console.log("User Dashboard data:", res);
 
         setCollections(
@@ -104,19 +105,20 @@ function CollectionDetails() {
 
 
   const toggleStatus = async (id, currentStatus) => {
+    if (!id) return toast.error("Collection ID is required");
+    const newStatus = currentStatus ? "inactive" : "active";
+    // Optimistic update
+    setCollections((prev) =>
+      prev.map((col) => (col.id === id ? { ...col, status: !currentStatus } : col))
+    );
     try {
-      const newStatus = currentStatus ? "inactive" : "active";
-      if (!id) {
-        toast.error("Collection Id is required");
-        return;
-      }
-
       await api.put(`/nft/status/${id}`, { status: newStatus });
-      setCollections((prev) =>
-        prev.map((col) => (col.id === id ? { ...col, status: !currentStatus } : col))
-      );
-      toast.success(`Status updated to ${newStatus}`);
+      toast.success(`Collection ${newStatus === "active" ? "activated" : "deactivated"}`);
     } catch (err) {
+      // Rollback on failure
+      setCollections((prev) =>
+        prev.map((col) => (col.id === id ? { ...col, status: currentStatus } : col))
+      );
       console.error("Status update error:", err);
       toast.error(err.response?.data?.message || "Failed to update status");
     }

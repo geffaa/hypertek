@@ -35,17 +35,25 @@ function CollectionOnSale() {
 
   useEffect(() => { fetchListings(); }, [wallet]);
 
-  const handleDelist = async (item) => {
+  const handleToggleListed = async (item) => {
+    const newListed = !item.listed;
+    // Optimistic update
+    setItems((prev) =>
+      prev.map((i) => i.subId === item.subId ? { ...i, listed: newListed } : i)
+    );
     try {
       await axios.put(
         `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${item.parentInfo.parentId}/sub-collection/${item.subId}`,
-        { listed: false },
+        { listed: newListed },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      toast.success(`"${item.name}" delisted`);
-      setItems((prev) => prev.filter((i) => i.subId !== item.subId));
+      toast.success(`"${item.name}" ${newListed ? "listed for sale" : "removed from sale"}`);
     } catch {
-      toast.error("Failed to delist item");
+      // Rollback on failure
+      setItems((prev) =>
+        prev.map((i) => i.subId === item.subId ? { ...i, listed: item.listed } : i)
+      );
+      toast.error("Failed to update listing status");
     }
   };
 
@@ -64,17 +72,7 @@ function CollectionOnSale() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-black">
-
-      {/* Blur Backgrounds */}
-      <div
-        style={{ top: "15px", left: "210px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)", pointerEvents: "none" }}
-        className="absolute rounded-full"
-      />
-      <div
-        style={{ top: "400px", left: "620px", width: "250px", height: "250px", background: "#002AA8", filter: "blur(180px)", pointerEvents: "none" }}
-        className="absolute rounded-full"
-      />
+    <div className="flex flex-col min-h-screen">
 
       {/* Header */}
       <div className="flex flex-col w-full max-w-[426px] gap-6 px-6 md:ml-12 z-10">
@@ -105,7 +103,7 @@ function CollectionOnSale() {
               {items.map((item) => {
                 const imgSrc = item.image ? getImageUrl(item.image) : Collectionimage;
                 return (
-                  <tr key={item.subId} className="h-[70px] transition-all duration-200 backdrop-blur-sm">
+                  <tr key={item.subId} className="h-[70px] transition-all duration-200">
                     <td className="px-6 py-4">
                       <img src={imgSrc} alt={item.name} className="w-12 h-12 object-cover border border-white/10 rounded" />
                     </td>
@@ -134,7 +132,7 @@ function CollectionOnSale() {
                     <td className="px-6 py-4">
                       <Switch
                         checked={item.listed}
-                        onChange={() => handleDelist(item)}
+                        onChange={() => handleToggleListed(item)}
                         sx={{
                           width: 46, height: 20, padding: 0,
                           "& .MuiSwitch-switchBase": {
@@ -159,7 +157,7 @@ function CollectionOnSale() {
 
       {/* Add More Button */}
       <div className="flex justify-start px-6 md:mx-12 my-12">
-        <Link to="/dashboard/add-collection">
+        <Link to="/dashboard/collections">
           <button className="flex items-center justify-center w-full sm:w-[190px] h-[42px] rounded-[6px] p-[10px] gap-[10px] bg-[#002AA8] text-white font-inter font-medium hover:opacity-90 transition">
             <p className="font-inter font-normal text-[18px] leading-[100%] opacity-100">Add More</p>
           </button>

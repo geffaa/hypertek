@@ -8,6 +8,7 @@ import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 import { FaUserCircle } from "react-icons/fa";
 import NotificationIcon from "../../assets/notification.png";
+import NotificationDropdown from "./Notification";
 
 const Header = ({ onMenuClick }) => {
   const navigate = useNavigate();
@@ -133,8 +134,17 @@ const Header = ({ onMenuClick }) => {
         </div>
 
         {/* 🔔 Notification */}
-        <div className="bg-white flex items-center justify-center rounded-full cursor-pointer w-[32px] h-[32px] flex-shrink-0">
-          <img src={NotificationIcon} alt="Notifications" className="w-[13px]" />
+        <div className="relative flex-shrink-0">
+          <button
+            onClick={() => setShowNotifications(!showNotifications)}
+            className="bg-white flex items-center justify-center rounded-full cursor-pointer w-[32px] h-[32px]"
+          >
+            <img src={NotificationIcon} alt="Notifications" className="w-[13px]" />
+          </button>
+          <NotificationDropdown
+            isOpen={showNotifications}
+            onClose={() => setShowNotifications(false)}
+          />
         </div>
 
         {/* 👤 Animated Profile Picture */}

@@ -33,6 +33,7 @@ export default function Navbar() {
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const isHome = location.pathname === "/";
@@ -161,6 +162,7 @@ export default function Navbar() {
 
   const shopRef = useRef(null);
   const socialRef = useRef(null);
+  const profileRef = useRef(null);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -173,6 +175,9 @@ export default function Navbar() {
       }
       if (socialRef.current && !socialRef.current.contains(event.target)) {
         setSocialOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -519,31 +524,45 @@ export default function Navbar() {
                   </Link>
                 )}
 
-                {user?.Role === "admin" ? (
-                  <a
-                    href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
-                    className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
+                {/* Profile dropdown (includes Dashboard/Panel access) */}
+                <div ref={profileRef} className="relative">
+                  <button
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer"
                   >
-                    Panel
-                  </a>
-                ) : (
-                  <a
-                    href="/dashboard"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center px-3 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 text-white text-sm font-semibold"
-                  >
-                    Panel
-                  </a>
-                )}
+                    <FontAwesomeIcon icon={faUser} className="text-white w-5 h-5" />
+                  </button>
 
-                <div className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer">
-                  <Link to="/profile">
-                    <FontAwesomeIcon
-                      icon={faUser}
-                      className="text-white w-5 h-5"
-                    />
-                  </Link>
+                  {profileOpen && (
+                    <div className="absolute top-full right-0 mt-2 w-44 rounded-[8px] bg-[#002AA8D9] border border-white/20 shadow-lg overflow-hidden z-50">
+                      <Link
+                        to="/profile"
+                        onClick={() => setProfileOpen(false)}
+                        className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors"
+                      >
+                        My Profile
+                      </Link>
+                      {user?.Role === "admin" ? (
+                        <a
+                          href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
+                          onClick={() => setProfileOpen(false)}
+                          className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors border-t border-white/10"
+                        >
+                          Dashboard
+                        </a>
+                      ) : (
+                        <a
+                          href="/dashboard"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setProfileOpen(false)}
+                          className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors border-t border-white/10"
+                        >
+                          Dashboard
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
@@ -701,26 +720,47 @@ export default function Navbar() {
             {/* Logged-in Search + Profile */}
             {isLoggedIn ? (
               <>
-                <div className="flex items-center justify-end space-x-2 mt-4 w-full">
-                  <Link to="/profile">
-                    <img
-                      src={ProfileImg}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-md hover:scale-105 transition-transform duration-200"
-                    />
+                <div className="flex flex-col gap-1 mt-4 pt-4 border-t border-white/20">
+                  <Link
+                    to="/profile"
+                    onClick={closeMobileMenu}
+                    className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
+                  >
+                    My Profile
                   </Link>
-                  <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
-                    <button
-                      className="flex items-center justify-center w-full h-full"
-                      onClick={() => setShowModal(true)}
+                  {user?.Role === "admin" ? (
+                    <a
+                      href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
+                      onClick={closeMobileMenu}
+                      className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                     >
-                      <img
-                        src={logoutImage}
-                        alt="Logout"
-                        className="w-[20px] h-[20px] brightness-0 invert"
-                        style={{ filter: "brightness(0) invert(1)" }}
-                      />
-                    </button>
+                      Dashboard
+                    </a>
+                  ) : (
+                    <a
+                      href="/dashboard"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={closeMobileMenu}
+                      className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
+                    >
+                      Dashboard
+                    </a>
+                  )}
+                  <div className="flex justify-end mt-2">
+                    <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
+                      <button
+                        className="flex items-center justify-center w-full h-full"
+                        onClick={() => setShowModal(true)}
+                      >
+                        <img
+                          src={logoutImage}
+                          alt="Logout"
+                          className="w-[20px] h-[20px] brightness-0 invert"
+                          style={{ filter: "brightness(0) invert(1)" }}
+                        />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </>

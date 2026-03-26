@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
 import axios from "axios";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
@@ -65,7 +66,8 @@ export default function MyMarketTab() {
   const [loading, setLoading] = useState(false);
   const [filter, setFilter]   = useState("all"); // all | listed | unlisted
 
-  const walletAddress = user?.walletAddress || user?.wallet;
+  const { address: wagmiAddress } = useAccount();
+  const walletAddress = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress;
 
   useEffect(() => {
     if (!walletAddress || !token) return;

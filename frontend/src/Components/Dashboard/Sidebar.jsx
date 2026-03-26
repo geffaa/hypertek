@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiChevronDown, FiChevronUp, FiX } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiX, FiFileText, FiTag, FiUploadCloud, FiZap, FiEdit2 } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
@@ -254,7 +254,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("transactions")}
               >
-                <span className="text-lg">📋</span>
+                <FiFileText className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   Transactions
                 </h1>
@@ -268,7 +268,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("listings")}
               >
-                <span className="text-lg">🏷️</span>
+                <FiTag className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   My Listings
                 </h1>
@@ -282,7 +282,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("upload-nfc")}
               >
-                <span className="text-lg">⬆️</span>
+                <FiUploadCloud className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   Upload NFC
                 </h1>
@@ -296,7 +296,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("withdraw")}
               >
-                <span className="text-lg">⚡</span>
+                <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   Withdraw HB
                 </h1>
@@ -310,7 +310,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("edit-profile")}
               >
-                <span className="text-lg">✏️</span>
+                <FiEdit2 className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   Edit Profile
                 </h1>

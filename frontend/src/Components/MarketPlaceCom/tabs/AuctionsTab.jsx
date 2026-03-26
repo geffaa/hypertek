@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
 import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
@@ -268,7 +269,9 @@ const FILTERS = ["active", "ended", "sold"];
 
 export default function AuctionsTab() {
   const { user, isLoggedInUser } = useSelector(s => s.auth);
-  const wallet = user?.walletAddress || user?.wallet || "";
+  const { address: wagmiAddress } = useAccount();
+  // Prefer wagmi address (RainbowKit) → fallback to Redux user wallet
+  const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
 
   const [auctions, setAuctions] = useState([]);
   const [usingPreview, setUsingPreview] = useState(false);

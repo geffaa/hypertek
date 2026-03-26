@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useAccount } from "wagmi";
 import { Swords, Package, Plus, X, Clock, CheckCircle2, Circle, Gamepad2, Info } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
@@ -191,7 +192,8 @@ const STATUS_FILTERS = ["open", "accepted", "completed"];
 
 export default function QuestsTab() {
   const { user, isLoggedInUser } = useSelector(s => s.auth);
-  const wallet = user?.walletAddress || user?.wallet || "";
+  const { address: wagmiAddress } = useAccount();
+  const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
 
   const [trades, setTrades] = useState([]);
   const [usingPreview, setUsingPreview] = useState(false);

@@ -378,6 +378,11 @@ const NFT_101_DATA = [
 // MAIN SEED FUNCTION
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// ── Force-reseed flag: set FORCE_RESEED_NFT=true in Config/.env to wipe & re-seed NFT collections
+// Remove this flag after QA testing to restore normal skip-if-exists behaviour.
+const FORCE_RESEED_NFT = process.env.FORCE_RESEED_NFT === "true";
+const QA_PRICE = 0.50; // $0.50 USDC — cheapest amount that works with both Stripe and wallet
+
 async function seed() {
     const mongoUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/hypertek";
     console.log("🔗 Connecting to MongoDB...");
@@ -421,9 +426,18 @@ async function seed() {
 
     // ── 3. NFT Collections ──────────────────────────────────────────────────
     let nft_created = 0, nft_skipped = 0;
+
+    if (FORCE_RESEED_NFT) {
+        const deleted = await NFTSystem.deleteMany({ isParentCollection: true });
+        console.log(`🗑  FORCE_RESEED_NFT: removed ${deleted.deletedCount} existing collections`);
+        console.log(`💰  All prices set to $${QA_PRICE} USDC for QA testing`);
+    }
+
     for (const cat of CATEGORIES) {
-        const existing = await NFTSystem.findOne({ "collection.name": cat.name, isParentCollection: true });
-        if (existing) { nft_skipped++; continue; }
+        if (!FORCE_RESEED_NFT) {
+            const existing = await NFTSystem.findOne({ "collection.name": cat.name, isParentCollection: true });
+            if (existing) { nft_skipped++; continue; }
+        }
         await NFTSystem.create({
             collection: {
                 name: cat.name, symbol: cat.symbol, chain: cat.chain,
@@ -436,11 +450,12 @@ async function seed() {
             subCollections: cat.items.map((item, i) => ({
                 name: item.name, symbol: item.symbol,
                 description: item.description, image: item.image,
-                priceETH: item.priceETH, listed: true,
+                priceETH: FORCE_RESEED_NFT ? QA_PRICE : item.priceETH,
+                listed: true,
                 isFirstSale: true, tokenId: i + 1,
             })),
         });
-        console.log(`✅ NFT Collection: ${cat.name} (${cat.items.length} items)`);
+        console.log(`✅ NFT Collection: ${cat.name} (${cat.items.length} items @ $${FORCE_RESEED_NFT ? QA_PRICE : item.priceETH} USDC)`);
         nft_created++;
     }
 
