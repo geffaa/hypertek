@@ -124,45 +124,45 @@ const CSS = `
 // Ship room data — positions as % of each level's PNG image (x, y, w, h)
 const SHIP_ROOMS = {
   1: [
-    { id: "process_ref",   name: "Process Refinement", x:30, y:40, w:8, h:14 },
-    { id: "mining_top",    name: "Mining Plant",        x:38, y:33, w:8, h:14 },
-    { id: "mining_bot",    name: "Mining Plant",        x:38, y:46, w:8, h:14 },
-    { id: "workshop",      name: "Workshop",            x:55, y:33, w:8, h:14 },
-    { id: "racing",        name: "Racing Hanger",       x:55, y:46, w:8, h:14 },
-    { id: "fuel",          name: "Fuel Processing",     x:70, y:38, w:12, h:24 },
+    { id: "process_ref",   name: "Process Refinement", x:8, y:38, w:10, h:17 },
+    { id: "mining_top",    name: "Mining Plant",        x:19, y:25, w:13, h:20 },
+    { id: "mining_bot",    name: "Mining Plant",        x:19, y:46, w:13, h:20 },
+    { id: "workshop",      name: "Workshop",            x:45, y:25, w:13, h:20 },
+    { id: "racing",        name: "Racing Hanger",       x:45, y:46, w:13, h:20 },
+    { id: "fuel",          name: "Fuel Processing",     x:60, y:31, w:20, h:30 },
   ],
   2: [
-    { id: "armory",        name: "Armory",                   x:30, y:40, w:8, h:14 },
-    { id: "fwd_shield",    name: "Forward Shield Generator", x:40, y:40, w:8,  h:14 },
-    { id: "teleport",      name: "Teleportation",            x:51, y:34, w:6,  h:13 },
-    { id: "security",      name: "Security",                 x:51, y:48, w:6,  h:13 },
-    { id: "barracks_top",  name: "Barracks",                 x:56, y:32, w:12, h:6 },
-    { id: "power_plant",   name: "Power Plant",              x:57, y:41, w:9,  h:14 },
-    { id: "eng_systems",   name: "Engineering Systems",      x:66, y:41, w:6,  h:14 },
-    { id: "barracks_bot",  name: "Barracks",                 x:56, y:58, w:12, h:6 },
-    { id: "engineering",   name: "Engineering",              x:72, y:41, w:9, h:14 },
+    { id: "armory",        name: "Armory",                   x:6, y:36, w:12, h:18 },
+    { id: "fwd_shield",    name: "Forward Shield Generator", x:22, y:38, w:8,  h:14 },
+    { id: "teleport",      name: "Teleportation",            x:39, y:29, w:6,  h:15 },
+    { id: "security",      name: "Security",                 x:39, y:47, w:6,  h:15 },
+    { id: "barracks_top",  name: "Barracks",                 x:47, y:23, w:17, h:6 },
+    { id: "power_plant",   name: "Power Plant",              x:47, y:37, w:12,  h:16 },
+    { id: "eng_systems",   name: "Engineering Systems",      x:61, y:37, w:10,  h:16 },
+    { id: "barracks_bot",  name: "Barracks",                 x:47, y:62, w:17, h:6 },
+    { id: "engineering",   name: "Engineering",              x:71, y:37, w:12, h:16 },
   ],
   3: [
-    { id: "flight_deck",   name: "Flight Deck",       x:40, y:40, w:5, h:14 },
-    { id: "mess_hall",     name: "Mess Hall",          x:51, y:40, w:5, h:7 },
-    { id: "capt_quarters", name: "Capt. Quarters",     x:46, y:51, w:5, h:6 },
-    { id: "medical",       name: "Medical",            x:52, y:49, w:4, h:8 },
-    { id: "hydro_bays",    name: "Hydro Bays",         x:57, y:35, w:14, h:24 },
-    { id: "storage_top",   name: "Storage Hold",       x:71, y:34, w:7, h:8 },
-    { id: "storage_bot",   name: "Storage Hold",       x:71, y:53, w:7, h:8 },
-    { id: "sec_power",     name: "Sec. Power Upper",   x:74, y:44, w:6, h:8 },
-    { id: "rear_cargo",    name: "Rear Cargo Hold",    x:80, y:34, w:7, h:26 },
+    { id: "flight_deck",   name: "Flight Deck",       x:20, y:35, w:10, h:19 },
+    { id: "mess_hall",     name: "Mess Hall",          x:38, y:32, w:8, h:10 },
+    { id: "capt_quarters", name: "Capt. Quarters",     x:30, y:51, w:8, h:7 },
+    { id: "medical",       name: "Medical",            x:41, y:48, w:5, h:10 },
+    { id: "hydro_bays",    name: "Hydro Bays",         x:46, y:29, w:23, h:33 },
+    { id: "storage_top",   name: "Storage Hold",       x:69, y:25, w:12, h:13 },
+    { id: "storage_bot",   name: "Storage Hold",       x:69, y:51, w:12, h:13 },
+    { id: "sec_power",     name: "Sec. Power Upper",   x:74, y:39, w:8, h:12 },
+    { id: "rear_cargo",    name: "Rear Cargo Hold",    x:84, y:25, w:10, h:40 },
   ],
   4: [
-    { id: "navigation",    name: "Navigation",         x:42, y:42, w:2, h:12 },
-    { id: "academy",       name: "Academy",            x:44, y:45, w:2,  h:6 },
-    { id: "holo_deck",     name: "Holo Deck",          x:52, y:45, w:6, h:5 },
-    { id: "cryo_lab",      name: "Cryo Lab",           x:61, y:41, w:6, h:5 },
-    { id: "dna_lab",       name: "DNA Lab",            x:61, y:50, w:6, h:5 },
-    { id: "cryostasis",    name: "Cryostasis",         x:67, y:41, w:7, h:6 },
-    { id: "dna_chambers",  name: "DNA Chambers",       x:67, y:49, w:7, h:6 },
-    { id: "shield_gen",    name: "Shield Generators",  x:75, y:44, w:6,  h:8 },
-    { id: "comms_tower",   name: "Comm Towers",        x:81, y:41, w:6, h:14 },
+    { id: "navigation",    name: "Navigation",         x:23, y:37, w:3, h:15 },
+    { id: "academy",       name: "Academy",            x:28, y:41, w:2,  h:8 },
+    { id: "holo_deck",     name: "Holo Deck",          x:40, y:39, w:10, h:9 },
+    { id: "cryo_lab",      name: "Cryo Lab",           x:54, y:35, w:10, h:9 },
+    { id: "dna_lab",       name: "DNA Lab",            x:54, y:47, w:10, h:9 },
+    { id: "cryostasis",    name: "Cryostasis",         x:64, y:35, w:10, h:9 },
+    { id: "dna_chambers",  name: "DNA Chambers",       x:64, y:47, w:10, h:9 },
+    { id: "shield_gen",    name: "Shield Generators",  x:76, y:38, w:10,  h:13 },
+    { id: "comms_tower",   name: "Comm Towers",        x:87, y:35, w:8, h:21 },
   ],
 };
 
@@ -208,7 +208,13 @@ export default function TopBar() {
   const [shipLevel,    setShipLevel]    = useState(null);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hoveredRoom,  setHoveredRoom]  = useState(null);
-  const [shipLine,     setShipLine]     = useState(null);
+  const [shipLine,       setShipLine]       = useState(null);
+  const [vrShipOpen,     setVrShipOpen]     = useState(false);
+  const [vrShipPairing,  setVrShipPairing]  = useState(false);
+  const [vrShipPairDone, setVrShipPairDone] = useState(false);
+  const [vrQuestShipOpen, setVrQuestShipOpen] = useState(false);
+  const vrShipRef        = useRef(null);
+  const vrQuestShipRef   = useRef(null);
   const shipsRef       = useRef(null);
   const shipContentRef = useRef(null);
   const shipImgRef     = useRef(null);
@@ -260,6 +266,11 @@ export default function TopBar() {
       }
       if (resBarRef.current && !resBarRef.current.contains(e.target))
         setActiveRes(null);
+      if (vrShipRef.current && !vrShipRef.current.contains(e.target)) {
+        setVrShipOpen(false); setVrShipPairing(false); setVrShipPairDone(false);
+      }
+      if (vrQuestShipRef.current && !vrQuestShipRef.current.contains(e.target))
+        setVrQuestShipOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -850,6 +861,109 @@ export default function TopBar() {
                     boxShadow: shipLevel === lvl ? "0 0 10px rgba(251,191,36,0.3)" : "none",
                   }}>LVL {lvl}</button>
                 ))}
+
+                {/* VR MODE button */}
+                <div ref={vrShipRef} style={{ position: "relative" }}>
+                  <button
+                    onClick={() => { setVrShipOpen(o => { if (o) { setVrShipPairing(false); setVrShipPairDone(false); } return !o; }); setVrQuestShipOpen(false); }}
+                    style={{
+                      padding: isMobile ? "4px 10px" : "6px 16px",
+                      background: vrShipOpen ? "rgba(0,212,255,0.18)" : "rgba(0,0,0,0.45)",
+                      border: `1.5px solid ${vrShipOpen ? "#00D4FF" : "rgba(0,212,255,0.65)"}`,
+                      borderRadius: 3, cursor: "pointer",
+                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 10 : 15, fontWeight: "bold",
+                      color: "#00D4FF",
+                      letterSpacing: "0.12em", transition: "all 0.15s",
+                      boxShadow: vrShipOpen ? "0 0 18px rgba(0,212,255,0.55)" : "0 0 8px rgba(0,212,255,0.25)",
+                      textShadow: "0 0 12px rgba(0,212,255,0.9)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >VR MODE</button>
+
+                  {vrShipOpen && (
+                    <div style={{
+                      position: "absolute", top: "calc(100% + 6px)", left: 0, zIndex: 60,
+                      background: "linear-gradient(160deg,#020d1a,#010812)",
+                      border: "1.5px solid rgba(0,212,255,0.45)", borderRadius: 5,
+                      boxShadow: "0 6px 28px rgba(0,0,0,0.95), 0 0 20px rgba(0,212,255,0.12)",
+                      overflow: "hidden", minWidth: isMobile ? 180 : 240,
+                    }}>
+                      {/* Header */}
+                      <div style={{ padding: isMobile ? "6px 12px" : "9px 16px", borderBottom: "1px solid rgba(0,212,255,0.15)", background: "rgba(0,212,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight: "bold", letterSpacing: "0.15em", color: "#00D4FF" }}>DEVICE PAIRING</span>
+                        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#f87171", boxShadow: "0 0 6px rgba(248,113,113,0.8)" }} />
+                          <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color: "rgba(248,113,113,0.85)", letterSpacing: "0.08em" }}>OFFLINE</span>
+                        </div>
+                      </div>
+                      {/* Single pair button */}
+                      <div style={{ padding: isMobile ? "12px 12px" : "14px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+                        <button
+                          onClick={() => {
+                            if (vrShipPairDone || vrShipPairing) return;
+                            setVrShipPairing(true);
+                            setTimeout(() => { setVrShipPairing(false); setVrShipPairDone(true); }, 2000);
+                          }}
+                          style={{
+                            width: "100%", padding: isMobile ? "6px 0" : "8px 0",
+                            background: vrShipPairDone ? "rgba(248,113,113,0.08)" : vrShipPairing ? "rgba(0,212,255,0.08)" : "rgba(0,212,255,0.12)",
+                            border: `1px solid ${vrShipPairDone ? "rgba(248,113,113,0.4)" : "rgba(0,212,255,0.4)"}`,
+                            borderRadius: 4, cursor: vrShipPairDone || vrShipPairing ? "default" : "pointer",
+                            fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight: "bold",
+                            letterSpacing: "0.12em",
+                            color: vrShipPairDone ? "rgba(248,113,113,0.9)" : "#00D4FF",
+                            transition: "all 0.2s",
+                          }}
+                        >
+                          {vrShipPairing ? "PAIRING..." : vrShipPairDone ? "UNAVAILABLE RIGHT NOW" : "PAIR DEVICE"}
+                        </button>
+                        {vrShipPairDone && (
+                          <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, color: "rgba(255,255,255,0.95)", letterSpacing: "0.08em" }}>Coming Soon</span>
+                        )}
+                      </div>
+                      {/* Footer */}
+                      <div style={{ padding: isMobile ? "6px 12px" : "7px 16px", borderTop: "1px solid rgba(0,212,255,0.15)", background: "rgba(0,0,0,0.3)", textAlign: "center" }}>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, color: "#00D4FF", letterSpacing: "0.08em", textShadow: "0 0 6px rgba(0,212,255,0.6)" }}>VR Interaction MODE · Coming Soon</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* VR QUEST button */}
+                <div ref={vrQuestShipRef} style={{ position: "relative" }}>
+                  <button
+                    onClick={() => { setVrQuestShipOpen(o => !o); setVrShipOpen(false); }}
+                    style={{
+                      padding: isMobile ? "4px 10px" : "6px 16px",
+                      background: vrQuestShipOpen ? "rgba(167,139,250,0.18)" : "rgba(0,0,0,0.45)",
+                      border: `1.5px solid ${vrQuestShipOpen ? "#a78bfa" : "rgba(167,139,250,0.6)"}`,
+                      borderRadius: 3, cursor: "pointer",
+                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 10 : 15, fontWeight: "bold",
+                      color: "#a78bfa",
+                      letterSpacing: "0.12em", transition: "all 0.15s",
+                      boxShadow: vrQuestShipOpen ? "0 0 18px rgba(167,139,250,0.55)" : "0 0 8px rgba(167,139,250,0.25)",
+                      textShadow: "0 0 12px rgba(167,139,250,0.9)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >VR QUEST</button>
+
+                  {vrQuestShipOpen && (
+                    <div style={{
+                      position: "absolute", top: "calc(100% + 6px)", left: 0, zIndex: 60,
+                      background: "linear-gradient(160deg,#0d0820,#06030f)",
+                      border: "1.5px solid rgba(167,139,250,0.4)", borderRadius: 5,
+                      boxShadow: "0 6px 24px rgba(0,0,0,0.95), 0 0 16px rgba(167,139,250,0.12)",
+                      padding: isMobile ? "10px 12px" : "12px 16px", minWidth: isMobile ? 155 : 195,
+                    }}>
+                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight: "bold", letterSpacing: "0.12em", color: "#a78bfa", marginBottom: 8 }}>VR QUEST MODE</div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#f87171", boxShadow: "0 0 6px rgba(248,113,113,0.8)", flexShrink: 0 }} />
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color: "#f87171", letterSpacing: "0.05em", textShadow: "0 0 8px rgba(248,113,113,0.6)" }}>Unavailable right now</span>
+                      </div>
+                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, color: "#a78bfa", letterSpacing: "0.08em", textShadow: "0 0 8px rgba(167,139,250,0.5)" }}>Coming Soon · VR Experience</div>
+                    </div>
+                  )}
+                </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 20 }}>
                 <span style={{
@@ -892,15 +1006,15 @@ export default function TopBar() {
 
               {/* Room sidebar */}
               <div style={{
-                width: isMobile ? 100 : 155, flexShrink: 0,
+                width: isMobile ? 110 : 170, flexShrink: 0,
                 background: "#0a0500", borderRight: "1px solid rgba(180,90,20,0.4)",
                 overflowY: "auto", display: "flex", flexDirection: "column",
               }}>
                 <div style={{
                   padding: isMobile ? "6px 8px" : "8px 12px",
                   borderBottom: "1px solid rgba(180,90,20,0.4)",
-                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
-                  color: "rgba(251,191,36,0.5)", letterSpacing: "0.12em",
+                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
+                  color: "#fbbf24", letterSpacing: "0.12em",
                 }}>ROOMS</div>
                 {(SHIP_ROOMS[shipLevel] || []).map(room => (
                   <div
@@ -911,7 +1025,7 @@ export default function TopBar() {
                     onMouseLeave={() => setHoveredRoom(null)}
                     style={{
                       display: "flex", alignItems: "center", justifyContent: "space-between",
-                      padding: isMobile ? "7px 8px" : "9px 12px",
+                      padding: isMobile ? "8px 8px" : "11px 12px",
                       borderBottom: "1px solid rgba(180,90,20,0.2)",
                       cursor: "pointer",
                       background: selectedRoom === room.id || hoveredRoom === room.id
@@ -920,9 +1034,9 @@ export default function TopBar() {
                     }}
                   >
                     <span style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight: "bold",
+                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight: "bold",
                       letterSpacing: "0.06em",
-                      color: selectedRoom === room.id || hoveredRoom === room.id ? "#fbbf24" : "rgba(220,180,120,0.8)",
+                      color: selectedRoom === room.id || hoveredRoom === room.id ? "#fbbf24" : "rgba(220,180,120,0.9)",
                     }}>{room.name}</span>
                     <div style={{
                       width: isMobile ? 7 : 9, height: isMobile ? 7 : 9,
