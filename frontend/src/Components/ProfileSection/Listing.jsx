@@ -306,7 +306,7 @@ function UserListings() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                    <span className="text-black font-bold text-xs p-1">₮</span>
+                    <span className="text-black font-bold text-[8px] p-1">USDC</span>
                   </div>
                   <span className="text-lg font-bold text-white font-mono">
                     ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}

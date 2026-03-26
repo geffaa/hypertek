@@ -18,7 +18,7 @@ function CreateCollections() {
   const [form, setForm] = useState({
     name: "",
     symbol: "",
-    chain: "",
+    chain: "Base", // hardcoded — platform only supports Base
   });
 
   const handleChange = (e) => {
@@ -158,25 +158,18 @@ function CreateCollections() {
               />
             </div>
 
-            {/* Chain */}
+            {/* Chain — fixed to Base */}
             <div className="w-full flex flex-col gap-2 mt-6">
-              <label htmlFor="chain" className="text-white text-[18px]">Chain</label>
-              <div className="flex items-center rounded-md bg-white/10 text-white border border-gray-600 focus-within:border-blue-500 focus-within:bg-white/15 transition-colors px-2">
+              <label className="text-white text-[18px]">Chain</label>
+              <div className="flex items-center gap-2 rounded-md bg-white/5 text-white border border-gray-600/50 px-3 h-10 cursor-not-allowed">
                 <div
                   className="w-[17px] h-[17px] rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ background: "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)" }}
                 >
                   <img src={ChainIcon} alt="" className="w-[10.62px] h-[9.78px]" />
                 </div>
-                <input
-                  type="text"
-                  id="chain"
-                  name="chain"
-                  value={form.chain}
-                  onChange={handleChange}
-                  placeholder="e.g. Base, Ethereum"
-                  className="w-full h-10 px-3 bg-transparent outline-none text-white"
-                />
+                <span className="text-white/70 text-sm">Base</span>
+                <span className="ml-auto text-white/30 text-xs">Fixed</span>
               </div>
             </div>
           </div>

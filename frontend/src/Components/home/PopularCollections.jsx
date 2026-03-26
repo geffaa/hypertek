@@ -108,7 +108,7 @@ function PopularCollections() {
 
                   <div className="flex items-center gap-1 mt-0.5">
                     <div className="w-3 h-3 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex-shrink-0" />
-                    <span className="text-white/60 text-[10px] truncate">{item?.collection?.chain}</span>
+                    <span className="text-white/60 text-[10px] truncate">USDC</span>
                   </div>
 
                   <div className="mt-auto pt-2">

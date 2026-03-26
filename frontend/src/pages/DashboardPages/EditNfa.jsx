@@ -161,23 +161,18 @@ function EditNfa() {
               />
             </div>
 
-            {/* Chain */}
+            {/* Chain — fixed to Base */}
             <div className="flex flex-col gap-2">
               <label className="text-white text-base">Chain</label>
-              <div className="flex items-center gap-2 px-2 h-12 border border-gray-600 rounded-md bg-white/10 focus-within:border-blue-500 focus-within:bg-white/15 transition">
+              <div className="flex items-center gap-2 px-2 h-12 border border-gray-600/50 rounded-md bg-white/5 cursor-not-allowed">
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ background: "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)" }}
                 >
                   <img src={ChainIcon} alt="" className="w-[11px] h-[10px]" />
                 </div>
-                <input
-                  type="text"
-                  value={formData.chain}
-                  onChange={(e) => setFormData({ ...formData, chain: e.target.value })}
-                  placeholder="e.g. Base, Ethereum"
-                  className="w-full bg-transparent outline-none text-white placeholder-white/40"
-                />
+                <span className="text-white/70 text-sm">Base</span>
+                <span className="ml-auto text-white/30 text-xs">Fixed</span>
               </div>
             </div>
 

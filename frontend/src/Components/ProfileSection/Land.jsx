@@ -111,7 +111,7 @@ function Land() {
 
             // Parent metadata
             category: item.category,
-            chain: "ETH",
+            chain: "Base",
 
             isSubCollection: true,
             userOwns: true,
@@ -500,7 +500,7 @@ function Land() {
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      toast.success(`✅ Listed! Token #${tokenId} @ 0.01 ETH`, {
+      toast.success(`✅ Listed! Token #${tokenId} @ ${selectedItem?.priceETH || 0.5} USDC`, {
         id: toastId,
         duration: 5000,
       });

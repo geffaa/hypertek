@@ -227,7 +227,7 @@ function NfaLand() {
     } catch (switchError) {
       if (switchError.code === 4902) {
         try {
-          toast.loading("➕ Adding Immutable network...", { id: toastId });
+          toast.loading("➕ Adding Base network...", { id: toastId });
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [
@@ -244,7 +244,7 @@ function NfaLand() {
               },
             ],
           });
-          toast.success("✅ Immutable network added", { id: toastId });
+          toast.success("✅ Base network added", { id: toastId });
           return true;
         } catch (addError) {
           console.error("❌ Failed to add Immutable:", addError);
@@ -976,16 +976,17 @@ function NfaLand() {
             <div className="mt-4 space-y-2">
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>List Price</span>
-                <span>0.01 ETH</span>
+                <span>{collection?.priceETH || 0.5} USDC</span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded">
                 <span>Platform Fee (10%)</span>
-                <span>0.001 ETH</span>
+                <span>{((collection?.priceETH || 0.5) * 0.1).toFixed(4)} USDC</span>
               </div>
               <div className="flex justify-between bg-white/10 px-4 py-2 rounded font-bold">
                 <span>Total</span>
-                <span>0.011 ETH</span>
+                <span>{((collection?.priceETH || 0.5) * 1.1).toFixed(4)} USDC</span>
               </div>
+              <p className="text-white/40 text-xs text-center pt-1">⛽ Base ETH required for gas fee</p>
             </div>
             <div className="flex justify-between mt-6">
               <button onClick={() => setIsOpen(false)}>
@@ -1035,7 +1036,7 @@ function NfaLand() {
             <div className="w-[90%] mb-3">
               <div className="flex justify-between items-center rounded px-4 h-9 bg-white/10">
                 <p className="text-gray-400 text-sm">Price</p>
-                <p className="text-white text-sm">0.01 ETH</p>
+                <p className="text-white text-sm">{collection?.priceETH || 0.5} USDC</p>
               </div>
             </div>
             <div className="flex md:flex-row gap-4 mt-6 w-full justify-center">
