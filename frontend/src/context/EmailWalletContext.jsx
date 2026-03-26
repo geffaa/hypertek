@@ -36,34 +36,19 @@ export const EmailWalletProvider = ({ children }) => {
 
             try {
                 setIsEmailWalletConnecting(true);
-                const response = await axios.get(`${BACKEND_BASE_URL}/api/v1/user/export-wallet`, {
+                const response = await axios.get(`${BACKEND_BASE_URL}/api/v1/user/wallet-address`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
-                if (response.data?.PrivateKey && isMounted) {
-                    // Note: API returns PrivateKey (capital P) based on EditProfile.jsx
-                    const pkRaw = response.data.PrivateKey || response.data.privateKey;
-                    const pk = pkRaw.startsWith('0x') ? pkRaw : `0x${pkRaw}`;
-
-                    const account = privateKeyToAccount(pk);
-
-                    const client = createWalletClient({
-                        account,
-                        chain: activeChain,
-                        transport: http(activeRpc)
-                    });
-
-                    setEmailWalletAddress(account.address);
-                    setEmailWalletClient(client);
-                    setPrivateKey(pk);
+                if (response.data?.WalletAddress && isMounted) {
+                    setEmailWalletAddress(response.data.WalletAddress);
                     setEmailWalletError(null);
-                    console.log("✅ Global Email Wallet Initialized:", account.address);
+                    console.log("✅ Email Wallet Address Loaded:", response.data.WalletAddress);
                 }
             } catch (err) {
                 if (isMounted) {
-                    console.log("ℹ️ Global Email Wallet failed to fetch or not present.");
+                    console.log("ℹ️ No email wallet found for this user.");
                     setEmailWalletError(err.message);
-                    setEmailWalletClient(null);
                     setEmailWalletAddress(null);
                 }
             } finally {
@@ -78,14 +63,28 @@ export const EmailWalletProvider = ({ children }) => {
         };
     }, [token, user]);
 
+    const initWalletWithPrivateKey = (pk) => {
+        try {
+            const formattedPk = pk.startsWith('0x') ? pk : `0x${pk}`;
+            const account = privateKeyToAccount(formattedPk);
+            const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
+            setEmailWalletAddress(account.address);
+            setEmailWalletClient(client);
+            setPrivateKey(formattedPk);
+        } catch (e) {
+            console.error("Failed to init wallet from private key:", e);
+        }
+    };
+
     return (
         <EmailWalletContext.Provider value={{
             emailWalletAddress,
             emailWalletClient,
             isEmailWalletConnecting,
-            isEmailWalletConnected: !!emailWalletClient,
+            isEmailWalletConnected: !!emailWalletAddress,
             emailWalletError,
-            privateKey
+            privateKey,
+            initWalletWithPrivateKey,
         }}>
             {children}
         </EmailWalletContext.Provider>

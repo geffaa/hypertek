@@ -46,17 +46,30 @@ export const welcomeEmailTemplate = ({ name, walletAddress, encryptedPrivateKey 
             </td>
           </tr>
 
-          <!-- Private Key Backup (encrypted) -->
+          <!-- How to view private key -->
           <tr>
             <td style="padding:0 40px 24px;">
-              <div style="background-color:#1a0a0a;border:1px solid #6b2020;border-radius:8px;padding:20px;">
-                <p style="margin:0 0 8px;font-size:12px;color:#f87171;font-weight:700;letter-spacing:1px;text-transform:uppercase;">⚠️ Encrypted Private Key Backup</p>
-                <p style="margin:0 0 12px;font-size:13px;color:#e2e8f0;font-family:'Courier New',monospace;word-break:break-all;background-color:#0f0505;padding:12px;border-radius:4px;">${encryptedPrivateKey}</p>
-                <p style="margin:0 0 8px;font-size:13px;color:#fca5a5;line-height:1.6;">
-                  This is your <strong>encrypted</strong> private key backup. It cannot be used directly — you must decrypt it using your account password via your HyperTek dashboard.
+              <div style="background-color:#0a1a0a;border:1px solid #1a4a1a;border-radius:8px;padding:20px;">
+                <p style="margin:0 0 10px;font-size:12px;color:#4ade80;font-weight:700;letter-spacing:1px;text-transform:uppercase;">🔑 How to View Your Private Key</p>
+                <p style="margin:0 0 12px;font-size:13px;color:#e2e8f0;line-height:1.7;">
+                  Your private key is securely stored and can be revealed anytime from your profile settings:
                 </p>
-                <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.5;">
-                  Store this string safely (password manager, USB drive, or offline). HyperTek cannot recover your wallet if both this backup and your dashboard access are lost.
+                <table cellpadding="0" cellspacing="0" width="100%">
+                  <tr><td style="padding:4px 0;font-size:13px;color:#86efac;">1.&nbsp; Go to <strong style="color:#ffffff;">Profile → Edit Profile</strong></td></tr>
+                  <tr><td style="padding:4px 0;font-size:13px;color:#86efac;">2.&nbsp; Scroll to <strong style="color:#ffffff;">Embedded Wallet Settings</strong></td></tr>
+                  <tr><td style="padding:4px 0;font-size:13px;color:#86efac;">3.&nbsp; Click <strong style="color:#ffffff;">"View Private Key"</strong></td></tr>
+                  <tr><td style="padding:4px 0;font-size:13px;color:#86efac;">4.&nbsp; Enter your account password to reveal it</td></tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Warning -->
+          <tr>
+            <td style="padding:0 40px 24px;">
+              <div style="background-color:#1a0a0a;border:1px solid #6b2020;border-radius:8px;padding:16px;">
+                <p style="margin:0;font-size:13px;color:#fca5a5;line-height:1.6;">
+                  ⚠️ <strong>Never share your private key with anyone.</strong> Anyone who has your private key has full control of your wallet and all your assets. HyperTek will never ask for your private key.
                 </p>
               </div>
             </td>
@@ -68,7 +81,7 @@ export const welcomeEmailTemplate = ({ name, walletAddress, encryptedPrivateKey 
               <p style="margin:0 0 12px;font-size:14px;color:#94a3b8;">What to do next:</p>
               <table cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td style="padding:6px 0;font-size:14px;color:#e2e8f0;">→&nbsp; Save your private key offline now</td>
+                  <td style="padding:6px 0;font-size:14px;color:#e2e8f0;">→&nbsp; Save your private key from your profile settings</td>
                 </tr>
                 <tr>
                   <td style="padding:6px 0;font-size:14px;color:#e2e8f0;">→&nbsp; Browse NFAs on the marketplace</td>

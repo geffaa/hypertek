@@ -1053,76 +1053,40 @@ const DeleteUser = async (req, res) => {
   }
 };
 
-// ------------------ REQUEST WALLET OTP (2FA step 1) ------------------
-export const RequestWalletOTP = async (req, res) => {
+// ------------------ GET WALLET ADDRESS (no private key, no OTP needed) ------------------
+export const GetWalletAddress = async (req, res) => {
   try {
-    const userId = String(req.user._id);
-    const user = await UserModel.findById(userId);
+    const userId = req.user._id;
+    const user = await UserModel.findById(userId).select("WalletAddress EncryptedPrivateKey");
     if (!user) return res.status(404).json({ message: "User not found" });
-    if (!user.EncryptedPrivateKey) {
-      return res.status(400).json({ message: "No auto-generated wallet found for this user." });
-    }
-
-    // Generate 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes
-    walletOTPStore.set(userId, { otp, expiresAt });
-
-    await transporter.sendMail({
-      from: `"HyperTek Security" <${process.env.SMTP_EMAIL}>`,
-      to: user.Email,
-      subject: "HyperTek — Wallet Export Verification Code",
-      html: `
-        <div style="font-family: Arial, sans-serif; background: #0a0a1a; color: #fff; padding: 24px; border-radius: 8px; max-width: 480px;">
-          <h2 style="color: #4a90e2;">🔐 Wallet Export Verification</h2>
-          <p>Someone (hopefully you) requested to export your private key.</p>
-          <p>Your one-time verification code is:</p>
-          <div style="background: #1a1a2e; border: 2px solid #4a90e2; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;">
-            <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #4a90e2;">${otp}</span>
-          </div>
-          <p style="color: #aaa; font-size: 13px;">This code expires in <strong style="color: #fff;">10 minutes</strong>.</p>
-          <p style="color: #e53e3e; font-size: 13px;">⚠️ If you did not request this, your account may be compromised. Change your password immediately.</p>
-        </div>
-      `,
-    });
-
-    res.json({ success: true, message: "OTP sent to your registered email." });
+    if (!user.WalletAddress) return res.status(404).json({ message: "No wallet found for this user." });
+    res.status(200).json({ success: true, WalletAddress: user.WalletAddress });
   } catch (err) {
-    console.error("RequestWalletOTP error:", err);
+    console.error("GetWalletAddress error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
-// ------------------ EXPORT WALLET (requires OTP) ------------------
+// ------------------ EXPORT WALLET (requires password confirmation) ------------------
 export const ExportWallet = async (req, res) => {
   try {
     const userId = String(req.user._id);
-    const { otp } = req.query;
+    const { password } = req.body;
 
-    if (!otp) {
-      return res.status(400).json({ message: "OTP is required. Call /request-wallet-otp first." });
+    if (!password) {
+      return res.status(400).json({ message: "Password is required to export your private key." });
     }
-
-    // Validate OTP
-    const stored = walletOTPStore.get(userId);
-    if (!stored) {
-      return res.status(400).json({ message: "No OTP found. Please request a new one." });
-    }
-    if (Date.now() > stored.expiresAt) {
-      walletOTPStore.delete(userId);
-      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
-    }
-    if (stored.otp !== otp) {
-      return res.status(400).json({ message: "Invalid OTP." });
-    }
-
-    // OTP valid — consume it (one-time use)
-    walletOTPStore.delete(userId);
 
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
     if (!user.EncryptedPrivateKey) {
       return res.status(400).json({ message: "No auto-generated wallet found for this user." });
+    }
+
+    // Verify password
+    const isMatch = await bcrypt.compare(password, user.Password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Incorrect password." });
     }
 
     const privateKey = decryptPrivateKey(user.EncryptedPrivateKey);

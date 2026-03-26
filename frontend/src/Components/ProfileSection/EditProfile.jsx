@@ -39,6 +39,8 @@ function EditProfile() {
   const [privateKey, setPrivateKey] = useState("");
   const [exportingKey, setExportingKey] = useState(false);
   const [showPrivateKey, setShowPrivateKey] = useState(false);
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
+  const [pkPassword, setPkPassword] = useState("");
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
@@ -246,27 +248,66 @@ function EditProfile() {
                 )}
 
                 {!privateKey ? (
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      setExportingKey(true);
-                      try {
-                        const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/user/export-wallet`, {
-                          headers: { Authorization: `Bearer ${token}` }
-                        });
-                        setPrivateKey(res.data.PrivateKey || res.data.privateKey);
-                        toast.success("Wallet settings unlocked.");
-                      } catch (err) {
-                        toast.error(err.response?.data?.message || "Failed to fetch wallet info.");
-                      } finally {
-                        setExportingKey(false);
-                      }
-                    }}
-                    disabled={exportingKey}
-                    className="w-full bg-transparent border border-white/10 hover:bg-white/5 text-gray-300 font-medium py-2 px-4 rounded-lg transition-colors flex justify-center items-center text-sm"
-                  >
-                    {exportingKey ? "Loading..." : "Advanced: View Private Key"}
-                  </button>
+                  <div>
+                    {!showPasswordPrompt ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowPasswordPrompt(true)}
+                        className="w-full bg-transparent border border-white/10 hover:bg-white/5 text-gray-300 font-medium py-2 px-4 rounded-lg transition-colors flex justify-center items-center text-sm"
+                      >
+                        Advanced: View Private Key
+                      </button>
+                    ) : (
+                      <div className="space-y-2">
+                        <p className="text-xs text-gray-400">Enter your password to reveal your private key:</p>
+                        <div className="relative">
+                          <input
+                            type="password"
+                            value={pkPassword}
+                            onChange={(e) => setPkPassword(e.target.value)}
+                            placeholder="Your password"
+                            className="w-full bg-white/5 border border-white/15 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500/60"
+                            autoFocus
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            disabled={exportingKey}
+                            onClick={async () => {
+                              if (!pkPassword) return;
+                              setExportingKey(true);
+                              try {
+                                const res = await axios.post(
+                                  `${BACKEND_BASE_URL}/api/v1/user/export-wallet`,
+                                  { password: pkPassword },
+                                  { headers: { Authorization: `Bearer ${token}` } }
+                                );
+                                setPrivateKey(res.data.PrivateKey || res.data.privateKey);
+                                setShowPasswordPrompt(false);
+                                setPkPassword("");
+                                toast.success("Private key unlocked.");
+                              } catch (err) {
+                                toast.error(err.response?.data?.message || "Incorrect password.");
+                              } finally {
+                                setExportingKey(false);
+                              }
+                            }}
+                            className="flex-1 py-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-all"
+                          >
+                            {exportingKey ? "Verifying..." : "Confirm"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => { setShowPasswordPrompt(false); setPkPassword(""); }}
+                            className="px-4 py-2 border border-white/15 text-white/60 hover:text-white text-sm rounded-lg transition-all"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ) : (
                   <div className="space-y-3 mt-4 pt-4 border-t border-white/10">
                     <div className="relative">
