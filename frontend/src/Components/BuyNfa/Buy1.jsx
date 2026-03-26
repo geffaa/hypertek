@@ -1301,6 +1301,12 @@ function Buy1() {
               </div>
             )}
 
+            {/* Network info */}
+            <div className="flex items-center gap-2 text-[11px] text-white/30 -mt-1">
+              <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
+              <span>USDC on Base · Base ETH required for gas (wallet payments only)</span>
+            </div>
+
             {/* Action buttons */}
             <div className="flex gap-3">
               <button
@@ -1315,7 +1321,7 @@ function Buy1() {
                 disabled={loading}
                 className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
               >
-                Buy With Card
+                💳 Buy With Card
               </button>
             </div>
 

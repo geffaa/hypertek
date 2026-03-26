@@ -172,7 +172,7 @@ function EditNfa() {
                   <img src={ChainIcon} alt="" className="w-[11px] h-[10px]" />
                 </div>
                 <span className="text-white/70 text-sm">Base</span>
-                <span className="ml-auto text-white/30 text-xs">Fixed</span>
+                <span className="ml-auto text-white/30 text-xs">Payments in USDC</span>
               </div>
             </div>
 

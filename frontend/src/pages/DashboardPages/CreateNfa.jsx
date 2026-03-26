@@ -169,7 +169,7 @@ function CreateCollections() {
                   <img src={ChainIcon} alt="" className="w-[10.62px] h-[9.78px]" />
                 </div>
                 <span className="text-white/70 text-sm">Base</span>
-                <span className="ml-auto text-white/30 text-xs">Fixed</span>
+                <span className="ml-auto text-white/30 text-xs">Payments in USDC</span>
               </div>
             </div>
           </div>
