@@ -180,8 +180,8 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
         )}
       </div>
 
-      {/* VR MODE button — to the left of VIEW button */}
-      <div ref={vrRef} style={{ position: "absolute", bottom: "3%", right: "calc(2.5% + clamp(48px, 7vmin, 80px) + 8px)", zIndex: 35 }}>
+      {/* VR MODE button — to the left of VIEW button (hidden in-game) */}
+      {!inGame && <div ref={vrRef} style={{ position: "absolute", bottom: "3%", right: "calc(2.5% + clamp(48px, 7vmin, 80px) + 8px)", zIndex: 35 }}>
           {/* Octagon VR MODE button */}
           <div
             onClick={() => setVrOpen(o => !o)}
@@ -256,7 +256,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
               </div>
             </div>
           )}
-      </div>
+      </div>}
     </>
   );
 }

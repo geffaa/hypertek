@@ -176,6 +176,7 @@ export default function RacingMode({ view = "TRACK", onExit }) {
         inset: 0,
         zIndex: 15,
         overflow: "hidden",
+        background: "#060610",
       }}>
 
         {/* ── Background ── */}

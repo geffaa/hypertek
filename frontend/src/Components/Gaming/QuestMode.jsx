@@ -237,15 +237,15 @@ const BTN_SIZE = 82;
 // Quarter-circle arc: R=42vh, center at bottom-right corner, spanning 105°→165°
 // Each button sits on the same circle radius, creating a true arc curve
 const ARC_3 = [
-  { id: "FIRE",   right: "11vh", bottom: "40vh" },  // 105° — nearly vertical
-  { id: "SCOPE",  right: "30vh", bottom: "30vh" },  // 135° — 45° midpoint
-  { id: "WEAPON", right: "40vh", bottom: "11vh" },  // 165° — nearly horizontal
+  { id: "FIRE",   right: "17vh", bottom: "38vh" },  // top of arc
+  { id: "SCOPE",  right: "35vh", bottom: "27vh" },  // arc — pushed further left
+  { id: "WEAPON", right: "45vh", bottom: "10vh" }  // bottom of arc
 ];
 const ARC_4 = [
-  { id: "FIRE",   right: "11vh", bottom: "40vh" },  // top of arc
-  { id: "SCOPE",  right: "35vh", bottom: "32vh" },  // arc — pushed further left
-  { id: "KNEEL",  right: "24vh", bottom: "22vh" },  // satellite: diagonal right-below SCOPE
-  { id: "WEAPON", right: "40vh", bottom: "11vh" },  // bottom of arc
+  { id: "FIRE",   right: "17vh", bottom: "38vh" },  // top of arc
+  { id: "SCOPE",  right: "35vh", bottom: "27vh" },  // arc — pushed further left
+  { id: "KNEEL",  right: "22vh", bottom: "15vh" },  // satellite: diagonal right-below SCOPE
+  { id: "WEAPON", right: "45vh", bottom: "10vh" },  // bottom of arc
 ];
 
 function ActionButtons({ includeKneel = false }) {
