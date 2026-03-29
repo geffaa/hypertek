@@ -146,27 +146,11 @@ const nftSystemSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-// Pre-save middleware to automatically set category from collection.name
+// Pre-save middleware: only set category from collection.name if category was not explicitly provided
 nftSystemSchema.pre("save", function (next) {
-  // Always set category from collection.name if collection exists
-  if (this.collection && this.collection.name) {
+  if (this.collection && this.collection.name && !this.category) {
     this.category = this.collection.name.toLowerCase().trim();
   }
-  next();
-});
-
-// Also handle updates
-nftSystemSchema.pre("findOneAndUpdate", function (next) {
-  const update = this.getUpdate();
-  
-  // If collection.name is being updated
-  if (update.$set && update.$set["collection.name"]) {
-    update.$set.category = update.$set["collection.name"].toLowerCase().trim();
-  } else if (update.collection && update.collection.name) {
-    if (!update.$set) update.$set = {};
-    update.$set.category = update.collection.name.toLowerCase().trim();
-  }
-  
   next();
 });
 

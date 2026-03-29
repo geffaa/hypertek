@@ -9,7 +9,6 @@ import { useAccount, useReadContract, useWriteContract, usePublicClient, useBala
 import { BASE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
-import TVector from "../../assets/images/popular/vector.png";
 import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
@@ -457,7 +456,7 @@ function ProfileCategory() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                <img src={TVector} className="w-3 h-3" alt="chain" />
+                <img src="/usdc-logo.svg" className="w-3 h-3" alt="USDC" />
               </div>
               <span className="text-lg font-bold text-white font-mono">
                 ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}

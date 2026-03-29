@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Switch from "@mui/material/Switch";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAccount } from "wagmi";
+import { useEmailWallet } from "../../hooks/useEmailWallet";
 import Collectionimage from "../../assets/images/CreateCollection/collection.png";
-import EditImage from "../../assets/edit.png";
-import DeleteImage from "../../assets/delete.png";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 
 function CollectionOnSale() {
@@ -15,7 +14,9 @@ function CollectionOnSale() {
   const [items, setItems]     = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const wallet = user?.WalletAddress || user?.MetaMaskAddress || "";
+  const { address: wagmiAddress } = useAccount();
+  const { emailWalletAddress } = useEmailWallet();
+  const wallet = wagmiAddress?.toLowerCase() || emailWalletAddress?.toLowerCase() || user?.WalletAddress || user?.MetaMaskAddress || "";
 
   const fetchListings = async () => {
     if (!wallet) { setLoading(false); return; }
@@ -35,39 +36,23 @@ function CollectionOnSale() {
 
   useEffect(() => { fetchListings(); }, [wallet]);
 
-  const handleToggleListed = async (item) => {
-    const newListed = !item.listed;
-    // Optimistic update
-    setItems((prev) =>
-      prev.map((i) => i.subId === item.subId ? { ...i, listed: newListed } : i)
-    );
-    try {
-      await axios.put(
-        `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${item.parentInfo.parentId}/sub-collection/${item.subId}`,
-        { listed: newListed },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success(`"${item.name}" ${newListed ? "listed for sale" : "removed from sale"}`);
-    } catch {
-      // Rollback on failure
-      setItems((prev) =>
-        prev.map((i) => i.subId === item.subId ? { ...i, listed: item.listed } : i)
-      );
-      toast.error("Failed to update listing status");
-    }
-  };
+  const [cancelling, setCancelling] = useState(null); // subId being cancelled
 
-  const handleDelete = async (item) => {
-    if (!window.confirm(`Delete "${item.name}"? This cannot be undone.`)) return;
+  const handleCancelListing = async (item) => {
+    if (!window.confirm(`Cancel listing for "${item.name}"? The item will return to unlisted.`)) return;
+    setCancelling(item.subId);
     try {
-      await axios.delete(
-        `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${item.parentInfo.parentId}/sub-collection/${item.subId}`,
+      await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
+        { nftId: item.parentInfo.parentId, subId: item.subId, tokenId: item.tokenId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      toast.success(`"${item.name}" deleted`);
+      toast.success(`"${item.name}" listing cancelled`);
       setItems((prev) => prev.filter((i) => i.subId !== item.subId));
     } catch {
-      toast.error("Failed to delete item");
+      toast.error("Failed to cancel listing");
+    } finally {
+      setCancelling(null);
     }
   };
 
@@ -95,13 +80,14 @@ function CollectionOnSale() {
                 <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Name</th>
                 <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Price</th>
                 <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Collection</th>
+                <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Status</th>
                 <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Action</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4] font-semibold text-sm">Listed</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
               {items.map((item) => {
                 const imgSrc = item.image ? getImageUrl(item.image) : Collectionimage;
+                const isCancelling = cancelling === item.subId;
                 return (
                   <tr key={item.subId} className="h-[70px] transition-all duration-200">
                     <td className="px-6 py-4">
@@ -115,37 +101,21 @@ function CollectionOnSale() {
                       {item.parentInfo?.parentName || "—"}
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex gap-4">
-                        <button
-                          className="p-2 cursor-pointer"
-                          onClick={() => navigate("/dashboard/edit-collection-item", {
-                            state: { subId: item.subId, parentId: item.parentInfo?.parentId }
-                          })}
-                        >
-                          <img src={EditImage} alt="edit" className="w-4 h-4" />
-                        </button>
-                        <button className="p-2 cursor-pointer" onClick={() => handleDelete(item)}>
-                          <img src={DeleteImage} alt="delete" className="w-3 h-4" />
-                        </button>
-                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-green-300"
+                        style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.25)" }}>
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                        Listed
+                      </span>
                     </td>
                     <td className="px-6 py-4">
-                      <Switch
-                        checked={item.listed}
-                        onChange={() => handleToggleListed(item)}
-                        sx={{
-                          width: 46, height: 20, padding: 0,
-                          "& .MuiSwitch-switchBase": {
-                            padding: 0, margin: 0,
-                            "&.Mui-checked": {
-                              transform: "translateX(24px)", color: "#fff",
-                              "& + .MuiSwitch-track": { backgroundColor: "#0860eeff", opacity: 1 },
-                            },
-                          },
-                          "& .MuiSwitch-thumb": { width: 22, height: 20, background: "#fff" },
-                          "& .MuiSwitch-track": { borderRadius: 34 / 2, backgroundColor: "#9ca3af" },
-                        }}
-                      />
+                      <button
+                        onClick={() => handleCancelListing(item)}
+                        disabled={isCancelling}
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors disabled:opacity-50"
+                        style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)", color: "#f87171" }}
+                      >
+                        {isCancelling ? "Cancelling..." : "Cancel Listing"}
+                      </button>
                     </td>
                   </tr>
                 );
@@ -155,14 +125,6 @@ function CollectionOnSale() {
         )}
       </div>
 
-      {/* Add More Button */}
-      <div className="flex justify-start px-6 md:mx-12 my-12">
-        <Link to="/dashboard/collections">
-          <button className="flex items-center justify-center w-full sm:w-[190px] h-[42px] rounded-[6px] p-[10px] gap-[10px] bg-[#002AA8] text-white font-inter font-medium hover:opacity-90 transition">
-            <p className="font-inter font-normal text-[18px] leading-[100%] opacity-100">Add More</p>
-          </button>
-        </Link>
-      </div>
     </div>
   );
 }

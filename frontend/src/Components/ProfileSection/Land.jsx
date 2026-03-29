@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { useAccount, useReadContract } from 'wagmi';
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { BASE_MARKETPLACE_ADDRESS } from "../../Web3/Config";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
@@ -16,6 +17,7 @@ import FaceTwo from "../../assets/images/noActivity2.png";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 
 import NavLinks from "../ProfileSection/Navlinks";
+import UserProfileHeader from "./UserProfileHeader";
 import GlowingOrb from "../Common/BgColoring";
 import FullScreenLoader from "../Common/Spinner";
 
@@ -36,6 +38,7 @@ function Land() {
   } = useEmailWallet();
 
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
+  const { openConnectModal } = useConnectModal();
 
   // Combine wallet state
   const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
@@ -61,6 +64,7 @@ function Land() {
   const [connectedWallet, setConnectedWallet] = useState(null);
   const [listingInProgress, setListingInProgress] = useState(false);
   const [connectingWallet, setConnectingWallet] = useState({});
+  const [pendingItemId, setPendingItemId] = useState(null);
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [showMobileList, setShowMobileList] = useState({});
   const navigate = useNavigate();
@@ -260,54 +264,22 @@ function Land() {
   };
 
   /* ================= HANDLE SELL NOW CLICK ================= */
-  const handleSellNowClick = async (itemId) => {
-    if (!window.ethereum) {
-      toast.error("Please install MetaMask!");
+  const handleSellNowClick = (itemId) => {
+    if (!isConnected) {
+      setPendingItemId(itemId);
+      if (openConnectModal) openConnectModal();
       return;
     }
-
-    setConnectingWallet((prev) => ({ ...prev, [itemId]: true }));
-
-    try {
-      // Force MetaMask popup every time
-      await window.ethereum.request({
-        method: "wallet_requestPermissions",
-        params: [{ eth_accounts: {} }],
-      });
-
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      if (!accounts || !accounts.length) return;
-
-      const wallet = accounts[0].toLowerCase();
-      setConnectedWallet(wallet);
-
-      // Mark this item as interacted
-      setUserHasInteracted((prev) => ({
-        ...prev,
-        [itemId]: true,
-      }));
-
-      // Update the specific item's state
-      setLandData((prev) =>
-        prev.map((item) =>
-          item._id === itemId ? { ...item, hasInteracted: true } : item,
-        ),
-      );
-
-      // Fetch NFTs for the connected wallet
-      await fetchOwnedNFTs(wallet);
-
-      toast.success("Wallet connected!");
-    } catch (err) {
-      if (err.code === 4001) toast.error("Connection cancelled");
-      else toast.error("Wallet connection failed");
-    } finally {
-      setConnectingWallet((prev) => ({ ...prev, [itemId]: false }));
-    }
+    setUserHasInteracted((prev) => ({ ...prev, [itemId]: true }));
   };
+
+  /* ================= WATCH FOR CONNECTION SUCCESS ================= */
+  useEffect(() => {
+    if (isConnected && pendingItemId) {
+      setUserHasInteracted((prev) => ({ ...prev, [pendingItemId]: true }));
+      setPendingItemId(null);
+    }
+  }, [isConnected, pendingItemId]);
 
   /* ================= NAVIGATE TO BUY-NFA ================= */
   const navigateToBuyNFA = (item) => {
@@ -542,57 +514,20 @@ function Land() {
             <img
               src={overview1}
               alt="Hero"
+              className="w-full h-full object-cover"
             />
           </div>
 
           {/* ================= PROFILE ================= */}
-          <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex flex-col items-start text-white">
-            <div className="relative">
-              {userData?.Avatar ? (
-                <img
-                  src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-                  alt="Avatar"
-                  className="w-28 h-28 rounded-full border-4 border-gray-900 object-cover -mt-14"
-                />
-              ) : (
-                <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-28 h-28 border-4 border-gray-900 -mt-14">
-                  <FaUserCircle className="w-16 h-16 text-white" />
-                </div>
-              )}
-            </div>
-            <h2 className="mt-4 text-xl sm:text-2xl font-semibold mb-1">
-              {userData?.FullName ||
-                userData?.Email?.split("@")[0] ||
-                "Guest"}
-            </h2>
-            <div className="flex items-center gap-3 text-sm text-gray-300 mb-2">
-              <span className="font-mono">
-                {connectedWallet ? `${connectedWallet.slice(0, 6)}...${connectedWallet.slice(-4)}` : "No Wallet Connected"}
-              </span>
-              <Link
-                to="/edit"
-                state={{ userData }}
-                className="flex items-center gap-1 hover:text-white transition-colors"
-              >
-                <span>Edit Profile</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-              </Link>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                <img src={TVector} className="w-3 h-3" alt="chain" />
-              </div>
-              <span className="text-lg font-bold text-white font-mono">
-                ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
-              </span>
-            </div>
-          </div>
+          <UserProfileHeader
+            userData={userData}
+            connectedWallet={connectedWallet}
+            sellerBalance={sellerBalance}
+          />
 
           {/* ================= NAV ================= */}
           <div className="mt-6 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-            <NavLinks />
+            <NavLinks onSelectCategory={() => {}} selectedCategory="" />
           </div>
 
           {/* ================= NFT CARDS ================= */}
@@ -655,8 +590,8 @@ function Land() {
                       {/* CTA — Desktop */}
                       {!hasInteracted ? (
                         <div className="hidden md:flex justify-center items-center w-full mt-auto pt-4">
-                          <button onClick={() => handleSellNowClick(item._id)} disabled={isConnecting} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full disabled:opacity-50">
-                            {isConnecting ? "Connecting..." : "Sell Now"}
+                          <button onClick={() => handleSellNowClick(item._id)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            Sell Now
                           </button>
                         </div>
                       ) : (
@@ -676,8 +611,8 @@ function Land() {
                       {/* CTA — Mobile */}
                       <div className="md:hidden mt-auto pt-4 text-center">
                         {!hasInteracted ? (
-                          <button onClick={() => handleSellNowClick(item._id)} disabled={isConnecting} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full disabled:opacity-50">
-                            {isConnecting ? "Connecting..." : "Sell Now"}
+                          <button onClick={() => handleSellNowClick(item._id)} className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20 w-full">
+                            Sell Now
                           </button>
                         ) : !showMobileList[item._id] ? (
                           <button

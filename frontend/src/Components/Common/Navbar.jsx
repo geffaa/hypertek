@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, TableRowsSplit } from "lucide-react";
+import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Map } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SearchImg from "../../assets/images/Search.png";
-import ProfileImg from "../../assets/images/login.png";
-import CustomeButtonLarge from "../Buttons/SignupButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -11,7 +8,6 @@ import { FiSearch } from "react-icons/fi";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
-import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
@@ -22,7 +18,6 @@ import DiscordImg from "../../assets/images/discard.png";
 import xImg from "../../assets/images/skipe.png";
 import telegramImg from "../../assets/images/telegram.png";
 import { logout } from "../../Redux/AuthSlice";
-import { useEmailWallet } from "../../hooks/useEmailWallet";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -33,6 +28,13 @@ export default function Navbar() {
   const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
   const [shopOpen, setShopOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
+  const shopTimer = useRef(null);
+  const socialTimer = useRef(null);
+
+  const openShop  = () => { clearTimeout(shopTimer.current);  setShopOpen(true); };
+  const closeShop = () => { shopTimer.current  = setTimeout(() => setShopOpen(false),  250); };
+  const openSocial  = () => { clearTimeout(socialTimer.current);  setSocialOpen(true); };
+  const closeSocial = () => { socialTimer.current  = setTimeout(() => setSocialOpen(false), 150); };
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -215,11 +217,6 @@ export default function Navbar() {
 
   /// hide the signup button on the following pages
   // Paths where Sign Up button should be hidden
-  const hideSignUpPaths = ["/signup", "/signin", "/forgot-password"];
-
-  /// show only the logout icon on the signup , login and forgot page its client requirement
-  const showLogoutPaths = ["/signup", "/signin", "/forgot-password"];
-
   // Hide navbar items on these routes
   const hideOnPaths = [
     "/signup",
@@ -291,73 +288,63 @@ export default function Navbar() {
               <div
                 ref={shopRef}
                 className="relative"
-                onMouseEnter={() => setShopOpen(true)}
-                onMouseLeave={() => setShopOpen(false)}
+                onMouseEnter={openShop}
+                onMouseLeave={closeShop}
               >
-                <button className="flex items-center hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm">
-                  Shops <ChevronDown className="ml-1 h-4 w-4" />
+                <button
+                  onClick={() => { shopOpen ? setShopOpen(false) : openShop(); setSocialOpen(false); }}
+                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${shopOpen ? "text-blue-300" : "hover:text-blue-300"}`}
+                >
+                  Shops <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
 
+                <AnimatePresence>
                 {shopOpen && (
-                  <div className="absolute  top-full left-[350px] transform -translate-x-1/2 mt-0 w-[746px] max-w-[90vw] pb-5 h-[265px] rounded-[10px] shadow-lg bg-[#001554D9] overflow-hidden border border-white/20 mb-4">
-                    <div className="grid grid-cols-3 gap-[30px] w-full h-full mx-auto px-[29px] py-[28px] text-white">
-                      {/* Column 1 */}
-                      <Link
-                        to="/market-place"
-                        onClick={() => setShopOpen(false)}
-                        className="flex flex-col gap-1 border-b-2 border-white pb-2 cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Overview
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          See what's new and trending.
-                        </p>
-                      </Link>
-
-                      <Link
-                        to="/personal-activity"
-                        onClick={() => setShopOpen(false)}
-                        className="flex flex-col gap-1 border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          My Assets
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Track and manage everything you own.
-                        </p>
-                      </Link>
-
-                      {/* Column 2 */}
-                      <Link
-                        to="/nfa-expand"
-                        onClick={() => setShopOpen(false)}
-                        className="flex flex-col border-b-2 border-white pb-4 cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Collectibles
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Track and manage your NFTs.
-                        </p>
-                      </Link>
-
-                      {/* Column 3 */}
-                      <Link
-                        to="/land"
-                        onClick={() => setShopOpen(false)}
-                        className="flex flex-col pb-2 border-b-2 border-white cursor-pointer hover:bg-white/10 p-2 transition-colors"
-                      >
-                        <h1 className="text-white font-semibold text-[16px]">
-                          Land
-                        </h1>
-                        <p className="text-white text-[12px]">
-                          Buy a parcel of land and build on it.
-                        </p>
-                      </Link>
-                    </div>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    onMouseEnter={openShop}
+                    onMouseLeave={closeShop}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[560px] max-w-[95vw] rounded-2xl shadow-2xl overflow-hidden border border-white/10"
+                    style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
+                    {[
+                      [
+                        { to: "/market-place",      icon: <LayoutGrid className="w-5 h-5" />, label: "Overview",     desc: "See what's new and trending" },
+                        { to: "/personal-activity", icon: <Package    className="w-5 h-5" />, label: "My Assets",    desc: "Track and manage everything you own" },
+                      ],
+                      [
+                        { to: "/collections",                            icon: <Layers className="w-5 h-5" />, label: "Collectibles", desc: "Browse all NFTs & NFAs" },
+                        { to: "/collections/land%20and%20bases",        icon: <Map     className="w-5 h-5" />, label: "Land & Bases", desc: "Buy a parcel of land and build on it" },
+                      ],
+                    ].map((row, rowIdx) => (
+                      <div key={rowIdx}>
+                        {rowIdx > 0 && <div className="mx-5" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />}
+                        <div className="grid grid-cols-2 gap-2 px-4 py-3">
+                          {row.map(({ to, icon, label, desc }) => (
+                            <Link
+                              key={label}
+                              to={to}
+                              onClick={() => setShopOpen(false)}
+                              className="group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200"
+                              style={{ background: "rgba(255,255,255,0.03)" }}
+                              onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.35)"}
+                              onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.03)"}
+                            >
+                              <span className="mt-0.5 text-blue-400 group-hover:text-blue-300 transition-colors flex-shrink-0">{icon}</span>
+                              <div className="flex flex-col gap-1.5">
+                                <p className="text-white font-semibold text-sm leading-tight pb-1.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.25)" }}>{label}</p>
+                                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
 
               <Link
@@ -377,64 +364,45 @@ export default function Navbar() {
               <div
                 ref={socialRef}
                 className="relative"
-                onMouseEnter={() => setSocialOpen(true)}
-                onMouseLeave={() => setSocialOpen(false)}
+                onMouseEnter={openSocial}
+                onMouseLeave={closeSocial}
               >
-                <button className="flex items-center hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm">
-                  Socials <ChevronDown className="h-4 w-4" />
+                <button
+                  onClick={() => { socialOpen ? setSocialOpen(false) : openSocial(); setShopOpen(false); }}
+                  className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${socialOpen ? "text-blue-300" : "hover:text-blue-300"}`}
+                >
+                  Socials <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""}`} />
                 </button>
 
+                <AnimatePresence>
                 {socialOpen && (
-                  <div className="absolute top-full left-0 w-[115px] rounded-[8px] bg-[#002AA8D9] p-3 flex flex-col shadow-lg border border-white/20">
-                    <a
-                      href="https://discord.gg/XGvE2nFe"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                    >
-                      <img
-                        src={DiscordImg}
-                        alt="Discord"
-                        className="w-[19px] h-[16px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        Discord
-                      </span>
-                    </a>
-
-                    <a
-                      href="https://x.com/HyperTek100"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                    >
-                      <img
-                        src={xImg}
-                        alt="X.com"
-                        className="w-[18px] h-[18px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        X.com
-                      </span>
-                    </a>
-
-                    <a
-                      href="https://t.me"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-1 py-2 rounded hover:bg-white/20 transition-colors"
-                    >
-                      <img
-                        src={telegramImg}
-                        alt="Telegram"
-                        className="w-[15px] h-[15px]"
-                      />
-                      <span className="text-white text-sm font-semibold">
-                        Telegram
-                      </span>
-                    </a>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    onMouseEnter={openSocial}
+                    onMouseLeave={closeSocial}
+                    className="absolute top-full left-0 mt-2 w-[160px] rounded-xl shadow-2xl border border-white/10 overflow-hidden"
+                    style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
+                    {[
+                      { href: "https://discord.gg/XGvE2nFe", img: DiscordImg, label: "Discord", size: "w-[18px] h-[15px]" },
+                      { href: "https://x.com/HyperTek100", img: xImg, label: "X (Twitter)", size: "w-[17px] h-[17px]" },
+                      { href: "https://t.me", img: telegramImg, label: "Telegram", size: "w-[15px] h-[15px]" },
+                    ].map(({ href, img, label, size }) => (
+                      <a key={label} href={href} target="_blank" rel="noreferrer"
+                        className="flex items-center gap-3 px-4 py-2.5 transition-all duration-150 border-b border-white/5 last:border-0"
+                        style={{ background: "transparent" }}
+                        onMouseEnter={e => e.currentTarget.style.background = "rgba(0,42,168,0.4)"}
+                        onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                      >
+                        <img src={img} alt={label} className={`${size} object-contain flex-shrink-0`} />
+                        <span className="text-white/85 text-sm font-medium">{label}</span>
+                      </a>
+                    ))}
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
             </div>
           </div>
@@ -470,113 +438,94 @@ export default function Navbar() {
 
             {/* Desktop Right Items */}
             {isLoggedIn ? (
-              <div className="hidden md:flex items-center space-x-4">
-                {/* ------------------------------------ Dynamic Searching -------------------------  */}
-                <div className="relative flex items-center rounded-[10px] bg-[#8C9ED8] p-1 min-w-[200px]">
-                  <img
-                    src={SearchImg}
-                    alt="Search"
-                    className="w-8 h-8 rounded-md"
-                  />
+              <div className="hidden md:flex items-center gap-3">
+                {/* Search */}
+                <div className="relative flex items-center gap-2 h-10 px-3 rounded-xl min-w-[200px]"
+                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}>
+                  <FiSearch className="text-white/50 w-4 h-4 flex-shrink-0" />
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="bg-transparent outline-none text-white placeholder-white/80 pl-2 w-full text-sm"
+                    className="bg-transparent outline-none text-white placeholder-white/40 text-sm w-full"
                     value={query}
                     onChange={handleSearchChange}
                     onFocus={() => query && setShowDropdown(true)}
                   />
-
-                  {/* Dropdown */}
                   {showDropdown && results.length > 0 && (
-                    <div
-                      ref={dropdownRef}
-                      className="absolute top-full left-0 w-full bg-white text-black rounded-md shadow-lg mt-1 z-50 max-h-60 overflow-auto"
-                    >
+                    <div ref={dropdownRef}
+                      className="absolute top-full left-0 w-full rounded-xl shadow-2xl mt-2 z-50 overflow-hidden"
+                      style={{ background: "rgba(0,15,60,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(16px)" }}>
                       {results.map((item) => (
-                        <div
-                          key={item._id}
-                          onClick={() => handleGetDetails(item)}
-                          className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                        >
-                          {item.title}{" "}
-                          <span className="text-xs text-gray-500">
-                            {/* ({item.type}) */}
-                          </span>
+                        <div key={item._id} onClick={() => handleGetDetails(item)}
+                          className="px-4 py-2.5 text-white/80 text-sm cursor-pointer transition-colors hover:bg-white/8 hover:text-white">
+                          {item.title || item.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
 
-                {/* ---------------------------- search end ------------------  */}
-
-                {/* HB Balance badge */}
+                {/* HB Balance */}
                 {hbBalance !== null && (
-                  <Link
-                    to="/dashboard/withdraw"
-                    className="flex items-center gap-1.5 px-3 h-10 rounded-md text-sm font-semibold text-white hover:opacity-80 transition-opacity"
-                    style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}
-                    title="HyperBucks balance — click to withdraw"
-                  >
+                  <Link to="/dashboard/withdraw"
+                    className="flex items-center gap-1.5 px-3 h-10 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+                    style={{ background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.35)" }}
+                    title="HyperBucks — click to withdraw">
                     <span style={{ color: "#facc15" }}>⚡</span>
                     <span>{Number(hbBalance).toLocaleString()} HB</span>
                   </Link>
                 )}
 
-                {/* Profile dropdown (includes Dashboard/Panel access) */}
+                {/* Profile dropdown */}
                 <div ref={profileRef} className="relative">
-                  <button
-                    onClick={() => setProfileOpen(!profileOpen)}
-                    className="flex items-center justify-center w-10 h-10 rounded-md bg-[#002AA8] hover:bg-[#0033CC] transition-colors duration-200 cursor-pointer"
-                  >
-                    <FontAwesomeIcon icon={faUser} className="text-white w-5 h-5" />
+                  <button onClick={() => setProfileOpen(!profileOpen)}
+                    className="flex items-center gap-2 h-10 px-3 rounded-xl transition-all duration-200 cursor-pointer"
+                    style={{
+                      background: profileOpen ? "rgba(0,42,168,0.7)" : "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.12)"
+                    }}>
+                    <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                      style={{ background: "rgba(0,42,168,0.8)" }}>
+                      {(user?.FullName || user?.name || "U")[0].toUpperCase()}
+                    </div>
+                    <span className="text-white text-sm font-medium max-w-[80px] truncate hidden lg:block">
+                      {user?.FullName || user?.name || "Profile"}
+                    </span>
+                    <ChevronDown className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${profileOpen ? "rotate-180" : ""}`} />
                   </button>
 
                   {profileOpen && (
-                    <div className="absolute top-full right-0 mt-2 w-44 rounded-[8px] bg-[#002AA8D9] border border-white/20 shadow-lg overflow-hidden z-50">
-                      <Link
-                        to="/profile"
-                        onClick={() => setProfileOpen(false)}
-                        className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors"
-                      >
+                    <div className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-2xl overflow-hidden z-50"
+                      style={{ background: "rgba(0,15,60,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(16px)" }}>
+                      <div className="px-4 py-3 border-b border-white/8">
+                        <p className="text-white text-sm font-semibold truncate">{user?.FullName || user?.name || "User"}</p>
+                        <p className="text-white/40 text-xs truncate mt-0.5">{user?.Email || user?.email || ""}</p>
+                      </div>
+                      <Link to="/Profile" onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white">
+                        <FontAwesomeIcon icon={faUser} className="w-3.5 h-3.5" />
                         My Profile
                       </Link>
                       {user?.Role === "admin" ? (
-                        <a
-                          href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
+                        <a href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
                           onClick={() => setProfileOpen(false)}
-                          className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors border-t border-white/10"
-                        >
-                          Dashboard
+                          className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                          <LayoutGrid className="w-3.5 h-3.5" /> Admin Panel
                         </a>
                       ) : (
-                        <a
-                          href="/dashboard"
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <a href="/dashboard" target="_blank" rel="noopener noreferrer"
                           onClick={() => setProfileOpen(false)}
-                          className="block px-4 py-3 text-white text-sm font-semibold hover:bg-white/10 transition-colors border-t border-white/10"
-                        >
-                          Dashboard
+                          className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                          <LayoutGrid className="w-3.5 h-3.5" /> Dashboard
                         </a>
                       )}
+                      <button onClick={() => { setProfileOpen(false); setShowModal(true); }}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400/80 text-sm font-medium transition-colors hover:bg-red-500/10 hover:text-red-400 border-t border-white/5">
+                        <img src={logoutImage} alt="Logout" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(320deg)" }} />
+                        Sign Out
+                      </button>
                     </div>
                   )}
-                </div>
-
-                <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
-                  <button
-                    className="flex items-center justify-center w-full h-full"
-                    onClick={() => setShowModal(true)}
-                  >
-                    <img
-                      src={logoutImage}
-                      alt="Logout"
-                      className="w-[20px] h-[20px] brightness-0 invert"
-                      style={{ filter: "brightness(0) invert(1)" }}
-                    />
-                  </button>
                 </div>
               </div>
             ) : (
@@ -636,7 +585,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  to="/nfa-expand"
+                  to="/market-place"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   Collectibles

@@ -2,7 +2,23 @@
 // In .env.staging:                VITE_BACKEND_URL=https://api.hypertek100.com
 // In .env.production:             VITE_BACKEND_URL=https://api.hypertek100.com
 
+import axios from "axios";
+
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4700";
+
+// Global axios interceptor — logs full error response in dev
+axios.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (import.meta.env.DEV) {
+      const status = err.response?.status;
+      const url = err.config?.url;
+      const data = err.response?.data;
+      console.error(`[API Error] ${err.config?.method?.toUpperCase()} ${url} → ${status}`, data);
+    }
+    return Promise.reject(err);
+  }
+);
 
 const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
     || "pk_test_51SHewG3UIHQiuHTy62JP9SiQzYm4kVI8uDg158N2RxzmQMUKU0tr5zSVlrSwOCaGmIxFTwEJL59vKJ9cVDzWdUxH005IuFlux3";

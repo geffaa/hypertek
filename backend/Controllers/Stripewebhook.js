@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
+import { markOfferCompleted } from "./Offer.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
@@ -69,6 +70,13 @@ export const StripeWebhook = async (req, res) => {
             paymentData.paymentIntentId
           );
 
+          // Mark associated offer as completed (if payment came from offer flow)
+          const offerId = dataObject.metadata?.offerId;
+          if (offerId && offerId !== "") {
+            console.log("🔗 [StripeWebhook] Marking offer completed:", offerId);
+            await markOfferCompleted(offerId);
+          }
+
           // Handle NFT Purchase if metadata exists
           const { parentId, subCollectionId, buyerWallet, priceETH } = dataObject.metadata || {};
           
@@ -85,7 +93,7 @@ export const StripeWebhook = async (req, res) => {
                 paymentIntentId: paymentData.paymentIntentId
               });
               console.log("✅ [StripeWebhook] NFT Purchase finalized:", JSON.stringify(result, null, 2));
-              
+
               // Update payment record with tokenId if available
               if (result && result.tokenId) {
                 await Payment.findOneAndUpdate(
@@ -94,7 +102,13 @@ export const StripeWebhook = async (req, res) => {
                 );
               }
             } catch (nftErr) {
-              console.error("❌ Failed to finalize NFT Purchase in Webhook:", nftErr.message);
+              // Payment already recorded as succeeded — mark NFT transfer as pending
+              // so support can retry manually. Do NOT return 500 (would cause Stripe to retry payment).
+              console.error("❌ [StripeWebhook] NFT transfer failed after payment:", nftErr.message);
+              await Payment.findOneAndUpdate(
+                { paymentIntentId: paymentData.paymentIntentId },
+                { nftTransferFailed: true, nftTransferError: nftErr.message }
+              ).catch(() => {});
             }
           }
         } else {

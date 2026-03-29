@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MarketPlace_Url, getImageUrl } from "../../Config";
 import LazyImage from "../Common/LazyImage";
 import popularFallback from "../../assets/images/popular/popolar.png";
@@ -16,6 +16,7 @@ const fadeUp = {
 };
 
 function PopularCollections() {
+  const navigate = useNavigate();
   const [landData, setLandData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -112,11 +113,20 @@ function PopularCollections() {
                   </div>
 
                   <div className="mt-auto pt-2">
-                    <Link to="/market-place" className="block w-full">
-                      <button className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20">
-                        Buy Now
-                      </button>
-                    </Link>
+                    <button
+                      onClick={() => {
+                        const firstSub = item?.subCollections?.[0];
+                        if (firstSub) {
+                          navigate("/buy-nfa", { state: { item: firstSub, parentId: item._id } });
+                        } else {
+                          const category = item?.category || item?.collection?.name?.toLowerCase()?.trim();
+                          navigate(category ? `/collections/${encodeURIComponent(category)}` : "/market-place");
+                        }
+                      }}
+                      className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20"
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
               </motion.div>

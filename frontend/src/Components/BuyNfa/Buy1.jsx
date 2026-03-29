@@ -28,6 +28,7 @@ import { openTransakOnRamp } from "../../utils/transakUtils";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy } from "lucide-react";
+import PriceHistory from "./BuyNfa2";
 
 // ── Stripe NFT Payment Modal ─────────────────────────────────────────────────
 const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
@@ -50,12 +51,14 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
     const { error: confirmErr, paymentIntent } = await stripe.confirmPayment({
       elements,
       redirect: "if_required",
+      confirmParams: {
+        return_url: window.location.href,
+      },
     });
 
     if (confirmErr) {
       setError(confirmErr.message);
     } else if (paymentIntent?.status === "succeeded") {
-      toast.success("💳 Card payment successful! NFT transfer in progress...");
       onSuccess(paymentIntent);
     }
     setLoading(false);
@@ -108,17 +111,23 @@ function Buy1() {
   let parentCollection, subCollection;
 
   if (passedSubCollection) {
+    // Explicit sub-collection passed alongside parent item
     parentCollection = item;
     subCollection = passedSubCollection;
   } else if (item?.isParentCollection) {
+    // Item is a parent — use its first sub-collection
     parentCollection = item;
     subCollection = item.subCollections?.[0];
-  } else if (item?.subCollection) {
-    subCollection = item.subCollection;
-    parentCollection = item;
+  } else if (item?.isSubCollection || item?.parentId) {
+    // Item is a sub-collection (from Collectible.jsx / Profile flow)
+    subCollection = item;
+    // parentCollection stays undefined — we use parentId from location.state or item.parentId
   } else {
     subCollection = item;
   }
+
+  // Resolve the effective parentId from all possible sources
+  const resolvedParentId = parentCollection?._id || parentId || item?.parentId;
 
   const collection = subCollection || item;
   if (!collection) return null;
@@ -150,6 +159,10 @@ function Buy1() {
   const isAnyConnected = isConnected || isEmailWalletConnected;
   const activeWalletClient = walletClient || emailWalletClient;
 
+  // For card payments: always prefer email wallet so NFT lands in profile-visible address
+  // If user only has MetaMask (no email wallet), fall back to activeAddress
+  const cardBuyerWallet = emailWalletAddress || activeAddress;
+
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -158,11 +171,12 @@ function Buy1() {
   const [isSecondOpen, setIsSecondOpen] = useState(false);
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
-  const [listingPrice, setListingPrice] = useState(''); // ✅ Custom price for re-listing
-  const [isEditingPrice, setIsEditingPrice] = useState(false); // ✅ Toggle inline edit
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false); // post-purchase modal
+  const [listingPrice, setListingPrice] = useState(''); // Custom listing price set in confirm modal
   const [walletCopied, setWalletCopied] = useState(false);
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
   const [stripeModal, setStripeModal] = useState(null); // { clientSecret, amount }
+  const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
 
   // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
@@ -213,6 +227,49 @@ function Buy1() {
       checkWalletAndOwnership();
     }
   }, [collection, isAnyConnected, activeAddress, publicClient]);
+
+  /* ======================== FETCH OFFERS ======================== */
+  useEffect(() => {
+    if (!collection?._id || !user) return;
+    const fetchOffers = async () => {
+      try {
+        const ownerId = collection.owner || "platform";
+        const res = await axios.get(
+          `${BACKEND_BASE_URL}/api/v1/offer/owner/${encodeURIComponent(ownerId)}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const all = res.data?.offers || res.data || [];
+        // Filter to only offers for this specific NFT
+        const forThisNft = all.filter((o) => String(o.gameId) === String(collection._id));
+        // Non-owners only see their own offers (privacy)
+        const filtered = isOwner
+          ? forThisNft
+          : forThisNft.filter((o) => String(o.userId) === String(user?.id || user?._id));
+        setOffers(filtered);
+      } catch {
+        // silently fail — offers are non-critical
+      }
+    };
+    fetchOffers();
+  }, [collection?._id, isOwner, showOffers]);
+
+  /* ====================== UPDATE OFFER STATUS ====================== */
+  const handleOfferStatus = async (offerId, status) => {
+    try {
+      await axios.put(
+        `${BACKEND_BASE_URL}/api/v1/offer/${offerId}/request-status`,
+        { status },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      // Update local state instantly — no re-fetch needed
+      setOffers((prev) =>
+        prev.map((o) => o._id === offerId ? { ...o, requestStatus: status } : o)
+      );
+      toast.success(`Offer ${status}`);
+    } catch {
+      toast.error("Failed to update offer status");
+    }
+  };
 
   /* ===================== WALLET + OWNERSHIP CHECK ===================== */
   const checkWalletAndOwnership = async () => {
@@ -360,14 +417,17 @@ function Buy1() {
 
   /* ========================== BACKEND MINT ========================== */
   const mintNFTToWallet = async (buyerWallet) => {
-    if (!user?.id || !item._id) {
+    if (!user?.id || !collection._id) {
       throw new Error("Invalid user or item data");
+    }
+    if (!resolvedParentId) {
+      throw new Error("Missing parent collection ID. Go back to your Profile and try again.");
     }
 
     try {
       const payload = {
-        parentId: item.parentId,
-        subCollectionId: item._id,
+        parentId: resolvedParentId,
+        subCollectionId: collection._id,
         tokenURI: `ipfs://auto-${Date.now()}`,
         royaltyBps: 500,
         creatorWallet: buyerWallet.toLowerCase(),
@@ -416,8 +476,15 @@ function Buy1() {
     setLoading(true);
 
     try {
-      if (!activeWalletClient || !publicClient) {
-        toast.error("❌ Wallet not connected properly", { id: toastId });
+      if (!activeWalletClient) {
+        toast.dismiss(toastId);
+        setLoading(false);
+        toast.error("Connect MetaMask or another wallet to sign this transaction. Email wallets cannot sign on-chain.", { duration: 6000 });
+        if (openConnectModal) openConnectModal();
+        return;
+      }
+      if (!publicClient) {
+        toast.error("❌ Network client not ready", { id: toastId });
         setLoading(false);
         return;
       }
@@ -522,6 +589,15 @@ function Buy1() {
         }
       }
 
+      // Check ETH balance for gas before any on-chain writes
+      const ethBal = await publicClient.getBalance({ address: walletAddress });
+      if (ethBal === 0n) {
+        toast.dismiss(toastId);
+        setGasModal(true);
+        setLoading(false);
+        return;
+      }
+
       // Check approval (Use setApprovalForAll for Marketplace)
       toast.loading("✍️ Checking marketplace approval...", { id: toastId });
 
@@ -600,13 +676,8 @@ function Buy1() {
         tokenId,
         seller: walletAddress.toLowerCase(),
         priceETH: parseFloat(finalPrice),
+        parentId: resolvedParentId,
       };
-
-      if (parentCollection?._id) {
-        listingPayload.parentId = parentCollection._id;
-      } else if (parentId) {
-        listingPayload.parentId = parentId;
-      }
 
       console.log("📤 Sending listing payload:", listingPayload);
 
@@ -644,7 +715,7 @@ function Buy1() {
 
       let msg = "❌ Listing failed";
       if (err.message?.includes("insufficient funds")) {
-        msg = "⛽ Insufficient gas. Add Testnet IMX";
+        msg = "⛽ Insufficient ETH for gas. Add ETH to your wallet on Base.";
       } else if (err.message?.includes("user rejected") || err.code === 4001) {
         msg = "❌ Transaction rejected by user";
       } else {
@@ -953,23 +1024,21 @@ function Buy1() {
       toast.loading("💾 Recording purchase...", { id: toastId });
 
       try {
+        // Find accepted offer from this buyer (if purchase is completing an offer)
+        const myAcceptedOffer = offers.find(
+          (o) => String(o.userId) === String(user?.id || user?._id) && o.requestStatus === "accepted"
+        );
+
         const salePayload = {
           tokenId: collection.tokenId,
           buyer: buyer.toLowerCase(),
           seller: listing[0].toLowerCase(),
           priceETH: ethers.formatUnits(price, 6),
           txHash: receipt.transactionHash,
+          parentId: resolvedParentId,
+          subCollectionId: collection._id,
+          ...(myAcceptedOffer ? { offerId: myAcceptedOffer._id } : {}),
         };
-
-        if (parentCollection?._id) {
-          salePayload.parentId = parentCollection._id;
-        } else if (parentId) {
-          salePayload.parentId = parentId;
-        }
-
-        if (collection._id) {
-          salePayload.subCollectionId = collection._id;
-        }
 
         console.log("📤 Recording sale with payload:", salePayload);
 
@@ -986,19 +1055,12 @@ function Buy1() {
         console.error("⚠️ Error response:", recordErr.response?.data);
       }
 
-      toast.success(
-        `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${collection.tokenId}\n💰 Price: ${ethers.formatUnits(price, 6)} USDC\n📜 TX: ${receipt.transactionHash.substring(0, 10)}...`,
-        { id: toastId, duration: 8000 },
-      );
-
+      toast.dismiss(toastId);
       collection.owner = buyer.toLowerCase();
       setIsOwner(true);
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
-      console.log("✅ Purchase complete!");
-
-      const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "characters").toLowerCase().trim();
-      navigate("/Profile", { state: { category: targetCategory } });
+      setPurchaseSuccess(true);
     } catch (err) {
       console.error("❌ Purchase error:", err);
       let msg = "❌ Purchase failed";
@@ -1029,7 +1091,7 @@ function Buy1() {
     }
 
     const priceUsdc = parseFloat(collection.priceETH || 0.01);
-    const amountCents = Math.round(priceUsdc * 100);
+    const amountCents = Math.max(50, Math.round(priceUsdc * 100)); // Stripe minimum = $0.50 = 50 cents
     const toastId = toast.loading("💳 Preparing card payment...");
 
     try {
@@ -1037,16 +1099,25 @@ function Buy1() {
         amount: amountCents,
         userId: user.id || user._id,
         email: user.Email || user.email || "",
-        parentId: parentCollection?._id || parentId || collection.parentId || "",
+        parentId: resolvedParentId || "",
         subCollectionId: collection._id,
-        buyerWallet: activeAddress,
+        buyerWallet: cardBuyerWallet,
         priceETH: priceUsdc,
         gameTitle: collection.name || "NFT Purchase",
       });
 
       toast.dismiss(toastId);
       if (res.data?.clientSecret) {
-        setStripeModal({ clientSecret: res.data.clientSecret, amount: priceUsdc });
+        setStripeModal({
+          clientSecret: res.data.clientSecret,
+          amount: priceUsdc,
+          meta: {
+            parentId: resolvedParentId || null,
+            subCollectionId: collection._id,
+            buyerWallet: cardBuyerWallet,
+            priceETH: priceUsdc,
+          },
+        });
       } else {
         toast.error("❌ Could not initiate card payment");
       }
@@ -1082,14 +1153,14 @@ function Buy1() {
       };
     }
 
-    if (isOwner && !listingData?.active) {
+    if (isOwner && !listingData?.active && !collection.listed) {
       return {
         text: "📝 List Now",
         action: handleCreateListing,
       };
     }
 
-    if (isOwner && listingData?.active) {
+    if (isOwner && (listingData?.active || collection.listed)) {
       return {
         text: "✅ Your NFA (Listed)",
         disabled: true,
@@ -1105,7 +1176,7 @@ function Buy1() {
   if (!collection) return null;
 
   return (
-    <div className="min-h-screen text-white px-4 sm:px-8 lg:px-16 pb-16 max-w-5xl mx-auto">
+    <div className="text-white px-4 sm:px-6 lg:px-12 xl:px-16 pb-8 max-w-6xl mx-auto pt-6 w-full">
 
       {/* ── Insufficient USDC Modal ── */}
       {fundModal && (
@@ -1137,13 +1208,73 @@ function Buy1() {
         </div>
       )}
 
+      {/* ── No ETH Gas Modal ── */}
+      {gasModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <h3 className="text-lg font-bold text-white mb-2">⛽ ETH Required for Gas</h3>
+            <p className="text-sm text-white/50 mb-3">
+              To list your NFA on-chain you need a small amount of <span className="text-white font-semibold">ETH</span> in your wallet to pay for gas fees on Base.
+            </p>
+            <p className="text-sm text-white/40 mb-1 leading-relaxed">
+              {TARGET_CHAIN_ID === 8453
+                ? "You're on Base Mainnet. Buy a small amount of ETH (≈ $1–2) on Coinbase or bridge from Ethereum via bridge.base.org."
+                : "You're on Base Sepolia Testnet. Get free test ETH from a faucet."}
+            </p>
+            <div className="flex flex-col gap-3 mt-4">
+              {TARGET_CHAIN_ID !== 8453 && (
+                <a
+                  href="https://faucet.quicknode.com/base/sepolia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-center bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
+                  onClick={() => setGasModal(false)}
+                >
+                  Get Testnet ETH (Faucet)
+                </a>
+              )}
+              {TARGET_CHAIN_ID === 8453 && (
+                <a
+                  href="https://bridge.base.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-center bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
+                  onClick={() => setGasModal(false)}
+                >
+                  Bridge ETH to Base
+                </a>
+              )}
+              <button onClick={() => setGasModal(false)} className="w-full text-white/40 hover:text-white transition text-sm py-2">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Stripe Card Payment Modal ── */}
       {stripeModal && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" } }}>
           <StripeNFTCheckoutForm
             amount={stripeModal.amount}
             onClose={() => setStripeModal(null)}
-            onSuccess={() => { setStripeModal(null); toast.success("Payment received — NFT transfer processing via webhook."); }}
+            onSuccess={async (paymentIntent) => {
+              setStripeModal(null);
+              const meta = stripeModal.meta || {};
+              try {
+                await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/finalize-by-payment-intent`, {
+                  paymentIntentId: paymentIntent.id,
+                  parentId: meta.parentId || null,
+                  subCollectionId: meta.subCollectionId,
+                  buyerWallet: meta.buyerWallet,
+                  priceETH: meta.priceETH,
+                  offerId: meta.offerId || null,
+                });
+              } catch (err) {
+                console.error("⚠️ [Stripe] finalize error:", err.message);
+              }
+              setPurchaseSuccess(true);
+            }}
           />
         </Elements>
       )}
@@ -1151,74 +1282,94 @@ function Buy1() {
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
         <Link
-          to="/market-place"
+          to={isOwner ? "/Profile" : "/market-place"}
           className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
         >
-          Overview
+          {isOwner ? "My Profile" : "Marketplace"}
         </Link>
+        <span className="pb-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px">
+          {isOwner ? "List NFA" : "Buy NFA"}
+        </span>
         <button
           onClick={() => setShowOffers(true)}
-          className="pb-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px"
+          className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
         >
-          Offers <span className="ml-1 text-white/40">{offers.length}</span>
+          Offers
+          {offers.length > 0 && (
+            <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold ${
+              offers.some(o => o.requestStatus === "accepted")
+                ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                : "bg-white/10 text-white/40"
+            }`}>
+              {offers.length}
+            </span>
+          )}
         </button>
       </div>
 
       {/* ── Main Content ── */}
-      <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
+      <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
         {/* Left — Image */}
-        <div className="w-full md:w-[360px] shrink-0">
+        <div className="w-full md:w-[320px] lg:w-[380px] shrink-0">
           <img
             src={getImageUrl(collection?.image)}
             alt={collection?.name}
-            className="w-full aspect-square rounded-2xl object-cover"
-            style={{ background: "linear-gradient(135deg, #977C34, #493F26)" }}
+            className="w-full h-full min-h-[300px] md:min-h-[440px] rounded-2xl object-cover"
+            style={{ background: "rgba(13,22,50,0.8)" }}
           />
         </div>
 
         {/* Right — Details */}
-        <div className="flex-1 flex flex-col gap-5">
+        <div className="flex-1 flex flex-col gap-4">
 
-          {/* Badges + Name */}
-          <div>
-            <div className="flex items-center gap-2 flex-wrap mb-2">
-              {listingData?.active && (
-                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                  Listed
-                </span>
-              )}
-              {isOwner && collection.tokenId && (
-                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                  You Own This
-                </span>
-              )}
-            </div>
-            <h1 className="text-3xl font-bold text-white">{collection?.name}</h1>
-            <p className="text-white/40 text-sm mt-1">
-              {collection?.symbol || "NFA"} · No{collection?.tokenId || "—"}
-            </p>
+          {/* Badges */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {listingData?.active && (
+              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                Listed
+              </span>
+            )}
+            {isOwner && collection.tokenId && (
+              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                You Own This
+              </span>
+            )}
           </div>
 
-          {/* Owner */}
-          <div className="flex items-center gap-2 text-sm">
-            <span className="text-white/40">Owned by</span>
-            <span className="text-blue-400 font-medium">
-              {onChainOwner || collection.owner
-                ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
-                : "Platform"}
-            </span>
+          {/* Name + meta */}
+          <div>
+            <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
+            <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+              <span className="text-white/40 text-sm">
+                {collection?.symbol || "NFA"}
+                {collection?.tokenId ? ` · Token #${collection.tokenId}` : " · Not minted yet"}
+              </span>
+              {(onChainOwner || collection.owner) && (
+                <span className="text-white/20 text-sm">·</span>
+              )}
+              <span className="text-white/40 text-sm">
+                Owned by{" "}
+                <span className="text-blue-400 font-medium">
+                  {onChainOwner || collection.owner
+                    ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
+                    : "Platform"}
+                </span>
+              </span>
+            </div>
           </div>
 
           {/* Description */}
-          {(collection?.description || collection?.name) && (
-            <div>
-              <p className="text-white/60 text-sm leading-relaxed">
-                {collection?.description ||
-                  "Humanity didn't conquer the stars it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies."}
-              </p>
-            </div>
-          )}
+          <div
+            className="rounded-xl p-4 min-h-[80px]"
+            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+          >
+            <p className="text-white/50 text-sm leading-relaxed">
+              {collection?.description && collection.description.trim().length > 0
+                ? collection.description
+                : "No description provided for this NFA."}
+            </p>
+          </div>
 
           {/* Price Card */}
           <div
@@ -1229,50 +1380,21 @@ function Buy1() {
             <div>
               <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">Price</p>
 
-              {isOwner && !listingData?.active ? (
-                isEditingPrice ? (
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="number" min="0.01" step="0.01" autoFocus
-                      value={listingPrice}
-                      onChange={(e) => setListingPrice(e.target.value)}
-                      placeholder={String(collection.priceETH || "1")}
-                      onBlur={() => setIsEditingPrice(false)}
-                      onKeyDown={(e) => e.key === "Enter" && setIsEditingPrice(false)}
-                      className="bg-white/10 border border-blue-500 rounded-lg px-3 py-1.5 text-white text-2xl font-bold w-40 outline-none"
-                    />
-                    <span className="text-blue-400 font-semibold">USDC</span>
-                    <button onClick={() => setIsEditingPrice(false)} className="text-green-400 text-sm hover:text-green-300">✓ Done</button>
-                  </div>
-                ) : (
-                  <div
-                    className="flex items-center gap-2 cursor-pointer group w-fit"
-                    onDoubleClick={() => setIsEditingPrice(true)}
-                    title="Double-click to edit price"
-                  >
-                    <span className="text-3xl font-bold">
-                      {listingPrice && parseFloat(listingPrice) > 0
-                        ? parseFloat(listingPrice).toFixed(2)
-                        : (collection.priceETH || 0.01)}
-                    </span>
-                    <span className="text-blue-400 font-semibold">USDC</span>
-                    <FiEdit2 className="text-white/30 group-hover:text-blue-400 transition-colors" size={14} />
-                  </div>
-                )
-              ) : (
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl font-bold">
-                    {listingData?.active
-                      ? ethers.formatUnits(listingData.price, 6)
-                      : (collection.priceETH || 0.01)}
-                  </span>
-                  <span className="text-blue-400 font-semibold">USDC</span>
-                </div>
-              )}
-
-              <div className="flex items-center gap-1 text-white/30 text-xs mt-1">
-                <FiEye size={11} /> <span>505 views</span>
+              <div className="flex items-center gap-2">
+                <span className="text-3xl font-bold">
+                  {listingData?.active
+                    ? ethers.formatUnits(listingData.price, 6)
+                    : (collection.priceETH || 0.01)}
+                </span>
+                <span className="text-blue-400 font-semibold">USDC</span>
               </div>
+
+              {collection.category && (
+                <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/50 capitalize"
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  {collection.category}
+                </span>
+              )}
             </div>
 
             {/* Embedded wallet display */}
@@ -1316,23 +1438,27 @@ function Buy1() {
               >
                 {buttonConfig.text}
               </button>
-              <button
-                onClick={handlePaymentCard}
-                disabled={loading}
-                className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
-              >
-                💳 Buy With Card
-              </button>
+              {!isOwner && (
+                <button
+                  onClick={handlePaymentCard}
+                  disabled={loading}
+                  className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
+                >
+                  💳 Buy With Card
+                </button>
+              )}
             </div>
 
-            {/* Make Offer */}
-            <Link
-              to="/payment"
-              state={{ item: collection }}
-              className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
-            >
-              Make Offer <FiEdit2 size={12} />
-            </Link>
+            {/* Make Offer — only for non-owners */}
+            {!isOwner && (
+              <Link
+                to="/make-offer"
+                state={{ item: collection }}
+                className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
+              >
+                Make Offer <FiEdit2 size={12} />
+              </Link>
+            )}
           </div>
 
         </div>
@@ -1496,22 +1622,179 @@ function Buy1() {
             ) : (
               <div className="w-full">
                 <div className="grid grid-cols-5 gap-4 text-xs font-semibold text-white/40 uppercase tracking-widest mb-3 px-3">
-                  <span>Price</span><span>Offers</span><span>From</span><span>Expire In</span><span>Action</span>
+                  <span>Price</span><span>Status</span><span>From</span><span>Expires</span><span>Action</span>
                 </div>
-                {offers.map((offer, index) => (
-                  <div key={index} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/06 p-3 rounded-lg mb-2 text-sm">
-                    <span className="text-white font-medium">{offer.price} USDC</span>
-                    <span className="text-white/50">Collection</span>
-                    <span className="text-white/50 truncate">{offer.from}</span>
-                    <span className="text-white/50">{offer.expire}</span>
-                    <button className="px-3 py-1.5 bg-[#002AA8] hover:bg-[#003BD4] rounded-lg text-xs font-semibold transition-colors">
-                      Accept
-                    </button>
-                  </div>
-                ))}
+                {offers.map((offer) => {
+                  const isMyOffer = String(offer.userId) === String(user?.id || user?._id);
+                  const statusColor =
+                    offer.requestStatus === "completed" ? "text-blue-400" :
+                    offer.requestStatus === "accepted"  ? "text-green-400" :
+                    offer.requestStatus === "rejected"  ? "text-red-400" :
+                    offer.requestStatus === "cancelled" ? "text-white/30" :
+                    "text-yellow-400"; // pending
+
+                  return (
+                    <div key={offer._id} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/08 p-3 rounded-lg mb-2 text-sm">
+                      <span className="text-white font-medium">{offer.offerPrice} USDC</span>
+                      <span className={`text-xs font-medium capitalize ${statusColor}`}>
+                        {offer.requestStatus || "pending"}
+                      </span>
+                      <span className="text-white/50 truncate text-xs">{offer.userName || "—"}</span>
+                      <span className="text-white/50 text-xs">{offer.priceDuration}</span>
+                      <div className="flex gap-1.5">
+                        {isOwner && offer.requestStatus === "pending" ? (
+                          <>
+                            <button
+                              onClick={() => handleOfferStatus(offer._id, "accepted")}
+                              className="px-2.5 py-1 bg-[#002AA8] hover:bg-[#003BD4] rounded-lg text-xs font-semibold transition-colors"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() => handleOfferStatus(offer._id, "rejected")}
+                              className="px-2.5 py-1 bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/30 rounded-lg text-xs text-white/50 hover:text-red-400 transition-colors"
+                            >
+                              Reject
+                            </button>
+                          </>
+                        ) : isMyOffer && offer.requestStatus === "pending" ? (
+                          <button
+                            onClick={() => handleOfferStatus(offer._id, "cancelled")}
+                            className="px-2.5 py-1 bg-white/5 hover:bg-red-500/10 border border-white/10 rounded-lg text-xs text-white/40 hover:text-red-400 transition-colors"
+                          >
+                            Cancel
+                          </button>
+                        ) : isMyOffer && offer.requestStatus === "accepted" ? (
+                          // Seller accepted — buyer completes purchase via card
+                          <div className="flex flex-col gap-1 items-start">
+                            {offer.acceptDeadlineAt && (() => {
+                              const diff = new Date(offer.acceptDeadlineAt) - Date.now();
+                              if (diff <= 0) return <span className="text-red-400 text-xs">Expired</span>;
+                              const h = Math.floor(diff / 3600000);
+                              const m = Math.floor((diff % 3600000) / 60000);
+                              return (
+                                <span className="text-orange-400 text-xs">
+                                  ⏳ {h > 24 ? `${Math.floor(h/24)}d ${h%24}h` : `${h}h ${m}m`} left
+                                </span>
+                              );
+                            })()}
+                            <button
+                              onClick={async () => {
+                                setShowOffers(false);
+                                const offerPriceUsdc = parseFloat(offer.offerPrice);
+                                const amountCents = Math.max(50, Math.round(offerPriceUsdc * 100));
+                                try {
+                                  const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/payment/create-payment-intent`, {
+                                    amount: amountCents,
+                                    userId: user.id || user._id,
+                                    email: user.Email || user.email || "",
+                                    parentId: resolvedParentId || "",
+                                    subCollectionId: collection._id,
+                                    buyerWallet: cardBuyerWallet,
+                                    priceETH: offerPriceUsdc,
+                                    gameTitle: collection.name || "NFT Purchase",
+                                    offerId: offer._id,
+                                  });
+                                  if (res.data?.clientSecret) {
+                                    setStripeModal({
+                                      clientSecret: res.data.clientSecret,
+                                      amount: offerPriceUsdc,
+                                      meta: {
+                                        parentId: resolvedParentId || null,
+                                        subCollectionId: collection._id,
+                                        buyerWallet: cardBuyerWallet,
+                                        priceETH: offerPriceUsdc,
+                                        offerId: offer._id,
+                                      },
+                                    });
+                                  } else {
+                                    toast.error("Could not initiate payment");
+                                  }
+                                } catch {
+                                  toast.error("Payment setup failed");
+                                }
+                              }}
+                              className="px-2.5 py-1 bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 rounded-lg text-xs font-semibold text-green-400 transition-colors"
+                            >
+                              Complete Purchase
+                            </button>
+                          </div>
+                        ) : (
+                          <span className="text-white/20 text-xs">—</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {/* ── Price History Chart ── */}
+      <PriceHistory subId={collection?._id} />
+
+      {/* ── Purchase Success Modal ── */}
+      {purchaseSuccess && (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-black/75 backdrop-blur-sm px-4"
+          style={{ animation: "fadeIn 0.2s ease" }}
+        >
+          <div
+            className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center gap-5 text-center"
+            style={{ animation: "scaleIn 0.25s ease" }}
+          >
+            {/* Animated check */}
+            <div
+              className="w-20 h-20 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(74,222,128,0.12)", border: "2px solid rgba(74,222,128,0.4)" }}
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path
+                  d="M8 20L16 28L32 12"
+                  stroke="#4ade80"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ strokeDasharray: 40, strokeDashoffset: 0, animation: "drawCheck 0.4s ease 0.1s both" }}
+                />
+              </svg>
+            </div>
+
+            <div>
+              <h2 className="text-white text-xl font-bold mb-1">Purchase Successful!</h2>
+              <p className="text-white/50 text-sm leading-relaxed">
+                <span className="text-white font-semibold">{collection?.name}</span> has been purchased.
+                Your NFT will be transferred to your wallet shortly.
+              </p>
+              <p className="text-white/30 text-xs mt-2">
+                Transfer is processed automatically via our system.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <button
+                onClick={() => { setPurchaseSuccess(false); navigate("/Profile"); }}
+                className="w-full h-11 rounded-xl text-white font-semibold text-sm transition-all"
+                style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
+              >
+                View in My Profile
+              </button>
+              <button
+                onClick={() => { setPurchaseSuccess(false); navigate("/market-place"); }}
+                className="w-full h-10 rounded-xl text-white/50 hover:text-white text-sm transition-colors"
+              >
+                Continue Shopping
+              </button>
+            </div>
+          </div>
+
+          <style>{`
+            @keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
+            @keyframes scaleIn { from { transform: scale(0.85); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+            @keyframes drawCheck { from { stroke-dashoffset: 40 } to { stroke-dashoffset: 0 } }
+          `}</style>
         </div>
       )}
 

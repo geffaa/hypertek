@@ -104,6 +104,20 @@ function EditProfile() {
     <div className="min-h-screen bg-transparent relative z-10 mt-16">
       {loading && <FullScreenLoader />}
 
+      {/* Back button */}
+      <div className="absolute top-4 left-4 z-20">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white/70 hover:text-white transition-all duration-200 hover:bg-white/10"
+          style={{ border: "1px solid rgba(255,255,255,0.12)" }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </button>
+      </div>
+
       {/* Hero */}
       <div
         className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] bg-cover bg-top bg-no-repeat rounded-none shadow-lg mb-20 md:mb-24"
@@ -268,10 +282,18 @@ function EditProfile() {
                             placeholder="Your password"
                             className="w-full bg-white/5 border border-white/15 text-white text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500/60"
                             autoFocus
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                document.getElementById("confirm-pk-btn")?.click();
+                              }
+                            }}
                           />
                         </div>
                         <div className="flex gap-2">
                           <button
+                            id="confirm-pk-btn"
                             type="button"
                             disabled={exportingKey}
                             onClick={async () => {

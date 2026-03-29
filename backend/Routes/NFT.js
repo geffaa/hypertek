@@ -43,6 +43,9 @@ import {
   getDashboardStats,
   userUploadNFC,
   getUserTransactions,
+  getSubCollectionPriceHistory,
+  getSubCollectionById,
+  finalizeByPaymentIntent,
 } from "../Controllers/nftController.js";
 
 import uploadTemp from "../Middleware/UploadMulter.js";
@@ -61,6 +64,14 @@ NFTRouter.post(
 );
 
 NFTRouter.get("/parent-collections", getParentCollections);
+
+NFTRouter.put(
+  "/parent-collection/:id",
+  uploadTemp.single("image"),
+  updateCollection
+);
+
+NFTRouter.delete("/parent-collection/:id", deleteCollection);
 
 /* =====================================================
    SUB COLLECTION ROUTES (NO AUTH)
@@ -186,7 +197,7 @@ NFTRouter.post(
   authMiddleware(),
   cancelSubCollectionListing
 );
-NFTRouter.post("/sub-collection/listing/create", createSubCollectionListing);
+NFTRouter.post("/sub-collection/listing/create", authMiddleware(), createSubCollectionListing);
 NFTRouter.post("/sub-collection/sale/record", authMiddleware(), recordSubCollectionSale);
 NFTRouter.get(
   "/user/listed-subs/:walletAddress",
@@ -208,5 +219,15 @@ NFTRouter.get(
   authMiddleware(),
   getUserTransactions
 );
+
+// NFT price history (public — needed on buy page)
+NFTRouter.get("/sub-collection/:subId/price-history", getSubCollectionPriceHistory);
+
+// Fetch a single sub-collection by ID (public — needed by MyOffers → Buy page navigation)
+NFTRouter.get("/sub-collection/:subId", getSubCollectionById);
+
+// Finalize NFT purchase directly from frontend after Stripe confirmPayment succeeds
+// Backend re-verifies with Stripe before executing (safe even without webhook)
+NFTRouter.post("/finalize-by-payment-intent", finalizeByPaymentIntent);
 
 export default NFTRouter;

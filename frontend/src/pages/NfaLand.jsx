@@ -954,7 +954,7 @@ function NfaLand() {
           </div>
         </div>
       </div>
-      <BuyNfa2 />
+      <BuyNfa2 subId={item?._id} />
 
       {/* Confirmation Modal */}
       {isOpen && (

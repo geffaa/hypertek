@@ -1,4 +1,5 @@
 import { Offer } from "../Models/Offer.js";
+import User from "../Models/User.js";
 import nodemailer from "nodemailer";
 
 // ✅ Setup Nodemailer Transporter
@@ -57,8 +58,8 @@ const createOffer = async (req, res) => {
       !serialNumber ||
       !gameId ||
       !gameTitle ||
-      !gameActualPrice ||
-      !offerPrice ||
+      gameActualPrice === undefined || gameActualPrice === null ||
+      !offerPrice || offerPrice <= 0 ||
       !priceDuration ||
       !userId ||
       !userName ||
@@ -67,13 +68,29 @@ const createOffer = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "All required fields must be provided",
+        message: "All required fields must be provided and offer price must be greater than 0",
       });
+    }
+
+    // If seller email wasn't provided, look it up by wallet address
+    let resolvedOwnerEmail = ownerEmail || "";
+    let resolvedOwnerName  = ownerName  || "Platform";
+    if (!resolvedOwnerEmail && ownerId && ownerId !== "platform") {
+      const ownerUser = await User.findOne({
+        $or: [
+          { MetaMaskAddress: ownerId.toLowerCase() },
+          { WalletAddress:   ownerId.toLowerCase() },
+        ],
+      }).select("Email FullName");
+      if (ownerUser) {
+        resolvedOwnerEmail = ownerUser.Email || "";
+        resolvedOwnerName  = ownerUser.FullName || resolvedOwnerName;
+      }
     }
 
     const offer = new Offer({
       serialNumber,
-      gameId: String(gameId),       // always store as string — NFT ID, not Game ObjectId
+      gameId: String(gameId),
       gameTitle,
       gameActualPrice,
       offerPrice,
@@ -81,9 +98,9 @@ const createOffer = async (req, res) => {
       userId,
       userName,
       userEmail,
-      ownerId: String(ownerId),      // can be wallet address, "platform", or userId string
-      ownerName: ownerName || "Platform",
-      ownerEmail: ownerEmail || "",
+      ownerId: String(ownerId),
+      ownerName: resolvedOwnerName,
+      ownerEmail: resolvedOwnerEmail,
       requestStatus: requestStatus || "pending",
       paymentStatus: paymentStatus || "unpaid",
     });
@@ -95,7 +112,7 @@ const createOffer = async (req, res) => {
       <div style="font-family: Arial, sans-serif; background:#f8f9fa; padding:40px;">
         <div style="background:white; padding:25px; border-radius:10px;">
           <h2>🎮 New Offer Request Received</h2>
-          <p>Dear ${ownerName},</p>
+          <p>Dear ${resolvedOwnerName},</p>
           <p>${userName} has made an offer for <b>${gameTitle}</b>.</p>
           <table style="margin-top:15px;">
             <tr><td><b>Offer ID:</b></td><td>${serialNumber}</td></tr>
@@ -115,7 +132,7 @@ const createOffer = async (req, res) => {
         <div style="background:white; padding:25px; border-radius:10px;">
           <h2>✅ Offer Created Successfully!</h2>
           <p>Dear ${userName},</p>
-          <p>Your offer for <b>${gameTitle}</b> has been sent to ${ownerName}.</p>
+          <p>Your offer for <b>${gameTitle}</b> has been sent to ${resolvedOwnerName}.</p>
           <table style="margin-top:15px;">
             <tr><td><b>Offer ID:</b></td><td>${serialNumber}</td></tr>
             <tr><td><b>Offered Price:</b></td><td>$${offerPrice}</td></tr>
@@ -127,7 +144,7 @@ const createOffer = async (req, res) => {
       </div>
     `;
 
-    await sendEmail(ownerEmail, `🎮 New Offer for ${gameTitle}`, ownerEmailHtml);
+    if (resolvedOwnerEmail) await sendEmail(resolvedOwnerEmail, `🎮 New Offer for ${gameTitle}`, ownerEmailHtml);
     await sendEmail(userEmail, `✅ Offer Created for ${gameTitle}`, userEmailHtml);
 
     res.status(201).json({
@@ -169,23 +186,91 @@ const updateRequestStatus = async (req, res) => {
     }
 
     offer.requestStatus = status;
+
+    // When seller accepts — record deadline (48 hours)
+    if (status === "accepted") {
+      offer.acceptedAt = new Date();
+      offer.acceptDeadlineAt = new Date(Date.now() + 48 * 60 * 60 * 1000);
+    }
+
     await offer.save();
 
-    // ✅ Notify both parties
-    const subject = `📢 Offer Request Update: ${offer.gameTitle}`;
-    const messageHtml = `
-      <div style="font-family: Arial; background:#f8f9fa; padding:40px;">
-        <div style="background:white; padding:25px; border-radius:10px;">
-          <h2>📢 Offer Status Updated</h2>
-          <p>Your Offer  for <b>${offer.gameTitle}</b> has been updated to <b>${status}</b>.</p>
-          <p>Offer ID: ${offer.serialNumber}</p>
-          <p style="font-size:12px;color:#777;">© ${new Date().getFullYear()} Hyper-Tek Games</p>
-        </div>
-      </div>
-    `;
+    // ✅ Notify both parties — customised per status
+    let buyerSubject, buyerHtml, ownerSubject, ownerHtml;
+    const year = new Date().getFullYear();
 
-    await sendEmail(offer.userEmail, subject, messageHtml);
-    await sendEmail(offer.ownerEmail, subject, messageHtml);
+    if (status === "accepted") {
+      const deadlineStr = offer.acceptDeadlineAt.toUTCString();
+      buyerSubject = `✅ Your Offer Was Accepted — Complete Purchase for ${offer.gameTitle}`;
+      buyerHtml = `
+        <div style="font-family:Arial,sans-serif;background:#f0f4ff;padding:40px;">
+          <div style="background:white;padding:28px;border-radius:12px;max-width:520px;">
+            <h2 style="color:#1a3cb5;">🎉 Your Offer Was Accepted!</h2>
+            <p>Hi ${offer.userName},</p>
+            <p>Great news! The owner has accepted your offer for <b>${offer.gameTitle}</b>.</p>
+            <table style="margin:16px 0;border-collapse:collapse;width:100%;">
+              <tr><td style="padding:6px 0;color:#555;"><b>Offer Price:</b></td><td>${offer.offerPrice} USDC</td></tr>
+              <tr><td style="padding:6px 0;color:#555;"><b>Offer ID:</b></td><td>${offer.serialNumber}</td></tr>
+              <tr><td style="padding:6px 0;color:#e05c00;"><b>Complete By:</b></td><td>${deadlineStr}</td></tr>
+            </table>
+            <p style="background:#fff3cd;padding:12px;border-radius:8px;color:#856404;">
+              ⏳ <b>You have 48 hours</b> to complete your purchase. After that, the offer expires.
+            </p>
+            <p>Log in to your account, open the NFT page, and click <b>"Complete Purchase"</b> in the Offers tab.</p>
+            <p style="font-size:12px;color:#aaa;margin-top:24px;">© ${year} Hyper-Tek Games</p>
+          </div>
+        </div>`;
+
+      ownerSubject = `📢 You Accepted an Offer for ${offer.gameTitle}`;
+      ownerHtml = `
+        <div style="font-family:Arial,sans-serif;background:#f0f4ff;padding:40px;">
+          <div style="background:white;padding:28px;border-radius:12px;max-width:520px;">
+            <h2 style="color:#1a3cb5;">📢 Offer Accepted</h2>
+            <p>You accepted an offer from <b>${offer.userName}</b> for <b>${offer.gameTitle}</b>.</p>
+            <table style="margin:16px 0;border-collapse:collapse;width:100%;">
+              <tr><td style="padding:6px 0;color:#555;"><b>Offer Price:</b></td><td>${offer.offerPrice} USDC</td></tr>
+              <tr><td style="padding:6px 0;color:#555;"><b>Offer ID:</b></td><td>${offer.serialNumber}</td></tr>
+              <tr><td style="padding:6px 0;color:#555;"><b>Buyer Deadline:</b></td><td>${deadlineStr}</td></tr>
+            </table>
+            <p>You will be notified once the buyer completes payment.</p>
+            <p style="font-size:12px;color:#aaa;margin-top:24px;">© ${year} Hyper-Tek Games</p>
+          </div>
+        </div>`;
+    } else if (status === "rejected") {
+      buyerSubject = `❌ Your Offer Was Declined — ${offer.gameTitle}`;
+      buyerHtml = `
+        <div style="font-family:Arial,sans-serif;background:#f8f9fa;padding:40px;">
+          <div style="background:white;padding:25px;border-radius:10px;">
+            <h2>❌ Offer Declined</h2>
+            <p>Hi ${offer.userName}, your offer of <b>${offer.offerPrice} USDC</b> for <b>${offer.gameTitle}</b> was declined.</p>
+            <p>You can make a new offer at a different price.</p>
+            <p style="font-size:12px;color:#777;">© ${year} Hyper-Tek Games</p>
+          </div>
+        </div>`;
+      ownerSubject = `📢 Offer Rejected for ${offer.gameTitle}`;
+      ownerHtml = `
+        <div style="font-family:Arial,sans-serif;background:#f8f9fa;padding:40px;">
+          <div style="background:white;padding:25px;border-radius:10px;">
+            <h2>📢 Offer Rejected</h2>
+            <p>You rejected the offer from <b>${offer.userName}</b> for <b>${offer.gameTitle}</b>.</p>
+            <p style="font-size:12px;color:#777;">© ${year} Hyper-Tek Games</p>
+          </div>
+        </div>`;
+    } else {
+      // cancelled or other
+      buyerSubject = ownerSubject = `📢 Offer Update: ${offer.gameTitle}`;
+      buyerHtml = ownerHtml = `
+        <div style="font-family:Arial,sans-serif;background:#f8f9fa;padding:40px;">
+          <div style="background:white;padding:25px;border-radius:10px;">
+            <h2>📢 Offer Status Changed</h2>
+            <p>The offer for <b>${offer.gameTitle}</b> is now <b>${status}</b>. Offer ID: ${offer.serialNumber}</p>
+            <p style="font-size:12px;color:#777;">© ${year} Hyper-Tek Games</p>
+          </div>
+        </div>`;
+    }
+
+    if (offer.userEmail)  await sendEmail(offer.userEmail,  buyerSubject,  buyerHtml);
+    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, ownerSubject,  ownerHtml);
 
     res.status(200).json({
       success: true,
@@ -260,6 +345,56 @@ const updatePaymentStatus = async (req, res) => {
 };
 
 // ============================================================
+// ✅ MARK OFFER COMPLETED (called by Stripe webhook after payment)
+// ============================================================
+export const markOfferCompleted = async (offerId) => {
+  try {
+    const offer = await Offer.findById(offerId);
+    if (!offer) return;
+
+    offer.requestStatus = "completed";
+    offer.paymentStatus = "paid";
+    await offer.save();
+
+    const year = new Date().getFullYear();
+
+    const buyerHtml = `
+      <div style="font-family:Arial,sans-serif;background:#f0f4ff;padding:40px;">
+        <div style="background:white;padding:28px;border-radius:12px;max-width:520px;">
+          <h2 style="color:#16a34a;">🎉 Purchase Complete!</h2>
+          <p>Hi ${offer.userName},</p>
+          <p>Your purchase of <b>${offer.gameTitle}</b> is complete. The NFT is being transferred to your wallet.</p>
+          <table style="margin:16px 0;border-collapse:collapse;width:100%;">
+            <tr><td style="padding:6px 0;color:#555;"><b>Amount Paid:</b></td><td>${offer.offerPrice} USDC</td></tr>
+            <tr><td style="padding:6px 0;color:#555;"><b>Offer ID:</b></td><td>${offer.serialNumber}</td></tr>
+          </table>
+          <p>You can view your NFT in your profile once the transfer completes.</p>
+          <p style="font-size:12px;color:#aaa;margin-top:24px;">© ${year} Hyper-Tek Games</p>
+        </div>
+      </div>`;
+
+    const sellerHtml = `
+      <div style="font-family:Arial,sans-serif;background:#f0f4ff;padding:40px;">
+        <div style="background:white;padding:28px;border-radius:12px;max-width:520px;">
+          <h2 style="color:#16a34a;">💰 Sale Complete!</h2>
+          <p>The buyer <b>${offer.userName}</b> has completed payment for <b>${offer.gameTitle}</b>.</p>
+          <table style="margin:16px 0;border-collapse:collapse;width:100%;">
+            <tr><td style="padding:6px 0;color:#555;"><b>Sale Price:</b></td><td>${offer.offerPrice} USDC</td></tr>
+            <tr><td style="padding:6px 0;color:#555;"><b>Offer ID:</b></td><td>${offer.serialNumber}</td></tr>
+          </table>
+          <p>Funds will be credited to your account as per our payment schedule.</p>
+          <p style="font-size:12px;color:#aaa;margin-top:24px;">© ${year} Hyper-Tek Games</p>
+        </div>
+      </div>`;
+
+    if (offer.userEmail)  await sendEmail(offer.userEmail,  `🎉 Purchase Complete — ${offer.gameTitle}`, buyerHtml);
+    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, `💰 Sale Complete — ${offer.gameTitle}`,    sellerHtml);
+  } catch (err) {
+    console.error("❌ markOfferCompleted error:", err.message);
+  }
+};
+
+// ============================================================
 // ✅ FETCH CONTROLLERS (No email needed)
 // ============================================================
 const getAllOffers = async (req, res) => {
@@ -274,6 +409,13 @@ const getAllOffers = async (req, res) => {
 const getOffersByOwnerId = async (req, res) => {
   try {
     const { ownerId } = req.params;
+
+    // Auto-expire accepted offers past 48-hour deadline
+    await Offer.updateMany(
+      { ownerId, requestStatus: "accepted", acceptDeadlineAt: { $lt: new Date() } },
+      { requestStatus: "cancelled" }
+    );
+
     const offers = await Offer.find({ ownerId }).sort({ createdAt: -1 });
     if (!offers.length)
       return res
@@ -288,6 +430,13 @@ const getOffersByOwnerId = async (req, res) => {
 const getOffersByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
+
+    // Auto-expire accepted offers past 48-hour deadline
+    await Offer.updateMany(
+      { userId, requestStatus: "accepted", acceptDeadlineAt: { $lt: new Date() } },
+      { requestStatus: "cancelled" }
+    );
+
     const offers = await Offer.find({ userId }).sort({ createdAt: -1 });
     if (!offers.length)
       return res

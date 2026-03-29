@@ -106,6 +106,13 @@ const PaymentSchema = new mongoose.Schema({
     default: "pending",
   },
 
+  // NFT transfer failure tracking (Stripe path)
+  nftTransferFailed: { type: Boolean, default: false },
+  nftTransferError:  { type: String,  default: null },
+
+  // Payment intent ID for deduplication
+  paymentIntentId: { type: String, default: null, unique: true, sparse: true },
+
   // Additional metadata for flexibility
   metadata: {
     type: Object,

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import popularFallback from "../../assets/images/popular/popolar.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
@@ -16,6 +16,7 @@ const fadeUp = {
 };
 
 function PopularCollections() {
+  const navigate = useNavigate();
   const [marketData, setMarketData] = useState([]);
 
   const fetchMarketData = async () => {
@@ -109,11 +110,20 @@ function PopularCollections() {
                 </div>
 
                 <div className="mt-auto pt-2">
-                  <Link to="/market-place" className="block w-full">
-                    <button className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20">
-                      Buy Now
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => {
+                      const firstSub = data.subCollections?.[0];
+                      if (firstSub) {
+                        navigate("/buy-nfa", { state: { item: firstSub, parentId: data._id } });
+                      } else {
+                        const category = data.category || data.collection?.name?.toLowerCase()?.trim();
+                        navigate(category ? `/collections/${encodeURIComponent(category)}` : "/market-place");
+                      }
+                    }}
+                    className="w-full py-1.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-[10px] sm:text-xs rounded-md transition-all duration-300 border border-white/20"
+                  >
+                    Buy Now
+                  </button>
                 </div>
               </div>
             </motion.div>

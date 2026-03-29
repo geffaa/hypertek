@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import uploadIcon from "../../assets/images/CreateCollection/uploadIcon.png";
-import ChainIcon from "../../assets/images/CreateCollection/ChainIcon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { User_Dashboard_Url } from "../../Config";
+import { BACKEND_BASE_URL } from "../../Config";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { FiArrowLeft } from "react-icons/fi";
 
 function EditNfa() {
   const location = useLocation();
@@ -20,28 +20,22 @@ function EditNfa() {
     name: collection?.name || "",
     symbol: collection?.symbol || "",
     chain: collection?.chain || "",
-    Type: collection?.Type || "",
   });
 
   // If navigated here without state, go back
   if (!collection) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <p className="text-white/60 text-lg">No collection data found.</p>
+        <p className="text-white/60">No collection data found.</p>
         <button
-          onClick={() => navigate("/dashboard/nfa-details")}
-          className="px-6 py-2 bg-blue-800 hover:bg-blue-700 text-white rounded-md transition-colors"
+          onClick={() => navigate("/dashboard/collections")}
+          className="px-5 py-2 bg-blue-800 hover:bg-blue-700 text-white rounded-lg text-sm transition"
         >
-          Go to Collections
+          ← Go to Collections
         </button>
       </div>
     );
   }
-
-  const api = axios.create({
-    baseURL: User_Dashboard_Url,
-    headers: { Authorization: `Bearer ${token}` },
-  });
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -69,19 +63,18 @@ function EditNfa() {
     form.append("name", formData.name);
     form.append("symbol", formData.symbol);
     form.append("chain", formData.chain);
-    if (formData.Type) form.append("Type", formData.Type);
     if (imageFile) form.append("image", imageFile);
 
     try {
       setSubmitting(true);
-      const response = await api.put(
-        `/nft/user/collection/update/${id}`,
+      const response = await axios.put(
+        `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${id}`,
         form,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
       );
       if (response.data.success) {
         toast.success("Collection updated successfully");
-        navigate("/dashboard/nfa-details");
+        navigate("/dashboard/collections");
       }
     } catch (error) {
       console.error("UPDATE ERROR:", error);
@@ -94,7 +87,19 @@ function EditNfa() {
   return (
     <div className="flex flex-col min-h-screen bg-transparent overflow-x-hidden">
       <div className="relative z-50 w-full px-4 md:px-8">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 mt-10 md:mt-16">
+
+        {/* Header */}
+        <div className="flex items-center gap-3 mt-6 mb-8">
+          <button
+            onClick={() => navigate("/dashboard/collections")}
+            className="p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/5 transition-all"
+          >
+            <FiArrowLeft size={18} />
+          </button>
+          <h1 className="text-white font-semibold text-xl">Edit Collection</h1>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
 
           {/* Left — Image Upload */}
           <div
@@ -164,31 +169,16 @@ function EditNfa() {
             {/* Chain — fixed to Base */}
             <div className="flex flex-col gap-2">
               <label className="text-white text-base">Chain</label>
-              <div className="flex items-center gap-2 px-2 h-12 border border-gray-600/50 rounded-md bg-white/5 cursor-not-allowed">
-                <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: "linear-gradient(180deg, #2AAC4F 0%, #85F3BE 100%)" }}
-                >
-                  <img src={ChainIcon} alt="" className="w-[11px] h-[10px]" />
-                </div>
-                <span className="text-white/70 text-sm">Base</span>
-                <span className="ml-auto text-white/30 text-xs">Payments in USDC</span>
+              <div className="flex items-center gap-2 px-3 h-10 border border-white/8 rounded-lg bg-white/3 cursor-not-allowed">
+                <svg width="16" height="16" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                  <circle cx="55.5" cy="55.5" r="55.5" fill="#0052FF"/>
+                  <path d="M55.494 85.816C72.3 85.816 85.97 72.147 85.97 55.341c0-16.806-13.67-30.475-30.476-30.475-15.764 0-28.714 11.98-30.285 27.334h40.04v6.282H25.21c1.571 15.354 14.521 27.334 30.285 27.334z" fill="white"/>
+                </svg>
+                <span className="text-white/60 text-sm font-medium">Base</span>
+                <span className="ml-auto text-white/25 text-xs">Payments in USDC</span>
               </div>
             </div>
 
-            {/* Collection Type */}
-            <div className="flex flex-col gap-2">
-              <label className="text-white text-base">Collection Type</label>
-              <select
-                value={formData.Type}
-                onChange={(e) => setFormData({ ...formData, Type: e.target.value })}
-                className="w-full h-12 px-3 rounded-md bg-white/10 text-white border border-gray-600 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition-colors"
-              >
-                <option value="" className="text-black bg-gray-900">Select Type</option>
-                <option value="NFA" className="text-black bg-gray-900">NFA</option>
-                <option value="Land" className="text-black bg-gray-900">Land</option>
-              </select>
-            </div>
           </div>
         </div>
 

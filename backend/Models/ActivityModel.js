@@ -5,7 +5,7 @@ const activitySchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
 
     name: {
@@ -14,10 +14,14 @@ const activitySchema = new mongoose.Schema(
       trim: true,
     },
 
+    image: {
+      type: String,
+      default: null,
+    },
+
     type: {
       type: String,
       required: true,
-      enum: ["buy", "sell"],
     },
 
     buyer: {
@@ -41,22 +45,14 @@ const activitySchema = new mongoose.Schema(
       default: Date.now,
     },
 
-    // ============================
-    // 🔥 NEW IMPORTANT FIELDS
-    // ============================
-
     itemType: {
       type: String,
-      enum: ["land", "NFA"],
-      required: true,
+      default: "NFA",
     },
 
     itemId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      refPath: "itemType",
-      // When itemType = "land" → ref: "Land"
-      // When itemType = "marketplace" → ref: "Marketplace"
+      required: false,
     }
 
   },

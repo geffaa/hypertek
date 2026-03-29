@@ -54,11 +54,8 @@ const createActivity = async (req, res) => {
 // =========================
 const getTrades = async (req, res) => {
   try {
-    const trades = await Activity.find()
-      .sort({ createdAt: -1 })
-      .populate("itemId"); // auto-populate land or marketplace
-
-    res.status(200).json({ success: true, data: trades });
+    const trades = await Activity.find().sort({ createdAt: -1 });
+    res.status(200).json(trades);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

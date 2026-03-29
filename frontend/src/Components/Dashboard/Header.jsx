@@ -6,7 +6,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
-import { FaUserCircle } from "react-icons/fa";
 import NotificationIcon from "../../assets/notification.png";
 import NotificationDropdown from "./Notification";
 
@@ -23,7 +22,11 @@ const Header = ({ onMenuClick }) => {
   const [imageError, setImageError] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { user, token, isLoggedInUser } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
+  const displayName = user?.FullName || user?.UserName || user?.Email || "";
+  const initials = displayName
+    ? displayName.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()
+    : "?";
   const bellRef = useRef(null);
   const [hbBalance, setHbBalance] = useState(null);
 
@@ -147,31 +150,40 @@ const Header = ({ onMenuClick }) => {
           />
         </div>
 
-        {/* 👤 Animated Profile Picture */}
+        {/* 👤 Profile Button */}
         <div
-          className={`
-            relative w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl cursor-pointer
-            p-0.5 transition-all duration-700 ease-out
-            ${isProfileHovered ? "scale-110 rotate-3" : "shadow-lg"}
-          `}
+          className="flex items-center gap-2 cursor-pointer"
           onClick={() => navigate("/dashboard/edit-profile")}
           onMouseEnter={() => setIsProfileHovered(true)}
           onMouseLeave={() => setIsProfileHovered(false)}
+        >
+          {displayName && (
+            <span className="hidden md:block text-white/70 text-sm font-medium max-w-[120px] truncate">
+              {displayName.split(" ")[0]}
+            </span>
+          )}
+        <div
+          className={`
+            relative w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl
+            p-0.5 transition-all duration-700 ease-out
+            ${isProfileHovered ? "scale-110 rotate-3" : "shadow-lg"}
+          `}
         >
           <div className="w-full h-full overflow-hidden flex items-center justify-center rounded-full md:rounded-3xl">
             {userData?.Avatar && !imageError ? (
               <img
                 src={`${BACKEND_BASE_URL}${userData.Avatar}`}
                 alt="Profile"
-                className={`w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? "scale-110" : ""
-                  }`}
+                className={`w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? "scale-110" : ""}`}
                 onError={handleImageError}
               />
             ) : (
-              <FaUserCircle
-                className={`w-8 h-8 text-gray-400 transition-all duration-700 ${isProfileHovered ? "scale-110 text-blue-500" : ""
-                  }`}
-              />
+              <div
+                className="w-full h-full flex items-center justify-center text-white font-bold text-sm"
+                style={{ background: "linear-gradient(135deg, #002AA8 0%, #4F46E5 100%)" }}
+              >
+                {initials}
+              </div>
             )}
           </div>
 
@@ -181,8 +193,9 @@ const Header = ({ onMenuClick }) => {
               }`}
           />
         </div>
+        </div>{/* end profile wrapper */}
 
-      </div>
+      </div>{/* end header right */}
 
       {/* Animations */}
       <style jsx>{`

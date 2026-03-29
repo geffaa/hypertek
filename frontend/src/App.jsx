@@ -64,7 +64,7 @@ import WaitlistForm from "./pages/WaitlistForm";
 import WhitepaperPage from "./pages/WhitepaperPage";
 import TermsPage from "./pages/TermsPage";
 import Testing from "./pages/Testing";
-import UserDashboard from "./pages/UserDashboard";
+import DashboardHome from "./pages/DashboardHome";
 import OfferedReceived from "./pages/OfferedReceived";
 import NoOffered from "./pages/NoOffered";
 import WalletConnect from "./pages/WalletConnect";
@@ -89,6 +89,7 @@ import Transactions from "./pages/DashboardPages/Transaction";
 import Support from "./pages/DashboardPages/Support";
 import AddCollection from "./pages/DashboardPages/AddCollection";
 import CollectionOnSale from "./pages/DashboardPages/CollectionOnSale";
+import MyOffers from "./pages/DashboardPages/MyOffers";
 import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
 import Withdraw from "./pages/DashboardPages/Withdraw";
@@ -133,6 +134,7 @@ function AppWrapper() {
     "/dashboard/support",
     "/dashboard/add-collection",
     "/dashboard/collection-on-sale",
+    "/dashboard/my-offers",
     "/dashboard/edit-nfa",
     "/dashboard/add-nfts",
     "/dashboard/add-user-collection",
@@ -169,6 +171,7 @@ function AppWrapper() {
             <Route path="/whitepapers" element={<WhitepaperPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/market-place" element={<MarketPlace />} />
+            <Route path="/collections" element={<CategoryMarketplace />} />
             <Route path="/collections/:category" element={<CategoryMarketplace />} />
             <Route path="/nfa-expand" element={<NFA />} />
             <Route path="/land" element={<Land />} />
@@ -180,6 +183,7 @@ function AppWrapper() {
             <Route path="/buy-nfa" element={<BuyNfa />} />
             <Route path="/buy-land" element={<NfaLand />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/make-offer" element={<Payment />} />
             <Route path="/offer" element={<OfferPage />} />
             <Route path="/offer-recieved" element={<OfferedReceived />} />
 
@@ -231,7 +235,7 @@ function AppWrapper() {
               }
             >
               {/* Default dashboard home */}
-              <Route index element={<UserDashboard />} />
+              <Route index element={<DashboardHome />} />
 
               {/* Dashboard pages */}
               <Route path="create-nfa" element={<CreateCollections />} />
@@ -248,6 +252,7 @@ function AppWrapper() {
               <Route path="support" element={<Support />} />
               <Route path="add-nfts" element={<AddCollection />} />
               <Route path="collection-on-sale" element={<CollectionOnSale />} />
+              <Route path="my-offers" element={<MyOffers />} />
               <Route
                 path="add-user-collection"
                 element={<AddUserCollection />}

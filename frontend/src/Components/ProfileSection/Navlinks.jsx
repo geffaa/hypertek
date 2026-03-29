@@ -1,11 +1,11 @@
 // src/components/NavLinks.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 
-function NavLinks({ onSelectCategory, selectedCategory, categories, onCategoriesLoaded }) {
+function NavLinks({ onSelectCategory, selectedCategory, categories, onCategoriesLoaded, showAll, onSelectAll, onSelectStatic, activeStatic }) {
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -17,9 +17,9 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
     str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection";
 
   const staticTail = [
-    { name: "Activities", path: "/Activity" },
-    { name: "Listing", path: "/List" },
-    { name: "Offer", path: "/offer" },
+    { name: "Activities" },
+    { name: "Listing" },
+    { name: "My Offers" },
   ];
 
   // ---------- GLOBAL CATEGORIES ----------
@@ -134,11 +134,29 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
 
   // ---------- RENDER ----------
   return (
-    <ul className="flex flex-wrap gap-4 mt-5 lg:gap-10">
+    <ul className="flex overflow-x-auto gap-1 mt-5 pb-2 scrollbar-hide" style={{ scrollbarWidth: "none" }}>
+      {/* ALL TAB */}
+      {showAll && (
+        <li>
+          <button
+            onClick={() => {
+              onSelectAll?.();
+              if (typeof onSelectStatic === "function") onSelectStatic("");
+            }}
+            className={`whitespace-nowrap px-3 py-1.5 rounded-lg font-inter text-sm transition-colors flex-shrink-0 ${
+              !selectedCategory && !activeStatic
+                ? "bg-[#002AA8] text-white font-semibold"
+                : "text-white/70 hover:bg-white/10 hover:text-white font-medium"
+            }`}
+          >
+            All
+          </button>
+        </li>
+      )}
       {/* CATEGORY TABS */}
       {categoryTabs.map((cat) => {
         const isActive =
-          cat === (selectedCategory || "").toLowerCase().trim();
+          !activeStatic && cat === (selectedCategory || "").toLowerCase().trim();
 
         return (
           <li key={cat}>
@@ -146,52 +164,45 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
               onClick={() => {
                 navigate("/Profile", { state: { category: cat } });
                 onSelectCategory(cat);
+                if (typeof onSelectStatic === "function") onSelectStatic("");
               }}
-              className={`px-2 py-2 lg:px-[14px] lg:py-[4px]
-              rounded-[10px] font-inter text-sm lg:text-[16px]
-              transition-colors
-              ${isActive
+              className={`whitespace-nowrap px-3 py-1.5 rounded-lg font-inter text-sm transition-colors flex-shrink-0 ${
+                isActive
                   ? "bg-[#002AA8] text-white font-semibold"
-                  : "text-white hover:bg-white/10 font-medium"
-                }`}
+                  : "text-white/70 hover:bg-white/10 hover:text-white font-medium"
+              }`}
             >
-              {(() => {
-                if (!categories || categories.length === 0) return categoryNameCapitalized(cat);
-
-                const match = categories.find(
-                  ([categoryName, items]) => categoryName.toLowerCase().trim() === cat.toLowerCase().trim()
-                );
-
-                if (match && match[1]?.length > 0) {
-                  const firstItem = match[1][0];
-                  return firstItem.parentName || firstItem.collection?.name || categoryNameCapitalized(cat);
-                }
-
-                return categoryNameCapitalized(cat);
-              })()}   </button>
+              {categoryNameCapitalized(cat)}
+            </button>
           </li>
         );
       })}
 
+      {/* DIVIDER */}
+      <li className="flex items-center flex-shrink-0 px-1">
+        <span className="w-px h-4 bg-white/15" />
+      </li>
+
       {/* STATIC TABS */}
-      {staticTail.map((link) => (
-        <li key={link.path}>
-          <NavLink
-            to={link.path}
-            className={({ isActive }) =>
-              `px-2 py-2 lg:px-[14px] lg:py-[4px]
-              rounded-[10px] font-inter text-sm lg:text-[16px]
-              transition-colors
-              ${isActive
-                ? "bg-[#002AA8] text-white font-semibold"
-                : "text-white hover:bg-white/10 font-medium"
-              }`
-            }
-          >
-            {link.name}
-          </NavLink>
-        </li>
-      ))}
+      {staticTail.map((link) => {
+        const isStaticActive = activeStatic === link.name;
+        return (
+          <li key={link.name} className="flex-shrink-0">
+            <button
+              onClick={() => {
+                if (typeof onSelectStatic === "function") onSelectStatic(link.name);
+              }}
+              className={`whitespace-nowrap px-3 py-1.5 rounded-lg font-inter text-sm transition-colors block ${
+                isStaticActive
+                  ? "bg-[#002AA8] text-white font-semibold"
+                  : "text-white/70 hover:bg-white/10 hover:text-white font-medium"
+              }`}
+            >
+              {link.name}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -188,9 +188,7 @@ function PersonalActivity() {
                   </Link>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-b from-[#2AAC4F] to-[#85F3BE] flex items-center justify-center">
-                    <img src={TVector} className="w-3 h-3" alt="chain" />
-                  </div>
+                  <img src="/usdc-logo.svg" className="w-5 h-5" alt="USDC" />
                   <span className="text-lg font-bold text-white font-mono">
                     ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
                   </span>

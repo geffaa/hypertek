@@ -9,6 +9,12 @@ import {
 } from "../Service/blockchain.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
+import { markOfferCompleted } from "./Offer.js";
+import Activity from "../Models/ActivityModel.js";
+import Stripe from "stripe";
+import { Payment } from "../Models/Payment.js";
+import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
 async function saveImagePermanently(filePath, filename) {
@@ -37,6 +43,11 @@ async function saveImagePermanently(filePath, filename) {
 /**
  * Create Parent Collection (Characters, Land, etc.)
  */
+const VALID_CATEGORIES = [
+  "skins", "military badges and collectables", "specialists", "weapons",
+  "body armour", "spaceships", "racing vehicles", "artwork", "land and bases",
+];
+
 export async function createParentCollection(req, res) {
   try {
     const { name, symbol, Type, chain, owner, category } = req.body;
@@ -49,6 +60,13 @@ export async function createParentCollection(req, res) {
     if (!name || !symbol || !chain || !owner || !category) {
       return res.status(400).json({
         error: "Missing required fields: name, symbol, chain, owner, category",
+      });
+    }
+
+    const normalizedCategory = category.toLowerCase().trim();
+    if (!VALID_CATEGORIES.includes(normalizedCategory)) {
+      return res.status(400).json({
+        error: `Invalid category "${category}". Must be one of: ${VALID_CATEGORIES.join(", ")}`,
       });
     }
 
@@ -75,7 +93,7 @@ export async function createParentCollection(req, res) {
         creator: creatorType,
         salesCount: 0,
       },
-      category: category.toLowerCase(),
+      category: normalizedCategory,
       isParentCollection: true,
       subCollections: [],
       status: "active",
@@ -158,12 +176,16 @@ export async function addSubCollection(req, res) {
  */
 export async function getParentCollections(req, res) {
   try {
-    const { category } = req.query;
+    const { category, owner } = req.query;
 
     let query = { isParentCollection: true, status: "active" };
 
     if (category) {
       query.category = category.toLowerCase();
+    }
+
+    if (owner) {
+      query["collection.owner"] = owner.toLowerCase();
     }
 
     const collections = await NFTSystem.find(query)
@@ -1611,9 +1633,14 @@ export async function createSubCollectionListing(req, res) {
       priceETH,
     });
 
-    if (!tokenId || !seller || !priceETH) {
+    if (!seller || !priceETH) {
       return res.status(400).json({
-        error: "Missing required fields: tokenId, seller, priceETH",
+        error: "Missing required fields: seller, priceETH",
+      });
+    }
+    if (!tokenId && !subCollectionId && !parentId) {
+      return res.status(400).json({
+        error: "Must provide tokenId, subCollectionId, or parentId to identify the item",
       });
     }
 
@@ -1666,12 +1693,23 @@ export async function createSubCollectionListing(req, res) {
 
     console.log("✅ Found sub-collection:", subCollection._id);
 
-    // Verify ownership
-    if (subCollection.owner.toLowerCase() !== seller.toLowerCase()) {
-      return res.status(403).json({
-        error: "You don't own this sub-collection",
-        currentOwner: subCollection.owner,
-        providedSeller: seller,
+    // Verify ownership — skip if sub has no owner set (platform first-sale item)
+    if (subCollection.owner && subCollection.owner !== "admin") {
+      if (subCollection.owner.toLowerCase() !== seller.toLowerCase()) {
+        return res.status(403).json({
+          error: "You don't own this sub-collection",
+          currentOwner: subCollection.owner,
+          providedSeller: seller,
+        });
+      }
+    }
+
+    // Validate minimum buyback reserve for NFA items
+    if (subCollection.isNFA && subCollection.minimumBuybackUSD > 0 && parseFloat(priceETH) < subCollection.minimumBuybackUSD) {
+      return res.status(400).json({
+        error: `Price $${priceETH} is below the minimum buyback reserve of $${subCollection.minimumBuybackUSD}`,
+        code: "BELOW_RESERVE",
+        minimumBuybackUSD: subCollection.minimumBuybackUSD,
       });
     }
 
@@ -1679,6 +1717,7 @@ export async function createSubCollectionListing(req, res) {
     subCollection.listed = true;
     subCollection.priceETH = priceETH;
 
+    parent.markModified('subCollections');
     await parent.save();
 
     console.log(`✅ Sub-collection ${tokenId} listed for ${priceETH} ETH`);
@@ -1705,6 +1744,7 @@ export async function recordSubCollectionSale(req, res) {
       txHash,
       parentId,
       subCollectionId,
+      offerId,
     } = req.body;
 
     console.log("💰 Recording Sub-Collection Sale:", {
@@ -1717,10 +1757,16 @@ export async function recordSubCollectionSale(req, res) {
       subCollectionId,
     });
 
-    if (!tokenId || !buyer || !seller || !priceETH || !txHash) {
+    if (!buyer || !seller || !priceETH || !txHash) {
       return res.status(400).json({
         success: false,
-        error: "Missing required fields",
+        error: "Missing required fields: buyer, seller, priceETH, txHash",
+      });
+    }
+    if (!tokenId && !subCollectionId && !parentId) {
+      return res.status(400).json({
+        success: false,
+        error: "Must provide tokenId, subCollectionId, or parentId",
       });
     }
 
@@ -1795,11 +1841,13 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // Validate seller ownership
-    if (subCollection.owner.toLowerCase() !== seller.toLowerCase()) {
+    // If owner is undefined/null/"admin", it's a first-sale platform item — allow any valid seller
+    const currentOwner = subCollection.owner;
+    if (currentOwner && currentOwner !== "admin" && currentOwner.toLowerCase() !== seller.toLowerCase()) {
       return res.status(400).json({
         success: false,
         error: "Seller does not match sub-collection owner",
-        expectedSeller: subCollection.owner,
+        expectedSeller: currentOwner,
         providedSeller: seller,
       });
     }
@@ -1891,6 +1939,26 @@ export async function recordSubCollectionSale(req, res) {
       }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
     }
 
+    // Mark linked offer as completed (USDC on-chain purchase path)
+    if (offerId) {
+      markOfferCompleted(offerId).catch(err =>
+        console.warn("⚠️ [Offer] markOfferCompleted error:", err.message)
+      );
+    }
+
+    // Write to Activity log (non-blocking)
+    Activity.create({
+      name:     subCollection.name || parent.name || "NFT",
+      image:    subCollection.image || null,
+      type:     "Sale",
+      buyer:    buyer.toLowerCase(),
+      seller:   seller.toLowerCase(),
+      price:    priceUSDC,
+      time:     new Date(),
+      itemType: "NFA",
+      itemId:   parent._id,
+    }).catch(err => console.warn("⚠️ [Activity] create error:", err.message));
+
     return res.json({
       success: true,
       message: "Sub-collection sale recorded successfully",
@@ -1915,20 +1983,20 @@ export async function recordSubCollectionSale(req, res) {
 
 export async function cancelSubCollectionListing(req, res) {
   try {
-    const { nftId, tokenId } = req.body;
+    const { nftId, tokenId, subId } = req.body;
 
     console.log("🚀 CANCEL SUB-COLLECTION LISTING REQUEST:", {
       nftId,
       tokenId,
-      tokenIdType: typeof tokenId,
+      subId,
       time: new Date().toISOString(),
     });
 
     // 1. Validate required fields
-    if (!nftId || tokenId === undefined) {
+    if (!nftId || (!tokenId && !subId)) {
       return res.status(400).json({
         success: false,
-        error: "nftId and tokenId are required",
+        error: "nftId and either tokenId or subId are required",
       });
     }
 
@@ -1948,32 +2016,25 @@ export async function cancelSubCollectionListing(req, res) {
       subCollectionsCount: parent.subCollections?.length || 0,
     });
 
-    // 3. Convert tokenId to number
-    const tokenIdNum = parseInt(tokenId);
-    if (isNaN(tokenIdNum)) {
-      return res.status(400).json({
-        success: false,
-        error: `Invalid tokenId: ${tokenId}`,
-      });
+    // 3. Find sub-collection by subId first, then tokenId as fallback
+    let subCollection;
+    if (subId) {
+      subCollection = parent.subCollections.id(subId);
+      console.log("🔍 Looking for sub-collection with subId:", subId);
+    }
+    if (!subCollection && tokenId != null) {
+      const tokenIdNum = parseInt(tokenId);
+      if (!isNaN(tokenIdNum)) {
+        subCollection = parent.subCollections.find((sub) => sub.tokenId === tokenIdNum);
+        console.log("🔍 Looking for sub-collection with tokenId:", tokenIdNum);
+      }
     }
 
-    console.log("🔍 Looking for sub-collection with tokenId:", tokenIdNum);
-
-    // 4. Find sub-collection by tokenId
-    const subCollection = parent.subCollections.find(
-      (sub) => sub.tokenId === tokenIdNum,
-    );
-
     if (!subCollection) {
-      console.error("❌ Sub-collection not found with tokenId:", tokenIdNum);
-      console.log(
-        "Available tokenIds:",
-        parent.subCollections.map((sub) => sub.tokenId),
-      );
+      console.error("❌ Sub-collection not found. subId:", subId, "tokenId:", tokenId);
       return res.status(404).json({
         success: false,
-        error: `Sub-collection with tokenId ${tokenIdNum} not found`,
-        availableTokenIds: parent.subCollections.map((sub) => sub.tokenId),
+        error: `Sub-collection not found`,
       });
     }
 
@@ -1995,31 +2056,17 @@ export async function cancelSubCollectionListing(req, res) {
     await parent.save();
 
     console.log("✅ Successfully cancelled listing:", {
-      tokenId: tokenIdNum,
+      subId: subCollection._id,
+      tokenId: subCollection.tokenId,
       newListed: false,
-      newPriceETH: null,
-    });
-
-    // 7. Verify the update
-    const verifiedParent = await NFTSystem.findById(nftId);
-    const verifiedSub = verifiedParent.subCollections.find(
-      (sub) => sub.tokenId === tokenIdNum,
-    );
-
-    console.log("✅ Verification:", {
-      listed: verifiedSub.listed,
-      priceETH: verifiedSub.priceETH,
     });
 
     return res.json({
       success: true,
       message: "Listing cancelled successfully",
-      parentId: nftId, // ✅ Direct return for frontend
-      tokenId: tokenIdNum,
-      details: {
-        newListed: verifiedSub.listed,
-        newPriceETH: verifiedSub.priceETH,
-      },
+      parentId: nftId,
+      subId: subCollection._id,
+      tokenId: subCollection.tokenId,
     });
   } catch (err) {
     console.error("❌ CANCEL SUB-COLLECTION LISTING ERROR:", {
@@ -2109,12 +2156,14 @@ export async function getListedSubCollections(req, res) {
     const walletLower = walletAddress.toLowerCase();
 
     // Find parent collections with LISTED sub-collections owned by this wallet
+    // NOTE: do NOT filter on isParentCollection — some collections may have it false/unset
+    // but still have valid sub-collections. JS filter below is the authoritative check.
     const parents = await NFTSystem.find({
-      "subCollections.owner": walletLower,
-      "subCollections.listed": true,
+      subCollections: {
+        $elemMatch: { owner: walletLower, listed: true },
+      },
       status: "active",
-      isParentCollection: true,
-    }).select("collection.name collection.image category subCollections");
+    }).select("collection.name collection.image category subCollections isParentCollection");
 
     console.log("✅ Found parent collections:", parents.length);
 
@@ -2462,6 +2511,142 @@ export async function getUserTransactions(req, res) {
     return res.json({ success: true, transactions, count: transactions.length });
   } catch (err) {
     console.error("❌ GET USER TRANSACTIONS ERROR:", err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+}
+
+/**
+ * Get price history for a specific sub-collection NFT
+ * Returns its salesHistory array sorted oldest → newest (for charting)
+ */
+export async function getSubCollectionById(req, res) {
+  try {
+    const { subId } = req.params;
+    if (!subId) return res.status(400).json({ success: false, error: "subId is required" });
+
+    const parent = await NFTSystem.findOne(
+      { "subCollections._id": subId },
+      { "subCollections.$": 1, name: 1, symbol: 1, chain: 1, category: 1 }
+    );
+
+    if (!parent || !parent.subCollections?.length) {
+      return res.status(404).json({ success: false, error: "NFT not found" });
+    }
+
+    const sub = parent.subCollections[0].toObject();
+    // Inject parentId so Buy1.jsx can resolve it
+    sub.parentId = parent._id;
+
+    return res.json({ success: true, item: sub, parentId: parent._id });
+  } catch (err) {
+    console.error("❌ GET SUB-COLLECTION BY ID ERROR:", err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+}
+
+export async function getSubCollectionPriceHistory(req, res) {
+  try {
+    const { subId } = req.params;
+    if (!subId) {
+      return res.status(400).json({ success: false, error: "subId is required" });
+    }
+
+    const parent = await NFTSystem.findOne(
+      { "subCollections._id": subId },
+      { "subCollections.$": 1 }
+    );
+
+    if (!parent || !parent.subCollections?.length) {
+      return res.status(404).json({ success: false, error: "NFT not found" });
+    }
+
+    const sub = parent.subCollections[0];
+    const history = (sub.salesHistory || [])
+      .slice()
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      .map((s) => ({
+        price: s.priceETH,
+        buyer: s.buyer,
+        seller: s.seller,
+        txHash: s.txHash,
+        date: s.createdAt,
+        isFirstSale: s.isFirstSale,
+      }));
+
+    return res.json({ success: true, history });
+  } catch (err) {
+    console.error("❌ GET PRICE HISTORY ERROR:", err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+}
+
+/**
+ * POST /api/v1/nft/finalize-by-payment-intent
+ * Called directly by frontend after stripe.confirmPayment() succeeds.
+ * Re-verifies payment with Stripe before executing — safe without webhook.
+ * Webhook (if it fires in production) is deduplicated by paymentIntentId check.
+ */
+export async function finalizeByPaymentIntent(req, res) {
+  const { paymentIntentId, parentId, subCollectionId, buyerWallet, priceETH, offerId } = req.body;
+
+  if (!paymentIntentId || !subCollectionId || !buyerWallet) {
+    return res.status(400).json({ success: false, error: "Missing required fields" });
+  }
+
+  try {
+    // 1. Verify payment with Stripe
+    const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    if (intent.status !== "succeeded") {
+      return res.status(400).json({ success: false, error: `Payment not succeeded (status: ${intent.status})` });
+    }
+
+    // 2. Dedup — if webhook already processed this, return success without re-running
+    const existing = await Payment.findOne({ paymentIntentId });
+    if (existing && !existing.nftTransferFailed) {
+      console.log("ℹ️ [finalizeByPaymentIntent] Already processed by webhook:", paymentIntentId);
+      return res.json({ success: true, alreadyProcessed: true });
+    }
+
+    // 3. Record payment (if not already recorded by webhook)
+    if (!existing) {
+      await Payment.create({
+        userId: intent.metadata?.userId || "unknown",
+        gameTitle: intent.metadata?.gameTitle || "NFT Purchase",
+        amount: intent.amount,
+        currency: intent.currency,
+        provider: "stripe",
+        transactionId: paymentIntentId,
+        paymentIntentId,
+        status: "succeeded",
+        itemType: "nft",
+        parentId: parentId || null,
+        subCollectionId,
+        buyerWallet,
+        productId: intent.metadata?.productId || subCollectionId,
+      }).catch(() => {});
+    }
+
+    // 4. Finalize NFT transfer
+    const result = await finalizeNFAPurchase({
+      parentId: parentId || null,
+      subCollectionId,
+      buyerWallet,
+      priceETH: parseFloat(priceETH || 0),
+      paymentProvider: "stripe",
+      paymentIntentId,
+    });
+
+    // 5. Mark offer completed if applicable
+    if (offerId) {
+      markOfferCompleted(offerId).catch(err =>
+        console.warn("⚠️ [Offer] markOfferCompleted error:", err.message)
+      );
+    }
+
+    console.log("✅ [finalizeByPaymentIntent] Done:", result);
+    return res.json({ success: true, result });
+  } catch (err) {
+    console.error("❌ [finalizeByPaymentIntent] Error:", err.message);
     return res.status(500).json({ success: false, error: err.message });
   }
 }

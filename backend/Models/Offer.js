@@ -60,7 +60,7 @@ const offerSchema = new mongoose.Schema(
 
     requestStatus: {
       type: String,
-      enum: ["pending", "accepted", "rejected", "cancelled"],
+      enum: ["pending", "accepted", "rejected", "cancelled", "completed"],
       default: "pending",
     },
     paymentStatus: {
@@ -68,6 +68,9 @@ const offerSchema = new mongoose.Schema(
       enum: ["unpaid", "paid", "refunded"],
       default: "unpaid",
     },
+    // Set when seller accepts — buyer has 48 h to complete payment
+    acceptedAt:      { type: Date, default: null },
+    acceptDeadlineAt: { type: Date, default: null },
   },
   { timestamps: true }
 );

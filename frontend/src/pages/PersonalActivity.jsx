@@ -50,7 +50,10 @@ export default function PersonalActivity() {
 
   useEffect(() => {
     axios.get(`${BACKEND_BASE_URL}/api/v1/activity/getActivity`)
-      .then(r => setRows(r.data?.length ? r.data : []))
+      .then(r => {
+        const data = Array.isArray(r.data) ? r.data : (r.data?.data || []);
+        setRows(data);
+      })
       .catch(() => setRows([]))
       .finally(() => setLoading(false));
   }, []);
@@ -165,7 +168,7 @@ export default function PersonalActivity() {
 
                     {/* Price */}
                     <span className="text-white/80 text-[13px] font-semibold text-right">
-                      {item.price ? `$${Number(item.price).toLocaleString()}` : "—"}
+                      {item.price ? `$${parseFloat(Number(item.price).toPrecision(4))}` : "—"}
                     </span>
 
                     {/* Time */}

@@ -1,4 +1,5 @@
 import NFTSystem from "../Models/NFTSystem.js";
+import Activity from "../Models/ActivityModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import dotenv from "dotenv";
@@ -135,7 +136,7 @@ export async function finalizeNFAPurchase({
     const platformWallet = (process.env.PLATFORM_WALLET_ADDRESS || "").toLowerCase();
     if (subCollection.owner.toLowerCase() === platformWallet || subCollection.owner.toLowerCase() === "admin") {
       console.log("📦 Transferring already minted NFT from platform to buyer...");
-      const chainId = 84532;
+      const chainId = 84532; // Base Sepolia Testnet
       const { nftContract, wallet: backendWalletObj } = getBlockchain(chainId);
       const backendWallet = await backendWalletObj.getAddress();
       
@@ -224,6 +225,19 @@ export async function finalizeNFAPurchase({
   await parent.save();
 
   console.log(`✅ [finalizeNFAPurchase] COMPLETED! Token #${tokenId} owner is now ${buyerWallet}`);
+
+  // Write to Activity log (non-blocking)
+  Activity.create({
+    name:     subCollection.name || parent.name || "NFT",
+    image:    subCollection.image || null,
+    type:     "Sale",
+    buyer:    buyerWallet.toLowerCase(),
+    seller:   seller.toLowerCase(),
+    price:    cleanPrice,
+    time:     new Date(),
+    itemType: "NFA",
+    itemId:   parent._id,
+  }).catch(err => console.warn("⚠️ [Activity] create error:", err.message));
 
   // Dispatch creator/artist royalty (4%) — async, non-blocking
   if (royaltyPaid > 0 && creatorWallet && creatorWallet !== "admin") {

@@ -1,5 +1,4 @@
 import { Volume2, VolumeX } from "lucide-react";
-import overview1 from "../../assets/images/Overview/overview1.jpg";
 import useSiteContent from "../../hooks/useSiteContent";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -7,7 +6,7 @@ import { BACKEND_BASE_URL } from "../../Config";
  * Full-width marketplace hero banner — driven by CMS (marketplace_banner section).
  *
  * Props:
- *   stats        — array of { num, label } shown at the bottom-left
+ *   stats        — array of { num, label } shown below the description
  *   titleOverride — if provided, replaces the CMS heading (used for category pages)
  *   descOverride  — if provided, replaces the CMS description
  *   playing       — boolean, current audio state (controlled by parent)
@@ -19,7 +18,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
   const heading = titleOverride || cms.heading     || "A New Era Dawns in Hyper Tek";
   const desc    = descOverride  || cms.description || "It's the start of a living, breathing universe where every decision shapes the journey.";
 
-  let bgImage = overview1;
+  let bgImage = "/marketplace_banner.png";
   if (cms.background_image) {
     bgImage = cms.background_image.startsWith("http")
       ? cms.background_image
@@ -28,14 +27,14 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
 
   return (
     <div
-      className={`relative w-full h-60 md:h-72 lg:h-[280px] shadow-lg ${noMargin ? "" : "mb-8"}`}
+      className={`relative w-full h-60 md:h-72 lg:h-[280px] shadow-lg flex items-center ${noMargin ? "" : "mb-8"}`}
       style={{
         backgroundImage: `
           linear-gradient(
             to right,
-            rgba(0,0,0,0.85) 0%,
-            rgba(0,0,0,0.55) 40%,
-            rgba(0,0,0,0.15) 65%,
+            rgba(0,0,0,0.88) 0%,
+            rgba(0,0,0,0.6) 45%,
+            rgba(0,0,0,0.2) 70%,
             rgba(0,0,0,0)    100%
           ),
           url(${bgImage})
@@ -45,14 +44,30 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Heading + Description */}
-      <div className="absolute top-4 left-4 lg:top-5 lg:left-12 w-[90%] lg:w-[860px]">
-        <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-2">
+      {/* Content — vertically centered via flex parent */}
+      <div className="px-4 lg:px-12 w-full max-w-[900px]">
+        <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-1.5">
           {heading}
         </h1>
-        <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] leading-relaxed text-white/90">
+        <p className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[16px] leading-relaxed text-white/80 mb-4">
           {desc}
         </p>
+
+        {/* Stats — directly below description, compact */}
+        {stats.length > 0 && (
+          <div className="flex flex-wrap gap-5 lg:gap-6">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                <span className="text-base md:text-lg font-semibold text-white">
+                  {stat.num}
+                </span>
+                <span className="text-[11px] md:text-xs font-normal text-white/60">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Audio toggle — top right */}
@@ -73,22 +88,6 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
           }
           <span className="hidden sm:inline">{playing ? "Sound On" : "Sound Off"}</span>
         </button>
-      )}
-
-      {/* Stats */}
-      {stats.length > 0 && (
-        <div className="absolute bottom-6 left-4 lg:bottom-auto lg:top-[185px] lg:left-12 flex flex-wrap gap-4 lg:gap-[18px]">
-          {stats.map((stat, i) => (
-            <div key={i} className="flex flex-col gap-1">
-              <span className="text-sm md:text-[16px] md:w-[86px] font-medium text-white">
-                {stat.num}
-              </span>
-              <span className="text-xs md:text-[12px] font-normal text-white/80">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
       )}
     </div>
   );
