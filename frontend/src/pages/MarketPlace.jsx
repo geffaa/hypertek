@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Volume2, VolumeX } from "lucide-react";
 import axios from "axios";
 import MarketNavBar      from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
@@ -13,6 +12,7 @@ import QuestsTab         from "../Components/MarketPlaceCom/tabs/QuestsTab";
 import HireRentTab       from "../Components/MarketPlaceCom/tabs/HireRentTab";
 import BountyTab         from "../Components/MarketPlaceCom/tabs/BountyTab";
 import MyMarketTab       from "../Components/MarketPlaceCom/tabs/MyMarketTab";
+import MusicPlayer        from "../Components/MarketPlaceCom/MusicPlayer";
 import { BACKEND_BASE_URL } from "../Config";
 
 // Navbar height = py-3 (24px) + h-12 logo (48px) = 72px
@@ -22,29 +22,6 @@ function MarketPlace() {
   const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
-
-  // ── Ambient audio (default: play on mount, loop) ───────────────────────────
-  const audioRef = useRef(null);
-  const [playing, setPlaying] = useState(true); // optimistic default = on
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    // Attempt autoplay; fail silently — button stays "Sound On" as intended default
-    audio.play().catch(() => {});
-    return () => { audio.pause(); };
-  }, []);
-
-  const toggleAudio = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      audio.play().then(() => setPlaying(true)).catch(() => {});
-    }
-  };
 
   // ── Banner stats from API ──────────────────────────────────────────────────
   const [bannerStats, setBannerStats] = useState({
@@ -119,9 +96,6 @@ function MarketPlace() {
   return (
     <div className="min-h-screen bg-transparent relative z-10">
 
-      {/* Ambient sound — drop .mp3 at public/audio/marketplace_ambient.mp3 */}
-      <audio ref={audioRef} src="/audio/marketplace_ambient.mp3" loop preload="auto" />
-
       {/* ── B: Hero Banner — flush to site header */}
       <div ref={bannerRef} className="mt-[72px]">
         <MarketplaceBanner
@@ -145,20 +119,7 @@ function MarketPlace() {
             onSearch={setSearch}
             className="flex-1 min-w-0"
           />
-          {/* Sound toggle — always visible in sticky nav */}
-          <button
-            onClick={toggleAudio}
-            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200"
-            style={{
-              background: "rgba(255,255,255,0.07)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              color: playing ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.4)",
-            }}
-            title={playing ? "Mute ambient sound" : "Play ambient sound"}
-          >
-            {playing ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-            <span className="hidden sm:inline">{playing ? "Sound On" : "Sound Off"}</span>
-          </button>
+          <MusicPlayer />
         </div>
       </div>
 

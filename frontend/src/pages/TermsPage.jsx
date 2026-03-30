@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 const LAST_UPDATED = "20.03.2026";
-
-const SIDEBAR_LINKS = [
-  { label: "Terms of Service", href: "/terms", active: true },
-];
 
 const SECTIONS = [
   { id: "s1",  title: "1. Agreement to Terms" },
@@ -32,9 +27,9 @@ const SECTIONS = [
 
 function S({ id, title, children }) {
   return (
-    <div id={id} className="mb-10 scroll-mt-24">
-      <h2 className="font-semibold text-sm text-white mb-3">{title}</h2>
-      <div className="text-white/60 text-sm leading-relaxed space-y-3 text-justify">{children}</div>
+    <div id={id} className="mb-12 scroll-mt-24">
+      <h2 className="font-semibold text-xl text-white mb-4">{title}</h2>
+      <div className="text-white/65 text-[17px] leading-[1.9] space-y-4 text-justify">{children}</div>
     </div>
   );
 }
@@ -90,22 +85,14 @@ export default function TermsPage() {
             padding: "32px 16px 32px 0",
           }}
         >
-          {SIDEBAR_LINKS.map((l) => (
-            <Link
-              key={l.label}
-              to={l.href}
-              className="block px-3 py-2 rounded-lg text-sm mb-0.5 transition-colors"
-              style={{
-                background:  l.active ? "rgba(0,42,168,0.35)"  : "transparent",
-                color:       l.active ? "#fff"                  : "rgba(255,255,255,0.45)",
-                borderLeft:  l.active ? "2px solid #002AA8"    : "2px solid transparent",
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
+          <Link
+            to="/"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-white/50 hover:text-white/90 transition-colors mb-5"
+          >
+            ← Back to Home
+          </Link>
 
-          <p className="text-white/30 text-[10px] uppercase tracking-widest font-semibold mt-7 mb-2">
+          <p className="text-white/30 text-[10px] uppercase tracking-widest font-semibold mb-2">
             Sections
           </p>
           {SECTIONS.map(({ id, title }) => (
@@ -126,9 +113,9 @@ export default function TermsPage() {
         {/* ── MAIN CONTENT ── */}
         <main className="px-10 py-10">
           <h1 className="font-bold text-2xl md:text-3xl mb-1">Terms of Service</h1>
-          <p className="text-white/35 text-xs mb-8">Last Updated: {LAST_UPDATED}</p>
+          <p className="text-white/35 text-sm mb-8">Last Updated: {LAST_UPDATED}</p>
 
-          <p className="text-white/60 text-sm leading-relaxed mb-8 text-justify">
+          <p className="text-white/65 text-[17px] leading-[1.9] mb-8 text-justify">
             Please read these Terms of Service (the{" "}
             <strong className="text-white/85">"Terms"</strong>) and our Privacy Policy (
             <strong className="text-white/85">"Privacy Policy"</strong>) carefully because they
@@ -160,13 +147,13 @@ export default function TermsPage() {
           </p>
 
           <div
-            className="rounded-xl p-5 mb-10 text-xs leading-relaxed text-justify"
+            className="rounded-xl p-5 mb-10 text-sm leading-relaxed text-justify"
             style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}
           >
             <strong className="text-white block mb-1 uppercase tracking-wider">
               Important Notice Regarding Arbitration
             </strong>
-            <span className="text-white/60">
+            <span className="text-white/65">
               WHEN YOU AGREE TO THESE TERMS YOU ARE AGREEING (WITH LIMITED EXCEPTION) TO
               RESOLVE ANY DISPUTE BETWEEN YOU AND HT THROUGH BINDING, INDIVIDUAL ARBITRATION
               RATHER THAN IN COURT. PLEASE REVIEW CAREFULLY SECTION 18 "DISPUTE RESOLUTION"
@@ -211,7 +198,7 @@ export default function TermsPage() {
                 <thead>
                   <tr style={{ background: "rgba(255,255,255,0.05)" }}>
                     {["Asset Type","Seller","Artist / Creator","Buyback Fund","HyperTek"].map((h) => (
-                      <th key={h} className="text-left px-4 py-2.5 text-white/50 font-medium">{h}</th>
+                      <th key={h} className="text-left px-4 py-2.5 text-white/50 font-medium text-sm">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -222,8 +209,8 @@ export default function TermsPage() {
                     ["Materials (HB)", "80%", "—",  "—",  "20%"],
                   ].map(([type, ...cols]) => (
                     <tr key={type} style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                      <td className="px-4 py-2.5 text-white/70 font-medium">{type}</td>
-                      {cols.map((v, i) => <td key={i} className="px-4 py-2.5 text-white/60">{v}</td>)}
+                      <td className="px-4 py-2.5 text-white/70 font-medium text-sm">{type}</td>
+                      {cols.map((v, i) => <td key={i} className="px-4 py-2.5 text-white/60 text-sm">{v}</td>)}
                     </tr>
                   ))}
                 </tbody>

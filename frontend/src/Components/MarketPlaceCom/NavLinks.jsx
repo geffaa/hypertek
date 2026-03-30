@@ -3,14 +3,14 @@ import { Search } from "lucide-react";
 // Fixed tabs per Don's brief
 // (no dynamic links from parent-collections anymore)
 const TABS = [
-  { key: "overview",  label: "Overview"      },
-  { key: "general",   label: "General"       },
-  { key: "nfa101",    label: "NFAs / NFCs 101" },
-  { key: "auctions",  label: "Auctions"      },
-  { key: "quests",    label: "Quests / Trades" },
-  { key: "hire",      label: "Hire / Rent"   },
-  { key: "bounty",    label: "Bounty"        },
-  { key: "mymarket",  label: "My Market"     },
+  { key: "overview",  label: "Overview"         },
+  { key: "nfa101",    label: "NFAs / NFTs"       },
+  { key: "general",   label: "The Marketplace"   },
+  { key: "auctions",  label: "Auctions"          },
+  { key: "quests",    label: "Quests / Trades"   },
+  { key: "hire",      label: "For Hire"          },
+  { key: "bounty",    label: "Bounty"            },
+  { key: "mymarket",  label: "My Collections"    },
 ];
 
 // Props: activeTab, onTabChange, search, onSearch

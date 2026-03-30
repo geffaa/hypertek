@@ -9,7 +9,7 @@
  * Run:
  *   node scripts/seedMarketplace.js
  *
- * Safe to re-run: skips any parent collection whose name already exists.
+ * Safe to re-run: skips parent collections that already exist; NFT 101 articles are always deleted and re-inserted fresh.
  */
 
 import mongoose from "mongoose";
@@ -143,109 +143,229 @@ const NFT_101_DATA = [
   {
     title: "What is an NFT?",
     description: "An NFT (Non-Fungible Token) is a unique digital asset verified on the blockchain. Each one is one-of-a-kind and cannot be replicated.",
+    image: "https://images.unsplash.com/photo-1644088379091-d574269d422f?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "NFT stands for Non-Fungible Token — a unique digital asset stored on a blockchain. Unlike regular digital files that can be copied infinitely, each NFT has a unique identifier that proves its authenticity and ownership on a public ledger. No two NFTs are identical, even if they represent visually similar images.",
+      "Think of it like a certificate of ownership for a digital item — whether that's a piece of art, a music track, a video game skin, or a character. The NFT itself lives on the blockchain, meaning no single company controls it and ownership is transparent and verifiable by anyone in the world at any time.",
+      "NFTs have revolutionized how creators monetize their work. Artists can now sell directly to collectors worldwide without galleries or platforms taking large cuts. Every time an NFT is resold, the original creator can receive royalties automatically through smart contracts — a permanent, passive income stream embedded in the token itself.",
+      "The ownership history of every NFT is permanently public. You can trace exactly who has owned a given token since it was minted. This provenance record adds significant value for collectors, similar to how a physical artwork gains value from a documented ownership chain through notable collectors or institutions.",
+      "Beyond art, NFTs have practical utility as access passes, memberships, game items, domain names, and financial instruments. In HyperTek, every in-game asset — from a soldier character to a spaceship — is an NFT. This means your in-game progress translates into real, tradeable digital value that exists independently of the game itself.",
+      "The technology underpinning NFTs continues to evolve. Standards like ERC-721 and ERC-1155 define how these tokens behave on Ethereum-compatible blockchains. Layer-2 networks like Base have dramatically reduced the cost of minting and transferring NFTs, making the ecosystem accessible to everyday users rather than only high-budget collectors.",
+    ],
     icon: "🖼️",
     gradientFrom: "#1a4fd6",
     gradientTo: "#0e2d8a",
-    link: "#",
     order: 1,
   },
   {
-    title: "How to buy an NFT",
+    title: "How to Buy an NFT",
     description: "Connect your crypto wallet, browse the marketplace, select an item and click Buy Now. Confirm the transaction in your wallet.",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "Buying an NFT is simpler than most people think. You need three things: a crypto wallet, some cryptocurrency (usually ETH or USDC), and access to a marketplace like HyperTek. The entire process from account creation to completing your first purchase can take less than ten minutes.",
+      "Once your wallet is connected and funded, browse the marketplace, click on an item you want, and hit 'Buy Now.' Your wallet will ask you to confirm the transaction and display the total cost including any gas fees. Once confirmed, the NFT is transferred to your wallet address — permanently recorded on the blockchain.",
+      "On HyperTek, you don't even need crypto initially. You can sign up with your email and pay with a credit card. HyperTek automatically creates a custodial wallet for you, lowering the barrier to entry dramatically for newcomers who have never interacted with crypto before.",
+      "Before completing any purchase, always review the seller's history, the collection's contract address, and the item's transaction history. A reputable NFT will have a clear provenance trail and the collection will match the official contract address listed on the project's verified channels.",
+      "Auction-based purchases work differently from direct sales. You place a bid, and if no higher bid is submitted before the timer expires, you win the item. The smart contract automatically transfers the NFT to you and the payment to the seller — no manual handover, no escrow, no counterparty risk.",
+      "After purchase, your NFT appears immediately in your wallet and your HyperTek profile. From there you can display it, list it for resale, use it in game, or hold it as a long-term investment. The choice is entirely yours — the platform has no ability to revoke or modify your ownership.",
+    ],
     icon: "🛒",
     gradientFrom: "#16a34a",
     gradientTo: "#064e1e",
-    link: "#",
     order: 2,
   },
   {
-    title: "What is minting?",
+    title: "What is Minting?",
     description: "Minting is the process of creating a new NFT on the blockchain — publishing a unique token that represents ownership of a digital asset.",
+    image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "Minting an NFT means publishing a digital asset onto the blockchain for the first time. The process converts your file — image, video, audio, or 3D model — into a token with a unique ID, creating an immutable record of its existence and your ownership at a specific point in time.",
+      "When you mint, a transaction is written to the blockchain. This transaction contains metadata about your asset: the file URI, title, description, and any royalty settings you choose. From this moment on, the NFT exists independently of any platform. Even if HyperTek ceased to exist, your token would remain on-chain.",
+      "On HyperTek, minting is handled through the platform's guided tools, which abstract away the technical complexity. You upload your asset, set a price, configure royalty percentages, and the platform handles the smart contract interaction entirely — no command line, no Solidity knowledge, and no technical background required.",
+      "Minting costs a small gas fee paid to the blockchain network for processing your transaction. On Base (HyperTek's underlying chain), these fees are fractions of a cent — a dramatic improvement over early NFT minting on Ethereum mainnet, where fees could run into hundreds of dollars during peak congestion.",
+      "Lazy minting is a variant where the NFT is not actually written to the blockchain until the first buyer purchases it. This means creators pay no upfront minting costs — the buyer's transaction covers the minting fee. HyperTek supports lazy minting for eligible asset types, making it completely free to create and list your first NFT.",
+      "Once minted, the metadata attached to your NFT becomes permanent. Choose your title, description, and category carefully — these fields cannot be edited after minting. The immutability of this data is a core part of what gives NFTs their authenticity and long-term collector value.",
+    ],
     icon: "⚡",
     gradientFrom: "#7c3aed",
     gradientTo: "#3b0f8a",
-    link: "#",
     order: 3,
   },
   {
-    title: "How to stay protected in Web3",
+    title: "How to Stay Protected in Web3",
     description: "Never share your seed phrase. Use hardware wallets for high-value assets and always verify contract addresses before signing transactions.",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+    category: "Security",
+    readTime: 6,
+    body: [
+      "Security in Web3 starts with your seed phrase — the 12 or 24 words that unlock your wallet. This phrase should never be shared with anyone, ever. Not with support teams, not with friends, not with platforms. Anyone who has it can drain your wallet instantly and irreversibly. There is no 'forgot password' in crypto.",
+      "Always verify the contract address of any NFT before purchasing. Scammers frequently create look-alike collections with near-identical names and stolen artwork. Cross-reference the contract address against the official project website or trusted aggregators like OpenSea's verified badge before completing any transaction.",
+      "Consider using a hardware wallet like Ledger or Trezor for high-value assets. Hardware wallets keep your private keys offline, making them immune to online attacks, phishing sites, and malware. For everyday trading, use a 'hot' wallet funded only with what you need for that session — treat it like a cash wallet, not a savings account.",
+      "Be deeply skeptical of unsolicited NFTs appearing in your wallet. Attackers airdrop malicious tokens designed to drain your funds the moment you try to interact with or sell them. Never click 'approve' or 'sign' on any transaction initiated by an unknown NFT — simply hide or ignore these items in your wallet interface.",
+      "Phishing is the most common attack vector in Web3. Fake websites impersonating popular marketplaces are distributed through social media ads, Discord links, and email. Before connecting your wallet, triple-check the URL — a single character difference (e.g., 'hypertek.io' vs 'hypert3k.io') may indicate a malicious clone site.",
+      "Enable transaction simulation in your wallet software when available. Modern wallets like MetaMask and Rainbow can simulate what a transaction will do before you sign it — showing you exactly which tokens will leave and enter your wallet. If the simulation shows unexpected transfers, reject the transaction immediately regardless of what a website tells you.",
+    ],
     icon: "🛡️",
     gradientFrom: "#0891b2",
     gradientTo: "#0c4a6e",
-    link: "#",
     order: 4,
   },
   {
-    title: "How to create an NFT",
+    title: "How to Create an NFT",
     description: "Prepare your digital asset, connect your wallet, use the HyperTek minting tool, set your price, and publish it to the marketplace.",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "Creating an NFT on HyperTek is a straightforward process. Start by preparing your digital file — this could be a piece of artwork, a 3D model, a character design, audio clip, or any digital content you own full rights to. File format and quality matter: high-resolution assets command higher prices and age better in collector libraries.",
+      "Connect your wallet to HyperTek's minting interface, upload your file, fill in the title, description, and royalty percentage — the cut you receive on every future resale — then set your initial listing price and publish. Each of these fields directly affects your asset's discoverability and long-term value.",
+      "Your NFT will be reviewed against platform content guidelines and then listed on the marketplace. Once live, anyone browsing the marketplace can view, share, and purchase it. HyperTek's search and filter system ensures your creation is surfaced to the right buyers.",
+      "Setting the right royalty percentage is important. Too low and you miss out on secondary market revenue; too high and resellers are disincentivized from buying. Industry standard royalties for NFTs range between 5% and 10%. HyperTek enforces royalties on-chain, so every future sale automatically sends your cut to your wallet.",
+      "If your asset qualifies under HyperTek's NFA criteria — meaning it meets the minimum quality, utility, and value thresholds defined in the platform's asset policy — it may be enrolled in the buyback guarantee program. This gives it a financial floor that protects both creator and collector from a complete loss of value.",
+      "Once your NFT is listed, promote it through your social channels. Collectors discover new assets through creator communities, Discord servers, and Twitter. HyperTek's platform amplifies high-quality listings through featured sections and category highlights, but grassroots community building remains the most effective long-term strategy for creators.",
+    ],
     icon: "✨",
     gradientFrom: "#ea580c",
     gradientTo: "#7c2d12",
-    link: "#",
     order: 5,
   },
   {
-    title: "How to sell an NFT",
+    title: "How to Sell an NFT",
     description: "List your NFT on the marketplace by setting a price, approving the contract, and confirming the listing transaction in your wallet.",
+    image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "To sell an NFT you own, navigate to your 'My Collections' section on HyperTek. Find the item you want to list, click 'List for Sale,' and set your asking price in USDC. You can also choose to run an auction with a starting bid and timer if you believe competitive bidding might yield a higher final price.",
+      "You will need to approve the marketplace contract to handle the transfer — this is a one-time step per collection. This approval grants the marketplace contract permission to move your NFT on your behalf when a buyer's payment is confirmed. It does not give the contract access to any other assets in your wallet.",
+      "Once your listing is active, it appears immediately in the marketplace feed and is indexed by HyperTek's search system. You can edit the price or delist the item at any time before a sale completes — there is no lock-in period for standard fixed-price listings.",
+      "When someone purchases your NFT, funds are distributed automatically by the smart contract: the platform fee (20%) is deducted, any creator royalties for secondary sales are routed to the original creator, and the remainder is deposited directly to your connected wallet. The entire process is instant and trustless.",
+      "On HyperTek, sellers can choose how to access their earnings — USDC to your wallet, Hyper Bucks credited to your platform balance for in-app purchases, or a bank transfer request processed through the platform's fiat off-ramp service. This flexibility makes HyperTek accessible to both crypto-native and traditional users.",
+      "Timing matters in NFT sales. Market activity fluctuates with broader crypto sentiment, game update cycles, and community events. Listing during a HyperTek game launch or in-game event typically drives higher buyer traffic and faster sales at stronger prices. Monitor the marketplace for peak activity windows before listing high-value assets.",
+    ],
     icon: "💰",
     gradientFrom: "#dc2626",
     gradientTo: "#7f1d1d",
-    link: "#",
     order: 6,
   },
   {
-    title: "What is a crypto wallet?",
+    title: "What is a Crypto Wallet?",
     description: "A crypto wallet stores your private keys and lets you interact with blockchains. Popular options include MetaMask and Rainbow Wallet.",
+    image: "https://images.unsplash.com/photo-1622630998477-20aa696ecb05?auto=format&fit=crop&w=800&q=80",
+    category: "Basics",
+    readTime: 5,
+    body: [
+      "A crypto wallet is software (or hardware) that stores your private keys and lets you interact with blockchains. Think of it as a combination of a bank account and a keyring — it doesn't store your tokens directly on the device, but holds the cryptographic keys that prove you own them on-chain.",
+      "There are two main categories: hot wallets (software-based, always online — e.g., MetaMask, Rainbow, Coinbase Wallet) and cold wallets (hardware-based, offline — e.g., Ledger, Trezor). Hot wallets are convenient for daily use and free to set up; cold wallets offer superior security for storing large or high-value balances.",
+      "On HyperTek, new users receive a custodial wallet automatically on signup — HyperTek manages the private keys on your behalf in a secure enclave. This removes all technical complexity for beginners and lets you start buying and trading immediately without understanding cryptography.",
+      "As you grow more comfortable with Web3, you can migrate your HyperTek assets to a self-custodial wallet. This means you — and only you — control the private keys. Self-custody is considered the gold standard for serious collectors, as no company can freeze, seize, or lose access to your assets.",
+      "Your wallet address is your public identity on the blockchain. It looks like a long string of characters (e.g., 0x1234...abcd) and functions like a bank account number — anyone can send assets to it, but only you can authorize outgoing transactions using your private key or seed phrase.",
+      "Never store your seed phrase digitally — not in your email, cloud storage, notes app, or screenshots. Write it on paper and store it in a physically secure location. Some users engrave seed phrases on metal plates for fire and water resistance. This single piece of information is the master key to everything in your wallet.",
+    ],
     icon: "👛",
     gradientFrom: "#4338ca",
     gradientTo: "#1e1b4b",
-    link: "#",
     order: 7,
   },
   {
-    title: "What is blockchain?",
+    title: "What is Blockchain?",
     description: "A blockchain is a distributed ledger that records all transactions transparently and immutably, making it impossible to tamper with records.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    category: "Blockchain",
+    readTime: 6,
+    body: [
+      "A blockchain is a distributed ledger — a database shared and synchronized across thousands of computers worldwide. Each 'block' contains a batch of confirmed transactions, and each block is cryptographically linked to the one before it, forming an unalterable chain extending back to the very first transaction ever recorded.",
+      "This design makes blockchains extremely resistant to tampering. To alter any historical record, an attacker would need to rewrite every subsequent block and simultaneously control more than 50% of the network's computing power — computationally and economically infeasible in any major blockchain. This is why 'the blockchain is immutable' is a foundational principle of Web3.",
+      "Ethereum is the most widely used blockchain for NFTs and smart contracts. It uses a proof-of-stake consensus mechanism where validators lock up ETH as collateral to participate in block creation. This replaced the energy-intensive proof-of-work model in 2022, reducing Ethereum's energy consumption by over 99.9%.",
+      "Layer-2 networks are blockchains built on top of (and secured by) a Layer-1 like Ethereum. They process transactions off the main chain and periodically settle batches back to Layer-1, inheriting its security while offering much higher throughput and dramatically lower fees. Base, built by Coinbase, is one of the most widely adopted Ethereum Layer-2 networks.",
+      "HyperTek is deployed on Base, which means all transactions — NFT purchases, auctions, minting — cost fractions of a cent and confirm in seconds rather than the minutes (and dollars) typical of Ethereum mainnet. This is what makes HyperTek accessible to everyday gamers rather than only crypto whales.",
+      "Public blockchains are permissionless and open to anyone. No government, company, or individual can prevent you from sending a transaction or reading the ledger. This openness is a deliberate design choice — it ensures that the rules governing digital ownership cannot be unilaterally changed to disadvantage users after the fact.",
+    ],
     icon: "⛓️",
     gradientFrom: "#0f766e",
     gradientTo: "#042f2e",
-    link: "#",
     order: 8,
   },
   {
-    title: "What are gas fees?",
+    title: "What Are Gas Fees?",
     description: "Gas fees are payments made to blockchain validators for processing your transaction. They vary based on network congestion.",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80",
+    category: "Blockchain",
+    readTime: 5,
+    body: [
+      "Gas fees are payments made to the validators who process and confirm your blockchain transactions. They are priced in the network's native currency — ETH for Ethereum-compatible chains — and fluctuate dynamically based on how much activity is competing for space in each block at any given moment.",
+      "Think of gas fees like surge pricing on a ride-sharing app. When lots of users are submitting transactions simultaneously, fees rise because block space is limited and validators prioritize higher-paying transactions. During off-peak hours or on less congested networks, fees can be negligible.",
+      "Every operation on a blockchain has a gas cost determined by its computational complexity. A simple ETH transfer costs less gas than deploying a smart contract or executing a complex NFT auction. Your wallet displays the estimated gas fee before you confirm any transaction, so you always know the total cost upfront.",
+      "EIP-1559, an Ethereum upgrade from 2021, introduced a base fee that is algorithmically adjusted block-by-block based on network demand. This base fee is burned (removed from circulation permanently) rather than paid to validators, creating deflationary pressure on ETH supply. You pay the base fee plus an optional priority tip to incentivize faster inclusion.",
+      "HyperTek is built on Base, an Ethereum Layer-2 network, which dramatically reduces gas costs compared to the main Ethereum chain. Transactions that might cost $5–$50 in gas on Ethereum mainnet cost less than $0.01 on Base. This makes frequent in-game transactions, small NFT purchases, and experimentation genuinely affordable for all users.",
+      "Gas fees are paid in ETH even when buying NFTs priced in USDC. Always keep a small amount of ETH in your wallet to cover fees. HyperTek's custodial wallet system sponsors gas fees for eligible new users, so you can make your first purchases without needing to acquire ETH separately — the platform covers the cost on your behalf.",
+    ],
     icon: "⛽",
     gradientFrom: "#b45309",
     gradientTo: "#451a03",
-    link: "#",
     order: 9,
   },
   {
-    title: "What is a smart contract?",
+    title: "What is a Smart Contract?",
     description: "A smart contract is self-executing code on the blockchain that automatically enforces the rules of a transaction without intermediaries.",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    category: "Blockchain",
+    readTime: 6,
+    body: [
+      "A smart contract is a self-executing program stored permanently on the blockchain. It contains a set of rules written in code — and when the defined conditions are met, it executes automatically, without any human intermediary, third-party service, or manual intervention of any kind.",
+      "In NFT marketplaces, smart contracts handle the entire transaction lifecycle: verifying ownership before a sale, transferring the NFT to the buyer simultaneously with payment to the seller, distributing royalties to the original creator, and updating all on-chain records in a single atomic operation that either fully succeeds or fully reverts.",
+      "The code of a smart contract is publicly visible on the blockchain. Anyone can read exactly what a contract does before interacting with it. This transparency is fundamental to trust in Web3 — you don't need to trust the company running a marketplace; you can verify the contract's behavior directly.",
+      "Once deployed, a standard smart contract cannot be modified. This immutability is a double-edged sword: it provides absolute certainty about rules, but also means bugs cannot be patched without deploying an entirely new contract. This is why security audits by independent firms before deployment are standard practice for serious projects.",
+      "HyperTek's smart contracts have been professionally audited to verify they behave exactly as described — handling buyback guarantees, auction mechanics, royalty distributions, and marketplace fees in strict accordance with the platform's published rules. Audit reports are publicly available for any user who wishes to review them.",
+      "Beyond simple transfers, smart contracts enable complex financial instruments. HyperTek's NFA buyback mechanism is itself a smart contract — it holds reserve funds and automatically executes a buyback if an NFA is listed below its floor price. This trustless automation is what makes the buyback guarantee credible: it doesn't rely on HyperTek choosing to honour it, the contract enforces it unconditionally.",
+    ],
     icon: "📜",
     gradientFrom: "#be185d",
     gradientTo: "#500724",
-    link: "#",
     order: 10,
   },
   {
     title: "What is HyperTek?",
     description: "HyperTek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own.",
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+    category: "HyperTek",
+    readTime: 6,
+    body: [
+      "HyperTek is a play-to-earn gaming universe built on the Base blockchain. It features multiple game modes — high-speed racing, quest-based missions, and large-scale tactical strategy — all centered around NFTs and NFAs that players genuinely own on-chain, not just licensed from a game publisher.",
+      "Unlike traditional games where in-game items disappear if the servers shut down or the developer changes the terms, HyperTek assets live on the blockchain independently. Your soldier character, weapons, vehicles, and land are real digital assets you control — tradeable, rentable, and valuable regardless of what happens to the platform.",
+      "HyperTek introduces the NFA (Non-Fungible Asset) standard — an evolution of the standard NFT that comes with a guaranteed minimum buyback value enforced by a smart contract. If an NFA is listed for sale below its reserve price, HyperTek's protocol automatically purchases it back. This floor price increases by 5% of each sale above the reserve, creating an asset that appreciates in baseline value over time.",
+      "The HyperTek ecosystem is designed for three types of participants. Gamers play to earn in-game rewards and improve their assets' stats and rankings. Collectors acquire rare items, NFAs with strong buyback floors, and limited-edition collectibles as long-term investments. Creators mint and sell original designs, characters, weapons, and artwork, earning royalties on every future resale.",
+      "HyperTek's marketplace is the central hub connecting all three participant types. It supports fixed-price listings, time-limited auctions, rental agreements (For Hire), skill-based Quests where users compete for NFT prizes, and Bounties where organizations post contracts for in-game services. This creates a genuine player-driven economy.",
+      "The platform is built to be accessible regardless of your crypto background. New users sign up with an email address and receive an automatically created custodial wallet. Credit card payments are supported from day one. As users grow more sophisticated, they can migrate to self-custodial wallets and participate in the full depth of the Web3 economy HyperTek is building.",
+    ],
     icon: "🚀",
     gradientFrom: "#1d4ed8",
     gradientTo: "#172554",
-    link: "#",
     order: 11,
   },
   {
     title: "What is Web3?",
     description: "Web3 is the next evolution of the internet built on blockchain technology, giving users ownership of their digital assets and data.",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+    category: "Blockchain",
+    readTime: 5,
+    body: [
+      "Web3 is a vision for the next generation of the internet — one built on decentralized blockchain infrastructure rather than centralized corporate servers. Where Web1 was read-only and Web2 gave users the ability to create content on platforms they don't control, Web3 gives users genuine ownership of their digital identities, assets, and data.",
+      "In practice, Web3 applications connect to users' wallets rather than requiring traditional account creation with email and password. Your wallet is your universal identity and account across every decentralized application — connect once and go. Your assets and reputation move with you across platforms, not siloed inside any single company's database.",
+      "Decentralization is the defining characteristic of Web3. Rather than a single company running servers that can be taken offline, censored, or modified unilaterally, Web3 applications run on distributed networks where no single party has full control. This makes the applications inherently more resilient and the rules governing them more trustworthy.",
+      "Critics of Web3 point to real challenges: user experience remains complex for mainstream audiences, scams and hacks have caused significant losses, and not all decentralization claims by projects hold up to scrutiny. These are legitimate concerns that the industry is actively working to address through better tooling, regulation, and education.",
+      "The usability gap is closing rapidly. Account abstraction allows wallets to behave more like traditional accounts — enabling password recovery, gasless transactions, and one-click onboarding. HyperTek is designed to onboard users at any level of crypto familiarity, abstracting complexity without sacrificing the genuine ownership benefits that Web3 enables.",
+      "Long term, Web3 represents a fundamental shift in who controls digital value. Today, platforms can ban accounts, confiscate in-game items, or shut down services with no recourse for users. In a Web3 world, your assets are yours unconditionally — secured by cryptography and public consensus rather than a company's terms of service. HyperTek is building toward that future, game by game.",
+    ],
     icon: "🌐",
     gradientFrom: "#0369a1",
     gradientTo: "#0c2840",
-    link: "#",
     order: 12,
   },
 ];
@@ -298,23 +418,13 @@ async function seed() {
     createdParents++;
   }
 
-  // ── Seed NFT 101 ──
-  let createdEdu = 0;
-  let skippedEdu = 0;
-
-  for (const edu of NFT_101_DATA) {
-    const existing = await Nft101.findOne({ title: edu.title });
-    if (existing) {
-      skippedEdu++;
-      continue;
-    }
-    await Nft101.create(edu);
-    createdEdu++;
-  }
+  // ── Seed NFT 101 (delete all then re-insert for clean state) ──
+  await Nft101.deleteMany({});
+  const inserted = await Nft101.insertMany(NFT_101_DATA);
 
   console.log("\n── Summary ──────────────────────────────────────────────");
   console.log(`📦 Parent collections: ${createdParents} created, ${skippedParents} skipped`);
-  console.log(`📚 NFT 101 cards:      ${createdEdu} created, ${skippedEdu} skipped`);
+  console.log(`📚 NFT 101 articles:   ${inserted.length} inserted (fresh)`);
   console.log("─────────────────────────────────────────────────────────\n");
 
   await mongoose.disconnect();

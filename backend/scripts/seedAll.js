@@ -567,152 +567,120 @@ async function seed() {
     if (act_created > 0) console.log(`✅ Activities: ${act_created} created`);
   }
 
-  // 10. Sample Auctions (in-game feature preview)
-  let auc_created = 0, auc_skipped = 0;
-  if (createdUsers.length >= 2) {
+  // 10. Sample Auctions — delete all and re-insert with distinct endTimes
+  let auc_created = 0;
+  {
+    await Auction.deleteMany({});
+    const _s = createdUsers.length >= 2 ? createdUsers[0]._id : null;
+    const _s2 = createdUsers.length >= 2 ? createdUsers[1]._id : null;
+    const now = Date.now();
+    // Three distinct countdowns per Don's brief: ~5h31m, ~1d7h18m, ~3d9h45m, then varied
     const SAMPLE_AUCTIONS = [
       {
         title: "Shadow Ops Skin — Legendary",
         description: "Jet black covert operations skin with night-vision accents. Extremely rare limited edition.",
-        category: "Skins",
-        isNFA: true,
-        startPrice: 250,
-        currentBid: 320,
-        reservePrice: 200,
-        instantBuyPrice: 500,
-        durationHours: 72,
-        seller: createdUsers[0]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        category: "Skins", isNFA: true,
+        startPrice: 250, currentBid: 320, reservePrice: 200, instantBuyPrice: 500,
+        endTime: new Date(now + 5 * 3600000 + 31 * 60000),        // ~05:31:00
+        seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_001", bidderName: "WarriorX", amount: 260, placedAt: new Date(Date.now() - 86400000 * 2) },
-          { bidderWallet: "0xBIDDER_002", bidderName: "SniperElite", amount: 280, placedAt: new Date(Date.now() - 86400000) },
-          { bidderWallet: "0xBIDDER_003", bidderName: "GhostOps", amount: 320, placedAt: new Date(Date.now() - 3600000) },
+          { bidderWallet: "0xBIDDER_001", bidderName: "WarriorX",    amount: 260, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_002", bidderName: "SniperElite", amount: 280, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_003", bidderName: "GhostOps",    amount: 320, placedAt: new Date(now - 3600000) },
         ],
       },
       {
         title: "Rail Sniper X90 — Gold Edition",
         description: "Long-range rail gun sniper with electro-targeting. Gold-plated collector's edition.",
-        category: "Weapons",
-        isNFA: false,
-        startPrice: 150,
-        currentBid: 180,
-        instantBuyPrice: null,
-        durationHours: 168,
-        seller: createdUsers[1]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        category: "Weapons", isNFA: false,
+        startPrice: 150, currentBid: 180, instantBuyPrice: null,
+        endTime: new Date(now + 31 * 3600000 + 18 * 60000 + 30000), // ~1d 07:18:30
+        seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_004", bidderName: "DarkHunter", amount: 160, placedAt: new Date(Date.now() - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_005", bidderName: "IronWill", amount: 180, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_004", bidderName: "DarkHunter", amount: 160, placedAt: new Date(now - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_005", bidderName: "IronWill",   amount: 180, placedAt: new Date(now - 86400000) },
         ],
       },
       {
         title: "Viper Fighter Mk1 — Commander",
         description: "Fast single-pilot fighter with twin plasma cannons. Commander edition with custom paint.",
-        category: "Spaceships",
-        isNFA: true,
-        startPrice: 1200,
-        currentBid: 1800,
-        instantBuyPrice: 2500,
-        durationHours: 24,
-        seller: createdUsers[0]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        category: "Spaceships", isNFA: true,
+        startPrice: 1200, currentBid: 1800, instantBuyPrice: 2500,
+        endTime: new Date(now + 81 * 3600000 + 45 * 60000 + 59000), // ~3d 09:45:59
+        seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_006", bidderName: "PilotAce", amount: 1400, placedAt: new Date(Date.now() - 86400000 * 2) },
-          { bidderWallet: "0xBIDDER_007", bidderName: "StarCommand", amount: 1600, placedAt: new Date(Date.now() - 86400000) },
-          { bidderWallet: "0xBIDDER_008", bidderName: "NovaPilot", amount: 1800, placedAt: new Date(Date.now() - 7200000) },
+          { bidderWallet: "0xBIDDER_006", bidderName: "PilotAce",    amount: 1400, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_007", bidderName: "StarCommand", amount: 1600, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_008", bidderName: "NovaPilot",   amount: 1800, placedAt: new Date(now - 7200000) },
         ],
       },
       {
         title: "Desert Outpost Alpha — Fortified",
         description: "Strategic desert base with resource extraction facilities. Fully fortified with defensive turrets.",
-        category: "Land & Bases",
-        isNFA: true,
-        startPrice: 3000,
-        currentBid: 4500,
-        instantBuyPrice: 6000,
-        durationHours: 72,
-        seller: createdUsers[1]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        category: "Land & Bases", isNFA: true,
+        startPrice: 3000, currentBid: 4500, instantBuyPrice: 6000,
+        endTime: new Date(now + 48 * 3600000),                       // ~2d
+        seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_009", bidderName: "LandBaron", amount: 3500, placedAt: new Date(Date.now() - 86400000 * 4) },
-          { bidderWallet: "0xBIDDER_010", bidderName: "Conqueror", amount: 4000, placedAt: new Date(Date.now() - 86400000 * 2) },
-          { bidderWallet: "0xBIDDER_011", bidderName: "TerraFormer", amount: 4500, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_009", bidderName: "LandBaron",   amount: 3500, placedAt: new Date(now - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_010", bidderName: "Conqueror",   amount: 4000, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_011", bidderName: "TerraFormer", amount: 4500, placedAt: new Date(now - 86400000) },
         ],
       },
       {
         title: "Ghost Recon Operator — Elite",
         description: "Elite recon specialist with ghost cloak ability. Maximum stealth rating.",
-        category: "Specialists",
-        isNFA: false,
-        startPrice: 380,
-        currentBid: 420,
-        instantBuyPrice: 600,
-        durationHours: 168,
-        seller: createdUsers[0]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        category: "Specialists", isNFA: false,
+        startPrice: 380, currentBid: 420, instantBuyPrice: 600,
+        endTime: new Date(now + 22 * 3600000),                       // ~22h
+        seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_012", bidderName: "StealthKing", amount: 400, placedAt: new Date(Date.now() - 86400000 * 2) },
-          { bidderWallet: "0xBIDDER_013", bidderName: "NightOwl", amount: 420, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_012", bidderName: "StealthKing", amount: 400, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_013", bidderName: "NightOwl",    amount: 420, placedAt: new Date(now - 86400000) },
         ],
       },
       {
         title: "HyperBike GT — Neon Circuit",
         description: "Ultra-fast racing bike built for gravity tracks. Neon Circuit limited edition.",
-        category: "Vehicles",
-        isNFA: false,
-        startPrice: 550,
-        currentBid: 660,
-        instantBuyPrice: 900,
-        durationHours: 72,
-        seller: createdUsers[1]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        category: "Vehicles", isNFA: false,
+        startPrice: 550, currentBid: 660, instantBuyPrice: 900,
+        endTime: new Date(now + 120 * 3600000),                      // ~5d
+        seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_014", bidderName: "SpeedDemon", amount: 600, placedAt: new Date(Date.now() - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_015", bidderName: "RacerX", amount: 660, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_014", bidderName: "SpeedDemon", amount: 600, placedAt: new Date(now - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_015", bidderName: "RacerX",     amount: 660, placedAt: new Date(now - 86400000) },
         ],
       },
       {
         title: "Star of Honour — Genesis",
         description: "The highest honour awarded in the HyperTek universe. Genesis edition — first batch ever minted.",
-        category: "Badges",
-        isNFA: true,
-        startPrice: 1500,
-        currentBid: 2100,
-        instantBuyPrice: 3000,
-        durationHours: 168,
-        seller: createdUsers[0]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_001",
+        category: "Badges", isNFA: true,
+        startPrice: 1500, currentBid: 2100, instantBuyPrice: 3000,
+        endTime: new Date(now + 168 * 3600000),                      // ~7d
+        seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_016", bidderName: "Collector1", amount: 1700, placedAt: new Date(Date.now() - 86400000 * 5) },
-          { bidderWallet: "0xBIDDER_017", bidderName: "MedalHunter", amount: 1900, placedAt: new Date(Date.now() - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_018", bidderName: "PrestigeMax", amount: 2100, placedAt: new Date(Date.now() - 86400000) },
+          { bidderWallet: "0xBIDDER_016", bidderName: "Collector1",     amount: 1700, placedAt: new Date(now - 86400000 * 5) },
+          { bidderWallet: "0xBIDDER_017", bidderName: "MedalHunter",    amount: 1900, placedAt: new Date(now - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_018", bidderName: "PrestigeMax",    amount: 2100, placedAt: new Date(now - 86400000) },
         ],
       },
       {
         title: "Cosmic Battle Scene — 1/1",
         description: "Epic deep-space battle, hand-painted in 8K resolution. One-of-one artwork.",
-        category: "Artwork",
-        isNFA: true,
-        startPrice: 4000,
-        currentBid: 5200,
-        instantBuyPrice: 8000,
-        durationHours: 168,
-        seller: createdUsers[1]._id,
-        sellerWallet: "0xSEED_WALLET_SELLER_002",
+        category: "Artwork", isNFA: true,
+        startPrice: 4000, currentBid: 5200, instantBuyPrice: 8000,
+        endTime: new Date(now + 96 * 3600000),                       // ~4d
+        seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_019", bidderName: "ArtLover", amount: 4500, placedAt: new Date(Date.now() - 86400000 * 4) },
-          { bidderWallet: "0xBIDDER_020", bidderName: "DigitalGallery", amount: 5200, placedAt: new Date(Date.now() - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_019", bidderName: "ArtLover",       amount: 4500, placedAt: new Date(now - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_020", bidderName: "DigitalGallery", amount: 5200, placedAt: new Date(now - 86400000 * 2) },
         ],
       },
     ];
-    for (const a of SAMPLE_AUCTIONS) {
-      const existing = await Auction.findOne({ title: a.title });
-      if (existing) { auc_skipped++; continue; }
-      const endTime = new Date(Date.now() + a.durationHours * 60 * 60 * 1000);
-      await Auction.create({ ...a, endTime, status: "active" });
-      auc_created++;
-    }
-    if (auc_created > 0) console.log(`✅ Auctions: ${auc_created} created`);
+    const docs = SAMPLE_AUCTIONS.map(a => ({ ...a, status: "active" }));
+    await Auction.insertMany(docs);
+    auc_created = docs.length;
+    console.log(`✅ Auctions: ${auc_created} inserted fresh (distinct countdowns)`);
   }
 
   // 11. Sample Trades & Quests (in-game feature preview)

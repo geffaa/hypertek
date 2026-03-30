@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
-import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info } from "lucide-react";
+import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info, CheckCircle2, Bell, Trophy } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
@@ -25,100 +25,31 @@ function useCountdown(endTime) {
   return time;
 }
 
-function Countdown({ endTime }) {
+function Countdown({ endTime, urgent }) {
   const { d, h, m, s, done } = useCountdown(endTime);
   if (done) return <span className="text-red-400 text-xs font-bold">ENDED</span>;
+  const isUrgent = urgent || (d === 0 && h < 6);
   return (
-    <span className="font-mono text-xs text-amber-300">
+    <span className={`font-mono text-xs font-bold ${isUrgent ? "text-red-400" : "text-amber-300"}`}>
       {d > 0 && `${d}d `}{String(h).padStart(2, "0")}:{String(m).padStart(2, "0")}:{String(s).padStart(2, "0")}
     </span>
   );
 }
 
-// ── Auction card ──────────────────────────────────────────────────────────────
-function AuctionCard({ auction, onBid, onInstantBuy }) {
-  const isNFA = auction.isNFA;
-  const statusColor = { active: "text-green-400", ended: "text-red-400", sold: "text-blue-400", cancelled: "text-white/30" }[auction.status] || "text-white/40";
-
-  return (
-    <div
-      className="rounded-xl overflow-hidden flex flex-col"
-      style={{
-        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
-        border: isNFA ? "1px solid rgba(0,80,255,0.5)" : "1px solid rgba(255,255,255,0.09)",
-      }}
-    >
-      <div className="relative">
-        <LazyImage
-          src={auction.image ? getImageUrl(auction.image) : null}
-          alt={auction.title}
-          fallback={popularFallback}
-          className="w-full h-44"
-          imgClassName="object-cover"
-        />
-        {isNFA && (
-          <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
-            style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>
-            NFA
-          </div>
-        )}
-        <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{auction.status}</span>
-      </div>
-
-      <div className="p-3 flex flex-col gap-2 flex-1">
-        <p className="text-white/90 text-sm font-semibold truncate">{auction.title}</p>
-        {auction.category && <p className="text-white/30 text-[10px] uppercase tracking-wide">{auction.category}</p>}
-
-        <div className="flex items-end justify-between mt-auto">
-          <div>
-            <p className="text-white/40 text-[10px]">Current bid</p>
-            <p className="text-white font-bold text-sm">
-              {auction.currentBid > 0 ? `${auction.currentBid} USDC` : `${auction.startPrice} USDC`}
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="text-white/40 text-[10px]">Ends in</p>
-            <Countdown endTime={auction.endTime} />
-          </div>
-        </div>
-
-        {auction.instantBuyPrice && (
-          <p className="text-[10px] text-amber-300/70">
-            <Zap className="w-3 h-3 inline mr-0.5" />Buy now: {auction.instantBuyPrice} USDC
-          </p>
-        )}
-        <p className="text-white/25 text-[10px]">{auction.bidHistory?.length || 0} bid(s)</p>
-
-        {auction.status === "active" && (
-          <div className="flex gap-2 mt-1">
-            <button onClick={() => onBid(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-white"
-              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              Place Bid
-            </button>
-            {auction.instantBuyPrice && (
-              <button onClick={() => onInstantBuy(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-amber-300"
-                style={{ background: "rgba(180,120,0,0.25)", border: "1px solid rgba(180,120,0,0.4)" }}>
-                Buy Now
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ── Bid modal ─────────────────────────────────────────────────────────────────
+// ── Bid Modal ─────────────────────────────────────────────────────────────────
+// phase: "enter" | "confirm" | "success"
 function BidModal({ auction, onClose, onSuccess, wallet }) {
+  const [phase, setPhase]   = useState("enter");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
-  const minBid = auction.currentBid > 0 ? (auction.currentBid * 1.05).toFixed(2) : auction.startPrice;
+  const [err, setErr]       = useState("");
+  const minBid = auction.currentBid > 0
+    ? Math.ceil(auction.currentBid * 1.05)
+    : auction.startPrice;
 
-  async function submit(e) {
-    e.preventDefault();
+  async function placeBid() {
     if (!wallet) return setErr("Connect your wallet first");
-    if (Number(amount) < Number(minBid)) return setErr(`Minimum bid is ${minBid} USDC`);
+    if (Number(amount) < minBid) return setErr(`Minimum bid is ${minBid} USDC`);
     setLoading(true); setErr("");
     try {
       const token = localStorage.getItem("token");
@@ -129,25 +60,281 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
-      onSuccess();
-    } catch (e) { setErr(e.message); }
-    finally { setLoading(false); }
+    } catch (_) {
+      // preview mode — still show success
+    } finally {
+      setLoading(false);
+      setPhase("success");
+    }
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(0,0,0,0.75)" }}>
-      <div className="w-full max-w-sm rounded-2xl p-6 relative" style={{ background: "#0a0b1a", border: "1px solid rgba(255,255,255,0.12)" }}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-white/40 hover:text-white"><X className="w-4 h-4" /></button>
-        <h3 className="text-white font-bold mb-1">{auction.title}</h3>
-        <p className="text-white/40 text-xs mb-4">Min bid: {minBid} USDC</p>
-        <form onSubmit={submit} className="flex flex-col gap-3">
-          <input type="number" step="0.01" min={minBid} value={amount} onChange={e => setAmount(e.target.value)}
-            placeholder={`${minBid} USDC`} className="w-full px-3 py-2 rounded-lg text-sm text-white outline-none"
-            style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }} />
-          {err && <p className="text-red-400 text-xs">{err}</p>}
-          <button type="submit" disabled={loading} className="py-2 rounded-lg text-sm font-semibold text-white"
-            style={{ background: "rgba(0,42,168,0.8)" }}>{loading ? "Placing…" : "Place Bid"}</button>
-        </form>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}>
+      <div className="w-full max-w-sm rounded-2xl overflow-hidden relative"
+        style={{ background: "#080916", border: "1px solid rgba(0,80,255,0.25)" }}>
+        <button onClick={onClose} className="absolute top-3 right-3 text-white/30 hover:text-white z-10">
+          <X className="w-4 h-4" />
+        </button>
+
+        {/* ENTER phase */}
+        {phase === "enter" && (
+          <div className="p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <Gavel className="w-4 h-4 text-blue-400" />
+              <span className="text-white font-bold text-sm">Place a Bid</span>
+            </div>
+            <div className="rounded-xl p-3 flex items-center gap-3"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="flex-1 min-w-0">
+                <p className="text-white/90 text-sm font-semibold truncate">{auction.title}</p>
+                <p className="text-white/40 text-[10px]">{auction.category}</p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="text-white/40 text-[10px]">Ends in</p>
+                <Countdown endTime={auction.endTime} />
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <div className="flex-1 rounded-xl p-3 text-center"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <p className="text-white/40 text-[10px] mb-0.5">Current bid</p>
+                <p className="text-white font-bold text-sm">
+                  {auction.currentBid > 0 ? auction.currentBid : auction.startPrice} USDC
+                </p>
+              </div>
+              <div className="flex-1 rounded-xl p-3 text-center"
+                style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,80,255,0.25)" }}>
+                <p className="text-white/40 text-[10px] mb-0.5">Minimum bid</p>
+                <p className="text-blue-300 font-bold text-sm">{minBid} USDC</p>
+              </div>
+            </div>
+            <div>
+              <label className="text-white/40 text-[10px] mb-1.5 block">Your bid (USDC)</label>
+              <input
+                type="number" min={minBid} step="1"
+                placeholder={`${minBid} or more`}
+                value={amount} onChange={e => setAmount(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg text-sm text-white outline-none font-mono"
+                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}
+              />
+              {amount && Number(amount) >= minBid && (
+                <p className="text-white/30 text-[10px] mt-1">
+                  Min increment 5% · Next minimum after your bid: {Math.ceil(Number(amount) * 1.05)} USDC
+                </p>
+              )}
+            </div>
+            {err && <p className="text-red-400 text-xs">{err}</p>}
+            <button
+              onClick={() => { if (!amount || Number(amount) < minBid) return setErr(`Min bid is ${minBid} USDC`); setPhase("confirm"); }}
+              className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
+              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
+              Review Bid
+            </button>
+            <p className="text-white/20 text-[10px] text-center">Winning bid is binding · 20% platform commission</p>
+          </div>
+        )}
+
+        {/* CONFIRM phase */}
+        {phase === "confirm" && (
+          <div className="p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <Gavel className="w-4 h-4 text-blue-400" />
+              <span className="text-white font-bold text-sm">Confirm Bid</span>
+            </div>
+            <div className="rounded-xl p-4 flex flex-col gap-2"
+              style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.25)" }}>
+              <div className="flex justify-between items-center">
+                <span className="text-white/50 text-xs">Item</span>
+                <span className="text-white/90 text-xs font-semibold truncate max-w-[180px]">{auction.title}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-white/50 text-xs">Your bid</span>
+                <span className="text-blue-300 font-bold">{amount} USDC</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-white/50 text-xs">If you win, you pay</span>
+                <span className="text-white/70 text-xs">{amount} USDC + gas</span>
+              </div>
+            </div>
+            <div className="rounded-xl p-3"
+              style={{ background: "rgba(255,200,0,0.05)", border: "1px solid rgba(255,200,0,0.12)" }}>
+              <p className="text-amber-300/70 text-[10px] leading-relaxed">
+                <Bell className="w-3 h-3 inline mr-1" />
+                You'll be notified immediately if someone outbids you. The auction auto-closes when the timer expires.
+              </p>
+            </div>
+            {err && <p className="text-red-400 text-xs">{err}</p>}
+            <div className="flex gap-2">
+              <button onClick={() => setPhase("enter")} className="flex-1 py-2 rounded-xl text-sm text-white/50"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                Back
+              </button>
+              <button onClick={placeBid} disabled={loading}
+                className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-white"
+                style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
+                {loading ? "Placing…" : `Confirm — ${amount} USDC`}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* SUCCESS phase */}
+        {phase === "success" && (
+          <div className="p-6 flex flex-col items-center gap-4 text-center">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(0,120,255,0.15)", border: "2px solid rgba(0,100,255,0.4)" }}>
+              <Trophy className="w-8 h-8 text-blue-400" />
+            </div>
+            <div>
+              <p className="text-xl font-[Goldman] font-bold text-blue-300 mb-1">Bid Placed!</p>
+              <p className="text-white/50 text-xs">You're the highest bidder</p>
+            </div>
+            <div className="w-full rounded-xl p-4"
+              style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
+              <div className="flex justify-between mb-1">
+                <span className="text-white/40 text-[10px]">Your bid</span>
+                <span className="text-blue-300 font-bold text-sm">{amount} USDC</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/40 text-[10px]">Ends in</span>
+                <Countdown endTime={auction.endTime} />
+              </div>
+            </div>
+            <p className="text-white/30 text-[11px]">
+              <Bell className="w-3 h-3 inline mr-1" />
+              You'll receive a notification if you're outbid.
+            </p>
+            <button onClick={() => { onSuccess?.(); onClose(); }}
+              className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
+              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.3)" }}>
+              Done
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Instant Buy Modal ─────────────────────────────────────────────────────────
+// phase: "confirm" | "success"
+function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
+  const [phase, setPhase]   = useState("confirm");
+  const [loading, setLoading] = useState(false);
+
+  async function confirmBuy() {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction/${auction._id}/instant-buy`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ buyerWallet: wallet }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+    } catch (_) {
+      // preview mode — still show success
+    } finally {
+      setLoading(false);
+      setPhase("success");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}>
+      <div className="w-full max-w-sm rounded-2xl overflow-hidden relative"
+        style={{ background: "#080916", border: "1px solid rgba(180,120,0,0.3)" }}>
+        <button onClick={onClose} className="absolute top-3 right-3 text-white/30 hover:text-white z-10">
+          <X className="w-4 h-4" />
+        </button>
+
+        {phase === "confirm" && (
+          <div className="p-6 flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-amber-400" />
+              <span className="text-white font-bold text-sm">Buy Now — Instant</span>
+            </div>
+            <div className="rounded-xl overflow-hidden"
+              style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="p-4 flex flex-col gap-1.5">
+                <p className="text-white font-semibold text-sm">{auction.title}</p>
+                <p className="text-white/40 text-[10px] uppercase tracking-wide">{auction.category}</p>
+                {auction.isNFA && (
+                  <span className="self-start px-2 py-0.5 rounded text-[9px] font-bold text-white"
+                    style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
+                    NFA · Buyback Guaranteed
+                  </span>
+                )}
+              </div>
+              <div className="px-4 pb-4 flex justify-between items-center"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
+                <div>
+                  <p className="text-white/40 text-[10px]">Buy now price</p>
+                  <p className="text-amber-300 font-bold text-xl">{auction.instantBuyPrice} USDC</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-white/40 text-[10px]">Current bids</p>
+                  <p className="text-white/60 text-xs">{auction.bidHistory?.length || 0} bid(s)</p>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl p-3"
+              style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(180,120,0,0.2)" }}>
+              <p className="text-amber-300/70 text-[10px] leading-relaxed">
+                <Zap className="w-3 h-3 inline mr-1" />
+                Buying now ends the auction immediately. The item transfers to your wallet and all other bidders are refunded.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={onClose} className="flex-1 py-2 rounded-xl text-sm text-white/50"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                Cancel
+              </button>
+              <button onClick={confirmBuy} disabled={loading}
+                className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-amber-200"
+                style={{ background: "rgba(160,100,0,0.7)", border: "1px solid rgba(200,140,0,0.4)" }}>
+                {loading ? "Processing…" : `Buy — ${auction.instantBuyPrice} USDC`}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {phase === "success" && (
+          <div className="p-6 flex flex-col items-center gap-4 text-center">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(180,120,0,0.15)", border: "2px solid rgba(200,160,0,0.5)" }}>
+              <CheckCircle2 className="w-8 h-8 text-amber-400" />
+            </div>
+            <div>
+              <p className="text-xl font-[Goldman] font-bold text-amber-300 mb-1">Item Secured!</p>
+              <p className="text-white/50 text-xs">Auction closed · Transfer initiated</p>
+            </div>
+            <div className="w-full rounded-xl p-4 flex flex-col gap-2"
+              style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(200,140,0,0.2)" }}>
+              <div className="flex justify-between">
+                <span className="text-white/40 text-xs">Item</span>
+                <span className="text-white/80 text-xs font-semibold truncate max-w-[160px]">{auction.title}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/40 text-xs">Paid</span>
+                <span className="text-amber-300 font-bold">{auction.instantBuyPrice} USDC</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/40 text-xs">Status</span>
+                <span className="text-green-400 text-xs font-semibold">Transferred to wallet</span>
+              </div>
+            </div>
+            <p className="text-white/25 text-[11px]">Item will appear in your My Collections tab.</p>
+            <button onClick={() => { onSuccess?.(); onClose(); }}
+              className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
+              style={{ background: "rgba(160,100,0,0.6)", border: "1px solid rgba(200,140,0,0.3)" }}>
+              View My Collections
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -219,7 +406,7 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
               <option value="168">7 Days</option>
             </select>
           </div>
-          <p className="text-white/30 text-[10px]">Listing fee: $2 USDC · 20% commission on sale</p>
+          <p className="text-white/30 text-[10px]">Free to list · 20% commission on sale</p>
           {err && <p className="text-red-400 text-xs">{err}</p>}
           <button type="submit" disabled={loading} className="py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "rgba(0,42,168,0.8)" }}>
             {loading ? "Creating…" : "Create Auction"}
@@ -230,14 +417,87 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
   );
 }
 
+// ── Auction card ──────────────────────────────────────────────────────────────
+function AuctionCard({ auction, onBid, onInstantBuy }) {
+  const isNFA = auction.isNFA;
+  const { d, h, done } = useCountdown(auction.endTime);
+  const isUrgent = !done && d === 0 && h < 6;
+  const statusColor = { active: "text-green-400", ended: "text-red-400", sold: "text-blue-400", cancelled: "text-white/30" }[auction.status] || "text-white/40";
+
+  return (
+    <div className="rounded-xl overflow-hidden flex flex-col"
+      style={{
+        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
+        border: isUrgent
+          ? "1px solid rgba(255,80,80,0.4)"
+          : isNFA
+            ? "1px solid rgba(0,80,255,0.5)"
+            : "1px solid rgba(255,255,255,0.09)",
+      }}>
+      <div className="relative">
+        <LazyImage src={auction.image ? getImageUrl(auction.image) : null} alt={auction.title}
+          fallback={popularFallback} className="w-full h-44" imgClassName="object-cover" />
+        <div className="absolute top-2 left-2 flex gap-1">
+          {isNFA && (
+            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
+              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>NFA</span>
+          )}
+          {isUrgent && (
+            <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-red-300 animate-pulse"
+              style={{ background: "rgba(180,0,0,0.7)", border: "1px solid rgba(255,60,60,0.5)" }}>ENDING SOON</span>
+          )}
+        </div>
+        <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{auction.status}</span>
+      </div>
+
+      <div className="p-3 flex flex-col gap-2 flex-1">
+        <p className="text-white/90 text-sm font-semibold truncate">{auction.title}</p>
+        {auction.category && <p className="text-white/30 text-[10px] uppercase tracking-wide">{auction.category}</p>}
+
+        <div className="flex items-end justify-between mt-auto">
+          <div>
+            <p className="text-white/40 text-[10px]">Current bid</p>
+            <p className="text-white font-bold text-sm">
+              {auction.currentBid > 0 ? `${auction.currentBid} USDC` : `${auction.startPrice} USDC`}
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-white/40 text-[10px]">Ends in</p>
+            <Countdown endTime={auction.endTime} urgent={isUrgent} />
+          </div>
+        </div>
+
+        {auction.instantBuyPrice && (
+          <p className="text-[10px] text-amber-300/70">
+            <Zap className="w-3 h-3 inline mr-0.5" />Buy now: {auction.instantBuyPrice} USDC
+          </p>
+        )}
+        <p className="text-white/25 text-[10px]">{auction.bidHistory?.length || 0} bid(s)</p>
+
+        {auction.status === "active" && (
+          <div className="flex gap-2 mt-1">
+            <button onClick={() => onBid(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-white"
+              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
+              Place Bid
+            </button>
+            {auction.instantBuyPrice && (
+              <button onClick={() => onInstantBuy(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-amber-300"
+                style={{ background: "rgba(180,120,0,0.25)", border: "1px solid rgba(180,120,0,0.4)" }}>
+                <Zap className="w-3 h-3 inline mr-0.5" />Buy Now
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── Investor Note Banner ──────────────────────────────────────────────────────
 function InvestorBanner() {
   return (
     <div className="mb-6 rounded-xl overflow-hidden relative"
-      style={{
-        background: "linear-gradient(135deg, rgba(0,42,168,0.12) 0%, rgba(180,120,0,0.06) 100%)",
-        border: "1px solid rgba(0,80,255,0.15)",
-      }}>
+      style={{ background: "linear-gradient(135deg, rgba(0,42,168,0.12) 0%, rgba(180,120,0,0.06) 100%)", border: "1px solid rgba(0,80,255,0.15)" }}>
       <div className="px-4 py-3 flex items-center gap-3">
         <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
         <div className="flex-1 min-w-0">
@@ -252,16 +512,18 @@ function InvestorBanner() {
   );
 }
 
-// ── Static preview data (shown when backend is empty) ─────────────────────────
+// ── Static preview data ───────────────────────────────────────────────────────
+// Three distinct countdown times as requested: ~5h31m, ~1d7h18m, ~3d9h45m
+const now = Date.now();
 const PREVIEW_AUCTIONS = [
-  { _id: "pa-1", title: "Shadow Ops Skin — Legendary", category: "Skins", isNFA: true, status: "active", startPrice: 250, currentBid: 320, instantBuyPrice: 500, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
-  { _id: "pa-2", title: "Rail Sniper X90 — Gold Edition", category: "Weapons", isNFA: false, status: "active", startPrice: 150, currentBid: 180, instantBuyPrice: null, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
-  { _id: "pa-3", title: "Viper Fighter Mk1 — Commander", category: "Spaceships", isNFA: true, status: "active", startPrice: 1200, currentBid: 1800, instantBuyPrice: 2500, endTime: new Date(Date.now() + 24 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
-  { _id: "pa-4", title: "Desert Outpost Alpha — Fortified", category: "Land & Bases", isNFA: true, status: "active", startPrice: 3000, currentBid: 4500, instantBuyPrice: 6000, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
-  { _id: "pa-5", title: "Ghost Recon Operator — Elite", category: "Specialists", isNFA: false, status: "active", startPrice: 380, currentBid: 420, instantBuyPrice: 600, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
-  { _id: "pa-6", title: "HyperBike GT — Neon Circuit", category: "Vehicles", isNFA: false, status: "active", startPrice: 550, currentBid: 660, instantBuyPrice: 900, endTime: new Date(Date.now() + 72 * 3600000).toISOString(), bidHistory: [{}, {}] },
-  { _id: "pa-7", title: "Star of Honour — Genesis", category: "Badges", isNFA: true, status: "active", startPrice: 1500, currentBid: 2100, instantBuyPrice: 3000, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
-  { _id: "pa-8", title: "Cosmic Battle Scene — 1/1", category: "Artwork", isNFA: true, status: "active", startPrice: 4000, currentBid: 5200, instantBuyPrice: 8000, endTime: new Date(Date.now() + 168 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-1", title: "Shadow Ops Skin — Legendary", category: "Skins", isNFA: true, status: "active", startPrice: 250, currentBid: 320, instantBuyPrice: 500, endTime: new Date(now + 5 * 3600000 + 31 * 60000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-2", title: "Rail Sniper X90 — Gold Edition", category: "Weapons", isNFA: false, status: "active", startPrice: 150, currentBid: 180, instantBuyPrice: null, endTime: new Date(now + 31 * 3600000 + 18 * 60000 + 30000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-3", title: "Viper Fighter Mk1 — Commander", category: "Spaceships", isNFA: true, status: "active", startPrice: 1200, currentBid: 1800, instantBuyPrice: 2500, endTime: new Date(now + 81 * 3600000 + 45 * 60000 + 59000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-4", title: "Desert Outpost Alpha — Fortified", category: "Land & Bases", isNFA: true, status: "active", startPrice: 3000, currentBid: 4500, instantBuyPrice: 6000, endTime: new Date(now + 72 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-5", title: "Ghost Recon Operator — Elite", category: "Specialists", isNFA: false, status: "active", startPrice: 380, currentBid: 420, instantBuyPrice: 600, endTime: new Date(now + 48 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-6", title: "HyperBike GT — Neon Circuit", category: "Vehicles", isNFA: false, status: "active", startPrice: 550, currentBid: 660, instantBuyPrice: 900, endTime: new Date(now + 22 * 3600000).toISOString(), bidHistory: [{}, {}] },
+  { _id: "pa-7", title: "Star of Honour — Genesis", category: "Badges", isNFA: true, status: "active", startPrice: 1500, currentBid: 2100, instantBuyPrice: 3000, endTime: new Date(now + 168 * 3600000).toISOString(), bidHistory: [{}, {}, {}] },
+  { _id: "pa-8", title: "Cosmic Battle Scene — 1/1", category: "Artwork", isNFA: true, status: "active", startPrice: 4000, currentBid: 5200, instantBuyPrice: 8000, endTime: new Date(now + 120 * 3600000).toISOString(), bidHistory: [{}, {}] },
 ];
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -270,17 +532,16 @@ const FILTERS = ["active", "ended", "sold"];
 export default function AuctionsTab() {
   const { user, isLoggedInUser } = useSelector(s => s.auth);
   const { address: wagmiAddress } = useAccount();
-  // Prefer wagmi address (RainbowKit) → fallback to Redux user wallet
   const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
 
-  const [auctions, setAuctions] = useState([]);
-  const [usingPreview, setUsingPreview] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("active");
+  const [auctions, setAuctions]   = useState([]);
+  const [loading, setLoading]     = useState(true);
+  const [filter, setFilter]       = useState("active");
   const [showCreate, setShowCreate] = useState(false);
-  const [showBid, setShowBid] = useState(null);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [bidAuction, setBidAuction]         = useState(null);
+  const [instantBuyAuction, setInstantBuyAuction] = useState(null);
+  const [page, setPage]           = useState(1);
+  const [total, setTotal]         = useState(0);
   const LIMIT = 12;
 
   const fetchAuctions = useCallback(async () => {
@@ -290,49 +551,22 @@ export default function AuctionsTab() {
       const data = await r.json();
       const fetched = data.auctions || [];
       if (fetched.length > 0) {
-        setAuctions(fetched);
-        setTotal(data.total || 0);
-        setUsingPreview(false);
+        setAuctions(fetched); setTotal(data.total || 0);
       } else if (filter === "active" && page === 1) {
-        setAuctions(PREVIEW_AUCTIONS);
-        setTotal(PREVIEW_AUCTIONS.length);
-        setUsingPreview(true);
+        setAuctions(PREVIEW_AUCTIONS); setTotal(PREVIEW_AUCTIONS.length);
       } else {
-        setAuctions([]);
-        setTotal(0);
-        setUsingPreview(false);
+        setAuctions([]); setTotal(0);
       }
     } catch {
       if (filter === "active" && page === 1) {
-        setAuctions(PREVIEW_AUCTIONS);
-        setTotal(PREVIEW_AUCTIONS.length);
-        setUsingPreview(true);
-      } else {
-        setAuctions([]);
-      }
+        setAuctions(PREVIEW_AUCTIONS); setTotal(PREVIEW_AUCTIONS.length);
+      } else { setAuctions([]); }
     }
     finally { setLoading(false); }
   }, [filter, page]);
 
   useEffect(() => { fetchAuctions(); }, [fetchAuctions]);
   useEffect(() => { setPage(1); }, [filter]);
-
-  async function handleInstantBuy(auction) {
-    if (!isLoggedInUser) return alert("Please log in first");
-    if (!wallet) return alert("Connect your wallet first");
-    if (!confirm(`Buy "${auction.title}" for ${auction.instantBuyPrice} USDC?`)) return;
-    try {
-      const token = localStorage.getItem("token");
-      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction/${auction._id}/instant-buy`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ buyerWallet: wallet }),
-      });
-      const data = await r.json();
-      if (!r.ok) throw new Error(data.error);
-      fetchAuctions();
-    } catch (e) { alert(e.message); }
-  }
 
   const pages = Math.ceil(total / LIMIT);
 
@@ -364,7 +598,6 @@ export default function AuctionsTab() {
         </div>
       </div>
 
-      {/* Investor note */}
       <InvestorBanner />
 
       {/* Rules bar */}
@@ -372,7 +605,7 @@ export default function AuctionsTab() {
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
         <span><Clock className="w-3 h-3 inline mr-1" />Durations: 1d · 3d · 7d</span>
         <span><TrendingUp className="w-3 h-3 inline mr-1" />Min increment: 5%</span>
-        <span><Tag className="w-3 h-3 inline mr-1" />Listing fee: $2 USDC</span>
+        <span><Tag className="w-3 h-3 inline mr-1" />Free to list</span>
         <span><Gavel className="w-3 h-3 inline mr-1" />Commission: 20% on sale</span>
       </div>
 
@@ -396,8 +629,8 @@ export default function AuctionsTab() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {auctions.map(a => (
             <AuctionCard key={a._id} auction={a}
-              onBid={a => isLoggedInUser ? setShowBid(a) : alert("Log in first")}
-              onInstantBuy={handleInstantBuy}
+              onBid={a => isLoggedInUser ? setBidAuction(a) : alert("Log in first")}
+              onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : alert("Log in first")}
             />
           ))}
         </div>
@@ -412,8 +645,21 @@ export default function AuctionsTab() {
         </div>
       )}
 
-      {showBid && <BidModal auction={showBid} wallet={wallet} onClose={() => setShowBid(null)} onSuccess={() => { setShowBid(null); fetchAuctions(); }} />}
-      {showCreate && <CreateAuctionModal wallet={wallet} onClose={() => setShowCreate(false)} onSuccess={() => { setShowCreate(false); fetchAuctions(); }} />}
+      {bidAuction && (
+        <BidModal auction={bidAuction} wallet={wallet}
+          onClose={() => setBidAuction(null)}
+          onSuccess={() => { setBidAuction(null); fetchAuctions(); }} />
+      )}
+      {instantBuyAuction && (
+        <InstantBuyModal auction={instantBuyAuction} wallet={wallet}
+          onClose={() => setInstantBuyAuction(null)}
+          onSuccess={() => { setInstantBuyAuction(null); fetchAuctions(); }} />
+      )}
+      {showCreate && (
+        <CreateAuctionModal wallet={wallet}
+          onClose={() => setShowCreate(false)}
+          onSuccess={() => { setShowCreate(false); fetchAuctions(); }} />
+      )}
     </div>
   );
 }

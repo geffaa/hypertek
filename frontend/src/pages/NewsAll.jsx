@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
-import CustomButton5 from "../Components/Buttons/Button5";
 const ITEMS_PER_PAGE = 3;
 
 export default function NewsList() {
@@ -88,11 +87,12 @@ export default function NewsList() {
       {/* NEXT BUTTON */}
       {visibleCount < news.length && (
         <div className="flex justify-center mt-16">
-          <CustomButton5
-            text="Next"
+          <button
             onClick={loadMore}
-            className="px-10 py-3"
-          />
+            className="px-7 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
+          >
+            Load More
+          </button>
         </div>
       )}
     </div>

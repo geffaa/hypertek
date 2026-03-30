@@ -1,5 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "./Redux/Store";
@@ -371,6 +377,7 @@ function App() {
       />
       {showSplash && <SplashScreen onDone={handleSplashDone} />}
       <BrowserRouter>
+        <ScrollToTop />
         <EmailWalletProvider>
           <AppWrapper />
         </EmailWalletProvider>

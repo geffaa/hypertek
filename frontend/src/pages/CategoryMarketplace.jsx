@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import FullScreenLoader from "../Components/Common/Spinner";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import overview1 from "../assets/images/Overview/overview1.jpg";
-import Logo from "../assets/logo1.png";
 import NavLinks from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import BottomInfoBar from "../Components/MarketPlaceCom/BottomInfoBar";
 import LazyImage from "../Components/Common/LazyImage";
-import { useAccount } from "wagmi";
-import { useEmailWallet } from "../hooks/useEmailWallet";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 
@@ -25,11 +21,6 @@ const HEADER_H = 72;
 function CategoryMarketplace() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
-
-  const { address: wagmiAddress } = useAccount();
-  const { emailWalletAddress } = useEmailWallet();
-  const activeAddress = wagmiAddress || emailWalletAddress;
   const { openConnectModal } = useConnectModal();
 
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -37,7 +28,6 @@ function CategoryMarketplace() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showNoItemMsg, setShowNoItemMsg] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
 
   // ── Fetch all categories for filter chips ─────────────────────────
@@ -83,56 +73,6 @@ function CategoryMarketplace() {
     navigate(`/market-place?tab=${tab}`);
   };
 
-  // Check if user has unlisted items in this category
-  const checkAndNavigate = async () => {
-    try {
-      if (!token) {
-        toast.error("Please login first");
-        return;
-      }
-
-      if (!activeAddress) {
-        setShowWalletModal(true);
-        return;
-      }
-
-      const wallet = activeAddress.toLowerCase();
-
-      const res = await axios.get(
-        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${wallet}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (res.data?.success) {
-        const normalizedCategory = category?.toLowerCase().trim();
-        const categoryItems = res.data.nfts.flatMap((item) => {
-          if (item.category?.toLowerCase().trim() !== normalizedCategory)
-            return [];
-
-          if (!item.isParentCollection || !Array.isArray(item.subCollections))
-            return [];
-
-          return item.subCollections.filter((sub) => {
-            const ownerMatch =
-              sub.owner?.toLowerCase() === wallet?.toLowerCase();
-            return ownerMatch && sub.listed === false;
-          });
-        });
-
-        if (categoryItems.length > 0) {
-          navigate("/Profile", { state: { category: category.toLowerCase().trim() } });
-        } else {
-          setShowNoItemMsg(true);
-          setTimeout(() => {
-            setShowNoItemMsg(false);
-          }, 2000);
-        }
-      }
-    } catch (error) {
-      console.error("Error checking items:", error);
-      toast.error("Failed to check items");
-    }
-  };
 
   useEffect(() => {
     const fetchByCategory = async () => {
@@ -330,39 +270,6 @@ function CategoryMarketplace() {
 
           {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-4">
-            {/* ✅ INSTANT SELL (STATIC CARD) */}
-            <div
-              className="rounded-xl p-3 text-white flex flex-col items-center"
-              style={{
-                background:
-                  "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-                border: "1px solid rgba(255,255,255,0.09)",
-              }}
-            >
-              {/* Top spacer — pushes content to center */}
-              <div className="flex-1" />
-
-              <img src={Logo} className="w-12 h-12 mb-2" alt="logo" />
-              <h2 className="text-sm font-bold mb-1">Instant Sell</h2>
-              <p className="text-sm font-semibold text-white/80 mb-1">1800 USDC</p>
-
-              {/* Bottom spacer — pushes button to bottom */}
-              <div className="flex-1" />
-
-              {showNoItemMsg && (
-                <div className="bg-black text-white text-[10px] px-2 py-1.5 rounded-md shadow-xl transition-all duration-300 mb-2 w-full text-center">
-                  you don't have any item to sell
-                </div>
-              )}
-
-              <button
-                onClick={checkAndNavigate}
-                className="px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20 w-full"
-              >
-                Sell Now
-              </button>
-            </div>
-
             {filteredItems && filteredItems.length > 0 ? (
               filteredItems.map((item) => (
                 <div

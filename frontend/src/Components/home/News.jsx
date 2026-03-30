@@ -265,7 +265,7 @@ export default function News() {
             whileInView="visible" viewport={{ once: true }}>
             <Link to="/news">
               <button className="px-7 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
-                More News
+                View All News
               </button>
             </Link>
           </motion.div>

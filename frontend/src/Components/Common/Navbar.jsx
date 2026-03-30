@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Map } from "lucide-react";
+import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Timer } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -311,12 +311,12 @@ export default function Navbar() {
                     style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
                     {[
                       [
-                        { to: "/market-place",      icon: <LayoutGrid className="w-5 h-5" />, label: "Overview",     desc: "See what's new and trending" },
-                        { to: "/personal-activity", icon: <Package    className="w-5 h-5" />, label: "My Assets",    desc: "Track and manage everything you own" },
+                        { to: "/market-place?tab=overview", icon: <LayoutGrid className="w-5 h-5" />, label: "Overview",  desc: "General market overview" },
+                        { to: "/personal-activity",         icon: <Package    className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
                       ],
                       [
-                        { to: "/collections",                            icon: <Layers className="w-5 h-5" />, label: "Collectibles", desc: "Browse all NFTs & NFAs" },
-                        { to: "/collections/land%20and%20bases",        icon: <Map     className="w-5 h-5" />, label: "Land & Bases", desc: "Buy a parcel of land and build on it" },
+                        { to: "/collections",               icon: <Layers className="w-5 h-5" />, label: "Collectibles", desc: "Browse all NFT & NFA collectibles" },
+                        { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: "Auction",      desc: "Track the countdown of any auction" },
                       ],
                     ].map((row, rowIdx) => (
                       <div key={rowIdx}>
