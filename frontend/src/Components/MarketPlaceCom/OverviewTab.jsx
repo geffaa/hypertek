@@ -13,12 +13,12 @@ const fadeUp = {
 
 // Avatar mapped per feature tab — each tab shows a different character
 const AVATARS = {
-  nfa101:  "/avatar/dryads.png",
-  general: "/avatar/fawnus.png",
-  auctions: "/avatar/geodians.png",
-  quests:  "/avatar/lithionites2.png",
-  hire:    "/avatar/mantasquads.png",
-  bounty:  "/avatar/ophidians.png",
+  nfa101:   "/avatar/dryads-male.png",
+  general:  "/avatar/fawnus-female.png",
+  auctions: "/avatar/geodians-male.png",
+  quests:   "/avatar/lithionites-female.png",
+  hire:     "/avatar/mantasquads-male.png",
+  bounty:   "/avatar/ophidians-female.png",
 };
 
 const FEATURES = [
