@@ -946,7 +946,7 @@ async function seed() {
   console.log(`💸 Withdrawals:    ${wd_created} created,  ${wd_skipped} skipped`);
   console.log(`💳 Payments:       ${pay_created} created,  ${pay_skipped} skipped`);
   console.log(`📊 Activities:     ${act_created} created,  ${act_skipped} skipped`);
-  console.log(`🔨 Auctions:       ${auc_created} created,  ${auc_skipped} skipped`);
+  console.log(`🔨 Auctions:       ${auc_created} created (fresh insert)`);
   console.log(`⚔️  Trades/Quests:  ${trade_created} created,  ${trade_skipped} skipped`);
   console.log(`👥 Hire/Rent:      ${hire_created} created,  ${hire_skipped} skipped`);
   console.log(`🎯 Bounties:       ${bounty_created} created,  ${bounty_skipped} skipped`);
