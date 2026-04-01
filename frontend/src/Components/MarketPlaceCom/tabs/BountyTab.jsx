@@ -562,7 +562,7 @@ export default function BountyTab() {
   const pages = Math.ceil(total / LIMIT);
 
   return (
-    <div className="py-6 relative overflow-hidden">
+    <div className="py-6 relative">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
@@ -609,26 +609,46 @@ export default function BountyTab() {
         <span><Target className="w-3 h-3 inline mr-0.5" />20% commission on reward</span>
       </div>
 
-      {/* Grid — semi-transparent while locked */}
-      <div className="opacity-50 pointer-events-none select-none">
-        {loading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="rounded-xl h-48 animate-pulse" style={{ background: "rgba(255,255,255,0.04)" }} />
-            ))}
+      {/* Cards + lock overlay using CSS Grid overlap */}
+      <div style={{ display: 'grid' }}>
+        {/* Grid cards — semi-transparent while locked */}
+        <div className="opacity-50 pointer-events-none select-none" style={{ gridRow: '1/1', gridColumn: '1/1' }}>
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="rounded-xl h-48 animate-pulse" style={{ background: "rgba(255,255,255,0.04)" }} />
+              ))}
+            </div>
+          ) : bounties.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-white/25">
+              <Target className="w-10 h-10 mb-3 opacity-30" />
+              <p className="text-sm">No {statusFilter} contracts</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {bounties.map(b => (
+                <BountyCard key={b._id} bounty={b} currentWallet={wallet} onClaim={handleClaim} />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Sticky lock message — overlaps cards, stays centered in viewport */}
+        <div className="pointer-events-none" style={{ gridRow: '1/1', gridColumn: '1/1', position: 'sticky', top: 'calc(50vh - 70px)', zIndex: 10, display: 'flex', justifyContent: 'center', alignSelf: 'start' }}>
+          <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
+            style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
+              <Lock className="w-5 h-5 text-white/60" />
+            </div>
+            <p className="text-white font-bold text-base leading-snug">
+              HyperTek Gaming content for display purposes only.
+            </p>
+            <p className="text-white/55 text-sm leading-relaxed">
+              This section is locked until games have been finalised.
+            </p>
           </div>
-        ) : bounties.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-white/25">
-            <Target className="w-10 h-10 mb-3 opacity-30" />
-            <p className="text-sm">No {statusFilter} contracts</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {bounties.map(b => (
-              <BountyCard key={b._id} bounty={b} currentWallet={wallet} onClaim={handleClaim} />
-            ))}
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Pagination */}
@@ -640,22 +660,7 @@ export default function BountyTab() {
         </div>
       )}
 
-      {/* Centered lock message box */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 10 }}>
-        <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl text-center"
-          style={{ background: "rgba(6,8,22,0.82)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxWidth: 400 }}>
-          <div className="w-10 h-10 rounded-full flex items-center justify-center"
-            style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
-            <Lock className="w-5 h-5 text-white/60" />
-          </div>
-          <p className="text-white font-bold text-base leading-snug">
-            Hyper Tek Gaming content for display purposes only.
-          </p>
-          <p className="text-white/55 text-sm leading-relaxed">
-            This section is locked until games have been finalised.
-          </p>
-        </div>
-      </div>
+
 
       {showCreate && (
         <CreateModal

@@ -12,6 +12,7 @@ import { BACKEND_BASE_URL } from "../../Config";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 /* ── Species data ─────────────────────────────────────────────── */
+// imgs[0] = female, imgs[1] = male  (genders array matches imgs order)
 const SPECIES = [
   {
     id: "lithionites", name: "Lithionites",
@@ -23,7 +24,8 @@ const SPECIES = [
     environment: "Caves · Mountains · Rocky Areas",
     clothing: "Tribal, Minimum",
     palette: ["#E5E7EB", "#374151", "#9CA3AF", "#D1D5DB"],
-    imgs: ["/avatar/lithionites.png", "/avatar/lithionites2.png"],
+    imgs: ["/avatar/lithionites-female.png", "/avatar/lithionites-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "marmulus", name: "Marmulus",
@@ -35,7 +37,8 @@ const SPECIES = [
     environment: "Forests · Flat Plains",
     clothing: "Egyptian – Modern",
     palette: ["#FFFFFF", "#FCD34D", "#92400E", "#111827"],
-    imgs: ["/avatar/marmulus.png", "/avatar/marmulus2.png"],
+    imgs: ["/avatar/marmulus-female.png", "/avatar/marmulus-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "ophidians", name: "Ophidians",
@@ -47,7 +50,8 @@ const SPECIES = [
     environment: "Rain Forest · Rocky Overgrown",
     clothing: "Roman – Egyptian",
     palette: ["#111827", "#7C2D12", "#B45309", "#BAE6FD"],
-    imgs: ["/avatar/ophidians.png", "/avatar/ophidians2.png"],
+    imgs: ["/avatar/ophidians-female.png", "/avatar/ophidians-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "geodians", name: "Geodians",
@@ -59,7 +63,8 @@ const SPECIES = [
     environment: "Rocky River Plains · Thermal Caves",
     clothing: "Long, Flowing, Semi-Transparent",
     palette: ["#FFFFFF", "#111827", "#78350F", "#9CA3AF"],
-    imgs: ["/avatar/geodians.png", "/avatar/geodians2.png"],
+    imgs: ["/avatar/geodians-female.png", "/avatar/geodians-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "fawnus", name: "Fawnus",
@@ -71,7 +76,8 @@ const SPECIES = [
     environment: "Flat Dry Plains · Near Mountains",
     clothing: "Steampunk",
     palette: ["#3B1F0A", "#1D3557", "#8B3A3A", "#B8860B"],
-    imgs: ["/avatar/fawnus.png", "/avatar/fawnus2.png"],
+    imgs: ["/avatar/fawnus-female.png", "/avatar/fawnus-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "mantasquads", name: "Mantasquads",
@@ -83,7 +89,8 @@ const SPECIES = [
     environment: "Monasteries · Europe",
     clothing: "Monk – Assassin Creed – Medieval",
     palette: ["#0A0A0A", "#2C1A0E", "#6B2737", "#4B0082"],
-    imgs: ["/avatar/mantasquads.png", "/avatar/mantasquads2.png"],
+    imgs: ["/avatar/mantasquads-female.png", "/avatar/mantasquads-male.png"],
+    genders: ["female", "male"],
   },
   {
     id: "dryads", name: "Dryads",
@@ -95,8 +102,18 @@ const SPECIES = [
     environment: "Woodlands · Forests · Overgrown Rocky Plains",
     clothing: "Woodlands",
     palette: ["#2D5016", "#5C3A1E", "#8B2500", "#4A7C59"],
-    imgs: ["/avatar/dryads.png", "/avatar/dryads2.png"],
+    imgs: ["/avatar/dryads-female.png", "/avatar/dryads-male.png"],
+    genders: ["female", "male"],
   },
+];
+
+/* ── Profile frames ───────────────────────────────────────────── */
+const PROFILE_FRAMES = [
+  { id: "default",  name: "Standard",     bonus: "Base frame",     color: "#00D4FF", locked: false },
+  { id: "iron",     name: "Iron Guard",   bonus: "+5,000 Might",   color: "#94a3b8", locked: true  },
+  { id: "crystal",  name: "Cryo Crystal", bonus: "+2% Endurance",  color: "#7dd3fc", locked: true  },
+  { id: "plasma",   name: "Plasma Core",  bonus: "+10,000 Might",  color: "#f97316", locked: true  },
+  { id: "overlord", name: "Overlord",     bonus: "+20% All Stats", color: "#a855f7", locked: true  },
 ];
 
 /* ── CSS ──────────────────────────────────────────────────────── */
@@ -108,6 +125,13 @@ const CSS = `
   .profile-circle:hover {
     transform: scale(1.06);
     box-shadow: 0 0 0 2px #00D4FF, 0 0 24px rgba(0,212,255,0.65), 0 0 6px rgba(0,0,0,0.9) !important;
+  }
+  .frame-opt {
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+  .frame-opt:hover {
+    transform: scale(1.08);
   }
   .equip-slot {
     transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
@@ -202,6 +226,11 @@ export default function ProfileButton() {
   const [open,           setOpen]           = useState(false);
   const [charSelectOpen, setCharSelectOpen] = useState(false);
   const [hoveredChar,    setHoveredChar]    = useState(null); // { speciesId, variantIdx }
+  const [selectedFrame,   setSelectedFrame]   = useState("default");
+  const [framePickerOpen, setFramePickerOpen] = useState(false);
+  const [genderFilter,    setGenderFilter]    = useState("all"); // "all" | "female" | "male"
+  const [carouselIdx,     setCarouselIdx]     = useState(0);
+  const touchStartX = useRef(null);
   const [selectedChar,   setSelectedChar]   = useState(() => {
     try {
       const s = localStorage.getItem("hypertek_selected_char");
@@ -247,6 +276,20 @@ export default function ProfileButton() {
     return () => window.removeEventListener("hypertek_name_changed", handler);
   }, []);
 
+  // Reset carousel when filter changes
+  useEffect(() => { setCarouselIdx(0); }, [genderFilter]);
+
+  // Keyboard ← → navigation
+  useEffect(() => {
+    if (!charSelectOpen) return;
+    const handler = (e) => {
+      if (e.key === "ArrowLeft")  setCarouselIdx(i => Math.max(0, i - 1));
+      if (e.key === "ArrowRight") setCarouselIdx(i => i + 1); // clamped at render time
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [charSelectOpen]);
+
   const handleSelectChar = (speciesId, variantIdx) => {
     const next = { speciesId, variantIdx };
     setSelectedChar(next);
@@ -280,45 +323,61 @@ export default function ProfileButton() {
         pointerEvents: "auto",
       }}>
 
-        {/* ── Avatar circle ── */}
-        <img
-          className="profile-circle"
-          src={displayAvatarSrc}
-          alt="Profile"
-          loading="lazy"
-          onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
-          onClick={() => setOpen(o => !o)}
-          style={{
-            width: SIZE, height: SIZE, borderRadius: "50%",
-            objectFit: "cover", objectPosition: "center 10%",
-            border: "2px solid rgba(0,212,255,0.7)",
-            boxShadow: "0 0 0 1px rgba(0,212,255,0.2), 0 0 16px rgba(0,212,255,0.35), 0 0 5px rgba(0,0,0,0.9)",
-          }}
-        />
-
-        {/* ── Name card ── */}
-        {!isMobile && (
-          <div onClick={() => setOpen(o => !o)} style={{
-            background: "rgba(3,8,20,0.92)",
-            border: "1px solid rgba(0,212,255,0.35)",
-            borderRadius: "3px", padding: "4px 10px",
-            textAlign: "center", backdropFilter: "blur(10px)",
-            boxShadow: "0 0 10px rgba(0,212,255,0.12)",
-            minWidth: "max-content", cursor: "pointer",
-          }}>
-            <div style={{
-              fontFamily: "Orbitron,sans-serif",
-              fontSize: "clamp(8px,0.7vw,11px)", fontWeight: "bold",
-              letterSpacing: "0.14em", color: "#00D4FF",
-              textShadow: "0 0 8px rgba(0,212,255,0.6)", lineHeight: 1.3,
-            }}>{displayName}</div>
-            <div style={{
-              fontFamily: "Orbitron,sans-serif",
-              fontSize: "clamp(8px,0.65vw,10px)", letterSpacing: "0.1em",
-              color: "#FFFFFF", lineHeight: 1.3,
-            }}>HYPER-TEK PLAYER</div>
-          </div>
-        )}
+        {/* ── Avatar circle with sci-fi frame ── */}
+        {(() => {
+          const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
+          const cornerSize = isMobile ? 8 : 11;
+          const cornerThick = 2;
+          const corners = [
+            { top: -4, left: -4,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { top: -4, right: -4, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+            { bottom: -4, left: -4,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { bottom: -4, right: -4, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+          ];
+          return (
+            <div style={{ position: "relative", display: "inline-block" }}>
+              {corners.map((c, i) => (
+                <div key={i} style={{
+                  position: "absolute", width: cornerSize, height: cornerSize,
+                  pointerEvents: "none", zIndex: 2, ...c,
+                }} />
+              ))}
+              <div
+                className="profile-circle"
+                onClick={() => setOpen(o => !o)}
+                style={{
+                  width: SIZE, height: SIZE, borderRadius: "50%",
+                  overflow: "hidden",
+                  border: `2px solid ${frameColor}`,
+                  boxShadow: `0 0 0 1px ${frameColor}33, 0 0 16px ${frameColor}55, 0 0 5px rgba(0,0,0,0.9)`,
+                  display: "block", flexShrink: 0,
+                }}
+              >
+                <img
+                  src={displayAvatarSrc}
+                  alt="Profile"
+                  loading="lazy"
+                  onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                  style={{
+                    width: "250%", height: "250%",
+                    objectFit: "cover", objectPosition: "center 5%",
+                    marginLeft: "-45%%",
+                    display: "block",
+                  }}
+                />
+              </div>
+              {/* LVL badge */}
+              <div style={{
+                position: "absolute", bottom: -10, left: "50%", transform: "translateX(-50%)",
+                background: "rgba(3,8,20,0.92)", border: `1px solid ${frameColor}77`,
+                borderRadius: 2, padding: "1px 8px", whiteSpace: "nowrap",
+                fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                fontWeight: "bold", letterSpacing: "0.1em", color: frameColor,
+                textShadow: `0 0 6px ${frameColor}88`,
+              }}>LVL 23</div>
+            </div>
+          );
+        })()}
 
         {/* ══════════════════════════════════════════
             AVATAR EQUIPMENT PANEL
@@ -361,63 +420,173 @@ export default function ProfileButton() {
                 <Slot label="Boots"  size={isMobile ? 42 : 60} />
               </div>
 
-              {/* Center: Avatar image — click to open character selection */}
-              <div style={{ flex: 1, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: isMobile ? 5 : 8 }}>
-                <div
-                  className="avatar-img-btn"
-                  onClick={() => setCharSelectOpen(o => !o)}
-                  title="Click to choose character"
-                  style={{
-                    width: isMobile ? 68 : 100, height: isMobile ? 98 : 148,
-                    background: "radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.14), transparent 70%)",
-                    border: charSelectOpen
-                      ? "1.5px solid rgba(0,212,255,0.75)"
-                      : "1px solid rgba(0,212,255,0.28)",
-                    borderRadius: 6,
-                    overflow: "hidden",
-                    boxShadow: charSelectOpen
-                      ? "0 0 22px rgba(0,212,255,0.38)"
-                      : "0 0 14px rgba(0,212,255,0.1)",
-                    position: "relative",
-                  }}
-                >
-                  <img
-                    src={displayAvatarSrc}
-                    alt="avatar"
-                    onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
-                  />
-                  {/* "CHANGE" hint */}
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    background: "linear-gradient(transparent, rgba(0,0,0,0.78))",
-                    padding: "10px 4px 5px",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                  }}>
-                    <span style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
-                      letterSpacing: "0.1em", color: "#00D4FF",
-                      textShadow: "0 0 6px rgba(0,212,255,0.7)",
-                    }}>CHANGE ▸</span>
+              {/* Center: Name/LVL header + Avatar image in sci-fi frame */}
+              {(() => {
+                const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
+                const imgW = isMobile ? 68 : 100;
+                const imgH = isMobile ? 98 : 148;
+                return (
+                  <div style={{ flex: 1, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: isMobile ? 4 : 6 }}>
+
+                    {/* Name + LVL */}
+                    <div style={{
+                      background: "rgba(3,8,20,0.88)",
+                      border: `1px solid ${frameColor}44`,
+                      borderRadius: 4, padding: isMobile ? "3px 8px" : "4px 12px",
+                      textAlign: "center", width: "100%",
+                    }}>
+                      <div style={{
+                        fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight: "bold",
+                        letterSpacing: "0.12em", color: frameColor,
+                        textShadow: `0 0 8px ${frameColor}88`, lineHeight: 1.3,
+                      }}>{displayName}</div>
+                      <div style={{
+                        fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                        letterSpacing: "0.1em", color: "rgba(255,255,255,0.75)", lineHeight: 1.3,
+                      }}>LvL: 23</div>
+                    </div>
+
+                    {/* Avatar image in sci-fi frame — hover shows frame picker */}
+                    <div style={{ position: "relative" }}
+                      onMouseEnter={() => setFramePickerOpen(true)}
+                      onMouseLeave={() => setFramePickerOpen(false)}
+                    >
+
+                      <div
+                        className="avatar-img-btn"
+                        onClick={() => setCharSelectOpen(o => !o)}
+                        title="Click to choose character"
+                        style={{
+                          width: imgW, height: imgH,
+                          background: `radial-gradient(ellipse at 50% 30%, ${frameColor}18, transparent 70%)`,
+                          border: `2px solid ${frameColor}BB`,
+                          borderRadius: 6,
+                          overflow: "hidden",
+                          boxShadow: `0 0 0 1px ${frameColor}33, 0 0 18px ${frameColor}66, 0 0 36px ${frameColor}22`,
+                          position: "relative",
+                        }}
+                      >
+                        <img
+                          src={displayAvatarSrc}
+                          alt="avatar"
+                          onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                          style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
+                        />
+                        {/* "CHANGE" hint */}
+                        <div style={{
+                          position: "absolute", bottom: 0, left: 0, right: 0,
+                          background: "linear-gradient(transparent, rgba(0,0,0,0.78))",
+                          padding: "10px 4px 5px",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>
+                          <span style={{
+                            fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
+                            letterSpacing: "0.1em", color: frameColor,
+                            textShadow: `0 0 6px ${frameColor}99`,
+                          }}>CHANGE ▸</span>
+                        </div>
+                      </div>
+
+                      {/* Frame picker overlay on hover */}
+                      {framePickerOpen && (
+                        <div style={{
+                          position: "absolute", top: 0, left: "calc(100% + 8px)",
+                          background: "rgba(3,10,24,0.97)",
+                          border: "1px solid rgba(0,212,255,0.28)",
+                          borderRadius: 6, padding: "8px",
+                          boxShadow: "0 8px 28px rgba(0,0,0,0.75)",
+                          backdropFilter: "blur(16px)",
+                          zIndex: 50, width: 140,
+                          display: "flex", flexDirection: "column", gap: 5,
+                        }}>
+                          <div style={{
+                            fontFamily: "Orbitron,sans-serif", fontSize: 8, fontWeight: "bold",
+                            color: "#00D4FF", letterSpacing: "0.12em", marginBottom: 3,
+                          }}>PROFILE FRAME</div>
+                          {PROFILE_FRAMES.map(f => (
+                            <div
+                              key={f.id}
+                              className="frame-opt"
+                              onClick={(e) => { e.stopPropagation(); if (!f.locked) setSelectedFrame(f.id); }}
+                              style={{
+                                display: "flex", alignItems: "center", gap: 6,
+                                padding: "5px 7px", borderRadius: 4,
+                                border: selectedFrame === f.id
+                                  ? `1px solid ${f.color}`
+                                  : "1px solid rgba(255,255,255,0.08)",
+                                background: selectedFrame === f.id
+                                  ? `${f.color}18`
+                                  : "rgba(255,255,255,0.03)",
+                                opacity: f.locked ? 0.55 : 1,
+                                cursor: f.locked ? "not-allowed" : "pointer",
+                              }}
+                            >
+                              {/* Color swatch */}
+                              <div style={{
+                                width: 10, height: 10, borderRadius: 2, flexShrink: 0,
+                                background: f.color,
+                                boxShadow: `0 0 6px ${f.color}88`,
+                                border: "1px solid rgba(255,255,255,0.2)",
+                              }} />
+                              <div style={{ minWidth: 0 }}>
+                                <div style={{
+                                  fontFamily: "Orbitron,sans-serif", fontSize: 8, fontWeight: "bold",
+                                  color: f.locked ? "#9CA3AF" : f.color,
+                                  letterSpacing: "0.06em", whiteSpace: "nowrap",
+                                }}>
+                                  {f.locked ? "🔒 " : ""}{f.name}
+                                </div>
+                                <div style={{
+                                  fontFamily: "Orbitron,sans-serif", fontSize: 7,
+                                  color: "rgba(255,255,255,0.45)", letterSpacing: "0.05em",
+                                }}>{f.bonus}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Might + Endurance frame */}
+                    <div style={{
+                      width: "100%",
+                      background: "rgba(3,8,20,0.88)",
+                      border: `1px solid ${frameColor}44`,
+                      borderRadius: 4, padding: isMobile ? "4px 6px" : "5px 8px",
+                      position: "relative",
+                    }}>
+                      {/* corner accents */}
+                      {[
+                        { top: -1, left: -1,   borderTop: `1px solid ${frameColor}`, borderLeft:   `1px solid ${frameColor}`, width: 5, height: 5 },
+                        { top: -1, right: -1,  borderTop: `1px solid ${frameColor}`, borderRight:  `1px solid ${frameColor}`, width: 5, height: 5 },
+                        { bottom: -1, left: -1,  borderBottom: `1px solid ${frameColor}`, borderLeft:   `1px solid ${frameColor}`, width: 5, height: 5 },
+                        { bottom: -1, right: -1, borderBottom: `1px solid ${frameColor}`, borderRight:  `1px solid ${frameColor}`, width: 5, height: 5 },
+                      ].map((c, i) => (
+                        <div key={i} style={{ position: "absolute", pointerEvents: "none", ...c }} />
+                      ))}
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>MIGHT</span>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold", color: "#fbbf24", letterSpacing: "0.05em" }}>342,879,418</span>
+                      </div>
+                      <div style={{ height: 1, background: `${frameColor}22`, margin: "2px 0" }} />
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>ENDURANCE</span>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold", color: "#6ee7b7", letterSpacing: "0.05em" }}>685</span>
+                      </div>
+                    </div>
+
+                    {selectedChar && (
+                      <span style={{
+                        fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                        letterSpacing: "0.07em", color: "#7ECEEC",
+                        textAlign: "center",
+                      }}>
+                        {SPECIES.find(s => s.id === selectedChar.speciesId)?.name ?? ""}
+                      </span>
+                    )}
                   </div>
-                </div>
-
-                <span style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight: "bold",
-                  letterSpacing: "0.1em", color: "#00D4FF",
-                  textAlign: "center", textShadow: "0 0 8px rgba(0,212,255,0.5)",
-                }}>{displayName}</span>
-
-                {selectedChar && (
-                  <span style={{
-                    fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                    letterSpacing: "0.07em", color: "#7ECEEC",
-                    textAlign: "center",
-                  }}>
-                    {SPECIES.find(s => s.id === selectedChar.speciesId)?.name ?? ""}
-                  </span>
-                )}
-              </div>
+                );
+              })()}
 
               {/* Right: Helmet / Gloves */}
               <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 6 : 10, alignItems: "center", justifyContent: "center" }}>
@@ -462,7 +631,7 @@ export default function ProfileButton() {
           }}>
 
             {/* Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <span style={{
                   fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight: "bold",
@@ -475,102 +644,189 @@ export default function ProfileButton() {
                   {SPECIES.length} SPECIES · {SPECIES.length * 2} VARIANTS
                 </div>
               </div>
-              <button onClick={() => setCharSelectOpen(false)} style={{
-                background: "none", border: "none", color: "rgba(255,255,255,0.65)",
-                fontSize: isMobile ? 14 : 18, cursor: "pointer", lineHeight: 1, padding: "0 2px",
-              }}>×</button>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                {/* Gender filter */}
+                {[
+                  { key: "all",    label: "ALL"    },
+                  { key: "female", label: "♀ F"   },
+                  { key: "male",   label: "♂ M"   },
+                ].map(({ key, label }) => (
+                  <button key={key} onClick={() => setGenderFilter(key)} style={{
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: isMobile ? 7 : 9, fontWeight: "bold",
+                    letterSpacing: "0.08em",
+                    padding: isMobile ? "2px 6px" : "3px 9px",
+                    borderRadius: 3, cursor: "pointer",
+                    border: genderFilter === key
+                      ? "1px solid #00D4FF"
+                      : "1px solid rgba(0,212,255,0.25)",
+                    background: genderFilter === key
+                      ? "rgba(0,212,255,0.18)"
+                      : "rgba(0,212,255,0.04)",
+                    color: genderFilter === key ? "#00D4FF" : "rgba(0,212,255,0.5)",
+                    transition: "all 0.15s",
+                  }}>{label}</button>
+                ))}
+
+                <button onClick={() => setCharSelectOpen(false)} style={{
+                  background: "none", border: "none", color: "rgba(255,255,255,0.65)",
+                  fontSize: isMobile ? 14 : 18, cursor: "pointer", lineHeight: 1, padding: "0 2px",
+                }}>×</button>
+              </div>
             </div>
 
-            {/* Character grid — 4 columns, scrollable */}
-            <div className="char-grid" style={{
-              display: "grid",
-              gridTemplateColumns: `repeat(${isMobile ? 3 : 4}, 1fr)`,
-              gap: isMobile ? 6 : 9,
-              overflowY: "auto",
-              maxHeight: isMobile ? "38vh" : "44vh",
-              paddingRight: 3,
-            }}>
-              {SPECIES.flatMap(sp =>
+            {/* ── Character Carousel ── */}
+            {(() => {
+              const visibleCount = isMobile ? 3 : 4;
+              const allItems = SPECIES.flatMap(sp =>
                 sp.imgs.map((img, vi) => {
-                  const isSelected = selectedChar?.speciesId === sp.id && selectedChar?.variantIdx === vi;
-                  return (
-                    <div
-                      key={`${sp.id}-${vi}`}
-                      className="char-card"
-                      onClick={() => handleSelectChar(sp.id, vi)}
-                      onMouseEnter={() => setHoveredChar({ speciesId: sp.id, variantIdx: vi })}
-                      onMouseLeave={() => setHoveredChar(null)}
-                      style={{
-                        borderRadius: 6,
-                        border: isSelected
-                          ? "1.5px solid rgba(0,212,255,0.85)"
-                          : "1px solid rgba(0,212,255,0.18)",
-                        background: isSelected
-                          ? "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.16), rgba(4,10,26,0.95))"
-                          : "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.05), rgba(4,10,26,0.88))",
-                        boxShadow: isSelected ? "0 0 18px rgba(0,212,255,0.35)" : "none",
-                        overflow: "hidden",
-                        display: "flex", flexDirection: "column", alignItems: "center",
-                        paddingBottom: 6,
-                        position: "relative",
-                      }}
-                    >
-                      {/* Character image */}
-                      <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden", position: "relative" }}>
-                        <img
-                          src={img}
-                          alt={sp.name}
-                          loading="lazy"
-                          onError={(e) => { e.currentTarget.style.opacity = "0.25"; }}
-                          style={{
-                            width: "100%", height: "100%",
-                            objectFit: "cover", objectPosition: "center top",
-                            display: "block",
-                          }}
-                        />
-                        {/* Coming soon overlay */}
-                        {!sp.type && (
-                          <div style={{
-                            position: "absolute", inset: 0,
-                            background: "rgba(4,10,26,0.55)",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                          }}>
-                            <span style={{
-                              fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.07em",
-                              color: "rgba(0,212,255,0.45)", textAlign: "center", lineHeight: 1.5,
-                            }}>COMING<br/>SOON</span>
-                          </div>
-                        )}
-                        {/* Selected checkmark */}
-                        {isSelected && (
-                          <div style={{
-                            position: "absolute", top: 5, right: 5,
-                            width: 15, height: 15, borderRadius: "50%",
-                            background: "#00D4FF",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            fontSize: 9, color: "#020d1a", fontWeight: "bold",
-                            boxShadow: "0 0 8px rgba(0,212,255,0.7)",
-                          }}>✓</div>
-                        )}
-                      </div>
-
-                      {/* Name + variant */}
-                      <span style={{
-                        fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 8 : 9, fontWeight: "bold",
-                        letterSpacing: "0.07em",
-                        color: isSelected ? "#00D4FF" : "#FFFFFF",
-                        textAlign: "center", marginTop: 5,
-                        textShadow: isSelected ? "0 0 8px rgba(0,212,255,0.5)" : "none",
-                      }}>{sp.name}</span>
-                      <span style={{
-                        fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                        color: "#7ECEEC", letterSpacing: "0.06em", marginTop: 1,
-                      }}>V{vi + 1}</span>
-                    </div>
-                  );
+                  const gender = sp.genders?.[vi] ?? (vi === 0 ? "female" : "male");
+                  return { img, vi, sp, gender };
                 })
-              )}
-            </div>
+              ).filter(({ gender }) => genderFilter === "all" || gender === genderFilter);
+
+              const maxIdx = Math.max(0, allItems.length - visibleCount);
+              const safeIdx = Math.min(carouselIdx, maxIdx);
+              if (safeIdx !== carouselIdx) setCarouselIdx(safeIdx);
+              const visible = allItems.slice(safeIdx, safeIdx + visibleCount);
+
+              return (
+                <div style={{ display: "flex", alignItems: "stretch", gap: 6 }}>
+
+                  {/* ◀ Prev */}
+                  <button
+                    onClick={() => setCarouselIdx(i => Math.max(0, i - 1))}
+                    disabled={safeIdx === 0}
+                    style={{
+                      flexShrink: 0, width: 28, background: "rgba(0,212,255,0.07)",
+                      border: "1px solid rgba(0,212,255,0.25)", borderRadius: 4,
+                      color: safeIdx === 0 ? "rgba(0,212,255,0.2)" : "#00D4FF",
+                      cursor: safeIdx === 0 ? "not-allowed" : "pointer",
+                      fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "all 0.15s",
+                    }}
+                  >◀</button>
+
+                  {/* Cards viewport */}
+                  <div
+                    style={{
+                      flex: 1, display: "grid",
+                      gridTemplateColumns: `repeat(${visibleCount}, 1fr)`,
+                      gap: isMobile ? 6 : 9,
+                      border: "1px solid rgba(0,212,255,0.22)",
+                      borderRadius: 6, padding: isMobile ? 6 : 9,
+                      background: "rgba(0,212,255,0.03)",
+                      boxShadow: "inset 0 0 18px rgba(0,212,255,0.06)",
+                    }}
+                    onTouchStart={e => { touchStartX.current = e.touches[0].clientX; }}
+                    onTouchEnd={e => {
+                      if (touchStartX.current === null) return;
+                      const dx = e.changedTouches[0].clientX - touchStartX.current;
+                      if (dx < -40) setCarouselIdx(i => Math.min(maxIdx, i + 1));
+                      if (dx >  40) setCarouselIdx(i => Math.max(0, i - 1));
+                      touchStartX.current = null;
+                    }}
+                  >
+                    {visible.map(({ img, vi, sp, gender }) => {
+                      const isSelected = selectedChar?.speciesId === sp.id && selectedChar?.variantIdx === vi;
+                      const isHovered  = hoveredChar?.speciesId === sp.id && hoveredChar?.variantIdx === vi;
+                      return (
+                        <div
+                          key={`${sp.id}-${vi}`}
+                          className="char-card"
+                          onClick={() => handleSelectChar(sp.id, vi)}
+                          onMouseEnter={() => setHoveredChar({ speciesId: sp.id, variantIdx: vi })}
+                          onMouseLeave={() => setHoveredChar(null)}
+                          style={{
+                            borderRadius: 6,
+                            border: isSelected
+                              ? "1.5px solid rgba(0,212,255,0.85)"
+                              : isHovered
+                                ? "1.5px solid rgba(0,212,255,0.55)"
+                                : "1px solid rgba(0,212,255,0.18)",
+                            background: isSelected
+                              ? "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.16), rgba(4,10,26,0.95))"
+                              : isHovered
+                                ? "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.12), rgba(4,10,26,0.9))"
+                                : "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.05), rgba(4,10,26,0.88))",
+                            boxShadow: isSelected
+                              ? "0 0 18px rgba(0,212,255,0.35)"
+                              : isHovered
+                                ? "0 0 12px rgba(0,212,255,0.22)"
+                                : "none",
+                            overflow: "hidden",
+                            display: "flex", flexDirection: "column", alignItems: "center",
+                            paddingBottom: 6, position: "relative",
+                            transform: isHovered ? "translateY(-2px) scale(1.02)" : "none",
+                            transition: "transform 0.15s, box-shadow 0.15s, border-color 0.15s",
+                          }}
+                        >
+                          {/* Image — half body */}
+                          <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden", position: "relative" }}>
+                            <img
+                              src={img} alt={sp.name} loading="lazy"
+                              onError={(e) => { e.currentTarget.style.opacity = "0.25"; }}
+                              style={{
+                                width: "100%", height: "160%",
+                                objectFit: "cover", objectPosition: "center top",
+                                display: "block", transform: "scale(1.1)", transformOrigin: "top center",
+                                filter: isHovered ? "brightness(1.15)" : "none",
+                                transition: "filter 0.15s",
+                              }}
+                            />
+                            {/* Gender badge */}
+                            <div style={{
+                              position: "absolute", top: 4, left: 4,
+                              background: gender === "female" ? "rgba(236,72,153,0.75)" : "rgba(59,130,246,0.75)",
+                              borderRadius: 2, padding: "1px 4px",
+                              fontFamily: "Orbitron,sans-serif", fontSize: 7, fontWeight: "bold",
+                              color: "#fff", letterSpacing: "0.05em",
+                            }}>{gender === "female" ? "♀" : "♂"}</div>
+                            {isSelected && (
+                              <div style={{
+                                position: "absolute", top: 5, right: 5,
+                                width: 15, height: 15, borderRadius: "50%",
+                                background: "#00D4FF",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                                fontSize: 9, color: "#020d1a", fontWeight: "bold",
+                                boxShadow: "0 0 8px rgba(0,212,255,0.7)",
+                              }}>✓</div>
+                            )}
+                          </div>
+                          <span style={{
+                            fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold",
+                            letterSpacing: "0.07em",
+                            color: isSelected ? "#00D4FF" : isHovered ? "#fff" : "#FFFFFF",
+                            textAlign: "center", marginTop: 5,
+                            textShadow: isSelected ? "0 0 8px rgba(0,212,255,0.5)" : "none",
+                          }}>{sp.name}</span>
+                          <span style={{
+                            fontFamily: "Orbitron,sans-serif", fontSize: 7,
+                            color: gender === "female" ? "rgba(236,72,153,0.7)" : "rgba(96,165,250,0.7)",
+                            letterSpacing: "0.06em", marginTop: 1,
+                          }}>{gender === "female" ? "♀ Female" : "♂ Male"}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* ▶ Next */}
+                  <button
+                    onClick={() => setCarouselIdx(i => Math.min(maxIdx, i + 1))}
+                    disabled={safeIdx >= maxIdx}
+                    style={{
+                      flexShrink: 0, width: 28, background: "rgba(0,212,255,0.07)",
+                      border: "1px solid rgba(0,212,255,0.25)", borderRadius: 4,
+                      color: safeIdx >= maxIdx ? "rgba(0,212,255,0.2)" : "#00D4FF",
+                      cursor: safeIdx >= maxIdx ? "not-allowed" : "pointer",
+                      fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "all 0.15s",
+                    }}
+                  >▶</button>
+                </div>
+              );
+            })()}
 
             {/* ── Detail strip ── */}
             {detailSpecies ? (

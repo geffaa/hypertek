@@ -4,7 +4,11 @@ const nft101Schema = new mongoose.Schema(
   {
     title:        { type: String, required: true, trim: true },
     description:  { type: String, default: "" },          // short summary shown on card
-    body:         [{ type: String }],                     // array of paragraphs for article view
+    body:         [{ type: String }],                     // legacy flat paragraphs
+    sections:     [{                                       // structured sub-headings
+      heading:    { type: String, required: true },
+      paragraphs: [{ type: String }],
+    }],
     image:        { type: String, default: "" },          // cover image URL
     category:     { type: String, default: "Basics" },    // e.g. Basics, Security, HyperTek, Blockchain
     readTime:     { type: Number, default: 3 },           // estimated minutes

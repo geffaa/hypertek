@@ -1,52 +1,126 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-const LAST_UPDATED = "20.03.2026";
+import { termsOfServiceData } from "../data/legal/termsOfService";
+import { apiTermsData } from "../data/legal/apiTerms";
+import { packsTermsData } from "../data/legal/packsTerms";
+import { privacyPolicyData } from "../data/legal/privacyPolicy";
+import { otherPoliciesData } from "../data/legal/otherPolicies";
 
-const SECTIONS = [
-  { id: "s1",  title: "1. Agreement to Terms" },
-  { id: "s2",  title: "2. Privacy Policy" },
-  { id: "s3",  title: "3. Changes to these Terms or the Services" },
-  { id: "s4",  title: "4. Who May Use the Services" },
-  { id: "s5",  title: "5. The HyperTek Platform" },
-  { id: "s6",  title: "6. Digital Assets — NFAs and NFCs" },
-  { id: "s7",  title: "7. Marketplace Fees and Royalties" },
-  { id: "s8",  title: "8. HyperBucks (HB)" },
-  { id: "s9",  title: "9. Wallet and Account Security" },
-  { id: "s10", title: "10. Intellectual Property" },
-  { id: "s11", title: "11. User Conduct" },
-  { id: "s12", title: "12. Third-Party Services" },
-  { id: "s13", title: "13. Disclaimers" },
-  { id: "s14", title: "14. Limitation of Liability" },
-  { id: "s15", title: "15. Indemnification" },
-  { id: "s16", title: "16. Termination" },
-  { id: "s17", title: "17. Dispute Resolution" },
-  { id: "s18", title: "18. Governing Law" },
-  { id: "s19", title: "19. General" },
-  { id: "s20", title: "20. Contact" },
+const DOCUMENTS = [
+  { key: "tos",     label: "Terms of Service",           ...termsOfServiceData },
+  { key: "api",     label: "API Terms of Service",       ...apiTermsData },
+  { key: "packs",   label: "Packs Terms of Service",     ...packsTermsData },
+  { key: "privacy", label: "Privacy Policy",              ...privacyPolicyData },
+  { key: "copy",    label: "Copyright Policy",            ...otherPoliciesData.copyright },
+  { key: "tm",      label: "Trademark Policy",            ...otherPoliciesData.trademark },
+  { key: "law",     label: "Law Enforcement Guidelines",  ...otherPoliciesData.lawEnforcement },
 ];
 
-function S({ id, title, children }) {
-  return (
-    <div id={id} className="mb-12 scroll-mt-24">
-      <h2 className="font-semibold text-xl text-white mb-4">{title}</h2>
-      <div className="text-white/65 text-[17px] leading-[1.9] space-y-4 text-justify">{children}</div>
-    </div>
-  );
+/* ── Renderers ── */
+function RenderBlock({ block }) {
+  if (!block) return null;
+  switch (block.type) {
+    case "p":
+      return <p className="text-white/60 text-sm leading-relaxed">{block.text}</p>;
+    case "bold-p":
+      return (
+        <p className="text-white/60 text-sm leading-relaxed">
+          <strong className="text-white/85">{block.label}</strong> {block.text}
+        </p>
+      );
+    case "caps":
+      return <p className="text-white/60 text-sm leading-relaxed uppercase">{block.text}</p>;
+    case "list":
+      return (
+        <ul className="space-y-2">
+          {block.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2 text-sm text-white/60">
+              <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-blue-500" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      );
+    case "important":
+      return (
+        <div className="rounded-xl p-5 my-4 text-sm leading-relaxed"
+          style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}>
+          <strong className="text-white block mb-1 uppercase tracking-wider text-xs">
+            {block.label || "Important Notice"}
+          </strong>
+          <span className="text-white/65">{block.text}</span>
+        </div>
+      );
+    case "subsection":
+      return (
+        <div
+          className="rounded-2xl p-6 mb-2"
+          style={{
+            background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <h3 className="font-semibold text-white text-sm mb-3">{block.title}</h3>
+          <div className="space-y-3">
+            {(block.content || []).map((b, i) => <RenderBlock key={i} block={b} />)}
+          </div>
+        </div>
+      );
+    case "table":
+      return (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr>
+                {block.headers.map(h => (
+                  <th key={h} className="text-left text-white/30 text-xs font-semibold py-2 pr-4">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {block.rows.map((row, ri) => (
+                <tr key={ri}>
+                  {row.map((v, ci) => (
+                    <td key={ci} className={`py-2.5 pr-4 text-sm ${ci === 0 ? "text-white/70 font-medium" : "text-white/50"}`}>{v}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    default:
+      return <p className="text-white/60 text-sm leading-relaxed">{block.text || ""}</p>;
+  }
 }
 
+/* ── Main ── */
 export default function TermsPage() {
-  const [activeSection, setActiveSection] = useState("s1");
+  const [activeDoc, setActiveDoc] = useState("tos");
+  const [activeSection, setActiveSection] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
 
+  const doc = DOCUMENTS.find(d => d.key === activeDoc) || DOCUMENTS[0];
+  const sections = doc.sections || [];
+
+  const switchDoc = useCallback((key) => {
+    setActiveDoc(key);
+    setTocOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  /* scroll-spy */
   useEffect(() => {
+    if (!sections.length) return;
+    setActiveSection(sections[0]?.id || "");
     const onScroll = () => {
-      // If scrolled to bottom, activate last section
       if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 60) {
-        setActiveSection(SECTIONS[SECTIONS.length - 1].id);
+        setActiveSection(sections[sections.length - 1]?.id || "");
         return;
       }
       const offset = window.scrollY + 140;
-      let current = SECTIONS[0].id;
-      for (const { id } of SECTIONS) {
+      let current = sections[0]?.id || "";
+      for (const { id } of sections) {
         const el = document.getElementById(id);
         if (el) {
           const top = el.getBoundingClientRect().top + window.scrollY;
@@ -58,240 +132,176 @@ export default function TermsPage() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [activeDoc, sections]);
 
-  const goTo = (id) => {
+  const scrollTo = useCallback((id) => {
     const el = document.getElementById(id);
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 88, behavior: "smooth" });
-  };
+    setTocOpen(false);
+  }, []);
 
   return (
-    <div className="min-h-screen text-white pt-[72px]">
-      <div className="flex px-4">
+    <div className="min-h-screen text-white mt-12">
 
-        {/* ── SPACER — reserves space for the fixed sidebar ── */}
-        <div className="hidden md:block shrink-0 w-[220px]" />
+      {/* ── Mobile TOC toggle ── */}
+      <div className="lg:hidden sticky top-[68px] z-40 px-4 py-3"
+        style={{ background: "rgba(0,8,32,0.95)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <button onClick={() => setTocOpen(!tocOpen)}
+          className="flex items-center gap-2 text-sm font-semibold text-white/70">
+          <span>☰</span> Contents
+        </button>
+        {tocOpen && (
+          <div className="mt-3 flex flex-col gap-1">
+            {/* Mobile doc switcher */}
+            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">Documents</p>
+            {DOCUMENTS.map(({ key, label }) => (
+              <button key={key} onClick={() => switchDoc(key)}
+                className={`text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                  activeDoc === key ? "text-blue-400 bg-blue-900/30 font-semibold" : "text-white/40 hover:text-white"
+                }`}>
+                {label}
+              </button>
+            ))}
+            <div className="border-t border-white/5 my-2" />
+            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">Sections</p>
+            {sections.map(({ id, title }) => (
+              <button key={id} onClick={() => scrollTo(id)}
+                className={`text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                  activeSection === id ? "text-white bg-blue-900/40" : "text-white/50 hover:text-white"
+                }`}>
+                {title}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
-        {/* ── SIDEBAR — fixed, always visible ── */}
+      {/* ── Body ── */}
+      <div className="flex items-start">
+
+        {/* ── Sidebar (sticky, same pattern as whitepaper) ── */}
         <aside
-          className="hidden md:flex flex-col"
+          className="hidden lg:flex flex-col shrink-0 w-[260px]"
           style={{
-            position: "fixed",
-            top: 72,
-            width: 220,
-            height: "calc(100vh - 72px)",
+            position: "sticky",
+            top: 68,
+            alignSelf: "flex-start",
+            height: "calc(100vh - 68px)",
             overflowY: "auto",
             borderRight: "1px solid rgba(255,255,255,0.08)",
-            padding: "32px 16px 32px 0",
+            padding: "32px 20px",
           }}
         >
-          <Link
-            to="/"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-white/50 hover:text-white/90 transition-colors mb-5"
-          >
-            ← Back to Home
-          </Link>
+          {/* Document switcher */}
+          <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">Documents</p>
+          <nav className="flex flex-col gap-0.5 mb-4">
+            {DOCUMENTS.map(({ key, label }) => (
+              <button
+                key={key}
+                onClick={() => switchDoc(key)}
+                className={`text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 font-medium ${
+                  activeDoc === key
+                    ? "text-blue-400 bg-blue-900/30 border-l-2 border-blue-500 pl-2"
+                    : "text-white/35 hover:text-white/60"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
 
-          <p className="text-white/30 text-[10px] uppercase tracking-widest font-semibold mb-2">
-            Sections
-          </p>
-          {SECTIONS.map(({ id, title }) => (
-            <button
-              key={id}
-              onClick={() => goTo(id)}
-              className={`w-full text-left px-3 py-1.5 rounded text-xs transition-colors ${
-                activeSection === id
-                  ? "text-white bg-blue-900/40 border-l-2 border-blue-500"
-                  : "text-white/35 hover:text-white"
-              }`}
-            >
-              {title}
-            </button>
-          ))}
-        </aside>
+          {/* Section nav */}
+          {sections.length > 0 && (
+            <>
+              <div className="border-t border-white/5 mb-4" />
+              <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">Sections</p>
+              <nav className="flex flex-col gap-0.5 overflow-y-auto flex-1">
+                {sections.map(({ id, title }) => (
+                  <button
+                    key={id}
+                    onClick={() => scrollTo(id)}
+                    className={`text-left px-3 py-1.5 rounded-lg text-[12px] leading-snug transition-all duration-200 ${
+                      activeSection === id
+                        ? "text-white bg-blue-900/40 border-l-2 border-blue-500 pl-2 font-medium"
+                        : "text-white/30 hover:text-white/55"
+                    }`}
+                  >
+                    {title}
+                  </button>
+                ))}
+              </nav>
+            </>
+          )}
 
-        {/* ── MAIN CONTENT ── */}
-        <main className="px-10 py-10">
-          <h1 className="font-bold text-2xl md:text-3xl mb-1">Terms of Service</h1>
-          <p className="text-white/35 text-sm mb-8">Last Updated: {LAST_UPDATED}</p>
-
-          <p className="text-white/65 text-[17px] leading-[1.9] mb-8 text-justify">
-            Please read these Terms of Service (the{" "}
-            <strong className="text-white/85">"Terms"</strong>) and our Privacy Policy (
-            <strong className="text-white/85">"Privacy Policy"</strong>) carefully because they
-            govern your use of the website and interface located at{" "}
-            <span className="text-blue-400">https://hypertek100.com</span> (the{" "}
-            <strong className="text-white/85">"Site"</strong> or the{" "}
-            <strong className="text-white/85">"Hyper Tek Platform"</strong>), the blockchain
-            currency management software that is downloadable from the site (the{" "}
-            <strong className="text-white/85">"Software"</strong>), corresponding mobile
-            applications (<strong className="text-white/85">"Apps"</strong>), and other
-            services and resources that are available, enabled or offered by Hyper Tek or Head
-            Tech P/L (<strong className="text-white/85">"HT"</strong>,{" "}
-            <strong className="text-white/85">"we,"</strong>{" "}
-            <strong className="text-white/85">"our"</strong>), which facilitates interaction
-            with certain decentralised cryptographic protocols, which are either open-sourced
-            or may become open-sourced (collectively, the{" "}
-            <strong className="text-white/85">"Protocols"</strong>) to effectuate the creation
-            and deployment (aka "minting") of Non-Fungible Assets/Non-Fungible Collectables
-            (<strong className="text-white/85">"NFAs/NFCs"</strong>), support sale and
-            distribution of such NFAs/NFCs on the decentralised blockchains on which the
-            NFAs/NFCs are recorded (<strong className="text-white/85">"Blockchains"</strong>),
-            and support the management of cryptographic currencies. To make these Terms easier
-            to read, the Site, Software, Apps and our services are collectively called the{" "}
-            <strong className="text-white/85">"Services"</strong>. These Terms do not govern
-            any interactions you may have with our third-party API providers, each of which has
-            its own terms. HT is not a bank or financial institution and does not provide
-            investment or financial advice to users of the Services. We are solely the provider
-            of the Services.
-          </p>
-
-          <div
-            className="rounded-xl p-5 mb-10 text-sm leading-relaxed text-justify"
-            style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}
-          >
-            <strong className="text-white block mb-1 uppercase tracking-wider">
-              Important Notice Regarding Arbitration
-            </strong>
-            <span className="text-white/65">
-              WHEN YOU AGREE TO THESE TERMS YOU ARE AGREEING (WITH LIMITED EXCEPTION) TO
-              RESOLVE ANY DISPUTE BETWEEN YOU AND HT THROUGH BINDING, INDIVIDUAL ARBITRATION
-              RATHER THAN IN COURT. PLEASE REVIEW CAREFULLY SECTION 18 "DISPUTE RESOLUTION"
-              BELOW FOR DETAILS REGARDING ARBITRATION.
-            </span>
-          </div>
-
-          <S id="s1" title="1. Agreement to Terms">
-            <p>By using the Services, you agree to be bound by these Terms. If you don't agree to be bound by these Terms, you are not authorised to use the Services.</p>
-          </S>
-
-          <S id="s2" title="2. Privacy Policy">
-            <p>Please review our Privacy Policy, which also governs your use of the Services, for information on how we collect, use and share your information.</p>
-          </S>
-
-          <S id="s3" title="3. Changes to these Terms or the Services">
-            <p>We may update the Terms from time to time at our sole discretion. If we do, we'll let you know by posting the updated Terms on the Site, to the Apps and/or may also send other communications. It's important that you review the Terms whenever we update them or you use the Services. If you continue to use the Services after we have posted updated Terms, it means that you accept and agree to the changes. If you don't agree to be bound by the changes, you may not use the Services anymore. Because the Services are evolving over time, we may change or discontinue all or any part of the Services, at any time and without notice, at our sole discretion.</p>
-          </S>
-
-          <S id="s4" title="4. Who May Use the Services">
-            <p><strong className="text-white/85">Eligibility.</strong> YOU MAY USE THE SERVICES ONLY IF YOU ARE 18 YEARS OR OLDER AND CAPABLE OF FORMING A BINDING CONTRACT WITH HT, AND NOT OTHERWISE BARRED FROM USING THE SERVICES UNDER APPLICABLE LAW. THE SERVICES ARE NOT AVAILABLE TO RESIDENTS OF THE UNITED STATES. We will not knowingly solicit or collect personal information from any user under the age of 13. Do not attempt to use the Services if you are under the age of 13. If we become aware that a user is under the age of 13, we will promptly delete all personal information of the user. If you have information that suggests that a user of the Service could be under the age of 13, please send an email to <span className="text-blue-400">info@hypertek100.com</span>.</p>
-          </S>
-
-          <S id="s5" title="5. The HyperTek Platform">
-            <p>HyperTek provides a platform through which users may create, list, purchase, and trade digital assets — including NFAs, NFCs, and in-game materials — on the Base blockchain network. HyperTek does not take custody of digital assets on behalf of users; all transactions occur directly between users via smart contracts.</p>
-            <p>HyperTek also offers HyperBucks (HB), an in-platform credit system earned through gameplay and redeemable within the HyperTek ecosystem. HyperBucks are not a security, investment product, or currency.</p>
-          </S>
-
-          <S id="s6" title="6. Digital Assets — NFAs and NFCs">
-            <p><strong className="text-white/85">NFA (Non-Fungible Asset).</strong> An NFA carries a buyback guarantee funded by a 5% contribution from every sale. The minimum buyback reserve accumulates automatically. Sales below an NFA's minimum reserve price are not permitted.</p>
-            <p><strong className="text-white/85">NFC (Non-Fungible Collectible).</strong> An NFC is a digital collectible without a buyback guarantee. NFCs may be created by registered users and listed for sale on the HyperTek marketplace.</p>
-            <p>Ownership is determined by the blockchain record. HyperTek does not guarantee the value, liquidity, or future utility of any digital asset.</p>
-          </S>
-
-          <S id="s7" title="7. Marketplace Fees and Royalties">
-            <p>HyperTek charges a platform fee on all completed sales. The fee structure applies uniformly to all sales — there is no preferential first-sale exception.</p>
-            <div
-              className="rounded-lg overflow-hidden text-xs mt-3"
-              style={{ border: "1px solid rgba(255,255,255,0.08)" }}
-            >
-              <table className="w-full">
-                <thead>
-                  <tr style={{ background: "rgba(255,255,255,0.05)" }}>
-                    {["Asset Type","Seller","Artist / Creator","Buyback Fund","HyperTek"].map((h) => (
-                      <th key={h} className="text-left px-4 py-2.5 text-white/50 font-medium text-sm">{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ["NFA",            "80%", "4%", "5%", "11%"],
-                    ["NFC",            "80%", "4%", "—",  "16%"],
-                    ["Materials (HB)", "80%", "—",  "—",  "20%"],
-                  ].map(([type, ...cols]) => (
-                    <tr key={type} style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                      <td className="px-4 py-2.5 text-white/70 font-medium text-sm">{type}</td>
-                      {cols.map((v, i) => <td key={i} className="px-4 py-2.5 text-white/60 text-sm">{v}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-3">Royalties are distributed automatically on-chain (USDC on Base). For artists with bank payment preferences, royalties are held pending and disbursed manually by HyperTek administration.</p>
-          </S>
-
-          <S id="s8" title="8. HyperBucks (HB)">
-            <p>HyperBucks are in-platform credits earned through gameplay, purchasable, and spendable within the HyperTek ecosystem. HB may be cashed out in USDC or via bank transfer subject to minimum thresholds and fees. HyperTek reserves the right to modify HB earn/cashout rates at any time.</p>
-            <p>HyperBucks are not a cryptocurrency, security, or investment instrument.</p>
-          </S>
-
-          <S id="s9" title="9. Wallet and Account Security">
-            <p>Upon registration, HyperTek generates a wallet on your behalf and delivers an encrypted private key backup to your registered email address. You are solely responsible for the security of your wallet and private key. HyperTek cannot recover your wallet or reset your private key if you lose your credentials. Never share your private key with anyone, including HyperTek staff.</p>
-          </S>
-
-          <S id="s10" title="10. Intellectual Property">
-            <p>Content submitted to HyperTek must be owned by the submitting party or properly licensed. HyperTek requires a non-exclusive licence to display and distribute it on the platform.</p>
-            <p>HyperTek's branding, platform design, and proprietary software are the exclusive property of HyperTek. You may not copy, modify, or distribute HyperTek's intellectual property without express written permission.</p>
-          </S>
-
-          <S id="s11" title="11. User Conduct">
-            <p>You agree not to:</p>
-            <ul className="list-disc list-inside space-y-1.5 pl-2">
-              <li>Use the Services for any illegal purpose or in violation of applicable laws</li>
-              <li>Engage in wash trading, price manipulation, or fraudulent listings</li>
-              <li>Submit content that infringes third-party intellectual property rights</li>
-              <li>Attempt to exploit, hack, or interfere with the platform or its smart contracts</li>
-              <li>Create multiple accounts to circumvent bans or restrictions</li>
-            </ul>
-            <p>HyperTek reserves the right to suspend or terminate accounts that violate these Terms without notice or refund.</p>
-          </S>
-
-          <S id="s12" title="12. Third-Party Services">
-            <p>The platform integrates with third-party services including blockchain networks (Base), payment processors (Stripe), and wallet providers. These third parties have their own terms and privacy policies. HyperTek is not responsible for the conduct or reliability of third-party services.</p>
-          </S>
-
-          <S id="s13" title="13. Disclaimers">
-            <p>THE SERVICES ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. HYPERTEK DOES NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED OR ERROR-FREE. NOTHING ON THE PLATFORM CONSTITUTES FINANCIAL, LEGAL, OR TAX ADVICE.</p>
-          </S>
-
-          <S id="s14" title="14. Limitation of Liability">
-            <p>TO THE FULLEST EXTENT PERMITTED BY LAW, HYPERTEK SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICES, INCLUDING LOSSES FROM MARKET VOLATILITY, SMART CONTRACT EXPLOITS, WALLET SECURITY BREACHES, OR THIRD-PARTY SERVICE OUTAGES.</p>
-          </S>
-
-          <S id="s15" title="15. Indemnification">
-            <p>You agree to indemnify and hold harmless HyperTek and its officers, directors, employees, and agents from any claims, damages, or expenses (including reasonable legal fees) arising from your use of the Services, your breach of these Terms, or your violation of any third-party rights.</p>
-          </S>
-
-          <S id="s16" title="16. Termination">
-            <p>We may suspend or terminate your access to the Services at any time, with or without cause or notice. Sections relating to intellectual property, disclaimers, limitation of liability, and dispute resolution survive termination.</p>
-          </S>
-
-          <S id="s17" title="17. Dispute Resolution">
-            <p><strong className="text-white/85">Informal Resolution.</strong> Before filing any formal dispute, you agree to contact HyperTek via the Support channel and attempt to resolve the issue informally for at least 30 days.</p>
-            <p><strong className="text-white/85">Binding Arbitration.</strong> If informal resolution fails, any dispute shall be resolved by binding individual arbitration rather than in court, except where prohibited by law.</p>
-            <p><strong className="text-white/85">No Class Actions.</strong> You may only bring disputes against HyperTek on an individual basis.</p>
-          </S>
-
-          <S id="s18" title="18. Governing Law">
-            <p>These Terms are governed by applicable law without regard to conflict-of-law principles. Any disputes not subject to arbitration shall be resolved in the courts of the jurisdiction where HyperTek is incorporated. <em className="text-white/40">[Jurisdiction to be confirmed by HyperTek legal team.]</em></p>
-          </S>
-
-          <S id="s19" title="19. General">
-            <p>These Terms constitute the entire agreement between you and HyperTek regarding the Services. If any provision is found unenforceable, the remaining provisions continue in full force.</p>
-          </S>
-
-          <S id="s20" title="20. Contact">
-            <p>For questions about these Terms, contact us through the Support section within your HyperTek account or via our official social channels listed on the Site.</p>
-          </S>
-
-          <div className="mt-10 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-white"
-              style={{ background: "#002AA8" }}
-            >
+          <div className="mt-4">
+            <Link to="/"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-300 border border-white/20 hover:border-white/40"
+              style={{ background: "#002AA8" }}>
               ← Back to Home
             </Link>
           </div>
+        </aside>
+
+        {/* ── Main content — full width from sidebar to right edge ── */}
+        <main className="flex-1 px-8 lg:px-16 py-16 space-y-16">
+
+          {/* Header */}
+          <div>
+            <h1 className="font-[Goldman] text-3xl md:text-4xl font-bold text-white mb-2">{doc.label}</h1>
+            <p className="text-white/30 text-sm">Last Updated: {doc.lastUpdated}</p>
+          </div>
+
+          {/* Intro */}
+          {doc.intro && (
+            <div
+              className="rounded-2xl p-6"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <p className="text-white/60 text-sm leading-relaxed">{doc.intro}</p>
+            </div>
+          )}
+
+          {/* Notice */}
+          {doc.notice && (
+            <div className="rounded-2xl p-6"
+              style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}>
+              <strong className="text-white block mb-2 uppercase tracking-wider text-xs">
+                {doc.notice.label || "Important Notice Regarding Arbitration"}
+              </strong>
+              <p className="text-white/65 text-sm leading-relaxed">{doc.notice.text}</p>
+            </div>
+          )}
+
+          {/* Sections */}
+          {sections.map((section) => (
+            <section key={section.id} id={section.id} className="pt-2">
+              {/* Heading */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-1 h-7 rounded-full bg-[#002AA8] shrink-0" />
+                <h2 className="font-[Goldman] text-xl md:text-2xl font-bold text-white">{section.title}</h2>
+              </div>
+              <div className="space-y-4">
+                {(section.content || []).map((block, i) => (
+                  <RenderBlock key={i} block={block} />
+                ))}
+              </div>
+            </section>
+          ))}
+
+          {/* Footer */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-8"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            <Link to="/"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
+              style={{ background: "#002AA8" }}>
+              ← Back to Home
+            </Link>
+            <p className="text-white/20 text-xs">© {new Date().getFullYear()} Hyper Tek. All rights reserved.</p>
+          </div>
+
         </main>
       </div>
     </div>

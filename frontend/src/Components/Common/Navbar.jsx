@@ -315,7 +315,7 @@ export default function Navbar() {
                         { to: "/personal-activity",         icon: <Package    className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
                       ],
                       [
-                        { to: "/collections",               icon: <Layers className="w-5 h-5" />, label: "Collectibles", desc: "Browse all NFT & NFA collectibles" },
+                        { to: "/collections",               icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT & NFA collectibles" },
                         { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: "Auction",      desc: "Track the countdown of any auction" },
                       ],
                     ].map((row, rowIdx) => (
@@ -585,10 +585,10 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  to="/market-place"
+                  to="/collections"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
-                  Collectibles
+                  The Marketplace
                 </Link>
 
                 <Link

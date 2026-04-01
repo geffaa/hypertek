@@ -42,7 +42,7 @@ export default function Gaming() {
       transition: "opacity 0.7s ease",
     }}>
       <GameFrame />
-      <TopBar />
+      <TopBar activeGame={activeGame} />
       <ProfileButton />
       <MiniMap />
       <ViewButton

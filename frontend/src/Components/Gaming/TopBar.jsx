@@ -11,13 +11,25 @@ import { logout } from "../../Redux/AuthSlice";
 import symbol from "../../assets/images/login/Symbol.svg.png";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
+// Per-game resource values (mock — replace with API per game)
+const GAME_RESOURCES = {
+  RACING:   { FOOD: 61.7,  OIL: 59.8,  CRYSTALS: 3.4,  FUEL: 102.6, ORE: 13.5 },
+  QUEST:    { FOOD: 12.9,  OIL: 102.7, CRYSTALS: 1.8,  FUEL: 125.2, ORE: 14.8 },
+  OVERLORD: { FOOD: 45.3,  OIL: 9.4,   CRYSTALS: 4.7,  FUEL: 191.0, ORE: 19.8 },
+};
+
+function fmtVal(n) {
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}B`;
+  return `${n.toFixed(1)}M`;
+}
+
 // 5 resources per Don's brief — each has open/stored for dropdown
-const RESOURCES = [
-  { id: "FOOD",     label: "Food",            value: "61.7M",   color: "#6ee7b7", img: "/icon_food.png",   open: "61.7M",  stored: "5.3B"  },
-  { id: "OIL",      label: "Oil",             value: "59.8M",   color: "#94a3b8", img: "/icon_oil.png",    open: "59.8M",  stored: "1.4B"  },
-  { id: "CRYSTALS", label: "Energy Crystals", value: "3.4M",    color: "#c4b5fd", img: "/icon_energy.png", open: "3.4M",   stored: "39M"   },
-  { id: "FUEL",     label: "Fuel",            value: "102.6M",  color: "#fb923c", img: "/icon_fuel.png",   open: "102.6M", stored: "766M"  },
-  { id: "ORE",      label: "Ore",             value: "73.5M",   color: "#cbd5e1", img: "/icon_ore.png",    open: "73.5M",  stored: "821M"  },
+const RESOURCE_META = [
+  { id: "FOOD",     label: "Food",            color: "#6ee7b7", img: "/icon_food.png",   openSuffix: "5.3B"  },
+  { id: "OIL",      label: "Oil",             color: "#94a3b8", img: "/icon_oil.png",    openSuffix: "1.4B"  },
+  { id: "CRYSTALS", label: "Energy Crystals", color: "#c4b5fd", img: "/icon_energy.png", openSuffix: "39M"   },
+  { id: "FUEL",     label: "Fuel",            color: "#fb923c", img: "/icon_fuel.png",   openSuffix: "766M"  },
+  { id: "ORE",      label: "Ore",             color: "#cbd5e1", img: "/icon_ore.png",    openSuffix: "821M"  },
 ];
 
 // Resources panel categories per Don's brief
@@ -60,10 +72,10 @@ const RES_CATEGORIES = [
   {
     id: "timeclocks", label: "Time Clocks", locked: false,
     items: [
-      { label: "5-minute Time Clock", val: "55056" }, { label: "15-minute Time Clock", val: "25648" },
-      { label: "30-minute Time Clock", val: "9878" }, { label: "1Hour Time Clock", val: "54569" },
-      { label: "3 Hour Time Clock", val: "42123" }, { label: "8 Hour Time Clock", val: "3212" },
-      { label: "12 Hour Time Clock", val: "1247" }, { label: "24 Hour Time Clock", val: "947" },
+      { label: "5-minute",  val: "55056" }, { label: "15-minute", val: "25648" },
+      { label: "30-minute", val: "9878"  }, { label: "1 Hour",    val: "54569" },
+      { label: "3 Hour",    val: "42123" }, { label: "8 Hour",    val: "3212"  },
+      { label: "12 Hour",   val: "1247"  }, { label: "24 Hour",   val: "947"   },
     ],
   },
 ];
@@ -182,10 +194,31 @@ const NAV_BTN_BASE = {
   transition: "background 0.15s, box-shadow 0.15s, color 0.15s",
 };
 
-export default function TopBar() {
+export default function TopBar({ activeGame }) {
   const navigate  = useNavigate();
   const dispatch  = useDispatch();
   const isMobile  = useMobileLandscape();
+
+  // ── Linked / Unlinked state ───────────────────────────────────────
+  const [isLinked,      setIsLinked]      = useState(false);
+  const [linkedTipOpen, setLinkedTipOpen] = useState(false);
+  const linkedTipTimer = useRef(null);
+
+  const openLinkedTip  = () => { clearTimeout(linkedTipTimer.current); setLinkedTipOpen(true); };
+  const closeLinkedTip = () => { linkedTipTimer.current = setTimeout(() => setLinkedTipOpen(false), 200); };
+
+  // Resolve which game's resources to show
+  const currentGame = activeGame || "RACING";   // default to RACING when on main screen
+
+  const RESOURCES = isLinked
+    ? RESOURCE_META.map((r) => {
+        const total = Object.values(GAME_RESOURCES).reduce((sum, g) => sum + g[r.id], 0);
+        return { ...r, value: fmtVal(total), open: fmtVal(total), stored: r.openSuffix };
+      })
+    : RESOURCE_META.map((r) => {
+        const val = GAME_RESOURCES[currentGame]?.[r.id] ?? 0;
+        return { ...r, value: fmtVal(val), open: fmtVal(val), stored: r.openSuffix };
+      });
 
   const NAV_BTN = {
     ...NAV_BTN_BASE,
@@ -206,15 +239,15 @@ export default function TopBar() {
   // ── Ships dropdown + floor plan modal ────────────────────────────
   const [shipsOpen,    setShipsOpen]    = useState(false);
   const [shipLevel,    setShipLevel]    = useState(null);
+  const [skinLevel,    setSkinLevel]    = useState(null);   // which LVL's skin panel is open
+  const [selectedShipSkins, setSelectedShipSkins] = useState({ 1: "plain", 2: "plain", 3: "plain", 4: "plain" });
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hoveredRoom,  setHoveredRoom]  = useState(null);
   const [shipLine,       setShipLine]       = useState(null);
   const [vrShipOpen,     setVrShipOpen]     = useState(false);
   const [vrShipPairing,  setVrShipPairing]  = useState(false);
   const [vrShipPairDone, setVrShipPairDone] = useState(false);
-  const [vrQuestShipOpen, setVrQuestShipOpen] = useState(false);
   const vrShipRef        = useRef(null);
-  const vrQuestShipRef   = useRef(null);
   const shipsRef       = useRef(null);
   const shipContentRef = useRef(null);
   const shipImgRef     = useRef(null);
@@ -269,8 +302,6 @@ export default function TopBar() {
       if (vrShipRef.current && !vrShipRef.current.contains(e.target)) {
         setVrShipOpen(false); setVrShipPairing(false); setVrShipPairDone(false);
       }
-      if (vrQuestShipRef.current && !vrQuestShipRef.current.contains(e.target))
-        setVrQuestShipOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -344,7 +375,7 @@ export default function TopBar() {
               display: "flex", alignItems: "center", gap: "6px",
             }}
           >
-            🚀 SHIPS
+            🚀 SHIP
             <span style={{
               fontSize: "8px", display: "inline-block",
               transition: "transform 0.18s",
@@ -355,31 +386,137 @@ export default function TopBar() {
           {shipsOpen && (
             <div className="market-dropdown" style={{
               position: "absolute", top: "calc(100% + 6px)", left: 0,
-              minWidth: 140,
+              minWidth: 160,
               background: "rgba(3,10,24,0.97)",
               border: "1px solid rgba(251,191,36,0.35)",
               borderRadius: 4,
               backdropFilter: "blur(16px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.7), 0 0 20px rgba(251,191,36,0.08)",
-              zIndex: 100, overflow: "hidden",
+              zIndex: 100, overflow: "visible",
             }}>
+              {/* Header */}
+              <div style={{
+                padding: "7px 16px 6px",
+                fontFamily: "Orbitron,sans-serif",
+                fontSize: "clamp(9px,0.75vw,11px)",
+                fontWeight: "bold", letterSpacing: "0.14em",
+                color: "#fbbf24", textShadow: "0 0 8px rgba(251,191,36,0.6)",
+                borderBottom: "1px solid rgba(251,191,36,0.18)",
+              }}>SHIP&apos;S SKINS</div>
+
               {[1, 2, 3, 4].map(lvl => (
-                <div
-                  key={lvl}
-                  className="market-dropdown-item"
-                  onClick={() => { setShipLevel(lvl); setShipsOpen(false); }}
-                  style={{
-                    padding: "9px 16px",
-                    fontFamily: "Orbitron,sans-serif",
-                    fontSize: "clamp(10px,0.85vw,13px)",
-                    fontWeight: "bold",
-                    letterSpacing: "0.12em",
-                    color: "#fbbf24",
-                    borderBottom: lvl < 4 ? "1px solid rgba(251,191,36,0.08)" : "none",
-                    cursor: "pointer",
-                  }}
+                <div key={lvl} style={{ position: "relative" }}
+                  onMouseEnter={() => setSkinLevel(lvl)}
+                  onMouseLeave={() => setSkinLevel(null)}
                 >
-                  SHIP LVL {lvl}
+                  <div
+                    className="market-dropdown-item"
+                    onClick={() => { setShipLevel(lvl); setShipsOpen(false); setSkinLevel(null); }}
+                    style={{
+                      padding: "9px 16px",
+                      fontFamily: "Orbitron,sans-serif",
+                      fontSize: "clamp(10px,0.85vw,13px)",
+                      fontWeight: "bold", letterSpacing: "0.12em",
+                      color: skinLevel === lvl ? "#fff" : "#fbbf24",
+                      background: skinLevel === lvl ? "rgba(251,191,36,0.1)" : "transparent",
+                      borderBottom: lvl < 4 ? "1px solid rgba(251,191,36,0.08)" : "none",
+                      cursor: "pointer",
+                      display: "flex", justifyContent: "space-between", alignItems: "center",
+                    }}
+                  >
+                    SHIP LVL {lvl}
+                    <span style={{ fontSize: 8, opacity: 0.6 }}>▶</span>
+                  </div>
+
+                  {/* Skin slots panel — opens to the right */}
+                  {skinLevel === lvl && (
+                    <div className="market-dropdown" style={{
+                      position: "absolute", top: 0, left: "calc(100% + 6px)",
+                      background: "rgba(3,10,24,0.97)",
+                      border: "1px solid rgba(251,191,36,0.35)",
+                      borderRadius: 4,
+                      backdropFilter: "blur(16px)",
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.7)",
+                      zIndex: 110, padding: "10px",
+                      display: "flex", gap: 8, alignItems: "flex-start",
+                    }}>
+                      {/* Current skin (unlocked) */}
+                      {(() => {
+                        const isSelected = selectedShipSkins[lvl] === "plain";
+                        return (
+                          <div
+                            className="frame-opt"
+                            onClick={() => setSelectedShipSkins(s => ({ ...s, [lvl]: "plain" }))}
+                            style={{
+                              width: isMobile ? 52 : 72, flexShrink: 0,
+                              display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
+                              cursor: "pointer",
+                            }}
+                          >
+                            <div style={{
+                              width: isMobile ? 52 : 72, height: isMobile ? 60 : 82,
+                              background: "rgba(0,80,130,0.55)",
+                              border: isSelected ? "2px solid #fbbf24" : "1.5px solid rgba(251,191,36,0.5)",
+                              borderRadius: 4,
+                              boxShadow: isSelected ? "0 0 16px rgba(251,191,36,0.6), 0 0 4px rgba(251,191,36,0.3)" : "0 0 6px rgba(251,191,36,0.2)",
+                              overflow: "hidden", position: "relative",
+                            }}>
+                              <img
+                                src={`/ships/level${lvl}-plain.png`}
+                                alt={`Ship LVL ${lvl}`}
+                                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                              />
+                              {isSelected && (
+                                <div style={{
+                                  position: "absolute", top: 3, right: 3,
+                                  width: 14, height: 14, borderRadius: "50%",
+                                  background: "#fbbf24", display: "flex",
+                                  alignItems: "center", justifyContent: "center",
+                                  fontSize: 8, color: "#020d1a", fontWeight: "bold",
+                                  boxShadow: "0 0 6px rgba(251,191,36,0.8)",
+                                }}>✓</div>
+                              )}
+                            </div>
+                            <span style={{
+                              fontFamily: "Orbitron,sans-serif", fontSize: 7, fontWeight: "bold",
+                              letterSpacing: "0.06em",
+                              color: isSelected ? "#fbbf24" : "rgba(251,191,36,0.6)",
+                              textAlign: "center",
+                            }}>{isSelected ? "✓ ACTIVE" : "CURRENT"}</span>
+                          </div>
+                        );
+                      })()}
+
+                      {/* Locked skin slots */}
+                      {[1, 2, 3, 4].map(i => (
+                        <div key={i} style={{
+                          width: isMobile ? 52 : 72, flexShrink: 0,
+                          display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
+                          cursor: "not-allowed",
+                        }}>
+                          <div style={{
+                            width: isMobile ? 52 : 72, height: isMobile ? 60 : 82,
+                            background: "rgba(0,40,70,0.55)",
+                            border: "1px solid rgba(251,191,36,0.2)",
+                            borderRadius: 4,
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            padding: "4px",
+                          }}>
+                            <span style={{
+                              fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 6 : 7,
+                              color: "rgba(251,191,36,0.4)", textAlign: "center",
+                              letterSpacing: "0.05em", lineHeight: 1.5,
+                            }}>NOT{"\n"}AVAILABLE{"\n"}RIGHT NOW</span>
+                          </div>
+                          <span style={{
+                            fontFamily: "Orbitron,sans-serif", fontSize: 7, fontWeight: "bold",
+                            letterSpacing: "0.06em", color: "rgba(251,191,36,0.3)",
+                            textAlign: "center",
+                          }}>🔒 LOCKED</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -451,6 +588,17 @@ export default function TopBar() {
                       boxShadow: "0 8px 24px rgba(0,0,0,0.7)",
                       zIndex: 110,
                     }}>
+                      {/* Category title header */}
+                      <div style={{
+                        padding: "7px 14px 6px",
+                        fontFamily: "Orbitron,sans-serif",
+                        fontSize: "clamp(9px,0.75vw,11px)",
+                        fontWeight: "bold",
+                        letterSpacing: "0.14em",
+                        color: "#00D4FF",
+                        textShadow: "0 0 8px rgba(0,212,255,0.6)",
+                        borderBottom: "1px solid rgba(0,212,255,0.18)",
+                      }}>{cat.label}</div>
                       {cat.items.map((item, j) => (
                         <div key={j} style={{
                           padding: "8px 14px",
@@ -477,7 +625,51 @@ export default function TopBar() {
           )}
         </div>
 
-        {/* 2. Resource slots */}
+        {/* 3. Linked / Unlinked toggle */}
+        <div style={{ position: "relative", flexShrink: 0 }}
+          onMouseEnter={openLinkedTip}
+          onMouseLeave={closeLinkedTip}
+        >
+          <button
+            className="res-slot"
+            onClick={() => setIsLinked(v => !v)}
+            style={{
+              ...NAV_BTN,
+              borderColor: isLinked ? "rgba(234,179,8,0.9)" : "rgba(0,212,255,0.55)",
+              color:       isLinked ? "#fbbf24"             : "#00D4FF",
+              textShadow:  isLinked ? "0 0 8px rgba(234,179,8,0.6)" : "0 0 8px rgba(0,212,255,0.6)",
+              background:  isLinked ? "rgba(234,179,8,0.12)" : undefined,
+            }}
+          >
+            {isLinked ? "LINKED" : "UNLINKED"}
+          </button>
+
+          {linkedTipOpen && (
+            <div className="market-dropdown" style={{
+              position: "absolute", top: "calc(100% + 6px)", left: 0,
+              width: 260,
+              background: "rgba(3,10,24,0.97)",
+              border: "1px solid rgba(0,212,255,0.25)",
+              borderRadius: 4,
+              backdropFilter: "blur(16px)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.7)",
+              zIndex: 100, padding: "12px 14px",
+              fontFamily: "Orbitron,sans-serif",
+            }}>
+              <p style={{ fontSize: 10, color: "#fbbf24", marginBottom: 8, lineHeight: 1.5 }}>
+                <strong>Linked Mode:</strong> Allows a player to link all resources from the other games for use in upgrades.
+              </p>
+              <p style={{ fontSize: 10, color: "#00D4FF", marginBottom: 8, lineHeight: 1.5 }}>
+                <strong>Unlinked Mode:</strong> Unlinks the resources from each game, showing only what&apos;s available in each game.
+              </p>
+              <p style={{ fontSize: 10, color: "#f87171", lineHeight: 1.5 }}>
+                <strong>Warning:</strong> In &quot;Linked&quot; mode, all materials are vulnerable to being taken if attacked!
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* 4. Resource slots */}
         <div ref={resBarRef} style={{
           flex: 1, height: isMobile ? "26px" : "4.8vh",
           display: "flex", alignItems: "stretch",
@@ -865,7 +1057,7 @@ export default function TopBar() {
                 {/* VR MODE button */}
                 <div ref={vrShipRef} style={{ position: "relative" }}>
                   <button
-                    onClick={() => { setVrShipOpen(o => { if (o) { setVrShipPairing(false); setVrShipPairDone(false); } return !o; }); setVrQuestShipOpen(false); }}
+                    onClick={() => { setVrShipOpen(o => { if (o) { setVrShipPairing(false); setVrShipPairDone(false); } return !o; }); }}
                     style={{
                       padding: isMobile ? "4px 10px" : "6px 16px",
                       background: vrShipOpen ? "rgba(0,212,255,0.18)" : "rgba(0,0,0,0.45)",
@@ -929,41 +1121,6 @@ export default function TopBar() {
                   )}
                 </div>
 
-                {/* VR QUEST button */}
-                <div ref={vrQuestShipRef} style={{ position: "relative" }}>
-                  <button
-                    onClick={() => { setVrQuestShipOpen(o => !o); setVrShipOpen(false); }}
-                    style={{
-                      padding: isMobile ? "4px 10px" : "6px 16px",
-                      background: vrQuestShipOpen ? "rgba(167,139,250,0.18)" : "rgba(0,0,0,0.45)",
-                      border: `1.5px solid ${vrQuestShipOpen ? "#a78bfa" : "rgba(167,139,250,0.6)"}`,
-                      borderRadius: 3, cursor: "pointer",
-                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 10 : 15, fontWeight: "bold",
-                      color: "#a78bfa",
-                      letterSpacing: "0.12em", transition: "all 0.15s",
-                      boxShadow: vrQuestShipOpen ? "0 0 18px rgba(167,139,250,0.55)" : "0 0 8px rgba(167,139,250,0.25)",
-                      textShadow: "0 0 12px rgba(167,139,250,0.9)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >VR QUEST</button>
-
-                  {vrQuestShipOpen && (
-                    <div style={{
-                      position: "absolute", top: "calc(100% + 6px)", left: 0, zIndex: 60,
-                      background: "linear-gradient(160deg,#0d0820,#06030f)",
-                      border: "1.5px solid rgba(167,139,250,0.4)", borderRadius: 5,
-                      boxShadow: "0 6px 24px rgba(0,0,0,0.95), 0 0 16px rgba(167,139,250,0.12)",
-                      padding: isMobile ? "10px 12px" : "12px 16px", minWidth: isMobile ? 155 : 195,
-                    }}>
-                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight: "bold", letterSpacing: "0.12em", color: "#a78bfa", marginBottom: 8 }}>VR QUEST MODE</div>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#f87171", boxShadow: "0 0 6px rgba(248,113,113,0.8)", flexShrink: 0 }} />
-                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color: "#f87171", letterSpacing: "0.05em", textShadow: "0 0 8px rgba(248,113,113,0.6)" }}>Unavailable right now</span>
-                      </div>
-                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, color: "#a78bfa", letterSpacing: "0.08em", textShadow: "0 0 8px rgba(167,139,250,0.5)" }}>Coming Soon · VR Experience</div>
-                    </div>
-                  )}
-                </div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 20 }}>
                 <span style={{

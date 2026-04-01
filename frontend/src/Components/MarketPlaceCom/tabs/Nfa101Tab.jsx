@@ -25,43 +25,55 @@ function categoryStyle(cat) {
 // ── Static fallback ───────────────────────────────────────────────────────────
 const STATIC_ARTICLES = [
   {
-    _id: "s1", title: "What is an NFT?", category: "Basics", readTime: 3,
+    _id: "s1", title: "What is an NFT?", category: "Basics", readTime: 12,
     description: "An NFT (Non-Fungible Token) is a unique digital asset verified on the blockchain. Each one is one-of-a-kind and cannot be replicated.",
     image: "https://images.unsplash.com/photo-1644088379091-d574269d422f?auto=format&fit=crop&w=800&q=80",
-    body: [
-      "NFT stands for Non-Fungible Token — a unique digital asset stored on a blockchain. Unlike regular digital files that can be copied infinitely, each NFT has a unique identifier that proves its authenticity and ownership on a public ledger.",
-      "Think of it like a certificate of ownership for a digital item — whether that's a piece of art, a music track, a video game skin, or a character. The NFT itself lives on the blockchain, meaning no single company controls it and ownership is transparent and verifiable by anyone in the world.",
-      "NFTs have revolutionized how creators monetize their work. Artists can now sell directly to collectors worldwide without galleries or platforms taking large cuts. Every time an NFT is resold, the original creator can receive royalties automatically through smart contracts.",
+    body: [],
+    sections: [
+      { heading: "Understanding Non-Fungibility", paragraphs: ["NFT stands for Non-Fungible Token — a unique digital asset stored on a blockchain. Each NFT has a unique identifier proving authenticity.", "The word 'fungible' means interchangeable. Non-fungible means unique and irreplaceable — NFTs bring this concept to the digital realm."] },
+      { heading: "How NFT Ownership Works", paragraphs: ["Think of it like a certificate of ownership for a digital item. The NFT lives on the blockchain, transparent and verifiable by anyone.", "When you purchase an NFT, the transaction is written to the blockchain. No centralized company can revoke this ownership."] },
+      { heading: "Creator Economy & Royalties", paragraphs: ["Artists sell directly to collectors worldwide. Every resale triggers automatic royalty payments through smart contracts — typically 5-10%."] },
+      { heading: "Real-World Utility", paragraphs: ["Beyond art, NFTs serve as access passes, game items, and financial instruments. In HyperTek, every in-game asset is an NFT.", "Gaming is the largest growth sector for NFTs — players' investments translate to real-world value."] },
+      { heading: "Technical Standards", paragraphs: ["ERC-721 creates unique tokens; ERC-1155 supports both unique and semi-fungible tokens. Layer-2 networks have made minting affordable."] },
     ],
   },
   {
-    _id: "s2", title: "What is Blockchain?", category: "Blockchain", readTime: 4,
+    _id: "s2", title: "What is Blockchain?", category: "Blockchain", readTime: 10,
     description: "A blockchain is a distributed ledger that records all transactions transparently and immutably.",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-    body: [
-      "A blockchain is a distributed ledger — a database shared and synchronized across thousands of computers worldwide. Each 'block' contains a batch of transactions, and each block is cryptographically linked to the previous one.",
-      "This design makes blockchains extremely resistant to tampering. To alter a historical record, you'd need to modify every copy of the chain simultaneously — computationally impossible in practice.",
-      "HyperTek is built on Base — an Ethereum Layer-2 chain offering faster transactions and significantly lower gas fees than mainnet Ethereum.",
+    body: [],
+    sections: [
+      { heading: "Distributed Ledger Technology", paragraphs: ["A blockchain is a database shared across thousands of computers. Each block is cryptographically linked to the previous one, forming an unalterable chain.", "To tamper with any record, an attacker would need to control 50%+ of the network — computationally infeasible."] },
+      { heading: "Ethereum & Smart Contracts", paragraphs: ["Ethereum is the most widely used blockchain for NFTs. Its proof-of-stake consensus reduced energy consumption by 99.9%."] },
+      { heading: "Layer-2 Networks", paragraphs: ["HyperTek uses Base — transactions cost fractions of a cent and confirm in seconds."] },
+      { heading: "Consensus Mechanisms", paragraphs: ["Proof-of-Stake requires validators to lock up crypto as collateral. Dishonest behavior results in their stake being 'slashed.'"] },
+      { heading: "Permissionless & Open", paragraphs: ["Public blockchains are open to anyone. No government or company can prevent transactions or censor the ledger."] },
     ],
   },
   {
-    _id: "s3", title: "How to Stay Protected in Web3", category: "Security", readTime: 4,
+    _id: "s3", title: "How to Stay Protected in Web3", category: "Security", readTime: 10,
     description: "Never share your seed phrase. Use hardware wallets for high-value assets.",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-    body: [
-      "Security in Web3 starts with your seed phrase — the 12 or 24 words that unlock your wallet. This phrase should never be shared with anyone, ever.",
-      "Always verify the contract address of any NFT before purchasing. Scammers frequently create look-alike collections with near-identical names.",
-      "Consider using a hardware wallet like Ledger for high-value assets. Hardware wallets keep your private keys offline, making them immune to online attacks.",
+    body: [],
+    sections: [
+      { heading: "Protecting Your Seed Phrase", paragraphs: ["Your seed phrase should never be shared with anyone. Anyone who has it can drain your wallet instantly and irreversibly.", "Write it on paper and store securely. Some users engrave seed phrases on metal plates."] },
+      { heading: "Verifying Contracts", paragraphs: ["Scammers create look-alike collections. Cross-reference contract addresses against official sources."] },
+      { heading: "Hardware Wallets", paragraphs: ["Ledger and Trezor keep private keys offline. Use a hot wallet only with funds needed for that session."] },
+      { heading: "Avoiding Phishing", paragraphs: ["Triple-check URLs before connecting your wallet. Be skeptical of unsolicited NFTs in your wallet.", "Never trust DMs from 'support teams' asking for wallet information."] },
+      { heading: "Transaction Simulation", paragraphs: ["Modern wallets can simulate transactions before signing. If unexpected transfers appear, reject immediately."] },
     ],
   },
   {
-    _id: "s4", title: "What is HyperTek?", category: "HyperTek", readTime: 4,
+    _id: "s4", title: "What is HyperTek?", category: "HyperTek", readTime: 10,
     description: "HyperTek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own.",
     image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
-    body: [
-      "HyperTek is a play-to-earn gaming universe built on the Base blockchain. It features multiple game modes all centered around NFTs and NFAs that players truly own on-chain.",
-      "Unlike most games where in-game items disappear when the servers shut down, HyperTek assets live on the blockchain — tradeable and valuable independent of the game.",
-      "HyperTek introduces the NFA standard — a category of NFT with a guaranteed minimum buyback value. If an NFA sells below its reserve price, HyperTek buys it back.",
+    body: [],
+    sections: [
+      { heading: "The HyperTek Universe", paragraphs: ["HyperTek is a play-to-earn gaming universe on Base blockchain — racing, quests, and tactical strategy centered around owned NFTs and NFAs."] },
+      { heading: "True Asset Ownership", paragraphs: ["Unlike traditional games, HyperTek assets persist on the blockchain independently. Even if HyperTek ceased to exist, your assets remain."] },
+      { heading: "The NFA Standard", paragraphs: ["NFAs have a guaranteed minimum buyback value enforced by smart contract. The floor price increases by 5% of each sale above reserve."] },
+      { heading: "Three Participant Types", paragraphs: ["Gamers earn rewards. Collectors acquire investments. Creators mint and sell, earning perpetual royalties."] },
+      { heading: "Marketplace Ecosystem", paragraphs: ["Supports fixed-price, auctions, rentals, Quests, and Bounties — creating a player-driven economy.", "Sign up with email, get an auto-created wallet, pay with credit cards. No crypto experience required."] },
     ],
   },
 ];
@@ -196,13 +208,36 @@ function ArticleDetail({ article, onBack }) {
       {/* Divider */}
       <div className="mb-8" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
 
-      {/* Body */}
-      <div className="flex flex-col gap-6">
-        {(article.body || []).map((para, i) => (
-          <p key={i} className="text-white/70 text-sm leading-[1.9] text-justify">
-            {para}
-          </p>
-        ))}
+      {/* Body — structured sections or flat paragraphs */}
+      <div className="flex flex-col gap-8">
+        {(article.sections && article.sections.length > 0) ? (
+          article.sections.map((section, si) => (
+            <div key={si}>
+              <div className="flex items-center gap-2 mb-3">
+                <span
+                  className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold"
+                  style={{
+                    background: "rgba(0,80,255,0.25)",
+                    border: "1px solid rgba(0,100,255,0.4)",
+                    color: "rgba(100,180,255,0.9)",
+                  }}
+                >
+                  {si + 1}
+                </span>
+                <h3 className="text-white/85 text-sm font-semibold">{section.heading}</h3>
+              </div>
+              <div className="pl-7 flex flex-col gap-3">
+                {(section.paragraphs || []).map((para, pi) => (
+                  <p key={pi} className="text-white/70 text-sm leading-[1.9] text-justify">{para}</p>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          (article.body || []).map((para, i) => (
+            <p key={i} className="text-white/70 text-sm leading-[1.9] text-justify">{para}</p>
+          ))
+        )}
       </div>
     </motion.div>
   );

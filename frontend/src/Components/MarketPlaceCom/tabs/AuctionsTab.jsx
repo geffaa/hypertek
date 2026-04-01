@@ -627,7 +627,18 @@ export default function AuctionsTab() {
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {auctions.map(a => (
+          {[...auctions].sort((a, b) => {
+            const now = Date.now();
+            const aEnd = new Date(a.endTime).getTime();
+            const bEnd = new Date(b.endTime).getTime();
+            const aEnded = aEnd <= now || a.status === "ended" || a.status === "sold";
+            const bEnded = bEnd <= now || b.status === "ended" || b.status === "sold";
+            // Ended auctions first
+            if (aEnded && !bEnded) return -1;
+            if (!aEnded && bEnded) return 1;
+            // Among same group, sort by endTime ascending (soonest first)
+            return aEnd - bEnd;
+          }).map(a => (
             <AuctionCard key={a._id} auction={a}
               onBid={a => isLoggedInUser ? setBidAuction(a) : alert("Log in first")}
               onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : alert("Log in first")}

@@ -27,7 +27,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
 
   return (
     <div
-      className={`relative w-full h-60 md:h-72 lg:h-[280px] shadow-lg flex items-center ${noMargin ? "" : "mb-8"}`}
+      className={`relative w-full h-[280px] md:h-[320px] lg:h-[400px] shadow-lg flex items-center ${noMargin ? "" : "mb-8"}`}
       style={{
         backgroundImage: `
           linear-gradient(
@@ -39,7 +39,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
           ),
           url(${bgImage})
         `,
-        backgroundPosition: "50% 8.5%",
+        backgroundPosition: "50% 25%",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}

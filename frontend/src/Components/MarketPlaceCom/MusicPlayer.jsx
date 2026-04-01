@@ -28,7 +28,7 @@ function parseSoundCloudEmbed(url) {
   }
 }
 
-const SOURCES = ["ambient", "spotify", "soundcloud"];
+const SOURCES = ["spotify", "ambient", "soundcloud"];
 const SOURCE_LABELS = { ambient: "Ambient", spotify: "Spotify", soundcloud: "SoundCloud" };
 
 const LS_KEY = "htek_music_player";
@@ -51,7 +51,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
   const prefs = loadPrefs();
 
   const [open, setOpen]         = useState(false);
-  const [source, setSource]     = useState(prefs.source || "ambient");
+  const [source, setSource]     = useState(prefs.source || "spotify");
   const [playing, setPlaying]   = useState(false);
   const [volume, setVolume]     = useState(prefs.volume ?? 0.5);
 

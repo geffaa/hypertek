@@ -11,6 +11,16 @@ const fadeUp = {
   }),
 };
 
+// Avatar mapped per feature tab — each tab shows a different character
+const AVATARS = {
+  nfa101:  "/avatar/dryads.png",
+  general: "/avatar/fawnus.png",
+  auctions: "/avatar/geodians.png",
+  quests:  "/avatar/lithionites2.png",
+  hire:    "/avatar/mantasquads.png",
+  bounty:  "/avatar/ophidians.png",
+};
+
 const FEATURES = [
   {
     key: "nfa101",
@@ -20,7 +30,7 @@ const FEATURES = [
     details: [
       "NFAs (Non-Fungible Assets) are unique in-game items you truly own on-chain.",
       "NFTs (Non-Fungible Tokens) represent characters, skins, and collectibles with verified rarity.",
-      "Learn how to buy, sell, and use Web3 assets safely within the Hyper Tek ecosystem.",
+      "Learn how to buy, sell, and use Web3 assets safely within the HyperTek ecosystem.",
     ],
     cta: "Learn the Basics",
   },
@@ -111,7 +121,7 @@ function OverviewTab({ onTabChange }) {
           Overview
         </h1>
         <p className="text-white/50 text-sm max-w-xl leading-relaxed">
-          Welcome to the Hyper Tek Marketplace. Select a feature to learn more — then jump straight in.
+          Welcome to the HyperTek Marketplace. Select a feature to learn more — then jump straight in.
         </p>
       </motion.div>
 
@@ -172,73 +182,93 @@ function OverviewTab({ onTabChange }) {
           })}
         </div>
 
-        {/* Right — detail panel */}
-        <div className="flex-1 min-w-0 p-6 sm:p-8" style={{ background: "rgba(0,10,40,0.5)" }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeKey}
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="flex flex-col h-full"
-            >
-              {/* Icon + title */}
-              <div className="flex items-center gap-3 mb-1">
-                <span className="text-3xl">{active.icon}</span>
-                <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-xl">
-                  {active.label}
-                </h2>
-              </div>
-              <p className="text-white/40 text-xs mb-6">{active.tagline}</p>
+        {/* Right — detail panel + avatar */}
+        <div className="flex-1 min-w-0 flex" style={{ background: "rgba(0,10,40,0.5)" }}>
+          {/* Detail content */}
+          <div className="flex-1 min-w-0 p-6 sm:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeKey}
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -12 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="flex flex-col h-full"
+              >
+                {/* Icon + title */}
+                <div className="flex items-center gap-3 mb-1">
+                  <span className="text-3xl">{active.icon}</span>
+                  <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-xl">
+                    {active.label}
+                  </h2>
+                </div>
+                <p className="text-white/40 text-xs mb-6">{active.tagline}</p>
 
-              {/* Divider */}
-              <div className="mb-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
+                {/* Divider */}
+                <div className="mb-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
 
-              {/* Detail points */}
-              <ul className="flex flex-col gap-4 mb-8">
-                {active.details.map((point, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span
-                      className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
-                      style={{
-                        background: "rgba(0,80,255,0.25)",
-                        border: "1px solid rgba(0,100,255,0.4)",
-                        color: "rgba(100,180,255,0.9)",
-                      }}
-                    >
-                      {i + 1}
-                    </span>
-                    <p className="text-white/60 text-sm leading-relaxed">{point}</p>
-                  </li>
-                ))}
-              </ul>
+                {/* Detail points */}
+                <ul className="flex flex-col gap-4 mb-8">
+                  {active.details.map((point, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span
+                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
+                        style={{
+                          background: "rgba(0,80,255,0.25)",
+                          border: "1px solid rgba(0,100,255,0.4)",
+                          color: "rgba(100,180,255,0.9)",
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                      <p className="text-white/60 text-sm leading-relaxed">{point}</p>
+                    </li>
+                  ))}
+                </ul>
 
-              {/* CTA */}
-              <div className="mt-auto">
-                <button
-                  onClick={() => onTabChange?.(active.key)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                  style={{
-                    background: "rgba(0,60,200,0.4)",
-                    border: "1px solid rgba(0,100,255,0.4)",
-                    color: "rgba(150,200,255,0.95)",
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = "rgba(0,80,220,0.6)";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = "rgba(0,60,200,0.4)";
-                    e.currentTarget.style.color = "rgba(150,200,255,0.95)";
-                  }}
-                >
-                  {active.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                {/* CTA */}
+                <div className="mt-auto">
+                  <button
+                    onClick={() => onTabChange?.(active.key)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                    style={{
+                      background: "rgba(0,60,200,0.4)",
+                      border: "1px solid rgba(0,100,255,0.4)",
+                      color: "rgba(150,200,255,0.95)",
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.background = "rgba(0,80,220,0.6)";
+                      e.currentTarget.style.color = "#fff";
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = "rgba(0,60,200,0.4)";
+                      e.currentTarget.style.color = "rgba(150,200,255,0.95)";
+                    }}
+                  >
+                    {active.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Avatar column — hidden on mobile */}
+          <div className="hidden lg:flex items-end justify-center flex-shrink-0" style={{ width: 280 }}>
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeKey}
+                src={AVATARS[activeKey]}
+                alt="Character"
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: 20 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="w-full h-auto max-h-[520px] object-contain drop-shadow-2xl"
+                style={{ filter: "drop-shadow(0 0 40px rgba(0,80,255,0.2))" }}
+              />
+            </AnimatePresence>
+          </div>
         </div>
       </motion.div>
     </div>
