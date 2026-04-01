@@ -178,26 +178,44 @@ const SHIP_ROOMS = {
     { id: "main_engine",  name: "Main Ship's Engine",  x:82, y:21, w:15, h:49 },  /* 20 */
   ],
   3: [
-    { id: "flight_deck",   name: "Flight Deck",       x:20, y:35, w:10, h:19 },
-    { id: "mess_hall",     name: "Mess Hall",          x:38, y:32, w:8, h:10 },
-    { id: "capt_quarters", name: "Capt. Quarters",     x:30, y:51, w:8, h:7 },
-    { id: "medical",       name: "Medical",            x:41, y:48, w:5, h:10 },
-    { id: "hydro_bays",    name: "Hydro Bays",         x:46, y:29, w:23, h:33 },
-    { id: "storage_top",   name: "Storage Hold",       x:69, y:25, w:12, h:13 },
-    { id: "storage_bot",   name: "Storage Hold",       x:69, y:51, w:12, h:13 },
-    { id: "sec_power",     name: "Sec. Power Upper",   x:74, y:39, w:8, h:12 },
-    { id: "rear_cargo",    name: "Rear Cargo Hold",    x:84, y:25, w:10, h:40 },
+    /* ── forward section (left oval) ── */
+    { id: "navigation",    name: "Navigation",         x:19, y:36, w:5,  h:18 },  /* 1  */
+    { id: "flight_deck",   name: "Flight Deck",        x:24, y:38, w:5,  h:14 },  /* 2  */
+    { id: "weapons_off",   name: "Weapons Officer",    x:24, y:33, w:5,  h:5 },  /* 3  */
+    { id: "comms_off",     name: "Comm's Officer",     x:24, y:52, w:5,  h:5 },  /* 4  */
+    /* ── crew quarters / galley ── */
+    { id: "capt_quarters", name: "Capt's Quarters",    x:29, y:50, w:9,  h:9 },  /* 5  */
+    { id: "kitchen",       name: "Kitchen",            x:40, y:47, w:6,  h:12 },  /* 6  */
+    /* ── mess hall ── */
+    { id: "mess_hall",     name: "Mess Hall",          x:38, y:32, w:8, h:12 },  /* 7  */
+    /* ── hydroponics grid 3×2 ── */
+    { id: "hydro_1",       name: "Hydroponics Cell",   x:47, y:28, w:9,  h:15 },  /* 8  */
+    { id: "hydro_2",       name: "Hydroponics Cell",   x:56, y:28, w:7,  h:15 },  /* 9  */
+    { id: "hydro_3",       name: "Hydroponics Cell",   x:63, y:28, w:6,  h:15 },  /* 10 */
+    { id: "hydro_4",       name: "Hydroponics Cell",   x:47, y:47, w:9,  h:15 },  /* 11 */
+    { id: "hydro_5",       name: "Hydroponics Cell",   x:56, y:47, w:7,  h:15 },  /* 12 */
+    { id: "hydro_6",       name: "Hydroponics Cell",   x:63, y:47, w:6,  h:15 },  /* 13 */
+    /* ── shield & power ── */
+    { id: "shield_main",   name: "Shield Gen Main",    x:75, y:39, w:8,  h:12 },  /* 14 */
+    { id: "power_relay1",  name: "Power Relay 1",      x:70, y:28, w:3, h:15 },  /* 15 */
+    { id: "power_relay2",  name: "Power Relay 2",      x:70, y:47, w:3, h:15 },  /* 16 */
+    /* ── hidden storage ── */
+    { id: "hidden_st1",    name: "Hidden Storage 1",   x:75, y:25, w:5, h:11 },  /* 17 */
+    { id: "hidden_st2",    name: "Hidden Storage 2",   x:75, y:54, w:5, h:11 },  /* 18 */
+    /* ── cargo holds ── */
+    { id: "cargo_1",       name: "Cargo Hold",         x:85, y:26, w:10,  h:14 },  /* 19 */
+    { id: "cargo_2",       name: "Cargo Hold",         x:85, y:40, w:10,  h:11 },  /* 20 */
+    { id: "cargo_3",       name: "Cargo Hold",         x:85, y:51, w:10,  h:14 },  /* 21 */
   ],
   4: [
-    { id: "navigation",    name: "Navigation",         x:23, y:37, w:3, h:15 },
-    { id: "academy",       name: "Academy",            x:28, y:41, w:2,  h:8 },
-    { id: "holo_deck",     name: "Holo Deck",          x:40, y:39, w:10, h:9 },
-    { id: "cryo_lab",      name: "Cryo Lab",           x:54, y:35, w:10, h:9 },
-    { id: "dna_lab",       name: "DNA Lab",            x:54, y:47, w:10, h:9 },
-    { id: "cryostasis",    name: "Cryostasis",         x:64, y:35, w:10, h:9 },
-    { id: "dna_chambers",  name: "DNA Chambers",       x:64, y:47, w:10, h:9 },
-    { id: "shield_gen",    name: "Shield Generators",  x:76, y:38, w:10,  h:13 },
-    { id: "comms_tower",   name: "Comm Towers",        x:87, y:35, w:8, h:21 },
+    { id: "war_council",   name: "War Council",        x:23, y:37, w:7,  h:17 },  /* 1+2 merged */
+    { id: "academy",       name: "Academy",            x:40, y:39, w:10, h:9  },  /* 3 */
+    { id: "science_lab",   name: "Science Lab",        x:54, y:35, w:10, h:9  },  /* 4 */
+    { id: "dna_lab",       name: "DNA Lab",            x:54, y:47, w:10, h:9  },  /* 5 */
+    { id: "cryostasis",    name: "Cryostasis",         x:64, y:35, w:10, h:9  },  /* 6 */
+    { id: "dna_chambers",  name: "DNA Chambers",       x:64, y:47, w:10, h:9  },  /* 7 — was DNA Chambers, now includes Weapons Power Relay area */
+    { id: "weapons_relay", name: "Weapons Power Relay",x:76, y:38, w:10, h:13 },  /* 7 */
+    { id: "comms_tower",   name: "Comm's Tower",       x:87, y:35, w:8,  h:21 },  /* 8 */
   ],
 };
 
@@ -266,7 +284,7 @@ export default function TopBar({ activeGame }) {
   const [selectedShipSkins, setSelectedShipSkins] = useState({ 1: "plain", 2: "plain", 3: "plain", 4: "plain" });
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hoveredRoom,  setHoveredRoom]  = useState(null);
-  const [shipLine,       setShipLine]       = useState(null);
+
   const [vrShipOpen,     setVrShipOpen]     = useState(false);
   const [vrShipPairing,  setVrShipPairing]  = useState(false);
   const [vrShipPairDone, setVrShipPairDone] = useState(false);
@@ -277,27 +295,7 @@ export default function TopBar({ activeGame }) {
   const shipItemRefs   = useRef({});
 
   // ── Ship modal: reset room selection when level changes ──────────
-  useEffect(() => { setSelectedRoom(null); setHoveredRoom(null); setShipLine(null); }, [shipLevel]);
-
-  // ── Ship modal: compute SVG line from sidebar item → room box ────
-  useEffect(() => {
-    if (!selectedRoom || !shipImgRef.current || !shipContentRef.current) {
-      setShipLine(null); return;
-    }
-    const room = (SHIP_ROOMS[shipLevel] || []).find(r => r.id === selectedRoom);
-    const itemEl = shipItemRefs.current[selectedRoom];
-    if (!room || !itemEl) { setShipLine(null); return; }
-
-    const cRect   = shipContentRef.current.getBoundingClientRect();
-    const imgRect = shipImgRef.current.getBoundingClientRect();
-    const iRect   = itemEl.getBoundingClientRect();
-
-    const x1 = iRect.right  - cRect.left;
-    const y1 = iRect.top + iRect.height / 2 - cRect.top;
-    const x2 = imgRect.left - cRect.left + imgRect.width  * (room.x / 100);
-    const y2 = imgRect.top  - cRect.top  + imgRect.height * ((room.y + room.h / 2) / 100);
-    setShipLine({ x1, y1, x2, y2 });
-  }, [selectedRoom, shipLevel]);
+  useEffect(() => { setSelectedRoom(null); setHoveredRoom(null); }, [shipLevel]);
 
   // ── Marketplace dropdown ─────────────────────────────────────────
   const [marketOpen, setMarketOpen] = useState(false);
@@ -1229,6 +1227,43 @@ export default function TopBar({ activeGame }) {
                 ))}
               </div>
 
+              {/* ── Information / Notes panel (between sidebar & image) ── */}
+              <div style={{
+                width: isMobile ? 120 : 200, flexShrink: 0,
+                border: "2px solid #fbbf24",
+                borderRadius: 4,
+                margin: isMobile ? "6px 0" : "10px 0",
+                background: "rgba(10,5,0,0.6)",
+                display: "flex", flexDirection: "column",
+                overflow: "hidden",
+              }}>
+                <div style={{
+                  padding: isMobile ? "6px 8px" : "8px 12px",
+                  borderBottom: "1px solid rgba(251,191,36,0.3)",
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: isMobile ? 8 : 11,
+                  fontWeight: "bold",
+                  letterSpacing: "0.12em",
+                  color: "#fbbf24",
+                  textShadow: "0 0 8px rgba(251,191,36,0.4)",
+                }}>
+                  INFORMATION
+                </div>
+                <div style={{
+                  flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+                  padding: isMobile ? "8px" : "14px",
+                }}>
+                  <span style={{
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: isMobile ? 7 : 9,
+                    color: "rgba(251,191,36,0.35)",
+                    letterSpacing: "0.1em",
+                    textAlign: "center",
+                    lineHeight: 1.6,
+                  }}>ROOM DETAILS &amp;<br/>NOTES WILL<br/>APPEAR HERE</span>
+                </div>
+              </div>
+
               {/* Ship image + overlays */}
               <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", position: "relative" }}>
                 <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
@@ -1237,21 +1272,6 @@ export default function TopBar({ activeGame }) {
                     key={shipLevel}
                     src={`/ships/level${shipLevel}-plain.png`}
                     alt={`Ship Level ${shipLevel}`}
-                    onLoad={() => {
-                      if (!selectedRoom) return;
-                      const room = (SHIP_ROOMS[shipLevel] || []).find(r => r.id === selectedRoom);
-                      const itemEl = shipItemRefs.current[selectedRoom];
-                      if (!room || !itemEl || !shipImgRef.current || !shipContentRef.current) return;
-                      const cRect   = shipContentRef.current.getBoundingClientRect();
-                      const imgRect = shipImgRef.current.getBoundingClientRect();
-                      const iRect   = itemEl.getBoundingClientRect();
-                      setShipLine({
-                        x1: iRect.right - cRect.left,
-                        y1: iRect.top + iRect.height / 2 - cRect.top,
-                        x2: imgRect.left - cRect.left + imgRect.width  * (room.x / 100),
-                        y2: imgRect.top  - cRect.top  + imgRect.height * ((room.y + room.h / 2) / 100),
-                      });
-                    }}
                     style={{ width: "100%", height: "auto", display: "block", maxHeight: isMobile ? "52vh" : "66vh", objectFit: "contain" }}
                   />
                   {/* Room highlight boxes — only visible on hover or select */}
@@ -1486,22 +1506,7 @@ export default function TopBar({ activeGame }) {
                 </div>
               </div>
 
-              {/* SVG connection line — covers full body area */}
-              {shipLine && (
-                <svg style={{
-                  position: "absolute", inset: 0, width: "100%", height: "100%",
-                  pointerEvents: "none", zIndex: 10, overflow: "visible",
-                }}>
-                  <line
-                    x1={shipLine.x1} y1={shipLine.y1}
-                    x2={shipLine.x2} y2={shipLine.y2}
-                    stroke="#fbbf24" strokeWidth="1.5"
-                    strokeDasharray="6 3" opacity="0.85"
-                  />
-                  <circle cx={shipLine.x1} cy={shipLine.y1} r="3" fill="#fbbf24" opacity="0.9" />
-                  <circle cx={shipLine.x2} cy={shipLine.y2} r="3" fill="#fbbf24" opacity="0.9" />
-                </svg>
-              )}
+
             </div>
 
             {/* ── Bottom bar */}
