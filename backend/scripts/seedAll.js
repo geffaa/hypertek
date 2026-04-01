@@ -260,21 +260,7 @@ const CATEGORIES = [
   },
 ];
 
-// ─── NFT 101 ──────────────────────────────────────────────────────────────────
-const NFT_101_DATA = [
-  { title: "What is an NFT?",              icon: "🖼️", order: 1,  gradientFrom: "#1a4fd6", gradientTo: "#0e2d8a", description: "An NFT (Non-Fungible Token) is a unique digital asset verified on the blockchain. Each one is one-of-a-kind and cannot be replicated." },
-  { title: "How to buy an NFT",            icon: "🛒", order: 2,  gradientFrom: "#16a34a", gradientTo: "#064e1e", description: "Connect your crypto wallet, browse the marketplace, select an item and click Buy Now. Confirm the transaction in your wallet." },
-  { title: "What is minting?",             icon: "⚡", order: 3,  gradientFrom: "#7c3aed", gradientTo: "#3b0f8a", description: "Minting is the process of creating a new NFT on the blockchain — publishing a unique token that represents ownership of a digital asset." },
-  { title: "How to stay protected",        icon: "🛡️", order: 4,  gradientFrom: "#0891b2", gradientTo: "#0c4a6e", description: "Never share your seed phrase. Use hardware wallets for high-value assets and always verify contract addresses before signing transactions." },
-  { title: "How to create an NFT",         icon: "✨", order: 5,  gradientFrom: "#ea580c", gradientTo: "#7c2d12", description: "Prepare your digital asset, connect your wallet, use the HyperTek minting tool, set your price, and publish it to the marketplace." },
-  { title: "How to sell an NFT",           icon: "💰", order: 6,  gradientFrom: "#dc2626", gradientTo: "#7f1d1d", description: "List your NFT on the marketplace by setting a price, approving the contract, and confirming the listing transaction in your wallet." },
-  { title: "What is a crypto wallet?",     icon: "👛", order: 7,  gradientFrom: "#4338ca", gradientTo: "#1e1b4b", description: "A crypto wallet stores your private keys and lets you interact with blockchains. Popular options include MetaMask and Coinbase Wallet." },
-  { title: "What is blockchain?",          icon: "⛓️", order: 8,  gradientFrom: "#0f766e", gradientTo: "#042f2e", description: "A blockchain is a distributed ledger that records all transactions transparently and immutably, making it impossible to tamper with records." },
-  { title: "What are gas fees?",           icon: "⛽", order: 9,  gradientFrom: "#b45309", gradientTo: "#451a03", description: "Gas fees are payments made to blockchain validators for processing your transaction. They vary based on network congestion." },
-  { title: "What is a smart contract?",    icon: "📜", order: 10, gradientFrom: "#be185d", gradientTo: "#500724", description: "A smart contract is self-executing code on the blockchain that automatically enforces the rules of a transaction without intermediaries." },
-  { title: "What is HyperTek?",            icon: "🚀", order: 11, gradientFrom: "#1d4ed8", gradientTo: "#172554", description: "HyperTek is a play-to-earn NFT gaming universe where soldiers, land, weapons and vehicles are real digital assets you own." },
-  { title: "What is Web3?",                icon: "🌐", order: 12, gradientFrom: "#0369a1", gradientTo: "#0c2840", description: "Web3 is the next evolution of the internet built on blockchain technology, giving users ownership of their digital assets and data." },
-];
+// ─── NFT 101 (handled by seedMarketplace.js with full data — here we just clean + re-insert) ──
 
 // ─── Main seed function ───────────────────────────────────────────────────────
 async function seed() {
@@ -328,15 +314,10 @@ async function seed() {
   );
   console.log(`✅ Migration: ${migrated.modifiedCount} collections marked isDummy=true`);
 
-  // 4. NFT 101
-  let edu_created = 0, edu_skipped = 0;
-  for (const edu of NFT_101_DATA) {
-    const existing = await Nft101.findOne({ title: edu.title });
-    if (existing) { edu_skipped++; continue; }
-    await Nft101.create(edu);
-    edu_created++;
-  }
-  if (edu_created > 0) console.log(`✅ NFT 101: ${edu_created} cards created`);
+  // 4. NFT 101 — delete all old entries and leave clean for seedMarketplace.js
+  //    seedMarketplace.js has the full data (images, body, sections).
+  const edu_deleted = await Nft101.deleteMany({});
+  console.log(`🗑️  NFT 101: ${edu_deleted.deletedCount} old entries removed (run seedMarketplace.js to re-populate)`);
 
   // 5. Users
   let users_created = 0, users_skipped = 0;
@@ -940,7 +921,7 @@ async function seed() {
   console.log(`📄 SiteContent:    ${sc_created} created,  ${sc_skipped} skipped`);
   console.log(`📰 News:           ${news_created} created,  ${news_skipped} skipped`);
   console.log(`📦 NFT Collections:${nft_created} created,  ${nft_skipped} skipped`);
-  console.log(`📚 NFT 101 cards:  ${edu_created} created,  ${edu_skipped} skipped`);
+  console.log(`📚 NFT 101 cards:  ${edu_deleted.deletedCount} cleaned (use seedMarketplace.js to populate)`);
   console.log(`👤 Users:          ${users_created} created,  ${users_skipped} skipped`);
   console.log(`📝 Offers:         ${offers_created} created,  ${offers_skipped} skipped`);
   console.log(`💸 Withdrawals:    ${wd_created} created,  ${wd_skipped} skipped`);
