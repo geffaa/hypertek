@@ -136,23 +136,46 @@ const CSS = `
 // Ship room data — positions as % of each level's PNG image (x, y, w, h)
 const SHIP_ROOMS = {
   1: [
-    { id: "process_ref",   name: "Process Refinement", x:8, y:38, w:10, h:17 },
-    { id: "mining_top",    name: "Mining Plant",        x:19, y:25, w:13, h:20 },
-    { id: "mining_bot",    name: "Mining Plant",        x:19, y:46, w:13, h:20 },
-    { id: "workshop",      name: "Workshop",            x:45, y:25, w:13, h:20 },
-    { id: "racing",        name: "Racing Hanger",       x:45, y:46, w:13, h:20 },
-    { id: "fuel",          name: "Fuel Processing",     x:60, y:31, w:20, h:30 },
+    { id: "storeroom",     name: "Storeroom",        x:5,  y:28, w:14, h:36,
+      tRight: { stemW: 45, armTop: 33, armBot: 67 } },
+    { id: "mining_fs",     name: "Mining FS",        x:12, y:21, w:20, h:16 },
+    { id: "mining_fp",     name: "Mining FP",        x:12, y:54, w:20, h:16 },
+    { id: "process_ref",   name: "Process Refinery", x:18, y:37, w:9, h:17 },
+    { id: "mining_rs",     name: "Mining RS",        x:68, y:14, w:18, h:20, rotate: -45 },
+    { id: "mining_rp",     name: "Mining RP",        x:68, y:58, w:18, h:20, rotate:  45 },
+    { id: "fuel_ref",      name: "Fuel Refinery",    x:64, y:40, w:25, h:10 },
+    { id: "workshop",      name: "Workshop",         x:45, y:21,  w:14, h:24 },
+    { id: "racing",        name: "Racing Hanger",    x:45, y:47, w:14, h:24 },
+    { id: "brig",          name: "Brig",             x:62, y:59, w:6,  h:8 },
   ],
   2: [
-    { id: "armory",        name: "Armory",                   x:6, y:36, w:12, h:18 },
-    { id: "fwd_shield",    name: "Forward Shield Generator", x:22, y:38, w:8,  h:14 },
-    { id: "teleport",      name: "Teleportation",            x:39, y:29, w:6,  h:15 },
-    { id: "security",      name: "Security",                 x:39, y:47, w:6,  h:15 },
-    { id: "barracks_top",  name: "Barracks",                 x:47, y:23, w:17, h:6 },
-    { id: "power_plant",   name: "Power Plant",              x:47, y:37, w:12,  h:16 },
-    { id: "eng_systems",   name: "Engineering Systems",      x:61, y:37, w:10,  h:16 },
-    { id: "barracks_bot",  name: "Barracks",                 x:47, y:62, w:17, h:6 },
-    { id: "engineering",   name: "Engineering",              x:71, y:37, w:12, h:16 },
+    /* ── oval left section ── */
+    { id: "armory_ss",    name: "Armory SS",           x:7,  y:30, w:12, h:10 },  /* 1 */
+    { id: "armory_ps",    name: "Armory PS",           x:7,  y:51, w:12, h:10 },  /* 2 */
+    { id: "main_weapon",  name: "Main Weapon Heavy",   x:2,  y:41, w:19,  h:10 },  /* 3 */
+    { id: "fwd_shield",   name: "Forward Shield Gen",  x:20, y:40, w:8, h:10 },  /* 4 */
+    /* ── center chambers ── */
+    { id: "fighter_fss",  name: "Fighter Bay FSS",     x:21, y:22, w:16, h:18 },  /* 5 */
+    { id: "fighter_fps",  name: "Fighter Bay FPS",     x:21, y:50, w:16, h:18 },  /* 6 */
+    /* ── far right nacelles ── */
+    { id: "fighter_rss",  name: "Fighter Bay RSS",     x:72, y:6,  w:10, h:25 },  /* 7 */
+    { id: "fighter_rps",  name: "Fighter Bay RPS",     x:72, y:60, w:10, h:25 },  /* 8 */
+    /* ── mid-right upper/lower ── */
+    { id: "barracks_ss",  name: "Barracks SS",         x:46, y:21, w:18, h:10 },  /* 9  */
+    { id: "barracks_ps",  name: "Barracks PS",         x:46, y:62, w:18, h:10 },  /* 10 */
+    { id: "stables_ss",   name: "Stables SS",          x:59, y:25, w:12, h:13, lShape: { notch: "topLeft",    notchW: 50, notchH: 46 } },  /* 11 — menonjol bawah-kiri */
+    { id: "stable_ps",    name: "Stable PS",           x:59, y:53, w:12, h:13, lShape: { notch: "bottomLeft", notchW: 50, notchH: 50 } },  /* 12 — menonjol atas-kiri */
+    /* ── center-right grid ── */
+    { id: "transporter",  name: "Transporter Bay",     x:38, y:25, w:8, h:19 },  /* 13 */
+    { id: "security",     name: "Security Station",    x:38, y:45, w:8, h:19 },  /* 14 */
+    { id: "weapons_ss",   name: "Weapons Systems SS",  x:47, y:32, w:10, h:12, triangle: "topLeft"    },  /* 15 — 90° di atas-kiri */
+    { id: "weapons_ps",   name: "Weapons Systems PS",  x:47, y:47, w:10, h:12, triangle: "bottomLeft" },  /* 16 — 90° di bawah-kiri */
+    /* ── power core ── */
+    { id: "power_plant",  name: "Power Plant",         x:52, y:40, w:8, h:12, circle: true },  /* 17 */
+    { id: "power_sys",    name: "Power Systems",       x:60, y:38, w:11, h:15 },  /* 18 */
+    /* ── engine section ── */
+    { id: "energy_dist",  name: "Energy Distribution", x:72, y:40, w:8, h:10 },  /* 19 */
+    { id: "main_engine",  name: "Main Ship's Engine",  x:82, y:21, w:15, h:49 },  /* 20 */
   ],
   3: [
     { id: "flight_deck",   name: "Flight Deck",       x:20, y:35, w:10, h:19 },
@@ -1027,7 +1050,7 @@ export default function TopBar({ activeGame }) {
           }}
         >
           <div style={{
-            position: "relative", width: "min(96vw, 1280px)",
+            position: "relative", width: "min(96vw, 1280px)", height: "min(88vh, 780px)",
             background: "#000", border: "1px solid rgba(180,90,20,0.6)",
             borderRadius: 6, boxShadow: "0 0 80px rgba(0,0,0,0.9)",
             overflow: "hidden", display: "flex", flexDirection: "column",
@@ -1165,14 +1188,14 @@ export default function TopBar({ activeGame }) {
               <div style={{
                 width: isMobile ? 110 : 170, flexShrink: 0,
                 background: "#0a0500", borderRight: "1px solid rgba(180,90,20,0.4)",
-                overflowY: "auto", display: "flex", flexDirection: "column",
+                overflowY: "hidden", display: "flex", flexDirection: "column",
               }}>
                 <div style={{
                   padding: isMobile ? "6px 8px" : "8px 12px",
                   borderBottom: "1px solid rgba(180,90,20,0.4)",
                   fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
                   color: "#fbbf24", letterSpacing: "0.12em",
-                }}>ROOMS</div>
+                }}>SECTIONS</div>
                 {(SHIP_ROOMS[shipLevel] || []).map(room => (
                   <div
                     key={room.id}
@@ -1182,7 +1205,7 @@ export default function TopBar({ activeGame }) {
                     onMouseLeave={() => setHoveredRoom(null)}
                     style={{
                       display: "flex", alignItems: "center", justifyContent: "space-between",
-                      padding: isMobile ? "8px 8px" : "11px 12px",
+                      padding: isMobile ? "5px 8px" : "7px 12px",
                       borderBottom: "1px solid rgba(180,90,20,0.2)",
                       cursor: "pointer",
                       background: selectedRoom === room.id || hoveredRoom === room.id
@@ -1191,7 +1214,7 @@ export default function TopBar({ activeGame }) {
                     }}
                   >
                     <span style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight: "bold",
+                      fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight: "bold",
                       letterSpacing: "0.06em",
                       color: selectedRoom === room.id || hoveredRoom === room.id ? "#fbbf24" : "rgba(220,180,120,0.9)",
                     }}>{room.name}</span>
@@ -1234,20 +1257,162 @@ export default function TopBar({ activeGame }) {
                   {/* Room highlight boxes — only visible on hover or select */}
                   {(SHIP_ROOMS[shipLevel] || []).map(room => {
                     const active = selectedRoom === room.id || hoveredRoom === room.id;
+                    const color = active ? "#fbbf24" : "transparent";
+                    const fill  = active ? "rgba(251,191,36,0.04)" : "transparent";
+                    const handlers = {
+                      onMouseEnter: () => setHoveredRoom(room.id),
+                      onMouseLeave: () => setHoveredRoom(null),
+                      onClick: () => setSelectedRoom(prev => prev === room.id ? null : room.id),
+                    };
+
+                    // Triangle helper — right-angle triangle, corner = which corner has the 90°
+                    if (room.triangle) {
+                      const c = room.triangle; // "topLeft"|"topRight"|"bottomLeft"|"bottomRight"
+                      const pts =
+                        c === "topLeft"     ? "0,0 100,0 0,100" :
+                        c === "topRight"    ? "0,0 100,0 100,100" :
+                        c === "bottomLeft"  ? "0,0 0,100 100,100" :
+                                             "100,0 0,100 100,100"; // bottomRight
+                      return (
+                        <svg
+                          key={room.id}
+                          {...handlers}
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="none"
+                          style={{
+                            position: "absolute",
+                            left: `${room.x}%`, top: `${room.y}%`,
+                            width: `${room.w}%`, height: `${room.h}%`,
+                            overflow: "visible", cursor: "pointer",
+                            filter: active ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "none",
+                            transition: "filter 0.18s",
+                          }}
+                        >
+                          <polygon
+                            points={pts}
+                            fill={fill}
+                            stroke={color}
+                            strokeWidth="3"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      );
+                    }
+
+                    // L-shape helper — renders SVG polygon for any L orientation
+                    // notch: "bottomRight" | "bottomLeft" | "topRight" | "topLeft"
+                    if (room.lShape) {
+                      const { notch = "bottomRight", notchW = 45, notchH = 50 } = room.lShape;
+                      let pts;
+                      if (notch === "bottomRight") {
+                        // Full top + left side, notch cut from bottom-right
+                        pts = `0,0 100,0 100,${100-notchH} ${100-notchW},${100-notchH} ${100-notchW},100 0,100`;
+                      } else if (notch === "bottomLeft") {
+                        // Full top + right side, notch cut from bottom-left
+                        pts = `0,0 100,0 100,100 ${notchW},100 ${notchW},${100-notchH} 0,${100-notchH}`;
+                      } else if (notch === "topRight") {
+                        // Full bottom + left side, notch cut from top-right
+                        pts = `0,0 ${100-notchW},0 ${100-notchW},${notchH} 100,${notchH} 100,100 0,100`;
+                      } else {
+                        // topLeft — notch cut from top-left
+                        pts = `${notchW},0 100,0 100,100 0,100 0,${notchH} ${notchW},${notchH}`;
+                      }
+                      return (
+                        <svg
+                          key={room.id}
+                          {...handlers}
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="none"
+                          style={{
+                            position: "absolute",
+                            left: `${room.x}%`, top: `${room.y}%`,
+                            width: `${room.w}%`, height: `${room.h}%`,
+                            overflow: "visible", cursor: "pointer",
+                            filter: active ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "none",
+                            transition: "filter 0.18s",
+                          }}
+                        >
+                          <polygon
+                            points={pts}
+                            fill={fill}
+                            stroke={color}
+                            strokeWidth="3"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      );
+                    }
+
+                    if (room.tRight) {
+                      // T-shape pointing right — rendered as SVG so all edges connect
+                      const { stemW = 45, armTop = 33, armBot = 67 } = room.tRight;
+                      const pts = [
+                        `0,0`, `${stemW},0`,
+                        `${stemW},${armTop}`, `100,${armTop}`,
+                        `100,${armBot}`, `${stemW},${armBot}`,
+                        `${stemW},100`, `0,100`,
+                      ].join(" ");
+                      return (
+                        <svg
+                          key={room.id}
+                          {...handlers}
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="none"
+                          style={{
+                            position: "absolute",
+                            left: `${room.x}%`, top: `${room.y}%`,
+                            width: `${room.w}%`, height: `${room.h}%`,
+                            overflow: "visible", cursor: "pointer",
+                            filter: active ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "none",
+                            transition: "filter 0.18s",
+                          }}
+                        >
+                          <polygon
+                            points={pts}
+                            fill={fill}
+                            stroke={color}
+                            strokeWidth="3"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      );
+                    }
+
+                    if (room.circle) {
+                      return (
+                        <div
+                          key={room.id}
+                          {...handlers}
+                          style={{
+                            position: "absolute",
+                            left: `${room.x}%`, top: `${room.y}%`,
+                            width: `${room.w}%`, height: `${room.h}%`,
+                            borderRadius: "50%",
+                            border: active ? "2px solid #fbbf24" : "2px solid transparent",
+                            boxShadow: active ? "0 0 16px rgba(251,191,36,0.6), inset 0 0 10px rgba(251,191,36,0.08)" : "none",
+                            background: fill,
+                            cursor: "pointer", transition: "all 0.18s",
+                          }}
+                        />
+                      );
+                    }
+
                     return (
                       <div
                         key={room.id}
-                        onMouseEnter={() => setHoveredRoom(room.id)}
-                        onMouseLeave={() => setHoveredRoom(null)}
-                        onClick={() => setSelectedRoom(prev => prev === room.id ? null : room.id)}
+                        {...handlers}
                         style={{
                           position: "absolute",
                           left: `${room.x}%`, top: `${room.y}%`,
                           width: `${room.w}%`, height: `${room.h}%`,
                           border: active ? "2px solid #fbbf24" : "2px solid transparent",
                           boxShadow: active ? "0 0 16px rgba(251,191,36,0.6), inset 0 0 10px rgba(251,191,36,0.08)" : "none",
-                          background: active ? "rgba(251,191,36,0.04)" : "transparent",
+                          background: fill,
                           borderRadius: 3, cursor: "pointer", transition: "all 0.18s",
+                          ...(room.rotate ? {
+                            transform: `rotate(${room.rotate}deg)`,
+                            transformOrigin: "center center",
+                          } : {}),
                         }}
                       />
                     );
