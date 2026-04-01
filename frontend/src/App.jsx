@@ -83,6 +83,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Stripe from "./pages/Stripe";
 import Funnel from "./pages/Funnel";
 import Gaming from "./pages/Gaming";
+import Nft101Article from "./pages/Nft101Article";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 
@@ -183,6 +184,7 @@ function AppWrapper() {
             <Route path="/land" element={<Land />} />
             <Route path="/more-news" element={<HypeGamePage />} />
             <Route path="/news" element={<NewsAll />} />
+            <Route path="/learn/:id" element={<Nft101Article />} />
 
 
             {/* NFA Pages */}

@@ -9,6 +9,11 @@ const nft101Schema = new mongoose.Schema(
       heading:    { type: String, required: true },
       paragraphs: [{ type: String }],
     }],
+    contentBlocks: [{                                      // rich article content
+      type:    { type: String, enum: ["heading", "text", "image"], required: true },
+      value:   { type: String, required: true },           // text content or image URL
+      caption: { type: String, default: "" },              // optional image caption
+    }],
     image:        { type: String, default: "" },          // cover image URL
     category:     { type: String, default: "Basics" },    // e.g. Basics, Security, HyperTek, Blockchain
     readTime:     { type: Number, default: 3 },           // estimated minutes
