@@ -571,7 +571,7 @@ export default function Navbar() {
               <div className="pl-4 flex flex-col space-y-2 border-l-2 border-white/30 ml-2">
 
                 <Link
-                  to="/market-place"
+                  to="/market-place?tab=overview"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   Overview

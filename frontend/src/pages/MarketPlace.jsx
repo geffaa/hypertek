@@ -23,6 +23,12 @@ function MarketPlace() {
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
+  // Sync activeTab when URL search params change (e.g. navbar Shops → Overview link)
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab) setActiveTab(tab);
+  }, [searchParams]);
+
   // ── Banner stats from API ──────────────────────────────────────────────────
   const [bannerStats, setBannerStats] = useState({
     totalItems: "—", totalVolume: "—", listed: "—", collections: "—",
@@ -68,7 +74,7 @@ function MarketPlace() {
   // ── Tab content ────────────────────────────────────────────────────────────
   const renderTab = () => {
     switch (activeTab) {
-      case "overview":  return <OverviewTab onTabChange={setActiveTab} />;
+      case "overview":  return <OverviewTab onTabChange={(tab) => { setActiveTab(tab); window.scrollTo({ top: 0, behavior: "smooth" }); }} />;
       case "general":   return <GeneralTab />;
       case "nfa101":    return <Nfa101Tab />;
       case "auctions":  return <AuctionsTab />;
@@ -114,7 +120,7 @@ function MarketPlace() {
         <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
           <MarketNavBar
             activeTab={activeTab}
-            onTabChange={(tab) => { setActiveTab(tab); setSearch(""); }}
+            onTabChange={(tab) => { setActiveTab(tab); setSearch(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             search={search}
             onSearch={setSearch}
             className="flex-1 min-w-0"

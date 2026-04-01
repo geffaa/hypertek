@@ -31,6 +31,19 @@ function CategoryMarketplace() {
   const [allCategories, setAllCategories] = useState([]);
 
   // ── Fetch all categories for filter chips ─────────────────────────
+  // Order matches GeneralTab CATEGORIES order
+  const CATEGORY_ORDER = [
+    "skins",
+    "military badges and collectables",
+    "specialists",
+    "weapons",
+    "body armour",
+    "spaceships",
+    "racing vehicles",
+    "artwork",
+    "land and bases",
+  ];
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -39,7 +52,13 @@ function CategoryMarketplace() {
         (res.data.collections || []).forEach((c) => {
           if (c.category) cats.add(c.category.toLowerCase().trim());
         });
-        setAllCategories(Array.from(cats));
+        const fetched = Array.from(cats);
+        // Sort by CATEGORY_ORDER; unknown categories go to the end alphabetically
+        const sorted = [
+          ...CATEGORY_ORDER.filter((k) => fetched.includes(k)),
+          ...fetched.filter((k) => !CATEGORY_ORDER.includes(k)).sort(),
+        ];
+        setAllCategories(sorted);
       } catch (e) {
         console.warn("Failed to fetch categories", e);
       }
