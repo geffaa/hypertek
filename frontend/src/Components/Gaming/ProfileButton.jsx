@@ -6,6 +6,7 @@
  */
 
 import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
@@ -228,15 +229,27 @@ export default function ProfileButton() {
   const [hoveredChar,    setHoveredChar]    = useState(null); // { speciesId, variantIdx }
   const [selectedFrame,   setSelectedFrame]   = useState("default");
   const [framePickerOpen, setFramePickerOpen] = useState(false);
-  const [genderFilter,    setGenderFilter]    = useState("all"); // "all" | "female" | "male"
-  const [carouselIdx,     setCarouselIdx]     = useState(0);
-  const touchStartX = useRef(null);
   const [selectedChar,   setSelectedChar]   = useState(() => {
     try {
       const s = localStorage.getItem("hypertek_selected_char");
       return s ? JSON.parse(s) : null;
     } catch { return null; }
   });
+  const [speciesIdx,      setSpeciesIdx]      = useState(() => {
+    try {
+      const s = localStorage.getItem("hypertek_selected_char");
+      const char = s ? JSON.parse(s) : null;
+      if (char) {
+        const idx = SPECIES.findIndex(sp => sp.id === char.speciesId);
+        return idx >= 0 ? idx : 0;
+      }
+    } catch { /* ignore */ }
+    return 0;
+  });
+  const [slideDir,        setSlideDir]        = useState(1);
+  const carouselContainerRef = useRef(null);
+  const [carouselW,       setCarouselW]       = useState(680);
+  const touchStartX = useRef(null);
   const panelRef = useRef(null);
 
   useEffect(() => {
@@ -250,6 +263,7 @@ export default function ProfileButton() {
   useEffect(() => {
     if (!open) return;
     const handler = (e) => {
+      if (charSelectOpen) return; // char-select panel is outside panelRef — don't close
       if (panelRef.current && !panelRef.current.contains(e.target)) {
         setOpen(false);
         setCharSelectOpen(false);
@@ -257,7 +271,7 @@ export default function ProfileButton() {
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
+  }, [open, charSelectOpen]);
 
   const backendAvatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar.png";
   const displayAvatarSrc = selectedChar
@@ -276,15 +290,22 @@ export default function ProfileButton() {
     return () => window.removeEventListener("hypertek_name_changed", handler);
   }, []);
 
-  // Reset carousel when filter changes
-  useEffect(() => { setCarouselIdx(0); }, [genderFilter]);
+  // Measure carousel container width when panel opens
+  useEffect(() => {
+    if (!charSelectOpen || !carouselContainerRef.current) return;
+    const update = () => { if (carouselContainerRef.current) setCarouselW(carouselContainerRef.current.offsetWidth); };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(carouselContainerRef.current);
+    return () => ro.disconnect();
+  }, [charSelectOpen]);
 
   // Keyboard ← → navigation
   useEffect(() => {
     if (!charSelectOpen) return;
     const handler = (e) => {
-      if (e.key === "ArrowLeft")  setCarouselIdx(i => Math.max(0, i - 1));
-      if (e.key === "ArrowRight") setCarouselIdx(i => i + 1); // clamped at render time
+      if (e.key === "ArrowLeft")  { setSlideDir(-1); setSpeciesIdx(i => (i - 1 + SPECIES.length) % SPECIES.length); }
+      if (e.key === "ArrowRight") { setSlideDir(1);  setSpeciesIdx(i => (i + 1) % SPECIES.length); }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -305,6 +326,7 @@ export default function ProfileButton() {
       : null;
 
   const detailVariant = hoveredChar?.variantIdx ?? selectedChar?.variantIdx ?? 0;
+  const modIdx = ((speciesIdx % SPECIES.length) + SPECIES.length) % SPECIES.length;
 
   /* equipment panel width (for char panel offset) */
   const equipW = isMobile ? 240 : 320;
@@ -326,14 +348,20 @@ export default function ProfileButton() {
         {/* ── Avatar circle with sci-fi frame ── */}
         {(() => {
           const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
-          const cornerSize = isMobile ? 8 : 20;
+          const cornerSize  = isMobile ? 8 : 20;
           const cornerThick = 2;
-          const cornerOff = isMobile ? -4 : -20;
+          // ── Corner offsets — adjust independently ──────────────────────
+          // topOff    : how far top corners extend ABOVE the circle  (less negative = lower / safer on short screens)
+          // bottomOff : how far bottom corners extend BELOW the circle
+          // sideOff   : how far all corners extend horizontally
+          const topOff    = isMobile ? -4 : -6;   // ← raise this value (e.g. 0) to move top corners down
+          const bottomOff = isMobile ? -4 : -20;
+          const sideOff   = isMobile ? -4 : -20;
           const corners = [
-            { top: cornerOff, left: cornerOff,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { top: cornerOff, right: cornerOff, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
-            { bottom: cornerOff, left: cornerOff,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { bottom: cornerOff, right: cornerOff, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+            { top: topOff,    left: sideOff,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { top: topOff,    right: sideOff, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+            { bottom: bottomOff, left: sideOff,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { bottom: bottomOff, right: sideOff, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
           ];
           return (
             <div style={{ position: "relative", display: "inline-block" }}>
@@ -630,225 +658,288 @@ export default function ProfileButton() {
           </div>
         )}
 
-        {/* ══════════════════════════════════════════
-            CHARACTER SELECTION PANEL
-            ══════════════════════════════════════════ */}
-        {open && charSelectOpen && (
-          <div className="char-panel" style={{
-            position: "absolute",
-            top: "calc(100% + 8px)",
-            /* right of the equipment panel */
-            left: isMobile ? "0" : `calc(50% + ${equipW / 2 + 10}px)`,
-            width: isMobile ? 260 : 500,
-            background: "rgba(4,10,26,0.97)",
+        {/* char-select moved outside – see below the main div */}
+
+      </div>
+
+      {/* ══════════════════════════════════════════
+          CHARACTER SELECTION PANEL  (outside transform div so position:fixed works correctly)
+          ══════════════════════════════════════════ */}
+      {charSelectOpen && (
+          /* Full-screen overlay */
+          <div
+            onClick={() => setCharSelectOpen(false)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,5,18,0.88)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              zIndex: 50,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+          <div className="char-panel" onClick={e => e.stopPropagation()} style={{
+            width: "min(880px, 95vw)",
+            background: "rgba(4,10,26,0.98)",
             border: "1px solid rgba(0,212,255,0.28)",
-            borderRadius: 10,
+            borderRadius: 16,
             backdropFilter: "blur(18px)",
-            boxShadow: "0 12px 50px rgba(0,0,0,0.85), 0 0 30px rgba(0,212,255,0.08)",
-            padding: isMobile ? 10 : 14,
-            zIndex: 40,
+            WebkitBackdropFilter: "blur(18px)",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.92), 0 0 60px rgba(0,212,255,0.07)",
+            padding: isMobile ? "14px 16px" : "clamp(12px, 2.2vh, 22px) 28px",
             display: "flex",
             flexDirection: "column",
-            gap: 10,
+            gap: isMobile ? 12 : "clamp(8px, 1.6vh, 18px)",
+            maxHeight: "min(96vh, 760px)",
+            overflowY: "auto",
           }}>
 
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
               <div>
                 <span style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight: "bold",
+                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 10 : 13, fontWeight: "bold",
                   letterSpacing: "0.14em", color: "#00D4FF", textShadow: "0 0 10px rgba(0,212,255,0.7)",
                 }}>SELECT CHARACTER</span>
                 <div style={{
                   fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                  color: "#7ECEEC", letterSpacing: "0.07em", marginTop: 2,
+                  color: "#7ECEEC", letterSpacing: "0.07em", marginTop: 3,
                 }}>
-                  {SPECIES.length} SPECIES · {SPECIES.length * 2} VARIANTS
+                  {SPECIES.length} SPECIES · CHOOSE YOUR VARIANT
                 </div>
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                {/* Gender filter */}
-                {[
-                  { key: "all",    label: "ALL"    },
-                  { key: "female", label: "♀ F"   },
-                  { key: "male",   label: "♂ M"   },
-                ].map(({ key, label }) => (
-                  <button key={key} onClick={() => setGenderFilter(key)} style={{
-                    fontFamily: "Orbitron,sans-serif",
-                    fontSize: isMobile ? 7 : 9, fontWeight: "bold",
-                    letterSpacing: "0.08em",
-                    padding: isMobile ? "2px 6px" : "3px 9px",
-                    borderRadius: 3, cursor: "pointer",
-                    border: genderFilter === key
-                      ? "1px solid #00D4FF"
-                      : "1px solid rgba(0,212,255,0.25)",
-                    background: genderFilter === key
-                      ? "rgba(0,212,255,0.18)"
-                      : "rgba(0,212,255,0.04)",
-                    color: genderFilter === key ? "#00D4FF" : "rgba(0,212,255,0.5)",
-                    transition: "all 0.15s",
-                  }}>{label}</button>
-                ))}
-
-                <button onClick={() => setCharSelectOpen(false)} style={{
-                  background: "none", border: "none", color: "rgba(255,255,255,0.65)",
-                  fontSize: isMobile ? 14 : 18, cursor: "pointer", lineHeight: 1, padding: "0 2px",
-                }}>×</button>
-              </div>
+              <button onClick={() => setCharSelectOpen(false)} style={{
+                background: "none", border: "none", color: "rgba(255,255,255,0.65)",
+                fontSize: 24, cursor: "pointer", lineHeight: 1, padding: "0 4px",
+              }}>×</button>
             </div>
 
-            {/* ── Character Carousel ── */}
+            {/* ── Center Carousel ── */}
             {(() => {
-              const visibleCount = isMobile ? 3 : 4;
-              const allItems = SPECIES.flatMap(sp =>
-                sp.imgs.map((img, vi) => {
-                  const gender = sp.genders?.[vi] ?? (vi === 0 ? "female" : "male");
-                  return { img, vi, sp, gender };
-                })
-              ).filter(({ gender }) => genderFilter === "all" || gender === genderFilter);
+              const CARD_W = isMobile ? 220 : 390;
+              const CARD_H = isMobile ? 250 : "clamp(260px, 50vh, 420px)";
+              const GAP    = isMobile ? 8 : 14;
+              const UNIT   = CARD_W + GAP;
+              const WIN    = 2; // cards visible on each side
+              const N      = SPECIES.length;
 
-              const maxIdx = Math.max(0, allItems.length - visibleCount);
-              const safeIdx = Math.min(carouselIdx, maxIdx);
-              if (safeIdx !== carouselIdx) setCarouselIdx(safeIdx);
-              const visible = allItems.slice(safeIdx, safeIdx + visibleCount);
+              // unbounded index — no modulo, infinite in both directions
+              const goNext = () => setSpeciesIdx(i => i + 1);
+              const goPrev = () => setSpeciesIdx(i => i - 1);
+
+              // track offset is constant: center item always at WIN position
+              const trackX = carouselW / 2 - WIN * UNIT - CARD_W / 2;
+
+              // render only virtual window around current index
+              const items = [];
+              for (let vi = speciesIdx - WIN; vi <= speciesIdx + WIN; vi++) {
+                items.push({ vi, sp: SPECIES[((vi % N) + N) % N] });
+              }
 
               return (
-                <div style={{ display: "flex", alignItems: "stretch", gap: 6 }}>
-
+                <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 6 : 10 }}>
                   {/* ◀ Prev */}
                   <button
-                    onClick={() => setCarouselIdx(i => Math.max(0, i - 1))}
-                    disabled={safeIdx === 0}
+                    onClick={goPrev}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,212,255,0.16)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,212,255,0.06)"; }}
                     style={{
-                      flexShrink: 0, width: 28, background: "rgba(0,212,255,0.07)",
-                      border: "1px solid rgba(0,212,255,0.25)", borderRadius: 4,
-                      color: safeIdx === 0 ? "rgba(0,212,255,0.2)" : "#00D4FF",
-                      cursor: safeIdx === 0 ? "not-allowed" : "pointer",
-                      fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center",
-                      transition: "all 0.15s",
+                      flexShrink: 0, width: isMobile ? 32 : 44, height: CARD_H,
+                      background: "rgba(0,212,255,0.06)", border: "1px solid rgba(0,212,255,0.25)",
+                      borderRadius: 8, color: "#00D4FF", cursor: "pointer",
+                      fontSize: isMobile ? 14 : 20,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "background 0.15s",
                     }}
                   >◀</button>
 
-                  {/* Cards viewport */}
+                  {/* Carousel viewport */}
                   <div
-                    style={{
-                      flex: 1, display: "grid",
-                      gridTemplateColumns: `repeat(${visibleCount}, 1fr)`,
-                      gap: isMobile ? 6 : 9,
-                      border: "1px solid rgba(0,212,255,0.22)",
-                      borderRadius: 6, padding: isMobile ? 6 : 9,
-                      background: "rgba(0,212,255,0.03)",
-                      boxShadow: "inset 0 0 18px rgba(0,212,255,0.06)",
-                    }}
+                    ref={carouselContainerRef}
+                    style={{ flex: 1, overflow: "hidden", position: "relative", height: CARD_H }}
                     onTouchStart={e => { touchStartX.current = e.touches[0].clientX; }}
                     onTouchEnd={e => {
                       if (touchStartX.current === null) return;
                       const dx = e.changedTouches[0].clientX - touchStartX.current;
-                      if (dx < -40) setCarouselIdx(i => Math.min(maxIdx, i + 1));
-                      if (dx >  40) setCarouselIdx(i => Math.max(0, i - 1));
+                      if (dx < -40) goNext();
+                      if (dx >  40) goPrev();
                       touchStartX.current = null;
                     }}
                   >
-                    {visible.map(({ img, vi, sp, gender }) => {
-                      const isSelected = selectedChar?.speciesId === sp.id && selectedChar?.variantIdx === vi;
-                      const isHovered  = hoveredChar?.speciesId === sp.id && hoveredChar?.variantIdx === vi;
-                      return (
-                        <div
-                          key={`${sp.id}-${vi}`}
-                          className="char-card"
-                          onClick={() => handleSelectChar(sp.id, vi)}
-                          onMouseEnter={() => setHoveredChar({ speciesId: sp.id, variantIdx: vi })}
-                          onMouseLeave={() => setHoveredChar(null)}
-                          style={{
-                            borderRadius: 6,
-                            border: isSelected
-                              ? "1.5px solid rgba(0,212,255,0.85)"
-                              : isHovered
-                                ? "1.5px solid rgba(0,212,255,0.55)"
-                                : "1px solid rgba(0,212,255,0.18)",
-                            background: isSelected
-                              ? "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.16), rgba(4,10,26,0.95))"
-                              : isHovered
-                                ? "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.12), rgba(4,10,26,0.9))"
-                                : "radial-gradient(ellipse at 50% 20%, rgba(0,212,255,0.05), rgba(4,10,26,0.88))",
-                            boxShadow: isSelected
-                              ? "0 0 18px rgba(0,212,255,0.35)"
-                              : isHovered
-                                ? "0 0 12px rgba(0,212,255,0.22)"
-                                : "none",
-                            overflow: "hidden",
-                            display: "flex", flexDirection: "column", alignItems: "center",
-                            paddingBottom: 6, position: "relative",
-                            transform: isHovered ? "translateY(-2px) scale(1.02)" : "none",
-                            transition: "transform 0.15s, box-shadow 0.15s, border-color 0.15s",
-                          }}
-                        >
-                          {/* Image — half body */}
-                          <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden", position: "relative" }}>
-                            <img
-                              src={img} alt={sp.name} loading="lazy"
-                              onError={(e) => { e.currentTarget.style.opacity = "0.25"; }}
-                              style={{
-                                width: "100%", height: "160%",
-                                objectFit: "cover", objectPosition: "center top",
-                                display: "block", transform: "scale(1.1)", transformOrigin: "top center",
-                                filter: isHovered ? "brightness(1.15)" : "none",
-                                transition: "filter 0.15s",
+                    {/* Static track — items slide via AnimatePresence layout */}
+                    <div style={{
+                      display: "flex", gap: GAP,
+                      position: "absolute", left: 0, top: 0, height: "100%",
+                      transform: `translateX(${trackX}px)`,
+                    }}>
+                      <AnimatePresence initial={false} mode="popLayout">
+                        {items.map(({ vi, sp }) => {
+                          const dist       = Math.abs(vi - speciesIdx);
+                          const isCenter   = dist === 0;
+                          const isAdjacent = dist === 1;
+
+                          return (
+                            <motion.div
+                              key={vi}
+                              initial={{ opacity: 0, scale: 0.72 }}
+                              animate={{
+                                scale:   isCenter ? 1 : 0.84,
+                                opacity: isCenter ? 1 : isAdjacent ? 0.44 : 0,
                               }}
-                            />
-                            {/* Gender badge */}
-                            <div style={{
-                              position: "absolute", top: 4, left: 4,
-                              background: gender === "female" ? "rgba(236,72,153,0.75)" : "rgba(59,130,246,0.75)",
-                              borderRadius: 2, padding: "1px 4px",
-                              fontFamily: "Orbitron,sans-serif", fontSize: 7, fontWeight: "bold",
-                              color: "#fff", letterSpacing: "0.05em",
-                            }}>{gender === "female" ? "♀" : "♂"}</div>
-                            {isSelected && (
+                              exit={{ opacity: 0, scale: 0.72 }}
+                              transition={{ type: "spring", stiffness: 300, damping: 36 }}
+                              onClick={() => { if (!isCenter) setSpeciesIdx(vi); }}
+                              onMouseEnter={() => isCenter && setHoveredChar({ speciesId: sp.id, variantIdx: 0 })}
+                              onMouseLeave={() => setHoveredChar(null)}
+                              style={{
+                                width: CARD_W, height: "100%", flexShrink: 0,
+                                borderRadius: 12,
+                                border: isCenter ? "1.5px solid rgba(0,212,255,0.6)" : "1px solid rgba(0,212,255,0.15)",
+                                background: isCenter
+                                  ? "radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.13), rgba(4,10,26,0.97))"
+                                  : "rgba(4,10,26,0.85)",
+                                padding: isMobile ? 7 : 10,
+                                display: "flex", flexDirection: "column", gap: isMobile ? 5 : 8,
+                                boxShadow: isCenter ? "0 0 35px rgba(0,212,255,0.22), inset 0 0 18px rgba(0,212,255,0.06)" : "none",
+                                cursor: isCenter ? "default" : "pointer",
+                              }}
+                            >
+                              {/* Species name */}
                               <div style={{
-                                position: "absolute", top: 5, right: 5,
-                                width: 15, height: 15, borderRadius: "50%",
-                                background: "#00D4FF",
-                                display: "flex", alignItems: "center", justifyContent: "center",
-                                fontSize: 9, color: "#020d1a", fontWeight: "bold",
-                                boxShadow: "0 0 8px rgba(0,212,255,0.7)",
-                              }}>✓</div>
-                            )}
-                          </div>
-                          <span style={{
-                            fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold",
-                            letterSpacing: "0.07em",
-                            color: isSelected ? "#00D4FF" : isHovered ? "#fff" : "#FFFFFF",
-                            textAlign: "center", marginTop: 5,
-                            textShadow: isSelected ? "0 0 8px rgba(0,212,255,0.5)" : "none",
-                          }}>{sp.name}</span>
-                          <span style={{
-                            fontFamily: "Orbitron,sans-serif", fontSize: 7,
-                            color: gender === "female" ? "rgba(236,72,153,0.7)" : "rgba(96,165,250,0.7)",
-                            letterSpacing: "0.06em", marginTop: 1,
-                          }}>{gender === "female" ? "♀ Female" : "♂ Male"}</span>
-                        </div>
-                      );
-                    })}
+                                fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight: "bold",
+                                letterSpacing: "0.1em", textAlign: "center",
+                                color: isCenter ? "#00D4FF" : "#7ECEEC",
+                                textShadow: isCenter ? "0 0 8px rgba(0,212,255,0.5)" : "none",
+                              }}>{sp.name.toUpperCase()}</div>
+
+                              {/* Female + Male side by side */}
+                              <div style={{ display: "flex", gap: isMobile ? 4 : 8, flex: 1, minHeight: 0 }}>
+                                {sp.imgs.map((img, vi2) => {
+                                  const gender     = sp.genders?.[vi2] ?? (vi2 === 0 ? "female" : "male");
+                                  const isSelected = selectedChar?.speciesId === sp.id && selectedChar?.variantIdx === vi2;
+                                  const isHov      = hoveredChar?.speciesId === sp.id && hoveredChar?.variantIdx === vi2;
+                                  return (
+                                    <div
+                                      key={vi2}
+                                      onClick={e => { e.stopPropagation(); if (isCenter) handleSelectChar(sp.id, vi2); }}
+                                      onMouseEnter={() => isCenter && setHoveredChar({ speciesId: sp.id, variantIdx: vi2 })}
+                                      onMouseLeave={() => isCenter && setHoveredChar(null)}
+                                      style={{
+                                        flex: 1, borderRadius: 8, overflow: "hidden",
+                                        border: isSelected
+                                          ? "1.5px solid rgba(0,212,255,0.9)"
+                                          : isHov && isCenter ? "1.5px solid rgba(0,212,255,0.55)"
+                                          : "1px solid rgba(0,212,255,0.14)",
+                                        background: isSelected
+                                          ? "radial-gradient(ellipse at 50% 10%, rgba(0,212,255,0.22), rgba(4,10,26,0.95))"
+                                          : "rgba(0,0,0,0.25)",
+                                        cursor: isCenter ? "pointer" : "default",
+                                        display: "flex", flexDirection: "column", alignItems: "center",
+                                        boxShadow: isSelected ? "0 0 18px rgba(0,212,255,0.45)" : "none",
+                                        transition: "transform 0.15s, border-color 0.15s, box-shadow 0.15s",
+                                        transform: isHov && isCenter ? "translateY(-2px) scale(1.02)" : "none",
+                                        position: "relative",
+                                      }}
+                                    >
+                                      {/* Image */}
+                                      <div style={{ width: "100%", flex: 1, overflow: "hidden", position: "relative", minHeight: 0 }}>
+                                        <img
+                                          src={img} alt={`${sp.name} ${gender}`} loading="lazy"
+                                          onError={e => { e.currentTarget.style.opacity = "0.2"; }}
+                                          style={{
+                                            width: "100%", height: "160%",
+                                            objectFit: "cover", objectPosition: "center top",
+                                            transform: isHov && isCenter ? "scale(1.08)" : "scale(1.05)",
+                                            transformOrigin: "top center", display: "block",
+                                            transition: "transform 0.25s ease",
+                                          }}
+                                        />
+                                        <div style={{
+                                          position: "absolute", top: 4, left: 4,
+                                          background: gender === "female" ? "rgba(236,72,153,0.8)" : "rgba(59,130,246,0.8)",
+                                          borderRadius: 3, padding: "1px 5px",
+                                          fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold", color: "#fff",
+                                        }}>{gender === "female" ? "♀" : "♂"}</div>
+                                        {isSelected && (
+                                          <div style={{
+                                            position: "absolute", top: 5, right: 5,
+                                            width: 17, height: 17, borderRadius: "50%",
+                                            background: "#00D4FF",
+                                            display: "flex", alignItems: "center", justifyContent: "center",
+                                            fontSize: 10, color: "#020d1a", fontWeight: "bold",
+                                            boxShadow: "0 0 8px rgba(0,212,255,0.7)",
+                                          }}>✓</div>
+                                        )}
+                                      </div>
+                                      {/* Gender label */}
+                                      <div style={{
+                                        fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold",
+                                        color: gender === "female" ? "rgba(236,72,153,0.8)" : "rgba(96,165,250,0.8)",
+                                        letterSpacing: "0.06em", padding: "4px 0 3px", flexShrink: 0,
+                                      }}>{gender === "female" ? "♀ FEMALE" : "♂ MALE"}</div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </AnimatePresence>
+                    </div>
                   </div>
 
                   {/* ▶ Next */}
                   <button
-                    onClick={() => setCarouselIdx(i => Math.min(maxIdx, i + 1))}
-                    disabled={safeIdx >= maxIdx}
+                    onClick={goNext}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,212,255,0.16)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,212,255,0.06)"; }}
                     style={{
-                      flexShrink: 0, width: 28, background: "rgba(0,212,255,0.07)",
-                      border: "1px solid rgba(0,212,255,0.25)", borderRadius: 4,
-                      color: safeIdx >= maxIdx ? "rgba(0,212,255,0.2)" : "#00D4FF",
-                      cursor: safeIdx >= maxIdx ? "not-allowed" : "pointer",
-                      fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center",
-                      transition: "all 0.15s",
+                      flexShrink: 0, width: isMobile ? 32 : 44, height: CARD_H,
+                      background: "rgba(0,212,255,0.06)", border: "1px solid rgba(0,212,255,0.25)",
+                      borderRadius: 8, color: "#00D4FF", cursor: "pointer",
+                      fontSize: isMobile ? 14 : 20,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      transition: "background 0.15s",
                     }}
                   >▶</button>
                 </div>
               );
             })()}
+
+            {/* Nav dots + species name */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+              <div style={{
+                fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 11 : 14, fontWeight: "bold",
+                color: "#00D4FF", letterSpacing: "0.12em", textShadow: "0 0 12px rgba(0,212,255,0.6)",
+              }}>{SPECIES[modIdx].name.toUpperCase()}</div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                {SPECIES.map((_, i) => {
+                  const isActive = i === modIdx;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        // navigate shortest path from current unbounded index
+                        const delta = i - modIdx;
+                        const N = SPECIES.length;
+                        const short = ((delta + Math.round(N / 2)) % N + N) % N - Math.round(N / 2);
+                        setSpeciesIdx(speciesIdx + short);
+                      }}
+                      style={{
+                        width: isActive ? (isMobile ? 18 : 24) : (isMobile ? 6 : 8),
+                        height: isMobile ? 4 : 5, borderRadius: 3,
+                        background: isActive ? "#00D4FF" : "rgba(0,212,255,0.25)",
+                        border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
 
             {/* ── Detail strip ── */}
             {detailSpecies ? (
@@ -951,9 +1042,9 @@ export default function ProfileButton() {
             )}
 
           </div>
+          </div>
         )}
 
-      </div>
     </>
   );
 }

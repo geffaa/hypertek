@@ -425,7 +425,7 @@ export default function TopBar({ activeGame }) {
 
   const handleMarketNav = (tab) => {
     setMarketOpen(false);
-    window.open(`/market-place?tab=${tab}`, "_blank");
+    navigate(`/market-place?tab=${tab}`);
   };
 
   const connectMetaMask = async () => {
@@ -715,8 +715,8 @@ export default function TopBar({ activeGame }) {
                         }}
                           className="market-dropdown-item"
                         >
-                          <span>{item.label}</span>
-                          {item.val && <span style={{ color: "#facc15", marginLeft: 12 }}>{item.val}</span>}
+                          <span style={{ whiteSpace: "nowrap" }}>{item.label}</span>
+                          {item.val && <span style={{ color: "#facc15", marginLeft: 12, whiteSpace: "nowrap" }}>{item.val}</span>}
                         </div>
                       ))}
                     </div>
@@ -956,11 +956,11 @@ export default function TopBar({ activeGame }) {
       {/* ── LOG OUT button ── */}
       <button className="logout-btn" style={{
         position: "absolute",
-        top: isMobile ? "4px" : "1vh",
-        right: isMobile ? "1.5%" : "1.8%",
+        top: isMobile ? "4px" : "2vh",
+        right: isMobile ? "1.5%" : "2.8%",
         zIndex: 30,
-        width: isMobile ? "32px" : "clamp(42px,6.5vh,58px)",
-        height: isMobile ? "32px" : "clamp(42px,6.5vh,58px)",
+        width: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
+        height: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
         borderRadius: "50%",
         background: "radial-gradient(circle at 38% 32%, rgba(200,40,40,0.9), rgba(70,6,6,0.97))",
         border: "2px solid rgba(248,113,113,0.65)",
@@ -1140,7 +1140,7 @@ export default function TopBar({ activeGame }) {
           }}
         >
           <div style={{
-            position: "relative", width: "min(96vw, 1260px)", height: "min(90vh, 800px)",
+            position: "relative", width: "min(96vw, 1260px)", height: "min(96vh, 800px)",
             background: "#000", border: "1px solid rgba(180,90,20,0.6)",
             borderRadius: 6, boxShadow: "0 0 80px rgba(0,0,0,0.9)",
             overflow: "hidden", display: "flex", flexDirection: "column",
@@ -1388,14 +1388,15 @@ export default function TopBar({ activeGame }) {
               </div>
 
               {/* Ship image + overlays */}
-              <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", position: "relative" }}>
+              {/* overflowY:auto here so the image NEVER shrinks — only the popup frame scrolls */}
+              <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", overflowY: "auto", overflowX: "hidden" }}>
                 <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
                   <img
                     ref={shipImgRef}
                     key={shipLevel}
                     src={`/ships/level${shipLevel}-plain.png`}
                     alt={`Ship Level ${shipLevel}`}
-                    style={{ width: "100%", height: "auto", display: "block", maxHeight: isMobile ? "52vh" : "66vh", objectFit: "contain" }}
+                    style={{ width: "100%", height: "auto", display: "block" }}
                   />
                   {/* Room highlight boxes — only visible on hover or select */}
                   {(SHIP_ROOMS[shipLevel] || []).map(room => {

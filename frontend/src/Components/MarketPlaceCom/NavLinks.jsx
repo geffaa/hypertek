@@ -10,7 +10,6 @@ const TABS = [
   { key: "quests",    label: "Quests / Trades"   },
   { key: "hire",      label: "For Hire"          },
   { key: "bounty",    label: "Bounty"            },
-  { key: "mymarket",  label: "My Collections"    },
 ];
 
 // Props: activeTab, onTabChange, search, onSearch

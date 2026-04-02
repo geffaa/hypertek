@@ -8,7 +8,7 @@
  * z-index 15: above GameFrame (10), below HUD elements (25+).
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
@@ -68,11 +68,11 @@ const CSS = `
    Layout mirrors Quest mode (manual top/left per button)
    ══════════════════════════════════════════════════════════════════ */
 const OVL_BTN_SIZE = 82;
-// Quarter-circle arc: R=42vh, center at bottom-right corner, same as Quest for consistency
+// Arc positions — mirrored from Quest ARC_3 for consistency
 const OVL_ARC = [
-  { id: "FIRE",   right: "11vh", bottom: "40vh" },
-  { id: "SCOPE",  right: "30vh", bottom: "30vh" },
-  { id: "WEAPON", right: "40vh", bottom: "11vh" },
+  { id: "FIRE",   right: "17vh", bottom: "38vh" },
+  { id: "SCOPE",  right: "35vh", bottom: "27vh" },
+  { id: "WEAPON", right: "45vh", bottom: "10vh" },
 ];
 const OVERLORD_ACTIONS = [
   {
@@ -113,10 +113,22 @@ const OVERLORD_ACTIONS = [
 function OverlordActionButtons() {
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
+  const [vpH, setVpH] = useState(() => window.innerHeight);
+  useEffect(() => {
+    const onResize = () => setVpH(window.innerHeight);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const sz = isMobile ? 52 : OVL_BTN_SIZE;
   const s = isMobile ? 0.65 : 1;
-  const pos2 = (v) => `${parseFloat(v) * s}vh`;
+
+  // Same short-viewport adjustment as Quest
+  const isShortVP = !isMobile && vpH < 720;
+  const rAdj = isShortVP ? 6 : 0;
+  const bAdj = isShortVP ? 5 : 0;
+  const pos2r = (v) => `${(parseFloat(v) + rAdj) * s}vh`;
+  const pos2b = (v) => `${Math.max(2, parseFloat(v) - bAdj) * s}vh`;
 
   return (
     <>
@@ -131,7 +143,7 @@ function OverlordActionButtons() {
             onMouseLeave={() => setActive(null)}
             style={{
               position: "absolute",
-              right: pos2(pos.right), bottom: pos2(pos.bottom),
+              right: pos2r(pos.right), bottom: pos2b(pos.bottom),
               zIndex: 35,
               width: sz, height: sz,
               borderRadius: "50%",

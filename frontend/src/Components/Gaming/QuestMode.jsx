@@ -251,11 +251,27 @@ const ARC_4 = [
 function ActionButtons({ includeKneel = false }) {
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
+  const [vpH, setVpH] = useState(() => window.innerHeight);
+  useEffect(() => {
+    const onResize = () => setVpH(window.innerHeight);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   const arc = includeKneel ? ARC_4 : ARC_3;
   const sz = isMobile ? 52 : BTN_SIZE;
   // Scale arc radius down on mobile so buttons don't overflow small screens
   const s = isMobile ? 0.65 : 1;
-  const pos2 = (v) => `${parseFloat(v) * s}vh`;
+
+  // ── Short-viewport adjustment (e.g. 1440×640) ──────────────────
+  // rAdj: extra vh added to `right`  → pushes buttons further LEFT
+  // bAdj: vh subtracted from `bottom` → pushes buttons DOWN
+  const isShortVP = !isMobile && vpH < 720;
+  const rAdj = isShortVP ? 12 : 0;
+  const bAdj = isShortVP ? 3 : 0;
+
+  const pos2r = (v) => `${(parseFloat(v) + rAdj) * s}vh`;
+  const pos2b = (v) => `${Math.max(2, parseFloat(v) - bAdj) * s}vh`;
 
   return (
     <>
@@ -270,7 +286,7 @@ function ActionButtons({ includeKneel = false }) {
           onMouseLeave={() => setActive(null)}
           style={{
             position: "absolute",
-            right: pos2(pos.right), bottom: pos2(pos.bottom),
+            right: pos2r(pos.right), bottom: pos2b(pos.bottom),
             zIndex: 35,
             width: sz, height: sz,
             borderRadius: "50%",

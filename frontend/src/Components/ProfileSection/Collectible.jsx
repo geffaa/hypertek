@@ -78,6 +78,7 @@ function MarketPlace() {
   // ---- Activities state ----
   const [transactions, setTransactions] = useState([]);
   const [txLoading, setTxLoading] = useState(false);
+  const [txFilter, setTxFilter] = useState("all");
 
   // ---- My Offers state ----
   const [offers, setOffers] = useState([]);
@@ -371,6 +372,7 @@ function MarketPlace() {
   const handleSelectCategory = (cat) => {
     setActiveCategory(cat);
     setActiveView("");
+    setTxFilter("all");
   };
 
   const handleCategoriesLoaded = (_cats) => {
@@ -545,53 +547,82 @@ function MarketPlace() {
             })()}
 
             {/* ---- ACTIVITIES VIEW ---- */}
-            {activeView === "Activities" && (
-              <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-                {txLoading ? (
-                  <div className="text-white/50 text-sm py-16 text-center">Loading transactions...</div>
-                ) : transactions.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-4">
-                    <p className="text-sm">No transactions yet</p>
-                  </div>
-                ) : (
-                  <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-                    {/* Header */}
-                    <div className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/30"
-                      style={{ background: "rgba(0,20,80,0.5)" }}>
-                      <span>Item</span>
-                      <span>Type</span>
-                      <span>Price</span>
-                      <span>From</span>
-                      <span>To</span>
-                      <span className="text-right">Date</span>
-                    </div>
-                    {transactions.map((tx, i) => (
-                      <div
-                        key={i}
-                        className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 items-center text-sm"
+            {activeView === "Activities" && (() => {
+              const TX_FILTERS = [
+                { key: "all",  label: "All"  },
+                { key: "buy",  label: "Buy"  },
+                { key: "sell", label: "Sell" },
+              ];
+              const filtered = txFilter === "all"
+                ? transactions
+                : transactions.filter((tx) => tx.type === txFilter);
+              return (
+                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+                  {/* Filter chips */}
+                  <div className="flex gap-2 mb-4">
+                    {TX_FILTERS.map((f) => (
+                      <button
+                        key={f.key}
+                        onClick={() => setTxFilter(f.key)}
+                        className="px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors"
                         style={{
-                          background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
-                          borderTop: "1px solid rgba(255,255,255,0.04)",
+                          background: txFilter === f.key ? "#002AA8" : "rgba(255,255,255,0.06)",
+                          color: txFilter === f.key ? "#fff" : "rgba(255,255,255,0.5)",
+                          border: txFilter === f.key ? "1px solid rgba(0,80,255,0.35)" : "1px solid rgba(255,255,255,0.1)",
                         }}
                       >
-                        <span className="text-white/85 text-[13px] font-medium truncate">{tx.itemName || "—"}</span>
-                        <span className={`text-xs font-bold ${tx.type === "buy" ? "text-blue-400" : "text-green-400"}`}>
-                          {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
-                        </span>
-                        <span className="text-white/80 text-[13px] font-semibold">
-                          {tx.priceETH ? `${tx.priceETH} USDC` : "—"}
-                        </span>
-                        <span className="text-white/45 text-[12px] font-mono truncate" title={tx.seller}>{shortAddr(tx.seller)}</span>
-                        <span className="text-white/45 text-[12px] font-mono truncate" title={tx.buyer}>{shortAddr(tx.buyer)}</span>
-                        <span className="text-white/30 text-[11px] text-right whitespace-nowrap">
-                          {tx.createdAt ? timeAgo(tx.createdAt) : "—"}
-                        </span>
-                      </div>
+                        {f.label}
+                      </button>
                     ))}
+                    <span className="ml-auto text-white/25 text-xs self-center">{filtered.length} record{filtered.length !== 1 ? "s" : ""}</span>
                   </div>
-                )}
-              </div>
-            )}
+
+                  {txLoading ? (
+                    <div className="text-white/50 text-sm py-16 text-center">Loading transactions...</div>
+                  ) : filtered.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-4">
+                      <p className="text-sm">No transactions yet</p>
+                    </div>
+                  ) : (
+                    <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                      {/* Header */}
+                      <div className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/30"
+                        style={{ background: "rgba(0,20,80,0.5)" }}>
+                        <span>Item</span>
+                        <span>Type</span>
+                        <span>Price</span>
+                        <span>From</span>
+                        <span>To</span>
+                        <span className="text-right">Date</span>
+                      </div>
+                      {filtered.map((tx, i) => (
+                        <div
+                          key={i}
+                          className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 items-center text-sm"
+                          style={{
+                            background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                            borderTop: "1px solid rgba(255,255,255,0.04)",
+                          }}
+                        >
+                          <span className="text-white/85 text-[13px] font-medium truncate">{tx.itemName || "—"}</span>
+                          <span className={`text-xs font-bold ${tx.type === "buy" ? "text-blue-400" : "text-green-400"}`}>
+                            {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
+                          </span>
+                          <span className="text-white/80 text-[13px] font-semibold">
+                            {tx.priceETH ? `${tx.priceETH} USDC` : "—"}
+                          </span>
+                          <span className="text-white/45 text-[12px] font-mono truncate" title={tx.seller}>{shortAddr(tx.seller)}</span>
+                          <span className="text-white/45 text-[12px] font-mono truncate" title={tx.buyer}>{shortAddr(tx.buyer)}</span>
+                          <span className="text-white/30 text-[11px] text-right whitespace-nowrap">
+                            {tx.createdAt ? timeAgo(tx.createdAt) : "—"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
             {/* ---- MY OFFERS VIEW ---- */}
             {activeView === "My Offers" && (

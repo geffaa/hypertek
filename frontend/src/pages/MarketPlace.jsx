@@ -11,7 +11,6 @@ import AuctionsTab       from "../Components/MarketPlaceCom/tabs/AuctionsTab";
 import QuestsTab         from "../Components/MarketPlaceCom/tabs/QuestsTab";
 import HireRentTab       from "../Components/MarketPlaceCom/tabs/HireRentTab";
 import BountyTab         from "../Components/MarketPlaceCom/tabs/BountyTab";
-import MyMarketTab       from "../Components/MarketPlaceCom/tabs/MyMarketTab";
 import MusicPlayer        from "../Components/MarketPlaceCom/MusicPlayer";
 import { BACKEND_BASE_URL } from "../Config";
 
@@ -81,7 +80,6 @@ function MarketPlace() {
       case "quests":    return <QuestsTab />;
       case "hire":      return <HireRentTab />;
       case "bounty":    return <BountyTab />;
-      case "mymarket":  return <MyMarketTab />;
       default:          return <GeneralTab />;
     }
   };
