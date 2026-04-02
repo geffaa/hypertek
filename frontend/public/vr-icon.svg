@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 8 100 76" width="100" height="100">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Head band top arc -->
+  <path d="M28 36 Q50 12 72 36" fill="none" stroke="#00D4FF" stroke-width="2.2" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M30 36 Q50 16 70 36" fill="none" stroke="#00D4FF" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Main visor body -->
+  <rect x="18" y="36" width="64" height="26" rx="5" ry="5"
+    fill="rgba(0,20,40,0.6)" stroke="#00D4FF" stroke-width="2" filter="url(#glow)"/>
+  <rect x="20" y="38" width="60" height="22" rx="4" ry="4"
+    fill="none" stroke="#00D4FF" stroke-width="0.7" opacity="0.35"/>
+
+  <!-- Left ear pad -->
+  <path d="M18 40 Q10 44 11 54 Q11 60 18 61" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Right ear pad -->
+  <path d="M82 40 Q90 44 89 54 Q89 60 82 61" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Inner lens left -->
+  <rect x="24" y="41" width="22" height="14" rx="3"
+    fill="rgba(0,212,255,0.06)" stroke="#00D4FF" stroke-width="1.2" filter="url(#glow)"/>
+
+  <!-- Inner lens right -->
+  <rect x="54" y="41" width="22" height="14" rx="3"
+    fill="rgba(0,212,255,0.06)" stroke="#00D4FF" stroke-width="1.2" filter="url(#glow)"/>
+
+  <!-- Nose bridge -->
+  <path d="M46 48 Q50 52 54 48" fill="none" stroke="#00D4FF" stroke-width="1.2" filter="url(#glow)"/>
+
+  <!-- Accent dots left lens -->
+  <circle cx="29" cy="45" r="1" fill="#00D4FF" opacity="0.7"/>
+  <circle cx="33" cy="45" r="0.6" fill="#00D4FF" opacity="0.4"/>
+
+  <!-- Accent crosshair right lens -->
+  <line x1="65" y1="46" x2="65" y2="50" stroke="#00D4FF" stroke-width="0.8" opacity="0.7"/>
+  <line x1="63" y1="48" x2="67" y2="48" stroke="#00D4FF" stroke-width="0.8" opacity="0.7"/>
+  <circle cx="65" cy="48" r="1.5" fill="none" stroke="#00D4FF" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- Chin arc -->
+  <path d="M26 62 Q50 74 74 62" fill="none" stroke="#00D4FF" stroke-width="1.8" stroke-linecap="round" filter="url(#glow)" opacity="0.7"/>
+
+  <!-- VR MODE text -->
+  <text x="50" y="82"
+    font-family="Orbitron, monospace"
+    font-size="8"
+    font-weight="700"
+    letter-spacing="2"
+    fill="#00D4FF"
+    text-anchor="middle"
+    filter="url(#glow)"
+    opacity="0.95">VR MODE</text>
+</svg>

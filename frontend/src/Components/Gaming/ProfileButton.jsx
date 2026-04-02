@@ -219,7 +219,7 @@ function Slot({ label, size = 54 }) {
 /* ── Main Component ───────────────────────────────────────────── */
 export default function ProfileButton() {
   const isMobile = useMobileLandscape();
-  const SIZE = isMobile ? "36px" : "8.5vh";
+  const SIZE = isMobile ? "36px" : "clamp(48px, 7vh, 64px)";
 
   const { token } = useSelector((s) => s.auth);
   const [profile,        setProfile]        = useState(null);
@@ -326,13 +326,14 @@ export default function ProfileButton() {
         {/* ── Avatar circle with sci-fi frame ── */}
         {(() => {
           const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
-          const cornerSize = isMobile ? 8 : 11;
+          const cornerSize = isMobile ? 8 : 20;
           const cornerThick = 2;
+          const cornerOff = isMobile ? -4 : -20;
           const corners = [
-            { top: -4, left: -4,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { top: -4, right: -4, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
-            { bottom: -4, left: -4,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { bottom: -4, right: -4, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+            { top: cornerOff, left: cornerOff,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { top: cornerOff, right: cornerOff, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
+            { bottom: cornerOff, left: cornerOff,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
+            { bottom: cornerOff, right: cornerOff, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
           ];
           return (
             <div style={{ position: "relative", display: "inline-block" }}>
@@ -366,15 +367,26 @@ export default function ProfileButton() {
                   }}
                 />
               </div>
-              {/* LVL badge */}
+              {/* LVL plaque */}
               <div style={{
-                position: "absolute", bottom: -10, left: "50%", transform: "translateX(-50%)",
-                background: "rgba(3,8,20,0.92)", border: `1px solid ${frameColor}77`,
-                borderRadius: 2, padding: "1px 8px", whiteSpace: "nowrap",
-                fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
-                fontWeight: "bold", letterSpacing: "0.1em", color: frameColor,
-                textShadow: `0 0 6px ${frameColor}88`,
-              }}>LVL 23</div>
+                position: "absolute", bottom: -14, left: "50%", transform: "translateX(-50%)",
+                background: "linear-gradient(180deg, rgba(3,12,28,0.97), rgba(2,6,18,0.99))",
+                border: `1px solid ${frameColor}99`,
+                borderRadius: 2,
+                padding: isMobile ? "2px 6px" : "2px 8px",
+                whiteSpace: "nowrap",
+                boxShadow: `0 0 8px ${frameColor}44, inset 0 1px 0 ${frameColor}22`,
+                fontFamily: "Orbitron,sans-serif",
+                fontSize: isMobile ? 6 : 8,
+                fontWeight: "bold", letterSpacing: "0.1em",
+                color: frameColor,
+                textShadow: `0 0 8px ${frameColor}cc`,
+                display: "flex", alignItems: "center", gap: 3,
+              }}>
+                <span style={{ fontSize: isMobile ? 5 : 7, opacity: 0.7 }}>▸</span>
+                LVL 23
+                <span style={{ fontSize: isMobile ? 5 : 7, opacity: 0.7 }}>◂</span>
+              </div>
             </div>
           );
         })()}
@@ -452,40 +464,50 @@ export default function ProfileButton() {
                       onMouseLeave={() => setFramePickerOpen(false)}
                     >
 
-                      <div
-                        className="avatar-img-btn"
-                        onClick={() => setCharSelectOpen(o => !o)}
-                        title="Click to choose character"
-                        style={{
-                          width: imgW, height: imgH,
-                          background: `radial-gradient(ellipse at 50% 30%, ${frameColor}18, transparent 70%)`,
-                          border: `2px solid ${frameColor}BB`,
-                          borderRadius: 6,
-                          overflow: "hidden",
-                          boxShadow: `0 0 0 1px ${frameColor}33, 0 0 18px ${frameColor}66, 0 0 36px ${frameColor}22`,
-                          position: "relative",
-                        }}
-                      >
-                        <img
-                          src={displayAvatarSrc}
-                          alt="avatar"
-                          onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
-                          style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
-                        />
-                        {/* "CHANGE" hint */}
+                      {/* Avatar image — sci-fi frame with corner brackets */}
+                      <div style={{ position: "relative", width: imgW, height: imgH }}>
+                        {/* Corner bracket decorations */}
+                        {[
+                          { top: -3, left: -3,     borderTop: `2px solid ${frameColor}`, borderLeft:  `2px solid ${frameColor}`, width: 12, height: 12 },
+                          { top: -3, right: -3,    borderTop: `2px solid ${frameColor}`, borderRight: `2px solid ${frameColor}`, width: 12, height: 12 },
+                          { bottom: -3, left: -3,  borderBottom: `2px solid ${frameColor}`, borderLeft:  `2px solid ${frameColor}`, width: 12, height: 12 },
+                          { bottom: -3, right: -3, borderBottom: `2px solid ${frameColor}`, borderRight: `2px solid ${frameColor}`, width: 12, height: 12 },
+                        ].map((c, i) => (
+                          <div key={i} style={{ position: "absolute", pointerEvents: "none", zIndex: 3, ...c }} />
+                        ))}
+                        {/* Image container */}
                         <div style={{
-                          position: "absolute", bottom: 0, left: 0, right: 0,
-                          background: "linear-gradient(transparent, rgba(0,0,0,0.78))",
-                          padding: "10px 4px 5px",
-                          display: "flex", alignItems: "center", justifyContent: "center",
+                          width: "100%", height: "100%",
+                          background: `radial-gradient(ellipse at 50% 30%, ${frameColor}18, transparent 70%)`,
+                          border: `1px solid ${frameColor}88`,
+                          borderRadius: 4,
+                          overflow: "hidden",
+                          boxShadow: `inset 0 0 18px rgba(0,0,0,0.6), 0 0 14px ${frameColor}44`,
+                          position: "relative",
                         }}>
-                          <span style={{
-                            fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
-                            letterSpacing: "0.1em", color: frameColor,
-                            textShadow: `0 0 6px ${frameColor}99`,
-                          }}>CHANGE ▸</span>
+                          <img
+                            src={displayAvatarSrc}
+                            alt="avatar"
+                            onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                            style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
+                          />
                         </div>
                       </div>
+
+                      {/* CHANGE button — separate, below image */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setCharSelectOpen(o => !o); }}
+                        style={{
+                          width: "100%", marginTop: 6,
+                          background: `linear-gradient(180deg, ${frameColor}22, ${frameColor}0d)`,
+                          border: `1px solid ${frameColor}88`,
+                          borderRadius: 3, padding: "4px 0",
+                          fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
+                          letterSpacing: "0.12em", color: frameColor,
+                          textShadow: `0 0 6px ${frameColor}99`,
+                          cursor: "pointer",
+                        }}
+                      >CHANGE ▸</button>
 
                       {/* Frame picker overlay on hover */}
                       {framePickerOpen && (

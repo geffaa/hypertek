@@ -312,10 +312,10 @@ export default function Navbar() {
                     {[
                       [
                         { to: "/market-place?tab=overview", icon: <LayoutGrid className="w-5 h-5" />, label: "Overview",  desc: "General market overview" },
-                        { to: "/personal-activity",         icon: <Package    className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
+                        { to: "/market-place?tab=mymarket",  icon: <Package    className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
                       ],
                       [
-                        { to: "/collections",               icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT & NFA collectibles" },
+                        { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT & NFA collectibles" },
                         { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: "Auction",      desc: "Track the countdown of any auction" },
                       ],
                     ].map((row, rowIdx) => (
@@ -578,14 +578,14 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  to="/personal-activity"
+                  to="/market-place?tab=mymarket"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   My Assets
                 </Link>
 
                 <Link
-                  to="/collections"
+                  to="/market-place?tab=general"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
                   The Marketplace
