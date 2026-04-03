@@ -875,12 +875,13 @@ export default function ProfileButton() {
                                           src={img} alt={`${sp.name} ${gender}`} loading="lazy"
                                           onError={e => { e.currentTarget.style.opacity = "0.2"; }}
                                           style={{
-                                            width: "100%", height: "160%",
-                                            objectFit: "cover",
-                                            objectPosition: gender === "female" ? "center 18%" : "center 2%",
+                                            position: "absolute",
+                                            top: gender === "female" ? "8%" : "-2%",
+                                            left: 0, width: "100%", height: "160%",
+                                            objectFit: "cover", objectPosition: "center top",
                                             transform: isHov && isCenter ? "scale(1.08)" : "scale(1.05)",
                                             transformOrigin: "top center", display: "block",
-                                            transition: "transform 0.25s ease",
+                                            transition: "transform 0.25s ease, top 0.25s ease",
                                           }}
                                         />
                                         <div style={{
