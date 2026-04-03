@@ -220,7 +220,14 @@ function Slot({ label, size = 54 }) {
 /* ── Main Component ───────────────────────────────────────────── */
 export default function ProfileButton() {
   const isMobile = useMobileLandscape();
-  const SIZE = isMobile ? "36px" : "clamp(48px, 7vh, 64px)";
+  const [windowW, setWindowW] = useState(() => window.innerWidth);
+  const [windowH, setWindowH] = useState(() => window.innerHeight);
+  useEffect(() => {
+    const onResize = () => { setWindowW(window.innerWidth); setWindowH(window.innerHeight); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  const isSmall = windowW < 600; // portrait phones / very small screens
 
   const { token } = useSelector((s) => s.auth);
   const [profile,        setProfile]        = useState(null);
@@ -251,6 +258,7 @@ export default function ProfileButton() {
   const [carouselW,       setCarouselW]       = useState(680);
   const touchStartX = useRef(null);
   const panelRef = useRef(null);
+  const frameLeaveTimer = useRef(null);
 
   useEffect(() => {
     if (!token) return;
@@ -318,15 +326,16 @@ export default function ProfileButton() {
     setCharSelectOpen(false);
   };
 
-  /* species detail shown at bottom of char-select panel */
+  const modIdx = ((speciesIdx % SPECIES.length) + SPECIES.length) % SPECIES.length;
+
+  /* species detail shown at bottom of char-select panel —
+     always tracks the currently centred carousel card, not the selected char */
   const detailSpecies = hoveredChar
     ? SPECIES.find(s => s.id === hoveredChar.speciesId)
-    : selectedChar
-      ? SPECIES.find(s => s.id === selectedChar.speciesId)
-      : null;
+    : SPECIES[modIdx];
 
-  const detailVariant = hoveredChar?.variantIdx ?? selectedChar?.variantIdx ?? 0;
-  const modIdx = ((speciesIdx % SPECIES.length) + SPECIES.length) % SPECIES.length;
+  const detailVariant = hoveredChar?.variantIdx
+    ?? (selectedChar?.speciesId === SPECIES[modIdx].id ? selectedChar.variantIdx : 0);
 
   /* equipment panel width (for char panel offset) */
   const equipW = isMobile ? 240 : 320;
@@ -345,76 +354,76 @@ export default function ProfileButton() {
         pointerEvents: "auto",
       }}>
 
-        {/* ── Avatar circle with sci-fi frame ── */}
+        {/* ── Avatar circle with sci-fi SVG frame ── */}
         {(() => {
           const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
-          const cornerSize  = isMobile ? 8 : 20;
-          const cornerThick = 2;
-          // ── Corner offsets — adjust independently ──────────────────────
-          // topOff    : how far top corners extend ABOVE the circle  (less negative = lower / safer on short screens)
-          // bottomOff : how far bottom corners extend BELOW the circle
-          // sideOff   : how far all corners extend horizontally
-          const topOff    = isMobile ? -4 : -6;   // ← raise this value (e.g. 0) to move top corners down
-          const bottomOff = isMobile ? -4 : -20;
-          const sideOff   = isMobile ? -4 : -20;
-          const corners = [
-            { top: topOff,    left: sideOff,  borderTop: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { top: topOff,    right: sideOff, borderTop: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
-            { bottom: bottomOff, left: sideOff,  borderBottom: `${cornerThick}px solid ${frameColor}`, borderLeft:  `${cornerThick}px solid ${frameColor}` },
-            { bottom: bottomOff, right: sideOff, borderBottom: `${cornerThick}px solid ${frameColor}`, borderRight: `${cornerThick}px solid ${frameColor}` },
-          ];
+          // Numeric avatar diameter
+          const sizeNum = isMobile ? 36 : Math.min(64, Math.max(48, windowH * 0.07));
+          // PNG frame: inner transparent circle ≈ 51% of image width
+          // So total frame display size = sizeNum / 0.51
+          const framePx  = Math.round(sizeNum / 0.51);
+          const avatarOff = Math.round((framePx - sizeNum) / 2); // center avatar inside frame
+
+          // Level badge — centered pill bar at bottom of frame
+          const badgeW  = Math.round(framePx * 0.52);
+          const badgeH  = Math.round(framePx * 0.14);
+          const badgeLeft = Math.round((framePx - badgeW) / 2);
+          const badgeTop  = Math.round(framePx * 0.82);
+
           return (
-            <div style={{ position: "relative", display: "inline-block" }}>
-              {corners.map((c, i) => (
-                <div key={i} style={{
-                  position: "absolute", width: cornerSize, height: cornerSize,
-                  pointerEvents: "none", zIndex: 2, ...c,
-                }} />
-              ))}
-              <div
-                className="profile-circle"
-                onClick={() => setOpen(o => !o)}
-                style={{
-                  width: SIZE, height: SIZE, borderRadius: "50%",
-                  overflow: "hidden",
-                  border: `2px solid ${frameColor}`,
-                  boxShadow: `0 0 0 1px ${frameColor}33, 0 0 16px ${frameColor}55, 0 0 5px rgba(0,0,0,0.9)`,
-                  display: "block", flexShrink: 0,
-                }}
-              >
+            <div
+              style={{ position: "relative", width: framePx, height: framePx, overflow: "visible", cursor: "pointer" }}
+              onClick={() => setOpen(o => !o)}
+            >
+              {/* Avatar image — centered inside frame's transparent circle */}
+              <div style={{
+                position: "absolute",
+                left: avatarOff, top: avatarOff,
+                width: sizeNum, height: sizeNum,
+                borderRadius: "50%", overflow: "hidden",
+              }}>
                 <img
                   src={displayAvatarSrc}
                   alt="Profile"
                   loading="lazy"
                   onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
-                  style={{
-                    width: "250%", height: "250%",
-                    objectFit: "cover", objectPosition: "center 5%",
-                    marginLeft: "-45%%",
-                    display: "block",
-                  }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%", display: "block" }}
                 />
               </div>
-              {/* LVL plaque */}
-              <div style={{
-                position: "absolute", bottom: -14, left: "50%", transform: "translateX(-50%)",
-                background: "linear-gradient(180deg, rgba(3,12,28,0.97), rgba(2,6,18,0.99))",
-                border: `1px solid ${frameColor}99`,
-                borderRadius: 2,
-                padding: isMobile ? "2px 6px" : "2px 8px",
-                whiteSpace: "nowrap",
-                boxShadow: `0 0 8px ${frameColor}44, inset 0 1px 0 ${frameColor}22`,
-                fontFamily: "Orbitron,sans-serif",
-                fontSize: isMobile ? 6 : 8,
-                fontWeight: "bold", letterSpacing: "0.1em",
-                color: frameColor,
-                textShadow: `0 0 8px ${frameColor}cc`,
-                display: "flex", alignItems: "center", gap: 3,
-              }}>
-                <span style={{ fontSize: isMobile ? 5 : 7, opacity: 0.7 }}>▸</span>
-                LVL 23
-                <span style={{ fontSize: isMobile ? 5 : 7, opacity: 0.7 }}>◂</span>
-              </div>
+
+              {/* PNG frame overlay — sits on top of avatar, transparent center shows avatar */}
+              <img
+                src="/profile-frame.png"
+                alt=""
+                draggable={false}
+                style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: framePx, height: framePx,
+                  pointerEvents: "none", userSelect: "none",
+                  filter: selectedFrame !== "default" ? `hue-rotate(${
+                    selectedFrame === "plasma"   ? "180deg" :
+                    selectedFrame === "overlord" ? "260deg" :
+                    selectedFrame === "iron"     ? "200deg" :
+                    selectedFrame === "crystal"  ? "20deg"  : "0deg"
+                  }) saturate(1.2)` : "none",
+                }}
+              />
+
+              {/* Level badge — centered pill bar at bottom */}
+              <svg
+                style={{ position: "absolute", left: badgeLeft, top: badgeTop, pointerEvents: "none" }}
+                width={badgeW} height={badgeH}
+                viewBox={`0 0 ${badgeW} ${badgeH}`}
+              >
+                <rect x="0" y="0" width={badgeW} height={badgeH} rx={badgeH / 2}
+                  fill="rgba(4,10,26,0.92)" stroke={frameColor} strokeWidth="1.5" />
+                <text
+                  x={badgeW / 2} y={badgeH / 2}
+                  textAnchor="middle" dominantBaseline="middle"
+                  fontFamily="Orbitron, monospace" fontSize={badgeH * 0.42} fontWeight="bold"
+                  fill={frameColor} letterSpacing="1"
+                >LVL 23</text>
+              </svg>
             </div>
           );
         })()}
@@ -488,8 +497,8 @@ export default function ProfileButton() {
 
                     {/* Avatar image in sci-fi frame — hover shows frame picker */}
                     <div style={{ position: "relative" }}
-                      onMouseEnter={() => setFramePickerOpen(true)}
-                      onMouseLeave={() => setFramePickerOpen(false)}
+                      onMouseEnter={() => { clearTimeout(frameLeaveTimer.current); setFramePickerOpen(true); }}
+                      onMouseLeave={() => { frameLeaveTimer.current = setTimeout(() => setFramePickerOpen(false), 120); }}
                     >
 
                       {/* Avatar image — sci-fi frame with corner brackets */}
@@ -539,8 +548,11 @@ export default function ProfileButton() {
 
                       {/* Frame picker overlay on hover */}
                       {framePickerOpen && (
-                        <div style={{
-                          position: "absolute", top: 0, left: "calc(100% + 8px)",
+                        <div
+                          onMouseEnter={() => clearTimeout(frameLeaveTimer.current)}
+                          onMouseLeave={() => { frameLeaveTimer.current = setTimeout(() => setFramePickerOpen(false), 120); }}
+                          style={{
+                          position: "absolute", top: 0, left: "calc(100% + 4px)",
                           background: "rgba(3,10,24,0.97)",
                           border: "1px solid rgba(0,212,255,0.28)",
                           borderRadius: 6, padding: "8px",
@@ -689,12 +701,12 @@ export default function ProfileButton() {
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
             boxShadow: "0 24px 80px rgba(0,0,0,0.92), 0 0 60px rgba(0,212,255,0.07)",
-            padding: isMobile ? "14px 16px" : "clamp(12px, 2.2vh, 22px) 28px",
+            padding: (isMobile || isSmall) ? "14px 16px" : "clamp(12px, 2.2vh, 22px) 28px",
             display: "flex",
             flexDirection: "column",
-            gap: isMobile ? 12 : "clamp(8px, 1.6vh, 18px)",
-            maxHeight: "min(96vh, 760px)",
-            overflowY: "auto",
+            gap: (isMobile || isSmall) ? 12 : "clamp(8px, 1.6vh, 18px)",
+            maxHeight: Math.min(windowH * 0.94, 760),
+            overflow: "hidden",
           }}>
 
             {/* Header */}
@@ -720,9 +732,14 @@ export default function ProfileButton() {
 
             {/* ── Center Carousel ── */}
             {(() => {
-              const CARD_W = isMobile ? 220 : 390;
-              const CARD_H = isMobile ? 250 : "clamp(260px, 50vh, 420px)";
-              const GAP    = isMobile ? 8 : 14;
+              // CARD_H computed from actual viewport height so carousel always fits
+              // panel budget: padding(~40) + header(~40) + dots(~54) + detail(~130) + gaps(~60) ≈ 324px fixed
+              const panelBudget = Math.min(windowH * 0.94, 760);
+              const fixedContent = 324;
+              const dynamicH = Math.max(180, Math.min(panelBudget - fixedContent, 420));
+              const CARD_W = (isMobile || isSmall) ? 200 : 390;
+              const CARD_H = (isMobile || isSmall) ? 230 : dynamicH;
+              const GAP    = (isMobile || isSmall) ? 8 : 14;
               const UNIT   = CARD_W + GAP;
               const WIN    = 2; // cards visible on each side
               const N      = SPECIES.length;
@@ -748,10 +765,10 @@ export default function ProfileButton() {
                     onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,212,255,0.16)"; }}
                     onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,212,255,0.06)"; }}
                     style={{
-                      flexShrink: 0, width: isMobile ? 32 : 44, height: CARD_H,
+                      flexShrink: 0, width: (isMobile || isSmall) ? 32 : 44, height: CARD_H,
                       background: "rgba(0,212,255,0.06)", border: "1px solid rgba(0,212,255,0.25)",
                       borderRadius: 8, color: "#00D4FF", cursor: "pointer",
-                      fontSize: isMobile ? 14 : 20,
+                      fontSize: (isMobile || isSmall) ? 14 : 20,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       transition: "background 0.15s",
                     }}
@@ -899,10 +916,10 @@ export default function ProfileButton() {
                     onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,212,255,0.16)"; }}
                     onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,212,255,0.06)"; }}
                     style={{
-                      flexShrink: 0, width: isMobile ? 32 : 44, height: CARD_H,
+                      flexShrink: 0, width: (isMobile || isSmall) ? 32 : 44, height: CARD_H,
                       background: "rgba(0,212,255,0.06)", border: "1px solid rgba(0,212,255,0.25)",
                       borderRadius: 8, color: "#00D4FF", cursor: "pointer",
-                      fontSize: isMobile ? 14 : 20,
+                      fontSize: (isMobile || isSmall) ? 14 : 20,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       transition: "background 0.15s",
                     }}
