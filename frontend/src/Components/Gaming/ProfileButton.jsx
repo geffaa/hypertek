@@ -501,32 +501,37 @@ export default function ProfileButton() {
                       onMouseLeave={() => { frameLeaveTimer.current = setTimeout(() => setFramePickerOpen(false), 120); }}
                     >
 
-                      {/* Avatar image — sci-fi frame with corner brackets */}
+                      {/* Avatar image with PNG frame overlay */}
                       <div style={{ position: "relative", width: imgW, height: imgH }}>
-                        {/* Corner bracket decorations */}
-                        {[
-                          { top: -3, left: -3,     borderTop: `2px solid ${frameColor}`, borderLeft:  `2px solid ${frameColor}`, width: 12, height: 12 },
-                          { top: -3, right: -3,    borderTop: `2px solid ${frameColor}`, borderRight: `2px solid ${frameColor}`, width: 12, height: 12 },
-                          { bottom: -3, left: -3,  borderBottom: `2px solid ${frameColor}`, borderLeft:  `2px solid ${frameColor}`, width: 12, height: 12 },
-                          { bottom: -3, right: -3, borderBottom: `2px solid ${frameColor}`, borderRight: `2px solid ${frameColor}`, width: 12, height: 12 },
-                        ].map((c, i) => (
-                          <div key={i} style={{ position: "absolute", pointerEvents: "none", zIndex: 3, ...c }} />
-                        ))}
-                        {/* Image container */}
+                        {/* Image container — clipped to card bounds */}
                         <div style={{
                           width: "100%", height: "100%",
                           background: `radial-gradient(ellipse at 50% 30%, ${frameColor}18, transparent 70%)`,
-                          border: `1px solid ${frameColor}88`,
                           borderRadius: 4,
                           overflow: "hidden",
-                          boxShadow: `inset 0 0 18px rgba(0,0,0,0.6), 0 0 14px ${frameColor}44`,
-                          position: "relative",
+                          boxShadow: `0 0 14px ${frameColor}44`,
                         }}>
                           <img
                             src={displayAvatarSrc}
                             alt="avatar"
                             onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
                             style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
+                          />
+                        </div>
+                        {/* PNG frame overlay — wrapper uses inset so right/left both work */}
+                        <div style={{
+                          position: "absolute",
+                          top: isMobile ? -5 : -6,
+                          bottom: isMobile ? -14 : -24,
+                          left: isMobile ? -8 : -14,
+                          right: isMobile ? -12 : -20,
+                          pointerEvents: "none", userSelect: "none",
+                        }}>
+                          <img
+                            src="/avatar-frame.png"
+                            alt=""
+                            draggable={false}
+                            style={{ width: "100%", height: "100%", objectFit: "fill", display: "block" }}
                           />
                         </div>
                       </div>
