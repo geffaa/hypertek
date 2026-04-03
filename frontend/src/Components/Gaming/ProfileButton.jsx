@@ -362,7 +362,9 @@ export default function ProfileButton() {
           // PNG frame: inner transparent circle ≈ 51% of image width
           // So total frame display size = sizeNum / 0.51
           const framePx  = Math.round(sizeNum / 0.51);
-          const avatarOff = Math.round((framePx - sizeNum) / 2); // center avatar inside frame
+          const avatarDisplaySize = Math.round(sizeNum * 1.5); // avatar larger than frame hole
+          const avatarOff = Math.round((framePx - avatarDisplaySize) / 2); // center avatar inside frame
+          const avatarTopOff = avatarOff + Math.round(framePx * 0.08); // shift avatar down
 
           // Level badge — centered pill bar at bottom of frame
           const badgeW  = Math.round(framePx * 0.52);
@@ -378,8 +380,8 @@ export default function ProfileButton() {
               {/* Avatar image — centered inside frame's transparent circle */}
               <div style={{
                 position: "absolute",
-                left: avatarOff, top: avatarOff,
-                width: sizeNum, height: sizeNum,
+                left: avatarOff, top: avatarTopOff,
+                width: avatarDisplaySize, height: avatarDisplaySize,
                 borderRadius: "50%", overflow: "hidden",
               }}>
                 <img
