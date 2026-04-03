@@ -136,19 +136,21 @@ export default function Navbar() {
       const currentTime = Date.now() / 1000; // convert ms → seconds
 
       if (decoded.exp < currentTime) {
-        console.log("Token has expired");
-        // navigate('/signin')
         dispatch(logout());
         setIsLogin(false);
+        toast("Session expired. Please sign in again.", {
+          icon: "🔒",
+          duration: 4000,
+          style: { background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" },
+        });
+        navigate("/signin");
       } else {
-        console.log("Token is valid");
-        // navigate("/signin")
         setIsLogin(true);
       }
     } catch (err) {
       console.error("Invalid token:", err);
-      dispatch(logout);
-      setIsLogin(false); // invalid token → not logged in
+      dispatch(logout());
+      setIsLogin(false);
     }
   }, [token]);
 

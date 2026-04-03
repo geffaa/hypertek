@@ -89,7 +89,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
   const gameGlow   = isRacing ? "rgba(34,197,94,0.8)" : isQuest ? "rgba(56,189,248,0.8)" : isOverlord ? "rgba(248,113,113,0.8)" : "rgba(0,212,255,0.8)";
   const strokeColor = gameColor;
 
-  const SIZE = inGame ? "clamp(90px, 13vmin, 148px)" : "clamp(54px, 8vmin, 90px)";
+  const SIZE = inGame ? "clamp(104px, 15vmin, 168px)" : "clamp(66px, 10vmin, 112px)";
 
   return (
     <>
@@ -133,8 +133,8 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
             alt={inGame ? gameSub : "VIEW"}
             loading="lazy"
             style={{
-              width:  inGame ? "clamp(52px, 8vmin, 96px)" : "clamp(38px, 6vmin, 72px)",
-              height: inGame ? "clamp(52px, 8vmin, 96px)" : "clamp(38px, 6vmin, 72px)",
+              width:  inGame ? "clamp(62px, 10vmin, 112px)" : "clamp(46px, 7.5vmin, 88px)",
+              height: inGame ? "clamp(62px, 10vmin, 112px)" : "clamp(46px, 7.5vmin, 88px)",
               objectFit: "contain",
               filter: `drop-shadow(0 0 8px ${gameGlow})`,
               zIndex: 1,
@@ -160,7 +160,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
       {/* ── VR MODE button — always visible, to the left of VIEW ── */}
       <div ref={vrRef} style={{
         position: "absolute", bottom: "3%",
-        right: `calc(2.5% + ${SIZE} + 10px)`,
+        right: `calc(2.5% + ${SIZE} + 12px)`,
         zIndex: 35,
         display: "flex", flexDirection: "column",
         alignItems: "center", gap: 6,
@@ -171,7 +171,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
             onClick={() => setVrOpen(o => !o)}
             className="view-btn"
             style={{
-              width: "clamp(58px, 8vmin, 90px)", height: "clamp(58px, 8vmin, 90px)",
+              width: "clamp(44px, 6vmin, 70px)", height: "clamp(44px, 6vmin, 70px)",
               borderRadius: "50%",
               border: `1.5px solid rgba(0,212,255,${vrOpen ? "1" : "0.75"})`,
               boxShadow: vrOpen
@@ -189,8 +189,8 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
               src="/vr-icon.png"
               alt="VR MODE"
               style={{
-                width: "clamp(50px, 7vmin, 82px)",
-                height: "clamp(50px, 7vmin, 82px)",
+                width: "clamp(36px, 5vmin, 62px)",
+                height: "clamp(36px, 5vmin, 62px)",
                 objectFit: "contain",
                 filter: vrOpen ? "drop-shadow(0 0 8px rgba(0,212,255,0.9))" : "none",
               }}

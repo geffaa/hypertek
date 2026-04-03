@@ -38,11 +38,9 @@ function NoItem() {
         setUserData(res.data.user);
         console.log("✅ User profile:", res.data.user);
       } catch (error) {
-        console.error(
-          "❌ Profile fetch error:",
-          error.response?.data || error.message
-        );
-        toast.error(error.response?.data?.message || "Failed to fetch profile");
+        if (error?.response?.status !== 401) {
+          console.error("Profile fetch error:", error.response?.data || error.message);
+        }
       } finally {
         setLoading(false); // ✅ hide loader after fetch
       }

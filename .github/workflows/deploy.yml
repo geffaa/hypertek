@@ -180,10 +180,15 @@ jobs:
             mkdir -p uploads/temp uploads/news
             chmod 755 uploads uploads/temp uploads/news
 
-            # ── Run database seed (safe: skips existing data) ──
-            echo "🌱 Running database seed..."
+            # ── 1. Fresh-seed marketplace NFT collections (deletes isDummy, re-inserts clean) ──
+            echo "🌱 Seeding marketplace (fresh NFT collections)..."
+            node --env-file=Config/.env scripts/seedMarketplace.js
+            echo "✅ Marketplace seed complete"
+
+            # ── 2. Seed SiteContent / News / Users (safe: skips existing; skips NFT since seedMarketplace already ran) ──
+            echo "🌱 Seeding site content, news & users..."
             node --env-file=Config/.env scripts/seed.js
-            echo "✅ Seed complete"
+            echo "✅ Site content seed complete"
 
             # ── Restart backend with PM2 ──
             echo "🔄 Restarting backend..."

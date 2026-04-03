@@ -304,8 +304,8 @@ export default function ProfileButton() {
   useEffect(() => {
     if (!charSelectOpen) return;
     const handler = (e) => {
-      if (e.key === "ArrowLeft")  { setSlideDir(-1); setSpeciesIdx(i => (i - 1 + SPECIES.length) % SPECIES.length); }
-      if (e.key === "ArrowRight") { setSlideDir(1);  setSpeciesIdx(i => (i + 1) % SPECIES.length); }
+      if (e.key === "ArrowLeft")  { setSlideDir(-1); setSpeciesIdx(i => i - 1); setHoveredChar(null); }
+      if (e.key === "ArrowRight") { setSlideDir(1);  setSpeciesIdx(i => i + 1); setHoveredChar(null); }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -728,8 +728,8 @@ export default function ProfileButton() {
               const N      = SPECIES.length;
 
               // unbounded index — no modulo, infinite in both directions
-              const goNext = () => setSpeciesIdx(i => i + 1);
-              const goPrev = () => setSpeciesIdx(i => i - 1);
+              const goNext = () => { setSpeciesIdx(i => i + 1); setHoveredChar(null); };
+              const goPrev = () => { setSpeciesIdx(i => i - 1); setHoveredChar(null); };
 
               // track offset is constant: center item always at WIN position
               const trackX = carouselW / 2 - WIN * UNIT - CARD_W / 2;
@@ -852,7 +852,8 @@ export default function ProfileButton() {
                                           onError={e => { e.currentTarget.style.opacity = "0.2"; }}
                                           style={{
                                             width: "100%", height: "160%",
-                                            objectFit: "cover", objectPosition: "center top",
+                                            objectFit: "cover",
+                                            objectPosition: gender === "female" ? "center 18%" : "center 2%",
                                             transform: isHov && isCenter ? "scale(1.08)" : "scale(1.05)",
                                             transformOrigin: "top center", display: "block",
                                             transition: "transform 0.25s ease",
@@ -927,7 +928,7 @@ export default function ProfileButton() {
                         const delta = i - modIdx;
                         const N = SPECIES.length;
                         const short = ((delta + Math.round(N / 2)) % N + N) % N - Math.round(N / 2);
-                        setSpeciesIdx(speciesIdx + short);
+                        setSpeciesIdx(speciesIdx + short); setHoveredChar(null);
                       }}
                       style={{
                         width: isActive ? (isMobile ? 18 : 24) : (isMobile ? 6 : 8),

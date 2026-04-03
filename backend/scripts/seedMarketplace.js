@@ -458,22 +458,13 @@ async function seed() {
   await mongoose.connect(process.env.MONGODB_URL);
   console.log("✅ Connected to MongoDB");
 
-  // ── Seed parent collections + sub-collections ──
+  // ── Fresh-seed NFT collections: remove all isDummy seed data, re-insert clean ──
+  const removed = await NFTSystem.deleteMany({ isDummy: true });
+  console.log(`🗑  Cleared ${removed.deletedCount} existing seed collections (isDummy)`);
+
   let createdParents = 0;
-  let skippedParents = 0;
 
   for (const cat of CATEGORIES) {
-    const existing = await NFTSystem.findOne({
-      "collection.name": cat.name,
-      isParentCollection: true,
-    });
-
-    if (existing) {
-      console.log(`⏭️  Skipped (already exists): ${cat.name}`);
-      skippedParents++;
-      continue;
-    }
-
     const parent = await NFTSystem.create({
       collection: {
         name:   cat.name,
@@ -485,6 +476,7 @@ async function seed() {
         creator: "admin",
       },
       isParentCollection: true,
+      isDummy: true,
       status: "active",
       subCollections: cat.items.map((item, i) => ({
         name:        item.name,
@@ -497,7 +489,7 @@ async function seed() {
       })),
     });
 
-    console.log(`✅ Created: ${cat.name}  (${parent.subCollections.length} items, _id: ${parent._id})`);
+    console.log(`✅ Created: ${cat.name}  (${parent.subCollections.length} items)`);
     createdParents++;
   }
 
@@ -506,7 +498,7 @@ async function seed() {
   const inserted = await Nft101.insertMany(NFT_101_DATA);
 
   console.log("\n── Summary ──────────────────────────────────────────────");
-  console.log(`📦 Parent collections: ${createdParents} created, ${skippedParents} skipped`);
+  console.log(`📦 Parent collections: ${createdParents} created fresh`);
   console.log(`📚 NFT 101 articles:   ${inserted.length} inserted (fresh)`);
   console.log("─────────────────────────────────────────────────────────\n");
 

@@ -142,6 +142,14 @@ const CSS = `
     to   { opacity:1; transform:translateX(0); }
   }
   .hud-side-panel { animation: panelSlideIn 0.2s ease both; }
+  .chat-scroll::-webkit-scrollbar { width: 3px; }
+  .chat-scroll::-webkit-scrollbar-track { background: transparent; }
+  .chat-scroll::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.45); border-radius: 2px; }
+  .chat-scroll::-webkit-scrollbar-thumb:hover { background: rgba(251,191,36,0.7); }
+  .alliance-mail-scroll::-webkit-scrollbar { width: 3px; }
+  .alliance-mail-scroll::-webkit-scrollbar-track { background: transparent; }
+  .alliance-mail-scroll::-webkit-scrollbar-thumb { background: rgba(251,191,36,0.4); border-radius: 2px; }
+  .alliance-mail-scroll::-webkit-scrollbar-thumb:hover { background: rgba(251,191,36,0.75); }
 `;
 
 const BTN_BASE = {
@@ -227,7 +235,7 @@ function EventsPanel({ onClose, isMobile }) {
             style={{
               flex:1, padding: isMobile ? "5px 2px" : "7px 4px", background:"none", border:"none",
               borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
-              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
+              fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, fontWeight:"bold",
               letterSpacing:"0.08em",
               color: tab === t ? "#00E5FF" : "#cceeff",
               whiteSpace:"nowrap",
@@ -254,12 +262,12 @@ function EventsPanel({ onClose, isMobile }) {
                 }}>
                 <div>
                   <div style={{
-                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
+                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
                     letterSpacing:"0.08em",
                     color: ev.locked ? "#aad4ee" : isSelected ? "#00E5FF" : "#ffffff",
                     marginBottom:3,
                   }}>{ev.title}</div>
-                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
                     color: ev.time ? "#fde047" : "#00E5FF", letterSpacing:"0.06em",
                   }}>
                     {ev.time ? `⏱ ${ev.status} ${ev.time}` : `● ${ev.status}`}
@@ -694,93 +702,286 @@ const ALLIANCE_MENU = [
 
 const ALLIANCE_BOTTOM = ["Mail", "Members", "Manage"];
 
-function AlliancePanel({ onClose, onOpenMail, isMobile }) {
+const MANAGE_MEMBERS = [
+  { name: "D@rkL0rd",    role: "R5 Leader",   power: "12.4B", online: true  },
+  { name: "ShadowWing",  role: "R4 Officer",  power: "8.1B",  online: true  },
+  { name: "NovaStar",    role: "R4 Officer",  power: "6.7B",  online: false },
+  { name: "IronForge",   role: "R3 Senior",   power: "4.2B",  online: true  },
+  { name: "Jak力",        role: "R3 Senior",   power: "3.9B",  online: false },
+  { name: "CometRider",  role: "R2 Member",   power: "2.1B",  online: false },
+  { name: "VoidHunter",  role: "R2 Member",   power: "1.8B",  online: true  },
+  { name: "StarCrest",   role: "R1 Recruit",  power: "0.5B",  online: false },
+];
+
+const ALLIANCE_MAIL_CATS = ["Inbox", "Announce", "Reports", "Unread"];
+const ALLIANCE_MAIL_BADGE = { Inbox: 2, Announce: 1, Reports: 1, Unread: 4 };
+
+function AlliancePanel({ onClose, isMobile }) {
   const [activeBottom, setActiveBottom] = useState("Members");
+  const [mailCat, setMailCat] = useState("Inbox");
+  const [selectedMail, setSelectedMail] = useState(0);
+
+  const ALLIANCE_MAIL_MAP = {
+    Inbox:    MAIL_MESSAGES.inbox,
+    Announce: MAIL_MESSAGES.announce,
+    Reports:  MAIL_MESSAGES.reports,
+    Unread:   MAIL_MESSAGES.unread,
+  };
+
+  /* ── Members / main view ── */
+  const MembersView = (
+    <>
+      {/* Alliance info card */}
+      <div style={{
+        margin:"10px 10px 0",
+        background:"rgba(30,15,5,0.9)",
+        border:"1px solid rgba(251,191,36,0.25)",
+        borderRadius:6, padding:"10px 12px",
+      }}>
+        <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+          <div style={{
+            width: isMobile ? 40 : 54, height: isMobile ? 40 : 54, borderRadius:"50%",
+            background:"radial-gradient(circle at 35% 30%, rgba(251,191,36,0.4), rgba(120,80,0,0.8))",
+            border:"2px solid rgba(251,191,36,0.5)",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            fontSize: isMobile ? 20 : 28, flexShrink:0,
+          }}>🦅</div>
+          <div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 11 : 14, fontWeight:"bold",
+              color:"#fbbf24", letterSpacing:"0.1em" }}>[HTK] HyperTek</div>
+            <div style={{ display:"flex", gap:10, marginTop:4 }}>
+              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11,
+                color:"rgba(251,191,36,0.85)" }}>⚡ 117.5B</span>
+              <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11,
+                color:"rgba(157,216,240,0.75)" }}>👥 128 / 150</span>
+            </div>
+          </div>
+        </div>
+        <div style={{
+          marginTop:8, padding:"5px 8px",
+          background:"rgba(0,0,0,0.3)", borderRadius:3,
+          fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+          color:"rgba(200,180,130,0.85)", fontStyle:"italic",
+        }}>
+          "United we conquer the 7 Realms"
+        </div>
+      </div>
+
+      {/* Menu items */}
+      <div style={{ marginTop:8 }}>
+        {ALLIANCE_MENU.map((item, i) => (
+          <div key={i} style={{
+            display:"flex", alignItems:"center", gap: isMobile ? 9 : 14,
+            padding: isMobile ? "9px 12px" : "12px 16px",
+            borderBottom:"1px solid rgba(251,191,36,0.07)",
+            cursor:"not-allowed", opacity:0.58,
+          }}>
+            <div style={{
+              width: isMobile ? 30 : 40, height: isMobile ? 30 : 40, borderRadius:8, flexShrink:0,
+              background:"rgba(30,15,0,0.8)",
+              border:"1px solid rgba(251,191,36,0.18)",
+              display:"flex", alignItems:"center", justifyContent:"center",
+              fontSize: isMobile ? 16 : 22, filter:"grayscale(0.3)",
+            }}>{item.icon}</div>
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 13,
+                fontWeight:"bold", color:"rgba(251,191,36,0.7)", letterSpacing:"0.07em" }}>
+                {item.label}
+              </div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                color:"rgba(200,180,130,0.45)", marginTop:2 }}>
+                Coming Soon
+              </div>
+            </div>
+            <span style={{ fontSize: isMobile ? 10 : 13, opacity:0.5, flexShrink:0 }}>🔒</span>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+
+  /* ── Inline Mail view ── */
+  const MailView = (
+    <div style={{ display:"flex", flexDirection:"column", height:"100%" }}>
+      {/* Category tabs */}
+      <div style={{
+        display:"flex", overflowX:"auto", gap:4, padding:"8px 8px 4px",
+        borderBottom:"1px solid rgba(251,191,36,0.12)",
+        flexShrink:0,
+      }}>
+        {ALLIANCE_MAIL_CATS.map(cat => (
+          <button key={cat} onClick={() => setMailCat(cat)} style={{
+            flexShrink:0, padding: isMobile ? "4px 8px" : "5px 10px",
+            background: mailCat === cat ? "rgba(251,191,36,0.18)" : "rgba(251,191,36,0.05)",
+            border: `1px solid ${mailCat === cat ? "rgba(251,191,36,0.6)" : "rgba(251,191,36,0.18)"}`,
+            borderRadius:4, cursor:"pointer",
+            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight:"bold",
+            color: mailCat === cat ? "#fbbf24" : "rgba(200,170,80,0.65)",
+            letterSpacing:"0.07em", display:"flex", alignItems:"center", gap:4,
+          }}>
+            {cat}
+            {ALLIANCE_MAIL_BADGE[cat] > 0 && (
+              <span style={{
+                background:"#dc2626", borderRadius:"50%",
+                width:14, height:14, display:"flex", alignItems:"center", justifyContent:"center",
+                fontSize:8, color:"#fff", fontWeight:"bold",
+              }}>{ALLIANCE_MAIL_BADGE[cat]}</span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Message list */}
+      <div className="alliance-mail-scroll" style={{ overflowY:"auto", flex:1 }}>
+        {(ALLIANCE_MAIL_MAP[mailCat] || []).map((msg, i) => (
+          <div key={i} onClick={() => setSelectedMail(i)} style={{
+            display:"flex", alignItems:"flex-start", gap:8,
+            padding: isMobile ? "8px 10px" : "10px 12px",
+            borderBottom:"1px solid rgba(251,191,36,0.07)",
+            cursor:"pointer", transition:"background 0.13s",
+            background: selectedMail === i
+              ? "rgba(251,191,36,0.14)"
+              : msg.unread ? "rgba(251,191,36,0.04)" : "transparent",
+            borderLeft: selectedMail === i ? "2px solid #fbbf24" : "2px solid transparent",
+          }}
+            onMouseEnter={e => { if (selectedMail !== i) e.currentTarget.style.background="rgba(251,191,36,0.08)"; }}
+            onMouseLeave={e => { if (selectedMail !== i) e.currentTarget.style.background = msg.unread ? "rgba(251,191,36,0.04)" : "transparent"; }}
+          >
+            {msg.unread && (
+              <div style={{
+                width:6, height:6, borderRadius:"50%", background:"#fbbf24",
+                flexShrink:0, marginTop:4,
+                boxShadow:"0 0 6px rgba(251,191,36,0.8)",
+              }} />
+            )}
+            <div style={{ flex:1, minWidth:0, paddingLeft: msg.unread ? 0 : 14 }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:6 }}>
+                <span style={{
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
+                  color: selectedMail === i ? "#ffffff" : msg.unread ? "#fbbf24" : "rgba(200,170,80,0.8)",
+                  overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
+                }}>{msg.from}</span>
+                <span style={{
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 8,
+                  color: selectedMail === i ? "rgba(255,255,255,0.6)" : "rgba(200,170,80,0.5)", flexShrink:0,
+                }}>{msg.time}</span>
+              </div>
+              <div style={{
+                fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+                color: selectedMail === i ? "rgba(255,255,255,0.75)" : "rgba(200,180,130,0.65)", marginTop:3,
+                overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
+              }}>{msg.preview}</div>
+            </div>
+          </div>
+        ))}
+        {(ALLIANCE_MAIL_MAP[mailCat] || []).length === 0 && (
+          <div style={{
+            padding:"30px 0", textAlign:"center",
+            fontFamily:"Orbitron,sans-serif", fontSize:10,
+            color:"rgba(200,170,80,0.4)",
+          }}>No messages</div>
+        )}
+      </div>
+    </div>
+  );
+
+  /* ── Manage members view ── */
+  const ManageView = (
+    <div style={{ overflowY:"auto", flex:1 }}>
+      {/* Header stats */}
+      <div style={{
+        margin:"10px 10px 0", padding:"8px 12px",
+        background:"rgba(30,15,5,0.9)",
+        border:"1px solid rgba(251,191,36,0.2)",
+        borderRadius:6, display:"flex", justifyContent:"space-between", alignItems:"center",
+      }}>
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
+          color:"rgba(200,170,80,0.8)" }}>MEMBERS</span>
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11,
+          fontWeight:"bold", color:"#fbbf24" }}>128 / 150</span>
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
+          color:"rgba(157,216,240,0.75)" }}>🟢 42 online</span>
+      </div>
+
+      {/* Member list */}
+      <div style={{ marginTop:6 }}>
+        {MANAGE_MEMBERS.map((m, i) => (
+          <div key={i} style={{
+            display:"flex", alignItems:"center", gap: isMobile ? 8 : 10,
+            padding: isMobile ? "7px 10px" : "9px 12px",
+            borderBottom:"1px solid rgba(251,191,36,0.07)",
+          }}>
+            {/* Avatar */}
+            <div style={{
+              width: isMobile ? 28 : 36, height: isMobile ? 28 : 36, borderRadius:"50%", flexShrink:0,
+              background:"radial-gradient(circle at 35% 30%, rgba(251,191,36,0.3), rgba(80,50,0,0.8))",
+              border:`1.5px solid ${m.online ? "rgba(34,197,94,0.6)" : "rgba(251,191,36,0.2)"}`,
+              display:"flex", alignItems:"center", justifyContent:"center",
+              fontSize: isMobile ? 13 : 16,
+            }}>👤</div>
+
+            {/* Name + role */}
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ display:"flex", alignItems:"center", gap:5 }}>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10,
+                  fontWeight:"bold", color:"#fbbf24",
+                  overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
+                }}>{m.name}</span>
+                {m.online && (
+                  <span style={{ width:6, height:6, borderRadius:"50%", background:"#22c55e", flexShrink:0,
+                    boxShadow:"0 0 5px rgba(34,197,94,0.8)", display:"inline-block" }} />
+                )}
+              </div>
+              <div style={{ display:"flex", gap:8, marginTop:2 }}>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 8,
+                  color:"rgba(200,170,80,0.7)" }}>{m.role}</span>
+                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 8,
+                  color:"rgba(251,191,36,0.6)" }}>⚡{m.power}</span>
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div style={{ display:"flex", gap:4, flexShrink:0 }}>
+              {!m.role.startsWith("R5") && (
+                <button style={{
+                  padding: isMobile ? "3px 5px" : "3px 7px",
+                  background:"rgba(34,197,94,0.1)", border:"1px solid rgba(34,197,94,0.35)",
+                  borderRadius:3, cursor:"pointer",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7,
+                  color:"rgba(34,197,94,0.9)", letterSpacing:"0.05em",
+                }}>▲</button>
+              )}
+              {!m.role.startsWith("R5") && (
+                <button style={{
+                  padding: isMobile ? "3px 5px" : "3px 7px",
+                  background:"rgba(251,191,36,0.08)", border:"1px solid rgba(251,191,36,0.25)",
+                  borderRadius:3, cursor:"pointer",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7,
+                  color:"rgba(251,191,36,0.8)", letterSpacing:"0.05em",
+                }}>▼</button>
+              )}
+              {!m.role.startsWith("R5") && (
+                <button style={{
+                  padding: isMobile ? "3px 5px" : "3px 7px",
+                  background:"rgba(220,38,38,0.1)", border:"1px solid rgba(220,38,38,0.35)",
+                  borderRadius:3, cursor:"pointer",
+                  fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7,
+                  color:"rgba(220,38,38,0.9)", letterSpacing:"0.05em",
+                }}>✕</button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <SidePanel title="ALLIANCE" accentColor="#fbbf24" onClose={onClose} isMobile={isMobile}>
-      <div style={{ overflowY:"auto", flex:1 }}>
-
-        {/* Alliance info card */}
-        <div style={{
-          margin:"10px 10px 0",
-          background:"rgba(30,15,5,0.9)",
-          border:"1px solid rgba(251,191,36,0.25)",
-          borderRadius:6, padding:"10px 12px",
-        }}>
-          <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-            <div style={{
-              width: isMobile ? 40 : 54, height: isMobile ? 40 : 54, borderRadius:"50%",
-              background:"radial-gradient(circle at 35% 30%, rgba(251,191,36,0.4), rgba(120,80,0,0.8))",
-              border:"2px solid rgba(251,191,36,0.5)",
-              display:"flex", alignItems:"center", justifyContent:"center",
-              fontSize: isMobile ? 20 : 28, flexShrink:0,
-            }}>🦅</div>
-            <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 11 : 14, fontWeight:"bold",
-                color:"#fbbf24", letterSpacing:"0.1em" }}>[HTK] HyperTek</div>
-              <div style={{ display:"flex", gap:10, marginTop:4 }}>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11,
-                  color:"rgba(251,191,36,0.85)" }}>⚡ 117.5B</span>
-                <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11,
-                  color:"rgba(157,216,240,0.75)" }}>👥 128 / 150</span>
-              </div>
-            </div>
-          </div>
-          <div style={{
-            marginTop:8, padding:"5px 8px",
-            background:"rgba(0,0,0,0.3)", borderRadius:3,
-            fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
-            color:"rgba(200,180,130,0.85)", fontStyle:"italic",
-          }}>
-            "United we conquer the 7 Realms"
-          </div>
-        </div>
-
-        {/* Menu items */}
-        <div style={{ marginTop:8 }}>
-          {ALLIANCE_MENU.map((item, i) => (
-            <div key={i} style={{
-              display:"flex", alignItems:"center", gap: isMobile ? 9 : 14,
-              padding: isMobile ? "9px 12px" : "12px 16px",
-              borderBottom:"1px solid rgba(251,191,36,0.07)",
-              cursor:"pointer", transition:"background 0.14s",
-            }}
-              onMouseEnter={e => e.currentTarget.style.background="rgba(251,191,36,0.07)"}
-              onMouseLeave={e => e.currentTarget.style.background="transparent"}
-            >
-              <div style={{
-                width: isMobile ? 30 : 40, height: isMobile ? 30 : 40, borderRadius:8, flexShrink:0,
-                background:"rgba(30,15,0,0.8)",
-                border:"1px solid rgba(251,191,36,0.25)",
-                display:"flex", alignItems:"center", justifyContent:"center",
-                fontSize: isMobile ? 16 : 22,
-              }}>{item.icon}</div>
-              <div style={{ flex:1, minWidth:0 }}>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 13,
-                  fontWeight:"bold", color:"#fbbf24", letterSpacing:"0.07em" }}>
-                  {item.label}
-                </div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
-                  color:"rgba(200,180,130,0.75)", marginTop:2 }}>
-                  {item.desc}
-                </div>
-              </div>
-              <div style={{ display:"flex", alignItems:"center", gap:6, flexShrink:0 }}>
-                {item.badge > 0 && (
-                  <div style={{
-                    width: isMobile ? 16 : 20, height: isMobile ? 16 : 20, borderRadius:"50%",
-                    background:"#dc2626", display:"flex", alignItems:"center",
-                    justifyContent:"center",
-                    fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
-                    color:"#fff",
-                  }}>{item.badge}</div>
-                )}
-                <span style={{ color:"rgba(251,191,36,0.5)", fontSize: isMobile ? 12 : 16 }}>›</span>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div style={{ overflowY: activeBottom === "Manage" ? "auto" : "hidden", flex:1, display:"flex", flexDirection:"column" }}>
+        {activeBottom === "Manage"  && MembersView}
+        {activeBottom === "Mail"    && MailView}
+        {activeBottom === "Members" && ManageView}
       </div>
 
       {/* Bottom tabs */}
@@ -789,7 +990,7 @@ function AlliancePanel({ onClose, onOpenMail, isMobile }) {
         flexShrink:0,
       }}>
         {ALLIANCE_BOTTOM.map(t => (
-          <button key={t} onClick={() => t === "Mail" ? onOpenMail?.() : setActiveBottom(t)} style={{
+          <button key={t} onClick={() => setActiveBottom(t)} style={{
             flex:1, padding: isMobile ? "6px 2px" : "8px 4px", background:"none", border:"none",
             borderTop: activeBottom === t ? "2px solid #fbbf24" : "2px solid transparent",
             fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
@@ -854,6 +1055,7 @@ const MAIL_MESSAGES = {
     { from: "Event System",   preview: "Daily login bonus collected: 250 Gold + 1x Repair Kit.",                    time: "12h ago", unread: true  },
   ],
   saved: [
+    { from: "Alliance Mail",  preview: "Rally points updated — save before the next Kingdom War begins!",           time: "1d ago",  unread: true },
     { from: "Alliance Mail",  preview: "Important: Alliance coordinates for next SvS event. Save this!",            time: "5d ago",  unread: false },
   ],
   unread: [
@@ -863,6 +1065,7 @@ const MAIL_MESSAGES = {
     { from: "Event System",   preview: "Galactic Cup starts in 3 days! Register your ship now.",                    time: "1h ago",  unread: true },
   ],
   purchases: [
+    { from: "Store",          preview: "Purchase confirmed: Commander Pack Bundle — $4.99. Thank you!",              time: "6h ago",  unread: true },
     { from: "Store",          preview: "Purchase confirmed: Battle Pass Season 2 — $9.99. Thank you!",              time: "2d ago",  unread: false },
   ],
 };
@@ -1093,7 +1296,7 @@ function ChatPanel({ onClose, isMobile }) {
       </div>
 
       {/* Messages */}
-      <div style={{ flex:1, overflowY:"auto", padding:"8px 0" }}>
+      <div className="chat-scroll" style={{ flex:1, overflowY:"auto", padding:"8px 0" }}>
         {msgs.map((msg, i) => (
           <div key={i} style={{
             padding: isMobile ? "5px 8px" : "7px 12px",
@@ -1237,7 +1440,7 @@ export default function SidebarPanel() {
       {openPanel === "events"   && <EventsPanel   onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
       {openPanel === "items"    && <ItemsPanel    onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
       {openPanel === "settings" && <SettingsPanel onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} isMobile={isMobile} onOpenMail={() => setOpenPanel("mail")} />}
+      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
       {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
       {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
     </div>

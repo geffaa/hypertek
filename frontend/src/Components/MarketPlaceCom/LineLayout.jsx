@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowDownUp, Search, ChevronRight } from "lucide-react";
+import { ChevronRight, SlidersHorizontal, X, Search } from "lucide-react";
 import LazyImage from "../Common/LazyImage";
 import popularFallback from "../../assets/images/popular/popolar.png";
 import { getImageUrl } from "../../Config";
@@ -71,63 +71,195 @@ function LineCard({ item }) {
   );
 }
 
+// ── Sort options ──────────────────────────────────────────────────────────────
+const SORT_OPTIONS = [
+  { value: "",           label: "Default"        },
+  { value: "price_asc",  label: "Price: Low → High" },
+  { value: "price_desc", label: "Price: High → Low" },
+  { value: "name_asc",   label: "Name: A → Z"    },
+  { value: "name_desc",  label: "Name: Z → A"    },
+];
+
 // ── Label/control panel — always on LEFT ──────────────────────────────────────
-function LabelPanel({ category, label, icon, sortDesc, setSortDesc, showSearch, setShowSearch, search, setSearch }) {
+function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMinPrice, maxPrice, setMaxPrice, search, setSearch }) {
+  const [showFilter, setShowFilter] = useState(false);
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (panelRef.current && !panelRef.current.contains(e.target)) setShowFilter(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const hasActive = sortBy || search || minPrice || maxPrice;
+
+  const clearAll = () => {
+    setSortBy("");
+    setSearch("");
+    setMinPrice("");
+    setMaxPrice("");
+  };
+
   return (
     <div
-      className="flex-shrink-0 w-[120px] sm:w-[140px] flex flex-col items-center justify-center gap-2 relative z-10 py-3 px-2"
+      ref={panelRef}
+      className="flex-shrink-0 w-[140px] sm:w-[165px] flex flex-col items-center justify-center gap-2.5 relative z-20 py-4 px-3"
       style={{
         background: "linear-gradient(to right, #060610 65%, transparent 100%)",
-        minHeight: 160,
+        minHeight: 180,
       }}
     >
-      <span className="text-3xl sm:text-4xl select-none">{icon}</span>
+      <span className="text-4xl sm:text-5xl select-none">{icon}</span>
 
       <Link
         to={`/collections/${encodeURIComponent(category)}`}
-        className="text-white/80 text-[11px] sm:text-xs font-semibold text-center uppercase tracking-wide leading-tight hover:text-white transition-colors flex items-center gap-0.5 group"
+        className="text-white/80 text-[12px] sm:text-[13px] font-semibold text-center uppercase tracking-wide leading-tight hover:text-white transition-colors flex flex-wrap items-center justify-center gap-0.5 group"
       >
         {label}
         <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity" />
       </Link>
 
-      <div className="flex items-center gap-1.5 mt-1">
-        <button
-          onClick={() => setSortDesc(v => !v)}
-          title={sortDesc ? "Sorted: High → Low" : "Sort by price"}
-          className="p-1 rounded transition-colors"
-          style={{
-            background: sortDesc ? "rgba(0,42,168,0.6)" : "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            color: sortDesc ? "#fff" : "rgba(255,255,255,0.4)",
-          }}
-        >
-          <ArrowDownUp className="w-2.5 h-2.5" />
-        </button>
-        <button
-          onClick={() => { setShowSearch(v => !v); if (showSearch) setSearch(""); }}
-          title="Search this category"
-          className="p-1 rounded transition-colors"
-          style={{
-            background: showSearch ? "rgba(0,42,168,0.6)" : "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            color: showSearch ? "#fff" : "rgba(255,255,255,0.4)",
-          }}
-        >
-          <Search className="w-2.5 h-2.5" />
-        </button>
-      </div>
+      {/* Filter button */}
+      <button
+        onClick={() => setShowFilter(v => !v)}
+        style={{
+          display: "flex", alignItems: "center", gap: 4,
+          padding: "3px 8px", borderRadius: 5,
+          background: hasActive ? "rgba(0,42,168,0.7)" : "rgba(255,255,255,0.07)",
+          border: `1px solid ${hasActive ? "rgba(0,80,255,0.6)" : "rgba(255,255,255,0.12)"}`,
+          color: hasActive ? "#fff" : "rgba(255,255,255,0.5)",
+          fontSize: 9, fontWeight: 600, letterSpacing: "0.05em",
+          cursor: "pointer", transition: "all 0.15s",
+        }}
+      >
+        <SlidersHorizontal style={{ width: 10, height: 10 }} />
+        FILTER
+        {hasActive && (
+          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
+        )}
+      </button>
 
-      {showSearch && (
-        <input
-          type="text"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder="Search..."
-          autoFocus
-          className="w-full px-2 py-1 rounded text-[10px] text-white placeholder-white/25 outline-none"
-          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)" }}
-        />
+      {/* Dropdown */}
+      {showFilter && (
+        <div
+          style={{
+            position: "absolute", top: 0, left: "calc(100% + 6px)",
+            width: 210, zIndex: 50,
+            background: "rgba(4,8,28,0.98)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: 8,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.8)",
+            padding: "10px 12px",
+            display: "flex", flexDirection: "column", gap: 10,
+          }}
+        >
+          {/* Header */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#fff", letterSpacing: "0.1em" }}>
+              FILTER &amp; SORT
+            </span>
+            <button onClick={() => setShowFilter(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.5)", cursor: "pointer", padding: "2px" }}>
+              <X style={{ width: 16, height: 16 }} />
+            </button>
+          </div>
+
+          {/* Search */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>SEARCH</label>
+            <div style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 5, padding: "4px 8px" }}>
+              <Search style={{ width: 10, height: 10, color: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search items..."
+                autoFocus
+                style={{
+                  background: "none", border: "none", outline: "none",
+                  color: "#fff", fontSize: 10, width: "100%",
+                }}
+              />
+              {search && (
+                <button onClick={() => setSearch("")} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", padding: 0 }}>
+                  <X style={{ width: 9, height: 9 }} />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Sort */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>SORT BY</label>
+            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {SORT_OPTIONS.map(opt => (
+                <button
+                  key={opt.value}
+                  onClick={() => setSortBy(opt.value)}
+                  style={{
+                    textAlign: "left", padding: "5px 8px", borderRadius: 4,
+                    background: sortBy === opt.value ? "rgba(0,42,168,0.6)" : "transparent",
+                    border: `1px solid ${sortBy === opt.value ? "rgba(0,80,255,0.5)" : "transparent"}`,
+                    color: sortBy === opt.value ? "#fff" : "rgba(255,255,255,0.6)",
+                    fontSize: 10, cursor: "pointer", transition: "all 0.12s",
+                  }}
+                  onMouseEnter={e => { if (sortBy !== opt.value) e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
+                  onMouseLeave={e => { if (sortBy !== opt.value) e.currentTarget.style.background = "transparent"; }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Price range */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>PRICE RANGE (USDC)</label>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <input
+                type="number"
+                value={minPrice}
+                onChange={e => setMinPrice(e.target.value)}
+                placeholder="Min"
+                min={0}
+                style={{
+                  width: "100%", padding: "4px 6px", borderRadius: 4,
+                  background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#fff", fontSize: 10, outline: "none",
+                }}
+              />
+              <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 10, flexShrink: 0 }}>—</span>
+              <input
+                type="number"
+                value={maxPrice}
+                onChange={e => setMaxPrice(e.target.value)}
+                placeholder="Max"
+                min={0}
+                style={{
+                  width: "100%", padding: "4px 6px", borderRadius: 4,
+                  background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)",
+                  color: "#fff", fontSize: 10, outline: "none",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Clear all */}
+          {hasActive && (
+            <button
+              onClick={clearAll}
+              style={{
+                padding: "5px 0", borderRadius: 5, cursor: "pointer",
+                background: "rgba(220,38,38,0.1)", border: "1px solid rgba(220,38,38,0.3)",
+                color: "rgba(248,113,113,0.9)", fontSize: 9, fontWeight: 600, letterSpacing: "0.08em",
+                transition: "all 0.15s",
+              }}
+            >
+              CLEAR ALL FILTERS
+            </button>
+          )}
+        </div>
       )}
 
       <Link
@@ -142,26 +274,38 @@ function LabelPanel({ category, label, icon, sortDesc, setSortDesc, showSearch, 
 }
 
 // ── LineLayout ─────────────────────────────────────────────────────────────────
-// direction="left"  → scrollLeft  animation  (items flow right→left, exit on right)
-// direction="right" → scrollRight animation  (items flow left→right, exit on left)
-// Icon panel is ALWAYS on the LEFT for both directions — zig-zag is scroll direction only.
 export default function LineLayout({ category, label, icon, items, direction = "left" }) {
   const scrollRight = direction === "right";
 
-  const [search, setSearch]         = useState("");
-  const [sortDesc, setSortDesc]     = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
+  const [search, setSearch]       = useState("");
+  const [sortBy, setSortBy]       = useState("");
+  const [minPrice, setMinPrice]   = useState("");
+  const [maxPrice, setMaxPrice]   = useState("");
 
   const processed = useMemo(() => {
     let result = items || [];
-    if (search) result = result.filter(item => (item.name || "").toLowerCase().includes(search.toLowerCase()));
-    if (sortDesc) result = [...result].sort((a, b) => (b.priceETH ?? b.price ?? 0) - (a.priceETH ?? a.price ?? 0));
+
+    if (search) result = result.filter(item =>
+      (item.name || "").toLowerCase().includes(search.toLowerCase())
+    );
+    if (minPrice !== "") result = result.filter(item => (item.priceETH ?? item.price ?? 0) >= Number(minPrice));
+    if (maxPrice !== "") result = result.filter(item => (item.priceETH ?? item.price ?? 0) <= Number(maxPrice));
+
+    if (sortBy === "price_asc")  result = [...result].sort((a, b) => (a.priceETH ?? a.price ?? 0) - (b.priceETH ?? b.price ?? 0));
+    if (sortBy === "price_desc") result = [...result].sort((a, b) => (b.priceETH ?? b.price ?? 0) - (a.priceETH ?? a.price ?? 0));
+    if (sortBy === "name_asc")   result = [...result].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    if (sortBy === "name_desc")  result = [...result].sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+
     return result;
-  }, [items, search, sortDesc]);
+  }, [items, search, sortBy, minPrice, maxPrice]);
 
-  if (!processed.length && !search) return null;
+  const isFiltering = search || sortBy || minPrice !== "" || maxPrice !== "";
 
-  // Duplicate to fill at least 10 cards for seamless loop
+  if (!processed.length && !isFiltering) return null;
+
+  // When filtering/searching: show static grid (no duplication)
+  // When idle: duplicate cards to fill scroll track for seamless loop
+  const showStatic = isFiltering;
   const fill  = Math.max(1, Math.ceil(10 / (processed.length || 1)));
   const track = Array.from({ length: fill * 2 }, () => processed).flat();
 
@@ -171,29 +315,33 @@ export default function LineLayout({ category, label, icon, items, direction = "
       {/* Icon/label panel — always LEFT */}
       <LabelPanel
         category={category} label={label} icon={icon}
-        sortDesc={sortDesc} setSortDesc={setSortDesc}
-        showSearch={showSearch} setShowSearch={setShowSearch}
+        sortBy={sortBy} setSortBy={setSortBy}
+        minPrice={minPrice} setMinPrice={setMinPrice}
+        maxPrice={maxPrice} setMaxPrice={setMaxPrice}
         search={search} setSearch={setSearch}
       />
 
-      {/* Scrolling track */}
+      {/* Scrolling / static track */}
       <div className="flex-1 overflow-hidden relative">
-        {/* Fade on left edge (icon side) */}
-        <div
-          className="absolute top-0 bottom-0 left-0 w-8 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #060610, transparent)" }}
-        />
-        {/* Fade on right edge */}
-        <div
-          className="absolute top-0 bottom-0 right-0 w-8 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #060610, transparent)" }}
-        />
+        {/* Fade edges */}
+        <div className="absolute top-0 bottom-0 left-0 w-8 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #060610, transparent)" }} />
+        <div className="absolute top-0 bottom-0 right-0 w-8 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #060610, transparent)" }} />
 
         {processed.length === 0 ? (
           <div className="flex items-center justify-center h-full min-h-[160px] text-white/25 text-xs">
-            No results for "{search}"
+            No results found
+          </div>
+        ) : showStatic ? (
+          /* Static layout when filtering — no duplication, no animation */
+          <div className="flex gap-3 px-4 py-1 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+            {processed.map((item, i) => (
+              <LineCard key={`${item._id || i}-static`} item={item} />
+            ))}
           </div>
         ) : (
+          /* Animated scroll when idle */
           <div
             className={`flex gap-3 ${scrollRight ? "animate-scroll-right" : "animate-scroll-left"}`}
             style={{ width: "max-content" }}

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import heroImage from "../../assets/images/hero.jpg";
 import Logo from "/logo-white.png";
@@ -12,11 +13,16 @@ function VideoModal({ onClose }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger fade-in on next frame
     requestAnimationFrame(() => setVisible(true));
     const handleKey = (e) => { if (e.key === "Escape") handleClose(); };
     document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
+    // Hide navbar while modal is open
+    const navbar = document.querySelector("nav");
+    if (navbar) navbar.style.visibility = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      if (navbar) navbar.style.visibility = "";
+    };
   }, []);
 
   function handleClose() {
@@ -24,40 +30,62 @@ function VideoModal({ onClose }) {
     setTimeout(onClose, 250);
   }
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       style={{
-        background: "rgba(0,0,0,0.88)",
+        position: "fixed", inset: 0,
+        zIndex: 999999,
+        background: "rgba(0,0,0,0.96)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "16px",
         opacity: visible ? 1 : 0,
         transition: "opacity 0.25s ease",
       }}
       onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
     >
       <div
-        className="relative w-full max-w-4xl"
         style={{
+          position: "relative", width: "100%", maxWidth: "896px",
           transform: visible ? "scale(1) translateY(0)" : "scale(0.95) translateY(16px)",
           transition: "transform 0.3s ease, opacity 0.3s ease",
           opacity: visible ? 1 : 0,
         }}
       >
+        {/* Close button — inside video container, top-right corner */}
         <button
           onClick={handleClose}
-          className="absolute -top-10 right-0 text-white/60 hover:text-white transition-colors flex items-center gap-1.5 text-sm"
+          style={{
+            position: "absolute", top: 10, right: 10,
+            zIndex: 10,
+            display: "flex", alignItems: "center", gap: 6,
+            padding: "5px 10px",
+            background: "rgba(0,0,0,0.65)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            borderRadius: 6,
+            color: "rgba(255,255,255,0.75)",
+            fontSize: 13, cursor: "pointer",
+            backdropFilter: "blur(4px)",
+            transition: "background 0.15s, color 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.9)"; e.currentTarget.style.color = "#fff"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.65)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; }}
         >
-          <X className="w-4 h-4" /> Close
+          <X style={{ width: 14, height: 14 }} /> Close
         </button>
         <video
           ref={videoRef}
           src="/video/download_page.mp4"
           autoPlay
           playsInline
-          className="w-full rounded-xl"
-          style={{ maxHeight: "80vh", background: "#000" }}
+          style={{
+            width: "100%", borderRadius: 12,
+            maxHeight: "80vh", background: "#000",
+            display: "block",
+          }}
         />
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

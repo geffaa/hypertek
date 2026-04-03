@@ -155,7 +155,11 @@ function MarketPlace() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUserData(res.data.user))
-      .catch(() => toast.error("Failed to fetch profile"));
+      .catch((err) => {
+        if (err?.response?.status !== 401) {
+          console.error("Profile fetch error:", err?.response?.data || err.message);
+        }
+      });
   }, [token]);
 
   /* ================= FETCH OWNED NFTS ================= */

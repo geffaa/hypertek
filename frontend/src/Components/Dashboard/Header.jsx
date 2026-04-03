@@ -55,7 +55,9 @@ const Header = ({ onMenuClick }) => {
         setUserData(res.data.user);
         setImageError(false);
       } catch (error) {
-        toast.error(error.response?.data?.message || "Failed to fetch profile");
+        if (error?.response?.status !== 401) {
+          console.error("Profile fetch error:", error.response?.data || error.message);
+        }
       }
     };
     if (token) fetchProfile();

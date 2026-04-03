@@ -107,20 +107,30 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
   }, [connectedWallet, token]);
 
   // ---------- FINAL MERGED LINKS (STABLE) ----------
+  // Fixed order matching CategoryMarketplace — unknown categories appended at the end
+  const CATEGORY_ORDER = [
+    "skins",
+    "military badges and collectables",
+    "specialists",
+    "weapons",
+    "body armour",
+    "spaceships",
+    "racing vehicles",
+    "artwork",
+    "land and bases",
+  ];
+
   const categoryTabs = useMemo(() => {
-    const ordered = [];
+    // Collect all unique categories from both user and global
+    const all = new Set();
+    userCategories.forEach((cat) => all.add(cat));
+    globalCategories.forEach((cat) => all.add(cat));
 
-    // user categories first
-    userCategories.forEach((cat) => {
-      if (!ordered.includes(cat)) ordered.push(cat);
-    });
+    // Sort: known categories in CATEGORY_ORDER first, unknowns appended after
+    const known = CATEGORY_ORDER.filter((cat) => all.has(cat));
+    const unknown = Array.from(all).filter((cat) => !CATEGORY_ORDER.includes(cat));
 
-    // then global categories
-    globalCategories.forEach((cat) => {
-      if (!ordered.includes(cat)) ordered.push(cat);
-    });
-
-    return ordered;
+    return [...known, ...unknown];
   }, [userCategories, globalCategories]);
 
   useEffect(() => {

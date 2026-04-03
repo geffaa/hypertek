@@ -4,6 +4,31 @@ import './index.css';
 import App from './App.jsx';
 import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
+import { logout } from './Redux/AuthSlice';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
+// Global 401 interceptor — auto-logout when server rejects expired/invalid token
+let sessionToastShown = false;
+axios.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err.response?.status === 401 && store.getState().auth.token) {
+      store.dispatch(logout());
+      if (!sessionToastShown) {
+        sessionToastShown = true;
+        toast("Session expired. Please sign in again.", {
+          icon: "🔒",
+          duration: 4000,
+          style: { background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" },
+        });
+        setTimeout(() => { sessionToastShown = false; }, 5000);
+      }
+      window.location.href = "/signin";
+    }
+    return Promise.reject(err);
+  }
+);
 
 // Rainbow imports
 import '@rainbow-me/rainbowkit/styles.css';
