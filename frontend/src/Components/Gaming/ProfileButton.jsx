@@ -281,7 +281,7 @@ export default function ProfileButton() {
     return () => document.removeEventListener("mousedown", handler);
   }, [open, charSelectOpen]);
 
-  const backendAvatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar.png";
+  const backendAvatarSrc = profile?.Avatar ? `${BACKEND_BASE_URL}${profile.Avatar}` : "/avatar/geodians-male.png";
   const displayAvatarSrc = selectedChar
     ? (SPECIES.find(s => s.id === selectedChar.speciesId)?.imgs[selectedChar.variantIdx] ?? backendAvatarSrc)
     : backendAvatarSrc;
@@ -388,7 +388,7 @@ export default function ProfileButton() {
                   src={displayAvatarSrc}
                   alt="Profile"
                   loading="lazy"
-                  onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                  onError={(e) => { e.currentTarget.src = "/avatar/geodians-male.png"; }}
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%", display: "block" }}
                 />
               </div>
@@ -516,7 +516,7 @@ export default function ProfileButton() {
                           <img
                             src={displayAvatarSrc}
                             alt="avatar"
-                            onError={(e) => { e.currentTarget.src = "/avatar.png"; }}
+                            onError={(e) => { e.currentTarget.src = "/avatar/geodians-male.png"; }}
                             style={{ width: "100%", height: "170%", objectFit: "cover", objectPosition: "center 10%", display: "block", transform: "scale(1.2)", transformOrigin: "top center" }}
                           />
                         </div>
