@@ -6,7 +6,7 @@ const WARN_BEFORE_MS = 24 * 60 * 60 * 1000; // notify 24h before expiry
 // Returns listings grouped by category, only non-empty categories
 export const getMyListings = async (req, res) => {
   try {
-    const listings = await MarketListing.find({ userId: req.user._id })
+    const listings = await MarketListing.find({ userId: req.user._id || req.user.id })
       .sort({ createdAt: -1 })
       .lean();
 
@@ -50,7 +50,7 @@ export const createListing = async (req, res) => {
     } = req.body;
 
     const listing = await MarketListing.create({
-      userId:     req.user._id,
+      userId:     req.user._id || req.user.id,
       userName:   req.user.FullName || req.user.Email?.split("@")[0] || "Anonymous",
       userWallet: req.user.WalletAddress || req.user.MetaMaskAddress || "",
       category,
@@ -77,7 +77,7 @@ export const updateListing = async (req, res) => {
   try {
     const listing = await MarketListing.findById(req.params.id);
     if (!listing) return res.status(404).json({ success: false, message: "Not found" });
-    if (listing.userId.toString() !== req.user._id.toString())
+    if (listing.userId.toString() !== (req.user._id || req.user.id).toString())
       return res.status(403).json({ success: false, message: "Not your listing" });
 
     const allowed = ["itemName", "itemDescription", "itemImage", "price", "reservePrice", "commissionTier", "status"];
@@ -96,7 +96,7 @@ export const renewListing = async (req, res) => {
   try {
     const listing = await MarketListing.findById(req.params.id);
     if (!listing) return res.status(404).json({ success: false, message: "Not found" });
-    if (listing.userId.toString() !== req.user._id.toString())
+    if (listing.userId.toString() !== (req.user._id || req.user.id).toString())
       return res.status(403).json({ success: false, message: "Not your listing" });
     if (listing.renewed)
       return res.status(400).json({ success: false, message: "Already renewed once. Please modify or create a new listing." });
@@ -119,7 +119,7 @@ export const deleteListing = async (req, res) => {
   try {
     const listing = await MarketListing.findById(req.params.id);
     if (!listing) return res.status(404).json({ success: false, message: "Not found" });
-    if (listing.userId.toString() !== req.user._id.toString())
+    if (listing.userId.toString() !== (req.user._id || req.user.id).toString())
       return res.status(403).json({ success: false, message: "Not your listing" });
 
     await listing.deleteOne();
