@@ -17,6 +17,7 @@ function NavLinks({ onSelectCategory, selectedCategory, categories, onCategories
     str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection";
 
   const staticTail = [
+    { name: "My Trades" },
     { name: "Activities" },
     { name: "Listing" },
     { name: "My Offers" },

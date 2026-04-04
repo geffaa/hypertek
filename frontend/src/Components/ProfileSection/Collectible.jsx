@@ -3,6 +3,7 @@ import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
+import MyTrades from "./MyTrades";
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
@@ -73,7 +74,7 @@ function MarketPlace() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [activeCategory, setActiveCategory] = useState(location.state?.category || "");
   const [pendingItemId, setPendingItemId] = useState(null);
-  const [activeView, setActiveView] = useState(""); // "" | "Activities" | "Listing" | "My Offers"
+  const [activeView, setActiveView] = useState(""); // "" | "My Trades" | "Activities" | "Listing" | "My Offers"
 
   // ---- Activities state ----
   const [transactions, setTransactions] = useState([]);
@@ -549,6 +550,9 @@ function MarketPlace() {
                 </div>
               );
             })()}
+
+            {/* ---- MY TRADES VIEW ---- */}
+            {activeView === "My Trades" && <MyTrades />}
 
             {/* ---- ACTIVITIES VIEW ---- */}
             {activeView === "Activities" && (() => {

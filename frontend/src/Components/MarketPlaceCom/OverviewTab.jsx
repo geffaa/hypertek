@@ -13,12 +13,12 @@ const fadeUp = {
 
 // Avatar mapped per feature tab — each tab shows a different character
 const AVATARS = {
-  nfa101:   "/avatar/dryads-male.png",
-  general:  "/avatar/fawnus-female.png",
+  nfa101: "/avatar/dryads-male.png",
+  general: "/avatar/fawnus-female.png",
   auctions: "/avatar/geodians-male.png",
-  quests:   "/avatar/lithionites-female.png",
-  hire:     "/avatar/mantasquads-male.png",
-  bounty:   "/avatar/ophidians-female.png",
+  quests: "/avatar/lithionites-female.png",
+  hire: "/avatar/mantasquads-male.png",
+  bounty: "/avatar/ophidians-female.png",
 };
 
 const FEATURES = [
@@ -60,7 +60,7 @@ const FEATURES = [
   },
   {
     key: "quests",
-    label: "Quests / Trades",
+    label: "Trades / Quests",
     icon: "⚔️",
     tagline: "Complete missions, trade assets peer-to-peer",
     details: [

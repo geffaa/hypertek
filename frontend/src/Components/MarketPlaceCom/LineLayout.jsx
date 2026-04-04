@@ -121,25 +121,55 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
         <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-60 transition-opacity" />
       </Link>
 
-      {/* Filter button */}
-      <button
-        onClick={() => setShowFilter(v => !v)}
-        style={{
-          display: "flex", alignItems: "center", gap: 4,
-          padding: "3px 8px", borderRadius: 5,
-          background: hasActive ? "rgba(0,42,168,0.7)" : "rgba(255,255,255,0.07)",
-          border: `1px solid ${hasActive ? "rgba(0,80,255,0.6)" : "rgba(255,255,255,0.12)"}`,
-          color: hasActive ? "#fff" : "rgba(255,255,255,0.5)",
-          fontSize: 9, fontWeight: 600, letterSpacing: "0.05em",
-          cursor: "pointer", transition: "all 0.15s",
-        }}
-      >
-        <SlidersHorizontal style={{ width: 10, height: 10 }} />
-        FILTER
-        {hasActive && (
-          <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
+      {/* Inline search */}
+      <div style={{ display: "flex", alignItems: "center", gap: 5, width: "100%", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 5, padding: "4px 8px" }}>
+        <Search style={{ width: 10, height: 10, color: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
+        <input
+          type="text"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search..."
+          style={{
+            background: "none", border: "none", outline: "none",
+            color: "#fff", fontSize: 10, width: "100%",
+          }}
+        />
+        {search && (
+          <button onClick={() => setSearch("")} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", padding: 0 }}>
+            <X style={{ width: 9, height: 9 }} />
+          </button>
         )}
-      </button>
+      </div>
+
+      {/* Filter + Show All row */}
+      <div style={{ display: "flex", gap: 4, width: "100%" }}>
+        <button
+          onClick={() => setShowFilter(v => !v)}
+          style={{
+            flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 4,
+            padding: "3px 8px", borderRadius: 5,
+            background: hasActive ? "rgba(0,42,168,0.7)" : "rgba(255,255,255,0.07)",
+            border: `1px solid ${hasActive ? "rgba(0,80,255,0.6)" : "rgba(255,255,255,0.12)"}`,
+            color: hasActive ? "#fff" : "rgba(255,255,255,0.5)",
+            fontSize: 9, fontWeight: 600, letterSpacing: "0.05em",
+            cursor: "pointer", transition: "all 0.15s",
+          }}
+        >
+          <SlidersHorizontal style={{ width: 10, height: 10 }} />
+          FILTER
+          {hasActive && (
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
+          )}
+        </button>
+
+        <Link
+          to={`/collections/${encodeURIComponent(category)}`}
+          className="text-[9px] sm:text-[10px] font-semibold text-white/70 hover:text-white border border-white/15 hover:border-white/35 transition-all whitespace-nowrap"
+          style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 5, background: "rgba(0,42,168,0.3)" }}
+        >
+          Show All
+        </Link>
+      </div>
 
       {/* Dropdown */}
       {showFilter && (
@@ -165,30 +195,6 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
             </button>
           </div>
 
-          {/* Search */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>SEARCH</label>
-            <div style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 5, padding: "4px 8px" }}>
-              <Search style={{ width: 10, height: 10, color: "rgba(255,255,255,0.35)", flexShrink: 0 }} />
-              <input
-                type="text"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Search items..."
-                autoFocus
-                style={{
-                  background: "none", border: "none", outline: "none",
-                  color: "#fff", fontSize: 10, width: "100%",
-                }}
-              />
-              {search && (
-                <button onClick={() => setSearch("")} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", padding: 0 }}>
-                  <X style={{ width: 9, height: 9 }} />
-                </button>
-              )}
-            </div>
-          </div>
-
           {/* Sort */}
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>SORT BY</label>
@@ -196,7 +202,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
               {SORT_OPTIONS.map(opt => (
                 <button
                   key={opt.value}
-                  onClick={() => setSortBy(opt.value)}
+                  onClick={() => { setSortBy(opt.value); setShowFilter(false); }}
                   style={{
                     textAlign: "left", padding: "5px 8px", borderRadius: 4,
                     background: sortBy === opt.value ? "rgba(0,42,168,0.6)" : "transparent",
@@ -243,6 +249,19 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
                 }}
               />
             </div>
+            {(minPrice || maxPrice) && (
+              <button
+                onClick={() => setShowFilter(false)}
+                style={{
+                  padding: "4px 0", borderRadius: 4, cursor: "pointer",
+                  background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.5)",
+                  color: "#fff", fontSize: 9, fontWeight: 600, letterSpacing: "0.08em",
+                  transition: "all 0.15s", width: "100%",
+                }}
+              >
+                APPLY
+              </button>
+            )}
           </div>
 
           {/* Clear all */}
@@ -262,13 +281,6 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
         </div>
       )}
 
-      <Link
-        to={`/collections/${encodeURIComponent(category)}`}
-        className="px-2.5 py-1 rounded-lg text-[9px] sm:text-[10px] font-semibold text-white/70 hover:text-white border border-white/15 hover:border-white/35 transition-all whitespace-nowrap"
-        style={{ background: "rgba(0,42,168,0.3)" }}
-      >
-        Show All
-      </Link>
     </div>
   );
 }

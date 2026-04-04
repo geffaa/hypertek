@@ -37,6 +37,7 @@ import BountyRouter from "./Routes/BountyRoute.js";
 import HBRouter from "./Routes/HBRoute.js";
 import ArtistRouter from "./Routes/ArtistRoute.js";
 import BuybackRouter from "./Routes/BuybackRoute.js";
+import MarketListingRouter from "./Routes/MarketListingRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -160,6 +161,7 @@ app.use("/api/v1/bounty", BountyRouter);
 app.use("/api/v1/hb", HBRouter);
 app.use("/api/v1/admin/artists", ArtistRouter);
 app.use("/api/v1/buyback", BuybackRouter);
+app.use("/api/v1/listings", MarketListingRouter);
 
 // Health check
 app.get("/health", (req, res) => {

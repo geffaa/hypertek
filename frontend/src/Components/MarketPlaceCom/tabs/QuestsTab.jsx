@@ -380,14 +380,14 @@ export default function QuestsTab() {
   const { address: wagmiAddress } = useAccount();
   const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
 
-  const [trades, setTrades]             = useState([]);
-  const [loading, setLoading]           = useState(true);
-  const [typeFilter, setTypeFilter]     = useState("all");
+  const [trades, setTrades] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [typeFilter, setTypeFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("open");
-  const [showCreate, setShowCreate]     = useState(false);
-  const [acceptTrade, setAcceptTrade]   = useState(null);
-  const [page, setPage]                 = useState(1);
-  const [total, setTotal]               = useState(0);
+  const [showCreate, setShowCreate] = useState(false);
+  const [acceptTrade, setAcceptTrade] = useState(null);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const LIMIT = 12;
 
   const fetchTrades = useCallback(async () => {
@@ -445,7 +445,7 @@ export default function QuestsTab() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Swords className="w-5 h-5 text-white/60" />
-          <h2 className="text-white font-bold text-lg">Quests / Trades</h2>
+          <h2 className="text-white font-bold text-lg">Trades / Quests</h2>
           <span className="text-white/30 text-sm">{total} listings</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
