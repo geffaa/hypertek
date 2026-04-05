@@ -1,13 +1,13 @@
 import { Search } from "lucide-react";
 
-// Fixed tabs per Don's brief
-// (no dynamic links from parent-collections anymore)
+// Fixed tabs per Don's brief — Trades and Quests are separate tabs
 const TABS = [
   { key: "overview", label: "Overview" },
   { key: "nfa101", label: "NFAs / NFTs" },
   { key: "general", label: "The Marketplace" },
   { key: "auctions", label: "Auctions" },
-  { key: "quests", label: "Trades / Quests" },
+  { key: "trades", label: "Trades" },
+  { key: "quests", label: "Quests" },
   { key: "hire", label: "For Hire" },
   { key: "bounty", label: "Bounty" },
 ];

@@ -9,6 +9,7 @@ import GeneralTab        from "../Components/MarketPlaceCom/tabs/GeneralTab";
 import Nfa101Tab         from "../Components/MarketPlaceCom/tabs/Nfa101Tab";
 import AuctionsTab       from "../Components/MarketPlaceCom/tabs/AuctionsTab";
 import QuestsTab         from "../Components/MarketPlaceCom/tabs/QuestsTab";
+import TradesTab         from "../Components/MarketPlaceCom/tabs/TradesTab";
 import HireRentTab       from "../Components/MarketPlaceCom/tabs/HireRentTab";
 import BountyTab         from "../Components/MarketPlaceCom/tabs/BountyTab";
 import MusicPlayer        from "../Components/MarketPlaceCom/MusicPlayer";
@@ -77,6 +78,7 @@ function MarketPlace() {
       case "general":   return <GeneralTab />;
       case "nfa101":    return <Nfa101Tab />;
       case "auctions":  return <AuctionsTab />;
+      case "trades":    return <TradesTab />;
       case "quests":    return <QuestsTab />;
       case "hire":      return <HireRentTab />;
       case "bounty":    return <BountyTab />;

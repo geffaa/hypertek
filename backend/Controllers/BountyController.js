@@ -12,10 +12,12 @@ async function expireBounties() {
 export async function getBounties(req, res) {
   try {
     await expireBounties();
-    const { status = "open", category, page = 1, limit = 20 } = req.query;
+    const { status = "open", category, posterWallet, claimedBy, page = 1, limit = 20 } = req.query;
     const filter = {};
     if (status) filter.status = status;
     if (category) filter.category = new RegExp(category, "i");
+    if (posterWallet) filter.posterWallet = new RegExp(`^${posterWallet}$`, "i");
+    if (claimedBy)    filter.claimedBy    = new RegExp(`^${claimedBy}$`,    "i");
 
     const skip = (Number(page) - 1) * Number(limit);
     const [bounties, total] = await Promise.all([

@@ -1,6 +1,18 @@
+import fs from "fs";
+import path from "path";
 import Trade from "../Models/TradeModel.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+
+// Save trade image locally under /uploads/trades/
+async function saveTradeImage(file) {
+  if (!file) return "";
+  const tradesDir = path.join(process.cwd(), "uploads", "trades");
+  if (!fs.existsSync(tradesDir)) fs.mkdirSync(tradesDir, { recursive: true });
+  const dest = path.join(tradesDir, file.filename);
+  fs.renameSync(file.path, dest);
+  return `/uploads/trades/${file.filename}`;
+}
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 async function expireTrades() {
@@ -14,11 +26,13 @@ async function expireTrades() {
 export async function getTrades(req, res) {
   try {
     await expireTrades();
-    const { type, status = "open", category, page = 1, limit = 20 } = req.query;
+    const { type, status = "open", category, posterWallet, acceptedByWallet, page = 1, limit = 20 } = req.query;
     const filter = {};
     if (type && ["trade", "quest"].includes(type)) filter.type = type;
     if (status) filter.status = status;
     if (category) filter.category = new RegExp(category, "i");
+    if (posterWallet) filter.posterWallet = new RegExp(`^${posterWallet}$`, "i");
+    if (acceptedByWallet) filter.acceptedByWallet = new RegExp(`^${acceptedByWallet}$`, "i");
 
     const skip = (Number(page) - 1) * Number(limit);
     const [trades, total] = await Promise.all([
@@ -50,50 +64,39 @@ export async function createTrade(req, res) {
       type, posterWallet, posterName,
       title, description, offering, requesting,
       offeringHB, requestingHB,
-      reward, image, category,
+      reward, category,
+      imageUrl,   // existing URL from owned NFT (no upload needed)
     } = req.body;
 
     if (!type || !["trade", "quest"].includes(type)) {
+      if (req.file) fs.unlink(req.file.path, () => {});
       return res.status(400).json({ error: "type must be 'trade' or 'quest'" });
     }
     if (!title || !posterWallet) {
+      if (req.file) fs.unlink(req.file.path, () => {});
       return res.status(400).json({ error: "title and posterWallet required" });
     }
     if (type === "quest" && (reward == null || Number(reward) <= 0)) {
+      if (req.file) fs.unlink(req.file.path, () => {});
       return res.status(400).json({ error: "Quest requires a positive reward amount" });
     }
-    if (type === "trade" && (!offering || !requesting)) {
-      return res.status(400).json({ error: "Trade requires offering and requesting fields" });
+    if (type === "trade" && !offering) {
+      if (req.file) fs.unlink(req.file.path, () => {});
+      return res.status(400).json({ error: "Trade requires an offering field" });
     }
 
-    // Deduct 500 HB listing fee + validate HB offering
-    const LISTING_FEE_HB = 500;
+    // imageUrl from body = existing NFT image URL; req.file = newly uploaded image
+    const resolvedImage = req.file ? await saveTradeImage(req.file) : (imageUrl || "");
     const hbOffered = Number(offeringHB) || 0;
-    const totalHBNeeded = LISTING_FEE_HB + hbOffered;
-
-    const poster = await User.findById(userId).select("hyperBucks");
-    if (!poster || (poster.hyperBucks || 0) < totalHBNeeded) {
-      return res.status(400).json({
-        error: `Insufficient HB. You need ${totalHBNeeded} HB (${LISTING_FEE_HB} listing fee + ${hbOffered} offered). You have ${poster?.hyperBucks || 0} HB.`,
-      });
-    }
-
-    // Deduct listing fee
-    poster.hyperBucks -= LISTING_FEE_HB;
-    await poster.save();
-    await HBLedger.create({
-      userId, type: "spend", amount: -LISTING_FEE_HB,
-      balanceAfter: poster.hyperBucks,
-      description: `${type === "quest" ? "Quest" : "Trade"} listing fee`,
-    });
 
     const trade = await Trade.create({
       type, poster: userId, posterWallet, posterName: posterName || "Anonymous",
-      title, description, offering, requesting,
+      title, description, offering,
+      requesting: requesting || "Make me an offer",
       offeringHB:   hbOffered,
       requestingHB: Number(requestingHB) || 0,
       reward:       type === "quest" ? Number(reward) : 0,
-      image, category,
+      image: resolvedImage, category,
     });
     res.status(201).json(trade);
   } catch (err) {

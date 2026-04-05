@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ProfileBanner from "./ProfileBanner";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import GlowingOrb from "../Common/BgColoring";
-import MyTrades from "./MyTrades";
+import ProfileListingsTab from "./ProfileListingsTab";
+import ProfileQuestingTab from "./ProfileQuestingTab";
+import ProfileBountyTab from "./ProfileBountyTab";
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
@@ -29,7 +31,7 @@ import { useEmailWallet } from "../../hooks/useEmailWallet";
 import UserProfileHeader from "./UserProfileHeader";
 
 function MarketPlace() {
-  const { token, user } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // RainbowKit hooks
@@ -67,6 +69,21 @@ function MarketPlace() {
   const sellerBalance = rawSellerBalance ? ethers.formatUnits(rawSellerBalance, 6) : '0';
 
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Tab ↔ URL slug mapping
+  const TAB_SLUG = {
+    "My Collectibles": "collectibles",
+    "Listings":        "listings",
+    "Activities":      "activities",
+    "My Offerings":    "offerings",
+    "Questing":        "questing",
+    "Bounty":          "bounty",
+  };
+  const SLUG_TAB = Object.fromEntries(Object.entries(TAB_SLUG).map(([k, v]) => [v, k]));
+
+  const tabFromUrl = SLUG_TAB[searchParams.get("tab")] || "My Collectibles";
+
   const [loading, setLoading] = useState(true);
   const [marketData, setMarketData] = useState([]);
   const [userData, setUserData] = useState(null);
@@ -74,18 +91,16 @@ function MarketPlace() {
   const [userHasInteracted, setUserHasInteracted] = useState({});
   const [activeCategory, setActiveCategory] = useState(location.state?.category || "");
   const [pendingItemId, setPendingItemId] = useState(null);
-  const [activeView, setActiveView] = useState(""); // "" | "My Trades" | "Activities" | "Listing" | "My Offers"
+  const [activeTab, setActiveTab] = useState(tabFromUrl);
 
   // ---- Activities state ----
   const [transactions, setTransactions] = useState([]);
   const [txLoading, setTxLoading] = useState(false);
   const [txFilter, setTxFilter] = useState("all");
 
-  // ---- My Offers state ----
+  // ---- My Offerings (trade posts) state ----
   const [offers, setOffers] = useState([]);
   const [offersLoading, setOffersLoading] = useState(false);
-  const [cancelling, setCancelling] = useState(null);
-  const [navigating, setNavigating] = useState(null);
 
   // ---- List for Sale modal ----
   const [listingModal, setListingModal] = useState(null); // null | { item }
@@ -242,9 +257,9 @@ function MarketPlace() {
     }
   }, [isConnected, pendingItemId]);
 
-  // ---- Fetch transactions when Activities view is active ----
+  // ---- Fetch transactions when Activities tab is active ----
   useEffect(() => {
-    if (activeView !== "Activities" || !connectedWallet || !token) return;
+    if (activeTab !== "Activities" || !connectedWallet || !token) return;
     setTxLoading(true);
     axios
       .get(`${BACKEND_BASE_URL}/api/v1/nft/user/transactions/${connectedWallet}`, {
@@ -253,60 +268,21 @@ function MarketPlace() {
       .then((res) => setTransactions(res.data?.transactions || []))
       .catch((err) => { console.error("Activities fetch error:", err.response?.status, err.message); setTransactions([]); })
       .finally(() => setTxLoading(false));
-  }, [activeView, connectedWallet, token]);
+  }, [activeTab, connectedWallet, token]);
 
-  // ---- Fetch offers when My Offers view is active ----
-  const userId = user?.id || user?._id;
-
+  // ---- Fetch trade posts when My Offerings tab is active ----
   useEffect(() => {
-    if (activeView !== "My Offers" || !userId || !token) return;
+    if (activeTab !== "My Offerings" || !connectedWallet) return;
     setOffersLoading(true);
     axios
-      .get(`${BACKEND_BASE_URL}/api/v1/offer/user/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
+      .get(`${BACKEND_BASE_URL}/api/v1/trade`, {
+        params: { type: "trade", posterWallet: connectedWallet, status: "open", limit: 50 },
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
-      .then((res) => setOffers(res.data?.offers || []))
-      .catch((err) => {
-        if (err.response?.status !== 404) toast.error("Failed to load offers");
-      })
+      .then((res) => setOffers(res.data?.trades || []))
+      .catch(() => setOffers([]))
       .finally(() => setOffersLoading(false));
-  }, [activeView, userId, token]);
-
-  // ---- My Offers helpers ----
-  const handleCompletePurchase = async (offer) => {
-    setNavigating(offer._id);
-    try {
-      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/sub-collection/${offer.gameId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const { item, parentId } = res.data;
-      navigate("/buy-nfa", { state: { item, parentId } });
-    } catch {
-      toast.error("Could not load NFT data");
-    } finally {
-      setNavigating(null);
-    }
-  };
-
-  const handleCancelOffer = async (offerId) => {
-    if (!window.confirm("Cancel this offer?")) return;
-    setCancelling(offerId);
-    try {
-      await axios.put(
-        `${BACKEND_BASE_URL}/api/v1/offer/${offerId}/request-status`,
-        { status: "cancelled" },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setOffers((prev) =>
-        prev.map((o) => o._id === offerId ? { ...o, requestStatus: "cancelled" } : o)
-      );
-      toast.success("Offer cancelled");
-    } catch {
-      toast.error("Failed to cancel offer");
-    } finally {
-      setCancelling(null);
-    }
-  };
+  }, [activeTab, connectedWallet, token]);
 
   // ---- List for Sale submit ----
   const handleListForSale = async () => {
@@ -355,28 +331,9 @@ function MarketPlace() {
     return `${addr.slice(0, 6)}\u2026${addr.slice(-4)}`;
   };
 
-  const OFFER_STATUS_COLORS = {
-    pending:   { text: "text-yellow-400", bg: "rgba(234,179,8,0.10)",   border: "rgba(234,179,8,0.25)" },
-    accepted:  { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-    completed: { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-    rejected:  { text: "text-red-400",    bg: "rgba(239,68,68,0.10)",   border: "rgba(239,68,68,0.25)" },
-    cancelled: { text: "text-white/30",   bg: "rgba(255,255,255,0.05)", border: "rgba(255,255,255,0.10)" },
-  };
-
-  const getDeadlineText = (acceptDeadlineAt) => {
-    if (!acceptDeadlineAt) return null;
-    const diff = new Date(acceptDeadlineAt) - Date.now();
-    if (diff <= 0) return { label: "Deadline passed", expired: true };
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const label = h > 24 ? `${Math.floor(h / 24)}d ${h % 24}h left` : `${h}h ${m}m left`;
-    return { label, expired: false };
-  };
-
-  // When NavLinks triggers a category selection, update activeCategory
+  // Category sub-filter within My Collectibles tab
   const handleSelectCategory = (cat) => {
     setActiveCategory(cat);
-    setActiveView("");
     setTxFilter("all");
   };
 
@@ -419,13 +376,15 @@ function MarketPlace() {
           {/* ================= NAV ================= */}
           <div className="mt-6 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
             <NavLinks
-              onSelectCategory={handleSelectCategory}
-              selectedCategory={activeCategory}
+              activeTab={activeTab}
+              onTabChange={(tab) => {
+                setActiveTab(tab);
+                setSearchParams({ tab: TAB_SLUG[tab] });
+                if (tab !== "My Collectibles") setActiveCategory("");
+              }}
+              activeCategory={activeCategory}
+              onCategoryChange={handleSelectCategory}
               onCategoriesLoaded={handleCategoriesLoaded}
-              showAll
-              onSelectAll={() => { setActiveCategory(""); setActiveView(""); }}
-              onSelectStatic={(name) => { setActiveView(name); setActiveCategory(""); }}
-              activeStatic={activeView}
             />
           </div>
 
@@ -435,26 +394,20 @@ function MarketPlace() {
           <section className="relative z-10 mt-10">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
-            {/* ---- DEFAULT / LISTING VIEW: NFT Grid ---- */}
-            {(activeView === "" || activeView === "Listing") && (() => {
-              const gridItems = activeView === "Listing"
-                ? filteredCollections.filter((item) => item.listed === true)
-                : filteredCollections;
+            {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
+            {activeTab === "My Collectibles" && (() => {
+              const gridItems = filteredCollections;
 
               return gridItems.length === 0 ? (
                 <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
                   <h2 className="text-lg font-semibold -mt-4">
-                    {activeView === "Listing"
-                      ? "No active listings"
-                      : isConnected
-                      ? "No Items Available"
-                      : "Connect Wallet to View Your Items"}
+                    {isConnected ? "No Items Available" : "Connect Wallet to View Your Items"}
                   </h2>
                   <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
                     <img src={FaceOne} alt="Face One" className="w-34 h-24" />
                     <img src={FaceTwo} alt="Face Two" className="absolute top-24 w-28 h-10" />
                   </div>
-                  {!isConnected && activeView === "" ? (
+                  {!isConnected ? (
                     <button
                       onClick={() => openConnectModal && openConnectModal()}
                       className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition"
@@ -551,11 +504,15 @@ function MarketPlace() {
               );
             })()}
 
-            {/* ---- MY TRADES VIEW ---- */}
-            {activeView === "My Trades" && <MyTrades />}
+            {/* ---- LISTINGS VIEW ---- */}
+            {activeTab === "Listings" && (
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <ProfileListingsTab token={token} />
+              </div>
+            )}
 
             {/* ---- ACTIVITIES VIEW ---- */}
-            {activeView === "Activities" && (() => {
+            {activeTab === "Activities" && (() => {
               const TX_FILTERS = [
                 { key: "all",  label: "All"  },
                 { key: "buy",  label: "Buy"  },
@@ -565,7 +522,7 @@ function MarketPlace() {
                 ? transactions
                 : transactions.filter((tx) => tx.type === txFilter);
               return (
-                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+                <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                   {/* Filter chips */}
                   <div className="flex gap-2 mb-4">
                     {TX_FILTERS.map((f) => (
@@ -632,88 +589,68 @@ function MarketPlace() {
               );
             })()}
 
-            {/* ---- MY OFFERS VIEW ---- */}
-            {activeView === "My Offers" && (
-              <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-                {offersLoading ? (
-                  <div className="text-white/50 text-sm py-16 text-center">Loading your offers...</div>
+            {/* ---- MY OFFERINGS VIEW (user's posted trades) ---- */}
+            {activeTab === "My Offerings" && (
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                {!connectedWallet ? (
+                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                    <p className="text-sm">Connect your wallet to view your trade offerings</p>
+                  </div>
+                ) : offersLoading ? (
+                  <div className="text-white/50 text-sm py-16 text-center">Loading your trade offerings...</div>
                 ) : offers.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-4">
-                    <p className="text-sm">No offers yet</p>
+                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                    <p className="text-sm">No active trade offerings</p>
+                    <p className="text-xs text-white/20">Post a trade on the Marketplace → Trades tab to see it here</p>
                   </div>
                 ) : (
-                  <div className="flex flex-col gap-3">
-                    {offers.map((offer) => {
-                      const colors = OFFER_STATUS_COLORS[offer.requestStatus] || OFFER_STATUS_COLORS.pending;
-                      const isAccepted = offer.requestStatus === "accepted";
-                      const canCancel = offer.requestStatus === "pending";
-                      const deadline = offer.acceptDeadlineAt ? getDeadlineText(offer.acceptDeadlineAt) : null;
-
+                  <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                    {/* Header */}
+                    <div className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                      style={{ background: "rgba(0,20,80,0.5)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
+                      <span>Trade No</span>
+                      <span>Offering</span>
+                      <span>Requesting</span>
+                      <span>Category</span>
+                      <span>Status</span>
+                    </div>
+                    {offers.map((trade, i) => {
+                      const statusColors = {
+                        open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
+                        accepted:  { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
+                        completed: { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
+                        cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+                      };
+                      const c = statusColors[trade.status] || statusColors.open;
                       return (
-                        <div
-                          key={offer._id}
-                          className="rounded-2xl px-5 py-4 flex flex-wrap items-center gap-4"
-                          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-                        >
-                          {/* Item info */}
-                          <div className="flex flex-col gap-0.5 flex-1 min-w-[150px]">
-                            <span className="text-white font-medium text-sm">{offer.gameTitle || "—"}</span>
-                            {offer.serialNumber && (
-                              <span className="text-white/30 text-xs">#{offer.serialNumber}</span>
-                            )}
-                          </div>
-
-                          {/* Offer price */}
-                          <div className="flex flex-col gap-0.5 min-w-[100px]">
-                            <span className="text-white/40 text-[10px] uppercase tracking-wider">Offer</span>
-                            <span className="text-white font-semibold text-sm">{offer.offerPrice} USDC</span>
-                          </div>
-
-                          {/* Status badge */}
-                          <span
-                            className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold capitalize ${colors.text}`}
-                            style={{ background: colors.bg, border: `1px solid ${colors.border}` }}
-                          >
-                            {offer.requestStatus || "pending"}
+                        <div key={trade._id} className="grid min-w-[560px] px-4 py-3 items-center"
+                          style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
+                          <span className="text-white/60 text-xs font-mono">#{String(trade._id).slice(-6).toUpperCase()}</span>
+                          <span className="text-white/80 text-xs truncate">{trade.offering || "—"}</span>
+                          <span className="text-white/60 text-xs truncate italic">{trade.requesting || "—"}</span>
+                          <span className="text-white/40 text-xs truncate">{trade.category || "—"}</span>
+                          <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
+                            style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>
+                            {trade.status}
                           </span>
-
-                          {/* Deadline */}
-                          {isAccepted && deadline && (
-                            <span className={`text-xs font-medium ${deadline.expired ? "text-red-400" : "text-orange-400"}`}>
-                              {deadline.label}
-                            </span>
-                          )}
-
-                          {/* Created date */}
-                          <span className="text-white/30 text-xs ml-auto">
-                            {offer.createdAt ? timeAgo(offer.createdAt) : ""}
-                          </span>
-
-                          {/* Actions */}
-                          {isAccepted && !deadline?.expired ? (
-                            <button
-                              onClick={() => handleCompletePurchase(offer)}
-                              disabled={navigating === offer._id}
-                              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors disabled:opacity-60"
-                              style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ade80" }}
-                            >
-                              {navigating === offer._id ? "Loading..." : "Complete Purchase →"}
-                            </button>
-                          ) : canCancel ? (
-                            <button
-                              onClick={() => handleCancelOffer(offer._id)}
-                              disabled={cancelling === offer._id}
-                              className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors disabled:opacity-50"
-                              style={{ background: "rgba(239,68,68,0.10)", border: "1px solid rgba(239,68,68,0.25)", color: "#f87171" }}
-                            >
-                              {cancelling === offer._id ? "Cancelling..." : "Cancel Offer"}
-                            </button>
-                          ) : null}
                         </div>
                       );
                     })}
                   </div>
                 )}
+              </div>
+            )}
+            {/* ---- QUESTING VIEW ---- */}
+            {activeTab === "Questing" && (
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <ProfileQuestingTab wallet={connectedWallet} token={token} />
+              </div>
+            )}
+
+            {/* ---- BOUNTY VIEW ---- */}
+            {activeTab === "Bounty" && (
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <ProfileBountyTab wallet={connectedWallet} token={token} />
               </div>
             )}
           </section>

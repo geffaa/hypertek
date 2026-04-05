@@ -430,7 +430,7 @@ export default function HireRentTab() {
 
   const [listings, setListings]     = useState([]);
   const [loading, setLoading]       = useState(true);
-  const [statusFilter, setStatusFilter] = useState("available");
+  const [statusFilter] = useState("available");
   const [showCreate, setShowCreate] = useState(false);
   const [hireListing, setHireListing] = useState(null);
   const [page, setPage]             = useState(1);
@@ -498,22 +498,20 @@ export default function HireRentTab() {
           <h2 className="text-white font-bold text-lg">For Hire</h2>
           <span className="text-white/30 text-sm">{total} listings</span>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
+        {/* Locked — all actions disabled */}
+        <div className="flex items-center gap-2 flex-wrap pointer-events-none select-none opacity-30">
           <div className="flex gap-1">
             {STATUS_FILTERS.map(f => (
-              <button key={f} onClick={() => setStatusFilter(f)} className="px-2.5 py-1 rounded-full text-xs capitalize"
-                style={statusFilter === f
-                  ? { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)", color: "#fff" }
-                  : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)" }
-                }>{f}</button>
+              <button key={f} className="px-2.5 py-1 rounded-full text-xs capitalize cursor-not-allowed"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)" }}>
+                {f}
+              </button>
             ))}
           </div>
-          {isLoggedInUser && (
-            <button onClick={() => setShowCreate(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
-              style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              <Plus className="w-3.5 h-3.5" /> List
-            </button>
-          )}
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white cursor-not-allowed"
+            style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
+            <Plus className="w-3.5 h-3.5" /> List
+          </button>
         </div>
       </div>
 
