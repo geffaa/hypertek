@@ -6,7 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../redux/AuthSlice";
+import { logout } from "../../Redux/AuthSlice";
 import NotificationIcon from "../../assets/notification.png";
 import NotificationDropdown from "./Notification";
 
@@ -14,7 +14,6 @@ const Header = ({ onMenuClick }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // States
   const [showNotifications, setShowNotifications] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
