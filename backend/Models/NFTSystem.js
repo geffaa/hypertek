@@ -25,10 +25,12 @@ const subCollectionSchema = new mongoose.Schema({
   priceETH: { type: Number, default: 0 },
   isFirstSale: { type: Boolean, default: true },
   salesHistory: [saleSchema],
-  // NFA designation — set by admin only
+  // Asset type — set by admin only. NFA = Hypertek-only, NFC = licensed player/Hypertek, NFT = player no license
+  assetType: { type: String, enum: ["NFA", "NFC", "NFT"], default: "NFT" },
+  // Legacy boolean — kept for backwards compat, derived from assetType
   isNFA: { type: Boolean, default: false },
   nfaFrame: { type: String, default: null },
-  // Per-item buyback tracking (NFA only)
+  // Per-item buyback tracking (NFA/NFC)
   minimumBuybackUSD:  { type: Number, default: 0 },
   reservePriceUSD:    { type: Number, default: 0 },
   buybackPending:     { type: Boolean, default: false },
@@ -121,11 +123,13 @@ const nftSystemSchema = new mongoose.Schema(
     },
     salesHistory: [saleSchema],
 
-    // NFA designation — applied by admin, any item in any category can be an NFA
+    // Asset type — set by admin only
+    assetType: { type: String, enum: ["NFA", "NFC", "NFT"], default: "NFT" },
+    // Legacy boolean — kept for backwards compat, derived from assetType
     isNFA: { type: Boolean, default: false },
     nfaFrame: { type: String, default: null }, // frame style key for visual distinction
 
-    // NFA buyback fields
+    // Buyback fields (NFA and NFC)
     reservePriceUSD: { type: Number, default: 0 },
     minimumBuybackUSD: { type: Number, default: 0 },
     buybackPending: { type: Boolean, default: false },

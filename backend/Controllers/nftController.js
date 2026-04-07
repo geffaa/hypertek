@@ -44,8 +44,9 @@ async function saveImagePermanently(filePath, filename) {
  * Create Parent Collection (Characters, Land, etc.)
  */
 const VALID_CATEGORIES = [
-  "skins", "military badges and collectables", "specialists", "weapons",
+  "skins", "military badges", "specialists", "weapons",
   "body armour", "spaceships", "racing vehicles", "artwork", "land and bases",
+  "general",
 ];
 
 export async function createParentCollection(req, res) {
@@ -106,6 +107,100 @@ export async function createParentCollection(req, res) {
     });
   } catch (err) {
     console.error("❌ CREATE PARENT COLLECTION ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
+}
+
+/**
+ * Create NFT/NFC item directly — auto-finds or creates parent collection per user+category.
+ * This is the single-step user create flow (no separate "create collection" step needed).
+ */
+export async function createItemDirect(req, res) {
+  try {
+    const { name, description, priceETH, category, assetType, owner } = req.body;
+
+    const userRole = req.user?.Role || req.user?.role || "";
+    const callerIsAdmin = userRole.toLowerCase() === "admin";
+    const userId = req.user?._id || req.user?.id || null;
+
+    if (!name?.trim()) return res.status(400).json({ error: "Item name is required" });
+    if (!owner)        return res.status(400).json({ error: "Wallet address is required" });
+
+    const normalizedCategory = (category || "general").toLowerCase().trim();
+    if (!VALID_CATEGORIES.includes(normalizedCategory)) {
+      return res.status(400).json({ error: `Invalid category "${category}". Must be one of: ${VALID_CATEGORIES.join(", ")}` });
+    }
+
+    const resolvedType = assetType || "NFT";
+    if (!callerIsAdmin && (resolvedType === "NFA" || resolvedType === "NFC")) {
+      return res.status(403).json({ error: "Only admins can create NFA or NFC items." });
+    }
+
+    let image = "";
+    if (req.file) {
+      image = await saveImagePermanently(req.file.path, req.file.filename);
+    } else if (req.body.image) {
+      image = req.body.image;
+    }
+
+    // Find or auto-create a parent collection for this user+category
+    let parent = await NFTSystem.findOne({
+      userId,
+      category: normalizedCategory,
+      isParentCollection: true,
+    });
+
+    if (!parent) {
+      // Deterministic symbol: catCode (up to 4 chars) + last 4 chars of userId/owner
+      // Same inputs always produce the same symbol — no random collision
+      const catCode  = normalizedCategory.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase();
+      const idSeed   = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
+      parent = await NFTSystem.create({
+        userId,
+        collection: {
+          name: normalizedCategory,
+          symbol: `${catCode}${idSeed}`,
+          Type: "ERC721",
+          chain: "Base",
+          image: "",
+          owner: owner.toLowerCase(),
+          creator: callerIsAdmin ? "admin" : "user",
+          salesCount: 0,
+        },
+        category: normalizedCategory,
+        isParentCollection: true,
+        subCollections: [],
+        status: "active",
+      });
+    }
+
+    const newItem = {
+      name: name.trim(),
+      description: description?.trim() || "",
+      owner: owner.toLowerCase(),
+      image,
+      priceETH: priceETH ? parseFloat(priceETH) : 0,
+      assetType: resolvedType,
+      isNFA: resolvedType === "NFA",
+      isFirstSale: true,
+      listed: false,
+      createdAt: new Date(),
+    };
+
+    parent.subCollections.push(newItem);
+    parent.markModified("subCollections");
+    await parent.save();
+
+    const savedItem = parent.subCollections[parent.subCollections.length - 1];
+
+    return res.json({
+      success: true,
+      message: `"${name}" saved to ${normalizedCategory} storage`,
+      item: savedItem,
+      parentId: parent._id,
+    });
+  } catch (err) {
+    console.error("❌ CREATE ITEM DIRECT ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -181,7 +276,15 @@ export async function getParentCollections(req, res) {
     let query = { isParentCollection: true, status: "active" };
 
     if (category) {
-      query.category = category.toLowerCase();
+      // Accept canonical names AND their legacy DB aliases
+      const CAT_ALIASES = {
+        "military badges":  ["military badges", "military badges and collectables"],
+        "racing vehicles":  ["racing vehicles", "vehicles"],
+        "land and bases":   ["land and bases", "land/bases"],
+      };
+      const normalized = category.toLowerCase().trim();
+      const searchValues = CAT_ALIASES[normalized] || [normalized];
+      query.category = searchValues.length > 1 ? { $in: searchValues } : searchValues[0];
     }
 
     if (owner) {
@@ -239,7 +342,7 @@ export async function updateSubCollection(req, res) {
     const { parentId, subCollectionId } = req.params;
     const {
       name, symbol, description, priceETH, listed,
-      isNFA, nfaFrame, minimumBuybackUSD, royaltyWallet,
+      assetType, isNFA, nfaFrame, minimumBuybackUSD, reservePriceUSD, royaltyWallet,
     } = req.body;
 
     const parent = await NFTSystem.findById(parentId);
@@ -252,16 +355,65 @@ export async function updateSubCollection(req, res) {
       return res.status(404).json({ error: "Sub-collection not found" });
     }
 
+    // Determine if caller is admin
+    const callerRole = req.user?.Role || req.user?.role || "";
+    const callerIsAdmin = callerRole.toLowerCase() === "admin";
+
     if (name)                        subCollection.name        = name;
     if (symbol)                      subCollection.symbol      = symbol;
     if (description !== undefined)   subCollection.description = description;
-    if (priceETH !== undefined)      subCollection.priceETH    = priceETH;
+    if (priceETH !== undefined)      subCollection.priceETH    = parseFloat(priceETH);
     if (listed !== undefined)        subCollection.listed      = listed;
-    // NFA fields — admin-only
-    if (isNFA !== undefined)         subCollection.isNFA       = isNFA === "true" || isNFA === true;
-    if (nfaFrame !== undefined)      subCollection.nfaFrame    = nfaFrame || null;
-    if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "")
-      subCollection.minimumBuybackUSD = parseFloat(minimumBuybackUSD);
+
+    // Asset type — admin-only field.
+    // Non-admins cannot set assetType to NFA or NFC (NFA=Hypertek only, NFC=requires license gating by admin).
+    if (assetType !== undefined && ["NFA", "NFC", "NFT"].includes(assetType)) {
+      if (!callerIsAdmin && (assetType === "NFA" || assetType === "NFC")) {
+        return res.status(403).json({
+          error: "Only admins can designate items as NFA or NFC.",
+        });
+      }
+      subCollection.assetType = assetType;
+      subCollection.isNFA     = assetType === "NFA";
+    } else if (isNFA !== undefined) {
+      // Legacy fallback — block non-admins from setting isNFA=true
+      const nfaBool = isNFA === "true" || isNFA === true;
+      if (!callerIsAdmin && nfaBool) {
+        return res.status(403).json({
+          error: "Only admins can designate items as NFA.",
+        });
+      }
+      subCollection.isNFA     = nfaBool;
+      subCollection.assetType = nfaBool ? "NFA" : (subCollection.assetType || "NFT");
+    }
+
+    // Admin-only fields: nfaFrame, minimumBuybackUSD, reservePriceUSD
+    if (!callerIsAdmin && (nfaFrame !== undefined || minimumBuybackUSD !== undefined || reservePriceUSD !== undefined)) {
+      return res.status(403).json({
+        error: "Only admins can set NFA frame, minimum buyback, or reserve price.",
+      });
+    }
+
+    if (nfaFrame !== undefined) subCollection.nfaFrame = nfaFrame || null;
+
+    // Min BB — enforce max 35% of listing price
+    if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "") {
+      const minBB       = parseFloat(minimumBuybackUSD);
+      const listPrice   = parseFloat(priceETH ?? subCollection.priceETH ?? 0);
+      const maxAllowed  = parseFloat((listPrice * 0.35).toFixed(2));
+      if (listPrice > 0 && minBB > maxAllowed) {
+        return res.status(400).json({
+          error: `Minimum buyback ($${minBB}) exceeds the 35% cap of listing price ($${listPrice}). Maximum allowed: $${maxAllowed}.`,
+          maxAllowed,
+        });
+      }
+      subCollection.minimumBuybackUSD = minBB;
+    }
+
+    // Reserve price
+    if (reservePriceUSD !== undefined && reservePriceUSD !== "")
+      subCollection.reservePriceUSD = parseFloat(reservePriceUSD);
+
     // Royalty wallet — stored on parent collection for this sub
     if (royaltyWallet !== undefined && royaltyWallet !== "")
       parent.collection.royaltyWallet = royaltyWallet;

@@ -47,7 +47,6 @@ import Land from "./pages/Land";
 import CategoryMarketplace from "./pages/CategoryMarketplace";
 import PersonalActivity from "./pages/PersonalActivity";
 import NoPersonalActivity from "./pages/NoPersonalActivity";
-import CreateEarning from "./pages/CreateEarning"
 
 // NFA Pages
 import BuyNfa from "./pages/BuyNfa";
@@ -87,8 +86,6 @@ import Nft101Article from "./pages/Nft101Article";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 
-import CreateCollections from "./pages/DashboardPages/CreateNfa";
-import NFAdetails from "./pages/DashboardPages/NFAdetails";
 import NFTs from "./pages/DashboardPages/Nfts";
 import EditColelctions from "./assets/EditCollection";
 import EditProfile from "./pages/DashboardPages/EditUser";
@@ -246,9 +243,9 @@ function AppWrapper() {
               <Route index element={<DashboardHome />} />
 
               {/* Dashboard pages */}
-              <Route path="create-nfa" element={<CreateCollections />} />
-              <Route path="create-earning" element={< CreateEarning />} />
-              <Route path="nfa-details" element={<NFAdetails />} />
+              <Route path="create-nfa" element={<Navigate to="/dashboard/add-user-collection" replace />} />
+              <Route path="create-earning" element={<Navigate to="/dashboard/add-user-collection" replace />} />
+              <Route path="nfa-details" element={<Navigate to="/dashboard/add-user-collection" replace />} />
               <Route path="edit-nfa" element={<EditNfa />} />
               <Route path="collections" element={<NFTs />} />
               <Route

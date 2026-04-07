@@ -6,21 +6,31 @@ import popularFallback from "../../assets/images/popular/popolar.png";
 import { getImageUrl } from "../../Config";
 
 // ── Item card ─────────────────────────────────────────────────────────────────
+// Asset type badge config
+const ASSET_BADGE = {
+  NFA: { label: "NFA", bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", ring: "#7C3AED" },
+  NFC: { label: "NFC", bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   ring: "#002AA8" },
+  NFT: null, // no badge for plain NFT
+};
+
 function LineCard({ item }) {
-  const isDummy = item.isDummy === true;
-  const navigate = useNavigate();
-  const name     = item.name || "Unnamed";
-  const price    = item.priceETH ?? item.price ?? null;
-  const imgSrc   = item.image ? getImageUrl(item.image) : null;
-  const isNFA    = item.isNFA || item.type === "NFA";
-  const category = (item.parentCategory || "").toLowerCase().trim();
+  const isDummy   = item.isDummy === true;
+  const navigate  = useNavigate();
+  const name      = item.name || "Unnamed";
+  const price     = item.priceETH ?? item.price ?? null;
+  const imgSrc    = item.image ? getImageUrl(item.image) : null;
+  const category  = (item.parentCategory || "").toLowerCase().trim();
+
+  // Resolve assetType — use new field, fall back to legacy isNFA boolean
+  const assetType = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+  const badge     = ASSET_BADGE[assetType] || null;
 
   return (
     <div
       className="flex-shrink-0 w-[150px] sm:w-[170px] flex flex-col rounded-xl overflow-hidden cursor-pointer group"
       style={{
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
-        border: isNFA ? "1px solid rgba(0,80,255,0.5)" : "1px solid rgba(255,255,255,0.09)",
+        border: badge ? `1px solid ${badge.border}` : "1px solid rgba(255,255,255,0.09)",
       }}
       onClick={() => {
         if (isDummy) {
@@ -40,14 +50,14 @@ function LineCard({ item }) {
           className="w-full h-[120px] sm:h-[135px]"
           imgClassName="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {isNFA && (
+        {badge && (
           <>
-            <div className="absolute inset-0 ring-2 ring-inset ring-[#002AA8] pointer-events-none" />
+            <div className="absolute inset-0 ring-2 ring-inset pointer-events-none" style={{ borderColor: badge.ring }} />
             <div
               className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
-              style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}
+              style={{ background: badge.bg, border: `1px solid ${badge.border}` }}
             >
-              NFA
+              {badge.label}
             </div>
           </>
         )}

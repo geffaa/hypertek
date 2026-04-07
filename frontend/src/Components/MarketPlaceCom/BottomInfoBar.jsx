@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, ChevronDown, X } from "lucide-react";
 
 const QUICK_FACTS = [
-  { icon: "🧬", label: "NFA", desc: "Buyback-guaranteed blockchain asset. Value grows with each sale." },
-  { icon: "🪙", label: "NFC", desc: "Tradeable collectible with game utility. No buyback guarantee." },
-  { icon: "💸", label: "Commission", desc: "20% platform fee on all sales. Seller receives 80%." },
-  { icon: "📈", label: "Buyback Growth", desc: "+5% of sale price added to NFA minimum value after each sale above reserve." },
-  { icon: "🎮", label: "Game Utility", desc: "All assets unlock in-game content within the HyperTek universe." },
+  { icon: "🧬", label: "NFA", desc: "Hypertek-only asset. Highest in-game bonuses. Guaranteed minimum buyback value that grows with every sale." },
+  { icon: "🪙", label: "NFC", desc: "Created by Hypertek or licensed players. In-game bonuses included. Minimum buyback guaranteed." },
+  { icon: "🎴", label: "NFT", desc: "Player-created collectible. No in-game bonuses. No buyback guarantee. Tradeable on the marketplace." },
+  { icon: "💸", label: "Commission", desc: "20% platform fee on all sales. Seller receives 80%. Artist royalty 4% on resales." },
+  { icon: "📈", label: "Buyback Growth", desc: "+5% of each resale price is added to the asset's minimum buyback value. It only ever grows." },
   { icon: "🔐", label: "Custodial Wallet", desc: "HyperTek auto-creates a crypto wallet for you on signup." },
 ];
 

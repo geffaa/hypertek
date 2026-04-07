@@ -9,6 +9,13 @@ const fadeUp = {
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.06, ease: "easeOut" } }),
 };
 
+// Normalise legacy/variant DB category values → canonical key
+const CAT_ALIAS = {
+  "military badges and collectables": "military badges",
+  "vehicles":                         "racing vehicles",
+  "land/bases":                       "land and bases",
+};
+
 // Per Don's brief — order matches the General section category list
 const CATEGORIES = [
   {
@@ -32,7 +39,7 @@ const CATEGORIES = [
     ),
   },
   {
-    key: "military badges and collectables", label: "Military Badges",
+    key: "military badges", label: "Military Badges",
     icon: (
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         {/* Outer hex */}
@@ -183,6 +190,21 @@ const CATEGORIES = [
       </svg>
     ),
   },
+  {
+    key: "general", label: "General",
+    icon: (
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Box body */}
+        <rect x="9" y="18" width="26" height="18" rx="2" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"/>
+        {/* Box lid */}
+        <path d="M7 18 L22 10 L37 18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinejoin="round"/>
+        {/* Lid centre line */}
+        <line x1="22" y1="10" x2="22" y2="18" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
+        {/* Front clasp */}
+        <rect x="19" y="24" width="6" height="4" rx="1" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+      </svg>
+    ),
+  },
 ];
 
 // ── Fallback sample data for when backend has no items ────────────────────────
@@ -194,12 +216,12 @@ const FALLBACK_ITEMS = {
     { _id: "fs-4", name: "Urban Assault Skin", priceETH: 55, description: "City warfare skin with tactical grey patterning.", parentCategory: "skins" },
     { _id: "fs-5", name: "Jungle Predator Skin", priceETH: 70, description: "Dense jungle camouflage skin for rainforest missions.", parentCategory: "skins" },
   ],
-  "military badges and collectables": [
-    { _id: "fb-1", name: "Commander's Cross", priceETH: 300, description: "Rare commander's cross awarded for battlefield leadership.", parentCategory: "military badges and collectables" },
-    { _id: "fb-2", name: "Purple Valor Medal", priceETH: 250, description: "Medal of valor for exceptional bravery under fire.", parentCategory: "military badges and collectables" },
-    { _id: "fb-3", name: "HyperTek Coin 2025", priceETH: 180, description: "Limited edition collectible coin for season 2025.", parentCategory: "military badges and collectables" },
-    { _id: "fb-4", name: "Iron Shield Badge", priceETH: 140, description: "Badge denoting mastery of defensive tactics.", parentCategory: "military badges and collectables" },
-    { _id: "fb-5", name: "Star of Honour", priceETH: 500, description: "The highest honour awarded in the HyperTek universe.", parentCategory: "military badges and collectables" },
+  "military badges": [
+    { _id: "fb-1", name: "Commander's Cross", priceETH: 300, description: "Rare commander's cross awarded for battlefield leadership.", parentCategory: "military badges" },
+    { _id: "fb-2", name: "Purple Valor Medal", priceETH: 250, description: "Medal of valor for exceptional bravery under fire.", parentCategory: "military badges" },
+    { _id: "fb-3", name: "HyperTek Coin 2025", priceETH: 180, description: "Limited edition collectible coin for season 2025.", parentCategory: "military badges" },
+    { _id: "fb-4", name: "Iron Shield Badge", priceETH: 140, description: "Badge denoting mastery of defensive tactics.", parentCategory: "military badges" },
+    { _id: "fb-5", name: "Star of Honour", priceETH: 500, description: "The highest honour awarded in the HyperTek universe.", parentCategory: "military badges" },
   ],
   specialists: [
     { _id: "fsp-1", name: "Ghost Recon Operator", priceETH: 400, description: "Elite recon specialist with ghost cloak ability.", parentCategory: "specialists" },
@@ -250,6 +272,13 @@ const FALLBACK_ITEMS = {
     { _id: "fl-4", name: "Mountain Fortress", priceETH: 4200, description: "Defensible mountain stronghold with 360-degree visibility.", parentCategory: "land and bases" },
     { _id: "fl-5", name: "Ocean Platform Delta", priceETH: 2800, description: "Off-shore naval platform for maritime operations.", parentCategory: "land and bases" },
   ],
+  "general": [
+    { _id: "fg-1", name: "HyperTek Starter Pack", priceETH: 50, description: "A bundle of miscellaneous items to kick-start your journey.", parentCategory: "general" },
+    { _id: "fg-2", name: "Collector's Badge", priceETH: 30, description: "Rare collectible badge for dedicated community members.", parentCategory: "general" },
+    { _id: "fg-3", name: "Mystery Crate", priceETH: 75, description: "Contains a random rare item from the HyperTek universe.", parentCategory: "general" },
+    { _id: "fg-4", name: "Season Pass Token", priceETH: 120, description: "Grants access to exclusive season events and rewards.", parentCategory: "general" },
+    { _id: "fg-5", name: "Community Tribute", priceETH: 25, description: "A commemorative token for early HyperTek community supporters.", parentCategory: "general" },
+  ],
 };
 
 // ── Gap section between lines (placeholder for announcements / dynamic content)
@@ -264,9 +293,10 @@ function Gap({ children }) {
 }
 
 export default function GeneralTab() {
-  const [catMap, setCatMap]   = useState({});   // { categoryKey: items[] }
-  const [loading, setLoading] = useState(true);
+  const [catMap, setCatMap]       = useState({});   // { categoryKey: items[] }
+  const [loading, setLoading]     = useState(true);
   const [usingFallback, setUsingFallback] = useState(false);
+  const [typeFilter, setTypeFilter] = useState("ALL"); // ALL | NFA | NFC | NFT
 
   useEffect(() => {
     const load = async () => {
@@ -283,7 +313,8 @@ export default function GeneralTab() {
                 `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`
               );
               if (sub.data.success && sub.data.subCollections?.length) {
-                const catKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
+                const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
+                const catKey = CAT_ALIAS[rawKey] || rawKey;
                 if (!map[catKey]) map[catKey] = [];
                 map[catKey].push(
                   ...sub.data.subCollections.map((s) => ({
@@ -321,7 +352,18 @@ export default function GeneralTab() {
     load();
   }, []);
 
-  const visibleCategories = CATEGORIES.filter((c) => catMap[c.key]?.length > 0);
+  // Apply assetType filter across all categories
+  const filteredCatMap = typeFilter === "ALL" ? catMap : Object.fromEntries(
+    Object.entries(catMap).map(([key, items]) => [
+      key,
+      items.filter(item => {
+        const t = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+        return t === typeFilter;
+      }),
+    ])
+  );
+
+  const visibleCategories = CATEGORIES.filter((c) => filteredCatMap[c.key]?.length > 0);
   const hasAnyItems = visibleCategories.length > 0;
 
   return (
@@ -334,8 +376,40 @@ export default function GeneralTab() {
         </div>
         <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-1">General</h1>
         <p className="text-white/50 text-sm max-w-xl leading-relaxed">
-          Browse NFAs and NFCs available for immediate purchase — skins, weapons, specialists, spaceships, and more.
+          Browse NFAs, NFCs, and NFTs available for immediate purchase — skins, weapons, specialists, spaceships, and more.
         </p>
+      </motion.div>
+
+      {/* Asset Type Filter */}
+      <motion.div className="flex items-center gap-2 mb-8 flex-wrap" initial="hidden" animate="visible" variants={fadeUp} custom={1}>
+        {[
+          { value: "ALL", label: "All" },
+          { value: "NFA", label: "NFA" },
+          { value: "NFC", label: "NFC" },
+          { value: "NFT", label: "NFT" },
+        ].map(({ value, label }) => {
+          const active = typeFilter === value;
+          const colors = {
+            ALL: { active: "#fff",     inactive: "rgba(255,255,255,0.15)", text: active ? "#000" : "rgba(255,255,255,0.5)" },
+            NFA: { active: "#7C3AED",  inactive: "rgba(124,58,237,0.15)", text: active ? "#fff" : "#c4b5fd" },
+            NFC: { active: "#002AA8",  inactive: "rgba(0,42,168,0.2)",    text: active ? "#fff" : "#93c5fd" },
+            NFT: { active: "rgba(255,255,255,0.12)", inactive: "rgba(255,255,255,0.05)", text: active ? "#fff" : "rgba(255,255,255,0.4)" },
+          }[value];
+          return (
+            <button
+              key={value}
+              onClick={() => setTypeFilter(value)}
+              className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
+              style={{
+                background: active ? colors.active : colors.inactive,
+                border: `1px solid ${active ? colors.active : "rgba(255,255,255,0.1)"}`,
+                color: colors.text,
+              }}
+            >
+              {label}
+            </button>
+          );
+        })}
       </motion.div>
 
       {/* Fallback notice */}
@@ -375,7 +449,7 @@ export default function GeneralTab() {
       ) : (
         <div className="flex flex-col">
           {CATEGORIES.map((cat, i) => {
-            const items = catMap[cat.key];
+            const items = filteredCatMap[cat.key];
             if (!items?.length) return null;
             return (
               <div key={cat.key}>

@@ -154,46 +154,81 @@ export async function finalizeNFAPurchase({
 
   const cleanPrice = parseFloat(String(priceETH || subCollection.priceETH || 0));
 
-  // Enforce NFA reserve price: block purchases below minimumBuybackUSD
-  const isNFA = subCollection.isNFA === true;
-  if (isNFA && subCollection.minimumBuybackUSD > 0 && cleanPrice < subCollection.minimumBuybackUSD) {
+  // Resolve assetType — use new field, fall back to legacy isNFA boolean
+  const assetType = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
+  const isNFA = assetType === "NFA";
+  const isHypertekCreator = parent.collection?.creator === "admin";
+  const isFirstSale = subCollection.isFirstSale === true;
+
+  // Hypertek first sale = admin created AND this is the first sale
+  // Player first sale   = user created AND this is the first sale
+  const isHypertekFirstSale = isFirstSale && isHypertekCreator;
+  const isPlayerFirstSale   = isFirstSale && !isHypertekCreator;
+
+  // Enforce reserve price: block purchases below minimumBuybackUSD for NFA and NFC
+  if ((isNFA || assetType === "NFC") && subCollection.minimumBuybackUSD > 0 && cleanPrice < subCollection.minimumBuybackUSD) {
     throw Object.assign(
-      new Error(`Price $${cleanPrice} is below this NFA's minimum buyback reserve of $${subCollection.minimumBuybackUSD}. The item cannot be sold below its guaranteed value.`),
+      new Error(`Price $${cleanPrice} is below this ${assetType}'s minimum buyback of $${subCollection.minimumBuybackUSD}. Cannot sell below guaranteed value.`),
       { code: "BELOW_RESERVE", minimumBuybackUSD: subCollection.minimumBuybackUSD }
     );
   }
 
-  // Distribution — NFA: 4% artist + 5% buyback + 11% company | NFC: 4% creator + 16% company
-  // No special first-sale case — same split applies to all sales per Don's brief.
-  // On first sale, HyperTek is the seller and receives the 80% seller proceeds.
+  /**
+   * Commission distribution per Don's rules:
+   *
+   * NFA — Hypertek first sale:   bank preset minBB (from seller portion) | 4% artist | 16% Hypertek | rest to Hypertek as seller
+   * NFA — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
+   *
+   * NFC — Hypertek first sale:   bank preset minBB (from seller portion) | 4% artist | 16% Hypertek | rest to Hypertek as seller
+   * NFC — player first sale:     80% creator | 5% banked as initial minBB | 15% Hypertek
+   * NFC — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
+   *
+   * NFT — player first sale:     80% creator | 5% banked as initial minBB | 15% Hypertek
+   * NFT — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
+   */
 
   let royaltyPaid    = 0;
   let platformFee    = 0;
-  let buybackAmount  = 0;
+  let buybackAmount  = 0;  // amount added to minBB or banked
   let companyAmount  = 0;
   let sellerReceived = 0;
 
-  if (isNFA) {
-    // NFA: seller 80% | artist 4% | buyback 5% | company 11%
-    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
-    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6));
-    companyAmount  = parseFloat((cleanPrice * 0.11).toFixed(6));
-    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
-  } else {
-    // NFC: seller 80% | creator 4% | company 16%
-    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+  if (isHypertekFirstSale) {
+    // Hypertek is both seller and platform — bank preset minBB from seller portion
+    // Commission: 4% artist + 16% Hypertek = 20%
     royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
     companyAmount  = parseFloat((cleanPrice * 0.16).toFixed(6));
     platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    // Hypertek as seller gets the remaining 80%; minBB is already preset/banked by admin
+    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+    buybackAmount  = 0; // preset minBB — no auto-increment on first sale
+    console.log(`💼 [Commission] Hypertek first sale (${assetType}): 4% artist + 16% company. MinBB preset.`);
+
+  } else if (isPlayerFirstSale) {
+    // Player first sale: 80% to creator, 5% banked as initial minBB, 15% Hypertek
+    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+    royaltyPaid    = 0; // Creator IS the seller — no separate artist fee
+    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6)); // initial minBB seed
+    companyAmount  = parseFloat((cleanPrice * 0.15).toFixed(6));
+    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    console.log(`🎮 [Commission] Player first sale (${assetType}): 80% creator + 5% minBB + 15% company.`);
+
+  } else {
+    // Owner resell (2nd+ sale) — applies to NFA, NFC, NFT equally
+    sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
+    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
+    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6)); // added to minBB
+    companyAmount  = parseFloat((cleanPrice * 0.11).toFixed(6));
+    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    console.log(`🔄 [Commission] Owner resell (${assetType}): 80% seller + 4% artist + 5% minBB + 11% company.`);
   }
 
-  // NFA buyback auto-increment — applies to ALL NFA sales
-  if (isNFA && cleanPrice > 0) {
+  // MinBB auto-increment — grows on resales and player first sales (not on Hypertek first sale)
+  if (buybackAmount > 0 && cleanPrice > 0) {
     subCollection.minimumBuybackUSD = parseFloat(
       ((subCollection.minimumBuybackUSD || 0) + buybackAmount).toFixed(2)
     );
-    console.log(`🏦 [Buyback] NFA minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
+    console.log(`🏦 [Buyback] ${assetType} minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
   }
 
   const saleRecord = {
@@ -235,7 +270,7 @@ export async function finalizeNFAPurchase({
     seller:   seller.toLowerCase(),
     price:    cleanPrice,
     time:     new Date(),
-    itemType: "NFA",
+    itemType: assetType,
     itemId:   parent._id,
   }).catch(err => console.warn("⚠️ [Activity] create error:", err.message));
 
@@ -250,8 +285,9 @@ export async function finalizeNFAPurchase({
     }).catch(err => console.warn("⚠️ [RoyaltyService] royalty dispatch error:", err.message));
   }
 
-  // Dispatch buyback fund (5% of NFA sales) → BUYBACK_WALLET_ADDRESS — async, non-blocking
-  if (isNFA && buybackAmount > 0) {
+  // Dispatch buyback fund → BUYBACK_WALLET_ADDRESS — async, non-blocking
+  // Applies to: NFA/NFC/NFT resell (5%) and player first sale (10%)
+  if (buybackAmount > 0) {
     const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
     if (buybackWallet) {
       dispatchRoyalty({

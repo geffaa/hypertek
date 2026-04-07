@@ -131,6 +131,7 @@ function Buy1() {
 
   const collection = subCollection || item;
   if (!collection) return null;
+  const assetType = collection.assetType || (collection.isNFA ? "NFA" : "NFT");
   const { token, user } = useSelector((state) => state.auth);
 
   // RainbowKit hooks
@@ -472,7 +473,7 @@ function Buy1() {
       return;
     }
 
-    const toastId = toast.loading("🔧 Preparing to list NFA...");
+    const toastId = toast.loading(`🔧 Preparing to list ${assetType}...`);
     setLoading(true);
 
     try {
@@ -1162,7 +1163,7 @@ function Buy1() {
 
     if (isOwner && (listingData?.active || collection.listed)) {
       return {
-        text: "✅ Your NFA (Listed)",
+        text: `✅ Your ${assetType} (Listed)`,
         disabled: true,
       };
     }
@@ -1281,14 +1282,16 @@ function Buy1() {
 
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
-        <Link
-          to={isOwner ? "/Profile" : "/market-place"}
-          className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
-        >
-          {isOwner ? "My Profile" : "Marketplace"}
-        </Link>
+        {!isOwner && (
+          <Link
+            to="/market-place"
+            className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
+          >
+            Marketplace
+          </Link>
+        )}
         <span className="pb-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px">
-          {isOwner ? "List NFA" : "Buy NFA"}
+          {isOwner ? `${assetType} Detail` : `Buy ${assetType}`}
         </span>
         <button
           onClick={() => setShowOffers(true)}
@@ -1325,6 +1328,20 @@ function Buy1() {
 
           {/* Badges */}
           <div className="flex items-center gap-2 flex-wrap">
+            {/* Asset type badge */}
+            {(() => {
+              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+              const cfg = {
+                NFA: { label: "NFA", bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30" },
+                NFC: { label: "NFC", bg: "bg-blue-500/20",   text: "text-blue-400",   border: "border-blue-500/30"   },
+                NFT: { label: "NFT", bg: "bg-white/10",      text: "text-white/50",   border: "border-white/10"       },
+              }[aType] || null;
+              return cfg ? (
+                <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${cfg.bg} ${cfg.text} border ${cfg.border}`}>
+                  {cfg.label}
+                </span>
+              ) : null;
+            })()}
             {listingData?.active && (
               <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
                 Listed
@@ -1342,7 +1359,7 @@ function Buy1() {
             <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
             <div className="flex items-center gap-3 mt-1.5 flex-wrap">
               <span className="text-white/40 text-sm">
-                {collection?.symbol || "NFA"}
+                {collection?.symbol || assetType}
                 {collection?.tokenId ? ` · Token #${collection.tokenId}` : " · Not minted yet"}
               </span>
               {(onChainOwner || collection.owner) && (
@@ -1367,7 +1384,7 @@ function Buy1() {
             <p className="text-white/50 text-sm leading-relaxed">
               {collection?.description && collection.description.trim().length > 0
                 ? collection.description
-                : "No description provided for this NFA."}
+                : "No description provided for this item."}
             </p>
           </div>
 
@@ -1396,6 +1413,72 @@ function Buy1() {
                 </span>
               )}
             </div>
+
+            {/* Min Buyback + Reserve Price (NFA / NFC only) */}
+            {(() => {
+              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+              const minBB = collection.minimumBuybackUSD;
+              const reserve = collection.reservePriceUSD;
+              if ((aType === "NFA" || aType === "NFC") && (minBB > 0 || reserve > 0)) {
+                return (
+                  <div className="rounded-xl p-3 flex flex-col gap-1.5"
+                    style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                    {minBB > 0 && (
+                      <div className="flex justify-between text-xs">
+                        <span className="text-white/50">Min Buyback Guarantee</span>
+                        <span className="text-green-400 font-semibold">${minBB} USD</span>
+                      </div>
+                    )}
+                    {reserve > 0 && (
+                      <div className="flex justify-between text-xs">
+                        <span className="text-white/50">Reserve Price</span>
+                        <span className="text-blue-300 font-semibold">${reserve} USD</span>
+                      </div>
+                    )}
+                    <p className="text-[10px] text-white/30 mt-0.5">
+                      This asset cannot be sold below its minimum buyback value.
+                    </p>
+                  </div>
+                );
+              }
+              return null;
+            })()}
+
+            {/* Commission Breakdown */}
+            {!isOwner && (() => {
+              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+              const isFirstSale = collection.isFirstSale !== false;
+              const isHypertekItem = true; // Items shown in marketplace are listed by platform/owners
+              let rows = [];
+              if (isFirstSale) {
+                rows = [
+                  { label: "You receive", value: "80%", color: "text-green-400" },
+                  { label: "Artist royalty", value: "4%", color: "text-white/50" },
+                  { label: "Platform fee", value: "16%", color: "text-white/40" },
+                ];
+              } else {
+                rows = [
+                  { label: "Seller receives", value: "80%", color: "text-green-400" },
+                  { label: "Artist royalty", value: "4%", color: "text-white/50" },
+                  { label: "Min buyback +", value: "5%", color: "text-blue-400" },
+                  { label: "Platform fee", value: "11%", color: "text-white/40" },
+                ];
+              }
+              return (
+                <div className="rounded-xl p-3"
+                  style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Sale Distribution</p>
+                  <div className="flex flex-col gap-1">
+                    {rows.map(r => (
+                      <div key={r.label} className="flex justify-between text-xs">
+                        <span className="text-white/40">{r.label}</span>
+                        <span className={`font-semibold ${r.color}`}>{r.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Embedded wallet display */}
             {isEmailWalletConnected && emailWalletAddress && (
@@ -1524,7 +1607,7 @@ function Buy1() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-lg font-bold text-white">{isOwner ? "List NFA" : "Buy NFA"}</h1>
+              <h1 className="text-lg font-bold text-white">{isOwner ? `${assetType} Detail` : `Buy ${assetType}`}</h1>
               <button onClick={() => setIsSecondOpen(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
             </div>
 
@@ -1596,16 +1679,14 @@ function Buy1() {
             className="bg-[#0f0f2a] border border-white/10 rounded-2xl w-full max-w-2xl p-6 text-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">{collection?.name}</h2>
+            <div className="flex justify-between items-center pb-4 mb-6 border-b border-white/10">
+              <div>
+                <h2 className="text-base font-semibold text-white">{collection?.name}</h2>
+                <p className="text-white/40 text-xs mt-0.5">
+                  {offers.length === 0 ? "No offers yet" : `${offers.length} offer${offers.length > 1 ? "s" : ""}`}
+                </p>
+              </div>
               <button onClick={() => setShowOffers(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
-            </div>
-
-            <div className="flex gap-6 border-b border-white/10 pb-3 mb-6">
-              <span className="text-white/40 text-sm">Overview</span>
-              <span className="text-white text-sm font-semibold border-b-2 border-blue-500 pb-3 -mb-3">
-                Offers <span className="text-white/40 ml-1">{offers.length}</span>
-              </span>
             </div>
 
             {offers.length === 0 ? (

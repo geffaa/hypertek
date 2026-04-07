@@ -208,8 +208,11 @@ function CollectionDetails() {
                 <option value="" className="bg-gray-700 text-white">
                   Select Type
                 </option>
-                <option value="NFA" className="bg-gray-700 text-white">
-                  NFA
+                <option value="NFT" className="bg-gray-700 text-white">
+                  NFT
+                </option>
+                <option value="NFC" className="bg-gray-700 text-white">
+                  NFC
                 </option>
                 <option value="Land" className="bg-gray-700 text-white">
                   Land

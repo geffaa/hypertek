@@ -174,7 +174,7 @@ function CollectionBasicInfo() {
           <div className="relative z-50 rounded-lg   flex flex-col gap-8">
             <div className="flex flex-col w-[495px] gap-[14px]">
               <h2 className="text-white text-2xl font-semibold">
-                Create your own NFA's
+                Create your own NFT/NFC
               </h2>
               <p className="text-white/70 text-base">
                 Create your own digital universe where every piece you <br />

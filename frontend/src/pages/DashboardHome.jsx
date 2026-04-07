@@ -6,8 +6,8 @@ import { FiPlusSquare, FiLayers, FiTag, FiMessageSquare, FiFileText, FiZap } fro
 const QUICK_LINKS = [
   {
     icon: <FiPlusSquare size={22} />,
-    label: "Create NFA",
-    sub: "Mint a new digital asset",
+    label: "Create NFT/NFC",
+    sub: "Create and store a new item",
     to: "/dashboard/add-user-collection",
     color: "rgba(0,42,168,0.25)",
     border: "rgba(0,42,168,0.4)",
@@ -15,7 +15,7 @@ const QUICK_LINKS = [
   {
     icon: <FiLayers size={22} />,
     label: "My Collections",
-    sub: "Browse your NFAs",
+    sub: "Browse your NFT/NFC collections",
     to: "/dashboard/collections",
     color: "rgba(168,85,247,0.15)",
     border: "rgba(168,85,247,0.35)",
@@ -66,7 +66,7 @@ function DashboardHome() {
           Welcome back{name !== "there" ? `, ${name.split(" ")[0]}` : ""}
         </h1>
         <p className="text-white/40 text-sm mt-1">
-          Manage your NFAs, listings, and offers from here.
+          Manage your NFT/NFC collections, listings, and offers from here.
         </p>
       </div>
 

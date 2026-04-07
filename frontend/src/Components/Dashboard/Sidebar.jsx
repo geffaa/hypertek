@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiX, FiFileText, FiTag, FiUploadCloud, FiZap, FiPlusSquare, FiMessageSquare } from "react-icons/fi";
+import { FiX, FiFileText, FiTag, FiZap, FiPlusSquare, FiMessageSquare } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
@@ -79,7 +79,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
           {/* Menu */}
           <ul className="flex flex-col items-center">
 
-            {/* Create NFA's */}
+            {/* Create NFT/NFC */}
             <Link to="/dashboard/add-user-collection" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center justify-between px-3 mt-4 cursor-pointer rounded-md ${
@@ -94,14 +94,14 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                     <img src={CreateCollection1} alt="" className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
                   <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-                    Create NFA's
+                    Create NFT/NFC
                   </h1>
                 </div>
                 <FiPlusSquare className="text-white/40 w-3 h-3 flex-shrink-0" />
               </li>
             </Link>
 
-            {/* NFA's Collection */}
+            {/* NFT/NFC Collection */}
             <Link to="/dashboard/collections" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center justify-between px-3 mt-3 cursor-pointer rounded-md ${
@@ -113,7 +113,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 <div className="flex items-center">
                   <img src={CollectionImage} alt="" className="w-[22px] h-[22px]" />
                   <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-                    NFA's Collection
+                    My Collections
                   </h1>
                 </div>
               </li>
@@ -157,20 +157,6 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 <FiTag className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
                   My Listings
-                </h1>
-              </li>
-            </Link>
-
-            {/* Upload NFC */}
-            <Link to="/dashboard/upload-nfc" className="w-full max-w-[222px]">
-              <li
-                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "upload-nfc" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
-                style={{ width: "100%", height: "42px" }}
-                onClick={() => handleItemClick("upload-nfc")}
-              >
-                <FiUploadCloud className="text-white w-[20px] h-[20px] flex-shrink-0" />
-                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  Upload NFC
                 </h1>
               </li>
             </Link>

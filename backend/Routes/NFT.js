@@ -1,5 +1,8 @@
 import express from "express";
 import {
+  // Direct item create (single-step user flow)
+  createItemDirect,
+
   // Parent Collection Controllers
   createParentCollection,
   getParentCollections,
@@ -56,6 +59,13 @@ const NFTRouter = express.Router();
 /* =====================================================
    PARENT COLLECTION ROUTES (NO AUTH)
 ===================================================== */
+
+// Single-step: create NFT/NFC item — auto-creates parent collection per user+category
+NFTRouter.post(
+  "/item/create",
+  uploadTemp.single("image"),
+  createItemDirect
+);
 
 NFTRouter.post(
   "/parent-collection/create",

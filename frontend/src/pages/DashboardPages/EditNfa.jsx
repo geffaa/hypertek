@@ -136,7 +136,7 @@ function EditNfa() {
           {/* Right — Form */}
           <div className="relative z-50 rounded-lg p-0 md:p-6 w-full max-w-[495px] mx-auto lg:mx-0 flex flex-col gap-6">
             <div>
-              <h2 className="text-white text-[22px] md:text-2xl font-semibold">Edit NFA Collection</h2>
+              <h2 className="text-white text-[22px] md:text-2xl font-semibold">Edit Collection</h2>
               <p className="text-white/70 text-[16px] leading-relaxed mt-2">
                 Update your collection details below.
               </p>
@@ -150,18 +150,6 @@ function EditNfa() {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 type="text"
                 placeholder="Add Contract Name"
-                className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/40 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
-              />
-            </div>
-
-            {/* Token Symbol */}
-            <div className="flex flex-col gap-2">
-              <label className="text-white text-base">Token Symbol</label>
-              <input
-                type="text"
-                placeholder="e.g. HTK"
-                value={formData.symbol}
-                onChange={(e) => setFormData({ ...formData, symbol: e.target.value })}
                 className="w-full h-12 px-3 rounded-md bg-white/10 border border-gray-600 text-white placeholder-white/40 focus:outline-none focus:border-blue-500 focus:bg-white/15 transition"
               />
             </div>

@@ -88,11 +88,38 @@ function UploadNFC() {
       <div>
         <h1 className="text-white text-2xl font-semibold mb-1">Upload NFC</h1>
         <p className="text-gray-400 text-sm">
-          Upload your NFC into an existing collection. No in-game bonus until a license is assigned (Phase 3).
+          NFC creation requires a player license. Licenses are coming in a future update.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      {/* License Lock Banner */}
+      <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/5 p-6 flex flex-col items-center text-center gap-4">
+        <div className="w-14 h-14 rounded-full bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-3xl">
+          🔒
+        </div>
+        <div>
+          <p className="text-yellow-300 font-semibold text-base">License Required</p>
+          <p className="text-white/50 text-sm mt-1 leading-relaxed max-w-sm">
+            Creating an NFC item requires a player license (per species × weapon type).<br />
+            The license system is coming in a future phase.
+          </p>
+        </div>
+        <div className="flex flex-col gap-1.5 text-xs text-white/30">
+          <span>· $2 per license (1 species × 1 weapon type)</span>
+          <span>· $10 bundle (7 species × 1 weapon type)</span>
+          <span>· Lifetime, non-transferable</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => navigate("/dashboard/collections")}
+          className="mt-2 px-6 h-9 rounded-lg border border-white/15 text-white/50 hover:text-white hover:border-white/30 transition-all text-sm"
+        >
+          ← Back to Collections
+        </button>
+      </div>
+
+      {/* Hidden form — kept for when license system goes live */}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 opacity-30 pointer-events-none select-none" aria-hidden="true">
         {/* Image Upload */}
         <div>
           <label className="block text-white font-medium mb-2">Image</label>

@@ -42,11 +42,15 @@ function EditSubCollection() {
 
   const [priceETH, setPriceETH] = useState("");
 
-  const [isNFA, setIsNFA] = useState(false);
+  const [assetType, setAssetType] = useState("NFT");
 
   const [nfaFrame, setNfaFrame] = useState("");
 
   const [minimumBuybackUSD, setMinimumBuybackUSD] = useState("");
+
+  const [reservePriceUSD, setReservePriceUSD] = useState("");
+
+  const [minBBError, setMinBBError] = useState("");
 
   const [royaltyWallet, setRoyaltyWallet] = useState("");
   const [royaltyPaymentPreference, setRoyaltyPaymentPreference] = useState("crypto");
@@ -70,11 +74,13 @@ function EditSubCollection() {
 
       setPriceETH(existingData.priceETH || existingData.price || "");
 
-      setIsNFA(existingData.isNFA || false);
+      setAssetType(existingData.assetType || (existingData.isNFA ? "NFA" : "NFT"));
 
       setNfaFrame(existingData.nfaFrame || "");
 
       setMinimumBuybackUSD(existingData.minimumBuybackUSD || "");
+
+      setReservePriceUSD(existingData.reservePriceUSD || "");
 
       setRoyaltyWallet(existingData.royaltyWallet || "");
       setRoyaltyPaymentPreference(existingData.royaltyPaymentPreference || "crypto");
@@ -140,6 +146,20 @@ function EditSubCollection() {
 
 
 
+  // Validate min BB against 35% cap of listing price
+  const validateMinBB = (minBB, price) => {
+    const p = parseFloat(price);
+    const m = parseFloat(minBB);
+    if (!p || !m) { setMinBBError(""); return true; }
+    const max = parseFloat((p * 0.35).toFixed(2));
+    if (m > max) {
+      setMinBBError(`Max allowed: $${max} (35% of $${p})`);
+      return false;
+    }
+    setMinBBError("");
+    return true;
+  };
+
   const handleSubmit = async () => {
 
     if (!name.trim()) return toast.error("Name is required");
@@ -147,6 +167,8 @@ function EditSubCollection() {
     if (!parentId) return toast.error("Parent collection not found");
 
     if (!subCollectionId) return toast.error("Sub-collection ID not found");
+
+    if (!validateMinBB(minimumBuybackUSD, priceETH)) return toast.error("Minimum buyback exceeds 35% cap of listing price");
 
 
 
@@ -162,11 +184,13 @@ function EditSubCollection() {
 
       formData.append("priceETH", priceETH);
 
-      formData.append("isNFA", isNFA);
+      formData.append("assetType", assetType);
 
       if (nfaFrame) formData.append("nfaFrame", nfaFrame);
 
       if (minimumBuybackUSD !== "") formData.append("minimumBuybackUSD", minimumBuybackUSD);
+
+      if (reservePriceUSD !== "") formData.append("reservePriceUSD", reservePriceUSD);
 
       if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
       formData.append("royaltyPaymentPreference", royaltyPaymentPreference);
@@ -364,117 +388,102 @@ function EditSubCollection() {
 
           </div>
 
-          {/* NFA Toggle */}
-
-          <div className="rounded-md p-4 flex items-center gap-4 mt-2">
-
+          {/* Asset Type Selector */}
+          <div className="rounded-md p-4 flex flex-col gap-2 mt-2 w-[400px]">
             <label className="font-inter font-normal text-[18px] text-white">
-
-              Is NFA (Buyback Guarantee)
+              Asset Type
             </label>
-
-            <button
-
-              type="button"
-
-              onClick={() => setIsNFA(v => !v)}
-
-              className="w-12 h-6 rounded-full transition-colors flex-shrink-0"
-
-              style={{ background: isNFA ? "#002AA8" : "#444" }}
-
-            >
-
-              <span
-
-                className="block w-5 h-5 bg-white rounded-full shadow transition-transform mx-0.5"
-
-                style={{ transform: isNFA ? "translateX(24px)" : "translateX(0)" }}
-
-              />
-
-            </button>
-
-            {isNFA && (
-
-              <span className="text-[10px] font-bold text-blue-400 border border-blue-400/40 px-2 py-0.5 rounded-full">
-
-                NFA
-
-              </span>
-
-            )}
-
+            <div className="flex gap-2">
+              {[
+                { value: "NFA", label: "NFA", desc: "Hypertek only · Highest bonus · Buyback guaranteed", color: "#7C3AED" },
+                { value: "NFC", label: "NFC", desc: "Hypertek / licensed player · Game bonus · Buyback", color: "#002AA8" },
+                { value: "NFT", label: "NFT", desc: "Player created · No game bonus · No buyback", color: "#444" },
+              ].map(({ value, label, desc, color }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setAssetType(value)}
+                  className="flex-1 py-2 px-2 rounded-md text-sm font-medium border transition-colors text-left"
+                  style={{
+                    background: assetType === value ? color : "transparent",
+                    borderColor: assetType === value ? color : "rgba(255,255,255,0.2)",
+                    color: "#fff",
+                    opacity: assetType === value ? 1 : 0.5,
+                  }}
+                >
+                  <div className="font-bold text-[13px]">{label}</div>
+                  <div className="text-[10px] text-white/60 leading-tight mt-0.5">{desc}</div>
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* NFA Frame + Buyback (only when isNFA) */}
-
-          {isNFA && (
-
+          {/* NFA Frame + Buyback fields (NFA and NFC only) */}
+          {(assetType === "NFA" || assetType === "NFC") && (
             <>
+              {assetType === "NFA" && (
+                <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
+                  <label className="font-inter font-normal text-[16px] text-white/70">
+                    NFA Frame Style
+                  </label>
+                  <select
+                    value={nfaFrame}
+                    onChange={(e) => setNfaFrame(e.target.value)}
+                    className="text-white rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
+                    style={{ background: "#111", height: "40px" }}
+                  >
+                    <option value="">Default (blue ring)</option>
+                    <option value="gold">Gold Frame</option>
+                    <option value="silver">Silver Frame</option>
+                    <option value="diamond">Diamond Frame</option>
+                  </select>
+                </div>
+              )}
 
-              <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
-
+              <div className="rounded-md p-4 flex flex-col gap-2 w-[280px]">
                 <label className="font-inter font-normal text-[16px] text-white/70">
-
-                  NFA Frame Style
-
+                  Reserve Price (USD)
                 </label>
-
-                <select
-
-                  value={nfaFrame}
-
-                  onChange={(e) => setNfaFrame(e.target.value)}
-
-                  className="text-white rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
-
-                  style={{ background: "#111", height: "40px" }}
-
-                >
-
-                  <option value="">Default (blue ring)</option>
-
-                  <option value="gold">Gold Frame</option>
-
-                  <option value="silver">Silver Frame</option>
-
-                  <option value="diamond">Diamond Frame</option>
-
-                </select>
-
+                <input
+                  type="number"
+                  min="0"
+                  value={reservePriceUSD}
+                  onChange={(e) => setReservePriceUSD(e.target.value)}
+                  placeholder="e.g. 500"
+                  className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
+                  style={{ height: "40px" }}
+                />
               </div>
 
               <div className="rounded-md p-4 flex flex-col gap-2 w-[280px]">
-
                 <label className="font-inter font-normal text-[16px] text-white/70">
-
-                  Minimum Buyback USD
-
+                  Minimum Buyback (USD)
+                  {priceETH && (
+                    <span className="ml-2 text-[11px] text-yellow-400">
+                      Max: ${(parseFloat(priceETH) * 0.35).toFixed(2)} (35% of ${priceETH})
+                    </span>
+                  )}
                 </label>
-
                 <input
-
                   type="number"
-
                   min="0"
-
                   value={minimumBuybackUSD}
-
-                  onChange={(e) => setMinimumBuybackUSD(e.target.value)}
-
-                  placeholder="e.g. 500"
-
-                  className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
-
-                  style={{ height: "40px" }}
-
+                  onChange={(e) => {
+                    setMinimumBuybackUSD(e.target.value);
+                    validateMinBB(e.target.value, priceETH);
+                  }}
+                  placeholder="e.g. 100"
+                  className="text-white placeholder-[#FFFFFFAB] rounded border px-4 py-2 focus:outline-none bg-transparent"
+                  style={{
+                    height: "40px",
+                    borderColor: minBBError ? "#EF4444" : "rgba(255,255,255,0.67)",
+                  }}
                 />
-
+                {minBBError && (
+                  <span className="text-red-400 text-[11px]">{minBBError}</span>
+                )}
               </div>
-
             </>
-
           )}
 
           {/* Royalty Payment Preference */}
