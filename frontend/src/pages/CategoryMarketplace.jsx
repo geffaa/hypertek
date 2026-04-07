@@ -30,11 +30,23 @@ function CategoryMarketplace() {
   const [searchTerm, setSearchTerm] = useState("");
   const [allCategories, setAllCategories] = useState([]);
 
+  // ── Redirect old alias URLs to canonical ──────────────────────────
+  const CAT_ALIAS_REDIRECT = {
+    "military badges and collectables": "military badges",
+    "vehicles":                         "racing vehicles",
+    "land/bases":                       "land and bases",
+  };
+  useEffect(() => {
+    if (!category) return;
+    const canonical = CAT_ALIAS_REDIRECT[category.toLowerCase().trim()];
+    if (canonical) navigate(`/collections/${encodeURIComponent(canonical)}`, { replace: true });
+  }, [category]);
+
   // ── Fetch all categories for filter chips ─────────────────────────
   // Order matches GeneralTab CATEGORIES order
   const CATEGORY_ORDER = [
     "skins",
-    "military badges and collectables",
+    "military badges",
     "specialists",
     "weapons",
     "body armour",
@@ -42,6 +54,7 @@ function CategoryMarketplace() {
     "racing vehicles",
     "artwork",
     "land and bases",
+    "general",
   ];
 
   useEffect(() => {
@@ -50,7 +63,11 @@ function CategoryMarketplace() {
         const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/nft/parent-collections`);
         const cats = new Set();
         (res.data.collections || []).forEach((c) => {
-          if (c.category) cats.add(c.category.toLowerCase().trim());
+          if (c.category) {
+            const raw = c.category.toLowerCase().trim();
+            // Normalize legacy names to canonical
+            cats.add(CAT_ALIAS_REDIRECT[raw] || raw);
+          }
         });
         const fetched = Array.from(cats);
         // Sort by CATEGORY_ORDER; unknown categories go to the end alphabetically
@@ -112,7 +129,7 @@ function CategoryMarketplace() {
               const mapped = parent.subCollections.map((sub) => ({
                 ...sub,
                 parentId: parent._id,
-                parentCategory: parent.category || category,
+                parentCategory: CAT_ALIAS_REDIRECT[(parent.category || category)?.toLowerCase().trim()] || (parent.category || category),
                 parentName: parent.collection?.name || "",
                 collection: {
                   name: sub.name,
@@ -131,7 +148,7 @@ function CategoryMarketplace() {
                 const mapped = subRes.data.subCollections.map((sub) => ({
                   ...sub,
                   parentId: parent._id,
-                  parentCategory: parent.category || category,
+                  parentCategory: CAT_ALIAS_REDIRECT[(parent.category || category)?.toLowerCase().trim()] || (parent.category || category),
                   parentName: parent.collection?.name || "",
                   collection: {
                     name: sub.name,
@@ -182,11 +199,11 @@ function CategoryMarketplace() {
       : { position: "relative" }),
   };
 
+  // Derive title from canonical URL param — never from DB parentName (could be old alias)
+  const toTitleCase = (str) => str.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   const categoryTitle = !category
     ? "All Collections"
-    : items.length > 0
-      ? items[0]?.parentName || items[0]?.collection?.name || category.charAt(0).toUpperCase() + category.slice(1)
-      : category.charAt(0).toUpperCase() + category.slice(1);
+    : toTitleCase((CAT_ALIAS_REDIRECT[category.toLowerCase().trim()] || category).toLowerCase());
 
   return (
     <div className="min-h-screen bg-transparent relative z-10">
@@ -196,7 +213,7 @@ function CategoryMarketplace() {
         <MarketplaceBanner
           noMargin
           titleOverride={categoryTitle}
-          descOverride={`Explore all ${category || ""} items in the marketplace. Discover unique collections and start your journey.`}
+          descOverride={`Explore all ${categoryTitle} items in the marketplace. Discover unique collections and start your journey.`}
           stats={[
             { num: filteredItems.length, label: "For Sale" },
             { num: items.filter((i) => i.listed && i.priceETH > 0).length, label: "Listed" },

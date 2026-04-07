@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 // Fixed tabs per Don's brief — Trades and Quests are separate tabs
 const TABS = [
   { key: "overview", label: "Overview" },
-  { key: "nfa101", label: "NFAs / NFTs" },
+  { key: "nfa101", label: "NFAs / NFCs / NFTs" },
   { key: "general", label: "The Marketplace" },
   { key: "auctions", label: "Auctions" },
   { key: "trades", label: "Trades" },

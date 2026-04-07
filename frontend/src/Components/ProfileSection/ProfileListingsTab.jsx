@@ -119,9 +119,9 @@ const PREVIEW_GROUPED = {
   weapons: [],
   "body armour": [],
   spaceships: [],
-  vehicles: [],
+  "racing vehicles": [],
   artwork: [],
-  "land/bases": [],
+  "land and bases": [],
 };
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -141,7 +141,19 @@ export default function ProfileListingsTab({ token }) {
         });
         const data = await res.json();
         if (data.success && Object.keys(data.grouped || {}).length > 0) {
-          setGrouped(data.grouped);
+          // Normalize legacy category keys → canonical names
+          const CAT_ALIAS = {
+            "military badges and collectables": "military badges",
+            "vehicles":                         "racing vehicles",
+            "land/bases":                       "land and bases",
+          };
+          const normalized = {};
+          for (const [key, val] of Object.entries(data.grouped)) {
+            const canonical = CAT_ALIAS[key.toLowerCase().trim()] || key;
+            if (normalized[canonical]) normalized[canonical] = [...normalized[canonical], ...val];
+            else normalized[canonical] = val;
+          }
+          setGrouped(normalized);
         } else {
           // No real data — show preview
           setGrouped(PREVIEW_GROUPED);
@@ -156,11 +168,10 @@ export default function ProfileListingsTab({ token }) {
     fetchListings();
   }, [token]);
 
-  // All known categories — always list them all in dropdown
+  // All known categories — canonical names only
   const ALL_KNOWN = [
-    "skins", "military badges", "military badges and collectables",
-    "specialists", "weapons", "body armour", "spaceships",
-    "vehicles", "racing vehicles", "artwork", "land and bases", "land/bases",
+    "skins", "military badges", "specialists", "weapons",
+    "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general",
   ];
   const allCategories = [
     ...ALL_KNOWN.filter((c) => Object.keys(grouped).includes(c)),

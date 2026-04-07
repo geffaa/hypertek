@@ -24,13 +24,13 @@ const AVATARS = {
 const FEATURES = [
   {
     key: "nfa101",
-    label: "NFAs / NFTs",
+    label: "NFAs / NFCs / NFTs",
     icon: "📚",
     tagline: "New to Web3 assets? Start here",
     details: [
-      "NFAs (Non-Fungible Assets) are unique in-game items you truly own on-chain.",
-      "NFTs (Non-Fungible Tokens) represent characters, skins, and collectibles with verified rarity.",
-      "Learn how to buy, sell, and use Web3 assets safely within the HyperTek ecosystem.",
+      "NFAs (Non-Fungible Assets) are Hypertek-issued items with a platform-guaranteed buyback price.",
+      "NFCs (Non-Fungible Characters) are licensed player items with in-game bonuses and buyback.",
+      "NFTs (Non-Fungible Tokens) are user-created collectibles — skins, weapons, and more.",
     ],
     cta: "Learn the Basics",
   },
@@ -40,7 +40,7 @@ const FEATURES = [
     icon: "🛒",
     tagline: "Buy & sell in-game assets instantly",
     details: [
-      "Browse a wide catalog of NFAs and NFTs — skins, weapons, specialists, spaceships, and more.",
+      "Browse a wide catalog of NFAs, NFCs, and NFTs — skins, weapons, specialists, spaceships, and more.",
       "Filter by category, rarity, or price range to find exactly what you need.",
       "Listings are fulfilled on-chain, so ownership transfers are instant and verifiable.",
     ],

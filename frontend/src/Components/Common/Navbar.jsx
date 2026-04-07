@@ -317,7 +317,7 @@ export default function Navbar() {
                         { to: isLoggedIn ? "/Profile" : "/signin", icon: <Package className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
                       ],
                       [
-                        { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT & NFA collectibles" },
+                        { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT, NFA & NFC collectibles" },
                         { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: "Auction",      desc: "Track the countdown of any auction" },
                       ],
                     ].map((row, rowIdx) => (

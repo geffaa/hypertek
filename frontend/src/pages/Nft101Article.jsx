@@ -105,7 +105,7 @@ export default function Nft101Article() {
           </button>
 
           <span className="text-white/25 text-[10px] tracking-widest uppercase font-semibold hidden sm:block">
-            NFAs / NFTs 101
+            NFAs / NFCs / NFTs 101
           </span>
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function Nft101Article() {
           </span>
           <span className="flex items-center gap-1 text-white/30 text-[10px]">
             <BookOpen className="w-3 h-3" />
-            NFAs / NFTs 101
+            NFAs / NFCs / NFTs 101
           </span>
         </div>
 

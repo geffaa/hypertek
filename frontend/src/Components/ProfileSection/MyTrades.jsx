@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 // ── Constants ──────────────────────────────────────────────────────────────────
 const CATEGORY_ORDER = [
   "skins", "military badges", "specialists", "weapons",
-  "body armour", "spaceships", "vehicles", "artwork", "land/bases", "general",
+  "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general",
 ];
 
 const ACTIVITY_LABELS = {

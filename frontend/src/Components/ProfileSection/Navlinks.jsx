@@ -15,7 +15,6 @@ export const MAJOR_TABS = [
 
 const CATEGORY_ORDER = [
   "skins",
-  "military badges and collectables",
   "military badges",
   "specialists",
   "weapons",
@@ -26,6 +25,7 @@ const CATEGORY_ORDER = [
   "artwork",
   "land and bases",
   "land/bases",
+  "general",
 ];
 
 // Display name overrides — normalises any DB variant to a clean label

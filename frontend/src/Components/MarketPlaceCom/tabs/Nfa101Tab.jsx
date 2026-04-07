@@ -137,7 +137,7 @@ export default function Nfa101Tab() {
             <div className="w-8 h-[2px] bg-white/40" />
             <span className="text-white/50 text-xs tracking-[0.3em] uppercase font-semibold">Education</span>
           </div>
-          <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-1">NFAs / NFTs 101</h1>
+          <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-1">NFAs / NFCs / NFTs 101</h1>
           <p className="text-white/50 text-sm max-w-xl leading-relaxed">
             New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the HyperTek ecosystem.
           </p>

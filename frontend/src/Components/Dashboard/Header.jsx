@@ -1,26 +1,28 @@
 // components/common/header.jsx
-import { FiSearch, FiMenu } from "react-icons/fi";
+import { FiSearch, FiMenu, FiUser, FiGrid, FiLogOut } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/AuthSlice";
 import NotificationIcon from "../../assets/notification.png";
 import NotificationDropdown from "./Notification";
 
 const Header = ({ onMenuClick }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // States
   const [showNotifications, setShowNotifications] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isBellHovered, setIsBellHovered] = useState(false);
-  const [isProfileHovered, setIsProfileHovered] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [notificationCount] = useState(3);
   const [userData, setUserData] = useState(null);
   const [imageError, setImageError] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const profileMenuRef = useRef(null);
 
   const { user, token } = useSelector((state) => state.auth);
   const displayName = user?.FullName || user?.UserName || user?.Email || "";
@@ -80,6 +82,22 @@ const Header = ({ onMenuClick }) => {
   }, [token]);
 
   const handleImageError = () => setImageError(true);
+
+  // Close profile dropdown on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target))
+        setShowProfileMenu(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   // Search handler
   const handleSearch = (e) => {
@@ -152,49 +170,70 @@ const Header = ({ onMenuClick }) => {
           />
         </div>
 
-        {/* 👤 Profile Button */}
-        <div
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => navigate("/dashboard/edit-profile")}
-          onMouseEnter={() => setIsProfileHovered(true)}
-          onMouseLeave={() => setIsProfileHovered(false)}
-        >
-          {displayName && (
-            <span className="hidden md:block text-white/70 text-sm font-medium max-w-[120px] truncate">
-              {displayName.split(" ")[0]}
-            </span>
-          )}
-        <div
-          className={`
-            relative w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl
-            p-0.5 transition-all duration-700 ease-out
-            ${isProfileHovered ? "scale-110 rotate-3" : "shadow-lg"}
-          `}
-        >
-          <div className="w-full h-full overflow-hidden flex items-center justify-center rounded-full md:rounded-3xl">
-            {userData?.Avatar && !imageError ? (
-              <img
-                src={`${BACKEND_BASE_URL}${userData.Avatar}`}
-                alt="Profile"
-                className={`w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? "scale-110" : ""}`}
-                onError={handleImageError}
-              />
-            ) : (
-              <div
-                className="w-full h-full flex items-center justify-center text-white font-bold text-sm"
-                style={{ background: "linear-gradient(135deg, #002AA8 0%, #4F46E5 100%)" }}
-              >
-                {initials}
-              </div>
+        {/* 👤 Profile Dropdown */}
+        <div className="relative flex-shrink-0" ref={profileMenuRef}>
+          <button
+            onClick={() => setShowProfileMenu((v) => !v)}
+            className="flex items-center gap-2 cursor-pointer focus:outline-none"
+          >
+            {displayName && (
+              <span className="hidden md:block text-white/70 text-sm font-medium max-w-[120px] truncate">
+                {displayName.split(" ")[0]}
+              </span>
             )}
-          </div>
+            <div className="w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl overflow-hidden flex items-center justify-center shadow-lg">
+              {userData?.Avatar && !imageError ? (
+                <img
+                  src={`${BACKEND_BASE_URL}${userData.Avatar}`}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                  onError={handleImageError}
+                />
+              ) : (
+                <div
+                  className="w-full h-full flex items-center justify-center text-white font-bold text-sm"
+                  style={{ background: "linear-gradient(135deg, #002AA8 0%, #4F46E5 100%)" }}
+                >
+                  {initials}
+                </div>
+              )}
+            </div>
+          </button>
 
-          <div
-            className={`absolute -inset-1 rounded-full md:rounded-2xl bg-gradient-to-r from-blue-400/30 to-purple-500/30
-            opacity-0 transition-all duration-1000 ${isProfileHovered ? "opacity-100 animate-pulse" : ""
-              }`}
-          />
-        </div>
+          {/* Dropdown menu */}
+          {showProfileMenu && (
+            <div
+              className="absolute right-0 mt-2 w-52 rounded-xl overflow-hidden shadow-2xl z-50"
+              style={{ background: "rgba(0,15,60,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(16px)" }}
+            >
+              {/* User info header */}
+              <div className="px-4 py-3 border-b border-white/8">
+                <p className="text-white text-sm font-semibold truncate">{displayName || "User"}</p>
+                <p className="text-white/40 text-xs truncate mt-0.5">{user?.Email || user?.email || ""}</p>
+              </div>
+              <Link
+                to="/Profile"
+                onClick={() => setShowProfileMenu(false)}
+                className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+              >
+                <FiUser size={14} /> My Profile
+              </Link>
+              <Link
+                to="/dashboard"
+                onClick={() => setShowProfileMenu(false)}
+                className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+              >
+                <FiGrid size={14} /> Dashboard
+              </Link>
+              <div className="h-px bg-white/8" />
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-400/80 hover:text-red-300 hover:bg-red-500/5 transition-colors"
+              >
+                <FiLogOut size={14} /> Sign Out
+              </button>
+            </div>
+          )}
         </div>{/* end profile wrapper */}
 
       </div>{/* end header right */}

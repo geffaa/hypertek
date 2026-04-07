@@ -232,9 +232,10 @@ const TRADE_CATEGORIES = [
   "Weapons",
   "Body Armour",
   "Spaceships",
-  "Vehicles",
+  "Racing Vehicles",
   "Artwork",
   "Land and Bases",
+  "General",
 ];
 
 // ── Create Trade Modal ────────────────────────────────────────────────────────
