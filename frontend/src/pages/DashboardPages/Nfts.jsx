@@ -51,17 +51,21 @@ function NFTs() {
 
   useEffect(() => {
     if (!wallet) { setLoading(false); return; }
+    // Use owned-with-subs (queries subCollections.owner) so old data with
+    // mismatched collection.owner still shows up correctly.
     axios.get(
-      `${BACKEND_BASE_URL}/api/v1/nft/parent-collections?owner=${encodeURIComponent(wallet)}`,
+      `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
       { headers: { Authorization: `Bearer ${token}` } }
     ).then((res) => {
       if (res.data.success) {
-        const items = (res.data.collections || []).flatMap((col) =>
-          (col.subCollections || []).map((item) => ({
-            ...item,
-            parentId: col._id,
-            category: col.category || "general",
-          }))
+        const items = (res.data.nfts || []).flatMap((col) =>
+          (col.subCollections || [])
+            .filter((sub) => sub.owner?.toLowerCase() === wallet.toLowerCase())
+            .map((item) => ({
+              ...item,
+              parentId: col._id,
+              category: col.category || "general",
+            }))
         );
         setAllItems(items);
       }
