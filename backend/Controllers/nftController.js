@@ -143,9 +143,11 @@ export async function createItemDirect(req, res) {
       image = req.body.image;
     }
 
-    // Find or auto-create a parent collection for this user+category
+    // Find or auto-create a parent collection for this user+category.
+    // Always scope by owner to prevent cross-user parent pollution when userId is null.
     let parent = await NFTSystem.findOne({
-      userId,
+      ...(userId ? { userId } : {}),
+      "collection.owner": owner.toLowerCase(),
       category: normalizedCategory,
       isParentCollection: true,
     });

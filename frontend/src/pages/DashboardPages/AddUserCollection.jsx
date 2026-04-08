@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
-import { FiUploadCloud, FiImage, FiArrowLeft } from "react-icons/fi";
+import { FiUploadCloud, FiImage, FiArrowLeft, FiLink } from "react-icons/fi";
 
 const CATEGORIES = [
   "skins", "military badges", "specialists", "weapons",
@@ -24,6 +25,14 @@ function CreateNFT() {
   const { user, token } = useSelector((state) => state.auth);
   const { address: wagmiAddress } = useAccount();
   const { emailWalletAddress } = useEmailWallet();
+  const { openConnectModal } = useConnectModal();
+
+  const owner =
+    wagmiAddress?.toLowerCase() ||
+    emailWalletAddress?.toLowerCase() ||
+    user?.WalletAddress?.toLowerCase() ||
+    user?.MetaMaskAddress?.toLowerCase() || "";
+  const walletConnected = !!owner;
 
   const [name, setName]           = useState("");
   const [description, setDesc]    = useState("");
@@ -45,14 +54,9 @@ function CreateNFT() {
   };
 
   const handleSubmit = async () => {
+    if (!walletConnected) return openConnectModal?.();
     if (!name.trim()) return toast.error("Item name is required");
     if (!imageFile)   return toast.error("Please upload an image");
-
-    const owner =
-      wagmiAddress?.toLowerCase() ||
-      emailWalletAddress?.toLowerCase() ||
-      user?.WalletAddress?.toLowerCase() ||
-      user?.MetaMaskAddress?.toLowerCase() || "";
     if (!owner) return toast.error("No wallet address found. Please connect your wallet.");
 
     try {
@@ -232,6 +236,26 @@ function CreateNFT() {
             </div>
           </div>
 
+          {/* Wallet warning banner */}
+          {!walletConnected && (
+            <div
+              className="flex items-center gap-3 px-4 py-3 rounded-lg"
+              style={{ background: "rgba(234,179,8,0.08)", border: "1px solid rgba(234,179,8,0.25)" }}
+            >
+              <FiLink size={14} className="text-yellow-400 flex-shrink-0" />
+              <p className="text-yellow-300/80 text-xs flex-1">
+                Connect your wallet to save items to storage.
+              </p>
+              <button
+                onClick={() => openConnectModal?.()}
+                className="px-3 h-7 rounded-lg text-xs font-semibold text-white flex-shrink-0 transition-all hover:brightness-110"
+                style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.4)" }}
+              >
+                Connect Wallet
+              </button>
+            </div>
+          )}
+
           {/* Actions */}
           <div className="flex items-center gap-3 pt-2 border-t border-white/5 mt-1">
             <button
@@ -255,6 +279,8 @@ function CreateNFT() {
                   </svg>
                   Saving...
                 </>
+              ) : !walletConnected ? (
+                <><FiLink size={14} /> Connect Wallet</>
               ) : (
                 "Save to Storage →"
               )}
