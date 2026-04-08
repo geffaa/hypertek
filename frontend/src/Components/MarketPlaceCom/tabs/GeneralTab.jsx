@@ -316,8 +316,12 @@ export default function GeneralTab() {
                 const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
                 const catKey = CAT_ALIAS[rawKey] || rawKey;
                 if (!map[catKey]) map[catKey] = [];
+                // Only show items that are listed for sale with a valid price
+                const listedSubs = sub.data.subCollections.filter(
+                  (s) => s.listed === true && s.priceETH > 0
+                );
                 map[catKey].push(
-                  ...sub.data.subCollections.map((s) => ({
+                  ...listedSubs.map((s) => ({
                     ...s,
                     parentId:       parent._id,
                     parentCategory: catKey,

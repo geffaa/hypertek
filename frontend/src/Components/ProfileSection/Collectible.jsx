@@ -31,7 +31,7 @@ import { useEmailWallet } from "../../hooks/useEmailWallet";
 import UserProfileHeader from "./UserProfileHeader";
 
 function MarketPlace() {
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // RainbowKit hooks
@@ -43,20 +43,18 @@ function MarketPlace() {
   const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
-  // Combine wallet state
+  // Combine wallet state — fallback to Redux user wallet so items show even without active wagmi session
   const activeAddress = isEmailWalletConnected ? emailWalletAddress : wagmiAddress;
   const isConnected = isEmailWalletConnected || isWagmiConnected;
+  const fallbackWallet = user?.WalletAddress || user?.MetaMaskAddress || null;
 
   const [connectedWallet, setConnectedWallet] = useState(null);
 
   // Sync state
   useEffect(() => {
-    if (activeAddress) {
-      setConnectedWallet(activeAddress.toLowerCase());
-    } else {
-      setConnectedWallet(null);
-    }
-  }, [activeAddress]);
+    const addr = activeAddress || fallbackWallet;
+    setConnectedWallet(addr ? addr.toLowerCase() : null);
+  }, [activeAddress, fallbackWallet]);
 
   // Read internal balances from Marketplace Contract
   const { data: rawSellerBalance } = useReadContract({
@@ -205,14 +203,15 @@ function MarketPlace() {
   };
 
   // Fetch NFTs when wallet connects or category changes
+  // Also fetch using fallback wallet (Redux) when wagmi isn't connected
   useEffect(() => {
-    if (isConnected && connectedWallet && token) {
+    if (connectedWallet && token) {
       fetchOwnedNFTs(connectedWallet.toLowerCase());
     } else {
       setMarketData([]);
       setLoading(false);
     }
-  }, [isConnected, connectedWallet, token, activeCategory]);
+  }, [connectedWallet, token, activeCategory]);
 
   /* ================= HANDLE SELL NOW CLICK ================= */
   const handleSellNowClick = (itemId) => {

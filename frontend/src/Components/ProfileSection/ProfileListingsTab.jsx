@@ -140,7 +140,7 @@ export default function ProfileListingsTab({ token }) {
           headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
         });
         const data = await res.json();
-        if (data.success && Object.keys(data.grouped || {}).length > 0) {
+        if (data.success) {
           // Normalize legacy category keys → canonical names
           const CAT_ALIAS = {
             "military badges and collectables": "military badges",
@@ -148,19 +148,18 @@ export default function ProfileListingsTab({ token }) {
             "land/bases":                       "land and bases",
           };
           const normalized = {};
-          for (const [key, val] of Object.entries(data.grouped)) {
+          for (const [key, val] of Object.entries(data.grouped || {})) {
             const canonical = CAT_ALIAS[key.toLowerCase().trim()] || key;
             if (normalized[canonical]) normalized[canonical] = [...normalized[canonical], ...val];
             else normalized[canonical] = val;
           }
           setGrouped(normalized);
         } else {
-          // No real data — show preview
-          setGrouped(PREVIEW_GROUPED);
+          setGrouped({});
         }
       } catch (err) {
         console.error("ProfileListingsTab fetch error:", err);
-        setGrouped(PREVIEW_GROUPED);
+        setGrouped({});
       } finally {
         setLoading(false);
       }
@@ -281,6 +280,10 @@ export default function ProfileListingsTab({ token }) {
             <div key={i} className="h-12 rounded-xl animate-pulse"
               style={{ background: "rgba(255,255,255,0.04)" }} />
           ))}
+        </div>
+      ) : allCategories.length === 0 ? (
+        <div className="text-center py-12 text-white/30 text-sm">
+          No listings yet — list an item from your collection to see it here.
         </div>
       ) : (
         /* ── Table ── */
