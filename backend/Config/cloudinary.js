@@ -29,6 +29,7 @@ function getCloudinary() {
 
 function getIsCloudinaryEnabled() {
   ensureConfigured();
+  if (process.env.DISABLE_CLOUDINARY === "true") return false;
   return !!(
     process.env.CLOUDINARY_CLOUD_NAME &&
     process.env.CLOUDINARY_API_KEY &&

@@ -63,7 +63,7 @@ const NFTRouter = express.Router();
 // Single-step: create NFT/NFC item — auto-creates parent collection per user+category
 NFTRouter.post(
   "/item/create",
-  authMiddleware,
+  authMiddleware(),
   uploadTemp.single("image"),
   createItemDirect
 );

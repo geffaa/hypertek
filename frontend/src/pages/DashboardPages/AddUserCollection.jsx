@@ -43,14 +43,37 @@ function CreateNFT() {
   const [dragOver, setDragOver]   = useState(false);
   const [loading, setLoading]     = useState(false);
 
-  const handleFile = (file) => {
+  // Resize image to max 1200px on the longest side before upload
+  const resizeImage = (file) =>
+    new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        const MAX = 1200;
+        let { width, height } = img;
+        if (width > MAX || height > MAX) {
+          if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
+          else { width = Math.round((width * MAX) / height); height = MAX; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+        canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: "image/jpeg" })), "image/jpeg", 0.88);
+      };
+      img.src = url;
+    });
+
+  const handleFile = async (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
-    setImageFile(file);
+    const resized = await resizeImage(file);
+    setImageFile(resized);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(resized);
   };
 
   const handleSubmit = async () => {
@@ -71,12 +94,17 @@ function CreateNFT() {
 
       await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/item/create`, form, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
+        timeout: 30000,
       });
 
       toast.success(`"${name}" saved to storage!`);
       navigate("/dashboard/collections");
     } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to create item");
+      if (err.code === "ECONNABORTED") {
+        toast.error("Request timed out — server is taking too long. Please try again.");
+      } else {
+        toast.error(err.response?.data?.error || "Failed to save item. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
