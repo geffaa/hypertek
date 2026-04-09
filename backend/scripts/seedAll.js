@@ -258,16 +258,6 @@ const CATEGORIES = [
       { name: "Ocean Platform Delta",   symbol: "OPD",  priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
     ],
   },
-  {
-    name: "General", chain: "Base", symbol: "GEN",
-    items: [
-      { name: "HyperTek Starter Pack",  symbol: "HSP",  priceETH: 50,  description: "A bundle of miscellaneous items to kick-start your journey." },
-      { name: "Collector's Badge",      symbol: "CLB",  priceETH: 30,  description: "Rare collectible badge for dedicated community members." },
-      { name: "Mystery Crate",          symbol: "MYC",  priceETH: 75,  description: "Contains a random rare item from the HyperTek universe." },
-      { name: "Season Pass Token",      symbol: "SPT",  priceETH: 120, description: "Grants access to exclusive season events and rewards." },
-      { name: "Community Tribute",      symbol: "CMT",  priceETH: 25,  description: "A commemorative token for early HyperTek community supporters." },
-    ],
-  },
 ];
 
 // ─── NFT 101 (handled by seedMarketplace.js with full data — here we just clean + re-insert) ──
