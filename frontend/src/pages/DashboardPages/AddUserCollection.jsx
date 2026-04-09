@@ -264,6 +264,21 @@ function CreateNFT() {
             </div>
           </div>
 
+          {/* Listing channels info note */}
+          <div
+            className="px-4 py-3 rounded-lg"
+            style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}
+          >
+            <p className="text-white/70 text-xs font-semibold mb-1.5 flex items-center gap-1.5">
+              <span>ℹ</span> How listing works
+            </p>
+            <ul className="text-white/45 text-[11px] space-y-1 leading-relaxed">
+              <li>• Save your item to storage first — no gas required.</li>
+              <li>• Then list it on the <span className="text-white/65 font-medium">Marketplace</span> (fixed price), open it for <span className="text-white/65 font-medium">Auction</span> (timed bidding with reserve), or offer it in <span className="text-white/65 font-medium">Trade</span>.</li>
+              <li>• All three channels can be active at the same time — the first sale cancels the rest.</li>
+            </ul>
+          </div>
+
           {/* Wallet warning banner */}
           {!walletConnected && (
             <div

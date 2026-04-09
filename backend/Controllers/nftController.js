@@ -345,6 +345,7 @@ export async function updateSubCollection(req, res) {
     const {
       name, symbol, description, priceETH, listed,
       assetType, isNFA, nfaFrame, minimumBuybackUSD, reservePriceUSD, royaltyWallet,
+      category,
     } = req.body;
 
     const parent = await NFTSystem.findById(parentId);
@@ -355,6 +356,54 @@ export async function updateSubCollection(req, res) {
     const subCollection = parent.subCollections.id(subCollectionId);
     if (!subCollection) {
       return res.status(404).json({ error: "Sub-collection not found" });
+    }
+
+    // ── Category change: move item to the correct parent ──────────────
+    if (category) {
+      const newCat = category.toLowerCase().trim();
+      const currentCat = parent.category?.toLowerCase().trim();
+      if (newCat !== currentCat && VALID_CATEGORIES.includes(newCat)) {
+        const userId = req.user?._id || req.user?.id || parent.userId || null;
+        const owner  = subCollection.owner;
+
+        // Find or create new parent for this user+category
+        let newParent = await NFTSystem.findOne({
+          ...(userId ? { userId } : {}),
+          "collection.owner": owner,
+          category: newCat,
+          isParentCollection: true,
+        });
+        if (!newParent) {
+          const catCode = newCat.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase();
+          const idSeed  = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
+          newParent = await NFTSystem.create({
+            userId,
+            collection: { name: newCat, symbol: `${catCode}${idSeed}`, Type: "ERC721", chain: "Base", image: "", owner, creator: "user", salesCount: 0 },
+            category: newCat,
+            isParentCollection: true,
+            subCollections: [],
+            status: "active",
+          });
+        }
+
+        // Update image if provided before moving
+        if (req.file) subCollection.image = await saveImagePermanently(req.file.path, req.file.filename);
+        if (name)        subCollection.name        = name;
+        if (description !== undefined) subCollection.description = description;
+
+        // Move: remove from current parent, push to new parent
+        const subData = subCollection.toObject();
+        parent.subCollections.pull({ _id: subCollectionId });
+        parent.markModified("subCollections");
+        await parent.save();
+
+        newParent.subCollections.push(subData);
+        newParent.markModified("subCollections");
+        await newParent.save();
+
+        const movedItem = newParent.subCollections[newParent.subCollections.length - 1];
+        return res.json({ success: true, message: "Item moved to new category", subCollection: movedItem, newParentId: newParent._id });
+      }
     }
 
     // Determine if caller is admin

@@ -89,7 +89,16 @@ export default function QuestsTab() {
   const pages = Math.ceil(total / LIMIT);
 
   return (
-    <div className="py-6 relative">
+    <div className="py-6 relative overflow-hidden">
+      {/* ── Background figure ── */}
+      <img
+        src="/avatar/lithionites-female.png"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -right-12 top-0 h-[700px] w-auto object-contain object-top"
+        style={{ opacity: 0.06, zIndex: 0 }}
+      />
+
       {/* ── Header ── */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">

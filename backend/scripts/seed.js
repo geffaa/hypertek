@@ -343,6 +343,17 @@ const CATEGORIES = [
         ],
     },
     {
+        name: "General", chain: "Base", symbol: "GEN",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+        items: [
+            { name: "HyperTek Starter Pack",   symbol: "HSP",  priceETH: 50,   image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80",  description: "A bundle of miscellaneous items to kick-start your HyperTek journey." },
+            { name: "Collector's Badge",        symbol: "CLB",  priceETH: 30,   image: "https://images.unsplash.com/photo-1619468129361-605ebea04b44?w=400&q=80",  description: "Rare collectible badge for dedicated community members." },
+            { name: "Mystery Crate",            symbol: "MYC",  priceETH: 75,   image: "https://images.unsplash.com/photo-1553481187-be93c21490a9?w=400&q=80",  description: "Contains a random rare item from the HyperTek universe." },
+            { name: "Season Pass Token",        symbol: "SPT",  priceETH: 120,  image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80",  description: "Grants access to exclusive season events and rewards." },
+            { name: "Community Tribute",        symbol: "CMT",  priceETH: 25,   image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80",  description: "A commemorative token for early HyperTek community supporters." },
+        ],
+    },
+    {
         name: "Land and Bases", chain: "Base", symbol: "LAND",
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
         items: [

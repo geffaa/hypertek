@@ -160,14 +160,14 @@ const LISTINGS = [
 
   // EXPIRED examples (status set manually; expiresAt kept in future so TTL doesn't delete them)
   {
-    category: "vehicles", activityType: "selling_general",
+    category: "racing vehicles", activityType: "selling_general",
     itemName: "RACE SPEEDER X90", itemDescription: "Expired listing — can still be renewed (demo).",
     price: 330, status: "expired", commissionTier: 20,
     expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // future — keeps doc alive for TTL
     renewed: false, // not yet renewed — Renew button should appear
   },
   {
-    category: "vehicles", activityType: "selling_general",
+    category: "racing vehicles", activityType: "selling_general",
     itemName: "HOVER BIKE Z55", itemDescription: "Expired listing — already renewed once (demo).",
     price: 180, status: "expired", commissionTier: 20,
     expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // future — keeps doc alive for TTL

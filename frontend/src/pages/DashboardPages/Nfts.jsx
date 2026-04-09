@@ -32,7 +32,7 @@ function NFTs() {
   const [search, setSearch]                 = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
-  // — Listing modal
+  // — Marketplace listing modal
   const [listingItem, setListingItem]       = useState(null);
   const [listingPrice, setListingPrice]     = useState("");
   const [listingLoading, setListingLoading] = useState(false);
@@ -41,6 +41,7 @@ function NFTs() {
   const [editItem, setEditItem]             = useState(null);
   const [editName, setEditName]             = useState("");
   const [editDesc, setEditDesc]             = useState("");
+  const [editCategory, setEditCategory]     = useState("");
   const [editFile, setEditFile]             = useState(null);
   const [editPreview, setEditPreview]       = useState(null);
   const [editLoading, setEditLoading]       = useState(false);
@@ -73,7 +74,7 @@ function NFTs() {
       .finally(() => setLoading(false));
   }, [wallet, token]);
 
-  // ── Listing ────────────────────────────────────────────────────────
+  // ── Marketplace listing ────────────────────────────────────────────
   const openListModal = (item) => {
     setListingItem(item);
     setListingPrice("");
@@ -111,7 +112,7 @@ function NFTs() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setAllItems((prev) =>
-        prev.map((i) => i._id === item._id ? { ...i, listed: false } : i)
+        prev.map((i) => i._id === item._id ? { ...i, listed: false, priceETH: 0 } : i)
       );
       toast.success("Listing cancelled");
     } catch (err) {
@@ -125,6 +126,7 @@ function NFTs() {
     setEditItem(item);
     setEditName(item.name || "");
     setEditDesc(item.description || "");
+    setEditCategory(item.category || ALL_CATEGORIES[1]);
     setEditFile(null);
     setEditPreview(item.image ? getImageUrl(item.image) : null);
   };
@@ -139,11 +141,13 @@ function NFTs() {
 
   const handleEdit = async () => {
     if (!editName.trim()) return toast.error("Item name is required");
+    const categoryChanged = editCategory && editCategory !== editItem.category;
     try {
       setEditLoading(true);
       const form = new FormData();
       form.append("name", editName.trim());
       form.append("description", editDesc.trim());
+      if (editCategory) form.append("category", editCategory);
       if (editFile) form.append("image", editFile);
 
       const { data } = await axios.put(
@@ -152,15 +156,37 @@ function NFTs() {
         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
       );
 
-      setAllItems((prev) =>
-        prev.map((i) =>
-          i._id === editItem._id
-            ? { ...i, name: editName.trim(), description: editDesc.trim(), image: data.subCollection?.image || i.image }
-            : i
-        )
-      );
-      toast.success("Item updated");
+      if (categoryChanged) {
+        // Remove from list — category change moves it to a new parent, refetch will pick it up
+        setAllItems((prev) => prev.filter((i) => i._id !== editItem._id));
+      } else {
+        setAllItems((prev) =>
+          prev.map((i) =>
+            i._id === editItem._id
+              ? { ...i, name: editName.trim(), description: editDesc.trim(), image: data.subCollection?.image || i.image }
+              : i
+          )
+        );
+      }
+      toast.success(categoryChanged ? "Item moved to new category" : "Item updated");
       setEditItem(null);
+
+      // Refetch if category changed so new parent shows up
+      if (categoryChanged && wallet) {
+        axios.get(
+          `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        ).then((res) => {
+          if (res.data.success) {
+            const items = (res.data.nfts || []).flatMap((col) =>
+              (col.subCollections || [])
+                .filter((sub) => sub.owner?.toLowerCase() === wallet.toLowerCase())
+                .map((item) => ({ ...item, parentId: col._id, category: col.category || "general" }))
+            );
+            setAllItems(items);
+          }
+        });
+      }
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to update item");
     } finally {
@@ -304,7 +330,7 @@ function NFTs() {
                   <div className="px-3 pt-2 pb-1 flex-1 flex flex-col gap-0.5">
                     <p className="text-white text-xs font-medium truncate">{item.name || "Unnamed"}</p>
                     <p className="text-white/30 text-[10px] capitalize">{item.category}</p>
-                    {item.priceETH > 0 && (
+                    {item.listed && item.priceETH > 0 && (
                       <p className="text-white/60 text-[11px] mt-0.5">{item.priceETH} USDC</p>
                     )}
                   </div>
@@ -426,6 +452,23 @@ function NFTs() {
               <label className="text-white/70 text-sm font-medium mb-1.5 block">Description</label>
               <textarea value={editDesc} onChange={(e) => setEditDesc(e.target.value)} rows={2}
                 className="w-full px-3 py-2 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 transition-all text-sm resize-none placeholder-white/30" />
+            </div>
+
+            <div>
+              <label className="text-white/70 text-sm font-medium mb-1.5 block">Category</label>
+              <select
+                value={editCategory}
+                onChange={(e) => setEditCategory(e.target.value)}
+                className="w-full h-10 px-3 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 transition-all text-sm capitalize appearance-none"
+                style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff60' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 12px center" }}
+              >
+                {ALL_CATEGORIES.filter(c => c !== "all").map((cat) => (
+                  <option key={cat} value={cat} className="bg-[#0d0d1a] capitalize">{cat}</option>
+                ))}
+              </select>
+              {editCategory !== editItem?.category && (
+                <p className="text-yellow-400/60 text-[11px] mt-1">Item will be moved to the new category storage box.</p>
+              )}
             </div>
 
             <div className="flex gap-3">

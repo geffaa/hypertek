@@ -21,10 +21,8 @@ const CATEGORY_ORDER = [
   "body armour",
   "spaceships",
   "racing vehicles",
-  "vehicles",
   "artwork",
   "land and bases",
-  "land/bases",
   "general",
 ];
 
@@ -32,8 +30,7 @@ const CATEGORY_ORDER = [
 const DISPLAY_NAMES = {
   "military badges and collectables": "Military Badges",
   "military badges":                  "Military Badges",
-  "racing vehicles":                  "Vehicles",
-  "vehicles":                         "Vehicles",
+  "racing vehicles":                  "Racing Vehicles",
   "land and bases":                   "Land and Bases",
   "land/bases":                       "Land and Bases",
 };

@@ -7,6 +7,7 @@ import {
   instantBuy,
   cancelAuction,
   getSellerAuctions,
+  finalizeAuction,
 } from "../Controllers/AuctionController.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
@@ -20,5 +21,6 @@ AuctionRouter.post("/",             authMiddleware(), createAuction);
 AuctionRouter.post("/:id/bid",      authMiddleware(), placeBid);
 AuctionRouter.post("/:id/instant-buy", authMiddleware(), instantBuy);
 AuctionRouter.put("/:id/cancel",    authMiddleware(), cancelAuction);
+AuctionRouter.post("/:id/finalize", authMiddleware(), finalizeAuction);
 
 export default AuctionRouter;

@@ -2,6 +2,7 @@ import NFTSystem from "../Models/NFTSystem.js";
 import Activity from "../Models/ActivityModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
+import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./Config/.env" });
@@ -303,6 +304,9 @@ export async function finalizeNFAPurchase({
       console.warn("⚠️ [Buyback] BUYBACK_WALLET_ADDRESS not set — skipping dispatch");
     }
   }
+
+  // Cancel any active sibling listings (auction / marketplace) for this item
+  cancelSiblingListings(cleanSubId).catch(() => {});
 
   console.log("✅ NFA Purchase Finalized for Token #", tokenId);
   return { success: true, tokenId, subCollection };

@@ -1,6 +1,43 @@
 import Auction from "../Models/AuctionModel.js";
+import NFTSystem from "../Models/NFTSystem.js";
+import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
+
+// Sync NFTSystem subCollection after auction sale — transfer ownership + record sale
+async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
+  // Cancel sibling marketplace/auction listings for this item (skip the selling auction itself)
+  cancelSiblingListings(auction.subCollectionId, { skipAuctionId: auction._id }).catch(() => {});
+
+  if (!auction.nftSystemId || !auction.subCollectionId) return;
+  try {
+    const parent = await NFTSystem.findById(auction.nftSystemId);
+    if (!parent) return;
+    const sub = parent.subCollections.id(auction.subCollectionId);
+    if (!sub) return;
+
+    const sellerWallet = sub.owner;
+
+    sub.listed    = false;
+    sub.priceETH  = winningPrice;
+    sub.owner     = buyerWallet.toLowerCase();
+    sub.isFirstSale = false;
+    sub.salesHistory.push({
+      buyer:          buyerWallet.toLowerCase(),
+      seller:         sellerWallet,
+      priceETH:       winningPrice,
+      isFirstSale:    sub.isFirstSale,
+      createdAt:      new Date(),
+    });
+
+    parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
+    parent.markModified("subCollections");
+    await parent.save();
+  } catch (err) {
+    console.error("❌ syncNFTAfterAuctionSale error:", err.message);
+  }
+}
+
 async function expireAuctions() {
   await Auction.updateMany(
     { status: "active", endTime: { $lt: new Date() } },
@@ -147,6 +184,7 @@ export async function instantBuy(req, res) {
     auction.txHash = txHash || null;
 
     await auction.save();
+    await syncNFTAfterAuctionSale(auction, auction.instantBuyPrice, buyerWallet);
     res.json({ message: "Instant buy successful", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -178,6 +216,35 @@ export async function getSellerAuctions(req, res) {
   try {
     const auctions = await Auction.find({ sellerWallet: req.params.wallet }).sort({ createdAt: -1 });
     res.json(auctions);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+// ── POST /api/v1/auction/:id/finalize (auth required) ────────────────────────
+// Called after auction ends — transfers item to winning bidder if reserve met.
+export async function finalizeAuction(req, res) {
+  try {
+    const auction = await Auction.findById(req.params.id);
+    if (!auction) return res.status(404).json({ error: "Auction not found" });
+    if (auction.status === "sold") return res.json({ message: "Already finalized", auction });
+    if (auction.status === "active" && new Date() < auction.endTime) {
+      return res.status(400).json({ error: "Auction is still active" });
+    }
+
+    // Reserve price check
+    const reserveMet = auction.currentBid >= (auction.reservePrice || 0);
+    if (!auction.currentBidderWallet || !reserveMet) {
+      auction.status = "ended"; // no winner
+      await auction.save();
+      return res.json({ message: "Auction ended with no winner — reserve not met or no bids", auction });
+    }
+
+    auction.status = "sold";
+    await auction.save();
+    await syncNFTAfterAuctionSale(auction, auction.currentBid, auction.currentBidderWallet);
+
+    res.json({ message: "Auction finalized — item transferred to winner", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -258,6 +258,16 @@ const CATEGORIES = [
       { name: "Ocean Platform Delta",   symbol: "OPD",  priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
     ],
   },
+  {
+    name: "General", chain: "Base", symbol: "GEN",
+    items: [
+      { name: "HyperTek Starter Pack",  symbol: "HSP",  priceETH: 50,  description: "A bundle of miscellaneous items to kick-start your journey." },
+      { name: "Collector's Badge",      symbol: "CLB",  priceETH: 30,  description: "Rare collectible badge for dedicated community members." },
+      { name: "Mystery Crate",          symbol: "MYC",  priceETH: 75,  description: "Contains a random rare item from the HyperTek universe." },
+      { name: "Season Pass Token",      symbol: "SPT",  priceETH: 120, description: "Grants access to exclusive season events and rewards." },
+      { name: "Community Tribute",      symbol: "CMT",  priceETH: 25,  description: "A commemorative token for early HyperTek community supporters." },
+    ],
+  },
 ];
 
 // ─── NFT 101 (handled by seedMarketplace.js with full data — here we just clean + re-insert) ──
@@ -623,7 +633,7 @@ async function seed() {
       {
         title: "HyperBike GT — Neon Circuit",
         description: "Ultra-fast racing bike built for gravity tracks. Neon Circuit limited edition.",
-        category: "Vehicles", isNFA: false,
+        category: "Racing Vehicles", isNFA: false,
         startPrice: 550, currentBid: 660, instantBuyPrice: 900,
         endTime: new Date(now + 120 * 3600000),                      // ~5d
         seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
@@ -673,6 +683,7 @@ async function seed() {
         title: "Retrieve the Lost Data Core",
         description: "Infiltrate the abandoned tech facility in Sector 7 and recover the encrypted data core. Beware of AI sentinels guarding the perimeter.",
         reward: 250,
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
         poster: createdUsers[0]._id,
         posterWallet: "0xSEED_WALLET_POSTER_001",
         posterName: "Commander Alpha",
@@ -684,16 +695,18 @@ async function seed() {
         description: "Looking to trade my Hyper Assault Rifle for a Stealth Composite Vest. Willing to negotiate.",
         offering: "Hyper Assault Rifle (120 USDC)",
         requesting: "Stealth Composite Vest",
+        image: "https://images.unsplash.com/photo-1614680376408-16afefa3332b?w=800&q=80",
         poster: createdUsers[1]._id,
         posterWallet: "0xSEED_WALLET_POSTER_002",
         posterName: "ShadowTrader_99",
-        category: "equipment",
+        category: "weapons",
       },
       {
         type: "quest",
         title: "Defend Outpost Alpha — Wave Survival",
         description: "Hold Outpost Alpha for 10 waves against enemy forces. Minimum squad of 3 required. Bonus reward for zero casualties.",
         reward: 500,
+        image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80",
         poster: createdUsers[0]._id,
         posterWallet: "0xSEED_WALLET_POSTER_001",
         posterName: "General Haze",
@@ -705,16 +718,18 @@ async function seed() {
         description: "Offering my Viper Fighter Mk1 spaceship in exchange for a strategic land plot. Desert or Arctic locations preferred.",
         offering: "Viper Fighter Mk1 (600 USDC)",
         requesting: "Any Land Plot (Desert/Arctic)",
+        image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80",
         poster: createdUsers[1]._id,
         posterWallet: "0xSEED_WALLET_POSTER_002",
         posterName: "PilotZero",
-        category: "vehicles",
+        category: "spaceships",
       },
       {
         type: "quest",
         title: "Hunt the Rogue AI — Intel Required",
         description: "Track down the rogue AI entity 'NEXUS-7' across three map zones. Deliver location coordinates for reward. Time-limited mission.",
         reward: 800,
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
         poster: createdUsers[0]._id,
         posterWallet: "0xSEED_WALLET_POSTER_001",
         posterName: "Intel Division",
@@ -726,10 +741,11 @@ async function seed() {
         description: "Have Commander's Cross and Iron Shield Badge. Looking for Star of Honour. Will offer both badges plus 100 USDC.",
         offering: "Commander's Cross + Iron Shield Badge + 100 USDC",
         requesting: "Star of Honour",
+        image: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&q=80",
         poster: createdUsers[1]._id,
         posterWallet: "0xSEED_WALLET_POSTER_002",
         posterName: "MedalCollector",
-        category: "badges",
+        category: "military badges",
       },
     ];
     for (const t of SAMPLE_TRADES) {
@@ -787,7 +803,7 @@ async function seed() {
         owner: createdUsers[1]._id,
         ownerWallet: "0xSEED_WALLET_OWNER_002",
         ownerName: "SpeedKing",
-        category: "vehicles",
+        category: "racing vehicles",
       },
       {
         type: "rent",

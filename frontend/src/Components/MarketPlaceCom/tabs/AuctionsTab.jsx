@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
-import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info, CheckCircle2, Bell, Trophy } from "lucide-react";
+import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info, CheckCircle2, Bell, Trophy, Package } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
@@ -342,26 +342,66 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
 
 // ── Create auction modal ──────────────────────────────────────────────────────
 function CreateAuctionModal({ onClose, onSuccess, wallet }) {
-  const [form, setForm] = useState({ title: "", description: "", image: "", category: "", startPrice: "", reservePrice: "", instantBuyPrice: "", durationHours: "24" });
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+  const token = localStorage.getItem("token");
+  const [form, setForm] = useState({
+    startPrice: "", reservePrice: "", instantBuyPrice: "", durationHours: "72",
+  });
+  const [loading, setLoading]           = useState(false);
+  const [err, setErr]                   = useState("");
+  const [ownedItems, setOwnedItems]     = useState([]);
+  const [itemsLoading, setItemsLoading] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  useEffect(() => {
+    if (!wallet) return;
+    setItemsLoading(true);
+    fetch(`${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success && data.nfts) {
+          const items = data.nfts.flatMap(col =>
+            (col.subCollections || [])
+              .filter(s => s.owner?.toLowerCase() === wallet.toLowerCase())
+              .map(s => ({
+                _id:         s._id,
+                parentId:    col._id,
+                name:        s.name || "Unnamed",
+                image:       s.image || "",
+                category:    col.category || "general",
+                description: s.description || "",
+              }))
+          );
+          setOwnedItems(items);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setItemsLoading(false));
+  }, [wallet]);
 
   async function submit(e) {
     e.preventDefault();
     if (!wallet) return setErr("Connect wallet first");
+    if (!selectedItem) return setErr("Select an item from your collection");
     setLoading(true); setErr("");
     try {
-      const token = localStorage.getItem("token");
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
-          ...form, sellerWallet: wallet,
-          startPrice: Number(form.startPrice),
-          reservePrice: form.reservePrice ? Number(form.reservePrice) : undefined,
+          sellerWallet:    wallet,
+          nftSystemId:     selectedItem.parentId,
+          subCollectionId: selectedItem._id,
+          title:           selectedItem.name,
+          description:     selectedItem.description,
+          image:           selectedItem.image,
+          category:        selectedItem.category,
+          startPrice:      Number(form.startPrice),
+          reservePrice:    form.reservePrice    ? Number(form.reservePrice)    : undefined,
           instantBuyPrice: form.instantBuyPrice ? Number(form.instantBuyPrice) : undefined,
-          durationHours: Number(form.durationHours),
+          durationHours:   Number(form.durationHours),
         }),
       });
       const data = await r.json();
@@ -371,47 +411,148 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
     finally { setLoading(false); }
   }
 
-  const iCls = "w-full px-3 py-2 rounded-lg text-sm text-white outline-none placeholder-white/25";
   const iSt = { background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" };
+  const iCls = "w-full px-2.5 py-1.5 rounded-lg text-xs text-white outline-none placeholder-white/25";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" style={{ background: "rgba(0,0,0,0.75)" }}>
-      <div className="w-full max-w-md rounded-2xl p-6 relative my-auto" style={{ background: "#0a0b1a", border: "1px solid rgba(255,255,255,0.12)" }}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-white/40 hover:text-white"><X className="w-4 h-4" /></button>
-        <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Gavel className="w-4 h-4" /> List Auction</h3>
-        <form onSubmit={submit} className="flex flex-col gap-3">
-          <input required placeholder="Title *" value={form.title} onChange={e => set("title", e.target.value)} className={iCls} style={iSt} />
-          <textarea placeholder="Description" value={form.description} onChange={e => set("description", e.target.value)} rows={2} className={iCls} style={iSt} />
-          <input placeholder="Image URL (optional)" value={form.image} onChange={e => set("image", e.target.value)} className={iCls} style={iSt} />
-          <input placeholder="Category" value={form.category} onChange={e => set("category", e.target.value)} className={iCls} style={iSt} />
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-white/40 text-[10px] mb-1 block">Start Price (USDC) *</label>
-              <input required type="number" step="0.01" min="0" placeholder="0.00" value={form.startPrice} onChange={e => set("startPrice", e.target.value)} className={iCls} style={iSt} />
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-3 pt-16 pb-3"
+      style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}>
+      <div className="w-full max-w-2xl rounded-2xl flex flex-col relative"
+        style={{ background: "#0a0b1a", border: "1px solid rgba(255,255,255,0.12)", maxHeight: "calc(100vh - 88px)" }}>
+
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3 shrink-0"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="flex items-center gap-2">
+            <Gavel className="w-4 h-4 text-yellow-400" />
+            <span className="text-white font-bold text-sm">Create Auction</span>
+          </div>
+          <button onClick={onClose} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>
+        </div>
+
+        {/* 2-column body — no outer scroll, each col handles its own */}
+        <form onSubmit={submit} className="flex flex-1 min-h-0 divide-x divide-white/[0.06]">
+
+          {/* ── Left: item picker ── */}
+          <div className="flex flex-col gap-2 p-4 w-[45%] shrink-0 overflow-y-auto auction-modal-scroll">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">
+              Select Item
+            </p>
+
+            {!wallet ? (
+              <p className="text-white/25 text-[11px] italic">Connect wallet to browse your items</p>
+            ) : itemsLoading ? (
+              <p className="text-white/25 text-[11px] italic">Loading…</p>
+            ) : ownedItems.length === 0 ? (
+              <p className="text-white/25 text-[11px] italic">No owned items found</p>
+            ) : (
+              <div className="grid grid-cols-3 gap-1.5">
+                {ownedItems.map(item => {
+                  const active = selectedItem?._id === item._id;
+                  return (
+                    <button key={item._id} type="button"
+                      onClick={() => setSelectedItem(active ? null : item)}
+                      className="flex flex-col items-center gap-0.5 p-1 rounded-lg text-center transition-all"
+                      style={{
+                        background: active ? "rgba(234,179,8,0.15)" : "rgba(255,255,255,0.04)",
+                        border: active ? "1px solid rgba(234,179,8,0.5)" : "1px solid rgba(255,255,255,0.07)",
+                      }}>
+                      <div className="w-full aspect-square rounded-md overflow-hidden"
+                        style={{ background: "rgba(255,255,255,0.06)" }}>
+                        {item.image
+                          ? <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
+                          : <div className="w-full h-full flex items-center justify-center">
+                              <Package className="w-3 h-3 text-white/20" />
+                            </div>
+                        }
+                      </div>
+                      <span className="text-white/70 text-[8px] leading-tight line-clamp-1 w-full">{item.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Selected summary */}
+            {selectedItem && (
+              <div className="flex items-center gap-2 px-2 py-2 rounded-lg shrink-0 mt-auto"
+                style={{ background: "rgba(234,179,8,0.08)", border: "1px solid rgba(234,179,8,0.3)" }}>
+                {selectedItem.image && (
+                  <img src={getImageUrl(selectedItem.image)} alt={selectedItem.name}
+                    className="w-8 h-8 rounded-md object-cover shrink-0" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-white/90 text-[11px] font-semibold truncate">{selectedItem.name}</p>
+                  {selectedItem.category && (
+                    <p className="text-white/35 text-[9px] capitalize truncate">{selectedItem.category}</p>
+                  )}
+                </div>
+                <button type="button" onClick={() => setSelectedItem(null)} className="text-white/30 hover:text-white shrink-0">
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* ── Right: pricing + submit ── */}
+          <div className="flex flex-col gap-3 p-4 flex-1 min-w-0">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">Pricing & Duration</p>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="text-white/40 text-[9px] mb-1 block">Start Price (USDC) *</label>
+                <input required type="number" step="any" min="0" placeholder="e.g. 50"
+                  value={form.startPrice} onChange={e => set("startPrice", e.target.value)}
+                  className={iCls} style={iSt} />
+              </div>
+              <div>
+                <label className="text-white/40 text-[9px] mb-1 block">Reserve Price (USDC)</label>
+                <input type="number" step="any" min="0" placeholder="Optional"
+                  value={form.reservePrice} onChange={e => set("reservePrice", e.target.value)}
+                  className={iCls} style={iSt} />
+              </div>
             </div>
+
             <div>
-              <label className="text-white/40 text-[10px] mb-1 block">Reserve Price (USDC)</label>
-              <input type="number" step="0.01" min="0" placeholder="Optional" value={form.reservePrice} onChange={e => set("reservePrice", e.target.value)} className={iCls} style={iSt} />
+              <label className="text-white/40 text-[9px] mb-1 block">Instant Buy Price (USDC)</label>
+              <input type="number" step="any" min="0" placeholder="Leave blank to disable"
+                value={form.instantBuyPrice} onChange={e => set("instantBuyPrice", e.target.value)}
+                className={iCls} style={iSt} />
+            </div>
+
+            <div>
+              <label className="text-white/40 text-[9px] mb-1 block">Duration</label>
+              <div className="flex gap-1.5">
+                {[["24", "1 Day"], ["72", "3 Days"], ["168", "7 Days"]].map(([val, label]) => (
+                  <button key={val} type="button" onClick={() => set("durationHours", val)}
+                    className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
+                    style={form.durationHours === val
+                      ? { background: "rgba(234,179,8,0.2)", border: "1px solid rgba(234,179,8,0.5)", color: "#fde047" }
+                      : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-auto flex flex-col gap-2">
+              <p className="text-white/25 text-[9px]">Free to list · 20% commission on sale</p>
+              {err && <p className="text-red-400 text-[11px]">{err}</p>}
+              <button type="submit" disabled={loading || !selectedItem}
+                className="w-full py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition-all"
+                style={{ background: "rgba(0,42,168,0.8)" }}>
+                {loading ? "Creating…" : "Create Auction"}
+              </button>
             </div>
           </div>
-          <div>
-            <label className="text-white/40 text-[10px] mb-1 block">Instant Buy Price (USDC)</label>
-            <input type="number" step="0.01" min="0" placeholder="Leave blank to disable" value={form.instantBuyPrice} onChange={e => set("instantBuyPrice", e.target.value)} className={iCls} style={iSt} />
-          </div>
-          <div>
-            <label className="text-white/40 text-[10px] mb-1 block">Duration</label>
-            <select value={form.durationHours} onChange={e => set("durationHours", e.target.value)} className={iCls} style={iSt}>
-              <option value="24">1 Day</option>
-              <option value="72">3 Days</option>
-              <option value="168">7 Days</option>
-            </select>
-          </div>
-          <p className="text-white/30 text-[10px]">Free to list · 20% commission on sale</p>
-          {err && <p className="text-red-400 text-xs">{err}</p>}
-          <button type="submit" disabled={loading} className="py-2.5 rounded-xl text-sm font-semibold text-white" style={{ background: "rgba(0,42,168,0.8)" }}>
-            {loading ? "Creating…" : "Create Auction"}
-          </button>
         </form>
+
+        <style>{`
+          .auction-modal-scroll { scrollbar-width: thin; scrollbar-color: rgba(0,100,255,0.5) rgba(255,255,255,0.04); }
+          .auction-modal-scroll::-webkit-scrollbar { width: 4px; }
+          .auction-modal-scroll::-webkit-scrollbar-thumb { background: rgba(0,100,255,0.55); border-radius: 99px; }
+          .auction-modal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,130,255,0.8); }
+        `}</style>
       </div>
     </div>
   );

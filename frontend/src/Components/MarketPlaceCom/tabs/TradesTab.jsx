@@ -173,10 +173,9 @@ function TradeCard({ trade, onAccept, currentWallet }) {
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
         border: "1px solid rgba(255,255,255,0.09)",
       }}>
-      {trade.image && (
-        <LazyImage src={getImageUrl(trade.image)} alt={trade.title} fallback={popularFallback}
-          className="w-full h-32" imgClassName="object-cover" />
-      )}
+      <LazyImage src={trade.image ? getImageUrl(trade.image) : null} alt={trade.title}
+        fallback={popularFallback}
+        className="w-full h-[110px] sm:h-[130px] lg:h-[150px]" imgClassName="object-cover" />
       <div className="p-3 flex flex-col gap-2 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded"
@@ -358,193 +357,106 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-3 pt-16 pb-3"
       style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}>
-      <div className="w-full max-w-lg rounded-2xl flex flex-col relative"
-        style={{
-          background: "#0a0b1a",
-          border: "1px solid rgba(255,255,255,0.12)",
-          maxHeight: "90dvh",
-        }}>
+      <div className="w-full max-w-2xl rounded-2xl flex flex-col relative"
+        style={{ background: "#0a0b1a", border: "1px solid rgba(255,255,255,0.12)", maxHeight: "calc(100vh - 88px)" }}>
 
-        {/* Header — sticky, never scrolls */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-4 shrink-0"
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3 shrink-0"
           style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div className="flex items-center gap-2">
             <ArrowRightLeft className="w-4 h-4 text-blue-400" />
             <span className="text-white font-bold text-sm">Post a Trade</span>
           </div>
-          <button onClick={onClose} className="text-white/30 hover:text-white">
-            <X className="w-4 h-4" />
-          </button>
+          <button onClick={onClose} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>
         </div>
 
-        {/* Scrollable body */}
-        <div className="overflow-y-auto trade-modal-scroll flex-1">
-        <form onSubmit={submit} className="p-6 flex flex-col gap-5">
-          {/* ── Section 1: What you're offering ── */}
-          <div className="flex flex-col gap-2">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-              Your Item — What You're Offering
+        {/* 2-column body */}
+        <form onSubmit={submit} className="flex flex-1 min-h-0 divide-x divide-white/[0.06]">
+
+          {/* ── Left: item picker ── */}
+          <div className="flex flex-col gap-2 p-4 w-[45%] shrink-0 overflow-y-auto trade-modal-scroll">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">
+              Your Item
             </p>
+
             {wallet && itemsLoading && (
-              <p className="text-white/25 text-xs italic">Loading your items…</p>
+              <p className="text-white/25 text-[11px] italic">Loading…</p>
             )}
             {wallet && !itemsLoading && myItems.length > 0 && (
-              <div className="grid grid-cols-3 gap-2 max-h-44 overflow-y-auto pr-1"
-                style={{ scrollbarWidth: "thin" }}>
+              <div className="grid grid-cols-3 gap-1.5">
                 {myItems.map((item) => {
                   const active = selectedItem?._id === item._id;
                   return (
-                    <button
-                      key={item._id}
-                      type="button"
+                    <button key={item._id} type="button"
                       onClick={() => setSelectedItem(active ? null : item)}
-                      className="flex flex-col items-center gap-1 p-1.5 rounded-xl text-center transition-all"
+                      className="flex flex-col items-center gap-0.5 p-1 rounded-lg text-center transition-all"
                       style={{
                         background: active ? "rgba(0,80,255,0.18)" : "rgba(255,255,255,0.04)",
                         border: active ? "1px solid rgba(0,120,255,0.5)" : "1px solid rgba(255,255,255,0.07)",
                       }}>
-                      <div className="w-full aspect-square rounded-lg overflow-hidden"
+                      <div className="w-full aspect-square rounded-md overflow-hidden"
                         style={{ background: "rgba(255,255,255,0.06)" }}>
                         {item.image
-                          ? <img src={getImageUrl(item.image)} alt={item.name}
-                              className="w-full h-full object-cover" />
+                          ? <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
                           : <div className="w-full h-full flex items-center justify-center">
-                              <Package className="w-4 h-4 text-white/20" />
+                              <Package className="w-3 h-3 text-white/20" />
                             </div>
                         }
                       </div>
-                      <span className="text-white/70 text-[9px] leading-tight line-clamp-2 w-full">{item.name}</span>
-                      {item.category && (
-                        <span className="text-white/30 text-[8px] truncate w-full">{item.category}</span>
-                      )}
+                      <span className="text-white/70 text-[8px] leading-tight line-clamp-1 w-full">{item.name}</span>
                     </button>
                   );
                 })}
               </div>
             )}
 
-            {/* Selected item summary OR empty state */}
+            {/* Selected summary or manual input */}
             {selectedItem ? (
-              <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl"
+              <div className="flex items-center gap-2 px-2 py-2 rounded-lg shrink-0 mt-auto"
                 style={{ background: "rgba(0,80,255,0.1)", border: "1px solid rgba(0,120,255,0.3)" }}>
                 {selectedItem.image && (
                   <img src={getImageUrl(selectedItem.image)} alt={selectedItem.name}
-                    className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                    className="w-8 h-8 rounded-md object-cover shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
-                  <p className="text-white/90 text-xs font-semibold truncate">{selectedItem.name}</p>
+                  <p className="text-white/90 text-[11px] font-semibold truncate">{selectedItem.name}</p>
                   {selectedItem.category && (
-                    <p className="text-white/35 text-[10px]">{selectedItem.category}</p>
+                    <p className="text-white/35 text-[9px] truncate">{selectedItem.category}</p>
                   )}
                 </div>
-                <button type="button" onClick={() => setSelectedItem(null)}
-                  className="text-white/30 hover:text-white shrink-0">
-                  <X className="w-3.5 h-3.5" />
+                <button type="button" onClick={() => setSelectedItem(null)} className="text-white/30 hover:text-white shrink-0">
+                  <X className="w-3 h-3" />
                 </button>
               </div>
-            ) : (
-              !wallet || (!itemsLoading && myItems.length === 0) ? (
-                <div className="flex flex-col gap-1.5">
-                  <p className="text-white/25 text-[10px] italic">
-                    {!wallet ? "Connect wallet to browse your items" : "No owned items found — describe your item manually"}
-                  </p>
-                  <input
-                    required
-                    placeholder="Item name e.g. Dragon Slayer Elite, Viper Mk2 *"
-                    value={manualOffering}
-                    onChange={(e) => setManualOffering(e.target.value)}
-                    className={iCls}
-                    style={iSt}
-                  />
-                </div>
-              ) : null
-            )}
-          </div>
-
-          {/* ── Section 2: What you want in return ── */}
-          <div className="flex flex-col gap-2"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "1rem" }}>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-              What You Want in Return
-            </p>
-
-            {/* Open offer toggle */}
-            <label className="flex items-center gap-2.5 cursor-pointer select-none">
-              <div className="relative w-9 h-5 shrink-0">
-                <input type="checkbox" className="sr-only" checked={openOffer}
-                  onChange={(e) => setOpenOffer(e.target.checked)} />
-                <div className="block rounded-full h-5 w-9 transition-colors"
-                  style={{ background: openOffer ? "rgba(0,100,255,0.7)" : "rgba(255,255,255,0.12)" }} />
-                <div className="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform"
-                  style={{ transform: openOffer ? "translateX(16px)" : "translateX(0)" }} />
-              </div>
-              <div>
-                <span className="text-white/70 text-xs font-medium">Open offer</span>
-                <span className="text-white/30 text-[10px] ml-1.5">— let anyone propose what they'll give you</span>
-              </div>
-            </label>
-
-            {!openOffer && (
-              <div className="flex flex-col gap-2 mt-1">
-                <select
-                  value={reqCategory}
-                  onChange={(e) => setReqCategory(e.target.value)}
-                  className={iCls}
-                  style={{ ...iSt, background: "#10112a" }}>
-                  <option value="">Any category</option>
-                  {TRADE_CATEGORIES.map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
-                </select>
-                <input
-                  required={!openOffer}
-                  placeholder="Item name e.g. Dragon Slayer Elite, Scout Vessel Mk2 *"
-                  value={reqItem}
-                  onChange={(e) => setReqItem(e.target.value)}
-                  className={iCls}
-                  style={iSt}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* ── Section 3: Optional details ── */}
-          <div className="flex flex-col gap-2"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "1rem" }}>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">
-              Additional Details (optional)
-            </p>
-            <textarea
-              placeholder="Any notes about condition, trade terms, etc."
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={2}
-              className={iCls}
-              style={iSt}
-            />
-
-            {/* Custom image — only if no item selected from collection */}
-            {!selectedItem && (
+            ) : (!wallet || (!itemsLoading && myItems.length === 0)) ? (
               <div className="flex flex-col gap-1.5">
-                <label className="text-white/30 text-[10px]">Upload item image (optional)</label>
-                <label className="flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer hover:brightness-110"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px dashed rgba(255,255,255,0.15)" }}>
-                  <Package className="w-3.5 h-3.5 text-white/25 shrink-0" />
-                  <span className="text-white/30 text-xs truncate">
-                    {imageFile ? imageFile.name : "Choose image…"}
-                  </span>
+                <p className="text-white/25 text-[9px] italic">
+                  {!wallet ? "Connect wallet to browse items" : "No items found — describe manually"}
+                </p>
+                <input required placeholder="Item name *" value={manualOffering}
+                  onChange={(e) => setManualOffering(e.target.value)}
+                  className={iCls} style={iSt} />
+              </div>
+            ) : null}
+
+            {/* Image upload (no item selected) */}
+            {!selectedItem && (
+              <div className="flex flex-col gap-1">
+                <label className="flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer hover:brightness-110"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px dashed rgba(255,255,255,0.12)" }}>
+                  <Package className="w-3 h-3 text-white/25 shrink-0" />
+                  <span className="text-white/30 text-[9px] truncate">{imageFile ? imageFile.name : "Image (optional)"}</span>
                   <input type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
                 </label>
                 {imagePreview && (
-                  <div className="relative w-full h-24 rounded-lg overflow-hidden"
-                    style={{ border: "1px solid rgba(255,255,255,0.09)" }}>
+                  <div className="relative w-full h-16 rounded-lg overflow-hidden">
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
                     <button type="button" onClick={clearCustomImage}
-                      className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full flex items-center justify-center"
+                      className="absolute top-1 right-1 w-4 h-4 rounded-full flex items-center justify-center"
                       style={{ background: "rgba(0,0,0,0.7)" }}>
-                      <X className="w-3 h-3 text-white" />
+                      <X className="w-2.5 h-2.5 text-white" />
                     </button>
                   </div>
                 )}
@@ -552,44 +464,64 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
             )}
           </div>
 
-          {/* Info strip */}
-          <div className="px-3 py-2 rounded-lg text-[10px] text-white/30"
-            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-            Both parties pay a platform fee · Listing expires in 30 days · NFAs cannot be traded — sell only
-          </div>
+          {/* ── Right: what you want + details + submit ── */}
+          <div className="flex flex-col gap-3 p-4 flex-1 min-w-0 overflow-y-auto trade-modal-scroll">
+            {/* What you want */}
+            <div className="flex flex-col gap-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">What You Want</p>
 
-          {err && <p className="text-red-400 text-xs">{err}</p>}
-          <button type="submit" disabled={loading}
-            className="py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
-            style={{
-              background: "rgba(0,42,168,0.8)",
-              border: "1px solid rgba(0,80,255,0.4)",
-              opacity: loading ? 0.5 : 1,
-            }}>
-            {loading ? "Posting…" : "Post Trade"}
-          </button>
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <div className="relative w-8 h-4 shrink-0">
+                  <input type="checkbox" className="sr-only" checked={openOffer}
+                    onChange={(e) => setOpenOffer(e.target.checked)} />
+                  <div className="block rounded-full h-4 w-8 transition-colors"
+                    style={{ background: openOffer ? "rgba(0,100,255,0.7)" : "rgba(255,255,255,0.12)" }} />
+                  <div className="absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white transition-transform"
+                    style={{ transform: openOffer ? "translateX(16px)" : "translateX(0)" }} />
+                </div>
+                <span className="text-white/60 text-[11px]">Open offer — let others propose</span>
+              </label>
+
+              {!openOffer && (
+                <div className="flex flex-col gap-1.5">
+                  <select value={reqCategory} onChange={(e) => setReqCategory(e.target.value)}
+                    className={iCls} style={{ ...iSt, background: "#10112a" }}>
+                    <option value="">Any category</option>
+                    {TRADE_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  <input required={!openOffer} placeholder="Item name *" value={reqItem}
+                    onChange={(e) => setReqItem(e.target.value)} className={iCls} style={iSt} />
+                </div>
+              )}
+            </div>
+
+            {/* Notes */}
+            <div className="flex flex-col gap-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">Notes (optional)</p>
+              <textarea placeholder="Trade terms, condition, etc." value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={2} className={iCls} style={iSt} />
+            </div>
+
+            <div className="mt-auto flex flex-col gap-2">
+              <p className="text-[9px] text-white/25 leading-relaxed">
+                Both parties pay a platform fee · Expires in 30 days · NFAs cannot be traded
+              </p>
+              {err && <p className="text-red-400 text-[11px]">{err}</p>}
+              <button type="submit" disabled={loading}
+                className="w-full py-2 rounded-xl text-sm font-semibold text-white transition-all"
+                style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", opacity: loading ? 0.5 : 1 }}>
+                {loading ? "Posting…" : "Post Trade"}
+              </button>
+            </div>
+          </div>
         </form>
-        </div>{/* end scrollable body */}
 
         <style>{`
-          .trade-modal-scroll {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0,100,255,0.5) rgba(255,255,255,0.04);
-          }
-          .trade-modal-scroll::-webkit-scrollbar {
-            width: 5px;
-          }
-          .trade-modal-scroll::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.03);
-            border-radius: 99px;
-          }
-          .trade-modal-scroll::-webkit-scrollbar-thumb {
-            background: rgba(0,100,255,0.55);
-            border-radius: 99px;
-          }
-          .trade-modal-scroll::-webkit-scrollbar-thumb:hover {
-            background: rgba(0,130,255,0.8);
-          }
+          .trade-modal-scroll { scrollbar-width: thin; scrollbar-color: rgba(0,100,255,0.5) rgba(255,255,255,0.04); }
+          .trade-modal-scroll::-webkit-scrollbar { width: 4px; }
+          .trade-modal-scroll::-webkit-scrollbar-thumb { background: rgba(0,100,255,0.55); border-radius: 99px; }
+          .trade-modal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,130,255,0.8); }
         `}</style>
       </div>
     </div>
@@ -700,7 +632,7 @@ export default function TradesTab() {
 
       {/* ── Cards ── */}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="rounded-xl h-44 animate-pulse"
               style={{ background: "rgba(255,255,255,0.04)" }} />
@@ -712,7 +644,7 @@ export default function TradesTab() {
           <p className="text-sm">No {statusFilter} trades</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {trades.map((t) => (
             <TradeCard
               key={t._id}
