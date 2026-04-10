@@ -1824,6 +1824,33 @@ function Buy1() {
         </div>
       )}
 
+      {/* ── Other Trading Options Note ── */}
+      <div className="mt-10 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        style={{ background: "rgba(0,42,168,0.08)", border: "1px solid rgba(0,80,255,0.15)" }}>
+        <div>
+          <p className="text-white/70 text-sm font-medium">Looking for other ways to trade?</p>
+          <p className="text-white/35 text-xs mt-0.5">You can also participate via Auction or direct Trade on the Marketplace.</p>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            to="/market-place?tab=auctions"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-amber-300 transition-all hover:brightness-125"
+            style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)" }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Auction
+          </Link>
+          <Link
+            to="/market-place?tab=trades"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-blue-300 transition-all hover:brightness-125"
+            style={{ background: "rgba(96,165,250,0.08)", border: "1px solid rgba(96,165,250,0.2)" }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+            Trade
+          </Link>
+        </div>
+      </div>
+
       {/* ── Price History Chart ── */}
       <PriceHistory subId={collection?._id} />
 
