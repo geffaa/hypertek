@@ -11,6 +11,7 @@ import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnab
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
 import { markOfferCompleted } from "./Offer.js";
 import Activity from "../Models/ActivityModel.js";
+import MarketListing from "../Models/MarketListingModel.js";
 import Stripe from "stripe";
 import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
@@ -1923,7 +1924,34 @@ export async function createSubCollectionListing(req, res) {
     parent.markModified('subCollections');
     await parent.save();
 
-    console.log(`✅ Sub-collection ${tokenId} listed for ${priceETH} ETH`);
+    // Sync to MarketListing for profile Listings tab
+    const CAT_ALIAS = {
+      "military badges and collectables": "military badges",
+      "vehicles": "racing vehicles",
+      "land/bases": "land and bases",
+    };
+    const VALID_CATS = ["skins","military badges","specialists","weapons","body armour","spaceships","racing vehicles","artwork","land and bases","general"];
+    const rawCat = (parent.category || parent.collection?.name || "general").toLowerCase().trim();
+    const normCat = CAT_ALIAS[rawCat] || (VALID_CATS.includes(rawCat) ? rawCat : "general");
+
+    // Remove any existing active listing for this sub-collection then create fresh
+    await MarketListing.deleteOne({ subCollectionId: subCollection._id.toString(), status: "active" });
+    await MarketListing.create({
+      userId: req.user._id || req.user.id,
+      userName: req.user.FullName || req.user.Name || req.user.Email?.split("@")[0] || "Anonymous",
+      userWallet: seller,
+      category: normCat,
+      activityType: "selling_general",
+      itemName: subCollection.name || "Unnamed",
+      itemDescription: subCollection.description || "",
+      itemImage: subCollection.image || "",
+      nftSystemId: parent._id,
+      subCollectionId: subCollection._id.toString(),
+      price: Number(priceETH),
+      status: "active",
+    });
+
+    console.log(`✅ Sub-collection ${subCollection._id} listed for ${priceETH} USDC`);
 
     return res.json({
       success: true,
@@ -2257,6 +2285,9 @@ export async function cancelSubCollectionListing(req, res) {
     // 6. Save changes
     parent.markModified('subCollections');
     await parent.save();
+
+    // Remove corresponding MarketListing
+    await MarketListing.deleteOne({ subCollectionId: subCollection._id.toString(), status: "active" });
 
     console.log("✅ Successfully cancelled listing:", {
       subId: subCollection._id,

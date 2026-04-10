@@ -1282,6 +1282,17 @@ function Buy1() {
 
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
+        {/* Back button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-0.5">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back
+        </button>
+        <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
         {!isOwner && (
           <Link
             to="/market-place"

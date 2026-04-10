@@ -390,7 +390,7 @@ function MarketPlace() {
 
 
           {/* ================= CONTENT AREA ================= */}
-          <section className="relative z-10 mt-10">
+          <section className="relative z-10 mt-10 pb-24">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
@@ -422,7 +422,7 @@ function MarketPlace() {
                   )}
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                   {gridItems.map((item) => (
                     <div
                       key={item._id}
@@ -470,7 +470,7 @@ function MarketPlace() {
                       </div>
 
                       {/* CTA */}
-                      <div className="px-3 pb-3">
+                      <div className="px-3 pb-3 flex flex-col gap-1.5">
                         {item.listed ? (
                           <button
                             onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
@@ -495,6 +495,16 @@ function MarketPlace() {
                           >
                             Connect Wallet
                           </button>
+                        )}
+                        {isConnected && (
+                          <Link
+                            to="/dashboard/collections"
+                            className="w-full h-7 rounded-lg text-white/40 hover:text-white/70 text-[10px] font-medium transition-all flex items-center justify-center gap-1"
+                            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                          >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            Edit / Delete in Dashboard
+                          </Link>
                         )}
                       </div>
                     </div>
