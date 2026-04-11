@@ -24,7 +24,7 @@ function Home() {
       <Hero />
       <StorySection />
       <News />
-<PopularCollections />
+      <PopularCollections />
       <MarketPlace />
 
     </div>

@@ -160,39 +160,13 @@ export default function News() {
                     {clip(item.heading, 65)}
                   </h3>
                   <p className="text-gray-300 text-[13px] lg:text-[14px] leading-relaxed">
-                    {clip(item.description, 160)}
+                    {item.description}
                   </p>
                 </div>
               </CardHover>
             </motion.div>
           ))}
 
-          {/* 2 smaller articles */}
-          <div className="flex gap-5">
-            {news.slice(1, 3).map((item, i) => (
-              <motion.div key={item._id} className="w-1/2"
-                variants={fadeLeft} custom={i + 1} initial="hidden"
-                whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
-                <CardHover onClick={() => go(item)} className="flex flex-col gap-3">
-                  <div className="overflow-hidden w-full" style={{ aspectRatio: "330/262" }}>
-                    <LazyImage
-                      src={getImageUrl(item.image)} alt={item.heading}
-                      className="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                      imgClassName="object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-white font-bold uppercase font-goldman leading-tight text-[13px] lg:text-[14px]">
-                      {clip(item.heading, 45)}
-                    </h3>
-                    <p className="text-gray-300 text-[12px] lg:text-[13px] leading-relaxed">
-                      {clip(item.description, 100)}
-                    </p>
-                  </div>
-                </CardHover>
-              </motion.div>
-            ))}
-          </div>
         </div>
 
         {/* ── Right Column — 42% ── */}
