@@ -8,7 +8,8 @@ export const MAJOR_TABS = [
   "My Collectibles",
   "Listings",
   "Activities",
-  "My Offerings",
+  "Trade",
+  "Auction",
   "Questing",
   "Bounty",
 ];

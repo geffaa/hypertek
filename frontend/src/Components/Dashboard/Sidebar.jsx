@@ -133,7 +133,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               </li>
             </Link>
 
-            {/* My Offers */}
+            {/* Offers */}
             <Link to="/dashboard/my-offers" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "my-offers" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
@@ -142,7 +142,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiMessageSquare className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  My Offers
+                  Offers
                 </h1>
               </li>
             </Link>

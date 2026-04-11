@@ -273,8 +273,9 @@ function CreateNFT() {
               <span>ℹ</span> How listing works
             </p>
             <ul className="text-white/45 text-[11px] space-y-1 leading-relaxed">
-              <li>• Save your item to storage first — no gas required.</li>
-              <li>• Then list it on the <span className="text-white/65 font-medium">Marketplace</span> (fixed price), open it for <span className="text-white/65 font-medium">Auction</span> (timed bidding with reserve), or offer it in <span className="text-white/65 font-medium">Trade</span>.</li>
+              <li>• Save your item to storage first — no gas / fees required.</li>
+              <li>• Then list it on the <span className="text-white/65 font-medium">Marketplace</span> (fixed price).</li>
+              <li>• Once listed on the <span className="text-white/65 font-medium">Marketplace</span>, open it for <span className="text-white/65 font-medium">Auction</span> (timed bidding with reserve), or offer it in <span className="text-white/65 font-medium">Trade</span>.</li>
               <li>• All three channels can be active at the same time — the first sale cancels the rest.</li>
             </ul>
           </div>

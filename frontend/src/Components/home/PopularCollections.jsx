@@ -345,7 +345,7 @@ const PACKAGES = [
     id: 15,
     title: "Team Specialist Major",
     tier: "$5,000 USD",
-    image: null,
+    image: "/avatar/team-specialist-major.png",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Team Specialist Major"',
       "You will receive $6,500 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",
@@ -380,7 +380,7 @@ const PACKAGES = [
     id: 16,
     title: "Commandar Elite",
     tier: "$7,500 USD",
-    image: null,
+    image: "/avatar/commander-elite.png",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Commandar Elite"',
       "You will receive $9,000 USD credits to be used for in-game purchases",
@@ -416,7 +416,7 @@ const PACKAGES = [
     id: 17,
     title: "Over Lord",
     tier: "$10,000 USD",
-    image: null,
+    image: "/avatar/overlord.png",
     rewards: [
       'Your name will appear in the end credits of the game under the title "Over Lord"',
       "You will receive $15,000 USD credits to be used for in-game purchases (can not be turned into cash-out payments)",

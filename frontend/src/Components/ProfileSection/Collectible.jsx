@@ -74,7 +74,8 @@ function MarketPlace() {
     "My Collectibles": "collectibles",
     "Listings":        "listings",
     "Activities":      "activities",
-    "My Offerings":    "offerings",
+    "Trade":           "trade",
+    "Auction":         "auction",
     "Questing":        "questing",
     "Bounty":          "bounty",
   };
@@ -96,9 +97,13 @@ function MarketPlace() {
   const [txLoading, setTxLoading] = useState(false);
   const [txFilter, setTxFilter] = useState("all");
 
-  // ---- My Offerings (trade posts) state ----
+  // ---- Trade (my posted trades) state ----
   const [offers, setOffers] = useState([]);
   const [offersLoading, setOffersLoading] = useState(false);
+
+  // ---- Auction (my posted auctions) state ----
+  const [myAuctions, setMyAuctions] = useState([]);
+  const [auctionsLoading, setAuctionsLoading] = useState(false);
 
   // ---- List for Sale modal ----
   const [listingModal, setListingModal] = useState(null); // null | { item }
@@ -269,9 +274,9 @@ function MarketPlace() {
       .finally(() => setTxLoading(false));
   }, [activeTab, connectedWallet, token]);
 
-  // ---- Fetch trade posts when My Offerings tab is active ----
+  // ---- Fetch trade posts when Trade tab is active ----
   useEffect(() => {
-    if (activeTab !== "My Offerings" || !connectedWallet) return;
+    if (activeTab !== "Trade" || !connectedWallet) return;
     setOffersLoading(true);
     axios
       .get(`${BACKEND_BASE_URL}/api/v1/trade`, {
@@ -281,6 +286,19 @@ function MarketPlace() {
       .then((res) => setOffers(res.data?.trades || []))
       .catch(() => setOffers([]))
       .finally(() => setOffersLoading(false));
+  }, [activeTab, connectedWallet, token]);
+
+  // ---- Fetch user's posted auctions when Auction tab is active ----
+  useEffect(() => {
+    if (activeTab !== "Auction" || !connectedWallet) return;
+    setAuctionsLoading(true);
+    axios
+      .get(`${BACKEND_BASE_URL}/api/v1/auction/seller/${connectedWallet}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      })
+      .then((res) => setMyAuctions(Array.isArray(res.data) ? res.data : res.data?.auctions || []))
+      .catch(() => setMyAuctions([]))
+      .finally(() => setAuctionsLoading(false));
   }, [activeTab, connectedWallet, token]);
 
   // ---- List for Sale submit ----
@@ -598,23 +616,22 @@ function MarketPlace() {
               );
             })()}
 
-            {/* ---- MY OFFERINGS VIEW (user's posted trades) ---- */}
-            {activeTab === "My Offerings" && (
+            {/* ---- TRADE VIEW (user's posted trades) ---- */}
+            {activeTab === "Trade" && (
               <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                 {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">Connect your wallet to view your trade offerings</p>
+                    <p className="text-sm">Connect your wallet to view your trade listings</p>
                   </div>
                 ) : offersLoading ? (
-                  <div className="text-white/50 text-sm py-16 text-center">Loading your trade offerings...</div>
+                  <div className="text-white/50 text-sm py-16 text-center">Loading your trade listings...</div>
                 ) : offers.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">No active trade offerings</p>
+                    <p className="text-sm">No active trade listings</p>
                     <p className="text-xs text-white/20">Post a trade on the Marketplace → Trades tab to see it here</p>
                   </div>
                 ) : (
                   <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-                    {/* Header */}
                     <div className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
                       style={{ background: "rgba(0,20,80,0.5)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
                       <span>Trade No</span>
@@ -649,6 +666,65 @@ function MarketPlace() {
                 )}
               </div>
             )}
+
+            {/* ---- AUCTION VIEW (user's posted auctions) ---- */}
+            {activeTab === "Auction" && (
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                {!connectedWallet ? (
+                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                    <p className="text-sm">Connect your wallet to view your auction listings</p>
+                  </div>
+                ) : auctionsLoading ? (
+                  <div className="text-white/50 text-sm py-16 text-center">Loading your auctions...</div>
+                ) : myAuctions.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                    <p className="text-sm">No auction listings</p>
+                    <p className="text-xs text-white/20">Start an auction from the Marketplace → Auctions tab to see it here</p>
+                  </div>
+                ) : (
+                  <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                    <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                      style={{ background: "rgba(0,20,80,0.5)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                      <span>Auction No</span>
+                      <span>Item</span>
+                      <span>Start Price</span>
+                      <span>Current Bid</span>
+                      <span>Ends</span>
+                      <span>Status</span>
+                    </div>
+                    {myAuctions.map((auction, i) => {
+                      const statusColors = {
+                        active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
+                        ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
+                        sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
+                        cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+                      };
+                      const c = statusColors[auction.status] || statusColors.ended;
+                      const endDate = auction.endTime ? new Date(auction.endTime) : null;
+                      const diff = endDate ? endDate - Date.now() : 0;
+                      const timeStr = diff > 0
+                        ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
+                        : "Ended";
+                      return (
+                        <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
+                          style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                          <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
+                          <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
+                          <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
+                          <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
+                          <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
+                          <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
+                            style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>
+                            {auction.status}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* ---- QUESTING VIEW ---- */}
             {activeTab === "Questing" && (
               <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">

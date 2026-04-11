@@ -1455,41 +1455,6 @@ function Buy1() {
               return null;
             })()}
 
-            {/* Commission Breakdown */}
-            {!isOwner && (() => {
-              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
-              const isFirstSale = collection.isFirstSale !== false;
-              const isHypertekItem = true; // Items shown in marketplace are listed by platform/owners
-              let rows = [];
-              if (isFirstSale) {
-                rows = [
-                  { label: "You receive", value: "80%", color: "text-green-400" },
-                  { label: "Artist royalty", value: "4%", color: "text-white/50" },
-                  { label: "Platform fee", value: "16%", color: "text-white/40" },
-                ];
-              } else {
-                rows = [
-                  { label: "Seller receives", value: "80%", color: "text-green-400" },
-                  { label: "Artist royalty", value: "4%", color: "text-white/50" },
-                  { label: "Min buyback +", value: "5%", color: "text-blue-400" },
-                  { label: "Platform fee", value: "11%", color: "text-white/40" },
-                ];
-              }
-              return (
-                <div className="rounded-xl p-3"
-                  style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Sale Distribution</p>
-                  <div className="flex flex-col gap-1">
-                    {rows.map(r => (
-                      <div key={r.label} className="flex justify-between text-xs">
-                        <span className="text-white/40">{r.label}</span>
-                        <span className={`font-semibold ${r.color}`}>{r.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })()}
 
             {/* Embedded wallet display */}
             {isEmailWalletConnected && emailWalletAddress && (

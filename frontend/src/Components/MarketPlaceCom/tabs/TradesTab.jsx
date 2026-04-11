@@ -163,7 +163,7 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
 }
 
 // ── Trade Card ────────────────────────────────────────────────────────────────
-function TradeCard({ trade, onAccept, currentWallet }) {
+function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
   const isPoster = trade.posterWallet === currentWallet;
   const statusColor = STATUS_COLOR[trade.status] || "text-white/40";
 
@@ -216,6 +216,15 @@ function TradeCard({ trade, onAccept, currentWallet }) {
             style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)", color: "#fff" }}
           >
             Accept Trade
+          </button>
+        )}
+        {trade.status === "open" && isPoster && (
+          <button
+            onClick={() => onCancel(trade._id)}
+            className="mt-auto w-full py-1.5 rounded-lg text-xs font-semibold transition-all hover:brightness-110"
+            style={{ background: "rgba(239,68,68,0.10)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
+          >
+            Cancel Trade
           </button>
         )}
       </div>
@@ -302,8 +311,8 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
     setImagePreview("");
   }
 
-  // Derived values — selectedItem takes priority over manual text
-  const offeringName     = selectedItem?.name     || manualOffering;
+  // manualOffering is always the source of truth (auto-filled from grid or typed manually)
+  const offeringName     = manualOffering.trim() || selectedItem?.name || "";
   const offeringCategory = selectedItem?.category || "";
   const offeringImageSrc = selectedItem ? getImageUrl(selectedItem.image) : imagePreview;
 
@@ -381,40 +390,63 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
               Your Item
             </p>
 
+            {/* Item name — always visible */}
+            <input
+              placeholder="Item name *"
+              value={manualOffering}
+              onChange={(e) => { setManualOffering(e.target.value); if (selectedItem) setSelectedItem(null); }}
+              className={iCls} style={iSt}
+            />
+
+            {/* Items grid — shown when wallet connected and has items */}
             {wallet && itemsLoading && (
-              <p className="text-white/25 text-[11px] italic">Loading…</p>
+              <p className="text-white/25 text-[11px] italic">Loading your items…</p>
+            )}
+            {!wallet && (
+              <p className="text-white/25 text-[9px] italic">Connect wallet to select from your items</p>
             )}
             {wallet && !itemsLoading && myItems.length > 0 && (
-              <div className="grid grid-cols-3 gap-1.5">
-                {myItems.map((item) => {
-                  const active = selectedItem?._id === item._id;
-                  return (
-                    <button key={item._id} type="button"
-                      onClick={() => setSelectedItem(active ? null : item)}
-                      className="flex flex-col items-center gap-0.5 p-1 rounded-lg text-center transition-all"
-                      style={{
-                        background: active ? "rgba(0,80,255,0.18)" : "rgba(255,255,255,0.04)",
-                        border: active ? "1px solid rgba(0,120,255,0.5)" : "1px solid rgba(255,255,255,0.07)",
-                      }}>
-                      <div className="w-full aspect-square rounded-md overflow-hidden"
-                        style={{ background: "rgba(255,255,255,0.06)" }}>
-                        {item.image
-                          ? <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
-                          : <div className="w-full h-full flex items-center justify-center">
-                              <Package className="w-3 h-3 text-white/20" />
-                            </div>
-                        }
-                      </div>
-                      <span className="text-white/70 text-[8px] leading-tight line-clamp-1 w-full">{item.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
+              <>
+                <p className="text-white/25 text-[9px]">Or pick from your items (auto-fills name):</p>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {myItems.map((item) => {
+                    const active = selectedItem?._id === item._id;
+                    return (
+                      <button key={item._id} type="button"
+                        onClick={() => {
+                          if (active) {
+                            setSelectedItem(null);
+                            setManualOffering("");
+                          } else {
+                            setSelectedItem(item);
+                            setManualOffering(item.name);
+                          }
+                        }}
+                        className="flex flex-col items-center gap-0.5 p-1 rounded-lg text-center transition-all"
+                        style={{
+                          background: active ? "rgba(0,80,255,0.18)" : "rgba(255,255,255,0.04)",
+                          border: active ? "1px solid rgba(0,120,255,0.5)" : "1px solid rgba(255,255,255,0.07)",
+                        }}>
+                        <div className="w-full aspect-square rounded-md overflow-hidden"
+                          style={{ background: "rgba(255,255,255,0.06)" }}>
+                          {item.image
+                            ? <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
+                            : <div className="w-full h-full flex items-center justify-center">
+                                <Package className="w-3 h-3 text-white/20" />
+                              </div>
+                          }
+                        </div>
+                        <span className="text-white/70 text-[8px] leading-tight line-clamp-1 w-full">{item.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
             )}
 
-            {/* Selected summary or manual input */}
-            {selectedItem ? (
-              <div className="flex items-center gap-2 px-2 py-2 rounded-lg shrink-0 mt-auto"
+            {/* Selected item badge */}
+            {selectedItem && (
+              <div className="flex items-center gap-2 px-2 py-2 rounded-lg shrink-0"
                 style={{ background: "rgba(0,80,255,0.1)", border: "1px solid rgba(0,120,255,0.3)" }}>
                 {selectedItem.image && (
                   <img src={getImageUrl(selectedItem.image)} alt={selectedItem.name}
@@ -426,20 +458,12 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
                     <p className="text-white/35 text-[9px] truncate">{selectedItem.category}</p>
                   )}
                 </div>
-                <button type="button" onClick={() => setSelectedItem(null)} className="text-white/30 hover:text-white shrink-0">
+                <button type="button" onClick={() => { setSelectedItem(null); setManualOffering(""); }}
+                  className="text-white/30 hover:text-white shrink-0">
                   <X className="w-3 h-3" />
                 </button>
               </div>
-            ) : (!wallet || (!itemsLoading && myItems.length === 0)) ? (
-              <div className="flex flex-col gap-1.5">
-                <p className="text-white/25 text-[9px] italic">
-                  {!wallet ? "Connect wallet to browse items" : "No items found — describe manually"}
-                </p>
-                <input required placeholder="Item name *" value={manualOffering}
-                  onChange={(e) => setManualOffering(e.target.value)}
-                  className={iCls} style={iSt} />
-              </div>
-            ) : null}
+            )}
 
             {/* Image upload (no item selected) */}
             {!selectedItem && (
@@ -451,12 +475,13 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
                   <input type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
                 </label>
                 {imagePreview && (
-                  <div className="relative w-full h-16 rounded-lg overflow-hidden">
-                    <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
+                  <div className="relative w-full rounded-lg overflow-hidden"
+                    style={{ background: "rgba(0,0,0,0.4)" }}>
+                    <img src={imagePreview} alt="preview" className="w-full h-auto object-contain max-h-48" />
                     <button type="button" onClick={clearCustomImage}
-                      className="absolute top-1 right-1 w-4 h-4 rounded-full flex items-center justify-center"
-                      style={{ background: "rgba(0,0,0,0.7)" }}>
-                      <X className="w-2.5 h-2.5 text-white" />
+                      className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full flex items-center justify-center"
+                      style={{ background: "rgba(0,0,0,0.75)" }}>
+                      <X className="w-3 h-3 text-white" />
                     </button>
                   </div>
                 )}
@@ -552,6 +577,7 @@ export default function TradesTab() {
   const [statusFilter, setStatusFilter] = useState("open");
   const [showCreate, setShowCreate] = useState(false);
   const [acceptTrade, setAcceptTrade] = useState(null);
+  const [cancelling, setCancelling] = useState(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const LIMIT = 12;
@@ -587,6 +613,23 @@ export default function TradesTab() {
 
   useEffect(() => { fetchTrades(); }, [fetchTrades]);
   useEffect(() => { setPage(1); }, [statusFilter]);
+
+  const handleCancel = async (tradeId) => {
+    if (!window.confirm("Cancel this trade listing?")) return;
+    setCancelling(tradeId);
+    try {
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade/${tradeId}/cancel`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      });
+      if (!r.ok) throw new Error("Failed to cancel");
+      setTrades((prev) => prev.filter((t) => t._id !== tradeId));
+    } catch {
+      alert("Could not cancel trade. Please try again.");
+    } finally {
+      setCancelling(null);
+    }
+  };
 
   const pages = Math.ceil(total / LIMIT);
 
@@ -651,6 +694,7 @@ export default function TradesTab() {
               trade={t}
               currentWallet={wallet}
               onAccept={(t) => setAcceptTrade(t)}
+              onCancel={handleCancel}
             />
           ))}
         </div>
