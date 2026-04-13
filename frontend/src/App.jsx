@@ -83,6 +83,7 @@ import Stripe from "./pages/Stripe";
 import Funnel from "./pages/Funnel";
 import Gaming from "./pages/Gaming";
 import Nft101Article from "./pages/Nft101Article";
+import GameModePage from "./pages/GameModePage";
 
 import DashboardLayout from "./Layout/DashboardLayout";
 
@@ -222,6 +223,7 @@ function AppWrapper() {
 
             {/* Gaming Interface */}
             <Route path="/gaming" element={<Gaming />} />
+            <Route path="/game/:mode" element={<GameModePage />} />
 
             {/* Testing Routes  */}
             <Route path="/testing" element={<Testing />} />

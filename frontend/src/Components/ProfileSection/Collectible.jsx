@@ -105,10 +105,9 @@ function MarketPlace() {
   const [myAuctions, setMyAuctions] = useState([]);
   const [auctionsLoading, setAuctionsLoading] = useState(false);
 
-  // ---- List for Sale modal ----
-  const [listingModal, setListingModal] = useState(null); // null | { item }
-  const [listingPrice, setListingPrice] = useState("");
-  const [listingSubmitting, setListingSubmitting] = useState(false);
+  // local flags for venue cross-reference in My Collectibles grid
+  const [sessionAuctionIds] = useState(new Set());
+  const [sessionTradeNames] = useState(new Set());
 
   useEffect(() => {
     setActiveCategory(location.state?.category || "");
@@ -274,9 +273,9 @@ function MarketPlace() {
       .finally(() => setTxLoading(false));
   }, [activeTab, connectedWallet, token]);
 
-  // ---- Fetch trade posts when Trade tab is active ----
+  // ---- Fetch trade posts (eager — needed for venue badges in My Collectibles) ----
   useEffect(() => {
-    if (activeTab !== "Trade" || !connectedWallet) return;
+    if (!connectedWallet) return;
     setOffersLoading(true);
     axios
       .get(`${BACKEND_BASE_URL}/api/v1/trade`, {
@@ -286,11 +285,11 @@ function MarketPlace() {
       .then((res) => setOffers(res.data?.trades || []))
       .catch(() => setOffers([]))
       .finally(() => setOffersLoading(false));
-  }, [activeTab, connectedWallet, token]);
+  }, [connectedWallet, token]);
 
-  // ---- Fetch user's posted auctions when Auction tab is active ----
+  // ---- Fetch user's posted auctions (eager — needed for venue badges in My Collectibles) ----
   useEffect(() => {
-    if (activeTab !== "Auction" || !connectedWallet) return;
+    if (!connectedWallet) return;
     setAuctionsLoading(true);
     axios
       .get(`${BACKEND_BASE_URL}/api/v1/auction/seller/${connectedWallet}`, {
@@ -299,40 +298,8 @@ function MarketPlace() {
       .then((res) => setMyAuctions(Array.isArray(res.data) ? res.data : res.data?.auctions || []))
       .catch(() => setMyAuctions([]))
       .finally(() => setAuctionsLoading(false));
-  }, [activeTab, connectedWallet, token]);
+  }, [connectedWallet, token]);
 
-  // ---- List for Sale submit ----
-  const handleListForSale = async () => {
-    const item = listingModal?.item;
-    if (!item || !listingPrice || isNaN(listingPrice) || Number(listingPrice) <= 0)
-      return toast.error("Enter a valid price");
-    const minReserve = item.minimumBuybackUSD || 0;
-    if (item.isNFA && minReserve > 0 && Number(listingPrice) < minReserve)
-      return toast.error(`Harga minimum ${parseFloat(minReserve.toPrecision(4))} USDC (buyback reserve)`);
-    setListingSubmitting(true);
-    try {
-      await axios.post(
-        `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/create`,
-        {
-          parentId: item.parentId,
-          subCollectionId: item._id,
-          tokenId: item.tokenId,
-          seller: connectedWallet,
-          priceETH: Number(listingPrice),
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      toast.success(`"${item.name}" listed for ${listingPrice} USDC`);
-      setListingModal(null);
-      setListingPrice("");
-      // Refresh NFT list
-      if (connectedWallet) fetchOwnedNFTs(connectedWallet.toLowerCase());
-    } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to list NFT");
-    } finally {
-      setListingSubmitting(false);
-    }
-  };
 
   // ---- Utility helpers ----
   const timeAgo = (dateStr) => {
@@ -441,11 +408,17 @@ function MarketPlace() {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-                  {gridItems.map((item) => (
+                  {gridItems.map((item) => {
+                      const onAuction = myAuctions.some((a) => a.subCollectionId === item._id && a.status === "active")
+                        || sessionAuctionIds.has(item._id);
+                      const onTrade   = offers.some((t) => t.offering === item.name && t.status === "open")
+                        || sessionTradeNames.has(item.name);
+                      const anyVenue  = item.listed || onAuction || onTrade;
+                      return (
                     <div
                       key={item._id}
                       className="group relative rounded-2xl overflow-hidden text-white flex flex-col cursor-pointer"
-                      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                      style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${anyVenue ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.08)"}` }}
                     >
                       {/* Image */}
                       <div className="relative w-full aspect-square overflow-hidden bg-[#0d1632]">
@@ -461,17 +434,33 @@ function MarketPlace() {
                             {item.category}
                           </div>
                         )}
-                        {item.listed ? (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-green-300"
-                            style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
-                            Listed
-                          </div>
-                        ) : (
-                          <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/50"
-                            style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.10)" }}>
-                            Unlisted
-                          </div>
-                        )}
+                        {/* Venue badges stacked top-right */}
+                        <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
+                          {item.listed && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
+                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
+                              Market
+                            </span>
+                          )}
+                          {onAuction && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
+                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(251,191,36,0.35)" }}>
+                              Auction
+                            </span>
+                          )}
+                          {onTrade && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
+                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(59,130,246,0.35)" }}>
+                              Trade
+                            </span>
+                          )}
+                          {!anyVenue && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold text-white/40"
+                              style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.10)" }}>
+                              Unlisted
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Info */}
@@ -499,11 +488,11 @@ function MarketPlace() {
                           </button>
                         ) : isConnected ? (
                           <button
-                            onClick={() => { setListingModal({ item }); setListingPrice(item.minimumBuybackUSD > 0 ? String(item.minimumBuybackUSD) : ""); }}
+                            onClick={() => navigate("/dashboard/collections")}
                             className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"
                             style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
                           >
-                            List for Sale →
+                            Manage in Dashboard →
                           </button>
                         ) : (
                           <button
@@ -526,7 +515,7 @@ function MarketPlace() {
                         )}
                       </div>
                     </div>
-                  ))}
+                  ); })}
                 </div>
               );
             })()}
@@ -648,13 +637,23 @@ function MarketPlace() {
                         cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
                       };
                       const c = statusColors[trade.status] || statusColors.open;
+                      // Derive category from the offering item if not saved on the trade record
+                      const resolvedCat = trade.category || (() => {
+                        for (const col of marketData) {
+                          const sub = (col.subCollections || []).find(
+                            (s) => s.name?.toLowerCase() === trade.offering?.toLowerCase()
+                          );
+                          if (sub) return col.category || sub.category || "";
+                        }
+                        return "";
+                      })() || "general";
                       return (
                         <div key={trade._id} className="grid min-w-[560px] px-4 py-3 items-center"
                           style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
                           <span className="text-white/60 text-xs font-mono">#{String(trade._id).slice(-6).toUpperCase()}</span>
                           <span className="text-white/80 text-xs truncate">{trade.offering || "—"}</span>
                           <span className="text-white/60 text-xs truncate italic">{trade.requesting || "—"}</span>
-                          <span className="text-white/40 text-xs truncate">{trade.category || "—"}</span>
+                          <span className="text-white/40 text-xs truncate capitalize">{resolvedCat}</span>
                           <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
                             style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>
                             {trade.status}
@@ -742,84 +741,6 @@ function MarketPlace() {
         </div>
       </div >
 
-      {/* ---- List for Sale Modal ---- */}
-      {listingModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
-          onClick={() => setListingModal(null)}
-        >
-          <div
-            className="rounded-2xl p-6 flex flex-col gap-5 w-full max-w-sm mx-4"
-            style={{ background: "#0b1435", border: "1px solid rgba(255,255,255,0.1)" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-white font-semibold text-lg">List for Sale</h3>
-            <p className="text-white/50 text-sm -mt-2 truncate">{listingModal.item?.name}</p>
-
-            {(() => {
-              const minPrice = listingModal?.item?.minimumBuybackUSD || 0;
-              const isNFAItem = listingModal?.item?.isNFA;
-              const enteredPrice = parseFloat(listingPrice) || 0;
-              const belowMin = isNFAItem && minPrice > 0 && enteredPrice < minPrice;
-
-              return (
-                <>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-white/60 text-xs uppercase tracking-wider">Price (USDC)</label>
-                      {isNFAItem && minPrice > 0 && (
-                        <span className="text-[11px] text-amber-400/80">
-                          Min: {parseFloat(minPrice.toPrecision(4))} USDC
-                        </span>
-                      )}
-                    </div>
-                    <input
-                      type="number"
-                      min={isNFAItem && minPrice > 0 ? minPrice : 0}
-                      step="any"
-                      placeholder={isNFAItem && minPrice > 0 ? `Min ${parseFloat(minPrice.toPrecision(4))}` : "e.g. 0.5"}
-                      value={listingPrice}
-                      onChange={(e) => setListingPrice(e.target.value)}
-                      className={`w-full h-11 px-3 rounded-lg text-white text-sm bg-white/5 border focus:outline-none transition ${
-                        belowMin ? "border-red-500/60 focus:border-red-500" : "border-white/15 focus:border-blue-500"
-                      }`}
-                    />
-                    {belowMin && (
-                      <p className="text-red-400 text-xs mt-0.5">
-                        Harga tidak boleh di bawah minimum buyback reserve ({parseFloat(minPrice.toPrecision(4))} USDC)
-                      </p>
-                    )}
-                    {isNFAItem && minPrice > 0 && !belowMin && listingPrice && (
-                      <p className="text-white/30 text-xs mt-0.5">
-                        Minimum reserve terjamin untuk pembeli
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => setListingModal(null)}
-                      className="flex-1 h-10 rounded-lg text-white/50 text-sm hover:text-white transition"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={handleListForSale}
-                      disabled={listingSubmitting || belowMin}
-                      className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition hover:brightness-110 disabled:opacity-50"
-                      style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)" }}
-                    >
-                      {listingSubmitting ? "Listing..." : "List Now"}
-                    </button>
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      )}
     </>
   );
 }

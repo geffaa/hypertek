@@ -9,9 +9,12 @@ import {
 } from "../Service/blockchain.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
+import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
 import { markOfferCompleted } from "./Offer.js";
 import Activity from "../Models/ActivityModel.js";
 import MarketListing from "../Models/MarketListingModel.js";
+import Trade from "../Models/TradeModel.js";
+import Auction from "../Models/AuctionModel.js";
 import Stripe from "stripe";
 import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
@@ -2289,10 +2292,35 @@ export async function cancelSubCollectionListing(req, res) {
     // Remove corresponding MarketListing
     await MarketListing.deleteOne({ subCollectionId: subCollection._id.toString(), status: "active" });
 
+    // Cancel any active Auction for this sub-collection
+    const auctionResult = await Auction.updateMany(
+      { subCollectionId: subCollection._id.toString(), status: "active" },
+      { status: "cancelled" }
+    );
+
+    // Cancel any open Trade listings for this item (matched by seller wallet + offering name)
+    const sellerWallet = req.body.seller || subCollection.owner || "";
+    const tradeResult = await Trade.updateMany(
+      {
+        posterWallet: new RegExp(`^${sellerWallet}$`, "i"),
+        offering: subCollection.name,
+        status: "open",
+      },
+      { status: "cancelled" }
+    );
+
+    const cancelledVenues = [];
+    if (auctionResult.modifiedCount > 0) cancelledVenues.push(`${auctionResult.modifiedCount} auction(s)`);
+    if (tradeResult.modifiedCount > 0)   cancelledVenues.push(`${tradeResult.modifiedCount} trade(s)`);
+    if (cancelledVenues.length > 0) {
+      console.log(`🚫 [Unlist cascade] Also cancelled: ${cancelledVenues.join(", ")} for subCollection ${subCollection._id}`);
+    }
+
     console.log("✅ Successfully cancelled listing:", {
       subId: subCollection._id,
       tokenId: subCollection.tokenId,
       newListed: false,
+      cascadeCancelled: cancelledVenues,
     });
 
     return res.json({
@@ -2301,6 +2329,7 @@ export async function cancelSubCollectionListing(req, res) {
       parentId: nftId,
       subId: subCollection._id,
       tokenId: subCollection.tokenId,
+      cancelledVenues,
     });
   } catch (err) {
     console.error("❌ CANCEL SUB-COLLECTION LISTING ERROR:", {

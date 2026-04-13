@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Collectionimage from "../../assets/images/CreateCollection/collection.png";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { FiSearch, FiEdit2, FiTrash2, FiTag, FiPackage, FiX, FiUploadCloud, FiAlertTriangle } from "react-icons/fi";
+import { Gavel, ArrowRightLeft, CheckCircle2 } from "lucide-react";
 
 const ASSET_BADGE = {
   NFA: { bg: "rgba(124,58,237,0.2)", border: "rgba(124,58,237,0.5)", text: "#c4b5fd" },
@@ -19,6 +20,31 @@ const ALL_CATEGORIES = [
   "all", "skins", "military badges", "specialists", "weapons",
   "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general",
 ];
+
+// Step indicator dots for the multi-step listing modal
+function ListingSteps({ step }) {
+  const steps = [
+    { key: "marketplace", label: "Marketplace" },
+    { key: "auction",     label: "Auction"     },
+    { key: "trade",       label: "Trade"        },
+  ];
+  const currentIndex =
+    step === "marketplace"                    ? 0 :
+    step === "auction_prompt" || step === "auction_form" ? 1 :
+    2;
+
+  return (
+    <div className="flex items-center gap-1 justify-center mb-1">
+      {steps.map((s, i) => (
+        <div key={s.key} className="flex items-center gap-1">
+          <div className={`w-2 h-2 rounded-full transition-all ${i < currentIndex ? "bg-green-400" : i === currentIndex ? "bg-blue-400" : "bg-white/15"}`} />
+          {i < steps.length - 1 && <div className="w-4 h-px bg-white/10" />}
+        </div>
+      ))}
+      <span className="text-white/30 text-[10px] ml-2">{steps[currentIndex]?.label}</span>
+    </div>
+  );
+}
 
 function NFTs() {
   const user  = useSelector((state) => state.auth.user);
@@ -32,10 +58,24 @@ function NFTs() {
   const [search, setSearch]                 = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
-  // — Marketplace listing modal
+  // — Multi-step marketplace listing modal
   const [listingItem, setListingItem]       = useState(null);
+  // step: null | 'marketplace' | 'auction_prompt' | 'auction_form' | 'trade_prompt' | 'trade_form'
+  const [listStep, setListStep]             = useState(null);
   const [listingPrice, setListingPrice]     = useState("");
   const [listingLoading, setListingLoading] = useState(false);
+
+  // — Auction sub-step
+  const [auctionForm, setAuctionForm]       = useState({ startPrice: "", durationHours: "24", reservePrice: "", instantBuyPrice: "" });
+  const [auctionLoading, setAuctionLoading] = useState(false);
+
+  // — Trade sub-step
+  const [tradeForm, setTradeForm]           = useState({ reqItem: "", description: "", openOffer: false });
+  const [tradeLoading, setTradeLoading]     = useState(false);
+
+  // — Unlist confirmation modal
+  const [unlistItem, setUnlistItem]         = useState(null);
+  const [unlistLoading, setUnlistLoading]   = useState(false);
 
   // — Edit modal
   const [editItem, setEditItem]             = useState(null);
@@ -52,8 +92,6 @@ function NFTs() {
 
   useEffect(() => {
     if (!wallet) { setLoading(false); return; }
-    // Use owned-with-subs (queries subCollections.owner) so old data with
-    // mismatched collection.owner still shows up correctly.
     axios.get(
       `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -74,12 +112,23 @@ function NFTs() {
       .finally(() => setLoading(false));
   }, [wallet, token]);
 
-  // ── Marketplace listing ────────────────────────────────────────────
+  // ── Close listing modal completely ─────────────────────────────────────────
+  const closeListing = () => {
+    setListingItem(null);
+    setListStep(null);
+    setListingPrice("");
+    setAuctionForm({ startPrice: "", durationHours: "24", reservePrice: "", instantBuyPrice: "" });
+    setTradeForm({ reqItem: "", description: "", openOffer: false });
+  };
+
+  // ── Open listing modal ─────────────────────────────────────────────────────
   const openListModal = (item) => {
     setListingItem(item);
     setListingPrice("");
+    setListStep("marketplace");
   };
 
+  // ── Step 1: List on Marketplace ────────────────────────────────────────────
   const handleList = async () => {
     if (!listingPrice || parseFloat(listingPrice) <= 0)
       return toast.error("Please enter a valid price");
@@ -94,8 +143,9 @@ function NFTs() {
       setAllItems((prev) =>
         prev.map((i) => i._id === listingItem._id ? { ...i, listed: true, priceETH: parseFloat(listingPrice) } : i)
       );
-      toast.success(`"${listingItem.name}" is now listed!`);
-      setListingItem(null);
+      toast.success(`"${listingItem.name}" listed on Marketplace!`);
+      // Proceed to offer auction listing
+      setListStep("auction_prompt");
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to list item");
     } finally {
@@ -103,20 +153,103 @@ function NFTs() {
     }
   };
 
-  // ── Cancel listing ─────────────────────────────────────────────────
-  const handleCancelListing = async (item) => {
+  // ── Step 2: Create Auction ─────────────────────────────────────────────────
+  const handleCreateAuction = async () => {
+    if (!auctionForm.startPrice || parseFloat(auctionForm.startPrice) <= 0)
+      return toast.error("Enter a valid start price");
     try {
-      await axios.post(
+      setAuctionLoading(true);
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/auction`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({
+          sellerWallet:    wallet,
+          nftSystemId:     listingItem.parentId,
+          subCollectionId: listingItem._id,
+          title:           listingItem.name,
+          description:     listingItem.description || "",
+          image:           listingItem.image || "",
+          category:        listingItem.category,
+          startPrice:      parseFloat(auctionForm.startPrice),
+          reservePrice:    auctionForm.reservePrice    ? parseFloat(auctionForm.reservePrice)    : undefined,
+          instantBuyPrice: auctionForm.instantBuyPrice ? parseFloat(auctionForm.instantBuyPrice) : undefined,
+          durationHours:   parseInt(auctionForm.durationHours) || 24,
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      setAllItems((prev) =>
+        prev.map((i) => i._id === listingItem._id ? { ...i, onAuction: true } : i)
+      );
+      toast.success("Auction listing created!");
+    } catch (err) {
+      toast.error(err.message || "Failed to create auction");
+    } finally {
+      setAuctionLoading(false);
+      setListStep("trade_prompt");
+    }
+  };
+
+  // ── Step 3: Create Trade listing ───────────────────────────────────────────
+  const handleCreateTrade = async () => {
+    const requesting = tradeForm.openOffer ? "Make me an offer" : tradeForm.reqItem.trim();
+    if (!tradeForm.openOffer && !requesting)
+      return toast.error("Specify what you want in return, or enable open offer");
+    try {
+      setTradeLoading(true);
+      const fd = new FormData();
+      const posterName = user?.FullName || user?.Email?.split("@")[0] || "Trader";
+      fd.append("type", "trade");
+      fd.append("posterWallet", wallet);
+      fd.append("posterName", posterName);
+      fd.append("reward", "0");
+      fd.append("title", `${listingItem.name} ↔ ${tradeForm.openOffer ? "Open Offer" : requesting}`);
+      fd.append("description", tradeForm.description || "");
+      fd.append("offering", listingItem.name);
+      fd.append("requesting", requesting || "Make me an offer");
+      fd.append("category", listingItem.category || "general");
+      if (listingItem.image) fd.append("imageUrl", listingItem.image);
+      const authToken = token || localStorage.getItem("token");
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${authToken}` },
+        body: fd,
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      setAllItems((prev) =>
+        prev.map((i) => i._id === listingItem._id ? { ...i, onTrade: true } : i)
+      );
+      toast.success("Trade listing created!");
+    } catch (err) {
+      toast.error(err.message || "Failed to create trade listing");
+    } finally {
+      setTradeLoading(false);
+      closeListing();
+    }
+  };
+
+  // ── Confirm + execute unlist (cancels marketplace, auction, and trade) ──────
+  const handleConfirmUnlist = async () => {
+    if (!unlistItem) return;
+    try {
+      setUnlistLoading(true);
+      const res = await axios.post(
         `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
-        { nftId: item.parentId, subId: item._id, seller: wallet },
+        { nftId: unlistItem.parentId, subId: unlistItem._id, seller: wallet },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setAllItems((prev) =>
-        prev.map((i) => i._id === item._id ? { ...i, listed: false, priceETH: 0 } : i)
+        prev.map((i) => i._id === unlistItem._id ? { ...i, listed: false, priceETH: 0, onAuction: false, onTrade: false } : i)
       );
-      toast.success("Listing cancelled");
+      const venues = res.data?.cancelledVenues;
+      const extra  = venues?.length ? ` (also removed from ${venues.join(", ")})` : "";
+      toast.success(`Listing cancelled${extra}`);
+      setUnlistItem(null);
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to cancel listing");
+    } finally {
+      setUnlistLoading(false);
     }
   };
 
@@ -157,7 +290,6 @@ function NFTs() {
       );
 
       if (categoryChanged) {
-        // Remove from list — category change moves it to a new parent, refetch will pick it up
         setAllItems((prev) => prev.filter((i) => i._id !== editItem._id));
       } else {
         setAllItems((prev) =>
@@ -171,7 +303,6 @@ function NFTs() {
       toast.success(categoryChanged ? "Item moved to new category" : "Item updated");
       setEditItem(null);
 
-      // Refetch if category changed so new parent shows up
       if (categoryChanged && wallet) {
         axios.get(
           `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
@@ -229,6 +360,9 @@ function NFTs() {
     acc[cat] = allItems.filter((i) => i.category === cat).length;
     return acc;
   }, {});
+
+  const inputStyle = { background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" };
+  const inputCls   = "w-full px-3 py-2 rounded-lg text-sm text-white outline-none placeholder-white/25 focus:border-blue-500 transition-all";
 
   return (
     <div className="flex flex-col overflow-x-hidden pb-12">
@@ -299,26 +433,46 @@ function NFTs() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {filtered.map((item) => {
               const img = item.image ? getImageUrl(item.image) : Collectionimage;
-              const aType = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+              const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
               const badge = ASSET_BADGE[aType] || ASSET_BADGE.NFT;
               const isOnChain = !!item.tokenId;
+              const isAnywhere = item.listed || item.onAuction || item.onTrade;
               return (
                 <div key={item._id}
                   className="rounded-xl border overflow-hidden flex flex-col transition-all hover:brightness-110"
-                  style={{ background: "rgba(255,255,255,0.03)", borderColor: item.listed ? "rgba(74,222,128,0.25)" : "rgba(255,255,255,0.08)" }}>
+                  style={{ background: "rgba(255,255,255,0.03)", borderColor: isAnywhere ? "rgba(74,222,128,0.25)" : "rgba(255,255,255,0.08)" }}>
                   <div className="relative aspect-square">
                     <img src={img} alt={item.name} className="w-full h-full object-cover"
                       onError={(e) => { e.target.src = Collectionimage; }} />
+
+                    {/* Asset type badge — top left */}
                     <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[10px] font-bold"
                       style={{ background: badge.bg, border: `1px solid ${badge.border}`, color: badge.text }}>
                       {aType}
                     </span>
-                    {item.listed && (
-                      <span className="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
-                        style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)" }}>
-                        Listed
-                      </span>
-                    )}
+
+                    {/* Venue status badges — top right, stacked */}
+                    <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
+                      {item.listed && (
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
+                          style={{ background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)" }}>
+                          Market
+                        </span>
+                      )}
+                      {item.onAuction && (
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
+                          style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}>
+                          Auction
+                        </span>
+                      )}
+                      {item.onTrade && (
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
+                          style={{ background: "rgba(0,80,255,0.15)", border: "1px solid rgba(0,80,255,0.3)" }}>
+                          Trade
+                        </span>
+                      )}
+                    </div>
+
                     {isOnChain && (
                       <span className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold text-purple-300"
                         style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(124,58,237,0.4)" }}>
@@ -343,7 +497,7 @@ function NFTs() {
                         <FiTag size={10} /> List
                       </button>
                     ) : (
-                      <button onClick={() => handleCancelListing(item)}
+                      <button onClick={() => setUnlistItem(item)}
                         className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-red-300/80 hover:text-red-200 transition-all justify-center"
                         style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
                         <FiX size={10} /> Unlist
@@ -365,47 +519,247 @@ function NFTs() {
         )}
       </div>
 
-      {/* ── List Modal ── */}
-      {listingItem && (
+      {/* ── Multi-step List Modal ── */}
+      {listingItem && listStep && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-5">
-            <div className="flex items-start justify-between">
-              <div>
-                <h2 className="text-white font-semibold text-base">List on Marketplace</h2>
-                <p className="text-white/40 text-xs mt-0.5">No gas fee now — item is minted on-chain only when someone buys it.</p>
-              </div>
-              <button onClick={() => setListingItem(null)} className="text-white/40 hover:text-white transition-colors mt-0.5"><FiX size={18} /></button>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8">
-              <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
-                className="w-12 h-12 rounded-lg object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
-              <div>
-                <p className="text-white text-sm font-medium">{listingItem.name}</p>
-                <p className="text-white/40 text-xs capitalize">{listingItem.category}</p>
-              </div>
-            </div>
-            <div>
-              <label className="text-white/70 text-sm font-medium mb-1.5 block">Listing Price (USDC) <span className="text-red-400">*</span></label>
-              <div className="flex h-11 rounded-lg bg-white/5 border border-white/10 focus-within:border-blue-500 transition-all overflow-hidden">
-                <input type="number" placeholder="0.00" min="0" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)}
-                  className="flex-1 bg-transparent px-3 text-white text-sm outline-none placeholder-white/30" autoFocus />
-                <span className="flex items-center pr-3 gap-1.5">
-                  <img src="/usdc-logo.svg" alt="USDC" className="w-4 h-4 opacity-60" />
-                  <span className="text-white/30 text-sm font-medium">USDC</span>
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button onClick={() => setListingItem(null)}
-                className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                Cancel
-              </button>
-              <button onClick={handleList} disabled={listingLoading}
-                className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
-                style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                {listingLoading ? "Listing..." : "List Now"}
-              </button>
-            </div>
+          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-4">
+
+            {/* Step dots */}
+            <ListingSteps step={listStep} />
+
+            {/* ── Step 1: Marketplace price ── */}
+            {listStep === "marketplace" && (
+              <>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h2 className="text-white font-semibold text-base">List on Marketplace</h2>
+                    <p className="text-white/40 text-xs mt-0.5">No gas fee now — minted on-chain when someone buys.</p>
+                  </div>
+                  <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors mt-0.5"><FiX size={18} /></button>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8">
+                  <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
+                    className="w-12 h-12 rounded-lg object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+                  <div>
+                    <p className="text-white text-sm font-medium">{listingItem.name}</p>
+                    <p className="text-white/40 text-xs capitalize">{listingItem.category}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-white/70 text-sm font-medium mb-1.5 block">Listing Price (USDC) <span className="text-red-400">*</span></label>
+                  <div className="flex h-11 rounded-lg bg-white/5 border border-white/10 focus-within:border-blue-500 transition-all overflow-hidden">
+                    <input type="number" placeholder="0.00" min="0" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)}
+                      className="flex-1 bg-transparent px-3 text-white text-sm outline-none placeholder-white/30" autoFocus />
+                    <span className="flex items-center pr-3 gap-1.5">
+                      <img src="/usdc-logo.svg" alt="USDC" className="w-4 h-4 opacity-60" />
+                      <span className="text-white/30 text-sm font-medium">USDC</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
+                    Cancel
+                  </button>
+                  <button onClick={handleList} disabled={listingLoading}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
+                    style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
+                    {listingLoading ? "Listing..." : "List Now →"}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 2a: Auction prompt ── */}
+            {listStep === "auction_prompt" && (
+              <>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
+                  <span className="text-green-300 text-sm font-medium">Listed on Marketplace!</span>
+                </div>
+
+                <div className="rounded-xl p-4 flex flex-col gap-2"
+                  style={{ background: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.2)" }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Gavel className="w-4 h-4 text-amber-400" />
+                    <span className="text-amber-300 font-semibold text-sm">Also list on Auction?</span>
+                  </div>
+                  <p className="text-white/40 text-xs leading-relaxed">
+                    Auction listings let buyers bid competitively. You set a start price and duration.
+                  </p>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={() => setListStep("trade_prompt")}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
+                    No, skip
+                  </button>
+                  <button onClick={() => setListStep("auction_form")}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
+                    style={{ background: "rgba(251,191,36,0.2)", border: "1px solid rgba(251,191,36,0.4)" }}>
+                    Yes, set up →
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 2b: Auction form ── */}
+            {listStep === "auction_form" && (
+              <>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-2">
+                    <Gavel className="w-4 h-4 text-amber-400" />
+                    <h2 className="text-white font-semibold text-base">Set Up Auction</h2>
+                  </div>
+                  <button onClick={() => setListStep("trade_prompt")} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
+                </div>
+
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/4 border border-white/6">
+                  <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
+                    className="w-8 h-8 rounded object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+                  <p className="text-white/70 text-xs font-medium truncate">{listingItem.name}</p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Start Price (USDC) <span className="text-red-400">*</span></label>
+                    <input type="number" placeholder="e.g. 50" min="0" value={auctionForm.startPrice}
+                      onChange={(e) => setAuctionForm(f => ({ ...f, startPrice: e.target.value }))}
+                      className={inputCls} style={inputStyle} autoFocus />
+                  </div>
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Duration</label>
+                    <select value={auctionForm.durationHours}
+                      onChange={(e) => setAuctionForm(f => ({ ...f, durationHours: e.target.value }))}
+                      className={inputCls} style={{ ...inputStyle, appearance: "none" }}>
+                      <option value="24">24 hours</option>
+                      <option value="72">3 days</option>
+                      <option value="168">7 days</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Instant Buy Price (USDC) <span className="text-white/25">optional</span></label>
+                    <input type="number" placeholder="Allows immediate purchase" min="0" value={auctionForm.instantBuyPrice}
+                      onChange={(e) => setAuctionForm(f => ({ ...f, instantBuyPrice: e.target.value }))}
+                      className={inputCls} style={inputStyle} />
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={() => setListStep("trade_prompt")}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
+                    Skip
+                  </button>
+                  <button onClick={handleCreateAuction} disabled={auctionLoading}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
+                    style={{ background: "rgba(251,191,36,0.25)", border: "1px solid rgba(251,191,36,0.45)" }}>
+                    {auctionLoading ? "Creating..." : "Create Auction →"}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 3a: Trade prompt ── */}
+            {listStep === "trade_prompt" && (
+              <>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
+                  <span className="text-green-300 text-sm font-medium">
+                    {listingItem && allItems.find(i => i._id === listingItem._id)?.onAuction
+                      ? "Listed on Marketplace & Auction!"
+                      : "Listed on Marketplace!"}
+                  </span>
+                </div>
+
+                <div className="rounded-xl p-4 flex flex-col gap-2"
+                  style={{ background: "rgba(0,80,255,0.07)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <ArrowRightLeft className="w-4 h-4 text-blue-400" />
+                    <span className="text-blue-300 font-semibold text-sm">Also list for Trading?</span>
+                  </div>
+                  <p className="text-white/40 text-xs leading-relaxed">
+                    Trade listings let other players propose item-for-item exchanges with you.
+                  </p>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
+                    No, done
+                  </button>
+                  <button onClick={() => setListStep("trade_form")}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
+                    style={{ background: "rgba(0,80,255,0.25)", border: "1px solid rgba(0,80,255,0.4)" }}>
+                    Yes, set up →
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 3b: Trade form ── */}
+            {listStep === "trade_form" && (
+              <>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-2">
+                    <ArrowRightLeft className="w-4 h-4 text-blue-400" />
+                    <h2 className="text-white font-semibold text-base">Set Up Trade</h2>
+                  </div>
+                  <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
+                </div>
+
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/4 border border-white/6">
+                  <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
+                    className="w-8 h-8 rounded object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+                  <div>
+                    <p className="text-white/70 text-xs font-medium truncate">Offering: <span className="text-green-300">{listingItem.name}</span></p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  {/* Open offer toggle */}
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <div
+                      onClick={() => setTradeForm(f => ({ ...f, openOffer: !f.openOffer, reqItem: f.openOffer ? f.reqItem : "" }))}
+                      className={`w-8 h-4 rounded-full transition-all relative ${tradeForm.openOffer ? "bg-blue-600" : "bg-white/15"}`}>
+                      <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${tradeForm.openOffer ? "left-4.5 left-[18px]" : "left-0.5"}`} />
+                    </div>
+                    <span className="text-white/60 text-xs">Open offer — let anyone propose what they'll give</span>
+                  </label>
+
+                  {!tradeForm.openOffer && (
+                    <div>
+                      <label className="text-white/60 text-xs font-medium mb-1 block">What do you want in return? <span className="text-red-400">*</span></label>
+                      <input type="text" placeholder="e.g. Rare Weapon Skin, Land Plot #42..." value={tradeForm.reqItem}
+                        onChange={(e) => setTradeForm(f => ({ ...f, reqItem: e.target.value }))}
+                        className={inputCls} style={inputStyle} autoFocus />
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Description <span className="text-white/25">optional</span></label>
+                    <textarea rows={2} placeholder="Add any details about your trade..." value={tradeForm.description}
+                      onChange={(e) => setTradeForm(f => ({ ...f, description: e.target.value }))}
+                      className={`${inputCls} resize-none`} style={inputStyle} />
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
+                    Skip
+                  </button>
+                  <button onClick={handleCreateTrade} disabled={tradeLoading}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
+                    style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
+                    {tradeLoading ? "Creating..." : "Post Trade →"}
+                  </button>
+                </div>
+              </>
+            )}
+
           </div>
         </div>
       )}
@@ -526,6 +880,56 @@ function NFTs() {
                 className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                 style={{ background: "rgba(239,68,68,0.8)", border: "1px solid rgba(239,68,68,0.4)" }}>
                 {deleteLoading ? "Deleting..." : "Delete Item"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Unlist Confirmation Modal ── */}
+      {unlistItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-5">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center flex-shrink-0">
+                  <FiAlertTriangle size={18} className="text-orange-400" />
+                </div>
+                <div>
+                  <h2 className="text-white font-semibold text-base">Unlist Item</h2>
+                  <p className="text-white/40 text-xs mt-0.5">This will remove all active listings.</p>
+                </div>
+              </div>
+              <button onClick={() => setUnlistItem(null)} className="text-white/40 hover:text-white transition-colors"><FiX size={18} /></button>
+            </div>
+
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/8">
+              <img src={unlistItem.image ? getImageUrl(unlistItem.image) : Collectionimage} alt={unlistItem.name}
+                className="w-12 h-12 rounded-lg object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+              <div>
+                <p className="text-white text-sm font-medium">{unlistItem.name}</p>
+                <p className="text-white/40 text-xs capitalize">{unlistItem.category}</p>
+              </div>
+            </div>
+
+            <div className="rounded-xl bg-orange-500/5 border border-orange-500/20 p-3 flex flex-col gap-1.5">
+              <p className="text-orange-300 text-xs font-semibold uppercase tracking-wide">What will be cancelled</p>
+              <ul className="text-white/60 text-sm space-y-1 mt-1">
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Marketplace listing</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Any active auction for this item</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Any open trade offers for this item</li>
+              </ul>
+            </div>
+
+            <div className="flex gap-3">
+              <button onClick={() => setUnlistItem(null)}
+                className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
+                Cancel
+              </button>
+              <button onClick={handleConfirmUnlist} disabled={unlistLoading}
+                className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
+                style={{ background: "rgba(234,88,12,0.8)", border: "1px solid rgba(234,88,12,0.4)" }}>
+                {unlistLoading ? "Unlisting..." : "Unlist All"}
               </button>
             </div>
           </div>

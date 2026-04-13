@@ -344,7 +344,7 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
       fd.append("description", description);
       fd.append("offering", offeringName || "");
       fd.append("requesting", requesting);
-      fd.append("category", offeringCategory);
+      fd.append("category", offeringCategory || reqCategory || "general");
       // Image: use selected item image URL if available, otherwise upload file
       if (!selectedItem && imageFile) {
         fd.append("image", imageFile);
