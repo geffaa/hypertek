@@ -58,6 +58,8 @@ export default function StorySection() {
     return (
         <section
             ref={ref}
+            data-edit-section="home_story"
+            data-edit-label="Story Section"
             className="relative w-full min-h-screen overflow-hidden"
             style={{
                 backgroundImage: `url(${bgImage})`,

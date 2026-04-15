@@ -19,6 +19,8 @@ function ProfileBanner() {
 
   return (
     <div
+      data-edit-section="profile_banner"
+      data-edit-label="Profile Banner"
       className="relative w-full h-[260px] sm:h-[300px] md:h-[269px] lg:h-[269px] overflow-hidden"
       style={{
         backgroundImage: `url(${bgImage})`,

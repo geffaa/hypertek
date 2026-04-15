@@ -27,6 +27,8 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
 
   return (
     <div
+      data-edit-section="marketplace_banner"
+      data-edit-label="Marketplace Banner"
       className={`relative w-full h-[280px] md:h-[320px] lg:h-[400px] shadow-lg flex items-center ${noMargin ? "" : "mb-8"}`}
       style={{
         backgroundImage: `

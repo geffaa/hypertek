@@ -145,6 +145,8 @@ export default function Hero() {
   return (
     <>
     <div
+      data-edit-section="home_hero"
+      data-edit-label="Welcome Banner"
       className="w-full h-screen relative overflow-hidden"
       style={{
         backgroundImage: `url(${bgImage})`,

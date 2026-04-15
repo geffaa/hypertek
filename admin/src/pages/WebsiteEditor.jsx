@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { createPortal } from "react-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Dashboard_Base_Url, FRONTEND_BASE_URL } from "../Config";
@@ -20,11 +21,6 @@ const IconSearch = () => (
         <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
     </svg>
 );
-const IconChevron = ({ open }) => (
-    <svg className={`w-5 h-5 text-white/40 transition-transform duration-200 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-);
 const IconExtLink = () => (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -33,6 +29,11 @@ const IconExtLink = () => (
 const IconUpload = () => (
     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+    </svg>
+);
+const IconClose = () => (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
     </svg>
 );
 
@@ -164,10 +165,7 @@ function TextField({ field, onChange }) {
         <div className="flex flex-col gap-2">
             <label className="text-white text-sm font-semibold">{field.label}</label>
             {FIELD_HINTS[field.key] && (
-                <div className="flex items-start gap-2 bg-blue-500/8 border border-blue-500/15 rounded-lg px-3 py-2">
-                    <span className="text-blue-400 text-sm mt-px shrink-0">💡</span>
-                    <p className="text-blue-200/70 text-sm leading-relaxed">{FIELD_HINTS[field.key]}</p>
-                </div>
+                <p className="text-white/45 text-sm leading-relaxed border-l-2 border-blue-500/30 pl-3">{FIELD_HINTS[field.key]}</p>
             )}
             <input
                 type="text"
@@ -187,10 +185,7 @@ function TextAreaField({ field, onChange }) {
         <div className="flex flex-col gap-2">
             <label className="text-white text-sm font-semibold">{field.label}</label>
             {FIELD_HINTS[field.key] && (
-                <div className="flex items-start gap-2 bg-blue-500/8 border border-blue-500/15 rounded-lg px-3 py-2">
-                    <span className="text-blue-400 text-sm mt-px shrink-0">💡</span>
-                    <p className="text-blue-200/70 text-sm leading-relaxed">{FIELD_HINTS[field.key]}</p>
-                </div>
+                <p className="text-white/45 text-sm leading-relaxed border-l-2 border-blue-500/30 pl-3">{FIELD_HINTS[field.key]}</p>
             )}
             <textarea
                 value={field.value || ""}
@@ -246,12 +241,8 @@ function ImageField({ field, sectionKey, onUploaded }) {
         <div className="flex flex-col gap-2">
             <label className="text-white text-sm font-semibold">{field.label}</label>
             {FIELD_HINTS[field.key] && (
-                <div className="flex items-start gap-2 bg-blue-500/8 border border-blue-500/15 rounded-lg px-3 py-2">
-                    <span className="text-blue-400 text-sm mt-px shrink-0">💡</span>
-                    <p className="text-blue-200/70 text-sm leading-relaxed">{FIELD_HINTS[field.key]}</p>
-                </div>
+                <p className="text-white/45 text-sm leading-relaxed border-l-2 border-blue-500/30 pl-3">{FIELD_HINTS[field.key]}</p>
             )}
-            {/* Upload area */}
             <div
                 onClick={() => !uploading && fileRef.current?.click()}
                 className="relative cursor-pointer rounded-xl overflow-hidden group transition-all"
@@ -273,7 +264,6 @@ function ImageField({ field, sectionKey, onUploaded }) {
                                 <p className="text-white/60 text-xs mt-1">Click to choose a new file</p>
                             </div>
                         </div>
-                        {/* Set badge */}
                         <div className="absolute top-3 right-3 bg-emerald-500/90 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
                             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                             Image set
@@ -316,10 +306,7 @@ function ListField({ field, onChange }) {
         <div className="flex flex-col gap-2">
             <label className="text-white text-sm font-semibold">{field.label}</label>
             {FIELD_HINTS[field.key] && (
-                <div className="flex items-start gap-2 bg-blue-500/8 border border-blue-500/15 rounded-lg px-3 py-2">
-                    <span className="text-blue-400 text-sm mt-px shrink-0">💡</span>
-                    <p className="text-blue-200/70 text-sm leading-relaxed">{FIELD_HINTS[field.key]}</p>
-                </div>
+                <p className="text-white/45 text-sm leading-relaxed border-l-2 border-blue-500/30 pl-3">{FIELD_HINTS[field.key]}</p>
             )}
             <div className="flex flex-col gap-3 mt-1">
                 {items.map((item, idx) => (
@@ -357,30 +344,18 @@ function ListField({ field, onChange }) {
     );
 }
 
-/* ─── Section card ────────────────────────────────────────────── */
-function SectionCard({ section, onSave, isHighlighted, defaultExpanded = false }) {
+/* ─── Section edit body (shared by SectionCard + EditDrawer) ──── */
+function SectionEditBody({ section, onSave }) {
     const [fields, setFields] = useState(section.fields || []);
-    const [saving, setSaving] = useState(false);
-    const [saved, setSaved] = useState(false);
-    const [expanded, setExpanded] = useState(defaultExpanded);
-    const cardRef = useRef(null);
+    const [saving, setSaving]   = useState(false);
+    const [saved,  setSaved]    = useState(false);
 
     const meta = SECTION_META[section.sectionKey] || {
-        icon: "📄",
-        label: section.sectionLabel,
-        zone: section.sectionLabel,
-        description: "Edit the content for this section.",
-        what: "",
+        icon: "📄", label: section.sectionLabel,
+        zone: section.sectionLabel, description: "Edit the content for this section.", what: "",
     };
 
     useEffect(() => { setFields(section.fields || []); }, [section]);
-
-    useEffect(() => {
-        if (isHighlighted && cardRef.current) {
-            cardRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-            setExpanded(true);
-        }
-    }, [isHighlighted]);
 
     const handleFieldChange = (key, value) => {
         setSaved(false);
@@ -403,8 +378,7 @@ function SectionCard({ section, onSave, isHighlighted, defaultExpanded = false }
                 setTimeout(() => setSaved(false), 5000);
                 onSave?.(res.data.section);
             }
-        } catch (err) {
-            console.error("Save error:", err);
+        } catch {
             toast.error("Could not save changes. Please try again.");
         } finally {
             setSaving(false);
@@ -414,182 +388,196 @@ function SectionCard({ section, onSave, isHighlighted, defaultExpanded = false }
     const textFields  = fields.filter((f) => f.type === "text" || f.type === "textarea");
     const imageFields = fields.filter((f) => f.type === "image");
     const listFields  = fields.filter((f) => f.type === "list");
-    const missingImages = imageFields.filter((f) => !f.value).length;
 
     return (
-        <div
-            ref={cardRef}
-            id={`section-${section.sectionKey}`}
-            className={`rounded-2xl overflow-hidden transition-all duration-200 ${
-                isHighlighted ? "ring-2 ring-blue-500/50 ring-offset-2 ring-offset-[#0a0b10]" : ""
-            }`}
-            style={{
-                background: "rgba(255,255,255,0.03)",
-                border: expanded ? "1px solid rgba(255,255,255,0.14)" : "1px solid rgba(255,255,255,0.08)",
-            }}
-        >
-            {/* Card header */}
-            <button
-                onClick={() => setExpanded(!expanded)}
-                className="w-full flex items-center gap-4 px-6 py-5 text-left hover:bg-white/[0.025] transition-colors cursor-pointer"
-            >
-                <span className="text-2xl shrink-0 leading-none">{meta.icon}</span>
-                <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                        <p className="text-white font-bold text-base">{meta.label}</p>
-                        {missingImages > 0 && (
-                            <span className="text-[11px] bg-amber-500/15 text-amber-400 border border-amber-500/25 px-2 py-0.5 rounded-full font-medium">
-                                ⚠ {missingImages} image{missingImages > 1 ? "s" : ""} missing
-                            </span>
-                        )}
-                        {saved && (
-                            <span className="text-[11px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
-                                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                                Saved
-                            </span>
-                        )}
+        <div className="flex flex-col gap-8">
+            {/* "Where is this?" banner */}
+            <div className="px-4 py-3.5 rounded-xl border border-blue-500/20" style={{ background: "rgba(37,99,235,0.07)" }}>
+                <p className="text-blue-200 text-sm font-semibold mb-1">{meta.zone}</p>
+                <p className="text-white/50 text-sm leading-relaxed">{meta.description}</p>
+            </div>
+
+            {/* Text fields */}
+            {textFields.length > 0 && (
+                <div>
+                    <div className="flex items-center gap-3 mb-5">
+                        <p className="text-white/50 text-xs font-semibold uppercase tracking-widest shrink-0">Text & Content</p>
+                        <div className="h-px flex-1 bg-white/8" />
                     </div>
-                    <p className="text-white/45 text-sm mt-0.5">
-                        <span className="text-white/25">📍</span> {meta.zone}
-                    </p>
-                    {!expanded && meta.what && (
-                        <p className="text-white/30 text-xs mt-1.5">Contains: {meta.what}</p>
-                    )}
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-white/35 text-sm hidden sm:block">
-                        {expanded ? "Close" : "Edit"}
-                    </span>
-                    <IconChevron open={expanded} />
-                </div>
-            </button>
-
-            {/* Card body */}
-            {expanded && (
-                <div className="border-t border-white/8">
-
-                    {/* "Where is this?" banner */}
-                    <div className="mx-6 mt-5 mb-6 px-4 py-3.5 rounded-xl border border-blue-500/20 flex items-start gap-3" style={{ background: "rgba(37,99,235,0.07)" }}>
-                        <span className="text-xl shrink-0 mt-0.5">{meta.icon}</span>
-                        <div>
-                            <p className="text-blue-200 text-sm font-semibold">{meta.label}</p>
-                            <p className="text-white/50 text-sm mt-1 leading-relaxed">{meta.description}</p>
-                        </div>
-                    </div>
-
-                    <div className="px-6 pb-6 flex flex-col gap-8">
-
-                        {/* Text fields */}
-                        {textFields.length > 0 && (
-                            <div>
-                                <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-7 h-7 rounded-lg bg-white/8 flex items-center justify-center text-base shrink-0">✏️</div>
-                                    <div>
-                                        <p className="text-white font-semibold text-sm">Text & Content</p>
-                                        <p className="text-white/35 text-xs">Edit the words shown on your website</p>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-6">
-                                    {textFields.map((field) =>
-                                        field.type === "text"
-                                            ? <TextField key={field.key} field={field} onChange={handleFieldChange} />
-                                            : <TextAreaField key={field.key} field={field} onChange={handleFieldChange} />
-                                    )}
-                                </div>
-                            </div>
+                    <div className="flex flex-col gap-6">
+                        {textFields.map((field) =>
+                            field.type === "text"
+                                ? <TextField key={field.key} field={field} onChange={handleFieldChange} />
+                                : <TextAreaField key={field.key} field={field} onChange={handleFieldChange} />
                         )}
-
-                        {/* Image fields */}
-                        {imageFields.length > 0 && (
-                            <div>
-                                <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-7 h-7 rounded-lg bg-white/8 flex items-center justify-center text-base shrink-0">🖼️</div>
-                                    <div>
-                                        <p className="text-white font-semibold text-sm">Images</p>
-                                        <p className="text-white/35 text-xs">Upload or replace images shown in this section</p>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    {imageFields.map((field) => (
-                                        <ImageField
-                                            key={field.key}
-                                            field={field}
-                                            sectionKey={section.sectionKey}
-                                            onUploaded={handleFieldChange}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* List fields */}
-                        {listFields.length > 0 && (
-                            <div>
-                                <div className="flex items-center gap-3 mb-5">
-                                    <div className="w-7 h-7 rounded-lg bg-white/8 flex items-center justify-center text-base shrink-0">📋</div>
-                                    <div>
-                                        <p className="text-white font-semibold text-sm">Repeating Cards / Items</p>
-                                        <p className="text-white/35 text-xs">Edit each card's title and description individually</p>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-6">
-                                    {listFields.map((field) => (
-                                        <ListField key={field.key} field={field} onChange={handleFieldChange} />
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Save row */}
-                        <div className="flex flex-col gap-3 pt-2 border-t border-white/8">
-                            {saved ? (
-                                <div className="flex items-center gap-2.5 bg-emerald-500/8 border border-emerald-500/20 rounded-xl px-4 py-3">
-                                    <svg className="w-5 h-5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                                    <div>
-                                        <p className="text-emerald-400 text-sm font-semibold">Changes saved!</p>
-                                        <p className="text-white/40 text-xs mt-0.5">Your website has been updated and is visible to visitors now.</p>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-2.5 bg-white/3 border border-white/8 rounded-xl px-4 py-3">
-                                    <svg className="w-5 h-5 text-white/30 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <p className="text-white/40 text-sm">When you click <strong className="text-white/60">Save Changes</strong>, your updates will go live on the website immediately.</p>
-                                </div>
-                            )}
-                            <button
-                                onClick={handleSave}
-                                disabled={saving}
-                                className={`w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-base font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                                    saved
-                                        ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25"
-                                        : "bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white shadow-lg shadow-blue-600/20"
-                                }`}
-                            >
-                                {saving ? (
-                                    <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving changes...</>
-                                ) : saved ? (
-                                    <><IconCheck /> Saved — all good!</>
-                                ) : (
-                                    <><IconSave /> Save Changes</>
-                                )}
-                            </button>
-                        </div>
                     </div>
                 </div>
             )}
+
+            {/* Image fields */}
+            {imageFields.length > 0 && (
+                <div>
+                    <div className="flex items-center gap-3 mb-5">
+                        <p className="text-white/50 text-xs font-semibold uppercase tracking-widest shrink-0">Images</p>
+                        <div className="h-px flex-1 bg-white/8" />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {imageFields.map((field) => (
+                            <ImageField
+                                key={field.key}
+                                field={field}
+                                sectionKey={section.sectionKey}
+                                onUploaded={handleFieldChange}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* List fields */}
+            {listFields.length > 0 && (
+                <div>
+                    <div className="flex items-center gap-3 mb-5">
+                        <p className="text-white/50 text-xs font-semibold uppercase tracking-widest shrink-0">Cards & Items</p>
+                        <div className="h-px flex-1 bg-white/8" />
+                    </div>
+                    <div className="flex flex-col gap-6">
+                        {listFields.map((field) => (
+                            <ListField key={field.key} field={field} onChange={handleFieldChange} />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Save row */}
+            <div className="flex flex-col gap-3 pt-2 border-t border-white/8">
+                {saved ? (
+                    <div className="flex items-center gap-2.5 bg-emerald-500/8 border border-emerald-500/20 rounded-xl px-4 py-3">
+                        <svg className="w-5 h-5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                        <div>
+                            <p className="text-emerald-400 text-sm font-semibold">Changes saved!</p>
+                            <p className="text-white/40 text-xs mt-0.5">Your website has been updated and is visible to visitors now.</p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-2.5 bg-white/3 border border-white/8 rounded-xl px-4 py-3">
+                        <svg className="w-5 h-5 text-white/30 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p className="text-white/40 text-sm">When you click <strong className="text-white/60">Save Changes</strong>, your updates will go live on the website immediately.</p>
+                    </div>
+                )}
+                <button
+                    onClick={handleSave}
+                    disabled={saving}
+                    className={`w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-base font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                        saved
+                            ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25"
+                            : "bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white shadow-lg shadow-blue-600/20"
+                    }`}
+                >
+                    {saving ? (
+                        <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Saving changes...</>
+                    ) : saved ? (
+                        <><IconCheck /> Saved — all good!</>
+                    ) : (
+                        <><IconSave /> Save Changes</>
+                    )}
+                </button>
+            </div>
         </div>
+    );
+}
+
+/* ─── Edit drawer ─────────────────────────────────────────────── */
+function EditDrawer({ section, onClose, onSave }) {
+    const meta = SECTION_META[section?.sectionKey] || {
+        icon: "📄", label: section?.sectionLabel || "Section",
+    };
+
+    // Close on Escape key
+    useEffect(() => {
+        const handler = (e) => { if (e.key === "Escape") onClose(); };
+        window.addEventListener("keydown", handler);
+        return () => window.removeEventListener("keydown", handler);
+    }, [onClose]);
+
+    return createPortal(
+        <>
+            {/* Backdrop */}
+            <div
+                className="fixed inset-0"
+                style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(2px)", zIndex: 9998 }}
+                onClick={onClose}
+            />
+
+            {/* Drawer panel */}
+            <div
+                className="fixed right-0 top-0 bottom-0 flex flex-col w-full sm:max-w-[480px]"
+                style={{
+                    zIndex: 9999,
+                    background: "#0d0e16",
+                    borderLeft: "1px solid rgba(255,255,255,0.1)",
+                    boxShadow: "-20px 0 60px rgba(0,0,0,0.5)",
+                    animation: "slideInFromRight 0.25s cubic-bezier(0.22, 0.61, 0.36, 1)",
+                }}
+            >
+                {/* Drawer header */}
+                <div className="flex items-center gap-3 px-6 py-4 border-b border-white/10 shrink-0"
+                    style={{ background: "rgba(59,130,246,0.06)" }}>
+                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center text-lg shrink-0">
+                        {meta.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className="text-white font-bold text-base leading-tight">{meta.label}</p>
+                        <p className="text-white/40 text-xs mt-0.5">Click Save Changes when done</p>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white transition-all shrink-0"
+                        title="Close (Esc)"
+                    >
+                        <IconClose />
+                    </button>
+                </div>
+
+                {/* Hint bar */}
+                <div className="px-6 py-2.5 border-b border-white/6 flex items-center gap-2 shrink-0"
+                    style={{ background: "rgba(255,255,255,0.02)" }}>
+                    <svg className="w-3.5 h-3.5 text-blue-400/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-white/35 text-xs">Press <kbd className="bg-white/10 text-white/50 px-1.5 py-0.5 rounded text-[10px] font-mono">Esc</kbd> or click outside to close without saving.</p>
+                </div>
+
+                {/* Scrollable body */}
+                <div className="flex-1 overflow-y-auto px-6 py-6">
+                    <SectionEditBody section={section} onSave={onSave} />
+                </div>
+            </div>
+
+            <style>{`
+                @keyframes slideInFromRight {
+                    from { transform: translateX(100%); opacity: 0.5; }
+                    to   { transform: translateX(0);    opacity: 1; }
+                }
+            `}</style>
+        </>,
+        document.body
     );
 }
 
 /* ─── Main page ───────────────────────────────────────────────── */
 export default function WebsiteEditor() {
-    const [sections,  setSections]  = useState([]);
-    const [loading,   setLoading]   = useState(true);
-    const [activeTab, setActiveTab] = useState("home");
-    const [searchQuery, setSearchQuery] = useState("");
-    const [highlightedSection, setHighlightedSection] = useState(null);
+    const [sections,           setSections]           = useState([]);
+    const [loading,            setLoading]            = useState(true);
+    const [activeTab,          setActiveTab]          = useState("home");
+    const [searchQuery,        setSearchQuery]        = useState("");
+    const viewMode = "live";
+    const [selectedSection,    setSelectedSection]    = useState(null);
+    const [iframeKey,          setIframeKey]          = useState(0);   // bump to reload iframe
+    const [iframeLoading,      setIframeLoading]      = useState(true);
+    const iframeRef = useRef(null);
 
     useEffect(() => { fetchSections(); }, []);
 
@@ -604,8 +592,42 @@ export default function WebsiteEditor() {
         }
     };
 
+    // Keep a ref to sections so the message handler always sees latest data
+    const sectionsRef = useRef(sections);
+    useEffect(() => { sectionsRef.current = sections; }, [sections]);
+
+    // Listen for section-click messages coming from the live-site iframe
+    useEffect(() => {
+        const handleMessage = (e) => {
+            if (!e.data || e.data.type !== "hypertek-section-click") return;
+            const sectionKey = e.data.key;
+            const section = sectionsRef.current.find((s) => s.sectionKey === sectionKey);
+            if (section) {
+                setSelectedSection(section);
+            } else {
+                // Section key received but not found — log for debugging
+                console.warn("[WebsiteEditor] Section not found for key:", sectionKey,
+                    "| Available:", sectionsRef.current.map(s => s.sectionKey));
+            }
+        };
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
+    }, []); // register once — uses ref for latest sections
+
     const handleSectionSave = (updated) => {
         setSections((prev) => prev.map((s) => s.sectionKey === updated.sectionKey ? updated : s));
+        setSelectedSection((prev) => prev?.sectionKey === updated.sectionKey ? updated : prev);
+        // In live mode: tell the iframe to clear its CMS cache then reload
+        if (viewMode === "live") {
+            if (iframeRef.current?.contentWindow) {
+                iframeRef.current.contentWindow.postMessage({ type: "hypertek-refresh" }, "*");
+            }
+            // Give the iframe 300ms to clear cache, then reload it
+            setTimeout(() => {
+                setIframeLoading(true);
+                setIframeKey((k) => k + 1);
+            }, 300);
+        }
     };
 
     const pageGroups = useMemo(() => [...new Set(sections.map((s) => s.pageGroup))], [sections]);
@@ -626,10 +648,30 @@ export default function WebsiteEditor() {
         return list;
     }, [sections, activeTab, searchQuery]);
 
-    const handleQuickNav = (sectionKey) => {
-        setHighlightedSection(sectionKey);
-        setTimeout(() => setHighlightedSection(null), 2500);
+
+
+    const handleDrawerClose = () => setSelectedSection(null);
+
+    const handleTabChange = (group) => {
+        setActiveTab(group);
+        setSearchQuery("");
+        setSelectedSection(null);
     };
+
+    // Build the live-site URL for the current page tab (with editor flag)
+    const liveSiteUrl = useMemo(() => {
+        const path = PAGE_GROUP_META[activeTab]?.path || "/";
+        return `${FRONTEND_BASE_URL}${path}?_hedit=1`;
+    }, [activeTab]);
+
+    // Reload iframe when page tab changes in live mode
+    useEffect(() => {
+        if (viewMode === "live") {
+            setIframeLoading(true);
+            setIframeKey((k) => k + 1);
+            setSelectedSection(null);
+        }
+    }, [activeTab, viewMode]);
 
     if (loading) {
         return (
@@ -647,186 +689,163 @@ export default function WebsiteEditor() {
             <div className="max-w-[1100px] mx-auto">
 
                 {/* Page header */}
-                <div className="mb-8">
-                    <h1 className="text-white font-bold text-2xl mb-2">Website Content Editor</h1>
-                    <p className="text-white/50 text-base">
-                        Use this page to update any text, image, or content on your website — no coding needed.
-                    </p>
-                </div>
-
-                {/* Quick guide banner */}
-                <div className="rounded-2xl border border-white/8 p-5 mb-8 flex flex-col sm:flex-row gap-4" style={{ background: "rgba(255,255,255,0.025)" }}>
-                    <div className="flex-1">
-                        <p className="text-white font-semibold text-sm mb-3">How to edit content</p>
-                        <ol className="flex flex-col gap-2.5">
-                            {[
-                                { num: "1", text: "Choose a page tab below (Home, Marketplace, About…)" },
-                                { num: "2", text: "Find the section you want to edit and click on it to open" },
-                                { num: "3", text: "Update the text or upload a new image" },
-                                { num: "4", text: "Click the blue Save Changes button — your website updates instantly" },
-                            ].map((step) => (
-                                <li key={step.num} className="flex items-start gap-3">
-                                    <span className="w-6 h-6 rounded-full bg-blue-600/30 text-blue-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{step.num}</span>
-                                    <span className="text-white/60 text-sm leading-relaxed">{step.text}</span>
-                                </li>
-                            ))}
-                        </ol>
+                <div className="mb-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                    <div>
+                        <h1 className="text-white font-bold text-2xl mb-1.5">Website Content Editor</h1>
+                        <p className="text-white/50 text-base">
+                            You are looking at the real website. <strong className="text-white/70">Hover any section</strong> to highlight it — <strong className="text-white/70">click to edit</strong>.
+                        </p>
                     </div>
-                    <div className="sm:border-l sm:border-white/8 sm:pl-5 flex flex-col justify-center gap-2">
-                        <p className="text-amber-400/80 text-xs font-semibold uppercase tracking-wide">⚠ Good to know</p>
-                        <p className="text-white/40 text-sm leading-relaxed">Changes go live on your website as soon as you save. Visitors will see the update immediately.</p>
+                    <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl shrink-0 self-start"
+                        style={{ background: "rgba(16,185,129,0.10)", border: "1px solid rgba(16,185,129,0.25)" }}>
+                        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-emerald-300 text-sm font-semibold">Live Site</span>
                     </div>
                 </div>
 
-                <div className="flex gap-6">
+                {/* Page tabs (shared between modes) */}
+                <div className="flex gap-2 mb-5 overflow-x-auto pb-1">
+                    {pageGroups.map((group) => {
+                        const gm = PAGE_GROUP_META[group] || { label: group, icon: "📄" };
+                        const isActive = activeTab === group;
+                        const subs = sections.filter((s) => s.pageGroup === group);
+                        const missingImgs = subs.reduce((acc, s) =>
+                            acc + (s.fields?.filter(f => f.type === "image" && !f.value).length || 0), 0);
+                        return (
+                            <button
+                                key={group}
+                                onClick={() => handleTabChange(group)}
+                                className={`px-4 py-2.5 rounded-xl text-sm font-semibold shrink-0 flex items-center gap-2 transition-all ${
+                                    isActive
+                                        ? "bg-blue-600/20 text-white border border-blue-500/30"
+                                        : "text-white/50 hover:text-white border border-transparent hover:bg-white/5"
+                                }`}
+                            >
+                                {gm.icon} {gm.label}
+                                {missingImgs > 0 && <span className="text-amber-400 text-xs">⚠</span>}
+                            </button>
+                        );
+                    })}
+                </div>
 
-                    {/* Sidebar — page navigation */}
-                    <div className="hidden lg:block w-[200px] shrink-0">
-                        <div className="sticky top-4">
-                            <p className="text-white/40 text-xs font-semibold uppercase tracking-wider mb-3 px-1">Choose a page</p>
-                            <div className="flex flex-col gap-1">
-                                {pageGroups.map((group) => {
-                                    const gm = PAGE_GROUP_META[group] || { label: group, icon: "📄" };
-                                    const isActive = activeTab === group;
-                                    const subs = sections.filter((s) => s.pageGroup === group);
-                                    const missingImgs = subs.reduce((acc, s) =>
-                                        acc + (s.fields?.filter(f => f.type === "image" && !f.value).length || 0), 0);
-                                    return (
-                                        <div key={group}>
-                                            <button
-                                                onClick={() => { setActiveTab(group); setSearchQuery(""); }}
-                                                className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-left transition-all ${
-                                                    isActive
-                                                        ? "bg-blue-600/20 text-white border border-blue-500/30"
-                                                        : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent"
-                                                }`}
-                                            >
-                                                <span className="text-base">{gm.icon}</span>
-                                                <span className="font-semibold text-sm flex-1">{gm.label}</span>
-                                                {missingImgs > 0 && (
-                                                    <span className="text-amber-400 text-xs shrink-0">⚠</span>
-                                                )}
-                                            </button>
-                                            {isActive && (
-                                                <div className="ml-4 mt-1 mb-2 flex flex-col gap-0.5 border-l-2 border-blue-500/20 pl-3">
-                                                    {subs.map((s) => {
-                                                        const sm = SECTION_META[s.sectionKey];
-                                                        return (
-                                                            <button
-                                                                key={s.sectionKey}
-                                                                onClick={() => handleQuickNav(s.sectionKey)}
-                                                                className="text-left text-xs text-white/40 hover:text-white/80 py-1.5 transition-colors"
-                                                            >
-                                                                {sm?.icon || "·"} {sm?.label || s.sectionLabel}
-                                                            </button>
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                        </div>
-                                    );
-                                })}
+                {/* Active page bar + view live (hidden in live mode) */}
+                {viewMode !== "live" && (
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center gap-2 flex-1">
+                            <span className="text-xl">{PAGE_GROUP_META[activeTab]?.icon || "📄"}</span>
+                            <div>
+                                <p className="text-white font-bold text-base">{PAGE_GROUP_META[activeTab]?.label || activeTab}</p>
+                                <p className="text-white/35 text-xs">{filteredSections.length} section{filteredSections.length !== 1 ? "s" : ""} on this page</p>
                             </div>
                         </div>
+                        {PAGE_GROUP_META[activeTab]?.path && (
+                            <a
+                                href={`${FRONTEND_BASE_URL}${PAGE_GROUP_META[activeTab].path}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border border-white/12 text-white/50 hover:text-white hover:border-white/25 transition-all"
+                            >
+                                <IconExtLink /> View Live Page
+                            </a>
+                        )}
                     </div>
+                )}
 
-                    {/* Main content */}
-                    <div className="flex-1 min-w-0">
+                {/* Search (hidden in live mode) */}
+                {viewMode !== "live" && (
+                    <div className="relative mb-5">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30">
+                            <IconSearch />
+                        </span>
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => { setSearchQuery(e.target.value); setSelectedSection(null); }}
+                            placeholder="Search for a section by name..."
+                            className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-10 pr-10 py-3 text-white text-sm focus:outline-none focus:border-white/20 transition-all placeholder:text-white/25"
+                        />
+                        {searchQuery && (
+                            <button
+                                onClick={() => setSearchQuery("")}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                            >✕</button>
+                        )}
+                    </div>
+                )}
 
-                        {/* Mobile tabs */}
-                        <div className="lg:hidden flex gap-2 mb-5 overflow-x-auto pb-1">
-                            {pageGroups.map((group) => {
-                                const gm = PAGE_GROUP_META[group] || { label: group, icon: "📄" };
-                                return (
-                                    <button
-                                        key={group}
-                                        onClick={() => { setActiveTab(group); setSearchQuery(""); }}
-                                        className={`px-4 py-2.5 rounded-xl text-sm font-semibold shrink-0 flex items-center gap-2 transition-all ${
-                                            activeTab === group
-                                                ? "bg-blue-600/20 text-white border border-blue-500/30"
-                                                : "bg-white/5 text-white/50 border border-transparent"
-                                        }`}
-                                    >
-                                        {gm.icon} {gm.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-
-                        {/* Page bar: active page + search + view live */}
-                        <div className="flex items-center gap-3 mb-5">
-                            <div className="flex items-center gap-2 flex-1">
-                                <span className="text-xl">{PAGE_GROUP_META[activeTab]?.icon || "📄"}</span>
-                                <div>
-                                    <p className="text-white font-bold text-base">{PAGE_GROUP_META[activeTab]?.label || activeTab}</p>
-                                    <p className="text-white/35 text-xs">{filteredSections.length} section{filteredSections.length !== 1 ? "s" : ""} on this page</p>
-                                </div>
+                {/* ── LIVE SITE MODE ── */}
+                {(
+                    <div className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(16,185,129,0.25)" }}>
+                        {/* Toolbar bar above iframe */}
+                        <div className="flex items-center gap-3 px-4 py-2.5"
+                            style={{ background: "rgba(16,185,129,0.08)", borderBottom: "1px solid rgba(16,185,129,0.15)" }}>
+                            {/* Traffic-light dots */}
+                            <div className="flex items-center gap-1.5">
+                                <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                                <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
+                                <div className="w-3 h-3 rounded-full bg-emerald-500/60" />
                             </div>
-                            {PAGE_GROUP_META[activeTab]?.path && (
-                                <a
-                                    href={`${FRONTEND_BASE_URL}${PAGE_GROUP_META[activeTab].path}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border border-white/12 text-white/50 hover:text-white hover:border-white/25 transition-all"
-                                >
-                                    <IconExtLink /> View Live Page
-                                </a>
-                            )}
+                            {/* URL bar */}
+                            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-white/40 font-mono"
+                                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                                <svg className="w-3 h-3 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                <span className="truncate">{liveSiteUrl.replace("?_hedit=1", "")}</span>
+                            </div>
+                            {/* Reload button */}
+                            <button
+                                onClick={() => { setIframeLoading(true); setIframeKey((k) => k + 1); }}
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white/50 hover:text-white transition-all"
+                                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                                title="Reload page"
+                            >
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                                Reload
+                            </button>
                         </div>
 
-                        {/* Search */}
-                        <div className="relative mb-5">
-                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30">
-                                <IconSearch />
-                            </span>
-                            <input
-                                type="text"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search for a section by name..."
-                                className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-10 pr-10 py-3 text-white text-sm focus:outline-none focus:border-white/20 transition-all placeholder:text-white/25"
-                            />
-                            {searchQuery && (
-                                <button
-                                    onClick={() => setSearchQuery("")}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
-                                >✕</button>
-                            )}
-                        </div>
+                        {/* iframe spinner overlay */}
+                        {iframeLoading && (
+                            <div className="absolute inset-0 top-[44px] flex flex-col items-center justify-center gap-3 z-10"
+                                style={{ background: "#0a0b10" }}>
+                                <div className="w-8 h-8 border-2 border-white/10 border-t-emerald-400 rounded-full animate-spin" />
+                                <p className="text-white/40 text-sm">Loading live site…</p>
+                            </div>
+                        )}
 
-                        {/* Section cards */}
-                        <div className="flex flex-col gap-3">
-                            {filteredSections.length === 0 ? (
-                                <div className="text-center py-16 rounded-2xl border border-white/6" style={{ background: "rgba(255,255,255,0.015)" }}>
-                                    {searchQuery ? (
-                                        <>
-                                            <p className="text-3xl mb-3">🔍</p>
-                                            <p className="text-white/50 text-base font-semibold">No matching sections found</p>
-                                            <p className="text-white/30 text-sm mt-1.5">Try searching with a different word</p>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <p className="text-3xl mb-3">📭</p>
-                                            <p className="text-white/50 text-base font-semibold">No sections available for this page</p>
-                                            <p className="text-white/30 text-sm mt-1.5">Contact the technical team to set up content for this page</p>
-                                        </>
-                                    )}
-                                </div>
-                            ) : (
-                                filteredSections.map((section, idx) => (
-                                    <SectionCard
-                                        key={section.sectionKey}
-                                        section={section}
-                                        onSave={handleSectionSave}
-                                        isHighlighted={highlightedSection === section.sectionKey}
-                                        defaultExpanded={filteredSections.length <= 2 || idx === 0}
-                                    />
-                                ))
-                            )}
-                        </div>
+                        {/* The actual iframe */}
+                        <iframe
+                            key={iframeKey}
+                            ref={iframeRef}
+                            src={liveSiteUrl}
+                            title="Live Site Editor"
+                            onLoad={() => setIframeLoading(false)}
+                            className="w-full block"
+                            style={{
+                                height: "calc(100vh - 220px)",
+                                minHeight: 600,
+                                border: "none",
+                                background: "#060610",
+                            }}
+                            // Allow same-origin scripts; needed for postMessage to work
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                        />
                     </div>
-                </div>
+                )}
+
             </div>
+
+            {/* Edit drawer */}
+            {selectedSection && (
+                <EditDrawer
+                    section={selectedSection}
+                    onClose={handleDrawerClose}
+                    onSave={handleSectionSave}
+                />
+            )}
         </div>
     );
 }

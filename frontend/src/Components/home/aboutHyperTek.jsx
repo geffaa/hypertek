@@ -46,7 +46,7 @@ export default function HyperTekDesign() {
   const imageRight2 = cms.image_right_2 || RightImage2Default;
 
   return (
-    <section className="relative w-full px-0 overflow-hidden z-10 pt-16 md:pt-24">
+    <section data-edit-section="home_about" data-edit-label="About Section" className="relative w-full px-0 overflow-hidden z-10 pt-16 md:pt-24">
       <div className="max-w-[1450px] mx-auto lg:pr-8 lg:pl-0">
         <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-10">
           {/* LEFT BIG IMAGE (Desktop only) */}

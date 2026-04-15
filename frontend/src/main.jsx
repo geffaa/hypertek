@@ -41,6 +41,10 @@ import { config } from './Wagmi.config.js';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from 'react-hot-toast';
 
+// Visual editor bridge — activates only when ?_hedit=1 is present (admin iframe mode)
+import { initEditorBridge } from './utils/editorBridge.js';
+initEditorBridge();
+
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const queryClient = new QueryClient();
 

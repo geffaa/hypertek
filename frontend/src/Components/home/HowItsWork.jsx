@@ -61,7 +61,7 @@ function HowItsWork() {
   const steps = Array.isArray(cms.steps) ? cms.steps : DEFAULT_STEPS;
 
   return (
-    <section className="relative z-10 w-full px-8 md:px-16 py-16 lg:py-20">
+    <section data-edit-section="home_how_it_works" data-edit-label="How It Works" className="relative z-10 w-full px-8 md:px-16 py-16 lg:py-20">
       <div className="max-w-[1480px] mx-auto grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-16 items-center">
 
         {/* Left Section */}

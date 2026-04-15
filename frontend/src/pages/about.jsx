@@ -104,6 +104,8 @@ function About() {
           HERO — full viewport height, bg image + char
       ════════════════════════════════════════════════════════ */}
       <section
+        data-edit-section="about_top"
+        data-edit-label="About — Top Section"
         className="relative min-h-screen flex items-center overflow-hidden"
         style={{
           backgroundImage: `url(${bgImage})`,
@@ -165,7 +167,7 @@ function About() {
       {/* ═══════════════════════════════════════════════════════
           OUR STORY
       ════════════════════════════════════════════════════════ */}
-      <section className="relative w-full max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 pt-20 pb-28">
+      <section data-edit-section="about_story" data-edit-label="About — Our Story" className="relative w-full max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 pt-20 pb-28">
 
         {/* Title with lines */}
         <div className="flex items-center gap-6 mb-20 md:mb-24">
