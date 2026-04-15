@@ -1,6 +1,14 @@
 import Auction from "../Models/AuctionModel.js";
 import NFTSystem from "../Models/NFTSystem.js";
+import MarketListing from "../Models/MarketListingModel.js";
 import { cancelSiblingListings } from "../services/cancelSiblingListings.js";
+
+const CAT_ALIAS_AUCTION = {
+  "military badges and collectables": "military badges",
+  "vehicles": "racing vehicles",
+  "land/bases": "land and bases",
+};
+const VALID_CATS_AUCTION = ["skins","military badges","specialists","weapons","body armour","spaceships","racing vehicles","artwork","land and bases","general"];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -109,6 +117,26 @@ export async function createAuction(req, res) {
       durationHours: Number(durationHours),
       endTime,
     });
+
+    // Sync to MarketListing so the Listings tab shows this auction
+    const rawCat = (category || "general").toLowerCase().trim();
+    const normCat = CAT_ALIAS_AUCTION[rawCat] || (VALID_CATS_AUCTION.includes(rawCat) ? rawCat : "general");
+    MarketListing.create({
+      userId,
+      userName: req.user?.FullName || req.user?.Name || req.user?.Email?.split("@")[0] || "Anonymous",
+      userWallet: sellerWallet,
+      category: normCat,
+      activityType: "selling_auction",
+      itemName: title,
+      itemDescription: description || "",
+      itemImage: image || "",
+      nftSystemId: nftSystemId || null,
+      subCollectionId: subCollectionId ? String(subCollectionId) : null,
+      reservePrice: reservePrice != null ? Number(reservePrice) : null,
+      currentBid: 0,
+      status: "active",
+    }).catch((e) => console.error("MarketListing auction sync:", e.message));
+
     res.status(201).json(auction);
   } catch (err) {
     res.status(500).json({ error: err.message });

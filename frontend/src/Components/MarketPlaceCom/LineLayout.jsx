@@ -10,7 +10,7 @@ import { getImageUrl } from "../../Config";
 const ASSET_BADGE = {
   NFA: { label: "NFA", bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", ring: "#7C3AED" },
   NFC: { label: "NFC", bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   ring: "#002AA8" },
-  NFT: null, // no badge for plain NFT
+  NFT: { label: "NFT", bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", ring: "transparent" },
 };
 
 function LineCard({ item }) {
@@ -47,8 +47,8 @@ function LineCard({ item }) {
           src={imgSrc}
           alt={name}
           fallback={popularFallback}
-          className="w-full h-[120px] sm:h-[135px]"
-          imgClassName="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-[120px] sm:h-[135px] bg-black"
+          imgClassName="object-contain transition-transform duration-500 group-hover:scale-105"
         />
         {badge && (
           <>

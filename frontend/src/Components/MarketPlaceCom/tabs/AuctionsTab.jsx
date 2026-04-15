@@ -577,7 +577,7 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
       }}>
       <div className="relative">
         <LazyImage src={auction.image ? getImageUrl(auction.image) : null} alt={auction.title}
-          fallback={popularFallback} className="w-full h-44" imgClassName="object-cover" />
+          fallback={popularFallback} className="w-full h-44 bg-black" imgClassName="object-contain" />
         <div className="absolute top-2 left-2 flex gap-1">
           {isNFA && (
             <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-white"

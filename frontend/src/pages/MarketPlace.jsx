@@ -19,7 +19,7 @@ import { BACKEND_BASE_URL } from "../Config";
 const HEADER_H = 72;
 
 function MarketPlace() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
@@ -120,7 +120,7 @@ function MarketPlace() {
         <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
           <MarketNavBar
             activeTab={activeTab}
-            onTabChange={(tab) => { setActiveTab(tab); setSearch(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            onTabChange={(tab) => { setActiveTab(tab); setSearchParams({ tab }); setSearch(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             search={search}
             onSearch={setSearch}
             className="flex-1 min-w-0"

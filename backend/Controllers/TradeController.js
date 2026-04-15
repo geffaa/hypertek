@@ -3,6 +3,14 @@ import path from "path";
 import Trade from "../Models/TradeModel.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+import MarketListing from "../Models/MarketListingModel.js";
+
+const CAT_ALIAS_TRADE = {
+  "military badges and collectables": "military badges",
+  "vehicles": "racing vehicles",
+  "land/bases": "land and bases",
+};
+const VALID_CATS_TRADE = ["skins","military badges","specialists","weapons","body armour","spaceships","racing vehicles","artwork","land and bases","general"];
 import {
   getTier,
   calculateQuestSplit,
@@ -199,6 +207,24 @@ export async function createTrade(req, res) {
     }
 
     const trade = await Trade.create(tradeDoc);
+
+    // Sync to MarketListing so the Listings tab shows this trade
+    if (type === "trade") {
+      const rawCat = (category || "general").toLowerCase().trim();
+      const normCat = CAT_ALIAS_TRADE[rawCat] || (VALID_CATS_TRADE.includes(rawCat) ? rawCat : "general");
+      MarketListing.create({
+        userId,
+        userName: posterName || "Anonymous",
+        userWallet: posterWallet,
+        category: normCat,
+        activityType: "trading",
+        itemName: offering || title,
+        itemDescription: description || "",
+        itemImage: resolvedImage || "",
+        status: "active",
+      }).catch((e) => console.error("MarketListing trade sync:", e.message));
+    }
+
     res.status(201).json(trade);
   } catch (err) {
     res.status(500).json({ error: err.message });

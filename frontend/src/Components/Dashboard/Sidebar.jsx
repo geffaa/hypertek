@@ -62,6 +62,12 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 <img src={Logo} alt="logo" className="w-[140px] h-auto object-contain" />
               </Link>
               <Link
+                to="/Profile"
+                className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/90 transition-colors"
+              >
+                ← Back to My Profile
+              </Link>
+              <Link
                 to="/"
                 className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/90 transition-colors"
               >

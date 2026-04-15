@@ -229,7 +229,7 @@ function ListingCard({ listing, onHire: _onHire, onReturn: _onReturn, onCancel: 
       }}>
       <div className="relative">
         <LazyImage src={listing.image ? getImageUrl(listing.image) : null} alt={listing.itemTitle}
-          fallback={popularFallback} className="w-full h-36" imgClassName="object-cover" />
+          fallback={popularFallback} className="w-full h-36 bg-black" imgClassName="object-contain" />
         <div className="absolute top-2 left-2">
           <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-white uppercase"
             style={{ background: isHire ? "rgba(0,120,60,0.85)" : "rgba(100,40,200,0.85)" }}>

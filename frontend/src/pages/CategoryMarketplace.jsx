@@ -29,6 +29,7 @@ function CategoryMarketplace() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [allCategories, setAllCategories] = useState([]);
+  const contentRef = useRef(null);
 
   // ── Redirect old alias URLs to canonical ──────────────────────────
   const CAT_ALIAS_REDIRECT = {
@@ -177,6 +178,16 @@ function CategoryMarketplace() {
     fetchByCategory();
   }, [category]);
 
+  // Auto-scroll to content heading once data has loaded
+  useEffect(() => {
+    if (loading || !contentRef.current) return;
+    const el = contentRef.current;
+    requestAnimationFrame(() => {
+      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_H - 56;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    });
+  }, [loading]);
+
   if (loading) return <FullScreenLoader />;
 
   // Only show items that are listed for sale with a valid price
@@ -257,7 +268,7 @@ function CategoryMarketplace() {
       <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 pb-24">
 
         {/* Items Section */}
-        <section className="flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16 pt-8">
+        <section ref={contentRef} className="flex flex-col gap-4 lg:gap-8 mb-12 lg:mb-16 pt-8">
           {/* Heading */}
           <div className="flex flex-col gap-2 items-start pl-1 lg:pl-[14px]">
             <h1 className="text-white uppercase text-xl sm:text-2xl lg:text-[30px] font-goldman font-bold">
@@ -310,20 +321,40 @@ function CategoryMarketplace() {
               filteredItems.map((item) => (
                 <div
                   key={item._id}
-                  className="relative rounded-xl text-white flex flex-col overflow-hidden group cursor-pointer"
+                  className="relative rounded-xl text-white flex flex-col overflow-hidden group cursor-pointer transition-all duration-200 hover:brightness-110 hover:border-white/20"
                   style={{
                     background:
                       "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
                     border: "1px solid rgba(255,255,255,0.09)",
                   }}
+                  onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
                 >
-                  <LazyImage
-                    src={getImageUrl(item.collection?.image)}
-                    alt={item.collection?.name || item.name || "Item"}
-                    fallback={overview1}
-                    className="w-full h-[140px] sm:h-[150px]"
-                    imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <div className="relative">
+                    <LazyImage
+                      src={getImageUrl(item.collection?.image)}
+                      alt={item.collection?.name || item.name || "Item"}
+                      fallback={overview1}
+                      className="w-full h-[200px] sm:h-[220px]"
+                      imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Asset type badge on image */}
+                    {(() => {
+                      const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
+                      const cfg = {
+                        NFA: { bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", text: "#fff" },
+                        NFC: { bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   text: "#fff" },
+                        NFT: { bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", text: "rgba(255,255,255,0.7)" },
+                      }[aType];
+                      return (
+                        <span
+                          className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold"
+                          style={{ background: cfg.bg, border: `1px solid ${cfg.border}`, color: cfg.text }}
+                        >
+                          {aType}
+                        </span>
+                      );
+                    })()}
+                  </div>
 
                   <div className="flex flex-col gap-1 p-3 flex-1">
                     <h2 className="text-xs sm:text-sm font-semibold truncate leading-tight">
@@ -331,19 +362,17 @@ function CategoryMarketplace() {
                     </h2>
 
                     <div className="flex justify-between items-center mt-1.5">
-                      <span className="text-[10px] sm:text-xs font-medium text-white/60">
-                        {item.symbol || item._id?.slice(0, 6) || "N/A"} 🔥
-                      </span>
                       <span className="text-[10px] sm:text-xs font-semibold">
                         {item.priceETH || 0} USDC
                       </span>
                     </div>
 
-                    <Link to="/buy-nfa" state={{ item }} className="mt-auto pt-2">
-                      <button className="px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20 w-full">
-                        Buy Now
-                      </button>
-                    </Link>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa", { state: { item, parentId: item.parentId } }); }}
+                      className="mt-3 w-full px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20"
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
               ))

@@ -175,7 +175,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
       }}>
       <LazyImage src={trade.image ? getImageUrl(trade.image) : null} alt={trade.title}
         fallback={popularFallback}
-        className="w-full h-[110px] sm:h-[130px] lg:h-[150px]" imgClassName="object-cover" />
+        className="w-full h-[110px] sm:h-[130px] lg:h-[150px] bg-black" imgClassName="object-contain" />
       <div className="p-3 flex flex-col gap-2 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded"

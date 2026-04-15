@@ -27,11 +27,13 @@ function ListingSteps({ step }) {
     { key: "marketplace", label: "Marketplace" },
     { key: "auction",     label: "Auction"     },
     { key: "trade",       label: "Trade"        },
+    { key: "hire",        label: "Hire"         },
   ];
   const currentIndex =
-    step === "marketplace"                    ? 0 :
+    step === "marketplace"                           ? 0 :
     step === "auction_prompt" || step === "auction_form" ? 1 :
-    2;
+    step === "trade_prompt"   || step === "trade_form"   ? 2 :
+    3;
 
   return (
     <div className="flex items-center gap-1 justify-center mb-1">
@@ -73,6 +75,10 @@ function NFTs() {
   const [tradeForm, setTradeForm]           = useState({ reqItem: "", description: "", openOffer: false });
   const [tradeLoading, setTradeLoading]     = useState(false);
 
+  // — Hire sub-step
+  const [hireForm, setHireForm]             = useState({ pricePerDuration: "", durationHours: "24" });
+  const [hireLoading, setHireLoading]       = useState(false);
+
   // — Unlist confirmation modal
   const [unlistItem, setUnlistItem]         = useState(null);
   const [unlistLoading, setUnlistLoading]   = useState(false);
@@ -92,18 +98,31 @@ function NFTs() {
 
   useEffect(() => {
     if (!wallet) { setLoading(false); return; }
-    axios.get(
-      `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    ).then((res) => {
-      if (res.data.success) {
-        const items = (res.data.nfts || []).flatMap((col) =>
+    Promise.all([
+      axios.get(
+        `${BACKEND_BASE_URL}/api/v1/nft/user/owned-with-subs/${encodeURIComponent(wallet)}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      ),
+      axios.get(`${BACKEND_BASE_URL}/api/v1/auction/seller/${wallet}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(() => ({ data: [] })),
+      axios.get(`${BACKEND_BASE_URL}/api/v1/trade`, {
+        params: { type: "trade", posterWallet: wallet, status: "open", limit: 50 },
+        headers: { Authorization: `Bearer ${token}` },
+      }).catch(() => ({ data: { trades: [] } })),
+    ]).then(([nftRes, auctionRes, tradeRes]) => {
+      if (nftRes.data.success) {
+        const auctions = Array.isArray(auctionRes.data) ? auctionRes.data : (auctionRes.data?.auctions || []);
+        const trades   = tradeRes.data?.trades || [];
+        const items = (nftRes.data.nfts || []).flatMap((col) =>
           (col.subCollections || [])
             .filter((sub) => sub.owner?.toLowerCase() === wallet.toLowerCase())
             .map((item) => ({
               ...item,
-              parentId: col._id,
-              category: col.category || "general",
+              parentId:  col._id,
+              category:  col.category || "general",
+              onAuction: auctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active"),
+              onTrade:   trades.some((t) => t.offering === item.name && t.status === "open"),
             }))
         );
         setAllItems(items);
@@ -119,6 +138,7 @@ function NFTs() {
     setListingPrice("");
     setAuctionForm({ startPrice: "", durationHours: "24", reservePrice: "", instantBuyPrice: "" });
     setTradeForm({ reqItem: "", description: "", openOffer: false });
+    setHireForm({ pricePerDuration: "", durationHours: "24" });
   };
 
   // ── Open listing modal ─────────────────────────────────────────────────────
@@ -225,6 +245,44 @@ function NFTs() {
       toast.error(err.message || "Failed to create trade listing");
     } finally {
       setTradeLoading(false);
+      setListStep("hire_prompt");
+    }
+  };
+
+  // ── Step 4: Create Hire listing ────────────────────────────────────────────
+  const handleCreateHire = async () => {
+    if (!hireForm.pricePerDuration || parseFloat(hireForm.pricePerDuration) <= 0)
+      return toast.error("Enter a valid price per duration");
+    try {
+      setHireLoading(true);
+      const authToken = token || localStorage.getItem("token");
+      const r = await fetch(`${BACKEND_BASE_URL}/api/v1/hire`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${authToken}` },
+        body: JSON.stringify({
+          type:             "hire",
+          ownerWallet:      wallet,
+          ownerName:        user?.FullName || user?.Email?.split("@")[0] || "User",
+          itemTitle:        listingItem.name,
+          itemDescription:  listingItem.description || "",
+          image:            listingItem.image || "",
+          category:         listingItem.category || "general",
+          nftSystemId:      listingItem.parentId,
+          subCollectionId:  listingItem._id,
+          pricePerDuration: parseFloat(hireForm.pricePerDuration),
+          durationHours:    parseInt(hireForm.durationHours),
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error);
+      setAllItems((prev) =>
+        prev.map((i) => i._id === listingItem._id ? { ...i, onHire: true } : i)
+      );
+      toast.success("Item listed for hire!");
+    } catch (err) {
+      toast.error(err.message || "Failed to list for hire");
+    } finally {
+      setHireLoading(false);
       closeListing();
     }
   };
@@ -441,8 +499,8 @@ function NFTs() {
                 <div key={item._id}
                   className="rounded-xl border overflow-hidden flex flex-col transition-all hover:brightness-110"
                   style={{ background: "rgba(255,255,255,0.03)", borderColor: isAnywhere ? "rgba(74,222,128,0.25)" : "rgba(255,255,255,0.08)" }}>
-                  <div className="relative aspect-square">
-                    <img src={img} alt={item.name} className="w-full h-full object-cover"
+                  <div className="relative h-[200px] sm:h-[220px]">
+                    <img src={img} alt={item.name} className="w-full h-full object-cover object-top"
                       onError={(e) => { e.target.src = Collectionimage; }} />
 
                     {/* Asset type badge — top left */}
@@ -686,9 +744,9 @@ function NFTs() {
                 </div>
 
                 <div className="flex gap-3">
-                  <button onClick={closeListing}
+                  <button onClick={() => setListStep("hire_prompt")}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    No, done
+                    No, skip
                   </button>
                   <button onClick={() => setListStep("trade_form")}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
@@ -707,7 +765,7 @@ function NFTs() {
                     <ArrowRightLeft className="w-4 h-4 text-blue-400" />
                     <h2 className="text-white font-semibold text-base">Set Up Trade</h2>
                   </div>
-                  <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
+                  <button onClick={() => setListStep("hire_prompt")} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
                 </div>
 
                 <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/4 border border-white/6">
@@ -747,7 +805,7 @@ function NFTs() {
                 </div>
 
                 <div className="flex gap-3">
-                  <button onClick={closeListing}
+                  <button onClick={() => setListStep("hire_prompt")}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
                     Skip
                   </button>
@@ -755,6 +813,95 @@ function NFTs() {
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                     style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
                     {tradeLoading ? "Creating..." : "Post Trade →"}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 4a: Hire prompt ── */}
+            {listStep === "hire_prompt" && (
+              <>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
+                  <span className="text-green-300 text-sm font-medium">Almost done!</span>
+                </div>
+
+                <div className="rounded-xl p-4 flex flex-col gap-2"
+                  style={{ background: "rgba(168,85,247,0.07)", border: "1px solid rgba(168,85,247,0.22)" }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-purple-300 text-base">🔑</span>
+                    <span className="text-purple-300 font-semibold text-sm">Also list for Hire?</span>
+                  </div>
+                  <p className="text-white/40 text-xs leading-relaxed">
+                    Let other players rent this item for a set duration and price. It stays yours — they just use it temporarily.
+                  </p>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
+                    No, done
+                  </button>
+                  <button onClick={() => setListStep("hire_form")}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
+                    style={{ background: "rgba(168,85,247,0.25)", border: "1px solid rgba(168,85,247,0.45)" }}>
+                    Yes, set up →
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* ── Step 4b: Hire form ── */}
+            {listStep === "hire_form" && (
+              <>
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-purple-300 text-base">🔑</span>
+                    <h2 className="text-white font-semibold text-base">Set Up Hire Listing</h2>
+                  </div>
+                  <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
+                </div>
+
+                <div className="flex items-center gap-2 p-2.5 rounded-lg bg-white/4 border border-white/6">
+                  <img src={listingItem.image ? getImageUrl(listingItem.image) : Collectionimage} alt={listingItem.name}
+                    className="w-8 h-8 rounded object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
+                  <p className="text-white/70 text-xs font-medium truncate">{listingItem.name}</p>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Price per Duration (USDC) <span className="text-red-400">*</span></label>
+                    <div className="flex h-10 rounded-lg bg-white/5 border border-white/10 focus-within:border-purple-500 transition-all overflow-hidden">
+                      <input type="number" placeholder="e.g. 10" min="0" value={hireForm.pricePerDuration}
+                        onChange={(e) => setHireForm(f => ({ ...f, pricePerDuration: e.target.value }))}
+                        className="flex-1 bg-transparent px-3 text-white text-sm outline-none placeholder-white/30" autoFocus />
+                      <span className="flex items-center pr-3 text-white/30 text-sm font-medium">USDC</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">Hire Duration</label>
+                    <select value={hireForm.durationHours}
+                      onChange={(e) => setHireForm(f => ({ ...f, durationHours: e.target.value }))}
+                      className={inputCls} style={{ ...inputStyle, appearance: "none" }}>
+                      <option value="8">8 hours</option>
+                      <option value="24">24 hours (1 day)</option>
+                      <option value="72">3 days</option>
+                      <option value="168">7 days</option>
+                      <option value="720">30 days</option>
+                    </select>
+                  </div>
+                  <p className="text-white/25 text-[10px]">20% commission applies on each rental. Item stays in your wallet.</p>
+                </div>
+
+                <div className="flex gap-3">
+                  <button onClick={closeListing}
+                    className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
+                    Skip
+                  </button>
+                  <button onClick={handleCreateHire} disabled={hireLoading}
+                    className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
+                    style={{ background: "rgba(168,85,247,0.3)", border: "1px solid rgba(168,85,247,0.5)" }}>
+                    {hireLoading ? "Listing..." : "List for Hire →"}
                   </button>
                 </div>
               </>

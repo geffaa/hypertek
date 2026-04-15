@@ -112,8 +112,8 @@ function FeaturedMarketplace() {
                     src={getImageUrl(item.image)}
                     alt={item.name || "Item"}
                     fallback={popularFallback}
-                    className="h-[110px] sm:h-[130px] lg:h-[150px]"
-                    imgClassName="object-cover"
+                    className="h-[110px] sm:h-[130px] lg:h-[150px] bg-black"
+                    imgClassName="object-contain"
                   />
                   {/* Asset type badge */}
                   <span

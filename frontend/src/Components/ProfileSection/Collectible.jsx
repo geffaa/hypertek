@@ -409,7 +409,7 @@ function MarketPlace() {
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                   {gridItems.map((item) => {
-                      const onAuction = myAuctions.some((a) => a.subCollectionId === item._id && a.status === "active")
+                      const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
                         || sessionAuctionIds.has(item._id);
                       const onTrade   = offers.some((t) => t.offering === item.name && t.status === "open")
                         || sessionTradeNames.has(item.name);
@@ -532,7 +532,7 @@ function MarketPlace() {
               const TX_FILTERS = [
                 { key: "all",  label: "All"  },
                 { key: "buy",  label: "Buy"  },
-                { key: "sell", label: "Sell" },
+                { key: "sell", label: "Sold" },
               ];
               const filtered = txFilter === "all"
                 ? transactions

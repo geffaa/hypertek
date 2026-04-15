@@ -12,6 +12,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 
 import FaceOne from "../../assets/images/noActivity1.png";
+import overview1 from "../../assets/images/Overview/overview1.jpg";
 import {
   BASE_NFT_ADDRESS,
   BASE_MARKETPLACE_ADDRESS,
@@ -1282,15 +1283,22 @@ function Buy1() {
 
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
-        {/* Back button */}
+        {/* Back button — navigate to category collection page for better UX */}
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            const cat = collection?.parentCategory || item?.parentCategory || collection?.category || item?.category || "";
+            if (cat) {
+              navigate(`/collections/${encodeURIComponent(cat.toLowerCase().trim())}`);
+            } else {
+              navigate("/collections");
+            }
+          }}
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-0.5">
             <path d="M19 12H5M12 5l-7 7 7 7"/>
           </svg>
-          Back
+          Back to Collections
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
         {!isOwner && (
@@ -1327,10 +1335,11 @@ function Buy1() {
         {/* Left — Image */}
         <div className="w-full md:w-[320px] lg:w-[380px] shrink-0">
           <img
-            src={getImageUrl(collection?.image)}
+            src={collection?.image ? getImageUrl(collection.image) : overview1}
             alt={collection?.name}
-            className="w-full h-full min-h-[300px] md:min-h-[440px] rounded-2xl object-cover"
+            className="w-full h-full min-h-[300px] md:min-h-[440px] rounded-2xl object-cover object-center"
             style={{ background: "rgba(13,22,50,0.8)" }}
+            onError={(e) => { e.target.src = overview1; }}
           />
         </div>
 
@@ -1535,9 +1544,10 @@ function Buy1() {
           >
             <h2 className="text-lg font-bold text-center mb-4">Confirm Action</h2>
             <img
-              src={getImageUrl(collection?.image)}
+              src={collection?.image ? getImageUrl(collection.image) : overview1}
               alt={collection?.name}
-              className="w-32 h-28 mx-auto mb-3 rounded-xl object-cover"
+              className="w-32 h-28 mx-auto mb-3 rounded-xl object-cover object-center"
+              onError={(e) => { e.target.src = overview1; }}
             />
             <h3 className="text-center font-semibold mb-4">{collection?.name}</h3>
             <div className="space-y-2 mb-6">
@@ -1590,9 +1600,10 @@ function Buy1() {
             <div className="border-t border-white/08 mb-4" />
 
             <img
-              src={getImageUrl(collection?.image)}
+              src={collection?.image ? getImageUrl(collection.image) : overview1}
               alt={collection?.name}
-              className="w-28 h-24 rounded-xl object-cover mx-auto mb-4"
+              className="w-28 h-24 rounded-xl object-cover object-center mx-auto mb-4"
+              onError={(e) => { e.target.src = overview1; }}
             />
 
             <div className="border-t border-white/08 mb-4" />

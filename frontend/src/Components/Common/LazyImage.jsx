@@ -28,20 +28,35 @@ export default function LazyImage({
   children,
   ...imgProps
 }) {
+  // currentSrc tracks what <img> actually renders — prevents React from
+  // resetting src back to a broken URL after onError switches to fallback.
+  const [currentSrc, setCurrentSrc] = useState(src || fallback || "");
   const [status, setStatus] = useState(src ? "loading" : "error");
+  const imgRef = useRef(null);
 
-  // Skip reset on first mount — only reset when src actually changes
-  const isFirstMount = useRef(true);
+  // When src prop changes (e.g. data loads async), reset to new src
+  const prevSrc = useRef(src);
   useEffect(() => {
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-      return;
+    if (prevSrc.current === src) return;
+    prevSrc.current = src;
+    if (src) {
+      setCurrentSrc(src);
+      setStatus("loading");
+    } else {
+      setCurrentSrc(fallback || "");
+      setStatus("error");
     }
-    setStatus(src ? "loading" : "error");
-  }, [src]);
+  }, [src, fallback]);
 
-  const effectiveSrc =
-    status === "error" && fallback ? fallback : src || fallback;
+  // Handle images already in browser cache — onLoad fires before React
+  // attaches the synthetic handler, so we check .complete after mount.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+    if (img.complete && img.naturalWidth > 0) {
+      setStatus("loaded");
+    }
+  }, [currentSrc]);
 
   return (
     <div className={`relative overflow-hidden ${className}`} style={style}>
@@ -60,16 +75,20 @@ export default function LazyImage({
 
       {/* Gambar */}
       <img
-        src={effectiveSrc}
+        ref={imgRef}
+        src={currentSrc}
         alt={alt}
         loading="lazy"
         className={`w-full h-full transition-opacity duration-500 ${
           status === "loaded" ? "opacity-100" : "opacity-0"
         } ${imgClassName}`}
         onLoad={() => setStatus("loaded")}
-        onError={(e) => {
-          if (fallback && e.target.src !== fallback) {
-            e.target.src = fallback;
+        onError={() => {
+          // Use fallback src via React state — never mutate DOM directly,
+          // otherwise React reconciler resets img.src back to the broken URL.
+          if (fallback && currentSrc !== fallback) {
+            setCurrentSrc(fallback);
+            // Keep status as "loading" so onLoad fires when fallback loads
           } else {
             setStatus("error");
           }

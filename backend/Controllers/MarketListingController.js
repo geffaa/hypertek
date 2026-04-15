@@ -1,4 +1,5 @@
 import MarketListing from "../Models/MarketListingModel.js";
+import HireRent from "../Models/HireRentModel.js";
 
 const WARN_BEFORE_MS = 24 * 60 * 60 * 1000; // notify 24h before expiry
 
@@ -6,15 +7,44 @@ const WARN_BEFORE_MS = 24 * 60 * 60 * 1000; // notify 24h before expiry
 // Returns listings grouped by category, only non-empty categories
 export const getMyListings = async (req, res) => {
   try {
-    const listings = await MarketListing.find({ userId: req.user._id || req.user.id })
-      .sort({ createdAt: -1 })
-      .lean();
+    const userId = req.user._id || req.user.id;
 
-    // Group by category, omit empty categories
+    const [listings, ownedHire, rentedHire] = await Promise.all([
+      MarketListing.find({ userId }).sort({ createdAt: -1 }).lean(),
+      // Items the user has listed for hire (they are the owner)
+      HireRent.find({ owner: userId, status: { $in: ["available", "rented", "cooldown"] } })
+        .sort({ createdAt: -1 }).lean(),
+      // Items the user is currently renting from others
+      HireRent.find({ renter: userId, status: "rented" })
+        .sort({ createdAt: -1 }).lean(),
+    ]);
+
+    // Convert HireRent doc → listing-like shape for the frontend
+    const toHireListing = (h, activityType) => ({
+      _id:          h._id,
+      activityType,
+      itemName:     h.itemTitle,
+      itemDescription: h.itemDescription || "",
+      itemImage:    h.image || "",
+      category:     (h.category || "general").toLowerCase().trim(),
+      price:        h.pricePerDuration,
+      durationHours: h.durationHours,
+      status:       ["available", "rented"].includes(h.status) ? "active" : h.status,
+      createdAt:    h.createdAt,
+    });
+
+    const allListings = [
+      ...listings,
+      ...ownedHire.map((h) => toHireListing(h, "on_hire")),
+      ...rentedHire.map((h) => toHireListing(h, "hiring")),
+    ];
+
+    // Group by category
     const grouped = {};
-    listings.forEach((l) => {
-      if (!grouped[l.category]) grouped[l.category] = [];
-      grouped[l.category].push(l);
+    allListings.forEach((l) => {
+      const cat = (l.category || "general").toLowerCase().trim();
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(l);
     });
 
     return res.json({ success: true, grouped });

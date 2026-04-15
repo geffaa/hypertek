@@ -61,7 +61,7 @@ function CollectionOnSale() {
 
       {/* Header */}
       <div className="flex flex-col w-full max-w-[426px] gap-6 px-6 md:ml-12 z-10">
-        <h1 className="font-inter font-semibold text-[25px] text-white">Collection On Sale</h1>
+        <h1 className="font-inter font-semibold text-[25px] text-white">Items On Sale</h1>
       </div>
 
       {/* Table */}
