@@ -21,8 +21,10 @@ function Artists() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setArtists(res.data.artists || []);
-    } catch {
-      toast.error("Failed to load artists");
+    } catch (err) {
+      const msg = err.response?.data?.message || err.message || "Failed to load artists";
+      console.error("Artists fetch error:", err.response?.status, msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

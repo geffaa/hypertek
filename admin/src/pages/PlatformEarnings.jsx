@@ -4,8 +4,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ethers } from 'ethers';
 import toast from "react-hot-toast";
 
-// Use the existing config logic copied from frontend
-const MARKETPLACE_ADDRESS = "0xfA9AFd6A073Da44bDDb4B7f3C396A39c782cC9df"; // Deployed Base Mainnet Marketplace
+const MARKETPLACE_ADDRESS = import.meta.env.VITE_MARKETPLACE_ADDRESS;
 const MARKETPLACE_ABI = [
   {
     "functionName": "platformBalance",
@@ -49,18 +48,6 @@ const MARKETPLACE_ABI = [
   }
 ];
 
-// USDC for balance check of the wallet itself (optional but helpful)
-const USDC_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
-const USDC_ABI = [
-  {
-    "name": "balanceOf",
-    "type": "function",
-    "stateMutability": "view",
-    "inputs": [{ "type": "address", "name": "account" }],
-    "outputs": [{ "type": "uint256" }]
-  }
-];
-
 function PlatformEarnings() {
   const { address, isConnected } = useAccount();
 
@@ -94,15 +81,6 @@ function PlatformEarnings() {
     address: MARKETPLACE_ADDRESS,
     abi: MARKETPLACE_ABI,
     functionName: 'platformWallet',
-  });
-
-  // Wallet's own USDC balance (to address "ye XMI ni USDC ay" potentially)
-  const { data: walletUsdcBalance } = useReadContract({
-    address: USDC_ADDRESS,
-    abi: USDC_ABI,
-    functionName: 'balanceOf',
-    args: [address],
-    query: { enabled: !!address }
   });
 
   // Write contract hook for withdrawal
@@ -226,12 +204,28 @@ function PlatformEarnings() {
         </div>
       </div>
 
+      {/* Contract error banner */}
+      {(balanceError || walletError) && (
+        <div className="mt-6 w-full max-w-[954px] bg-red-500/20 border border-red-500/40 rounded-md px-5 py-3">
+          <p className="text-red-400 text-sm font-medium">
+            Contract read error — wallet may be on the wrong network, or the contract address is incorrect.
+          </p>
+          {balanceError && (
+            <p className="text-red-300 text-xs mt-1 font-mono break-all">{balanceError.shortMessage || balanceError.message}</p>
+          )}
+          {walletError && (
+            <p className="text-red-300 text-xs mt-1 font-mono break-all">{walletError.shortMessage || walletError.message}</p>
+          )}
+        </div>
+      )}
+
       {/* Platform Fees Section */}
       <div className="mt-12 w-full max-w-[954px] space-y-6">
 
         <div className="flex justify-between items-center border-b border-white/20 pb-6">
           <div>
             <p className="text-[#FFFFFFAB] text-sm">Accumulated Platform Fees</p>
+            <p className="text-[#FFFFFF60] text-xs mt-1">Secondary sale marketplace fees (on-chain only)</p>
             <h2 className="text-4xl font-semibold mt-2">
               {isReading ? "..." : balanceDisplay} USDC
             </h2>
@@ -259,7 +253,12 @@ function PlatformEarnings() {
         {/* Creator Earnings */}
         <div className="flex justify-between items-center border-b border-white/20 pb-6 mt-10">
           <div>
-            <p className="text-[#FFFFFFAB] text-sm">Creator Earnings</p>
+            <p className="text-[#FFFFFFAB] text-sm">Creator Earnings (Connected Wallet)</p>
+            <p className="text-[#FFFFFF60] text-xs mt-1">
+              On-chain royalty balance for{" "}
+              {address ? `${address.slice(0, 8)}...${address.slice(-6)}` : "this wallet"}
+              {" "}— only populated from on-chain marketplace sales
+            </p>
             <h2 className="text-4xl font-semibold mt-2">
               {creatorDisplay} USDC
             </h2>

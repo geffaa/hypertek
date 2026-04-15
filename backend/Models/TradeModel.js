@@ -31,9 +31,52 @@ const tradeSchema = new mongoose.Schema(
     // Optional image for the item being offered/quested
     image:        { type: String, default: "" },
 
-    // Response
+    // ── Quest-specific fields ────────────────────────────────────────────────
+    // In-game planet data (synced when game goes live)
+    pickupPlanet:  { type: String, default: null },
+    dropOffPlanet: { type: String, default: null },
+
+    // Quest type: "money" (11% pool) or "resources" (20% pool)
+    questType: {
+      type: String,
+      enum: ["money", "resources"],
+      default: null,
+    },
+
+    // Wait tier chosen by buyer: 4, 12, or 24 hours
+    waitHours: {
+      type: Number,
+      enum: [4, 12, 24],
+      default: null,
+    },
+
+    // Commission split percentages (stored at creation time for audit trail)
+    buyerSavePercent:    { type: Number, default: null }, // % buyer saves off sale price
+    playerSharePercent:  { type: Number, default: null }, // % player earns on completion
+    platformSharePercent:{ type: Number, default: null }, // % platform earns on completion
+
+    // Actual amounts settled on completion (in USDC or HB)
+    buyerSavesAmount:    { type: Number, default: null },
+    playerEarnsAmount:   { type: Number, default: null },
+    platformEarnsAmount: { type: Number, default: null },
+    salePrice:           { type: Number, default: null }, // base price the split applies to
+
+    // Reference to the MarketListing that auto-generated this quest
+    linkedListingId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "MarketListing",
+      default: null,
+    },
+
+    // Daily quest accept limit tracking (key = "YYYY-MM-DD", value = count per player)
+    // Stored on the QUEST document — we query acceptedByWallet + dailyQuestDate to count
+    dailyQuestDate: { type: String, default: null }, // e.g. "2026-04-14"
+
+    // ── Response ─────────────────────────────────────────────────────────────
     acceptedBy:       { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
     acceptedByWallet: { type: String, default: null },
+    acceptedAt:       { type: Date, default: null },
+    completedAt:      { type: Date, default: null },
 
     status: {
       type: String,

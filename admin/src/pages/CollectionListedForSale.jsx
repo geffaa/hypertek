@@ -1,341 +1,365 @@
-import React, { useState, useEffect } from "react";
-import Switch from "@mui/material/Switch";
-import EditImage from "../assets/edit.png";
-import DeleteImage from "../assets/delete.png";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Dashboard_Base_Url, getImageUrl } from "../Config";
-import FullScreenLoader from "../components/common/Spinner";
+import { Dashboard_Base_Url } from "../Config";
 
-function Character() {
-  const [view, setView] = useState("list"); // "list" | "details"
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedChar, setSelectedChar] = useState(null);
+// ── Config ────────────────────────────────────────────────────────────────────
 
-  /* ================================
-     Fetch Sub-Collections from All Parent Collections (API)
-  ================================= */
-  useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(`${Dashboard_Base_Url}/v1/nft/parent-collections`);
+const PAGE_SIZE_OPTIONS = [10, 25, 50];
 
-        if (res.data.success && res.data.collections) {
-          const allSubs = [];
-          res.data.collections.forEach((parent) => {
-            (parent.subCollections || []).forEach((sub) => {
-              allSubs.push({
-                _id: sub._id,
-                parentId: parent._id,
-                name: sub.name || sub.symbol || "Unnamed",
-                image: sub.image || parent.collection?.image || "",
-                price: sub.priceETH || 0,
-                address: sub.owner || "N/A",
-                description: sub.description || parent.collection?.description || "",
-                status: true,
-              });
-            });
-          });
-          setCharacters(allSubs);
-        } else {
-          setCharacters([]);
-        }
-      } catch (err) {
-        toast.error("Failed to fetch sub-collections");
-      } finally {
-        setLoading(false);
-      }
-    };
+const STATUS_FILTERS = [
+  { key: "all",       label: "All" },
+  { key: "active",    label: "Active" },
+  { key: "pending",   label: "Pending" },
+  { key: "expired",   label: "Expired" },
+  { key: "sold",      label: "Sold" },
+  { key: "cancelled", label: "Cancelled" },
+];
 
-    fetchCharacters();
-  }, []);
+const ACTIVITY_FILTERS = [
+  { key: "all",             label: "All Types" },
+  { key: "selling_general", label: "Selling" },
+  { key: "selling_auction", label: "Auction (Sell)" },
+  { key: "buying_general",  label: "Buying" },
+  { key: "buying_auction",  label: "Auction (Buy)" },
+  { key: "trading",         label: "Trade" },
+  { key: "hiring",          label: "Hiring" },
+];
 
-  /* ================================
-     Toggle Status API
-  ================================= */
-  const handleStatusChange = async (char) => {
+const STATUS_STYLE = {
+  active:    "bg-green-500/15 text-green-400 border border-green-500/30",
+  pending:   "bg-amber-500/15 text-amber-400 border border-amber-500/30",
+  expired:   "bg-white/5 text-white/40 border border-white/10",
+  sold:      "bg-blue-500/15 text-blue-400 border border-blue-500/30",
+  cancelled: "bg-red-500/15 text-red-400 border border-red-500/30",
+};
+
+const ACTIVITY_STYLE = {
+  selling_general: "bg-purple-500/15 text-purple-300 border border-purple-500/30",
+  selling_auction: "bg-purple-500/15 text-purple-300 border border-purple-500/30",
+  buying_general:  "bg-blue-500/15 text-blue-300 border border-blue-500/30",
+  buying_auction:  "bg-blue-500/15 text-blue-300 border border-blue-500/30",
+  trading:         "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+  hiring:          "bg-teal-500/15 text-teal-300 border border-teal-500/30",
+};
+
+const ACTIVITY_LABEL = {
+  selling_general: "Selling",
+  selling_auction: "Auction ↑",
+  buying_general:  "Buying",
+  buying_auction:  "Auction ↓",
+  trading:         "Trade",
+  hiring:          "Hiring",
+};
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
+function MarketListings() {
+  const token = localStorage.getItem("token");
+
+  const [listings,  setListings]  = useState([]);
+  const [summary,   setSummary]   = useState({ active: 0, pending: 0, expired: 0, sold: 0, cancelled: 0, total: 0 });
+  const [loading,   setLoading]   = useState(true);
+
+  // Filters
+  const [statusFilter,   setStatusFilter]   = useState("all");
+  const [activityFilter, setActivityFilter] = useState("all");
+
+  // Pagination
+  const [page,       setPage]       = useState(1);
+  const [pageSize,   setPageSize]   = useState(PAGE_SIZE_OPTIONS[0]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // ── Fetch ──────────────────────────────────────────────────────────────────
+
+  const fetchListings = useCallback(async () => {
+    setLoading(true);
     try {
-      const newStatus = char.status ? "inactive" : "active";
+      const params = new URLSearchParams();
+      if (statusFilter   !== "all") params.set("status",       statusFilter);
+      if (activityFilter !== "all") params.set("activityType", activityFilter);
+      params.set("page",  String(page));
+      params.set("limit", String(pageSize));
 
-      const res = await axios.put(
-        `${Dashboard_Base_Url}/v1/nft/status/${char._id}`,
-        { status: newStatus }
+      const res = await axios.get(
+        `${Dashboard_Base_Url}/v1/admin/nfa/market-listings?${params.toString()}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      setCharacters((prev) =>
-        prev.map((c) =>
-          c._id === char._id
-            ? { ...c, status: res.data.nft.status === "active" }
-            : c
-        )
-      );
-
-      toast.success("Status updated");
-    } catch (err) {
-      toast.error("Failed to update status");
+      setListings(res.data.data         || []);
+      setSummary(res.data.summary       || {});
+      setTotalItems(res.data.total      || 0);
+      setTotalPages(res.data.totalPages || 1);
+    } catch {
+      toast.error("Failed to load market listings");
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [statusFilter, activityFilter, page, pageSize, token]);
 
-  /* ================================
-     Delete APIs
-  ================================= */
-  const openDeleteModal = (char) => {
-    setSelectedChar(char);
-    setShowDeleteModal(true);
-  };
+  useEffect(() => { fetchListings(); }, [fetchListings]);
+  useEffect(() => { setPage(1); }, [statusFilter, activityFilter, pageSize]);
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete(
-        `${Dashboard_Base_Url}/v1/nft/collection/delete/${selectedChar._id}`
-      );
+  // ── Helpers ────────────────────────────────────────────────────────────────
 
-      setCharacters((prev) =>
-        prev.filter((c) => c._id !== selectedChar._id)
-      );
-
-      toast.success("Character deleted");
-      setShowDeleteModal(false);
-      setSelectedChar(null);
-    } catch (err) {
-      toast.error("Delete failed");
+  const formatPrice = (listing) => {
+    if (listing.activityType?.includes("auction")) {
+      if (listing.currentBid)   return `$${listing.currentBid.toLocaleString()} (bid)`;
+      if (listing.reservePrice) return `$${listing.reservePrice.toLocaleString()} (reserve)`;
+      return "—";
     }
+    return listing.price ? `$${listing.price.toLocaleString()}` : "—";
   };
 
-  const openDetails = (char) => {
-    setSelectedChar(char);
-    setView("details");
+  const daysLeft = (expiresAt) => {
+    if (!expiresAt) return null;
+    return Math.ceil((new Date(expiresAt) - Date.now()) / (1000 * 60 * 60 * 24));
   };
 
-  const handleEditClick = (e, char) => {
-    e.stopPropagation();
-    setSelectedChar(char);
-    setView("details");
+  const getPageNumbers = () => {
+    const delta = 2;
+    const range = [];
+    for (let i = Math.max(1, page - delta); i <= Math.min(totalPages, page + delta); i++) range.push(i);
+    if (range[0] > 1) { if (range[0] > 2) range.unshift("..."); range.unshift(1); }
+    if (range[range.length - 1] < totalPages) {
+      if (range[range.length - 1] < totalPages - 1) range.push("...");
+      range.push(totalPages);
+    }
+    return range;
   };
 
-  if (loading) {
-    return <FullScreenLoader />;
-  }
-
-  if (view === "details" && selectedChar) {
-    return (
-      <div className="bg-black mt-12 relative pb-0">
-
-        {/* Content stretches to fill page */}
-        <div className="z-10 ml-12 flex flex-col">
-          <h1 className="font-inter font-semibold text-[25px] text-white mb-6">Details</h1>
-
-          {/* Detail Card — matches image: dark navy bg, compact, image + inline text */}
-          <div
-            className="flex gap-10 items-center p-8 rounded-xl w-fit"
-            style={{
-
-              border: "1px solid rgba(255,255,255,0.12)",
-              minWidth: "550px",
-            }}
-          >
-            {/* Circular Image */}
-            <img
-              src={getImageUrl(selectedChar.image)}
-              alt={selectedChar.name}
-              className="w-[120px] h-[120px] rounded-full object-cover flex-shrink-0"
-              onError={(e) => (e.target.src = "https://via.placeholder.com/120")}
-            />
-
-            {/* Info — inline label + value, matching image font size */}
-            <div className="flex flex-col gap-1.5 font-inter">
-              <p className="text-white text-[16px]">
-                <span className="font-semibold">Owner Address:</span>
-                <span className="text-white/75 ml-1">
-                  {selectedChar.address && selectedChar.address !== "N/A" && selectedChar.address.length > 10
-                    ? `${selectedChar.address.slice(0, 10)}...${selectedChar.address.slice(-4)}`
-                    : selectedChar.address}
-                </span>
-              </p>
-              <p className="text-white text-[16px]">
-                <span className="font-semibold">Price:</span>
-                <span className="text-white/75 ml-1">${selectedChar.price}</span>
-              </p>
-              <p className="text-white text-[16px]">
-                <span className="font-semibold">Description:</span>
-                <span className="text-white/75 ml-1">{selectedChar.description || ""}</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Back Button — fixed margin below card */}
-          <div className="mt-20">
-            <button
-              className="bg-[#002AA8] font-inter text-white text-sm rounded-md transition-colors"
-              style={{ width: "120px", height: "38px" }}
-              onClick={() => setView("list")}
-            >
-              Back
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <>
-      <div className="flex flex-col min-h-full">
+    <div className="flex flex-col min-h-full pb-12">
 
-        {/* ===== HEADER ===== */}
-        <div className="flex flex-col gap-4 mb-8">
-          <h1 className="font-inter font-semibold text-[25px] text-white">
-            Collection On Sale
-          </h1>
+      {/* ── Header ── */}
+      <div className="mb-6">
+        <h1 className="font-inter font-semibold text-[25px] text-white mb-1">Market Listings</h1>
+        <p className="text-white/40 text-sm">Monitor all marketplace activity across the platform</p>
+      </div>
+
+      {/* ── Summary Cards ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+        {[
+          { key: "total",     label: "Total",     color: "border-white/10",     text: "text-white" },
+          { key: "active",    label: "Active",    color: "border-green-500/30", text: "text-green-400" },
+          { key: "pending",   label: "Pending",   color: "border-amber-500/30", text: "text-amber-400" },
+          { key: "sold",      label: "Sold",      color: "border-blue-500/30",  text: "text-blue-400" },
+          { key: "expired",   label: "Expired",   color: "border-white/10",     text: "text-white/50" },
+          { key: "cancelled", label: "Cancelled", color: "border-red-500/30",   text: "text-red-400" },
+        ].map(({ key, label, color, text }) => (
+          <div
+            key={key}
+            className={`rounded-xl border ${color} p-4`}
+            style={{ background: "rgba(255,255,255,0.02)" }}
+          >
+            <p className="text-white/50 text-xs mb-1">{label}</p>
+            <p className={`font-bold text-xl ${text}`}>{summary[key] ?? 0}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Filters ── */}
+      <div className="flex flex-wrap gap-3 mb-5">
+        <div className="flex gap-1.5 flex-wrap">
+          {STATUS_FILTERS.map(f => (
+            <button
+              key={f.key}
+              onClick={() => setStatusFilter(f.key)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                statusFilter === f.key ? "bg-[#002AA8] text-white" : "bg-white/5 text-white/60 hover:bg-white/10"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
 
-        {/* ===== TABLE ===== */}
-        <div className="overflow-x-auto w-full">
-          <table className="w-full text-left">
+        <select
+          value={activityFilter}
+          onChange={e => setActivityFilter(e.target.value)}
+          className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-white/70 border border-white/10 outline-none cursor-pointer ml-auto"
+        >
+          {ACTIVITY_FILTERS.map(f => (
+            <option key={f.key} value={f.key}>{f.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* ── Table ── */}
+      {loading ? (
+        <div className="flex-1 flex items-center justify-center py-20">
+          <p className="text-white/40 text-sm">Loading listings…</p>
+        </div>
+      ) : listings.length === 0 ? (
+        <div className="flex-1 flex items-center justify-center py-20">
+          <p className="text-white/40 text-sm">No listings found</p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto w-full rounded-xl border border-white/8" style={{ background: "rgba(255,255,255,0.02)" }}>
+          <table className="w-full text-left min-w-[850px]">
             <thead>
-              <tr className="h-[50px]">
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Image</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Name</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Price</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Address</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Action</th>
-                <th className="px-6 py-3 text-[#FFFFFFC4]">Status</th>
+              <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Item</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Seller</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Type</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Price</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Commission</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Expires</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Status</th>
               </tr>
             </thead>
-
-            <tbody className="divide-y divide-white/10">
-              {characters.map((char) => (
-                <tr key={char._id} className="h-[70px] cursor-pointer hover:bg-white/5 transition-colors" onClick={() => openDetails(char)}>
-                  <td className="px-6 py-4">
-                    {char.image ? (
-                      <img
-                        src={getImageUrl(char.image)}
-                        alt={char.name}
-                        className="w-12 h-12 object-cover border border-white/10"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 bg-gray-700 flex items-center justify-center text-xs text-white">
-                        No Image
+            <tbody>
+              {listings.map(listing => {
+                const days = daysLeft(listing.expiresAt);
+                const expiringSoon = days !== null && days <= 1 && listing.status === "active";
+                return (
+                  <tr
+                    key={listing._id}
+                    style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                    className="hover:bg-white/[0.02] transition-colors"
+                  >
+                    {/* Item */}
+                    <td className="px-5 py-3">
+                      <div className="flex items-center gap-3">
+                        {listing.itemImage ? (
+                          <img
+                            src={listing.itemImage}
+                            alt={listing.itemName}
+                            className="w-10 h-10 rounded-lg object-cover border border-white/10 flex-shrink-0"
+                            onError={e => { e.target.style.display = "none"; }}
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white/20 text-xs">IMG</span>
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-white text-sm font-semibold leading-tight">{listing.itemName || "—"}</p>
+                          <p className="text-white/30 text-xs mt-0.5 capitalize">{listing.category || "—"}</p>
+                        </div>
                       </div>
-                    )}
-                  </td>
+                    </td>
 
-                  <td className="px-6 py-4 text-[#FFFFFFC4]">{char.name}</td>
-                  <td className="px-6 py-4 text-[#FFFFFFC4]">
-                    ${char.price}
-                  </td>
-                  <td className="px-6 py-4 text-[#FFFFFFC4]">
-                    {char.address && char.address !== "N/A" && char.address.length > 10
-                      ? `${char.address.slice(0, 6)}...${char.address.slice(-4)}`
-                      : char.address}
-                  </td>
+                    {/* Seller */}
+                    <td className="px-5 py-3">
+                      <p className="text-white/80 text-sm">{listing.userName || "Anonymous"}</p>
+                      {listing.userWallet && (
+                        <p className="text-white/30 text-xs font-mono mt-0.5">
+                          {listing.userWallet.slice(0, 6)}…{listing.userWallet.slice(-4)}
+                        </p>
+                      )}
+                    </td>
 
-                  <td className="px-6 py-4">
-                    <div className="flex gap-4">
-                      <button onClick={(e) => handleEditClick(e, char)}>
-                        <img src={EditImage} className="w-4 h-4" />
-                      </button>
+                    {/* Type */}
+                    <td className="px-5 py-3">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold ${ACTIVITY_STYLE[listing.activityType] || ""}`}>
+                        {ACTIVITY_LABEL[listing.activityType] || listing.activityType}
+                      </span>
+                      {listing.questEnabled && (
+                        <span className="ml-1.5 inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold bg-teal-500/15 text-teal-300 border border-teal-500/30">
+                          Quest
+                        </span>
+                      )}
+                    </td>
 
-                      <button onClick={(e) => { e.stopPropagation(); openDeleteModal(char); }}>
-                        <img src={DeleteImage} className="w-3 h-4" />
-                      </button>
-                    </div>
-                  </td>
+                    {/* Price */}
+                    <td className="px-5 py-3 text-white/80 text-sm font-mono whitespace-nowrap">
+                      {formatPrice(listing)}
+                    </td>
 
-                  <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
-                    {/* <Switch
-                      checked={char.status}
-                      onChange={() => handleStatusChange(char)}
-                    /> */}
-                    <Switch
-                      checked={char.status}
-                      onChange={() => handleStatusChange(char)}
-                      sx={{
-                        width: 47,
-                        height: 20,
-                        padding: 0,
-                        "& .MuiSwitch-switchBase": {
-                          padding: 0,
-                          margin: 0,
-                          transitionDuration: "300ms",
-                          "&.Mui-checked": {
-                            transform: "translateX(24px)",
-                            color: "#fff",
-                            "& + .MuiSwitch-track": {
-                              backgroundColor: "#0860eeff",
-                              opacity: 1,
-                              border: 0,
-                            },
-                            "&.Mui-disabled + .MuiSwitch-track": {
-                              opacity: 0.5,
-                            },
-                          },
-                          "&.Mui-focusVisible .MuiSwitch-thumb": {
-                            color: "#3b82f6",
-                            border: "6px solid #fff",
-                          },
-                          "&.Mui-disabled .MuiSwitch-thumb": {
-                            color: "gray",
-                          },
-                          "&.Mui-disabled + .MuiSwitch-track": {
-                            opacity: 0.7,
-                          },
-                        },
-                        "& .MuiSwitch-thumb": {
-                          boxSizing: "border-box",
-                          width: 22,
-                          height: 20,
-                          backgroundColor: "#fff",
-                          boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-                        },
-                        "& .MuiSwitch-track": {
-                          borderRadius: 34 / 2,
-                          backgroundColor: "#9ca3af",
-                          opacity: 1,
-                          transition: "background-color 500ms",
-                        },
-                      }}
-                    />
-                  </td>
-                </tr>
-              ))}
+                    {/* Commission */}
+                    <td className="px-5 py-3 text-white/60 text-sm">
+                      {listing.commissionTier ? `${listing.commissionTier}%` : "—"}
+                    </td>
+
+                    {/* Expiry */}
+                    <td className="px-5 py-3">
+                      {listing.expiresAt ? (
+                        <span className={`text-xs ${expiringSoon ? "text-red-400 font-semibold" : "text-white/50"}`}>
+                          {["active", "pending"].includes(listing.status)
+                            ? days !== null && days > 0 ? `${days}d left` : "Expired"
+                            : new Date(listing.expiresAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+                          }
+                        </span>
+                      ) : (
+                        <span className="text-white/30 text-xs">—</span>
+                      )}
+                    </td>
+
+                    {/* Status */}
+                    <td className="px-5 py-3">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold capitalize ${STATUS_STYLE[listing.status] || ""}`}>
+                        {listing.status}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
+      )}
 
-        {/* ===== DELETE MODAL ===== */}
-        {showDeleteModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-            <div className="bg-gray-800 p-6 rounded-lg w-[400px]">
-              <h2 className="text-white text-lg mb-4">
-                Delete {selectedChar?.name}?
-              </h2>
-
-              <div className="flex justify-end gap-4">
+      {/* ── Pagination ── */}
+      {!loading && totalItems > 0 && (
+        <div className="flex items-center justify-between mt-4 px-1">
+          <div className="flex items-center gap-3">
+            <p className="text-white/40 text-xs">
+              Showing {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, totalItems)} of {totalItems} listings
+            </p>
+            <div className="flex items-center gap-1.5">
+              <span className="text-white/30 text-xs">Per page:</span>
+              {PAGE_SIZE_OPTIONS.map(size => (
                 <button
-                  onClick={() => setShowDeleteModal(false)}
-                  className="px-4 py-2 border text-white rounded"
+                  key={size}
+                  onClick={() => setPageSize(size)}
+                  className={`w-8 h-6 rounded text-xs font-semibold transition-colors cursor-pointer ${
+                    pageSize === size ? "bg-[#002AA8] text-white" : "bg-white/5 text-white/50 hover:bg-white/10"
+                  }`}
                 >
-                  Cancel
+                  {size}
                 </button>
-                <button
-                  onClick={handleDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded"
-                >
-                  Delete
-                </button>
-              </div>
+              ))}
             </div>
           </div>
-        )}
-      </div>
-    </>
+
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            >
+              ← Prev
+            </button>
+            {getPageNumbers().map((num, idx) =>
+              num === "..." ? (
+                <span key={`e-${idx}`} className="px-2 text-white/30 text-xs select-none">…</span>
+              ) : (
+                <button
+                  key={num}
+                  onClick={() => setPage(num)}
+                  className={`w-8 h-8 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                    num === page ? "bg-[#002AA8] text-white" : "bg-white/5 text-white/60 hover:bg-white/10"
+                  }`}
+                >
+                  {num}
+                </button>
+              )
+            )}
+            <button
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
-
-export default Character;
+export default MarketListings;

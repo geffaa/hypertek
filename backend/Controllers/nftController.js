@@ -121,7 +121,11 @@ export async function createParentCollection(req, res) {
  */
 export async function createItemDirect(req, res) {
   try {
-    const { name, description, priceETH, category, assetType, owner } = req.body;
+    const {
+      name, description, priceETH, category, assetType, owner,
+      // Admin-only NFA fields
+      minimumBuybackUSD, reservePriceUSD, nfaFrame, royaltyWallet,
+    } = req.body;
 
     const userRole = req.user?.Role || req.user?.role || "";
     const callerIsAdmin = userRole.toLowerCase() === "admin";
@@ -180,6 +184,24 @@ export async function createItemDirect(req, res) {
       });
     }
 
+    // Validate NFA admin fields
+    if (resolvedType === "NFA" && callerIsAdmin) {
+      if (!minimumBuybackUSD || parseFloat(minimumBuybackUSD) <= 0) {
+        return res.status(400).json({ error: "NFA requires a Minimum Buyback price (> 0)." });
+      }
+      if (!reservePriceUSD || parseFloat(reservePriceUSD) <= 0) {
+        return res.status(400).json({ error: "NFA requires a Reserve Price (listing price, > 0)." });
+      }
+      const minBB  = parseFloat(minimumBuybackUSD);
+      const reserve = parseFloat(reservePriceUSD);
+      const maxAllowed = parseFloat((reserve * 0.35).toFixed(2));
+      if (minBB > maxAllowed) {
+        return res.status(400).json({
+          error: `Minimum Buyback ($${minBB}) exceeds the 35% cap of Reserve Price ($${reserve}). Maximum allowed: $${maxAllowed}.`,
+        });
+      }
+    }
+
     const newItem = {
       name: name.trim(),
       description: description?.trim() || "",
@@ -192,6 +214,21 @@ export async function createItemDirect(req, res) {
       listed: false,
       createdAt: new Date(),
     };
+
+    // Admin NFA/NFC extra fields
+    if (callerIsAdmin) {
+      if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "")
+        newItem.minimumBuybackUSD = parseFloat(minimumBuybackUSD);
+      if (reservePriceUSD !== undefined && reservePriceUSD !== "")
+        newItem.reservePriceUSD = parseFloat(reservePriceUSD);
+      if (nfaFrame !== undefined)
+        newItem.nfaFrame = nfaFrame || null;
+    }
+
+    // Store royalty wallet on parent collection
+    if (royaltyWallet?.trim()) {
+      parent.collection.royaltyWallet = royaltyWallet.trim().toLowerCase();
+    }
 
     parent.subCollections.push(newItem);
     parent.markModified("subCollections");
@@ -348,8 +385,8 @@ export async function updateSubCollection(req, res) {
     const { parentId, subCollectionId } = req.params;
     const {
       name, symbol, description, priceETH, listed,
-      assetType, isNFA, nfaFrame, minimumBuybackUSD, reservePriceUSD, royaltyWallet,
-      category,
+      assetType, isNFA, nfaFrame, minimumBuybackUSD, reservePriceUSD,
+      artistId, category,
     } = req.body;
 
     const parent = await NFTSystem.findById(parentId);
@@ -469,9 +506,9 @@ export async function updateSubCollection(req, res) {
     if (reservePriceUSD !== undefined && reservePriceUSD !== "")
       subCollection.reservePriceUSD = parseFloat(reservePriceUSD);
 
-    // Royalty wallet — stored on parent collection for this sub
-    if (royaltyWallet !== undefined && royaltyWallet !== "")
-      parent.collection.royaltyWallet = royaltyWallet;
+    // Artist assignment — admin links an artist to this item for royalty dispatch
+    if (artistId !== undefined)
+      subCollection.artistId = artistId || null;
 
     if (req.file) {
       subCollection.image = await saveImagePermanently(req.file.path, req.file.filename);
@@ -1269,36 +1306,22 @@ function calculatePaymentDistribution(
     payments: [],
   };
 
-  // NOTE: No special first-sale case — Don's brief defines the same split for ALL sales.
-  // On first sale, HyperTek is the seller (gets 80%). Artist still gets 4%.
-  if (isNFA) {
-    // NFA: seller 80% | artist 4% | buyback fund 5% | company 11% — all from total price
-    // 4% + 5% + 11% = 20% platform (from seller's gross), seller nets 80%
-    distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
-    distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
-    distribution.buybackAmount  = parseFloat((priceETH * 0.05).toFixed(6));
-    distribution.companyAmount  = parseFloat((priceETH * 0.11).toFixed(6));
-    distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
+  // NFA and NFC (resell / 2nd+ sale) share the same split per Don's brief:
+  // seller 80% | artist 4% | buyback 5% | company 11%
+  // On Hypertek first sale, HyperTek is the seller (gets 80%); minBB is preset by admin.
+  // NFC first sale by Hypertek: same 4%+16% applied via nftPurchaseService (Stripe/backend path).
+  distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
+  distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
+  distribution.buybackAmount  = parseFloat((priceETH * 0.05).toFixed(6));
+  distribution.companyAmount  = parseFloat((priceETH * 0.11).toFixed(6));
+  distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
 
-    distribution.payments.push(
-      { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
-      { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "artist_royalty"  },
-      { recipient: "buyback_fund", amount: distribution.buybackAmount,  percentage: 5,  type: "buyback_fund"    },
-      { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 11, type: "company_account" },
-    );
-  } else {
-    // NFC: seller 80% | creator 4% | company 16% — all from total price
-    distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
-    distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
-    distribution.companyAmount  = parseFloat((priceETH * 0.16).toFixed(6));
-    distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
-
-    distribution.payments.push(
-      { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
-      { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "creator_royalty" },
-      { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 16, type: "company_account" },
-    );
-  }
+  distribution.payments.push(
+    { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
+    { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "artist_royalty"  },
+    { recipient: "buyback_fund", amount: distribution.buybackAmount,  percentage: 5,  type: "buyback_fund"    },
+    { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 11, type: "company_account" },
+  );
 
   return distribution;
 }
@@ -2135,13 +2158,14 @@ export async function recordSubCollectionSale(req, res) {
       subCollection.isFirstSale = false;
     }
 
-    // NFA buyback auto-increment: minimumBuybackUSD += salePrice * 5%
-    // Applies to ALL NFA sales — Don's brief: "after the first sale, minimum increases by 5%"
-    if (subCollection.isNFA && priceUSDC > 0) {
+    // MinBB auto-increment: minimumBuybackUSD += salePrice * 5%
+    // Applies to NFA and NFC resales — Don's brief: 5% added to min BB on every resell
+    const itemAssetType = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
+    if ((itemAssetType === "NFA" || itemAssetType === "NFC") && priceUSDC > 0) {
       subCollection.minimumBuybackUSD = parseFloat(
         ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
       );
-      console.log(`🏦 [Buyback] NFA minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
+      console.log(`🏦 [Buyback] ${itemAssetType} minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
     }
 
     // Update parent collection sales count
@@ -2163,14 +2187,46 @@ export async function recordSubCollectionSale(req, res) {
       `✅ Sub-collection sale recorded: Token ${tokenId} sold to ${buyer}`,
     );
 
-    // Dispatch creator royalty (non-blocking — sale already saved)
+    // Dispatch artist royalty (4%) — non-blocking
     if (distribution.creatorAmount > 0 && creatorWallet && creatorWallet !== "admin") {
       dispatchRoyalty({
         subCollectionId: subCollection._id.toString(),
         parentId:        parent._id.toString(),
         creatorWallet,
         amount:          distribution.creatorAmount,
+        payoutType:      "artist_royalty",
+        note:            `${itemAssetType} artist royalty 4%`,
       }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
+    }
+
+    // Dispatch buyback fund (5%) — non-blocking
+    if (distribution.buybackAmount > 0) {
+      const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
+      if (buybackWallet) {
+        dispatchRoyalty({
+          subCollectionId: subCollection._id.toString(),
+          parentId:        parent._id.toString(),
+          creatorWallet:   buybackWallet,
+          amount:          distribution.buybackAmount,
+          payoutType:      "buyback_fund",
+          note:            `${itemAssetType} buyback fund 5%`,
+        }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
+      }
+    }
+
+    // Dispatch company fee (11%) — non-blocking
+    if (distribution.companyAmount > 0) {
+      const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
+      if (platformWallet) {
+        dispatchRoyalty({
+          subCollectionId: subCollection._id.toString(),
+          parentId:        parent._id.toString(),
+          creatorWallet:   platformWallet,
+          amount:          distribution.companyAmount,
+          payoutType:      "company_fee",
+          note:            `${itemAssetType} company fee 11%`,
+        }).catch(err => console.warn("⚠️ [PlatformFee] dispatch error:", err.message));
+      }
     }
 
     // Mark linked offer as completed (USDC on-chain purchase path)

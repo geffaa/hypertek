@@ -39,6 +39,8 @@ const royaltyPayoutSchema = new mongoose.Schema(
     currency:        { type: String, default: "USDC" },
     // "crypto" = send USDC to wallet | "bank" = manual Wise transfer
     paymentType:     { type: String, enum: ["crypto", "bank"], default: "crypto" },
+    // "artist_royalty" = 4% to creator | "buyback_fund" = 5% to buyback wallet | "company_fee" = platform's share
+    payoutType:      { type: String, enum: ["artist_royalty", "buyback_fund", "company_fee"], default: "artist_royalty" },
     status:          { type: String, enum: ["pending", "dispatched", "failed"], default: "pending" },
     txHash:          String,
     note:            String,
@@ -103,6 +105,8 @@ export async function dispatchRoyalty({
   amount,
   saleRecordId,
   paymentType = "crypto",
+  payoutType = "artist_royalty",
+  note,
 }) {
   if (!amount || amount <= 0) return null;
 
@@ -115,7 +119,9 @@ export async function dispatchRoyalty({
     amount:      parseFloat(amount.toFixed(6)),
     currency:    "USDC",
     paymentType,
+    payoutType,
     status:      "pending",
+    note,
   });
 
   console.log(

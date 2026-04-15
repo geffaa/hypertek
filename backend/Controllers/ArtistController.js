@@ -6,6 +6,7 @@ export const getArtists = async (req, res) => {
     const artists = await Artist.find().sort({ createdAt: -1 });
     res.json({ success: true, artists });
   } catch (err) {
+    console.error("GET /admin/artists error:", err);
     res.status(500).json({ success: false, message: err.message });
   }
 };

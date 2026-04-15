@@ -119,6 +119,61 @@ const SECTIONS = [
         ],
     },
     {
+        sectionKey: "home_story",
+        sectionLabel: "Story Section",
+        pageGroup: "home",
+        fields: [
+            {
+                key: "left_heading",
+                label: "Left Heading",
+                type: "text",
+                value: "STORY",
+            },
+            {
+                key: "left_subheading",
+                label: "Left Subheading",
+                type: "text",
+                value: "The year is 2117.",
+            },
+            {
+                key: "left_body",
+                label: "Left Body Text",
+                type: "textarea",
+                value: "Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology.",
+            },
+            {
+                key: "right_heading",
+                label: "Right Heading",
+                type: "text",
+                value: "STORY",
+            },
+            {
+                key: "right_subheading",
+                label: "Right Subheading",
+                type: "text",
+                value: "The year is 2117.",
+            },
+            {
+                key: "right_body",
+                label: "Right Body Text",
+                type: "textarea",
+                value: "Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology.",
+            },
+            {
+                key: "background_image",
+                label: "Background Image",
+                type: "image",
+                value: "",
+            },
+            {
+                key: "character_image",
+                label: "Character Image",
+                type: "image",
+                value: "",
+            },
+        ],
+    },
+    {
         sectionKey: "home_how_it_works",
         sectionLabel: "How It Works",
         pageGroup: "home",

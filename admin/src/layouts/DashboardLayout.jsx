@@ -17,10 +17,7 @@ const DashboardLayout = () => {
   const [userData, setUserData] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const hideScrollPages = ["create-collection", "creator-earning"];
-  const shouldHideScroll = hideScrollPages.some((page) =>
-    location.pathname.includes(page)
-  );
+  const shouldHideScroll = false;
   const { userId } = useParams();
   const dispatch = useDispatch();
 

@@ -64,7 +64,7 @@ export default function News() {
 
         {/* Mobile: NEWS heading */}
         <div className="flex items-end mb-6">
-          <h2 className="text-white font-goldman uppercase text-xl pb-1 border-b-2 border-white">NEWS</h2>
+          <h2 className="text-white font-goldman uppercase text-xl pb-1 border-b-2 border-white">NEWS/UPDATES</h2>
           <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
         </div>
 
@@ -143,6 +143,14 @@ export default function News() {
         <motion.div className="flex flex-col gap-5 w-[58%]"
           variants={fadeLeft} custom={0} initial="hidden"
           whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
+
+          {/* Gaming Info heading */}
+          <div className="flex items-end">
+            <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
+              GAMING INFO
+            </h2>
+            <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
+          </div>
 
           {/* Static promo image with button overlay */}
           <div className="relative w-full overflow-hidden" style={{ aspectRatio: "680/405" }}>
@@ -223,7 +231,7 @@ export default function News() {
             variants={fadeRight} custom={0} initial="hidden"
             whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
             <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
-              NEWS
+              NEWS/UPDATES
             </h2>
             <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
           </motion.div>

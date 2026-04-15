@@ -10,15 +10,11 @@ import CollectionDetails from "./pages/CollectionDetails";
 import CreatorEarning from "./pages/CreatorEarning";
 import Character from "./pages/Character";
 import Land from "./pages/Land";
-import Category from "./pages/Category";
-import EditUsers from "./pages/EditUser";
 import PlatformEarnings from "./pages/PlatformEarnings";
 import UpdateNews from "./pages/UpdateNews";
 import CollectionListedForSale from "./pages/CollectionListedForSale";
 import CollectionDetails2 from "./pages/CollectionDetails2";
 import UserDetails from "./pages/UserDetails";
-import UserCollections from "./pages/UserCollections";
-import EditNews from "./EditNews";
 import UploadedNews from "./pages/UploadedNews";
 import OtherNews from "./pages/OtherNews";
 import EditCollection2 from "./pages/EditCollection2";
@@ -35,6 +31,7 @@ import Artists from "./pages/Artists";
 import ArtistForm from "./pages/ArtistForm";
 import RoyaltyPayouts from "./pages/RoyaltyPayouts";
 import BuybackApproval from "./pages/BuybackApproval";
+import Items from "./pages/Items";
 
 
 function App() {
@@ -59,7 +56,6 @@ function App() {
             <Route path="edit-collection-item" element={<EditCollection2 />} />
             <Route path="add-sub-collection" element={<AddSubCollection />} />
             <Route path="edit-sub-collection" element={<EditSubCollection />} />
-            <Route path="collections/:category" element={<Category />} />
             <Route path="character-collection" element={<Character />} />
             <Route path="land-collection" element={<Land />} />
             <Route
@@ -70,12 +66,10 @@ function App() {
               path="collection-details-2"
               element={<CollectionDetails2 />}
             />
-            <Route path="edit-user" element={<EditUsers />} />
             <Route path="users" element={<UserDetails />} />
-            <Route path="user-details" element={<UserCollections />} />
             <Route path="add-news" element={<UpdateNews />} />
             <Route path="other-news" element={<OtherNews />} />
-            <Route path="edit-news" element={<EditNews />} />
+            <Route path="edit-news" element={<Navigate to="other-news" replace />} />
             <Route path="edit-news-item" element={<UploadedNews />} />
             <Route path="support" element={<Support />} />
             <Route path="notification" element={<NotificationsPage />} />
@@ -86,6 +80,7 @@ function App() {
             <Route path="artist-form" element={<ArtistForm />} />
             <Route path="royalty-payouts" element={<RoyaltyPayouts />} />
             <Route path="buyback-approval" element={<BuybackApproval />} />
+            <Route path="items" element={<Items />} />
           </Route>
         </Route>
 

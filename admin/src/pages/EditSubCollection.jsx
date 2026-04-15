@@ -52,18 +52,24 @@ function EditSubCollection() {
 
   const [minBBError, setMinBBError] = useState("");
 
-  const [royaltyWallet, setRoyaltyWallet] = useState("");
-  const [royaltyPaymentPreference, setRoyaltyPaymentPreference] = useState("crypto");
-  const [royaltyBankDetails, setRoyaltyBankDetails] = useState({
-    accountHolderName: "", bankName: "", accountNumber: "", iban: "", swift: "", routingNumber: "", country: "", currency: "USD",
-  });
+  const [artistId, setArtistId] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [artists, setArtists] = useState([]);
 
+  const token = localStorage.getItem("token");
 
+  // Load artists for dropdown
+  useEffect(() => {
+    axios
+      .get(`${Dashboard_Base_Url}/v1/admin/artists`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setArtists(res.data.artists || []))
+      .catch(() => {});
+  }, []);
 
-  // Existing data load کرنا
-
+  // Existing data load
   useEffect(() => {
 
     if (existingData) {
@@ -82,11 +88,7 @@ function EditSubCollection() {
 
       setReservePriceUSD(existingData.reservePriceUSD || "");
 
-      setRoyaltyWallet(existingData.royaltyWallet || "");
-      setRoyaltyPaymentPreference(existingData.royaltyPaymentPreference || "crypto");
-      if (existingData.royaltyBankDetails) {
-        setRoyaltyBankDetails({ ...royaltyBankDetails, ...existingData.royaltyBankDetails });
-      }
+      setArtistId(existingData.artistId || "");
 
       if (existingData.image) {
 
@@ -192,9 +194,7 @@ function EditSubCollection() {
 
       if (reservePriceUSD !== "") formData.append("reservePriceUSD", reservePriceUSD);
 
-      if (royaltyWallet) formData.append("royaltyWallet", royaltyWallet);
-      formData.append("royaltyPaymentPreference", royaltyPaymentPreference);
-      formData.append("royaltyBankDetails", JSON.stringify(royaltyBankDetails));
+      if (artistId) formData.append("artistId", artistId);
 
 
 
@@ -486,85 +486,42 @@ function EditSubCollection() {
             </>
           )}
 
-          {/* Royalty Payment Preference */}
-          <div className="rounded-md p-4 flex flex-col gap-3 w-[400px]">
+          {/* Artist Assignment */}
+          <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
             <label className="font-inter font-normal text-[16px] text-white/70">
-              Artist Royalty Payment Method
+              Assign Artist
+              <span className="ml-2 text-[11px] text-white/40">(royalty auto-dispatched on sale)</span>
             </label>
-            <div className="flex gap-2">
-              {["crypto", "bank"].map((opt) => (
-                <button key={opt} type="button"
-                  onClick={() => setRoyaltyPaymentPreference(opt)}
-                  className="flex-1 py-2 rounded-md text-sm font-medium border transition-colors"
-                  style={{
-                    background: royaltyPaymentPreference === opt ? "#002AA8" : "transparent",
-                    borderColor: royaltyPaymentPreference === opt ? "#002AA8" : "rgba(255,255,255,0.3)",
-                    color: royaltyPaymentPreference === opt ? "#fff" : "rgba(255,255,255,0.5)",
-                  }}>
-                  {opt === "crypto" ? "🔗 Crypto Wallet" : "🏦 Bank Transfer"}
-                </button>
+            <select
+              value={artistId}
+              onChange={(e) => setArtistId(e.target.value)}
+              className="text-white rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none text-sm"
+              style={{ background: "#111", height: "40px" }}
+            >
+              <option value="">— No artist assigned —</option>
+              {artists.map((a) => (
+                <option key={a._id} value={a._id}>
+                  {a.name}
+                  {a.paymentPreference === "crypto"
+                    ? ` · ${a.walletAddress ? a.walletAddress.slice(0, 8) + "..." : "no wallet"}`
+                    : ` · Bank (${a.bankDetails?.bankName || "—"})`}
+                </option>
               ))}
-            </div>
-          </div>
-
-          {/* Royalty Wallet (crypto) */}
-          {royaltyPaymentPreference === "crypto" && (
-            <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
-              <label className="font-inter font-normal text-[16px] text-white/70">
-                Artist Royalty Wallet (0x...)
-              </label>
-              <input
-                type="text"
-                value={royaltyWallet}
-                onChange={(e) => setRoyaltyWallet(e.target.value)}
-                placeholder="0x..."
-                className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent font-mono text-sm"
-                style={{ height: "40px" }}
-              />
-            </div>
-          )}
-
-          {/* Bank details (bank) */}
-          {royaltyPaymentPreference === "bank" && (
-            <div className="rounded-md p-4 flex flex-col gap-3 w-[400px]">
-              <label className="font-inter font-normal text-[14px] text-white/50 uppercase tracking-wider">Bank Details</label>
-              {[
-                { field: "accountHolderName", label: "Account Holder Name", placeholder: "Full legal name" },
-                { field: "bankName",           label: "Bank Name",           placeholder: "e.g. Wise, Barclays" },
-                { field: "accountNumber",      label: "Account Number",      placeholder: "Account number" },
-                { field: "iban",               label: "IBAN",                placeholder: "GB00 XXXX..." },
-                { field: "swift",              label: "SWIFT / BIC",         placeholder: "SWIFT code" },
-                { field: "routingNumber",      label: "Routing Number (US)", placeholder: "US routing" },
-                { field: "country",            label: "Country",             placeholder: "e.g. United Kingdom" },
-              ].map(({ field, label, placeholder }) => (
-                <div key={field}>
-                  <label className="text-white/50 text-xs mb-1 block">{label}</label>
-                  <input
-                    type="text"
-                    value={royaltyBankDetails[field]}
-                    onChange={(e) => setRoyaltyBankDetails({ ...royaltyBankDetails, [field]: e.target.value })}
-                    placeholder={placeholder}
-                    className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-3 py-2 w-full focus:outline-none bg-transparent text-sm"
-                    style={{ height: "36px" }}
-                  />
+            </select>
+            {artistId && (() => {
+              const a = artists.find(x => x._id === artistId);
+              if (!a) return null;
+              return (
+                <div className="text-[11px] text-white/40 mt-1">
+                  Royalty (4%) will be sent via{" "}
+                  <span className="text-white/60 font-medium">
+                    {a.paymentPreference === "crypto" ? "crypto wallet" : "bank transfer"}
+                  </span>{" "}
+                  to {a.name} on every sale.
                 </div>
-              ))}
-              <div>
-                <label className="text-white/50 text-xs mb-1 block">Payout Currency</label>
-                <select
-                  value={royaltyBankDetails.currency}
-                  onChange={(e) => setRoyaltyBankDetails({ ...royaltyBankDetails, currency: e.target.value })}
-                  className="text-white rounded border border-[#FFFFFFAB] px-3 py-2 w-full focus:outline-none text-sm"
-                  style={{ background: "#111", height: "36px" }}
-                >
-                  <option value="USD">USD</option>
-                  <option value="EUR">EUR</option>
-                  <option value="GBP">GBP</option>
-                  <option value="AUD">AUD</option>
-                </select>
-              </div>
-            </div>
-          )}
+              );
+            })()}
+          </div>
 
         </div>
 

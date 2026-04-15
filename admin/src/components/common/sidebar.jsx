@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
 
 import DashboardImage from "../../assets/Sidebar/dashboard.png";
 import CreateCollection1 from "../../assets/Sidebar/create1.png";
@@ -17,50 +15,24 @@ import LogoutImage from "../../assets/Sidebar/logout.png";
 
 const Logo = "/logo-t-white.png";
 
-import { Dashboard_Base_Url } from "../../Config";
-
 const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const admin = useSelector((state) => state.admin.admin);
   const adminId = admin?._id;
   const location = useLocation();
   const path = location.pathname || "";
-  const navigate = useNavigate();
-
-  const [openCreate, setOpenCreate] = useState(false);
-  const [openCollection, setOpenCollection] = useState(false);
-  const [openNews, setOpenNews] = useState(false);
-  const [openTransaction, setOpenTransaction] = useState(false);
-  const [openSale, setOpenSale] = useState(false);
-  const [categories, setCategories] = useState([]);
-
   const sidebarRef = useRef(null);
 
   const withAdmin = (path) => (adminId ? `/${adminId}${path}` : "#");
 
-  const handleLinkClick = (e, hasDropdown = false) => {
-    if (window.innerWidth < 1024 && !hasDropdown) {
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
       onClose && onClose();
     }
   };
 
-  const handleCategoryClick = (cat) => {
-    if (!adminId) return;
-    const categoryKey = (cat.key || "").toLowerCase();
-    if (window.innerWidth < 1024) onClose && onClose();
-
-    navigate(
-      categoryKey
-        ? `/${adminId}/collections/${categoryKey}`
-        : `/${adminId}/collections`
-    );
-  };
-
   const isDashboard = path.endsWith("/dashboard") || (adminId && (path === `/${adminId}` || path === `/${adminId}/`));
-  const isCreate =
-    path.includes("create-collection") ||
-    path.includes("edit-collection") ||
-    path.includes("creator-earning");
-  const isCollection = path.includes("/collections");
+  const isCreate = path.includes("create-collection");
+  const isItems = path.includes("/items");
   const isUsers = path.includes("/users");
   const isNews =
     path.includes("add-news") ||
@@ -74,63 +46,6 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const isRoyaltyPayouts = path.includes("/royalty-payouts");
   const isBuybackApproval = path.includes("/buyback-approval");
 
-  const toggleDropdown = (type) => {
-    setOpenCreate(type === "create" ? !openCreate : false);
-    setOpenCollection(type === "collection" ? !openCollection : false);
-    setOpenNews(type === "news" ? !openNews : false);
-    setOpenTransaction(type === "transaction" ? !openTransaction : false);
-    setOpenSale(type === "sale" ? !openSale : false);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
-        setOpenCreate(false);
-        setOpenCollection(false);
-        setOpenNews(false);
-        setOpenTransaction(false);
-        setOpenSale(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const fetchCategories = async () => {
-    try {
-      const res = await axios.get(
-        `${Dashboard_Base_Url}/v1/nft/parent-collections`
-      );
-      const parents = res.data.collections || [];
-      setCategories(
-        parents.map((p) => ({
-          key: (p.category || "").toLowerCase(),
-          label: p.collection?.name || "Unnamed Collection",
-        }))
-      );
-    } catch (err) {
-      console.error("Sidebar category fetch error:", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-    window.addEventListener("categoriesUpdated", fetchCategories);
-    return () =>
-      window.removeEventListener("categoriesUpdated", fetchCategories);
-  }, []);
-
-  // ✅ Auto-open dropdown on category pages, close on main collections page
-  useEffect(() => {
-    const isMainCollections = path.endsWith("/collections");
-    const isSpecificCategory = path.includes("/collections/") && path.split("/").length > 3;
-
-    if (isSpecificCategory) {
-      setOpenCollection(true);
-    } else if (isMainCollections) {
-      setOpenCollection(false);
-    }
-  }, [path]);
 
   return (
     <div
@@ -169,161 +84,27 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
 
 
-            {/* Create Collection */}
-
-            <Link to={withAdmin("/create-collection")} onClick={(e) => handleLinkClick(e, true)}>
-
-              <li
-
-                onClick={() => toggleDropdown("create")}
-
-                className={`menu-item justify-between ${isCreate ? "bg-[#002AA8]" : ""}`}
-
-              >
-
-                <div className="flex items-center gap-3">
-                  <div className="relative w-[20px] h-[20px] flex-shrink-0">
-                    <img src={CreateCollection2} className="w-[20px] h-[20px] object-contain" />
-                    <img
-                      src={CreateCollection1}
-                      className="w-[10px] h-[10px] absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2 object-contain"
-                    />
-                  </div>
-                  <span className="pt-[2px]">Create Collection</span>
+            {/* Create Item */}
+            <Link to={withAdmin("/create-collection")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isCreate ? "bg-[#002AA8]" : ""}`}>
+                <div className="relative w-[20px] h-[20px] flex-shrink-0">
+                  <img src={CreateCollection2} className="w-[20px] h-[20px] object-contain" />
+                  <img
+                    src={CreateCollection1}
+                    className="w-[10px] h-[10px] absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                  />
                 </div>
-
-
-
-                {openCreate ? <FiChevronUp /> : <FiChevronDown />}
-
-              </li>
-
-            </Link>
-
-
-
-            {openCreate && (
-
-              <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[50px]">
-
-                {[
-
-                  { key: "edit-collection", label: "Collection Details", path: "/edit-collection" },
-
-                  { key: "creator-earning", label: "Creator Earning", path: "/creator-earning" }
-
-                ].map((item, index, array) => (
-
-                  <Link key={item.key} to={withAdmin(item.path)} onClick={handleLinkClick}>
-
-                    <li
-
-                      className={`submenu-item ${index === array.length - 1 ? "submenu-item-last" : ""}`}
-
-                    >
-
-                      <div className="submenu-line">
-
-                        <div
-
-                          className={
-
-                            index === array.length - 1
-
-                              ? "line-vertical-short"
-
-                              : "line-vertical"
-
-                          }
-
-                        ></div>
-
-                        <div className="line-horizontal"></div>
-
-                      </div>
-
-                      <span>{item.label}</span>
-
-                    </li>
-
-                  </Link>
-
-                ))}
-
-              </ul>
-
-            )}
-
-
-
-            {/* Collection */}
-            <Link to={withAdmin("/collections")} onClick={(e) => handleLinkClick(e, true)}>
-              <li
-                className={`menu-item justify-between ${isCollection ? "bg-[#002AA8]" : ""}`}
-              >
-                <div className="flex items-center gap-3">
-                  <img src={CollectionImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
-                  <span className="pt-[2px]">Collection</span>
-                </div>
-                {openCollection ? <FiChevronUp /> : <FiChevronDown />}
+                <span className="pt-[2px]">Create Item</span>
               </li>
             </Link>
 
-
-
-            {/* 🔥 Dynamic Categories */}
-
-            {openCollection && (
-
-              <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[50px]">
-
-                {categories.map((cat, index) => (
-
-                  <li
-
-                    key={cat.key}
-
-                    onClick={() => handleCategoryClick(cat)}
-
-                    className={`submenu-item ${index === categories.length - 1 ? "submenu-item-last" : ""
-
-                      } ${path.includes(`/collections/${cat.key}`) ? "text-white" : "text-[#FFFFFFC4] hover:text-white"}`}
-
-                  >
-
-                    <div className="submenu-line">
-
-                      <div
-
-                        className={
-
-                          index === categories.length - 1
-
-                            ? "line-vertical-short"
-
-                            : "line-vertical"
-
-                        }
-
-                      ></div>
-
-                      <div className="line-horizontal"></div>
-
-                    </div>
-
-
-
-                    <span>{cat.label}</span>
-
-                  </li>
-
-                ))}
-
-              </ul>
-
-            )}
-
-
+            {/* Items */}
+            <Link to={withAdmin("/items")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isItems ? "bg-[#002AA8]" : ""}`}>
+                <img src={CollectionImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Items</span>
+              </li>
+            </Link>
 
             {/* Users */}
             <Link to={withAdmin("/users")} onClick={handleLinkClick}>
@@ -335,76 +116,18 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
 
 
 
-            {/* News */}
-            <Link to={withAdmin("/add-news")} onClick={(e) => handleLinkClick(e, true)}>
-              <li
-                onClick={() => toggleDropdown("news")}
-                className={`menu-item justify-between ${isNews ? "bg-[#002AA8]" : ""}`}
-              >
-                <div className="flex items-center gap-3">
-                  <img src={NewsImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
-                  <span className="pt-[2px]">Upload News</span>
-                </div>
-                {openNews ? <FiChevronUp /> : <FiChevronDown />}
+            {/* News Management */}
+            <Link to={withAdmin("/other-news")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isNews ? "bg-[#002AA8]" : ""}`}>
+                <img src={NewsImage} className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">News Management</span>
               </li>
             </Link>
 
-
-
-            {openNews && (
-
-              <ul className="w-[222px] ml-0 space-y-2 text-sm relative pl-[50px]">
-
-                <Link to={withAdmin("/edit-news")} onClick={handleLinkClick}>
-
-                  <li className="submenu-item">
-
-                    <div className="submenu-line">
-
-                      <div className="line-vertical"></div>
-
-                      <div className="line-horizontal"></div>
-
-                    </div>
-
-                    <span>Edit News</span>
-
-                  </li>
-
-                </Link>
-
-                <Link to={withAdmin("/other-news")} onClick={handleLinkClick}>
-
-                  <li className="submenu-item submenu-item-last">
-
-                    <div className="submenu-line">
-
-                      <div className="line-vertical-short"></div>
-
-                      <div className="line-horizontal"></div>
-
-                    </div>
-
-                    <span>Other News</span>
-
-                  </li>
-
-                </Link>
-
-              </ul>
-
-            )}
-
-            <Link to={withAdmin("/collection-listed-sale")} onClick={(e) => handleLinkClick(e, true)}>
-              <li
-                className={`menu-item justify-between ${isSale ? "bg-[#002AA8]" : ""}`}
-                onClick={() => toggleDropdown("sale")}
-              >
-                <div className="flex items-center gap-3">
-                  <img src={SaleImage} alt="" className="w-[20px] h-[20px] object-contain flex-shrink-0" />
-                  <span className="pt-[2px]">Collection on Sale</span>
-                </div>
-                {openSale ? <FiChevronUp /> : <FiChevronDown />}
+            <Link to={withAdmin("/collection-listed-sale")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isSale ? "bg-[#002AA8]" : ""}`}>
+                <img src={SaleImage} alt="" className="w-[20px] h-[20px] object-contain flex-shrink-0" />
+                <span className="pt-[2px]">Market Listings</span>
               </li>
             </Link>
 

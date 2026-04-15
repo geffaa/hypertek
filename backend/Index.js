@@ -133,6 +133,10 @@ app.use((req, res, next) => {
 });
 
 // Routes
+// NOTE: specific /api/v1/admin/* routes MUST be registered before the generic
+// /api/v1 User router — otherwise Route.get("/admin/:adminId") swallows them.
+app.use("/api/v1/admin/nfa", AdminNFARouter);
+app.use("/api/v1/admin/artists", ArtistRouter);
 app.use("/api/v1/card", SaveCardRoute);
 app.use("/api/v1/payment", PaymentRotue);
 app.use("/api/v1/card", CardRoute);
@@ -153,13 +157,11 @@ app.use("/api/v1/withdraw", WithdrawalRoute); // Register Withdrawal Route
 app.use("/api/v1/site-content", ContentRoute);
 app.use("/api/v1/waitlist", WaitlistRouter);
 app.use("/api/v1/nft101", Nft101Router);
-app.use("/api/v1/admin/nfa", AdminNFARouter);
 app.use("/api/v1/auction", AuctionRouter);
 app.use("/api/v1/trade", TradeRouter);
 app.use("/api/v1/hire", HireRentRouter);
 app.use("/api/v1/bounty", BountyRouter);
 app.use("/api/v1/hb", HBRouter);
-app.use("/api/v1/admin/artists", ArtistRouter);
 app.use("/api/v1/buyback", BuybackRouter);
 app.use("/api/v1/listings", MarketListingRouter);
 

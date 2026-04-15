@@ -46,6 +46,28 @@ const SECTIONS = [
         ],
     },
 
+    // ─── HOME: How It Works ───
+    {
+        sectionKey: "home_how_it_works",
+        sectionLabel: "How It Works",
+        pageGroup: "home",
+        fields: [
+            { key: "section_title",    label: "Section Title",    type: "text",     value: "How It Works" },
+            { key: "section_subtitle", label: "Section Subtitle", type: "textarea", value: "Get started in just a few steps and unlock the world of digital collectibles." },
+            {
+                key: "steps",
+                label: "Steps",
+                type: "list",
+                value: [
+                    { title: "Connect Wallet",     description: "Securely connect your crypto wallet to start buying, selling, and collecting NFTs." },
+                    { title: "Explore Collections", description: "Browse trending collections and discover rare digital artworks from top creators." },
+                    { title: "Collect & Trade",    description: "Buy your favorite NFTs and showcase or trade them on your profile anytime." },
+                    { title: "Earn & Grow",        description: "Earn by selling your collections or gaining popularity in the NFT space." },
+                ],
+            },
+        ],
+    },
+
     // ─── HOME: Marketplace Banner ───
     {
         sectionKey: "marketplace_banner",

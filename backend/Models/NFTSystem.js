@@ -34,16 +34,9 @@ const subCollectionSchema = new mongoose.Schema({
   minimumBuybackUSD:  { type: Number, default: 0 },
   reservePriceUSD:    { type: Number, default: 0 },
   buybackPending:     { type: Boolean, default: false },
-  // Artist royalty payout preference (set by admin per item/collection)
-  royaltyPaymentPreference: { type: String, enum: ["crypto", "bank"], default: "crypto" },
-  royaltyBankDetails: {
-    accountHolderName: String,
-    bankName:          String,
-    accountNumber:     String,
-    iban:              String,
-    swift:             String,
-    country:           String,
-  },
+  // Artist linked to this item — admin selects from Artist model
+  // Royalty (4%) on every sale is dispatched using the artist's payment method
+  artistId: { type: mongoose.Schema.Types.ObjectId, ref: "Artist", default: null },
   createdAt: { type: Date, default: Date.now },
 });
 

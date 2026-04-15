@@ -1,4 +1,5 @@
 import NFTSystem from "../Models/NFTSystem.js";
+import Artist from "../Models/Artist.js";
 import Activity from "../Models/ActivityModel.js";
 import { getBlockchain, ethers } from "./blockchain.js";
 import { dispatchRoyalty } from "../services/RoyaltyService.js";
@@ -147,9 +148,29 @@ export async function finalizeNFAPurchase({
     }
   }
 
+  // 3. Resolve artist for royalty dispatch
+  let creatorWallet = "admin";
+  let royaltyPaymentType = "crypto";
+  if (subCollection.artistId) {
+    try {
+      const artist = await Artist.findById(subCollection.artistId).lean();
+      if (artist) {
+        royaltyPaymentType = artist.paymentPreference || "crypto";
+        creatorWallet = royaltyPaymentType === "crypto"
+          ? (artist.walletAddress || "admin")
+          : "bank"; // bank payouts use a sentinel; RoyaltyService records them as pending
+        console.log(`🎨 [Artist] ${artist.name} — ${royaltyPaymentType} → ${creatorWallet}`);
+      }
+    } catch (err) {
+      console.warn("⚠️ [Artist] lookup failed:", err.message);
+    }
+  } else {
+    // Fallback: legacy royaltyWallet on parent collection
+    creatorWallet = parent.collection?.royaltyWallet || parent.collection?.owner || "admin";
+  }
+
   // 3. Record Sale in Database
-  const creatorWallet = parent.collection?.royaltyWallet || parent.collection?.owner || "admin";
-  const seller = (subCollection.owner && subCollection.owner.toLowerCase() !== "admin") 
+  const seller = (subCollection.owner && subCollection.owner.toLowerCase() !== "admin")
     ? subCollection.owner 
     : (process.env.PLATFORM_WALLET_ADDRESS || "admin");
 
@@ -181,10 +202,10 @@ export async function finalizeNFAPurchase({
    * NFA — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
    *
    * NFC — Hypertek first sale:   bank preset minBB (from seller portion) | 4% artist | 16% Hypertek | rest to Hypertek as seller
-   * NFC — player first sale:     80% creator | 5% banked as initial minBB | 15% Hypertek
+   * NFC — player first sale:     80% creator | 10% banked as initial minBB | 10% Hypertek
    * NFC — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
    *
-   * NFT — player first sale:     80% creator | 5% banked as initial minBB | 15% Hypertek
+   * NFT — player first sale:     80% creator | 10% banked as initial minBB | 10% Hypertek
    * NFT — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
    */
 
@@ -206,13 +227,13 @@ export async function finalizeNFAPurchase({
     console.log(`💼 [Commission] Hypertek first sale (${assetType}): 4% artist + 16% company. MinBB preset.`);
 
   } else if (isPlayerFirstSale) {
-    // Player first sale: 80% to creator, 5% banked as initial minBB, 15% Hypertek
+    // Player first sale: 80% to creator, 10% banked as initial minBB, 10% Hypertek
     sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
     royaltyPaid    = 0; // Creator IS the seller — no separate artist fee
-    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6)); // initial minBB seed
-    companyAmount  = parseFloat((cleanPrice * 0.15).toFixed(6));
+    buybackAmount  = parseFloat((cleanPrice * 0.10).toFixed(6)); // initial minBB seed
+    companyAmount  = parseFloat((cleanPrice * 0.10).toFixed(6));
     platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
-    console.log(`🎮 [Commission] Player first sale (${assetType}): 80% creator + 5% minBB + 15% company.`);
+    console.log(`🎮 [Commission] Player first sale (${assetType}): 80% creator + 10% minBB + 10% company.`);
 
   } else {
     // Owner resell (2nd+ sale) — applies to NFA, NFC, NFT equally
@@ -283,25 +304,49 @@ export async function finalizeNFAPurchase({
       creatorWallet,
       amount:          royaltyPaid,
       saleRecordId:    receiptHash || paymentIntentId,
+      paymentType:     royaltyPaymentType,
+      payoutType:      "artist_royalty",
+      note:            `${assetType} artist royalty 4%`,
     }).catch(err => console.warn("⚠️ [RoyaltyService] royalty dispatch error:", err.message));
   }
 
   // Dispatch buyback fund → BUYBACK_WALLET_ADDRESS — async, non-blocking
-  // Applies to: NFA/NFC/NFT resell (5%) and player first sale (10%)
   if (buybackAmount > 0) {
     const buybackWallet = process.env.BUYBACK_WALLET_ADDRESS;
     if (buybackWallet) {
+      const bbPct = isPlayerFirstSale ? '10%' : '5%';
       dispatchRoyalty({
         subCollectionId: cleanSubId,
         parentId:        cleanParentId,
         creatorWallet:   buybackWallet,
         amount:          buybackAmount,
         saleRecordId:    receiptHash || paymentIntentId,
-        note:            "NFA buyback fund 5%",
+        payoutType:      "buyback_fund",
+        note:            `${assetType} buyback fund ${bbPct}`,
       }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
       console.log(`🏦 [Buyback] Dispatching $${buybackAmount} USDC → ${buybackWallet}`);
     } else {
       console.warn("⚠️ [Buyback] BUYBACK_WALLET_ADDRESS not set — skipping dispatch");
+    }
+  }
+
+  // Dispatch company/platform fee → PLATFORM_WALLET_ADDRESS — async, non-blocking
+  if (companyAmount > 0) {
+    const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
+    if (platformWallet) {
+      const feeLabel = isHypertekFirstSale ? '16%' : isPlayerFirstSale ? '10%' : '11%';
+      dispatchRoyalty({
+        subCollectionId: cleanSubId,
+        parentId:        cleanParentId,
+        creatorWallet:   platformWallet,
+        amount:          companyAmount,
+        saleRecordId:    receiptHash || paymentIntentId,
+        payoutType:      "company_fee",
+        note:            `${assetType} company fee ${feeLabel}`,
+      }).catch(err => console.warn("⚠️ [PlatformFee] dispatch error:", err.message));
+      console.log(`🏢 [Platform] Dispatching $${companyAmount} USDC → ${platformWallet}`);
+    } else {
+      console.warn("⚠️ [Platform] PLATFORM_WALLET_ADDRESS not set — skipping company fee dispatch");
     }
   }
 

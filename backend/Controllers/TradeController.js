@@ -3,6 +3,14 @@ import path from "path";
 import Trade from "../Models/TradeModel.js";
 import User from "../Models/User.js";
 import HBLedger from "../Models/HBLedger.js";
+import {
+  getTier,
+  calculateQuestSplit,
+  todayKey,
+  VALID_WAIT_HOURS,
+  QUEST_TYPES,
+  MAX_DAILY_QUEST_ACCEPTS,
+} from "../utils/questUtils.js";
 
 // Save trade image locally under /uploads/trades/
 async function saveTradeImage(file) {
@@ -20,6 +28,18 @@ async function expireTrades() {
     { status: "open", expiresAt: { $lt: new Date() } },
     { status: "expired" }
   );
+}
+
+/**
+ * Count how many quests a wallet has accepted today.
+ */
+async function countTodayAccepts(wallet) {
+  const key = todayKey();
+  return Trade.countDocuments({
+    type: "quest",
+    acceptedByWallet: new RegExp(`^${wallet}$`, "i"),
+    dailyQuestDate: key,
+  });
 }
 
 // ── GET /api/v1/trade ─────────────────────────────────────────────────────────
@@ -56,6 +76,29 @@ export async function getTrade(req, res) {
   }
 }
 
+// ── GET /api/v1/trade/stats/daily?wallet=0x... ───────────────────────────────
+// Returns daily quest accept stats for a wallet (used by frontend to show limit)
+export async function getQuestStats(req, res) {
+  try {
+    const { wallet } = req.query;
+    if (!wallet) return res.status(400).json({ error: "wallet query param required" });
+
+    const acceptedToday = await countTodayAccepts(wallet);
+    const remaining = Math.max(0, MAX_DAILY_QUEST_ACCEPTS - acceptedToday);
+
+    res.json({
+      wallet,
+      date: todayKey(),
+      acceptedToday,
+      dailyLimit: MAX_DAILY_QUEST_ACCEPTS,
+      remaining,
+      limitReached: remaining === 0,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 // ── POST /api/v1/trade (auth required) ───────────────────────────────────────
 export async function createTrade(req, res) {
   try {
@@ -65,7 +108,15 @@ export async function createTrade(req, res) {
       title, description, offering, requesting,
       offeringHB, requestingHB,
       reward, category,
-      imageUrl,   // existing URL from owned NFT (no upload needed)
+      imageUrl,
+
+      // Quest-specific fields
+      questType,      // "money" | "resources"
+      waitHours,      // 4 | 12 | 24
+      salePrice,      // base sale price for split calculation
+      pickupPlanet,   // in-game planet (optional, synced later)
+      dropOffPlanet,  // in-game planet (optional, synced later)
+      linkedListingId,// MarketListing that triggered this quest
     } = req.body;
 
     if (!type || !["trade", "quest"].includes(type)) {
@@ -85,19 +136,69 @@ export async function createTrade(req, res) {
       return res.status(400).json({ error: "Trade requires an offering field" });
     }
 
-    // imageUrl from body = existing NFT image URL; req.file = newly uploaded image
+    // ── Quest commission split validation ───────────────────────────────────
+    let tierData = null;
+    let splitAmounts = null;
+
+    if (type === "quest" && questType && waitHours) {
+      if (!QUEST_TYPES.includes(questType)) {
+        if (req.file) fs.unlink(req.file.path, () => {});
+        return res.status(400).json({ error: `questType must be one of: ${QUEST_TYPES.join(", ")}` });
+      }
+      if (!VALID_WAIT_HOURS.includes(Number(waitHours))) {
+        if (req.file) fs.unlink(req.file.path, () => {});
+        return res.status(400).json({ error: "waitHours must be 4, 12, or 24" });
+      }
+
+      tierData = getTier(questType, Number(waitHours));
+
+      if (salePrice && Number(salePrice) > 0) {
+        splitAmounts = calculateQuestSplit(Number(salePrice), questType, Number(waitHours));
+      }
+    }
+
     const resolvedImage = req.file ? await saveTradeImage(req.file) : (imageUrl || "");
     const hbOffered = Number(offeringHB) || 0;
 
-    const trade = await Trade.create({
-      type, poster: userId, posterWallet, posterName: posterName || "Anonymous",
-      title, description, offering,
+    const tradeDoc = {
+      type,
+      poster: userId,
+      posterWallet,
+      posterName: posterName || "Anonymous",
+      title,
+      description,
+      offering,
       requesting: requesting || "Make me an offer",
       offeringHB:   hbOffered,
       requestingHB: Number(requestingHB) || 0,
       reward:       type === "quest" ? Number(reward) : 0,
-      image: resolvedImage, category,
-    });
+      image: resolvedImage,
+      category,
+    };
+
+    // Attach quest-specific fields if present
+    if (type === "quest") {
+      if (pickupPlanet)   tradeDoc.pickupPlanet   = pickupPlanet;
+      if (dropOffPlanet)  tradeDoc.dropOffPlanet  = dropOffPlanet;
+      if (linkedListingId) tradeDoc.linkedListingId = linkedListingId;
+
+      if (tierData) {
+        tradeDoc.questType            = questType;
+        tradeDoc.waitHours            = Number(waitHours);
+        tradeDoc.buyerSavePercent     = tierData.buyerSavePercent;
+        tradeDoc.playerSharePercent   = tierData.playerSharePercent;
+        tradeDoc.platformSharePercent = tierData.platformSharePercent;
+      }
+
+      if (splitAmounts) {
+        tradeDoc.salePrice           = Number(salePrice);
+        tradeDoc.buyerSavesAmount    = splitAmounts.buyerSaves;
+        tradeDoc.playerEarnsAmount   = splitAmounts.playerEarns;
+        tradeDoc.platformEarnsAmount = splitAmounts.platformEarns;
+      }
+    }
+
+    const trade = await Trade.create(tradeDoc);
     res.status(201).json(trade);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -118,9 +219,29 @@ export async function acceptTrade(req, res) {
       return res.status(400).json({ error: "Cannot accept your own listing" });
     }
 
-    trade.acceptedBy = userId;
-    trade.acceptedByWallet = acceptedByWallet;
-    trade.status = "accepted";
+    // ── Daily quest accept limit (quests only) ──────────────────────────────
+    if (trade.type === "quest") {
+      const acceptedToday = await countTodayAccepts(acceptedByWallet);
+      if (acceptedToday >= MAX_DAILY_QUEST_ACCEPTS) {
+        return res.status(429).json({
+          error: `Daily quest limit reached. You can accept up to ${MAX_DAILY_QUEST_ACCEPTS} quests per day.`,
+          acceptedToday,
+          dailyLimit: MAX_DAILY_QUEST_ACCEPTS,
+          resetsAt: "midnight UTC",
+        });
+      }
+    }
+
+    trade.acceptedBy        = userId;
+    trade.acceptedByWallet  = acceptedByWallet;
+    trade.acceptedAt        = new Date();
+    trade.status            = "accepted";
+
+    // Tag with today's date for daily limit tracking
+    if (trade.type === "quest") {
+      trade.dailyQuestDate = todayKey();
+    }
+
     await trade.save();
     res.json(trade);
   } catch (err) {
@@ -145,97 +266,150 @@ export async function completeTrade(req, res) {
       return res.status(400).json({ error: "Trade must be accepted before completion" });
     }
 
-    // ── HB settlement ──────────────────────────────────────────────────────
-    // offeringHB:   poster gives HB → acceptedBy receives
-    // requestingHB: acceptedBy gives HB → poster receives
     const hbErrors = [];
 
-    if (trade.offeringHB > 0 && acceptedById) {
-      try {
-        // Debit from poster
-        const poster = await User.findById(posterId);
-        if (!poster || (poster.hyperBucks || 0) < trade.offeringHB) {
-          hbErrors.push(`Poster has insufficient HB (${poster?.hyperBucks || 0} < ${trade.offeringHB})`);
-        } else {
-          poster.hyperBucks -= trade.offeringHB;
-          await poster.save();
-          await HBLedger.create({
-            userId:       posterId,
-            type:         "spend",
-            amount:       -trade.offeringHB,
-            balanceAfter: poster.hyperBucks,
-            description:  `Trade HB payment: "${trade.title}"`,
-            reference:    String(trade._id),
-          });
+    // ── Quest completion: distribute via commission split ───────────────────
+    if (trade.type === "quest" && trade.questType && trade.waitHours) {
+      // Recalculate split if salePrice is present (use stored amounts if already set)
+      let playerEarns = trade.playerEarnsAmount;
 
-          // Credit acceptedBy
+      if (!playerEarns && trade.salePrice && trade.playerSharePercent) {
+        playerEarns = +(trade.salePrice * trade.playerSharePercent / 100).toFixed(4);
+      }
+
+      // Also use reward field as fallback (legacy quests without split config)
+      if (!playerEarns) playerEarns = trade.reward || 0;
+
+      if (playerEarns > 0 && acceptedById) {
+        try {
           const acceptor = await User.findById(acceptedById);
           if (acceptor) {
-            acceptor.hyperBucks = (acceptor.hyperBucks || 0) + trade.offeringHB;
+            acceptor.hyperBucks = (acceptor.hyperBucks || 0) + playerEarns;
             await acceptor.save();
             await HBLedger.create({
               userId:       acceptedById,
               type:         "earn",
-              amount:       trade.offeringHB,
+              amount:       playerEarns,
               balanceAfter: acceptor.hyperBucks,
-              description:  `Trade HB received: "${trade.title}"`,
+              description:  `Quest reward (${trade.waitHours}h tier, ${trade.playerSharePercent ?? "?"}% share): "${trade.title}"`,
               reference:    String(trade._id),
             });
           }
+        } catch (hbErr) {
+          hbErrors.push(`Quest player reward error: ${hbErr.message}`);
         }
-      } catch (hbErr) {
-        hbErrors.push(`offeringHB transfer error: ${hbErr.message}`);
       }
-    }
 
-    if (trade.requestingHB > 0 && acceptedById) {
-      try {
-        // Debit from acceptedBy
-        const acceptor = await User.findById(acceptedById);
-        if (!acceptor || (acceptor.hyperBucks || 0) < trade.requestingHB) {
-          hbErrors.push(`Acceptor has insufficient HB (${acceptor?.hyperBucks || 0} < ${trade.requestingHB})`);
-        } else {
-          acceptor.hyperBucks -= trade.requestingHB;
-          await acceptor.save();
-          await HBLedger.create({
-            userId:       acceptedById,
-            type:         "spend",
-            amount:       -trade.requestingHB,
-            balanceAfter: acceptor.hyperBucks,
-            description:  `Trade HB payment: "${trade.title}"`,
-            reference:    String(trade._id),
-          });
+      trade.completedAt = new Date();
 
-          // Credit poster
+      // Persist final amounts if not already set
+      if (trade.salePrice && !trade.playerEarnsAmount) {
+        const split = calculateQuestSplit(trade.salePrice, trade.questType, trade.waitHours);
+        trade.buyerSavesAmount    = split.buyerSaves;
+        trade.playerEarnsAmount   = split.playerEarns;
+        trade.platformEarnsAmount = split.platformEarns;
+      }
+
+    } else {
+      // ── Regular trade: HB settlement (existing logic) ─────────────────────
+      if (trade.offeringHB > 0 && acceptedById) {
+        try {
           const poster = await User.findById(posterId);
-          if (poster) {
-            poster.hyperBucks = (poster.hyperBucks || 0) + trade.requestingHB;
+          if (!poster || (poster.hyperBucks || 0) < trade.offeringHB) {
+            hbErrors.push(`Poster has insufficient HB (${poster?.hyperBucks || 0} < ${trade.offeringHB})`);
+          } else {
+            poster.hyperBucks -= trade.offeringHB;
             await poster.save();
             await HBLedger.create({
               userId:       posterId,
-              type:         "earn",
-              amount:       trade.requestingHB,
+              type:         "spend",
+              amount:       -trade.offeringHB,
               balanceAfter: poster.hyperBucks,
-              description:  `Trade HB received: "${trade.title}"`,
+              description:  `Trade HB payment: "${trade.title}"`,
               reference:    String(trade._id),
             });
+
+            const acceptor = await User.findById(acceptedById);
+            if (acceptor) {
+              acceptor.hyperBucks = (acceptor.hyperBucks || 0) + trade.offeringHB;
+              await acceptor.save();
+              await HBLedger.create({
+                userId:       acceptedById,
+                type:         "earn",
+                amount:       trade.offeringHB,
+                balanceAfter: acceptor.hyperBucks,
+                description:  `Trade HB received: "${trade.title}"`,
+                reference:    String(trade._id),
+              });
+            }
           }
+        } catch (hbErr) {
+          hbErrors.push(`offeringHB transfer error: ${hbErr.message}`);
         }
-      } catch (hbErr) {
-        hbErrors.push(`requestingHB transfer error: ${hbErr.message}`);
+      }
+
+      if (trade.requestingHB > 0 && acceptedById) {
+        try {
+          const acceptor = await User.findById(acceptedById);
+          if (!acceptor || (acceptor.hyperBucks || 0) < trade.requestingHB) {
+            hbErrors.push(`Acceptor has insufficient HB (${acceptor?.hyperBucks || 0} < ${trade.requestingHB})`);
+          } else {
+            acceptor.hyperBucks -= trade.requestingHB;
+            await acceptor.save();
+            await HBLedger.create({
+              userId:       acceptedById,
+              type:         "spend",
+              amount:       -trade.requestingHB,
+              balanceAfter: acceptor.hyperBucks,
+              description:  `Trade HB payment: "${trade.title}"`,
+              reference:    String(trade._id),
+            });
+
+            const poster = await User.findById(posterId);
+            if (poster) {
+              poster.hyperBucks = (poster.hyperBucks || 0) + trade.requestingHB;
+              await poster.save();
+              await HBLedger.create({
+                userId:       posterId,
+                type:         "earn",
+                amount:       trade.requestingHB,
+                balanceAfter: poster.hyperBucks,
+                description:  `Trade HB received: "${trade.title}"`,
+                reference:    String(trade._id),
+              });
+            }
+          }
+        } catch (hbErr) {
+          hbErrors.push(`requestingHB transfer error: ${hbErr.message}`);
+        }
       }
     }
-    // ──────────────────────────────────────────────────────────────────────
 
     trade.status = "completed";
     await trade.save();
 
+    const isQuest = trade.type === "quest" && trade.questType;
     res.json({
       message: "Trade completed",
       trade,
-      hbSettlement: hbErrors.length > 0
-        ? { status: "partial", errors: hbErrors }
-        : { status: "ok", offeringHBTransferred: trade.offeringHB, requestingHBTransferred: trade.requestingHB },
+      ...(isQuest
+        ? {
+            questSettlement: hbErrors.length > 0
+              ? { status: "partial", errors: hbErrors }
+              : {
+                  status:          "ok",
+                  questType:       trade.questType,
+                  waitHours:       trade.waitHours,
+                  buyerSaved:      trade.buyerSavesAmount,
+                  playerEarned:    trade.playerEarnsAmount,
+                  platformEarned:  trade.platformEarnsAmount,
+                },
+          }
+        : {
+            hbSettlement: hbErrors.length > 0
+              ? { status: "partial", errors: hbErrors }
+              : { status: "ok", offeringHBTransferred: trade.offeringHB, requestingHBTransferred: trade.requestingHB },
+          }),
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

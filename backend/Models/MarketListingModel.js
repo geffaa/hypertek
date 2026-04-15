@@ -76,11 +76,29 @@ const marketListingSchema = new mongoose.Schema(
     viewCount:    { type: Number, default: 0 },
     soldCount:    { type: Number, default: 0 }, // times this item type sold (analytics)
 
-    // Commission (for questing integration later)
+    // Commission tier chosen by seller
     commissionTier: {
       type: Number,
       enum: [20, 12, 10, 8],
       default: 20,
+    },
+
+    // ── Quest integration ────────────────────────────────────────────────────
+    // Whether this listing has quest mode enabled (commissionTier < 20 implies quest)
+    questEnabled: { type: Boolean, default: false },
+
+    // Quest type: "money" (standard 11% pool) or "resources" (20% pool)
+    questType: {
+      type: String,
+      enum: ["money", "resources", null],
+      default: null,
+    },
+
+    // Reference to the auto-generated Quest (Trade doc) for this listing
+    linkedQuestId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Trade",
+      default: null,
     },
 
     // Status

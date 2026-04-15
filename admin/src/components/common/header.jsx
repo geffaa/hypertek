@@ -171,7 +171,7 @@ const Header = ({ toggleSidebar }) => {
       </div>
 
       {/* Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes shake {
           0%,
           100% {

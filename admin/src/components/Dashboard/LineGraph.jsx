@@ -115,7 +115,6 @@ function LineGraph() {
   setTimeout(() => {
     try {
       const adminData = localStorage.getItem("admin_data");
-      console.log("your admin data are :",adminData._id);
       if (adminData) setUserData(JSON.parse(adminData));
     } catch (error) {
       console.error("Failed to parse admin data from localStorage", error);
