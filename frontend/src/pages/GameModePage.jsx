@@ -21,7 +21,7 @@ const MODES = {
     label: "QUEST",
     accent: "#38bdf8",
     glow: "rgba(56,189,248,0.2)",
-    panelImg: "/quest_space.png",
+    panelImg: "/quest1.png",
     heading: "HyperTek Quest",
     subtitle: "Explore. Discover. Conquer.",
     description:

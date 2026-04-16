@@ -45,6 +45,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const isArtists = path.includes("/artists") || path.includes("/artist-form");
   const isRoyaltyPayouts = path.includes("/royalty-payouts");
   const isBuybackApproval = path.includes("/buyback-approval");
+  const isCPIAdjustment   = path.includes("/cpi-adjustment");
 
 
   return (
@@ -186,6 +187,16 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="pt-[2px]">Buyback Approval</span>
+              </li>
+            </Link>
+
+            {/* CPI Adjustment */}
+            <Link to={withAdmin("/cpi-adjustment")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isCPIAdjustment ? "bg-[#002AA8]" : ""}`}>
+                <svg className="w-[20px] h-[20px] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <span className="pt-[2px]">CPI Adjustment</span>
               </li>
             </Link>
 

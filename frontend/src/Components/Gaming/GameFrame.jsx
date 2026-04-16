@@ -91,9 +91,9 @@ export default function GameFrame() {
       {/* ── Panel images ── */}
       <image href="/racing_panel.png"    x="15"  y={TL_Y} width="375" height={BL_Y - TL_Y}
         clipPath="url(#clip-left)"   preserveAspectRatio="xMidYMid slice" />
-      <image href="/quest_panel.png"     x="280" y={TL_Y} width="415" height={BL_Y - TL_Y}
+      <image href="/quest1.png"     x="280" y={TL_Y} width="450" height={BL_Y - TL_Y}
         clipPath="url(#clip-middle)" preserveAspectRatio="xMidYMid slice" />
-      <image href="/overlord_panel.png"  x="630" y={TL_Y} width="355" height={BL_Y - TL_Y}
+      <image href="/overlord3.png"  x="630" y={TL_Y} width="355" height={BL_Y - TL_Y}
         clipPath="url(#clip-right)"  preserveAspectRatio="xMidYMid slice" />
 
       {/* ── Vignette ── */}

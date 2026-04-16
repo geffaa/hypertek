@@ -174,6 +174,7 @@ function Buy1() {
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false); // post-purchase modal
+  const [transferFailed, setTransferFailed]   = useState(null);  // { paymentIntentId, error }
   const [listingPrice, setListingPrice] = useState(''); // Custom listing price set in confirm modal
   const [walletCopied, setWalletCopied] = useState(false);
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
@@ -1264,7 +1265,7 @@ function Buy1() {
               setStripeModal(null);
               const meta = stripeModal.meta || {};
               try {
-                await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/finalize-by-payment-intent`, {
+                const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/nft/finalize-by-payment-intent`, {
                   paymentIntentId: paymentIntent.id,
                   parentId: meta.parentId || null,
                   subCollectionId: meta.subCollectionId,
@@ -1272,10 +1273,15 @@ function Buy1() {
                   priceETH: meta.priceETH,
                   offerId: meta.offerId || null,
                 });
+                if (res.data?.success) {
+                  setPurchaseSuccess(true);
+                } else {
+                  setTransferFailed({ paymentIntentId: paymentIntent.id, error: res.data?.error });
+                }
               } catch (err) {
                 console.error("⚠️ [Stripe] finalize error:", err.message);
+                setTransferFailed({ paymentIntentId: paymentIntent.id, error: err.message });
               }
-              setPurchaseSuccess(true);
             }}
           />
         </Elements>
@@ -1890,6 +1896,62 @@ function Buy1() {
             @keyframes scaleIn { from { transform: scale(0.85); opacity: 0 } to { transform: scale(1); opacity: 1 } }
             @keyframes drawCheck { from { stroke-dashoffset: 40 } to { stroke-dashoffset: 0 } }
           `}</style>
+        </div>
+      )}
+
+      {/* ── Transfer Failed Modal ── */}
+      {transferFailed && (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-black/75 backdrop-blur-sm px-4"
+          style={{ animation: "fadeIn 0.2s ease" }}
+        >
+          <div
+            className="bg-[#0f0f2a] border border-red-500/30 rounded-2xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center gap-5 text-center"
+            style={{ animation: "scaleIn 0.25s ease" }}
+          >
+            {/* Warning icon */}
+            <div
+              className="w-20 h-20 rounded-full flex items-center justify-center"
+              style={{ background: "rgba(239,68,68,0.1)", border: "2px solid rgba(239,68,68,0.35)" }}
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M20 13v9M20 27h.01" stroke="#ef4444" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M17.3 6.5L3.5 31a3 3 0 002.6 4.5h27.8a3 3 0 002.6-4.5L22.7 6.5a3 3 0 00-5.4 0z" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+
+            <div>
+              <h2 className="text-white text-xl font-bold mb-1">Payment Received — Transfer Pending</h2>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Your payment was successful, but the NFT transfer encountered an issue.
+                Your funds are safe — our team will complete the transfer manually.
+              </p>
+              <div
+                className="mt-3 px-3 py-2 rounded-lg text-left"
+                style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}
+              >
+                <p className="text-white/40 text-[10px] font-mono break-all">
+                  Ref: {transferFailed.paymentIntentId}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 w-full">
+              <button
+                onClick={() => { setTransferFailed(null); navigate("/Profile"); }}
+                className="w-full h-11 rounded-xl text-white font-semibold text-sm transition-all"
+                style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)" }}
+              >
+                View My Profile
+              </button>
+              <button
+                onClick={() => setTransferFailed(null)}
+                className="w-full h-10 rounded-xl text-white/40 hover:text-white text-sm transition-colors"
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
         </div>
       )}
 

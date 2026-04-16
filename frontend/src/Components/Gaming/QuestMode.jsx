@@ -440,7 +440,7 @@ function GroundView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#080c06" }}>
 
       {/* Background image */}
-      <LazyImage src="/quest_ground.png" spinnerColor="#38bdf8" />
+      <LazyImage src="/quest2.png" spinnerColor="#38bdf8" />
 
       {/* Vignette */}
       <div style={{

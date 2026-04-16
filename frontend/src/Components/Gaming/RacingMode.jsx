@@ -38,8 +38,8 @@ const CSS = `
     transition: background 0.18s, box-shadow 0.18s, transform 0.15s;
   }
   .race-exit-btn:hover {
-    background: rgba(248,113,113,0.25) !important;
-    box-shadow: 0 0 18px rgba(248,113,113,0.5) !important;
+    background: rgba(34,197,94,0.25) !important;
+    box-shadow: 0 0 18px rgba(34,197,94,0.5) !important;
     transform: scale(1.05);
   }
 `;
@@ -54,7 +54,7 @@ function TrackView() {
       overflow: "hidden",
     }}>
       {/* ── Background image ── */}
-      <LazyImage src="/race_track.png" spinnerColor="#22c55e"
+      <LazyImage src="/racing1.png" spinnerColor="#22c55e"
         style={{ objectPosition: "center" }} />
 
       {/* ── Dark vignette overlay ── */}
@@ -111,7 +111,7 @@ function GarageView() {
       overflow: "hidden",
     }}>
       {/* ── Background image ── */}
-      <LazyImage src="/garage.png" spinnerColor="#22c55e"
+      <LazyImage src="/racing2.png" spinnerColor="#22c55e"
         style={{ objectPosition: "center" }} />
 
       {/* ── Dark vignette overlay ── */}
@@ -195,17 +195,17 @@ export default function RacingMode({ view = "TRACK", onExit }) {
             left: "2%",
             zIndex: 35,
             padding: "8px 20px",
-            background: "rgba(30,0,0,0.88)",
-            border: "1.5px solid rgba(248,113,113,0.55)",
+            background: "rgba(0,20,8,0.88)",
+            border: "1.5px solid rgba(34,197,94,0.55)",
             borderRadius: 3,
             clipPath: "polygon(0% 0%, calc(100% - 10px) 0%, 100% 100%, 10px 100%)",
             fontFamily: "Orbitron, sans-serif",
             fontSize: "clamp(7px, 0.7vw, 9px)",
             fontWeight: "bold",
             letterSpacing: "0.18em",
-            color: "#fca5a5",
-            textShadow: "0 0 8px rgba(248,113,113,0.7)",
-            boxShadow: "0 0 16px rgba(248,113,113,0.2)",
+            color: "#86efac",
+            textShadow: "0 0 8px rgba(34,197,94,0.7)",
+            boxShadow: "0 0 16px rgba(34,197,94,0.2)",
             cursor: "pointer",
             whiteSpace: "nowrap",
           }}

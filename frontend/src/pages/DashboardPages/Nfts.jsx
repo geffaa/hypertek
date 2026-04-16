@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import Collectionimage from "../../assets/images/CreateCollection/collection.png";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { FiSearch, FiEdit2, FiTrash2, FiTag, FiPackage, FiX, FiUploadCloud, FiAlertTriangle } from "react-icons/fi";
-import { Gavel, ArrowRightLeft, CheckCircle2 } from "lucide-react";
+import { Gavel, ArrowRightLeft, CheckCircle2, ChevronDown } from "lucide-react";
 
 const ASSET_BADGE = {
   NFA: { bg: "rgba(124,58,237,0.2)", border: "rgba(124,58,237,0.5)", text: "#c4b5fd" },
@@ -68,6 +68,7 @@ function NFTs() {
   // — Auction sub-step
   const [auctionForm, setAuctionForm]       = useState({ startPrice: "", durationHours: "24", reservePrice: "", instantBuyPrice: "" });
   const [auctionLoading, setAuctionLoading] = useState(false);
+  const [durationOpen, setDurationOpen]     = useState(false);
 
   // — Trade sub-step
   const [tradeForm, setTradeForm]           = useState({ reqItem: "", description: "", openOffer: false });
@@ -645,13 +646,49 @@ function NFTs() {
                   </div>
                   <div>
                     <label className="text-white/60 text-xs font-medium mb-1 block">Duration</label>
-                    <select value={auctionForm.durationHours}
-                      onChange={(e) => setAuctionForm(f => ({ ...f, durationHours: e.target.value }))}
-                      className={inputCls} style={{ ...inputStyle, colorScheme: "dark" }}>
-                      <option value="24" style={{ background: "#1a1b2e", color: "#fff" }}>24 hours</option>
-                      <option value="72" style={{ background: "#1a1b2e", color: "#fff" }}>3 days</option>
-                      <option value="168" style={{ background: "#1a1b2e", color: "#fff" }}>7 days</option>
-                    </select>
+                    <div className="relative">
+                      {/* Backdrop — closes dropdown on outside click */}
+                      {durationOpen && (
+                        <div className="fixed inset-0 z-40" onClick={() => setDurationOpen(false)} />
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => setDurationOpen(v => !v)}
+                        className={`${inputCls} flex items-center justify-between`}
+                        style={inputStyle}
+                      >
+                        <span>
+                          {auctionForm.durationHours === "24" ? "24 hours" :
+                           auctionForm.durationHours === "72" ? "3 days" : "7 days"}
+                        </span>
+                        <ChevronDown size={14} className={`text-white/40 transition-transform duration-200 ${durationOpen ? "rotate-180" : ""}`} />
+                      </button>
+                      {durationOpen && (
+                        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 overflow-hidden rounded-lg"
+                          style={{ background: "#13142a", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }}>
+                          {[
+                            { value: "24",  label: "24 hours" },
+                            { value: "72",  label: "3 days"   },
+                            { value: "168", label: "7 days"   },
+                          ].map((opt, i, arr) => (
+                            <button
+                              key={opt.value}
+                              type="button"
+                              onClick={() => { setAuctionForm(f => ({ ...f, durationHours: opt.value })); setDurationOpen(false); }}
+                              className="w-full text-left px-3 py-2 text-sm text-white transition-colors"
+                              style={{
+                                background: auctionForm.durationHours === opt.value ? "rgba(0,42,168,0.5)" : "transparent",
+                                borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                              }}
+                              onMouseEnter={e => { if (auctionForm.durationHours !== opt.value) e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }}
+                              onMouseLeave={e => { if (auctionForm.durationHours !== opt.value) e.currentTarget.style.background = "transparent"; }}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div>
                     <label className="text-white/60 text-xs font-medium mb-1 block">Instant Buy Price (USDC) <span className="text-white/25">optional</span></label>

@@ -18,6 +18,7 @@ import Auction from "../Models/AuctionModel.js";
 import Stripe from "stripe";
 import { Payment } from "../Models/Payment.js";
 import { finalizeNFAPurchase } from "../Service/nftPurchaseService.js";
+import License from "../Models/License.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Helper: save uploaded image permanently (Cloudinary or local /uploads/nft/)
@@ -1286,44 +1287,77 @@ export async function recordOnchainSale(req, res) {
 }
 
 /**
- * Calculate payment distribution
+ * Calculate payment distribution — per Don's brief (all scenarios)
+ *
+ * Scenario A — NFA, Hypertek first sale:
+ *   Bank preset minBB (admin-set), 4% to artist, Hypertek keeps the rest.
+ *
+ * Scenario B — NFC/NFT, Hypertek first sale:
+ *   80% Hypertek (seller), 4% artist, 16% company.
+ *   Preset minBB is banked from the seller's 80%.
+ *
+ * Scenario C — NFC/NFT, Player first sale:
+ *   80% player/creator, 10% minBB banked, 10% Hypertek.
+ *
+ * Scenario D — Resale, all asset types:
+ *   80% seller, 4% artist, 5% added to minBB, 11% Hypertek.
  */
 function calculatePaymentDistribution(
   priceETH,
-  isFirstSale,   // kept for signature compatibility — no longer affects split
+  isFirstSale,
   creatorWallet,
   sellerWallet,
-  isNFA = false,
+  assetType = "NFT",       // "NFA" | "NFC" | "NFT"
+  creatorIsAdmin = false,  // true when Hypertek created the item
+  presetMinBB = 0,         // admin-set minimumBuybackUSD (used in first-sale scenarios)
 ) {
   const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
+  const fmt = (n) => parseFloat(n.toFixed(6));
 
-  let distribution = {
-    sellerAmount:   0,
-    creatorAmount:  0,
-    platformAmount: 0,
-    buybackAmount:  0,  // NFA only — 5% to buyback fund
-    companyAmount:  0,  // 11% (NFA) or 16% (NFC) to company account
-    payments: [],
-  };
+  let sellerAmount, creatorAmount, buybackAmount, companyAmount, platformAmount;
 
-  // NFA and NFC (resell / 2nd+ sale) share the same split per Don's brief:
-  // seller 80% | artist 4% | buyback 5% | company 11%
-  // On Hypertek first sale, HyperTek is the seller (gets 80%); minBB is preset by admin.
-  // NFC first sale by Hypertek: same 4%+16% applied via nftPurchaseService (Stripe/backend path).
-  distribution.sellerAmount   = parseFloat((priceETH * 0.80).toFixed(6));
-  distribution.creatorAmount  = parseFloat((priceETH * 0.04).toFixed(6));
-  distribution.buybackAmount  = parseFloat((priceETH * 0.05).toFixed(6));
-  distribution.companyAmount  = parseFloat((priceETH * 0.11).toFixed(6));
-  distribution.platformAmount = parseFloat((priceETH * 0.20).toFixed(6));
+  if (isFirstSale && creatorIsAdmin && assetType === "NFA") {
+    // ── Scenario A: NFA — Hypertek first sale ─────────────────────────────────
+    creatorAmount  = fmt(priceETH * 0.04);
+    buybackAmount  = fmt(Math.max(0, Math.min(presetMinBB, priceETH - creatorAmount)));
+    sellerAmount   = fmt(priceETH - creatorAmount - buybackAmount);
+    companyAmount  = 0;
+    platformAmount = fmt(creatorAmount + buybackAmount);
 
-  distribution.payments.push(
-    { recipient: sellerWallet,   amount: distribution.sellerAmount,   percentage: 80, type: "seller_proceeds" },
-    { recipient: creatorWallet,  amount: distribution.creatorAmount,  percentage: 4,  type: "artist_royalty"  },
-    { recipient: "buyback_fund", amount: distribution.buybackAmount,  percentage: 5,  type: "buyback_fund"    },
-    { recipient: platformWallet, amount: distribution.companyAmount,  percentage: 11, type: "company_account" },
-  );
+  } else if (isFirstSale && creatorIsAdmin) {
+    // ── Scenario B: NFC/NFT — Hypertek first sale ─────────────────────────────
+    const sellerGross = fmt(priceETH * 0.80);
+    creatorAmount  = fmt(priceETH * 0.04);
+    companyAmount  = fmt(priceETH * 0.16);
+    buybackAmount  = fmt(Math.min(presetMinBB, sellerGross));
+    sellerAmount   = fmt(sellerGross - buybackAmount);
+    platformAmount = fmt(creatorAmount + companyAmount + buybackAmount);
 
-  return distribution;
+  } else if (isFirstSale && !creatorIsAdmin) {
+    // ── Scenario C: NFC/NFT — Player first sale ───────────────────────────────
+    sellerAmount   = fmt(priceETH * 0.80);
+    creatorAmount  = 0;  // creator IS the seller
+    buybackAmount  = fmt(priceETH * 0.10);
+    companyAmount  = fmt(priceETH * 0.10);
+    platformAmount = fmt(priceETH * 0.20);
+
+  } else {
+    // ── Scenario D: Resale — all asset types ──────────────────────────────────
+    sellerAmount   = fmt(priceETH * 0.80);
+    creatorAmount  = fmt(priceETH * 0.04);
+    buybackAmount  = fmt(priceETH * 0.05);
+    companyAmount  = fmt(priceETH * 0.11);
+    platformAmount = fmt(priceETH * 0.20);
+  }
+
+  const payments = [
+    { recipient: sellerWallet,   amount: sellerAmount,  percentage: Math.round((sellerAmount  / priceETH) * 100), type: "seller_proceeds" },
+    { recipient: creatorWallet,  amount: creatorAmount, percentage: Math.round((creatorAmount / priceETH) * 100), type: "artist_royalty"  },
+    { recipient: "buyback_fund", amount: buybackAmount, percentage: Math.round((buybackAmount / priceETH) * 100), type: "buyback_fund"    },
+    { recipient: platformWallet, amount: companyAmount, percentage: Math.round((companyAmount / priceETH) * 100), type: "company_account" },
+  ].filter(p => p.amount > 0);
+
+  return { sellerAmount, creatorAmount, buybackAmount, companyAmount, platformAmount, payments };
 }
 
 /**
@@ -2117,27 +2151,44 @@ export async function recordSubCollectionSale(req, res) {
     const priceUSDC = isNaN(cleanPrice) ? 0 : parseFloat(cleanPrice.toFixed(6));
     console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (raw received: ${priceETH})`);
 
-    // Calculate payment distribution (NFA vs NFC split)
-    const wasFirstSale = subCollection.isFirstSale;
+    // ── Fix 5: Reserve price enforcement (on-chain path) ─────────────────────
+    const currentMinBB = subCollection.minimumBuybackUSD || 0;
+    if (currentMinBB > 0 && priceUSDC < currentMinBB) {
+      return res.status(400).json({
+        success: false,
+        error: `Sale price $${priceUSDC} is below the minimum buyback guarantee of $${currentMinBB}. List at or above the minimum buyback price.`,
+        minimumBuybackUSD: currentMinBB,
+      });
+    }
+
+    // ── Determine sale scenario params ────────────────────────────────────────
+    const itemAssetType   = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
+    const wasFirstSale    = subCollection.isFirstSale !== false; // default true for new items
+    const creatorIsAdmin  = parent.collection?.creator === "admin";
+    const presetMinBB     = subCollection.minimumBuybackUSD || 0;
+
+    // ── Calculate payment distribution (per Don's brief — all scenarios) ─────
     const distribution = calculatePaymentDistribution(
       priceUSDC,
       wasFirstSale,
       creatorWallet,
       seller,
-      subCollection.isNFA === true,
+      itemAssetType,
+      creatorIsAdmin,
+      presetMinBB,
     );
 
     // Create sale record
     const saleRecord = {
-      buyer: buyer.toLowerCase(),
-      seller: seller.toLowerCase(),
-      priceETH: priceUSDC,
-      royaltyPaid: parseFloat(distribution.creatorAmount.toFixed(6)),
-      platformFee: parseFloat(distribution.platformAmount.toFixed(6)),
+      buyer:          buyer.toLowerCase(),
+      seller:         seller.toLowerCase(),
+      priceETH:       priceUSDC,
+      royaltyPaid:    parseFloat(distribution.creatorAmount.toFixed(6)),
+      platformFee:    parseFloat(distribution.platformAmount.toFixed(6)),
       sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
-      txHash: txHash,
-      isFirstSale: subCollection.isFirstSale,
-      createdAt: new Date(),
+      txHash:         txHash,
+      isFirstSale:    wasFirstSale,
+      createdAt:      new Date(),
     };
 
     console.log("📝 Adding Sale Record:", saleRecord);
@@ -2146,11 +2197,11 @@ export async function recordSubCollectionSale(req, res) {
     if (!subCollection.salesHistory) {
       subCollection.salesHistory = [];
     }
-    
+
     subCollection.salesHistory.push(saleRecord);
-    subCollection.owner = buyer.toLowerCase();
+    subCollection.owner  = buyer.toLowerCase();
     subCollection.seller = null;
-    subCollection.buyer = null;
+    subCollection.buyer  = null;
     subCollection.listed = false;
     subCollection.priceETH = null;
 
@@ -2158,14 +2209,26 @@ export async function recordSubCollectionSale(req, res) {
       subCollection.isFirstSale = false;
     }
 
-    // MinBB auto-increment: minimumBuybackUSD += salePrice * 5%
-    // Applies to NFA and NFC resales — Don's brief: 5% added to min BB on every resell
-    const itemAssetType = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
-    if ((itemAssetType === "NFA" || itemAssetType === "NFC") && priceUSDC > 0) {
-      subCollection.minimumBuybackUSD = parseFloat(
-        ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
-      );
-      console.log(`🏦 [Buyback] ${itemAssetType} minimumBuybackUSD updated to $${subCollection.minimumBuybackUSD}`);
+    // ── Fix 4+2: MinBB update (all types) + buyback auto-trigger ─────────────
+    if (priceUSDC > 0) {
+      if (wasFirstSale && !creatorIsAdmin) {
+        // Player first sale — set initial minBB = 10% of sale price
+        subCollection.minimumBuybackUSD = parseFloat((priceUSDC * 0.10).toFixed(2));
+        console.log(`🏦 [Buyback] ${itemAssetType} player first sale — minBB set to $${subCollection.minimumBuybackUSD}`);
+      } else if (!wasFirstSale) {
+        // Resale (NFA, NFC, NFT) — add 5% of sale price to existing minBB
+        subCollection.minimumBuybackUSD = parseFloat(
+          ((subCollection.minimumBuybackUSD || 0) + priceUSDC * 0.05).toFixed(2)
+        );
+        console.log(`🏦 [Buyback] ${itemAssetType} resale — minBB updated to $${subCollection.minimumBuybackUSD}`);
+      }
+      // Admin first sale: minBB already preset by admin — no auto-increment
+
+      // Fix 2: Auto-flag buybackPending if sale price slips below minBB (safety net)
+      if (subCollection.minimumBuybackUSD > 0 && priceUSDC < subCollection.minimumBuybackUSD) {
+        subCollection.buybackPending = true;
+        console.warn(`⚠️ [Buyback] Sale $${priceUSDC} < minBB $${subCollection.minimumBuybackUSD} — buybackPending flagged`);
+      }
     }
 
     // Update parent collection sales count
@@ -2724,12 +2787,33 @@ export async function getDashboardStats(req, res) {
  */
 export async function userUploadNFC(req, res) {
   try {
-    const { parentId, name, description, priceETH } = req.body;
+    const { parentId, name, description, priceETH, speciesId, itemType } = req.body;
     const userId = req.user?._id || req.user?.id;
     const walletAddress = req.user?.WalletAddress;
 
     if (!parentId || !name) {
       return res.status(400).json({ success: false, error: "parentId and name are required" });
+    }
+    if (!speciesId || !itemType) {
+      return res.status(400).json({
+        success: false,
+        error: "speciesId and itemType are required to create an NFC. Purchase a license first.",
+      });
+    }
+
+    // ── Fix 8: Enforce NFC license check ─────────────────────────────────────
+    const license = await License.findOne({
+      userId,
+      speciesId: Number(speciesId),
+      itemType: itemType.toLowerCase(),
+    });
+
+    if (!license) {
+      return res.status(403).json({
+        success: false,
+        error: `No license found for species ${speciesId} / item type "${itemType}". Purchase a license to create NFC items.`,
+        requiredLicense: { speciesId: Number(speciesId), itemType: itemType.toLowerCase() },
+      });
     }
 
     const parent = await NFTSystem.findById(parentId);
@@ -2749,6 +2833,7 @@ export async function userUploadNFC(req, res) {
       description: description || "",
       image: image || "",
       owner: walletAddress || "",
+      assetType: "NFC",
       listed: false,
       priceETH: priceETH ? parseFloat(priceETH) : 0,
       isFirstSale: true,

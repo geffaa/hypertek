@@ -13,6 +13,28 @@ const ASSET_BADGE = {
   NFT: { label: "NFT", bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", ring: "transparent" },
 };
 
+// Varied gradient backgrounds per card — like OpenSea
+const CARD_GRADIENTS = [
+  "linear-gradient(145deg, #0f1f4a 0%, #06101f 100%)",   // navy
+  "linear-gradient(145deg, #200f4a 0%, #100624 100%)",   // deep purple
+  "linear-gradient(145deg, #0f4a1f 0%, #06200f 100%)",   // forest green
+  "linear-gradient(145deg, #4a0f0f 0%, #200606 100%)",   // crimson
+  "linear-gradient(145deg, #0f354a 0%, #061a22 100%)",   // ocean teal
+  "linear-gradient(145deg, #4a370f 0%, #221b06 100%)",   // dark amber
+  "linear-gradient(145deg, #250f4a 0%, #120724 100%)",   // violet
+  "linear-gradient(145deg, #0f4a3f 0%, #06221d 100%)",   // emerald
+  "linear-gradient(145deg, #3f1f0f 0%, #1d0e07 100%)",   // burnt orange
+  "linear-gradient(145deg, #0f254a 0%, #060f22 100%)",   // midnight blue
+  "linear-gradient(145deg, #340f4a 0%, #190624 100%)",   // royal purple
+  "linear-gradient(145deg, #0f3a2f 0%, #061d16 100%)",   // jade
+];
+
+function hashIndex(str, mod) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xffff;
+  return h % mod;
+}
+
 function LineCard({ item }) {
   const isDummy   = item.isDummy === true;
   const navigate  = useNavigate();
@@ -25,11 +47,14 @@ function LineCard({ item }) {
   const assetType = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
   const badge     = ASSET_BADGE[assetType] || null;
 
+  // Unique gradient per item based on ID/name hash
+  const cardBg = CARD_GRADIENTS[hashIndex(item._id || item.name || "", CARD_GRADIENTS.length)];
+
   return (
     <div
-      className="flex-shrink-0 w-[150px] sm:w-[170px] flex flex-col rounded-xl overflow-hidden cursor-pointer group"
+      className="flex-shrink-0 w-[180px] sm:w-[210px] flex flex-col rounded-xl overflow-hidden cursor-pointer group"
       style={{
-        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
+        background: cardBg,
         border: badge ? `1px solid ${badge.border}` : "1px solid rgba(255,255,255,0.09)",
       }}
       onClick={() => {
@@ -42,13 +67,14 @@ function LineCard({ item }) {
         }
       }}
     >
-      <div className="relative">
+      {/* Image area — overflow-hidden clips the slide-up overlay */}
+      <div className="relative overflow-hidden">
         <LazyImage
           src={imgSrc}
           alt={name}
           fallback={popularFallback}
-          className="w-full h-[120px] sm:h-[135px] bg-black"
-          imgClassName="object-contain transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-[150px] sm:h-[170px] bg-transparent"
+          imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
         {badge && (
           <>
@@ -62,15 +88,53 @@ function LineCard({ item }) {
           </>
         )}
         {isDummy && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            style={{ background: "rgba(0,0,0,0.30)" }}>
+          <div className="absolute inset-0 flex items-end justify-center pb-3 pointer-events-none"
+            style={{ background: "rgba(0,0,0,0.25)" }}>
             <span className="text-white/60 text-[9px] font-bold uppercase tracking-widest select-none"
-              style={{ transform: "rotate(-30deg)", textShadow: "0 1px 4px rgba(0,0,0,0.9)", whiteSpace: "nowrap" }}>
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9)", whiteSpace: "nowrap" }}>
               Dummy Content
             </span>
           </div>
         )}
+
+        {/* Hover overlay — slides up from bottom */}
+        <div
+          className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+          style={{
+            background: "linear-gradient(to top, rgba(0,0,0,0.93) 50%, transparent 100%)",
+            paddingTop: 28,
+            paddingBottom: 8,
+            paddingLeft: 8,
+            paddingRight: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3,
+          }}
+        >
+          <div style={{
+            width: "100%",
+            padding: "5px 0",
+            borderRadius: 5,
+            background: price != null && !isDummy ? "rgba(0,42,168,0.95)" : "rgba(255,255,255,0.12)",
+            border: price != null && !isDummy ? "1px solid rgba(0,80,255,0.7)" : "1px solid rgba(255,255,255,0.2)",
+            color: "#fff",
+            fontSize: 9,
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            textAlign: "center",
+            textTransform: "uppercase",
+          }}>
+            {isDummy ? "Preview" : price != null ? "Buy Now" : "View Details"}
+          </div>
+          {price != null && !isDummy && (
+            <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 8.5 }}>
+              {price} USDC
+            </span>
+          )}
+        </div>
       </div>
+
       <div className="flex flex-col gap-1 p-2 flex-1">
         <p className="text-white/80 text-[11px] font-semibold truncate leading-tight">{name}</p>
         <p className="text-white/40 text-[10px] mt-auto">
