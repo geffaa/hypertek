@@ -44,7 +44,7 @@ export default function Gaming() {
       <GameFrame />
       <TopBar activeGame={activeGame} />
       <ProfileButton />
-      <MiniMap />
+      {!(activeGame === "RACING" && raceView === "GARAGE") && <MiniMap />}
       <ViewButton
         activeGame={activeGame}
         raceView={raceView}

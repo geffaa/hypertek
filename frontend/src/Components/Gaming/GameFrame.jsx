@@ -36,11 +36,44 @@ const { TL_Y, TR_Y, NOTCH_Y, BR_Y, BL_Y } = CORNER;
 const FRAME = `M15 ${NOTCH_Y} L90 ${NOTCH_Y} L140 ${TL_Y} L920 ${TL_Y} L950 ${TR_Y} L980 ${TR_Y} L980 ${BR_Y} L880 ${BR_Y} L860 ${BL_Y} L15 ${BL_Y} L15 ${NOTCH_Y}`;
 
 // ── Section dividers ──────────────────────────────────────────────────
-const DIV1 = `M390 ${TL_Y} L390 177 L280 ${BL_Y}`;   // RACING | QUEST
-const DIV2 = `M630 ${TL_Y} L630 177 L695 ${BL_Y}`;   // QUEST  | OVERLORD
+const DIV1 = `M370 ${TL_Y} L370 230 L260 ${BL_Y}`;   // RACING | QUEST
+const DIV2 = `M630 ${TL_Y} L630 230 L695 ${BL_Y}`;   // QUEST  | OVERLORD
+
+// Quest panel clip polygon in viewport-percentage coordinates
+// derived from SVG viewBox 1000×500 → clip-path % = (x/1000, y/500)
+// Points: 370,42 → 630,42 → 630,230 → 695,488 → 260,488 → 370,230
+const QUEST_CLIP = "polygon(37% 8.4%, 63% 8.4%, 63% 46%, 69.5% 97.6%, 26% 97.6%, 37% 46%)";
 
 export default function GameFrame() {
   return (
+    <>
+    {/* Quest image rendered outside SVG so it is NOT affected by
+        preserveAspectRatio="none" — maintains natural proportions */}
+    {/* Quest panel image — sized to ~panel area to avoid over-zoom.
+        Panel center: ~47.75% from left, ~53% from top.
+        Panel size:   ~43.5vw wide × ~89.2vh tall. */}
+    <div style={{
+      position: "absolute", inset: 0,
+      pointerEvents: "none", zIndex: 9,
+      clipPath: QUEST_CLIP,
+      overflow: "hidden",
+    }}>
+      <img
+        src="/quest1.png"
+        alt=""
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "53%",
+          transform: "translate(-50%, -50%)",
+          width: "50vw",
+          height: "95vh",
+          objectFit: "cover",
+          objectPosition: "center center",
+        }}
+      />
+    </div>
+
     <svg
       viewBox="0 0 1000 500"
       preserveAspectRatio="none"
@@ -49,13 +82,13 @@ export default function GameFrame() {
     >
       <defs>
         <clipPath id="clip-left">
-          <polygon points={`15,${NOTCH_Y} 90,${NOTCH_Y} 140,${TL_Y} 390,${TL_Y} 390,177 280,${BL_Y} 15,${BL_Y}`} />
+          <polygon points={`15,${NOTCH_Y} 90,${NOTCH_Y} 140,${TL_Y} 370,${TL_Y} 370,230 260,${BL_Y} 15,${BL_Y}`} />
         </clipPath>
         <clipPath id="clip-middle">
-          <polygon points={`390,${TL_Y} 630,${TL_Y} 630,177 695,${BL_Y} 280,${BL_Y} 390,177`} />
+          <polygon points={`370,${TL_Y} 630,${TL_Y} 630,230 695,${BL_Y} 260,${BL_Y} 370,230`} />
         </clipPath>
         <clipPath id="clip-right">
-          <polygon points={`630,${TL_Y} 920,${TL_Y} 950,${TR_Y} 980,${TR_Y} 980,${BR_Y} 880,${BR_Y} 860,${BL_Y} 695,${BL_Y} 630,177`} />
+          <polygon points={`630,${TL_Y} 920,${TL_Y} 950,${TR_Y} 980,${TR_Y} 980,${BR_Y} 880,${BR_Y} 860,${BL_Y} 695,${BL_Y} 630,230`} />
         </clipPath>
 
         <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
@@ -89,10 +122,9 @@ export default function GameFrame() {
       </defs>
 
       {/* ── Panel images ── */}
-      <image href="/racing_panel.png"    x="15"  y={TL_Y} width="375" height={BL_Y - TL_Y}
+      <image href="/racing3.png"    x="15"  y={TL_Y} width="375" height={BL_Y - TL_Y}
         clipPath="url(#clip-left)"   preserveAspectRatio="xMidYMid slice" />
-      <image href="/quest1.png"     x="280" y={TL_Y} width="450" height={BL_Y - TL_Y}
-        clipPath="url(#clip-middle)" preserveAspectRatio="xMidYMid slice" />
+      {/* quest1.png moved to HTML layer — see div above SVG */}
       <image href="/overlord3.png"  x="630" y={TL_Y} width="355" height={BL_Y - TL_Y}
         clipPath="url(#clip-right)"  preserveAspectRatio="xMidYMid slice" />
 
@@ -123,5 +155,6 @@ export default function GameFrame() {
         mask="url(#ui-mask)"
       />
     </svg>
+    </>
   );
 }

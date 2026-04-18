@@ -1,13 +1,13 @@
 // SVG viewBox = "0 0 1000 500" mapped to 100vw × 100vh (preserveAspectRatio="none")
 // Frame bottom y=488, bar center y=482 → 96.4%; buttons raised to ~91%
-// DIV1 bottom x=280, DIV2 bottom x=695
-// Panel bottom centers: RACING (15+280)/2=147→14.7vw, QUEST (280+695)/2=487→48.7vw, OVERLORD (695+860)/2=777→77.7vw
+// DIV1 bottom x=260, DIV2 bottom x=695
+// Panel bottom centers: RACING (15+260)/2=137→13.7vw, QUEST (260+695)/2=477→47.8vw, OVERLORD (695+860)/2=777→77.7vw
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 const GAMES = [
   {
     label: "RACING",
-    left:  "14.7vw",
+    left:  "13.7vw",
     width: "14vw",
     accent: "#22c55e",
     glow:   "rgba(34,197,94,0.30)",
@@ -15,7 +15,7 @@ const GAMES = [
   },
   {
     label: "QUEST",
-    left:  "48.7vw",
+    left:  "47.8vw",
     width: "20vw",
     accent: "#38bdf8",
     glow:   "rgba(56,189,248,0.30)",

@@ -285,6 +285,8 @@ export default function ProfileButton() {
   const displayAvatarSrc = selectedChar
     ? (SPECIES.find(s => s.id === selectedChar.speciesId)?.imgs[selectedChar.variantIdx] ?? backendAvatarSrc)
     : backendAvatarSrc;
+  // Portrait (head-only) version for the small profile circle
+  const portraitAvatarSrc = displayAvatarSrc.replace("/avatar/", "/avatar-potrait/");
 
   const getDisplayName = () =>
     localStorage.getItem("hypertek_display_name") ||
@@ -358,13 +360,13 @@ export default function ProfileButton() {
         {(() => {
           const frameColor = PROFILE_FRAMES.find(f => f.id === selectedFrame)?.color ?? "#00D4FF";
           // Numeric avatar diameter
-          const sizeNum = isMobile ? 36 : Math.min(64, Math.max(48, windowH * 0.07));
+          const sizeNum = isMobile ? 38 : Math.min(68, Math.max(50, windowH * 0.075));
           // PNG frame: inner transparent circle ≈ 51% of image width
           // So total frame display size = sizeNum / 0.51
           const framePx  = Math.round(sizeNum / 0.51);
-          const avatarDisplaySize = Math.round(sizeNum * 1.5); // avatar larger than frame hole
+          const avatarDisplaySize = Math.round(sizeNum * 1.6); // portrait fills more of the frame
           const avatarOff = Math.round((framePx - avatarDisplaySize) / 2); // center avatar inside frame
-          const avatarTopOff = avatarOff + Math.round(framePx * 0.08); // shift avatar down
+          const avatarTopOff = avatarOff + Math.round(framePx * 0.04); // slight downward shift
 
           // Level badge — centered pill bar at bottom of frame
           const badgeW  = Math.round(framePx * 0.52);
@@ -385,11 +387,11 @@ export default function ProfileButton() {
                 borderRadius: "50%", overflow: "hidden",
               }}>
                 <img
-                  src={displayAvatarSrc}
+                  src={portraitAvatarSrc}
                   alt="Profile"
                   loading="lazy"
-                  onError={(e) => { e.currentTarget.src = "/avatar/geodians-male.png"; }}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%", display: "block" }}
+                  onError={(e) => { e.currentTarget.src = "/avatar-potrait/geodians-male.png"; }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", display: "block" }}
                 />
               </div>
 

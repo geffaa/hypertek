@@ -170,10 +170,9 @@ function Joystick() {
 /* ══════════════════════════════════════════════════════
    Speed Slider (vertical)
    ══════════════════════════════════════════════════════ */
-function SpeedSlider() {
+function SpeedSlider({ speed, onSpeedChange }) {
   const isMobile = useMobileLandscape();
-  /* 0 = full stop, 1 = full speed  (handle top = full speed) */
-  const [speed, setSpeed]       = useState(0.4);
+  const setSpeed = onSpeedChange;
   const [dragging, setDragging] = useState(false);
   const trackRef = useRef(null);
 
@@ -358,12 +357,12 @@ function SpeedSlider() {
 /* ══════════════════════════════════════════════════════
    Export
    ══════════════════════════════════════════════════════ */
-export default function RacingControls() {
+export default function RacingControls({ speed, onSpeedChange }) {
   return (
     <>
       <style>{CSS}</style>
       <Joystick />
-      <SpeedSlider />
+      <SpeedSlider speed={speed} onSpeedChange={onSpeedChange} />
     </>
   );
 }
