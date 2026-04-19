@@ -196,7 +196,7 @@ function SpaceView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#04010a" }}>
 
       {/* Background image */}
-      <LazyImage src="/overlord1.png" spinnerColor="#f87171" />
+      <LazyImage src="/overlord4.png" spinnerColor="#f87171" />
 
       {/* Stars */}
       {Array.from({ length: 150 }, (_, i) => (
@@ -306,7 +306,7 @@ function WorldView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#060208" }}>
 
       {/* Background image */}
-      <LazyImage src="/overlord2.png" spinnerColor="#f87171" />
+      <LazyImage src="/overlord5.png" spinnerColor="#f87171" />
 
       {/* Dark vignette */}
       <div style={{

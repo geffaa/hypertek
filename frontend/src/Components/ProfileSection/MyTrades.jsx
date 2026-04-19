@@ -384,6 +384,8 @@ export default function MyTrades() {
     padding: "8px 12px", textAlign: "left", whiteSpace: "nowrap",
     borderBottom: "1px solid rgba(0,212,255,0.15)",
     fontFamily: "Orbitron, monospace",
+    background: "rgba(4,10,26,0.97)",
+    position: "sticky", top: 0, zIndex: 10,
   };
 
   const tdStyle = {

@@ -173,6 +173,7 @@ export default function QuestsTab() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [, setTick] = useState(0);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   // Tick every second so elapsed times update live
   useEffect(() => {
@@ -246,28 +247,31 @@ export default function QuestsTab() {
         </div>
       </div>
 
-      {/* ── In-game note + CTA ── */}
-      <div className="mb-5 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3 justify-between"
-        style={{ background: "rgba(180,120,0,0.07)", border: "1px solid rgba(180,120,0,0.18)" }}>
-        <div className="flex items-start gap-3 flex-1 min-w-0">
-          <Gamepad2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-          <div>
-            <p className="text-amber-300/80 text-xs font-semibold">In-Game Feature</p>
-            <p className="text-white/35 text-[11px] leading-snug mt-0.5">
-              Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day.
-              The commission pool is split between the buyer discount, the player reward, and the platform.
-            </p>
-          </div>
-        </div>
-        <span className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap"
-          style={{ background: "rgba(180,120,0,0.35)", border: "1px solid rgba(220,150,0,0.4)", color: "rgba(255,200,80,0.95)", cursor: "default" }}>
-          Want to earn from quests? Play the game →
-        </span>
-      </div>
+      {/* ── 3-card info row ── */}
+      <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
 
-      {/* ── Commission split legend ── */}
-      <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {/* Money quests */}
+        {/* Card 1 — In-Game Feature */}
+        <div className="rounded-xl px-4 py-3 flex flex-col justify-between gap-3"
+          style={{ background: "rgba(180,120,0,0.07)", border: "1px solid rgba(180,120,0,0.18)" }}>
+          <div className="flex items-start gap-3">
+            <Gamepad2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-amber-300/80 text-xs font-semibold">In-Game Feature</p>
+              <p className="text-white/35 text-[11px] leading-snug mt-0.5">
+                Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day. The commission pool is split between the buyer discount, the player reward, and the platform.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowComingSoon(true)}
+            className="self-center mx-auto px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-opacity hover:opacity-80"
+            style={{ background: "rgba(180,120,0,0.35)", border: "1px solid rgba(220,150,0,0.4)", color: "rgba(255,200,80,0.95)" }}
+          >
+            Want to earn from quests? Play the game →
+          </button>
+        </div>
+
+        {/* Card 2 — Money Quests */}
         <div className="rounded-xl px-4 py-3"
           style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.12)" }}>
           <div className="flex items-center gap-2 mb-2">
@@ -287,7 +291,8 @@ export default function QuestsTab() {
             ))}
           </div>
         </div>
-        {/* Resource quests */}
+
+        {/* Card 3 — Resource Quests */}
         <div className="rounded-xl px-4 py-3"
           style={{ background: "rgba(74,222,128,0.04)", border: "1px solid rgba(74,222,128,0.12)" }}>
           <div className="flex items-center gap-2 mb-2">
@@ -306,7 +311,9 @@ export default function QuestsTab() {
               </div>
             ))}
           </div>
+          <p className="text-white/20 text-[9px] mt-2">Planet data will sync once the game goes live.</p>
         </div>
+
       </div>
 
       {/* ── Table ── */}
@@ -405,6 +412,36 @@ export default function QuestsTab() {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* ── Coming Soon modal ── */}
+      {showComingSoon && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
+          onClick={() => setShowComingSoon(false)}
+        >
+          <div
+            className="flex flex-col items-center gap-4 rounded-2xl px-10 py-8 text-center"
+            style={{ background: "#0a1230", border: "1px solid rgba(220,150,0,0.3)", boxShadow: "0 0 40px rgba(180,120,0,0.15)", maxWidth: 340 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Gamepad2 className="w-8 h-8 text-amber-400" />
+            <div>
+              <p className="text-white font-bold text-base mb-1">Coming Soon</p>
+              <p className="text-white/40 text-xs leading-relaxed">
+                The in-game quest feature is currently under development. Stay tuned — you'll be able to earn rewards directly from the game.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowComingSoon(false)}
+              className="px-5 py-2 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
+              style={{ background: "rgba(180,120,0,0.35)", border: "1px solid rgba(220,150,0,0.4)", color: "rgba(255,200,80,0.95)" }}
+            >
+              Got it
+            </button>
+          </div>
         </div>
       )}
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Timer } from "lucide-react";
+import { Menu, X, ChevronDown, LayoutGrid, Package, Layers, Timer, Gamepad2, Store } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -515,12 +515,22 @@ export default function Navbar() {
                           <LayoutGrid className="w-3.5 h-3.5" /> Admin Panel
                         </a>
                       ) : (
-                        <a href="/dashboard" target="_blank" rel="noopener noreferrer"
+                          <Link to="/dashboard"
                           onClick={() => setProfileOpen(false)}
                           className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
                           <LayoutGrid className="w-3.5 h-3.5" /> Dashboard
-                        </a>
+                        </Link>
                       )}
+                      <Link to="/gaming"
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                        <Gamepad2 className="w-3.5 h-3.5" /> Gaming
+                      </Link>
+                      <Link to="/market-place"
+                        onClick={() => setProfileOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
+                        <Store className="w-3.5 h-3.5" /> Marketplace
+                      </Link>
                       <button onClick={() => { setProfileOpen(false); setShowModal(true); }}
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400/80 text-sm font-medium transition-colors hover:bg-red-500/10 hover:text-red-400 border-t border-white/5">
                         <img src={logoutImage} alt="Logout" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(320deg)" }} />
@@ -688,16 +698,28 @@ export default function Navbar() {
                       Dashboard
                     </a>
                   ) : (
-                    <a
-                      href="/dashboard"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to="/dashboard"
                       onClick={closeMobileMenu}
                       className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                     >
                       Dashboard
-                    </a>
+                    </Link>
                   )}
+                  <Link
+                    to="/gaming"
+                    onClick={closeMobileMenu}
+                    className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
+                  >
+                    Gaming
+                  </Link>
+                  <Link
+                    to="/market-place"
+                    onClick={closeMobileMenu}
+                    className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
+                  >
+                    Marketplace
+                  </Link>
                   <div className="flex justify-end mt-2">
                     <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
                       <button

@@ -165,6 +165,7 @@ function Buy1() {
   // If user only has MetaMask (no email wallet), fall back to activeAddress
   const cardBuyerWallet = emailWalletAddress || activeAddress;
 
+  const [activeTab, setActiveTab] = useState("detail");
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -1289,16 +1290,8 @@ function Buy1() {
 
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
-        {/* Back button — navigate to category collection page for better UX */}
         <button
-          onClick={() => {
-            const cat = collection?.parentCategory || item?.parentCategory || collection?.category || item?.category || "";
-            if (cat) {
-              navigate(`/collections/${encodeURIComponent(cat.toLowerCase().trim())}`);
-            } else {
-              navigate("/collections");
-            }
-          }}
+          onClick={() => navigate("/Profile?tab=collectibles")}
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-0.5">
@@ -1307,17 +1300,19 @@ function Buy1() {
           Back to Collections
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
-        {!isOwner && (
-          <Link
-            to="/market-place"
-            className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
-          >
-            Marketplace
-          </Link>
-        )}
-        <span className="pb-3 text-sm font-medium text-white border-b-2 border-blue-500 -mb-px">
+
+        {/* NFT Detail tab */}
+        <button
+          onClick={() => setActiveTab("detail")}
+          className="pb-3 text-sm font-medium transition-colors"
+          style={activeTab === "detail"
+            ? { color: "#fff", borderBottom: "2px solid #3b82f6", marginBottom: "-1px" }
+            : { color: "rgba(255,255,255,0.4)" }}
+        >
           {isOwner ? `${assetType} Detail` : `Buy ${assetType}`}
-        </span>
+        </button>
+
+        {/* Offers tab */}
         <button
           onClick={() => setShowOffers(true)}
           className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
@@ -1333,10 +1328,40 @@ function Buy1() {
             </span>
           )}
         </button>
+
+        {/* Marketplace / Auction / Trade — direct nav links */}
+        <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
+        <Link
+          to="/market-place"
+          className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
+          style={{ borderBottom: "2px solid transparent" }}
+          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(255,255,255,0.2)"}
+          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        >
+          Marketplace
+        </Link>
+        <Link
+          to="/market-place?tab=auctions"
+          className="pb-3 text-sm font-medium text-white/40 hover:text-amber-300 transition-colors"
+          style={{ borderBottom: "2px solid transparent" }}
+          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(251,191,36,0.4)"}
+          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        >
+          Auction
+        </Link>
+        <Link
+          to="/market-place?tab=trades"
+          className="pb-3 text-sm font-medium text-white/40 hover:text-blue-300 transition-colors"
+          style={{ borderBottom: "2px solid transparent" }}
+          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(96,165,250,0.4)"}
+          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        >
+          Trade
+        </Link>
       </div>
 
       {/* ── Main Content ── */}
-      <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
+      {activeTab === "detail" && <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
         {/* Left — Image */}
         <div className="w-full md:w-[320px] lg:w-[380px] shrink-0">
@@ -1536,7 +1561,7 @@ function Buy1() {
           </div>
 
         </div>
-      </div>
+      </div>}
 
       {/* ── Confirmation Modal 1 ── */}
       {isOpen && (
@@ -1805,33 +1830,6 @@ function Buy1() {
           </div>
         </div>
       )}
-
-      {/* ── Other Trading Options Note ── */}
-      <div className="mt-10 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-        style={{ background: "rgba(0,42,168,0.08)", border: "1px solid rgba(0,80,255,0.15)" }}>
-        <div>
-          <p className="text-white/70 text-sm font-medium">Looking for other ways to trade?</p>
-          <p className="text-white/35 text-xs mt-0.5">You can also participate via Auction or direct Trade on the Marketplace.</p>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <Link
-            to="/market-place?tab=auctions"
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-amber-300 transition-all hover:brightness-125"
-            style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)" }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            Auction
-          </Link>
-          <Link
-            to="/market-place?tab=trades"
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-blue-300 transition-all hover:brightness-125"
-            style={{ background: "rgba(96,165,250,0.08)", border: "1px solid rgba(96,165,250,0.2)" }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
-            Trade
-          </Link>
-        </div>
-      </div>
 
       {/* ── Price History Chart ── */}
       <PriceHistory subId={collection?._id} />

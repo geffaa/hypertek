@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { GiCrystalBall, GiGavel, GiCrossedSwords, GiShakingHands, GiTargetArrows, GiTrade } from "react-icons/gi";
+import { MdStorefront } from "react-icons/md";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -13,19 +15,20 @@ const fadeUp = {
 
 // Avatar mapped per feature tab — each tab shows a different character
 const AVATARS = {
-  nfa101: "/avatar/dryads-male.png",
+  nfa101:  "/avatar/dryads-male.png",
   general: "/avatar/fawnus-female.png",
-  auctions: "/avatar/geodians-male.png",
-  quests: "/avatar/lithionites-female.png",
-  hire: "/avatar/mantasquads-male.png",
-  bounty: "/avatar/ophidians-female.png",
+  auctions:"/avatar/geodians-male.png",
+  trades:  "/avatar/geodians-female.png",
+  quests:  "/avatar/lithionites-female.png",
+  hire:    "/avatar/mantasquads-male.png",
+  bounty:  "/avatar/ophidians-female.png",
 };
 
 const FEATURES = [
   {
     key: "nfa101",
     label: "NFAs / NFCs / NFTs",
-    icon: "📚",
+    Icon: GiCrystalBall,
     tagline: "New to Web3 assets? Start here",
     details: [
       "NFAs (Non-Fungible Assets) are Hypertek-issued items with a platform-guaranteed buyback price.",
@@ -37,7 +40,7 @@ const FEATURES = [
   {
     key: "general",
     label: "The Marketplace",
-    icon: "🛒",
+    Icon: MdStorefront,
     tagline: "Buy & sell in-game assets instantly",
     details: [
       "Browse a wide catalog of NFAs, NFCs, and NFTs — skins, weapons, specialists, spaceships, and more.",
@@ -49,7 +52,7 @@ const FEATURES = [
   {
     key: "auctions",
     label: "Auctions",
-    icon: "🔨",
+    Icon: GiGavel,
     tagline: "Compete for exclusive limited-edition items",
     details: [
       "Bid on rare assets that are only available through time-limited auctions.",
@@ -59,13 +62,25 @@ const FEATURES = [
     cta: "View Auctions",
   },
   {
+    key: "trades",
+    label: "Trades",
+    Icon: GiTrade,
+    tagline: "Swap assets peer-to-peer, no middleman",
+    details: [
+      "Propose or accept direct asset trades with other players — fully on-chain.",
+      "Set the terms yourself: choose what you offer and what you want in return.",
+      "Browse open trade offers or post your own to find the perfect deal.",
+    ],
+    cta: "Browse Trades",
+  },
+  {
     key: "quests",
-    label: "Trades / Quests",
-    icon: "⚔️",
-    tagline: "Complete missions, trade assets peer-to-peer",
+    label: "Quests",
+    Icon: GiCrossedSwords,
+    tagline: "Complete missions, earn exclusive rewards",
     details: [
       "Take on quests to earn exclusive rewards and rare in-game assets.",
-      "Propose or accept direct trades with other players — no middleman.",
+      "Each quest has unique objectives — explore, battle, or build your way to victory.",
       "Build your collection strategically through skill, not just spending.",
     ],
     cta: "Explore Quests",
@@ -73,7 +88,7 @@ const FEATURES = [
   {
     key: "hire",
     label: "For Hire",
-    icon: "🤝",
+    Icon: GiShakingHands,
     tagline: "Borrow assets or earn from yours",
     details: [
       "Rent powerful specialists or gear for a single mission without buying outright.",
@@ -85,7 +100,7 @@ const FEATURES = [
   {
     key: "bounty",
     label: "Bounty",
-    icon: "🎯",
+    Icon: GiTargetArrows,
     tagline: "Hunt targets, claim rewards, top the leaderboard",
     details: [
       "Accept bounties posted by other players or the system to earn crypto rewards.",
@@ -155,7 +170,7 @@ function OverviewTab({ onTabChange }) {
                   borderLeft: isActive ? "3px solid rgba(0,100,255,0.8)" : "3px solid transparent",
                 }}
               >
-                <span className="text-lg leading-none">{f.icon}</span>
+                <f.Icon size={20} style={{ color: isActive ? "#60a5fa" : "rgba(255,255,255,0.4)", flexShrink: 0 }} />
                 <div className="hidden sm:block min-w-0">
                   <p
                     className="text-xs font-semibold leading-tight truncate"
@@ -197,7 +212,7 @@ function OverviewTab({ onTabChange }) {
               >
                 {/* Icon + title */}
                 <div className="flex items-center gap-3 mb-1">
-                  <span className="text-3xl">{active.icon}</span>
+                  <active.Icon size={32} style={{ color: "#60a5fa", filter: "drop-shadow(0 0 6px rgba(96,165,250,0.5))" }} />
                   <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-xl">
                     {active.label}
                   </h2>

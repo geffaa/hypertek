@@ -15,7 +15,7 @@ import Maintenance from "./pages/Maintenance";
 import SplashScreen from "./Components/Common/SplashScreen";
 
 const MAINTENANCE_MODE = true;
-const MAINTENANCE_BYPASS_PATH = "/fixbugaccess";
+const MAINTENANCE_BYPASS_PATH = "/testing";
 
 const SPLASH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
 
@@ -269,7 +269,7 @@ function AppWrapper() {
             </Route>
 
             {/* Maintenance bypass — accessible even when maintenance mode is on */}
-            <Route path="/fixbugaccess" element={<Navigate to="/" replace />} />
+            <Route path="/testing" element={<Navigate to="/" replace />} />
 
             {/* not found page  */}
             <Route path="*" element={<NotFound />} />

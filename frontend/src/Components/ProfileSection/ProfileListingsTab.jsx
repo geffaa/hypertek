@@ -148,22 +148,6 @@ function GroupHeaderRow() {
   );
 }
 
-// ── Preview / dummy data ──────────────────────────────────────────────────────
-const PREVIEW_GROUPED = {
-  skins: [
-    { _id: "p1", itemName: "Gen Snake Skin",   activityType: "selling_general",  price: 150, currentOffer: 280, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p2", itemName: "XYZ",              activityType: "selling_auction",  reservePrice: 320, currentBid: 280, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p3", itemName: "ABC",              activityType: "buying_general",   price: 410, currentOffer: 350, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p4", itemName: "123",              activityType: "buying_auction",   reservePrice: 1100, currentBid: 2080, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p5", itemName: "Snake Royal Suit", activityType: "buying_auction",   reservePrice: 750, currentBid: 880, status: "active", createdAt: new Date().toISOString() },
-  ],
-  "military badges": [
-    { _id: "p6", itemName: "Dragon Slayer Elite", activityType: "selling_auction", reservePrice: 3500, currentBid: 7880, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p7", itemName: "UH45HG",              activityType: "selling_general", price: 150, currentOffer: 280,  status: "active", createdAt: new Date().toISOString() },
-    { _id: "p8", itemName: "G4B45BB",             activityType: "buying_auction",  reservePrice: 2500, currentBid: 5580, status: "active", createdAt: new Date().toISOString() },
-    { _id: "p9", itemName: "G45B45RR",            activityType: "buying_auction",  reservePrice: 6500, currentBid: 5980, status: "active", createdAt: new Date().toISOString() },
-  ],
-};
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function ProfileListingsTab({ token }) {
@@ -246,13 +230,6 @@ export default function ProfileListingsTab({ token }) {
     (sum, cat) => sum + (grouped[cat]?.length || 0), 0
   );
 
-  // Use preview data if no real listings
-  const displayGrouped  = totalItems === 0 && !loading ? PREVIEW_GROUPED : grouped;
-  const displayCats     = totalItems === 0 && !loading
-    ? Object.keys(PREVIEW_GROUPED)
-    : categoriesToShow;
-  const isPreview       = totalItems === 0 && !loading;
-
   return (
     <div className="py-4">
       {/* ── Header + Category Dropdown ── */}
@@ -261,9 +238,6 @@ export default function ProfileListingsTab({ token }) {
           <LayoutList className="w-4 h-4 text-white/50" />
           <h3 className="text-white font-semibold text-base">My Listings</h3>
           <span className="text-white/30 text-xs">{totalItems} items</span>
-          {isPreview && (
-            <span className="text-[10px] text-white/20 italic">(preview)</span>
-          )}
         </div>
 
         <div className="relative" ref={dropdownRef}>
@@ -324,13 +298,26 @@ export default function ProfileListingsTab({ token }) {
               style={{ background: "rgba(255,255,255,0.04)" }} />
           ))}
         </div>
+      ) : totalItems === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 rounded-2xl"
+          style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
+          <LayoutList className="w-8 h-8 text-white/15 mb-3" />
+          <p className="text-white/30 text-sm font-medium">No listings yet</p>
+          <p className="text-white/15 text-xs mt-1">Items you list on the marketplace will appear here</p>
+        </div>
       ) : (
         /* ── Table ── */
         <div className="w-full rounded-2xl overflow-x-auto"
           style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
 
-          {/* Group bracket headers */}
-          <div style={{ background: "rgba(0,20,80,0.5)" }}>
+          {/* Sticky group bracket headers */}
+          <div style={{
+            background: "rgba(0,20,80,0.95)",
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            backdropFilter: "blur(8px)",
+          }}>
             <GroupHeaderRow />
 
             {/* Column sub-headers */}
@@ -365,8 +352,8 @@ export default function ProfileListingsTab({ token }) {
           </div>
 
           {/* Category groups */}
-          {displayCats.map((cat) => {
-            const listings  = displayGrouped[cat] || [];
+          {categoriesToShow.map((cat) => {
+            const listings  = grouped[cat] || [];
             const itemMap   = buildItemMap(listings);
             const itemNames = Object.keys(itemMap);
 

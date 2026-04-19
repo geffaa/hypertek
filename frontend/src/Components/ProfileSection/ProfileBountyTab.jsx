@@ -131,8 +131,10 @@ export default function ProfileBountyTab({ wallet, token }) {
           <div
             className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
             style={{
-              background: "rgba(0,20,80,0.5)",
+              background: "rgba(0,20,80,0.95)",
               gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr",
+              position: "sticky", top: 0, zIndex: 10,
+              backdropFilter: "blur(8px)",
             }}
           >
             <span>Bounty No</span>

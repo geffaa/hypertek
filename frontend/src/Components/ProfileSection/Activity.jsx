@@ -210,7 +210,7 @@ function PersonalActivity() {
         {/* Responsive Table */}
         <div className="overflow-x-auto rounded-lg z-10">
           <table className="w-full min-w-[500px] text-white border-collapse">
-            <thead className="bg-[#00134C]">
+            <thead className="bg-[#00134C]" style={{ position: "sticky", top: 0, zIndex: 10 }}>
               <tr className="text-left">
                 {["Name", "Type", "Buyer", "Seller", "Price", "Time"].map((h, i) => (
                   <th

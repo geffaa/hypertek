@@ -338,53 +338,59 @@ const HAZ_COLOR = { LOW:"#22c55e", MEDIUM:"#facc15", HIGH:"#f87171" };
 // Positions derived from image grid: center X≈50.1%, column interval≈2.88%vw, row interval≈6.12%vh
 const LOCATIONS = [
   // ── Left cluster ──────────────────────────────────────────
-  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"9.8%",  top:"24%",   desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
-  { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"24.2%", top:"12%",   desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
-  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"18.5%", top:"24%",   desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
-  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"32.9%", top:"18%",   desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
-  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"38.6%", top:"24%",   desc:"Hydroponic farming complex. Primary food source for western sectors." },
-  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"35.7%", top:"35.9%", desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
-  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"38.6%", top:"41.8%", desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
-  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"12.7%", top:"47.8%", desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
-  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"21.4%", top:"53.7%", desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
-  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"21.4%", top:"59.6%", desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
-  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"30%",   top:"65.5%", desc:"Sector command authority. All major coalition operations coordinated here." },
-  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"18.5%", top:"71.5%", desc:"Traffic control and cargo routing for southern transit lanes." },
-  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"12.7%", top:"77.4%", desc:"Research station studying gravitational anomalies near the galactic core boundary." },
-  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"27.1%", top:"83.4%", desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
-  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"18.5%", top:"83.4%", desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
-  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"7%",    top:"89.3%", desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
+  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"15%",  top:"23,5%",   desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
+  { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"20%", top:"17,5%",   desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
+  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"24%", top:"35%",   desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
+  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%", top:"20%",   desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
+  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"42.5%", top:"23%",   desc:"Hydroponic farming complex. Primary food source for western sectors." },
+  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39%", top:"30%", desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
+  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"41.5%", top:"38%", desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
+  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"11%", top:"42.5%", desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
+  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"17.5%", top:"49%", desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
+  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"30%", top:"49%", desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
+  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"36%",   top:"55%", desc:"Sector command authority. All major coalition operations coordinated here." },
+  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"24%", top:"62%", desc:"Traffic control and cargo routing for southern transit lanes." },
+  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"14.5%", top:"69%", desc:"Research station studying gravitational anomalies near the galactic core boundary." },
+  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"31%", top:"71%", desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
+  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"24.5%", top:"79%", desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
+  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"10%",    top:"82%", desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
   // ── Center ────────────────────────────────────────────────
-  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"50.1%", top:"30%",   desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
-  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"55.9%", top:"35.9%", desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
-  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"49%",   top:"71.5%", desc:"Frontier exploration base. Marks the edge of the charted transit network." },
+  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"58.5%", top:"31%",   desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
+  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"71.5%", top:"29%", desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
+  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"58%",   top:"68.5%", desc:"Frontier exploration base. Marks the edge of the charted transit network." },
   // ── Right cluster ─────────────────────────────────────────
-  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"87.5%", top:"12%",   desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
-  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"70.3%", top:"18%",   desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
-  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"64.5%", top:"24%",   desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
-  { id:"mco",   name:"TRN-562",      type:"Mining Colony",       coords:"T11·R10", atm:"VACUUM",     hazard:"HIGH",   left:"79%",   top:"35.9%", desc:"Deep-core drilling operation. Rare mineral extraction. Seismic activity: elevated." },
-  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"64.5%", top:"41.8%", desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
-  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"70.3%", top:"47.8%", desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
-  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"62.9%", top:"53.7%", desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
-  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"70.3%", top:"65.5%", desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
-  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"79%",   top:"65.5%", desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
-  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"64.5%", top:"71.5%", desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
-  { id:"adv",   name:"ZRE3-QW",      type:"Advanced Research",   coords:"T04·R05", atm:"VACUUM",     hazard:"MEDIUM", left:"64.5%", top:"77.4%", desc:"Black-site research installation. Classified operations. Access restricted." },
-  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"70.3%", top:"83.4%", desc:"Cryo-comet resource extraction. Primary water source for eastern stations." },
-  { id:"surv",  name:"TQX-115",      type:"Survey Station",      coords:"T03·R10", atm:"VACUUM",     hazard:"LOW",    left:"79%",   top:"83.4%", desc:"Cartographic post. Continuously updates the regional star map." },
-  { id:"pros",  name:"TKM-689",      type:"Prospecting Post",    coords:"T03·R13", atm:"VACUUM",     hazard:"MEDIUM", left:"87.5%", top:"83.4%", desc:"Mineral survey base. Reports high concentrations of neutronium-class deposits." },
+  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"91%", top:"20%",   desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
+  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"63%", top:"23%",   desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
+  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"79%", top:"17.5%",   desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
+  { id:"mco",   name:"TRN-562",      type:"Mining Colony",       coords:"T11·R10", atm:"VACUUM",     hazard:"HIGH",   left:"91%",   top:"35.9%", desc:"Deep-core drilling operation. Rare mineral extraction. Seismic activity: elevated." },
+  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"82.5%", top:"37%", desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
+  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"76.5%", top:"45%", desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
+  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"65%", top:"43%", desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
+  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"84%", top:"52%", desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
+  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"89.5%",   top:"51%", desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
+  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"69%", desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
+  { id:"adv",   name:"ZRE3-QW",      type:"Advanced Research",   coords:"T04·R05", atm:"VACUUM",     hazard:"MEDIUM", left:"76%", top:"56%", desc:"Black-site research installation. Classified operations. Access restricted." },
+  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"62.3%", top:"79%", desc:"Cryo-comet resource extraction. Primary water source for eastern stations." },
+  { id:"surv",  name:"TQX-115",      type:"Survey Station",      coords:"T03·R10", atm:"VACUUM",     hazard:"LOW",    left:"75%",   top:"81%", desc:"Cartographic post. Continuously updates the regional star map." },
+  { id:"pros",  name:"TKM-689",      type:"Prospecting Post",    coords:"T03·R13", atm:"VACUUM",     hazard:"MEDIUM", left:"87%", top:"82.5%", desc:"Mineral survey base. Reports high concentrations of neutronium-class deposits." },
 ];
 
 /* ── Planet detail panel ──────────────────────────────────── */
 function PlanetDetail({ loc, onClose }) {
   const ac = ATM_COLOR[loc.atm]    || "#94a3b8";
   const hc = HAZ_COLOR[loc.hazard] || "#94a3b8";
+
+  // Smart position: opposite corner from the clicked node
+  const l = parseFloat(loc.left);
+  const t = parseFloat(loc.top);
+  const hPos = l >= 50 ? { left: "2%" }  : { right: "2%" };
+  const vPos = t  > 58 ? { top: "12%" }  : { bottom: "10%" };
+
   return (
     <div style={{
       position: "absolute",
-      bottom: "8%", left: "50%",
-      transform: "translateX(-50%)",
-      width: "clamp(300px, 48vw, 560px)",
+      ...hPos, ...vPos,
+      width: "min(230px, 33%)",
       background: "rgba(2,6,22,0.97)",
       border: "1px solid rgba(56,189,248,0.38)",
       borderRadius: 10,
@@ -396,8 +402,8 @@ function PlanetDetail({ loc, onClose }) {
     }}>
       <style>{`
         @keyframes locDetailIn {
-          from { opacity:0; transform:translateX(-50%) translateY(10px); }
-          to   { opacity:1; transform:translateX(-50%) translateY(0); }
+          from { opacity:0; transform: scale(0.94); }
+          to   { opacity:1; transform: scale(1); }
         }
       `}</style>
 
@@ -447,41 +453,70 @@ function StarMapOverlay({ onClose }) {
   const toggle = (loc) => setSelected(s => s?.id === loc.id ? null : loc);
 
   return (
-    <div style={{ position:"absolute", inset:0, zIndex:75, background:"rgba(0,3,15,0.95)", backdropFilter:"blur(6px)" }}>
+    <div style={{
+      position:"absolute", inset:0, zIndex:75,
+      background:"rgba(0,3,15,0.82)", backdropFilter:"blur(5px)",
+      display:"flex", alignItems:"center", justifyContent:"center",
+    }}>
       <style>{`
         @keyframes dotPulse {
           0%,100% { box-shadow: 0 0 5px 1px rgba(56,189,248,0.35); }
           50%      { box-shadow: 0 0 12px 3px rgba(56,189,248,0.75); }
         }
-        @keyframes mapIn { from { opacity:0; transform:scale(0.97); } to { opacity:1; transform:scale(1); } }
-        .map-dot { transition: width 0.15s, height 0.15s, box-shadow 0.15s; }
-        .map-dot:hover { filter: brightness(1.5); }
+        @keyframes mapPopIn {
+          from { opacity:0; transform:scale(0.95); }
+          to   { opacity:1; transform:scale(1); }
+        }
+        .map-dot { transition: width 0.15s, height 0.15s; }
+        .map-dot:hover { filter: brightness(1.6); }
       `}</style>
 
       {/* Backdrop click to close */}
       <div style={{ position:"absolute", inset:0 }} onClick={() => { setSelected(null); onClose(); }} />
 
-      {/* Image + hotspots */}
-      <div style={{ position:"relative", width:"100%", height:"100%", animation:"mapIn 0.28s ease both" }}>
-        <img src="/quest-content.png" alt="star map" style={{ width:"100%", height:"100%", objectFit:"cover", pointerEvents:"none" }} />
-        <div style={{ position:"absolute", inset:0, background:"rgba(0,4,18,0.15)", pointerEvents:"none" }} />
+      {/* ── Popup card — 16:9, fits within viewport with margins ── */}
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: "relative",
+          width: "min(90vw, calc(78vh * 1.778))",
+          aspectRatio: "16/9",
+          background: "#000",
+          border: "1.5px solid rgba(56,189,248,0.45)",
+          borderRadius: 10,
+          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(56,189,248,0.1)",
+          overflow: "hidden",
+          animation: "mapPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
+          zIndex: 76,
+        }}
+      >
+        {/* Map image — fills popup exactly (same 16:9 ratio) */}
+        <img
+          src="/quest-content.png"
+          alt="star map"
+          style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"fill", pointerEvents:"none" }}
+        />
 
+        {/* Subtle overlay */}
+        <div style={{ position:"absolute", inset:0, background:"rgba(0,4,18,0.1)", pointerEvents:"none" }} />
+
+        {/* Hotspot dots — % relative to popup = % relative to image */}
         {LOCATIONS.map(loc => {
           const isSel = selected?.id === loc.id;
           return (
             <button
               key={loc.id}
               className="map-dot"
-              onClick={(e) => { e.stopPropagation(); toggle(loc); }}
+              onClick={() => toggle(loc)}
               title={loc.name}
               style={{
                 position:"absolute", left:loc.left, top:loc.top,
                 transform:"translate(-50%,-50%)",
-                width: isSel ? 15 : 10, height: isSel ? 15 : 10,
+                width: isSel ? 14 : 9, height: isSel ? 14 : 9,
                 borderRadius:"50%",
-                background: isSel ? "#38bdf8" : "rgba(56,189,248,0.6)",
+                background: isSel ? "#38bdf8" : "rgba(56,189,248,0.65)",
                 border:`1.5px solid ${isSel ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
-                boxShadow: isSel ? "0 0 18px 5px rgba(56,189,248,0.9)" : undefined,
+                boxShadow: isSel ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
                 animation: isSel ? "none" : "dotPulse 2.4s ease-in-out infinite",
                 cursor:"pointer", padding:0, zIndex:80,
               }}
@@ -489,18 +524,38 @@ function StarMapOverlay({ onClose }) {
           );
         })}
 
+        {/* Detail panel — inside popup */}
         {selected && <PlanetDetail loc={selected} onClose={() => setSelected(null)} />}
-      </div>
 
-      {/* Title */}
-      <div style={{ position:"absolute", top:"3%", left:"50%", transform:"translateX(-50%)", fontFamily:"Orbitron,sans-serif", fontSize:"clamp(8px,0.9vw,11px)", fontWeight:"bold", letterSpacing:"0.3em", color:"rgba(56,189,248,0.6)", textShadow:"0 0 14px rgba(56,189,248,0.4)", pointerEvents:"none", zIndex:90, whiteSpace:"nowrap" }}>
-        INTERACTIVE STAR MAP — IN-GAME CONTENT
+        {/* Top bar: title + BACK button — all in one flex row */}
+        <div style={{
+          position:"absolute", top:0, left:0, right:0,
+          padding:"5px 8px",
+          display:"flex", justifyContent:"space-between", alignItems:"center",
+          background:"rgba(0,6,22,0.75)", backdropFilter:"blur(6px)",
+          borderBottom:"1px solid rgba(56,189,248,0.22)",
+          zIndex:90,
+        }}>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:"clamp(6px,0.7vw,9px)", fontWeight:"bold", letterSpacing:"0.22em", color:"rgba(56,189,248,0.7)", whiteSpace:"nowrap", pointerEvents:"none" }}>
+            ◈ STAR MAP — IN-GAME CONTENT
+          </div>
+          <button
+            onClick={onClose}
+            style={{
+              flexShrink: 0,
+              marginLeft: 8,
+              padding:"3px 10px",
+              background:"rgba(0,15,35,0.9)",
+              border:"1px solid rgba(56,189,248,0.55)",
+              borderRadius:3,
+              clipPath:"polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
+              fontFamily:"Orbitron,sans-serif", fontSize:"clamp(6px,0.65vw,8px)", fontWeight:"bold",
+              letterSpacing:"0.12em", color:"#7dd3fc",
+              cursor:"pointer", whiteSpace:"nowrap",
+            }}
+          >✕ BACK</button>
+        </div>
       </div>
-
-      {/* Close button */}
-      <button onClick={onClose} style={{ position:"absolute", top:"2.5%", right:"2%", zIndex:90, padding:"7px 16px", background:"rgba(0,10,30,0.88)", border:"1.5px solid rgba(56,189,248,0.5)", borderRadius:3, clipPath:"polygon(0% 0%,calc(100% - 8px) 0%,100% 100%,8px 100%)", fontFamily:"Orbitron,sans-serif", fontSize:9, fontWeight:"bold", letterSpacing:"0.15em", color:"#7dd3fc", cursor:"pointer", whiteSpace:"nowrap" }}>
-        ✕ CLOSE MAP
-      </button>
     </div>
   );
 }

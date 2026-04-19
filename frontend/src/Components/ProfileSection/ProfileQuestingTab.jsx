@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
-import { Swords, Gamepad2, Clock, Zap, Package, ShieldCheck } from "lucide-react";
+import { Swords, Clock, Zap, Package, ShieldCheck } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
+
+const QUEST_TIERS = {
+  money: [
+    { waitHours: 4,  buyerSavePercent: 3, playerSharePercent: 4,   platformSharePercent: 4   },
+    { waitHours: 12, buyerSavePercent: 4, playerSharePercent: 3.5, platformSharePercent: 3.5 },
+    { waitHours: 24, buyerSavePercent: 5, playerSharePercent: 3,   platformSharePercent: 3   },
+  ],
+  resources: [
+    { waitHours: 4,  buyerSavePercent: 8,  playerSharePercent: 6, platformSharePercent: 6 },
+    { waitHours: 12, buyerSavePercent: 10, playerSharePercent: 5, platformSharePercent: 5 },
+    { waitHours: 24, buyerSavePercent: 12, playerSharePercent: 4, platformSharePercent: 4 },
+  ],
+};
 
 const MAX_DAILY = 5;
 
@@ -177,34 +190,72 @@ export default function ProfileQuestingTab({ wallet, token }) {
         </div>
       </div>
 
-      {/* ── Daily limit bar ── */}
-      {dailyStats && (
-        <div className="mb-4 rounded-xl px-4 py-3"
-          style={{ background: "rgba(0,15,40,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
-          <DailyLimitBar
-            acceptedToday={dailyStats.acceptedToday}
-            remaining={dailyStats.remaining}
-            limitReached={dailyStats.limitReached}
-          />
-        </div>
-      )}
+      {/* ── 3-card info row ── */}
+      <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
 
-      {/* ── In-game note ── */}
-      <div className="mb-5 rounded-xl px-4 py-3 flex items-start gap-3"
-        style={{ background: "rgba(180,120,0,0.06)", border: "1px solid rgba(180,120,0,0.15)" }}>
-        <Gamepad2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-        <div>
-          <p className="text-amber-300/70 text-xs font-semibold mb-0.5">Commission Split Logic</p>
-          <p className="text-amber-300/50 text-[11px] leading-snug">
-            <span className="text-amber-300/70 font-semibold">Money quests (11% pool):</span>{" "}
-            4h → Buyer −3%, Player +4%, Platform +4% · 12h → Buyer −4%, Player +3.5%, Platform +3.5% · 24h → Buyer −5%, Player +3%, Platform +3%
-          </p>
-          <p className="text-green-300/50 text-[11px] leading-snug mt-0.5">
-            <span className="text-green-300/70 font-semibold">Resource quests (20% pool):</span>{" "}
-            4h → Buyer −8%, Player +6%, Platform +6% · 12h → Buyer −10%, Player +5%, Platform +5% · 24h → Buyer −12%, Player +4%, Platform +4%
-          </p>
-          <p className="text-white/25 text-[10px] mt-1">Planet data will sync once the game goes live.</p>
+        {/* Card 1 — Daily Quest Slots */}
+        <div className="rounded-xl px-4 py-3"
+          style={{ background: "rgba(0,15,40,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          {dailyStats ? (
+            <DailyLimitBar
+              acceptedToday={dailyStats.acceptedToday}
+              remaining={dailyStats.remaining}
+              limitReached={dailyStats.limitReached}
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-white/20 shrink-0" />
+              <div>
+                <p className="text-white/40 text-[10px] font-semibold">Daily Quest Slots</p>
+                <p className="text-white/20 text-[10px] mt-0.5">5 slots per day · resets midnight UTC</p>
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* Card 2 — Money Quests */}
+        <div className="rounded-xl px-4 py-3"
+          style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.12)" }}>
+          <div className="flex items-center gap-2 mb-2">
+            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <span className="text-amber-300/80 text-xs font-semibold">Money Quests (11% pool)</span>
+          </div>
+          <div className="space-y-1">
+            {QUEST_TIERS.money.map((t) => (
+              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
+                <span className="text-white/30 w-6">{t.waitHours}h</span>
+                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
+                <span className="text-white/20">·</span>
+                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
+                <span className="text-white/20">·</span>
+                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Card 3 — Resource Quests */}
+        <div className="rounded-xl px-4 py-3"
+          style={{ background: "rgba(74,222,128,0.04)", border: "1px solid rgba(74,222,128,0.12)" }}>
+          <div className="flex items-center gap-2 mb-2">
+            <Package className="w-3.5 h-3.5 text-green-400" />
+            <span className="text-green-300/80 text-xs font-semibold">Resource Quests (20% pool)</span>
+          </div>
+          <div className="space-y-1">
+            {QUEST_TIERS.resources.map((t) => (
+              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
+                <span className="text-white/30 w-6">{t.waitHours}h</span>
+                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
+                <span className="text-white/20">·</span>
+                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
+                <span className="text-white/20">·</span>
+                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-white/20 text-[9px] mt-2">Planet data will sync once the game goes live.</p>
+        </div>
+
       </div>
 
       {/* ── Loading ── */}
@@ -229,8 +280,10 @@ export default function ProfileQuestingTab({ wallet, token }) {
           <div
             className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
             style={{
-              background: "rgba(0,20,80,0.5)",
+              background: "rgba(0,20,80,0.95)",
               gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
+              position: "sticky", top: 0, zIndex: 10,
+              backdropFilter: "blur(8px)",
             }}
           >
             <span>Quest No</span>
