@@ -380,11 +380,19 @@ function PlanetDetail({ loc, onClose }) {
   const ac = ATM_COLOR[loc.atm]    || "#94a3b8";
   const hc = HAZ_COLOR[loc.hazard] || "#94a3b8";
 
-  // Smart position: opposite corner from the clicked node
+  // Anchor popup near the clicked node — same approach as ships-level room popup
   const l = parseFloat(loc.left);
   const t = parseFloat(loc.top);
-  const hPos = l >= 50 ? { left: "2%" }  : { right: "2%" };
-  const vPos = t  > 58 ? { top: "12%" }  : { bottom: "10%" };
+  // Horizontal: if node is in right half, popup appears to its LEFT (right edge near node)
+  const toLeft = l > 52;
+  const hPos = toLeft
+    ? { right: `${Math.max(1, 100 - l + 1)}%` }
+    : { left:  `${Math.min(66, l + 2)}%` };
+  // Vertical: if node is in bottom 45%, popup rises above it; otherwise drops below
+  const toAbove = t > 55;
+  const vPos = toAbove
+    ? { bottom: `${Math.max(2, 100 - t + 1)}%` }
+    : { top:    `${Math.min(55, t + 2)}%` };
 
   return (
     <div style={{
@@ -442,6 +450,89 @@ function PlanetDetail({ loc, onClose }) {
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:"#f87171", letterSpacing:"0.12em", marginBottom:3 }}>QUEST INFORMATION — CONTENT LOCKED</div>
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"rgba(248,113,113,0.5)", letterSpacing:"0.05em", lineHeight:1.5 }}>Full mission data, objectives &amp; rewards available in the complete game release.</div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Video overlay ────────────────────────────────────────── */
+function VideoOverlay({ onClose }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "absolute", inset: 0, zIndex: 80,
+        background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <style>{`
+        @keyframes videoPopIn {
+          from { opacity:0; transform:scale(0.93); }
+          to   { opacity:1; transform:scale(1); }
+        }
+      `}</style>
+
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: "relative",
+          width: "min(88vw, calc(72vh * 1.778))",
+          aspectRatio: "16/9",
+          background: "#000",
+          border: "1.5px solid rgba(99,102,241,0.55)",
+          borderRadius: 10,
+          boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(99,102,241,0.15)",
+          overflow: "hidden",
+          animation: "videoPopIn 0.25s cubic-bezier(0.16,1,0.3,1) both",
+        }}
+      >
+        {/* Video */}
+        <video
+          src="/video/quest_video.mp4"
+          autoPlay
+          controls
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+
+        {/* Top bar */}
+        <div style={{
+          position: "absolute", top: 0, left: 0, right: 0,
+          padding: "5px 8px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          background: "linear-gradient(to bottom, rgba(0,6,22,0.85), transparent)",
+          pointerEvents: "none",
+          zIndex: 5,
+        }}>
+          <div style={{
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(6px,0.7vw,9px)", fontWeight: "bold",
+            letterSpacing: "0.22em", color: "rgba(165,180,252,0.8)",
+            whiteSpace: "nowrap",
+          }}>
+            ▶ VIDEO CONTENT
+          </div>
+        </div>
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute", top: 6, right: 8,
+            zIndex: 10,
+            padding: "3px 10px",
+            background: "rgba(0,15,35,0.9)",
+            border: "1px solid rgba(99,102,241,0.55)",
+            borderRadius: 3,
+            clipPath: "polygon(0% 0%,calc(100% - 5px) 0%,100% 100%,5px 100%)",
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(6px,0.65vw,8px)", fontWeight: "bold",
+            letterSpacing: "0.12em", color: "#a5b4fc",
+            cursor: "pointer", whiteSpace: "nowrap",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(99,102,241,0.25)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,15,35,0.9)"; }}
+        >✕ CLOSE</button>
       </div>
     </div>
   );
@@ -564,7 +655,8 @@ function StarMapOverlay({ onClose }) {
    SPACE VIEW
    ══════════════════════════════════════════════════════════════════ */
 function SpaceView() {
-  const [mapOpen, setMapOpen] = useState(false);
+  const [mapOpen,   setMapOpen]   = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#020612" }}>
 
@@ -659,30 +751,56 @@ function SpaceView() {
       {/* Action buttons — right, no Kneel in space */}
       <ActionButtons includeKneel={false} />
 
-      {/* IN-GAME CONTENT button */}
-      <button
-        onClick={() => setMapOpen(true)}
-        style={{
-          position: "absolute", top: "22%", left: "50%",
-          transform: "translateX(-50%)",
-          padding: "9px 24px", zIndex: 30,
-          background: "rgba(0,12,32,0.88)",
-          border: "1.5px solid rgba(56,189,248,0.6)",
-          borderRadius: 3,
-          clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
-          fontFamily: "Orbitron,sans-serif",
-          fontSize: "clamp(8px,0.9vw,11px)", fontWeight: "bold",
-          letterSpacing: "0.18em", color: "#7dd3fc",
-          textShadow: "0 0 10px rgba(56,189,248,0.6)",
-          boxShadow: "0 0 20px rgba(56,189,248,0.2)",
-          cursor: "pointer", whiteSpace: "nowrap",
-          transition: "background 0.2s, box-shadow 0.2s",
-        }}
-        onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(56,189,248,0.4)"; }}
-        onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,12,32,0.88)";    e.currentTarget.style.boxShadow = "0 0 20px rgba(56,189,248,0.2)"; }}
-      >◈ IN-GAME CONTENT</button>
+      {/* IN-GAME CONTENT + VIDEO CONTENT buttons */}
+      <div style={{
+        position: "absolute", top: "22%", left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex", gap: 8, zIndex: 30,
+        alignItems: "center",
+      }}>
+        <button
+          onClick={() => setMapOpen(true)}
+          style={{
+            padding: "9px 20px",
+            background: "rgba(0,12,32,0.88)",
+            border: "1.5px solid rgba(56,189,248,0.6)",
+            borderRadius: 3,
+            clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(7px,0.85vw,10px)", fontWeight: "bold",
+            letterSpacing: "0.18em", color: "#7dd3fc",
+            textShadow: "0 0 10px rgba(56,189,248,0.6)",
+            boxShadow: "0 0 20px rgba(56,189,248,0.2)",
+            cursor: "pointer", whiteSpace: "nowrap",
+            transition: "background 0.2s, box-shadow 0.2s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(56,189,248,0.4)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,12,32,0.88)";    e.currentTarget.style.boxShadow = "0 0 20px rgba(56,189,248,0.2)"; }}
+        >◈ IN-GAME CONTENT</button>
 
-      {mapOpen && <StarMapOverlay onClose={() => setMapOpen(false)} />}
+        <button
+          onClick={() => setVideoOpen(true)}
+          style={{
+            padding: "9px 20px",
+            background: "rgba(0,12,32,0.88)",
+            border: "1.5px solid rgba(99,102,241,0.65)",
+            borderRadius: 3,
+            clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+            fontFamily: "Orbitron,sans-serif",
+            fontSize: "clamp(7px,0.85vw,10px)", fontWeight: "bold",
+            letterSpacing: "0.18em", color: "#a5b4fc",
+            textShadow: "0 0 10px rgba(99,102,241,0.5)",
+            boxShadow: "0 0 20px rgba(99,102,241,0.2)",
+            cursor: "pointer", whiteSpace: "nowrap",
+            transition: "background 0.2s, box-shadow 0.2s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(99,102,241,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(99,102,241,0.4)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,12,32,0.88)";    e.currentTarget.style.boxShadow = "0 0 20px rgba(99,102,241,0.2)"; }}
+        >▶ VIDEO CONTENT</button>
+      </div>
+
+      {mapOpen   && <StarMapOverlay  onClose={() => setMapOpen(false)} />}
+      {videoOpen && <VideoOverlay    onClose={() => setVideoOpen(false)} />}
     </div>
   );
 }

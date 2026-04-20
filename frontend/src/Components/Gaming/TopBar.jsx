@@ -147,12 +147,11 @@ const ROOM_DETAILS = {
 };
 
 const MARKET_ITEMS = [
-  { label: "Overview", tab: "overview" },
-  { label: "Auction", tab: "auctions" },
-  { label: "Quests", tab: "quests" },
-  { label: "For Hire", tab: "hire" },
-  { label: "Bounty", tab: "bounty" },
-  { label: "My Market", tab: "mymarket" },
+  { label: "Overview",    tab: "overview"  },
+  { label: "Marketplace", tab: "general"   },
+  { label: "Auction",     tab: "auctions"  },
+  { label: "Trade",       tab: "trades"    },
+  { label: "Quest",       tab: "quests"    },
 ];
 
 const CSS = `
@@ -914,7 +913,7 @@ export default function TopBar({ activeGame }) {
               zIndex: 100,
               overflow: "hidden",
             }}>
-              {MARKET_ITEMS.map((item, i) => (
+              {MARKET_ITEMS.map((item) => (
                 <div
                   key={item.tab}
                   className="market-dropdown-item"
@@ -926,12 +925,29 @@ export default function TopBar({ activeGame }) {
                     fontWeight: "bold",
                     letterSpacing: "0.12em",
                     color: "#ffffff",
-                    borderBottom: i < MARKET_ITEMS.length - 1 ? "1px solid rgba(0,212,255,0.08)" : "none",
+                    borderBottom: "1px solid rgba(0,212,255,0.08)",
                   }}
                 >
                   {item.label}
                 </div>
               ))}
+
+              {/* My Profile — separated at bottom */}
+              <div style={{ borderTop: "1px solid rgba(0,212,255,0.25)", margin: "2px 0" }} />
+              <div
+                className="market-dropdown-item"
+                onClick={() => { setMarketOpen(false); navigate("/Profile"); }}
+                style={{
+                  padding: "9px 16px",
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: "clamp(10px,0.85vw,13px)",
+                  fontWeight: "bold",
+                  letterSpacing: "0.12em",
+                  color: "rgba(0,212,255,0.85)",
+                }}
+              >
+                My Profile
+              </div>
             </div>
           )}
         </div>

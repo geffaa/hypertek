@@ -1,5 +1,9 @@
 // components/common/header.jsx
 import { FiSearch, FiMenu, FiUser, FiGrid, FiLogOut } from "react-icons/fi";
+import { ChevronDown, LayoutGrid, Gamepad2, Store } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import logoutImage from "../../assets/images/login/logout.png";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -173,14 +177,16 @@ const Header = ({ onMenuClick }) => {
         <div className="relative flex-shrink-0" ref={profileMenuRef}>
           <button
             onClick={() => setShowProfileMenu((v) => !v)}
-            className="flex items-center gap-2 cursor-pointer focus:outline-none"
+            className="flex items-center gap-2 h-10 px-3 rounded-xl transition-all duration-200 cursor-pointer focus:outline-none"
+            style={{
+              background: showProfileMenu ? "rgba(0,42,168,0.7)" : "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.12)"
+            }}
           >
-            {displayName && (
-              <span className="hidden md:block text-white/70 text-sm font-medium max-w-[120px] truncate">
-                {displayName.split(" ")[0]}
-              </span>
-            )}
-            <div className="w-[38px] h-[38px] md:w-[44px] md:h-[44px] rounded-full md:rounded-3xl overflow-hidden flex items-center justify-center shadow-lg">
+            <div
+              className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0 overflow-hidden"
+              style={{ background: "rgba(0,42,168,0.8)" }}
+            >
               {userData?.Avatar && !imageError ? (
                 <img
                   src={`${BACKEND_BASE_URL}${userData.Avatar}`}
@@ -189,20 +195,19 @@ const Header = ({ onMenuClick }) => {
                   onError={handleImageError}
                 />
               ) : (
-                <div
-                  className="w-full h-full flex items-center justify-center text-white font-bold text-sm"
-                  style={{ background: "linear-gradient(135deg, #002AA8 0%, #4F46E5 100%)" }}
-                >
-                  {initials}
-                </div>
+                (user?.FullName || user?.name || user?.UserName || "U")[0].toUpperCase()
               )}
             </div>
+            <span className="text-white text-sm font-medium max-w-[80px] truncate hidden lg:block">
+              {displayName.split(" ")[0] || "Profile"}
+            </span>
+            <ChevronDown className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${showProfileMenu ? "rotate-180" : ""}`} />
           </button>
 
           {/* Dropdown menu */}
           {showProfileMenu && (
             <div
-              className="absolute right-0 mt-2 w-52 rounded-xl overflow-hidden shadow-2xl z-50"
+              className="absolute right-0 mt-2 w-48 rounded-xl shadow-2xl overflow-hidden z-50"
               style={{ background: "rgba(0,15,60,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(16px)" }}
             >
               {/* User info header */}
@@ -213,23 +218,46 @@ const Header = ({ onMenuClick }) => {
               <Link
                 to="/Profile"
                 onClick={() => setShowProfileMenu(false)}
-                className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white"
               >
-                <FiUser size={14} /> My Profile
+                <FontAwesomeIcon icon={faUser} className="w-3.5 h-3.5" /> My Profile
+              </Link>
+              {user?.Role === "admin" ? (
+                <a
+                  href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
+                  onClick={() => setShowProfileMenu(false)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5"
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" /> Admin Panel
+                </a>
+              ) : (
+                <Link
+                  to="/dashboard"
+                  onClick={() => setShowProfileMenu(false)}
+                  className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5"
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" /> Dashboard
+                </Link>
+              )}
+              <Link
+                to="/gaming"
+                onClick={() => setShowProfileMenu(false)}
+                className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5"
+              >
+                <Gamepad2 className="w-3.5 h-3.5" /> Gaming
               </Link>
               <Link
-                to="/dashboard"
+                to="/market-place"
                 onClick={() => setShowProfileMenu(false)}
-                className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5"
               >
-                <FiGrid size={14} /> Dashboard
+                <Store className="w-3.5 h-3.5" /> Marketplace
               </Link>
-              <div className="h-px bg-white/8" />
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-400/80 hover:text-red-300 hover:bg-red-500/5 transition-colors"
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400/80 text-sm font-medium transition-colors hover:bg-red-500/10 hover:text-red-400 border-t border-white/5"
               >
-                <FiLogOut size={14} /> Sign Out
+                <img src={logoutImage} alt="Logout" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(320deg)" }} /> Sign Out
               </button>
             </div>
           )}

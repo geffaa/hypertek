@@ -165,7 +165,7 @@ function Buy1() {
   // If user only has MetaMask (no email wallet), fall back to activeAddress
   const cardBuyerWallet = emailWalletAddress || activeAddress;
 
-  const [activeTab, setActiveTab] = useState("detail");
+  const [activeTab, setActiveTab] = useState("marketplace");
   const [isOwner, setIsOwner] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -181,6 +181,18 @@ function Buy1() {
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
   const [stripeModal, setStripeModal] = useState(null); // { clientSecret, amount }
   const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
+
+  // ── Auction tab data ──
+  const [auctionInfo, setAuctionInfo]                   = useState(null);
+  const [auctionInfoLoading, setAuctionInfoLoading]     = useState(false);
+  const [auctionFetched, setAuctionFetched]             = useState(false);
+  const [bidAmount, setBidAmount]                       = useState("");
+  const [bidLoading, setBidLoading]                     = useState(false);
+
+  // ── Trade tab data ──
+  const [tradeListings, setTradeListings]               = useState([]);
+  const [tradeListingsLoading, setTradeListingsLoading] = useState(false);
+  const [tradeFetched, setTradeFetched]                 = useState(false);
 
   // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
@@ -391,6 +403,62 @@ function Buy1() {
     } catch (err) {
       console.error("❌ Error checking listing:", err);
     }
+  };
+
+  /* ================== FETCH AUCTION FOR THIS ITEM ================== */
+  // Uses seller/:wallet endpoint then filters client-side by subCollectionId,
+  // because the GET /auction list endpoint has no subCollectionId query param.
+  const fetchAuctionInfo = async () => {
+    if (auctionFetched) return;
+    setAuctionInfoLoading(true);
+    try {
+      const sellerWallet = collection.owner || onChainOwner;
+      if (!sellerWallet || sellerWallet === "admin") {
+        setAuctionInfo(null);
+        return;
+      }
+      const res = await axios.get(
+        `${BACKEND_BASE_URL}/api/v1/auction/seller/${encodeURIComponent(sellerWallet)}`,
+        { headers: token ? { Authorization: `Bearer ${token}` } : {} }
+      );
+      const list = Array.isArray(res.data) ? res.data : (res.data?.auctions || []);
+      const match = list.find(
+        (a) => String(a.subCollectionId) === String(collection._id) && a.status === "active"
+      );
+      setAuctionInfo(match || null);
+    } catch { setAuctionInfo(null); }
+    finally { setAuctionInfoLoading(false); setAuctionFetched(true); }
+  };
+
+  /* ================== FETCH TRADE LISTINGS FOR THIS ITEM ================== */
+  // Uses posterWallet filter then filters client-side by offering name,
+  // because the GET /trade endpoint has no offering query filter.
+  const fetchTradeListings = async () => {
+    if (tradeFetched) return;
+    setTradeListingsLoading(true);
+    try {
+      const posterWallet = collection.owner || onChainOwner;
+      if (!posterWallet || posterWallet === "admin") {
+        setTradeListings([]);
+        return;
+      }
+      const res = await axios.get(`${BACKEND_BASE_URL}/api/v1/trade`, {
+        params: { posterWallet, status: "open", type: "trade", limit: 50 },
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      const list = res.data?.trades || [];
+      const matches = list.filter(
+        (t) => t.offering === collection.name && t.status === "open"
+      );
+      setTradeListings(matches);
+    } catch { setTradeListings([]); }
+    finally { setTradeListingsLoading(false); setTradeFetched(true); }
+  };
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === "auction") fetchAuctionInfo();
+    if (tab === "trade") fetchTradeListings();
   };
 
   const ensureCorrectNetwork = async () => {
@@ -1176,6 +1244,43 @@ function Buy1() {
 
   const buttonConfig = getButtonAction();
 
+  /* ========================== PLACE BID ========================== */
+  const handlePlaceBid = async () => {
+    if (!isAnyConnected || !activeAddress) return toast.error("Connect your wallet first");
+    if (!user?.id) return toast.error("Login required to bid");
+    if (!bidAmount || parseFloat(bidAmount) <= 0) return toast.error("Enter a valid bid amount");
+    if (!auctionInfo?._id) return;
+    const minBid = auctionInfo.currentBid > 0
+      ? Number((auctionInfo.currentBid * 1.05).toFixed(4))
+      : auctionInfo.startPrice;
+    if (parseFloat(bidAmount) < minBid)
+      return toast.error(`Bid must be at least ${minBid} USDC`);
+    try {
+      setBidLoading(true);
+      await axios.post(
+        `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/bid`,
+        { amount: parseFloat(bidAmount), bidderWallet: activeAddress.toLowerCase() },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success("Bid placed!");
+      setBidAmount("");
+      setAuctionFetched(false);
+      await fetchAuctionInfo();
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Failed to place bid");
+    } finally { setBidLoading(false); }
+  };
+
+  /* ====================== TIME REMAINING HELPER ====================== */
+  const timeRemaining = (endTime) => {
+    const diff = new Date(endTime) - Date.now();
+    if (diff <= 0) return "Ended";
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    if (h >= 24) return `${Math.floor(h / 24)}d ${h % 24}h remaining`;
+    return `${h}h ${m}m remaining`;
+  };
+
   /* ================================== UI ================================== */
   if (!collection) return null;
 
@@ -1289,7 +1394,7 @@ function Buy1() {
       )}
 
       {/* ── Breadcrumb / Tabs ── */}
-      <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10">
+      <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10 flex-wrap">
         <button
           onClick={() => navigate("/Profile?tab=collectibles")}
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
@@ -1301,11 +1406,11 @@ function Buy1() {
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
 
-        {/* NFT Detail tab */}
+        {/* NFT Detail label — clicking goes to marketplace tab */}
         <button
-          onClick={() => setActiveTab("detail")}
+          onClick={() => setActiveTab("marketplace")}
           className="pb-3 text-sm font-medium transition-colors"
-          style={activeTab === "detail"
+          style={activeTab === "marketplace"
             ? { color: "#fff", borderBottom: "2px solid #3b82f6", marginBottom: "-1px" }
             : { color: "rgba(255,255,255,0.4)" }}
         >
@@ -1329,41 +1434,41 @@ function Buy1() {
           )}
         </button>
 
-        {/* Marketplace / Auction / Trade — direct nav links */}
+        {/* Marketplace / Auction / Trade — in-page tabs */}
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
-        <Link
-          to="/market-place"
-          className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors"
-          style={{ borderBottom: "2px solid transparent" }}
-          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(255,255,255,0.2)"}
-          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        <button
+          onClick={() => handleTabChange("marketplace")}
+          className="pb-3 text-sm font-medium transition-colors"
+          style={activeTab === "marketplace"
+            ? { color: "#fff", borderBottom: "2px solid #3b82f6", marginBottom: "-1px" }
+            : { color: "rgba(255,255,255,0.4)" }}
         >
           Marketplace
-        </Link>
-        <Link
-          to="/market-place?tab=auctions"
-          className="pb-3 text-sm font-medium text-white/40 hover:text-amber-300 transition-colors"
-          style={{ borderBottom: "2px solid transparent" }}
-          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(251,191,36,0.4)"}
-          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        </button>
+        <button
+          onClick={() => handleTabChange("auction")}
+          className="pb-3 text-sm font-medium transition-colors"
+          style={activeTab === "auction"
+            ? { color: "#fbbf24", borderBottom: "2px solid #fbbf24", marginBottom: "-1px" }
+            : { color: "rgba(255,255,255,0.4)" }}
         >
           Auction
-        </Link>
-        <Link
-          to="/market-place?tab=trades"
-          className="pb-3 text-sm font-medium text-white/40 hover:text-blue-300 transition-colors"
-          style={{ borderBottom: "2px solid transparent" }}
-          onMouseEnter={e => e.currentTarget.style.borderBottomColor = "rgba(96,165,250,0.4)"}
-          onMouseLeave={e => e.currentTarget.style.borderBottomColor = "transparent"}
+        </button>
+        <button
+          onClick={() => handleTabChange("trade")}
+          className="pb-3 text-sm font-medium transition-colors"
+          style={activeTab === "trade"
+            ? { color: "#60a5fa", borderBottom: "2px solid #60a5fa", marginBottom: "-1px" }
+            : { color: "rgba(255,255,255,0.4)" }}
         >
           Trade
-        </Link>
+        </button>
       </div>
 
       {/* ── Main Content ── */}
-      {activeTab === "detail" && <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
+      <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
-        {/* Left — Image */}
+        {/* Left — Image (always visible) */}
         <div className="w-full md:w-[320px] lg:w-[380px] shrink-0">
           <img
             src={collection?.image ? getImageUrl(collection.image) : overview1}
@@ -1374,8 +1479,11 @@ function Buy1() {
           />
         </div>
 
-        {/* Right — Details */}
+        {/* Right — Tab panel */}
         <div className="flex-1 flex flex-col gap-4">
+
+        {/* ── Marketplace Panel ── */}
+        {activeTab === "marketplace" && <>
 
           {/* Badges */}
           <div className="flex items-center gap-2 flex-wrap">
@@ -1560,8 +1668,330 @@ function Buy1() {
             )}
           </div>
 
+        </>}
+
+        {/* ── Auction Panel ── */}
+        {activeTab === "auction" && (
+          <div className="flex flex-col gap-4">
+
+            {/* Item header */}
+            <div>
+              <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
+              <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                <span className="text-white/40 text-sm">
+                  {assetType}{collection?.tokenId ? ` · Token #${collection.tokenId}` : " · Not minted yet"}
+                </span>
+                {(onChainOwner || collection.owner) && (
+                  <span className="text-white/40 text-sm">
+                    · Owned by{" "}
+                    <span className="text-amber-400 font-medium">
+                      {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0,6)}...${w.substring(38)}`; })()}
+                    </span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="rounded-xl p-4"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+              <p className="text-white/50 text-sm leading-relaxed">
+                {collection?.description?.trim() || "No description provided for this item."}
+              </p>
+            </div>
+
+            {/* Auction content */}
+            {auctionInfoLoading ? (
+              <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
+                style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
+                <div className="w-6 h-6 rounded-full border-2 border-amber-400/40 border-t-amber-400 animate-spin" />
+                <p className="text-white/40 text-sm">Loading auction data…</p>
+              </div>
+
+            ) : auctionInfo ? (
+              <div className="rounded-2xl p-5 flex flex-col gap-5"
+                style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.2)" }}>
+
+                {/* Status row */}
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="text-amber-300 text-sm font-semibold">Active Auction</span>
+                  </div>
+                  {auctionInfo.endTime && (
+                    <span className="text-white/40 text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
+                      ⏱ {timeRemaining(auctionInfo.endTime)}
+                    </span>
+                  )}
+                </div>
+
+                {/* Price grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <p className="text-white/35 text-[10px] uppercase tracking-widest">Start Price</p>
+                    <p className="text-white font-bold text-base">{auctionInfo.startPrice} <span className="text-white/50 text-xs font-normal">USDC</span></p>
+                  </div>
+
+                  <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                    style={{ background: auctionInfo.currentBid > 0 ? "rgba(74,222,128,0.06)" : "rgba(255,255,255,0.04)", border: auctionInfo.currentBid > 0 ? "1px solid rgba(74,222,128,0.25)" : "1px solid rgba(255,255,255,0.08)" }}>
+                    <p className="text-white/35 text-[10px] uppercase tracking-widest">Current Bid</p>
+                    {auctionInfo.currentBid > 0
+                      ? <p className="text-green-300 font-bold text-base">{auctionInfo.currentBid} <span className="text-green-400/60 text-xs font-normal">USDC</span></p>
+                      : <p className="text-white/30 text-sm italic">No bids yet</p>}
+                  </div>
+
+                  {auctionInfo.instantBuyPrice > 0 && (
+                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                      style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.25)" }}>
+                      <p className="text-white/35 text-[10px] uppercase tracking-widest">Instant Buy</p>
+                      <p className="text-amber-300 font-bold text-base">{auctionInfo.instantBuyPrice} <span className="text-amber-400/60 text-xs font-normal">USDC</span></p>
+                    </div>
+                  )}
+
+                  {auctionInfo.reservePrice > 0 && (
+                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                      <p className="text-white/35 text-[10px] uppercase tracking-widest">Reserve Price</p>
+                      <p className="text-white/70 font-semibold text-base">{auctionInfo.reservePrice} <span className="text-white/30 text-xs font-normal">USDC</span></p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bid history summary */}
+                {auctionInfo.bidHistory?.length > 0 && (
+                  <div className="rounded-xl overflow-hidden"
+                    style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                    <div className="px-3 py-2 flex items-center justify-between"
+                      style={{ background: "rgba(255,255,255,0.04)" }}>
+                      <p className="text-white/40 text-xs uppercase tracking-widest">Bid History</p>
+                      <span className="text-white/30 text-xs">{auctionInfo.bidHistory.length} bid{auctionInfo.bidHistory.length !== 1 ? "s" : ""}</span>
+                    </div>
+                    {[...auctionInfo.bidHistory].reverse().slice(0, 3).map((bid, i) => (
+                      <div key={i} className="px-3 py-2 flex items-center justify-between border-t border-white/5">
+                        <span className="text-white/50 text-xs font-mono">
+                          {bid.bidderWallet ? `${bid.bidderWallet.substring(0,6)}...${bid.bidderWallet.substring(38)}` : bid.bidderName || "—"}
+                        </span>
+                        <span className="text-white/80 text-xs font-semibold">{bid.amount} USDC</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Bid form — non-owners only */}
+                {!isOwner && (
+                  <div className="flex flex-col gap-3 pt-1 border-t border-white/08">
+                    <p className="text-white/40 text-xs">
+                      Min bid:{" "}
+                      <span className="text-white/70 font-medium">
+                        {auctionInfo.currentBid > 0
+                          ? Number((auctionInfo.currentBid * 1.05).toFixed(4))
+                          : auctionInfo.startPrice} USDC
+                      </span>
+                    </p>
+                    <div className="flex gap-2">
+                      <div className="flex-1 flex items-center rounded-lg overflow-hidden"
+                        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                        <input
+                          type="number" min="0" step="0.01"
+                          placeholder={String(auctionInfo.currentBid > 0 ? Number((auctionInfo.currentBid * 1.05).toFixed(4)) : auctionInfo.startPrice)}
+                          value={bidAmount}
+                          onChange={(e) => setBidAmount(e.target.value)}
+                          className="flex-1 bg-transparent px-3 py-2.5 text-white text-sm outline-none placeholder-white/25"
+                        />
+                        <span className="pr-3 text-amber-400/70 text-xs font-semibold">USDC</span>
+                      </div>
+                      <button
+                        onClick={handlePlaceBid}
+                        disabled={bidLoading || !isAnyConnected}
+                        className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-all"
+                        style={{ background: "rgba(251,191,36,0.25)", border: "1px solid rgba(251,191,36,0.45)" }}
+                      >
+                        {bidLoading ? "Bidding…" : "Place Bid"}
+                      </button>
+                    </div>
+
+                    {auctionInfo.instantBuyPrice > 0 && (
+                      <button
+                        onClick={async () => {
+                          if (!isAnyConnected) return toast.error("Connect your wallet first");
+                          if (!user?.id) return toast.error("Login required");
+                          try {
+                            setBidLoading(true);
+                            await axios.post(
+                              `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/instant-buy`,
+                              { buyerWallet: activeAddress.toLowerCase() },
+                              { headers: { Authorization: `Bearer ${token}` } }
+                            );
+                            toast.success("Item purchased instantly!");
+                            setAuctionFetched(false);
+                            fetchAuctionInfo();
+                          } catch (err) {
+                            toast.error(err.response?.data?.error || "Instant buy failed");
+                          } finally { setBidLoading(false); }
+                        }}
+                        disabled={bidLoading}
+                        className="w-full py-2.5 rounded-lg text-sm font-semibold text-amber-200 disabled:opacity-50 transition-all"
+                        style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}
+                      >
+                        ⚡ Instant Buy — {auctionInfo.instantBuyPrice} USDC
+                      </button>
+                    )}
+
+                    {!isAnyConnected && (
+                      <p className="text-white/30 text-xs text-center">Connect your wallet to place a bid</p>
+                    )}
+                  </div>
+                )}
+
+                {/* Owner view */}
+                {isOwner && (
+                  <div className="pt-2 border-t border-white/08 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-400" />
+                    <p className="text-white/50 text-xs">Your item is listed on auction. Bids will appear here as they come in.</p>
+                  </div>
+                )}
+
+                {/* End time footer */}
+                {auctionInfo.endTime && (
+                  <p className="text-white/25 text-[11px] text-right">
+                    Ends {new Date(auctionInfo.endTime).toLocaleString()}
+                  </p>
+                )}
+              </div>
+
+            ) : (
+              /* No auction empty state */
+              <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
+                  style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.15)" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(251,191,36,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <p className="text-white/50 text-sm font-medium">No active auction for this item</p>
+                {isOwner
+                  ? <p className="text-white/25 text-xs max-w-[200px]">Go to your Collections and click <span className="text-white/40">List</span> to set up an auction.</p>
+                  : <p className="text-white/25 text-xs">This item has no open auction at the moment.</p>}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── Trade Panel ── */}
+        {activeTab === "trade" && (
+          <div className="flex flex-col gap-4">
+
+            {/* Item header */}
+            <div>
+              <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
+              <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                <span className="text-white/40 text-sm">
+                  {assetType} · <span className="capitalize">{collection?.category || "general"}</span>
+                </span>
+                {(onChainOwner || collection.owner) && (
+                  <span className="text-white/40 text-sm">
+                    · Owned by{" "}
+                    <span className="text-blue-400 font-medium">
+                      {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0,6)}...${w.substring(38)}`; })()}
+                    </span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="rounded-xl p-4"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+              <p className="text-white/50 text-sm leading-relaxed">
+                {collection?.description?.trim() || "No description provided for this item."}
+              </p>
+            </div>
+
+            {/* Trade listings */}
+            {tradeListingsLoading ? (
+              <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
+                style={{ background: "rgba(0,80,255,0.04)", border: "1px solid rgba(0,80,255,0.15)" }}>
+                <div className="w-6 h-6 rounded-full border-2 border-blue-400/40 border-t-blue-400 animate-spin" />
+                <p className="text-white/40 text-sm">Loading trade listings…</p>
+              </div>
+
+            ) : tradeListings.length > 0 ? (
+              <div className="flex flex-col gap-3">
+                <p className="text-white/30 text-xs uppercase tracking-widest pl-1">
+                  {tradeListings.length} active trade listing{tradeListings.length !== 1 ? "s" : ""}
+                </p>
+                {tradeListings.map((trade) => (
+                  <div key={trade._id} className="rounded-xl p-4 flex flex-col gap-3"
+                    style={{ background: "rgba(0,80,255,0.05)", border: "1px solid rgba(0,80,255,0.2)" }}>
+
+                    {/* Trade exchange row */}
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
+                        style={{ background: "rgba(74,222,128,0.07)", border: "1px solid rgba(74,222,128,0.15)" }}>
+                        <p className="text-[10px] text-green-400/60 uppercase tracking-widest mb-0.5">Offering</p>
+                        <p className="text-green-300 text-sm font-medium truncate">{trade.offering}</p>
+                      </div>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                        <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
+                      </svg>
+                      <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
+                        style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                        <p className="text-[10px] text-blue-400/60 uppercase tracking-widest mb-0.5">Wants</p>
+                        <p className="text-blue-300 text-sm font-medium truncate">
+                          {trade.requesting === "Make me an offer" || !trade.requesting
+                            ? <span className="italic text-white/40">Open offer</span>
+                            : trade.requesting}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    {trade.description && (
+                      <p className="text-white/35 text-xs leading-relaxed px-1">{trade.description}</p>
+                    )}
+
+                    {/* Footer: poster + action */}
+                    <div className="flex items-center justify-between pt-1 border-t border-white/06">
+                      <span className="text-white/30 text-xs">
+                        {trade.posterName ? `By ${trade.posterName}` : trade.posterWallet ? `${trade.posterWallet.substring(0,6)}...${trade.posterWallet.substring(38)}` : ""}
+                      </span>
+                      {!isOwner && (
+                        <Link
+                          to="/market-place?tab=trades"
+                          state={{ tradeId: trade._id }}
+                          className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                        >
+                          Propose Trade →
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            ) : (
+              /* No trades empty state */
+              <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
+                  style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.15)" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(96,165,250,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
+                  </svg>
+                </div>
+                <p className="text-white/50 text-sm font-medium">No active trade listings</p>
+                {isOwner
+                  ? <p className="text-white/25 text-xs max-w-[200px]">Go to your Collections and click <span className="text-white/40">List</span> to set up a trade.</p>
+                  : <p className="text-white/25 text-xs">The owner has no open trade listings for this item.</p>}
+              </div>
+            )}
+          </div>
+        )}
+
         </div>
-      </div>}
+      </div>
 
       {/* ── Confirmation Modal 1 ── */}
       {isOpen && (
