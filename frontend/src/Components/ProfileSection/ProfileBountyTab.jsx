@@ -126,7 +126,7 @@ export default function ProfileBountyTab({ wallet, token }) {
       ) : (
         /* ── Table ── */
         <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "70vh" }}>
           {/* Header */}
           <div
             className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"

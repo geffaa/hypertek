@@ -308,7 +308,7 @@ export default function ProfileListingsTab({ token }) {
       ) : (
         /* ── Table ── */
         <div className="w-full rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "70vh" }}>
 
           {/* Sticky group bracket headers */}
           <div style={{

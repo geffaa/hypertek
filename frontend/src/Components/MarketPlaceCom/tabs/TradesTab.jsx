@@ -8,6 +8,52 @@ import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
 
+// ── Item Detail Popup ─────────────────────────────────────────────────────────
+function ItemDetailPopup({ imgSrc, title, category, description, offering, requesting, onClose }) {
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}
+      onClick={onClose}>
+      <div className="w-full max-w-xs rounded-2xl overflow-hidden relative"
+        style={{ background: "#080916", border: "1px solid rgba(255,255,255,0.12)" }}
+        onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-2.5 right-2.5 text-white/30 hover:text-white z-10">
+          <X className="w-4 h-4" />
+        </button>
+        <div className="w-full h-44 bg-black flex items-center justify-center overflow-hidden">
+          <img src={imgSrc || popularFallback} alt={title} className="w-full h-full object-contain" />
+        </div>
+        <div className="p-4 flex flex-col gap-2">
+          <p className="text-white font-bold text-sm pr-5">{title}</p>
+          {category && (
+            <span className="self-start px-2 py-0.5 rounded text-[9px] font-semibold capitalize"
+              style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
+              {category}
+            </span>
+          )}
+          {description && <p className="text-white/50 text-xs leading-relaxed">{description}</p>}
+          {(offering || requesting) && (
+            <div className="flex flex-col gap-1 mt-1 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+              {offering && (
+                <div className="flex justify-between gap-2">
+                  <span className="text-white/30 text-[10px]">Offering</span>
+                  <span className="text-green-300/80 text-[11px] font-medium text-right truncate">{offering}</span>
+                </div>
+              )}
+              {requesting && (
+                <div className="flex justify-between gap-2">
+                  <span className="text-white/30 text-[10px]">Wanting</span>
+                  <span className="text-blue-300/80 text-[11px] font-medium text-right truncate">{requesting}</span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Status colours ────────────────────────────────────────────────────────────
 const STATUS_COLOR = {
   open:      "text-green-400",
@@ -164,18 +210,34 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
 
 // ── Trade Card ────────────────────────────────────────────────────────────────
 function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
+  const [showDetail, setShowDetail] = useState(false);
   const isPoster = trade.posterWallet === currentWallet;
   const statusColor = STATUS_COLOR[trade.status] || "text-white/40";
+  const imgSrc = trade.image ? getImageUrl(trade.image) : null;
 
   return (
+    <>
     <div className="rounded-xl overflow-hidden flex flex-col"
       style={{
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
         border: "1px solid rgba(255,255,255,0.09)",
       }}>
-      <LazyImage src={trade.image ? getImageUrl(trade.image) : null} alt={trade.title}
-        fallback={popularFallback}
-        className="w-full h-[110px] sm:h-[130px] lg:h-[150px] bg-black" imgClassName="object-contain" />
+      {/* Image — clickable for detail popup */}
+      <div className="relative cursor-pointer" onClick={() => setShowDetail(true)}>
+        <LazyImage src={imgSrc} alt={trade.title}
+          fallback={popularFallback}
+          className="w-full h-[110px] sm:h-[130px] lg:h-[150px] bg-black" imgClassName="object-contain" />
+        {trade.category && (
+          <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
+            style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
+            {trade.category}
+          </span>
+        )}
+        <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
+          style={{ background: "rgba(0,0,0,0.35)" }}>
+          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">View Details</span>
+        </div>
+      </div>
       <div className="p-3 flex flex-col gap-2 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded"
@@ -229,6 +291,19 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
         )}
       </div>
     </div>
+
+    {showDetail && (
+      <ItemDetailPopup
+        imgSrc={imgSrc}
+        title={trade.title}
+        category={trade.category}
+        description={trade.description}
+        offering={trade.offering}
+        requesting={trade.requesting}
+        onClose={() => setShowDetail(false)}
+      />
+    )}
+    </>
   );
 }
 

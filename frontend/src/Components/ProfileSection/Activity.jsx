@@ -208,7 +208,7 @@ function PersonalActivity() {
         <GlowingOrb Xaxis={920} Yaxis={550} />
 
         {/* Responsive Table */}
-        <div className="overflow-x-auto rounded-lg z-10">
+        <div className="overflow-x-auto rounded-lg z-10" style={{ overflowY: "auto", maxHeight: "70vh" }}>
           <table className="w-full min-w-[500px] text-white border-collapse">
             <thead className="bg-[#00134C]" style={{ position: "sticky", top: 0, zIndex: 10 }}>
               <tr className="text-left">

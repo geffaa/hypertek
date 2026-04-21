@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
@@ -47,6 +47,7 @@ function ListingSteps({ step }) {
 }
 
 function NFTs() {
+  const gridRef = useRef(null);
   const user  = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token) || localStorage.getItem("token");
   const { address: wagmiAddress } = useAccount();
@@ -57,6 +58,13 @@ function NFTs() {
   const [loading, setLoading]               = useState(true);
   const [search, setSearch]                 = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   // — Multi-step marketplace listing modal
   const [listingItem, setListingItem]       = useState(null);
@@ -444,7 +452,7 @@ function NFTs() {
         ) : filtered.length === 0 ? (
           <p className="text-white/50 text-sm">No items match your search.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {filtered.map((item) => {
               const img = item.image ? getImageUrl(item.image) : Collectionimage;
               const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
@@ -455,8 +463,8 @@ function NFTs() {
                 <div key={item._id}
                   className="rounded-xl border overflow-hidden flex flex-col transition-all hover:brightness-110"
                   style={{ background: "rgba(255,255,255,0.03)", borderColor: isAnywhere ? "rgba(74,222,128,0.25)" : "rgba(255,255,255,0.08)" }}>
-                  <div className="relative h-[200px] sm:h-[220px]">
-                    <img src={img} alt={item.name} className="w-full h-full object-cover object-top"
+                  <div className="relative h-[200px] sm:h-[220px]" style={{ background: "#0d1020" }}>
+                    <img src={img} alt={item.name} className="w-full h-full object-contain"
                       onError={(e) => { e.target.src = Collectionimage; }} />
 
                     {/* Asset type badge — top left */}
@@ -497,7 +505,12 @@ function NFTs() {
 
                   <div className="px-3 pt-2 pb-1 flex-1 flex flex-col gap-0.5">
                     <p className="text-white text-xs font-medium truncate">{item.name || "Unnamed"}</p>
-                    <p className="text-white/30 text-[10px] capitalize">{item.category}</p>
+                    {item.category && (
+                      <span className="self-start px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize mt-0.5"
+                        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
+                        {item.category}
+                      </span>
+                    )}
                     {item.listed && item.priceETH > 0 && (
                       <p className="text-white/60 text-[11px] mt-0.5">{item.priceETH} USDC</p>
                     )}

@@ -6,6 +6,151 @@ import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
 
+// ── Auction Detail Popup ──────────────────────────────────────────────────────
+function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
+  const { d, h, m, s, done } = useCountdown(auction.endTime);
+  const isUrgent = !done && d === 0 && h < 6;
+  const timeLabel = done
+    ? "Ended"
+    : d > 0
+      ? `${d}d ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`
+      : `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  const currentPrice = auction.currentBid > 0 ? auction.currentBid : auction.startPrice;
+  const bidCount = auction.bidHistory?.length || 0;
+
+  return (
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(8px)" }}
+      onClick={onClose}>
+      <div className="w-full max-w-sm rounded-2xl overflow-hidden flex flex-col relative"
+        style={{ background: "linear-gradient(160deg,#0a0c1e 0%,#060810 100%)", border: "1px solid rgba(0,80,255,0.25)", maxHeight: "90vh" }}
+        onClick={e => e.stopPropagation()}>
+
+        {/* Close */}
+        <button onClick={onClose} className="absolute top-3 right-3 z-10 text-white/30 hover:text-white transition-colors">
+          <X className="w-4 h-4" />
+        </button>
+
+        {/* Image */}
+        <div className="relative w-full flex-shrink-0" style={{ height: 220, background: "#000" }}>
+          <img
+            src={imgSrc || popularFallback}
+            alt={auction.title}
+            className="w-full h-full object-contain"
+          />
+          {/* Gradient overlay bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+            style={{ background: "linear-gradient(to top, #0a0c1e, transparent)" }} />
+          {/* Status badge */}
+          <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase
+            ${auction.status === "active" ? "text-green-300" : auction.status === "ended" ? "text-red-400" : "text-white/40"}`}
+            style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.12)" }}>
+            {auction.status}
+          </span>
+          {auction.isNFA && (
+            <span className="absolute top-2.5 right-8 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
+              style={{ background: "rgba(0,42,168,0.9)", border: "1px solid rgba(0,80,255,0.5)" }}>NFA</span>
+          )}
+        </div>
+
+        {/* Scrollable body */}
+        <div className="flex flex-col gap-3 p-4 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+
+          {/* Title + category */}
+          <div className="flex flex-col gap-1">
+            <h2 className="text-white font-bold text-base leading-snug pr-4">{auction.title}</h2>
+            <div className="flex items-center gap-2 flex-wrap">
+              {auction.category && (
+                <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
+                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
+                  {auction.category}
+                </span>
+              )}
+              <span className="text-white/25 text-[10px]">{bidCount} bid{bidCount !== 1 ? "s" : ""}</span>
+            </div>
+          </div>
+
+          {/* Stats row */}
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-xl p-2.5 text-center"
+              style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,80,255,0.2)" }}>
+              <p className="text-white/40 text-[9px] mb-0.5">Current bid</p>
+              <p className="text-blue-300 font-bold text-xs">{currentPrice} <span className="text-[9px] font-normal text-white/30">USDC</span></p>
+            </div>
+            <div className="rounded-xl p-2.5 text-center"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <p className="text-white/40 text-[9px] mb-0.5">Start</p>
+              <p className="text-white/70 font-bold text-xs">{auction.startPrice} <span className="text-[9px] font-normal text-white/30">USDC</span></p>
+            </div>
+            <div className="rounded-xl p-2.5 text-center"
+              style={{ background: isUrgent ? "rgba(180,0,0,0.15)" : "rgba(255,255,255,0.04)", border: `1px solid ${isUrgent ? "rgba(255,60,60,0.3)" : "rgba(255,255,255,0.08)"}` }}>
+              <p className="text-white/40 text-[9px] mb-0.5">Ends in</p>
+              <p className={`font-bold text-xs font-mono ${isUrgent ? "text-red-400" : "text-amber-300"}`}>{timeLabel}</p>
+            </div>
+          </div>
+
+          {/* Instant buy */}
+          {auction.instantBuyPrice && (
+            <div className="flex items-center justify-between px-3 py-2 rounded-xl"
+              style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(180,120,0,0.2)" }}>
+              <div className="flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-amber-300/80 text-xs font-semibold">Buy Now</span>
+              </div>
+              <span className="text-amber-300 font-bold text-sm">{auction.instantBuyPrice} USDC</span>
+            </div>
+          )}
+
+          {/* Description */}
+          {auction.description && (
+            <div className="rounded-xl p-3"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-1 font-semibold">Description</p>
+              <p className="text-white/60 text-xs leading-relaxed">{auction.description}</p>
+            </div>
+          )}
+
+          {/* Bid history preview */}
+          {bidCount > 0 && auction.bidHistory && (
+            <div className="rounded-xl p-3"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-2 font-semibold">Recent Bids</p>
+              <div className="flex flex-col gap-1.5">
+                {auction.bidHistory.slice(-3).reverse().map((b, i) => (
+                  <div key={i} className="flex justify-between items-center">
+                    <span className="text-white/50 text-[10px] truncate max-w-[130px]">{b.bidderName || "Anonymous"}</span>
+                    <span className="text-blue-300 text-[10px] font-bold">{b.amount} USDC</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Actions */}
+          {auction.status === "active" && (
+            <div className="flex gap-2 pt-1">
+              <button
+                onClick={() => { onClose(); onBid?.(auction); }}
+                className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110"
+                style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
+                <Gavel className="w-3.5 h-3.5 inline mr-1.5" />Place Bid
+              </button>
+              {auction.instantBuyPrice && (
+                <button
+                  onClick={() => { onClose(); onInstantBuy?.(auction); }}
+                  className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-amber-300 transition-all hover:brightness-110"
+                  style={{ background: "rgba(180,120,0,0.25)", border: "1px solid rgba(180,120,0,0.4)" }}>
+                  <Zap className="w-3.5 h-3.5 inline mr-1" />Buy Now
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Countdown timer hook ──────────────────────────────────────────────────────
 function useCountdown(endTime) {
   const calc = () => {
@@ -84,15 +229,32 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               <Gavel className="w-4 h-4 text-blue-400" />
               <span className="text-white font-bold text-sm">Place a Bid</span>
             </div>
-            <div className="rounded-xl p-3 flex items-center gap-3"
+            {/* Item preview */}
+            <div className="rounded-xl overflow-hidden"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div className="flex-1 min-w-0">
-                <p className="text-white/90 text-sm font-semibold truncate">{auction.title}</p>
-                <p className="text-white/40 text-[10px]">{auction.category}</p>
-              </div>
-              <div className="text-right flex-shrink-0">
-                <p className="text-white/40 text-[10px]">Ends in</p>
-                <Countdown endTime={auction.endTime} />
+              {auction.image && (
+                <div className="w-full flex items-center justify-center" style={{ height: 140, background: "#000" }}>
+                  <img src={getImageUrl(auction.image)} alt={auction.title}
+                    className="h-full w-full object-contain" />
+                </div>
+              )}
+              <div className="p-3 flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <p className="text-white/90 text-sm font-semibold leading-snug">{auction.title}</p>
+                  {auction.category && (
+                    <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
+                      style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>
+                      {auction.category}
+                    </span>
+                  )}
+                  {auction.description && (
+                    <p className="text-white/35 text-[10px] leading-relaxed mt-1.5 line-clamp-2">{auction.description}</p>
+                  )}
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-white/40 text-[10px]">Ends in</p>
+                  <Countdown endTime={auction.endTime} />
+                </div>
               </div>
             </div>
             <div className="flex gap-3">
@@ -560,12 +722,15 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
 
 // ── Auction card ──────────────────────────────────────────────────────────────
 function AuctionCard({ auction, onBid, onInstantBuy }) {
+  const [showDetail, setShowDetail] = useState(false);
   const isNFA = auction.isNFA;
   const { d, h, done } = useCountdown(auction.endTime);
   const isUrgent = !done && d === 0 && h < 6;
   const statusColor = { active: "text-green-400", ended: "text-red-400", sold: "text-blue-400", cancelled: "text-white/30" }[auction.status] || "text-white/40";
+  const imgSrc = auction.image ? getImageUrl(auction.image) : null;
 
   return (
+    <>
     <div className="rounded-xl overflow-hidden flex flex-col"
       style={{
         background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
@@ -575,13 +740,20 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
             ? "1px solid rgba(0,80,255,0.5)"
             : "1px solid rgba(255,255,255,0.09)",
       }}>
-      <div className="relative">
-        <LazyImage src={auction.image ? getImageUrl(auction.image) : null} alt={auction.title}
+      {/* Image — clickable for detail popup */}
+      <div className="relative cursor-pointer" onClick={() => setShowDetail(true)}>
+        <LazyImage src={imgSrc} alt={auction.title}
           fallback={popularFallback} className="w-full h-44 bg-black" imgClassName="object-contain" />
-        <div className="absolute top-2 left-2 flex gap-1">
+        <div className="absolute top-2 left-2 flex gap-1 flex-wrap">
           {isNFA && (
             <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
               style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.5)" }}>NFA</span>
+          )}
+          {auction.category && (
+            <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
+              style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
+              {auction.category}
+            </span>
           )}
           {isUrgent && (
             <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-red-300 animate-pulse"
@@ -589,11 +761,15 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
           )}
         </div>
         <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{auction.status}</span>
+        {/* Click hint */}
+        <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
+          style={{ background: "rgba(0,0,0,0.35)" }}>
+          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">View Details</span>
+        </div>
       </div>
 
       <div className="p-3 flex flex-col gap-2 flex-1">
         <p className="text-white/90 text-sm font-semibold truncate">{auction.title}</p>
-        {auction.category && <p className="text-white/30 text-[10px] uppercase tracking-wide">{auction.category}</p>}
 
         <div className="flex items-end justify-between mt-auto">
           <div>
@@ -631,6 +807,17 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
         )}
       </div>
     </div>
+
+    {showDetail && (
+      <AuctionDetailPopup
+        auction={auction}
+        imgSrc={imgSrc}
+        onClose={() => setShowDetail(false)}
+        onBid={onBid}
+        onInstantBuy={onInstantBuy}
+      />
+    )}
+    </>
   );
 }
 

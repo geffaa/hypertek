@@ -12,6 +12,7 @@ import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
 import BottomInfoBar from "../Components/MarketPlaceCom/BottomInfoBar";
 import LazyImage from "../Components/Common/LazyImage";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { FALLBACK_ITEMS, ALL_FALLBACK_ITEMS } from "../Components/MarketPlaceCom/marketplaceFallback";
 
 
 
@@ -191,11 +192,28 @@ function CategoryMarketplace() {
   if (loading) return <FullScreenLoader />;
 
   // Only show items that are listed for sale with a valid price
-  const filteredItems = items.filter((item) =>
-    item.listed === true &&
-    item.priceETH > 0 &&
-    (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
+  const listedItems = items.filter((item) =>
+    item.listed === true && item.priceETH > 0
   );
+
+  // When backend has no items, show consistent fallback dummy data
+  const normalizedCategory = category
+    ? (CAT_ALIAS_REDIRECT[category.toLowerCase().trim()] || category.toLowerCase().trim())
+    : null;
+  const fallbackForCat = !listedItems.length
+    ? (normalizedCategory ? (FALLBACK_ITEMS[normalizedCategory] || ALL_FALLBACK_ITEMS) : ALL_FALLBACK_ITEMS)
+    : [];
+  const usingFallback = fallbackForCat.length > 0;
+
+  const displayItems = usingFallback
+    ? fallbackForCat.filter((item) =>
+        (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : listedItems.filter((item) =>
+        (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+  const filteredItems = displayItems;
 
   const navStyle = {
     background:           "rgba(4,5,18,0.97)",
@@ -226,8 +244,8 @@ function CategoryMarketplace() {
           titleOverride={categoryTitle}
           descOverride={`Explore all ${categoryTitle} items in the marketplace. Discover unique collections and start your journey.`}
           stats={[
-            { num: filteredItems.length, label: "For Sale" },
-            { num: items.filter((i) => i.listed && i.priceETH > 0).length, label: "Listed" },
+            { num: listedItems.length, label: "For Sale" },
+            { num: listedItems.length, label: "Listed" },
             { num: items.filter((i) => !i.listed).length, label: "Unlisted" },
           ]}
         />
@@ -315,67 +333,97 @@ function CategoryMarketplace() {
             </div>
           )}
 
+          {/* Fallback notice */}
+          {usingFallback && (
+            <div
+              className="mb-2 px-5 py-4 rounded-xl flex items-start gap-3"
+              style={{
+                background: "linear-gradient(135deg, rgba(180,120,0,0.1) 0%, rgba(0,42,168,0.06) 100%)",
+                border: "1px solid rgba(180,120,0,0.2)",
+              }}
+            >
+              <span className="text-2xl flex-shrink-0">🎮</span>
+              <div>
+                <p className="text-amber-300/90 text-sm font-semibold mb-1">Sample Marketplace Preview</p>
+                <p className="text-white/50 text-xs leading-relaxed">
+                  The items below are sample previews showcasing the types of digital assets that will be available.
+                  Actual items with unique artwork and blockchain-verified ownership will be available at launch.
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* GRID — responsive: 2 cols mobile → 3 sm → 5 lg → 6 xl */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-4">
             {filteredItems && filteredItems.length > 0 ? (
-              filteredItems.map((item) => (
-                <div
-                  key={item._id}
-                  className="relative rounded-xl text-white flex flex-col overflow-hidden group cursor-pointer transition-all duration-200 hover:brightness-110 hover:border-white/20"
-                  style={{
-                    background:
-                      "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
-                    border: "1px solid rgba(255,255,255,0.09)",
-                  }}
-                  onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
-                >
-                  <div className="relative">
-                    <LazyImage
-                      src={getImageUrl(item.collection?.image)}
-                      alt={item.collection?.name || item.name || "Item"}
-                      fallback={overview1}
-                      className="w-full h-[200px] sm:h-[220px]"
-                      imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {/* Asset type badge on image */}
-                    {(() => {
-                      const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
-                      const cfg = {
-                        NFA: { bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", text: "#fff" },
-                        NFC: { bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   text: "#fff" },
-                        NFT: { bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", text: "rgba(255,255,255,0.7)" },
-                      }[aType];
-                      return (
-                        <span
-                          className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold"
-                          style={{ background: cfg.bg, border: `1px solid ${cfg.border}`, color: cfg.text }}
-                        >
-                          {aType}
-                        </span>
-                      );
-                    })()}
-                  </div>
-
-                  <div className="flex flex-col gap-1 p-3 flex-1">
-                    <h2 className="text-xs sm:text-sm font-semibold truncate leading-tight">
-                      {item.collection?.name || item.name || "Unnamed"}
-                    </h2>
-
-                    <div className="flex justify-between items-center mt-1.5">
-                      <span className="text-[10px] sm:text-xs font-semibold">
-                        {item.priceETH || 0} USDC
-                      </span>
+              filteredItems.map((item) => {
+                const isDummy = item.isDummy === true;
+                // Fallback items have item.image (public path); real items have item.collection?.image (backend path)
+                const imgSrc = isDummy
+                  ? item.image
+                  : getImageUrl(item.collection?.image);
+                const displayName = item.collection?.name || item.name || "Unnamed";
+                return (
+                  <div
+                    key={item._id}
+                    className="relative rounded-xl text-white flex flex-col overflow-hidden group cursor-pointer transition-all duration-200 hover:brightness-110 hover:border-white/20"
+                    style={{
+                      background: "linear-gradient(147.75deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+                      border: "1px solid rgba(255,255,255,0.09)",
+                    }}
+                    onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
+                  >
+                    <div className="relative">
+                      <LazyImage
+                        src={imgSrc}
+                        alt={displayName}
+                        fallback={overview1}
+                        className="w-full h-[200px] sm:h-[220px]"
+                        imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {/* Asset type badge */}
+                      {(() => {
+                        const aType = item.assetType || (item.isNFA ? "NFA" : "NFT");
+                        const cfg = {
+                          NFA: { bg: "rgba(124,58,237,0.9)", border: "rgba(124,58,237,0.6)", text: "#fff" },
+                          NFC: { bg: "rgba(0,42,168,0.9)",   border: "rgba(0,80,255,0.5)",   text: "#fff" },
+                          NFT: { bg: "rgba(255,255,255,0.12)", border: "rgba(255,255,255,0.25)", text: "rgba(255,255,255,0.7)" },
+                        }[aType];
+                        return (
+                          <span
+                            className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold"
+                            style={{ background: cfg.bg, border: `1px solid ${cfg.border}`, color: cfg.text }}
+                          >
+                            {aType}
+                          </span>
+                        );
+                      })()}
+                      {isDummy && (
+                        <div className="absolute inset-0 flex items-end justify-center pb-3 pointer-events-none"
+                          style={{ background: "rgba(0,0,0,0.25)" }}>
+                          <span className="text-white/60 text-[9px] font-bold uppercase tracking-widest select-none"
+                            style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9)", whiteSpace: "nowrap" }}>
+                            Sample Preview
+                          </span>
+                        </div>
+                      )}
                     </div>
 
-                    <button
-                      onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa", { state: { item, parentId: item.parentId } }); }}
-                      className="mt-3 w-full px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20"
-                    >
-                      Buy Now
-                    </button>
+                    <div className="flex flex-col gap-1 p-3 flex-1">
+                      <h2 className="text-xs sm:text-sm font-semibold truncate leading-tight">{displayName}</h2>
+                      <div className="flex justify-between items-center mt-1.5">
+                        <span className="text-[10px] sm:text-xs font-semibold">{item.priceETH || 0} USDC</span>
+                      </div>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa", { state: { item, parentId: item.parentId } }); }}
+                        className="mt-3 w-full px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20"
+                      >
+                        {isDummy ? "Preview" : "Buy Now"}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-span-full text-center text-white/50 py-12">
                 <div className="text-4xl mb-2">🛒</div>

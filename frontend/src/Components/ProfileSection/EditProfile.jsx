@@ -3,6 +3,7 @@ import overview1 from "../../assets/images/Profile/Hero1.jpeg";
 import Profile from "../../assets/images/Profile/Profile.png";
 import { FaUserCircle } from "react-icons/fa";
 import { FiCamera, FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
+import ImageCropModal from "../ImageCropModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import FullScreenLoader from "../Common/Spinner";
@@ -34,6 +35,8 @@ function EditProfile() {
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [cropSrc, setCropSrc] = useState(null);
+  const [cropFileName, setCropFileName] = useState("");
   const fileInputRef = useRef(null);
 
   const [privateKey, setPrivateKey] = useState("");
@@ -44,12 +47,20 @@ function EditProfile() {
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
-    if (selected) {
-      setFile(selected);
-      const reader = new FileReader();
-      reader.onload = () => setProfileImage(reader.result);
-      reader.readAsDataURL(selected);
-    }
+    if (!selected) return;
+    setCropFileName(selected.name);
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(reader.result);
+    reader.readAsDataURL(selected);
+    e.target.value = "";
+  };
+
+  const handleCropConfirm = (croppedFile) => {
+    setCropSrc(null);
+    setFile(croppedFile);
+    const reader = new FileReader();
+    reader.onload = () => setProfileImage(reader.result);
+    reader.readAsDataURL(croppedFile);
   };
 
   const handleProfileClick = () => fileInputRef.current.click();
@@ -104,6 +115,15 @@ function EditProfile() {
     <div className="min-h-screen bg-transparent relative z-10 mt-16">
       {loading && <FullScreenLoader />}
 
+      {cropSrc && (
+        <ImageCropModal
+          src={cropSrc}
+          fileName={cropFileName}
+          onConfirm={handleCropConfirm}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
+
       {/* Back button */}
       <div className="absolute top-4 left-4 z-20">
         <button
@@ -132,12 +152,15 @@ function EditProfile() {
       <div className="relative -mt-16 sm:-mt-24 md:-mt-32 lg:-mt-36 px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
         <div className="relative flex-shrink-0 cursor-pointer">
           {profileImage ? (
-            <img
-              src={profileImage.startsWith("data:") ? profileImage : profileImage}
-              alt="Profile"
-              className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
-              onError={() => setProfileImage(null)}
-            />
+            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white overflow-hidden flex items-center justify-center"
+              style={{ background: "#0a1a3a" }}>
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="w-full h-full object-cover"
+                onError={() => setProfileImage(null)}
+              />
+            </div>
           ) : (
             <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-24 h-24 md:w-28 md:h-28 border-2 border-white">
               <FaUserCircle className="w-16 h-16 md:w-20 md:h-20" />

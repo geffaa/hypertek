@@ -42,6 +42,7 @@
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
+    "react-image-crop": "^11.0.10",
     "react-payment-logos": "^1.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.1",

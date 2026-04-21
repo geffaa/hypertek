@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
@@ -6,6 +6,7 @@ import GlowingOrb from "../Common/BgColoring";
 import ProfileListingsTab from "./ProfileListingsTab";
 import ProfileQuestingTab from "./ProfileQuestingTab";
 import ProfileBountyTab from "./ProfileBountyTab";
+import StickyAvatarSidebar from "./StickyAvatarSidebar";
 
 import FaceOne from "../../assets/images/noActivity1.png";
 import FaceTwo from "../../assets/images/noActivity2.png";
@@ -68,6 +69,8 @@ function MarketPlace() {
 
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const gridRef    = useRef(null);
+  const contentRef = useRef(null);
 
   // Tab ↔ URL slug mapping
   const TAB_SLUG = {
@@ -108,6 +111,16 @@ function MarketPlace() {
   // local flags for venue cross-reference in My Collectibles grid
   const [sessionAuctionIds] = useState(new Set());
   const [sessionTradeNames] = useState(new Set());
+
+  const scrollToContent = (delay = 300) =>
+    setTimeout(() => contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), delay);
+
+  // scroll back from BuyNfa
+  useEffect(() => { if (location.state?.scrollToGrid) scrollToContent(400); }, [location.state]);
+  // scroll on tab switch
+  useEffect(() => { scrollToContent(200); }, [activeTab]);
+  // scroll on category filter change
+  useEffect(() => { scrollToContent(150); }, [activeCategory]);
 
   useEffect(() => {
     setActiveCategory(location.state?.category || "");
@@ -375,7 +388,7 @@ function MarketPlace() {
 
 
           {/* ================= CONTENT AREA ================= */}
-          <section className="relative z-10 mt-10 pb-24">
+          <section ref={contentRef} className="relative z-10 mt-10 pb-24">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
@@ -407,7 +420,7 @@ function MarketPlace() {
                   )}
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                   {gridItems.map((item) => {
                       const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
                         || sessionAuctionIds.has(item._id);
@@ -607,7 +620,8 @@ function MarketPlace() {
 
             {/* ---- TRADE VIEW (user's posted trades) ---- */}
             {activeTab === "Trade" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="flex-1 min-w-0">
                 {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
                     <p className="text-sm">Connect your wallet to view your trade listings</p>
@@ -664,11 +678,14 @@ function MarketPlace() {
                   </div>
                 )}
               </div>
+              <StickyAvatarSidebar />
+              </div>
             )}
 
             {/* ---- AUCTION VIEW (user's posted auctions) ---- */}
             {activeTab === "Auction" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="flex-1 min-w-0">
                 {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
                     <p className="text-sm">Connect your wallet to view your auction listings</p>
@@ -722,19 +739,27 @@ function MarketPlace() {
                   </div>
                 )}
               </div>
+              <StickyAvatarSidebar />
+              </div>
             )}
 
             {/* ---- QUESTING VIEW ---- */}
             {activeTab === "Questing" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-                <ProfileQuestingTab wallet={connectedWallet} token={token} />
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+                <div className="flex-1 min-w-0">
+                  <ProfileQuestingTab wallet={connectedWallet} token={token} />
+                </div>
+                <StickyAvatarSidebar />
               </div>
             )}
 
             {/* ---- BOUNTY VIEW ---- */}
             {activeTab === "Bounty" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-                <ProfileBountyTab wallet={connectedWallet} token={token} />
+              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+                <div className="flex-1 min-w-0">
+                  <ProfileBountyTab wallet={connectedWallet} token={token} />
+                </div>
+                <StickyAvatarSidebar />
               </div>
             )}
           </section>

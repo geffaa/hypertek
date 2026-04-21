@@ -8,6 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FiUploadCloud, FiImage, FiArrowLeft, FiLink } from "react-icons/fi";
+import ImageCropModal from "../../Components/ImageCropModal";
 
 const CATEGORIES = [
   "skins", "military badges", "specialists", "weapons",
@@ -42,38 +43,25 @@ function CreateNFT() {
   const [imagePreview, setPreview] = useState(null);
   const [dragOver, setDragOver]   = useState(false);
   const [loading, setLoading]     = useState(false);
+  const [cropSrc,  setCropSrc]    = useState(null);
+  const [cropFileName, setCropFileName] = useState("");
 
-  // Resize image to max 1200px on the longest side before upload
-  const resizeImage = (file) =>
-    new Promise((resolve) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-        const MAX = 1200;
-        let { width, height } = img;
-        if (width > MAX || height > MAX) {
-          if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
-          else { width = Math.round((width * MAX) / height); height = MAX; }
-        }
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        URL.revokeObjectURL(url);
-        canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: "image/jpeg" })), "image/jpeg", 0.88);
-      };
-      img.src = url;
-    });
-
-  const handleFile = async (file) => {
+  const handleFile = (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
-    const resized = await resizeImage(file);
-    setImageFile(resized);
+    setCropFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleCropConfirm = (croppedFile) => {
+    setCropSrc(null);
+    setImageFile(croppedFile);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result);
-    reader.readAsDataURL(resized);
+    reader.readAsDataURL(croppedFile);
   };
 
   const handleSubmit = async () => {
@@ -112,6 +100,15 @@ function CreateNFT() {
 
   return (
     <div className="min-h-screen px-4 md:px-8 xl:px-16 py-8 max-w-[1440px]">
+
+      {cropSrc && (
+        <ImageCropModal
+          src={cropSrc}
+          fileName={cropFileName}
+          onConfirm={handleCropConfirm}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-8">

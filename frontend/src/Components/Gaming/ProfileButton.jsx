@@ -364,15 +364,15 @@ export default function ProfileButton() {
           // PNG frame: inner transparent circle ≈ 51% of image width
           // So total frame display size = sizeNum / 0.51
           const framePx  = Math.round(sizeNum / 0.51);
-          const avatarDisplaySize = Math.round(sizeNum * 1.6); // portrait fills more of the frame
+          const avatarDisplaySize = Math.round(sizeNum * 1.45); // reduced to stay inside frame
           const avatarOff = Math.round((framePx - avatarDisplaySize) / 2); // center avatar inside frame
-          const avatarTopOff = avatarOff + Math.round(framePx * 0.04); // slight downward shift
+          const avatarTopOff = avatarOff + Math.round(framePx * 0.02); // slight downward shift
 
-          // Level badge — centered pill bar at bottom of frame
-          const badgeW  = Math.round(framePx * 0.52);
-          const badgeH  = Math.round(framePx * 0.14);
-          const badgeLeft = Math.round((framePx - badgeW) / 2);
-          const badgeTop  = Math.round(framePx * 0.82);
+          // Level badge — bottom-left: single box with LVL + number
+          const boxSize   = Math.round(framePx * 0.30);
+          const badgeLeft = Math.round(framePx * 0.04);
+          const lvlLabelH = Math.round(boxSize * 0.20);
+          const badgeTop  = Math.round(framePx * 0.68);
 
           return (
             <div
@@ -385,6 +385,7 @@ export default function ProfileButton() {
                 left: avatarOff, top: avatarTopOff,
                 width: avatarDisplaySize, height: avatarDisplaySize,
                 borderRadius: "50%", overflow: "hidden",
+                background: "radial-gradient(ellipse at 50% 15%, rgba(0,212,255,0.45) 0%, rgba(110,40,200,0.38) 45%, rgba(8,4,30,0.96) 100%)",
               }}>
                 <img
                   src={portraitAvatarSrc}
@@ -413,21 +414,28 @@ export default function ProfileButton() {
                 }}
               />
 
-              {/* Level badge — centered pill bar at bottom */}
-              <svg
-                style={{ position: "absolute", left: badgeLeft, top: badgeTop, pointerEvents: "none" }}
-                width={badgeW} height={badgeH}
-                viewBox={`0 0 ${badgeW} ${badgeH}`}
-              >
-                <rect x="0" y="0" width={badgeW} height={badgeH} rx={badgeH / 2}
-                  fill="rgba(4,10,26,0.92)" stroke={frameColor} strokeWidth="1.5" />
-                <text
-                  x={badgeW / 2} y={badgeH / 2}
-                  textAnchor="middle" dominantBaseline="middle"
-                  fontFamily="Orbitron, monospace" fontSize={badgeH * 0.42} fontWeight="bold"
-                  fill={frameColor} letterSpacing="1"
-                >LVL 23</text>
-              </svg>
+              {/* Level badge — single box with LVL on top, number below */}
+              <div style={{
+                position: "absolute", left: badgeLeft, top: badgeTop,
+                width: Math.round(boxSize * 1.35), height: Math.round(boxSize * 0.85),
+                background: "rgba(4,10,26,0.92)",
+                border: `1.5px solid ${frameColor}`,
+                borderRadius: 4,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                boxShadow: `0 0 8px ${frameColor}66`,
+                pointerEvents: "none", gap: 0,
+              }}>
+                <span style={{
+                  fontFamily: "Orbitron, monospace", fontSize: lvlLabelH,
+                  fontWeight: "bold", color: frameColor, letterSpacing: "0.1em",
+                  lineHeight: 1, opacity: 0.8,
+                }}>LVL</span>
+                <span style={{
+                  fontFamily: "Orbitron, monospace", fontSize: Math.round(boxSize * 0.40),
+                  fontWeight: "bold", color: frameColor, letterSpacing: "0.05em",
+                  textShadow: `0 0 8px ${frameColor}`, lineHeight: 1.1,
+                }}>23</span>
+              </div>
             </div>
           );
         })()}

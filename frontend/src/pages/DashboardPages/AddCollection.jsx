@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { FiArrowLeft, FiImage, FiUploadCloud, FiPackage } from "react-icons/fi";
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import Collectionimage from "../../assets/images/CreateCollection/collection.png";
+import ImageCropModal from "../../Components/ImageCropModal";
 
 const inputClass =
   "w-full h-10 px-3 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all placeholder-white/30 text-sm";
@@ -29,6 +30,8 @@ function AddCollection() {
   const [imageFile, setImageFile]   = useState(null);
   const [imagePreview, setPreview]  = useState(null);
   const [dragOver, setDragOver]     = useState(false);
+  const [cropSrc,  setCropSrc]      = useState(null);
+  const [cropFileName, setCropFileName] = useState("");
   const [assetType, setAssetType]   = useState("NFT");
   const [loading, setLoading]       = useState(false);
   const [existingItems, setExistingItems] = useState([]);
@@ -61,10 +64,18 @@ function AddCollection() {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
-    setImageFile(file);
+    setCropFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleCropConfirm = (croppedFile) => {
+    setCropSrc(null);
+    setImageFile(croppedFile);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(croppedFile);
   };
 
   const handleSubmit = async () => {
@@ -109,6 +120,15 @@ function AddCollection() {
 
   return (
     <div className="min-h-screen px-4 md:px-8 py-8">
+
+      {cropSrc && (
+        <ImageCropModal
+          src={cropSrc}
+          fileName={cropFileName}
+          onConfirm={handleCropConfirm}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">

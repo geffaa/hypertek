@@ -2,7 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, SlidersHorizontal, X, Search } from "lucide-react";
 import LazyImage from "../Common/LazyImage";
-import popularFallback from "../../assets/images/popular/popolar.png";
+import overview1 from "../../assets/images/Overview/overview1.jpg";
 import { getImageUrl } from "../../Config";
 
 // ── Item card ─────────────────────────────────────────────────────────────────
@@ -40,8 +40,10 @@ function LineCard({ item }) {
   const navigate  = useNavigate();
   const name      = item.name || "Unnamed";
   const price     = item.priceETH ?? item.price ?? null;
-  const imgSrc    = item.image ? getImageUrl(item.image) : null;
-  const category  = (item.parentCategory || "").toLowerCase().trim();
+  // Public-folder paths (start with "/") are served directly; backend paths go through getImageUrl
+  const imgSrc    = item.image
+    ? (item.image.startsWith("/") ? item.image : getImageUrl(item.image))
+    : null;
 
   // Resolve assetType — use new field, fall back to legacy isNFA boolean
   const assetType = item.assetType || (item.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
@@ -58,13 +60,9 @@ function LineCard({ item }) {
         border: badge ? `1px solid ${badge.border}` : "1px solid rgba(255,255,255,0.09)",
       }}
       onClick={() => {
-        if (isDummy) {
-          navigate(`/collections/${encodeURIComponent(category)}`);
-        } else {
-          navigate("/buy-nfa", {
-            state: { subCollectionId: item._id, parentId: item.parentId, item },
-          });
-        }
+        navigate("/buy-nfa", {
+          state: { subCollectionId: item._id, parentId: item.parentId, item },
+        });
       }}
     >
       {/* Image area — overflow-hidden clips the slide-up overlay */}
@@ -72,13 +70,14 @@ function LineCard({ item }) {
         <LazyImage
           src={imgSrc}
           alt={name}
-          fallback={popularFallback}
+          fallback={overview1}
           className="w-full h-[150px] sm:h-[170px] bg-transparent"
           imgClassName="object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
         {badge && (
           <>
             <div className="absolute inset-0 ring-2 ring-inset pointer-events-none" style={{ borderColor: badge.ring }} />
+            {/* Asset type badge (NFA/NFC/NFT) */}
             <div
               className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[9px] font-bold text-white"
               style={{ background: badge.bg, border: `1px solid ${badge.border}` }}
@@ -86,6 +85,13 @@ function LineCard({ item }) {
               {badge.label}
             </div>
           </>
+        )}
+        {/* Category badge — top right */}
+        {item.parentCategory && (
+          <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize"
+            style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.7)" }}>
+            {item.parentCategory}
+          </div>
         )}
         {isDummy && (
           <div className="absolute inset-0 flex items-end justify-center pb-3 pointer-events-none"

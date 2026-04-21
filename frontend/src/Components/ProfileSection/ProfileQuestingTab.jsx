@@ -191,7 +191,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
       </div>
 
       {/* ── 3-card info row ── */}
-      <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
 
         {/* Card 1 — Daily Quest Slots */}
         <div className="rounded-xl px-4 py-3"
@@ -275,7 +275,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
       ) : (
         /* ── Table ── */
         <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "70vh" }}>
           {/* Header */}
           <div
             className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"

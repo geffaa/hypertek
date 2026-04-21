@@ -726,7 +726,7 @@ function GarageView() {
                       }}>
                         <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel, color: isLocked ? "rgba(255,255,255,0.3)" : "#f3f4f6", lineHeight: 1.55 }}>{upg}</div>
                         {!isLocked && (
-                          <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel - 1, color: v.color, marginTop: 5, letterSpacing: "0.1em", fontWeight: "bold" }}>▸ UPGRADE</div>
+                          <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel - 1, color: "rgba(255,255,255,0.3)", marginTop: 5, letterSpacing: "0.1em", fontWeight: "bold", cursor: "not-allowed" }}>🔒 UPGRADE</div>
                         )}
                       </div>
                     );

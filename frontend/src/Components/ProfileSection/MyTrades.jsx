@@ -469,7 +469,7 @@ export default function MyTrades() {
 
                 {/* Table */}
                 {isOpen && (
-                  <div style={{ overflowX: "auto" }}>
+                  <div style={{ overflowX: "auto", overflowY: "auto", maxHeight: "70vh" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 700 }}>
                       <thead>
                         <tr>
