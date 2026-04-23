@@ -23,11 +23,33 @@ function MarketPlace() {
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
+  // Per-tab scroll position memory
+  const scrollPositions = useRef({});
+  const pendingScroll   = useRef(null);
+
   // Sync activeTab when URL search params change (e.g. navbar Shops → Overview link)
   useEffect(() => {
     const tab = searchParams.get("tab");
-    if (tab) setActiveTab(tab);
-  }, [searchParams]);
+    if (tab && tab !== activeTab) handleTabChange(tab, true);
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Save current scroll → set new tab → restore saved scroll after render
+  const handleTabChange = (tab, fromUrl = false) => {
+    scrollPositions.current[activeTab] = window.scrollY;
+    const saved = scrollPositions.current[tab];
+    pendingScroll.current = saved !== undefined ? saved : null;
+    if (!fromUrl) setSearchParams({ tab });
+    setActiveTab(tab);
+    setSearch("");
+  };
+
+  // Restore scroll position after tab content renders
+  useEffect(() => {
+    if (pendingScroll.current === null) return;
+    const pos = pendingScroll.current;
+    pendingScroll.current = null;
+    requestAnimationFrame(() => window.scrollTo({ top: pos, behavior: "instant" }));
+  }, [activeTab]);
 
   // ── Banner stats from API ──────────────────────────────────────────────────
   const [bannerStats, setBannerStats] = useState({
@@ -74,7 +96,7 @@ function MarketPlace() {
   // ── Tab content ────────────────────────────────────────────────────────────
   const renderTab = () => {
     switch (activeTab) {
-      case "overview":  return <OverviewTab onTabChange={(tab) => { setActiveTab(tab); window.scrollTo({ top: 0, behavior: "smooth" }); }} />;
+      case "overview":  return <OverviewTab onTabChange={(tab) => handleTabChange(tab)} />;
       case "general":   return <GeneralTab />;
       case "nfa101":    return <Nfa101Tab />;
       case "auctions":  return <AuctionsTab />;
@@ -120,7 +142,7 @@ function MarketPlace() {
         <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2 flex items-center gap-3">
           <MarketNavBar
             activeTab={activeTab}
-            onTabChange={(tab) => { setActiveTab(tab); setSearchParams({ tab }); setSearch(""); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            onTabChange={(tab) => handleTabChange(tab)}
             search={search}
             onSearch={setSearch}
             className="flex-1 min-w-0"

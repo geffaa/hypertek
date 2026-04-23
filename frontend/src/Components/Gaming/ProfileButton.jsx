@@ -11,6 +11,17 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
+import {
+  GiLaserGun,
+  GiSpaceSuit,
+  GiBoots,
+  GiHelmet,
+  GiGauntlet,
+  GiFlagObjective,
+  GiPowerLightning,
+  GiStarMedal,
+  GiPlasmaBolt,
+} from "react-icons/gi";
 
 /* ── Species data ─────────────────────────────────────────────── */
 // imgs[0] = female, imgs[1] = male  (genders array matches imgs order)
@@ -19,12 +30,13 @@ const SPECIES = [
     id: "lithionites", name: "Lithionites",
     type: "Mutagenic Metamorphic Hybrid",
     symbolism: "Wisdom / Owl",
-    height: "5–6 feet", eyes: "Pale Blue",
+    height: "5.8 – 6.4 feet", eyes: "Pale Blue / Blue or Purple",
     skin: "Semi Crystalised Stone Structure",
     culture: "Hinduism · Pyramids · Statues",
-    environment: "Caves · Mountains · Rocky Areas",
-    clothing: "Tribal, Minimum",
+    environment: "Caves, Mountains and Rocky Plains",
+    clothing: "Trial style, made of natural and fabricated fibres",
     palette: ["#E5E7EB", "#374151", "#9CA3AF", "#D1D5DB"],
+    notes: "The Lithionites are a complex species, classified as mutagenic, metamorphic hybrids. They are distinguished by their hard, rough exoskeletons and unique crystallised fluidic inner structure.\n\nIn terms of behaviour, Lithionites are known for their aggressive nature and can be easily provoked into combat when threatened or challenged. Despite their fierce disposition, they are quite sociable among members of their own species, where they often engage in social bonding rituals, although they are typically wary of outsiders and may perceive them as threats and, or prey.\n\nWithin their groups, Lithionites have a tendency to test their strength against one another, leading to competitive displays that can sometimes disrupt group cohesion and unity. This frequent rivalry, while integral to their culture, can result in internal conflicts.\n\nTheir diet is diverse, encompassing both plant life and meat sources. Lithionites are skilled hunters and ruthless in capturing prey. Their lack of mercy during hunts showcases their survival instincts and emphasises their dominance in their ecosystem.\n\nLithionites reside in caves or constructed rock shelters at the bases of mountainous regions and rocky plains. These environments not only provide them with ample resources but also serve as strategic vantage points for observing rival species or potential threats.\n\nLoyalty is a cornerstone of Lithionite culture; they are fiercely devoted to their kin and will mobilise to engage in warfare against other species to secure territory and valuable resources. This warrior spirit reflects their deep-rooted beliefs and values.\n\nSpiritually, Lithionites hold a profound connection to crystallised structures, considering them sacred. They engage in rituals that involve worshipping the light emitted from fire and the energies radiated by the crystals that surround them.",
     imgs: ["/avatar/lithionites-female.png", "/avatar/lithionites-male.png"],
     genders: ["female", "male"],
   },
@@ -32,77 +44,86 @@ const SPECIES = [
     id: "marmulus", name: "Marmulus",
     type: "Mutagenic Metamorphic Hybrid",
     symbolism: "The Sun / Moon / Stars",
-    height: "6–7 feet", eyes: "Yellow",
+    height: "6 – 7 feet", eyes: "Yellow",
+    wings: "Can not maintain flight, but can hover",
     skin: "White/Black, gold veins, marble texture",
     culture: "Egyptian · Technology · Gods",
-    environment: "Forests · Flat Plains",
-    clothing: "Egyptian – Modern",
+    environment: "Base of Mountains or Rocky Plains",
+    clothing: "Egyptian/Modern style, made of natural and fabricated fibres",
     palette: ["#FFFFFF", "#FCD34D", "#92400E", "#111827"],
+    notes: "The Marmulus species are classified as mutagenic, metamorphic hybrids. These extraordinary beings are characterised by their hard, smooth exoskeletons and feature a unique, energised fluidic inner core.\n\nMarmulus are not just biologically advanced; they are also socially vibrant and incredibly outgoing. They express their sexuality openly, celebrating their identities through elaborate displays.\n\nTheir diet is diverse, comprising both plant life and meat, reflecting their adaptability as a species. Marmulus have a keen appreciation for valuable items and wealth, often seeking out rare treasures.\n\nOver the centuries, they have developed impressive cities that stand as testaments to their intelligence and creativity, favouring locations in mountainous regions or areas characterised by hard stone, which provide their inspiration.\n\nThe social structure of the Marmulus is deeply rooted in democratic values, fostering loyalty and camaraderie among its communities. They maintain a well-defined authority that ensures harmony within their society. Central to their culture is a belief in spiritual beings and the importance of structural alignment, guiding their interactions with both the physical and metaphysical worlds.",
     imgs: ["/avatar/marmulus-female.png", "/avatar/marmulus-male.png"],
     genders: ["female", "male"],
   },
   {
     id: "ophidians", name: "Ophidians",
-    type: "Snake Hybrid",
-    symbolism: "Fire",
-    height: "8 feet", eyes: "Orange-Red",
+    type: "Snake Alien Hybrid",
+    symbolism: "Aztec Symbols",
+    height: "7.6 – 8.0 feet", eyes: "Reddy Orange / Reddy Brown",
     skin: "Reptile, snake-like all over",
     culture: "Aztec · Fire Worship",
-    environment: "Rain Forest · Rocky Overgrown",
-    clothing: "Roman – Egyptian",
+    environment: "Rain Forests – Overgrown Rocky Plains",
+    clothing: "Roman, Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#111827", "#7C2D12", "#B45309", "#BAE6FD"],
+    notes: "The Ophidians species are characterised by their unique snake-alien hybrid appearance. With smooth, scaly skin that glistens in vibrant dark arrays of colors.\n\nThese creatures thrive in social settings, exhibiting a strong tendency to interact and bond with one another, although their demeanour towards outsiders is notably hostile.\n\nTheir diet is diverse, encompassing both meat and plant-based foods, which supports their dynamic lifestyle.\n\nOphidians are renowned for their deep social connections and affection, forming tight-knit communities where loyalty is paramount. When their territory is threatened, they display fierce protectiveness, and their readiness to engage in conflict can be easily provoked.\n\nWorshipping the sun is an integral part of their culture, as they flourish in warm to hot plains and arid regions. Their architectural prowess is evident in the advanced cities they construct in these sun-drenched environments, showcasing their engineering skills and adaptation to their preferred habitats.",
     imgs: ["/avatar/ophidians-female.png", "/avatar/ophidians-male.png"],
     genders: ["female", "male"],
   },
   {
     id: "geodians", name: "Geodians",
     type: "Mutagenic Metamorphic Hybrid",
-    symbolism: "Moon · Stars",
-    height: "7–8 feet", eyes: "Light Blue / Purple",
+    symbolism: "The Moon / Stars / Light",
+    height: "6.6 – 7.2 feet", eyes: "Pale Blue / Blue / Purple",
     skin: "Infused Crystallised Structure",
     culture: "Mesopotamia · Art · Dance",
-    environment: "Rocky River Plains · Thermal Caves",
-    clothing: "Long, Flowing, Semi-Transparent",
+    environment: "Base of Mountains with thermal activity or Thermal Caves",
+    clothing: "Long, flowing, Semi-Transparent, made of natural and fabricated fibres",
     palette: ["#FFFFFF", "#111827", "#78350F", "#9CA3AF"],
+    notes: "The Geodian species are classified as mutagenic, metamorphic hybrids. These remarkable beings possess a striking crystalised lattice exoskeleton that shimmers and refracts light with mesmerising beauty, while their inner core flows with a thermos fluidic substance that fluctuates with thermal energy.\n\nIntelligent and highly evolved, Geodians have established intricate cities, showcasing advanced engineering and architectural marvels that often flourish near thermal hot springs or regions of intense heat, where their unique biology thrives.\n\nSocial in nature, Geodians embrace their communal existence, openly expressing their emotions and sexuality, fostering connections that bind them together.\n\nTheir diet is versatile, comprising both lush plant life and various forms of meat, reflecting their adaptive nature.\n\nThe Geodian society is marked by its democratic principles and well-structured systems, ensuring every voice is heard.\n\nThey hold a deep reverence for light, which dances through their crystal lattice, creating a captivating spectacle that symbolises their spiritual beliefs and unity within the community.",
     imgs: ["/avatar/geodians-female.png", "/avatar/geodians-male.png"],
     genders: ["female", "male"],
   },
   {
     id: "fawnus", name: "Fawnus",
     type: "Goat Alien Hybrid",
-    symbolism: "Aztec · Music",
-    height: "5.8–6 feet", eyes: "Red",
+    symbolism: "Religious Symbols",
+    height: "5.8 – 6.0 feet", eyes: "Red / Pale Green",
     skin: "White to Light Grey, fine hair",
     culture: "Spanish Civilisation · Music · Gold",
-    environment: "Flat Dry Plains · Near Mountains",
-    clothing: "Steampunk",
+    environment: "Flat Dry Plains, Base of Mountains",
+    clothing: "Steampunk Style of clothing made from Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#3B1F0A", "#1D3557", "#8B3A3A", "#B8860B"],
+    notes: "The Fawnus species resembles a captivating blend of goat and alien features. Their bodies are covered in coarse, short fur that varies in colour, giving them an intriguing appearance that reflects their playful personalities.\n\nInherently mischievous and spirited, Fawnus are known for their love of play, often engaging in activities that showcase their vibrant energy.\n\nTheir diet is impressively diverse, as they thrive on both meat and plant-based foods, allowing them to adapt in varying environments that support their dynamic lifestyles.\n\nSocially, Fawnus are deeply connected, forming tight-knit communities where loyalty holds significant value. Their bonds are fierce, and they display a protective instinct towards both their kin and their territory, making them guardians of the places they inhabit.\n\nCulturally, the Fawnus are devout, worshipping an array of gods and religious symbols that are integral to their way of life. They take cues from Spanish culture, revelling in the joy of music and the allure of wealth, particularly gold, which they cherish as a symbol of prosperity.\n\nArchitecturally, their creations are nothing short of magnificent, showcasing a steampunk style that reflects both their artistic flair and engineering prowess. Grand structures adorned with intricate designs and mechanisms stand as a testament to their creativity and innovation.",
     imgs: ["/avatar/fawnus-female.png", "/avatar/fawnus-male.png"],
     genders: ["female", "male"],
   },
   {
-    id: "mantasquads", name: "Mantasquads",
-    type: "4-Armed Alien Hybrid",
-    symbolism: "Pagan Symbols · Death",
-    height: "5.10–6.6 feet", eyes: "Orange-Red (4 eyes)",
+    id: "mantaquads", name: "Mantaquads",
+    type: "4 Armed Alien Hybrid",
+    symbolism: "Religious Medieval and Satanic Symbols",
+    height: "5.8 – 6.6 feet", eyes: "Orange / Red (4 Eyes)",
+    arms: "4 Arms",
     skin: "Skin Tone to Light Brown",
     culture: "Medieval · Monk · Satanic",
-    environment: "Monasteries · Europe",
-    clothing: "Monk – Assassin Creed – Medieval",
+    environment: "Caves in Mountains or Hillsides",
+    clothing: "Cloaked or Hooded Style of clothing made from Natural and Fabricated Fibres, Silk, Cotton, and Leather",
     palette: ["#0A0A0A", "#2C1A0E", "#6B2737", "#4B0082"],
     imgs: ["/avatar/mantasquads-female.png", "/avatar/mantasquads-male.png"],
     genders: ["female", "male"],
+    notes: "The Mantaquads are unique beings, characterised by their four dexterous arms and four observant eyes, embodying the essence of an alien hybrid. These creatures possess a hive mind, allowing them to operate in perfect unison, which makes them a formidable force.\n\nSocial creatures by nature, Mantaquads engage in vibrant interactions and are known for their open and adventurous approach to sexuality.\n\nTheir pursuit of perfection drives them to master a wide array of martial arts, honing their skills with relentless dedication.\n\nThey consume both meat and plant-based foods, with a particular desire for hunting. Their hunting methods are both thrilling and ruthless, as they prefer to consume their prey while it is still alive, revelling in the primal act of pursuit.\n\nAs mercenaries, the Mantaquads are often sought after for their unparalleled efficiency and merciless prowess in battle. Their hive minds enhance this capability, enabling them to function seamlessly as a single unit, whether in combat or construction.\n\nThese beings exhibit remarkable architectural skills, erecting intricate and massive structures at a pace unmatched by any other species. Deeply religious, Mantaquads are devoted worshippers who follow an intriguing blend of medieval traditions and the use of satanic symbols. They demonstrate their faith by contributing at least 10% of their wealth to churches, reflecting their commitment to their beliefs and community.",
   },
   {
     id: "dryads", name: "Dryads",
     type: "Tree Alien Hybrid",
     symbolism: "Bird · Sun · Butterfly · Dragonfly",
-    height: "6.6 feet", eyes: "Red / Brown / Black / Green",
+    height: "6 – 6.6 feet", eyes: "Red / Brown / Hazel / Black / Green",
+    wings: "Can not maintain flight, but can hover",
     skin: "Wood Root / Leaf-Like",
     culture: "Water · Nature · Spirit · Elements",
     environment: "Woodlands · Forests · Overgrown Rocky Plains",
-    clothing: "Woodlands",
+    clothing: "Natural Plant and Tree-Based Fibres, Silk, Cotton, and Leather",
     palette: ["#2D5016", "#5C3A1E", "#8B2500", "#4A7C59"],
+    notes: "The Dryads are a fascinating and unique species, characterised by their hybrid nature that combines traits of trees and alien beings. This distinctive physiology allows them to thrive in diverse environments, often resembling the flora around them.\n\nThey have a hive-like mind, which enables them to communicate seamlessly with one another. This collective consciousness fosters a deep sense of unity and cooperation, allowing them to operate as a cohesive group while maintaining an intricate connection to the natural world, and they can sense the health of their surroundings, making them exceptional guardians of nature.\n\nTheir diet is primarily plant-based, consisting of leaves, fruits, and other botanical materials. However, they occasionally supplement their diet with small quantities of meat, which they acquire with great care and respect for the life they take.\n\nIn addition to their physical attributes, the Dryads are known for their playful and mischievous behaviour. They often engage in light-hearted pranks or games, reflecting their joyful spirit.\n\nTheir loyalty to one another and their homeland is unwavering, and they will fiercely protect their community and territory when threatened.\n\nSpiritually, the Dryads hold a profound belief in an afterlife that is intertwined with the cycles of nature. They revere the natural elements (Earth, Air, Fire, and Water) as divine forces, and they also worship celestial bodies such as the sun and stars, which they perceive as guiding lights in their existence. This deep connection to both nature and the cosmos shapes their culture, rituals, and overall way of life.",
     imgs: ["/avatar/dryads-female.png", "/avatar/dryads-male.png"],
     genders: ["female", "male"],
   },
@@ -172,23 +193,28 @@ const CSS = `
   .char-grid::-webkit-scrollbar { width: 4px; }
   .char-grid::-webkit-scrollbar-track { background: rgba(0,212,255,0.04); }
   .char-grid::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.28); border-radius: 4px; }
+  .detail-strip::-webkit-scrollbar { width: 3px; }
+  .detail-strip::-webkit-scrollbar-track { background: transparent; }
+  .detail-strip::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.35); border-radius: 4px; }
+  .detail-strip { scrollbar-width: thin; scrollbar-color: rgba(0,212,255,0.35) transparent; }
 `;
 
 /* ── Slot icons ───────────────────────────────────────────────── */
 const SLOT_ICONS = {
-  Weapon: { emoji: "⚔️", color: "#f87171" },
-  Suit:   { emoji: "🥋", color: "#38bdf8" },
-  Boots:  { emoji: "👢", color: "#fb923c" },
-  Helmet: { emoji: "⛑️", color: "#fcd34d" },
-  Gloves: { emoji: "🧤", color: "#a78bfa" },
-  Flag:   { emoji: "🚩", color: "#f87171" },
-  Staff:  { emoji: "🪄", color: "#c4b5fd" },
-  Badge:  { emoji: "🏅", color: "#fcd34d" },
-  Power:  { emoji: "⚡", color: "#38bdf8" },
+  Weapon: { icon: GiLaserGun,       color: "#f87171" },
+  Suit:   { icon: GiSpaceSuit,      color: "#38bdf8" },
+  Boots:  { icon: GiBoots,          color: "#fb923c" },
+  Helmet: { icon: GiHelmet,         color: "#fcd34d" },
+  Gloves: { icon: GiGauntlet,       color: "#a78bfa" },
+  Flag:   { icon: GiFlagObjective,  color: "#f87171" },
+  Staff:  { icon: GiPowerLightning, color: "#c4b5fd" },
+  Badge:  { icon: GiStarMedal,      color: "#fcd34d" },
+  Power:  { icon: GiPlasmaBolt,     color: "#38bdf8" },
 };
 
 function Slot({ label, size = 54 }) {
-  const slot = SLOT_ICONS[label] || { emoji: "❓", color: "#00D4FF" };
+  const slot = SLOT_ICONS[label] || { icon: null, color: "#00D4FF" };
+  const IconComp = slot.icon;
   const iconSize = Math.round(size * 0.52);
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
@@ -199,9 +225,15 @@ function Slot({ label, size = 54 }) {
         backdropFilter: "blur(6px)",
         display: "flex", alignItems: "center", justifyContent: "center",
         boxShadow: `0 0 10px ${slot.color}22, inset 0 1px 0 rgba(255,255,255,0.06)`,
-        fontSize: iconSize, lineHeight: 1, position: "relative",
+        lineHeight: 1, position: "relative",
       }}>
-        {slot.emoji}
+        {IconComp && (
+          <IconComp
+            size={iconSize}
+            color={slot.color}
+            style={{ filter: `drop-shadow(0 0 5px ${slot.color}aa)`, opacity: 0.85 }}
+          />
+        )}
         <div style={{
           position: "absolute", inset: 0, borderRadius: 6,
           background: "rgba(0,0,0,0.45)",
@@ -254,6 +286,7 @@ export default function ProfileButton() {
     return 0;
   });
   const [slideDir,        setSlideDir]        = useState(1);
+  const [notesOpen,       setNotesOpen]       = useState(false);
   const carouselContainerRef = useRef(null);
   const [carouselW,       setCarouselW]       = useState(680);
   const touchStartX = useRef(null);
@@ -338,6 +371,9 @@ export default function ProfileButton() {
 
   const detailVariant = hoveredChar?.variantIdx
     ?? (selectedChar?.speciesId === SPECIES[modIdx].id ? selectedChar.variantIdx : 0);
+
+  // Reset notes panel when switching characters
+  useEffect(() => { setNotesOpen(false); }, [detailSpecies?.id]);
 
   /* equipment panel width (for char panel offset) */
   const equipW = isMobile ? 240 : 320;
@@ -722,7 +758,7 @@ export default function ProfileButton() {
             display: "flex",
             flexDirection: "column",
             gap: (isMobile || isSmall) ? 12 : "clamp(8px, 1.6vh, 18px)",
-            maxHeight: Math.min(windowH * 0.94, 760),
+            maxHeight: Math.min(windowH * 0.96, 900),
             overflow: "hidden",
           }}>
 
@@ -750,9 +786,9 @@ export default function ProfileButton() {
             {/* ── Center Carousel ── */}
             {(() => {
               // CARD_H computed from actual viewport height so carousel always fits
-              // panel budget: padding(~40) + header(~40) + dots(~54) + detail(~130) + gaps(~60) ≈ 324px fixed
-              const panelBudget = Math.min(windowH * 0.94, 760);
-              const fixedContent = 324;
+              // panel budget: padding(~40) + header(~40) + dots(~54) + detail(180) + gaps(~60) ≈ 374px fixed
+              const panelBudget = Math.min(windowH * 0.96, 900);
+              const fixedContent = 374;
               const dynamicH = Math.max(180, Math.min(panelBudget - fixedContent, 420));
               const CARD_W = (isMobile || isSmall) ? 200 : 390;
               const CARD_H = (isMobile || isSmall) ? 230 : dynamicH;
@@ -979,17 +1015,22 @@ export default function ProfileButton() {
 
             {/* ── Detail strip ── */}
             {detailSpecies ? (
-              <div style={{
+              <div className="detail-strip" style={{
                 borderTop: "1px solid rgba(0,212,255,0.14)",
                 paddingTop: 10,
                 display: "flex",
                 gap: 12,
+                overflowY: "auto",
+                flexShrink: 0,
+                height: 180,
+                paddingRight: 6,
               }}>
                 {/* Thumbnail */}
                 <div style={{
                   width: 58, height: 80, flexShrink: 0,
                   borderRadius: 5, overflow: "hidden",
                   border: "1px solid rgba(0,212,255,0.28)",
+                  position: "sticky", top: 0, alignSelf: "flex-start",
                 }}>
                   <img
                     src={detailSpecies.imgs[detailVariant]}
@@ -1021,6 +1062,8 @@ export default function ProfileButton() {
                           ["Culture",   detailSpecies.culture],
                           ["Environ.",  detailSpecies.environment],
                           ["Clothing",  detailSpecies.clothing],
+                          ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
+                          ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
                         ].map(([k, v]) => (
                           <div key={k} style={{ minWidth: 0 }}>
                             <span style={{
@@ -1057,6 +1100,28 @@ export default function ProfileButton() {
                       }}>
                         ⚠ Powers: Not available at this time due to game balancing
                       </div>
+
+                      {/* Notes button */}
+                      {detailSpecies.notes && (
+                        <button
+                          onClick={() => setNotesOpen(true)}
+                          style={{
+                            marginTop: 6,
+                            display: "flex", alignItems: "center", gap: 5,
+                            background: "rgba(0,212,255,0.08)",
+                            border: "1px solid rgba(0,212,255,0.25)",
+                            borderRadius: 4, padding: "4px 8px",
+                            cursor: "pointer", width: "100%",
+                            fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                            color: "#7ECEEC", letterSpacing: "0.08em",
+                            transition: "background 0.15s",
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(0,212,255,0.16)"}
+                          onMouseLeave={e => e.currentTarget.style.background = "rgba(0,212,255,0.08)"}
+                        >
+                          <span style={{ fontSize: 10 }}>📋</span> VIEW NOTES
+                        </button>
+                      )}
                     </>
                   ) : (
                     <div style={{
@@ -1080,6 +1145,89 @@ export default function ProfileButton() {
           </div>
           </div>
         )}
+
+      {/* ── Notes Modal ─────────────────────────────────────────── */}
+      {notesOpen && detailSpecies?.notes && (
+        <div
+          onClick={() => setNotesOpen(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 200,
+            background: "rgba(0,0,0,0.75)",
+            backdropFilter: "blur(6px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "16px",
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              position: "relative",
+              width: "100%", maxWidth: 520,
+              maxHeight: "80vh",
+              background: "rgba(4,8,28,0.98)",
+              border: "1px solid rgba(0,212,255,0.25)",
+              borderRadius: 10,
+              boxShadow: "0 24px 64px rgba(0,0,0,0.8), 0 0 40px rgba(0,212,255,0.08)",
+              display: "flex", flexDirection: "column",
+              overflow: "hidden",
+            }}
+          >
+            {/* Header */}
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "14px 18px",
+              borderBottom: "1px solid rgba(0,212,255,0.12)",
+              flexShrink: 0,
+            }}>
+              <div>
+                <div style={{
+                  fontFamily: "Orbitron,sans-serif", fontSize: 12, fontWeight: "bold",
+                  color: "#00D4FF", letterSpacing: "0.12em",
+                }}>{detailSpecies.name.toUpperCase()}</div>
+                <div style={{
+                  fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
+                  color: "#7ECEEC", letterSpacing: "0.06em", marginTop: 2,
+                }}>SPECIES NOTES</div>
+              </div>
+              <button
+                onClick={() => setNotesOpen(false)}
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 4, width: 28, height: 28,
+                  cursor: "pointer", color: "rgba(255,255,255,0.6)",
+                  fontFamily: "Orbitron,sans-serif", fontSize: 12,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >✕</button>
+            </div>
+
+            {/* Body */}
+            <div style={{ overflowY: "auto", padding: "16px 18px", flex: 1 }}>
+              {detailSpecies.notes.split("\n\n").map((para, i) => (
+                <p key={i} style={{
+                  fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                  color: "rgba(255,255,255,0.7)", lineHeight: 1.8,
+                  margin: i > 0 ? "10px 0 0" : 0,
+                }}>{para}</p>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div style={{
+              padding: "10px 18px",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              flexShrink: 0,
+            }}>
+              <div style={{
+                fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                color: "#F87171", letterSpacing: "0.06em",
+              }}>⚠ Powers: Not available at this time due to game balancing</div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </>
   );

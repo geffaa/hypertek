@@ -158,11 +158,15 @@ export default function ProfileListingsTab({ token }) {
 
   useEffect(() => {
     const fetchListings = async () => {
+      if (!token) {
+        setGrouped({});
+        setLoading(false);
+        return;
+      }
       setLoading(true);
       try {
-        const authToken = token || localStorage.getItem("token");
         const res = await fetch(`${BACKEND_BASE_URL}/api/v1/listings/my`, {
-          headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
+          headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
         if (data.success) {
@@ -233,7 +237,7 @@ export default function ProfileListingsTab({ token }) {
   return (
     <div className="py-4">
       {/* ── Header + Category Dropdown ── */}
-      <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
+      {token && <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <LayoutList className="w-4 h-4 text-white/50" />
           <h3 className="text-white font-semibold text-base">My Listings</h3>
@@ -288,10 +292,17 @@ export default function ProfileListingsTab({ token }) {
             </div>
           )}
         </div>
-      </div>
+      </div>}
 
-      {/* ── Loading ── */}
-      {loading ? (
+      {/* ── Not logged in ── */}
+      {!token ? (
+        <div className="flex flex-col items-center justify-center py-16 rounded-2xl"
+          style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
+          <LayoutList className="w-8 h-8 text-white/15 mb-3" />
+          <p className="text-white/30 text-sm font-medium">Login required</p>
+          <p className="text-white/15 text-xs mt-1">Please log in to view your listings</p>
+        </div>
+      ) : loading ? (
         <div className="space-y-2">
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="h-12 rounded-xl animate-pulse"

@@ -1469,18 +1469,18 @@ function Buy1() {
       <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-stretch">
 
         {/* Left — Image (always visible) */}
-        <div className="w-full md:w-[320px] lg:w-[380px] shrink-0">
+        <div className="w-full md:w-[420px] lg:w-[520px] xl:w-[580px] shrink-0">
           <img
             src={collection?.image ? getImageUrl(collection.image) : overview1}
             alt={collection?.name}
-            className="w-full h-full min-h-[300px] md:min-h-[440px] rounded-2xl object-cover object-center"
+            className="w-full h-full min-h-[300px] md:min-h-[440px] rounded-2xl object-contain object-center"
             style={{ background: "rgba(13,22,50,0.8)" }}
             onError={(e) => { e.target.src = overview1; }}
           />
         </div>
 
         {/* Right — Tab panel */}
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 min-w-0 flex flex-col gap-4">
 
         {/* ── Marketplace Panel ── */}
         {activeTab === "marketplace" && <>

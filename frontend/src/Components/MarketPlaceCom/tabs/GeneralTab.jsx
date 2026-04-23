@@ -4,6 +4,11 @@ import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../Config";
 import LineLayout from "../LineLayout";
 import { FALLBACK_ITEMS } from "../marketplaceFallback";
+import {
+  GiBodySwapping, GiStarMedal, GiTargetLaser, GiCrossedSwords,
+  GiChestArmor, GiSpaceship, GiRaceCar, GiDiamondHard,
+  GiMilitaryFort, GiOpenTreasureChest,
+} from "react-icons/gi";
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -18,194 +23,18 @@ const CAT_ALIAS = {
 };
 
 // Per Don's brief — order matches the General section category list
+const ICON_SIZE = 44;
 const CATEGORIES = [
-  {
-    key: "skins", label: "Skins",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Combat helmet dome */}
-        <path d="M10 24 Q10 10 22 10 Q34 10 34 24" fill="rgba(100,160,255,0.15)" stroke="#6eb4ff" strokeWidth="1.5"/>
-        {/* Visor */}
-        <path d="M13 24 Q13 30 22 30 Q31 30 31 24" fill="rgba(0,120,255,0.25)" stroke="#00d4ff" strokeWidth="1.5"/>
-        <line x1="14" y1="26.5" x2="30" y2="26.5" stroke="#00d4ff" strokeWidth="0.8" opacity="0.5"/>
-        {/* Side vents */}
-        <line x1="10" y1="21" x2="10" y2="26" stroke="#6eb4ff" strokeWidth="2" strokeLinecap="round"/>
-        <line x1="34" y1="21" x2="34" y2="26" stroke="#6eb4ff" strokeWidth="2" strokeLinecap="round"/>
-        {/* Chin guard */}
-        <path d="M13 30 L13 33 Q22 37 31 33 L31 30" fill="rgba(100,160,255,0.08)" stroke="#6eb4ff" strokeWidth="1.2"/>
-        {/* Tech detail on dome */}
-        <line x1="22" y1="10" x2="22" y2="14" stroke="#6eb4ff" strokeWidth="1" opacity="0.5"/>
-        <circle cx="22" cy="14" r="1.5" fill="#6eb4ff" opacity="0.6"/>
-      </svg>
-    ),
-  },
-  {
-    key: "military badges", label: "Military Badges",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Outer hex */}
-        <polygon points="22,5 34,12 34,28 22,35 10,28 10,12" fill="rgba(255,200,50,0.1)" stroke="#ffc83d" strokeWidth="1.5"/>
-        {/* Inner hex ring */}
-        <polygon points="22,9 30,14 30,26 22,31 14,26 14,14" fill="none" stroke="#ffc83d" strokeWidth="0.8" opacity="0.45"/>
-        {/* 5-point star */}
-        <polygon points="22,13 23.8,18.5 29.5,18.5 24.9,21.8 26.6,27.3 22,24 17.4,27.3 19.1,21.8 14.5,18.5 20.2,18.5" fill="#ffc83d" opacity="0.9"/>
-      </svg>
-    ),
-  },
-  {
-    key: "specialists", label: "Specialists",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Outer ring */}
-        <circle cx="22" cy="22" r="13" stroke="#00ff88" strokeWidth="1.5" opacity="0.8"/>
-        {/* Mid ring */}
-        <circle cx="22" cy="22" r="7" fill="rgba(0,255,136,0.07)" stroke="#00ff88" strokeWidth="1" opacity="0.6"/>
-        {/* Center dot */}
-        <circle cx="22" cy="22" r="2" fill="#00ff88"/>
-        {/* Cross lines — gap in center */}
-        <line x1="22" y1="6" x2="22" y2="15" stroke="#00ff88" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="22" y1="29" x2="22" y2="38" stroke="#00ff88" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="6" y1="22" x2="15" y2="22" stroke="#00ff88" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="29" y1="22" x2="38" y2="22" stroke="#00ff88" strokeWidth="1.5" strokeLinecap="round"/>
-        {/* Corner ticks */}
-        <line x1="10" y1="10" x2="12.5" y2="12.5" stroke="#00ff88" strokeWidth="1" strokeLinecap="round" opacity="0.5"/>
-        <line x1="34" y1="10" x2="31.5" y2="12.5" stroke="#00ff88" strokeWidth="1" strokeLinecap="round" opacity="0.5"/>
-        <line x1="10" y1="34" x2="12.5" y2="31.5" stroke="#00ff88" strokeWidth="1" strokeLinecap="round" opacity="0.5"/>
-        <line x1="34" y1="34" x2="31.5" y2="31.5" stroke="#00ff88" strokeWidth="1" strokeLinecap="round" opacity="0.5"/>
-      </svg>
-    ),
-  },
-  {
-    key: "weapons", label: "Weapons",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Barrel */}
-        <rect x="5" y="19" width="24" height="6" rx="1.5" fill="rgba(255,100,100,0.12)" stroke="#ff6464" strokeWidth="1.3"/>
-        {/* Muzzle flash area */}
-        <rect x="29" y="20.5" width="10" height="3" rx="1" fill="rgba(255,150,50,0.2)" stroke="#ff9632" strokeWidth="1"/>
-        <ellipse cx="39" cy="22" rx="2.5" ry="1.5" fill="#ff9632" opacity="0.85"/>
-        {/* Handle */}
-        <path d="M16 25 L16 35 Q16.5 36.5 18 36.5 L22 36.5 Q23.5 36.5 23.5 35 L23.5 25" fill="rgba(255,80,80,0.1)" stroke="#ff6464" strokeWidth="1.2"/>
-        {/* Scope rail */}
-        <rect x="11" y="14.5" width="10" height="4.5" rx="1" fill="rgba(255,100,100,0.1)" stroke="#ff6464" strokeWidth="1"/>
-        <circle cx="16" cy="17" r="1.8" fill="none" stroke="#ff6464" strokeWidth="0.9"/>
-        <circle cx="16" cy="17" r="0.7" fill="#ff6464" opacity="0.8"/>
-        {/* Energy cell */}
-        <rect x="19" y="26" width="4" height="6" rx="0.8" fill="#ff4444" opacity="0.55"/>
-      </svg>
-    ),
-  },
-  {
-    key: "body armour", label: "Body Armour",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Shield outer */}
-        <path d="M22 6 L36 13 L36 26 Q36 37 22 42 Q8 37 8 26 L8 13 Z" fill="rgba(0,42,168,0.18)" stroke="#4f8fff" strokeWidth="1.5"/>
-        {/* Shield inner */}
-        <path d="M22 11 L31 17 L31 25 Q31 33 22 37 Q13 33 13 25 L13 17 Z" fill="rgba(0,80,255,0.08)" stroke="#4f8fff" strokeWidth="0.9" opacity="0.55"/>
-        {/* Energy core */}
-        <circle cx="22" cy="25" r="5" fill="rgba(0,150,255,0.2)" stroke="#00d4ff" strokeWidth="1.3"/>
-        <circle cx="22" cy="25" r="2.5" fill="rgba(0,200,255,0.4)" stroke="#00d4ff" strokeWidth="0.8"/>
-        <circle cx="22" cy="25" r="1" fill="#00d4ff" opacity="0.95"/>
-      </svg>
-    ),
-  },
-  {
-    key: "spaceships", label: "Spaceships",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Main hull — points right */}
-        <path d="M7 22 L28 13 L39 22 L28 31 Z" fill="rgba(100,180,255,0.13)" stroke="#6eb4ff" strokeWidth="1.5"/>
-        {/* Wing details */}
-        <line x1="13" y1="22" x2="28" y2="22" stroke="#6eb4ff" strokeWidth="0.8" opacity="0.45"/>
-        <line x1="28" y1="13" x2="28" y2="31" stroke="#6eb4ff" strokeWidth="0.8" opacity="0.35"/>
-        {/* Cockpit */}
-        <ellipse cx="28" cy="22" rx="5.5" ry="3.5" fill="rgba(0,200,255,0.18)" stroke="#00d4ff" strokeWidth="1.1"/>
-        {/* Engine glow */}
-        <ellipse cx="8" cy="22" rx="3.5" ry="2" fill="rgba(255,120,40,0.45)" stroke="#ff8030" strokeWidth="0.9"/>
-        <ellipse cx="7" cy="22" rx="1.5" ry="1" fill="#ffaa60" opacity="0.9"/>
-        {/* Wing guns */}
-        <line x1="18" y1="16" x2="26" y2="16" stroke="#6eb4ff" strokeWidth="1" strokeLinecap="round" opacity="0.6"/>
-        <line x1="18" y1="28" x2="26" y2="28" stroke="#6eb4ff" strokeWidth="1" strokeLinecap="round" opacity="0.6"/>
-      </svg>
-    ),
-  },
-  {
-    key: "racing vehicles", label: "Vehicles",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Car body */}
-        <path d="M5 26 L9 20 L19 18 L32 18 L39 24 L39 30 L5 30 Z" fill="rgba(255,50,100,0.12)" stroke="#ff3264" strokeWidth="1.4"/>
-        {/* Canopy */}
-        <path d="M13 20 L17 14.5 L28 14.5 L33 20" fill="rgba(0,200,255,0.12)" stroke="#00d4ff" strokeWidth="1.1"/>
-        {/* Wheels */}
-        <circle cx="13" cy="30" r="5" fill="rgba(20,20,40,0.9)" stroke="#6eb4ff" strokeWidth="1.3"/>
-        <circle cx="32" cy="30" r="5" fill="rgba(20,20,40,0.9)" stroke="#6eb4ff" strokeWidth="1.3"/>
-        <circle cx="13" cy="30" r="2" fill="#6eb4ff" opacity="0.65"/>
-        <circle cx="32" cy="30" r="2" fill="#6eb4ff" opacity="0.65"/>
-        {/* Speed lines */}
-        <line x1="1" y1="22" x2="7" y2="22" stroke="#ff3264" strokeWidth="1.2" strokeLinecap="round" opacity="0.75"/>
-        <line x1="1" y1="25" x2="5" y2="25" stroke="#ff3264" strokeWidth="1" strokeLinecap="round" opacity="0.45"/>
-        {/* Intake / front scoop */}
-        <path d="M37 22 L41 23.5 L37 25" fill="none" stroke="#ff3264" strokeWidth="1" opacity="0.5"/>
-      </svg>
-    ),
-  },
-  {
-    key: "artwork", label: "Artwork",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Diamond gem */}
-        <polygon points="22,6 37,20 22,38 7,20" fill="rgba(180,100,255,0.1)" stroke="#c864ff" strokeWidth="1.5"/>
-        {/* Top facets */}
-        <polygon points="22,6 37,20 22,20" fill="rgba(200,130,255,0.07)" stroke="#c864ff" strokeWidth="0.8" opacity="0.6"/>
-        <polygon points="22,6 7,20 22,20" fill="rgba(180,100,255,0.05)" stroke="#c864ff" strokeWidth="0.8" opacity="0.5"/>
-        {/* Bottom facets */}
-        <polygon points="22,38 37,20 22,20" fill="rgba(140,60,220,0.1)" stroke="#c864ff" strokeWidth="0.8" opacity="0.4"/>
-        {/* Middle line */}
-        <line x1="7" y1="20" x2="37" y2="20" stroke="#c864ff" strokeWidth="0.9" opacity="0.55"/>
-        {/* Center vertical */}
-        <line x1="22" y1="6" x2="22" y2="38" stroke="#c864ff" strokeWidth="0.5" opacity="0.3"/>
-        {/* Shine streak */}
-        <line x1="15" y1="13" x2="13" y2="17" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.55"/>
-      </svg>
-    ),
-  },
-  {
-    key: "land and bases", label: "Land & Bases",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Hex platform */}
-        <polygon points="22,28 33,22 33,12 22,6 11,12 11,22" fill="rgba(0,42,168,0.15)" stroke="#4f8fff" strokeWidth="1.5"/>
-        {/* Inner hex */}
-        <polygon points="22,24 29,20 29,14 22,10 15,14 15,20" fill="none" stroke="#4f8fff" strokeWidth="0.8" opacity="0.45"/>
-        {/* Tower */}
-        <rect x="19.5" y="28" width="5" height="9" rx="1" fill="rgba(0,42,168,0.25)" stroke="#4f8fff" strokeWidth="1.1"/>
-        {/* Tower top */}
-        <rect x="18" y="26" width="8" height="2.5" rx="0.8" fill="rgba(0,80,255,0.2)" stroke="#4f8fff" strokeWidth="1"/>
-        {/* Antenna */}
-        <line x1="22" y1="6" x2="22" y2="2.5" stroke="#4f8fff" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="22" cy="2" r="1.8" fill="#00d4ff" opacity="0.9"/>
-        {/* Ground line */}
-        <line x1="7" y1="39" x2="37" y2="39" stroke="#4f8fff" strokeWidth="1" opacity="0.4"/>
-      </svg>
-    ),
-  },
-  {
-    key: "general", label: "General",
-    icon: (
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Box body */}
-        <rect x="9" y="18" width="26" height="18" rx="2" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5"/>
-        {/* Box lid */}
-        <path d="M7 18 L22 10 L37 18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinejoin="round"/>
-        {/* Lid centre line */}
-        <line x1="22" y1="10" x2="22" y2="18" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
-        {/* Front clasp */}
-        <rect x="19" y="24" width="6" height="4" rx="1" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
-      </svg>
-    ),
-  },
+  { key: "skins",           label: "Skins",           icon: <GiBodySwapping      size={ICON_SIZE} color="#38bdf8" style={{ filter: "drop-shadow(0 0 6px #38bdf888)" }} /> },
+  { key: "military badges", label: "Military Badges",  icon: <GiStarMedal         size={ICON_SIZE} color="#fcd34d" style={{ filter: "drop-shadow(0 0 6px #fcd34d88)" }} /> },
+  { key: "specialists",     label: "Specialists",      icon: <GiTargetLaser       size={ICON_SIZE} color="#00ff88" style={{ filter: "drop-shadow(0 0 6px #00ff8888)" }} /> },
+  { key: "weapons",         label: "Weapons",          icon: <GiCrossedSwords     size={ICON_SIZE} color="#ff6464" style={{ filter: "drop-shadow(0 0 6px #ff646488)" }} /> },
+  { key: "body armour",     label: "Body Armour",      icon: <GiChestArmor        size={ICON_SIZE} color="#4f8fff" style={{ filter: "drop-shadow(0 0 6px #4f8fff88)" }} /> },
+  { key: "spaceships",      label: "Spaceships",       icon: <GiSpaceship         size={ICON_SIZE} color="#6eb4ff" style={{ filter: "drop-shadow(0 0 6px #6eb4ff88)" }} /> },
+  { key: "racing vehicles", label: "Vehicles",         icon: <GiRaceCar           size={ICON_SIZE} color="#ff3264" style={{ filter: "drop-shadow(0 0 6px #ff326488)" }} /> },
+  { key: "artwork",         label: "Artwork",          icon: <GiDiamondHard       size={ICON_SIZE} color="#c864ff" style={{ filter: "drop-shadow(0 0 6px #c864ff88)" }} /> },
+  { key: "land and bases",  label: "Land & Bases",     icon: <GiMilitaryFort      size={ICON_SIZE} color="#4f8fff" style={{ filter: "drop-shadow(0 0 6px #4f8fff88)" }} /> },
+  { key: "general",         label: "General",          icon: <GiOpenTreasureChest size={ICON_SIZE} color="#e2e8f0" style={{ filter: "drop-shadow(0 0 6px #e2e8f066)" }} /> },
 ];
 
 
@@ -234,33 +63,25 @@ export default function GeneralTab() {
         const parents = res.data.nfts || res.data.collections || [];
 
         const map = {};
-        await Promise.all(
-          parents.map(async (parent) => {
-            try {
-              const sub = await axios.get(
-                `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`
-              );
-              if (sub.data.success && sub.data.subCollections?.length) {
-                const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
-                const catKey = CAT_ALIAS[rawKey] || rawKey;
-                if (!map[catKey]) map[catKey] = [];
-                // Only show items that are listed for sale with a valid price
-                const listedSubs = sub.data.subCollections.filter(
-                  (s) => s.listed === true && s.priceETH > 0
-                );
-                map[catKey].push(
-                  ...listedSubs.map((s) => ({
-                    ...s,
-                    parentId:       parent._id,
-                    parentCategory: catKey,
-                    parentName:     parent.collection?.name || "",
-                    isDummy:        parent.isDummy === true,
-                  }))
-                );
-              }
-            } catch { /* skip */ }
-          })
-        );
+        parents.forEach((parent) => {
+          const subCollections = parent.subCollections || [];
+          if (!subCollections.length) return;
+          const rawKey = (parent.category || parent.collection?.name || "other").toLowerCase().trim();
+          const catKey = CAT_ALIAS[rawKey] || rawKey;
+          if (!map[catKey]) map[catKey] = [];
+          const listedSubs = subCollections.filter(
+            (s) => s.listed === true && s.priceETH > 0
+          );
+          map[catKey].push(
+            ...listedSubs.map((s) => ({
+              ...s,
+              parentId:       parent._id,
+              parentCategory: catKey,
+              parentName:     parent.collection?.name || "",
+              isDummy:        parent.isDummy === true,
+            }))
+          );
+        });
 
         // Check if we got any items from backend
         const hasItems = Object.values(map).some(arr => arr.length > 0);

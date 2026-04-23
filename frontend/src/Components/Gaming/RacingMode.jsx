@@ -269,40 +269,29 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
             onMouseLeave={e => e.currentTarget.style.background = "rgba(34,197,94,0.06)"}
           >◀</button>
 
-          {/* Vehicle detail card */}
+          {/* Vehicle detail card — split 50/50: image left | details right */}
           <div style={{
             flex: 1, background: "rgba(3,12,8,0.88)",
             border: `1.5px solid ${v.color}55`,
             borderRadius: 10,
             boxShadow: `0 0 30px ${v.color}18`,
             padding: s.cardPad,
-            display: "flex", flexDirection: "column", gap: s.cardGap,
+            display: "flex", flexDirection: "row", gap: 0,
             transition: "border-color 0.3s, box-shadow 0.3s",
+            overflow: "hidden",
           }}>
-            {/* Name + class */}
-            <div style={{ textAlign: "center" }}>
-              <div style={{
-                fontFamily: "Orbitron,sans-serif",
-                fontSize: s.fontSize + 2,
-                fontWeight: "bold", letterSpacing: "0.16em",
-                color: v.color, textShadow: `0 0 18px ${v.color}bb`,
-                transition: "color 0.3s",
-              }}>{v.name}</div>
-              <div style={{
-                fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                color: "rgba(255,255,255,0.4)", letterSpacing: "0.18em", marginTop: 4,
-              }}>{v.class} · {v.bay}</div>
-            </div>
 
-            {/* Vehicle image */}
+            {/* LEFT — vehicle image */}
             <div style={{
-              width: "100%", height: s.imgH,
+              flex: 1,
               display: "flex", alignItems: "center", justifyContent: "center",
               position: "relative", overflow: "hidden",
+              minHeight: s.imgH,
+              padding: s.cardPad,
             }}>
               <div style={{
                 position: "absolute", inset: 0,
-                background: `radial-gradient(ellipse at 50% 60%, ${v.color}18, transparent 70%)`,
+                background: `radial-gradient(ellipse at 50% 55%, ${v.color}1a, transparent 70%)`,
                 pointerEvents: "none",
               }} />
               <img
@@ -313,15 +302,36 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
                   objectFit: "contain",
                   filter: `drop-shadow(0 0 18px ${v.color}88)`,
                   transition: "filter 0.3s",
+                  position: "relative", zIndex: 1,
                 }}
               />
             </div>
 
-            {/* Stats + loadout row */}
-            <div style={{ display: "flex", gap: 14 }}>
+            {/* Vertical divider */}
+            <div style={{ width: 1, background: `${v.color}22`, flexShrink: 0, alignSelf: "stretch" }} />
+
+            {/* RIGHT — name, specs, loadout, button */}
+            <div style={{
+              flex: 1, display: "flex", flexDirection: "column", gap: s.cardGap,
+              padding: s.cardPad, overflowY: "auto",
+            }}>
+              {/* Name + class */}
+              <div>
+                <div style={{
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: s.fontSize + 2,
+                  fontWeight: "bold", letterSpacing: "0.16em",
+                  color: v.color, textShadow: `0 0 18px ${v.color}bb`,
+                  transition: "color 0.3s",
+                }}>{v.name}</div>
+                <div style={{
+                  fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                  color: "rgba(255,255,255,0.4)", letterSpacing: "0.18em", marginTop: 4,
+                }}>{v.class} · {v.bay}</div>
+              </div>
 
               {/* Stats */}
-              <div style={{ flex: 1 }}>
+              <div>
                 <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: "rgba(34,197,94,0.45)", marginBottom: s.gap * 0.7 }}>SPECIFICATIONS</div>
                 {Object.entries(v.stats).map(([k, val]) => (
                   <div key={k} style={{ display: "flex", justifyContent: "space-between", marginBottom: s.gap * 0.5 }}>
@@ -331,11 +341,11 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
                 ))}
               </div>
 
-              {/* Divider */}
-              <div style={{ width: 1, background: "rgba(34,197,94,0.12)", flexShrink: 0 }} />
+              {/* Horizontal divider */}
+              <div style={{ height: 1, background: `${v.color}22`, flexShrink: 0 }} />
 
               {/* Loadout */}
-              <div style={{ flex: 1 }}>
+              <div>
                 <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: "rgba(34,197,94,0.45)", marginBottom: s.gap * 0.7 }}>LOADOUT</div>
                 {v.loadout.map(item => (
                   <div key={item} style={{
@@ -347,20 +357,20 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* SELECT button */}
-            <button onClick={() => onSelect(vehicleIdx)} style={{
-              width: "100%", padding: s.btnPad,
-              background: `linear-gradient(180deg, ${v.color}28, ${v.color}10)`,
-              border: `1px solid ${v.color}99`,
-              borderRadius: 4,
-              fontFamily: "Orbitron,sans-serif", fontSize: s.btnFont, fontWeight: "bold",
-              letterSpacing: "0.16em", color: v.color,
-              textShadow: `0 0 8px ${v.color}88`,
-              cursor: "pointer",
-              transition: "background 0.2s",
-            }}>DEPLOY VEHICLE ▸</button>
+              {/* Deploy button — pushed to bottom */}
+              <button onClick={() => onSelect(vehicleIdx)} style={{
+                width: "100%", padding: s.btnPad, marginTop: "auto",
+                background: `linear-gradient(180deg, ${v.color}28, ${v.color}10)`,
+                border: `1px solid ${v.color}99`,
+                borderRadius: 4,
+                fontFamily: "Orbitron,sans-serif", fontSize: s.btnFont, fontWeight: "bold",
+                letterSpacing: "0.16em", color: v.color,
+                textShadow: `0 0 8px ${v.color}88`,
+                cursor: "pointer",
+                transition: "background 0.2s",
+              }}>DEPLOY VEHICLE ▸</button>
+            </div>
           </div>
 
           {/* NEXT */}
