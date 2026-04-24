@@ -1039,95 +1039,96 @@ export default function ProfileButton() {
                   />
                 </div>
 
-                {/* Info */}
-                <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 3 }}>
-                  <div style={{
-                    fontFamily: "Orbitron,sans-serif", fontSize: 11.5, fontWeight: "bold",
-                    color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.6)",
-                    letterSpacing: "0.1em", lineHeight: 1.2,
-                  }}>{detailSpecies.name.toUpperCase()}</div>
+                {/* Info — left attributes + right notes */}
+                <div style={{ flex: 1, minWidth: 0, display: "flex", gap: 10 }}>
 
-                  {detailSpecies.type ? (
-                    <>
-                      <div style={{
-                        fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                        color: "#7ECEEC", letterSpacing: "0.06em",
-                      }}>{detailSpecies.type}</div>
+                  {/* Left: name + type + ordered attributes + power notice */}
+                  <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 3 }}>
+                    <div style={{
+                      fontFamily: "Orbitron,sans-serif", fontSize: 11.5, fontWeight: "bold",
+                      color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.6)",
+                      letterSpacing: "0.1em", lineHeight: 1.2,
+                    }}>{detailSpecies.name.toUpperCase()}</div>
 
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 12px", marginTop: 3 }}>
-                        {[
-                          ["Symbolism", detailSpecies.symbolism],
-                          ["Height",    detailSpecies.height],
-                          ["Eyes",      detailSpecies.eyes],
-                          ["Culture",   detailSpecies.culture],
-                          ["Environ.",  detailSpecies.environment],
-                          ["Clothing",  detailSpecies.clothing],
-                          ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
-                          ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
-                        ].map(([k, v]) => (
-                          <div key={k} style={{ minWidth: 0 }}>
-                            <span style={{
-                              fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                              color: "#9CA3AF", letterSpacing: "0.06em",
-                            }}>{k}: </span>
-                            <span style={{
-                              fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
-                              color: "#FFFFFF",
-                            }}>{v}</span>
-                          </div>
-                        ))}
-                      </div>
+                    {detailSpecies.type ? (
+                      <>
+                        <div style={{
+                          fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                          color: "#7ECEEC", letterSpacing: "0.06em",
+                        }}>{detailSpecies.type}</div>
 
-                      {/* Colour palette */}
-                      {detailSpecies.palette?.length > 0 && (
-                        <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 3 }}>
-                          <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "#9CA3AF", letterSpacing: "0.06em" }}>PALETTE:</span>
-                          {detailSpecies.palette.map((c, i) => (
-                            <div key={i} style={{
-                              width: 13, height: 13, borderRadius: 2,
-                              background: c, border: "1px solid rgba(255,255,255,0.25)",
-                              boxShadow: `0 0 5px ${c}88`,
-                            }} />
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 12px", marginTop: 3 }}>
+                          {[
+                            ["Height",    detailSpecies.height],
+                            ["Eyes",      detailSpecies.eyes],
+                            ["Clothing",  detailSpecies.clothing],
+                            ["Environ.",  detailSpecies.environment],
+                            ["Symbolism", detailSpecies.symbolism],
+                            ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
+                            ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
+                          ].map(([k, v]) => (
+                            <div key={k} style={{ minWidth: 0 }}>
+                              <span style={{
+                                fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                                color: "#9CA3AF", letterSpacing: "0.06em",
+                              }}>{k}: </span>
+                              <span style={{
+                                fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
+                                color: "#FFFFFF",
+                              }}>{v}</span>
+                            </div>
                           ))}
                         </div>
-                      )}
 
-                      {/* Powers notice */}
+                        {/* Powers notice */}
+                        <div style={{
+                          marginTop: 4,
+                          fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                          color: "#F87171", letterSpacing: "0.06em",
+                        }}>
+                          ⚠ Powers: Not available at this time due to game balancing
+                        </div>
+                      </>
+                    ) : (
                       <div style={{
-                        marginTop: 4,
-                        fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                        color: "#F87171", letterSpacing: "0.06em",
-                      }}>
-                        ⚠ Powers: Not available at this time due to game balancing
-                      </div>
+                        fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                        color: "#7ECEEC", marginTop: 6,
+                      }}>Species details coming soon...</div>
+                    )}
+                  </div>
 
-                      {/* Notes button */}
-                      {detailSpecies.notes && (
-                        <button
-                          onClick={() => setNotesOpen(true)}
-                          style={{
-                            marginTop: 6,
-                            display: "flex", alignItems: "center", gap: 5,
-                            background: "rgba(0,212,255,0.08)",
-                            border: "1px solid rgba(0,212,255,0.25)",
-                            borderRadius: 4, padding: "4px 8px",
-                            cursor: "pointer", width: "100%",
-                            fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                            color: "#7ECEEC", letterSpacing: "0.08em",
-                            transition: "background 0.15s",
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = "rgba(0,212,255,0.16)"}
-                          onMouseLeave={e => e.currentTarget.style.background = "rgba(0,212,255,0.08)"}
-                        >
-                          <span style={{ fontSize: 10 }}>📋</span> VIEW NOTES
-                        </button>
-                      )}
-                    </>
-                  ) : (
+                  {/* Right: Notes button */}
+                  {detailSpecies.notes && (
                     <div style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                      color: "#7ECEEC", marginTop: 6,
-                    }}>Species details coming soon...</div>
+                      width: 90, flexShrink: 0,
+                      display: "flex", flexDirection: "column",
+                      alignItems: "center", justifyContent: "center",
+                      borderLeft: "1px solid rgba(0,212,255,0.12)",
+                      paddingLeft: 10,
+                    }}>
+                      <span style={{
+                        fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                        color: "#9CA3AF", letterSpacing: "0.06em", marginBottom: 8,
+                      }}>NOTES</span>
+                      <button
+                        onClick={() => setNotesOpen(true)}
+                        style={{
+                          display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
+                          background: "rgba(0,212,255,0.08)",
+                          border: "1px solid rgba(0,212,255,0.25)",
+                          borderRadius: 6, padding: "8px 10px",
+                          cursor: "pointer", width: "100%",
+                          fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                          color: "#7ECEEC", letterSpacing: "0.08em",
+                          transition: "background 0.15s",
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = "rgba(0,212,255,0.18)"}
+                        onMouseLeave={e => e.currentTarget.style.background = "rgba(0,212,255,0.08)"}
+                      >
+                        <span style={{ fontSize: 18 }}>📋</span>
+                        VIEW NOTES
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>

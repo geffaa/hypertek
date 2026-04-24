@@ -338,67 +338,103 @@ const HAZ_COLOR = { LOW:"#22c55e", MEDIUM:"#facc15", HIGH:"#f87171" };
 // Positions derived from image grid: center X≈50.1%, column interval≈2.88%vw, row interval≈6.12%vh
 const LOCATIONS = [
   // ── Left cluster ──────────────────────────────────────────
-  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"15%",  top:"23,5%",   desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
+  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"10%",  top:"23,5%",   desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
   { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"20%", top:"17,5%",   desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
-  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"24%", top:"35%",   desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
-  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%", top:"20%",   desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
-  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"42.5%", top:"23%",   desc:"Hydroponic farming complex. Primary food source for western sectors." },
-  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39%", top:"30%", desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
-  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"41.5%", top:"38%", desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
-  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"11%", top:"42.5%", desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
-  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"17.5%", top:"49%", desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
-  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"30%", top:"49%", desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
-  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"36%",   top:"55%", desc:"Sector command authority. All major coalition operations coordinated here." },
-  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"24%", top:"62%", desc:"Traffic control and cargo routing for southern transit lanes." },
-  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"14.5%", top:"69%", desc:"Research station studying gravitational anomalies near the galactic core boundary." },
-  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"31%", top:"71%", desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
-  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"24.5%", top:"79%", desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
-  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"10%",    top:"82%", desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
+  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%", top:"29%",   desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
+  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"13.1%", top:"22%",   desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
+  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"17.5%", top:"20.5%",   desc:"Hydroponic farming complex. Primary food source for western sectors." },
+  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"41%", top:"21%", desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
+  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"37%", top:"31.5%", desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
+  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"15.5%", top:"43%", desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
+  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"20.5%", top:"42%", desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
+  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"28%", top:"50%", desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
+  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"31.5%",   top:"54.5%", desc:"Sector command authority. All major coalition operations coordinated here." },
+  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"22.5%", top:"60%", desc:"Traffic control and cargo routing for southern transit lanes." },
+  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"17.5%", top:"63%", desc:"Research station studying gravitational anomalies near the galactic core boundary." },
+  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"29.5%", top:"66%", desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
+  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"23%", top:"77%", desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
+  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"10%",    top:"74%", desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
   // ── Center ────────────────────────────────────────────────
-  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"58.5%", top:"31%",   desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
-  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"71.5%", top:"29%", desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
-  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"58%",   top:"68.5%", desc:"Frontier exploration base. Marks the edge of the charted transit network." },
+  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"30%", top:"19%",   desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
+  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"40.5%", top:"30.5%", desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
+  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"42%",   top:"68.5%", desc:"Frontier exploration base. Marks the edge of the charted transit network." },
   // ── Right cluster ─────────────────────────────────────────
-  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"91%", top:"20%",   desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
-  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"63%", top:"23%",   desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
-  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"79%", top:"17.5%",   desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
-  { id:"mco",   name:"TRN-562",      type:"Mining Colony",       coords:"T11·R10", atm:"VACUUM",     hazard:"HIGH",   left:"91%",   top:"35.9%", desc:"Deep-core drilling operation. Rare mineral extraction. Seismic activity: elevated." },
-  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"82.5%", top:"37%", desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
-  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"76.5%", top:"45%", desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
-  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"65%", top:"43%", desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
-  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"84%", top:"52%", desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
-  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"89.5%",   top:"51%", desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
-  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"69%", desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
-  { id:"adv",   name:"ZRE3-QW",      type:"Advanced Research",   coords:"T04·R05", atm:"VACUUM",     hazard:"MEDIUM", left:"76%", top:"56%", desc:"Black-site research installation. Classified operations. Access restricted." },
-  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"62.3%", top:"79%", desc:"Cryo-comet resource extraction. Primary water source for eastern stations." },
-  { id:"surv",  name:"TQX-115",      type:"Survey Station",      coords:"T03·R10", atm:"VACUUM",     hazard:"LOW",    left:"75%",   top:"81%", desc:"Cartographic post. Continuously updates the regional star map." },
-  { id:"pros",  name:"TKM-689",      type:"Prospecting Post",    coords:"T03·R13", atm:"VACUUM",     hazard:"MEDIUM", left:"87%", top:"82.5%", desc:"Mineral survey base. Reports high concentrations of neutronium-class deposits." },
+  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"65.5%", top:"22%",   desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
+  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"22.5%", top:"18.5%",   desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
+  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"75.5%", top:"17.5%",   desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
+  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39.5%", top:"38.5%", desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
+  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"79.5%", top:"51%", desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
+  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"73.5%", top:"41%", desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
+  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"85.5%", top:"47.5%", desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
+  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"86.5%", top:"47.5%", desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
+  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"30%", desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
+  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"64.5%", top:"35%", desc:"Cryo-comet resource extraction. Primary water source for eastern stations." }
 ];
+
+/* ── Planet image mapping — add entries here as assets arrive ── */
+const PLANET_IMG = {
+  agri:  "/planet/1.png",   // ZETA-37-6LP
+  sd:    "/planet/1.png",   // ZETA-51-M2
+  mil:   "/planet/1.png",   // ZV-23N-19U
+  orb:   "/planet/2.png",   // TXC-44P
+  ship:  "/planet/2.png",   // ZION-37-6Q2
+  echo:  "/planet/2.png",   // ZIR-12-56
+  logi:  "/planet/2.png",   // ZORAX-4SH
+  trade: "/planet/2.png",   // ZETA-73-QN
+  sci:   "/planet/3.png",   // ZETA-31-196
+  pion:  "/planet/3.png",   // TNS-554
+  sup:   "/planet/3.png",   // TLM-675
+  fuel:  "/planet/3.png",   // ZETA-91-9XV
+  cmd:   "/planet/4.png",   // ZORAX-19U
+  ind:   "/planet/4.png",   // ZETA-33-8V2
+  sig:   "/planet/4.png",   // TMA-488
+  asm:   "/planet/4.png",   // ZX-89-QW
+  ice:   "/planet/4.png",   // TZR-092
+  bio:   "/planet/4.png",   // TY-67-3P
+  col:   "/planet/5.png",   // FZC-423
+  res:   "/planet/5.png",   // ZETA-55-9R
+  relay: "/planet/6.png",   // ZEN-83-OX
+  trd:   "/planet/6.png",   // TKY-981
+  gas:   "/planet/6.png",   // TNG-921
+  tech:  "/planet/6.png",   // ZX-88-QW
+  comm:  "/planet/7.png",   // ZIR-31-6NV
+  expl:  "/planet/7.png",   // ZRSE-40P
+  nav:   "/planet/7.png",   // TQ-173-HN
+};
 
 /* ── Planet detail panel ──────────────────────────────────── */
 function PlanetDetail({ loc, onClose }) {
   const ac = ATM_COLOR[loc.atm]    || "#94a3b8";
   const hc = HAZ_COLOR[loc.hazard] || "#94a3b8";
+  const imgSrc = PLANET_IMG[loc.id];
+  const fallbackColor = ATM_COLOR[loc.atm] || "#94a3b8";
 
-  // Anchor popup near the clicked node — same approach as ships-level room popup
+  const [note, setNote] = useState(() => {
+    try { return localStorage.getItem(`quest_note_${loc.id}`) || ""; }
+    catch { return ""; }
+  });
+  const handleNote = (e) => {
+    setNote(e.target.value);
+    try { localStorage.setItem(`quest_note_${loc.id}`, e.target.value); }
+    catch {}
+  };
+
   const l = parseFloat(loc.left);
   const t = parseFloat(loc.top);
-  // Horizontal: if node is in right half, popup appears to its LEFT (right edge near node)
   const toLeft = l > 52;
   const hPos = toLeft
     ? { right: `${Math.max(1, 100 - l + 1)}%` }
-    : { left:  `${Math.min(66, l + 2)}%` };
-  // Vertical: if node is in bottom 45%, popup rises above it; otherwise drops below
+    : { left:  `${Math.min(48, l + 2)}%` };
   const toAbove = t > 55;
   const vPos = toAbove
     ? { bottom: `${Math.max(2, 100 - t + 1)}%` }
-    : { top:    `${Math.min(55, t + 2)}%` };
+    : { top:    `${Math.min(46, t + 2)}%` };
 
   return (
     <div style={{
       position: "absolute",
       ...hPos, ...vPos,
-      width: "min(230px, 33%)",
+      width: "min(500px, 64%)",
       background: "rgba(2,6,22,0.97)",
       border: "1px solid rgba(56,189,248,0.38)",
       borderRadius: 10,
@@ -413,42 +449,94 @@ function PlanetDetail({ loc, onClose }) {
           from { opacity:0; transform: scale(0.94); }
           to   { opacity:1; transform: scale(1); }
         }
+        .quest-notes-ta::placeholder { color: #7dd3fc; }
+        .quest-notes-ta:focus { outline: none; }
       `}</style>
 
-      {/* Header */}
+      {/* Header — full width */}
       <div style={{ background:"rgba(56,189,248,0.07)", borderBottom:"1px solid rgba(56,189,248,0.16)", padding:"10px 14px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
         <div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:14, fontWeight:"bold", color:"#38bdf8", letterSpacing:"0.12em", textShadow:"0 0 12px rgba(56,189,248,0.7)" }}>{loc.name}</div>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:13, fontWeight:"bold", color:"#38bdf8", letterSpacing:"0.12em", textShadow:"0 0 12px rgba(56,189,248,0.7)" }}>{loc.name}</div>
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, color:"rgba(255,255,255,0.4)", letterSpacing:"0.18em", marginTop:3 }}>{loc.type} · {loc.coords}</div>
         </div>
         <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
       </div>
 
-      {/* Body */}
-      <div style={{ padding:"10px 14px", display:"flex", gap:14 }}>
-        <div style={{ display:"flex", flexDirection:"column", gap:8, flexShrink:0 }}>
-          <div>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>ATMOSPHERE</div>
-            <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{loc.atm}</div>
-          </div>
-          <div>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>HAZARD LVL</div>
-            <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{loc.hazard}</div>
-          </div>
-        </div>
-        <div style={{ width:1, background:"rgba(56,189,248,0.1)", flexShrink:0 }} />
-        <div style={{ flex:1 }}>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:5 }}>BRIEFING</div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8.5, color:"rgba(255,255,255,0.68)", lineHeight:1.7, letterSpacing:"0.03em" }}>{loc.desc}</div>
-        </div>
-      </div>
+      {/* Body — LEFT: info + quest locked  |  RIGHT: image + notes */}
+      <div style={{ display:"flex" }}>
 
-      {/* Locked quest */}
-      <div style={{ margin:"0 14px 10px", background:"rgba(248,113,113,0.05)", border:"1px solid rgba(248,113,113,0.2)", borderRadius:6, padding:"8px 10px", display:"flex", alignItems:"center", gap:10 }}>
-        <div style={{ fontSize:15, flexShrink:0 }}>🔒</div>
-        <div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:"#f87171", letterSpacing:"0.12em", marginBottom:3 }}>QUEST INFORMATION — CONTENT LOCKED</div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"rgba(248,113,113,0.5)", letterSpacing:"0.05em", lineHeight:1.5 }}>Full mission data, objectives &amp; rewards available in the complete game release.</div>
+        {/* LEFT — atmosphere, hazard, briefing, quest locked */}
+        <div style={{ flex:1, padding:"10px 14px 12px", display:"flex", flexDirection:"column", gap:8, minWidth:0 }}>
+          <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+            <div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>ATMOSPHERE</div>
+              <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{loc.atm}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>HAZARD LVL</div>
+              <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{loc.hazard}</div>
+            </div>
+          </div>
+          <div style={{ height:1, background:"rgba(56,189,248,0.1)" }} />
+          <div style={{ flex:1 }}>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:4 }}>BRIEFING</div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8.5, color:"rgba(255,255,255,0.68)", lineHeight:1.6, letterSpacing:"0.03em" }}>{loc.desc}</div>
+          </div>
+          {/* Quest locked — left column only */}
+          <div style={{ background:"rgba(248,113,113,0.05)", border:"1px solid rgba(248,113,113,0.2)", borderRadius:6, padding:"7px 9px", display:"flex", alignItems:"center", gap:8, marginTop:2 }}>
+            <div style={{ fontSize:13, flexShrink:0 }}>🔒</div>
+            <div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5, fontWeight:"bold", color:"#f87171", letterSpacing:"0.1em", marginBottom:2 }}>QUEST — CONTENT LOCKED</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5, color:"rgba(248,113,113,0.55)", letterSpacing:"0.04em", lineHeight:1.4 }}>Available in the complete game release.</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Vertical divider */}
+        <div style={{ width:1, background:"rgba(56,189,248,0.1)", flexShrink:0 }} />
+
+        {/* RIGHT — image (top) + notes (bottom) */}
+        <div style={{ width:155, display:"flex", flexDirection:"column", flexShrink:0 }}>
+
+          {/* Image box */}
+          <div style={{
+            height:150,
+            flexShrink:0,
+            borderBottom:"1px solid rgba(56,189,248,0.1)",
+            position:"relative", overflow:"hidden",
+            background: imgSrc ? "#000" : `radial-gradient(circle at 40% 35%, ${fallbackColor}33, rgba(2,6,22,0.9))`,
+          }}>
+            {imgSrc
+              ? <img src={imgSrc} alt={loc.type} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+              : <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>NO IMAGE</div>
+                </div>
+            }
+            <div style={{ position:"absolute", bottom:4, left:7, fontFamily:"Orbitron,sans-serif", fontSize:6, color:"#fff", letterSpacing:"0.12em", pointerEvents:"none" }}>IMAGE</div>
+          </div>
+
+          {/* Notes box */}
+          <div style={{ height:120, flexShrink:0, display:"flex", flexDirection:"column", background:"rgba(56,189,248,0.02)" }}>
+            <div style={{ padding:"6px 8px 2px", fontFamily:"Orbitron,sans-serif", fontSize:7, color:"#38bdf8", letterSpacing:"0.15em", fontWeight:"bold", flexShrink:0 }}>NOTES</div>
+            <textarea
+              className="quest-notes-ta"
+              value={note}
+              onChange={handleNote}
+              placeholder="Type your notes..."
+              style={{
+                flex:1,
+                width:"100%",
+                background:"transparent",
+                border:"none", resize:"none",
+                padding:"2px 8px 8px",
+                fontFamily:"Orbitron,sans-serif", fontSize:9,
+                color:"#fff",
+                lineHeight:1.6, letterSpacing:"0.03em",
+                boxSizing:"border-box",
+              }}
+            />
+          </div>
+
         </div>
       </div>
     </div>
@@ -489,7 +577,7 @@ function VideoOverlay({ onClose }) {
       >
         {/* Video */}
         <video
-          src="/video/quest_video.mp4"
+          src="/video/quest_video2.webm"
           autoPlay
           controls
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
@@ -583,7 +671,7 @@ function StarMapOverlay({ onClose }) {
       >
         {/* Map image — fills popup exactly (same 16:9 ratio) */}
         <img
-          src="/quest-content.png"
+          src="/UI Globe Map_Fixed.png"
           alt="star map"
           style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"fill", pointerEvents:"none" }}
         />
@@ -591,8 +679,31 @@ function StarMapOverlay({ onClose }) {
         {/* Subtle overlay */}
         <div style={{ position:"absolute", inset:0, background:"rgba(0,4,18,0.1)", pointerEvents:"none" }} />
 
-        {/* Hotspot dots — % relative to popup = % relative to image */}
+        {/* Hotspot dots (known) + UNKNOWN boxes */}
         {LOCATIONS.map(loc => {
+          if (loc.unknown) {
+            return (
+              <div
+                key={loc.id}
+                style={{
+                  position:"absolute", left:loc.left, top:loc.top,
+                  transform:"translate(-50%,-50%)",
+                  border:"1.5px solid #EAB308",
+                  borderRadius:2,
+                  background:"rgba(0,0,0,0.55)",
+                  padding:"2px 6px",
+                  fontFamily:"Orbitron,sans-serif",
+                  fontSize:"clamp(5px,0.55vw,7px)", fontWeight:"bold",
+                  letterSpacing:"0.1em",
+                  color:"#EAB308",
+                  whiteSpace:"nowrap",
+                  pointerEvents:"none",
+                  zIndex:80,
+                  boxShadow:"0 0 6px rgba(234,179,8,0.4)",
+                }}
+              >UNKNOWN</div>
+            );
+          }
           const isSel = selected?.id === loc.id;
           return (
             <button
@@ -813,7 +924,7 @@ function GroundView() {
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#080c06" }}>
 
       {/* Background image */}
-      <LazyImage src="/quest2.png" spinnerColor="#38bdf8" />
+      <LazyImage src="/quest3.png" spinnerColor="#38bdf8" />
 
       {/* Vignette */}
       <div style={{
