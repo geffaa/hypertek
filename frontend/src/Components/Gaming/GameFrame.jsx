@@ -122,11 +122,11 @@ export default function GameFrame() {
       </defs>
 
       {/* ── Panel images ── */}
-      <image href="/racing3.png"    x="15"  y={TL_Y} width="375" height={BL_Y - TL_Y}
+      <image href="/racing3.png"   x="15"  y={TL_Y} width="375" height={BL_Y - TL_Y}
         clipPath="url(#clip-left)"   preserveAspectRatio="xMidYMid slice" />
       {/* quest1.png moved to HTML layer — see div above SVG */}
-      <image href="/overlord3.png"  x="630" y={TL_Y} width="355" height={BL_Y - TL_Y}
-        clipPath="url(#clip-right)"  preserveAspectRatio="xMidYMid slice" />
+      <image href="/overlord4.png" x="380" y={TL_Y - 100} width="870" height={BL_Y - TL_Y + 200}
+        clipPath="url(#clip-right)"  preserveAspectRatio="xMinYMid slice" />
 
       {/* ── Vignette ── */}
       <polygon

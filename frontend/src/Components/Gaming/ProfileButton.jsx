@@ -286,7 +286,6 @@ export default function ProfileButton() {
     return 0;
   });
   const [slideDir,        setSlideDir]        = useState(1);
-  const [notesOpen,       setNotesOpen]       = useState(false);
   const carouselContainerRef = useRef(null);
   const [carouselW,       setCarouselW]       = useState(680);
   const touchStartX = useRef(null);
@@ -372,8 +371,6 @@ export default function ProfileButton() {
   const detailVariant = hoveredChar?.variantIdx
     ?? (selectedChar?.speciesId === SPECIES[modIdx].id ? selectedChar.variantIdx : 0);
 
-  // Reset notes panel when switching characters
-  useEffect(() => { setNotesOpen(false); }, [detailSpecies?.id]);
 
   /* equipment panel width (for char panel offset) */
   const equipW = isMobile ? 240 : 320;
@@ -1019,31 +1016,30 @@ export default function ProfileButton() {
                 borderTop: "1px solid rgba(0,212,255,0.14)",
                 paddingTop: 10,
                 display: "flex",
-                gap: 12,
-                overflowY: "auto",
+                gap: 16,
                 flexShrink: 0,
-                height: 180,
-                paddingRight: 6,
+                height: 200,
+                overflowY: "auto",
+                paddingRight: 4,
               }}>
-                {/* Thumbnail */}
-                <div style={{
-                  width: 58, height: 80, flexShrink: 0,
-                  borderRadius: 5, overflow: "hidden",
-                  border: "1px solid rgba(0,212,255,0.28)",
-                  position: "sticky", top: 0, alignSelf: "flex-start",
-                }}>
-                  <img
-                    src={detailSpecies.imgs[detailVariant]}
-                    alt={detailSpecies.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-                  />
-                </div>
 
-                {/* Info — left attributes + right notes */}
-                <div style={{ flex: 1, minWidth: 0, display: "flex", gap: 10 }}>
+                {/* ── Left section: image + detail points (single column) ── */}
+                <div style={{ display: "flex", gap: 12, flex: "0 0 46%", minWidth: 0, alignItems: "flex-start" }}>
+                  {/* Thumbnail */}
+                  <div style={{
+                    width: 58, height: 82, flexShrink: 0,
+                    borderRadius: 5, overflow: "hidden",
+                    border: "1px solid rgba(0,212,255,0.28)",
+                  }}>
+                    <img
+                      src={detailSpecies.imgs[detailVariant]}
+                      alt={detailSpecies.name}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+                    />
+                  </div>
 
-                  {/* Left: name + type + ordered attributes + power notice */}
-                  <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 3 }}>
+                  {/* Name + type + attributes single column */}
+                  <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 4 }}>
                     <div style={{
                       fontFamily: "Orbitron,sans-serif", fontSize: 11.5, fontWeight: "bold",
                       color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.6)",
@@ -1054,10 +1050,11 @@ export default function ProfileButton() {
                       <>
                         <div style={{
                           fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                          color: "#7ECEEC", letterSpacing: "0.06em",
+                          color: "#7ECEEC", letterSpacing: "0.06em", marginBottom: 2,
                         }}>{detailSpecies.type}</div>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 12px", marginTop: 3 }}>
+                        {/* Single-column attribute list — common fields first, then species-specific */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                           {[
                             ["Height",    detailSpecies.height],
                             ["Eyes",      detailSpecies.eyes],
@@ -1067,22 +1064,22 @@ export default function ProfileButton() {
                             ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
                             ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
                           ].map(([k, v]) => (
-                            <div key={k} style={{ minWidth: 0 }}>
+                            <div key={k} style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 1 }}>
                               <span style={{
-                                fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                                color: "#9CA3AF", letterSpacing: "0.06em",
-                              }}>{k}: </span>
+                                fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
+                                color: "#00D4FF", letterSpacing: "0.08em",
+                                textShadow: "0 0 6px rgba(0,212,255,0.45)",
+                              }}>{k}</span>
                               <span style={{
-                                fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
-                                color: "#FFFFFF",
+                                fontFamily: "Orbitron,sans-serif", fontSize: 9,
+                                color: "rgba(255,255,255,0.85)",
                               }}>{v}</span>
                             </div>
                           ))}
                         </div>
 
-                        {/* Powers notice */}
                         <div style={{
-                          marginTop: 4,
+                          marginTop: 2,
                           fontFamily: "Orbitron,sans-serif", fontSize: 8,
                           color: "#F87171", letterSpacing: "0.06em",
                         }}>
@@ -1096,41 +1093,29 @@ export default function ProfileButton() {
                       }}>Species details coming soon...</div>
                     )}
                   </div>
-
-                  {/* Right: Notes button */}
-                  {detailSpecies.notes && (
-                    <div style={{
-                      width: 90, flexShrink: 0,
-                      display: "flex", flexDirection: "column",
-                      alignItems: "center", justifyContent: "center",
-                      borderLeft: "1px solid rgba(0,212,255,0.12)",
-                      paddingLeft: 10,
-                    }}>
-                      <span style={{
-                        fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                        color: "#9CA3AF", letterSpacing: "0.06em", marginBottom: 8,
-                      }}>NOTES</span>
-                      <button
-                        onClick={() => setNotesOpen(true)}
-                        style={{
-                          display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
-                          background: "rgba(0,212,255,0.08)",
-                          border: "1px solid rgba(0,212,255,0.25)",
-                          borderRadius: 6, padding: "8px 10px",
-                          cursor: "pointer", width: "100%",
-                          fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                          color: "#7ECEEC", letterSpacing: "0.08em",
-                          transition: "background 0.15s",
-                        }}
-                        onMouseEnter={e => e.currentTarget.style.background = "rgba(0,212,255,0.18)"}
-                        onMouseLeave={e => e.currentTarget.style.background = "rgba(0,212,255,0.08)"}
-                      >
-                        <span style={{ fontSize: 18 }}>📋</span>
-                        VIEW NOTES
-                      </button>
-                    </div>
-                  )}
                 </div>
+
+                {/* ── Right section: Notes text ── */}
+                {detailSpecies.notes && (
+                  <div style={{
+                    flex: 1, minWidth: 0,
+                    borderLeft: "1px solid rgba(0,212,255,0.14)",
+                    paddingLeft: 14,
+                    display: "flex", flexDirection: "column", gap: 6,
+                  }}>
+                    <div style={{
+                      fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold",
+                      color: "#00D4FF", letterSpacing: "0.12em",
+                      textShadow: "0 0 8px rgba(0,212,255,0.5)",
+                    }}>NOTES</div>
+                    <p style={{
+                      fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
+                      color: "rgba(255,255,255,0.72)", lineHeight: 1.65,
+                      margin: 0,
+                    }}>{detailSpecies.notes.split("\n\n").join(" ")}</p>
+                  </div>
+                )}
+
               </div>
             ) : (
               <div style={{
@@ -1147,88 +1132,6 @@ export default function ProfileButton() {
           </div>
         )}
 
-      {/* ── Notes Modal ─────────────────────────────────────────── */}
-      {notesOpen && detailSpecies?.notes && (
-        <div
-          onClick={() => setNotesOpen(false)}
-          style={{
-            position: "fixed", inset: 0, zIndex: 200,
-            background: "rgba(0,0,0,0.75)",
-            backdropFilter: "blur(6px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            padding: "16px",
-          }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{
-              position: "relative",
-              width: "100%", maxWidth: 520,
-              maxHeight: "80vh",
-              background: "rgba(4,8,28,0.98)",
-              border: "1px solid rgba(0,212,255,0.25)",
-              borderRadius: 10,
-              boxShadow: "0 24px 64px rgba(0,0,0,0.8), 0 0 40px rgba(0,212,255,0.08)",
-              display: "flex", flexDirection: "column",
-              overflow: "hidden",
-            }}
-          >
-            {/* Header */}
-            <div style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "14px 18px",
-              borderBottom: "1px solid rgba(0,212,255,0.12)",
-              flexShrink: 0,
-            }}>
-              <div>
-                <div style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: 12, fontWeight: "bold",
-                  color: "#00D4FF", letterSpacing: "0.12em",
-                }}>{detailSpecies.name.toUpperCase()}</div>
-                <div style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
-                  color: "#7ECEEC", letterSpacing: "0.06em", marginTop: 2,
-                }}>SPECIES NOTES</div>
-              </div>
-              <button
-                onClick={() => setNotesOpen(false)}
-                style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRadius: 4, width: 28, height: 28,
-                  cursor: "pointer", color: "rgba(255,255,255,0.6)",
-                  fontFamily: "Orbitron,sans-serif", fontSize: 12,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >✕</button>
-            </div>
-
-            {/* Body */}
-            <div style={{ overflowY: "auto", padding: "16px 18px", flex: 1 }}>
-              {detailSpecies.notes.split("\n\n").map((para, i) => (
-                <p key={i} style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                  color: "rgba(255,255,255,0.7)", lineHeight: 1.8,
-                  margin: i > 0 ? "10px 0 0" : 0,
-                }}>{para}</p>
-              ))}
-            </div>
-
-            {/* Footer */}
-            <div style={{
-              padding: "10px 18px",
-              borderTop: "1px solid rgba(255,255,255,0.06)",
-              flexShrink: 0,
-            }}>
-              <div style={{
-                fontFamily: "Orbitron,sans-serif", fontSize: 8,
-                color: "#F87171", letterSpacing: "0.06em",
-              }}>⚠ Powers: Not available at this time due to game balancing</div>
-            </div>
-          </div>
-        </div>
-      )}
 
     </>
   );

@@ -23,14 +23,14 @@ const UNLOCKED_VEHICLES = [
     img: "/vehicle1.png",
     color: "#22c55e",
     stats: {
-      "TOP SPEED":    "427 kt",
-      "ACCELERATION": "1.31 G",
-      "KETO MASS":    "0.00 t",
-      "RANGE":        "8,400 km",
-      "SHIELD":       "94%",
-      "HULL":         "100%",
+      "Top Speed":     "1341 kt",
+      "Acceleration":  "0-500kt/0.9sec",
+      "Hull Strength": "Mid Range",
+      "Range":         "316 km",
+      "Weight":        "1107 kg",
+      "Shields":       "F/R 80%",
     },
-    loadout: ["Plasma Drive", "Vector Thrusters", "H.A.R. Stabilizer", "Neutrino Boost"],
+    loadout: ["PZI Jet Drive", "3Vec Anti-Gravity Units", "Twin H.A.R. Stabilisers", "Dual Neutrino Booster"],
   },
   {
     id: "wraith",
@@ -40,14 +40,14 @@ const UNLOCKED_VEHICLES = [
     img: "/vehicle2.png",
     color: "#38bdf8",
     stats: {
-      "TOP SPEED":    "612 kt",
-      "ACCELERATION": "2.10 G",
-      "KETO MASS":    "0.00 t",
-      "RANGE":        "5,200 km",
-      "SHIELD":       "71%",
-      "HULL":         "87%",
+      "Top Speed":     "1645 kt",
+      "Acceleration":  "0-500kt/0.83sec",
+      "Hull Strength": "Mid Range",
+      "Range":         "296 km",
+      "Weight":        "1184 kg",
+      "Shields":       "F/R 85%",
     },
-    loadout: ["Dark Matter Core", "Phase Cloaking", "Ion Burst", "EMP Shield"],
+    loadout: ["MC234 Drive", "3VPDS Anti-Gravity Units", "Twin H.A.R. Stabilisers", "Dual Z314 Boosters"],
   },
   {
     id: "voidhawk",
@@ -57,14 +57,14 @@ const UNLOCKED_VEHICLES = [
     img: "/vehicle3.png",
     color: "#f97316",
     stats: {
-      "TOP SPEED":    "510 kt",
-      "ACCELERATION": "1.75 G",
-      "KETO MASS":    "1.20 t",
-      "RANGE":        "11,000 km",
-      "SHIELD":       "83%",
-      "HULL":         "92%",
+      "Top Speed":     "1798 kt",
+      "Acceleration":  "0-500kt/0.77sec",
+      "Hull Strength": "Mid Range",
+      "Range":         "241 km",
+      "Weight":        "1211 kg",
+      "Shields":       "F/R 87%",
     },
-    loadout: ["Void Engine Mk2", "Railgun Array", "Stealth Coating", "Surge Capacitor"],
+    loadout: ["Twin Cove Drive", "4Zeta Anti-Gravity Units", "Twin Z1i Stabilisers", "Dual Z314 Boosters"],
   },
 ];
 
@@ -324,18 +324,14 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
                   color: v.color, textShadow: `0 0 18px ${v.color}bb`,
                   transition: "color 0.3s",
                 }}>{v.name}</div>
-                <div style={{
-                  fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                  color: "rgba(255,255,255,0.4)", letterSpacing: "0.18em", marginTop: 4,
-                }}>{v.class} · {v.bay}</div>
               </div>
 
               {/* Stats */}
               <div>
-                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: "rgba(34,197,94,0.45)", marginBottom: s.gap * 0.7 }}>SPECIFICATIONS</div>
+                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>BASIC SPECIFICATION</div>
                 {Object.entries(v.stats).map(([k, val]) => (
                   <div key={k} style={{ display: "flex", justifyContent: "space-between", marginBottom: s.gap * 0.5 }}>
-                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, color: "rgba(255,255,255,0.38)", letterSpacing: "0.08em" }}>{k}</span>
+                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, color: "rgba(255,255,255,0.75)", letterSpacing: "0.08em" }}>{k}</span>
                     <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont + 1, fontWeight: "bold", color: v.color }}>{val}</span>
                   </div>
                 ))}
@@ -346,11 +342,11 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
 
               {/* Loadout */}
               <div>
-                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: "rgba(34,197,94,0.45)", marginBottom: s.gap * 0.7 }}>LOADOUT</div>
+                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>SYSTEM LAYOUT</div>
                 {v.loadout.map(item => (
                   <div key={item} style={{
                     fontFamily: "Orbitron,sans-serif", fontSize: s.statFont,
-                    color: "rgba(255,255,255,0.65)", marginBottom: s.gap * 0.5,
+                    color: "rgba(255,255,255,0.82)", marginBottom: s.gap * 0.5,
                     display: "flex", alignItems: "center", gap: 5,
                   }}>
                     <span style={{ color: v.color, fontSize: 8 }}>▸</span>{item}
@@ -438,45 +434,105 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
   );
 }
 
-/* ─── Parts data ──────────────────────────────────────────────── */
-const PARTS = [
+/* ─── Parts data (per vehicle) ────────────────────────────────── */
+const LOCKED_PARTS = [
   {
-    id: "hull",    label: "HULL",         icon: "🛡",  locked: false,
-    equipped: "Carbon Composite Mk1",
-    specs: { "Weight": "420 kg", "Defense": "+18%", "Drag Coeff.": "0.28" },
-    upgrades: ["Carbon Composite Mk2 — +12% Defense", "Titanium Shell — +30% Defense 🔒", "Nano-Armor — +45% Defense 🔒"],
-  },
-  {
-    id: "fins",    label: "AERODYNAMICS", icon: "🌬",  locked: false,
-    equipped: "Standard Wing Array",
-    specs: { "Downforce": "320 N", "Top Speed": "+5%", "Cornering": "+8%" },
-    upgrades: ["Delta Wing Array — +12% Speed", "Swept Vortex Fins — +18% Cornering 🔒", "Active Aero System — COMING SOON 🔒"],
-  },
-  {
-    id: "drive",   label: "DRIVE SYSTEM", icon: "⚡",  locked: false,
-    equipped: "Plasma Drive Mk1",
-    specs: { "Thrust": "1.31 G", "Top Speed": "427 kt", "Efficiency": "88%" },
-    upgrades: ["Plasma Drive Mk2 — +0.4G Thrust", "Vector Nozzle — +15% Turn Rate 🔒", "Quantum Drive — COMING SOON 🔒"],
-  },
-  {
-    id: "cockpit", label: "COCKPIT",      icon: "🎮",  locked: false,
-    equipped: "Standard HUD",
-    specs: { "Visibility": "220°", "HUD Type": "Basic", "Reaction": "0ms lag" },
-    upgrades: ["Enhanced HUD — +30° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection — COMING SOON 🔒"],
-  },
-  {
-    id: "weapons", label: "WEAPONS",      icon: "🔫",  locked: true,
+    id: "weapons", label: "WEAPONS",   icon: "🔫", locked: true,
     equipped: "— LOCKED —",
     specs: { "Status": "Not Available", "Unlock": "Lvl 30 Required" },
     upgrades: ["Laser Array — 🔒", "Plasma Cannon — 🔒", "EMP Burst — 🔒"],
   },
   {
-    id: "boost",   label: "BOOST CORE",   icon: "🚀",  locked: true,
+    id: "boost",   label: "BOOST CORE", icon: "🚀", locked: true,
     equipped: "— LOCKED —",
     specs: { "Status": "Not Available", "Unlock": "Complete Season 1" },
     upgrades: ["Nitro Burst — 🔒", "Gravity Sling — 🔒", "Afterburner X — 🔒"],
   },
 ];
+
+const PARTS_BY_VEHICLE = {
+  sebring: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Carbon Composite Mk1",
+      specs: { "Weight": "859 kg", "Defence": "Front and Rear Split Shields +18%", "Drag Coeff.": "0.018Cd" },
+      upgrades: ["Defence: Front and Rear Split Shields +18%", "Titanium Shell — +30% Defence 🔒", "Nano-Armor — +45% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Standard Wing Array",
+      specs: { "G-Limits": "9.3G", "Speed Rating": "+5%", "Corning": "+8" },
+      upgrades: ["Delta Wing Array — +12% Speed", "Swept Vortex Fins — +18% Corning 🔒", "Active Aero System — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "PZI Jet Drive",
+      specs: { "Top Speed": "1341 kt", "Acceleration": "0-500kt/0.9sec", "Fuel Type": "Av Fuel 120", "Efficiency": "88%" },
+      upgrades: ["Series 2 PZI Jet Drive — +8%", "Vector Nozzle — +15% Turn Rate 🔒", "Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Standard HUD",
+      specs: { "Visibility": "220°", "HUD Type": "Basic", "Reaction": "0ms lag" },
+      upgrades: ["Enhanced HUD — +30° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+  wraith: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Carbon Composite Mk1",
+      specs: { "Weight": "887 kg", "Defence": "Front and Rear Split Shields +20%", "Drag Coeff.": "0.018Cd" },
+      upgrades: ["Defence: Front and Rear Split Shields +22%", "Titanium Shell — +30% Defence 🔒", "Nano-Armor — +45% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Standard Wing Array",
+      specs: { "G-Limits": "9.4G", "Speed Rating": "+5%", "Corning": "+8" },
+      upgrades: ["Delta Wing Array — +12% Speed", "Swept Vortex Fins — +18% Corning 🔒", "Active Aero System — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "MC234 Drive",
+      specs: { "Top Speed": "1645 kt", "Acceleration": "0-500kt/0.83sec", "Fuel Type": "Av Fuel 125", "Efficiency": "92%" },
+      upgrades: ["MC237 Drive — +10%", "Vector Nozzle — +15% Turn Rate 🔒", "Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Standard HUD",
+      specs: { "Visibility": "220°", "HUD Type": "Basic", "Reaction": "0ms lag" },
+      upgrades: ["Enhanced HUD — +30° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+  voidhawk: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Carbon Composite Mk1",
+      specs: { "Weight": "902 kg", "Defence": "Front and Rear Split Shields +20%", "Drag Coeff.": "0.017Cd" },
+      upgrades: ["Carbon Composite Mk2 — Defence: Front and Rear Split Shields +22%", "Titanium Shell — +30% Defence 🔒", "Nano-Armor — +45% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Standard Wing Array",
+      specs: { "G-Limits": "9.7G", "Speed Rating": "+6%", "Corning": "+10" },
+      upgrades: ["Delta Wing Array — +12% Speed", "Swept Vortex Fins — +18% Corning 🔒", "Active Aero System — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "Twin Cove Drive",
+      specs: { "Top Speed": "1798 kt", "Acceleration": "0-500kt/0.77sec", "Fuel Type": "Av Fuel 125", "Efficiency": "94%" },
+      upgrades: ["Series 2 Twin Cove Drive — +12%", "Vector Nozzle — +15% Turn Rate 🔒", "Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Standard HUD",
+      specs: { "Visibility": "220°", "HUD Type": "Basic", "Reaction": "0ms lag" },
+      upgrades: ["Enhanced HUD — +30° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+};
 
 /* ══════════════════════════════════════════════════════════════════
    GARAGE VIEW — Gran Turismo style
@@ -503,7 +559,8 @@ function GarageView() {
     : { panelTop: "18%", panelMaxH: "74%", panelW: "clamp(300px,24vw,360px)", pad: "12px 16px", gap: 6, hdr: 13, partIcon: 20, partLabel: 11, partSub: 9.5, specLabel: 10, specVal: 11, upgLabel: 10, sectionTitle: 10, btnH: "11px 28px", btnFont: 11 };
 
   const v = UNLOCKED_VEHICLES[vehicleIdx];
-  const part = PARTS.find(p => p.id === selectedPart);
+  const parts = PARTS_BY_VEHICLE[v.id] ?? [];
+  const part = parts.find(p => p.id === selectedPart);
 
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
@@ -657,7 +714,7 @@ function GarageView() {
               padding: `${g.gap + 4}px ${g.gap + 4}px`,
               borderRight: part && !part.locked ? "1px solid rgba(34,197,94,0.18)" : "none",
             }}>
-              {PARTS.map(p => {
+              {parts.map(p => {
                 // SVG icon per part
                 const icons = {
                   hull:    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L15 6V12L9 16L3 12V6Z" stroke="currentColor" strokeWidth="1.4" fill="none"/><path d="M9 5L12 7V11L9 13L6 11V7Z" fill="currentColor" opacity="0.25"/></svg>,
@@ -679,15 +736,15 @@ function GarageView() {
                       borderRadius: 7, marginBottom: g.gap,
                       border: selectedPart === p.id ? `1.5px solid ${v.color}cc` : "1px solid rgba(255,255,255,0.07)",
                       background: selectedPart === p.id ? `${v.color}1c` : "rgba(255,255,255,0.03)",
-                      opacity: p.locked ? 0.38 : 1,
+                      opacity: p.locked ? 0.65 : 1,
                       cursor: p.locked ? "not-allowed" : "pointer",
                       transition: "all 0.15s",
                     }}
                   >
                     <span style={{ color: iconColor, flexShrink: 0, display: "flex" }}>{icons[p.id]}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partLabel, fontWeight: "bold", color: p.locked ? "#9ca3af" : "#f3f4f6", letterSpacing: "0.07em" }}>{p.label}</div>
-                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partSub, color: p.locked ? "rgba(255,255,255,0.22)" : v.color, marginTop: 3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.equipped}</div>
+                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partLabel, fontWeight: "bold", color: p.locked ? "#d1d5db" : "#f3f4f6", letterSpacing: "0.07em" }}>{p.label}</div>
+                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partSub, color: p.locked ? "rgba(255,255,255,0.5)" : v.color, marginTop: 3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.equipped}</div>
                     </div>
                     <span style={{ color: p.locked ? "#6b7280" : v.color, fontSize: 11, flexShrink: 0 }}>
                       {p.locked ? "🔒" : selectedPart === p.id ? "◀" : "▶"}
@@ -711,30 +768,30 @@ function GarageView() {
 
                 {/* Specs */}
                 <div style={{ padding: g.pad, borderBottom: "1px solid rgba(34,197,94,0.08)" }}>
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: "rgba(34,197,94,0.6)", marginBottom: g.gap + 4 }}>SPECIFICATIONS</div>
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>SPECIFICATIONS</div>
                   {Object.entries(part.specs).map(([k, val]) => (
-                    <div key={k} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: g.gap + 4, padding: "0 2px" }}>
-                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specLabel, color: "rgba(255,255,255,0.45)", letterSpacing: "0.05em" }}>{k}</span>
-                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specVal, fontWeight: "bold", color: v.color }}>{val}</span>
+                    <div key={k} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: g.gap + 4, padding: "0 2px" }}>
+                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specLabel, color: "rgba(255,255,255,0.8)", letterSpacing: "0.05em", flexShrink: 0 }}>{k}</span>
+                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specVal, fontWeight: "bold", color: v.color, textAlign: "right" }}>{val}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Upgrades */}
                 <div style={{ padding: g.pad }}>
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: "rgba(34,197,94,0.6)", marginBottom: g.gap + 4 }}>UPGRADES</div>
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>UPGRADES</div>
                   {part.upgrades.map((upg, i) => {
                     const isLocked = upg.includes("🔒") || upg.includes("COMING SOON");
                     return (
                       <div key={i} style={{
                         padding: `${g.gap + 4}px ${g.gap + 5}px`,
                         borderRadius: 6, marginBottom: g.gap + 3,
-                        border: `1px solid ${isLocked ? "rgba(255,255,255,0.08)" : `${v.color}66`}`,
-                        background: isLocked ? "rgba(255,255,255,0.02)" : `${v.color}10`,
-                        opacity: isLocked ? 0.4 : 1,
+                        border: `1px solid ${isLocked ? "rgba(255,255,255,0.18)" : `${v.color}66`}`,
+                        background: isLocked ? "rgba(255,255,255,0.05)" : `${v.color}10`,
+                        opacity: isLocked ? 0.7 : 1,
                         cursor: isLocked ? "not-allowed" : "pointer",
                       }}>
-                        <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel, color: isLocked ? "rgba(255,255,255,0.3)" : "#f3f4f6", lineHeight: 1.55 }}>{upg}</div>
+                        <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel, color: isLocked ? "rgba(255,255,255,0.6)" : "#f3f4f6", lineHeight: 1.55 }}>{upg}</div>
                         {!isLocked && (
                           <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel - 1, color: "rgba(255,255,255,0.3)", marginTop: 5, letterSpacing: "0.1em", fontWeight: "bold", cursor: "not-allowed" }}>🔒 UPGRADE</div>
                         )}

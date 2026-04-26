@@ -550,7 +550,7 @@ export default function TopBar({ activeGame }) {
                       }}>
                         {skin.unlocked ? (
                           <img
-                            src="/ships/level1-plain.png"
+                            src="/ships/level1-cover.jpeg"
                             alt={skin.label}
                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />

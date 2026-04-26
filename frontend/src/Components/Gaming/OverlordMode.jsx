@@ -271,28 +271,6 @@ function SpaceView() {
         whiteSpace: "nowrap", userSelect: "none",
       }}>OVERLORD · SPACE RING</div>
 
-      {/* Target HUD — scanning */}
-      <div style={{
-        position: "absolute", bottom: "50%", right: "9%",
-        width: 130, padding: "8px 12px",
-        background: "rgba(28,4,4,0.85)",
-        border: "1px solid rgba(248,113,113,0.3)",
-        borderRadius: 3, backdropFilter: "blur(8px)",
-        boxShadow: "0 0 16px rgba(248,113,113,0.1)",
-      }}>
-        <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
-          letterSpacing:"0.2em", color:"#f87171", marginBottom:6,
-          textShadow:"0 0 8px rgba(248,113,113,0.8)" }}>TARGETS</div>
-        {["PLAYER-7", "PLAYER-12", "PLAYER-3"].map((p, i) => (
-          <div key={i} style={{ display:"flex", justifyContent:"space-between",
-            marginBottom:4, fontFamily:"Orbitron,sans-serif", fontSize:6 }}>
-            <span style={{ color:"rgba(255,180,180,0.6)" }}>{p}</span>
-            <span style={{ color: i === 0 ? "#f87171" : "#fbbf24" }}>
-              {i === 0 ? "LOCKED" : "IN RANGE"}
-            </span>
-          </div>
-        ))}
-      </div>
 
     </div>
   );
