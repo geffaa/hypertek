@@ -292,6 +292,58 @@ const SHIP_ROOMS = {
   ],
 };
 
+// ── Skin 1 weapon hotspot data — positions as % of level1-cover.jpeg ──
+// circle:true = elliptical hotspot; rotate = degrees for rect hotspots
+// Total: 26 hotspots
+//   Left section (18): 1 far-left bar + 2 diagonal bays
+//                      + 6 PD upper + 2 center ovals + 1 center box + 6 PD lower
+//   Right section (8): 2 flank strips + 3 spine guns + 1 mid rail + 2 nacelle bays
+const SKIN1_GUNS = [
+  /* ── #1  Far-left horizontal deck bar ── */
+  { id: "far_left_bar",       name: "Far Left Deck Gun",        x: 1,  y: 46, w: 5,  h: 10 },
+
+  /* ── #2-3  Diagonal gun bays (nose) ── */
+  { id: "fore_port_bay",      name: "Fore Port Gun Bay",        x: 4,  y: 28, w: 22, h: 8,  rotate: -25 },
+  { id: "fore_stbd_bay",      name: "Fore Starboard Gun Bay",   x: 4,  y: 67, w: 22, h: 8,  rotate:  25 },
+
+  /* ── #4-9  Point Defense — UPPER 6 (diagonal pattern) ── */
+  { id: "pd_gun_1",  name: "Point Defense Gun 1",  x: 14, y: 36, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_2",  name: "Point Defense Gun 2",  x: 19, y: 32, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_3",  name: "Point Defense Gun 3",  x: 24, y: 28, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_4",  name: "Point Defense Gun 4",  x: 29, y: 27, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_5",  name: "Point Defense Gun 5",  x: 34, y: 27, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_6",  name: "Point Defense Gun 6",  x: 39, y: 32, w: 4.5, h: 9, circle: true },
+
+  /* ── #10-12  Center section — 2 ovals + 1 box ── */
+  { id: "vert_oval_upper",    name: "Center Fore Upper Gun",    x: 19, y: 42, w: 5, h: 16, circle: true },
+  { id: "vert_oval_lower",    name: "Center Fore Lower Gun",    x: 29, y: 42, w: 5, h: 16, circle: true },
+  { id: "center_front_gun",   name: "Center Forward Gun",       x: 34, y: 46, w: 12,  h: 12 },
+
+  /* ── #13-18  Point Defense — LOWER 6 (2 rows × 3) ── */
+  { id: "pd_gun_7",  name: "Point Defense Gun 7",  x: 14, y: 56, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_8",  name: "Point Defense Gun 8",  x: 19, y: 62, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_9",  name: "Point Defense Gun 9",  x: 24, y: 68, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_10", name: "Point Defense Gun 10", x: 29, y: 67, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_11", name: "Point Defense Gun 11", x: 34, y: 67, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_12", name: "Point Defense Gun 12", x: 39, y: 62, w: 4.5, h: 9, circle: true },
+
+  /* ── #19-20  Right body — top & bottom flank strips ── */
+  { id: "upper_flank_array",  name: "Upper Flank Gun Array",   x: 52, y: 30,  w: 44, h: 7 },
+  { id: "lower_flank_array",  name: "Lower Flank Gun Array",   x: 52, y: 65, w: 44, h: 7 },
+
+  /* ── #21-23  Right body — spine guns (3 inline) ── */
+  { id: "spine_gun_1",        name: "Spine Gun 1",             x: 53, y: 45, w: 10, h: 10 },
+  { id: "spine_gun_2",        name: "Spine Gun 2",             x: 63, y: 45, w: 10, h: 10 },
+  { id: "spine_gun_3",        name: "Spine Gun 3",             x: 73, y: 45, w: 10,  h: 10 },
+
+  /* ── #24  Right body — mid rail gun (trapezoid: wide-left → narrow-right) ── */
+  { id: "mid_rail_gun",       name: "Mid Rail Gun",            x: 83, y: 40, w: 12, h: 20, trapRight: { topCut: 22, botCut: 22 } },
+
+  /* ── #25-26  Far-right nacelle gun bays ── */
+  { id: "upper_nacelle_bay",  name: "Upper Nacelle Gun Bay",   x: 75, y: 4,  w: 22, h: 25 },
+  { id: "lower_nacelle_bay",  name: "Lower Nacelle Gun Bay",   x: 75, y: 74, w: 22, h: 25 },
+];
+
 const NAV_BTN_BASE = {
   background: "linear-gradient(180deg, rgba(0,30,55,0.95) 0%, rgba(0,15,35,0.98) 100%)",
   border: "1px solid rgba(0,212,255,0.55)",
@@ -362,6 +414,11 @@ export default function TopBar({ activeGame }) {
   const [selectedShipSkins, setSelectedShipSkins] = useState({ 1: "plain" });
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hoveredRoom, setHoveredRoom] = useState(null);
+
+  // ── Skin detail popup (weapon layout) ────────────────────────────
+  const [skinDetailOpen, setSkinDetailOpen] = useState(false);
+  const [hoveredGun, setHoveredGun] = useState(null);
+  const [selectedGun, setSelectedGun] = useState(null);
 
   const [vrShipOpen, setVrShipOpen] = useState(false);
   const [vrShipPairing, setVrShipPairing] = useState(false);
@@ -530,7 +587,11 @@ export default function TopBar({ activeGame }) {
                     <div
                       key={skin.id}
                       className={skin.unlocked ? "market-dropdown-item" : ""}
-                      onClick={() => skin.unlocked && setSelectedShipSkins(s => ({ ...s, 1: `skin${skin.id}` }))}
+                      onClick={() => {
+                        if (!skin.unlocked) return;
+                        setSelectedShipSkins(s => ({ ...s, 1: `skin${skin.id}` }));
+                        if (skin.id === 1) { setShipsOpen(false); setSkinDetailOpen(true); setSelectedGun(null); setHoveredGun(null); }
+                      }}
                       style={{
                         display: "flex", alignItems: "center", gap: 10,
                         padding: "5px 6px", borderRadius: 3,
@@ -1655,6 +1716,369 @@ export default function TopBar({ activeGame }) {
               height: isMobile ? 10 : 18,
               background: "linear-gradient(90deg, #000 0%, #7a3a0a 30%, #5a2a05 70%, #000 100%)",
               borderTop: "2px solid #b85c14",
+            }} />
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════
+          SKIN 1 — WEAPON LAYOUT MODAL
+          ══════════════════════════════════════════════════════════════ */}
+      {skinDetailOpen && (
+        <div
+          onClick={(e) => { if (e.target === e.currentTarget) { setSkinDetailOpen(false); setSelectedGun(null); setHoveredGun(null); } }}
+          style={{
+            position: "fixed", inset: 0, zIndex: 200,
+            background: "rgba(0,0,0,0.92)", backdropFilter: "blur(4px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <div style={{
+            position: "relative", width: "min(96vw, 1260px)", height: "min(96vh, 800px)",
+            background: "#000", border: "1px solid rgba(0,180,220,0.5)",
+            borderRadius: 6, boxShadow: "0 0 80px rgba(0,0,0,0.9)",
+            overflow: "hidden", display: "flex", flexDirection: "column",
+          }}>
+
+            {/* ── Header ── */}
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              background: "linear-gradient(90deg, #001a24, #004a6a 40%, #003050)",
+              padding: isMobile ? "6px 10px" : "10px 20px",
+              borderBottom: "2px solid #0099cc",
+              flexShrink: 0,
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <span style={{
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: isMobile ? 10 : 16,
+                  fontWeight: "900", letterSpacing: "0.2em",
+                  color: "#00D4FF", textShadow: "0 0 14px rgba(0,212,255,0.9)",
+                }}>SKIN 1 — WEAPONS LAYOUT</span>
+                <span style={{
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: isMobile ? 6 : 8,
+                  letterSpacing: "0.14em",
+                  color: "rgba(0,212,255,0.5)",
+                }}>HOVER OR SELECT A WEAPON SLOT TO VIEW DETAILS</span>
+              </div>
+              <button
+                onClick={() => { setSkinDetailOpen(false); setSelectedGun(null); setHoveredGun(null); }}
+                style={{
+                  background: "rgba(0,0,0,0.4)", border: "1px solid rgba(0,212,255,0.3)",
+                  borderRadius: 3, color: "rgba(0,212,255,0.7)",
+                  fontSize: isMobile ? 12 : 16,
+                  cursor: "pointer", lineHeight: 1, padding: isMobile ? "2px 6px" : "2px 8px",
+                }}
+              >×</button>
+            </div>
+
+            {/* ── Body ── */}
+            <div style={{ display: "flex", flex: 1, minHeight: 0, overflow: "hidden" }}>
+
+              {/* Left decorative strip */}
+              {!isMobile && (
+                <div style={{
+                  width: 36, flexShrink: 0, background: "#000",
+                  display: "flex", flexDirection: "column", borderRight: "2px solid #0099cc",
+                }}>
+                  <div style={{ height: 50, background: "#003a52", borderBottom: "2px solid #0099cc" }} />
+                  <div style={{
+                    flex: 1, background: "#001824",
+                    display: "flex", flexDirection: "column", alignItems: "center",
+                    justifyContent: "center", gap: 10, padding: "12px 0",
+                    borderBottom: "2px solid #0099cc",
+                  }}>
+                    {[...Array(8)].map((_, i) => (
+                      <div key={i} style={{
+                        width: 10, height: 10, borderRadius: "50%",
+                        background: "#00D4FF",
+                        boxShadow: "0 0 6px rgba(0,212,255,0.8)",
+                      }} />
+                    ))}
+                  </div>
+                  <div style={{ height: 50, background: "#003a52" }} />
+                </div>
+              )}
+
+              {/* Gun list sidebar */}
+              <div style={{
+                width: isMobile ? 100 : "clamp(130px,13vw,170px)", flexShrink: 0,
+                background: "#000c14", borderRight: "1px solid rgba(0,180,220,0.3)",
+                display: "flex", flexDirection: "column", minHeight: 0,
+              }}>
+                <div style={{
+                  padding: isMobile ? "6px 8px" : "8px 12px",
+                  borderBottom: "1px solid rgba(0,180,220,0.35)",
+                  fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 12,
+                  color: "#00D4FF", letterSpacing: "0.12em", flexShrink: 0,
+                }}>WEAPONS</div>
+                <div style={{ flex: 1, overflowY: "auto", minHeight: 0 }} className="sections-scroll">
+                  {SKIN1_GUNS.map(gun => {
+                    const active = selectedGun === gun.id || hoveredGun === gun.id;
+                    return (
+                      <div
+                        key={gun.id}
+                        onClick={() => setSelectedGun(p => p === gun.id ? null : gun.id)}
+                        onMouseEnter={() => setHoveredGun(gun.id)}
+                        onMouseLeave={() => setHoveredGun(null)}
+                        style={{
+                          display: "flex", alignItems: "center", justifyContent: "space-between",
+                          padding: isMobile ? "5px 8px" : "7px 12px",
+                          borderBottom: "1px solid rgba(0,180,220,0.15)",
+                          cursor: "pointer",
+                          background: active ? "rgba(0,212,255,0.1)" : "transparent",
+                          transition: "background 0.15s",
+                        }}
+                      >
+                        <span style={{
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: isMobile ? 7 : 9, fontWeight: "bold",
+                          letterSpacing: "0.05em",
+                          color: active ? "#00D4FF" : "rgba(0,200,240,0.8)",
+                          lineHeight: 1.3,
+                        }}>{gun.name}</span>
+                        <div style={{
+                          width: isMobile ? 6 : 8, height: isMobile ? 6 : 8,
+                          borderRadius: "50%", flexShrink: 0, marginLeft: 5,
+                          background: active ? "#00D4FF" : "rgba(0,180,220,0.5)",
+                          boxShadow: active ? "0 0 8px #00D4FF" : "none",
+                          transition: "all 0.18s",
+                        }} />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Information panel */}
+              <div style={{
+                width: isMobile ? 110 : "clamp(150px,15vw,200px)", flexShrink: 0,
+                border: "2px solid #00D4FF",
+                borderRadius: 4,
+                margin: isMobile ? "6px 0" : "10px 0",
+                background: "rgba(0,12,24,0.7)",
+                display: "flex", flexDirection: "column",
+                overflow: "hidden",
+              }}>
+                <div style={{
+                  padding: isMobile ? "6px 8px" : "8px 12px",
+                  borderBottom: "1px solid rgba(0,212,255,0.3)",
+                  fontFamily: "Orbitron,sans-serif",
+                  fontSize: isMobile ? 8 : 11,
+                  fontWeight: "bold", letterSpacing: "0.12em",
+                  color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.5)",
+                  flexShrink: 0,
+                }}>INFORMATION</div>
+
+                <div style={{ flex: 1, padding: isMobile ? "8px" : "12px", overflowY: "auto" }} className="sections-scroll">
+                  {(() => {
+                    const activeId = hoveredGun || selectedGun;
+                    const gun = SKIN1_GUNS.find(g => g.id === activeId);
+                    if (!gun) {
+                      return (
+                        <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <span style={{
+                            fontFamily: "Orbitron,sans-serif",
+                            fontSize: isMobile ? 7 : 9,
+                            color: "rgba(0,212,255,0.3)",
+                            letterSpacing: "0.1em",
+                            textAlign: "center", lineHeight: 1.6,
+                          }}>HOVER OR SELECT<br />A WEAPON SLOT<br />TO VIEW INFO</span>
+                        </div>
+                      );
+                    }
+                    return (
+                      <>
+                        <div style={{
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: isMobile ? 8 : 10, fontWeight: "bold",
+                          letterSpacing: "0.1em", color: "#00D4FF",
+                          textShadow: "0 0 6px rgba(0,212,255,0.6)",
+                          marginBottom: isMobile ? 6 : 8,
+                          paddingBottom: isMobile ? 4 : 6,
+                          borderBottom: "1px solid rgba(0,212,255,0.2)",
+                        }}>{gun.name}</div>
+                        {/* All locked */}
+                        {["Damage", "Range", "Fire Rate", "Upgrade"].map((label) => (
+                          <div key={label} style={{
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                            padding: "5px 0",
+                            borderBottom: "1px solid rgba(0,212,255,0.08)",
+                          }}>
+                            <span style={{
+                              fontFamily: "Orbitron,sans-serif",
+                              fontSize: isMobile ? 7 : 8,
+                              color: "rgba(0,180,220,0.6)",
+                              letterSpacing: "0.06em",
+                            }}>{label}</span>
+                            <span style={{ fontSize: isMobile ? 9 : 11, opacity: 0.35 }}>🔒</span>
+                          </div>
+                        ))}
+                        <div style={{
+                          marginTop: isMobile ? 8 : 12,
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: isMobile ? 6 : 7,
+                          color: "rgba(0,212,255,0.35)",
+                          letterSpacing: "0.08em", lineHeight: 1.6,
+                        }}>
+                          WEAPON STATS AVAILABLE AFTER OFFICIAL GAME LAUNCH
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Ship image + hotspots */}
+              <div style={{ flex: 1, background: "#000", padding: isMobile ? "6px" : "10px", overflowY: "auto", overflowX: "hidden" }}>
+                <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+                  <img
+                    src="/ships/level1-cover.jpeg"
+                    alt="Skin 1 Weapons Layout"
+                    style={{ width: "100%", height: "auto", display: "block" }}
+                  />
+
+                  {/* Weapon hotspot overlays */}
+                  {SKIN1_GUNS.map(gun => {
+                    const active = selectedGun === gun.id || hoveredGun === gun.id;
+                    const fill   = active ? "rgba(0,212,255,0.07)" : "transparent";
+                    const handlers = {
+                      onMouseEnter: () => setHoveredGun(gun.id),
+                      onMouseLeave: () => setHoveredGun(null),
+                      onClick:      () => setSelectedGun(p => p === gun.id ? null : gun.id),
+                    };
+
+                    if (gun.circle) {
+                      return (
+                        <div
+                          key={gun.id}
+                          {...handlers}
+                          style={{
+                            position: "absolute",
+                            left: `${gun.x}%`, top: `${gun.y}%`,
+                            width: `${gun.w}%`, height: `${gun.h}%`,
+                            borderRadius: "50%",
+                            border: active ? "2px solid #00D4FF" : "2px solid transparent",
+                            boxShadow: active ? "0 0 16px rgba(0,212,255,0.7), inset 0 0 10px rgba(0,212,255,0.1)" : "none",
+                            background: fill,
+                            cursor: "pointer", transition: "all 0.18s",
+                          }}
+                        />
+                      );
+                    }
+
+                    if (gun.trapRight) {
+                      const { topCut = 25, botCut = 25 } = gun.trapRight;
+                      const pts = `0,${topCut} 100,0 100,100 0,${100 - botCut}`;
+                      return (
+                        <svg
+                          key={gun.id}
+                          {...handlers}
+                          viewBox="0 0 100 100"
+                          preserveAspectRatio="none"
+                          style={{
+                            position: "absolute",
+                            left: `${gun.x}%`, top: `${gun.y}%`,
+                            width: `${gun.w}%`, height: `${gun.h}%`,
+                            overflow: "visible", cursor: "pointer",
+                            filter: active ? "drop-shadow(0 0 6px rgba(0,212,255,0.8))" : "none",
+                            transition: "filter 0.18s",
+                          }}
+                        >
+                          <polygon
+                            points={pts}
+                            fill={active ? "rgba(0,212,255,0.07)" : "transparent"}
+                            stroke={active ? "#00D4FF" : "transparent"}
+                            strokeWidth="3"
+                            vectorEffect="non-scaling-stroke"
+                          />
+                        </svg>
+                      );
+                    }
+
+                    return (
+                      <div
+                        key={gun.id}
+                        {...handlers}
+                        style={{
+                          position: "absolute",
+                          left: `${gun.x}%`, top: `${gun.y}%`,
+                          width: `${gun.w}%`, height: `${gun.h}%`,
+                          border: active ? "2px solid #00D4FF" : "2px solid transparent",
+                          boxShadow: active ? "0 0 16px rgba(0,212,255,0.7), inset 0 0 10px rgba(0,212,255,0.1)" : "none",
+                          background: fill,
+                          borderRadius: 3, cursor: "pointer", transition: "all 0.18s",
+                          ...(gun.rotate ? {
+                            transform: `rotate(${gun.rotate}deg)`,
+                            transformOrigin: "center center",
+                          } : {}),
+                        }}
+                      />
+                    );
+                  })}
+
+                  {/* Gun name popup on click */}
+                  {selectedGun && (() => {
+                    const gun = SKIN1_GUNS.find(g => g.id === selectedGun);
+                    if (!gun) return null;
+                    const toLeft   = (gun.x + gun.w) > 68;
+                    const anchorLeft = toLeft ? `${gun.x}%` : `${gun.x + gun.w}%`;
+                    const anchorTop  = `${gun.y}%`;
+                    const popupW     = isMobile ? 110 : 140;
+                    return (
+                      <div style={{
+                        position: "absolute",
+                        left: anchorLeft, top: anchorTop,
+                        transform: toLeft ? `translateX(-${popupW}px)` : "translateX(8px)",
+                        zIndex: 30, width: popupW,
+                        background: "linear-gradient(160deg, #020d1a, #010812)",
+                        border: "1.5px solid #00D4FF",
+                        borderRadius: 5,
+                        boxShadow: "0 6px 28px rgba(0,0,0,0.95), 0 0 16px rgba(0,212,255,0.2)",
+                        overflow: "hidden",
+                        pointerEvents: "auto",
+                      }}>
+                        {/* Gun name header */}
+                        <div style={{
+                          background: "linear-gradient(90deg, #003a52, #001824)",
+                          borderBottom: "1px solid #00D4FF",
+                          padding: isMobile ? "5px 8px" : "6px 10px",
+                          fontFamily: "Orbitron,sans-serif",
+                          fontSize: isMobile ? 7 : 8,
+                          fontWeight: "bold", letterSpacing: "0.1em",
+                          color: "#00D4FF", textTransform: "uppercase",
+                        }}>{gun.name}</div>
+                        {/* Locked action rows */}
+                        {["Detail", "Upgrade"].map((label, i) => (
+                          <div key={label} style={{
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                            padding: isMobile ? "7px 10px" : "9px 12px",
+                            borderBottom: i < 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                            cursor: "default",
+                          }}>
+                            <span style={{
+                              fontFamily: "Orbitron,sans-serif",
+                              fontSize: isMobile ? 8 : 10,
+                              fontWeight: "bold", letterSpacing: "0.1em",
+                              color: "rgba(200,200,200,0.4)",
+                            }}>{label}</span>
+                            <span style={{ fontSize: isMobile ? 9 : 11, opacity: 0.35 }}>🔒</span>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+
+            {/* ── Bottom bar ── */}
+            <div style={{
+              height: isMobile ? 10 : 18,
+              background: "linear-gradient(90deg, #000 0%, #003a52 30%, #002a40 70%, #000 100%)",
+              borderTop: "2px solid #0099cc",
+              flexShrink: 0,
             }} />
           </div>
         </div>

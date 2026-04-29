@@ -8,7 +8,7 @@
  * z-index 15: above GameFrame (10), below HUD elements (25+).
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
@@ -277,106 +277,271 @@ function SpaceView() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   WORLD VIEW — planet close-up, ground targeting
+   WORLD VIEW — large game map with free pan + zoom
+   Uses transform: translate + scale with center-origin clamping.
+   Map is always ≥ MIN_SCALE × viewport so black gaps are impossible.
    ══════════════════════════════════════════════════════════════════ */
+
+const MIN_SCALE     = 1.5;   // map is always 1.5× viewport — never shows edges
+const MAX_SCALE     = 5.0;
+const DEFAULT_SCALE = 1.5;
+const ZOOM_STEP     = 0.25;
+
 function WorldView() {
+  const containerRef = useRef(null);
+  const [scale,  setScale]  = useState(DEFAULT_SCALE);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [ready,  setReady]  = useState(false);
+  const drag  = useRef({ active: false, startX: 0, startY: 0, ox: 0, oy: 0 });
+  const pinch = useRef({ active: false, dist: 0, scale: DEFAULT_SCALE });
+
+  /*
+   * With transformOrigin "center center" and scale sc:
+   * visible content spans ±(W*sc/2) in x around center.
+   * Offset shifts by (ox, oy) on top of that.
+   * No black gap means the image edge never crosses into viewport:
+   *   maxX = W*(sc-1)/2  →  offset.x ∈ [-maxX, maxX]
+   *   maxY = H*(sc-1)/2  →  offset.y ∈ [-maxY, maxY]
+   */
+  const clampOffset = useCallback((ox, oy, sc) => {
+    const el = containerRef.current;
+    if (!el) return { x: ox, y: oy };
+    const maxX = (el.clientWidth  * (sc - 1)) / 2;
+    const maxY = (el.clientHeight * (sc - 1)) / 2;
+    return {
+      x: Math.min(maxX, Math.max(-maxX, ox)),
+      y: Math.min(maxY, Math.max(-maxY, oy)),
+    };
+  }, []);
+
+  /* ── Entry: show left portion of map (max positive x offset) ── */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const maxX = (el.clientWidth * (DEFAULT_SCALE - 1)) / 2;
+    setOffset({ x: maxX, y: 0 });
+    const t = setTimeout(() => setReady(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+
+  /* ── Zoom helper ── */
+  const applyZoom = useCallback((delta) => {
+    setScale(prev => {
+      const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, prev + delta));
+      setOffset(o => clampOffset(o.x, o.y, next));
+      return next;
+    });
+  }, [clampOffset]);
+
+  /* ── Mouse drag ── */
+  const onMouseDown = useCallback((e) => {
+    drag.current = { active: true, startX: e.clientX, startY: e.clientY, ox: offset.x, oy: offset.y };
+    e.preventDefault();
+  }, [offset]);
+
+  const onMouseMove = useCallback((e) => {
+    if (!drag.current.active) return;
+    setOffset(clampOffset(
+      drag.current.ox + e.clientX - drag.current.startX,
+      drag.current.oy + e.clientY - drag.current.startY,
+      scale,
+    ));
+  }, [scale, clampOffset]);
+
+  const onMouseUp = useCallback(() => { drag.current.active = false; }, []);
+
+  /* ── Scroll wheel zoom ── */
+  const onWheel = useCallback((e) => {
+    e.preventDefault();
+    applyZoom(e.deltaY > 0 ? -0.12 : 0.12);
+  }, [applyZoom]);
+
+  /* ── Touch pinch + pan ── */
+  const onTouchStart = useCallback((e) => {
+    if (e.touches.length === 1) {
+      drag.current = { active: true, startX: e.touches[0].clientX, startY: e.touches[0].clientY, ox: offset.x, oy: offset.y };
+    } else if (e.touches.length === 2) {
+      drag.current.active = false;
+      pinch.current = {
+        active: true,
+        dist: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
+        scale,
+      };
+    }
+  }, [offset, scale]);
+
+  const onTouchMove = useCallback((e) => {
+    e.preventDefault();
+    if (pinch.current.active && e.touches.length === 2) {
+      const newDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, pinch.current.scale * (newDist / pinch.current.dist)));
+      setScale(next);
+      setOffset(o => clampOffset(o.x, o.y, next));
+    } else if (drag.current.active && e.touches.length === 1) {
+      setOffset(clampOffset(
+        drag.current.ox + e.touches[0].clientX - drag.current.startX,
+        drag.current.oy + e.touches[0].clientY - drag.current.startY,
+        scale,
+      ));
+    }
+  }, [scale, clampOffset]);
+
+  const onTouchEnd = useCallback(() => { drag.current.active = false; pinch.current.active = false; }, []);
+
+  /* ── Wheel event (needs passive:false to call preventDefault) ── */
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [onWheel]);
+
+  const pct = Math.round(((scale - MIN_SCALE) / (MAX_SCALE - MIN_SCALE)) * 100);
+
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#060208" }}>
-
-      {/* Background image */}
-      <LazyImage src="/overlord5.png" spinnerColor="#f87171" />
-
-      {/* Dark vignette */}
+    <div
+      ref={containerRef}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseUp}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      style={{
+        position: "absolute", inset: 0,
+        overflow: "hidden", background: "#000",
+        cursor: drag.current.active ? "grabbing" : "grab",
+        userSelect: "none",
+      }}
+    >
+      {/* Map — transform approach guarantees no black gaps at any scale/pan */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "radial-gradient(ellipse 90% 80% at 50% 50%, transparent 35%, rgba(0,0,0,0.65) 100%)",
-        pointerEvents: "none",
-      }} />
-
-      {/* ── Scan line ── */}
-      <div className="world-scan-line" style={{
-        position: "absolute", left: 0, right: 0, height: 2,
-        background: "linear-gradient(90deg, transparent, rgba(248,113,113,0.6), transparent)",
-        pointerEvents: "none", zIndex: 1,
-      }} />
-
-      {/* ── Grid overlay (tactical map feel) ── */}
-      <svg style={{ position:"absolute", inset:0, width:"100%", height:"100%", pointerEvents:"none", opacity:0.08 }}
-        preserveAspectRatio="none" viewBox="0 0 100 100">
-        {Array.from({ length: 10 }, (_, i) => (
-          <g key={i}>
-            <line x1={i * 10} y1="0" x2={i * 10} y2="100" stroke="#f87171" strokeWidth="0.3"/>
-            <line x1="0" y1={i * 10} x2="100" y2={i * 10} stroke="#f87171" strokeWidth="0.3"/>
-          </g>
-        ))}
-      </svg>
-
-      {/* ── Target reticle ── */}
-      <div style={{
-        position: "absolute", top: "42%", left: "50%",
-        transform: "translate(-50%, -50%)",
-        pointerEvents: "none", zIndex: 2,
+        transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
+        transformOrigin: "center center",
+        transition: ready ? "none" : "transform 1s cubic-bezier(0.16,1,0.3,1)",
+        willChange: "transform",
       }}>
-        <svg viewBox="0 0 120 120" width="200" height="200" fill="none">
-          {/* Outer circle */}
-          <circle cx="60" cy="60" r="55" stroke="#f87171" strokeWidth="0.8" strokeOpacity="0.35"
-            strokeDasharray="8 4"/>
-          {/* Mid circle */}
-          <circle cx="60" cy="60" r="36" stroke="#f87171" strokeWidth="1" strokeOpacity="0.5"/>
-          {/* Inner reticle */}
-          <circle cx="60" cy="60" r="14" stroke="#f87171" strokeWidth="1.2" strokeOpacity="0.8"/>
-          <circle cx="60" cy="60" r="3" fill="#f87171" fillOpacity="0.9"/>
-          {/* Cross */}
-          <line x1="60" y1="10" x2="60" y2="44" stroke="#f87171" strokeWidth="1" strokeOpacity="0.7"/>
-          <line x1="60" y1="76" x2="60" y2="110" stroke="#f87171" strokeWidth="1" strokeOpacity="0.7"/>
-          <line x1="10" y1="60" x2="44" y2="60" stroke="#f87171" strokeWidth="1" strokeOpacity="0.7"/>
-          <line x1="76" y1="60" x2="110" y2="60" stroke="#f87171" strokeWidth="1" strokeOpacity="0.7"/>
-          {/* Corner brackets */}
-          <path d="M20 20 L30 20 M20 20 L20 30" stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.7"/>
-          <path d="M100 20 L90 20 M100 20 L100 30" stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.7"/>
-          <path d="M20 100 L30 100 M20 100 L20 90" stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.7"/>
-          <path d="M100 100 L90 100 M100 100 L100 90" stroke="#fbbf24" strokeWidth="1.2" strokeOpacity="0.7"/>
-        </svg>
+        <img
+          src="/overlord_world2.png"
+          alt="World Map"
+          draggable={false}
+          style={{
+            width: "100%", height: "100%",
+            objectFit: "cover", display: "block",
+            pointerEvents: "none",
+          }}
+        />
       </div>
 
-      {/* HUD label */}
+      {/* Subtle edge vignette */}
       <div style={{
-        position: "absolute", top: "14%", left: "50%",
-        transform: "translateX(-50%)",
-        fontFamily: "Orbitron, sans-serif",
-        fontSize: "clamp(9px, 1vw, 12px)",
-        fontWeight: "bold", letterSpacing: "0.4em",
-        color: "rgba(248,113,113,0.4)",
-        textShadow: "0 0 16px rgba(248,113,113,0.3)",
-        whiteSpace: "nowrap", userSelect: "none",
-      }}>OVERLORD · WORLD VIEW</div>
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse 96% 92% at 50% 50%, transparent 52%, rgba(0,0,0,0.55) 100%)",
+      }} />
 
-      {/* Ground intel panel */}
-      <div style={{
-        position: "absolute", bottom: "18%", left: "5%",
-        width: 148, padding: "10px 14px",
-        background: "rgba(28,4,4,0.88)",
-        border: "1px solid rgba(248,113,113,0.3)",
-        borderRadius: 3, backdropFilter: "blur(8px)",
-        boxShadow: "0 0 18px rgba(248,113,113,0.1)",
-      }}>
-        <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold",
-          letterSpacing:"0.2em", color:"#f87171", marginBottom:8,
-          textShadow:"0 0 8px rgba(248,113,113,0.8)" }}>GROUND INTEL</div>
-        {[
-          { label:"SECTOR",  val:"7-ALPHA" },
-          { label:"THREATS", val:"HIGH" },
-          { label:"ALLIES",  val:"3 NEAR" },
-          { label:"COORDS",  val:"44.2 / 88.7" },
-        ].map(s => (
-          <div key={s.label} style={{ display:"flex", justifyContent:"space-between",
-            marginBottom:5, fontFamily:"Orbitron,sans-serif" }}>
-            <span style={{ fontSize:6, letterSpacing:"0.1em", color:"rgba(255,180,180,0.5)" }}>{s.label}</span>
-            <span style={{ fontSize:6.5, color: s.val === "HIGH" ? "#f87171" : "#fbbf24" }}>{s.val}</span>
+      {/* ── Zoom controls — bottom-center HUD bar ── */}
+      <div
+        onMouseDown={e => e.stopPropagation()}
+        style={{
+          position: "absolute",
+          bottom: "4%", left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 20,
+          display: "flex", alignItems: "center", gap: 0,
+          background: "rgba(10,0,0,0.82)",
+          border: "1px solid rgba(248,113,113,0.25)",
+          borderRadius: 6,
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 0 20px rgba(248,113,113,0.1), inset 0 1px 0 rgba(248,113,113,0.08)",
+          overflow: "hidden",
+          pointerEvents: "auto",
+        }}
+      >
+        {/* Zoom out */}
+        <button
+          onClick={() => applyZoom(-ZOOM_STEP)}
+          disabled={scale <= MIN_SCALE}
+          style={{
+            width: 38, height: 34,
+            background: "transparent",
+            border: "none",
+            borderRight: "1px solid rgba(248,113,113,0.15)",
+            color: scale <= MIN_SCALE ? "rgba(248,113,113,0.2)" : "#f87171",
+            fontSize: 20, lineHeight: 1,
+            cursor: scale <= MIN_SCALE ? "default" : "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background 0.15s",
+          }}
+          onMouseEnter={e => { if (scale > MIN_SCALE) e.currentTarget.style.background = "rgba(248,113,113,0.1)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+        >−</button>
+
+        {/* Zoom level bar */}
+        <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 12px" }}>
+          <span style={{
+            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.1em",
+            color: "rgba(248,113,113,0.4)", userSelect: "none",
+          }}>ZOOM</span>
+          <div style={{
+            width: 72, height: 3, borderRadius: 2,
+            background: "rgba(248,113,113,0.12)", overflow: "hidden",
+          }}>
+            <div style={{
+              height: "100%", borderRadius: 2,
+              width: `${pct}%`,
+              background: "linear-gradient(90deg, #f87171, #fbbf24)",
+              transition: "width 0.18s ease",
+            }} />
           </div>
-        ))}
-      </div>
+          <span style={{
+            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.05em",
+            color: "rgba(248,113,113,0.5)", userSelect: "none", minWidth: 28, textAlign: "right",
+          }}>{scale.toFixed(1)}×</span>
+        </div>
 
+        {/* Zoom in */}
+        <button
+          onClick={() => applyZoom(ZOOM_STEP)}
+          disabled={scale >= MAX_SCALE}
+          style={{
+            width: 38, height: 34,
+            background: "transparent",
+            border: "none",
+            borderLeft: "1px solid rgba(248,113,113,0.15)",
+            borderRight: "1px solid rgba(248,113,113,0.15)",
+            color: scale >= MAX_SCALE ? "rgba(248,113,113,0.2)" : "#f87171",
+            fontSize: 20, lineHeight: 1,
+            cursor: scale >= MAX_SCALE ? "default" : "pointer",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background 0.15s",
+          }}
+          onMouseEnter={e => { if (scale < MAX_SCALE) e.currentTarget.style.background = "rgba(248,113,113,0.1)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+        >+</button>
+
+        {/* Reset */}
+        <button
+          onClick={() => {
+            const el = containerRef.current;
+            const maxX = el ? (el.clientWidth * (DEFAULT_SCALE - 1)) / 2 : 0;
+            setScale(DEFAULT_SCALE);
+            setOffset({ x: maxX, y: 0 });
+          }}
+          style={{
+            height: 34, padding: "0 12px",
+            background: "transparent",
+            border: "none",
+            color: "rgba(248,113,113,0.55)",
+            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.12em",
+            cursor: "pointer",
+            transition: "background 0.15s, color 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.08)"; e.currentTarget.style.color = "#f87171"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(248,113,113,0.55)"; }}
+        >RESET</button>
+      </div>
     </div>
   );
 }
