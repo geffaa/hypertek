@@ -9,8 +9,9 @@
  */
 
 import { useState, useEffect } from "react";
-import RacingControls from "./RacingControls";
-import LazyImage      from "./LazyImage";
+import RacingControls  from "./RacingControls";
+import LazyImage       from "./LazyImage";
+import Wraith3DViewer  from "./Wraith3DViewer";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 /* ─── Vehicle fleet data ───────────────────────────────────────── */
@@ -281,30 +282,36 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
             overflow: "hidden",
           }}>
 
-            {/* LEFT — vehicle image */}
+            {/* LEFT — vehicle image / 3D viewer */}
             <div style={{
               flex: 1,
               display: "flex", alignItems: "center", justifyContent: "center",
               position: "relative", overflow: "hidden",
               minHeight: s.imgH,
-              padding: s.cardPad,
+              padding: v.id === "wraith" ? 0 : s.cardPad,
             }}>
-              <div style={{
-                position: "absolute", inset: 0,
-                background: `radial-gradient(ellipse at 50% 55%, ${v.color}1a, transparent 70%)`,
-                pointerEvents: "none",
-              }} />
-              <img
-                src={v.img}
-                alt={v.name}
-                style={{
-                  maxHeight: "100%", maxWidth: "100%",
-                  objectFit: "contain",
-                  filter: `drop-shadow(0 0 18px ${v.color}88)`,
-                  transition: "filter 0.3s",
-                  position: "relative", zIndex: 1,
-                }}
-              />
+              {v.id === "wraith" ? (
+                <Wraith3DViewer />
+              ) : (
+                <>
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: `radial-gradient(ellipse at 50% 55%, ${v.color}1a, transparent 70%)`,
+                    pointerEvents: "none",
+                  }} />
+                  <img
+                    src={v.img}
+                    alt={v.name}
+                    style={{
+                      maxHeight: "100%", maxWidth: "100%",
+                      objectFit: "contain",
+                      filter: `drop-shadow(0 0 18px ${v.color}88)`,
+                      transition: "filter 0.3s",
+                      position: "relative", zIndex: 1,
+                    }}
+                  />
+                </>
+              )}
             </div>
 
             {/* Vertical divider */}
@@ -584,33 +591,39 @@ function GarageView() {
         style={{ objectPosition: "center" }} />
 
       {/* ── Vehicle — center stage ── */}
-      {/* Outer: positions to center; Inner: handles animation without breaking centering */}
       <div style={{
         position: "absolute",
         top: "22%", left: "50%", transform: "translateX(-50%)",
-        width: isMobile ? 220 : 420,
+        width:  isMobile ? 220 : 420,
+        height: isMobile ? 180 : 360,
         zIndex: 20,
         display: "flex", justifyContent: "center",
       }}>
-        <div
-          onClick={() => setCustomizeOpen(c => !c)}
-          style={{
-            width: "100%", cursor: "pointer",
-            animation: spinning
-              ? "vehicleSpin 10s linear infinite"
-              : "vehicleFloat 4s ease-in-out infinite",
-          }}
-          title="Click to customize"
-        >
-          <img
-            src={v.img} alt={v.name}
-            style={{
-              width: "100%", objectFit: "contain",
-              filter: `drop-shadow(0 0 28px ${v.color}aa) drop-shadow(0 12px 40px rgba(0,0,0,0.7))`,
-              transition: "filter 0.4s",
-            }}
+        {v.id === "wraith" ? (
+          <Wraith3DViewer
+            onClick={() => setCustomizeOpen(c => !c)}
           />
-        </div>
+        ) : (
+          <div
+            onClick={() => setCustomizeOpen(c => !c)}
+            style={{
+              width: "100%", cursor: "pointer",
+              animation: spinning
+                ? "vehicleSpin 10s linear infinite"
+                : "vehicleFloat 4s ease-in-out infinite",
+            }}
+            title="Click to customize"
+          >
+            <img
+              src={v.img} alt={v.name}
+              style={{
+                width: "100%", objectFit: "contain",
+                filter: `drop-shadow(0 0 28px ${v.color}aa) drop-shadow(0 12px 40px rgba(0,0,0,0.7))`,
+                transition: "filter 0.4s",
+              }}
+            />
+          </div>
+        )}
       </div>
 
       {/* ── Vehicle name + hint ── */}

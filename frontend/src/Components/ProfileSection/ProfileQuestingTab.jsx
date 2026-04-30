@@ -164,9 +164,9 @@ export default function ProfileQuestingTab({ wallet, token }) {
   }
 
   return (
-    <div className="py-4">
+    <div className="pt-1 pb-4">
       {/* ── Header ── */}
-      <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <Swords className="w-4 h-4 text-amber-400" />
           <h3 className="text-white font-semibold text-base">Quest History</h3>
@@ -190,10 +190,61 @@ export default function ProfileQuestingTab({ wallet, token }) {
         </div>
       </div>
 
-      {/* ── 3-card info row ── */}
+      {/* ── 2-card info row: [Money+Resource combined] [Daily Slots] ── */}
       <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
 
-        {/* Card 1 — Daily Quest Slots */}
+        {/* Card 1 — Money + Resource combined (spans 2 cols) */}
+        <div className="sm:col-span-2 rounded-xl px-4 py-3"
+          style={{ background: "rgba(20,15,5,0.6)", border: "1px solid rgba(251,191,36,0.15)" }}>
+          <div className="grid grid-cols-2 gap-4 divide-x divide-white/10">
+
+            {/* Money Quests */}
+            <div>
+              <div className="flex items-center gap-2 mb-2.5">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-amber-300 text-xs font-semibold">Money Quests (11% pool)</span>
+              </div>
+              <div className="space-y-1.5">
+                {QUEST_TIERS.money.map((t) => (
+                  <div key={t.waitHours} className="grid text-[10px]"
+                    style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
+                    <span className="text-white/50">{t.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Resource Quests */}
+            <div className="pl-4">
+              <div className="flex items-center gap-2 mb-2.5">
+                <Package className="w-3.5 h-3.5 text-green-400" />
+                <span className="text-green-300 text-xs font-semibold">Resource Quests (20% pool)</span>
+              </div>
+              <div className="space-y-1.5">
+                {QUEST_TIERS.resources.map((t) => (
+                  <div key={t.waitHours} className="grid text-[10px]"
+                    style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
+                    <span className="text-white/50">{t.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+          {/* Footer note */}
+          <div className="mt-3 pt-2.5 border-t border-white/8 flex flex-wrap gap-x-8 gap-y-1">
+            <p className="text-white/45 text-[9px]"># Quests with combined payloads will be paid out using the separate table amounts.</p>
+            <p className="text-white/45 text-[9px]"># Planet data will sync when the games go live.</p>
+          </div>
+        </div>
+
+        {/* Card 2 — Daily Quest Slots */}
         <div className="rounded-xl px-4 py-3"
           style={{ background: "rgba(0,15,40,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
           {dailyStats ? (
@@ -204,56 +255,13 @@ export default function ProfileQuestingTab({ wallet, token }) {
             />
           ) : (
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-white/20 shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-white/40 shrink-0" />
               <div>
-                <p className="text-white/40 text-[10px] font-semibold">Daily Quest Slots</p>
-                <p className="text-white/20 text-[10px] mt-0.5">5 slots per day · resets midnight UTC</p>
+                <p className="text-white/60 text-[10px] font-semibold">Daily Quest Slots</p>
+                <p className="text-white/40 text-[10px] mt-0.5">5 slots per day · resets midnight UTC</p>
               </div>
             </div>
           )}
-        </div>
-
-        {/* Card 2 — Money Quests */}
-        <div className="rounded-xl px-4 py-3"
-          style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.12)" }}>
-          <div className="flex items-center gap-2 mb-2">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-amber-300/80 text-xs font-semibold">Money Quests (11% pool)</span>
-          </div>
-          <div className="space-y-1">
-            {QUEST_TIERS.money.map((t) => (
-              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
-                <span className="text-white/30 w-6">{t.waitHours}h</span>
-                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Card 3 — Resource Quests */}
-        <div className="rounded-xl px-4 py-3"
-          style={{ background: "rgba(74,222,128,0.04)", border: "1px solid rgba(74,222,128,0.12)" }}>
-          <div className="flex items-center gap-2 mb-2">
-            <Package className="w-3.5 h-3.5 text-green-400" />
-            <span className="text-green-300/80 text-xs font-semibold">Resource Quests (20% pool)</span>
-          </div>
-          <div className="space-y-1">
-            {QUEST_TIERS.resources.map((t) => (
-              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
-                <span className="text-white/30 w-6">{t.waitHours}h</span>
-                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
-              </div>
-            ))}
-          </div>
-          <p className="text-white/20 text-[9px] mt-2">Planet data will sync once the game goes live.</p>
         </div>
 
       </div>
@@ -275,7 +283,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
       ) : (
         /* ── Table ── */
         <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "70vh" }}>
+          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "calc(100vh - 260px)" }}>
           {/* Header */}
           <div
             className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
@@ -325,20 +333,20 @@ export default function ProfileQuestingTab({ wallet, token }) {
                 </div>
 
                 {/* Pickup Planet */}
-                <span className="text-white/35 text-xs">
-                  {q.pickupPlanet || <span className="italic text-white/20">In-game</span>}
+                <span className="text-white/55 text-xs">
+                  {q.pickupPlanet || <span className="italic text-white/35">In-game</span>}
                 </span>
 
                 {/* Drop Off Planet */}
-                <span className="text-white/35 text-xs">
-                  {q.dropOffPlanet || <span className="italic text-white/20">In-game</span>}
+                <span className="text-white/55 text-xs">
+                  {q.dropOffPlanet || <span className="italic text-white/35">In-game</span>}
                 </span>
 
                 {/* Item / Goods */}
                 <div className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-white/80 text-xs font-medium truncate">{q.title || "—"}</span>
+                  <span className="text-white/85 text-xs font-medium truncate">{q.title || "—"}</span>
                   {q.offering && (
-                    <span className="text-white/35 text-[10px] truncate">{q.offering}</span>
+                    <span className="text-white/55 text-[10px] truncate">{q.offering}</span>
                   )}
                 </div>
 
@@ -346,21 +354,21 @@ export default function ProfileQuestingTab({ wallet, token }) {
                 <div className="flex flex-col gap-1">
                   <WaitBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
                   {q.playerSharePercent != null && (
-                    <div className="text-[9px] text-white/30 leading-tight">
-                      <span className="text-amber-300/55">Player +{q.playerSharePercent}%</span>
+                    <div className="text-[9px] leading-tight">
+                      <span className="text-amber-300">Player +{q.playerSharePercent}%</span>
                       {" · "}
-                      <span className="text-white/25">Plat +{q.platformSharePercent}%</span>
+                      <span className="text-white/50">Plat +{q.platformSharePercent}%</span>
                     </div>
                   )}
                   {q.playerEarnsAmount != null && (
-                    <span className="text-[9px] text-amber-300/60">
+                    <span className="text-[9px] text-amber-300">
                       Earned: {q.playerEarnsAmount} HB
                     </span>
                   )}
                 </div>
 
                 {/* Time Active */}
-                <span className="text-white/40 text-xs font-mono">
+                <span className="text-white/60 text-xs font-mono">
                   {formatTime(q.createdAt)}
                 </span>
 
