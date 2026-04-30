@@ -318,15 +318,12 @@ export default function ProfileListingsTab({ token }) {
         </div>
       ) : (
         /* ── Table ── */
-        <div className="w-full rounded-2xl overflow-x-auto profile-custom-scroll"
-          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "70vh" }}>
+        <div className="w-full rounded-2xl overflow-x-auto"
+          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
 
           {/* Sticky group bracket headers */}
           <div style={{
             background: "rgba(0,20,80,0.95)",
-            position: "sticky",
-            top: 0,
-            zIndex: 10,
             backdropFilter: "blur(8px)",
           }}>
             <GroupHeaderRow />
