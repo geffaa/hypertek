@@ -61,7 +61,7 @@ function LineCard({ item }) {
       }}
       onClick={() => {
         navigate("/buy-nfa", {
-          state: { subCollectionId: item._id, parentId: item.parentId, item },
+          state: { subCollectionId: item._id, parentId: item.parentId, item, marketplaceScrollY: window.scrollY },
         });
       }}
     >

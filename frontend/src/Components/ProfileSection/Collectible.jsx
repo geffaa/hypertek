@@ -71,6 +71,7 @@ function MarketPlace() {
   const [searchParams, setSearchParams] = useSearchParams();
   const gridRef    = useRef(null);
   const contentRef = useRef(null);
+  const headerRef  = useRef(null);
 
   // Tab ↔ URL slug mapping
   const TAB_SLUG = {
@@ -119,7 +120,11 @@ function MarketPlace() {
   const [sessionTradeNames] = useState(new Set());
 
   const scrollToContent = (delay = 300) =>
-    setTimeout(() => contentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), delay);
+    setTimeout(() => {
+      if (!headerRef.current) return;
+      const top = headerRef.current.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top, behavior: "smooth" });
+    }, delay);
 
   // scroll back from BuyNfa
   useEffect(() => { if (location.state?.scrollToGrid) scrollToContent(400); }, [location.state]);
@@ -371,14 +376,16 @@ function MarketPlace() {
           <ProfileBanner />
 
           {/* ================= PROFILE ================= */}
-          <UserProfileHeader
-            userData={userData}
-            connectedWallet={connectedWallet}
-            sellerBalance={sellerBalance}
-          />
+          <div ref={headerRef}>
+            <UserProfileHeader
+              userData={userData}
+              connectedWallet={connectedWallet}
+              sellerBalance={sellerBalance}
+            />
+          </div>
 
           {/* ================= NAV ================= */}
-          <div className="mt-6 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+          <div className="mt-2 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
             <NavLinks
               activeTab={activeTab}
               onTabChange={(tab) => {
@@ -590,7 +597,7 @@ function MarketPlace() {
                     return (
                       <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflow: "clip" }}>
                         {/* Scrollable area with sticky header */}
-                        <div style={{ maxHeight: 480, overflowY: "auto" }}>
+                        <div className="profile-custom-scroll" style={{ maxHeight: 480, overflowY: "auto" }}>
                           <div className="sticky top-0 z-10 grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
                             <span>Item</span><span>Type</span><span>Price</span><span>From</span><span>To</span><span className="text-right">Date</span>
@@ -659,7 +666,7 @@ function MarketPlace() {
                     const paged = offers.slice((tradePage - 1) * PAGE_SIZE, tradePage * PAGE_SIZE);
                     return (
                       <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflow: "clip" }}>
-                        <div style={{ maxHeight: 480, overflowY: "auto", overflowX: "auto" }}>
+                        <div className="profile-custom-scroll" style={{ maxHeight: 480, overflowY: "auto", overflowX: "auto" }}>
                           <div className="sticky top-0 z-10 grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
                             <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span>
@@ -743,7 +750,7 @@ function MarketPlace() {
                     const paged = myAuctions.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
                     return (
                       <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflow: "clip" }}>
-                        <div style={{ maxHeight: 480, overflowY: "auto", overflowX: "auto" }}>
+                        <div className="profile-custom-scroll" style={{ maxHeight: 480, overflowY: "auto", overflowX: "auto" }}>
                           <div className="sticky top-0 z-10 grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
                             <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>

@@ -13,6 +13,30 @@
   display: none;
 }
 
+/* Custom scrollbar for profile tables */
+.profile-custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 80, 255, 0.45) rgba(255, 255, 255, 0.03);
+}
+.profile-custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.profile-custom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+.profile-custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 80, 255, 0.45);
+  border-radius: 10px;
+}
+.profile-custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 80, 255, 0.75);
+}
+.profile-custom-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Ensure position:sticky works inside the App flex wrapper */
 #root, #root > * {
   overflow: visible !important;

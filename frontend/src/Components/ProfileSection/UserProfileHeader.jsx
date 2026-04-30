@@ -30,7 +30,7 @@ function UserProfileHeader({ userData, connectedWallet, sellerBalance }) {
             : "No Wallet Connected"}
         </span>
       </div>
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
         <Link
           to="/edit"
           state={{ userData }}
@@ -58,12 +58,18 @@ function UserProfileHeader({ userData, connectedWallet, sellerBalance }) {
           </svg>
           <span>Dashboard</span>
         </Link>
-      </div>
-      <div className="flex items-center gap-2">
-        <img src="/usdc-logo.svg" className="w-5 h-5" alt="USDC" />
-        <span className="text-lg font-bold text-white font-mono">
-          ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
-        </span>
+        <div
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <img src="/usdc-logo.svg" className="w-4 h-4" alt="USDC" />
+          <span className="text-sm font-bold text-white font-mono">
+            ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -1054,7 +1054,7 @@ export default function ProfileButton() {
                         }}>{detailSpecies.type}</div>
 
                         {/* Single-column attribute list — common fields first, then species-specific */}
-                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                           {[
                             ["Height",    detailSpecies.height],
                             ["Eyes",      detailSpecies.eyes],
@@ -1064,15 +1064,15 @@ export default function ProfileButton() {
                             ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
                             ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
                           ].map(([k, v]) => (
-                            <div key={k} style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 1 }}>
+                            <div key={k} style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
                               <span style={{
-                                fontFamily: "Orbitron,sans-serif", fontSize: 9, fontWeight: "bold",
+                                fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold",
                                 color: "#00D4FF", letterSpacing: "0.08em",
                                 textShadow: "0 0 6px rgba(0,212,255,0.45)",
                               }}>{k}</span>
                               <span style={{
-                                fontFamily: "Orbitron,sans-serif", fontSize: 9,
-                                color: "rgba(255,255,255,0.85)",
+                                fontFamily: "Orbitron,sans-serif", fontSize: 11,
+                                color: "rgba(255,255,255,0.85)", letterSpacing: "0.03em",
                               }}>{v}</span>
                             </div>
                           ))}
@@ -1080,7 +1080,7 @@ export default function ProfileButton() {
 
                         <div style={{
                           marginTop: 2,
-                          fontFamily: "Orbitron,sans-serif", fontSize: 8,
+                          fontFamily: "Orbitron,sans-serif", fontSize: 10,
                           color: "#F87171", letterSpacing: "0.06em",
                         }}>
                           ⚠ Powers: Not available at this time due to game balancing
@@ -1104,13 +1104,15 @@ export default function ProfileButton() {
                     display: "flex", flexDirection: "column", gap: 6,
                   }}>
                     <div style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold",
+                      fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold",
                       color: "#00D4FF", letterSpacing: "0.12em",
                       textShadow: "0 0 8px rgba(0,212,255,0.5)",
                     }}>NOTES</div>
                     <p style={{
-                      fontFamily: "Orbitron,sans-serif", fontSize: 8.5,
-                      color: "rgba(255,255,255,0.72)", lineHeight: 1.65,
+                      fontFamily: "Orbitron,sans-serif", fontSize: 11,
+                      color: "rgba(255,255,255,0.80)", lineHeight: 1.75,
+                      letterSpacing: "0.04em",
+                      textAlign: "justify",
                       margin: 0,
                     }}>{detailSpecies.notes.split("\n\n").join(" ")}</p>
                   </div>

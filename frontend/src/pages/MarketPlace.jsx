@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import MarketNavBar      from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
@@ -20,12 +20,19 @@ const HEADER_H = 72;
 
 function MarketPlace() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
   // Per-tab scroll position memory
   const scrollPositions = useRef({});
   const pendingScroll   = useRef(null);
+
+  // Restore scroll when coming back from item detail (Back to Marketplace)
+  useEffect(() => {
+    const y = location.state?.restoreScrollY;
+    if (y != null) requestAnimationFrame(() => window.scrollTo({ top: y, behavior: "instant" }));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Sync activeTab when URL search params change (e.g. navbar Shops → Overview link)
   useEffect(() => {

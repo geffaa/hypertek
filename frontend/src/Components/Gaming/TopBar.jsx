@@ -300,48 +300,48 @@ const SHIP_ROOMS = {
 //   Right section (8): 2 flank strips + 3 spine guns + 1 mid rail + 2 nacelle bays
 const SKIN1_GUNS = [
   /* ── #1  Far-left horizontal deck bar ── */
-  { id: "far_left_bar",       name: "Far Left Deck Gun",        x: 1,  y: 46, w: 5,  h: 10 },
+  { id: "far_left_bar",       name: "Front Main Canon",                  x: 1,  y: 46, w: 5,  h: 10 },
 
   /* ── #2-3  Diagonal gun bays (nose) ── */
-  { id: "fore_port_bay",      name: "Fore Port Gun Bay",        x: 4,  y: 28, w: 22, h: 8,  rotate: -25 },
-  { id: "fore_stbd_bay",      name: "Fore Starboard Gun Bay",   x: 4,  y: 67, w: 22, h: 8,  rotate:  25 },
+  { id: "fore_port_bay",      name: "Starboard Gun Bank Forward",        x: 4,  y: 28, w: 22, h: 8,  rotate: -25 },
+  { id: "fore_stbd_bay",      name: "Port Gun Bank Forward",             x: 4,  y: 67, w: 22, h: 8,  rotate:  25 },
 
   /* ── #4-9  Point Defense — UPPER 6 (diagonal pattern) ── */
-  { id: "pd_gun_1",  name: "Point Defense Gun 1",  x: 14, y: 36, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_2",  name: "Point Defense Gun 2",  x: 19, y: 32, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_3",  name: "Point Defense Gun 3",  x: 24, y: 28, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_4",  name: "Point Defense Gun 4",  x: 29, y: 27, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_5",  name: "Point Defense Gun 5",  x: 34, y: 27, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_6",  name: "Point Defense Gun 6",  x: 39, y: 32, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_1",  name: "Cockpit Starboard Defence Cell 1",  x: 14, y: 36, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_2",  name: "Cockpit Starboard Defence Cell 2",  x: 19, y: 32, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_3",  name: "Cockpit Starboard Defence Cell 3",  x: 24, y: 28, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_4",  name: "Cockpit Starboard Defence Cell 4",  x: 29, y: 27, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_5",  name: "Cockpit Starboard Defence Cell 5",  x: 34, y: 27, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_6",  name: "Cockpit Starboard Defence Cell 6",  x: 39, y: 32, w: 4.5, h: 9, circle: true },
 
   /* ── #10-12  Center section — 2 ovals + 1 box ── */
-  { id: "vert_oval_upper",    name: "Center Fore Upper Gun",    x: 19, y: 42, w: 5, h: 16, circle: true },
-  { id: "vert_oval_lower",    name: "Center Fore Lower Gun",    x: 29, y: 42, w: 5, h: 16, circle: true },
-  { id: "center_front_gun",   name: "Center Forward Gun",       x: 34, y: 46, w: 12,  h: 12 },
+  { id: "vert_oval_upper",    name: "Cockpit Center Defence Cell Lower", x: 19, y: 42, w: 5, h: 16, circle: true },
+  { id: "vert_oval_lower",    name: "Cockpit Center Defence Cell Upper", x: 29, y: 42, w: 5, h: 16, circle: true },
+  { id: "center_front_gun",   name: "Forward Upperdeck Gun Array",       x: 31, y: 44, w: 17,  h: 14 },
 
   /* ── #13-18  Point Defense — LOWER 6 (2 rows × 3) ── */
-  { id: "pd_gun_7",  name: "Point Defense Gun 7",  x: 14, y: 56, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_8",  name: "Point Defense Gun 8",  x: 19, y: 62, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_9",  name: "Point Defense Gun 9",  x: 24, y: 68, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_10", name: "Point Defense Gun 10", x: 29, y: 67, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_11", name: "Point Defense Gun 11", x: 34, y: 67, w: 4.5, h: 9, circle: true },
-  { id: "pd_gun_12", name: "Point Defense Gun 12", x: 39, y: 62, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_7",  name: "Cockpit Port Defence Cell 1",  x: 14, y: 56, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_8",  name: "Cockpit Port Defence Cell 2",  x: 19, y: 62, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_9",  name: "Cockpit Port Defence Cell 3",  x: 24, y: 68, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_10", name: "Cockpit Port Defence Cell 4",  x: 29, y: 67, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_11", name: "Cockpit Port Defence Cell 5",  x: 34, y: 67, w: 4.5, h: 9, circle: true },
+  { id: "pd_gun_12", name: "Cockpit Port Defence Cell 6",  x: 39, y: 62, w: 4.5, h: 9, circle: true },
 
   /* ── #19-20  Right body — top & bottom flank strips ── */
-  { id: "upper_flank_array",  name: "Upper Flank Gun Array",   x: 52, y: 30,  w: 44, h: 7 },
-  { id: "lower_flank_array",  name: "Lower Flank Gun Array",   x: 52, y: 65, w: 44, h: 7 },
+  { id: "upper_flank_array",  name: "Starboard Gun Bank Rear",   x: 52, y: 30,  w: 44, h: 7 },
+  { id: "lower_flank_array",  name: "Port Gun Bank Rear",        x: 52, y: 65, w: 44, h: 7 },
 
   /* ── #21-23  Right body — spine guns (3 inline) ── */
-  { id: "spine_gun_1",        name: "Spine Gun 1",             x: 53, y: 45, w: 10, h: 10 },
-  { id: "spine_gun_2",        name: "Spine Gun 2",             x: 63, y: 45, w: 10, h: 10 },
-  { id: "spine_gun_3",        name: "Spine Gun 3",             x: 73, y: 45, w: 10,  h: 10 },
+  { id: "spine_gun_1",        name: "Mid Upperdeck Gun Array",   x: 53, y: 45, w: 10, h: 10 },
+  { id: "spine_gun_2",        name: "Lower Central Spine Array", x: 63, y: 45, w: 10, h: 10 },
+  { id: "spine_gun_3",        name: "Rear Central Spine Array",  x: 73, y: 45, w: 10,  h: 10 },
 
   /* ── #24  Right body — mid rail gun (trapezoid: wide-left → narrow-right) ── */
-  { id: "mid_rail_gun",       name: "Mid Rail Gun",            x: 83, y: 40, w: 12, h: 20, trapRight: { topCut: 22, botCut: 22 } },
+  { id: "mid_rail_gun",       name: "Central Tower Embankment",  x: 83, y: 40, w: 12, h: 20, trapRight: { topCut: 22, botCut: 22 } },
 
   /* ── #25-26  Far-right nacelle gun bays ── */
-  { id: "upper_nacelle_bay",  name: "Upper Nacelle Gun Bay",   x: 75, y: 4,  w: 22, h: 25 },
-  { id: "lower_nacelle_bay",  name: "Lower Nacelle Gun Bay",   x: 75, y: 74, w: 22, h: 25 },
+  { id: "upper_nacelle_bay",  name: "Starboard Wing Array",      x: 75, y: 4,  w: 22, h: 25 },
+  { id: "lower_nacelle_bay",  name: "Port Wing Array",           x: 75, y: 74, w: 22, h: 25 },
 ];
 
 const NAV_BTN_BASE = {

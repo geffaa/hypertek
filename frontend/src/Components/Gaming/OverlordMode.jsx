@@ -277,61 +277,40 @@ function SpaceView() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   WORLD VIEW — large game map with free pan + zoom
-   Uses transform: translate + scale with center-origin clamping.
-   Map is always ≥ MIN_SCALE × viewport so black gaps are impossible.
+   WORLD VIEW — large game map with pan only (no zoom).
+   Map is MAP_SCALE × the viewport — drag to explore, like a strategy
+   game map. No zoom controls; zooming looked blurry so it's removed.
    ══════════════════════════════════════════════════════════════════ */
 
-const MIN_SCALE     = 1.5;   // map is always 1.5× viewport — never shows edges
-const MAX_SCALE     = 5.0;
-const DEFAULT_SCALE = 1.5;
-const ZOOM_STEP     = 0.25;
+const MAP_SCALE = 2.0; // map is 2× the viewport in each dimension
 
 function WorldView() {
   const containerRef = useRef(null);
-  const [scale,  setScale]  = useState(DEFAULT_SCALE);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [ready,  setReady]  = useState(false);
-  const drag  = useRef({ active: false, startX: 0, startY: 0, ox: 0, oy: 0 });
-  const pinch = useRef({ active: false, dist: 0, scale: DEFAULT_SCALE });
+  const drag = useRef({ active: false, startX: 0, startY: 0, ox: 0, oy: 0 });
 
-  /*
-   * With transformOrigin "center center" and scale sc:
-   * visible content spans ±(W*sc/2) in x around center.
-   * Offset shifts by (ox, oy) on top of that.
-   * No black gap means the image edge never crosses into viewport:
-   *   maxX = W*(sc-1)/2  →  offset.x ∈ [-maxX, maxX]
-   *   maxY = H*(sc-1)/2  →  offset.y ∈ [-maxY, maxY]
-   */
-  const clampOffset = useCallback((ox, oy, sc) => {
+  /* Clamp so map edges never expose black gaps */
+  const clampOffset = useCallback((ox, oy) => {
     const el = containerRef.current;
     if (!el) return { x: ox, y: oy };
-    const maxX = (el.clientWidth  * (sc - 1)) / 2;
-    const maxY = (el.clientHeight * (sc - 1)) / 2;
+    const maxX = (el.clientWidth  * (MAP_SCALE - 1)) / 2;
+    const maxY = (el.clientHeight * (MAP_SCALE - 1)) / 2;
     return {
       x: Math.min(maxX, Math.max(-maxX, ox)),
       y: Math.min(maxY, Math.max(-maxY, oy)),
     };
   }, []);
 
-  /* ── Entry: show left portion of map (max positive x offset) ── */
+  /* Entry: show left side of map (max positive x = leftmost visible area) */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const maxX = (el.clientWidth * (DEFAULT_SCALE - 1)) / 2;
+    const maxX = (el.clientWidth * (MAP_SCALE - 1)) / 2;
     setOffset({ x: maxX, y: 0 });
     const t = setTimeout(() => setReady(true), 80);
     return () => clearTimeout(t);
   }, []);
-
-  /* ── Zoom helper ── */
-  const applyZoom = useCallback((delta) => {
-    setScale(prev => {
-      const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, prev + delta));
-      setOffset(o => clampOffset(o.x, o.y, next));
-      return next;
-    });
-  }, [clampOffset]);
 
   /* ── Mouse drag ── */
   const onMouseDown = useCallback((e) => {
@@ -344,59 +323,29 @@ function WorldView() {
     setOffset(clampOffset(
       drag.current.ox + e.clientX - drag.current.startX,
       drag.current.oy + e.clientY - drag.current.startY,
-      scale,
     ));
-  }, [scale, clampOffset]);
+  }, [clampOffset]);
 
   const onMouseUp = useCallback(() => { drag.current.active = false; }, []);
 
-  /* ── Scroll wheel zoom ── */
-  const onWheel = useCallback((e) => {
-    e.preventDefault();
-    applyZoom(e.deltaY > 0 ? -0.12 : 0.12);
-  }, [applyZoom]);
-
-  /* ── Touch pinch + pan ── */
+  /* ── Touch pan (single finger only) ── */
   const onTouchStart = useCallback((e) => {
     if (e.touches.length === 1) {
       drag.current = { active: true, startX: e.touches[0].clientX, startY: e.touches[0].clientY, ox: offset.x, oy: offset.y };
-    } else if (e.touches.length === 2) {
-      drag.current.active = false;
-      pinch.current = {
-        active: true,
-        dist: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
-        scale,
-      };
     }
-  }, [offset, scale]);
+  }, [offset]);
 
   const onTouchMove = useCallback((e) => {
     e.preventDefault();
-    if (pinch.current.active && e.touches.length === 2) {
-      const newDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, pinch.current.scale * (newDist / pinch.current.dist)));
-      setScale(next);
-      setOffset(o => clampOffset(o.x, o.y, next));
-    } else if (drag.current.active && e.touches.length === 1) {
+    if (drag.current.active && e.touches.length === 1) {
       setOffset(clampOffset(
         drag.current.ox + e.touches[0].clientX - drag.current.startX,
         drag.current.oy + e.touches[0].clientY - drag.current.startY,
-        scale,
       ));
     }
-  }, [scale, clampOffset]);
+  }, [clampOffset]);
 
-  const onTouchEnd = useCallback(() => { drag.current.active = false; pinch.current.active = false; }, []);
-
-  /* ── Wheel event (needs passive:false to call preventDefault) ── */
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [onWheel]);
-
-  const pct = Math.round(((scale - MIN_SCALE) / (MAX_SCALE - MIN_SCALE)) * 100);
+  const onTouchEnd = useCallback(() => { drag.current.active = false; }, []);
 
   return (
     <div
@@ -413,18 +362,19 @@ function WorldView() {
         overflow: "hidden", background: "#000",
         cursor: drag.current.active ? "grabbing" : "grab",
         userSelect: "none",
+        touchAction: "none",
       }}
     >
-      {/* Map — transform approach guarantees no black gaps at any scale/pan */}
+      {/* Map — 2.8× larger than viewport, pan to explore */}
       <div style={{
         position: "absolute", inset: 0,
-        transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
+        transform: `translate(${offset.x}px, ${offset.y}px) scale(${MAP_SCALE})`,
         transformOrigin: "center center",
         transition: ready ? "none" : "transform 1s cubic-bezier(0.16,1,0.3,1)",
         willChange: "transform",
       }}>
         <img
-          src="/overlord_world2.png"
+          src="/overlord_world3.png"
           alt="World Map"
           draggable={false}
           style={{
@@ -440,108 +390,6 @@ function WorldView() {
         position: "absolute", inset: 0, pointerEvents: "none",
         background: "radial-gradient(ellipse 96% 92% at 50% 50%, transparent 52%, rgba(0,0,0,0.55) 100%)",
       }} />
-
-      {/* ── Zoom controls — bottom-center HUD bar ── */}
-      <div
-        onMouseDown={e => e.stopPropagation()}
-        style={{
-          position: "absolute",
-          bottom: "4%", left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 20,
-          display: "flex", alignItems: "center", gap: 0,
-          background: "rgba(10,0,0,0.82)",
-          border: "1px solid rgba(248,113,113,0.25)",
-          borderRadius: 6,
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 0 20px rgba(248,113,113,0.1), inset 0 1px 0 rgba(248,113,113,0.08)",
-          overflow: "hidden",
-          pointerEvents: "auto",
-        }}
-      >
-        {/* Zoom out */}
-        <button
-          onClick={() => applyZoom(-ZOOM_STEP)}
-          disabled={scale <= MIN_SCALE}
-          style={{
-            width: 38, height: 34,
-            background: "transparent",
-            border: "none",
-            borderRight: "1px solid rgba(248,113,113,0.15)",
-            color: scale <= MIN_SCALE ? "rgba(248,113,113,0.2)" : "#f87171",
-            fontSize: 20, lineHeight: 1,
-            cursor: scale <= MIN_SCALE ? "default" : "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transition: "background 0.15s",
-          }}
-          onMouseEnter={e => { if (scale > MIN_SCALE) e.currentTarget.style.background = "rgba(248,113,113,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
-        >−</button>
-
-        {/* Zoom level bar */}
-        <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "0 12px" }}>
-          <span style={{
-            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.1em",
-            color: "rgba(248,113,113,0.4)", userSelect: "none",
-          }}>ZOOM</span>
-          <div style={{
-            width: 72, height: 3, borderRadius: 2,
-            background: "rgba(248,113,113,0.12)", overflow: "hidden",
-          }}>
-            <div style={{
-              height: "100%", borderRadius: 2,
-              width: `${pct}%`,
-              background: "linear-gradient(90deg, #f87171, #fbbf24)",
-              transition: "width 0.18s ease",
-            }} />
-          </div>
-          <span style={{
-            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.05em",
-            color: "rgba(248,113,113,0.5)", userSelect: "none", minWidth: 28, textAlign: "right",
-          }}>{scale.toFixed(1)}×</span>
-        </div>
-
-        {/* Zoom in */}
-        <button
-          onClick={() => applyZoom(ZOOM_STEP)}
-          disabled={scale >= MAX_SCALE}
-          style={{
-            width: 38, height: 34,
-            background: "transparent",
-            border: "none",
-            borderLeft: "1px solid rgba(248,113,113,0.15)",
-            borderRight: "1px solid rgba(248,113,113,0.15)",
-            color: scale >= MAX_SCALE ? "rgba(248,113,113,0.2)" : "#f87171",
-            fontSize: 20, lineHeight: 1,
-            cursor: scale >= MAX_SCALE ? "default" : "pointer",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transition: "background 0.15s",
-          }}
-          onMouseEnter={e => { if (scale < MAX_SCALE) e.currentTarget.style.background = "rgba(248,113,113,0.1)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
-        >+</button>
-
-        {/* Reset */}
-        <button
-          onClick={() => {
-            const el = containerRef.current;
-            const maxX = el ? (el.clientWidth * (DEFAULT_SCALE - 1)) / 2 : 0;
-            setScale(DEFAULT_SCALE);
-            setOffset({ x: maxX, y: 0 });
-          }}
-          style={{
-            height: 34, padding: "0 12px",
-            background: "transparent",
-            border: "none",
-            color: "rgba(248,113,113,0.55)",
-            fontFamily: "Orbitron,sans-serif", fontSize: 7, letterSpacing: "0.12em",
-            cursor: "pointer",
-            transition: "background 0.15s, color 0.15s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "rgba(248,113,113,0.08)"; e.currentTarget.style.color = "#f87171"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(248,113,113,0.55)"; }}
-        >RESET</button>
-      </div>
     </div>
   );
 }

@@ -105,7 +105,8 @@ function Buy1() {
     buyerWallet,
     priceETH,
     itemType,
-    tokenId
+    tokenId,
+    marketplaceScrollY,
   } = location.state || {};
 
   // Determine which is parent and which is sub-collection
@@ -1396,12 +1397,19 @@ function Buy1() {
       {/* ── Breadcrumb / Tabs ── */}
       <div className="flex items-end gap-6 mt-8 mb-8 border-b border-white/10 flex-wrap">
         <button
-          onClick={() => navigate("/Profile?tab=collectibles", { state: { scrollToGrid: true } })}
+          onClick={() => navigate("/market-place", { state: { restoreScrollY: marketplaceScrollY ?? 0 } })}
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-0.5">
             <path d="M19 12H5M12 5l-7 7 7 7"/>
           </svg>
+          Back to Marketplace
+        </button>
+        <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
+        <button
+          onClick={() => navigate("/Profile?tab=collectibles", { state: { scrollToGrid: true } })}
+          className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
+        >
           Back to Collections
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
