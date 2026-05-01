@@ -283,15 +283,13 @@ export default function ProfileQuestingTab({ wallet, token }) {
       ) : (
         /* ── Table ── */
         <div className="rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)", overflowY: "auto", maxHeight: "calc(100vh - 260px)" }}>
+          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
           {/* Header */}
           <div
             className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
             style={{
               background: "rgba(0,20,80,0.95)",
               gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
-              position: "sticky", top: 0, zIndex: 10,
-              backdropFilter: "blur(8px)",
             }}
           >
             <span>Quest No</span>

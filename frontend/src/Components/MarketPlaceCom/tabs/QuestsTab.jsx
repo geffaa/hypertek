@@ -271,47 +271,55 @@ export default function QuestsTab() {
           </button>
         </div>
 
-        {/* Card 2 — Money Quests */}
-        <div className="rounded-xl px-4 py-3"
-          style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.12)" }}>
-          <div className="flex items-center gap-2 mb-2">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-amber-300/80 text-xs font-semibold">Money Quests (11% pool)</span>
-          </div>
-          <div className="space-y-1">
-            {QUEST_TIERS.money.map((t) => (
-              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
-                <span className="text-white/30 w-6">{t.waitHours}h</span>
-                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Card 2+3 — Money + Resource combined */}
+        <div className="sm:col-span-2 rounded-xl px-4 py-3"
+          style={{ background: "rgba(20,15,5,0.6)", border: "1px solid rgba(251,191,36,0.15)" }}>
+          <div className="grid grid-cols-2 gap-4 divide-x divide-white/10">
 
-        {/* Card 3 — Resource Quests */}
-        <div className="rounded-xl px-4 py-3"
-          style={{ background: "rgba(74,222,128,0.04)", border: "1px solid rgba(74,222,128,0.12)" }}>
-          <div className="flex items-center gap-2 mb-2">
-            <Package className="w-3.5 h-3.5 text-green-400" />
-            <span className="text-green-300/80 text-xs font-semibold">Resource Quests (20% pool)</span>
-          </div>
-          <div className="space-y-1">
-            {QUEST_TIERS.resources.map((t) => (
-              <div key={t.waitHours} className="flex items-center gap-2 text-[10px]">
-                <span className="text-white/30 w-6">{t.waitHours}h</span>
-                <span className="text-green-400/70">Buyer −{t.buyerSavePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-amber-300/60">Player +{t.playerSharePercent}%</span>
-                <span className="text-white/20">·</span>
-                <span className="text-white/30">Platform +{t.platformSharePercent}%</span>
+            {/* Money Quests */}
+            <div>
+              <div className="flex items-center gap-2 mb-2.5">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-amber-300 text-xs font-semibold">Money Quests (11% pool)</span>
               </div>
-            ))}
+              <div className="space-y-1.5">
+                {QUEST_TIERS.money.map((t) => (
+                  <div key={t.waitHours} className="grid text-[10px]"
+                    style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
+                    <span className="text-white/50">{t.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Resource Quests */}
+            <div className="pl-4">
+              <div className="flex items-center gap-2 mb-2.5">
+                <Package className="w-3.5 h-3.5 text-green-400" />
+                <span className="text-green-300 text-xs font-semibold">Resource Quests (20% pool)</span>
+              </div>
+              <div className="space-y-1.5">
+                {QUEST_TIERS.resources.map((t) => (
+                  <div key={t.waitHours} className="grid text-[10px]"
+                    style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
+                    <span className="text-white/50">{t.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
-          <p className="text-white/20 text-[9px] mt-2">Planet data will sync once the game goes live.</p>
+          {/* Footer notes */}
+          <div className="mt-3 pt-2.5 border-t border-white/8 flex flex-wrap gap-x-8 gap-y-1">
+            <p className="text-white/45 text-[9px]"># Quests with combined payloads will be paid out using the separate table amounts.</p>
+            <p className="text-white/45 text-[9px]"># Planet data will sync when the games go live.</p>
+          </div>
         </div>
 
       </div>

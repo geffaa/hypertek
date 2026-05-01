@@ -9,17 +9,14 @@ function WraithModel() {
   return <primitive object={scene} />;
 }
 
-export default function Wraith3DViewer({ onClick }) {
+export default function Wraith3DViewer() {
   return (
-    <Canvas
-      style={{ width: "100%", height: "100%", cursor: "grab" }}
-      onClick={onClick}
-    >
+    <Canvas style={{ width: "100%", height: "100%", cursor: "grab" }}>
       <Suspense fallback={null}>
         <Stage
           environment="city"
           intensity={0.6}
-          adjustCamera={1.2}
+          adjustCamera={0.85}
           shadows={false}
         >
           <WraithModel />
@@ -30,8 +27,8 @@ export default function Wraith3DViewer({ onClick }) {
         enablePan={false}
         enableDamping
         dampingFactor={0.08}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={Math.PI / 1.8}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI}
       />
     </Canvas>
   );

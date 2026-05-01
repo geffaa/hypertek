@@ -282,36 +282,30 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
             overflow: "hidden",
           }}>
 
-            {/* LEFT — vehicle image / 3D viewer */}
+            {/* LEFT — vehicle image (always static in selector) */}
             <div style={{
               flex: 1,
               display: "flex", alignItems: "center", justifyContent: "center",
               position: "relative", overflow: "hidden",
               minHeight: s.imgH,
-              padding: v.id === "wraith" ? 0 : s.cardPad,
+              padding: s.cardPad,
             }}>
-              {v.id === "wraith" ? (
-                <Wraith3DViewer />
-              ) : (
-                <>
-                  <div style={{
-                    position: "absolute", inset: 0,
-                    background: `radial-gradient(ellipse at 50% 55%, ${v.color}1a, transparent 70%)`,
-                    pointerEvents: "none",
-                  }} />
-                  <img
-                    src={v.img}
-                    alt={v.name}
-                    style={{
-                      maxHeight: "100%", maxWidth: "100%",
-                      objectFit: "contain",
-                      filter: `drop-shadow(0 0 18px ${v.color}88)`,
-                      transition: "filter 0.3s",
-                      position: "relative", zIndex: 1,
-                    }}
-                  />
-                </>
-              )}
+              <div style={{
+                position: "absolute", inset: 0,
+                background: `radial-gradient(ellipse at 50% 55%, ${v.color}1a, transparent 70%)`,
+                pointerEvents: "none",
+              }} />
+              <img
+                src={v.img}
+                alt={v.name}
+                style={{
+                  maxHeight: "100%", maxWidth: "100%",
+                  objectFit: "contain",
+                  filter: `drop-shadow(0 0 18px ${v.color}88)`,
+                  transition: "filter 0.3s",
+                  position: "relative", zIndex: 1,
+                }}
+              />
             </div>
 
             {/* Vertical divider */}
@@ -593,27 +587,21 @@ function GarageView() {
       {/* ── Vehicle — center stage ── */}
       <div style={{
         position: "absolute",
-        top: "22%", left: "50%", transform: "translateX(-50%)",
-        width:  isMobile ? 220 : 420,
-        height: isMobile ? 180 : 360,
+        top: "14%", left: "50%", transform: "translateX(-50%)",
+        width:  isMobile ? 280 : 540,
+        height: isMobile ? 240 : 460,
         zIndex: 20,
         display: "flex", justifyContent: "center",
       }}>
         {v.id === "wraith" ? (
-          <Wraith3DViewer
-            onClick={() => setCustomizeOpen(c => !c)}
-          />
+          <Wraith3DViewer />
         ) : (
-          <div
-            onClick={() => setCustomizeOpen(c => !c)}
-            style={{
-              width: "100%", cursor: "pointer",
-              animation: spinning
-                ? "vehicleSpin 10s linear infinite"
-                : "vehicleFloat 4s ease-in-out infinite",
-            }}
-            title="Click to customize"
-          >
+          <div style={{
+            width: "100%",
+            animation: spinning
+              ? "vehicleSpin 10s linear infinite"
+              : "vehicleFloat 4s ease-in-out infinite",
+          }}>
             <img
               src={v.img} alt={v.name}
               style={{
@@ -626,7 +614,7 @@ function GarageView() {
         )}
       </div>
 
-      {/* ── Vehicle name + hint ── */}
+      {/* ── Vehicle name ── */}
       <div style={{
         position: "absolute", top: isMobile ? "11%" : "13%",
         left: "50%", transform: "translateX(-50%)",
@@ -638,17 +626,6 @@ function GarageView() {
           fontWeight: "bold", letterSpacing: "0.16em",
           color: v.color, textShadow: `0 0 20px ${v.color}bb`,
         }}>{v.name}</div>
-        <div style={{
-          fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8,
-          letterSpacing: "0.16em", color: "rgba(255,255,255,0.3)", marginTop: 3,
-        }}>{v.class} · {v.bay}</div>
-        {!customizeOpen && (
-          <div style={{
-            fontFamily: "Orbitron,sans-serif", fontSize: 7,
-            color: "rgba(34,197,94,0.5)", letterSpacing: "0.1em", marginTop: 6,
-            animation: "vehicleFloat 2s ease-in-out infinite",
-          }}>▼ CLICK TO CUSTOMIZE</div>
-        )}
       </div>
 
       {/* ── Spin toggle ── */}

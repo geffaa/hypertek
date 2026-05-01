@@ -392,6 +392,10 @@ function MarketPlace() {
                 setActiveTab(tab);
                 setSearchParams({ tab: TAB_SLUG[tab] });
                 if (tab !== "My Collectibles") setActiveCategory("");
+                setTimeout(() => {
+                  // Sesuaikan angka ini untuk mengatur posisi scroll (px dari atas halaman)
+                  window.scrollTo({ top: 420, behavior: "smooth" });
+                }, 70);
               }}
               activeCategory={activeCategory}
               onCategoryChange={handleSelectCategory}
@@ -402,7 +406,7 @@ function MarketPlace() {
 
 
           {/* ================= CONTENT AREA ================= */}
-          <section ref={contentRef} className="relative z-10 mt-4 pb-24">
+          <section ref={contentRef} className="relative z-10 mt-4 pb-8">
             <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
@@ -664,10 +668,10 @@ function MarketPlace() {
                     const totalPages = Math.ceil(offers.length / PAGE_SIZE);
                     const paged = offers.slice((tradePage - 1) * PAGE_SIZE, tradePage * PAGE_SIZE);
                     return (
-                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto", overflowY: "auto", maxHeight: "calc(100vh - 260px)" }}>
+                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto" }}>
                         <div>
                           <div className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr", position: "sticky", top: 0, zIndex: 10, backdropFilter: "blur(8px)" }}>
+                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
                             <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span>
                           </div>
                           {paged.map((trade, i) => {
@@ -732,96 +736,7 @@ function MarketPlace() {
             {activeTab === "Auction" && (
               <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
               <div className="flex-1 min-w-0">
-                {/* ⚠️ MOCK DATA — remove before production */}
-                {(() => {
-                  const MOCK_AUCTIONS = [
-                    { _id: "aaa001", title: "Arctic Ghost Skin",      startPrice: 120, currentBid: 145,  status: "active",    endTime: new Date(Date.now() + 3 * 86400000).toISOString() },
-                    { _id: "aaa002", title: "Shadow Ops Skin",         startPrice: 80,  currentBid: 95,   status: "active",    endTime: new Date(Date.now() + 1 * 86400000).toISOString() },
-                    { _id: "aaa003", title: "Desert Storm Skin",       startPrice: 55,  currentBid: null, status: "ended",     endTime: new Date(Date.now() - 2 * 86400000).toISOString() },
-                    { _id: "aaa004", title: "Urban Assault Skin",      startPrice: 70,  currentBid: 110,  status: "sold",      endTime: new Date(Date.now() - 1 * 86400000).toISOString() },
-                    { _id: "aaa005", title: "Jungle Predator",         startPrice: 90,  currentBid: 130,  status: "active",    endTime: new Date(Date.now() + 5 * 86400000).toISOString() },
-                    { _id: "aaa006", title: "Neon Reaper Skin",        startPrice: 200, currentBid: 220,  status: "active",    endTime: new Date(Date.now() + 12 * 3600000).toISOString() },
-                    { _id: "aaa007", title: "Stealth Viper",           startPrice: 60,  currentBid: null, status: "cancelled", endTime: new Date(Date.now() - 3 * 86400000).toISOString() },
-                    { _id: "aaa008", title: "Iron Colossus",           startPrice: 150, currentBid: 175,  status: "active",    endTime: new Date(Date.now() + 2 * 86400000).toISOString() },
-                    { _id: "aaa009", title: "Phantom Wraith",          startPrice: 45,  currentBid: 60,   status: "ended",     endTime: new Date(Date.now() - 6 * 3600000).toISOString() },
-                    { _id: "aaa010", title: "Void Walker",             startPrice: 300, currentBid: 340,  status: "active",    endTime: new Date(Date.now() + 7 * 86400000).toISOString() },
-                    { _id: "aaa011", title: "Crimson Warlord",         startPrice: 180, currentBid: 210,  status: "active",    endTime: new Date(Date.now() + 4 * 86400000).toISOString() },
-                    { _id: "aaa012", title: "Frostbite Commander",     startPrice: 95,  currentBid: null, status: "ended",     endTime: new Date(Date.now() - 5 * 86400000).toISOString() },
-                    { _id: "aaa013", title: "Obsidian Sentinel",       startPrice: 250, currentBid: 280,  status: "active",    endTime: new Date(Date.now() + 9 * 3600000).toISOString() },
-                    { _id: "aaa014", title: "Solar Flare Skin",        startPrice: 75,  currentBid: 90,   status: "sold",      endTime: new Date(Date.now() - 4 * 86400000).toISOString() },
-                    { _id: "aaa015", title: "Midnight Specter",        startPrice: 110, currentBid: 135,  status: "active",    endTime: new Date(Date.now() + 6 * 86400000).toISOString() },
-                    { _id: "aaa016", title: "Toxic Raider",            startPrice: 65,  currentBid: null, status: "cancelled", endTime: new Date(Date.now() - 1 * 86400000).toISOString() },
-                    { _id: "aaa017", title: "Glacial Titan",           startPrice: 320, currentBid: 355,  status: "active",    endTime: new Date(Date.now() + 8 * 86400000).toISOString() },
-                    { _id: "aaa018", title: "Ember Phoenix",           startPrice: 140, currentBid: 160,  status: "active",    endTime: new Date(Date.now() + 18 * 3600000).toISOString() },
-                    { _id: "aaa019", title: "Stone Golem Skin",        startPrice: 50,  currentBid: 68,   status: "ended",     endTime: new Date(Date.now() - 7 * 86400000).toISOString() },
-                    { _id: "aaa020", title: "Thunderstrike Elite",     startPrice: 190, currentBid: 225,  status: "active",    endTime: new Date(Date.now() + 3 * 86400000).toISOString() },
-                    { _id: "aaa021", title: "Lunar Eclipse Skin",      startPrice: 85,  currentBid: 100,  status: "active",    endTime: new Date(Date.now() + 2 * 86400000).toISOString() },
-                    { _id: "aaa022", title: "Venomous Shade",          startPrice: 130, currentBid: null, status: "ended",     endTime: new Date(Date.now() - 3 * 86400000).toISOString() },
-                    { _id: "aaa023", title: "Galactic Enforcer",       startPrice: 270, currentBid: 310,  status: "active",    endTime: new Date(Date.now() + 11 * 3600000).toISOString() },
-                    { _id: "aaa024", title: "Abyssal Hunter",          startPrice: 160, currentBid: 185,  status: "sold",      endTime: new Date(Date.now() - 2 * 86400000).toISOString() },
-                    { _id: "aaa025", title: "Storm Breaker Skin",      startPrice: 220, currentBid: 260,  status: "active",    endTime: new Date(Date.now() + 10 * 86400000).toISOString() },
-                  ];
-                  const MOCK_PAGE_SIZE = 10;
-                  const totalPages = Math.ceil(MOCK_AUCTIONS.length / MOCK_PAGE_SIZE);
-                  const paged = MOCK_AUCTIONS.slice((auctionPage - 1) * MOCK_PAGE_SIZE, auctionPage * MOCK_PAGE_SIZE);
-                  const statusColors = {
-                    active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                    ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                    sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                    cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
-                  };
-                  return (
-                    <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto", overflowY: "auto", maxHeight: "calc(100vh - 260px)" }}>
-                      {/* Sticky header — works because container has overflow-y:auto */}
-                      <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                        style={{
-                          background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)",
-                          gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr",
-                          position: "sticky", top: 0, zIndex: 10, backdropFilter: "blur(8px)",
-                        }}>
-                        <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
-                      </div>
-                      {paged.map((auction, i) => {
-                        const c = statusColors[auction.status] || statusColors.ended;
-                        const endDate = new Date(auction.endTime);
-                        const diff = endDate - Date.now();
-                        const timeStr = diff > 0
-                          ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
-                          : "Ended";
-                        return (
-                          <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
-                            style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
-                            <span className="text-white/60 text-xs font-mono">#{auction._id.slice(-6).toUpperCase()}</span>
-                            <span className="text-white/80 text-xs truncate">{auction.title}</span>
-                            <span className="text-white/60 text-xs">${auction.startPrice}</span>
-                            <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
-                            <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
-                            <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
-                              style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
-                          </div>
-                        );
-                      })}
-                      {/* Pagination */}
-                      <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
-                        <span className="text-white/30 text-xs">{(auctionPage - 1) * MOCK_PAGE_SIZE + 1}–{Math.min(auctionPage * MOCK_PAGE_SIZE, MOCK_AUCTIONS.length)} of {MOCK_AUCTIONS.length}</span>
-                        <div className="flex gap-1">
-                          <button onClick={() => setAuctionPage(p => Math.max(1, p - 1))} disabled={auctionPage === 1}
-                            className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>
-                          {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-                            <button key={p} onClick={() => setAuctionPage(p)}
-                              className="px-2.5 py-1 rounded text-xs font-medium transition-colors"
-                              style={{ background: auctionPage === p ? "#002AA8" : "rgba(255,255,255,0.06)", border: `1px solid ${auctionPage === p ? "rgba(0,80,255,0.4)" : "rgba(255,255,255,0.1)"}`, color: auctionPage === p ? "#fff" : "rgba(255,255,255,0.45)" }}>{p}</button>
-                          ))}
-                          <button onClick={() => setAuctionPage(p => Math.min(totalPages, p + 1))} disabled={auctionPage === totalPages}
-                            className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>→</button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()}
-                {false && (!connectedWallet ? (
+                {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
                     <p className="text-sm">Connect your wallet to view your auction listings</p>
                   </div>
@@ -836,40 +751,38 @@ function MarketPlace() {
                   (() => {
                     const totalPages = Math.ceil(myAuctions.length / PAGE_SIZE);
                     const paged = myAuctions.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
+                    const statusColors = {
+                      active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
+                      ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
+                      sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
+                      cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+                    };
                     return (
-                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto", overflowY: "auto", maxHeight: "calc(100vh - 260px)" }}>
-                        <div>
-                          <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr", position: "sticky", top: 0, zIndex: 10, backdropFilter: "blur(8px)" }}>
-                            <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
-                          </div>
-                          {paged.map((auction, i) => {
-                            const statusColors = {
-                              active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                              ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                              sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                              cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
-                            };
-                            const c = statusColors[auction.status] || statusColors.ended;
-                            const endDate = auction.endTime ? new Date(auction.endTime) : null;
-                            const diff = endDate ? endDate - Date.now() : 0;
-                            const timeStr = diff > 0
-                              ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
-                              : "Ended";
-                            return (
-                              <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
-                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
-                                <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
-                                <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
-                                <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
-                                <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
-                                <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
-                                <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
-                                  style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
-                              </div>
-                            );
-                          })}
+                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto" }}>
+                        <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                          style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                          <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
                         </div>
+                        {paged.map((auction, i) => {
+                          const c = statusColors[auction.status] || statusColors.ended;
+                          const endDate = auction.endTime ? new Date(auction.endTime) : null;
+                          const diff = endDate ? endDate - Date.now() : 0;
+                          const timeStr = diff > 0
+                            ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
+                            : "Ended";
+                          return (
+                            <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
+                              style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                              <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
+                              <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
+                              <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
+                              <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
+                              <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
+                              <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
+                                style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
+                            </div>
+                          );
+                        })}
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
                             <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, myAuctions.length)} of {myAuctions.length}</span>
@@ -894,7 +807,7 @@ function MarketPlace() {
                       </div>
                     );
                   })()
-                ))}
+                )}
               </div>
               <StickyAvatarSidebar />
               </div>
