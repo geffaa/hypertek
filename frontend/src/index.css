@@ -5,6 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes scanline {
+  0%   { transform: skewX(-20deg) translateX(-150%); }
+  100% { transform: skewX(-20deg) translateX(350%); }
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -34,6 +39,29 @@
   background: rgba(0, 80, 255, 0.75);
 }
 .profile-custom-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Custom scrollbar for modals */
+.modal-custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.35) rgba(255, 255, 255, 0.03);
+}
+.modal-custom-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-custom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+}
+.modal-custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 10px;
+}
+.modal-custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.65);
+}
+.modal-custom-scroll::-webkit-scrollbar-corner {
   background: transparent;
 }
 

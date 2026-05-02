@@ -26,8 +26,10 @@ export default function StickyAvatarSidebar() {
     <div
       style={{
         position: "sticky",
-        top: 68,
-        width: 480,
+        top: 155,
+        width: 460,
+        minWidth: 460,
+        maxWidth: 460,
         flexShrink: 0,
         alignSelf: "flex-start",
         display: "flex",
@@ -35,7 +37,7 @@ export default function StickyAvatarSidebar() {
         alignItems: "center",
         pointerEvents: "none",
         userSelect: "none",
-        overflow: "visible",
+        overflow: "hidden",
       }}
     >
       <img
@@ -43,9 +45,9 @@ export default function StickyAvatarSidebar() {
         alt="avatar"
         onError={(e) => { e.currentTarget.style.opacity = "0.15"; }}
         style={{
-          width: "115%",
-          height: "calc(70vh - 30px)",
-          maxHeight: 1200,
+          width: "110%",
+          height: "calc(78vh - 30px)",
+          maxHeight: 980,
           objectFit: "contain",
           objectPosition: "top center",
           display: "block",

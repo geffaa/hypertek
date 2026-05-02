@@ -383,29 +383,75 @@ function MarketPlace() {
             />
           </div>
 
-          {/* ================= NAV ================= */}
-          <div className="mt-2 w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-            <NavLinks
-              activeTab={activeTab}
-              onTabChange={(tab) => {
-                setActiveTab(tab);
-                setSearchParams({ tab: TAB_SLUG[tab] });
-                if (tab !== "My Collectibles") setActiveCategory("");
-                setTimeout(() => {
-                  // Sesuaikan angka ini untuk mengatur posisi scroll (px dari atas halaman)
-                  window.scrollTo({ top: 420, behavior: "smooth" });
-                }, 70);
-              }}
-              activeCategory={activeCategory}
-              onCategoryChange={handleSelectCategory}
-              onCategoriesLoaded={handleCategoriesLoaded}
-            />
+          {/* ================= STICKY NAV BAR ================= */}
+          <div
+            style={{
+              position: "sticky",
+              top: 68,
+              zIndex: 40,
+              background: "rgba(6,6,16,0.96)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              borderBottom: "1px solid rgba(255,255,255,0.07)",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+            }}
+          >
+            <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+              {/* Compact action buttons */}
+              <div className="flex items-center gap-2 pt-2 pb-1 flex-wrap">
+                <Link
+                  to="/edit"
+                  state={{ userData }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all duration-200 hover:brightness-125"
+                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)" }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                  Edit Profile
+                </Link>
+                <Link
+                  to="/dashboard"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all duration-200 hover:brightness-125"
+                  style={{ background: "linear-gradient(180deg,#002AA8 0%,#001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7h18M3 12h18M3 17h18" />
+                  </svg>
+                  Dashboard
+                </Link>
+                <div
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                >
+                  <img src="/usdc-logo.svg" className="w-3.5 h-3.5" alt="USDC" />
+                  <span className="text-xs font-bold text-white font-mono">
+                    ${Number(sellerBalance) > 0 ? Number(sellerBalance).toFixed(2) : "0.00"}
+                  </span>
+                </div>
+              </div>
+              {/* Tabs */}
+              <div className="pb-2">
+                <NavLinks
+                  activeTab={activeTab}
+                  onTabChange={(tab) => {
+                    setActiveTab(tab);
+                    setSearchParams({ tab: TAB_SLUG[tab] });
+                    if (tab !== "My Collectibles") setActiveCategory("");
+                    setTimeout(() => { window.scrollTo({ top: 420, behavior: "smooth" }); }, 70);
+                  }}
+                  activeCategory={activeCategory}
+                  onCategoryChange={handleSelectCategory}
+                  onCategoriesLoaded={handleCategoriesLoaded}
+                />
+              </div>
+            </div>
           </div>
 
 
 
           {/* ================= CONTENT AREA ================= */}
-          <section ref={contentRef} className="relative z-10 mt-4" style={{ overflowY: "clip" }}>
+          <section ref={contentRef} className="relative z-10 mt-8" style={{ overflowY: "clip" }}>
 
             {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
             {activeTab === "My Collectibles" && (() => {
@@ -759,31 +805,38 @@ function MarketPlace() {
                       cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
                     };
                     return (
-                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto" }}>
-                        <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                          style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
-                          <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
+                      <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                        {/* Fixed header */}
+                        <div className="overflow-x-auto">
+                          <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                            <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
+                          </div>
                         </div>
-                        {paged.map((auction, i) => {
-                          const c = statusColors[auction.status] || statusColors.ended;
-                          const endDate = auction.endTime ? new Date(auction.endTime) : null;
-                          const diff = endDate ? endDate - Date.now() : 0;
-                          const timeStr = diff > 0
-                            ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
-                            : "Ended";
-                          return (
-                            <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
-                              style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
-                              <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
-                              <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
-                              <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
-                              <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
-                              <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
-                              <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
-                                style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
-                            </div>
-                          );
-                        })}
+                        {/* Scrollable body */}
+                        <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
+                          {paged.map((auction, i) => {
+                            const c = statusColors[auction.status] || statusColors.ended;
+                            const endDate = auction.endTime ? new Date(auction.endTime) : null;
+                            const diff = endDate ? endDate - Date.now() : 0;
+                            const timeStr = diff > 0
+                              ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
+                              : "Ended";
+                            return (
+                              <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
+                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                                <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
+                                <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
+                                <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
+                                <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
+                                <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
+                                <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
+                                  style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {/* Pagination — outside scroll area */}
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
                             <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, myAuctions.length)} of {myAuctions.length}</span>
@@ -810,7 +863,7 @@ function MarketPlace() {
                   })()
                 )}
               </div>
-              <StickyAvatarSidebar />
+              <div className="hidden xl:block"><StickyAvatarSidebar /></div>
               </div>
             )}
 
@@ -820,7 +873,7 @@ function MarketPlace() {
                 <div className="flex-1 min-w-0">
                   <ProfileQuestingTab wallet={connectedWallet} token={token} />
                 </div>
-                <StickyAvatarSidebar />
+                <div className="hidden xl:block"><StickyAvatarSidebar /></div>
               </div>
             )}
 
@@ -830,7 +883,7 @@ function MarketPlace() {
                 <div className="flex-1 min-w-0">
                   <ProfileBountyTab wallet={connectedWallet} token={token} />
                 </div>
-                <StickyAvatarSidebar />
+                <div className="hidden xl:block"><StickyAvatarSidebar /></div>
               </div>
             )}
           </section>

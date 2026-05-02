@@ -15,11 +15,11 @@ const shortAddr = (addr) =>
 
 export default function ProfileBountyTab({ wallet, token }) {
   const [bounties, setBounties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("all"); // all | posted | completed
+  const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    if (!wallet) { setLoading(false); return; }
+    if (!wallet) { return; }
 
     const fetchBounties = async () => {
       setLoading(true);
@@ -42,7 +42,8 @@ export default function ProfileBountyTab({ wallet, token }) {
           .filter((b) => !posted.find((p) => p._id === b._id))
           .map((b) => ({ ...b, role: "completed" }));
 
-        setBounties([...posted, ...completed]);
+        const real = [...posted, ...completed];
+        setBounties(real);
       } catch (err) {
         console.error("ProfileBountyTab fetch error:", err);
         setBounties([]);
@@ -125,25 +126,28 @@ export default function ProfileBountyTab({ wallet, token }) {
         </div>
       ) : (
         /* ── Table ── */
-        <div className="rounded-2xl overflow-x-auto"
+        <div className="rounded-2xl overflow-hidden"
           style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Header */}
-          <div
-            className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-            style={{
-              background: "rgba(0,20,80,0.95)",
-              gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <span>Bounty No</span>
-            <span>Hit On</span>
-            <span>Rewards</span>
-            <span>Completed By</span>
-            <span>Status</span>
+          {/* Fixed Header */}
+          <div className="overflow-x-auto">
+            <div
+              className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+              style={{
+                background: "rgba(4,8,28,0.98)",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr",
+              }}
+            >
+              <span>Bounty No</span>
+              <span>Hit On</span>
+              <span>Rewards</span>
+              <span>Completed By</span>
+              <span>Status</span>
+            </div>
           </div>
 
-          {/* Rows */}
+          {/* Scrollable Rows */}
+          <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
           {filtered.map((b, i) => {
             const colors = STATUS_COLORS[b.status] || STATUS_COLORS.open;
             const completedBy =
@@ -204,6 +208,7 @@ export default function ProfileBountyTab({ wallet, token }) {
               </div>
             );
           })}
+          </div>
         </div>
       )}
     </div>

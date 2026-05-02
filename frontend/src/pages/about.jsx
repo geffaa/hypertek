@@ -1,286 +1,556 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ChevronRight, X } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
 import GlowingOrb from "../Components/Common/BgColoring";
 
-// ── fallback assets ───────────────────────────────────────────────────────────
 import aboutBg   from "../assets/images/aboutpage/about_bg.jpg";
 import charImg   from "../assets/images/aboutpage/char.png";
 import ourstory1 from "../assets/images/aboutpage/ourstory1.png";
 import ourstory2 from "../assets/images/aboutpage/ourstory2.png";
 import ourstory3 from "../assets/images/aboutpage/ourstory3.png";
+import gamePng   from "../assets/images/aboutpage/game.png";
+import iconConnect from "../assets/images/howItsWork/connect.png";
+import iconWallet  from "../assets/images/howItsWork/wallet.png";
+import iconCard    from "../assets/images/howItsWork/card.png";
+import iconEarn    from "../assets/images/howItsWork/earn.png";
 
-// ── default texts ─────────────────────────────────────────────────────────────
+// ── Content ───────────────────────────────────────────────────────────────────
 const DEFAULT_SUBTITLE =
-  "The year is 2117. Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology.";
+  "Transforming the gaming industry by establishing an interconnected universe that seamlessly integrates multiple gameplay styles into one cohesive progression system.";
 
-const DEFAULT_STORY =
-  "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.";
+const DEFAULT_MISSION = [
+  "The Hyper Tek mission is to transform the gaming industry by establishing an interconnected universe that seamlessly integrates multiple gameplay styles into one cohesive progression system. This innovative environment empowers players to explore, compete, and grow together.",
+  "We deliver true ownership of valuable digital assets, backed by a guaranteed minimum buy-back on all Non-Fungible Artworks. Our authentic play-to-earn systems actively engage players, ensuring their contributions are recognised — empowering meaningful ownership of progress and rewards while driving creativity, collaboration, and intense competition.",
+  "Hyper Tek is committed to building a living digital universe where diverse games, economies, and communities thrive together on a single interconnected platform — a dynamic ecosystem where player actions have a significant impact on the world around them.",
+];
 
-// ── motion variants ───────────────────────────────────────────────────────────
-const fadeUp = {
-  hidden:  { opacity: 0, y: 32 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.65, delay: i * 0.12, ease: "easeOut" },
-  }),
+const DEFAULT_PROJECT = [
+  "The Hyper Tek Project, founded by Don Bennett, establishes a groundbreaking gaming environment where multiple genres thrive within one cohesive progression system. Players are not limited to a single gameplay loop; instead, they are empowered to explore a variety of activities while actively building their character, resources, and reputation throughout the entire ecosystem.",
+  "Progression, materials, rewards, and achievements flow seamlessly across all games, ensuring an unmatched gaming experience. This project confidently presents three major game environments — each delivering a distinct style of gameplay, all firmly set within the same universe and operating under a cohesive player economy.",
+];
+
+const DEFAULT_ADVANTAGE = [
+  { icon: iconConnect, title: "Interconnected Ecosystem",   body: "Strategy, racing, and quest-based adventures linked through a shared progression system — move freely between games without losing progress." },
+  { icon: iconWallet,  title: "Digital Asset Economy",      body: "NFAs with guaranteed minimum buy-backs. Own, trade, and create assets — land, infrastructure, utilities — that function across the entire ecosystem." },
+  { icon: iconCard,    title: "Player-Controlled Economy",  body: "Unlike locked developer inventories, Hyper Tek lets players acquire assets, develop resources, and introduce new utilities into the universe." },
+  { icon: iconEarn,    title: "Contributors, Not Players",  body: "Gameplay and digital ownership create a dynamic environment where every participant actively contributes to the growth of the ecosystem." },
+];
+
+const GAMES = [
+  { name: "Hyper Racing",                tag: "Speed · Dominance", desc: "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy.", img: "/racing3.png",      accent: "#f59e0b", glow: "rgba(245,158,11,0.35)" },
+  { name: "Hyper Quest",                 tag: "Explore · Trade",   desc: "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy.", img: "/quest1.png",       accent: "#22c55e", glow: "rgba(34,197,94,0.35)"  },
+  { name: "Overlord of the Seven Realms",tag: "Strategy · Power",  desc: "Command armies, forge alliances, and conquer realms. The most powerful Overlord controls the fate of the entire universe.", img: "/overlord_panel.png",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)" },
+];
+
+// ── Shared button styles ──────────────────────────────────────────────────────
+const BTN_PRIMARY = {
+  background: "rgba(0,10,40,0.75)",
+  border: "1px solid rgba(56,189,248,0.55)",
+  borderTop: "2px solid rgba(56,189,248,0.85)",
+  clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+  fontFamily: "Orbitron, sans-serif",
+  boxShadow: "0 0 28px rgba(56,189,248,0.22)",
+  color: "rgba(56,189,248,0.95)",
+  letterSpacing: "0.12em",
 };
-const fadeLeft  = { hidden: { opacity: 0, x: -48 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: "easeOut" } } };
-const fadeRight = { hidden: { opacity: 0, x:  48 }, visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: "easeOut" } } };
+const BTN_SECONDARY = {
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderTop: "2px solid rgba(255,255,255,0.28)",
+  clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+  fontFamily: "Orbitron, sans-serif",
+  color: "rgba(255,255,255,0.55)",
+  letterSpacing: "0.12em",
+};
 
-// ── Zigzag connectors — no dots, just lines ───────────────────────────────────
-function ConnectorRight() {
+// ── Motion ────────────────────────────────────────────────────────────────────
+const fadeUp    = (delay = 0) => ({ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: "easeOut" } } });
+const fadeLeft  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
+const fadeRight = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: "easeOut" } } };
+
+function SectionLabel({ number, label }) {
   return (
-    <div className="hidden md:block w-full" style={{ height: 100 }}>
-      <svg className="w-full h-full" viewBox="0 0 1000 100" fill="none" preserveAspectRatio="none">
-        <polyline
-          points="400,0 400,50 600,50 600,100"
-          stroke="rgba(255,255,255,0.18)"
-          strokeWidth="1"
-        />
-      </svg>
+    <div className="flex items-center gap-3 mb-5">
+      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(56,189,248,0.6)", letterSpacing: "0.35em" }}>{number}</span>
+      <div className="w-6 h-px" style={{ background: "rgba(56,189,248,0.35)" }} />
+      <span className="text-white/35 text-[10px] font-bold tracking-[0.3em] uppercase">{label}</span>
     </div>
   );
 }
 
-function ConnectorLeft() {
+function CornerAccent({ color = "rgba(56,189,248,0.45)" }) {
   return (
-    <div className="hidden md:block w-full" style={{ height: 100 }}>
-      <svg className="w-full h-full" viewBox="0 0 1000 100" fill="none" preserveAspectRatio="none">
-        <polyline
-          points="600,0 600,50 400,50 400,100"
-          stroke="rgba(255,255,255,0.18)"
-          strokeWidth="1"
-        />
-      </svg>
-    </div>
+    <>
+      <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 rounded-tl pointer-events-none" style={{ borderColor: color }} />
+      <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 rounded-br pointer-events-none" style={{ borderColor: color }} />
+    </>
   );
 }
 
-// ── Helper: render text with \n as line breaks ────────────────────────────────
-function MultilineText({ text, className }) {
+// ── Full Story Modal ──────────────────────────────────────────────────────────
+function FullStoryModal({ onClose }) {
   return (
-    <p className={className}>
-      {text.split("\n").map((line, i, arr) => (
-        <span key={i}>
-          {line}
-          {i < arr.length - 1 && <><br /><br /></>}
-        </span>
-      ))}
-    </p>
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[999] flex items-center justify-center px-4 pt-20 pb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0" style={{ background: "rgba(4,6,20,0.88)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }} />
+        <motion.div
+          className="modal-custom-scroll relative w-full max-w-[760px] max-h-full overflow-y-auto rounded-2xl"
+          style={{ background: "rgba(8,12,36,0.98)", border: "1px solid rgba(56,189,248,0.18)", boxShadow: "0 0 80px rgba(56,189,248,0.12)" }}
+          initial={{ opacity: 0, scale: 0.93, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.93, y: 24 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="sticky top-0 z-10 flex items-center justify-between px-7 py-5"
+            style={{ background: "rgba(8,12,36,0.98)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-5 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(56,189,248,0.9),rgba(99,102,241,0.5))" }} />
+              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 11, color: "rgba(56,189,248,0.85)", letterSpacing: "0.28em" }}>FULL STORY</span>
+            </div>
+            <button onClick={onClose} className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors hover:bg-white/10"
+              style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+              <X className="w-4 h-4 text-white/50" />
+            </button>
+          </div>
+
+          <div className="px-7 py-6 space-y-8">
+
+            {/* Our Mission */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.5)", letterSpacing: "0.3em" }}>01</span>
+                <div className="w-5 h-px" style={{ background: "rgba(56,189,248,0.3)" }} />
+                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">Our Mission</span>
+              </div>
+              <h3 className="font-[Goldman] font-bold text-lg text-white mb-4">Redefining What Gaming Can Be</h3>
+              <div className="space-y-3">
+                {DEFAULT_MISSION.map((p, i) => (
+                  <p key={i} className="text-white/55 text-sm leading-[1.9]">{p}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+
+            {/* The Project */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(167,139,250,0.5)", letterSpacing: "0.3em" }}>02</span>
+                <div className="w-5 h-px" style={{ background: "rgba(167,139,250,0.3)" }} />
+                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">The Project</span>
+              </div>
+              <h3 className="font-[Goldman] font-bold text-lg text-white mb-4">One Universe, Infinite Possibilities</h3>
+              <div className="space-y-3">
+                {DEFAULT_PROJECT.map((p, i) => (
+                  <p key={i} className="text-white/55 text-sm leading-[1.9]">{p}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+
+            {/* Key Advantage */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.5)", letterSpacing: "0.3em" }}>03</span>
+                <div className="w-5 h-px" style={{ background: "rgba(56,189,248,0.3)" }} />
+                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">The Key Advantage</span>
+              </div>
+              <div className="space-y-4">
+                {DEFAULT_ADVANTAGE.map((a, i) => (
+                  <div key={a.title} className="flex gap-4 items-start">
+                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.4)", letterSpacing: "0.2em", minWidth: 20, paddingTop: 2 }}>0{i + 1}</span>
+                    <div>
+                      <p className="text-white font-semibold text-sm mb-1">{a.title}</p>
+                      <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+
+            {/* Closing */}
+            <div className="rounded-xl px-5 py-4" style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.12)" }}>
+              <p className="text-white/50 text-sm leading-[1.9] italic">
+                Investors, partners, and innovators who believe in the future of interconnected gaming ecosystems are invited to explore the project and join the journey as Hyper Tek continues to build the next generation of digital worlds.
+              </p>
+            </div>
+
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 function About() {
+  const [showModal, setShowModal] = useState(false);
   const { sections: cms } = useSiteContentPage("about");
-
   const top   = cms.about_top   || {};
   const story = cms.about_story || {};
 
-  // Hero
   const heroHeading  = top.heading    || "About Us";
-  const heroSubtitle = top.subtitle   || DEFAULT_SUBTITLE;
+  const heroSubtitle = DEFAULT_SUBTITLE;
   const bgImage      = top.bg_image   ? getImageUrl(top.bg_image)   : aboutBg;
   const charImage    = top.char_image ? getImageUrl(top.char_image) : charImg;
 
-  // Stories
-  const story1Body  = story.body         || DEFAULT_STORY;
+  const missionParas = DEFAULT_MISSION;
+  const projectParas = DEFAULT_PROJECT;
+  const advantages = DEFAULT_ADVANTAGE;
+
   const story1Image = story.story_image  ? getImageUrl(story.story_image)  : ourstory1;
-  const story2Body  = story.story2_body  || DEFAULT_STORY;
   const story2Image = story.story2_image ? getImageUrl(story.story2_image) : ourstory2;
-  const story3Body  = story.story3_body  || DEFAULT_STORY;
   const story3Image = story.story3_image ? getImageUrl(story.story3_image) : ourstory3;
 
   return (
-    <div className="relative text-white overflow-x-hidden" style={{ background: "#060610" }}>
+    <div className="relative text-white" style={{ background: "#060610" }}>
 
-      {/* Blue glow orbs — same as other pages */}
-      <GlowingOrb Xaxis={100} Yaxis={1200} />
-      <GlowingOrb Xaxis={1300} Yaxis={2000} />
+      <GlowingOrb Xaxis={80}   Yaxis={900}  />
+      <GlowingOrb Xaxis={1350} Yaxis={2200} />
+      <GlowingOrb Xaxis={200}  Yaxis={3600} />
 
-      {/* ═══════════════════════════════════════════════════════
-          HERO — full viewport height, bg image + char
-      ════════════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════ */}
       <section
         data-edit-section="about_top"
         data-edit-label="About — Top Section"
         className="relative min-h-screen flex items-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center top" }}
       >
-        {/* Overlay — fade to page bg at bottom */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(6,6,16,0.45) 0%, rgba(6,6,16,0.60) 55%, #060610 100%)",
-          }}
-        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(115deg,rgba(6,6,16,0.88) 0%,rgba(6,6,16,0.50) 55%,rgba(6,6,16,0.72) 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to bottom,transparent,#060610)" }} />
+        {/* Neon bottom line */}
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 40%,rgba(56,189,248,0.4) 60%,transparent)" }} />
 
-        <div className="relative z-10 w-full max-w-full mx-auto px-6 md:px-12 xl:px-20 pt-24 pb-16 flex flex-col md:flex-row items-center gap-10 md:gap-0">
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 pt-28 pb-16 flex flex-col md:flex-row items-center gap-8">
 
-          {/* Left — text */}
+          {/* Left */}
           <motion.div
-            className="flex-1 flex flex-col gap-6 md:pr-16"
+            className="flex-1 flex flex-col gap-5"
             initial="hidden"
             animate="visible"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
           >
-            <motion.h1
-              variants={fadeUp}
-              className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] uppercase text-white leading-tight"
-            >
-              {heroHeading}
-            </motion.h1>
-            <motion.div variants={fadeUp} custom={1}>
-              <MultilineText
-                text={heroSubtitle}
-                className="text-white/70 text-sm md:text-[15px] leading-[1.9] max-w-[500px]"
-              />
+            {/* Badge */}
+            <motion.div variants={fadeUp(0)}>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-3"
+                style={{ border: "1px solid rgba(56,189,248,0.45)", background: "rgba(56,189,248,0.18)", borderRadius: 99, backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="text-cyan-200 text-[11px] font-bold tracking-[0.25em] uppercase">Hyper Tek Universe</span>
+              </div>
+              <h1 className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] uppercase text-white leading-[1.1] whitespace-nowrap">
+                {heroHeading}
+              </h1>
+            </motion.div>
+
+            <motion.p variants={fadeUp(0.1)} className="text-white/55 text-sm md:text-[15px] leading-[1.85] max-w-[500px]">
+              {heroSubtitle}
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div variants={fadeUp(0.2)} className="flex gap-3 mt-1 flex-wrap sm:flex-nowrap">
+              {[{ v: "3", l: "Game Worlds" }, { v: "NFA", l: "Guaranteed Buy-back" }, { v: "P2E", l: "Play-to-Earn" }].map((s) => (
+                <div key={s.l} className="flex items-center gap-2 px-4 py-2 whitespace-nowrap"
+                  style={{ background: "rgba(255,255,255,0.09)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 10 }}>
+                  <span className="text-white font-[Goldman] font-bold text-sm">{s.v}</span>
+                  <span className="text-white/70 text-xs">{s.l}</span>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Buttons */}
+            <motion.div variants={fadeUp(0.3)} className="mt-2">
+              <button
+                onClick={() => setShowModal(true)}
+                className="group relative w-full flex items-center justify-center gap-2 py-3 text-[11px] font-bold uppercase overflow-hidden transition-all hover:brightness-125"
+                style={{
+                  background: "linear-gradient(135deg,rgba(56,189,248,0.14) 0%,rgba(99,102,241,0.10) 100%)",
+                  border: "1px solid rgba(56,189,248,0.45)",
+                  borderTop: "2px solid rgba(56,189,248,0.85)",
+                  clipPath: "polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%)",
+                  fontFamily: "Orbitron,sans-serif",
+                  color: "rgba(255,255,255,0.92)",
+                  letterSpacing: "0.18em",
+                  boxShadow: "0 0 36px rgba(56,189,248,0.18), inset 0 1px 0 rgba(56,189,248,0.18)",
+                }}
+              >
+                <span className="absolute inset-0 pointer-events-none" style={{
+                  background: "linear-gradient(90deg,transparent 0%,rgba(56,189,248,0.10) 50%,transparent 100%)",
+                  animation: "scanline 2.8s ease-in-out infinite",
+                }} />
+                <ChevronRight className="w-3.5 h-3.5 text-cyan-400" style={{ filter: "drop-shadow(0 0 5px rgba(56,189,248,0.8))" }} />
+                <span>Full Story</span>
+                <span className="text-cyan-400/80 text-[9px] font-normal ml-1">↗</span>
+              </button>
             </motion.div>
           </motion.div>
 
-          {/* Right — character (hidden on mobile) */}
+          {/* Character */}
           <motion.div
-            className="hidden md:flex flex-shrink-0 justify-end"
-            initial={{ opacity: 0, scale: 0.92, x: 40 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="hidden md:flex flex-shrink-0 justify-end items-end self-end"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           >
             <LazyImage
               src={charImage}
               alt="Character"
               fallback={charImg}
-              className="h-[320px] md:h-[420px] lg:h-[540px] xl:h-[680px] 2xl:h-[760px] w-auto"
-              imgClassName="object-contain drop-shadow-2xl"
+              className="h-[360px] md:h-[480px] lg:h-[580px] xl:h-[680px] w-auto"
+              imgClassName="object-contain"
             />
           </motion.div>
-
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
-          OUR STORY
-      ════════════════════════════════════════════════════════ */}
-      <section data-edit-section="about_story" data-edit-label="About — Our Story" className="relative w-full max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 pt-20 pb-28">
-
-        {/* Title with lines */}
-        <div className="flex items-center gap-6 mb-20 md:mb-24">
-          <div className="flex-1 h-px bg-white/15" />
-          <h2 className="font-[Goldman] font-bold text-base md:text-xl uppercase tracking-[0.35em] text-white whitespace-nowrap">
-            Our Story
-          </h2>
-          <div className="flex-1 h-px bg-white/15" />
-        </div>
-
-        {/* Story 1 — Image LEFT · Text RIGHT */}
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 xl:gap-20">
-          <motion.div
-            className="w-full md:w-[44%] flex-shrink-0"
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <LazyImage
-              src={story1Image}
-              alt="Story 1"
-              fallback={ourstory1}
-              className="w-full h-[240px] md:h-[300px] xl:h-[340px] rounded-2xl"
-              imgClassName="object-cover"
-            />
+      {/* ══════════════════════════════════════════════════════
+          OUR MISSION
+      ══════════════════════════════════════════════════════ */}
+      <section
+        data-edit-section="about_story"
+        data-edit-label="About — Our Story"
+        className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10"
+      >
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+          <motion.div className="w-full lg:w-[40%] flex-shrink-0" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <div className="relative rounded-2xl overflow-hidden">
+              <LazyImage src={story1Image} alt="Our Mission" fallback={ourstory1}
+                className="w-full h-[240px] md:h-[340px] xl:h-[400px]" imgClassName="object-cover" />
+              <CornerAccent />
+              <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(56,189,248,0.18)" }} />
+            </div>
+            <div className="mt-3 px-4 py-2.5 rounded-xl" style={{ background: "rgba(56,189,248,0.06)", border: "1px solid rgba(56,189,248,0.12)" }}>
+              <p style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(56,189,248,0.7)", letterSpacing: "0.28em" }}>PLAY · EARN · OWN</p>
+            </div>
           </motion.div>
-          <motion.div
-            className="flex-1"
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <MultilineText
-              text={story1Body}
-              className="text-white/70 text-sm md:text-[15px] leading-[1.9]"
-            />
+
+          <motion.div className="flex-1" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <SectionLabel number="01" label="Our Mission" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight mb-6">
+              Redefining What<br />Gaming Can Be
+            </h2>
+            <div className="space-y-4">
+              {missionParas.map((p, i) => (
+                <p key={i} className="text-white/58 text-sm md:text-[15px] leading-[1.9]">{p}</p>
+              ))}
+            </div>
           </motion.div>
         </div>
-
-        {/* Connector → */}
-        <ConnectorRight />
-        <div className="md:hidden h-10" />
-
-        {/* Story 2 — Text LEFT · Image RIGHT */}
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 xl:gap-20">
-          <motion.div
-            className="flex-1 order-2 md:order-1"
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <MultilineText
-              text={story2Body}
-              className="text-white/70 text-sm md:text-[15px] leading-[1.9]"
-            />
-          </motion.div>
-          <motion.div
-            className="w-full md:w-[44%] flex-shrink-0 order-1 md:order-2"
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <LazyImage
-              src={story2Image}
-              alt="Story 2"
-              fallback={ourstory2}
-              className="w-full h-[240px] md:h-[300px] xl:h-[340px] rounded-2xl"
-              imgClassName="object-cover"
-            />
-          </motion.div>
-        </div>
-
-        {/* Connector ← */}
-        <ConnectorLeft />
-        <div className="md:hidden h-10" />
-
-        {/* Story 3 — Image LEFT · Text RIGHT */}
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 xl:gap-20">
-          <motion.div
-            className="w-full md:w-[44%] flex-shrink-0"
-            variants={fadeLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <LazyImage
-              src={story3Image}
-              alt="Story 3"
-              fallback={ourstory3}
-              className="w-full h-[240px] md:h-[300px] xl:h-[340px] rounded-2xl"
-              imgClassName="object-cover"
-            />
-          </motion.div>
-          <motion.div
-            className="flex-1"
-            variants={fadeRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <MultilineText
-              text={story3Body}
-              className="text-white/70 text-sm md:text-[15px] leading-[1.9]"
-            />
-          </motion.div>
-        </div>
-
       </section>
 
+      {/* ══════════════════════════════════════════════════════
+          3 GAMES
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-10">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10 text-center">
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(56,189,248,0.6)", letterSpacing: "0.35em" }}>02</span>
+              <div className="w-6 h-px" style={{ background: "rgba(56,189,248,0.35)" }} />
+              <span className="text-white/35 text-[10px] font-bold tracking-[0.3em] uppercase">The Universe</span>
+            </div>
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white">
+              Three Worlds. One Economy.
+            </h2>
+            <p className="text-white/38 text-sm mt-2 max-w-lg mx-auto">
+              Each game is a gateway — distinct in gameplay, unified in economy and progression.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {GAMES.map((game, i) => (
+              <motion.div
+                key={game.name}
+                className="group relative rounded-2xl overflow-hidden"
+                style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: i * 0.09 }}
+                viewport={{ once: true }}
+              >
+                {/* Top accent line */}
+                <div className="h-0.5 w-full" style={{ background: game.accent }} />
+                {/* Image */}
+                <div className="relative h-44 overflow-hidden">
+                  <img src={game.img} alt={game.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    onError={(e) => { e.currentTarget.style.opacity = "0.25"; }} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,transparent 30%,rgba(6,6,16,0.97) 100%)" }} />
+                </div>
+                {/* Content */}
+                <div className="px-5 py-4">
+                  <p className="text-[9px] font-bold tracking-[0.3em] uppercase mb-1" style={{ color: game.accent, fontFamily: "Orbitron,sans-serif" }}>{game.tag}</p>
+                  <h3 className="font-[Goldman] font-bold text-sm text-white mb-2 leading-snug">{game.name}</h3>
+                  <p className="text-white/45 text-xs leading-relaxed mb-4">{game.desc}</p>
+                  <div className="flex items-center gap-1 text-[10px] font-bold uppercase transition-opacity group-hover:opacity-100 opacity-60"
+                    style={{ color: game.accent, fontFamily: "Orbitron,sans-serif" }}>
+                    Discover <ChevronRight className="w-3 h-3" />
+                  </div>
+                </div>
+                {/* Hover glow */}
+                <div className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ boxShadow: `inset 0 0 0 1px ${game.accent}35, 0 8px 32px ${game.glow}` }} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          THE PROJECT
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-12 pb-10">
+        <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-16 items-start">
+          <motion.div className="w-full lg:w-[40%] flex-shrink-0" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <div className="relative rounded-2xl overflow-hidden">
+              <LazyImage src={story2Image} alt="The Project" fallback={ourstory2}
+                className="w-full h-[240px] md:h-[340px] xl:h-[400px]" imgClassName="object-cover" />
+              <CornerAccent color="rgba(167,139,250,0.50)" />
+              <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(167,139,250,0.18)" }} />
+            </div>
+            <div className="mt-3 px-4 py-2.5 rounded-xl" style={{ background: "rgba(167,139,250,0.06)", border: "1px solid rgba(167,139,250,0.12)" }}>
+              <p style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(167,139,250,0.75)", letterSpacing: "0.28em" }}>FOUNDED BY DON BENNETT</p>
+            </div>
+          </motion.div>
+
+          <motion.div className="flex-1" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <SectionLabel number="03" label="The Project" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight mb-6">
+              One Universe,<br />Infinite Possibilities
+            </h2>
+            <div className="space-y-4">
+              {projectParas.map((p, i) => (
+                <p key={i} className="text-white/58 text-sm md:text-[15px] leading-[1.9]">{p}</p>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {["Hyper Racing", "Hyper Quest", "Overlord of the Seven Realms"].map((g) => (
+                <span key={g} className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white/55"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
+                  {g}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          KEY ADVANTAGE
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full pt-14 pb-12 mt-4">
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 35%,rgba(99,102,241,0.4) 65%,transparent)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,12,50,0.20) 0%,transparent 100%)" }} />
+
+        <div className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
+            <SectionLabel number="04" label="Competitive Edge" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white">The Key Advantage</h2>
+          </motion.div>
+
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+
+            {/* Advantage list */}
+            <div className="flex-1 flex flex-col divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+              {advantages.map((a, i) => (
+                <motion.div
+                  key={a.title}
+                  className="flex gap-5 items-start py-5"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.07 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Left: number + icon */}
+                  <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.45)", letterSpacing: "0.2em" }}>0{i + 1}</span>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: "rgba(56,189,248,0.07)", border: "1px solid rgba(56,189,248,0.18)" }}>
+                      <img src={a.icon} alt={a.title} className="w-5 h-5 object-contain"
+                        style={{ filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(175deg) opacity(0.85)" }} />
+                    </div>
+                  </div>
+
+                  {/* Right: text */}
+                  <div className="flex-1 pt-1">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="w-3 h-0.5 rounded-full" style={{ background: "rgba(56,189,248,0.6)" }} />
+                      <p className="text-white font-semibold text-sm">{a.title}</p>
+                    </div>
+                    <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Image */}
+            <motion.div className="w-full lg:w-[38%] flex-shrink-0"
+              initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+              <div className="relative rounded-2xl overflow-hidden">
+                <LazyImage src={story3Image} alt="Key Advantage" fallback={ourstory3}
+                  className="w-full h-[260px] md:h-[460px]" imgClassName="object-cover" />
+                <div className="absolute inset-0 pointer-events-none rounded-2xl"
+                  style={{ border: "1px solid rgba(56,189,248,0.20)", boxShadow: "0 0 40px rgba(56,189,248,0.07)" }} />
+                <CornerAccent />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          CLOSING CTA
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full py-20 overflow-hidden">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${gamePng})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.05 }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom,#060610 0%,rgba(6,6,16,0.75) 50%,#060610 100%)" }} />
+
+        <motion.div className="relative z-10 max-w-[680px] mx-auto px-6 text-center"
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}>
+
+          <div className="flex items-center gap-4 mb-8 justify-center">
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left,rgba(56,189,248,0.3),transparent)" }} />
+            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/50" />
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right,rgba(56,189,248,0.3),transparent)" }} />
+          </div>
+
+          <p className="text-white/48 text-sm md:text-[15px] leading-[1.9] italic mb-8">
+            Investors, partners, and innovators who believe in the future of interconnected gaming ecosystems are invited to explore the project and join the journey as Hyper Tek continues to build the next generation of digital worlds.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            <Link to="/market-place" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={BTN_PRIMARY}>
+              Explore Marketplace
+            </Link>
+            <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={BTN_SECONDARY}>
+              View Games
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-4 mt-10 justify-center">
+            <div className="flex-1 h-px bg-white/8" />
+            <span className="text-white/12 text-[10px] tracking-[0.5em] font-bold uppercase">Hyper Tek</span>
+            <div className="flex-1 h-px bg-white/8" />
+          </div>
+        </motion.div>
+      </section>
+
+      {showModal && <FullStoryModal onClose={() => setShowModal(false)} />}
     </div>
   );
 }

@@ -138,7 +138,8 @@ export default function ProfileQuestingTab({ wallet, token }) {
           .filter((q) => !posted.find((p) => p._id === q._id))
           .map((q) => ({ ...q, role: "accepted" }));
 
-        setQuests([...posted, ...accepted]);
+        const real = [...posted, ...accepted];
+        setQuests(real);
         if (!statsData.error) setDailyStats(statsData);
       } catch (err) {
         console.error("ProfileQuestingTab fetch error:", err);
@@ -282,26 +283,30 @@ export default function ProfileQuestingTab({ wallet, token }) {
         </div>
       ) : (
         /* ── Table ── */
-        <div className="rounded-2xl overflow-x-auto"
+        <div className="rounded-2xl overflow-hidden"
           style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Header */}
-          <div
-            className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-            style={{
-              background: "rgba(0,20,80,0.95)",
-              gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
-            }}
-          >
-            <span>Quest No</span>
-            <span>Pickup Planet</span>
-            <span>Drop Off Planet</span>
-            <span>Item / Goods</span>
-            <span>Split</span>
-            <span>Time Active</span>
-            <span>Assigned To</span>
+          {/* Fixed Header */}
+          <div className="overflow-x-auto">
+            <div
+              className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+              style={{
+                background: "rgba(4,8,28,0.98)",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+                gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
+              }}
+            >
+              <span>Quest No</span>
+              <span>Pickup Planet</span>
+              <span>Drop Off Planet</span>
+              <span>Item / Goods</span>
+              <span>Split</span>
+              <span>Time Active</span>
+              <span>Assigned To</span>
+            </div>
           </div>
 
-          {/* Rows */}
+          {/* Scrollable Rows */}
+          <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
           {filtered.map((q, i) => {
             const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
             const acceptedName = q.acceptedByWallet ? shortAddr(q.acceptedByWallet) : "—";
@@ -349,7 +354,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
                 </div>
 
                 {/* Split */}
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 items-start">
                   <WaitBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
                   {q.playerSharePercent != null && (
                     <div className="text-[9px] leading-tight">
@@ -381,6 +386,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
               </div>
             );
           })}
+          </div>
         </div>
       )}
     </div>

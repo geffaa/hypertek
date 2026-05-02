@@ -1,307 +1,338 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
-import LazyImage from "../Common/LazyImage";
+import { useNavigate } from "react-router-dom";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-const fadeLeft = {
-  hidden: { opacity: 0, x: -30 },
-  visible: (i = 0) => ({
-    opacity: 1, x: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-const fadeRight = {
-  hidden: { opacity: 0, x: 30 },
-  visible: (i = 0) => ({
-    opacity: 1, x: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-
-/* ── reusable card hover wrapper ── */
-function CardHover({ children, onClick, className = "" }) {
-  return (
-    <div
-      onClick={onClick}
-      className={`cursor-pointer group ${className}`}
-      style={{ transition: "opacity 0.2s" }}
-      onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
-      onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-    >
-      {children}
-    </div>
-  );
-}
+const GAMES = [
+  {
+    id: "racing",
+    label: "RACING",
+    path: "/game/racing",
+    image: "/racing3.png",
+    accent: "#22c55e",
+    glow: "rgba(34,197,94,0.45)",
+    tagline: "Speed is survival.",
+    description:
+      "Push beyond the limits of gravity on neon-lit megacities and alien terrain. Tune your machine, master every corner, and leave your rivals in the dust — the leaderboard waits for no one.",
+  },
+  {
+    id: "quest",
+    label: "QUEST",
+    path: "/game/quest",
+    image: "/quest1.png",
+    accent: "#38bdf8",
+    glow: "rgba(56,189,248,0.45)",
+    tagline: "Explore the unknown.",
+    description:
+      "Navigate uncharted star systems, forge alliances, and uncover the secrets of the Echo Core. Every choice shapes your legacy.",
+  },
+  {
+    id: "overlord",
+    label: "OVERLORD",
+    path: "/game/overlord",
+    image: "/overlord4.png",
+    accent: "#f87171",
+    glow: "rgba(248,113,113,0.45)",
+    tagline: "Command. Conquer. Rule.",
+    description:
+      "You are the Overlord — reborn from the ashes of a fractured Earth. Raise armies, seize star systems, and bend rival factions to your will. The Echo Core chose you. Prove it was right.",
+  },
+];
 
 export default function News() {
-  const [news, setNews] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews`)
-      .then(res => res.json())
-      .then(data => { if (data.success) setNews(data.data); })
-      .catch(err => console.error(err));
-  }, []);
-
-  const go = (item) => navigate("/more-news", { state: { newsItem: item } });
-
-  const clip = (str, n) => str?.length > n ? str.slice(0, n) + "…" : (str || "");
+  const [active, setActive] = useState(null);
 
   return (
-    <section className="w-full z-10 flex justify-center items-start pt-16 md:pt-24 pb-12 md:pb-20 relative">
+    <section className="w-full pt-16 md:pt-24 pb-12 md:pb-20 relative">
+      <div className="w-full max-w-[1480px] mx-auto px-6 md:px-14 xl:px-18 2xl:px-20">
 
-      {/* ═══════════════════ MOBILE ═══════════════════ */}
-      <div className="flex md:hidden flex-col w-full px-5 gap-0">
-
-        {/* Mobile: NEWS heading */}
-        <div className="flex items-end mb-6">
-          <h2 className="text-white font-goldman uppercase text-xl pb-1 border-b-2 border-white">NEWS/UPDATES</h2>
+        {/* Section heading */}
+        <motion.div
+          className="flex items-end mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
+            GAMING INFO
+          </h2>
           <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
-        </div>
-
-        {/* Mobile featured articles — top 3 */}
-        <div className="flex flex-col gap-8">
-          {news.slice(0, 3).map((item, i) => (
-            <motion.div
-              key={item._id}
-              variants={fadeUp} custom={i}
-              initial="hidden" whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-            >
-              <CardHover onClick={() => go(item)} className="flex flex-col gap-3">
-                <LazyImage
-                  src={getImageUrl(item.image)} alt={item.heading}
-                  className="w-full" imgClassName="object-cover"
-                  style={{ aspectRatio: "16/9" }}
-                />
-                <div className="flex flex-col gap-1.5">
-                  <h3 className="text-white text-[15px] font-bold uppercase font-goldman leading-snug">
-                    {clip(item.heading, 55)}
-                  </h3>
-                  <p className="text-gray-300 text-[13px] leading-relaxed">
-                    {clip(item.description, 110)}
-                  </p>
-                </div>
-              </CardHover>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile compact list — items 4-7 */}
-        <div className="flex flex-col mt-6 divide-y divide-white/10">
-          {news.slice(3, 7).map((item, i) => (
-            <motion.div
-              key={item._id}
-              variants={fadeUp} custom={i + 3}
-              initial="hidden" whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-            >
-              <CardHover onClick={() => go(item)} className="flex gap-3 py-4">
-                <LazyImage
-                  src={getImageUrl(item.image)} alt={item.heading}
-                  className="w-[96px] h-[68px] flex-shrink-0"
-                  imgClassName="object-cover"
-                />
-                <div className="flex flex-col gap-1 justify-center">
-                  <h4 className="text-white text-[12px] font-bold uppercase font-goldman leading-tight">
-                    {clip(item.heading, 40)}
-                  </h4>
-                  <p className="text-gray-400 text-[11px] leading-snug">
-                    {clip(item.description, 70)}
-                  </p>
-                </div>
-              </CardHover>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div className="flex justify-center mt-8"
-          variants={fadeUp} custom={7} initial="hidden"
-          whileInView="visible" viewport={{ once: true }}>
-          <Link to="/news">
-            <button className="px-7 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
-              View More
-            </button>
-          </Link>
         </motion.div>
-      </div>
-      {/* ═══════════════════ END MOBILE ═══════════════════ */}
 
-      {/* ═══════════════════ DESKTOP ═══════════════════ */}
-      <div className="hidden md:flex flex-row gap-8 lg:gap-12 w-full max-w-[1480px] mx-auto px-8 lg:px-14 xl:px-18 2xl:px-20">
-
-        {/* ── Left Column — 58% ── */}
-        <motion.div className="flex flex-col gap-5 w-[58%]"
-          variants={fadeLeft} custom={0} initial="hidden"
-          whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
-
-          {/* Gaming Info heading */}
-          <div className="flex items-end">
-            <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
-              GAMING INFO
-            </h2>
-            <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
-          </div>
-
-          {/* Static promo image with button overlay */}
-          <div className="relative w-full overflow-hidden" style={{ aspectRatio: "680/405" }}>
-            <img
-              src="/ui-game.png"
-              alt="HyperTek Game UI"
-              className="w-full h-full object-cover"
-            />
-            {/* Gradient overlay at bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/90 to-transparent" />
-            {/* 3 Buttons — individually positioned to align with each game panel */}
-            {[
-              { label: "RACING",   path: "/game/racing",   left: "14.7%", accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   bg: "rgba(0,25,10,0.88)" },
-              { label: "QUEST",    path: "/game/quest",    left: "48.7%", accent: "#38bdf8", glow: "rgba(56,189,248,0.35)",  bg: "rgba(0,12,32,0.88)" },
-              { label: "OVERLORD", path: "/game/overlord", left: "77.7%", accent: "#f87171", glow: "rgba(248,113,113,0.35)", bg: "rgba(32,0,0,0.88)" },
-            ].map(({ label, path, left, accent, glow, bg }) => (
-              <button
-                key={label}
-                onClick={() => navigate(path)}
+        {/* ── DESKTOP: Accordion panels ── */}
+        <div className="hidden md:flex gap-3 h-[520px] lg:h-[600px]">
+          {GAMES.map((game, i) => {
+            const isActive = active === game.id;
+            return (
+              <motion.div
+                key={game.id}
+                className="relative overflow-hidden cursor-pointer rounded-lg"
                 style={{
-                  position: "absolute",
-                  bottom: "6%",
-                  left,
-                  transform: "translateX(-50%)",
-                  padding: "5px 12px",
-                  background: bg,
-                  border: `1px solid ${accent}`,
-                  borderTop: `2px solid ${accent}`,
-                  borderRadius: 2,
-                  clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-                  color: "#fff",
-                  fontFamily: "Orbitron, sans-serif",
-                  fontSize: 9,
-                  fontWeight: "bold",
-                  letterSpacing: "0.12em",
-                  cursor: "pointer",
-                  textAlign: "center",
-                  lineHeight: 1,
-                  whiteSpace: "nowrap",
-                  boxShadow: `0 0 20px ${glow}, inset 0 1px 0 rgba(255,255,255,0.1)`,
-                  textShadow: `0 0 10px ${accent}`,
-                  transition: "filter 0.18s ease, transform 0.18s ease",
-                  zIndex: 10,
+                  flex: isActive ? "3 1 0%" : "1 1 0%",
+                  transition: "flex 0.55s cubic-bezier(0.4,0,0.2,1)",
+                  backgroundImage: `url(${game.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
-                onMouseEnter={e => { e.currentTarget.style.filter = "brightness(1.4)"; e.currentTarget.style.transform = "translateX(-50%) translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.filter = "brightness(1)";   e.currentTarget.style.transform = "translateX(-50%) translateY(0)"; }}
+                onClick={() => navigate(game.path)}
+                onMouseEnter={() => setActive(game.id)}
+                onMouseLeave={() => setActive(null)}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.12 }}
               >
-                {label} LEARN MORE
-              </button>
-            ))}
-          </div>
+                {/* Dark overlay */}
+                <div
+                  className="absolute inset-0 transition-all duration-500"
+                  style={{
+                    background: isActive
+                      ? "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.08) 100%)"
+                      : "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 100%)",
+                  }}
+                />
 
-          {/* Title */}
-          <h3 className="text-white font-goldman uppercase leading-tight text-[17px] lg:text-[20px]">
-            AWAKEN THE HYPER TEK PLAYER WITHIN
-          </h3>
+                {/* Accent bar bottom */}
+                <div
+                  className="absolute bottom-0 inset-x-0 h-[2px] transition-all duration-500"
+                  style={{
+                    background: game.accent,
+                    boxShadow: isActive ? `0 0 40px 6px ${game.glow}` : `0 0 12px 2px ${game.glow}`,
+                    opacity: isActive ? 1 : 0.5,
+                  }}
+                />
 
-          {/* Description */}
-          <div className="flex flex-col gap-3 text-gray-300 text-[13px] lg:text-[14px] leading-relaxed">
-            <p>
-              As the Hyper Tek movement continues to surge forward, it's time to secure your place in history by grabbing one of our exclusive packages, available for a very limited time.
-            </p>
-            <p>
-              We have already raised nearly $400,000 to get us this far, but we are now launching a crowdfunding campaign to secure the additional funds needed to complete the project. While the donation tiers are outlined here, our exclusive packages are your opportunity to invest and will not be repeated.
-            </p>
-            <p>
-              Don't forget, our Non-Fungible Digital Items come with a minimum money-back guarantee and offer incredible in-game bonuses. Act now and be part of this groundbreaking movement!
-            </p>
-          </div>
+                {/* Accent top corner line */}
+                <div
+                  className="absolute top-0 left-0 w-12 h-[2px] transition-opacity duration-500"
+                  style={{ background: game.accent, opacity: isActive ? 1 : 0.3 }}
+                />
 
-        </motion.div>
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
 
-        {/* ── Right Column — 42% ── */}
-        <div className="flex flex-col gap-4 w-[42%]">
-
-          {/* NEWS heading */}
-          <motion.div className="flex items-end"
-            variants={fadeRight} custom={0} initial="hidden"
-            whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-            <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
-              NEWS/UPDATES
-            </h2>
-            <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
-          </motion.div>
-
-          {/* Right featured article */}
-          {news.slice(3, 4).map((item) => (
-            <motion.div key={item._id}
-              variants={fadeRight} custom={1} initial="hidden"
-              whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
-              <CardHover onClick={() => go(item)} className="flex flex-col gap-3">
-                <div className="overflow-hidden w-full" style={{ aspectRatio: "462/209" }}>
-                  <LazyImage
-                    src={getImageUrl(item.image)} alt={item.heading}
-                    className="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                    imgClassName="object-cover"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <h3 className="text-white font-bold uppercase font-goldman leading-tight text-[13px] lg:text-[14px]">
-                    {clip(item.heading, 60)}
-                  </h3>
-                  <p className="text-gray-300 text-[12px] lg:text-[13px] leading-relaxed">
-                    {clip(item.description, 100)}
-                  </p>
-                </div>
-              </CardHover>
-            </motion.div>
-          ))}
-
-          {/* 2 compact list cards */}
-          <div className="flex flex-col divide-y divide-white/10">
-            {news.slice(4, 6).map((item, i) => (
-              <motion.div key={item._id}
-                variants={fadeRight} custom={i + 2} initial="hidden"
-                whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
-                <CardHover onClick={() => go(item)} className="flex gap-3 py-3.5">
-                  <div className="overflow-hidden flex-shrink-0 w-[38%]" style={{ aspectRatio: "229/157" }}>
-                    <LazyImage
-                      src={getImageUrl(item.image)} alt={item.heading}
-                      className="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                      imgClassName="object-cover"
+                  {/* Label */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <div
+                      className="h-[2px] transition-all duration-500"
+                      style={{ width: isActive ? 24 : 16, background: game.accent }}
                     />
+                    <span
+                      className="font-bold uppercase tracking-[0.25em] text-xs transition-all duration-300"
+                      style={{ color: game.accent, fontFamily: "Orbitron, sans-serif" }}
+                    >
+                      {game.label}
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-1 justify-center">
-                    <h4 className="text-white font-bold uppercase font-goldman leading-tight text-[11px] lg:text-[12px]">
-                      {clip(item.heading, 45)}
-                    </h4>
-                    <p className="text-gray-300 text-[11px] lg:text-[12px] leading-snug">
-                      {clip(item.description, 80)}
-                    </p>
-                  </div>
-                </CardHover>
-              </motion.div>
-            ))}
-          </div>
 
-          <motion.div className="flex justify-center mt-2"
-            variants={fadeRight} custom={5} initial="hidden"
-            whileInView="visible" viewport={{ once: true }}>
-            <Link to="/news">
-              <button className="px-7 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
-                View All News
-              </button>
-            </Link>
-          </motion.div>
+                  {/* Tagline */}
+                  <h3
+                    className="text-white font-[Goldman] font-bold leading-tight transition-all duration-500"
+                    style={{ fontSize: isActive ? "clamp(1.4rem, 2.2vw, 2rem)" : "clamp(1rem, 1.4vw, 1.3rem)" }}
+                  >
+                    {game.tagline}
+                  </h3>
+
+                  {/* Description + button — slide in when active */}
+                  <div
+                    className="overflow-hidden transition-all duration-500"
+                    style={{
+                      maxHeight: isActive ? "180px" : "0px",
+                      opacity: isActive ? 1 : 0,
+                      marginTop: isActive ? 16 : 0,
+                    }}
+                  >
+                    <p
+                      className="text-[13px] lg:text-sm leading-relaxed mb-5"
+                      style={{
+                        color: "rgba(255,255,255,0.82)",
+                        textShadow: `0 0 18px ${game.glow}, 0 0 6px ${game.glow}`,
+                      }}
+                    >
+                      {game.description}
+                    </p>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate(game.path); }}
+                      className="px-7 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-200 hover:brightness-125"
+                      style={{
+                        background: "rgba(0,0,0,0.4)",
+                        border: `1px solid ${game.accent}`,
+                        borderTop: `2px solid ${game.accent}`,
+                        color: game.accent,
+                        fontFamily: "Orbitron, sans-serif",
+                        clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                        boxShadow: `0 0 24px ${game.glow}`,
+                      }}
+                    >
+                      LEARN MORE
+                    </button>
+                  </div>
+
+                  {/* "Hover" hint when collapsed */}
+                  <div
+                    className="mt-2 transition-all duration-300"
+                    style={{ opacity: isActive ? 0 : 0.45, height: isActive ? 0 : "auto" }}
+                  >
+                    <span
+                      className="text-[9px] uppercase tracking-[0.35em] font-bold"
+                      style={{ color: game.accent, fontFamily: "Orbitron, sans-serif" }}
+                    >
+                      hover to explore
+                    </span>
+                  </div>
+                </div>
+
+                {/* Vertical rotated label when collapsed */}
+                <div
+                  className="absolute top-8 right-4 transition-opacity duration-300 pointer-events-none"
+                  style={{ opacity: isActive ? 0 : 0.6 }}
+                >
+                  <span
+                    className="block text-[9px] font-bold uppercase tracking-[0.4em]"
+                    style={{
+                      color: game.accent,
+                      fontFamily: "Orbitron, sans-serif",
+                      writingMode: "vertical-rl",
+                      textOrientation: "mixed",
+                      transform: "rotate(180deg)",
+                    }}
+                  >
+                    {game.label}
+                  </span>
+                </div>
+
+              </motion.div>
+            );
+          })}
         </div>
 
-      </div>
-      {/* ═══════════════════ END DESKTOP ═══════════════════ */}
+        {/* ── Description banner — desktop, below panels ── */}
+        <motion.div
+          className="hidden md:flex gap-0 overflow-hidden"
+          style={{
+            background: "linear-gradient(90deg, rgba(0,60,180,0.18) 0%, rgba(0,120,255,0.28) 50%, rgba(0,60,180,0.18) 100%)",
+            border: "1px solid rgba(56,189,248,0.25)",
+            borderTop: "2px solid rgba(56,189,248,0.5)",
+            boxShadow: "0 0 40px rgba(56,189,248,0.12), inset 0 1px 0 rgba(56,189,248,0.15)",
+            borderRadius: "0 0 10px 10px",
+            marginTop: -2,
+          }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.35 }}
+        >
+          {/* Left accent bar */}
+          <div className="w-1 flex-shrink-0" style={{ background: "linear-gradient(to bottom, #38bdf8, rgba(56,189,248,0.2))" }} />
 
+          <div className="flex flex-row gap-8 px-8 py-5 flex-1">
+            {/* Neon icon */}
+            <div className="flex-shrink-0 flex items-center">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center"
+                style={{
+                  background: "rgba(56,189,248,0.12)",
+                  border: "1px solid rgba(56,189,248,0.4)",
+                  boxShadow: "0 0 16px rgba(56,189,248,0.35)",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <circle cx="7" cy="7" r="3" fill="#38bdf8" />
+                  <circle cx="7" cy="7" r="6" stroke="#38bdf8" strokeWidth="1" strokeOpacity="0.5" />
+                </svg>
+              </div>
+            </div>
+
+            <p className="flex-1 text-[13px] lg:text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+              As the Hyper Tek movement continues to surge forward, it's time to secure your place in history
+              by grabbing one of our exclusive packages — available for a very limited time.
+            </p>
+
+            {/* Divider */}
+            <div className="w-px flex-shrink-0 self-stretch" style={{ background: "rgba(56,189,248,0.2)" }} />
+
+            <p className="flex-1 text-[13px] lg:text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+              Our Non-Fungible Digital Items come with a minimum money-back guarantee and offer incredible
+              in-game bonuses. We have already raised nearly $400,000 — act now and be part of this
+              groundbreaking movement!
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── MOBILE: Stacked cards ── */}
+        <div className="flex md:hidden flex-col gap-4">
+          {GAMES.map((game, i) => (
+            <motion.div
+              key={game.id}
+              className="relative overflow-hidden rounded-lg cursor-pointer"
+              style={{
+                height: 200,
+                backgroundImage: `url(${game.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              onClick={() => navigate(game.path)}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 100%)" }}
+              />
+              <div
+                className="absolute bottom-0 inset-x-0 h-[2px]"
+                style={{ background: game.accent, boxShadow: `0 0 20px ${game.glow}` }}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end p-5">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="w-4 h-[2px]" style={{ background: game.accent }} />
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-widest"
+                    style={{ color: game.accent, fontFamily: "Orbitron, sans-serif" }}
+                  >
+                    {game.label}
+                  </span>
+                </div>
+                <h3 className="text-white font-[Goldman] font-bold text-xl leading-tight mb-1.5">
+                  {game.tagline}
+                </h3>
+                <p className="text-gray-300 text-xs leading-relaxed">{game.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+
+        {/* ── Description banner — mobile ── */}
+        <motion.div
+          className="flex md:hidden flex-col gap-4 mt-4 p-5 rounded-xl"
+          style={{
+            background: "linear-gradient(135deg, rgba(0,60,180,0.2) 0%, rgba(0,120,255,0.25) 100%)",
+            border: "1px solid rgba(56,189,248,0.25)",
+            borderTop: "2px solid rgba(56,189,248,0.5)",
+            boxShadow: "0 0 30px rgba(56,189,248,0.1)",
+          }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+            As the Hyper Tek movement continues to surge forward, it's time to secure your place in history
+            by grabbing one of our exclusive packages — available for a very limited time.
+          </p>
+          <div className="h-px w-full" style={{ background: "rgba(56,189,248,0.2)" }} />
+          <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
+            Our Non-Fungible Digital Items come with a minimum money-back guarantee and offer incredible
+            in-game bonuses. We have already raised nearly $400,000 — act now and be part of this
+            groundbreaking movement!
+          </p>
+        </motion.div>
+
+      </div>
     </section>
   );
 }

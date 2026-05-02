@@ -34,7 +34,7 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
         autoRotate
-        autoRotateSpeed={2}
+        autoRotateSpeed={6}
       />
     </Canvas>
   );

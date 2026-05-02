@@ -49,78 +49,87 @@ export default function NewsDetail() {
   }
 
   return (
-    <div className="min-h-screen text-white font-sans relative mt-24">
-          {/* Featured Image */}
-        <div className="mb-8">
+    <div className="min-h-screen text-white font-sans relative" style={{ background: "#060610" }}>
+
+      {/* Hero image — flush with top, covers navbar area */}
+      <div className="relative w-full" style={{ height: "clamp(280px, 42vw, 500px)" }}>
         <img
-  src={
-    newsItem.image
-      ? getImageUrl(newsItem.image)
-      : ""
-  }
-  alt={newsItem.heading}
-  className="
-    w-screen
-    max-h-[420px]
-    object-cover
-    relative
-    left-1/2
-    right-1/2
-    -ml-[50vw]
-    -mr-[50vw]
-  "
-/>
+          src={newsItem.image ? getImageUrl(newsItem.image) : ""}
+          alt={newsItem.heading}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* gradient: dark at top (behind navbar) → dark at bottom */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to bottom, rgba(6,6,16,0.55) 0%, rgba(6,6,16,0.2) 40%, rgba(6,6,16,0.85) 100%)" }}
+        />
+        {/* neon bottom line */}
+        <div
+          className="absolute bottom-0 inset-x-0 h-[2px]"
+          style={{ background: "linear-gradient(to right, transparent, #38bdf8, transparent)", boxShadow: "0 0 24px rgba(56,189,248,0.5)" }}
+        />
 
-
+        {/* Back button — floating over image */}
+        <div className="absolute bottom-6 left-6 md:left-12 xl:left-16 z-20">
+          <button
+            onClick={() => navigate("/news")}
+            className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-200 hover:brightness-125"
+            style={{
+              background: "rgba(6,6,16,0.7)",
+              border: "1px solid rgba(56,189,248,0.4)",
+              borderTop: "2px solid #38bdf8",
+              color: "#38bdf8",
+              fontFamily: "Orbitron, sans-serif",
+              backdropFilter: "blur(8px)",
+              clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+              boxShadow: "0 0 16px rgba(56,189,248,0.2)",
+            }}
+          >
+            <FaArrowLeft size={10} />
+            Back to News
+          </button>
         </div>
-
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-blue-500/10 blur-[100px]"></div>
-        <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-purple-500/10 blur-[100px]"></div>
       </div>
 
-      {/* Header */}
-      <header className="px-6 py-4 relative z-10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-         
-
-     <nav className="flex items-center gap-2 text-sm">
-       <button onClick={() => navigate("/")} 
-       className="text-gray-400 hover:text-white transition-colors" >
-         Home </button> <span className="text-gray-600">›</span> 
-         <button onClick={() => navigate("/news")}
-          className="text-white-400 hover:text-white transition-colors" > 
-          News </button> <span className="text-gray-600"></span> 
-     </nav>
-         
-        </div>
-      </header>
+      {/* Background glow effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-40 right-20 w-64 h-64 rounded-full bg-blue-500/10 blur-[100px]" />
+        <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-purple-500/10 blur-[100px]" />
+      </div>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-8 relative z-10">
+      <main className="max-w-6xl mx-auto px-6 md:px-12 xl:px-16 py-10 relative z-10">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-xs text-white/40 mb-8">
+          <button onClick={() => navigate("/")} className="hover:text-white transition-colors">Home</button>
+          <span>›</span>
+          <button onClick={() => navigate("/news")} className="hover:text-white transition-colors">News</button>
+          <span>›</span>
+          <span className="text-white/70">{newsItem.heading?.slice(0, 40)}{newsItem.heading?.length > 40 ? "…" : ""}</span>
+        </nav>
+
         {/* Title */}
-        <div className="mb-6">
+        <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded">
+            <span
+              className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded"
+              style={{ background: "rgba(56,189,248,0.12)", border: "1px solid rgba(56,189,248,0.45)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}
+            >
               LATEST
             </span>
-            <h1 className="text-3xl md:text-xl font-normal uppercase leading-[100%] tracking-[0%] font-goldman">
-  {newsItem.heading}
-</h1>
-
           </div>
-          <div className="flex items-center gap-4 text-gray-400 text-sm">
+          <h1 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-4xl uppercase leading-tight text-white mb-4">
+            {newsItem.heading}
+          </h1>
+          <div className="flex items-center gap-4 text-white/40 text-sm">
             <div className="flex items-center gap-2">
-              <FaCalendarAlt />
+              <FaCalendarAlt size={12} />
               <span>{formatDate(newsItem.createdAt)}</span>
             </div>
             <span>•</span>
             <span>By Admin</span>
           </div>
-          
-  {/* Add the border at the end */}
-  <div className="border-t border-gray-800 mt-4"></div>
+          <div className="mt-5 h-px" style={{ background: "linear-gradient(to right, rgba(56,189,248,0.4), transparent)" }} />
         </div>
 
       

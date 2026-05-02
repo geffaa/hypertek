@@ -6,7 +6,7 @@ const MODES = {
     label: "RACING",
     accent: "#22c55e",
     glow: "rgba(34,197,94,0.2)",
-    panelImg: "/racing_panel.png",
+    panelImg: "/racing3.png",
     heading: "HyperTek Racing",
     subtitle: "Speed. Precision. Dominance.",
     description:
@@ -36,7 +36,7 @@ const MODES = {
     label: "OVERLORD",
     accent: "#f87171",
     glow: "rgba(248,113,113,0.2)",
-    panelImg: "/overlord_panel.png",
+    panelImg: "/overlord4.png",
     heading: "HyperTek Overlord",
     subtitle: "Command. Conquer. Rule.",
     description:
