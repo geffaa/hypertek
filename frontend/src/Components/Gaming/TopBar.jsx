@@ -317,7 +317,7 @@ const SKIN1_GUNS = [
   /* ── #10-12  Center section — 2 ovals + 1 box ── */
   { id: "vert_oval_upper",    name: "Cockpit Center Defence Cell Lower", x: 19, y: 42, w: 5, h: 16, circle: true },
   { id: "vert_oval_lower",    name: "Cockpit Center Defence Cell Upper", x: 29, y: 42, w: 5, h: 16, circle: true },
-  { id: "center_front_gun",   name: "Forward Upperdeck Gun Array",       x: 31, y: 44, w: 17,  h: 14 },
+  { id: "center_front_gun",   name: "Forward Upperdeck Gun Array",       x: 34, y: 44, w: 15,  h: 14 },
 
   /* ── #13-18  Point Defense — LOWER 6 (2 rows × 3) ── */
   { id: "pd_gun_7",  name: "Cockpit Port Defence Cell 1",  x: 14, y: 56, w: 4.5, h: 9, circle: true },

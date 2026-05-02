@@ -38,7 +38,7 @@ const UNLOCKED_VEHICLES = [
     name: "Wraith SR-9",
     class: "Stealth Interceptor",
     bay: "BAY 03",
-    img: "/vehicle2.png",
+    img: "/vehicle2-1.png",
     color: "#38bdf8",
     stats: {
       "Top Speed":     "1645 kt",
@@ -55,7 +55,7 @@ const UNLOCKED_VEHICLES = [
     name: "Voidhawk ZX-1",
     class: "Long Range Striker",
     bay: "BAY 01",
-    img: "/vehicle3.png",
+    img: "/vehicle3-1.png",
     color: "#f97316",
     stats: {
       "Top Speed":     "1798 kt",
@@ -564,7 +564,7 @@ function GarageView() {
   const part = parts.find(p => p.id === selectedPart);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+    <div style={{ position: "absolute", inset: 0, overflow: "visible" }}>
       <style>{`
         @keyframes vehicleSpin {
           from { transform: perspective(900px) rotateY(0deg); }
@@ -584,18 +584,27 @@ function GarageView() {
       <LazyImage src="/racing-overlay.png" spinnerColor="#22c55e"
         style={{ objectPosition: "center" }} />
 
-      {/* ── Vehicle — center stage ── */}
-      <div style={{
-        position: "absolute",
-        top: "14%", left: "50%", transform: "translateX(-50%)",
-        width:  isMobile ? 280 : 540,
-        height: isMobile ? 240 : 460,
-        zIndex: 20,
-        display: "flex", justifyContent: "center",
-      }}>
-        {v.id === "wraith" ? (
-          <Wraith3DViewer />
-        ) : (
+      {/* ── Vehicle — 3D: large centered canvas, static: fixed container ── */}
+      {(v.id === "wraith" || v.id === "voidhawk") ? (
+        <div style={{
+          position: "absolute",
+          top: "40%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          width:  isMobile ? "95vw" : "70vw",
+          height: isMobile ? "70vh" : "75vh",
+          zIndex: 20, pointerEvents: "auto",
+        }}>
+          <Wraith3DViewer vehicleId={v.id} />
+        </div>
+      ) : (
+        <div style={{
+          position: "absolute",
+          top: "14%", left: "50%", transform: "translateX(-50%)",
+          width:  isMobile ? 280 : 540,
+          height: isMobile ? 240 : 460,
+          zIndex: 20,
+          display: "flex", justifyContent: "center",
+        }}>
           <div style={{
             width: "100%",
             animation: spinning
@@ -611,8 +620,8 @@ function GarageView() {
               }}
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* ── Vehicle name ── */}
       <div style={{

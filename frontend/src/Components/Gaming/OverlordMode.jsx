@@ -70,9 +70,9 @@ const CSS = `
 const OVL_BTN_SIZE = 82;
 // Arc positions — mirrored from Quest ARC_3 for consistency
 const OVL_ARC = [
-  { id: "FIRE",   right: "17vh", bottom: "38vh" },
-  { id: "SCOPE",  right: "35vh", bottom: "27vh" },
-  { id: "WEAPON", right: "45vh", bottom: "10vh" },
+  { id: "FIRE",    right: "17vh", bottom: "38vh" },
+  { id: "ZOOM",    right: "35vh", bottom: "27vh" },
+  { id: "WEAPONS", right: "45vh", bottom: "10vh" },
 ];
 const OVERLORD_ACTIONS = [
   {
@@ -86,7 +86,7 @@ const OVERLORD_ACTIONS = [
     color: "#f87171", glow: "rgba(248,113,113,0.55)",
   },
   {
-    id: "SCOPE",
+    id: "ZOOM",
     icon: (
       <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
         <circle cx="16" cy="16" r="12" stroke="#fbbf24" strokeWidth="1.8" strokeOpacity="0.9"/>
@@ -97,7 +97,7 @@ const OVERLORD_ACTIONS = [
     color: "#fbbf24", glow: "rgba(251,191,36,0.55)",
   },
   {
-    id: "WEAPON",
+    id: "WEAPONS",
     icon: (
       <svg viewBox="0 0 32 32" width="44" height="44" fill="none">
         <rect x="3"  y="12" width="20" height="8" rx="2" fill="#1e0a0a" stroke="#f87171" strokeWidth="1.5" strokeOpacity="0.9"/>
