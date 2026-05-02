@@ -5,7 +5,6 @@ import ProfileBanner from "./ProfileBanner";
 import { Link } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
 import Profile from "../../assets/images/Profile/Profile.png";
-import GlowingOrb from "../Common/BgColoring";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -205,7 +204,6 @@ function PersonalActivity() {
 
       {/* Activities Section */}
       <section className="mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 w-full max-w-[1600px]">
-        <GlowingOrb Xaxis={920} Yaxis={550} />
 
         {/* Responsive Table */}
         <div className="overflow-x-auto rounded-lg z-10" style={{ overflowY: "auto", maxHeight: "70vh" }}>

@@ -336,39 +336,41 @@ const ATM_COLOR = { BREATHABLE:"#22c55e", ARTIFICIAL:"#38bdf8", VACUUM:"#94a3b8"
 const HAZ_COLOR = { LOW:"#22c55e", MEDIUM:"#facc15", HIGH:"#f87171" };
 
 // Positions derived from image grid: center X≈50.1%, column interval≈2.88%vw, row interval≈6.12%vh
+// labelBelow:true  → label di bawah dot (default: di atas)
+// labelShift:{x,y} → geser label dalam px (dot tidak ikut)
 const LOCATIONS = [
   // ── Left cluster ──────────────────────────────────────────
-  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"10%",  top:"23,5%",   desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
-  { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"20%", top:"17,5%",   desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
-  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%", top:"29%",   desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
-  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"13.1%", top:"22%",   desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
-  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"17.5%", top:"20.5%",   desc:"Hydroponic farming complex. Primary food source for western sectors." },
-  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"41%", top:"21%", desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
-  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"37%", top:"31.5%", desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
-  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"15.5%", top:"43%", desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
-  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"20.5%", top:"42%", desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
-  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"28%", top:"50%", desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
-  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"31.5%",   top:"54.5%", desc:"Sector command authority. All major coalition operations coordinated here." },
-  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"22.5%", top:"60%", desc:"Traffic control and cargo routing for southern transit lanes." },
-  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"17.5%", top:"63%", desc:"Research station studying gravitational anomalies near the galactic core boundary." },
-  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"29.5%", top:"66%", desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
-  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"23%", top:"77%", desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
-  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"10%",    top:"74%", desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
+  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"10%",   top:"23.5%", labelShift:{x:-18,y:0},                desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
+  { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"20%",   top:"17.5%", labelShift:{x:22,y:0},                 desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
+  { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%",   top:"29%",                                          desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
+  { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"13.1%", top:"22%",   labelBelow:true, labelShift:{x:-10,y:0}, desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
+  { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"17.5%", top:"20.5%",                                        desc:"Hydroponic farming complex. Primary food source for western sectors." },
+  { id:"trade", name:"ZETA-73-QN",   type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"41%",   top:"21%",                                          desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
+  { id:"fuel",  name:"ZETA-91-9XV",  type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"37%",   top:"31.5%", labelBelow:true, labelShift:{x:-18,y:0}, desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
+  { id:"ship",  name:"ZION-37-6Q2",  type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"15.5%", top:"43%",   labelBelow:true,                        desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
+  { id:"ind",   name:"ZETA-33-8V2",  type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"20.5%", top:"42%",   labelShift:{x:18,y:0},                 desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
+  { id:"mil",   name:"ZV-23N-19U",   type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"28%",   top:"50%",                                          desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
+  { id:"cmd",   name:"ZORAX-19U",    type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"31.5%", top:"54.5%",                                        desc:"Sector command authority. All major coalition operations coordinated here." },
+  { id:"logi",  name:"ZORAX-4SH",    type:"Logistics Hub",       coords:"T05·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"22.5%", top:"60%",                                          desc:"Traffic control and cargo routing for southern transit lanes." },
+  { id:"sci",   name:"ZETA-31-196",  type:"Science Outpost",     coords:"T04·L13", atm:"VACUUM",     hazard:"MEDIUM", left:"17.5%", top:"63%",                                          desc:"Research station studying gravitational anomalies near the galactic core boundary." },
+  { id:"comm",  name:"ZIR-31-6NV",   type:"Communication Array", coords:"T03·L08", atm:"VACUUM",     hazard:"LOW",    left:"29.5%", top:"66%",                                          desc:"Quantum-entanglement communication node. Zero-lag interstellar messaging." },
+  { id:"relay", name:"ZEN-83-OX",    type:"Deep Space Relay",    coords:"T03·L11", atm:"VACUUM",     hazard:"LOW",    left:"23%",   top:"77%",                                          desc:"Automated relay node. Maintains network connectivity for outer ring settlements." },
+  { id:"echo",  name:"ZIR-12-56",    type:"Echo Station",        coords:"T02·L15", atm:"VACUUM",     hazard:"LOW",    left:"10%",   top:"74%",                                          desc:"Long-range communication relay. Signal strength: 99.7%. Uptime: 14.2 years." },
   // ── Center ────────────────────────────────────────────────
-  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"30%", top:"19%",   desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
-  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"40.5%", top:"30.5%", desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
-  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"42%",   top:"68.5%", desc:"Frontier exploration base. Marks the edge of the charted transit network." },
+  { id:"sup",   name:"TLM-675",      type:"Supply Station",      coords:"T12·C00", atm:"ARTIFICIAL", hazard:"LOW",    left:"30%",   top:"19%",   labelBelow:true, labelShift:{x:22,y:0}, desc:"Neutral supply platform. Operated by the Interstellar Merchant Consortium." },
+  { id:"nav",   name:"TQ-173-HN",    type:"Navigation Beacon",   coords:"T11·R02", atm:"VACUUM",     hazard:"LOW",    left:"40.5%", top:"30.5%", labelShift:{x:28,y:0},                 desc:"Automated navigation beacon. Guides transit traffic through the central corridor." },
+  { id:"pion",  name:"TNS-554",      type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"42%",   top:"68.5%",                                        desc:"Frontier exploration base. Marks the edge of the charted transit network." },
   // ── Right cluster ─────────────────────────────────────────
-  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"65.5%", top:"22%",   desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
-  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"22.5%", top:"18.5%",   desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
-  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"75.5%", top:"17.5%",   desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
-  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39.5%", top:"38.5%", desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
-  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"79.5%", top:"51%", desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
-  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"73.5%", top:"41%", desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
-  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"85.5%", top:"47.5%", desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
-  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"86.5%", top:"47.5%", desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
-  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"30%", desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
-  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"64.5%", top:"35%", desc:"Cryo-comet resource extraction. Primary water source for eastern stations." }
+  { id:"sig",   name:"TMA-488",      type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"65.5%", top:"22%",                                          desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
+  { id:"orb",   name:"TXC-44P",      type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"22.5%", top:"18.5%", labelShift:{x:22,y:0},                 desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
+  { id:"col",   name:"FZC-423",      type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"75.5%", top:"17.5%",                                        desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
+  { id:"trd",   name:"TKY-981",      type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39.5%", top:"38.5%",                                        desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
+  { id:"bio",   name:"TY-67-3P",     type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"79.5%", top:"51%",   labelBelow:true,                        desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
+  { id:"expl",  name:"ZRSE-40P",     type:"Exploration Outpost", coords:"T08·R06", atm:"VACUUM",     hazard:"LOW",    left:"73.5%", top:"41%",                                          desc:"Forward scout base for unmapped regions. Last transmission: 3.2 standard days ago." },
+  { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"85.5%", top:"47.5%", labelShift:{x:-20,y:0},                desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
+  { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"86.5%", top:"47.5%", labelBelow:true, labelShift:{x:-20,y:0}, desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
+  { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"30%",                                          desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
+  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"64.5%", top:"35%",                                          desc:"Cryo-comet resource extraction. Primary water source for eastern stations." }
 ];
 
 /* ── Planet image mapping — add entries here as assets arrive ── */
@@ -670,7 +672,7 @@ function StarMapOverlay({ onClose }) {
       >
         {/* Map image — fills popup exactly (same 16:9 ratio) */}
         <img
-          src="/UI Globe Map_Fixed.png"
+          src="/UI Globe Map_Fixed2.png"
           alt="star map"
           style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"fill", pointerEvents:"none" }}
         />
@@ -704,24 +706,53 @@ function StarMapOverlay({ onClose }) {
             );
           }
           const isSel = selected?.id === loc.id;
+          const sx = loc.labelShift?.x ?? 0;
+          const sy = loc.labelShift?.y ?? 0;
+          const labelTransform = loc.labelBelow
+            ? `translate(calc(-50% + ${sx}px), calc(8px + ${sy}px))`
+            : `translate(calc(-50% + ${sx}px), calc(-100% - 8px + ${sy}px))`;
           return (
-            <button
-              key={loc.id}
-              className="map-dot"
-              onClick={() => toggle(loc)}
-              title={loc.name}
-              style={{
-                position:"absolute", left:loc.left, top:loc.top,
-                transform:"translate(-50%,-50%)",
-                width: isSel ? 14 : 9, height: isSel ? 14 : 9,
-                borderRadius:"50%",
-                background: isSel ? "#38bdf8" : "rgba(56,189,248,0.65)",
-                border:`1.5px solid ${isSel ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
-                boxShadow: isSel ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
-                animation: isSel ? "none" : "dotPulse 2.4s ease-in-out infinite",
-                cursor:"pointer", padding:0, zIndex:80,
-              }}
-            />
+            <div key={loc.id} style={{ position:"absolute", left:loc.left, top:loc.top, width:0, height:0, zIndex:80 }}>
+              {/* Label — independently offset, dot stays pinned */}
+              <div
+                style={{
+                  position:"absolute",
+                  whiteSpace:"nowrap",
+                  transform: labelTransform,
+                  fontFamily:"Orbitron,sans-serif",
+                  fontSize:"clamp(7px,0.75vw,10px)",
+                  fontWeight:"bold",
+                  letterSpacing:"0.08em",
+                  color: isSel ? "#7dd3fc" : "rgba(255,255,255,0.85)",
+                  textShadow: isSel
+                    ? "0 0 8px rgba(56,189,248,0.9), 0 1px 3px rgba(0,0,0,0.9)"
+                    : "0 1px 4px rgba(0,0,0,0.95), 0 0 6px rgba(0,0,0,0.8)",
+                  background:"rgba(0,4,18,0.6)",
+                  padding:"2px 5px",
+                  borderRadius:2,
+                  border: isSel ? "1px solid rgba(56,189,248,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                  pointerEvents:"none",
+                }}
+              >{loc.name}</div>
+
+              {/* Dot — always centered at exact left/top */}
+              <button
+                className="map-dot"
+                onClick={() => toggle(loc)}
+                title={`${loc.name} — ${loc.type}`}
+                style={{
+                  position:"absolute",
+                  transform:"translate(-50%,-50%)",
+                  width: isSel ? 14 : 9, height: isSel ? 14 : 9,
+                  borderRadius:"50%",
+                  background: isSel ? "#38bdf8" : "rgba(56,189,248,0.65)",
+                  border:`1.5px solid ${isSel ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
+                  boxShadow: isSel ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
+                  animation: isSel ? "none" : "dotPulse 2.4s ease-in-out infinite",
+                  cursor:"pointer", padding:0,
+                }}
+              />
+            </div>
           );
         })}
 

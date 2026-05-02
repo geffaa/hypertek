@@ -33,6 +33,8 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
         dampingFactor={0.08}
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
+        autoRotate
+        autoRotateSpeed={2}
       />
     </Canvas>
   );

@@ -18,7 +18,6 @@ import land1Image from "../../assets/images/Overview/land1.jpg";
 
 import NavLinks from "../ProfileSection/Navlinks";
 import UserProfileHeader from "./UserProfileHeader";
-import GlowingOrb from "../Common/BgColoring";
 import FullScreenLoader from "../Common/Spinner";
 
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
@@ -536,7 +535,6 @@ function Land() {
 
           {/* ================= NFT CARDS ================= */}
           <section className="relative z-10 mt-10">
-            <GlowingOrb Xaxis={800} Yaxis={100} />
 
             {filteredLandCollections.length === 0 ? (
               <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">

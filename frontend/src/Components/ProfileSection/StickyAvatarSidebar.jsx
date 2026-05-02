@@ -27,7 +27,7 @@ export default function StickyAvatarSidebar() {
       style={{
         position: "sticky",
         top: 68,
-        width: 340,
+        width: 480,
         flexShrink: 0,
         alignSelf: "flex-start",
         display: "flex",
@@ -44,8 +44,8 @@ export default function StickyAvatarSidebar() {
         onError={(e) => { e.currentTarget.style.opacity = "0.15"; }}
         style={{
           width: "115%",
-          height: "calc(100vh - 80px)",
-          maxHeight: 760,
+          height: "calc(70vh - 30px)",
+          maxHeight: 1200,
           objectFit: "contain",
           objectPosition: "top center",
           display: "block",

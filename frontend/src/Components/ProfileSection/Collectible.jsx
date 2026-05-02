@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
-import GlowingOrb from "../Common/BgColoring";
 import ProfileListingsTab from "./ProfileListingsTab";
 import ProfileQuestingTab from "./ProfileQuestingTab";
 import ProfileBountyTab from "./ProfileBountyTab";
@@ -370,7 +369,7 @@ function MarketPlace() {
 
   return (
     <>
-      <div className="min-h-screen bg-transparent">
+      <div className="bg-transparent">
         <div className="mx-auto mt-[68px] max-w-[2000px]">
           {/* ================= HERO ================= */}
           <ProfileBanner />
@@ -385,7 +384,7 @@ function MarketPlace() {
           </div>
 
           {/* ================= NAV ================= */}
-          <div className="mt-2 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+          <div className="mt-2 w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
             <NavLinks
               activeTab={activeTab}
               onTabChange={(tab) => {
@@ -406,15 +405,16 @@ function MarketPlace() {
 
 
           {/* ================= CONTENT AREA ================= */}
-          <section ref={contentRef} className="relative z-10 mt-4 pb-8">
-            <GlowingOrb Xaxis={800} Yaxis={100} />
+          <section ref={contentRef} className="relative z-10 mt-4" style={{ overflowY: "clip" }}>
 
             {/* ---- MY COLLECTIBLES: NFT Grid ---- */}
             {activeTab === "My Collectibles" && (() => {
               const gridItems = filteredCollections;
 
-              return gridItems.length === 0 ? (
-                <div className="col-span-full flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
+              return (
+                <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+              {gridItems.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
                   <h2 className="text-lg font-semibold -mt-4">
                     {isConnected ? "No Items Available" : "Connect Wallet to View Your Items"}
                   </h2>
@@ -438,7 +438,7 @@ function MarketPlace() {
                   )}
                 </div>
               ) : (
-                <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
                   {gridItems.map((item) => {
                       const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
                         || sessionAuctionIds.has(item._id);
@@ -548,12 +548,14 @@ function MarketPlace() {
                     </div>
                   ); })}
                 </div>
+              )}
+                </div>
               );
             })()}
 
             {/* ---- LISTINGS VIEW ---- */}
             {activeTab === "Listings" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                 <ProfileListingsTab token={token} />
               </div>
             )}
@@ -569,7 +571,7 @@ function MarketPlace() {
                 ? transactions
                 : transactions.filter((tx) => tx.type === txFilter);
               return (
-                <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
+                <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
                   {/* Filter chips */}
                   <div className="flex gap-2 mb-4">
                     {TX_FILTERS.map((f) => (
@@ -650,7 +652,7 @@ function MarketPlace() {
 
             {/* ---- TRADE VIEW (user's posted trades) ---- */}
             {activeTab === "Trade" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
               <div className="flex-1 min-w-0">
                 {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
@@ -728,13 +730,12 @@ function MarketPlace() {
                   })()
                 )}
               </div>
-              <StickyAvatarSidebar />
               </div>
             )}
 
             {/* ---- AUCTION VIEW (user's posted auctions) ---- */}
             {activeTab === "Auction" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
               <div className="flex-1 min-w-0">
                 {!connectedWallet ? (
                   <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
@@ -815,7 +816,7 @@ function MarketPlace() {
 
             {/* ---- QUESTING VIEW ---- */}
             {activeTab === "Questing" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                 <div className="flex-1 min-w-0">
                   <ProfileQuestingTab wallet={connectedWallet} token={token} />
                 </div>
@@ -825,7 +826,7 @@ function MarketPlace() {
 
             {/* ---- BOUNTY VIEW ---- */}
             {activeTab === "Bounty" && (
-              <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                 <div className="flex-1 min-w-0">
                   <ProfileBountyTab wallet={connectedWallet} token={token} />
                 </div>

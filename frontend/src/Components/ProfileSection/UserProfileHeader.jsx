@@ -6,7 +6,7 @@ import { BACKEND_BASE_URL } from "../../Config";
 
 function UserProfileHeader({ userData, connectedWallet, sellerBalance }) {
   return (
-    <div className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex flex-col items-start text-white">
+    <div className="relative w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex flex-col items-start text-white">
       <div className="relative">
         {userData?.Avatar ? (
           <img

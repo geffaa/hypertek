@@ -16,7 +16,6 @@ import CustomButton4 from "../Buttons/Button4";
 import land1Image from "../../assets/images/Overview/land1.jpg";
 
 import NavLinks from "../ProfileSection/Navlinks";
-import GlowingOrb from "../Common/BgColoring";
 import FullScreenLoader from "../Common/Spinner";
 
 import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
@@ -420,7 +419,6 @@ function ProfileCategory() {
 
   return (
     <div className="relative w-full bg-black min-h-screen">
-      <GlowingOrb Xaxis={200} Yaxis={200} />
 
       {/* ================= HERO SECTION ================= */}
       <div className="mx-auto max-w-[2000px]">
