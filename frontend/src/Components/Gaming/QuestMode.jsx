@@ -8,6 +8,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
@@ -340,8 +341,6 @@ const HAZ_COLOR = { LOW:"#22c55e", MEDIUM:"#facc15", HIGH:"#f87171" };
 // labelShift:{x,y} → geser label dalam px (dot tidak ikut)
 const LOCATIONS = [
   // ── Left cluster ──────────────────────────────────────────
-  { id:"obs",   name:"ZETA-5.1-8SP", type:"Observatory",        coords:"T13·L14", atm:"VACUUM",     hazard:"LOW",    left:"10%",   top:"23.5%", labelShift:{x:-18,y:0},                desc:"Deep space observation post monitoring stellar phenomena across sectors T09–T16." },
-  { id:"mine",  name:"ZETA-7A",      type:"Mining Outpost",      coords:"T15·L09", atm:"VACUUM",     hazard:"MEDIUM", left:"20%",   top:"17.5%", labelShift:{x:22,y:0},                 desc:"Active asteroid processing facility. High-yield kethane deposits detected." },
   { id:"sd",    name:"ZETA-51-M2",   type:"Supply Depot",        coords:"T13·L11", atm:"ARTIFICIAL", hazard:"LOW",    left:"28%",   top:"29%",                                          desc:"Primary logistics hub for the western frontier. Maintains emergency ration reserves." },
   { id:"res",   name:"ZETA-55-9R",   type:"Research Station",    coords:"T14·L06", atm:"ARTIFICIAL", hazard:"LOW",    left:"13.1%", top:"22%",   labelBelow:true, labelShift:{x:-10,y:0}, desc:"Xenobiology and deep-space materials lab. Houses 40 resident scientists." },
   { id:"agri",  name:"ZETA-37-6LP",  type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"17.5%", top:"20.5%",                                        desc:"Hydroponic farming complex. Primary food source for western sectors." },
@@ -436,7 +435,7 @@ function PlanetDetail({ loc, onClose }) {
     <div style={{
       position: "absolute",
       ...hPos, ...vPos,
-      width: "min(500px, 64%)",
+      width: "min(320px, 46%)",
       background: "rgba(2,6,22,0.97)",
       border: "1px solid rgba(56,189,248,0.38)",
       borderRadius: 10,
@@ -456,40 +455,40 @@ function PlanetDetail({ loc, onClose }) {
       `}</style>
 
       {/* Header — full width */}
-      <div style={{ background:"rgba(56,189,248,0.07)", borderBottom:"1px solid rgba(56,189,248,0.16)", padding:"10px 14px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+      <div style={{ background:"rgba(56,189,248,0.07)", borderBottom:"1px solid rgba(56,189,248,0.16)", padding:"7px 10px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
         <div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:13, fontWeight:"bold", color:"#38bdf8", letterSpacing:"0.12em", textShadow:"0 0 12px rgba(56,189,248,0.7)" }}>{loc.name}</div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8, color:"rgba(255,255,255,0.4)", letterSpacing:"0.18em", marginTop:3 }}>{loc.type} · {loc.coords}</div>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, fontWeight:"bold", color:"#38bdf8", letterSpacing:"0.12em", textShadow:"0 0 12px rgba(56,189,248,0.7)" }}>{loc.name}</div>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"rgba(255,255,255,0.4)", letterSpacing:"0.18em", marginTop:2 }}>{loc.type} · {loc.coords}</div>
         </div>
-        <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:20, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
+        <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:16, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
       </div>
 
       {/* Body — LEFT: info + quest locked  |  RIGHT: image + notes */}
       <div style={{ display:"flex" }}>
 
         {/* LEFT — atmosphere, hazard, briefing, quest locked */}
-        <div style={{ flex:1, padding:"10px 14px 12px", display:"flex", flexDirection:"column", gap:8, minWidth:0 }}>
-          <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+        <div style={{ flex:1, padding:"8px 10px 10px", display:"flex", flexDirection:"column", gap:6, minWidth:0 }}>
+          <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>ATMOSPHERE</div>
-              <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{loc.atm}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>ATMOSPHERE</div>
+              <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{loc.atm}</div>
             </div>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:3 }}>HAZARD LVL</div>
-              <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"3px 8px", fontFamily:"Orbitron,sans-serif", fontSize:8, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{loc.hazard}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>HAZARD LVL</div>
+              <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{loc.hazard}</div>
             </div>
           </div>
           <div style={{ height:1, background:"rgba(56,189,248,0.1)" }} />
           <div style={{ flex:1 }}>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:4 }}>BRIEFING</div>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:8.5, color:"rgba(255,255,255,0.68)", lineHeight:1.6, letterSpacing:"0.03em" }}>{loc.desc}</div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:3 }}>BRIEFING</div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5, color:"rgba(255,255,255,0.68)", lineHeight:1.55, letterSpacing:"0.03em" }}>{loc.desc}</div>
           </div>
           {/* Quest locked — left column only */}
-          <div style={{ background:"rgba(248,113,113,0.05)", border:"1px solid rgba(248,113,113,0.2)", borderRadius:6, padding:"7px 9px", display:"flex", alignItems:"center", gap:8, marginTop:2 }}>
-            <div style={{ fontSize:13, flexShrink:0 }}>🔒</div>
+          <div style={{ background:"rgba(248,113,113,0.05)", border:"1px solid rgba(248,113,113,0.2)", borderRadius:5, padding:"5px 7px", display:"flex", alignItems:"center", gap:6, marginTop:1 }}>
+            <div style={{ fontSize:11, flexShrink:0 }}>🔒</div>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5, fontWeight:"bold", color:"#f87171", letterSpacing:"0.1em", marginBottom:2 }}>QUEST — CONTENT LOCKED</div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5, color:"rgba(248,113,113,0.55)", letterSpacing:"0.04em", lineHeight:1.4 }}>Available in the complete game release.</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold", color:"#f87171", letterSpacing:"0.1em", marginBottom:1 }}>QUEST — CONTENT LOCKED</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(248,113,113,0.55)", letterSpacing:"0.04em", lineHeight:1.4 }}>Available in the complete game release.</div>
             </div>
           </div>
         </div>
@@ -498,11 +497,11 @@ function PlanetDetail({ loc, onClose }) {
         <div style={{ width:1, background:"rgba(56,189,248,0.1)", flexShrink:0 }} />
 
         {/* RIGHT — image (top) + notes (bottom) */}
-        <div style={{ width:155, display:"flex", flexDirection:"column", flexShrink:0 }}>
+        <div style={{ width:110, display:"flex", flexDirection:"column", flexShrink:0 }}>
 
           {/* Image box */}
           <div style={{
-            height:150,
+            height:105,
             flexShrink:0,
             borderBottom:"1px solid rgba(56,189,248,0.1)",
             position:"relative", overflow:"hidden",
@@ -514,12 +513,12 @@ function PlanetDetail({ loc, onClose }) {
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>NO IMAGE</div>
                 </div>
             }
-            <div style={{ position:"absolute", bottom:4, left:7, fontFamily:"Orbitron,sans-serif", fontSize:6, color:"#fff", letterSpacing:"0.12em", pointerEvents:"none" }}>IMAGE</div>
+            <div style={{ position:"absolute", bottom:3, left:5, fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"#fff", letterSpacing:"0.12em", pointerEvents:"none" }}>IMAGE</div>
           </div>
 
           {/* Notes box */}
-          <div style={{ height:120, flexShrink:0, display:"flex", flexDirection:"column", background:"rgba(56,189,248,0.02)" }}>
-            <div style={{ padding:"6px 8px 2px", fontFamily:"Orbitron,sans-serif", fontSize:7, color:"#38bdf8", letterSpacing:"0.15em", fontWeight:"bold", flexShrink:0 }}>NOTES</div>
+          <div style={{ height:88, flexShrink:0, display:"flex", flexDirection:"column", background:"rgba(56,189,248,0.02)" }}>
+            <div style={{ padding:"5px 7px 2px", fontFamily:"Orbitron,sans-serif", fontSize:6, color:"#38bdf8", letterSpacing:"0.15em", fontWeight:"bold", flexShrink:0 }}>NOTES</div>
             <textarea
               className="quest-notes-ta"
               value={note}
@@ -530,10 +529,10 @@ function PlanetDetail({ loc, onClose }) {
                 width:"100%",
                 background:"transparent",
                 border:"none", resize:"none",
-                padding:"2px 8px 8px",
-                fontFamily:"Orbitron,sans-serif", fontSize:9,
+                padding:"2px 7px 7px",
+                fontFamily:"Orbitron,sans-serif", fontSize:8,
                 color:"#fff",
-                lineHeight:1.6, letterSpacing:"0.03em",
+                lineHeight:1.5, letterSpacing:"0.03em",
                 boxSizing:"border-box",
               }}
             />
@@ -547,11 +546,11 @@ function PlanetDetail({ loc, onClose }) {
 
 /* ── Video overlay ────────────────────────────────────────── */
 function VideoOverlay({ onClose }) {
-  return (
+  return createPortal(
     <div
       onClick={onClose}
       style={{
-        position: "absolute", inset: 0, zIndex: 80,
+        position: "fixed", inset: 0, zIndex: 9000,
         background: "rgba(0,3,15,0.92)", backdropFilter: "blur(6px)",
         display: "flex", alignItems: "center", justifyContent: "center",
       }}
@@ -623,18 +622,36 @@ function VideoOverlay({ onClose }) {
           />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
 /* ── Star Map overlay ─────────────────────────────────────── */
 function StarMapOverlay({ onClose }) {
-  const [selected, setSelected] = useState(null);
-  const toggle = (loc) => setSelected(s => s?.id === loc.id ? null : loc);
+  const [hovered, setHovered] = useState(null);
+  const [pinned,  setPinned]  = useState(null);
+  const closeTimer = useRef(null);
 
-  return (
+  const openPanel   = (loc) => { clearTimeout(closeTimer.current); setHovered(loc); };
+  const startClose  = ()    => { if (pinned) return; closeTimer.current = setTimeout(() => setHovered(null), 160); };
+  const cancelClose = ()    => { clearTimeout(closeTimer.current); };
+  const togglePin   = (loc) => {
+    if (pinned?.id === loc.id) {
+      setPinned(null);
+    } else {
+      clearTimeout(closeTimer.current);
+      setHovered(loc);
+      setPinned(loc);
+    }
+  };
+  const closePanel  = ()    => { setPinned(null); setHovered(null); };
+
+  const active = pinned ?? hovered;
+
+  return createPortal(
     <div style={{
-      position:"absolute", inset:0, zIndex:75,
+      position:"fixed", inset:0, zIndex:9000,
       background:"rgba(0,3,15,0.82)", backdropFilter:"blur(5px)",
       display:"flex", alignItems:"center", justifyContent:"center",
     }}>
@@ -652,7 +669,7 @@ function StarMapOverlay({ onClose }) {
       `}</style>
 
       {/* Backdrop click to close */}
-      <div style={{ position:"absolute", inset:0 }} onClick={() => { setSelected(null); onClose(); }} />
+      <div style={{ position:"absolute", inset:0 }} onClick={() => { closePanel(); onClose(); }} />
 
       {/* ── Popup card — 16:9, fits within viewport with margins ── */}
       <div
@@ -680,75 +697,28 @@ function StarMapOverlay({ onClose }) {
         {/* Subtle overlay */}
         <div style={{ position:"absolute", inset:0, background:"rgba(0,4,18,0.1)", pointerEvents:"none" }} />
 
-        {/* Hotspot dots (known) + UNKNOWN boxes */}
+        {/* Hotspot dots — hover to preview, click to pin */}
         {LOCATIONS.map(loc => {
-          if (loc.unknown) {
-            return (
-              <div
-                key={loc.id}
-                style={{
-                  position:"absolute", left:loc.left, top:loc.top,
-                  transform:"translate(-50%,-50%)",
-                  border:"1.5px solid #EAB308",
-                  borderRadius:2,
-                  background:"rgba(0,0,0,0.55)",
-                  padding:"2px 6px",
-                  fontFamily:"Orbitron,sans-serif",
-                  fontSize:"clamp(5px,0.55vw,7px)", fontWeight:"bold",
-                  letterSpacing:"0.1em",
-                  color:"#EAB308",
-                  whiteSpace:"nowrap",
-                  pointerEvents:"none",
-                  zIndex:80,
-                  boxShadow:"0 0 6px rgba(234,179,8,0.4)",
-                }}
-              >UNKNOWN</div>
-            );
-          }
-          const isSel = selected?.id === loc.id;
-          const sx = loc.labelShift?.x ?? 0;
-          const sy = loc.labelShift?.y ?? 0;
-          const labelTransform = loc.labelBelow
-            ? `translate(calc(-50% + ${sx}px), calc(8px + ${sy}px))`
-            : `translate(calc(-50% + ${sx}px), calc(-100% - 8px + ${sy}px))`;
+          if (loc.unknown) return null;
+          const isActive = active?.id === loc.id;
+          const isPinned = pinned?.id === loc.id;
           return (
             <div key={loc.id} style={{ position:"absolute", left:loc.left, top:loc.top, width:0, height:0, zIndex:80 }}>
-              {/* Label — independently offset, dot stays pinned */}
-              <div
-                style={{
-                  position:"absolute",
-                  whiteSpace:"nowrap",
-                  transform: labelTransform,
-                  fontFamily:"Orbitron,sans-serif",
-                  fontSize:"clamp(7px,0.75vw,10px)",
-                  fontWeight:"bold",
-                  letterSpacing:"0.08em",
-                  color: isSel ? "#7dd3fc" : "rgba(255,255,255,0.85)",
-                  textShadow: isSel
-                    ? "0 0 8px rgba(56,189,248,0.9), 0 1px 3px rgba(0,0,0,0.9)"
-                    : "0 1px 4px rgba(0,0,0,0.95), 0 0 6px rgba(0,0,0,0.8)",
-                  background:"rgba(0,4,18,0.6)",
-                  padding:"2px 5px",
-                  borderRadius:2,
-                  border: isSel ? "1px solid rgba(56,189,248,0.4)" : "1px solid rgba(255,255,255,0.08)",
-                  pointerEvents:"none",
-                }}
-              >{loc.name}</div>
-
-              {/* Dot — always centered at exact left/top */}
               <button
                 className="map-dot"
-                onClick={() => toggle(loc)}
+                onMouseEnter={() => openPanel(loc)}
+                onMouseLeave={startClose}
+                onClick={() => togglePin(loc)}
                 title={`${loc.name} — ${loc.type}`}
                 style={{
                   position:"absolute",
                   transform:"translate(-50%,-50%)",
-                  width: isSel ? 14 : 9, height: isSel ? 14 : 9,
+                  width: isActive ? 14 : 9, height: isActive ? 14 : 9,
                   borderRadius:"50%",
-                  background: isSel ? "#38bdf8" : "rgba(56,189,248,0.65)",
-                  border:`1.5px solid ${isSel ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
-                  boxShadow: isSel ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
-                  animation: isSel ? "none" : "dotPulse 2.4s ease-in-out infinite",
+                  background: isPinned ? "#facc15" : isActive ? "#38bdf8" : "rgba(56,189,248,0.65)",
+                  border:`1.5px solid ${isPinned ? "#fde68a" : isActive ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
+                  boxShadow: isPinned ? "0 0 16px 4px rgba(250,204,21,0.9)" : isActive ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
+                  animation: isActive ? "none" : "dotPulse 2.4s ease-in-out infinite",
                   cursor:"pointer", padding:0,
                 }}
               />
@@ -756,8 +726,12 @@ function StarMapOverlay({ onClose }) {
           );
         })}
 
-        {/* Detail panel — inside popup */}
-        {selected && <PlanetDetail loc={selected} onClose={() => setSelected(null)} />}
+        {/* Detail panel — hover: closes on mouseLeave; pinned: stays until × or re-click */}
+        {active && (
+          <div onMouseEnter={cancelClose} onMouseLeave={startClose}>
+            <PlanetDetail loc={active} onClose={closePanel} />
+          </div>
+        )}
 
         {/* Top bar: title + BACK button — all in one flex row */}
         <div style={{
@@ -788,7 +762,8 @@ function StarMapOverlay({ onClose }) {
           >✕ BACK</button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

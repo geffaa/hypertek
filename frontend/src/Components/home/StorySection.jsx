@@ -1,7 +1,7 @@
 import { useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Network, Gem, Zap } from "lucide-react";
+import { Network, Gem, Zap, ArrowLeftRight, Layers, Glasses } from "lucide-react";
 import useSiteContent from "../../hooks/useSiteContent";
 
 const AVATAR_FILES = [
@@ -29,9 +29,12 @@ import lineRight from "../../assets/images/herostory/line_right.png";
 import lineLeft  from "../../assets/images/herostory/line_left.png";
 
 const KEY_HIGHLIGHTS = [
-  { Icon: Network, label: "Interconnected Universe", desc: "3 games — 1 shared economy and progression system", color: "rgba(56,189,248,0.85)" },
-  { Icon: Gem,     label: "True Ownership",           desc: "NFAs with guaranteed minimum buy-back",            color: "rgba(167,139,250,0.85)" },
-  { Icon: Zap,     label: "Play-to-Earn",             desc: "Every action contributes to your real-world rewards", color: "rgba(251,191,36,0.85)" },
+  { Icon: Network,        label: "Interconnected Universe",  desc: "3 games — 1 shared economy and progression system",           color: "rgba(56,189,248,0.85)"  },
+  { Icon: Gem,            label: "True Ownership",           desc: "NFAs with guaranteed minimum buy-back",                       color: "rgba(167,139,250,0.85)" },
+  { Icon: Zap,            label: "Play-to-Earn",             desc: "Every action contributes to your real-world rewards",         color: "rgba(251,191,36,0.85)"  },
+  { Icon: ArrowLeftRight, label: "Cash-Out Payments",        desc: "Converting in-game currency/rewards to cash-out payments",    color: "rgba(34,197,94,0.85)"   },
+  { Icon: Layers,         label: "Linked Progression",       desc: "Player progression is linked across all suites of games",    color: "rgba(251,113,133,0.85)" },
+  { Icon: Glasses,        label: "VR/AR Integration",        desc: "VR/AR players can join missions and epic battles in real-time", color: "rgba(250,204,21,0.85)"  },
 ];
 
 const containerVariants = {
@@ -56,8 +59,8 @@ export default function StorySection() {
   const charImage      = cms.character_image  || randomAvatar;
   const leftHeading    = cms.left_heading     || "STORY";
   const leftSubheading = cms.left_subheading  || "The year is 2117.";
-  const leftBody       = cms.left_body        ||
-    "Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. At the center of it all lies the Echo Core — a quantum relic that awakens you as a reborn Overlord, forged by legacy and technology.";
+  const leftBody       =
+    "In the Year 2117, prior to the aftermath of Earth's collapse, survivors initiated the Hyper Tek Exodus. Humanity's final endeavour for survival didn't result in the conquest of the stars; instead, it scattered across them, dispersing AI, enhanced genomes, and prototypes over thousands of seed worlds. Each world developed in isolation, giving rise to new species, cultures, and technologies. At the heart of it all lies the Echo Core, a quantum relic pulsing with paradoxes, memories, and a call to power. It awakens you as a reborn Overlord, forged from legacy and technology.";
 
   return (
     <section
@@ -89,7 +92,7 @@ export default function StorySection() {
                 src={charImage}
                 alt="Character"
                 loading="lazy"
-                className="relative z-[2] w-[420px] lg:w-[600px] 2xl:w-[680px] h-auto object-contain"
+                className="relative z-[2] w-[360px] lg:w-[480px] 2xl:w-[540px] h-auto object-contain"
                 style={{ filter: "drop-shadow(0 0 50px rgba(255,255,255,0.1))" }}
               />
             </motion.div>

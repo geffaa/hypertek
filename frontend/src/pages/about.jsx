@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, X } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
@@ -19,13 +19,16 @@ import iconCard    from "../assets/images/howItsWork/card.png";
 import iconEarn    from "../assets/images/howItsWork/earn.png";
 
 // ── Content ───────────────────────────────────────────────────────────────────
-const DEFAULT_SUBTITLE =
-  "Transforming the gaming industry by establishing an interconnected universe that seamlessly integrates multiple gameplay styles into one cohesive progression system.";
+const DEFAULT_SUBTITLE = [
+  "The Hyper Tek mission was to address multiple issues within the gaming industry and to redefine how gaming ecosystems operate by creating an interconnected universe where players are not limited to a single gameplay style. By combining multiple genres into one progression system, the Hyper Tek project provides a dynamic environment where players can explore, compete, and grow within a unified world.",
+  "It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all Non-Fungible Artworks, and true play-to-earn designed systems within the ecosystem, which players contribute to.",
+  "The project aims to empower players by giving them meaningful ownership over their progress and rewards while encouraging creativity, collaboration, and competition.",
+  "Hyper Tek's long-term vision is to build a living digital universe where multiple games, economies, and communities coexist on a single interconnected platform.",
+];
 
 const DEFAULT_MISSION = [
-  "The Hyper Tek mission is to transform the gaming industry by establishing an interconnected universe that seamlessly integrates multiple gameplay styles into one cohesive progression system. This innovative environment empowers players to explore, compete, and grow together.",
-  "We deliver true ownership of valuable digital assets, backed by a guaranteed minimum buy-back on all Non-Fungible Artworks. Our authentic play-to-earn systems actively engage players, ensuring their contributions are recognised — empowering meaningful ownership of progress and rewards while driving creativity, collaboration, and intense competition.",
-  "Hyper Tek is committed to building a living digital universe where diverse games, economies, and communities thrive together on a single interconnected platform — a dynamic ecosystem where player actions have a significant impact on the world around them.",
+  "The Hyper Tek Project was founded by Don Bennett, who envisioned a gaming environment where multiple genres could coexist within a single progression system. Rather than forcing players to remain in one gameplay loop, Hyper Tek allows them to explore different activities while building their character, resources, and reputation across the entire ecosystem, with progression, materials, rewards, and achievements flowing seamlessly across all the games.",
+  "The project combines three major game environments: Hyper Racing, Hyper Quest, and Overlord of the Seven Realms. Each game represents a different style of gameplay, yet all operate within the same universe and share the same player economy. This design allows players to engage in the type of gameplay they enjoy most while still contributing to a larger ecosystem to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games.",
 ];
 
 const DEFAULT_PROJECT = [
@@ -41,9 +44,9 @@ const DEFAULT_ADVANTAGE = [
 ];
 
 const GAMES = [
-  { name: "Hyper Racing",                tag: "Speed · Dominance", desc: "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy.", img: "/racing3.png",      accent: "#f59e0b", glow: "rgba(245,158,11,0.35)" },
-  { name: "Hyper Quest",                 tag: "Explore · Trade",   desc: "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy.", img: "/quest1.png",       accent: "#22c55e", glow: "rgba(34,197,94,0.35)"  },
-  { name: "Overlord of the Seven Realms",tag: "Strategy · Power",  desc: "Command armies, forge alliances, and conquer realms. The most powerful Overlord controls the fate of the entire universe.", img: "/overlord_panel.png",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)" },
+  { name: "Hyper Racing",                tag: "Speed · Dominance", desc: "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy.", img: "/racing3.png",      accent: "#f59e0b", glow: "rgba(245,158,11,0.35)",  mode: "racing"   },
+  { name: "Hyper Quest",                 tag: "Explore · Trade",   desc: "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy.", img: "/quest1.png",       accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   mode: "quest"    },
+  { name: "Overlord of the Seven Realms",tag: "Strategy · Power",  desc: "Command armies, forge alliances, and conquer realms. The most powerful Overlord controls the fate of the entire universe.", img: "/overlord_panel.png",accent: "#a78bfa", glow: "rgba(167,139,250,0.35)", mode: "overlord" },
 ];
 
 // ── Shared button styles ──────────────────────────────────────────────────────
@@ -200,6 +203,7 @@ function FullStoryModal({ onClose }) {
 // ── Main ──────────────────────────────────────────────────────────────────────
 function About() {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const { sections: cms } = useSiteContentPage("about");
   const top   = cms.about_top   || {};
   const story = cms.about_story || {};
@@ -213,7 +217,6 @@ function About() {
   const projectParas = DEFAULT_PROJECT;
   const advantages = DEFAULT_ADVANTAGE;
 
-  const story1Image = story.story_image  ? getImageUrl(story.story_image)  : ourstory1;
   const story2Image = story.story2_image ? getImageUrl(story.story2_image) : ourstory2;
   const story3Image = story.story3_image ? getImageUrl(story.story3_image) : ourstory3;
 
@@ -252,20 +255,24 @@ function About() {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-3"
                 style={{ border: "1px solid rgba(56,189,248,0.45)", background: "rgba(56,189,248,0.18)", borderRadius: 99, backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                <span className="text-cyan-200 text-[11px] font-bold tracking-[0.25em] uppercase">Hyper Tek Universe</span>
+                <span className="text-cyan-200 text-[11px] font-bold tracking-[0.25em] uppercase">The HYPER TEK UNIVERSE</span>
               </div>
               <h1 className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] uppercase text-white leading-[1.1] whitespace-nowrap">
                 {heroHeading}
               </h1>
             </motion.div>
 
-            <motion.p variants={fadeUp(0.1)} className="text-white/55 text-sm md:text-[15px] leading-[1.85] max-w-[500px]">
-              {heroSubtitle}
-            </motion.p>
+            <motion.div variants={fadeUp(0.1)} className="flex flex-col gap-2.5 max-w-[660px]"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>
+              {(Array.isArray(heroSubtitle) ? heroSubtitle : [heroSubtitle]).map((para, i) => (
+                <p key={i} className="text-white/85 text-[10px] md:text-[11.5px] leading-[1.8] text-justify"
+                  style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.02em" }}>{para}</p>
+              ))}
+            </motion.div>
 
             {/* Stats */}
             <motion.div variants={fadeUp(0.2)} className="flex gap-3 mt-1 flex-wrap sm:flex-nowrap">
-              {[{ v: "3", l: "Game Worlds" }, { v: "NFA", l: "Guaranteed Buy-back" }, { v: "P2E", l: "Play-to-Earn" }].map((s) => (
+              {[{ v: "3", l: "Gaming Worlds" }, { v: "NFA", l: "Guaranteed Min Buy-back" }, { v: "P2E", l: "Play-to-Earn" }].map((s) => (
                 <div key={s.l} className="flex items-center gap-2 px-4 py-2 whitespace-nowrap"
                   style={{ background: "rgba(255,255,255,0.09)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 10 }}>
                   <span className="text-white font-[Goldman] font-bold text-sm">{s.v}</span>
@@ -327,27 +334,51 @@ function About() {
         data-edit-label="About — Our Story"
         className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10"
       >
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-          <motion.div className="w-full lg:w-[40%] flex-shrink-0" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <div className="relative rounded-2xl overflow-hidden">
-              <LazyImage src={story1Image} alt="Our Mission" fallback={ourstory1}
-                className="w-full h-[240px] md:h-[340px] xl:h-[400px]" imgClassName="object-cover" />
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
+          <motion.div className="w-full lg:w-[45%] flex-shrink-0 flex" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+            <div className="relative rounded-2xl overflow-hidden w-full">
+              <LazyImage src="/about2.png" alt="Our Mission" fallback={ourstory1}
+                className="w-full h-full min-h-[280px]" imgClassName="object-cover" />
               <CornerAccent />
               <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(56,189,248,0.18)" }} />
             </div>
-            <div className="mt-3 px-4 py-2.5 rounded-xl" style={{ background: "rgba(56,189,248,0.06)", border: "1px solid rgba(56,189,248,0.12)" }}>
-              <p style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(56,189,248,0.7)", letterSpacing: "0.28em" }}>PLAY · EARN · OWN</p>
-            </div>
           </motion.div>
 
-          <motion.div className="flex-1" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
+          <motion.div className="flex-1 flex flex-col gap-5" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
             <SectionLabel number="01" label="Our Mission" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight mb-6">
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
               Redefining What<br />Gaming Can Be
             </h2>
             <div className="space-y-4">
               {missionParas.map((p, i) => (
-                <p key={i} className="text-white/58 text-sm md:text-[15px] leading-[1.9]">{p}</p>
+                <p key={i} className="text-white/70 text-sm md:text-[14px] leading-[1.9] text-justify">{p}</p>
+              ))}
+            </div>
+            {/* Game badges */}
+            <div className="flex flex-wrap gap-3 mt-2">
+              {[
+                { label: "Hyper Racing",                accent: "#f59e0b", glow: "rgba(245,158,11,0.3)" },
+                { label: "Hyper Quest",                 accent: "#22c55e", glow: "rgba(34,197,94,0.3)"  },
+                { label: "Overlord of the Seven Realms",accent: "#a78bfa", glow: "rgba(167,139,250,0.3)"},
+              ].map((g) => (
+                <span key={g.label}
+                  className="px-4 py-2 flex items-center gap-2"
+                  style={{
+                    background: `linear-gradient(135deg, ${g.glow}, rgba(255,255,255,0.04))`,
+                    border: `1px solid ${g.accent}55`,
+                    borderLeft: `3px solid ${g.accent}`,
+                    borderRadius: 6,
+                    fontFamily: "Orbitron,sans-serif",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    color: g.accent,
+                    textTransform: "uppercase",
+                    boxShadow: `0 0 12px ${g.glow}`,
+                  }}>
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: g.accent, display: "inline-block", boxShadow: `0 0 6px ${g.accent}` }} />
+                  {g.label}
+                </span>
               ))}
             </div>
           </motion.div>
@@ -373,16 +404,17 @@ function About() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="the-universe">
             {GAMES.map((game, i) => (
               <motion.div
                 key={game.name}
-                className="group relative rounded-2xl overflow-hidden"
+                className="group relative rounded-2xl overflow-hidden cursor-pointer"
                 style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: i * 0.09 }}
                 viewport={{ once: true }}
+                onClick={() => navigate(`/game/${game.mode}`, { state: { backTo: "/about", section: "the-universe" } })}
               >
                 {/* Top accent line */}
                 <div className="h-0.5 w-full" style={{ background: game.accent }} />
@@ -451,15 +483,130 @@ function About() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          KEY ADVANTAGE
+          WEB3 MARKETPLACE + KEY ADVANTAGE (blended)
       ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full pt-14 pb-12 mt-4">
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 35%,rgba(99,102,241,0.4) 65%,transparent)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,12,50,0.20) 0%,transparent 100%)" }} />
+      <section className="relative w-full pt-20 pb-20 overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(0,8,40,0.35) 0%,rgba(6,6,16,0) 60%)" }} />
 
         <div className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20">
+
+          {/* ── Slide 1: Web3 heading + 3-column grid ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+            className="mb-16"
+          >
+            <SectionLabel number="04" label="Web3 Marketplace" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[38px] text-white leading-tight mb-4 max-w-[860px]">
+              HYPER TEK, A WEB3 GAMING SOLUTION<br className="hidden md:block" /> WITH A DRIVEN MARKETPLACE
+            </h2>
+            <p className="text-white/50 text-[14px] md:text-[15px] leading-relaxed max-w-[620px] mb-14"
+              style={{ fontFamily: "Orbitron, sans-serif" }}>
+              Bridging gaps between immersive gaming, a driven digital marketplace, rewarding players, and investors alike.
+            </p>
+
+            {/* 3-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+              {/* Left column */}
+              <motion.div
+                className="rounded-xl p-6 flex flex-col gap-5"
+                style={{ background: "rgba(34,197,94,0.04)", border: "1px solid rgba(34,197,94,0.18)", borderTop: "2px solid rgba(34,197,94,0.45)" }}
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.05 }} viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 4.5V9.5L7 13L1 9.5V4.5L7 1Z" stroke="#22c55e" strokeWidth="1.2" /><circle cx="7" cy="7" r="2" fill="#22c55e" /></svg>
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] leading-tight" style={{ fontFamily: "Orbitron, sans-serif", color: "#22c55e" }}>
+                    Tangible Rewards &amp;<br />Entrepreneurship
+                  </span>
+                </div>
+                <div className="h-px w-full" style={{ background: "rgba(34,197,94,0.15)" }} />
+                <ul className="flex flex-col gap-3">
+                  {[
+                    "True NFT/NFA ownership with guaranteed minimum buy-back",
+                    "Revenue sharing through player-controlled digital economy",
+                    "Real-world value with evolving in-game asset prices",
+                  ].map((b, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: "#22c55e" }} />
+                      <span className="text-white/65 text-[13px] leading-relaxed">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Center column */}
+              <motion.div
+                className="rounded-xl p-6 flex flex-col items-center gap-5 text-center"
+                style={{ background: "rgba(56,189,248,0.05)", border: "1px solid rgba(56,189,248,0.22)", borderTop: "2px solid rgba(56,189,248,0.55)" }}
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.12 }} viewport={{ once: true }}
+              >
+                {/* Hex icon with arrows */}
+                <div className="relative flex items-center justify-center my-2">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-xl"
+                    style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.35)", boxShadow: "0 0 28px rgba(56,189,248,0.25)" }}>
+                    <img src="/logo-white.png" alt="HyperTek" className="w-9 h-9 object-contain"
+                      style={{ filter: "brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(175deg) opacity(0.9)" }} />
+                  </div>
+                  {/* Arrow left */}
+                  <div className="absolute -left-6 top-1/2 -translate-y-1/2">
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M0 5H16M16 5L11 1M16 5L11 9" stroke="rgba(56,189,248,0.5)" strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                  {/* Arrow right */}
+                  <div className="absolute -right-6 top-1/2 -translate-y-1/2 rotate-180">
+                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M0 5H16M16 5L11 1M16 5L11 9" stroke="rgba(56,189,248,0.5)" strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                </div>
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}>
+                  Cash-Out Ecosystem
+                </span>
+                <div className="h-px w-full" style={{ background: "rgba(56,189,248,0.15)" }} />
+                <p className="text-white/65 text-[13px] leading-relaxed">
+                  Seamlessly convert in-game earnings to real-world currency — your digital labour has tangible, withdrawable value.
+                </p>
+              </motion.div>
+
+              {/* Right column */}
+              <motion.div
+                className="rounded-xl p-6 flex flex-col gap-5"
+                style={{ background: "rgba(167,139,250,0.04)", border: "1px solid rgba(167,139,250,0.18)", borderTop: "2px solid rgba(167,139,250,0.45)" }}
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.19 }} viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#a78bfa" strokeWidth="1.2" /><path d="M4 7h6M7 4v6" stroke="#a78bfa" strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] leading-tight" style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
+                    Infinite Gameplay<br />Across Interconnected Worlds
+                  </span>
+                </div>
+                <div className="h-px w-full" style={{ background: "rgba(167,139,250,0.15)" }} />
+                <ul className="flex flex-col gap-3">
+                  {[
+                    "Three unique game genres within one unified universe",
+                    "Shared progression, rewards, and achievements across all games",
+                    "A living ecosystem where every choice impacts the whole universe",
+                  ].map((b, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: "#a78bfa" }} />
+                      <span className="text-white/65 text-[13px] leading-relaxed">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+            </div>
+          </motion.div>
+
+          {/* Divider */}
+          <div className="w-full h-px mb-16" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.25) 40%,rgba(167,139,250,0.25) 60%,transparent)" }} />
+
+          {/* ── Slide 2: The Key Advantage ── */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
-            <SectionLabel number="04" label="Competitive Edge" />
+            <SectionLabel number="05" label="Competitive Edge" />
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white">The Key Advantage</h2>
           </motion.div>
 
@@ -501,12 +648,8 @@ function About() {
             {/* Image */}
             <motion.div className="w-full lg:w-[38%] flex-shrink-0"
               initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-              <div className="relative rounded-2xl overflow-hidden">
-                <LazyImage src={story3Image} alt="Key Advantage" fallback={ourstory3}
-                  className="w-full h-[260px] md:h-[460px]" imgClassName="object-cover" />
-                <div className="absolute inset-0 pointer-events-none rounded-2xl"
-                  style={{ border: "1px solid rgba(56,189,248,0.20)", boxShadow: "0 0 40px rgba(56,189,248,0.07)" }} />
-                <CornerAccent />
+              <div className="flex items-center justify-center py-8">
+                <img src="/logo-t-white.png" alt="HyperTek" className="w-full max-w-[340px] md:max-w-[420px] object-contain" />
               </div>
             </motion.div>
           </div>

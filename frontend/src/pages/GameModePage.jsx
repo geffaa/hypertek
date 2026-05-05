@@ -62,6 +62,8 @@ export default function GameModePage() {
   const navigate = useNavigate();
   const data = MODES[mode?.toLowerCase()] || MODES.racing;
 
+  const handleBack = () => navigate(-1);
+
   return (
     <div
       className="relative text-white min-h-screen"
@@ -97,7 +99,7 @@ export default function GameModePage() {
         {/* Back button */}
         <motion.button
           variants={fadeUp} custom={0} initial="hidden" animate="visible"
-          onClick={() => navigate(-1)}
+          onClick={handleBack}
           className="self-start flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-200 text-[13px] tracking-widest uppercase"
           style={{ fontFamily: "Orbitron, sans-serif" }}
         >

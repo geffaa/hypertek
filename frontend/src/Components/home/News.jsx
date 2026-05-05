@@ -43,7 +43,7 @@ export default function News() {
   const [active, setActive] = useState(null);
 
   return (
-    <section className="w-full pt-16 md:pt-24 pb-12 md:pb-20 relative">
+    <section id="gaming-section" className="w-full pt-16 md:pt-24 pb-12 md:pb-20 relative">
       <div className="w-full max-w-[1480px] mx-auto px-6 md:px-14 xl:px-18 2xl:px-20">
 
         {/* Section heading */}
@@ -75,7 +75,7 @@ export default function News() {
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
-                onClick={() => navigate(game.path)}
+                onClick={() => navigate(game.path, { state: { backTo: "/", section: "gaming-section" } })}
                 onMouseEnter={() => setActive(game.id)}
                 onMouseLeave={() => setActive(null)}
                 initial={{ opacity: 0, y: 40 }}
@@ -153,7 +153,7 @@ export default function News() {
                       {game.description}
                     </p>
                     <button
-                      onClick={(e) => { e.stopPropagation(); navigate(game.path); }}
+                      onClick={(e) => { e.stopPropagation(); navigate(game.path, { state: { backTo: "/", section: "gaming-section" } }); }}
                       className="px-7 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-200 hover:brightness-125"
                       style={{
                         background: "rgba(0,0,0,0.4)",
@@ -272,7 +272,7 @@ export default function News() {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-              onClick={() => navigate(game.path)}
+              onClick={() => navigate(game.path, { state: { backTo: "/", section: "gaming-section" } })}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
