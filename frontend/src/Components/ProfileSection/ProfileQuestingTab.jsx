@@ -17,6 +17,7 @@ const QUEST_TIERS = {
 
 const MAX_DAILY = 5;
 
+
 const STATUS_COLORS = {
   open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
   accepted:  { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
@@ -119,27 +120,19 @@ export default function ProfileQuestingTab({ wallet, token }) {
       setLoading(true);
       try {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-        // Fetch quests posted by + accepted by this wallet, and daily stats — all in parallel
         const [postedRes, acceptedRes, statsRes] = await Promise.all([
           fetch(`${BACKEND_BASE_URL}/api/v1/trade?type=quest&posterWallet=${wallet}&limit=50`, { headers }),
           fetch(`${BACKEND_BASE_URL}/api/v1/trade?type=quest&acceptedByWallet=${wallet}&limit=50`, { headers }),
           fetch(`${BACKEND_BASE_URL}/api/v1/trade/stats/daily?wallet=${wallet}`, { headers }),
         ]);
-
         const [postedData, acceptedData, statsData] = await Promise.all([
-          postedRes.json(),
-          acceptedRes.json(),
-          statsRes.json(),
+          postedRes.json(), acceptedRes.json(), statsRes.json(),
         ]);
-
         const posted = (postedData.trades || []).map((q) => ({ ...q, role: "posted" }));
         const accepted = (acceptedData.trades || [])
           .filter((q) => !posted.find((p) => p._id === q._id))
           .map((q) => ({ ...q, role: "accepted" }));
-
-        const real = [...posted, ...accepted];
-        setQuests(real);
+        setQuests([...posted, ...accepted]);
         if (!statsData.error) setDailyStats(statsData);
       } catch (err) {
         console.error("ProfileQuestingTab fetch error:", err);
@@ -148,7 +141,6 @@ export default function ProfileQuestingTab({ wallet, token }) {
         setLoading(false);
       }
     };
-
     fetchAll();
   }, [wallet, token]);
 
@@ -283,30 +275,20 @@ export default function ProfileQuestingTab({ wallet, token }) {
         </div>
       ) : (
         /* ── Table ── */
-        <div className="rounded-2xl overflow-hidden"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Fixed Header */}
-          <div className="overflow-x-auto">
+        <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+          {/* Sticky Header */}
+          <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
             <div
-              className="grid min-w-[760px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-              style={{
-                background: "rgba(4,8,28,0.98)",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
-                gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr",
-              }}
+              className="grid min-w-[760px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}
             >
-              <span>Quest No</span>
-              <span>Pickup Planet</span>
-              <span>Drop Off Planet</span>
-              <span>Item / Goods</span>
-              <span>Split</span>
-              <span>Time Active</span>
-              <span>Assigned To</span>
+              <span>Quest No</span><span>Pickup Planet</span><span>Drop Off Planet</span>
+              <span>Item / Goods</span><span>Split</span><span>Time Active</span><span>Assigned To</span>
             </div>
           </div>
 
-          {/* Scrollable Rows */}
-          <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
+          {/* Body — natural page scroll */}
+          <div className="overflow-x-auto">
           {filtered.map((q, i) => {
             const colors = STATUS_COLORS[q.status] || STATUS_COLORS.open;
             const acceptedName = q.acceptedByWallet ? shortAddr(q.acceptedByWallet) : "—";

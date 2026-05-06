@@ -369,7 +369,18 @@ const LOCATIONS = [
   { id:"asm",   name:"ZX-89-QW",     type:"Assembly Plant",      coords:"T06·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"85.5%", top:"47.5%", labelShift:{x:-20,y:0},                desc:"Modular spacecraft assembly. Produces 12 vessels per standard cycle." },
   { id:"tech",  name:"ZX-88-QW",     type:"Technology Hub",      coords:"T06·R09", atm:"ARTIFICIAL", hazard:"LOW",    left:"86.5%", top:"47.5%", labelBelow:true, labelShift:{x:-20,y:0}, desc:"Advanced tech R&D facility. Specializes in propulsion systems and AI cores." },
   { id:"gas",   name:"TNG-921",      type:"Gas Extraction",      coords:"T05·R05", atm:"TOXIC",      hazard:"HIGH",   left:"67.5%", top:"30%",                                          desc:"Atmospheric gas harvesting from a dense nebula pocket. High radiation environment." },
-  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"64.5%", top:"35%",                                          desc:"Cryo-comet resource extraction. Primary water source for eastern stations." }
+  { id:"ice",   name:"TZR-092",      type:"Ice Harvesting",      coords:"T03·R07", atm:"VACUUM",     hazard:"LOW",    left:"64.5%", top:"35%",                                          desc:"Cryo-comet resource extraction. Primary water source for eastern stations." },
+  // ── Unknown / unvisited planets — left/top = dot tip (upper-right end of line) ──
+  { id:"unk1",  unknown:true, left:"81.3%",   top:"32%",  lineLen:20 },
+  { id:"unk2",  unknown:true, left:"89.7%", top:"30%",  lineLen:20 },
+  { id:"unk3",  unknown:true, left:"90.5%",   top:"17%",  lineLen:20 },
+  { id:"unk4",  unknown:true, left:"57.8%", top:"63%",  lineLen:20 },
+  { id:"unk5",  unknown:true, left:"67.4%",   top:"63%",  lineLen:20 },
+  { id:"unk6",  unknown:true, left:"62%",   top:"72.5%",  lineLen:20 },
+  { id:"unk7",  unknown:true, left:"75.8%",   top:"73.2%",  lineLen:20 },
+  { id:"unk8",  unknown:true, left:"87%",   top:"60%",  lineLen:20 },
+  { id:"unk9",  unknown:true, left:"87.5%",   top:"75.5%",  lineLen:20 },
+  { id:"unk10", unknown:true, left:"58.1%",   top:"27.8%",  lineLen:20 },
 ];
 
 /* ── Planet image mapping — add entries here as assets arrive ── */
@@ -627,6 +638,66 @@ function VideoOverlay({ onClose }) {
   );
 }
 
+/* ── Unknown planet dropdown ──────────────────────────────── */
+function UnknownDropdown({ loc, onClose }) {
+  const l = parseFloat(loc.left);
+  const t = parseFloat(loc.top);
+  const toLeft = l > 60;
+  const hPos = toLeft
+    ? { right: `${Math.max(1, 100 - l + 2)}%` }
+    : { left:  `${Math.min(55, l + 2)}%` };
+  const toAbove = t > 55;
+  const vPos = toAbove
+    ? { bottom: `${Math.max(2, 100 - t + 2)}%` }
+    : { top:    `${Math.min(60, t + 2)}%` };
+
+  return (
+    <div style={{
+      position: "absolute",
+      ...hPos, ...vPos,
+      width: "min(300px, 44%)",
+      background: "rgba(2,6,22,0.97)",
+      border: "1px solid rgba(148,163,184,0.25)",
+      borderRadius: 8,
+      backdropFilter: "blur(20px)",
+      boxShadow: "0 8px 40px rgba(0,0,0,0.9), 0 0 20px rgba(148,163,184,0.04)",
+      zIndex: 85,
+      overflow: "hidden",
+      animation: "locDetailIn 0.2s ease both",
+    }}>
+      {/* Header */}
+      <div style={{
+        background: "rgba(148,163,184,0.06)",
+        borderBottom: "1px solid rgba(148,163,184,0.15)",
+        padding: "8px 12px",
+        display: "flex", justifyContent: "space-between", alignItems: "center",
+      }}>
+        <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, fontWeight:"bold", color:"rgba(148,163,184,0.7)", letterSpacing:"0.14em" }}>
+          ⚠ UNCHARTED PLANET
+        </div>
+        <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.35)", fontSize:16, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
+      </div>
+      {/* Body */}
+      <div style={{ padding:"11px 13px 13px", display:"flex", flexDirection:"column", gap:9 }}>
+        <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, color:"rgba(255,255,255,0.6)", lineHeight:1.7, letterSpacing:"0.03em" }}>
+          Planet details are unavailable as player has not visited this planet yet.
+        </div>
+        <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, color:"rgba(255,255,255,0.6)", lineHeight:1.7, letterSpacing:"0.03em" }}>
+          Details and atmosphere unknown.
+        </div>
+        <div style={{
+          borderTop: "1px solid rgba(148,163,184,0.15)",
+          paddingTop: 9,
+          fontFamily:"Orbitron,sans-serif", fontSize:9.5,
+          color:"rgba(250,204,21,0.75)", lineHeight:1.7, letterSpacing:"0.03em",
+        }}>
+          Naming rights of the planet is given to the first to visit it and explore the planet's surface.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Star Map overlay ─────────────────────────────────────── */
 function StarMapOverlay({ onClose }) {
   const [hovered, setHovered] = useState(null);
@@ -648,6 +719,20 @@ function StarMapOverlay({ onClose }) {
   const closePanel  = ()    => { setPinned(null); setHovered(null); };
 
   const active = pinned ?? hovered;
+
+  // Unknown planet state
+  const [unkHovered, setUnkHovered] = useState(null);
+  const [unkPinned,  setUnkPinned]  = useState(null);
+  const unkTimer = useRef(null);
+  const openUnk    = (loc) => { clearTimeout(unkTimer.current); setUnkHovered(loc); };
+  const closeUnk   = ()    => { if (unkPinned) return; unkTimer.current = setTimeout(() => setUnkHovered(null), 160); };
+  const cancelUnk  = ()    => { clearTimeout(unkTimer.current); };
+  const toggleUnk  = (loc) => {
+    if (unkPinned?.id === loc.id) { setUnkPinned(null); }
+    else { clearTimeout(unkTimer.current); setUnkHovered(loc); setUnkPinned(loc); }
+  };
+  const closeUnkPanel = () => { setUnkPinned(null); setUnkHovered(null); };
+  const activeUnk = unkPinned ?? unkHovered;
 
   return createPortal(
     <div style={{
@@ -689,7 +774,7 @@ function StarMapOverlay({ onClose }) {
       >
         {/* Map image — fills popup exactly (same 16:9 ratio) */}
         <img
-          src="/UI Globe Map_Fixed2.png"
+          src="/UI Globe Map_Fixed3.png"
           alt="star map"
           style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"fill", pointerEvents:"none" }}
         />
@@ -709,9 +794,51 @@ function StarMapOverlay({ onClose }) {
                 onMouseEnter={() => openPanel(loc)}
                 onMouseLeave={startClose}
                 onClick={() => togglePin(loc)}
-                title={`${loc.name} — ${loc.type}`}
                 style={{
                   position:"absolute",
+                  transform:"translate(-50%,-50%)",
+                  width: isActive ? 14 : 9, height: isActive ? 14 : 9,
+                  borderRadius:"50%",
+                  background: isPinned ? "#facc15" : isActive ? "#38bdf8" : "rgba(56,189,248,0.65)",
+                  border:`1.5px solid ${isPinned ? "#fde68a" : isActive ? "#7dd3fc" : "rgba(56,189,248,0.9)"}`,
+                  boxShadow: isPinned ? "0 0 16px 4px rgba(250,204,21,0.9)" : isActive ? "0 0 16px 4px rgba(56,189,248,0.9)" : undefined,
+                  animation: isActive ? "none" : "dotPulse 2.4s ease-in-out infinite",
+                  cursor:"pointer", padding:0,
+                }}
+              />
+            </div>
+          );
+        })}
+
+        {/* Unknown planet — vertical line, dot at top */}
+        {LOCATIONS.map(loc => {
+          if (!loc.unknown) return null;
+          const isActive = activeUnk?.id === loc.id;
+          const isPinned = unkPinned?.id === loc.id;
+          const len = loc.lineLen ?? 70;
+          return (
+            <div key={loc.id} style={{ position:"absolute", left:loc.left, top:loc.top, width:0, height:0, zIndex:80 }}>
+              {/* Vertical line going straight up from base */}
+              <div style={{
+                position:"absolute",
+                left:0, top: -len,
+                width: 1.5,
+                height: len,
+                background: isPinned ? "rgba(250,204,21,0.8)" : "rgba(56,189,248,0.55)",
+                transform: "translateX(-50%)",
+                pointerEvents: "none",
+                transition: "background 0.15s",
+              }} />
+              {/* Dot at the top of the line */}
+              <button
+                className="map-dot"
+                onMouseEnter={() => openUnk(loc)}
+                onMouseLeave={closeUnk}
+                onClick={() => toggleUnk(loc)}
+                style={{
+                  position:"absolute",
+                  left: 0,
+                  top: -len,
                   transform:"translate(-50%,-50%)",
                   width: isActive ? 14 : 9, height: isActive ? 14 : 9,
                   borderRadius:"50%",
@@ -730,6 +857,13 @@ function StarMapOverlay({ onClose }) {
         {active && (
           <div onMouseEnter={cancelClose} onMouseLeave={startClose}>
             <PlanetDetail loc={active} onClose={closePanel} />
+          </div>
+        )}
+
+        {/* Unknown planet dropdown */}
+        {activeUnk && (
+          <div onMouseEnter={cancelUnk} onMouseLeave={closeUnk}>
+            <UnknownDropdown loc={activeUnk} onClose={closeUnkPanel} />
           </div>
         )}
 

@@ -13,26 +13,24 @@ const shortId = (id) => (id ? `#${String(id).slice(-6).toUpperCase()}` : "—");
 const shortAddr = (addr) =>
   addr && addr.length > 10 ? `${addr.slice(0, 6)}…${addr.slice(-4)}` : addr || "—";
 
+
 export default function ProfileBountyTab({ wallet, token }) {
   const [bounties, setBounties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    if (!wallet) { return; }
+    if (!wallet) return;
 
     const fetchBounties = async () => {
       setLoading(true);
       try {
-        // Bounties posted by this wallet
         const postedRes = await fetch(
           `${BACKEND_BASE_URL}/api/v1/bounty?posterWallet=${wallet}&limit=50`,
           { headers: token ? { Authorization: `Bearer ${token}` } : {} }
         );
         const postedData = await postedRes.json();
         const posted = (postedData.bounties || []).map((b) => ({ ...b, role: "posted" }));
-
-        // Bounties completed by this wallet (claimed)
         const completedRes = await fetch(
           `${BACKEND_BASE_URL}/api/v1/bounty?claimedBy=${wallet}&limit=50`,
           { headers: token ? { Authorization: `Bearer ${token}` } : {} }
@@ -41,9 +39,7 @@ export default function ProfileBountyTab({ wallet, token }) {
         const completed = (completedData.bounties || [])
           .filter((b) => !posted.find((p) => p._id === b._id))
           .map((b) => ({ ...b, role: "completed" }));
-
-        const real = [...posted, ...completed];
-        setBounties(real);
+        setBounties([...posted, ...completed]);
       } catch (err) {
         console.error("ProfileBountyTab fetch error:", err);
         setBounties([]);
@@ -51,7 +47,6 @@ export default function ProfileBountyTab({ wallet, token }) {
         setLoading(false);
       }
     };
-
     fetchBounties();
   }, [wallet, token]);
 
@@ -126,28 +121,17 @@ export default function ProfileBountyTab({ wallet, token }) {
         </div>
       ) : (
         /* ── Table ── */
-        <div className="rounded-2xl overflow-hidden"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Fixed Header */}
-          <div className="overflow-x-auto">
-            <div
-              className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-              style={{
-                background: "rgba(4,8,28,0.98)",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
-                gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr",
-              }}
-            >
-              <span>Bounty No</span>
-              <span>Hit On</span>
-              <span>Rewards</span>
-              <span>Completed By</span>
-              <span>Status</span>
+        <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+          {/* Sticky Header */}
+          <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
+            <div className="grid min-w-[560px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr" }}>
+              <span>Bounty No</span><span>Hit On</span><span>Rewards</span><span>Completed By</span><span>Status</span>
             </div>
           </div>
 
-          {/* Scrollable Rows */}
-          <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
+          {/* Body — natural page scroll */}
+          <div className="overflow-x-auto">
           {filtered.map((b, i) => {
             const colors = STATUS_COLORS[b.status] || STATUS_COLORS.open;
             const completedBy =

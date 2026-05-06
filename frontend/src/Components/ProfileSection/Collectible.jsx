@@ -30,6 +30,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 import UserProfileHeader from "./UserProfileHeader";
 
+
 function MarketPlace() {
   const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -70,7 +71,6 @@ function MarketPlace() {
   const [searchParams, setSearchParams] = useSearchParams();
   const gridRef    = useRef(null);
   const contentRef = useRef(null);
-  const headerRef  = useRef(null);
 
   // Tab ↔ URL slug mapping
   const TAB_SLUG = {
@@ -118,19 +118,6 @@ function MarketPlace() {
   const [sessionAuctionIds] = useState(new Set());
   const [sessionTradeNames] = useState(new Set());
 
-  const scrollToContent = (delay = 300) =>
-    setTimeout(() => {
-      if (!headerRef.current) return;
-      const top = headerRef.current.getBoundingClientRect().top + window.scrollY - 76;
-      window.scrollTo({ top, behavior: "smooth" });
-    }, delay);
-
-  // scroll back from BuyNfa
-  useEffect(() => { if (location.state?.scrollToGrid) scrollToContent(400); }, [location.state]);
-  // scroll on tab switch
-  useEffect(() => { scrollToContent(200); }, [activeTab]);
-  // scroll on category filter change
-  useEffect(() => { scrollToContent(150); }, [activeCategory]);
 
   useEffect(() => {
     setActiveCategory(location.state?.category || "");
@@ -370,12 +357,12 @@ function MarketPlace() {
   return (
     <>
       <div className="bg-transparent">
-        <div className="mx-auto mt-[68px] max-w-[2000px]">
+        <div className="mx-auto mt-[68px] max-w-[2000px] pb-16">
           {/* ================= HERO ================= */}
           <ProfileBanner />
 
           {/* ================= PROFILE ================= */}
-          <div ref={headerRef}>
+          <div>
             <UserProfileHeader
               userData={userData}
               connectedWallet={connectedWallet}
@@ -431,14 +418,18 @@ function MarketPlace() {
                 </div>
               </div>
               {/* Tabs */}
-              <div className="pb-2">
+              <div className="pb-2 mt-3">
                 <NavLinks
                   activeTab={activeTab}
                   onTabChange={(tab) => {
                     setActiveTab(tab);
                     setSearchParams({ tab: TAB_SLUG[tab] });
                     if (tab !== "My Collectibles") setActiveCategory("");
-                    setTimeout(() => { window.scrollTo({ top: 420, behavior: "smooth" }); }, 70);
+                    requestAnimationFrame(() => {
+                      if (!contentRef.current) return;
+                      const top = contentRef.current.getBoundingClientRect().top + window.scrollY - 160;
+                      window.scrollTo({ top, behavior: "instant" });
+                    });
                   }}
                   activeCategory={activeCategory}
                   onCategoryChange={handleSelectCategory}
@@ -696,47 +687,45 @@ function MarketPlace() {
               );
             })()}
 
-            {/* ---- TRADE VIEW (user's posted trades) ---- */}
-            {activeTab === "Trade" && (
-              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-              <div className="flex-1 min-w-0">
-                {!connectedWallet ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">Connect your wallet to view your trade listings</p>
-                  </div>
-                ) : offersLoading ? (
-                  <div className="text-white/50 text-sm py-16 text-center">Loading your trade listings...</div>
-                ) : offers.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">No active trade listings</p>
-                    <p className="text-xs text-white/20">Post a trade on the Marketplace → Trades tab to see it here</p>
-                  </div>
-                ) : (
-                  (() => {
-                    const totalPages = Math.ceil(offers.length / PAGE_SIZE);
-                    const paged = offers.slice((tradePage - 1) * PAGE_SIZE, tradePage * PAGE_SIZE);
-                    return (
-                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto" }}>
-                        <div>
-                          <div className="grid min-w-[560px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
+            {/* ---- TRADE VIEW ---- */}
+            {activeTab === "Trade" && (() => {
+              const tradeData  = offers;
+              const isLoading  = offersLoading;
+              const statusColors = {
+                open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
+                accepted:  { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
+                completed: { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
+                cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+              };
+              const totalPages = Math.ceil(tradeData.length / PAGE_SIZE);
+              const paged = tradeData.slice((tradePage - 1) * PAGE_SIZE, tradePage * PAGE_SIZE);
+              return (
+                <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+                  <div className="flex-1 min-w-0">
+                    {!connectedWallet ? (
+                      <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                        <p className="text-sm">Connect your wallet to view your trade listings</p>
+                      </div>
+                    ) : isLoading ? (
+                      <div className="text-white/50 text-sm py-16 text-center">Loading your trade listings...</div>
+                    ) : tradeData.length === 0 ? (
+                      <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                        <p className="text-sm">No active trade listings</p>
+                      </div>
+                    ) : (
+                      <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+                        {/* Sticky table header */}
+                        <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
+                          <div className="grid min-w-[560px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
                             <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span>
                           </div>
+                        </div>
+                        {/* Body — natural page scroll */}
+                        <div className="overflow-x-auto">
                           {paged.map((trade, i) => {
-                            const statusColors = {
-                              open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                              accepted:  { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                              completed: { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                              cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
-                            };
                             const c = statusColors[trade.status] || statusColors.open;
-                            const resolvedCat = trade.category || (() => {
-                              for (const col of marketData) {
-                                const sub = (col.subCollections || []).find((s) => s.name?.toLowerCase() === trade.offering?.toLowerCase());
-                                if (sub) return col.category || sub.category || "";
-                              }
-                              return "";
-                            })() || "general";
+                            const resolvedCat = trade.category || "general";
                             return (
                               <div key={trade._id} className="grid min-w-[560px] px-4 py-3 items-center"
                                 style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
@@ -752,69 +741,64 @@ function MarketPlace() {
                         </div>
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
-                            <span className="text-white/30 text-xs">{(tradePage - 1) * PAGE_SIZE + 1}–{Math.min(tradePage * PAGE_SIZE, offers.length)} of {offers.length}</span>
+                            <span className="text-white/30 text-xs">{(tradePage - 1) * PAGE_SIZE + 1}–{Math.min(tradePage * PAGE_SIZE, tradeData.length)} of {tradeData.length}</span>
                             <div className="flex gap-1">
                               <button onClick={() => setTradePage(p => Math.max(1, p - 1))} disabled={tradePage === 1}
-                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>
+                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>
                               {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
                                 const p = totalPages <= 7 ? i + 1 : tradePage <= 4 ? i + 1 : tradePage >= totalPages - 3 ? totalPages - 6 + i : tradePage - 3 + i;
-                                return (
-                                  <button key={p} onClick={() => setTradePage(p)}
-                                    className="px-2.5 py-1 rounded text-xs font-medium transition-colors"
-                                    style={{ background: tradePage === p ? "#002AA8" : "rgba(255,255,255,0.06)", border: `1px solid ${tradePage === p ? "rgba(0,80,255,0.4)" : "rgba(255,255,255,0.1)"}`, color: tradePage === p ? "#fff" : "rgba(255,255,255,0.45)" }}>{p}</button>
-                                );
+                                return <button key={p} onClick={() => setTradePage(p)} className="px-2.5 py-1 rounded text-xs font-medium"
+                                  style={{ background: tradePage === p ? "#002AA8" : "rgba(255,255,255,0.06)", border: `1px solid ${tradePage === p ? "rgba(0,80,255,0.4)" : "rgba(255,255,255,0.1)"}`, color: tradePage === p ? "#fff" : "rgba(255,255,255,0.45)" }}>{p}</button>;
                               })}
                               <button onClick={() => setTradePage(p => Math.min(totalPages, p + 1))} disabled={tradePage === totalPages}
-                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>→</button>
+                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>→</button>
                             </div>
                           </div>
                         )}
                       </div>
-                    );
-                  })()
-                )}
-              </div>
-              </div>
-            )}
+                    )}
+                  </div>
+                  <div className="hidden xl:block"><StickyAvatarSidebar /></div>
+                </div>
+              );
+            })()}
 
-            {/* ---- AUCTION VIEW (user's posted auctions) ---- */}
-            {activeTab === "Auction" && (
-              <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
-              <div className="flex-1 min-w-0">
-                {!connectedWallet ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">Connect your wallet to view your auction listings</p>
-                  </div>
-                ) : auctionsLoading ? (
-                  <div className="text-white/50 text-sm py-16 text-center">Loading your auctions...</div>
-                ) : myAuctions.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                    <p className="text-sm">No auction listings</p>
-                    <p className="text-xs text-white/20">Start an auction from the Marketplace → Auctions tab to see it here</p>
-                  </div>
-                ) : (
-                  (() => {
-                    const totalPages = Math.ceil(myAuctions.length / PAGE_SIZE);
-                    const paged = myAuctions.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
-                    const statusColors = {
-                      active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                      ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                      sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                      cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
-                    };
-                    return (
-                      <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-                        {/* Fixed header */}
-                        <div className="overflow-x-auto">
-                          <div className="grid min-w-[620px] px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+            {/* ---- AUCTION VIEW ---- */}
+            {activeTab === "Auction" && (() => {
+              const auctionData = myAuctions;
+              const isLoading   = auctionsLoading;
+              const statusColors = {
+                active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
+                ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
+                sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
+                cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+              };
+              const totalPages = Math.ceil(auctionData.length / PAGE_SIZE);
+              const paged = auctionData.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
+              return (
+                <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
+                  <div className="flex-1 min-w-0">
+                    {!connectedWallet ? (
+                      <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                        <p className="text-sm">Connect your wallet to view your auction listings</p>
+                      </div>
+                    ) : isLoading ? (
+                      <div className="text-white/50 text-sm py-16 text-center">Loading your auctions...</div>
+                    ) : auctionData.length === 0 ? (
+                      <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
+                        <p className="text-sm">No auction listings</p>
+                      </div>
+                    ) : (
+                      <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
+                        {/* Sticky table header */}
+                        <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
+                          <div className="grid min-w-[620px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
                             <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
                           </div>
                         </div>
-                        {/* Scrollable body */}
-                        <div className="profile-custom-scroll overflow-x-auto" style={{ overflowY: "auto", maxHeight: 380 }}>
+                        {/* Body — natural page scroll */}
+                        <div className="overflow-x-auto">
                           {paged.map((auction, i) => {
                             const c = statusColors[auction.status] || statusColors.ended;
                             const endDate = auction.endTime ? new Date(auction.endTime) : null;
@@ -836,36 +820,29 @@ function MarketPlace() {
                             );
                           })}
                         </div>
-                        {/* Pagination — outside scroll area */}
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
-                            <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, myAuctions.length)} of {myAuctions.length}</span>
+                            <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, auctionData.length)} of {auctionData.length}</span>
                             <div className="flex gap-1">
                               <button onClick={() => setAuctionPage(p => Math.max(1, p - 1))} disabled={auctionPage === 1}
-                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>
+                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>
                               {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
                                 const p = totalPages <= 7 ? i + 1 : auctionPage <= 4 ? i + 1 : auctionPage >= totalPages - 3 ? totalPages - 6 + i : auctionPage - 3 + i;
-                                return (
-                                  <button key={p} onClick={() => setAuctionPage(p)}
-                                    className="px-2.5 py-1 rounded text-xs font-medium transition-colors"
-                                    style={{ background: auctionPage === p ? "#002AA8" : "rgba(255,255,255,0.06)", border: `1px solid ${auctionPage === p ? "rgba(0,80,255,0.4)" : "rgba(255,255,255,0.1)"}`, color: auctionPage === p ? "#fff" : "rgba(255,255,255,0.45)" }}>{p}</button>
-                                );
+                                return <button key={p} onClick={() => setAuctionPage(p)} className="px-2.5 py-1 rounded text-xs font-medium"
+                                  style={{ background: auctionPage === p ? "#002AA8" : "rgba(255,255,255,0.06)", border: `1px solid ${auctionPage === p ? "rgba(0,80,255,0.4)" : "rgba(255,255,255,0.1)"}`, color: auctionPage === p ? "#fff" : "rgba(255,255,255,0.45)" }}>{p}</button>;
                               })}
                               <button onClick={() => setAuctionPage(p => Math.min(totalPages, p + 1))} disabled={auctionPage === totalPages}
-                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"
-                                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>→</button>
+                                className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>→</button>
                             </div>
                           </div>
                         )}
                       </div>
-                    );
-                  })()
-                )}
-              </div>
-              <div className="hidden xl:block"><StickyAvatarSidebar /></div>
-              </div>
-            )}
+                    )}
+                  </div>
+                  <div className="hidden xl:block"><StickyAvatarSidebar /></div>
+                </div>
+              );
+            })()}
 
             {/* ---- QUESTING VIEW ---- */}
             {activeTab === "Questing" && (
