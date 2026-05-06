@@ -30,6 +30,7 @@ const MIN_WIDTH  = "860px";
 const capWords = (str) =>
   str ? str.replace(/\b\w/g, (c) => c.toUpperCase()) : "";
 
+
 // ── Per-cell value renderer ───────────────────────────────────────────────────
 function PriceCell({ listing }) {
   if (!listing) return <span className="text-white/15 text-[11px]">—</span>;
@@ -105,7 +106,7 @@ function PriceCell({ listing }) {
 function GroupHeaderRow() {
   return (
     <div
-      className="grid w-full px-4 pt-2 pb-0 text-[9px] font-bold uppercase tracking-widest"
+      className="grid w-full px-4 pt-4 pb-0 text-[9px] font-bold uppercase tracking-widest"
       style={{ gridTemplateColumns: GRID_COLS, minWidth: MIN_WIDTH }}
     >
       {/* Item spacer */}
@@ -294,127 +295,116 @@ export default function ProfileListingsTab({ token }) {
         </div>
       </div>}
 
-      {/* ── Not logged in ── */}
-      {!token ? (
-        <div className="flex flex-col items-center justify-center py-16 rounded-2xl"
-          style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
-          <LayoutList className="w-8 h-8 text-white/15 mb-3" />
-          <p className="text-white/30 text-sm font-medium">Login required</p>
-          <p className="text-white/15 text-xs mt-1">Please log in to view your listings</p>
-        </div>
-      ) : loading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-12 rounded-xl animate-pulse"
-              style={{ background: "rgba(255,255,255,0.04)" }} />
-          ))}
-        </div>
-      ) : totalItems === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 rounded-2xl"
-          style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
-          <LayoutList className="w-8 h-8 text-white/15 mb-3" />
-          <p className="text-white/30 text-sm font-medium">No listings yet</p>
-          <p className="text-white/15 text-xs mt-1">Items you list on the marketplace will appear here</p>
-        </div>
-      ) : (
-        /* ── Table ── */
-        <div className="w-full rounded-2xl overflow-x-auto"
-          style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+      {/* ── Table (always rendered) ── */}
+      <div className="w-full rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflow: "clip" }}>
 
-          {/* Sticky group bracket headers */}
-          <div style={{
-            background: "rgba(0,20,80,0.95)",
-            backdropFilter: "blur(8px)",
-          }}>
-            <GroupHeaderRow />
-
-            {/* Column sub-headers */}
-            <div
-              className="grid w-full px-4 py-2 text-[10px] font-semibold uppercase tracking-widest"
-              style={{
-                gridTemplateColumns: GRID_COLS,
-                minWidth: MIN_WIDTH,
-                borderTop: "1px solid rgba(255,255,255,0.07)",
-              }}
-            >
-              <span className="text-white/50">Item</span>
-              {ACTIVITY_COLS.map((col, i) => {
-                const prevGroup = i > 0 ? ACTIVITY_COLS[i - 1].group : null;
-                const isGroupStart = prevGroup !== col.group;
-                return (
-                  <span
-                    key={col.key}
-                    className="text-center"
-                    style={{
-                      color: GROUP_COLOR[col.group],
-                      borderLeft: isGroupStart && i > 0
-                        ? "1px solid rgba(255,255,255,0.08)"
-                        : undefined,
-                    }}
-                  >
-                    {col.label}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Category groups */}
-          {categoriesToShow.map((cat) => {
-            const listings  = grouped[cat] || [];
-            const itemMap   = buildItemMap(listings);
-            const itemNames = Object.keys(itemMap);
-
-            return (
-              <div key={cat}>
-                <div
-                  className="px-4 py-2 text-[11px] font-bold uppercase tracking-wider"
+        {/* Sticky header — group bracket + column sub-headers */}
+        <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(0,20,80,0.95)", backdropFilter: "blur(8px)" }}>
+          <GroupHeaderRow />
+          <div
+            className="grid px-4 py-4 text-[10px] font-semibold uppercase tracking-widest"
+            style={{
+              gridTemplateColumns: GRID_COLS,
+              minWidth: MIN_WIDTH,
+              borderTop: "1px solid rgba(255,255,255,0.07)",
+            }}
+          >
+            <span className="text-white/50">Item</span>
+            {ACTIVITY_COLS.map((col, i) => {
+              const prevGroup = i > 0 ? ACTIVITY_COLS[i - 1].group : null;
+              const isGroupStart = prevGroup !== col.group;
+              return (
+                <span
+                  key={col.key}
+                  className="text-center"
                   style={{
-                    background:   "rgba(0,42,168,0.08)",
-                    borderTop:    "1px solid rgba(255,255,255,0.05)",
-                    borderBottom: "1px solid rgba(255,255,255,0.04)",
-                    color:        "rgba(255,255,255,0.45)",
+                    color: GROUP_COLOR[col.group],
+                    borderLeft: isGroupStart && i > 0 ? "1px solid rgba(255,255,255,0.08)" : undefined,
                   }}
                 >
-                  {capWords(cat)}
-                </div>
-
-                {itemNames.length === 0 && (
-                  <div className="px-4 py-3 text-white/20 text-xs italic"
-                    style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-                    No listings
-                  </div>
-                )}
-
-                {itemNames.map((itemName, i) => {
-                  const typesMap = itemMap[itemName];
-                  return (
-                    <div
-                      key={itemName}
-                      className="grid w-full px-4 py-2.5 items-center"
-                      style={{
-                        background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
-                        borderTop:  "1px solid rgba(255,255,255,0.04)",
-                        gridTemplateColumns: GRID_COLS,
-                        minWidth: MIN_WIDTH,
-                      }}
-                    >
-                      <span className="text-white/80 text-xs font-medium truncate pr-2">
-                        {itemName}
-                      </span>
-                      {ACTIVITY_COLS.map((col) => (
-                        <div key={col.key} className="flex justify-center">
-                          <PriceCell listing={typesMap[col.key] || null} />
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+                  {col.label}
+                </span>
+              );
+            })}
+          </div>
         </div>
-      )}
+
+        {/* Body — fixed min-height = 10 rows (~44px each) */}
+        {!token ? (
+          <div className="flex flex-col items-center justify-center" style={{ minHeight: 440 }}>
+            <LayoutList className="w-8 h-8 text-white/15 mb-3" />
+            <p className="text-white/30 text-sm font-medium">Login required</p>
+            <p className="text-white/15 text-xs mt-1">Please log in to view your listings</p>
+          </div>
+        ) : loading ? (
+          <div className="overflow-x-auto">
+            <div className="flex flex-col gap-2 p-4" style={{ minHeight: 440, minWidth: MIN_WIDTH }}>
+              {Array.from({ length: 10 }).map((_, i) => (
+                <div key={i} className="h-10 rounded-xl animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.04)" }} />
+              ))}
+            </div>
+          </div>
+        ) : totalItems === 0 ? (
+          <div className="flex flex-col items-center justify-center" style={{ minHeight: 440 }}>
+            <LayoutList className="w-8 h-8 text-white/15 mb-3" />
+            <p className="text-white/30 text-sm font-medium">No listings yet</p>
+            <p className="text-white/15 text-xs mt-1">Items you list on the marketplace will appear here</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto" style={{ minHeight: 440 }}>
+            {categoriesToShow.map((cat) => {
+              const listings = grouped[cat] || [];
+              const itemMap  = buildItemMap(listings);
+              const itemNames = Object.keys(itemMap);
+              return (
+                <div key={cat}>
+                  <div
+                    className="px-4 py-2 text-[11px] font-bold uppercase tracking-wider"
+                    style={{
+                      minWidth: MIN_WIDTH,
+                      background:   "rgba(0,42,168,0.08)",
+                      borderTop:    "1px solid rgba(255,255,255,0.05)",
+                      borderBottom: "1px solid rgba(255,255,255,0.04)",
+                      color:        "rgba(255,255,255,0.45)",
+                    }}
+                  >
+                    {capWords(cat)}
+                  </div>
+                  {itemNames.length === 0 && (
+                    <div className="px-4 py-3 text-white/20 text-xs italic"
+                      style={{ minWidth: MIN_WIDTH, borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                      No listings
+                    </div>
+                  )}
+                  {itemNames.map((itemName, i) => {
+                    const typesMap = itemMap[itemName];
+                    return (
+                      <div
+                        key={itemName}
+                        className="grid px-4 py-2.5 items-center"
+                        style={{
+                          background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                          borderTop:  "1px solid rgba(255,255,255,0.04)",
+                          gridTemplateColumns: GRID_COLS,
+                          minWidth: MIN_WIDTH,
+                        }}
+                      >
+                        <span className="text-white/80 text-xs font-medium truncate pr-2">{itemName}</span>
+                        {ACTIVITY_COLS.map((col) => (
+                          <div key={col.key} className="flex justify-center">
+                            <PriceCell listing={typesMap[col.key] || null} />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

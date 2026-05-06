@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight, X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
 import { getImageUrl } from "../Config";
 import LazyImage from "../Components/Common/LazyImage";
@@ -31,10 +30,7 @@ const DEFAULT_MISSION = [
   "The project combines three major game environments: Hyper Racing, Hyper Quest, and Overlord of the Seven Realms. Each game represents a different style of gameplay, yet all operate within the same universe and share the same player economy. This design allows players to engage in the type of gameplay they enjoy most while still contributing to a larger ecosystem to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games.",
 ];
 
-const DEFAULT_PROJECT = [
-  "The Hyper Tek Project, founded by Don Bennett, establishes a groundbreaking gaming environment where multiple genres thrive within one cohesive progression system. Players are not limited to a single gameplay loop; instead, they are empowered to explore a variety of activities while actively building their character, resources, and reputation throughout the entire ecosystem.",
-  "Progression, materials, rewards, and achievements flow seamlessly across all games, ensuring an unmatched gaming experience. This project confidently presents three major game environments — each delivering a distinct style of gameplay, all firmly set within the same universe and operating under a cohesive player economy.",
-];
+
 
 const DEFAULT_ADVANTAGE = [
   { icon: iconConnect, title: "Interconnected Ecosystem",   body: "Strategy, racing, and quest-based adventures linked through a shared progression system — move freely between games without losing progress." },
@@ -94,115 +90,10 @@ function CornerAccent({ color = "rgba(56,189,248,0.45)" }) {
   );
 }
 
-// ── Full Story Modal ──────────────────────────────────────────────────────────
-function FullStoryModal({ onClose }) {
-  return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[999] flex items-center justify-center px-4 pt-20 pb-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-      >
-        <div className="absolute inset-0" style={{ background: "rgba(4,6,20,0.88)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }} />
-        <motion.div
-          className="modal-custom-scroll relative w-full max-w-[760px] max-h-full overflow-y-auto rounded-2xl"
-          style={{ background: "rgba(8,12,36,0.98)", border: "1px solid rgba(56,189,248,0.18)", boxShadow: "0 0 80px rgba(56,189,248,0.12)" }}
-          initial={{ opacity: 0, scale: 0.93, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.93, y: 24 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Header */}
-          <div className="sticky top-0 z-10 flex items-center justify-between px-7 py-5"
-            style={{ background: "rgba(8,12,36,0.98)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-            <div className="flex items-center gap-3">
-              <div className="w-1 h-5 rounded-full" style={{ background: "linear-gradient(to bottom,rgba(56,189,248,0.9),rgba(99,102,241,0.5))" }} />
-              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 11, color: "rgba(56,189,248,0.85)", letterSpacing: "0.28em" }}>FULL STORY</span>
-            </div>
-            <button onClick={onClose} className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors hover:bg-white/10"
-              style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
-              <X className="w-4 h-4 text-white/50" />
-            </button>
-          </div>
 
-          <div className="px-7 py-6 space-y-8">
-
-            {/* Our Mission */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.5)", letterSpacing: "0.3em" }}>01</span>
-                <div className="w-5 h-px" style={{ background: "rgba(56,189,248,0.3)" }} />
-                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">Our Mission</span>
-              </div>
-              <h3 className="font-[Goldman] font-bold text-lg text-white mb-4">Redefining What Gaming Can Be</h3>
-              <div className="space-y-3">
-                {DEFAULT_MISSION.map((p, i) => (
-                  <p key={i} className="text-white/55 text-sm leading-[1.9]">{p}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
-
-            {/* The Project */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(167,139,250,0.5)", letterSpacing: "0.3em" }}>02</span>
-                <div className="w-5 h-px" style={{ background: "rgba(167,139,250,0.3)" }} />
-                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">The Project</span>
-              </div>
-              <h3 className="font-[Goldman] font-bold text-lg text-white mb-4">One Universe, Infinite Possibilities</h3>
-              <div className="space-y-3">
-                {DEFAULT_PROJECT.map((p, i) => (
-                  <p key={i} className="text-white/55 text-sm leading-[1.9]">{p}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
-
-            {/* Key Advantage */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.5)", letterSpacing: "0.3em" }}>03</span>
-                <div className="w-5 h-px" style={{ background: "rgba(56,189,248,0.3)" }} />
-                <span className="text-white/30 text-[10px] font-bold tracking-[0.3em] uppercase">The Key Advantage</span>
-              </div>
-              <div className="space-y-4">
-                {DEFAULT_ADVANTAGE.map((a, i) => (
-                  <div key={a.title} className="flex gap-4 items-start">
-                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.4)", letterSpacing: "0.2em", minWidth: 20, paddingTop: 2 }}>0{i + 1}</span>
-                    <div>
-                      <p className="text-white font-semibold text-sm mb-1">{a.title}</p>
-                      <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
-
-            {/* Closing */}
-            <div className="rounded-xl px-5 py-4" style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.12)" }}>
-              <p className="text-white/50 text-sm leading-[1.9] italic">
-                Investors, partners, and innovators who believe in the future of interconnected gaming ecosystems are invited to explore the project and join the journey as Hyper Tek continues to build the next generation of digital worlds.
-              </p>
-            </div>
-
-          </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
-  );
-}
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 function About() {
-  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { sections: cms } = useSiteContentPage("about");
   const top   = cms.about_top   || {};
@@ -214,18 +105,17 @@ function About() {
   const charImage    = top.char_image ? getImageUrl(top.char_image) : charImg;
 
   const missionParas = DEFAULT_MISSION;
-  const projectParas = DEFAULT_PROJECT;
   const advantages = DEFAULT_ADVANTAGE;
 
   const story2Image = story.story2_image ? getImageUrl(story.story2_image) : ourstory2;
   const story3Image = story.story3_image ? getImageUrl(story.story3_image) : ourstory3;
 
   return (
-    <div className="relative text-white" style={{ background: "#060610" }}>
+    <div className="relative text-white overflow-hidden" style={{ background: "#060610" }}>
 
       <GlowingOrb Xaxis={80}   Yaxis={900}  />
       <GlowingOrb Xaxis={1350} Yaxis={2200} />
-      <GlowingOrb Xaxis={200}  Yaxis={3600} />
+      <GlowingOrb Xaxis={200}  Yaxis={2800} />
 
       {/* ══════════════════════════════════════════════════════
           HERO
@@ -281,31 +171,7 @@ function About() {
               ))}
             </motion.div>
 
-            {/* Buttons */}
-            <motion.div variants={fadeUp(0.3)} className="mt-2">
-              <button
-                onClick={() => setShowModal(true)}
-                className="group relative w-full flex items-center justify-center gap-2 py-3 text-[11px] font-bold uppercase overflow-hidden transition-all hover:brightness-125"
-                style={{
-                  background: "linear-gradient(135deg,rgba(56,189,248,0.14) 0%,rgba(99,102,241,0.10) 100%)",
-                  border: "1px solid rgba(56,189,248,0.45)",
-                  borderTop: "2px solid rgba(56,189,248,0.85)",
-                  clipPath: "polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%)",
-                  fontFamily: "Orbitron,sans-serif",
-                  color: "rgba(255,255,255,0.92)",
-                  letterSpacing: "0.18em",
-                  boxShadow: "0 0 36px rgba(56,189,248,0.18), inset 0 1px 0 rgba(56,189,248,0.18)",
-                }}
-              >
-                <span className="absolute inset-0 pointer-events-none" style={{
-                  background: "linear-gradient(90deg,transparent 0%,rgba(56,189,248,0.10) 50%,transparent 100%)",
-                  animation: "scanline 2.8s ease-in-out infinite",
-                }} />
-                <ChevronRight className="w-3.5 h-3.5 text-cyan-400" style={{ filter: "drop-shadow(0 0 5px rgba(56,189,248,0.8))" }} />
-                <span>Full Story</span>
-                <span className="text-cyan-400/80 text-[9px] font-normal ml-1">↗</span>
-              </button>
-            </motion.div>
+
           </motion.div>
 
           {/* Character */}
@@ -443,47 +309,10 @@ function About() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          THE PROJECT
-      ══════════════════════════════════════════════════════ */}
-      <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-12 pb-10">
-        <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-16 items-start">
-          <motion.div className="w-full lg:w-[40%] flex-shrink-0" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <div className="relative rounded-2xl overflow-hidden">
-              <LazyImage src={story2Image} alt="The Project" fallback={ourstory2}
-                className="w-full h-[240px] md:h-[340px] xl:h-[400px]" imgClassName="object-cover" />
-              <CornerAccent color="rgba(167,139,250,0.50)" />
-              <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{ border: "1px solid rgba(167,139,250,0.18)" }} />
-            </div>
-            <div className="mt-3 px-4 py-2.5 rounded-xl" style={{ background: "rgba(167,139,250,0.06)", border: "1px solid rgba(167,139,250,0.12)" }}>
-              <p style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, color: "rgba(167,139,250,0.75)", letterSpacing: "0.28em" }}>FOUNDED BY DON BENNETT</p>
-            </div>
-          </motion.div>
 
-          <motion.div className="flex-1" variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <SectionLabel number="03" label="The Project" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight mb-6">
-              One Universe,<br />Infinite Possibilities
-            </h2>
-            <div className="space-y-4">
-              {projectParas.map((p, i) => (
-                <p key={i} className="text-white/58 text-sm md:text-[15px] leading-[1.9]">{p}</p>
-              ))}
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["Hyper Racing", "Hyper Quest", "Overlord of the Seven Realms"].map((g) => (
-                <span key={g} className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white/55"
-                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.09)" }}>
-                  {g}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════════
-          WEB3 MARKETPLACE + KEY ADVANTAGE (blended)
+          WEB3 GAMING + KEY ADVANTAGE (combined)
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full pt-20 pb-20 overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.35) 35%,rgba(167,139,250,0.35) 65%,transparent)" }} />
@@ -491,167 +320,145 @@ function About() {
 
         <div className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20">
 
-          {/* ── Slide 1: Web3 heading + 3-column grid ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
-            className="mb-16"
-          >
-            <SectionLabel number="04" label="Web3 Marketplace" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[38px] text-white leading-tight mb-4 max-w-[860px]">
-              HYPER TEK, A WEB3 GAMING SOLUTION<br className="hidden md:block" /> WITH A DRIVEN MARKETPLACE
-            </h2>
-            <p className="text-white/50 text-[14px] md:text-[15px] leading-relaxed max-w-[620px] mb-14"
-              style={{ fontFamily: "Orbitron, sans-serif" }}>
-              Bridging gaps between immersive gaming, a driven digital marketplace, rewarding players, and investors alike.
-            </p>
-
-            {/* 3-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-
-              {/* Left column */}
-              <motion.div
-                className="rounded-xl p-6 flex flex-col gap-5"
-                style={{ background: "rgba(34,197,94,0.04)", border: "1px solid rgba(34,197,94,0.18)", borderTop: "2px solid rgba(34,197,94,0.45)" }}
-                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.05 }} viewport={{ once: true }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 4.5V9.5L7 13L1 9.5V4.5L7 1Z" stroke="#22c55e" strokeWidth="1.2" /><circle cx="7" cy="7" r="2" fill="#22c55e" /></svg>
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] leading-tight" style={{ fontFamily: "Orbitron, sans-serif", color: "#22c55e" }}>
-                    Tangible Rewards &amp;<br />Entrepreneurship
-                  </span>
-                </div>
-                <div className="h-px w-full" style={{ background: "rgba(34,197,94,0.15)" }} />
-                <ul className="flex flex-col gap-3">
-                  {[
-                    "True NFT/NFA ownership with guaranteed minimum buy-back",
-                    "Revenue sharing through player-controlled digital economy",
-                    "Real-world value with evolving in-game asset prices",
-                  ].map((b, i) => (
-                    <li key={i} className="flex gap-3 items-start">
-                      <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: "#22c55e" }} />
-                      <span className="text-white/65 text-[13px] leading-relaxed">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Center column */}
-              <motion.div
-                className="rounded-xl p-6 flex flex-col items-center gap-5 text-center"
-                style={{ background: "rgba(56,189,248,0.05)", border: "1px solid rgba(56,189,248,0.22)", borderTop: "2px solid rgba(56,189,248,0.55)" }}
-                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.12 }} viewport={{ once: true }}
-              >
-                {/* Hex icon with arrows */}
-                <div className="relative flex items-center justify-center my-2">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-xl"
-                    style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.35)", boxShadow: "0 0 28px rgba(56,189,248,0.25)" }}>
-                    <img src="/logo-white.png" alt="HyperTek" className="w-9 h-9 object-contain"
-                      style={{ filter: "brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(175deg) opacity(0.9)" }} />
-                  </div>
-                  {/* Arrow left */}
-                  <div className="absolute -left-6 top-1/2 -translate-y-1/2">
-                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M0 5H16M16 5L11 1M16 5L11 9" stroke="rgba(56,189,248,0.5)" strokeWidth="1.2" strokeLinecap="round" /></svg>
-                  </div>
-                  {/* Arrow right */}
-                  <div className="absolute -right-6 top-1/2 -translate-y-1/2 rotate-180">
-                    <svg width="18" height="10" viewBox="0 0 18 10" fill="none"><path d="M0 5H16M16 5L11 1M16 5L11 9" stroke="rgba(56,189,248,0.5)" strokeWidth="1.2" strokeLinecap="round" /></svg>
-                  </div>
-                </div>
-
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}>
-                  Cash-Out Ecosystem
-                </span>
-                <div className="h-px w-full" style={{ background: "rgba(56,189,248,0.15)" }} />
-                <p className="text-white/65 text-[13px] leading-relaxed">
-                  Seamlessly convert in-game earnings to real-world currency — your digital labour has tangible, withdrawable value.
-                </p>
-              </motion.div>
-
-              {/* Right column */}
-              <motion.div
-                className="rounded-xl p-6 flex flex-col gap-5"
-                style={{ background: "rgba(167,139,250,0.04)", border: "1px solid rgba(167,139,250,0.18)", borderTop: "2px solid rgba(167,139,250,0.45)" }}
-                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.19 }} viewport={{ once: true }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)" }}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#a78bfa" strokeWidth="1.2" /><path d="M4 7h6M7 4v6" stroke="#a78bfa" strokeWidth="1.2" strokeLinecap="round" /></svg>
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] leading-tight" style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
-                    Infinite Gameplay<br />Across Interconnected Worlds
-                  </span>
-                </div>
-                <div className="h-px w-full" style={{ background: "rgba(167,139,250,0.15)" }} />
-                <ul className="flex flex-col gap-3">
-                  {[
-                    "Three unique game genres within one unified universe",
-                    "Shared progression, rewards, and achievements across all games",
-                    "A living ecosystem where every choice impacts the whole universe",
-                  ].map((b, i) => (
-                    <li key={i} className="flex gap-3 items-start">
-                      <div className="w-1 h-1 rounded-full mt-2 flex-shrink-0" style={{ background: "#a78bfa" }} />
-                      <span className="text-white/65 text-[13px] leading-relaxed">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-            </div>
+          {/* Section label */}
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
+            <SectionLabel number="03" label="Web3 Gaming & Competitive Edge" />
           </motion.div>
 
-          {/* Divider */}
-          <div className="w-full h-px mb-16" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.25) 40%,rgba(167,139,250,0.25) 60%,transparent)" }} />
+          {/* Two-column layout */}
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start mt-2">
 
-          {/* ── Slide 2: The Key Advantage ── */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
-            <SectionLabel number="05" label="Competitive Edge" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white">The Key Advantage</h2>
-          </motion.div>
+            {/* ── LEFT: The Key Advantage ── */}
+            <motion.div
+              className="w-full lg:w-[44%] flex-shrink-0"
+              initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
+            >
+              <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white mb-8 leading-tight">
+                The Key<br />Advantage
+              </h2>
 
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-
-            {/* Advantage list */}
-            <div className="flex-1 flex flex-col divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-              {advantages.map((a, i) => (
-                <motion.div
-                  key={a.title}
-                  className="flex gap-5 items-start py-5"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Left: number + icon */}
-                  <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
-                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.45)", letterSpacing: "0.2em" }}>0{i + 1}</span>
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(56,189,248,0.07)", border: "1px solid rgba(56,189,248,0.18)" }}>
-                      <img src={a.icon} alt={a.title} className="w-5 h-5 object-contain"
-                        style={{ filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(175deg) opacity(0.85)" }} />
+              <div className="flex flex-col divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                {advantages.map((a, i) => (
+                  <motion.div
+                    key={a.title}
+                    className="flex gap-5 items-start py-5"
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.45)", letterSpacing: "0.2em" }}>0{i + 1}</span>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: "rgba(56,189,248,0.07)", border: "1px solid rgba(56,189,248,0.18)" }}>
+                        <img src={a.icon} alt={a.title} className="w-5 h-5 object-contain"
+                          style={{ filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(175deg) opacity(0.85)" }} />
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Right: text */}
-                  <div className="flex-1 pt-1">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-3 h-0.5 rounded-full" style={{ background: "rgba(56,189,248,0.6)" }} />
-                      <p className="text-white font-semibold text-sm">{a.title}</p>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-3 h-0.5 rounded-full" style={{ background: "rgba(56,189,248,0.6)" }} />
+                        <p className="text-white font-semibold text-sm">{a.title}</p>
+                      </div>
+                      <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
                     </div>
-                    <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Image */}
-            <motion.div className="w-full lg:w-[38%] flex-shrink-0"
-              initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-              <div className="flex items-center justify-center py-8">
-                <img src="/logo-t-white.png" alt="HyperTek" className="w-full max-w-[340px] md:max-w-[420px] object-contain" />
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
+
+            {/* Vertical divider (desktop only) */}
+            <div className="hidden lg:block w-px self-stretch flex-shrink-0" style={{ background: "linear-gradient(to bottom,transparent,rgba(56,189,248,0.25) 20%,rgba(167,139,250,0.25) 80%,transparent)" }} />
+
+            {/* ── RIGHT: HYPER TEK, A WEB3 GAMING SOLUTION ── */}
+            <motion.div
+              className="flex-1 flex flex-col gap-6"
+              initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
+            >
+              <div>
+                <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
+                  HYPER TEK,<br />A WEB3 GAMING SOLUTION
+                </h2>
+                <p className="text-white/50 text-[13px] leading-relaxed max-w-[480px]"
+                  style={{ fontFamily: "Orbitron, sans-serif" }}>
+                  Bridging gaps between immersive gaming, a driven digital marketplace, rewarding players, and investors alike.
+                </p>
+              </div>
+
+              {/* 3 feature cards — stacked vertically */}
+              <div className="flex flex-col gap-4">
+
+                <motion.div
+                  className="rounded-xl p-5 flex gap-4 items-start"
+                  style={{ background: "rgba(34,197,94,0.04)", border: "1px solid rgba(34,197,94,0.18)", borderLeft: "3px solid rgba(34,197,94,0.55)" }}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }} viewport={{ once: true }}
+                >
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 4.5V9.5L7 13L1 9.5V4.5L7 1Z" stroke="#22c55e" strokeWidth="1.2" /><circle cx="7" cy="7" r="2" fill="#22c55e" /></svg>
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] block mb-2" style={{ fontFamily: "Orbitron, sans-serif", color: "#22c55e" }}>
+                      Tangible Rewards &amp; Entrepreneurship
+                    </span>
+                    <ul className="flex flex-col gap-1.5">
+                      {["True NFT/NFA ownership with guaranteed minimum buy-back", "Revenue sharing through player-controlled digital economy", "Real-world value with evolving in-game asset prices"].map((b, i) => (
+                        <li key={i} className="flex gap-2 items-start">
+                          <div className="w-1 h-1 rounded-full mt-[7px] flex-shrink-0" style={{ background: "#22c55e" }} />
+                          <span className="text-white/60 text-[12px] leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="rounded-xl p-5 flex gap-4 items-center"
+                  style={{ background: "rgba(56,189,248,0.05)", border: "1px solid rgba(56,189,248,0.22)", borderLeft: "3px solid rgba(56,189,248,0.55)" }}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.12 }} viewport={{ once: true }}
+                >
+                  <div className="relative flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 flex items-center justify-center rounded-xl"
+                      style={{ background: "rgba(56,189,248,0.10)", border: "1px solid rgba(56,189,248,0.35)", boxShadow: "0 0 18px rgba(56,189,248,0.2)" }}>
+                      <img src="/logo-white.png" alt="HyperTek" className="w-5 h-5 object-contain"
+                        style={{ filter: "brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(175deg) opacity(0.9)" }} />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] block mb-1" style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}>
+                      Cash-Out Ecosystem
+                    </span>
+                    <p className="text-white/60 text-[12px] leading-relaxed">
+                      Seamlessly convert in-game earnings to real-world currency — your digital labour has tangible, withdrawable value.
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="rounded-xl p-5 flex gap-4 items-start"
+                  style={{ background: "rgba(167,139,250,0.04)", border: "1px solid rgba(167,139,250,0.18)", borderLeft: "3px solid rgba(167,139,250,0.55)" }}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.19 }} viewport={{ once: true }}
+                >
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.3)" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#a78bfa" strokeWidth="1.2" /><path d="M4 7h6M7 4v6" stroke="#a78bfa" strokeWidth="1.2" strokeLinecap="round" /></svg>
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] block mb-2" style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
+                      Infinite Gameplay Across Interconnected Worlds
+                    </span>
+                    <ul className="flex flex-col gap-1.5">
+                      {["Three unique game genres within one unified universe", "Shared progression, rewards, and achievements across all games", "A living ecosystem where every choice impacts the whole universe"].map((b, i) => (
+                        <li key={i} className="flex gap-2 items-start">
+                          <div className="w-1 h-1 rounded-full mt-[7px] flex-shrink-0" style={{ background: "#a78bfa" }} />
+                          <span className="text-white/60 text-[12px] leading-relaxed">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
@@ -693,7 +500,7 @@ function About() {
         </motion.div>
       </section>
 
-      {showModal && <FullStoryModal onClose={() => setShowModal(false)} />}
+
     </div>
   );
 }

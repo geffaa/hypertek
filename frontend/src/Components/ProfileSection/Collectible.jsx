@@ -110,6 +110,7 @@ function MarketPlace() {
 
   // ---- Pagination ----
   const PAGE_SIZE = 10;
+  const ACT_PAGE_SIZE = 10;
   const [activitiesPage, setActivitiesPage] = useState(1);
   const [tradePage,      setTradePage]      = useState(1);
   const [auctionPage,    setAuctionPage]    = useState(1);
@@ -628,40 +629,72 @@ function MarketPlace() {
                     <span className="ml-auto text-white/25 text-xs self-center">{filtered.length} record{filtered.length !== 1 ? "s" : ""}</span>
                   </div>
 
-                  {txLoading ? (
-                    <div className="text-white/50 text-sm py-16 text-center">Loading transactions...</div>
-                  ) : filtered.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-4">
-                      <p className="text-sm">No transactions yet</p>
-                    </div>
-                  ) : (() => {
-                    const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-                    const paged = filtered.slice((activitiesPage - 1) * PAGE_SIZE, activitiesPage * PAGE_SIZE);
+                  {/* Table always renders — body pads to 10-row minimum height */}
+                  {(() => {
+                    const ROW_H = 52;
+                    const MIN_ROWS = 10;
+                    const totalPages = Math.ceil(filtered.length / ACT_PAGE_SIZE);
+                    const paged = filtered.slice((activitiesPage - 1) * ACT_PAGE_SIZE, activitiesPage * ACT_PAGE_SIZE);
+                    const padCount = Math.max(0, MIN_ROWS - paged.length);
                     return (
-                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflowX: "auto" }}>
-                        <div>
-                          <div className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ background: "rgba(4,8,28,0.98)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                      <div className="rounded-2xl" style={{ border: "1px solid rgba(255,255,255,0.07)", overflow: "clip" }}>
+                        {/* Sticky header */}
+                        <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
+                          <div className="grid min-w-[640px] gap-4 px-5 py-5 text-[11px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ gridTemplateColumns: "2fr 1fr 1.5fr 1.5fr 1.5fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
                             <span>Item</span><span>Type</span><span>Price</span><span>From</span><span>To</span><span className="text-right">Date</span>
                           </div>
-                          {paged.map((tx, i) => (
-                            <div key={i} className="grid grid-cols-[2fr_1fr_1.5fr_1.5fr_1.5fr_1fr] gap-4 px-5 py-3 items-center text-sm"
-                              style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-                              <span className="text-white/85 text-[13px] font-medium truncate">{tx.itemName || "—"}</span>
-                              <span className={`text-xs font-bold ${tx.type === "buy" ? "text-blue-400" : "text-green-400"}`}>
-                                {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
-                              </span>
-                              <span className="text-white/80 text-[13px] font-semibold">{tx.priceETH ? `${tx.priceETH} USDC` : "—"}</span>
-                              <span className="text-white/45 text-[12px] font-mono truncate" title={tx.seller}>{shortAddr(tx.seller)}</span>
-                              <span className="text-white/45 text-[12px] font-mono truncate" title={tx.buyer}>{shortAddr(tx.buyer)}</span>
-                              <span className="text-white/30 text-[11px] text-right whitespace-nowrap">{tx.createdAt ? timeAgo(tx.createdAt) : "—"}</span>
-                            </div>
-                          ))}
                         </div>
+
+                        {/* Body */}
+                        {txLoading ? (
+                          /* Skeleton rows */
+                          <div className="overflow-x-auto">
+                            {Array.from({ length: MIN_ROWS }).map((_, i) => (
+                              <div key={i} className="grid min-w-[640px] gap-4 px-5 items-center"
+                                style={{ height: ROW_H, gridTemplateColumns: "2fr 1fr 1.5fr 1.5fr 1.5fr 1fr", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                                {Array.from({ length: 6 }).map((__, j) => (
+                                  <div key={j} className="h-3 rounded animate-pulse" style={{ background: "rgba(255,255,255,0.06)" }} />
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        ) : filtered.length === 0 ? (
+                          <div className="overflow-x-auto">
+                            <div className="flex items-center justify-center text-white/25 min-w-[640px]"
+                              style={{ height: ROW_H, borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                              <p className="text-sm">No transactions yet</p>
+                            </div>
+                            {Array.from({ length: MIN_ROWS - 1 }).map((_, i) => (
+                              <div key={i} className="min-w-[640px]" style={{ height: ROW_H, borderTop: "1px solid rgba(255,255,255,0.04)" }} />
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="overflow-x-auto">
+                            {paged.map((tx, i) => (
+                              <div key={i} className="grid min-w-[640px] gap-4 px-5 py-3 items-center text-sm"
+                                style={{ gridTemplateColumns: "2fr 1fr 1.5fr 1.5fr 1.5fr 1fr", background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                                <span className="text-white/85 text-[13px] font-medium truncate">{tx.itemName || "—"}</span>
+                                <span className={`text-xs font-bold ${tx.type === "buy" ? "text-blue-400" : "text-green-400"}`}>
+                                  {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
+                                </span>
+                                <span className="text-white/80 text-[13px] font-semibold">{tx.priceETH ? `${tx.priceETH} USDC` : "—"}</span>
+                                <span className="text-white/45 text-[12px] font-mono truncate" title={tx.seller}>{shortAddr(tx.seller)}</span>
+                                <span className="text-white/45 text-[12px] font-mono truncate" title={tx.buyer}>{shortAddr(tx.buyer)}</span>
+                                <span className="text-white/30 text-[11px] text-right whitespace-nowrap">{tx.createdAt ? timeAgo(tx.createdAt) : "—"}</span>
+                              </div>
+                            ))}
+                            {/* Pad to 10-row minimum */}
+                            {Array.from({ length: padCount }).map((_, i) => (
+                              <div key={`pad-${i}`} className="min-w-[640px]" style={{ height: ROW_H, borderTop: "1px solid rgba(255,255,255,0.04)" }} />
+                            ))}
+                          </div>
+                        )}
+
                         {/* Pagination */}
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
-                            <span className="text-white/30 text-xs">{(activitiesPage - 1) * PAGE_SIZE + 1}–{Math.min(activitiesPage * PAGE_SIZE, filtered.length)} of {filtered.length}</span>
+                            <span className="text-white/30 text-xs">{(activitiesPage - 1) * ACT_PAGE_SIZE + 1}–{Math.min(activitiesPage * ACT_PAGE_SIZE, filtered.length)} of {filtered.length}</span>
                             <div className="flex gap-1">
                               <button onClick={() => setActivitiesPage(p => Math.max(1, p - 1))} disabled={activitiesPage === 1}
                                 className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30 transition-colors"

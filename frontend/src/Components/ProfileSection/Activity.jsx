@@ -206,7 +206,7 @@ function PersonalActivity() {
       <section className="mx-auto flex flex-col gap-6 lg:gap-8 mb-16 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-20 w-full max-w-[1600px]">
 
         {/* Responsive Table */}
-        <div className="overflow-x-auto rounded-lg z-10" style={{ overflowY: "auto", maxHeight: "70vh" }}>
+        <div className="overflow-x-auto rounded-lg z-10">
           <table className="w-full min-w-[500px] text-white border-collapse">
             <thead className="bg-[#00134C]" style={{ position: "sticky", top: 0, zIndex: 10 }}>
               <tr className="text-left">
@@ -222,42 +222,66 @@ function PersonalActivity() {
             </thead>
 
             <tbody>
-              {activityData.slice(0, 5).map((item, index) => (
-                <tr
-                  key={index}
-                  className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
-                >
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden flex-shrink-0">
-                        <img
-                          src={land1Image}
-                          alt="Avatar"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <span className="text-xs sm:text-sm lg:text-[18px] font-inter font-medium truncate">
-                        {item.name}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
-                    {item.type}
-                  </td>
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
-                    {item.buyer}
-                  </td>
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
-                    {item.seller}
-                  </td>
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
-                    ${item.price}
-                  </td>
-                  <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
-                    {getDaysAgo(item.time)}
-                  </td>
-                </tr>
-              ))}
+              {activityData.length === 0 ? (
+                <>
+                  <tr>
+                    <td colSpan={6} className="text-center py-10 text-white/30 text-sm">
+                      No activity yet
+                    </td>
+                  </tr>
+                  {/* Fill remaining rows to reach 10-row height */}
+                  {Array.from({ length: 9 }).map((_, i) => (
+                    <tr key={`pad-${i}`} className="border-b border-[#00134C]">
+                      <td colSpan={6} style={{ height: 64 }} />
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {activityData.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-[#00134C] hover:bg-white/5 transition-colors"
+                    >
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-md overflow-hidden flex-shrink-0">
+                            <img
+                              src={land1Image}
+                              alt="Avatar"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="text-xs sm:text-sm lg:text-[18px] font-inter font-medium truncate">
+                            {item.name}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
+                        {item.type}
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
+                        {item.buyer}
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
+                        {item.seller}
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
+                        ${item.price}
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-5 lg:px-6 py-3 text-xs sm:text-sm lg:text-base">
+                        {getDaysAgo(item.time)}
+                      </td>
+                    </tr>
+                  ))}
+                  {/* Pad to 10-row minimum height */}
+                  {Array.from({ length: Math.max(0, 10 - activityData.length) }).map((_, i) => (
+                    <tr key={`pad-${i}`} className="border-b border-[#00134C]">
+                      <td colSpan={6} style={{ height: 64 }} />
+                    </tr>
+                  ))}
+                </>
+              )}
             </tbody>
           </table>
         </div>
