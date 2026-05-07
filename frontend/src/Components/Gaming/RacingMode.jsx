@@ -67,6 +67,74 @@ const UNLOCKED_VEHICLES = [
     },
     loadout: ["Twin Cove Drive", "4Zeta Anti-Gravity Units", "Twin Z1i Stabilisers", "Dual Z314 Boosters"],
   },
+  {
+    id: "spaceship3",
+    name: "Phantom SP-3",
+    class: "Shadow Striker",
+    bay: "BAY 07",
+    img: "/Spaceship_3.png",
+    color: "#a78bfa",
+    stats: {
+      "Top Speed":     "1854 kt",
+      "Acceleration":  "0-500kt/0.74sec",
+      "Hull Strength": "High Range",
+      "Range":         "228 km",
+      "Weight":        "1238 kg",
+      "Shields":       "F/R 90%",
+    },
+    loadout: ["Phantom Drive V1", "5Zeta Anti-Gravity Units", "Tri-Axis Stabilisers", "Triple Z-Core Boosters"],
+  },
+  {
+    id: "spaceship4",
+    name: "Nova Apex SP-4",
+    class: "Assault Runner",
+    bay: "BAY 09",
+    img: "/Spaceship_4.png",
+    color: "#f43f5e",
+    stats: {
+      "Top Speed":     "1921 kt",
+      "Acceleration":  "0-500kt/0.71sec",
+      "Hull Strength": "High Range",
+      "Range":         "214 km",
+      "Weight":        "1262 kg",
+      "Shields":       "F/R 92%",
+    },
+    loadout: ["Apex Surge Drive", "5Zeta Anti-Gravity Units", "Quad-Axis Stabilisers", "Triple Z-Core Boosters"],
+  },
+  {
+    id: "spaceship5",
+    name: "Solar Fury SP-5",
+    class: "Speed Chaser",
+    bay: "BAY 11",
+    img: "/Spaceship_5.png",
+    color: "#eab308",
+    stats: {
+      "Top Speed":     "1987 kt",
+      "Acceleration":  "0-500kt/0.68sec",
+      "Hull Strength": "High Range",
+      "Range":         "198 km",
+      "Weight":        "1290 kg",
+      "Shields":       "F/R 93%",
+    },
+    loadout: ["Solar Pulse Drive", "6Zeta Anti-Gravity Units", "Quad-Axis Stabilisers", "Quad Z-Plasma Boosters"],
+  },
+  {
+    id: "spaceship6",
+    name: "Aether SP-6",
+    class: "Hyper Runner",
+    bay: "BAY 13",
+    img: "/Spaceship_6.png",
+    color: "#06b6d4",
+    stats: {
+      "Top Speed":     "2058 kt",
+      "Acceleration":  "0-500kt/0.65sec",
+      "Hull Strength": "Elite",
+      "Range":         "182 km",
+      "Weight":        "1318 kg",
+      "Shields":       "F/R 96%",
+    },
+    loadout: ["Aether Void Drive", "6Zeta Anti-Gravity Units", "Omni-Axis Stabilisers", "Quad Z-Plasma Boosters"],
+  },
 ];
 
 const LOCKED_VEHICLES = Array.from({ length: 21 }, (_, i) => ({
@@ -533,6 +601,114 @@ const PARTS_BY_VEHICLE = {
     },
     ...LOCKED_PARTS,
   ],
+  spaceship3: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Phantom Alloy Frame",
+      specs: { "Weight": "924 kg", "Defence": "Split Vortex Shields +22%", "Drag Coeff.": "0.016Cd" },
+      upgrades: ["Phantom Alloy Mk2 — +25% Defence", "Void Composite — +35% Defence 🔒", "Nano-Armor Mk2 — +50% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Swept Vortex Array",
+      specs: { "G-Limits": "10.1G", "Speed Rating": "+7%", "Corning": "+12" },
+      upgrades: ["Vortex Array Mk2 — +15% Speed", "Adaptive Aero System — +22% Corning 🔒", "Neural Aero — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "Phantom Drive V1",
+      specs: { "Top Speed": "1854 kt", "Acceleration": "0-500kt/0.74sec", "Fuel Type": "Av Fuel 130", "Efficiency": "95%" },
+      upgrades: ["Phantom Drive V2 — +10%", "Omni-Vector Nozzle — +18% Turn Rate 🔒", "Quantum Drive Mk2 — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Enhanced HUD",
+      specs: { "Visibility": "240°", "HUD Type": "Enhanced", "Reaction": "0ms lag" },
+      upgrades: ["Advanced HUD — +40° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection Mk2 — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+  spaceship4: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Apex Combat Frame",
+      specs: { "Weight": "948 kg", "Defence": "Assault Shields +24%", "Drag Coeff.": "0.016Cd" },
+      upgrades: ["Apex Frame Mk2 — +28% Defence", "Plasma Hull — +38% Defence 🔒", "Invictus Armor — +55% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Combat Delta Array",
+      specs: { "G-Limits": "10.4G", "Speed Rating": "+8%", "Corning": "+13" },
+      upgrades: ["Delta Array Mk2 — +16% Speed", "Combat Vortex Fins — +24% Corning 🔒", "Assault Aero — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "Apex Surge Drive",
+      specs: { "Top Speed": "1921 kt", "Acceleration": "0-500kt/0.71sec", "Fuel Type": "Av Fuel 132", "Efficiency": "96%" },
+      upgrades: ["Surge Drive Mk2 — +11%", "Precision Vector Nozzle — +20% Turn Rate 🔒", "Apex Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Combat HUD",
+      specs: { "Visibility": "255°", "HUD Type": "Combat", "Reaction": "0ms lag" },
+      upgrades: ["Combat HUD Mk2 — +45° Vision", "Reflex Interface — COMING SOON 🔒", "Holo Combat Array — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+  spaceship5: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Solar Composite Shell",
+      specs: { "Weight": "970 kg", "Defence": "Plasma Shields +26%", "Drag Coeff.": "0.015Cd" },
+      upgrades: ["Solar Shell Mk2 — +30% Defence", "Fusion Hull — +42% Defence 🔒", "Solar Invictus — +58% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Solar Wing System",
+      specs: { "G-Limits": "10.8G", "Speed Rating": "+9%", "Corning": "+14" },
+      upgrades: ["Solar Wing Mk2 — +18% Speed", "Fusion Vortex Array — +26% Corning 🔒", "Plasma Aero — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "Solar Pulse Drive",
+      specs: { "Top Speed": "1987 kt", "Acceleration": "0-500kt/0.68sec", "Fuel Type": "Solar Fuel 140", "Efficiency": "97%" },
+      upgrades: ["Pulse Drive Mk2 — +12%", "Solar Vector Nozzle — +22% Turn Rate 🔒", "Fusion Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Tactical HUD",
+      specs: { "Visibility": "265°", "HUD Type": "Tactical", "Reaction": "0ms lag" },
+      upgrades: ["Tactical HUD Mk2 — +50° Vision", "Neural Reflex Link — COMING SOON 🔒", "Holo Tactical Array — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
+  spaceship6: [
+    {
+      id: "hull", label: "HULL", icon: "🛡", locked: false,
+      equipped: "Aether Void Frame",
+      specs: { "Weight": "992 kg", "Defence": "Void Shields +28%", "Drag Coeff.": "0.014Cd" },
+      upgrades: ["Void Frame Mk2 — +32% Defence", "Aether Hull — +46% Defence 🔒", "Omega Armor — +62% Defence 🔒"],
+    },
+    {
+      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
+      equipped: "Aether Fin Array",
+      specs: { "G-Limits": "11.2G", "Speed Rating": "+11%", "Corning": "+16" },
+      upgrades: ["Aether Array Mk2 — +20% Speed", "Omega Vortex System — +30% Corning 🔒", "Void Aero — COMING SOON 🔒"],
+    },
+    {
+      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
+      equipped: "Aether Void Drive",
+      specs: { "Top Speed": "2058 kt", "Acceleration": "0-500kt/0.65sec", "Fuel Type": "Void Fuel 150", "Efficiency": "99%" },
+      upgrades: ["Void Drive Mk2 — +13%", "Aether Vector Nozzle — +25% Turn Rate 🔒", "Omega Quantum Drive — COMING SOON 🔒"],
+    },
+    {
+      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
+      equipped: "Omega HUD",
+      specs: { "Visibility": "280°", "HUD Type": "Omega", "Reaction": "0ms lag" },
+      upgrades: ["Omega HUD Mk2 — +60° Vision", "Full Neural Interface — COMING SOON 🔒", "Holo Omega Array — COMING SOON 🔒"],
+    },
+    ...LOCKED_PARTS,
+  ],
 };
 
 /* ══════════════════════════════════════════════════════════════════
@@ -585,7 +761,7 @@ function GarageView() {
         style={{ objectPosition: "center" }} />
 
       {/* ── Vehicle — 3D: large centered canvas, static: fixed container ── */}
-      {(v.id === "wraith" || v.id === "voidhawk") ? (
+      {(v.id === "wraith" || v.id === "voidhawk" || v.id === "spaceship3" || v.id === "spaceship4" || v.id === "spaceship5" || v.id === "spaceship6") ? (
         <div style={{
           position: "absolute",
           top: "40%", left: "50%",

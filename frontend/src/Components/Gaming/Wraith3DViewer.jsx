@@ -3,8 +3,12 @@ import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Stage } from "@react-three/drei";
 
 const MODELS = {
-  wraith:   "/vehicles/3D%20Racing%20Vehicle%204.glb",
-  voidhawk: "/vehicles/3D%20Racing%20Vehicle%202.glb",
+  wraith:      "/vehicles/Spaceship_2.glb",
+  voidhawk:    "/vehicles/Spaceship_1.glb",
+  spaceship3:  "/vehicles/Spaceship_3.glb",
+  spaceship4:  "/vehicles/Spaceship_4.glb",
+  spaceship5:  "/vehicles/Spaceship_5.glb",
+  spaceship6:  "/vehicles/Spaceship_6.glb",
 };
 
 function VehicleModel({ url }) {
@@ -34,7 +38,7 @@ export default function Wraith3DViewer({ vehicleId = "wraith" }) {
         minPolarAngle={0}
         maxPolarAngle={Math.PI}
         autoRotate
-        autoRotateSpeed={6}
+        autoRotateSpeed={8}
       />
     </Canvas>
   );

@@ -72,14 +72,14 @@ function FeaturedMarketplace() {
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-6">
             <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
-              Marketplace Items
+              Limited Edition NFA Items
             </h2>
             <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 w-fit mb-1">
               <span>✦</span> Guaranteed Buy-Back on NFAs &amp; NFCs
             </span>
           </div>
-          <p className="text-white/50 text-xs whitespace-nowrap">
-            Every NFA and NFC comes with a high minimum buy-back guarantee — your asset holds real value.
+          <p className="text-white/70 text-sm sm:text-base font-semibold -mt-1">
+            Act fast, once they are gone, they're GONE!
           </p>
         </motion.div>
 

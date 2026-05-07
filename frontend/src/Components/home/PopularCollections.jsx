@@ -576,8 +576,11 @@ function CrowdfundingPackages() {
             <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Collections</span>
           </div>
           <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
-            Popular Collections
+            Donation Tier Packages,
           </h2>
+          <p className="text-white/70 text-sm sm:text-base font-semibold -mt-1">
+            Purchase here and save 10% off the listed prices
+          </p>
         </motion.div>
 
         <div className="flex flex-col gap-4">

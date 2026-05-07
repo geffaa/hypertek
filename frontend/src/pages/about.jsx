@@ -123,7 +123,7 @@ function About() {
       <section
         data-edit-section="about_top"
         data-edit-label="About — Top Section"
-        className="relative min-h-screen flex items-center overflow-hidden"
+        className="relative min-h-[90vh] flex items-start overflow-hidden"
         style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center top" }}
       >
         <div className="absolute inset-0" style={{ background: "linear-gradient(115deg,rgba(6,6,16,0.88) 0%,rgba(6,6,16,0.50) 55%,rgba(6,6,16,0.72) 100%)" }} />
@@ -131,7 +131,7 @@ function About() {
         {/* Neon bottom line */}
         <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(56,189,248,0.4) 40%,rgba(56,189,248,0.4) 60%,transparent)" }} />
 
-        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 pt-28 pb-16 flex flex-col md:flex-row items-center gap-8">
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-20 pt-36 pb-10 flex flex-col md:flex-row items-start gap-8">
 
           {/* Left */}
           <motion.div
@@ -155,8 +155,7 @@ function About() {
             <motion.div variants={fadeUp(0.1)} className="flex flex-col gap-2.5 max-w-[660px]"
               style={{ textShadow: "0 1px 8px rgba(0,0,0,0.8)" }}>
               {(Array.isArray(heroSubtitle) ? heroSubtitle : [heroSubtitle]).map((para, i) => (
-                <p key={i} className="text-white/85 text-[10px] md:text-[11.5px] leading-[1.8] text-justify"
-                  style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.02em" }}>{para}</p>
+                <p key={i} className="text-white/70 text-sm md:text-[14px] leading-[1.9] text-justify">{para}</p>
               ))}
             </motion.div>
 
@@ -176,7 +175,7 @@ function About() {
 
           {/* Character */}
           <motion.div
-            className="hidden md:flex flex-shrink-0 justify-end items-end self-end"
+            className="hidden md:flex flex-shrink-0 justify-end items-start self-start"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
@@ -185,7 +184,7 @@ function About() {
               src={charImage}
               alt="Character"
               fallback={charImg}
-              className="h-[360px] md:h-[480px] lg:h-[580px] xl:h-[680px] w-auto"
+              className="h-[320px] md:h-[420px] lg:h-[510px] xl:h-[600px] w-auto"
               imgClassName="object-contain"
             />
           </motion.div>
@@ -401,7 +400,7 @@ function About() {
                       Tangible Rewards &amp; Entrepreneurship
                     </span>
                     <ul className="flex flex-col gap-1.5">
-                      {["True NFT/NFA ownership with guaranteed minimum buy-back", "Revenue sharing through player-controlled digital economy", "Real-world value with evolving in-game asset prices"].map((b, i) => (
+                      {["True NFA ownership with guaranteed minimum buy-back", "Revenue sharing through player-controlled digital economy", "Real-world value with evolving in-game asset prices"].map((b, i) => (
                         <li key={i} className="flex gap-2 items-start">
                           <div className="w-1 h-1 rounded-full mt-[7px] flex-shrink-0" style={{ background: "#22c55e" }} />
                           <span className="text-white/60 text-[12px] leading-relaxed">{b}</span>

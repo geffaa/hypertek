@@ -38,6 +38,175 @@ const GAMES = [
   },
 ];
 
+const LIMITED_PACKAGES = [
+  { name: "Stage 1 Starter Pack",    price: "TBA", highlight: "Best Entry Value",    bonuses: ["In-game Currency Bonus", "Exclusive Starter NFA", "Early Access Badge"] },
+  { name: "Stage 1 Explorer Pack",   price: "TBA", highlight: "Most Popular",         bonuses: ["2× In-game Currency Bonus", "2× Exclusive NFAs", "Explorer Title + Badge"] },
+  { name: "Stage 1 Elite Pack",      price: "TBA", highlight: "High Bonus Tier",      bonuses: ["5× In-game Currency Bonus", "5× Exclusive NFAs", "Elite Title + Rare Badge"] },
+  { name: "Stage 1 Champion Pack",   price: "TBA", highlight: "Top Bonus Tier",       bonuses: ["10× In-game Currency Bonus", "10× Exclusive NFAs", "Champion Title + Ultra Badge"] },
+];
+
+const LIMITED_ITEMS = [
+  { name: "Stage 1 Racing Vehicle NFA",   tag: "Hyper Racing",  bonus: "Highest Racing Bonus",  color: "#22c55e" },
+  { name: "Stage 1 Quest Ship NFA",        tag: "Hyper Quest",   bonus: "Highest Quest Bonus",   color: "#38bdf8" },
+  { name: "Stage 1 Overlord Character NFA",tag: "Overlord",      bonus: "Highest Strategy Bonus",color: "#f87171" },
+  { name: "Stage 1 Land Parcel NFA",       tag: "All Games",     bonus: "Passive Yield Bonus",   color: "#a78bfa" },
+  { name: "Stage 1 Infrastructure NFA",    tag: "All Games",     bonus: "Revenue Share Bonus",   color: "#f59e0b" },
+];
+
+function CrowdfundingSection({ className = "" }) {
+  return (
+    <motion.div
+      className={`${className} flex-col gap-0 mt-5 overflow-hidden rounded-xl`}
+      style={{
+        background: "linear-gradient(160deg, rgba(0,40,120,0.22) 0%, rgba(0,10,40,0.55) 100%)",
+        border: "1px solid rgba(56,189,248,0.22)",
+        borderTop: "2px solid rgba(56,189,248,0.5)",
+        boxShadow: "0 0 50px rgba(56,189,248,0.08)",
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      {/* ── Top text block ── */}
+      <div className="px-8 py-7 flex flex-col gap-4" style={{ borderBottom: "1px solid rgba(56,189,248,0.12)" }}>
+        {/* Badge */}
+        <div className="flex items-center gap-2 mb-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(56,189,248,0.7)" }}>
+            CROWDFUNDING CAMPAIGN — STAGE 1
+          </span>
+        </div>
+
+        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+          We are excited to announce the launch of our highly anticipated crowdfunding campaign to secure funding
+          for the completion of the groundbreaking Hyper Tek project, which is making positive strides! This is
+          your chance to dive into the Hyper Tek ecosystem as an early participant by choosing from an exclusive
+          selection of limited-availability items and packages that you won't want to miss.<br />
+          Act quickly! By purchasing directly from us on this platform, you can enjoy reduced rates of 10% by
+          allowing us to pass the savings on to you, from avoiding crowdfunding fees, which are listed below!
+        </p>
+
+        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+          As all Hyper Tek Non-Fungible Digital items are backed by a guaranteed minimum buy-back, with most also
+          offering substantial in-game bonuses that enhance your experience, to amp things up, we're introducing a
+          series of limited-edition Non-Fungible Assets (NFAs) featuring the highest bonus levels that will ever
+          be offered. This is a rare opportunity as these offerings will never be repeated! Once these items sell
+          out or we hit our funding target, any remaining unminted limited-edition NFAs will be pulled from the
+          website for good! This means these Stage 1 NFAs will retain the highest in-game bonuses and remain
+          truly unique, offering you and fellow investors the confidence that your purchase is genuinely one of a
+          kind.
+        </p>
+
+        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+          We've already raised over $440,000 and are looking to secure an additional $460,000. This is your
+          moment to join us in this thrilling initiative; don't let it slip away! Purchase your
+          limited-availability items or packages today and be part of the exciting Hyper Tek Ecosystem.
+        </p>
+
+        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+          Remember to sign up for the wishlist and connect with us on social media to stay in the loop! Act now,
+          as time is of the essence!
+        </p>
+      </div>
+
+      {/* ── Two lists ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+
+        {/* Limited Packages */}
+        <div className="px-7 py-6" style={{ borderRight: "1px solid rgba(56,189,248,0.12)" }}>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-4 h-[2px]" style={{ background: "#38bdf8" }} />
+            <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.22em", color: "#38bdf8" }}>
+              LIMITED PACKAGES
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {LIMITED_PACKAGES.map((pkg, i) => (
+              <motion.div
+                key={pkg.name}
+                className="relative rounded-lg overflow-hidden"
+                style={{
+                  background: "rgba(56,189,248,0.04)",
+                  border: "1px solid rgba(56,189,248,0.18)",
+                  borderLeft: "3px solid rgba(56,189,248,0.6)",
+                  padding: "12px 14px",
+                }}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
+              >
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold", color: "rgba(255,255,255,0.92)", letterSpacing: "0.06em" }}>
+                    {pkg.name}
+                  </span>
+                  <span className="flex-shrink-0 px-2 py-0.5 rounded text-[9px] font-bold" style={{ background: "rgba(56,189,248,0.15)", color: "#38bdf8", fontFamily: "Orbitron,sans-serif", letterSpacing: "0.1em" }}>
+                    {pkg.highlight}
+                  </span>
+                </div>
+                <ul className="flex flex-col gap-1">
+                  {pkg.bonuses.map((b) => (
+                    <li key={b} className="flex items-center gap-2">
+                      <span style={{ color: "#38bdf8", fontSize: 8 }}>▸</span>
+                      <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.6)" }}>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Limited Items */}
+        <div className="px-7 py-6">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-4 h-[2px]" style={{ background: "#a78bfa" }} />
+            <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.22em", color: "#a78bfa" }}>
+              LIMITED ITEMS
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(167,139,250,0.15)" }} />
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {LIMITED_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.name}
+                className="rounded-lg"
+                style={{
+                  background: "rgba(167,139,250,0.04)",
+                  border: "1px solid rgba(167,139,250,0.18)",
+                  borderLeft: `3px solid ${item.color}`,
+                  padding: "12px 14px",
+                  display: "flex", alignItems: "center", gap: 12,
+                }}
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
+              >
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${item.color}18`, border: `1px solid ${item.color}44` }}>
+                  <div className="w-2 h-2 rounded-full" style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", color: "rgba(255,255,255,0.9)", letterSpacing: "0.05em" }}>{item.name}</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[10px] px-2 py-0.5 rounded" style={{ background: `${item.color}18`, color: item.color, fontFamily: "Orbitron,sans-serif", letterSpacing: "0.08em" }}>{item.tag}</span>
+                    <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.45)" }}>{item.bonus}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </motion.div>
+  );
+}
+
 export default function News() {
   const navigate = useNavigate();
   const [active, setActive] = useState(null);
@@ -207,58 +376,8 @@ export default function News() {
           })}
         </div>
 
-        {/* ── Description banner — desktop, below panels ── */}
-        <motion.div
-          className="hidden md:flex gap-0 overflow-hidden"
-          style={{
-            background: "linear-gradient(90deg, rgba(0,60,180,0.18) 0%, rgba(0,120,255,0.28) 50%, rgba(0,60,180,0.18) 100%)",
-            border: "1px solid rgba(56,189,248,0.25)",
-            borderTop: "2px solid rgba(56,189,248,0.5)",
-            boxShadow: "0 0 40px rgba(56,189,248,0.12), inset 0 1px 0 rgba(56,189,248,0.15)",
-            borderRadius: "0 0 10px 10px",
-            marginTop: -2,
-          }}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.35 }}
-        >
-          {/* Left accent bar */}
-          <div className="w-1 flex-shrink-0" style={{ background: "linear-gradient(to bottom, #38bdf8, rgba(56,189,248,0.2))" }} />
-
-          <div className="flex flex-row gap-8 px-8 py-5 flex-1">
-            {/* Neon icon */}
-            <div className="flex-shrink-0 flex items-center">
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{
-                  background: "rgba(56,189,248,0.12)",
-                  border: "1px solid rgba(56,189,248,0.4)",
-                  boxShadow: "0 0 16px rgba(56,189,248,0.35)",
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <circle cx="7" cy="7" r="3" fill="#38bdf8" />
-                  <circle cx="7" cy="7" r="6" stroke="#38bdf8" strokeWidth="1" strokeOpacity="0.5" />
-                </svg>
-              </div>
-            </div>
-
-            <p className="flex-1 text-[13px] lg:text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
-              As the Hyper Tek movement continues to surge forward, it's time to secure your place in history
-              by grabbing one of our exclusive packages — available for a very limited time.
-            </p>
-
-            {/* Divider */}
-            <div className="w-px flex-shrink-0 self-stretch" style={{ background: "rgba(56,189,248,0.2)" }} />
-
-            <p className="flex-1 text-[13px] lg:text-[14px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
-              Our Non-Fungible Digital Items come with a minimum money-back guarantee and offer incredible
-              in-game bonuses. We have already raised nearly $400,000 — act now and be part of this
-              groundbreaking movement!
-            </p>
-          </div>
-        </motion.div>
+        {/* ── Crowdfunding section — desktop ── */}
+        <CrowdfundingSection className="hidden md:block" />
 
         {/* ── MOBILE: Stacked cards ── */}
         <div className="flex md:hidden flex-col gap-4">
@@ -306,31 +425,8 @@ export default function News() {
         </div>
 
 
-        {/* ── Description banner — mobile ── */}
-        <motion.div
-          className="flex md:hidden flex-col gap-4 mt-4 p-5 rounded-xl"
-          style={{
-            background: "linear-gradient(135deg, rgba(0,60,180,0.2) 0%, rgba(0,120,255,0.25) 100%)",
-            border: "1px solid rgba(56,189,248,0.25)",
-            borderTop: "2px solid rgba(56,189,248,0.5)",
-            boxShadow: "0 0 30px rgba(56,189,248,0.1)",
-          }}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
-            As the Hyper Tek movement continues to surge forward, it's time to secure your place in history
-            by grabbing one of our exclusive packages — available for a very limited time.
-          </p>
-          <div className="h-px w-full" style={{ background: "rgba(56,189,248,0.2)" }} />
-          <p className="text-[13px] leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
-            Our Non-Fungible Digital Items come with a minimum money-back guarantee and offer incredible
-            in-game bonuses. We have already raised nearly $400,000 — act now and be part of this
-            groundbreaking movement!
-          </p>
-        </motion.div>
+        {/* ── Crowdfunding section — mobile ── */}
+        <CrowdfundingSection className="flex md:hidden" />
 
       </div>
     </section>

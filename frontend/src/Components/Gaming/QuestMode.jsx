@@ -346,7 +346,7 @@ const LOCATIONS = [
   { id:"agri",  name:"ZETA-37-6LP-GM09",   type:"Agriculture Hub",     coords:"T13·L04", atm:"BREATHABLE", hazard:"LOW",    left:"17.5%", top:"20.5%",                                        desc:"Hydroponic farming complex. Primary food source for western sectors." },
   { id:"trade", name:"TQ-174-HC-GM09",     type:"Trading Post",        coords:"T11·L05", atm:"ARTIFICIAL", hazard:"LOW",    left:"41%",   top:"21%",                                          desc:"Free-trade zone. Over 200 registered merchants. Currency: Universal Credits." },
   { id:"fuel",  name:"OPs88-GM09",         type:"Refuel Station",      coords:"T10·L04", atm:"VACUUM",     hazard:"LOW",    left:"37%",   top:"31.5%", labelBelow:true, labelShift:{x:-18,y:0}, desc:"High-capacity fuel depot. Supports ion drives, plasma cores, and dark matter cells." },
-  { id:"ship",  name:"ZION-37-6Q2-GM09",   type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"15.5%", top:"43%",   labelBelow:true,                        desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
+  { id:"ship",  name:"ICx3-9-GM09",        type:"Shipyard",            coords:"T09·L13", atm:"ARTIFICIAL", hazard:"LOW",    left:"15.5%", top:"43%",   labelBelow:true,                        desc:"Fleet maintenance and assembly station. Capacity: 18 vessels." },
   { id:"ind",   name:"CFT47-56TRE-GM09",   type:"Industrial Complex",  coords:"T08·L10", atm:"TOXIC",      hazard:"HIGH",   left:"20.5%", top:"42%",   labelShift:{x:18,y:0},                 desc:"Heavy manufacturing zone. Atmospheric scrubbers required. Output: 8.4k units/cycle." },
   { id:"mil",   name:"ZV-23N-19U-GM09",    type:"Military Base",       coords:"T07·L10", atm:"BREATHABLE", hazard:"HIGH",   left:"28%",   top:"50%",                                          desc:"Restricted zone. Coalition Armed Forces installation. Clearance Level 4 required." },
   { id:"cmd",   name:"ZORAX-19U-GM09",     type:"Command Center",      coords:"T06·L07", atm:"BREATHABLE", hazard:"LOW",    left:"31.5%", top:"54.5%",                                        desc:"Sector command authority. All major coalition operations coordinated here." },
@@ -361,7 +361,7 @@ const LOCATIONS = [
   { id:"pion",  name:"OP28b-GM09",         type:"Pioneer Outpost",     coords:"T05·C00", atm:"VACUUM",     hazard:"MEDIUM", left:"42%",   top:"68.5%",                                        desc:"Frontier exploration base. Marks the edge of the charted transit network." },
   // ── Right cluster ─────────────────────────────────────────
   { id:"sig",   name:"EXT5i-GM09",         type:"Signal Relay",        coords:"T15·R13", atm:"VACUUM",     hazard:"LOW",    left:"65.5%", top:"22%",                                          desc:"High-orbit relay beacon. Uplinks to the Core Network every 6 minutes." },
-  { id:"orb",   name:"ICx3-9-GM09",        type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"22.5%", top:"18.5%", labelBelow:true, labelShift:{x:22,y:0}, desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
+  { id:"orb",   name:"TXC-44P-GM09",       type:"Orbital Lab",         coords:"T14·R07", atm:"ARTIFICIAL", hazard:"MEDIUM", left:"22.5%", top:"18.5%", labelBelow:true, labelShift:{x:22,y:0}, desc:"Zero-gravity materials research. Studies exotic matter behavior under void conditions." },
   { id:"col",   name:"TQ-175-HOP-GM09",    type:"Colony Outpost",      coords:"T13·R05", atm:"BREATHABLE", hazard:"LOW",    left:"75.5%", top:"17.5%",                                        desc:"Early settlement colony. Population: 12,400. Agriculture and mining operations active." },
   { id:"trd",   name:"ECHO23-GM09",        type:"Trade Station",       coords:"T10·R05", atm:"ARTIFICIAL", hazard:"LOW",    left:"39.5%", top:"38.5%",                                        desc:"Eastern trade hub. Junction point for cargo routes from sectors R01–R08." },
   { id:"bio",   name:"MED-B143-GM09",      type:"Biomedical Research", coords:"T09·R05", atm:"BREATHABLE", hazard:"MEDIUM", left:"79.5%", top:"51%",   labelBelow:true,                        desc:"Pharmaceutical and xenobiology research. Quarantine protocols in effect." },
@@ -388,8 +388,8 @@ const PLANET_IMG = {
   agri:  "/planet/1.png",   // ZETA-37-6LP
   sd:    "/planet/1.png",   // ZETA-51-M2
   mil:   "/planet/1.png",   // ZV-23N-19U
-  orb:   "/planet/2.png",   // TXC-44P
-  ship:  "/planet/2.png",   // ZION-37-6Q2
+  orb:   "/planet/2.png",   // TXC-44P-GM09
+  ship:  "/planet/2.png",   // ICx3-9-GM09
   echo:  "/planet/2.png",   // ZIR-12-56
   logi:  "/planet/2.png",   // ZORAX-4SH
   trade: "/planet/2.png",   // ZETA-73-QN
