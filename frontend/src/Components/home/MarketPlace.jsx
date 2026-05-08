@@ -75,7 +75,7 @@ function FeaturedMarketplace() {
               Limited Edition NFA Items
             </h2>
             <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 w-fit mb-1">
-              <span>✦</span> Guaranteed Buy-Back on NFAs &amp; NFCs
+              <span>✦</span> Guaranteed Buy-Back on All NFAs/NFCs/NFTs
             </span>
           </div>
           <p className="text-white/70 text-sm sm:text-base font-semibold -mt-1">

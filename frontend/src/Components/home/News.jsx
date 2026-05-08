@@ -38,20 +38,7 @@ const GAMES = [
   },
 ];
 
-const LIMITED_PACKAGES = [
-  { name: "Stage 1 Starter Pack",    price: "TBA", highlight: "Best Entry Value",    bonuses: ["In-game Currency Bonus", "Exclusive Starter NFA", "Early Access Badge"] },
-  { name: "Stage 1 Explorer Pack",   price: "TBA", highlight: "Most Popular",         bonuses: ["2× In-game Currency Bonus", "2× Exclusive NFAs", "Explorer Title + Badge"] },
-  { name: "Stage 1 Elite Pack",      price: "TBA", highlight: "High Bonus Tier",      bonuses: ["5× In-game Currency Bonus", "5× Exclusive NFAs", "Elite Title + Rare Badge"] },
-  { name: "Stage 1 Champion Pack",   price: "TBA", highlight: "Top Bonus Tier",       bonuses: ["10× In-game Currency Bonus", "10× Exclusive NFAs", "Champion Title + Ultra Badge"] },
-];
 
-const LIMITED_ITEMS = [
-  { name: "Stage 1 Racing Vehicle NFA",   tag: "Hyper Racing",  bonus: "Highest Racing Bonus",  color: "#22c55e" },
-  { name: "Stage 1 Quest Ship NFA",        tag: "Hyper Quest",   bonus: "Highest Quest Bonus",   color: "#38bdf8" },
-  { name: "Stage 1 Overlord Character NFA",tag: "Overlord",      bonus: "Highest Strategy Bonus",color: "#f87171" },
-  { name: "Stage 1 Land Parcel NFA",       tag: "All Games",     bonus: "Passive Yield Bonus",   color: "#a78bfa" },
-  { name: "Stage 1 Infrastructure NFA",    tag: "All Games",     bonus: "Revenue Share Bonus",   color: "#f59e0b" },
-];
 
 function CrowdfundingSection({ className = "" }) {
   return (
@@ -110,99 +97,7 @@ function CrowdfundingSection({ className = "" }) {
         </p>
       </div>
 
-      {/* ── Two lists ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
 
-        {/* Limited Packages */}
-        <div className="px-7 py-6" style={{ borderRight: "1px solid rgba(56,189,248,0.12)" }}>
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-4 h-[2px]" style={{ background: "#38bdf8" }} />
-            <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.22em", color: "#38bdf8" }}>
-              LIMITED PACKAGES
-            </span>
-            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
-          </div>
-
-          <div className="flex flex-col gap-3">
-            {LIMITED_PACKAGES.map((pkg, i) => (
-              <motion.div
-                key={pkg.name}
-                className="relative rounded-lg overflow-hidden"
-                style={{
-                  background: "rgba(56,189,248,0.04)",
-                  border: "1px solid rgba(56,189,248,0.18)",
-                  borderLeft: "3px solid rgba(56,189,248,0.6)",
-                  padding: "12px 14px",
-                }}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
-              >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold", color: "rgba(255,255,255,0.92)", letterSpacing: "0.06em" }}>
-                    {pkg.name}
-                  </span>
-                  <span className="flex-shrink-0 px-2 py-0.5 rounded text-[9px] font-bold" style={{ background: "rgba(56,189,248,0.15)", color: "#38bdf8", fontFamily: "Orbitron,sans-serif", letterSpacing: "0.1em" }}>
-                    {pkg.highlight}
-                  </span>
-                </div>
-                <ul className="flex flex-col gap-1">
-                  {pkg.bonuses.map((b) => (
-                    <li key={b} className="flex items-center gap-2">
-                      <span style={{ color: "#38bdf8", fontSize: 8 }}>▸</span>
-                      <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.6)" }}>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Limited Items */}
-        <div className="px-7 py-6">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-4 h-[2px]" style={{ background: "#a78bfa" }} />
-            <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.22em", color: "#a78bfa" }}>
-              LIMITED ITEMS
-            </span>
-            <div className="flex-1 h-px" style={{ background: "rgba(167,139,250,0.15)" }} />
-          </div>
-
-          <div className="flex flex-col gap-3">
-            {LIMITED_ITEMS.map((item, i) => (
-              <motion.div
-                key={item.name}
-                className="rounded-lg"
-                style={{
-                  background: "rgba(167,139,250,0.04)",
-                  border: "1px solid rgba(167,139,250,0.18)",
-                  borderLeft: `3px solid ${item.color}`,
-                  padding: "12px 14px",
-                  display: "flex", alignItems: "center", gap: 12,
-                }}
-                initial={{ opacity: 0, x: 16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.07 }}
-              >
-                <div className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${item.color}18`, border: `1px solid ${item.color}44` }}>
-                  <div className="w-2 h-2 rounded-full" style={{ background: item.color, boxShadow: `0 0 6px ${item.color}` }} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", color: "rgba(255,255,255,0.9)", letterSpacing: "0.05em" }}>{item.name}</div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[10px] px-2 py-0.5 rounded" style={{ background: `${item.color}18`, color: item.color, fontFamily: "Orbitron,sans-serif", letterSpacing: "0.08em" }}>{item.tag}</span>
-                    <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.45)" }}>{item.bonus}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-      </div>
     </motion.div>
   );
 }

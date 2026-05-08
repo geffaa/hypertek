@@ -33,8 +33,8 @@ const DEFAULT_MISSION = [
 
 
 const DEFAULT_ADVANTAGE = [
-  { icon: iconConnect, title: "Interconnected Ecosystem",   body: "Strategy, racing, and quest-based adventures linked through a shared progression system — move freely between games without losing progress." },
-  { icon: iconWallet,  title: "Digital Asset Economy",      body: "NFAs with guaranteed minimum buy-backs. Own, trade, and create assets — land, infrastructure, utilities — that function across the entire ecosystem." },
+  { icon: iconConnect, title: "Interconnected Ecosystem",   body: "Strategy, racing, and quest-based adventures linked through a shared progression system, move freely between games without losing progress." },
+  { icon: iconWallet,  title: "Digital Asset Economy",      body: "NFAs with guaranteed minimum buy-backs. Own, trade, and create assets, land, infrastructure, utilities, that function across the entire ecosystem." },
   { icon: iconCard,    title: "Player-Controlled Economy",  body: "Unlike locked developer inventories, Hyper Tek lets players acquire assets, develop resources, and introduce new utilities into the universe." },
   { icon: iconEarn,    title: "Contributors, Not Players",  body: "Gameplay and digital ownership create a dynamic environment where every participant actively contributes to the growth of the ecosystem." },
 ];
@@ -211,7 +211,7 @@ function About() {
 
           <motion.div className="flex-1 flex flex-col gap-5" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
             <SectionLabel number="01" label="Our Mission" />
-            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
+            <h2 className="font-[Goldman] font-bold text-4xl md:text-5xl xl:text-[56px] text-white leading-[1.1] uppercase">
               Redefining What<br />Gaming Can Be
             </h2>
             <div className="space-y-4">
@@ -265,7 +265,7 @@ function About() {
               Three Worlds. One Economy.
             </h2>
             <p className="text-white/38 text-sm mt-2 max-w-lg mx-auto">
-              Each game is a gateway — distinct in gameplay, unified in economy and progression.
+              Each game is a gateway, distinct in gameplay, unified in economy and progression.
             </p>
           </motion.div>
 
@@ -327,52 +327,10 @@ function About() {
           {/* Two-column layout */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start mt-2">
 
-            {/* ── LEFT: The Key Advantage ── */}
+            {/* ── LEFT: HYPER TEK, A WEB3 GAMING SOLUTION ── */}
             <motion.div
-              className="w-full lg:w-[44%] flex-shrink-0"
+              className="w-full lg:w-[44%] flex-shrink-0 flex flex-col gap-6"
               initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
-            >
-              <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white mb-8 leading-tight">
-                The Key<br />Advantage
-              </h2>
-
-              <div className="flex flex-col divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                {advantages.map((a, i) => (
-                  <motion.div
-                    key={a.title}
-                    className="flex gap-5 items-start py-5"
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.45, delay: i * 0.07 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
-                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.45)", letterSpacing: "0.2em" }}>0{i + 1}</span>
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                        style={{ background: "rgba(56,189,248,0.07)", border: "1px solid rgba(56,189,248,0.18)" }}>
-                        <img src={a.icon} alt={a.title} className="w-5 h-5 object-contain"
-                          style={{ filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(175deg) opacity(0.85)" }} />
-                      </div>
-                    </div>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <div className="w-3 h-0.5 rounded-full" style={{ background: "rgba(56,189,248,0.6)" }} />
-                        <p className="text-white font-semibold text-sm">{a.title}</p>
-                      </div>
-                      <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Vertical divider (desktop only) */}
-            <div className="hidden lg:block w-px self-stretch flex-shrink-0" style={{ background: "linear-gradient(to bottom,transparent,rgba(56,189,248,0.25) 20%,rgba(167,139,250,0.25) 80%,transparent)" }} />
-
-            {/* ── RIGHT: HYPER TEK, A WEB3 GAMING SOLUTION ── */}
-            <motion.div
-              className="flex-1 flex flex-col gap-6"
-              initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
             >
               <div>
                 <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
@@ -427,7 +385,7 @@ function About() {
                       Cash-Out Ecosystem
                     </span>
                     <p className="text-white/60 text-[12px] leading-relaxed">
-                      Seamlessly convert in-game earnings to real-world currency — your digital labour has tangible, withdrawable value.
+                      Seamlessly convert in-game earnings to real-world currency; your digital labour has tangible, withdrawable value.
                     </p>
                   </div>
                 </motion.div>
@@ -455,6 +413,48 @@ function About() {
                   </div>
                 </motion.div>
 
+              </div>
+            </motion.div>
+
+            {/* Vertical divider (desktop only) */}
+            <div className="hidden lg:block w-px self-stretch flex-shrink-0" style={{ background: "linear-gradient(to bottom,transparent,rgba(56,189,248,0.25) 20%,rgba(167,139,250,0.25) 80%,transparent)" }} />
+
+            {/* ── RIGHT: The Key Advantage ── */}
+            <motion.div
+              className="flex-1"
+              initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
+            >
+              <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white mb-8 leading-tight">
+                The Key<br />Advantages
+              </h2>
+
+              <div className="flex flex-col divide-y" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                {advantages.map((a, i) => (
+                  <motion.div
+                    key={a.title}
+                    className="flex gap-5 items-start py-5"
+                    initial={{ opacity: 0, x: 16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, delay: i * 0.07 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex flex-col items-center gap-1.5 flex-shrink-0">
+                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, color: "rgba(56,189,248,0.45)", letterSpacing: "0.2em" }}>0{i + 1}</span>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: "rgba(56,189,248,0.07)", border: "1px solid rgba(56,189,248,0.18)" }}>
+                        <img src={a.icon} alt={a.title} className="w-5 h-5 object-contain"
+                          style={{ filter: "brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(175deg) opacity(0.85)" }} />
+                      </div>
+                    </div>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-3 h-0.5 rounded-full" style={{ background: "rgba(56,189,248,0.6)" }} />
+                        <p className="text-white font-semibold text-sm">{a.title}</p>
+                      </div>
+                      <p className="text-white/50 text-[13px] leading-relaxed">{a.body}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
 

@@ -17,23 +17,6 @@ import useMobileLandscape from "../../hooks/useMobileLandscape";
 /* ─── Vehicle fleet data ───────────────────────────────────────── */
 const UNLOCKED_VEHICLES = [
   {
-    id: "sebring",
-    name: "Sebring X-427",
-    class: "Plasma Fighter",
-    bay: "BAY 05",
-    img: "/vehicle1.png",
-    color: "#22c55e",
-    stats: {
-      "Top Speed":     "1341 kt",
-      "Acceleration":  "0-500kt/0.9sec",
-      "Hull Strength": "Mid Range",
-      "Range":         "316 km",
-      "Weight":        "1107 kg",
-      "Shields":       "F/R 80%",
-    },
-    loadout: ["PZI Jet Drive", "3Vec Anti-Gravity Units", "Twin H.A.R. Stabilisers", "Dual Neutrino Booster"],
-  },
-  {
     id: "wraith",
     name: "Wraith SR-9",
     class: "Stealth Interceptor",
@@ -520,33 +503,6 @@ const LOCKED_PARTS = [
 ];
 
 const PARTS_BY_VEHICLE = {
-  sebring: [
-    {
-      id: "hull", label: "HULL", icon: "🛡", locked: false,
-      equipped: "Carbon Composite Mk1",
-      specs: { "Weight": "859 kg", "Defence": "Front and Rear Split Shields +18%", "Drag Coeff.": "0.018Cd" },
-      upgrades: ["Defence: Front and Rear Split Shields +18%", "Titanium Shell — +30% Defence 🔒", "Nano-Armor — +45% Defence 🔒"],
-    },
-    {
-      id: "fins", label: "AERODYNAMICS", icon: "🌬", locked: false,
-      equipped: "Standard Wing Array",
-      specs: { "G-Limits": "9.3G", "Speed Rating": "+5%", "Corning": "+8" },
-      upgrades: ["Delta Wing Array — +12% Speed", "Swept Vortex Fins — +18% Corning 🔒", "Active Aero System — COMING SOON 🔒"],
-    },
-    {
-      id: "drive", label: "DRIVE SYSTEM", icon: "⚡", locked: false,
-      equipped: "PZI Jet Drive",
-      specs: { "Top Speed": "1341 kt", "Acceleration": "0-500kt/0.9sec", "Fuel Type": "Av Fuel 120", "Efficiency": "88%" },
-      upgrades: ["Series 2 PZI Jet Drive — +8%", "Vector Nozzle — +15% Turn Rate 🔒", "Quantum Drive — COMING SOON 🔒"],
-    },
-    {
-      id: "cockpit", label: "COCKPIT", icon: "🎮", locked: false,
-      equipped: "Standard HUD",
-      specs: { "Visibility": "220°", "HUD Type": "Basic", "Reaction": "0ms lag" },
-      upgrades: ["Enhanced HUD — +30° Vision", "Neural Interface — COMING SOON 🔒", "Holo Projection — COMING SOON 🔒"],
-    },
-    ...LOCKED_PARTS,
-  ],
   wraith: [
     {
       id: "hull", label: "HULL", icon: "🛡", locked: false,

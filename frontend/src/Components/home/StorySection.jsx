@@ -5,23 +5,12 @@ import { Network, Gem, Zap, ArrowLeftRight, Layers, Glasses } from "lucide-react
 import useSiteContent from "../../hooks/useSiteContent";
 
 const AVATAR_FILES = [
-  "commander-elite.png",
-  "dryads-female.png",
-  "dryads-male.png",
-  "fawnus-female.png",
-  "fawnus-male.png",
-  "geodians-female.png",
-  "geodians-male.png",
-  "lithionites-female.png",
-  "lithionites-male.png",
-  "mantasquads-female.png",
-  "mantasquads-male.png",
-  "marmulus-female.png",
-  "marmulus-male.png",
-  "ophidians-female.png",
-  "ophidians-male.png",
-  "overlord.png",
-  "team-specialist-major.png",
+  "commander-elite.png","dryads-female.png","dryads-male.png",
+  "fawnus-female.png","fawnus-male.png","geodians-female.png",
+  "geodians-male.png","lithionites-female.png","lithionites-male.png",
+  "mantasquads-female.png","mantasquads-male.png","marmulus-female.png",
+  "marmulus-male.png","ophidians-female.png","ophidians-male.png",
+  "overlord.png","team-specialist-major.png",
 ];
 
 import storyBg   from "../../assets/images/herostory/story_bg.jpg";
@@ -29,31 +18,26 @@ import lineRight from "../../assets/images/herostory/line_right.png";
 import lineLeft  from "../../assets/images/herostory/line_left.png";
 
 const KEY_HIGHLIGHTS = [
-  { Icon: Network,        label: "Interconnected Universe",  desc: "3 games — 1 shared economy and progression system",           color: "rgba(56,189,248,0.85)"  },
-  { Icon: Gem,            label: "True Ownership",           desc: "NFAs with guaranteed minimum buy-back",                       color: "rgba(167,139,250,0.85)" },
-  { Icon: Zap,            label: "Play-to-Earn",             desc: "Every action contributes to your real-world rewards",         color: "rgba(251,191,36,0.85)"  },
-  { Icon: ArrowLeftRight, label: "Cash-Out Payments",        desc: "Converting in-game currency/rewards to cash-out payments",    color: "rgba(34,197,94,0.85)"   },
-  { Icon: Layers,         label: "Linked Progression",       desc: "Player progression is linked across all suites of games",    color: "rgba(251,113,133,0.85)" },
-  { Icon: Glasses,        label: "VR/AR Integration",        desc: "VR/AR players can join missions and epic battles in real-time", color: "rgba(250,204,21,0.85)"  },
+  { Icon: Network,        label: "Interconnected Universe",  desc: "3 games — 1 shared economy and progression system",          color: "#38bdf8" },
+  { Icon: Gem,            label: "True Ownership",           desc: "NFAs with guaranteed minimum buy-back",                      color: "#a78bfa" },
+  { Icon: Zap,            label: "Play-to-Earn",             desc: "Every action contributes to your real-world rewards",        color: "#fbbf24" },
+  { Icon: ArrowLeftRight, label: "Cash-Out Payments",        desc: "Converting in-game currency/rewards to cash-out payments",   color: "#22c55e" },
+  { Icon: Layers,         label: "Linked Progression",       desc: "Player progression is linked across all suites of games",   color: "#fb7185" },
+  { Icon: Glasses,        label: "VR/AR Integration",        desc: "VR/AR players can join missions and epic battles in real-time", color: "#facc15" },
 ];
 
-const containerVariants = {
-  hidden:   { opacity: 0 },
-  visible:  { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
-const fadeRight = { hidden: { opacity: 0, x: 80 }, visible: { opacity: 1, x: 0, transition: { duration: 0.9, ease: "easeOut" } } };
-const scaleIn   = { hidden: { opacity: 0, scale: 0.8, y: 40 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } } };
-const fadeUp    = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } } };
+const c = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+const up  = { hidden: { opacity: 0, y: 32 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } };
+const lft = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } };
+const rgt = { hidden: { opacity: 0, x: 40  }, visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } };
+const sc  = { hidden: { opacity: 0, scale: 0.9, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } } };
 
 export default function StorySection() {
-  const ref       = useRef(null);
-  const isInView  = useInView(ref, { once: true, margin: "-60px" });
+  const ref      = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
   const { data: cms } = useSiteContent("home_story");
 
-  const randomAvatar = useMemo(() => {
-    const file = AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)];
-    return `/avatar/${file}`;
-  }, []);
+  const randomAvatar = useMemo(() => `/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`, []);
 
   const bgImage        = cms.background_image || storyBg;
   const charImage      = cms.character_image  || randomAvatar;
@@ -67,113 +51,165 @@ export default function StorySection() {
       ref={ref}
       data-edit-section="home_story"
       data-edit-label="Story Section"
-      className="relative w-full min-h-screen overflow-hidden"
-      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+      className="relative w-full min-h-screen overflow-hidden flex items-center"
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#060a1f]/75 z-[1]" />
+      {/* Background */}
+      <div className="absolute inset-0"
+        style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+      <div className="absolute inset-0 bg-[#040815]/80" />
+      {/* Left-side dark fade so text is always readable */}
+      <div className="absolute inset-0"
+        style={{ background: "linear-gradient(90deg, rgba(4,8,21,0.92) 0%, rgba(4,8,21,0.60) 38%, rgba(4,8,21,0.10) 55%, rgba(4,8,21,0.60) 70%, rgba(4,8,21,0.92) 100%)" }} />
+      {/* Bottom vignette */}
+      <div className="absolute bottom-0 left-0 right-0 h-32"
+        style={{ background: "linear-gradient(to top, rgba(4,8,21,0.9), transparent)" }} />
 
       {/* Decorative lines */}
-      <img src={lineRight} alt="" className="absolute top-8 right-0 w-[200px] md:w-[300px] opacity-40 z-[2]" />
-      <img src={lineLeft}  alt="" className="absolute bottom-8 left-0 w-[200px] md:w-[300px] opacity-40 z-[2]" />
+      <img src={lineRight} alt="" className="absolute top-6 right-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
+      <img src={lineLeft}  alt="" className="absolute bottom-6 left-0 w-[220px] opacity-30 z-[2] pointer-events-none" />
 
+      {/* ── 3-column grid ── */}
       <motion.div
-        className="relative z-10 h-full min-h-screen flex items-center"
+        className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 py-6"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        variants={containerVariants}
+        variants={c}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_auto_1fr] gap-0 items-center min-h-[calc(100vh-48px)]">
 
-            {/* LEFT: Character */}
-            <motion.div className="hidden lg:flex relative items-center justify-end" variants={scaleIn}>
-              <img
-                src={charImage}
-                alt="Character"
-                loading="lazy"
-                className="relative z-[2] w-[360px] lg:w-[480px] 2xl:w-[540px] h-auto object-contain"
-                style={{ filter: "drop-shadow(0 0 50px rgba(255,255,255,0.1))" }}
-              />
+          {/* ══ LEFT: Story text ══ */}
+          <motion.div className="flex flex-col gap-6 pr-0 lg:pr-10" variants={c}>
+
+            {/* Label */}
+            <motion.div variants={lft} className="flex items-center gap-3">
+              <div className="w-8 h-[1px] bg-[#38bdf8]/70" />
+              <span className="text-[#38bdf8]/80 text-[10px] font-bold tracking-[0.45em] uppercase"
+                style={{ fontFamily: "Orbitron, sans-serif" }}>
+                {leftHeading}
+              </span>
             </motion.div>
 
-            {/* RIGHT: Content */}
-            <div className="flex flex-col gap-5 lg:pl-8">
+            {/* Title */}
+            <motion.h2
+              variants={lft}
+              className="font-[Goldman] font-bold text-white leading-[1.05]"
+              style={{ fontSize: "clamp(2rem, 4vw, 4rem)" }}
+            >
+              {leftSubheading}
+            </motion.h2>
 
-              {/* Heading */}
-              <motion.div variants={fadeRight}>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-[2px] bg-white/50" />
-                  <span className="text-white/70 font-bold text-sm tracking-[0.3em] uppercase">{leftHeading}</span>
-                </div>
-                <h2 className="text-white font-[Goldman] font-bold text-3xl md:text-4xl lg:text-5xl leading-tight">
-                  {leftSubheading}
-                </h2>
-              </motion.div>
+            {/* Divider */}
+            <motion.div variants={lft} className="flex items-center gap-3">
+              <div className="w-5 h-[1px] bg-[#38bdf8]/50" />
+              <div className="w-24 h-[1px] bg-white/10" />
+            </motion.div>
 
-              {/* Story body — single concise card */}
-              <motion.div
-                className="rounded-xl p-6"
-                style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.10)" }}
-                variants={fadeRight}
+            {/* Body */}
+            <motion.p
+              variants={up}
+              className="text-gray-400 text-sm leading-[1.85]"
+            >
+              {leftBody}
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div variants={up} className="flex items-center gap-6 mt-2">
+              <Link
+                to="/about"
+                className="group relative px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:brightness-125"
+                style={{
+                  fontFamily: "Orbitron, sans-serif",
+                  background: "rgba(0,8,30,0.85)",
+                  border: "1px solid rgba(56,189,248,0.45)",
+                  borderTop: "2px solid rgba(56,189,248,0.80)",
+                  clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
+                  color: "rgba(56,189,248,0.95)",
+                  boxShadow: "0 0 24px rgba(56,189,248,0.12)",
+                }}
               >
-                <p className="text-gray-300 text-sm md:text-[15px] leading-relaxed text-justify">
-                  {leftBody}
-                </p>
-              </motion.div>
+                Read Our Full Story
+              </Link>
+              <span className="text-white/15 text-[9px] tracking-[0.45em] uppercase font-bold">Hyper Tek 100</span>
+            </motion.div>
+          </motion.div>
 
-              {/* Key highlights */}
-              <motion.div
-                className="rounded-xl overflow-hidden"
-                style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.10)" }}
-                variants={fadeUp}
-              >
-                {KEY_HIGHLIGHTS.map((h, idx) => {
-                  const Icon = h.Icon;
-                  return (
+          {/* ══ CENTER: Character ══ */}
+          <motion.div
+            className="hidden lg:flex relative items-end justify-center"
+            style={{ width: "clamp(340px, 30vw, 520px)", height: "clamp(600px, 84vh, 920px)" }}
+            variants={sc}
+          >
+            {/* Foot glow */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-48 h-10 rounded-full blur-2xl"
+              style={{ background: "radial-gradient(ellipse, rgba(56,189,248,0.30) 0%, transparent 70%)" }} />
+            {/* Vertical light beam behind character */}
+            <div className="absolute inset-x-0 bottom-0 h-full"
+              style={{ background: "radial-gradient(ellipse 40% 80% at 50% 80%, rgba(56,189,248,0.08) 0%, transparent 70%)" }} />
+            <img
+              src={charImage}
+              alt="Character"
+              loading="lazy"
+              className="relative z-[2] h-full w-auto object-contain object-bottom"
+              style={{ filter: "drop-shadow(0 0 50px rgba(56,189,248,0.15)) drop-shadow(0 20px 40px rgba(0,0,0,0.8))" }}
+            />
+          </motion.div>
+
+          {/* ══ RIGHT: Key highlights ══ */}
+          <motion.div
+            className="flex flex-col pl-0 lg:pl-10"
+            variants={c}
+          >
+            <motion.div
+              variants={rgt}
+              className="rounded-xl overflow-hidden"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 48px rgba(0,0,0,0.4)",
+              }}
+            >
+              {KEY_HIGHLIGHTS.map((h, idx) => {
+                const Icon = h.Icon;
+                return (
+                  <motion.div
+                    key={h.label}
+                    variants={rgt}
+                    className="group flex items-center gap-4 px-5 py-3.5 relative overflow-hidden cursor-default transition-all duration-300 hover:bg-white/[0.03]"
+                    style={{ borderTop: idx > 0 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+                  >
+                    {/* Left accent */}
                     <div
-                      key={h.label}
-                      className="flex items-center gap-3 px-5 py-3"
-                      style={{ borderTop: idx > 0 ? "1px solid rgba(255,255,255,0.07)" : "none" }}
+                      className="absolute left-0 top-0 bottom-0 w-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ background: `linear-gradient(to bottom, transparent, ${h.color}, transparent)` }}
+                    />
+                    {/* Icon */}
+                    <div
+                      className="w-8 h-8 flex items-center justify-center rounded-lg flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
+                      style={{
+                        background: `${h.color}12`,
+                        border: `1px solid ${h.color}28`,
+                      }}
                     >
-                      <div className="w-7 h-7 flex items-center justify-center flex-shrink-0 rounded-lg"
-                        style={{ background: `${h.color}15`, border: `1px solid ${h.color}35` }}>
-                        <Icon style={{ color: h.color, width: 14, height: 14 }} />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-white text-xs font-semibold">{h.label}</p>
-                        <p className="text-white/45 text-[11px] mt-0.5">{h.desc}</p>
-                      </div>
-                      <div className="w-1 h-5 rounded-full flex-shrink-0" style={{ background: `linear-gradient(to bottom, ${h.color}, transparent)`, opacity: 0.6 }} />
+                      <Icon style={{ color: h.color, width: 14, height: 14 }} />
                     </div>
-                  );
-                })}
-              </motion.div>
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-[12px] font-semibold leading-tight">{h.label}</p>
+                      <p className="text-white/40 text-[10.5px] mt-0.5 leading-tight truncate">{h.desc}</p>
+                    </div>
+                    {/* Right accent bar */}
+                    <div
+                      className="w-[3px] h-5 rounded-full flex-shrink-0"
+                      style={{ background: `linear-gradient(to bottom, ${h.color}, transparent)`, opacity: 0.55 }}
+                    />
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </motion.div>
 
-              {/* CTA */}
-              <motion.div className="flex items-center gap-4 mt-1" variants={fadeUp}>
-                <Link
-                  to="/about"
-                  className="px-6 py-2.5 text-[10px] font-bold uppercase transition-all hover:brightness-125"
-                  style={{
-                    background: "rgba(0,10,40,0.75)",
-                    border: "1px solid rgba(56,189,248,0.55)",
-                    borderTop: "2px solid rgba(56,189,248,0.85)",
-                    clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
-                    fontFamily: "Orbitron,sans-serif",
-                    boxShadow: "0 0 24px rgba(56,189,248,0.20)",
-                    color: "rgba(56,189,248,0.95)",
-                    letterSpacing: "0.14em",
-                  }}
-                >
-                  Read Our Full Story
-                </Link>
-                <div className="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent" />
-                <span className="text-white/15 text-[10px] tracking-[0.4em] uppercase font-bold">Hyper Tek 100</span>
-              </motion.div>
-
-            </div>
-          </div>
         </div>
       </motion.div>
     </section>
