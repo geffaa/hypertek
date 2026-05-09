@@ -44,7 +44,7 @@ export default function StorySection() {
   const leftHeading    = cms.left_heading     || "STORY";
   const leftSubheading = cms.left_subheading  || "The year is 2117.";
   const leftBody       =
-    "In the Year 2117, prior to the aftermath of Earth's collapse, survivors initiated the Hyper Tek Exodus. Humanity's final endeavour for survival didn't result in the conquest of the stars; instead, it scattered across them, dispersing AI, enhanced genomes, and prototypes over thousands of seed worlds. Each world developed in isolation, giving rise to new species, cultures, and technologies. At the heart of it all lies the Echo Core, a quantum relic pulsing with paradoxes, memories, and a call to power. It awakens you as a reborn Overlord, forged from legacy and technology.";
+    "In the Year 2117, prior to the aftermath of Earth's collapse, survivors initiated the Hyper Tek Exodus. Humanity's final endeavour for survival didn't result in the conquest of the stars; instead, it scattered across them, dispersing AI, enhanced genomes, and prototypes over thousands of seed worlds. Eons passed, as each world developed in isolation, giving rise to new species, cultures, and technologies. At the heart of it all lies the Echo Core, a quantum relic pulsing with paradoxes, memories, and a call to power. It awakens you as a reborn Overlord, forged from legacy and technology.";
 
   return (
     <section
@@ -83,9 +83,9 @@ export default function StorySection() {
             {/* Label */}
             <motion.div variants={lft} className="flex items-center gap-3">
               <div className="w-8 h-[1px] bg-[#38bdf8]/70" />
-              <span className="text-[#38bdf8]/80 text-[10px] font-bold tracking-[0.45em] uppercase"
-                style={{ fontFamily: "Orbitron, sans-serif" }}>
-                {leftHeading}
+              <span className="text-[#38bdf8] text-[15px] font-bold tracking-[0.45em] uppercase"
+                style={{ fontFamily: "Orbitron, sans-serif", textShadow: "0 0 16px rgba(56,189,248,0.55)" }}>
+                The {leftHeading}
               </span>
             </motion.div>
 
@@ -129,7 +129,15 @@ export default function StorySection() {
               >
                 Read Our Full Story
               </Link>
-              <span className="text-white/15 text-[9px] tracking-[0.45em] uppercase font-bold">Hyper Tek 100</span>
+              <span
+                className="text-[11px] tracking-[0.45em] uppercase font-bold"
+                style={{
+                  fontFamily: "Orbitron, sans-serif",
+                  color: "rgba(56,189,248,0.75)",
+                  textShadow: "0 0 10px rgba(56,189,248,0.4)",
+                  letterSpacing: "0.45em",
+                }}
+              >Hyper Tek 100</span>
             </motion.div>
           </motion.div>
 

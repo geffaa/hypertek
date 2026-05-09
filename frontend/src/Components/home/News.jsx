@@ -40,67 +40,6 @@ const GAMES = [
 
 
 
-function CrowdfundingSection({ className = "" }) {
-  return (
-    <motion.div
-      className={`${className} flex-col gap-0 mt-5 overflow-hidden rounded-xl`}
-      style={{
-        background: "linear-gradient(160deg, rgba(0,40,120,0.22) 0%, rgba(0,10,40,0.55) 100%)",
-        border: "1px solid rgba(56,189,248,0.22)",
-        borderTop: "2px solid rgba(56,189,248,0.5)",
-        boxShadow: "0 0 50px rgba(56,189,248,0.08)",
-      }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
-      {/* ── Top text block ── */}
-      <div className="px-8 py-7 flex flex-col gap-4" style={{ borderBottom: "1px solid rgba(56,189,248,0.12)" }}>
-        {/* Badge */}
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(56,189,248,0.7)" }}>
-            CROWDFUNDING CAMPAIGN — STAGE 1
-          </span>
-        </div>
-
-        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-          We are excited to announce the launch of our highly anticipated crowdfunding campaign to secure funding
-          for the completion of the groundbreaking Hyper Tek project, which is making positive strides! This is
-          your chance to dive into the Hyper Tek ecosystem as an early participant by choosing from an exclusive
-          selection of limited-availability items and packages that you won't want to miss.<br />
-          Act quickly! By purchasing directly from us on this platform, you can enjoy reduced rates of 10% by
-          allowing us to pass the savings on to you, from avoiding crowdfunding fees, which are listed below!
-        </p>
-
-        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-          As all Hyper Tek Non-Fungible Digital items are backed by a guaranteed minimum buy-back, with most also
-          offering substantial in-game bonuses that enhance your experience, to amp things up, we're introducing a
-          series of limited-edition Non-Fungible Assets (NFAs) featuring the highest bonus levels that will ever
-          be offered. This is a rare opportunity as these offerings will never be repeated! Once these items sell
-          out or we hit our funding target, any remaining unminted limited-edition NFAs will be pulled from the
-          website for good! This means these Stage 1 NFAs will retain the highest in-game bonuses and remain
-          truly unique, offering you and fellow investors the confidence that your purchase is genuinely one of a
-          kind.
-        </p>
-
-        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-          We've already raised over $440,000 and are looking to secure an additional $460,000. This is your
-          moment to join us in this thrilling initiative; don't let it slip away! Purchase your
-          limited-availability items or packages today and be part of the exciting Hyper Tek Ecosystem.
-        </p>
-
-        <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-          Remember to sign up for the wishlist and connect with us on social media to stay in the loop! Act now,
-          as time is of the essence!
-        </p>
-      </div>
-
-
-    </motion.div>
-  );
-}
 
 export default function News() {
   const navigate = useNavigate();
@@ -271,8 +210,6 @@ export default function News() {
           })}
         </div>
 
-        {/* ── Crowdfunding section — desktop ── */}
-        <CrowdfundingSection className="hidden md:block" />
 
         {/* ── MOBILE: Stacked cards ── */}
         <div className="flex md:hidden flex-col gap-4">
@@ -320,8 +257,6 @@ export default function News() {
         </div>
 
 
-        {/* ── Crowdfunding section — mobile ── */}
-        <CrowdfundingSection className="flex md:hidden" />
 
       </div>
     </section>

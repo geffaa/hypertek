@@ -563,110 +563,171 @@ function CrowdfundingPackages() {
 
   return (
     <section className="relative z-10 w-full px-6 pb-16">
-      <div className="mx-auto max-w-[1400px] flex flex-col gap-8">
+      <div className="mx-auto max-w-[1400px]">
 
+        {/* ── Unified container: header text + packages grid ── */}
         <motion.div
-          className="flex flex-col gap-2"
           variants={fadeUp} custom={0}
           initial="hidden" whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="overflow-hidden rounded-xl"
+          style={{
+            background: "linear-gradient(160deg, rgba(0,40,120,0.22) 0%, rgba(0,10,40,0.55) 100%)",
+            border: "1px solid rgba(56,189,248,0.22)",
+            borderTop: "2px solid rgba(56,189,248,0.5)",
+            boxShadow: "0 0 50px rgba(56,189,248,0.08)",
+          }}
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-[2px] bg-white/50" />
-            <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Collections</span>
-          </div>
-          <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
-            Donation Tier Packages,
-          </h2>
-          <p className="text-white/70 text-sm sm:text-base font-semibold -mt-1">
-            Purchase here and save 10% off the listed prices
-          </p>
-        </motion.div>
+          {/* ── Header: crowdfunding intro text ── */}
+          <div className="px-8 py-7 flex flex-col gap-4">
 
-        <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {visible.map((pkg, index) => (
-              <motion.div
-                key={pkg.id}
-                className="rounded-xl overflow-hidden flex flex-col cursor-pointer group"
-                style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                }}
-                variants={fadeUp} custom={index + 1}
-                initial="hidden" whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                onClick={() => setSelected(pkg)}
-              >
-                <div
-                  className="relative overflow-hidden flex items-end justify-center bg-[rgba(255,255,255,0.04)]"
-                  style={{ height: "160px" }}
-                >
-                  {pkg.image ? (
-                    <img
-                      src={pkg.image}
-                      alt={pkg.title}
-                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
-                      <span className="text-white/20 text-4xl">?</span>
-                      <span className="text-white/20 text-[10px]">Image coming soon</span>
-                    </div>
-                  )}
-                </div>
+            {/* Badge */}
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
+                CROWDFUNDING CAMPAIGN — STAGE 1
+              </span>
+            </div>
 
-                <div
-                  className="flex flex-col gap-1 px-3 py-2.5"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
-                >
-                  <h3 className="text-white font-bold text-[12px] leading-snug line-clamp-2">
-                    {pkg.title}
-                  </h3>
-                  <span className="text-[#7EC8A0] text-[11px] font-semibold">
-                    Donation Tier: {pkg.tier}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              We are excited to announce the launch of our highly anticipated crowdfunding campaign to secure funding
+              for the completion of the groundbreaking Hyper Tek project, which is making positive strides! This is
+              your chance to dive into the Hyper Tek ecosystem as an early participant by choosing from an exclusive
+              selection of limited-availability items and packages that you won't want to miss.<br />
+              Act quickly! By purchasing directly from us on this platform, you can enjoy reduced rates of 10% by
+              allowing us to pass the savings on to you, from avoiding crowdfunding fees, which are listed below!
+            </p>
+
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              As all Hyper Tek Non-Fungible Digital items are backed by a guaranteed minimum buy-back, with most also
+              offering substantial in-game bonuses that enhance your experience, to amp things up, we're introducing a
+              series of limited-edition Non-Fungible Assets (NFAs) featuring the highest bonus levels that will ever
+              be offered. This is a rare opportunity as these offerings will never be repeated! Once these items sell
+              out or we hit our funding target, any remaining unminted limited-edition NFAs will be pulled from the
+              website for good! This means these Stage 1 NFAs will retain the highest in-game bonuses and remain
+              truly unique, offering you and fellow investors the confidence that your purchase is genuinely one of a
+              kind.
+            </p>
+
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              We've already raised over $440,000 and are looking to secure an additional $460,000. This is your
+              moment to join us in this thrilling initiative; don't let it slip away! Purchase your
+              limited-availability items or packages today and be part of the exciting Hyper Tek Ecosystem.
+            </p>
+
+            <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
+              Remember to sign up for the wishlist and connect with us on social media to stay in the loop! Act now,
+              as time is of the essence!
+            </p>
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center gap-2">
-              {Array.from({ length: totalPages }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setPage(i)}
-                  className="rounded-full transition-all duration-200"
+          {/* ── Divider with section heading ── */}
+          <div
+            className="px-8 py-4 flex items-center gap-4"
+            style={{ borderTop: "1px solid rgba(56,189,248,0.2)", background: "rgba(56,189,248,0.04)" }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-[2px] bg-white/50" />
+              <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Collections</span>
+            </div>
+            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <h2 className="text-white font-[Goldman] font-bold text-xl sm:text-2xl uppercase whitespace-nowrap">
+              Donation Tier Packages
+            </h2>
+            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <span className="text-white/50 text-[12px] font-semibold whitespace-nowrap">
+              Save 10% off listed prices
+            </span>
+          </div>
+
+          {/* ── Packages grid ── */}
+          <div className="px-8 pb-8 pt-5 flex flex-col gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {visible.map((pkg, index) => (
+                <motion.div
+                  key={pkg.id}
+                  className="rounded-xl overflow-hidden flex flex-col cursor-pointer group"
                   style={{
-                    width: page === i ? "24px" : "8px",
-                    height: "8px",
-                    background: page === i ? "#fff" : "rgba(255,255,255,0.25)",
+                    background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+                    border: "1px solid rgba(255,255,255,0.12)",
                   }}
-                />
+                  variants={fadeUp} custom={index + 1}
+                  initial="hidden" whileInView="visible"
+                  viewport={{ once: true, amount: 0.1 }}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  onClick={() => setSelected(pkg)}
+                >
+                  <div
+                    className="relative overflow-hidden flex items-end justify-center bg-[rgba(255,255,255,0.04)]"
+                    style={{ height: "160px" }}
+                  >
+                    {pkg.image ? (
+                      <img
+                        src={pkg.image}
+                        alt={pkg.title}
+                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center gap-1">
+                        <span className="text-white/20 text-4xl">?</span>
+                        <span className="text-white/20 text-[10px]">Image coming soon</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div
+                    className="flex flex-col gap-1 px-3 py-2.5"
+                    style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
+                  >
+                    <h3 className="text-white font-bold text-[12px] leading-snug line-clamp-2">
+                      {pkg.title}
+                    </h3>
+                    <span className="text-[#7EC8A0] text-[11px] font-semibold">
+                      Donation Tier: {pkg.tier}
+                    </span>
+                  </div>
+                </motion.div>
               ))}
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setPage((p) => Math.max(0, p - 1))}
-                disabled={page === 0}
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 disabled:opacity-30"
-                style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
-              >
-                ‹
-              </button>
-              <button
-                onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-                disabled={page === totalPages - 1}
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 disabled:opacity-30"
-                style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
-              >
-                ›
-              </button>
+
+            {/* Pagination */}
+            <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setPage(i)}
+                    className="rounded-full transition-all duration-200"
+                    style={{
+                      width: page === i ? "24px" : "8px",
+                      height: "8px",
+                      background: page === i ? "#fff" : "rgba(255,255,255,0.25)",
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(0, p - 1))}
+                  disabled={page === 0}
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 disabled:opacity-30"
+                  style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+                  disabled={page === totalPages - 1}
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 disabled:opacity-30"
+                  style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}
+                >
+                  ›
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+
+        </motion.div>
       </div>
 
       {selected && <PackageModal pkg={selected} onClose={() => setSelected(null)} />}

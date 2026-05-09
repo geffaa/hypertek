@@ -68,23 +68,6 @@ const UNLOCKED_VEHICLES = [
     loadout: ["Phantom Drive V1", "5Zeta Anti-Gravity Units", "Tri-Axis Stabilisers", "Triple Z-Core Boosters"],
   },
   {
-    id: "spaceship4",
-    name: "Nova Apex SP-4",
-    class: "Assault Runner",
-    bay: "BAY 09",
-    img: "/Spaceship_4.png",
-    color: "#f43f5e",
-    stats: {
-      "Top Speed":     "1921 kt",
-      "Acceleration":  "0-500kt/0.71sec",
-      "Hull Strength": "High Range",
-      "Range":         "214 km",
-      "Weight":        "1262 kg",
-      "Shields":       "F/R 92%",
-    },
-    loadout: ["Apex Surge Drive", "5Zeta Anti-Gravity Units", "Quad-Axis Stabilisers", "Triple Z-Core Boosters"],
-  },
-  {
     id: "spaceship5",
     name: "Solar Fury SP-5",
     class: "Speed Chaser",
@@ -717,7 +700,7 @@ function GarageView() {
         style={{ objectPosition: "center" }} />
 
       {/* ── Vehicle — 3D: large centered canvas, static: fixed container ── */}
-      {(v.id === "wraith" || v.id === "voidhawk" || v.id === "spaceship3" || v.id === "spaceship4" || v.id === "spaceship5" || v.id === "spaceship6") ? (
+      {(v.id === "wraith" || v.id === "voidhawk" || v.id === "spaceship3" || v.id === "spaceship5" || v.id === "spaceship6") ? (
         <div style={{
           position: "absolute",
           top: "40%", left: "50%",
