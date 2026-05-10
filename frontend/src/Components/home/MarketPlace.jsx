@@ -66,19 +66,23 @@ function FeaturedMarketplace() {
           initial="hidden" whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-[2px] bg-white/50" />
-            <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Featured</span>
-          </div>
-          <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-6">
-            <h2 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl uppercase">
+          {/* Divider row — matches DONATION TIER PACKAGES style */}
+          <div className="flex items-center gap-4 py-3"
+            style={{ borderTop: "1px solid rgba(56,189,248,0.2)", borderBottom: "1px solid rgba(56,189,248,0.1)", background: "rgba(56,189,248,0.03)" }}>
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="w-10 h-[2px] bg-white/50" />
+              <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Featured</span>
+            </div>
+            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <h2 className="text-white font-[Goldman] font-bold text-xl sm:text-2xl uppercase whitespace-nowrap">
               Limited Edition NFA Items
             </h2>
-            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 w-fit mb-1">
+            <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-[#50C878] bg-[#50C878]/10 border border-[#50C878]/30 rounded-full px-3 py-1 shrink-0">
               <span>✦</span> Guaranteed Buy-Back on All NFAs/NFCs/NFTs
             </span>
           </div>
-          <p className="text-white/70 text-sm sm:text-base font-semibold -mt-1">
+          <p className="text-white/70 text-sm sm:text-base font-semibold mt-1">
             Act fast, once they are gone, they're GONE!
           </p>
         </motion.div>

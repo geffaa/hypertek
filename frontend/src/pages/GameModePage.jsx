@@ -206,99 +206,125 @@ const MODES = {
   overlord: {
     label: "OVERLORD",
     rich: true,
+    upgradesBeforeRewards: true,
     accent: "#f87171",
     accentDim: "rgba(248,113,113,0.12)",
     glow: "rgba(248,113,113,0.25)",
     panelImg: "/overlord4.png",
     heading: "Overlord of the 7 Realms",
-    subtitle: "Rise. Command. Dominate.",
+    subtitle: "Crash-land. Rebuild. Conquer. Become the Overlord.",
 
     intro: [
-      "Overlord of the 7 Realms is a grand strategy game set across a vast and fractured universe, where you rise as a reborn Overlord with one goal: absolute dominance. Command armies, forge alliances, crush your rivals, and seize control of the Echo Core — the most powerful force in all of existence.",
-      "But Overlord is more than a war game. It is a living political battlefield where every decision carries consequence. Build your empire from the ground up, manage resources across multiple realms, and outmanoeuvre opponents who are just as hungry for power as you are. The galaxy bows to strategy, not just strength.",
-      "Every skill you developed in Hyper Racing and every upgrade you earned in Hyper Quest feeds directly into your power as an Overlord. Your spaceship, your combat skills, your specialist team — all of it carries forward. One universe, seamless progression. What you built across the other games becomes your foundation for galactic rule.",
-      "Read on to discover how the realms work, what you can conquer, and how you build the most feared empire in the galaxy.",
+      "Overlord of the 7 Realms is a tri-level battle strategy game unlike anything else in gaming. You ventured through a portal into a parallel universe and crash-landed on a hostile alien planet. Your ship is wrecked, your systems are failing, and the planet's creatures are already closing in. Survival is just the beginning. Dominance is the goal.",
+      "Rebuild your ship from the wreckage up. Clone and train armies in your onboard labs. Tame the planet's wildlife to create devastating mounted cavalry. Then take the fight across three battle dimensions: ground-to-ground combat against monsters and rival players, ground-to-space assaults on orbital or ground targets, and space-to-space warfare aboard the massive Battle Ring that orbits the planet.",
+      "This is not just another strategy game. Overlord features real-time VR interaction, real cash rewards for completing daily events and quests, and fortnightly invasions by the fearsome Hammerongs, the most powerful alien species in existence. Every fortnight, they arrive to strip-mine the planet, and every fortnight, brave players can challenge them for massive bonuses and legendary rewards.",
+      "Upgrade your spaceship, arm it with devastating weapons, recruit specialists who amplify your power level, and forge alliances to control entire regions. Everything you build connects directly to Hyper Racing and Hyper Quest through the shared Hyper Tek ecosystem. One universe, three games, unlimited warfare. Read on to discover how the battle system works and why Overlord changes everything.",
     ],
 
-    calloutLine1: "Rise to Power. Command the Realms.",
-    calloutLine2: "Dominate the Echo Core.",
+    calloutLine1: "Survival is Just the Beginning.",
+    calloutLine2: "Dominance is the Goal.",
 
+    howItWorksTitle: "The Tri-Level Battle System; Three Dimensions of War",
     howItWorks: [
       {
         num: "01",
-        title: "Claim Your Realm",
-        body: "Every Overlord begins with a single realm. Establish your base of power, secure your borders, and begin expanding outward into the 7 Realms. Each realm offers unique resources, strategic advantages, and hostile forces that must be subdued. The realm you claim first shapes the identity of your empire and the strategies available to you throughout the game.",
+        title: "Ground-to-Ground Combat",
+        body: "The planet's surface is a warzone. Deploy your cloned armies against hostile alien creatures, monstrous beasts, and rival players fighting for territory and resources. Tame and train the planet's wildlife to create mounted cavalry units that give your ground forces a devastating edge. Ground warfare is raw, tactical, and relentless. Every battle you win earns resources, territory, and reputation.",
       },
       {
         num: "02",
-        title: "Build and Command Your Armies",
-        body: "Raise armies from within your cloning labs and command them across multiple fronts. Recruit elite units, assign commanders with unique tactical abilities, and deploy forces strategically across the realms. Every battle is a test of preparation and decision-making. Outflank enemies, defend your territories, and crush opposition before they can organise against you.",
+        title: "Ground-to-Space Assaults",
+        body: "This is where Overlord adds a dimension that no, or almost no, other game offers. Create specialised troop groups designed to launch attacks between the planet's surface and the orbital Battle Ring. Strike at ships stationed in space from your ground position or coordinate combined assaults that hit enemies from above and below simultaneously. This vertical battle layer transforms standard strategy into a multi-dimensional chess match where positioning across both ground and space determines victory.",
       },
       {
         num: "03",
-        title: "Forge Alliances and Betray Them",
-        body: "Politics is as powerful as any army. Negotiate treaties with rival Overlords, form temporary alliances to take down common threats, then strike when the moment is right. Every alliance is an opportunity, and every betrayal reshapes the balance of power across the 7 Realms. How you navigate loyalty and deception determines whether you rise or fall.",
+        title: "Space-to-Space Warfare",
+        body: "Port your ship into orbit and land on the Battle Ring, a massive orbital structure circling the planet. From here, hunt for unshielded ships and vulnerable targets. Teleport troops through space and directly into enemy vessels to inflict maximum internal damage using specially developed boarding attacks. Space combat rewards are among the highest in the game, and controlling orbital territory gives you a strategic advantage that no ground-only player can match.",
       },
       {
         num: "04",
-        title: "Seize the Echo Core",
-        body: "The Echo Core is the ultimate prize — a source of power that grants its controller dominance over all 7 Realms. Reaching it requires defeating the most powerful Overlords in the galaxy, surviving waves of hostile forces, and surviving the politics of the final power struggle. Only the most prepared, most ruthless, and most strategic commander will claim it.",
+        title: "Why Tri-Level Changes Everything",
+        body: "Most strategy games operate on a single plane. Overlord operates on three. The ability to attack from ground to ground, ground to space, and space to space creates a battlefield with unmatched tactical depth. Skill is everything. Brute force alone will not make you the Overlord. Strategic mastery across all three levels is what separates the dominant from the defeated.",
       },
     ],
 
-    rewards: [
-      {
-        title: "In-Game Rewards",
-        body: "Every battle won, every realm captured, and every alliance forged generates resources, rare materials, and power credits. Victories unlock elite unit blueprints, advanced weapons systems, and exclusive commander abilities. The deeper you push into the 7 Realms, the richer the spoils and the more formidable your empire becomes.",
-      },
-      {
-        title: "Real Cash Events",
-        body: "Overlord of the 7 Realms hosts seasonal conquest events and ranked war campaigns where real money is on the line. Dominate leaderboard rankings, lead your alliance to victory in inter-realm wars, and earn real cash payouts based on your empire's performance. The most powerful Overlords earn the greatest rewards.",
-      },
-      {
-        title: "How Conquest Events Work",
-        body: "Conquest events run on seasonal cycles. Players qualify through ranked play, build their empires to meet entry thresholds, and compete in structured war campaigns against opponents of comparable strength. Event outcomes are determined by territory controlled, armies deployed, and objectives completed. Prize pools are displayed before the season begins, and payouts are processed at season end.",
-      },
-      {
-        title: "Cross-Game Progression",
-        body: "Every resource you earn in Overlord feeds back into your Hyper Racing and Hyper Quest operations. Your spaceship upgrades carry directly into combat, your racing skills influence commander movement speed, and your Quest specialists add powerful bonuses to your army. One ecosystem, complete progression. Everything you build powers everything else.",
-      },
-    ],
+    extraSection: {
+      title: "The Battle Ring and VR Interaction",
+      items: [
+        {
+          title: "Landing on the Battle Ring",
+          body: "The Battle Ring is a colossal orbital structure that circles the planet's system. When you port your ship into space, you can dock on the Battle Ring to gain a massive strategic advantage. From this elevated position, you can hunt for unshielded ships, launch boarding parties into rival vessels, and coordinate devastating attacks on ground targets below. Landing on the Battle Ring opens an entirely new dimension of gameplay that most strategy games simply do not offer, giving Overlord a tactical edge over anything else on the market.",
+        },
+        {
+          title: "Inside the Battle Ring",
+          body: "The Battle Ring is not just a docking platform. If you can work out how to breach its interior, hidden quests, extra bonuses, and exclusive rewards await inside. The ring's interior is a labyrinth of corridors, chambers, and ancient technology. Carry out quests and hunting missions within the ring itself, discovering secrets that no surface-bound player will ever access. The Battle Ring rewards the bold, the cunning, and the relentless.",
+        },
+        {
+          title: "Real-Time VR Interaction",
+          body: "Like all of the Hyper Tek range of games, Overlord of the 7 Realms supports full VR interaction in real time. Step inside your ship, walk the corridors of the Battle Ring, lead your troops into ground combat, and experience space warfare from the cockpit of your vessel. VR transforms Overlord from a strategy game into a fully immersive battlefield experience. Command your forces, explore alien terrain, and engage in combat with a level of presence and intensity that flat-screen gaming cannot replicate.",
+        },
+        {
+          title: "The Advantage Over Other Games",
+          body: "No other game combines tri-level warfare, an explorable orbital battle station, real-time VR, and real cash and or in-game rewards in a single experience. The Battle Ring alone adds a gameplay dimension that competitors cannot match. When you combine that with ground combat, space warfare, VR immersion, and the interconnected Hyper Tek ecosystem, Overlord stands in a category of its own.",
+        },
+      ],
+    },
 
-    rewardsTitle: "Conquer and Earn — Rewards of the 7 Realms",
-
-    upgradesTitle: "Build Your Empire, Arm Your Forces, Expand Your Power",
+    upgradesTitle: "Rebuild, Rearm, Recruit; Power Up for War",
     upgrades: [
       {
-        title: "Empire Infrastructure",
-        body: "Your empire is only as strong as its foundations. Build and upgrade command centres, resource extraction facilities, weapons forges, cloning labs, and defensive fortifications across every realm you control. Better infrastructure produces stronger armies faster, generates more resources per cycle, and makes your territories significantly harder to invade. The empire you build defines the war you can fight.",
+        title: "Spaceship Upgrades",
+        body: "Your crashed ship is where it all begins. Rebuild it system by system, from the engine bay to the command deck. Every component is fully upgradable: hull reinforcement, structural integrity, outer shell composition, shield generators, power systems, and navigation arrays. In Overlord, you build not for speed but for battle. A fully upgraded warship is the foundation of every successful campaign, and the deeper you invest, the more formidable your vessel becomes.",
       },
       {
-        title: "Army and Weapons Upgrades",
-        body: "Every unit in your army can be upgraded with better armour, weapons systems, and combat enhancements. Advance through the weapons tree to unlock plasma artillery, energy shields, orbital strike capabilities, and experimental warfare technology. The further you progress through the 7 Realms, the more devastating the arsenal you can deploy against enemies who stand in your way.",
+        title: "Weapons Systems and Tech Levels",
+        body: "Upgrade and refine your weapons, skills and tech levels to dominate across all three battle levels. Ground-based artillery for planetary warfare, anti-orbital batteries for ground-to-space assaults, and ship-mounted weapons arrays for space-to-space combat. Each weapons system can be refined for specific tactical roles. Whether you specialise in long-range bombardment, close-quarters boarding actions, or defensive countermeasures, your weapons loadout defines your combat identity.",
       },
       {
-        title: "Commander Abilities",
-        body: "Commanders are the backbone of your military strategy. Each commander brings unique abilities — tactical retreats, ambush formations, siege expertise, or rapid redeployment. Level up your commanders through battle, unlock advanced abilities, and assign them to the fronts where their strengths matter most. A well-placed commander can turn a losing battle into a decisive victory.",
+        title: "Recruit Specialists",
+        body: "Specialists are the force multipliers that separate good players from Overlords. Acquire unique specialists who bring powerful bonuses to your ship's overall performance and power level. Tactical specialists improve troop deployment efficiency, engineering specialists accelerate ship repairs and upgrades, weapons specialists increase damage output across all systems, and intelligence specialists reveal enemy positions and weaknesses. Stack multiple specialists to create devastating synergies that amplify every aspect of your operation.",
       },
       {
-        title: "The Domination Loop",
-        body: "Conquer to earn. Earn to upgrade. Upgrade to field stronger armies and seize harder targets with richer rewards. Every realm you capture expands your resource base, every victory funds your next campaign, and every upgrade compounds your military advantage. The stronger your empire grows, the faster the remaining realms fall before you.",
+        title: "Build Your Armies",
+        body: "Clone troops within your ship's onboard cloning labs, then upgrade and refine them and their weapons until they are battle-ready. But troops alone are not enough. Tame and train the planet's wild creatures to create mounted beast cavalry, a force that cannot be cloned or manufactured and must be earned through skill and patience. Your army composition across ground, air, and space is what determines your dominance.",
+      },
+    ],
+
+    rewardsTitle: "The Hammerongs, rewards, and the Hyper Tek Ecosystem",
+    rewards: [
+      {
+        title: "The Hammerongs: The Most Powerful Species in Existence",
+        body: "Every two weeks, the centre arena's force fields drop, and the Hammerongs arrive. They are the strongest alien species in the universe, armed with advanced technology far beyond anything players possess. They come to strip-mine the planet's resources, and they defend the arena with full, overwhelming force. Attacking the Hammerongs is the most dangerous challenge in Overlord, but those who succeed are rewarded with huge bonuses, legendary loot, rare upgrade materials, and exclusive rewards that cannot be obtained any other way. The fortnightly Hammerong invasion is the ultimate test of your power.",
+      },
+      {
+        title: "Daily Events, Quests, and Battle Rewards",
+        body: "Overlord delivers rewards constantly. Complete daily tasks to earn credits, upgrade materials, and progression bonuses. Enter special events for premium rewards. Carry out quests across the planet's surface and within the Battle Ring for exclusive loot. Win battles against monsters, alien creatures, and rival players to stockpile resources. Explore the surface to discover hidden artefacts and treasures. The reward structure is designed so that every action you take moves you closer to becoming the ultimate Overlord of the server.",
+      },
+      {
+        title: "Connected to the Hyper Tek Ecosystem",
+        body: "Overlord of the 7 Realms does not exist in isolation. It is fully integrated into the Hyper Tek universe alongside Hyper Racing and Hyper Quest. Resources earned in Overlord can be used across all three games. Ship upgrades, specialist bonuses, combat skills, and materials flow seamlessly between titles. Racing abilities gained in Hyper Racing improve your pilot skills in Overlord space combat. Materials gathered in Hyper Quest fuel your upgrades on the planet. The Hyper Tek marketplace connects everything, creating a unified economy where progress in one game powers advancement in all three.",
+      },
+      {
+        title: "One Universe, Three Games, Unlimited Power",
+        body: "Players who engage across all three Hyper Tek games build power faster, access exclusive cross-game rewards, and dominate through a breadth of skills and resources that single-game players cannot match. The interconnected ecosystem is the ultimate competitive advantage.",
       },
     ],
 
     faqTitle: "Overlord of the 7 Realms — Frequently Asked Questions",
     faq: [
-      { q: "What is Overlord of the 7 Realms?", a: "A grand strategy game set across a fractured galaxy where you rise as a reborn Overlord, command armies, forge alliances, and fight to seize control of the Echo Core and dominate all 7 Realms." },
-      { q: "How do I start building my empire?", a: "You begin by claiming your first realm, establishing your command centre, and expanding your infrastructure. Early decisions about resource management and territorial expansion set the foundation for your entire campaign." },
-      { q: "Can I play cooperatively with others?", a: "Yes. You can forge alliances with other Overlords, share resources, coordinate military campaigns, and compete together in inter-realm war events. Alliances are powerful — though knowing when to break them is equally important." },
-      { q: "Can I earn real money?", a: "Yes. Seasonal conquest events and ranked war campaigns offer real cash prize pools. Qualify through ranked play, dominate leaderboard standings, and earn payouts based on your empire's performance across the season." },
-      { q: "How do armies work?", a: "Build and upgrade units in your cloning labs, assign commanders with unique abilities, and deploy forces across multiple realms simultaneously. Every unit type has strengths and weaknesses, and matching your army composition to the terrain and enemy forces is key to victory." },
-      { q: "What is the Echo Core?", a: "The Echo Core is the ultimate objective — a source of power at the centre of the 7 Realms that grants its controller dominance over all other Overlords. Reaching it requires defeating the most powerful rivals in the galaxy and surviving the final power struggle." },
-      { q: "Does progress carry from other games?", a: "Yes. Skills, ship upgrades, and specialist bonuses from Hyper Racing and Hyper Quest carry directly into Overlord. Your spaceship combat abilities, racing-trained reflexes, and recruited specialists all contribute to your power as an Overlord." },
-      { q: "What happens when my realm is attacked?", a: "Defensive fortifications, stationed armies, and commander abilities activate automatically when your realm comes under attack. You can also redirect forces from neighbouring realms to reinforce under pressure. Every realm lost weakens your resource base, so defence is as critical as offence." },
-      { q: "How do alliances and betrayals work?", a: "Negotiate treaties directly with rival Overlords, agree on shared objectives, and coordinate attacks. Alliances can be broken at any time, triggering political consequences across the realm network. Reputation matters — Overlords known for betrayal find it harder to form future alliances." },
-      { q: "What are commanders and how do I get them?", a: "Commanders are elite leaders unlocked through conquest milestones, seasonal rewards, and in-game events. Each brings unique tactical abilities — ambush, siege, rapid deployment, or fortification. Level them up through battle to unlock increasingly powerful abilities." },
+      { q: "What is Overlord of the 7 Realms?", a: "A tri-level battle strategy game where you crash-land on an alien planet, rebuild your ship, clone armies, and fight across three dimensions: ground-to-ground, ground-to-space, and space-to-space. Features VR interaction, real cash rewards, and fortnightly Hammerong invasions." },
+      { q: "What is the tri-level battle system?", a: "Combat operates across three levels: ground-to-ground against monsters and rival players, ground-to-space assaults targeting orbital ships, and space-to-space warfare on the Battle Ring. This multi-dimensional approach creates tactical depth no single-plane strategy game can match." },
+      { q: "What is the Battle Ring?", a: "A massive orbital structure circling the planet. Land your ship on it to hunt unshielded targets, launch boarding parties into enemy vessels, and access hidden quests inside its interior. Controlling the Battle Ring gives you a strategic advantage over ground-only players." },
+      { q: "Can I upgrade my spaceship?", a: "Every system is upgradable from engine bay to command deck: hull, structure, outer shell, shield generators, power systems, and navigation. In Overlord you build for battle, not speed. A fully upgraded warship is the foundation of every campaign." },
+      { q: "How do specialists work?", a: "Recruit unique specialists who add powerful bonuses to your ship's performance and power level. Tactical, engineering, weapons, and intelligence specialists each boost different systems. Stack multiple specialists for devastating synergies across all battle levels." },
+      { q: "Who are the Hammeroungs?", a: "The most powerful alien species in existence. Every fortnight they arrive at the centre arena to strip-mine the planet's resources, defended by overwhelming force and advanced technology. Attacking them is extremely dangerous but rewards players with huge bonuses and legendary loot." },
+      { q: "What rewards can I earn?", a: "Daily tasks, quests, battles, and events all pay out credits, upgrade materials, and progression bonuses. Special events and Hammerong invasions offer premium and exclusive rewards. Higher-difficulty challenges and ranked competitions yield greater payouts including real cash." },
+      { q: "Does Overlord support VR?", a: "Yes. Full real-time VR interaction lets you walk your ship's corridors, explore the Battle Ring interior, lead troops into ground combat, and pilot your vessel in space warfare. VR transforms Overlord from strategy into a fully immersive battlefield experience." },
+      { q: "How do I build my army?", a: "Clone troops in your ship's onboard labs, then upgrade and refine them and their weapons. For mounted cavalry, you must tame and train the planet's wild creatures, as animals cannot be cloned. Army composition across ground, air, and space determines your dominance." },
+      { q: "Can I join an alliance?", a: "Yes. Go it alone or join an alliance that increases your power and helps you grow. Alliances offer shared resources, coordinated attacks, and collective defence. Complete daily tasks to upgrade both your ship and the alliance's shared assets." },
+      { q: "Is Overlord linked to other Hyper Tek games?", a: "Fully integrated. Resources, ship upgrades, specialist bonuses, and combat skills flow between Overlord, Hyper Racing, and Hyper Quest. Racing abilities improve your space combat, Quest materials fuel your upgrades, and the Hyper Tek marketplace connects the entire economy." },
+      { q: "What weapons are available?", a: "Ground-based artillery, anti-orbital batteries, ship-mounted weapons arrays, and specialised boarding-action equipment. Each system can be refined for specific tactical roles including long-range bombardment, close-quarters combat, and defensive countermeasures." },
+      { q: "Can I explore the planet's surface?", a: "Yes. The planet is rich with hidden rewards, artefacts, resources, and dangerous wildlife to tame. Explore the surface to find treasures, battle alien creatures and monsters, and discover strategic advantages that strengthen your campaign for Overlord dominance." },
     ],
   },
 };
@@ -361,7 +387,7 @@ function DetailPage({ data }) {
     <div className="flex flex-col">
 
       {/* ═══ SECTION 1 — Welcome / Intro ════════════════════════ */}
-      <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pt-10 pb-24">
+      <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pt-36 pb-24">
         <motion.div variants={fadeUp} custom={0} initial="hidden" animate="visible" className="mb-2">
           <span
             className="text-[11px] tracking-[0.35em] uppercase font-bold"
@@ -414,65 +440,36 @@ function DetailPage({ data }) {
         className="relative py-24"
         style={{ background: "rgba(6,6,20,0.6)", borderTop: `1px solid rgba(255,255,255,0.05)`, borderBottom: `1px solid rgba(255,255,255,0.05)` }}
       >
-        {/* BG watermark number */}
-        <div
-          className="absolute right-0 top-0 select-none pointer-events-none font-goldman leading-none"
-          style={{ fontSize: "clamp(140px, 20vw, 260px)", color: "rgba(255,255,255,0.02)", lineHeight: 1 }}
-        >
+        <div className="absolute right-0 top-0 select-none pointer-events-none font-goldman leading-none"
+          style={{ fontSize: "clamp(140px, 20vw, 260px)", color: "rgba(255,255,255,0.02)", lineHeight: 1 }}>
           HOW
         </div>
-
         <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
-          <motion.div
-            variants={fadeUp} custom={0} initial="hidden"
-            whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-            className="mb-16"
-          >
+          <motion.div variants={fadeUp} custom={0} initial="hidden"
+            whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-16">
             <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
-              How {data.heading} Works
+              {data.howItWorksTitle || `How ${data.heading} Works`}
             </h2>
           </motion.div>
-
           <div className="flex flex-col gap-0">
             {data.howItWorks.map((item, i) => (
-              <motion.div
-                key={item.num}
-                variants={fadeUp} custom={i * 0.8} initial="hidden"
+              <motion.div key={item.num} variants={fadeUp} custom={i * 0.8} initial="hidden"
                 whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-                className="relative flex gap-8 md:gap-14 pb-16 last:pb-0"
-              >
-                {/* Left: number + vertical line */}
+                className="relative flex gap-8 md:gap-14 pb-16 last:pb-0">
                 <div className="flex flex-col items-center shrink-0">
-                  <div
-                    className="font-goldman text-[13px] w-12 h-12 flex items-center justify-center shrink-0"
-                    style={{
-                      border: `1px solid ${accent}`,
-                      color: accent,
-                      background: accentDim,
-                      boxShadow: `0 0 20px ${accentDim}`,
-                    }}
-                  >
+                  <div className="font-goldman text-[13px] w-12 h-12 flex items-center justify-center shrink-0"
+                    style={{ border: `1px solid ${accent}`, color: accent, background: accentDim, boxShadow: `0 0 20px ${accentDim}` }}>
                     {item.num}
                   </div>
                   {i < data.howItWorks.length - 1 && (
-                    <div
-                      className="flex-1 w-px mt-3"
-                      style={{ background: `linear-gradient(to bottom, ${accent}44, transparent)` }}
-                    />
+                    <div className="flex-1 w-px mt-3"
+                      style={{ background: `linear-gradient(to bottom, ${accent}44, transparent)` }} />
                   )}
                 </div>
-
-                {/* Right: content */}
                 <div className="pt-2 pb-2">
-                  <h3
-                    className="font-goldman uppercase text-xl md:text-2xl tracking-wide mb-4"
-                    style={{ color: "rgba(255,255,255,0.95)" }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-white/62 text-[15px] leading-[1.9]">
-                    {item.body}
-                  </p>
+                  <h3 className="font-goldman uppercase text-xl md:text-2xl tracking-wide mb-4"
+                    style={{ color: "rgba(255,255,255,0.95)" }}>{item.title}</h3>
+                  <p className="text-white/62 text-[15px] leading-[1.9]">{item.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -480,174 +477,185 @@ function DetailPage({ data }) {
         </div>
       </section>
 
-      {/* ═══ SECTION 3 — Rewards ════════════════════════════════ */}
-      <section className="relative py-24 overflow-hidden">
-        <div
-          className="absolute left-0 top-0 select-none pointer-events-none font-goldman leading-none"
-          style={{ fontSize: "clamp(120px, 18vw, 240px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}
-        >
-          WIN
-        </div>
-
-        <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
-          <motion.div
-            variants={fadeUp} custom={0} initial="hidden"
-            whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-            className="mb-16"
-          >
-            <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
-              {data.rewardsTitle}
-            </h2>
-          </motion.div>
-
-          {/* alternating layout */}
-          <div className="flex flex-col gap-16">
-            {data.rewards.map((item, i) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp} custom={i * 0.7} initial="hidden"
-                whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-                className={`flex flex-col md:flex-row gap-8 items-start ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}
-              >
-                {/* Large label */}
-                <div className="shrink-0 md:w-[200px]">
-                  <div
-                    className="font-goldman uppercase text-[13px] tracking-widest leading-tight py-3 px-4 inline-block"
-                    style={{
-                      color: accent,
-                      border: `1px solid ${accent}44`,
-                      borderLeft: `3px solid ${accent}`,
-                      background: accentDim,
-                    }}
-                  >
-                    {item.title}
+      {/* ═══ EXTRA SECTION (optional — e.g. Battle Ring for Overlord) ══ */}
+      {data.extraSection && (
+        <section className="relative py-24 overflow-hidden"
+          style={{ borderBottom: `1px solid rgba(255,255,255,0.05)` }}>
+          <div className="absolute left-0 bottom-0 select-none pointer-events-none font-goldman leading-none"
+            style={{ fontSize: "clamp(120px, 16vw, 220px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}>
+            RING
+          </div>
+          <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
+            <motion.div variants={fadeUp} custom={0} initial="hidden"
+              whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-16">
+              <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
+                {data.extraSection.title}
+              </h2>
+            </motion.div>
+            <div className="flex flex-col gap-0">
+              {data.extraSection.items.map((item, i) => (
+                <motion.div key={item.title} variants={fadeUp} custom={i * 0.7} initial="hidden"
+                  whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                  className="group py-10 border-b last:border-b-0"
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                  <div className="flex items-start gap-6 md:gap-10">
+                    <span className="shrink-0 font-goldman text-[36px] md:text-[48px] leading-none select-none"
+                      style={{ color: `${accent}70`, textShadow: `0 0 20px ${accent}44`, fontVariantNumeric: "tabular-nums" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <h3 className="font-goldman uppercase text-lg md:text-xl tracking-wide mb-4"
+                        style={{ color: "rgba(255,255,255,0.92)" }}>{item.title}</h3>
+                      <p className="text-white/60 text-[15px] leading-[1.9]">{item.body}</p>
+                    </div>
                   </div>
-                </div>
-
-                {/* Text */}
-                <div className="flex-1">
-                  <div
-                    className="w-full h-px mb-6"
-                    style={{ background: `linear-gradient(to right, ${accent}33, transparent)` }}
-                  />
-                  <p className="text-white/68 text-[16px] leading-[1.95]">{item.body}</p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ═══ CALLOUT BANNER ════════════════════════════════════ */}
-      <div
-        className="relative overflow-hidden py-16 md:py-20"
-        style={{
-          background: `linear-gradient(to right, rgba(6,6,20,0.95), ${accentDim} 50%, rgba(6,6,20,0.95))`,
-          borderTop: `1px solid ${accent}22`,
-          borderBottom: `1px solid ${accent}22`,
-        }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: `radial-gradient(ellipse at 50% 50%, ${accentDim} 0%, transparent 70%)` }}
-        />
-        <div
-          className="absolute top-0 left-0 right-0 h-[1px]"
-          style={{ background: `linear-gradient(to right, transparent, ${accent}88, transparent)` }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-[1px]"
-          style={{ background: `linear-gradient(to right, transparent, ${accent}88, transparent)` }}
-        />
+      <div className="relative overflow-hidden py-16 md:py-20"
+        style={{ background: `linear-gradient(to right, rgba(6,6,20,0.95), ${accentDim} 50%, rgba(6,6,20,0.95))`,
+          borderTop: `1px solid ${accent}22`, borderBottom: `1px solid ${accent}22` }}>
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse at 50% 50%, ${accentDim} 0%, transparent 70%)` }} />
+        <div className="absolute top-0 left-0 right-0 h-[1px]"
+          style={{ background: `linear-gradient(to right, transparent, ${accent}88, transparent)` }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[1px]"
+          style={{ background: `linear-gradient(to right, transparent, ${accent}88, transparent)` }} />
         <div className="relative text-center px-6">
-          <motion.p
-            variants={fadeUp} custom={0} initial="hidden"
+          <motion.p variants={fadeUp} custom={0} initial="hidden"
             whileInView="visible" viewport={{ once: true, amount: 0.5 }}
             className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide"
-            style={{ color: accent, textShadow: `0 0 40px ${accent}` }}
-          >
+            style={{ color: accent, textShadow: `0 0 40px ${accent}` }}>
             {data.calloutLine1}
           </motion.p>
-          <motion.p
-            variants={fadeUp} custom={0.3} initial="hidden"
+          <motion.p variants={fadeUp} custom={0.3} initial="hidden"
             whileInView="visible" viewport={{ once: true, amount: 0.5 }}
             className="font-goldman uppercase text-2xl md:text-4xl xl:text-5xl tracking-wide mt-1"
-            style={{ color: "rgba(255,255,255,0.9)", textShadow: `0 0 30px ${glow}` }}
-          >
+            style={{ color: "rgba(255,255,255,0.9)", textShadow: `0 0 30px ${glow}` }}>
             {data.calloutLine2}
           </motion.p>
         </div>
       </div>
 
-      {/* ═══ SECTION 4 — Upgrades ═══════════════════════════════ */}
-      <section
-        className="relative py-24 overflow-hidden"
-        style={{ background: "rgba(6,6,20,0.55)", borderBottom: `1px solid rgba(255,255,255,0.05)` }}
-      >
-        <div
-          className="absolute right-0 bottom-0 select-none pointer-events-none font-goldman leading-none"
-          style={{ fontSize: "clamp(100px, 15vw, 220px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}
+      {/* ═══ UPGRADES — first for Overlord ═════════════════════ */}
+      {data.upgradesBeforeRewards && (
+        <section
+          className="relative py-24 overflow-hidden"
+          style={{ background: "rgba(6,6,20,0.55)", borderBottom: `1px solid rgba(255,255,255,0.05)` }}
         >
-          UP
-        </div>
+          <div className="absolute right-0 bottom-0 select-none pointer-events-none font-goldman leading-none"
+            style={{ fontSize: "clamp(100px, 15vw, 220px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}>UP</div>
+          <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
+            <motion.div variants={fadeUp} custom={0} initial="hidden"
+              whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-16">
+              <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
+                {data.upgradesTitle}
+              </h2>
+            </motion.div>
+            <div className="flex flex-col gap-0">
+              {data.upgrades.map((item, i) => (
+                <motion.div key={item.title} variants={fadeUp} custom={i * 0.7} initial="hidden"
+                  whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                  className="group py-10 border-b last:border-b-0"
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                  <div className="flex items-start gap-6 md:gap-10">
+                    <span className="shrink-0 font-goldman text-[36px] md:text-[48px] leading-none select-none"
+                      style={{ color: `${accent}70`, fontVariantNumeric: "tabular-nums", textShadow: `0 0 20px ${accent}44` }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <h3 className="font-goldman uppercase text-lg md:text-xl tracking-wide mb-4"
+                        style={{ color: "rgba(255,255,255,0.92)" }}>{item.title}</h3>
+                      <p className="text-white/60 text-[15px] leading-[1.9]">{item.body}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
+      {/* ═══ REWARDS ════════════════════════════════════════════ */}
+      <section className="relative py-24 overflow-hidden"
+        style={{ borderBottom: `1px solid rgba(255,255,255,0.05)` }}>
+        <div className="absolute left-0 top-0 select-none pointer-events-none font-goldman leading-none"
+          style={{ fontSize: "clamp(100px, 15vw, 220px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}>WIN</div>
         <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
-          <motion.div
-            variants={fadeUp} custom={0} initial="hidden"
-            whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-            className="mb-16"
-          >
+          <motion.div variants={fadeUp} custom={0} initial="hidden"
+            whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-16">
             <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
-              {data.upgradesTitle}
+              {data.rewardsTitle}
             </h2>
           </motion.div>
-
-          <div className="flex flex-col gap-0">
-            {data.upgrades.map((item, i) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp} custom={i * 0.7} initial="hidden"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {data.rewards.map((item, i) => (
+              <motion.div key={item.title} variants={fadeUp} custom={i * 0.5} initial="hidden"
                 whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-                className="group py-10 border-b last:border-b-0"
-                style={{ borderColor: "rgba(255,255,255,0.06)" }}
-              >
-                <div className="flex items-start gap-6 md:gap-10">
-                  {/* Large index */}
-                  <span
-                    className="shrink-0 font-goldman text-[36px] md:text-[48px] leading-none select-none transition-opacity duration-300"
-                    style={{ color: `${accent}70`, fontVariantNumeric: "tabular-nums", textShadow: `0 0 20px ${accent}44` }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex-1 pt-1">
-                    <h3
-                      className="font-goldman uppercase text-lg md:text-xl tracking-wide mb-4"
-                      style={{ color: "rgba(255,255,255,0.92)" }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="text-white/60 text-[15px] leading-[1.9]">{item.body}</p>
-                  </div>
-                </div>
+                className="p-8 flex flex-col gap-4"
+                style={{ background: "rgba(6,6,20,0.7)", border: `1px solid rgba(255,255,255,0.06)`, borderTop: `2px solid ${accent}` }}>
+                <h3 className="font-goldman uppercase text-base md:text-lg tracking-wide"
+                  style={{ color: accent }}>{item.title}</h3>
+                <p className="text-white/60 text-[14px] leading-[1.9]">{item.body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ SECTION 5 — FAQ Accordion ═══════════════════════════ */}
+      {/* ═══ UPGRADES — after rewards for Racing/Quest ══════════ */}
+      {!data.upgradesBeforeRewards && (
+        <section
+          className="relative py-24 overflow-hidden"
+          style={{ background: "rgba(6,6,20,0.55)", borderBottom: `1px solid rgba(255,255,255,0.05)` }}
+        >
+          <div className="absolute right-0 bottom-0 select-none pointer-events-none font-goldman leading-none"
+            style={{ fontSize: "clamp(100px, 15vw, 220px)", color: "rgba(255,255,255,0.018)", lineHeight: 1 }}>UP</div>
+          <div className="relative w-full max-w-[1080px] mx-auto px-6 md:px-12">
+            <motion.div variants={fadeUp} custom={0} initial="hidden"
+              whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-16">
+              <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
+                {data.upgradesTitle}
+              </h2>
+            </motion.div>
+            <div className="flex flex-col gap-0">
+              {data.upgrades.map((item, i) => (
+                <motion.div key={item.title} variants={fadeUp} custom={i * 0.7} initial="hidden"
+                  whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                  className="group py-10 border-b last:border-b-0"
+                  style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                  <div className="flex items-start gap-6 md:gap-10">
+                    <span className="shrink-0 font-goldman text-[36px] md:text-[48px] leading-none select-none"
+                      style={{ color: `${accent}70`, fontVariantNumeric: "tabular-nums", textShadow: `0 0 20px ${accent}44` }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 pt-1">
+                      <h3 className="font-goldman uppercase text-lg md:text-xl tracking-wide mb-4"
+                        style={{ color: "rgba(255,255,255,0.92)" }}>{item.title}</h3>
+                      <p className="text-white/60 text-[15px] leading-[1.9]">{item.body}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══ FAQ ACCORDION ══════════════════════════════════════ */}
       <section className="py-24">
         <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12">
-          <motion.div
-            variants={fadeUp} custom={0} initial="hidden"
-            whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-            className="mb-14"
-          >
+          <motion.div variants={fadeUp} custom={0} initial="hidden"
+            whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="mb-14">
             <h2 className="font-goldman uppercase text-3xl md:text-4xl xl:text-5xl" style={{ textShadow: `0 0 50px ${glow}` }}>
               {data.faqTitle}
             </h2>
           </motion.div>
-
           <div>
             {data.faq.map((item, i) => (
               <FaqItem key={item.q} item={item} accent={accent} accentDim={accentDim} index={i} />
@@ -736,42 +744,69 @@ export default function GameModePage() {
         }}
       />
 
+      {/* ── Fixed back / mode bar — always visible below navbar */}
+      <motion.div
+        initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="fixed left-0 right-0 z-40"
+        style={{ top: "var(--navbar-h, 72px)" }}
+      >
+        <div style={{
+          background: `linear-gradient(to right, rgba(6,6,20,0.55), ${data.accentDim} 50%, rgba(6,6,20,0.55))`,
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          borderBottom: `1px solid ${data.accent}22`,
+          boxShadow: "0 4px 24px rgba(0,0,0,0.35)",
+        }}>
+          {/* accent line at bottom of bar */}
+          <div className="absolute bottom-0 left-0 right-0 h-[1px]"
+            style={{ background: `linear-gradient(to right, transparent, ${data.accent}55, transparent)` }} />
+
+          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[14px] flex items-center gap-4">
+            {/* Back button — clearly visible */}
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase transition-all duration-200 group"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                color: "rgba(255,255,255,0.9)",
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                padding: "6px 14px 6px 10px",
+                clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; }}
+            >
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Back
+            </button>
+
+            <div className="w-px h-4 bg-white/15" />
+
+            {/* Mode tag */}
+            <div
+              className="text-[11px] font-bold tracking-[0.3em] uppercase px-4 py-[5px]"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                border: `1px solid ${data.accent}55`,
+                borderTop: `2px solid ${data.accent}`,
+                color: data.accent,
+                background: data.accentDim,
+                clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+                textShadow: `0 0 12px ${data.accent}88`,
+              }}
+            >
+              {data.label} MODE
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* ── Scrollable content */}
       <div className="relative z-10">
-
-        {/* Sticky header strip */}
-        <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pt-28 pb-6 flex items-center gap-4">
-          <motion.button
-            initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-200 text-[12px] tracking-widest uppercase"
-            style={{ fontFamily: "Orbitron, sans-serif" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Back
-          </motion.button>
-
-          <div className="w-px h-4 bg-white/15" />
-
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-[11px] font-bold tracking-[0.3em] uppercase px-4 py-1"
-            style={{
-              fontFamily: "Orbitron, sans-serif",
-              border: `1px solid ${data.accent}55`,
-              borderTop: `2px solid ${data.accent}`,
-              color: data.accent,
-              background: data.accentDim,
-              clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-            }}
-          >
-            {data.label} MODE
-          </motion.div>
-        </div>
 
         {/* ── Page content */}
         {data.rich
@@ -779,7 +814,7 @@ export default function GameModePage() {
           : (
             <>
               {/* Simple mode header */}
-              <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pt-8 pb-20 flex flex-col gap-5">
+              <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pt-36 pb-20 flex flex-col gap-5">
                 <motion.h1
                   initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}

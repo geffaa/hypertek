@@ -46,7 +46,7 @@ export default function News() {
   const [active, setActive] = useState(null);
 
   return (
-    <section id="gaming-section" className="w-full pt-16 md:pt-24 pb-12 md:pb-20 relative">
+    <section id="gaming-section" className="w-full pt-4 md:pt-6 pb-12 md:pb-20 relative">
       <div className="w-full max-w-[1480px] mx-auto px-6 md:px-14 xl:px-18 2xl:px-20">
 
         {/* Section heading */}

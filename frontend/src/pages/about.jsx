@@ -319,7 +319,7 @@ function About() {
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
           >
             <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[34px] text-white leading-tight mb-3">
-              HYPER TEK, A WEB3 GAMING SOLUTION
+              HYPER TEK, A WEB3 GAMING SOLUTION AND THE KEY ADVANTAGES
             </h2>
             <p className="text-white/50 text-[13px] leading-relaxed"
               style={{ fontFamily: "Orbitron, sans-serif" }}>
