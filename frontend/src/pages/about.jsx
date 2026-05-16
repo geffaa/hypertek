@@ -29,6 +29,120 @@ const DEFAULT_MISSION = [
 
 
 
+const NFA_CARDS = [
+  {
+    title: "What Are They?",
+    icon: "🎨",
+    accent: "#38bdf8",
+    glow: "rgba(56,189,248,0.12)",
+    border: "rgba(56,189,248,0.35)",
+    content: (
+      <div className="flex flex-col gap-2">
+        <p className="text-white/70 text-[13px] leading-relaxed">Blockchain-linked digital artworks in three tiers:</p>
+        {[
+          { label: "NFAs...", desc: "Architect-created, highest in-game bonuses, ultra-rare" },
+          { label: "NFCs...", desc: "Collectibles with in-game bonuses, player-creatable" },
+          { label: "NFTs...", desc: "Fully player-made, decorate your base for power bonuses" },
+        ].map((r) => (
+          <div key={r.label} className="flex gap-2 text-[13px]">
+            <span className="font-bold text-white/90 flex-shrink-0">{r.label}</span>
+            <span className="text-white/60">{r.desc}</span>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    title: "Why They Hold Value",
+    icon: "💰",
+    accent: "#fbbf24",
+    glow: "rgba(251,191,36,0.10)",
+    border: "rgba(251,191,36,0.4)",
+    content: (
+      <ul className="flex flex-col gap-2">
+        {[
+          "Guaranteed minimum buy-back on every artwork",
+          "Buy-back increases every resale",
+          "Inflation-indexed twice per year",
+          "Your value is always growing, never shrinking",
+        ].map((t) => (
+          <li key={t} className="flex gap-2 items-start">
+            <div className="w-1 h-1 rounded-full mt-[7px] flex-shrink-0" style={{ background: "#fbbf24" }} />
+            <span className="text-white/75 text-[13px] leading-relaxed font-semibold">{t}</span>
+          </li>
+        ))}
+      </ul>
+    ),
+  },
+  {
+    title: "Fair by Design",
+    icon: "🤝",
+    accent: "#818cf8",
+    glow: "rgba(129,140,248,0.10)",
+    border: "rgba(129,140,248,0.35)",
+    content: (
+      <p className="text-white/70 text-[13px] leading-[1.85]">
+        Up to <strong className="text-white/90">85% of marketplace commission</strong> goes to increasing buy-back values,
+        paying artist royalties, and funding quests. Players can reduce fees by creating quests that pay others
+        to participate, driving social interaction at every level. This is{" "}
+        <strong className="text-white/90">unique to Hyper Tek</strong>.
+      </p>
+    ),
+  },
+  {
+    title: "Get Involved Now",
+    icon: "🚀",
+    accent: "#4ade80",
+    glow: "rgba(74,222,128,0.10)",
+    border: "rgba(74,222,128,0.35)",
+    content: (
+      <div className="flex flex-col gap-3">
+        <p className="text-white/70 text-[13px] leading-[1.85]">
+          We are <strong className="text-white/90">crowdfunding</strong> to build Hyper Racing, Hyper Quest, and Overlord
+          of the 7 Realms. Every artwork you buy or create directly funds development. Own art that is guaranteed
+          to hold and grow in value while helping build the future of gaming.
+        </p>
+        <span className="text-[12px] font-bold" style={{ color: "#4ade80", fontFamily: "Orbitron, sans-serif" }}>
+          [www.hypertek.com] — Browse. Buy. Create. Own the Future.
+        </span>
+      </div>
+    ),
+  },
+];
+
+const PHASES = [
+  {
+    num: 1, name: "Foundation", status: "done", icon: "✅",
+    accent: "#38bdf8", bg: "rgba(56,189,248,0.06)", border: "rgba(56,189,248,0.3)",
+    desc: "Website live • User Interface built • Marketplace operational • NFA/NFC/NFT system designed • Guaranteed buy-back framework in place",
+  },
+  {
+    num: 2, name: "Crowdfunding Now", status: "active", icon: "🔥",
+    accent: "#fbbf24", bg: "rgba(251,191,36,0.08)", border: "rgba(251,191,36,0.5)",
+    desc: "NFA/NFC/NFT artwork sales live • Player-created NFTs enabled • Commission-sharing active • Community building • Funds flowing into game development",
+  },
+  {
+    num: 3, name: "Alpha Launch", status: "locked", icon: "🔒",
+    accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)",
+    desc: "Hyper Racing alpha • First playable game environment • In-game NFA integration • Early backer exclusive rewards • Live marketplace trading",
+  },
+  {
+    num: 4, name: "Ecosystem Expansion", status: "locked", icon: "🔒",
+    accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)",
+    desc: "Hyper Quest alpha • Cross-game progression live • Hyper Bucks currency integration • Expanded NFA collections • Real cash prize events",
+  },
+  {
+    num: 5, name: "Overlord Launch", status: "locked", icon: "🔒",
+    accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)",
+    desc: "Overlord of the 7 Realms alpha • Tri-level battle system • Battle Ring access • VR integration • Full three-game unified economy",
+  },
+  {
+    num: 6, name: "Full Release", status: "locked", icon: "🔒",
+    accent: "rgba(255,255,255,0.22)", bg: "rgba(255,255,255,0.02)", border: "rgba(255,255,255,0.1)",
+    desc: "All three games fully live • Complete NFA ecosystem • Full VR across all titles • Global tournaments • The interconnected universe realised",
+  },
+];
+
 const GAMES = [
   { name: "Hyper Racing",                tag: "Speed · Dominance", desc: "High-speed racing across hostile terrain. Upgrade your vehicle, build your crew, and claim territory across the galaxy.", img: "/racing3.png",      accent: "#f59e0b", glow: "rgba(245,158,11,0.35)",  mode: "racing"   },
   { name: "Hyper Quest",                 tag: "Explore · Trade",   desc: "Navigate planets, complete quests, and trade resources across an ever-expanding star map. Every delivery shapes the economy.", img: "/quest1.png",       accent: "#22c55e", glow: "rgba(34,197,94,0.35)",   mode: "quest"    },
@@ -105,6 +219,8 @@ function About() {
       <GlowingOrb Xaxis={80}   Yaxis={900}  />
       <GlowingOrb Xaxis={1350} Yaxis={2200} />
       <GlowingOrb Xaxis={200}  Yaxis={2800} />
+      <GlowingOrb Xaxis={1200} Yaxis={3600} />
+      <GlowingOrb Xaxis={100}  Yaxis={4400} />
 
       {/* ══════════════════════════════════════════════════════
           HERO
@@ -326,7 +442,7 @@ function About() {
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10 text-center">
             <div className="flex items-center justify-center gap-3 mb-5">
-              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 14, fontWeight: "bold", color: "rgba(56,189,248,0.95)", letterSpacing: "0.35em", textShadow: "0 0 12px rgba(56,189,248,0.6)" }}>02</span>
+              <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 14, fontWeight: "bold", color: "rgba(56,189,248,0.95)", letterSpacing: "0.35em", textShadow: "0 0 12px rgba(56,189,248,0.6)" }}>03</span>
               <div className="w-8 h-px" style={{ background: "rgba(56,189,248,0.55)" }} />
               <span className="text-white/70 text-[12px] font-bold tracking-[0.3em] uppercase">The Universe</span>
             </div>
@@ -394,6 +510,149 @@ function About() {
 
 
       {/* ══════════════════════════════════════════════════════
+          NFA QUICK SUMMARY
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-16 pb-10">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
+            <SectionLabel number="04" label="Non-Fungible Digital Artworks" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
+              Digital Art With Guaranteed Value
+            </h2>
+            <p className="text-white/45 text-[12px] mt-2 tracking-[0.2em] uppercase" style={{ fontFamily: "Orbitron, sans-serif" }}>
+              The 60-Second Summary
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {NFA_CARDS.map((card, i) => (
+              <motion.div
+                key={card.title}
+                className="relative rounded-2xl p-6 flex flex-col gap-4"
+                style={{ background: card.glow, border: `1px solid ${card.border}`, borderTop: `3px solid ${card.accent}` }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">{card.icon}</span>
+                  <span className="text-[12px] font-bold uppercase tracking-[0.18em]"
+                    style={{ fontFamily: "Orbitron, sans-serif", color: card.accent }}>
+                    {card.title}
+                  </span>
+                </div>
+                {card.content}
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p
+            className="text-center text-white/30 text-[12px] italic mt-10 leading-relaxed"
+            style={{ fontFamily: "Orbitron, sans-serif" }}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }}
+          >
+            "One Universe. Three Games. Guaranteed Value. The Future of Digital Ownership Starts with Hyper Tek."
+          </motion.p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
+          CROWDFUNDING ROADMAP
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full px-6 md:px-12 xl:px-20 pt-16 pb-12">
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg,transparent,rgba(251,191,36,0.3) 35%,rgba(56,189,248,0.3) 65%,transparent)" }} />
+        <div className="max-w-[1400px] mx-auto">
+
+          {/* Header */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-10">
+            <SectionLabel number="05" label="Crowdfunding — Help Build the Future" />
+            <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-[36px] text-white leading-tight">
+              Your Support Powers the Hyper Tek Universe
+            </h2>
+            <p className="text-white/50 text-sm mt-2 max-w-xl leading-relaxed">
+              Every artwork purchased directly funds three interconnected games. Here is what we are building together.
+            </p>
+          </motion.div>
+
+          {/* Phases grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {PHASES.map((phase, i) => (
+              <motion.div
+                key={phase.num}
+                className="relative rounded-xl p-5 flex flex-col gap-3"
+                style={{
+                  background: phase.bg,
+                  border: `1px solid ${phase.border}`,
+                  borderTop: phase.status === "active" ? `3px solid ${phase.accent}` : `1px solid ${phase.border}`,
+                  boxShadow: phase.status === "active" ? `0 0 28px rgba(251,191,36,0.15)` : "none",
+                }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                viewport={{ once: true }}
+              >
+                {/* Phase label */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-[0.28em]"
+                    style={{ fontFamily: "Orbitron, sans-serif", color: phase.status === "locked" ? "rgba(255,255,255,0.3)" : phase.accent }}
+                  >
+                    Phase {phase.num} — {phase.name}
+                  </span>
+                  <span className="text-lg">{phase.icon}</span>
+                </div>
+
+                {/* Active badge */}
+                {phase.status === "active" && (
+                  <div className="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full"
+                    style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.4)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-amber-300" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                      Crowdfunding Now
+                    </span>
+                  </div>
+                )}
+
+                <p className="text-[12px] leading-relaxed" style={{ color: phase.status === "locked" ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.70)" }}>
+                  {phase.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* How You Can Help CTA */}
+          <motion.div
+            className="rounded-2xl p-7 flex flex-col gap-5"
+            style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.2)", borderTop: "2px solid rgba(56,189,248,0.4)" }}
+            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
+          >
+            <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl text-center">
+              How YOU Can Help Right Now
+            </h3>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {[
+                { icon: "🎨", bold: "Buy an NFA, NFC, or NFT", text: "— own digital art with guaranteed value that funds game development" },
+                { icon: "✏️", bold: "Create your own NFT", text: "— become a creator in the marketplace and earn from every resale" },
+                { icon: "📢", bold: "Share and spread the word", text: "— every new supporter accelerates the journey to launch" },
+              ].map((item) => (
+                <div key={item.bold} className="flex items-start gap-2 flex-1">
+                  <span className="text-base flex-shrink-0">{item.icon}</span>
+                  <p className="text-[13px] text-white/70 leading-relaxed">
+                    <strong className="text-white/90">{item.bold}</strong> {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="text-center font-bold text-sm" style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
+              [www.hypertek.com] — Back the Project. Own the Future.
+            </p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
           WEB3 GAMING SOLUTION — one header, 3 horizontal cards
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full pt-14 pb-8 overflow-hidden">
@@ -404,7 +663,7 @@ function About() {
 
           {/* Section label */}
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <SectionLabel number="03" label="Web3 Gaming & Competitive Edge" />
+            <SectionLabel number="06" label="Web3 Gaming & Competitive Edge" />
           </motion.div>
 
           {/* ── Single header ── */}

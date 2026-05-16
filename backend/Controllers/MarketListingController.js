@@ -1,5 +1,23 @@
 import MarketListing from "../Models/MarketListingModel.js";
 import HireRent from "../Models/HireRentModel.js";
+import NFTSystem from "../Models/NFTSystem.js";
+
+// Sync priceETH + listed flag on the NFTSystem subCollection
+async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, listed) {
+  if (!nftSystemId || !subCollectionId) return;
+  try {
+    const parent = await NFTSystem.findById(nftSystemId);
+    if (!parent) return;
+    const sub = parent.subCollections.id(subCollectionId);
+    if (!sub) return;
+    sub.priceETH = priceETH;
+    sub.listed   = listed;
+    parent.markModified("subCollections");
+    await parent.save();
+  } catch (err) {
+    console.error("syncSubCollectionPrice error:", err.message);
+  }
+}
 
 const WARN_BEFORE_MS = 24 * 60 * 60 * 1000; // notify 24h before expiry
 
@@ -95,6 +113,11 @@ export const createListing = async (req, res) => {
       commissionTier:  commissionTier ?? 20,
     });
 
+    // Sync priceETH to the NFTSystem subCollection so marketplace filter works
+    if (activityType === "selling_general" && nftSystemId && subCollectionId && price > 0) {
+      await syncSubCollectionPrice(nftSystemId, subCollectionId, price, true);
+    }
+
     return res.status(201).json({ success: true, listing });
   } catch (err) {
     console.error("createListing:", err);
@@ -151,6 +174,21 @@ export const deleteListing = async (req, res) => {
     if (!listing) return res.status(404).json({ success: false, message: "Not found" });
     if (listing.userId.toString() !== (req.user._id || req.user.id).toString())
       return res.status(403).json({ success: false, message: "Not your listing" });
+
+    // If this was a selling_general listing, reset priceETH on the subCollection
+    // only if no other active selling_general listing exists for the same item
+    if (listing.activityType === "selling_general" && listing.nftSystemId && listing.subCollectionId) {
+      const sibling = await MarketListing.findOne({
+        _id:             { $ne: listing._id },
+        nftSystemId:     listing.nftSystemId,
+        subCollectionId: listing.subCollectionId,
+        activityType:    "selling_general",
+        status:          "active",
+      });
+      if (!sibling) {
+        await syncSubCollectionPrice(listing.nftSystemId, listing.subCollectionId, 0, false);
+      }
+    }
 
     await listing.deleteOne();
     return res.json({ success: true, message: "Listing removed" });
