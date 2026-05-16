@@ -46,11 +46,40 @@ async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
   }
 }
 
+// Reset subCollection.listed = false when an auction ends without a winner,
+// so the item correctly returns to the owner's My Collectibles.
+async function resetListedFlagForAuction(auction) {
+  if (!auction.nftSystemId || !auction.subCollectionId) return;
+  try {
+    const parent = await NFTSystem.findById(auction.nftSystemId);
+    if (!parent) return;
+    const sub = parent.subCollections.id(auction.subCollectionId);
+    if (!sub || !sub.listed) return;
+    sub.listed = false;
+    parent.markModified("subCollections");
+    await parent.save();
+  } catch (err) {
+    console.error("resetListedFlagForAuction error:", err.message);
+  }
+}
+
 async function expireAuctions() {
+  // Find auctions about to be expired so we can reset their listed flags
+  const aboutToExpire = await Auction.find({
+    status: "active",
+    endTime: { $lt: new Date() },
+  }).select("_id nftSystemId subCollectionId currentBidderWallet");
+
   await Auction.updateMany(
     { status: "active", endTime: { $lt: new Date() } },
     { status: "ended" }
   );
+
+  // Reset listed=false for auctions that ended with no winner
+  const noWinner = aboutToExpire.filter((a) => !a.currentBidderWallet);
+  for (const auction of noWinner) {
+    await resetListedFlagForAuction(auction);
+  }
 }
 
 // ── GET /api/v1/auction ───────────────────────────────────────────────────────
@@ -233,6 +262,8 @@ export async function cancelAuction(req, res) {
     }
     auction.status = "cancelled";
     await auction.save();
+    // Item has no winner — return it to unlisted state so it shows back in My Collectibles
+    await resetListedFlagForAuction(auction);
     res.json({ message: "Auction cancelled", auction });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -265,6 +296,8 @@ export async function finalizeAuction(req, res) {
     if (!auction.currentBidderWallet || !reserveMet) {
       auction.status = "ended"; // no winner
       await auction.save();
+      // No winner — return item to unlisted state so it shows back in My Collectibles
+      await resetListedFlagForAuction(auction);
       return res.json({ message: "Auction ended with no winner — reserve not met or no bids", auction });
     }
 

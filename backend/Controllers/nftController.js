@@ -1857,6 +1857,62 @@ export async function getNFTsWithSubCollections(req, res) {
 
     console.log("🎨 Found regular NFTs:", regularNFTs.length);
 
+    // ── Lazy cleanup: reset listed=false for subCollections whose MarketListing
+    // has expired (TTL-deleted by MongoDB) or been cancelled.
+    // This runs in the background so it doesn't slow down the response.
+    (async () => {
+      try {
+        const staleIds = [];
+        for (const parent of parentCollections) {
+          for (const sub of parent.subCollections) {
+            if (sub.listed && sub.owner?.toLowerCase() === walletAddress.toLowerCase()) {
+              staleIds.push({ parentId: parent._id, subId: sub._id });
+            }
+          }
+        }
+        if (staleIds.length === 0) return;
+
+        // Check which subCollections still have an active MarketListing or active Auction
+        const subIdStrings = staleIds.map((s) => String(s.subId));
+        const [activeListings, activeAuctions] = await Promise.all([
+          MarketListing.find({ subCollectionId: { $in: subIdStrings }, status: "active" }).select("subCollectionId"),
+          Auction.find({ subCollectionId: { $in: subIdStrings }, status: "active" }).select("subCollectionId"),
+        ]);
+        const stillActiveIds = new Set([
+          ...activeListings.map((l) => String(l.subCollectionId)),
+          ...activeAuctions.map((a) => String(a.subCollectionId)),
+        ]);
+
+        // Reset listed=false for any subCollection with no active listing or auction
+        const staleByParent = {};
+        for (const { parentId, subId } of staleIds) {
+          if (!stillActiveIds.has(String(subId))) {
+            if (!staleByParent[parentId]) staleByParent[parentId] = [];
+            staleByParent[parentId].push(String(subId));
+          }
+        }
+
+        for (const [parentId, subIds] of Object.entries(staleByParent)) {
+          const parent = parentCollections.find((p) => String(p._id) === parentId);
+          if (!parent) continue;
+          let changed = false;
+          for (const subId of subIds) {
+            const sub = parent.subCollections.id(subId);
+            if (sub && sub.listed) {
+              sub.listed = false;
+              changed = true;
+            }
+          }
+          if (changed) {
+            parent.markModified("subCollections");
+            await parent.save();
+          }
+        }
+      } catch (cleanupErr) {
+        console.error("getNFTsWithSubCollections lazy cleanup error:", cleanupErr.message);
+      }
+    })();
+
     // Combine both
     const allNFTs = [...parentCollections, ...regularNFTs];
 

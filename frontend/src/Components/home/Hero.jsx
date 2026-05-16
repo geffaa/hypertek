@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import heroImage from "../../assets/images/hero.jpg";
 import Logo from "/logo-white.png";
 import "../../App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useSiteContent from "../../hooks/useSiteContent";
 import { X } from "lucide-react";
 
 function VideoModal({ onClose }) {
   const videoRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     requestAnimationFrame(() => setVisible(true));
@@ -83,6 +84,32 @@ function VideoModal({ onClose }) {
             display: "block",
           }}
         />
+        {/* Try the UI button below video */}
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+          <button
+            onClick={() => { handleClose(); navigate("/gaming"); }}
+            style={{
+              padding: "10px 32px",
+              background: "rgba(0,42,168,0.85)",
+              border: "1px solid rgba(56,189,248,0.45)",
+              borderTop: "2px solid rgba(56,189,248,0.8)",
+              borderRadius: 8,
+              color: "#fff",
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: "Orbitron, sans-serif",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              cursor: "pointer",
+              transition: "background 0.2s, box-shadow 0.2s",
+              boxShadow: "0 0 24px rgba(56,189,248,0.2)",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,59,212,0.95)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,42,168,0.85)"; }}
+          >
+            Try the UI
+          </button>
+        </div>
       </div>
     </div>,
     document.body

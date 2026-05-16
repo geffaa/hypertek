@@ -89,7 +89,7 @@ function About() {
   const top   = cms.about_top   || {};
   const story = cms.about_story || {};
 
-  const heroHeading  = top.heading    || "About Us";
+  const heroHeading  = top.heading    || "The Interconnected Gaming Universe.";
   const heroSubtitle = DEFAULT_SUBTITLE;
   const bgImage      = top.bg_image   ? getImageUrl(top.bg_image)   : aboutBg;
   const charImage    = top.char_image ? getImageUrl(top.char_image) : charImg;
@@ -240,6 +240,86 @@ function About() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
+          VISION & MISSION
+      ══════════════════════════════════════════════════════ */}
+      <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 xl:px-20 pt-16 pb-10">
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+        >
+          <SectionLabel number="02" label="Vision & Mission" />
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Vision Card */}
+          <motion.div
+            className="relative rounded-2xl p-7 flex flex-col gap-4"
+            style={{ background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.18)", borderTop: "3px solid rgba(56,189,248,0.6)" }}
+            initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+          >
+            <CornerAccent color="rgba(56,189,248,0.4)" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(56,189,248,0.12)", border: "1px solid rgba(56,189,248,0.35)" }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="2.5" fill="#38bdf8" />
+                  <circle cx="8" cy="8" r="6" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="3 2" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em]"
+                style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}>
+                Vision
+              </span>
+            </div>
+            <p className="text-white/55 text-[12px] italic leading-relaxed"
+              style={{ fontFamily: "Orbitron, sans-serif" }}>
+              "...to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games..."
+            </p>
+            <p className="text-white/70 text-sm leading-[1.9] text-justify">
+              The long-term vision of Hyper Tek is to build a living digital universe where multiple games, economies, and communities coexist within one interconnected platform. Instead of isolated gaming experiences, Hyper Tek aims to establish a shared ecosystem where players' actions influence the world around them.
+            </p>
+            <p className="text-white/70 text-sm leading-[1.9] text-justify">
+              By merging strategy, racing, and adventure into one cohesive system, Hyper Tek seeks to create a new generation of gaming environments that are deeper, more immersive, and more rewarding than traditional standalone games.
+            </p>
+          </motion.div>
+
+          {/* Mission Card */}
+          <motion.div
+            className="relative rounded-2xl p-7 flex flex-col gap-4"
+            style={{ background: "rgba(167,139,250,0.04)", border: "1px solid rgba(167,139,250,0.18)", borderTop: "3px solid rgba(167,139,250,0.6)" }}
+            initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+          >
+            <CornerAccent color="rgba(167,139,250,0.4)" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ background: "rgba(167,139,250,0.12)", border: "1px solid rgba(167,139,250,0.35)" }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 2L14 5.5V10.5L8 14L2 10.5V5.5L8 2Z" stroke="#a78bfa" strokeWidth="1.2" />
+                  <circle cx="8" cy="8" r="2" fill="#a78bfa" />
+                </svg>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em]"
+                style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}>
+                Mission
+              </span>
+            </div>
+            <p className="text-white/55 text-[12px] italic leading-relaxed"
+              style={{ fontFamily: "Orbitron, sans-serif" }}>
+              "...to address multiple issues within the gaming industry and to redefine how gaming ecosystems operate..."
+            </p>
+            <p className="text-white/70 text-sm leading-[1.9] text-justify">
+              The Hyper Tek mission was to address multiple issues within the gaming industry and to redefine how gaming ecosystems operate by creating an interconnected universe where players are not limited to a single gameplay style.
+            </p>
+            <p className="text-white/70 text-sm leading-[1.9] text-justify">
+              By combining multiple genres into one progression system, Hyper Tek seeks to provide a dynamic environment where players can explore, compete, and grow within a unified world. It sets out to give true ownership to digital assets that have real value, which increases over time with a guaranteed minimum buy-back on all NFAs.
+            </p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════
           3 GAMES
       ══════════════════════════════════════════════════════ */}
       <section className="relative w-full px-6 md:px-12 xl:px-20 pt-12 pb-10">
@@ -283,9 +363,23 @@ function About() {
                   <p className="text-[9px] font-bold tracking-[0.3em] uppercase mb-1" style={{ color: game.accent, fontFamily: "Orbitron,sans-serif" }}>{game.tag}</p>
                   <h3 className="font-[Goldman] font-bold text-sm text-white mb-2 leading-snug">{game.name}</h3>
                   <p className="text-white/45 text-xs leading-relaxed mb-4">{game.desc}</p>
-                  <div className="flex items-center gap-1 text-[10px] font-bold uppercase transition-opacity group-hover:opacity-100 opacity-60"
-                    style={{ color: game.accent, fontFamily: "Orbitron,sans-serif" }}>
-                    Discover <ChevronRight className="w-3 h-3" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-[10px] font-bold uppercase transition-opacity group-hover:opacity-100 opacity-60"
+                      style={{ color: game.accent, fontFamily: "Orbitron,sans-serif" }}>
+                      Discover <ChevronRight className="w-3 h-3" />
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate("/gaming"); }}
+                      className="text-[9px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded transition-all duration-200 hover:brightness-125"
+                      style={{
+                        fontFamily: "Orbitron,sans-serif",
+                        background: `${game.accent}18`,
+                        border: `1px solid ${game.accent}50`,
+                        color: game.accent,
+                      }}
+                    >
+                      Try the UI
+                    </button>
                   </div>
                 </div>
                 {/* Hover glow */}

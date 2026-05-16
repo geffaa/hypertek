@@ -107,6 +107,7 @@ function MarketPlace() {
   // ---- Auction (my posted auctions) state ----
   const [myAuctions, setMyAuctions] = useState([]);
   const [auctionsLoading, setAuctionsLoading] = useState(false);
+  const [auctionStatusFilter, setAuctionStatusFilter] = useState("active");
 
   // ---- Pagination ----
   const PAGE_SIZE = 10;
@@ -285,7 +286,7 @@ function MarketPlace() {
   }, [activeTab, connectedWallet, token]);
 
   // ---- Fetch trade posts (eager — needed for venue badges in My Collectibles) ----
-  useEffect(() => {
+  const fetchOffers = () => {
     if (!connectedWallet) return;
     setOffersLoading(true);
     axios
@@ -296,10 +297,11 @@ function MarketPlace() {
       .then((res) => setOffers(res.data?.trades || []))
       .catch(() => setOffers([]))
       .finally(() => setOffersLoading(false));
-  }, [connectedWallet, token]);
+  };
+  useEffect(() => { fetchOffers(); }, [connectedWallet, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- Fetch user's posted auctions (eager — needed for venue badges in My Collectibles) ----
-  useEffect(() => {
+  const fetchAuctions = () => {
     if (!connectedWallet) return;
     setAuctionsLoading(true);
     axios
@@ -309,7 +311,40 @@ function MarketPlace() {
       .then((res) => setMyAuctions(Array.isArray(res.data) ? res.data : res.data?.auctions || []))
       .catch(() => setMyAuctions([]))
       .finally(() => setAuctionsLoading(false));
-  }, [connectedWallet, token]);
+  };
+  useEffect(() => { fetchAuctions(); }, [connectedWallet, token]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ---- Cancel trade ----
+  const handleCancelTrade = async (tradeId) => {
+    if (!window.confirm("Cancel this trade listing?")) return;
+    try {
+      await axios.put(
+        `${BACKEND_BASE_URL}/api/v1/trade/${tradeId}/cancel`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success("Trade cancelled");
+      fetchOffers();
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Failed to cancel trade");
+    }
+  };
+
+  // ---- Cancel auction ----
+  const handleCancelAuction = async (auctionId) => {
+    if (!window.confirm("Cancel this auction? (Only possible if no bids have been placed.)")) return;
+    try {
+      await axios.put(
+        `${BACKEND_BASE_URL}/api/v1/auction/${auctionId}/cancel`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success("Auction cancelled");
+      fetchAuctions();
+    } catch (err) {
+      toast.error(err.response?.data?.error || "Failed to cancel auction");
+    }
+  };
 
 
   // ---- Utility helpers ----
@@ -749,9 +784,9 @@ function MarketPlace() {
                       <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
                         {/* Sticky table header */}
                         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
-                          <div className="grid min-w-[560px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
-                            <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span>
+                          <div className="grid min-w-[640px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr 0.7fr" }}>
+                            <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span><span></span>
                           </div>
                         </div>
                         {/* Body — natural page scroll */}
@@ -759,15 +794,27 @@ function MarketPlace() {
                           {paged.map((trade, i) => {
                             const c = statusColors[trade.status] || statusColors.open;
                             const resolvedCat = trade.category || "general";
+                            const canCancel = trade.status === "open" || trade.status === "accepted";
                             return (
-                              <div key={trade._id} className="grid min-w-[560px] px-4 py-3 items-center"
-                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr" }}>
+                              <div key={trade._id} className="grid min-w-[640px] px-4 py-3 items-center"
+                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr 0.7fr" }}>
                                 <span className="text-white/60 text-xs font-mono">#{String(trade._id).slice(-6).toUpperCase()}</span>
                                 <span className="text-white/80 text-xs truncate">{trade.offering || "—"}</span>
                                 <span className="text-white/60 text-xs truncate italic">{trade.requesting || "—"}</span>
                                 <span className="text-white/40 text-xs truncate capitalize">{resolvedCat}</span>
                                 <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
                                   style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{trade.status}</span>
+                                <div className="flex justify-end">
+                                  {canCancel && (
+                                    <button
+                                      onClick={() => handleCancelTrade(trade._id)}
+                                      className="text-[10px] font-semibold px-2 py-1 rounded transition-opacity hover:opacity-80"
+                                      style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
+                                    >
+                                      Cancel
+                                    </button>
+                                  )}
+                                </div>
                               </div>
                             );
                           })}
@@ -798,7 +845,10 @@ function MarketPlace() {
 
             {/* ---- AUCTION VIEW ---- */}
             {activeTab === "Auction" && (() => {
-              const auctionData = myAuctions;
+              const AUCTION_STATUS_FILTERS = ["active", "ended", "sold", "all"];
+              const filteredAuctions = auctionStatusFilter === "all"
+                ? myAuctions
+                : myAuctions.filter((a) => a.status === auctionStatusFilter);
               const isLoading   = auctionsLoading;
               const statusColors = {
                 active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
@@ -806,28 +856,43 @@ function MarketPlace() {
                 sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
                 cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
               };
-              const totalPages = Math.ceil(auctionData.length / PAGE_SIZE);
-              const paged = auctionData.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
+              const totalPages = Math.ceil(filteredAuctions.length / PAGE_SIZE);
+              const paged = filteredAuctions.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
               return (
                 <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10 flex gap-4 items-start">
                   <div className="flex-1 min-w-0">
+                    {/* Status filter pills */}
+                    <div className="flex gap-2 mb-4 flex-wrap">
+                      {AUCTION_STATUS_FILTERS.map((f) => (
+                        <button
+                          key={f}
+                          onClick={() => { setAuctionStatusFilter(f); setAuctionPage(1); }}
+                          className="px-3 py-1 rounded-full text-xs font-semibold capitalize transition-all"
+                          style={auctionStatusFilter === f
+                            ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
+                            : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
+                          }
+                        >{f}</button>
+                      ))}
+                    </div>
+
                     {!connectedWallet ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
                         <p className="text-sm">Connect your wallet to view your auction listings</p>
                       </div>
                     ) : isLoading ? (
                       <div className="text-white/50 text-sm py-16 text-center">Loading your auctions...</div>
-                    ) : auctionData.length === 0 ? (
+                    ) : filteredAuctions.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                        <p className="text-sm">No auction listings</p>
+                        <p className="text-sm">No {auctionStatusFilter === "all" ? "" : auctionStatusFilter + " "}auction listings</p>
                       </div>
                     ) : (
                       <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
                         {/* Sticky table header */}
                         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
-                          <div className="grid min-w-[620px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
-                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
-                            <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span>
+                          <div className="grid min-w-[700px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
+                            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr 0.7fr" }}>
+                            <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span><span></span>
                           </div>
                         </div>
                         {/* Body — natural page scroll */}
@@ -839,9 +904,10 @@ function MarketPlace() {
                             const timeStr = diff > 0
                               ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
                               : "Ended";
+                            const canCancel = auction.status === "active" && (!auction.bidHistory || auction.bidHistory.length === 0);
                             return (
-                              <div key={auction._id} className="grid min-w-[620px] px-4 py-3 items-center"
-                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr" }}>
+                              <div key={auction._id} className="grid min-w-[700px] px-4 py-3 items-center"
+                                style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr 0.7fr" }}>
                                 <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
                                 <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
                                 <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
@@ -849,13 +915,24 @@ function MarketPlace() {
                                 <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
                                 <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
                                   style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
+                                <div className="flex justify-end">
+                                  {canCancel && (
+                                    <button
+                                      onClick={() => handleCancelAuction(auction._id)}
+                                      className="text-[10px] font-semibold px-2 py-1 rounded transition-opacity hover:opacity-80"
+                                      style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
+                                    >
+                                      Cancel
+                                    </button>
+                                  )}
+                                </div>
                               </div>
                             );
                           })}
                         </div>
                         {totalPages > 1 && (
                           <div className="flex items-center justify-between px-5 py-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(4,8,28,0.6)" }}>
-                            <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, auctionData.length)} of {auctionData.length}</span>
+                            <span className="text-white/30 text-xs">{(auctionPage - 1) * PAGE_SIZE + 1}–{Math.min(auctionPage * PAGE_SIZE, filteredAuctions.length)} of {filteredAuctions.length}</span>
                             <div className="flex gap-1">
                               <button onClick={() => setAuctionPage(p => Math.max(1, p - 1))} disabled={auctionPage === 1}
                                 className="px-2.5 py-1 rounded text-xs text-white/50 hover:text-white disabled:opacity-30" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>←</button>

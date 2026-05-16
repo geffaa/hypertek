@@ -62,9 +62,46 @@ function clip(str, n) {
   return str?.length > n ? str.slice(0, n) + "…" : (str || "");
 }
 
+function NewsCard({ item, i, go }) {
+  return (
+    <motion.div
+      className="group cursor-pointer rounded-xl overflow-hidden flex flex-col"
+      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "border-color 0.3s, box-shadow 0.3s" }}
+      onClick={() => go(item)}
+      variants={fadeUp} custom={i}
+      initial="hidden" whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.3)"; e.currentTarget.style.boxShadow = "0 0 30px rgba(56,189,248,0.08)"; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.boxShadow = "none"; }}
+    >
+      <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+        <img src={getImageUrl(item.image)} alt={item.heading}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,6,16,0.6) 0%, transparent 60%)" }} />
+      </div>
+      <div className="flex flex-col flex-1 p-5 gap-2">
+        <span className="text-[10px] uppercase tracking-widest" style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
+          {formatDate(item.createdAt)}
+        </span>
+        <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
+          {clip(item.heading, 65)}
+        </h3>
+        <p className="text-white/50 text-[13px] leading-relaxed flex-1">{clip(item.description, 110)}</p>
+        <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
+          <span>Read</span>
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 4h10M7 1l4 3-4 3" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function NewsList() {
   const [news, setNews]       = useState([]);
   const [activeFaq, setFaq]   = useState(0);
+  const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,7 +114,8 @@ export default function NewsList() {
   const go = (item) => navigate("/more-news", { state: { newsItem: item } });
 
   const featured   = news[0];
-  const newsCards  = news.slice(1, 4); // exactly 3 cards
+  const newsCards  = news.slice(1, 4);      // first 3 after featured
+  const extraNews  = news.slice(4);         // remaining when "See All"
 
   // Pick a random avatar per FAQ item (stable per session)
   const faqAvatars = useMemo(() =>
@@ -162,7 +200,7 @@ export default function NewsList() {
           </motion.div>
         )}
 
-        {/* ── News: 3 cards ── */}
+        {/* ── News: 3 cards + See All ── */}
         {newsCards.length > 0 && (
           <>
             <div className="flex items-center gap-4 mb-8">
@@ -170,42 +208,52 @@ export default function NewsList() {
               <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>All Stories</span>
               <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {newsCards.map((item, i) => (
-                <motion.div
-                  key={item._id}
-                  className="group cursor-pointer rounded-xl overflow-hidden flex flex-col"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "border-color 0.3s, box-shadow 0.3s" }}
-                  onClick={() => go(item)}
-                  variants={fadeUp} custom={i}
-                  initial="hidden" whileInView="visible"
-                  viewport={{ once: true, amount: 0.15 }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(56,189,248,0.3)"; e.currentTarget.style.boxShadow = "0 0 30px rgba(56,189,248,0.08)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.boxShadow = "none"; }}
-                >
-                  <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                    <img src={getImageUrl(item.image)} alt={item.heading}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(6,6,16,0.6) 0%, transparent 60%)" }} />
-                  </div>
-                  <div className="flex flex-col flex-1 p-5 gap-2">
-                    <span className="text-[10px] uppercase tracking-widest" style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-                      {formatDate(item.createdAt)}
-                    </span>
-                    <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
-                      {clip(item.heading, 65)}
-                    </h3>
-                    <p className="text-white/50 text-[13px] leading-relaxed flex-1">{clip(item.description, 110)}</p>
-                    <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                      <span>Read</span>
-                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                        <path d="M1 4h10M7 1l4 3-4 3" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.div>
+                <NewsCard key={item._id} item={item} i={i} go={go} />
               ))}
             </div>
+
+            {/* Extra news — shown when showAll */}
+            {showAll && extraNews.length > 0 && (
+              <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+              >
+                {extraNews.map((item, i) => (
+                  <NewsCard key={item._id} item={item} i={i} go={go} />
+                ))}
+              </motion.div>
+            )}
+
+            {/* See All / Collapse button */}
+            {(extraNews.length > 0 || showAll) && (
+              <div className="flex justify-center mt-8 mb-16">
+                <button
+                  onClick={() => setShowAll(v => !v)}
+                  className="flex items-center gap-2 px-7 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-200 hover:brightness-125"
+                  style={{
+                    background: "rgba(56,189,248,0.07)",
+                    border: "1px solid rgba(56,189,248,0.35)",
+                    borderTop: "2px solid rgba(56,189,248,0.65)",
+                    color: "#38bdf8",
+                    fontFamily: "Orbitron, sans-serif",
+                    clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                  }}
+                >
+                  {showAll ? "Show Less" : `See All Stories (${news.length - 1})`}
+                  <svg
+                    width="12" height="8" viewBox="0 0 12 8" fill="none"
+                    style={{ transform: showAll ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}
+                  >
+                    <path d="M1 1l5 5 5-5" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            )}
+            {!extraNews.length && !showAll && <div className="mb-16" />}
           </>
         )}
 
