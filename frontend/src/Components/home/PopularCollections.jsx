@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -453,6 +454,7 @@ const PACKAGES = [
 
 // ── Detail Modal ───────────────────────────────────────────────────────────────
 function PackageModal({ pkg, onClose }) {
+  const { t } = useTranslation();
   if (!pkg) return null;
 
   return createPortal(
@@ -501,7 +503,7 @@ function PackageModal({ pkg, onClose }) {
               </div>
             )}
             <div className="flex flex-col gap-0.5 min-w-0">
-              <span className="text-white/50 text-[11px] font-bold tracking-widest uppercase">Donation Tier</span>
+              <span className="text-white/50 text-[11px] font-bold tracking-widest uppercase">{t("packages.donationTierLabel")}</span>
               <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-xl leading-tight">{pkg.title}</h2>
               <span className="text-[#7EC8A0] text-xl sm:text-2xl font-bold font-[Goldman]">{pkg.tier}</span>
             </div>
@@ -519,7 +521,7 @@ function PackageModal({ pkg, onClose }) {
 
             {/* Rewards */}
             <div className="flex flex-col gap-3">
-              <h3 className="text-white/80 text-xs font-bold uppercase tracking-widest">Rewards &amp; Benefits</h3>
+              <h3 className="text-white/80 text-xs font-bold uppercase tracking-widest">{t("packages.rewardsTitle")}</h3>
               <ul className="flex flex-col gap-2">
                 {pkg.rewards.map((r, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-white/80 text-[13px] leading-relaxed">
@@ -534,15 +536,15 @@ function PackageModal({ pkg, onClose }) {
 
             {/* Note */}
             <div className="flex flex-col gap-2">
-              <h4 className="text-white/50 text-[11px] font-bold uppercase tracking-widest">Note</h4>
-              <p className="text-white/50 text-[12px] leading-relaxed whitespace-pre-line">{COMMON_NOTE}</p>
+              <h4 className="text-white/50 text-[11px] font-bold uppercase tracking-widest">{t("packages.noteTitle")}</h4>
+              <p className="text-white/50 text-[12px] leading-relaxed whitespace-pre-line">{t("packages.commonNote")}</p>
             </div>
 
             {/* Special Condition */}
             <div className="rounded-lg p-4 flex flex-col gap-2"
               style={{ background: "rgba(126,200,160,0.08)", border: "1px solid rgba(126,200,160,0.25)" }}>
-              <h4 className="text-[#7EC8A0] text-[11px] font-bold uppercase tracking-widest">Special Condition</h4>
-              <p className="text-white/70 text-[12px] leading-relaxed">{SPECIAL_CONDITION}</p>
+              <h4 className="text-[#7EC8A0] text-[11px] font-bold uppercase tracking-widest">{t("packages.specialConditionTitle")}</h4>
+              <p className="text-white/70 text-[12px] leading-relaxed">{t("packages.specialCondition")}</p>
             </div>
 
           </div>
@@ -555,6 +557,7 @@ function PackageModal({ pkg, onClose }) {
 
 // ── Main component ─────────────────────────────────────────────────────────────
 function CrowdfundingPackages() {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState(null);
   const [page, setPage] = useState(0);
   const CARDS_PER_PAGE = 6;
@@ -585,39 +588,21 @@ function CrowdfundingPackages() {
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
               <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 13, letterSpacing: "0.28em", color: "rgba(56,189,248,1)", fontWeight: "bold", textShadow: "0 0 14px rgba(56,189,248,0.7)" }}>
-                CROWDFUNDING CAMPAIGN — STAGE 1
+                {t("packages.badge")}
               </span>
             </div>
 
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-              We are excited to announce the launch of our highly anticipated crowdfunding campaign to secure funding
-              for the completion of the groundbreaking Hyper Tek project, which is making positive strides! This is
-              your chance to dive into the Hyper Tek ecosystem as an early participant by choosing from an exclusive
-              selection of limited-availability items and packages that you won't want to miss.<br />
-              Act quickly! By purchasing directly from us on this platform, you can enjoy reduced rates of 10% by
-              allowing us to pass the savings on to you, from avoiding crowdfunding fees, which are listed below!
+              {t("packages.intro1")}
             </p>
-
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-              As all Hyper Tek Non-Fungible Digital items are backed by a guaranteed minimum buy-back, with most also
-              offering substantial in-game bonuses that enhance your experience, to amp things up, we're introducing a
-              series of limited-edition Non-Fungible Assets (NFAs) featuring the highest bonus levels that will ever
-              be offered. This is a rare opportunity as these offerings will never be repeated! Once these items sell
-              out or we hit our funding target, any remaining unminted limited-edition NFAs will be pulled from the
-              website for good! This means these Stage 1 NFAs will retain the highest in-game bonuses and remain
-              truly unique, offering you and fellow investors the confidence that your purchase is genuinely one of a
-              kind.
+              {t("packages.intro2")}
             </p>
-
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-              We've already raised over $440,000 and are looking to secure an additional $460,000. This is your
-              moment to join us in this thrilling initiative; don't let it slip away! Purchase your
-              limited-availability items or packages today and be part of the exciting Hyper Tek Ecosystem.
+              {t("packages.intro3")}
             </p>
-
             <p className="text-[13px] lg:text-[14px] leading-[1.85] text-justify" style={{ color: "rgba(255,255,255,0.78)" }}>
-              Remember to sign up for the wishlist and connect with us on social media to stay in the loop! Act now,
-              as time is of the essence!
+              {t("packages.intro4")}
             </p>
           </div>
 
@@ -628,15 +613,15 @@ function CrowdfundingPackages() {
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-[2px] bg-white/50" />
-              <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">Collections</span>
+              <span className="text-white/70 font-bold text-xs tracking-[0.3em] uppercase">{t("packages.collectionsLabel")}</span>
             </div>
             <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
             <h2 className="text-white font-[Goldman] font-bold text-xl sm:text-2xl uppercase whitespace-nowrap">
-              Donation Tier Packages
+              {t("packages.sectionTitle")}
             </h2>
             <div className="flex-1 h-px" style={{ background: "rgba(56,189,248,0.15)" }} />
             <span className="text-white/50 text-[12px] font-semibold whitespace-nowrap">
-              Save 10% off listed prices
+              {t("packages.discount")}
             </span>
           </div>
 
@@ -670,7 +655,7 @@ function CrowdfundingPackages() {
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center gap-1">
                         <span className="text-white/20 text-4xl">?</span>
-                        <span className="text-white/20 text-[10px]">Image coming soon</span>
+                        <span className="text-white/20 text-[10px]">{t("packages.imageComing")}</span>
                       </div>
                     )}
                   </div>
@@ -683,7 +668,7 @@ function CrowdfundingPackages() {
                       {pkg.title}
                     </h3>
                     <span className="text-[#7EC8A0] text-[11px] font-semibold">
-                      Donation Tier: {pkg.tier}
+                      {t("packages.donationTierPrefix")} {pkg.tier}
                     </span>
                   </div>
                 </motion.div>

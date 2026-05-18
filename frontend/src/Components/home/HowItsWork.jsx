@@ -6,6 +6,7 @@ import cardIcon from "../../assets/images/howItsWork/card.png";
 import earnIcon from "../../assets/images/howItsWork/earn.png";
 import "../../index.css";
 import useSiteContent from "../../hooks/useSiteContent";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_STEPS = [
   {
@@ -51,14 +52,14 @@ const fadeUp = {
 };
 
 function HowItsWork() {
+  const { t } = useTranslation();
   const { data: cms } = useSiteContent("home_how_it_works");
 
-  const sectionTitle = cms.section_title || "How It Works";
-  const sectionSubtitle =
-    cms.section_subtitle ||
-    "Get started in just a few steps and unlock the world of digital collectibles.";
+  const sectionTitle = cms.section_title || t("howItWorks.sectionTitle");
+  const sectionSubtitle = cms.section_subtitle || t("howItWorks.sectionSubtitle");
 
-  const steps = Array.isArray(cms.steps) ? cms.steps : DEFAULT_STEPS;
+  const translatedSteps = t("howItWorks.steps", { returnObjects: true });
+  const steps = Array.isArray(cms.steps) ? cms.steps : (Array.isArray(translatedSteps) ? translatedSteps : DEFAULT_STEPS);
 
   return (
     <section data-edit-section="home_how_it_works" data-edit-label="How It Works" className="relative z-10 w-full px-8 md:px-16 py-16 lg:py-20">

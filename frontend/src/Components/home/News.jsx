@@ -1,49 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const GAMES = [
-  {
-    id: "racing",
-    label: "RACING",
-    path: "/game/racing",
-    image: "/racing3.png",
-    accent: "#22c55e",
-    glow: "rgba(34,197,94,0.45)",
-    tagline: "Speed is survival.",
-    description:
-      "Push beyond the limits of gravity on neon-lit megacities and alien terrain. Tune your machine, master every corner, and leave your rivals in the dust — the leaderboard waits for no one.",
-  },
-  {
-    id: "quest",
-    label: "QUEST",
-    path: "/game/quest",
-    image: "/quest1.png",
-    accent: "#38bdf8",
-    glow: "rgba(56,189,248,0.45)",
-    tagline: "Explore the unknown.",
-    description:
-      "Navigate uncharted star systems, forge alliances, and uncover the secrets of the Echo Core. Every choice shapes your legacy.",
-  },
-  {
-    id: "overlord",
-    label: "OVERLORD",
-    path: "/game/overlord",
-    image: "/overlord4.png",
-    accent: "#f87171",
-    glow: "rgba(248,113,113,0.45)",
-    tagline: "Command. Conquer. Rule.",
-    description:
-      "You are the Overlord — reborn from the ashes of a fractured Earth. Raise armies, seize star systems, and bend rival factions to your will. The Echo Core chose you. Prove it was right.",
-  },
+const GAME_STATIC = [
+  { id: "racing",   path: "/game/racing",   image: "/racing3.png",   accent: "#22c55e", glow: "rgba(34,197,94,0.45)" },
+  { id: "quest",    path: "/game/quest",    image: "/quest1.png",    accent: "#38bdf8", glow: "rgba(56,189,248,0.45)" },
+  { id: "overlord", path: "/game/overlord", image: "/overlord4.png", accent: "#f87171", glow: "rgba(248,113,113,0.45)" },
 ];
 
 
 
 
 export default function News() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [active, setActive] = useState(null);
+
+  const rawGames = t("gaming.games", { returnObjects: true });
+  const GAMES = GAME_STATIC.map((s, i) => ({
+    ...s,
+    label:       (Array.isArray(rawGames) && rawGames[i]?.label)       || s.id.toUpperCase(),
+    tagline:     (Array.isArray(rawGames) && rawGames[i]?.tagline)     || "",
+    description: (Array.isArray(rawGames) && rawGames[i]?.description) || "",
+  }));
 
   return (
     <section id="gaming-section" className="w-full pt-4 md:pt-6 pb-12 md:pb-20 relative">
@@ -58,7 +38,7 @@ export default function News() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-white font-goldman uppercase text-[22px] pb-1 border-b-2 border-white">
-            GAMING INFO
+            {t("gaming.sectionTitle")}
           </h2>
           <div className="flex-1 ml-3 mb-[1px] h-[2px] bg-gradient-to-r from-white to-transparent" />
         </motion.div>
@@ -168,7 +148,7 @@ export default function News() {
                         boxShadow: `0 0 24px ${game.glow}`,
                       }}
                     >
-                      LEARN MORE
+                      {t("gaming.learnMore")}
                     </button>
                   </div>
 
@@ -181,7 +161,7 @@ export default function News() {
                       className="text-[9px] uppercase tracking-[0.35em] font-bold"
                       style={{ color: game.accent, fontFamily: "Orbitron, sans-serif" }}
                     >
-                      hover to explore
+                      {t("gaming.hoverToExplore")}
                     </span>
                   </div>
                 </div>

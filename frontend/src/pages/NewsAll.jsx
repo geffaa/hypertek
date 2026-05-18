@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 
@@ -11,39 +12,6 @@ const AVATAR_FILES = [
   "mantasquads-female.png","mantasquads-male.png","marmulus-female.png",
   "marmulus-male.png","ophidians-female.png","ophidians-male.png",
   "overlord.png","team-specialist-major.png",
-];
-
-const FAQ_ITEMS = [
-  {
-    id: 1,
-    q: "What is HyperTek?",
-    a: "HyperTek is a play-to-earn gaming ecosystem set in the year 2117. It features 3 interconnected games — Hyper Racing, Hyper Quest, and Hyper Overlord — sharing a single economy and progression system. Every action you take contributes to real-world rewards.",
-  },
-  {
-    id: 2,
-    q: "What are NFAs, NFCs, and NFTs?",
-    a: "NFAs (Non-Fungible Assets) are HyperTek-issued in-game items with a platform-guaranteed minimum buy-back price. NFCs (Non-Fungible Characters) are licensed player characters with in-game bonuses and buy-back guarantees. NFTs are user-created collectibles — skins, weapons, and cosmetics.",
-  },
-  {
-    id: 3,
-    q: "How does the buy-back guarantee work?",
-    a: "Every NFA on HyperTek comes with a guaranteed minimum buy-back value. If you decide to exit the game, HyperTek will repurchase your assets at no less than the guaranteed minimum price — protecting your investment at all times.",
-  },
-  {
-    id: 4,
-    q: "How do I start earning real-world rewards?",
-    a: "Sign up, connect your wallet, and start playing. Every mission completed, asset traded, or battle won earns you in-game currency that can be converted to cash-out payments. Your progression carries across all three games.",
-  },
-  {
-    id: 5,
-    q: "What games are available?",
-    a: "Three games share the HyperTek universe: Hyper Racing (high-speed circuit battles), Hyper Quest (exploration, factions, and ancient tech), and Hyper Overlord (strategy, dominion, and conquest). All share the same economy and player progression.",
-  },
-  {
-    id: 6,
-    q: "Is VR/AR supported?",
-    a: "Yes. HyperTek supports VR and AR players who can join missions and epic battles in real-time alongside standard players. The ecosystem is designed to be accessible across all devices and platforms.",
-  },
 ];
 
 const fadeUp = {
@@ -62,7 +30,7 @@ function clip(str, n) {
   return str?.length > n ? str.slice(0, n) + "…" : (str || "");
 }
 
-function NewsCard({ item, i, go }) {
+function NewsCard({ item, i, go, readLabel }) {
   return (
     <motion.div
       className="group cursor-pointer rounded-xl overflow-hidden flex flex-col"
@@ -88,7 +56,7 @@ function NewsCard({ item, i, go }) {
         </h3>
         <p className="text-white/50 text-[13px] leading-relaxed flex-1">{clip(item.description, 110)}</p>
         <div className="flex items-center gap-1.5 mt-2 text-[#38bdf8]/70 text-[11px] font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
-          <span>Read</span>
+          <span>{readLabel}</span>
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 4h10M7 1l4 3-4 3" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -103,6 +71,9 @@ export default function NewsList() {
   const [activeFaq, setFaq]   = useState(0);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const faqItems = t("newsPage.faq", { returnObjects: true }) || [];
 
   useEffect(() => {
     fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews`)
@@ -114,12 +85,11 @@ export default function NewsList() {
   const go = (item) => navigate("/more-news", { state: { newsItem: item } });
 
   const featured   = news[0];
-  const newsCards  = news.slice(1, 4);      // first 3 after featured
-  const extraNews  = news.slice(4);         // remaining when "See All"
+  const newsCards  = news.slice(1, 4);
+  const extraNews  = news.slice(4);
 
-  // Pick a random avatar per FAQ item (stable per session)
   const faqAvatars = useMemo(() =>
-    FAQ_ITEMS.map(() => `/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`),
+    Array.from({ length: 6 }, () => `/avatar/${AVATAR_FILES[Math.floor(Math.random() * AVATAR_FILES.length)]}`),
   []);
 
   return (
@@ -144,14 +114,14 @@ export default function NewsList() {
               <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
                 <path d="M13 5H1M5 1L1 5l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Back to Home
+              {t("newsPage.backToHome")}
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.35em] mb-2"
               style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-              Latest Updates
+              {t("newsPage.latestUpdates")}
             </p>
             <h1 className="font-[Goldman] font-bold text-3xl md:text-4xl xl:text-5xl uppercase text-white">
-              News, Updates &amp; FAQ
+              {t("newsPage.heading")}
             </h1>
           </div>
           <div className="flex-1 mb-2 h-px" style={{ background: "linear-gradient(to right, rgba(56,189,248,0.4), transparent)" }} />
@@ -180,7 +150,7 @@ export default function NewsList() {
               <div className="flex items-center gap-3 mb-3">
                 <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded"
                   style={{ background: "rgba(56,189,248,0.15)", border: "1px solid rgba(56,189,248,0.5)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-                  LATEST
+                  {t("newsPage.latestBadge")}
                 </span>
                 <span className="text-white/40 text-xs">{formatDate(featured.createdAt)}</span>
               </div>
@@ -191,7 +161,7 @@ export default function NewsList() {
                 {featured.description}
               </p>
               <div className="mt-5 flex items-center gap-2 text-[#38bdf8] text-xs font-bold uppercase tracking-widest" style={{ fontFamily: "Orbitron, sans-serif" }}>
-                <span>Read Article</span>
+                <span>{t("newsPage.readArticle")}</span>
                 <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
                   <path d="M1 5h14M10 1l5 4-5 4" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -205,16 +175,17 @@ export default function NewsList() {
           <>
             <div className="flex items-center gap-4 mb-8">
               <div className="w-5 h-[2px]" style={{ background: "#38bdf8" }} />
-              <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>All Stories</span>
+              <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+                {t("newsPage.allStories")}
+              </span>
               <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {newsCards.map((item, i) => (
-                <NewsCard key={item._id} item={item} i={i} go={go} />
+                <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} />
               ))}
             </div>
 
-            {/* Extra news — shown when showAll */}
             {showAll && extraNews.length > 0 && (
               <motion.div
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6"
@@ -223,12 +194,11 @@ export default function NewsList() {
                 transition={{ duration: 0.45 }}
               >
                 {extraNews.map((item, i) => (
-                  <NewsCard key={item._id} item={item} i={i} go={go} />
+                  <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} />
                 ))}
               </motion.div>
             )}
 
-            {/* See All / Collapse button */}
             {(extraNews.length > 0 || showAll) && (
               <div className="flex justify-center mt-8 mb-16">
                 <button
@@ -243,7 +213,7 @@ export default function NewsList() {
                     clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
                   }}
                 >
-                  {showAll ? "Show Less" : `See All Stories (${news.length - 1})`}
+                  {showAll ? t("newsPage.showLess") : t("newsPage.seeAll", { count: news.length - 1 })}
                   <svg
                     width="12" height="8" viewBox="0 0 12 8" fill="none"
                     style={{ transform: showAll ? "rotate(180deg)" : "none", transition: "transform 0.3s" }}
@@ -264,38 +234,34 @@ export default function NewsList() {
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }} viewport={{ once: true, amount: 0.1 }}
         >
-          {/* Section header */}
           <div className="flex items-center gap-4 mb-8">
             <div className="w-5 h-[2px]" style={{ background: "#a78bfa" }} />
             <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-              Frequently Asked
+              {t("newsPage.frequentlyAsked")}
             </span>
             <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
           </div>
 
-          {/* Two-panel layout */}
           <div
             className="rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-[280px_1fr]"
             style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
           >
             {/* LEFT: Question list */}
             <div style={{ borderRight: "1px solid rgba(255,255,255,0.07)" }}>
-              {FAQ_ITEMS.map((item, i) => (
+              {faqItems.map((item, i) => (
                 <button
-                  key={item.id}
+                  key={i}
                   onClick={() => setFaq(i)}
                   className="w-full text-left px-5 py-4 flex items-start gap-3 transition-all duration-200 group relative"
                   style={{
-                    borderBottom: i < FAQ_ITEMS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                    borderBottom: i < faqItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
                     background: activeFaq === i ? "rgba(167,139,250,0.08)" : "transparent",
                   }}
                 >
-                  {/* Active left bar */}
                   {activeFaq === i && (
                     <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r"
                       style={{ background: "linear-gradient(to bottom, #a78bfa, rgba(167,139,250,0.3))" }} />
                   )}
-                  {/* Number badge */}
                   <span
                     className="flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5 transition-colors duration-200"
                     style={{
@@ -318,7 +284,6 @@ export default function NewsList() {
 
             {/* RIGHT: Answer + Character */}
             <div className="relative overflow-hidden flex flex-col justify-between min-h-[340px]">
-              {/* Character — random per FAQ item, slides in */}
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeFaq}
@@ -333,13 +298,11 @@ export default function NewsList() {
                 />
               </AnimatePresence>
 
-              {/* Gradient over character so text is readable */}
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: "linear-gradient(90deg, rgba(6,6,16,0.0) 30%, rgba(6,6,16,0.75) 100%)" }} />
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: "linear-gradient(to top, rgba(6,6,16,0.5) 0%, transparent 50%)" }} />
 
-              {/* Answer content */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFaq}
@@ -352,20 +315,21 @@ export default function NewsList() {
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-4 h-[1px]" style={{ background: "#a78bfa" }} />
                     <span className="text-[10px] font-bold uppercase tracking-[0.3em]"
-                      style={{ color: "#a78bfa", fontFamily: "Orbitron, sans-serif" }}>FAQ</span>
+                      style={{ color: "#a78bfa", fontFamily: "Orbitron, sans-serif" }}>
+                      {t("newsPage.faqLabel")}
+                    </span>
                   </div>
                   <h3 className="font-[Goldman] font-bold text-white text-xl md:text-2xl leading-snug mb-4">
-                    {FAQ_ITEMS[activeFaq].q}
+                    {faqItems[activeFaq]?.q}
                   </h3>
                   <p className="text-gray-400 text-sm leading-[1.85]">
-                    {FAQ_ITEMS[activeFaq].a}
+                    {faqItems[activeFaq]?.a}
                   </p>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Pagination dots */}
               <div className="relative z-10 flex items-center gap-2 px-8 md:px-10 pb-8">
-                {FAQ_ITEMS.map((_, i) => (
+                {faqItems.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setFaq(i)}

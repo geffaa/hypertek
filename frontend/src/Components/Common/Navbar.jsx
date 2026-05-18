@@ -19,8 +19,12 @@ import xImg from "../../assets/images/skipe.png";
 import telegramImg from "../../assets/images/telegram.png";
 import { logout } from "../../Redux/AuthSlice";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n/index.js";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -138,7 +142,7 @@ export default function Navbar() {
       if (decoded.exp < currentTime) {
         dispatch(logout());
         setIsLogin(false);
-        toast("Session expired. Please sign in again.", {
+        toast(i18n.t("auth.sessionExpired"), {
           icon: "🔒",
           duration: 4000,
           style: { background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" },
@@ -297,7 +301,7 @@ export default function Navbar() {
                   onClick={() => { shopOpen ? setShopOpen(false) : openShop(); setSocialOpen(false); }}
                   className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${shopOpen ? "text-blue-300" : "hover:text-blue-300"}`}
                 >
-                  Shops <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""}`} />
+                  {t("nav.shops")} <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 <AnimatePresence>
@@ -313,12 +317,12 @@ export default function Navbar() {
                     style={{ background: "rgba(0, 15, 60, 0.97)", backdropFilter: "blur(24px)" }}>
                     {[
                       [
-                        { to: "/market-place?tab=overview", icon: <LayoutGrid className="w-5 h-5" />, label: "Overview",  desc: "General market overview" },
-                        { to: isLoggedIn ? "/Profile" : "/signin", icon: <Package className="w-5 h-5" />, label: "My Assets", desc: "Track and manage everything you own" },
+                        { to: "/market-place?tab=overview", icon: <LayoutGrid className="w-5 h-5" />, label: t("nav.shop.overview"),  desc: t("nav.shop.overviewDesc") },
+                        { to: isLoggedIn ? "/Profile" : "/signin", icon: <Package className="w-5 h-5" />, label: t("nav.shop.myAssets"), desc: t("nav.shop.myAssetsDesc") },
                       ],
                       [
-                        { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: "The Marketplace", desc: "Browse all NFT, NFA & NFC collectibles" },
-                        { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: "Auction",      desc: "Track the countdown of any auction" },
+                        { to: "/market-place?tab=general",  icon: <Layers className="w-5 h-5" />, label: t("nav.shop.theMarketplace"), desc: t("nav.shop.theMarketplaceDesc") },
+                        { to: "/market-place?tab=auctions", icon: <Timer  className="w-5 h-5" />, label: t("nav.shop.auction"),      desc: t("nav.shop.auctionDesc") },
                       ],
                     ].map((row, rowIdx) => (
                       <div key={rowIdx}>
@@ -353,13 +357,13 @@ export default function Navbar() {
                 to="/about"
                 className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
               >
-                About Us
+                {t("nav.aboutUs")}
               </Link>
               <Link
                 to="/news"
                 className="hover:text-blue-300 transition-colors duration-200 uppercase tracking-wide text-sm"
               >
-                News
+                {t("nav.news")}
               </Link>
 
               {/* Social Dropdown */}
@@ -373,7 +377,7 @@ export default function Navbar() {
                   onClick={() => { socialOpen ? setSocialOpen(false) : openSocial(); setShopOpen(false); }}
                   className={`flex items-center transition-colors duration-200 uppercase tracking-wide text-sm ${socialOpen ? "text-blue-300" : "hover:text-blue-300"}`}
                 >
-                  Socials <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""}`} />
+                  {t("nav.socials")} <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 <AnimatePresence>
@@ -441,13 +445,14 @@ export default function Navbar() {
             {/* Desktop Right Items */}
             {isLoggedIn ? (
               <div className="hidden md:flex items-center gap-3">
+                <LanguageSwitcher />
                 {/* Search */}
                 <div className="relative flex items-center gap-2 h-10 px-3 rounded-xl min-w-[200px]"
                   style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}>
                   <FiSearch className="text-white/50 w-4 h-4 flex-shrink-0" />
                   <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder={t("nav.search")}
                     className="bg-transparent outline-none text-white placeholder-white/40 text-sm w-full"
                     value={query}
                     onChange={handleSearchChange}
@@ -506,35 +511,35 @@ export default function Navbar() {
                       <Link to="/Profile" onClick={() => setProfileOpen(false)}
                         className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white">
                         <FontAwesomeIcon icon={faUser} className="w-3.5 h-3.5" />
-                        My Profile
+                        {t("nav.myProfile")}
                       </Link>
                       {user?.Role === "admin" ? (
                         <a href={`${import.meta.env.VITE_ADMIN_URL || "http://localhost:5174"}/${user.id || user._id}`}
                           onClick={() => setProfileOpen(false)}
                           className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
-                          <LayoutGrid className="w-3.5 h-3.5" /> Admin Panel
+                          <LayoutGrid className="w-3.5 h-3.5" /> {t("nav.adminPanel")}
                         </a>
                       ) : (
                           <Link to="/dashboard"
                           onClick={() => setProfileOpen(false)}
                           className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
-                          <LayoutGrid className="w-3.5 h-3.5" /> Dashboard
+                          <LayoutGrid className="w-3.5 h-3.5" /> {t("nav.dashboard")}
                         </Link>
                       )}
                       <Link to="/gaming"
                         onClick={() => setProfileOpen(false)}
                         className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
-                        <Gamepad2 className="w-3.5 h-3.5" /> Gaming
+                        <Gamepad2 className="w-3.5 h-3.5" /> {t("nav.gaming")}
                       </Link>
                       <Link to="/market-place"
                         onClick={() => setProfileOpen(false)}
                         className="flex items-center gap-2 px-4 py-2.5 text-white/80 text-sm font-medium transition-colors hover:bg-white/8 hover:text-white border-t border-white/5">
-                        <Store className="w-3.5 h-3.5" /> Marketplace
+                        <Store className="w-3.5 h-3.5" /> {t("nav.marketplace")}
                       </Link>
                       <button onClick={() => { setProfileOpen(false); setShowModal(true); }}
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400/80 text-sm font-medium transition-colors hover:bg-red-500/10 hover:text-red-400 border-t border-white/5">
                         <img src={logoutImage} alt="Logout" className="w-3.5 h-3.5 opacity-70" style={{ filter: "invert(40%) sepia(80%) saturate(500%) hue-rotate(320deg)" }} />
-                        Sign Out
+                        {t("nav.signOut")}
                       </button>
                     </div>
                   )}
@@ -545,14 +550,15 @@ export default function Navbar() {
                 location.pathname
               ) && (
                 <div className="hidden md:flex items-center gap-3">
+                  <LanguageSwitcher />
                   <Link to="/waitlist">
                     <button className="px-5 py-2.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/30">
-                      Waitlist
+                      {t("nav.waitlist")}
                     </button>
                   </Link>
                   <Link to="/signup">
                     <button className="px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
-                      Sign Up
+                      {t("nav.signUp")}
                     </button>
                   </Link>
                 </div>
@@ -573,7 +579,7 @@ export default function Navbar() {
               className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
             >
 
-              <span className="font-semibold">Shop</span>
+              <span className="font-semibold">{t("nav.shops")}</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""
                   }`}
@@ -586,28 +592,28 @@ export default function Navbar() {
                   to="/market-place?tab=overview"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
-                  Overview
+                  {t("nav.shop.overview")}
                 </Link>
 
                 <Link
                   to={isLoggedIn ? "/Profile" : "/signin"}
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
-                  My Assets
+                  {t("nav.shop.myAssets")}
                 </Link>
 
                 <Link
                   to="/market-place?tab=general"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
-                  The Marketplace
+                  {t("nav.shop.theMarketplace")}
                 </Link>
 
                 <Link
                   to="/land"
                   className="py-2 text-left font-medium hover:text-blue-300 transition-colors duration-200"
                 >
-                  Land
+                  {t("nav.shop.land")}
                 </Link>
 
               </div>
@@ -619,13 +625,13 @@ export default function Navbar() {
               to="/about"
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
-              About Us
+              {t("nav.aboutUs")}
             </Link>
             <Link
               to="/more-news"
               className="block w-full py-3 hover:text-blue-300 transition-colors duration-200 font-semibold"
             >
-              News
+              {t("nav.news")}
             </Link>
 
             {/* Social */}
@@ -637,7 +643,7 @@ export default function Navbar() {
               className="flex justify-between w-full py-3 text-left items-center hover:text-blue-300 transition-colors duration-200"
             >
 
-              <span className="font-semibold">Social</span>
+              <span className="font-semibold">{t("nav.socials")}</span>
               <ChevronDown
                 className={`h-4 w-4 transition-transform duration-200 ${socialOpen ? "rotate-180" : ""
                   }`}
@@ -687,7 +693,7 @@ export default function Navbar() {
                     onClick={closeMobileMenu}
                     className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                   >
-                    My Profile
+                    {t("nav.myProfile")}
                   </Link>
                   {user?.Role === "admin" ? (
                     <a
@@ -695,7 +701,7 @@ export default function Navbar() {
                       onClick={closeMobileMenu}
                       className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                     >
-                      Dashboard
+                      {t("nav.dashboard")}
                     </a>
                   ) : (
                     <Link
@@ -703,7 +709,7 @@ export default function Navbar() {
                       onClick={closeMobileMenu}
                       className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                     >
-                      Dashboard
+                      {t("nav.dashboard")}
                     </Link>
                   )}
                   <Link
@@ -711,14 +717,14 @@ export default function Navbar() {
                     onClick={closeMobileMenu}
                     className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                   >
-                    Gaming
+                    {t("nav.gaming")}
                   </Link>
                   <Link
                     to="/market-place"
                     onClick={closeMobileMenu}
                     className="block w-full py-3 text-white font-semibold hover:text-blue-300 transition-colors duration-200"
                   >
-                    Marketplace
+                    {t("nav.marketplace")}
                   </Link>
                   <div className="flex justify-end mt-2">
                     <div className="bg-[#002AA8] w-[40px] h-[40px] rounded-[10px] flex items-center justify-center">
@@ -739,13 +745,16 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-white/20">
+                <div className="flex justify-center">
+                  <LanguageSwitcher />
+                </div>
                 <Link to="/waitlist" onClick={closeMobileMenu}
                   className="w-full text-center py-2.5 rounded-lg font-semibold text-sm text-white border border-white/30 hover:bg-white/10 transition-colors">
-                  Join Waitlist
+                  {t("nav.joinWaitlist")}
                 </Link>
                 <Link to="/signup" onClick={closeMobileMenu} className="w-full">
                   <button className="w-full py-2.5 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20">
-                    Sign Up
+                    {t("nav.signUp")}
                   </button>
                 </Link>
               </div>
@@ -796,10 +805,10 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
             >
               <h2 className="text-2xl font-semibold text-white">
-                Confirm Logout
+                {t("logout.confirmTitle")}
               </h2>
               <p className="text-white mb-8">
-                Are you sure you want to log out?
+                {t("logout.confirmMessage")}
               </p>
 
               <div className="flex justify-end gap-4">
@@ -807,14 +816,14 @@ export default function Navbar() {
                   onClick={() => setShowModal(false)}
                   className="px-5 py-2 bg-white/20 text-white font-medium rounded-lg hover:bg-white/30 dark:bg-gray-800/30 dark:text-gray-200 dark:hover:bg-gray-700/40 transition-all backdrop-blur-sm"
                 >
-                  Cancel
+                  {t("logout.cancel")}
                 </button>
 
                 <button
                   onClick={handleLogoutConfirm}
                   className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-all"
                 >
-                  Logout
+                  {t("logout.logout")}
                 </button>
               </div>
             </motion.div>

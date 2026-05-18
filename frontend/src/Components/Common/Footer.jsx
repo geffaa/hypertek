@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FaFacebook, FaInstagram, FaTiktok, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 const Logo = "/logo-white.png";
 const currentYear = new Date().getFullYear();
 
-const menuItems = [
-  { name: "Marketplace", path: "/market-place" },
-  { name: "News", path: "/news" },
-  { name: "Whitepaper", path: "/whitepapers" },
-  { name: "About", path: "/about" },
-  { name: "Profile", path: "/profile" },
-  { name: "Terms & Conditions", path: "/terms" },
+const MENU_KEYS = [
+  { tKey: "footer.links.marketplace", path: "/market-place" },
+  { tKey: "footer.links.news",        path: "/news" },
+  { tKey: "footer.links.whitepaper",  path: "/whitepapers" },
+  { tKey: "footer.links.about",       path: "/about" },
+  { tKey: "footer.links.profile",     path: "/profile" },
+  { tKey: "footer.links.terms",       path: "/terms" },
 ];
 
 const socials = [
@@ -23,6 +24,7 @@ const socials = [
 ];
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="w-full text-white relative z-10 overflow-hidden">
       {/* Top divider */}
@@ -44,27 +46,27 @@ function Footer() {
             className="inline-flex items-center px-4 py-1.5 rounded-lg font-semibold text-xs text-white transition-all duration-200 hover:opacity-90"
             style={{ background: "#002AA8", border: "1px solid rgba(255,255,255,0.15)" }}
           >
-            Join the Waitlist
+            {t("footer.joinWaitlist")}
           </Link>
         </div>
 
         {/* Nav links */}
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-white/80">
-          {menuItems.map((item, idx) => (
+          {MENU_KEYS.map((item, idx) => (
             <Link
               key={idx}
               to={item.path}
               onClick={() => window.scrollTo(0, 0)}
               className="hover:text-white transition-colors duration-200"
             >
-              {item.name}
+              {t(item.tKey)}
             </Link>
           ))}
         </nav>
 
         {/* Copyright */}
         <p className="text-white/50 text-xs tracking-wide">
-          @ {currentYear}. All Rights Reserved
+          @ {currentYear}. {t("footer.allRightsReserved")}
         </p>
 
       </div>

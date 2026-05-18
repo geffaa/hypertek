@@ -6,9 +6,11 @@ import Logo from "/logo-white.png";
 import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import useSiteContent from "../../hooks/useSiteContent";
+import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 
 function VideoModal({ onClose }) {
+  const { t } = useTranslation();
   const videoRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
@@ -107,7 +109,7 @@ function VideoModal({ onClose }) {
             onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,59,212,0.95)"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,42,168,0.85)"; }}
           >
-            Try the UI
+            {t("hero.tryUI")}
           </button>
         </div>
       </div>
@@ -126,6 +128,7 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const { t } = useTranslation();
   const { data: cms } = useSiteContent("home_hero");
   const [showVideo, setShowVideo] = useState(false);
 
@@ -138,11 +141,11 @@ export default function Hero() {
     return () => window.removeEventListener("splashComplete", handler);
   }, []);
 
-  const headingLine1 = cms.heading_line1 || "HYPERTEK";
-  const headingLine2 = cms.heading_line2 || "WHERE LEGENDS ARE FORGED.";
-  const btn1Text = cms.button1_text || cms.cta_button_1_text || "Marketplace";
+  const headingLine1 = cms.heading_line1 || "HYPER TEK 100:";
+  const headingLine2 = t("hero.headingLine2") || cms.heading_line2 || "WHERE LEGENDS ARE FORGOTTEN";
+  const btn1Text = t("hero.marketplace");
   const btn1Link = cms.button1_link || cms.cta_button_1_link || "/market-place";
-  const btn2Text = cms.button2_text || cms.cta_button_2_text || "Download Game";
+  const btn2Text = t("hero.downloadGame");
   const bgImage = cms.background_image || heroImage;
 
   // Render heading line 2 with the 2nd word (LEGENDS) as outline

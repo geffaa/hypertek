@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Network, Gem, Zap, ArrowLeftRight, Layers, Glasses } from "lucide-react";
 import useSiteContent from "../../hooks/useSiteContent";
+import { useTranslation } from "react-i18next";
 
 const AVATAR_FILES = [
   "commander-elite.png","dryads-female.png","dryads-male.png",
@@ -33,6 +34,7 @@ const rgt = { hidden: { opacity: 0, x: 40  }, visible: { opacity: 1, x: 0, trans
 const sc  = { hidden: { opacity: 0, scale: 0.9, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] } } };
 
 export default function StorySection() {
+  const { t } = useTranslation();
   const ref      = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const { data: cms } = useSiteContent("home_story");
@@ -41,10 +43,12 @@ export default function StorySection() {
 
   const bgImage        = cms.background_image || storyBg;
   const charImage      = cms.character_image  || randomAvatar;
-  const leftHeading    = cms.left_heading     || "STORY";
-  const leftSubheading = cms.left_subheading  || "The year is 2117.";
-  const leftBody       =
-    "In the Year 2117, prior to the aftermath of Earth's collapse, survivors initiated the Hyper Tek Exodus. Humanity's final endeavour for survival didn't result in the conquest of the stars; instead, it scattered across them, dispersing AI, enhanced genomes, and prototypes over thousands of seed worlds. Eons passed, as each world developed in isolation, giving rise to new species, cultures, and technologies. At the heart of it all lies the Echo Core, a quantum relic pulsing with paradoxes, memories, and a call to power. It awakens you as a reborn Overlord, forged from legacy and technology.";
+  const leftHeading    = t("story.label")     || cms.left_heading;
+  const leftSubheading = t("story.subheading") || cms.left_subheading;
+  const leftBody       = t("story.body");
+
+  const rawHighlights = t("story.highlights", { returnObjects: true });
+  const highlights = Array.isArray(rawHighlights) ? rawHighlights : [];
 
   return (
     <section
@@ -127,7 +131,7 @@ export default function StorySection() {
                   boxShadow: "0 0 24px rgba(56,189,248,0.12)",
                 }}
               >
-                Read Our Full Story
+                {t("story.readMore")}
               </Link>
               <span
                 className="text-[11px] tracking-[0.45em] uppercase font-bold"
@@ -137,7 +141,7 @@ export default function StorySection() {
                   textShadow: "0 0 10px rgba(56,189,248,0.4)",
                   letterSpacing: "0.45em",
                 }}
-              >Hyper Tek 100</span>
+              >{t("story.brand")}</span>
             </motion.div>
           </motion.div>
 
@@ -179,6 +183,9 @@ export default function StorySection() {
               }}
             >
               {KEY_HIGHLIGHTS.map((h, idx) => {
+                const tH = highlights[idx] || {};
+                const label = tH.label || h.label;
+                const desc  = tH.desc  || h.desc;
                 const Icon = h.Icon;
                 return (
                   <motion.div
@@ -204,8 +211,8 @@ export default function StorySection() {
                     </div>
                     {/* Text */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-white text-[12px] font-semibold leading-tight">{h.label}</p>
-                      <p className="text-white/40 text-[10.5px] mt-0.5 leading-tight truncate">{h.desc}</p>
+                      <p className="text-white text-[12px] font-semibold leading-tight">{label}</p>
+                      <p className="text-white/40 text-[10.5px] mt-0.5 leading-tight truncate">{desc}</p>
                     </div>
                     {/* Right accent bar */}
                     <div

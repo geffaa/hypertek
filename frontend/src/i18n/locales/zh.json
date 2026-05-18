@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "shops": "商店",
+    "aboutUs": "关于我们",
+    "news": "新闻",
+    "socials": "社交媒体",
+    "waitlist": "候补名单",
+    "signUp": "注册",
+    "joinWaitlist": "加入候补",
+    "search": "搜索...",
+    "myProfile": "我的主页",
+    "dashboard": "控制台",
+    "adminPanel": "管理面板",
+    "gaming": "游戏",
+    "marketplace": "市场",
+    "signOut": "退出登录",
+    "shop": {
+      "overview": "概览",
+      "overviewDesc": "市场总体概况",
+      "myAssets": "我的资产",
+      "myAssetsDesc": "追踪并管理您拥有的一切",
+      "theMarketplace": "市场广场",
+      "theMarketplaceDesc": "浏览所有 NFT、NFA 和 NFC 收藏品",
+      "auction": "拍卖",
+      "auctionDesc": "跟踪任意拍卖的倒计时",
+      "land": "土地"
+    }
+  },
+  "logout": {
+    "confirmTitle": "确认退出",
+    "confirmMessage": "您确定要退出吗？",
+    "cancel": "取消",
+    "logout": "退出"
+  },
+  "footer": {
+    "joinWaitlist": "加入候补名单",
+    "allRightsReserved": "版权所有",
+    "links": {
+      "marketplace": "市场",
+      "news": "新闻",
+      "whitepaper": "白皮书",
+      "about": "关于",
+      "profile": "个人资料",
+      "terms": "条款与条件"
+    }
+  },
+  "hero": {
+    "headingLine2": "英雄在此沉寂",
+    "marketplace": "市场",
+    "downloadGame": "下载游戏",
+    "tryUI": "体验界面"
+  },
+  "howItWorks": {
+    "sectionTitle": "使用流程",
+    "sectionSubtitle": "只需几个步骤即可开始，解锁数字收藏品的世界。",
+    "steps": [
+      {
+        "title": "连接钱包",
+        "description": "安全连接您的加密钱包，开始买卖和收集 NFT。"
+      },
+      {
+        "title": "探索收藏",
+        "description": "浏览热门收藏，发现顶级创作者的稀有数字艺术品。"
+      },
+      {
+        "title": "收集与交易",
+        "description": "购买您喜欢的 NFT，随时在个人主页展示或交易。"
+      },
+      {
+        "title": "赚取与成长",
+        "description": "通过出售收藏品或在 NFT 领域获得人气来赚取收益。"
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "会话已过期，请重新登录。"
+  },
+  "language": {
+    "select": "语言"
+  },
+  "story": {
+    "label": "故事",
+    "subheading": "这是2117年。",
+    "body": "公元2117年，在地球崩溃的余波之前，幸存者发起了超级特克大迁徙。人类最后的生存努力并没有征服星空，而是将其分散其中，将人工智能、增强基因组和原型机散布在数千个种子世界上。漫长岁月流逝，每个世界都在孤立中发展，孕育出新的物种、文化和技术。而这一切的核心是回声核心——一颗量子遗物，跳动着悖论、记忆与力量的召唤。它将你唤醒，成为一个由传承与科技锻造的重生霸主。",
+    "readMore": "阅读完整故事",
+    "brand": "超级特克100",
+    "highlights": [
+      { "label": "互联宇宙",    "desc": "3款游戏 — 1个共享经济与进阶系统" },
+      { "label": "真实所有权",  "desc": "NFA具有保证最低回购" },
+      { "label": "边玩边赚",    "desc": "每一个行动都为您的现实奖励做贡献" },
+      { "label": "现金兑出",    "desc": "将游戏内货币/奖励转换为现金提现" },
+      { "label": "联动进阶",    "desc": "玩家进阶与所有游戏套件同步关联" },
+      { "label": "VR/AR 融合",  "desc": "VR/AR玩家可实时加入任务和史诗战斗" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "超级特克100",
+    "title": "这是2117年。",
+    "body": "人类没有征服星空——而是在其中碎裂。地球崩溃后，幸存者发起了超级特克大迁徙，将人工智能、增强基因组和原型机散布在数千个种子世界。每个世界在孤立中进化，形成新的物种、文化和技术。这一切的中心是回声核心，一颗量子遗物，正跳动着谜题、记忆与力量的召唤。它唤醒了你——一个重生的霸主，由传承与科技铸就。"
+  },
+  "homeMarket": {
+    "featured": "精选",
+    "sectionTitle": "限量版NFA物品",
+    "buybackBadge": "所有NFA/NFC/NFT均提供保证回购",
+    "urgency": "快行动！一旦售罄，将永久消失！",
+    "loading": "加载中...",
+    "empty": "暂无上架物品。",
+    "price": "价格",
+    "minBuyback": "最低回购",
+    "buyNow": "立即购买"
+  },
+  "gaming": {
+    "sectionTitle": "游戏信息",
+    "learnMore": "了解更多",
+    "hoverToExplore": "悬停探索",
+    "games": [
+      {
+        "label": "竞速",
+        "tagline": "速度即生存。",
+        "description": "在霓虹灯照耀的超级都市和外星地形上突破重力极限。调校你的座驾，征服每一个弯道，将对手甩在身后——排行榜不等任何人。"
+      },
+      {
+        "label": "任务",
+        "tagline": "探索未知。",
+        "description": "穿越未知星系，建立联盟，揭开回声核心的秘密。每一个选择都塑造你的传奇。"
+      },
+      {
+        "label": "霸主",
+        "tagline": "指挥。征服。统治。",
+        "description": "你就是霸主——从破碎地球的灰烬中重生。建立军队，占领星系，使敌对派系臣服于你的意志。回声核心选择了你，证明这是正确的。"
+      }
+    ]
+  },
+  "packages": {
+    "badge": "众筹活动 — 第一阶段",
+    "intro1": "我们很高兴宣布我们备受期待的众筹活动正式启动，为突破性的超级特克项目的完成提供资金支持！这是您作为早期参与者进入超级特克生态系统的机会，从独家限量供应的物品和套餐中选择，机不可失！快行动！通过直接在我们平台购买，您可以享受10%的折扣优惠！",
+    "intro2": "所有超级特克非同质化数字物品均由保证最低回购支持，大多数还提供丰厚的游戏内奖励以提升您的体验。为进一步激励，我们推出了一系列限量版非同质化资产（NFA），其奖励等级是有史以来最高的。这是千载难逢的机会！",
+    "intro3": "我们已筹集超过44万美元，并正在寻求额外的46万美元。这是加入这一激动人心计划的时刻，请不要错过！立即购买您的限量物品或套餐，成为超级特克生态系统的一部分。",
+    "intro4": "请记住注册愿望清单并在社交媒体上关注我们以保持最新动态！立即行动，时不我待！",
+    "collectionsLabel": "收藏品",
+    "sectionTitle": "捐赠等级套餐",
+    "discount": "比标价节省10%",
+    "donationTierLabel": "捐赠等级",
+    "donationTierPrefix": "捐赠等级：",
+    "rewardsTitle": "奖励与权益",
+    "noteTitle": "备注",
+    "commonNote": "现在捐赠的奖励、奖金和折扣。\n\n注意：除了用于游戏内或特定购买的代金券外，所有其他奖励、奖金和折扣不能与任何其他促销活动合并使用。\n\n所有捐赠包将在游戏开发中包含书面致谢。",
+    "specialConditionTitle": "特别条件",
+    "specialCondition": "在游戏/多款游戏成功开发并完成后，每位捐赠者将在游戏内获得超过其原始投资价值的奖励或套餐，并且任何承诺的奖金或奖励将在游戏发布后兑现。",
+    "imageComing": "图片即将上线"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "shops": "Lojas",
+    "aboutUs": "Sobre Nós",
+    "news": "Notícias",
+    "socials": "Redes Sociais",
+    "waitlist": "Lista de Espera",
+    "signUp": "Cadastrar",
+    "joinWaitlist": "Entrar na Fila",
+    "search": "Buscar...",
+    "myProfile": "Meu Perfil",
+    "dashboard": "Painel",
+    "adminPanel": "Painel Admin",
+    "gaming": "Jogos",
+    "marketplace": "Mercado",
+    "signOut": "Sair",
+    "shop": {
+      "overview": "Visão Geral",
+      "overviewDesc": "Panorama geral do mercado",
+      "myAssets": "Meus Ativos",
+      "myAssetsDesc": "Rastreie e gerencie tudo que você possui",
+      "theMarketplace": "O Mercado",
+      "theMarketplaceDesc": "Explore todos os colecionáveis NFT, NFA e NFC",
+      "auction": "Leilão",
+      "auctionDesc": "Acompanhe a contagem regressiva de qualquer leilão",
+      "land": "Terreno"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Confirmar Saída",
+    "confirmMessage": "Tem certeza que deseja sair?",
+    "cancel": "Cancelar",
+    "logout": "Sair"
+  },
+  "footer": {
+    "joinWaitlist": "Entrar na Lista de Espera",
+    "allRightsReserved": "Todos os Direitos Reservados",
+    "links": {
+      "marketplace": "Mercado",
+      "news": "Notícias",
+      "whitepaper": "Whitepaper",
+      "about": "Sobre",
+      "profile": "Perfil",
+      "terms": "Termos e Condições"
+    }
+  },
+  "hero": {
+    "headingLine2": "ONDE LENDAS SÃO ESQUECIDAS",
+    "marketplace": "Mercado",
+    "downloadGame": "Baixar Jogo",
+    "tryUI": "Experimentar UI"
+  },
+  "howItWorks": {
+    "sectionTitle": "Como Funciona",
+    "sectionSubtitle": "Comece em apenas alguns passos e desbloqueie o mundo dos colecionáveis digitais.",
+    "steps": [
+      {
+        "title": "Conectar Carteira",
+        "description": "Conecte sua carteira de criptomoedas com segurança para começar a comprar, vender e colecionar NFTs."
+      },
+      {
+        "title": "Explorar Coleções",
+        "description": "Navegue pelas coleções em alta e descubra obras de arte digitais raras dos melhores criadores."
+      },
+      {
+        "title": "Colecionar & Negociar",
+        "description": "Compre seus NFTs favoritos e os exiba ou negocie no seu perfil a qualquer momento."
+      },
+      {
+        "title": "Ganhar & Crescer",
+        "description": "Ganhe vendendo suas coleções ou ganhando popularidade no espaço NFT."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Sessão expirada. Por favor, entre novamente."
+  },
+  "language": {
+    "select": "Idioma"
+  },
+  "story": {
+    "label": "HISTÓRIA",
+    "subheading": "O ano é 2117.",
+    "body": "No ano de 2117, antes das consequências do colapso da Terra, os sobreviventes iniciaram o Êxodo Hyper Tek. O último esforço de sobrevivência da humanidade não resultou na conquista das estrelas; em vez disso, dispersou-se por elas, espalhando IA, genomas aprimorados e protótipos por milhares de mundos-semente. Eras se passaram, enquanto cada mundo se desenvolveu em isolamento, dando origem a novas espécies, culturas e tecnologias. No centro de tudo está o Núcleo Eco — uma relíquia quântica que pulsa com paradoxos, memórias e um chamado ao poder. Ele te desperta como um Soberano renascido, forjado pela herança e pela tecnologia.",
+    "readMore": "Ler a História Completa",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Universo Interconectado", "desc": "3 jogos — 1 economia e sistema de progressão compartilhados" },
+      { "label": "Propriedade Real",        "desc": "NFAs com recompra mínima garantida" },
+      { "label": "Jogar para Ganhar",       "desc": "Cada ação contribui para suas recompensas no mundo real" },
+      { "label": "Pagamentos em Dinheiro",  "desc": "Convertendo moeda/recompensas do jogo em pagamentos em dinheiro" },
+      { "label": "Progressão Vinculada",    "desc": "A progressão do jogador é vinculada a todos os jogos" },
+      { "label": "Integração VR/AR",        "desc": "Jogadores VR/AR podem se juntar a missões e batalhas épicas em tempo real" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "O ano é 2117.",
+    "body": "A humanidade não conquistou as estrelas — se fragmentou nelas. Após o colapso da Terra, os sobreviventes lançaram o Êxodo Hyper Tek, espalhando IA, genomas aprimorados e protótipos por milhares de mundos-semente. Cada um evoluiu em isolamento, formando novas espécies, culturas e tecnologias. No centro de tudo está o Núcleo Eco, uma relíquia quântica que pulsa com enigmas, memórias e um chamado ao poder. Ele te desperta, um Soberano renascido, forjado pela herança e pela tecnologia."
+  },
+  "homeMarket": {
+    "featured": "Destaque",
+    "sectionTitle": "Itens NFA Edição Limitada",
+    "buybackBadge": "Recompra Garantida em todos NFAs/NFCs/NFTs",
+    "urgency": "Aja rápido, uma vez que se esgotarem, não voltam!",
+    "loading": "Carregando itens...",
+    "empty": "Nenhum item listado ainda.",
+    "price": "Preço",
+    "minBuyback": "Recompra Mínima",
+    "buyNow": "Comprar Agora"
+  },
+  "gaming": {
+    "sectionTitle": "INFORMAÇÕES DO JOGO",
+    "learnMore": "SAIBA MAIS",
+    "hoverToExplore": "passe o mouse para explorar",
+    "games": [
+      {
+        "label": "CORRIDA",
+        "tagline": "Velocidade é sobrevivência.",
+        "description": "Ultrapasse os limites da gravidade em megacidades iluminadas por neon e terrenos alienígenas. Ajuste sua máquina, domine cada curva e deixe seus rivais para trás — o placar não espera por ninguém."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Explore o desconhecido.",
+        "description": "Navegue por sistemas estelares inexplorados, forme alianças e descubra os segredos do Núcleo Eco. Cada escolha molda seu legado."
+      },
+      {
+        "label": "SOBERANO",
+        "tagline": "Comandar. Conquistar. Governar.",
+        "description": "Você é o Soberano — renascido das cinzas de uma Terra fragmentada. Erga exércitos, tome sistemas estelares e dobre facções rivais à sua vontade. O Núcleo Eco te escolheu. Prove que foi a escolha certa."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CAMPANHA DE CROWDFUNDING — ESTÁGIO 1",
+    "intro1": "Estamos animados em anunciar o lançamento de nossa campanha de crowdfunding para garantir recursos para a conclusão do revolucionário projeto Hyper Tek! Esta é sua chance de entrar no ecossistema Hyper Tek como participante inicial. Ao comprar diretamente em nossa plataforma, você pode aproveitar uma redução de 10% nos preços!",
+    "intro2": "Todos os itens digitais Não Fungíveis da Hyper Tek são respaldados por recompra mínima garantida, com a maioria oferecendo também substanciais bônus no jogo. Estamos introduzindo uma série de NFAs de edição limitada com os maiores níveis de bônus já oferecidos. Esta oportunidade não se repetirá!",
+    "intro3": "Já arrecadamos mais de US$ 440.000 e buscamos garantir mais US$ 460.000. Este é o seu momento de se juntar a esta iniciativa empolgante. Adquira hoje seus itens ou pacotes de disponibilidade limitada e faça parte do emocionante Ecossistema Hyper Tek.",
+    "intro4": "Lembre-se de se inscrever na lista de desejos e nos siga nas redes sociais para ficar por dentro! Aja agora, pois o tempo é precioso!",
+    "collectionsLabel": "Coleções",
+    "sectionTitle": "Pacotes por Nível de Doação",
+    "discount": "Economize 10% do preço listado",
+    "donationTierLabel": "Nível de Doação",
+    "donationTierPrefix": "Nível de Doação:",
+    "rewardsTitle": "Recompensas & Benefícios",
+    "noteTitle": "Nota",
+    "commonNote": "Recompensas, Bônus e/ou Descontos por doar agora.\n\nNOTA: Além do voucher para uso em jogos ou compras selecionadas, todas as outras Recompensas, Bônus e/ou Descontos não podem ser combinados ou usados em conjunto com outras promoções.\n\nTodos os pacotes de doação incluirão créditos escritos no desenvolvimento do jogo.",
+    "specialConditionTitle": "Condição Especial",
+    "specialCondition": "Com o desenvolvimento e conclusão bem-sucedidos do(s) jogo(s), cada pessoa que doou receberá um valor mínimo maior do que seu investimento original em recompensas ou pacotes para uso no(s) jogo(s), e quaisquer bônus ou recompensas prometidos por doação serão entregues após o lançamento do(s) jogo(s).",
+    "imageComing": "Imagem em breve"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "shops": "Shops",
+    "aboutUs": "About Us",
+    "news": "News",
+    "socials": "Socials",
+    "waitlist": "Waitlist",
+    "signUp": "Sign Up",
+    "joinWaitlist": "Join Waitlist",
+    "search": "Search...",
+    "myProfile": "My Profile",
+    "dashboard": "Dashboard",
+    "adminPanel": "Admin Panel",
+    "gaming": "Gaming",
+    "marketplace": "Marketplace",
+    "signOut": "Sign Out",
+    "shop": {
+      "overview": "Overview",
+      "overviewDesc": "General market overview",
+      "myAssets": "My Assets",
+      "myAssetsDesc": "Track and manage everything you own",
+      "theMarketplace": "The Marketplace",
+      "theMarketplaceDesc": "Browse all NFT, NFA & NFC collectibles",
+      "auction": "Auction",
+      "auctionDesc": "Track the countdown of any auction",
+      "land": "Land"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Confirm Logout",
+    "confirmMessage": "Are you sure you want to log out?",
+    "cancel": "Cancel",
+    "logout": "Logout"
+  },
+  "footer": {
+    "joinWaitlist": "Join the Waitlist",
+    "allRightsReserved": "All Rights Reserved",
+    "links": {
+      "marketplace": "Marketplace",
+      "news": "News",
+      "whitepaper": "Whitepaper",
+      "about": "About",
+      "profile": "Profile",
+      "terms": "Terms & Conditions"
+    }
+  },
+  "hero": {
+    "headingLine2": "WHERE LEGENDS ARE FORGOTTEN",
+    "marketplace": "Marketplace",
+    "downloadGame": "Download Game",
+    "tryUI": "Try the UI"
+  },
+  "howItWorks": {
+    "sectionTitle": "How It Works",
+    "sectionSubtitle": "Get started in just a few steps and unlock the world of digital collectibles.",
+    "steps": [
+      {
+        "title": "Connect Wallet",
+        "description": "Securely connect your crypto wallet to start buying, selling, and collecting NFTs."
+      },
+      {
+        "title": "Explore Collections",
+        "description": "Browse trending collections and discover rare digital artworks from top creators."
+      },
+      {
+        "title": "Collect & Trade",
+        "description": "Buy your favorite NFTs and showcase or trade them on your profile anytime."
+      },
+      {
+        "title": "Earn & Grow",
+        "description": "Earn by selling your collections or gaining popularity in the NFT space."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Session expired. Please sign in again."
+  },
+  "language": {
+    "select": "Language"
+  },
+  "story": {
+    "label": "STORY",
+    "subheading": "The year is 2117.",
+    "body": "In the Year 2117, prior to the aftermath of Earth's collapse, survivors initiated the Hyper Tek Exodus. Humanity's final endeavour for survival didn't result in the conquest of the stars; instead, it scattered across them, dispersing AI, enhanced genomes, and prototypes over thousands of seed worlds. Eons passed, as each world developed in isolation, giving rise to new species, cultures, and technologies. At the heart of it all lies the Echo Core, a quantum relic pulsing with paradoxes, memories, and a call to power. It awakens you as a reborn Overlord, forged from legacy and technology.",
+    "readMore": "Read Our Full Story",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Interconnected Universe",  "desc": "3 games — 1 shared economy and progression system" },
+      { "label": "True Ownership",           "desc": "NFAs with guaranteed minimum buy-back" },
+      { "label": "Play-to-Earn",             "desc": "Every action contributes to your real-world rewards" },
+      { "label": "Cash-Out Payments",        "desc": "Converting in-game currency/rewards to cash-out payments" },
+      { "label": "Linked Progression",       "desc": "Player progression is linked across all suites of games" },
+      { "label": "VR/AR Integration",        "desc": "VR/AR players can join missions and epic battles in real-time" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "The year is 2117.",
+    "body": "Humanity didn't conquer the stars—it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation, forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you, a reborn Overlord, forged by legacy and technology."
+  },
+  "homeMarket": {
+    "featured": "Featured",
+    "sectionTitle": "Limited Edition NFA Items",
+    "buybackBadge": "Guaranteed Buy-Back on All NFAs/NFCs/NFTs",
+    "urgency": "Act fast, once they are gone, they're GONE!",
+    "loading": "Loading items...",
+    "empty": "No listed items yet.",
+    "price": "Price",
+    "minBuyback": "Min Buy-Back",
+    "buyNow": "Buy Now"
+  },
+  "gaming": {
+    "sectionTitle": "GAMING INFO",
+    "learnMore": "LEARN MORE",
+    "hoverToExplore": "hover to explore",
+    "games": [
+      {
+        "label": "RACING",
+        "tagline": "Speed is survival.",
+        "description": "Push beyond the limits of gravity on neon-lit megacities and alien terrain. Tune your machine, master every corner, and leave your rivals in the dust — the leaderboard waits for no one."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Explore the unknown.",
+        "description": "Navigate uncharted star systems, forge alliances, and uncover the secrets of the Echo Core. Every choice shapes your legacy."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Command. Conquer. Rule.",
+        "description": "You are the Overlord — reborn from the ashes of a fractured Earth. Raise armies, seize star systems, and bend rival factions to your will. The Echo Core chose you. Prove it was right."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CROWDFUNDING CAMPAIGN — STAGE 1",
+    "intro1": "We are excited to announce the launch of our highly anticipated crowdfunding campaign to secure funding for the completion of the groundbreaking Hyper Tek project, which is making positive strides! This is your chance to dive into the Hyper Tek ecosystem as an early participant by choosing from an exclusive selection of limited-availability items and packages that you won't want to miss. Act quickly! By purchasing directly from us on this platform, you can enjoy reduced rates of 10% by allowing us to pass the savings on to you, from avoiding crowdfunding fees, which are listed below!",
+    "intro2": "As all Hyper Tek Non-Fungible Digital items are backed by a guaranteed minimum buy-back, with most also offering substantial in-game bonuses that enhance your experience, to amp things up, we're introducing a series of limited-edition Non-Fungible Assets (NFAs) featuring the highest bonus levels that will ever be offered. This is a rare opportunity as these offerings will never be repeated! Once these items sell out or we hit our funding target, any remaining unminted limited-edition NFAs will be pulled from the website for good!",
+    "intro3": "We've already raised over $440,000 and are looking to secure an additional $460,000. This is your moment to join us in this thrilling initiative; don't let it slip away! Purchase your limited-availability items or packages today and be part of the exciting Hyper Tek Ecosystem.",
+    "intro4": "Remember to sign up for the wishlist and connect with us on social media to stay in the loop! Act now, as time is of the essence!",
+    "collectionsLabel": "Collections",
+    "sectionTitle": "Donation Tier Packages",
+    "discount": "Save 10% off listed prices",
+    "donationTierLabel": "Donation Tier",
+    "donationTierPrefix": "Donation Tier:",
+    "rewardsTitle": "Rewards & Benefits",
+    "noteTitle": "Note",
+    "commonNote": "Rewards, Bonuses and or Discounts for donating now.\n\nNOTE: Other than the voucher to be used for in-line games or selected purchases, all other Rewards, Bonuses and or Discounts cannot be combined or used in conjunction with any other promotions.\n\nAll donation packs will include written end credits in the game development.",
+    "specialConditionTitle": "Special Condition",
+    "specialCondition": "On the successful development and completion of the game/games, every person who donates will receive a minimum value of more than their original investment in rewards or packages to be used within the game/games, and any bonuses or rewards promised for donating will be given once the game/games are released.",
+    "imageComing": "Image coming soon"
+  }
+}

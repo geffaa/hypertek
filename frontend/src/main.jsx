@@ -17,7 +17,7 @@ axios.interceptors.response.use(
       store.dispatch(logout());
       if (!sessionToastShown) {
         sessionToastShown = true;
-        toast("Session expired. Please sign in again.", {
+        toast(i18n.t("auth.sessionExpired"), {
           icon: "🔒",
           duration: 4000,
           style: { background: "#1a1a2e", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" },
@@ -44,6 +44,9 @@ import { Toaster } from 'react-hot-toast';
 // Visual editor bridge — activates only when ?_hedit=1 is present (admin iframe mode)
 import { initEditorBridge } from './utils/editorBridge.js';
 initEditorBridge();
+
+// i18n — must be imported before App renders
+import i18n from './i18n/index.js';
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const queryClient = new QueryClient();

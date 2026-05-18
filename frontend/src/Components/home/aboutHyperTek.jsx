@@ -4,6 +4,7 @@ import LeftImageDefault from "../../assets/images/about/about.jpg";
 import RightImage1Default from "../../assets/images/about/left.jpg";
 import RightImage2Default from "../../assets/images/about/right.jpg";
 import useSiteContent from "../../hooks/useSiteContent";
+import { useTranslation } from "react-i18next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -33,14 +34,12 @@ const fadeRight = {
 };
 
 export default function HyperTekDesign() {
+  const { t } = useTranslation();
   const { data: cms } = useSiteContent("home_about");
 
-  // CMS values with fallbacks
-  const verticalLabel = cms.vertical_label || "HYPER TEK 100";
-  const title = cms.title || "The year is 2117.";
-  const body =
-    cms.body ||
-    "Humanity didn't conquer the stars—it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation, forming new species, cultures, and technologies. At the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you, a reborn Overlord, forged by legacy and technology.";
+  const verticalLabel = cms.vertical_label || t("about.verticalLabel");
+  const title = cms.title || t("about.title");
+  const body = cms.body || t("about.body");
   const imageLeft = cms.image_left || LeftImageDefault;
   const imageRight1 = cms.image_right_1 || RightImage1Default;
   const imageRight2 = cms.image_right_2 || RightImage2Default;
