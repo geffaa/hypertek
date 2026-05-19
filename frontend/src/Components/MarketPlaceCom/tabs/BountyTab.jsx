@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Target, Gamepad2, Swords, Clock, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../../Config";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -74,6 +75,7 @@ const LIMIT = 20;
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function BountyTab() {
+  const { t } = useTranslation();
   const [bounties, setBounties]         = useState([]);
   const [loading, setLoading]           = useState(true);
   const [statusFilter, setStatusFilter] = useState("open");
@@ -130,8 +132,10 @@ export default function BountyTab() {
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Target className="w-5 h-5 text-red-400/80" />
-          <h2 className="text-white font-bold text-lg">Bounty Board</h2>
-          <span className="text-white/30 text-sm">{total} contract{total !== 1 ? "s" : ""}</span>
+          <h2 className="text-white font-bold text-lg">{t("marketplace.bounty.heading")}</h2>
+          <span className="text-white/30 text-sm">
+            {total} {t(total !== 1 ? "marketplace.bounty.contractsPlural" : "marketplace.bounty.contracts")}
+          </span>
         </div>
 
         {/* Status filters */}
@@ -157,11 +161,9 @@ export default function BountyTab() {
         style={{ background: "rgba(255,60,60,0.05)", border: "1px solid rgba(255,60,60,0.14)" }}>
         <Gamepad2 className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
         <div>
-          <p className="text-red-300/80 text-xs font-semibold mb-0.5">In-Game Feature — View Only</p>
+          <p className="text-red-300/80 text-xs font-semibold mb-0.5">{t("marketplace.bounty.inGameNotice.title")}</p>
           <p className="text-white/35 text-[11px] leading-snug">
-            Bounties are created by game players and the game system. Accepting and completing
-            bounties happens in-game only. This board is shown for transparency and to
-            encourage new players to join.
+            {t("marketplace.bounty.inGameNotice.desc")}
           </p>
         </div>
       </div>
@@ -169,9 +171,9 @@ export default function BountyTab() {
       {/* ── Info strip ── */}
       <div className="mb-6 px-4 py-2.5 rounded-xl text-xs text-white/35 flex flex-wrap gap-x-6 gap-y-1"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <span><Swords className="w-3 h-3 inline mr-1" />Battle resolved in-game automatically</span>
-        <span><Zap className="w-3 h-3 inline mr-1" />20% platform commission on reward</span>
-        <span><Clock className="w-3 h-3 inline mr-1" />Contracts expire in 30 days</span>
+        <span><Swords className="w-3 h-3 inline mr-1" />{t("marketplace.bounty.rules.battle")}</span>
+        <span><Zap className="w-3 h-3 inline mr-1" />{t("marketplace.bounty.rules.commission")}</span>
+        <span><Clock className="w-3 h-3 inline mr-1" />{t("marketplace.bounty.rules.expiry")}</span>
       </div>
 
       {/* ── Table ── */}
@@ -185,8 +187,8 @@ export default function BountyTab() {
       ) : bounties.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-white/25 gap-3">
           <Target className="w-10 h-10 opacity-20" />
-          <p className="text-sm">No {statusFilter} contracts</p>
-          <p className="text-xs text-white/15">Bounties are posted by game players and the game system</p>
+          <p className="text-sm">{t("marketplace.bounty.noContracts", { filter: statusFilter })}</p>
+          <p className="text-xs text-white/15">{t("marketplace.bounty.noContractsNote")}</p>
         </div>
       ) : (
         <div className="rounded-2xl overflow-x-auto"
@@ -200,12 +202,12 @@ export default function BountyTab() {
               gridTemplateColumns: "1fr 1.6fr 1.4fr 1.2fr 1.2fr 0.8fr",
             }}
           >
-            <span>Bounty No</span>
-            <span>Target (Hit On)</span>
-            <span>Reward</span>
-            <span>Posted By</span>
-            <span>Claimed By</span>
-            <span>Status</span>
+            <span>{t("marketplace.bounty.table.bountyNo")}</span>
+            <span>{t("marketplace.bounty.table.target")}</span>
+            <span>{t("marketplace.bounty.table.reward")}</span>
+            <span>{t("marketplace.bounty.table.postedBy")}</span>
+            <span>{t("marketplace.bounty.table.claimedBy")}</span>
+            <span>{t("marketplace.bounty.table.status")}</span>
           </div>
 
           {/* Rows */}
@@ -234,7 +236,9 @@ export default function BountyTab() {
                     {b.targetName || b.title || "—"}
                   </span>
                   {expiresIn !== null && b.status === "open" && (
-                    <span className="text-white/25 text-[9px]">Expires in {expiresIn}d</span>
+                    <span className="text-white/25 text-[9px]">
+                      {t("marketplace.bounty.expiresIn", { days: expiresIn })}
+                    </span>
                   )}
                 </div>
 
@@ -245,7 +249,7 @@ export default function BountyTab() {
                   </span>
                   {b.rewardType === "hyperBucks" && b.reward > 0 && (
                     <span className="text-white/25 text-[9px]">
-                      {Math.round(b.reward * 0.8)} HB net
+                      {t("marketplace.bounty.table.netHB", { amount: Math.round(b.reward * 0.8) })}
                     </span>
                   )}
                 </div>
@@ -284,13 +288,15 @@ export default function BountyTab() {
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
             style={{ background: "rgba(255,255,255,0.07)" }}>
-            Prev
+            {t("marketplace.bounty.pagination.prev")}
           </button>
-          <span className="text-white/30 text-xs">Page {page} of {pages}</span>
+          <span className="text-white/30 text-xs">
+            {t("marketplace.bounty.pagination.page", { page, pages })}
+          </span>
           <button disabled={page >= pages} onClick={() => setPage((p) => p + 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
             style={{ background: "rgba(255,255,255,0.07)" }}>
-            Next
+            {t("marketplace.bounty.pagination.next")}
           </button>
         </div>
       )}

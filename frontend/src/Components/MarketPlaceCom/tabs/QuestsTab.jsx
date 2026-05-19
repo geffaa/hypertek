@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Swords, Gamepad2, Clock, Zap, Package } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../../Config";
 
 // ── Quest tier constants (mirrors backend/utils/questUtils.js) ────────────────
@@ -167,6 +168,7 @@ function SplitInfo({ q }) {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function QuestsTab() {
+  const { t } = useTranslation();
   const [quests, setQuests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("open");
@@ -231,8 +233,8 @@ export default function QuestsTab() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Swords className="w-5 h-5 text-amber-400" />
-          <h2 className="text-white font-bold text-lg">Quest Board</h2>
-          <span className="text-white/30 text-sm">{total} quests</span>
+          <h2 className="text-white font-bold text-lg">{t("marketplace.quests.heading")}</h2>
+          <span className="text-white/30 text-sm">{total} {t("marketplace.quests.quests")}</span>
         </div>
         <div className="flex gap-1">
           {STATUS_FILTERS.map((f) => (
@@ -256,9 +258,9 @@ export default function QuestsTab() {
           <div className="flex items-start gap-3">
             <Gamepad2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <p className="text-amber-300/80 text-xs font-semibold">In-Game Feature</p>
+              <p className="text-amber-300/80 text-xs font-semibold">{t("marketplace.quests.inGameFeature")}</p>
               <p className="text-white/35 text-[11px] leading-snug mt-0.5">
-                Quests are auto-generated when sellers choose a reduced commission. Players can complete up to 5 quests per day. The commission pool is split between the buyer discount, the player reward, and the platform.
+                {t("marketplace.quests.inGameDesc")}
               </p>
             </div>
           </div>
@@ -267,7 +269,7 @@ export default function QuestsTab() {
             className="self-center mx-auto px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-opacity hover:opacity-80"
             style={{ background: "rgba(180,120,0,0.35)", border: "1px solid rgba(220,150,0,0.4)", color: "rgba(255,200,80,0.95)" }}
           >
-            Want to earn from quests? Play the game →
+            {t("marketplace.quests.earnFromQuests")}
           </button>
         </div>
 
@@ -280,16 +282,16 @@ export default function QuestsTab() {
             <div>
               <div className="flex items-center gap-2 mb-2.5">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-amber-300 text-xs font-semibold">Money Quests (11% pool)</span>
+                <span className="text-amber-300 text-xs font-semibold">{t("marketplace.quests.moneyQuests")}</span>
               </div>
               <div className="space-y-1.5">
-                {QUEST_TIERS.money.map((t) => (
-                  <div key={t.waitHours} className="grid text-[10px]"
+                {QUEST_TIERS.money.map((tier) => (
+                  <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
-                    <span className="text-white/50">{t.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                    <span className="text-white/50">{tier.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -299,16 +301,16 @@ export default function QuestsTab() {
             <div className="pl-4">
               <div className="flex items-center gap-2 mb-2.5">
                 <Package className="w-3.5 h-3.5 text-green-400" />
-                <span className="text-green-300 text-xs font-semibold">Resource Quests (20% pool)</span>
+                <span className="text-green-300 text-xs font-semibold">{t("marketplace.quests.resourceQuests")}</span>
               </div>
               <div className="space-y-1.5">
-                {QUEST_TIERS.resources.map((t) => (
-                  <div key={t.waitHours} className="grid text-[10px]"
+                {QUEST_TIERS.resources.map((tier) => (
+                  <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
-                    <span className="text-white/50">{t.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                    <span className="text-white/50">{tier.waitHours}h</span>
+                    <span className="text-red-400">Buyer −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">Player +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">Platform +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -317,8 +319,8 @@ export default function QuestsTab() {
           </div>
           {/* Footer notes */}
           <div className="mt-3 pt-2.5 border-t border-white/8 flex flex-wrap gap-x-8 gap-y-1">
-            <p className="text-white/45 text-[9px]"># Quests with combined payloads will be paid out using the separate table amounts.</p>
-            <p className="text-white/45 text-[9px]"># Planet data will sync when the games go live.</p>
+            <p className="text-white/45 text-[9px]">{t("marketplace.quests.footerNote1")}</p>
+            <p className="text-white/45 text-[9px]">{t("marketplace.quests.footerNote2")}</p>
           </div>
         </div>
 
@@ -335,7 +337,7 @@ export default function QuestsTab() {
       ) : quests.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-white/25">
           <Swords className="w-10 h-10 mb-3 opacity-30" />
-          <p className="text-sm">No {statusFilter} quests</p>
+          <p className="text-sm">{t("marketplace.quests.noQuests", { filter: statusFilter })}</p>
         </div>
       ) : (
         <div className="rounded-2xl overflow-x-auto"
@@ -348,13 +350,13 @@ export default function QuestsTab() {
               gridTemplateColumns: "1fr 1.1fr 1.1fr 1.8fr 1.6fr 1fr 1.2fr",
             }}
           >
-            <span>Questing No</span>
-            <span>Pickup Planet</span>
-            <span>Drop Off Planet</span>
-            <span>Item / Goods</span>
-            <span>Commission Split</span>
-            <span>Questing Time</span>
-            <span>Assigned To</span>
+            <span>{t("marketplace.quests.table.questingNo")}</span>
+            <span>{t("marketplace.quests.table.pickupPlanet")}</span>
+            <span>{t("marketplace.quests.table.dropOffPlanet")}</span>
+            <span>{t("marketplace.quests.table.itemGoods")}</span>
+            <span>{t("marketplace.quests.table.commSplit")}</span>
+            <span>{t("marketplace.quests.table.questingTime")}</span>
+            <span>{t("marketplace.quests.table.assignedTo")}</span>
           </div>
 
           {/* Table rows */}
@@ -386,12 +388,12 @@ export default function QuestsTab() {
 
                 {/* Pickup Planet */}
                 <span className="text-white/50 text-xs">
-                  {q.pickupPlanet || <span className="text-white/20 italic">In-game</span>}
+                  {q.pickupPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}
                 </span>
 
                 {/* Drop Off Planet */}
                 <span className="text-white/50 text-xs">
-                  {q.dropOffPlanet || <span className="text-white/20 italic">In-game</span>}
+                  {q.dropOffPlanet || <span className="text-white/20 italic">{t("marketplace.quests.inGame")}</span>}
                 </span>
 
                 {/* Item / Goods */}
@@ -414,7 +416,7 @@ export default function QuestsTab() {
                 {/* Assigned To */}
                 <span className="text-white/50 text-xs font-mono">
                   {q.status === "open"
-                    ? <span className="text-green-400/60 text-[11px]">Open</span>
+                    ? <span className="text-green-400/60 text-[11px]">{t("marketplace.quests.open")}</span>
                     : shortAddr(q.acceptedByWallet)}
                 </span>
               </div>
@@ -437,9 +439,9 @@ export default function QuestsTab() {
           >
             <Gamepad2 className="w-8 h-8 text-amber-400" />
             <div>
-              <p className="text-white font-bold text-base mb-1">Coming Soon</p>
+              <p className="text-white font-bold text-base mb-1">{t("marketplace.quests.comingSoon.title")}</p>
               <p className="text-white/40 text-xs leading-relaxed">
-                The in-game quest feature is currently under development. Stay tuned — you'll be able to earn rewards directly from the game.
+                {t("marketplace.quests.comingSoon.desc")}
               </p>
             </div>
             <button
@@ -447,7 +449,7 @@ export default function QuestsTab() {
               className="px-5 py-2 rounded-lg text-xs font-semibold transition-opacity hover:opacity-80"
               style={{ background: "rgba(180,120,0,0.35)", border: "1px solid rgba(220,150,0,0.4)", color: "rgba(255,200,80,0.95)" }}
             >
-              Got it
+              {t("marketplace.quests.comingSoon.gotIt")}
             </button>
           </div>
         </div>
@@ -458,11 +460,17 @@ export default function QuestsTab() {
         <div className="flex items-center justify-center gap-3 mt-8">
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
-            style={{ background: "rgba(255,255,255,0.07)" }}>Prev</button>
-          <span className="text-white/30 text-xs">Page {page} of {pages}</span>
+            style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.quests.pagination.prev")}
+          </button>
+          <span className="text-white/30 text-xs">
+            {t("marketplace.quests.pagination.page", { page, pages })}
+          </span>
           <button disabled={page >= pages} onClick={() => setPage((p) => p + 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
-            style={{ background: "rgba(255,255,255,0.07)" }}>Next</button>
+            style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.quests.pagination.next")}
+          </button>
         </div>
       )}
     </div>

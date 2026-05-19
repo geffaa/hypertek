@@ -86,6 +86,7 @@ import Nft101Article from "./pages/Nft101Article";
 import GameModePage from "./pages/GameModePage";
 
 import DashboardLayout from "./Layout/DashboardLayout";
+import ChatbotWidget from "./Components/Chatbot/ChatbotWidget";
 
 import NFTs from "./pages/DashboardPages/Nfts";
 import EditColelctions from "./assets/EditCollection";
@@ -124,7 +125,6 @@ function AppWrapper() {
 
   // ✅ Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
-    "/terms",
     "/waitlist",
     "/join-waitlist",
     "/dashboard/create-earning",
@@ -278,6 +278,7 @@ function AppWrapper() {
         <Toaster position="top-right" reverseOrder={false} />
         {!shouldHideLayout && <Footer />}
       </Elements>
+      {location.pathname !== "/gaming" && <ChatbotWidget />}
     </>
   );
 }

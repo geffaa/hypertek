@@ -1,19 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { termsOfServiceData } from "../data/legal/termsOfService";
 import { apiTermsData } from "../data/legal/apiTerms";
 import { packsTermsData } from "../data/legal/packsTerms";
 import { privacyPolicyData } from "../data/legal/privacyPolicy";
 import { otherPoliciesData } from "../data/legal/otherPolicies";
 
-const DOCUMENTS = [
-  { key: "tos",     label: "Terms of Service",           ...termsOfServiceData },
-  { key: "api",     label: "API Terms of Service",       ...apiTermsData },
-  { key: "packs",   label: "Packs Terms of Service",     ...packsTermsData },
-  { key: "privacy", label: "Privacy Policy",              ...privacyPolicyData },
-  { key: "copy",    label: "Copyright Policy",            ...otherPoliciesData.copyright },
-  { key: "tm",      label: "Trademark Policy",            ...otherPoliciesData.trademark },
-  { key: "law",     label: "Law Enforcement Guidelines",  ...otherPoliciesData.lawEnforcement },
+const DOCUMENT_DATA = [
+  { key: "tos",     ...termsOfServiceData },
+  { key: "api",     ...apiTermsData },
+  { key: "packs",   ...packsTermsData },
+  { key: "privacy", ...privacyPolicyData },
+  { key: "copy",    ...otherPoliciesData.copyright },
+  { key: "tm",      ...otherPoliciesData.trademark },
+  { key: "law",     ...otherPoliciesData.lawEnforcement },
 ];
 
 /* ── Renderers ── */
@@ -96,6 +98,8 @@ function RenderBlock({ block }) {
 
 /* ── Main ── */
 export default function TermsPage() {
+  const { t } = useTranslation();
+  const DOCUMENTS = DOCUMENT_DATA.map(d => ({ ...d, label: t(`terms.docs.${d.key}`) }));
   const [activeDoc, setActiveDoc] = useState("tos");
   const [activeSection, setActiveSection] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
@@ -148,12 +152,12 @@ export default function TermsPage() {
         style={{ background: "rgba(0,8,32,0.95)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <button onClick={() => setTocOpen(!tocOpen)}
           className="flex items-center gap-2 text-sm font-semibold text-white/70">
-          <span>☰</span> Contents
+          <span>☰</span> {t("terms.contents")}
         </button>
         {tocOpen && (
           <div className="mt-3 flex flex-col gap-1">
             {/* Mobile doc switcher */}
-            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">Documents</p>
+            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">{t("terms.documents")}</p>
             {DOCUMENTS.map(({ key, label }) => (
               <button key={key} onClick={() => switchDoc(key)}
                 className={`text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
@@ -163,7 +167,7 @@ export default function TermsPage() {
               </button>
             ))}
             <div className="border-t border-white/5 my-2" />
-            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">Sections</p>
+            <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-1 px-3">{t("terms.sections")}</p>
             {sections.map(({ id, title }) => (
               <button key={id} onClick={() => scrollTo(id)}
                 className={`text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
@@ -181,7 +185,7 @@ export default function TermsPage() {
 
         {/* ── Sidebar (sticky, same pattern as whitepaper) ── */}
         <aside
-          className="hidden lg:flex flex-col shrink-0 w-[260px]"
+          className="hidden lg:flex flex-col shrink-0 w-[260px] sidebar-custom-scroll"
           style={{
             position: "sticky",
             top: 68,
@@ -193,7 +197,7 @@ export default function TermsPage() {
           }}
         >
           {/* Document switcher */}
-          <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">Documents</p>
+          <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">{t("terms.documents")}</p>
           <nav className="flex flex-col gap-0.5 mb-4">
             {DOCUMENTS.map(({ key, label }) => (
               <button
@@ -214,8 +218,8 @@ export default function TermsPage() {
           {sections.length > 0 && (
             <>
               <div className="border-t border-white/5 mb-4" />
-              <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">Sections</p>
-              <nav className="flex flex-col gap-0.5 overflow-y-auto flex-1">
+              <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-3">{t("terms.sections")}</p>
+              <nav className="flex flex-col gap-0.5 overflow-y-auto flex-1 sidebar-custom-scroll">
                 {sections.map(({ id, title }) => (
                   <button
                     key={id}
@@ -237,7 +241,7 @@ export default function TermsPage() {
             <Link to="/"
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-300 border border-white/20 hover:border-white/40"
               style={{ background: "#002AA8" }}>
-              ← Back to Home
+              {t("terms.backToHome")}
             </Link>
           </div>
         </aside>
@@ -248,7 +252,7 @@ export default function TermsPage() {
           {/* Header */}
           <div>
             <h1 className="font-[Goldman] text-3xl md:text-4xl font-bold text-white mb-2">{doc.label}</h1>
-            <p className="text-white/30 text-sm">Last Updated: {doc.lastUpdated}</p>
+            <p className="text-white/30 text-sm">{t("terms.lastUpdated")}: {doc.lastUpdated}</p>
           </div>
 
           {/* Intro */}
@@ -269,7 +273,7 @@ export default function TermsPage() {
             <div className="rounded-2xl p-6"
               style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,42,168,0.3)" }}>
               <strong className="text-white block mb-2 uppercase tracking-wider text-xs">
-                {doc.notice.label || "Important Notice Regarding Arbitration"}
+                {doc.notice.label || t("terms.importantNotice")}
               </strong>
               <p className="text-white/65 text-sm leading-relaxed">{doc.notice.text}</p>
             </div>
@@ -297,9 +301,9 @@ export default function TermsPage() {
             <Link to="/"
               className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
               style={{ background: "#002AA8" }}>
-              ← Back to Home
+              {t("terms.backToHome")}
             </Link>
-            <p className="text-white/20 text-xs">© {new Date().getFullYear()} Hyper Tek. All rights reserved.</p>
+            <p className="text-white/20 text-xs">© {new Date().getFullYear()} Hyper Tek. {t("terms.allRights")}</p>
           </div>
 
         </main>

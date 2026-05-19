@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../Config";
 
-// ── Animation ─────────────────────────────────────────────────────────────────
 const fadeUp = {
   hidden:  { opacity: 0, y: 20 },
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.45, delay: i * 0.05, ease: "easeOut" } }),
 };
 const stagger = { visible: { transition: { staggerChildren: 0.05 } } };
 
-// ── Category badge colors ─────────────────────────────────────────────────────
 const CATEGORY_COLORS = {
   Basics:     { bg: "rgba(0,80,200,0.25)",  border: "rgba(0,100,255,0.35)",  text: "rgba(120,180,255,0.9)"  },
   Security:   { bg: "rgba(0,150,120,0.2)",  border: "rgba(0,180,150,0.35)", text: "rgba(80,220,190,0.9)"   },
@@ -23,7 +22,6 @@ function categoryStyle(cat) {
   return CATEGORY_COLORS[cat] || CATEGORY_COLORS.Basics;
 }
 
-// ── Static fallback ───────────────────────────────────────────────────────────
 const STATIC_ARTICLES = [
   {
     _id: "s1", title: "What is an NFT?", category: "Basics", readTime: 12,
@@ -47,8 +45,7 @@ const STATIC_ARTICLES = [
   },
 ];
 
-// ── Article Card ──────────────────────────────────────────────────────────────
-function ArticleCard({ article, index, onClick }) {
+function ArticleCard({ article, index, onClick, minReadLabel }) {
   const [imgError, setImgError] = useState(false);
   const cs = categoryStyle(article.category);
 
@@ -60,7 +57,6 @@ function ArticleCard({ article, index, onClick }) {
       className="group flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-transform duration-200 hover:-translate-y-1"
       style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)" }}
     >
-      {/* Cover image */}
       <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
         {!imgError && article.image ? (
           <img
@@ -77,7 +73,6 @@ function ArticleCard({ article, index, onClick }) {
             {article.icon || "📚"}
           </div>
         )}
-        {/* Category badge over image */}
         <span
           className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[10px] font-semibold"
           style={{ background: cs.bg, border: `1px solid ${cs.border}`, color: cs.text, backdropFilter: "blur(8px)" }}
@@ -86,7 +81,6 @@ function ArticleCard({ article, index, onClick }) {
         </span>
       </div>
 
-      {/* Content */}
       <div className="flex flex-col gap-2 p-4 flex-1">
         <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2 group-hover:text-blue-300 transition-colors">
           {article.title}
@@ -96,19 +90,19 @@ function ArticleCard({ article, index, onClick }) {
         </p>
         <div className="flex items-center gap-1.5 mt-1">
           <Clock className="w-3 h-3 text-white/25" />
-          <span className="text-white/30 text-[10px]">{article.readTime || 3} min read</span>
+          <span className="text-white/30 text-[10px]">{article.readTime || 3} {minReadLabel}</span>
         </div>
       </div>
     </motion.div>
   );
 }
 
-// ── Main Tab ──────────────────────────────────────────────────────────────────
 export default function Nfa101Tab() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading]   = useState(true);
-  const [filter, setFilter]     = useState("All");
+  const [filter, setFilter]     = useState("__all__");
 
   useEffect(() => {
     axios.get(`${BACKEND_BASE_URL}/api/v1/nft101`)
@@ -118,11 +112,11 @@ export default function Nfa101Tab() {
   }, []);
 
   const data = articles.length > 0 ? articles : STATIC_ARTICLES;
-  const categories = ["All", ...Array.from(new Set(data.map(a => a.category).filter(Boolean)))];
-  const filtered = filter === "All" ? data : data.filter(a => a.category === filter);
+  const filterAll = t("marketplace.nfa101.filterAll");
+  const categories = ["__all__", ...Array.from(new Set(data.map(a => a.category).filter(Boolean)))];
+  const filtered = filter === "__all__" ? data : data.filter(a => a.category === filter);
 
   const handleArticleClick = (article) => {
-    // Navigate to dedicated article page; static fallback articles stay inline
     if (article._id && !article._id.startsWith("s")) {
       navigate(`/learn/${article._id}`);
     }
@@ -131,19 +125,21 @@ export default function Nfa101Tab() {
   return (
     <div className="py-8">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
-        {/* Header */}
         <motion.div className="mb-8" initial="hidden" animate="visible" variants={fadeUp} custom={0}>
           <div className="flex items-center gap-3 mb-2">
             <div className="w-8 h-[2px] bg-white/40" />
-            <span className="text-white/50 text-xs tracking-[0.3em] uppercase font-semibold">Education</span>
+            <span className="text-white/50 text-xs tracking-[0.3em] uppercase font-semibold">
+              {t("marketplace.nfa101.sectionLabel")}
+            </span>
           </div>
-          <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-1">NFAs / NFCs / NFTs 101</h1>
+          <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-1">
+            {t("marketplace.nfa101.heading")}
+          </h1>
           <p className="text-white/50 text-sm max-w-xl leading-relaxed">
-            New to NFTs and Web3? Explore our articles to understand blockchain assets, wallets, security, and the HyperTek ecosystem.
+            {t("marketplace.nfa101.subtitle")}
           </p>
         </motion.div>
 
-        {/* Category filter */}
         <motion.div
           className="flex gap-2 flex-wrap mb-6"
           initial="hidden"
@@ -153,7 +149,8 @@ export default function Nfa101Tab() {
         >
           {categories.map(cat => {
             const isActive = filter === cat;
-            const cs = cat === "All" ? null : categoryStyle(cat);
+            const isAll = cat === "__all__";
+            const cs = isAll ? null : categoryStyle(cat);
             return (
               <button
                 key={cat}
@@ -165,13 +162,12 @@ export default function Nfa101Tab() {
                   color: isActive ? (cs?.text || "rgba(150,200,255,0.95)") : "rgba(255,255,255,0.4)",
                 }}
               >
-                {cat}
+                {isAll ? filterAll : cat}
               </button>
             );
           })}
         </motion.div>
 
-        {/* Articles grid */}
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -191,6 +187,7 @@ export default function Nfa101Tab() {
                 article={article}
                 index={i}
                 onClick={handleArticleClick}
+                minReadLabel={t("marketplace.nfa101.minRead")}
               />
             ))}
           </motion.div>

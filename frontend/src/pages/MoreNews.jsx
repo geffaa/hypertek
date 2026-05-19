@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaArrowLeft, FaShareAlt, FaCheck } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import { getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
 
 export default function NewsDetail() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [newsItem, setNewsItem] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -41,13 +43,12 @@ export default function NewsDetail() {
       <div className="min-h-screen text-white flex items-center justify-center" style={{ background: "#060610" }}>
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 rounded-full border-2 border-cyan-400/40 border-t-cyan-400 animate-spin" />
-          <span className="text-white/40 text-sm">Loading article…</span>
+          <span className="text-white/40 text-sm">{t("newsPage.loadingArticle")}</span>
         </div>
       </div>
     );
   }
 
-  // Parse description into blocks: subtitle (## prefix) or paragraph
   const blocks = newsItem.description
     .split("\n")
     .map(p => p.trim())
@@ -88,7 +89,7 @@ export default function NewsDetail() {
               boxShadow: "0 0 16px rgba(56,189,248,0.18)",
             }}
           >
-            <FaArrowLeft size={10} /> Back to News
+            <FaArrowLeft size={10} /> {t("newsPage.backToNews")}
           </button>
         </div>
       </div>
@@ -98,14 +99,18 @@ export default function NewsDetail() {
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-[11px] text-white/35 mb-8 font-medium">
-          <button onClick={() => navigate("/")} className="hover:text-white/70 transition-colors">Home</button>
+          <button onClick={() => navigate("/")} className="hover:text-white/70 transition-colors">
+            {t("newsPage.home")}
+          </button>
           <span>›</span>
-          <button onClick={() => navigate("/news")} className="hover:text-white/70 transition-colors">News</button>
+          <button onClick={() => navigate("/news")} className="hover:text-white/70 transition-colors">
+            {t("newsPage.news")}
+          </button>
           <span>›</span>
           <span className="text-white/55">{newsItem.heading?.slice(0, 45)}{newsItem.heading?.length > 45 ? "…" : ""}</span>
         </nav>
 
-        {/* Meta — date only, no hardcoded "LATEST" */}
+        {/* Meta */}
         <motion.div
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -113,7 +118,7 @@ export default function NewsDetail() {
         >
           <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded"
             style={{ background: "rgba(56,189,248,0.1)", border: "1px solid rgba(56,189,248,0.35)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-            News & Updates
+            {t("newsPage.newsUpdates")}
           </span>
           <div className="flex items-center gap-1.5 text-white/40 text-[12px]">
             <FaCalendarAlt size={11} />
@@ -173,7 +178,7 @@ export default function NewsDetail() {
             className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-cyan-400 transition-colors duration-200"
             style={{ fontFamily: "Orbitron, sans-serif" }}
           >
-            <FaArrowLeft size={10} /> All Articles
+            <FaArrowLeft size={10} /> {t("newsPage.allArticles")}
           </button>
 
           <button
@@ -186,7 +191,7 @@ export default function NewsDetail() {
             }}
           >
             {copied ? <FaCheck size={10} /> : <FaShareAlt size={10} />}
-            {copied ? "Copied!" : "Share"}
+            {copied ? t("newsPage.copied") : t("newsPage.share")}
           </button>
         </div>
       </main>

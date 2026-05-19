@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const SECTIONS = [
-  { id: "executive-summary",  label: "01  Executive Summary" },
-  { id: "three-worlds",       label: "02  The Three Worlds" },
-  { id: "technology",         label: "03  Technology" },
-  { id: "nfa",                label: "04  Non-Fungible Assets" },
-  { id: "hyperbucks",         label: "05  HyperBucks Economy" },
-  { id: "marketplace",        label: "06  Marketplace" },
-  { id: "roadmap",            label: "07  Roadmap" },
-  { id: "conclusion",         label: "08  Conclusion" },
+const SECTION_IDS = [
+  "executive-summary",
+  "three-worlds",
+  "technology",
+  "nfa",
+  "hyperbucks",
+  "marketplace",
+  "roadmap",
+  "conclusion",
 ];
 
 function SectionHeading({ number, title }) {
@@ -62,23 +63,22 @@ function WorldCard({ title, genre, tagline, color, features }) {
 }
 
 function RarityBadge({ tier, color, dropRate, reserve, bonuses }) {
+  const { t } = useTranslation();
   return (
     <div
       className="rounded-xl p-4 flex flex-col gap-1"
-      style={{
-        background: "rgba(0,0,0,0.3)",
-        border: `1px solid ${color}50`,
-      }}
+      style={{ background: "rgba(0,0,0,0.3)", border: `1px solid ${color}50` }}
     >
       <span className="font-semibold text-sm" style={{ color }}>{tier}</span>
-      <span className="text-white/50 text-xs">Drop rate: {dropRate}</span>
-      <span className="text-white/80 text-xs font-semibold">Reserve: {reserve}</span>
+      <span className="text-white/50 text-xs">{t("whitepaper.dropRate")}: {dropRate}</span>
+      <span className="text-white/80 text-xs font-semibold">{t("whitepaper.reserve")}: {reserve}</span>
       <span className="text-white/50 text-xs">{bonuses}</span>
     </div>
   );
 }
 
 function RoadmapPhase({ phase, title, period, items, done = false }) {
+  const { t } = useTranslation();
   return (
     <div className="flex gap-4">
       <div className="flex flex-col items-center">
@@ -99,7 +99,7 @@ function RoadmapPhase({ phase, title, period, items, done = false }) {
           <span className="font-[Goldman] font-bold text-white">{title}</span>
           {done && (
             <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(0,42,168,0.3)", color: "#60a5fa" }}>
-              Completed
+              {t("whitepaper.completed")}
             </span>
           )}
         </div>
@@ -118,19 +118,21 @@ function RoadmapPhase({ phase, title, period, items, done = false }) {
 }
 
 export default function WhitepaperPage() {
+  const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState("executive-summary");
   const [tocOpen, setTocOpen] = useState(false);
 
-  // Track active section via scroll
+  const sections = SECTION_IDS.map(id => ({ id, label: t(`whitepaper.sections.${id}`) }));
+
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 60) {
-        setActiveSection(SECTIONS[SECTIONS.length - 1].id);
+        setActiveSection(SECTION_IDS[SECTION_IDS.length - 1]);
         return;
       }
       const offset = window.scrollY + 140;
-      let current = SECTIONS[0].id;
-      for (const { id } of SECTIONS) {
+      let current = SECTION_IDS[0];
+      for (const id of SECTION_IDS) {
         const el = document.getElementById(id);
         if (el) {
           const top = el.getBoundingClientRect().top + window.scrollY;
@@ -158,11 +160,11 @@ export default function WhitepaperPage() {
       {/* ── Mobile TOC toggle ── */}
       <div className="lg:hidden sticky top-[68px] z-40 px-4 py-3" style={{ background: "rgba(0,8,32,0.95)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <button onClick={() => setTocOpen(!tocOpen)} className="flex items-center gap-2 text-sm font-semibold text-white/70">
-          <span>☰</span> Contents
+          <span>☰</span> {t("whitepaper.contents")}
         </button>
         {tocOpen && (
           <div className="mt-3 flex flex-col gap-1">
-            {SECTIONS.map(({ id, label }) => (
+            {sections.map(({ id, label }) => (
               <button key={id} onClick={() => scrollTo(id)} className={`text-left px-3 py-2 rounded-lg text-sm transition-colors ${activeSection === id ? "text-white bg-blue-900/40" : "text-white/50 hover:text-white"}`}>
                 {label}
               </button>
@@ -174,9 +176,8 @@ export default function WhitepaperPage() {
       {/* ── Body ── */}
       <div className="flex items-start">
 
-        {/* Sidebar TOC — sticky, stays within document flow (won't cover footer) */}
         <aside
-          className="hidden lg:flex flex-col shrink-0 w-[260px]"
+          className="hidden lg:flex flex-col shrink-0 w-[260px] sidebar-custom-scroll"
           style={{
             position: "sticky",
             top: 68,
@@ -187,9 +188,9 @@ export default function WhitepaperPage() {
             padding: "32px 20px",
           }}
         >
-          <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-4">Contents</p>
+          <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-4">{t("whitepaper.contents")}</p>
           <nav className="flex flex-col gap-1">
-            {SECTIONS.map(({ id, label }) => (
+            {sections.map(({ id, label }) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
@@ -210,7 +211,7 @@ export default function WhitepaperPage() {
               className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-300 border border-white/20 hover:border-white/40"
               style={{ background: "#002AA8" }}
             >
-              ↓ Download PDF
+              {t("whitepaper.download")}
             </a>
           </div>
         </aside>
@@ -465,11 +466,11 @@ export default function WhitepaperPage() {
             <div className="mb-6">
               <h3 className="font-semibold text-white mb-4">Five Rarity Tiers</h3>
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                <RarityBadge tier="Common" color="#9ca3af" dropRate="~5%" reserve="$50–$150" bonuses="+10–15% in specific stats" />
-                <RarityBadge tier="Uncommon" color="#22c55e" dropRate="~2%" reserve="$100" bonuses="+15–20% in specific stats" />
-                <RarityBadge tier="Semi-Rare" color="#3b82f6" dropRate="~0.5%" reserve="$400" bonuses="+20–25% in specific stats" />
-                <RarityBadge tier="Rare" color="#a855f7" dropRate="~0.1%" reserve="$700" bonuses="+25–35% in specific stats" />
-                <RarityBadge tier="Extremely Rare" color="#f59e0b" dropRate="~0.01%" reserve="$1,000+" bonuses="Maximum bonuses, legendary status" />
+                <RarityBadge tier="Common"        color="#9ca3af" dropRate="~5%"    reserve="$50–$150"  bonuses="+10–15% in specific stats" />
+                <RarityBadge tier="Uncommon"      color="#22c55e" dropRate="~2%"    reserve="$100"      bonuses="+15–20% in specific stats" />
+                <RarityBadge tier="Semi-Rare"     color="#3b82f6" dropRate="~0.5%"  reserve="$400"      bonuses="+20–25% in specific stats" />
+                <RarityBadge tier="Rare"          color="#a855f7" dropRate="~0.1%"  reserve="$700"      bonuses="+25–35% in specific stats" />
+                <RarityBadge tier="Extremely Rare" color="#f59e0b" dropRate="~0.01%" reserve="$1,000+"  bonuses="Maximum bonuses, legendary status" />
               </div>
             </div>
 
@@ -652,9 +653,9 @@ export default function WhitepaperPage() {
                 {[
                   { pct: "50%", label: "Reserve Fund", color: "#3b82f6" },
                   { pct: "20%", label: "Platform Ops", color: "#a855f7" },
-                  { pct: "15%", label: "Development", color: "#10b981" },
-                  { pct: "10%", label: "Support", color: "#f59e0b" },
-                  { pct: "5%",  label: "Marketing",  color: "#ef4444" },
+                  { pct: "15%", label: "Development",  color: "#10b981" },
+                  { pct: "10%", label: "Support",      color: "#f59e0b" },
+                  { pct: "5%",  label: "Marketing",    color: "#ef4444" },
                 ].map(({ pct, label, color }) => (
                   <div key={label} className="text-center rounded-xl py-4" style={{ background: `${color}12`, border: `1px solid ${color}30` }}>
                     <p className="font-bold text-xl" style={{ color }}>{pct}</p>
@@ -773,14 +774,14 @@ export default function WhitepaperPage() {
                 className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-[#003BD4]"
                 style={{ background: "#002AA8" }}
               >
-                ↓ Download Full PDF (104 pages)
+                {t("whitepaper.downloadFull")}
               </a>
               <Link
                 to="/waitlist"
                 onClick={() => window.scrollTo(0, 0)}
                 className="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold text-sm text-white/70 hover:text-white transition-colors border border-white/10 hover:border-white/30"
               >
-                Join the Waitlist →
+                {t("whitepaper.joinWaitlist")}
               </Link>
             </div>
           </section>

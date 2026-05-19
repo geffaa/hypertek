@@ -2,16 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 import { Gavel, Clock, TrendingUp, Tag, Plus, X, Zap, Gamepad2, Info, CheckCircle2, Bell, Trophy, Package } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
 
 // ── Auction Detail Popup ──────────────────────────────────────────────────────
 function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
+  const { t } = useTranslation();
   const { d, h, m, s, done } = useCountdown(auction.endTime);
   const isUrgent = !done && d === 0 && h < 6;
   const timeLabel = done
-    ? "Ended"
+    ? t("marketplace.auctions.card.ended")
     : d > 0
       ? `${d}d ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`
       : `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
@@ -38,10 +40,8 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
             alt={auction.title}
             className="w-full h-full object-contain"
           />
-          {/* Gradient overlay bottom */}
           <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
             style={{ background: "linear-gradient(to top, #0a0c1e, transparent)" }} />
-          {/* Status badge */}
           <span className={`absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[9px] font-bold uppercase
             ${auction.status === "active" ? "text-green-300" : auction.status === "ended" ? "text-red-400" : "text-white/40"}`}
             style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.12)" }}>
@@ -66,7 +66,7 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
                   {auction.category}
                 </span>
               )}
-              <span className="text-white/25 text-[10px]">{bidCount} bid{bidCount !== 1 ? "s" : ""}</span>
+              <span className="text-white/25 text-[10px]">{bidCount} {t("marketplace.auctions.detail.bids")}</span>
             </div>
           </div>
 
@@ -74,17 +74,17 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded-xl p-2.5 text-center"
               style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,80,255,0.2)" }}>
-              <p className="text-white/40 text-[9px] mb-0.5">Current bid</p>
+              <p className="text-white/40 text-[9px] mb-0.5">{t("marketplace.auctions.detail.currentBid")}</p>
               <p className="text-blue-300 font-bold text-xs">{currentPrice} <span className="text-[9px] font-normal text-white/30">USDC</span></p>
             </div>
             <div className="rounded-xl p-2.5 text-center"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <p className="text-white/40 text-[9px] mb-0.5">Start</p>
+              <p className="text-white/40 text-[9px] mb-0.5">{t("marketplace.auctions.detail.start")}</p>
               <p className="text-white/70 font-bold text-xs">{auction.startPrice} <span className="text-[9px] font-normal text-white/30">USDC</span></p>
             </div>
             <div className="rounded-xl p-2.5 text-center"
               style={{ background: isUrgent ? "rgba(180,0,0,0.15)" : "rgba(255,255,255,0.04)", border: `1px solid ${isUrgent ? "rgba(255,60,60,0.3)" : "rgba(255,255,255,0.08)"}` }}>
-              <p className="text-white/40 text-[9px] mb-0.5">Ends in</p>
+              <p className="text-white/40 text-[9px] mb-0.5">{t("marketplace.auctions.detail.endsIn")}</p>
               <p className={`font-bold text-xs font-mono ${isUrgent ? "text-red-400" : "text-amber-300"}`}>{timeLabel}</p>
             </div>
           </div>
@@ -95,7 +95,7 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
               style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(180,120,0,0.2)" }}>
               <div className="flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-amber-300/80 text-xs font-semibold">Buy Now</span>
+                <span className="text-amber-300/80 text-xs font-semibold">{t("marketplace.auctions.detail.buyNowLabel")}</span>
               </div>
               <span className="text-amber-300 font-bold text-sm">{auction.instantBuyPrice} USDC</span>
             </div>
@@ -105,7 +105,7 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
           {auction.description && (
             <div className="rounded-xl p-3"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-1 font-semibold">Description</p>
+              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-1 font-semibold">{t("marketplace.auctions.detail.description")}</p>
               <p className="text-white/60 text-xs leading-relaxed">{auction.description}</p>
             </div>
           )}
@@ -114,11 +114,11 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
           {bidCount > 0 && auction.bidHistory && (
             <div className="rounded-xl p-3"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-2 font-semibold">Recent Bids</p>
+              <p className="text-white/30 text-[9px] uppercase tracking-widest mb-2 font-semibold">{t("marketplace.auctions.detail.recentBids")}</p>
               <div className="flex flex-col gap-1.5">
                 {auction.bidHistory.slice(-3).reverse().map((b, i) => (
                   <div key={i} className="flex justify-between items-center">
-                    <span className="text-white/50 text-[10px] truncate max-w-[130px]">{b.bidderName || "Anonymous"}</span>
+                    <span className="text-white/50 text-[10px] truncate max-w-[130px]">{b.bidderName || t("marketplace.auctions.detail.anonymous")}</span>
                     <span className="text-blue-300 text-[10px] font-bold">{b.amount} USDC</span>
                   </div>
                 ))}
@@ -133,14 +133,14 @@ function AuctionDetailPopup({ auction, imgSrc, onClose, onBid, onInstantBuy }) {
                 onClick={() => { onClose(); onBid?.(auction); }}
                 className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110"
                 style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
-                <Gavel className="w-3.5 h-3.5 inline mr-1.5" />Place Bid
+                <Gavel className="w-3.5 h-3.5 inline mr-1.5" />{t("marketplace.auctions.detail.placeBid")}
               </button>
               {auction.instantBuyPrice && (
                 <button
                   onClick={() => { onClose(); onInstantBuy?.(auction); }}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-amber-300 transition-all hover:brightness-110"
                   style={{ background: "rgba(180,120,0,0.25)", border: "1px solid rgba(180,120,0,0.4)" }}>
-                  <Zap className="w-3.5 h-3.5 inline mr-1" />Buy Now
+                  <Zap className="w-3.5 h-3.5 inline mr-1" />{t("marketplace.auctions.detail.buyNow")}
                 </button>
               )}
             </div>
@@ -171,8 +171,9 @@ function useCountdown(endTime) {
 }
 
 function Countdown({ endTime, urgent }) {
+  const { t } = useTranslation();
   const { d, h, m, s, done } = useCountdown(endTime);
-  if (done) return <span className="text-red-400 text-xs font-bold">ENDED</span>;
+  if (done) return <span className="text-red-400 text-xs font-bold">{t("marketplace.auctions.card.ended")}</span>;
   const isUrgent = urgent || (d === 0 && h < 6);
   return (
     <span className={`font-mono text-xs font-bold ${isUrgent ? "text-red-400" : "text-amber-300"}`}>
@@ -182,8 +183,8 @@ function Countdown({ endTime, urgent }) {
 }
 
 // ── Bid Modal ─────────────────────────────────────────────────────────────────
-// phase: "enter" | "confirm" | "success"
 function BidModal({ auction, onClose, onSuccess, wallet }) {
+  const { t } = useTranslation();
   const [phase, setPhase]   = useState("enter");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -193,7 +194,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
     : auction.startPrice;
 
   async function placeBid() {
-    if (!wallet) return setErr("Connect your wallet first");
+    if (!wallet) return setErr(t("marketplace.common.connectWallet"));
     if (Number(amount) < minBid) return setErr(`Minimum bid is ${minBid} USDC`);
     setLoading(true); setErr("");
     try {
@@ -227,7 +228,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
           <div className="p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Gavel className="w-4 h-4 text-blue-400" />
-              <span className="text-white font-bold text-sm">Place a Bid</span>
+              <span className="text-white font-bold text-sm">{t("marketplace.auctions.bidModal.title")}</span>
             </div>
             {/* Item preview */}
             <div className="rounded-xl overflow-hidden"
@@ -252,7 +253,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
                   )}
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <p className="text-white/40 text-[10px]">Ends in</p>
+                  <p className="text-white/40 text-[10px]">{t("marketplace.auctions.bidModal.endsIn")}</p>
                   <Countdown endTime={auction.endTime} />
                 </div>
               </div>
@@ -260,19 +261,19 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
             <div className="flex gap-3">
               <div className="flex-1 rounded-xl p-3 text-center"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <p className="text-white/40 text-[10px] mb-0.5">Current bid</p>
+                <p className="text-white/40 text-[10px] mb-0.5">{t("marketplace.auctions.bidModal.currentBid")}</p>
                 <p className="text-white font-bold text-sm">
                   {auction.currentBid > 0 ? auction.currentBid : auction.startPrice} USDC
                 </p>
               </div>
               <div className="flex-1 rounded-xl p-3 text-center"
                 style={{ background: "rgba(0,42,168,0.15)", border: "1px solid rgba(0,80,255,0.25)" }}>
-                <p className="text-white/40 text-[10px] mb-0.5">Minimum bid</p>
+                <p className="text-white/40 text-[10px] mb-0.5">{t("marketplace.auctions.bidModal.minimumBid")}</p>
                 <p className="text-blue-300 font-bold text-sm">{minBid} USDC</p>
               </div>
             </div>
             <div>
-              <label className="text-white/40 text-[10px] mb-1.5 block">Your bid (USDC)</label>
+              <label className="text-white/40 text-[10px] mb-1.5 block">{t("marketplace.auctions.bidModal.yourBid")}</label>
               <input
                 type="number" min={minBid} step="1"
                 placeholder={`${minBid} or more`}
@@ -282,7 +283,7 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               />
               {amount && Number(amount) >= minBid && (
                 <p className="text-white/30 text-[10px] mt-1">
-                  Min increment 5% · Next minimum after your bid: {Math.ceil(Number(amount) * 1.05)} USDC
+                  {t("marketplace.auctions.bidModal.minIncrement", { next: Math.ceil(Number(amount) * 1.05) })}
                 </p>
               )}
             </div>
@@ -291,9 +292,9 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               onClick={() => { if (!amount || Number(amount) < minBid) return setErr(`Min bid is ${minBid} USDC`); setPhase("confirm"); }}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              Review Bid
+              {t("marketplace.auctions.bidModal.reviewBid")}
             </button>
-            <p className="text-white/20 text-[10px] text-center">Winning bid is binding · 20% platform commission</p>
+            <p className="text-white/20 text-[10px] text-center">{t("marketplace.auctions.bidModal.disclaimer")}</p>
           </div>
         )}
 
@@ -302,20 +303,20 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
           <div className="p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Gavel className="w-4 h-4 text-blue-400" />
-              <span className="text-white font-bold text-sm">Confirm Bid</span>
+              <span className="text-white font-bold text-sm">{t("marketplace.auctions.bidModal.confirmTitle")}</span>
             </div>
             <div className="rounded-xl p-4 flex flex-col gap-2"
               style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.25)" }}>
               <div className="flex justify-between items-center">
-                <span className="text-white/50 text-xs">Item</span>
+                <span className="text-white/50 text-xs">{t("marketplace.auctions.bidModal.item")}</span>
                 <span className="text-white/90 text-xs font-semibold truncate max-w-[180px]">{auction.title}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-white/50 text-xs">Your bid</span>
+                <span className="text-white/50 text-xs">{t("marketplace.auctions.bidModal.yourBidLabel")}</span>
                 <span className="text-blue-300 font-bold">{amount} USDC</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-white/50 text-xs">If you win, you pay</span>
+                <span className="text-white/50 text-xs">{t("marketplace.auctions.bidModal.youPay")}</span>
                 <span className="text-white/70 text-xs">{amount} USDC + gas</span>
               </div>
             </div>
@@ -323,19 +324,19 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               style={{ background: "rgba(255,200,0,0.05)", border: "1px solid rgba(255,200,0,0.12)" }}>
               <p className="text-amber-300/70 text-[10px] leading-relaxed">
                 <Bell className="w-3 h-3 inline mr-1" />
-                You'll be notified immediately if someone outbids you. The auction auto-closes when the timer expires.
+                {t("marketplace.auctions.bidModal.outbidNotice")}
               </p>
             </div>
             {err && <p className="text-red-400 text-xs">{err}</p>}
             <div className="flex gap-2">
               <button onClick={() => setPhase("enter")} className="flex-1 py-2 rounded-xl text-sm text-white/50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                Back
+                {t("marketplace.auctions.bidModal.back")}
               </button>
               <button onClick={placeBid} disabled={loading}
                 className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-white"
                 style={{ background: "rgba(0,42,168,0.85)", border: "1px solid rgba(0,80,255,0.4)" }}>
-                {loading ? "Placing…" : `Confirm — ${amount} USDC`}
+                {loading ? t("marketplace.auctions.bidModal.placing") : t("marketplace.auctions.bidModal.confirm", { amount })}
               </button>
             </div>
           </div>
@@ -349,28 +350,28 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
               <Trophy className="w-8 h-8 text-blue-400" />
             </div>
             <div>
-              <p className="text-xl font-[Goldman] font-bold text-blue-300 mb-1">Bid Placed!</p>
-              <p className="text-white/50 text-xs">You're the highest bidder</p>
+              <p className="text-xl font-[Goldman] font-bold text-blue-300 mb-1">{t("marketplace.auctions.bidModal.successTitle")}</p>
+              <p className="text-white/50 text-xs">{t("marketplace.auctions.bidModal.highestBidder")}</p>
             </div>
             <div className="w-full rounded-xl p-4"
               style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
               <div className="flex justify-between mb-1">
-                <span className="text-white/40 text-[10px]">Your bid</span>
+                <span className="text-white/40 text-[10px]">{t("marketplace.auctions.bidModal.yourBidLabel")}</span>
                 <span className="text-blue-300 font-bold text-sm">{amount} USDC</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/40 text-[10px]">Ends in</span>
+                <span className="text-white/40 text-[10px]">{t("marketplace.auctions.bidModal.endsIn")}</span>
                 <Countdown endTime={auction.endTime} />
               </div>
             </div>
             <p className="text-white/30 text-[11px]">
               <Bell className="w-3 h-3 inline mr-1" />
-              You'll receive a notification if you're outbid.
+              {t("marketplace.auctions.bidModal.outbidWarning")}
             </p>
             <button onClick={() => { onSuccess?.(); onClose(); }}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.3)" }}>
-              Done
+              {t("marketplace.auctions.bidModal.done")}
             </button>
           </div>
         )}
@@ -380,8 +381,8 @@ function BidModal({ auction, onClose, onSuccess, wallet }) {
 }
 
 // ── Instant Buy Modal ─────────────────────────────────────────────────────────
-// phase: "confirm" | "success"
 function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
+  const { t } = useTranslation();
   const [phase, setPhase]   = useState("confirm");
   const [loading, setLoading] = useState(false);
 
@@ -417,7 +418,7 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
           <div className="p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-amber-400" />
-              <span className="text-white font-bold text-sm">Buy Now — Instant</span>
+              <span className="text-white font-bold text-sm">{t("marketplace.auctions.instantBuyModal.title")}</span>
             </div>
             <div className="rounded-xl overflow-hidden"
               style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
@@ -434,12 +435,12 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
               <div className="px-4 pb-4 flex justify-between items-center"
                 style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 12 }}>
                 <div>
-                  <p className="text-white/40 text-[10px]">Buy now price</p>
+                  <p className="text-white/40 text-[10px]">{t("marketplace.auctions.instantBuyModal.buyNowPrice")}</p>
                   <p className="text-amber-300 font-bold text-xl">{auction.instantBuyPrice} USDC</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-white/40 text-[10px]">Current bids</p>
-                  <p className="text-white/60 text-xs">{auction.bidHistory?.length || 0} bid(s)</p>
+                  <p className="text-white/40 text-[10px]">{t("marketplace.auctions.instantBuyModal.currentBids")}</p>
+                  <p className="text-white/60 text-xs">{auction.bidHistory?.length || 0} {t("marketplace.auctions.card.bids")}</p>
                 </div>
               </div>
             </div>
@@ -447,18 +448,18 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
               style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(180,120,0,0.2)" }}>
               <p className="text-amber-300/70 text-[10px] leading-relaxed">
                 <Zap className="w-3 h-3 inline mr-1" />
-                Buying now ends the auction immediately. The item transfers to your wallet and all other bidders are refunded.
+                {t("marketplace.auctions.instantBuyModal.notice")}
               </p>
             </div>
             <div className="flex gap-2">
               <button onClick={onClose} className="flex-1 py-2 rounded-xl text-sm text-white/50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                Cancel
+                {t("marketplace.auctions.instantBuyModal.cancel")}
               </button>
               <button onClick={confirmBuy} disabled={loading}
                 className="flex-2 flex-grow py-2 rounded-xl text-sm font-bold text-amber-200"
                 style={{ background: "rgba(160,100,0,0.7)", border: "1px solid rgba(200,140,0,0.4)" }}>
-                {loading ? "Processing…" : `Buy — ${auction.instantBuyPrice} USDC`}
+                {loading ? t("marketplace.auctions.instantBuyModal.processing") : `Buy — ${auction.instantBuyPrice} USDC`}
               </button>
             </div>
           </div>
@@ -471,29 +472,29 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
               <CheckCircle2 className="w-8 h-8 text-amber-400" />
             </div>
             <div>
-              <p className="text-xl font-[Goldman] font-bold text-amber-300 mb-1">Item Secured!</p>
-              <p className="text-white/50 text-xs">Auction closed · Transfer initiated</p>
+              <p className="text-xl font-[Goldman] font-bold text-amber-300 mb-1">{t("marketplace.auctions.instantBuyModal.successTitle")}</p>
+              <p className="text-white/50 text-xs">{t("marketplace.auctions.instantBuyModal.auctionClosed")}</p>
             </div>
             <div className="w-full rounded-xl p-4 flex flex-col gap-2"
               style={{ background: "rgba(180,120,0,0.08)", border: "1px solid rgba(200,140,0,0.2)" }}>
               <div className="flex justify-between">
-                <span className="text-white/40 text-xs">Item</span>
+                <span className="text-white/40 text-xs">{t("marketplace.auctions.instantBuyModal.item")}</span>
                 <span className="text-white/80 text-xs font-semibold truncate max-w-[160px]">{auction.title}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/40 text-xs">Paid</span>
+                <span className="text-white/40 text-xs">{t("marketplace.auctions.instantBuyModal.paid")}</span>
                 <span className="text-amber-300 font-bold">{auction.instantBuyPrice} USDC</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/40 text-xs">Status</span>
-                <span className="text-green-400 text-xs font-semibold">Transferred to wallet</span>
+                <span className="text-white/40 text-xs">{t("marketplace.auctions.instantBuyModal.status")}</span>
+                <span className="text-green-400 text-xs font-semibold">{t("marketplace.auctions.instantBuyModal.transferred")}</span>
               </div>
             </div>
-            <p className="text-white/25 text-[11px]">Item will appear in your My Collections tab.</p>
+            <p className="text-white/25 text-[11px]">{t("marketplace.auctions.instantBuyModal.walletNote")}</p>
             <button onClick={() => { onSuccess?.(); onClose(); }}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
               style={{ background: "rgba(160,100,0,0.6)", border: "1px solid rgba(200,140,0,0.3)" }}>
-              View My Collections
+              {t("marketplace.auctions.instantBuyModal.viewCollect")}
             </button>
           </div>
         )}
@@ -504,6 +505,7 @@ function InstantBuyModal({ auction, onClose, onSuccess, wallet }) {
 
 // ── Create auction modal ──────────────────────────────────────────────────────
 function CreateAuctionModal({ onClose, onSuccess, wallet }) {
+  const { t } = useTranslation();
   const token = localStorage.getItem("token");
   const [form, setForm] = useState({
     startPrice: "", reservePrice: "", instantBuyPrice: "", durationHours: "72",
@@ -545,7 +547,7 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
 
   async function submit(e) {
     e.preventDefault();
-    if (!wallet) return setErr("Connect wallet first");
+    if (!wallet) return setErr(t("marketplace.common.connectWallet"));
     if (!selectedItem) return setErr("Select an item from your collection");
     setLoading(true); setErr("");
     try {
@@ -587,26 +589,26 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
           style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div className="flex items-center gap-2">
             <Gavel className="w-4 h-4 text-yellow-400" />
-            <span className="text-white font-bold text-sm">Create Auction</span>
+            <span className="text-white font-bold text-sm">{t("marketplace.auctions.createModal.title")}</span>
           </div>
           <button onClick={onClose} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>
         </div>
 
-        {/* 2-column body — no outer scroll, each col handles its own */}
+        {/* 2-column body */}
         <form onSubmit={submit} className="flex flex-1 min-h-0 divide-x divide-white/[0.06]">
 
           {/* ── Left: item picker ── */}
           <div className="flex flex-col gap-2 p-4 w-[45%] shrink-0 overflow-y-auto auction-modal-scroll">
             <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">
-              Select Item
+              {t("marketplace.auctions.createModal.selectItem")}
             </p>
 
             {!wallet ? (
-              <p className="text-white/25 text-[11px] italic">Connect wallet to browse your items</p>
+              <p className="text-white/25 text-[11px] italic">{t("marketplace.auctions.createModal.connectWallet")}</p>
             ) : itemsLoading ? (
-              <p className="text-white/25 text-[11px] italic">Loading…</p>
+              <p className="text-white/25 text-[11px] italic">{t("marketplace.auctions.createModal.loadingItems")}</p>
             ) : ownedItems.length === 0 ? (
-              <p className="text-white/25 text-[11px] italic">No owned items found</p>
+              <p className="text-white/25 text-[11px] italic">{t("marketplace.auctions.createModal.noItems")}</p>
             ) : (
               <div className="grid grid-cols-3 gap-1.5">
                 {ownedItems.map(item => {
@@ -658,34 +660,38 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
 
           {/* ── Right: pricing + submit ── */}
           <div className="flex flex-col gap-3 p-4 flex-1 min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">Pricing & Duration</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">
+              {t("marketplace.auctions.createModal.pricingDuration")}
+            </p>
 
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="text-white/40 text-[9px] mb-1 block">Start Price (USDC) *</label>
+                <label className="text-white/40 text-[9px] mb-1 block">{t("marketplace.auctions.createModal.startPrice")}</label>
                 <input required type="number" step="any" min="0" placeholder="e.g. 50"
                   value={form.startPrice} onChange={e => set("startPrice", e.target.value)}
                   className={iCls} style={iSt} />
               </div>
               <div>
-                <label className="text-white/40 text-[9px] mb-1 block">Reserve Price (USDC)</label>
-                <input type="number" step="any" min="0" placeholder="Optional"
+                <label className="text-white/40 text-[9px] mb-1 block">{t("marketplace.auctions.createModal.reservePrice")}</label>
+                <input type="number" step="any" min="0"
+                  placeholder={t("marketplace.auctions.createModal.optional")}
                   value={form.reservePrice} onChange={e => set("reservePrice", e.target.value)}
                   className={iCls} style={iSt} />
               </div>
             </div>
 
             <div>
-              <label className="text-white/40 text-[9px] mb-1 block">Instant Buy Price (USDC)</label>
-              <input type="number" step="any" min="0" placeholder="Leave blank to disable"
+              <label className="text-white/40 text-[9px] mb-1 block">{t("marketplace.auctions.createModal.instantBuyPrice")}</label>
+              <input type="number" step="any" min="0"
+                placeholder={t("marketplace.auctions.createModal.leaveBlank")}
                 value={form.instantBuyPrice} onChange={e => set("instantBuyPrice", e.target.value)}
                 className={iCls} style={iSt} />
             </div>
 
             <div>
-              <label className="text-white/40 text-[9px] mb-1 block">Duration</label>
+              <label className="text-white/40 text-[9px] mb-1 block">{t("marketplace.auctions.createModal.duration")}</label>
               <div className="flex gap-1.5">
-                {[["24", "1 Day"], ["72", "3 Days"], ["168", "7 Days"]].map(([val, label]) => (
+                {[["24", t("marketplace.auctions.createModal.dur1Day")], ["72", t("marketplace.auctions.createModal.dur3Days")], ["168", t("marketplace.auctions.createModal.dur7Days")]].map(([val, label]) => (
                   <button key={val} type="button" onClick={() => set("durationHours", val)}
                     className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
                     style={form.durationHours === val
@@ -698,12 +704,12 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
             </div>
 
             <div className="mt-auto flex flex-col gap-2">
-              <p className="text-white/25 text-[9px]">Free to list · 20% commission on sale</p>
+              <p className="text-white/25 text-[9px]">{t("marketplace.auctions.createModal.freeToList")}</p>
               {err && <p className="text-red-400 text-[11px]">{err}</p>}
               <button type="submit" disabled={loading || !selectedItem}
                 className="w-full py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-40 transition-all"
                 style={{ background: "rgba(0,42,168,0.8)" }}>
-                {loading ? "Creating…" : "Create Auction"}
+                {loading ? t("marketplace.auctions.createModal.creating") : t("marketplace.auctions.createModal.submit")}
               </button>
             </div>
           </div>
@@ -722,6 +728,7 @@ function CreateAuctionModal({ onClose, onSuccess, wallet }) {
 
 // ── Auction card ──────────────────────────────────────────────────────────────
 function AuctionCard({ auction, onBid, onInstantBuy }) {
+  const { t } = useTranslation();
   const [showDetail, setShowDetail] = useState(false);
   const isNFA = auction.isNFA;
   const { d, h, done } = useCountdown(auction.endTime);
@@ -757,14 +764,17 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
           )}
           {isUrgent && (
             <span className="px-1.5 py-0.5 rounded text-[9px] font-bold text-red-300 animate-pulse"
-              style={{ background: "rgba(180,0,0,0.7)", border: "1px solid rgba(255,60,60,0.5)" }}>ENDING SOON</span>
+              style={{ background: "rgba(180,0,0,0.7)", border: "1px solid rgba(255,60,60,0.5)" }}>
+              {t("marketplace.auctions.endingSoon")}
+            </span>
           )}
         </div>
         <span className={`absolute top-2 right-2 text-[10px] font-bold uppercase ${statusColor}`}>{auction.status}</span>
-        {/* Click hint */}
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
           style={{ background: "rgba(0,0,0,0.35)" }}>
-          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">View Details</span>
+          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">
+            {t("marketplace.auctions.viewDetails")}
+          </span>
         </div>
       </div>
 
@@ -773,34 +783,34 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
 
         <div className="flex items-end justify-between mt-auto">
           <div>
-            <p className="text-white/40 text-[10px]">Current bid</p>
+            <p className="text-white/40 text-[10px]">{t("marketplace.auctions.card.currentBid")}</p>
             <p className="text-white font-bold text-sm">
               {auction.currentBid > 0 ? `${auction.currentBid} USDC` : `${auction.startPrice} USDC`}
             </p>
           </div>
           <div className="text-right">
-            <p className="text-white/40 text-[10px]">Ends in</p>
+            <p className="text-white/40 text-[10px]">{t("marketplace.auctions.card.endsIn")}</p>
             <Countdown endTime={auction.endTime} urgent={isUrgent} />
           </div>
         </div>
 
         {auction.instantBuyPrice && (
           <p className="text-[10px] text-amber-300/70">
-            <Zap className="w-3 h-3 inline mr-0.5" />Buy now: {auction.instantBuyPrice} USDC
+            <Zap className="w-3 h-3 inline mr-0.5" />{t("marketplace.auctions.card.buyNow")}: {auction.instantBuyPrice} USDC
           </p>
         )}
-        <p className="text-white/25 text-[10px]">{auction.bidHistory?.length || 0} bid(s)</p>
+        <p className="text-white/25 text-[10px]">{auction.bidHistory?.length || 0} {t("marketplace.auctions.card.bids")}</p>
 
         {auction.status === "active" && (
           <div className="flex gap-2 mt-1">
             <button onClick={() => onBid(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              Place Bid
+              {t("marketplace.auctions.card.placeBid")}
             </button>
             {auction.instantBuyPrice && (
               <button onClick={() => onInstantBuy(auction)} className="flex-1 py-1.5 rounded-lg text-xs font-semibold text-amber-300"
                 style={{ background: "rgba(180,120,0,0.25)", border: "1px solid rgba(180,120,0,0.4)" }}>
-                <Zap className="w-3 h-3 inline mr-0.5" />Buy Now
+                <Zap className="w-3 h-3 inline mr-0.5" />{t("marketplace.auctions.card.buyNow")}
               </button>
             )}
           </div>
@@ -823,16 +833,15 @@ function AuctionCard({ auction, onBid, onInstantBuy }) {
 
 // ── Investor Note Banner ──────────────────────────────────────────────────────
 function InvestorBanner() {
+  const { t } = useTranslation();
   return (
     <div className="mb-6 rounded-xl overflow-hidden relative"
       style={{ background: "linear-gradient(135deg, rgba(0,42,168,0.12) 0%, rgba(180,120,0,0.06) 100%)", border: "1px solid rgba(0,80,255,0.15)" }}>
       <div className="px-4 py-3 flex items-center gap-3">
         <Gamepad2 className="w-5 h-5 text-amber-400 flex-shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-amber-300/90 text-xs font-semibold">In-Game Feature Preview</p>
-          <p className="text-white/40 text-[11px] leading-snug">
-            The Auction system will be fully live in-game at launch. Items shown here are seeded samples for investor/user showcase.
-          </p>
+          <p className="text-amber-300/90 text-xs font-semibold">{t("marketplace.auctions.preview.title")}</p>
+          <p className="text-white/40 text-[11px] leading-snug">{t("marketplace.auctions.preview.desc")}</p>
         </div>
         <Info className="w-4 h-4 text-white/20 flex-shrink-0" />
       </div>
@@ -841,7 +850,6 @@ function InvestorBanner() {
 }
 
 // ── Static preview data ───────────────────────────────────────────────────────
-// Three distinct countdown times as requested: ~5h31m, ~1d7h18m, ~3d9h45m
 const now = Date.now();
 const PREVIEW_AUCTIONS = [
   { _id: "pa-1", title: "Shadow Ops Skin — Legendary", category: "Skins", isNFA: true, status: "active", startPrice: 250, currentBid: 320, instantBuyPrice: 500, endTime: new Date(now + 5 * 3600000 + 31 * 60000).toISOString(), bidHistory: [{}, {}, {}] },
@@ -858,6 +866,7 @@ const PREVIEW_AUCTIONS = [
 const FILTERS = ["active", "ended", "sold"];
 
 export default function AuctionsTab() {
+  const { t } = useTranslation();
   const { user, isLoggedInUser } = useSelector(s => s.auth);
   const { address: wagmiAddress } = useAccount();
   const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
@@ -904,8 +913,8 @@ export default function AuctionsTab() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Gavel className="w-5 h-5 text-white/60" />
-          <h2 className="text-white font-bold text-lg">Auctions</h2>
-          <span className="text-white/30 text-sm">{total} listings</span>
+          <h2 className="text-white font-bold text-lg">{t("marketplace.auctions.heading")}</h2>
+          <span className="text-white/30 text-sm">{total} {t("marketplace.auctions.listings")}</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           <div className="flex gap-1.5">
@@ -920,7 +929,7 @@ export default function AuctionsTab() {
           {isLoggedInUser && (
             <button onClick={() => setShowCreate(true)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              <Plus className="w-3.5 h-3.5" /> New Auction
+              <Plus className="w-3.5 h-3.5" /> {t("marketplace.auctions.newAuction")}
             </button>
           )}
         </div>
@@ -931,10 +940,10 @@ export default function AuctionsTab() {
       {/* Rules bar */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <span><Clock className="w-3 h-3 inline mr-1" />Durations: 1d · 3d · 7d</span>
-        <span><TrendingUp className="w-3 h-3 inline mr-1" />Min increment: 5%</span>
-        <span><Tag className="w-3 h-3 inline mr-1" />Free to list</span>
-        <span><Gavel className="w-3 h-3 inline mr-1" />Commission: 20% on sale</span>
+        <span><Clock className="w-3 h-3 inline mr-1" />{t("marketplace.auctions.rules.durations")}</span>
+        <span><TrendingUp className="w-3 h-3 inline mr-1" />{t("marketplace.auctions.rules.minIncrement")}</span>
+        <span><Tag className="w-3 h-3 inline mr-1" />{t("marketplace.auctions.rules.freeToList")}</span>
+        <span><Gavel className="w-3 h-3 inline mr-1" />{t("marketplace.auctions.rules.commission")}</span>
       </div>
 
       {/* Grid */}
@@ -947,10 +956,12 @@ export default function AuctionsTab() {
       ) : auctions.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-white/25">
           <Gavel className="w-10 h-10 mb-3 opacity-30" />
-          <p className="text-sm">No {filter} auctions</p>
+          <p className="text-sm">{t("marketplace.auctions.noAuctions", { filter })}</p>
           {isLoggedInUser && filter === "active" && (
             <button onClick={() => setShowCreate(true)} className="mt-4 px-4 py-2 rounded-lg text-xs text-white"
-              style={{ background: "rgba(0,42,168,0.6)" }}>Create the first auction</button>
+              style={{ background: "rgba(0,42,168,0.6)" }}>
+              {t("marketplace.auctions.createFirst")}
+            </button>
           )}
         </div>
       ) : (
@@ -961,15 +972,13 @@ export default function AuctionsTab() {
             const bEnd = new Date(b.endTime).getTime();
             const aEnded = aEnd <= now || a.status === "ended" || a.status === "sold";
             const bEnded = bEnd <= now || b.status === "ended" || b.status === "sold";
-            // Ended auctions first
             if (aEnded && !bEnded) return -1;
             if (!aEnded && bEnded) return 1;
-            // Among same group, sort by endTime ascending (soonest first)
             return aEnd - bEnd;
           }).map(a => (
             <AuctionCard key={a._id} auction={a}
-              onBid={a => isLoggedInUser ? setBidAuction(a) : alert("Log in first")}
-              onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : alert("Log in first")}
+              onBid={a => isLoggedInUser ? setBidAuction(a) : alert(t("marketplace.common.loginFirst"))}
+              onInstantBuy={a => isLoggedInUser ? setInstantBuyAuction(a) : alert(t("marketplace.common.loginFirst"))}
             />
           ))}
         </div>
@@ -978,9 +987,15 @@ export default function AuctionsTab() {
       {/* Pagination */}
       {pages > 1 && (
         <div className="flex items-center justify-center gap-3 mt-8">
-          <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30" style={{ background: "rgba(255,255,255,0.07)" }}>Prev</button>
-          <span className="text-white/30 text-xs">Page {page} of {pages}</span>
-          <button disabled={page >= pages} onClick={() => setPage(p => p + 1)} className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30" style={{ background: "rgba(255,255,255,0.07)" }}>Next</button>
+          <button disabled={page === 1} onClick={() => setPage(p => p - 1)} className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30" style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.auctions.pagination.prev")}
+          </button>
+          <span className="text-white/30 text-xs">
+            {t("marketplace.auctions.pagination.page", { page, pages })}
+          </span>
+          <button disabled={page >= pages} onClick={() => setPage(p => p + 1)} className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30" style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.auctions.pagination.next")}
+          </button>
         </div>
       )}
 

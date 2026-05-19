@@ -26,16 +26,28 @@ import newsKo from "./locales/news-ko.json";
 import newsJa from "./locales/news-ja.json";
 import newsPt from "./locales/news-pt.json";
 
+import marketplaceEn from "./locales/marketplace-en.json";
+import marketplaceZh from "./locales/marketplace-zh.json";
+import marketplaceKo from "./locales/marketplace-ko.json";
+import marketplaceJa from "./locales/marketplace-ja.json";
+import marketplacePt from "./locales/marketplace-pt.json";
+
+import pagesEn from "./locales/pages-en.json";
+import pagesZh from "./locales/pages-zh.json";
+import pagesKo from "./locales/pages-ko.json";
+import pagesJa from "./locales/pages-ja.json";
+import pagesPt from "./locales/pages-pt.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
-      en: { translation: { ...en, ...gameEn, ...aboutEn, ...newsEn } },
-      zh: { translation: { ...zh, ...gameZh, ...aboutZh, ...newsZh } },
-      ko: { translation: { ...ko, ...gameKo, ...aboutKo, ...newsKo } },
-      ja: { translation: { ...ja, ...gameJa, ...aboutJa, ...newsJa } },
-      pt: { translation: { ...pt, ...gamePt, ...aboutPt, ...newsPt } },
+      en: { translation: { ...en, ...gameEn, ...aboutEn, ...newsEn, ...marketplaceEn, ...pagesEn } },
+      zh: { translation: { ...zh, ...gameZh, ...aboutZh, ...newsZh, ...marketplaceZh, ...pagesZh } },
+      ko: { translation: { ...ko, ...gameKo, ...aboutKo, ...newsKo, ...marketplaceKo, ...pagesKo } },
+      ja: { translation: { ...ja, ...gameJa, ...aboutJa, ...newsJa, ...marketplaceJa, ...pagesJa } },
+      pt: { translation: { ...pt, ...gamePt, ...aboutPt, ...newsPt, ...marketplacePt, ...pagesPt } },
     },
     fallbackLng: "en",
     detection: {

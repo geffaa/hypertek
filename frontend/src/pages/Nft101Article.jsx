@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, BookOpen, ChevronUp } from "lucide-react";
 import axios from "axios";
@@ -19,6 +20,7 @@ function categoryStyle(cat) {
 export default function Nft101Article() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imgError, setImgError] = useState(false);
@@ -54,12 +56,12 @@ export default function Nft101Article() {
   if (!article) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4">
-        <p className="text-white/50 text-sm">Article not found</p>
+        <p className="text-white/50 text-sm">{t("nft101Article.notFound")}</p>
         <button
           onClick={goBack}
           className="flex items-center gap-2 text-xs text-white/50 hover:text-white transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Articles
+          <ArrowLeft className="w-4 h-4" /> {t("nft101Article.backToArticles")}
         </button>
       </div>
     );
@@ -101,11 +103,11 @@ export default function Nft101Article() {
             }}
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Marketplace
+            {t("nft101Article.backToMarketplace")}
           </button>
 
           <span className="text-white/25 text-[10px] tracking-widest uppercase font-semibold hidden sm:block">
-            NFAs / NFCs / NFTs 101
+            {t("nft101Article.sectionLabel")}
           </span>
         </div>
       </div>
@@ -164,11 +166,11 @@ export default function Nft101Article() {
           </span>
           <span className="flex items-center gap-1 text-white/30 text-[10px]">
             <Clock className="w-3 h-3" />
-            {article.readTime || 3} min read
+            {article.readTime || 3} {t("nft101Article.minRead")}
           </span>
           <span className="flex items-center gap-1 text-white/30 text-[10px]">
             <BookOpen className="w-3 h-3" />
-            NFAs / NFCs / NFTs 101
+            {t("nft101Article.sectionLabel")}
           </span>
         </div>
 
@@ -303,7 +305,7 @@ export default function Nft101Article() {
             }}
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Marketplace
+            {t("nft101Article.backToMarketplace")}
           </button>
         </div>
       </motion.article>

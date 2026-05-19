@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import MarketNavBar      from "../Components/MarketPlaceCom/NavLinks";
 import MarketplaceBanner from "../Components/MarketPlaceCom/MarketplaceBanner";
@@ -21,6 +22,7 @@ const HEADER_H = 72;
 function MarketPlace() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "general");
   const [search, setSearch]       = useState("");
 
@@ -136,10 +138,10 @@ function MarketPlace() {
         <MarketplaceBanner
           noMargin
           stats={[
-            { num: bannerStats.totalItems,  label: "Total Items"  },
-            { num: bannerStats.totalVolume, label: "Total Buys"   },
-            { num: bannerStats.listed,      label: "Listed"       },
-            { num: bannerStats.collections, label: "Collections"  },
+            { num: bannerStats.totalItems,  label: t("marketplace.banner.stats.totalItems")  },
+            { num: bannerStats.totalVolume, label: t("marketplace.banner.stats.totalBuys")   },
+            { num: bannerStats.listed,      label: t("marketplace.banner.stats.listed")       },
+            { num: bannerStats.collections, label: t("marketplace.banner.stats.collections")  },
           ]}
         />
       </div>

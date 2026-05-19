@@ -4,12 +4,14 @@ import { useAccount } from "wagmi";
 import {
   ArrowRightLeft, Plus, X, Clock, CheckCircle2, Info, Package, ChevronDown,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL, getImageUrl } from "../../../Config";
 import LazyImage from "../../Common/LazyImage";
 import popularFallback from "../../../assets/images/popular/popolar.png";
 
 // ── Item Detail Popup ─────────────────────────────────────────────────────────
 function ItemDetailPopup({ imgSrc, title, category, description, offering, requesting, onClose }) {
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 z-[300] flex items-center justify-center p-4"
       style={{ background: "rgba(0,0,0,0.82)", backdropFilter: "blur(6px)" }}
@@ -36,13 +38,13 @@ function ItemDetailPopup({ imgSrc, title, category, description, offering, reque
             <div className="flex flex-col gap-1 mt-1 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
               {offering && (
                 <div className="flex justify-between gap-2">
-                  <span className="text-white/30 text-[10px]">Offering</span>
+                  <span className="text-white/30 text-[10px]">{t("marketplace.trades.offering")}</span>
                   <span className="text-green-300/80 text-[11px] font-medium text-right truncate">{offering}</span>
                 </div>
               )}
               {requesting && (
                 <div className="flex justify-between gap-2">
-                  <span className="text-white/30 text-[10px]">Wanting</span>
+                  <span className="text-white/30 text-[10px]">{t("marketplace.trades.wanting")}</span>
                   <span className="text-blue-300/80 text-[11px] font-medium text-right truncate">{requesting}</span>
                 </div>
               )}
@@ -65,12 +67,13 @@ const STATUS_COLOR = {
 
 // ── Accept Trade Modal ────────────────────────────────────────────────────────
 function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
+  const { t } = useTranslation();
   const [phase, setPhase] = useState("review"); // review | confirm | sent
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
   async function handleAccept() {
-    if (!wallet) return setErr("Connect your wallet to accept this trade");
+    if (!wallet) return setErr(t("marketplace.common.connectWallet"));
     setLoading(true); setErr("");
     try {
       const r = await fetch(`${BACKEND_BASE_URL}/api/v1/trade/${trade._id}/accept`, {
@@ -100,29 +103,29 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
           <div className="p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-              <span className="text-white font-bold text-sm">Trade Proposal</span>
+              <span className="text-white font-bold text-sm">{t("marketplace.trades.acceptModal.title")}</span>
             </div>
 
             <div className="rounded-xl p-4 flex flex-col gap-2"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <p className="text-white font-semibold text-sm">{trade.title}</p>
               <p className="text-white/50 text-xs leading-relaxed">{trade.description}</p>
-              <p className="text-white/30 text-[10px] mt-1">Posted by {trade.posterName}</p>
+              <p className="text-white/30 text-[10px] mt-1">{t("marketplace.trades.acceptModal.postedBy")} {trade.posterName}</p>
             </div>
 
             <div className="rounded-xl p-3 flex flex-col gap-2"
               style={{ background: "rgba(0,42,168,0.08)", border: "1px solid rgba(0,80,255,0.2)" }}>
               <div className="flex items-center gap-1.5 mb-0.5">
                 <ArrowRightLeft className="w-3.5 h-3.5 text-blue-400" />
-                <span className="text-blue-300/80 text-[11px] font-semibold">Exchange Details</span>
+                <span className="text-blue-300/80 text-[11px] font-semibold">{t("marketplace.trades.acceptModal.exchangeDetails")}</span>
               </div>
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between items-center">
-                  <span className="text-white/40 text-[10px]">They offer</span>
+                  <span className="text-white/40 text-[10px]">{t("marketplace.trades.acceptModal.theyOffer")}</span>
                   <span className="text-green-300 text-[11px] font-semibold">{trade.offering}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-white/40 text-[10px]">They want</span>
+                  <span className="text-white/40 text-[10px]">{t("marketplace.trades.acceptModal.theyWant")}</span>
                   <span className="text-red-300/80 text-[11px] font-semibold">{trade.requesting}</span>
                 </div>
               </div>
@@ -133,9 +136,9 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
             <button onClick={() => setPhase("confirm")}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              Accept This Trade
+              {t("marketplace.trades.acceptModal.acceptBtn")}
             </button>
-            <p className="text-white/20 text-[10px] text-center">Platform fee applies to both parties</p>
+            <p className="text-white/20 text-[10px] text-center">{t("marketplace.trades.acceptModal.feeNotice")}</p>
           </div>
         )}
 
@@ -144,35 +147,35 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
           <div className="p-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-              <span className="text-white font-bold text-sm">Confirm Trade</span>
+              <span className="text-white font-bold text-sm">{t("marketplace.trades.acceptModal.confirmTitle")}</span>
             </div>
             <div className="rounded-xl p-4 flex flex-col gap-2"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <div className="flex justify-between">
-                <span className="text-white/40 text-xs">Trade</span>
+                <span className="text-white/40 text-xs">{t("marketplace.trades.acceptModal.trade")}</span>
                 <span className="text-white/80 text-xs font-semibold truncate max-w-[160px]">{trade.title}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/40 text-xs">Posted by</span>
+                <span className="text-white/40 text-xs">{t("marketplace.trades.acceptModal.postedByLabel")}</span>
                 <span className="text-white/60 text-xs">{trade.posterName}</span>
               </div>
             </div>
             <div className="rounded-xl p-3"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-white/40 text-[10px] leading-relaxed">
-                By accepting, you agree to the exchange terms. The poster will be notified and must confirm before items are transferred.
+                {t("marketplace.trades.acceptModal.terms")}
               </p>
             </div>
             {err && <p className="text-red-400 text-xs">{err}</p>}
             <div className="flex gap-2">
               <button onClick={() => setPhase("review")} className="flex-1 py-2 rounded-xl text-sm text-white/50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                Back
+                {t("marketplace.trades.acceptModal.back")}
               </button>
               <button onClick={handleAccept} disabled={loading}
                 className="flex-1 py-2 rounded-xl text-sm font-bold text-white"
                 style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", opacity: loading ? 0.6 : 1 }}>
-                {loading ? "Sending…" : "Confirm"}
+                {loading ? t("marketplace.trades.acceptModal.sending") : t("marketplace.trades.acceptModal.confirm")}
               </button>
             </div>
           </div>
@@ -186,20 +189,20 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
               <CheckCircle2 className="w-8 h-8 text-blue-400" />
             </div>
             <div>
-              <p className="text-xl font-[Goldman] font-bold mb-1 text-blue-300">Proposal Sent!</p>
-              <p className="text-white/50 text-xs">{trade.posterName} has been notified</p>
+              <p className="text-xl font-[Goldman] font-bold mb-1 text-blue-300">{t("marketplace.trades.acceptModal.successTitle")}</p>
+              <p className="text-white/50 text-xs">{trade.posterName} {t("marketplace.trades.acceptModal.notified")}</p>
             </div>
             <div className="w-full rounded-xl p-4 text-left"
               style={{ background: "rgba(0,42,168,0.08)", border: "1px solid rgba(0,80,255,0.2)" }}>
               <p className="text-white/50 text-[11px] leading-relaxed">
-                The trade poster will review your proposal and arrange the exchange. Check your notifications for their response.
+                {t("marketplace.trades.acceptModal.successNote")}
               </p>
-              <p className="text-white/30 text-[10px] mt-1">⏱ Proposals expire in 30 days if not confirmed.</p>
+              <p className="text-white/30 text-[10px] mt-1">{t("marketplace.trades.acceptModal.expiry")}</p>
             </div>
             <button onClick={onClose}
               className="w-full py-2.5 rounded-xl text-sm font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.3)" }}>
-              Close
+              {t("marketplace.trades.acceptModal.close")}
             </button>
           </div>
         )}
@@ -210,6 +213,7 @@ function AcceptTradeModal({ trade, onClose, wallet, token, onSuccess }) {
 
 // ── Trade Card ────────────────────────────────────────────────────────────────
 function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
+  const { t } = useTranslation();
   const [showDetail, setShowDetail] = useState(false);
   const isPoster = trade.posterWallet === currentWallet;
   const statusColor = STATUS_COLOR[trade.status] || "text-white/40";
@@ -235,20 +239,20 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
         )}
         <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none"
           style={{ background: "rgba(0,0,0,0.35)" }}>
-          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">View Details</span>
+          <span className="text-white/70 text-[10px] font-semibold bg-black/60 px-2 py-1 rounded">{t("marketplace.trades.viewDetails")}</span>
         </div>
       </div>
       <div className="p-3 flex flex-col gap-2 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded"
             style={{ background: "rgba(0,80,255,0.18)", color: "rgba(100,160,255,0.9)" }}>
-            trade
+            {t("marketplace.trades.trade")}
           </span>
           <span className={`text-[10px] font-bold uppercase ml-auto ${statusColor}`}>{trade.status}</span>
           {isPoster && (
             <span className="text-[9px] px-1.5 py-0.5 rounded font-semibold"
               style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.35)" }}>
-              yours
+              {t("marketplace.trades.yours")}
             </span>
           )}
         </div>
@@ -260,16 +264,16 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
 
         <div className="text-xs space-y-0.5 mt-0.5">
           <div className="flex justify-between items-center gap-2">
-            <span className="text-white/30 text-[10px] shrink-0">Offering</span>
+            <span className="text-white/30 text-[10px] shrink-0">{t("marketplace.trades.offering")}</span>
             <span className="text-green-300/80 text-[11px] font-medium truncate text-right">{trade.offering || "—"}</span>
           </div>
           <div className="flex justify-between items-center gap-2">
-            <span className="text-white/30 text-[10px] shrink-0">Wanting</span>
-            <span className="text-blue-300/80 text-[11px] font-medium truncate text-right">{trade.requesting || "Make an offer"}</span>
+            <span className="text-white/30 text-[10px] shrink-0">{t("marketplace.trades.wanting")}</span>
+            <span className="text-blue-300/80 text-[11px] font-medium truncate text-right">{trade.requesting || t("marketplace.trades.makeOffer")}</span>
           </div>
         </div>
 
-        <p className="text-white/25 text-[10px]">by {trade.posterName}</p>
+        <p className="text-white/25 text-[10px]">{t("marketplace.trades.by")} {trade.posterName}</p>
 
         {trade.status === "open" && !isPoster && (
           <button
@@ -277,7 +281,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
             className="mt-auto w-full py-1.5 rounded-lg text-xs font-semibold transition-all hover:brightness-110"
             style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)", color: "#fff" }}
           >
-            Accept Trade
+            {t("marketplace.trades.acceptTrade")}
           </button>
         )}
         {trade.status === "open" && isPoster && (
@@ -286,7 +290,7 @@ function TradeCard({ trade, onAccept, onCancel, currentWallet }) {
             className="mt-auto w-full py-1.5 rounded-lg text-xs font-semibold transition-all hover:brightness-110"
             style={{ background: "rgba(239,68,68,0.10)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
           >
-            Cancel Trade
+            {t("marketplace.trades.cancelTrade")}
           </button>
         )}
       </div>
@@ -323,6 +327,7 @@ const TRADE_CATEGORIES = [
 
 // ── Create Trade Modal ────────────────────────────────────────────────────────
 function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
+  const { t } = useTranslation();
   // Owned items
   const [myItems, setMyItems]   = useState([]);
   const [itemsLoading, setItemsLoading] = useState(false);
@@ -353,7 +358,6 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
       .then((r) => r.json())
       .then((data) => {
         if (data?.success && data.nfts) {
-          // Flatten sub-collections that the wallet owns
           const items = [];
           data.nfts.forEach((col) => {
             (col.subCollections || []).forEach((sub) => {
@@ -393,10 +397,10 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
 
   async function submit(e) {
     e.preventDefault();
-    if (!wallet) return setErr("Connect your wallet first");
+    if (!wallet) return setErr(t("marketplace.common.connectWallet"));
     if (!offeringName.trim()) return setErr("Describe what you're offering");
     const authToken = token || localStorage.getItem("token");
-    if (!authToken) return setErr("Please log in first");
+    if (!authToken) return setErr(t("marketplace.common.loginFirst"));
     setLoading(true); setErr("");
     try {
       const requesting = openOffer
@@ -420,11 +424,9 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
       fd.append("offering", offeringName || "");
       fd.append("requesting", requesting);
       fd.append("category", offeringCategory || reqCategory || "general");
-      // Image: use selected item image URL if available, otherwise upload file
       if (!selectedItem && imageFile) {
         fd.append("image", imageFile);
       } else if (selectedItem?.image) {
-        // Pass existing URL as text — no upload needed
         fd.append("imageUrl", selectedItem.image);
       }
 
@@ -451,7 +453,7 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
           style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           <div className="flex items-center gap-2">
             <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-            <span className="text-white font-bold text-sm">Post a Trade</span>
+            <span className="text-white font-bold text-sm">{t("marketplace.trades.createModal.title")}</span>
           </div>
           <button onClick={onClose} className="text-white/30 hover:text-white"><X className="w-4 h-4" /></button>
         </div>
@@ -462,27 +464,27 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
           {/* ── Left: item picker ── */}
           <div className="flex flex-col gap-2 p-4 w-[45%] shrink-0 overflow-y-auto trade-modal-scroll">
             <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 shrink-0">
-              Your Item
+              {t("marketplace.trades.createModal.yourItem")}
             </p>
 
             {/* Item name — always visible */}
             <input
-              placeholder="Item name *"
+              placeholder={t("marketplace.trades.createModal.itemNamePlaceholder")}
               value={manualOffering}
               onChange={(e) => { setManualOffering(e.target.value); if (selectedItem) setSelectedItem(null); }}
               className={iCls} style={iSt}
             />
 
-            {/* Items grid — shown when wallet connected and has items */}
+            {/* Items grid */}
             {wallet && itemsLoading && (
-              <p className="text-white/25 text-[11px] italic">Loading your items…</p>
+              <p className="text-white/25 text-[11px] italic">{t("marketplace.trades.createModal.loadingItems")}</p>
             )}
             {!wallet && (
-              <p className="text-white/25 text-[9px] italic">Connect wallet to select from your items</p>
+              <p className="text-white/25 text-[9px] italic">{t("marketplace.trades.createModal.connectWallet")}</p>
             )}
             {wallet && !itemsLoading && myItems.length > 0 && (
               <>
-                <p className="text-white/25 text-[9px]">Or pick from your items (auto-fills name):</p>
+                <p className="text-white/25 text-[9px]">{t("marketplace.trades.createModal.pickFromItems")}</p>
                 <div className="grid grid-cols-3 gap-1.5">
                   {myItems.map((item) => {
                     const active = selectedItem?._id === item._id;
@@ -546,7 +548,9 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
                 <label className="flex items-center gap-2 px-2 py-2 rounded-lg cursor-pointer hover:brightness-110"
                   style={{ background: "rgba(255,255,255,0.04)", border: "1px dashed rgba(255,255,255,0.12)" }}>
                   <Package className="w-3 h-3 text-white/25 shrink-0" />
-                  <span className="text-white/30 text-[9px] truncate">{imageFile ? imageFile.name : "Image (optional)"}</span>
+                  <span className="text-white/30 text-[9px] truncate">
+                    {imageFile ? imageFile.name : t("marketplace.trades.createModal.imageOptional")}
+                  </span>
                   <input type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
                 </label>
                 {imagePreview && (
@@ -568,7 +572,9 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
           <div className="flex flex-col gap-3 p-4 flex-1 min-w-0 overflow-y-auto trade-modal-scroll">
             {/* What you want */}
             <div className="flex flex-col gap-2">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">What You Want</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                {t("marketplace.trades.createModal.whatYouWant")}
+              </p>
 
               <label className="flex items-center gap-2 cursor-pointer select-none">
                 <div className="relative w-8 h-4 shrink-0">
@@ -579,17 +585,19 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
                   <div className="absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white transition-transform"
                     style={{ transform: openOffer ? "translateX(16px)" : "translateX(0)" }} />
                 </div>
-                <span className="text-white/60 text-[11px]">Open offer — let others propose</span>
+                <span className="text-white/60 text-[11px]">{t("marketplace.trades.createModal.openOffer")}</span>
               </label>
 
               {!openOffer && (
                 <div className="flex flex-col gap-1.5">
                   <select value={reqCategory} onChange={(e) => setReqCategory(e.target.value)}
                     className={iCls} style={{ ...iSt, background: "#10112a" }}>
-                    <option value="">Any category</option>
+                    <option value="">{t("marketplace.trades.createModal.anyCategory")}</option>
                     {TRADE_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
-                  <input required={!openOffer} placeholder="Item name *" value={reqItem}
+                  <input required={!openOffer}
+                    placeholder={t("marketplace.trades.createModal.itemNamePlaceholder")}
+                    value={reqItem}
                     onChange={(e) => setReqItem(e.target.value)} className={iCls} style={iSt} />
                 </div>
               )}
@@ -597,21 +605,25 @@ function CreateTradeModal({ onClose, onSuccess, wallet, token, posterName }) {
 
             {/* Notes */}
             <div className="flex flex-col gap-1">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">Notes (optional)</p>
-              <textarea placeholder="Trade terms, condition, etc." value={description}
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                {t("marketplace.trades.createModal.notesLabel")}
+              </p>
+              <textarea
+                placeholder={t("marketplace.trades.createModal.notesPlaceholder")}
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2} className={iCls} style={iSt} />
             </div>
 
             <div className="mt-auto flex flex-col gap-2">
               <p className="text-[9px] text-white/25 leading-relaxed">
-                Both parties pay a platform fee · Expires in 30 days · NFAs cannot be traded
+                {t("marketplace.trades.createModal.disclaimer")}
               </p>
               {err && <p className="text-red-400 text-[11px]">{err}</p>}
               <button type="submit" disabled={loading}
                 className="w-full py-2 rounded-xl text-sm font-semibold text-white transition-all"
                 style={{ background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", opacity: loading ? 0.5 : 1 }}>
-                {loading ? "Posting…" : "Post Trade"}
+                {loading ? t("marketplace.trades.createModal.posting") : t("marketplace.trades.createModal.submit")}
               </button>
             </div>
           </div>
@@ -642,6 +654,7 @@ const STATUS_FILTERS = ["open", "accepted", "completed"];
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function TradesTab() {
+  const { t } = useTranslation();
   const { user, isLoggedInUser, token } = useSelector((s) => s.auth);
   const { address: wagmiAddress } = useAccount();
   const wallet = wagmiAddress || user?.WalletAddress || user?.MetaMaskAddress || "";
@@ -714,8 +727,8 @@ export default function TradesTab() {
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <ArrowRightLeft className="w-5 h-5 text-white/60" />
-          <h2 className="text-white font-bold text-lg">Trades</h2>
-          <span className="text-white/30 text-sm">{total} listings</span>
+          <h2 className="text-white font-bold text-lg">{t("marketplace.trades.heading")}</h2>
+          <span className="text-white/30 text-sm">{total} {t("marketplace.trades.listings")}</span>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           {/* Status filters */}
@@ -734,7 +747,7 @@ export default function TradesTab() {
             <button onClick={() => setShowCreate(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: "rgba(0,42,168,0.7)", border: "1px solid rgba(0,80,255,0.4)" }}>
-              <Plus className="w-3.5 h-3.5" /> Post Trade
+              <Plus className="w-3.5 h-3.5" /> {t("marketplace.trades.postTrade")}
             </button>
           )}
         </div>
@@ -743,9 +756,9 @@ export default function TradesTab() {
       {/* ── Info strip ── */}
       <div className="mb-6 px-4 py-3 rounded-xl text-xs text-white/40 flex flex-wrap gap-x-6 gap-y-1"
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-        <span><Clock className="w-3 h-3 inline mr-1" />Listings expire in 30 days</span>
-        <span><CheckCircle2 className="w-3 h-3 inline mr-1" />Platform fee applies to both parties</span>
-        <span><Info className="w-3 h-3 inline mr-1" />NFAs cannot be traded — sell only</span>
+        <span><Clock className="w-3 h-3 inline mr-1" />{t("marketplace.trades.rules.expiry")}</span>
+        <span><CheckCircle2 className="w-3 h-3 inline mr-1" />{t("marketplace.trades.rules.fee")}</span>
+        <span><Info className="w-3 h-3 inline mr-1" />{t("marketplace.trades.rules.noNFA")}</span>
       </div>
 
       {/* ── Cards ── */}
@@ -759,16 +772,16 @@ export default function TradesTab() {
       ) : trades.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-white/25">
           <ArrowRightLeft className="w-10 h-10 mb-3 opacity-30" />
-          <p className="text-sm">No {statusFilter} trades</p>
+          <p className="text-sm">{t("marketplace.trades.noTrades", { filter: statusFilter })}</p>
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {trades.map((t) => (
+          {trades.map((tr) => (
             <TradeCard
-              key={t._id}
-              trade={t}
+              key={tr._id}
+              trade={tr}
               currentWallet={wallet}
-              onAccept={(t) => setAcceptTrade(t)}
+              onAccept={(tr) => setAcceptTrade(tr)}
               onCancel={handleCancel}
             />
           ))}
@@ -780,11 +793,17 @@ export default function TradesTab() {
         <div className="flex items-center justify-center gap-3 mt-8">
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
-            style={{ background: "rgba(255,255,255,0.07)" }}>Prev</button>
-          <span className="text-white/30 text-xs">Page {page} of {pages}</span>
+            style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.trades.pagination.prev")}
+          </button>
+          <span className="text-white/30 text-xs">
+            {t("marketplace.trades.pagination.page", { page, pages })}
+          </span>
           <button disabled={page >= pages} onClick={() => setPage((p) => p + 1)}
             className="px-3 py-1 rounded text-xs text-white/60 disabled:opacity-30"
-            style={{ background: "rgba(255,255,255,0.07)" }}>Next</button>
+            style={{ background: "rgba(255,255,255,0.07)" }}>
+            {t("marketplace.trades.pagination.next")}
+          </button>
         </div>
       )}
 

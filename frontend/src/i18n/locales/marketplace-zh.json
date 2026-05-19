@@ -1,0 +1,475 @@
+{
+  "marketplace": {
+    "sectionLabel": "市场",
+    "searchPlaceholder": "搜索...",
+
+    "tabs": {
+      "overview":  "概览",
+      "nfa101":    "NFA / NFC / NFT",
+      "general":   "市场",
+      "auctions":  "拍卖",
+      "trades":    "交易",
+      "quests":    "任务",
+      "hire":      "雇佣",
+      "bounty":    "赏金"
+    },
+
+    "banner": {
+      "defaultHeading": "Hyper Tek 新纪元开启",
+      "defaultDesc": "这是一个充满活力的宇宙，每一个决定都将塑造旅程。",
+      "stats": {
+        "totalItems":  "总物品",
+        "totalBuys":   "总购买",
+        "listed":      "已上架",
+        "collections": "收藏集"
+      },
+      "soundOn":  "开启声音",
+      "soundOff": "关闭声音"
+    },
+
+    "bottomBar": {
+      "learnLabel":     "了解 NFA / NFC",
+      "educationPanel": "HyperTek 教育面板",
+      "footerNote":     "此面板仅供快速参考。请访问 NFA / NFC 101 标签页获取完整教育内容。",
+      "facts": [
+        { "label": "NFA",      "desc": "Hypertek 专属资产。最高游戏内奖励。具有随每次销售增长的保底回购价值。" },
+        { "label": "NFC",      "desc": "由 Hypertek 或授权玩家创建。包含游戏内奖励。保证最低回购价值。" },
+        { "label": "NFT",      "desc": "玩家创建的收藏品。无游戏内奖励。无回购保证。可在市场上交易。" },
+        { "label": "佣金",     "desc": "所有销售收取 20% 平台费。卖家获得 80%。二次销售艺术家版税 4%。" },
+        { "label": "回购增长", "desc": "每次转售价格的 +5% 会添加到资产的最低回购价值中。只增不减。" },
+        { "label": "托管钱包", "desc": "HyperTek 在您注册时自动为您创建加密钱包。" }
+      ]
+    },
+
+    "overview": {
+      "heading":  "概览",
+      "subtitle": "欢迎来到 HyperTek 市场。选择功能以了解更多 — 然后直接开始。",
+      "features": [
+        {
+          "label":   "NFA / NFC / NFT",
+          "tagline": "Web3 资产新手？从这里开始",
+          "details": [
+            "NFA（非同质资产）是 Hypertek 发行的具有平台保底回购价格的物品。",
+            "NFC（非同质角色）是具有游戏内奖励和回购保证的授权玩家物品。",
+            "NFT（非同质代币）是用户创建的收藏品 — 皮肤、武器等。"
+          ],
+          "cta": "了解基础知识"
+        },
+        {
+          "label":   "市场",
+          "tagline": "即时买卖游戏内资产",
+          "details": [
+            "浏览 NFA、NFC 和 NFT 的广泛目录 — 皮肤、武器、专家、飞船等。",
+            "按类别、稀有度或价格范围筛选，找到您需要的一切。",
+            "上架在链上完成，所有权转让即时且可验证。"
+          ],
+          "cta": "浏览市场"
+        },
+        {
+          "label":   "拍卖",
+          "tagline": "竞拍限量独家物品",
+          "details": [
+            "竞拍只能通过限时拍卖获得的稀有资产。",
+            "实时倒计时显示剩余时间 — 每一秒都至关重要。",
+            "击败他人以获取无法通过其他方式购买的传奇物品。"
+          ],
+          "cta": "查看拍卖"
+        },
+        {
+          "label":   "交易",
+          "tagline": "点对点资产交换，无中间商",
+          "details": [
+            "与其他玩家提出或接受直接资产交易 — 完全在链上进行。",
+            "自行设定条款：选择您提供的和您想要的。",
+            "浏览开放的交易请求或发布您自己的以找到完美交易。"
+          ],
+          "cta": "浏览交易"
+        },
+        {
+          "label":   "任务",
+          "tagline": "完成任务，获取独家奖励",
+          "details": [
+            "接受任务以获取独家奖励和稀有游戏内资产。",
+            "每个任务都有独特目标 — 探索、战斗或建造通往胜利之路。",
+            "通过技巧而非消费来战略性地建立您的收藏。"
+          ],
+          "cta": "探索任务"
+        },
+        {
+          "label":   "雇佣",
+          "tagline": "借用资产或从您的资产中获利",
+          "details": [
+            "为单次任务租用强大的专家或装备，无需全额购买。",
+            "将您闲置的资产出租，在您不在时赚取被动收入。",
+            "灵活时长 — 按小时、按天或按任务协议。"
+          ],
+          "cta": "浏览雇佣"
+        },
+        {
+          "label":   "赏金",
+          "tagline": "追捕目标，领取奖励，登上排行榜",
+          "details": [
+            "接受其他玩家或系统发布的赏金以赚取加密奖励。",
+            "攀登赏金排行榜以解锁独家称号和奖励加成。",
+            "发布您自己的赏金以为您的目标招募技术玩家。"
+          ],
+          "cta": "查看赏金"
+        }
+      ]
+    },
+
+    "general": {
+      "heading":  "综合",
+      "subtitle": "浏览可立即购买的 NFA、NFC 和 NFT — 皮肤、武器、专家、飞船等。",
+      "filterAll": "全部",
+      "samplePreviewTitle": "市场示例预览",
+      "samplePreviewDesc": "以下物品是展示 HyperTek 市场将提供的数字资产类型的示例预览。具有独特艺术作品和区块链验证所有权的实际物品将在上线时提供。",
+      "noItems": "暂无可用物品，请稍后再查看。",
+      "categories": {
+        "skins":           "皮肤",
+        "militaryBadges":  "军事徽章",
+        "specialists":     "专家",
+        "weapons":         "武器",
+        "bodyArmour":      "护甲",
+        "spaceships":      "飞船",
+        "racingVehicles":  "车辆",
+        "artwork":         "艺术品",
+        "landAndBases":    "土地与基地",
+        "general":         "综合"
+      }
+    },
+
+    "nfa101": {
+      "sectionLabel": "教育",
+      "heading":      "NFA / NFC / NFT 101",
+      "subtitle":     "NFT 和 Web3 新手？浏览我们的文章，了解区块链资产、钱包、安全性和 HyperTek 生态系统。",
+      "minRead":      "分钟阅读",
+      "filterAll":    "全部"
+    },
+
+    "auctions": {
+      "heading":        "拍卖",
+      "listings":       "个上架",
+      "newAuction":     "新建拍卖",
+      "noAuctions":     "没有{{filter}}拍卖",
+      "createFirst":    "创建第一个拍卖",
+      "endingSoon":     "即将结束",
+      "viewDetails":    "查看详情",
+      "rules": {
+        "durations":    "时长：1天 · 3天 · 7天",
+        "minIncrement": "最低加价：5%",
+        "freeToList":   "免费上架",
+        "commission":   "佣金：成交收取 20%"
+      },
+      "preview": {
+        "title":   "游戏内功能预览",
+        "desc":    "拍卖系统将在游戏上线时完全启用。此处显示的物品是为投资者/用户展示的示例。"
+      },
+      "card": {
+        "currentBid": "当前出价",
+        "endsIn":     "剩余时间",
+        "placeBid":   "出价",
+        "buyNow":     "立即购买",
+        "bids":       "次出价",
+        "ended":      "已结束"
+      },
+      "detail": {
+        "currentBid":  "当前出价",
+        "start":       "起拍",
+        "endsIn":      "剩余时间",
+        "description": "描述",
+        "recentBids":  "最近出价",
+        "anonymous":   "匿名",
+        "placeBid":    "出价",
+        "buyNow":      "立即购买",
+        "buyNowLabel": "立即购买",
+        "bids":        "次出价"
+      },
+      "bidModal": {
+        "title":          "出价",
+        "currentBid":     "当前出价",
+        "minimumBid":     "最低出价",
+        "yourBid":        "您的出价 (USDC)",
+        "minIncrement":   "最低加价 5% · 您出价后的下一个最低价：{{next}} USDC",
+        "reviewBid":      "确认出价",
+        "disclaimer":     "中标出价具有约束力 · 20% 平台佣金",
+        "confirmTitle":   "确认出价",
+        "item":           "物品",
+        "yourBidLabel":   "您的出价",
+        "youPay":         "若您获胜，您支付",
+        "outbidNotice":   "如果有人超过您的出价，您将立即收到通知。计时器到期时拍卖自动关闭。",
+        "back":           "返回",
+        "confirm":        "确认 — {{amount}} USDC",
+        "placing":        "出价中…",
+        "successTitle":   "出价成功！",
+        "highestBidder":  "您是最高出价者",
+        "outbidWarning":  "如果您被超价，您将收到通知。",
+        "done":           "完成",
+        "endsIn":         "剩余时间"
+      },
+      "instantBuyModal": {
+        "title":         "立即购买 — 即时",
+        "buyNowPrice":   "立即购买价格",
+        "currentBids":   "当前出价数",
+        "notice":        "立即购买将立即结束拍卖。物品转入您的钱包，所有其他竞拍者获得退款。",
+        "cancel":        "取消",
+        "processing":    "处理中…",
+        "successTitle":  "物品已获取！",
+        "auctionClosed": "拍卖已关闭 · 转让已启动",
+        "item":          "物品",
+        "paid":          "已支付",
+        "status":        "状态",
+        "transferred":   "已转入钱包",
+        "walletNote":    "物品将出现在您的我的收藏标签页中。",
+        "viewCollect":   "查看我的收藏"
+      },
+      "createModal": {
+        "title":          "创建拍卖",
+        "selectItem":     "选择物品",
+        "connectWallet":  "连接钱包以浏览您的物品",
+        "loadingItems":   "加载中…",
+        "noItems":        "未找到拥有的物品",
+        "pricingDuration":"定价和时长",
+        "startPrice":     "起拍价 (USDC) *",
+        "reservePrice":   "保留价 (USDC)",
+        "instantBuyPrice":"立即购买价格 (USDC)",
+        "optional":       "可选",
+        "leaveBlank":     "留空以禁用",
+        "duration":       "时长",
+        "dur1Day":        "1 天",
+        "dur3Days":       "3 天",
+        "dur7Days":       "7 天",
+        "freeToList":     "免费上架 · 成交收取 20% 佣金",
+        "creating":       "创建中…",
+        "submit":         "创建拍卖"
+      },
+      "pagination": {
+        "prev":  "上一页",
+        "next":  "下一页",
+        "page":  "第 {{page}} 页，共 {{pages}} 页"
+      }
+    },
+
+    "trades": {
+      "heading":    "交易",
+      "listings":   "个上架",
+      "postTrade":  "发布交易",
+      "noTrades":   "没有{{filter}}交易",
+      "viewDetails":"查看详情",
+      "trade":      "交易",
+      "yours":      "您的",
+      "offering":   "提供",
+      "wanting":    "想要",
+      "makeOffer":  "提交报价",
+      "by":         "来自",
+      "acceptTrade":"接受交易",
+      "cancelTrade":"取消交易",
+      "rules": {
+        "expiry":    "上架 30 天后到期",
+        "fee":       "双方均需支付平台费",
+        "noNFA":     "NFA 不可交易 — 仅限出售"
+      },
+      "acceptModal": {
+        "title":          "交易提案",
+        "postedBy":       "发布者",
+        "exchangeDetails":"交易详情",
+        "theyOffer":      "他们提供",
+        "theyWant":       "他们想要",
+        "feeNotice":      "双方均需支付平台费",
+        "acceptBtn":      "接受此交易",
+        "confirmTitle":   "确认交易",
+        "trade":          "交易",
+        "postedByLabel":  "发布者",
+        "terms":          "通过接受，您同意交换条款。发布者将收到通知，并必须在物品转让前确认。",
+        "back":           "返回",
+        "sending":        "发送中…",
+        "confirm":        "确认",
+        "successTitle":   "提案已发送！",
+        "notified":       "已收到通知",
+        "successNote":    "交易发布者将审查您的提案并安排交换。检查您的通知以获取回复。",
+        "expiry":         "⏱ 提案如未确认将在 30 天后到期。",
+        "close":          "关闭"
+      },
+      "createModal": {
+        "title":               "发布交易",
+        "yourItem":            "您的物品",
+        "itemNamePlaceholder": "物品名称 *",
+        "loadingItems":        "加载您的物品中…",
+        "connectWallet":       "连接钱包以从您的物品中选择",
+        "pickFromItems":       "或从您的物品中选择（自动填写名称）：",
+        "imageOptional":       "图片（可选）",
+        "whatYouWant":         "您想要的",
+        "openOffer":           "开放报价 — 让他人提议",
+        "anyCategory":         "任意类别",
+        "notesLabel":          "备注（可选）",
+        "notesPlaceholder":    "交易条款、状况等。",
+        "disclaimer":          "双方支付平台费 · 30 天后到期 · NFA 不可交易",
+        "posting":             "发布中…",
+        "submit":              "发布交易"
+      },
+      "pagination": {
+        "prev":  "上一页",
+        "next":  "下一页",
+        "page":  "第 {{page}} 页，共 {{pages}} 页"
+      }
+    },
+
+    "quests": {
+      "heading":       "任务板",
+      "quests":        "个任务",
+      "noQuests":      "没有{{filter}}任务",
+      "inGameFeature": "游戏内功能",
+      "inGameDesc":    "当卖家选择降低佣金时，任务会自动生成。玩家每天最多可完成 5 个任务。佣金池在买家折扣、玩家奖励和平台之间分配。",
+      "earnFromQuests":"想从任务中获利？进入游戏 →",
+      "moneyQuests":   "金钱任务（11% 奖池）",
+      "resourceQuests":"资源任务（20% 奖池）",
+      "footerNote1":   "# 具有组合载荷的任务将使用单独的表格金额支付。",
+      "footerNote2":   "# 游戏上线时，星球数据将同步。",
+      "inGame":        "游戏内",
+      "open":          "开放",
+      "table": {
+        "questingNo":    "任务编号",
+        "pickupPlanet":  "接取星球",
+        "dropOffPlanet": "交付星球",
+        "itemGoods":     "物品/货物",
+        "commSplit":     "佣金分配",
+        "questingTime":  "任务时间",
+        "assignedTo":    "分配给"
+      },
+      "comingSoon": {
+        "title":   "即将推出",
+        "desc":    "游戏内任务功能目前正在开发中。请持续关注 — 您将能够直接从游戏中获取奖励。",
+        "gotIt":   "知道了"
+      },
+      "pagination": {
+        "prev":  "上一页",
+        "next":  "下一页",
+        "page":  "第 {{page}} 页，共 {{pages}} 页"
+      }
+    },
+
+    "hire": {
+      "heading":          "雇佣",
+      "listings":         "个上架",
+      "listBtn":          "上架",
+      "forHireLabel":     "待雇佣",
+      "wantingToHire":    "寻求雇佣",
+      "noListings":       "没有{{filter}}上架",
+      "lockedTitle":      "HyperTek 游戏内容仅供展示。",
+      "lockedDesc":       "此部分在游戏最终确定之前处于锁定状态。",
+      "forHireBadge":     "待雇佣",
+      "wantedBadge":      "寻求雇佣",
+      "price":            "价格",
+      "maxDuration":      "最长时长",
+      "hireBtn":          "雇佣",
+      "fulfillBtn":       "履行请求",
+      "rules": {
+        "durations":   "8小时 · 1天 · 3天 · 1周 · 1月",
+        "cooldown":    "冷却时间：2倍租用时长",
+        "commission":  "佣金：20%",
+        "payment":     "以 Hyper Bucks 或材料支付"
+      },
+      "preview": {
+        "title": "游戏内功能预览",
+        "desc":  "雇佣系统将在游戏上线时完全启用。此处显示的物品是为投资者/用户展示的示例。"
+      },
+      "hireModal": {
+        "hireTitle":     "雇佣专家",
+        "fulfillTitle":  "履行雇佣请求",
+        "forHireBadge":  "待雇佣",
+        "wantedBadge":   "招募中",
+        "price":         "价格",
+        "duration":      "时长",
+        "howHire":       "雇佣流程",
+        "howFulfill":    "履行请求的流程",
+        "proceedHire":   "继续雇佣",
+        "offerFulfill":  "提供履行",
+        "commission":    "20% 平台佣金 · 归还后冷却时间生效",
+        "confirmHire":   "确认雇佣",
+        "confirmOffer":  "确认报价",
+        "specialist":    "专家",
+        "payment":       "支付",
+        "yourOffer":     "您的报价",
+        "durationLabel": "时长",
+        "commLabel":     "佣金",
+        "back":          "返回",
+        "processing":    "处理中…",
+        "sendOffer":     "发送报价",
+        "deployedTitle": "已部署！",
+        "offerSentTitle":"报价已发送！",
+        "availableFor":  "可用于",
+        "paid":          "已支付",
+        "returnNote":    "请在期限结束前归还以避免自动处罚。归还后适用 {{hours}}h 冷却时间。",
+        "close":         "关闭"
+      },
+      "createModal": {
+        "listTitle":          "上架待雇佣",
+        "postTitle":          "发布寻求雇佣",
+        "forHireBtn":         "待雇佣",
+        "wantingBtn":         "寻求雇佣",
+        "itemNameHire":       "专家/物品名称 *",
+        "itemNameWant":       "您想雇佣的内容 *",
+        "descPlaceholder":    "描述",
+        "categoryPlaceholder":"类别（可选）",
+        "paymentType":        "支付类型",
+        "hyperBucks":         "Hyper Bucks",
+        "materials":          "材料",
+        "amountLabel":        "金额 (Hyper Bucks)",
+        "afterCommission":    "扣除 20% 佣金后您获得 {{amount}} HB",
+        "maxDuration":        "最长时长",
+        "disclaimer":         "20% 佣金 · 冷却时间 = 归还后 2 倍租用时长",
+        "listing":            "上架中…",
+        "submit":             "创建上架"
+      },
+      "pagination": {
+        "prev":  "上一页",
+        "next":  "下一页",
+        "page":  "第 {{page}} 页，共 {{pages}} 页"
+      }
+    },
+
+    "bounty": {
+      "heading":        "赏金板",
+      "contracts":      "个合约",
+      "contractsPlural":"个合约",
+      "noContracts":    "没有{{filter}}合约",
+      "noContractsNote":"赏金由游戏玩家和游戏系统发布",
+      "expiresIn":      "{{days}}天后到期",
+      "inGameNotice": {
+        "title": "游戏内功能 — 仅查看",
+        "desc":  "赏金由游戏玩家和游戏系统创建。接受和完成赏金仅在游戏内进行。此板块显示用于透明度和鼓励新玩家加入。"
+      },
+      "rules": {
+        "battle":     "战斗在游戏内自动解决",
+        "commission": "奖励收取 20% 平台佣金",
+        "expiry":     "合约 30 天后到期"
+      },
+      "table": {
+        "bountyNo":   "赏金编号",
+        "target":     "目标（打击对象）",
+        "reward":     "奖励",
+        "postedBy":   "发布者",
+        "claimedBy":  "领取者",
+        "status":     "状态",
+        "netHB":      "{{amount}} HB 净额"
+      },
+      "pagination": {
+        "prev":  "上一页",
+        "next":  "下一页",
+        "page":  "第 {{page}} 页，共 {{pages}} 页"
+      }
+    },
+
+    "common": {
+      "prev":          "上一页",
+      "next":          "下一页",
+      "pageOf":        "第 {{page}} 页，共 {{pages}} 页",
+      "back":          "返回",
+      "close":         "关闭",
+      "cancel":        "取消",
+      "loading":       "加载中…",
+      "connectWallet": "请先连接您的钱包",
+      "loginFirst":    "请先登录"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
@@ -22,6 +23,7 @@ const HEADER_H = 72;
 function CategoryMarketplace() {
   const { category } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { openConnectModal } = useConnectModal();
 
   const [showWalletModal, setShowWalletModal] = useState(false);
@@ -231,7 +233,7 @@ function CategoryMarketplace() {
   // Derive title from canonical URL param — never from DB parentName (could be old alias)
   const toTitleCase = (str) => str.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   const categoryTitle = !category
-    ? "All Collections"
+    ? t("collections.allCollections")
     : toTitleCase((CAT_ALIAS_REDIRECT[category.toLowerCase().trim()] || category).toLowerCase());
 
   return (
@@ -242,11 +244,11 @@ function CategoryMarketplace() {
         <MarketplaceBanner
           noMargin
           titleOverride={categoryTitle}
-          descOverride={`Explore all ${categoryTitle} items in the marketplace. Discover unique collections and start your journey.`}
+          descOverride={t("collections.exploreDesc", { category: categoryTitle })}
           stats={[
-            { num: listedItems.length, label: "For Sale" },
-            { num: listedItems.length, label: "Listed" },
-            { num: items.filter((i) => !i.listed).length, label: "Unlisted" },
+            { num: listedItems.length, label: t("collections.forSale") },
+            { num: listedItems.length, label: t("collections.listed") },
+            { num: items.filter((i) => !i.listed).length, label: t("collections.unlisted") },
           ]}
         />
       </div>
@@ -263,10 +265,10 @@ function CategoryMarketplace() {
               border: "1px solid rgba(255,255,255,0.12)",
               color: "rgba(255,255,255,0.7)",
             }}
-            title="Back to Marketplace"
+            title={t("collections.backToMarketplace")}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Marketplace</span>
+            <span className="hidden sm:inline">{t("collections.backToMarketplace")}</span>
           </Link>
 
           <NavLinks
@@ -312,7 +314,7 @@ function CategoryMarketplace() {
                     : "text-white/70 hover:text-white hover:bg-white/10 border border-white/10"
                 }`}
               >
-                All
+                {t("collections.all")}
               </button>
               {allCategories.map((cat) => {
                 const isActive = cat === category?.toLowerCase().trim();
@@ -344,10 +346,9 @@ function CategoryMarketplace() {
             >
               <span className="text-2xl flex-shrink-0">🎮</span>
               <div>
-                <p className="text-amber-300/90 text-sm font-semibold mb-1">Sample Marketplace Preview</p>
+                <p className="text-amber-300/90 text-sm font-semibold mb-1">{t("collections.samplePreviewTitle")}</p>
                 <p className="text-white/50 text-xs leading-relaxed">
-                  The items below are sample previews showcasing the types of digital assets that will be available.
-                  Actual items with unique artwork and blockchain-verified ownership will be available at launch.
+                  {t("collections.samplePreviewDesc")}
                 </p>
               </div>
             </div>
@@ -418,7 +419,7 @@ function CategoryMarketplace() {
                         onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa", { state: { item, parentId: item.parentId } }); }}
                         className="mt-3 w-full px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20"
                       >
-                        {isDummy ? "Preview" : "Buy Now"}
+                        {isDummy ? t("collections.preview") : t("collections.buyNow")}
                       </button>
                     </div>
                   </div>
@@ -427,7 +428,7 @@ function CategoryMarketplace() {
             ) : (
               <div className="col-span-full text-center text-white/50 py-12">
                 <div className="text-4xl mb-2">🛒</div>
-                <p className="text-sm">No items found in this category</p>
+                <p className="text-sm">{t("collections.noItemsFound")}</p>
               </div>
             )}
           </div>
@@ -448,7 +449,7 @@ function CategoryMarketplace() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white">Connect Wallet</h2>
+              <h2 className="text-xl font-bold text-white">{t("collections.connectWallet")}</h2>
               <button
                 onClick={() => setShowWalletModal(false)}
                 className="text-gray-400 hover:text-white transition-colors"
@@ -470,9 +471,9 @@ function CategoryMarketplace() {
                     🌐
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-white">Browser Wallet</div>
+                    <div className="font-semibold text-white">{t("collections.browserWallet")}</div>
                     <div className="text-xs text-gray-400 group-hover:text-gray-300">
-                      MetaMask, Rainbow, etc.
+                      {t("collections.browserWalletDesc")}
                     </div>
                   </div>
                 </div>

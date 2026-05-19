@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { GiCrystalBall, GiGavel, GiCrossedSwords, GiShakingHands, GiTargetArrows, GiTrade } from "react-icons/gi";
 import { MdStorefront } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -13,7 +14,6 @@ const fadeUp = {
   }),
 };
 
-// Avatar mapped per feature tab — each tab shows a different character
 const AVATARS = {
   nfa101:  "/avatar/dryads-male.png",
   general: "/avatar/fawnus-female.png",
@@ -24,97 +24,17 @@ const AVATARS = {
   bounty:  "/avatar/ophidians-female.png",
 };
 
-const FEATURES = [
-  {
-    key: "nfa101",
-    label: "NFAs / NFCs / NFTs",
-    Icon: GiCrystalBall,
-    tagline: "New to Web3 assets? Start here",
-    details: [
-      "NFAs (Non-Fungible Assets) are Hypertek-issued items with a platform-guaranteed buyback price.",
-      "NFCs (Non-Fungible Characters) are licensed player items with in-game bonuses and buyback.",
-      "NFTs (Non-Fungible Tokens) are user-created collectibles — skins, weapons, and more.",
-    ],
-    cta: "Learn the Basics",
-  },
-  {
-    key: "general",
-    label: "The Marketplace",
-    Icon: MdStorefront,
-    tagline: "Buy & sell in-game assets instantly",
-    details: [
-      "Browse a wide catalog of NFAs, NFCs, and NFTs — skins, weapons, specialists, spaceships, and more.",
-      "Filter by category, rarity, or price range to find exactly what you need.",
-      "Listings are fulfilled on-chain, so ownership transfers are instant and verifiable.",
-    ],
-    cta: "Browse The Marketplace",
-  },
-  {
-    key: "auctions",
-    label: "Auctions",
-    Icon: GiGavel,
-    tagline: "Compete for exclusive limited-edition items",
-    details: [
-      "Bid on rare assets that are only available through time-limited auctions.",
-      "A live countdown shows exactly how much time is left — every second counts.",
-      "Outbid others to secure legendary items that can't be bought any other way.",
-    ],
-    cta: "View Auctions",
-  },
-  {
-    key: "trades",
-    label: "Trades",
-    Icon: GiTrade,
-    tagline: "Swap assets peer-to-peer, no middleman",
-    details: [
-      "Propose or accept direct asset trades with other players — fully on-chain.",
-      "Set the terms yourself: choose what you offer and what you want in return.",
-      "Browse open trade offers or post your own to find the perfect deal.",
-    ],
-    cta: "Browse Trades",
-  },
-  {
-    key: "quests",
-    label: "Quests",
-    Icon: GiCrossedSwords,
-    tagline: "Complete missions, earn exclusive rewards",
-    details: [
-      "Take on quests to earn exclusive rewards and rare in-game assets.",
-      "Each quest has unique objectives — explore, battle, or build your way to victory.",
-      "Build your collection strategically through skill, not just spending.",
-    ],
-    cta: "Explore Quests",
-  },
-  {
-    key: "hire",
-    label: "For Hire",
-    Icon: GiShakingHands,
-    tagline: "Borrow assets or earn from yours",
-    details: [
-      "Rent powerful specialists or gear for a single mission without buying outright.",
-      "List your own idle assets for rent and earn passive income while you're away.",
-      "Flexible durations — hourly, daily, or per-mission agreements.",
-    ],
-    cta: "Browse For Hire",
-  },
-  {
-    key: "bounty",
-    label: "Bounty",
-    Icon: GiTargetArrows,
-    tagline: "Hunt targets, claim rewards, top the leaderboard",
-    details: [
-      "Accept bounties posted by other players or the system to earn crypto rewards.",
-      "Climb the bounty leaderboard to unlock exclusive titles and bonus payouts.",
-      "Post your own bounties to recruit skilled players for your objectives.",
-    ],
-    cta: "View Bounties",
-  },
-];
+const FEATURE_ICONS = [GiCrystalBall, MdStorefront, GiGavel, GiTrade, GiCrossedSwords, GiShakingHands, GiTargetArrows];
+const FEATURE_KEYS  = ["nfa101", "general", "auctions", "trades", "quests", "hire", "bounty"];
 
 function OverviewTab({ onTabChange }) {
-  const [activeKey, setActiveKey] = useState(FEATURES[0].key);
+  const { t } = useTranslation();
+  const features = t("marketplace.overview.features", { returnObjects: true }) || [];
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  const active = FEATURES.find(f => f.key === activeKey);
+  const activeKey  = FEATURE_KEYS[activeIdx]  || "nfa101";
+  const activeIcon = FEATURE_ICONS[activeIdx] || GiCrystalBall;
+  const active     = features[activeIdx]       || {};
 
   return (
     <div className="py-8">
@@ -129,14 +49,14 @@ function OverviewTab({ onTabChange }) {
         <div className="flex items-center gap-3 mb-2">
           <div className="w-8 h-[2px] bg-white/40" />
           <span className="text-white/50 text-xs tracking-[0.3em] uppercase font-semibold">
-            Marketplace
+            {t("marketplace.sectionLabel")}
           </span>
         </div>
         <h1 className="text-white font-[Goldman] font-bold text-2xl sm:text-3xl mb-2">
-          Overview
+          {t("marketplace.overview.heading")}
         </h1>
         <p className="text-white/50 text-sm max-w-xl leading-relaxed">
-          Welcome to the HyperTek Marketplace. Select a feature to learn more — then jump straight in.
+          {t("marketplace.overview.subtitle")}
         </p>
       </motion.div>
 
@@ -158,19 +78,20 @@ function OverviewTab({ onTabChange }) {
             scrollbarWidth: "none",
           }}
         >
-          {FEATURES.map((f) => {
-            const isActive = f.key === activeKey;
+          {features.map((f, i) => {
+            const isActive = i === activeIdx;
+            const Icon = FEATURE_ICONS[i] || GiCrystalBall;
             return (
               <button
-                key={f.key}
-                onClick={() => setActiveKey(f.key)}
+                key={FEATURE_KEYS[i]}
+                onClick={() => setActiveIdx(i)}
                 className="flex items-center gap-3 px-4 py-3.5 text-left transition-all duration-200 flex-shrink-0 sm:flex-shrink relative"
                 style={{
                   background: isActive ? "rgba(0,42,168,0.35)" : "transparent",
                   borderLeft: isActive ? "3px solid rgba(0,100,255,0.8)" : "3px solid transparent",
                 }}
               >
-                <f.Icon size={20} style={{ color: isActive ? "#60a5fa" : "rgba(255,255,255,0.4)", flexShrink: 0 }} />
+                <Icon size={20} style={{ color: isActive ? "#60a5fa" : "rgba(255,255,255,0.4)", flexShrink: 0 }} />
                 <div className="hidden sm:block min-w-0">
                   <p
                     className="text-xs font-semibold leading-tight truncate"
@@ -185,7 +106,6 @@ function OverviewTab({ onTabChange }) {
                     {f.tagline}
                   </p>
                 </div>
-                {/* mobile: label only below icon */}
                 <p
                   className="sm:hidden text-[10px] font-semibold whitespace-nowrap"
                   style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.45)" }}
@@ -199,32 +119,28 @@ function OverviewTab({ onTabChange }) {
 
         {/* Right — detail panel + avatar */}
         <div className="flex-1 min-w-0 flex" style={{ background: "rgba(0,10,40,0.5)" }}>
-          {/* Detail content */}
           <div className="flex-1 min-w-0 p-6 sm:p-8">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeKey}
+                key={activeIdx}
                 initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -12 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="flex flex-col h-full"
               >
-                {/* Icon + title */}
                 <div className="flex items-center gap-3 mb-1">
-                  <active.Icon size={32} style={{ color: "#60a5fa", filter: "drop-shadow(0 0 6px rgba(96,165,250,0.5))" }} />
+                  {React.createElement(activeIcon, { size: 32, style: { color: "#60a5fa", filter: "drop-shadow(0 0 6px rgba(96,165,250,0.5))" } })}
                   <h2 className="text-white font-[Goldman] font-bold text-lg sm:text-xl">
                     {active.label}
                   </h2>
                 </div>
                 <p className="text-white/40 text-xs mb-6">{active.tagline}</p>
 
-                {/* Divider */}
                 <div className="mb-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
 
-                {/* Detail points */}
                 <ul className="flex flex-col gap-4 mb-8">
-                  {active.details.map((point, i) => (
+                  {(active.details || []).map((point, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <span
                         className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
@@ -241,10 +157,9 @@ function OverviewTab({ onTabChange }) {
                   ))}
                 </ul>
 
-                {/* CTA */}
                 <div className="mt-auto">
                   <button
-                    onClick={() => onTabChange?.(active.key)}
+                    onClick={() => onTabChange?.(activeKey)}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                     style={{
                       background: "rgba(0,60,200,0.4)",
@@ -272,7 +187,7 @@ function OverviewTab({ onTabChange }) {
           <div className="hidden lg:flex items-end justify-center flex-shrink-0" style={{ width: 280 }}>
             <AnimatePresence mode="wait">
               <motion.img
-                key={activeKey}
+                key={activeIdx}
                 src={AVATARS[activeKey]}
                 alt="Character"
                 initial={{ opacity: 0, scale: 0.92, y: 20 }}

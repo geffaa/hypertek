@@ -1,29 +1,20 @@
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-// Fixed tabs per Don's brief — Trades and Quests are separate tabs
-const TABS = [
-  { key: "overview", label: "Overview" },
-  { key: "nfa101", label: "NFAs / NFCs / NFTs" },
-  { key: "general", label: "The Marketplace" },
-  { key: "auctions", label: "Auctions" },
-  { key: "trades", label: "Trades" },
-  { key: "quests", label: "Quests" },
-  { key: "hire", label: "For Hire" },
-  { key: "bounty", label: "Bounty" },
-];
+const TAB_KEYS = ["overview", "nfa101", "general", "auctions", "trades", "quests", "hire", "bounty"];
 
-// Props: activeTab, onTabChange, search, onSearch
 function NavLinks({ activeTab, onTabChange, search = "", onSearch, className = "" }) {
+  const { t } = useTranslation();
+
   return (
     <div className={`flex items-center gap-0 ${className}`}>
-      {/* Scrollable tab list */}
       <ul className="flex gap-1 overflow-x-auto scrollbar-hide flex-1 pr-3" style={{ scrollbarWidth: "none" }}>
-        {TABS.map((tab) => {
-          const isActive = activeTab === tab.key;
+        {TAB_KEYS.map((key) => {
+          const isActive = activeTab === key;
           return (
-            <li key={tab.key} className="flex-shrink-0">
+            <li key={key} className="flex-shrink-0">
               <button
-                onClick={() => onTabChange?.(tab.key)}
+                onClick={() => onTabChange?.(key)}
                 className="px-3 py-1.5 lg:px-4 rounded-lg font-inter text-xs lg:text-sm transition-colors whitespace-nowrap"
                 style={{
                   background: isActive ? "#002AA8" : "transparent",
@@ -32,14 +23,13 @@ function NavLinks({ activeTab, onTabChange, search = "", onSearch, className = "
                   border: isActive ? "1px solid rgba(0,80,255,0.3)" : "1px solid transparent",
                 }}
               >
-                {tab.label}
+                {t(`marketplace.tabs.${key}`)}
               </button>
             </li>
           );
         })}
       </ul>
 
-      {/* Search bar */}
       {onSearch && (
         <div className="relative flex-shrink-0">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/35 pointer-events-none" />
@@ -47,7 +37,7 @@ function NavLinks({ activeTab, onTabChange, search = "", onSearch, className = "
             type="text"
             value={search}
             onChange={(e) => onSearch(e.target.value)}
-            placeholder="Search..."
+            placeholder={t("marketplace.searchPlaceholder")}
             className="pl-8 pr-3 py-1.5 rounded-lg text-xs text-white placeholder-white/30 outline-none w-[140px] lg:w-[180px]"
             style={{
               background: "rgba(255,255,255,0.07)",

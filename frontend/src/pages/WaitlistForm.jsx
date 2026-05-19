@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaXTwitter, FaDiscord } from "react-icons/fa6";
 import { FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FiArrowRight, FiCheck, FiX, FiArrowLeft } from "react-icons/fi";
@@ -14,20 +15,13 @@ const slideVariants = {
   exit: (dir) => ({ opacity: 0, x: dir > 0 ? -50 : 50 }),
 };
 
-const stepMeta = [
-  { icon: FiUser,       title: "Let's get to know you" },
-  { icon: FiMail,       title: "Add your email" },
-  { icon: FiZap,        title: "How excited are you about a universe where three full games are connected into one experience?" },
-  { icon: FiGrid,       title: "Which part of HyperTek 100 interests you the most?" },
-  { icon: FiEdit3,      title: "What would make HyperTek 100 a 'must-play' game for you?" },
-  { icon: FiDollarSign, title: "Would you consider supporting this project when we open our crowdfunding campaign?" },
-  { icon: FaXTwitter,   title: "Follow us on X" },
-];
+const STEP_ICONS = [FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FaXTwitter];
 
 function FooterSocials() {
+  const { t } = useTranslation();
   return (
     <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
-      <span className="text-white/35 text-xs">Stay Updated</span>
+      <span className="text-white/35 text-xs">{t("waitlistForm.stayUpdated")}</span>
       <div className="flex items-center gap-3">
         <a href="#" className="text-white/35 hover:text-white transition-colors"><FaXTwitter size={14} /></a>
         <a href="#" className="text-white/35 hover:text-white transition-colors"><FaDiscord size={15} /></a>
@@ -36,7 +30,7 @@ function FooterSocials() {
   );
 }
 
-function NextButton({ onClick, disabled, label = "Next" }) {
+function NextButton({ onClick, disabled, label }) {
   return (
     <motion.button
       onClick={onClick}
@@ -51,6 +45,7 @@ function NextButton({ onClick, disabled, label = "Next" }) {
 
 export default function WaitlistForm() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
   const [status, setStatus] = useState(null);
@@ -83,41 +78,42 @@ export default function WaitlistForm() {
     }
   };
 
-  const { icon: StepIcon, title } = stepMeta[step] || {};
+  const StepIcon = STEP_ICONS[step];
+  const title = t(`waitlistForm.steps.${step}`);
 
   const stepContent = {
     0: (
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-white/60 text-sm">Your Name</label>
+          <label className="text-white/60 text-sm">{t("waitlistForm.nameLabel")}</label>
           <input
             type="text"
             value={formData.name}
             onChange={e => setFormData(d => ({ ...d, name: e.target.value }))}
             onKeyDown={e => e.key === "Enter" && formData.name.trim() && goNext()}
-            placeholder="Enter your name"
+            placeholder={t("waitlistForm.namePlaceholder")}
             autoFocus
             className="h-11 px-4 rounded-lg bg-white text-[#060610] text-sm font-medium outline-none placeholder-gray-400"
           />
         </div>
-        <NextButton onClick={goNext} disabled={!formData.name.trim()} />
+        <NextButton onClick={goNext} disabled={!formData.name.trim()} label={t("waitlistForm.next")} />
       </div>
     ),
     1: (
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-white/60 text-sm">Email Address</label>
+          <label className="text-white/60 text-sm">{t("waitlistForm.emailLabel")}</label>
           <input
             type="email"
             value={formData.email}
             onChange={e => setFormData(d => ({ ...d, email: e.target.value }))}
             onKeyDown={e => e.key === "Enter" && formData.email.trim() && goNext()}
-            placeholder="you@example.com"
+            placeholder={t("waitlistForm.emailPlaceholder")}
             autoFocus
             className="h-11 px-4 rounded-lg bg-white text-[#060610] text-sm font-medium outline-none placeholder-gray-400"
           />
         </div>
-        <NextButton onClick={goNext} disabled={!formData.email.trim()} />
+        <NextButton onClick={goNext} disabled={!formData.email.trim()} label={t("waitlistForm.next")} />
       </div>
     ),
     2: (
@@ -125,12 +121,12 @@ export default function WaitlistForm() {
         <textarea
           value={formData.excitement}
           onChange={e => setFormData(d => ({ ...d, excitement: e.target.value }))}
-          placeholder="Share how excited you are..."
+          placeholder={t("waitlistForm.excitementPlaceholder")}
           rows={4}
           autoFocus
           className="px-4 py-3 rounded-lg bg-white text-[#060610] text-sm font-medium outline-none placeholder-gray-400 resize-none"
         />
-        <NextButton onClick={goNext} disabled={!String(formData.excitement || "").trim()} />
+        <NextButton onClick={goNext} disabled={!String(formData.excitement || "").trim()} label={t("waitlistForm.next")} />
       </div>
     ),
     3: (
@@ -138,12 +134,12 @@ export default function WaitlistForm() {
         <textarea
           value={formData.interest}
           onChange={e => setFormData(d => ({ ...d, interest: e.target.value }))}
-          placeholder="Tell us which part interests you most..."
+          placeholder={t("waitlistForm.interestPlaceholder")}
           rows={4}
           autoFocus
           className="px-4 py-3 rounded-lg bg-white text-[#060610] text-sm font-medium outline-none placeholder-gray-400 resize-none"
         />
-        <NextButton onClick={goNext} disabled={!formData.interest.trim()} />
+        <NextButton onClick={goNext} disabled={!formData.interest.trim()} label={t("waitlistForm.next")} />
       </div>
     ),
     4: (
@@ -151,32 +147,32 @@ export default function WaitlistForm() {
         <textarea
           value={formData.mustPlay}
           onChange={e => setFormData(d => ({ ...d, mustPlay: e.target.value }))}
-          placeholder="Tell us what would make it a must-play for you..."
+          placeholder={t("waitlistForm.mustPlayPlaceholder")}
           rows={4}
           autoFocus
           className="px-4 py-3 rounded-lg bg-white text-[#060610] text-sm font-medium outline-none placeholder-gray-400 resize-none"
         />
-        <NextButton onClick={goNext} disabled={!formData.mustPlay.trim()} />
+        <NextButton onClick={goNext} disabled={!formData.mustPlay.trim()} label={t("waitlistForm.next")} />
       </div>
     ),
     5: (
       <div className="flex flex-col gap-4">
         <div className="flex gap-3">
-          {["Yes", "No"].map(opt => (
+          {[{ value: "yes", label: t("waitlistForm.yes") }, { value: "no", label: t("waitlistForm.no") }].map(opt => (
             <button
-              key={opt}
-              onClick={() => setFormData(d => ({ ...d, crowdfunding: opt }))}
+              key={opt.value}
+              onClick={() => setFormData(d => ({ ...d, crowdfunding: opt.value }))}
               className={`flex-1 h-12 rounded-full text-sm font-bold transition-all ${
-                formData.crowdfunding === opt
+                formData.crowdfunding === opt.value
                   ? "bg-white text-[#060610]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
-              {opt}
+              {opt.label}
             </button>
           ))}
         </div>
-        <NextButton onClick={goNext} disabled={!formData.crowdfunding} />
+        <NextButton onClick={goNext} disabled={!formData.crowdfunding} label={t("waitlistForm.next")} />
       </div>
     ),
     6: (
@@ -195,7 +191,7 @@ export default function WaitlistForm() {
           className="h-11 rounded-full bg-white text-[#060610] font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/90 transition disabled:opacity-50"
           whileTap={{ scale: 0.97 }}
         >
-          {submitting ? "Submitting..." : "Submit"}
+          {submitting ? t("waitlistForm.submitting") : t("waitlistForm.submit")}
         </motion.button>
       </div>
     ),
@@ -209,7 +205,7 @@ export default function WaitlistForm() {
         onClick={() => navigate("/waitlist")}
         className="absolute top-5 left-5 z-20 flex items-center gap-1.5 text-white/50 hover:text-white transition-colors text-sm"
       >
-        <FiArrowLeft size={15} /> Back to Waitlist
+        <FiArrowLeft size={15} /> {t("waitlistForm.backToWaitlist")}
       </button>
 
       <div className="absolute inset-0">
@@ -247,15 +243,13 @@ export default function WaitlistForm() {
               <div className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center">
                 <FiCheck size={22} className="text-green-400" />
               </div>
-              <h2 className="font-bold text-xl leading-snug">You're on the list!</h2>
-              <p className="text-white/55 text-sm leading-relaxed">
-                Thanks for joining the Hyper Tek waitlist.<br />We'll be in touch.
-              </p>
+              <h2 className="font-bold text-xl leading-snug">{t("waitlistForm.successTitle")}</h2>
+              <p className="text-white/55 text-sm leading-relaxed">{t("waitlistForm.successDesc")}</p>
               <button
                 onClick={() => navigate("/waitlist")}
                 className="mt-1 h-11 w-full rounded-full bg-white text-[#060610] font-semibold text-sm flex items-center justify-center hover:bg-white/90 transition"
               >
-                Visit HyperTek Website
+                {t("waitlistForm.visitWebsite")}
               </button>
               <FooterSocials />
             </div>
@@ -266,21 +260,19 @@ export default function WaitlistForm() {
               <div className="w-12 h-12 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center">
                 <FiX size={22} className="text-red-400" />
               </div>
-              <h2 className="font-bold text-xl">Something went wrong</h2>
-              <p className="text-white/55 text-sm leading-relaxed">
-                We couldn't submit your form.<br />Please try again.
-              </p>
+              <h2 className="font-bold text-xl">{t("waitlistForm.errorTitle")}</h2>
+              <p className="text-white/55 text-sm leading-relaxed">{t("waitlistForm.errorDesc")}</p>
               <button
                 onClick={() => setStatus(null)}
                 className="mt-1 h-11 w-full rounded-full bg-white text-[#060610] font-semibold text-sm flex items-center justify-center hover:bg-white/90 transition"
               >
-                Try Again
+                {t("waitlistForm.tryAgain")}
               </button>
               <button
                 onClick={() => navigate("/waitlist")}
                 className="h-11 w-full rounded-full bg-white/10 border border-white/15 text-white font-semibold text-sm flex items-center justify-center hover:bg-white/20 transition"
               >
-                Visit HyperTek Website
+                {t("waitlistForm.visitWebsite")}
               </button>
               <FooterSocials />
             </div>
@@ -330,7 +322,7 @@ export default function WaitlistForm() {
                   onClick={goBack}
                   className="mt-4 w-full text-white/35 hover:text-white/60 text-xs transition-colors text-center"
                 >
-                  ← Back
+                  {t("waitlistForm.back")}
                 </button>
               )}
 

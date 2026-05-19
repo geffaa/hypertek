@@ -1,22 +1,14 @@
 import { Volume2, VolumeX } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import useSiteContent from "../../hooks/useSiteContent";
 import { BACKEND_BASE_URL } from "../../Config";
 
-/**
- * Full-width marketplace hero banner — driven by CMS (marketplace_banner section).
- *
- * Props:
- *   stats        — array of { num, label } shown below the description
- *   titleOverride — if provided, replaces the CMS heading (used for category pages)
- *   descOverride  — if provided, replaces the CMS description
- *   playing       — boolean, current audio state (controlled by parent)
- *   onToggleAudio — callback to toggle ambient sound
- */
 function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = false, onToggleAudio, noMargin = false }) {
+  const { t } = useTranslation();
   const { data: cms } = useSiteContent("marketplace_banner");
 
-  const heading = titleOverride || cms.heading     || "A New Era Dawns in Hyper Tek";
-  const desc    = descOverride  || cms.description || "It's the start of a living, breathing universe where every decision shapes the journey.";
+  const heading = titleOverride || cms.heading     || t("marketplace.banner.defaultHeading");
+  const desc    = descOverride  || cms.description || t("marketplace.banner.defaultDesc");
 
   let bgImage = "/marketplace_banner.png";
   if (cms.background_image) {
@@ -46,7 +38,6 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Content — vertically centered via flex parent */}
       <div className="px-4 lg:px-12 w-full max-w-[900px]">
         <h1 className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] leading-tight text-white mb-1.5">
           {heading}
@@ -55,7 +46,6 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
           {desc}
         </p>
 
-        {/* Stats — directly below description, compact */}
         {stats.length > 0 && (
           <div className="flex flex-wrap gap-5 lg:gap-6">
             {stats.map((stat, i) => (
@@ -72,7 +62,6 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
         )}
       </div>
 
-      {/* Audio toggle — top right */}
       {onToggleAudio && (
         <button
           onClick={onToggleAudio}
@@ -82,13 +71,12 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
             border: "1px solid rgba(255,255,255,0.15)",
             backdropFilter: "blur(8px)",
           }}
-          title={playing ? "Mute ambient sound" : "Play ambient sound"}
+          title={playing ? t("marketplace.banner.soundOn") : t("marketplace.banner.soundOff")}
         >
-          {playing
-            ? <Volume2 className="w-4 h-4" />
-            : <VolumeX className="w-4 h-4" />
-          }
-          <span className="hidden sm:inline">{playing ? "Sound On" : "Sound Off"}</span>
+          {playing ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          <span className="hidden sm:inline">
+            {playing ? t("marketplace.banner.soundOn") : t("marketplace.banner.soundOff")}
+          </span>
         </button>
       )}
     </div>
