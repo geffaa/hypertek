@@ -2,21 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Zap, Gavel, Gamepad2, Wallet } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
-
-/* messages that pop up near the button when chat is closed */
-const PEEK_MESSAGES = [
-  "Need help? Ask me anything!",
-  "Questions about HyperBucks?",
-  "Curious how auctions work?",
-];
-
-/* shortcut chips shown at the start */
-const SHORTCUTS = [
-  { Icon: Zap,      label: "Earn HyperBucks",  text: "How do I earn HyperBucks?" },
-  { Icon: Wallet,   label: "Cash Out HB",       text: "How do I cash out my HyperBucks?" },
-  { Icon: Gavel,    label: "How Auctions Work", text: "How do auctions work?" },
-  { Icon: Gamepad2, label: "Available Games",   text: "What games are available on HyperTek100?" },
-];
+import hyperbotAvatar from "../../assets/images/hyperbot-avatar.png";
+import { useTranslation } from "react-i18next";
 
 /* ── Typing dots ── */
 function TypingIndicator() {
@@ -48,17 +35,15 @@ function TypingIndicator() {
 /* ── Bot avatar ── */
 function BotAvatar() {
   return (
-    <div
-      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold"
+    <img
+      src={hyperbotAvatar}
+      alt="HyperBot"
+      className="w-7 h-7 rounded-full flex-shrink-0 object-cover"
       style={{
-        background: "linear-gradient(135deg, #002AA8 0%, #1D7AD6 100%)",
         border: "1px solid rgba(0,120,255,0.5)",
         boxShadow: "0 0 8px rgba(0,100,255,0.4)",
-        fontFamily: "'Goldman', sans-serif",
       }}
-    >
-      HB
-    </div>
+    />
   );
 }
 
@@ -99,15 +84,39 @@ function ShortcutChip({ Icon, label, onClick }) {
 }
 
 export default function ChatbotWidget() {
+  const { t, i18n } = useTranslation();
+
+  /* messages that pop up near the button when chat is closed */
+  const PEEK_MESSAGES = [
+    t("chatbot.peek.0"),
+    t("chatbot.peek.1"),
+    t("chatbot.peek.2"),
+  ];
+
+  /* shortcut chips shown at the start */
+  const SHORTCUTS = [
+    { Icon: Zap,      label: t("chatbot.shortcuts.earnLabel"),     text: t("chatbot.shortcuts.earnText") },
+    { Icon: Wallet,   label: t("chatbot.shortcuts.cashOutLabel"),  text: t("chatbot.shortcuts.cashOutText") },
+    { Icon: Gavel,    label: t("chatbot.shortcuts.auctionsLabel"), text: t("chatbot.shortcuts.auctionsText") },
+    { Icon: Gamepad2, label: t("chatbot.shortcuts.gamesLabel"),    text: t("chatbot.shortcuts.gamesText") },
+  ];
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
-    {
-      role: "model",
-      text: "Hi! I'm HyperBot, your HyperTek100 AI assistant. Ask me anything about the platform, marketplace, games, or NFTs!",
-    },
+    { role: "model", text: t("chatbot.greeting") },
   ]);
+
+  /* update greeting in real-time when language changes, but only if chat hasn't started */
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1) {
+        return [{ role: "model", text: t("chatbot.greeting") }];
+      }
+      return prev;
+    });
+  }, [i18n.language]);
 
   const bottomRef   = useRef(null);
   const inputRef    = useRef(null);
@@ -117,7 +126,6 @@ export default function ChatbotWidget() {
   const showShortcuts = messages.length === 1;
 
   /* ── peek bubble ── */
-  // peekState: { phase: "idle"|"in"|"out", text: string }
   const [peekState, setPeekState] = useState({ phase: "idle", text: "" });
   const peekTimer = useRef(null);
 
@@ -129,14 +137,11 @@ export default function ChatbotWidget() {
     }
 
     const runAt = (idx) => {
-      // 1. show bubble
       setPeekState({ phase: "in", text: PEEK_MESSAGES[idx] });
 
-      // 2. after display time → start exit
       peekTimer.current = setTimeout(() => {
         setPeekState((s) => ({ ...s, phase: "out" }));
 
-        // 3. after exit animation → idle, then maybe next
         peekTimer.current = setTimeout(() => {
           setPeekState({ phase: "idle", text: "" });
           const next = (idx + 1) % PEEK_MESSAGES.length;
@@ -147,7 +152,7 @@ export default function ChatbotWidget() {
 
     peekTimer.current = setTimeout(() => runAt(0), 2500);
     return () => clearTimeout(peekTimer.current);
-  }, [open]);
+  }, [open, t]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -190,10 +195,7 @@ export default function ChatbotWidget() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        {
-          role: "model",
-          text: "Sorry, I could not get a response right now. Please try again or contact our support team.",
-        },
+        { role: "model", text: t("chatbot.error") },
       ]);
     } finally {
       setLoading(false);
@@ -237,17 +239,15 @@ export default function ChatbotWidget() {
             <Scanlines />
 
             <div className="flex items-center gap-3 relative z-20">
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+              <img
+                src={hyperbotAvatar}
+                alt="HyperBot"
+                className="w-9 h-9 rounded-full flex-shrink-0 object-cover"
                 style={{
-                  background: "linear-gradient(135deg, #002AA8 0%, #1D7AD6 100%)",
                   border: "1px solid rgba(0,140,255,0.6)",
                   boxShadow: "0 0 14px rgba(0,100,255,0.5)",
-                  fontFamily: "'Goldman', sans-serif",
                 }}
-              >
-                HB
-              </div>
+              />
               <div>
                 <p
                   className="text-white text-sm font-bold"
@@ -261,7 +261,7 @@ export default function ChatbotWidget() {
                     style={{ background: "#22c55e", boxShadow: "0 0 6px #22c55e" }}
                   />
                   <span className="text-[10px] text-green-400 font-medium tracking-wider uppercase">
-                    Online
+                    {t("chatbot.online")}
                   </span>
                 </div>
               </div>
@@ -322,7 +322,7 @@ export default function ChatbotWidget() {
                     className="text-[10px] uppercase tracking-widest pl-9"
                     style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'Goldman', sans-serif" }}
                   >
-                    Quick questions
+                    {t("chatbot.quickQuestions")}
                   </p>
                   <div className="flex flex-wrap gap-2 pl-9">
                     {SHORTCUTS.map((s) => (
@@ -362,7 +362,7 @@ export default function ChatbotWidget() {
                 autoResize();
               }}
               onKeyDown={handleKeyDown}
-              placeholder="Ask me anything... (Enter to send)"
+              placeholder={t("chatbot.placeholder")}
               disabled={loading}
               className="chatbot-textarea flex-1 resize-none outline-none text-[13px] text-white/90 placeholder-white/25 bg-transparent disabled:opacity-40"
               style={{
@@ -488,7 +488,6 @@ export default function ChatbotWidget() {
             animation: "hb-float 2s ease-in-out infinite",
           }}
         >
-          {/* wrapper drives the peek-in/out animation */}
           <div
             style={{
               transformOrigin: "bottom right",

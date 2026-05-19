@@ -24,6 +24,59 @@ const ASSET_CONFIG = {
   NFT: { label: "NFT", color: "bg-purple-500/15 text-purple-300 border border-purple-500/30" },
 };
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function shortAddr(addr) {
+  if (!addr) return null;
+  if (addr.length < 10) return addr;
+  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+}
+
+function isWallet(str) {
+  return typeof str === "string" && str.startsWith("0x") && str.length === 42;
+}
+
+function WalletCell({ addr, label }) {
+  if (!addr) return <span className="text-white/25 text-xs">—</span>;
+  const display = isWallet(addr) ? shortAddr(addr) : addr;
+  const isAddr  = isWallet(addr);
+  return (
+    <div className="flex flex-col gap-0.5">
+      {label && <span className="text-white/30 text-[10px]">{label}</span>}
+      {isAddr ? (
+        <a
+          href={`https://basescan.org/address/${addr}`}
+          target="_blank"
+          rel="noreferrer"
+          title={addr}
+          className="font-mono text-xs text-blue-400 hover:text-blue-300 hover:underline transition-colors"
+        >
+          {display}
+        </a>
+      ) : (
+        <span className="text-xs text-white/60">{display}</span>
+      )}
+    </div>
+  );
+}
+
+function CreatorBadge({ item }) {
+  const raw = item.createdBy || item.creator || "";
+  const isAdmin = raw === "admin" || raw === "Admin" || !raw;
+
+  if (isAdmin) {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#002AA8]/20 border border-[#002AA8]/40 text-blue-300">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/>
+        </svg>
+        Admin
+      </span>
+    );
+  }
+  return <WalletCell addr={isWallet(raw) ? raw : null} />;
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 function Items() {
@@ -168,9 +221,21 @@ function Items() {
     <div className="flex flex-col min-h-full pb-12">
 
       {/* ── Header ── */}
-      <div className="mb-6">
-        <h1 className="font-inter font-semibold text-[25px] text-white mb-1">Items</h1>
-        <p className="text-white/40 text-sm">All NFT / NFC / NFA items across all categories</p>
+      <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
+        <div>
+          <h1 className="font-inter font-semibold text-[25px] text-white mb-1">Items</h1>
+          <p className="text-white/40 text-sm">All NFT / NFC / NFA items across all categories</p>
+        </div>
+        <button
+          onClick={() => adminId && navigate(`/${adminId}/create-collection`)}
+          className="flex items-center gap-2 px-5 h-10 rounded-lg text-white text-sm font-semibold transition-all flex-shrink-0"
+          style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Create Item
+        </button>
       </div>
 
       {/* ── Summary Cards ── */}
@@ -263,14 +328,21 @@ function Items() {
         </div>
       ) : (
         <div className="overflow-x-auto w-full rounded-xl border border-white/8" style={{ background: "rgba(255,255,255,0.02)" }}>
-          <table className="w-full text-left min-w-[900px]">
+          <table className="w-full text-left min-w-[1200px]">
             <thead>
               <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Item</th>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Type</th>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Category</th>
-                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Artist</th>
-                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Price (ETH)</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Creator</th>
+                <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">
+                  <span className="flex items-center gap-1">
+                    Owner
+                    <span title="Last known owner in database. Click wallet address to verify on-chain via Basescan." className="cursor-help text-white/25">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </span>
+                  </span>
+                </th>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Listed</th>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Min Buyback</th>
                 <th className="px-5 py-3 text-white/50 font-semibold text-xs tracking-wider">Status</th>
@@ -318,16 +390,16 @@ function Items() {
                     {/* Category */}
                     <td className="px-5 py-3 text-white/60 text-sm capitalize">{item.category || "—"}</td>
 
-                    {/* Artist */}
+                    {/* Creator */}
                     <td className="px-5 py-3">
-                      {item.artistName
-                        ? <span className="text-blue-300 text-xs font-medium">{item.artistName}</span>
-                        : <span className="text-white/25 text-xs">—</span>}
+                      <CreatorBadge item={item} />
                     </td>
 
-                    {/* Price */}
-                    <td className="px-5 py-3 text-white/80 text-sm font-mono">
-                      {item.priceETH > 0 ? item.priceETH.toFixed(4) : <span className="text-white/30">—</span>}
+                    {/* Owner */}
+                    <td className="px-5 py-3">
+                      <WalletCell
+                        addr={item.owner || item.ownerAddress || item.ownerWallet}
+                      />
                     </td>
 
                     {/* Listed */}

@@ -162,5 +162,72 @@
     "minRead":           "分钟阅读",
     "notFound":          "文章未找到",
     "backToArticles":    "返回文章列表"
+  },
+
+  "chatbot": {
+    "greeting":       "嗨！我是 HyperBot，您的 HyperTek100 AI 助手。欢迎询问有关平台、市场、游戏或 NFT 的任何问题！",
+    "online":         "在线",
+    "quickQuestions": "快速提问",
+    "placeholder":    "问我任何事情...（按 Enter 发送）",
+    "error":          "很抱歉，目前无法获取回应。请稍后重试或联系我们的支持团队。",
+    "peek": {
+      "0": "需要帮助？问我任何问题！",
+      "1": "关于 HyperBucks 的问题？",
+      "2": "想了解拍卖是如何运作的？"
+    },
+    "shortcuts": {
+      "earnLabel":     "赚取 HyperBucks",
+      "earnText":      "如何赚取 HyperBucks？",
+      "cashOutLabel":  "提取 HB",
+      "cashOutText":   "如何提取我的 HyperBucks？",
+      "auctionsLabel": "拍卖如何运作",
+      "auctionsText":  "拍卖是如何运作的？",
+      "gamesLabel":    "可用游戏",
+      "gamesText":     "HyperTek100 上有哪些游戏？"
+    }
+  },
+
+  "auth": {
+    "signIn":                  "登录",
+    "signUp":                  "注册",
+    "emailPlaceholder":        "电子邮件",
+    "passwordPlaceholder":     "密码",
+    "forgotPassword":          "忘记密码？",
+    "signingIn":               "登录中...",
+    "signInBtn":               "登录",
+    "noAccount":               "还没有账户？",
+    "signUpLink":              "注册",
+    "alreadyAccount":          "已有账户？",
+    "signInLink":              "登录",
+    "orContinueWith":          "或继续使用",
+    "fullNamePlaceholder":     "全名",
+    "confirmPasswordPlaceholder": "确认密码",
+    "creatingAccount":         "创建账户中...",
+    "signUpBtn":               "注册",
+    "walletReady":             "您的钱包已就绪",
+    "walletReadyDesc":         "已为您的账户创建了安全的嵌入式钱包。",
+    "walletWarning":           "⚠️ 切勿与任何人分享您的私钥。拥有您私钥的人可以完全控制您的钱包和资产。",
+    "walletAddress":           "您的钱包地址",
+    "enterPasswordReveal":     "输入您的密码以显示私钥：",
+    "reEnterPassword":         "重新输入密码",
+    "verifying":               "验证中...",
+    "revealPrivateKey":        "显示私钥",
+    "privateKeyLabel":         "私钥 — 请安全保存，切勿分享",
+    "savedWalletContinue":     "我已保存钱包信息 — 继续",
+    "backToSignIn":            "返回登录",
+    "forgotPasswordHeading":   "忘记密码",
+    "forgotPasswordDesc":      "输入您的邮箱，我们将向您发送重置链接。",
+    "forgotPasswordSentDesc":  "请查看您的收件箱获取重置链接。",
+    "emailInputPlaceholder":   "输入您的邮箱",
+    "sending":                 "发送中...",
+    "sendResetLink":           "发送重置链接",
+    "resetLinkSent":           "重置链接已发送！请查看您的邮箱。",
+    "didntReceive":            "未收到？重新发送",
+    "resetPassword":           "重置密码",
+    "resetPasswordDesc":       "请在下方输入您的新密码。",
+    "newPasswordPlaceholder":  "新密码",
+    "passwordHint":            "密码必须为 8-20 个字符。",
+    "resetting":               "重置中...",
+    "resetPasswordBtn":        "重置密码"
   }
 }

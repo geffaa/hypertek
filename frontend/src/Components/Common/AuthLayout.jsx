@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useSiteContent from "../../hooks/useSiteContent";
 import { getImageUrl } from "../../Config";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 import bgAuth from "../../assets/images/auth/bg-auth.png";
 
@@ -103,7 +104,7 @@ export default function AuthLayout({ children }) {
           }}
         />
 
-        {/* Mobile: logo + back to home */}
+        {/* Mobile: logo + back to home + language switcher */}
         <div className="lg:hidden relative z-10 flex items-center justify-between px-6 pt-6 pb-2">
           <Link to="/" className="flex items-center gap-2">
             <img src={Logo} alt="Hypertek" className="h-7 w-auto object-contain" />
@@ -111,9 +112,17 @@ export default function AuthLayout({ children }) {
               Hypertek
             </span>
           </Link>
-          <Link to="/" className="text-white/60 hover:text-white text-xs transition-colors">
-            ← Home
-          </Link>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <Link to="/" className="text-white/60 hover:text-white text-xs transition-colors">
+              ← Home
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop: language switcher pinned top-right */}
+        <div className="hidden lg:flex absolute top-5 right-6 z-20">
+          <LanguageSwitcher />
         </div>
 
         {/* Form area — centered */}

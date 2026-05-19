@@ -162,5 +162,72 @@
     "minRead":           "分で読める",
     "notFound":          "記事が見つかりません",
     "backToArticles":    "記事一覧に戻る"
+  },
+
+  "chatbot": {
+    "greeting":       "こんにちは！私はHyperBot、HyperTek100のAIアシスタントです。プラットフォーム、マーケットプレイス、ゲーム、NFTについて何でも聞いてください！",
+    "online":         "オンライン",
+    "quickQuestions": "クイック質問",
+    "placeholder":    "何でも聞いてください...（Enterで送信）",
+    "error":          "申し訳ありませんが、現在応答を取得できません。もう一度お試しいただくか、サポートチームにお問い合わせください。",
+    "peek": {
+      "0": "お手伝いが必要ですか？何でも聞いてください！",
+      "1": "HyperBucksについてのご質問は？",
+      "2": "オークションの仕組みが気になりますか？"
+    },
+    "shortcuts": {
+      "earnLabel":     "HyperBucksを稼ぐ",
+      "earnText":      "HyperBucksはどうやって稼ぎますか？",
+      "cashOutLabel":  "HBを換金",
+      "cashOutText":   "HyperBucksはどうやって換金しますか？",
+      "auctionsLabel": "オークションの仕組み",
+      "auctionsText":  "オークションはどのように機能しますか？",
+      "gamesLabel":    "利用可能なゲーム",
+      "gamesText":     "HyperTek100でどんなゲームが利用できますか？"
+    }
+  },
+
+  "auth": {
+    "signIn":                  "ログイン",
+    "signUp":                  "新規登録",
+    "emailPlaceholder":        "メールアドレス",
+    "passwordPlaceholder":     "パスワード",
+    "forgotPassword":          "パスワードをお忘れですか？",
+    "signingIn":               "ログイン中...",
+    "signInBtn":               "ログイン",
+    "noAccount":               "アカウントをお持ちでない方は",
+    "signUpLink":              "新規登録",
+    "alreadyAccount":          "すでにアカウントをお持ちの方は",
+    "signInLink":              "ログイン",
+    "orContinueWith":          "または次の方法で続ける",
+    "fullNamePlaceholder":     "フルネーム",
+    "confirmPasswordPlaceholder": "パスワード確認",
+    "creatingAccount":         "アカウント作成中...",
+    "signUpBtn":               "新規登録",
+    "walletReady":             "ウォレットが準備できました",
+    "walletReadyDesc":         "アカウント用の安全な組み込みウォレットが作成されました。",
+    "walletWarning":           "⚠️ 秘密鍵を誰にも共有しないでください。秘密鍵を持つ人はウォレットと資産を完全に制御できます。",
+    "walletAddress":           "ウォレットアドレス",
+    "enterPasswordReveal":     "秘密鍵を確認するにはパスワードを入力してください：",
+    "reEnterPassword":         "パスワードを再入力",
+    "verifying":               "確認中...",
+    "revealPrivateKey":        "秘密鍵を表示",
+    "privateKeyLabel":         "秘密鍵 — 安全に保管し、絶対に共有しないでください",
+    "savedWalletContinue":     "ウォレット情報を保存しました — 続ける",
+    "backToSignIn":            "ログインに戻る",
+    "forgotPasswordHeading":   "パスワードをお忘れですか",
+    "forgotPasswordDesc":      "メールアドレスを入力してください。リセットリンクをお送りします。",
+    "forgotPasswordSentDesc":  "受信トレイでリセットリンクを確認してください。",
+    "emailInputPlaceholder":   "メールアドレスを入力",
+    "sending":                 "送信中...",
+    "sendResetLink":           "リセットリンクを送信",
+    "resetLinkSent":           "リセットリンクが送信されました！メール受信トレイを確認してください。",
+    "didntReceive":            "受信できませんでしたか？再送信",
+    "resetPassword":           "パスワードリセット",
+    "resetPasswordDesc":       "以下に新しいパスワードを入力してください。",
+    "newPasswordPlaceholder":  "新しいパスワード",
+    "passwordHint":            "パスワードは8〜20文字にする必要があります。",
+    "resetting":               "リセット中...",
+    "resetPasswordBtn":        "パスワードをリセット"
   }
 }

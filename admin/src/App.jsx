@@ -5,8 +5,6 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Transactions from "./pages/Transactions";
 import CreateCollections from "./pages/CreateCollections";
-import CollectionTable from "./pages/CollectionTable";
-import CollectionDetails from "./pages/CollectionDetails";
 import CreatorEarning from "./pages/CreatorEarning";
 import Character from "./pages/Character";
 import Land from "./pages/Land";
@@ -17,8 +15,6 @@ import CollectionDetails2 from "./pages/CollectionDetails2";
 import UserDetails from "./pages/UserDetails";
 import UploadedNews from "./pages/UploadedNews";
 import OtherNews from "./pages/OtherNews";
-import EditCollection2 from "./pages/EditCollection2";
-import AddCollection from "./pages/AddCollection";
 import Support from "./pages/Support";
 import ProtectedRoute from "./ProtectedRoute";
 import NotificationsPage from "./pages/Notifications";
@@ -33,6 +29,7 @@ import RoyaltyPayouts from "./pages/RoyaltyPayouts";
 import BuybackApproval from "./pages/BuybackApproval";
 import CPIAdjustment from "./pages/CPIAdjustment";
 import Items from "./pages/Items";
+import HyperBucksAdmin from "./pages/HyperBucksAdmin";
 
 
 function App() {
@@ -49,12 +46,8 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="create-collection" element={<CreateCollections />} />
-            <Route path="collection-details" element={<CollectionTable />} />
-            <Route path="edit-collection" element={<CollectionDetails />} />
             <Route path="creator-earning" element={<CreatorEarning />} />
-            <Route path="collections" element={<AddCollection />} />
             <Route path="platform-earnings" element={<PlatformEarnings />} />
-            <Route path="edit-collection-item" element={<EditCollection2 />} />
             <Route path="add-sub-collection" element={<AddSubCollection />} />
             <Route path="edit-sub-collection" element={<EditSubCollection />} />
             <Route path="character-collection" element={<Character />} />
@@ -83,11 +76,9 @@ function App() {
             <Route path="buyback-approval" element={<BuybackApproval />} />
             <Route path="cpi-adjustment" element={<CPIAdjustment />} />
             <Route path="items" element={<Items />} />
+            <Route path="hyperbucks" element={<HyperBucksAdmin />} />
           </Route>
         </Route>
-
-        {/* // Admin Profile (outside user routes) */}
-        {/* <Route path="/edit-profile" element={<EditAdminProfile />} /> */}
 
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/signin" replace />} />

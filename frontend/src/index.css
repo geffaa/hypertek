@@ -10,6 +10,29 @@
   100% { transform: skewX(-20deg) translateX(350%); }
 }
 
+/* ── Global scrollbar — semua elemen yang belum override ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 80, 255, 0.4) transparent;
+}
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 80, 255, 0.4);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 100, 255, 0.7);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

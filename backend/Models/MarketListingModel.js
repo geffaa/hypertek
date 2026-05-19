@@ -114,6 +114,10 @@ const marketListingSchema = new mongoose.Schema(
 
     // Notification sent flag (for expiry warning)
     expiryNotified: { type: Boolean, default: false },
+
+    // Admin moderation
+    adminCancelReason: { type: String, default: "" },
+    cancelledByAdmin:  { type: Boolean, default: false },
   },
   { timestamps: true }
 );

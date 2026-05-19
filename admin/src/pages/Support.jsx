@@ -120,7 +120,7 @@ function Support() {
   useEffect(() => {
     if (!socket) return;
     const handler = (msg) => {
-      if (msg.roomId === selectedChat?._id) {
+      if (msg.roomId?.toString() === selectedChat?._id?.toString()) {
         setMessages(prev => [...prev, msg]);
       }
     };

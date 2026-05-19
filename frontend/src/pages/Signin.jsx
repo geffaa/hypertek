@@ -10,12 +10,14 @@ import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
+import { useTranslation } from "react-i18next";
 
 import symbol from "../assets/images/login/Symbol.svg.png";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -99,7 +101,7 @@ function Login() {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-white text-3xl font-bold">Sign in</h1>
+        <h1 className="text-white text-3xl font-bold">{t("auth.signIn")}</h1>
       </div>
 
       {/* Form */}
@@ -112,7 +114,7 @@ function Login() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder={t("auth.emailPlaceholder")}
             className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -126,7 +128,7 @@ function Login() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder={t("auth.passwordPlaceholder")}
             className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -138,7 +140,7 @@ function Login() {
         {/* Forgot password */}
         <div className="text-right -mt-1">
           <Link to="/forgot-password" className="text-white/50 hover:text-white text-xs transition-colors">
-            Forgot Password?
+            {t("auth.forgotPassword")}
           </Link>
         </div>
 
@@ -148,22 +150,22 @@ function Login() {
           disabled={loading}
           className="w-full py-3 mt-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold rounded-lg transition-all duration-300 border border-white/10 text-sm"
         >
-          {loading ? "Signing in..." : "Sign In"}
+          {loading ? t("auth.signingIn") : t("auth.signInBtn")}
         </button>
       </form>
 
       {/* Don't have account */}
       <p className="text-white/50 text-sm text-center mt-4">
-        Don't have an account?{" "}
+        {t("auth.noAccount")}{" "}
         <Link to="/signup" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-          Sign up
+          {t("auth.signUpLink")}
         </Link>
       </p>
 
       {/* Divider */}
       <div className="flex items-center gap-3 my-6">
         <div className="flex-1 h-px bg-white/10" />
-        <span className="text-white/40 text-xs">Or continue with</span>
+        <span className="text-white/40 text-xs">{t("auth.orContinueWith")}</span>
         <div className="flex-1 h-px bg-white/10" />
       </div>
 

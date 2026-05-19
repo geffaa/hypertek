@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FiUploadCloud, FiImage, FiArrowLeft, FiInfo } from "react-icons/fi";
 import { BACKEND_BASE_URL, Dashboard_Base_Url } from "../Config";
+import ImageCropModal from "./common/ImageCropModal";
 
 const CATEGORIES = [
   "skins", "military badges", "specialists", "weapons",
@@ -37,49 +38,47 @@ function CreateCollection() {
   const [assetType,  setAssetType]  = useState("NFT");
   const [imageFile,  setImageFile]  = useState(null);
   const [imagePreview, setPreview]  = useState(null);
-  const [dragOver,   setDragOver]   = useState(false);
-  const [loading,    setLoading]    = useState(false);
+  const [dragOver,      setDragOver]      = useState(false);
+  const [loading,       setLoading]       = useState(false);
+  const [cropSrc,       setCropSrc]       = useState(null);
+  const [cropFileName,  setCropFileName]  = useState("");
 
   // NFA / NFC admin-only fields
   const [minBuyback,  setMinBuyback]  = useState("");
   const [reservePrice,setReservePrice]= useState("");
   const [nfaFrame,    setNfaFrame]    = useState("");
-  const [royaltyWallet, setRoyaltyWallet] = useState("");
-  const [recipientWallet, setRecipientWallet] = useState("");
+  const [artistId,    setArtistId]    = useState("");
+  const [artists,     setArtists]     = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${Dashboard_Base_Url}/v1/admin/artists`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(res => setArtists(res.data.artists || []))
+      .catch(() => {});
+  }, []);
 
   const isNFA = assetType === "NFA";
   const isNFC = assetType === "NFC";
 
   // ── Image handling ──────────────────────────────────────────────────────────
-  const resizeImage = (file) =>
-    new Promise((resolve) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-        const MAX = 1200;
-        let { width, height } = img;
-        if (width > MAX || height > MAX) {
-          if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
-          else { width = Math.round((width * MAX) / height); height = MAX; }
-        }
-        const canvas = document.createElement("canvas");
-        canvas.width = width; canvas.height = height;
-        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        URL.revokeObjectURL(url);
-        canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: "image/jpeg" })), "image/jpeg", 0.88);
-      };
-      img.src = url;
-    });
-
-  const handleFile = async (file) => {
+  const handleFile = (file) => {
     if (!file) return;
     if (!file.type.startsWith("image/")) return toast.error("Please upload an image file");
     if (file.size > 10 * 1024 * 1024) return toast.error("Image must be under 10MB");
-    const resized = await resizeImage(file);
-    setImageFile(resized);
+    setCropFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => setCropSrc(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleCropConfirm = (croppedFile) => {
+    setCropSrc(null);
+    setImageFile(croppedFile);
     const reader = new FileReader();
     reader.onload = () => setPreview(reader.result);
-    reader.readAsDataURL(resized);
+    reader.readAsDataURL(croppedFile);
   };
 
   // ── Submit ──────────────────────────────────────────────────────────────────
@@ -98,10 +97,9 @@ function CreateCollection() {
         return toast.error(`Min Buyback ($${minBuyback}) exceeds 35% cap of Reserve Price. Max: $${maxAllowed}`);
     }
 
-    // Determine owner: use specified recipient or platform wallet from env, fallback to empty
-    const owner = (recipientWallet.trim() || import.meta.env.VITE_PLATFORM_WALLET_ADDRESS || "").toLowerCase();
+    const owner = (import.meta.env.VITE_PLATFORM_WALLET_ADDRESS || "").toLowerCase();
     if (!owner)
-      return toast.error("Recipient wallet address is required");
+      return toast.error("Platform wallet not configured — set VITE_PLATFORM_WALLET_ADDRESS in .env");
 
     try {
       setLoading(true);
@@ -113,7 +111,7 @@ function CreateCollection() {
       form.append("owner",       owner);
       form.append("image",       imageFile);
 
-      if (royaltyWallet.trim()) form.append("royaltyWallet", royaltyWallet.trim());
+      if (artistId) form.append("artistId", artistId);
       if (isNFA || isNFC) {
         if (minBuyback)   form.append("minimumBuybackUSD", minBuyback);
         if (reservePrice) form.append("reservePriceUSD",   reservePrice);
@@ -126,7 +124,7 @@ function CreateCollection() {
       });
 
       toast.success(`"${name}" created and saved to ${category} storage`);
-      navigate(`/${admin?._id}/collection-details`);
+      navigate(`/${admin?._id}/items`);
     } catch (err) {
       if (err.code === "ECONNABORTED") {
         toast.error("Request timed out — please try again.");
@@ -140,7 +138,16 @@ function CreateCollection() {
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
-    <div className="px-4 md:px-10 pt-6 pb-16 max-w-[1200px]">
+    <div className="px-4 md:px-10 pt-6 pb-16">
+
+      {cropSrc && (
+        <ImageCropModal
+          src={cropSrc}
+          fileName={cropFileName}
+          onConfirm={handleCropConfirm}
+          onCancel={() => setCropSrc(null)}
+        />
+      )}
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-8">
@@ -350,38 +357,44 @@ function CreateCollection() {
             </div>
           )}
 
-          {/* Artist / Royalty Wallet */}
+          {/* Artist dropdown */}
           <div>
-            <label className={labelClass}>Artist / Royalty Wallet</label>
-            <input
-              type="text"
-              placeholder="0x... (wallet address that receives the 4% artist fee)"
-              value={royaltyWallet}
-              onChange={(e) => setRoyaltyWallet(e.target.value)}
-              className={inputClass}
-            />
-            <p className="text-white/25 text-[11px] mt-1">
-              Leave blank if Hypertek keeps the artist fee (no external artist).
-            </p>
+            <label className={labelClass}>Assign Artist <span className="text-white/30 font-normal text-[11px]">(royalty auto-dispatched on sale)</span></label>
+            <select
+              value={artistId}
+              onChange={(e) => setArtistId(e.target.value)}
+              className={`${inputClass} appearance-none`}
+              style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff60' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 12px center" }}
+            >
+              <option value="">— No artist assigned —</option>
+              {artists.map(a => (
+                <option key={a._id} value={a._id} className="bg-[#0d0d1a]">
+                  {a.name}
+                  {a.paymentPreference === "crypto"
+                    ? ` · ${a.walletAddress ? a.walletAddress.slice(0, 8) + "..." : "no wallet"}`
+                    : ` · Bank (${a.bankDetails?.bankName || "—"})`}
+                </option>
+              ))}
+            </select>
+            {artistId ? (() => {
+              const a = artists.find(x => x._id === artistId);
+              if (!a) return null;
+              return (
+                <p className="text-white/30 text-[11px] mt-1.5">
+                  4% royalty → <span className="text-white/55 font-medium">{a.name}</span> via{" "}
+                  {a.paymentPreference === "crypto"
+                    ? <span className="text-white/55">{a.walletAddress ? `${a.walletAddress.slice(0, 10)}...${a.walletAddress.slice(-6)}` : "no wallet set"}</span>
+                    : <span className="text-white/55">bank transfer ({a.bankDetails?.bankName || "—"})</span>
+                  }
+                </p>
+              );
+            })() : (
+              <p className="text-white/25 text-[11px] mt-1">Leave blank if no external artist for this item.</p>
+            )}
           </div>
 
-          {/* Recipient Wallet */}
-          <div>
-            <label className={labelClass}>Recipient Wallet (Owner) <span className="text-red-400">*</span></label>
-            <input
-              type="text"
-              placeholder="0x... (defaults to platform wallet if blank)"
-              value={recipientWallet}
-              onChange={(e) => setRecipientWallet(e.target.value)}
-              className={inputClass}
-            />
-            <p className="text-white/25 text-[11px] mt-1">
-              Wallet address that will own this item. Typically the platform wallet for NFA/NFC.
-            </p>
-          </div>
-
-          {/* Blockchain */}
-          <div>
+          {/* Blockchain + owner info */}
+          <div className="flex flex-col gap-2">
             <label className={labelClass}>Blockchain</label>
             <div className="w-full h-10 px-3 rounded-lg bg-white/[0.03] border border-white/8 flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
@@ -391,6 +404,13 @@ function CreateCollection() {
               <span className="text-white/60 text-sm font-medium">Base</span>
               <span className="ml-auto text-white/25 text-xs">Payments in USDC · Minted on listing</span>
             </div>
+            {import.meta.env.VITE_PLATFORM_WALLET_ADDRESS ? (
+              <p className="text-white/25 text-[11px]">
+                Initial owner: <span className="font-mono text-white/40">{import.meta.env.VITE_PLATFORM_WALLET_ADDRESS.slice(0, 10)}...{import.meta.env.VITE_PLATFORM_WALLET_ADDRESS.slice(-6)}</span> (platform wallet)
+              </p>
+            ) : (
+              <p className="text-red-400/60 text-[11px]">⚠ VITE_PLATFORM_WALLET_ADDRESS not set — item cannot be created.</p>
+            )}
           </div>
 
           {/* Info box */}

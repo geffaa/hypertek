@@ -1,65 +1,47 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import { useLocation, useNavigate } from "react-router-dom";
-
 import uploadIcon from "../assets/CreateCollection/uploadIcon.png";
-
 import toast from "react-hot-toast";
-
 import axios from "axios";
-
 import { Dashboard_Base_Url, getImageUrl } from "../Config";
 
+const F    = "Inter, sans-serif";
+const CARD = { background: "#0c0c18", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14 };
 
+const inputStyle = {
+  width: "100%", padding: "9px 12px", borderRadius: 8,
+  background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
+  color: "white", fontFamily: F, fontSize: 13, outline: "none",
+};
+
+const labelStyle = { fontFamily: F, fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.5)", marginBottom: 6, display: "block" };
 
 function EditSubCollection() {
-
   const navigate = useNavigate();
-
   const location = useLocation();
 
-
-
   const subCollectionId = location.state?.subCollectionId;
-
-  const parentId = location.state?.parentId;
-
-  const existingData = location.state?.existingData;
-
-
+  const parentId        = location.state?.parentId;
+  const existingData    = location.state?.existingData;
 
   const fileInputRef = useRef(null);
 
-
-
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const [imageFile, setImageFile] = useState(null);
-
-  const [name, setName] = useState("");
-
-  const [description, setDescription] = useState("");
-
-  const [priceETH, setPriceETH] = useState("");
-
-  const [assetType, setAssetType] = useState("NFT");
-
-  const [nfaFrame, setNfaFrame] = useState("");
-
+  const [selectedImage,    setSelectedImage]    = useState(null);
+  const [imageFile,        setImageFile]        = useState(null);
+  const [name,             setName]             = useState("");
+  const [description,      setDescription]      = useState("");
+  const [priceETH,         setPriceETH]         = useState("");
+  const [assetType,        setAssetType]        = useState("NFT");
+  const [nfaFrame,         setNfaFrame]         = useState("");
   const [minimumBuybackUSD, setMinimumBuybackUSD] = useState("");
-
-  const [reservePriceUSD, setReservePriceUSD] = useState("");
-
-  const [minBBError, setMinBBError] = useState("");
-
-  const [artistId, setArtistId] = useState("");
-
-  const [loading, setLoading] = useState(false);
-  const [artists, setArtists] = useState([]);
+  const [reservePriceUSD,  setReservePriceUSD]  = useState("");
+  const [minBBError,       setMinBBError]       = useState("");
+  const [artistId,         setArtistId]         = useState("");
+  const [artists,          setArtists]          = useState([]);
+  const [loading,          setLoading]          = useState(false);
 
   const token = localStorage.getItem("token");
 
-  // Load artists for dropdown
   useEffect(() => {
     axios
       .get(`${Dashboard_Base_Url}/v1/admin/artists`, {
@@ -69,437 +51,264 @@ function EditSubCollection() {
       .catch(() => {});
   }, []);
 
-  // Existing data load
   useEffect(() => {
-
-    if (existingData) {
-
-      setName(existingData.name || "");
-
-      setDescription(existingData.description || "");
-
-      setPriceETH(existingData.priceETH || existingData.price || "");
-
-      setAssetType(existingData.assetType || (existingData.isNFA ? "NFA" : "NFT"));
-
-      setNfaFrame(existingData.nfaFrame || "");
-
-      setMinimumBuybackUSD(existingData.minimumBuybackUSD || "");
-
-      setReservePriceUSD(existingData.reservePriceUSD || "");
-
-      setArtistId(existingData.artistId || "");
-
-      if (existingData.image) {
-
-        setSelectedImage(getImageUrl(existingData.image));
-
-      }
-
-    }
-
+    if (!existingData) return;
+    setName(existingData.name || "");
+    setDescription(existingData.description || "");
+    setPriceETH(existingData.priceETH || existingData.price || "");
+    setAssetType(existingData.assetType || (existingData.isNFA ? "NFA" : "NFT"));
+    setNfaFrame(existingData.nfaFrame || "");
+    setMinimumBuybackUSD(existingData.minimumBuybackUSD || "");
+    setReservePriceUSD(existingData.reservePriceUSD || "");
+    setArtistId(existingData.artistId || "");
+    if (existingData.image) setSelectedImage(getImageUrl(existingData.image));
   }, [existingData]);
 
-
-
   const handleFileChange = (e) => {
-
     const file = e.target.files[0];
-
     if (!file) return;
-
-
-
     const reader = new FileReader();
-
     reader.onload = () => setSelectedImage(reader.result);
-
     reader.readAsDataURL(file);
-
     setImageFile(file);
-
   };
-
-
 
   const handleDrop = (e) => {
-
     e.preventDefault();
-
     const file = e.dataTransfer.files[0];
-
     if (!file) return;
-
-
-
     const reader = new FileReader();
-
     reader.onload = () => setSelectedImage(reader.result);
-
     reader.readAsDataURL(file);
-
     setImageFile(file);
-
   };
 
-
-
-  const handleDragOver = (e) => e.preventDefault();
-
-
-
-  // Validate min BB against 35% cap of listing price
   const validateMinBB = (minBB, price) => {
     const p = parseFloat(price);
     const m = parseFloat(minBB);
     if (!p || !m) { setMinBBError(""); return true; }
     const max = parseFloat((p * 0.35).toFixed(2));
-    if (m > max) {
-      setMinBBError(`Max allowed: $${max} (35% of $${p})`);
-      return false;
-    }
+    if (m > max) { setMinBBError(`Max allowed: $${max} (35% of $${p})`); return false; }
     setMinBBError("");
     return true;
   };
 
   const handleSubmit = async () => {
-
     if (!name.trim()) return toast.error("Name is required");
-
-    if (!parentId) return toast.error("Parent collection not found");
-
+    if (!parentId)    return toast.error("Parent collection not found");
     if (!subCollectionId) return toast.error("Sub-collection ID not found");
-
-    if (!validateMinBB(minimumBuybackUSD, priceETH)) return toast.error("Minimum buyback exceeds 35% cap of listing price");
-
-
+    if (!validateMinBB(minimumBuybackUSD, priceETH)) return toast.error("Minimum buyback exceeds 35% cap");
 
     setLoading(true);
-
     try {
-
       const formData = new FormData();
-
       formData.append("name", name);
-
       formData.append("description", description);
-
       formData.append("priceETH", priceETH);
-
       formData.append("assetType", assetType);
-
       if (nfaFrame) formData.append("nfaFrame", nfaFrame);
-
       if (minimumBuybackUSD !== "") formData.append("minimumBuybackUSD", minimumBuybackUSD);
-
-      if (reservePriceUSD !== "") formData.append("reservePriceUSD", reservePriceUSD);
-
+      if (reservePriceUSD !== "")  formData.append("reservePriceUSD", reservePriceUSD);
       if (artistId) formData.append("artistId", artistId);
+      if (imageFile) formData.append("image", imageFile);
 
-
-
-      if (imageFile) {
-
-        formData.append("image", imageFile);
-
-      }
-
-
-
-      const response = await axios.put(
-
+      const res = await axios.put(
         `${Dashboard_Base_Url}/v1/nft/parent-collection/${parentId}/sub-collection/${subCollectionId}`,
-
         formData,
-
         { headers: { "Content-Type": "multipart/form-data" } }
-
       );
 
-
-
-      if (response.data.success) {
-
-        toast.success("Sub-collection updated successfully");
-
-        // 🔥 Dispatch event to update Category page and sidebar instantly
-
-        console.log("Dispatching categoriesUpdated event from EditSubCollection");
-
+      if (res.data.success) {
+        toast.success("Item updated successfully");
         window.dispatchEvent(new Event("categoriesUpdated"));
-
         setTimeout(() => navigate(-1), 800);
-
       } else {
-
-        toast.error(response.data.message || "Update failed");
-
+        toast.error(res.data.message || "Update failed");
       }
-
     } catch (err) {
-
-      console.error("Update error:", err);
-
-      if (err.response?.data?.error) {
-
-        toast.error(err.response.data.error);
-
-      } else if (err.response?.data?.message) {
-
-        toast.error(err.response.data.message);
-
-      } else {
-
-        toast.error("Failed to update sub-collection");
-
-      }
-
+      toast.error(err.response?.data?.error || err.response?.data?.message || "Failed to update item");
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
-
-
   if (!parentId || !subCollectionId) {
-
     return (
-
-      <div className="flex items-center justify-center h-screen bg-black text-white">
-
-        No parent collection or sub-collection selected
-
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 400, fontFamily: F, color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
+        No item selected — navigate here from the Items page.
       </div>
-
     );
-
   }
 
-
+  const selectedArtist = artists.find(a => a._id === artistId);
+  const showBuybackFields = assetType === "NFA" || assetType === "NFC";
 
   return (
-
-    <div className="mt-8 flex h-[700px] bg-black flex-col">
-
-
+    <div style={{ fontFamily: F, color: "white", paddingBottom: 48 }}>
 
       {/* Header */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+          <button
+            onClick={() => navigate(-1)}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.35)", display: "flex", alignItems: "center", gap: 4, padding: 0 }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span style={{ fontFamily: F, fontSize: 12 }}>Back</span>
+          </button>
+        </div>
+        <h1 style={{ fontFamily: F, fontSize: 22, fontWeight: 700, color: "white", margin: 0 }}>Edit Item</h1>
+        <p style={{ fontFamily: F, fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
+          Update item details. Changes take effect immediately.
+        </p>
+      </div>
 
-      <h1 className="font-inter px-4 font-semibold text-[25px] text-white">
+      {/* Main layout */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 20, alignItems: "start" }}>
 
-        Edit Collection
+        {/* Left — form */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-      </h1>
+          {/* Basic Info */}
+          <div style={{ ...CARD, padding: 20 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Basic Info</p>
 
-
-
-      <div className="flex justify-between items-center">
-
-        {/* Left Form */}
-
-        <div>
-
-          {/* Name */}
-
-          <div className="rounded-md p-4 flex flex-col gap-2 relative z-50 w-[400px]">
-
-            <label className="font-inter font-normal text-[18px] text-white">
-
-              Name
-
-            </label>
-
-            <input
-
-              type="text"
-
-              value={name}
-
-              onChange={(e) => setName(e.target.value)}
-
-              placeholder="Enter Name"
-
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 focus:outline-none bg-transparent"
-
-              style={{ height: "40px" }}
-
-            />
-
-          </div>
-
-
-
-          {/* Description */}
-
-          <div className="rounded-md p-4 flex flex-col gap-2 relative z-50 mt-4 w-[400px]">
-
-            <label className="font-inter font-normal text-[18px] text-white">
-
-              Description
-
-            </label>
-
-            <textarea
-
-              value={description}
-
-              onChange={(e) => setDescription(e.target.value)}
-
-              placeholder="Description"
-
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full h-[93px] focus:outline-none resize-none bg-transparent"
-
-            />
-
-          </div>
-
-
-
-          {/* Price */}
-
-          <div className="rounded-md p-4 flex flex-col gap-2 mt-4 w-[200px]">
-
-            <label className="font-inter font-normal text-[18px] text-white">
-
-              Price (USDC)
-
-            </label>
-
-            <input
-
-              type="number"
-
-              min="0"
-
-              value={priceETH}
-
-              onChange={(e) => setPriceETH(e.target.value)}
-
-              placeholder="Enter Price"
-
-              className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-3 w-full focus:outline-none bg-transparent"
-
-              style={{ height: "40px" }}
-
-            />
-
-          </div>
-
-          {/* Asset Type Selector */}
-          <div className="rounded-md p-4 flex flex-col gap-2 mt-2 w-[400px]">
-            <label className="font-inter font-normal text-[18px] text-white">
-              Asset Type
-            </label>
-            <div className="flex gap-2">
-              {[
-                { value: "NFA", label: "NFA", desc: "Hypertek only · Highest bonus · Buyback guaranteed", color: "#7C3AED" },
-                { value: "NFC", label: "NFC", desc: "Hypertek / licensed player · Game bonus · Buyback", color: "#002AA8" },
-                { value: "NFT", label: "NFT", desc: "Player created · No game bonus · No buyback", color: "#444" },
-              ].map(({ value, label, desc, color }) => (
-                <button
-                  key={value}
-                  type="button"
-                  onClick={() => setAssetType(value)}
-                  className="flex-1 py-2 px-2 rounded-md text-sm font-medium border transition-colors text-left"
-                  style={{
-                    background: assetType === value ? color : "transparent",
-                    borderColor: assetType === value ? color : "rgba(255,255,255,0.2)",
-                    color: "#fff",
-                    opacity: assetType === value ? 1 : 0.5,
-                  }}
-                >
-                  <div className="font-bold text-[13px]">{label}</div>
-                  <div className="text-[10px] text-white/60 leading-tight mt-0.5">{desc}</div>
-                </button>
-              ))}
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div>
+                <label style={labelStyle}>Name *</label>
+                <input
+                  style={inputStyle}
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder="Item name"
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Description</label>
+                <textarea
+                  style={{ ...inputStyle, height: 80, resize: "vertical" }}
+                  value={description}
+                  onChange={e => setDescription(e.target.value)}
+                  placeholder="Item description"
+                />
+              </div>
+              <div style={{ maxWidth: 200 }}>
+                <label style={labelStyle}>Price (USDC)</label>
+                <input
+                  style={inputStyle}
+                  type="number"
+                  min="0"
+                  value={priceETH}
+                  onChange={e => setPriceETH(e.target.value)}
+                  placeholder="0.00"
+                />
+              </div>
             </div>
           </div>
 
-          {/* NFA Frame + Buyback fields (NFA and NFC only) */}
-          {(assetType === "NFA" || assetType === "NFC") && (
-            <>
-              {assetType === "NFA" && (
-                <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
-                  <label className="font-inter font-normal text-[16px] text-white/70">
-                    NFA Frame Style
-                  </label>
-                  <select
-                    value={nfaFrame}
-                    onChange={(e) => setNfaFrame(e.target.value)}
-                    className="text-white rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
-                    style={{ background: "#111", height: "40px" }}
+          {/* Asset Type */}
+          <div style={{ ...CARD, padding: 20 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Asset Type</p>
+            <div style={{ display: "flex", gap: 10 }}>
+              {[
+                { value: "NFA", label: "NFA", desc: "Hypertek only · Highest bonus · Buyback guaranteed", accent: "#7C3AED" },
+                { value: "NFC", label: "NFC", desc: "Hypertek / licensed player · Game bonus · Buyback",  accent: "#002AA8" },
+                { value: "NFT", label: "NFT", desc: "Player created · No game bonus · No buyback",        accent: "#374151" },
+              ].map(({ value, label, desc, accent }) => {
+                const active = assetType === value;
+                return (
+                  <button
+                    key={value}
+                    onClick={() => setAssetType(value)}
+                    style={{
+                      flex: 1, padding: "12px 10px", borderRadius: 10, textAlign: "left", cursor: "pointer",
+                      background: active ? `${accent}22` : "rgba(255,255,255,0.03)",
+                      border: `1px solid ${active ? accent : "rgba(255,255,255,0.1)"}`,
+                      transition: "all 0.15s",
+                    }}
                   >
-                    <option value="">Default (blue ring)</option>
-                    <option value="gold">Gold Frame</option>
-                    <option value="silver">Silver Frame</option>
-                    <option value="diamond">Diamond Frame</option>
-                  </select>
-                </div>
-              )}
+                    <div style={{ fontFamily: F, fontSize: 13, fontWeight: 700, color: active ? "white" : "rgba(255,255,255,0.5)" }}>{label}</div>
+                    <div style={{ fontFamily: F, fontSize: 10, color: "rgba(255,255,255,0.35)", marginTop: 4, lineHeight: 1.4 }}>{desc}</div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-              <div className="rounded-md p-4 flex flex-col gap-2 w-[280px]">
-                <label className="font-inter font-normal text-[16px] text-white/70">
-                  Reserve Price (USD)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  value={reservePriceUSD}
-                  onChange={(e) => setReservePriceUSD(e.target.value)}
-                  placeholder="e.g. 500"
-                  className="text-white placeholder-[#FFFFFFAB] rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none bg-transparent"
-                  style={{ height: "40px" }}
-                />
-              </div>
-
-              <div className="rounded-md p-4 flex flex-col gap-2 w-[280px]">
-                <label className="font-inter font-normal text-[16px] text-white/70">
-                  Minimum Buyback (USD)
-                  {priceETH && (
-                    <span className="ml-2 text-[11px] text-yellow-400">
-                      Max: ${(parseFloat(priceETH) * 0.35).toFixed(2)} (35% of ${priceETH})
-                    </span>
-                  )}
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  value={minimumBuybackUSD}
-                  onChange={(e) => {
-                    setMinimumBuybackUSD(e.target.value);
-                    validateMinBB(e.target.value, priceETH);
-                  }}
-                  placeholder="e.g. 100"
-                  className="text-white placeholder-[#FFFFFFAB] rounded border px-4 py-2 focus:outline-none bg-transparent"
-                  style={{
-                    height: "40px",
-                    borderColor: minBBError ? "#EF4444" : "rgba(255,255,255,0.67)",
-                  }}
-                />
-                {minBBError && (
-                  <span className="text-red-400 text-[11px]">{minBBError}</span>
+          {/* Buyback / NFA fields */}
+          {showBuybackFields && (
+            <div style={{ ...CARD, padding: 20 }}>
+              <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Buyback Settings</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                {assetType === "NFA" && (
+                  <div>
+                    <label style={labelStyle}>NFA Frame Style</label>
+                    <select
+                      value={nfaFrame}
+                      onChange={e => setNfaFrame(e.target.value)}
+                      style={{ ...inputStyle, cursor: "pointer" }}
+                    >
+                      <option value="">Default (blue ring)</option>
+                      <option value="gold">Gold Frame</option>
+                      <option value="silver">Silver Frame</option>
+                      <option value="diamond">Diamond Frame</option>
+                    </select>
+                  </div>
                 )}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div>
+                    <label style={labelStyle}>Reserve Price (USD)</label>
+                    <input
+                      style={inputStyle}
+                      type="number"
+                      min="0"
+                      value={reservePriceUSD}
+                      onChange={e => setReservePriceUSD(e.target.value)}
+                      placeholder="e.g. 500"
+                    />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>
+                      Minimum Buyback (USD)
+                      {priceETH && (
+                        <span style={{ marginLeft: 6, fontSize: 10, color: "#f59e0b" }}>
+                          Max: ${(parseFloat(priceETH) * 0.35).toFixed(2)}
+                        </span>
+                      )}
+                    </label>
+                    <input
+                      style={{ ...inputStyle, borderColor: minBBError ? "#EF4444" : "rgba(255,255,255,0.12)" }}
+                      type="number"
+                      min="0"
+                      value={minimumBuybackUSD}
+                      onChange={e => { setMinimumBuybackUSD(e.target.value); validateMinBB(e.target.value, priceETH); }}
+                      placeholder="e.g. 100"
+                    />
+                    {minBBError && <p style={{ fontFamily: F, fontSize: 11, color: "#ef4444", marginTop: 4 }}>{minBBError}</p>}
+                  </div>
+                </div>
               </div>
-            </>
+            </div>
           )}
 
-          {/* Artist Assignment */}
-          <div className="rounded-md p-4 flex flex-col gap-2 w-[400px]">
-            <label className="font-inter font-normal text-[16px] text-white/70">
+          {/* Artist */}
+          <div style={{ ...CARD, padding: 20 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
+              Artist Assignment
+            </p>
+            <label style={labelStyle}>
               Assign Artist
-              <span className="ml-2 text-[11px] text-white/40">(royalty auto-dispatched on sale)</span>
+              <span style={{ marginLeft: 6, fontSize: 10, color: "rgba(255,255,255,0.3)", fontWeight: 400 }}>royalty auto-dispatched on sale</span>
             </label>
             <select
               value={artistId}
-              onChange={(e) => setArtistId(e.target.value)}
-              className="text-white rounded border border-[#FFFFFFAB] px-4 py-2 focus:outline-none text-sm"
-              style={{ background: "#111", height: "40px" }}
+              onChange={e => setArtistId(e.target.value)}
+              style={{ ...inputStyle, cursor: "pointer" }}
             >
               <option value="">— No artist assigned —</option>
-              {artists.map((a) => (
+              {artists.map(a => (
                 <option key={a._id} value={a._id}>
                   {a.name}
                   {a.paymentPreference === "crypto"
@@ -508,181 +317,95 @@ function EditSubCollection() {
                 </option>
               ))}
             </select>
-            {artistId && (() => {
-              const a = artists.find(x => x._id === artistId);
-              if (!a) return null;
-              return (
-                <div className="text-[11px] text-white/40 mt-1">
-                  Royalty (4%) will be sent via{" "}
-                  <span className="text-white/60 font-medium">
-                    {a.paymentPreference === "crypto" ? "crypto wallet" : "bank transfer"}
-                  </span>{" "}
-                  to {a.name} on every sale.
-                </div>
-              );
-            })()}
+            {selectedArtist && (
+              <p style={{ fontFamily: F, fontSize: 11, color: "rgba(255,255,255,0.35)", marginTop: 8 }}>
+                4% royalty → <span style={{ color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>{selectedArtist.name}</span> via{" "}
+                {selectedArtist.paymentPreference === "crypto" ? "crypto wallet" : "bank transfer"}
+              </p>
+            )}
           </div>
 
         </div>
 
-
-
-        {/* Right Image Upload */}
-
-        <div
-
-          className="flex items-center justify-center backdrop-blur-sm bg-white/5 border border-white/30 rounded-md cursor-pointer"
-
-          style={{
-
-            width: "324px",
-
-            height: "312px",
-
-            borderStyle: "dashed",
-
-            position: "relative",
-
-          }}
-
-          onDrop={handleDrop}
-
-          onDragOver={handleDragOver}
-
-          onClick={() => fileInputRef.current?.click()}
-
-        >
-
-          {selectedImage ? (
-
-            <img
-
-              src={selectedImage}
-
-              alt="Preview"
-
-              className="max-w-full max-h-full rounded-md object-contain"
-
-            />
-
-          ) : (
-
-            <div className="flex flex-col items-center justify-center gap-2">
-
-              <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
-
-              <span className="text-white font-semibold text-center">
-
-                Click to upload or drag and drop
-
-              </span>
-
-              <span className="text-gray-400 text-sm">
-
-                (Leave empty to keep existing image)
-
-              </span>
-
+        {/* Right — image */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16, position: "sticky", top: 20 }}>
+          <div style={{ ...CARD, padding: 20 }}>
+            <p style={{ fontFamily: F, fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>Item Image</p>
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDrop={handleDrop}
+              onDragOver={e => e.preventDefault()}
+              style={{
+                width: "100%", aspectRatio: "1 / 1", borderRadius: 10, cursor: "pointer",
+                border: "2px dashed rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.02)",
+                display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
+                transition: "border-color 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"}
+            >
+              {selectedImage ? (
+                <img src={selectedImage} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+                  <img src={uploadIcon} alt="Upload" style={{ width: 28, height: 28, opacity: 0.4 }} />
+                  <span style={{ fontFamily: F, fontSize: 12, color: "rgba(255,255,255,0.35)", textAlign: "center" }}>
+                    Click or drag to upload
+                  </span>
+                  <span style={{ fontFamily: F, fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
+                    Leave empty to keep existing
+                  </span>
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
             </div>
+            {selectedImage && (
+              <button
+                onClick={e => { e.stopPropagation(); setSelectedImage(null); setImageFile(null); }}
+                style={{ marginTop: 10, width: "100%", padding: "7px 0", borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)", fontFamily: F, fontSize: 12, cursor: "pointer" }}
+              >
+                Remove image
+              </button>
+            )}
+          </div>
 
-          )}
-
-          <input
-
-            type="file"
-
-            accept="image/*"
-
-            ref={fileInputRef}
-
-            onChange={handleFileChange}
-
-            className="absolute w-full h-full opacity-0 cursor-pointer pointer-events-none"
-
-          />
-
+          {/* Actions */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              style={{
+                width: "100%", padding: "11px 0", borderRadius: 10, border: "none", cursor: loading ? "not-allowed" : "pointer",
+                background: loading ? "rgba(0,42,168,0.5)" : "#002AA8",
+                color: "white", fontFamily: F, fontSize: 14, fontWeight: 600, transition: "background 0.15s",
+                opacity: loading ? 0.7 : 1,
+              }}
+            >
+              {loading ? "Saving…" : "Update Item"}
+            </button>
+            <button
+              onClick={() => navigate(-1)}
+              disabled={loading}
+              style={{
+                width: "100%", padding: "11px 0", borderRadius: 10, cursor: "pointer",
+                background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
+                color: "rgba(255,255,255,0.6)", fontFamily: F, fontSize: 14, fontWeight: 500,
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
 
       </div>
-
-
-
-      {/* Buttons */}
-
-      <div className="w-full flex justify-between px-12 items-center pt-24">
-
-        <button
-
-          onClick={() => navigate(-1)}
-
-          disabled={loading}
-
-          className="flex items-center justify-center rounded-[6px] px-4 py-2"
-
-          style={{
-
-            width: "190px",
-
-            height: "42px",
-
-            background: "#666",
-
-            border: "none",
-
-            cursor: "pointer",
-
-            opacity: loading ? 0.6 : 1
-
-          }}
-
-        >
-
-          <span className="text-white font-inter text-[18px]">Cancel</span>
-
-        </button>
-
-        <button
-
-          onClick={handleSubmit}
-
-          disabled={loading}
-
-          className="flex items-center justify-center rounded-[6px] px-4 py-2"
-
-          style={{
-
-            width: "190px",
-
-            height: "42px",
-
-            background: "#002AA8",
-
-            border: "none",
-
-            cursor: loading ? "not-allowed" : "pointer",
-
-            opacity: loading ? 0.6 : 1
-
-          }}
-
-        >
-
-          <span className="text-white font-inter text-[18px]">
-
-            {loading ? "Updating..." : "Update Collection"}
-
-          </span>
-
-        </button>
-
-      </div>
-
     </div>
-
   );
-
 }
-
-
 
 export default EditSubCollection;

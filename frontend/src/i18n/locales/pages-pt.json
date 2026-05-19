@@ -162,5 +162,72 @@
     "minRead":           "min de leitura",
     "notFound":          "Artigo não encontrado",
     "backToArticles":    "Voltar aos Artigos"
+  },
+
+  "chatbot": {
+    "greeting":       "Olá! Sou o HyperBot, seu assistente de IA do HyperTek100. Pergunte-me qualquer coisa sobre a plataforma, mercado, jogos ou NFTs!",
+    "online":         "Online",
+    "quickQuestions": "Perguntas rápidas",
+    "placeholder":    "Pergunte-me qualquer coisa... (Enter para enviar)",
+    "error":          "Desculpe, não foi possível obter uma resposta agora. Tente novamente ou entre em contato com nossa equipe de suporte.",
+    "peek": {
+      "0": "Precisa de ajuda? Pergunte-me qualquer coisa!",
+      "1": "Dúvidas sobre HyperBucks?",
+      "2": "Curioso sobre como os leilões funcionam?"
+    },
+    "shortcuts": {
+      "earnLabel":     "Ganhar HyperBucks",
+      "earnText":      "Como ganho HyperBucks?",
+      "cashOutLabel":  "Sacar HB",
+      "cashOutText":   "Como saco meus HyperBucks?",
+      "auctionsLabel": "Como os Leilões Funcionam",
+      "auctionsText":  "Como funcionam os leilões?",
+      "gamesLabel":    "Jogos Disponíveis",
+      "gamesText":     "Quais jogos estão disponíveis no HyperTek100?"
+    }
+  },
+
+  "auth": {
+    "signIn":                  "Entrar",
+    "signUp":                  "Cadastrar",
+    "emailPlaceholder":        "Email",
+    "passwordPlaceholder":     "Senha",
+    "forgotPassword":          "Esqueceu a senha?",
+    "signingIn":               "Entrando...",
+    "signInBtn":               "Entrar",
+    "noAccount":               "Não tem uma conta?",
+    "signUpLink":              "Cadastrar",
+    "alreadyAccount":          "Já tem uma conta?",
+    "signInLink":              "Entrar",
+    "orContinueWith":          "Ou continue com",
+    "fullNamePlaceholder":     "Nome Completo",
+    "confirmPasswordPlaceholder": "Confirmar Senha",
+    "creatingAccount":         "Criando Conta...",
+    "signUpBtn":               "Cadastrar",
+    "walletReady":             "Sua Carteira Está Pronta",
+    "walletReadyDesc":         "Uma carteira incorporada segura foi criada para sua conta.",
+    "walletWarning":           "⚠️ Nunca compartilhe sua chave privada com ninguém. Quem tiver sua chave privada tem controle total sobre sua carteira e ativos.",
+    "walletAddress":           "Seu Endereço de Carteira",
+    "enterPasswordReveal":     "Digite sua senha para revelar sua chave privada:",
+    "reEnterPassword":         "Digite a senha novamente",
+    "verifying":               "Verificando...",
+    "revealPrivateKey":        "Revelar Chave Privada",
+    "privateKeyLabel":         "Chave Privada — guarde com segurança, nunca compartilhe",
+    "savedWalletContinue":     "Salvei minhas informações de carteira — Continuar",
+    "backToSignIn":            "Voltar ao Login",
+    "forgotPasswordHeading":   "Esqueceu a Senha",
+    "forgotPasswordDesc":      "Digite seu email e enviaremos um link de redefinição.",
+    "forgotPasswordSentDesc":  "Verifique sua caixa de entrada para o link de redefinição.",
+    "emailInputPlaceholder":   "Digite seu email",
+    "sending":                 "Enviando...",
+    "sendResetLink":           "Enviar Link de Redefinição",
+    "resetLinkSent":           "Link de redefinição enviado! Verifique sua caixa de entrada.",
+    "didntReceive":            "Não recebeu? Enviar novamente",
+    "resetPassword":           "Redefinir Senha",
+    "resetPasswordDesc":       "Digite sua nova senha abaixo.",
+    "newPasswordPlaceholder":  "Nova Senha",
+    "passwordHint":            "A senha deve ter entre 8 e 20 caracteres.",
+    "resetting":               "Redefinindo...",
+    "resetPasswordBtn":        "Redefinir Senha"
   }
 }

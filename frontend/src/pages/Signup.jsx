@@ -10,12 +10,14 @@ import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
+import { useTranslation } from "react-i18next";
 
 import symbol from "../assets/images/login/Symbol.svg.png";
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
@@ -128,19 +130,19 @@ function Signup() {
       {walletModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4">
           <div className="bg-[#0f0f1a] border border-blue-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <h2 className="text-white text-xl font-bold mb-1">Your Wallet is Ready</h2>
-            <p className="text-gray-400 text-sm mb-4">A secure embedded wallet has been created for your account.</p>
+            <h2 className="text-white text-xl font-bold mb-1">{t("auth.walletReady")}</h2>
+            <p className="text-gray-400 text-sm mb-4">{t("auth.walletReadyDesc")}</p>
 
             {/* Warning */}
             <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mb-4">
               <p className="text-red-400 text-xs font-semibold">
-                ⚠️ Never share your private key with anyone. Anyone with your private key has full control of your wallet and assets.
+                {t("auth.walletWarning")}
               </p>
             </div>
 
             {/* Wallet Address */}
             <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-4">
-              <p className="text-xs text-gray-400 mb-1">Your Wallet Address</p>
+              <p className="text-xs text-gray-400 mb-1">{t("auth.walletAddress")}</p>
               <div className="flex items-center justify-between gap-2">
                 <span className="text-sm font-mono text-blue-400 break-all">{walletModal.walletAddress}</span>
                 <button
@@ -156,13 +158,13 @@ function Signup() {
             {/* Private Key Section */}
             {!privateKey ? (
               <form onSubmit={handleRevealPrivateKey} className="space-y-2">
-                <p className="text-xs text-gray-400">Enter your password to reveal your private key:</p>
+                <p className="text-xs text-gray-400">{t("auth.enterPasswordReveal")}</p>
                 <div className="relative">
                   <input
                     type={showPrivateKey ? "text" : "password"}
                     value={pkPassword}
                     onChange={(e) => setPkPassword(e.target.value)}
-                    placeholder="Re-enter your password"
+                    placeholder={t("auth.reEnterPassword")}
                     className="w-full bg-white/5 border border-white/15 text-white text-sm rounded-lg px-3 py-2 pr-10 focus:outline-none focus:border-blue-500/60"
                     required
                   />
@@ -175,12 +177,12 @@ function Signup() {
                   disabled={revealLoading}
                   className="w-full py-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white text-sm font-semibold rounded-lg transition-all"
                 >
-                  {revealLoading ? "Verifying..." : "Reveal Private Key"}
+                  {revealLoading ? t("auth.verifying") : t("auth.revealPrivateKey")}
                 </button>
               </form>
             ) : (
               <div className="bg-black/40 border border-white/10 rounded-lg p-3 mb-2">
-                <p className="text-xs text-gray-400 mb-1">Private Key — store this safely, never share it</p>
+                <p className="text-xs text-gray-400 mb-1">{t("auth.privateKeyLabel")}</p>
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-mono text-green-400 break-all">{showPrivateKey ? privateKey : "•".repeat(32)}</span>
                   <div className="flex gap-2 shrink-0">
@@ -200,7 +202,7 @@ function Signup() {
               onClick={() => { setWalletModal(null); navigate("/"); }}
               className="w-full mt-4 py-2 border border-white/15 text-white/70 hover:text-white text-sm rounded-lg transition-all"
             >
-              I've saved my wallet info — Continue
+              {t("auth.savedWalletContinue")}
             </button>
           </div>
         </div>
@@ -208,7 +210,7 @@ function Signup() {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-white text-3xl font-bold">Sign up</h1>
+        <h1 className="text-white text-3xl font-bold">{t("auth.signUp")}</h1>
       </div>
 
       {/* Form */}
@@ -221,7 +223,7 @@ function Signup() {
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
-            placeholder="Full Name"
+            placeholder={t("auth.fullNamePlaceholder")}
             className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all text-sm"
             required
           />
@@ -235,7 +237,7 @@ function Signup() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder={t("auth.emailPlaceholder")}
             className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -249,7 +251,7 @@ function Signup() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Password"
+            placeholder={t("auth.passwordPlaceholder")}
             className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -266,7 +268,7 @@ function Signup() {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            placeholder="Confirm Password"
+            placeholder={t("auth.confirmPasswordPlaceholder")}
             className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -281,22 +283,22 @@ function Signup() {
           disabled={loading}
           className="w-full py-3 mt-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold rounded-lg transition-all duration-300 border border-white/10 text-sm"
         >
-          {loading ? "Creating Account..." : "Sign Up"}
+          {loading ? t("auth.creatingAccount") : t("auth.signUpBtn")}
         </button>
       </form>
 
       {/* Already have account */}
       <p className="text-white/50 text-sm text-center mt-4">
-        Already have an account?{" "}
+        {t("auth.alreadyAccount")}{" "}
         <Link to="/signin" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-          Sign in
+          {t("auth.signInLink")}
         </Link>
       </p>
 
       {/* Divider */}
       <div className="flex items-center gap-3 my-6">
         <div className="flex-1 h-px bg-white/10" />
-        <span className="text-white/40 text-xs">Or continue with</span>
+        <span className="text-white/40 text-xs">{t("auth.orContinueWith")}</span>
         <div className="flex-1 h-px bg-white/10" />
       </div>
 

@@ -2,17 +2,38 @@
 
 import { Payment } from "../Models/Payment.js";
 
-// 📘 Controller 1: Get Complete Payment History
+// 📘 Controller 1: Get Complete Payment History (admin)
 export const getAllPaymentHistory = async (req, res) => {
   try {
-    const payments = await Payment.find()
-    if (!payments.length) {
-      return res.status(404).json({ message: "No payment records found." });
+    const { status, search, page = 1, limit = 50 } = req.query;
+
+    const filter = {};
+    if (status && status !== "all") filter.status = status;
+    if (search?.trim()) {
+      const re = new RegExp(search.trim(), "i");
+      filter.$or = [
+        { gameTitle:     re },
+        { transactionId: re },
+        { provider:      re },
+        { itemType:      re },
+        { buyerWallet:   re },
+      ];
     }
+
+    const skip  = (Number(page) - 1) * Number(limit);
+    const total = await Payment.countDocuments(filter);
+    const payments = await Payment
+      .find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(Number(limit))
+      .lean();
 
     res.status(200).json({
       success: true,
-      total: payments.length,
+      total,
+      page: Number(page),
+      totalPages: Math.ceil(total / Number(limit)),
       data: payments,
     });
   } catch (error) {

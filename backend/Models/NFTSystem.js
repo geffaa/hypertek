@@ -37,6 +37,16 @@ const subCollectionSchema = new mongoose.Schema({
   // Artist linked to this item — admin selects from Artist model
   // Royalty (4%) on every sale is dispatched using the artist's payment method
   artistId: { type: mongoose.Schema.Types.ObjectId, ref: "Artist", default: null },
+  // CPI history — mirrors parent-level for sub-collection items
+  cpiHistory: [
+    {
+      year:        Number,
+      cpiPercent:  Number,
+      previousMin: Number,
+      newMin:      Number,
+      appliedAt:   { type: Date, default: Date.now },
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 });
 

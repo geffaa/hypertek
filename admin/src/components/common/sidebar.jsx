@@ -46,6 +46,7 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
   const isRoyaltyPayouts = path.includes("/royalty-payouts");
   const isBuybackApproval = path.includes("/buyback-approval");
   const isCPIAdjustment   = path.includes("/cpi-adjustment");
+  const isHyperBucks      = path.includes("/hyperbucks");
 
 
   return (
@@ -197,6 +198,16 @@ const Sidebar = ({ onLogoutClick, isOpen, onClose }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
                 <span className="pt-[2px]">CPI Adjustment</span>
+              </li>
+            </Link>
+
+            {/* HyperBucks */}
+            <Link to={withAdmin("/hyperbucks")} onClick={handleLinkClick}>
+              <li className={`menu-item ${isHyperBucks ? "bg-[#002AA8]" : ""}`}>
+                <svg className="w-[20px] h-[20px] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span className="pt-[2px]">HyperBucks</span>
               </li>
             </Link>
 

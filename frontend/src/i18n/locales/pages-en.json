@@ -162,5 +162,72 @@
     "minRead":           "min read",
     "notFound":          "Article not found",
     "backToArticles":    "Back to Articles"
+  },
+
+  "chatbot": {
+    "greeting":       "Hi! I'm HyperBot, your HyperTek100 AI assistant. Ask me anything about the platform, marketplace, games, or NFTs!",
+    "online":         "Online",
+    "quickQuestions": "Quick questions",
+    "placeholder":    "Ask me anything... (Enter to send)",
+    "error":          "Sorry, I could not get a response right now. Please try again or contact our support team.",
+    "peek": {
+      "0": "Need help? Ask me anything!",
+      "1": "Questions about HyperBucks?",
+      "2": "Curious how auctions work?"
+    },
+    "shortcuts": {
+      "earnLabel":     "Earn HyperBucks",
+      "earnText":      "How do I earn HyperBucks?",
+      "cashOutLabel":  "Cash Out HB",
+      "cashOutText":   "How do I cash out my HyperBucks?",
+      "auctionsLabel": "How Auctions Work",
+      "auctionsText":  "How do auctions work?",
+      "gamesLabel":    "Available Games",
+      "gamesText":     "What games are available on HyperTek100?"
+    }
+  },
+
+  "auth": {
+    "signIn":                  "Sign in",
+    "signUp":                  "Sign up",
+    "emailPlaceholder":        "Email",
+    "passwordPlaceholder":     "Password",
+    "forgotPassword":          "Forgot Password?",
+    "signingIn":               "Signing in...",
+    "signInBtn":               "Sign In",
+    "noAccount":               "Don't have an account?",
+    "signUpLink":              "Sign up",
+    "alreadyAccount":          "Already have an account?",
+    "signInLink":              "Sign in",
+    "orContinueWith":          "Or continue with",
+    "fullNamePlaceholder":     "Full Name",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "creatingAccount":         "Creating Account...",
+    "signUpBtn":               "Sign Up",
+    "walletReady":             "Your Wallet is Ready",
+    "walletReadyDesc":         "A secure embedded wallet has been created for your account.",
+    "walletWarning":           "⚠️ Never share your private key with anyone. Anyone with your private key has full control of your wallet and assets.",
+    "walletAddress":           "Your Wallet Address",
+    "enterPasswordReveal":     "Enter your password to reveal your private key:",
+    "reEnterPassword":         "Re-enter your password",
+    "verifying":               "Verifying...",
+    "revealPrivateKey":        "Reveal Private Key",
+    "privateKeyLabel":         "Private Key — store this safely, never share it",
+    "savedWalletContinue":     "I've saved my wallet info — Continue",
+    "backToSignIn":            "Back to Sign In",
+    "forgotPasswordHeading":   "Forgot Password",
+    "forgotPasswordDesc":      "Enter your email and we'll send you a reset link.",
+    "forgotPasswordSentDesc":  "Check your inbox for a reset link.",
+    "emailInputPlaceholder":   "Enter your email",
+    "sending":                 "Sending...",
+    "sendResetLink":           "Send Reset Link",
+    "resetLinkSent":           "Reset link sent! Please check your email inbox.",
+    "didntReceive":            "Didn't receive it? Send again",
+    "resetPassword":           "Reset Password",
+    "resetPasswordDesc":       "Enter your new password below.",
+    "newPasswordPlaceholder":  "New Password",
+    "passwordHint":            "Password must be 8–20 characters.",
+    "resetting":               "Resetting...",
+    "resetPasswordBtn":        "Reset Password"
   }
 }

@@ -6,10 +6,12 @@ import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
+import { useTranslation } from "react-i18next";
 
 function ResetPassword() {
   const { token } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ password: "", confirmPassword: "" });
   const [loading, setLoading] = useState(false);
@@ -55,10 +57,10 @@ function ResetPassword() {
       {/* Header */}
       <div className="mb-8">
         <Link to="/signin" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-4 transition-colors">
-          <FaArrowLeft className="text-xs" /> Back to Sign In
+          <FaArrowLeft className="text-xs" /> {t("auth.backToSignIn")}
         </Link>
-        <h1 className="text-white text-3xl font-bold">Reset Password</h1>
-        <p className="text-white/50 text-sm mt-2">Enter your new password below.</p>
+        <h1 className="text-white text-3xl font-bold">{t("auth.resetPassword")}</h1>
+        <p className="text-white/50 text-sm mt-2">{t("auth.resetPasswordDesc")}</p>
       </div>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -70,7 +72,7 @@ function ResetPassword() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="New Password"
+            placeholder={t("auth.newPasswordPlaceholder")}
             className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -87,7 +89,7 @@ function ResetPassword() {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            placeholder="Confirm Password"
+            placeholder={t("auth.confirmPasswordPlaceholder")}
             className="w-full pl-10 pr-10 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
             required
           />
@@ -97,7 +99,7 @@ function ResetPassword() {
         </div>
 
         {/* Password hint */}
-        <p className="text-white/30 text-xs -mt-1">Password must be 8–20 characters.</p>
+        <p className="text-white/30 text-xs -mt-1">{t("auth.passwordHint")}</p>
 
         {/* Submit */}
         <button
@@ -105,7 +107,7 @@ function ResetPassword() {
           disabled={loading}
           className="w-full py-3 mt-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold rounded-lg transition-all duration-300 border border-white/10 text-sm"
         >
-          {loading ? "Resetting..." : "Reset Password"}
+          {loading ? t("auth.resetting") : t("auth.resetPasswordBtn")}
         </button>
       </form>
     </AuthLayout>

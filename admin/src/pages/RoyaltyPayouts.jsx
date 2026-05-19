@@ -65,8 +65,11 @@ function RoyaltyPayouts() {
 
   useEffect(() => { fetchPayouts(typeFilter, statFilter); }, [typeFilter, statFilter]);
 
-  const handleMarkDispatched = async (id) => {
-    if (!window.confirm("Mark this payout as dispatched? Only do this after you have manually sent the payment.")) return;
+  const handleMarkDispatched = async (id, paymentType) => {
+    const msg = paymentType === "crypto"
+      ? "Crypto dispatch failed. Mark as manually sent (bank/Wise fallback)? Only confirm after you have transferred the amount to the artist."
+      : "Mark this bank payout as dispatched? Only do this after you have manually sent the payment via Wise.";
+    if (!window.confirm(msg)) return;
     setProcessing(id);
     try {
       await axios.put(
@@ -78,6 +81,29 @@ function RoyaltyPayouts() {
       setPayouts((prev) => prev.map((p) => p._id === id ? { ...p, status: "dispatched" } : p));
     } catch {
       toast.error("Failed to update payout");
+    } finally {
+      setProcessing(null);
+    }
+  };
+
+  const handleRetry = async (id) => {
+    if (!window.confirm("Retry on-chain USDC dispatch? Make sure the backend wallet has sufficient USDC balance.")) return;
+    setProcessing(id);
+    try {
+      const res = await axios.post(
+        `${Dashboard_Base_Url}/v1/admin/nfa/royalty-payouts/${id}/retry`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      const updated = res.data.data;
+      setPayouts((prev) => prev.map((p) => p._id === id ? updated : p));
+      if (updated.status === "dispatched") {
+        toast.success("Payout dispatched on-chain ✓");
+      } else {
+        toast.error("Retry failed — check backend wallet USDC balance");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Retry failed");
     } finally {
       setProcessing(null);
     }
@@ -216,7 +242,11 @@ function RoyaltyPayouts() {
               {payouts.map((p) => {
                 const typeCfg   = TYPE_CONFIG[p.payoutType]   || { label: p.payoutType || "—", color: "bg-white/10 text-white/50", dot: "bg-white/30" };
                 const statusCfg = STATUS_CONFIG[p.status]     || { label: p.status,   color: "bg-white/10 text-white/50" };
-                const canMarkSent = (p.status === "pending" || p.status === "failed") && p.paymentType === "bank";
+                // Bank: pending or failed → manual Wise transfer
+                // Crypto failed: show both Retry (on-chain) and Mark Sent (manual fallback)
+                const canMarkSent    = p.status === "pending" && p.paymentType === "bank"
+                                    || p.status === "failed";
+                const canRetryCrypto = p.status === "failed" && p.paymentType === "crypto";
 
                 return (
                   <tr key={p._id} className="hover:bg-white/[0.02] transition-colors">
@@ -239,10 +269,14 @@ function RoyaltyPayouts() {
                     </td>
 
                     {/* Recipient */}
-                    <td className="px-4 py-3 text-white/50 text-xs font-mono">
-                      {p.creatorWallet
-                        ? `${p.creatorWallet.slice(0, 8)}...${p.creatorWallet.slice(-6)}`
-                        : "—"}
+                    <td className="px-4 py-3 text-xs">
+                      {!p.creatorWallet || p.creatorWallet === "bank" ? (
+                        <span className="px-2 py-0.5 rounded bg-purple-500/15 text-purple-300">Bank Transfer</span>
+                      ) : (
+                        <span className="font-mono text-white/50">
+                          {p.creatorWallet.slice(0, 8)}...{p.creatorWallet.slice(-6)}
+                        </span>
+                      )}
                     </td>
 
                     {/* Method */}
@@ -282,15 +316,26 @@ function RoyaltyPayouts() {
 
                     {/* Action */}
                     <td className="px-4 py-3">
-                      {canMarkSent && (
-                        <button
-                          onClick={() => handleMarkDispatched(p._id)}
-                          disabled={processing === p._id}
-                          className="px-3 py-1 bg-green-700/30 hover:bg-green-700/50 disabled:opacity-50 text-green-300 text-xs rounded-md transition-colors"
-                        >
-                          {processing === p._id ? "..." : "Mark Sent"}
-                        </button>
-                      )}
+                      <div className="flex flex-col gap-1.5">
+                        {canRetryCrypto && (
+                          <button
+                            onClick={() => handleRetry(p._id)}
+                            disabled={processing === p._id}
+                            className="px-3 py-1 bg-blue-700/30 hover:bg-blue-700/50 disabled:opacity-50 text-blue-300 text-xs rounded-md transition-colors whitespace-nowrap"
+                          >
+                            {processing === p._id ? "Retrying…" : "↺ Retry On-chain"}
+                          </button>
+                        )}
+                        {canMarkSent && (
+                          <button
+                            onClick={() => handleMarkDispatched(p._id, p.paymentType)}
+                            disabled={processing === p._id}
+                            className="px-3 py-1 bg-green-700/30 hover:bg-green-700/50 disabled:opacity-50 text-green-300 text-xs rounded-md transition-colors whitespace-nowrap"
+                          >
+                            {processing === p._id ? "…" : p.paymentType === "crypto" ? "Mark Sent (Manual)" : "Mark Sent"}
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 );

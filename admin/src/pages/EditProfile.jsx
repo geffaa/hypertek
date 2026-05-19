@@ -1,99 +1,105 @@
 import React, { useState, useRef } from "react";
-import overview1 from "../assets/Hero1.jpeg";
 import { FaUserCircle } from "react-icons/fa";
-import { FiCamera, FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiCamera, FiCopy, FiEye, FiEyeOff, FiLogOut } from "react-icons/fi";
 import { Dashboard_Base_Url, Image_Base_Url } from "../Config";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import FullScreenLoader from "../components/common/Spinner";
 
-// ✅ Import your Header component
-// import Header from "../components/common/header";
+const F = "Inter, sans-serif";
+const CARD = { background: "#0c0c18", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "14px" };
 
+const inputClass =
+  "w-full h-10 px-3 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 focus:bg-white/8 transition-all placeholder-white/30 text-sm";
+const labelClass = "text-white/60 text-xs font-semibold uppercase tracking-wider mb-1.5 block";
+
+function PasswordInput({ value, onChange, placeholder, show, onToggle }) {
+  return (
+    <div className="relative">
+      <input
+        type={show ? "text" : "password"}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`${inputClass} pr-10`}
+      />
+      <button
+        type="button"
+        onClick={onToggle}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+      >
+        {show ? <FiEyeOff size={15} /> : <FiEye size={15} />}
+      </button>
+    </div>
+  );
+}
 
 function EditAdminProfile() {
-  const navigate = useNavigate();
+  const navigate     = useNavigate();
   const fileInputRef = useRef(null);
 
-  // Admin data from localStorage
   const adminDataString = localStorage.getItem("admin_data");
-  const adminData = adminDataString ? JSON.parse(adminDataString) : {};
-  const adminId = adminData?._id;
+  const adminData       = adminDataString ? JSON.parse(adminDataString) : {};
+  const adminId         = adminData?._id;
 
-  const [name, setName] = useState(adminData.name || "");
-  const [username, setUsername] = useState(adminData.username || "");
-  const [email, setEmail] = useState(adminData.email || "");
-  const [bio, setBio] = useState(adminData.bio || "");
-  const [profileImage, setProfileImage] = useState(
+  const [name,         setName]        = useState(adminData.name     || adminData.FullName   || "");
+  const [username,     setUsername]    = useState(adminData.username  || adminData.Username  || "");
+  const [email,        setEmail]       = useState(adminData.email     || adminData.Email     || "");
+  const [bio,          setBio]         = useState(adminData.bio       || adminData.Bio       || "");
+  const [profileImage, setProfileImage]= useState(
     adminData.Avatar ? `${Image_Base_Url}${adminData.Avatar}` : null
   );
+  const [currentPass,  setCurrentPass] = useState("");
+  const [newPass,      setNewPass]     = useState("");
+  const [confirmPass,  setConfirmPass] = useState("");
+  const [showCurrent,  setShowCurrent] = useState(false);
+  const [showNew,      setShowNew]     = useState(false);
+  const [showConfirm,  setShowConfirm] = useState(false);
+  const [copied,       setCopied]      = useState(false);
+  const [file,         setFile]        = useState(null);
+  const [loading,      setLoading]     = useState(false);
 
-  const [currentPass, setCurrentPass] = useState("");
-  const [newPass, setNewPass] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [showCurrent, setShowCurrent] = useState(false);
-  const [showNew, setShowNew] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  // Profile image upload
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
-    if (selected) {
-      setFile(selected);
-      const reader = new FileReader();
-      reader.onload = () => setProfileImage(reader.result);
-      reader.readAsDataURL(selected);
-    }
-  };
-  const handleProfileClick = () => {
-    fileInputRef.current.click();
+    if (!selected) return;
+    setFile(selected);
+    const reader = new FileReader();
+    reader.onload = () => setProfileImage(reader.result);
+    reader.readAsDataURL(selected);
   };
 
-  // Copy admin ID
   const handleCopy = () => {
     navigator.clipboard.writeText(adminId || "");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Submit updated profile
   const handleSubmit = async () => {
     if (newPass && newPass !== confirmPass) {
       toast.error("New password and confirm password do not match");
       return;
     }
-
     const formData = new FormData();
     formData.append("FullName", name);
     formData.append("Username", username);
     formData.append("Email", email);
     formData.append("Bio", bio);
     if (newPass) formData.append("Password", newPass);
-    if (file) formData.append("Avatar", file);
+    if (file)    formData.append("Avatar", file);
 
     try {
       setLoading(true);
-      const res = await fetch(`${Dashboard_Base_Url}/v1/edit/${adminId}`, {
-        method: "PUT",
-        body: formData,
-      });
-
+      const res  = await fetch(`${Dashboard_Base_Url}/v1/edit/${adminId}`, { method: "PUT", body: formData });
       const data = await res.json();
-      setLoading(false);
-
       if (data.success) {
-        toast.success("Admin profile updated successfully!");
+        toast.success("Profile updated successfully");
         navigate("/dashboard");
       } else {
         toast.error(data.message || "Failed to update profile");
       }
-    } catch (err) {
-      console.error(err);
-      setLoading(false);
+    } catch {
       toast.error("Error updating profile");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,175 +108,158 @@ function EditAdminProfile() {
     navigate("/login");
   };
 
-  if (loading) return <FullScreenLoader />;
+  const avatarSrc = profileImage?.startsWith("data:") ? profileImage : profileImage ? `${Image_Base_Url}${profileImage}` : null;
 
   return (
+    <div style={{ fontFamily: F, color: "white", paddingBottom: 48 }}>
 
-    <div className="min-h-screen relative">
-      {/* Hero Banner */}
+      {/* Header */}
+      <div style={{ marginBottom: 28 }}>
+        <h1 style={{ fontFamily: F, fontSize: 22, fontWeight: 700, color: "white", margin: 0 }}>Edit Profile</h1>
+        <p style={{ fontFamily: F, fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 6 }}>
+          Update your admin account information and password
+        </p>
+      </div>
 
-      {/* ✅ Header */}
-      {/* <Header /> */}
-
-
-
-
-      <div
-        className="relative h-40 sm:h-48 md:h-56 lg:h-[237px] bg-cover bg-top shadow-lg mb-20 md:mb-24"
-        style={{ backgroundImage: `url(${overview1})` }}
-      ></div>
-
-      {/* Profile Section */}
-      <div className="relative -mt-16 sm:-mt-24 md:-mt-32 lg:-mt-36 px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
-        <div className="relative flex-shrink-0 cursor-pointer">
-          {profileImage ? (
-            <img
-              src={profileImage.startsWith("data:") ? profileImage : `${Image_Base_Url}${profileImage}`}
-              alt="Admin Profile"
-              className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-lg border-2 border-white object-cover"
-              onError={() => setProfileImage(null)}
-            />
-          ) : (
-            <div className="flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full shadow-lg w-24 h-24 md:w-28 md:h-28 border-2 border-white">
-              <FaUserCircle className="w-16 h-16 md:w-20 md:h-20" />
+      {/* Profile picture + ID */}
+      <div style={{ ...CARD, padding: 24, marginBottom: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          {/* Avatar */}
+          <div style={{ position: "relative", flexShrink: 0 }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", overflow: "hidden", border: "2px solid rgba(255,255,255,0.15)", background: "rgba(0,42,168,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              {avatarSrc
+                ? <img src={avatarSrc} alt="Avatar" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={() => setProfileImage(null)} />
+                : <FaUserCircle style={{ width: 44, height: 44, color: "rgba(255,255,255,0.5)" }} />
+              }
             </div>
-          )}
-
-          {/* Camera Icon */}
-          <div
-            className="absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full border-2 border-white hover:bg-blue-600"
-            onClick={handleProfileClick}
-          >
-            <FiCamera className="w-4 h-4 text-white" />
+            <button
+              onClick={() => fileInputRef.current.click()}
+              style={{ position: "absolute", bottom: 0, right: 0, width: 24, height: 24, borderRadius: "50%", background: "#002AA8", border: "2px solid #0c0c18", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
+            >
+              <FiCamera size={11} color="white" />
+            </button>
+            <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
           </div>
 
-          <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
-        </div>
-
-        <div className="mt-3 text-white">
-          <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
-          <p className="text-xs sm:text-sm text-gray-400 break-words flex items-center gap-2">
-            {adminId || "null"}
-            <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" title="Copy">
-              <FiCopy className="w-4 h-4" />
-            </button>
-            {copied && <span className="text-green-400 text-[10px]">Copied!</span>}
-          </p>
+          {/* Name + ID */}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontFamily: F, fontSize: 16, fontWeight: 700, color: "white", margin: 0 }}>
+              {name || "Admin"}
+            </p>
+            {username && (
+              <p style={{ fontFamily: F, fontSize: 12, color: "rgba(255,255,255,0.4)", margin: "2px 0 6px" }}>
+                @{username}
+              </p>
+            )}
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.05)", padding: "2px 8px", borderRadius: 4, border: "1px solid rgba(255,255,255,0.07)" }}>
+                {adminId || "—"}
+              </span>
+              <button
+                onClick={handleCopy}
+                title="Copy ID"
+                style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.3)", display: "flex", alignItems: "center", padding: 0 }}
+              >
+                <FiCopy size={13} />
+              </button>
+              {copied && <span style={{ fontFamily: F, fontSize: 11, color: "#22c55e" }}>Copied!</span>}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Form Section */}
-      <div className="flex justify-center mt-8 pb-24">
-        <div className="w-[369px] flex flex-col gap-6">
-          {/* Name */}
-          <div className="flex flex-col gap-2">
-            <label className="text-white font-semibold">Full Name</label>
-            <div className="w-full h-[47px] px-2 rounded-[10px] border border-white flex items-center">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base"
+      {/* Two-column layout: Account Info + Password */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 20, alignItems: "start" }}>
+
+        {/* Account Information */}
+        <div style={{ ...CARD, padding: 24 }}>
+          <p style={{ fontFamily: F, fontWeight: 600, fontSize: "10.5px", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 20 }}>
+            Account Information
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div>
+              <label className={labelClass}>Full Name</label>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" className={inputClass} />
+            </div>
+            <div>
+              <label className={labelClass}>Username</label>
+              <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" className={inputClass} />
+            </div>
+            <div>
+              <label className={labelClass}>Email</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className={inputClass} />
+            </div>
+            <div>
+              <label className={labelClass}>Bio</label>
+              <textarea
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                placeholder="A short description about you…"
+                rows={4}
+                className="w-full px-3 py-2 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 transition-all placeholder-white/30 text-sm resize-none"
               />
             </div>
-          </div>
-
-          {/* Username */}
-          <div className="flex flex-col gap-2">
-            <label className="text-white font-semibold">Username</label>
-            <div className="w-full h-[47px] px-2 rounded-[10px] border border-white flex items-center">
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base"
-              />
-            </div>
-          </div>
-
-          {/* Email */}
-          <div className="flex flex-col gap-2">
-            <label className="text-white font-semibold">Email</label>
-            <div className="w-full h-[47px] px-2 rounded-[10px] border border-white flex items-center">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base"
-              />
-            </div>
-          </div>
-
-          {/* Bio */}
-          <div className="flex flex-col gap-2">
-            <label className="text-white font-semibold">Bio</label>
-            <textarea
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              placeholder="Enter your bio"
-              className="w-full h-40 px-3 py-2 rounded-[10px] border border-white bg-transparent text-white outline-none resize-none font-inter text-base"
-            />
-          </div>
-
-          {/* Passwords */}
-          <div className="flex flex-col gap-4">
-            <div className="relative flex items-center border border-white rounded-[10px] px-2 h-[47px]">
-              <input
-                type={showCurrent ? "text" : "password"}
-                value={currentPass}
-                onChange={(e) => setCurrentPass(e.target.value)}
-                placeholder="Current Password"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base pr-10"
-              />
-              <div className="absolute right-2 cursor-pointer" onClick={() => setShowCurrent(!showCurrent)}>
-                {showCurrent ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
-              </div>
-            </div>
-
-            <div className="relative flex items-center border border-white rounded-[10px] px-2 h-[47px]">
-              <input
-                type={showNew ? "text" : "password"}
-                value={newPass}
-                onChange={(e) => setNewPass(e.target.value)}
-                placeholder="New Password"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base pr-10"
-              />
-              <div className="absolute right-2 cursor-pointer" onClick={() => setShowNew(!showNew)}>
-                {showNew ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
-              </div>
-            </div>
-
-            <div className="relative flex items-center border border-white rounded-[10px] px-2 h-[47px]">
-              <input
-                type={showConfirm ? "text" : "password"}
-                value={confirmPass}
-                onChange={(e) => setConfirmPass(e.target.value)}
-                placeholder="Confirm New Password"
-                className="w-full h-full bg-transparent border-none text-white outline-none font-inter text-base pr-10"
-              />
-              <div className="absolute right-2 cursor-pointer" onClick={() => setShowConfirm(!showConfirm)}>
-                {showConfirm ? <FiEyeOff className="text-white" /> : <FiEye className="text-white" />}
-              </div>
-            </div>
-          </div>
-
-          {/* Save Button */}
-          <div className="flex justify-center mt-6" onClick={handleSubmit}>
-            <div className="flex items-center justify-center w-[120px] h-[39px] text-white font-medium text-sm rounded-[5px] bg-gradient-to-b from-[#002AA8] to-[#001142] hover:from-[#0034D6] hover:to-[#001B70] cursor-pointer">
-              Save
-            </div>
-          </div>
-
-          {/* Logout */}
-          <div className="flex justify-center mt-4">
-            <button onClick={handleLogout} className="text-red-500 hover:text-red-600 text-sm">
-              Log out →
-            </button>
           </div>
         </div>
+
+        {/* Change Password */}
+        <div style={{ ...CARD, padding: 24 }}>
+          <p style={{ fontFamily: F, fontWeight: 600, fontSize: "10.5px", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+            Change Password
+          </p>
+          <p style={{ fontFamily: F, fontSize: 12, color: "rgba(255,255,255,0.25)", marginBottom: 20 }}>
+            Leave blank to keep your current password
+          </p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div>
+              <label className={labelClass}>Current Password</label>
+              <PasswordInput value={currentPass} onChange={(e) => setCurrentPass(e.target.value)} placeholder="Current password" show={showCurrent} onToggle={() => setShowCurrent(!showCurrent)} />
+            </div>
+            <div>
+              <label className={labelClass}>New Password</label>
+              <PasswordInput value={newPass} onChange={(e) => setNewPass(e.target.value)} placeholder="New password" show={showNew} onToggle={() => setShowNew(!showNew)} />
+            </div>
+            <div>
+              <label className={labelClass}>Confirm New Password</label>
+              <PasswordInput value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} placeholder="Confirm new password" show={showConfirm} onToggle={() => setShowConfirm(!showConfirm)} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <button
+          onClick={handleLogout}
+          style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", fontFamily: F, fontSize: 13, color: "rgba(239,68,68,0.7)", padding: 0, transition: "color 0.15s" }}
+          onMouseEnter={(e) => e.currentTarget.style.color = "#ef4444"}
+          onMouseLeave={(e) => e.currentTarget.style.color = "rgba(239,68,68,0.7)"}
+        >
+          <FiLogOut size={14} />
+          Log out
+        </button>
+
+        <button
+          onClick={handleSubmit}
+          disabled={loading}
+          style={{
+            padding: "10px 28px",
+            borderRadius: 10,
+            fontFamily: F,
+            fontSize: 13,
+            fontWeight: 600,
+            color: "white",
+            cursor: loading ? "not-allowed" : "pointer",
+            opacity: loading ? 0.5 : 1,
+            background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)",
+            border: "1px solid rgba(0,80,255,0.3)",
+            transition: "opacity 0.15s",
+          }}
+        >
+          {loading ? "Saving…" : "Save Changes"}
+        </button>
       </div>
     </div>
   );

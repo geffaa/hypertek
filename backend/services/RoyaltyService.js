@@ -128,61 +128,63 @@ export async function dispatchRoyalty({
     `💰 [RoyaltyService] Payout queued: ${amount} USDC → ${creatorWallet} (ID: ${payout._id})`
   );
 
-  // ── Auto-dispatch USDC on-chain (crypto payouts) ────────────────────────────
-  // Requires: process.env.PRIVATE_KEY wallet holds USDC on Base Mainnet.
-  // Fund the backend wallet with USDC from platform revenue periodically.
   if (paymentType === "crypto" && creatorWallet && creatorWallet !== "admin") {
-    try {
-      const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
-      const privateKey = process.env.PRIVATE_KEY;
-      const usdcAddr   = process.env.BASE_USDC_ADDRESS;
-
-      if (!privateKey || !usdcAddr) {
-        throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not set in env");
-      }
-
-      const provider   = new ethers.JsonRpcProvider(rpcUrl);
-      const signer     = new ethers.Wallet(privateKey, provider);
-      const usdc       = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
-
-      // USDC has 6 decimals
-      const amountUnits = ethers.parseUnits(amount.toFixed(6), 6);
-
-      // Check backend wallet USDC balance before attempting
-      const balance = await usdc.balanceOf(await signer.getAddress());
-      if (balance < amountUnits) {
-        throw new Error(
-          `Backend wallet USDC balance insufficient. Has: ${ethers.formatUnits(balance, 6)}, needs: ${amount}`
-        );
-      }
-
-      const tx = await usdc.transfer(creatorWallet, amountUnits);
-      await tx.wait();
-
-      await RoyaltyPayout.findByIdAndUpdate(payout._id, {
-        status:  "dispatched",
-        txHash:  tx.hash,
-        note:    `Auto-dispatched on-chain at ${new Date().toISOString()}`,
-      });
-
-      console.log(
-        `✅ [RoyaltyService] USDC dispatched on-chain: ${amount} USDC → ${creatorWallet} | tx: ${tx.hash}`
-      );
-
-      return await RoyaltyPayout.findById(payout._id);
-    } catch (dispatchErr) {
-      console.error("❌ [RoyaltyService] On-chain USDC dispatch failed:", dispatchErr.message);
-      await RoyaltyPayout.findByIdAndUpdate(payout._id, {
-        status: "failed",
-        note:   `Auto-dispatch failed: ${dispatchErr.message}`,
-      });
-      // Fall through to notify admin
-    }
+    return await dispatchRoyaltyOnChain(payout);
   }
-  // ──────────────────────────────────────────────────────────────────────────
 
-  // Notify admin (always for bank payouts; for crypto only on failure)
+  // Bank payout — notify admin to process manually
   await notifyAdmin(payout);
-
   return payout;
+}
+
+/**
+ * dispatchRoyaltyOnChain — attempt on-chain USDC transfer for an existing RoyaltyPayout record.
+ * Called automatically after sale, and also by the admin retry endpoint.
+ *
+ * @param {object} payout — RoyaltyPayout mongoose document
+ */
+export async function dispatchRoyaltyOnChain(payout) {
+  try {
+    const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+    const privateKey = process.env.PRIVATE_KEY;
+    const usdcAddr   = process.env.BASE_USDC_ADDRESS;
+
+    if (!privateKey || !usdcAddr) {
+      throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not set in env");
+    }
+
+    const provider   = new ethers.JsonRpcProvider(rpcUrl);
+    const signer     = new ethers.Wallet(privateKey, provider);
+    const usdc       = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
+
+    const amountUnits = ethers.parseUnits(payout.amount.toFixed(6), 6);
+
+    const balance = await usdc.balanceOf(await signer.getAddress());
+    if (balance < amountUnits) {
+      throw new Error(
+        `Backend wallet USDC balance insufficient. Has: ${ethers.formatUnits(balance, 6)}, needs: ${payout.amount}`
+      );
+    }
+
+    const tx = await usdc.transfer(payout.creatorWallet, amountUnits);
+    await tx.wait();
+
+    const updated = await RoyaltyPayout.findByIdAndUpdate(
+      payout._id,
+      { status: "dispatched", txHash: tx.hash, note: `Auto-dispatched on-chain at ${new Date().toISOString()}` },
+      { new: true }
+    );
+
+    console.log(`✅ [RoyaltyService] USDC dispatched: ${payout.amount} USDC → ${payout.creatorWallet} | tx: ${tx.hash}`);
+    return updated;
+  } catch (dispatchErr) {
+    console.error("❌ [RoyaltyService] On-chain dispatch failed:", dispatchErr.message);
+    const updated = await RoyaltyPayout.findByIdAndUpdate(
+      payout._id,
+      { status: "failed", note: `Dispatch failed: ${dispatchErr.message}` },
+      { new: true }
+    );
+    await notifyAdmin(updated);
+    return updated;
+  }
 }

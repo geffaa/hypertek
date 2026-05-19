@@ -7,6 +7,7 @@ const buybackRequestSchema = new mongoose.Schema({
   subCollectionId:  { type: String, required: true },
   itemName:         { type: String, default: "" },
   collectionName:   { type: String, default: "" },
+  assetType:        { type: String, enum: ["NFT", "NFC", "NFA"], default: "NFA" },
   minimumBuybackUSD: { type: Number, default: 0 },
   requestedAt:      { type: Date, default: Date.now },
   status:           { type: String, enum: ["pending", "approved", "rejected"], default: "pending" },

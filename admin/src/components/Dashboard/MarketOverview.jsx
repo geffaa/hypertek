@@ -1,178 +1,239 @@
 import React, { useState, useEffect } from "react";
-import CreateNews from "../../assets/MarketOverview/createnews.png";
-import SupportImage from "../../assets/MarketOverview/support.png";
 import { Link } from "react-router-dom";
 
-function MarketOverview() {
-  const [filterType, setFilterType] = useState("today");
-  const [userData, setUserData] = useState([]);
+const QUICK_ACTIONS = [
+  {
+    id: "users",
+    label: "Manage Users",
+    description: "View & edit user accounts",
+    path: "/users",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20H7m10 0a3 3 0 003-3V7a3 3 0 00-3-3H7a3 3 0 00-3 3v10a3 3 0 003 3m10 0H7m5-14v14" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292" />
+      </svg>
+    ),
+  },
+  {
+    id: "create",
+    label: "Create Item",
+    description: "Mint new NFT / NFA asset",
+    path: "/create-collection",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+      </svg>
+    ),
+  },
+  {
+    id: "items",
+    label: "Items",
+    description: "Browse all platform items",
+    path: "/items",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+      </svg>
+    ),
+  },
+  {
+    id: "market",
+    label: "Market Listings",
+    description: "Items listed for sale",
+    path: "/collection-listed-sale",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: "transactions",
+    label: "Transactions",
+    description: "All platform transactions",
+    path: "/transactions",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: "news",
+    label: "News Management",
+    description: "Publish & manage news posts",
+    path: "/other-news",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+      </svg>
+    ),
+  },
+  {
+    id: "support",
+    label: "Support",
+    description: "Handle user support tickets",
+    path: "/support",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: "royalty",
+    label: "Royalty Payouts",
+    description: "Manage creator royalties",
+    path: "/royalty-payouts",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: "buyback",
+    label: "Buyback Approval",
+    description: "Review buyback requests",
+    path: "/buyback-approval",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: "cpi",
+    label: "CPI Adjustment",
+    description: "Adjust in-game price index",
+    path: "/cpi-adjustment",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+      </svg>
+    ),
+  },
+  {
+    id: "earnings",
+    label: "Platform Earnings",
+    description: "Platform revenue overview",
+    path: "/platform-earnings",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+  },
+  {
+    id: "waitlist",
+    label: "Waitlist",
+    description: "View user waitlist",
+    path: "/waitlist",
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+];
+
+function QuickActions() {
+  const [userData, setUserData] = useState(null);
+  const [hovered, setHovered] = useState(null);
 
   useEffect(() => {
     try {
       const adminData = localStorage.getItem("admin_data");
-      if (adminData) {
-        setUserData(JSON.parse(adminData));
-      }
+      if (adminData) setUserData(JSON.parse(adminData));
     } catch (error) {
       console.error("Failed to parse admin data from localStorage", error);
     }
   }, []);
 
-  // Dummy data for all filters
-  const allData = {
-    today: [
-      { type: "Gold", buy: "1200", sell: "1300", gap: "100" },
-      { type: "Silver", buy: "800", sell: "850", gap: "50" },
-    ],
-    week: [
-      { type: "Gold", buy: "5000", sell: "5500", gap: "500" },
-      { type: "Silver", buy: "3600", sell: "3800", gap: "200" },
-      { type: "Platinum", buy: "7200", sell: "7600", gap: "400" },
-    ],
-    month: [
-      { type: "Gold", buy: "20000", sell: "21000", gap: "1000" },
-      { type: "Silver", buy: "15000", sell: "15800", gap: "800" },
-      { type: "Copper", buy: "6000", sell: "6300", gap: "300" },
-    ],
-    year: [
-      { type: "Gold", buy: "250000", sell: "260000", gap: "10000" },
-      { type: "Silver", buy: "180000", sell: "190000", gap: "10000" },
-      { type: "Platinum", buy: "350000", sell: "365000", gap: "15000" },
-      { type: "Diamond", buy: "500000", sell: "520000", gap: "20000" },
-    ],
-  };
-
-  const filteredRows = allData[filterType];
+  const withAdmin = (path) => (userData?._id ? `/${userData._id}${path}` : "#");
 
   return (
-    <div className="mt-8 flex gap-6 my-8 w-full">
-      {/* Left side */}
-      <div className="min-w-0" style={{ flex: "0 1 55%" }}>
-        {/* Header */}
-        <div className="my-3 flex gap-4 items-center flex-wrap">
-          <h1
-            className="z-10"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 700,
-              fontSize: "20px",
-              color: "white",
-              flexShrink: 0,
-            }}
-          >
-            Market Overview
-          </h1>
+    <div className="w-full">
+      <p
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontWeight: 600,
+          fontSize: "11px",
+          color: "rgba(255,255,255,0.35)",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          marginBottom: "12px",
+        }}
+      >
+        Quick Actions
+      </p>
 
-          <ul
-            className="relative z-50"
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+        {QUICK_ACTIONS.map((action) => (
+          <Link
+            key={action.id}
+            to={withAdmin(action.path)}
+            onMouseEnter={() => setHovered(action.id)}
+            onMouseLeave={() => setHovered(null)}
             style={{
               display: "flex",
-              gap: "4px",
-              padding: "4px",
-              margin: 0,
-              listStyle: "none",
-              alignItems: "center",
-              backgroundColor: "rgba(255,255,255,0.04)",
-              borderRadius: "8px",
+              flexDirection: "column",
+              gap: "10px",
+              padding: "14px",
+              borderRadius: "10px",
+              background: hovered === action.id ? "rgba(0,42,168,0.12)" : "#100F0F",
+              border: `1px solid ${hovered === action.id ? "rgba(0,42,168,0.5)" : "rgba(255,255,255,0.06)"}`,
+              transition: "all 0.18s ease",
+              cursor: "pointer",
+              textDecoration: "none",
             }}
           >
-            {["today", "week", "month", "year"].map((type) => (
-              <li
-                key={type}
-                onClick={() => setFilterType(type)}
+            <div
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "10px",
+                background: hovered === action.id ? "rgba(0,42,168,0.3)" : "rgba(255,255,255,0.06)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                color: hovered === action.id ? "#6b9aff" : "rgba(255,255,255,0.55)",
+                transition: "all 0.18s ease",
+              }}
+            >
+              {action.icon}
+            </div>
+            <div>
+              <p
                 style={{
-                  flex: 1,
-                  textAlign: "center",
-                  cursor: "pointer",
-                  borderRadius: "6px",
-                  padding: "3px 10px",
-                  backgroundColor:
-                    filterType === type ? "#002AA8" : "transparent",
-                  color: "white", // 👈 always white
                   fontFamily: "Inter, sans-serif",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontSize: "12px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  color: "white",
+                  lineHeight: "1.3",
+                  margin: 0,
                 }}
               >
-                {type.charAt(0).toUpperCase() + type.slice(1)}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Main Table */}
-     <div className="w-full rounded-[10px] bg-[#100F0F] mt-5 z-50 relative px-6 py-3">
-  <table className="w-full text-white text-sm border-separate border-spacing-y-4">
-    <thead>
-      <tr className="w-[461px] h-4 opacity-100 gap-[82px]">
-        <th className="text-left w-[83px] font-inter font-semibold text-[11px]">
-          Collection Type
-        </th>
-        <th className="text-left pl-2 w-[21px] font-inter font-semibold text-[11px]">
-          Buy
-        </th>
-        <th className="text-left pl-2 w-[20px] font-inter font-semibold text-[11px]">
-          Sell
-        </th>
-        <th className="text-left w-[91px] font-inter font-semibold text-[11px]">
-          Total Market Gap
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {filteredRows.map((row, index) => (
-        <tr key={index} className=" rounded-md w-[398px]">
-          <td className="py-2 w-[16px] font-inter font-medium text-[11px]">
-            {row.type}
-          </td>
-          <td className="py-2 pr-8 font-inter text-[11px] text-green-400">
-            +${row.buy}
-          </td>
-          <td className="py-2 pr-5 font-inter text-[11px] text-[#FF5733]">
-            -${row.sell}
-          </td>
-          <td className="py-2  font-inter text-[11px] text-gray-400">
-            {row.gap}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-      </div>
-
-      {/* Right Side */}
-      <div className="flex flex-col gap-4 flex-1 flex-shrink-0">
-        {/* Create News card */}
-        <div className="flex flex-col items-center justify-between rounded-[10px] p-4 gap-3" style={{ background: "#100F0F" }}>
-          <img src={CreateNews} alt="Create News" className="w-full max-h-[100px] object-contain" />
-          <Link
-            to={`/${userData._id}/add-news`}
-            className="w-full flex items-center justify-center rounded py-1.5 text-white text-xs font-semibold hover:bg-blue-700 transition"
-            style={{ backgroundColor: "#002AA8", fontFamily: "Inter, sans-serif" }}
-          >
-            Create News
+                {action.label}
+              </p>
+              <p
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "10.5px",
+                  color: "rgba(255,255,255,0.38)",
+                  marginTop: "3px",
+                  lineHeight: "1.4",
+                }}
+              >
+                {action.description}
+              </p>
+            </div>
           </Link>
-        </div>
-
-        {/* Support card */}
-        <div className="flex flex-col items-center justify-between rounded-[10px] p-4 gap-3" style={{ background: "#100F0F" }}>
-          <img src={SupportImage} alt="Support" className="w-full max-h-[100px] object-contain" />
-          <Link
-            to={`/${userData._id}/support`}
-            className="w-full flex items-center justify-center rounded py-1.5 text-white text-xs font-semibold hover:bg-blue-700 transition"
-            style={{ backgroundColor: "#002AA8", fontFamily: "Inter, sans-serif" }}
-          >
-            Support
-          </Link>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default MarketOverview;
+export default QuickActions;

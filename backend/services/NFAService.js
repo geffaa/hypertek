@@ -154,44 +154,58 @@ export async function applyCPI(cpiPercent, year) {
   if (!year) throw new Error("year is required");
 
   const multiplier = 1 + cpiPercent / 100;
-
-  // Find all active NFAs with a minimumBuybackUSD > 0 that haven't been zeroed
-  const nfas = await NFTSystem.find({
-    zeroed: { $ne: true },
-    removedFromCirculation: { $ne: true },
-    minimumBuybackUSD: { $gt: 0 },
-  });
-
   let updatedCount = 0;
   let skippedCount = 0;
 
-  for (const nfa of nfas) {
-    // Check if CPI for this year was already applied
-    const alreadyApplied = nfa.cpiHistory?.some((h) => h.year === year);
-    if (alreadyApplied) {
-      skippedCount++;
-      continue;
-    }
+  // ── 1. Standalone NFTSystem docs (non-parent) with minimumBuybackUSD ────────
+  const standalones = await NFTSystem.find({
+    isParentCollection: { $ne: true },
+    zeroed:             { $ne: true },
+    removedFromCirculation: { $ne: true },
+    minimumBuybackUSD:  { $gt: 0 },
+  });
 
-    const previousMin = nfa.minimumBuybackUSD;
+  for (const doc of standalones) {
+    const alreadyApplied = doc.cpiHistory?.some((h) => h.year === year);
+    if (alreadyApplied) { skippedCount++; continue; }
+
+    const previousMin = doc.minimumBuybackUSD;
     const newMin = parseFloat((previousMin * multiplier).toFixed(2));
 
-    await NFTSystem.findByIdAndUpdate(nfa._id, {
+    await NFTSystem.findByIdAndUpdate(doc._id, {
       minimumBuybackUSD: newMin,
-      $push: {
-        cpiHistory: {
-          year,
-          cpiPercent,
-          previousMin,
-          newMin,
-          appliedAt: new Date(),
-        },
-      },
+      $push: { cpiHistory: { year, cpiPercent, previousMin, newMin, appliedAt: new Date() } },
     });
     updatedCount++;
   }
 
-  console.log(`✅ CPI ${cpiPercent}% applied for ${year}: ${updatedCount} updated, ${skippedCount} skipped (already applied)`);
+  // ── 2. Sub-collection items inside parent collections ────────────────────────
+  const parents = await NFTSystem.find({ isParentCollection: true });
+
+  for (const parent of parents) {
+    let parentModified = false;
+
+    for (const sub of parent.subCollections) {
+      if (!sub.minimumBuybackUSD || sub.minimumBuybackUSD <= 0) continue;
+      if (sub.zeroed) continue;
+
+      const alreadyApplied = sub.cpiHistory?.some((h) => h.year === year);
+      if (alreadyApplied) { skippedCount++; continue; }
+
+      const previousMin = sub.minimumBuybackUSD;
+      const newMin = parseFloat((previousMin * multiplier).toFixed(2));
+
+      sub.minimumBuybackUSD = newMin;
+      sub.cpiHistory = sub.cpiHistory || [];
+      sub.cpiHistory.push({ year, cpiPercent, previousMin, newMin, appliedAt: new Date() });
+      parentModified = true;
+      updatedCount++;
+    }
+
+    if (parentModified) await parent.save();
+  }
+
+  console.log(`✅ CPI ${cpiPercent}% applied for ${year}: ${updatedCount} updated, ${skippedCount} skipped`);
   return { updatedCount, skippedCount };
 }
 

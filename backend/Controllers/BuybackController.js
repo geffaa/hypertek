@@ -44,6 +44,7 @@ export async function submitBuybackRequest(req, res) {
       subCollectionId,
       itemName: subCollection.name || "",
       collectionName: nftSystem.collection?.name || "",
+      assetType: subCollection.assetType || "NFA",
       minimumBuybackUSD: subCollection.minimumBuybackUSD || 0,
     });
 

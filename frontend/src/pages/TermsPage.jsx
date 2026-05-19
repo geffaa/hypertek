@@ -173,7 +173,7 @@ export default function TermsPage() {
                 className={`text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
                   activeSection === id ? "text-white bg-blue-900/40" : "text-white/50 hover:text-white"
                 }`}>
-                {title}
+                {t(`terms.sectionTitles.${id}`, { defaultValue: title })}
               </button>
             ))}
           </div>
@@ -230,7 +230,7 @@ export default function TermsPage() {
                         : "text-white/30 hover:text-white/55"
                     }`}
                   >
-                    {title}
+                    {t(`terms.sectionTitles.${id}`, { defaultValue: title })}
                   </button>
                 ))}
               </nav>
@@ -285,7 +285,7 @@ export default function TermsPage() {
               {/* Heading */}
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-1 h-7 rounded-full bg-[#002AA8] shrink-0" />
-                <h2 className="font-[Goldman] text-xl md:text-2xl font-bold text-white">{section.title}</h2>
+                <h2 className="font-[Goldman] text-xl md:text-2xl font-bold text-white">{t(`terms.sectionTitles.${section.id}`, { defaultValue: section.title })}</h2>
               </div>
               <div className="space-y-4">
                 {(section.content || []).map((block, i) => (

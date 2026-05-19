@@ -6,8 +6,10 @@ import toast from "react-hot-toast";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
+import { useTranslation } from "react-i18next";
 
 function ForgotPassword() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
@@ -43,13 +45,11 @@ function ForgotPassword() {
       {/* Header */}
       <div className="mb-8">
         <Link to="/signin" className="inline-flex items-center gap-2 text-white/50 hover:text-white text-sm mb-4 transition-colors">
-          <FaArrowLeft className="text-xs" /> Back to Sign In
+          <FaArrowLeft className="text-xs" /> {t("auth.backToSignIn")}
         </Link>
-        <h1 className="text-white text-3xl font-bold">Forgot Password</h1>
+        <h1 className="text-white text-3xl font-bold">{t("auth.forgotPasswordHeading")}</h1>
         <p className="text-white/50 text-sm mt-2">
-          {sent
-            ? "Check your inbox for a reset link."
-            : "Enter your email and we'll send you a reset link."}
+          {sent ? t("auth.forgotPasswordSentDesc") : t("auth.forgotPasswordDesc")}
         </p>
       </div>
 
@@ -61,7 +61,7 @@ function ForgotPassword() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={t("auth.emailInputPlaceholder")}
               className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/60 transition-all text-sm"
               required
             />
@@ -72,19 +72,19 @@ function ForgotPassword() {
             disabled={loading}
             className="w-full py-3 mt-2 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold rounded-lg transition-all duration-300 border border-white/10 text-sm"
           >
-            {loading ? "Sending..." : "Send Reset Link"}
+            {loading ? t("auth.sending") : t("auth.sendResetLink")}
           </button>
         </form>
       ) : (
         <div className="flex flex-col gap-4">
           <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm">
-            Reset link sent! Please check your email inbox.
+            {t("auth.resetLinkSent")}
           </div>
           <button
             onClick={() => setSent(false)}
             className="text-white/50 hover:text-white text-sm transition-colors"
           >
-            Didn't receive it? Send again
+            {t("auth.didntReceive")}
           </button>
         </div>
       )}

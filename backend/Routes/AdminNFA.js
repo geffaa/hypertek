@@ -6,11 +6,14 @@
  */
 import express from "express";
 import { applyCPI, getPendingBuybacks, executeBuyback } from "../services/NFAService.js";
-import { RoyaltyPayout } from "../services/RoyaltyService.js";
+import { RoyaltyPayout, dispatchRoyaltyOnChain } from "../services/RoyaltyService.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import NFTSystem from "../Models/NFTSystem.js";
 import MarketListing from "../Models/MarketListingModel.js";
 import Artist from "../Models/Artist.js";
+import BuybackRequest from "../Models/BuybackRequest.js";
+import User from "../Models/User.js";
+import HBLedger from "../Models/HBLedger.js";
 
 const AdminNFARouter = express.Router();
 
@@ -28,7 +31,13 @@ AdminNFARouter.post("/apply-cpi", async (req, res) => {
       return res.status(400).json({ success: false, message: "cpiPercent and year are required" });
     }
     const result = await applyCPI(Number(cpiPercent), Number(year));
-    res.json({ success: true, ...result });
+    res.json({
+      success:    true,
+      year:       Number(year),
+      cpiPercent: Number(cpiPercent),
+      updated:    result.updatedCount,
+      skipped:    result.skippedCount,
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -101,6 +110,31 @@ AdminNFARouter.get("/royalty-payouts", async (req, res) => {
     }
 
     res.json({ success: true, count: payouts.length, data: payouts, summary });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * POST /api/v1/admin/nfa/royalty-payouts/:id/retry
+ * Admin retries a failed crypto payout — re-attempts on-chain USDC dispatch
+ */
+AdminNFARouter.post("/royalty-payouts/:id/retry", async (req, res) => {
+  try {
+    const payout = await RoyaltyPayout.findById(req.params.id);
+    if (!payout) return res.status(404).json({ success: false, message: "Payout not found" });
+    if (payout.paymentType !== "crypto")
+      return res.status(400).json({ success: false, message: "Only crypto payouts can be retried" });
+    if (payout.status === "dispatched")
+      return res.status(400).json({ success: false, message: "Payout already dispatched" });
+    if (!payout.creatorWallet || payout.creatorWallet === "admin")
+      return res.status(400).json({ success: false, message: "No valid recipient wallet on this payout" });
+
+    // Reset to pending before retry
+    await RoyaltyPayout.findByIdAndUpdate(payout._id, { status: "pending", note: "Retry initiated by admin" });
+
+    const updated = await dispatchRoyaltyOnChain(payout);
+    res.json({ success: true, data: updated });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -260,16 +294,19 @@ AdminNFARouter.put("/items/:parentId/:subId/status", async (req, res) => {
 
 /**
  * GET /api/v1/admin/nfa/market-listings
- * All marketplace listings — filterable, paginated at DB level.
- * Query: status, activityType, page, limit
+ * All marketplace listings — filterable by status, activityType, search; paginated at DB level.
  */
 AdminNFARouter.get("/market-listings", async (req, res) => {
   try {
-    const { status, activityType, page = 1, limit = 20 } = req.query;
+    const { status, activityType, search, page = 1, limit = 20 } = req.query;
 
     const filter = {};
     if (status)       filter.status       = status;
     if (activityType) filter.activityType = activityType;
+    if (search?.trim()) {
+      const re = new RegExp(search.trim(), "i");
+      filter.$or = [{ itemName: re }, { userName: re }, { userWallet: re }];
+    }
 
     const skip = (Number(page) - 1) * Number(limit);
 
@@ -300,18 +337,342 @@ AdminNFARouter.get("/market-listings", async (req, res) => {
 });
 
 /**
- * DELETE /api/v1/admin/nfa/market-listings/:id
- * Admin force-cancels a listing (sets status to "cancelled", does not delete).
+ * PUT /api/v1/admin/nfa/market-listings/:id/cancel
+ * Admin force-cancels a listing with an optional reason.
  */
-AdminNFARouter.delete("/market-listings/:id", async (req, res) => {
+AdminNFARouter.put("/market-listings/:id/cancel", async (req, res) => {
   try {
     const listing = await MarketListing.findById(req.params.id);
     if (!listing) return res.status(404).json({ success: false, message: "Listing not found" });
+    if (!["active", "pending"].includes(listing.status)) {
+      return res.status(400).json({ success: false, message: `Cannot cancel a listing with status "${listing.status}"` });
+    }
 
-    listing.status = "cancelled";
+    listing.status            = "cancelled";
+    listing.cancelledByAdmin  = true;
+    listing.adminCancelReason = req.body.reason?.trim() || "Cancelled by admin";
     await listing.save();
 
     res.json({ success: true, message: "Listing cancelled by admin", data: listing });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * GET /api/v1/admin/nfa/notifications
+ * Aggregates platform events into admin notification feed.
+ * Sources: pending buybacks, pending royalty payouts, expiring listings, recent new users.
+ */
+AdminNFARouter.get("/notifications", async (req, res) => {
+  try {
+    const now = new Date();
+    const in24h = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+    const last7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+    const [pendingBuybacks, pendingPayouts, expiringListings, newUsers] = await Promise.all([
+      BuybackRequest.find({ status: "pending" }).sort({ createdAt: -1 }).limit(20).lean(),
+      RoyaltyPayout.find({ status: "pending" }).sort({ createdAt: -1 }).limit(20).lean(),
+      MarketListing.find({ status: "active", expiresAt: { $lte: in24h } }).sort({ expiresAt: 1 }).limit(20).lean(),
+      User.find({ createdAt: { $gte: last7d } }).sort({ createdAt: -1 }).limit(20).lean(),
+    ]);
+
+    const notifications = [];
+
+    for (const r of pendingBuybacks) {
+      notifications.push({
+        _id: `buyback-${r._id}`,
+        type: "warning",
+        title: "Buyback Request Pending",
+        message: `"${r.itemName || "Item"}" — min. $${(r.minimumBuybackUSD || 0).toFixed(2)} USDC`,
+        link: "buyback-approval",
+        read: false,
+        createdAt: r.createdAt,
+      });
+    }
+
+    for (const p of pendingPayouts) {
+      notifications.push({
+        _id: `payout-${p._id}`,
+        type: "warning",
+        title: "Royalty Payout Pending",
+        message: `$${(p.amount || 0).toFixed(2)} USDC — ${p.payoutType?.replace(/_/g, " ") || "payout"}`,
+        link: "royalty-payouts",
+        read: false,
+        createdAt: p.createdAt,
+      });
+    }
+
+    for (const l of expiringListings) {
+      const hoursLeft = Math.ceil((new Date(l.expiresAt) - now) / (1000 * 60 * 60));
+      notifications.push({
+        _id: `expiry-${l._id}`,
+        type: "info",
+        title: "Listing Expiring Soon",
+        message: `"${l.itemName || "Item"}" by ${l.userName || "seller"} — ${hoursLeft}h left`,
+        link: "collection-listed-sale",
+        read: false,
+        createdAt: l.createdAt,
+      });
+    }
+
+    for (const u of newUsers) {
+      notifications.push({
+        _id: `user-${u._id}`,
+        type: "success",
+        title: "New User Registered",
+        message: u.FullName || u.Email || "New member joined the platform",
+        link: "users",
+        read: false,
+        createdAt: u.createdAt,
+      });
+    }
+
+    // Sort all by createdAt desc
+    notifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    res.json({ success: true, count: notifications.length, data: notifications });
+  } catch (err) {
+    console.error("GET /admin/notifications error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HYPERBUCKS ADMIN ENDPOINTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * GET /api/v1/admin/nfa/hb/users
+ * List all users who have a non-zero HB balance, with pagination + search.
+ * Query: page, limit, search (name/email/wallet)
+ */
+AdminNFARouter.get("/hb/users", async (req, res) => {
+  try {
+    const { page = 1, limit = 20, search } = req.query;
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const filter = { hyperBucks: { $gt: 0 } };
+    if (search?.trim()) {
+      const re = new RegExp(search.trim(), "i");
+      filter.$or = [{ FullName: re }, { Email: re }, { walletAddress: re }];
+    }
+
+    const [users, total] = await Promise.all([
+      User.find(filter)
+        .select("FullName Email walletAddress hyperBucks createdAt")
+        .sort({ hyperBucks: -1 })
+        .skip(skip)
+        .limit(Number(limit))
+        .lean(),
+      User.countDocuments(filter),
+    ]);
+
+    const totalHB = await User.aggregate([{ $group: { _id: null, sum: { $sum: "$hyperBucks" } } }]);
+
+    res.json({
+      success: true,
+      data: users,
+      pagination: { page: Number(page), limit: Number(limit), total, totalPages: Math.ceil(total / Number(limit)) },
+      platformTotalHB: totalHB[0]?.sum || 0,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * GET /api/v1/admin/nfa/hb/ledger/:userId
+ * Full HB transaction history for a specific user.
+ * Query: page, limit, type (earn|spend|cashout|admin_adjust|prize)
+ */
+AdminNFARouter.get("/hb/ledger/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { page = 1, limit = 30, type } = req.query;
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const filter = { userId };
+    if (type) filter.type = type;
+
+    const [entries, total, user] = await Promise.all([
+      HBLedger.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit)).lean(),
+      HBLedger.countDocuments(filter),
+      User.findById(userId).select("FullName Email walletAddress hyperBucks").lean(),
+    ]);
+
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+    res.json({
+      success: true,
+      user,
+      data: entries,
+      pagination: { page: Number(page), limit: Number(limit), total, totalPages: Math.ceil(total / Number(limit)) },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * POST /api/v1/admin/nfa/hb/adjust
+ * Manually credit or debit a user's HB balance.
+ * Body: { userId, amount (positive=credit, negative=debit), reason }
+ */
+AdminNFARouter.post("/hb/adjust", async (req, res) => {
+  try {
+    const { userId, amount, reason } = req.body;
+
+    if (!userId) return res.status(400).json({ success: false, message: "userId is required" });
+    if (amount == null || amount === 0) return res.status(400).json({ success: false, message: "amount must be non-zero" });
+    if (!reason?.trim()) return res.status(400).json({ success: false, message: "reason is required" });
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+    const previousBalance = user.hyperBucks || 0;
+    const newBalance = previousBalance + Number(amount);
+
+    if (newBalance < 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Debit of ${Math.abs(amount)} HB exceeds current balance of ${previousBalance} HB`,
+      });
+    }
+
+    user.hyperBucks = newBalance;
+    await user.save();
+
+    const entry = await HBLedger.create({
+      userId,
+      type:          "admin_adjust",
+      amount:        Number(amount),
+      balanceAfter:  newBalance,
+      description:   reason.trim(),
+      reference:     `admin_adjust_${req.user._id}_${Date.now()}`,
+    });
+
+    console.log(`[Admin HB] adjust user ${userId}: ${amount > 0 ? "+" : ""}${amount} HB by admin ${req.user._id}. Reason: ${reason}`);
+
+    res.json({
+      success: true,
+      message: `${amount > 0 ? "Credited" : "Debited"} ${Math.abs(amount)} HB ${amount > 0 ? "to" : "from"} user`,
+      previousBalance,
+      newBalance,
+      entry,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * GET /api/v1/admin/nfa/hb/cashouts
+ * All HB cashout ledger entries with optional status filter.
+ * Query: status (pending|processing|completed|failed), page, limit
+ */
+AdminNFARouter.get("/hb/cashouts", async (req, res) => {
+  try {
+    const { status, page = 1, limit = 30 } = req.query;
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const filter = { type: "cashout" };
+    if (status) filter.cashoutStatus = status;
+
+    const [entries, total, agg] = await Promise.all([
+      HBLedger.find(filter)
+        .populate("userId", "FullName Email walletAddress bankDetails")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(Number(limit))
+        .lean(),
+      HBLedger.countDocuments(filter),
+      HBLedger.aggregate([
+        { $match: { type: "cashout" } },
+        { $group: { _id: "$cashoutStatus", count: { $sum: 1 }, totalUSD: { $sum: "$cashoutUSD" } } },
+      ]),
+    ]);
+
+    const summary = { pending: 0, processing: 0, completed: 0, failed: 0 };
+    for (const row of agg) if (row._id) summary[row._id] = row.count;
+
+    res.json({
+      success: true,
+      data: entries,
+      summary,
+      pagination: { page: Number(page), limit: Number(limit), total, totalPages: Math.ceil(total / Number(limit)) },
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * PUT /api/v1/admin/nfa/hb/cashouts/:ledgerId/complete
+ * Admin marks a pending/failed cashout as completed (manual payout done outside system).
+ * Body: { txHash? (optional), adminNote? }
+ */
+AdminNFARouter.put("/hb/cashouts/:ledgerId/complete", async (req, res) => {
+  try {
+    const { txHash, adminNote } = req.body;
+    const entry = await HBLedger.findById(req.params.ledgerId);
+
+    if (!entry) return res.status(404).json({ success: false, message: "Ledger entry not found" });
+    if (entry.type !== "cashout") return res.status(400).json({ success: false, message: "Entry is not a cashout" });
+    if (entry.cashoutStatus === "completed") {
+      return res.status(400).json({ success: false, message: "Cashout already completed" });
+    }
+
+    entry.cashoutStatus = "completed";
+    if (txHash) entry.cashoutTxHash = txHash;
+    if (adminNote) entry.description = `${entry.description || ""} | Admin: ${adminNote}`.trim();
+    await entry.save();
+
+    console.log(`[Admin HB] cashout ${entry._id} marked completed by admin ${req.user._id}`);
+    res.json({ success: true, message: "Cashout marked as completed", entry });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+/**
+ * PUT /api/v1/admin/nfa/hb/cashouts/:ledgerId/fail
+ * Admin marks a cashout as failed and refunds HB back to user.
+ * Body: { reason }
+ */
+AdminNFARouter.put("/hb/cashouts/:ledgerId/fail", async (req, res) => {
+  try {
+    const { reason } = req.body;
+    const entry = await HBLedger.findById(req.params.ledgerId);
+
+    if (!entry) return res.status(404).json({ success: false, message: "Ledger entry not found" });
+    if (entry.type !== "cashout") return res.status(400).json({ success: false, message: "Entry is not a cashout" });
+    if (["completed", "failed"].includes(entry.cashoutStatus)) {
+      return res.status(400).json({ success: false, message: `Cashout already ${entry.cashoutStatus}` });
+    }
+
+    // Refund HB to user
+    const hbAmount = Math.abs(entry.amount);
+    const user = await User.findById(entry.userId);
+    if (user) {
+      user.hyperBucks = (user.hyperBucks || 0) + hbAmount;
+      await user.save();
+      await HBLedger.create({
+        userId: entry.userId,
+        type:        "admin_adjust",
+        amount:      hbAmount,
+        balanceAfter: user.hyperBucks,
+        description: `Refund: failed cashout #${entry._id}${reason ? ` — ${reason}` : ""}`,
+        reference:   `refund_${entry._id}`,
+      });
+    }
+
+    entry.cashoutStatus = "failed";
+    entry.description   = `${entry.description || ""} | Failed: ${reason || "Admin marked failed"}`.trim();
+    await entry.save();
+
+    console.log(`[Admin HB] cashout ${entry._id} marked failed + ${hbAmount} HB refunded by admin ${req.user._id}`);
+    res.json({ success: true, message: `Cashout marked failed. ${user ? `${hbAmount} HB refunded to user.` : "User not found — no refund."}`, entry });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
