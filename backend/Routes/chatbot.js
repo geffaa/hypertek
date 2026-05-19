@@ -4,8 +4,6 @@ import { knowledgeBase } from "../Config/knowledgeBase.js";
 
 const router = express.Router();
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-
 /**
  * POST /api/v1/chatbot/message
  * Body: { message: string, history: Array<{role, parts}> }
@@ -19,12 +17,16 @@ router.post("/message", async (req, res) => {
       return res.status(400).json({ error: "message is required" });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey || apiKey === "your_gemini_api_key_here") {
       return res.status(503).json({ error: "AI service not configured" });
     }
 
+    // instantiate per-request so it always picks up the current env value
+    const genAI = new GoogleGenerativeAI(apiKey);
+
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
+      model: "gemini-1.5-flash",
       systemInstruction: knowledgeBase,
     });
 
