@@ -161,7 +161,9 @@ export default function ChatbotWidget() {
     const el = textareaRef.current;
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = `${Math.min(el.scrollHeight, 100)}px`;
+    const next = Math.min(el.scrollHeight, 100);
+    el.style.height = `${next}px`;
+    el.style.overflowY = el.scrollHeight > 100 ? "auto" : "hidden";
   };
 
   const buildHistory = () =>
@@ -362,7 +364,7 @@ export default function ChatbotWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Ask me anything... (Enter to send)"
               disabled={loading}
-              className="flex-1 resize-none outline-none text-[13px] text-white/90 placeholder-white/25 bg-transparent max-h-[100px] overflow-y-auto disabled:opacity-40"
+              className="chatbot-textarea flex-1 resize-none outline-none text-[13px] text-white/90 placeholder-white/25 bg-transparent disabled:opacity-40"
               style={{
                 background: "rgba(255,255,255,0.05)",
                 border: "1px solid rgba(0,80,255,0.2)",
@@ -370,6 +372,8 @@ export default function ChatbotWidget() {
                 padding: "8px 12px",
                 lineHeight: "1.45",
                 transition: "border-color 0.2s",
+                maxHeight: 100,
+                overflowY: "hidden",
               }}
               onFocus={(e) => (e.target.style.borderColor = "rgba(0,100,255,0.55)")}
               onBlur={(e)  => (e.target.style.borderColor = "rgba(0,80,255,0.2)")}
@@ -533,6 +537,10 @@ export default function ChatbotWidget() {
       )}
 
       <style>{`
+        .chatbot-textarea::-webkit-scrollbar { width: 3px; }
+        .chatbot-textarea::-webkit-scrollbar-track { background: transparent; }
+        .chatbot-textarea::-webkit-scrollbar-thumb { background: rgba(0,80,255,0.35); border-radius: 10px; }
+        .chatbot-textarea { scrollbar-width: thin; scrollbar-color: rgba(0,80,255,0.35) transparent; }
         @keyframes hb-float {
           0%,100% { transform: translateY(0);   }
           50%     { transform: translateY(-7px); }
