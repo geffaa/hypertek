@@ -1,9 +1,323 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Play, X, Calendar } from "lucide-react";
 import { BACKEND_BASE_URL, getImageUrl } from "../Config";
 import GlowingOrb from "../Components/Common/BgColoring";
+
+// ── Add new game videos here ─────────────────────────────────────────────────
+const VIDEO_ITEMS = [
+  {
+    id: "vid-001",
+    src: "/video/news_content.mp4",
+    tag: "GAME FOOTAGE",
+    tagColor: "#38bdf8",
+    title: "Hyper Tek — Game Content Preview",
+    description: "A first look at in-game footage from the Hyper Tek universe.",
+    date: "May 2025",
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+
+function VideoModal({ item, onClose }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    requestAnimationFrame(() => setVisible(true));
+    const handleKey = (e) => { if (e.key === "Escape") handleClose(); };
+    document.addEventListener("keydown", handleKey);
+    const navbar = document.querySelector("nav");
+    if (navbar) navbar.style.visibility = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      if (navbar) navbar.style.visibility = "";
+    };
+  }, []);
+
+  function handleClose() {
+    setVisible(false);
+    setTimeout(onClose, 250);
+  }
+
+  return createPortal(
+    <div
+      style={{
+        position: "fixed", inset: 0, zIndex: 999999,
+        background: "rgba(0,0,0,0.96)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "16px",
+        opacity: visible ? 1 : 0,
+        transition: "opacity 0.25s ease",
+      }}
+      onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}
+    >
+      <div style={{
+        position: "relative", width: "100%", maxWidth: "960px",
+        transform: visible ? "scale(1) translateY(0)" : "scale(0.95) translateY(16px)",
+        transition: "transform 0.3s ease, opacity 0.3s ease",
+        opacity: visible ? 1 : 0,
+      }}>
+        <button
+          onClick={handleClose}
+          style={{
+            position: "absolute", top: 10, right: 10, zIndex: 10,
+            display: "flex", alignItems: "center", gap: 6,
+            padding: "5px 10px",
+            background: "rgba(0,0,0,0.65)",
+            border: "1px solid rgba(255,255,255,0.25)",
+            borderRadius: 6, color: "rgba(255,255,255,0.75)",
+            fontSize: 13, cursor: "pointer", backdropFilter: "blur(4px)",
+            transition: "background 0.15s, color 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.9)"; e.currentTarget.style.color = "#fff"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.65)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; }}
+        >
+          <X style={{ width: 14, height: 14 }} /> Close
+        </button>
+        <video
+          src={item.src} autoPlay controls playsInline
+          style={{ width: "100%", borderRadius: 12, maxHeight: "80vh", background: "#000", display: "block" }}
+        />
+        <div style={{ marginTop: 14, paddingLeft: 4 }}>
+          <span style={{ fontSize: 10, fontFamily: "Orbitron, sans-serif", fontWeight: 700, letterSpacing: "0.2em", color: item.tagColor, textTransform: "uppercase" }}>
+            {item.tag}
+          </span>
+          <h3 style={{ color: "#fff", fontSize: 18, fontWeight: 700, marginTop: 4, fontFamily: "Goldman, sans-serif" }}>
+            {item.title}
+          </h3>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+function VideoCarousel() {
+  const [active, setActive] = useState(0);
+  const [modalItem, setModal] = useState(null);
+  const [paused, setPaused]   = useState(false);
+  const timerRef    = useRef(null);
+  const thumbRefs   = useRef([]);
+  const dragStartX  = useRef(null);
+  const didDrag     = useRef(false);
+
+  const total = VIDEO_ITEMS.length;
+  const go = (dir) => setActive(i => (i + dir + total) % total);
+
+  useEffect(() => {
+    if (total <= 1 || paused) return;
+    timerRef.current = setInterval(() => go(1), 5000);
+    return () => clearInterval(timerRef.current);
+  }, [paused, total]);
+
+  const handleMeta = (i) => {
+    const el = thumbRefs.current[i];
+    if (el) el.currentTime = 1;
+  };
+
+  // ── Drag / swipe ──────────────────────────────────────────────────────────
+  const onPointerDown = (e) => {
+    dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX;
+    didDrag.current = false;
+    setPaused(true);
+  };
+  const onPointerUp = (e) => {
+    if (dragStartX.current === null) return;
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const delta = endX - dragStartX.current;
+    if (Math.abs(delta) > 50) {
+      didDrag.current = true;
+      go(delta > 0 ? -1 : 1);
+    }
+    dragStartX.current = null;
+    setPaused(false);
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
+  if (total === 0) return null;
+
+  const activeItem = VIDEO_ITEMS[active];
+
+  const cardStyle = (d) => {
+    const T = "all 0.6s cubic-bezier(0.4,0,0.2,1)";
+    if (d === 0) return {
+      zIndex: 10, opacity: 1, pointerEvents: "auto",
+      transform: "translateX(0%) scale(1) rotateY(0deg)",
+      filter: "none", transition: T,
+    };
+    if (Math.abs(d) === 1) return {
+      zIndex: 5, opacity: 0.78, pointerEvents: "auto",
+      transform: `translateX(${d > 0 ? "52%" : "-52%"}) scale(0.91) rotateY(${d > 0 ? "-46deg" : "46deg"})`,
+      filter: "brightness(0.5)", transition: T,
+    };
+    return {
+      zIndex: 1, opacity: 0, pointerEvents: "none",
+      transform: `translateX(${d > 0 ? "130%" : "-130%"}) scale(0.75)`,
+      filter: "brightness(0.1)", transition: T,
+    };
+  };
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }} viewport={{ once: true, amount: 0.08 }}
+        style={{
+          width: "100vw", position: "relative",
+          left: "50%", marginLeft: "-50vw",
+          marginBottom: "5rem",
+        }}
+      >
+        {/* Section label — re-contained */}
+        <div className="max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16 mb-7">
+          <div className="flex items-center gap-4">
+            <div className="w-5 h-[2px]" style={{ background: "#38bdf8" }} />
+            <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
+              Game Videos
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+            {total > 1 && (
+              <div className="flex gap-2">
+                {[[-1, "←"], [1, "→"]].map(([dir, lbl]) => (
+                  <button key={dir} onClick={() => go(dir)} style={{
+                    width: 34, height: 34, borderRadius: "50%",
+                    background: "rgba(56,189,248,0.07)",
+                    border: "1px solid rgba(56,189,248,0.25)",
+                    color: "#38bdf8", fontSize: 14, cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    transition: "background 0.2s, border-color 0.2s",
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.18)"; e.currentTarget.style.borderColor = "rgba(56,189,248,0.6)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(56,189,248,0.07)"; e.currentTarget.style.borderColor = "rgba(56,189,248,0.25)"; }}
+                  >{lbl}</button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── Full-width stage ── */}
+        <div
+          style={{
+            width: "100%", overflow: "hidden",
+            height: "clamp(220px, 44vw, 620px)",
+            perspective: "1300px", perspectiveOrigin: "50% 50%",
+            cursor: "grab", userSelect: "none",
+          }}
+          onMouseDown={onPointerDown}
+          onMouseUp={onPointerUp}
+          onMouseLeave={(e) => { if (dragStartX.current !== null) onPointerUp(e); }}
+          onTouchStart={onPointerDown}
+          onTouchEnd={onPointerUp}
+        >
+          {VIDEO_ITEMS.map((item, i) => {
+            const raw = ((i - active + total) % total + total) % total;
+            const d   = raw > total / 2 ? raw - total : raw;
+            return (
+              <div
+                key={item.id}
+                className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+                style={{ ...cardStyle(d), transformStyle: "preserve-3d" }}
+                onClick={() => {
+                  if (didDrag.current) return;
+                  if (d === 0) setModal(item);
+                  else { didDrag.current = false; setActive(i); }
+                }}
+              >
+                {/* Card */}
+                <div
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{
+                    width: "min(1040px, 80%)",
+                    aspectRatio: "16/9",
+                    cursor: d === 0 ? "pointer" : "default",
+                    boxShadow: d === 0 ? "0 20px 90px rgba(0,0,0,0.85)" : "none",
+                  }}
+                >
+                  <video
+                    ref={el => thumbRefs.current[i] = el}
+                    src={item.src} preload="metadata" muted playsInline
+                    onLoadedMetadata={() => handleMeta(i)}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none" }}
+                  />
+                  <div className="absolute inset-0"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.05) 55%)" }} />
+                  {/* Top accent line */}
+                  <div className="absolute top-0 inset-x-0 h-[3px]"
+                    style={{ background: item.tagColor, boxShadow: d === 0 ? `0 0 24px ${item.tagColor}aa` : "none", opacity: d === 0 ? 1 : 0.45 }} />
+                  {/* Tag */}
+                  <div className="absolute top-4 left-4">
+                    <span style={{
+                      fontSize: 9, fontFamily: "Orbitron, sans-serif", fontWeight: 700,
+                      letterSpacing: "0.2em", color: item.tagColor,
+                      background: "rgba(0,0,0,0.82)", border: `1px solid ${item.tagColor}55`,
+                      borderRadius: 4, padding: "4px 10px", textTransform: "uppercase",
+                      backdropFilter: "blur(6px)",
+                    }}>{item.tag}</span>
+                  </div>
+                  {/* Play — active only */}
+                  {d === 0 && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div style={{
+                        width: 68, height: 68, borderRadius: "50%",
+                        background: item.tagColor,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        boxShadow: `0 0 40px ${item.tagColor}bb`,
+                      }}>
+                        <Play size={28} style={{ color: "#000", marginLeft: 5 }} fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
+                  {/* Info — active only */}
+                  {d === 0 && (
+                    <div className="absolute bottom-0 inset-x-0 px-6 pb-5">
+                      <h3 style={{ color: "#fff", fontFamily: "Goldman, sans-serif", fontSize: "clamp(1rem,1.6vw,1.35rem)", fontWeight: 700, marginBottom: 6 }}>
+                        {item.title}
+                      </h3>
+                      <div className="flex items-center gap-2">
+                        <Calendar size={12} style={{ color: "rgba(255,255,255,0.4)" }} />
+                        <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 12 }}>{item.date}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Dots + description — re-contained */}
+        <div className="max-w-[1280px] mx-auto px-6 md:px-12 xl:px-16">
+          {total > 1 && (
+            <div className="flex justify-center gap-2 mt-5">
+              {VIDEO_ITEMS.map((_, i) => (
+                <button key={i} onClick={() => setActive(i)} style={{
+                  width: active === i ? 24 : 7, height: 7, borderRadius: 4, border: "none",
+                  background: active === i ? "#38bdf8" : "rgba(255,255,255,0.2)",
+                  cursor: "pointer", transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
+                }} />
+              ))}
+            </div>
+          )}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={active}
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+              className="text-center text-white/40 text-sm mt-3 max-w-2xl mx-auto"
+            >
+              {activeItem.description}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {modalItem && <VideoModal item={modalItem} onClose={() => setModal(null)} />}
+    </>
+  );
+}
 
 const AVATAR_FILES = [
   "commander-elite.png","dryads-female.png","dryads-male.png",
@@ -170,6 +484,9 @@ export default function NewsList() {
           </motion.div>
         )}
 
+        {/* ── Game Videos carousel ── */}
+        <VideoCarousel />
+
         {/* ── News: 3 cards + See All ── */}
         {newsCards.length > 0 && (
           <>
@@ -227,6 +544,7 @@ export default function NewsList() {
           </>
         )}
 
+        {/* ── Game Videos ── */}
         {/* ══════════════════════════════════════════
             FAQ SECTION — two-panel half-page layout
         ══════════════════════════════════════════ */}

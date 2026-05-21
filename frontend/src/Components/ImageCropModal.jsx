@@ -46,8 +46,6 @@ const RATIOS = [
   { label: "Free", value: null },
 ];
 
-// Fixed chrome heights: header(~40) + ratio tabs(~32) + actions(~44) + gaps(~24) + padding(~40)
-const CHROME_H = 180;
 
 export default function ImageCropModal({ src, fileName, onConfirm, onCancel }) {
   const imgRef    = useRef(null);
@@ -76,9 +74,7 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel }) {
     onConfirm(file);
   };
 
-  // Available viewport height minus navbar and some padding
   const availH = `calc(100vh - ${NAV_H + 32}px)`;
-  const cropAreaH = `calc(100vh - ${NAV_H + CHROME_H + 32}px)`;
 
   return (
     <div
@@ -121,8 +117,8 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel }) {
 
         {/* Crop area */}
         <div
-          className="flex items-center justify-center overflow-hidden flex-shrink-0"
-          style={{ height: cropAreaH, minHeight: 120 }}
+          className="flex items-center justify-center overflow-hidden"
+          style={{ flex: 1, minHeight: 120 }}
         >
           <ReactCrop
             crop={crop}
@@ -130,7 +126,7 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel }) {
             onComplete={(c) => setCompletedCrop(c)}
             aspect={aspect ?? undefined}
             minWidth={20}
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
+            style={{ maxWidth: "100%", maxHeight: "100%", display: "flex" }}
           >
             <img
               ref={imgRef}
@@ -140,7 +136,7 @@ export default function ImageCropModal({ src, fileName, onConfirm, onCancel }) {
               style={{
                 display: "block",
                 maxWidth: "100%",
-                maxHeight: cropAreaH,
+                maxHeight: "100%",
                 objectFit: "contain",
                 userSelect: "none",
               }}
