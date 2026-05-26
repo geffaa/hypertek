@@ -71,7 +71,7 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
             border: "1px solid rgba(255,255,255,0.15)",
             backdropFilter: "blur(8px)",
           }}
-          title={playing ? t("marketplace.banner.soundOn") : t("marketplace.banner.soundOff")}
+          data-tooltip={playing ? t("marketplace.banner.soundOn") : t("marketplace.banner.soundOff")}
         >
           {playing ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
           <span className="hidden sm:inline">

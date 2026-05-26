@@ -331,7 +331,7 @@ function MyOffers() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen px-6 md:pl-24 py-8">
+    <div className="w-full flex flex-col relative z-10">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-white font-semibold text-2xl">Offers</h1>

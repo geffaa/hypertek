@@ -1,4 +1,179 @@
 {
+  "overlord": {
+    "exit": "SAIR",
+    "spaceRing": "OVERLORD · ANEL ESPACIAL",
+    "actions": {
+      "fire": "ATIRAR",
+      "zoom": "APROXIMAR",
+      "weapons": "ARMAS"
+    }
+  },
+  "quest": {
+    "exit": "SAIR",
+    "move": "MOVER",
+    "actions": {
+      "fire": "ATIRAR",
+      "scope": "MIRA",
+      "kneel": "AJOELHAR",
+      "weapon": "ARMA"
+    },
+    "planet": {
+      "atmosphere": "ATMOSFERA",
+      "hazardLvl": "NÍV. DE PERIGO",
+      "briefing": "BRIEFING",
+      "questLocked": "QUEST — CONTEÚDO BLOQUEADO",
+      "questLockedDesc": "Disponível no lançamento completo do jogo.",
+      "noImage": "SEM IMAGEM",
+      "image": "IMAGEM",
+      "notes": "NOTAS",
+      "notesPlaceholder": "Digite suas notas..."
+    },
+    "atm": {
+      "breathable": "RESPIRÁVEL",
+      "artificial": "ARTIFICIAL",
+      "vacuum": "VÁCUO",
+      "toxic": "TÓXICA"
+    },
+    "hazard": {
+      "low": "BAIXO",
+      "medium": "MÉDIO",
+      "high": "ALTO"
+    },
+    "unknown": {
+      "title": "PLANETA NÃO MAPEADO",
+      "line1": "Os detalhes do planeta estão indisponíveis pois o jogador ainda não visitou este planeta.",
+      "line2": "Detalhes e atmosfera desconhecidos.",
+      "naming": "Os direitos de nomeação do planeta são concedidos ao primeiro a visitá-lo e explorar sua superfície."
+    },
+    "starMap": {
+      "title": "MAPA ESTELAR — CONTEÚDO NO JOGO",
+      "back": "VOLTAR"
+    },
+    "video": {
+      "title": "VÍDEO DE MAPEAMENTO ORBITAL GALÁCTICO",
+      "close": "FECHAR"
+    },
+    "space": {
+      "inGameContent": "CONTEÚDO NO JOGO",
+      "galaxyVideo": "Vídeo de Mapeamento Orbital Galáctico",
+      "interactiveMap": "Mapa Interativo"
+    },
+    "ground": {
+      "mission": "SOLO · MISSÃO"
+    },
+    "locTypes": {
+      "supplyDepot": "Depósito de Suprimentos",
+      "researchStation": "Estação de Pesquisa",
+      "agricultureHub": "Centro Agrícola",
+      "tradingPost": "Posto de Comércio",
+      "refuelStation": "Posto de Reabastecimento",
+      "shipyard": "Estaleiro",
+      "industrialComplex": "Complexo Industrial",
+      "militaryBase": "Base Militar",
+      "commandCenter": "Centro de Comando",
+      "logisticsHub": "Centro Logístico",
+      "scienceOutpost": "Posto Científico",
+      "communicationArray": "Matriz de Comunicação",
+      "deepSpaceRelay": "Repetidor de Espaço Profundo",
+      "echoStation": "Estação Echo",
+      "supplyStation": "Estação de Suprimentos",
+      "navigationBeacon": "Balizador de Navegação",
+      "pioneerOutpost": "Posto Pioneiro",
+      "signalRelay": "Repetidor de Sinal",
+      "orbitalLab": "Laboratório Orbital",
+      "colonyOutpost": "Posto Colonial",
+      "tradeStation": "Estação Comercial",
+      "biomedicalResearch": "Pesquisa Biomédica",
+      "explorationOutpost": "Posto de Exploração",
+      "assemblyPlant": "Planta de Montagem",
+      "technologyHub": "Centro Tecnológico",
+      "gasExtraction": "Extração de Gás",
+      "iceHarvesting": "Colheita de Gelo",
+      "unknown": "Desconhecido"
+    },
+    "locDescs": {
+      "sd": "Principal centro logístico da fronteira ocidental. Mantém reservas de rações de emergência.",
+      "res": "Laboratório de xenobiologia e materiais do espaço profundo. Abriga 40 cientistas residentes.",
+      "agri": "Complexo de cultivo hidropônico. Principal fonte de alimentos para os setores ocidentais.",
+      "trade": "Zona de livre comércio. Mais de 200 comerciantes registrados. Moeda: Créditos Universais.",
+      "fuel": "Depósito de combustível de alta capacidade. Suporta propulsores iônicos, núcleos de plasma e células de matéria escura.",
+      "ship": "Estação de manutenção e montagem de frotas. Capacidade: 18 embarcações.",
+      "ind": "Zona de manufatura pesada. Purificadores de atmosfera obrigatórios. Produção: 8,4 mil unidades/ciclo.",
+      "mil": "Zona restrita. Instalação das Forças Armadas da Coalizão. Nível de Autorização 4 necessário.",
+      "cmd": "Autoridade de comando do setor. Todas as grandes operações da coalizão são coordenadas aqui.",
+      "logi": "Controle de tráfego e roteamento de cargas para as rotas de trânsito do sul.",
+      "sci": "Estação de pesquisa que estuda anomalias gravitacionais próximas à fronteira do núcleo galáctico.",
+      "comm": "Nó de comunicação por entrelaçamento quântico. Mensagens interestelares sem latência.",
+      "relay": "Nó de repetição automatizado. Mantém a conectividade da rede para os assentamentos do anel externo.",
+      "echo": "Repetidor de comunicação de longo alcance. Intensidade do sinal: 99,7%. Tempo de operação: 14,2 anos.",
+      "sup": "Plataforma de suprimentos neutra. Operada pelo Consórcio de Comerciantes Interestelares.",
+      "nav": "Balizador de navegação automatizado. Orienta o tráfego de trânsito pelo corredor central.",
+      "pion": "Base de exploração da fronteira. Marca o limite da rede de trânsito mapeada.",
+      "sig": "Balizador repetidor em alta órbita. Sincroniza com a Rede Central a cada 6 minutos.",
+      "orb": "Pesquisa de materiais em microgravidade. Estuda o comportamento da matéria exótica em condições de vazio.",
+      "col": "Colônia em estágio inicial. População: 12.400. Operações de agricultura e mineração em andamento.",
+      "trd": "Centro comercial oriental. Ponto de junção para rotas de carga dos setores R01–R08.",
+      "bio": "Pesquisa farmacêutica e de xenobiologia. Protocolos de quarentena em vigor.",
+      "expl": "Base avançada de reconhecimento para regiões não mapeadas. Última transmissão: 3,2 dias padrão atrás.",
+      "asm": "Montagem modular de naves espaciais. Produz 12 embarcações por ciclo padrão.",
+      "tech": "Centro avançado de P&D tecnológico. Especializado em sistemas de propulsão e núcleos de IA.",
+      "gas": "Colheita de gás atmosférico de um bolsão denso de nebulosa. Ambiente de alta radiação.",
+      "ice": "Extração de recursos de cometa criocongelado. Principal fonte de água para as estações orientais."
+    }
+  },
+  "racing": {
+    "airspeed": "VELOCIDADE DO AR",
+    "knots": "NÓS",
+    "steer": "DIRIGIR",
+    "speed": "VELOCIDADE",
+    "exit": "SAIR",
+    "selectVehicle": "SELECIONAR VEÍCULO",
+    "active": "ATIVO",
+    "locked": "BLOQUEADO",
+    "basicSpec": "ESPECIFICAÇÃO BÁSICA",
+    "systemLayout": "CONFIGURAÇÃO DO SISTEMA",
+    "deployVehicle": "IMPLANTAR VEÍCULO ▸",
+    "lockedFleet": "FROTA BLOQUEADA",
+    "vehicles": "VEÍCULOS",
+    "customize": "PERSONALIZAR",
+    "openCustomize": "⚙ PERSONALIZAR",
+    "close": "✕ FECHAR",
+    "pause": "⏸ PAUSAR",
+    "spin": "▶ GIRAR",
+    "chooseRacer": "ESCOLHER PILOTO",
+    "equipped": "EQUIPADO:",
+    "specifications": "ESPECIFICAÇÕES",
+    "upgrades": "MELHORIAS",
+    "upgradeBtn": "MELHORAR",
+    "stats": {
+      "topSpeed": "Velocidade Máx.",
+      "acceleration": "Aceleração",
+      "hullStrength": "Resistência do Casco",
+      "range": "Alcance",
+      "weight": "Peso",
+      "shields": "Escudos",
+      "defence": "Defesa",
+      "dragCoeff": "Coef. de Arrasto",
+      "gLimits": "Limite G",
+      "speedRating": "Avaliação de Vel.",
+      "corning": "Curvas",
+      "fuelType": "Tipo de Combustível",
+      "efficiency": "Eficiência",
+      "visibility": "Visibilidade",
+      "hudType": "Tipo de HUD",
+      "reaction": "Latência de Reação",
+      "status": "Status",
+      "unlock": "Desbloquear"
+    },
+    "parts": {
+      "hull": "CASCO",
+      "aerodynamics": "AERODINÂMICA",
+      "driveSystem": "SISTEMA DE PROPULSÃO",
+      "cockpit": "COCKPIT",
+      "weapons": "ARMAS",
+      "boostCore": "NÚCLEO DE IMPULSO"
+    }
+  },
   "gamePage": {
     "welcomeTo": "Bem-vindo ao",
     "back": "Voltar",
@@ -156,6 +331,310 @@
         { "q": "Quais armas estão disponíveis?", "a": "Artilharia terrestre, baterias antiorbitais, arrays de armas embarcadas e equipamento especializado para ações de abordagem. Cada sistema pode ser refinado para funções táticas específicas, incluindo bombardeio de longo alcance, combate em curto alcance e contramedidas defensivas." },
         { "q": "Posso explorar a superfície do planeta?", "a": "Sim. O planeta é rico em recompensas ocultas, artefatos, recursos e vida selvagem perigosa para domesticar. Explore a superfície para encontrar tesouros, batalhar criaturas e monstros alienígenas e descobrir vantagens estratégicas que fortalecem sua campanha pela dominação como Senhor dos 7 Reinos." }
       ]
+    }
+  },
+  "hud": {
+    "ship": "NAVE",
+    "shipSkins": "SKINS DA NAVE",
+    "shipLvl": "NÍV. DA NAVE",
+    "resourcesBtn": "RECURSOS",
+    "linked": "VINCULADO",
+    "unlinked": "DESVINCULADO",
+    "marketplace": "MERCADO",
+    "wallet": "CARTEIRA",
+    "connected": "CONECTADO",
+    "logOut": "SAIR",
+    "connectWallet": "CONECTAR CARTEIRA",
+    "whatIsWallet": "O QUE É UMA CARTEIRA CRIPTO?",
+    "stored": "ARMAZENADO",
+    "vrMode": "MODO VR",
+    "view": "VER",
+    "hoverSelectRoom": "PASSE O MOUSE OU SELECIONE\nUM COMPARTIMENTO PARA\nVER AS INFORMAÇÕES",
+    "hoverSelectWeapon": "PASSE O MOUSE OU SELECIONE UM SLOT DE ARMA PARA VER OS DETALHES",
+    "chatLocked": "Chat bloqueado até o lançamento...",
+    "availableAfterLaunch": "DISPONÍVEL NO JOGO APÓS O LANÇAMENTO OFICIAL",
+    "changeName": "ALTERAR NOME",
+    "save": "SALVAR",
+    "saved": "✓ SALVO",
+    "profileDetails": "DETALHES DO PERFIL",
+    "contactSupport": "CONTATAR SUPORTE",
+    "eventCenter": "CENTRAL DE EVENTOS",
+    "resourceLabels": {
+      "food": "ALIMENTO",
+      "oil": "ÓLEO",
+      "crystals": "CRISTAIS DE ENERGIA",
+      "fuel": "COMBUSTÍVEL",
+      "ore": "MINÉRIO"
+    },
+    "sidebar": {
+      "events": "EVENTOS",
+      "items": "ITENS",
+      "settings": "CONFIGURAÇÕES",
+      "alliance": "ALIANÇA",
+      "mail": "CORREIO",
+      "chat": "CHAT"
+    },
+    "eventTabs": {
+      "limited": "Limitado",
+      "activities": "Atividades",
+      "competition": "Competição"
+    },
+    "itemTabs": {
+      "inventory": "Inventário",
+      "weapons": "Armas",
+      "rewards": "Recompensas",
+      "specialists": "Especialistas"
+    },
+    "allianceTabs": {
+      "members": "Membros",
+      "mail": "Correio",
+      "manage": "Gerenciar"
+    },
+    "mailCats": {
+      "all": "TODOS",
+      "system": "SISTEMA",
+      "alliance": "ALIANÇA",
+      "events": "EVENTOS",
+      "battle": "BATALHA"
+    },
+    "chatTabs": {
+      "world": "MUNDO",
+      "alliance": "ALIANÇA",
+      "trade": "COMÉRCIO"
+    },
+    "settings": {
+      "audio": "ÁUDIO",
+      "language": "IDIOMA",
+      "profile": "PERFIL",
+      "support": "SUPORTE",
+      "soundEffects": "Efeitos Sonoros",
+      "music": "Música",
+      "chatTranslation": "TRADUÇÃO DO CHAT",
+      "chatTranslationDesc": "Você pode ativar ou desativar a Tradução do Chat.",
+      "autoTranslation": "Tradução Automática"
+    },
+    "games": {
+      "racing": "RACING",
+      "quest": "QUEST",
+      "overlord": "OVERLORD"
+    },
+    "resCategories": {
+      "endurance": "Resistência",
+      "water": "Água",
+      "furuseth": "Cristais Furuseth",
+      "gems": "Gemas",
+      "minerals": "Minerais",
+      "crystals": "Cristais",
+      "timeclocks": "Relógios de Tempo"
+    },
+    "resItems": {
+      "endurance": "Resistência",
+      "water": "Água",
+      "waterHeavy": "Água Pesada",
+      "fCrystals1": "F Cristais nv 1",
+      "fCrystals2": "F Cristais nv 2",
+      "fCrystals3": "F Cristais nv 3",
+      "fCrystals4": "F Cristais nv 4",
+      "fCrystals5": "F Cristais nv 5",
+      "gems": "Gemas",
+      "cotton": "Algodão",
+      "silk": "Seda",
+      "wood": "Madeira",
+      "carbon": "Carbono",
+      "silica": "Sílica",
+      "ash": "Cinza",
+      "whiteCrystals": "Cristais Brancos",
+      "greenCrystals": "Cristais Verdes",
+      "blueCrystals": "Cristais Azuis",
+      "redCrystals": "Cristais Vermelhos",
+      "clearCrystals": "Cristais Transparentes",
+      "min5": "5 minutos",
+      "min15": "15 minutos",
+      "min30": "30 minutos",
+      "hour1": "1 hora",
+      "hour3": "3 horas",
+      "hour8": "8 horas",
+      "hour12": "12 horas",
+      "hour24": "24 horas"
+    },
+    "marketItems": {
+      "overview": "Visão Geral",
+      "marketplace": "Mercado",
+      "auction": "Leilão",
+      "trade": "Comércio",
+      "quest": "Missão",
+      "myProfile": "Meu Perfil"
+    },
+    "linkedTooltip": {
+      "linkedMode": "Modo Vinculado:",
+      "linkedDesc": "Permite que um jogador vincule todos os recursos dos outros jogos para uso em atualizações.",
+      "unlinkedMode": "Modo Desvinculado:",
+      "unlinkedDesc": "Desvincula os recursos de cada jogo, mostrando apenas o que está disponível em cada jogo.",
+      "warning": "Aviso:",
+      "warningDesc": "No modo \"Vinculado\", todos os materiais ficam vulneráveis a serem roubados se atacado!"
+    },
+    "noRoomInfo": "Nenhuma informação disponível para este compartimento.",
+    "skinLabel": "SKIN 1 — LAYOUT DE ARMAS",
+    "gunStats": {
+      "damage": "Dano",
+      "range": "Alcance",
+      "fireRate": "Cadência de Tiro",
+      "upgrade": "Melhorar",
+      "detail": "Detalhes"
+    },
+    "rooms": {
+      "storeroom": { "title": "Almoxarifado", "desc": "Hub central de armazenamento de matérias-primas e recursos coletados. Gerencia a distribuição de inventário entre as operações de mineração e refinaria." },
+      "mining_fs": { "title": "Mining FS", "desc": "Baía de mineração dianteira de boreste. Equipada com matrizes de extração de núcleo profundo para coleta de minerais e minérios no espaço aberto." },
+      "mining_fp": { "title": "Mining FP", "desc": "Baía de mineração dianteira de bombordo. Espelha a unidade de boreste, dobrando a capacidade de extração durante operações em campos ricos em recursos." },
+      "process_ref": { "title": "Refinaria de Processamento", "desc": "Converte minério bruto e minerais em ligas refinadas. Essencial para síntese de combustível e materiais de melhoria da nave." },
+      "mining_rs": { "title": "Mining RS", "desc": "Unidade de mineração traseira de boreste. Angulada a -45° para varreduras laterais durante a coleta de asteroides em deriva lenta." },
+      "mining_rp": { "title": "Mining RP", "desc": "Unidade de mineração traseira de bombordo. Trabalha em conjunto com a baía RS para maximizar o rendimento de extração de recursos na retaguarda." },
+      "fuel_ref": { "title": "Refinaria de Combustível", "desc": "Processa ligas refinadas em combustível de grau propulsivo. Abastece o motor principal e as reservas dos propulsores de emergência." },
+      "workshop": { "title": "Oficina", "desc": "Centro de manutenção e fabricação da nave. Realiza reparos de componentes, fabricação de peças e melhorias de equipamentos." },
+      "racing": { "title": "Hangar de Corrida", "desc": "Baía dedicada que abriga drones de corrida e aeronaves leves. Suporta implantação no modo de jogo de corrida e operações de pit stop." },
+      "brig": { "title": "Cela", "desc": "Cela de contenção segura para prisioneiros e cargas valiosas. Paredes reforçadas impedem acesso não autorizado ou fuga." },
+      "armory_ss": { "title": "Armory SS", "desc": "Depósito de armas de boreste. Armazena e mantém armas leves, equipamentos de proteção da tripulação e sistemas de defesa pessoal." },
+      "armory_ps": { "title": "Armory PS", "desc": "Depósito de armas de bombordo. Espelha o armamento SS, proporcionando acesso equilibrado ao armamento em ambos os lados da embarcação." },
+      "main_weapon": { "title": "Armamento Pesado Principal", "desc": "Emplazamento de arma pesada primária. Abriga os sistemas ofensivos mais poderosos da nave para grandes engajamentos de combate." },
+      "fwd_shield": { "title": "Gerador de Escudo Dianteiro", "desc": "Gera uma barreira de energia protetora na proa da nave. Primeira linha de defesa contra projéteis e ataques de energia." },
+      "fighter_fss": { "title": "Fighter Bay FSS", "desc": "Baía dianteira de boreste que abriga caças compactos. Permite implantação rápida de caças de escolta durante missões de combate e patrulha." },
+      "fighter_fps": { "title": "Fighter Bay FPS", "desc": "Baía de caças dianteira de bombordo. Opera em conjunto com a baía FSS para lançamentos coordenados de esquadrões de caças." },
+      "fighter_rss": { "title": "Fighter Bay RSS", "desc": "Baía de caças na nacela traseira de boreste. Suporta operações de retaguarda e cenários de interceptação em perseguição." },
+      "fighter_rps": { "title": "Fighter Bay RPS", "desc": "Baía de caças na nacela traseira de bombordo. Fornece cobertura traseira simétrica para implantação defensiva completa de caças." },
+      "barracks_ss": { "title": "Barracks SS", "desc": "Alojamentos de tripulação de boreste para pessoal de combate. Acomoda soldados, pilotos e equipes de segurança com beliches e armários de equipamentos." },
+      "barracks_ps": { "title": "Barracks PS", "desc": "Alojamentos de tripulação de bombordo. Layout idêntico ao Barracks SS, garantindo distribuição igual da tripulação e mobilização rápida de qualquer lado." },
+      "stables_ss": { "title": "Stables SS", "desc": "Baía de ativos biológicos de boreste. Abriga montarias alienígenas e criaturas bioengenheiradas usadas em operações na superfície planetária." },
+      "stable_ps": { "title": "Stable PS", "desc": "Baía de ativos biológicos de bombordo. Espelha os estábulos SS para carga equilibrada de criaturas e distribuição simétrica de peso." },
+      "transporter": { "title": "Baía de Transporte", "desc": "Sistema de transporte de pessoal e carga assistido por quantum. Permite teletransporte de curto alcance rápido para superfícies planetárias ou naves próximas." },
+      "security": { "title": "Posto de Segurança", "desc": "Hub de vigilância e resposta a ameaças de toda a nave. Monitora todos os conveses e coordena os protocolos de segurança interna." },
+      "weapons_ss": { "title": "Weapons Systems SS", "desc": "Console de gerenciamento de armas de boreste. Controla matrizes de mira, sequências de disparo e logística de munição para armamentos de boreste." },
+      "weapons_ps": { "title": "Weapons Systems PS", "desc": "Console de gerenciamento de armas de bombordo. Fornece controle independente completo de todas as plataformas de armas do lado de bombordo." },
+      "power_plant": { "title": "Usina de Energia", "desc": "Unidade central de geração de energia. Fornece saída de energia estável para todos os sistemas da nave por meio de tecnologia de contenção de plasma circular." },
+      "power_sys": { "title": "Sistemas de Energia", "desc": "Hub de distribuição e regulação de energia. Gerencia o balanceamento de carga entre armas, escudos, motores e sistemas de suporte à vida." },
+      "energy_dist": { "title": "Distribuição de Energia", "desc": "Nó secundário de roteamento de energia. Garante fornecimento consistente de energia aos sistemas da seção média e traseira da nave em condições de alta demanda." },
+      "main_engine": { "title": "Motor Principal da Nave", "desc": "Sistema de propulsão primário que alimenta todas as viagens sub-luz. Gera empuxo por meio de jatos de plasma catalisados por antimatéria." },
+      "navigation": { "title": "Navegação", "desc": "Estação central de controle de navegação e leme. Gerencia traçado de curso, astrocartografia e rastreamento posicional em tempo real." },
+      "flight_deck": { "title": "Convés de Voo", "desc": "Estação principal de pilotagem. Controla todas as operações de voo, incluindo decolagem, pouso, manobras orbitais e ações evasivas de emergência." },
+      "weapons_off": { "title": "Oficial de Armas", "desc": "Posto de comando tático de armas. Coordena o fogo ofensivo e defensivo sob o comando direto do Oficial de Armas." },
+      "comms_off": { "title": "Oficial de Comunicações", "desc": "Hub de comunicação e interceptação de sinais. Lida com todas as comunicações entre naves, aliança e planetárias, incluindo canais criptografados." },
+      "capt_quarters": { "title": "Aposentos do Capitão", "desc": "Aposentos privados para o comandante da nave. Contém terminais de dados seguros e instalações de briefing privado." },
+      "kitchen": { "title": "Cozinha", "desc": "Instalação de nutrição e preparo de alimentos da tripulação. Processa recursos alimentares armazenados e sintetiza suplementos nutricionais para viagens longas." },
+      "mess_hall": { "title": "Refeitório", "desc": "Espaço comunitário de refeições e recreação. Serve como hub de moral da tripulação durante o tempo livre entre operações de combate e recursos." },
+      "hydro_1": { "title": "Célula Hidropônica 1", "desc": "Unidade de cultivo automatizada que produz alimentos frescos e plantas medicinais. Reduz a dependência de provisões armazenadas para missões estendidas." },
+      "hydro_2": { "title": "Célula Hidropônica 2", "desc": "Célula hidropônica secundária que expande a variedade e o rendimento das colheitas. Apoia a nutrição da tripulação e a produção de commodities para comércio." },
+      "hydro_3": { "title": "Célula Hidropônica 3", "desc": "Unidade de cultivo terciária especializada em culturas básicas de alto rendimento. Fornece suprimento calórico básico para grandes contingentes de tripulação." },
+      "hydro_4": { "title": "Célula Hidropônica 4", "desc": "Célula de pesquisa medicinal e botânica. Cultiva espécies raras usadas em tratamento médico e síntese alquímica." },
+      "hydro_5": { "title": "Célula Hidropônica 5", "desc": "Baía de cultivo de plantas exóticas. Produz bens de luxo e flora rara para negociação no mercado." },
+      "hydro_6": { "title": "Célula Hidropônica 6", "desc": "Célula experimental de alto crescimento. Testa novas variedades de culturas desenvolvidas por meio de programas de modificação genética." },
+      "shield_main": { "title": "Gerador de Escudo Principal", "desc": "Gerador de escudo multidirecional primário. Projeta uma barreira de energia ao redor de todo o casco durante situações de combate." },
+      "power_relay1": { "title": "Relé de Energia 1", "desc": "Junção de relé de energia do convés superior. Roteia energia da usina para armas dianteiras e matrizes de escudo." },
+      "power_relay2": { "title": "Relé de Energia 2", "desc": "Junção de relé de energia do convés inferior. Distribui energia para as nacelas do motor e sistemas defensivos traseiros." },
+      "hidden_st1": { "title": "Armazenamento Oculto 1", "desc": "Cofre de alta segurança oculto. Guarda carga classificada, artefatos valiosos e contrabando longe das varreduras de inventário padrão." },
+      "hidden_st2": { "title": "Armazenamento Oculto 2", "desc": "Cofre oculto secundário. Espaço seguro adicional para itens críticos de missão que requerem máxima discrição." },
+      "cargo_1": { "title": "Porão de Carga 1", "desc": "Baía de carga a granel primária. Projetada para transporte de recursos em grande volume, incluindo minérios, metais refinados e mercadorias." },
+      "cargo_2": { "title": "Porão de Carga 2", "desc": "Baía de carga secundária otimizada para cargas frágeis ou sensíveis à temperatura. Condições de armazenamento com controle climático." },
+      "cargo_3": { "title": "Porão de Carga 3", "desc": "Baía de carga terciária. Layout configurável suporta cargas mistas, incluindo veículos, contêineres e equipamentos de grande porte." },
+      "war_council": { "title": "Conselho de Guerra", "desc": "Câmara de comando estratégico. Mesa de briefing de oficiais seniores onde planos de batalha, estratégias de aliança e objetivos de campanha são coordenados." },
+      "academy": { "title": "Academia", "desc": "Instalação de treinamento e educação da tripulação. Permite avanço de habilidades, desbloqueios de especialização e programas de desenvolvimento de oficiais." },
+      "science_lab": { "title": "Laboratório Científico", "desc": "Centro de pesquisa e desenvolvimento. Conduz experimentos em ciência dos materiais, teoria de propulsão e análise de tecnologia alienígena." },
+      "dna_lab": { "title": "Laboratório de DNA", "desc": "Instalação de pesquisa genética. Desenvolve aprimoramentos biológicos para a tripulação, cria novas variantes de espécies e pesquisa amostras de DNA alienígena." },
+      "cryostasis": { "title": "Criostase", "desc": "Sistema de suspensão para viagens de longo alcance. Coloca a tripulação em estase criogênica para preservar recursos durante jornadas de vários anos no espaço profundo." },
+      "dna_chambers": { "title": "Câmaras de DNA", "desc": "Baías de modificação genética. Aplica aprimoramentos de DNA pesquisados diretamente a membros da tripulação e unidades biológicas." },
+      "weapons_relay": { "title": "Relé de Energia de Armas", "desc": "Nó dedicado de gerenciamento de energia para sistemas de armas pesadas. Garante fornecimento estável de energia durante engajamentos de combate prolongados." },
+      "comms_tower": { "title": "Torre de Comunicações", "desc": "Matriz de comunicações de espaço profundo de longo alcance. Permite transmissões para toda a frota, transmissões interestelares e coordenação de aliança em vastas distâncias." }
+    },
+    "guns": {
+      "far_left_bar": "Canhão Principal Frontal",
+      "fore_port_bay": "Bateria de Boreste Dianteira",
+      "fore_stbd_bay": "Bateria de Bombordo Dianteira",
+      "pd_gun_1": "Célula de Defesa de Boreste do Cockpit 1",
+      "pd_gun_2": "Célula de Defesa de Boreste do Cockpit 2",
+      "pd_gun_3": "Célula de Defesa de Boreste do Cockpit 3",
+      "pd_gun_4": "Célula de Defesa de Boreste do Cockpit 4",
+      "pd_gun_5": "Célula de Defesa de Boreste do Cockpit 5",
+      "pd_gun_6": "Célula de Defesa de Boreste do Cockpit 6",
+      "vert_oval_upper": "Célula de Defesa Central do Cockpit — Inferior",
+      "vert_oval_lower": "Célula de Defesa Central do Cockpit — Superior",
+      "center_front_gun": "Bateria do Convés Superior Dianteiro",
+      "pd_gun_7": "Célula de Defesa de Bombordo do Cockpit 1",
+      "pd_gun_8": "Célula de Defesa de Bombordo do Cockpit 2",
+      "pd_gun_9": "Célula de Defesa de Bombordo do Cockpit 3",
+      "pd_gun_10": "Célula de Defesa de Bombordo do Cockpit 4",
+      "pd_gun_11": "Célula de Defesa de Bombordo do Cockpit 5",
+      "pd_gun_12": "Célula de Defesa de Bombordo do Cockpit 6",
+      "upper_flank_array": "Bateria de Boreste Traseira",
+      "lower_flank_array": "Bateria de Bombordo Traseira",
+      "spine_gun_1": "Bateria do Convés Superior Central",
+      "spine_gun_2": "Bateria da Espinha Dorsal Central Inferior",
+      "spine_gun_3": "Bateria da Espinha Dorsal Central Traseira",
+      "mid_rail_gun": "Emplazamento da Torre Central",
+      "upper_nacelle_bay": "Bateria de Asa de Boreste",
+      "lower_nacelle_bay": "Bateria de Asa de Bombordo"
+    },
+    "avatar": {
+      "header": "AVATAR",
+      "selectChar": "SELECIONAR PERSONAGEM",
+      "speciesSubtitle": "7 ESPÉCIES · ESCOLHA SUA VARIANTE",
+      "change": "ALTERAR ▸",
+      "profileFrame": "MOLDURA DE PERFIL",
+      "might": "PODER",
+      "endurance": "RESISTÊNCIA",
+      "female": "FEMININO",
+      "male": "MASCULINO",
+      "notes": "NOTAS",
+      "powersWarning": "⚠ Poderes: Indisponível no momento devido ao balanceamento do jogo",
+      "detailsSoon": "Detalhes da espécie em breve...",
+      "hoverHint": "PASSE O MOUSE SOBRE UM PERSONAGEM PARA VER OS DETALHES",
+      "attrs": {
+        "height": "Altura",
+        "eyes": "Olhos",
+        "clothing": "Vestuário",
+        "environ": "Ambiente",
+        "symbolism": "Simbolismo",
+        "wings": "Asas",
+        "arms": "Braços"
+      },
+      "slots": {
+        "weapon": "Arma",
+        "suit": "Traje",
+        "boots": "Botas",
+        "helmet": "Capacete",
+        "gloves": "Luvas",
+        "flag": "Bandeira",
+        "staff": "Cajado",
+        "badge": "Distintivo",
+        "power": "Poder"
+      },
+      "species": {
+        "lithionites": {
+          "type": "Híbrido Metamórfico Mutagênico",
+          "notes": "Os Lithionites são uma espécie complexa, classificada como híbridos metamórficos mutagênicos. Distinguem-se por seus exoesqueletos duros e ásperos e por sua estrutura interna fluídica e cristalizada. São conhecidos por sua natureza agressiva e facilmente provocados ao combate quando ameaçados. Apesar da disposição feroz, são sociáveis entre os membros da própria espécie, mas desconfiam de estranhos, podendo vê-los como ameaças ou presas. Dentro dos grupos, tendem a testar a força uns dos outros, o que pode gerar conflitos internos. Sua dieta é diversa, incluindo plantas e carne, sendo caçadores habilidosos. Residem em cavernas ou abrigos rochosos na base de regiões montanhosas. A lealdade é a base da cultura Lithionite; são ferozmente devotos aos seus e farão guerra para garantir território e recursos. Espiritualmente, possuem profunda conexão com estruturas cristalizadas, consideradas sagradas, e realizam rituais de adoração à luz do fogo e às energias dos cristais."
+        },
+        "marmulus": {
+          "type": "Híbrido Metamórfico Mutagênico",
+          "notes": "A espécie Marmulus é classificada como híbridos metamórficos mutagênicos. Esses seres extraordinários são caracterizados por seus exoesqueletos duros e lisos, com um núcleo fluídico energizado único. Os Marmulus são socialmente vibrantes e extremamente extrovertidos, expressando sua sexualidade abertamente. Sua dieta é diversa, composta por plantas e carne. Têm apreço por itens valiosos e riquezas, frequentemente buscando tesouros raros. Ao longo dos séculos, desenvolveram cidades impressionantes em regiões montanhosas. A estrutura social dos Marmulus é profundamente enraizada em valores democráticos, com crenças em seres espirituais e na importância do alinhamento estrutural guiando suas interações."
+        },
+        "ophidians": {
+          "type": "Híbrido Alienígena Serpente",
+          "notes": "A espécie Ophidians é caracterizada por sua aparência única de híbrido serpente-alienígena, com pele escamosa e lisa que brilha em matrizes de cores escuras vibrantes. Prosperam em ambientes sociais e interagem bem entre si, embora sejam notavelmente hostis com estranhos. Sua dieta é diversa, incluindo carne e alimentos vegetais. São conhecidos por suas profundas conexões sociais, formando comunidades unidas onde a lealdade é primordial. Quando seu território é ameaçado, demonstram ferocidade intensa. A adoração ao sol é parte integral de sua cultura, e prosperam em planícies quentes e áridas, onde constroem cidades avançadas."
+        },
+        "geodians": {
+          "type": "Híbrido Metamórfico Mutagênico",
+          "notes": "A espécie Geodian é classificada como híbridos metamórficos mutagênicos. Esses seres notáveis possuem um deslumbrante exoesqueleto de malha cristalizada que refrata a luz com beleza hipnotizante, enquanto seu núcleo interno flui com uma substância fluídica térmica que flutua com energia térmica. Inteligentes e altamente evoluídos, os Geodians estabeleceram cidades complexas próximas a fontes termais. Sociáveis por natureza, expressam abertamente suas emoções e sexualidade. Sua dieta é versátil, incluindo plantas e carne. A sociedade Geodian é marcada por princípios democráticos e possuem profunda reverência pela luz, que simboliza suas crenças espirituais."
+        },
+        "fawnus": {
+          "type": "Híbrido Alienígena Cabra",
+          "notes": "A espécie Fawnus assemelha-se a uma mistura cativante de cabra e características alienígenas. Seus corpos são cobertos por pelo curto e áspero de cores variadas, refletindo suas personalidades brincalhonas. Inerentemente travessos e animados, os Fawnus adoram brincar. Sua dieta é impressionantemente diversa, incluindo carne e alimentos vegetais. São socialmente conectados, formando comunidades unidas com forte lealdade e instinto de proteção. Culturalmente, são devotos, adorando diversas divindades e símbolos religiosos. Inspiram-se na cultura espanhola, apreciando a música e a riqueza, especialmente o ouro. Arquitetonicamente, criam estruturas magníficas no estilo steampunk."
+        },
+        "mantaquads": {
+          "type": "Híbrido Alienígena de 4 Braços",
+          "notes": "Os Mantaquads são seres únicos, caracterizados por seus quatro braços destramente habilidosos e quatro olhos observadores, incorporando a essência de um híbrido alienígena. Possuem uma mente coletiva, permitindo operar em perfeita sincronia. São criaturas sociais e conhecidos por sua abordagem aberta à sexualidade. A busca pela perfeição os leva a dominar diversas artes marciais. Consomem carne e alimentos vegetais, com forte desejo de caçar. Como mercenários, são procurados por sua eficiência incomparável e destreza implacável em batalha. Exibem habilidades arquitetônicas notáveis, erigindo estruturas complexas em velocidade sem precedentes. São profundamente religiosos, seguindo uma mistura de tradições medievais e símbolos satânicos, doando pelo menos 10% de sua riqueza às igrejas."
+        },
+        "dryads": {
+          "type": "Híbrido Alienígena Árvore",
+          "notes": "Os Dryads são uma espécie fascinante e única, caracterizada por sua natureza híbrida que combina traços de árvores e seres alienígenas, prosperando em ambientes diversos com aparência semelhante à flora ao redor. Possuem uma mente semelhante a uma colmeia, comunicando-se perfeitamente entre si. Essa consciência coletiva promove forte senso de unidade e cooperação, mantendo conexão intrincada com o mundo natural e podendo sentir a saúde do ambiente. Sua dieta é principalmente vegetal, com pequenas quantidades de carne consumidas com grande cuidado. Os Dryads são conhecidos por seu comportamento brincalhão e travesso. Sua lealdade ao próximo e à terra natal é inabalável. Espiritualmente, acreditam em uma vida após a morte entrelaçada com os ciclos da natureza e reverenciam os elementos naturais (Terra, Ar, Fogo e Água) como forças divinas, além de corpos celestes como o sol e as estrelas."
+        }
+      }
     }
   }
 }

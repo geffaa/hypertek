@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaXTwitter, FaDiscord } from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6";
 import { FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FiArrowRight, FiCheck, FiX, FiArrowLeft } from "react-icons/fi";
 import bgHero from "../assets/images/waitlist/bg-hero.png";
 import { BACKEND_BASE_URL } from "../Config";
+import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 const TOTAL_STEPS = 7;
 
@@ -18,16 +19,7 @@ const slideVariants = {
 const STEP_ICONS = [FiUser, FiMail, FiZap, FiGrid, FiEdit3, FiDollarSign, FaXTwitter];
 
 function FooterSocials() {
-  const { t } = useTranslation();
-  return (
-    <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
-      <span className="text-white/35 text-xs">{t("waitlistForm.stayUpdated")}</span>
-      <div className="flex items-center gap-3">
-        <a href="#" className="text-white/35 hover:text-white transition-colors"><FaXTwitter size={14} /></a>
-        <a href="#" className="text-white/35 hover:text-white transition-colors"><FaDiscord size={15} /></a>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 function NextButton({ onClick, disabled, label }) {
@@ -207,6 +199,11 @@ export default function WaitlistForm() {
       >
         <FiArrowLeft size={15} /> {t("waitlistForm.backToWaitlist")}
       </button>
+
+      {/* Language switcher — top right */}
+      <div className="absolute top-5 right-5 z-20">
+        <LanguageSwitcher />
+      </div>
 
       <div className="absolute inset-0">
         <img

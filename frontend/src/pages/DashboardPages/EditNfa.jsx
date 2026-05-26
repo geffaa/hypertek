@@ -103,8 +103,8 @@ function EditNfa() {
 
           {/* Left — Image Upload */}
           <div
-            className="flex items-center justify-center cursor-pointer backdrop-blur-sm bg-white/5 border border-white/30 w-full max-w-[456px] h-[300px] md:h-[440px] mx-auto lg:mx-0"
-            style={{ borderRadius: "6px", borderStyle: "dashed" }}
+            className="cursor-pointer backdrop-blur-sm bg-white/5 border border-white/30 w-full max-w-[456px] mx-auto lg:mx-0 overflow-hidden"
+            style={{ borderRadius: "6px", borderStyle: selectedImage ? "solid" : "dashed", minHeight: "200px" }}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onClick={() => document.getElementById("file-upload").click()}
@@ -113,15 +113,17 @@ function EditNfa() {
               <img
                 src={selectedImage}
                 alt="Preview"
-                className="max-w-full max-h-full object-contain rounded-md"
+                className="w-full h-auto block rounded-md"
               />
             ) : (
-              <div className="flex flex-col items-center gap-2 px-4 text-center">
-                <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
-                <p className="text-white text-sm">
-                  <span className="font-bold text-blue-400">Click to upload</span> or drag & drop
-                </p>
-                <p className="text-white/40 text-xs">PNG, JPG, WebP — max 5MB</p>
+              <div className="flex items-center justify-center h-[300px] md:h-[440px]">
+                <div className="flex flex-col items-center gap-2 px-4 text-center">
+                  <img src={uploadIcon} alt="Upload" className="w-6 h-6" />
+                  <p className="text-white text-sm">
+                    <span className="font-bold text-blue-400">Click to upload</span> or drag & drop
+                  </p>
+                  <p className="text-white/40 text-xs">PNG, JPG, WebP — max 5MB</p>
+                </div>
               </div>
             )}
             <input

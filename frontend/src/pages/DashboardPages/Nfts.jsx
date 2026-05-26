@@ -530,11 +530,11 @@ function NFTs() {
                         <FiX size={10} /> Unlist
                       </button>
                     )}
-                    <button onClick={() => openEditModal(item)} title={item.listed ? "Cancel listing to edit" : "Edit"}
+                    <button onClick={() => openEditModal(item)} data-tooltip={item.listed ? "Cancel listing to edit" : "Edit"}
                       className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${item.listed ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-white hover:bg-white/5"}`}>
                       <FiEdit2 size={11} />
                     </button>
-                    <button onClick={() => openDeleteModal(item)} title={item.listed ? "Cancel listing to delete" : isOnChain ? "On-chain, cannot delete" : "Delete"}
+                    <button onClick={() => openDeleteModal(item)} data-tooltip={item.listed ? "Cancel listing to delete" : isOnChain ? "On-chain, cannot delete" : "Delete"}
                       className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${(item.listed || isOnChain) ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-red-400 hover:bg-red-400/5"}`}>
                       <FiTrash2 size={11} />
                     </button>
@@ -831,7 +831,7 @@ function NFTs() {
       {/* ── Edit Modal ── */}
       {editItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-5">
+          <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between">
               <h2 className="text-white font-semibold text-base">Edit Item</h2>
               <button onClick={() => setEditItem(null)} className="text-white/40 hover:text-white transition-colors"><FiX size={18} /></button>
@@ -839,21 +839,24 @@ function NFTs() {
 
             {/* Image */}
             <div
-              className="relative w-full h-32 rounded-xl border border-dashed border-white/15 bg-white/3 flex items-center justify-center cursor-pointer overflow-hidden group"
+              className="relative w-full rounded-xl border border-white/15 bg-white/3 cursor-pointer overflow-hidden group"
+              style={{ borderStyle: editPreview ? "solid" : "dashed" }}
               onClick={() => document.getElementById("edit-img-input").click()}
             >
               {editPreview ? (
                 <>
-                  <img src={editPreview} alt="preview" className="w-full h-full object-cover" />
+                  <img src={editPreview} alt="preview" className="w-full max-h-[200px] object-contain block" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                     <FiUploadCloud size={18} className="text-white" />
                     <span className="text-white text-xs">Change image</span>
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col items-center gap-1 text-white/30">
-                  <FiUploadCloud size={20} />
-                  <span className="text-xs">Click to change image</span>
+                <div className="h-32 flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-1 text-white/30">
+                    <FiUploadCloud size={20} />
+                    <span className="text-xs">Click to change image</span>
+                  </div>
                 </div>
               )}
               <input type="file" id="edit-img-input" accept="image/*" className="hidden"

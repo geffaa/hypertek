@@ -1617,7 +1617,7 @@ function Buy1() {
               <div
                 className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition"
                 onClick={() => copyToClipboard(emailWalletAddress)}
-                title="Copy wallet address"
+                data-tooltip="Copy wallet address"
               >
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-500/20 rounded-lg">

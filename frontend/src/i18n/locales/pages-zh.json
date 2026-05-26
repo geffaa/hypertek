@@ -102,7 +102,17 @@
     "newsletter":     "订阅新闻简报",
     "newsletterDesc": "要开始接收我们的新闻，您只需输入您的电子邮件地址。其余的一切由我们来处理。我们将向您发送有关游戏的信息邮件。我们不发垃圾邮件。",
     "emailPlaceholder":"您的电子邮件地址",
-    "subscribe":      "订阅"
+    "subscribe":      "订阅",
+    "universeHeading":"一个宇宙。",
+    "threeWorlds":    "三个世界。",
+    "noSpam":         "无垃圾邮件。随时退订。",
+    "subscribedTitle":"您已订阅！",
+    "subscribedDesc": "我们将持续为您更新 HyperTek 的最新资讯。",
+    "worlds": {
+      "racing":   { "desc": "在外星赛道上竞速，升级载具，称霸排行榜。" },
+      "quest":    { "desc": "完成史诗任务，探索全新世界，建立属于你的传奇。" },
+      "overlord": { "desc": "统领军队，征服领土，主宰战场。" }
+    }
   },
 
   "waitlistForm": {

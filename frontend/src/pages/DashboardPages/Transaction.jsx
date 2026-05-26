@@ -4,11 +4,18 @@ import axios from "axios";
 import SearchImage from "../../assets/search.png";
 import { BACKEND_BASE_URL } from "../../Config";
 
+const TABS = [
+  { key: "all",      label: "All" },
+  { key: "sell",     label: "Sales History" },
+  { key: "buy",      label: "Purchases" },
+];
+
 function Transactions() {
   const { user, token } = useSelector((state) => state.auth);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading]           = useState(true);
   const [searchTerm, setSearchTerm]     = useState("");
+  const [activeTab, setActiveTab]       = useState("all");
 
   const wallet = user?.WalletAddress || user?.MetaMaskAddress || "";
 
@@ -32,6 +39,7 @@ function Transactions() {
   }, [wallet]);
 
   const filtered = transactions.filter((tx) => {
+    if (activeTab !== "all" && tx.type !== activeTab) return false;
     const q = searchTerm.toLowerCase();
     return (
       (tx.txHash || "").toLowerCase().includes(q) ||
@@ -42,18 +50,50 @@ function Transactions() {
   });
 
   const shortHash = (hash) => hash ? `${hash.slice(0, 14)}....` : "—";
+  const shortWallet = (w) => w ? `${w.slice(0, 6)}...${w.slice(-4)}` : "—";
   const formatDate = (d) => d ? new Date(d).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
+
+  const counts = {
+    all:  transactions.length,
+    sell: transactions.filter((tx) => tx.type === "sell").length,
+    buy:  transactions.filter((tx) => tx.type === "buy").length,
+  };
 
   return (
     <div className="w-full flex flex-col relative z-10">
       {/* Header */}
-      <div className="w-full max-w-[426px] z-10 relative">
-        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-6">
+      <div className="w-full z-10 relative mb-6">
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-4">
           Transaction History
         </h1>
 
-        {/* Search Box */}
-        <div className="flex items-center w-full h-[43px] rounded-md gap-[15px] px-4 md:px-6 bg-[#FFFFFF1C] backdrop-blur-sm">
+        {/* Tabs */}
+        <div className="flex items-center gap-1 border-b border-white/10 mb-6">
+          {TABS.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-4 py-2.5 text-sm font-semibold transition-colors relative whitespace-nowrap ${
+                activeTab === tab.key ? "text-white" : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              {tab.label}
+              {counts[tab.key] > 0 && (
+                <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full ${
+                  activeTab === tab.key ? "bg-[#002AA8] text-white" : "bg-white/10 text-white/50"
+                }`}>
+                  {counts[tab.key]}
+                </span>
+              )}
+              {activeTab === tab.key && (
+                <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-[#002AA8] rounded-t-full" />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Search */}
+        <div className="flex items-center w-full max-w-[426px] h-[43px] rounded-md gap-[15px] px-4 md:px-6 bg-[#FFFFFF1C] backdrop-blur-sm">
           <img src={SearchImage} alt="search" className="w-[16px] h-[16px] flex-shrink-0" />
           <input
             type="text"
@@ -66,14 +106,20 @@ function Transactions() {
       </div>
 
       {/* List */}
-      <div className="mt-8 space-y-4 z-10 relative">
+      <div className="space-y-4 z-10 relative">
         {loading ? (
           <p className="text-white/50 text-sm text-center py-12">Loading transactions...</p>
         ) : !wallet ? (
           <p className="text-white/50 text-sm text-center py-12">Connect your wallet to see your transaction history.</p>
         ) : filtered.length === 0 ? (
           <p className="text-white/50 text-sm text-center py-12">
-            {searchTerm ? `No transactions found matching "${searchTerm}"` : "No transactions yet."}
+            {searchTerm
+              ? `No transactions found matching "${searchTerm}"`
+              : activeTab === "sell"
+              ? "No sales yet. Items you sell will appear here."
+              : activeTab === "buy"
+              ? "No purchases yet."
+              : "No transactions yet."}
           </p>
         ) : (
           filtered.map((tx, i) => (
@@ -81,7 +127,7 @@ function Transactions() {
               key={i}
               className="flex flex-col md:flex-row items-start md:items-center w-full max-w-[954px] gap-4 p-4 md:p-0 bg-white/5 md:bg-transparent rounded-lg"
             >
-              {/* Left — tx hash + date */}
+              {/* Left — type badge + date */}
               <div className="flex items-center gap-3 w-full md:w-[209px]">
                 <div
                   className="flex items-center justify-center rounded-full flex-shrink-0"
@@ -102,16 +148,26 @@ function Transactions() {
                       {shortHash(tx.txHash)}
                     </a>
                   ) : (
-                    <span className="font-inter font-normal text-[14px] text-white/50">{tx.itemName}</span>
+                    <span className="font-inter font-normal text-[14px] text-white/50">{tx.itemName || "—"}</span>
                   )}
                   <p className="font-inter font-normal text-[14px] text-white/50 m-0">{formatDate(tx.createdAt)}</p>
                 </div>
               </div>
 
-              {/* Center — item name + collection */}
+              {/* Center — item + collection + buyer/seller */}
               <div className="flex-1 w-full overflow-hidden">
                 <p className="font-inter font-normal text-[14px] text-white/70 m-0 truncate">{tx.itemName}</p>
                 <p className="font-inter font-normal text-[12px] text-white/40 m-0 truncate">{tx.collectionName}</p>
+                {tx.type === "sell" && tx.buyer && (
+                  <p className="font-inter font-normal text-[11px] text-white/30 m-0 truncate">
+                    Buyer: {shortWallet(tx.buyer)}
+                  </p>
+                )}
+                {tx.type === "buy" && tx.seller && (
+                  <p className="font-inter font-normal text-[11px] text-white/30 m-0 truncate">
+                    Seller: {shortWallet(tx.seller)}
+                  </p>
+                )}
               </div>
 
               {/* Right — price */}

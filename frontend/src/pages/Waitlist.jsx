@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -14,27 +14,9 @@ import character2 from "../assets/images/waitlist/character2.png";
 import logoWhite from "../assets/logo-t-white.png";
 
 const WORLDS = [
-  {
-    Icon: Gauge,
-    key: "racing",
-    title: "Hyper Racing",
-    desc: "Race across alien tracks, upgrade vehicles, and dominate the leaderboards.",
-    color: "#3B82F6",
-  },
-  {
-    Icon: Compass,
-    key: "quest",
-    title: "Hyper Quest",
-    desc: "Complete epic quests, explore new worlds, and build your legacy.",
-    color: "#8B5CF6",
-  },
-  {
-    Icon: Crown,
-    key: "overlord",
-    title: "Overlord Realm",
-    desc: "Command armies, conquer territories, and rule the battlefield.",
-    color: "#06B6D4",
-  },
+  { Icon: Gauge,   key: "racing",   title: "Hyper Racing",   color: "#3B82F6" },
+  { Icon: Compass, key: "quest",    title: "Hyper Quest",    color: "#8B5CF6" },
+  { Icon: Crown,   key: "overlord", title: "Overlord Realm", color: "#06B6D4" },
 ];
 
 function Waitlist() {
@@ -183,10 +165,10 @@ function Waitlist() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              One Universe.<br />
+              {t("waitlist.universeHeading")}<br />
               <span className="text-transparent bg-clip-text"
                 style={{ backgroundImage: "linear-gradient(90deg, #3B82F6, #8B5CF6, #06B6D4)" }}>
-                Three Worlds.
+                {t("waitlist.threeWorlds")}
               </span>
             </motion.h2>
 
@@ -228,7 +210,7 @@ function Waitlist() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-sm text-white mb-1">{world.title}</h3>
-                    <p className="text-white/45 text-xs leading-relaxed">{world.desc}</p>
+                    <p className="text-white/45 text-xs leading-relaxed">{t(`waitlist.worlds.${world.key}.desc`)}</p>
                   </div>
                   <div
                     className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5"
@@ -334,7 +316,7 @@ function Waitlist() {
                 >
                   {t("waitlist.subscribe")} <FiArrowRight size={16} />
                 </motion.button>
-                <p className="text-white/25 text-xs">No spam. Unsubscribe anytime.</p>
+                <p className="text-white/25 text-xs">{t("waitlist.noSpam")}</p>
               </div>
             ) : (
               <motion.div
@@ -347,8 +329,8 @@ function Waitlist() {
                   <FiCheck size={18} className="text-green-400" />
                 </div>
                 <div>
-                  <p className="font-bold text-sm text-white">You're subscribed!</p>
-                  <p className="text-white/50 text-xs mt-0.5">We'll keep you updated on HyperTek news.</p>
+                  <p className="font-bold text-sm text-white">{t("waitlist.subscribedTitle")}</p>
+                  <p className="text-white/50 text-xs mt-0.5">{t("waitlist.subscribedDesc")}</p>
                 </div>
               </motion.div>
             )}

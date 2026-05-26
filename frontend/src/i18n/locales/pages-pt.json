@@ -102,7 +102,17 @@
     "newsletter":     "Assinar Newsletter",
     "newsletterDesc": "Para começar a receber nossas notícias, você só precisa inserir seu endereço de e-mail. Cuidaremos de tudo mais. Enviaremos e-mails com informações sobre o jogo. Não enviamos spam.",
     "emailPlaceholder":"Seu endereço de e-mail",
-    "subscribe":      "Assinar"
+    "subscribe":      "Assinar",
+    "universeHeading":"Um Universo.",
+    "threeWorlds":    "Três Mundos.",
+    "noSpam":         "Sem spam. Cancele a qualquer momento.",
+    "subscribedTitle":"Você está inscrito!",
+    "subscribedDesc": "Manteremos você atualizado com as notícias do HyperTek.",
+    "worlds": {
+      "racing":   { "desc": "Acelere em pistas alienígenas, melhore seus veículos e domine o placar." },
+      "quest":    { "desc": "Complete missões épicas, explore novos mundos e construa seu legado." },
+      "overlord": { "desc": "Comande exércitos, conquiste territórios e domine o campo de batalha." }
+    }
   },
 
   "waitlistForm": {

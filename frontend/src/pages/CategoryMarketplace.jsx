@@ -265,7 +265,7 @@ function CategoryMarketplace() {
               border: "1px solid rgba(255,255,255,0.12)",
               color: "rgba(255,255,255,0.7)",
             }}
-            title={t("collections.backToMarketplace")}
+            data-tooltip={t("collections.backToMarketplace")}
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">{t("collections.backToMarketplace")}</span>

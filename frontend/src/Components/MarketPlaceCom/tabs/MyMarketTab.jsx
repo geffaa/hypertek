@@ -357,13 +357,13 @@ export default function MyMarketTab() {
                     </td>
                     {/* From (Seller) */}
                     <td className="px-4 py-3">
-                      <span className="font-mono text-xs text-white/60" title={act.seller}>
+                      <span className="font-mono text-xs text-white/60" data-tooltip={act.seller}>
                         {truncateAddress(act.seller)}
                       </span>
                     </td>
                     {/* To (Buyer) */}
                     <td className="px-4 py-3">
-                      <span className="font-mono text-xs text-white/60" title={act.buyer}>
+                      <span className="font-mono text-xs text-white/60" data-tooltip={act.buyer}>
                         {truncateAddress(act.buyer)}
                       </span>
                     </td>

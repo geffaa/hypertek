@@ -5,6 +5,7 @@
  */
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 
 const CSS = `
@@ -44,6 +45,7 @@ const CSS = `
 `;
 
 export default function ViewButton({ activeGame, raceView, onRaceViewToggle, questView, onQuestViewToggle, overlordView, onOverlordViewToggle }) {
+  const { t } = useTranslation();
   const [vrOpen, setVrOpen] = useState(false);
   const [vrPairing, setVrPairing] = useState(false);
   const [vrPairDone, setVrPairDone] = useState(false);
@@ -64,7 +66,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
 
   // Racing icons
   const isTrack    = raceView === "TRACK";
-  const raceImgSrc = isTrack ? "/flag.png" : "/garage_icon.png";
+  const raceImgSrc = isTrack ? "/garage_icon.png" : "/flag.png";
   const raceSub    = isTrack ? "GARAGE" : "TRACK";
 
   // Quest icons
@@ -108,7 +110,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
         <div
           className={isRacing ? "view-btn-racing" : isOverlord ? "view-btn-overlord" : "view-btn"}
           onClick={handleClick}
-          title={inGame ? `Switch to ${gameSub} view` : "VIEW"}
+          data-tooltip={inGame ? `Switch to ${gameSub} view` : t("hud.view", "VIEW")}
           style={{
             width:    SIZE,
             height:   SIZE,
@@ -154,7 +156,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
           borderRadius: 4, padding: "2px 7px",
           backdropFilter: "blur(4px)",
           whiteSpace: "nowrap",
-        }}>{inGame ? gameSub : "VIEW"}</span>
+        }}>{inGame ? gameSub : t("hud.view", "VIEW")}</span>
       </div>
 
       {/* ── VR MODE button — always visible, to the left of VIEW ── */}
@@ -259,7 +261,7 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
           borderRadius: 4, padding: "2px 7px",
           backdropFilter: "blur(4px)",
           whiteSpace: "nowrap",
-        }}>VR MODE</span>
+        }}>{t("hud.vrMode", "VR MODE")}</span>
 
       </div>{/* end vrRef wrapper */}
     </>

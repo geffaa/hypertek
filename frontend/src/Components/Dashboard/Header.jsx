@@ -126,7 +126,7 @@ const Header = ({ onMenuClick }) => {
           <button
             onClick={() => navigate("/dashboard/withdraw")}
             className="flex flex-col items-center justify-center bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/40 hover:border-yellow-400/70 rounded-lg px-3 py-1 transition-all duration-200 hover:scale-105 flex-shrink-0"
-            title="Hyper Bucks — click to cashout"
+            data-tooltip="Hyper Bucks — click to cashout"
           >
             <span className="text-yellow-300 text-xs font-bold leading-tight whitespace-nowrap">
               ⚡ {hbBalance.hyperBucks} HB
@@ -266,7 +266,7 @@ const Header = ({ onMenuClick }) => {
       </div>{/* end header right */}
 
       {/* Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes shake {
           0%, 100% { transform: rotate(0deg); }
           25% { transform: rotate(-5deg); }

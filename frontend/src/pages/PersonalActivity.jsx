@@ -160,11 +160,11 @@ export default function PersonalActivity() {
 
                     {/* From (seller) */}
                     <span className="text-white/45 text-[12px] font-mono truncate"
-                      title={item.seller}>{shortAddr(item.seller)}</span>
+                      data-tooltip={item.seller}>{shortAddr(item.seller)}</span>
 
                     {/* To (buyer) */}
                     <span className="text-white/45 text-[12px] font-mono truncate"
-                      title={item.buyer}>{shortAddr(item.buyer)}</span>
+                      data-tooltip={item.buyer}>{shortAddr(item.buyer)}</span>
 
                     {/* Price */}
                     <span className="text-white/80 text-[13px] font-semibold text-right">

@@ -179,7 +179,7 @@ function EditProfile() {
           <h2 className="text-lg md:text-xl font-semibold">{name}</h2>
           <p className="text-xs sm:text-sm text-gray-400 flex items-center gap-2">
             {userData._id || userData.id || "null"}
-            <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" title="Copy">
+            <button onClick={handleCopy} className="text-gray-400 hover:text-white transition" data-tooltip="Copy">
               <FiCopy className="w-4 h-4" />
             </button>
             {copied && <span className="text-green-400 text-[10px]">Copied!</span>}
@@ -276,7 +276,7 @@ function EditProfile() {
                           toast.success("Wallet address copied!");
                         }}
                         className="text-gray-400 hover:text-white p-2"
-                        title="Copy to clipboard"
+                        data-tooltip="Copy to clipboard"
                       >
                         <FiCopy size={16} />
                       </button>
@@ -368,7 +368,7 @@ function EditProfile() {
                           type="button"
                           onClick={() => setShowPrivateKey(!showPrivateKey)}
                           className="text-gray-400 hover:text-white p-1"
-                          title="Toggle visibility"
+                          data-tooltip="Toggle visibility"
                         >
                           {showPrivateKey ? <FiEyeOff size={16} /> : <FiEye size={16} />}
                         </button>
@@ -379,7 +379,7 @@ function EditProfile() {
                             toast.success("Private key copied to clipboard!");
                           }}
                           className="text-gray-400 hover:text-white p-1"
-                          title="Copy to clipboard"
+                          data-tooltip="Copy to clipboard"
                         >
                           <FiCopy size={16} />
                         </button>

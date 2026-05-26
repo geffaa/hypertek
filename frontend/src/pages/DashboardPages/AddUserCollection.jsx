@@ -234,7 +234,7 @@ function CreateNFT() {
               <button
                 type="button"
                 disabled
-                title="License required — coming soon"
+                data-tooltip="License required — coming soon"
                 className="flex-1 h-9 rounded-lg text-sm font-medium border border-white/10 text-white/20 cursor-not-allowed relative"
               >
                 NFC

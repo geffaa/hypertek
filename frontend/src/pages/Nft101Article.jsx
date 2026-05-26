@@ -320,7 +320,7 @@ export default function Nft101Article() {
             border: "1px solid rgba(255,255,255,0.12)",
             backdropFilter: "blur(12px)",
           }}
-          title="Scroll to top"
+          data-tooltip="Scroll to top"
         >
           <ChevronUp className="w-5 h-5 text-white/60" />
         </button>

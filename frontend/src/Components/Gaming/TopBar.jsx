@@ -5,11 +5,13 @@
  */
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/AuthSlice";
 import symbol from "../../assets/images/login/Symbol.svg.png";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
+import { Rocket } from "lucide-react";
 
 // Per-game resource values (mock — replace with API per game)
 const GAME_RESOURCES = {
@@ -36,46 +38,46 @@ const RESOURCE_META = [
 const RES_CATEGORIES = [
   {
     id: "endurance", label: "Endurance", locked: false,
-    items: [{ label: "Endurance", val: "8825" }],
+    items: [{ key: "endurance", label: "Endurance", val: "8825" }],
   },
   {
     id: "water", label: "Water", locked: false,
-    items: [{ label: "Water", val: "24.5M" }, { label: "Water Heavy", val: "3.8M" }],
+    items: [{ key: "water", label: "Water", val: "24.5M" }, { key: "waterHeavy", label: "Water Heavy", val: "3.8M" }],
   },
   {
     id: "furuseth", label: "Furuseth Crystals", locked: false,
     items: [
-      { label: "F Crystals lvl 1", val: "34,521" }, { label: "F Crystals lvl 2", val: "25,579" },
-      { label: "F Crystals lvl 3", val: "12,728" }, { label: "F Crystals lvl 4", val: "7,356" },
-      { label: "F Crystals lvl 5", val: "2,698" },
+      { key: "fCrystals1", label: "F Crystals lvl 1", val: "34,521" }, { key: "fCrystals2", label: "F Crystals lvl 2", val: "25,579" },
+      { key: "fCrystals3", label: "F Crystals lvl 3", val: "12,728" }, { key: "fCrystals4", label: "F Crystals lvl 4", val: "7,356" },
+      { key: "fCrystals5", label: "F Crystals lvl 5", val: "2,698" },
     ],
   },
   {
     id: "gems", label: "Gems", locked: false,
-    items: [{ label: "Gems", val: "57,231" }],
+    items: [{ key: "gems", label: "Gems", val: "57,231" }],
   },
   {
     id: "minerals", label: "Minerals", locked: false,
     items: [
-      { label: "Cotton", val: "45,561" }, { label: "Silk", val: "15,961" }, { label: "Wood", val: "2,168,546" },
-      { label: "Carbon", val: "7,562" }, { label: "Silica", val: "48,389" }, { label: "Ash", val: "14,734" },
+      { key: "cotton", label: "Cotton", val: "45,561" }, { key: "silk", label: "Silk", val: "15,961" }, { key: "wood", label: "Wood", val: "2,168,546" },
+      { key: "carbon", label: "Carbon", val: "7,562" }, { key: "silica", label: "Silica", val: "48,389" }, { key: "ash", label: "Ash", val: "14,734" },
     ],
   },
   {
     id: "crystals", label: "Crystals", locked: false,
     items: [
-      { label: "White Crystals", val: "1,569" }, { label: "Green Crystals", val: "2,487" },
-      { label: "Blue Crystals", val: "2,513" }, { label: "Red Crystals", val: "842" },
-      { label: "Clear Crystals", val: "4,116" },
+      { key: "whiteCrystals", label: "White Crystals", val: "1,569" }, { key: "greenCrystals", label: "Green Crystals", val: "2,487" },
+      { key: "blueCrystals", label: "Blue Crystals", val: "2,513" }, { key: "redCrystals", label: "Red Crystals", val: "842" },
+      { key: "clearCrystals", label: "Clear Crystals", val: "4,116" },
     ],
   },
   {
     id: "timeclocks", label: "Time Clocks", locked: false,
     items: [
-      { label: "5-minute", val: "55056" }, { label: "15-minute", val: "25648" },
-      { label: "30-minute", val: "9878" }, { label: "1 Hour", val: "54569" },
-      { label: "3 Hour", val: "42123" }, { label: "8 Hour", val: "3212" },
-      { label: "12 Hour", val: "1247" }, { label: "24 Hour", val: "947" },
+      { key: "min5", label: "5-minute", val: "55056" }, { key: "min15", label: "15-minute", val: "25648" },
+      { key: "min30", label: "30-minute", val: "9878" }, { key: "hour1", label: "1 Hour", val: "54569" },
+      { key: "hour3", label: "3 Hour", val: "42123" }, { key: "hour8", label: "8 Hour", val: "3212" },
+      { key: "hour12", label: "12 Hour", val: "1247" }, { key: "hour24", label: "24 Hour", val: "947" },
     ],
   },
 ];
@@ -147,11 +149,11 @@ const ROOM_DETAILS = {
 };
 
 const MARKET_ITEMS = [
-  { label: "Overview",    tab: "overview"  },
-  { label: "Marketplace", tab: "general"   },
-  { label: "Auction",     tab: "auctions"  },
-  { label: "Trade",       tab: "trades"    },
-  { label: "Quest",       tab: "quests"    },
+  { key: "overview",    label: "Overview",    tab: "overview"  },
+  { key: "marketplace", label: "Marketplace", tab: "general"   },
+  { key: "auction",     label: "Auction",     tab: "auctions"  },
+  { key: "trade",       label: "Trade",       tab: "trades"    },
+  { key: "quest",       label: "Quest",       tab: "quests"    },
 ];
 
 const CSS = `
@@ -159,12 +161,12 @@ const CSS = `
     transition: background 0.15s, color 0.15s;
   }
   .res-slot:hover {
-    background: rgba(0,212,255,0.09) !important;
+    background: rgba(255,255,255,0.22) !important;
     color: #fff !important;
   }
   button.res-slot:hover {
-    box-shadow: 0 0 18px rgba(0,212,255,0.35), inset 0 1px 0 rgba(0,212,255,0.2) !important;
-    border-color: rgba(0,212,255,0.9) !important;
+    box-shadow: 0 0 18px rgba(0,212,255,0.35), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+    border-color: rgba(255,255,255,0.55) !important;
   }
   .logout-btn:hover {
     box-shadow: 0 0 22px rgba(248,113,113,0.55), inset 0 1px 0 rgba(255,255,255,0.1) !important;
@@ -345,8 +347,10 @@ const SKIN1_GUNS = [
 ];
 
 const NAV_BTN_BASE = {
-  background: "linear-gradient(180deg, rgba(0,30,55,0.95) 0%, rgba(0,15,35,0.98) 100%)",
-  border: "1px solid rgba(0,212,255,0.55)",
+  background: "linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.12) 100%)",
+  backdropFilter: "blur(14px)",
+  WebkitBackdropFilter: "blur(14px)",
+  border: "1px solid rgba(255,255,255,0.28)",
   borderRadius: "3px",
   color: "#00D4FF",
   fontFamily: "Orbitron,sans-serif",
@@ -355,12 +359,13 @@ const NAV_BTN_BASE = {
   cursor: "pointer",
   whiteSpace: "nowrap",
   flexShrink: 0,
-  boxShadow: "0 0 10px rgba(0,212,255,0.18), inset 0 1px 0 rgba(0,212,255,0.12)",
+  boxShadow: "0 0 10px rgba(0,212,255,0.18), inset 0 1px 0 rgba(255,255,255,0.18)",
   textShadow: "0 0 8px rgba(0,212,255,0.6)",
-  transition: "background 0.15s, box-shadow 0.15s, color 0.15s",
+  transition: "background 0.15s, box-shadow 0.15s, color 0.15s, border-color 0.15s",
 };
 
 export default function TopBar({ activeGame }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMobile = useMobileLandscape();
@@ -539,13 +544,14 @@ export default function TopBar({ activeGame }) {
             onClick={() => setShipsOpen(o => !o)}
             style={{
               ...NAV_BTN,
-              borderColor: shipsOpen ? "rgba(251,191,36,0.9)" : "rgba(251,191,36,0.55)",
+              borderColor: shipsOpen ? "rgba(251,191,36,0.9)" : undefined,
               color: "#fbbf24",
               textShadow: "0 0 8px rgba(251,191,36,0.6)",
               display: "flex", alignItems: "center", gap: "6px",
             }}
           >
-            🚀 SHIP
+            <Rocket size={14} style={{ filter: "drop-shadow(0 0 4px rgba(251,191,36,0.6))", flexShrink: 0 }} />
+            {t("hud.ship", "SHIP")}
             <span style={{
               fontSize: "8px", display: "inline-block",
               transition: "transform 0.18s",
@@ -573,7 +579,7 @@ export default function TopBar({ activeGame }) {
                 fontWeight: "bold", letterSpacing: "0.14em",
                 color: "#fbbf24", textShadow: "0 0 8px rgba(251,191,36,0.6)",
                 borderBottom: "1px solid rgba(251,191,36,0.18)",
-              }}>SHIP&apos;S SKINS</div>
+              }}>{t("hud.shipSkins", "SHIP'S SKINS")}</div>
 
               <div style={{ padding: "8px 10px", display: "flex", flexDirection: "column", gap: 6 }}>
                 {[
@@ -666,7 +672,7 @@ export default function TopBar({ activeGame }) {
                     cursor: "pointer",
                   }}
                 >
-                  SHIP LVL {lvl}
+                  {t("hud.shipLvl", "SHIP LVL")} {lvl}
                 </div>
               ))}
             </div>
@@ -683,11 +689,11 @@ export default function TopBar({ activeGame }) {
             onClick={() => { resPanelOpen ? closeResPanel() : openResPanel(); setActiveCat(null); }}
             style={{
               ...NAV_BTN,
-              borderColor: resPanelOpen ? "rgba(0,212,255,0.9)" : "rgba(0,212,255,0.55)",
+              borderColor: resPanelOpen ? "rgba(0,212,255,0.9)" : undefined,
               display: "flex", alignItems: "center", gap: "6px",
             }}
           >
-            RESOURCES
+            {t("hud.resourcesBtn", "RESOURCES")}
             <span style={{
               fontSize: "8px", display: "inline-block",
               transition: "transform 0.18s",
@@ -730,7 +736,7 @@ export default function TopBar({ activeGame }) {
                       background: activeCat === cat.id ? "rgba(0,212,255,0.07)" : "transparent",
                     }}
                   >
-                    {cat.label}
+                    {t(`hud.resCategories.${cat.id}`, cat.label)}
                     <span style={{ fontSize: 8, opacity: 0.6 }}>
                       {cat.locked ? "🔒" : (activeCat === cat.id ? "▶" : "▷")}
                     </span>
@@ -760,7 +766,7 @@ export default function TopBar({ activeGame }) {
                         color: "#00D4FF",
                         textShadow: "0 0 8px rgba(0,212,255,0.6)",
                         borderBottom: "1px solid rgba(0,212,255,0.18)",
-                      }}>{cat.label}</div>
+                      }}>{t(`hud.resCategories.${cat.id}`, cat.label)}</div>
                       {cat.items.map((item, j) => (
                         <div key={j} style={{
                           padding: "8px 14px",
@@ -775,7 +781,7 @@ export default function TopBar({ activeGame }) {
                         }}
                           className="market-dropdown-item"
                         >
-                          <span style={{ whiteSpace: "nowrap" }}>{item.label}</span>
+                          <span style={{ whiteSpace: "nowrap" }}>{t(`hud.resItems.${item.key}`, item.label)}</span>
                           {item.val && <span style={{ color: "#facc15", marginLeft: 12, whiteSpace: "nowrap" }}>{item.val}</span>}
                         </div>
                       ))}
@@ -797,13 +803,13 @@ export default function TopBar({ activeGame }) {
             onClick={() => setIsLinked(v => !v)}
             style={{
               ...NAV_BTN,
-              borderColor: isLinked ? "rgba(234,179,8,0.9)" : "rgba(0,212,255,0.55)",
+              borderColor: isLinked ? "rgba(234,179,8,0.9)" : undefined,
               color: isLinked ? "#fbbf24" : "#00D4FF",
               textShadow: isLinked ? "0 0 8px rgba(234,179,8,0.6)" : "0 0 8px rgba(0,212,255,0.6)",
               background: isLinked ? "rgba(234,179,8,0.12)" : undefined,
             }}
           >
-            {isLinked ? "LINKED" : "UNLINKED"}
+            {isLinked ? t("hud.linked", "LINKED") : t("hud.unlinked", "UNLINKED")}
           </button>
 
           {linkedTipOpen && (
@@ -819,13 +825,13 @@ export default function TopBar({ activeGame }) {
               fontFamily: "Orbitron,sans-serif",
             }}>
               <p style={{ fontSize: 10, color: "#fbbf24", marginBottom: 8, lineHeight: 1.5 }}>
-                <strong>Linked Mode:</strong> Allows a player to link all resources from the other games for use in upgrades.
+                <strong>{t("hud.linkedTooltip.linkedMode", "Linked Mode:")}</strong> {t("hud.linkedTooltip.linkedDesc")}
               </p>
               <p style={{ fontSize: 10, color: "#00D4FF", marginBottom: 8, lineHeight: 1.5 }}>
-                <strong>Unlinked Mode:</strong> Unlinks the resources from each game, showing only what&apos;s available in each game.
+                <strong>{t("hud.linkedTooltip.unlinkedMode", "Unlinked Mode:")}</strong> {t("hud.linkedTooltip.unlinkedDesc")}
               </p>
               <p style={{ fontSize: 10, color: "#f87171", lineHeight: 1.5 }}>
-                <strong>Warning:</strong> In &quot;Linked&quot; mode, all materials are vulnerable to being taken if attacked!
+                <strong>{t("hud.linkedTooltip.warning", "Warning:")}</strong> {t("hud.linkedTooltip.warningDesc")}
               </p>
             </div>
           )}
@@ -835,10 +841,11 @@ export default function TopBar({ activeGame }) {
         <div ref={resBarRef} style={{
           flex: 1, height: isMobile ? "26px" : "clamp(28px,3.8vh,42px)",
           display: "flex", alignItems: "stretch",
-          background: "rgba(3,8,18,0.92)",
-          border: "1px solid rgba(0,212,255,0.18)",
+          background: "rgba(255,255,255,0.12)",
+          border: "1px solid rgba(255,255,255,0.24)",
           borderRadius: "3px",
           backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
           overflow: "visible",
           minWidth: 0, position: "relative",
         }}>
@@ -850,7 +857,7 @@ export default function TopBar({ activeGame }) {
               {/* slot button */}
               <div
                 className="res-slot"
-                title={r.label}
+                data-tooltip={t(`hud.resourceLabels.${r.id.toLowerCase()}`, r.label)}
                 onClick={() => setActiveRes(activeRes === r.id ? null : r.id)}
                 style={{
                   height: "100%", display: "flex", alignItems: "center",
@@ -860,7 +867,7 @@ export default function TopBar({ activeGame }) {
                 }}
               >
                 <img
-                  src={r.img} alt={r.label}
+                  src={r.img} alt={t(`hud.resourceLabels.${r.id.toLowerCase()}`, r.label)}
                   style={{
                     width: isMobile ? "18px" : "clamp(22px,3vh,36px)",
                     height: isMobile ? "18px" : "clamp(22px,3vh,36px)",
@@ -879,7 +886,7 @@ export default function TopBar({ activeGame }) {
                       textTransform: "uppercase",
                       lineHeight: 1, marginBottom: "2px",
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                    }}>{r.label}</div>
+                    }}>{t(`hud.resourceLabels.${r.id.toLowerCase()}`, r.label)}</div>
                   )}
                   <div style={{
                     fontFamily: "Orbitron,sans-serif",
@@ -911,11 +918,11 @@ export default function TopBar({ activeGame }) {
                     fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold",
                     color: r.color, letterSpacing: "0.12em", marginBottom: 8,
                     textShadow: `0 0 6px ${r.color}88`,
-                  }}>{r.label.toUpperCase()}</div>
+                  }}>{t(`hud.resourceLabels.${r.id.toLowerCase()}`, r.label).toUpperCase()}</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     {[
                       { label: "OPEN", val: r.open },
-                      { label: "STORED", val: r.stored },
+                      { label: t("hud.stored", "STORED"), val: r.stored },
                     ].map(row => (
                       <div key={row.label} style={{
                         display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12,
@@ -947,11 +954,11 @@ export default function TopBar({ activeGame }) {
             onClick={() => setMarketOpen(o => !o)}
             style={{
               ...NAV_BTN,
-              borderColor: marketOpen ? "rgba(0,212,255,0.9)" : "rgba(0,212,255,0.55)",
+              borderColor: marketOpen ? "rgba(0,212,255,0.9)" : undefined,
               display: "flex", alignItems: "center", gap: "6px",
             }}
           >
-            MARKETPLACE
+            {t("hud.marketplace", "MARKETPLACE")}
             <span style={{
               fontSize: "8px",
               transition: "transform 0.18s",
@@ -989,7 +996,7 @@ export default function TopBar({ activeGame }) {
                     borderBottom: "1px solid rgba(0,212,255,0.08)",
                   }}
                 >
-                  {item.label}
+                  {t(`hud.marketItems.${item.key}`, item.label)}
                 </div>
               ))}
 
@@ -1007,7 +1014,7 @@ export default function TopBar({ activeGame }) {
                   color: "rgba(0,212,255,0.85)",
                 }}
               >
-                My Profile
+                {t("hud.marketItems.myProfile", "My Profile")}
               </div>
             </div>
           )}
@@ -1020,12 +1027,12 @@ export default function TopBar({ activeGame }) {
           style={{
             ...NAV_BTN,
             flexShrink: 0,
-            borderColor: connected ? "rgba(34,197,94,0.7)" : "rgba(0,212,255,0.55)",
+            borderColor: connected ? "rgba(34,197,94,0.7)" : undefined,
             color: connected ? "#4ade80" : "#00D4FF",
             textShadow: connected ? "0 0 8px rgba(34,197,94,0.6)" : "0 0 8px rgba(0,212,255,0.6)",
           }}
         >
-          {connected ? (shortAddr || "CONNECTED") : "WALLET"}
+          {connected ? (shortAddr || t("hud.connected", "CONNECTED")) : t("hud.wallet", "WALLET")}
         </button>
 
       </div>
@@ -1051,7 +1058,7 @@ export default function TopBar({ activeGame }) {
         boxShadow: "0 0 16px rgba(248,113,113,0.3), 0 0 1px rgba(248,113,113,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
         textShadow: "0 0 8px rgba(248,113,113,0.8)",
         transition: "box-shadow 0.2s, transform 0.2s, border-color 0.2s",
-      }} onClick={handleLogout}>LOG<br />OUT</button>
+      }} onClick={handleLogout}>{t("hud.logOut", "LOG OUT")}</button>
 
       {/* ══════════════════════════════════════════════════════════════
           WALLET MODAL — inline overlay, no navigation
@@ -1100,7 +1107,7 @@ export default function TopBar({ activeGame }) {
               textAlign: "center",
               marginBottom: 16,
               textShadow: "0 0 10px rgba(0,212,255,0.5)",
-            }}>CONNECT WALLET</div>
+            }}>{t("hud.connectWallet", "CONNECT WALLET")}</div>
 
             <div style={{ height: 1, background: "rgba(0,212,255,0.15)", marginBottom: 20 }} />
 
@@ -1190,7 +1197,7 @@ export default function TopBar({ activeGame }) {
                     fontFamily: "Orbitron,sans-serif", fontSize: 7, fontWeight: "bold",
                     color: "#38bdf8", letterSpacing: "0.12em", marginBottom: 6
                   }}>
-                    WHAT IS A CRYPTO WALLET?
+                    {t("hud.whatIsWallet", "WHAT IS A CRYPTO WALLET?")}
                   </div>
                   <div style={{ fontSize: 11, color: "rgba(148,192,210,0.65)", lineHeight: 1.5 }}>
                     A crypto wallet lets you interact with the blockchain.
@@ -1260,7 +1267,7 @@ export default function TopBar({ activeGame }) {
                       textShadow: "0 0 12px rgba(0,212,255,0.9)",
                       whiteSpace: "nowrap",
                     }}
-                  >VR MODE</button>
+                  >{t("hud.vrMode", "VR MODE")}</button>
 
                   {vrShipOpen && (
                     <div style={{
@@ -1425,7 +1432,7 @@ export default function TopBar({ activeGame }) {
                   const rooms = SHIP_ROOMS[shipLevel] || [];
                   const roomName = rooms.find(r => r.id === activeId)?.name;
                   const detail = activeId
-                    ? (ROOM_DETAILS[activeId] ?? { title: roomName ?? activeId, desc: "No information available for this room." })
+                    ? (ROOM_DETAILS[activeId] ?? { title: roomName ?? activeId, desc: t("hud.noRoomInfo", "No information available for this room.") })
                     : null;
                   return (
                     <div style={{ flex: 1, padding: isMobile ? "8px" : "12px", overflowY: "auto" }} className="sections-scroll">
@@ -1439,14 +1446,14 @@ export default function TopBar({ activeGame }) {
                             marginBottom: isMobile ? 6 : 8,
                             paddingBottom: isMobile ? 4 : 6,
                             borderBottom: "1px solid rgba(251,191,36,0.2)",
-                          }}>{detail.title}</div>
+                          }}>{t(`hud.rooms.${activeId}.title`, detail.title)}</div>
                           <div style={{
                             fontFamily: "Orbitron,sans-serif",
                             fontSize: isMobile ? 7 : 8,
                             color: "rgba(220,190,130,0.85)",
                             letterSpacing: "0.04em",
                             lineHeight: 1.7,
-                          }}>{detail.desc}</div>
+                          }}>{t(`hud.rooms.${activeId}.desc`, detail.desc)}</div>
                         </>
                       ) : (
                         <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -1456,7 +1463,7 @@ export default function TopBar({ activeGame }) {
                             color: "rgba(251,191,36,0.3)",
                             letterSpacing: "0.1em",
                             textAlign: "center", lineHeight: 1.6,
-                          }}>HOVER OR SELECT<br />A ROOM TO VIEW<br />INFORMATION</span>
+                          }}>{t("hud.hoverSelectRoom", "HOVER OR SELECT A ROOM TO VIEW INFORMATION")}</span>
                         </div>
                       )}
                     </div>
@@ -1754,13 +1761,13 @@ export default function TopBar({ activeGame }) {
                   fontSize: isMobile ? 10 : 16,
                   fontWeight: "900", letterSpacing: "0.2em",
                   color: "#00D4FF", textShadow: "0 0 14px rgba(0,212,255,0.9)",
-                }}>SKIN 1 — WEAPONS LAYOUT</span>
+                }}>{t("hud.skinLabel", "SKIN 1 — WEAPONS LAYOUT")}</span>
                 <span style={{
                   fontFamily: "Orbitron,sans-serif",
                   fontSize: isMobile ? 6 : 8,
                   letterSpacing: "0.14em",
                   color: "rgba(0,212,255,0.5)",
-                }}>HOVER OR SELECT A WEAPON SLOT TO VIEW DETAILS</span>
+                }}>{t("hud.hoverSelectWeapon", "HOVER OR SELECT A WEAPON SLOT TO VIEW DETAILS")}</span>
               </div>
               <button
                 onClick={() => { setSkinDetailOpen(false); setSelectedGun(null); setHoveredGun(null); }}
@@ -1837,7 +1844,7 @@ export default function TopBar({ activeGame }) {
                           letterSpacing: "0.05em",
                           color: active ? "#00D4FF" : "rgba(0,200,240,0.8)",
                           lineHeight: 1.3,
-                        }}>{gun.name}</span>
+                        }}>{t(`hud.guns.${gun.id}`, gun.name)}</span>
                         <div style={{
                           width: isMobile ? 6 : 8, height: isMobile ? 6 : 8,
                           borderRadius: "50%", flexShrink: 0, marginLeft: 5,
@@ -1884,7 +1891,7 @@ export default function TopBar({ activeGame }) {
                             color: "rgba(0,212,255,0.3)",
                             letterSpacing: "0.1em",
                             textAlign: "center", lineHeight: 1.6,
-                          }}>HOVER OR SELECT<br />A WEAPON SLOT<br />TO VIEW INFO</span>
+                          }}>{t("hud.hoverSelectWeapon", "HOVER OR SELECT A WEAPON SLOT TO VIEW DETAILS")}</span>
                         </div>
                       );
                     }
@@ -1898,10 +1905,15 @@ export default function TopBar({ activeGame }) {
                           marginBottom: isMobile ? 6 : 8,
                           paddingBottom: isMobile ? 4 : 6,
                           borderBottom: "1px solid rgba(0,212,255,0.2)",
-                        }}>{gun.name}</div>
+                        }}>{t(`hud.guns.${gun.id}`, gun.name)}</div>
                         {/* All locked */}
-                        {["Damage", "Range", "Fire Rate", "Upgrade"].map((label) => (
-                          <div key={label} style={{
+                        {[
+                          { key: "damage",   label: "Damage"    },
+                          { key: "range",    label: "Range"     },
+                          { key: "fireRate", label: "Fire Rate" },
+                          { key: "upgrade",  label: "Upgrade"   },
+                        ].map(({ key, label }) => (
+                          <div key={key} style={{
                             display: "flex", alignItems: "center", justifyContent: "space-between",
                             padding: "5px 0",
                             borderBottom: "1px solid rgba(0,212,255,0.08)",
@@ -1911,7 +1923,7 @@ export default function TopBar({ activeGame }) {
                               fontSize: isMobile ? 7 : 8,
                               color: "rgba(0,180,220,0.6)",
                               letterSpacing: "0.06em",
-                            }}>{label}</span>
+                            }}>{t(`hud.gunStats.${key}`, label)}</span>
                             <span style={{ fontSize: isMobile ? 9 : 11, opacity: 0.35 }}>🔒</span>
                           </div>
                         ))}
@@ -2048,10 +2060,13 @@ export default function TopBar({ activeGame }) {
                           fontSize: isMobile ? 7 : 8,
                           fontWeight: "bold", letterSpacing: "0.1em",
                           color: "#00D4FF", textTransform: "uppercase",
-                        }}>{gun.name}</div>
+                        }}>{t(`hud.guns.${gun.id}`, gun.name)}</div>
                         {/* Locked action rows */}
-                        {["Detail", "Upgrade"].map((label, i) => (
-                          <div key={label} style={{
+                        {[
+                          { key: "detail",  label: "Detail"  },
+                          { key: "upgrade", label: "Upgrade" },
+                        ].map(({ key, label }, i) => (
+                          <div key={key} style={{
                             display: "flex", alignItems: "center", justifyContent: "space-between",
                             padding: isMobile ? "7px 10px" : "9px 12px",
                             borderBottom: i < 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
@@ -2062,7 +2077,7 @@ export default function TopBar({ activeGame }) {
                               fontSize: isMobile ? 8 : 10,
                               fontWeight: "bold", letterSpacing: "0.1em",
                               color: "rgba(200,200,200,0.4)",
-                            }}>{label}</span>
+                            }}>{t(`hud.gunStats.${key}`, label)}</span>
                             <span style={{ fontSize: isMobile ? 9 : 11, opacity: 0.35 }}>🔒</span>
                           </div>
                         ))}

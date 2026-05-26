@@ -147,7 +147,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
           border: open ? "1px solid rgba(0,100,255,0.4)" : "1px solid rgba(255,255,255,0.12)",
           color: open ? "rgba(150,200,255,0.95)" : "rgba(255,255,255,0.7)",
         }}
-        title="Music player"
+        data-tooltip="Music player"
       >
         {source === "ambient" && !playing
           ? <VolumeX className="w-4 h-4" />

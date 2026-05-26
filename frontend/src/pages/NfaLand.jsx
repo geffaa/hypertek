@@ -906,7 +906,7 @@ function NfaLand() {
               <span>Price</span>
               <span
                 className="truncate max-w-[150px]"
-                title={onChainOwner || item.owner || collection?.owner}
+                data-tooltip={onChainOwner || item.owner || collection?.owner}
               >
                 Owner:{" "}
                 {onChainOwner || item.owner

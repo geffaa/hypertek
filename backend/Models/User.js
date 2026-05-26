@@ -114,7 +114,15 @@ const UserSchema = new mongoose.Schema(
       routingNumber:     String,
       country:           String,
       currency:          { type: String, default: "USD" },
-      verified:          { type: Boolean, default: false }, // $0 test deposit verification
+      verified:          { type: Boolean, default: false },
+    },
+
+    // KYC — required before cashout
+    kyc: {
+      status:    { type: String, enum: ["not_started", "pending", "verified", "failed"], default: "not_started" },
+      sessionId: { type: String, default: null },
+      verifiedAt:{ type: Date,   default: null },
+      failReason:{ type: String, default: null },
     },
   },
   {

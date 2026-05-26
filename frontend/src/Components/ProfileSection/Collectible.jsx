@@ -714,8 +714,8 @@ function MarketPlace() {
                                   {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
                                 </span>
                                 <span className="text-white/80 text-[13px] font-semibold">{tx.priceETH ? `${tx.priceETH} USDC` : "—"}</span>
-                                <span className="text-white/45 text-[12px] font-mono truncate" title={tx.seller}>{shortAddr(tx.seller)}</span>
-                                <span className="text-white/45 text-[12px] font-mono truncate" title={tx.buyer}>{shortAddr(tx.buyer)}</span>
+                                <span className="text-white/45 text-[12px] font-mono truncate" data-tooltip={tx.seller}>{shortAddr(tx.seller)}</span>
+                                <span className="text-white/45 text-[12px] font-mono truncate" data-tooltip={tx.buyer}>{shortAddr(tx.buyer)}</span>
                                 <span className="text-white/30 text-[11px] text-right whitespace-nowrap">{tx.createdAt ? timeAgo(tx.createdAt) : "—"}</span>
                               </div>
                             ))}

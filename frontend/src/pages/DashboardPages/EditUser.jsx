@@ -258,7 +258,7 @@ function EditProfile() {
                     <button
                       onClick={handleCopy}
                       className="text-gray-400 hover:text-white transition flex-shrink-0"
-                      title="Copy wallet address"
+                      data-tooltip="Copy wallet address"
                     >
                       <FiCopy className="w-4 h-4" />
                     </button>
@@ -411,7 +411,7 @@ function EditProfile() {
                         type="button"
                         onClick={handleCopy}
                         className="text-gray-400 hover:text-white transition flex-shrink-0"
-                        title="Copy address"
+                        data-tooltip="Copy address"
                       >
                         <FiCopy className="w-4 h-4" />
                       </button>

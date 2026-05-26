@@ -17,6 +17,7 @@ const ERC20_ABI = [
 const HB_TO_USD = 250; // 250 HB = $1 USD
 const MIN_USDC_CASHOUT_HB = 250; // $1 minimum for USDC cashout
 const MIN_BANK_CASHOUT_HB = 2500; // $10 minimum for bank cashout
+const MIN_TOPUP_HB = 250; // $1 minimum top-up
 
 // ------------------ SMTP TRANSPORTER ------------------
 const transporter = nodemailer.createTransport({
@@ -130,7 +131,7 @@ export async function spendHB(req, res) {
 //   requires Stripe Connect (future implementation).
 export async function cashoutHB(req, res) {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id || req.user._id;
     const { amount, method, walletAddress } = req.body;
 
     if (!amount || amount <= 0) {
@@ -144,6 +145,14 @@ export async function cashoutHB(req, res) {
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
+    }
+
+    // KYC required before cashout
+    if (user.kyc?.status !== "verified") {
+      return res.status(403).json({
+        error: "Identity verification required before cashout",
+        kycStatus: user.kyc?.status || "not_started",
+      });
     }
 
     const currentBalance = user.hyperBucks || 0;
@@ -346,7 +355,7 @@ export async function cashoutHB(req, res) {
 // Auth required.
 export async function getHBBalance(req, res) {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id || req.user._id;
 
     const user = await User.findById(userId).select("hyperBucks");
     if (!user) {
@@ -372,7 +381,7 @@ export async function getHBBalance(req, res) {
 // Auth required. Query params: page, limit
 export async function getHBHistory(req, res) {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id || req.user._id;
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 20));
     const skip = (page - 1) * limit;
@@ -408,7 +417,7 @@ export async function getHBHistory(req, res) {
 // NOTE: $0 test deposit verification is Phase 2. For now: save details and set verified: false (admin verifies manually).
 export async function saveBankDetails(req, res) {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id || req.user._id;
     const {
       accountHolderName,
       bankName,
@@ -455,6 +464,44 @@ export async function saveBankDetails(req, res) {
     });
   } catch (error) {
     console.error("saveBankDetails error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
+// ------------------ CREATE HB TOP-UP PAYMENT INTENT ------------------
+// POST /api/v1/hb/topup/intent
+// Body: { hbAmount } — must be multiple of 250, minimum 250
+export async function createHBTopupIntent(req, res) {
+  try {
+    const userId = req.user.id || req.user._id.toString();
+    const { hbAmount } = req.body;
+
+    if (!hbAmount || hbAmount < MIN_TOPUP_HB || hbAmount % 250 !== 0) {
+      return res.status(400).json({ error: "Minimum top-up is 250 HB ($1) and must be a multiple of 250" });
+    }
+
+    const usdAmount = hbAmount / HB_TO_USD;
+    const stripeAmountCents = Math.round(usdAmount * 100);
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: stripeAmountCents,
+      currency: "usd",
+      automatic_payment_methods: { enabled: true },
+      metadata: {
+        userId,
+        itemType: "hyperbucks",
+        hbAmount: hbAmount.toString(),
+        productId: userId,
+        gameTitle: "HyperBucks Top-Up",
+        provider: "stripe",
+        transactionId: "",
+      },
+    });
+
+    return res.json({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    console.error("createHBTopupIntent error:", error);
     return res.status(500).json({ error: error.message });
   }
 }

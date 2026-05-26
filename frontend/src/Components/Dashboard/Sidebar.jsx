@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiX, FiFileText, FiTag, FiZap, FiPlusSquare, FiMessageSquare } from "react-icons/fi";
+import { FiX, FiFileText, FiZap, FiPlusSquare, FiMessageSquare, FiPlusCircle } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
 import CreateCollection1 from "../../assets/images/Sidebar/create1.png";
@@ -29,6 +29,8 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
       setSelectedItem("listings");
     } else if (path.includes("/dashboard/my-offers")) {
       setSelectedItem("my-offers");
+    } else if (path.includes("/dashboard/topup")) {
+      setSelectedItem("topup");
     } else if (path.includes("/dashboard/withdraw")) {
       setSelectedItem("withdraw");
     } else if (path.includes("/dashboard/upload-nfc")) {
@@ -153,8 +155,8 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               </li>
             </Link>
 
-            {/* My Listings */}
-            <Link to="/dashboard/collection-on-sale" className="w-full max-w-[222px]">
+            {/* My Listings — hidden, page kept for reference */}
+            {/* <Link to="/dashboard/collection-on-sale" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "listings" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
                 style={{ width: "100%", height: "42px" }}
@@ -165,18 +167,32 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                   My Listings
                 </h1>
               </li>
+            </Link> */}
+
+            {/* HyperBucks */}
+            <Link to="/dashboard/topup" className="w-full max-w-[222px]">
+              <li
+                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "topup" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
+                style={{ width: "100%", height: "42px" }}
+                onClick={() => handleItemClick("topup")}
+              >
+                <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
+                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
+                  HyperBucks
+                </h1>
+              </li>
             </Link>
 
-            {/* Withdraw */}
+            {/* Earnings */}
             <Link to="/dashboard/withdraw" className="w-full max-w-[222px]">
               <li
                 className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "withdraw" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
                 style={{ width: "100%", height: "42px" }}
                 onClick={() => handleItemClick("withdraw")}
               >
-                <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
+                <FiPlusCircle className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  Withdraw HB
+                  Earnings
                 </h1>
               </li>
             </Link>

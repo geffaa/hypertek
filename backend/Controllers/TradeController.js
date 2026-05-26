@@ -144,29 +144,7 @@ export async function createTrade(req, res) {
       return res.status(400).json({ error: "Trade requires an offering field" });
     }
 
-    // ── 500 HB listing fee (trade listings only) ────────────────────────────
-    const TRADE_LISTING_FEE_HB = 500;
-    if (type === "trade" && userId) {
-      const poster = await User.findById(userId);
-      if (!poster || (poster.hyperBucks || 0) < TRADE_LISTING_FEE_HB) {
-        if (req.file) fs.unlink(req.file.path, () => {});
-        return res.status(400).json({
-          error: `Insufficient HB balance. Trade listings require ${TRADE_LISTING_FEE_HB} HB. Current balance: ${poster?.hyperBucks || 0} HB.`,
-          requiredHB: TRADE_LISTING_FEE_HB,
-          currentHB: poster?.hyperBucks || 0,
-        });
-      }
-      poster.hyperBucks -= TRADE_LISTING_FEE_HB;
-      await poster.save();
-      await HBLedger.create({
-        userId,
-        type:        "spend",
-        amount:      -TRADE_LISTING_FEE_HB,
-        balanceAfter: poster.hyperBucks,
-        description: "Trade listing fee",
-        reference:   `trade_fee_${Date.now()}`,
-      });
-    }
+
 
     // ── Quest commission split validation ───────────────────────────────────
     let tierData = null;

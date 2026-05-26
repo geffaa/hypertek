@@ -42,12 +42,12 @@ const DashboardLayout = () => {
       <div className="flex flex-col flex-1 h-screen relative z-10">
 
         {/* Header: fixed on top with transparent bg */}
-        <div className="top-0 left-0 right-0 z-30">
+        <div className="relative top-0 left-0 right-0 z-50">
           <Header onMenuClick={toggleSidebar} />
         </div>
 
         {/* Scrollable main content */}
-        <main className="flex-1 mt-[1px] overflow-y-auto p-4 md:p-6 custom-scrollbar">
+        <main className="flex-1 mt-[1px] overflow-y-auto p-4 md:p-6 custom-scrollbar relative z-10">
           <Outlet />
         </main>
       </div>

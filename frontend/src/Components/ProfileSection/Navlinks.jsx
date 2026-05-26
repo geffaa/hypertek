@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 export const MAJOR_TABS = [
   "My Collectibles",
-  "Listings",
   "Activities",
+  "Listings",
   "Trade",
   "Auction",
   "Questing",

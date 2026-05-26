@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
@@ -111,6 +112,7 @@ const OVERLORD_ACTIONS = [
 ];
 
 function OverlordActionButtons() {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
   const [vpH, setVpH] = useState(() => window.innerHeight);
@@ -180,7 +182,7 @@ function OverlordActionButtons() {
               background: "linear-gradient(to top, rgba(0,0,0,0.55) 100%, transparent)",
               userSelect: "none",
               pointerEvents: "none",
-            }}>{a.id}</span>
+            }}>{t(`overlord.actions.${a.id.toLowerCase()}`, a.id)}</span>
           </button>
         );
       })}
@@ -192,6 +194,7 @@ function OverlordActionButtons() {
    SPACE VIEW — 45° overhead, spaceship + space ring
    ══════════════════════════════════════════════════════════════════ */
 function SpaceView() {
+  const { t } = useTranslation();
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#04010a" }}>
 
@@ -269,7 +272,7 @@ function SpaceView() {
         color: "rgba(248,113,113,0.45)",
         textShadow: "0 0 16px rgba(248,113,113,0.35)",
         whiteSpace: "nowrap", userSelect: "none",
-      }}>OVERLORD · SPACE RING</div>
+      }}>{t("overlord.spaceRing")}</div>
 
 
     </div>
@@ -398,6 +401,7 @@ function WorldView() {
    OverlordMode — main export
    ══════════════════════════════════════════════════════════════════ */
 export default function OverlordMode({ view = "SPACE", onExit }) {
+  const { t } = useTranslation();
   const isSpace = view === "SPACE";
 
   return (
@@ -438,7 +442,7 @@ export default function OverlordMode({ view = "SPACE", onExit }) {
             whiteSpace: "nowrap",
           }}
         >
-          ← EXIT OVERLORD
+          ← {t("overlord.exit")} OVERLORD
         </button>
 
       </div>

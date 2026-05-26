@@ -144,7 +144,7 @@ export default function MiniMap({ rotation: externalRotation }) {
       <div
         className="minimap-wrap"
         onMouseDown={onMouseDown}
-        title="Drag to rotate map"
+        data-tooltip="Drag to rotate map"
         style={{
           position: "absolute",
           left:  "4%",

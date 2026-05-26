@@ -2,6 +2,7 @@
 // Frame bottom y=488, bar center y=482 → 96.4%; buttons raised to ~91%
 // DIV1 bottom x=260, DIV2 bottom x=695
 // Panel bottom centers: RACING (15+260)/2=137→13.7vw, QUEST (260+695)/2=477→47.8vw, OVERLORD (695+860)/2=777→77.7vw
+import { useTranslation } from "react-i18next";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 const GAMES = [
@@ -47,6 +48,7 @@ const CSS = `
 
 export default function GameButtons({ activeGame, onSelect }) {
   const isMobile = useMobileLandscape();
+  const { t } = useTranslation();
   return (
     <>
       <style>{CSS}</style>
@@ -82,7 +84,7 @@ export default function GameButtons({ activeGame, onSelect }) {
               textShadow: isActive ? "none" : `0 0 10px ${g.accent}`,
               transition:"background 0.2s, color 0.2s, box-shadow 0.2s",
             }}
-          >{g.label}</button>
+          >{t(`hud.games.${g.label.toLowerCase()}`, g.label)}</button>
         );
       })}
     </>

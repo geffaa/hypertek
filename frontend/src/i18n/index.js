@@ -38,6 +38,10 @@ import pagesKo from "./locales/pages-ko.json";
 import pagesJa from "./locales/pages-ja.json";
 import pagesPt from "./locales/pages-pt.json";
 
+/* Base English spread — used for all new languages so non-HUD content
+   falls back to English seamlessly. HUD sections are overridden below. */
+const enBase = { ...en, ...gameEn, ...aboutEn, ...newsEn, ...marketplaceEn, ...pagesEn };
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

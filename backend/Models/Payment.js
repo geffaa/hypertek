@@ -55,7 +55,7 @@ const PaymentSchema = new mongoose.Schema({
   // Purchase Details
   itemType: {
     type: String,
-    enum: ["game", "in_game_item", "subscription", "dlc", "other", "land", "nft"],
+    enum: ["game", "in_game_item", "subscription", "dlc", "other", "land", "nft", "hyperbucks"],
     default: "game"
   },
 

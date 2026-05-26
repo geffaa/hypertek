@@ -8,6 +8,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
@@ -213,6 +214,7 @@ const SLOT_ICONS = {
 };
 
 function Slot({ label, size = 54 }) {
+  const { t } = useTranslation();
   const slot = SLOT_ICONS[label] || { icon: null, color: "#00D4FF" };
   const IconComp = slot.icon;
   const iconSize = Math.round(size * 0.52);
@@ -244,7 +246,7 @@ function Slot({ label, size = 54 }) {
       <span style={{
         fontFamily: "Orbitron,sans-serif", fontSize: size >= 48 ? 9 : 7, fontWeight: "bold",
         letterSpacing: "0.08em", color: slot.color, textShadow: `0 0 6px ${slot.color}66`,
-      }}>{label.toUpperCase()}</span>
+      }}>{t(`hud.avatar.slots.${label.toLowerCase()}`, label).toUpperCase()}</span>
     </div>
   );
 }
@@ -260,6 +262,7 @@ export default function ProfileButton() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
   const isSmall = windowW < 600; // portrait phones / very small screens
+  const { t } = useTranslation();
 
   const { token } = useSelector((s) => s.auth);
   const [profile,        setProfile]        = useState(null);
@@ -497,7 +500,7 @@ export default function ProfileButton() {
               <span style={{
                 fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight: "bold",
                 letterSpacing: "0.14em", color: "#00D4FF", textShadow: "0 0 10px rgba(0,212,255,0.7)",
-              }}>AVATAR</span>
+              }}>{t("hud.avatar.header")}</span>
               <button onClick={() => { setOpen(false); setCharSelectOpen(false); }} style={{
                 background: "none", border: "none", color: "rgba(255,255,255,0.65)",
                 fontSize: isMobile ? 14 : 18, cursor: "pointer", lineHeight: 1, padding: "0 2px",
@@ -594,7 +597,7 @@ export default function ProfileButton() {
                           textShadow: `0 0 6px ${frameColor}99`,
                           cursor: "pointer",
                         }}
-                      >CHANGE ▸</button>
+                      >{t("hud.avatar.change")}</button>
 
                       {/* Frame picker overlay on hover */}
                       {framePickerOpen && (
@@ -614,7 +617,7 @@ export default function ProfileButton() {
                           <div style={{
                             fontFamily: "Orbitron,sans-serif", fontSize: 8, fontWeight: "bold",
                             color: "#00D4FF", letterSpacing: "0.12em", marginBottom: 3,
-                          }}>PROFILE FRAME</div>
+                          }}>{t("hud.avatar.profileFrame")}</div>
                           {PROFILE_FRAMES.map(f => (
                             <div
                               key={f.id}
@@ -677,12 +680,12 @@ export default function ProfileButton() {
                         <div key={i} style={{ position: "absolute", pointerEvents: "none", ...c }} />
                       ))}
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
-                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>MIGHT</span>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>{t("hud.avatar.might")}</span>
                         <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold", color: "#fbbf24", letterSpacing: "0.05em" }}>342,879,418</span>
                       </div>
                       <div style={{ height: 1, background: `${frameColor}22`, margin: "2px 0" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
-                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>ENDURANCE</span>
+                        <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 7, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em" }}>{t("hud.avatar.endurance")}</span>
                         <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold", color: "#6ee7b7", letterSpacing: "0.05em" }}>685</span>
                       </div>
                     </div>
@@ -765,12 +768,12 @@ export default function ProfileButton() {
                 <span style={{
                   fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 10 : 13, fontWeight: "bold",
                   letterSpacing: "0.14em", color: "#00D4FF", textShadow: "0 0 10px rgba(0,212,255,0.7)",
-                }}>SELECT CHARACTER</span>
+                }}>{t("hud.avatar.selectChar")}</span>
                 <div style={{
                   fontFamily: "Orbitron,sans-serif", fontSize: 9,
                   color: "#7ECEEC", letterSpacing: "0.07em", marginTop: 3,
                 }}>
-                  {SPECIES.length} SPECIES · CHOOSE YOUR VARIANT
+                  {t("hud.avatar.speciesSubtitle", `${SPECIES.length} SPECIES · CHOOSE YOUR VARIANT`)}
                 </div>
               </div>
 
@@ -949,7 +952,7 @@ export default function ProfileButton() {
                                         fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 7 : 8, fontWeight: "bold",
                                         color: gender === "female" ? "rgba(236,72,153,0.8)" : "rgba(96,165,250,0.8)",
                                         letterSpacing: "0.06em", padding: "4px 0 3px", flexShrink: 0,
-                                      }}>{gender === "female" ? "♀ FEMALE" : "♂ MALE"}</div>
+                                      }}>{gender === "female" ? `♀ ${t("hud.avatar.female")}` : `♂ ${t("hud.avatar.male")}`}</div>
                                     </div>
                                   );
                                 })}
@@ -1051,29 +1054,29 @@ export default function ProfileButton() {
                         <div style={{
                           fontFamily: "Orbitron,sans-serif", fontSize: 9,
                           color: "#7ECEEC", letterSpacing: "0.06em", marginBottom: 2,
-                        }}>{detailSpecies.type}</div>
+                        }}>{t(`hud.avatar.species.${detailSpecies.id}.type`, detailSpecies.type)}</div>
 
                         {/* Single-column attribute list — common fields first, then species-specific */}
                         <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                           {[
-                            ["Height",    detailSpecies.height],
-                            ["Eyes",      detailSpecies.eyes],
-                            ["Clothing",  detailSpecies.clothing],
-                            ["Environ.",  detailSpecies.environment],
-                            ["Symbolism", detailSpecies.symbolism],
-                            ...(detailSpecies.wings ? [["Wings", detailSpecies.wings]] : []),
-                            ...(detailSpecies.arms  ? [["Arms",  detailSpecies.arms]]  : []),
-                          ].map(([k, v]) => (
-                            <div key={k} style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
+                            { key: "height",    label: "Height",    val: detailSpecies.height },
+                            { key: "eyes",      label: "Eyes",      val: detailSpecies.eyes },
+                            { key: "clothing",  label: "Clothing",  val: detailSpecies.clothing },
+                            { key: "environ",   label: "Environ.",  val: detailSpecies.environment },
+                            { key: "symbolism", label: "Symbolism", val: detailSpecies.symbolism },
+                            ...(detailSpecies.wings ? [{ key: "wings", label: "Wings", val: detailSpecies.wings }] : []),
+                            ...(detailSpecies.arms  ? [{ key: "arms",  label: "Arms",  val: detailSpecies.arms }]  : []),
+                          ].map(({ key, label, val }) => (
+                            <div key={key} style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
                               <span style={{
                                 fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold",
                                 color: "#00D4FF", letterSpacing: "0.08em",
                                 textShadow: "0 0 6px rgba(0,212,255,0.45)",
-                              }}>{k}</span>
+                              }}>{t(`hud.avatar.attrs.${key}`, label)}</span>
                               <span style={{
                                 fontFamily: "Orbitron,sans-serif", fontSize: 11,
                                 color: "rgba(255,255,255,0.85)", letterSpacing: "0.03em",
-                              }}>{v}</span>
+                              }}>{val}</span>
                             </div>
                           ))}
                         </div>
@@ -1083,14 +1086,14 @@ export default function ProfileButton() {
                           fontFamily: "Orbitron,sans-serif", fontSize: 10,
                           color: "#F87171", letterSpacing: "0.06em",
                         }}>
-                          ⚠ Powers: Not available at this time due to game balancing
+                          {t("hud.avatar.powersWarning", "⚠ Powers: Not available at this time due to game balancing")}
                         </div>
                       </>
                     ) : (
                       <div style={{
                         fontFamily: "Orbitron,sans-serif", fontSize: 9,
                         color: "#7ECEEC", marginTop: 6,
-                      }}>Species details coming soon...</div>
+                      }}>{t("hud.avatar.detailsSoon", "Species details coming soon...")}</div>
                     )}
                   </div>
                 </div>
@@ -1107,14 +1110,14 @@ export default function ProfileButton() {
                       fontFamily: "Orbitron,sans-serif", fontSize: 11, fontWeight: "bold",
                       color: "#00D4FF", letterSpacing: "0.12em",
                       textShadow: "0 0 8px rgba(0,212,255,0.5)",
-                    }}>NOTES</div>
+                    }}>{t("hud.avatar.notes")}</div>
                     <p style={{
                       fontFamily: "Orbitron,sans-serif", fontSize: 11,
                       color: "rgba(255,255,255,0.80)", lineHeight: 1.75,
                       letterSpacing: "0.04em",
                       textAlign: "justify",
                       margin: 0,
-                    }}>{detailSpecies.notes.split("\n\n").join(" ")}</p>
+                    }}>{t(`hud.avatar.species.${detailSpecies.id}.notes`, detailSpecies.notes.split("\n\n").join(" "))}</p>
                   </div>
                 )}
 
@@ -1126,7 +1129,7 @@ export default function ProfileButton() {
                 fontFamily: "Orbitron,sans-serif", fontSize: 9,
                 color: "#7ECEEC", letterSpacing: "0.08em",
               }}>
-                HOVER A CHARACTER TO SEE DETAILS
+                {t("hud.avatar.hoverHint", "HOVER A CHARACTER TO SEE DETAILS")}
               </div>
             )}
 

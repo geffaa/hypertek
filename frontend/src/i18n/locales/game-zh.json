@@ -1,4 +1,179 @@
 {
+  "overlord": {
+    "exit": "退出",
+    "spaceRing": "OVERLORD · 太空环",
+    "actions": {
+      "fire": "开火",
+      "zoom": "变焦",
+      "weapons": "武器"
+    }
+  },
+  "quest": {
+    "exit": "退出",
+    "move": "移动",
+    "actions": {
+      "fire": "开火",
+      "scope": "瞄准",
+      "kneel": "跪伏",
+      "weapon": "武器"
+    },
+    "planet": {
+      "atmosphere": "大气层",
+      "hazardLvl": "危险等级",
+      "briefing": "任务简报",
+      "questLocked": "探索 — 内容已锁定",
+      "questLockedDesc": "完整游戏发布后即可使用。",
+      "noImage": "暂无图像",
+      "image": "图像",
+      "notes": "备注",
+      "notesPlaceholder": "输入你的备注..."
+    },
+    "atm": {
+      "breathable": "可呼吸",
+      "artificial": "人工合成",
+      "vacuum": "真空",
+      "toxic": "有毒"
+    },
+    "hazard": {
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "unknown": {
+      "title": "未知星球",
+      "line1": "玩家尚未到访此星球，星球详情暂不可用。",
+      "line2": "详情与大气状况未知。",
+      "naming": "首位到访并探索该星球表面的玩家将获得命名权。"
+    },
+    "starMap": {
+      "title": "星图 — 游戏内容",
+      "back": "返回"
+    },
+    "video": {
+      "title": "银河轨道测绘视频",
+      "close": "关闭"
+    },
+    "space": {
+      "inGameContent": "游戏内容",
+      "galaxyVideo": "银河轨道测绘视频",
+      "interactiveMap": "互动地图"
+    },
+    "ground": {
+      "mission": "地面 · 任务"
+    },
+    "locTypes": {
+      "supplyDepot": "补给站",
+      "researchStation": "研究站",
+      "agricultureHub": "农业中心",
+      "tradingPost": "贸易站",
+      "refuelStation": "加油站",
+      "shipyard": "船坞",
+      "industrialComplex": "工业综合区",
+      "militaryBase": "军事基地",
+      "commandCenter": "指挥中心",
+      "logisticsHub": "物流中心",
+      "scienceOutpost": "科学前哨站",
+      "communicationArray": "通信阵列",
+      "deepSpaceRelay": "深空中继站",
+      "echoStation": "回声站",
+      "supplyStation": "供应站",
+      "navigationBeacon": "导航信标",
+      "pioneerOutpost": "先锋前哨站",
+      "signalRelay": "信号中继站",
+      "orbitalLab": "轨道实验室",
+      "colonyOutpost": "殖民前哨站",
+      "tradeStation": "贸易站",
+      "biomedicalResearch": "生物医学研究",
+      "explorationOutpost": "探索前哨站",
+      "assemblyPlant": "装配厂",
+      "technologyHub": "技术中心",
+      "gasExtraction": "气体采集",
+      "iceHarvesting": "冰块开采",
+      "unknown": "未知"
+    },
+    "locDescs": {
+      "sd": "西部边疆的主要物流枢纽，维持着紧急口粮储备。",
+      "res": "异种生物学与深空材料实验室，常驻40名科学家。",
+      "agri": "水培农业综合体，西部星区的主要食物来源。",
+      "trade": "自由贸易区，注册商人逾200名。货币：通用积分。",
+      "fuel": "大容量燃料补给站，支持离子驱动、等离子核心及暗物质电池。",
+      "ship": "舰队维护与装配站，容量：18艘舰船。",
+      "ind": "重工业制造区，需配备大气净化装置。产量：每周期8400单位。",
+      "mil": "限制区域，联合武装部队设施，需4级通行许可。",
+      "cmd": "星区指挥权力中心，所有主要联合行动均在此协调。",
+      "logi": "南部过境航线的交通管控与货物路由中心。",
+      "sci": "研究银河系核心边界附近引力异常的研究站。",
+      "comm": "量子纠缠通信节点，实现零延迟星际消息传输。",
+      "relay": "自动化中继节点，为外环定居点维持网络连通性。",
+      "echo": "远程通信中继站。信号强度：99.7%。运行时间：14.2年。",
+      "sup": "中立补给平台，由星际商人联合会运营。",
+      "nav": "自动化导航信标，引导过境飞船穿越中央走廊。",
+      "pion": "边疆探索基地，标志着已测绘过境网络的边缘。",
+      "sig": "高轨中继信标，每6分钟与核心网络进行一次上行链接。",
+      "orb": "零重力材料研究，研究真空条件下奇异物质的行为特性。",
+      "col": "早期定居殖民地，人口：12,400人，农业与采矿作业持续进行。",
+      "trd": "东部贸易枢纽，R01至R08星区货运路线的交汇点。",
+      "bio": "制药与异种生物学研究，隔离协议执行中。",
+      "expl": "未测绘区域的前沿侦察基地，最后一次传输：标准时间3.2天前。",
+      "asm": "模块化飞船装配，每标准周期生产12艘舰船。",
+      "tech": "先进技术研发设施，专注于推进系统与人工智能核心。",
+      "gas": "从稠密星云囊袋中采集大气气体，高辐射环境。",
+      "ice": "冰彗星资源提取，东部站区的主要水源。"
+    }
+  },
+  "racing": {
+    "airspeed": "空速",
+    "knots": "节",
+    "steer": "转向",
+    "speed": "速度",
+    "exit": "退出",
+    "selectVehicle": "选择飞行器",
+    "active": "可用",
+    "locked": "已锁定",
+    "basicSpec": "基本规格",
+    "systemLayout": "系统配置",
+    "deployVehicle": "部署飞行器 ▸",
+    "lockedFleet": "锁定舰队",
+    "vehicles": "辆",
+    "customize": "自定义",
+    "openCustomize": "⚙ 自定义",
+    "close": "✕ 关闭",
+    "pause": "⏸ 暂停",
+    "spin": "▶ 旋转",
+    "chooseRacer": "选择赛车",
+    "equipped": "已装备：",
+    "specifications": "规格参数",
+    "upgrades": "升级",
+    "upgradeBtn": "升级",
+    "stats": {
+      "topSpeed": "最高速度",
+      "acceleration": "加速度",
+      "hullStrength": "船体强度",
+      "range": "航程",
+      "weight": "重量",
+      "shields": "护盾",
+      "defence": "防御",
+      "dragCoeff": "阻力系数",
+      "gLimits": "G极限",
+      "speedRating": "速度评级",
+      "corning": "过弯",
+      "fuelType": "燃料类型",
+      "efficiency": "效率",
+      "visibility": "视野",
+      "hudType": "HUD类型",
+      "reaction": "反应延迟",
+      "status": "状态",
+      "unlock": "解锁"
+    },
+    "parts": {
+      "hull": "船体",
+      "aerodynamics": "空气动力学",
+      "driveSystem": "驱动系统",
+      "cockpit": "驾驶舱",
+      "weapons": "武器",
+      "boostCore": "推进核心"
+    }
+  },
   "gamePage": {
     "welcomeTo": "欢迎来到",
     "back": "返回",
@@ -156,6 +331,310 @@
         { "q": "有哪些武器可用？", "a": "地基炮兵、反轨道炮台、舰载武器阵列和专业登舰行动装备。每个系统可针对特定战术角色精炼，包括远程轰炸、近战战斗和防御反制措施。" },
         { "q": "我可以探索行星地表吗？", "a": "可以。这颗星球蕴藏着隐藏奖励、文物、资源和可驯服的危险野生动物。探索地表寻找宝藏，对抗外星生物和怪物，并发现强化你争夺霸主地位战役的战略优势。" }
       ]
+    }
+  },
+  "hud": {
+    "ship": "飞船",
+    "shipSkins": "飞船皮肤",
+    "shipLvl": "飞船等级",
+    "resourcesBtn": "资源",
+    "linked": "已链接",
+    "unlinked": "未链接",
+    "marketplace": "交易市场",
+    "wallet": "钱包",
+    "connected": "已连接",
+    "logOut": "退出登录",
+    "connectWallet": "连接钱包",
+    "whatIsWallet": "什么是加密钱包？",
+    "stored": "已存储",
+    "vrMode": "VR 模式",
+    "view": "查看",
+    "hoverSelectRoom": "悬停或选择\n一个舱室以查看\n相关信息",
+    "hoverSelectWeapon": "悬停或选择武器槽以查看详情",
+    "chatLocked": "聊天功能将于游戏上线后开放...",
+    "availableAfterLaunch": "正式上线后可在游戏内使用",
+    "changeName": "更改名称",
+    "save": "保存",
+    "saved": "✓ 已保存",
+    "profileDetails": "个人资料",
+    "contactSupport": "联系客服",
+    "eventCenter": "活动中心",
+    "resourceLabels": {
+      "food": "食物",
+      "oil": "石油",
+      "crystals": "能量晶体",
+      "fuel": "燃料",
+      "ore": "矿石"
+    },
+    "sidebar": {
+      "events": "活动",
+      "items": "物品",
+      "settings": "设置",
+      "alliance": "联盟",
+      "mail": "邮件",
+      "chat": "聊天"
+    },
+    "eventTabs": {
+      "limited": "限时",
+      "activities": "任务",
+      "competition": "竞技"
+    },
+    "itemTabs": {
+      "inventory": "背包",
+      "weapons": "武器",
+      "rewards": "奖励",
+      "specialists": "专家"
+    },
+    "allianceTabs": {
+      "members": "成员",
+      "mail": "邮件",
+      "manage": "管理"
+    },
+    "mailCats": {
+      "all": "全部",
+      "system": "系统",
+      "alliance": "联盟",
+      "events": "活动",
+      "battle": "战斗"
+    },
+    "chatTabs": {
+      "world": "世界",
+      "alliance": "联盟",
+      "trade": "交易"
+    },
+    "settings": {
+      "audio": "音频",
+      "language": "语言",
+      "profile": "个人资料",
+      "support": "客服支持",
+      "soundEffects": "音效",
+      "music": "音乐",
+      "chatTranslation": "聊天翻译",
+      "chatTranslationDesc": "您可以启用或禁用聊天翻译。",
+      "autoTranslation": "自动翻译"
+    },
+    "games": {
+      "racing": "RACING",
+      "quest": "QUEST",
+      "overlord": "OVERLORD"
+    },
+    "resCategories": {
+      "endurance": "耐久度",
+      "water": "水资源",
+      "furuseth": "弗鲁塞斯晶体",
+      "gems": "宝石",
+      "minerals": "矿物",
+      "crystals": "晶体",
+      "timeclocks": "时间时钟"
+    },
+    "resItems": {
+      "endurance": "耐久度",
+      "water": "水",
+      "waterHeavy": "重水",
+      "fCrystals1": "F晶体 1级",
+      "fCrystals2": "F晶体 2级",
+      "fCrystals3": "F晶体 3级",
+      "fCrystals4": "F晶体 4级",
+      "fCrystals5": "F晶体 5级",
+      "gems": "宝石",
+      "cotton": "棉花",
+      "silk": "丝绸",
+      "wood": "木材",
+      "carbon": "碳",
+      "silica": "硅",
+      "ash": "灰烬",
+      "whiteCrystals": "白色晶体",
+      "greenCrystals": "绿色晶体",
+      "blueCrystals": "蓝色晶体",
+      "redCrystals": "红色晶体",
+      "clearCrystals": "透明晶体",
+      "min5": "5分钟",
+      "min15": "15分钟",
+      "min30": "30分钟",
+      "hour1": "1小时",
+      "hour3": "3小时",
+      "hour8": "8小时",
+      "hour12": "12小时",
+      "hour24": "24小时"
+    },
+    "marketItems": {
+      "overview": "概览",
+      "marketplace": "交易市场",
+      "auction": "拍卖",
+      "trade": "交易",
+      "quest": "任务",
+      "myProfile": "我的主页"
+    },
+    "linkedTooltip": {
+      "linkedMode": "链接模式：",
+      "linkedDesc": "允许玩家将所有游戏的资源链接在一起，用于升级。",
+      "unlinkedMode": "未链接模式：",
+      "unlinkedDesc": "断开各游戏资源的链接，仅显示各游戏内可用的资源。",
+      "warning": "警告：",
+      "warningDesc": "在\"链接\"模式下，所有材料都可能在被攻击时被夺取！"
+    },
+    "noRoomInfo": "该舱室暂无可用信息。",
+    "skinLabel": "SKIN 1 — 武器布局",
+    "gunStats": {
+      "damage": "伤害",
+      "range": "射程",
+      "fireRate": "射速",
+      "upgrade": "升级",
+      "detail": "详情"
+    },
+    "rooms": {
+      "storeroom": { "title": "储藏室", "desc": "原材料和采集资源的中央储存中枢，负责管理采矿与精炼作业之间的库存分配。" },
+      "mining_fs": { "title": "Mining FS", "desc": "前侧右舷采矿舱，配备深核提取阵列，用于在开放太空中收集矿物和矿石。" },
+      "mining_fp": { "title": "Mining FP", "desc": "前侧左舷采矿舱，与右舷舱互为镜像，在资源丰富区域作业时可将提取产能翻倍。" },
+      "process_ref": { "title": "处理精炼厂", "desc": "将原矿和矿物转化为精炼合金，对燃料合成和船体升级材料至关重要。" },
+      "mining_rs": { "title": "Mining RS", "desc": "后侧右舷采矿单元，以-45°角倾斜配置，适用于慢速漂移小行星采集时的侧向扫描。" },
+      "mining_rp": { "title": "Mining RP", "desc": "后侧左舷采矿单元，与RS舱协同作业，最大化后方区域的资源提取产量。" },
+      "fuel_ref": { "title": "燃料精炼厂", "desc": "将精炼合金加工为推进级燃料，为主发动机和紧急推进器储备提供燃料供应。" },
+      "workshop": { "title": "工作间", "desc": "船体维护与制造中心，负责部件修复、零件制造以及设备升级工作。" },
+      "racing": { "title": "竞速机库", "desc": "专用停机坪，用于存放竞速无人机和轻型飞行器，支持竞速游戏模式的部署与维修站作业。" },
+      "brig": { "title": "牢房", "desc": "关押囚犯和存放贵重货物的安全拘留室，强化墙壁可防止未经授权的进入或逃脱。" },
+      "armory_ss": { "title": "Armory SS", "desc": "右舷武器库，负责小型武器、乘员防护装备及个人防卫系统的储存与维护。" },
+      "armory_ps": { "title": "Armory PS", "desc": "左舷武器库，与SS武器库互为镜像，确保飞船两侧装备配置均衡。" },
+      "main_weapon": { "title": "主重型武器", "desc": "主要重型武器部署区，搭载船上最具威力的进攻系统，用于大规模战斗。" },
+      "fwd_shield": { "title": "前置护盾发生器", "desc": "在船首方向生成保护能量屏障，是抵御来袭炮弹和能量攻击的第一道防线。" },
+      "fighter_fss": { "title": "Fighter Bay FSS", "desc": "前侧右舷战斗机机库，搭载小型战斗机，可在战斗和巡逻任务中快速部署护航战斗机。" },
+      "fighter_fps": { "title": "Fighter Bay FPS", "desc": "前侧左舷战斗机机库，与FSS机库协同运作，实现协调一致的战斗机中队发射。" },
+      "fighter_rss": { "title": "Fighter Bay RSS", "desc": "后侧右舷短舱战斗机机库，支持后卫作战和追击拦截任务。" },
+      "fighter_rps": { "title": "Fighter Bay RPS", "desc": "后侧左舷短舱战斗机机库，提供对称后方覆盖，实现全方位防御战斗机部署。" },
+      "barracks_ss": { "title": "Barracks SS", "desc": "右舷作战人员宿舍，配备双层床系统和装备储物柜，用于安置士兵、飞行员和安保队伍。" },
+      "barracks_ps": { "title": "Barracks PS", "desc": "左舷船员宿舍，布局与SS宿舍完全相同，确保乘员分布均衡，可从任一侧快速动员。" },
+      "stables_ss": { "title": "Stables SS", "desc": "右舷生物资产舱，用于安置外星坐骑和在行星地面作战中使用的生物工程生物。" },
+      "stable_ps": { "title": "Stable PS", "desc": "左舷生物资产舱，与SS兽栏互为镜像，实现生物负载均衡和重量对称分布。" },
+      "transporter": { "title": "传送舱", "desc": "量子辅助人员与货物传送系统，可快速实现短程传送至行星地表或附近舰船。" },
+      "security": { "title": "安保站", "desc": "全船监控与威胁响应中枢，负责监控所有甲板并协调内部安保协议。" },
+      "weapons_ss": { "title": "Weapons Systems SS", "desc": "右舷武器管理控制台，控制右舷武装的目标阵列、发射序列和弹药后勤保障。" },
+      "weapons_ps": { "title": "Weapons Systems PS", "desc": "左舷武器管理控制台，提供对所有左舷武器平台的完整独立控制。" },
+      "power_plant": { "title": "动力装置", "desc": "核心能源生成单元，通过环形等离子约束技术为全船系统提供稳定电力输出。" },
+      "power_sys": { "title": "电力系统", "desc": "电力分配与调节中枢，负责武器、护盾、发动机和生命维持系统之间的负载均衡管理。" },
+      "energy_dist": { "title": "能源分配节点", "desc": "辅助能源路由节点，在高需求条件下确保向船体中部和后段系统持续稳定供电。" },
+      "main_engine": { "title": "主发动机", "desc": "驱动所有亚光速航行的主推进系统，通过反物质催化等离子喷流产生推力。" },
+      "navigation": { "title": "导航", "desc": "中央导航与舵机控制站，负责航线规划、星图绘制和实时位置追踪。" },
+      "flight_deck": { "title": "飞行甲板", "desc": "主驾驶操控站，控制所有飞行操作，包括起飞、降落、轨道机动和紧急规避动作。" },
+      "weapons_off": { "title": "武器官", "desc": "战术武器指挥哨位，在武器官直接指挥下协调进攻和防御武器开火。" },
+      "comms_off": { "title": "通讯官", "desc": "通信与信号截获中枢，处理所有舰间、联盟及行星通信，包括加密频道。" },
+      "capt_quarters": { "title": "舰长室", "desc": "船只指挥官的私人舱室，配备安全数据终端和私密简报设施。" },
+      "kitchen": { "title": "厨房", "desc": "乘员营养与食物制备设施，加工储存食品资源并为长途航行合成营养补充剂。" },
+      "mess_hall": { "title": "餐厅", "desc": "公共餐饮与休闲空间，在战斗与资源作业间歇期间作为乘员士气提升中心。" },
+      "hydro_1": { "title": "水培室 1", "desc": "自动化种植单元，生产新鲜食物和药用植物，减少长期任务对储备物资的依赖。" },
+      "hydro_2": { "title": "水培室 2", "desc": "辅助水培室，扩展作物种类和产量，支持乘员营养供应和贸易商品生产。" },
+      "hydro_3": { "title": "水培室 3", "desc": "第三培育单元，专攻高产主食作物，为大规模乘员补充提供基础热量供应。" },
+      "hydro_4": { "title": "水培室 4", "desc": "药用与植物研究室，种植用于医疗和炼金合成的稀有物种。" },
+      "hydro_5": { "title": "水培室 5", "desc": "异域植物培育舱，生产奢侈品和稀有植物用于市场交易。" },
+      "hydro_6": { "title": "水培室 6", "desc": "高产实验培育室，通过基因改造项目测试新培育的作物品系。" },
+      "shield_main": { "title": "主护盾发生器", "desc": "主要多向护盾发生器，在战斗情况下在整个船体周围投射能量屏障。" },
+      "power_relay1": { "title": "电力中继 1", "desc": "上层甲板电力中继接口，将来自动力装置的能量输送至前向武器和护盾阵列。" },
+      "power_relay2": { "title": "电力中继 2", "desc": "下层甲板电力中继接口，向发动机舱和后方防御系统分配电力。" },
+      "hidden_st1": { "title": "隐藏储存室 1", "desc": "隐蔽高安全保险库，用于存放机密货物、贵重文物和不在标准库存扫描范围内的违禁品。" },
+      "hidden_st2": { "title": "隐藏储存室 2", "desc": "第二隐蔽保险库，为需要最高保密级别的关键任务物品提供额外安全存储空间。" },
+      "cargo_1": { "title": "货舱 1", "desc": "主要大宗货物舱，专为大容量资源运输设计，包括矿石、精炼金属和贸易商品。" },
+      "cargo_2": { "title": "货舱 2", "desc": "辅助货舱，针对易碎或温控敏感货物进行优化，提供气候可控的储存条件。" },
+      "cargo_3": { "title": "货舱 3", "desc": "第三货舱，可配置布局支持混合装载，包括车辆、集装箱和超大型设备。" },
+      "war_council": { "title": "战争议会", "desc": "战略指挥室，高级军官在此汇聚商讨作战计划、联盟策略和战役目标。" },
+      "academy": { "title": "学院", "desc": "乘员训练与教育设施，支持技能晋升、专业解锁和军官发展培训计划。" },
+      "science_lab": { "title": "科学实验室", "desc": "研究与开发中心，开展材料科学、推进理论和外星技术分析实验。" },
+      "dna_lab": { "title": "DNA实验室", "desc": "基因研究设施，为乘员研发生物强化方案，培育新物种变体，并研究外星DNA样本。" },
+      "cryostasis": { "title": "冷冻休眠室", "desc": "长途航行暂停系统，使乘员进入低温休眠状态，以保存多年深空旅行中的资源消耗。" },
+      "dna_chambers": { "title": "DNA改造舱", "desc": "基因改造舱，将已研究的DNA强化方案直接应用于乘员和生物单元。" },
+      "weapons_relay": { "title": "武器电力中继", "desc": "重型武器系统专用电力管理节点，在持续战斗中确保稳定能源供应。" },
+      "comms_tower": { "title": "通讯塔", "desc": "远程深空通信阵列，支持舰队广播、星际传输以及跨越广袤距离的联盟协调通信。" }
+    },
+    "guns": {
+      "far_left_bar": "前主炮",
+      "fore_port_bay": "右舷前炮组",
+      "fore_stbd_bay": "左舷前炮组",
+      "pd_gun_1": "驾驶舱右舷防御炮位 1",
+      "pd_gun_2": "驾驶舱右舷防御炮位 2",
+      "pd_gun_3": "驾驶舱右舷防御炮位 3",
+      "pd_gun_4": "驾驶舱右舷防御炮位 4",
+      "pd_gun_5": "驾驶舱右舷防御炮位 5",
+      "pd_gun_6": "驾驶舱右舷防御炮位 6",
+      "vert_oval_upper": "驾驶舱中央防御炮位下层",
+      "vert_oval_lower": "驾驶舱中央防御炮位上层",
+      "center_front_gun": "前向上甲板炮阵",
+      "pd_gun_7": "驾驶舱左舷防御炮位 1",
+      "pd_gun_8": "驾驶舱左舷防御炮位 2",
+      "pd_gun_9": "驾驶舱左舷防御炮位 3",
+      "pd_gun_10": "驾驶舱左舷防御炮位 4",
+      "pd_gun_11": "驾驶舱左舷防御炮位 5",
+      "pd_gun_12": "驾驶舱左舷防御炮位 6",
+      "upper_flank_array": "右舷后炮组",
+      "lower_flank_array": "左舷后炮组",
+      "spine_gun_1": "中部上甲板炮阵",
+      "spine_gun_2": "下部中央脊线炮阵",
+      "spine_gun_3": "后部中央脊线炮阵",
+      "mid_rail_gun": "中央炮台堡垒",
+      "upper_nacelle_bay": "右舷翼炮阵",
+      "lower_nacelle_bay": "左舷翼炮阵"
+    },
+    "avatar": {
+      "header": "头像",
+      "selectChar": "选择角色",
+      "speciesSubtitle": "7 种族 · 选择你的变体",
+      "change": "更换 ▸",
+      "profileFrame": "头像边框",
+      "might": "战力",
+      "endurance": "耐久",
+      "female": "女性",
+      "male": "男性",
+      "notes": "备注",
+      "powersWarning": "⚠ 技能：因游戏平衡调整，暂时不可用",
+      "detailsSoon": "种族详情即将上线...",
+      "hoverHint": "悬停角色以查看详情",
+      "attrs": {
+        "height": "身高",
+        "eyes": "眼睛",
+        "clothing": "服饰",
+        "environ": "环境",
+        "symbolism": "象征",
+        "wings": "翅膀",
+        "arms": "手臂"
+      },
+      "slots": {
+        "weapon": "武器",
+        "suit": "套装",
+        "boots": "靴子",
+        "helmet": "头盔",
+        "gloves": "手套",
+        "flag": "旗帜",
+        "staff": "法杖",
+        "badge": "徽章",
+        "power": "能量"
+      },
+      "species": {
+        "lithionites": {
+          "type": "变异变形混合体",
+          "notes": "Lithionites 是一个复杂的种族，被归类为变异变形混合体。他们以坚硬粗糙的外骨骼和独特的结晶流体内部结构著称。Lithionites 以好斗著称，受到威胁或挑战时极易被激怒。尽管性情凶猛，他们在同族之间颇具社交性，常进行社交联谊仪式，但对外族通常保持警惕，可能将其视为威胁或猎物。在群体内部，他们倾向于相互较量力量，有时会导致内部冲突。饮食多样，涵盖植物和肉类，是技艺精湛的猎手。他们居住在山地或岩石平原基部的洞穴或石质庇护所中。忠诚是 Lithionite 文化的基石，他们对同族极为忠诚，会为争夺领土和资源与其他种族开战。在精神层面，Lithionites 与结晶构造有着深厚联系，视其为神圣之物，并进行崇拜火光和水晶能量的仪式。"
+        },
+        "marmulus": {
+          "type": "变异变形混合体",
+          "notes": "Marmulus 种族被归类为变异变形混合体。这些非凡的生命体以坚硬光滑的外骨骼和独特的高能流体核心著称。Marmulus 不仅在生物学上高度进化，社交上也充满活力、极为外向，公开表达自身性别认同。饮食多样，包含植物和肉类。他们对贵重物品和财富有强烈偏好，常寻找稀世珍宝。数百年来，他们在山地或硬石地区建造了宏伟城市，彰显了其智慧与创造力。Marmulus 的社会结构深植于民主价值观，培养了社区间的忠诚与友爱。其文化核心是对灵性存在的信仰和结构对齐的重视，指引着他们与物质和形而上世界的互动。"
+        },
+        "ophidians": {
+          "type": "蛇外星混合体",
+          "notes": "Ophidians 种族以其独特的蛇外星混合外貌著称，拥有在深色系中闪闪发光的光滑鳞片皮肤。他们在社交环境中如鱼得水，善于与同族互动和建立联系，但对外族态度极为敌对。饮食多样，涵盖肉类和植物性食物。Ophidians 以深厚的社交联系著称，形成紧密的社区，忠诚至上。领地受到威胁时，他们会展现出强烈的保护欲，极易被激怒进入战斗状态。崇拜太阳是其文化的重要组成部分，他们在温暖至炎热的平原和干旱地区蓬勃发展，并在这些阳光充沛的环境中建造了先进的城市。"
+        },
+        "geodians": {
+          "type": "变异变形混合体",
+          "notes": "Geodian 种族被归类为变异变形混合体。这些非凡的生命体拥有令人叹为观止的结晶格外骨骼，能以迷人的方式折射光线，其内核则流淌着随热能波动的热流体物质。智慧高度进化的 Geodians 建造了错综复杂的城市，展现出先进的工程和建筑奇迹，通常在热泉或高热区域附近蓬勃发展。他们天性合群，坦然表达情感和性别认同，饮食涵盖植物和肉类。Geodian 社会以民主原则和完善的制度为特征，确保每个声音都能被倾听。他们对穿越水晶格起舞的光芒怀有深厚的崇敬，这不仅象征着他们的精神信仰，也凝聚着社区的团结。"
+        },
+        "fawnus": {
+          "type": "山羊外星混合体",
+          "notes": "Fawnus 种族融合了山羊和外星生命的特征，身体覆盖着色彩各异的粗短毛发，外貌独特，性格活泼。他们天生顽皮好动，热爱嬉戏。饮食极为多样，肉类和植物性食物皆宜。Fawnus 社交联系紧密，形成团结的社区，忠诚度极高，对同族和领地有强烈的保护意识。在文化上，Fawnus 是虔诚的信徒，崇拜各类神灵和宗教符号。他们受西班牙文化启发，热爱音乐和财富，尤其珍视黄金作为繁荣的象征。建筑上，他们的创造令人叹为观止，蒸汽朋克风格彰显了其艺术才华和工程实力。"
+        },
+        "mantaquads": {
+          "type": "四臂外星混合体",
+          "notes": "Mantaquads 是独特的生命体，以四条灵巧手臂和四只警觉的眼睛为特征，体现了外星混合体的本质。他们拥有蜂巢思维，能够完美协同运作，使其成为强大的力量。天性合群，Mantaquads 以开放和冒险的方式对待性别认同。他们追求完美，掌握了各种武术技能。饮食涵盖肉类和植物，有强烈的狩猎欲望，甚至偏好活食。作为雇佣兵，他们以高效无情的战斗力著称。他们展现出卓越的建筑技能，建造速度无与伦比。信仰上，他们融合了中世纪传统和撒旦符号，并将至少 10% 的财富奉献给教会。"
+        },
+        "dryads": {
+          "type": "树木外星混合体",
+          "notes": "Dryads 是迷人而独特的种族，结合了树木和外星生命的特征，能在各种环境中生存，外貌常与周围植物相似。他们拥有类蜂巢的思维，能够无缝沟通，集体意识促进了深厚的团结与合作，并与自然界保持着错综复杂的联系，能感知环境健康状况，是出色的自然守护者。饮食以植物为主，偶尔少量摄入肉类。Dryads 以顽皮恶作剧著称，充满欢乐精神。他们对同族和故土的忠诚坚定不移，受到威胁时会奋力保护社区和领地。在精神层面，Dryads 相信与自然循环交织的来世，崇拜自然元素（地、风、火、水）为神圣力量，也崇拜太阳和星辰等天体为指引之光。"
+        }
+      }
     }
   }
 }

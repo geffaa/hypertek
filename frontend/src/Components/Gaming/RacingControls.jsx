@@ -5,6 +5,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
 /* ─── colours ────────────────────────────────────────── */
@@ -37,6 +38,7 @@ const CSS = `
    Joystick
    ══════════════════════════════════════════════════════ */
 function Joystick() {
+  const { t } = useTranslation();
   /* knobX: -1 (full left) → 0 (center) → +1 (full right) */
   const [knobX, setKnobX]       = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -111,7 +113,8 @@ function Joystick() {
         ref={trackRef}
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
-        title="Drag left / right to steer"
+        data-tooltip="Drag left / right to steer"
+          className="ht-tip-green"
         style={{
           position: "relative",
           width:  TRACK_W,
@@ -160,7 +163,7 @@ function Joystick() {
         <span style={{
           fontSize: 7, letterSpacing: "0.15em",
           color: "rgba(34,197,94,0.55)", fontWeight: "bold",
-        }}>STEER</span>
+        }}>{t("racing.steer")}</span>
         <span className="rc-arrow-r">▶</span>
       </div>
     </div>
@@ -171,6 +174,7 @@ function Joystick() {
    Speed Slider (vertical)
    ══════════════════════════════════════════════════════ */
 function SpeedSlider({ speed, onSpeedChange }) {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const setSpeed = onSpeedChange;
   const [dragging, setDragging] = useState(false);
@@ -263,7 +267,8 @@ function SpeedSlider({ speed, onSpeedChange }) {
           ref={trackRef}
           onMouseDown={onMouseDown}
           onTouchStart={onTouchStart}
-          title="Drag up / down to control speed"
+          data-tooltip="Drag up / down to control speed"
+            className="ht-tip-green"
           style={{
             position: "absolute",
             left: "50%",
@@ -349,7 +354,7 @@ function SpeedSlider({ speed, onSpeedChange }) {
         fontSize: 7, fontWeight: "bold",
         color: "rgba(34,197,94,0.55)",
         letterSpacing: "0.15em",
-      }}>SPEED</div>
+      }}>{t("racing.speed")}</div>
     </div>
   );
 }

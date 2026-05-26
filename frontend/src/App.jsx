@@ -100,6 +100,7 @@ import EditNfa from "./pages/DashboardPages/EditNfa";
 import AddUserCollection from "./pages/DashboardPages/AddUserCollection";
 import Withdraw from "./pages/DashboardPages/Withdraw";
 import UploadNFC from "./pages/DashboardPages/UploadNFC";
+import TopUp from "./pages/DashboardPages/TopUp";
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -144,6 +145,7 @@ function AppWrapper() {
     "/dashboard/add-nfts",
     "/dashboard/add-user-collection",
     "/dashboard/withdraw",
+    "/dashboard/topup",
     "/dashboard/upload-nfc",
     "/gaming",
   ];
@@ -265,6 +267,7 @@ function AppWrapper() {
                 element={<AddUserCollection />}
               />
               <Route path="withdraw" element={<Withdraw />} />
+              <Route path="topup" element={<TopUp />} />
               <Route path="upload-nfc" element={<UploadNFC />} />
             </Route>
 

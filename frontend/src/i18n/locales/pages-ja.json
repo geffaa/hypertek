@@ -102,7 +102,17 @@
     "newsletter":     "ニュースレター登録",
     "newsletterDesc": "ニュースの受信を開始するには、メールアドレスを入力するだけです。あとはすべて私たちが取り処理します。ゲームに関する情報をメールでお送りします。スパムは送信しません。",
     "emailPlaceholder":"メールアドレス",
-    "subscribe":      "登録"
+    "subscribe":      "登録",
+    "universeHeading":"一つの宇宙。",
+    "threeWorlds":    "三つの世界。",
+    "noSpam":         "スパムなし。いつでも退会可能。",
+    "subscribedTitle":"登録完了！",
+    "subscribedDesc": "HyperTek の最新情報をお届けします。",
+    "worlds": {
+      "racing":   { "desc": "異星のトラックを疾走し、車両をアップグレードして、リーダーボードに君臨しよう。" },
+      "quest":    { "desc": "壮大なクエストをクリアし、新世界を探索して、あなたの伝説を築こう。" },
+      "overlord": { "desc": "軍を率い、領土を征服し、戦場を支配しよう。" }
+    }
   },
 
   "waitlistForm": {

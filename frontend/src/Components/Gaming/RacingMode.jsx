@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import RacingControls  from "./RacingControls";
 import LazyImage       from "./LazyImage";
 import Wraith3DViewer  from "./Wraith3DViewer";
@@ -115,6 +116,37 @@ const LOCKED_VEHICLES = Array.from({ length: 21 }, (_, i) => ({
   bay: `BAY ${String(i + 8).padStart(2, "0")}`,
 }));
 
+/* ─── i18n key maps ────────────────────────────────────────────── */
+const SPEC_KEY = {
+  "Top Speed":     "topSpeed",
+  "Acceleration":  "acceleration",
+  "Hull Strength": "hullStrength",
+  "Range":         "range",
+  "Weight":        "weight",
+  "Shields":       "shields",
+  "Defence":       "defence",
+  "Drag Coeff.":   "dragCoeff",
+  "G-Limits":      "gLimits",
+  "Speed Rating":  "speedRating",
+  "Corning":       "corning",
+  "Fuel Type":     "fuelType",
+  "Efficiency":    "efficiency",
+  "Visibility":    "visibility",
+  "HUD Type":      "hudType",
+  "Reaction":      "reaction",
+  "Status":        "status",
+  "Unlock":        "unlock",
+};
+
+const PART_KEY = {
+  "HULL":         "hull",
+  "AERODYNAMICS": "aerodynamics",
+  "DRIVE SYSTEM": "driveSystem",
+  "COCKPIT":      "cockpit",
+  "WEAPONS":      "weapons",
+  "BOOST CORE":   "boostCore",
+};
+
 /* ─── CSS ──────────────────────────────────────────────────────── */
 const CSS = `
   /* ── Entry animation ── */
@@ -151,6 +183,7 @@ const CSS = `
    TRACK VIEW — animated neon race track
    ══════════════════════════════════════════════════════════════════ */
 function TrackView({ speed }) {
+  const { t } = useTranslation();
   const knots = String(Math.round(speed * 2400)).padStart(4, "0");
   const speedColor = speed > 0.7 ? "#f87171" : speed > 0.4 ? "#facc15" : "#22c55e";
   return (
@@ -192,7 +225,7 @@ function TrackView({ speed }) {
           letterSpacing: "0.25em",
           color: "rgba(34,197,94,0.55)",
           marginBottom: 2,
-        }}>AIRSPEED</div>
+        }}>{t("racing.airspeed")}</div>
         <div style={{
           fontFamily: "Orbitron, sans-serif",
           fontSize: "clamp(28px, 4vw, 48px)",
@@ -208,7 +241,7 @@ function TrackView({ speed }) {
           fontSize: "clamp(7px, 0.7vw, 9px)",
           letterSpacing: "0.25em",
           color: "rgba(34,197,94,0.55)",
-        }}>KNOTS</div>
+        }}>{t("racing.knots")}</div>
       </div>
     </div>
   );
@@ -218,6 +251,7 @@ function TrackView({ speed }) {
    VEHICLE SELECTOR POPUP
    ══════════════════════════════════════════════════════════════════ */
 function VehicleSelectorPopup({ onClose, onSelect }) {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const [vehicleIdx, setVehicleIdx] = useState(0);
   const [winH, setWinH] = useState(() => window.innerHeight);
@@ -277,11 +311,11 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
             <div style={{
               fontFamily: "Orbitron,sans-serif", fontSize: s.fontSize, fontWeight: "bold",
               letterSpacing: "0.14em", color: "#22c55e", textShadow: "0 0 10px rgba(34,197,94,0.7)",
-            }}>SELECT VEHICLE</div>
+            }}>{t("racing.selectVehicle")}</div>
             <div style={{
               fontFamily: "Orbitron,sans-serif", fontSize: s.subFont, color: "rgba(34,197,94,0.5)",
               letterSpacing: "0.07em", marginTop: 3,
-            }}>{UNLOCKED_VEHICLES.length} ACTIVE · {LOCKED_VEHICLES.length} LOCKED</div>
+            }}>{UNLOCKED_VEHICLES.length} {t("racing.active")} · {LOCKED_VEHICLES.length} {t("racing.locked")}</div>
           </div>
           <button onClick={onClose} style={{
             background: "none", border: "none", color: "rgba(255,255,255,0.55)",
@@ -363,10 +397,10 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
 
               {/* Stats */}
               <div>
-                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>BASIC SPECIFICATION</div>
+                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>{t("racing.basicSpec")}</div>
                 {Object.entries(v.stats).map(([k, val]) => (
                   <div key={k} style={{ display: "flex", justifyContent: "space-between", marginBottom: s.gap * 0.5 }}>
-                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, color: "rgba(255,255,255,0.75)", letterSpacing: "0.08em" }}>{k}</span>
+                    <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, color: "rgba(255,255,255,0.75)", letterSpacing: "0.08em" }}>{t(`racing.stats.${SPEC_KEY[k] ?? k}`, k)}</span>
                     <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont + 1, fontWeight: "bold", color: v.color }}>{val}</span>
                   </div>
                 ))}
@@ -377,7 +411,7 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
 
               {/* Loadout */}
               <div>
-                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>SYSTEM LAYOUT</div>
+                <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: s.statFont, letterSpacing: "0.18em", color: v.color, marginBottom: s.gap * 0.7, fontWeight: "bold" }}>{t("racing.systemLayout")}</div>
                 {v.loadout.map(item => (
                   <div key={item} style={{
                     fontFamily: "Orbitron,sans-serif", fontSize: s.statFont,
@@ -400,7 +434,7 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
                 textShadow: `0 0 8px ${v.color}88`,
                 cursor: "pointer",
                 transition: "background 0.2s",
-              }}>DEPLOY VEHICLE ▸</button>
+              }}>{t("racing.deployVehicle")}</button>
             </div>
           </div>
 
@@ -435,7 +469,7 @@ function VehicleSelectorPopup({ onClose, onSelect }) {
           <div style={{
             fontFamily: "Orbitron,sans-serif", fontSize: 8, letterSpacing: "0.18em",
             color: "rgba(255,255,255,0.25)", marginBottom: 8,
-          }}>🔒 LOCKED FLEET — {LOCKED_VEHICLES.length} VEHICLES</div>
+          }}>🔒 {t("racing.lockedFleet")} — {LOCKED_VEHICLES.length} {t("racing.vehicles")}</div>
           <style>{`
             .fleet-scroll::-webkit-scrollbar { height: 4px; }
             .fleet-scroll::-webkit-scrollbar-track { background: rgba(34,197,94,0.05); border-radius: 2px; }
@@ -654,6 +688,7 @@ const PARTS_BY_VEHICLE = {
    GARAGE VIEW — Gran Turismo style
    ══════════════════════════════════════════════════════════════════ */
 function GarageView() {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const [selectorOpen,  setSelectorOpen]  = useState(false);
   const [customizeOpen, setCustomizeOpen] = useState(false);
@@ -763,7 +798,7 @@ function GarageView() {
           fontFamily: "Orbitron,sans-serif", fontSize: 7,
           color: "rgba(34,197,94,0.6)", cursor: "pointer", letterSpacing: "0.1em",
         }}
-      >{spinning ? "⏸ PAUSE" : "▶ SPIN"}</button>
+      >{spinning ? t("racing.pause") : t("racing.spin")}</button>
 
       {/* ── CUSTOMIZE panel — split left+right within one container ── */}
       {customizeOpen && (
@@ -810,7 +845,7 @@ function GarageView() {
                   <line x1="2" y1="8" x2="0" y2="8" stroke="#22c55e" strokeWidth="1.5"/>
                   <line x1="16" y1="8" x2="14" y2="8" stroke="#22c55e" strokeWidth="1.5"/>
                 </svg>
-                CUSTOMIZE
+                {t("racing.customize")}
               </div>
               <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.hdr - 3, color: v.color, marginTop: 3, letterSpacing: "0.1em" }}>{v.name}</div>
             </div>
@@ -857,7 +892,7 @@ function GarageView() {
                   >
                     <span style={{ color: iconColor, flexShrink: 0, display: "flex" }}>{icons[p.id]}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partLabel, fontWeight: "bold", color: p.locked ? "#d1d5db" : "#f3f4f6", letterSpacing: "0.07em" }}>{p.label}</div>
+                      <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partLabel, fontWeight: "bold", color: p.locked ? "#d1d5db" : "#f3f4f6", letterSpacing: "0.07em" }}>{t(`racing.parts.${PART_KEY[p.label] ?? p.label.toLowerCase()}`, p.label)}</div>
                       <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partSub, color: p.locked ? "rgba(255,255,255,0.5)" : v.color, marginTop: 3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.equipped}</div>
                     </div>
                     <span style={{ color: p.locked ? "#6b7280" : v.color, fontSize: 11, flexShrink: 0 }}>
@@ -877,15 +912,15 @@ function GarageView() {
                 {/* Part title */}
                 <div style={{ padding: g.pad, background: `${v.color}0d`, borderBottom: "1px solid rgba(34,197,94,0.12)" }}>
                   <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.hdr, fontWeight: "bold", color: v.color, letterSpacing: "0.12em" }}>{part.label}</div>
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partSub, color: "rgba(255,255,255,0.4)", marginTop: 4 }}>EQUIPPED: {part.equipped}</div>
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.partSub, color: "rgba(255,255,255,0.4)", marginTop: 4 }}>{t("racing.equipped")} {part.equipped}</div>
                 </div>
 
                 {/* Specs */}
                 <div style={{ padding: g.pad, borderBottom: "1px solid rgba(34,197,94,0.08)" }}>
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>SPECIFICATIONS</div>
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>{t("racing.specifications")}</div>
                   {Object.entries(part.specs).map(([k, val]) => (
                     <div key={k} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: g.gap + 4, padding: "0 2px" }}>
-                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specLabel, color: "rgba(255,255,255,0.8)", letterSpacing: "0.05em", flexShrink: 0 }}>{k}</span>
+                      <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specLabel, color: "rgba(255,255,255,0.8)", letterSpacing: "0.05em", flexShrink: 0 }}>{t(`racing.stats.${SPEC_KEY[k] ?? k}`, k)}</span>
                       <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.specVal, fontWeight: "bold", color: v.color, textAlign: "right" }}>{val}</span>
                     </div>
                   ))}
@@ -893,7 +928,7 @@ function GarageView() {
 
                 {/* Upgrades */}
                 <div style={{ padding: g.pad }}>
-                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>UPGRADES</div>
+                  <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.sectionTitle, letterSpacing: "0.18em", color: v.color, fontWeight: "bold", marginBottom: g.gap + 4 }}>{t("racing.upgrades")}</div>
                   {part.upgrades.map((upg, i) => {
                     const isLocked = upg.includes("🔒") || upg.includes("COMING SOON");
                     return (
@@ -907,7 +942,7 @@ function GarageView() {
                       }}>
                         <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel, color: isLocked ? "rgba(255,255,255,0.6)" : "#f3f4f6", lineHeight: 1.55 }}>{upg}</div>
                         {!isLocked && (
-                          <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel - 1, color: "rgba(255,255,255,0.3)", marginTop: 5, letterSpacing: "0.1em", fontWeight: "bold", cursor: "not-allowed" }}>🔒 UPGRADE</div>
+                          <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: g.upgLabel - 1, color: "rgba(255,255,255,0.3)", marginTop: 5, letterSpacing: "0.1em", fontWeight: "bold", cursor: "not-allowed" }}>🔒 {t("racing.upgradeBtn")}</div>
                         )}
                       </div>
                     );
@@ -951,7 +986,7 @@ function GarageView() {
             cursor: "pointer", whiteSpace: "nowrap",
             boxShadow: "0 0 16px rgba(34,197,94,0.15)",
           }}
-        >CHOOSE RACER</button>
+        >{t("racing.chooseRacer")}</button>
 
         {/* Customize toggle */}
         <button
@@ -969,7 +1004,7 @@ function GarageView() {
             cursor: "pointer", whiteSpace: "nowrap",
             boxShadow: `0 0 16px ${v.color}22`,
           }}
-        >{customizeOpen ? "✕ CLOSE" : "⚙ CUSTOMIZE"}</button>
+        >{customizeOpen ? t("racing.close") : t("racing.openCustomize")}</button>
       </div>
 
       {/* ── Selector popup ── */}
@@ -987,6 +1022,7 @@ function GarageView() {
    RacingMode — main export
    ══════════════════════════════════════════════════════════════════ */
 export default function RacingMode({ view = "TRACK", onExit }) {
+  const { t } = useTranslation();
   const isTrack = view === "TRACK";
   const [speed, setSpeed] = useState(0.4);
 
@@ -1033,7 +1069,7 @@ export default function RacingMode({ view = "TRACK", onExit }) {
             whiteSpace: "nowrap",
           }}
         >
-          ← EXIT RACING
+          ← {t("racing.exit")} RACING
         </button>
 
       </div>

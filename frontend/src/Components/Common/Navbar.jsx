@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { FiSearch } from "react-icons/fi";
+
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
@@ -55,78 +55,7 @@ export default function Navbar() {
   console.log("your user from redux token :", token);
   console.log("your user from redux isLoggedIn :", isLoggedInUser);
 
-  // ------------------------- SEARCHING ------------------------------
-  const [results, setResults] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);
-  const [query, setQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
-
-
-
-  // Fetch search results when query changes
-  useEffect(() => {
-    if (!query) {
-      setResults([]);
-      return;
-    }
-
-    const fetchResults = async () => {
-      try {
-        const res = await axios.get(
-          // `http://localhost:4700/api/v1/search/search?query=${query}`
-          `${BACKEND_BASE_URL}/api/v1/search/search?query=${query}`
-        );
-        setResults([...res.data.lands, ...res.data.nfas]);
-        setShowDropdown(true);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    const delayDebounce = setTimeout(fetchResults, 300); // debounce
-    return () => clearTimeout(delayDebounce);
-  }, [query]);
-
-  /// get the search item
-  // handle search input
-  const handleSearchChange = async (e) => {
-    const value = e.target.value;
-    setQuery(value);
-
-    if (value.length > 1) {
-      try {
-        const res = await axios.get(
-          // `http://localhost:4700/api/v1/search/search?query=${value}`
-          `${BACKEND_BASE_URL}/api/v1/search/search?query=${value}`
-        );
-        setResults([...res.data.lands, ...res.data.nfas]);
-        setShowDropdown(true);
-        console.log("Search results:", res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      setResults([]);
-    }
-  };
-
-  // get the details of that search
-  const handleGetDetails = async (item) => {
-    try {
-      const res = await axios.get(
-        // `http://localhost:4700/api/v1/search/item/${item._id}`
-        `${BACKEND_BASE_URL}/api/v1/search/item/${item._id}`
-      );
-      console.log("Full item data:", res.data);
-      // You can navigate to a details page or open a modal
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  // --------------------------- search end ---------------------------
-
   // token expired logic
   useEffect(() => {
     if (!token) {
@@ -194,20 +123,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // hide the dropdown if click outside the modal
-  // Hide search suggestions when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   // Close mobile menu when clicking on a link
   const closeMobileMenu = () => {
@@ -231,7 +146,7 @@ export default function Navbar() {
     "/signin",
     "/about",
   ];
-  const showSearchBar = isLoggedIn && !hideOnPaths.includes(location.pathname);
+
 
   const handleLogoutConfirm = () => {
     // Close the modal first
@@ -271,22 +186,6 @@ export default function Navbar() {
             <Link to="/">
               <img src={logo} alt="Logo" className="h-12 w-auto" />
             </Link>
-            {/* Mobile Search */}
-            {isLoggedIn && showSearchBar && (
-              <div className="flex md:hidden flex-1 justify-center px-3">
-                <div className="flex items-center bg-transparent border rounded-[10px] px-3 py-1 w-full max-w-[220px]">
-                  <FiSearch className="text-white text-lg" />
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    value={query}
-                    onChange={handleSearchChange}
-                    onFocus={() => query && setShowDropdown(true)}
-                    className="bg-transparent outline-none text-white pl-2 text-sm w-full"
-                  />
-                </div>
-              </div>
-            )}
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 font-semibold text-white relative ml-4">
@@ -446,38 +345,19 @@ export default function Navbar() {
             {isLoggedIn ? (
               <div className="hidden md:flex items-center gap-3">
                 <LanguageSwitcher />
-                {/* Search */}
-                <div className="relative flex items-center gap-2 h-10 px-3 rounded-xl min-w-[200px]"
-                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}>
-                  <FiSearch className="text-white/50 w-4 h-4 flex-shrink-0" />
-                  <input
-                    type="text"
-                    placeholder={t("nav.search")}
-                    className="bg-transparent outline-none text-white placeholder-white/40 text-sm w-full"
-                    value={query}
-                    onChange={handleSearchChange}
-                    onFocus={() => query && setShowDropdown(true)}
-                  />
-                  {showDropdown && results.length > 0 && (
-                    <div ref={dropdownRef}
-                      className="absolute top-full left-0 w-full rounded-xl shadow-2xl mt-2 z-50 overflow-hidden"
-                      style={{ background: "rgba(0,15,60,0.97)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(16px)" }}>
-                      {results.map((item) => (
-                        <div key={item._id} onClick={() => handleGetDetails(item)}
-                          className="px-4 py-2.5 text-white/80 text-sm cursor-pointer transition-colors hover:bg-white/8 hover:text-white">
-                          {item.title || item.name}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                {/* Waitlist */}
+                <Link to="/waitlist">
+                  <button className="px-5 py-2.5 bg-transparent hover:bg-white/10 text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/30">
+                    {t("nav.waitlist")}
+                  </button>
+                </Link>
 
                 {/* HB Balance */}
                 {hbBalance !== null && (
                   <Link to="/dashboard/withdraw"
                     className="flex items-center gap-1.5 px-3 h-10 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
                     style={{ background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.35)" }}
-                    title="HyperBucks — click to withdraw">
+                    data-tooltip="HyperBucks — click to withdraw">
                     <span style={{ color: "#facc15" }}>⚡</span>
                     <span>{Number(hbBalance).toLocaleString()} HB</span>
                   </Link>
@@ -762,27 +642,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {/* search field on the small screen  */}
-        {showDropdown && results.length > 0 && (
-          <div
-            ref={dropdownRef}
-            className="absolute top-[3rem] left-8 right-0 w-[13rem] mx-auto item-center sm:hidden bg-white text-black rounded-md shadow-lg mt-1 z-50 max-h-60 overflow-auto"
-          >
-            {results.map((item) => (
-              <div
-                key={item._id}
-                onClick={() => {
-                  handleGetDetails(item);
-                  setShowDropdown(false);
-                }}
-                className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
-              >
-                {item.title}{" "}
-                {/* <span className="text-xs text-gray-500">({item.type})</span> */}
-              </div>
-            ))}
-          </div>
-        )}
+
       </div>
 
       {/* Confirmation Modal */}

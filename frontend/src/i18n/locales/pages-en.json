@@ -102,7 +102,17 @@
     "newsletter":     "Newsletter Subscribe",
     "newsletterDesc": "In order to start receiving our news, all you have to do is enter your email address. Everything else will be taken care of by us. We will send you emails containing information about game. We don't spam.",
     "emailPlaceholder":"Your email address",
-    "subscribe":      "Subscribe"
+    "subscribe":      "Subscribe",
+    "universeHeading":"One Universe.",
+    "threeWorlds":    "Three Worlds.",
+    "noSpam":         "No spam. Unsubscribe anytime.",
+    "subscribedTitle":"You're subscribed!",
+    "subscribedDesc": "We'll keep you updated on HyperTek news.",
+    "worlds": {
+      "racing":   { "desc": "Race across alien tracks, upgrade vehicles, and dominate the leaderboards." },
+      "quest":    { "desc": "Complete epic quests, explore new worlds, and build your legacy." },
+      "overlord": { "desc": "Command armies, conquer territories, and rule the battlefield." }
+    }
   },
 
   "waitlistForm": {

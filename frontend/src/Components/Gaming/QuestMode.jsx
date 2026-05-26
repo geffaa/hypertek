@@ -9,6 +9,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import LazyImage from "./LazyImage";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 
@@ -64,6 +65,7 @@ const CSS = `
    2D JOYSTICK — drag in any direction
    ══════════════════════════════════════════════════════════════════ */
 function Joystick2D({ accentColor = "#38bdf8" }) {
+  const { t } = useTranslation();
   const [pos, setPos]           = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const padRef = useRef(null);
@@ -71,8 +73,8 @@ function Joystick2D({ accentColor = "#38bdf8" }) {
 
   useEffect(() => {
     if (!dragging && (pos.x !== 0 || pos.y !== 0)) {
-      const t = setTimeout(() => setPos({ x: 0, y: 0 }), 220);
-      return () => clearTimeout(t);
+      const timer = setTimeout(() => setPos({ x: 0, y: 0 }), 220);
+      return () => clearTimeout(timer);
     }
   }, [dragging, pos]);
 
@@ -163,7 +165,7 @@ function Joystick2D({ accentColor = "#38bdf8" }) {
         <span>◀</span>
         <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:2 }}>
           <span style={{ fontSize:9 }}>▲</span>
-          <span style={{ fontSize:6, letterSpacing:"0.15em", fontWeight:"bold" }}>MOVE</span>
+          <span style={{ fontSize:6, letterSpacing:"0.15em", fontWeight:"bold" }}>{t("quest.move")}</span>
           <span style={{ fontSize:9 }}>▼</span>
         </div>
         <span>▶</span>
@@ -250,6 +252,7 @@ const ARC_4 = [
 ];
 
 function ActionButtons({ includeKneel = false }) {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const [active, setActive] = useState(null);
   const [vpH, setVpH] = useState(() => window.innerHeight);
@@ -324,7 +327,7 @@ function ActionButtons({ includeKneel = false }) {
             background: "linear-gradient(to top, rgba(0,0,0,0.55) 100%, transparent)",
             userSelect: "none",
             pointerEvents: "none",
-          }}>{a.id}</span>
+          }}>{t(`quest.actions.${a.id.toLowerCase()}`, a.id)}</span>
         </button>
         );
       })}
@@ -414,8 +417,40 @@ const PLANET_IMG = {
   nav:   "/planet/7.png",   // TQ-173-HN
 };
 
+/* ── Location type → i18n key map ────────────────────────────── */
+const LOC_TYPE_KEY = {
+  "Supply Depot":        "supplyDepot",
+  "Research Station":    "researchStation",
+  "Agriculture Hub":     "agricultureHub",
+  "Trading Post":        "tradingPost",
+  "Refuel Station":      "refuelStation",
+  "Shipyard":            "shipyard",
+  "Industrial Complex":  "industrialComplex",
+  "Military Base":       "militaryBase",
+  "Command Center":      "commandCenter",
+  "Logistics Hub":       "logisticsHub",
+  "Science Outpost":     "scienceOutpost",
+  "Communication Array": "communicationArray",
+  "Deep Space Relay":    "deepSpaceRelay",
+  "Echo Station":        "echoStation",
+  "Supply Station":      "supplyStation",
+  "Navigation Beacon":   "navigationBeacon",
+  "Pioneer Outpost":     "pioneerOutpost",
+  "Signal Relay":        "signalRelay",
+  "Orbital Lab":         "orbitalLab",
+  "Colony Outpost":      "colonyOutpost",
+  "Trade Station":       "tradeStation",
+  "Biomedical Research": "biomedicalResearch",
+  "Exploration Outpost": "explorationOutpost",
+  "Assembly Plant":      "assemblyPlant",
+  "Technology Hub":      "technologyHub",
+  "Gas Extraction":      "gasExtraction",
+  "Ice Harvesting":      "iceHarvesting",
+};
+
 /* ── Planet detail panel ──────────────────────────────────── */
 function PlanetDetail({ loc, onClose }) {
+  const { t } = useTranslation();
   const ac = ATM_COLOR[loc.atm]    || "#94a3b8";
   const hc = HAZ_COLOR[loc.hazard] || "#94a3b8";
   const imgSrc = PLANET_IMG[loc.id];
@@ -432,15 +467,15 @@ function PlanetDetail({ loc, onClose }) {
   };
 
   const l = parseFloat(loc.left);
-  const t = parseFloat(loc.top);
+  const topPct = parseFloat(loc.top);
   const toLeft = l > 52;
   const hPos = toLeft
     ? { right: `${Math.max(1, 100 - l + 1)}%` }
     : { left:  `${Math.min(48, l + 2)}%` };
-  const toAbove = t > 55;
+  const toAbove = topPct > 55;
   const vPos = toAbove
-    ? { bottom: `${Math.max(2, 100 - t + 1)}%` }
-    : { top:    `${Math.min(46, t + 2)}%` };
+    ? { bottom: `${Math.max(2, 100 - topPct + 1)}%` }
+    : { top:    `${Math.min(46, topPct + 2)}%` };
 
   return (
     <div style={{
@@ -469,7 +504,7 @@ function PlanetDetail({ loc, onClose }) {
       <div style={{ background:"rgba(56,189,248,0.07)", borderBottom:"1px solid rgba(56,189,248,0.16)", padding:"7px 10px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
         <div>
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, fontWeight:"bold", color:"#38bdf8", letterSpacing:"0.12em", textShadow:"0 0 12px rgba(56,189,248,0.7)" }}>{loc.name}</div>
-          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"rgba(255,255,255,0.4)", letterSpacing:"0.18em", marginTop:2 }}>{loc.type} · {loc.coords}</div>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7, color:"rgba(255,255,255,0.4)", letterSpacing:"0.18em", marginTop:2 }}>{t(`quest.locTypes.${LOC_TYPE_KEY[loc.type] ?? "unknown"}`, loc.type)} · {loc.coords}</div>
         </div>
         <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.4)", fontSize:16, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
       </div>
@@ -481,25 +516,25 @@ function PlanetDetail({ loc, onClose }) {
         <div style={{ flex:1, padding:"8px 10px 10px", display:"flex", flexDirection:"column", gap:6, minWidth:0 }}>
           <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>ATMOSPHERE</div>
-              <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{loc.atm}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>{t("quest.planet.atmosphere")}</div>
+              <div style={{ display:"inline-block", background:`${ac}18`, border:`1px solid ${ac}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:ac, letterSpacing:"0.1em" }}>{t(`quest.atm.${loc.atm.toLowerCase()}`, loc.atm)}</div>
             </div>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>HAZARD LVL</div>
-              <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{loc.hazard}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(255,255,255,0.32)", letterSpacing:"0.18em", marginBottom:2 }}>{t("quest.planet.hazardLvl")}</div>
+              <div style={{ display:"inline-block", background:`${hc}18`, border:`1px solid ${hc}55`, borderRadius:3, padding:"2px 6px", fontFamily:"Orbitron,sans-serif", fontSize:7, fontWeight:"bold", color:hc, letterSpacing:"0.1em" }}>{t(`quest.hazard.${loc.hazard.toLowerCase()}`, loc.hazard)}</div>
             </div>
           </div>
           <div style={{ height:1, background:"rgba(56,189,248,0.1)" }} />
           <div style={{ flex:1 }}>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:3 }}>BRIEFING</div>
-            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5, color:"rgba(255,255,255,0.68)", lineHeight:1.55, letterSpacing:"0.03em" }}>{loc.desc}</div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(56,189,248,0.4)", letterSpacing:"0.18em", marginBottom:3 }}>{t("quest.planet.briefing")}</div>
+            <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:7.5, color:"rgba(255,255,255,0.68)", lineHeight:1.55, letterSpacing:"0.03em" }}>{t(`quest.locDescs.${loc.id}`, loc.desc)}</div>
           </div>
           {/* Quest locked — left column only */}
           <div style={{ background:"rgba(248,113,113,0.05)", border:"1px solid rgba(248,113,113,0.2)", borderRadius:5, padding:"5px 7px", display:"flex", alignItems:"center", gap:6, marginTop:1 }}>
             <div style={{ fontSize:11, flexShrink:0 }}>🔒</div>
             <div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold", color:"#f87171", letterSpacing:"0.1em", marginBottom:1 }}>QUEST — CONTENT LOCKED</div>
-              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(248,113,113,0.55)", letterSpacing:"0.04em", lineHeight:1.4 }}>Available in the complete game release.</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6.5, fontWeight:"bold", color:"#f87171", letterSpacing:"0.1em", marginBottom:1 }}>{t("quest.planet.questLocked")}</div>
+              <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"rgba(248,113,113,0.55)", letterSpacing:"0.04em", lineHeight:1.4 }}>{t("quest.planet.questLockedDesc")}</div>
             </div>
           </div>
         </div>
@@ -521,20 +556,20 @@ function PlanetDetail({ loc, onClose }) {
             {imgSrc
               ? <img src={imgSrc} alt={loc.type} style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
               : <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center" }}>
-                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>NO IMAGE</div>
+                  <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:6, color:"rgba(255,255,255,0.18)", letterSpacing:"0.12em" }}>{t("quest.planet.noImage")}</div>
                 </div>
             }
-            <div style={{ position:"absolute", bottom:3, left:5, fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"#fff", letterSpacing:"0.12em", pointerEvents:"none" }}>IMAGE</div>
+            <div style={{ position:"absolute", bottom:3, left:5, fontFamily:"Orbitron,sans-serif", fontSize:5.5, color:"#fff", letterSpacing:"0.12em", pointerEvents:"none" }}>{t("quest.planet.image")}</div>
           </div>
 
           {/* Notes box */}
           <div style={{ height:88, flexShrink:0, display:"flex", flexDirection:"column", background:"rgba(56,189,248,0.02)" }}>
-            <div style={{ padding:"5px 7px 2px", fontFamily:"Orbitron,sans-serif", fontSize:6, color:"#38bdf8", letterSpacing:"0.15em", fontWeight:"bold", flexShrink:0 }}>NOTES</div>
+            <div style={{ padding:"5px 7px 2px", fontFamily:"Orbitron,sans-serif", fontSize:6, color:"#38bdf8", letterSpacing:"0.15em", fontWeight:"bold", flexShrink:0 }}>{t("quest.planet.notes")}</div>
             <textarea
               className="quest-notes-ta"
               value={note}
               onChange={handleNote}
-              placeholder="Type your notes..."
+              placeholder={t("quest.planet.notesPlaceholder")}
               style={{
                 flex:1,
                 width:"100%",
@@ -557,6 +592,7 @@ function PlanetDetail({ loc, onClose }) {
 
 /* ── Video overlay ────────────────────────────────────────── */
 function VideoOverlay({ onClose }) {
+  const { t } = useTranslation();
   return createPortal(
     <div
       onClick={onClose}
@@ -592,7 +628,7 @@ function VideoOverlay({ onClose }) {
             letterSpacing: "0.18em", color: "#c4b5fd",
             textShadow: "0 0 12px rgba(167,139,250,0.7)",
             whiteSpace: "nowrap",
-          }}>▶ GALACTIC ORBITAL MAPPING VIDEO</div>
+          }}>▶ {t("quest.video.title")}</div>
 
           <button
             onClick={onClose}
@@ -610,7 +646,7 @@ function VideoOverlay({ onClose }) {
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "rgba(99,102,241,0.3)"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,15,35,0.9)"; }}
-          >✕ CLOSE</button>
+          >✕ {t("quest.video.close")}</button>
         </div>
 
         {/* Video container */}
@@ -640,16 +676,17 @@ function VideoOverlay({ onClose }) {
 
 /* ── Unknown planet dropdown ──────────────────────────────── */
 function UnknownDropdown({ loc, onClose }) {
+  const { t } = useTranslation();
   const l = parseFloat(loc.left);
-  const t = parseFloat(loc.top);
+  const topPct = parseFloat(loc.top);
   const toLeft = l > 60;
   const hPos = toLeft
     ? { right: `${Math.max(1, 100 - l + 2)}%` }
     : { left:  `${Math.min(55, l + 2)}%` };
-  const toAbove = t > 55;
+  const toAbove = topPct > 55;
   const vPos = toAbove
-    ? { bottom: `${Math.max(2, 100 - t + 2)}%` }
-    : { top:    `${Math.min(60, t + 2)}%` };
+    ? { bottom: `${Math.max(2, 100 - topPct + 2)}%` }
+    : { top:    `${Math.min(60, topPct + 2)}%` };
 
   return (
     <div style={{
@@ -673,17 +710,17 @@ function UnknownDropdown({ loc, onClose }) {
         display: "flex", justifyContent: "space-between", alignItems: "center",
       }}>
         <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, fontWeight:"bold", color:"rgba(148,163,184,0.7)", letterSpacing:"0.14em" }}>
-          ⚠ UNCHARTED PLANET
+          ⚠ {t("quest.unknown.title")}
         </div>
         <button onClick={onClose} style={{ background:"none", border:"none", color:"rgba(255,255,255,0.35)", fontSize:16, cursor:"pointer", lineHeight:1, padding:"0 2px" }}>×</button>
       </div>
       {/* Body */}
       <div style={{ padding:"11px 13px 13px", display:"flex", flexDirection:"column", gap:9 }}>
         <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, color:"rgba(255,255,255,0.6)", lineHeight:1.7, letterSpacing:"0.03em" }}>
-          Planet details are unavailable as player has not visited this planet yet.
+          {t("quest.unknown.line1")}
         </div>
         <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:10, color:"rgba(255,255,255,0.6)", lineHeight:1.7, letterSpacing:"0.03em" }}>
-          Details and atmosphere unknown.
+          {t("quest.unknown.line2")}
         </div>
         <div style={{
           borderTop: "1px solid rgba(148,163,184,0.15)",
@@ -691,7 +728,7 @@ function UnknownDropdown({ loc, onClose }) {
           fontFamily:"Orbitron,sans-serif", fontSize:9.5,
           color:"rgba(250,204,21,0.75)", lineHeight:1.7, letterSpacing:"0.03em",
         }}>
-          Naming rights of the planet is given to the first to visit it and explore the planet's surface.
+          {t("quest.unknown.naming")}
         </div>
       </div>
     </div>
@@ -700,6 +737,7 @@ function UnknownDropdown({ loc, onClose }) {
 
 /* ── Star Map overlay ─────────────────────────────────────── */
 function StarMapOverlay({ onClose }) {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState(null);
   const [pinned,  setPinned]  = useState(null);
   const closeTimer = useRef(null);
@@ -877,7 +915,7 @@ function StarMapOverlay({ onClose }) {
           zIndex:90,
         }}>
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize:"clamp(6px,0.7vw,9px)", fontWeight:"bold", letterSpacing:"0.22em", color:"rgba(56,189,248,0.7)", whiteSpace:"nowrap", pointerEvents:"none" }}>
-            ◈ STAR MAP — IN-GAME CONTENT
+            ◈ {t("quest.starMap.title")}
           </div>
           <button
             onClick={onClose}
@@ -893,7 +931,7 @@ function StarMapOverlay({ onClose }) {
               letterSpacing:"0.12em", color:"#7dd3fc",
               cursor:"pointer", whiteSpace:"nowrap",
             }}
-          >✕ BACK</button>
+          >✕ {t("quest.starMap.back")}</button>
         </div>
       </div>
     </div>,
@@ -905,6 +943,7 @@ function StarMapOverlay({ onClose }) {
    SPACE VIEW
    ══════════════════════════════════════════════════════════════════ */
 function SpaceView() {
+  const { t } = useTranslation();
   const [mapOpen,      setMapOpen]      = useState(false);
   const [videoOpen,    setVideoOpen]    = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -1016,7 +1055,7 @@ function SpaceView() {
           onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.18)"; e.currentTarget.style.boxShadow = "0 0 28px rgba(56,189,248,0.4)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,12,32,0.88)";    e.currentTarget.style.boxShadow = "0 0 20px rgba(56,189,248,0.2)"; }}
         >
-          ◈ IN-GAME CONTENT
+          ◈ {t("quest.space.inGameContent")}
           <span style={{ fontSize: "0.7em", opacity: 0.7 }}>{dropdownOpen ? "▲" : "▼"}</span>
         </button>
 
@@ -1032,8 +1071,8 @@ function SpaceView() {
             overflow: "hidden", minWidth: 220,
           }}>
             {[
-              { label: "Galactic Orbital Mapping Video", icon: "▶", action: () => { setVideoOpen(true); setDropdownOpen(false); } },
-              { label: "Interactive Map",                icon: "◈", action: () => { setMapOpen(true);   setDropdownOpen(false); } },
+              { label: t("quest.space.galaxyVideo"), icon: "▶", action: () => { setVideoOpen(true); setDropdownOpen(false); } },
+              { label: t("quest.space.interactiveMap"), icon: "◈", action: () => { setMapOpen(true);   setDropdownOpen(false); } },
             ].map(item => (
               <button
                 key={item.label}
@@ -1070,6 +1109,7 @@ function SpaceView() {
    GROUND VIEW
    ══════════════════════════════════════════════════════════════════ */
 function GroundView() {
+  const { t } = useTranslation();
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", background: "#080c06" }}>
 
@@ -1093,7 +1133,7 @@ function GroundView() {
         color: "rgba(56,189,248,0.35)",
         textShadow: "0 0 16px rgba(56,189,248,0.25)",
         whiteSpace: "nowrap", userSelect: "none",
-      }}>GROUND · MISSION</div>
+      }}>{t("quest.ground.mission")}</div>
 
       {/* 2D Joystick — left */}
       <div style={{ position:"absolute", left:"4%", bottom:"16%", zIndex:35 }}>
@@ -1110,6 +1150,7 @@ function GroundView() {
    QuestMode — main export
    ══════════════════════════════════════════════════════════════════ */
 export default function QuestMode({ view = "SPACE", onExit }) {
+  const { t } = useTranslation();
   const isSpace = view === "SPACE";
 
   return (
@@ -1147,7 +1188,7 @@ export default function QuestMode({ view = "SPACE", onExit }) {
             whiteSpace: "nowrap",
           }}
         >
-          ← EXIT QUEST
+          ← {t("quest.exit")} QUEST
         </button>
 
       </div>

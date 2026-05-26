@@ -1,6 +1,38 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import useMobileLandscape from "../../hooks/useMobileLandscape";
 import { useNavigate } from "react-router-dom";
+import i18n from "../../i18n/index.js";
+
+const HUD_LANGS = [
+  { code: "en",    flag: "🇺🇸", label: "English",       engLabel: "English",            supported: true  },
+  { code: "fr",    flag: "🇫🇷", label: "Français",      engLabel: "French",             supported: false },
+  { code: "it",    flag: "🇮🇹", label: "Italiano",      engLabel: "Italian",            supported: false },
+  { code: "de",    flag: "🇩🇪", label: "Deutsch",       engLabel: "German",             supported: false },
+  { code: "es",    flag: "🇪🇸", label: "Español",       engLabel: "Spanish",            supported: false },
+  { code: "ru",    flag: "🇷🇺", label: "Русский",       engLabel: "Russian",            supported: false },
+  { code: "ko",    flag: "🇰🇷", label: "한국어",         engLabel: "Korean",             supported: true  },
+  { code: "ja",    flag: "🇯🇵", label: "日本語",         engLabel: "Japanese",           supported: true  },
+  { code: "pt",    flag: "🇧🇷", label: "Português",     engLabel: "Portuguese",         supported: true  },
+  { code: "ar",    flag: "🇸🇦", label: "العربية",       engLabel: "Arabic",             supported: false },
+  { code: "ms",    flag: "🇲🇾", label: "Melayu",        engLabel: "Malay",              supported: false },
+  { code: "no",    flag: "🇳🇴", label: "Norsk",         engLabel: "Norwegian",          supported: false },
+  { code: "nl",    flag: "🇳🇱", label: "Nederlands",    engLabel: "Dutch",              supported: false },
+  { code: "th",    flag: "🇹🇭", label: "ไทย",           engLabel: "Thai",               supported: false },
+  { code: "tr",    flag: "🇹🇷", label: "Türkçe",        engLabel: "Turkish",            supported: false },
+  { code: "vi",    flag: "🇻🇳", label: "Việt",          engLabel: "Vietnamese",         supported: false },
+  { code: "id",    flag: "🇮🇩", label: "Indonesia",     engLabel: "Indonesian",         supported: false },
+  { code: "zh",    flag: "🇨🇳", label: "简体中文",       engLabel: "Simplified Chinese", supported: true  },
+  { code: "sv",    flag: "🇸🇪", label: "Svenska",       engLabel: "Swedish",            supported: false },
+  { code: "he",    flag: "🇮🇱", label: "עברית",         engLabel: "Hebrew",             supported: false },
+  { code: "da",    flag: "🇩🇰", label: "Dansk",         engLabel: "Danish",             supported: false },
+  { code: "ro",    flag: "🇷🇴", label: "Română",        engLabel: "Romanian",           supported: false },
+  { code: "fil",   flag: "🇵🇭", label: "Filipino",      engLabel: "Filipino",           supported: false },
+  { code: "zh-TW", flag: "🇹🇼", label: "繁體中文",       engLabel: "Trad. Chinese",      supported: false },
+  { code: "hi",    flag: "🇮🇳", label: "हिंदी",          engLabel: "Hindi",              supported: false },
+  { code: "pl",    flag: "🇵🇱", label: "Polski",        engLabel: "Polish",             supported: false },
+  { code: "el",    flag: "🇬🇷", label: "Ελληνικά",      engLabel: "Greek",              supported: false },
+];
 import {
   GiScrollQuill, GiFlagObjective, GiMedal, GiBodySwapping,
   GiVortex, GiPlasmaBolt, GiGalaxy, GiBookAura,
@@ -175,6 +207,7 @@ const BTN_BASE = {
 
 /* ── Shared panel shell ──────────────────────────────────────── */
 function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile = false, showSubtitle = false }) {
+  const { t } = useTranslation();
   return (
     <div className="hud-side-panel" style={{
       position: "absolute",
@@ -208,7 +241,7 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
             <span style={{
               fontFamily: "Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
               letterSpacing: "0.12em", color: `${accentColor}88`,
-            }}>AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH</span>
+            }}>{t("hud.availableAfterLaunch", "AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH")}</span>
           )}
         </div>
         <button onClick={onClose} style={{
@@ -224,6 +257,7 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
 
 /* ── Events panel ────────────────────────────────────────────── */
 function EventsPanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const [tab,      setTab]      = useState("Limited");
   const [detail,   setDetail]   = useState(null);
   const [selected, setSelected] = useState(null); // highlighted row for Activities/Competition
@@ -239,21 +273,21 @@ function EventsPanel({ onClose, isMobile }) {
   };
 
   return (
-    <SidePanel title="EVENT CENTER" onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.eventCenter", "EVENT CENTER")} onClose={onClose} isMobile={isMobile} showSubtitle>
 
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)" }}>
-        {["Limited","Activities","Competition"].map(t => (
-          <button key={t} className="hud-panel-tab"
-            onClick={() => { setTab(t); setDetail(null); setSelected(null); }}
+        {["Limited","Activities","Competition"].map(tabKey => (
+          <button key={tabKey} className="hud-panel-tab"
+            onClick={() => { setTab(tabKey); setDetail(null); setSelected(null); }}
             style={{
               flex:1, padding: isMobile ? "5px 2px" : "7px 4px", background:"none", border:"none",
-              borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
+              borderBottom: tab === tabKey ? "2px solid #00E5FF" : "2px solid transparent",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11, fontWeight:"bold",
               letterSpacing:"0.08em",
-              color: tab === t ? "#00E5FF" : "#cceeff",
+              color: tab === tabKey ? "#00E5FF" : "#cceeff",
               whiteSpace:"nowrap",
-            }}>{t}</button>
+            }}>{t(`hud.eventTabs.${tabKey.toLowerCase()}`, tabKey)}</button>
         ))}
       </div>
 
@@ -336,27 +370,28 @@ function EventsPanel({ onClose, isMobile }) {
 
 /* ── Items panel ─────────────────────────────────────────────── */
 function ItemsPanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const [tab,          setTab]          = useState("Inventory");
   const [specCategory, setSpecCategory] = useState(null);   // selected specialist category
   const [profile,      setProfile]      = useState(null);   // specialist being viewed
   const items = ITEM_DATA[tab] || [];
 
   return (
-    <SidePanel title="ITEMS" accentColor="#38bdf8" onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.sidebar.items", "ITEMS")} accentColor="#38bdf8" onClose={onClose} isMobile={isMobile} showSubtitle>
 
       {/* ── Tabs ── */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(56,189,248,0.1)", overflowX:"auto" }}>
-        {ITEM_TABS.map(t => (
-          <button key={t} className="hud-panel-tab"
-            onClick={() => { setTab(t); setSpecCategory(null); setProfile(null); }}
+        {ITEM_TABS.map(tabKey => (
+          <button key={tabKey} className="hud-panel-tab"
+            onClick={() => { setTab(tabKey); setSpecCategory(null); setProfile(null); }}
             style={{
               flex:1, padding: isMobile ? "5px 3px" : "7px 6px", background:"none", border:"none",
-              borderBottom: tab === t ? "2px solid #38bdf8" : "2px solid transparent",
+              borderBottom: tab === tabKey ? "2px solid #38bdf8" : "2px solid transparent",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
               letterSpacing:"0.06em",
-              color: tab === t ? "#38bdf8" : "rgba(157,216,240,0.7)",
+              color: tab === tabKey ? "#38bdf8" : "rgba(157,216,240,0.7)",
               whiteSpace:"nowrap", minWidth:0,
-            }}>{t}</button>
+            }}>{t(`hud.itemTabs.${tabKey.toLowerCase()}`, tabKey)}</button>
         ))}
       </div>
 
@@ -567,11 +602,25 @@ function ItemsPanel({ onClose, isMobile }) {
 
 /* ── Settings panel ─────────────────────────────────────────── */
 function SettingsPanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [sound, setSound]   = useState(true);
   const [music, setMusic]   = useState(true);
   const [name,  setName]    = useState(localStorage.getItem("hypertek_display_name") || "");
   const [saved, setSaved]   = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language || "en");
+  const [autoTranslate, setAutoTranslate] = useState(true);
+  const [chatLangs, setChatLangs] = useState(() =>
+    Object.fromEntries(HUD_LANGS.map(l => [l.code, true]))
+  );
+
+  const handleLangSelect = (code) => {
+    i18n.changeLanguage(code);
+    setCurrentLang(code);
+  };
+
+  const toggleChatLang = (code, val) =>
+    setChatLangs(prev => ({ ...prev, [code]: val }));
 
   const handleSaveName = () => {
     if (!name.trim()) return;
@@ -606,24 +655,154 @@ function SettingsPanel({ onClose, isMobile }) {
   );
 
   return (
-    <SidePanel title="SETTINGS" accentColor="#a78bfa" onClose={onClose} isMobile={isMobile}>
+    <SidePanel title={t("hud.sidebar.settings", "SETTINGS")} accentColor="#a78bfa" onClose={onClose} isMobile={isMobile}>
       <div style={{ overflowY:"auto", flex:1 }}>
 
         {/* Sound & Music */}
         <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", fontFamily:"Orbitron,sans-serif",
           fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
-          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>AUDIO</div>
-        <Toggle label="Sound Effects" value={sound} onChange={setSound} />
-        <Toggle label="Music"         value={music} onChange={setMusic} />
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.audio", "AUDIO")}</div>
+        <Toggle label={t("hud.settings.soundEffects", "Sound Effects")} value={sound} onChange={setSound} />
+        <Toggle label={t("hud.settings.music", "Music")}               value={music} onChange={setMusic} />
+
+        {/* Language */}
+        <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
+          fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.language", "LANGUAGE")}</div>
+
+        {/* Scrollable 2-column checkbox grid */}
+        <div style={{
+          padding: isMobile ? "6px 10px" : "8px 14px",
+          maxHeight: isMobile ? 150 : 210,
+          overflowY: "auto",
+        }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: isMobile ? 3 : 4,
+          }}>
+            {HUD_LANGS.map(lang => {
+              const isActive = currentLang === lang.code || currentLang.startsWith(lang.code + "-");
+              return (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLangSelect(lang.code)}
+                  style={{
+                    display:"flex", alignItems:"center", gap: isMobile ? 5 : 7,
+                    padding: isMobile ? "4px 6px" : "5px 8px",
+                    background: isActive ? "rgba(167,139,250,0.12)" : "transparent",
+                    border: "none", borderRadius:3, cursor:"pointer", textAlign:"left",
+                    opacity: lang.supported ? 1 : 0.7,
+                  }}
+                >
+                  {/* Checkbox */}
+                  <div style={{
+                    width: isMobile ? 12 : 14, height: isMobile ? 12 : 14,
+                    borderRadius: 2, flexShrink: 0,
+                    border: `1.5px solid ${isActive ? "#a78bfa" : "rgba(255,255,255,0.22)"}`,
+                    background: isActive ? "#a78bfa" : "transparent",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                    transition:"background 0.15s, border-color 0.15s",
+                  }}>
+                    {isActive && <span style={{ color:"#fff", fontSize: isMobile ? 7 : 9, lineHeight:1, fontWeight:"bold" }}>✓</span>}
+                  </div>
+                  <span style={{
+                    fontFamily:"Orbitron,sans-serif",
+                    fontSize: isMobile ? 7 : 9,
+                    color: isActive ? "#c4b5fd" : "rgba(199,233,247,0.7)",
+                    letterSpacing:"0.04em",
+                    fontWeight: isActive ? "bold" : "normal",
+                    overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
+                  }}>
+                    {lang.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Chat Translation */}
+        <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
+          fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.chatTranslation", "CHAT TRANSLATION")}</div>
+
+        <div style={{ padding: isMobile ? "5px 10px 4px" : "7px 14px 5px" }}>
+          <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
+            color:"rgba(199,233,247,0.5)", letterSpacing:"0.04em", lineHeight:1.5, marginBottom:4 }}>
+            {t("hud.settings.chatTranslationDesc", "You can enable or disable Chat Translation.")}
+          </div>
+          <Toggle
+            label={t("hud.settings.autoTranslation", "Auto Translation")}
+            value={autoTranslate}
+            onChange={setAutoTranslate}
+          />
+        </div>
+
+        {/* Per-language chat translation toggles */}
+        {autoTranslate && (
+          <div style={{
+            padding: isMobile ? "4px 10px 8px" : "4px 14px 8px",
+            maxHeight: isMobile ? 130 : 180,
+            overflowY: "auto",
+          }}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: isMobile ? 2 : 3,
+            }}>
+              {HUD_LANGS.map(lang => {
+                const on = chatLangs[lang.code] ?? true;
+                return (
+                  <div key={lang.code} style={{
+                    display:"flex", flexDirection:"column", alignItems:"center",
+                    gap: isMobile ? 3 : 4,
+                    padding: isMobile ? "4px 2px" : "5px 3px",
+                    borderBottom: `1px solid rgba(0,229,255,0.05)`,
+                  }}>
+                    <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
+                      color:"rgba(199,233,247,0.7)", letterSpacing:"0.04em",
+                      textAlign:"center", lineHeight:1.3 }}>
+                      {lang.engLabel}
+                    </span>
+                    {/* Mini toggle */}
+                    <div
+                      onClick={() => toggleChatLang(lang.code, !on)}
+                      style={{
+                        width: isMobile ? 28 : 34, height: isMobile ? 15 : 18,
+                        borderRadius: 9, cursor:"pointer",
+                        background: on ? "rgba(0,212,255,0.28)" : "rgba(255,255,255,0.07)",
+                        border: `1.5px solid ${on ? "#00D4FF" : "rgba(255,255,255,0.18)"}`,
+                        position:"relative", transition:"background 0.2s, border-color 0.2s",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div style={{
+                        position:"absolute",
+                        top: isMobile ? 1.5 : 2,
+                        left: on ? (isMobile ? 13 : 16) : 2,
+                        width: isMobile ? 10 : 12, height: isMobile ? 10 : 12,
+                        borderRadius:"50%",
+                        background: on ? "#00D4FF" : "rgba(255,255,255,0.3)",
+                        boxShadow: on ? "0 0 6px rgba(0,212,255,0.8)" : "none",
+                        transition:"left 0.2s, background 0.2s",
+                      }}/>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Profile */}
         <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
           fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
-          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>PROFILE</div>
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.profile", "PROFILE")}</div>
 
         <div style={{ padding: isMobile ? "7px 10px" : "10px 14px", borderBottom:"1px solid rgba(0,229,255,0.07)" }}>
           <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, color:"#c7e9f7",
-            letterSpacing:"0.1em", marginBottom:8 }}>CHANGE NAME</div>
+            letterSpacing:"0.1em", marginBottom:8 }}>{t("hud.changeName", "CHANGE NAME")}</div>
           <div style={{ display:"flex", gap:6 }}>
             <input
               value={name}
@@ -646,7 +825,7 @@ function SettingsPanel({ onClose, isMobile }) {
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
               color: saved ? "#4ade80" : "#c4b5fd", letterSpacing:"0.08em",
               transition:"all 0.2s",
-            }}>{saved ? "✓ SAVED" : "SAVE"}</button>
+            }}>{saved ? t("hud.saved", "✓ SAVED") : t("hud.save", "SAVE")}</button>
           </div>
         </div>
 
@@ -660,14 +839,14 @@ function SettingsPanel({ onClose, isMobile }) {
           onMouseLeave={e => e.currentTarget.style.background="transparent"}
         >
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
-            color:"#c7e9f7", letterSpacing:"0.1em" }}>PROFILE DETAILS</span>
+            color:"#c7e9f7", letterSpacing:"0.1em" }}>{t("hud.profileDetails", "PROFILE DETAILS")}</span>
           <span style={{ color:"rgba(167,139,250,0.6)", fontSize: isMobile ? 8 : 10 }}>›</span>
         </div>
 
         {/* Support */}
         <div style={{ padding: isMobile ? "6px 10px 3px" : "8px 14px 4px", marginTop:4, fontFamily:"Orbitron,sans-serif",
           fontSize: isMobile ? 7 : 9, letterSpacing:"0.15em", color:"rgba(167,139,250,0.85)",
-          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>SUPPORT</div>
+          borderBottom:"1px solid rgba(167,139,250,0.2)" }}>{t("hud.settings.support", "SUPPORT")}</div>
 
         <div style={{
           padding: isMobile ? "7px 10px" : "10px 14px", cursor:"not-allowed",
@@ -676,7 +855,7 @@ function SettingsPanel({ onClose, isMobile }) {
           opacity: 0.5,
         }}>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 11,
-            color:"#c7e9f7", letterSpacing:"0.1em" }}>CONTACT SUPPORT</span>
+            color:"#c7e9f7", letterSpacing:"0.1em" }}>{t("hud.contactSupport", "CONTACT SUPPORT")}</span>
           <span style={{ fontSize: isMobile ? 9 : 11 }}>🔒</span>
         </div>
 
@@ -723,25 +902,26 @@ const ALLIANCE_MANAGE = [
 
 /* ── Alliance panel ──────────────────────────────────────────── */
 function AlliancePanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const [tab, setTab] = useState("Members");
 
   const statusColor = (s) => s === "Online" ? "#4ade80" : s === "Away" ? "#fbbf24" : "#64748b";
 
   return (
-    <SidePanel title="ALLIANCE" accentColor="#fbbf24" onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.sidebar.alliance", "ALLIANCE")} accentColor="#fbbf24" onClose={onClose} isMobile={isMobile} showSubtitle>
 
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(251,191,36,0.15)", flexShrink:0 }}>
-        {ALLIANCE_TABS.map(t => (
-          <button key={t} className="hud-panel-tab"
-            onClick={() => setTab(t)}
+        {ALLIANCE_TABS.map(tabKey => (
+          <button key={tabKey} className="hud-panel-tab"
+            onClick={() => setTab(tabKey)}
             style={{
               flex:1, padding: isMobile ? "5px 2px" : "7px 4px", background:"none", border:"none",
-              borderBottom: tab === t ? "2px solid #fbbf24" : "2px solid transparent",
+              borderBottom: tab === tabKey ? "2px solid #fbbf24" : "2px solid transparent",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
               letterSpacing:"0.08em",
-              color: tab === t ? "#fbbf24" : "rgba(200,170,80,0.7)",
-            }}>{t.toUpperCase()}</button>
+              color: tab === tabKey ? "#fbbf24" : "rgba(200,170,80,0.7)",
+            }}>{t(`hud.allianceTabs.${tabKey.toLowerCase()}`, tabKey).toUpperCase()}</button>
         ))}
       </div>
 
@@ -860,6 +1040,7 @@ const MAIL_CAT_COLOR = { ALL:"#00E5FF", SYSTEM:"#94a3b8", ALLIANCE:"#fbbf24", EV
 
 /* ── Mail panel ─────────────────────────────────────────────── */
 function MailPanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const [cat, setCat] = useState("ALL");
   const filtered = cat === "ALL" ? MAIL_MESSAGES : MAIL_MESSAGES.filter(m => m.cat === cat);
 
@@ -886,9 +1067,9 @@ function MailPanel({ onClose, isMobile }) {
       }}>
         <div style={{ display:"flex", flexDirection:"column", gap:2 }}>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
-            letterSpacing:"0.18em", color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>MAIL</span>
+            letterSpacing:"0.18em", color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>{t("hud.sidebar.mail", "MAIL")}</span>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-            letterSpacing:"0.12em", color:"rgba(0,229,255,0.53)" }}>AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH</span>
+            letterSpacing:"0.12em", color:"rgba(0,229,255,0.53)" }}>{t("hud.availableAfterLaunch", "AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH")}</span>
         </div>
         <button onClick={onClose} style={{ background:"none", border:"none",
           color:"rgba(157,216,240,0.5)", fontSize: isMobile ? 13 : 16, cursor:"pointer", lineHeight:1 }}>×</button>
@@ -908,7 +1089,7 @@ function MailPanel({ onClose, isMobile }) {
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, fontWeight:"bold",
               letterSpacing:"0.08em", color: active ? col : "rgba(157,216,240,0.5)",
               cursor:"pointer",
-            }}>{c}</button>
+            }}>{t(`hud.mailCats.${c.toLowerCase()}`, c)}</button>
           );
         })}
       </div>
@@ -969,6 +1150,7 @@ const CHAT_MESSAGES = [
 
 /* ── Chat panel ─────────────────────────────────────────────── */
 function ChatPanel({ onClose, isMobile }) {
+  const { t } = useTranslation();
   const [tab, setTab] = useState("WORLD");
   const msgs = CHAT_MESSAGES.filter(m => m.tab === tab);
 
@@ -995,9 +1177,9 @@ function ChatPanel({ onClose, isMobile }) {
       }}>
         <div style={{ display:"flex", flexDirection:"column", gap:2 }}>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 12, fontWeight:"bold",
-            letterSpacing:"0.18em", color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>CHAT</span>
+            letterSpacing:"0.18em", color:"#00E5FF", textShadow:"0 0 10px rgba(0,229,255,0.8)" }}>{t("hud.sidebar.chat", "CHAT")}</span>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
-            letterSpacing:"0.12em", color:"rgba(0,229,255,0.53)" }}>AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH</span>
+            letterSpacing:"0.12em", color:"rgba(0,229,255,0.53)" }}>{t("hud.availableAfterLaunch", "AVAILABLE IN-GAME AFTER OFFICIAL LAUNCH")}</span>
         </div>
         <button onClick={onClose} style={{ background:"none", border:"none",
           color:"rgba(157,216,240,0.5)", fontSize: isMobile ? 13 : 16, cursor:"pointer", lineHeight:1 }}>×</button>
@@ -1005,15 +1187,15 @@ function ChatPanel({ onClose, isMobile }) {
 
       {/* Channel tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)", flexShrink:0 }}>
-        {CHAT_TABS_LIST.map(t => (
-          <button key={t} className="hud-panel-tab"
-            onClick={() => setTab(t)}
+        {CHAT_TABS_LIST.map(tabKey => (
+          <button key={tabKey} className="hud-panel-tab"
+            onClick={() => setTab(tabKey)}
             style={{
               flex:1, padding: isMobile ? "4px 2px" : "6px 4px", background:"none", border:"none",
-              borderBottom: tab === t ? "2px solid #00E5FF" : "2px solid transparent",
+              borderBottom: tab === tabKey ? "2px solid #00E5FF" : "2px solid transparent",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, fontWeight:"bold",
-              letterSpacing:"0.06em", color: tab === t ? "#00E5FF" : "rgba(157,216,240,0.5)",
-            }}>{t}</button>
+              letterSpacing:"0.06em", color: tab === tabKey ? "#00E5FF" : "rgba(157,216,240,0.5)",
+            }}>{t(`hud.chatTabs.${tabKey.toLowerCase()}`, tabKey)}</button>
         ))}
       </div>
 
@@ -1059,7 +1241,7 @@ function ChatPanel({ onClose, isMobile }) {
           display:"flex", alignItems:"center", paddingLeft:8,
         }}>
           <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 8,
-            color:"rgba(157,216,240,0.35)" }}>🔒 Chat locked until launch...</span>
+            color:"rgba(157,216,240,0.35)" }}>🔒 {t("hud.chatLocked", "Chat locked until launch...")}</span>
         </div>
         <div style={{
           width: isMobile ? 24 : 30, height: isMobile ? 24 : 30, borderRadius:4,
@@ -1074,6 +1256,7 @@ function ChatPanel({ onClose, isMobile }) {
 
 /* ── Main component ──────────────────────────────────────────── */
 export default function SidebarPanel() {
+  const { t } = useTranslation();
   const isMobile = useMobileLandscape();
   const [openPanel, setOpenPanel] = useState(null);
   const sidebarRef = useRef(null);
@@ -1117,7 +1300,7 @@ export default function SidebarPanel() {
               fontSize:  isMobile ? 7 : BTN_BASE.fontSize,
               letterSpacing: isMobile ? "0.06em" : BTN_BASE.letterSpacing,
             }}>
-            {key.toUpperCase()}
+            {t(`hud.sidebar.${key}`, key.toUpperCase())}
           </button>
         ))}
       </div>
