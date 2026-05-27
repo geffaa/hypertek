@@ -3,6 +3,7 @@ import {
   earnHB,
   spendHB,
   cashoutHB,
+  requestCashoutOTP,
   getHBBalance,
   getHBHistory,
   saveBankDetails,
@@ -14,6 +15,7 @@ const router = express.Router();
 
 router.post("/earn", earnHB);                             // called by game server (no auth — internal)
 router.post("/spend", spendHB);                           // called by marketplace (no auth — internal)
+router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
 router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
 router.get("/history", authMiddleware(), getHBHistory);

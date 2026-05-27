@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Về Trang Chủ",
+    "latestUpdates": "Cập Nhật Mới Nhất",
+    "heading": "Tin Tức, Cập Nhật & Câu Hỏi Thường Gặp",
+    "latestBadge": "MỚI NHẤT",
+    "readArticle": "Đọc Bài Viết",
+    "read": "Đọc",
+    "allStories": "Tất Cả Bài Viết",
+    "seeAll": "Xem Tất Cả ({{count}})",
+    "showLess": "Thu Gọn",
+    "frequentlyAsked": "Câu Hỏi Thường Gặp",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Đang tải bài viết…",
+    "backToNews": "Quay Lại Tin Tức",
+    "home": "Trang Chủ",
+    "news": "Tin Tức",
+    "newsUpdates": "Tin Tức & Cập Nhật",
+    "allArticles": "Tất Cả Bài Viết",
+    "copied": "Đã Sao Chép!",
+    "share": "Chia Sẻ",
+    "faq": [
+      {
+        "q": "HyperTek là gì?",
+        "a": "HyperTek là hệ sinh thái chơi game kiếm tiền được đặt trong năm 2117. Nó bao gồm 3 trò chơi liên kết với nhau — Hyper Racing, Hyper Quest và Hyper Overlord — chia sẻ một nền kinh tế và hệ thống tiến trình duy nhất. Mọi hành động bạn thực hiện đều đóng góp vào phần thưởng thực tế."
+      },
+      {
+        "q": "NFA, NFC và NFT là gì?",
+        "a": "NFA (Tài Sản Không Thể Thay Thế) là các vật phẩm trong game do HyperTek phát hành với giá mua lại tối thiểu được nền tảng đảm bảo. NFC (Nhân Vật Không Thể Thay Thế) là các nhân vật người chơi được cấp phép với phần thưởng trong game và đảm bảo mua lại. NFT là các vật phẩm sưu tập do người dùng tạo ra — giao diện, vũ khí và phụ kiện."
+      },
+      {
+        "q": "Đảm bảo mua lại hoạt động như thế nào?",
+        "a": "Mỗi NFA trên HyperTek đều có giá trị mua lại tối thiểu được đảm bảo. Nếu bạn quyết định rời bỏ trò chơi, HyperTek sẽ mua lại tài sản của bạn với giá không thấp hơn mức tối thiểu được đảm bảo — bảo vệ khoản đầu tư của bạn mọi lúc."
+      },
+      {
+        "q": "Làm thế nào để bắt đầu kiếm phần thưởng thực tế?",
+        "a": "Đăng ký, kết nối ví của bạn và bắt đầu chơi. Mỗi nhiệm vụ hoàn thành, tài sản giao dịch hoặc trận chiến thắng đều mang lại tiền tệ trong game có thể chuyển đổi thành thanh toán rút tiền. Tiến trình của bạn được duy trì trên cả ba trò chơi."
+      },
+      {
+        "q": "Có những trò chơi nào?",
+        "a": "Ba trò chơi chia sẻ vũ trụ HyperTek: Hyper Racing (trận chiến đường đua tốc độ cao), Hyper Quest (khám phá, phe phái và công nghệ cổ đại) và Hyper Overlord (chiến lược, thống trị và chinh phục). Tất cả đều chia sẻ cùng một nền kinh tế và tiến trình người chơi."
+      },
+      {
+        "q": "VR/AR có được hỗ trợ không?",
+        "a": "Có. HyperTek hỗ trợ người chơi VR và AR có thể tham gia nhiệm vụ và các trận chiến hùng tráng theo thời gian thực cùng với người chơi thông thường. Hệ sinh thái được thiết kế để có thể truy cập trên tất cả các thiết bị và nền tảng."
+      }
+    ]
+  }
+}

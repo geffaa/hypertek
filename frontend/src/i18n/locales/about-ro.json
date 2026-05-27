@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "UNIVERSUL HYPER TEK",
+    "heroHeading": "DESPRE NOI",
+    "stats": [
+      { "v": "3", "l": "Lumi de joc" },
+      { "v": "NFA", "l": "Răscumpărare minimă garantată" },
+      { "v": "P2E", "l": "Joacă-și-Câștigă" }
+    ],
+    "subtitle": [
+      "Misiunea Hyper Tek a fost să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri, creând un univers interconectat unde jucătorii nu sunt limitați la un singur stil de joc. Combinând mai multe genuri într-un singur sistem de progresie, proiectul Hyper Tek oferă un mediu dinamic unde jucătorii pot explora, concura și crește într-o lume unificată.",
+      "Își propune să ofere adevărata proprietate asupra activelor digitale cu valoare reală, care crește în timp, cu o răscumpărare minimă garantată pentru toate Non-Fungible Artworks, și sisteme adevărate de play-to-earn în cadrul ecosistemului, la care contribuie jucătorii.",
+      "Proiectul urmărește să împuternicească jucătorii oferindu-le proprietate semnificativă asupra progresului și recompenselor lor, încurajând în același timp creativitatea, colaborarea și competiția.",
+      "Viziunea pe termen lung a Hyper Tek este de a construi un univers digital viu unde mai multe jocuri, economii și comunități coexistă pe o singură platformă interconectată."
+    ],
+    "section01": {
+      "label": "Misiunea noastră",
+      "heading1": "Redefinind ce",
+      "heading2": "poate fi jocul",
+      "paras": [
+        "Proiectul Hyper Tek a fost fondat de Don Bennett, care a imaginat un mediu de jocuri unde mai multe genuri puteau coexista într-un singur sistem de progresie. În loc să forțeze jucătorii să rămână într-o singură buclă de joc, Hyper Tek le permite să exploreze diferite activități în timp ce își construiesc personajul, resursele și reputația în întreg ecosistemul, cu progres, materiale, recompense și realizări care curg fără probleme prin toate jocurile.",
+        "Proiectul combină trei medii majore de joc: Hyper Racing, Hyper Quest și Overlord of the Seven Realms. Fiecare joc reprezintă un stil diferit de joc, dar toate funcționează în același univers și împart aceeași economie a jucătorilor. Acest design le permite jucătorilor să se implice în tipul de joc care le place cel mai mult, contribuind în același timp la un ecosistem mai mare pentru a crea o nouă generație de medii de joc care sunt mai profunde, mai captivante și mai recompensatoare decât jocurile standalone tradiționale."
+      ]
+    },
+    "section02": {
+      "label": "Viziune și misiune",
+      "vision": {
+        "label": "Viziune",
+        "quote": "...să creeze o nouă generație de medii de joc care sunt mai profunde, mai captivante și mai recompensatoare decât jocurile standalone tradiționale...",
+        "paras": [
+          "Viziunea pe termen lung a Hyper Tek este de a construi un univers digital viu unde mai multe jocuri, economii și comunități coexistă pe o singură platformă interconectată. În loc de experiențe de joc izolate, Hyper Tek urmărește să stabilească un ecosistem comun unde acțiunile jucătorilor influențează lumea din jurul lor.",
+          "Îmbinând strategia, cursele și aventura într-un sistem coerent, Hyper Tek caută să creeze o nouă generație de medii de joc care sunt mai profunde, mai captivante și mai recompensatoare decât jocurile standalone tradiționale."
+        ]
+      },
+      "mission": {
+        "label": "Misiune",
+        "quote": "...să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri...",
+        "paras": [
+          "Misiunea Hyper Tek a fost să abordeze mai multe probleme din industria jocurilor și să redefinească modul în care funcționează ecosistemele de jocuri, creând un univers interconectat unde jucătorii nu sunt limitați la un singur stil de joc.",
+          "Combinând mai multe genuri într-un singur sistem de progresie, Hyper Tek caută să furnizeze un mediu dinamic unde jucătorii pot explora, concura și crește într-o lume unificată. Își propune să ofere adevărata proprietate asupra activelor digitale cu valoare reală, care crește în timp, cu o răscumpărare minimă garantată pentru toate NFA."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Universul",
+      "heading": "Trei lumi. O economie.",
+      "subtitle": "Fiecare joc este o poartă — distinct în joc, unificat în economie și progresie.",
+      "discover": "Descoperă",
+      "tryUI": "Încearcă interfața",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Viteză · Dominanță", "desc": "Curse de mare viteză pe teren ostil. Îmbunătățește-ți vehiculul, construiește-ți echipajul și cucerește teritorii în toată galaxia." },
+        { "name": "Hyper Quest", "tag": "Explorare · Comerț", "desc": "Navighează planete, finalizează misiuni și tranzacționează resurse pe o hartă stelară mereu în expansiune. Fiecare livrare modelează economia." },
+        { "name": "Overlord of the Seven Realms", "tag": "Strategie · Putere", "desc": "Comandă armate, forjează alianțe și cucerește regate. Cel mai puternic Overlord controlează destinul întregului univers." }
+      ]
+    },
+    "section04": {
+      "label": "Opere de artă digitale non-fungibile",
+      "heading": "Artă digitală cu valoare garantată",
+      "subtitle": "Rezumatul de 60 de secunde",
+      "quote": "Un univers. Trei jocuri. Valoare garantată. Viitorul proprietății digitale începe cu Hyper Tek.",
+      "cards": [
+        {
+          "title": "Ce sunt?",
+          "intro": "Opere de artă digitală legate de blockchain în trei niveluri:",
+          "items": [
+            { "label": "NFA...", "desc": "Create de arhitecți, cele mai mari bonusuri în joc, ultra-rare" },
+            { "label": "NFC...", "desc": "Colecționabile cu bonusuri în joc, pot fi create de jucători" },
+            { "label": "NFT...", "desc": "Complet create de jucători, decorează-ți baza pentru bonusuri de putere" }
+          ]
+        },
+        {
+          "title": "De ce își păstrează valoarea",
+          "bullets": [
+            "Răscumpărare minimă garantată pentru fiecare operă de artă",
+            "Răscumpărarea crește cu fiecare revânzare",
+            "Indexată față de inflație de două ori pe an",
+            "Valoarea ta crește mereu, niciodată nu scade"
+          ]
+        },
+        {
+          "title": "Echitabil prin design",
+          "body": "Până la 85% din comisionul pieței merge spre creșterea valorilor de răscumpărare, plata drepturilor de autor ale artiștilor și finanțarea misiunilor. Jucătorii pot reduce taxele creând misiuni care îi plătesc pe alții să participe, generând interacțiuni sociale la fiecare nivel. Acesta este specific Hyper Tek."
+        },
+        {
+          "title": "Implică-te acum",
+          "body": "Strângem fonduri pentru a construi Hyper Racing, Hyper Quest și Overlord of the 7 Realms. Fiecare operă de artă pe care o cumperi sau o creezi finanțează direct dezvoltarea. Deține artă garantată să-și mențină și să-și crească valoarea, ajutând în același timp să construiești viitorul jocurilor.",
+          "link": "[www.hypertek.com] — Explorează. Cumpără. Creează. Deține viitorul."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Crowdfunding — Ajută să construim viitorul",
+      "heading": "Sprijinul tău alimentează universul Hyper Tek",
+      "subtitle": "Fiecare operă de artă cumpărată finanțează direct trei jocuri interconectate. Iată ce construim împreună.",
+      "phaseLabel": "Faza",
+      "crowdfundingNow": "Crowdfunding în desfășurare",
+      "phases": [
+        { "name": "Fundație", "desc": "Site web activ • Interfață utilizator construită • Piață operațională • Sistem NFA/NFC/NFT proiectat • Cadrul de răscumpărare garantată implementat" },
+        { "name": "Crowdfunding în desfășurare", "desc": "Vânzări de opere de artă NFA/NFC/NFT active • NFT-uri create de jucători activate • Partajare comision activă • Construirea comunității • Fonduri direcționate în dezvoltarea jocurilor" },
+        { "name": "Lansare Alpha", "desc": "Alpha Hyper Racing • Primul mediu de joc jucabil • Integrare NFA în joc • Recompense exclusive pentru susținătorii timpurii • Tranzacționare live pe piață" },
+        { "name": "Expansiunea ecosistemului", "desc": "Alpha Hyper Quest • Progresie între jocuri activă • Integrarea monedei Hyper Bucks • Colecții NFA extinse • Evenimente cu premii în numerar" },
+        { "name": "Lansare Overlord", "desc": "Alpha Overlord of the 7 Realms • Sistem de bătălie pe trei niveluri • Acces Battle Ring • Integrare VR • Economie unificată completă pentru trei jocuri" },
+        { "name": "Lansare completă", "desc": "Toate cele trei jocuri complet active • Ecosistem NFA complet • VR complet în toate titlurile • Turnee globale • Universul interconectat realizat" }
+      ],
+      "helpHeading": "Cum POȚI ajuta chiar acum",
+      "helpItems": [
+        { "bold": "Cumpără un NFA, NFC sau NFT", "text": "— deține artă digitală cu valoare garantată care finanțează dezvoltarea jocurilor" },
+        { "bold": "Creează-ți propriul NFT", "text": "— devino creator pe piață și câștigă din fiecare revânzare" },
+        { "bold": "Distribuie și răspândește vestea", "text": "— fiecare nou susținător accelerează drumul spre lansare" }
+      ],
+      "link": "[www.hypertek.com] — Susține proiectul. Deține viitorul."
+    },
+    "section06": {
+      "label": "Jocuri Web3 și avantaj competitiv",
+      "heading": "HYPER TEK, O SOLUȚIE DE JOCURI WEB3 ȘI PRINCIPALELE AVANTAJE",
+      "subtitle": "Reducând decalajele dintre jocurile captivante, o piață digitală dinamică, recompensând jucătorii și investitorii deopotrivă.",
+      "cards": [
+        {
+          "label": "Recompense tangibile și antreprenoriat",
+          "bullets": [
+            "Adevărata proprietate NFA cu răscumpărare minimă garantată",
+            "Partajarea veniturilor prin economia digitală controlată de jucători",
+            "Valoare din lumea reală cu prețuri de active în joc în evoluție",
+            "Mecanici adevărate de play-to-earn"
+          ]
+        },
+        {
+          "label": "Ecosistemul de retragere",
+          "body": "Convertește fără probleme câștigurile din joc în monedă din lumea reală; munca ta digitală are valoare tangibilă, retragabilă."
+        },
+        {
+          "label": "Joc infinit în lumi interconectate",
+          "bullets": [
+            "Trei genuri de joc unice într-un singur univers unificat",
+            "Progresie, recompense și realizări comune în toate jocurile",
+            "Un ecosistem viu unde fiecare alegere influențează întreg universul",
+            "Jucătorii VR/AR pot participa la misiuni și bătălii epice în timp real"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Investitorii, partenerii și inovatorii care cred în viitorul ecosistemelor de jocuri interconectate sunt invitați să exploreze proiectul și să se alăture călătoriei pe măsură ce Hyper Tek continuă să construiască următoarea generație de lumi digitale.",
+      "exploreMarketplace": "Explorează piața",
+      "viewGames": "Vezi jocurile"
+    }
+  }
+}

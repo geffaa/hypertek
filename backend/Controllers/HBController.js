@@ -119,6 +119,53 @@ export async function spendHB(req, res) {
   }
 }
 
+// ------------------ CASHOUT OTP ------------------
+// POST /api/v1/hb/cashout/otp
+// Auth required. Sends a 6-digit OTP to user's email to authorize cashout.
+export async function requestCashoutOTP(req, res) {
+  try {
+    const userId = req.user.id || req.user._id;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const email = user.Email || user.email;
+    if (!email) return res.status(400).json({ error: "No email address on account" });
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    // Hash before storing
+    const { createHash } = await import("crypto");
+    const hashedOtp = createHash("sha256").update(otp).digest("hex");
+
+    user.cashoutOtp = { code: hashedOtp, expiresAt };
+    await user.save();
+
+    await transporter.sendMail({
+      from: `"HyperTek" <${process.env.SMTP_USER || process.env.SMTP_EMAIL}>`,
+      to: email,
+      subject: "HyperTek Cashout Verification Code",
+      html: `
+        <div style="font-family:Inter,sans-serif;max-width:480px;margin:0 auto;background:#0d0d0d;color:#fff;padding:32px;border-radius:12px">
+          <h2 style="color:#fff;margin-bottom:8px">Cashout Verification</h2>
+          <p style="color:#aaa;margin-bottom:24px">Use the code below to confirm your HyperBucks cashout. This code expires in <strong>5 minutes</strong>.</p>
+          <div style="background:#1a1a2e;border:1px solid #002AA8;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px">
+            <p style="color:#aaa;font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px">Your OTP Code</p>
+            <p style="color:#fff;font-size:36px;font-weight:700;letter-spacing:8px;margin:0">${otp}</p>
+          </div>
+          <p style="color:#555;font-size:12px">If you did not request this, please secure your account immediately.</p>
+          <p style="color:#555;font-size:12px;margin-top:16px">HyperTek — Building Worlds, One Game at a Time</p>
+        </div>`,
+    });
+
+    return res.json({ success: true, message: "OTP sent to your email" });
+  } catch (error) {
+    console.error("requestCashoutOTP error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 // ------------------ CASHOUT HB ------------------
 // POST /api/v1/hb/cashout
 // Auth required. Body: { amount (in HB), method ("usdc"|"bank"), walletAddress? }
@@ -132,7 +179,7 @@ export async function spendHB(req, res) {
 export async function cashoutHB(req, res) {
   try {
     const userId = req.user.id || req.user._id;
-    const { amount, method, walletAddress } = req.body;
+    const { amount, method, walletAddress, otp } = req.body;
 
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: "Amount must be positive" });
@@ -142,10 +189,29 @@ export async function cashoutHB(req, res) {
       return res.status(400).json({ error: 'Method must be "usdc" or "bank"' });
     }
 
+    if (!otp) {
+      return res.status(400).json({ error: "OTP is required to authorize cashout" });
+    }
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
+
+    // Validate OTP
+    const { createHash } = await import("crypto");
+    const hashedInput = createHash("sha256").update(otp.toString()).digest("hex");
+
+    if (!user.cashoutOtp?.code || user.cashoutOtp.code !== hashedInput) {
+      return res.status(400).json({ error: "Invalid OTP code" });
+    }
+    if (new Date() > new Date(user.cashoutOtp.expiresAt)) {
+      return res.status(400).json({ error: "OTP has expired. Please request a new one." });
+    }
+
+    // Clear OTP immediately — single use
+    user.cashoutOtp = { code: null, expiresAt: null };
+    await user.save();
 
     // KYC required before cashout
     if (user.kyc?.status !== "verified") {

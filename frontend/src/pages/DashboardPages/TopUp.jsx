@@ -105,6 +105,9 @@ export default function HyperBucks() {
   const [hbCashoutAmount, setHbCashoutAmount] = useState('');
   const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc');
   const [hbProcessing, setHbProcessing] = useState(false);
+  const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'otp'
+  const [otpCode, setOtpCode] = useState('');
+  const [sendingOtp, setSendingOtp] = useState(false);
 
   // KYC gate — only shown when user tries to cashout without being verified
   const [kycStatus, setKycStatus] = useState(null); // null = not fetched
@@ -215,17 +218,14 @@ export default function HyperBucks() {
   };
 
   // ── Cashout ───────────────────────────────────────────────────────
-  const handleHBCashout = async () => {
+  // Step 1 — validate inputs then send OTP to email
+  const handleRequestOTP = async () => {
     const hbAmount = parseInt(hbCashoutAmount, 10);
     const method = hbCashoutMethod;
 
     if (!hbAmount || hbAmount <= 0) { toast.error('Please enter a valid HB amount'); return; }
+    if (kycStatus !== 'verified') { setKycGateOpen(true); return; }
 
-    // KYC gate — block cashout if not verified
-    if (kycStatus !== 'verified') {
-      setKycGateOpen(true);
-      return;
-    }
     const minHb = method === 'bank' ? 2500 : 250;
     if (hbAmount < minHb) {
       toast.error(method === 'bank' ? 'Minimum bank cashout is 2500 HB ($10)' : 'Minimum USDC cashout is 250 HB ($1)');
@@ -233,22 +233,47 @@ export default function HyperBucks() {
     }
     if (method === 'usdc' && !activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
 
+    setSendingOtp(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout/otp`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Failed to send OTP'); return; }
+      toast.success('OTP sent to your email');
+      setOtpCode('');
+      setCashoutStep('otp');
+    } catch (err) {
+      toast.error('Failed to send OTP: ' + err.message);
+    } finally {
+      setSendingOtp(false);
+    }
+  };
+
+  // Step 2 — submit cashout with OTP
+  const handleHBCashout = async () => {
+    if (!otpCode || otpCode.length !== 6) { toast.error('Enter the 6-digit OTP from your email'); return; }
+
     setHbProcessing(true);
-    const toastId = toast.loading('Processing cashout...');
+    const toastId = toast.loading('Verifying OTP & processing cashout...');
     try {
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
         body: JSON.stringify({
-          amount: hbAmount,
-          method,
-          ...(method === 'usdc' ? { walletAddress: activeAddress } : {}),
+          amount: parseInt(hbCashoutAmount, 10),
+          method: hbCashoutMethod,
+          otp: otpCode,
+          ...(hbCashoutMethod === 'usdc' ? { walletAddress: activeAddress } : {}),
         }),
       });
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || 'Cashout failed', { id: toastId }); return; }
-      toast.success(`${hbAmount.toLocaleString()} HB cashout submitted!`, { id: toastId });
+      toast.success(`${parseInt(hbCashoutAmount, 10).toLocaleString()} HB cashout submitted!`, { id: toastId });
       setHbCashoutAmount('');
+      setOtpCode('');
+      setCashoutStep('form');
       fetchBalance();
       fetchHistory();
     } catch (err) {
@@ -481,8 +506,61 @@ export default function HyperBucks() {
                   }}
                 />
               </div>
+            ) : cashoutStep === 'otp' ? (
+              /* OTP Step */
+              <div className="w-full">
+                <div className="flex items-center gap-3 mb-6">
+                  <button onClick={() => setCashoutStep('form')} className="text-white/40 hover:text-white transition-colors">
+                    <FiArrowLeft size={16} />
+                  </button>
+                  <div>
+                    <p className="text-white font-semibold text-sm">Enter verification code</p>
+                    <p className="text-white/40 text-xs mt-0.5">
+                      A 6-digit code was sent to your email · expires in 5 minutes
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-4">
+                  <div className="mb-2 text-white/50 text-xs">
+                    Cashing out <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
+                    {' '}≈ <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
+                    {' '}via <span className="text-white font-semibold capitalize">{hbCashoutMethod === 'usdc' ? 'USDC Wallet' : 'Bank Account'}</span>
+                  </div>
+                </div>
+
+                <label className="text-white/50 text-xs mb-2 block">OTP Code</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={otpCode}
+                  onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))}
+                  placeholder="000000"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white text-3xl font-bold tracking-[0.5em] text-center focus:outline-none focus:border-[#002AA8] transition-colors mb-3"
+                />
+
+                <button
+                  onClick={handleHBCashout}
+                  disabled={hbProcessing || otpCode.length !== 6}
+                  className={`w-full py-4 rounded-2xl font-bold text-base transition-all mb-3 ${
+                    hbProcessing || otpCode.length !== 6
+                      ? 'bg-white/10 text-white/40 cursor-not-allowed'
+                      : 'bg-[#002AA8] hover:bg-blue-700 text-white'
+                  }`}
+                >
+                  {hbProcessing ? 'Processing...' : 'Confirm Cashout'}
+                </button>
+
+                <button
+                  onClick={handleRequestOTP}
+                  disabled={sendingOtp}
+                  className="w-full text-xs text-white/30 hover:text-white/60 transition-colors py-2"
+                >
+                  {sendingOtp ? 'Sending...' : 'Resend code'}
+                </button>
+              </div>
             ) : (
-            /* Cashout Form */
             <div className="flex flex-col lg:flex-row gap-6 items-start">
               {/* Left — amount + button */}
               <div className="w-full lg:flex-1">
@@ -514,15 +592,15 @@ export default function HyperBucks() {
                 </div>
 
                 <button
-                  onClick={handleHBCashout}
-                  disabled={hbProcessing}
+                  onClick={handleRequestOTP}
+                  disabled={sendingOtp}
                   className={`w-full py-4 rounded-2xl font-bold text-base transition-all ${
-                    hbProcessing
+                    sendingOtp
                       ? 'bg-white/10 text-white/40 cursor-not-allowed'
                       : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {hbProcessing ? 'Processing...' : hbCashoutMethod === 'usdc' ? 'Cashout to USDC Wallet' : 'Cashout to Bank Account'}
+                  {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'usdc' ? 'Cashout to USDC Wallet' : 'Cashout to Bank Account'}
                 </button>
               </div>
 

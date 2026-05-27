@@ -48,6 +48,10 @@ const auctionSchema = new mongoose.Schema(
 
     listingFee:       { type: Number, default: 2 }, // $2 per brief
     txHash:           { type: String, default: null },
+
+    // Auto-cleanup: MongoDB TTL will delete this document when cleanupAt is reached.
+    // Only set when auction enters a terminal state (ended/cancelled/sold).
+    cleanupAt:        { type: Date, default: null },
   },
   { timestamps: true }
 );
@@ -57,7 +61,18 @@ auctionSchema.pre("save", function (next) {
   if (this.isNew && !this.endTime) {
     this.endTime = new Date(Date.now() + this.durationHours * 60 * 60 * 1000);
   }
+
+  // Auto-set cleanupAt when auction enters a terminal state (30-day retention)
+  const TERMINAL_STATES = ["ended", "cancelled", "sold"];
+  if (this.isModified("status") && TERMINAL_STATES.includes(this.status) && !this.cleanupAt) {
+    this.cleanupAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
+  }
+
   next();
 });
 
+// TTL index: MongoDB background thread deletes docs where cleanupAt < now
+auctionSchema.index({ cleanupAt: 1 }, { expireAfterSeconds: 0, sparse: true });
+
 export default mongoose.model("Auction", auctionSchema);
+

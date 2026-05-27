@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Tilbake til hjem",
+    "latestUpdates": "Siste oppdateringer",
+    "heading": "Nyheter, oppdateringer og FAQ",
+    "latestBadge": "SISTE",
+    "readArticle": "Les artikkelen",
+    "read": "Les",
+    "allStories": "Alle historier",
+    "seeAll": "Se alle historier ({{count}})",
+    "showLess": "Vis faerre",
+    "frequentlyAsked": "Ofte stilte",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Laster artikkelen...",
+    "backToNews": "Tilbake til nyheter",
+    "home": "Hjem",
+    "news": "Nyheter",
+    "newsUpdates": "Nyheter og oppdateringer",
+    "allArticles": "Alle artikler",
+    "copied": "Kopiert!",
+    "share": "Del",
+    "faq": [
+      {
+        "q": "Hva er HyperTek?",
+        "a": "HyperTek er et spill-for-a-tjene-okosystem satt i ar 2117. Det har 3 sammenkoblede spill — Hyper Racing, Hyper Quest og Hyper Overlord — som deler en felles okonomi og et progresjonssystem. Hver handling du tar bidrar til virkelige belonninger."
+      },
+      {
+        "q": "Hva er NFA-er, NFC-er og NFT-er?",
+        "a": "NFA-er (ikke-fungible eiendeler) er HyperTek-utstedte spillgjenstander med en plattformgarantert minimumsinnkjopspris. NFC-er (ikke-fungible karakterer) er lisensierte spillkarakter med spillbonuser og innkjopsgarantier. NFT-er er brukerskapte samleobjekter — skinn, vapen og kosmetikk."
+      },
+      {
+        "q": "Hvordan fungerer innkjopsgarantien?",
+        "a": "Hver NFA pa HyperTek kommer med en garantert minimumsinnkjopsverdi. Hvis du bestemmer deg for a forlate spillet, vil HyperTek kjope tilbake eiendelene dine til ikke mindre enn den garanterte minimumsprisen — og beskytte investeringen din til enhver tid."
+      },
+      {
+        "q": "Hvordan begynner jeg a tjene virkelige belonninger?",
+        "a": "Registrer deg, koble til lommeboken din og begynn a spille. Hvert fullforte oppdrag, omsatte eiendel eller vunne slag gir deg spillvaluta som kan konverteres til utbetalinger. Progresjonen din gjelder pa tvers av alle tre spillene."
+      },
+      {
+        "q": "Hvilke spill er tilgjengelige?",
+        "a": "Tre spill deler HyperTek-universet: Hyper Racing (hoyhastighets kretslopsslag), Hyper Quest (utforskning, fraksjoner og gammel teknologi) og Hyper Overlord (strategi, herredomme og erobring). Alle deler den samme okonomien og spillerprogresjonen."
+      },
+      {
+        "q": "Stotter dere VR/AR?",
+        "a": "Ja. HyperTek stotter VR- og AR-spillere som kan bli med pa oppdrag og episke slag i sanntid ved siden av standardspillere. Okosystemet er designet for a vaere tilgjengelig pa alle enheter og plattformer."
+      }
+    ]
+  }
+}

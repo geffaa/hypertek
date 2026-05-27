@@ -1,0 +1,87 @@
+{
+  "marketplace": {
+    "sectionLabel": "Palengke",
+    "searchPlaceholder": "Maghanap...",
+    "tabs": { "overview": "Pangkalahatang-tanaw", "nfa101": "NFAs / NFCs / NFTs", "general": "Ang Palengke", "auctions": "Mga Auction", "trades": "Mga Palitan", "quests": "Mga Quest", "hire": "Para Paupahan", "bounty": "Mga Gantimpala" },
+    "banner": {
+      "defaultHeading": "Bagong Panahon ang Sumapit sa Hyper Tek",
+      "defaultDesc": "Ito ang simula ng isang buhay na sansinukob kung saan ang bawat desisyon ay humuhubog sa paglalakbay.",
+      "stats": { "totalItems": "Kabuuang Mga Item", "totalBuys": "Kabuuang Mga Binili", "listed": "Nakalista", "collections": "Mga Koleksyon" },
+      "soundOn": "Tunog Naka-on", "soundOff": "Tunog Naka-off"
+    },
+    "bottomBar": {
+      "learnLabel": "Matuto tungkol sa NFAs / NFCs",
+      "educationPanel": "Panel ng Edukasyon ng HyperTek",
+      "footerNote": "Ang panel na ito ay para sa mabilis na sanggunian. Bisitahin ang tab na NFAs / NFCs 101 para sa buong nilalaman ng edukasyon.",
+      "facts": [
+        { "label": "NFA", "desc": "Asset na eksklusibo sa Hypertek. Pinakamataas na bonus sa laro. Garantisadong minimum na halaga ng buyback na lumalaki sa bawat benta." },
+        { "label": "NFC", "desc": "Nilikha ng Hypertek o mga lisensyadong manlalaro. Kasama ang mga bonus sa laro. Garantisadong minimum na buyback." },
+        { "label": "NFT", "desc": "Kolektible na nilikha ng manlalaro. Walang bonus sa laro. Walang garantiya ng buyback. Maaaring ipagpalit sa palengke." },
+        { "label": "Komisyon", "desc": "20% bayad sa platform sa lahat ng benta. Ang nagbebenta ay nakatanggap ng 80%. Royalty ng artista 4% sa mga muling benta." },
+        { "label": "Paglago ng Buyback", "desc": "+5% ng bawat presyo ng muling pagbebenta ay idinaragdag sa minimum na halaga ng buyback ng asset." },
+        { "label": "Custodial na Wallet", "desc": "Awtomatikong gumagawa ang HyperTek ng crypto wallet para sa iyo sa pag-sign up." }
+      ]
+    },
+    "overview": {
+      "heading": "Pangkalahatang-tanaw", "subtitle": "Maligayang pagdating sa Palengke ng HyperTek. Pumili ng feature para matuto pa.",
+      "features": [
+        { "label": "NFAs / NFCs / NFTs", "tagline": "Bago sa mga asset ng Web3? Magsimula dito", "details": ["Ang mga NFA ay mga item na inilabas ng Hypertek na may garantisadong presyo ng buyback.", "Ang mga NFC ay mga lisensyadong item ng manlalaro na may mga bonus sa laro.", "Ang mga NFT ay mga kolektible na nilikha ng gumagamit."], "cta": "Alamin ang Mga Batayan" },
+        { "label": "Ang Palengke", "tagline": "Bumili at magbenta ng mga asset sa laro agad", "details": ["Mag-browse ng malawak na katalogo ng NFAs, NFCs at NFTs.", "I-filter ayon sa kategorya, bihirang-bihira o saklaw ng presyo.", "Ang mga listahan ay tinutupad on-chain para sa instant na paglipat."], "cta": "I-browse ang Palengke" },
+        { "label": "Mga Auction", "tagline": "Makipagtulungan para sa eksklusibong mga item", "details": ["Mag-bid para sa mga bihirang asset na available lamang sa pamamagitan ng mga auction na limitado ang oras.", "Ipinapakita ng live countdown kung gaano karaming oras na natitira.", "Talunin ang iba para masiguro ang mga legendary na item."], "cta": "Tingnan ang mga Auction" },
+        { "label": "Mga Palitan", "tagline": "Ipagpalit ang mga asset peer-to-peer, walang tagapamagitan", "details": ["Magmungkahi o tumanggap ng mga direktang palitan ng asset sa ibang manlalaro.", "Itakda ang mga tuntunin mismo.", "I-browse ang mga bukas na alok ng palitan o mag-post ng sarili."], "cta": "I-browse ang mga Palitan" },
+        { "label": "Mga Quest", "tagline": "Kumpletuhin ang mga misyon, manalo ng eksklusibong gantimpala", "details": ["Kumuha ng mga quest para manalo ng eksklusibong gantimpala at bihirang mga asset sa laro.", "Ang bawat quest ay may natatanging layunin.", "Itayo ang iyong koleksyon nang estratehiko."], "cta": "I-explore ang mga Quest" },
+        { "label": "Para Paupahan", "tagline": "Humiram ng mga asset o kumita mula sa iyong sarili", "details": ["Mag-rent ng makapangyarihang mga espesyalista o kagamitan para sa iisang misyon.", "Ilista ang iyong sariling mga idle asset para sa renta.", "Flexible na tagal — bawat oras, araw-araw o per-misyon."], "cta": "Tingnan ang Para Paupahan" },
+        { "label": "Mga Gantimpala", "tagline": "Mangaso ng mga target, mag-angkin ng gantimpala", "details": ["Tumanggap ng mga gantimpala na inipost ng ibang manlalaro o sistema.", "Umakyat sa leaderboard ng gantimpala.", "Mag-post ng sariling mga gantimpala para mag-recruit ng mga manlalaro."], "cta": "Tingnan ang mga Gantimpala" }
+      ]
+    },
+    "general": {
+      "heading": "Pangkalahatan", "subtitle": "I-browse ang mga NFA, NFC at NFT na available para sa agarang pagbili.",
+      "filterAll": "Lahat",
+      "samplePreviewTitle": "Sample Preview ng Palengke",
+      "samplePreviewDesc": "Ang mga item sa ibaba ay mga sample na preview na nagpapakita ng mga uri ng digital asset na magiging available.",
+      "noItems": "Walang available na item pa. Bumalik sa ibang pagkakataon.",
+      "categories": { "skins": "Mga Skin", "militaryBadges": "Mga Badge ng Militar", "specialists": "Mga Espesyalista", "weapons": "Mga Sandata", "bodyArmour": "Proteksyon ng Katawan", "spaceships": "Mga Spaceship", "racingVehicles": "Mga Sasakyan", "artwork": "Sining", "landAndBases": "Lupa at Mga Base", "general": "Pangkalahatan" }
+    },
+    "nfa101": { "sectionLabel": "Edukasyon", "heading": "NFAs / NFCs / NFTs 101", "subtitle": "Bago sa NFT at Web3? I-explore ang aming mga artikulo.", "minRead": "min basahin", "filterAll": "Lahat" },
+    "auctions": {
+      "heading": "Mga Auction", "listings": "mga listahan", "newAuction": "Bagong Auction", "noAuctions": "Walang {{filter}} na auction", "createFirst": "Lumikha ng unang auction", "endingSoon": "MATATAPOS NA", "viewDetails": "Tingnan ang Detalye",
+      "rules": { "durations": "Tagal: 1d · 3d · 7d", "minIncrement": "Min na pagtaas: 5%", "freeToList": "Libre ang paglista", "commission": "Komisyon: 20% sa benta" },
+      "preview": { "title": "Preview ng Feature sa Laro", "desc": "Ang sistema ng auction ay magiging ganap na aktibo sa laro sa paglulunsad." },
+      "card": { "currentBid": "Kasalukuyang bid", "endsIn": "Natatapos sa", "placeBid": "Mag-bid", "buyNow": "Bilhin Ngayon", "bids": "bid(s)", "ended": "NATAPOS" },
+      "detail": { "currentBid": "Kasalukuyang bid", "start": "Simula", "endsIn": "Natatapos sa", "description": "Paglalarawan", "recentBids": "Mga Kamakailang Bid", "anonymous": "Hindi Kilala", "placeBid": "Mag-bid", "buyNow": "Bilhin Ngayon", "buyNowLabel": "Bilhin Ngayon", "bids": "bid(s)" },
+      "bidModal": { "title": "Mag-bid", "currentBid": "Kasalukuyang bid", "minimumBid": "Minimum na bid", "yourBid": "Iyong bid (USDC)", "minIncrement": "Min na pagtaas 5% · Susunod na minimum pagkatapos ng iyong bid: {{next}} USDC", "reviewBid": "Suriin ang Bid", "disclaimer": "Ang nanalong bid ay nakatali · 20% komisyon ng platform", "confirmTitle": "Kumpirmahin ang Bid", "item": "Item", "yourBidLabel": "Iyong bid", "youPay": "Kung mananalo ka, magbabayad ka", "outbidNotice": "Maabisuhan ka agad kung may mag-outbid sa iyo.", "back": "Bumalik", "confirm": "Kumpirmahin — {{amount}} USDC", "placing": "Naglalagay…", "successTitle": "Nailagay ang Bid!", "highestBidder": "Ikaw ang pinakamataas na bidder", "outbidWarning": "Makakatanggap ka ng abiso kung may mag-outbid sa iyo.", "done": "Tapos", "endsIn": "Natatapos sa" },
+      "instantBuyModal": { "title": "Bilhin Ngayon — Instant", "buyNowPrice": "Presyo ng bilhin ngayon", "currentBids": "Mga kasalukuyang bid", "notice": "Ang pagbili ngayon ay agad na nagsasara ng auction.", "cancel": "Kanselahin", "processing": "Pinoproseso…", "successTitle": "Nakuha ang Item!", "auctionClosed": "Auction sarado · Nagsimula ang paglipat", "item": "Item", "paid": "Binayaran", "status": "Katayuan", "transferred": "Inilipat sa wallet", "walletNote": "Ang item ay lilitaw sa iyong tab na Mga Koleksyon Ko.", "viewCollect": "Tingnan ang Mga Koleksyon Ko" },
+      "createModal": { "title": "Lumikha ng Auction", "selectItem": "Pumili ng Item", "connectWallet": "I-connect ang wallet para i-browse ang iyong mga item", "loadingItems": "Naglo-load…", "noItems": "Walang nahanap na item na pag-aari mo", "pricingDuration": "Pagpepresyo at Tagal", "startPrice": "Presyo sa Simula (USDC) *", "reservePrice": "Presyo ng Reserba (USDC)", "instantBuyPrice": "Presyo ng Instant na Pagbili (USDC)", "optional": "Opsyonal", "leaveBlank": "Iwanang blangko para i-disable", "duration": "Tagal", "dur1Day": "1 Araw", "dur3Days": "3 Araw", "dur7Days": "7 Araw", "freeToList": "Libre ang paglista · 20% komisyon sa benta", "creating": "Ginagawa…", "submit": "Lumikha ng Auction" },
+      "pagination": { "prev": "Nakaraan", "next": "Susunod", "page": "Pahina {{page}} ng {{pages}}" }
+    },
+    "trades": {
+      "heading": "Mga Palitan", "listings": "mga listahan", "postTrade": "Mag-post ng Palitan", "noTrades": "Walang {{filter}} na palitan", "viewDetails": "Tingnan ang Detalye", "trade": "palitan", "yours": "sa iyo", "offering": "Nag-aalok", "wanting": "Gustong", "makeOffer": "Gumawa ng alok", "by": "ng", "acceptTrade": "Tanggapin ang Palitan", "cancelTrade": "Kanselahin ang Palitan",
+      "rules": { "expiry": "Ang mga listahan ay nag-eexpire sa 30 araw", "fee": "Bayad sa platform ay nalalapat sa dalawang partido", "noNFA": "Hindi maaaring ipagpalit ang mga NFA — pag-ibenta lamang" },
+      "acceptModal": { "title": "Mungkahi ng Palitan", "postedBy": "Ini-post ng", "exchangeDetails": "Mga Detalye ng Palitan", "theyOffer": "Inaalok nila", "theyWant": "Gusto nila", "feeNotice": "Bayad sa platform ay nalalapat sa dalawang partido", "acceptBtn": "Tanggapin ang Palitang Ito", "confirmTitle": "Kumpirmahin ang Palitan", "trade": "Palitan", "postedByLabel": "Ini-post ng", "terms": "Sa pag-accept, sumasang-ayon ka sa mga tuntunin ng palitan.", "back": "Bumalik", "sending": "Nagpapadala…", "confirm": "Kumpirmahin", "successTitle": "Naipadala ang Mungkahi!", "notified": "ay naabisuhan", "successNote": "Susuriin ng poster ng palitan ang iyong mungkahi.", "expiry": "⏱ Ang mga mungkahi ay nag-eexpire sa 30 araw kung hindi nakumpirma.", "close": "Isara" },
+      "createModal": { "title": "Mag-post ng Palitan", "yourItem": "Ang Iyong Item", "itemNamePlaceholder": "Pangalan ng item *", "loadingItems": "Naglo-load ng iyong mga item…", "connectWallet": "I-connect ang wallet para pumili", "pickFromItems": "O pumili mula sa iyong mga item:", "imageOptional": "Larawan (opsyonal)", "whatYouWant": "Ang Gusto Mo", "openOffer": "Bukas na alok — hayaang magmungkahi ang iba", "anyCategory": "Anumang kategorya", "notesLabel": "Mga tala (opsyonal)", "notesPlaceholder": "Mga tuntunin ng palitan, kondisyon, atbp.", "disclaimer": "Parehong partido ay nagbabayad ng bayad · Nag-eexpire sa 30 araw · Hindi maaaring ipagpalit ang NFAs", "posting": "Nag-po-post…", "submit": "Mag-post ng Palitan" },
+      "pagination": { "prev": "Nakaraan", "next": "Susunod", "page": "Pahina {{page}} ng {{pages}}" }
+    },
+    "quests": {
+      "heading": "Quest Board", "quests": "mga quest", "noQuests": "Walang {{filter}} na quest", "inGameFeature": "Feature sa Laro", "inGameDesc": "Ang mga quest ay awtomatikong nalilikha kapag pinili ng mga nagbebenta ang nabawasang komisyon. Maaaring kumpletuhin ang mga manlalaro ng hanggang 5 na quest bawat araw.", "earnFromQuests": "Gusto kumita mula sa mga quest? Maglaro →", "moneyQuests": "Mga Quest sa Pera (pool 11%)", "resourceQuests": "Mga Quest sa Mapagkukunan (pool 20%)", "footerNote1": "# Ang mga quest na may pinagsanib na payload ay babayaran gamit ang mga hiwalay na halaga ng talahanayan.", "footerNote2": "# Ang data ng planeta ay mag-si-sync kapag aktibo na ang mga laro.", "inGame": "Sa laro", "open": "Bukas",
+      "table": { "questingNo": "Blg. ng Quest", "pickupPlanet": "Planeta ng Pagkuha", "dropOffPlanet": "Planeta ng Paghahatid", "itemGoods": "Item / Kalakal", "commSplit": "Hatian ng Komisyon", "questingTime": "Oras ng Quest", "assignedTo": "Itinalaga Kay" },
+      "comingSoon": { "title": "Paparating Na", "desc": "Ang feature ng quest sa laro ay kasalukuyang nasa pag-unlad.", "gotIt": "Naintindihan" },
+      "pagination": { "prev": "Nakaraan", "next": "Susunod", "page": "Pahina {{page}} ng {{pages}}" }
+    },
+    "hire": {
+      "heading": "Para Paupahan", "listings": "mga listahan", "listBtn": "Ilista", "forHireLabel": "Para Paupahan", "wantingToHire": "Gustong Kumuha", "noListings": "Walang {{filter}} na listahan", "lockedTitle": "Nilalaman ng HyperTek Gaming para sa pagpapakita lamang.", "lockedDesc": "Ang seksyong ito ay naka-lock hanggang matapos ang mga laro.", "forHireBadge": "PARA PAUPAHAN", "wantedBadge": "GUSTONG KUMUHA", "price": "Presyo", "maxDuration": "Pinakamataas na Tagal", "hireBtn": "Kumuha", "fulfillBtn": "Tuparin ang Kahilingan",
+      "rules": { "durations": "8h · 1d · 3d · 1l · 1b", "cooldown": "Cooldown: 2× tagal ng renta", "commission": "Komisyon: 20%", "payment": "Magbayad sa Hyper Bucks o Materyales" },
+      "preview": { "title": "Preview ng Feature sa Laro", "desc": "Ang sistema ng Para Paupahan ay magiging ganap na aktibo sa laro sa paglulunsad." },
+      "hireModal": { "hireTitle": "Kumuha ng Espesyalista", "fulfillTitle": "Tuparin ang Kahilingan sa Pagkuha", "forHireBadge": "PARA PAUPAHAN", "wantedBadge": "GUSTO", "price": "Presyo", "duration": "Tagal", "howHire": "Paano gumagana ang pagkuha", "howFulfill": "Paano gumagana ang pagtutpad ng kahilingan", "proceedHire": "Magpatuloy sa Pagkuha", "offerFulfill": "Mag-alok na Tuparin", "commission": "20% komisyon ng platform · Nalalapat ang cooldown pagkatapos ibalik", "confirmHire": "Kumpirmahin ang Pagkuha", "confirmOffer": "Kumpirmahin ang Alok", "specialist": "Espesyalista", "payment": "Bayad", "yourOffer": "Ang iyong alok", "durationLabel": "Tagal", "commLabel": "Komisyon", "back": "Bumalik", "processing": "Pinoproseso…", "sendOffer": "Ipadala ang Alok", "deployedTitle": "Nai-deploy!", "offerSentTitle": "Naipadala ang Alok!", "availableFor": "Available para sa", "paid": "Binayaran", "returnNote": "Ibalik bago matapos ang panahon. Nalalapat ang cooldown na {{hours}}h pagkatapos ibalik.", "close": "Isara" },
+      "createModal": { "listTitle": "Ilista Para Paupahan", "postTitle": "Mag-post ng Gustong Kumuha", "forHireBtn": "Para Paupahan", "wantingBtn": "Gustong Kumuha", "itemNameHire": "Espesyalista / pangalan ng item *", "itemNameWant": "Ang gusto mong kumuha *", "descPlaceholder": "Paglalarawan", "categoryPlaceholder": "Kategorya (opsyonal)", "paymentType": "Uri ng Bayad", "hyperBucks": "Hyper Bucks", "materials": "Materyales", "amountLabel": "Halaga (Hyper Bucks)", "afterCommission": "Matatanggap mo ang {{amount}} HB pagkatapos ng 20% komisyon", "maxDuration": "Pinakamataas na Tagal", "disclaimer": "20% komisyon · Cooldown = 2× tagal ng renta pagkatapos ibalik", "listing": "Naglilista…", "submit": "Lumikha ng Listahan" },
+      "pagination": { "prev": "Nakaraan", "next": "Susunod", "page": "Pahina {{page}} ng {{pages}}" }
+    },
+    "bounty": {
+      "heading": "Bounty Board", "contracts": "kontrata", "contractsPlural": "mga kontrata", "noContracts": "Walang {{filter}} na kontrata", "noContractsNote": "Ang mga gantimpala ay inilalagay ng mga manlalaro at ng sistema ng laro", "expiresIn": "Nag-eexpire sa {{days}}d",
+      "inGameNotice": { "title": "Feature sa Laro — Tingnan Lamang", "desc": "Ang mga gantimpala ay nilikha ng mga manlalaro at sistema ng laro. Ang pagtanggap at pagkumpleto ng mga gantimpala ay nangyayari sa laro lamang." },
+      "rules": { "battle": "Ang labanan ay awtomatikong nareresolba sa laro", "commission": "20% komisyon ng platform sa gantimpala", "expiry": "Ang mga kontrata ay nag-eexpire sa 30 araw" },
+      "table": { "bountyNo": "Blg. ng Gantimpala", "target": "Target", "reward": "Gantimpala", "postedBy": "Ini-post Ng", "claimedBy": "Inangkin Ng", "status": "Katayuan", "netHB": "{{amount}} HB net" },
+      "pagination": { "prev": "Nakaraan", "next": "Susunod", "page": "Pahina {{page}} ng {{pages}}" }
+    },
+    "common": { "prev": "Nakaraan", "next": "Susunod", "pageOf": "Pahina {{page}} ng {{pages}}", "back": "Bumalik", "close": "Isara", "cancel": "Kanselahin", "loading": "Naglo-load…", "connectWallet": "I-connect muna ang iyong wallet", "loginFirst": "Mag-login muna" }
+  }
+}

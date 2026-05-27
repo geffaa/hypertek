@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Kembali ke Beranda",
+    "latestUpdates": "Pembaruan Terbaru",
+    "heading": "Berita, Pembaruan & FAQ",
+    "latestBadge": "TERBARU",
+    "readArticle": "Baca Artikel",
+    "read": "Baca",
+    "allStories": "Semua Cerita",
+    "seeAll": "Lihat Semua ({{count}})",
+    "showLess": "Tampilkan Lebih Sedikit",
+    "frequentlyAsked": "Pertanyaan Umum",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Memuat artikel…",
+    "backToNews": "Kembali ke Berita",
+    "home": "Beranda",
+    "news": "Berita",
+    "newsUpdates": "Berita & Pembaruan",
+    "allArticles": "Semua Artikel",
+    "copied": "Disalin!",
+    "share": "Bagikan",
+    "faq": [
+      {
+        "q": "Apa itu HyperTek?",
+        "a": "HyperTek adalah ekosistem gaming play-to-earn yang berlatar tahun 2117. Menampilkan 3 game yang saling terhubung — Hyper Racing, Hyper Quest, dan Hyper Overlord — berbagi satu ekonomi dan sistem perkembangan. Setiap tindakan yang Anda lakukan berkontribusi pada hadiah dunia nyata."
+      },
+      {
+        "q": "Apa itu NFA, NFC, dan NFT?",
+        "a": "NFA (Aset Non-Fungible) adalah item dalam game yang diterbitkan HyperTek dengan harga buyback minimum yang dijamin platform. NFC (Karakter Non-Fungible) adalah karakter pemain berlisensi dengan bonus dalam game dan jaminan buyback. NFT adalah kolektibel buatan pengguna — skin, senjata, dan kosmetik."
+      },
+      {
+        "q": "Bagaimana cara kerja jaminan buyback?",
+        "a": "Setiap NFA di HyperTek hadir dengan nilai buyback minimum yang dijamin. Jika Anda memutuskan untuk keluar dari game, HyperTek akan membeli kembali aset Anda tidak kurang dari harga minimum yang dijamin — melindungi investasi Anda setiap saat."
+      },
+      {
+        "q": "Bagaimana cara mulai mendapatkan hadiah dunia nyata?",
+        "a": "Daftar, hubungkan dompet Anda, dan mulai bermain. Setiap misi yang diselesaikan, aset yang diperdagangkan, atau pertempuran yang dimenangkan menghasilkan mata uang dalam game yang dapat dikonversi menjadi pembayaran penarikan. Perkembangan Anda berlaku di ketiga game."
+      },
+      {
+        "q": "Game apa saja yang tersedia?",
+        "a": "Tiga game berbagi semesta HyperTek: Hyper Racing (pertempuran sirkuit berkecepatan tinggi), Hyper Quest (eksplorasi, faksi, dan teknologi kuno), dan Hyper Overlord (strategi, dominasi, dan penaklukan). Semua berbagi ekonomi dan perkembangan pemain yang sama."
+      },
+      {
+        "q": "Apakah VR/AR didukung?",
+        "a": "Ya. HyperTek mendukung pemain VR dan AR yang dapat bergabung dalam misi dan pertempuran epik secara real-time bersama pemain standar. Ekosistem ini dirancang agar dapat diakses di semua perangkat dan platform."
+      }
+    ]
+  }
+}

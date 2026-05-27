@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Shops",
+    "aboutUs": "Über uns",
+    "news": "Neuigkeiten",
+    "socials": "Soziale Medien",
+    "waitlist": "Warteliste",
+    "signUp": "Registrieren",
+    "joinWaitlist": "Warteliste beitreten",
+    "search": "Suchen...",
+    "myProfile": "Mein Profil",
+    "dashboard": "Dashboard",
+    "adminPanel": "Admin-Panel",
+    "gaming": "Gaming",
+    "marketplace": "Marketplace",
+    "signOut": "Abmelden",
+    "shop": {
+      "overview": "Übersicht",
+      "overviewDesc": "Allgemeine Marktübersicht",
+      "myAssets": "Meine Assets",
+      "myAssetsDesc": "Alles verfolgen und verwalten, was Sie besitzen",
+      "theMarketplace": "Der Marketplace",
+      "theMarketplaceDesc": "Alle NFT-, NFA- und NFC-Sammlerstücke durchsuchen",
+      "auction": "Auktion",
+      "auctionDesc": "Countdown einer beliebigen Auktion verfolgen",
+      "land": "Land"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Abmeldung bestätigen",
+    "confirmMessage": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "cancel": "Abbrechen",
+    "logout": "Abmelden"
+  },
+  "footer": {
+    "joinWaitlist": "Der Warteliste beitreten",
+    "allRightsReserved": "Alle Rechte vorbehalten",
+    "links": {
+      "marketplace": "Marketplace",
+      "news": "Neuigkeiten",
+      "whitepaper": "Whitepaper",
+      "about": "Über uns",
+      "profile": "Profil",
+      "terms": "Nutzungsbedingungen"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "WO LEGENDEN VERGESSEN WERDEN",
+    "marketplace": "Marketplace",
+    "downloadGame": "Spiel herunterladen",
+    "tryUI": "Die Benutzeroberfläche ausprobieren",
+    "close": "Schließen"
+  },
+  "howItWorks": {
+    "sectionTitle": "So funktioniert es",
+    "sectionSubtitle": "Starten Sie in wenigen Schritten und erschließen Sie die Welt der digitalen Sammlerstücke.",
+    "steps": [
+      {
+        "title": "Wallet verbinden",
+        "description": "Verbinden Sie sicher Ihre Krypto-Wallet, um mit dem Kauf, Verkauf und Sammeln von NFTs zu beginnen."
+      },
+      {
+        "title": "Kollektionen erkunden",
+        "description": "Durchsuchen Sie angesagte Kollektionen und entdecken Sie seltene digitale Kunstwerke von Top-Kreatoren."
+      },
+      {
+        "title": "Sammeln & handeln",
+        "description": "Kaufen Sie Ihre Lieblings-NFTs und präsentieren oder handeln Sie diese jederzeit in Ihrem Profil."
+      },
+      {
+        "title": "Verdienen & wachsen",
+        "description": "Verdienen Sie durch den Verkauf Ihrer Kollektionen oder durch steigende Popularität im NFT-Bereich."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Sitzung abgelaufen. Bitte erneut anmelden."
+  },
+  "language": {
+    "select": "Sprache"
+  },
+  "story": {
+    "label": "GESCHICHTE",
+    "subheading": "Das Jahr ist 2117.",
+    "body": "Im Jahr 2117, vor den Nachwirkungen des Zusammenbruchs der Erde, initiierten die Überlebenden den Hyper Tek Exodus. Das letzte Bestreben der Menschheit nach Überleben führte nicht zur Eroberung der Sterne; stattdessen zerstreute es sich durch sie, verbreitete KI, verbesserte Genome und Prototypen über Tausende von Saatplaneten. Äonen vergingen, während sich jede Welt in Isolation entwickelte und neue Arten, Kulturen und Technologien hervorbrachte. Im Mittelpunkt von allem liegt der Echo Core, ein Quantenrelikt, das mit Paradoxen, Erinnerungen und einem Ruf zur Macht pulsiert. Er erweckt Sie als wiedergeborenen Herrscher, geschmiedet aus Erbe und Technologie.",
+    "readMore": "Unsere vollständige Geschichte lesen",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Vernetztes Universum",    "desc": "3 Spiele — 1 gemeinsame Wirtschaft und Progressionssystem" },
+      { "label": "Echtes Eigentum",         "desc": "NFAs mit garantiertem Mindestrückkauf" },
+      { "label": "Play-to-Earn",            "desc": "Jede Aktion trägt zu Ihren Belohnungen in der realen Welt bei" },
+      { "label": "Auszahlungen",            "desc": "Spielwährung/Belohnungen in Auszahlungen umwandeln" },
+      { "label": "Verknüpfter Fortschritt", "desc": "Spielerfortschritt ist über alle Spielsuiten verknüpft" },
+      { "label": "VR/AR-Integration",       "desc": "VR/AR-Spieler können in Echtzeit an Missionen und epischen Schlachten teilnehmen" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "Das Jahr ist 2117.",
+    "body": "Die Menschheit hat die Sterne nicht erobert — sie zerbrach in sie hinein. Nach dem Zusammenbruch der Erde starteten die Überlebenden den Hyper Tek Exodus und verstreuten KI, verbesserte Genome und Prototypen über Tausende von Saatplaneten. Jeder entwickelte sich in Isolation und bildete neue Arten, Kulturen und Technologien. Im Zentrum von allem liegt der Echo Core, ein Quantenrelikt, das nun mit Rätseln, Erinnerungen und einem Ruf zur Macht pulsiert. Er erweckt Sie, einen wiedergeborenen Herrscher, geschmiedet durch Erbe und Technologie."
+  },
+  "homeMarket": {
+    "featured": "Empfohlen",
+    "sectionTitle": "Limitierte NFA-Artikel",
+    "buybackBadge": "Garantierter Mindestrückkauf auf alle NFAs/NFCs/NFTs",
+    "urgency": "Handeln Sie schnell — wenn sie weg sind, sind sie WEG!",
+    "loading": "Artikel werden geladen...",
+    "empty": "Noch keine gelisteten Artikel.",
+    "price": "Preis",
+    "minBuyback": "Mindestrückkauf",
+    "buyNow": "Jetzt kaufen"
+  },
+  "gaming": {
+    "sectionTitle": "GAMING-INFO",
+    "learnMore": "MEHR ERFAHREN",
+    "hoverToExplore": "zum Erkunden hovern",
+    "games": [
+      {
+        "label": "RENNEN",
+        "tagline": "Geschwindigkeit ist Überleben.",
+        "description": "Überschreiten Sie die Grenzen der Schwerkraft auf neonbeleuchteten Megastädten und außerirdischem Gelände. Tunen Sie Ihre Maschine, meistern Sie jede Kurve und lassen Sie Ihre Rivalen im Staub — die Rangliste wartet auf niemanden."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Erkunden Sie das Unbekannte.",
+        "description": "Navigieren Sie durch unerforschte Sternensysteme, schmieden Sie Allianzen und entdecken Sie die Geheimnisse des Echo Core. Jede Entscheidung prägt Ihr Erbe."
+      },
+      {
+        "label": "HERRSCHER",
+        "tagline": "Befehlen. Erobern. Herrschen.",
+        "description": "Sie sind der Herrscher — wiedergeboren aus der Asche einer zerbrochenen Erde. Stellen Sie Armeen auf, besetzen Sie Sternensysteme und beugen Sie rivalisierende Fraktionen Ihrem Willen. Der Echo Core hat Sie gewählt. Beweisen Sie, dass er Recht hatte."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CROWDFUNDING-KAMPAGNE — STUFE 1",
+    "intro1": "Wir freuen uns, den Start unserer mit Spannung erwarteten Crowdfunding-Kampagne zur Sicherung der Finanzierung für die Fertigstellung des bahnbrechenden Hyper Tek-Projekts bekannt zu geben, das positive Fortschritte macht! Dies ist Ihre Chance, als früher Teilnehmer in das Hyper Tek-Ökosystem einzutauchen, indem Sie aus einer exklusiven Auswahl an Artikeln und Paketen mit begrenzter Verfügbarkeit wählen, die Sie nicht verpassen möchten. Handeln Sie schnell! Durch den direkten Kauf bei uns auf dieser Plattform können Sie reduzierte Preise von 10 % genießen, da wir Ihnen die Ersparnisse weitergeben, die durch die Vermeidung von Crowdfunding-Gebühren entstehen, die unten aufgeführt sind!",
+    "intro2": "Da alle digitalen nicht-fungiblen Artikel von Hyper Tek durch einen garantierten Mindestrückkauf abgesichert sind und die meisten auch erhebliche In-Game-Boni bieten, die Ihr Erlebnis verbessern, führen wir zur Steigerung eine Serie von limitierten Non-Fungible Assets (NFAs) mit den höchsten Bonusniveaus ein, die jemals angeboten werden. Dies ist eine seltene Gelegenheit, da diese Angebote nie wiederholt werden! Sobald diese Artikel ausverkauft sind oder wir unser Finanzierungsziel erreicht haben, werden alle verbleibenden ungeminteten limitierten NFAs dauerhaft von der Website entfernt!",
+    "intro3": "Wir haben bereits über 440.000 $ gesammelt und möchten weitere 460.000 $ sichern. Dies ist Ihr Moment, sich uns bei dieser spannenden Initiative anzuschließen — lassen Sie ihn nicht verstreichen! Kaufen Sie noch heute Ihre Artikel oder Pakete mit begrenzter Verfügbarkeit und werden Sie Teil des aufregenden Hyper Tek-Ökosystems.",
+    "intro4": "Denken Sie daran, sich für die Wunschliste anzumelden und sich in den sozialen Medien mit uns zu verbinden, um auf dem Laufenden zu bleiben! Handeln Sie jetzt, denn die Zeit drängt!",
+    "collectionsLabel": "Kollektionen",
+    "sectionTitle": "Spendenstufenpakete",
+    "discount": "10 % Rabatt auf gelistete Preise",
+    "donationTierLabel": "Spendenstufe",
+    "donationTierPrefix": "Spendenstufe:",
+    "rewardsTitle": "Belohnungen & Vorteile",
+    "noteTitle": "Hinweis",
+    "commonNote": "Belohnungen, Boni und/oder Rabatte für Spenden.\n\nHINWEIS: Mit Ausnahme des Gutscheins, der für In-Line-Spiele oder ausgewählte Käufe verwendet werden kann, können alle anderen Belohnungen, Boni und/oder Rabatte nicht mit anderen Aktionen kombiniert oder in Verbindung damit verwendet werden.\n\nAlle Spendenpakete beinhalten schriftliche Abspannkredite in der Spielentwicklung.",
+    "specialConditionTitle": "Sonderbedingung",
+    "specialCondition": "Bei erfolgreicher Entwicklung und Fertigstellung des Spiels/der Spiele erhält jeder, der spendet, einen Mindestwert, der über seiner ursprünglichen Investition in Form von Belohnungen oder Paketen liegt, die innerhalb des Spiels/der Spiele verwendet werden können, und alle versprochenen Boni oder Belohnungen für Spenden werden gewährt, sobald das Spiel/die Spiele veröffentlicht wird/werden.",
+    "imageComing": "Bild folgt in Kürze",
+    "close": "Schließen",
+    "items": [
+      { "title": "Rekrut", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Rekrut\"","Sie erhalten 35 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Rekrut erhalten Sie 10 % Rabatt auf In-Game-Käufe für die ersten 12 Monate"] },
+      { "title": "Kadettenanfänger", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Kadettenanfänger\"","Sie erhalten 90 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Kadettenanfänger erhalten Sie einen Bonus von 10 % Steigerung der Ressourcensammlung","5 % Steigerung der Trainingsgeschwindigkeit","10 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","#Wählen Sie einfach, 50 $ zu spenden, um unsere Mission zu unterstützen, und, wenn Sie möchten, erscheint Ihr Name im Abspann des Spiels unter dem Titel \"Eingetragener Ehren-Kadettenanfänger\""] },
+      { "title": "Kadett 1. Klasse", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Kadett 1. Klasse\"","Sie erhalten 125 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Kadett 1. Klasse erhalten Sie einen Bonus von 10 % Steigerung der Ressourcensammlung","5 % Steigerung der Trainingsgeschwindigkeit","5 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","10 % Rabatt auf In-Game-Käufe für die ersten 24 Monate"] },
+      { "title": "Leitender Kadett", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Leitender Kadett\"","Sie erhalten 170 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Leitender Kadett erhalten Sie einen Bonus von 10 % Steigerung der Ressourcensammlung","5 % Steigerung der Trainingsgeschwindigkeit","5 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","10 % Rabatt auf In-Game-Käufe für die ersten 24 Monate"] },
+      { "title": "Leitender Kadett Sonderklasse", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Leitender Kadett Sonderklasse\"","Sie erhalten 240 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Leitender Kadett Sonderklasse erhalten Sie einen Bonus von 10 % Steigerung der Ressourcensammlung","5 % Steigerung der Trainingsgeschwindigkeit","5 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","15 % Rabatt auf In-Game-Käufe für die ersten 24 Monate"] },
+      { "title": "Senior-Kadett", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Leitender Kadett Sonderklasse\"","Sie erhalten 390 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Senior-Kadett erhalten Sie einen Bonus von 15 % Steigerung der Ressourcensammlung","5 % Steigerung der Trainingsgeschwindigkeit","10 % Steigerung der Gesundheit","5 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","10 % Rabatt auf In-Game-Käufe für weitere 12 Monate","#Wählen Sie einfach, 250 $ zu spenden, um unsere Mission zu unterstützen, wenn Sie möchten, erscheint Ihr Name im Abspann des Spiels unter dem Titel \"Eingetragener Ehren-Senior-Sonderklasse\""] },
+      { "title": "Senior-Kadett Sonderklasse", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Senior-Kadett Sonderklasse\"","Sie erhalten 440 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Senior-Kadett Sonderklasse erhalten Sie einen Bonus von 15 % Steigerung der Ressourcensammlung","1,0 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","10 % Steigerung der Trainingsgeschwindigkeit","10 % Steigerung der Gesundheit","10 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","5 % größere Angriffskapazität","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","10 % Rabatt auf In-Game-Käufe für weitere 12 Monate"] },
+      { "title": "Flugkadett", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Flugkadett\"","Sie erhalten 550 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Leutnant erhalten Sie einen Bonus von 15 % Steigerung der Ressourcensammlung","1,5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","15 % Steigerung der Trainingsgeschwindigkeit","15 % Steigerung der Gesundheit","10 % mehr Preisgeld","5 % Angriffs- und Verteidigungssteigerung","5 % größere Angriffskapazität","1 Mega-Ressourcenpaket","1 NFA Superior-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von 150 $","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","10 % Rabatt auf In-Game-Käufe für weitere 12 Monate"] },
+      { "title": "Leutnant", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Leutnant\"","Sie erhalten 6.800 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Leutnant erhalten Sie einen Bonus von 20 % Steigerung der Ressourcensammlung","1,5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","20 % Steigerung der Trainingsgeschwindigkeit","15 % Steigerung der Gesundheit","15 % mehr Preisgeld","8 % Angriffs- und Verteidigungssteigerung","7 % größere Angriffskapazität","Bonus-Rennteile","1 Mega-Ressourcenpaket","1 Außenwelt-Hafenpass","1 NFA Superior-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von 150 $","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","10 % Rabatt auf In-Game-Käufe für weitere 12 Monate","#Wählen Sie einfach, 500 $ zu spenden, um unsere Mission zu unterstützen, und, wenn Sie möchten, erscheint Ihr Name im Abspann des Spiels unter dem Titel \"Eingetragener Ehren-Leutnant\""] },
+      { "title": "Leutnant Sonderklasse", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Leutnant Sonderklasse\"","Sie erhalten 1.050 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Leutnant Sonderklasse erhalten Sie einen Bonus von 20 % Steigerung der Ressourcensammlung","1,5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","1,0 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","20 % Steigerung der Trainingsgeschwindigkeit","20 % Steigerung der Gesundheit","15 % mehr Preisgeld","10 % Angriffs- und Verteidigungssteigerung","7 % größere Angriffskapazität","Bonus-Rennteile","1 Mega-Ressourcenpaket","1 zusätzlicher Host-Avatar","1 Außenwelt-Hafenpass","1 NFA Superior-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von 150 $","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","10 % Rabatt auf In-Game-Käufe für weitere 12 Monate"] },
+      { "title": "Flügelmann", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Flügelmann\"","Sie erhalten 1.480 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Flügelmann erhalten Sie einen Bonus von 25 % Steigerung der Ressourcensammlung","2,0 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","1,0 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","25 % Steigerung der Trainingsgeschwindigkeit","20 % Steigerung der Gesundheit","20 % mehr Preisgeld","10 % Angriffs- und Verteidigungssteigerung","8 % größere Angriffskapazität","Bonus-Rennteile","1 Mega-Ressourcenpaket","1 Mega-Kristallpaket","1 zusätzlicher Host-Avatar","1 Außenwelt-Hafenpass","2 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","Erhalten Sie dauerhaft weitere 10 % Rabatt auf alle Käufe im Spiel/den Spielen","#Wählen Sie einfach, 1.000 $ zu spenden, um unsere Mission zu unterstützen, und, wenn Sie möchten, erscheint Ihr Name im Abspann des Spiels unter dem Titel \"Eingetragener Ehren-Flügelmann\""] },
+      { "title": "Flügelmann Senior-Klasse", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Flügelmann Senior-Klasse\"","Sie erhalten 2.200 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Flügelmann Senior-Klasse erhalten Sie einen Bonus von 25 % Steigerung der Ressourcensammlung","3,0 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","1,5 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","30 % Steigerung der Trainingsgeschwindigkeit","25 % Steigerung der Gesundheit","20 % mehr Preisgeld","15 % Angriffs- und Verteidigungssteigerung","10 % größere Angriffskapazität","1 zusätzlicher Teleportationsplatz zum Angreifen/Verteidigen","Bonus-Rennteile","1 Mega-Ressourcenpaket","1 Mega-Kristallpaket","1 zusätzlicher Host-Avatar","1 Außenwelt-Hafenpass","2 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","20 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","Erhalten Sie dauerhaft weitere 10 % Rabatt auf alle Käufe im Spiel/den Spielen"] },
+      { "title": "Technischer Offizier", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Technischer Offizier\"","Sie erhalten 2.900 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Technischer Offizier erhalten Sie einen Bonus von 25 % Steigerung der Ressourcensammlung","3,5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","2,0 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","30 % Steigerung der Trainingsgeschwindigkeit","25 % Steigerung der Gesundheit","25 % mehr Preisgeld","15 % Angriffs- und Verteidigungssteigerung","10 % größere Angriffskapazität","1 zusätzlicher Teleportationsplatz zum Angreifen/Verteidigen","Bonus-Rennteile","2 Mega-Ressourcenpakete","1 Mega-Kristallpaket","2 zusätzliche Host-Avatare","2 Außenwelt-Hafenpässe","3 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","25 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","Erhalten Sie dauerhaft weitere 20 % Rabatt auf alle Käufe im Spiel/den Spielen","Personalisierter Avatar nach dem Vorbild des Spenders, der im gesamten Spiel erscheint","Umsatzbeteiligung! Anteil an bis zu 2,5 % des Gewinnpools aus dem Verkauf von In-Game-Paketen und NFAs","Exklusiver Entwicklerzugang mit monatlichen privaten Updates zum Spiel, zur Entwicklung sowie Möglichkeiten zum Feedback","Exklusives Quest-Renndesign zur Verwendung im Spiel","Sammelkarte im Baseball-Stil Ihres exklusiven Quest-Rennens, an Sie gesendet mit einem Dankesschreiben"] },
+      { "title": "Teamspezialist", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Teamspezialist\"","Sie erhalten 3.300 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Teamspezialist erhalten Sie einen Bonus von 30 % Steigerung der Ressourcensammlung","5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","2,5 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","30 % Steigerung der Trainingsgeschwindigkeit","30 % Steigerung der Gesundheit","25 % mehr Preisgeld","15 % Angriffs- und Verteidigungssteigerung","10 % größere Angriffskapazität","1 zusätzlicher Teleportationsplatz zum Angreifen/Verteidigen","Bonus-Rennteile","3 Mega-Ressourcenpakete","1 Mega-Kristallpaket","2 zusätzliche Host-Avatare","2 Außenwelt-Hafenpässe","2 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","1 NFA Exceptional-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 400 $","25 % Rabatt auf In-Game-Käufe für die ersten 24 Monate","Erhalten Sie dauerhaft weitere 20 % Rabatt auf alle Käufe im Spiel/den Spielen","Personalisierter Avatar nach dem Vorbild des Spenders, der im gesamten Spiel erscheint","Umsatzbeteiligung! Anteil an bis zu 2,5 % des Gewinnpools aus dem Verkauf von In-Game-Paketen und NFAs","Exklusiver Entwicklerzugang mit monatlichen privaten Updates zum Spiel, zur Entwicklung sowie Möglichkeiten zum Feedback","Exklusives Quest-Renndesign zur Verwendung im Spiel","Sammelkarte im Baseball-Stil Ihres exklusiven Quest-Rennens, an Sie gesendet mit einem Dankesschreiben","#Wählen Sie einfach, 2.500 $ zu spenden, um unsere Mission zu unterstützen, und, wenn Sie möchten, erscheint Ihr Name im Abspann des Spiels unter dem Titel \"Eingetragener Ehren-Teamspezialist\""] },
+      { "title": "Teamspezialist Major", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Teamspezialist Major\"","Sie erhalten 6.500 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Teamspezialist Major erhalten Sie einen Bonus von 35 % Steigerung der Ressourcensammlung/-gewinnung","7 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","3,5 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","35 % Steigerung der Trainingsgeschwindigkeit","30 % Steigerung der Gesundheit","30 % mehr Preisgeld","20 % Angriffs- und Verteidigungssteigerung","10 % größere Angriffskapazität","1 zusätzlicher Teleportationsplatz zum Angreifen/Verteidigen","Bonus-Rennteile","4 Mega-Ressourcenpakete","1 Mega-Kristallpaket","2 zusätzliche Host-Avatare","2 Außenwelt-Hafenpässe","3 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","1 NFA Exceptional-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 400 $","25 % Rabatt auf In-Game-Käufe für die ersten 24 Monate","Erhalten Sie dauerhaft weitere 20 % Rabatt auf alle Käufe im Spiel/den Spielen","Personalisierter Avatar nach dem Vorbild des Spenders, der im gesamten Spiel erscheint","Umsatzbeteiligung! Anteil an bis zu 5 % des Gewinnpools aus dem Verkauf von In-Game-Paketen und NFAs","Exklusiver Entwicklerzugang mit monatlichen privaten Updates zum Spiel, zur Entwicklung sowie Möglichkeiten zum Feedback","Exklusives Quest-Renndesign zur Verwendung im Spiel","Sammelkarte im Baseball-Stil Ihres exklusiven Quest-Rennens, an Sie gesendet mit einem Dankesschreiben"] },
+      { "title": "Kommandant Elite", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Kommandant Elite\"","Sie erhalten 9.000 USD Guthaben für In-Game-Käufe","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Kommandant Elite erhalten Sie einen Bonus von 35 % Steigerung der Ressourcensammlung/-gewinnung","7,5 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","4 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","40 % Steigerung der Trainingsgeschwindigkeit","35 % Steigerung der Gesundheit","30 % mehr Preisgeld","20 % Angriffs- und Verteidigungssteigerung","20 % größere Angriffskapazität","2 zusätzliche Teleportationsplätze zum Angreifen/Verteidigen","Bonus-Rennteile","4 Mega-Ressourcenpakete","2 Mega-Kristallpakete","2 zusätzliche Host-Avatare","3 Außenwelt-Hafenpässe","4 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","1 NFA Exceptional-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 400 $","30 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","25 % Rabatt auf In-Game-Käufe für die nächsten 12 Monate","Erhalten Sie dauerhaft weitere 20 % Rabatt auf alle Käufe im Spiel/den Spielen","Personalisierter Avatar nach dem Vorbild des Spenders, der im gesamten Spiel erscheint","Umsatzbeteiligung! Anteil an bis zu 5 % des Gewinnpools aus dem Verkauf von In-Game-Paketen und NFAs","Exklusiver Entwicklerzugang mit monatlichen privaten Updates zum Spiel, zur Entwicklung sowie Möglichkeiten zum Feedback","Exklusives Quest-Renndesign zur Verwendung im Spiel","Sammelkarte im Baseball-Stil Ihres exklusiven Quest-Rennens, an Sie gesendet mit einem Dankesschreiben"] },
+      { "title": "Herrscher", "rewards": ["Ihr Name erscheint im Abspann des Spiels unter dem Titel \"Herrscher\"","Sie erhalten 15.000 USD Guthaben für In-Game-Käufe (kann nicht in Auszahlungen umgewandelt werden)","Sie erhalten wöchentliche Updates zum Spiel per E-Mail","Sie können dem Discord-Chat beitreten.","Als Herrscher erhalten Sie einen Bonus von 40 % Steigerung der Ressourcensammlung/-gewinnung","10 % höhere Chance, NFAs oder seltene Gegenstände in den ersten 12 Monaten zu erhalten","5 % höhere Chance, NFAs oder seltene Gegenstände dauerhaft zu erhalten","50 % Steigerung der Trainingsgeschwindigkeit","40 % Steigerung der Gesundheit","40 % mehr Preisgeld","25 % Angriffs- und Verteidigungssteigerung","25 % größere Angriffskapazität","2 zusätzliche Teleportationsplätze zum Angreifen/Verteidigen","Bonus-Rennteile","6 Mega-Ressourcenpakete","3 Mega-Kristallpakete","2 zusätzliche Host-Avatare","4 Außenwelt-Hafenpässe","4 NFA Superior-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 150 $","2 NFA Legendary-Teamspezialisten mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 650 $","1 NFA Epic-Teamspezialist mit Schiffs- und Rennboni sowie garantiertem Mindestrückkauf von je 1.000 $","40 % Rabatt auf In-Game-Käufe für die ersten 12 Monate","30 % Rabatt auf In-Game-Käufe für die nächsten 12 Monate","Erhalten Sie weitere 20 % Rabatt auf alle Käufe im Spiel/den Spielen, solange Sie am Spiel beteiligt sind","Personalisierter Avatar nach dem Vorbild des Spenders, der im gesamten Spiel erscheint","Umsatzbeteiligung! Anteil an bis zu 5 % des Gewinnpools aus dem Verkauf von In-Game-Paketen und NFAs","Exklusiver Entwicklerzugang mit monatlichen privaten Updates zum Spiel, zur Entwicklung sowie Möglichkeiten zum Feedback","Exklusives Quest-Renndesign zur Verwendung im Spiel","Sammelkarte im Baseball-Stil Ihres exklusiven Quest-Rennens, an Sie gesendet mit einem Dankesschreiben"] }
+    ]
+  }
+}

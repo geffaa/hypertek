@@ -1,0 +1,475 @@
+{
+  "marketplace": {
+    "sectionLabel": "Markedsplass",
+    "searchPlaceholder": "Sok...",
+
+    "tabs": {
+      "overview":  "Oversikt",
+      "nfa101":    "NFA-er / NFC-er / NFT-er",
+      "general":   "Markedsplassen",
+      "auctions":  "Auksjoner",
+      "trades":    "Handler",
+      "quests":    "Oppdrag",
+      "hire":      "Til leie",
+      "bounty":    "Dusjer"
+    },
+
+    "banner": {
+      "defaultHeading": "En ny era er i ferd med a dages i Hyper Tek",
+      "defaultDesc": "Det er starten pa et levende, pustende univers der hver beslutning former reisen.",
+      "stats": {
+        "totalItems":  "Totalt antall gjenstander",
+        "totalBuys":   "Totalt antall kjop",
+        "listed":      "Listet",
+        "collections": "Samlinger"
+      },
+      "soundOn":  "Lyd pa",
+      "soundOff": "Lyd av"
+    },
+
+    "bottomBar": {
+      "learnLabel":     "Laer om NFA-er / NFC-er",
+      "educationPanel": "HyperTek opplaringspanel",
+      "footerNote":     "Dette panelet er for rask referanse. Besok NFA-er / NFC-er 101-fanen for fullstendig opplaeringsinnhold.",
+      "facts": [
+        { "label": "NFA",        "desc": "Kun Hypertek-eiendel. Hoyeste spillbonuser. Garantert minimumsinnkjopsverdi som vokser med hvert salg." },
+        { "label": "NFC",        "desc": "Skapt av Hypertek eller lisensierte spillere. Spillbonuser inkludert. Minimumsinnkjop garantert." },
+        { "label": "NFT",        "desc": "Spillerskapt samleobjekt. Ingen spillbonuser. Ingen innkjopsgaranti. Kan handles pa markedsplassen." },
+        { "label": "Provisjon", "desc": "20% plattformgebyr pa alle salg. Selger mottar 80%. Artistroyalty 4% pa videresalg." },
+        { "label": "Innkjopsvekst", "desc": "+5% av hvert videresalgspris legges til eiendelens minimumsinnkjopsverdi. Det vokser kun aldri." },
+        { "label": "Oppbevaringsommebok", "desc": "HyperTek oppretter automatisk en kryptolommebok for deg ved registrering." }
+      ]
+    },
+
+    "overview": {
+      "heading":  "Oversikt",
+      "subtitle": "Velkommen til HyperTek-markedsplassen. Velg en funksjon for a laere mer — og hopp rett inn.",
+      "features": [
+        {
+          "label":   "NFA-er / NFC-er / NFT-er",
+          "tagline": "Ny pa Web3-eiendeler? Begynn her",
+          "details": [
+            "NFA-er (ikke-fungible eiendeler) er Hypertek-utstedte gjenstander med en plattformgarantert innkjopspris.",
+            "NFC-er (ikke-fungible karakterer) er lisensierte spillergjenstander med spillbonuser og innkjop.",
+            "NFT-er (ikke-fungible tokens) er brukerskapte samleobjekter — skinn, vapen og mer."
+          ],
+          "cta": "Laer grunnlaget"
+        },
+        {
+          "label":   "Markedsplassen",
+          "tagline": "Kjop og selg spilleiendeler umiddelbart",
+          "details": [
+            "Bla gjennom et bredt utvalg av NFA-er, NFC-er og NFT-er — skinn, vapen, spesialister, romskip og mer.",
+            "Filtrer etter kategori, sjeldenhet eller prisinterval for a finne akkurat det du trenger.",
+            "Listinger er fulfort pa kjeden, slik at eieroverforinger er umiddelbare og verificerbare."
+          ],
+          "cta": "Bla gjennom markedsplassen"
+        },
+        {
+          "label":   "Auksjoner",
+          "tagline": "Konkurrer om eksklusive begrensede gjenstander",
+          "details": [
+            "By pa sjeldne eiendeler som kun er tilgjengelige gjennom tidsbegrensede auksjoner.",
+            "En live nedtelling viser akkurat hvor mye tid som er igjen — hvert sekund teller.",
+            "Overd andre for a sikre legendariske gjenstander som ikke kan kjopes pa noen annen mate."
+          ],
+          "cta": "Se auksjoner"
+        },
+        {
+          "label":   "Handler",
+          "tagline": "Bytt eiendeler mellom kollegaer, ingen mellommann",
+          "details": [
+            "Foresla eller aksepter direkte eiendelsbytter med andre spillere — fullt pa kjeden.",
+            "Sett betingelsene selv: velg hva du tilbyr og hva du vil ha i retur.",
+            "Bla gjennom apne handletilbud eller legg ut ditt eget for a finne den perfekte avtalen."
+          ],
+          "cta": "Bla gjennom handler"
+        },
+        {
+          "label":   "Oppdrag",
+          "tagline": "Fulfor oppdrag, tjen eksklusive belonninger",
+          "details": [
+            "Ta pa deg oppdrag for a tjene eksklusive belonninger og sjeldne spilleiendeler.",
+            "Hvert oppdrag har unike mal — utforsk, kjemp eller bygg veien til seieren.",
+            "Bygg samlingen din strategisk gjennom ferdighet, ikke bare pengebruk."
+          ],
+          "cta": "Utforsk oppdrag"
+        },
+        {
+          "label":   "Til leie",
+          "tagline": "Lan eiendeler eller tjen pa dine egne",
+          "details": [
+            "Lei kraftige spesialister eller utstyr for ett enkelt oppdrag uten a kjope direkte.",
+            "List dine egne inaktive eiendeler for utleie og tjen passiv inntekt mens du er borte.",
+            "Fleksible varighet — timesvis, daglig eller per-oppdrags-avtaler."
+          ],
+          "cta": "Bla gjennom til leie"
+        },
+        {
+          "label":   "Dusjer",
+          "tagline": "Jakt mal, krev belonninger, topp lederbordet",
+          "details": [
+            "Aksepter dusjer publisert av andre spillere eller systemet for a tjene kryptobelonninger.",
+            "Klatr pa dusjledertavlen for a lase opp eksklusive titler og bonusutbetalinger.",
+            "Legg ut dine egne dusjer for a rekruttere dyktige spillere til malene dine."
+          ],
+          "cta": "Se dusjer"
+        }
+      ]
+    },
+
+    "general": {
+      "heading":  "Generelt",
+      "subtitle": "Bla gjennom NFA-er, NFC-er og NFT-er tilgjengelig for umiddelbart kjop — skinn, vapen, spesialister, romskip og mer.",
+      "filterAll": "Alle",
+      "samplePreviewTitle": "Eksempel pa forhansvisning av markedsplass",
+      "samplePreviewDesc": "Gjenstandene nedenfor er eksempel pa forhansvisninger som viser typer digitale eiendeler som vil vaere tilgjengelige pa HyperTek-markedsplassen. Faktiske gjenstander med unik kunst og blokkjede-verifisert eierskap vil vaere tilgjengelige ved lansering.",
+      "noItems": "Ingen gjenstander tilgjengelige enna. Sjekk tilbake snart.",
+      "categories": {
+        "skins":           "Skinn",
+        "militaryBadges":  "Militaermerker",
+        "specialists":     "Spesialister",
+        "weapons":         "Vapen",
+        "bodyArmour":      "Kroppspansere",
+        "spaceships":      "Romskip",
+        "racingVehicles":  "Kjoretoy",
+        "artwork":         "Kunstverk",
+        "landAndBases":    "Land og baser",
+        "general":         "Generelt"
+      }
+    },
+
+    "nfa101": {
+      "sectionLabel": "Opplaring",
+      "heading":      "NFA-er / NFC-er / NFT-er 101",
+      "subtitle":     "Ny pa NFT-er og Web3? Utforsk artiklene vare for a forsta blokkjedeeiendeler, lommebokter, sikkerhet og HyperTek-okosystemet.",
+      "minRead":      "min lesing",
+      "filterAll":    "Alle"
+    },
+
+    "auctions": {
+      "heading":        "Auksjoner",
+      "listings":       "listinger",
+      "newAuction":     "Ny auksjon",
+      "noAuctions":     "Ingen {{filter}} auksjoner",
+      "createFirst":    "Opprett den forste auksjonen",
+      "endingSoon":     "SLUTTER SNART",
+      "viewDetails":    "Se detaljer",
+      "rules": {
+        "durations":    "Varigheter: 1d · 3d · 7d",
+        "minIncrement": "Min okning: 5%",
+        "freeToList":   "Gratis a liste",
+        "commission":   "Provisjon: 20% ved salg"
+      },
+      "preview": {
+        "title":   "Forhansvisning av spillfunksjon",
+        "desc":    "Auksjonssystemet vil vaere fullt live i spillet ved lansering. Gjenstander vist her er seedede eksempler for investor-/brukervisning."
+      },
+      "card": {
+        "currentBid": "Gjeldende bud",
+        "endsIn":     "Slutter om",
+        "placeBid":   "Legg inn bud",
+        "buyNow":     "Kjop na",
+        "bids":       "bud",
+        "ended":      "AVSLUTTET"
+      },
+      "detail": {
+        "currentBid":  "Gjeldende bud",
+        "start":       "Start",
+        "endsIn":      "Slutter om",
+        "description": "Beskrivelse",
+        "recentBids":  "Siste bud",
+        "anonymous":   "Anonym",
+        "placeBid":    "Legg inn bud",
+        "buyNow":      "Kjop na",
+        "buyNowLabel": "Kjop na",
+        "bids":        "bud"
+      },
+      "bidModal": {
+        "title":          "Legg inn bud",
+        "currentBid":     "Gjeldende bud",
+        "minimumBid":     "Minimumsbud",
+        "yourBid":        "Budet ditt (USDC)",
+        "minIncrement":   "Min okning 5% · Neste minimum etter budet ditt: {{next}} USDC",
+        "reviewBid":      "Gjennomg bud",
+        "disclaimer":     "Vinnende bud er bindende · 20% plattformprovisjon",
+        "confirmTitle":   "Bekreft bud",
+        "item":           "Gjenstand",
+        "yourBidLabel":   "Budet ditt",
+        "youPay":         "Hvis du vinner, betaler du",
+        "outbidNotice":   "Du vil bli varslet umiddelbart hvis noen overbyr deg. Auksjonen lukkes automatisk nar tidtakeren utloper.",
+        "back":           "Tilbake",
+        "confirm":        "Bekreft — {{amount}} USDC",
+        "placing":        "Legger inn...",
+        "successTitle":   "Bud lagt inn!",
+        "highestBidder":  "Du er hoyestbyder",
+        "outbidWarning":  "Du vil motta en varsling hvis du blir overbyd.",
+        "done":           "Ferdig",
+        "endsIn":         "Slutter om"
+      },
+      "instantBuyModal": {
+        "title":         "Kjop na — Umiddelbart",
+        "buyNowPrice":   "Kjop na-pris",
+        "currentBids":   "Gjeldende bud",
+        "notice":        "Kjop na avslutter auksjonen umiddelbart. Gjenstanden overforest til lommeboken din og alle andre budgivere refunderes.",
+        "cancel":        "Avbryt",
+        "processing":    "Behandler...",
+        "successTitle":  "Gjenstand sikret!",
+        "auctionClosed": "Auksjon avsluttet · Overforing initiert",
+        "item":          "Gjenstand",
+        "paid":          "Betalt",
+        "status":        "Status",
+        "transferred":   "Overfert til lommebok",
+        "walletNote":    "Gjenstanden vises i fanen Mine samlinger.",
+        "viewCollect":   "Se mine samlinger"
+      },
+      "createModal": {
+        "title":          "Opprett auksjon",
+        "selectItem":     "Velg gjenstand",
+        "connectWallet":  "Koble til lommebok for a bla gjennom gjenstandene dine",
+        "loadingItems":   "Laster...",
+        "noItems":        "Ingen eide gjenstander funnet",
+        "pricingDuration":"Prissetting og varighet",
+        "startPrice":     "Startpris (USDC) *",
+        "reservePrice":   "Reservepris (USDC)",
+        "instantBuyPrice":"Kjop na-pris (USDC)",
+        "optional":       "Valgfritt",
+        "leaveBlank":     "La sta blank for a deaktivere",
+        "duration":       "Varighet",
+        "dur1Day":        "1 dag",
+        "dur3Days":       "3 dager",
+        "dur7Days":       "7 dager",
+        "freeToList":     "Gratis a liste · 20% provisjon ved salg",
+        "creating":       "Oppretter...",
+        "submit":         "Opprett auksjon"
+      },
+      "pagination": {
+        "prev":  "Forrige",
+        "next":  "Neste",
+        "page":  "Side {{page}} av {{pages}}"
+      }
+    },
+
+    "trades": {
+      "heading":    "Handler",
+      "listings":   "listinger",
+      "postTrade":  "Legg ut handel",
+      "noTrades":   "Ingen {{filter}} handler",
+      "viewDetails":"Se detaljer",
+      "trade":      "handel",
+      "yours":      "ditt",
+      "offering":   "Tilbyr",
+      "wanting":    "Onsker",
+      "makeOffer":  "Gi et tilbud",
+      "by":         "av",
+      "acceptTrade":"Aksepter handel",
+      "cancelTrade":"Avbryt handel",
+      "rules": {
+        "expiry":    "Listinger utloper etter 30 dager",
+        "fee":       "Plattformgebyr gjelder for begge parter",
+        "noNFA":     "NFA-er kan ikke handles — kun selges"
+      },
+      "acceptModal": {
+        "title":          "Handelsforslag",
+        "postedBy":       "Lagt ut av",
+        "exchangeDetails":"Utvekslingsdetaljer",
+        "theyOffer":      "De tilbyr",
+        "theyWant":       "De vil ha",
+        "feeNotice":      "Plattformgebyr gjelder for begge parter",
+        "acceptBtn":      "Aksepter denne handelen",
+        "confirmTitle":   "Bekreft handel",
+        "trade":          "Handel",
+        "postedByLabel":  "Lagt ut av",
+        "terms":          "Ved a akseptere samtykker du til utvekslingsbetingelsene. Leggeren vil bli varslet og ma bekrefte for gjenstander overforest.",
+        "back":           "Tilbake",
+        "sending":        "Sender...",
+        "confirm":        "Bekreft",
+        "successTitle":   "Forslag sendt!",
+        "notified":       "har blitt varslet",
+        "successNote":    "Handelsleggeren vil gjennomg forslaget ditt og ordne utvekslingen. Sjekk varslene dine for svaret deres.",
+        "expiry":         "Forslag utloper etter 30 dager hvis de ikke bekreftes.",
+        "close":          "Lukk"
+      },
+      "createModal": {
+        "title":          "Legg ut en handel",
+        "yourItem":       "Din gjenstand",
+        "itemNamePlaceholder": "Gjenstandsnavn *",
+        "loadingItems":   "Laster gjenstandene dine...",
+        "connectWallet":  "Koble til lommebok for a velge fra gjenstandene dine",
+        "pickFromItems":  "Eller velg fra gjenstandene dine (fyller inn navn automatisk):",
+        "imageOptional":  "Bilde (valgfritt)",
+        "whatYouWant":    "Det du vil ha",
+        "openOffer":      "Apent tilbud — la andre foreslå",
+        "anyCategory":    "Alle kategorier",
+        "notesLabel":     "Notater (valgfritt)",
+        "notesPlaceholder":"Handelsbetingelser, tilstand osv.",
+        "disclaimer":     "Begge parter betaler plattformgebyr · Utloper etter 30 dager · NFA-er kan ikke handles",
+        "posting":        "Legger ut...",
+        "submit":         "Legg ut handel"
+      },
+      "pagination": {
+        "prev":  "Forrige",
+        "next":  "Neste",
+        "page":  "Side {{page}} av {{pages}}"
+      }
+    },
+
+    "quests": {
+      "heading":       "Oppdragstavle",
+      "quests":        "oppdrag",
+      "noQuests":      "Ingen {{filter}} oppdrag",
+      "inGameFeature": "Spillfunksjon",
+      "inGameDesc":    "Oppdrag genereres automatisk nar selgere velger redusert provisjon. Spillere kan fullfore opptil 5 oppdrag per dag. Provisjonspoolen deles mellom kjoperrabatten, spillerbelonningen og plattformen.",
+      "earnFromQuests":"Vil du tjene pa oppdrag? Spill spillet →",
+      "moneyQuests":   "Pengeopprag (11% pool)",
+      "resourceQuests":"Ressursoppdrag (20% pool)",
+      "footerNote1":   "# Oppdrag med kombinerte nyttelaster vil bli utbetalt ved bruk av de separate tabellbeløpene.",
+      "footerNote2":   "# Planettdata synkroniseres nar spillene gar live.",
+      "inGame":        "I spillet",
+      "open":          "Apen",
+      "table": {
+        "questingNo":    "Oppdragsnr.",
+        "pickupPlanet":  "Henteplanet",
+        "dropOffPlanet": "Leveringsplanet",
+        "itemGoods":     "Gjenstand / varer",
+        "commSplit":     "Provisjonsfordeling",
+        "questingTime":  "Oppragstid",
+        "assignedTo":    "Tildelt til"
+      },
+      "comingSoon": {
+        "title":   "Kommer snart",
+        "desc":    "Spillets oppdragsfunksjon er for oyeblikket under utvikling. Hold deg oppdatert — du vil snart kunne tjene belonninger direkte fra spillet.",
+        "gotIt":   "Forst"
+      },
+      "pagination": {
+        "prev":  "Forrige",
+        "next":  "Neste",
+        "page":  "Side {{page}} av {{pages}}"
+      }
+    },
+
+    "hire": {
+      "heading":          "Til leie",
+      "listings":         "listinger",
+      "listBtn":          "List",
+      "forHireLabel":     "Til leie",
+      "wantingToHire":    "Onsker a ansette",
+      "noListings":       "Ingen {{filter}} listinger",
+      "lockedTitle":      "HyperTek-spillinnhold kun til visningsformal.",
+      "lockedDesc":       "Denne delen er last til spillene er ferdigstilt.",
+      "forHireBadge":     "TIL LEIE",
+      "wantedBadge":      "ONSKER A ANSETTE",
+      "price":            "Pris",
+      "maxDuration":      "Maks varighet",
+      "hireBtn":          "Ansett",
+      "fulfillBtn":       "Innfri foresporsel",
+      "rules": {
+        "durations":   "8t · 1d · 3d · 1u · 1mn",
+        "cooldown":    "Nedkjoling: 2x leievarighet",
+        "commission":  "Provisjon: 20%",
+        "payment":     "Betal med Hyper Bucks eller materialer"
+      },
+      "preview": {
+        "title": "Forhansvisning av spillfunksjon",
+        "desc":  "Til leie-systemet vil vaere fullt live i spillet ved lansering. Gjenstander vist her er seedede eksempler for investor-/brukervisning."
+      },
+      "hireModal": {
+        "hireTitle":     "Ansett spesialist",
+        "fulfillTitle":  "Innfri leieforespørsel",
+        "forHireBadge":  "TIL LEIE",
+        "wantedBadge":   "ONSKET",
+        "price":         "Pris",
+        "duration":      "Varighet",
+        "howHire":       "Slik fungerer ansettelse",
+        "howFulfill":    "Slik fungerer innfriing av en foresporsel",
+        "proceedHire":   "Gje videre til ansettelse",
+        "offerFulfill":  "Tilby a innfri",
+        "commission":    "20% plattformprovisjon · Nedkjoling gjelder etter retur",
+        "confirmHire":   "Bekreft ansettelse",
+        "confirmOffer":  "Bekreft tilbud",
+        "specialist":    "Spesialist",
+        "payment":       "Betaling",
+        "yourOffer":     "Tilbudet ditt",
+        "durationLabel": "Varighet",
+        "commLabel":     "Provisjon",
+        "back":          "Tilbake",
+        "processing":    "Behandler...",
+        "sendOffer":     "Send tilbud",
+        "deployedTitle": "Utplassert!",
+        "offerSentTitle":"Tilbud sendt!",
+        "availableFor":  "Tilgjengelig for",
+        "paid":          "Betalt",
+        "returnNote":    "Returner for perioden slutter for a unnga automatisk straff. Nedkjoling pa {{hours}}t gjelder etter retur.",
+        "close":         "Lukk"
+      },
+      "createModal": {
+        "listTitle":         "List til leie",
+        "postTitle":         "Legg ut onsker a ansette",
+        "forHireBtn":        "Til leie",
+        "wantingBtn":        "Onsker a ansette",
+        "itemNameHire":      "Spesialist / gjenstandsnavn *",
+        "itemNameWant":      "Det du vil ansette *",
+        "descPlaceholder":   "Beskrivelse",
+        "categoryPlaceholder":"Kategori (valgfritt)",
+        "paymentType":       "Betalingstype",
+        "hyperBucks":        "Hyper Bucks",
+        "materials":         "Materialer",
+        "amountLabel":       "Belop (Hyper Bucks)",
+        "afterCommission":   "Du mottar {{amount}} HB etter 20% provisjon",
+        "maxDuration":       "Maks varighet",
+        "disclaimer":        "20% provisjon · Nedkjoling = 2x leievarighet etter retur",
+        "listing":           "Lister...",
+        "submit":            "Opprett listing"
+      },
+      "pagination": {
+        "prev":  "Forrige",
+        "next":  "Neste",
+        "page":  "Side {{page}} av {{pages}}"
+      }
+    },
+
+    "bounty": {
+      "heading":       "Dusjbrett",
+      "contracts":     "kontrakt",
+      "contractsPlural":"kontrakter",
+      "noContracts":   "Ingen {{filter}} kontrakter",
+      "noContractsNote":"Dusjer legges ut av spillere og spillsystemet",
+      "expiresIn":     "Utloper om {{days}}d",
+      "inGameNotice": {
+        "title": "Spillfunksjon — Kun visning",
+        "desc":  "Dusjer opprettes av spillere og spillsystemet. Akseptering og fullfor av dusjer skjer kun i spillet. Dette brettet vises for apenenhet og for a oppmuntre nye spillere til a bli med."
+      },
+      "rules": {
+        "battle":     "Slag lost i spillet automatisk",
+        "commission": "20% plattformprovisjon pa belonning",
+        "expiry":     "Kontrakter utloper etter 30 dager"
+      },
+      "table": {
+        "bountyNo":   "Dusj nr.",
+        "target":     "Mal (tatt pa)",
+        "reward":     "Belonning",
+        "postedBy":   "Lagt ut av",
+        "claimedBy":  "Krevd av",
+        "status":     "Status",
+        "netHB":      "{{amount}} HB netto"
+      },
+      "pagination": {
+        "prev":  "Forrige",
+        "next":  "Neste",
+        "page":  "Side {{page}} av {{pages}}"
+      }
+    },
+
+    "common": {
+      "prev":           "Forrige",
+      "next":           "Neste",
+      "pageOf":         "Side {{page}} av {{pages}}",
+      "back":           "Tilbake",
+      "close":          "Lukk",
+      "cancel":         "Avbryt",
+      "loading":        "Laster...",
+      "connectWallet":  "Koble til lommeboken din forst",
+      "loginFirst":     "Logg inn forst"
+    }
+  }
+}

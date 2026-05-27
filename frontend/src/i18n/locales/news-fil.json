@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Bumalik sa Home",
+    "latestUpdates": "Pinakabagong Updates",
+    "heading": "Balita, Updates at FAQ",
+    "latestBadge": "PINAKABAGO",
+    "readArticle": "Basahin ang Artikulo",
+    "read": "Basahin",
+    "allStories": "Lahat ng Kwento",
+    "seeAll": "Tingnan Lahat ({{count}})",
+    "showLess": "Ipakita ang Mas Kaunti",
+    "frequentlyAsked": "Mga Madalas na Tanong",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Naglo-load ng artikulo…",
+    "backToNews": "Bumalik sa Balita",
+    "home": "Home",
+    "news": "Balita",
+    "newsUpdates": "Balita at Updates",
+    "allArticles": "Lahat ng Artikulo",
+    "copied": "Nakopya!",
+    "share": "Ibahagi",
+    "faq": [
+      {
+        "q": "Ano ang HyperTek?",
+        "a": "Ang HyperTek ay isang play-to-earn gaming ecosystem na nakatakda sa taong 2117. Nagtatampok ito ng 3 magkakaugnay na laro — Hyper Racing, Hyper Quest, at Hyper Overlord — na nagbabahagi ng iisang ekonomiya at sistema ng pag-unlad. Bawat aksyon na iyong gagawin ay nag-aambag sa mga gantimpala sa totoong mundo."
+      },
+      {
+        "q": "Ano ang NFA, NFC, at NFT?",
+        "a": "Ang NFA (Non-Fungible Assets) ay mga in-game na item na inilabas ng HyperTek na may garantisadong minimum na buyback price mula sa platform. Ang NFC (Non-Fungible Characters) ay mga lisensyadong character ng manlalaro na may mga bonus sa laro at garantiya ng buyback. Ang NFT ay mga collectible na ginawa ng gumagamit — mga skin, sandata, at cosmetics."
+      },
+      {
+        "q": "Paano gumagana ang garantiya ng buyback?",
+        "a": "Bawat NFA sa HyperTek ay may garantisadong minimum na halaga ng buyback. Kung magpasya kang umalis sa laro, ang HyperTek ay muling bibilhin ang iyong mga asset sa halagang hindi bababa sa garantisadong minimum na presyo — pinoprotektahan ang iyong investment sa lahat ng oras."
+      },
+      {
+        "q": "Paano magsimulang kumita ng mga gantimpala sa totoong mundo?",
+        "a": "Mag-sign up, ikonekta ang iyong wallet, at magsimulang maglaro. Bawat misiyon na natapos, asset na ipinagpalit, o labanan na nanalo ay nagbibigay ng in-game currency na maaaring gawing cash-out payments. Ang iyong pag-unlad ay dinadala sa lahat ng tatlong laro."
+      },
+      {
+        "q": "Anong mga laro ang available?",
+        "a": "Tatlong laro ang nagbabahagi ng HyperTek universe: Hyper Racing (mataas na bilis na circuit battles), Hyper Quest (paggalugad, mga faction, at sinaunang teknolohiya), at Hyper Overlord (estratehiya, dominyon, at panaklukan). Lahat ay nagbabahagi ng parehong ekonomiya at pag-unlad ng manlalaro."
+      },
+      {
+        "q": "Sinusuportahan ba ang VR/AR?",
+        "a": "Oo. Sinusuportahan ng HyperTek ang mga manlalaro ng VR at AR na maaaring sumali sa mga misiyon at epic na labanan sa real-time kasabay ng mga karaniwang manlalaro. Ang ecosystem ay dinisenyo upang ma-access sa lahat ng device at platform."
+      }
+    ]
+  }
+}

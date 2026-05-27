@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Butikker",
+    "aboutUs": "Om Os",
+    "news": "Nyheder",
+    "socials": "Sociale Medier",
+    "waitlist": "Venteliste",
+    "signUp": "Tilmeld",
+    "joinWaitlist": "Tilmeld Venteliste",
+    "search": "Søg...",
+    "myProfile": "Min Profil",
+    "dashboard": "Kontrolpanel",
+    "adminPanel": "Adminpanel",
+    "gaming": "Gaming",
+    "marketplace": "Markedsplads",
+    "signOut": "Log Ud",
+    "shop": {
+      "overview": "Oversigt",
+      "overviewDesc": "Generel markedsoversigt",
+      "myAssets": "Mine Aktiver",
+      "myAssetsDesc": "Spor og administrer alt, du ejer",
+      "theMarketplace": "Markedspladsen",
+      "theMarketplaceDesc": "Gennemse alle NFT-, NFA- og NFC-samlerobjekter",
+      "auction": "Auktion",
+      "auctionDesc": "Spor nedtællingen for enhver auktion",
+      "land": "Land"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Bekræft Logout",
+    "confirmMessage": "Er du sikker på, at du vil logge ud?",
+    "cancel": "Annuller",
+    "logout": "Log Ud"
+  },
+  "footer": {
+    "joinWaitlist": "Tilmeld Ventelisten",
+    "allRightsReserved": "Alle Rettigheder Forbeholdes",
+    "links": {
+      "marketplace": "Markedsplads",
+      "news": "Nyheder",
+      "whitepaper": "Whitepaper",
+      "about": "Om Os",
+      "profile": "Profil",
+      "terms": "Vilkar og Betingelser"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "HVOR LEGENDER GLEMMES",
+    "marketplace": "Markedsplads",
+    "downloadGame": "Download Spillet",
+    "tryUI": "Prøv Brugerfladen",
+    "close": "Luk"
+  },
+  "howItWorks": {
+    "sectionTitle": "Sådan Fungerer Det",
+    "sectionSubtitle": "Kom i gang med blot et par trin og lås op for verden af digitale samleobjekter.",
+    "steps": [
+      {
+        "title": "Tilslut Pung",
+        "description": "Tilslut sikkert din kryptopung for at begynde at købe, sælge og samle NFT'er."
+      },
+      {
+        "title": "Udforsk Samlinger",
+        "description": "Gennemse trending samlinger og opdag sjældne digitale kunstværker fra topskabere."
+      },
+      {
+        "title": "Saml og Handl",
+        "description": "Køb dine yndlings-NFT'er og vis dem frem eller handl dem på din profil til enhver tid."
+      },
+      {
+        "title": "Tjen og Voks",
+        "description": "Tjen penge ved at sælge dine samlinger eller opnå popularitet i NFT-rummet."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Session udløbet. Log venligst ind igen."
+  },
+  "language": {
+    "select": "Sprog"
+  },
+  "story": {
+    "label": "HISTORIEN",
+    "subheading": "Året er 2117.",
+    "body": "I året 2117, forud for eftervirkningen af Jordens kollaps, igangsatte overlevende Hyper Tek-eksoduset. Menneskehedens sidste forsøg på overlevelse resulterede ikke i en erobring af stjernerne; i stedet spredte det sig ud over dem og spredde kunstig intelligens, forbedrede genomer og prototyper over tusindvis af frøverdener. Eoner gik, idet hver verden udviklede sig i isolation og gav anledning til nye arter, kulturer og teknologier. I hjertet af det hele ligger Echo Core, en kvanterelik, der pulserer med paradokser, minder og et kald til magt. Det vækker dig som en genfødt Overlord, smedet af arv og teknologi.",
+    "readMore": "Læs Vores Fulde Historie",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Sammenkoblet Univers",  "desc": "3 spil - 1 fælles økonomi og progressionssystem" },
+      { "label": "Ægte Ejerskab",         "desc": "NFA'er med garanteret minimumstilbagekøb" },
+      { "label": "Spil-for-at-Tjene",     "desc": "Enhver handling bidrager til dine virkelige belønninger" },
+      { "label": "Udbetalinger",          "desc": "Konvertering af spilintern valuta/belønninger til udbetalinger" },
+      { "label": "Sammenkoblet Progression", "desc": "Spillerprogression er forbundet på tværs af alle spilserier" },
+      { "label": "VR/AR-Integration",    "desc": "VR/AR-spillere kan deltage i missioner og episke slag i realtid" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "Året er 2117.",
+    "body": "Menneskeheden erobrede ikke stjernerne — den splintrede ind i dem. Efter Jordens kollaps lancerede overlevende Hyper Tek-eksoduset og spredte kunstig intelligens, forbedrede genomer og prototyper over tusindvis af frøverdener. Hver udviklede sig i isolation og dannede nye arter, kulturer og teknologier. I centrum af det hele ligger Echo Core, en kvanterelik, der nu pulserer med gåder, minder og et kald til magt. Det vækker dig, en genfødt Overlord, smedet af arv og teknologi."
+  },
+  "homeMarket": {
+    "featured": "Udvalgte",
+    "sectionTitle": "Limited Edition NFA-genstande",
+    "buybackBadge": "Garanteret Tilbagekøb på Alle NFA'er/NFC'er/NFT'er",
+    "urgency": "Handl hurtigt — når de er væk, er de VÆK!",
+    "loading": "Indlæser genstande...",
+    "empty": "Ingen listede genstande endnu.",
+    "price": "Pris",
+    "minBuyback": "Min. Tilbagekøb",
+    "buyNow": "Køb Nu"
+  },
+  "gaming": {
+    "sectionTitle": "GAMING-INFO",
+    "learnMore": "LÆR MERE",
+    "hoverToExplore": "hold musen over for at udforske",
+    "games": [
+      {
+        "label": "RACING",
+        "tagline": "Hastighed er overlevelse.",
+        "description": "Skub ud over tyngdekraftens grænser på neonbelyste megabyer og fremmed terræn. Tune din maskine, mestr hvert hjørne og lad dine rivaler i støvet — ranglisten venter på ingen."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Udforsk det ukendte.",
+        "description": "Naviger ukendte stjernesystemer, smi alliancer og afdæk hemmelighederne i Echo Core. Hvert valg former din arv."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Kommander. Erobre. Regér.",
+        "description": "Du er Overlord — genfødt af asken fra en splittet Jord. Rejs hære, besæt stjernesystemer og bøj rivaliserende fraktioner til din vilje. Echo Core valgte dig. Bevis at det var rigtigt."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CROWDFUNDING-KAMPAGNE — FASE 1",
+    "intro1": "Vi er glade for at annoncere lanceringen af vores meget ventede crowdfunding-kampagne for at sikre finansiering til færdiggørelsen af det banebrydende Hyper Tek-projekt, som gør positive fremskridt! Dette er din chance for at dykke ned i Hyper Tek-økosystemet som en tidlig deltager ved at vælge fra et eksklusivt udvalg af limited availability-genstande og pakker, som du ikke vil gå glip af. Handl hurtigt! Ved at købe direkte fra os på denne platform kan du nyde reducerede priser på 10% ved at lade os give besparelserne videre til dig fra at undgå crowdfunding-gebyrer, som er angivet nedenfor!",
+    "intro2": "Da alle Hyper Tek Non-Fungible digitale genstande er bakket op af et garanteret minimum tilbagekøb, med de fleste der også tilbyder store spilbonusser, der forbedrer din oplevelse, introducerer vi en serie limited-edition Non-Fungible Assets (NFA'er) med de højeste bonusniveauer, der nogensinde vil blive tilbudt. Dette er en sjælden mulighed, da disse tilbud aldrig vil blive gentaget! Når disse genstande er udsolgt eller vi rammer vores finansieringsmål, vil eventuelle resterende umintede limited-edition NFA'er blive fjernet fra hjemmesiden for altid!",
+    "intro3": "Vi har allerede rejst over $440.000 og ønsker at sikre yderligere $460.000. Dette er dit øjeblik til at tilslutte dig os i dette spændende initiativ; lad det ikke glide væk! Køb dine limited availability-genstande eller pakker i dag og vær en del af det spændende Hyper Tek-økosystem.",
+    "intro4": "Husk at tilmelde dig ønskelisten og kontakt os på sociale medier for at holde dig opdateret! Handl nu, da tid er afgørende!",
+    "collectionsLabel": "Samlinger",
+    "sectionTitle": "Donationstierpakker",
+    "discount": "Spar 10% af listede priser",
+    "donationTierLabel": "Donationstier",
+    "donationTierPrefix": "Donationstier:",
+    "rewardsTitle": "Belønninger og Fordele",
+    "noteTitle": "Bemærk",
+    "commonNote": "Belønninger, bonusser og/eller rabatter for at donere nu.\n\nBEMÆRK: Bortset fra kuponen, der skal bruges til inline-spil eller udvalgte køb, kan alle andre belønninger, bonusser og/eller rabatter ikke kombineres eller bruges i forbindelse med andre kampagner.\n\nAlle donationspakker vil inkludere skriftlige slutkreditter i spiludviklingen.",
+    "specialConditionTitle": "Særlig Betingelse",
+    "specialCondition": "Ved succesfuld udvikling og færdiggørelse af spillet/spillene vil enhver person, der donerer, modtage en minimumsværdi på mere end deres oprindelige investering i belønninger eller pakker, der skal bruges i spillet/spillene, og eventuelle bonusser eller belønninger lovet for at donere vil blive givet, når spillet/spillene udkommer.",
+    "imageComing": "Billede kommer snart",
+    "close": "Luk",
+    "items": [
+      { "title": "Rekrut", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Rekrut\"","Du modtager $35 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Rekrut modtager du 10% rabat på køb i spillet i de første 12 måneder"] },
+      { "title": "Kadet Rookie-klasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Kadet Rookie-klasse\"","Du modtager $90 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Kadet Rookie-klasse modtager du en bonus på 10% stigning i ressourceindsamling","5% stigning i træningshastighed","10% rabat på køb i spillet i de første 12 måneder","#Vælg blot at donere $50 for at støtte vores mission, og, hvis du ønsker det, vil dit navn optræde i spillets slutkreditter under titlen \"Indmeldt Æres-Rookie-klasse\""] },
+      { "title": "Kadet 1. klasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Kadet 1. klasse\"","Du modtager $125 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Kadet 1. klasse modtager du en bonus på 10% stigning i ressourceindsamling","5% stigning i træningshastighed","5% mere præmiepenge","5% angreb og forsvar stigning","10% rabat på køb i spillet i de første 24 måneder"] },
+      { "title": "Ledende Kadet", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Ledende Kadet\"","Du modtager $170 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Ledende Kadet modtager du en bonus på 10% stigning i ressourceindsamling","5% stigning i træningshastighed","5% mere præmiepenge","5% angreb og forsvar stigning","10% rabat på køb i spillet i de første 24 måneder"] },
+      { "title": "Ledende Kadet Særklasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Ledende Kadet Særklasse\"","Du modtager $240 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Ledende Kadet Særklasse modtager du en bonus på 10% stigning i ressourceindsamling","5% stigning i træningshastighed","5% mere præmiepenge","5% angreb og forsvar stigning","15% rabat på køb i spillet i de første 24 måneder"] },
+      { "title": "Senior Kadet", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Ledende Kadet Særklasse\"","Du modtager $390 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Senior Kadet modtager du en bonus på 15% stigning i ressourceindsamling","5% stigning i træningshastighed","10% stigning i helbred","5% mere præmiepenge","5% angreb og forsvar stigning","20% rabat på køb i spillet i de første 12 måneder","10% rabat på køb i spillet i de næste 12 måneder","#Vælg blot at donere $250 for at støtte vores mission, og, hvis du ønsker det, vil dit navn optræde i spillets slutkreditter under titlen \"Indmeldt Æres-Senior Særklasse\""] },
+      { "title": "Senior Kadet Særklasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Senior Kadet Særklasse\"","Du modtager $440 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Senior Kadet Særklasse modtager du en bonus på 15% stigning i ressourceindsamling","1,0% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","10% stigning i træningshastighed","10% stigning i helbred","10% mere præmiepenge","5% angreb og forsvar stigning","5% større angrebsstørrelses-kapacitet","20% rabat på køb i spillet i de første 12 måneder","10% rabat på køb i spillet i de næste 12 måneder"] },
+      { "title": "Flyvekadet", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Flyvekadet\"","Du modtager $550 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Flyveløjtnant modtager du en bonus på 15% stigning i ressourceindsamling","1,5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","15% stigning i træningshastighed","15% stigning i helbred","10% mere præmiepenge","5% angreb og forsvar stigning","5% større angrebsstørrelses-kapacitet","1 mega ressourcepakke","1 NFA Superior teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150","20% rabat på køb i spillet i de første 12 måneder","10% rabat på køb i spillet i de næste 12 måneder"] },
+      { "title": "Flyveløjtnant", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Flyveløjtnant\"","Du modtager $6800 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Flyveløjtnant modtager du en bonus på 20% stigning i ressourceindsamling","1,5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","20% stigning i træningshastighed","15% stigning i helbred","15% mere præmiepenge","8% angreb og forsvar stigning","7% større angrebsstørrelses-kapacitet","Bonus racingdele","1 mega ressourcepakke","1 offworld port pas","1 NFA Superior teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150","20% rabat på køb i spillet i de første 12 måneder","10% rabat på køb i spillet i de næste 12 måneder","#Vælg blot at donere $500 for at støtte vores mission, og, hvis du ønsker det, vil dit navn optræde i spillets slutkreditter under titlen \"Indmeldt Æres-Flyveløjtnant\""] },
+      { "title": "Flyveløjtnant Særklasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Flyveløjtnant Særklasse\"","Du modtager $1.050 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Flyveløjtnant Særklasse modtager du en bonus på 20% stigning i ressourceindsamling","1,5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","1,0% højere chance for løbende at opnå NFA'er eller sjældne genstande","20% stigning i træningshastighed","20% stigning i helbred","15% mere præmiepenge","10% angreb og forsvar stigning","7% større angrebsstørrelses-kapacitet","Bonus racingdele","1 mega ressourcepakke","1 ekstra værtavatarer","1 offworld port pas","1 NFA Superior teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150","20% rabat på køb i spillet i de første 12 måneder","10% rabat på køb i spillet i de næste 12 måneder"] },
+      { "title": "Wingman", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Wingman\"","Du modtager $1.480 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Wingman modtager du en bonus på 25% stigning i ressourceindsamling","2,0% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","1,0% højere chance for løbende at opnå NFA'er eller sjældne genstande","25% stigning i træningshastighed","20% stigning i helbred","20% mere præmiepenge","10% angreb og forsvar stigning","8% større angrebsstørrelses-kapacitet","Bonus racingdele","1 mega ressourcepakke","1 mega krystalpakke","1 ekstra værtavatarer","1 offworld port pas","2 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","20% rabat på køb i spillet i de første 12 måneder","Modtag løbende yderligere 10% rabat på alle køb i spillet/spillene","#Vælg blot at donere $1.000 for at støtte vores mission, og, hvis du ønsker det, vil dit navn optræde i spillets slutkreditter under titlen \"Indmeldt Æres-Wingman\""] },
+      { "title": "Wingman Senior Klasse", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Wingman Senior Klasse\"","Du modtager $2.200 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Wingman Senior Klasse modtager du en bonus på 25% stigning i ressourceindsamling","3,0% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","1,5% højere chance for løbende at opnå NFA'er eller sjældne genstande","30% stigning i træningshastighed","25% stigning i helbred","20% mere præmiepenge","15% angreb og forsvar stigning","10% større angrebsstørrelses-kapacitet","1 ekstra teleportationsplads til angreb/forsvar","Bonus racingdele","1 mega ressourcepakke","1 mega krystalpakke","1 ekstra værtavatarer","1 offworld port pas","2 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","20% rabat på køb i spillet i de første 12 måneder","Modtag løbende yderligere 10% rabat på alle køb i spillet/spillene"] },
+      { "title": "Teknisk Officer", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Teknisk Officer\"","Du modtager $2.900 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Teknisk Officer modtager du en bonus på 25% stigning i ressourceindsamling","3,5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","2,0% højere chance for løbende at opnå NFA'er eller sjældne genstande","30% stigning i træningshastighed","25% stigning i helbred","25% mere præmiepenge","15% angreb og forsvar stigning","10% større angrebsstørrelses-kapacitet","1 ekstra teleportationsplads til angreb/forsvar","Bonus racingdele","2 mega ressourcepakker","1 mega krystalpakke","2 ekstra værtavatarer","2 offworld port pas","3 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","25% rabat på køb i spillet i de første 12 måneder","Modtag løbende yderligere 20% rabat på alle køb i spillet/spillene","Personliggjort avatar modelleret efter donoren og vises på tværs af spillet","Indtægtsdeling! Del i op til 2,5% overskudspulje genereret fra salg af spilinterne pakker og NFA'er","Eksklusiv udviklertilgang med månedlige private opdateringer om spillet og udviklingsmuligheder plus muligheder for at give feedback","Eksklusivt Quest-racerdesign til brug i spillet","Samlerkort i baseball-stil af dit eksklusive quest-race, sendt til dig med et takke-brev"] },
+      { "title": "Teamspecialist", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Teamspecialist\"","Du modtager $3.300 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Teamspecialist modtager du en bonus på 30% stigning i ressourceindsamling","5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","2,5% højere chance for løbende at opnå NFA'er eller sjældne genstande","30% stigning i træningshastighed","30% stigning i helbred","25% mere præmiepenge","15% angreb og forsvar stigning","10% større angrebsstørrelses-kapacitet","1 ekstra teleportationsplads til angreb/forsvar","Bonus racingdele","3 mega ressourcepakker","1 mega krystalpakke","2 ekstra værtavatarer","2 offworld port pas","2 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","1 NFA Exceptional teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $400 hver","25% rabat på køb i spillet i de første 24 måneder","Modtag løbende yderligere 20% rabat på alle køb i spillet/spillene","Personliggjort avatar modelleret efter donoren og vises på tværs af spillet","Indtægtsdeling! Del i op til 2,5% overskudspulje genereret fra salg af spilinterne pakker og NFA'er","Eksklusiv udviklertilgang med månedlige private opdateringer om spillet og udviklingsmuligheder plus muligheder for at give feedback","Eksklusivt Quest-racerdesign til brug i spillet","Samlerkort i baseball-stil af dit eksklusive quest-race, sendt til dig med et takke-brev","#Vælg blot at donere $2.500 for at støtte vores mission, og, hvis du ønsker det, vil dit navn optræde i spillets slutkreditter under titlen \"Indmeldt Æres-Teamspecialist\""] },
+      { "title": "Teamspecialist Major", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Teamspecialist Major\"","Du modtager $6.500 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Teamspecialist Major modtager du en bonus på 35% stigning i ressourceindsamling/minedrift","7% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","3,5% højere chance for løbende at opnå NFA'er eller sjældne genstande","35% stigning i træningshastighed","30% stigning i helbred","30% mere præmiepenge","20% angreb og forsvar stigning","10% større angrebsstørrelses-kapacitet","1 ekstra teleportationsplads til angreb/forsvar","Bonus racingdele","4 mega ressourcepakker","1 mega krystalpakke","2 ekstra værtavatarer","2 offworld port pas","3 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","1 NFA Exceptional teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $400 hver","25% rabat på køb i spillet i de første 24 måneder","Modtag løbende yderligere 20% rabat på alle køb i spillet/spillene","Personliggjort avatar modelleret efter donoren og vises på tværs af spillet","Indtægtsdeling! Del i op til 5% overskudspulje genereret fra salg af spilinterne pakker og NFA'er","Eksklusiv udviklertilgang med månedlige private opdateringer om spillet og udviklingsmuligheder plus muligheder for at give feedback","Eksklusivt Quest-racerdesign til brug i spillet","Samlerkort i baseball-stil af dit eksklusive quest-race, sendt til dig med et takke-brev"] },
+      { "title": "Kommandant Elite", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Kommandant Elite\"","Du modtager $9.000 USD i kreditter til brug for køb i spillet","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Kommandant Elite modtager du en bonus på 35% stigning i ressourceindsamling/minedrift","7,5% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","4% højere chance for løbende at opnå NFA'er eller sjældne genstande","40% stigning i træningshastighed","35% stigning i helbred","30% mere præmiepenge","20% angreb og forsvar stigning","20% større angrebsstørrelses-kapacitet","2 ekstra teleportationspladser til angreb/forsvar","Bonus racingdele","4 mega ressourcepakker","2 mega krystalpakker","2 ekstra værtavatarer","3 offworld port pas","4 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","1 NFA Exceptional teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $400 hver","30% rabat på køb i spillet i de første 12 måneder","25% rabat på køb i spillet i de næste 12 måneder","Modtag løbende yderligere 20% rabat på alle køb i spillet/spillene","Personliggjort avatar modelleret efter donoren og vises på tværs af spillet","Indtægtsdeling! Del i op til 5% overskudspulje genereret fra salg af spilinterne pakker og NFA'er","Eksklusiv udviklertilgang med månedlige private opdateringer om spillet og udviklingsmuligheder plus muligheder for at give feedback","Eksklusivt Quest-racerdesign til brug i spillet","Samlerkort i baseball-stil af dit eksklusive quest-race, sendt til dig med et takke-brev"] },
+      { "title": "Over Lord", "rewards": ["Dit navn vises i spillets slutkreditter under titlen \"Over Lord\"","Du modtager $15.000 USD i kreditter til brug for køb i spillet (kan ikke omdannes til udbetalinger)","Du modtager ugentlige opdateringer om spillet via e-mail","Du kan tilslutte dig Discord-chatten.","Som Overlord modtager du en bonus på 40% stigning i ressourceindsamling/minedrift","10% højere chance for at opnå NFA'er eller sjældne genstande i de første 12 måneder","5% højere chance for løbende at opnå NFA'er eller sjældne genstande","50% stigning i træningshastighed","40% stigning i helbred","40% mere præmiepenge","25% angreb og forsvar stigning","25% større angrebsstørrelses-kapacitet","2 ekstra teleportationspladser til angreb/forsvar","Bonus racingdele","6 mega ressourcepakker","3 mega krystalpakker","2 ekstra værtavatarer","4 offworld port pas","4 NFA Superior teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $150 hver","2 NFA Legendary teamspecialister med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $650 hver","1 NFA Epic teamspecialist med skib- og racingbonusser samt et garanteret minimum tilbagekøb på $1000 hver","40% rabat på køb i spillet i de første 12 måneder","30% rabat på køb i spillet i de næste 12 måneder","Modtag yderligere 20% rabat på alle køb i spillet/spillene, så længe du er involveret i spillet","Personliggjort avatar modelleret efter donoren og vises på tværs af spillet","Indtægtsdeling! Del i op til 5% overskudspulje genereret fra salg af spilinterne pakker og NFA'er","Eksklusiv udviklertilgang med månedlige private opdateringer om spillet og udviklingsmuligheder plus muligheder for at give feedback","Eksklusivt Quest-racerdesign til brug i spillet","Samlerkort i baseball-stil af dit eksklusive quest-race, sendt til dig med et takke-brev"] }
+    ]
+  }
+}

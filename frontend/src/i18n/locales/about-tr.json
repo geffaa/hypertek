@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "HYPER TEK EVRENI",
+    "heroHeading": "HAKKIMIZDA",
+    "stats": [
+      { "v": "3", "l": "Oyun Dunyasi" },
+      { "v": "NFA", "l": "Garantili Min Geri Alim" },
+      { "v": "P2E", "l": "Oynayarak Kazan" }
+    ],
+    "subtitle": [
+      "Hyper Tek misyonu, oyun sektoru icindeki birden fazla sorunu ele almak ve oyun ekosistemlerinin nasil isletildigini yeniden tanimlamakti; oyuncularin tek bir oyun stiliyle sinirli olmadigi birbirine bagli bir evren yaratmak. Birden fazla turu tek bir ilerleme sisteminde birlestirerek Hyper Tek projesi, oyuncularin birlesik bir dunya icinde kesfedebilecegi, rekabet edebilecegi ve buyuyebilecegi dinamik bir ortam sunmaktadir.",
+      "Oyuncularin katki sagladdigi ekosistem icerisinde garantili minimum geri alim ile zaman icinde gercek degeri artan dijital varliklara gercek sahiplik tanima ve gercek oynayarak-kazan olarak tasarlanmis sistemler sunmayi hedeflemektedir.",
+      "Proje, oyunculari ilerleme ve odulleri uzerinde anlamli sahiplik vererek guclendirmeyi, yaraticilik, isbirligi ve rekabeti tesvik etmeyi amaclamaktadir.",
+      "Hyper Tek'in uzun vadeli vizyonu, birden fazla oyunun, ekonominin ve toplulugugun tek bir birbirine bagli platformda bir arada var oldugu yasayan bir dijital evren insa etmektir."
+    ],
+    "section01": {
+      "label": "Misyonumuz",
+      "heading1": "Oyunun Ne",
+      "heading2": "Olabilecegini Yeniden Tanimlamak",
+      "paras": [
+        "Hyper Tek Projesi, birden fazla turun tek bir ilerleme sistemi icerisinde bir arada var olabilecegi bir oyun ortamini hayal eden Don Bennett tarafindan kuruldu. Oyunculari tek bir oyun dongusuyle kalmaya zorlamak yerine Hyper Tek, karakter, kaynaklar ve itibarlarini tum ekosistem genelinde insa ederken, ilerleme, materyaller, oduller ve basarilarin tum oyunlar arasinda kusursuz sekilde akmasiyla farkli aktiviteleri kesfetmelerine olanak tanir.",
+        "Proje, uc buyuk oyun ortamini birlestirir: Hyper Racing, Hyper Quest ve Overlord of the Seven Realms. Her oyun farkli bir oyun stilini temsil eder, ancak hepsi ayni evren icerisinde faaliyet gosterir ve ayni oyuncu ekonomisini paylasiр. Bu tasarim, oyuncularin en cok keyif aldiklari oyun turuyle ilgilenmelerine olanak tanirken daha genis bir ekosisteме katki saglamasina izin vererek geleneksel tek basina oyunlardan daha derin, daha sürükleyici ve daha odullendirici yeni nesil oyun ortamlari yaratir."
+      ]
+    },
+    "section02": {
+      "label": "Vizyon ve Misyon",
+      "vision": {
+        "label": "Vizyon",
+        "quote": "...geleneksel tek basina oyunlardan daha derin, daha surukleyici ve daha odullendirici yeni nesil oyun ortamlari yaratmak...",
+        "paras": [
+          "Hyper Tek'in uzun vadeli vizyonu, birden fazla oyunun, ekonominin ve toplulugugun tek bir birbirine bagli platform icerisinde bir arada var oldugu yasayan bir dijital evren insa etmektir. Yalitilmis oyun deneyimleri yerine Hyper Tek, oyuncularin eylemlerinin etraflarindaki dunyayi etkiledigi paylasimli bir ekosistem kurmay hedeflemektedir.",
+          "Strateji, yaris ve macera turlerini tek bir uyumlu sistem icerisinde birlestirerek Hyper Tek, geleneksel tek basina oyunlardan daha derin, daha surukleyici ve daha odullendirici yeni nesil oyun ortamlari yaratmayi hedeflemektedir."
+        ]
+      },
+      "mission": {
+        "label": "Misyon",
+        "quote": "...oyun sektoru icerisindeki birden fazla sorunu ele almak ve oyun ekosistemlerinin nasil isletildigini yeniden tanimlamak...",
+        "paras": [
+          "Hyper Tek misyonu, oyun sektoru icerisindeki birden fazla sorunu ele almak ve oyuncularin tek bir oyun stiliyle sinirli olmadigi birbirine bagli bir evren yaratarak oyun ekosistemlerinin nasil isletildigini yeniden tanimlamakti.",
+          "Birden fazla turu tek bir ilerleme sisteminde birlestirerek Hyper Tek, oyuncularin birlesik bir dunya icerisinde kesfedebilecegi, rekabet edebilecegi ve buyuyebilecegi dinamik bir ortam saglаmayi hedeflemektedir. Tum NFA'larda garantili minimum geri alim ile zaman icinde gercek degeri artan dijital varliklara gercek sahiplik tanima hedeflenmektedir."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Evren",
+      "heading": "Uc Dunya. Bir Ekonomi.",
+      "subtitle": "Her oyun bir kapi — oynanista ayri, ekonomi ve ilerlemede birlesik.",
+      "discover": "Kesfedin",
+      "tryUI": "Arayuzu Dene",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Hiz · Ustunluk", "desc": "Dusmanca arazide yuksek hizli yaris. Aracini yukselt, ekibini kur ve galaksi genelinde bolgeler kazan." },
+        { "name": "Hyper Quest", "tag": "Kesif · Ticaret", "desc": "Gezegenlerde yol alin, gorevleri tamamlayin ve suresiz genisleyen bir yildiz haritasi uzerinde kaynaklar takas edin. Her teslimat ekonomiyi sekillendiriyor." },
+        { "name": "Overlord of the Seven Realms", "tag": "Strateji · Guc", "desc": "Orduları komuta edin, ittifaklar kurun ve alemleri fethedin. En guclu Overlord tum evrenin kaderini kontrol eder." }
+      ]
+    },
+    "section04": {
+      "label": "Mantarlanmaz Dijital Sanat Eserleri",
+      "heading": "Garantili Degerle Dijital Sanat",
+      "subtitle": "60 Saniyelik Ozet",
+      "quote": "Bir Evren. Uc Oyun. Garantili Deger. Dijital Sahipligin Gelecegi Hyper Tek ile Basliyor.",
+      "cards": [
+        {
+          "title": "Nelerdir?",
+          "intro": "Uc katmanda blokzincir baglantili dijital sanat eserleri:",
+          "items": [
+            { "label": "NFA'lar...", "desc": "Mimar tarafindan olusturulmus, en yuksek oyun ici bonuslar, ultra nadir" },
+            { "label": "NFC'ler...", "desc": "Oyun ici bonuslu koleksiyonlar, oyuncu tarafindan olusturulabilir" },
+            { "label": "NFT'ler...", "desc": "Tamamen oyuncu yapimi, ussu guc bonuslari icin dekorasyon yapimi" }
+          ]
+        },
+        {
+          "title": "Neden Degerlerini Korurlar",
+          "bullets": [
+            "Her sanat eserinde garantili minimum geri alim",
+            "Geri alim her yeniden satista artar",
+            "Yilda iki kez enflasyona endeksli",
+            "Degeriniz her zaman buyur, hicbir zaman kuculmez"
+          ]
+        },
+        {
+          "title": "Tasarim Gereği Adil",
+          "body": "Pazar yeri komisyonunun %85'e kadar olan kismi geri alim degerlerini artirmak, sanatci telif ucretlerini odemek ve gorevleri finanse etmek icin kullanilir. Oyuncular, basskalarini katilim icin odeyerek gorevler olusturarak ucreti azaltabilir; bu da her seviyede sosyal etkilesimi tesvike eder. Bu Hyper Tek'e ozgudur."
+        },
+        {
+          "title": "Simdi Dahil Olun",
+          "body": "Hyper Racing, Hyper Quest ve Overlord of the 7 Realms'i insa etmek icin kitle fonlamasi yapiyoruz. Satin aldiginiz veya olusturdugunuz her sanat eseri dogrudan gelistirmeyi finanse eder. Oyunun gelecegini insa etmeye yardim ederken garantili olarak degerini koruyan ve buyuyen sanata sahip olun.",
+          "link": "[www.hypertek.com] — Goz At. Satin Al. Olustur. Gelecege Sahip Ol."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Kitle Fonlamasi — Geleceği Insa Etmeye Yardim Et",
+      "heading": "Desteginiz Hyper Tek Evrenini Guclendirir",
+      "subtitle": "Satin alinan her sanat eseri dogrudan uc birbirine bagli oyunu finanse eder. Birlikte insa ettiğimiz sey budur.",
+      "phaseLabel": "Aşama",
+      "crowdfundingNow": "Simdi Kitle Fonlamasi",
+      "phases": [
+        { "name": "Temel", "desc": "Web sitesi canli • Kullanici Arayuzu insa edildi • Pazar yeri faaliyette • NFA/NFC/NFT sistemi tasarlandi • Garantili geri alim cercevesi yerinde" },
+        { "name": "Simdi Kitle Fonlamasi", "desc": "NFA/NFC/NFT sanat eseri satislari canli • Oyuncu tarafindan olusturulan NFT'ler etkin • Komisyon paylasimi aktif • Topluluk insa etme • Fonlar oyun gelistirmeye akiyor" },
+        { "name": "Alfa Lansmani", "desc": "Hyper Racing alfa • Ilk oynanabilir oyun ortami • Oyun ici NFA entegrasyonu • Erken destekci ozel odulleri • Canli pazar yeri ticareti" },
+        { "name": "Ekosistem Genislemes", "desc": "Hyper Quest alfa • Oyunlar arasi ilerleme canli • Hyper Bucks para birimi entegrasyonu • Genisletilmis NFA koleksiyonlari • Gercek nakit odul etkinlikleri" },
+        { "name": "Overlord Lansmani", "desc": "Overlord of the 7 Realms alfa • Uc seviyeli savas sistemi • Savas Halkas erisimi • VR entegrasyonu • Tam uc oyun birlesik ekonomi" },
+        { "name": "Tam Surum", "desc": "Her uc oyun tam olarak canli • Tam NFA ekosistemi • Tum basliкlar genelinde tam VR • Kuresel turnuvalar • Birbirine bagli evren gerceklesti" }
+      ],
+      "helpHeading": "SIMDI Nasil Yardim Edebilirsiniz",
+      "helpItems": [
+        { "bold": "Bir NFA, NFC veya NFT Satin Alin", "text": "— oyun gelistirmeyi finanse eden garantili degerli dijital sanata sahip olun" },
+        { "bold": "Kendi NFT'nizi Olusturun", "text": "— pazar yerinde bir yaratici olun ve her yeniden satisten kazanin" },
+        { "bold": "Paylasin ve Haberi Yayın", "text": "— her yeni destekci lansmana gidis yolculugunu hizlandiriyor" }
+      ],
+      "link": "[www.hypertek.com] — Projeyi Destekle. Gelecege Sahip Ol."
+    },
+    "section06": {
+      "label": "Web3 Oyunculugu ve Rekabet Ustu",
+      "heading": "HYPER TEK, BIR WEB3 OYUN COZUMU VE TEMEL AVANTAJLAR",
+      "subtitle": "Surukleyici oyunculuk, guclu bir dijital pazar yeri, oyuncuları ve yatirımcıları ödüllendirmek arasındaki boslukları kapatiyor.",
+      "cards": [
+        {
+          "label": "Somut Oduller ve Girisimcilik",
+          "bullets": [
+            "Garantili minimum geri alim ile gercek NFA sahipligi",
+            "Oyuncu kontrollu dijital ekonomi araciligiyla gelir paylasimi",
+            "Gercek dunya degeri gelisen oyun ici varlik fiyatlariyla",
+            "Gercek oynayarak-kazan mekanikleri"
+          ]
+        },
+        {
+          "label": "Nakit Cekme Ekosistemi",
+          "body": "Oyun ici kazanclarinizi gercek dunya para birimine kusursuz sekilde donusturun; dijital emginizin somut, cekilebilir degeri var."
+        },
+        {
+          "label": "Birbirine Bagli Dunyalarda Sonsuz Oyunculuk",
+          "bullets": [
+            "Tek bir birlesik evren icinde uc benzersiz oyun turu",
+            "Tum oyunlarda paylasimli ilerleme, oduller ve basarilar",
+            "Her seçimin tum evreni etkiledigi yasayan bir ekosistem",
+            "VR/AR oyuncular gercek zamanli gorevlere ve epik savaslaра katilabilir"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Birbirine bagli oyun ekosistemlerinin geleceğine inanan yatirımcılar, ortaklar ve yenilikçiler projeyi kesfetmeye ve Hyper Tek yeni nesil dijital dunyalar insa etmeye devam ederken yolculuga katilmaya davet edilmektedir.",
+      "exploreMarketplace": "Pazar Yerini Kesfet",
+      "viewGames": "Oyunlari Goruntule"
+    }
+  }
+}

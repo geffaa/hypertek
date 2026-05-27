@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "HET HYPER TEK-UNIVERSUM",
+    "heroHeading": "OVER ONS",
+    "stats": [
+      { "v": "3", "l": "Spelwerelden" },
+      { "v": "NFA", "l": "Gegarandeerd min. terugkoop" },
+      { "v": "P2E", "l": "Play-to-Earn" }
+    ],
+    "subtitle": [
+      "De missie van Hyper Tek was om meerdere problemen in de gaming-industrie aan te pakken en opnieuw te definiëren hoe gaming-ecosystemen werken door een onderling verbonden universum te creëren waar spelers niet beperkt zijn tot één enkele spelstijl. Door meerdere genres te combineren in één progressiesysteem biedt het Hyper Tek-project een dynamische omgeving waar spelers kunnen verkennen, concurreren en groeien binnen een verenigde wereld.",
+      "Het heeft als doel echte eigendom te geven aan digitale activa die echte waarde hebben, die in de loop van de tijd toeneemt met een gegarandeerde minimale terugkoop op alle Non-Fungible Artworks, en echte play-to-earn-ontworpen systemen binnen het ecosysteem waaraan spelers bijdragen.",
+      "Het project heeft als doel spelers te versterken door hen zinvolle eigendom te geven over hun voortgang en beloningen, terwijl creativiteit, samenwerking en concurrentie worden aangemoedigd.",
+      "De langetermijnvisie van Hyper Tek is het bouwen van een levend digitaal universum waar meerdere spellen, economieën en gemeenschappen naast elkaar bestaan op één onderling verbonden platform."
+    ],
+    "section01": {
+      "label": "Onze missie",
+      "heading1": "Herdefiniëren wat",
+      "heading2": "Gaming kan zijn",
+      "paras": [
+        "Het Hyper Tek-project werd opgericht door Don Bennett, die zich een spelmilieu voorstelde waar meerdere genres konden samenleven binnen één progressiesysteem. In plaats van spelers te dwingen in één gameplayloop te blijven, stelt Hyper Tek hen in staat verschillende activiteiten te verkennen terwijl ze hun personage, middelen en reputatie in het hele ecosysteem opbouwen, met voortgang, materialen, beloningen en prestaties die naadloos door alle spellen stromen.",
+        "Het project combineert drie grote spelmilieus: Hyper Racing, Hyper Quest en Overlord of the Seven Realms. Elk spel vertegenwoordigt een andere spelstijl, maar alle opereren binnen hetzelfde universum en delen dezelfde spelerseconomie. Dit ontwerp stelt spelers in staat zich bezig te houden met het type gameplay dat ze het meest genieten, terwijl ze nog steeds bijdragen aan een groter ecosysteem om een nieuwe generatie spelomgevingen te creëren die dieper, meer meeslepend en meer belovend zijn dan traditionele standalone-spellen."
+      ]
+    },
+    "section02": {
+      "label": "Visie & Missie",
+      "vision": {
+        "label": "Visie",
+        "quote": "...een nieuwe generatie spelomgevingen creëren die dieper, meer meeslepend en meer belovend zijn dan traditionele standalone-spellen...",
+        "paras": [
+          "De langetermijnvisie van Hyper Tek is het bouwen van een levend digitaal universum waar meerdere spellen, economieën en gemeenschappen naast elkaar bestaan binnen één onderling verbonden platform. In plaats van geïsoleerde spelervaringen streeft Hyper Tek ernaar een gedeeld ecosysteem te vestigen waar de acties van spelers de wereld om hen heen beïnvloeden.",
+          "Door strategie, racen en avontuur samen te voegen in één samenhangend systeem streeft Hyper Tek ernaar een nieuwe generatie spelomgevingen te creëren die dieper, meer meeslepend en meer belovend zijn dan traditionele standalone-spellen."
+        ]
+      },
+      "mission": {
+        "label": "Missie",
+        "quote": "...meerdere problemen in de gaming-industrie aanpakken en herdefiniëren hoe gaming-ecosystemen werken...",
+        "paras": [
+          "De missie van Hyper Tek was om meerdere problemen in de gaming-industrie aan te pakken en opnieuw te definiëren hoe gaming-ecosystemen werken door een onderling verbonden universum te creëren waar spelers niet beperkt zijn tot één enkele spelstijl.",
+          "Door meerdere genres te combineren in één progressiesysteem streeft Hyper Tek ernaar een dynamische omgeving te bieden waar spelers kunnen verkennen, concurreren en groeien binnen een verenigde wereld. Het heeft als doel echte eigendom te geven aan digitale activa die echte waarde hebben, die in de loop van de tijd toeneemt met een gegarandeerde minimale terugkoop op alle NFA's."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Het universum",
+      "heading": "Drie werelden. Één economie.",
+      "subtitle": "Elk spel is een gateway, onderscheidend in gameplay, verenigd in economie en progressie.",
+      "discover": "Ontdekken",
+      "tryUI": "Probeer de UI",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Snelheid · Dominantie", "desc": "Hoge snelheidsracing over vijandig terrein. Upgrade je voertuig, bouw je crew en claim territorium door de hele melkweg." },
+        { "name": "Hyper Quest", "tag": "Verkennen · Handelen", "desc": "Navigeer planeten, voltooi quests en handel hulpbronnen via een steeds groeiende sterrenkart. Elke levering vormt de economie." },
+        { "name": "Overlord of the Seven Realms", "tag": "Strategie · Macht", "desc": "Beveel legers, smeed allianties en verover rijken. De machtigste Overlord bepaalt het lot van het hele universum." }
+      ]
+    },
+    "section04": {
+      "label": "Non-Fungible Digital Artworks",
+      "heading": "Digitale kunst met gegarandeerde waarde",
+      "subtitle": "De 60-secondensamenvatting",
+      "quote": "Één universum. Drie spellen. Gegarandeerde waarde. De toekomst van digitaal eigendom begint met Hyper Tek.",
+      "cards": [
+        {
+          "title": "Wat zijn ze?",
+          "intro": "Blockchain-gekoppelde digitale kunstwerken in drie niveaus:",
+          "items": [
+            { "label": "NFA's...", "desc": "Door architect gemaakt, hoogste in-game bonussen, ultrazeldzaam" },
+            { "label": "NFC's...", "desc": "Verzamelobjecten met in-game bonussen, door spelers aanmaakbaar" },
+            { "label": "NFT's...", "desc": "Volledig door spelers gemaakt, decoreer je basis voor kracht bonussen" }
+          ]
+        },
+        {
+          "title": "Waarom ze waarde behouden",
+          "bullets": [
+            "Gegarandeerde minimale terugkoop op elk kunstwerk",
+            "Terugkoop neemt toe bij elke doorverkoop",
+            "Twee keer per jaar inflatie-geïndexeerd",
+            "Je waarde groeit altijd, krimpt nooit"
+          ]
+        },
+        {
+          "title": "Eerlijk by design",
+          "body": "Tot 85% van de marktplaatscommissie gaat naar het verhogen van terugkoopwaarden, het betalen van auteursrechten en het financieren van quests. Spelers kunnen kosten verlagen door quests te maken die anderen betalen om deel te nemen, wat sociale interactie op elk niveau stimuleert. Dit is uniek voor Hyper Tek."
+        },
+        {
+          "title": "Doe nu mee",
+          "body": "We crowdfunden om Hyper Racing, Hyper Quest en Overlord of the 7 Realms te bouwen. Elk kunstwerk dat je koopt of maakt, financiert direct de ontwikkeling. Bezit kunst die gegarandeerd waarde houdt en groeit terwijl je helpt de toekomst van gaming te bouwen.",
+          "link": "[www.hypertek.com] — Bladeren. Kopen. Maken. Bezit de toekomst."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Crowdfunding — Help de toekomst te bouwen",
+      "heading": "Jouw steun drijft het HyperTek-universum aan",
+      "subtitle": "Elk gekocht kunstwerk financiert direct drie onderling verbonden spellen. Dit is wat we samen bouwen.",
+      "phaseLabel": "Fase",
+      "crowdfundingNow": "Nu crowdfunding",
+      "phases": [
+        { "name": "Fundament", "desc": "Website live • Gebruikersinterface gebouwd • Marktplaats operationeel • NFA/NFC/NFT-systeem ontworpen • Gegarandeerd terugkoopkader op zijn plaats" },
+        { "name": "Nu crowdfunding", "desc": "NFA/NFC/NFT-kunstwerkverkopen live • Door spelers gemaakte NFT's ingeschakeld • Commissiedeling actief • Gemeenschapsopbouw • Fondsen stromen in spelontwikkeling" },
+        { "name": "Alpha-lancering", "desc": "Hyper Racing alpha • Eerste speelbare spelmilieu • NFA-integratie in het spel • Exclusieve beloningen voor vroege backers • Live marktplaatshandel" },
+        { "name": "Ecosysteemuitbreiding", "desc": "Hyper Quest alpha • Cross-game progressie live • HyperBucks-valuta-integratie • Uitgebreide NFA-collecties • Echte geldprijsevenementen" },
+        { "name": "Overlord-lancering", "desc": "Overlord of the 7 Realms alpha • Drieniveaugevechtsysteem • Battle Ring-toegang • VR-integratie • Volledige driespeleneconomie" },
+        { "name": "Volledige release", "desc": "Alle drie de spellen volledig live • Compleet NFA-ecosysteem • Volledige VR in alle titels • Wereldwijde toernooien • Het onderling verbonden universum gerealiseerd" }
+      ],
+      "helpHeading": "Hoe JIJ nu kunt helpen",
+      "helpItems": [
+        { "bold": "Koop een NFA, NFC of NFT", "text": "— bezit digitale kunst met gegarandeerde waarde die spelontwikkeling financiert" },
+        { "bold": "Maak je eigen NFT", "text": "— word creator op de marktplaats en verdien bij elke doorverkoop" },
+        { "bold": "Deel en verspreid het woord", "text": "— elke nieuwe supporter versnelt de reis naar lancering" }
+      ],
+      "link": "[www.hypertek.com] — Steun het project. Bezit de toekomst."
+    },
+    "section06": {
+      "label": "Web3-gaming & concurrentievoordeel",
+      "heading": "HYPER TEK, EEN WEB3-GAMINGOPLOSSING EN DE BELANGRIJKSTE VOORDELEN",
+      "subtitle": "Overbruggen van kloven tussen meeslepende gaming, een gedreven digitale marktplaats en het belonen van zowel spelers als investeerders.",
+      "cards": [
+        {
+          "label": "Tastbare beloningen & ondernemerschap",
+          "bullets": [
+            "Echt NFA-eigendom met gegarandeerde minimale terugkoop",
+            "Inkomstendeling via door spelers beheerde digitale economie",
+            "Echte waarde met evoluerende in-game activaprijzen",
+            "Echte play-to-earn-mechanica"
+          ]
+        },
+        {
+          "label": "Cash-Out-ecosysteem",
+          "body": "Converteer naadloos in-game verdiensten naar echte valuta; je digitale arbeid heeft tastbare, opneembare waarde."
+        },
+        {
+          "label": "Oneindig gameplay in onderling verbonden werelden",
+          "bullets": [
+            "Drie unieke spelgenres binnen één verenigd universum",
+            "Gedeelde progressie, beloningen en prestaties in alle spellen",
+            "Een levend ecosysteem waar elke keuze invloed heeft op het hele universum",
+            "VR/AR-spelers kunnen in realtime deelnemen aan missies en epische gevechten"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Investeerders, partners en innovators die geloven in de toekomst van onderling verbonden gaming-ecosystemen worden uitgenodigd om het project te verkennen en deel te nemen aan de reis terwijl Hyper Tek de volgende generatie digitale werelden blijft bouwen.",
+      "exploreMarketplace": "Marktplaats verkennen",
+      "viewGames": "Spellen bekijken"
+    }
+  }
+}

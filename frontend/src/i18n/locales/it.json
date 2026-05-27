@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Negozi",
+    "aboutUs": "Chi Siamo",
+    "news": "Notizie",
+    "socials": "Social",
+    "waitlist": "Lista d'Attesa",
+    "signUp": "Registrati",
+    "joinWaitlist": "Unisciti alla Lista d'Attesa",
+    "search": "Cerca...",
+    "myProfile": "Il Mio Profilo",
+    "dashboard": "Dashboard",
+    "adminPanel": "Pannello Admin",
+    "gaming": "Gaming",
+    "marketplace": "Marketplace",
+    "signOut": "Esci",
+    "shop": {
+      "overview": "Panoramica",
+      "overviewDesc": "Panoramica generale del mercato",
+      "myAssets": "I Miei Asset",
+      "myAssetsDesc": "Traccia e gestisci tutto cio che possiedi",
+      "theMarketplace": "Il Marketplace",
+      "theMarketplaceDesc": "Sfoglia tutti i collezionabili NFT, NFA e NFC",
+      "auction": "Asta",
+      "auctionDesc": "Segui il conto alla rovescia di qualsiasi asta",
+      "land": "Terra"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Conferma Disconnessione",
+    "confirmMessage": "Sei sicuro di voler uscire?",
+    "cancel": "Annulla",
+    "logout": "Esci"
+  },
+  "footer": {
+    "joinWaitlist": "Unisciti alla Lista d'Attesa",
+    "allRightsReserved": "Tutti i Diritti Riservati",
+    "links": {
+      "marketplace": "Marketplace",
+      "news": "Notizie",
+      "whitepaper": "Whitepaper",
+      "about": "Chi Siamo",
+      "profile": "Profilo",
+      "terms": "Termini e Condizioni"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "DOVE LE LEGGENDE VENGONO DIMENTICATE",
+    "marketplace": "Marketplace",
+    "downloadGame": "Scarica il Gioco",
+    "tryUI": "Prova l'Interfaccia",
+    "close": "Chiudi"
+  },
+  "howItWorks": {
+    "sectionTitle": "Come Funziona",
+    "sectionSubtitle": "Inizia in pochi passaggi e sblocca il mondo dei collezionabili digitali.",
+    "steps": [
+      {
+        "title": "Collega il Portafoglio",
+        "description": "Collega in modo sicuro il tuo portafoglio crypto per iniziare ad acquistare, vendere e collezionare NFT."
+      },
+      {
+        "title": "Esplora le Collezioni",
+        "description": "Sfoglia le collezioni di tendenza e scopri rare opere d'arte digitali dai migliori creatori."
+      },
+      {
+        "title": "Colleziona e Scambia",
+        "description": "Acquista i tuoi NFT preferiti e mostrali o scambiali sul tuo profilo in qualsiasi momento."
+      },
+      {
+        "title": "Guadagna e Cresci",
+        "description": "Guadagna vendendo le tue collezioni o acquisendo popolarita nello spazio NFT."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Sessione scaduta. Effettua nuovamente l'accesso."
+  },
+  "language": {
+    "select": "Lingua"
+  },
+  "story": {
+    "label": "STORIA",
+    "subheading": "L'anno e il 2117.",
+    "body": "Nell'anno 2117, prima delle conseguenze del crollo della Terra, i sopravvissuti diedero inizio all'Esodo di Hyper Tek. L'ultimo tentativo dell'umanita per la sopravvivenza non porto alla conquista delle stelle; invece, si disperse tra di esse, disseminando intelligenza artificiale, genomi potenziati e prototipi su migliaia di mondi seme. Passarono eoni, mentre ogni mondo si sviluppava in isolamento, dando origine a nuove specie, culture e tecnologie. Al centro di tutto si trova l'Echo Core, una reliquia quantistica pulsante di paradossi, ricordi e un richiamo al potere. Ti risveglia come un Overlord rinato, forgiato da eredita e tecnologia.",
+    "readMore": "Leggi la Nostra Storia Completa",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Universo Interconnesso",  "desc": "3 giochi — 1 economia e sistema di progressione condivisi" },
+      { "label": "Vera Proprieta",           "desc": "NFA con riacquisto minimo garantito" },
+      { "label": "Play-to-Earn",             "desc": "Ogni azione contribuisce alle tue ricompense nel mondo reale" },
+      { "label": "Pagamenti di Incasso",        "desc": "Conversione della valuta/ricompense di gioco in pagamenti di incasso" },
+      { "label": "Progressione Collegata",       "desc": "La progressione del giocatore e collegata a tutta la suite di giochi" },
+      { "label": "Integrazione VR/AR",        "desc": "I giocatori VR/AR possono unirsi a missioni e battaglie epiche in tempo reale" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "L'anno e il 2117.",
+    "body": "L'umanita non conquisto le stelle — si frammento in esse. Dopo il crollo della Terra, i sopravvissuti lanciorono l'Esodo di Hyper Tek, disperdendo intelligenza artificiale, genomi potenziati e prototipi su migliaia di mondi seme. Ciascuno si evolse in isolamento, formando nuove specie, culture e tecnologie. Al centro di tutto si trova l'Echo Core, una reliquia quantistica ora pulsante di enigmi, ricordi e un richiamo al potere. Ti risveglia, un Overlord rinato, forgiato da eredita e tecnologia."
+  },
+  "homeMarket": {
+    "featured": "In Evidenza",
+    "sectionTitle": "Articoli NFA in Edizione Limitata",
+    "buybackBadge": "Riacquisto Garantito su Tutti gli NFA/NFC/NFT",
+    "urgency": "Agisci in fretta, una volta esauriti, sono ESAURITI!",
+    "loading": "Caricamento articoli...",
+    "empty": "Nessun articolo elencato ancora.",
+    "price": "Prezzo",
+    "minBuyback": "Riacquisto Minimo",
+    "buyNow": "Acquista Ora"
+  },
+  "gaming": {
+    "sectionTitle": "INFO GAMING",
+    "learnMore": "SCOPRI DI PIU",
+    "hoverToExplore": "passa il mouse per esplorare",
+    "games": [
+      {
+        "label": "RACING",
+        "tagline": "La velocita e sopravvivenza.",
+        "description": "Spingi oltre i limiti della gravita su megacittà al neon e terreni alieni. Metti a punto la tua macchina, padroneggia ogni curva e lascia i tuoi rivali nella polvere — la classifica non aspetta nessuno."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Esplora l'ignoto.",
+        "description": "Naviga sistemi stellari inesplorati, forgia alleanze e scopri i segreti dell'Echo Core. Ogni scelta plasma il tuo lascito."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Comanda. Conquista. Governa.",
+        "description": "Sei l'Overlord — rinato dalle ceneri di una Terra frantumata. Raduna eserciti, conquista sistemi stellari e piega le fazioni rivali alla tua volonta. L'Echo Core ti ha scelto. Dimostra che aveva ragione."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CAMPAGNA DI CROWDFUNDING — FASE 1",
+    "intro1": "Siamo lieti di annunciare il lancio della nostra attesissima campagna di crowdfunding per garantire i finanziamenti per il completamento del rivoluzionario progetto Hyper Tek, che sta compiendo progressi positivi! Questa e la tua opportunita di immergerti nell'ecosistema Hyper Tek come partecipante iniziale, scegliendo da una selezione esclusiva di articoli e pacchetti a disponibilita limitata che non vorrai perdere. Agisci rapidamente! Acquistando direttamente da noi su questa piattaforma, puoi godere di tariffe ridotte del 10% consentendoci di trasferire il risparmio a te, evitando le commissioni di crowdfunding, elencate di seguito!",
+    "intro2": "Poiche tutti gli articoli digitali Non-Fungibili di Hyper Tek sono supportati da un riacquisto minimo garantito, con la maggior parte che offre anche sostanziali bonus nel gioco che migliorano la tua esperienza, per aumentare le cose, stiamo introducendo una serie di Asset Non-Fungibili (NFA) in edizione limitata con i livelli di bonus piu alti che saranno mai offerti. Questa e un'opportunita rara poiche queste offerte non si ripeteranno mai! Una volta esauriti questi articoli o raggiunto il nostro obiettivo di finanziamento, gli NFA rimanenti in edizione limitata non ancora coniati saranno rimossi definitivamente dal sito web!",
+    "intro3": "Abbiamo gia raccolto oltre $440.000 e stiamo cercando di garantire ulteriori $460.000. Questo e il tuo momento per unirti a noi in questa emozionante iniziativa; non lasciartela sfuggire! Acquista oggi i tuoi articoli o pacchetti a disponibilita limitata e fai parte dell'entusiasmante Ecosistema Hyper Tek.",
+    "intro4": "Ricordati di iscriverti alla lista dei desideri e connetterti con noi sui social media per rimanere aggiornato! Agisci ora, poiche il tempo e essenziale!",
+    "collectionsLabel": "Collezioni",
+    "sectionTitle": "Pacchetti di Livello Donazione",
+    "discount": "Risparmia il 10% sui prezzi elencati",
+    "donationTierLabel": "Livello Donazione",
+    "donationTierPrefix": "Livello Donazione:",
+    "rewardsTitle": "Premi e Benefici",
+    "noteTitle": "Nota",
+    "commonNote": "Premi, Bonus e/o Sconti per donare ora.\n\nNOTA: Oltre al voucher da utilizzare per giochi in linea o acquisti selezionati, tutti gli altri Premi, Bonus e/o Sconti non possono essere combinati o utilizzati in concomitanza con altre promozioni.\n\nTutti i pacchetti di donazione includeranno crediti scritti nei titoli di coda dello sviluppo del gioco.",
+    "specialConditionTitle": "Condizione Speciale",
+    "specialCondition": "Al completamento con successo del/dei gioco/i, ogni persona che dona ricevera un valore minimo superiore al suo investimento originale in premi o pacchetti da utilizzare all'interno del/dei gioco/i, e qualsiasi bonus o premio promesso per la donazione sara dato una volta che il/i gioco/i saranno rilasciati.",
+    "imageComing": "Immagine in arrivo",
+    "close": "Chiudi",
+    "items": [
+      { "title": "Recluta", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Recluta\"","Riceverai $35 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Recluta, riceverai uno Sconto del 10% sugli acquisti nel gioco per i primi 12 mesi"] },
+      { "title": "Classe Cadetto Principiante", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Cadetto Principiante\"","Riceverai $90 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Classe Cadetto Principiante, riceverai un bonus del 10% di aumento nella raccolta di risorse","Aumento del 5% nella velocita di addestramento","Sconto del 10% sugli acquisti nel gioco per i primi 12 mesi","#Scegli semplicemente di donare $50 per supportare la nostra missione, e, se lo desideri, il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Principiante Onorario Arruolato\""] },
+      { "title": "Cadetto di Prima Classe", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Cadetto di Prima Classe\"","Riceverai $125 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Cadetto di Prima Classe, riceverai un bonus del 10% di aumento nella raccolta di risorse","Aumento del 5% nella velocita di addestramento","5% in piu di montepremi","Aumento del 5% di attacco e difesa","Sconto del 10% sugli acquisti nel gioco per i primi 24 mesi"] },
+      { "title": "Cadetto Capo", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Cadetto Capo\"","Riceverai $170 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Cadetto Capo, riceverai un bonus del 10% di aumento nella raccolta di risorse","Aumento del 5% nella velocita di addestramento","5% in piu di montepremi","Aumento del 5% di attacco e difesa","Sconto del 10% sugli acquisti nel gioco per i primi 24 mesi"] },
+      { "title": "Classe Speciale Cadetto Capo", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Speciale Cadetto Capo\"","Riceverai $240 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Classe Speciale Cadetto Capo, riceverai un bonus del 10% di aumento nella raccolta di risorse","Aumento del 5% nella velocita di addestramento","5% in piu di montepremi","Aumento del 5% di attacco e difesa","Sconto del 15% sugli acquisti nel gioco per i primi 24 mesi"] },
+      { "title": "Cadetto Senior", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Speciale Cadetto Capo\"","Riceverai $390 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Cadetto Senior, riceverai un bonus del 15% di aumento nella raccolta di risorse","Aumento del 5% nella velocita di addestramento","Aumento del 10% della salute","5% in piu di montepremi","Aumento del 5% di attacco e difesa","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 10% sugli acquisti nel gioco per un secondo periodo di 12 mesi","#Scegli semplicemente di donare $250 per supportare la nostra missione, se lo desideri, il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Senior Speciale Onorario Arruolato\""] },
+      { "title": "Classe Speciale Cadetto Senior", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Speciale Cadetto Senior\"","Riceverai $440 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Classe Speciale Cadetto Senior, riceverai un bonus del 15% di aumento nella raccolta di risorse","Probabilita dell'1,0% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Aumento del 10% nella velocita di addestramento","Aumento del 10% della salute","10% in piu di montepremi","Aumento del 5% di attacco e difesa","5% maggiore capacita di dimensione dell'attacco","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 10% sugli acquisti nel gioco per un secondo periodo di 12 mesi"] },
+      { "title": "Cadetto di Volo", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Cadetto di Volo\"","Riceverai $550 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Tenente di Volo, riceverai un bonus del 15% di aumento nella raccolta di risorse","Probabilita dell'1,5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Aumento del 15% nella velocita di addestramento","Aumento del 15% della salute","10% in piu di montepremi","Aumento del 5% di attacco e difesa","5% maggiore capacita di dimensione dell'attacco","1 pacchetto mega risorse","1 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 10% sugli acquisti nel gioco per un secondo periodo di 12 mesi"] },
+      { "title": "Tenente di Volo", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Tenente di Volo\"","Riceverai $6800 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Tenente di Volo, riceverai un bonus del 20% di aumento nella raccolta di risorse","Probabilita dell'1,5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Aumento del 20% nella velocita di addestramento","Aumento del 15% della salute","15% in piu di montepremi","Aumento dell'8% di attacco e difesa","7% maggiore capacita di dimensione dell'attacco","Parti racing bonus","1 pacchetto mega risorse","1 lasciapassare porto fuori mondo","1 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 10% sugli acquisti nel gioco per un secondo periodo di 12 mesi","#Scegli semplicemente di donare $500 per supportare la nostra missione, e, se lo desideri, il tuo nome apparira nei titoli di coda del gioco con il titolo \"Tenente di Volo Onorario Arruolato\""] },
+      { "title": "Classe Speciale Tenente di Volo", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Speciale Tenente di Volo\"","Riceverai $1.050 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Classe Speciale Tenente di Volo, riceverai un bonus del 20% di aumento nella raccolta di risorse","Probabilita dell'1,5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita dell'1,0% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 20% nella velocita di addestramento","Aumento del 20% della salute","15% in piu di montepremi","Aumento del 10% di attacco e difesa","7% maggiore capacita di dimensione dell'attacco","Parti racing bonus","1 pacchetto mega risorse","1 avatar host extra","1 lasciapassare porto fuori mondo","1 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 10% sugli acquisti nel gioco per un secondo periodo di 12 mesi"] },
+      { "title": "Gregario", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Gregario\"","Riceverai $1.480 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Gregario, riceverai un bonus del 25% di aumento nella raccolta di risorse","Probabilita del 2,0% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita dell'1,0% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 25% nella velocita di addestramento","Aumento del 20% della salute","20% in piu di montepremi","Aumento del 10% di attacco e difesa","8% maggiore capacita di dimensione dell'attacco","Parti racing bonus","1 pacchetto mega risorse","1 pacchetto mega cristalli","1 avatar host extra","1 lasciapassare porto fuori mondo","2 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Ricevi un ulteriore 10% di sconto continuo su qualsiasi acquisto nel gioco","#Scegli semplicemente di donare $1.000 per supportare la nostra missione, e, se lo desideri, il tuo nome apparira nei titoli di coda del gioco con il titolo \"Gregario Onorario Arruolato\""] },
+      { "title": "Classe Senior Gregario", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Classe Senior Gregario\"","Riceverai $2.200 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Classe Senior Gregario, riceverai un bonus del 25% di aumento nella raccolta di risorse","Probabilita del 3,0% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita dell'1,5% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 30% nella velocita di addestramento","Aumento del 25% della salute","20% in piu di montepremi","Aumento del 15% di attacco e difesa","10% maggiore capacita di dimensione dell'attacco","1 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","1 pacchetto mega risorse","1 pacchetto mega cristalli","1 avatar host extra","1 lasciapassare porto fuori mondo","2 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","Sconto del 20% sugli acquisti nel gioco per i primi 12 mesi","Ricevi un ulteriore 10% di sconto continuo su qualsiasi acquisto nel gioco"] },
+      { "title": "Ufficiale Tecnico", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Ufficiale Tecnico\"","Riceverai $2.900 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Ufficiale Tecnico, riceverai un bonus del 25% di aumento nella raccolta di risorse","Probabilita del 3,5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita del 2,0% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 30% nella velocita di addestramento","Aumento del 25% della salute","25% in piu di montepremi","Aumento del 15% di attacco e difesa","10% maggiore capacita di dimensione dell'attacco","1 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","2 pacchetti mega risorse","1 pacchetto mega cristalli","2 avatar host extra","2 lasciapassare porto fuori mondo","3 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","Sconto del 25% sugli acquisti nel gioco per i primi 12 mesi","Ricevi un ulteriore 20% di sconto continuo su qualsiasi acquisto nel gioco","Avatar personalizzato modellato sul donatore, che appare in tutto il gioco","Condivisione dei ricavi! Partecipa fino al 2,5% del pool di profitti generato dalla vendita di pacchetti nel gioco e NFA","Accesso esclusivo agli sviluppatori con aggiornamenti privati mensili sul gioco, lo sviluppo, piu opportunita di fornire feedback","Design esclusivo del pilota Quest da utilizzare nel gioco","Carta collezionabile stile baseball del tuo percorso quest esclusivo, inviata a te con una lettera di apprezzamento"] },
+      { "title": "Specialista del Team", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Specialista del Team\"","Riceverai $3.300 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Specialista del Team, riceverai un bonus del 30% di aumento nella raccolta di risorse","Probabilita del 5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita del 2,5% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 30% nella velocita di addestramento","Aumento del 30% della salute","25% in piu di montepremi","Aumento del 15% di attacco e difesa","10% maggiore capacita di dimensione dell'attacco","1 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","3 pacchetti mega risorse","1 pacchetto mega cristalli","2 avatar host extra","2 lasciapassare porto fuori mondo","2 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","1 NFA specialisti team eccezionali che offrono bonus nave e gara, con un riacquisto minimo garantito di $400 ciascuno","Sconto del 25% sugli acquisti nel gioco per i primi 24 mesi","Ricevi un ulteriore 20% di sconto continuo su qualsiasi acquisto nel gioco","Avatar personalizzato modellato sul donatore, che appare in tutto il gioco","Condivisione dei ricavi! Partecipa fino al 2,5% del pool di profitti generato dalla vendita di pacchetti nel gioco e NFA","Accesso esclusivo agli sviluppatori con aggiornamenti privati mensili sul gioco, lo sviluppo, piu opportunita di fornire feedback","Design esclusivo del pilota Quest da utilizzare nel gioco","Carta collezionabile stile baseball del tuo percorso quest esclusivo, inviata a te con una lettera di apprezzamento","#Scegli semplicemente di donare $2.500 per supportare la nostra missione e, se lo desideri, il tuo nome apparira nei titoli di coda del gioco con il titolo \"Specialista del Team Onorario Arruolato\""] },
+      { "title": "Specialista del Team Maggiore", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Specialista del Team Maggiore\"","Riceverai $6.500 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Specialista del Team Maggiore, riceverai un bonus del 35% di aumento nella raccolta/estrazione di risorse","Probabilita del 7% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita del 3,5% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 35% nella velocita di addestramento","Aumento del 30% della salute","30% in piu di montepremi","Aumento del 20% di attacco e difesa","10% maggiore capacita di dimensione dell'attacco","1 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","4 pacchetti mega risorse","1 pacchetto mega cristalli","2 avatar host extra","2 lasciapassare porto fuori mondo","3 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","1 NFA specialisti team eccezionali che offrono bonus nave e gara, con un riacquisto minimo garantito di $400 ciascuno","Sconto del 25% sugli acquisti nel gioco per i primi 24 mesi","Ricevi un ulteriore 20% di sconto continuo su qualsiasi acquisto nel gioco","Avatar personalizzato modellato sul donatore, che appare in tutto il gioco","Condivisione dei ricavi! Partecipa fino al 5% del pool di profitti generato dalla vendita di pacchetti nel gioco e NFA","Accesso esclusivo agli sviluppatori con aggiornamenti privati mensili sul gioco, lo sviluppo, piu opportunita di fornire feedback","Design esclusivo del pilota Quest da utilizzare nel gioco","Carta collezionabile stile baseball del tuo percorso quest esclusivo, inviata a te con una lettera di apprezzamento"] },
+      { "title": "Comandante Elite", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Comandante Elite\"","Riceverai $9.000 USD di crediti da utilizzare per acquisti nel gioco","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Comandante Elite, riceverai un bonus del 35% di aumento nella raccolta/estrazione di risorse","Probabilita del 7,5% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita del 4% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 40% nella velocita di addestramento","Aumento del 35% della salute","30% in piu di montepremi","Aumento del 20% di attacco e difesa","20% maggiore capacita di dimensione dell'attacco","2 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","4 pacchetti mega risorse","2 pacchetti mega cristalli","2 avatar host extra","3 lasciapassare porto fuori mondo","4 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","1 NFA specialisti team eccezionali che offrono bonus nave e gara, con un riacquisto minimo garantito di $400 ciascuno","Sconto del 30% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 25% sugli acquisti nel gioco per i secondi 12 mesi","Ricevi un ulteriore 20% di sconto continuo su qualsiasi acquisto nel gioco","Avatar personalizzato modellato sul donatore, che appare in tutto il gioco","Condivisione dei ricavi! Partecipa fino al 5% del pool di profitti generato dalla vendita di pacchetti nel gioco e NFA","Accesso esclusivo agli sviluppatori con aggiornamenti privati mensili sul gioco, lo sviluppo, piu opportunita di fornire feedback","Design esclusivo del pilota Quest da utilizzare nel gioco","Carta collezionabile stile baseball del tuo percorso quest esclusivo, inviata a te con una lettera di apprezzamento"] },
+      { "title": "Over Lord", "rewards": ["Il tuo nome apparira nei titoli di coda del gioco con il titolo \"Over Lord\"","Riceverai $15.000 USD di crediti da utilizzare per acquisti nel gioco (non possono essere convertiti in pagamenti di incasso)","Riceverai aggiornamenti settimanali sul gioco via email","Potrai unirti alla chat Discord.","Come Overlord, riceverai un bonus del 40% di aumento nella raccolta/estrazione di risorse","Probabilita del 10% piu alta di ottenere NFA o oggetti rari nei primi 12 mesi","Probabilita del 5% piu alta di ottenere NFA o oggetti rari in corso","Aumento del 50% nella velocita di addestramento","Aumento del 40% della salute","40% in piu di montepremi","Aumento del 25% di attacco e difesa","25% maggiore capacita di dimensione dell'attacco","2 slot di teletrasporto extra per attacco/difesa","Parti racing bonus","6 pacchetti mega risorse","3 pacchetti mega cristalli","2 avatar host extra","4 lasciapassare porto fuori mondo","4 NFA specialisti team superiori che offrono bonus nave e gara, con un riacquisto minimo garantito di $150 ciascuno","2 NFA specialisti team leggendari che offrono bonus nave e gara, con un riacquisto minimo garantito di $650 ciascuno","1 NFA specialisti team epici che offrono bonus nave e gara, con un riacquisto minimo garantito di $1000 ciascuno","Sconto del 40% sugli acquisti nel gioco per i primi 12 mesi","Sconto del 30% sugli acquisti nel gioco per i secondi 12 mesi","Ricevi un ulteriore 20% di sconto su qualsiasi acquisto nel gioco finche sei coinvolto nel gioco","Avatar personalizzato modellato sul donatore, che appare in tutto il gioco","Condivisione dei ricavi! Partecipa fino al 5% del pool di profitti generato dalla vendita di pacchetti nel gioco e NFA","Accesso esclusivo agli sviluppatori con aggiornamenti privati mensili sul gioco, lo sviluppo, piu opportunita di fornire feedback","Design esclusivo del pilota Quest da utilizzare nel gioco","Carta collezionabile stile baseball del tuo percorso quest esclusivo, inviata a te con una lettera di apprezzamento"] }
+    ]
+  }
+}

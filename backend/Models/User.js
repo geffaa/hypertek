@@ -124,6 +124,10 @@ const UserSchema = new mongoose.Schema(
       verifiedAt:{ type: Date,   default: null },
       failReason:{ type: String, default: null },
     },
+    cashoutOtp: {
+      code:      { type: String, default: null },
+      expiresAt: { type: Date,   default: null },
+    },
   },
   {
     timestamps: true,

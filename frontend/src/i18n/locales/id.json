@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Toko",
+    "aboutUs": "Tentang Kami",
+    "news": "Berita",
+    "socials": "Media Sosial",
+    "waitlist": "Daftar Tunggu",
+    "signUp": "Daftar",
+    "joinWaitlist": "Bergabung ke Daftar Tunggu",
+    "search": "Cari...",
+    "myProfile": "Profil Saya",
+    "dashboard": "Dasbor",
+    "adminPanel": "Panel Admin",
+    "gaming": "Gaming",
+    "marketplace": "Pasar",
+    "signOut": "Keluar",
+    "shop": {
+      "overview": "Ikhtisar",
+      "overviewDesc": "Ikhtisar pasar umum",
+      "myAssets": "Aset Saya",
+      "myAssetsDesc": "Lacak dan kelola semua yang Anda miliki",
+      "theMarketplace": "Pasar",
+      "theMarketplaceDesc": "Jelajahi semua koleksi NFT, NFA & NFC",
+      "auction": "Lelang",
+      "auctionDesc": "Lacak hitung mundur lelang mana pun",
+      "land": "Tanah"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Konfirmasi Keluar",
+    "confirmMessage": "Apakah Anda yakin ingin keluar?",
+    "cancel": "Batal",
+    "logout": "Keluar"
+  },
+  "footer": {
+    "joinWaitlist": "Bergabung ke Daftar Tunggu",
+    "allRightsReserved": "Semua Hak Dilindungi",
+    "links": {
+      "marketplace": "Pasar",
+      "news": "Berita",
+      "whitepaper": "Whitepaper",
+      "about": "Tentang",
+      "profile": "Profil",
+      "terms": "Syarat & Ketentuan"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "TEMPAT LEGENDA TERLUPAKAN",
+    "marketplace": "Pasar",
+    "downloadGame": "Unduh Game",
+    "tryUI": "Coba UI",
+    "close": "Tutup"
+  },
+  "howItWorks": {
+    "sectionTitle": "Cara Kerja",
+    "sectionSubtitle": "Mulai hanya dalam beberapa langkah dan buka dunia koleksi digital.",
+    "steps": [
+      {
+        "title": "Hubungkan Dompet",
+        "description": "Hubungkan dompet kripto Anda dengan aman untuk mulai membeli, menjual, dan mengoleksi NFT."
+      },
+      {
+        "title": "Jelajahi Koleksi",
+        "description": "Telusuri koleksi yang sedang tren dan temukan karya seni digital langka dari kreator terbaik."
+      },
+      {
+        "title": "Koleksi & Perdagangan",
+        "description": "Beli NFT favorit Anda dan pamerkan atau perdagangkan di profil Anda kapan saja."
+      },
+      {
+        "title": "Hasilkan & Berkembang",
+        "description": "Hasilkan uang dengan menjual koleksi Anda atau mendapatkan popularitas di ruang NFT."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Sesi berakhir. Silakan masuk kembali."
+  },
+  "language": {
+    "select": "Bahasa"
+  },
+  "story": {
+    "label": "CERITA",
+    "subheading": "Tahun 2117.",
+    "body": "Pada Tahun 2117, sebelum dampak keruntuhan Bumi, para penyintas memulai Hyper Tek Exodus. Upaya terakhir umat manusia untuk bertahan hidup tidak menghasilkan penaklukan bintang-bintang; sebaliknya, ia tersebar di antara mereka, menyebarkan AI, genom yang ditingkatkan, dan prototipe ke ribuan dunia benih. Eona berlalu, setiap dunia berkembang dalam isolasi, melahirkan spesies, budaya, dan teknologi baru. Di jantung semuanya terletak Echo Core, sebuah peninggalan kuantum yang berdenyut dengan paradoks, kenangan, dan panggilan kekuasaan. Ia membangunkan Anda sebagai Overlord yang terlahir kembali, ditempa dari warisan dan teknologi.",
+    "readMore": "Baca Cerita Lengkap Kami",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Alam Semesta Terkoneksi",  "desc": "3 game - 1 sistem ekonomi dan perkembangan bersama" },
+      { "label": "Kepemilikan Sejati",           "desc": "NFA dengan buyback minimum yang dijamin" },
+      { "label": "Main-untuk-Hasilkan",             "desc": "Setiap tindakan berkontribusi pada hadiah dunia nyata Anda" },
+      { "label": "Pembayaran Penarikan",        "desc": "Mengonversi mata uang/hadiah dalam game menjadi pembayaran penarikan" },
+      { "label": "Perkembangan Terhubung",       "desc": "Perkembangan pemain terhubung di semua suite game" },
+      { "label": "Integrasi VR/AR",        "desc": "Pemain VR/AR dapat bergabung dalam misi dan pertempuran epik secara real-time" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "Tahun 2117.",
+    "body": "Umat manusia tidak menaklukkan bintang-bintang - ia pecah di antaranya. Setelah keruntuhan Bumi, para penyintas meluncurkan Hyper Tek Exodus, menyebarkan AI, genom yang ditingkatkan, dan prototipe ke ribuan dunia benih. Setiap dunia berkembang dalam isolasi, membentuk spesies, budaya, dan teknologi baru. Di pusat semuanya terletak Echo Core, sebuah peninggalan kuantum yang kini berdenyut dengan teka-teki, kenangan, dan panggilan kekuasaan. Ia membangunkan Anda, seorang Overlord yang terlahir kembali, ditempa oleh warisan dan teknologi."
+  },
+  "homeMarket": {
+    "featured": "Unggulan",
+    "sectionTitle": "Item NFA Edisi Terbatas",
+    "buybackBadge": "Buyback Minimum Dijamin untuk Semua NFA/NFC/NFT",
+    "urgency": "Bertindak cepat, begitu mereka habis, mereka LENYAP!",
+    "loading": "Memuat item...",
+    "empty": "Belum ada item yang terdaftar.",
+    "price": "Harga",
+    "minBuyback": "Buyback Minimum",
+    "buyNow": "Beli Sekarang"
+  },
+  "gaming": {
+    "sectionTitle": "INFO GAMING",
+    "learnMore": "PELAJARI LEBIH LANJUT",
+    "hoverToExplore": "arahkan kursor untuk menjelajahi",
+    "games": [
+      {
+        "label": "BALAP",
+        "tagline": "Kecepatan adalah kelangsungan hidup.",
+        "description": "Terobos batas gravitasi di megakota berlampion neon dan medan alien. Setel mesin Anda, kuasai setiap tikungan, dan tinggalkan rival Anda di belakang - papan peringkat tidak menunggu siapa pun."
+      },
+      {
+        "label": "PETUALANGAN",
+        "tagline": "Jelajahi yang belum diketahui.",
+        "description": "Navigasi sistem bintang yang belum dipetakan, jalin aliansi, dan ungkap rahasia Echo Core. Setiap pilihan membentuk warisan Anda."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Perintah. Taklukkan. Kuasai.",
+        "description": "Anda adalah Overlord - terlahir kembali dari abu Bumi yang terpecah. Bangun pasukan, kuasai sistem bintang, dan tundukkan faksi-faksi rival sesuai kehendak Anda. Echo Core memilih Anda. Buktikan itu benar."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "KAMPANYE CROWDFUNDING - TAHAP 1",
+    "intro1": "Kami dengan gembira mengumumkan peluncuran kampanye crowdfunding kami yang sangat ditunggu-tunggu untuk mengamankan dana bagi penyelesaian proyek Hyper Tek yang revolusioner, yang sedang membuat kemajuan positif! Ini adalah kesempatan Anda untuk terjun ke ekosistem Hyper Tek sebagai peserta awal dengan memilih dari pilihan eksklusif item dan paket dengan ketersediaan terbatas yang tidak ingin Anda lewatkan. Bertindak cepat! Dengan membeli langsung dari kami di platform ini, Anda dapat menikmati tarif yang dikurangi sebesar 10% dengan memungkinkan kami meneruskan penghematan kepada Anda, dari menghindari biaya crowdfunding, yang tercantum di bawah!",
+    "intro2": "Karena semua item digital Non-Fungible Hyper Tek didukung oleh buyback minimum yang dijamin, dengan sebagian besar juga menawarkan bonus dalam game yang substansial yang meningkatkan pengalaman Anda, untuk mempermeriah segalanya, kami memperkenalkan serangkaian NFA (Non-Fungible Assets) edisi terbatas dengan tingkat bonus tertinggi yang pernah ditawarkan. Ini adalah kesempatan langka karena penawaran ini tidak akan pernah terulang! Setelah item-item ini terjual habis atau kami mencapai target pendanaan, NFA edisi terbatas yang belum dicetak akan ditarik dari situs web untuk selamanya!",
+    "intro3": "Kami telah mengumpulkan lebih dari $440.000 dan ingin mengamankan tambahan $460.000. Ini adalah momen Anda untuk bergabung dengan kami dalam inisiatif yang menggembirakan ini; jangan biarkan berlalu! Beli item atau paket dengan ketersediaan terbatas Anda hari ini dan jadilah bagian dari Ekosistem Hyper Tek yang menarik.",
+    "intro4": "Ingat untuk mendaftar ke daftar keinginan dan terhubung dengan kami di media sosial agar tetap up to date! Bertindak sekarang, karena waktu sangat berharga!",
+    "collectionsLabel": "Koleksi",
+    "sectionTitle": "Paket Tingkat Donasi",
+    "discount": "Hemat 10% dari harga yang tercantum",
+    "donationTierLabel": "Tingkat donasi",
+    "donationTierPrefix": "Tingkat Donasi:",
+    "rewardsTitle": "Hadiah & Manfaat",
+    "noteTitle": "Catatan",
+    "commonNote": "Hadiah, Bonus dan/atau Diskon untuk berdonasi sekarang.\n\nCATATAN: Selain voucher yang akan digunakan untuk game online atau pembelian tertentu, semua Hadiah, Bonus dan/atau Diskon lainnya tidak dapat digabungkan atau digunakan bersamaan dengan promosi lain mana pun.\n\nSemua paket donasi akan mencakup kredit akhir tertulis dalam pengembangan game.",
+    "specialConditionTitle": "Kondisi Khusus",
+    "specialCondition": "Setelah pengembangan dan penyelesaian game/game-game yang berhasil, setiap orang yang berdonasi akan menerima nilai minimum lebih dari investasi awal mereka dalam hadiah atau paket yang akan digunakan dalam game/game-game, dan bonus atau hadiah yang dijanjikan untuk berdonasi akan diberikan setelah game/game-game dirilis.",
+    "imageComing": "Gambar segera hadir",
+    "close": "Tutup",
+    "items": [
+      { "title": "Rekrut", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Rekrut\"","Anda akan menerima kredit USD $35 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Rekrut, Anda akan menerima Diskon 10% untuk pembelian dalam game selama 12 bulan pertama"] },
+      { "title": "Kadet Kelas Pemula", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Kelas Pemula\"","Anda akan menerima kredit USD $90 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Kelas Pemula, Anda akan menerima bonus peningkatan pengumpulan sumber daya 10%","Peningkatan kecepatan pelatihan 5%","Diskon 10% untuk pembelian dalam game selama 12 bulan pertama","#Pilih untuk hanya berdonasi $50 untuk mendukung misi kami, dan, jika Anda mau, nama Anda akan muncul di kredit akhir game dengan judul \"Terdaftar Kehormatan Kelas Pemula\""] },
+      { "title": "Kadet Kelas 1", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Kelas 1\"","Anda akan menerima kredit USD $125 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Kelas 1, Anda akan menerima bonus peningkatan pengumpulan sumber daya 10%","Peningkatan kecepatan pelatihan 5%","Uang hadiah lebih banyak 5%","Peningkatan serangan dan pertahanan 5%","Diskon 10% untuk pembelian dalam game selama 24 bulan pertama"] },
+      { "title": "Kadet Terkemuka", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Terkemuka\"","Anda akan menerima kredit USD $170 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Terkemuka, Anda akan menerima bonus peningkatan pengumpulan sumber daya 10%","Peningkatan kecepatan pelatihan 5%","Uang hadiah lebih banyak 5%","Peningkatan serangan dan pertahanan 5%","Diskon 10% untuk pembelian dalam game selama 24 bulan pertama"] },
+      { "title": "Kadet Terkemuka Kelas Khusus", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Terkemuka Kelas Khusus\"","Anda akan menerima kredit USD $240 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Terkemuka Kelas Khusus, Anda akan menerima bonus peningkatan pengumpulan sumber daya 10%","Peningkatan kecepatan pelatihan 5%","Uang hadiah lebih banyak 5%","Peningkatan serangan dan pertahanan 5%","Diskon 15% untuk pembelian dalam game selama 24 bulan pertama"] },
+      { "title": "Kadet Senior", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Terkemuka Kelas Khusus\"","Anda akan menerima kredit USD $390 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Senior, Anda akan menerima bonus peningkatan pengumpulan sumber daya 15%","Peningkatan kecepatan pelatihan 5%","Peningkatan kesehatan 10%","Uang hadiah lebih banyak 5%","Peningkatan serangan dan pertahanan 5%","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Diskon 10% untuk pembelian dalam game selama 12 bulan kedua","#Pilih untuk hanya berdonasi $250 untuk mendukung misi kami, jika Anda mau, nama Anda akan muncul di kredit akhir game dengan judul \"Terdaftar Kehormatan Kelas Senior Khusus\""] },
+      { "title": "Kadet Senior Kelas Khusus", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Senior Kelas Khusus\"","Anda akan menerima kredit USD $440 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Kadet Senior Kelas Khusus, Anda akan menerima bonus peningkatan pengumpulan sumber daya 15%","Peluang 1,0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peningkatan kecepatan pelatihan 10%","Peningkatan kesehatan 10%","Uang hadiah lebih banyak 10%","Peningkatan serangan dan pertahanan 5%","Kapasitas ukuran serangan lebih besar 5%","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Diskon 10% untuk pembelian dalam game selama 12 bulan kedua"] },
+      { "title": "Kadet Penerbangan", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Kadet Penerbangan\"","Anda akan menerima kredit USD $550 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Letnan Penerbangan, Anda akan menerima bonus peningkatan pengumpulan sumber daya 15%","Peluang 1,5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peningkatan kecepatan pelatihan 15%","Peningkatan kesehatan 15%","Uang hadiah lebih banyak 10%","Peningkatan serangan dan pertahanan 5%","Kapasitas ukuran serangan lebih besar 5%","1 paket sumber daya mega","1 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Diskon 10% untuk pembelian dalam game selama 12 bulan kedua"] },
+      { "title": "Letnan Penerbangan", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Letnan Penerbangan\"","Anda akan menerima kredit USD $6800 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Letnan Penerbangan, Anda akan menerima bonus peningkatan pengumpulan sumber daya 20%","Peluang 1,5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peningkatan kecepatan pelatihan 20%","Peningkatan kesehatan 15%","Uang hadiah lebih banyak 15%","Peningkatan serangan dan pertahanan 8%","Kapasitas ukuran serangan lebih besar 7%","Suku cadang balap bonus","1 paket sumber daya mega","1 kartu izin pelabuhan luar dunia","1 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Diskon 10% untuk pembelian dalam game selama 12 bulan kedua","#Pilih untuk hanya berdonasi $500 untuk mendukung misi kami, dan, jika Anda mau, nama Anda akan muncul di kredit akhir game dengan judul \"Letnan Penerbangan Kehormatan\""] },
+      { "title": "Letnan Penerbangan Kelas Khusus", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Letnan Penerbangan Kelas Khusus\"","Anda akan menerima kredit USD $1.050 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Letnan Penerbangan Kelas Khusus, Anda akan menerima bonus peningkatan pengumpulan sumber daya 20%","Peluang 1,5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 1,0% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 20%","Peningkatan kesehatan 20%","Uang hadiah lebih banyak 15%","Peningkatan serangan dan pertahanan 10%","Kapasitas ukuran serangan lebih besar 7%","Suku cadang balap bonus","1 paket sumber daya mega","1 avatar host ekstra","1 kartu izin pelabuhan luar dunia","1 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Diskon 10% untuk pembelian dalam game selama 12 bulan kedua"] },
+      { "title": "Wingman", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Wingman\"","Anda akan menerima kredit USD $1.480 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Wingman, Anda akan menerima bonus peningkatan pengumpulan sumber daya 25%","Peluang 2,0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 1,0% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 25%","Peningkatan kesehatan 20%","Uang hadiah lebih banyak 20%","Peningkatan serangan dan pertahanan 10%","Kapasitas ukuran serangan lebih besar 8%","Suku cadang balap bonus","1 paket sumber daya mega","1 paket kristal mega","1 avatar host ekstra","1 kartu izin pelabuhan luar dunia","2 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Terima diskon tambahan 10% yang berkelanjutan untuk pembelian apa pun dalam game/game-game","#Pilih untuk hanya berdonasi $1.000 untuk mendukung misi kami, dan, jika Anda mau, nama Anda akan muncul di kredit akhir game dengan judul \"Wingman Kehormatan\""] },
+      { "title": "Wingman Kelas Senior", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Wingman Kelas Senior\"","Anda akan menerima kredit USD $2.200 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Wingman Kelas Senior, Anda akan menerima bonus peningkatan pengumpulan sumber daya 25%","Peluang 3,0% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 1,5% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 30%","Peningkatan kesehatan 25%","Uang hadiah lebih banyak 20%","Peningkatan serangan dan pertahanan 15%","Kapasitas ukuran serangan lebih besar 10%","1 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","1 paket sumber daya mega","1 paket kristal mega","1 avatar host ekstra","1 kartu izin pelabuhan luar dunia","2 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","Diskon 20% untuk pembelian dalam game selama 12 bulan pertama","Terima diskon tambahan 10% yang berkelanjutan untuk pembelian apa pun dalam game/game-game"] },
+      { "title": "Perwira Teknis", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Perwira Teknis\"","Anda akan menerima kredit USD $2.900 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Perwira Teknis, Anda akan menerima bonus peningkatan pengumpulan sumber daya 25%","Peluang 3,5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 2,0% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 30%","Peningkatan kesehatan 25%","Uang hadiah lebih banyak 25%","Peningkatan serangan dan pertahanan 15%","Kapasitas ukuran serangan lebih besar 10%","1 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","2 paket sumber daya mega","1 paket kristal mega","2 avatar host ekstra","2 kartu izin pelabuhan luar dunia","3 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","Diskon 25% untuk pembelian dalam game selama 12 bulan pertama","Terima diskon tambahan 20% yang berkelanjutan untuk pembelian apa pun dalam game/game-game","Avatar yang dipersonalisasi sesuai model donor, muncul di seluruh game","Berbagi pendapatan! Bagikan hingga 2,5% kumpulan keuntungan dari penjualan paket dalam game dan NFA","Akses pengembang eksklusif dengan pembaruan pribadi bulanan tentang game, pengembangan, serta peluang untuk memberikan umpan balik","Desain pembalap Quest eksklusif untuk digunakan dalam game","Kartu kolektif bergaya baseball dari perlombaan quest eksklusif Anda, dikirim kepada Anda dengan surat apresiasi"] },
+      { "title": "Spesialis Tim", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Spesialis Tim\"","Anda akan menerima kredit USD $3.300 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Spesialis Tim, Anda akan menerima bonus peningkatan pengumpulan sumber daya 30%","Peluang 5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 2,5% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 30%","Peningkatan kesehatan 30%","Uang hadiah lebih banyak 25%","Peningkatan serangan dan pertahanan 15%","Kapasitas ukuran serangan lebih besar 10%","1 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","3 paket sumber daya mega","1 paket kristal mega","2 avatar host ekstra","2 kartu izin pelabuhan luar dunia","2 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","1 NFA spesialis tim luar biasa yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $400 masing-masing","Diskon 25% untuk pembelian dalam game selama 24 bulan pertama","Terima diskon tambahan 20% yang berkelanjutan untuk pembelian apa pun dalam game/game-game","Avatar yang dipersonalisasi sesuai model donor, muncul di seluruh game","Berbagi pendapatan! Bagikan hingga 2,5% kumpulan keuntungan dari penjualan paket dalam game dan NFA","Akses pengembang eksklusif dengan pembaruan pribadi bulanan tentang game, pengembangan, serta peluang untuk memberikan umpan balik","Desain pembalap Quest eksklusif untuk digunakan dalam game","Kartu kolektif bergaya baseball dari perlombaan quest eksklusif Anda, dikirim kepada Anda dengan surat apresiasi","#Pilih untuk hanya berdonasi $2.500 untuk mendukung misi kami dan, jika Anda mau, nama Anda akan muncul di kredit akhir game dengan judul \"Spesialis Tim Kehormatan\""] },
+      { "title": "Spesialis Tim Mayor", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Spesialis Tim Mayor\"","Anda akan menerima kredit USD $6.500 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Spesialis Tim Mayor, Anda akan menerima bonus peningkatan pengumpulan/penambangan sumber daya 35%","Peluang 7% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 3,5% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 35%","Peningkatan kesehatan 30%","Uang hadiah lebih banyak 30%","Peningkatan serangan dan pertahanan 20%","Kapasitas ukuran serangan lebih besar 10%","1 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","4 paket sumber daya mega","1 paket kristal mega","2 avatar host ekstra","2 kartu izin pelabuhan luar dunia","3 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","1 NFA spesialis tim luar biasa yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $400 masing-masing","Diskon 25% untuk pembelian dalam game selama 24 bulan pertama","Terima diskon tambahan 20% yang berkelanjutan untuk pembelian apa pun dalam game/game-game","Avatar yang dipersonalisasi sesuai model donor, muncul di seluruh game","Berbagi pendapatan! Bagikan hingga 5% kumpulan keuntungan dari penjualan paket dalam game dan NFA","Akses pengembang eksklusif dengan pembaruan pribadi bulanan tentang game, pengembangan, serta peluang untuk memberikan umpan balik","Desain pembalap Quest eksklusif untuk digunakan dalam game","Kartu kolektif bergaya baseball dari perlombaan quest eksklusif Anda, dikirim kepada Anda dengan surat apresiasi"] },
+      { "title": "Komandan Elite", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Komandan Elite\"","Anda akan menerima kredit USD $9.000 untuk digunakan pada pembelian dalam game","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan discord.","Sebagai Komandan Elite, Anda akan menerima bonus peningkatan pengumpulan/penambangan sumber daya 35%","Peluang 7,5% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 4% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 40%","Peningkatan kesehatan 35%","Uang hadiah lebih banyak 30%","Peningkatan serangan dan pertahanan 20%","Kapasitas ukuran serangan lebih besar 20%","2 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","4 paket sumber daya mega","2 paket kristal mega","2 avatar host ekstra","3 kartu izin pelabuhan luar dunia","4 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","1 NFA spesialis tim luar biasa yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $400 masing-masing","Diskon 30% untuk pembelian dalam game selama 12 bulan pertama","Diskon 25% untuk pembelian dalam game selama 12 bulan kedua","Terima diskon tambahan 20% yang berkelanjutan untuk pembelian apa pun dalam game/game-game","Avatar yang dipersonalisasi sesuai model donor, muncul di seluruh game","Berbagi pendapatan! Bagikan hingga 5% kumpulan keuntungan dari penjualan paket dalam game dan NFA","Akses pengembang eksklusif dengan pembaruan pribadi bulanan tentang game, pengembangan, serta peluang untuk memberikan umpan balik","Desain pembalap Quest eksklusif untuk digunakan dalam game","Kartu kolektif bergaya baseball dari perlombaan quest eksklusif Anda, dikirim kepada Anda dengan surat apresiasi"] },
+      { "title": "Over Lord", "rewards": ["Nama Anda akan muncul di kredit akhir game dengan judul \"Over Lord\"","Anda akan menerima kredit USD $15.000 untuk digunakan pada pembelian dalam game (tidak dapat diubah menjadi pembayaran penarikan)","Anda akan menerima pembaruan mingguan tentang game melalui email","Anda akan dapat bergabung dengan obrolan Discord.","Sebagai Overlord, Anda akan menerima bonus peningkatan pengumpulan/penambangan sumber daya 40%","Peluang 10% lebih tinggi untuk mendapatkan NFA atau item langka dalam 12 bulan pertama","Peluang 5% lebih tinggi untuk mendapatkan NFA atau item langka secara berkelanjutan","Peningkatan kecepatan pelatihan 50%","Peningkatan kesehatan 40%","Uang hadiah lebih banyak 40%","Peningkatan serangan dan pertahanan 25%","Kapasitas ukuran serangan lebih besar 25%","2 slot teleportasi ekstra untuk menyerang/bertahan","Suku cadang balap bonus","6 paket sumber daya mega","3 paket kristal mega","2 avatar host ekstra","4 kartu izin pelabuhan luar dunia","4 NFA spesialis tim superior yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $150 masing-masing","2 NFA spesialis tim legendaris yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $650 masing-masing","1 NFA spesialis tim epik yang menawarkan bonus kapal dan balap, serta buyback minimum yang dijamin sebesar $1000 masing-masing","Diskon 40% untuk pembelian dalam game selama 12 bulan pertama","Diskon 30% untuk pembelian dalam game selama 12 bulan kedua","Terima diskon tambahan 20% untuk pembelian apa pun dalam game/game-game selama Anda terlibat dalam game","Avatar yang dipersonalisasi sesuai model donor, muncul di seluruh game","Berbagi pendapatan! Bagikan hingga 5% kumpulan keuntungan dari penjualan paket dalam game dan NFA","Akses pengembang eksklusif dengan pembaruan pribadi bulanan tentang game, pengembangan, serta peluang untuk memberikan umpan balik","Desain pembalap Quest eksklusif untuk digunakan dalam game","Kartu kolektif bergaya baseball dari perlombaan quest eksklusif Anda, dikirim kepada Anda dengan surat apresiasi"] }
+    ]
+  }
+}

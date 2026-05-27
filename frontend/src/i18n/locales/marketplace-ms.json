@@ -1,0 +1,87 @@
+{
+  "marketplace": {
+    "sectionLabel": "Pasaran",
+    "searchPlaceholder": "Cari...",
+    "tabs": { "overview": "Gambaran Keseluruhan", "nfa101": "NFAs / NFCs / NFTs", "general": "Pasaran", "auctions": "Lelongan", "trades": "Pertukaran", "quests": "Kuest", "hire": "Untuk Disewa", "bounty": "Ganjaran" },
+    "banner": {
+      "defaultHeading": "Era Baru Bermula di Hyper Tek",
+      "defaultDesc": "Ini permulaan alam semesta yang hidup dan bernafas di mana setiap keputusan membentuk perjalanan.",
+      "stats": { "totalItems": "Jumlah Item", "totalBuys": "Jumlah Pembelian", "listed": "Disenaraikan", "collections": "Koleksi" },
+      "soundOn": "Bunyi Hidup", "soundOff": "Bunyi Mati"
+    },
+    "bottomBar": {
+      "learnLabel": "Ketahui tentang NFAs / NFCs",
+      "educationPanel": "Panel Pendidikan HyperTek",
+      "footerNote": "Panel ini untuk rujukan pantas. Lawati tab NFAs / NFCs 101 untuk kandungan pendidikan penuh.",
+      "facts": [
+        { "label": "NFA", "desc": "Aset eksklusif Hypertek. Bonus dalam permainan tertinggi. Nilai buyback minimum dijamin yang berkembang dengan setiap jualan." },
+        { "label": "NFC", "desc": "Dicipta oleh Hypertek atau pemain berlesen. Bonus dalam permainan disertakan. Buyback minimum dijamin." },
+        { "label": "NFT", "desc": "Koleksi yang dicipta oleh pemain. Tiada bonus dalam permainan. Tiada jaminan buyback. Boleh didagangkan di pasaran." },
+        { "label": "Komisen", "desc": "Yuran platform 20% pada semua jualan. Penjual menerima 80%. Royalti artis 4% pada jualan semula." },
+        { "label": "Pertumbuhan Buyback", "desc": "+5% setiap harga jualan semula ditambah kepada nilai buyback minimum aset." },
+        { "label": "Dompet Kustodi", "desc": "HyperTek secara automatik mencipta dompet kripto untuk anda semasa pendaftaran." }
+      ]
+    },
+    "overview": {
+      "heading": "Gambaran Keseluruhan", "subtitle": "Selamat datang ke Pasaran HyperTek. Pilih ciri untuk mengetahui lebih lanjut.",
+      "features": [
+        { "label": "NFAs / NFCs / NFTs", "tagline": "Baru dalam aset Web3? Mulakan di sini", "details": ["NFAs adalah item yang dikeluarkan Hypertek dengan harga buyback yang dijamin.", "NFCs adalah item pemain berlesen dengan bonus dalam permainan.", "NFTs adalah koleksi yang dicipta pengguna."], "cta": "Pelajari Asas" },
+        { "label": "Pasaran", "tagline": "Beli & jual aset dalam permainan dengan segera", "details": ["Layari katalog NFAs, NFCs dan NFTs yang luas.", "Tapis mengikut kategori, kelangkaan atau julat harga.", "Penyenaraian dilaksanakan on-chain untuk pemindahan segera."], "cta": "Layari Pasaran" },
+        { "label": "Lelongan", "tagline": "Bersaing untuk item edisi terhad eksklusif", "details": ["Bida untuk aset langka yang hanya tersedia melalui lelongan terhad masa.", "Kiraan undur langsung menunjukkan berapa lama masa tinggal.", "Kalahkan orang lain untuk memperoleh item lagenda."], "cta": "Lihat Lelongan" },
+        { "label": "Pertukaran", "tagline": "Tukar aset peer-to-peer, tiada orang tengah", "details": ["Cadangkan atau terima pertukaran aset terus dengan pemain lain.", "Tetapkan terma sendiri.", "Layari tawaran pertukaran terbuka atau siarkan sendiri."], "cta": "Layari Pertukaran" },
+        { "label": "Kuest", "tagline": "Selesaikan misi, menang ganjaran eksklusif", "details": ["Ambil kuest untuk memenangkan ganjaran eksklusif dan aset dalam permainan yang langka.", "Setiap kuest mempunyai objektif unik.", "Bina koleksi anda secara strategik."], "cta": "Terokai Kuest" },
+        { "label": "Untuk Disewa", "tagline": "Pinjam aset atau jana dari milik anda", "details": ["Sewa pakar atau peralatan berkuasa untuk satu misi sahaja.", "Senaraikan aset anda yang tidak aktif untuk disewa.", "Tempoh fleksibel — setiap jam, harian atau per misi."], "cta": "Lihat Untuk Disewa" },
+        { "label": "Ganjaran", "tagline": "Buru sasaran, tuntut ganjaran", "details": ["Terima ganjaran yang disiarkan oleh pemain lain atau sistem.", "Naiki papan pendahulu ganjaran.", "Siarkan ganjaran anda sendiri untuk merekrut pemain."], "cta": "Lihat Ganjaran" }
+      ]
+    },
+    "general": {
+      "heading": "Umum", "subtitle": "Layari NFAs, NFCs dan NFTs yang tersedia untuk pembelian segera.",
+      "filterAll": "Semua",
+      "samplePreviewTitle": "Pratonton Sampel Pasaran",
+      "samplePreviewDesc": "Item di bawah adalah pratonton sampel yang mempamerkan jenis aset digital yang akan tersedia.",
+      "noItems": "Tiada item tersedia lagi. Semak semula tidak lama lagi.",
+      "categories": { "skins": "Kulit", "militaryBadges": "Lencana Tentera", "specialists": "Pakar", "weapons": "Senjata", "bodyArmour": "Perisai Badan", "spaceships": "Kapal Angkasa", "racingVehicles": "Kenderaan", "artwork": "Karya Seni", "landAndBases": "Tanah & Pangkalan", "general": "Umum" }
+    },
+    "nfa101": { "sectionLabel": "Pendidikan", "heading": "NFAs / NFCs / NFTs 101", "subtitle": "Baru dalam NFT dan Web3? Terokai artikel kami.", "minRead": "min baca", "filterAll": "Semua" },
+    "auctions": {
+      "heading": "Lelongan", "listings": "penyenaraian", "newAuction": "Lelongan Baru", "noAuctions": "Tiada lelongan {{filter}}", "createFirst": "Cipta lelongan pertama", "endingSoon": "AKAN TAMAT", "viewDetails": "Lihat Butiran",
+      "rules": { "durations": "Tempoh: 1h · 3h · 7h", "minIncrement": "Kenaikan min: 5%", "freeToList": "Percuma untuk senarai", "commission": "Komisen: 20% semasa jualan" },
+      "preview": { "title": "Pratonton Ciri Dalam Permainan", "desc": "Sistem lelongan akan aktif sepenuhnya dalam permainan semasa pelancaran." },
+      "card": { "currentBid": "Bida semasa", "endsIn": "Tamat dalam", "placeBid": "Buat Bida", "buyNow": "Beli Sekarang", "bids": "bida", "ended": "TAMAT" },
+      "detail": { "currentBid": "Bida semasa", "start": "Mula", "endsIn": "Tamat dalam", "description": "Penerangan", "recentBids": "Bida Terkini", "anonymous": "Tanpa Nama", "placeBid": "Buat Bida", "buyNow": "Beli Sekarang", "buyNowLabel": "Beli Sekarang", "bids": "bida" },
+      "bidModal": { "title": "Buat Bida", "currentBid": "Bida semasa", "minimumBid": "Bida minimum", "yourBid": "Bida anda (USDC)", "minIncrement": "Kenaikan min 5% · Minimum seterusnya selepas bida anda: {{next}} USDC", "reviewBid": "Semak Bida", "disclaimer": "Bida pemenang adalah mengikat · 20% komisen platform", "confirmTitle": "Sahkan Bida", "item": "Item", "yourBidLabel": "Bida anda", "youPay": "Jika anda menang, anda bayar", "outbidNotice": "Anda akan diberitahu serta-merta jika seseorang mengatasi bida anda.", "back": "Kembali", "confirm": "Sahkan — {{amount}} USDC", "placing": "Sedang membida…", "successTitle": "Bida Dibuat!", "highestBidder": "Anda pembida tertinggi", "outbidWarning": "Anda akan menerima pemberitahuan jika bida anda diatasi.", "done": "Selesai", "endsIn": "Tamat dalam" },
+      "instantBuyModal": { "title": "Beli Sekarang — Segera", "buyNowPrice": "Harga beli sekarang", "currentBids": "Bida semasa", "notice": "Membeli sekarang menutup lelongan serta-merta.", "cancel": "Batal", "processing": "Memproses…", "successTitle": "Item Dijamin!", "auctionClosed": "Lelongan ditutup · Pemindahan dimulakan", "item": "Item", "paid": "Dibayar", "status": "Status", "transferred": "Dipindahkan ke dompet", "walletNote": "Item akan muncul dalam tab Koleksi Saya.", "viewCollect": "Lihat Koleksi Saya" },
+      "createModal": { "title": "Cipta Lelongan", "selectItem": "Pilih Item", "connectWallet": "Sambungkan dompet untuk melayari item anda", "loadingItems": "Memuatkan…", "noItems": "Tiada item milik ditemui", "pricingDuration": "Penetapan Harga & Tempoh", "startPrice": "Harga Permulaan (USDC) *", "reservePrice": "Harga Rizab (USDC)", "instantBuyPrice": "Harga Beli Segera (USDC)", "optional": "Pilihan", "leaveBlank": "Biarkan kosong untuk nyahdayakan", "duration": "Tempoh", "dur1Day": "1 Hari", "dur3Days": "3 Hari", "dur7Days": "7 Hari", "freeToList": "Percuma untuk senarai · 20% komisen semasa jualan", "creating": "Mencipta…", "submit": "Cipta Lelongan" },
+      "pagination": { "prev": "Sebelum", "next": "Seterusnya", "page": "Halaman {{page}} daripada {{pages}}" }
+    },
+    "trades": {
+      "heading": "Pertukaran", "listings": "penyenaraian", "postTrade": "Siarkan Pertukaran", "noTrades": "Tiada pertukaran {{filter}}", "viewDetails": "Lihat Butiran", "trade": "pertukaran", "yours": "milik anda", "offering": "Menawarkan", "wanting": "Mahukan", "makeOffer": "Buat tawaran", "by": "oleh", "acceptTrade": "Terima Pertukaran", "cancelTrade": "Batal Pertukaran",
+      "rules": { "expiry": "Penyenaraian tamat tempoh dalam 30 hari", "fee": "Yuran platform dikenakan kepada kedua-dua pihak", "noNFA": "NFAs tidak boleh ditukar — jual sahaja" },
+      "acceptModal": { "title": "Cadangan Pertukaran", "postedBy": "Disiarkan oleh", "exchangeDetails": "Butiran Pertukaran", "theyOffer": "Mereka tawarkan", "theyWant": "Mereka mahukan", "feeNotice": "Yuran platform dikenakan kepada kedua-dua pihak", "acceptBtn": "Terima Pertukaran Ini", "confirmTitle": "Sahkan Pertukaran", "trade": "Pertukaran", "postedByLabel": "Disiarkan oleh", "terms": "Dengan menerima, anda bersetuju dengan terma pertukaran.", "back": "Kembali", "sending": "Menghantar…", "confirm": "Sahkan", "successTitle": "Cadangan Dihantar!", "notified": "telah diberitahu", "successNote": "Penyiar pertukaran akan menyemak cadangan anda.", "expiry": "⏱ Cadangan tamat tempoh dalam 30 hari jika tidak disahkan.", "close": "Tutup" },
+      "createModal": { "title": "Siarkan Pertukaran", "yourItem": "Item Anda", "itemNamePlaceholder": "Nama item *", "loadingItems": "Memuatkan item anda…", "connectWallet": "Sambungkan dompet untuk memilih", "pickFromItems": "Atau pilih dari item anda:", "imageOptional": "Imej (pilihan)", "whatYouWant": "Yang Anda Mahukan", "openOffer": "Tawaran terbuka — biar orang lain cadangkan", "anyCategory": "Sebarang kategori", "notesLabel": "Nota (pilihan)", "notesPlaceholder": "Terma pertukaran, keadaan, dsb.", "disclaimer": "Kedua-dua pihak bayar yuran · Tamat dalam 30 hari · NFAs tidak boleh ditukar", "posting": "Menyiarkan…", "submit": "Siarkan Pertukaran" },
+      "pagination": { "prev": "Sebelum", "next": "Seterusnya", "page": "Halaman {{page}} daripada {{pages}}" }
+    },
+    "quests": {
+      "heading": "Papan Kuest", "quests": "kuest", "noQuests": "Tiada kuest {{filter}}", "inGameFeature": "Ciri Dalam Permainan", "inGameDesc": "Kuest dijana secara automatik apabila penjual memilih komisen yang dikurangkan. Pemain boleh menyelesaikan sehingga 5 kuest sehari.", "earnFromQuests": "Ingin mendapat dari kuest? Main permainan →", "moneyQuests": "Kuest Wang (kolam 11%)", "resourceQuests": "Kuest Sumber (kolam 20%)", "footerNote1": "# Kuest dengan muatan gabungan akan dibayar menggunakan jumlah jadual berasingan.", "footerNote2": "# Data planet akan diselaraskan apabila permainan aktif.", "inGame": "Dalam permainan", "open": "Terbuka",
+      "table": { "questingNo": "No. Kuest", "pickupPlanet": "Planet Ambilan", "dropOffPlanet": "Planet Penghantaran", "itemGoods": "Item / Barangan", "commSplit": "Pembahagian Komisen", "questingTime": "Masa Kuest", "assignedTo": "Ditugaskan Kepada" },
+      "comingSoon": { "title": "Akan Datang", "desc": "Ciri kuest dalam permainan sedang dalam pembangunan.", "gotIt": "Faham" },
+      "pagination": { "prev": "Sebelum", "next": "Seterusnya", "page": "Halaman {{page}} daripada {{pages}}" }
+    },
+    "hire": {
+      "heading": "Untuk Disewa", "listings": "penyenaraian", "listBtn": "Senaraikan", "forHireLabel": "Untuk Disewa", "wantingToHire": "Ingin Menyewa", "noListings": "Tiada penyenaraian {{filter}}", "lockedTitle": "Kandungan HyperTek Gaming hanya untuk paparan.", "lockedDesc": "Bahagian ini dikunci sehingga permainan dimuktamadkan.", "forHireBadge": "UNTUK DISEWA", "wantedBadge": "INGIN MENYEWA", "price": "Harga", "maxDuration": "Tempoh Maksimum", "hireBtn": "Sewa", "fulfillBtn": "Tunaikan Permintaan",
+      "rules": { "durations": "8j · 1h · 3h · 1m · 1b", "cooldown": "Rehat: 2× tempoh sewaan", "commission": "Komisen: 20%", "payment": "Bayar dalam Hyper Bucks atau Bahan" },
+      "preview": { "title": "Pratonton Ciri Dalam Permainan", "desc": "Sistem Untuk Disewa akan aktif sepenuhnya dalam permainan semasa pelancaran." },
+      "hireModal": { "hireTitle": "Sewa Pakar", "fulfillTitle": "Tunaikan Permintaan Sewaan", "forHireBadge": "UNTUK DISEWA", "wantedBadge": "DIKEHENDAKI", "price": "Harga", "duration": "Tempoh", "howHire": "Bagaimana penyewaan berfungsi", "howFulfill": "Bagaimana menunaikan permintaan berfungsi", "proceedHire": "Teruskan untuk Menyewa", "offerFulfill": "Tawarkan untuk Menunaikan", "commission": "20% komisen platform · Rehat dikenakan selepas pemulangan", "confirmHire": "Sahkan Sewaan", "confirmOffer": "Sahkan Tawaran", "specialist": "Pakar", "payment": "Pembayaran", "yourOffer": "Tawaran anda", "durationLabel": "Tempoh", "commLabel": "Komisen", "back": "Kembali", "processing": "Memproses…", "sendOffer": "Hantar Tawaran", "deployedTitle": "Dikerahkan!", "offerSentTitle": "Tawaran Dihantar!", "availableFor": "Tersedia untuk", "paid": "Dibayar", "returnNote": "Pulangkan sebelum tempoh tamat. Rehat {{hours}}j dikenakan selepas pemulangan.", "close": "Tutup" },
+      "createModal": { "listTitle": "Senaraikan Untuk Disewa", "postTitle": "Siar Ingin Menyewa", "forHireBtn": "Untuk Disewa", "wantingBtn": "Ingin Menyewa", "itemNameHire": "Pakar / nama item *", "itemNameWant": "Apa yang ingin anda sewa *", "descPlaceholder": "Penerangan", "categoryPlaceholder": "Kategori (pilihan)", "paymentType": "Jenis Pembayaran", "hyperBucks": "Hyper Bucks", "materials": "Bahan", "amountLabel": "Jumlah (Hyper Bucks)", "afterCommission": "Anda terima {{amount}} HB selepas 20% komisen", "maxDuration": "Tempoh Maksimum", "disclaimer": "20% komisen · Rehat = 2× tempoh sewaan selepas pemulangan", "listing": "Menyenaraikan…", "submit": "Cipta Penyenaraian" },
+      "pagination": { "prev": "Sebelum", "next": "Seterusnya", "page": "Halaman {{page}} daripada {{pages}}" }
+    },
+    "bounty": {
+      "heading": "Papan Ganjaran", "contracts": "kontrak", "contractsPlural": "kontrak", "noContracts": "Tiada kontrak {{filter}}", "noContractsNote": "Ganjaran disiarkan oleh pemain permainan dan sistem permainan", "expiresIn": "Tamat dalam {{days}}h",
+      "inGameNotice": { "title": "Ciri Dalam Permainan — Hanya Lihat", "desc": "Ganjaran dicipta oleh pemain dan sistem permainan. Menerima dan menyelesaikan ganjaran berlaku dalam permainan sahaja." },
+      "rules": { "battle": "Pertempuran diselesaikan secara automatik dalam permainan", "commission": "20% komisen platform pada ganjaran", "expiry": "Kontrak tamat dalam 30 hari" },
+      "table": { "bountyNo": "No. Ganjaran", "target": "Sasaran", "reward": "Ganjaran", "postedBy": "Disiarkan Oleh", "claimedBy": "Dituntut Oleh", "status": "Status", "netHB": "{{amount}} HB bersih" },
+      "pagination": { "prev": "Sebelum", "next": "Seterusnya", "page": "Halaman {{page}} daripada {{pages}}" }
+    },
+    "common": { "prev": "Sebelum", "next": "Seterusnya", "pageOf": "Halaman {{page}} daripada {{pages}}", "back": "Kembali", "close": "Tutup", "cancel": "Batal", "loading": "Memuatkan…", "connectWallet": "Sambungkan dompet anda dahulu", "loginFirst": "Log masuk dahulu" }
+  }
+}

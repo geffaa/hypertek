@@ -467,6 +467,12 @@ const NFT_101_DATA = [
 ];
 // ─── Main seed function ───────────────────────────────────────────────────────
 async function seed() {
+  // ── Safety guard: never run on production ──
+  if (process.env.NODE_ENV === "production") {
+    console.error("❌ ABORT: seedMarketplace.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    process.exit(1);
+  }
+
   await mongoose.connect(process.env.MONGODB_URL);
   console.log("✅ Connected to MongoDB");
 

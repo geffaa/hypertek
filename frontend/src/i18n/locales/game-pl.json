@@ -312,7 +312,7 @@
       "unlinkedMode": "Tryb niepołączony:",
       "unlinkedDesc": "Rozłącza zasoby każdej gry, pokazując tylko to, co jest dostępne w danej grze.",
       "warning": "Ostrzeżenie:",
-      "warningDesc": "W trybie „Połączonym" wszystkie materiały są narażone na utratę w przypadku ataku!"
+      "warningDesc": "W trybie 'Połączonym' wszystkie materiały są narażone na utratę w przypadku ataku!"
     },
     "noRoomInfo": "Brak informacji o tym pomieszczeniu.",
     "skinLabel": "SKÓRKA 1 — ROZMIESZCZENIE BRONI",

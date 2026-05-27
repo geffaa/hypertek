@@ -350,8 +350,11 @@ export async function finalizeNFAPurchase({
     }
   }
 
-  // Cancel any active sibling listings (auction / marketplace) for this item
-  cancelSiblingListings(cleanSubId).catch(() => {});
+  // Cancel any active sibling listings (auction / marketplace / trade) for this item
+  cancelSiblingListings(cleanSubId, {
+    itemName: subCollection.name,
+    ownerWallet: seller,
+  }).catch(() => {});
 
   console.log("✅ NFA Purchase Finalized for Token #", tokenId);
   return { success: true, tokenId, subCollection };

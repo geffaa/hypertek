@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Volver al inicio",
+    "latestUpdates": "Últimas actualizaciones",
+    "heading": "Noticias, actualizaciones y FAQ",
+    "latestBadge": "RECIENTE",
+    "readArticle": "Leer artículo",
+    "read": "Leer",
+    "allStories": "Todos los artículos",
+    "seeAll": "Ver todos ({{count}})",
+    "showLess": "Ver menos",
+    "frequentlyAsked": "Preguntas frecuentes",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Cargando artículo…",
+    "backToNews": "Volver a noticias",
+    "home": "Inicio",
+    "news": "Noticias",
+    "newsUpdates": "Noticias y actualizaciones",
+    "allArticles": "Todos los artículos",
+    "copied": "¡Copiado!",
+    "share": "Compartir",
+    "faq": [
+      {
+        "q": "¿Qué es HyperTek?",
+        "a": "HyperTek es un ecosistema de juegos play-to-earn situado en el año 2117. Cuenta con 3 juegos interconectados — Hyper Racing, Hyper Quest y Hyper Overlord — que comparten una sola economía y sistema de progresión. Cada acción contribuye a recompensas del mundo real."
+      },
+      {
+        "q": "¿Qué son los NFA, NFC y NFT?",
+        "a": "Los NFA (Non-Fungible Assets) son objetos del juego emitidos por HyperTek con un precio de recompra mínimo garantizado por la plataforma. Los NFC (Non-Fungible Characters) son personajes de jugadores con licencia que tienen bonificaciones en el juego y garantías de recompra. Los NFT son coleccionables creados por usuarios: skins, armas y cosméticos."
+      },
+      {
+        "q": "¿Cómo funciona la garantía de recompra?",
+        "a": "Cada NFA en HyperTek tiene un valor de recompra mínimo garantizado. Si decides salir del juego, HyperTek recomprará tus activos a un precio no inferior al mínimo garantizado, protegiendo tu inversión en todo momento."
+      },
+      {
+        "q": "¿Cómo empiezo a ganar recompensas del mundo real?",
+        "a": "Regístrate, conecta tu billetera y comienza a jugar. Cada misión completada, activo intercambiado o batalla ganada te otorga moneda del juego que puede convertirse en pagos en efectivo. Tu progresión se extiende por los tres juegos."
+      },
+      {
+        "q": "¿Qué juegos están disponibles?",
+        "a": "Tres juegos comparten el universo HyperTek: Hyper Racing (batallas de circuito a alta velocidad), Hyper Quest (exploración, facciones y tecnología antigua) y Hyper Overlord (estrategia, dominio y conquista). Todos comparten la misma economía y progresión del jugador."
+      },
+      {
+        "q": "¿Se admite VR/AR?",
+        "a": "Sí. HyperTek admite jugadores de VR y AR que pueden unirse a misiones y batallas épicas en tiempo real junto a los jugadores estándar. El ecosistema está diseñado para ser accesible en todos los dispositivos y plataformas."
+      }
+    ]
+  }
+}

@@ -118,6 +118,12 @@ async function main() {
     process.exit(1);
   }
 
+  // ── Safety guard: never run on production ──
+  if (process.env.NODE_ENV === "production") {
+    console.error("❌ ABORT: seedTestAssets.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    process.exit(1);
+  }
+
   await mongoose.connect(MONGO_URI);
   console.log("📦 Connected to MongoDB\n");
 

@@ -87,6 +87,10 @@ const tradeSchema = new mongoose.Schema(
     expiresAt:  { type: Date },
     listingFee: { type: Number, default: 2 }, // $2 / 500 HB per brief
     category:   { type: String, default: "" },
+
+    // Auto-cleanup: MongoDB TTL will delete this document when cleanupAt is reached.
+    // Only set when trade enters a terminal state (completed/cancelled/expired).
+    cleanupAt:  { type: Date, default: null },
   },
   { timestamps: true }
 );
@@ -96,7 +100,18 @@ tradeSchema.pre("save", function (next) {
   if (this.isNew && !this.expiresAt) {
     this.expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
   }
+
+  // Auto-set cleanupAt when trade enters a terminal state (30-day retention)
+  const TERMINAL_STATES = ["completed", "cancelled", "expired"];
+  if (this.isModified("status") && TERMINAL_STATES.includes(this.status) && !this.cleanupAt) {
+    this.cleanupAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  }
+
   next();
 });
 
+// TTL index: MongoDB background thread deletes docs where cleanupAt < now
+tradeSchema.index({ cleanupAt: 1 }, { expireAfterSeconds: 0, sparse: true });
+
 export default mongoose.model("Trade", tradeSchema);
+

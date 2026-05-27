@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "VŨ TRỤ HYPER TEK",
+    "heroHeading": "VỀ CHÚNG TÔI",
+    "stats": [
+      { "v": "3", "l": "Thế Giới Game" },
+      { "v": "NFA", "l": "Đảm Bảo Mua Lại Tối Thiểu" },
+      { "v": "P2E", "l": "Chơi Để Kiếm Tiền" }
+    ],
+    "subtitle": [
+      "Sứ mệnh của Hyper Tek là giải quyết nhiều vấn đề trong ngành công nghiệp game và định nghĩa lại cách các hệ sinh thái game hoạt động bằng cách tạo ra một vũ trụ liên kết nơi người chơi không bị giới hạn ở một phong cách chơi duy nhất. Bằng cách kết hợp nhiều thể loại vào một hệ thống tiến trình, dự án Hyper Tek cung cấp một môi trường năng động nơi người chơi có thể khám phá, cạnh tranh và phát triển trong một thế giới thống nhất.",
+      "Nó đặt ra mục tiêu trao quyền sở hữu thực sự cho các tài sản kỹ thuật số có giá trị thực, tăng theo thời gian với mức mua lại tối thiểu được đảm bảo trên tất cả các Tác Phẩm Nghệ Thuật Không Thể Thay Thế, và các hệ thống play-to-earn thực sự được thiết kế trong hệ sinh thái mà người chơi đóng góp vào.",
+      "Dự án nhằm trao quyền cho người chơi bằng cách cho họ quyền sở hữu có ý nghĩa đối với tiến trình và phần thưởng của họ, đồng thời khuyến khích sự sáng tạo, hợp tác và cạnh tranh.",
+      "Tầm nhìn dài hạn của Hyper Tek là xây dựng một vũ trụ kỹ thuật số sống động nơi nhiều trò chơi, nền kinh tế và cộng đồng cùng tồn tại trên một nền tảng liên kết duy nhất."
+    ],
+    "section01": {
+      "label": "Sứ Mệnh Của Chúng Tôi",
+      "heading1": "Định Nghĩa Lại",
+      "heading2": "Game Có Thể Là Gì",
+      "paras": [
+        "Dự án Hyper Tek được thành lập bởi Don Bennett, người đã hình dung một môi trường game nơi nhiều thể loại có thể cùng tồn tại trong một hệ thống tiến trình duy nhất. Thay vì buộc người chơi phải ở trong một vòng lặp chơi game, Hyper Tek cho phép họ khám phá các hoạt động khác nhau trong khi xây dựng nhân vật, tài nguyên và danh tiếng của họ trong toàn bộ hệ sinh thái, với tiến trình, vật liệu, phần thưởng và thành tích chảy liền mạch qua tất cả các trò chơi.",
+        "Dự án kết hợp ba môi trường game lớn: Hyper Racing, Hyper Quest và Overlord of the Seven Realms. Mỗi trò chơi đại diện cho một phong cách chơi khác nhau, nhưng tất cả đều hoạt động trong cùng một vũ trụ và chia sẻ cùng một nền kinh tế người chơi. Thiết kế này cho phép người chơi tham gia vào loại trò chơi mà họ thích nhất trong khi vẫn đóng góp vào một hệ sinh thái lớn hơn để tạo ra một thế hệ môi trường game mới sâu sắc hơn, đắm chìm hơn và có phần thưởng hơn các trò chơi độc lập truyền thống."
+      ]
+    },
+    "section02": {
+      "label": "Tầm Nhìn & Sứ Mệnh",
+      "vision": {
+        "label": "Tầm Nhìn",
+        "quote": "...tạo ra một thế hệ môi trường game mới sâu sắc hơn, đắm chìm hơn và có phần thưởng hơn các trò chơi độc lập truyền thống...",
+        "paras": [
+          "Tầm nhìn dài hạn của Hyper Tek là xây dựng một vũ trụ kỹ thuật số sống động nơi nhiều trò chơi, nền kinh tế và cộng đồng cùng tồn tại trong một nền tảng liên kết duy nhất. Thay vì các trải nghiệm game biệt lập, Hyper Tek hướng tới việc thiết lập một hệ sinh thái chung nơi hành động của người chơi ảnh hưởng đến thế giới xung quanh họ.",
+          "Bằng cách kết hợp chiến lược, đua xe và phiêu lưu vào một hệ thống gắn kết, Hyper Tek tìm cách tạo ra một thế hệ môi trường game mới sâu sắc hơn, đắm chìm hơn và có phần thưởng hơn các trò chơi độc lập truyền thống."
+        ]
+      },
+      "mission": {
+        "label": "Sứ Mệnh",
+        "quote": "...giải quyết nhiều vấn đề trong ngành công nghiệp game và định nghĩa lại cách các hệ sinh thái game hoạt động...",
+        "paras": [
+          "Sứ mệnh của Hyper Tek là giải quyết nhiều vấn đề trong ngành công nghiệp game và định nghĩa lại cách các hệ sinh thái game hoạt động bằng cách tạo ra một vũ trụ liên kết nơi người chơi không bị giới hạn ở một phong cách chơi duy nhất.",
+          "Bằng cách kết hợp nhiều thể loại vào một hệ thống tiến trình, Hyper Tek tìm cách cung cấp một môi trường năng động nơi người chơi có thể khám phá, cạnh tranh và phát triển trong một thế giới thống nhất. Nó đặt ra mục tiêu trao quyền sở hữu thực sự cho các tài sản kỹ thuật số có giá trị thực, tăng theo thời gian với mức mua lại tối thiểu được đảm bảo trên tất cả các NFA."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Vũ Trụ",
+      "heading": "Ba Thế Giới. Một Nền Kinh Tế.",
+      "subtitle": "Mỗi trò chơi là một cổng vào, khác biệt về gameplay, thống nhất về nền kinh tế và tiến trình.",
+      "discover": "Khám Phá",
+      "tryUI": "Thử Giao Diện",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Tốc Độ · Thống Trị", "desc": "Đua xe tốc độ cao qua địa hình thù địch. Nâng cấp phương tiện, xây dựng đội nhóm và chiếm lãnh thổ khắp thiên hà." },
+        { "name": "Hyper Quest", "tag": "Khám Phá · Giao Thương", "desc": "Di chuyển qua các hành tinh, hoàn thành nhiệm vụ và giao dịch tài nguyên trên bản đồ sao không ngừng mở rộng. Mỗi lần giao hàng định hình nền kinh tế." },
+        { "name": "Overlord of the Seven Realms", "tag": "Chiến Lược · Quyền Lực", "desc": "Chỉ huy quân đội, kết minh và chinh phục các vương quốc. Overlord quyền lực nhất kiểm soát số phận của toàn vũ trụ." }
+      ]
+    },
+    "section04": {
+      "label": "Tác Phẩm Nghệ Thuật Kỹ Thuật Số Không Thể Thay Thế",
+      "heading": "Nghệ Thuật Kỹ Thuật Số Với Giá Trị Được Đảm Bảo",
+      "subtitle": "Tóm Tắt 60 Giây",
+      "quote": "Một Vũ Trụ. Ba Trò Chơi. Giá Trị Được Đảm Bảo. Tương Lai Của Quyền Sở Hữu Kỹ Thuật Số Bắt Đầu Với Hyper Tek.",
+      "cards": [
+        {
+          "title": "Chúng Là Gì?",
+          "intro": "Các tác phẩm nghệ thuật kỹ thuật số được liên kết blockchain trong ba tầng:",
+          "items": [
+            { "label": "NFA...", "desc": "Do kiến trúc sư tạo ra, phần thưởng trong game cao nhất, cực kỳ hiếm" },
+            { "label": "NFC...", "desc": "Vật phẩm sưu tập với phần thưởng trong game, người chơi có thể tạo" },
+            { "label": "NFT...", "desc": "Hoàn toàn do người chơi tạo, trang trí căn cứ của bạn để có phần thưởng sức mạnh" }
+          ]
+        },
+        {
+          "title": "Tại Sao Chúng Giữ Được Giá Trị",
+          "bullets": [
+            "Mua lại tối thiểu được đảm bảo trên mọi tác phẩm nghệ thuật",
+            "Mua lại tăng theo mỗi lần bán lại",
+            "Được điều chỉnh theo lạm phát hai lần mỗi năm",
+            "Giá trị của bạn luôn tăng, không bao giờ giảm"
+          ]
+        },
+        {
+          "title": "Công Bằng Theo Thiết Kế",
+          "body": "Lên đến 85% hoa hồng thị trường được dùng để tăng giá trị mua lại, trả tiền bản quyền cho nghệ sĩ và tài trợ nhiệm vụ. Người chơi có thể giảm phí bằng cách tạo các nhiệm vụ trả tiền cho người khác tham gia, thúc đẩy tương tác xã hội ở mọi cấp độ. Điều này là độc nhất đối với Hyper Tek."
+        },
+        {
+          "title": "Tham Gia Ngay Bây Giờ",
+          "body": "Chúng tôi đang crowdfunding để xây dựng Hyper Racing, Hyper Quest và Overlord of the 7 Realms. Mỗi tác phẩm nghệ thuật bạn mua hoặc tạo ra sẽ trực tiếp tài trợ cho quá trình phát triển. Sở hữu nghệ thuật được đảm bảo giữ và tăng giá trị trong khi giúp xây dựng tương lai của game.",
+          "link": "[www.hypertek.com] — Duyệt. Mua. Tạo. Sở Hữu Tương Lai."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Crowdfunding — Hãy Giúp Xây Dựng Tương Lai",
+      "heading": "Sự Hỗ Trợ Của Bạn Thúc Đẩy Vũ Trụ Hyper Tek",
+      "subtitle": "Mỗi tác phẩm nghệ thuật được mua trực tiếp tài trợ cho ba trò chơi liên kết. Đây là những gì chúng tôi đang cùng nhau xây dựng.",
+      "phaseLabel": "Giai Đoạn",
+      "crowdfundingNow": "Đang Crowdfunding",
+      "phases": [
+        { "name": "Nền Tảng", "desc": "Website hoạt động • Giao diện người dùng được xây dựng • Thị trường hoạt động • Hệ thống NFA/NFC/NFT được thiết kế • Khung mua lại tối thiểu được đảm bảo" },
+        { "name": "Đang Crowdfunding", "desc": "Bán tác phẩm NFA/NFC/NFT đang diễn ra • NFT do người chơi tạo được kích hoạt • Chia sẻ hoa hồng đang hoạt động • Xây dựng cộng đồng • Tiền chảy vào phát triển game" },
+        { "name": "Ra Mắt Alpha", "desc": "Hyper Racing alpha • Môi trường game có thể chơi đầu tiên • Tích hợp NFA trong game • Phần thưởng độc quyền cho người ủng hộ sớm • Giao dịch thị trường trực tiếp" },
+        { "name": "Mở Rộng Hệ Sinh Thái", "desc": "Hyper Quest alpha • Tiến trình xuyên game đang hoạt động • Tích hợp tiền tệ Hyper Bucks • Bộ sưu tập NFA mở rộng • Sự kiện giải thưởng tiền mặt thực tế" },
+        { "name": "Ra Mắt Overlord", "desc": "Overlord of the 7 Realms alpha • Hệ thống chiến đấu ba cấp • Quyền truy cập Battle Ring • Tích hợp VR • Nền kinh tế thống nhất ba trò chơi đầy đủ" },
+        { "name": "Ra Mắt Đầy Đủ", "desc": "Cả ba trò chơi đều hoàn toàn hoạt động • Hệ sinh thái NFA đầy đủ • VR đầy đủ trên tất cả các tựa game • Giải đấu toàn cầu • Vũ trụ liên kết được hiện thực hóa" }
+      ],
+      "helpHeading": "BẠN Có Thể Giúp Gì Ngay Bây Giờ",
+      "helpItems": [
+        { "bold": "Mua một NFA, NFC hoặc NFT", "text": "— sở hữu nghệ thuật kỹ thuật số với giá trị được đảm bảo, tài trợ cho phát triển game" },
+        { "bold": "Tạo NFT của riêng bạn", "text": "— trở thành nhà sáng tạo trên thị trường và kiếm tiền từ mỗi lần bán lại" },
+        { "bold": "Chia sẻ và lan truyền thông tin", "text": "— mỗi người ủng hộ mới đẩy nhanh hành trình đến khi ra mắt" }
+      ],
+      "link": "[www.hypertek.com] — Ủng Hộ Dự Án. Sở Hữu Tương Lai."
+    },
+    "section06": {
+      "label": "Gaming Web3 & Lợi Thế Cạnh Tranh",
+      "heading": "HYPER TEK, GIẢI PHÁP GAMING WEB3 VÀ CÁC LỢI THẾ CHÍNH",
+      "subtitle": "Thu hẹp khoảng cách giữa gaming đắm chìm, thị trường kỹ thuật số năng động, khen thưởng người chơi và nhà đầu tư.",
+      "cards": [
+        {
+          "label": "Phần Thưởng Thực Chất & Tinh Thần Kinh Doanh",
+          "bullets": [
+            "Quyền sở hữu NFA thực sự với mua lại tối thiểu được đảm bảo",
+            "Chia sẻ doanh thu thông qua nền kinh tế kỹ thuật số do người chơi kiểm soát",
+            "Giá trị thực tế với giá tài sản trong game đang phát triển",
+            "Cơ chế play-to-earn thực sự"
+          ]
+        },
+        {
+          "label": "Hệ Sinh Thái Rút Tiền",
+          "body": "Chuyển đổi liền mạch thu nhập trong game thành tiền tệ thực tế; lao động kỹ thuật số của bạn có giá trị thực chất và có thể rút."
+        },
+        {
+          "label": "Gameplay Vô Tận Trên Các Thế Giới Liên Kết",
+          "bullets": [
+            "Ba thể loại game độc đáo trong một vũ trụ thống nhất",
+            "Tiến trình, phần thưởng và thành tích được chia sẻ trên tất cả các trò chơi",
+            "Một hệ sinh thái sống động nơi mọi lựa chọn ảnh hưởng đến toàn vũ trụ",
+            "Người chơi VR/AR có thể tham gia nhiệm vụ và trận chiến hùng tráng theo thời gian thực"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Các nhà đầu tư, đối tác và nhà cải tiến tin tưởng vào tương lai của các hệ sinh thái game liên kết được mời khám phá dự án và tham gia hành trình khi Hyper Tek tiếp tục xây dựng thế hệ thế giới kỹ thuật số tiếp theo.",
+      "exploreMarketplace": "Khám Phá Thị Trường",
+      "viewGames": "Xem Trò Chơi"
+    }
+  }
+}

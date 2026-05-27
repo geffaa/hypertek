@@ -4,6 +4,12 @@ require('dotenv').config({ path: path.join(__dirname, 'Config', '.env') });
 
 const MONGODB_URL = process.env.MONGODB_URL;
 
+// ── Safety guard: never run on production ──
+if (process.env.NODE_ENV === "production") {
+  console.error("❌ ABORT: cleanup_db.cjs must NOT run in production. This script resets ALL NFT ownership.");
+  process.exit(1);
+}
+
 if (!MONGODB_URL) {
   console.error("❌ MONGODB_URL not found in .env");
   process.exit(1);

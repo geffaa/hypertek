@@ -34,7 +34,7 @@ async function saveTradeImage(file) {
 async function expireTrades() {
   await Trade.updateMany(
     { status: "open", expiresAt: { $lt: new Date() } },
-    { status: "expired" }
+    { status: "expired", cleanupAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) }
   );
 }
 

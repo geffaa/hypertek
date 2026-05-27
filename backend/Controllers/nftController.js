@@ -542,6 +542,20 @@ export async function deleteSubCollection(req, res) {
       return res.status(404).json({ error: "Parent collection not found" });
     }
 
+    // Grab item details before removal for Trade matching
+    const sub = parent.subCollections.id(subCollectionId);
+    const itemName = sub?.name || null;
+    const ownerWallet = sub?.owner || null;
+
+    // Cascade: cancel all active listings for this item across all channels
+    try {
+      const { cancelSiblingListings } = await import("../services/cancelSiblingListings.js");
+      await cancelSiblingListings(subCollectionId, { itemName, ownerWallet });
+      console.log(`🧹 [deleteSubCollection] Cascaded cleanup for subCollection ${subCollectionId}`);
+    } catch (cleanupErr) {
+      console.error("⚠️ [deleteSubCollection] Cascade cleanup error (non-blocking):", cleanupErr.message);
+    }
+
     parent.subCollections.pull(subCollectionId);
     await parent.save();
 
@@ -1718,11 +1732,31 @@ export async function updateCollection(req, res) {
 export async function deleteCollection(req, res) {
   try {
     const { id } = req.params;
-    const deleted = await NFTSystem.findByIdAndDelete(id);
 
-    if (!deleted) {
+    // Fetch the collection first to cascade-cleanup all sub-items
+    const toDelete = await NFTSystem.findById(id);
+    if (!toDelete) {
       return res.status(404).json({ error: "Collection not found" });
     }
+
+    // Cascade: cancel all active listings for every subCollection in this collection
+    if (toDelete.subCollections && toDelete.subCollections.length > 0) {
+      try {
+        const { cancelSiblingListings } = await import("../services/cancelSiblingListings.js");
+        const cleanupPromises = toDelete.subCollections.map((sub) =>
+          cancelSiblingListings(String(sub._id), {
+            itemName: sub.name,
+            ownerWallet: sub.owner,
+          })
+        );
+        await Promise.all(cleanupPromises);
+        console.log(`🧹 [deleteCollection] Cascaded cleanup for ${toDelete.subCollections.length} sub-items in collection ${id}`);
+      } catch (cleanupErr) {
+        console.error("⚠️ [deleteCollection] Cascade cleanup error (non-blocking):", cleanupErr.message);
+      }
+    }
+
+    await NFTSystem.findByIdAndDelete(id);
 
     return res.json({
       success: true,

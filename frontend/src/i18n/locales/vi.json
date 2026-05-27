@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Cua hang",
+    "aboutUs": "Ve chung toi",
+    "news": "Tin tuc",
+    "socials": "Mang xa hoi",
+    "waitlist": "Danh sach cho",
+    "signUp": "Dang ky",
+    "joinWaitlist": "Tham gia danh sach cho",
+    "search": "Tim kiem...",
+    "myProfile": "Ho so cua toi",
+    "dashboard": "Bang dieu khien",
+    "adminPanel": "Bang quan tri",
+    "gaming": "Tro choi",
+    "marketplace": "Cho",
+    "signOut": "Dang xuat",
+    "shop": {
+      "overview": "Tong quan",
+      "overviewDesc": "Tong quan thi truong chung",
+      "myAssets": "Tai san cua toi",
+      "myAssetsDesc": "Theo doi va quan ly moi thu ban so huu",
+      "theMarketplace": "Cho",
+      "theMarketplaceDesc": "Duyet tat ca do suu tam NFT, NFA & NFC",
+      "auction": "Dau gia",
+      "auctionDesc": "Theo doi dem nguoc cua bat ky phien dau gia nao",
+      "land": "Dat dai"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Xac nhan dang xuat",
+    "confirmMessage": "Ban co chac chan muon dang xuat khong?",
+    "cancel": "Huy",
+    "logout": "Dang xuat"
+  },
+  "footer": {
+    "joinWaitlist": "Tham gia danh sach cho",
+    "allRightsReserved": "Bao luu moi quyen",
+    "links": {
+      "marketplace": "Cho",
+      "news": "Tin tuc",
+      "whitepaper": "Sach trang",
+      "about": "Ve chung toi",
+      "profile": "Ho so",
+      "terms": "Dieu khoan & Dieu kien"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "NOI NHUNG HUYEN THOAI BI LANG QUEN",
+    "marketplace": "Cho",
+    "downloadGame": "Tai game",
+    "tryUI": "Thu giao dien",
+    "close": "Dong"
+  },
+  "howItWorks": {
+    "sectionTitle": "Cach hoat dong",
+    "sectionSubtitle": "Bat dau chi voi vai buoc va mo khoa the gioi do suu tam ky thuat so.",
+    "steps": [
+      {
+        "title": "Ket noi vi",
+        "description": "Ket noi vi tien dien tu cua ban mot cach an toan de bat dau mua, ban va suu tap NFT."
+      },
+      {
+        "title": "Kham pha bo suu tap",
+        "description": "Duyet qua cac bo suu tap dang phat tren va kham pha cac tac pham nghe thuat ky thuat so hiem co tu cac nha sang tao hang dau."
+      },
+      {
+        "title": "Suu tam & Giao dich",
+        "description": "Mua NFT yeu thich cua ban va trung bay hoac giao dich chung tren ho so bat cu luc nao."
+      },
+      {
+        "title": "Kiem tien & Phat trien",
+        "description": "Kiem tien bang cach ban cac bo suu tap cua ban hoac nhan duoc su noi tieng trong khong gian NFT."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Phien lam viec da het han. Vui long dang nhap lai."
+  },
+  "language": {
+    "select": "Ngon ngu"
+  },
+  "story": {
+    "label": "CAU CHUYEN",
+    "subheading": "Nam 2117.",
+    "body": "Vao nam 2117, truoc hau qua su sup do cua Trai Dat, nhung nguoi sot lai da khoi xuong cuoc Hyper Tek Exodus. No luc cuoi cung cua nhan loai de ton tai khong dan den viec chinh phuc cac vi sao; thay vao do, no tan ra khap noi, phan tan AI, bo gen nang cao va cac nguyen mau tren hang nghin the gioi hat giong. Nhung the ky da qua, khi moi the gioi phat trien trong su co lap, lam nay sinh cac loai moi, van hoa va cong nghe moi. O trung tam cua tat ca la Echo Core, mot di vat luong tu dang dap voi nghich ly, ky uc va loi keu goi quyen nang. No thuc tinh ban nhu mot Overlord tai sinh, duoc duc nen tu di san va cong nghe.",
+    "readMore": "Doc toan bo cau chuyen cua chung toi",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Vu tru lien ket",  "desc": "3 tro choi - 1 he thong kinh te va tien trinh chung" },
+      { "label": "So huu that su",           "desc": "NFA voi muc mua lai toi thieu duoc dam bao" },
+      { "label": "Choi de Kiem tien",             "desc": "Moi hanh dong deu dong gop vao phan thuong thuc te cua ban" },
+      { "label": "Thanh toan rut tien",        "desc": "Chuyen doi tien te/phan thuong trong game thanh cac khoan thanh toan rut tien" },
+      { "label": "Tien trinh lien ket",       "desc": "Tien trinh nguoi choi duoc lien ket qua tat ca cac bo tro choi" },
+      { "label": "Tich hop VR/AR",        "desc": "Nguoi choi VR/AR co the tham gia nhiem vu va cac tran chien su thi trong thoi gian thuc" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "Nam 2117.",
+    "body": "Nhan loai da khong chinh phuc cac vi sao - no vo thanh manh. Sau su sup do cua Trai Dat, nhung nguoi sot lai da phat dong cuoc Hyper Tek Exodus, phan tan AI, bo gen nang cao va cac nguyen mau khap hang nghin the gioi hat giong. Moi the gioi phat trien trong su co lap, hinh thanh cac loai moi, van hoa va cong nghe. O trung tam cua tat ca la Echo Core, mot di vat luong tu dang dap voi nhung bi an, ky uc va loi keu goi quyen nang. No thuc tinh ban, mot Overlord tai sinh, duoc duc nen boi di san va cong nghe."
+  },
+  "homeMarket": {
+    "featured": "Noi bat",
+    "sectionTitle": "Do NFA Phien Ban Gioi Han",
+    "buybackBadge": "Mua lai toi thieu duoc dam bao tren tat ca NFA/NFC/NFT",
+    "urgency": "Hanh dong ngay, khi chung het hang, chung se BIEN MAT!",
+    "loading": "Dang tai cac san pham...",
+    "empty": "Chua co san pham nao duoc niem yet.",
+    "price": "Gia",
+    "minBuyback": "Mua lai toi thieu",
+    "buyNow": "Mua ngay"
+  },
+  "gaming": {
+    "sectionTitle": "THONG TIN TRO CHOI",
+    "learnMore": "TIM HIEU THEM",
+    "hoverToExplore": "di chuot de kham pha",
+    "games": [
+      {
+        "label": "DUA XE",
+        "tagline": "Toc do la su song con.",
+        "description": "Vuot qua gioi han trong luc tren cac sieu thanh pho duong neon va dia hinh ngoai hanh tinh. Tinh chinh may moc cua ban, thong thao moi khuc quanh va bo lai cac doi thu phia sau - bang xep hang khong cho doi ai."
+      },
+      {
+        "label": "PHIEU LUU",
+        "tagline": "Kham pha cai chua biet.",
+        "description": "Di chuyen qua cac he sao chua duoc kham pha, ket hop lien minh va giai ma nhung bi an cua Echo Core. Moi lua chon dinh hinh di san cua ban."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Chi huy. Chinh phuc. Thong tri.",
+        "description": "Ban la Overlord - tai sinh tu dong tro cua Trai Dat bi chia cat. Xay dung quan doi, chiem linh cac he sao va khuat phuc cac phe phai doi lap theo y chi cua ban. Echo Core da chon ban. Hay chung minh rang dieu do la dung."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "CHIEN DICH GUY VAN - GIAI DOAN 1",
+    "intro1": "Chung toi vui mung thong bao ra mat chien dich gua vong duoc mong doi de bao dam tai tro cho viec hoan thien du an Hyper Tek dot pha dang co nhung buoc tien tich cuc! Day la co hoi de ban tham gia he sinh thai Hyper Tek voi tu cach la nguoi tham gia som bang cach lua chon tu bo suu tap do vat va goi hang doc quyen co so luong gioi han ma ban se khong muon bo lo. Hanh dong nhanh! Bang cach mua truc tiep tu chung toi tren nen tang nay, ban co the huong gia giam 10% bang cach cho phep chung toi chuyen khoan tiet kiem cho ban, tu viec tranh phi gua vong, duoc liet ke ben duoi!",
+    "intro2": "Vi tat ca cac vat pham ky thuat so Khong Can Thay the cua Hyper Tek duoc bao dam boi muc mua lai toi thieu, voi phan lon cung cung cap cac phan thuong trong game dang ke nang cao trai nghiem cua ban, de khuay dong moi thu, chung toi dang gioi thieu mot loat NFA (Non-Fungible Assets) phien ban gioi han voi muc thuong cao nhat se duoc cung cap. Day la co hoi hiem co vi nhung phan bo nay se khong bao gio lap lai! Khi cac san pham nay het hang hoac chung toi dat muc tieu tai tro, bat ky NFA phien ban gioi han chua duc nao con lai se bi xoa khoi trang web vinh vien!",
+    "intro3": "Chung toi da huy dong duoc hon 440.000 USD va dang tim kiem them 460.000 USD. Day la thoi diem cua ban de tham gia cung chung toi trong sang kien day thu vi nay; dung de no vuot qua! Mua ngay cac vat pham hoac goi hang co so luong gioi han cua ban va tro thanh mot phan cua He sinh thai Hyper Tek day phan khich.",
+    "intro4": "Hay nho dang ky vao danh sach mong muon va ket noi voi chung toi tren mang xa hoi de cap nhat thong tin! Hanh dong ngay, vi thoi gian la yeu to song con!",
+    "collectionsLabel": "Bo suu tap",
+    "sectionTitle": "Goi Cap Do Quyen Gop",
+    "discount": "Tiet kiem 10% so voi gia niem yet",
+    "donationTierLabel": "Cap do quyen gop",
+    "donationTierPrefix": "Cap do quyen gop:",
+    "rewardsTitle": "Phan thuong & Quyen loi",
+    "noteTitle": "Luu y",
+    "commonNote": "Phan thuong, Phan thuong them va/hoac Giam gia khi quyen gop ngay bay gio.\n\nLUU Y: Ngoai voucher duoc su dung cho cac tro choi truc tuyen hoac cac giao dich mua hang duoc chon, tat ca cac Phan thuong, Phan thuong them va/hoac Giam gia khac khong the duoc ket hop hoac su dung ket hop voi bat ky chuong trinh khuyen mai nao khac.\n\nTat ca cac goi quyen gop se bao gom ten duoc ghi trong phan ket phim cua qua trinh phat trien tro choi.",
+    "specialConditionTitle": "Dieu kien dac biet",
+    "specialCondition": "Khi phat trien va hoan thien thanh cong tro choi/cac tro choi, moi nguoi quyen gop se nhan duoc gia tri toi thieu lon hon khoan dau tu ban dau cua ho trong cac phan thuong hoac goi de su dung trong tro choi/cac tro choi, va bat ky phan thuong them hoac phan thuong nao duoc hua khi quyen gop se duoc trao khi tro choi/cac tro choi duoc phat hanh.",
+    "imageComing": "Hinh anh sap ra mat",
+    "close": "Dong",
+    "items": [
+      { "title": "Tuyen quan", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Tuyen quan\"","Ban se nhan duoc 35 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Tuyen quan, ban se nhan duoc Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang dau"] },
+      { "title": "Canh quan moi vao lop", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan moi vao lop\"","Ban se nhan duoc 90 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan moi vao lop, ban se nhan duoc phan thuong them 10% tang thu thap tai nguyen","Tang 5% toc do huan luyen","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang dau","#Chi quyen gop 50 USD de ung ho su menh cua chung toi va neu ban muon, ten ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Tuyen quan Danh du moi vao lop\""] },
+      { "title": "Canh quan Hang 1", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan Hang 1\"","Ban se nhan duoc 125 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan Hang 1, ban se nhan duoc phan thuong them 10% tang thu thap tai nguyen","Tang 5% toc do huan luyen","Tang 5% tien thuong","Tang 5% tan cong va phong thu","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 24 thang dau"] },
+      { "title": "Canh quan Dan dau", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan Dan dau\"","Ban se nhan duoc 170 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan Dan dau, ban se nhan duoc phan thuong them 10% tang thu thap tai nguyen","Tang 5% toc do huan luyen","Tang 5% tien thuong","Tang 5% tan cong va phong thu","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 24 thang dau"] },
+      { "title": "Canh quan Dan dau Lop dac biet", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan Dan dau Lop dac biet\"","Ban se nhan duoc 240 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan Dan dau Lop dac biet, ban se nhan duoc phan thuong them 10% tang thu thap tai nguyen","Tang 5% toc do huan luyen","Tang 5% tien thuong","Tang 5% tan cong va phong thu","Giam gia 15% cho cac giao dich mua hang trong tro choi trong 24 thang dau"] },
+      { "title": "Canh quan Cap cao", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan Dan dau Lop dac biet\"","Ban se nhan duoc 390 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan Cap cao, ban se nhan duoc phan thuong them 15% tang thu thap tai nguyen","Tang 5% toc do huan luyen","Tang 10% suc khoe","Tang 5% tien thuong","Tang 5% tan cong va phong thu","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang tiep theo","#Chi quyen gop 250 USD de ung ho su menh cua chung toi, neu ban muon, ten ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Tuyen quan Danh du Cap cao Dac biet\""] },
+      { "title": "Canh quan Cap cao Lop dac biet", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Canh quan Cap cao Lop dac biet\"","Ban se nhan duoc 440 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Canh quan Cap cao Lop dac biet, ban se nhan duoc phan thuong them 15% tang thu thap tai nguyen","Co 1,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Tang 10% toc do huan luyen","Tang 10% suc khoe","Tang 10% tien thuong","Tang 5% tan cong va phong thu","Tang 5% kha nang tan cong","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang tiep theo"] },
+      { "title": "Phi cong Tap su", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Phi cong Tap su\"","Ban se nhan duoc 550 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Trung uy Bay, ban se nhan duoc phan thuong them 15% tang thu thap tai nguyen","Co 1,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Tang 15% toc do huan luyen","Tang 15% suc khoe","Tang 10% tien thuong","Tang 5% tan cong va phong thu","Tang 5% kha nang tan cong","1 goi tai nguyen khong lo","1 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang tiep theo"] },
+      { "title": "Trung uy Bay", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Trung uy Bay\"","Ban se nhan duoc 6800 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Trung uy Bay, ban se nhan duoc phan thuong them 20% tang thu thap tai nguyen","Co 1,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Tang 20% toc do huan luyen","Tang 15% suc khoe","Tang 15% tien thuong","Tang 8% tan cong va phong thu","Tang 7% kha nang tan cong","Phu kien dua xe","1 goi tai nguyen khong lo","1 the thong hoa ngoai the gioi","1 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang tiep theo","#Chi quyen gop 500 USD de ung ho su menh cua chung toi va neu ban muon, ten ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Trung uy Bay Danh du\""] },
+      { "title": "Trung uy Bay Lop dac biet", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Trung uy Bay Lop dac biet\"","Ban se nhan duoc 1.050 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Trung uy Bay Lop dac biet, ban se nhan duoc phan thuong them 20% tang thu thap tai nguyen","Co 1,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 1,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 20% toc do huan luyen","Tang 20% suc khoe","Tang 15% tien thuong","Tang 10% tan cong va phong thu","Tang 7% kha nang tan cong","Phu kien dua xe","1 goi tai nguyen khong lo","1 avatar chu quan bo sung","1 the thong hoa ngoai the gioi","1 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 10% cho cac giao dich mua hang trong tro choi trong 12 thang tiep theo"] },
+      { "title": "Dong doi canh", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Dong doi canh\"","Ban se nhan duoc 1.480 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Dong doi canh, ban se nhan duoc phan thuong them 25% tang thu thap tai nguyen","Co 2,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 1,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 25% toc do huan luyen","Tang 20% suc khoe","Tang 20% tien thuong","Tang 10% tan cong va phong thu","Tang 8% kha nang tan cong","Phu kien dua xe","1 goi tai nguyen khong lo","1 goi tinh the khong lo","1 avatar chu quan bo sung","1 the thong hoa ngoai the gioi","2 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Nhan them 10% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi","#Chi quyen gop 1.000 USD de ung ho su menh cua chung toi va neu ban muon, ten ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Dong doi canh Danh du\""] },
+      { "title": "Dong doi canh Cap cao", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Dong doi canh Cap cao\"","Ban se nhan duoc 2.200 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Dong doi canh Cap cao, ban se nhan duoc phan thuong them 25% tang thu thap tai nguyen","Co 3,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 1,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 30% toc do huan luyen","Tang 25% suc khoe","Tang 20% tien thuong","Tang 15% tan cong va phong thu","Tang 10% kha nang tan cong","1 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","1 goi tai nguyen khong lo","1 goi tinh the khong lo","1 avatar chu quan bo sung","1 the thong hoa ngoai the gioi","2 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","Giam gia 20% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Nhan them 10% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi"] },
+      { "title": "Si quan Ky thuat", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Si quan Ky thuat\"","Ban se nhan duoc 2.900 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Si quan Ky thuat, ban se nhan duoc phan thuong them 25% tang thu thap tai nguyen","Co 3,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 2,0% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 30% toc do huan luyen","Tang 25% suc khoe","Tang 25% tien thuong","Tang 15% tan cong va phong thu","Tang 10% kha nang tan cong","1 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","2 goi tai nguyen khong lo","1 goi tinh the khong lo","2 avatar chu quan bo sung","2 the thong hoa ngoai the gioi","3 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","Giam gia 25% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Nhan them 20% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi","Avatar ca nhan duoc mo phong theo nguoi quyen gop, xuat hien khap tro choi","Chia se doanh thu! Chia se den 2,5% ho boi loi nhuan tu viec ban cac goi trong tro choi va NFA","Truy cap nha phat trien doc quyen voi cap nhat rieng tu hang thang ve tro choi, qua trinh phat trien, cung cac co hoi cung cap phan hoi","Thiet ke xe dua Quest doc quyen de su dung trong tro choi","The suu tam kieu bong chay cua xe dua quest doc quyen cua ban, gui cho ban kem thu cam on"] },
+      { "title": "Chuyen gia doi", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Chuyen gia doi\"","Ban se nhan duoc 3.300 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Chuyen gia doi, ban se nhan duoc phan thuong them 30% tang thu thap tai nguyen","Co 5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 2,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 30% toc do huan luyen","Tang 30% suc khoe","Tang 25% tien thuong","Tang 15% tan cong va phong thu","Tang 10% kha nang tan cong","1 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","3 goi tai nguyen khong lo","1 goi tinh the khong lo","2 avatar chu quan bo sung","2 the thong hoa ngoai the gioi","2 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","1 NFA chuyen gia doi xuat sac cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 400 USD moi cai","Giam gia 25% cho cac giao dich mua hang trong tro choi trong 24 thang dau","Nhan them 20% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi","Avatar ca nhan duoc mo phong theo nguoi quyen gop, xuat hien khap tro choi","Chia se doanh thu! Chia se den 2,5% ho boi loi nhuan tu viec ban cac goi trong tro choi va NFA","Truy cap nha phat trien doc quyen voi cap nhat rieng tu hang thang ve tro choi, qua trinh phat trien, cung cac co hoi cung cap phan hoi","Thiet ke xe dua Quest doc quyen de su dung trong tro choi","The suu tap kieu bong chay cua xe dua quest doc quyen cua ban, gui cho ban kem thu cam on","#Chi quyen gop 2.500 USD de ung ho su menh cua chung toi va neu ban muon, ten ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Chuyen gia doi Danh du\""] },
+      { "title": "Chuyen gia doi Thieu ta", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Chuyen gia doi Thieu ta\"","Ban se nhan duoc 6.500 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Chuyen gia doi Thieu ta, ban se nhan duoc phan thuong them 35% tang thu thap/khai thac tai nguyen","Co 7% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 3,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 35% toc do huan luyen","Tang 30% suc khoe","Tang 30% tien thuong","Tang 20% tan cong va phong thu","Tang 10% kha nang tan cong","1 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","4 goi tai nguyen khong lo","1 goi tinh the khong lo","2 avatar chu quan bo sung","2 the thong hoa ngoai the gioi","3 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","1 NFA chuyen gia doi xuat sac cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 400 USD moi cai","Giam gia 25% cho cac giao dich mua hang trong tro choi trong 24 thang dau","Nhan them 20% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi","Avatar ca nhan duoc mo phong theo nguoi quyen gop, xuat hien khap tro choi","Chia se doanh thu! Chia se den 5% ho boi loi nhuan tu viec ban cac goi trong tro choi va NFA","Truy cap nha phat trien doc quyen voi cap nhat rieng tu hang thang ve tro choi, qua trinh phat trien, cung cac co hoi cung cap phan hoi","Thiet ke xe dua Quest doc quyen de su dung trong tro choi","The suu tap kieu bong chay cua xe dua quest doc quyen cua ban, gui cho ban kem thu cam on"] },
+      { "title": "Chien binh Elite", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Chien binh Elite\"","Ban se nhan duoc 9.000 USD tin dung de su dung cho cac giao dich mua hang trong tro choi","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat discord.","Voi tu cach la Chien binh Elite, ban se nhan duoc phan thuong them 35% tang thu thap/khai thac tai nguyen","Co 7,5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 4% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 40% toc do huan luyen","Tang 35% suc khoe","Tang 30% tien thuong","Tang 20% tan cong va phong thu","Tang 20% kha nang tan cong","2 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","4 goi tai nguyen khong lo","2 goi tinh the khong lo","2 avatar chu quan bo sung","3 the thong hoa ngoai the gioi","4 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","1 NFA chuyen gia doi xuat sac cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 400 USD moi cai","Giam gia 30% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 25% cho cac giao dich mua hang trong tro choi trong 12 thang thu hai","Nhan them 20% giam gia lien tuc cho bat ky giao dich mua hang nao trong tro choi/cac tro choi","Avatar ca nhan duoc mo phong theo nguoi quyen gop, xuat hien khap tro choi","Chia se doanh thu! Chia se den 5% ho boi loi nhuan tu viec ban cac goi trong tro choi va NFA","Truy cap nha phat trien doc quyen voi cap nhat rieng tu hang thang ve tro choi, qua trinh phat trien, cung cac co hoi cung cap phan hoi","Thiet ke xe dua Quest doc quyen de su dung trong tro choi","The suu tap kieu bong chay cua xe dua quest doc quyen cua ban, gui cho ban kem thu cam on"] },
+      { "title": "Over Lord", "rewards": ["Ten cua ban se xuat hien trong phan ket phim cua tro choi voi tieu de \"Over Lord\"","Ban se nhan duoc 15.000 USD tin dung de su dung cho cac giao dich mua hang trong tro choi (khong the chuyen thanh cac khoan thanh toan rut tien)","Ban se nhan duoc cap nhat hang tuan ve tro choi qua email","Ban se co the tham gia chat Discord.","Voi tu cach la Overlord, ban se nhan duoc phan thuong them 40% tang thu thap/khai thac tai nguyen","Co 10% co hoi cao hon de nhan NFA hoac cac vat pham hiem co trong 12 thang dau","Co 5% co hoi cao hon de nhan NFA hoac cac vat pham hiem co lien tuc","Tang 50% toc do huan luyen","Tang 40% suc khoe","Tang 40% tien thuong","Tang 25% tan cong va phong thu","Tang 25% kha nang tan cong","2 vi tri dich chuyen tuc thoi bo sung cho viec tan cong/phong thu","Phu kien dua xe","6 goi tai nguyen khong lo","3 goi tinh the khong lo","2 avatar chu quan bo sung","4 the thong hoa ngoai the gioi","4 NFA chuyen gia doi cap tren cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 150 USD moi cai","2 NFA chuyen gia doi huyen thoai cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 650 USD moi cai","1 NFA chuyen gia doi su thi cung cap them de thuyen va dua xe, cung voi muc mua lai toi thieu duoc dam bao la 1.000 USD moi cai","Giam gia 40% cho cac giao dich mua hang trong tro choi trong 12 thang dau","Giam gia 30% cho cac giao dich mua hang trong tro choi trong 12 thang thu hai","Nhan them 20% giam gia cho bat ky giao dich mua hang nao trong tro choi/cac tro choi mien la ban tham gia tro choi","Avatar ca nhan duoc mo phong theo nguoi quyen gop, xuat hien khap tro choi","Chia se doanh thu! Chia se den 5% ho boi loi nhuan tu viec ban cac goi trong tro choi va NFA","Truy cap nha phat trien doc quyen voi cap nhat rieng tu hang thang ve tro choi, qua trinh phat trien, cung cac co hoi cung cap phan hoi","Thiet ke xe dua Quest doc quyen de su dung trong tro choi","The suu tap kieu bong chay cua xe dua quest doc quyen cua ban, gui cho ban kem thu cam on"] }
+    ]
+  }
+}

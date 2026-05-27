@@ -14,8 +14,12 @@ const VALID_CATS_AUCTION = ["skins","military badges","specialists","weapons","b
 
 // Sync NFTSystem subCollection after auction sale — transfer ownership + record sale
 async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
-  // Cancel sibling marketplace/auction listings for this item (skip the selling auction itself)
-  cancelSiblingListings(auction.subCollectionId, { skipAuctionId: auction._id }).catch(() => {});
+  // Cancel sibling marketplace/auction/trade listings for this item (skip the selling auction itself)
+  cancelSiblingListings(auction.subCollectionId, {
+    skipAuctionId: auction._id,
+    itemName: auction.title || auction.itemName,
+    ownerWallet: auction.sellerWallet,
+  }).catch(() => {});
 
   if (!auction.nftSystemId || !auction.subCollectionId) return;
   try {
@@ -72,7 +76,7 @@ async function expireAuctions() {
 
   await Auction.updateMany(
     { status: "active", endTime: { $lt: new Date() } },
-    { status: "ended" }
+    { status: "ended", cleanupAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) }
   );
 
   // Reset listed=false for auctions that ended with no winner
@@ -273,6 +277,7 @@ export async function cancelAuction(req, res) {
 // ── GET /api/v1/auction/seller/:wallet ───────────────────────────────────────
 export async function getSellerAuctions(req, res) {
   try {
+    await expireAuctions();
     const auctions = await Auction.find({ sellerWallet: req.params.wallet }).sort({ createdAt: -1 });
     res.json(auctions);
   } catch (err) {

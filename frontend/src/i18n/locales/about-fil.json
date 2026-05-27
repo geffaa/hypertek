@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "ANG HYPER TEK UNIVERSE",
+    "heroHeading": "TUNGKOL SA AMIN",
+    "stats": [
+      { "v": "3", "l": "Mga Mundo ng Laro" },
+      { "v": "NFA", "l": "Garantisadong Min Buyback" },
+      { "v": "P2E", "l": "Play-to-Earn" }
+    ],
+    "subtitle": [
+      "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem sa pamamagitan ng paglikha ng isang magkakaugnay na universe kung saan ang mga manlalaro ay hindi limitado sa isang estilo ng gameplay. Sa pamamagitan ng pagsasama ng maraming genre sa isang sistema ng pag-unlad, ang proyekto ng Hyper Tek ay nagbibigay ng dinamikong kapaligiran kung saan ang mga manlalaro ay maaaring magsaliksik, makipagkumpitensya, at lumago sa loob ng isang pinag-isang mundo.",
+      "Layunin nitong bigyan ng tunay na pagmamay-ari ang mga digital na asset na may tunay na halaga, na tumataas sa paglipas ng panahon na may garantisadong minimum na buyback sa lahat ng Non-Fungible Artworks, at tunay na mga sistema ng play-to-earn na dinisenyo sa loob ng ecosystem na pinag-ambagan ng mga manlalaro.",
+      "Layunin ng proyekto na bigyan ng kapangyarihan ang mga manlalaro sa pamamagitan ng pagbibigay sa kanila ng makabuluhang pagmamay-ari sa kanilang pag-unlad at mga gantimpala habang hinihikayat ang pagkamalikhain, pakikipagtulungan, at kumpetisyon.",
+      "Ang pangmatagalang pananaw ng Hyper Tek ay bumuo ng isang buhay na digital na universe kung saan ang maraming laro, ekonomiya, at komunidad ay magkasamang nabubuhay sa isang magkakaugnay na platform."
+    ],
+    "section01": {
+      "label": "Ang Aming Misyon",
+      "heading1": "Muling Tukuyin Kung Ano",
+      "heading2": "Ang Maaaring Maging Gaming",
+      "paras": [
+        "Ang Proyekto ng Hyper Tek ay itinatag ni Don Bennett, na nag-isip ng isang kapaligiran ng gaming kung saan ang maraming genre ay maaaring magkasamang mabuhay sa loob ng isang sistema ng pag-unlad. Sa halip na pilitin ang mga manlalaro na manatili sa isang gameplay loop, pinapayagan ng Hyper Tek ang mga ito na mag-explore ng iba't ibang aktibidad habang binubuo ang kanilang karakter, mga mapagkukunan, at reputasyon sa buong ecosystem, na may pag-unlad, mga materyales, gantimpala, at mga nagawa na umaagos nang maayos sa lahat ng mga laro.",
+        "Pinagsasama ng proyekto ang tatlong pangunahing kapaligiran ng laro: Hyper Racing, Hyper Quest, at Overlord of the Seven Realms. Bawat laro ay kumakatawan sa iba't ibang estilo ng gameplay, ngunit lahat ay gumagana sa loob ng parehong universe at nagbabahagi ng parehong ekonomiya ng manlalaro. Ang disenyong ito ay nagbibigay-daan sa mga manlalaro na makisali sa uri ng gameplay na pinaka-gusto nila habang nag-aambag pa rin sa isang mas malaking ecosystem upang lumikha ng bagong henerasyon ng mga kapaligiran ng gaming na mas malalim, mas immersive, at mas kapaki-pakinabang kaysa sa mga tradisyonal na standalone na laro."
+      ]
+    },
+    "section02": {
+      "label": "Pananaw at Misyon",
+      "vision": {
+        "label": "Pananaw",
+        "quote": "...lumikha ng bagong henerasyon ng mga kapaligiran ng gaming na mas malalim, mas immersive, at mas kapaki-pakinabang kaysa sa mga tradisyonal na standalone na laro...",
+        "paras": [
+          "Ang pangmatagalang pananaw ng Hyper Tek ay bumuo ng isang buhay na digital na universe kung saan ang maraming laro, ekonomiya, at komunidad ay magkasamang nabubuhay sa loob ng isang magkakaugnay na platform. Sa halip na mga nakahiwalay na karanasan sa gaming, layunin ng Hyper Tek na magtatag ng isang shared ecosystem kung saan ang mga aksyon ng mga manlalaro ay nakakaimpluwensya sa mundo sa paligid nila.",
+          "Sa pamamagitan ng pagsasama ng estratehiya, karera, at pakikipagsapalaran sa isang magkakaugnay na sistema, nastratehiya ng Hyper Tek na lumikha ng bagong henerasyon ng mga kapaligiran ng gaming na mas malalim, mas immersive, at mas kapaki-pakinabang kaysa sa mga tradisyonal na standalone na laro."
+        ]
+      },
+      "mission": {
+        "label": "Misyon",
+        "quote": "...tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem...",
+        "paras": [
+          "Ang misyon ng Hyper Tek ay tugunan ang maraming isyu sa loob ng industriya ng gaming at muling tukuyin kung paano gumagana ang mga gaming ecosystem sa pamamagitan ng paglikha ng isang magkakaugnay na universe kung saan ang mga manlalaro ay hindi limitado sa isang estilo ng gameplay.",
+          "Sa pamamagitan ng pagsasama ng maraming genre sa isang sistema ng pag-unlad, nastratehiya ng Hyper Tek na magbigay ng dinamikong kapaligiran kung saan ang mga manlalaro ay maaaring magsaliksik, makipagkumpitensya, at lumago sa loob ng isang pinag-isang mundo. Layunin nitong bigyan ng tunay na pagmamay-ari ang mga digital na asset na may tunay na halaga, na tumataas sa paglipas ng panahon na may garantisadong minimum na buyback sa lahat ng NFA."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Ang Universe",
+      "heading": "Tatlong Mundo. Isang Ekonomiya.",
+      "subtitle": "Bawat laro ay isang gateway, natatangi sa gameplay, nagkakaisa sa ekonomiya at pag-unlad.",
+      "discover": "Tuklasin",
+      "tryUI": "Subukan ang UI",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Bilis · Dominasyon", "desc": "Mataas na bilis na karera sa kabayanan na kapaligiran. I-upgrade ang iyong sasakyan, buuin ang iyong crew, at angkinin ang teritoryo sa buong galaksya." },
+        { "name": "Hyper Quest", "tag": "Mag-explore · Mag-trade", "desc": "Mag-navigate ng mga planeta, kumpletuhin ang mga misyon, at mag-trade ng mga mapagkukunan sa isang patuloy na lumalawak na star map. Bawat paghahatid ay humuhubog sa ekonomiya." },
+        { "name": "Overlord of the Seven Realms", "tag": "Estratehiya · Kapangyarihan", "desc": "Mamuno ng mga hukbo, bumuo ng mga alyansa, at sakupin ang mga kaharian. Ang pinaka-makapangyarihang Overlord ay kumokontrol sa kapalaran ng buong universe." }
+      ]
+    },
+    "section04": {
+      "label": "Mga Non-Fungible Digital Artworks",
+      "heading": "Digital Art Na May Garantisadong Halaga",
+      "subtitle": "Ang 60-Segundong Buod",
+      "quote": "Isang Universe. Tatlong Laro. Garantisadong Halaga. Ang Hinaharap ng Digital Ownership ay Nagsisimula sa Hyper Tek.",
+      "cards": [
+        {
+          "title": "Ano Ang Mga Ito?",
+          "intro": "Mga digital na artwork na nakakonekta sa blockchain sa tatlong antas:",
+          "items": [
+            { "label": "NFA...", "desc": "Nilikha ng arkitekto, pinakamataas na bonus sa laro, ultra-bihira" },
+            { "label": "NFC...", "desc": "Mga collectible na may bonus sa laro, maaaring likhain ng manlalaro" },
+            { "label": "NFT...", "desc": "Ganap na ginawa ng manlalaro, palamutian ang iyong base para sa mga bonus sa kapangyarihan" }
+          ]
+        },
+        {
+          "title": "Bakit Napanatili ang Kanilang Halaga",
+          "bullets": [
+            "Garantisadong minimum na buyback sa bawat artwork",
+            "Ang buyback ay tumataas sa bawat muling pagbebenta",
+            "Na-index ng inflation nang dalawang beses sa isang taon",
+            "Ang iyong halaga ay palaging lumalaki, hindi kailanman bumababa"
+          ]
+        },
+        {
+          "title": "Patas sa Pamamagitan ng Disenyo",
+          "body": "Hanggang 85% ng komisyon sa marketplace ay napupunta sa pagpapataas ng mga halaga ng buyback, pagbabayad ng royalties sa mga artista, at pagpopondo ng mga misyon. Ang mga manlalaro ay maaaring bawasan ang mga bayad sa pamamagitan ng paglikha ng mga misyon na nagbabayad sa iba para lumahok, na nagpapalakas ng social interaction sa bawat antas. Ito ay natatangi sa Hyper Tek."
+        },
+        {
+          "title": "Makisali Ngayon",
+          "body": "Kami ay nag-crowdfund upang itayo ang Hyper Racing, Hyper Quest, at Overlord of the 7 Realms. Bawat artwork na iyong binibili o nililikha ay direktang nagpopondo ng pag-unlad. Magmay-ari ng sining na garantisadong mapanatili at lalago ang halaga habang tinutulungan ang pagtatayo ng hinaharap ng gaming.",
+          "link": "[www.hypertek.com] — Mag-browse. Bumili. Lumikha. Angkinin ang Hinaharap."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Crowdfunding — Tulungan Tayong Itayo ang Hinaharap",
+      "heading": "Ang Iyong Suporta ay Nagpapalakas ng Hyper Tek Universe",
+      "subtitle": "Bawat artwork na binili ay direktang nagpopondo ng tatlong magkakaugnay na laro. Narito ang aming pinagsamang itinatatayo.",
+      "phaseLabel": "Phase",
+      "crowdfundingNow": "Crowdfunding Ngayon",
+      "phases": [
+        { "name": "Pundasyon", "desc": "Website live • Nabuong User Interface • Marketplace gumagana • Sistema ng NFA/NFC/NFT dinisenyo • Garantisadong buyback framework nakalagay" },
+        { "name": "Crowdfunding Ngayon", "desc": "Benta ng NFA/NFC/NFT artwork live • Pinagana ang player-created NFTs • Aktibo ang pagbabahagi ng komisyon • Pagtatayo ng komunidad • Pondo umaagos sa pag-unlad ng laro" },
+        { "name": "Alpha Launch", "desc": "Alpha ng Hyper Racing • Unang maaaring laruin na kapaligiran ng laro • Integrasyong NFA sa laro • Eksklusibong gantimpala para sa maagang backer • Live na kalakalan sa marketplace" },
+        { "name": "Pagpapalawak ng Ecosystem", "desc": "Alpha ng Hyper Quest • Aktibo ang cross-game progression • Integrasyong Hyper Bucks currency • Pinalawak na mga koleksyon ng NFA • Mga real cash prize events" },
+        { "name": "Overlord Launch", "desc": "Alpha ng Overlord of the 7 Realms • Tri-level na sistema ng labanan • Akses sa Battle Ring • Integrasyong VR • Ganap na tatlong-larong pinag-isang ekonomiya" },
+        { "name": "Ganap na Paglabas", "desc": "Tatlong laro ganap na live • Kumpletong NFA ecosystem • Buong VR sa lahat ng titulo • Mga global na tournament • Ang magkakaugnay na universe ay natupad" }
+      ],
+      "helpHeading": "Paano KAYO Makatutulong Ngayon",
+      "helpItems": [
+        { "bold": "Bumili ng NFA, NFC, o NFT", "text": "— magmay-ari ng digital art na may garantisadong halaga na nagpopondo ng pag-unlad ng laro" },
+        { "bold": "Lumikha ng iyong sariling NFT", "text": "— maging tagalikha sa marketplace at kumita mula sa bawat muling pagbebenta" },
+        { "bold": "Ibahagi at ikalat ang balita", "text": "— bawat bagong tagasuporta ay nagpapabilis sa paglalakbay patungo sa paglulunsad" }
+      ],
+      "link": "[www.hypertek.com] — Suportahan ang Proyekto. Angkinin ang Hinaharap."
+    },
+    "section06": {
+      "label": "Web3 Gaming at Kompetitibong Kalamangan",
+      "heading": "HYPER TEK, ISANG WEB3 GAMING SOLUTION AT ANG MGA PANGUNAHING KALAMANGAN",
+      "subtitle": "Pinagsasama ang agwat sa pagitan ng immersive gaming, isang aktibong digital marketplace, ginagantimpalaan ang mga manlalaro at mga mamumuhunan.",
+      "cards": [
+        {
+          "label": "Mga Tunay na Gantimpala at Entrepreneurship",
+          "bullets": [
+            "Tunay na pagmamay-ari ng NFA na may garantisadong minimum na buyback",
+            "Pagbabahagi ng kita sa pamamagitan ng player-controlled digital economy",
+            "Halaga sa totoong mundo na may umuusbong na presyo ng in-game asset",
+            "Tunay na mekanika ng play-to-earn"
+          ]
+        },
+        {
+          "label": "Cash-Out Ecosystem",
+          "body": "Ang mga in-game earnings ay seamlessly na nako-convert sa real-world currency; ang iyong digital na pagsisikap ay may kongkretong, maaaring i-withdraw na halaga."
+        },
+        {
+          "label": "Walang Katapusang Gameplay Sa Mga Magkakaugnay na Mundo",
+          "bullets": [
+            "Tatlong natatanging genre ng laro sa loob ng isang pinag-isang universe",
+            "Magkasamang pag-unlad, gantimpala, at mga nagawa sa lahat ng laro",
+            "Isang buhay na ecosystem kung saan bawat pagpili ay nakakaimpluwensya sa buong universe",
+            "Ang mga manlalaro ng VR/AR ay maaaring sumali sa mga misyon at epic na labanan sa real-time"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Ang mga mamumuhunan, kasosyo, at mga innovator na naniniwala sa hinaharap ng mga magkakaugnay na gaming ecosystem ay iniimbitahan na tuklasin ang proyekto at sumali sa paglalakbay habang patuloy na itinatayo ng Hyper Tek ang susunod na henerasyon ng mga digital na mundo.",
+      "exploreMarketplace": "Tuklasin ang Marketplace",
+      "viewGames": "Tingnan ang mga Laro"
+    }
+  }
+}

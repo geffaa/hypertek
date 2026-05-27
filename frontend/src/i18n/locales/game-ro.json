@@ -312,7 +312,7 @@
       "unlinkedMode": "Mod neslegat:",
       "unlinkedDesc": "Desface resursele fiecărui joc, arătând doar ce este disponibil în fiecare joc.",
       "warning": "Avertisment:",
-      "warningDesc": "În modul „Legat", toate materialele sunt vulnerabile la confiscare dacă ești atacat!"
+      "warningDesc": "În modul 'Legat', toate materialele sunt vulnerabile la confiscare dacă ești atacat!"
     },
     "noRoomInfo": "Nu există informații disponibile pentru această cameră.",
     "skinLabel": "ASPECT 1 — DISPOZIȚIE ARME",

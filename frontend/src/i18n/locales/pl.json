@@ -1,0 +1,174 @@
+{
+  "nav": {
+    "shops": "Sklepy",
+    "aboutUs": "O nas",
+    "news": "Aktualnosci",
+    "socials": "Media spolecznosciowe",
+    "waitlist": "Lista oczekujacych",
+    "signUp": "Zarejestruj sie",
+    "joinWaitlist": "Dolacz do listy oczekujacych",
+    "search": "Szukaj...",
+    "myProfile": "Moj profil",
+    "dashboard": "Panel sterowania",
+    "adminPanel": "Panel administratora",
+    "gaming": "Gry",
+    "marketplace": "Rynek",
+    "signOut": "Wyloguj sie",
+    "shop": {
+      "overview": "Przeglad",
+      "overviewDesc": "Ogolny przeglad rynku",
+      "myAssets": "Moje aktywa",
+      "myAssetsDesc": "Sledz i zarzadzaj wszystkim, co posiadasz",
+      "theMarketplace": "Rynek",
+      "theMarketplaceDesc": "Przegladaj wszystkie kolekcjonalne NFT, NFA i NFC",
+      "auction": "Aukcja",
+      "auctionDesc": "Sledz odliczanie dowolnej aukcji",
+      "land": "Ziemia"
+    }
+  },
+  "logout": {
+    "confirmTitle": "Potwierdzenie wylogowania",
+    "confirmMessage": "Czy na pewno chcesz sie wylogowac?",
+    "cancel": "Anuluj",
+    "logout": "Wyloguj sie"
+  },
+  "footer": {
+    "joinWaitlist": "Dolacz do listy oczekujacych",
+    "allRightsReserved": "Wszelkie prawa zastrzezone",
+    "links": {
+      "marketplace": "Rynek",
+      "news": "Aktualnosci",
+      "whitepaper": "Whitepaper",
+      "about": "O nas",
+      "profile": "Profil",
+      "terms": "Warunki korzystania"
+    }
+  },
+  "hero": {
+    "headingLine1": "HYPER TEK 100:",
+    "headingLine2": "GDZIE LEGENDY SA ZAPOMNIANE",
+    "marketplace": "Rynek",
+    "downloadGame": "Pobierz gre",
+    "tryUI": "Wyprobuj interfejs",
+    "close": "Zamknij"
+  },
+  "howItWorks": {
+    "sectionTitle": "Jak to dziala",
+    "sectionSubtitle": "Zacznij w zaledwie kilku krokach i odblokuj swiat cyfrowych kolekcji.",
+    "steps": [
+      {
+        "title": "Polacz portfel",
+        "description": "Bezpiecznie polacz swoj portfel kryptowalutowy, aby zaczac kupowac, sprzedawac i zbierac NFT."
+      },
+      {
+        "title": "Odkrywaj kolekcje",
+        "description": "Przegladaj popularne kolekcje i odkrywaj rzadkie cyfrowe dziela sztuki od najlepszych tworcow."
+      },
+      {
+        "title": "Kolekcjonuj i handluj",
+        "description": "Kupuj ulubione NFT i prezentuj je lub handluj nimi na swoim profilu w dowolnym momencie."
+      },
+      {
+        "title": "Zarabiaj i rozwijaj sie",
+        "description": "Zarabiaj, sprzedajac swoje kolekcje lub zdobywajac popularnosc w przestrzeni NFT."
+      }
+    ]
+  },
+  "auth": {
+    "sessionExpired": "Sesja wygasla. Prosze zalogowac sie ponownie."
+  },
+  "language": {
+    "select": "Jezyk"
+  },
+  "story": {
+    "label": "HISTORIA",
+    "subheading": "Rok 2117.",
+    "body": "W roku 2117, przed nastaniem skutkow upadku Ziemi, ocaleni zainicjowali Exodus Hyper Tek. Ostatni wysilek ludzkosci na rzecz przetrwania nie zakonczyl sie podbojem gwiazd — zamiast tego rozproszylo sie wsrod nich, rozsilewajac AI, ulepszone genomy i prototypy na tysiacach swiatow-zalazkow. Minely eony, a kazdy swiat rozwijal sie w izolacji, rodzac nowe gatunki, kultury i technologie. W centrum tego wszystkiego lezy Echo Core — kwantowa relikwia pulsujaca paradoksami, wspomnieniami i wezwaniem do wladzy. Przebudza cie jako odrodzonego Overlorda, wykutego z dziedzictwa i technologii.",
+    "readMore": "Przeczytaj nasza pelna historie",
+    "brand": "Hyper Tek 100",
+    "highlights": [
+      { "label": "Polaczony wszechswiat",      "desc": "3 gry — 1 wspolna ekonomia i system progresji" },
+      { "label": "Prawdziwa wlasnosc",          "desc": "NFA z gwarantowanym minimalnym odkupem" },
+      { "label": "Play-to-Earn",               "desc": "Kazda akcja przyczynia sie do twoich realnych nagrod" },
+      { "label": "Wyplaty srodkow",            "desc": "Konwersja waluty w grze / nagrod na wyplaty gotowkowe" },
+      { "label": "Powiazana progresja",         "desc": "Progresja gracza jest powiazana ze wszystkimi grami" },
+      { "label": "Integracja VR/AR",            "desc": "Gracze VR/AR moga dolaczac do misji i epickich bitew w czasie rzeczywistym" }
+    ]
+  },
+  "about": {
+    "verticalLabel": "HYPER TEK 100",
+    "title": "Rok 2117.",
+    "body": "Ludzkosc nie podbiła gwiazd — rozpadla sie i rozproszyla wsrod nich. Po upadku Ziemi ocaleni uruchomili Exodus Hyper Tek, rozsilewajac AI, ulepszone genomy i prototypy na tysiacach swiatow-zalazkow. Kazdy rozwijal sie w izolacji, tworzac nowe gatunki, kultury i technologie. W centrum wszystkiego lezy Echo Core — kwantowa relikwia pulsujaca zagadkami, wspomnieniami i wezwaniem do wladzy. Przebudza cie — odrodzonego Overlorda, wykutego przez dziedzictwo i technologie."
+  },
+  "homeMarket": {
+    "featured": "Polecane",
+    "sectionTitle": "Limitowane przedmioty NFA",
+    "buybackBadge": "Gwarantowany odkup na wszystkie NFA/NFC/NFT",
+    "urgency": "Dzialaj szybko — gdy znikna, znikna NA ZAWSZE!",
+    "loading": "Ladowanie przedmiotow...",
+    "empty": "Brak wystawionych przedmiotow.",
+    "price": "Cena",
+    "minBuyback": "Min. odkup",
+    "buyNow": "Kup teraz"
+  },
+  "gaming": {
+    "sectionTitle": "INFORMACJE O GRACH",
+    "learnMore": "DOWIEDZ SIE WIECEJ",
+    "hoverToExplore": "najedz, aby odkryc",
+    "games": [
+      {
+        "label": "WYSCIGI",
+        "tagline": "Predkosc to przetrwanie.",
+        "description": "Przekraczaj granice grawitacji w neonowych megalopoliach i na pozaziemskich trasach. Dostosuj swoja maszyne, opanuj kazdy zakret i pozostaw rywali w tyle — tabela wynikow na nikogo nie czeka."
+      },
+      {
+        "label": "QUEST",
+        "tagline": "Odkrywaj nieznane.",
+        "description": "Nawiguj po niezbadanych ukladach gwiezdnych, zawieraj sojusze i odkrywaj tajemnice Echo Core. Kazdy wybor ksztaltuje twoje dziedzictwo."
+      },
+      {
+        "label": "OVERLORD",
+        "tagline": "Dowodz. Podbijaj. Rzadz.",
+        "description": "Jestes Overlordem — odrodzonym z popiolu rozbitej Ziemi. Twórz armie, przejmuj uklady gwiezdne i uginaj wrogie frakcje pod swoja wola. Echo Core wybralo cie. Udowodnij, ze mialo racje."
+      }
+    ]
+  },
+  "packages": {
+    "badge": "KAMPANIA CROWDFUNDINGOWA — ETAP 1",
+    "intro1": "Z radoscia oglaszamy uruchomienie naszej dlugo oczekiwanej kampanii crowdfundingowej w celu pozyskania finansowania na ukonczenie przelomowego projektu Hyper Tek, który czyni pozytywne postepy! To twoja szansa, by dolaczyc do ekosystemu Hyper Tek jako wczesny uczestnik, wybierajac z ekskluzywnego wyboru limitowanych przedmiotow i pakietow, ktorych nie chcesz przegapic. Dzialaj szybko! Kupujac bezposrednio od nas na tej platformie, mozesz korzystac z obnizonej stawki o 10%, poniewaz przekazujemy ci oszczednosci wynikajace z unikniecia oplat crowdfundingowych, ktore sa wymienione ponizej!",
+    "intro2": "Poniewaz wszystkie cyfrowe przedmioty Hyper Tek sa poparte gwarantowanym minimalnym odkupem, a wiekszosc oferuje rowniez znaczace bonusy w grze, wprowadzamy serie limitowanych Non-Fungible Assets (NFA) z najwyzszymi poziomami bonusow, ktore kiedykolwiek beda oferowane. To rzadka okazja, poniewaz te oferty nigdy sie nie powtorza! Gdy te przedmioty zostana wyprzedane lub osiagniemy nasz cel finansowy, pozostale niesworzone limitowane NFA zostana na zawsze usuniete ze strony!",
+    "intro3": "Zebralismy juz ponad 440 000 dolarow i chcemy pozyskac dodatkowe 460 000 dolarow. To twoj moment, aby dolaczyc do nas w tej ekscytujacej inicjatywie — nie daj mu umknac! Kup swoje limitowane przedmioty lub pakiety juz dzis i stan sie czescia ekscytujacego ekosystemu Hyper Tek.",
+    "intro4": "Pamietaj, aby zapisac sie na liste zyczen i polubic nas w mediach spolecznosciowych, by byc na biezaco! Dzialaj teraz, gdyz czas jest najwazniejszy!",
+    "collectionsLabel": "Kolekcje",
+    "sectionTitle": "Pakiety poziomow darowizn",
+    "discount": "Zaoszczedz 10% od podanych cen",
+    "donationTierLabel": "Poziom darowizny",
+    "donationTierPrefix": "Poziom darowizny:",
+    "rewardsTitle": "Nagrody i korzysci",
+    "noteTitle": "Uwaga",
+    "commonNote": "Nagrody, bonusy i/lub rabaty za przekazanie darowizny teraz.\n\nUWAGA: Oprocz vouchera do wykorzystania w grach online lub wybranych zakupach, wszystkie inne Nagrody, Bonusy i/lub Rabaty nie moga byc laczone ani uzywane w polaczeniu z jakimikolwiek innymi promocjami.\n\nWszystkie pakiety darowizn beda zawierac pisemne wyroznienie w napisach koncowych produkcji gry.",
+    "specialConditionTitle": "Szczegolny warunek",
+    "specialCondition": "Po pomyslnym opracowaniu i ukonczeniu gry/gier, kazda osoba, ktora dokona darowizny, otrzyma minimalna wartosc wieksza niz jej pierwotna inwestycja w nagrody lub pakiety do wykorzystania w grze/grach, a wszelkie obiecane bonusy lub nagrody za darowizne zostana przyznane po wydaniu gry/gier.",
+    "imageComing": "Obraz wkrotce",
+    "close": "Zamknij",
+    "items": [
+      { "title": "Rekrut", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Rekrut\"","Otrzymasz kredyty o wartosci 35 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Rekrut, otrzymasz 10% rabatu na zakupy w grze przez pierwsze 12 miesiecy"] },
+      { "title": "Kadet klasy poczatkowej", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Kadet klasy poczatkowej\"","Otrzymasz kredyty o wartosci 90 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Kadet klasy poczatkowej, otrzymasz bonus 10% do zbierania zasobow","5% wzrost predkosci szkolenia","10% rabatu na zakupy w grze przez pierwsze 12 miesiecy","#Zdecyduj sie tylko przekazac darowizne w wysokosci 50 dolarow, aby wesprzec nasza misje, a jezeli chcesz, twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Zaciagniety Honorowy Kadet klasy poczatkowej\""] },
+      { "title": "Kadet 1. klasy", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Kadet 1. klasy\"","Otrzymasz kredyty o wartosci 125 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Kadet 1. klasy, otrzymasz bonus 10% do zbierania zasobow","5% wzrost predkosci szkolenia","5% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","10% rabatu na zakupy w grze przez pierwsze 24 miesiace"] },
+      { "title": "Wiodacy kadet", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Wiodacy kadet\"","Otrzymasz kredyty o wartosci 170 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Wiodacy kadet, otrzymasz bonus 10% do zbierania zasobow","5% wzrost predkosci szkolenia","5% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","10% rabatu na zakupy w grze przez pierwsze 24 miesiace"] },
+      { "title": "Wiodacy kadet klasy specjalnej", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Wiodacy kadet klasy specjalnej\"","Otrzymasz kredyty o wartosci 240 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Wiodacy kadet klasy specjalnej, otrzymasz bonus 10% do zbierania zasobow","5% wzrost predkosci szkolenia","5% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","15% rabatu na zakupy w grze przez pierwsze 24 miesiace"] },
+      { "title": "Starszy kadet", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Wiodacy kadet klasy specjalnej\"","Otrzymasz kredyty o wartosci 390 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Starszy kadet, otrzymasz bonus 15% do zbierania zasobow","5% wzrost predkosci szkolenia","10% wzrost zdrowia","5% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","10% rabatu na zakupy w grze przez kolejne 12 miesiecy","#Zdecyduj sie tylko przekazac darowizne w wysokosci 250 dolarow, jezeli chcesz, twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Zaciagniety Honorowy Starszy Kadet Klasy Specjalnej\""] },
+      { "title": "Starszy kadet klasy specjalnej", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Starszy kadet klasy specjalnej\"","Otrzymasz kredyty o wartosci 440 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Starszy kadet klasy specjalnej, otrzymasz bonus 15% do zbierania zasobow","1,0% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","10% wzrost predkosci szkolenia","10% wzrost zdrowia","10% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","5% wieksza pojemnosc sil atakujacych","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","10% rabatu na zakupy w grze przez kolejne 12 miesiecy"] },
+      { "title": "Kadet lotniczy", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Kadet lotniczy\"","Otrzymasz kredyty o wartosci 550 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Porucznik lotniczy, otrzymasz bonus 15% do zbierania zasobow","1,5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","15% wzrost predkosci szkolenia","15% wzrost zdrowia","10% wiecej pieniedzy nagrodowych","5% wzrost ataku i obrony","5% wieksza pojemnosc sil atakujacych","1 mega pakiet zasobow","1 NFA Przelozony specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup w wysokosci 150 USD","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","10% rabatu na zakupy w grze przez kolejne 12 miesiecy"] },
+      { "title": "Porucznik lotniczy", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Porucznik lotniczy\"","Otrzymasz kredyty o wartosci 6800 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Porucznik lotniczy, otrzymasz bonus 20% do zbierania zasobow","1,5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","20% wzrost predkosci szkolenia","15% wzrost zdrowia","15% wiecej pieniedzy nagrodowych","8% wzrost ataku i obrony","7% wieksza pojemnosc sil atakujacych","Bonusowe czesci wyscigowe","1 mega pakiet zasobow","1 przepustka do portu pozaziemskiego","1 NFA Przelozony specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup w wysokosci 150 USD","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","10% rabatu na zakupy w grze przez kolejne 12 miesiecy","#Zdecyduj sie tylko przekazac darowizne w wysokosci 500 dolarow, jezeli chcesz, twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Zaciagniety Honorowy Porucznik Lotniczy\""] },
+      { "title": "Porucznik lotniczy klasy specjalnej", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Porucznik lotniczy klasy specjalnej\"","Otrzymasz kredyty o wartosci 1 050 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Porucznik lotniczy klasy specjalnej, otrzymasz bonus 20% do zbierania zasobow","1,5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","1,0% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","20% wzrost predkosci szkolenia","20% wzrost zdrowia","15% wiecej pieniedzy nagrodowych","10% wzrost ataku i obrony","7% wieksza pojemnosc sil atakujacych","Bonusowe czesci wyscigowe","1 mega pakiet zasobow","1 dodatkowy awatar hosta","1 przepustka do portu pozaziemskiego","1 NFA Przelozony specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup w wysokosci 150 USD","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","10% rabatu na zakupy w grze przez kolejne 12 miesiecy"] },
+      { "title": "Skrzydlowy", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Skrzydlowy\"","Otrzymasz kredyty o wartosci 1 480 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Skrzydlowy, otrzymasz bonus 25% do zbierania zasobow","2,0% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","1,0% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","25% wzrost predkosci szkolenia","20% wzrost zdrowia","20% wiecej pieniedzy nagrodowych","10% wzrost ataku i obrony","8% wieksza pojemnosc sil atakujacych","Bonusowe czesci wyscigowe","1 mega pakiet zasobow","1 mega pakiet krysztalow","1 dodatkowy awatar hosta","1 przepustka do portu pozaziemskiego","2 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","Trwaly dodatkowy rabat 10% na dowolne zakupy w grze/grach","#Zdecyduj sie tylko przekazac darowizne w wysokosci 1000 dolarow, jezeli chcesz, twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Zaciagniety Honorowy Skrzydlowy\""] },
+      { "title": "Skrzydlowy klasy starszej", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Skrzydlowy klasy starszej\"","Otrzymasz kredyty o wartosci 2 200 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Skrzydlowy klasy starszej, otrzymasz bonus 25% do zbierania zasobow","3,0% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","1,5% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","30% wzrost predkosci szkolenia","25% wzrost zdrowia","20% wiecej pieniedzy nagrodowych","15% wzrost ataku i obrony","10% wieksza pojemnosc sil atakujacych","1 dodatkowy slot teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","1 mega pakiet zasobow","1 mega pakiet krysztalow","1 dodatkowy awatar hosta","1 przepustka do portu pozaziemskiego","2 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","20% rabatu na zakupy w grze przez pierwsze 12 miesiecy","Trwaly dodatkowy rabat 10% na dowolne zakupy w grze/grach"] },
+      { "title": "Oficer techniczny", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Oficer techniczny\"","Otrzymasz kredyty o wartosci 2 900 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Oficer techniczny, otrzymasz bonus 25% do zbierania zasobow","3,5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","2,0% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","30% wzrost predkosci szkolenia","25% wzrost zdrowia","25% wiecej pieniedzy nagrodowych","15% wzrost ataku i obrony","10% wieksza pojemnosc sil atakujacych","1 dodatkowy slot teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","2 mega pakiety zasobow","1 mega pakiet krysztalow","2 dodatkowe awatary hosta","2 przepustki do portow pozaziemskich","3 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","25% rabatu na zakupy w grze przez pierwsze 12 miesiecy","Trwaly dodatkowy rabat 20% na dowolne zakupy w grze/grach","Spersonalizowany awatar wzorowany na darczyńcy, pojawiajacy sie w calej grze","Podzial przychodow! Udzial w puli zysku do 2,5% generowanej ze sprzedazy pakietow w grze i NFA","Ekskluzywny dostep dla deweloperow z miesiecznymi prywatnymi aktualizacjami o grze, produkcji i mozliwosciami przekazywania opinii","Ekskluzywny projekt gracza Quest do uzycia w grze","Kolekcjonerska karta w stylu baseballowym twojego ekskluzywnego gracza Quest, wyslana do ciebie z listem podziekowania"] },
+      { "title": "Specjalista zespolu", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Specjalista zespolu\"","Otrzymasz kredyty o wartosci 3 300 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Specjalista zespolu, otrzymasz bonus 30% do zbierania zasobow","5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","2,5% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","30% wzrost predkosci szkolenia","30% wzrost zdrowia","25% wiecej pieniedzy nagrodowych","15% wzrost ataku i obrony","10% wieksza pojemnosc sil atakujacych","1 dodatkowy slot teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","3 mega pakiety zasobow","1 mega pakiet krysztalow","2 dodatkowe awatary hosta","2 przepustki do portow pozaziemskich","2 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","1 NFA Wyjatkowy specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 400 USD kazdy","25% rabatu na zakupy w grze przez pierwsze 24 miesiace","Trwaly dodatkowy rabat 20% na dowolne zakupy w grze/grach","Spersonalizowany awatar wzorowany na darczyńcy, pojawiajacy sie w calej grze","Podzial przychodow! Udzial w puli zysku do 2,5% generowanej ze sprzedazy pakietow w grze i NFA","Ekskluzywny dostep dla deweloperow z miesiecznymi prywatnymi aktualizacjami o grze, produkcji i mozliwosciami przekazywania opinii","Ekskluzywny projekt gracza Quest do uzycia w grze","Kolekcjonerska karta w stylu baseballowym twojego ekskluzywnego gracza Quest, wyslana do ciebie z listem podziekowania","#Zdecyduj sie tylko przekazac darowizne w wysokosci 2500 dolarow, jezeli chcesz, twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Zaciagniety Honorowy Specjalista Zespolu\""] },
+      { "title": "Major specjalistow zespolu", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Major specjalistow zespolu\"","Otrzymasz kredyty o wartosci 6 500 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Major specjalistow zespolu, otrzymasz bonus 35% do zbierania/wydobywania zasobow","7% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","3,5% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","35% wzrost predkosci szkolenia","30% wzrost zdrowia","30% wiecej pieniedzy nagrodowych","20% wzrost ataku i obrony","10% wieksza pojemnosc sil atakujacych","1 dodatkowy slot teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","4 mega pakiety zasobow","1 mega pakiet krysztalow","2 dodatkowe awatary hosta","2 przepustki do portow pozaziemskich","3 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","1 NFA Wyjatkowy specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 400 USD kazdy","25% rabatu na zakupy w grze przez pierwsze 24 miesiace","Trwaly dodatkowy rabat 20% na dowolne zakupy w grze/grach","Spersonalizowany awatar wzorowany na darczyńcy, pojawiajacy sie w calej grze","Podzial przychodow! Udzial w puli zysku do 5% generowanej ze sprzedazy pakietow w grze i NFA","Ekskluzywny dostep dla deweloperow z miesiecznymi prywatnymi aktualizacjami o grze, produkcji i mozliwosciami przekazywania opinii","Ekskluzywny projekt gracza Quest do uzycia w grze","Kolekcjonerska karta w stylu baseballowym twojego ekskluzywnego gracza Quest, wyslana do ciebie z listem podziekowania"] },
+      { "title": "Dowodca Elita", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Dowodca Elita\"","Otrzymasz kredyty o wartosci 9 000 USD do wykorzystania na zakupy w grze","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Dowodca Elita, otrzymasz bonus 35% do zbierania/wydobywania zasobow","7,5% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","4% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","40% wzrost predkosci szkolenia","35% wzrost zdrowia","30% wiecej pieniedzy nagrodowych","20% wzrost ataku i obrony","20% wieksza pojemnosc sil atakujacych","2 dodatkowe sloty teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","4 mega pakiety zasobow","2 mega pakiety krysztalow","2 dodatkowe awatary hosta","3 przepustki do portow pozaziemskich","4 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","1 NFA Wyjatkowy specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 400 USD kazdy","30% rabatu na zakupy w grze przez pierwsze 12 miesiecy","25% rabatu na zakupy w grze przez kolejne 12 miesiecy","Trwaly dodatkowy rabat 20% na dowolne zakupy w grze/grach","Spersonalizowany awatar wzorowany na darczyńcy, pojawiajacy sie w calej grze","Podzial przychodow! Udzial w puli zysku do 5% generowanej ze sprzedazy pakietow w grze i NFA","Ekskluzywny dostep dla deweloperow z miesiecznymi prywatnymi aktualizacjami o grze, produkcji i mozliwosciami przekazywania opinii","Ekskluzywny projekt gracza Quest do uzycia w grze","Kolekcjonerska karta w stylu baseballowym twojego ekskluzywnego gracza Quest, wyslana do ciebie z listem podziekowania"] },
+      { "title": "Overlord", "rewards": ["Twoje imie pojawi sie w napisach koncowych gry pod tytulem \"Overlord\"","Otrzymasz kredyty o wartosci 15 000 USD do wykorzystania na zakupy w grze (nie moga byc zamienione na wyplaty gotowkowe)","Bedziesz otrzymywac cotygodniowe aktualizacje o grze pocztą elektroniczną","Bedziesz mogl dolaczyc do czatu Discord.","Jako Overlord, otrzymasz bonus 40% do zbierania/wydobywania zasobow","10% wieksze szanse na zdobycie NFA lub rzadkich przedmiotow w ciagu pierwszych 12 miesiecy","5% trwale wieksze szanse na zdobycie NFA lub rzadkich przedmiotow","50% wzrost predkosci szkolenia","40% wzrost zdrowia","40% wiecej pieniedzy nagrodowych","25% wzrost ataku i obrony","25% wieksza pojemnosc sil atakujacych","2 dodatkowe sloty teleportacji do ataku/obrony","Bonusowe czesci wyscigowe","6 mega pakietow zasobow","3 mega pakiety krysztalow","2 dodatkowe awatary hosta","4 przepustki do portow pozaziemskich","4 NFA Przelozonych specjalistow zespolu oferujacych bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 150 USD kazdy","2 NFA Legendarne specjalisty zespolu oferujace bonusy do statku i wyscigow oraz gwarantowany minimalny odkup po 650 USD kazdy","1 NFA Epiczny specjalista zespolu oferujacy bonusy do statku i wyscigow oraz gwarantowany minimalny odkup w wysokosci 1000 USD","40% rabatu na zakupy w grze przez pierwsze 12 miesiecy","30% rabatu na zakupy w grze przez kolejne 12 miesiecy","Dodatkowy rabat 20% na dowolne zakupy w grze/grach przez caly czas uczestnictwa","Spersonalizowany awatar wzorowany na darczyńcy, pojawiajacy sie w calej grze","Podzial przychodow! Udzial w puli zysku do 5% generowanej ze sprzedazy pakietow w grze i NFA","Ekskluzywny dostep dla deweloperow z miesiecznymi prywatnymi aktualizacjami o grze, produkcji i mozliwosciami przekazywania opinii","Ekskluzywny projekt gracza Quest do uzycia w grze","Kolekcjonerska karta w stylu baseballowym twojego ekskluzywnego gracza Quest, wyslana do ciebie z listem podziekowania"] }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "返回首頁",
+    "latestUpdates": "最新更新",
+    "heading": "新聞、更新與常見問題",
+    "latestBadge": "最新",
+    "readArticle": "閱讀文章",
+    "read": "閱讀",
+    "allStories": "所有故事",
+    "seeAll": "查看所有故事（{{count}}）",
+    "showLess": "顯示更少",
+    "frequentlyAsked": "常見問題",
+    "faqLabel": "常見問題",
+    "loadingArticle": "載入文章中…",
+    "backToNews": "返回新聞",
+    "home": "首頁",
+    "news": "新聞",
+    "newsUpdates": "新聞與更新",
+    "allArticles": "所有文章",
+    "copied": "已複製！",
+    "share": "分享",
+    "faq": [
+      {
+        "q": "什麼是 HyperTek？",
+        "a": "HyperTek 是一個設定在 2117 年的邊玩邊賺遊戲生態系統。它擁有 3 款互聯遊戲——Hyper Racing、Hyper Quest 和 Hyper Overlord——共享單一經濟體和進程系統。您的每一個行動都貢獻於現實世界的獎勵。"
+      },
+      {
+        "q": "什麼是 NFA、NFC 和 NFT？",
+        "a": "NFA（非同質化資產）是 HyperTek 發行的遊戲內物品，具有平台保障的最低回購價。NFC（非同質化角色）是具有遊戲內獎勵和回購保障的授權玩家角色。NFT 是用戶創作的收藏品——皮膚、武器和外觀道具。"
+      },
+      {
+        "q": "回購保障如何運作？",
+        "a": "HyperTek 上的每個 NFA 都有保障的最低回購價值。如果您決定退出遊戲，HyperTek 將以不低於保障最低價格回購您的資產——始終保護您的投資。"
+      },
+      {
+        "q": "如何開始賺取現實世界獎勵？",
+        "a": "註冊、連接您的錢包並開始遊戲。完成的每個任務、交易的資產或贏得的戰鬥都能為您賺取可轉換為提款支付的遊戲內貨幣。您的進度跨越三款遊戲。"
+      },
+      {
+        "q": "有哪些遊戲可用？",
+        "a": "三款遊戲共享 HyperTek 宇宙：Hyper Racing（高速賽道戰鬥）、Hyper Quest（探索、派系和古代技術）和 Hyper Overlord（策略、統治和征服）。所有遊戲共享相同的經濟體和玩家進程。"
+      },
+      {
+        "q": "支援 VR/AR 嗎？",
+        "a": "是的。HyperTek 支援 VR 和 AR 玩家，他們可以與標準玩家即時一起加入任務和史詩戰鬥。該生態系統設計為可在所有設備和平台上訪問。"
+      }
+    ]
+  }
+}

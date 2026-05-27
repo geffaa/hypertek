@@ -264,6 +264,12 @@ const CATEGORIES = [
 
 // ─── Main seed function ───────────────────────────────────────────────────────
 async function seed() {
+  // ── Safety guard: never run on production ──
+  if (process.env.NODE_ENV === "production") {
+    console.error("❌ ABORT: seedAll.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    process.exit(1);
+  }
+
   await mongoose.connect(process.env.MONGODB_URL);
   console.log("✅ Connected to MongoDB\n");
 
@@ -306,13 +312,9 @@ async function seed() {
     nft_created++;
   }
 
-  // Mark all existing seeded parent collections as isDummy=true.
-  // Any collection created by a real user/admin via the panel will be created with isDummy:false by default.
-  const migrated = await NFTSystem.updateMany(
-    { isParentCollection: true },
-    { $set: { isDummy: true } }
-  );
-  console.log(`✅ Migration: ${migrated.modifiedCount} collections marked isDummy=true`);
+  // NOTE: Removed blanket isDummy=true migration — it was marking user-created
+  // collections as deletable, causing data loss when seedMarketplace.js ran next.
+  // isDummy is now only set on records created by this seed script (line 298).
 
   // 4. NFT 101 — delete all old entries and leave clean for seedMarketplace.js
   //    seedMarketplace.js has the full data (images, body, sections).
@@ -548,10 +550,10 @@ async function seed() {
     if (act_created > 0) console.log(`✅ Activities: ${act_created} created`);
   }
 
-  // 10. Sample Auctions — delete all and re-insert with distinct endTimes
+  // 10. Sample Auctions — delete SEED auctions only and re-insert with distinct endTimes
   let auc_created = 0;
   {
-    await Auction.deleteMany({});
+    await Auction.deleteMany({ sellerWallet: { $in: ["0xSEED_WALLET_SELLER_001", "0xSEED_WALLET_SELLER_002"] } });
     const _s = createdUsers.length >= 2 ? createdUsers[0]._id : null;
     const _s2 = createdUsers.length >= 2 ? createdUsers[1]._id : null;
     const now = Date.now();

@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Ana Sayfaya Don",
+    "latestUpdates": "Son Guncellemeler",
+    "heading": "Haberler, Guncellemeler ve SSS",
+    "latestBadge": "SON",
+    "readArticle": "Makaleyi Oku",
+    "read": "Oku",
+    "allStories": "Tum Haberler",
+    "seeAll": "Tum Haberleri Gor ({{count}})",
+    "showLess": "Daha Az Goster",
+    "frequentlyAsked": "Sık Sorulanlar",
+    "faqLabel": "SSS",
+    "loadingArticle": "Makale yukleniyor...",
+    "backToNews": "Haberlere Don",
+    "home": "Ana Sayfa",
+    "news": "Haberler",
+    "newsUpdates": "Haberler ve Guncellemeler",
+    "allArticles": "Tum Makaleler",
+    "copied": "Kopyalandi!",
+    "share": "Paylas",
+    "faq": [
+      {
+        "q": "HyperTek nedir?",
+        "a": "HyperTek, 2117 yilinda gecen bir oynayarak-kazan oyun ekosistemidir. Tek bir ekonomi ve ilerleme sistemini paylasan 3 birbirine bagli oyun icermektedir: Hyper Racing, Hyper Quest ve Hyper Overlord. Yaptiginiz her eylem gercek dunya odullerine katki saglar."
+      },
+      {
+        "q": "NFA'lar, NFC'ler ve NFT'ler nelerdir?",
+        "a": "NFA'lar (Mantar Olmayan Varliklar), platform garantili minimum geri alim fiyatina sahip HyperTek tarafindan yayinlanan oyun ici urunlerdir. NFC'ler (Mantar Olmayan Karakterler), oyun ici bonuslara ve geri alim garantilerine sahip lisansli oyuncu karakterleridir. NFT'ler kullanici tarafindan olusturulan koleksiyonlardir: deri, silah ve kozmetikler."
+      },
+      {
+        "q": "Geri alim garantisi nasil calisir?",
+        "a": "HyperTek'teki her NFA, garantili minimum geri alim degerine sahiptir. Oyundan cikmak istediginizde, HyperTek varliklarinizi garantili minimum fiyatin altinda olmayan bir fiyata geri alir; bu da yatiriminizi her zaman korur."
+      },
+      {
+        "q": "Gercek dunya odullerini kazanmaya nasil baslarim?",
+        "a": "Kaydolun, cuzданinizi baglayin ve oynamaya baslayin. Tamamlanan her gorev, takas edilen varlik veya kazanilan savas, nakit odemelere donusturulebilen oyun ici para birimi kazanmanizi saglar. Ilerlemeniz her uc oyun genelinde tasiniyor."
+      },
+      {
+        "q": "Hangi oyunlar mevcut?",
+        "a": "Uc oyun HyperTek evrenini paylasiyor: Hyper Racing (yuksek hizli devre savalarlari), Hyper Quest (kesif, fraksiyonlar ve antik teknoloji) ve Hyper Overlord (strateji, hakimiyet ve fetih). Hepsi ayni ekonomiyi ve oyuncu ilerlемesini paylasiyor."
+      },
+      {
+        "q": "VR/AR destekleniyor mu?",
+        "a": "Evet. HyperTek, standart oyuncularla birlikte gercek zamanli gorevlere ve epik savaslaрa katilabilen VR ve AR oyuncularini destekliyor. Ekosistem, tum cihazlar ve platformlarda erisilebilir olacak sekilde tasarlanmistir."
+      }
+    ]
+  }
+}

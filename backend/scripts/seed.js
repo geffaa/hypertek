@@ -395,6 +395,12 @@ const FORCE_RESEED_NFT = process.env.FORCE_RESEED_NFT === "true";
 const QA_PRICE = 0.50; // $0.50 USDC — cheapest amount that works with both Stripe and wallet
 
 async function seed() {
+    // ── Safety guard: never run on production ──
+    if (process.env.NODE_ENV === "production") {
+        console.error("❌ ABORT: seed.js must NOT run in production. Set NODE_ENV=development to proceed.");
+        process.exit(1);
+    }
+
     const mongoUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/hypertek";
     console.log("🔗 Connecting to MongoDB...");
     await mongoose.connect(mongoUrl);
@@ -470,12 +476,9 @@ async function seed() {
         nft_created++;
     }
 
-    // Mark all existing seeded parent collections as isDummy=true (migration)
-    const migrated = await NFTSystem.updateMany(
-        { isParentCollection: true },
-        { $set: { isDummy: true } }
-    );
-    console.log(`🏷️  isDummy migration: ${migrated.modifiedCount} collections updated`);
+    // NOTE: Removed blanket isDummy=true migration — it was marking user-created
+    // collections as deletable, causing data loss when seedMarketplace.js ran.
+    // isDummy is only set on records created by this seed script (line 459).
 
     // ── 4. NFT 101 ──────────────────────────────────────────────────────────
     let edu_created = 0, edu_skipped = 0;

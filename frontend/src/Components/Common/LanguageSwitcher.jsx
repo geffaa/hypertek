@@ -3,11 +3,33 @@ import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 
 const LANGUAGES = [
-  { code: "en", label: "EN", full: "English", flag: "🇺🇸" },
-  { code: "zh", label: "ZH", full: "中文", flag: "🇨🇳" },
-  { code: "ko", label: "KO", full: "한국어", flag: "🇰🇷" },
-  { code: "ja", label: "JA", full: "日本語", flag: "🇯🇵" },
-  { code: "pt", label: "PT", full: "Português", flag: "🇧🇷" },
+  { code: "en",    label: "EN",    full: "English",          flag: "🇺🇸" },
+  { code: "fr",    label: "FR",    full: "Français",         flag: "🇫🇷" },
+  { code: "it",    label: "IT",    full: "Italiano",         flag: "🇮🇹" },
+  { code: "de",    label: "DE",    full: "Deutsch",          flag: "🇩🇪" },
+  { code: "es",    label: "ES",    full: "Español",          flag: "🇪🇸" },
+  { code: "ru",    label: "RU",    full: "Русский",          flag: "🇷🇺" },
+  { code: "ko",    label: "KO",    full: "한국어",            flag: "🇰🇷" },
+  { code: "ja",    label: "JA",    full: "日本語",            flag: "🇯🇵" },
+  { code: "pt",    label: "PT",    full: "Português",        flag: "🇧🇷" },
+  { code: "ar",    label: "AR",    full: "العربية",          flag: "🇸🇦" },
+  { code: "ms",    label: "MS",    full: "Melayu",           flag: "🇲🇾" },
+  { code: "no",    label: "NO",    full: "Norsk",            flag: "🇳🇴" },
+  { code: "nl",    label: "NL",    full: "Nederlands",       flag: "🇳🇱" },
+  { code: "th",    label: "TH",    full: "ไทย",              flag: "🇹🇭" },
+  { code: "tr",    label: "TR",    full: "Türkçe",           flag: "🇹🇷" },
+  { code: "vi",    label: "VI",    full: "Việt",             flag: "🇻🇳" },
+  { code: "id",    label: "ID",    full: "Indonesia",        flag: "🇮🇩" },
+  { code: "zh",    label: "ZH",    full: "简体中文",          flag: "🇨🇳" },
+  { code: "sv",    label: "SV",    full: "Svenska",          flag: "🇸🇪" },
+  { code: "he",    label: "HE",    full: "עברית",            flag: "🇮🇱" },
+  { code: "da",    label: "DA",    full: "Dansk",            flag: "🇩🇰" },
+  { code: "ro",    label: "RO",    full: "Română",           flag: "🇷🇴" },
+  { code: "fil",   label: "FIL",   full: "Filipino",         flag: "🇵🇭" },
+  { code: "zh-TW", label: "ZHT",   full: "繁體中文",          flag: "🇹🇼" },
+  { code: "hi",    label: "HI",    full: "हिंदी",             flag: "🇮🇳" },
+  { code: "pl",    label: "PL",    full: "Polski",           flag: "🇵🇱" },
+  { code: "el",    label: "EL",    full: "Ελληνικά",         flag: "🇬🇷" },
 ];
 
 export default function LanguageSwitcher() {
@@ -15,7 +37,10 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  const current = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0];
+  const current =
+    LANGUAGES.find((l) => l.code === i18n.language) ||
+    LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) ||
+    LANGUAGES[0];
 
   useEffect(() => {
     const handler = (e) => {
@@ -49,11 +74,13 @@ export default function LanguageSwitcher() {
 
       {open && (
         <div
-          className="absolute top-full right-0 mt-2 w-44 rounded-xl shadow-2xl overflow-hidden z-50"
+          className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-2xl z-50"
           style={{
             background: "rgba(0,15,60,0.97)",
             border: "1px solid rgba(255,255,255,0.1)",
             backdropFilter: "blur(16px)",
+            maxHeight: "min(420px, 70vh)",
+            overflowY: "auto",
           }}
         >
           {LANGUAGES.map((lang) => (
@@ -66,7 +93,8 @@ export default function LanguageSwitcher() {
                   lang.code === current.code
                     ? "rgba(0,42,168,0.4)"
                     : "transparent",
-                color: lang.code === current.code ? "#fff" : "rgba(255,255,255,0.75)",
+                color:
+                  lang.code === current.code ? "#fff" : "rgba(255,255,255,0.75)",
               }}
               onMouseEnter={(e) => {
                 if (lang.code !== current.code)

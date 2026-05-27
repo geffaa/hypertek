@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Înapoi la pagina principală",
+    "latestUpdates": "Ultimele actualizări",
+    "heading": "Știri, actualizări și întrebări frecvente",
+    "latestBadge": "NOU",
+    "readArticle": "Citește articolul",
+    "read": "Citește",
+    "allStories": "Toate articolele",
+    "seeAll": "Vezi toate articolele ({{count}})",
+    "showLess": "Arată mai puțin",
+    "frequentlyAsked": "Întrebări frecvente",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Se încarcă articolul…",
+    "backToNews": "Înapoi la știri",
+    "home": "Acasă",
+    "news": "Știri",
+    "newsUpdates": "Știri și actualizări",
+    "allArticles": "Toate articolele",
+    "copied": "Copiat!",
+    "share": "Distribuie",
+    "faq": [
+      {
+        "q": "Ce este HyperTek?",
+        "a": "HyperTek este un ecosistem de jocuri play-to-earn plasat în anul 2117. Cuprinde 3 jocuri interconectate — Hyper Racing, Hyper Quest și Hyper Overlord — care împart o singură economie și un sistem de progresie. Fiecare acțiune a ta contribuie la recompense din lumea reală."
+      },
+      {
+        "q": "Ce sunt NFA, NFC și NFT?",
+        "a": "NFA (Non-Fungible Assets) sunt obiecte din joc emise de HyperTek cu un preț minim de răscumpărare garantat de platformă. NFC (Non-Fungible Characters) sunt personaje de jucători licențiate cu bonusuri în joc și garanție de răscumpărare. NFT sunt obiecte de colecție create de utilizatori — skinuri, arme și cosmetice."
+      },
+      {
+        "q": "Cum funcționează garanția de răscumpărare?",
+        "a": "Fiecare NFA din HyperTek vine cu o valoare minimă garantată de răscumpărare. Dacă decizi să ieși din joc, HyperTek îți va răscumpăra activele la un preț nu mai mic decât minimul garantat — protejând investiția ta în orice moment."
+      },
+      {
+        "q": "Cum pot începe să câștig recompense din lumea reală?",
+        "a": "Înregistrează-te, conectează-ți portofelul și începe să joci. Fiecare misiune finalizată, activ tranzacționat sau bătălie câștigată îți aduce monedă în joc care poate fi convertită în plăți reale. Progresul tău se transferă în toate cele trei jocuri."
+      },
+      {
+        "q": "Ce jocuri sunt disponibile?",
+        "a": "Trei jocuri împart universul HyperTek: Hyper Racing (bătălii de circuit de mare viteză), Hyper Quest (explorare, facțiuni și tehnologie antică) și Hyper Overlord (strategie, dominație și cucerire). Toate împart aceeași economie și progresie a jucătorului."
+      },
+      {
+        "q": "Este suportat VR/AR?",
+        "a": "Da. HyperTek îi susține pe jucătorii de VR și AR care pot participa la misiuni și bătălii epice în timp real alături de jucătorii standard. Ecosistemul este conceput să fie accesibil pe toate dispozitivele și platformele."
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "newsPage": {
+    "backToHome": "Terug naar startpagina",
+    "latestUpdates": "Laatste updates",
+    "heading": "Nieuws, updates & FAQ",
+    "latestBadge": "NIEUWSTE",
+    "readArticle": "Artikel lezen",
+    "read": "Lezen",
+    "allStories": "Alle verhalen",
+    "seeAll": "Zie alle verhalen ({{count}})",
+    "showLess": "Minder tonen",
+    "frequentlyAsked": "Veelgestelde vragen",
+    "faqLabel": "FAQ",
+    "loadingArticle": "Artikel laden…",
+    "backToNews": "Terug naar nieuws",
+    "home": "Home",
+    "news": "Nieuws",
+    "newsUpdates": "Nieuws & updates",
+    "allArticles": "Alle artikelen",
+    "copied": "Gekopieerd!",
+    "share": "Delen",
+    "faq": [
+      {
+        "q": "Wat is HyperTek?",
+        "a": "HyperTek is een play-to-earn-spelecosysteem dat zich afspeelt in het jaar 2117. Het bevat 3 onderling verbonden spellen — Hyper Racing, Hyper Quest en Hyper Overlord — die een gemeenschappelijke economie en progressiesysteem delen. Elke actie die je onderneemt draagt bij aan echte beloningen."
+      },
+      {
+        "q": "Wat zijn NFA's, NFC's en NFT's?",
+        "a": "NFA's (Non-Fungible Assets) zijn door HyperTek uitgegeven items in het spel met een door het platform gegarandeerde minimale terugkoopprijs. NFC's (Non-Fungible Characters) zijn gelicentieerde spelerspersonages met bonussen in het spel en terugkoopgaranties. NFT's zijn door gebruikers gemaakte verzamelobjecten — skins, wapens en cosmetica."
+      },
+      {
+        "q": "Hoe werkt de terugkoopgarantie?",
+        "a": "Elke NFA op HyperTek wordt geleverd met een gegarandeerde minimale terugkoopwaarde. Als je besluit het spel te verlaten, koopt HyperTek je activa terug voor niet minder dan de gegarandeerde minimumprijs — zodat je investering altijd beschermd is."
+      },
+      {
+        "q": "Hoe begin ik echte beloningen te verdienen?",
+        "a": "Meld je aan, verbind je portemonnee en begin te spelen. Elke voltooide missie, verhandeld activum of gewonnen gevecht levert je in-game valuta op die kan worden omgezet in uitbetalingen. Je voortgang loopt door in alle drie de spellen."
+      },
+      {
+        "q": "Welke spellen zijn beschikbaar?",
+        "a": "Drie spellen delen het HyperTek-universum: Hyper Racing (snelheidsbanen), Hyper Quest (verkenning, fracties en oude technologie) en Hyper Overlord (strategie, overheersing en verovering). Allemaal delen ze dezelfde economie en spelersprogressie."
+      },
+      {
+        "q": "Wordt VR/AR ondersteund?",
+        "a": "Ja. HyperTek ondersteunt VR- en AR-spelers die in realtime kunnen deelnemen aan missies en epische gevechten naast standaardspelers. Het ecosysteem is ontworpen om toegankelijk te zijn op alle apparaten en platforms."
+      }
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "aboutPage": {
+    "badge": "HYPER TEK-UNIVERSET",
+    "heroHeading": "OM OS",
+    "stats": [
+      { "v": "3", "l": "Gamingverdener" },
+      { "v": "NFA", "l": "Garanteret Min. Tilbagekøb" },
+      { "v": "P2E", "l": "Spil-for-at-Tjene" }
+    ],
+    "subtitle": [
+      "Hyper Tek-missionen var at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer, ved at skabe et sammenkoblet univers, hvor spillere ikke er begrænset til en enkelt gameplay-stil. Ved at kombinere flere genrer i ét progressionssystem giver Hyper Tek-projektet et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse inden for en samlet verden.",
+      "Det sætter sig for at give ægte ejerskab til digitale aktiver med reel værdi, som stiger over tid med et garanteret minimum tilbagekøb på alle Non-Fungible Artworks, og ægte spil-for-at-tjene-designede systemer inden for økosystemet, som spillere bidrager til.",
+      "Projektet sigter mod at styrke spillere ved at give dem meningsfuldt ejerskab over deres fremgang og belønninger, mens det fremmer kreativitet, samarbejde og konkurrence.",
+      "Hyper Teks langsigtede vision er at bygge et levende digitalt univers, hvor flere spil, økonomier og fællesskaber sameksisterer på en enkelt sammenkoblet platform."
+    ],
+    "section01": {
+      "label": "Vores Mission",
+      "heading1": "Omdefinering af Hvad",
+      "heading2": "Gaming Kan Vaere",
+      "paras": [
+        "Hyper Tek-projektet blev grundlagt af Don Bennett, som forestillede sig et gaming-miljø, hvor flere genrer kunne sameksistere inden for et enkelt progressionssystem. I stedet for at tvinge spillere til at forblive i ét gameplay-loop giver Hyper Tek dem mulighed for at udforske forskellige aktiviteter, mens de opbygger deres karakter, ressourcer og ry på tværs af hele økosystemet, med progression, materialer, belønninger og resultater der flyder problemfrit på tværs af alle spillene.",
+        "Projektet kombinerer tre store spilenvironments: Hyper Racing, Hyper Quest og Overlord of the Seven Realms. Hvert spil repræsenterer en forskellig spillestil, men alle opererer inden for det samme univers og deler den samme spillerøkonomi. Dette design giver spillere mulighed for at engagere sig i den type gameplay, de nyder mest, mens de stadig bidrager til et større økosystem for at skabe en ny generation af gaming-environments, der er dybere, mere fordybende og mere givende end traditionelle standalone-spil."
+      ]
+    },
+    "section02": {
+      "label": "Vision og Mission",
+      "vision": {
+        "label": "Vision",
+        "quote": "...at skabe en ny generation af gaming-environments, der er dybere, mere fordybende og mere givende end traditionelle standalone-spil...",
+        "paras": [
+          "Hyper Teks langsigtede vision er at bygge et levende digitalt univers, hvor flere spil, økonomier og fællesskaber sameksisterer inden for en sammenkoblet platform. I stedet for isolerede gaming-oplevelser sigter Hyper Tek mod at etablere et fælles økosystem, hvor spillernes handlinger påvirker verden omkring dem.",
+          "Ved at fusionere strategi, racing og eventyr i ét sammenhængende system søger Hyper Tek at skabe en ny generation af gaming-environments, der er dybere, mere fordybende og mere givende end traditionelle standalone-spil."
+        ]
+      },
+      "mission": {
+        "label": "Mission",
+        "quote": "...at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer...",
+        "paras": [
+          "Hyper Tek-missionen var at adressere flere problemer i spilindustrien og omdefinere, hvordan gaming-økosystemer fungerer, ved at skabe et sammenkoblet univers, hvor spillere ikke er begrænset til en enkelt gameplay-stil.",
+          "Ved at kombinere flere genrer i ét progressionssystem søger Hyper Tek at tilbyde et dynamisk miljø, hvor spillere kan udforske, konkurrere og vokse inden for en samlet verden. Det sætter sig for at give ægte ejerskab til digitale aktiver med reel værdi, som stiger over tid med et garanteret minimum tilbagekøb på alle NFA'er."
+        ]
+      }
+    },
+    "section03": {
+      "label": "Universet",
+      "heading": "Tre Verdener. En Økonomi.",
+      "subtitle": "Hvert spil er en indgang — distinkt i gameplay, forenet i økonomi og progression.",
+      "discover": "Opdag",
+      "tryUI": "Prøv Brugerfladen",
+      "games": [
+        { "name": "Hyper Racing", "tag": "Hastighed · Dominans", "desc": "Højhastighedsracing over fjendtligt terræn. Opgradér dit køretøj, byg dit crew og gør krav på territorium på tværs af galaksen." },
+        { "name": "Hyper Quest", "tag": "Udforsk · Handel", "desc": "Naviger planeter, gennemfør quests og handl ressourcer på tværs af et stadigt voksende stjernekort. Enhver levering former økonomien." },
+        { "name": "Overlord of the Seven Realms", "tag": "Strategi · Magt", "desc": "Kommander hære, smi alliancer og erobre riger. Den mest magtfulde Overlord kontrollerer hele universets skæbne." }
+      ]
+    },
+    "section04": {
+      "label": "Non-Fungible Digitale Kunstværker",
+      "heading": "Digital Kunst Med Garanteret Vaerdi",
+      "subtitle": "60-Sekunders Resumeet",
+      "quote": "Et Univers. Tre Spil. Garanteret Vaerdi. Fremtiden for Digitalt Ejerskab Starter med Hyper Tek.",
+      "cards": [
+        {
+          "title": "Hvad Er De?",
+          "intro": "Blockchain-tilknyttede digitale kunstværker i tre niveauer:",
+          "items": [
+            { "label": "NFA'er...", "desc": "Arkitektskabte, højeste spilinterne bonusser, ultrasjaeldne" },
+            { "label": "NFC'er...", "desc": "Samlerobjekter med spilinterne bonusser, kan skabes af spillere" },
+            { "label": "NFT'er...", "desc": "Fuldt spillerskabte, dekorér din base for magtbonusser" }
+          ]
+        },
+        {
+          "title": "Hvorfor De Holder Vaerdi",
+          "bullets": [
+            "Garanteret minimum tilbagekøb på hvert kunstværk",
+            "Tilbagekøb stiger ved hvert videresalg",
+            "Inflationsindekseret to gange om året",
+            "Din vaerdi vokser altid, falder aldrig"
+          ]
+        },
+        {
+          "title": "Fair af Design",
+          "body": "Op til 85% af markedspladsens kommission går til at øge tilbagekøbsvaerdier, betale kunstnerroyalties og finansiere quests. Spillere kan reducere gebyrer ved at skabe quests, der betaler andre for at deltage, hvilket driver social interaktion på alle niveauer. Dette er unikt for Hyper Tek."
+        },
+        {
+          "title": "Kom Med Nu",
+          "body": "Vi crowdfunder for at bygge Hyper Racing, Hyper Quest og Overlord of the 7 Realms. Hvert kunstvaerk du køber eller skaber finansierer direkte udviklingen. Ej kunst, der er garanteret at holde og vokse i vaerdi, mens du hjælper med at bygge fremtiden for gaming.",
+          "link": "[www.hypertek.com] — Gennemse. Køb. Skab. Ej Fremtiden."
+        }
+      ]
+    },
+    "section05": {
+      "label": "Crowdfunding — Hjælp med at Bygge Fremtiden",
+      "heading": "Din Støtte Driver Hyper Tek-Universet",
+      "subtitle": "Hvert købt kunstvaerk finansierer direkte tre sammenkoblede spil. Her er hvad vi bygger sammen.",
+      "phaseLabel": "Fase",
+      "crowdfundingNow": "Crowdfunder Nu",
+      "phases": [
+        { "name": "Grundlag", "desc": "Hjemmeside live • Brugerflade bygget • Markedsplads i drift • NFA/NFC/NFT-system designet • Garanteret tilbagekøbsramme på plads" },
+        { "name": "Crowdfunder Nu", "desc": "NFA/NFC/NFT-kunstvaerksalg live • Spillerskabte NFT'er aktiveret • Kommissionsdeling aktiv • Fællesskabsopbygning • Midler strømmer ind i spiludvikling" },
+        { "name": "Alpha-lancering", "desc": "Hyper Racing alfa • Første spillbare spilenvironment • NFA-integration i spillet • Eksklusive belønninger for tidlige støttere • Live markedspladshandel" },
+        { "name": "Økoystem-udvidelse", "desc": "Hyper Quest alfa • Progression på tvaers af spil live • Hyper Bucks-valutaintegration • Udvidede NFA-samlinger • Virkelige kontantpræmiebegivenheder" },
+        { "name": "Overlord-lancering", "desc": "Overlord of the 7 Realms alfa • Treeniveau kampsystem • Battle Ring-adgang • VR-integration • Fuld trespils forenet økonomi" },
+        { "name": "Fuld Udgivelse", "desc": "Alle tre spil fuldt live • Komplet NFA-økosystem • Fuld VR på tvaers af alle titler • Globale turneringer • Det sammenkoblede univers realiseret" }
+      ],
+      "helpHeading": "Hvordan DU Kan Hjælpe Lige Nu",
+      "helpItems": [
+        { "bold": "Køb et NFA, NFC eller NFT", "text": "— ej digital kunst med garanteret vaerdi, der finansierer spiludvikling" },
+        { "bold": "Skab dit eget NFT", "text": "— bliv skaber på markedspladsen og tjen ved hvert videresalg" },
+        { "bold": "Del og spred budskabet", "text": "— enhver ny støtte accelererer rejsen mod lancering" }
+      ],
+      "link": "[www.hypertek.com] — Støt Projektet. Ej Fremtiden."
+    },
+    "section06": {
+      "label": "Web3-gaming og Konkurrencefordel",
+      "heading": "HYPER TEK, EN WEB3-GAMING-LØSNING OG DE VIGTIGSTE FORDELE",
+      "subtitle": "Brobygger mellem fordybende gaming, en drevet digital markedsplads, belønner spillere og investorer alike.",
+      "cards": [
+        {
+          "label": "Håndgribelige Belønninger og Ivaerksetteri",
+          "bullets": [
+            "Ægte NFA-ejerskab med garanteret minimum tilbagekøb",
+            "Indtægtsdeling gennem spillerstyret digital økonomi",
+            "Reel-verdi med udviklende spilinterne aktivpriser",
+            "Ægte spil-for-at-tjene-mekanikker"
+          ]
+        },
+        {
+          "label": "Udbetalingsøkosystem",
+          "body": "Konvertér problemfrit spilinterne indtjeninger til virkelige valutaer; dit digitale arbejde har håndgribelig, hævbar vaerdi."
+        },
+        {
+          "label": "Uendelig Gameplay på Tvaers af Sammenkoblede Verdener",
+          "bullets": [
+            "Tre unikke spillegenrer inden for ét forenet univers",
+            "Delt progression, belønninger og resultater på tvaers af alle spil",
+            "Et levende økosystem, hvor hvert valg påvirker hele universet",
+            "VR/AR-spillere kan deltage i missioner og episke slag i realtid"
+          ]
+        }
+      ]
+    },
+    "closing": {
+      "body": "Investorer, partnere og innovatorer, der tror på fremtiden for sammenkoblede gaming-økosystemer, inviteres til at udforske projektet og deltage i rejsen, mens Hyper Tek fortsætter med at bygge naeste generation af digitale verdener.",
+      "exploreMarketplace": "Udforsk Markedsplads",
+      "viewGames": "Se Spil"
+    }
+  }
+}
