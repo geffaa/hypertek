@@ -9,7 +9,7 @@ import GlowingOrb from "../Components/Common/BgColoring";
 export default function NewsDetail() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [newsItem, setNewsItem] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -22,7 +22,7 @@ export default function NewsDetail() {
   }, [location.state, navigate]);
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString(i18n.language || "en", {
       year: "numeric", month: "long", day: "numeric",
     });
   };

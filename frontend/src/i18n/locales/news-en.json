@@ -17,8 +17,10 @@
     "news": "News",
     "newsUpdates": "News & Updates",
     "allArticles": "All Articles",
-    "copied": "Copied!",
-    "share": "Share",
+    "copied":     "Copied!",
+    "share":      "Share",
+    "gameVideos": "Game Videos",
+    "close":      "Close",
     "faq": [
       {
         "q": "What is HyperTek?",

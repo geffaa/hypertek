@@ -44,6 +44,8 @@
         "q": "Stöds VR/AR?",
         "a": "Ja. HyperTek stöder VR- och AR-spelare som kan delta i uppdrag och episka bataljer i realtid tillsammans med vanliga spelare. Ekosystemet är utformat för att vara tillgängligt på alla enheter och plattformar."
       }
-    ]
+    ],
+    "gameVideos": "Spelvideor",
+    "close": "Stäng"
   }
 }

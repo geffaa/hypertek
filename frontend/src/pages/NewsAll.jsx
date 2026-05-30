@@ -22,6 +22,7 @@ const VIDEO_ITEMS = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 function VideoModal({ item, onClose }) {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ function VideoModal({ item, onClose }) {
           onMouseEnter={e => { e.currentTarget.style.background = "rgba(0,0,0,0.9)"; e.currentTarget.style.color = "#fff"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "rgba(0,0,0,0.65)"; e.currentTarget.style.color = "rgba(255,255,255,0.75)"; }}
         >
-          <X style={{ width: 14, height: 14 }} /> Close
+          <X style={{ width: 14, height: 14 }} /> {t("newsPage.close", "Close")}
         </button>
         <video
           src={item.src} autoPlay controls playsInline
@@ -95,6 +96,7 @@ function VideoModal({ item, onClose }) {
 }
 
 function VideoCarousel() {
+  const { t } = useTranslation();
   const [active, setActive] = useState(0);
   const [modalItem, setModal] = useState(null);
   const [paused, setPaused]   = useState(false);
@@ -175,7 +177,7 @@ function VideoCarousel() {
           <div className="flex items-center gap-4">
             <div className="w-5 h-[2px]" style={{ background: "#38bdf8" }} />
             <span className="text-white/40 text-xs uppercase tracking-[0.3em]" style={{ fontFamily: "Orbitron, sans-serif" }}>
-              Game Videos
+              {t("newsPage.gameVideos", "Game Videos")}
             </span>
             <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
             {total > 1 && (
@@ -336,15 +338,15 @@ const fadeUp = {
   }),
 };
 
-function formatDate(str) {
-  return new Date(str).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+function formatDate(str, lang) {
+  return new Date(str).toLocaleDateString(lang || "en", { year: "numeric", month: "short", day: "numeric" });
 }
 
 function clip(str, n) {
   return str?.length > n ? str.slice(0, n) + "…" : (str || "");
 }
 
-function NewsCard({ item, i, go, readLabel }) {
+function NewsCard({ item, i, go, readLabel, lang }) {
   return (
     <motion.div
       className="group cursor-pointer rounded-xl overflow-hidden flex flex-col"
@@ -363,7 +365,7 @@ function NewsCard({ item, i, go, readLabel }) {
       </div>
       <div className="flex flex-col flex-1 p-5 gap-2">
         <span className="text-[10px] uppercase tracking-widest" style={{ color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
-          {formatDate(item.createdAt)}
+          {formatDate(item.createdAt, lang)}
         </span>
         <h3 className="font-[Goldman] font-bold text-white text-[15px] leading-snug group-hover:text-[#38bdf8] transition-colors duration-300">
           {clip(item.heading, 65)}
@@ -385,16 +387,17 @@ export default function NewsList() {
   const [activeFaq, setFaq]   = useState(0);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const faqItems = t("newsPage.faq", { returnObjects: true }) || [];
 
   useEffect(() => {
-    fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews`)
+    const lang = i18n.language || "en";
+    fetch(`${BACKEND_BASE_URL}/api/v1/news/getNews?lang=${lang}`)
       .then(r => r.json())
       .then(d => { if (d.success) setNews(d.data); })
       .catch(console.error);
-  }, []);
+  }, [i18n.language]);
 
   const go = (item) => navigate("/more-news", { state: { newsItem: item } });
 
@@ -466,7 +469,7 @@ export default function NewsList() {
                   style={{ background: "rgba(56,189,248,0.15)", border: "1px solid rgba(56,189,248,0.5)", color: "#38bdf8", fontFamily: "Orbitron, sans-serif" }}>
                   {t("newsPage.latestBadge")}
                 </span>
-                <span className="text-white/40 text-xs">{formatDate(featured.createdAt)}</span>
+                <span className="text-white/40 text-xs">{formatDate(featured.createdAt, i18n.language)}</span>
               </div>
               <h2 className="font-[Goldman] font-bold text-2xl md:text-3xl xl:text-4xl text-white leading-tight mb-3 max-w-3xl group-hover:text-[#38bdf8] transition-colors duration-300">
                 {featured.heading}
@@ -499,7 +502,7 @@ export default function NewsList() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {newsCards.map((item, i) => (
-                <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} />
+                <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} lang={i18n.language} />
               ))}
             </div>
 
@@ -511,7 +514,7 @@ export default function NewsList() {
                 transition={{ duration: 0.45 }}
               >
                 {extraNews.map((item, i) => (
-                  <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} />
+                  <NewsCard key={item._id} item={item} i={i} go={go} readLabel={t("newsPage.read")} lang={i18n.language} />
                 ))}
               </motion.div>
             )}

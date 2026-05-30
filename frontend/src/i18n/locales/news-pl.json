@@ -44,6 +44,8 @@
         "q": "Czy VR/AR jest obsługiwane?",
         "a": "Tak. HyperTek obsługuje graczy VR i AR, którzy mogą dołączać do misji i epickich bitew w czasie rzeczywistym razem ze standardowymi graczami. Ekosystem został zaprojektowany tak, aby był dostępny na wszystkich urządzeniach i platformach."
       }
-    ]
+    ],
+    "gameVideos": "Filmy z gier",
+    "close": "Zamknij"
   }
 }

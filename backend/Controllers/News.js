@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import News from "../Models/News.js";
 import { cloudinary as getCloudinary, isCloudinaryEnabled as getIsCloudinaryEnabled } from "../Config/cloudinary.js";
+import { translateNewsContent, getLocalizedNews } from "../utils/translateContent.js";
 
 // Helper: upload file to Cloudinary and delete temp file
 async function uploadToCloudinary(filePath) {
@@ -73,17 +74,41 @@ export const createNews = async (req, res) => {
       message: "News created successfully",
       data: news,
     });
+
+    // Auto-translate in background — don't block the response
+    translateNewsContent(heading, description)
+      .then((translations) => {
+        news.translations = translations;
+        return news.save();
+      })
+      .catch((err) => console.error("[News] Auto-translate failed:", err.message));
+
   } catch (error) {
     console.log("Create News Error:", error);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
-// GET ONLY ACTIVE NEWS (FOR WEBSITE)
+// GET ONLY ACTIVE NEWS (FOR WEBSITE) — supports ?lang=ko
 export const getAllNews = async (req, res) => {
   try {
+    const lang = req.query.lang || "en";
     const news = await News.find({ status: "active" }).sort({ createdAt: -1 });
-    res.status(200).json({ success: true, data: news });
+
+    const data = news.map((item) => {
+      const localized = getLocalizedNews(item, lang);
+      return {
+        _id:         item._id,
+        heading:     localized.heading,
+        description: localized.description,
+        image:       item.image,
+        status:      item.status,
+        createdAt:   item.createdAt,
+        updatedAt:   item.updatedAt,
+      };
+    });
+
+    res.status(200).json({ success: true, data });
   } catch (error) {
     res.status(500).json({ success: false });
   }
@@ -140,6 +165,7 @@ export const editNews = async (req, res) => {
       }
     }
 
+    const contentChanged = (heading && heading !== news.heading) || (description && description !== news.description);
     if (heading) news.heading = heading;
     if (description) news.description = description;
 
@@ -150,6 +176,17 @@ export const editNews = async (req, res) => {
       message: "News updated successfully",
       data: news,
     });
+
+    // Re-translate in background if content changed
+    if (contentChanged) {
+      translateNewsContent(news.heading, news.description)
+        .then((translations) => {
+          news.translations = translations;
+          return news.save();
+        })
+        .catch((err) => console.error("[News] Re-translate failed:", err.message));
+    }
+
   } catch (error) {
     console.error("Edit News Error:", error?.message || error);
     if (req.file?.path) fs.unlink(req.file.path, () => { });

@@ -44,6 +44,8 @@
         "q": "La VR/AR est-elle prise en charge ?",
         "a": "Oui. HyperTek prend en charge les joueurs VR et AR qui peuvent rejoindre des missions et des batailles épiques en temps réel aux côtés des joueurs standard. L'écosystème est conçu pour être accessible sur tous les appareils et plateformes."
       }
-    ]
+    ],
+    "gameVideos": "Vidéos du jeu",
+    "close": "Fermer"
   }
 }

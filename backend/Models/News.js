@@ -20,7 +20,17 @@ const newsSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["active", "inactive"],
-      default: "active", // BY DEFAULT ACTIVE
+      default: "active",
+    },
+
+    // Auto-translated versions keyed by locale code (e.g. "ko", "id", "ja")
+    translations: {
+      type: Map,
+      of: new mongoose.Schema({
+        heading:     { type: String },
+        description: { type: String },
+      }, { _id: false }),
+      default: {},
     },
   },
   { timestamps: true }
