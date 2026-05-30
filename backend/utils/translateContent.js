@@ -64,8 +64,11 @@ export function getLocalizedNews(newsDoc, lang) {
     return { heading: newsDoc.heading, description: newsDoc.description };
   }
 
-  const translations = newsDoc.translations || {};
-  const trans = translations[lang];
+  // Mongoose Map type requires .get(), plain object fallback uses bracket notation
+  const translations = newsDoc.translations;
+  const trans = translations?.get
+    ? translations.get(lang)
+    : translations?.[lang];
 
   if (trans?.heading && trans?.description) {
     return { heading: trans.heading, description: trans.description };
