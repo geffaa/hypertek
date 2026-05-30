@@ -3,378 +3,701 @@
     "sectionLabel": "Mercado",
     "searchPlaceholder": "Buscar...",
     "tabs": {
-      "overview":  "Visión general",
-      "nfa101":    "NFAs / NFCs / NFTs",
-      "general":   "El Mercado",
-      "auctions":  "Subastas",
-      "trades":    "Intercambios",
-      "quests":    "Misiones",
-      "hire":      "Se Busca",
-      "bounty":    "Recompensas"
+      "overview": "Visión general",
+      "nfa101": "NFAs / NFCs / NFTs",
+      "general": "El Mercado",
+      "auctions": "Subastas",
+      "trades": "Intercambios",
+      "quests": "Misiones",
+      "hire": "Se Busca",
+      "bounty": "Recompensas"
     },
     "banner": {
       "defaultHeading": "Una Nueva Era Amanece en Hyper Tek",
-      "defaultDesc": "Es el comienzo de un universo vivo y respirante donde cada decisión moldea el camino.",
+      "defaultDesc": "Es el comienzo de un universo vivo y respirable donde cada decisión da forma al viaje. Ya sea que estés corriendo a la velocidad de la luz, forjando alianzas en Overlord Realm o descubriendo secretos en HyperQuest, esta es tu oportunidad de dejar tu huella en la historia.",
       "stats": {
-        "totalItems":  "Total de Artículos",
-        "totalBuys":   "Total de Compras",
-        "listed":      "Listados",
+        "totalItems": "Total de Artículos",
+        "totalBuys": "Total de Compras",
+        "listed": "Listados",
         "collections": "Colecciones"
       },
-      "soundOn":  "Sonido Activado",
+      "soundOn": "Sonido Activado",
       "soundOff": "Sonido Desactivado"
     },
     "bottomBar": {
-      "learnLabel":     "Aprende sobre NFAs / NFCs",
+      "learnLabel": "Aprende sobre NFAs / NFCs",
       "educationPanel": "Panel Educativo de HyperTek",
-      "footerNote":     "Este panel es para referencia rápida. Visita la pestaña NFAs / NFCs 101 para contenido educativo completo.",
+      "footerNote": "Este panel es para referencia rápida. Visita la pestaña NFAs / NFCs 101 para contenido educativo completo.",
       "facts": [
-        { "label": "NFA",        "desc": "Activo exclusivo de Hypertek. Mayores bonificaciones en el juego. Valor mínimo de recompra garantizado que crece con cada venta." },
-        { "label": "NFC",        "desc": "Creado por Hypertek o jugadores licenciados. Bonificaciones en el juego incluidas. Recompra mínima garantizada." },
-        { "label": "NFT",        "desc": "Coleccionable creado por jugadores. Sin bonificaciones en el juego. Sin garantía de recompra. Comercializable en el mercado." },
-        { "label": "Comisión",   "desc": "20% de tarifa de plataforma en todas las ventas. El vendedor recibe el 80%. Regalía del artista 4% en reventas." },
-        { "label": "Crecimiento de Recompra", "desc": "+5% de cada precio de reventa se suma al valor mínimo de recompra del activo. Solo puede crecer." },
-        { "label": "Cartera Custodial", "desc": "HyperTek crea automáticamente una cartera cripto para ti al registrarte." }
+        {
+          "label": "NFA",
+          "desc": "Activo exclusivo de Hypertek. Mayores bonificaciones en el juego. Valor mínimo de recompra garantizado que crece con cada venta."
+        },
+        {
+          "label": "NFC",
+          "desc": "Creado por Hypertek o jugadores licenciados. Bonificaciones en el juego incluidas. Recompra mínima garantizada."
+        },
+        {
+          "label": "NFT",
+          "desc": "Coleccionable creado por jugadores. Sin bonificaciones en el juego. Sin garantía de recompra. Comercializable en el mercado."
+        },
+        {
+          "label": "Comisión",
+          "desc": "20% de tarifa de plataforma en todas las ventas. El vendedor recibe el 80%. Regalía del artista 4% en reventas."
+        },
+        {
+          "label": "Crecimiento de Recompra",
+          "desc": "+5% de cada precio de reventa se suma al valor mínimo de recompra del activo. Solo puede crecer."
+        },
+        {
+          "label": "Cartera Custodial",
+          "desc": "HyperTek crea automáticamente una cartera cripto para ti al registrarte."
+        }
       ]
     },
     "overview": {
-      "heading":  "Visión General",
+      "heading": "Visión General",
       "subtitle": "Bienvenido al Mercado HyperTek. Selecciona una función para aprender más — luego sumérgete directamente.",
       "features": [
-        { "label": "NFAs / NFCs / NFTs", "tagline": "¿Nuevo en los activos Web3? Empieza aquí", "details": ["Los NFAs (Activos No Fungibles) son artículos emitidos por Hypertek con un precio de recompra garantizado por la plataforma.", "Los NFCs (Personajes No Fungibles) son artículos de jugadores licenciados con bonificaciones en el juego y recompra.", "Los NFTs (Tokens No Fungibles) son coleccionables creados por usuarios — skins, armas y más."], "cta": "Aprende lo Básico" },
-        { "label": "El Mercado", "tagline": "Compra y vende activos del juego al instante", "details": ["Navega por un amplio catálogo de NFAs, NFCs y NFTs — skins, armas, especialistas, naves espaciales y más.", "Filtra por categoría, rareza o rango de precios para encontrar exactamente lo que necesitas.", "Los listados se cumplen en la cadena, por lo que las transferencias de propiedad son instantáneas y verificables."], "cta": "Explorar el Mercado" },
-        { "label": "Subastas", "tagline": "Compite por artículos exclusivos de edición limitada", "details": ["Puja por activos raros que solo están disponibles a través de subastas de tiempo limitado.", "Una cuenta regresiva en vivo muestra exactamente cuánto tiempo queda — cada segundo cuenta.", "Supera las ofertas de otros para asegurar artículos legendarios que no se pueden comprar de otra manera."], "cta": "Ver Subastas" },
-        { "label": "Intercambios", "tagline": "Intercambia activos entre pares, sin intermediarios", "details": ["Propón o acepta intercambios directos de activos con otros jugadores — totalmente en cadena.", "Establece los términos tú mismo: elige lo que ofreces y lo que quieres a cambio.", "Navega por ofertas de intercambio abiertas o publica las tuyas para encontrar el trato perfecto."], "cta": "Explorar Intercambios" },
-        { "label": "Misiones", "tagline": "Completa misiones, gana recompensas exclusivas", "details": ["Acepta misiones para ganar recompensas exclusivas y activos raros del juego.", "Cada misión tiene objetivos únicos — explora, batalla o construye tu camino hacia la victoria.", "Construye tu colección estratégicamente a través de habilidad, no solo gastando."], "cta": "Explorar Misiones" },
-        { "label": "Se Busca", "tagline": "Toma prestado activos o gana con los tuyos", "details": ["Alquila especialistas o equipo poderoso para una sola misión sin comprar directamente.", "Lista tus propios activos inactivos para alquiler y gana ingresos pasivos mientras estás fuera.", "Duraciones flexibles — acuerdos por hora, día o por misión."], "cta": "Ver Se Busca" },
-        { "label": "Recompensas", "tagline": "Caza objetivos, reclama recompensas, lidera el marcador", "details": ["Acepta recompensas publicadas por otros jugadores o el sistema para ganar recompensas cripto.", "Escala la tabla de recompensas para desbloquear títulos exclusivos y pagos de bonificación.", "Publica tus propias recompensas para reclutar jugadores habilidosos para tus objetivos."], "cta": "Ver Recompensas" }
+        {
+          "label": "NFAs / NFCs / NFTs",
+          "tagline": "¿Nuevo en los activos Web3? Empieza aquí",
+          "details": [
+            "Los NFAs (Activos No Fungibles) son artículos emitidos por Hypertek con un precio de recompra garantizado por la plataforma.",
+            "Los NFCs (Personajes No Fungibles) son artículos de jugadores licenciados con bonificaciones en el juego y recompra.",
+            "Los NFTs (Tokens No Fungibles) son coleccionables creados por usuarios — skins, armas y más."
+          ],
+          "cta": "Aprende lo Básico"
+        },
+        {
+          "label": "El Mercado",
+          "tagline": "Compra y vende activos del juego al instante",
+          "details": [
+            "Navega por un amplio catálogo de NFAs, NFCs y NFTs — skins, armas, especialistas, naves espaciales y más.",
+            "Filtra por categoría, rareza o rango de precios para encontrar exactamente lo que necesitas.",
+            "Los listados se cumplen en la cadena, por lo que las transferencias de propiedad son instantáneas y verificables."
+          ],
+          "cta": "Explorar el Mercado"
+        },
+        {
+          "label": "Subastas",
+          "tagline": "Compite por artículos exclusivos de edición limitada",
+          "details": [
+            "Puja por activos raros que solo están disponibles a través de subastas de tiempo limitado.",
+            "Una cuenta regresiva en vivo muestra exactamente cuánto tiempo queda — cada segundo cuenta.",
+            "Supera las ofertas de otros para asegurar artículos legendarios que no se pueden comprar de otra manera."
+          ],
+          "cta": "Ver Subastas"
+        },
+        {
+          "label": "Intercambios",
+          "tagline": "Intercambia activos entre pares, sin intermediarios",
+          "details": [
+            "Propón o acepta intercambios directos de activos con otros jugadores — totalmente en cadena.",
+            "Establece los términos tú mismo: elige lo que ofreces y lo que quieres a cambio.",
+            "Navega por ofertas de intercambio abiertas o publica las tuyas para encontrar el trato perfecto."
+          ],
+          "cta": "Explorar Intercambios"
+        },
+        {
+          "label": "Misiones",
+          "tagline": "Completa misiones, gana recompensas exclusivas",
+          "details": [
+            "Acepta misiones para ganar recompensas exclusivas y activos raros del juego.",
+            "Cada misión tiene objetivos únicos — explora, batalla o construye tu camino hacia la victoria.",
+            "Construye tu colección estratégicamente a través de habilidad, no solo gastando."
+          ],
+          "cta": "Explorar Misiones"
+        },
+        {
+          "label": "Se Busca",
+          "tagline": "Toma prestado activos o gana con los tuyos",
+          "details": [
+            "Alquila especialistas o equipo poderoso para una sola misión sin comprar directamente.",
+            "Lista tus propios activos inactivos para alquiler y gana ingresos pasivos mientras estás fuera.",
+            "Duraciones flexibles — acuerdos por hora, día o por misión."
+          ],
+          "cta": "Ver Se Busca"
+        },
+        {
+          "label": "Recompensas",
+          "tagline": "Caza objetivos, reclama recompensas, lidera el marcador",
+          "details": [
+            "Acepta recompensas publicadas por otros jugadores o el sistema para ganar recompensas cripto.",
+            "Escala la tabla de recompensas para desbloquear títulos exclusivos y pagos de bonificación.",
+            "Publica tus propias recompensas para reclutar jugadores habilidosos para tus objetivos."
+          ],
+          "cta": "Ver Recompensas"
+        }
       ]
     },
     "general": {
-      "heading":  "General",
+      "heading": "General",
       "subtitle": "Explora NFAs, NFCs y NFTs disponibles para compra inmediata — skins, armas, especialistas, naves espaciales y más.",
       "filterAll": "Todo",
       "samplePreviewTitle": "Vista Previa de Muestra del Mercado",
       "samplePreviewDesc": "Los artículos a continuación son vistas previas de muestra que muestran los tipos de activos digitales que estarán disponibles en el mercado HyperTek. Los artículos reales con obras de arte únicas y propiedad verificada en blockchain estarán disponibles en el lanzamiento.",
       "noItems": "No hay artículos disponibles todavía. Vuelve pronto.",
       "categories": {
-        "skins":           "Skins",
-        "militaryBadges":  "Insignias Militares",
-        "specialists":     "Especialistas",
-        "weapons":         "Armas",
-        "bodyArmour":      "Armadura Corporal",
-        "spaceships":      "Naves Espaciales",
-        "racingVehicles":  "Vehículos",
-        "artwork":         "Arte",
-        "landAndBases":    "Tierra y Bases",
-        "general":         "General"
-      }
+        "skins": "Skins",
+        "militaryBadges": "Insignias Militares",
+        "specialists": "Especialistas",
+        "weapons": "Armas",
+        "bodyArmour": "Armadura Corporal",
+        "spaceships": "Naves Espaciales",
+        "racingVehicles": "Vehículos",
+        "artwork": "Arte",
+        "landAndBases": "Tierra y Bases",
+        "general": "General"
+      },
+      "search": "Buscar...",
+      "filter": "Filtrar",
+      "showAll": "Mostrar todo",
+      "filterSort": "Filtrar y ordenar",
+      "sortBy": "Ordenar por",
+      "sort": {
+        "default": "Predeterminado",
+        "priceAsc": "Precio: de menor a mayor",
+        "priceDesc": "Precio: de mayor a menor",
+        "nameAsc": "Nombre: de A a Z",
+        "nameDesc": "Nombre: Z a A"
+      },
+      "priceRange": "Rango de precios (USDC)",
+      "min": "Mínimo",
+      "max": "Máximo",
+      "apply": "Aplicar",
+      "clearAll": "Borrar todos los filtros",
+      "noResults": "No se encontraron resultados",
+      "dummyContent": "Contenido ficticio",
+      "preview": "Vista previa",
+      "buyNow": "Comprar ahora",
+      "viewDetails": "Ver detalles"
     },
     "nfa101": {
       "sectionLabel": "Educación",
-      "heading":      "NFAs / NFCs / NFTs 101",
-      "subtitle":     "¿Nuevo en NFTs y Web3? Explora nuestros artículos para entender los activos blockchain, carteras, seguridad y el ecosistema HyperTek.",
-      "minRead":      "min de lectura",
-      "filterAll":    "Todo"
+      "heading": "NFAs / NFCs / NFTs 101",
+      "subtitle": "¿Nuevo en NFTs y Web3? Explora nuestros artículos para entender los activos blockchain, carteras, seguridad y el ecosistema HyperTek.",
+      "minRead": "min de lectura",
+      "filterAll": "Todo"
     },
     "auctions": {
-      "heading":     "Subastas",
-      "listings":    "listados",
-      "newAuction":  "Nueva Subasta",
-      "noAuctions":  "No hay subastas {{filter}}",
+      "heading": "Subastas",
+      "listings": "listados",
+      "newAuction": "Nueva Subasta",
+      "noAuctions": "No hay subastas {{filter}}",
       "createFirst": "Crea la primera subasta",
-      "endingSoon":  "TERMINANDO PRONTO",
+      "endingSoon": "TERMINANDO PRONTO",
       "viewDetails": "Ver Detalles",
       "rules": {
-        "durations":    "Duraciones: 1d · 3d · 7d",
+        "durations": "Duraciones: 1d · 3d · 7d",
         "minIncrement": "Incremento mínimo: 5%",
-        "freeToList":   "Listar es gratis",
-        "commission":   "Comisión: 20% en venta"
+        "freeToList": "Listar es gratis",
+        "commission": "Comisión: 20% en venta"
       },
       "preview": {
         "title": "Vista Previa de Función en el Juego",
-        "desc":  "El sistema de subastas estará completamente disponible en el juego al lanzamiento. Los artículos mostrados aquí son muestras para inversores/usuarios."
+        "desc": "El sistema de subastas estará completamente disponible en el juego al lanzamiento. Los artículos mostrados aquí son muestras para inversores/usuarios."
       },
       "card": {
         "currentBid": "Oferta actual",
-        "endsIn":     "Termina en",
-        "placeBid":   "Hacer Oferta",
-        "buyNow":     "Comprar Ahora",
-        "bids":       "oferta(s)",
-        "ended":      "TERMINADO"
+        "endsIn": "Termina en",
+        "placeBid": "Hacer Oferta",
+        "buyNow": "Comprar Ahora",
+        "bids": "oferta(s)",
+        "ended": "TERMINADO"
       },
       "detail": {
-        "currentBid":  "Oferta actual",
-        "start":       "Inicio",
-        "endsIn":      "Termina en",
+        "currentBid": "Oferta actual",
+        "start": "Inicio",
+        "endsIn": "Termina en",
         "description": "Descripción",
-        "recentBids":  "Ofertas Recientes",
-        "anonymous":   "Anónimo",
-        "placeBid":    "Hacer Oferta",
-        "buyNow":      "Comprar Ahora",
+        "recentBids": "Ofertas Recientes",
+        "anonymous": "Anónimo",
+        "placeBid": "Hacer Oferta",
+        "buyNow": "Comprar Ahora",
         "buyNowLabel": "Comprar Ahora",
-        "bids":        "oferta(s)"
+        "bids": "oferta(s)"
       },
       "bidModal": {
-        "title":        "Hacer una Oferta",
-        "currentBid":   "Oferta actual",
-        "minimumBid":   "Oferta mínima",
-        "yourBid":      "Tu oferta (USDC)",
+        "title": "Hacer una Oferta",
+        "currentBid": "Oferta actual",
+        "minimumBid": "Oferta mínima",
+        "yourBid": "Tu oferta (USDC)",
         "minIncrement": "Incremento mínimo 5% · Próximo mínimo después de tu oferta: {{next}} USDC",
-        "reviewBid":    "Revisar Oferta",
-        "disclaimer":   "La oferta ganadora es vinculante · 20% de comisión de plataforma",
+        "reviewBid": "Revisar Oferta",
+        "disclaimer": "La oferta ganadora es vinculante · 20% de comisión de plataforma",
         "confirmTitle": "Confirmar Oferta",
-        "item":         "Artículo",
+        "item": "Artículo",
         "yourBidLabel": "Tu oferta",
-        "youPay":       "Si ganas, pagas",
+        "youPay": "Si ganas, pagas",
         "outbidNotice": "Serás notificado inmediatamente si alguien supera tu oferta. La subasta se cierra automáticamente cuando expira el temporizador.",
-        "back":         "Atrás",
-        "confirm":      "Confirmar — {{amount}} USDC",
-        "placing":      "Procesando…",
+        "back": "Atrás",
+        "confirm": "Confirmar — {{amount}} USDC",
+        "placing": "Procesando…",
         "successTitle": "¡Oferta Realizada!",
-        "highestBidder":"Eres el mejor postor",
-        "outbidWarning":"Recibirás una notificación si te superan.",
-        "done":         "Listo",
-        "endsIn":       "Termina en"
+        "highestBidder": "Eres el mejor postor",
+        "outbidWarning": "Recibirás una notificación si te superan.",
+        "done": "Listo",
+        "endsIn": "Termina en"
       },
       "instantBuyModal": {
-        "title":        "Comprar Ahora — Instantáneo",
-        "buyNowPrice":  "Precio de compra ahora",
-        "currentBids":  "Ofertas actuales",
-        "notice":       "Comprar ahora cierra la subasta inmediatamente. El artículo se transfiere a tu cartera y todos los demás postores reciben un reembolso.",
-        "cancel":       "Cancelar",
-        "processing":   "Procesando…",
+        "title": "Comprar Ahora — Instantáneo",
+        "buyNowPrice": "Precio de compra ahora",
+        "currentBids": "Ofertas actuales",
+        "notice": "Comprar ahora cierra la subasta inmediatamente. El artículo se transfiere a tu cartera y todos los demás postores reciben un reembolso.",
+        "cancel": "Cancelar",
+        "processing": "Procesando…",
         "successTitle": "¡Artículo Asegurado!",
-        "auctionClosed":"Subasta cerrada · Transferencia iniciada",
-        "item":         "Artículo",
-        "paid":         "Pagado",
-        "status":       "Estado",
-        "transferred":  "Transferido a la cartera",
-        "walletNote":   "El artículo aparecerá en tu pestaña Mis Colecciones.",
-        "viewCollect":  "Ver Mis Colecciones"
+        "auctionClosed": "Subasta cerrada · Transferencia iniciada",
+        "item": "Artículo",
+        "paid": "Pagado",
+        "status": "Estado",
+        "transferred": "Transferido a la cartera",
+        "walletNote": "El artículo aparecerá en tu pestaña Mis Colecciones.",
+        "viewCollect": "Ver Mis Colecciones"
       },
       "createModal": {
-        "title":           "Crear Subasta",
-        "selectItem":      "Seleccionar Artículo",
-        "connectWallet":   "Conecta tu cartera para explorar tus artículos",
-        "loadingItems":    "Cargando…",
-        "noItems":         "No se encontraron artículos de tu propiedad",
+        "title": "Crear Subasta",
+        "selectItem": "Seleccionar Artículo",
+        "connectWallet": "Conecta tu cartera para explorar tus artículos",
+        "loadingItems": "Cargando…",
+        "noItems": "No se encontraron artículos de tu propiedad",
         "pricingDuration": "Precio y Duración",
-        "startPrice":      "Precio Inicial (USDC) *",
-        "reservePrice":    "Precio de Reserva (USDC)",
+        "startPrice": "Precio Inicial (USDC) *",
+        "reservePrice": "Precio de Reserva (USDC)",
         "instantBuyPrice": "Precio de Compra Instantánea (USDC)",
-        "optional":        "Opcional",
-        "leaveBlank":      "Dejar en blanco para desactivar",
-        "duration":        "Duración",
-        "dur1Day":         "1 Día",
-        "dur3Days":        "3 Días",
-        "dur7Days":        "7 Días",
-        "freeToList":      "Listar es gratis · 20% de comisión en venta",
-        "creating":        "Creando…",
-        "submit":          "Crear Subasta"
+        "optional": "Opcional",
+        "leaveBlank": "Dejar en blanco para desactivar",
+        "duration": "Duración",
+        "dur1Day": "1 Día",
+        "dur3Days": "3 Días",
+        "dur7Days": "7 Días",
+        "freeToList": "Listar es gratis · 20% de comisión en venta",
+        "creating": "Creando…",
+        "submit": "Crear Subasta"
       },
-      "pagination": { "prev": "Ant.", "next": "Sig.", "page": "Página {{page}} de {{pages}}" }
+      "pagination": {
+        "prev": "Ant.",
+        "next": "Sig.",
+        "page": "Página {{page}} de {{pages}}"
+      }
     },
     "trades": {
-      "heading":    "Intercambios",
-      "listings":   "listados",
-      "postTrade":  "Publicar Intercambio",
-      "noTrades":   "No hay intercambios {{filter}}",
-      "viewDetails":"Ver Detalles",
-      "trade":      "intercambio",
-      "yours":      "tuyo",
-      "offering":   "Ofreciendo",
-      "wanting":    "Queriendo",
-      "makeOffer":  "Hacer una oferta",
-      "by":         "por",
-      "acceptTrade":"Aceptar Intercambio",
-      "cancelTrade":"Cancelar Intercambio",
+      "heading": "Intercambios",
+      "listings": "listados",
+      "postTrade": "Publicar Intercambio",
+      "noTrades": "No hay intercambios {{filter}}",
+      "viewDetails": "Ver Detalles",
+      "trade": "intercambio",
+      "yours": "tuyo",
+      "offering": "Ofreciendo",
+      "wanting": "Queriendo",
+      "makeOffer": "Hacer una oferta",
+      "by": "por",
+      "acceptTrade": "Aceptar Intercambio",
+      "cancelTrade": "Cancelar Intercambio",
       "rules": {
-        "expiry":  "Los listados vencen en 30 días",
-        "fee":     "Se aplica tarifa de plataforma a ambas partes",
-        "noNFA":   "Los NFAs no se pueden intercambiar — solo vender"
+        "expiry": "Los listados vencen en 30 días",
+        "fee": "Se aplica tarifa de plataforma a ambas partes",
+        "noNFA": "Los NFAs no se pueden intercambiar — solo vender"
       },
       "acceptModal": {
-        "title":           "Propuesta de Intercambio",
-        "postedBy":        "Publicado por",
+        "title": "Propuesta de Intercambio",
+        "postedBy": "Publicado por",
         "exchangeDetails": "Detalles del Intercambio",
-        "theyOffer":       "Ellos ofrecen",
-        "theyWant":        "Ellos quieren",
-        "feeNotice":       "Se aplica tarifa de plataforma a ambas partes",
-        "acceptBtn":       "Aceptar Este Intercambio",
-        "confirmTitle":    "Confirmar Intercambio",
-        "trade":           "Intercambio",
-        "postedByLabel":   "Publicado por",
-        "terms":           "Al aceptar, aceptas los términos del intercambio. El publicador será notificado y debe confirmar antes de que se transfieran los artículos.",
-        "back":            "Atrás",
-        "sending":         "Enviando…",
-        "confirm":         "Confirmar",
-        "successTitle":    "¡Propuesta Enviada!",
-        "notified":        "ha sido notificado",
-        "successNote":     "El publicador del intercambio revisará tu propuesta y organizará el intercambio. Revisa tus notificaciones para su respuesta.",
-        "expiry":          "⏱ Las propuestas vencen en 30 días si no se confirman.",
-        "close":           "Cerrar"
+        "theyOffer": "Ellos ofrecen",
+        "theyWant": "Ellos quieren",
+        "feeNotice": "Se aplica tarifa de plataforma a ambas partes",
+        "acceptBtn": "Aceptar Este Intercambio",
+        "confirmTitle": "Confirmar Intercambio",
+        "trade": "Intercambio",
+        "postedByLabel": "Publicado por",
+        "terms": "Al aceptar, aceptas los términos del intercambio. El publicador será notificado y debe confirmar antes de que se transfieran los artículos.",
+        "back": "Atrás",
+        "sending": "Enviando…",
+        "confirm": "Confirmar",
+        "successTitle": "¡Propuesta Enviada!",
+        "notified": "ha sido notificado",
+        "successNote": "El publicador del intercambio revisará tu propuesta y organizará el intercambio. Revisa tus notificaciones para su respuesta.",
+        "expiry": "⏱ Las propuestas vencen en 30 días si no se confirman.",
+        "close": "Cerrar"
       },
       "createModal": {
-        "title":               "Publicar un Intercambio",
-        "yourItem":            "Tu Artículo",
+        "title": "Publicar un Intercambio",
+        "yourItem": "Tu Artículo",
         "itemNamePlaceholder": "Nombre del artículo *",
-        "loadingItems":        "Cargando tus artículos…",
-        "connectWallet":       "Conecta tu cartera para seleccionar de tus artículos",
-        "pickFromItems":       "O elige de tus artículos (rellena el nombre automáticamente):",
-        "imageOptional":       "Imagen (opcional)",
-        "whatYouWant":         "Lo Que Quieres",
-        "openOffer":           "Oferta abierta — deja que otros propongan",
-        "anyCategory":         "Cualquier categoría",
-        "notesLabel":          "Notas (opcional)",
-        "notesPlaceholder":    "Términos del intercambio, condición, etc.",
-        "disclaimer":          "Ambas partes pagan tarifa de plataforma · Vence en 30 días · Los NFAs no se pueden intercambiar",
-        "posting":             "Publicando…",
-        "submit":              "Publicar Intercambio"
+        "loadingItems": "Cargando tus artículos…",
+        "connectWallet": "Conecta tu cartera para seleccionar de tus artículos",
+        "pickFromItems": "O elige de tus artículos (rellena el nombre automáticamente):",
+        "imageOptional": "Imagen (opcional)",
+        "whatYouWant": "Lo Que Quieres",
+        "openOffer": "Oferta abierta — deja que otros propongan",
+        "anyCategory": "Cualquier categoría",
+        "notesLabel": "Notas (opcional)",
+        "notesPlaceholder": "Términos del intercambio, condición, etc.",
+        "disclaimer": "Ambas partes pagan tarifa de plataforma · Vence en 30 días · Los NFAs no se pueden intercambiar",
+        "posting": "Publicando…",
+        "submit": "Publicar Intercambio"
       },
-      "pagination": { "prev": "Ant.", "next": "Sig.", "page": "Página {{page}} de {{pages}}" }
+      "pagination": {
+        "prev": "Ant.",
+        "next": "Sig.",
+        "page": "Página {{page}} de {{pages}}"
+      }
     },
     "quests": {
-      "heading":        "Tablero de Misiones",
-      "quests":         "misiones",
-      "noQuests":       "No hay misiones {{filter}}",
-      "inGameFeature":  "Función en el Juego",
-      "inGameDesc":     "Las misiones se generan automáticamente cuando los vendedores eligen una comisión reducida. Los jugadores pueden completar hasta 5 misiones por día. El fondo de comisión se divide entre el descuento del comprador, la recompensa del jugador y la plataforma.",
+      "heading": "Tablero de Misiones",
+      "quests": "misiones",
+      "noQuests": "No hay misiones {{filter}}",
+      "inGameFeature": "Función en el Juego",
+      "inGameDesc": "Las misiones se generan automáticamente cuando los vendedores eligen una comisión reducida. Los jugadores pueden completar hasta 5 misiones por día. El fondo de comisión se divide entre el descuento del comprador, la recompensa del jugador y la plataforma.",
       "earnFromQuests": "¿Quieres ganar de las misiones? Juega →",
-      "moneyQuests":    "Misiones de Dinero (fondo 11%)",
+      "moneyQuests": "Misiones de Dinero (fondo 11%)",
       "resourceQuests": "Misiones de Recursos (fondo 20%)",
-      "footerNote1":    "# Las misiones con cargas combinadas se pagarán usando los montos de la tabla separada.",
-      "footerNote2":    "# Los datos del planeta se sincronizarán cuando los juegos estén en vivo.",
-      "inGame":         "En el juego",
-      "open":           "Abierto",
+      "footerNote1": "# Las misiones con cargas combinadas se pagarán usando los montos de la tabla separada.",
+      "footerNote2": "# Los datos del planeta se sincronizarán cuando los juegos estén en vivo.",
+      "inGame": "En el juego",
+      "open": "Abierto",
       "table": {
-        "questingNo":    "N° de Misión",
-        "pickupPlanet":  "Planeta de Recogida",
+        "questingNo": "N° de Misión",
+        "pickupPlanet": "Planeta de Recogida",
         "dropOffPlanet": "Planeta de Entrega",
-        "itemGoods":     "Artículo / Bienes",
-        "commSplit":     "División de Comisión",
-        "questingTime":  "Tiempo de Misión",
-        "assignedTo":    "Asignado A"
+        "itemGoods": "Artículo / Bienes",
+        "commSplit": "División de Comisión",
+        "questingTime": "Tiempo de Misión",
+        "assignedTo": "Asignado A"
       },
       "comingSoon": {
         "title": "Próximamente",
-        "desc":  "La función de misiones en el juego está actualmente en desarrollo. Mantente atento — podrás ganar recompensas directamente del juego.",
+        "desc": "La función de misiones en el juego está actualmente en desarrollo. Mantente atento — podrás ganar recompensas directamente del juego.",
         "gotIt": "Entendido"
       },
-      "pagination": { "prev": "Ant.", "next": "Sig.", "page": "Página {{page}} de {{pages}}" }
+      "pagination": {
+        "prev": "Ant.",
+        "next": "Sig.",
+        "page": "Página {{page}} de {{pages}}"
+      },
+      "buyer": "Comprador",
+      "player": "Jugador",
+      "platform": "Plataforma",
+      "status": {
+        "open": "Abierto",
+        "accepted": "Aceptado",
+        "completed": "Completado",
+        "cancelled": "Cancelado"
+      },
+      "type": {
+        "money": "Dinero",
+        "resources": "Recursos"
+      }
     },
     "hire": {
-      "heading":       "Se Busca",
-      "listings":      "listados",
-      "listBtn":       "Listar",
-      "forHireLabel":  "Se Alquila",
+      "heading": "Se Busca",
+      "listings": "listados",
+      "listBtn": "Listar",
+      "forHireLabel": "Se Alquila",
       "wantingToHire": "Queriendo Contratar",
-      "noListings":    "No hay listados {{filter}}",
-      "lockedTitle":   "Contenido de HyperTek Gaming solo para fines de visualización.",
-      "lockedDesc":    "Esta sección está bloqueada hasta que los juegos hayan sido finalizados.",
-      "forHireBadge":  "SE ALQUILA",
-      "wantedBadge":   "QUERIENDO CONTRATAR",
-      "price":         "Precio",
-      "maxDuration":   "Duración Máxima",
-      "hireBtn":       "Contratar",
-      "fulfillBtn":    "Cumplir Solicitud",
+      "noListings": "No hay listados {{filter}}",
+      "lockedTitle": "Contenido de HyperTek Gaming solo para fines de visualización.",
+      "lockedDesc": "Esta sección está bloqueada hasta que los juegos hayan sido finalizados.",
+      "forHireBadge": "SE ALQUILA",
+      "wantedBadge": "QUERIENDO CONTRATAR",
+      "price": "Precio",
+      "maxDuration": "Duración Máxima",
+      "hireBtn": "Contratar",
+      "fulfillBtn": "Cumplir Solicitud",
       "rules": {
-        "durations":  "8h · 1d · 3d · 1s · 1mes",
-        "cooldown":   "Enfriamiento: 2× duración del alquiler",
+        "durations": "8h · 1d · 3d · 1s · 1mes",
+        "cooldown": "Enfriamiento: 2× duración del alquiler",
         "commission": "Comisión: 20%",
-        "payment":    "Pago en Hyper Bucks o Materiales"
+        "payment": "Pago en Hyper Bucks o Materiales"
       },
       "preview": {
         "title": "Vista Previa de Función en el Juego",
-        "desc":  "El sistema Se Busca estará completamente disponible en el juego al lanzamiento."
+        "desc": "El sistema Se Busca estará completamente disponible en el juego al lanzamiento."
       },
       "hireModal": {
-        "hireTitle":    "Contratar Especialista",
+        "hireTitle": "Contratar Especialista",
         "fulfillTitle": "Cumplir Solicitud de Contratación",
         "forHireBadge": "SE ALQUILA",
-        "wantedBadge":  "BUSCADO",
-        "price":        "Precio",
-        "duration":     "Duración",
-        "howHire":      "Cómo funciona la contratación",
-        "howFulfill":   "Cómo funciona cumplir una solicitud",
-        "proceedHire":  "Proceder a Contratar",
+        "wantedBadge": "BUSCADO",
+        "price": "Precio",
+        "duration": "Duración",
+        "howHire": "Cómo funciona la contratación",
+        "howFulfill": "Cómo funciona cumplir una solicitud",
+        "proceedHire": "Proceder a Contratar",
         "offerFulfill": "Ofrecer Cumplir",
-        "commission":   "20% de comisión de plataforma · Se aplica enfriamiento después de la devolución",
-        "confirmHire":  "Confirmar Contratación",
+        "commission": "20% de comisión de plataforma · Se aplica enfriamiento después de la devolución",
+        "confirmHire": "Confirmar Contratación",
         "confirmOffer": "Confirmar Oferta",
-        "specialist":   "Especialista",
-        "payment":      "Pago",
-        "yourOffer":    "Tu oferta",
-        "durationLabel":"Duración",
-        "commLabel":    "Comisión",
-        "back":         "Atrás",
-        "processing":   "Procesando…",
-        "sendOffer":    "Enviar Oferta",
-        "deployedTitle":"¡Desplegado!",
-        "offerSentTitle":"¡Oferta Enviada!",
+        "specialist": "Especialista",
+        "payment": "Pago",
+        "yourOffer": "Tu oferta",
+        "durationLabel": "Duración",
+        "commLabel": "Comisión",
+        "back": "Atrás",
+        "processing": "Procesando…",
+        "sendOffer": "Enviar Oferta",
+        "deployedTitle": "¡Desplegado!",
+        "offerSentTitle": "¡Oferta Enviada!",
         "availableFor": "Disponible por",
-        "paid":         "Pagado",
-        "returnNote":   "Devuelve antes de que termine el período para evitar penalización automática. Se aplica enfriamiento de {{hours}}h después de la devolución.",
-        "close":        "Cerrar"
+        "paid": "Pagado",
+        "returnNote": "Devuelve antes de que termine el período para evitar penalización automática. Se aplica enfriamiento de {{hours}}h después de la devolución.",
+        "close": "Cerrar"
       },
       "createModal": {
-        "listTitle":          "Listar para Alquiler",
-        "postTitle":          "Publicar Queriendo Contratar",
-        "forHireBtn":         "Se Alquila",
-        "wantingBtn":         "Queriendo Contratar",
-        "itemNameHire":       "Especialista / nombre del artículo *",
-        "itemNameWant":       "Lo que quieres contratar *",
-        "descPlaceholder":    "Descripción",
-        "categoryPlaceholder":"Categoría (opcional)",
-        "paymentType":        "Tipo de Pago",
-        "hyperBucks":         "Hyper Bucks",
-        "materials":          "Materiales",
-        "amountLabel":        "Cantidad (Hyper Bucks)",
-        "afterCommission":    "Recibes {{amount}} HB después del 20% de comisión",
-        "maxDuration":        "Duración Máxima",
-        "disclaimer":         "20% de comisión · Enfriamiento = 2× duración del alquiler después de la devolución",
-        "listing":            "Listando…",
-        "submit":             "Crear Listado"
+        "listTitle": "Listar para Alquiler",
+        "postTitle": "Publicar Queriendo Contratar",
+        "forHireBtn": "Se Alquila",
+        "wantingBtn": "Queriendo Contratar",
+        "itemNameHire": "Especialista / nombre del artículo *",
+        "itemNameWant": "Lo que quieres contratar *",
+        "descPlaceholder": "Descripción",
+        "categoryPlaceholder": "Categoría (opcional)",
+        "paymentType": "Tipo de Pago",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materiales",
+        "amountLabel": "Cantidad (Hyper Bucks)",
+        "afterCommission": "Recibes {{amount}} HB después del 20% de comisión",
+        "maxDuration": "Duración Máxima",
+        "disclaimer": "20% de comisión · Enfriamiento = 2× duración del alquiler después de la devolución",
+        "listing": "Listando…",
+        "submit": "Crear Listado"
       },
-      "pagination": { "prev": "Ant.", "next": "Sig.", "page": "Página {{page}} de {{pages}}" }
+      "pagination": {
+        "prev": "Ant.",
+        "next": "Sig.",
+        "page": "Página {{page}} de {{pages}}"
+      }
     },
     "bounty": {
-      "heading":          "Tablero de Recompensas",
-      "contracts":        "contrato",
-      "contractsPlural":  "contratos",
-      "noContracts":      "No hay contratos {{filter}}",
-      "noContractsNote":  "Las recompensas son publicadas por jugadores del juego y el sistema del juego",
-      "expiresIn":        "Vence en {{days}}d",
+      "heading": "Tablero de Recompensas",
+      "contracts": "contrato",
+      "contractsPlural": "contratos",
+      "noContracts": "No hay contratos {{filter}}",
+      "noContractsNote": "Las recompensas son publicadas por jugadores del juego y el sistema del juego",
+      "expiresIn": "Vence en {{days}}d",
       "inGameNotice": {
         "title": "Función en el Juego — Solo Vista",
-        "desc":  "Las recompensas son creadas por jugadores del juego y el sistema del juego. Aceptar y completar recompensas ocurre solo en el juego. Este tablero se muestra para transparencia y para animar a nuevos jugadores a unirse."
+        "desc": "Las recompensas son creadas por jugadores del juego y el sistema del juego. Aceptar y completar recompensas ocurre solo en el juego. Este tablero se muestra para transparencia y para animar a nuevos jugadores a unirse."
       },
       "rules": {
-        "battle":     "Batalla resuelta en el juego automáticamente",
+        "battle": "Batalla resuelta en el juego automáticamente",
         "commission": "20% de comisión de plataforma en recompensa",
-        "expiry":     "Los contratos vencen en 30 días"
+        "expiry": "Los contratos vencen en 30 días"
       },
       "table": {
-        "bountyNo":  "N° de Recompensa",
-        "target":    "Objetivo (Atacado En)",
-        "reward":    "Recompensa",
-        "postedBy":  "Publicado Por",
+        "bountyNo": "N° de Recompensa",
+        "target": "Objetivo (Atacado En)",
+        "reward": "Recompensa",
+        "postedBy": "Publicado Por",
         "claimedBy": "Reclamado Por",
-        "status":    "Estado",
-        "netHB":     "{{amount}} HB neto"
+        "status": "Estado",
+        "netHB": "{{amount}} HB neto"
       },
-      "pagination": { "prev": "Ant.", "next": "Sig.", "page": "Página {{page}} de {{pages}}" }
+      "pagination": {
+        "prev": "Ant.",
+        "next": "Sig.",
+        "page": "Página {{page}} de {{pages}}"
+      }
     },
     "common": {
-      "prev":          "Anterior",
-      "next":          "Siguiente",
-      "pageOf":        "Página {{page}} de {{pages}}",
-      "back":          "Atrás",
-      "close":         "Cerrar",
-      "cancel":        "Cancelar",
-      "loading":       "Cargando…",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "pageOf": "Página {{page}} de {{pages}}",
+      "back": "Atrás",
+      "close": "Cerrar",
+      "cancel": "Cancelar",
+      "loading": "Cargando…",
       "connectWallet": "Conecta tu cartera primero",
-      "loginFirst":    "Inicia sesión primero"
+      "loginFirst": "Inicia sesión primero"
     }
+  },
+  "musicPlayer": {
+    "title": "Reproductor de música",
+    "playing": "Reproducción",
+    "sound": "Sonido",
+    "ambientDesc": "Banda sonora ambiental incorporada para el mercado. Se reproduce en bucle.",
+    "playAmbient": "Reproducir ambiente",
+    "pauseAmbient": "Pausar ambiente",
+    "spotifyDesc": "Pegue cualquier pista, lista de reproducción o enlace de álbum de Spotify.",
+    "loadSpotify": "Cargue Spotify",
+    "soundcloudDesc": "Pegue cualquier pista de SoundCloud o enlace de lista de reproducción.",
+    "loadSoundCloud": "Cargar SoundCloud",
+    "changeLink": "Cambiar enlace"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Pagar con Tarjeta",
+      "amount": "Monto:",
+      "cancel": "Cancelar",
+      "processing": "Procesando...",
+      "pay": "Pagar"
+    },
+    "nav": {
+      "backToMarketplace": "Volver a Marketplace",
+      "backToCollections": "Volver a Colecciones",
+      "offers": "Ofertas",
+      "marketplace": "Mercado",
+      "auction": "Subasta",
+      "trade": "Comercio",
+      "detail": "{{type}} Detalle",
+      "buy": "Comprar {{type}}"
+    },
+    "marketplace": {
+      "listed": "Listado",
+      "youOwn": "Eres dueño de esto",
+      "notMinted": "No acuñado todavía",
+      "ownedBy": "Propiedad de",
+      "platform": "Plataforma",
+      "noDesc": "No se proporciona descripción para este artículo.",
+      "price": "Precio",
+      "minBuyback": "Garantía de recompra mínima",
+      "reservePrice": "Precio de reserva",
+      "buybackNote": "Este activo no se puede vender por debajo de su valor mínimo de recompra.",
+      "networkNote": "USDC en base · Se requiere ETH base para gasolina (solo pagos con billetera)",
+      "buyWithCard": "Comprar con tarjeta",
+      "makeOffer": "Hacer oferta",
+      "processing": "Procesando...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "Comprar ahora",
+      "listNow": "Listar ahora",
+      "yourListed": "Su {{type}} (listado)",
+      "notAvailable": "No disponible"
+    },
+    "fundModal": {
+      "title": "USDC insuficiente",
+      "youNeed": "Necesitas",
+      "butHave": "pero tu billetera solo tiene",
+      "desc2": "Financia tu billetera instantáneamente con una tarjeta de crédito o débito a través de Transak, luego regresa para completar la compra.",
+      "fundBtn": "Funda tu billetera con tarjeta (Transak)",
+      "cancel": "Cancelar"
+    },
+    "gasModal": {
+      "title": "ETH requerido para gas",
+      "mainnetNote": "Estás en Base Mainnet. Compra una pequeña cantidad de ETH (≈ $1–2) en Coinbase o puentea desde Ethereum a través de bridge.base.org.",
+      "testnetNote": "Estás en Base Sepolia Testnet. Obtenga ETH de prueba gratis desde un faucet.",
+      "faucetBtn": "Obtenga Testnet ETH (Faucet)",
+      "bridgeBtn": "Puente ETH a la base",
+      "close": "Cerrar"
+    },
+    "confirmModal1": {
+      "title": "Confirmar acción",
+      "listPrice": "Precio de lista",
+      "platformFee": "Tarifa de plataforma (10%)",
+      "total": "Total",
+      "cancel": "Cancelar",
+      "continue": "Continuar"
+    },
+    "confirmModal2": {
+      "setPrice": "Establezca su precio de cotización (USDC)",
+      "willList": "✓ Se publicará en {{price}} USDC",
+      "price": "Precio",
+      "cancel": "Cancelar",
+      "processing": "Procesando...",
+      "confirm": "Confirmar"
+    },
+    "offers": {
+      "noOffers": "Aún no hay ofertas",
+      "offer": "oferta",
+      "offers": "ofertas",
+      "noOffersTitle": "No hay ofertas en este momento",
+      "noOffersDesc": "Sé el primero en hacer una oferta",
+      "colPrice": "Precio",
+      "colStatus": "Estado",
+      "colFrom": "De",
+      "colExpires": "Expira",
+      "colAction": "Acción",
+      "accept": "Aceptar",
+      "reject": "Rechazar",
+      "cancel": "Cancelar",
+      "expired": "Expirado",
+      "completePurchase": "Completo Compra"
+    },
+    "auction": {
+      "loading": "Cargando datos de la subasta…",
+      "active": "Subasta activa",
+      "startPrice": "Precio inicial",
+      "currentBid": "Oferta actual",
+      "noBids": "Sin ofertas aún",
+      "instantBuy": "Compra instantánea",
+      "reservePrice": "Precio de reserva",
+      "bidHistory": "Historial de ofertas",
+      "minBid": "Min oferta:",
+      "bidding": "Hacer una oferta…",
+      "placeBid": "Realizar una oferta",
+      "connectWallet": "Conecte su billetera para hacer una oferta",
+      "ownerNote": "Su artículo aparece en la subasta. Las ofertas aparecerán aquí a medida que vayan llegando.",
+      "noAuction": "No hay subasta activa para este artículo",
+      "ownerSetup": "Vaya a sus Colecciones y haga clic en Lista para configurar una subasta.",
+      "notAvailable": "Este artículo no tiene subasta abierta en este momento."
+    },
+    "trade": {
+      "loading": "Cargando listados comerciales…",
+      "active": "listado comercial activo",
+      "actives": "comercio activo listados",
+      "offering": "Oferta",
+      "wants": "Deseos",
+      "openOffer": "Oferta abierta",
+      "by": "Por",
+      "proposeTrade": "Proponer intercambio →",
+      "noTrades": "No hay listados comerciales activos",
+      "ownerSetup": "Vaya a sus Colecciones y haga clic en Lista para configurar un intercambio.",
+      "notAvailable": "El propietario no tiene listados comerciales abiertos para esto item."
+    },
+    "successModal": {
+      "title": "¡Compra exitosa!",
+      "desc": "{{name}} ha sido comprado. Su NFT se transferirá a su billetera en breve.",
+      "note": "La transferencia se procesa automáticamente a través de nuestro sistema.",
+      "viewProfile": "Ver en Mi perfil",
+      "continueShopping": "Continuar comprando"
+    },
+    "transferFailed": {
+      "title": "Pago recibido: transferencia pendiente",
+      "desc": "Su pago se realizó correctamente, pero la transferencia NFT encontró un problema. Sus fondos están seguros: nuestro equipo completará la transferencia manualmente.",
+      "viewProfile": "Ver mi perfil",
+      "dismiss": "Descartar"
+    },
+    "priceHistory": {
+      "title": "Historial de precios",
+      "subtitle": "Precios de venta históricos para esto NFT",
+      "loading": "Cargando...",
+      "noSales": "Aún no se han registrado ventas",
+      "noSalesNote": "El historial de precios aparece después de la primera venta"
+    }
+  },
+  "makeOffer": {
+    "back": "Atrás",
+    "floor": "Piso",
+    "title": "Haga una oferta",
+    "yourOffer": "Su oferta (USDC)",
+    "expiresIn": "La oferta vence en",
+    "youPay": "Usted paga",
+    "submitting": "Enviando...",
+    "submit": "Enviar oferta",
+    "terms": "Al enviar esta oferta, acepta los términos de Hyper Tek de servicio.",
+    "expiry": {
+      "6h": "6 horas",
+      "12h": "12 horas",
+      "1d": "1 día",
+      "3d": "3 días",
+      "7d": "7 días",
+      "1mo": "1 mes"
+    },
+    "success": {
+      "title": "¡Oferta enviada!",
+      "desc": "Su oferta de {{price}} USDC por {{name}} ha sido enviada al propietario.",
+      "expires": "Expira en {{duration}}",
+      "backToNft": "Volver a NFT",
+      "goToMarketplace": "Ir a Marketplace"
+    },
+    "error": {
+      "loginRequired": "Inicie sesión para hacer una oferta",
+      "submitFailed": "No se pudo enviar la oferta. Por favor, inténtelo de nuevo."
+    }
+  },
+  "paymentError": {
+    "message": "Su solicitud no fue exitosa",
+    "goHome": "Ir a casa"
   }
 }

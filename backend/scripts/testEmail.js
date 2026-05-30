@@ -34,7 +34,7 @@ console.log("");
 // Verify connection first
 transporter.verify((error, success) => {
   if (error) {
-    console.error("❌ SMTP connection failed:", error.message);
+    console.error(" SMTP connection failed:", error.message);
     console.error("\n💡 Common fixes:");
     console.error("   1. Gmail App Password required (not your regular password)");
     console.error("   2. Go to: myaccount.google.com → Security → 2-Step Verification → App passwords");
@@ -43,7 +43,7 @@ transporter.verify((error, success) => {
     process.exit(1);
   }
 
-  console.log("✅ SMTP connection verified");
+  console.log("SMTP connection verified");
   console.log("📧 Sending test welcome email...\n");
 
   const { subject, html } = welcomeEmailTemplate({
@@ -61,10 +61,10 @@ transporter.verify((error, success) => {
     },
     (err, info) => {
       if (err) {
-        console.error("❌ Send failed:", err.message);
+        console.error(" Send failed:", err.message);
         process.exit(1);
       }
-      console.log("✅ Email sent successfully!");
+      console.log("Email sent successfully!");
       console.log("   Message ID:", info.messageId);
       console.log("   Check your inbox at:", to);
     }

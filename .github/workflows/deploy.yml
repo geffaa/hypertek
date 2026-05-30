@@ -155,7 +155,7 @@ jobs:
 
             echo ""
             echo "═══════════════════════════════════════"
-            echo "  ✅ Deployment completed!"
+            echo "  Deployment completed!"
             echo "═══════════════════════════════════════"
           EOF
 
@@ -177,7 +177,7 @@ jobs:
             echo "⚠️  Services unreachable — check server"
             exit 1
           else
-            echo "✅ Services are responding!"
+            echo "Services are responding!"
           fi
 
       - name: 🧹 Cleanup SSH key

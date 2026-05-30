@@ -13,7 +13,7 @@ function Land() {
   const navigate = useNavigate();
 
   const [characters, setCharacters] = useState([]);
-  const [parentCollections, setParentCollections] = useState([]); // ✅ add state
+  const [parentCollections, setParentCollections] = useState([]); // add state
   const [loading, setLoading] = useState(true);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -39,7 +39,7 @@ function Land() {
         }
 
         const parents = parentRes.data.collections || [];
-        setParentCollections(parents); // ✅ save parents in state
+        setParentCollections(parents); // save parents in state
 
         let allCharacters = [];
 

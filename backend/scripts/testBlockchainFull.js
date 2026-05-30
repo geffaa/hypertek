@@ -16,13 +16,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "../Config/.env") });
 
 // ── Config ──────────────────────────────────────────────────────────────────
-const RPC_URL        = process.env.BASE_RPC_URL        || "https://mainnet.base.org";
-const PRIVATE_KEY    = process.env.PRIVATE_KEY;
-const NFT_ADDR       = process.env.MYNFT_ADDRESS;
-const MARKET_ADDR    = process.env.MARKETPLACE_ADDRESS;
+const RPC_URL = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const NFT_ADDR = process.env.MYNFT_ADDRESS;
+const MARKET_ADDR = process.env.MARKETPLACE_ADDRESS;
 const PLATFORM_WALLET = process.env.PLATFORM_WALLET_ADDRESS;
-const BUYBACK_WALLET  = process.env.BUYBACK_WALLET_ADDRESS;
-const USDC_ADDR      = process.env.BASE_USDC_ADDRESS;
+const BUYBACK_WALLET = process.env.BUYBACK_WALLET_ADDRESS;
+const USDC_ADDR = process.env.BASE_USDC_ADDRESS;
 
 const ERC20_ABI = [
   "function name() view returns (string)",
@@ -40,16 +40,16 @@ function loadABI(filename) {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-const PASS  = "✅";
-const FAIL  = "❌";
-const WARN  = "⚠️ ";
-const INFO  = "ℹ️ ";
+const PASS = "✅";
+const FAIL = "";
+const WARN = "⚠️ ";
+const INFO = "ℹ️ ";
 
-function ok(label, value)   { console.log(`  ${PASS} ${label}: ${value}`); }
+function ok(label, value) { console.log(`  ${PASS} ${label}: ${value}`); }
 function fail(label, value) { console.log(`  ${FAIL} ${label}: ${value}`); }
 function warn(label, value) { console.log(`  ${WARN} ${label}: ${value}`); }
 function info(label, value) { console.log(`  ${INFO} ${label}: ${value}`); }
-function header(title)      { console.log(`\n${"─".repeat(55)}\n  ${title}\n${"─".repeat(55)}`); }
+function header(title) { console.log(`\n${"─".repeat(55)}\n  ${title}\n${"─".repeat(55)}`); }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
@@ -64,7 +64,7 @@ async function main() {
   header("1. Environment Variables");
 
   const envVars = {
-    PRIVATE_KEY:    PRIVATE_KEY     ? PRIVATE_KEY.slice(0, 8) + "..." : null,
+    PRIVATE_KEY: PRIVATE_KEY ? PRIVATE_KEY.slice(0, 8) + "..." : null,
     NFT_ADDR,
     MARKET_ADDR,
     PLATFORM_WALLET,
@@ -76,7 +76,7 @@ async function main() {
   let envOk = true;
   for (const [k, v] of Object.entries(envVars)) {
     if (v) { ok(k, v); passed++; }
-    else   { fail(k, "NOT SET"); failed++; envOk = false; }
+    else { fail(k, "NOT SET"); failed++; envOk = false; }
   }
   if (!envOk) {
     console.log("\n  ⛔ Critical env vars missing. Fix .env before continuing.");
@@ -90,10 +90,10 @@ async function main() {
   try {
     provider = new ethers.JsonRpcProvider(RPC_URL);
     const network = await provider.getNetwork();
-    const block   = await provider.getBlockNumber();
-    ok("Network name",    network.name);
-    ok("Chain ID",        network.chainId.toString());
-    ok("Latest block",    block.toString());
+    const block = await provider.getBlockNumber();
+    ok("Network name", network.name);
+    ok("Chain ID", network.chainId.toString());
+    ok("Latest block", block.toString());
     passed += 3;
   } catch (err) {
     fail("RPC connection", err.message);
@@ -109,10 +109,10 @@ async function main() {
   try {
     signer = new ethers.Wallet(PRIVATE_KEY, provider);
     const address = await signer.getAddress();
-    const ethBal  = await provider.getBalance(address);
-    const ethFmt  = ethers.formatEther(ethBal);
+    const ethBal = await provider.getBalance(address);
+    const ethFmt = ethers.formatEther(ethBal);
 
-    ok("Wallet address",  address);
+    ok("Wallet address", address);
 
     if (parseFloat(ethFmt) >= 0.001) {
       ok("ETH balance (gas)", `${ethFmt} ETH`);
@@ -133,10 +133,10 @@ async function main() {
   header("4. USDC Balances (Base Mainnet)");
 
   try {
-    const usdc        = new ethers.Contract(USDC_ADDR, ERC20_ABI, provider);
-    const usdcName    = await usdc.name();
-    const usdcSymbol  = await usdc.symbol();
-    const decimals    = await usdc.decimals();
+    const usdc = new ethers.Contract(USDC_ADDR, ERC20_ABI, provider);
+    const usdcName = await usdc.name();
+    const usdcSymbol = await usdc.symbol();
+    const decimals = await usdc.decimals();
 
     ok("USDC contract", `${usdcName} (${usdcSymbol}) — ${decimals} decimals`);
     passed++;
@@ -144,7 +144,7 @@ async function main() {
     const wallets = [
       { label: "Backend/Deployer wallet (sends royalties)", address: await signer.getAddress() },
       { label: "Platform wallet (receives seller proceeds)", address: PLATFORM_WALLET },
-      { label: "Buyback wallet (receives 5% NFA sales)",    address: BUYBACK_WALLET },
+      { label: "Buyback wallet (receives 5% NFA sales)", address: BUYBACK_WALLET },
     ];
 
     for (const w of wallets) {
@@ -173,7 +173,7 @@ async function main() {
 
   await new Promise(r => setTimeout(r, 800));
   try {
-    const nftABI      = loadABI("MyNFT.json");
+    const nftABI = loadABI("MyNFT.json");
     const nftContract = new ethers.Contract(NFT_ADDR, nftABI, provider);
 
     // Verify bytecode first
@@ -186,17 +186,17 @@ async function main() {
 
     // Read contract state (with individual error handling per call)
     const calls = [
-      ["name",   () => nftContract.name()],
+      ["name", () => nftContract.name()],
       ["symbol", () => nftContract.symbol()],
       ["nextTokenId (minted so far)", () => nftContract.nextTokenId()],
-      ["owner",  () => nftContract.owner()],
+      ["owner", () => nftContract.owner()],
     ];
     for (const [label, fn] of calls) {
       await new Promise(r => setTimeout(r, 200));
       try {
         const v = await fn();
         ok(label, v.toString()); passed++;
-      } catch(e) {
+      } catch (e) {
         warn(label, `RPC error (${e.code}) — contract deployed, try again later`);
       }
     }
@@ -207,7 +207,7 @@ async function main() {
       const isAuthorized = await nftContract.isMarketplaceAuthorized(MARKET_ADDR);
       if (isAuthorized) { ok("Marketplace authorized", "YES ✔"); passed++; }
       else { fail("Marketplace authorized", "NO — marketplace cannot call markAsSold!"); failed++; }
-    } catch(e) {
+    } catch (e) {
       warn("Marketplace authorized", `Could not verify (RPC error: ${e.code})`);
     }
   } catch (err) {
@@ -218,7 +218,7 @@ async function main() {
   header("6. Marketplace Contract");
 
   try {
-    const marketABI      = loadABI("Marketplace.json");
+    const marketABI = loadABI("Marketplace.json");
     const marketContract = new ethers.Contract(MARKET_ADDR, marketABI, provider);
 
     // Try to read PLATFORM_FEE_BPS — may differ by contract version
@@ -227,7 +227,7 @@ async function main() {
       feeBps = await marketContract.PLATFORM_FEE_BPS();
       const feePct = Number(feeBps) / 100;
       if (feePct === 20) {
-        ok("Platform fee",  `${feePct}% (correct — matches Don's brief)`);
+        ok("Platform fee", `${feePct}% (correct — matches Don's brief)`);
         passed++;
       } else {
         warn("Platform fee", `${feePct}% — expected 20%`);
@@ -254,13 +254,13 @@ async function main() {
   header("7. Mint Function Signature (ABI vs Service)");
 
   try {
-    const parsed  = loadABI("MyNFT.json"); // already an array after double-parse
-    const mintFn  = parsed.find(f => f.name === "mint" && f.type === "function");
+    const parsed = loadABI("MyNFT.json"); // already an array after double-parse
+    const mintFn = parsed.find(f => f.name === "mint" && f.type === "function");
 
     if (mintFn) {
       const params = mintFn.inputs.map(i => `${i.type} ${i.name}`).join(", ");
       ok("mint() signature", `mint(${params})`);
-      info("Expected call",  "nftContract.mint(creatorAddress, tokenURI, royaltyBps)");
+      info("Expected call", "nftContract.mint(creatorAddress, tokenURI, royaltyBps)");
 
       if (mintFn.inputs.length === 3) {
         ok("Parameter count", "3 params — correct");
@@ -282,7 +282,7 @@ async function main() {
   console.log("╚══════════════════════════════════════════════════════╝\n");
 
   if (failed > 0) {
-    console.log("  Items marked ❌ need to be fixed before going live.\n");
+    console.log("  Items marked  need to be fixed before going live.\n");
     process.exit(1);
   } else {
     console.log("  All checks passed. Blockchain connection is ready.\n");

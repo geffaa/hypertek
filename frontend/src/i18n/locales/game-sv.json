@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Välkommen till",
+    "back": "Tillbaka",
+    "racing": {
+      "label": "RACING",
+      "heading": "Hyper Racing",
+      "subtitle": "Galaxens mest intensiva flygande fordonsracingupplevelse,\ndär skicklighet lönar sig, och mästare görs.",
+      "intro": [
+        "Hyper Racing är ett högoktanigt konkurrenskraftigt racingspel som utspelar sig över främmande världar, där spelare bygger, uppgraderar och styr helt anpassningsbara flygande racerfordon genom några av de farligaste banorna i galaxen. Från flytande klippformationer och vulkaniska lavarör till ödemarker och bergspass är varje lopp ett test av förberedelser, reflexer och strategi.",
+        "Men Hyper Racing är mer än bara ett spel; det är en konkurrenskraftig plattform där verkliga belöningar är på spel. Toppspelare kan delta i rankade evenemang och turneringar med riktiga prispotter. Ju bättre du tävlar, desto mer tjänar du. Oavsett om du jagar leaderboard ära eller bygger ett racingimperium, allt du gör i Hyper Racing tar dig framåt.",
+        "Uppgradera dina racerbilar från nos till svans. Rekrytera och höj nivån på ditt depåbesättning. Anställ en pit manager som matchar din racingfilosofi. Ta sedan dina färdigheter bortom banan, ditt racinggarage fungerar som hangar för ditt personliga rymdskepp, och varje förmåga du utvecklar för med sig till rymdstrider över Hyper Quest och Overlord of the 7 Realms."
+      ],
+      "introClose": "Läs vidare för att upptäcka hur spelet fungerar, vad du kan vinna och hur din racingkarriär ger energi till ett helt universum av progression.",
+      "calloutLine1": "Race för att tjäna. Tjäna för att uppgradera.",
+      "calloutLine2": "Uppgradera till Dominate.",
+      "howItWorksTitle": "Hur Hyper Racing fungerar",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Välj ditt fordon",
+          "body": "Varje lopp börjar i ditt garage. Välj från en växande lista av flygande racerfordon, alla med unika hanteringsegenskaper och uppgraderingspotential. Skala av ett skrov för att få blixtsnabb hastighet i rak linje eller pansra upp det för att överleva de mest brutala förhållanden. Thrustrar, stabilisatorer, sköldar, kylsystem, aerodynamiska fenor, uppgraderingsträdet går djupt och varje modifiering förändrar hur ditt farkost beter sig på banan."
+        },
+        {
+          "num": "02",
+          "title": "Bygg ditt team",
+          "body": "Racing är en lagsport. Rekrytera pit crew-specialister som ger unika bonusar, snabbare tankning, realtidsdiagnostik, nödreparationer av skrov i mitten av loppet och prestandajusteringar mellan varven. Varje besättningsmedlem går upp i nivå med erfarenhet och lägger kraftfulla förmågor ovanpå dina fordonsuppgraderingar. Anställ sedan en pit manager för att koordinera verksamheten, ringa racestrategi och låsa upp teamomfattande prestationshöjningar som förstärker under en hel säsong."
+        },
+        {
+          "num": "03",
+          "title": "Race Across Worlds",
+          "body": "Kretsar spänner över främmande planeter med väldigt olika terräng och atmosfäriska faror. Väv dig genom flytande klippformationer i Avatar-stil, trä vulkaniska lavarör i rasande hastighet, slit dig över ändlösa ökenslätter och hugga genom förrädiska bergskedjor. Surt regn, radioaktiva atmosfärer, skiftande gravitation och turbulenta vindar, inga två raser kräver samma upplägg. Att trimma ditt fordon för att matcha varje miljö är där strategi möter skicklighet."
+        },
+        {
+          "num": "04",
+          "title": "Klättra i graderna",
+          "body": "Victory tjänar ledarpoäng, låser upp nya kretsar i avlägsna världar och öppnar dörren till tävlingar på högre nivå. Ju djupare du går, desto hårdare är motståndarna och desto större insatser. Bevisa dig själv över alla planeter och ta dig genom den globala rankingen."
+        }
+      ],
+      "rewardsTitle": "Vinn stort; Belöningar som betyder något!",
+      "rewards": [
+        {
+          "title": "Belöningar i spelet",
+          "body": "Varje lopp du avslutar betalar ut. Vinn, och belöningarna multipliceras. Tävlingssegrar låser upp förstklassiga fordonskomponenter, sällsynta uppgraderingsmaterial, exklusiva rekryteringspoletter och krediter för att finansiera ditt nästa bygge. Sälj uppgraderade fordon för vinst, återinvestera i nya maskiner och se ditt racingimperium växa för varje pallplats."
+        },
+        {
+          "title": "Real Cash Events",
+          "body": "Hyper Racing tar konkurrensen till nästa nivå med rankade evenemang och turneringar där riktiga pengar står på spel. Delta i skicklighetsbaserade tävlingar, bevisa din förmåga mot de bästa piloterna i galaxen och gå därifrån med riktiga kontantutbetalningar. Ju högre du placerar dig, desto större prispott. Från veckorankade utmaningar till säsongsbetonade mästerskapsevenemang, det finns alltid möjligheter för toppspelare att omvandla sina racingfärdigheter till riktiga intäkter."
+        },
+        {
+          "title": "Hur prisevenemang fungerar",
+          "body": "Spelare kvalificerar sig genom rankat spel och möter prestationströsklar som ger inträde till kontantpristurneringar. Evenemang är uppbyggda kring rättvis matchmaking, vilket säkerställer att alla tävlande möter motståndare med liknande skicklighet. Anmälningsavgifterna är transparenta, prispotterna visas tydligt innan du förbinder dig, och utbetalningar behandlas snabbt efter att varje evenemang har avslutats. Det är konkurrenskraftigt, det är rättvist och belöningarna är verkliga."
+        },
+        {
+          "title": "Progression Beyond the Track",
+          "body": "Belöningar som du tjänar genom racing matas in direkt i din bredare utveckling. Uppgradera dina racerfordon, stärk din depåbesättning och låt vinster uppgradera ditt huvudsakliga rymdskepp. Ditt racinggarage är det där skeppets hangarvik, så varje förbättring av din kappseglingsoperation stärker också fartyget du flyger mellan världar och in i rymdstrider över Hyper Quest och Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Två maskiner, ett uppdrag... Uppgradera allt",
+      "upgrades": [
+        {
+          "title": "Uppgraderingar av racerbilar",
+          "body": "Ditt racerfordon är en helt modulär maskin. Varje komponent kan bytas ut, trimmas och uppgraderas: skrov, propeller, sköldar, yttre skal, motorer, stabilisatorer, kylsystem och aerodynamiska ytor. Lättviktskompositer levererar rå hastighet; kraftig rustning håller dig vid liv genom brutala atmosfäriska förhållanden. Uppgraderingsvägen är djup, och de val du gör definierar din racingidentitet. Köp nya fordon, bygg dem till mästerskapsutmanare, kör dem till seger och sälj dem med vinst när du är redo för nästa utmaning."
+        },
+        {
+          "title": "Huvudsakliga uppgraderingar av rymdskepp",
+          "body": "Ditt racinggarage är inte bara en verkstad; det är hangarviken för ditt personliga rymdskepp. Samma resurser, krediter och material som du tjänar på banan kan investeras i att uppgradera ditt huvudfartyg. Bättre motorer för interplanetära resor, starkare vapensystem för rymdstrider, förbättrad navigering för att upptäcka nya racingvärldar och förstärkta skrov för att överleva fientliga möten under transit. Ditt rymdskepp är din hemmabas, din transport och ditt slagskepp, och racing gör det starkare."
+        },
+        {
+          "title": "Uppgraderingsslingan",
+          "body": "Race för att tjäna. Tjäna för att uppgradera. Uppgradera för att vinna större lopp med större belöningar. Lägg in dessa belöningar i både dina racingfordon och ditt rymdskepp. Ju bättre ditt skepp, desto längre du reser och desto farligare och mer lukrativa blir kretsarna. Det är en progressionsslinga som belönar engagemang och skicklighet på alla nivåer."
+        },
+        {
+          "title": "Cross-Game Impact",
+          "body": "Varje pilotfärdighet du utvecklar på banan och varje uppgradering du installerar på ditt rymdskepp bär direkt in i Hyper Quest och Overlord of the 7 Realms. Ett universum, flera spel, sömlös progression. Det du bygger i Hyper Racing driver allt annat."
+        }
+      ],
+      "faqTitle": "Hyper Racing — Vanliga frågor",
+      "faq": [
+        {
+          "q": "Vad är Hyper Racing?",
+          "a": "Ett högintensivt flygande fordonsracingspel som utspelar sig över främmande världar. Bygg, uppgradera och tävla helt anpassningsbara fordon genom farliga sci-fi-kretsar medan du tävlar om belöningar i spelet och riktiga kontantpriser."
+        },
+        {
+          "q": "Kan jag uppgradera mitt racerfordon?",
+          "a": "Varje komponent kan uppgraderas: skrov, propeller, sköldar, yttre skal, motorer, stabilisatorer, kylsystem och aerodynamiska ytor. Varje uppgradering ändrar hur ditt fordon hanterar olika spår och förhållanden."
+        },
+        {
+          "q": "Vad gör gropbesättningen?",
+          "a": "Pitbesättningsmedlemmar ger unika bonusar: snabbare tankning, skrovdiagnostik, nödreparationer och prestandajusteringar mellan varven. De går upp i nivå med tiden och låser upp starkare förmågor som staplas med fordonsuppgraderingar."
+        },
+        {
+          "q": "Hur fungerar pit manager?",
+          "a": "Depåchefen koordinerar besättningens operationer, kallar racestrategi och låser upp teamomfattande prestationshöjningar. Defensiva chefer skyddar ditt fordon under svåra förhållanden; aggressiva chefer pressar varje system för maximal hastighet."
+        },
+        {
+          "q": "Kan jag vinna riktiga pengar?",
+          "a": "Ja. Rangordnade evenemang och turneringar har riktiga prispotter. Kvalificera dig genom rankat spel, tävla mot liknande skickliga motståndare och tjäna riktiga utbetalningar baserat på din slutposition. Veckovisa utmaningar och säsongsmästerskap pågår kontinuerligt."
+        },
+        {
+          "q": "Hur fungerar tävlingsbelöningar?",
+          "a": "Varje lopp betalar ut krediter, uppgraderingsmaterial och besättningspoletter. Segrar multiplicerar dina intäkter. Köp fordon, uppgradera dem till racingmaskiner, vinn lopp och sälj dem med vinst för att finansiera ytterligare förbättringar och uppgraderingar av rymdskepp."
+        },
+        {
+          "q": "Kan jag uppgradera mitt huvudrymdskepp också?",
+          "a": "Absolut. Ditt racinggarage är hangarviken för ditt rymdskepp. Racevinsterfonduppgraderingar till motorer, vapen, navigering och skrovförstärkning på ditt huvudfartyg, vilket ger kraft till interplanetära resor och rymdstrider."
+        },
+        {
+          "q": "Går framstegen vidare till andra spel?",
+          "a": "Varje pilotfärdighet och rymdskeppsuppgradering överförs direkt till Hyper Quest och Overlord of the 7 Realms. Ett universum, flera spel, sömlös progression. Det du bygger i Hyper Racing driver allt annat."
+        },
+        {
+          "q": "Vilka racingmiljöer finns det?",
+          "a": "Kretsar sträcker sig över flytande klippformationer, lavarör, ökenslätter och bergskedjor över främmande världar. Atmosfäriska faror inkluderar surt regn, radioaktiv atmosfär, variabel gravitation och turbulenta vindar. Varje krets kräver olika fordonsinställningar."
+        }
+      ]
+    },
+    "quest": {
+      "label": "QUEST",
+      "heading": "Hyper Quest",
+      "subtitle": "Din galax. Dina regler. Din förmögenhet.",
+      "intro": [
+        "Hyper Quest är ett rymdäventyr i öppen värld där du styr ditt eget helt uppgraderbara rymdskepp, Quest Racer, över en stor och farlig galax. Du lämnade din hemcivilisation för flera år sedan på jakt efter makt, rikedom och berömmelse. Nu är hela universum din lekplats, och varje uppdrag du slutför tar dig närmare galaktisk dominans.",
+        "Men Hyper Quest är inte bara ett spel. Det är en konkurrenskraftig plattform där riktiga pengar står på spel. Slutför uppdrag, besegra utmaningar och gå därifrån med riktiga pengar i fickan och eller belöningar. Från snabba uppdrag som tar minuter till episka flerdagarsexpeditioner, varje uppdrag betalar sig. Ju svårare utmaning, desto större belöning.",
+        "Uppgradera ditt rymdskepp från skrov till cockpit. Beväpna den med förödande vapensystem. Rekrytera specialister som lägger kraftfulla bonusar på ditt skepps prestanda och kraftnivå. Mina asteroider, transportera farlig last, jaga gömda skatter, kidnappa värdefulla mål eller bli en hyrd pistol. Hur du styr universum är helt och hållet ditt val.",
+        "Allt du bygger i Hyper Quest matas direkt in i Hyper Racing och Overlord of the 7 Realms. Ett universum, sömlös utveckling, obegränsad potential. Läs vidare för att upptäcka hur questing fungerar, vad du kan tjäna och hur du och ditt rymdskepp blir det mest fruktade fartyget i galaxen."
+      ],
+      "calloutLine1": "Quest to Earn. Tjäna för att uppgradera.",
+      "calloutLine2": "Uppgradera till Conquer.",
+      "howItWorksTitle": "Hur Hyper Quest fungerar",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Acceptera uppdrag från uppdragsstyrelsen",
+          "body": "Uppdragsbrädet i spelet är din inkörsport till äventyr. Bläddra bland tillgängliga uppdrag som sträcker sig från snabba lastkörningar som tar bara några minuter till episka flerdagarsexpeditioner djupt in i okänt utrymme. Varje uppdrag kommer med tydliga mål, riskklassificeringar och belöningsnivåer. Välj de uppdrag som matchar din spelstil, oavsett om det är att transportera farlig last, jaga gömda skatter, bryta asteroidfält eller gå undercover för att återställa förlorade artefakter."
+        },
+        {
+          "num": "02",
+          "title": "Utforska galaxen",
+          "body": "Res genom portaler till avlägsna planeter, var och en med unika miljöer, värdefullt material och nya racingbanor. Följ galaktiska kartor för att kartlägga outforskade områden och få namnrättigheter för planeter du först upptäcker. Mina resurser från asteroidfält, rädda delar från forntida reliker och övergivna skepp och samla ledtrådar som leder till dolda förmögenheter utspridda över stjärnorna."
+        },
+        {
+          "num": "03",
+          "title": "Bygg ditt imperium inifrån ditt skepp",
+          "body": "Din Quest Racer är mer än transport. Odla mat i hydroponiska vikar, förfina material som utvinns från avlägsna planeter och bygg arméer inifrån dina kloningslabb. Förfina dina trupper och deras vapen, försvara dig mot pirater och hantera en självförsörjande mobil bas som blir kraftfullare för varje uppdrag du slutför."
+        },
+        {
+          "num": "04",
+          "title": "Spela på ditt sätt",
+          "body": "Det finns ingen enskild väg till dominans. Bli en fruktad prisjägare, en listig smugglare, en gruvarbetare eller en legendarisk upptäcktsresande. Kidnappa värdefulla mål, bli en hyrd pistol eller skapa allianser för att kontrollera hela sektorer. Galaxen böjer sig efter din vilja, och varje beslut formar ditt rykte och din förmögenhet."
+        }
+      ],
+      "rewardsTitle": "Quest Rewards; Få betalt för att spela!",
+      "rewards": [
+        {
+          "title": "Belöningar i spelet",
+          "body": "Varje uppdrag du slutför betalar ut. Krediter, uppgraderingsmaterial, sällsynta komponenter, specialistrekryteringspoletter och exklusiva föremål flödar in i ditt lager med varje framgångsrikt uppdrag. Ju svårare uppdraget är, desto rikare är draget. Upptäck sällsynta material på avlägsna planeter, rädda värdefulla delar från uråldriga reliker och lagra resurser som ger energi till din uppgång till galaktisk överhöghet."
+        },
+        {
+          "title": "Riktiga kontantbetalningar",
+          "body": "Hyper Quest tar spel bortom underhållning. Vissa uppdrag och rankade utmaningar erbjuder riktiga kontantutbetalningar. Slutför uppdrag på hög nivå, dominera leaderboard-evenemang och delta i säsongsbetonade quest-mästerskap där riktiga pengar står på spel. Ju skickligare och mer vågad du blir, desto större blir utbetalningarna. Från veckovisa uppdragspremier till episka säsongsbetonade turneringar, det finns alltid möjligheter att förvandla dina galaktiska äventyr till riktiga intäkter."
+        },
+        {
+          "title": "Hur Quest-utbetalningar fungerar",
+          "body": "Spelare kvalificerar sig för kontantbelöningsuppdrag genom att bygga upp sitt rykte och uppfylla prestationströsklar. Questens svårighetsgrad, varaktighet och risknivå avgör prispotten. Utbetalningar är transparenta, tydligt visas innan du accepterar något uppdrag, och behandlas snabbt när de är klara. Oavsett om du kör en tio minuters lasttransport eller en veckolång expedition i rymden, matchar belöningarna risken."
+        },
+        {
+          "title": "Progression som lönar sig",
+          "body": "Quest-belöningar matas direkt in i dina fartygsuppgraderingar, vapensystem och specialistrekrytering. Varje utbetalning gör dig starkare, vilket låser upp svårare uppdrag med ännu större belöningar. Intäkterna överförs också till Hyper Racing och Overlord of the 7 Realms, vilket skapar en progressionsloop som belönar engagemang över hela Hyper Teks ekosystem."
+        }
+      ],
+      "upgradesTitle": "Uppgradera ditt skepp, beväpna ditt arsenal, rekrytera din besättning",
+      "upgrades": [
+        {
+          "title": "Rymdskeppsuppgraderingar",
+          "body": "Din Quest Racer är helt modulär från motorrum till cockpit. Uppgradera skrovet för maximal hållbarhet, förstärk det yttre skalet för att motstå fientliga miljöer, förstärk sköldgeneratorer för stridsöverlevnadsförmåga och översyn kraftsystem för toppprestanda. Bättre motorer innebär snabbare interplanetär färd. Starkare navigationssystem avslöjar dolda rutter och okända världar. Varje uppgradering förvandlar ditt skepp till ett kraftfullare, mer fruktat fartyg."
+        },
+        {
+          "title": "Vapensystem",
+          "body": "Galaxen är farlig, och du måste vara farligare. Uppgradera och förfina dina vapensystem för att skydda dig mot pirater, rivaliserande spelare och fientliga styrkor. Välj mellan defensiva konfigurationer som håller dig vid liv i de värsta situationerna eller offensiva belastningar utformade för att orsaka maximal skada. Lasermatriser, missilbatterier, plasmakanoner och experimentella energivapen är alla tillgängliga när du går igenom uppgraderingsträdet."
+        },
+        {
+          "title": "Rekrytera specialister",
+          "body": "Specialister är spelväxlare. Var och en ger unika färdigheter som ger kraftfulla bonusar till ditt skepps övergripande prestanda och kraftnivå. Navigationsspecialister avslöjar dolda stigar och minskar restiden. Stridsspecialister ökar vapennoggrannheten och skadar produktionen. Ingenjörsspecialister ökar skrovets integritet och reparationshastighet. Vetenskapsspecialister förbättrar resursutvinning och materialförfining. Stapla flera specialister för att skapa förödande kombinationer som multiplicerar ditt fartygs effektivitet."
+        },
+        {
+          "title": "Power Loop",
+          "body": "Quest att tjäna. Tjäna för att uppgradera. Uppgradera för att erövra svårare uppdrag med större belöningar. Rekrytera specialister för att förstärka alla system på ditt skepp. Ju starkare du blir, desto mer av galaxen öppnar sig, och desto större förmögenhet väntar. Fartygsuppgraderingar och specialistbonusar bär också direkt in i rymdstrider under Hyper Racing-transfer och strider över Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest — Vanliga frågor",
+      "faq": [
+        {
+          "q": "Vad är Hyper Quest?",
+          "a": "Ett rymdäventyr i öppen värld där du styr ett helt uppgraderbart rymdskepp över en stor galax. Slutför uppdrag, utforska främmande världar, uppgradera ditt skepp, rekrytera specialister och tjäna riktiga kontantbelöningar tillsammans med rikedomar i spelet."
+        },
+        {
+          "q": "Hur fungerar uppdrag?",
+          "a": "Acceptera uppdrag från spelets uppdragsbräda. Uppdragen sträcker sig från snabba lastkörningar som tar bara några minuter till episka flerdagarsexpeditioner djupt in i okänt utrymme. Varje uppdrag har tydliga mål, riskklassificeringar och belöningsnivåer som visas innan du accepterar."
+        },
+        {
+          "q": "Kan jag tjäna riktiga pengar?",
+          "a": "Ja. Vissa uppdrag, rankade utmaningar och säsongsbetonade mästerskap erbjuder riktiga kontantutbetalningar. Bygg upp ditt rykte, uppnå prestationströsklar och kvalificera dig för allt mer lukrativa kontantbelöningsuppdrag. Veckovisa bounties och säsongsbetonade turneringar körs kontinuerligt."
+        },
+        {
+          "q": "Vilka belöningar i spelet kan jag tjäna?",
+          "a": "Varje avslutat uppdrag betalar ut krediter, uppgraderingsmaterial, sällsynta komponenter, specialistrekryteringspoletter och exklusiva föremål. Ju hårdare och längre uppdrag, desto rikare belöningar. Upptäck sällsynta material på avlägsna planeter och rädda värdefulla delar från forntida reliker."
+        },
+        {
+          "q": "Kan jag uppgradera mitt rymdskepp?",
+          "a": "Varje system kan uppgraderas: skrov, yttre skal, sköldgeneratorer, kraftsystem, motorer, sittbrunn och navigering. Bättre motorer innebär snabbare resor, starkare skrov överlever fientliga möten och uppgraderad navigering avslöjar dolda rutter och okända världar."
+        },
+        {
+          "q": "Vilka vapen finns tillgängliga?",
+          "a": "Uppgradera och förfina vapensystem inklusive lasermatriser, missilbatterier, plasmakanoner och experimentella energivapen. Välj defensiva konfigurationer för överlevnad eller offensiva laddningar för maximal skada mot pirater, rivaler och fientliga styrkor."
+        },
+        {
+          "q": "Hur arbetar specialister?",
+          "a": "Rekrytera specialister med unika färdigheter som ger kraftfulla bonusar till ditt fartygs prestanda och kraftnivå. Navigationsspecialister avslöjar dolda vägar, stridsspecialister ökar vapenskador, ingenjörsspecialister ökar skrovets integritet och vetenskapsspecialister förbättrar resursutvinningen. Stapla flera specialister för förödande kombinationer."
+        },
+        {
+          "q": "Vilka typer av uppdrag finns tillgängliga?",
+          "a": "Lasttransport, asteroidbrytning, skattjakt, prisjakt, återhämtning av artefakter, undercover-operationer, planetarisk utforskning, piratförsvar, räddningsuppdrag och mer. Uppdragen sträcker sig från snabba tiominuterslopp till flerdagars djupa rymdexpeditioner."
+        },
+        {
+          "q": "Kan jag upptäcka nya planeter?",
+          "a": "Ja. Följ galaktiska kartor till okända områden och upptäck nya världar. De första upptäckarna får namnrättigheter för de planeter de hittar. Nya världar erbjuder unika material, miljöer och racingbanor som ingen annan spelare har använt tidigare."
+        },
+        {
+          "q": "Vad kan jag göra i mitt skepp?",
+          "a": "Din Quest Racer är en mobil bas. Odla mat i hydroponiska vikar, förfina material som utvinns från avlägsna planeter, bygg och träna arméer i kloningslabb, uppgradera vapen och försvar och hantera en självförsörjande operation som blir kraftfullare för varje uppdrag."
+        },
+        {
+          "q": "Hur fungerar den galaktiska kartan?",
+          "a": "Den galaktiska kartan guidar din utforskning över universum. Uppgradera din karta för att avslöja nya sektorer, portalplatser och dolda uppdragszoner. När du utforskar ytterligare expanderar kartan och låser upp allt farligare och givande områden i rymden."
+        },
+        {
+          "q": "Går mina framsteg vidare till andra spel?",
+          "a": "Allt du bygger i Hyper Quest matas direkt in i Hyper Racing och Overlord of the 7 Realms. Fartygsuppgraderingar, specialistbonusar, stridsfärdigheter och resurser överförs sömlöst. Ett universum, flera spel, obegränsad progression."
+        },
+        {
+          "q": "Kan jag spela som en skurk?",
+          "a": "Absolut. Gå under täckmantel, kidnappa värdefulla mål, bli en hyrd pistol, smuggla farlig last eller plundra andra spelare. Det finns ingen enskild väg till dominans. Hur du styr galaxen är helt och hållet ditt val, och varje beslut formar ditt rykte."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "OVERLORD",
+      "heading": "Overlord of the 7 Realms",
+      "subtitle": "Crash-land. Återuppbygga. Erövra. Bli Overlord.",
+      "intro": [
+        "Overlord of the 7 Realms är ett strategispel på tre nivåer som inte liknar något annat inom spel. Du vågade dig genom en portal in i ett parallellt universum och kraschlandade på en fientlig främmande planet. Ditt skepp har havererat, dina system havererar och planetens varelser närmar sig redan. Överlevnad är bara början. Dominans är målet.",
+        "Bygg om ditt skepp från vraket och uppåt. Klona och träna arméer i dina labb ombord. Tämja planetens vilda djur och skapa förödande beridna kavalleri. Ta sedan kampen över tre stridsdimensioner: mark-till-mark-strid mot monster och rivaliserande spelare, mark-till-rymd-angrepp på orbital- eller markmål och rymd-till-rymden-krigföring ombord på den massiva Battle Ring som kretsar runt planeten.",
+        "Detta är inte bara ännu ett strategispel. Overlord har VR-interaktion i realtid, riktiga kontantbelöningar för att slutföra dagliga händelser och uppdrag, och varannan vecka invasioner av de skräckinjagande Hammerongs, den mäktigaste främmande arten som finns. Var fjortonde dag kommer de för att bryta planeten, och var fjortonde dag kan modiga spelare utmana dem för enorma bonusar och legendariska belöningar.",
+        "Uppgradera ditt rymdskepp, beväpna det med förödande vapen, rekrytera specialister som förstärker din kraftnivå och skapa allianser för att kontrollera hela regioner. Allt du bygger ansluter direkt till Hyper Racing och Hyper Quest genom det delade Hyper Tek-ekosystemet. Ett universum, tre spel, obegränsad krigföring. Läs vidare för att upptäcka hur stridssystemet fungerar och varför Overlord ändrar allt."
+      ],
+      "calloutLine1": "Överlevnad är bara början.",
+      "calloutLine2": "Dominans är målet.",
+      "howItWorksTitle": "Tri-Level Battle System; Tre dimensioner av krig",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Kamp från mark till mark",
+          "body": "Planetens yta är en krigszon. Distribuera dina klonade arméer mot fientliga främmande varelser, monstruösa bestar och rivaliserande spelare som kämpar om territorium och resurser. Tämja och träna planetens vilda djur för att skapa beridna kavallerienheter som ger dina markstyrkor en förödande kant. Markkrigföring är rå, taktisk och obeveklig. Varje strid du vinner tjänar resurser, territorium och rykte."
+        },
+        {
+          "num": "02",
+          "title": "Angrepp från mark till rymden",
+          "body": "Det är här Overlord lägger till en dimension som inga, eller nästan inga, andra spel erbjuder. Skapa specialiserade truppgrupper utformade för att starta attacker mellan planetens yta och den orbitala Battle Ring. Slå till mot fartyg som är stationerade i rymden från din markposition eller samordna kombinerade angrepp som träffar fiender från ovan och under samtidigt. Detta vertikala stridslager förvandlar standardstrategi till en flerdimensionell schackmatch där placering över både mark och rymden avgör segern."
+        },
+        {
+          "num": "03",
+          "title": "Space-to-space-krigföring",
+          "body": "Flytta ditt skepp i omloppsbana och landa på Battle Ring, en massiv orbital struktur som kretsar runt planeten. Härifrån, jaga efter oskärmade fartyg och utsatta mål. Teleportera trupper genom rymden och direkt in i fiendens fartyg för att orsaka maximal inre skada med hjälp av speciellt utvecklade boardingattacker. Belöningar för rymdstrider är bland de högsta i spelet, och att kontrollera orbitalt territorium ger dig en strategisk fördel som ingen markspelare kan matcha."
+        },
+        {
+          "num": "04",
+          "title": "Varför Tri-Level förändrar allt",
+          "body": "De flesta strategispel fungerar på ett enda plan. Overlord opererar på tre. Förmågan att attackera från mark till mark, mark till rymden och rymd till rymden skapar ett slagfält med oöverträffat taktiskt djup. Skicklighet är allt. Enbart rå våld kommer inte att göra dig till Overlord. Strategisk behärskning över alla tre nivåerna är det som skiljer dominant från besegrad."
+        }
+      ],
+      "extraSection": {
+        "title": "Battle Ring och VR Interaction",
+        "items": [
+          {
+            "title": "Landning på Battle Ring",
+            "body": "Battle Ring är en kolossal orbital struktur som cirklar planetens system. När du hamnar ditt skepp i rymden kan du docka på Battle Ring för att få en enorm strategisk fördel. Från denna upphöjda position kan du jaga efter oskyddade fartyg, skjuta ombordstigningspartier till rivaliserande fartyg och koordinera förödande attacker mot markmål nedanför. Att landa på Battle Ring öppnar en helt ny dimension av spelandet som de flesta strategispel helt enkelt inte erbjuder, vilket ger Overlord en taktisk fördel gentemot allt annat på marknaden."
+          },
+          {
+            "title": "Inuti stridsringen",
+            "body": "Battle Ring är inte bara en dockningsplattform. Om du kan komma på hur du bryter mot dess inre, väntar dolda uppdrag, extra bonusar och exklusiva belöningar inuti. Ringens inre är en labyrint av korridorer, kammare och gammal teknik. Utför uppdrag och jaktuppdrag inom själva ringen och upptäck hemligheter som ingen spelare någonsin kommer att få tillgång till. Battle Ring belönar de djärva, listiga och obevekliga."
+          },
+          {
+            "title": "Realtids VR-interaktion",
+            "body": "Liksom alla Hyper Teks spelutbud stöder Overlord of the 7 Realms full VR-interaktion i realtid. Stig in i ditt skepp, gå i korridorerna i Battle Ring, led dina trupper in i markstrider och upplev rymdkrigföring från ditt fartygs cockpit. VR förvandlar Overlord från ett strategispel till en helt uppslukande slagfältsupplevelse. Styr dina styrkor, utforska främmande terräng och delta i strid med en nivå av närvaro och intensitet som plattskärmsspel inte kan replikera."
+          },
+          {
+            "title": "Fördelen framför andra spel",
+            "body": "Inget annat spel kombinerar krigföring på tre nivåer, en utforskabar orbital stridsstation, VR i realtid och riktiga pengar och/eller belöningar i spelet i en enda upplevelse. Enbart Battle Ring lägger till en speldimension som konkurrenterna inte kan matcha. När du kombinerar det med markstrider, rymdkrigföring, VR-nedsänkning och det sammankopplade Hyper Tek-ekosystemet, står Overlord i en egen kategori."
+          }
+        ]
+      },
+      "upgradesTitle": "Bygg om, beväpna, rekrytera; Power Up för krig",
+      "upgrades": [
+        {
+          "title": "Rymdskeppsuppgraderingar",
+          "body": "Ditt kraschade skepp är där allt börjar. Bygg om det system för system, från motorrummet till kommandodäcket. Varje komponent är helt uppgraderbar: skrovförstärkning, strukturell integritet, yttre skalsammansättning, sköldgeneratorer, kraftsystem och navigeringsmatriser. I Overlord bygger du inte för snabbhet utan för strid. Ett helt uppgraderat krigsfartyg är grunden för varje framgångsrik kampanj, och ju djupare du investerar, desto mer formidabel blir ditt fartyg."
+        },
+        {
+          "title": "Vapensystem och tekniska nivåer",
+          "body": "Uppgradera och förfina dina vapen, färdigheter och tekniska nivåer för att dominera över alla tre stridsnivåerna. Markbaserat artilleri för planetarisk krigföring, anti-orbitalbatterier för mark-till-rymd-anfall och fartygsmonterade vapenuppsättningar för rymd-till-rymd-strider. Varje vapensystem kan förfinas för specifika taktiska roller. Oavsett om du är specialiserad på långdistansbombning, ombordstigning på nära håll eller defensiva motåtgärder, definierar din vapenladdning din stridsidentitet."
+        },
+        {
+          "title": "Rekrytera specialister",
+          "body": "Specialister är kraftmultiplikatorerna som skiljer bra spelare från Overlords. Skaffa unika specialister som ger kraftfulla bonusar till ditt skepps övergripande prestanda och kraftnivå. Taktiska specialister förbättrar truppplaceringens effektivitet, ingenjörsspecialister påskyndar reparationer och uppgraderingar av fartyg, vapenspecialister ökar skadorna i alla system, och underrättelsespecialister avslöjar fiendens positioner och svagheter. Stapla flera specialister för att skapa förödande synergier som förstärker varje aspekt av din verksamhet."
+        },
+        {
+          "title": "Bygg dina arméer",
+          "body": "Klona trupper i ditt skepps kloningslabb ombord, uppgradera och förfina dem och deras vapen tills de är redo för strid. Men enbart trupper räcker inte. Tämja och träna planetens vilda varelser för att skapa beridna odjurskavalleri, en kraft som inte kan klonas eller tillverkas och som måste förtjänas genom skicklighet och tålamod. Din armésammansättning över marken, luften och rymden är det som avgör din dominans."
+        }
+      ],
+      "rewardsTitle": "Hammerongs, Rewards och Hyper Tek Ecosystem",
+      "rewards": [
+        {
+          "title": "Hammerongs: Den mest kraftfulla arten som finns",
+          "body": "Varannan vecka sjunker centerarenans kraftfält, och Hammerongs anländer. De är den starkaste främmande arten i universum, beväpnade med avancerad teknik långt bortom allt som spelare har. De kommer för att ta bort jordens resurser, och de försvarar arenan med full, överväldigande kraft. Att attackera Hammerongs är den farligaste utmaningen i Overlord, men de som lyckas belönas med enorma bonusar, legendariskt byte, sällsynt uppgraderingsmaterial och exklusiva belöningar som inte kan erhållas på annat sätt. Hammerong-invasionen varannan vecka är det ultimata testet på din makt."
+        },
+        {
+          "title": "Dagliga evenemang, uppdrag och stridsbelöningar",
+          "body": "Overlord ger konstant belöningar. Slutför dagliga uppgifter för att tjäna poäng, uppgradera material och progressionsbonusar. Gå med i speciella evenemang för premiumbelöningar. Utför uppdrag över planetens yta och i Battle Ring för exklusivt byte. Vinn strider mot monster, främmande varelser och rivaliserande spelare för att samla resurser. Utforska ytan för att upptäcka dolda artefakter och skatter. Belöningsstrukturen är utformad så att varje åtgärd du tar för dig närmare att bli serverns ultimata Overlord."
+        },
+        {
+          "title": "Ansluten till Hyper Tek Ecosystem",
+          "body": "Overlord of the 7 Realms existerar inte isolerat. Den är helt integrerad i Hyper Tek-universumet tillsammans med Hyper Racing och Hyper Quest. Resurser som tjänas in i Overlord kan användas i alla tre spelen. Fartygsuppgraderingar, specialistbonusar, stridsfärdigheter och material flyter sömlöst mellan titlarna. Racingförmågor som du fått i Hyper Racing förbättrar dina pilotfärdigheter i Overlord-rymdstrid. Material som samlats i Hyper Quest ger energi till dina uppgraderingar på planeten. Hyper Tek-marknadsplatsen förenar allt och skapar en enhetlig ekonomi där framsteg i ett spel driver framsteg i alla tre."
+        },
+        {
+          "title": "Ett universum, tre spel, obegränsad kraft",
+          "body": "Spelare som engagerar sig i alla tre Hyper Tek-spelen bygger kraft snabbare, får tillgång till exklusiva belöningar mellan olika spel och dominerar genom en mängd färdigheter och resurser som enspelsspelare inte kan matcha. Det sammankopplade ekosystemet är den ultimata konkurrensfördelen."
+        }
+      ],
+      "faqTitle": "Overlord of the 7 Realms — Vanliga frågor",
+      "faq": [
+        {
+          "q": "Vad är Overlord of the 7 Realms?",
+          "a": "Ett stridsstrategispel på tre nivåer där du kraschlandar på en främmande planet, bygger om ditt skepp, klonar arméer och slåss över tre dimensioner: mark-till-mark, mark-till-rymden och rymd-till-rymden. Innehåller VR-interaktion, riktiga kontantbelöningar och varannan vecka Hammerong-invasioner."
+        },
+        {
+          "q": "Vad är stridssystemet i tre nivåer?",
+          "a": "Strids pågår på tre nivåer: jord-till-mark mot monster och rivaliserande spelare, jord-till-rymd-angrepp riktade mot orbitalskepp och rymd-till-rymd-krigföring på Battle Ring. Detta flerdimensionella tillvägagångssätt skapar taktiskt djup som inget strategispel på ett plan kan matcha."
+        },
+        {
+          "q": "Vad är Battle Ring?",
+          "a": "En massiv orbital struktur som kretsar runt planeten. Landa ditt skepp på det för att jaga oskyddade mål, starta ombordstigningspartier i fiendens fartyg och komma åt dolda uppdrag i dess inre. Att kontrollera Battle Ring ger dig en strategisk fördel gentemot markspelare."
+        },
+        {
+          "q": "Kan jag uppgradera mitt rymdskepp?",
+          "a": "Varje system kan uppgraderas från motorrum till kommandodäck: skrov, struktur, yttre skal, sköldgeneratorer, kraftsystem och navigering. I Overlord bygger du för strid, inte fart. Ett fullt uppgraderat krigsfartyg är grunden för varje kampanj."
+        },
+        {
+          "q": "Hur arbetar specialister?",
+          "a": "Rekrytera unika specialister som lägger till kraftfulla bonusar till ditt fartygs prestanda och kraftnivå. Taktik-, ingenjörs-, vapen- och underrättelsespecialister förstärker olika system. Stapla flera specialister för förödande synergier över alla stridsnivåer."
+        },
+        {
+          "q": "Vilka är Hammerongs?",
+          "a": "Den mest kraftfulla främmande arten som finns. Var fjortonde dag anländer de till centrumarenan för att bryta ut planetens resurser, försvarade av överväldigande kraft och avancerad teknik. Att attackera dem är extremt farligt men belönar spelare med enorma bonusar och legendariska byten."
+        },
+        {
+          "q": "Vilka belöningar kan jag tjäna?",
+          "a": "Dagliga uppgifter, uppdrag, strider och evenemang betalar alla ut krediter, uppgraderingsmaterial och progressionsbonusar. Specialevenemang och Hammerong-invasioner erbjuder premium och exklusiva belöningar. Utmaningar med högre svårighetsgrad och rankade tävlingar ger större utbetalningar inklusive riktiga pengar."
+        },
+        {
+          "q": "Stöder Overlord VR?",
+          "a": "Ja. Full VR-interaktion i realtid låter dig gå genom ditt skepps korridorer, utforska Battle Rings inre, leda trupper in i markstrider och lotsa ditt fartyg i rymdkrigföring. VR förvandlar Overlord från strategi till en helt uppslukande slagfältsupplevelse."
+        },
+        {
+          "q": "Hur bygger jag min armé?",
+          "a": "Klona trupper i ditt fartygs laboratorier ombord, uppgradera och förfina dem och deras vapen. För beridet kavalleri måste du tämja och träna planetens vilda varelser, eftersom djur inte kan klonas. Arméns sammansättning över marken, luften och rymden avgör din dominans."
+        },
+        {
+          "q": "Kan jag gå med i en allians?",
+          "a": "Ja. Gå ensam eller gå med i en allians som ökar din makt och hjälper dig att växa. Allianser erbjuder delade resurser, koordinerade attacker och kollektivt försvar. Slutför dagliga uppgifter för att uppgradera både ditt skepp och alliansens delade tillgångar."
+        },
+        {
+          "q": "Är Overlord länkad till andra Hyper Tek-spel?",
+          "a": "Helt integrerad. Resurser, fartygsuppgraderingar, specialistbonusar och stridsfärdigheter flyter mellan Overlord, Hyper Racing och Hyper Quest. Racingförmågor förbättrar din rymdstrid, Quest-material ger bränsle till dina uppgraderingar och Hyper Tek-marknaden kopplar samman hela ekonomin."
+        },
+        {
+          "q": "Vilka vapen finns tillgängliga?",
+          "a": "Markbaserat artilleri, anti-orbitalbatterier, fartygsmonterade vapenarrayer och specialiserad ombordstigningsutrustning. Varje system kan förfinas för specifika taktiska roller inklusive långdistansbombardement, närstrid och defensiva motåtgärder."
+        },
+        {
+          "q": "Kan jag utforska planetens yta?",
+          "a": "Ja. Planeten är rik på dolda belöningar, artefakter, resurser och farligt vilda djur att tämja. Utforska ytan för att hitta skatter, bekämpa främmande varelser och monster och upptäck strategiska fördelar som stärker din kampanj för Overlord-dominans."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "AVSLUTA",
     "spaceRing": "OVERLORD · RYMDRING",
@@ -324,91 +720,268 @@
       "detail": "Detalj"
     },
     "rooms": {
-      "storeroom":     { "title": "Förrådsrum",              "desc": "Centralt lagernav för råmaterial och skördade resurser. Hanterar inventariefördelning över gruv- och raffineringsoperationer." },
-      "mining_fs":     { "title": "Gruva FS",                "desc": "Framre styrbords gruvebay. Utrustad med djupkärnutvinningsanläggningar för mineral- och malminsamling i öppet rymden." },
-      "mining_fp":     { "title": "Gruva FP",                "desc": "Framre babords gruvebay. Speglar styrbordenheten och fördubblar utvinningskapaciteten under resursrika fältoperationer." },
-      "process_ref":   { "title": "Processraffinaderi",      "desc": "Omvandlar rå malm och mineraler till raffinerade legeringar. Kritisk för bränslsyntes och skeppsuppgraderingsmaterial." },
-      "mining_rs":     { "title": "Gruva RS",                "desc": "Bakre styrbords gruvbay. Vinklad vid -45° för laterala fältsvepningar under långsam-drift asteroidskördning." },
-      "mining_rp":     { "title": "Gruva RP",                "desc": "Bakre babords gruvbay. Arbetar i tandem med RS-bay för att maximera bakre fältresursutvinningsutbytet." },
-      "fuel_ref":      { "title": "Bränsleraffinaderi",      "desc": "Bearbetar raffinerade legeringar till framdrivningsklassificerat bränsle. Försörjer huvudmotorn och nödtrusterreserverna." },
-      "workshop":      { "title": "Verkstad",                "desc": "Skeppsunderhåll och fabrikationscentral. Hanterar komponentreparationer, deltillverkning och utrustningsuppgraderingar." },
-      "racing":        { "title": "Tävlingshangar",          "desc": "Dedikerad bay med tävlingsdrönare och lätta farkoster. Stöder Racing-spellägedriftsättning och depåoperationer." },
-      "brig":          { "title": "Arrest",                  "desc": "Säkert förvaringsutrymme för fångar och värdefull last. Förstärkta väggar förhindrar obehörig åtkomst eller flykt." },
-      "armory_ss":     { "title": "Vapenlager SS",           "desc": "Styrbordssidans vapenskåp. Lagrar och underhåller handvapen, besättningsskyddsutrustning och personliga försvarssystem." },
-      "armory_ps":     { "title": "Vapenlager PS",           "desc": "Babordssidans vapenskåp. Speglar SS-vapenlagret och ger balanserad utrustningsåtkomst på båda sidor av fartyget." },
-      "main_weapon":   { "title": "Huvudvapen Tungt",        "desc": "Primär tung vapenmontering. Huserar skeppets kraftfullaste offensiva system för storskaliga stridssituationer." },
-      "fwd_shield":    { "title": "Framre Sköldgenerator",   "desc": "Genererar en skyddande energibarriär längs skeppets stäv. Första försvarslinjen mot inkommande projektiler och energiattacker." },
-      "fighter_fss":   { "title": "Jagarbay FSS",            "desc": "Framre styrbords bay med kompakta jagarfarkoster. Möjliggör snabb driftsättning av eskorterande jagare under strid- och patrulluppdrag." },
-      "fighter_fps":   { "title": "Jagarbay FPS",            "desc": "Framre babords jagarbay. Opererar i tandem med FSS-bay för koordinerade jagarskvadronuppskjutningar." },
-      "fighter_rss":   { "title": "Jagarbay RSS",            "desc": "Bakre styrbords nacelle-jagarbay. Stöder bakskyddsoperationer och förföljningsinspelningsscenarier." },
-      "fighter_rps":   { "title": "Jagarbay RPS",            "desc": "Bakre babords nacelle-jagarbay. Ger symmetrisk baktäckning för fullständig defensiv jagardriftsättning." },
-      "barracks_ss":   { "title": "Kaserner SS",             "desc": "Styrbords besättningskvarter för stridspersonal. Huserar soldater, piloter och säkerhetsteam med köyesystem och utrustningsskåp." },
-      "barracks_ps":   { "title": "Kaserner PS",             "desc": "Babords besättningskvarter. Identisk layout som SS-kasernerna för att säkerställa jämn besättningsfördelning och snabb mobilisering från vardera sida." },
-      "stables_ss":    { "title": "Stall SS",                "desc": "Styrbords biologisk anläggningsbay. Huserar utomjordiska riddjur och biotekniska varelser använda i planetyta-operationer." },
-      "stable_ps":     { "title": "Stall PS",                "desc": "Babords biologisk anläggningsbay. Speglar SS-stallen för balanserad varelsbelastning och symmetrisk viktfördelning." },
-      "transporter":   { "title": "Transportbay",            "desc": "Kvantassisterat personal- och lasttransportsystem. Möjliggör snabb kortdistansteleportation till planetytor eller närliggande fartyg." },
-      "security":      { "title": "Säkerhetsstation",        "desc": "Skeppsomfattande övervaknings- och hotresponstav. Övervakar alla däck och koordinerar interna säkerhetsprotokoll." },
-      "weapons_ss":    { "title": "Vapensystem SS",          "desc": "Styrbords vapenhanterings-konsol. Styr målsökning, avfyringssekvenser och ammunitionslogistik för styrbordsvapen." },
-      "weapons_ps":    { "title": "Vapensystem PS",          "desc": "Babords vapenhanterings-konsol. Ger fullständig oberoende kontroll av alla babords vapensystem." },
-      "power_plant":   { "title": "Kraftverk",               "desc": "Kärnenergigenereringsenhet. Tillhandahåller stabil kraftproduktion till alla skeppssystem via cirkulär plasmainneslutningsteknologi." },
-      "power_sys":     { "title": "Kraftsystem",             "desc": "Kraftdistributions- och regleringsnav. Hanterar lastbalansering mellan vapen, sköldar, motorer och livsuppehållande system." },
-      "energy_dist":   { "title": "Energidistribution",      "desc": "Sekundär energirutningsnod. Säkerställer konsekvent kraftleverans till midskepps- och aktersektionssystem under höga efterfrågeförhållanden." },
-      "main_engine":   { "title": "Skeppets Huvudmotor",     "desc": "Primärt framdrivningssystem som driver all subljos-resa. Genererar dragkraft via antimaterie-katalyserade plasmajetar." },
-      "navigation":    { "title": "Navigation",              "desc": "Central navigations- och roderkontrollstation. Hanterar kursplotning, astrokartografi och realtidspositionsspårning." },
-      "flight_deck":   { "title": "Flygdäck",                "desc": "Huvud pilotstation. Styr alla flygoperationer inklusive start, landning, orbitala manövrar och nödundvikande åtgärder." },
-      "weapons_off":   { "title": "Vapensoffiser",           "desc": "Taktisk vapenkommandopost. Koordinerar offensiv och defensiv vapenbeskjutning under direkt befäl av Vapenoffiseren." },
-      "comms_off":     { "title": "Kommunikationsoffiser",   "desc": "Kommunikations- och signalavlyssningsnav. Hanterar all inter-skepp, allians och planetär kommunikation inklusive krypterade kanaler." },
-      "capt_quarters": { "title": "Kaptenskvarter",          "desc": "Privata kvarter för skeppets kommenderande officer. Innehåller säkra dataterminaler och privata briefings-faciliteter." },
-      "kitchen":       { "title": "Kök",                     "desc": "Besättningens näring och matlagningsfacilitet. Bearbetar lagrade matresurser och syntetiserar näringssupplement för långdistansresor." },
-      "mess_hall":     { "title": "Matsal",                  "desc": "Gemensamt mat- och rekreationsutrymme. Fungerar som besättningsmoral-nav under drifttid mellan strid- och resursoperationer." },
-      "hydro_1":       { "title": "Hydroponikscell 1",       "desc": "Automatiserad odlingsenhet som producerar färsk mat och medicinska växter. Minskar beroendet av lagrade förråd för utökade uppdrag." },
-      "hydro_2":       { "title": "Hydroponikscell 2",       "desc": "Sekundär hydroponikscell som utökar grödvariation och utbyte. Stöder besättningsernäring och handelsvaruproduktion." },
-      "hydro_3":       { "title": "Hydroponikscell 3",       "desc": "Tertiär odlingsenhet specialiserad på högavkastnings basisgrödor. Tillhandahåller grundläggande kaloribuds för stora besättningskomplement." },
-      "hydro_4":       { "title": "Hydroponikscell 4",       "desc": "Medicinsk och botanisk forskningscell. Odlar sällsynta arter som används i medicinsk behandling och alkemisk syntes." },
-      "hydro_5":       { "title": "Hydroponikscell 5",       "desc": "Exotisk plantodlingsbay. Producerar lyxvaror och sällsynt flora för handel på marknadsplatsen." },
-      "hydro_6":       { "title": "Hydroponikscell 6",       "desc": "Högtillväxt experimentell cell. Testar nya grödstammar utvecklade genom genetiska modifieringsprogram." },
-      "shield_main":   { "title": "Sköldgenerator Huvud",    "desc": "Primär multidirektionell sköldgenerator. Projicerar en energibarriär runt hela skrovet under stridssituationer." },
-      "power_relay1":  { "title": "Kraftrelä 1",             "desc": "Övredäck kraftreläkoppling. Leder energi från kraftverket till framre vapen och sköldanläggningar." },
-      "power_relay2":  { "title": "Kraftrelä 2",             "desc": "Nedredäck kraftreläkoppling. Distribuerar kraft till motorsidor och bakre defensiva system." },
-      "hidden_st1":    { "title": "Dolt Lagringsutrymme 1",  "desc": "Dolt högsäkerhetsgömsle. Lagrar klassificerad last, värdefulla artefakter och smuggelgods borta från standardinventarieskanning." },
-      "hidden_st2":    { "title": "Dolt Lagringsutrymme 2",  "desc": "Sekundärt dolt gömsle. Ytterligare säkert utrymme för uppdragskritiska föremål som kräver maximal diskretion." },
-      "cargo_1":       { "title": "Lastutrymme 1",           "desc": "Primärt bulk-lastutrymme. Designat för storskalig resurstransport inklusive malm, raffinerade metaller och handelsvaror." },
-      "cargo_2":       { "title": "Lastutrymme 2",           "desc": "Sekundärt lastutrymme optimerat för sköra eller temperaturkänsliga laster. Klimatkontrollerade lagringsförhållanden." },
-      "cargo_3":       { "title": "Lastutrymme 3",           "desc": "Tertiärt lastutrymme. Konfigurerbar layout stöder blandade laster inklusive fordon, behållare och överdimensionerad utrustning." },
-      "war_council":   { "title": "Krigsråd",                "desc": "Strategiskt kommandokammare. Senior officerare briefingsbord där stridplaner, alliansstrategier och kampanjmål koordineras." },
-      "academy":       { "title": "Akademi",                 "desc": "Besättningsträning och utbildningsfacilitet. Möjliggör färdighetsutveckling, specialiseringslåsningar och officersutvecklingsprogram." },
-      "science_lab":   { "title": "Vetenskapslaboratorium",  "desc": "Forsknings- och utvecklingscentral. Genomför experiment inom materialvetenskap, framdrivningsteori och utomjordisk teknologianalys." },
-      "dna_lab":       { "title": "DNA-laboratorium",        "desc": "Genetisk forskningsfacilitet. Utvecklar biologiska förbättringar för besättning, skapar nya artvarianter och forskar på utomjordiska DNA-prover." },
-      "cryostasis":    { "title": "Kryostasis",              "desc": "Långdistansresor suspensionssystem. Placerar besättningen i kryogen stasis för att bevara resurser under fleråriga djuprymdsresor." },
-      "dna_chambers":  { "title": "DNA-kammare",             "desc": "Genetiska modifieringsbays. Tillämpar forskat DNA-förbättringar direkt på besättningsmedlemmar och biologiska enheter." },
-      "weapons_relay": { "title": "Vapenkraftrelä",          "desc": "Dedikerad krafthanteringsnod för tunga vapensystem. Säkerställer stabil energiförsörjning under ihållande stridsoperationer." },
-      "comms_tower":   { "title": "Kommunikationstorn",      "desc": "Långdistans djuprymds-kommunikationsanläggning. Möjliggör flottomfattande sändningar, interstellära överföringar och allianskoordinering över stora avstånd." }
+      "storeroom": {
+        "title": "Förrådsrum",
+        "desc": "Centralt lagernav för råmaterial och skördade resurser. Hanterar inventariefördelning över gruv- och raffineringsoperationer."
+      },
+      "mining_fs": {
+        "title": "Gruva FS",
+        "desc": "Framre styrbords gruvebay. Utrustad med djupkärnutvinningsanläggningar för mineral- och malminsamling i öppet rymden."
+      },
+      "mining_fp": {
+        "title": "Gruva FP",
+        "desc": "Framre babords gruvebay. Speglar styrbordenheten och fördubblar utvinningskapaciteten under resursrika fältoperationer."
+      },
+      "process_ref": {
+        "title": "Processraffinaderi",
+        "desc": "Omvandlar rå malm och mineraler till raffinerade legeringar. Kritisk för bränslsyntes och skeppsuppgraderingsmaterial."
+      },
+      "mining_rs": {
+        "title": "Gruva RS",
+        "desc": "Bakre styrbords gruvbay. Vinklad vid -45° för laterala fältsvepningar under långsam-drift asteroidskördning."
+      },
+      "mining_rp": {
+        "title": "Gruva RP",
+        "desc": "Bakre babords gruvbay. Arbetar i tandem med RS-bay för att maximera bakre fältresursutvinningsutbytet."
+      },
+      "fuel_ref": {
+        "title": "Bränsleraffinaderi",
+        "desc": "Bearbetar raffinerade legeringar till framdrivningsklassificerat bränsle. Försörjer huvudmotorn och nödtrusterreserverna."
+      },
+      "workshop": {
+        "title": "Verkstad",
+        "desc": "Skeppsunderhåll och fabrikationscentral. Hanterar komponentreparationer, deltillverkning och utrustningsuppgraderingar."
+      },
+      "racing": {
+        "title": "Tävlingshangar",
+        "desc": "Dedikerad bay med tävlingsdrönare och lätta farkoster. Stöder Racing-spellägedriftsättning och depåoperationer."
+      },
+      "brig": {
+        "title": "Arrest",
+        "desc": "Säkert förvaringsutrymme för fångar och värdefull last. Förstärkta väggar förhindrar obehörig åtkomst eller flykt."
+      },
+      "armory_ss": {
+        "title": "Vapenlager SS",
+        "desc": "Styrbordssidans vapenskåp. Lagrar och underhåller handvapen, besättningsskyddsutrustning och personliga försvarssystem."
+      },
+      "armory_ps": {
+        "title": "Vapenlager PS",
+        "desc": "Babordssidans vapenskåp. Speglar SS-vapenlagret och ger balanserad utrustningsåtkomst på båda sidor av fartyget."
+      },
+      "main_weapon": {
+        "title": "Huvudvapen Tungt",
+        "desc": "Primär tung vapenmontering. Huserar skeppets kraftfullaste offensiva system för storskaliga stridssituationer."
+      },
+      "fwd_shield": {
+        "title": "Framre Sköldgenerator",
+        "desc": "Genererar en skyddande energibarriär längs skeppets stäv. Första försvarslinjen mot inkommande projektiler och energiattacker."
+      },
+      "fighter_fss": {
+        "title": "Jagarbay FSS",
+        "desc": "Framre styrbords bay med kompakta jagarfarkoster. Möjliggör snabb driftsättning av eskorterande jagare under strid- och patrulluppdrag."
+      },
+      "fighter_fps": {
+        "title": "Jagarbay FPS",
+        "desc": "Framre babords jagarbay. Opererar i tandem med FSS-bay för koordinerade jagarskvadronuppskjutningar."
+      },
+      "fighter_rss": {
+        "title": "Jagarbay RSS",
+        "desc": "Bakre styrbords nacelle-jagarbay. Stöder bakskyddsoperationer och förföljningsinspelningsscenarier."
+      },
+      "fighter_rps": {
+        "title": "Jagarbay RPS",
+        "desc": "Bakre babords nacelle-jagarbay. Ger symmetrisk baktäckning för fullständig defensiv jagardriftsättning."
+      },
+      "barracks_ss": {
+        "title": "Kaserner SS",
+        "desc": "Styrbords besättningskvarter för stridspersonal. Huserar soldater, piloter och säkerhetsteam med köyesystem och utrustningsskåp."
+      },
+      "barracks_ps": {
+        "title": "Kaserner PS",
+        "desc": "Babords besättningskvarter. Identisk layout som SS-kasernerna för att säkerställa jämn besättningsfördelning och snabb mobilisering från vardera sida."
+      },
+      "stables_ss": {
+        "title": "Stall SS",
+        "desc": "Styrbords biologisk anläggningsbay. Huserar utomjordiska riddjur och biotekniska varelser använda i planetyta-operationer."
+      },
+      "stable_ps": {
+        "title": "Stall PS",
+        "desc": "Babords biologisk anläggningsbay. Speglar SS-stallen för balanserad varelsbelastning och symmetrisk viktfördelning."
+      },
+      "transporter": {
+        "title": "Transportbay",
+        "desc": "Kvantassisterat personal- och lasttransportsystem. Möjliggör snabb kortdistansteleportation till planetytor eller närliggande fartyg."
+      },
+      "security": {
+        "title": "Säkerhetsstation",
+        "desc": "Skeppsomfattande övervaknings- och hotresponstav. Övervakar alla däck och koordinerar interna säkerhetsprotokoll."
+      },
+      "weapons_ss": {
+        "title": "Vapensystem SS",
+        "desc": "Styrbords vapenhanterings-konsol. Styr målsökning, avfyringssekvenser och ammunitionslogistik för styrbordsvapen."
+      },
+      "weapons_ps": {
+        "title": "Vapensystem PS",
+        "desc": "Babords vapenhanterings-konsol. Ger fullständig oberoende kontroll av alla babords vapensystem."
+      },
+      "power_plant": {
+        "title": "Kraftverk",
+        "desc": "Kärnenergigenereringsenhet. Tillhandahåller stabil kraftproduktion till alla skeppssystem via cirkulär plasmainneslutningsteknologi."
+      },
+      "power_sys": {
+        "title": "Kraftsystem",
+        "desc": "Kraftdistributions- och regleringsnav. Hanterar lastbalansering mellan vapen, sköldar, motorer och livsuppehållande system."
+      },
+      "energy_dist": {
+        "title": "Energidistribution",
+        "desc": "Sekundär energirutningsnod. Säkerställer konsekvent kraftleverans till midskepps- och aktersektionssystem under höga efterfrågeförhållanden."
+      },
+      "main_engine": {
+        "title": "Skeppets Huvudmotor",
+        "desc": "Primärt framdrivningssystem som driver all subljos-resa. Genererar dragkraft via antimaterie-katalyserade plasmajetar."
+      },
+      "navigation": {
+        "title": "Navigation",
+        "desc": "Central navigations- och roderkontrollstation. Hanterar kursplotning, astrokartografi och realtidspositionsspårning."
+      },
+      "flight_deck": {
+        "title": "Flygdäck",
+        "desc": "Huvud pilotstation. Styr alla flygoperationer inklusive start, landning, orbitala manövrar och nödundvikande åtgärder."
+      },
+      "weapons_off": {
+        "title": "Vapensoffiser",
+        "desc": "Taktisk vapenkommandopost. Koordinerar offensiv och defensiv vapenbeskjutning under direkt befäl av Vapenoffiseren."
+      },
+      "comms_off": {
+        "title": "Kommunikationsoffiser",
+        "desc": "Kommunikations- och signalavlyssningsnav. Hanterar all inter-skepp, allians och planetär kommunikation inklusive krypterade kanaler."
+      },
+      "capt_quarters": {
+        "title": "Kaptenskvarter",
+        "desc": "Privata kvarter för skeppets kommenderande officer. Innehåller säkra dataterminaler och privata briefings-faciliteter."
+      },
+      "kitchen": {
+        "title": "Kök",
+        "desc": "Besättningens näring och matlagningsfacilitet. Bearbetar lagrade matresurser och syntetiserar näringssupplement för långdistansresor."
+      },
+      "mess_hall": {
+        "title": "Matsal",
+        "desc": "Gemensamt mat- och rekreationsutrymme. Fungerar som besättningsmoral-nav under drifttid mellan strid- och resursoperationer."
+      },
+      "hydro_1": {
+        "title": "Hydroponikscell 1",
+        "desc": "Automatiserad odlingsenhet som producerar färsk mat och medicinska växter. Minskar beroendet av lagrade förråd för utökade uppdrag."
+      },
+      "hydro_2": {
+        "title": "Hydroponikscell 2",
+        "desc": "Sekundär hydroponikscell som utökar grödvariation och utbyte. Stöder besättningsernäring och handelsvaruproduktion."
+      },
+      "hydro_3": {
+        "title": "Hydroponikscell 3",
+        "desc": "Tertiär odlingsenhet specialiserad på högavkastnings basisgrödor. Tillhandahåller grundläggande kaloribuds för stora besättningskomplement."
+      },
+      "hydro_4": {
+        "title": "Hydroponikscell 4",
+        "desc": "Medicinsk och botanisk forskningscell. Odlar sällsynta arter som används i medicinsk behandling och alkemisk syntes."
+      },
+      "hydro_5": {
+        "title": "Hydroponikscell 5",
+        "desc": "Exotisk plantodlingsbay. Producerar lyxvaror och sällsynt flora för handel på marknadsplatsen."
+      },
+      "hydro_6": {
+        "title": "Hydroponikscell 6",
+        "desc": "Högtillväxt experimentell cell. Testar nya grödstammar utvecklade genom genetiska modifieringsprogram."
+      },
+      "shield_main": {
+        "title": "Sköldgenerator Huvud",
+        "desc": "Primär multidirektionell sköldgenerator. Projicerar en energibarriär runt hela skrovet under stridssituationer."
+      },
+      "power_relay1": {
+        "title": "Kraftrelä 1",
+        "desc": "Övredäck kraftreläkoppling. Leder energi från kraftverket till framre vapen och sköldanläggningar."
+      },
+      "power_relay2": {
+        "title": "Kraftrelä 2",
+        "desc": "Nedredäck kraftreläkoppling. Distribuerar kraft till motorsidor och bakre defensiva system."
+      },
+      "hidden_st1": {
+        "title": "Dolt Lagringsutrymme 1",
+        "desc": "Dolt högsäkerhetsgömsle. Lagrar klassificerad last, värdefulla artefakter och smuggelgods borta från standardinventarieskanning."
+      },
+      "hidden_st2": {
+        "title": "Dolt Lagringsutrymme 2",
+        "desc": "Sekundärt dolt gömsle. Ytterligare säkert utrymme för uppdragskritiska föremål som kräver maximal diskretion."
+      },
+      "cargo_1": {
+        "title": "Lastutrymme 1",
+        "desc": "Primärt bulk-lastutrymme. Designat för storskalig resurstransport inklusive malm, raffinerade metaller och handelsvaror."
+      },
+      "cargo_2": {
+        "title": "Lastutrymme 2",
+        "desc": "Sekundärt lastutrymme optimerat för sköra eller temperaturkänsliga laster. Klimatkontrollerade lagringsförhållanden."
+      },
+      "cargo_3": {
+        "title": "Lastutrymme 3",
+        "desc": "Tertiärt lastutrymme. Konfigurerbar layout stöder blandade laster inklusive fordon, behållare och överdimensionerad utrustning."
+      },
+      "war_council": {
+        "title": "Krigsråd",
+        "desc": "Strategiskt kommandokammare. Senior officerare briefingsbord där stridplaner, alliansstrategier och kampanjmål koordineras."
+      },
+      "academy": {
+        "title": "Akademi",
+        "desc": "Besättningsträning och utbildningsfacilitet. Möjliggör färdighetsutveckling, specialiseringslåsningar och officersutvecklingsprogram."
+      },
+      "science_lab": {
+        "title": "Vetenskapslaboratorium",
+        "desc": "Forsknings- och utvecklingscentral. Genomför experiment inom materialvetenskap, framdrivningsteori och utomjordisk teknologianalys."
+      },
+      "dna_lab": {
+        "title": "DNA-laboratorium",
+        "desc": "Genetisk forskningsfacilitet. Utvecklar biologiska förbättringar för besättning, skapar nya artvarianter och forskar på utomjordiska DNA-prover."
+      },
+      "cryostasis": {
+        "title": "Kryostasis",
+        "desc": "Långdistansresor suspensionssystem. Placerar besättningen i kryogen stasis för att bevara resurser under fleråriga djuprymdsresor."
+      },
+      "dna_chambers": {
+        "title": "DNA-kammare",
+        "desc": "Genetiska modifieringsbays. Tillämpar forskat DNA-förbättringar direkt på besättningsmedlemmar och biologiska enheter."
+      },
+      "weapons_relay": {
+        "title": "Vapenkraftrelä",
+        "desc": "Dedikerad krafthanteringsnod för tunga vapensystem. Säkerställer stabil energiförsörjning under ihållande stridsoperationer."
+      },
+      "comms_tower": {
+        "title": "Kommunikationstorn",
+        "desc": "Långdistans djuprymds-kommunikationsanläggning. Möjliggör flottomfattande sändningar, interstellära överföringar och allianskoordinering över stora avstånd."
+      }
     },
     "guns": {
-      "far_left_bar":      "Framre Huvud Kanon",
-      "fore_port_bay":     "Styrbords Kanonbatteri Framre",
-      "fore_stbd_bay":     "Babords Kanonbatteri Framre",
-      "pd_gun_1":          "Cockpit Styrbords Försvarscell 1",
-      "pd_gun_2":          "Cockpit Styrbords Försvarscell 2",
-      "pd_gun_3":          "Cockpit Styrbords Försvarscell 3",
-      "pd_gun_4":          "Cockpit Styrbords Försvarscell 4",
-      "pd_gun_5":          "Cockpit Styrbords Försvarscell 5",
-      "pd_gun_6":          "Cockpit Styrbords Försvarscell 6",
-      "vert_oval_upper":   "Cockpit Center Försvarscell Nedre",
-      "vert_oval_lower":   "Cockpit Center Försvarscell Övre",
-      "center_front_gun":  "Framre Övre Däck Kanonmatris",
-      "pd_gun_7":          "Cockpit Babords Försvarscell 1",
-      "pd_gun_8":          "Cockpit Babords Försvarscell 2",
-      "pd_gun_9":          "Cockpit Babords Försvarscell 3",
-      "pd_gun_10":         "Cockpit Babords Försvarscell 4",
-      "pd_gun_11":         "Cockpit Babords Försvarscell 5",
-      "pd_gun_12":         "Cockpit Babords Försvarscell 6",
+      "far_left_bar": "Framre Huvud Kanon",
+      "fore_port_bay": "Styrbords Kanonbatteri Framre",
+      "fore_stbd_bay": "Babords Kanonbatteri Framre",
+      "pd_gun_1": "Cockpit Styrbords Försvarscell 1",
+      "pd_gun_2": "Cockpit Styrbords Försvarscell 2",
+      "pd_gun_3": "Cockpit Styrbords Försvarscell 3",
+      "pd_gun_4": "Cockpit Styrbords Försvarscell 4",
+      "pd_gun_5": "Cockpit Styrbords Försvarscell 5",
+      "pd_gun_6": "Cockpit Styrbords Försvarscell 6",
+      "vert_oval_upper": "Cockpit Center Försvarscell Nedre",
+      "vert_oval_lower": "Cockpit Center Försvarscell Övre",
+      "center_front_gun": "Framre Övre Däck Kanonmatris",
+      "pd_gun_7": "Cockpit Babords Försvarscell 1",
+      "pd_gun_8": "Cockpit Babords Försvarscell 2",
+      "pd_gun_9": "Cockpit Babords Försvarscell 3",
+      "pd_gun_10": "Cockpit Babords Försvarscell 4",
+      "pd_gun_11": "Cockpit Babords Försvarscell 5",
+      "pd_gun_12": "Cockpit Babords Försvarscell 6",
       "upper_flank_array": "Styrbords Kanonbatteri Bakre",
       "lower_flank_array": "Babords Kanonbatteri Bakre",
-      "spine_gun_1":       "Mittövre Däck Kanonmatris",
-      "spine_gun_2":       "Nedre Central Ryggradsmatris",
-      "spine_gun_3":       "Bakre Central Ryggradsmatris",
-      "mid_rail_gun":      "Central Torn Befästning",
+      "spine_gun_1": "Mittövre Däck Kanonmatris",
+      "spine_gun_2": "Nedre Central Ryggradsmatris",
+      "spine_gun_3": "Bakre Central Ryggradsmatris",
+      "mid_rail_gun": "Central Torn Befästning",
       "upper_nacelle_bay": "Styrbords Vingmatris",
       "lower_nacelle_bay": "Babords Vingmatris"
     },
@@ -476,6 +1049,76 @@
           "notes": "Dryaderna är en fascinerande och unik art, kännetecknad av sin hybridnatur som kombinerar drag av träd och utomjordiska varelser. Denna distinkta fysiologi gör att de kan trivas i olika miljöer och liknar ofta floraen runt dem. De har ett bikuptankeliknande sinne som gör dem i stånd att kommunicera sömlöst med varandra. Denna kollektiva medvetenhet fremjar en djup känsla av enhet och samarbete och låter dem verka som en sammanhängande grupp medan de upprätthåller en intrikat anslutning till naturen, och de kan känna hälsan hos sin omgivning, vilket gör dem till exceptionella väktare av naturen. Kosten är primärt växtbaserad och består av löv, frukter och annat botaniskt material. Men de kompletterar ibland kosten med små mängder kött, som de skaffar med stor omsorg och respekt för livet de tar. Förutom sina fysiska egenskaper är Dryaderna kända för sitt lekfulla och illvilliga beteende. De ägnar sig ofta åt lättsamma spratt eller spel, vilket speglar deras glädjerika anda. Lojaliteten mot varandra och mot hemlandet är orubblig och de kommer vilt att skydda sitt samhälle och territorium när de hotas. Andligt sett har Dryaderna en djup tro på ett efterliv som är sammanflätat med naturens cykler. De vördar naturens element (Jord, Luft, Eld och Vatten) som gudomliga krafter och tillber också himmelska kroppar som solen och stjärnorna, som de uppfattar som vägledande ljus i sin existens. Denna djupa koppling till både naturen och kosmos formar deras kultur, ritualer och övergripande levnadssätt."
         }
       }
-    }
+    },
+    "back": "← TILLBAKA",
+    "viewArrow": "VISA →",
+    "selectCategory": "VÄLJ KATEGORI",
+    "comingSoon": "KOMMER SNART",
+    "specialistProfileDesc": "Specialistprofil — fullständiga statistik och förmågor tillgängliga vid spelets lansering.",
+    "alliance": {
+      "rank": {
+        "leader": "Ledare",
+        "coleader": "Co-ledare",
+        "officer": "Officer",
+        "member": "Medlem"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Borta"
+      },
+      "manage": {
+        "editInfo": "Redigera alliansinfo",
+        "editInfoDesc": "Ändra namn, tagg och beskrivning",
+        "joinRequests": "Hantera anslutningsförfrågningar",
+        "joinRequestsDesc": "Granska och acceptera nya medlemmar",
+        "donationGoals": "Ange donationsmål",
+        "donationGoalsDesc": "Konfigurera veckliga donationsmål",
+        "warSettings": "Allianskrigsinställningar",
+        "warSettingsDesc": "Konfigurera krigsdeltagarregler",
+        "kickMembers": "Sparka medlemmar",
+        "kickMembersDesc": "Ta bort inaktiva eller regelbrytande medlemmar"
+      },
+      "allianceMail": {
+        "warResults": "AlliansKrigsresultat",
+        "strategyPlan": "Ny strategiplan",
+        "donationSummary": "Vecklig donationssammanfattning",
+        "meeting1800": "Möte kl 18:00",
+        "levelUp": "Alliansen gick upp i nivå!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Välkommen till HyperTek!",
+      "maintenance": "Meddelande om serverunderhåll",
+      "allianceWar": "Allianskrigstillkännagivande",
+      "galacticCup": "Registrering för Galactic Cup",
+      "baseAttacked": "Din bas attackerades!",
+      "loginReward": "Daglig inloggningsbelöning redo",
+      "refiningEvent": "Raffinerings-mästare-evenemang börjar",
+      "meeting1800": "Möte kl 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Automatisk översättning PÅ — Meddelanden levereras på varje mottagares språk",
+      "autoTranslateOff": "Automatisk översättning AV"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Vem är med i allianskrig ikväll?",
+      "ggLastRace": "GG i senaste racet, fantastisk hastighet",
+      "tradingPlasma": "Byter plasmastaavar mot teknikböcker",
+      "needHelpAsteroid": "Behöver hjälp med asteroiduppdraget",
+      "allianceRecruiting": "Vår allians rekryterar, skicka DM",
+      "donationGoalsPlasma": "Donationsmål: plasmastaavar behövs!",
+      "warStarts2Hours": "Krig börjar om 2 timmar, förbered er",
+      "handleMedicalSupport": "Jag tar hand om medicinskt stöd",
+      "wts50Engines": "SÄLJER: 50 motorer, skicka PM",
+      "wtbAntiGravity": "KÖPER: Anti-gravitationsmoduler x10",
+      "sellingRareSkins": "Säljer sällsynta skins, kolla profilen"
+    },
+    "devicePairing": "ENHETSPARNING",
+    "deviceOffline": "OFFLINE",
+    "pairing": "PARNING...",
+    "unavailableNow": "INTE TILLGÄNGLIG JUST NU",
+    "pairDevice": "PARA ENHET",
+    "vrInteractionMode": "VR-interaktionsläge · Kommer snart"
   }
 }

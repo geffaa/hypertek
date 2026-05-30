@@ -11,7 +11,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
@@ -112,7 +112,7 @@ const ITEM_IMAGES = {
 
 async function patchImages() {
   await mongoose.connect(process.env.MONGODB_URL);
-  console.log("✅ Connected to MongoDB\n");
+  console.log("Connected to MongoDB\n");
 
   const parents = await NFTSystem.find({ isParentCollection: true });
   let updated = 0;
@@ -141,7 +141,7 @@ async function patchImages() {
 
     if (changed) {
       await parent.save();
-      console.log(`✅ Patched: ${catName}`);
+      console.log(`Patched: ${catName}`);
       updated++;
     } else {
       console.log(`⏭️  Skipped (already has images): ${catName}`);
@@ -164,10 +164,10 @@ async function patchImages() {
   console.log(`──────────────────────────────────────────────\n`);
 
   await mongoose.disconnect();
-  console.log("✅ Done.");
+  console.log("Done.");
 }
 
 patchImages().catch((err) => {
-  console.error("❌ Failed:", err);
+  console.error(" Failed:", err);
   process.exit(1);
 });

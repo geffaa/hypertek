@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { useTranslation } from "react-i18next";
 import ChatImage from "../../assets/icon.png";
 import SendIcon from "../../assets/images/Support/sendIcon.png";
 import { BACKEND_BASE_URL } from "../../Config";
 
 function Support() {
+  const { t } = useTranslation();
   const [adminId, setAdminId] = useState(null);
   const [roomId, setRoomId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -136,7 +138,7 @@ function Support() {
         <div className="flex items-center gap-2 h-[50px] border-b border-white px-2">
           <img src={ChatImage} alt="" className="w-8 h-8 rounded-full" />
           <p className="font-inter font-medium text-white">
-            Online
+            {t("dashboard.support.online","Online")}
           </p>
         </div>
 
@@ -144,7 +146,7 @@ function Support() {
         <div className="flex flex-col gap-4 mt-4 overflow-y-auto flex-1 pr-2">
           {messages.length === 0 ? (
             <p className="text-gray-400 text-center mt-10">
-              Start a conversation with our support team
+              {t("dashboard.support.startConversation","Start a conversation with our support team")}
             </p>
           ) : (
             messages.map((msg) =>
@@ -186,7 +188,7 @@ function Support() {
               autoResize();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Type a message… (Ctrl + Enter to send)"
+            placeholder={t("dashboard.support.messagePlaceholder","Type a message… (Ctrl + Enter to send)")}
             className="w-full resize-none bg-transparent outline-none text-black text-[13px] leading-5 max-h-[120px] overflow-y-auto"
           />
 
@@ -196,7 +198,7 @@ function Support() {
               className="flex items-center gap-2 px-4 h-[32px] bg-[#1D7AD6] rounded-md"
             >
               <span className="text-white text-[12px] font-semibold">
-                Send
+                {t("dashboard.support.send","Send")}
               </span>
               <img src={SendIcon} className="w-4 h-4" />
             </button>

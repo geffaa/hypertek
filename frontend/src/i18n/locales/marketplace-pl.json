@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Rynek",
     "searchPlaceholder": "Szukaj…",
-
     "tabs": {
-      "overview":  "Przegląd",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "Rynek",
-      "auctions":  "Aukcje",
-      "trades":    "Wymiany",
-      "quests":    "Misje",
-      "hire":      "Wynajem",
-      "bounty":    "Łowy"
+      "overview": "Przegląd",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "Rynek",
+      "auctions": "Aukcje",
+      "trades": "Wymiany",
+      "quests": "Misje",
+      "hire": "Wynajem",
+      "bounty": "Łowy"
     },
-
     "banner": {
       "defaultHeading": "Nowa era nadchodzi w Hyper Tek",
-      "defaultDesc": "Początek żywego, oddychającego wszechświata, gdzie każda decyzja kształtuje podróż.",
+      "defaultDesc": "To początek żyjącego, oddychającego wszechświata, w którym każda decyzja kształtuje podróż. Niezależnie od tego, czy ścigasz się z prędkością światła, zawierasz sojusze w Królestwie Overlord, czy odkrywasz tajemnice w HyperQuest, masz szansę pozostawić swój ślad w historii.",
       "stats": {
-        "totalItems":  "Łączna liczba przedmiotów",
-        "totalBuys":   "Łączna liczba zakupów",
-        "listed":      "Wystawione",
+        "totalItems": "Łączna liczba przedmiotów",
+        "totalBuys": "Łączna liczba zakupów",
+        "listed": "Wystawione",
         "collections": "Kolekcje"
       },
-      "soundOn":  "Dźwięk włączony",
+      "soundOn": "Dźwięk włączony",
       "soundOff": "Dźwięk wyłączony"
     },
-
     "bottomBar": {
-      "learnLabel":     "Dowiedz się o NFA / NFC",
+      "learnLabel": "Dowiedz się o NFA / NFC",
       "educationPanel": "Panel edukacyjny HyperTek",
-      "footerNote":     "Ten panel służy do szybkiego informowania. Odwiedź zakładkę NFA / NFC 101, aby uzyskać pełną treść edukacyjną.",
+      "footerNote": "Ten panel służy do szybkiego informowania. Odwiedź zakładkę NFA / NFC 101, aby uzyskać pełną treść edukacyjną.",
       "facts": [
-        { "label": "NFA",        "desc": "Wyłącznie od Hypertek. Najwyższe bonusy w grze. Gwarantowana minimalna wartość odkupu, która rośnie z każdą sprzedażą." },
-        { "label": "NFC",        "desc": "Stworzony przez Hypertek lub licencjonowanych graczy. Bonusy w grze uwzględnione. Gwarantowany minimalny odkup." },
-        { "label": "NFT",        "desc": "Kolekcjonerski przedmiot tworzony przez gracza. Bez bonusów w grze. Bez gwarancji odkupu. Handlowy na rynku." },
-        { "label": "Prowizja",   "desc": "20% opłata platformy od wszystkich sprzedaży. Sprzedawca otrzymuje 80%. Honorarium artysty 4% przy odsprzedaży." },
-        { "label": "Wzrost odkupu","desc": "+5% każdej ceny odsprzedaży jest dodawane do minimalnej wartości odkupu zasobu. Tylko rośnie." },
-        { "label": "Portfel powierniczy","desc": "HyperTek automatycznie tworzy krypto portfel przy rejestracji." }
+        {
+          "label": "NFA",
+          "desc": "Wyłącznie od Hypertek. Najwyższe bonusy w grze. Gwarantowana minimalna wartość odkupu, która rośnie z każdą sprzedażą."
+        },
+        {
+          "label": "NFC",
+          "desc": "Stworzony przez Hypertek lub licencjonowanych graczy. Bonusy w grze uwzględnione. Gwarantowany minimalny odkup."
+        },
+        {
+          "label": "NFT",
+          "desc": "Kolekcjonerski przedmiot tworzony przez gracza. Bez bonusów w grze. Bez gwarancji odkupu. Handlowy na rynku."
+        },
+        {
+          "label": "Prowizja",
+          "desc": "20% opłata platformy od wszystkich sprzedaży. Sprzedawca otrzymuje 80%. Honorarium artysty 4% przy odsprzedaży."
+        },
+        {
+          "label": "Wzrost odkupu",
+          "desc": "+5% każdej ceny odsprzedaży jest dodawane do minimalnej wartości odkupu zasobu. Tylko rośnie."
+        },
+        {
+          "label": "Portfel powierniczy",
+          "desc": "HyperTek automatycznie tworzy krypto portfel przy rejestracji."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Przegląd",
+      "heading": "Przegląd",
       "subtitle": "Witaj na rynku HyperTek. Wybierz funkcję, aby dowiedzieć się więcej — a następnie przejdź od razu do działania.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Nowy w aktywach Web3? Zacznij tutaj",
           "details": [
             "NFA (Non-Fungible Assets) to przedmioty wydawane przez Hypertek z gwarantowaną przez platformę ceną odkupu.",
@@ -56,7 +70,7 @@
           "cta": "Poznaj podstawy"
         },
         {
-          "label":   "Rynek",
+          "label": "Rynek",
           "tagline": "Kupuj i sprzedawaj aktywa w grze natychmiast",
           "details": [
             "Przeglądaj szeroki katalog NFA, NFC i NFT — skórki, broń, specjalistów, statki kosmiczne i więcej.",
@@ -66,7 +80,7 @@
           "cta": "Przeglądaj rynek"
         },
         {
-          "label":   "Aukcje",
+          "label": "Aukcje",
           "tagline": "Rywalizuj o ekskluzywne przedmioty limitowane",
           "details": [
             "Licytuj rzadkie aktywa dostępne wyłącznie na aukcjach z ograniczonym czasem.",
@@ -76,7 +90,7 @@
           "cta": "Zobacz aukcje"
         },
         {
-          "label":   "Wymiany",
+          "label": "Wymiany",
           "tagline": "Wymieniaj aktywa peer-to-peer, bez pośredników",
           "details": [
             "Proponuj lub akceptuj bezpośrednie wymiany aktywami z innymi graczami — w pełni on-chain.",
@@ -86,7 +100,7 @@
           "cta": "Przeglądaj wymiany"
         },
         {
-          "label":   "Misje",
+          "label": "Misje",
           "tagline": "Wypełniaj misje, zdobywaj ekskluzywne nagrody",
           "details": [
             "Podejmij misje, aby zdobyć ekskluzywne nagrody i rzadkie aktywa w grze.",
@@ -96,7 +110,7 @@
           "cta": "Przeglądaj misje"
         },
         {
-          "label":   "Wynajem",
+          "label": "Wynajem",
           "tagline": "Wypożyczaj aktywa lub zarabiaj na swoich",
           "details": [
             "Wynajmij potężnych specjalistów lub sprzęt na jedną misję bez zakupu.",
@@ -106,7 +120,7 @@
           "cta": "Przeglądaj wynajem"
         },
         {
-          "label":   "Łowy",
+          "label": "Łowy",
           "tagline": "Poluj na cele, zgarniaj nagrody, bądź na szczycie",
           "details": [
             "Przyjmuj łowy opublikowane przez innych graczy lub system, aby zdobyć kryptowaluty.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "Ogólny",
+      "heading": "Ogólny",
       "subtitle": "Przeglądaj NFA, NFC i NFT dostępne do natychmiastowego zakupu — skórki, broń, specjalistów, statki kosmiczne i więcej.",
       "filterAll": "Wszystkie",
       "samplePreviewTitle": "Przykładowy podgląd rynku",
       "samplePreviewDesc": "Poniższe przedmioty są przykładowymi podglądami prezentującymi typy aktywów cyfrowych, które będą dostępne na rynku HyperTek. Rzeczywiste przedmioty z unikalnym artwork'iem i zweryfikowaną przez blockchain własnością będą dostępne przy uruchomieniu.",
       "noItems": "Brak dostępnych przedmiotów. Sprawdź ponownie wkrótce.",
       "categories": {
-        "skins":           "Skórki",
-        "militaryBadges":  "Odznaki wojskowe",
-        "specialists":     "Specjaliści",
-        "weapons":         "Broń",
-        "bodyArmour":      "Zbroja",
-        "spaceships":      "Statki kosmiczne",
-        "racingVehicles":  "Pojazdy",
-        "artwork":         "Dzieła sztuki",
-        "landAndBases":    "Teren i bazy",
-        "general":         "Ogólne"
-      }
+        "skins": "Skórki",
+        "militaryBadges": "Odznaki wojskowe",
+        "specialists": "Specjaliści",
+        "weapons": "Broń",
+        "bodyArmour": "Zbroja",
+        "spaceships": "Statki kosmiczne",
+        "racingVehicles": "Pojazdy",
+        "artwork": "Dzieła sztuki",
+        "landAndBases": "Teren i bazy",
+        "general": "Ogólne"
+      },
+      "search": "Szukaj...",
+      "filter": "Filtruj",
+      "showAll": "Pokaż wszystko",
+      "filterSort": "Filtruj i sortuj",
+      "sortBy": "Sortuj według",
+      "sort": {
+        "default": "Domyślne",
+        "priceAsc": "Cena: od najniższej do wysokiej",
+        "priceDesc": "Cena: od najwyższej do najniższej",
+        "nameAsc": "Nazwa: od A do Z",
+        "nameDesc": "Nazwa: Z do A"
+      },
+      "priceRange": "Przedział cenowy (USDC)",
+      "min": "Min.",
+      "max": "Maks.",
+      "apply": "Zastosuj",
+      "clearAll": "Wyczyść wszystkie filtry",
+      "noResults": "Nie znaleziono wyników",
+      "dummyContent": "Dummy Content",
+      "preview": "Podgląd",
+      "buyNow": "Kup Teraz",
+      "viewDetails": "Wyświetl szczegóły"
     },
-
     "nfa101": {
       "sectionLabel": "Edukacja",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "Nowy w NFT i Web3? Przeglądaj nasze artykuły, aby zrozumieć zasoby blockchain, portfele, bezpieczeństwo i ekosystem HyperTek.",
-      "minRead":      "min czytania",
-      "filterAll":    "Wszystkie"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "Nowy w NFT i Web3? Przeglądaj nasze artykuły, aby zrozumieć zasoby blockchain, portfele, bezpieczeństwo i ekosystem HyperTek.",
+      "minRead": "min czytania",
+      "filterAll": "Wszystkie"
     },
-
     "auctions": {
-      "heading":        "Aukcje",
-      "listings":       "ogłoszeń",
-      "newAuction":     "Nowa aukcja",
-      "noAuctions":     "Brak {{filter}} aukcji",
-      "createFirst":    "Utwórz pierwszą aukcję",
-      "endingSoon":     "WKRÓTCE KOŃCZY SIĘ",
-      "viewDetails":    "Zobacz szczegóły",
+      "heading": "Aukcje",
+      "listings": "ogłoszeń",
+      "newAuction": "Nowa aukcja",
+      "noAuctions": "Brak {{filter}} aukcji",
+      "createFirst": "Utwórz pierwszą aukcję",
+      "endingSoon": "WKRÓTCE KOŃCZY SIĘ",
+      "viewDetails": "Zobacz szczegóły",
       "rules": {
-        "durations":    "Czas trwania: 1d · 3d · 7d",
+        "durations": "Czas trwania: 1d · 3d · 7d",
         "minIncrement": "Minimalne podbicie: 5%",
-        "freeToList":   "Bezpłatne wystawienie",
-        "commission":   "Prowizja: 20% przy sprzedaży"
-      },
-      "preview": {
-        "title":   "Podgląd funkcji w grze",
-        "desc":    "System aukcji będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
-      },
-      "card": {
-        "currentBid": "Aktualna oferta",
-        "endsIn":     "Kończy się za",
-        "placeBid":   "Złóż ofertę",
-        "buyNow":     "Kup teraz",
-        "bids":       "ofert",
-        "ended":      "ZAKOŃCZONA"
-      },
-      "detail": {
-        "currentBid":  "Aktualna oferta",
-        "start":       "Start",
-        "endsIn":      "Kończy się za",
-        "description": "Opis",
-        "recentBids":  "Ostatnie oferty",
-        "anonymous":   "Anonimowy",
-        "placeBid":    "Złóż ofertę",
-        "buyNow":      "Kup teraz",
-        "buyNowLabel": "Kup teraz",
-        "bids":        "ofert"
-      },
-      "bidModal": {
-        "title":          "Złóż ofertę",
-        "currentBid":     "Aktualna oferta",
-        "minimumBid":     "Minimalna oferta",
-        "yourBid":        "Twoja oferta (USDC)",
-        "minIncrement":   "Minimalne podbicie 5% · Następne minimum po Twojej ofercie: {{next}} USDC",
-        "reviewBid":      "Sprawdź ofertę",
-        "disclaimer":     "Wygrywająca oferta jest wiążąca · Prowizja platformy 20%",
-        "confirmTitle":   "Potwierdź ofertę",
-        "item":           "Przedmiot",
-        "yourBidLabel":   "Twoja oferta",
-        "youPay":         "W przypadku wygranej płacisz",
-        "outbidNotice":   "Zostaniesz natychmiast powiadomiony, jeśli ktoś przebije Twoją ofertę. Aukcja zamyka się automatycznie po upływie czasu.",
-        "back":           "Wstecz",
-        "confirm":        "Potwierdź — {{amount}} USDC",
-        "placing":        "Składanie…",
-        "successTitle":   "Oferta złożona!",
-        "highestBidder":  "Jesteś najwyższym licytantem",
-        "outbidWarning":  "Otrzymasz powiadomienie, jeśli zostaniesz przebity.",
-        "done":           "Gotowe",
-        "endsIn":         "Kończy się za"
-      },
-      "instantBuyModal": {
-        "title":         "Kup teraz — natychmiast",
-        "buyNowPrice":   "Cena natychmiastowego zakupu",
-        "currentBids":   "Aktualne oferty",
-        "notice":        "Zakup teraz kończy aukcję natychmiast. Przedmiot trafia do Twojego portfela, a wszystkim innym licytantom zwracane są środki.",
-        "cancel":        "Anuluj",
-        "processing":    "Przetwarzanie…",
-        "successTitle":  "Przedmiot zabezpieczony!",
-        "auctionClosed": "Aukcja zamknięta · Transfer zainicjowany",
-        "item":          "Przedmiot",
-        "paid":          "Zapłacono",
-        "status":        "Status",
-        "transferred":   "Przeniesiony do portfela",
-        "walletNote":    "Przedmiot pojawi się w zakładce Moje kolekcje.",
-        "viewCollect":   "Zobacz moje kolekcje"
-      },
-      "createModal": {
-        "title":          "Utwórz aukcję",
-        "selectItem":     "Wybierz przedmiot",
-        "connectWallet":  "Połącz portfel, aby przeglądać swoje przedmioty",
-        "loadingItems":   "Ładowanie…",
-        "noItems":        "Nie znaleziono własnych przedmiotów",
-        "pricingDuration":"Cena i czas trwania",
-        "startPrice":     "Cena startowa (USDC) *",
-        "reservePrice":   "Cena rezerwowa (USDC)",
-        "instantBuyPrice":"Cena natychmiastowego zakupu (USDC)",
-        "optional":       "Opcjonalne",
-        "leaveBlank":     "Pozostaw puste, aby wyłączyć",
-        "duration":       "Czas trwania",
-        "dur1Day":        "1 dzień",
-        "dur3Days":       "3 dni",
-        "dur7Days":       "7 dni",
-        "freeToList":     "Bezpłatne wystawienie · Prowizja 20% przy sprzedaży",
-        "creating":       "Tworzenie…",
-        "submit":         "Utwórz aukcję"
-      },
-      "pagination": {
-        "prev":  "Poprzednia",
-        "next":  "Następna",
-        "page":  "Strona {{page}} z {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "Wymiany",
-      "listings":   "ogłoszeń",
-      "postTrade":  "Opublikuj wymianę",
-      "noTrades":   "Brak {{filter}} wymian",
-      "viewDetails":"Zobacz szczegóły",
-      "trade":      "wymiana",
-      "yours":      "twoja",
-      "offering":   "Oferuję",
-      "wanting":    "Chcę",
-      "makeOffer":  "Złóż ofertę",
-      "by":         "przez",
-      "acceptTrade":"Akceptuj wymianę",
-      "cancelTrade":"Anuluj wymianę",
-      "rules": {
-        "expiry":    "Ogłoszenia wygasają po 30 dniach",
-        "fee":       "Opłata platformy obowiązuje obie strony",
-        "noNFA":     "NFA nie mogą być wymieniane — tylko sprzedawane"
-      },
-      "acceptModal": {
-        "title":          "Propozycja wymiany",
-        "postedBy":       "Opublikowane przez",
-        "exchangeDetails":"Szczegóły wymiany",
-        "theyOffer":      "Oni oferują",
-        "theyWant":       "Oni chcą",
-        "feeNotice":      "Opłata platformy obowiązuje obie strony",
-        "acceptBtn":      "Akceptuj tę wymianę",
-        "confirmTitle":   "Potwierdź wymianę",
-        "trade":          "Wymiana",
-        "postedByLabel":  "Opublikowane przez",
-        "terms":          "Akceptując, zgadzasz się na warunki wymiany. Autor ogłoszenia zostanie powiadomiony i musi potwierdzić przed przeniesieniem przedmiotów.",
-        "back":           "Wstecz",
-        "sending":        "Wysyłanie…",
-        "confirm":        "Potwierdź",
-        "successTitle":   "Propozycja wysłana!",
-        "notified":       "został powiadomiony",
-        "successNote":    "Autor ogłoszenia przejrzy Twoją propozycję i zorganizuje wymianę. Sprawdź swoje powiadomienia.",
-        "expiry":         "⏱ Propozycje wygasają po 30 dniach, jeśli nie zostaną potwierdzone.",
-        "close":          "Zamknij"
-      },
-      "createModal": {
-        "title":          "Opublikuj wymianę",
-        "yourItem":       "Twój przedmiot",
-        "itemNamePlaceholder": "Nazwa przedmiotu *",
-        "loadingItems":   "Ładowanie Twoich przedmiotów…",
-        "connectWallet":  "Połącz portfel, aby wybrać spośród swoich przedmiotów",
-        "pickFromItems":  "Lub wybierz spośród swoich przedmiotów (autouzupełnienie nazwy):",
-        "imageOptional":  "Obraz (opcjonalne)",
-        "whatYouWant":    "Czego chcesz",
-        "openOffer":      "Otwarta oferta — niech inni proponują",
-        "anyCategory":    "Dowolna kategoria",
-        "notesLabel":     "Notatki (opcjonalne)",
-        "notesPlaceholder":"Warunki wymiany, stan itp.",
-        "disclaimer":     "Obie strony płacą opłatę platformy · Wygasa po 30 dniach · NFA nie mogą być wymieniane",
-        "posting":        "Publikowanie…",
-        "submit":         "Opublikuj wymianę"
-      },
-      "pagination": {
-        "prev":  "Poprzednia",
-        "next":  "Następna",
-        "page":  "Strona {{page}} z {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Tablica misji",
-      "quests":        "misji",
-      "noQuests":      "Brak {{filter}} misji",
-      "inGameFeature": "Funkcja w grze",
-      "inGameDesc":    "Misje są generowane automatycznie, gdy sprzedawcy wybierają obniżoną prowizję. Gracze mogą wykonywać do 5 misji dziennie. Pula prowizji jest podzielona między zniżkę dla kupującego, nagrodę gracza i platformę.",
-      "earnFromQuests":"Chcesz zarabiać na misjach? Graj →",
-      "moneyQuests":   "Misje pieniężne (pula 11%)",
-      "resourceQuests":"Misje zasobów (pula 20%)",
-      "footerNote1":   "# Misje z połączonymi ładunkami będą wypłacane przy użyciu oddzielnych kwot z tabeli.",
-      "footerNote2":   "# Dane planet zsynchronizują się, gdy gry zostaną uruchomione.",
-      "inGame":        "W grze",
-      "open":          "Otwarte",
-      "table": {
-        "questingNo":    "Nr misji",
-        "pickupPlanet":  "Planeta odbioru",
-        "dropOffPlanet": "Planeta docelowa",
-        "itemGoods":     "Przedmiot / Towar",
-        "commSplit":     "Podział prowizji",
-        "questingTime":  "Czas misji",
-        "assignedTo":    "Przypisano do"
-      },
-      "comingSoon": {
-        "title":   "Wkrótce",
-        "desc":    "Funkcja misji w grze jest obecnie rozwijana. Bądź na bieżąco — wkrótce będziesz mógł zdobywać nagrody bezpośrednio z gry.",
-        "gotIt":   "Rozumiem"
-      },
-      "pagination": {
-        "prev":  "Poprzednia",
-        "next":  "Następna",
-        "page":  "Strona {{page}} z {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "Wynajem",
-      "listings":         "ogłoszeń",
-      "listBtn":          "Wystaw",
-      "forHireLabel":     "Do wynajęcia",
-      "wantingToHire":    "Szukam do wynajęcia",
-      "noListings":       "Brak {{filter}} ogłoszeń",
-      "lockedTitle":      "Treść gier HyperTek tylko do celów demonstracyjnych.",
-      "lockedDesc":       "Ta sekcja jest zablokowana do czasu sfinalizowania gier.",
-      "forHireBadge":     "DO WYNAJĘCIA",
-      "wantedBadge":      "SZUKAM DO WYNAJĘCIA",
-      "price":            "Cena",
-      "maxDuration":      "Maks. czas",
-      "hireBtn":          "Wynajmij",
-      "fulfillBtn":       "Realizuj zapytanie",
-      "rules": {
-        "durations":   "8h · 1d · 3d · 1t · 1m",
-        "cooldown":    "Przerwa: 2× czas wynajmu",
-        "commission":  "Prowizja: 20%",
-        "payment":     "Płatność w Hyper Bucks lub materiałach"
+        "freeToList": "Bezpłatne wystawienie",
+        "commission": "Prowizja: 20% przy sprzedaży"
       },
       "preview": {
         "title": "Podgląd funkcji w grze",
-        "desc":  "System wynajmu będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
+        "desc": "System aukcji będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
       },
-      "hireModal": {
-        "hireTitle":     "Wynajmij specjalistę",
-        "fulfillTitle":  "Zrealizuj zapytanie o wynajem",
-        "forHireBadge":  "DO WYNAJĘCIA",
-        "wantedBadge":   "POSZUKIWANY",
-        "price":         "Cena",
-        "duration":      "Czas trwania",
-        "howHire":       "Jak działa wynajem",
-        "howFulfill":    "Jak działa realizacja zapytania",
-        "proceedHire":   "Przejdź do wynajmu",
-        "offerFulfill":  "Zaoferuj realizację",
-        "commission":    "Prowizja platformy 20% · Przerwa obowiązuje po zwrocie",
-        "confirmHire":   "Potwierdź wynajem",
-        "confirmOffer":  "Potwierdź ofertę",
-        "specialist":    "Specjalista",
-        "payment":       "Płatność",
-        "yourOffer":     "Twoja oferta",
-        "durationLabel": "Czas trwania",
-        "commLabel":     "Prowizja",
-        "back":          "Wstecz",
-        "processing":    "Przetwarzanie…",
-        "sendOffer":     "Wyślij ofertę",
-        "deployedTitle": "Rozmieszczony!",
-        "offerSentTitle":"Oferta wysłana!",
-        "availableFor":  "Dostępny przez",
-        "paid":          "Zapłacono",
-        "returnNote":    "Zwróć przed końcem okresu, aby uniknąć automatycznej kary. Przerwa {{hours}}h obowiązuje po zwrocie.",
-        "close":         "Zamknij"
+      "card": {
+        "currentBid": "Aktualna oferta",
+        "endsIn": "Kończy się za",
+        "placeBid": "Złóż ofertę",
+        "buyNow": "Kup teraz",
+        "bids": "ofert",
+        "ended": "ZAKOŃCZONA"
+      },
+      "detail": {
+        "currentBid": "Aktualna oferta",
+        "start": "Start",
+        "endsIn": "Kończy się za",
+        "description": "Opis",
+        "recentBids": "Ostatnie oferty",
+        "anonymous": "Anonimowy",
+        "placeBid": "Złóż ofertę",
+        "buyNow": "Kup teraz",
+        "buyNowLabel": "Kup teraz",
+        "bids": "ofert"
+      },
+      "bidModal": {
+        "title": "Złóż ofertę",
+        "currentBid": "Aktualna oferta",
+        "minimumBid": "Minimalna oferta",
+        "yourBid": "Twoja oferta (USDC)",
+        "minIncrement": "Minimalne podbicie 5% · Następne minimum po Twojej ofercie: {{next}} USDC",
+        "reviewBid": "Sprawdź ofertę",
+        "disclaimer": "Wygrywająca oferta jest wiążąca · Prowizja platformy 20%",
+        "confirmTitle": "Potwierdź ofertę",
+        "item": "Przedmiot",
+        "yourBidLabel": "Twoja oferta",
+        "youPay": "W przypadku wygranej płacisz",
+        "outbidNotice": "Zostaniesz natychmiast powiadomiony, jeśli ktoś przebije Twoją ofertę. Aukcja zamyka się automatycznie po upływie czasu.",
+        "back": "Wstecz",
+        "confirm": "Potwierdź — {{amount}} USDC",
+        "placing": "Składanie…",
+        "successTitle": "Oferta złożona!",
+        "highestBidder": "Jesteś najwyższym licytantem",
+        "outbidWarning": "Otrzymasz powiadomienie, jeśli zostaniesz przebity.",
+        "done": "Gotowe",
+        "endsIn": "Kończy się za"
+      },
+      "instantBuyModal": {
+        "title": "Kup teraz — natychmiast",
+        "buyNowPrice": "Cena natychmiastowego zakupu",
+        "currentBids": "Aktualne oferty",
+        "notice": "Zakup teraz kończy aukcję natychmiast. Przedmiot trafia do Twojego portfela, a wszystkim innym licytantom zwracane są środki.",
+        "cancel": "Anuluj",
+        "processing": "Przetwarzanie…",
+        "successTitle": "Przedmiot zabezpieczony!",
+        "auctionClosed": "Aukcja zamknięta · Transfer zainicjowany",
+        "item": "Przedmiot",
+        "paid": "Zapłacono",
+        "status": "Status",
+        "transferred": "Przeniesiony do portfela",
+        "walletNote": "Przedmiot pojawi się w zakładce Moje kolekcje.",
+        "viewCollect": "Zobacz moje kolekcje"
       },
       "createModal": {
-        "listTitle":         "Wystaw do wynajęcia",
-        "postTitle":         "Opublikuj zapytanie o wynajem",
-        "forHireBtn":        "Do wynajęcia",
-        "wantingBtn":        "Szukam do wynajęcia",
-        "itemNameHire":      "Specjalista / nazwa przedmiotu *",
-        "itemNameWant":      "Czego chcesz wynająć *",
-        "descPlaceholder":   "Opis",
-        "categoryPlaceholder":"Kategoria (opcjonalne)",
-        "paymentType":       "Rodzaj płatności",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "Materiały",
-        "amountLabel":       "Kwota (Hyper Bucks)",
-        "afterCommission":   "Otrzymujesz {{amount}} HB po prowizji 20%",
-        "maxDuration":       "Maks. czas trwania",
-        "disclaimer":        "Prowizja 20% · Przerwa = 2× czas wynajmu po zwrocie",
-        "listing":           "Wystawianie…",
-        "submit":            "Utwórz ogłoszenie"
+        "title": "Utwórz aukcję",
+        "selectItem": "Wybierz przedmiot",
+        "connectWallet": "Połącz portfel, aby przeglądać swoje przedmioty",
+        "loadingItems": "Ładowanie…",
+        "noItems": "Nie znaleziono własnych przedmiotów",
+        "pricingDuration": "Cena i czas trwania",
+        "startPrice": "Cena startowa (USDC) *",
+        "reservePrice": "Cena rezerwowa (USDC)",
+        "instantBuyPrice": "Cena natychmiastowego zakupu (USDC)",
+        "optional": "Opcjonalne",
+        "leaveBlank": "Pozostaw puste, aby wyłączyć",
+        "duration": "Czas trwania",
+        "dur1Day": "1 dzień",
+        "dur3Days": "3 dni",
+        "dur7Days": "7 dni",
+        "freeToList": "Bezpłatne wystawienie · Prowizja 20% przy sprzedaży",
+        "creating": "Tworzenie…",
+        "submit": "Utwórz aukcję"
       },
       "pagination": {
-        "prev":  "Poprzednia",
-        "next":  "Następna",
-        "page":  "Strona {{page}} z {{pages}}"
+        "prev": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona {{page}} z {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "Wymiany",
+      "listings": "ogłoszeń",
+      "postTrade": "Opublikuj wymianę",
+      "noTrades": "Brak {{filter}} wymian",
+      "viewDetails": "Zobacz szczegóły",
+      "trade": "wymiana",
+      "yours": "twoja",
+      "offering": "Oferuję",
+      "wanting": "Chcę",
+      "makeOffer": "Złóż ofertę",
+      "by": "przez",
+      "acceptTrade": "Akceptuj wymianę",
+      "cancelTrade": "Anuluj wymianę",
+      "rules": {
+        "expiry": "Ogłoszenia wygasają po 30 dniach",
+        "fee": "Opłata platformy obowiązuje obie strony",
+        "noNFA": "NFA nie mogą być wymieniane — tylko sprzedawane"
+      },
+      "acceptModal": {
+        "title": "Propozycja wymiany",
+        "postedBy": "Opublikowane przez",
+        "exchangeDetails": "Szczegóły wymiany",
+        "theyOffer": "Oni oferują",
+        "theyWant": "Oni chcą",
+        "feeNotice": "Opłata platformy obowiązuje obie strony",
+        "acceptBtn": "Akceptuj tę wymianę",
+        "confirmTitle": "Potwierdź wymianę",
+        "trade": "Wymiana",
+        "postedByLabel": "Opublikowane przez",
+        "terms": "Akceptując, zgadzasz się na warunki wymiany. Autor ogłoszenia zostanie powiadomiony i musi potwierdzić przed przeniesieniem przedmiotów.",
+        "back": "Wstecz",
+        "sending": "Wysyłanie…",
+        "confirm": "Potwierdź",
+        "successTitle": "Propozycja wysłana!",
+        "notified": "został powiadomiony",
+        "successNote": "Autor ogłoszenia przejrzy Twoją propozycję i zorganizuje wymianę. Sprawdź swoje powiadomienia.",
+        "expiry": "⏱ Propozycje wygasają po 30 dniach, jeśli nie zostaną potwierdzone.",
+        "close": "Zamknij"
+      },
+      "createModal": {
+        "title": "Opublikuj wymianę",
+        "yourItem": "Twój przedmiot",
+        "itemNamePlaceholder": "Nazwa przedmiotu *",
+        "loadingItems": "Ładowanie Twoich przedmiotów…",
+        "connectWallet": "Połącz portfel, aby wybrać spośród swoich przedmiotów",
+        "pickFromItems": "Lub wybierz spośród swoich przedmiotów (autouzupełnienie nazwy):",
+        "imageOptional": "Obraz (opcjonalne)",
+        "whatYouWant": "Czego chcesz",
+        "openOffer": "Otwarta oferta — niech inni proponują",
+        "anyCategory": "Dowolna kategoria",
+        "notesLabel": "Notatki (opcjonalne)",
+        "notesPlaceholder": "Warunki wymiany, stan itp.",
+        "disclaimer": "Obie strony płacą opłatę platformy · Wygasa po 30 dniach · NFA nie mogą być wymieniane",
+        "posting": "Publikowanie…",
+        "submit": "Opublikuj wymianę"
+      },
+      "pagination": {
+        "prev": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona {{page}} z {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "Tablica misji",
+      "quests": "misji",
+      "noQuests": "Brak {{filter}} misji",
+      "inGameFeature": "Funkcja w grze",
+      "inGameDesc": "Misje są generowane automatycznie, gdy sprzedawcy wybierają obniżoną prowizję. Gracze mogą wykonywać do 5 misji dziennie. Pula prowizji jest podzielona między zniżkę dla kupującego, nagrodę gracza i platformę.",
+      "earnFromQuests": "Chcesz zarabiać na misjach? Graj →",
+      "moneyQuests": "Misje pieniężne (pula 11%)",
+      "resourceQuests": "Misje zasobów (pula 20%)",
+      "footerNote1": "# Misje z połączonymi ładunkami będą wypłacane przy użyciu oddzielnych kwot z tabeli.",
+      "footerNote2": "# Dane planet zsynchronizują się, gdy gry zostaną uruchomione.",
+      "inGame": "W grze",
+      "open": "Otwarte",
+      "table": {
+        "questingNo": "Nr misji",
+        "pickupPlanet": "Planeta odbioru",
+        "dropOffPlanet": "Planeta docelowa",
+        "itemGoods": "Przedmiot / Towar",
+        "commSplit": "Podział prowizji",
+        "questingTime": "Czas misji",
+        "assignedTo": "Przypisano do"
+      },
+      "comingSoon": {
+        "title": "Wkrótce",
+        "desc": "Funkcja misji w grze jest obecnie rozwijana. Bądź na bieżąco — wkrótce będziesz mógł zdobywać nagrody bezpośrednio z gry.",
+        "gotIt": "Rozumiem"
+      },
+      "pagination": {
+        "prev": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona {{page}} z {{pages}}"
+      },
+      "buyer": "Kupujący",
+      "player": "Gracz",
+      "platform": "Platforma",
+      "status": {
+        "open": "Otwarte",
+        "accepted": "Zaakceptowano",
+        "completed": "Ukończono",
+        "cancelled": "Anulowano"
+      },
+      "type": {
+        "money": "Pieniądze",
+        "resources": "Zasoby"
+      }
+    },
+    "hire": {
+      "heading": "Wynajem",
+      "listings": "ogłoszeń",
+      "listBtn": "Wystaw",
+      "forHireLabel": "Do wynajęcia",
+      "wantingToHire": "Szukam do wynajęcia",
+      "noListings": "Brak {{filter}} ogłoszeń",
+      "lockedTitle": "Treść gier HyperTek tylko do celów demonstracyjnych.",
+      "lockedDesc": "Ta sekcja jest zablokowana do czasu sfinalizowania gier.",
+      "forHireBadge": "DO WYNAJĘCIA",
+      "wantedBadge": "SZUKAM DO WYNAJĘCIA",
+      "price": "Cena",
+      "maxDuration": "Maks. czas",
+      "hireBtn": "Wynajmij",
+      "fulfillBtn": "Realizuj zapytanie",
+      "rules": {
+        "durations": "8h · 1d · 3d · 1t · 1m",
+        "cooldown": "Przerwa: 2× czas wynajmu",
+        "commission": "Prowizja: 20%",
+        "payment": "Płatność w Hyper Bucks lub materiałach"
+      },
+      "preview": {
+        "title": "Podgląd funkcji w grze",
+        "desc": "System wynajmu będzie w pełni aktywny w grze przy uruchomieniu. Pokazane tutaj przedmioty są przykładami dla inwestorów i użytkowników."
+      },
+      "hireModal": {
+        "hireTitle": "Wynajmij specjalistę",
+        "fulfillTitle": "Zrealizuj zapytanie o wynajem",
+        "forHireBadge": "DO WYNAJĘCIA",
+        "wantedBadge": "POSZUKIWANY",
+        "price": "Cena",
+        "duration": "Czas trwania",
+        "howHire": "Jak działa wynajem",
+        "howFulfill": "Jak działa realizacja zapytania",
+        "proceedHire": "Przejdź do wynajmu",
+        "offerFulfill": "Zaoferuj realizację",
+        "commission": "Prowizja platformy 20% · Przerwa obowiązuje po zwrocie",
+        "confirmHire": "Potwierdź wynajem",
+        "confirmOffer": "Potwierdź ofertę",
+        "specialist": "Specjalista",
+        "payment": "Płatność",
+        "yourOffer": "Twoja oferta",
+        "durationLabel": "Czas trwania",
+        "commLabel": "Prowizja",
+        "back": "Wstecz",
+        "processing": "Przetwarzanie…",
+        "sendOffer": "Wyślij ofertę",
+        "deployedTitle": "Rozmieszczony!",
+        "offerSentTitle": "Oferta wysłana!",
+        "availableFor": "Dostępny przez",
+        "paid": "Zapłacono",
+        "returnNote": "Zwróć przed końcem okresu, aby uniknąć automatycznej kary. Przerwa {{hours}}h obowiązuje po zwrocie.",
+        "close": "Zamknij"
+      },
+      "createModal": {
+        "listTitle": "Wystaw do wynajęcia",
+        "postTitle": "Opublikuj zapytanie o wynajem",
+        "forHireBtn": "Do wynajęcia",
+        "wantingBtn": "Szukam do wynajęcia",
+        "itemNameHire": "Specjalista / nazwa przedmiotu *",
+        "itemNameWant": "Czego chcesz wynająć *",
+        "descPlaceholder": "Opis",
+        "categoryPlaceholder": "Kategoria (opcjonalne)",
+        "paymentType": "Rodzaj płatności",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materiały",
+        "amountLabel": "Kwota (Hyper Bucks)",
+        "afterCommission": "Otrzymujesz {{amount}} HB po prowizji 20%",
+        "maxDuration": "Maks. czas trwania",
+        "disclaimer": "Prowizja 20% · Przerwa = 2× czas wynajmu po zwrocie",
+        "listing": "Wystawianie…",
+        "submit": "Utwórz ogłoszenie"
+      },
+      "pagination": {
+        "prev": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona {{page}} z {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "Tablica łowów",
-      "contracts":     "kontrakt",
-      "contractsPlural":"kontraktów",
-      "noContracts":   "Brak {{filter}} kontraktów",
-      "noContractsNote":"Łowy są publikowane przez graczy i system gry",
-      "expiresIn":     "Wygasa za {{days}}d",
+      "heading": "Tablica łowów",
+      "contracts": "kontrakt",
+      "contractsPlural": "kontraktów",
+      "noContracts": "Brak {{filter}} kontraktów",
+      "noContractsNote": "Łowy są publikowane przez graczy i system gry",
+      "expiresIn": "Wygasa za {{days}}d",
       "inGameNotice": {
         "title": "Funkcja w grze — tylko do przeglądania",
-        "desc":  "Łowy są tworzone przez graczy i system gry. Przyjmowanie i realizacja łowów odbywa się wyłącznie w grze. Tablica jest wyświetlana dla przejrzystości i zachęcania nowych graczy do dołączenia."
+        "desc": "Łowy są tworzone przez graczy i system gry. Przyjmowanie i realizacja łowów odbywa się wyłącznie w grze. Tablica jest wyświetlana dla przejrzystości i zachęcania nowych graczy do dołączenia."
       },
       "rules": {
-        "battle":     "Bitwa rozwiązywana automatycznie w grze",
+        "battle": "Bitwa rozwiązywana automatycznie w grze",
         "commission": "Prowizja platformy 20% od nagrody",
-        "expiry":     "Kontrakty wygasają po 30 dniach"
+        "expiry": "Kontrakty wygasają po 30 dniach"
       },
       "table": {
-        "bountyNo":   "Nr łowu",
-        "target":     "Cel (uderzenie w)",
-        "reward":     "Nagroda",
-        "postedBy":   "Opublikowane przez",
-        "claimedBy":  "Przyjęte przez",
-        "status":     "Status",
-        "netHB":      "{{amount}} HB netto"
+        "bountyNo": "Nr łowu",
+        "target": "Cel (uderzenie w)",
+        "reward": "Nagroda",
+        "postedBy": "Opublikowane przez",
+        "claimedBy": "Przyjęte przez",
+        "status": "Status",
+        "netHB": "{{amount}} HB netto"
       },
       "pagination": {
-        "prev":  "Poprzednia",
-        "next":  "Następna",
-        "page":  "Strona {{page}} z {{pages}}"
+        "prev": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona {{page}} z {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "Poprzednia",
-      "next":           "Następna",
-      "pageOf":         "Strona {{page}} z {{pages}}",
-      "back":           "Wstecz",
-      "close":          "Zamknij",
-      "cancel":         "Anuluj",
-      "loading":        "Ładowanie…",
-      "connectWallet":  "Najpierw połącz portfel",
-      "loginFirst":     "Najpierw się zaloguj"
+      "prev": "Poprzednia",
+      "next": "Następna",
+      "pageOf": "Strona {{page}} z {{pages}}",
+      "back": "Wstecz",
+      "close": "Zamknij",
+      "cancel": "Anuluj",
+      "loading": "Ładowanie…",
+      "connectWallet": "Najpierw połącz portfel",
+      "loginFirst": "Najpierw się zaloguj"
     }
+  },
+  "musicPlayer": {
+    "title": "Odtwarzacz muzyki",
+    "playing": "Odtwarzanie",
+    "sound": "Dźwięk",
+    "ambientDesc": "Wbudowana ścieżka dźwiękowa otoczenia dla rynku. Odtwarza w pętli.",
+    "playAmbient": "Odtwórz dźwięk otoczenia",
+    "pauseAmbient": "Wstrzymaj dźwięk otoczenia",
+    "spotifyDesc": "Wklej dowolny utwór, playlistę lub link do albumu ze Spotify.",
+    "loadSpotify": "Załaduj Spotify",
+    "soundcloudDesc": "Wklej dowolny utwór lub link do playlisty SoundCloud.",
+    "loadSoundCloud": "Załaduj SoundCloud",
+    "changeLink": "Zmień link"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Zapłać kartą",
+      "amount": "Kwota:",
+      "cancel": "Anuluj",
+      "processing": "Przetwarzanie...",
+      "pay": "Zapłać"
+    },
+    "nav": {
+      "backToMarketplace": "Powrót do Rynku",
+      "backToCollections": "Powrót do Kolekcje",
+      "offers": "Oferty",
+      "marketplace": "Rynek",
+      "auction": "Aukcja",
+      "trade": "Handel",
+      "detail": "{{type}} Szczegóły",
+      "buy": "Kup {{type}}"
+    },
+    "marketplace": {
+      "listed": "Wystawione",
+      "youOwn": "Jesteś właścicielem tego",
+      "notMinted": "Niewybite jeszcze",
+      "ownedBy": "Właściciel",
+      "platform": "Platforma",
+      "noDesc": "Nie podano opisu dla tego przedmiotu.",
+      "price": "Cena",
+      "minBuyback": "Minimalna gwarancja wykupu",
+      "reservePrice": "Cena minimalna",
+      "buybackNote": "Tego aktywa nie można sprzedać poniżej minimalnej wartości wykupu.",
+      "networkNote": "USDC na podstawie · Baza W przypadku gazu wymagane jest ETH (tylko płatności portfelem)",
+      "buyWithCard": "Kup za pomocą karty",
+      "makeOffer": "Złóż ofertę",
+      "processing": "Przetwarzanie...",
+      "connectWallet": "Połącz portfel",
+      "buyNow": "Kup teraz",
+      "listNow": "Wystaw teraz",
+      "yourListed": "Twój {{type}} (na liście)",
+      "notAvailable": "Niedostępne"
+    },
+    "fundModal": {
+      "title": "Niewystarczająca ilość USDC",
+      "youNeed": "Potrzebujesz",
+      "butHave": "ale Twój portfel ma tylko",
+      "desc2": "Zasil swój portfel natychmiast kartą kredytową lub debetową za pośrednictwem Transak, a następnie wróć, aby dokończyć zakup.",
+      "fundBtn": "Zasil portfel za pomocą karty (Transak)",
+      "cancel": "Anuluj"
+    },
+    "gasModal": {
+      "title": "ETH wymagany w przypadku gazu",
+      "mainnetNote": "Jesteś w sieci głównej Base. Kup niewielką ilość ETH (≈ 1–2 USD) na Coinbase lub most z Ethereum za pośrednictwem Bridge.base.org.",
+      "testnetNote": "Jesteś w Base Sepolia Testnet. Uzyskaj bezpłatny test ETH z kranu.",
+      "faucetBtn": "Uzyskaj Testnet ETH (kran)",
+      "bridgeBtn": "Połącz ETH z bazą",
+      "close": "Zamknij"
+    },
+    "confirmModal1": {
+      "title": "Potwierdź działanie",
+      "listPrice": "Cena katalogowa",
+      "platformFee": "Opłata za platformę (10%)",
+      "total": "Razem",
+      "cancel": "Anuluj",
+      "continue": "Kontynuuj"
+    },
+    "confirmModal2": {
+      "setPrice": "Ustaw cenę ofertową (USDC)",
+      "willList": "✓ Wystawię o godzinie {{price}} USDC",
+      "price": "Cena",
+      "cancel": "Anuluj",
+      "processing": "Przetwarzanie...",
+      "confirm": "Potwierdź"
+    },
+    "offers": {
+      "noOffers": "Nie ma jeszcze ofert",
+      "offer": "oferta",
+      "offers": "oferty",
+      "noOffersTitle": "W tej chwili brak ofert",
+      "noOffersDesc": "Bądź pierwszą osobą, która złoży ofertę oferta",
+      "colPrice": "Cena",
+      "colStatus": "Stan",
+      "colFrom": "Od",
+      "colExpires": "Wygasa",
+      "colAction": "Działanie",
+      "accept": "Akceptuj",
+      "reject": "Odrzuć",
+      "cancel": "Anuluj",
+      "expired": "Wygasł",
+      "completePurchase": "Zakończono Kup"
+    },
+    "auction": {
+      "loading": "Wczytuję dane aukcji…",
+      "active": "Aktywna aukcja",
+      "startPrice": "Cena początkowa",
+      "currentBid": "Aktualna oferta",
+      "noBids": "Brak jeszcze ofert",
+      "instantBuy": "Natychmiastowy zakup",
+      "reservePrice": "Cena minimalna",
+      "bidHistory": "Historia ofert",
+      "minBid": "Min licytuj:",
+      "bidding": "Licytacja…",
+      "placeBid": "Złóż ofertę",
+      "connectWallet": "Połącz swój portfel, aby złożyć ofertę",
+      "ownerNote": "Twój przedmiot jest wystawiony na aukcji. Oferty będą się tutaj pojawiać w miarę ich nadejścia.",
+      "noAuction": "Brak aktywnej aukcji dla tego przedmiotu",
+      "ownerSetup": "Przejdź do swoich Kolekcji i kliknij Lista, aby ustawić aukcję.",
+      "notAvailable": "Ten przedmiot nie ma obecnie otwartej aukcji."
+    },
+    "trade": {
+      "loading": "Ładowanie ofert handlowych…",
+      "active": "aktywna oferta handlu",
+      "actives": "aktywna wymiana aukcje",
+      "offering": "Oferta",
+      "wants": "Potrzeby",
+      "openOffer": "Otwarta oferta",
+      "by": "Przez",
+      "proposeTrade": "Zaproponuj wymianę →",
+      "noTrades": "Brak aktywnych ofert wymiany",
+      "ownerSetup": "Przejdź do swoich Kolekcji i kliknij Lista, aby skonfigurować wymianę.",
+      "notAvailable": "Właściciel nie ma otwartych ofert wymiany dla tej transakcji. pozycja."
+    },
+    "successModal": {
+      "title": "Zakup udany!",
+      "desc": "{{name}} został zakupiony. Twój NFT zostanie wkrótce przeniesiony do Twojego portfela.",
+      "note": "Przelew jest przetwarzany automatycznie przez nasz system.",
+      "viewProfile": "Wyświetl w Moim profilu",
+      "continueShopping": "Kontynuuj zakupy"
+    },
+    "transferFailed": {
+      "title": "Płatność otrzymana — przelew w toku",
+      "desc": "Twoja płatność została zrealizowana pomyślnie, ale z przelewem NFT wystąpił problem. Twoje środki są bezpieczne — nasz zespół dokona przelewu ręcznie.",
+      "viewProfile": "Wyświetl mój profil",
+      "dismiss": "Zamknij"
+    },
+    "priceHistory": {
+      "title": "Historia cen",
+      "subtitle": "Historyczne ceny sprzedaży dla tego NFT",
+      "loading": "Ładowanie...",
+      "noSales": "Nie zarejestrowano jeszcze sprzedaży",
+      "noSalesNote": "Historia cen pojawia się po pierwszej sprzedaży"
+    }
+  },
+  "makeOffer": {
+    "back": "Wstecz",
+    "floor": "Piętro",
+    "title": "Złóż ofertę",
+    "yourOffer": "Twoja oferta (USDC)",
+    "expiresIn": "Oferta wygasa za",
+    "youPay": "Płacisz",
+    "submitting": "Przesyłasz...",
+    "submit": "Prześlij ofertę",
+    "terms": "Przesyłając tę ofertę, wyrażasz zgodę na Hyper Warunki korzystania z usługi Tek.",
+    "expiry": {
+      "6h": "6 godzin",
+      "12h": "12 godzin",
+      "1d": "1 dzień",
+      "3d": "3 dni",
+      "7d": "7 dni",
+      "1mo": "1 miesiąc"
+    },
+    "success": {
+      "title": "Oferta przesłana!",
+      "desc": "Twoja oferta {{price}} USDC za {{name}} został wysłany do właściciela.",
+      "expires": "Wygasa za {{duration}}",
+      "backToNft": "Powrót do NFT",
+      "goToMarketplace": "Idź do Marketplace"
+    },
+    "error": {
+      "loginRequired": "Zaloguj się, aby złożyć ofertę",
+      "submitFailed": "Nie udało się przesłać oferty. Spróbuj ponownie."
+    }
+  },
+  "paymentError": {
+    "message": "Twoje żądanie nie powiodło się",
+    "goHome": "Przejdź do strony głównej"
   }
 }

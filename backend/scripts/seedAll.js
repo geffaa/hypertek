@@ -20,23 +20,23 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 
 import SiteContent from "../Models/SiteContent.js";
-import News        from "../Models/News.js";
-import NFTSystem   from "../Models/NFTSystem.js";
-import Nft101      from "../Models/Nft101.js";
-import User        from "../Models/User.js";
-import { Offer }   from "../Models/Offer.js";
+import News from "../Models/News.js";
+import NFTSystem from "../Models/NFTSystem.js";
+import Nft101 from "../Models/Nft101.js";
+import User from "../Models/User.js";
+import { Offer } from "../Models/Offer.js";
 import { Withdrawal } from "../Models/WithdrawalModel.js";
 import { Payment } from "../Models/Payment.js";
-import Activity    from "../Models/ActivityModel.js";
-import Auction     from "../Models/AuctionModel.js";
-import Trade       from "../Models/TradeModel.js";
-import HireRent    from "../Models/HireRentModel.js";
-import Bounty      from "../Models/BountyModel.js";
+import Activity from "../Models/ActivityModel.js";
+import Auction from "../Models/AuctionModel.js";
+import Trade from "../Models/TradeModel.js";
+import HireRent from "../Models/HireRentModel.js";
+import Bounty from "../Models/BountyModel.js";
 
 // ─── SiteContent ─────────────────────────────────────────────────────────────
 const SITE_CONTENT = [
@@ -45,10 +45,10 @@ const SITE_CONTENT = [
     sectionLabel: "Hero Banner",
     pageGroup: "home",
     fields: [
-      { key: "heading",    label: "Main Heading",    type: "text",     value: "Welcome to HyperTek" },
-      { key: "subheading", label: "Sub Heading",     type: "text",     value: "The Future of Gaming NFTs" },
-      { key: "body",       label: "Body Text",       type: "textarea", value: "Own, trade, and battle with real digital assets in the HyperTek universe. Your NFTs. Your rules." },
-      { key: "cta_text",   label: "CTA Button Text", type: "text",     value: "Explore Marketplace" },
+      { key: "heading", label: "Main Heading", type: "text", value: "Welcome to HyperTek" },
+      { key: "subheading", label: "Sub Heading", type: "text", value: "The Future of Gaming NFTs" },
+      { key: "body", label: "Body Text", type: "textarea", value: "Own, trade, and battle with real digital assets in the HyperTek universe. Your NFTs. Your rules." },
+      { key: "cta_text", label: "CTA Button Text", type: "text", value: "Explore Marketplace" },
     ],
   },
   {
@@ -56,8 +56,8 @@ const SITE_CONTENT = [
     sectionLabel: "About HyperTek",
     pageGroup: "home",
     fields: [
-      { key: "heading",    label: "Section Heading", type: "text",     value: "About HyperTek" },
-      { key: "body",       label: "Body Text",       type: "textarea", value: "HyperTek is a next-generation play-to-earn NFT gaming platform built on the Base blockchain. We offer a fully on-chain marketplace where players can buy, sell, and trade digital game assets — from weapons and skins to land and vehicles. Every asset is backed by a guaranteed minimum buy-back value, making HyperTek NFTs a unique blend of gaming and digital investment." },
+      { key: "heading", label: "Section Heading", type: "text", value: "About HyperTek" },
+      { key: "body", label: "Body Text", type: "textarea", value: "HyperTek is a next-generation play-to-earn NFT gaming platform built on the Base blockchain. We offer a fully on-chain marketplace where players can buy, sell, and trade digital game assets — from weapons and skins to land and vehicles. Every asset is backed by a guaranteed minimum buy-back value, making HyperTek NFTs a unique blend of gaming and digital investment." },
     ],
   },
   {
@@ -69,10 +69,10 @@ const SITE_CONTENT = [
       {
         key: "steps", label: "Steps", type: "list",
         value: [
-          { title: "Create a Wallet",       description: "Connect your crypto wallet (MetaMask or Coinbase Wallet) to get started." },
+          { title: "Create a Wallet", description: "Connect your crypto wallet (MetaMask or Coinbase Wallet) to get started." },
           { title: "Browse the Marketplace", description: "Explore thousands of unique gaming NFTs across 9 categories." },
-          { title: "Buy or Mint",           description: "Purchase existing NFTs or mint your own unique digital assets." },
-          { title: "Play & Earn",           description: "Use your NFTs in-game and earn rewards through trading and gameplay." },
+          { title: "Buy or Mint", description: "Purchase existing NFTs or mint your own unique digital assets." },
+          { title: "Play & Earn", description: "Use your NFTs in-game and earn rewards through trading and gameplay." },
         ],
       },
     ],
@@ -82,8 +82,8 @@ const SITE_CONTENT = [
     sectionLabel: "About Page — Top Section",
     pageGroup: "about",
     fields: [
-      { key: "heading", label: "Heading",   type: "text",     value: "The HyperTek Story" },
-      { key: "body",    label: "Body Text", type: "textarea", value: "Born from a passion for gaming and blockchain technology, HyperTek was built to give players true ownership of their in-game assets." },
+      { key: "heading", label: "Heading", type: "text", value: "The HyperTek Story" },
+      { key: "body", label: "Body Text", type: "textarea", value: "Born from a passion for gaming and blockchain technology, HyperTek was built to give players true ownership of their in-game assets." },
     ],
   },
   {
@@ -91,8 +91,8 @@ const SITE_CONTENT = [
     sectionLabel: "About Page — Our Story",
     pageGroup: "about",
     fields: [
-      { key: "heading", label: "Heading",   type: "text",     value: "Our Mission" },
-      { key: "body",    label: "Body Text", type: "textarea", value: "We believe the future of gaming is ownership. HyperTek combines AAA gaming experiences with the security and transparency of blockchain, ensuring every player truly owns what they earn." },
+      { key: "heading", label: "Heading", type: "text", value: "Our Mission" },
+      { key: "body", label: "Body Text", type: "textarea", value: "We believe the future of gaming is ownership. HyperTek combines AAA gaming experiences with the security and transparency of blockchain, ensuring every player truly owns what they earn." },
     ],
   },
   {
@@ -100,14 +100,14 @@ const SITE_CONTENT = [
     sectionLabel: "About Page — Ecosystem",
     pageGroup: "about",
     fields: [
-      { key: "heading", label: "Heading",   type: "text",     value: "The HyperTek Ecosystem" },
+      { key: "heading", label: "Heading", type: "text", value: "The HyperTek Ecosystem" },
       {
         key: "features", label: "Features", type: "list",
         value: [
-          { title: "NFT Marketplace",    description: "Trade digital assets with guaranteed buy-back protection." },
-          { title: "Play-to-Earn",       description: "Earn real rewards by playing and competing in the HyperTek universe." },
-          { title: "DAO Governance",     description: "HyperTek holders vote on platform decisions and future development." },
-          { title: "Base Blockchain",    description: "Built on Coinbase's Base network for fast, low-cost transactions." },
+          { title: "NFT Marketplace", description: "Trade digital assets with guaranteed buy-back protection." },
+          { title: "Play-to-Earn", description: "Earn real rewards by playing and competing in the HyperTek universe." },
+          { title: "DAO Governance", description: "HyperTek holders vote on platform decisions and future development." },
+          { title: "Base Blockchain", description: "Built on Coinbase's Base network for fast, low-cost transactions." },
         ],
       },
     ],
@@ -171,91 +171,91 @@ const CATEGORIES = [
   {
     name: "Skins", chain: "Base", symbol: "SKIN",
     items: [
-      { name: "Desert Storm Skin",    symbol: "DSS",  priceETH: 45,   description: "Camouflage desert warfare skin for elite soldiers." },
-      { name: "Arctic Ghost Skin",    symbol: "AGS",  priceETH: 60,   description: "Icy blue stealth skin for cold-climate operations." },
-      { name: "Shadow Ops Skin",      symbol: "SOS",  priceETH: 80,   description: "Jet black covert operations skin with night-vision accents." },
-      { name: "Urban Assault Skin",   symbol: "UAS",  priceETH: 55,   description: "City warfare skin with tactical grey patterning." },
-      { name: "Jungle Predator Skin", symbol: "JPS",  priceETH: 70,   description: "Dense jungle camouflage skin for rainforest missions." },
+      { name: "Desert Storm Skin", symbol: "DSS", priceETH: 45, description: "Camouflage desert warfare skin for elite soldiers." },
+      { name: "Arctic Ghost Skin", symbol: "AGS", priceETH: 60, description: "Icy blue stealth skin for cold-climate operations." },
+      { name: "Shadow Ops Skin", symbol: "SOS", priceETH: 80, description: "Jet black covert operations skin with night-vision accents." },
+      { name: "Urban Assault Skin", symbol: "UAS", priceETH: 55, description: "City warfare skin with tactical grey patterning." },
+      { name: "Jungle Predator Skin", symbol: "JPS", priceETH: 70, description: "Dense jungle camouflage skin for rainforest missions." },
     ],
   },
   {
     name: "Weapons", chain: "Base", symbol: "WPNS",
     items: [
-      { name: "Hyper Assault Rifle",  symbol: "HAR",  priceETH: 120,  description: "High-powered assault rifle with hyper-tech optics." },
-      { name: "Plasma Pistol Mk2",    symbol: "PPM2", priceETH: 85,   description: "Compact plasma pistol with dual-fire mode." },
-      { name: "Rail Sniper X90",      symbol: "RSX",  priceETH: 200,  description: "Long-range rail gun sniper with electro-targeting." },
-      { name: "Frag Launcher Pro",    symbol: "FLP",  priceETH: 150,  description: "Grenade launcher with proximity detonation system." },
-      { name: "Ion Blade Elite",      symbol: "IBE",  priceETH: 95,   description: "Electrified combat blade for close-quarters warfare." },
+      { name: "Hyper Assault Rifle", symbol: "HAR", priceETH: 120, description: "High-powered assault rifle with hyper-tech optics." },
+      { name: "Plasma Pistol Mk2", symbol: "PPM2", priceETH: 85, description: "Compact plasma pistol with dual-fire mode." },
+      { name: "Rail Sniper X90", symbol: "RSX", priceETH: 200, description: "Long-range rail gun sniper with electro-targeting." },
+      { name: "Frag Launcher Pro", symbol: "FLP", priceETH: 150, description: "Grenade launcher with proximity detonation system." },
+      { name: "Ion Blade Elite", symbol: "IBE", priceETH: 95, description: "Electrified combat blade for close-quarters warfare." },
     ],
   },
   {
     name: "Military Badges and Collectables", chain: "Base", symbol: "MBAC",
     items: [
-      { name: "Commander's Cross",    symbol: "CC",   priceETH: 300,  description: "Rare commander's cross awarded for battlefield leadership." },
-      { name: "Purple Valor Medal",   symbol: "PVM",  priceETH: 250,  description: "Medal of valor for exceptional bravery under fire." },
-      { name: "HyperTek Coin 2025",   symbol: "HTC",  priceETH: 180,  description: "Limited edition collectible coin for season 2025." },
-      { name: "Iron Shield Badge",    symbol: "ISB",  priceETH: 140,  description: "Badge denoting mastery of defensive tactics." },
-      { name: "Star of Honour",       symbol: "SOH",  priceETH: 500,  description: "The highest honour awarded in the HyperTek universe." },
+      { name: "Commander's Cross", symbol: "CC", priceETH: 300, description: "Rare commander's cross awarded for battlefield leadership." },
+      { name: "Purple Valor Medal", symbol: "PVM", priceETH: 250, description: "Medal of valor for exceptional bravery under fire." },
+      { name: "HyperTek Coin 2025", symbol: "HTC", priceETH: 180, description: "Limited edition collectible coin for season 2025." },
+      { name: "Iron Shield Badge", symbol: "ISB", priceETH: 140, description: "Badge denoting mastery of defensive tactics." },
+      { name: "Star of Honour", symbol: "SOH", priceETH: 500, description: "The highest honour awarded in the HyperTek universe." },
     ],
   },
   {
     name: "Body Armour", chain: "Base", symbol: "BARM",
     items: [
-      { name: "Nano-Mesh Vest",           symbol: "NMV",  priceETH: 110,  description: "Lightweight nano-fibre vest with ballistic resistance." },
-      { name: "Exo-Skeleton Mk3",         symbol: "ESK3", priceETH: 350,  description: "Full exoskeleton suit with powered joints." },
-      { name: "Carbon Plate Armour",      symbol: "CPA",  priceETH: 220,  description: "Hard carbon plates for heavy assault operations." },
-      { name: "Stealth Composite Vest",   symbol: "SCV",  priceETH: 175,  description: "Radar-absorbing composite armour vest." },
-      { name: "Titan Full Plate",         symbol: "TFP",  priceETH: 480,  description: "Maximum protection titanium alloy full body armour." },
+      { name: "Nano-Mesh Vest", symbol: "NMV", priceETH: 110, description: "Lightweight nano-fibre vest with ballistic resistance." },
+      { name: "Exo-Skeleton Mk3", symbol: "ESK3", priceETH: 350, description: "Full exoskeleton suit with powered joints." },
+      { name: "Carbon Plate Armour", symbol: "CPA", priceETH: 220, description: "Hard carbon plates for heavy assault operations." },
+      { name: "Stealth Composite Vest", symbol: "SCV", priceETH: 175, description: "Radar-absorbing composite armour vest." },
+      { name: "Titan Full Plate", symbol: "TFP", priceETH: 480, description: "Maximum protection titanium alloy full body armour." },
     ],
   },
   {
     name: "Specialists", chain: "Base", symbol: "SPEC",
     items: [
-      { name: "Ghost Recon Operator",  symbol: "GRO",  priceETH: 400,  description: "Elite recon specialist with ghost cloak ability." },
-      { name: "Cyber Medic",           symbol: "CME",  priceETH: 280,  description: "Field medic with advanced cybernetic healing tools." },
-      { name: "Bomb Disposal Expert",  symbol: "BDE",  priceETH: 320,  description: "Specialist trained to neutralise any explosive device." },
-      { name: "AI Drone Handler",      symbol: "ADH",  priceETH: 360,  description: "Controls a squad of tactical AI combat drones." },
-      { name: "Sniper Ace",            symbol: "SAC",  priceETH: 450,  description: "Long-range marksman with zero-wind precision targeting." },
+      { name: "Ghost Recon Operator", symbol: "GRO", priceETH: 400, description: "Elite recon specialist with ghost cloak ability." },
+      { name: "Cyber Medic", symbol: "CME", priceETH: 280, description: "Field medic with advanced cybernetic healing tools." },
+      { name: "Bomb Disposal Expert", symbol: "BDE", priceETH: 320, description: "Specialist trained to neutralise any explosive device." },
+      { name: "AI Drone Handler", symbol: "ADH", priceETH: 360, description: "Controls a squad of tactical AI combat drones." },
+      { name: "Sniper Ace", symbol: "SAC", priceETH: 450, description: "Long-range marksman with zero-wind precision targeting." },
     ],
   },
   {
     name: "Spaceships", chain: "Base", symbol: "SSHP",
     items: [
-      { name: "Viper Fighter Mk1",     symbol: "VFM1", priceETH: 600,  description: "Fast single-pilot fighter with twin plasma cannons." },
-      { name: "Nexus Cruiser",         symbol: "NCR",  priceETH: 1200, description: "Mid-range cruiser with advanced shield systems." },
-      { name: "Hyper Drive Engine",    symbol: "HDE",  priceETH: 250,  description: "Replacement engine part providing 40% speed boost." },
-      { name: "Phantom Stealth Ship",  symbol: "PSS",  priceETH: 900,  description: "Radar-invisible stealth spacecraft for covert ops." },
-      { name: "Ion Thruster Pack",     symbol: "ITP",  priceETH: 180,  description: "Upgradeable ion thruster set for any ship class." },
+      { name: "Viper Fighter Mk1", symbol: "VFM1", priceETH: 600, description: "Fast single-pilot fighter with twin plasma cannons." },
+      { name: "Nexus Cruiser", symbol: "NCR", priceETH: 1200, description: "Mid-range cruiser with advanced shield systems." },
+      { name: "Hyper Drive Engine", symbol: "HDE", priceETH: 250, description: "Replacement engine part providing 40% speed boost." },
+      { name: "Phantom Stealth Ship", symbol: "PSS", priceETH: 900, description: "Radar-invisible stealth spacecraft for covert ops." },
+      { name: "Ion Thruster Pack", symbol: "ITP", priceETH: 180, description: "Upgradeable ion thruster set for any ship class." },
     ],
   },
   {
     name: "Racing Vehicles", chain: "Base", symbol: "RVEH",
     items: [
-      { name: "HyperBike GT",          symbol: "HBGT", priceETH: 550,  description: "Ultra-fast racing bike built for gravity tracks." },
-      { name: "Turbo Hovercar X",      symbol: "THX",  priceETH: 780,  description: "Anti-gravity hovercar with turbo boost module." },
-      { name: "Mag-Wheel Upgrade Kit", symbol: "MWU",  priceETH: 120,  description: "Magnetic wheel set for improved cornering speed." },
-      { name: "Neon Dragster 5000",    symbol: "ND5K", priceETH: 650,  description: "Straight-line speed demon with neon drive system." },
-      { name: "Combat Trike",          symbol: "CTR",  priceETH: 430,  description: "Three-wheeled combat racer with front-mounted cannon." },
+      { name: "HyperBike GT", symbol: "HBGT", priceETH: 550, description: "Ultra-fast racing bike built for gravity tracks." },
+      { name: "Turbo Hovercar X", symbol: "THX", priceETH: 780, description: "Anti-gravity hovercar with turbo boost module." },
+      { name: "Mag-Wheel Upgrade Kit", symbol: "MWU", priceETH: 120, description: "Magnetic wheel set for improved cornering speed." },
+      { name: "Neon Dragster 5000", symbol: "ND5K", priceETH: 650, description: "Straight-line speed demon with neon drive system." },
+      { name: "Combat Trike", symbol: "CTR", priceETH: 430, description: "Three-wheeled combat racer with front-mounted cannon." },
     ],
   },
   {
     name: "Artwork", chain: "Base", symbol: "ART",
     items: [
-      { name: "Genesis Warrior Portrait", symbol: "GWP",  priceETH: 800,  description: "Original digital oil portrait of the first HyperTek warrior." },
-      { name: "Neon City Skyline",        symbol: "NCS",  priceETH: 600,  description: "Vibrant neon cityscape from the HyperTek universe." },
-      { name: "Cosmic Battle Scene",      symbol: "CBS",  priceETH: 1500, description: "Epic deep-space battle, hand-painted in 8K resolution." },
-      { name: "Hyper Soldier Sketch",     symbol: "HSS",  priceETH: 400,  description: "Concept sketch of the iconic HyperTek soldier." },
-      { name: "Abstract Data Stream",     symbol: "ADS",  priceETH: 350,  description: "Generative art piece representing blockchain data flow." },
+      { name: "Genesis Warrior Portrait", symbol: "GWP", priceETH: 800, description: "Original digital oil portrait of the first HyperTek warrior." },
+      { name: "Neon City Skyline", symbol: "NCS", priceETH: 600, description: "Vibrant neon cityscape from the HyperTek universe." },
+      { name: "Cosmic Battle Scene", symbol: "CBS", priceETH: 1500, description: "Epic deep-space battle, hand-painted in 8K resolution." },
+      { name: "Hyper Soldier Sketch", symbol: "HSS", priceETH: 400, description: "Concept sketch of the iconic HyperTek soldier." },
+      { name: "Abstract Data Stream", symbol: "ADS", priceETH: 350, description: "Generative art piece representing blockchain data flow." },
     ],
   },
   {
     name: "Land and Bases", chain: "Base", symbol: "LAND",
     items: [
-      { name: "Desert Outpost Alpha",   symbol: "DOA",  priceETH: 2000, description: "Strategic desert base with resource extraction facilities." },
-      { name: "Arctic Station Omega",   symbol: "ASO",  priceETH: 3500, description: "Fortified arctic base in the polar zone." },
-      { name: "City Block 47",          symbol: "CB47", priceETH: 1800, description: "Prime urban land block in the central HyperTek city." },
-      { name: "Mountain Fortress",      symbol: "MFT",  priceETH: 4200, description: "Defensible mountain stronghold with 360-degree visibility." },
-      { name: "Ocean Platform Delta",   symbol: "OPD",  priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
+      { name: "Desert Outpost Alpha", symbol: "DOA", priceETH: 2000, description: "Strategic desert base with resource extraction facilities." },
+      { name: "Arctic Station Omega", symbol: "ASO", priceETH: 3500, description: "Fortified arctic base in the polar zone." },
+      { name: "City Block 47", symbol: "CB47", priceETH: 1800, description: "Prime urban land block in the central HyperTek city." },
+      { name: "Mountain Fortress", symbol: "MFT", priceETH: 4200, description: "Defensible mountain stronghold with 360-degree visibility." },
+      { name: "Ocean Platform Delta", symbol: "OPD", priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
     ],
   },
 ];
@@ -266,12 +266,12 @@ const CATEGORIES = [
 async function seed() {
   // ── Safety guard: never run on production ──
   if (process.env.NODE_ENV === "production") {
-    console.error("❌ ABORT: seedAll.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    console.error(" ABORT: seedAll.js must NOT run in production. Set NODE_ENV=development to proceed.");
     process.exit(1);
   }
 
   await mongoose.connect(process.env.MONGODB_URL);
-  console.log("✅ Connected to MongoDB\n");
+  console.log("Connected to MongoDB\n");
 
   // 1. SiteContent
   let sc_created = 0, sc_skipped = 0;
@@ -279,7 +279,7 @@ async function seed() {
     const existing = await SiteContent.findOne({ sectionKey: section.sectionKey });
     if (existing) { sc_skipped++; continue; }
     await SiteContent.create(section);
-    console.log(`✅ SiteContent: ${section.sectionKey}`);
+    console.log(`SiteContent: ${section.sectionKey}`);
     sc_created++;
   }
 
@@ -291,7 +291,7 @@ async function seed() {
     await News.create(article);
     news_created++;
   }
-  if (news_created > 0) console.log(`✅ News: ${news_created} articles created`);
+  if (news_created > 0) console.log(`News: ${news_created} articles created`);
 
   // 3. NFT Collections
   let nft_created = 0, nft_skipped = 0;
@@ -308,7 +308,7 @@ async function seed() {
         priceETH: item.priceETH, listed: true, isFirstSale: true, tokenId: i + 1,
       })),
     });
-    console.log(`✅ NFT Collection: ${cat.name} (${cat.items.length} items)`);
+    console.log(`NFT Collection: ${cat.name} (${cat.items.length} items)`);
     nft_created++;
   }
 
@@ -324,9 +324,9 @@ async function seed() {
   // 5. Users
   let users_created = 0, users_skipped = 0;
   const USERS = [
-    { Email: "alice@hypertek.com",   FullName: "Alice Walker",   Password: "User@1234", Role: "user", Bio: "NFT collector and gaming enthusiast." },
-    { Email: "bob@hypertek.com",     FullName: "Bob Martinez",   Password: "User@1234", Role: "user", Bio: "Blockchain developer and digital artist." },
-    { Email: "charlie@hypertek.com", FullName: "Charlie Kim",    Password: "User@1234", Role: "user", Bio: "Play-to-earn gamer and crypto investor." },
+    { Email: "alice@hypertek.com", FullName: "Alice Walker", Password: "User@1234", Role: "user", Bio: "NFT collector and gaming enthusiast." },
+    { Email: "bob@hypertek.com", FullName: "Bob Martinez", Password: "User@1234", Role: "user", Bio: "Blockchain developer and digital artist." },
+    { Email: "charlie@hypertek.com", FullName: "Charlie Kim", Password: "User@1234", Role: "user", Bio: "Play-to-earn gamer and crypto investor." },
   ];
   const createdUsers = [];
   for (const u of USERS) {
@@ -337,7 +337,7 @@ async function seed() {
     createdUsers.push(user);
     users_created++;
   }
-  if (users_created > 0) console.log(`✅ Users: ${users_created} created`);
+  if (users_created > 0) console.log(`Users: ${users_created} created`);
 
   // 6. Offers
   let offers_created = 0, offers_skipped = 0;
@@ -399,7 +399,7 @@ async function seed() {
       await Offer.create(o);
       offers_created++;
     }
-    if (offers_created > 0) console.log(`✅ Offers: ${offers_created} created`);
+    if (offers_created > 0) console.log(`Offers: ${offers_created} created`);
   }
 
   // 7. Withdrawals
@@ -445,7 +445,7 @@ async function seed() {
       await Withdrawal.create(w);
       wd_created++;
     }
-    if (wd_created > 0) console.log(`✅ Withdrawals: ${wd_created} created`);
+    if (wd_created > 0) console.log(`Withdrawals: ${wd_created} created`);
   }
 
   // 8. Payments
@@ -502,7 +502,7 @@ async function seed() {
       await Payment.create(p);
       pay_created++;
     }
-    if (pay_created > 0) console.log(`✅ Payments: ${pay_created} created`);
+    if (pay_created > 0) console.log(`Payments: ${pay_created} created`);
   }
 
   // 9. Activities
@@ -547,7 +547,7 @@ async function seed() {
       await Activity.create(a);
       act_created++;
     }
-    if (act_created > 0) console.log(`✅ Activities: ${act_created} created`);
+    if (act_created > 0) console.log(`Activities: ${act_created} created`);
   }
 
   // 10. Sample Auctions — delete SEED auctions only and re-insert with distinct endTimes
@@ -567,9 +567,9 @@ async function seed() {
         endTime: new Date(now + 5 * 3600000 + 31 * 60000),        // ~05:31:00
         seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_001", bidderName: "WarriorX",    amount: 260, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_001", bidderName: "WarriorX", amount: 260, placedAt: new Date(now - 86400000 * 2) },
           { bidderWallet: "0xBIDDER_002", bidderName: "SniperElite", amount: 280, placedAt: new Date(now - 86400000) },
-          { bidderWallet: "0xBIDDER_003", bidderName: "GhostOps",    amount: 320, placedAt: new Date(now - 3600000) },
+          { bidderWallet: "0xBIDDER_003", bidderName: "GhostOps", amount: 320, placedAt: new Date(now - 3600000) },
         ],
       },
       {
@@ -581,7 +581,7 @@ async function seed() {
         seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
           { bidderWallet: "0xBIDDER_004", bidderName: "DarkHunter", amount: 160, placedAt: new Date(now - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_005", bidderName: "IronWill",   amount: 180, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_005", bidderName: "IronWill", amount: 180, placedAt: new Date(now - 86400000) },
         ],
       },
       {
@@ -592,9 +592,9 @@ async function seed() {
         endTime: new Date(now + 81 * 3600000 + 45 * 60000 + 59000), // ~3d 09:45:59
         seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_006", bidderName: "PilotAce",    amount: 1400, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_006", bidderName: "PilotAce", amount: 1400, placedAt: new Date(now - 86400000 * 2) },
           { bidderWallet: "0xBIDDER_007", bidderName: "StarCommand", amount: 1600, placedAt: new Date(now - 86400000) },
-          { bidderWallet: "0xBIDDER_008", bidderName: "NovaPilot",   amount: 1800, placedAt: new Date(now - 7200000) },
+          { bidderWallet: "0xBIDDER_008", bidderName: "NovaPilot", amount: 1800, placedAt: new Date(now - 7200000) },
         ],
       },
       {
@@ -605,8 +605,8 @@ async function seed() {
         endTime: new Date(now + 48 * 3600000),                       // ~2d
         seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_009", bidderName: "LandBaron",   amount: 3500, placedAt: new Date(now - 86400000 * 4) },
-          { bidderWallet: "0xBIDDER_010", bidderName: "Conqueror",   amount: 4000, placedAt: new Date(now - 86400000 * 2) },
+          { bidderWallet: "0xBIDDER_009", bidderName: "LandBaron", amount: 3500, placedAt: new Date(now - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_010", bidderName: "Conqueror", amount: 4000, placedAt: new Date(now - 86400000 * 2) },
           { bidderWallet: "0xBIDDER_011", bidderName: "TerraFormer", amount: 4500, placedAt: new Date(now - 86400000) },
         ],
       },
@@ -619,7 +619,7 @@ async function seed() {
         seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
           { bidderWallet: "0xBIDDER_012", bidderName: "StealthKing", amount: 400, placedAt: new Date(now - 86400000 * 2) },
-          { bidderWallet: "0xBIDDER_013", bidderName: "NightOwl",    amount: 420, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_013", bidderName: "NightOwl", amount: 420, placedAt: new Date(now - 86400000) },
         ],
       },
       {
@@ -631,7 +631,7 @@ async function seed() {
         seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
           { bidderWallet: "0xBIDDER_014", bidderName: "SpeedDemon", amount: 600, placedAt: new Date(now - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_015", bidderName: "RacerX",     amount: 660, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_015", bidderName: "RacerX", amount: 660, placedAt: new Date(now - 86400000) },
         ],
       },
       {
@@ -642,9 +642,9 @@ async function seed() {
         endTime: new Date(now + 168 * 3600000),                      // ~7d
         seller: _s, sellerWallet: "0xSEED_WALLET_SELLER_001",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_016", bidderName: "Collector1",     amount: 1700, placedAt: new Date(now - 86400000 * 5) },
-          { bidderWallet: "0xBIDDER_017", bidderName: "MedalHunter",    amount: 1900, placedAt: new Date(now - 86400000 * 3) },
-          { bidderWallet: "0xBIDDER_018", bidderName: "PrestigeMax",    amount: 2100, placedAt: new Date(now - 86400000) },
+          { bidderWallet: "0xBIDDER_016", bidderName: "Collector1", amount: 1700, placedAt: new Date(now - 86400000 * 5) },
+          { bidderWallet: "0xBIDDER_017", bidderName: "MedalHunter", amount: 1900, placedAt: new Date(now - 86400000 * 3) },
+          { bidderWallet: "0xBIDDER_018", bidderName: "PrestigeMax", amount: 2100, placedAt: new Date(now - 86400000) },
         ],
       },
       {
@@ -655,7 +655,7 @@ async function seed() {
         endTime: new Date(now + 96 * 3600000),                       // ~4d
         seller: _s2, sellerWallet: "0xSEED_WALLET_SELLER_002",
         bidHistory: [
-          { bidderWallet: "0xBIDDER_019", bidderName: "ArtLover",       amount: 4500, placedAt: new Date(now - 86400000 * 4) },
+          { bidderWallet: "0xBIDDER_019", bidderName: "ArtLover", amount: 4500, placedAt: new Date(now - 86400000 * 4) },
           { bidderWallet: "0xBIDDER_020", bidderName: "DigitalGallery", amount: 5200, placedAt: new Date(now - 86400000 * 2) },
         ],
       },
@@ -663,7 +663,7 @@ async function seed() {
     const docs = SAMPLE_AUCTIONS.map(a => ({ ...a, status: "active" }));
     await Auction.insertMany(docs);
     auc_created = docs.length;
-    console.log(`✅ Auctions: ${auc_created} inserted fresh (distinct countdowns)`);
+    console.log(`Auctions: ${auc_created} inserted fresh (distinct countdowns)`);
   }
 
   // 11. Sample Trades & Quests (in-game feature preview)
@@ -746,7 +746,7 @@ async function seed() {
       await Trade.create({ ...t, status: "open" });
       trade_created++;
     }
-    if (trade_created > 0) console.log(`✅ Trades/Quests: ${trade_created} created`);
+    if (trade_created > 0) console.log(`Trades/Quests: ${trade_created} created`);
   }
 
   // 12. Sample Hire/Rent listings (in-game feature preview)
@@ -848,7 +848,7 @@ async function seed() {
       await HireRent.create({ ...h, status: "available" });
       hire_created++;
     }
-    if (hire_created > 0) console.log(`✅ Hire/Rent: ${hire_created} created`);
+    if (hire_created > 0) console.log(`Hire/Rent: ${hire_created} created`);
   }
 
   // 13. Sample Bounties (in-game feature preview)
@@ -922,7 +922,7 @@ async function seed() {
       await Bounty.create({ ...b, status: "open" });
       bounty_created++;
     }
-    if (bounty_created > 0) console.log(`✅ Bounties: ${bounty_created} created`);
+    if (bounty_created > 0) console.log(`Bounties: ${bounty_created} created`);
   }
 
   console.log("\n── Summary ──────────────────────────────────────────────────");
@@ -946,10 +946,10 @@ async function seed() {
   console.log("   charlie@hypertek.com / User@1234");
 
   await mongoose.disconnect();
-  console.log("\n✅ Done.");
+  console.log("\nDone.");
 }
 
 seed().catch((err) => {
-  console.error("❌ Seed failed:", err);
+  console.error(" Seed failed:", err);
   process.exit(1);
 });

@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, SlidersHorizontal, X, Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import LazyImage from "../Common/LazyImage";
 import overview1 from "../../assets/images/Overview/overview1.jpg";
 import { getImageUrl } from "../../Config";
@@ -38,6 +39,7 @@ function hashIndex(str, mod) {
 function LineCard({ item }) {
   const isDummy   = item.isDummy === true;
   const navigate  = useNavigate();
+  const { t }     = useTranslation();
   const name      = item.name || "Unnamed";
   const price     = item.priceETH ?? item.price ?? null;
   // Public-folder paths (start with "/") are served directly; backend paths go through getImageUrl
@@ -98,7 +100,7 @@ function LineCard({ item }) {
             style={{ background: "rgba(0,0,0,0.25)" }}>
             <span className="text-white/60 text-[9px] font-bold uppercase tracking-widest select-none"
               style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9)", whiteSpace: "nowrap" }}>
-              Dummy Content
+              {t("marketplace.general.dummyContent", "Dummy Content")}
             </span>
           </div>
         )}
@@ -131,7 +133,11 @@ function LineCard({ item }) {
             textAlign: "center",
             textTransform: "uppercase",
           }}>
-            {isDummy ? "Preview" : price != null ? "Buy Now" : "View Details"}
+            {isDummy
+              ? t("marketplace.general.preview", "Preview")
+              : price != null
+                ? t("marketplace.general.buyNow", "Buy Now")
+                : t("marketplace.general.viewDetails", "View Details")}
           </div>
           {price != null && !isDummy && (
             <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 8.5 }}>
@@ -151,19 +157,24 @@ function LineCard({ item }) {
   );
 }
 
-// ── Sort options ──────────────────────────────────────────────────────────────
-const SORT_OPTIONS = [
-  { value: "",           label: "Default"        },
-  { value: "price_asc",  label: "Price: Low → High" },
-  { value: "price_desc", label: "Price: High → Low" },
-  { value: "name_asc",   label: "Name: A → Z"    },
-  { value: "name_desc",  label: "Name: Z → A"    },
-];
+// ── Sort options built inside component to pick up t() ───────────────────────
+function useSortOptions() {
+  const { t } = useTranslation();
+  return [
+    { value: "",           label: t("marketplace.general.sort.default",   "Default") },
+    { value: "price_asc",  label: t("marketplace.general.sort.priceAsc",  "Price: Low → High") },
+    { value: "price_desc", label: t("marketplace.general.sort.priceDesc", "Price: High → Low") },
+    { value: "name_asc",   label: t("marketplace.general.sort.nameAsc",   "Name: A → Z") },
+    { value: "name_desc",  label: t("marketplace.general.sort.nameDesc",  "Name: Z → A") },
+  ];
+}
 
 // ── Label/control panel — always on LEFT ──────────────────────────────────────
 function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMinPrice, maxPrice, setMaxPrice, search, setSearch }) {
   const [showFilter, setShowFilter] = useState(false);
   const panelRef = useRef(null);
+  const { t } = useTranslation();
+  const sortOptions = useSortOptions();
 
   useEffect(() => {
     const handler = (e) => {
@@ -208,7 +219,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="Search..."
+          placeholder={t("marketplace.general.search", "Search...")}
           style={{
             background: "none", border: "none", outline: "none",
             color: "#fff", fontSize: 10, width: "100%",
@@ -236,7 +247,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
           }}
         >
           <SlidersHorizontal style={{ width: 10, height: 10 }} />
-          FILTER
+          {t("marketplace.general.filter", "Filter")}
           {hasActive && (
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
           )}
@@ -247,7 +258,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
           className="text-[9px] sm:text-[10px] font-semibold text-white/70 hover:text-white border border-white/15 hover:border-white/35 transition-all whitespace-nowrap"
           style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 5, background: "rgba(0,42,168,0.3)" }}
         >
-          Show All
+          {t("marketplace.general.showAll", "Show All")}
         </Link>
       </div>
 
@@ -268,7 +279,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
           {/* Header */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontSize: 10, fontWeight: 700, color: "#fff", letterSpacing: "0.1em" }}>
-              FILTER &amp; SORT
+              {t("marketplace.general.filterSort", "Filter & Sort")}
             </span>
             <button onClick={() => setShowFilter(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.5)", cursor: "pointer", padding: "2px" }}>
               <X style={{ width: 16, height: 16 }} />
@@ -277,9 +288,9 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
 
           {/* Sort */}
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>SORT BY</label>
+            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>{t("marketplace.general.sortBy", "Sort By")}</label>
             <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              {SORT_OPTIONS.map(opt => (
+              {sortOptions.map(opt => (
                 <button
                   key={opt.value}
                   onClick={() => { setSortBy(opt.value); setShowFilter(false); }}
@@ -301,13 +312,13 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
 
           {/* Price range */}
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>PRICE RANGE (USDC)</label>
+            <label style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", fontWeight: 600 }}>{t("marketplace.general.priceRange", "Price Range (USDC)")}</label>
             <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <input
                 type="number"
                 value={minPrice}
                 onChange={e => setMinPrice(e.target.value)}
-                placeholder="Min"
+                placeholder={t("marketplace.general.min", "Min")}
                 min={0}
                 style={{
                   width: "100%", padding: "4px 6px", borderRadius: 4,
@@ -320,7 +331,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
                 type="number"
                 value={maxPrice}
                 onChange={e => setMaxPrice(e.target.value)}
-                placeholder="Max"
+                placeholder={t("marketplace.general.max", "Max")}
                 min={0}
                 style={{
                   width: "100%", padding: "4px 6px", borderRadius: 4,
@@ -339,7 +350,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
                   transition: "all 0.15s", width: "100%",
                 }}
               >
-                APPLY
+                {t("marketplace.general.apply", "Apply")}
               </button>
             )}
           </div>
@@ -355,7 +366,7 @@ function LabelPanel({ category, label, icon, sortBy, setSortBy, minPrice, setMin
                 transition: "all 0.15s",
               }}
             >
-              CLEAR ALL FILTERS
+              {t("marketplace.general.clearAll", "Clear All Filters")}
             </button>
           )}
         </div>
@@ -423,7 +434,7 @@ export default function LineLayout({ category, label, icon, items, direction = "
 
         {processed.length === 0 ? (
           <div className="flex items-center justify-center h-full min-h-[160px] text-white/25 text-xs">
-            No results found
+            {t("marketplace.general.noResults", "No results found")}
           </div>
         ) : showStatic ? (
           /* Static layout when filtering — no duplication, no animation */

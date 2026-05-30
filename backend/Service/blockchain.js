@@ -24,12 +24,12 @@ function loadABI(filename) {
 
   for (const abiPath of possiblePaths) {
     if (fs.existsSync(abiPath)) {
-      console.log(`✅ ${filename} loaded from: ${abiPath}`);
+      console.log(`${filename} loaded from: ${abiPath}`);
       return JSON.parse(fs.readFileSync(abiPath, "utf-8"));
     }
   }
 
-  throw new Error(`❌ ABI file not found: ${filename}`);
+  throw new Error(` ABI file not found: ${filename}`);
 }
 
 const MyNFTAbi = loadABI("MyNFT.json");
@@ -62,7 +62,7 @@ function getBlockchain(chainId) {
   const config = NETWORKS[id];
 
   if (!config) {
-    throw new Error(`❌ Network configuration not found for Chain ID: ${id}`);
+    throw new Error(` Network configuration not found for Chain ID: ${id}`);
   }
 
   if (instances[id]) {
@@ -72,7 +72,7 @@ function getBlockchain(chainId) {
   console.log(`🔌 Initializing connection for ${config.name} (${id})...`);
 
   if (!config.rpc || !config.privateKey) {
-     throw new Error(`❌ Missing RPC or Private Key for ${config.name}`);
+    throw new Error(` Missing RPC or Private Key for ${config.name}`);
   }
 
   const provider = new ethers.JsonRpcProvider(config.rpc);
@@ -89,7 +89,7 @@ function getBlockchain(chainId) {
     chainId: id
   };
 
-  console.log(`✅ Initialized ${config.name}`);
+  console.log(`Initialized ${config.name}`);
   return instances[id];
 }
 

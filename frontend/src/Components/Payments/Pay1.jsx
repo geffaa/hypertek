@@ -2,18 +2,27 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FiArrowLeft, FiChevronDown, FiClock, FiCheck } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { getImageUrl, BACKEND_BASE_URL } from "../../Config";
 
-const EXPIRY_OPTIONS = ["6 Hours", "12 Hours", "1 Day", "3 Days", "7 Days", "1 Month"];
-
 function Pay1({ item }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
 
+  const EXPIRY_OPTIONS = [
+    t("makeOffer.expiry.6h",    "6 Hours"),
+    t("makeOffer.expiry.12h",   "12 Hours"),
+    t("makeOffer.expiry.1d",    "1 Day"),
+    t("makeOffer.expiry.3d",    "3 Days"),
+    t("makeOffer.expiry.7d",    "7 Days"),
+    t("makeOffer.expiry.1mo",   "1 Month"),
+  ];
+
   const [price, setPrice]       = useState("");
-  const [selected, setSelected] = useState("6 Hours");
+  const [selected, setSelected] = useState(EXPIRY_OPTIONS[0]);
   const [open, setOpen]         = useState(false);
   const [loading, setLoading]   = useState(false);
   const [success, setSuccess]   = useState(false);
@@ -30,7 +39,6 @@ function Pay1({ item }) {
 
   const parsedPrice = price ? parseFloat(price) : 0;
   const totalPay = parsedPrice > 0 ? parsedPrice : null;
-  // Display with enough precision: small amounts like 0.0006 need more than 2 decimals
   const displayPay = totalPay
     ? (totalPay >= 0.01 ? totalPay.toFixed(2) : totalPay.toFixed(6).replace(/\.?0+$/, ""))
     : null;
@@ -39,11 +47,10 @@ function Pay1({ item }) {
     if (!totalPay) return;
 
     if (!user) {
-      toast.error("Please log in to make an offer");
+      toast.error(t("makeOffer.error.loginRequired", "Please log in to make an offer"));
       return;
     }
 
-    // Resolve user fields — user object shape: { id, FullName, Email, Role, WalletAddress }
     const resolvedUserName  = user.FullName || user.UserName || user.username || user.name || user.Email || "Anonymous";
     const resolvedUserEmail = user.Email || user.email || `user-${user.id}@hyperteks.app`;
     const resolvedPrice     = parseFloat(item?.priceETH) > 0 ? parseFloat(item.priceETH) : 0.01;
@@ -74,7 +81,7 @@ function Pay1({ item }) {
       );
       setSuccess(true);
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to submit offer. Please try again.");
+      toast.error(err.response?.data?.message || t("makeOffer.error.submitFailed", "Failed to submit offer. Please try again."));
     } finally {
       setLoading(false);
     }
@@ -89,7 +96,7 @@ function Pay1({ item }) {
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-8 text-sm"
       >
-        <FiArrowLeft size={16} /> Back
+        <FiArrowLeft size={16} /> {t("makeOffer.back", "Back")}
       </button>
 
       {/* Item preview */}
@@ -106,19 +113,23 @@ function Pay1({ item }) {
             <p className="text-white font-semibold truncate">{item.name || "NFT Item"}</p>
             <p className="text-white/40 text-sm truncate">{item.description || ""}</p>
             {item.priceETH && (
-              <p className="text-white/30 text-xs mt-0.5">Floor: {item.priceETH} USDC</p>
+              <p className="text-white/30 text-xs mt-0.5">
+                {t("makeOffer.floor", "Floor")}: {item.priceETH} USDC
+              </p>
             )}
           </div>
         </div>
       )}
 
-      <h1 className="text-xl font-bold text-white mb-6">Make an Offer</h1>
+      <h1 className="text-xl font-bold text-white mb-6">{t("makeOffer.title", "Make an Offer")}</h1>
 
       <div className="flex flex-col gap-5">
 
         {/* Price input */}
         <div>
-          <label className="text-white/60 text-sm font-medium block mb-2">Your Offer (USDC)</label>
+          <label className="text-white/60 text-sm font-medium block mb-2">
+            {t("makeOffer.yourOffer", "Your Offer (USDC)")}
+          </label>
           <div className="flex h-12 rounded-xl overflow-hidden"
             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <input
@@ -140,7 +151,8 @@ function Pay1({ item }) {
         {/* Expiry */}
         <div>
           <label className="text-white/60 text-sm font-medium block mb-2">
-            <FiClock className="inline mr-1.5" size={12} />Offer Expires In
+            <FiClock className="inline mr-1.5" size={12} />
+            {t("makeOffer.expiresIn", "Offer Expires In")}
           </label>
           <div ref={dropdownRef} className="relative">
             <button
@@ -178,7 +190,7 @@ function Pay1({ item }) {
 
         {/* Summary */}
         <div className="flex items-center justify-between py-3 border-t border-white/5">
-          <span className="text-white/50 text-sm">You Pay</span>
+          <span className="text-white/50 text-sm">{t("makeOffer.youPay", "You Pay")}</span>
           <span className="text-white font-semibold">
             {displayPay ? `${displayPay} USDC` : "— USDC"}
           </span>
@@ -196,11 +208,11 @@ function Pay1({ item }) {
             border: "1px solid rgba(0,80,255,0.3)",
           }}
         >
-          {loading ? "Submitting..." : "Submit Offer"}
+          {loading ? t("makeOffer.submitting", "Submitting...") : t("makeOffer.submit", "Submit Offer")}
         </button>
 
         <p className="text-white/25 text-xs text-center leading-relaxed">
-          By submitting this offer, you agree to Hyper Tek's Terms of Service.
+          {t("makeOffer.terms", "By submitting this offer, you agree to Hyper Tek's Terms of Service.")}
         </p>
       </div>
 
@@ -221,12 +233,18 @@ function Pay1({ item }) {
             </div>
 
             <div>
-              <h2 className="text-white text-lg font-bold mb-1">Offer Submitted!</h2>
+              <h2 className="text-white text-lg font-bold mb-1">
+                {t("makeOffer.success.title", "Offer Submitted!")}
+              </h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                Your offer of <span className="text-white font-semibold">{displayPay} USDC</span> for{" "}
-                <span className="text-white font-semibold">{item?.name}</span> has been sent to the owner.
+                {t("makeOffer.success.desc", "Your offer of {{price}} USDC for {{name}} has been sent to the owner.", {
+                  price: displayPay,
+                  name: item?.name,
+                })}
               </p>
-              <p className="text-white/30 text-xs mt-2">Expires in {selected}</p>
+              <p className="text-white/30 text-xs mt-2">
+                {t("makeOffer.success.expires", "Expires in {{duration}}", { duration: selected })}
+              </p>
             </div>
 
             <div className="flex flex-col gap-2 w-full">
@@ -235,13 +253,13 @@ function Pay1({ item }) {
                 className="w-full h-10 rounded-xl text-white font-semibold text-sm transition-all"
                 style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
               >
-                Back to NFT
+                {t("makeOffer.success.backToNft", "Back to NFT")}
               </button>
               <button
                 onClick={() => navigate("/market-place")}
                 className="w-full h-10 rounded-xl text-white/50 hover:text-white text-sm transition-colors"
               >
-                Go to Marketplace
+                {t("makeOffer.success.goToMarketplace", "Go to Marketplace")}
               </button>
             </div>
           </div>

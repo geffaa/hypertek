@@ -1,6 +1,7 @@
 import MarketListing from "../Models/MarketListingModel.js";
 import HireRent from "../Models/HireRentModel.js";
 import NFTSystem from "../Models/NFTSystem.js";
+import { createNotification } from "../services/notificationService.js";
 
 // Sync priceETH + listed flag on the NFTSystem subCollection
 async function syncSubCollectionPrice(nftSystemId, subCollectionId, priceETH, listed) {
@@ -225,6 +226,19 @@ export const submitOffer = async (req, res) => {
     listing.status = "pending";
 
     await listing.save();
+
+    // Notify the listing owner
+    if (listing.userId) {
+      const offerer = req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
+      createNotification(
+        listing.userId,
+        "offer",
+        "New Offer Received",
+        `${offerer} made an offer of ${amount} ${currency || "USDC"} on "${listing.itemName || "your listing"}"`,
+        { link: "/dashboard", meta: { listingId: listing._id, amount } }
+      );
+    }
+
     return res.json({ success: true, listing });
   } catch (err) {
     console.error("submitOffer:", err);
@@ -253,6 +267,19 @@ export const submitBid = async (req, res) => {
     listing.currentBid = amount;
 
     await listing.save();
+
+    // Notify the listing owner about the new bid
+    if (listing.userId) {
+      const bidder = req.user.FullName || req.user.Email?.split("@")[0] || "Someone";
+      createNotification(
+        listing.userId,
+        "bid",
+        "New Bid on Your Auction",
+        `${bidder} placed a bid of ${amount} USDC on "${listing.itemName || "your auction"}"`,
+        { link: "/dashboard", meta: { listingId: listing._id, amount } }
+      );
+    }
+
     return res.json({ success: true, listing });
   } catch (err) {
     console.error("submitBid:", err);

@@ -1,20 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ChevronDown, LayoutList } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
 
-// Column definitions — order matches the visual table left→right
-// Labels shown in the sub-header row beneath the brackets
-const ACTIVITY_COLS = [
-  { key: "selling_general",  label: "Selling",   group: "marketplace" },
-  { key: "buying_general",   label: "Buying",    group: "marketplace" },
-  { key: "selling_auction",  label: "Selling",   group: "auction"     },
-  { key: "buying_auction",   label: "Buying",    group: "auction"     },
-  { key: "trading",          label: "Trading",   group: "trade"       },
-  { key: "on_hire",          label: "On Hire",   group: "on_hire"     },
-  { key: "hiring",           label: "Hiring",    group: "hiring"      },
+const ACTIVITY_KEYS = [
+  { key: "selling_general",  labelKey: "profile.listings.colSelling",  group: "marketplace" },
+  { key: "buying_general",   labelKey: "profile.listings.colBuying",   group: "marketplace" },
+  { key: "selling_auction",  labelKey: "profile.listings.colSelling",  group: "auction"     },
+  { key: "buying_auction",   labelKey: "profile.listings.colBuying",   group: "auction"     },
+  { key: "trading",          labelKey: "profile.listings.colTrading",  group: "trade"       },
+  { key: "on_hire",          labelKey: "profile.listings.colOnHire",   group: "on_hire"     },
+  { key: "hiring",           labelKey: "profile.listings.colHiring",   group: "hiring"      },
 ];
 
-// Color per group used in sub-header + cell text
 const GROUP_COLOR = {
   marketplace: "rgba(255,255,255,0.75)",
   auction:     "rgba(251,191,36,0.8)",
@@ -23,7 +21,6 @@ const GROUP_COLOR = {
   hiring:      "rgba(168,85,247,0.8)",
 };
 
-// Grid column widths — item col + 7 data cols
 const GRID_COLS = "1.5fr 1.1fr 1.1fr 1.1fr 1.1fr 0.9fr 0.9fr 0.9fr";
 const MIN_WIDTH  = "860px";
 
@@ -31,7 +28,6 @@ const capWords = (str) =>
   str ? str.replace(/\b\w/g, (c) => c.toUpperCase()) : "";
 
 
-// ── Per-cell value renderer ───────────────────────────────────────────────────
 function PriceCell({ listing }) {
   if (!listing) return <span className="text-white/15 text-[11px]">—</span>;
 
@@ -101,18 +97,13 @@ function PriceCell({ listing }) {
   return <span className="text-white/20 text-[10px]">—</span>;
 }
 
-// ── Group bracket header — only MARKETPLACE and AUCTION get brackets (2-col spans)
-// Standalone columns (Trading, On Hire, Hiring) skip this row — their label is in the sub-header
-function GroupHeaderRow() {
+function GroupHeaderRow({ t }) {
   return (
     <div
       className="grid w-full px-4 pt-4 pb-0 text-[9px] font-bold uppercase tracking-widest"
       style={{ gridTemplateColumns: GRID_COLS, minWidth: MIN_WIDTH }}
     >
-      {/* Item spacer */}
       <div />
-
-      {/* MARKETPLACE bracket — spans selling_general + buying_general */}
       <div
         className="text-center py-1 rounded-t"
         style={{
@@ -124,10 +115,8 @@ function GroupHeaderRow() {
           letterSpacing: "0.12em",
         }}
       >
-        MARKETPLACE
+        {t("profile.listings.groupMarketplace", "MARKETPLACE")}
       </div>
-
-      {/* AUCTION bracket — spans selling_auction + buying_auction */}
       <div
         className="text-center py-1 rounded-t"
         style={{
@@ -140,18 +129,16 @@ function GroupHeaderRow() {
           letterSpacing: "0.12em",
         }}
       >
-        AUCTION
+        {t("profile.listings.groupAuction", "AUCTION")}
       </div>
-
-      {/* Remaining 3 standalone columns — no bracket header (label is in sub-header row) */}
       <div /><div /><div />
     </div>
   );
 }
 
 
-// ── Main ──────────────────────────────────────────────────────────────────────
 export default function ProfileListingsTab({ token }) {
+  const { t } = useTranslation();
   const [grouped, setGrouped]               = useState({});
   const [loading, setLoading]               = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -235,14 +222,20 @@ export default function ProfileListingsTab({ token }) {
     (sum, cat) => sum + (grouped[cat]?.length || 0), 0
   );
 
+  // Build translated column definitions
+  const ACTIVITY_COLS = ACTIVITY_KEYS.map((c) => ({
+    ...c,
+    label: t(c.labelKey, c.labelKey.split(".").pop()),
+  }));
+
   return (
     <div className="py-4">
       {/* ── Header + Category Dropdown ── */}
       {token && <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <LayoutList className="w-4 h-4 text-white/50" />
-          <h3 className="text-white font-semibold text-base">My Listings</h3>
-          <span className="text-white/30 text-xs">{totalItems} items</span>
+          <h3 className="text-white font-semibold text-base">{t("profile.listings.title", "My Listings")}</h3>
+          <span className="text-white/30 text-xs">{totalItems} {t("profile.listings.items", "items")}</span>
         </div>
 
         <div className="relative" ref={dropdownRef}>
@@ -255,7 +248,7 @@ export default function ProfileListingsTab({ token }) {
               color: "rgba(255,255,255,0.7)",
             }}
           >
-            {selectedCategory === "all" ? "All Categories" : capWords(selectedCategory)}
+            {selectedCategory === "all" ? t("profile.listings.allCategories", "All Categories") : capWords(selectedCategory)}
             <ChevronDown
               className="w-3.5 h-3.5 text-white/40 transition-transform"
               style={{ transform: dropdownOpen ? "rotate(180deg)" : "none" }}
@@ -275,7 +268,7 @@ export default function ProfileListingsTab({ token }) {
                 className="w-full text-left px-4 py-2 text-xs transition-colors hover:bg-white/5"
                 style={{ color: selectedCategory === "all" ? "#fff" : "rgba(255,255,255,0.5)" }}
               >
-                All Categories
+                {t("profile.listings.allCategories", "All Categories")}
               </button>
               {allCategories.map((cat) => (
                 <button
@@ -286,7 +279,7 @@ export default function ProfileListingsTab({ token }) {
                 >
                   <span>{capWords(cat)}</span>
                   {(grouped[cat]?.length || 0) === 0 && (
-                    <span className="text-[10px] text-white/20 italic">empty</span>
+                    <span className="text-[10px] text-white/20 italic">{t("profile.listings.empty", "empty")}</span>
                   )}
                 </button>
               ))}
@@ -300,7 +293,7 @@ export default function ProfileListingsTab({ token }) {
 
         {/* Sticky header — group bracket + column sub-headers */}
         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(0,20,80,0.95)", backdropFilter: "blur(8px)" }}>
-          <GroupHeaderRow />
+          <GroupHeaderRow t={t} />
           <div
             className="grid px-4 py-4 text-[10px] font-semibold uppercase tracking-widest"
             style={{
@@ -309,7 +302,7 @@ export default function ProfileListingsTab({ token }) {
               borderTop: "1px solid rgba(255,255,255,0.07)",
             }}
           >
-            <span className="text-white/50">Item</span>
+            <span className="text-white/50">{t("profile.activities.colItem","Item")}</span>
             {ACTIVITY_COLS.map((col, i) => {
               const prevGroup = i > 0 ? ACTIVITY_COLS[i - 1].group : null;
               const isGroupStart = prevGroup !== col.group;
@@ -333,8 +326,8 @@ export default function ProfileListingsTab({ token }) {
         {!token ? (
           <div className="flex flex-col items-center justify-center" style={{ minHeight: 440 }}>
             <LayoutList className="w-8 h-8 text-white/15 mb-3" />
-            <p className="text-white/30 text-sm font-medium">Login required</p>
-            <p className="text-white/15 text-xs mt-1">Please log in to view your listings</p>
+            <p className="text-white/30 text-sm font-medium">{t("profile.listings.loginRequired", "Login required")}</p>
+            <p className="text-white/15 text-xs mt-1">{t("profile.listings.loginRequiredHint", "Please log in to view your listings")}</p>
           </div>
         ) : loading ? (
           <div className="overflow-x-auto">
@@ -348,8 +341,8 @@ export default function ProfileListingsTab({ token }) {
         ) : totalItems === 0 ? (
           <div className="flex flex-col items-center justify-center" style={{ minHeight: 440 }}>
             <LayoutList className="w-8 h-8 text-white/15 mb-3" />
-            <p className="text-white/30 text-sm font-medium">No listings yet</p>
-            <p className="text-white/15 text-xs mt-1">Items you list on the marketplace will appear here</p>
+            <p className="text-white/30 text-sm font-medium">{t("profile.listings.noListings", "No listings yet")}</p>
+            <p className="text-white/15 text-xs mt-1">{t("profile.listings.noListingsHint", "Items you list on the marketplace will appear here")}</p>
           </div>
         ) : (
           <div className="overflow-x-auto" style={{ minHeight: 440 }}>
@@ -374,7 +367,7 @@ export default function ProfileListingsTab({ token }) {
                   {itemNames.length === 0 && (
                     <div className="px-4 py-3 text-white/20 text-xs italic"
                       style={{ minWidth: MIN_WIDTH, borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-                      No listings
+                      {t("profile.listings.noListingsInCat", "No listings")}
                     </div>
                   )}
                   {itemNames.map((itemName, i) => {

@@ -108,7 +108,7 @@ function UserListings() {
 
       console.log("📋 Listed Sub-Collections Response:", res.data);
 
-      // ✅ Use the properly formatted data from backend
+      // Use the properly formatted data from backend
       const listedNFTs = res.data.listedSubCollections.map((sub) => ({
         _id: sub.subId,
         tokenId: sub.tokenId,
@@ -122,7 +122,7 @@ function UserListings() {
         priceUSD: sub.priceUSD,
         tokenURI: sub.tokenURI,
         createdAt: sub.createdAt,
-        parentId: sub.parentInfo.parentId, // ✅ CRITICAL
+        parentId: sub.parentInfo.parentId, // CRITICAL
         collection: {
           name: sub.parentInfo.parentName,
           image: sub.parentInfo.parentImage,
@@ -133,7 +133,7 @@ function UserListings() {
 
       setListings(listedNFTs);
     } catch (err) {
-      console.error("❌ Fetch listings error:", err);
+      console.error(" Fetch listings error:", err);
       toast.error("Failed to load listings");
     } finally {
       setLoading(false);
@@ -203,9 +203,9 @@ function UserListings() {
 
           await publicClient.waitForTransactionReceipt({ hash: txHash });
 
-          console.log("✅ Blockchain cancel confirmed");
+          console.log("Blockchain cancel confirmed");
 
-          // ✅ Update backend with CORRECT parentId
+          // Update backend with CORRECT parentId
           const cancelResponse = await axios.post(
             `${BACKEND_BASE_URL}/api/v1/nft/sub-collection/listing/cancel`,
             {
@@ -217,16 +217,16 @@ function UserListings() {
             },
           );
 
-          console.log("✅ Backend response:", cancelResponse.data);
+          console.log("Backend response:", cancelResponse.data);
           successCount++;
         } catch (err) {
-          console.error(`❌ Failed to cancel token ${listing.tokenId}:`, err);
+          console.error(` Failed to cancel token ${listing.tokenId}:`, err);
           failCount++;
         }
       }
 
       if (successCount > 0) {
-        toast.success(`✅ Cancelled ${successCount} listing(s)!`, {
+        toast.success(`Cancelled ${successCount} listing(s)!`, {
           id: toastId,
           duration: 5000,
         });
@@ -234,7 +234,7 @@ function UserListings() {
 
       if (failCount > 0) {
         setTimeout(() => {
-          toast.error(`❌ Failed: ${failCount}`, { duration: 5000 });
+          toast.error(` Failed: ${failCount}`, { duration: 5000 });
         }, successCount > 0 ? 1000 : 0);
       }
 

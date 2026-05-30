@@ -29,6 +29,7 @@ import { openTransakOnRamp } from "../../utils/transakUtils";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
 import { Wallet, Copy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
 
 // ── Stripe NFT Payment Modal ─────────────────────────────────────────────────
@@ -39,6 +40,7 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,21 +71,21 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
       <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-md w-full shadow-2xl">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-bold text-white">💳 Pay with Card</h3>
+          <h3 className="text-lg font-bold text-white">💳 {t("buyNfa.stripe.title", "Pay with Card")}</h3>
           <button onClick={onClose} className="text-white/50 hover:text-white text-xl">×</button>
         </div>
-        <p className="text-sm text-white/50 mb-4">Amount: <span className="text-white font-semibold">${amount} USD</span></p>
+        <p className="text-sm text-white/50 mb-4">{t("buyNfa.stripe.amount", "Amount:")} <span className="text-white font-semibold">${amount} USD</span></p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <PaymentElement />
           {error && <p className="text-red-400 text-xs">{error}</p>}
           <div className="flex gap-3 mt-2">
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm transition-colors">
-              Cancel
+              {t("buyNfa.stripe.cancel", "Cancel")}
             </button>
             <button type="submit" disabled={!stripe || loading}
               className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#0038d4] disabled:opacity-50 text-white font-semibold text-sm transition-colors">
-              {loading ? "Processing..." : `Pay $${amount}`}
+              {loading ? t("buyNfa.stripe.processing", "Processing...") : `${t("buyNfa.stripe.pay", "Pay")} $${amount}`}
             </button>
           </div>
         </form>
@@ -176,7 +178,7 @@ function Buy1() {
   const [showOffers, setShowOffers] = useState(false);
   const [offers, setOffers] = useState([]);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false); // post-purchase modal
-  const [transferFailed, setTransferFailed]   = useState(null);  // { paymentIntentId, error }
+  const [transferFailed, setTransferFailed] = useState(null);  // { paymentIntentId, error }
   const [listingPrice, setListingPrice] = useState(''); // Custom listing price set in confirm modal
   const [walletCopied, setWalletCopied] = useState(false);
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
@@ -184,19 +186,20 @@ function Buy1() {
   const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
 
   // ── Auction tab data ──
-  const [auctionInfo, setAuctionInfo]                   = useState(null);
-  const [auctionInfoLoading, setAuctionInfoLoading]     = useState(false);
-  const [auctionFetched, setAuctionFetched]             = useState(false);
-  const [bidAmount, setBidAmount]                       = useState("");
-  const [bidLoading, setBidLoading]                     = useState(false);
+  const [auctionInfo, setAuctionInfo] = useState(null);
+  const [auctionInfoLoading, setAuctionInfoLoading] = useState(false);
+  const [auctionFetched, setAuctionFetched] = useState(false);
+  const [bidAmount, setBidAmount] = useState("");
+  const [bidLoading, setBidLoading] = useState(false);
 
   // ── Trade tab data ──
-  const [tradeListings, setTradeListings]               = useState([]);
+  const [tradeListings, setTradeListings] = useState([]);
   const [tradeListingsLoading, setTradeListingsLoading] = useState(false);
-  const [tradeFetched, setTradeFetched]                 = useState(false);
+  const [tradeFetched, setTradeFetched] = useState(false);
 
   // Fetch Native ETH Balance for Embedded Wallet display
   const { balance: ethBalance } = useTokenBalance("0x0000000000000000000000000000000000000000");
+  const { t } = useTranslation();
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
@@ -212,13 +215,13 @@ function Buy1() {
     console.log("📦 Collection (display):", collection);
 
     if (!collection) {
-      toast.error("❌ No NFT data found");
+      toast.error(" No NFT data found");
       navigate("/buy-nfa");
       return;
     }
   }, [collection, navigate]);
 
-  // ✅ Fetch Fresh Data on Mount
+  // Fetch Fresh Data on Mount
   useEffect(() => {
     const fetchFreshData = async () => {
       if (collection?._id) {
@@ -295,7 +298,7 @@ function Buy1() {
 
       const wallet = activeAddress ? activeAddress.toLowerCase() : null;
       if (wallet) {
-        console.log("✅ Connected wallet:", wallet);
+        console.log("Connected wallet:", wallet);
       }
       console.log("📋 Collection owner from DB:", collection.owner);
 
@@ -345,7 +348,7 @@ function Buy1() {
           setIsOwner(ownerMatch);
           console.log("🔍 Is owner (blockchain check):", ownerMatch);
         } catch (err) {
-          console.error("❌ Error checking on-chain owner:", err);
+          console.error(" Error checking on-chain owner:", err);
 
           // If read fails (e.g. wrong chain), trust DB
           if (collection.owner) {
@@ -373,7 +376,7 @@ function Buy1() {
         await checkListingStatus();
       }
     } catch (err) {
-      console.error("❌ Error checking wallet:", err);
+      console.error(" Error checking wallet:", err);
     }
   };
 
@@ -402,7 +405,7 @@ function Buy1() {
       console.log("📊 Listing status:", listing[2] ? "Active" : "Inactive");
       collection.listed = listing[2];
     } catch (err) {
-      console.error("❌ Error checking listing:", err);
+      console.error(" Error checking listing:", err);
     }
   };
 
@@ -475,15 +478,15 @@ function Buy1() {
     try {
       if (switchChain) {
         await switchChain({ chainId: targetChainId });
-        toast.success(`✅ Switched to ${targetChainName}`, { id: toastId });
+        toast.success(`Switched to ${targetChainName}`, { id: toastId });
         return true;
       } else {
-        toast.error("❌ Network switch not supported by wallet", { id: toastId });
+        toast.error(" Network switch not supported by wallet", { id: toastId });
         return false;
       }
     } catch (error) {
-      console.error("❌ Failed to switch network:", error);
-      toast.error(`❌ Please switch to ${targetChainName} manually`, { id: toastId });
+      console.error(" Failed to switch network:", error);
+      toast.error(` Please switch to ${targetChainName} manually`, { id: toastId });
       return false;
     }
   };
@@ -521,14 +524,14 @@ function Buy1() {
       );
 
       if (res.data?.success && res.data?.tokenId) {
-        console.log("✅ Mint successful, Token ID:", res.data.tokenId);
+        console.log("Mint successful, Token ID:", res.data.tokenId);
         return res.data.tokenId;
       } else {
-        console.error("❌ Mint response invalid:", res.data);
+        console.error(" Mint response invalid:", res.data);
         throw new Error(res.data?.error || res.data?.message || "Mint response invalid");
       }
     } catch (err) {
-      console.error("❌ Mint error:", err.response?.data || err);
+      console.error(" Mint error:", err.response?.data || err);
       if (err.response?.data?.error) {
         throw new Error(err.response.data.error);
       }
@@ -557,7 +560,7 @@ function Buy1() {
         return;
       }
       if (!publicClient) {
-        toast.error("❌ Network client not ready", { id: toastId });
+        toast.error(" Network client not ready", { id: toastId });
         setLoading(false);
         return;
       }
@@ -580,12 +583,12 @@ function Buy1() {
         try {
           tokenId = await mintNFTToWallet(walletAddress);
         } catch (mintErr) {
-          console.error("❌ Minting error:", mintErr);
+          console.error(" Minting error:", mintErr);
           const errMsg = mintErr.message || "";
           if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
-            toast.error("❌ Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
+            toast.error(" Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
           } else {
-            toast.error(`❌ Minting Failed: ${errMsg}`, { id: toastId, duration: 8000 });
+            toast.error(` Minting Failed: ${errMsg}`, { id: toastId, duration: 8000 });
           }
           setLoading(false);
           return;
@@ -596,7 +599,7 @@ function Buy1() {
         setIsOwner(true);
         setOnChainOwner(walletAddress.toLowerCase());
 
-        toast.success("✅ NFT Minted! Indexing...", { id: toastId });
+        toast.success("NFT Minted! Indexing...", { id: toastId });
 
         // Short wait to allow indexing
         await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -631,7 +634,7 @@ function Buy1() {
             collection.owner = owner.toLowerCase();
             setOnChainOwner(owner.toLowerCase());
             setIsOwner(true);
-            console.log("✅ Ownership verified");
+            console.log("Ownership verified");
             break;
           } else if (retries > 1) {
             console.log(`⏳ Owner mismatch/pending (${retries - 1} retries left)...`);
@@ -640,12 +643,12 @@ function Buy1() {
             continue;
           } else {
             // ... existing failure logic
-            toast.error("❌ Ownership mismatch after retries", { id: toastId });
+            toast.error(" Ownership mismatch after retries", { id: toastId });
             setLoading(false);
             return;
           }
         } catch (err) {
-          console.error("❌ Error getting owner:", err);
+          console.error(" Error getting owner:", err);
           if (retries > 1) {
             console.log(
               `⏳ Retrying blockchain check... (${retries - 1} left)`,
@@ -653,7 +656,7 @@ function Buy1() {
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
-            toast.error("❌ NFT not found on blockchain. Please try again.", {
+            toast.error(" NFT not found on blockchain. Please try again.", {
               id: toastId,
             });
             setLoading(false);
@@ -693,14 +696,14 @@ function Buy1() {
           });
           toast.loading("⏳ Waiting for approval confirmation...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTx });
-          console.log("✅ Marketplace approved for all");
+          console.log("Marketplace approved for all");
         } catch (approveError) {
-          console.error("❌ Approval failed:", approveError);
+          console.error(" Approval failed:", approveError);
           // Special handling for user rejection
           if (approveError.message.includes("User rejected")) {
-            toast.error("❌ Approval rejected by user", { id: toastId });
+            toast.error(" Approval rejected by user", { id: toastId });
           } else {
-            toast.error("❌ Approval transaction failed", { id: toastId });
+            toast.error(" Approval transaction failed", { id: toastId });
           }
           setLoading(false);
           return;
@@ -720,7 +723,7 @@ function Buy1() {
       });
 
       if (listing[2]) {
-        toast.success("✅ Already listed!", { id: toastId });
+        toast.success("Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
         setLoading(false);
         return;
@@ -739,7 +742,7 @@ function Buy1() {
         account: activeWalletClient.account || walletAddress,
       });
       await publicClient.waitForTransactionReceipt({ hash: listTx });
-      console.log("✅ Listing created on blockchain");
+      console.log("Listing created on blockchain");
 
       // Record in backend
       toast.loading("💾 Saving listing data...", { id: toastId });
@@ -762,7 +765,7 @@ function Buy1() {
         },
       );
 
-      console.log("✅ Backend response:", response.data);
+      console.log("Backend response:", response.data);
 
       toast.success(
         `🎉 NFA listed for sale @ ${finalPrice} USDC!`,
@@ -783,16 +786,16 @@ function Buy1() {
 
       navigate("/List");
     } catch (err) {
-      console.error("❌ Listing error:", err);
-      console.error("❌ Error details:", err);
+      console.error(" Listing error:", err);
+      console.error(" Error details:", err);
 
-      let msg = "❌ Listing failed";
+      let msg = " Listing failed";
       if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient ETH for gas. Add ETH to your wallet on Base.";
       } else if (err.message?.includes("user rejected") || err.code === 4001) {
-        msg = "❌ Transaction rejected by user";
+        msg = " Transaction rejected by user";
       } else {
-        msg = `❌ Error: ${err.shortMessage || err.message?.substring(0, 50) || "Unknown"}`;
+        msg = ` Error: ${err.shortMessage || err.message?.substring(0, 50) || "Unknown"}`;
       }
       console.error("Listing Error:", err);
       toast.error(msg, { id: toastId, duration: 8000 });
@@ -815,13 +818,13 @@ function Buy1() {
 
     try {
       if (!activeWalletClient || !publicClient) {
-        toast.error("❌ Wallet not connected properly", { id: toastId });
+        toast.error("Wallet not connected properly", { id: toastId });
         setLoading(false);
         return;
       }
 
       if (!user?.id) {
-        toast.error("❌ Please login first", { id: toastId });
+        toast.error("Please login first", { id: toastId });
         setLoading(false);
         return;
       }
@@ -840,7 +843,7 @@ function Buy1() {
       console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error('❌ Your wallet has no ETH for gas fees.', { id: toastId, duration: 8000 });
+        toast.error(' Your wallet has no ETH for gas fees.', { id: toastId, duration: 8000 });
         setLoading(false);
         return;
       }
@@ -895,14 +898,14 @@ function Buy1() {
             });
             toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
             await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
-            console.log("✅ USDC Approved for Marketplace (First Sale)");
+            console.log("USDC Approved for Marketplace (First Sale)");
           } catch (approveErr) {
-            console.error("❌ USDC Approval failed:", approveErr);
-            let msg = "❌ USDC Approval failed";
+            console.error(" USDC Approval failed:", approveErr);
+            let msg = " USDC Approval failed";
             if (approveErr.message?.includes("user rejected") || approveErr.code === 4001) {
-              msg = "❌ Transaction rejected by user";
+              msg = " Transaction rejected by user";
             } else {
-              msg = `❌ Error: ${approveErr.shortMessage || approveErr.message?.substring(0, 50) || "Unknown"}`;
+              msg = ` Error: ${approveErr.shortMessage || approveErr.message?.substring(0, 50) || "Unknown"}`;
             }
             toast.error(msg, { id: toastId, duration: 8000 });
             setLoading(false);
@@ -934,16 +937,16 @@ function Buy1() {
 
           toast.loading("⏳ Finalizing payment...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: depositTxHash });
-          console.log("✅ First sale payment deposited to creator:", creatorWallet);
+          console.log("First sale payment deposited to creator:", creatorWallet);
         } catch (depositErr) {
-          console.error("❌ Payment failed:", depositErr);
-          let msg = "❌ Payment failed during deposit";
+          console.error(" Payment failed:", depositErr);
+          let msg = " Payment failed during deposit";
           if (depositErr.message?.includes("user rejected") || depositErr.code === 4001) {
-            msg = "❌ Transaction rejected by user";
+            msg = " Transaction rejected by user";
           } else if (depositErr.message?.includes("0xfb8f41b2") || depositErr.message?.includes("ERC20InsufficientAllowance")) {
-            msg = "❌ Allowance pending. Please wait a few seconds and try again.";
+            msg = " Allowance pending. Please wait a few seconds and try again.";
           } else {
-            msg = `❌ Error: ${depositErr.shortMessage || depositErr.message?.substring(0, 50) || "Unknown"}`;
+            msg = ` Error: ${depositErr.shortMessage || depositErr.message?.substring(0, 50) || "Unknown"}`;
           }
           toast.error(msg, { id: toastId, duration: 8000 });
           setLoading(false);
@@ -955,12 +958,12 @@ function Buy1() {
         try {
           mintedTokenId = await mintNFTToWallet(buyer);
         } catch (mintErr) {
-          console.error("❌ Minting error:", mintErr);
+          console.error(" Minting error:", mintErr);
           const errMsg = mintErr.message || "";
           if (errMsg.toLowerCase().includes("insufficient eth") || errMsg.toLowerCase().includes("fund")) {
-            toast.error("❌ Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
+            toast.error(" Minting Failed: Insufficient funds in backend wallet. Please contact support.", { id: toastId, duration: 8000 });
           } else {
-            toast.error(`❌ Payment succeeded but minting failed: ${errMsg}. Please contact support.`, { id: toastId, duration: 8000 });
+            toast.error(` Payment succeeded but minting failed: ${errMsg}. Please contact support.`, { id: toastId, duration: 8000 });
           }
           setLoading(false);
           return;
@@ -970,7 +973,7 @@ function Buy1() {
         collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
-        console.log("✅ NFA prepared, Token ID:", mintedTokenId);
+        console.log("NFA prepared, Token ID:", mintedTokenId);
 
         toast.success(
           `🎉 NFA Purchased Successfully!\n\n🎫 Token ID: ${mintedTokenId}\n💰 Price: ${mintPrice} USDC\n\n⛓️ Blockchain confirmation in progress...`,
@@ -1004,14 +1007,14 @@ function Buy1() {
         currentOwner = currentOwner.toLowerCase();
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
-        console.error("❌ Error checking owner:", err);
-        toast.error("❌ NFT not found on blockchain", { id: toastId });
+        console.error(" Error checking owner:", err);
+        toast.error(" NFT not found on blockchain", { id: toastId });
         setLoading(false);
         return;
       }
 
       if (buyer.toLowerCase() === currentOwner) {
-        toast.error("❌ You already own this NFA!", { id: toastId });
+        toast.error(" You already own this NFA!", { id: toastId });
         setLoading(false);
         return;
       }
@@ -1030,7 +1033,7 @@ function Buy1() {
       });
 
       if (!listing[2]) {
-        toast.error("❌ This NFA is not listed for sale", { id: toastId });
+        toast.error(" This NFA is not listed for sale", { id: toastId });
         setLoading(false);
         return;
       }
@@ -1068,10 +1071,10 @@ function Buy1() {
           });
           toast.loading("⏳ Waiting for USDC approval...", { id: toastId });
           await publicClient.waitForTransactionReceipt({ hash: approveTxHash });
-          console.log("✅ USDC Approved!");
+          console.log("USDC Approved!");
         } catch (approveErr) {
-          console.error("❌ Approval failed:", approveErr);
-          toast.error("❌ USDC Approval failed", { id: toastId });
+          console.error(" Approval failed:", approveErr);
+          toast.error(" USDC Approval failed", { id: toastId });
           setLoading(false);
           return;
         }
@@ -1092,7 +1095,7 @@ function Buy1() {
       });
 
       const receipt = await publicClient.waitForTransactionReceipt({ hash: buyTx });
-      console.log("✅ Transaction confirmed:", receipt.transactionHash);
+      console.log("Transaction confirmed:", receipt.transactionHash);
 
       toast.loading("💾 Recording purchase...", { id: toastId });
 
@@ -1122,7 +1125,7 @@ function Buy1() {
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        console.log("✅ Sale recorded in backend");
+        console.log("Sale recorded in backend");
       } catch (recordErr) {
         console.error("⚠️ Error recording sale:", recordErr);
         console.error("⚠️ Error response:", recordErr.response?.data);
@@ -1135,17 +1138,17 @@ function Buy1() {
       setListingData(null);
       setPurchaseSuccess(true);
     } catch (err) {
-      console.error("❌ Purchase error:", err);
-      let msg = "❌ Purchase failed";
+      console.error(" Purchase error:", err);
+      let msg = " Purchase failed";
 
       if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient ETH for gas fees";
       } else if (err.message?.includes("user rejected") || err.code === 4001) {
-        msg = "❌ Transaction rejected by user";
+        msg = " Transaction rejected by user";
       } else if (err.response?.data?.error) {
-        msg = `❌ ${err.response.data.error}`;
+        msg = ` ${err.response.data.error}`;
       } else {
-        msg = `❌ ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
+        msg = ` ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
       }
 
       toast.error(msg, { id: toastId });
@@ -1156,10 +1159,10 @@ function Buy1() {
 
   /* ======================== CARD PAYMENT ======================== */
   const handlePaymentCard = async () => {
-    if (!user?.id) { toast.error("❌ Please login first"); return; }
-    if (!stripePromise) { toast.error("❌ Card payments not configured"); return; }
+    if (!user?.id) { toast.error(" Please login first"); return; }
+    if (!stripePromise) { toast.error(" Card payments not configured"); return; }
     if (!isAnyConnected || !activeAddress) {
-      toast.error("❌ Connect wallet first to receive the NFT");
+      toast.error(" Connect wallet first to receive the NFT");
       return;
     }
 
@@ -1192,10 +1195,10 @@ function Buy1() {
           },
         });
       } else {
-        toast.error("❌ Could not initiate card payment");
+        toast.error(" Could not initiate card payment");
       }
     } catch (err) {
-      toast.error("❌ Card payment setup failed", { id: toastId });
+      toast.error(" Card payment setup failed", { id: toastId });
     }
   };
 
@@ -1210,37 +1213,37 @@ function Buy1() {
       PLATFORM_WALLET_ADDRESS.toLowerCase());
 
   const getButtonAction = () => {
-    if (loading) return { text: "⏳ Processing...", disabled: true };
+    if (loading) return { text: `⏳ ${t("buyNfa.marketplace.processing", "Processing...")}`, disabled: true };
 
     if (!isAnyConnected) {
       return {
-        text: "🔌 Connect Wallet",
+        text: `🔌 ${t("buyNfa.marketplace.connectWallet", "Connect Wallet")}`,
         action: () => setShowWalletModal(true),
       };
     }
 
     if (!isOwner && (listingData?.active || isPlatformOwned)) {
       return {
-        text: "🛒 Buy Now",
+        text: `🛒 ${t("buyNfa.marketplace.buyNow", "Buy Now")}`,
         action: handleBuyNFT,
       };
     }
 
     if (isOwner && !listingData?.active && !collection.listed) {
       return {
-        text: "📝 List Now",
+        text: `📝 ${t("buyNfa.marketplace.listNow", "List Now")}`,
         action: handleCreateListing,
       };
     }
 
     if (isOwner && (listingData?.active || collection.listed)) {
       return {
-        text: `✅ Your ${assetType} (Listed)`,
+        text: `${t("buyNfa.marketplace.yourListed", "Your {{type}} (Listed)", { type: assetType })}`,
         disabled: true,
       };
     }
 
-    return { text: "❌ Not Available", disabled: true };
+    return { text: ` ${t("buyNfa.marketplace.notAvailable", "Not Available")}`, disabled: true };
   };
 
   const buttonConfig = getButtonAction();
@@ -1292,13 +1295,13 @@ function Buy1() {
       {fundModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-2">Insufficient USDC</h3>
+            <h3 className="text-lg font-bold text-white mb-2">{t("buyNfa.fundModal.title", "Insufficient USDC")}</h3>
             <p className="text-sm text-white/50 mb-3">
-              You need <span className="text-white font-semibold">{fundModal.needed} USDC</span> but your wallet only has{" "}
+              {t("buyNfa.fundModal.youNeed", "You need")} <span className="text-white font-semibold">{fundModal.needed} USDC</span> {t("buyNfa.fundModal.butHave", "but your wallet only has")}{" "}
               <span className="text-white font-semibold">{fundModal.have} USDC</span>.
             </p>
             <p className="text-sm text-white/50 mb-6">
-              Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.
+              {t("buyNfa.fundModal.desc2", "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.")}
             </p>
             <div className="flex flex-col gap-3">
               <button
@@ -1308,10 +1311,10 @@ function Buy1() {
                 }}
                 className="w-full bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
               >
-                Fund Wallet with Card (Transak)
+                {t("buyNfa.fundModal.fundBtn", "Fund Wallet with Card (Transak)")}
               </button>
               <button onClick={() => setFundModal(null)} className="w-full text-white/40 hover:text-white transition text-sm py-2">
-                Cancel
+                {t("buyNfa.fundModal.cancel", "Cancel")}
               </button>
             </div>
           </div>
@@ -1322,14 +1325,14 @@ function Buy1() {
       {gasModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-2">⛽ ETH Required for Gas</h3>
+            <h3 className="text-lg font-bold text-white mb-2">⛽ {t("buyNfa.gasModal.title", "ETH Required for Gas")}</h3>
             <p className="text-sm text-white/50 mb-3">
-              To list your NFA on-chain you need a small amount of <span className="text-white font-semibold">ETH</span> in your wallet to pay for gas fees on Base.
+              {t("buyNfa.gasModal.desc", "To list your NFA on-chain you need a small amount of")} <span className="text-white font-semibold">ETH</span> {t("buyNfa.gasModal.descSuffix", "in your wallet to pay for gas fees on Base.")}
             </p>
             <p className="text-sm text-white/40 mb-1 leading-relaxed">
               {TARGET_CHAIN_ID === 8453
-                ? "You're on Base Mainnet. Buy a small amount of ETH (≈ $1–2) on Coinbase or bridge from Ethereum via bridge.base.org."
-                : "You're on Base Sepolia Testnet. Get free test ETH from a faucet."}
+                ? t("buyNfa.gasModal.mainnetNote", "You're on Base Mainnet. Buy a small amount of ETH (≈ $1–2) on Coinbase or bridge from Ethereum via bridge.base.org.")
+                : t("buyNfa.gasModal.testnetNote", "You're on Base Sepolia Testnet. Get free test ETH from a faucet.")}
             </p>
             <div className="flex flex-col gap-3 mt-4">
               {TARGET_CHAIN_ID !== 8453 && (
@@ -1340,7 +1343,7 @@ function Buy1() {
                   className="w-full text-center bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
                   onClick={() => setGasModal(false)}
                 >
-                  Get Testnet ETH (Faucet)
+                  {t("buyNfa.gasModal.faucetBtn", "Get Testnet ETH (Faucet)")}
                 </a>
               )}
               {TARGET_CHAIN_ID === 8453 && (
@@ -1351,11 +1354,11 @@ function Buy1() {
                   className="w-full text-center bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
                   onClick={() => setGasModal(false)}
                 >
-                  Bridge ETH to Base
+                  {t("buyNfa.gasModal.bridgeBtn", "Bridge ETH to Base")}
                 </a>
               )}
               <button onClick={() => setGasModal(false)} className="w-full text-white/40 hover:text-white transition text-sm py-2">
-                Close
+                {t("buyNfa.gasModal.close", "Close")}
               </button>
             </div>
           </div>
@@ -1401,16 +1404,16 @@ function Buy1() {
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:-translate-x-0.5">
-            <path d="M19 12H5M12 5l-7 7 7 7"/>
+            <path d="M19 12H5M12 5l-7 7 7 7" />
           </svg>
-          Back to Marketplace
+          {t("buyNfa.nav.backToMarketplace", "Back to Marketplace")}
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
         <button
           onClick={() => navigate("/Profile?tab=collectibles", { state: { scrollToGrid: true } })}
           className="pb-3 flex items-center gap-1.5 text-sm text-white/40 hover:text-white transition-colors group mr-2"
         >
-          Back to Collections
+          {t("buyNfa.nav.backToCollections", "Back to Collections")}
         </button>
         <div className="pb-3 w-px h-4 bg-white/10 self-center mb-0.5" />
 
@@ -1422,7 +1425,7 @@ function Buy1() {
             ? { color: "#fff", borderBottom: "2px solid #3b82f6", marginBottom: "-1px" }
             : { color: "rgba(255,255,255,0.4)" }}
         >
-          {isOwner ? `${assetType} Detail` : `Buy ${assetType}`}
+          {isOwner ? t("buyNfa.nav.detail", "{{type}} Detail", { type: assetType }) : t("buyNfa.nav.buy", "Buy {{type}}", { type: assetType })}
         </button>
 
         {/* Offers tab */}
@@ -1430,13 +1433,12 @@ function Buy1() {
           onClick={() => setShowOffers(true)}
           className="pb-3 text-sm font-medium text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
         >
-          Offers
+          {t("buyNfa.nav.offers", "Offers")}
           {offers.length > 0 && (
-            <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold ${
-              offers.some(o => o.requestStatus === "accepted")
-                ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                : "bg-white/10 text-white/40"
-            }`}>
+            <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold ${offers.some(o => o.requestStatus === "accepted")
+              ? "bg-green-500/20 text-green-400 border border-green-500/30"
+              : "bg-white/10 text-white/40"
+              }`}>
               {offers.length}
             </span>
           )}
@@ -1451,7 +1453,7 @@ function Buy1() {
             ? { color: "#fff", borderBottom: "2px solid #3b82f6", marginBottom: "-1px" }
             : { color: "rgba(255,255,255,0.4)" }}
         >
-          Marketplace
+          {t("buyNfa.nav.marketplace", "Marketplace")}
         </button>
         <button
           onClick={() => handleTabChange("auction")}
@@ -1460,7 +1462,7 @@ function Buy1() {
             ? { color: "#fbbf24", borderBottom: "2px solid #fbbf24", marginBottom: "-1px" }
             : { color: "rgba(255,255,255,0.4)" }}
         >
-          Auction
+          {t("buyNfa.nav.auction", "Auction")}
         </button>
         <button
           onClick={() => handleTabChange("trade")}
@@ -1469,7 +1471,7 @@ function Buy1() {
             ? { color: "#60a5fa", borderBottom: "2px solid #60a5fa", marginBottom: "-1px" }
             : { color: "rgba(255,255,255,0.4)" }}
         >
-          Trade
+          {t("buyNfa.nav.trade", "Trade")}
         </button>
       </div>
 
@@ -1490,513 +1492,513 @@ function Buy1() {
         {/* Right — Tab panel */}
         <div className="flex-1 min-w-0 flex flex-col gap-4">
 
-        {/* ── Marketplace Panel ── */}
-        {activeTab === "marketplace" && <>
+          {/* ── Marketplace Panel ── */}
+          {activeTab === "marketplace" && <>
 
-          {/* Badges */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {/* Asset type badge */}
-            {(() => {
-              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
-              const cfg = {
-                NFA: { label: "NFA", bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30" },
-                NFC: { label: "NFC", bg: "bg-blue-500/20",   text: "text-blue-400",   border: "border-blue-500/30"   },
-                NFT: { label: "NFT", bg: "bg-white/10",      text: "text-white/50",   border: "border-white/10"       },
-              }[aType] || null;
-              return cfg ? (
-                <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${cfg.bg} ${cfg.text} border ${cfg.border}`}>
-                  {cfg.label}
+            {/* Badges */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Asset type badge */}
+              {(() => {
+                const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+                const cfg = {
+                  NFA: { label: "NFA", bg: "bg-purple-500/20", text: "text-purple-400", border: "border-purple-500/30" },
+                  NFC: { label: "NFC", bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30" },
+                  NFT: { label: "NFT", bg: "bg-white/10", text: "text-white/50", border: "border-white/10" },
+                }[aType] || null;
+                return cfg ? (
+                  <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${cfg.bg} ${cfg.text} border ${cfg.border}`}>
+                    {cfg.label}
+                  </span>
+                ) : null;
+              })()}
+              {listingData?.active && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                  {t("buyNfa.marketplace.listed", "Listed")}
                 </span>
-              ) : null;
-            })()}
-            {listingData?.active && (
-              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                Listed
-              </span>
-            )}
-            {isOwner && collection.tokenId && (
-              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                You Own This
-              </span>
-            )}
-          </div>
-
-          {/* Name + meta */}
-          <div>
-            <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
-            <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-              <span className="text-white/40 text-sm">
-                {collection?.symbol || assetType}
-                {collection?.tokenId ? ` · Token #${collection.tokenId}` : " · Not minted yet"}
-              </span>
-              {(onChainOwner || collection.owner) && (
-                <span className="text-white/20 text-sm">·</span>
               )}
-              <span className="text-white/40 text-sm">
-                Owned by{" "}
-                <span className="text-blue-400 font-medium">
-                  {onChainOwner || collection.owner
-                    ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
-                    : "Platform"}
-                </span>
-              </span>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div
-            className="rounded-xl p-4 min-h-[80px]"
-            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
-          >
-            <p className="text-white/50 text-sm leading-relaxed">
-              {collection?.description && collection.description.trim().length > 0
-                ? collection.description
-                : "No description provided for this item."}
-            </p>
-          </div>
-
-          {/* Price Card */}
-          <div
-            className="rounded-2xl p-5 flex flex-col gap-4"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-          >
-            {/* Price row */}
-            <div>
-              <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">Price</p>
-
-              <div className="flex items-center gap-2">
-                <span className="text-3xl font-bold">
-                  {listingData?.active
-                    ? ethers.formatUnits(listingData.price, 6)
-                    : (collection.priceETH || 0.01)}
-                </span>
-                <span className="text-blue-400 font-semibold">USDC</span>
-              </div>
-
-              {collection.category && (
-                <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/50 capitalize"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                  {collection.category}
+              {isOwner && collection.tokenId && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                  {t("buyNfa.marketplace.youOwn", "You Own This")}
                 </span>
               )}
             </div>
 
-            {/* Min Buyback + Reserve Price (NFA / NFC only) */}
-            {(() => {
-              const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
-              const minBB = collection.minimumBuybackUSD;
-              const reserve = collection.reservePriceUSD;
-              if ((aType === "NFA" || aType === "NFC") && (minBB > 0 || reserve > 0)) {
-                return (
-                  <div className="rounded-xl p-3 flex flex-col gap-1.5"
-                    style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
-                    {minBB > 0 && (
-                      <div className="flex justify-between text-xs">
-                        <span className="text-white/50">Min Buyback Guarantee</span>
-                        <span className="text-green-400 font-semibold">${minBB} USD</span>
-                      </div>
-                    )}
-                    {reserve > 0 && (
-                      <div className="flex justify-between text-xs">
-                        <span className="text-white/50">Reserve Price</span>
-                        <span className="text-blue-300 font-semibold">${reserve} USD</span>
-                      </div>
-                    )}
-                    <p className="text-[10px] text-white/30 mt-0.5">
-                      This asset cannot be sold below its minimum buyback value.
-                    </p>
-                  </div>
-                );
-              }
-              return null;
-            })()}
-
-
-            {/* Embedded wallet display */}
-            {isEmailWalletConnected && emailWalletAddress && (
-              <div
-                className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition"
-                onClick={() => copyToClipboard(emailWalletAddress)}
-                data-tooltip="Copy wallet address"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-500/20 rounded-lg">
-                    <Wallet className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-mono text-white/60 flex items-center gap-2">
-                      {emailWalletAddress.slice(0, 6)}...{emailWalletAddress.slice(-4)}
-                      {walletCopied
-                        ? <span className="text-green-400 text-[10px]">Copied!</span>
-                        : <Copy className="w-3 h-3 text-white/30" />}
-                    </div>
-                    <div className="text-sm font-semibold text-white mt-0.5">
-                      {Number(ethBalance).toFixed(4)} ETH
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Network info */}
-            <div className="flex items-center gap-2 text-[11px] text-white/30 -mt-1">
-              <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
-              <span>USDC on Base · Base ETH required for gas (wallet payments only)</span>
-            </div>
-
-            {/* Action buttons */}
-            <div className="flex gap-3">
-              <button
-                onClick={buttonConfig.action || (() => setIsOpen(true))}
-                disabled={buttonConfig.disabled || loading}
-                className="flex-1 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
-              >
-                {buttonConfig.text}
-              </button>
-              {!isOwner && (
-                <button
-                  onClick={handlePaymentCard}
-                  disabled={loading}
-                  className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
-                >
-                  💳 Buy With Card
-                </button>
-              )}
-            </div>
-
-            {/* Make Offer — only for non-owners */}
-            {!isOwner && (
-              <Link
-                to="/make-offer"
-                state={{ item: collection }}
-                className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
-              >
-                Make Offer <FiEdit2 size={12} />
-              </Link>
-            )}
-          </div>
-
-        </>}
-
-        {/* ── Auction Panel ── */}
-        {activeTab === "auction" && (
-          <div className="flex flex-col gap-4">
-
-            {/* Item header */}
+            {/* Name + meta */}
             <div>
               <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
               <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                 <span className="text-white/40 text-sm">
-                  {assetType}{collection?.tokenId ? ` · Token #${collection.tokenId}` : " · Not minted yet"}
+                  {collection?.symbol || assetType}
+                  {collection?.tokenId ? ` · Token #${collection.tokenId}` : ` · ${t("buyNfa.marketplace.notMinted", "Not minted yet")}`}
                 </span>
                 {(onChainOwner || collection.owner) && (
-                  <span className="text-white/40 text-sm">
-                    · Owned by{" "}
-                    <span className="text-amber-400 font-medium">
-                      {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0,6)}...${w.substring(38)}`; })()}
-                    </span>
-                  </span>
+                  <span className="text-white/20 text-sm">·</span>
                 )}
+                <span className="text-white/40 text-sm">
+                  {t("buyNfa.marketplace.ownedBy", "Owned by")}{" "}
+                  <span className="text-blue-400 font-medium">
+                    {onChainOwner || collection.owner
+                      ? `${(onChainOwner || collection.owner).substring(0, 6)}...${(onChainOwner || collection.owner).substring(38)}`
+                      : t("buyNfa.marketplace.platform", "Platform")}
+                  </span>
+                </span>
               </div>
             </div>
 
             {/* Description */}
-            <div className="rounded-xl p-4"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+            <div
+              className="rounded-xl p-4 min-h-[80px]"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+            >
               <p className="text-white/50 text-sm leading-relaxed">
-                {collection?.description?.trim() || "No description provided for this item."}
+                {collection?.description && collection.description.trim().length > 0
+                  ? collection.description
+                  : t("buyNfa.marketplace.noDesc", "No description provided for this item.")}
               </p>
             </div>
 
-            {/* Auction content */}
-            {auctionInfoLoading ? (
-              <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
-                style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
-                <div className="w-6 h-6 rounded-full border-2 border-amber-400/40 border-t-amber-400 animate-spin" />
-                <p className="text-white/40 text-sm">Loading auction data…</p>
+            {/* Price Card */}
+            <div
+              className="rounded-2xl p-5 flex flex-col gap-4"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              {/* Price row */}
+              <div>
+                <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">{t("buyNfa.marketplace.price", "Price")}</p>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-3xl font-bold">
+                    {listingData?.active
+                      ? ethers.formatUnits(listingData.price, 6)
+                      : (collection.priceETH || 0.01)}
+                  </span>
+                  <span className="text-blue-400 font-semibold">USDC</span>
+                </div>
+
+                {collection.category && (
+                  <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/50 capitalize"
+                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    {collection.category}
+                  </span>
+                )}
               </div>
 
-            ) : auctionInfo ? (
-              <div className="rounded-2xl p-5 flex flex-col gap-5"
-                style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.2)" }}>
+              {/* Min Buyback + Reserve Price (NFA / NFC only) */}
+              {(() => {
+                const aType = collection.assetType || (collection.isNFA ? "NFA" : "NFT"); // NFC always has assetType set
+                const minBB = collection.minimumBuybackUSD;
+                const reserve = collection.reservePriceUSD;
+                if ((aType === "NFA" || aType === "NFC") && (minBB > 0 || reserve > 0)) {
+                  return (
+                    <div className="rounded-xl p-3 flex flex-col gap-1.5"
+                      style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                      {minBB > 0 && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-white/50">{t("buyNfa.marketplace.minBuyback", "Min Buyback Guarantee")}</span>
+                          <span className="text-green-400 font-semibold">${minBB} USD</span>
+                        </div>
+                      )}
+                      {reserve > 0 && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-white/50">{t("buyNfa.marketplace.reservePrice", "Reserve Price")}</span>
+                          <span className="text-blue-300 font-semibold">${reserve} USD</span>
+                        </div>
+                      )}
+                      <p className="text-[10px] text-white/30 mt-0.5">
+                        {t("buyNfa.marketplace.buybackNote", "This asset cannot be sold below its minimum buyback value.")}
+                      </p>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
 
-                {/* Status row */}
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                    <span className="text-amber-300 text-sm font-semibold">Active Auction</span>
+
+              {/* Embedded wallet display */}
+              {isEmailWalletConnected && emailWalletAddress && (
+                <div
+                  className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3 cursor-pointer hover:bg-white/10 transition"
+                  onClick={() => copyToClipboard(emailWalletAddress)}
+                  data-tooltip="Copy wallet address"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-500/20 rounded-lg">
+                      <Wallet className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-mono text-white/60 flex items-center gap-2">
+                        {emailWalletAddress.slice(0, 6)}...{emailWalletAddress.slice(-4)}
+                        {walletCopied
+                          ? <span className="text-green-400 text-[10px]">Copied!</span>
+                          : <Copy className="w-3 h-3 text-white/30" />}
+                      </div>
+                      <div className="text-sm font-semibold text-white mt-0.5">
+                        {Number(ethBalance).toFixed(4)} ETH
+                      </div>
+                    </div>
                   </div>
-                  {auctionInfo.endTime && (
-                    <span className="text-white/40 text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
-                      ⏱ {timeRemaining(auctionInfo.endTime)}
+                </div>
+              )}
+
+              {/* Network info */}
+              <div className="flex items-center gap-2 text-[11px] text-white/30 -mt-1">
+                <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
+                <span>{t("buyNfa.marketplace.networkNote", "USDC on Base · Base ETH required for gas (wallet payments only)")}</span>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={buttonConfig.action || (() => setIsOpen(true))}
+                  disabled={buttonConfig.disabled || loading}
+                  className="flex-1 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
+                >
+                  {buttonConfig.text}
+                </button>
+                {!isOwner && (
+                  <button
+                    onClick={handlePaymentCard}
+                    disabled={loading}
+                    className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
+                  >
+                    💳 {t("buyNfa.marketplace.buyWithCard", "Buy With Card")}
+                  </button>
+                )}
+              </div>
+
+              {/* Make Offer — only for non-owners */}
+              {!isOwner && (
+                <Link
+                  to="/make-offer"
+                  state={{ item: collection }}
+                  className="flex items-center justify-center gap-1.5 text-white/40 hover:text-blue-400 text-sm transition-colors"
+                >
+                  {t("buyNfa.marketplace.makeOffer", "Make Offer")} <FiEdit2 size={12} />
+                </Link>
+              )}
+            </div>
+
+          </>}
+
+          {/* ── Auction Panel ── */}
+          {activeTab === "auction" && (
+            <div className="flex flex-col gap-4">
+
+              {/* Item header */}
+              <div>
+                <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
+                <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                  <span className="text-white/40 text-sm">
+                    {assetType}{collection?.tokenId ? ` · Token #${collection.tokenId}` : ` · ${t("buyNfa.marketplace.notMinted", "Not minted yet")}`}
+                  </span>
+                  {(onChainOwner || collection.owner) && (
+                    <span className="text-white/40 text-sm">
+                      · {t("buyNfa.marketplace.ownedBy", "Owned by")}{" "}
+                      <span className="text-amber-400 font-medium">
+                        {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0, 6)}...${w.substring(38)}`; })()}
+                      </span>
                     </span>
                   )}
                 </div>
+              </div>
 
-                {/* Price grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-xl p-3 flex flex-col gap-0.5"
-                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <p className="text-white/35 text-[10px] uppercase tracking-widest">Start Price</p>
-                    <p className="text-white font-bold text-base">{auctionInfo.startPrice} <span className="text-white/50 text-xs font-normal">USDC</span></p>
-                  </div>
+              {/* Description */}
+              <div className="rounded-xl p-4"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {collection?.description?.trim() || t("buyNfa.marketplace.noDesc", "No description provided for this item.")}
+                </p>
+              </div>
 
-                  <div className="rounded-xl p-3 flex flex-col gap-0.5"
-                    style={{ background: auctionInfo.currentBid > 0 ? "rgba(74,222,128,0.06)" : "rgba(255,255,255,0.04)", border: auctionInfo.currentBid > 0 ? "1px solid rgba(74,222,128,0.25)" : "1px solid rgba(255,255,255,0.08)" }}>
-                    <p className="text-white/35 text-[10px] uppercase tracking-widest">Current Bid</p>
-                    {auctionInfo.currentBid > 0
-                      ? <p className="text-green-300 font-bold text-base">{auctionInfo.currentBid} <span className="text-green-400/60 text-xs font-normal">USDC</span></p>
-                      : <p className="text-white/30 text-sm italic">No bids yet</p>}
-                  </div>
-
-                  {auctionInfo.instantBuyPrice > 0 && (
-                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
-                      style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.25)" }}>
-                      <p className="text-white/35 text-[10px] uppercase tracking-widest">Instant Buy</p>
-                      <p className="text-amber-300 font-bold text-base">{auctionInfo.instantBuyPrice} <span className="text-amber-400/60 text-xs font-normal">USDC</span></p>
-                    </div>
-                  )}
-
-                  {auctionInfo.reservePrice > 0 && (
-                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
-                      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                      <p className="text-white/35 text-[10px] uppercase tracking-widest">Reserve Price</p>
-                      <p className="text-white/70 font-semibold text-base">{auctionInfo.reservePrice} <span className="text-white/30 text-xs font-normal">USDC</span></p>
-                    </div>
-                  )}
+              {/* Auction content */}
+              {auctionInfoLoading ? (
+                <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
+                  style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.15)" }}>
+                  <div className="w-6 h-6 rounded-full border-2 border-amber-400/40 border-t-amber-400 animate-spin" />
+                  <p className="text-white/40 text-sm">{t("buyNfa.auction.loading", "Loading auction data…")}</p>
                 </div>
 
-                {/* Bid history summary */}
-                {auctionInfo.bidHistory?.length > 0 && (
-                  <div className="rounded-xl overflow-hidden"
-                    style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-                    <div className="px-3 py-2 flex items-center justify-between"
-                      style={{ background: "rgba(255,255,255,0.04)" }}>
-                      <p className="text-white/40 text-xs uppercase tracking-widest">Bid History</p>
-                      <span className="text-white/30 text-xs">{auctionInfo.bidHistory.length} bid{auctionInfo.bidHistory.length !== 1 ? "s" : ""}</span>
-                    </div>
-                    {[...auctionInfo.bidHistory].reverse().slice(0, 3).map((bid, i) => (
-                      <div key={i} className="px-3 py-2 flex items-center justify-between border-t border-white/5">
-                        <span className="text-white/50 text-xs font-mono">
-                          {bid.bidderWallet ? `${bid.bidderWallet.substring(0,6)}...${bid.bidderWallet.substring(38)}` : bid.bidderName || "—"}
-                        </span>
-                        <span className="text-white/80 text-xs font-semibold">{bid.amount} USDC</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+              ) : auctionInfo ? (
+                <div className="rounded-2xl p-5 flex flex-col gap-5"
+                  style={{ background: "rgba(251,191,36,0.04)", border: "1px solid rgba(251,191,36,0.2)" }}>
 
-                {/* Bid form — non-owners only */}
-                {!isOwner && (
-                  <div className="flex flex-col gap-3 pt-1 border-t border-white/08">
-                    <p className="text-white/40 text-xs">
-                      Min bid:{" "}
-                      <span className="text-white/70 font-medium">
-                        {auctionInfo.currentBid > 0
-                          ? Number((auctionInfo.currentBid * 1.05).toFixed(4))
-                          : auctionInfo.startPrice} USDC
+                  {/* Status row */}
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-amber-300 text-sm font-semibold">{t("buyNfa.auction.active", "Active Auction")}</span>
+                    </div>
+                    {auctionInfo.endTime && (
+                      <span className="text-white/40 text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">
+                        ⏱ {timeRemaining(auctionInfo.endTime)}
                       </span>
-                    </p>
-                    <div className="flex gap-2">
-                      <div className="flex-1 flex items-center rounded-lg overflow-hidden"
-                        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                        <input
-                          type="number" min="0" step="0.01"
-                          placeholder={String(auctionInfo.currentBid > 0 ? Number((auctionInfo.currentBid * 1.05).toFixed(4)) : auctionInfo.startPrice)}
-                          value={bidAmount}
-                          onChange={(e) => setBidAmount(e.target.value)}
-                          className="flex-1 bg-transparent px-3 py-2.5 text-white text-sm outline-none placeholder-white/25"
-                        />
-                        <span className="pr-3 text-amber-400/70 text-xs font-semibold">USDC</span>
-                      </div>
-                      <button
-                        onClick={handlePlaceBid}
-                        disabled={bidLoading || !isAnyConnected}
-                        className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-all"
-                        style={{ background: "rgba(251,191,36,0.25)", border: "1px solid rgba(251,191,36,0.45)" }}
-                      >
-                        {bidLoading ? "Bidding…" : "Place Bid"}
-                      </button>
+                    )}
+                  </div>
+
+                  {/* Price grid */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                      <p className="text-white/35 text-[10px] uppercase tracking-widest">{t("buyNfa.auction.startPrice", "Start Price")}</p>
+                      <p className="text-white font-bold text-base">{auctionInfo.startPrice} <span className="text-white/50 text-xs font-normal">USDC</span></p>
+                    </div>
+
+                    <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                      style={{ background: auctionInfo.currentBid > 0 ? "rgba(74,222,128,0.06)" : "rgba(255,255,255,0.04)", border: auctionInfo.currentBid > 0 ? "1px solid rgba(74,222,128,0.25)" : "1px solid rgba(255,255,255,0.08)" }}>
+                      <p className="text-white/35 text-[10px] uppercase tracking-widest">{t("buyNfa.auction.currentBid", "Current Bid")}</p>
+                      {auctionInfo.currentBid > 0
+                        ? <p className="text-green-300 font-bold text-base">{auctionInfo.currentBid} <span className="text-green-400/60 text-xs font-normal">USDC</span></p>
+                        : <p className="text-white/30 text-sm italic">{t("buyNfa.auction.noBids", "No bids yet")}</p>}
                     </div>
 
                     {auctionInfo.instantBuyPrice > 0 && (
-                      <button
-                        onClick={async () => {
-                          if (!isAnyConnected) return toast.error("Connect your wallet first");
-                          if (!user?.id) return toast.error("Login required");
-                          try {
-                            setBidLoading(true);
-                            await axios.post(
-                              `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/instant-buy`,
-                              { buyerWallet: activeAddress.toLowerCase() },
-                              { headers: { Authorization: `Bearer ${token}` } }
-                            );
-                            toast.success("Item purchased instantly!");
-                            setAuctionFetched(false);
-                            fetchAuctionInfo();
-                          } catch (err) {
-                            toast.error(err.response?.data?.error || "Instant buy failed");
-                          } finally { setBidLoading(false); }
-                        }}
-                        disabled={bidLoading}
-                        className="w-full py-2.5 rounded-lg text-sm font-semibold text-amber-200 disabled:opacity-50 transition-all"
-                        style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}
-                      >
-                        ⚡ Instant Buy — {auctionInfo.instantBuyPrice} USDC
-                      </button>
+                      <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                        style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.25)" }}>
+                        <p className="text-white/35 text-[10px] uppercase tracking-widest">{t("buyNfa.auction.instantBuy", "Instant Buy")}</p>
+                        <p className="text-amber-300 font-bold text-base">{auctionInfo.instantBuyPrice} <span className="text-amber-400/60 text-xs font-normal">USDC</span></p>
+                      </div>
                     )}
 
-                    {!isAnyConnected && (
-                      <p className="text-white/30 text-xs text-center">Connect your wallet to place a bid</p>
+                    {auctionInfo.reservePrice > 0 && (
+                      <div className="rounded-xl p-3 flex flex-col gap-0.5"
+                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                        <p className="text-white/35 text-[10px] uppercase tracking-widest">{t("buyNfa.auction.reservePrice", "Reserve Price")}</p>
+                        <p className="text-white/70 font-semibold text-base">{auctionInfo.reservePrice} <span className="text-white/30 text-xs font-normal">USDC</span></p>
+                      </div>
                     )}
                   </div>
-                )}
 
-                {/* Owner view */}
-                {isOwner && (
-                  <div className="pt-2 border-t border-white/08 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-400" />
-                    <p className="text-white/50 text-xs">Your item is listed on auction. Bids will appear here as they come in.</p>
-                  </div>
-                )}
-
-                {/* End time footer */}
-                {auctionInfo.endTime && (
-                  <p className="text-white/25 text-[11px] text-right">
-                    Ends {new Date(auctionInfo.endTime).toLocaleString()}
-                  </p>
-                )}
-              </div>
-
-            ) : (
-              /* No auction empty state */
-              <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
-                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
-                  style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.15)" }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(251,191,36,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <p className="text-white/50 text-sm font-medium">No active auction for this item</p>
-                {isOwner
-                  ? <p className="text-white/25 text-xs max-w-[200px]">Go to your Collections and click <span className="text-white/40">List</span> to set up an auction.</p>
-                  : <p className="text-white/25 text-xs">This item has no open auction at the moment.</p>}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ── Trade Panel ── */}
-        {activeTab === "trade" && (
-          <div className="flex flex-col gap-4">
-
-            {/* Item header */}
-            <div>
-              <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
-              <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                <span className="text-white/40 text-sm">
-                  {assetType} · <span className="capitalize">{collection?.category || "general"}</span>
-                </span>
-                {(onChainOwner || collection.owner) && (
-                  <span className="text-white/40 text-sm">
-                    · Owned by{" "}
-                    <span className="text-blue-400 font-medium">
-                      {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0,6)}...${w.substring(38)}`; })()}
-                    </span>
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Description */}
-            <div className="rounded-xl p-4"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <p className="text-white/50 text-sm leading-relaxed">
-                {collection?.description?.trim() || "No description provided for this item."}
-              </p>
-            </div>
-
-            {/* Trade listings */}
-            {tradeListingsLoading ? (
-              <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
-                style={{ background: "rgba(0,80,255,0.04)", border: "1px solid rgba(0,80,255,0.15)" }}>
-                <div className="w-6 h-6 rounded-full border-2 border-blue-400/40 border-t-blue-400 animate-spin" />
-                <p className="text-white/40 text-sm">Loading trade listings…</p>
-              </div>
-
-            ) : tradeListings.length > 0 ? (
-              <div className="flex flex-col gap-3">
-                <p className="text-white/30 text-xs uppercase tracking-widest pl-1">
-                  {tradeListings.length} active trade listing{tradeListings.length !== 1 ? "s" : ""}
-                </p>
-                {tradeListings.map((trade) => (
-                  <div key={trade._id} className="rounded-xl p-4 flex flex-col gap-3"
-                    style={{ background: "rgba(0,80,255,0.05)", border: "1px solid rgba(0,80,255,0.2)" }}>
-
-                    {/* Trade exchange row */}
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
-                        style={{ background: "rgba(74,222,128,0.07)", border: "1px solid rgba(74,222,128,0.15)" }}>
-                        <p className="text-[10px] text-green-400/60 uppercase tracking-widest mb-0.5">Offering</p>
-                        <p className="text-green-300 text-sm font-medium truncate">{trade.offering}</p>
+                  {/* Bid history summary */}
+                  {auctionInfo.bidHistory?.length > 0 && (
+                    <div className="rounded-xl overflow-hidden"
+                      style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+                      <div className="px-3 py-2 flex items-center justify-between"
+                        style={{ background: "rgba(255,255,255,0.04)" }}>
+                        <p className="text-white/40 text-xs uppercase tracking-widest">{t("buyNfa.auction.bidHistory", "Bid History")}</p>
+                        <span className="text-white/30 text-xs">{auctionInfo.bidHistory.length} bid{auctionInfo.bidHistory.length !== 1 ? "s" : ""}</span>
                       </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-                        <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
-                      </svg>
-                      <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
-                        style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.2)" }}>
-                        <p className="text-[10px] text-blue-400/60 uppercase tracking-widest mb-0.5">Wants</p>
-                        <p className="text-blue-300 text-sm font-medium truncate">
-                          {trade.requesting === "Make me an offer" || !trade.requesting
-                            ? <span className="italic text-white/40">Open offer</span>
-                            : trade.requesting}
-                        </p>
-                      </div>
+                      {[...auctionInfo.bidHistory].reverse().slice(0, 3).map((bid, i) => (
+                        <div key={i} className="px-3 py-2 flex items-center justify-between border-t border-white/5">
+                          <span className="text-white/50 text-xs font-mono">
+                            {bid.bidderWallet ? `${bid.bidderWallet.substring(0, 6)}...${bid.bidderWallet.substring(38)}` : bid.bidderName || "—"}
+                          </span>
+                          <span className="text-white/80 text-xs font-semibold">{bid.amount} USDC</span>
+                        </div>
+                      ))}
                     </div>
+                  )}
 
-                    {/* Description */}
-                    {trade.description && (
-                      <p className="text-white/35 text-xs leading-relaxed px-1">{trade.description}</p>
-                    )}
-
-                    {/* Footer: poster + action */}
-                    <div className="flex items-center justify-between pt-1 border-t border-white/06">
-                      <span className="text-white/30 text-xs">
-                        {trade.posterName ? `By ${trade.posterName}` : trade.posterWallet ? `${trade.posterWallet.substring(0,6)}...${trade.posterWallet.substring(38)}` : ""}
-                      </span>
-                      {!isOwner && (
-                        <Link
-                          to="/market-place?tab=trades"
-                          state={{ tradeId: trade._id }}
-                          className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                  {/* Bid form — non-owners only */}
+                  {!isOwner && (
+                    <div className="flex flex-col gap-3 pt-1 border-t border-white/08">
+                      <p className="text-white/40 text-xs">
+                        {t("buyNfa.auction.minBid", "Min bid:")}{" "}
+                        <span className="text-white/70 font-medium">
+                          {auctionInfo.currentBid > 0
+                            ? Number((auctionInfo.currentBid * 1.05).toFixed(4))
+                            : auctionInfo.startPrice} USDC
+                        </span>
+                      </p>
+                      <div className="flex gap-2">
+                        <div className="flex-1 flex items-center rounded-lg overflow-hidden"
+                          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                          <input
+                            type="number" min="0" step="0.01"
+                            placeholder={String(auctionInfo.currentBid > 0 ? Number((auctionInfo.currentBid * 1.05).toFixed(4)) : auctionInfo.startPrice)}
+                            value={bidAmount}
+                            onChange={(e) => setBidAmount(e.target.value)}
+                            className="flex-1 bg-transparent px-3 py-2.5 text-white text-sm outline-none placeholder-white/25"
+                          />
+                          <span className="pr-3 text-amber-400/70 text-xs font-semibold">USDC</span>
+                        </div>
+                        <button
+                          onClick={handlePlaceBid}
+                          disabled={bidLoading || !isAnyConnected}
+                          className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-all"
+                          style={{ background: "rgba(251,191,36,0.25)", border: "1px solid rgba(251,191,36,0.45)" }}
                         >
-                          Propose Trade →
-                        </Link>
+                          {bidLoading ? t("buyNfa.auction.bidding", "Bidding…") : t("buyNfa.auction.placeBid", "Place Bid")}
+                        </button>
+                      </div>
+
+                      {auctionInfo.instantBuyPrice > 0 && (
+                        <button
+                          onClick={async () => {
+                            if (!isAnyConnected) return toast.error("Connect your wallet first");
+                            if (!user?.id) return toast.error("Login required");
+                            try {
+                              setBidLoading(true);
+                              await axios.post(
+                                `${BACKEND_BASE_URL}/api/v1/auction/${auctionInfo._id}/instant-buy`,
+                                { buyerWallet: activeAddress.toLowerCase() },
+                                { headers: { Authorization: `Bearer ${token}` } }
+                              );
+                              toast.success("Item purchased instantly!");
+                              setAuctionFetched(false);
+                              fetchAuctionInfo();
+                            } catch (err) {
+                              toast.error(err.response?.data?.error || "Instant buy failed");
+                            } finally { setBidLoading(false); }
+                          }}
+                          disabled={bidLoading}
+                          className="w-full py-2.5 rounded-lg text-sm font-semibold text-amber-200 disabled:opacity-50 transition-all"
+                          style={{ background: "rgba(251,191,36,0.15)", border: "1px solid rgba(251,191,36,0.3)" }}
+                        >
+                          ⚡ Instant Buy — {auctionInfo.instantBuyPrice} USDC
+                        </button>
+                      )}
+
+                      {!isAnyConnected && (
+                        <p className="text-white/30 text-xs text-center">{t("buyNfa.auction.connectWallet", "Connect your wallet to place a bid")}</p>
                       )}
                     </div>
+                  )}
+
+                  {/* Owner view */}
+                  {isOwner && (
+                    <div className="pt-2 border-t border-white/08 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-amber-400" />
+                      <p className="text-white/50 text-xs">{t("buyNfa.auction.ownerNote", "Your item is listed on auction. Bids will appear here as they come in.")}</p>
+                    </div>
+                  )}
+
+                  {/* End time footer */}
+                  {auctionInfo.endTime && (
+                    <p className="text-white/25 text-[11px] text-right">
+                      Ends {new Date(auctionInfo.endTime).toLocaleString()}
+                    </p>
+                  )}
+                </div>
+
+              ) : (
+                /* No auction empty state */
+                <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
+                    style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.15)" }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(251,191,36,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
                   </div>
-                ))}
+                  <p className="text-white/50 text-sm font-medium">{t("buyNfa.auction.noAuction", "No active auction for this item")}</p>
+                  {isOwner
+                    ? <p className="text-white/25 text-xs max-w-[200px]">{t("buyNfa.auction.ownerSetup", "Go to your Collections and click List to set up an auction.")}</p>
+                    : <p className="text-white/25 text-xs">{t("buyNfa.auction.notAvailable", "This item has no open auction at the moment.")}</p>}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── Trade Panel ── */}
+          {activeTab === "trade" && (
+            <div className="flex flex-col gap-4">
+
+              {/* Item header */}
+              <div>
+                <h1 className="text-3xl font-bold text-white leading-tight">{collection?.name}</h1>
+                <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                  <span className="text-white/40 text-sm">
+                    {assetType} · <span className="capitalize">{collection?.category || "general"}</span>
+                  </span>
+                  {(onChainOwner || collection.owner) && (
+                    <span className="text-white/40 text-sm">
+                      · {t("buyNfa.marketplace.ownedBy", "Owned by")}{" "}
+                      <span className="text-blue-400 font-medium">
+                        {(() => { const w = onChainOwner || collection.owner; return `${w.substring(0, 6)}...${w.substring(38)}`; })()}
+                      </span>
+                    </span>
+                  )}
+                </div>
               </div>
 
-            ) : (
-              /* No trades empty state */
-              <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
-                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
-                  style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.15)" }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(96,165,250,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/>
-                  </svg>
-                </div>
-                <p className="text-white/50 text-sm font-medium">No active trade listings</p>
-                {isOwner
-                  ? <p className="text-white/25 text-xs max-w-[200px]">Go to your Collections and click <span className="text-white/40">List</span> to set up a trade.</p>
-                  : <p className="text-white/25 text-xs">The owner has no open trade listings for this item.</p>}
+              {/* Description */}
+              <div className="rounded-xl p-4"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  {collection?.description?.trim() || t("buyNfa.marketplace.noDesc", "No description provided for this item.")}
+                </p>
               </div>
-            )}
-          </div>
-        )}
+
+              {/* Trade listings */}
+              {tradeListingsLoading ? (
+                <div className="rounded-2xl p-10 flex flex-col items-center gap-3"
+                  style={{ background: "rgba(0,80,255,0.04)", border: "1px solid rgba(0,80,255,0.15)" }}>
+                  <div className="w-6 h-6 rounded-full border-2 border-blue-400/40 border-t-blue-400 animate-spin" />
+                  <p className="text-white/40 text-sm">{t("buyNfa.trade.loading", "Loading trade listings…")}</p>
+                </div>
+
+              ) : tradeListings.length > 0 ? (
+                <div className="flex flex-col gap-3">
+                  <p className="text-white/30 text-xs uppercase tracking-widest pl-1">
+                    {tradeListings.length} {tradeListings.length !== 1 ? t("buyNfa.trade.actives", "active trade listings") : t("buyNfa.trade.active", "active trade listing")}
+                  </p>
+                  {tradeListings.map((trade) => (
+                    <div key={trade._id} className="rounded-xl p-4 flex flex-col gap-3"
+                      style={{ background: "rgba(0,80,255,0.05)", border: "1px solid rgba(0,80,255,0.2)" }}>
+
+                      {/* Trade exchange row */}
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
+                          style={{ background: "rgba(74,222,128,0.07)", border: "1px solid rgba(74,222,128,0.15)" }}>
+                          <p className="text-[10px] text-green-400/60 uppercase tracking-widest mb-0.5">{t("buyNfa.trade.offering", "Offering")}</p>
+                          <p className="text-green-300 text-sm font-medium truncate">{trade.offering}</p>
+                        </div>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                          <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4" />
+                        </svg>
+                        <div className="flex-1 min-w-0 rounded-lg px-3 py-2"
+                          style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.2)" }}>
+                          <p className="text-[10px] text-blue-400/60 uppercase tracking-widest mb-0.5">{t("buyNfa.trade.wants", "Wants")}</p>
+                          <p className="text-blue-300 text-sm font-medium truncate">
+                            {trade.requesting === "Make me an offer" || !trade.requesting
+                              ? <span className="italic text-white/40">{t("buyNfa.trade.openOffer", "Open offer")}</span>
+                              : trade.requesting}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      {trade.description && (
+                        <p className="text-white/35 text-xs leading-relaxed px-1">{trade.description}</p>
+                      )}
+
+                      {/* Footer: poster + action */}
+                      <div className="flex items-center justify-between pt-1 border-t border-white/06">
+                        <span className="text-white/30 text-xs">
+                          {trade.posterName ? `${t("buyNfa.trade.by", "By")} ${trade.posterName}` : trade.posterWallet ? `${trade.posterWallet.substring(0, 6)}...${trade.posterWallet.substring(38)}` : ""}
+                        </span>
+                        {!isOwner && (
+                          <Link
+                            to="/market-place?tab=trades"
+                            state={{ tradeId: trade._id }}
+                            className="text-xs text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                          >
+                            {t("buyNfa.trade.proposeTrade", "Propose Trade →")}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+              ) : (
+                /* No trades empty state */
+                <div className="rounded-2xl p-10 flex flex-col items-center gap-3 text-center"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
+                    style={{ background: "rgba(0,80,255,0.08)", border: "1px solid rgba(0,80,255,0.15)" }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(96,165,250,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4" />
+                    </svg>
+                  </div>
+                  <p className="text-white/50 text-sm font-medium">{t("buyNfa.trade.noTrades", "No active trade listings")}</p>
+                  {isOwner
+                    ? <p className="text-white/25 text-xs max-w-[200px]">{t("buyNfa.trade.ownerSetup", "Go to your Collections and click List to set up a trade.")}</p>
+                    : <p className="text-white/25 text-xs">{t("buyNfa.trade.notAvailable", "The owner has no open trade listings for this item.")}</p>}
+                </div>
+              )}
+            </div>
+          )}
 
         </div>
       </div>
@@ -2011,7 +2013,7 @@ function Buy1() {
             className="bg-[#0f0f2a] border border-white/10 p-6 rounded-2xl w-full max-w-[480px] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-lg font-bold text-center mb-4">Confirm Action</h2>
+            <h2 className="text-lg font-bold text-center mb-4">{t("buyNfa.confirmModal1.title", "Confirm Action")}</h2>
             <img
               src={collection?.image ? getImageUrl(collection.image) : overview1}
               alt={collection?.name}
@@ -2021,15 +2023,15 @@ function Buy1() {
             <h3 className="text-center font-semibold mb-4">{collection?.name}</h3>
             <div className="space-y-2 mb-6">
               <div className="flex justify-between bg-white/5 border border-white/08 px-4 py-2.5 rounded-lg text-sm">
-                <span className="text-white/50">List Price</span>
+                <span className="text-white/50">{t("buyNfa.confirmModal1.listPrice", "List Price")}</span>
                 <span className="text-white font-medium">{collection.priceETH || 0.01} USDC</span>
               </div>
               <div className="flex justify-between bg-white/5 border border-white/08 px-4 py-2.5 rounded-lg text-sm">
-                <span className="text-white/50">Platform Fee (10%)</span>
+                <span className="text-white/50">{t("buyNfa.confirmModal1.platformFee", "Platform Fee (10%)")}</span>
                 <span className="text-white font-medium">{((collection.priceETH || 0.01) * 0.1).toFixed(4)} USDC</span>
               </div>
               <div className="flex justify-between bg-[#002AA8]/20 border border-blue-500/30 px-4 py-2.5 rounded-lg text-sm">
-                <span className="text-white font-semibold">Total</span>
+                <span className="text-white font-semibold">{t("buyNfa.confirmModal1.total", "Total")}</span>
                 <span className="text-white font-bold">{((collection.priceETH || 0.01) * 1.1).toFixed(4)} USDC</span>
               </div>
             </div>
@@ -2038,13 +2040,13 @@ function Buy1() {
                 onClick={() => setIsOpen(false)}
                 className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm font-semibold transition-colors"
               >
-                Cancel
+                {t("buyNfa.confirmModal1.cancel", "Cancel")}
               </button>
               <button
                 onClick={() => { setIsOpen(false); setIsSecondOpen(true); }}
                 className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-sm transition-colors"
               >
-                Continue
+                {t("buyNfa.confirmModal1.continue", "Continue")}
               </button>
             </div>
           </div>
@@ -2062,7 +2064,7 @@ function Buy1() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
-              <h1 className="text-lg font-bold text-white">{isOwner ? `${assetType} Detail` : `Buy ${assetType}`}</h1>
+              <h1 className="text-lg font-bold text-white">{isOwner ? t("buyNfa.nav.detail", "{{type}} Detail", { type: assetType }) : t("buyNfa.nav.buy", "Buy {{type}}", { type: assetType })}</h1>
               <button onClick={() => setIsSecondOpen(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
             </div>
 
@@ -2080,7 +2082,7 @@ function Buy1() {
             <div className="mb-4">
               {isOwner ? (
                 <div className="flex flex-col gap-1">
-                  <label className="text-white/40 text-xs px-1">Set Your Listing Price (USDC)</label>
+                  <label className="text-white/40 text-xs px-1">{t("buyNfa.confirmModal2.setPrice", "Set Your Listing Price (USDC)")}</label>
                   <div className="flex items-center rounded-lg px-4 h-11 bg-white/5 border border-white/15 focus-within:border-blue-400 transition-colors">
                     <input
                       type="number" min="0.01" step="0.01"
@@ -2092,12 +2094,12 @@ function Buy1() {
                     <span className="text-blue-400 text-xs font-bold ml-2">USDC</span>
                   </div>
                   {listingPrice && parseFloat(listingPrice) > 0 && (
-                    <p className="text-xs text-green-400 px-1">✓ Will list at {parseFloat(listingPrice).toFixed(2)} USDC</p>
+                    <p className="text-xs text-green-400 px-1">{t("buyNfa.confirmModal2.willList", "✓ Will list at {{price}} USDC", { price: parseFloat(listingPrice).toFixed(2) })}</p>
                   )}
                 </div>
               ) : (
                 <div className="flex justify-between items-center bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-                  <span className="text-white/50 text-sm">Price</span>
+                  <span className="text-white/50 text-sm">{t("buyNfa.confirmModal2.price", "Price")}</span>
                   <span className="text-white font-semibold text-sm">{collection.priceETH || 0.01} USDC</span>
                 </div>
               )}
@@ -2108,7 +2110,7 @@ function Buy1() {
                 onClick={() => setIsSecondOpen(false)}
                 className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm font-semibold transition-colors"
               >
-                Cancel
+                {t("buyNfa.confirmModal2.cancel", "Cancel")}
               </button>
               <button
                 onClick={() => {
@@ -2118,7 +2120,7 @@ function Buy1() {
                 disabled={loading}
                 className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 text-white font-semibold text-sm transition-colors"
               >
-                {loading ? "Processing..." : "Confirm"}
+                {loading ? t("buyNfa.confirmModal2.processing", "Processing...") : t("buyNfa.confirmModal2.confirm", "Confirm")}
               </button>
             </div>
           </div>
@@ -2139,7 +2141,7 @@ function Buy1() {
               <div>
                 <h2 className="text-base font-semibold text-white">{collection?.name}</h2>
                 <p className="text-white/40 text-xs mt-0.5">
-                  {offers.length === 0 ? "No offers yet" : `${offers.length} offer${offers.length > 1 ? "s" : ""}`}
+                  {offers.length === 0 ? t("buyNfa.offers.noOffers", "No offers yet") : `${offers.length} ${offers.length > 1 ? t("buyNfa.offers.offers", "offers") : t("buyNfa.offers.offer", "offer")}`}
                 </p>
               </div>
               <button onClick={() => setShowOffers(false)} className="text-white/40 hover:text-white text-xl leading-none">×</button>
@@ -2153,22 +2155,22 @@ function Buy1() {
                     <img src={FaceOne} alt="" className="w-20 h-16" />
                   </div>
                 </div>
-                <p className="text-white font-bold text-xl mt-2">No offers right now</p>
-                <p className="text-white/40 text-sm">Be the first to make an offer</p>
+                <p className="text-white font-bold text-xl mt-2">{t("buyNfa.offers.noOffersTitle", "No offers right now")}</p>
+                <p className="text-white/40 text-sm">{t("buyNfa.offers.noOffersDesc", "Be the first to make an offer")}</p>
               </div>
             ) : (
               <div className="w-full">
                 <div className="grid grid-cols-5 gap-4 text-xs font-semibold text-white/40 uppercase tracking-widest mb-3 px-3">
-                  <span>Price</span><span>Status</span><span>From</span><span>Expires</span><span>Action</span>
+                  <span>{t("buyNfa.offers.colPrice", "Price")}</span><span>{t("buyNfa.offers.colStatus", "Status")}</span><span>{t("buyNfa.offers.colFrom", "From")}</span><span>{t("buyNfa.offers.colExpires", "Expires")}</span><span>{t("buyNfa.offers.colAction", "Action")}</span>
                 </div>
                 {offers.map((offer) => {
                   const isMyOffer = String(offer.userId) === String(user?.id || user?._id);
                   const statusColor =
                     offer.requestStatus === "completed" ? "text-blue-400" :
-                    offer.requestStatus === "accepted"  ? "text-green-400" :
-                    offer.requestStatus === "rejected"  ? "text-red-400" :
-                    offer.requestStatus === "cancelled" ? "text-white/30" :
-                    "text-yellow-400"; // pending
+                      offer.requestStatus === "accepted" ? "text-green-400" :
+                        offer.requestStatus === "rejected" ? "text-red-400" :
+                          offer.requestStatus === "cancelled" ? "text-white/30" :
+                            "text-yellow-400"; // pending
 
                   return (
                     <div key={offer._id} className="grid grid-cols-5 gap-4 items-center bg-white/5 border border-white/08 p-3 rounded-lg mb-2 text-sm">
@@ -2185,13 +2187,13 @@ function Buy1() {
                               onClick={() => handleOfferStatus(offer._id, "accepted")}
                               className="px-2.5 py-1 bg-[#002AA8] hover:bg-[#003BD4] rounded-lg text-xs font-semibold transition-colors"
                             >
-                              Accept
+                              {t("buyNfa.offers.accept", "Accept")}
                             </button>
                             <button
                               onClick={() => handleOfferStatus(offer._id, "rejected")}
                               className="px-2.5 py-1 bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/30 rounded-lg text-xs text-white/50 hover:text-red-400 transition-colors"
                             >
-                              Reject
+                              {t("buyNfa.offers.reject", "Reject")}
                             </button>
                           </>
                         ) : isMyOffer && offer.requestStatus === "pending" ? (
@@ -2199,19 +2201,19 @@ function Buy1() {
                             onClick={() => handleOfferStatus(offer._id, "cancelled")}
                             className="px-2.5 py-1 bg-white/5 hover:bg-red-500/10 border border-white/10 rounded-lg text-xs text-white/40 hover:text-red-400 transition-colors"
                           >
-                            Cancel
+                            {t("buyNfa.offers.cancel", "Cancel")}
                           </button>
                         ) : isMyOffer && offer.requestStatus === "accepted" ? (
                           // Seller accepted — buyer completes purchase via card
                           <div className="flex flex-col gap-1 items-start">
                             {offer.acceptDeadlineAt && (() => {
                               const diff = new Date(offer.acceptDeadlineAt) - Date.now();
-                              if (diff <= 0) return <span className="text-red-400 text-xs">Expired</span>;
+                              if (diff <= 0) return <span className="text-red-400 text-xs">{t("buyNfa.offers.expired", "Expired")}</span>;
                               const h = Math.floor(diff / 3600000);
                               const m = Math.floor((diff % 3600000) / 60000);
                               return (
                                 <span className="text-orange-400 text-xs">
-                                  ⏳ {h > 24 ? `${Math.floor(h/24)}d ${h%24}h` : `${h}h ${m}m`} left
+                                  ⏳ {h > 24 ? `${Math.floor(h / 24)}d ${h % 24}h` : `${h}h ${m}m`} left
                                 </span>
                               );
                             })()}
@@ -2253,7 +2255,7 @@ function Buy1() {
                               }}
                               className="px-2.5 py-1 bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 rounded-lg text-xs font-semibold text-green-400 transition-colors"
                             >
-                              Complete Purchase
+                              {t("buyNfa.offers.completePurchase", "Complete Purchase")}
                             </button>
                           </div>
                         ) : (
@@ -2300,13 +2302,12 @@ function Buy1() {
             </div>
 
             <div>
-              <h2 className="text-white text-xl font-bold mb-1">Purchase Successful!</h2>
+              <h2 className="text-white text-xl font-bold mb-1">{t("buyNfa.successModal.title", "Purchase Successful!")}</h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                <span className="text-white font-semibold">{collection?.name}</span> has been purchased.
-                Your NFT will be transferred to your wallet shortly.
+                {t("buyNfa.successModal.desc", "{{name}} has been purchased. Your NFT will be transferred to your wallet shortly.", { name: collection?.name })}
               </p>
               <p className="text-white/30 text-xs mt-2">
-                Transfer is processed automatically via our system.
+                {t("buyNfa.successModal.note", "Transfer is processed automatically via our system.")}
               </p>
             </div>
 
@@ -2316,13 +2317,13 @@ function Buy1() {
                 className="w-full h-11 rounded-xl text-white font-semibold text-sm transition-all"
                 style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
               >
-                View in My Profile
+                {t("buyNfa.successModal.viewProfile", "View in My Profile")}
               </button>
               <button
                 onClick={() => { setPurchaseSuccess(false); navigate("/market-place"); }}
                 className="w-full h-10 rounded-xl text-white/50 hover:text-white text-sm transition-colors"
               >
-                Continue Shopping
+                {t("buyNfa.successModal.continueShopping", "Continue Shopping")}
               </button>
             </div>
           </div>
@@ -2351,16 +2352,15 @@ function Buy1() {
               style={{ background: "rgba(239,68,68,0.1)", border: "2px solid rgba(239,68,68,0.35)" }}
             >
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <path d="M20 13v9M20 27h.01" stroke="#ef4444" strokeWidth="3" strokeLinecap="round"/>
-                <path d="M17.3 6.5L3.5 31a3 3 0 002.6 4.5h27.8a3 3 0 002.6-4.5L22.7 6.5a3 3 0 00-5.4 0z" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M20 13v9M20 27h.01" stroke="#ef4444" strokeWidth="3" strokeLinecap="round" />
+                <path d="M17.3 6.5L3.5 31a3 3 0 002.6 4.5h27.8a3 3 0 002.6-4.5L22.7 6.5a3 3 0 00-5.4 0z" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
 
             <div>
-              <h2 className="text-white text-xl font-bold mb-1">Payment Received — Transfer Pending</h2>
+              <h2 className="text-white text-xl font-bold mb-1">{t("buyNfa.transferFailed.title", "Payment Received — Transfer Pending")}</h2>
               <p className="text-white/50 text-sm leading-relaxed">
-                Your payment was successful, but the NFT transfer encountered an issue.
-                Your funds are safe — our team will complete the transfer manually.
+                {t("buyNfa.transferFailed.desc", "Your payment was successful, but the NFT transfer encountered an issue. Your funds are safe — our team will complete the transfer manually.")}
               </p>
               <div
                 className="mt-3 px-3 py-2 rounded-lg text-left"
@@ -2378,13 +2378,13 @@ function Buy1() {
                 className="w-full h-11 rounded-xl text-white font-semibold text-sm transition-all"
                 style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.35)" }}
               >
-                View My Profile
+                {t("buyNfa.transferFailed.viewProfile", "View My Profile")}
               </button>
               <button
                 onClick={() => setTransferFailed(null)}
                 className="w-full h-10 rounded-xl text-white/40 hover:text-white text-sm transition-colors"
               >
-                Dismiss
+                {t("buyNfa.transferFailed.dismiss", "Dismiss")}
               </button>
             </div>
           </div>

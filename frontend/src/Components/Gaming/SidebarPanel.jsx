@@ -191,7 +191,7 @@ const CSS = `
 `;
 
 const BTN_BASE = {
-  padding: "9px 14px", width: "100%",
+  padding: "9px 14px", whiteSpace: "nowrap",
   background: "rgba(4,18,36,0.82)",
   backdropFilter: "blur(8px)",
   border: "1px solid rgba(0,229,255,0.18)",
@@ -206,12 +206,13 @@ const BTN_BASE = {
 };
 
 /* ── Shared panel shell ──────────────────────────────────────── */
-function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile = false, showSubtitle = false }) {
+function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile = false, showSubtitle = false, panelRight }) {
   const { t } = useTranslation();
+  const rightVal = isMobile ? "18vw" : panelRight;
   return (
     <div className="hud-side-panel" style={{
       position: "absolute",
-      right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
+      right: rightVal,
       top:       isMobile ? "60px"  : "21vh",
       width:     isMobile ? 290     : 460,
       maxHeight: isMobile ? "75vh"  : "70vh",
@@ -256,7 +257,7 @@ function SidePanel({ title, accentColor = "#00E5FF", onClose, children, isMobile
 }
 
 /* ── Events panel ────────────────────────────────────────────── */
-function EventsPanel({ onClose, isMobile }) {
+function EventsPanel({ onClose, isMobile, panelRight }) {
   const { t } = useTranslation();
   const [tab,      setTab]      = useState("Limited");
   const [detail,   setDetail]   = useState(null);
@@ -273,7 +274,7 @@ function EventsPanel({ onClose, isMobile }) {
   };
 
   return (
-    <SidePanel title={t("hud.eventCenter", "EVENT CENTER")} onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.eventCenter", "EVENT CENTER")} onClose={onClose} isMobile={isMobile} showSubtitle panelRight={panelRight}>
 
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(0,229,255,0.1)" }}>
@@ -369,7 +370,7 @@ function EventsPanel({ onClose, isMobile }) {
 }
 
 /* ── Items panel ─────────────────────────────────────────────── */
-function ItemsPanel({ onClose, isMobile }) {
+function ItemsPanel({ onClose, isMobile, panelRight }) {
   const { t } = useTranslation();
   const [tab,          setTab]          = useState("Inventory");
   const [specCategory, setSpecCategory] = useState(null);   // selected specialist category
@@ -377,7 +378,7 @@ function ItemsPanel({ onClose, isMobile }) {
   const items = ITEM_DATA[tab] || [];
 
   return (
-    <SidePanel title={t("hud.sidebar.items", "ITEMS")} accentColor="#38bdf8" onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.sidebar.items", "ITEMS")} accentColor="#38bdf8" onClose={onClose} isMobile={isMobile} showSubtitle panelRight={panelRight}>
 
       {/* ── Tabs ── */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(56,189,248,0.1)", overflowX:"auto" }}>
@@ -476,7 +477,7 @@ function ItemsPanel({ onClose, isMobile }) {
           <>
             <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.12em", marginBottom:8,
-            }}>SELECT CATEGORY</div>
+            }}>{t("hud.selectCategory", "SELECT CATEGORY")}</div>
             <div style={{ display:"grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(3,1fr)", gap: isMobile ? 6 : 10 }}>
               {SPECIALIST_CATEGORIES.map(cat => {
                 const locked = CATEGORY_LOCKED[cat];
@@ -504,7 +505,7 @@ function ItemsPanel({ onClose, isMobile }) {
                     {locked && (
                       <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                         color:"rgba(157,216,240,0.75)", letterSpacing:"0.1em",
-                      }}>COMING SOON</div>
+                      }}>{t("hud.comingSoon", "COMING SOON")}</div>
                     )}
                   </button>
                 );
@@ -520,7 +521,7 @@ function ItemsPanel({ onClose, isMobile }) {
               background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.1em",
-            }}>← BACK</button>
+            }}>{t("hud.back", "← BACK")}</button>
             <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
               color: CATEGORY_COLOR[specCategory], letterSpacing:"0.12em", marginBottom:8,
             }}>{specCategory.toUpperCase()}</div>
@@ -551,7 +552,7 @@ function ItemsPanel({ onClose, isMobile }) {
                   </div>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
                     color:"rgba(56,189,248,0.7)", letterSpacing:"0.06em",
-                  }}>VIEW →</div>
+                  }}>{t("hud.viewArrow", "VIEW →")}</div>
                 </div>
               ))}
             </div>
@@ -565,7 +566,7 @@ function ItemsPanel({ onClose, isMobile }) {
               background:"none", border:"none", cursor:"pointer", padding:"0 0 8px 0",
               fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"rgba(56,189,248,0.8)",
               letterSpacing:"0.1em",
-            }}>← BACK</button>
+            }}>{t("hud.back", "← BACK")}</button>
             <div style={{
               background:"rgba(3,10,28,0.92)", border:`1px solid ${profile.color}44`,
               borderRadius:6, padding: isMobile ? "12px 10px" : "16px 14px",
@@ -589,7 +590,7 @@ function ItemsPanel({ onClose, isMobile }) {
               <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
                 color:"rgba(157,216,240,0.7)", textAlign:"center", lineHeight:1.6,
               }}>
-                Specialist profile — full stats and abilities will be available when the game launches.
+                {t("hud.specialistProfileDesc", "Specialist profile — full stats and abilities will be available when the game launches.")}
               </div>
             </div>
           </>
@@ -601,7 +602,7 @@ function ItemsPanel({ onClose, isMobile }) {
 }
 
 /* ── Settings panel ─────────────────────────────────────────── */
-function SettingsPanel({ onClose, isMobile }) {
+function SettingsPanel({ onClose, isMobile, autoTranslate, setAutoTranslate, panelRight }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [sound, setSound]   = useState(true);
@@ -609,7 +610,6 @@ function SettingsPanel({ onClose, isMobile }) {
   const [name,  setName]    = useState(localStorage.getItem("hypertek_display_name") || "");
   const [saved, setSaved]   = useState(false);
   const [currentLang, setCurrentLang] = useState(i18n.language || "en");
-  const [autoTranslate, setAutoTranslate] = useState(true);
   const [chatLangs, setChatLangs] = useState(() =>
     Object.fromEntries(HUD_LANGS.map(l => [l.code, true]))
   );
@@ -655,7 +655,7 @@ function SettingsPanel({ onClose, isMobile }) {
   );
 
   return (
-    <SidePanel title={t("hud.sidebar.settings", "SETTINGS")} accentColor="#a78bfa" onClose={onClose} isMobile={isMobile}>
+    <SidePanel title={t("hud.sidebar.settings", "SETTINGS")} accentColor="#a78bfa" onClose={onClose} isMobile={isMobile} panelRight={panelRight}>
       <div style={{ overflowY:"auto", flex:1 }}>
 
         {/* Sound & Music */}
@@ -885,30 +885,30 @@ const ALLIANCE_MEMBERS = [
 ];
 
 const ALLIANCE_MAILS = [
-  { from: "SYSTEM",         subject: "Alliance War Results",     time: "2h ago", unread: true  },
-  { from: "Commander Rex",  subject: "New Strategy Plan",        time: "5h ago", unread: true  },
-  { from: "SYSTEM",         subject: "Weekly Donation Summary",  time: "1d ago", unread: false },
-  { from: "Warden-7",       subject: "Meeting at 18:00",         time: "2d ago", unread: false },
-  { from: "SYSTEM",         subject: "Alliance Level Up!",       time: "3d ago", unread: false },
+  { key: "warResults",      from: "SYSTEM",         subject: "Alliance War Results",     time: "2h ago", unread: true  },
+  { key: "strategyPlan",    from: "Commander Rex",  subject: "New Strategy Plan",        time: "5h ago", unread: true  },
+  { key: "donationSummary", from: "SYSTEM",         subject: "Weekly Donation Summary",  time: "1d ago", unread: false },
+  { key: "meeting1800",     from: "Warden-7",       subject: "Meeting at 18:00",         time: "2d ago", unread: false },
+  { key: "levelUp",         from: "SYSTEM",         subject: "Alliance Level Up!",       time: "3d ago", unread: false },
 ];
 
 const ALLIANCE_MANAGE = [
-  { action: "Edit Alliance Info",     desc: "Change name, tag & description"        },
-  { action: "Manage Join Requests",   desc: "Review and accept new members"         },
-  { action: "Set Donation Goals",     desc: "Configure weekly donation targets"      },
-  { action: "Alliance War Settings",  desc: "Configure war participation rules"      },
-  { action: "Kick Members",           desc: "Remove inactive or rule-breaking members" },
+  { key: "editInfo",      action: "Edit Alliance Info",     desc: "Change name, tag & description"           },
+  { key: "joinRequests",  action: "Manage Join Requests",   desc: "Review and accept new members"            },
+  { key: "donationGoals", action: "Set Donation Goals",     desc: "Configure weekly donation targets"         },
+  { key: "warSettings",   action: "Alliance War Settings",  desc: "Configure war participation rules"         },
+  { key: "kickMembers",   action: "Kick Members",           desc: "Remove inactive or rule-breaking members"  },
 ];
 
 /* ── Alliance panel ──────────────────────────────────────────── */
-function AlliancePanel({ onClose, isMobile }) {
+function AlliancePanel({ onClose, isMobile, panelRight }) {
   const { t } = useTranslation();
   const [tab, setTab] = useState("Members");
 
   const statusColor = (s) => s === "Online" ? "#4ade80" : s === "Away" ? "#fbbf24" : "#64748b";
 
   return (
-    <SidePanel title={t("hud.sidebar.alliance", "ALLIANCE")} accentColor="#fbbf24" onClose={onClose} isMobile={isMobile} showSubtitle>
+    <SidePanel title={t("hud.sidebar.alliance", "ALLIANCE")} accentColor="#fbbf24" onClose={onClose} isMobile={isMobile} showSubtitle panelRight={panelRight}>
 
       {/* Tabs */}
       <div style={{ display:"flex", borderBottom:"1px solid rgba(251,191,36,0.15)", flexShrink:0 }}>
@@ -949,7 +949,7 @@ function AlliancePanel({ onClose, isMobile }) {
                   }}>{m.name}</div>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                     color:"rgba(251,191,36,0.55)", letterSpacing:"0.06em", marginTop:2,
-                  }}>{m.rank}</div>
+                  }}>{t(`hud.alliance.rank.${m.rank.replace(/[- ]/g,"").toLowerCase()}`, m.rank)}</div>
                 </div>
               </div>
               <div style={{ display:"flex", alignItems:"center", gap: isMobile ? 6 : 8, flexShrink:0 }}>
@@ -957,7 +957,7 @@ function AlliancePanel({ onClose, isMobile }) {
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9, color:"#fbbf24", letterSpacing:"0.04em" }}>{m.power}</div>
                   <div style={{ display:"flex", alignItems:"center", gap:3, justifyContent:"flex-end", marginTop:2 }}>
                     <div style={{ width:5, height:5, borderRadius:"50%", background:statusColor(m.status) }}/>
-                    <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 5 : 7, color:statusColor(m.status) }}>{m.status}</span>
+                    <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 5 : 7, color:statusColor(m.status) }}>{t(`hud.alliance.status.${m.status.toLowerCase()}`, m.status)}</span>
                   </div>
                 </div>
                 <span style={{ fontSize: isMobile ? 9 : 11 }}>🔒</span>
@@ -984,7 +984,7 @@ function AlliancePanel({ onClose, isMobile }) {
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
                     color: m.unread ? "#fde68a" : "#c4a84a", letterSpacing:"0.06em",
                     whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis",
-                  }}>{m.subject}</div>
+                  }}>{t(`hud.alliance.allianceMail.${m.key}`, m.subject)}</div>
                 </div>
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"rgba(251,191,36,0.45)", letterSpacing:"0.04em" }}>
                   {m.from} · {m.time}
@@ -1009,8 +1009,8 @@ function AlliancePanel({ onClose, isMobile }) {
               <div>
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
                   color:"#e2d9a0", letterSpacing:"0.06em", marginBottom:2,
-                }}>{m.action}</div>
-                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"rgba(251,191,36,0.45)", letterSpacing:"0.04em" }}>{m.desc}</div>
+                }}>{t(`hud.alliance.manage.${m.key}`, m.action)}</div>
+                <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8, color:"rgba(251,191,36,0.45)", letterSpacing:"0.04em" }}>{t(`hud.alliance.manage.${m.key}Desc`, m.desc)}</div>
               </div>
               <span style={{ fontSize: isMobile ? 9 : 11, marginLeft:8, flexShrink:0 }}>🔒</span>
             </div>
@@ -1026,20 +1026,20 @@ function AlliancePanel({ onClose, isMobile }) {
 const MAIL_CATS = ["ALL", "SYSTEM", "ALLIANCE", "EVENTS", "BATTLE"];
 
 const MAIL_MESSAGES = [
-  { cat: "SYSTEM",   from: "HyperTek System",  subject: "Welcome to HyperTek!",          time: "Just now", unread: true  },
-  { cat: "SYSTEM",   from: "HyperTek System",  subject: "Server Maintenance Notice",     time: "1h ago",   unread: true  },
-  { cat: "ALLIANCE", from: "Commander Rex",    subject: "Alliance War Announcement",     time: "3h ago",   unread: false },
-  { cat: "EVENTS",   from: "Events Team",      subject: "Galactic Cup Registration",     time: "1d ago",   unread: false },
-  { cat: "BATTLE",   from: "Battle System",    subject: "Your base was attacked!",       time: "1d ago",   unread: false },
-  { cat: "SYSTEM",   from: "HyperTek System",  subject: "Daily Login Reward Ready",      time: "2d ago",   unread: false },
-  { cat: "EVENTS",   from: "Events Team",      subject: "Refining Master Event Starts",  time: "3d ago",   unread: false },
-  { cat: "ALLIANCE", from: "Warden-7",         subject: "Meeting at 18:00",              time: "4d ago",   unread: false },
+  { key: "welcome",       cat: "SYSTEM",   from: "HyperTek System",  subject: "Welcome to HyperTek!",          time: "Just now", unread: true  },
+  { key: "maintenance",   cat: "SYSTEM",   from: "HyperTek System",  subject: "Server Maintenance Notice",     time: "1h ago",   unread: true  },
+  { key: "allianceWar",   cat: "ALLIANCE", from: "Commander Rex",    subject: "Alliance War Announcement",     time: "3h ago",   unread: false },
+  { key: "galacticCup",   cat: "EVENTS",   from: "Events Team",      subject: "Galactic Cup Registration",     time: "1d ago",   unread: false },
+  { key: "baseAttacked",  cat: "BATTLE",   from: "Battle System",    subject: "Your base was attacked!",       time: "1d ago",   unread: false },
+  { key: "loginReward",   cat: "SYSTEM",   from: "HyperTek System",  subject: "Daily Login Reward Ready",      time: "2d ago",   unread: false },
+  { key: "refiningEvent", cat: "EVENTS",   from: "Events Team",      subject: "Refining Master Event Starts",  time: "3d ago",   unread: false },
+  { key: "meeting1800",   cat: "ALLIANCE", from: "Warden-7",         subject: "Meeting at 18:00",              time: "4d ago",   unread: false },
 ];
 
 const MAIL_CAT_COLOR = { ALL:"#00E5FF", SYSTEM:"#94a3b8", ALLIANCE:"#fbbf24", EVENTS:"#4ade80", BATTLE:"#f87171" };
 
 /* ── Mail panel ─────────────────────────────────────────────── */
-function MailPanel({ onClose, isMobile }) {
+function MailPanel({ onClose, isMobile, panelRight }) {
   const { t } = useTranslation();
   const [cat, setCat] = useState("ALL");
   const filtered = cat === "ALL" ? MAIL_MESSAGES : MAIL_MESSAGES.filter(m => m.cat === cat);
@@ -1047,7 +1047,7 @@ function MailPanel({ onClose, isMobile }) {
   return (
     <div className="hud-side-panel" style={{
       position:"absolute",
-      right: isMobile ? "18vw" : "calc(8.5vw + 4px)",
+      right: isMobile ? "18vw" : panelRight,
       top:   isMobile ? "60px" : "21vh",
       width: isMobile ? 310 : 560,
       maxHeight: isMobile ? "75vh" : "70vh",
@@ -1112,11 +1112,11 @@ function MailPanel({ onClose, isMobile }) {
                   <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 5 : 7,
                     letterSpacing:"0.1em", color:col, background:`${col}18`,
                     padding:"1px 5px", borderRadius:3, border:`1px solid ${col}33`, flexShrink:0,
-                  }}>{m.cat}</span>
+                  }}>{t(`hud.mailCats.${m.cat.toLowerCase()}`, m.cat)}</span>
                   <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 8 : 10, fontWeight:"bold",
                     color: m.unread ? "#c7e9f7" : "rgba(157,216,240,0.75)",
                     whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis", letterSpacing:"0.05em",
-                  }}>{m.subject}</div>
+                  }}>{t(`hud.mailSubjects.${m.key}`, m.subject)}</div>
                 </div>
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                   color:"rgba(100,160,200,0.5)", letterSpacing:"0.04em",
@@ -1135,21 +1135,21 @@ function MailPanel({ onClose, isMobile }) {
 const CHAT_TABS_LIST = ["WORLD", "ALLIANCE", "TRADE"];
 
 const CHAT_MESSAGES = [
-  { tab:"WORLD",    user:"Commander Rex", msg:"Anyone up for alliance war tonight?",   time:"14:32", color:"#f87171" },
-  { tab:"WORLD",    user:"Pilot Zara",   msg:"GG on the last race, great speed run",  time:"14:28", color:"#22c55e" },
-  { tab:"WORLD",    user:"Dr. Nova",     msg:"Trading plasma rods for tech books",    time:"14:15", color:"#a78bfa" },
-  { tab:"WORLD",    user:"Iron Mace",    msg:"Need help with the asteroid mission",   time:"13:58", color:"#fb923c" },
-  { tab:"WORLD",    user:"Warden-7",     msg:"Our alliance is recruiting, DM me",     time:"13:44", color:"#94a3b8" },
-  { tab:"ALLIANCE", user:"Commander Rex", msg:"Donation goals: plasma rods needed!",  time:"14:40", color:"#f87171" },
-  { tab:"ALLIANCE", user:"Warden-7",     msg:"War starts in 2 hours, prepare",        time:"14:35", color:"#94a3b8" },
-  { tab:"ALLIANCE", user:"Medic Ryn",    msg:"I will handle the medical support",     time:"14:30", color:"#f0abfc" },
-  { tab:"TRADE",    user:"Mechanic Kole", msg:"WTS: 50 engines, PM me",               time:"14:20", color:"#fcd34d" },
-  { tab:"TRADE",    user:"Medic Ryn",    msg:"WTB: Anti-gravity modules x10",         time:"14:10", color:"#f0abfc" },
-  { tab:"TRADE",    user:"Ace Vega",     msg:"Selling rare skins, check profile",     time:"13:55", color:"#38bdf8" },
+  { key:"allianceWarTonight",   tab:"WORLD",    user:"Commander Rex",  msg:"Anyone up for alliance war tonight?",   time:"14:32", color:"#f87171" },
+  { key:"ggLastRace",           tab:"WORLD",    user:"Pilot Zara",     msg:"GG on the last race, great speed run",  time:"14:28", color:"#22c55e" },
+  { key:"tradingPlasma",        tab:"WORLD",    user:"Dr. Nova",       msg:"Trading plasma rods for tech books",    time:"14:15", color:"#a78bfa" },
+  { key:"needHelpAsteroid",     tab:"WORLD",    user:"Iron Mace",      msg:"Need help with the asteroid mission",   time:"13:58", color:"#fb923c" },
+  { key:"allianceRecruiting",   tab:"WORLD",    user:"Warden-7",       msg:"Our alliance is recruiting, DM me",     time:"13:44", color:"#94a3b8" },
+  { key:"donationGoalsPlasma",  tab:"ALLIANCE", user:"Commander Rex",  msg:"Donation goals: plasma rods needed!",   time:"14:40", color:"#f87171" },
+  { key:"warStarts2Hours",      tab:"ALLIANCE", user:"Warden-7",       msg:"War starts in 2 hours, prepare",        time:"14:35", color:"#94a3b8" },
+  { key:"handleMedicalSupport", tab:"ALLIANCE", user:"Medic Ryn",      msg:"I will handle the medical support",     time:"14:30", color:"#f0abfc" },
+  { key:"wts50Engines",         tab:"TRADE",    user:"Mechanic Kole",  msg:"WTS: 50 engines, PM me",                time:"14:20", color:"#fcd34d" },
+  { key:"wtbAntiGravity",       tab:"TRADE",    user:"Medic Ryn",      msg:"WTB: Anti-gravity modules x10",         time:"14:10", color:"#f0abfc" },
+  { key:"sellingRareSkins",     tab:"TRADE",    user:"Ace Vega",       msg:"Selling rare skins, check profile",     time:"13:55", color:"#38bdf8" },
 ];
 
 /* ── Chat panel ─────────────────────────────────────────────── */
-function ChatPanel({ onClose, isMobile }) {
+function ChatPanel({ onClose, isMobile, autoTranslate, panelRight }) {
   const { t } = useTranslation();
   const [tab, setTab] = useState("WORLD");
   const msgs = CHAT_MESSAGES.filter(m => m.tab === tab);
@@ -1157,7 +1157,7 @@ function ChatPanel({ onClose, isMobile }) {
   return (
     <div className="hud-side-panel" style={{
       position:"absolute",
-      right: isMobile ? "18vw" : "calc(8.5vw + 7px)",
+      right: isMobile ? "18vw" : panelRight,
       top:   isMobile ? "60px" : "21vh",
       width: isMobile ? 220 : 340,
       maxHeight: isMobile ? "62vh" : "58vh",
@@ -1199,6 +1199,29 @@ function ChatPanel({ onClose, isMobile }) {
         ))}
       </div>
 
+      {/* Auto-translate indicator */}
+      <div style={{
+        padding: isMobile ? "3px 8px" : "4px 10px",
+        background: autoTranslate ? "rgba(0,229,255,0.06)" : "rgba(255,255,255,0.03)",
+        borderBottom: "1px solid rgba(0,229,255,0.08)",
+        flexShrink: 0,
+        display: "flex", alignItems: "center", gap: 4,
+      }}>
+        <div style={{
+          width: 5, height: 5, borderRadius: "50%", flexShrink: 0,
+          background: autoTranslate ? "#00E5FF" : "rgba(157,216,240,0.25)",
+          boxShadow: autoTranslate ? "0 0 5px rgba(0,229,255,0.7)" : "none",
+        }}/>
+        <span style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 7,
+          color: autoTranslate ? "rgba(0,229,255,0.7)" : "rgba(157,216,240,0.3)",
+          letterSpacing: "0.05em",
+        }}>
+          {autoTranslate
+            ? t("hud.chat.autoTranslateOn", "Auto-translate ON — Messages delivered in each recipient's language")
+            : t("hud.chat.autoTranslateOff", "Auto-translate OFF")}
+        </span>
+      </div>
+
       {/* Messages */}
       <div className="chat-scroll" style={{ overflowY:"auto", flex:1, padding: isMobile ? "6px 8px" : "8px 10px",
         display:"flex", flexDirection:"column", gap: isMobile ? 5 : 7 }}>
@@ -1222,7 +1245,7 @@ function ChatPanel({ onClose, isMobile }) {
                 <span style={{ fontSize: isMobile ? 7 : 9, marginLeft:"auto" }}>🔒</span>
               </div>
               <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 9,
-                color:"rgba(157,216,240,0.6)", lineHeight:1.5, wordBreak:"break-word" }}>{m.msg}</div>
+                color:"rgba(157,216,240,0.6)", lineHeight:1.5, wordBreak:"break-word" }}>{t(`hud.chatMessages.${m.key}`, m.msg)}</div>
             </div>
           </div>
         ))}
@@ -1260,6 +1283,32 @@ export default function SidebarPanel() {
   const isMobile = useMobileLandscape();
   const [openPanel, setOpenPanel] = useState(null);
   const sidebarRef = useRef(null);
+  const buttonsRef = useRef(null);
+  const [panelRight, setPanelRight] = useState("calc(8.5vw + 4px)");
+
+  const [autoTranslate, setAutoTranslate] = useState(() => {
+    const saved = localStorage.getItem("hypertek_auto_translate");
+    return saved !== null ? saved === "true" : true;
+  });
+
+  const handleSetAutoTranslate = (val) => {
+    setAutoTranslate(val);
+    localStorage.setItem("hypertek_auto_translate", String(val));
+  };
+
+  useEffect(() => {
+    const updatePanelRight = () => {
+      if (buttonsRef.current) {
+        const w = buttonsRef.current.offsetWidth;
+        setPanelRight(`calc(2.5vw + ${w + 10}px)`);
+      }
+    };
+    updatePanelRight();
+    const obs = new ResizeObserver(updatePanelRight);
+    if (buttonsRef.current) obs.observe(buttonsRef.current);
+    window.addEventListener("resize", updatePanelRight);
+    return () => { obs.disconnect(); window.removeEventListener("resize", updatePanelRight); };
+  }, []);
 
   const toggle = (key) => setOpenPanel(p => p === key ? null : key);
 
@@ -1283,11 +1332,12 @@ export default function SidebarPanel() {
       <style>{CSS}</style>
 
       {/* ── Buttons ── */}
-      <div style={{
+      <div ref={buttonsRef} style={{
         position: "absolute",
-        left: isMobile ? "85vw" : "91.5vw", right: isMobile ? "3vw" : "2.5vw",
+        right: isMobile ? "3vw" : "2.5vw",
         top: isMobile ? "60px" : "18vh",
         display: "flex", flexDirection: "column",
+        alignItems: "stretch",
         gap: isMobile ? 2 : 4,
         zIndex: 30, padding: "0 4px",
       }}>
@@ -1306,12 +1356,12 @@ export default function SidebarPanel() {
       </div>
 
       {/* ── Panels ── */}
-      {openPanel === "events"   && <EventsPanel   onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "items"    && <ItemsPanel    onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "settings" && <SettingsPanel onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
-      {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} />}
+      {openPanel === "events"   && <EventsPanel   onClose={() => setOpenPanel(null)} isMobile={isMobile} panelRight={panelRight} />}
+      {openPanel === "items"    && <ItemsPanel    onClose={() => setOpenPanel(null)} isMobile={isMobile} panelRight={panelRight} />}
+      {openPanel === "settings" && <SettingsPanel onClose={() => setOpenPanel(null)} isMobile={isMobile} autoTranslate={autoTranslate} setAutoTranslate={handleSetAutoTranslate} panelRight={panelRight} />}
+      {openPanel === "alliance" && <AlliancePanel onClose={() => setOpenPanel(null)} isMobile={isMobile} panelRight={panelRight} />}
+      {openPanel === "mail"     && <MailPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} panelRight={panelRight} />}
+      {openPanel === "chat"     && <ChatPanel     onClose={() => setOpenPanel(null)} isMobile={isMobile} autoTranslate={autoTranslate} panelRight={panelRight} />}
     </div>
   );
 }

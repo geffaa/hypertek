@@ -35,7 +35,7 @@ async function saveImagePermanently(filePath, filename) {
       });
       return result.secure_url;
     } finally {
-      fs.unlink(filePath, () => {});
+      fs.unlink(filePath, () => { });
     }
   } else {
     const finalDir = path.join(process.cwd(), "uploads", "nft");
@@ -111,7 +111,7 @@ export async function createParentCollection(req, res) {
       doc,
     });
   } catch (err) {
-    console.error("❌ CREATE PARENT COLLECTION ERROR:", err);
+    console.error(" CREATE PARENT COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -133,7 +133,7 @@ export async function createItemDirect(req, res) {
     const userId = req.user?._id || req.user?.id || null;
 
     if (!name?.trim()) return res.status(400).json({ error: "Item name is required" });
-    if (!owner)        return res.status(400).json({ error: "Wallet address is required" });
+    if (!owner) return res.status(400).json({ error: "Wallet address is required" });
 
     const normalizedCategory = (category || "general").toLowerCase().trim();
     if (!VALID_CATEGORIES.includes(normalizedCategory)) {
@@ -164,8 +164,8 @@ export async function createItemDirect(req, res) {
     if (!parent) {
       // Deterministic symbol: catCode (up to 4 chars) + last 4 chars of userId/owner
       // Same inputs always produce the same symbol — no random collision
-      const catCode  = normalizedCategory.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase();
-      const idSeed   = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
+      const catCode = normalizedCategory.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase();
+      const idSeed = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
       parent = await NFTSystem.create({
         userId,
         collection: {
@@ -193,7 +193,7 @@ export async function createItemDirect(req, res) {
       if (!reservePriceUSD || parseFloat(reservePriceUSD) <= 0) {
         return res.status(400).json({ error: "NFA requires a Reserve Price (listing price, > 0)." });
       }
-      const minBB  = parseFloat(minimumBuybackUSD);
+      const minBB = parseFloat(minimumBuybackUSD);
       const reserve = parseFloat(reservePriceUSD);
       const maxAllowed = parseFloat((reserve * 0.35).toFixed(2));
       if (minBB > maxAllowed) {
@@ -244,7 +244,7 @@ export async function createItemDirect(req, res) {
       parentId: parent._id,
     });
   } catch (err) {
-    console.error("❌ CREATE ITEM DIRECT ERROR:", err);
+    console.error(" CREATE ITEM DIRECT ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -305,7 +305,7 @@ export async function addSubCollection(req, res) {
       newSubCollection: parent.subCollections[parent.subCollections.length - 1],
     });
   } catch (err) {
-    console.error("❌ ADD SUB-COLLECTION ERROR:", err);
+    console.error(" ADD SUB-COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -322,9 +322,9 @@ export async function getParentCollections(req, res) {
     if (category) {
       // Accept canonical names AND their legacy DB aliases
       const CAT_ALIASES = {
-        "military badges":  ["military badges", "military badges and collectables"],
-        "racing vehicles":  ["racing vehicles", "vehicles"],
-        "land and bases":   ["land and bases", "land/bases"],
+        "military badges": ["military badges", "military badges and collectables"],
+        "racing vehicles": ["racing vehicles", "vehicles"],
+        "land and bases": ["land and bases", "land/bases"],
       };
       const normalized = category.toLowerCase().trim();
       const searchValues = CAT_ALIASES[normalized] || [normalized];
@@ -345,7 +345,7 @@ export async function getParentCollections(req, res) {
       count: collections.length,
     });
   } catch (err) {
-    console.error("❌ GET PARENT COLLECTIONS ERROR:", err);
+    console.error(" GET PARENT COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -373,7 +373,7 @@ export async function getSubCollections(req, res) {
       count: parent.subCollections.length,
     });
   } catch (err) {
-    console.error("❌ GET SUB-COLLECTIONS ERROR:", err);
+    console.error(" GET SUB-COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -406,7 +406,7 @@ export async function updateSubCollection(req, res) {
       const currentCat = parent.category?.toLowerCase().trim();
       if (newCat !== currentCat && VALID_CATEGORIES.includes(newCat)) {
         const userId = req.user?._id || req.user?.id || parent.userId || null;
-        const owner  = subCollection.owner;
+        const owner = subCollection.owner;
 
         // Find or create new parent for this user+category
         let newParent = await NFTSystem.findOne({
@@ -417,7 +417,7 @@ export async function updateSubCollection(req, res) {
         });
         if (!newParent) {
           const catCode = newCat.replace(/[^a-z]/gi, "").slice(0, 4).toUpperCase();
-          const idSeed  = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
+          const idSeed = (userId || owner || "").toString().replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase().padStart(4, "0");
           newParent = await NFTSystem.create({
             userId,
             collection: { name: newCat, symbol: `${catCode}${idSeed}`, Type: "ERC721", chain: "Base", image: "", owner, creator: "user", salesCount: 0 },
@@ -430,7 +430,7 @@ export async function updateSubCollection(req, res) {
 
         // Update image if provided before moving
         if (req.file) subCollection.image = await saveImagePermanently(req.file.path, req.file.filename);
-        if (name)        subCollection.name        = name;
+        if (name) subCollection.name = name;
         if (description !== undefined) subCollection.description = description;
 
         // Move: remove from current parent, push to new parent
@@ -452,11 +452,11 @@ export async function updateSubCollection(req, res) {
     const callerRole = req.user?.Role || req.user?.role || "";
     const callerIsAdmin = callerRole.toLowerCase() === "admin";
 
-    if (name)                        subCollection.name        = name;
-    if (symbol)                      subCollection.symbol      = symbol;
-    if (description !== undefined)   subCollection.description = description;
-    if (priceETH !== undefined)      subCollection.priceETH    = parseFloat(priceETH);
-    if (listed !== undefined)        subCollection.listed      = listed;
+    if (name) subCollection.name = name;
+    if (symbol) subCollection.symbol = symbol;
+    if (description !== undefined) subCollection.description = description;
+    if (priceETH !== undefined) subCollection.priceETH = parseFloat(priceETH);
+    if (listed !== undefined) subCollection.listed = listed;
 
     // Asset type — admin-only field.
     // Non-admins cannot set assetType to NFA or NFC (NFA=Hypertek only, NFC=requires license gating by admin).
@@ -467,7 +467,7 @@ export async function updateSubCollection(req, res) {
         });
       }
       subCollection.assetType = assetType;
-      subCollection.isNFA     = assetType === "NFA";
+      subCollection.isNFA = assetType === "NFA";
     } else if (isNFA !== undefined) {
       // Legacy fallback — block non-admins from setting isNFA=true
       const nfaBool = isNFA === "true" || isNFA === true;
@@ -476,7 +476,7 @@ export async function updateSubCollection(req, res) {
           error: "Only admins can designate items as NFA.",
         });
       }
-      subCollection.isNFA     = nfaBool;
+      subCollection.isNFA = nfaBool;
       subCollection.assetType = nfaBool ? "NFA" : (subCollection.assetType || "NFT");
     }
 
@@ -491,9 +491,9 @@ export async function updateSubCollection(req, res) {
 
     // Min BB — enforce max 35% of listing price
     if (minimumBuybackUSD !== undefined && minimumBuybackUSD !== "") {
-      const minBB       = parseFloat(minimumBuybackUSD);
-      const listPrice   = parseFloat(priceETH ?? subCollection.priceETH ?? 0);
-      const maxAllowed  = parseFloat((listPrice * 0.35).toFixed(2));
+      const minBB = parseFloat(minimumBuybackUSD);
+      const listPrice = parseFloat(priceETH ?? subCollection.priceETH ?? 0);
+      const maxAllowed = parseFloat((listPrice * 0.35).toFixed(2));
       if (listPrice > 0 && minBB > maxAllowed) {
         return res.status(400).json({
           error: `Minimum buyback ($${minBB}) exceeds the 35% cap of listing price ($${listPrice}). Maximum allowed: $${maxAllowed}.`,
@@ -525,7 +525,7 @@ export async function updateSubCollection(req, res) {
       subCollection,
     });
   } catch (err) {
-    console.error("❌ UPDATE SUB-COLLECTION ERROR:", err);
+    console.error(" UPDATE SUB-COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -564,7 +564,7 @@ export async function deleteSubCollection(req, res) {
       message: "Sub-collection deleted successfully",
     });
   } catch (err) {
-    console.error("❌ DELETE SUB-COLLECTION ERROR:", err);
+    console.error(" DELETE SUB-COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -579,7 +579,7 @@ export async function mintSubCollection(req, res) {
     const { parentId, subCollectionId, tokenURI, royaltyBps, creatorWallet } =
       req.body;
 
-    // ✅ Validation
+    // Validation
     if (!parentId || !subCollectionId || !tokenURI || !creatorWallet) {
       return res.status(400).json({
         success: false,
@@ -595,7 +595,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Find parent collection
+    // Find parent collection
     const parent = await NFTSystem.findById(parentId);
     if (!parent) {
       return res.status(404).json({
@@ -604,7 +604,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Find sub-collection within parent
+    // Find sub-collection within parent
     const subCollection = parent.subCollections.id(subCollectionId);
     if (!subCollection) {
       return res.status(404).json({
@@ -613,7 +613,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Check if already minted
+    // Check if already minted
     if (subCollection.tokenId) {
       return res.status(400).json({
         success: false,
@@ -622,7 +622,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ BlockChain Initialization
+    // BlockChain Initialization
     const chainId = req.body.chainId || 84532; // Default to Base Sepolia if not provided
     console.log(`🔗 Minting on Chain ID: ${chainId}`);
 
@@ -635,7 +635,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Backend wallet balance check
+    // Backend wallet balance check
     const backendWallet = await backendWalletObj.getAddress();
     const balance = await provider.getBalance(backendWallet);
 
@@ -652,11 +652,11 @@ export async function mintSubCollection(req, res) {
     let tx, receipt, tokenId;
 
     try {
-      // ✅ Fetch the latest confirmed nonce to avoid NONCE_EXPIRED errors
+      // Fetch the latest confirmed nonce to avoid NONCE_EXPIRED errors
       let currentNonce = await provider.getTransactionCount(backendWallet, "latest");
       console.log(`📡 Current Nonce: ${currentNonce}`);
 
-      // ✅ Mint NFT on blockchain
+      // Mint NFT on blockchain
       console.log("🎨 Minting NFT...");
       console.log("- TokenURI:", tokenURI);
       console.log("- RoyaltyBps:", royaltyBps || 500);
@@ -665,10 +665,10 @@ export async function mintSubCollection(req, res) {
       console.log("📤 Mint Transaction sent:", tx.hash);
 
       receipt = await tx.wait();
-      console.log("✅ Confirmed in block:", receipt.blockNumber);
+      console.log("Confirmed in block:", receipt.blockNumber);
       currentNonce++; // Increment nonce for next tx
 
-      // ✅ Extract TokenId from events
+      // Extract TokenId from events
       if (receipt.logs) {
         for (const log of receipt.logs) {
           try {
@@ -704,10 +704,10 @@ export async function mintSubCollection(req, res) {
       }
 
       if (tokenId === undefined) {
-        throw new Error("❌ Failed to retrieve Token ID from transaction receipt. Logs did not contain Transfer or Minted event.");
+        throw new Error(" Failed to retrieve Token ID from transaction receipt. Logs did not contain Transfer or Minted event.");
       }
 
-      // ✅ Transfer ownership (with L2 node indexing retry loop)
+      // Transfer ownership (with L2 node indexing retry loop)
       let owner;
       let retries = 20;
       while (retries > 0) {
@@ -715,8 +715,8 @@ export async function mintSubCollection(req, res) {
           // If this succeeds, the node has indexed the token!
           owner = await nftContract.ownerOf(tokenId);
           if (owner) {
-             console.log(`✅ Node indexed Token #${tokenId}. Owner is ${owner}.`);
-             break;
+            console.log(`Node indexed Token #${tokenId}. Owner is ${owner}.`);
+            break;
           }
         } catch (err) {
           console.log(`⏳ Node hasn't indexed Token #${tokenId} yet... (${retries - 1} left)`);
@@ -726,7 +726,7 @@ export async function mintSubCollection(req, res) {
       }
 
       if (retries === 0) {
-        throw new Error(`❌ Blockchain node failed to index NFT #${tokenId} after 60 seconds.`);
+        throw new Error(` Blockchain node failed to index NFT #${tokenId} after 60 seconds.`);
       }
 
       console.log(`⚠️ Transferring token ${tokenId} from backend to ${creatorWallet}...`);
@@ -737,15 +737,15 @@ export async function mintSubCollection(req, res) {
         { nonce: currentNonce }
       );
       await transferTx.wait();
-      console.log("✅ NFT transferred to:", creatorWallet);
+      console.log("NFT transferred to:", creatorWallet);
       currentNonce++;
 
-      // ✅ Mark as sold so smart contract treats next sale as secondary
+      // Mark as sold so smart contract treats next sale as secondary
       const markTx = await nftContract.markAsSold(tokenId, { nonce: currentNonce });
       await markTx.wait();
-      console.log("✅ Marked as sold on contract (isFirstSale = false)");
+      console.log("Marked as sold on contract (isFirstSale = false)");
     } catch (mintErr) {
-      console.error("❌ Mint error:", mintErr);
+      console.error(" Mint error:", mintErr);
 
       let errorMessage = "Failed to mint NFT";
 
@@ -764,7 +764,7 @@ export async function mintSubCollection(req, res) {
       });
     }
 
-    // ✅ Update Database - ONLY sub-collection
+    // Update Database - ONLY sub-collection
     console.log("💾 Updating database...");
 
     subCollection.tokenId = tokenId;
@@ -772,10 +772,10 @@ export async function mintSubCollection(req, res) {
     subCollection.owner = creatorWallet.toLowerCase();
     subCollection.listed = false;
 
-    // ✅ Record Mint as First Sale
+    // Record Mint as First Sale
     console.log("📝 Recording Mint Sale...");
     const mintPrice = req.body.priceETH || subCollection.priceETH || 0;
-    
+
     const deployerWallet = (process.env.PLATFORM_WALLET_ADDRESS || "").toLowerCase();
     const saleRecord = {
       buyer: creatorWallet.toLowerCase(),
@@ -791,18 +791,18 @@ export async function mintSubCollection(req, res) {
 
     if (!subCollection.salesHistory) subCollection.salesHistory = [];
     subCollection.salesHistory.push(saleRecord);
-    
+
     // Mark as sold (next sale will be secondary)
-    subCollection.isFirstSale = false; 
-    
+    subCollection.isFirstSale = false;
+
     // Increment parent sales count
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
 
-    // ✅ FORCE SAVE
+    // FORCE SAVE
     parent.markModified('subCollections');
     await parent.save();
 
-    console.log("✅ Mint completed!");
+    console.log("Mint completed!");
     console.log("- TokenId:", tokenId);
     console.log("- Owner:", creatorWallet.toLowerCase());
     console.log("- Sub-collection updated in database");
@@ -825,7 +825,7 @@ export async function mintSubCollection(req, res) {
       blockNumber: receipt.blockNumber,
     });
   } catch (err) {
-    console.error("❌ SERVER ERROR:", err);
+    console.error(" SERVER ERROR:", err);
 
     return res.status(500).json({
       success: false,
@@ -912,7 +912,7 @@ export async function createCollection(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ CREATE COLLECTION ERROR:", err);
+    console.error(" CREATE COLLECTION ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -989,7 +989,7 @@ export async function serverMint(req, res) {
       console.log("📤 Transaction sent:", tx.hash);
 
       receipt = await tx.wait();
-      console.log("✅ Confirmed in block:", receipt.blockNumber);
+      console.log("Confirmed in block:", receipt.blockNumber);
 
       // Extract TokenId from events
       for (const log of receipt.logs) {
@@ -1037,7 +1037,7 @@ export async function serverMint(req, res) {
 
       // Check and transfer ownership if needed
       const owner = await nftContract.ownerOf(tokenId);
-      console.log("✅ Current owner:", owner);
+      console.log("Current owner:", owner);
 
       const expectedOwner = creatorWallet.toLowerCase();
       const actualOwner = owner.toLowerCase();
@@ -1052,13 +1052,13 @@ export async function serverMint(req, res) {
             tokenId,
           );
           await transferTx.wait();
-          console.log("✅ NFT transferred to:", creatorWallet);
+          console.log("NFT transferred to:", creatorWallet);
         } else {
           throw new Error(`Cannot transfer - owned by: ${actualOwner}`);
         }
       }
     } catch (mintErr) {
-      console.error("❌ Mint error:", mintErr);
+      console.error(" Mint error:", mintErr);
 
       let errorMessage = "Failed to mint NFT";
 
@@ -1092,7 +1092,7 @@ export async function serverMint(req, res) {
       { new: true },
     );
 
-    console.log("✅ Mint completed!");
+    console.log("Mint completed!");
     console.log("- TokenId:", tokenId);
     console.log("- Owner:", creatorWallet);
 
@@ -1106,7 +1106,7 @@ export async function serverMint(req, res) {
       blockNumber: receipt.blockNumber,
     });
   } catch (err) {
-    console.error("❌ SERVER ERROR:", err);
+    console.error(" SERVER ERROR:", err);
 
     return res.status(500).json({
       success: false,
@@ -1143,7 +1143,7 @@ export async function createListing(req, res) {
       return res.status(404).json({ error: "NFT not found" });
     }
 
-    console.log(`✅ NFT ${tokenId} listed for ${priceETH} ETH`);
+    console.log(`NFT ${tokenId} listed for ${priceETH} ETH`);
 
     return res.json({
       success: true,
@@ -1151,7 +1151,7 @@ export async function createListing(req, res) {
       nft,
     });
   } catch (err) {
-    console.error("❌ CREATE LISTING ERROR:", err);
+    console.error(" CREATE LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1229,7 +1229,7 @@ export async function recordOnchainSale(req, res) {
       });
     }
 
-    // ✅ CRITICAL: Sanitize priceETH — parseFloat to ensure clean number, never scientific notation
+    // CRITICAL: Sanitize priceETH — parseFloat to ensure clean number, never scientific notation
     const cleanPrice = parseFloat(String(priceETH));
     if (isNaN(cleanPrice) || cleanPrice <= 0) {
       return res.status(400).json({
@@ -1276,7 +1276,7 @@ export async function recordOnchainSale(req, res) {
 
     await nft.save();
 
-    console.log(`✅ Sale recorded: Token ${tokenId} sold to ${buyer} for ${priceUSDC} USDC`);
+    console.log(`Sale recorded: Token ${tokenId} sold to ${buyer} for ${priceUSDC} USDC`);
 
     return res.json({
       success: true,
@@ -1291,7 +1291,7 @@ export async function recordOnchainSale(req, res) {
       paymentDistribution: distribution,
     });
   } catch (err) {
-    console.error("❌ RECORD SALE ERROR:", err);
+    console.error(" RECORD SALE ERROR:", err);
     return res.status(500).json({
       success: false,
       error: err.message,
@@ -1332,42 +1332,42 @@ function calculatePaymentDistribution(
 
   if (isFirstSale && creatorIsAdmin && assetType === "NFA") {
     // ── Scenario A: NFA — Hypertek first sale ─────────────────────────────────
-    creatorAmount  = fmt(priceETH * 0.04);
-    buybackAmount  = fmt(Math.max(0, Math.min(presetMinBB, priceETH - creatorAmount)));
-    sellerAmount   = fmt(priceETH - creatorAmount - buybackAmount);
-    companyAmount  = 0;
+    creatorAmount = fmt(priceETH * 0.04);
+    buybackAmount = fmt(Math.max(0, Math.min(presetMinBB, priceETH - creatorAmount)));
+    sellerAmount = fmt(priceETH - creatorAmount - buybackAmount);
+    companyAmount = 0;
     platformAmount = fmt(creatorAmount + buybackAmount);
 
   } else if (isFirstSale && creatorIsAdmin) {
     // ── Scenario B: NFC/NFT — Hypertek first sale ─────────────────────────────
     const sellerGross = fmt(priceETH * 0.80);
-    creatorAmount  = fmt(priceETH * 0.04);
-    companyAmount  = fmt(priceETH * 0.16);
-    buybackAmount  = fmt(Math.min(presetMinBB, sellerGross));
-    sellerAmount   = fmt(sellerGross - buybackAmount);
+    creatorAmount = fmt(priceETH * 0.04);
+    companyAmount = fmt(priceETH * 0.16);
+    buybackAmount = fmt(Math.min(presetMinBB, sellerGross));
+    sellerAmount = fmt(sellerGross - buybackAmount);
     platformAmount = fmt(creatorAmount + companyAmount + buybackAmount);
 
   } else if (isFirstSale && !creatorIsAdmin) {
     // ── Scenario C: NFC/NFT — Player first sale ───────────────────────────────
-    sellerAmount   = fmt(priceETH * 0.80);
-    creatorAmount  = 0;  // creator IS the seller
-    buybackAmount  = fmt(priceETH * 0.10);
-    companyAmount  = fmt(priceETH * 0.10);
+    sellerAmount = fmt(priceETH * 0.80);
+    creatorAmount = 0;  // creator IS the seller
+    buybackAmount = fmt(priceETH * 0.10);
+    companyAmount = fmt(priceETH * 0.10);
     platformAmount = fmt(priceETH * 0.20);
 
   } else {
     // ── Scenario D: Resale — all asset types ──────────────────────────────────
-    sellerAmount   = fmt(priceETH * 0.80);
-    creatorAmount  = fmt(priceETH * 0.04);
-    buybackAmount  = fmt(priceETH * 0.05);
-    companyAmount  = fmt(priceETH * 0.11);
+    sellerAmount = fmt(priceETH * 0.80);
+    creatorAmount = fmt(priceETH * 0.04);
+    buybackAmount = fmt(priceETH * 0.05);
+    companyAmount = fmt(priceETH * 0.11);
     platformAmount = fmt(priceETH * 0.20);
   }
 
   const payments = [
-    { recipient: sellerWallet,   amount: sellerAmount,  percentage: Math.round((sellerAmount  / priceETH) * 100), type: "seller_proceeds" },
-    { recipient: creatorWallet,  amount: creatorAmount, percentage: Math.round((creatorAmount / priceETH) * 100), type: "artist_royalty"  },
-    { recipient: "buyback_fund", amount: buybackAmount, percentage: Math.round((buybackAmount / priceETH) * 100), type: "buyback_fund"    },
+    { recipient: sellerWallet, amount: sellerAmount, percentage: Math.round((sellerAmount / priceETH) * 100), type: "seller_proceeds" },
+    { recipient: creatorWallet, amount: creatorAmount, percentage: Math.round((creatorAmount / priceETH) * 100), type: "artist_royalty" },
+    { recipient: "buyback_fund", amount: buybackAmount, percentage: Math.round((buybackAmount / priceETH) * 100), type: "buyback_fund" },
     { recipient: platformWallet, amount: companyAmount, percentage: Math.round((companyAmount / priceETH) * 100), type: "company_account" },
   ].filter(p => p.amount > 0);
 
@@ -1409,7 +1409,7 @@ export async function getListingDetails(req, res) {
       blockchainListing,
     });
   } catch (err) {
-    console.error("❌ GET LISTING ERROR:", err);
+    console.error(" GET LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1434,7 +1434,7 @@ export async function getPopularCollections(req, res) {
       count: collections.length,
     });
   } catch (err) {
-    console.error("❌ GET POPULAR COLLECTIONS ERROR:", err);
+    console.error(" GET POPULAR COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1501,7 +1501,7 @@ export async function getRoyaltiesSummary(req, res) {
       })),
     });
   } catch (err) {
-    console.error("❌ GET ROYALTIES ERROR:", err);
+    console.error(" GET ROYALTIES ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1545,7 +1545,7 @@ export async function getPlatformRevenue(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ GET PLATFORM REVENUE ERROR:", err);
+    console.error(" GET PLATFORM REVENUE ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1818,7 +1818,7 @@ export async function cancelListing(req, res) {
       return res.status(404).json({ error: "NFT not found" });
     }
 
-    console.log(`✅ Listing cancelled for Token #${tokenId}`);
+    console.log(`Listing cancelled for Token #${tokenId}`);
 
     return res.json({
       success: true,
@@ -1826,7 +1826,7 @@ export async function cancelListing(req, res) {
       nft,
     });
   } catch (err) {
-    console.error("❌ CANCEL LISTING ERROR:", err);
+    console.error(" CANCEL LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1850,7 +1850,7 @@ export async function getNFTsByWallet(req, res) {
       nfts,
     });
   } catch (err) {
-    console.error("❌ GET NFTs BY WALLET ERROR:", err);
+    console.error(" GET NFTs BY WALLET ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -1964,7 +1964,7 @@ export async function getNFTsWithSubCollections(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ GET NFTs WITH SUB-COLLECTIONS ERROR:", err);
+    console.error(" GET NFTs WITH SUB-COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -2034,7 +2034,7 @@ export async function createSubCollectionListing(req, res) {
       });
     }
 
-    console.log("✅ Found parent:", parent._id);
+    console.log("Found parent:", parent._id);
 
     // Find sub-collection
     const subCollection = subCollectionId
@@ -2045,7 +2045,7 @@ export async function createSubCollectionListing(req, res) {
       return res.status(404).json({ error: "Sub-collection not found" });
     }
 
-    console.log("✅ Found sub-collection:", subCollection._id);
+    console.log("Found sub-collection:", subCollection._id);
 
     // Verify ownership — skip if sub has no owner set (platform first-sale item)
     if (subCollection.owner && subCollection.owner !== "admin") {
@@ -2080,7 +2080,7 @@ export async function createSubCollectionListing(req, res) {
       "vehicles": "racing vehicles",
       "land/bases": "land and bases",
     };
-    const VALID_CATS = ["skins","military badges","specialists","weapons","body armour","spaceships","racing vehicles","artwork","land and bases","general"];
+    const VALID_CATS = ["skins", "military badges", "specialists", "weapons", "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general"];
     const rawCat = (parent.category || parent.collection?.name || "general").toLowerCase().trim();
     const normCat = CAT_ALIAS[rawCat] || (VALID_CATS.includes(rawCat) ? rawCat : "general");
 
@@ -2101,7 +2101,7 @@ export async function createSubCollectionListing(req, res) {
       status: "active",
     });
 
-    console.log(`✅ Sub-collection ${subCollection._id} listed for ${priceETH} USDC`);
+    console.log(`Sub-collection ${subCollection._id} listed for ${priceETH} USDC`);
 
     return res.json({
       success: true,
@@ -2110,7 +2110,7 @@ export async function createSubCollectionListing(req, res) {
       parentId: parent._id,
     });
   } catch (err) {
-    console.error("❌ CREATE SUB-COLLECTION LISTING ERROR:", err);
+    console.error(" CREATE SUB-COLLECTION LISTING ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -2170,17 +2170,17 @@ export async function recordSubCollectionSale(req, res) {
     // Validate transaction on blockchain
     // Validate transaction on blockchain
     // Default to Base Sepolia if no chainId provided
-    const chainId = req.body.chainId || 84532; 
+    const chainId = req.body.chainId || 84532;
     const { provider } = getBlockchain(chainId);
 
     if (provider) {
       try {
         const tx = await provider.getTransaction(txHash);
         if (!tx) {
-           return res.status(400).json({
-             success: false,
-             error: "Transaction not found on blockchain",
-           });
+          return res.status(400).json({
+            success: false,
+            error: "Transaction not found on blockchain",
+          });
         }
 
         // We could wait for receipt here, but usually frontend sends this after confirmation
@@ -2189,7 +2189,7 @@ export async function recordSubCollectionSale(req, res) {
         console.error("Transaction validation error:", txErr);
       }
     } else {
-       console.warn("⚠️ No provider available for transaction validation");
+      console.warn("⚠️ No provider available for transaction validation");
     }
 
     // Find parent collection
@@ -2236,7 +2236,7 @@ export async function recordSubCollectionSale(req, res) {
     const creatorWallet =
       parent.collection?.royaltyWallet || parent.collection?.owner;
 
-    // ✅ Sanitize priceETH to prevent scientific notation in DB (e.g. 2e-10 → 200)
+    // Sanitize priceETH to prevent scientific notation in DB (e.g. 2e-10 → 200)
     const cleanPrice = parseFloat(String(priceETH));
     const priceUSDC = isNaN(cleanPrice) ? 0 : parseFloat(cleanPrice.toFixed(6));
     console.log(`💰 Sub-collection sale: ${priceUSDC} USDC (raw received: ${priceETH})`);
@@ -2252,10 +2252,10 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     // ── Determine sale scenario params ────────────────────────────────────────
-    const itemAssetType   = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
-    const wasFirstSale    = subCollection.isFirstSale !== false; // default true for new items
-    const creatorIsAdmin  = parent.collection?.creator === "admin";
-    const presetMinBB     = subCollection.minimumBuybackUSD || 0;
+    const itemAssetType = subCollection.assetType || (subCollection.isNFA ? "NFA" : "NFT");
+    const wasFirstSale = subCollection.isFirstSale !== false; // default true for new items
+    const creatorIsAdmin = parent.collection?.creator === "admin";
+    const presetMinBB = subCollection.minimumBuybackUSD || 0;
 
     // ── Calculate payment distribution (per Don's brief — all scenarios) ─────
     const distribution = calculatePaymentDistribution(
@@ -2270,15 +2270,15 @@ export async function recordSubCollectionSale(req, res) {
 
     // Create sale record
     const saleRecord = {
-      buyer:          buyer.toLowerCase(),
-      seller:         seller.toLowerCase(),
-      priceETH:       priceUSDC,
-      royaltyPaid:    parseFloat(distribution.creatorAmount.toFixed(6)),
-      platformFee:    parseFloat(distribution.platformAmount.toFixed(6)),
+      buyer: buyer.toLowerCase(),
+      seller: seller.toLowerCase(),
+      priceETH: priceUSDC,
+      royaltyPaid: parseFloat(distribution.creatorAmount.toFixed(6)),
+      platformFee: parseFloat(distribution.platformAmount.toFixed(6)),
       sellerReceived: parseFloat(distribution.sellerAmount.toFixed(6)),
-      txHash:         txHash,
-      isFirstSale:    wasFirstSale,
-      createdAt:      new Date(),
+      txHash: txHash,
+      isFirstSale: wasFirstSale,
+      createdAt: new Date(),
     };
 
     console.log("📝 Adding Sale Record:", saleRecord);
@@ -2289,9 +2289,9 @@ export async function recordSubCollectionSale(req, res) {
     }
 
     subCollection.salesHistory.push(saleRecord);
-    subCollection.owner  = buyer.toLowerCase();
+    subCollection.owner = buyer.toLowerCase();
     subCollection.seller = null;
-    subCollection.buyer  = null;
+    subCollection.buyer = null;
     subCollection.listed = false;
     subCollection.priceETH = null;
 
@@ -2324,31 +2324,31 @@ export async function recordSubCollectionSale(req, res) {
     // Update parent collection sales count
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
 
-    // ✅ FORCE SAVE with extra logging
+    // FORCE SAVE with extra logging
     console.log("💾 Saving Parent Collection...");
     parent.markModified('subCollections');
-    
+
     const savedParent = await parent.save();
-    
+
     // Verify save
     const savedSub = savedParent.subCollections.id(subCollection._id);
-    console.log("✅ Saved Sub-Collection Sales History Length:", savedSub?.salesHistory?.length);
-    console.log("✅ Saved Sub-Collection Owner:", savedSub?.owner);
-    console.log("✅ Saved Sub-Collection Listed:", savedSub?.listed);
+    console.log("Saved Sub-Collection Sales History Length:", savedSub?.salesHistory?.length);
+    console.log("Saved Sub-Collection Owner:", savedSub?.owner);
+    console.log("Saved Sub-Collection Listed:", savedSub?.listed);
 
     console.log(
-      `✅ Sub-collection sale recorded: Token ${tokenId} sold to ${buyer}`,
+      `Sub-collection sale recorded: Token ${tokenId} sold to ${buyer}`,
     );
 
     // Dispatch artist royalty (4%) — non-blocking
     if (distribution.creatorAmount > 0 && creatorWallet && creatorWallet !== "admin") {
       dispatchRoyalty({
         subCollectionId: subCollection._id.toString(),
-        parentId:        parent._id.toString(),
+        parentId: parent._id.toString(),
         creatorWallet,
-        amount:          distribution.creatorAmount,
-        payoutType:      "artist_royalty",
-        note:            `${itemAssetType} artist royalty 4%`,
+        amount: distribution.creatorAmount,
+        payoutType: "artist_royalty",
+        note: `${itemAssetType} artist royalty 4%`,
       }).catch(err => console.warn("⚠️ [RoyaltyService] dispatch error:", err.message));
     }
 
@@ -2358,11 +2358,11 @@ export async function recordSubCollectionSale(req, res) {
       if (buybackWallet) {
         dispatchRoyalty({
           subCollectionId: subCollection._id.toString(),
-          parentId:        parent._id.toString(),
-          creatorWallet:   buybackWallet,
-          amount:          distribution.buybackAmount,
-          payoutType:      "buyback_fund",
-          note:            `${itemAssetType} buyback fund 5%`,
+          parentId: parent._id.toString(),
+          creatorWallet: buybackWallet,
+          amount: distribution.buybackAmount,
+          payoutType: "buyback_fund",
+          note: `${itemAssetType} buyback fund 5%`,
         }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
       }
     }
@@ -2373,11 +2373,11 @@ export async function recordSubCollectionSale(req, res) {
       if (platformWallet) {
         dispatchRoyalty({
           subCollectionId: subCollection._id.toString(),
-          parentId:        parent._id.toString(),
-          creatorWallet:   platformWallet,
-          amount:          distribution.companyAmount,
-          payoutType:      "company_fee",
-          note:            `${itemAssetType} company fee 11%`,
+          parentId: parent._id.toString(),
+          creatorWallet: platformWallet,
+          amount: distribution.companyAmount,
+          payoutType: "company_fee",
+          note: `${itemAssetType} company fee 11%`,
         }).catch(err => console.warn("⚠️ [PlatformFee] dispatch error:", err.message));
       }
     }
@@ -2391,15 +2391,15 @@ export async function recordSubCollectionSale(req, res) {
 
     // Write to Activity log (non-blocking)
     Activity.create({
-      name:     subCollection.name || parent.name || "NFT",
-      image:    subCollection.image || null,
-      type:     "Sale",
-      buyer:    buyer.toLowerCase(),
-      seller:   seller.toLowerCase(),
-      price:    priceUSDC,
-      time:     new Date(),
+      name: subCollection.name || parent.name || "NFT",
+      image: subCollection.image || null,
+      type: "Sale",
+      buyer: buyer.toLowerCase(),
+      seller: seller.toLowerCase(),
+      price: priceUSDC,
+      time: new Date(),
       itemType: "NFA",
-      itemId:   parent._id,
+      itemId: parent._id,
     }).catch(err => console.warn("⚠️ [Activity] create error:", err.message));
 
     return res.json({
@@ -2416,7 +2416,7 @@ export async function recordSubCollectionSale(req, res) {
       parentId: parent._id,
     });
   } catch (err) {
-    console.error("❌ RECORD SUB-COLLECTION SALE ERROR:", err);
+    console.error(" RECORD SUB-COLLECTION SALE ERROR:", err);
     return res.status(500).json({
       success: false,
       error: err.message,
@@ -2446,14 +2446,14 @@ export async function cancelSubCollectionListing(req, res) {
     // 2. Find parent collection
     const parent = await NFTSystem.findById(nftId);
     if (!parent) {
-      console.error("❌ Parent collection not found with ID:", nftId);
+      console.error(" Parent collection not found with ID:", nftId);
       return res.status(404).json({
         success: false,
         error: "Parent collection not found",
       });
     }
 
-    console.log("✅ Found parent:", {
+    console.log("Found parent:", {
       id: parent._id,
       name: parent.collection?.name,
       subCollectionsCount: parent.subCollections?.length || 0,
@@ -2474,14 +2474,14 @@ export async function cancelSubCollectionListing(req, res) {
     }
 
     if (!subCollection) {
-      console.error("❌ Sub-collection not found. subId:", subId, "tokenId:", tokenId);
+      console.error(" Sub-collection not found. subId:", subId, "tokenId:", tokenId);
       return res.status(404).json({
         success: false,
         error: `Sub-collection not found`,
       });
     }
 
-    console.log("✅ Found sub-collection:", {
+    console.log("Found sub-collection:", {
       _id: subCollection._id,
       tokenId: subCollection.tokenId,
       listed: subCollection.listed,
@@ -2520,12 +2520,12 @@ export async function cancelSubCollectionListing(req, res) {
 
     const cancelledVenues = [];
     if (auctionResult.modifiedCount > 0) cancelledVenues.push(`${auctionResult.modifiedCount} auction(s)`);
-    if (tradeResult.modifiedCount > 0)   cancelledVenues.push(`${tradeResult.modifiedCount} trade(s)`);
+    if (tradeResult.modifiedCount > 0) cancelledVenues.push(`${tradeResult.modifiedCount} trade(s)`);
     if (cancelledVenues.length > 0) {
       console.log(`🚫 [Unlist cascade] Also cancelled: ${cancelledVenues.join(", ")} for subCollection ${subCollection._id}`);
     }
 
-    console.log("✅ Successfully cancelled listing:", {
+    console.log("Successfully cancelled listing:", {
       subId: subCollection._id,
       tokenId: subCollection.tokenId,
       newListed: false,
@@ -2541,7 +2541,7 @@ export async function cancelSubCollectionListing(req, res) {
       cancelledVenues,
     });
   } catch (err) {
-    console.error("❌ CANCEL SUB-COLLECTION LISTING ERROR:", {
+    console.error(" CANCEL SUB-COLLECTION LISTING ERROR:", {
       message: err.message,
       stack: err.stack,
       body: req.body,
@@ -2605,7 +2605,7 @@ export async function getOwnedSubCollectionsOnly(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ GET OWNED SUB-COLLECTIONS ERROR:", err);
+    console.error(" GET OWNED SUB-COLLECTIONS ERROR:", err);
     return res.status(500).json({ error: err.message });
   }
 }
@@ -2637,7 +2637,7 @@ export async function getListedSubCollections(req, res) {
       status: "active",
     }).select("collection.name collection.image category subCollections isParentCollection");
 
-    console.log("✅ Found parent collections:", parents.length);
+    console.log("Found parent collections:", parents.length);
 
     // Extract only LISTED sub-collections owned by this wallet
     const listedSubCollections = [];
@@ -2667,7 +2667,7 @@ export async function getListedSubCollections(req, res) {
           tokenURI: sub.tokenURI,
           createdAt: sub.createdAt,
           parentInfo: {
-            parentId: parent._id, // ✅ CRITICAL - parent ID for cancel listing
+            parentId: parent._id, // CRITICAL - parent ID for cancel listing
             parentName: parent.collection?.name,
             parentImage: parent.collection?.image,
             category: parent.category,
@@ -2677,7 +2677,7 @@ export async function getListedSubCollections(req, res) {
     });
 
     console.log(
-      "✅ Total listed sub-collections:",
+      "Total listed sub-collections:",
       listedSubCollections.length,
     );
 
@@ -2691,7 +2691,7 @@ export async function getListedSubCollections(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ GET LISTED SUB-COLLECTIONS ERROR:", err);
+    console.error(" GET LISTED SUB-COLLECTIONS ERROR:", err);
     return res.status(500).json({
       success: false,
       error: err.message,
@@ -2735,7 +2735,7 @@ export async function getDashboardStats(req, res) {
       ]
     }).select('createdAt tokenId');
 
-    console.log("✅ Regular Minted NFTs:", regularMintedNFTs.length);
+    console.log("Regular Minted NFTs:", regularMintedNFTs.length);
 
     // 2. Sub-collections with tokenId (minted)
     const parentsWithMintedSubs = await NFTSystem.aggregate([
@@ -2754,7 +2754,7 @@ export async function getDashboardStats(req, res) {
       }
     ]);
 
-    console.log("✅ Minted Sub-Collections:", parentsWithMintedSubs.length);
+    console.log("Minted Sub-Collections:", parentsWithMintedSubs.length);
 
     // Combine both for Total Buy
     const totalBuyCount = regularMintedNFTs.length + parentsWithMintedSubs.length;
@@ -2777,7 +2777,7 @@ export async function getDashboardStats(req, res) {
       ]
     }).select('createdAt tokenId priceETH');
 
-    console.log("✅ Regular Listed NFTs:", regularListedNFTs.length);
+    console.log("Regular Listed NFTs:", regularListedNFTs.length);
 
     // 2. Sub-collections that are listed
     const parentsWithListedSubs = await NFTSystem.aggregate([
@@ -2798,7 +2798,7 @@ export async function getDashboardStats(req, res) {
       }
     ]);
 
-    console.log("✅ Listed Sub-Collections:", parentsWithListedSubs.length);
+    console.log("Listed Sub-Collections:", parentsWithListedSubs.length);
 
     // Combine both for Total Sell
     const totalSellCount = regularListedNFTs.length + parentsWithListedSubs.length;
@@ -2830,7 +2830,7 @@ export async function getDashboardStats(req, res) {
     const offerData = [];
 
     // ==================== FINAL RESPONSE ====================
-    console.log("✅ Dashboard Stats Compiled Successfully");
+    console.log("Dashboard Stats Compiled Successfully");
     console.log("Summary:", {
       totalUsers,
       totalBuy: totalBuyCount,
@@ -2861,7 +2861,7 @@ export async function getDashboardStats(req, res) {
     });
 
   } catch (err) {
-    console.error("❌ GET DASHBOARD STATS ERROR:", err);
+    console.error(" GET DASHBOARD STATS ERROR:", err);
     return res.status(500).json({
       success: false,
       error: err.message
@@ -2935,7 +2935,7 @@ export async function userUploadNFC(req, res) {
 
     const added = parent.subCollections[parent.subCollections.length - 1];
 
-    console.log(`✅ User NFC uploaded: ${name} into collection ${parent.collection.name} by ${walletAddress || userId}`);
+    console.log(`User NFC uploaded: ${name} into collection ${parent.collection.name} by ${walletAddress || userId}`);
 
     return res.status(201).json({
       success: true,
@@ -2949,7 +2949,7 @@ export async function userUploadNFC(req, res) {
       },
     });
   } catch (err) {
-    console.error("❌ USER UPLOAD NFC ERROR:", err);
+    console.error(" USER UPLOAD NFC ERROR:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
@@ -2979,21 +2979,21 @@ export async function getUserTransactions(req, res) {
       parent.subCollections.forEach((sub) => {
         if (!sub.salesHistory?.length) return;
         sub.salesHistory.forEach((sale) => {
-          const buyerLow  = (sale.buyer  || "").toLowerCase();
+          const buyerLow = (sale.buyer || "").toLowerCase();
           const sellerLow = (sale.seller || "").toLowerCase();
           if (buyerLow !== walletLower && sellerLow !== walletLower) return;
           transactions.push({
-            txHash:         sale.txHash || null,
-            itemName:       sub.name,
+            txHash: sale.txHash || null,
+            itemName: sub.name,
             collectionName: parent.collection?.name || "",
-            category:       parent.category || "",
-            priceETH:       sale.priceETH,
-            buyer:          sale.buyer,
-            seller:         sale.seller,
-            type:           buyerLow === walletLower ? "buy" : "sell",
-            royaltyPaid:    sale.royaltyPaid,
+            category: parent.category || "",
+            priceETH: sale.priceETH,
+            buyer: sale.buyer,
+            seller: sale.seller,
+            type: buyerLow === walletLower ? "buy" : "sell",
+            royaltyPaid: sale.royaltyPaid,
             sellerReceived: sale.sellerReceived,
-            createdAt:      sale.createdAt,
+            createdAt: sale.createdAt,
           });
         });
       });
@@ -3004,7 +3004,7 @@ export async function getUserTransactions(req, res) {
 
     return res.json({ success: true, transactions, count: transactions.length });
   } catch (err) {
-    console.error("❌ GET USER TRANSACTIONS ERROR:", err);
+    console.error(" GET USER TRANSACTIONS ERROR:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
@@ -3033,7 +3033,7 @@ export async function getSubCollectionById(req, res) {
 
     return res.json({ success: true, item: sub, parentId: parent._id });
   } catch (err) {
-    console.error("❌ GET SUB-COLLECTION BY ID ERROR:", err);
+    console.error(" GET SUB-COLLECTION BY ID ERROR:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
@@ -3069,7 +3069,7 @@ export async function getSubCollectionPriceHistory(req, res) {
 
     return res.json({ success: true, history });
   } catch (err) {
-    console.error("❌ GET PRICE HISTORY ERROR:", err);
+    console.error(" GET PRICE HISTORY ERROR:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
 }
@@ -3117,7 +3117,7 @@ export async function finalizeByPaymentIntent(req, res) {
         subCollectionId,
         buyerWallet,
         productId: intent.metadata?.productId || subCollectionId,
-      }).catch(() => {});
+      }).catch(() => { });
     }
 
     // 4. Finalize NFT transfer
@@ -3137,10 +3137,10 @@ export async function finalizeByPaymentIntent(req, res) {
       );
     }
 
-    console.log("✅ [finalizeByPaymentIntent] Done:", result);
+    console.log("[finalizeByPaymentIntent] Done:", result);
     return res.json({ success: true, result });
   } catch (err) {
-    console.error("❌ [finalizeByPaymentIntent] Error:", err.message);
+    console.error(" [finalizeByPaymentIntent] Error:", err.message);
     return res.status(500).json({ success: false, error: err.message });
   }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Target, Gamepad2 } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -15,6 +16,7 @@ const shortAddr = (addr) =>
 
 
 export default function ProfileBountyTab({ wallet, token }) {
+  const { t } = useTranslation();
   const [bounties, setBounties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("all");
@@ -55,12 +57,18 @@ export default function ProfileBountyTab({ wallet, token }) {
       ? bounties
       : bounties.filter((b) => b.role === filter);
 
+  const FILTERS = [
+    { key: "all",       label: t("profile.bounty.filterAll",       "All")       },
+    { key: "posted",    label: t("profile.bounty.filterPosted",    "Posted")    },
+    { key: "completed", label: t("profile.bounty.filterCompleted", "Completed") },
+  ];
+
   // ── Empty / no wallet ──────────────────────────────────────────────────────
   if (!wallet) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
         <Target className="w-10 h-10 opacity-20" />
-        <p className="text-sm">Connect your wallet to view bounty history</p>
+        <p className="text-sm">{t("profile.bounty.noWallet", "Connect your wallet to view bounty history")}</p>
       </div>
     );
   }
@@ -71,26 +79,26 @@ export default function ProfileBountyTab({ wallet, token }) {
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <Target className="w-4 h-4 text-red-400" />
-          <h3 className="text-white font-semibold text-base">Bounty History</h3>
+          <h3 className="text-white font-semibold text-base">{t("profile.bounty.header", "Bounty History")}</h3>
           <span className="text-white/30 text-xs">
-            {filtered.length} record{filtered.length !== 1 ? "s" : ""}
+            {filtered.length} {t("profile.activities.records", "records")}
           </span>
         </div>
 
         {/* Filter */}
         <div className="flex gap-1">
-          {["all", "posted", "completed"].map((f) => (
+          {FILTERS.map((f) => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className="px-3 py-1 rounded-lg text-xs capitalize transition-colors"
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className="px-3 py-1 rounded-lg text-xs transition-colors"
               style={
-                filter === f
+                filter === f.key
                   ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", color: "#fff" }
                   : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
               }
             >
-              {f}
+              {f.label}
             </button>
           ))}
         </div>
@@ -101,7 +109,7 @@ export default function ProfileBountyTab({ wallet, token }) {
         style={{ background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.12)" }}>
         <Gamepad2 className="w-4 h-4 text-red-400 flex-shrink-0" />
         <p className="text-red-300/50 text-xs leading-snug">
-          Bounties are in-game contracts. Posted bounties and completions you've claimed will appear here.
+          {t("profile.bounty.inGameNote", "Bounties are in-game contracts. Posted bounties and completions you've claimed will appear here.")}
         </p>
       </div>
 
@@ -116,8 +124,8 @@ export default function ProfileBountyTab({ wallet, token }) {
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-white/25 gap-3">
           <Target className="w-8 h-8 opacity-20" />
-          <p className="text-sm">No bounty history yet</p>
-          <p className="text-xs text-white/15">Post or complete bounties in-game to see them here</p>
+          <p className="text-sm">{t("profile.bounty.noHistory", "No bounty history yet")}</p>
+          <p className="text-xs text-white/15">{t("profile.bounty.noHistoryHint", "Post or complete bounties in-game to see them here")}</p>
         </div>
       ) : (
         /* ── Table ── */
@@ -126,7 +134,11 @@ export default function ProfileBountyTab({ wallet, token }) {
           <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
             <div className="grid min-w-[560px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1.2fr 1fr" }}>
-              <span>Bounty No</span><span>Hit On</span><span>Rewards</span><span>Completed By</span><span>Status</span>
+              <span>{t("profile.bounty.colBountyNo","Bounty No")}</span>
+              <span>{t("profile.bounty.colHitOn","Hit On")}</span>
+              <span>{t("profile.bounty.colRewards","Rewards")}</span>
+              <span>{t("profile.bounty.colCompletedBy","Completed By")}</span>
+              <span>{t("profile.bounty.colStatus","Status")}</span>
             </div>
           </div>
 
@@ -166,7 +178,7 @@ export default function ProfileBountyTab({ wallet, token }) {
                     {b.reward > 0 ? `${b.reward} HB` : "—"}
                   </span>
                   {b.rewardType === "materials" && (
-                    <span className="text-white/30 text-[10px]">Materials</span>
+                    <span className="text-white/30 text-[10px]">{t("profile.bounty.materials", "Materials")}</span>
                   )}
                 </div>
 

@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
 async function sendKycEmail(toEmail, status, failReason) {
   const isVerified = status === "verified";
   const subject = isVerified
-    ? "✅ Your HyperTek Identity Verification is Complete"
+    ? "Your HyperTek Identity Verification is Complete"
     : "⚠️ Identity Verification Unsuccessful";
 
   const html = isVerified
@@ -61,14 +61,14 @@ async function sendKycEmail(toEmail, status, failReason) {
     });
     console.log(`📧 KYC ${status} email sent to ${toEmail}`);
   } catch (err) {
-    console.error("❌ Failed to send KYC email:", err.message);
+    console.error(" Failed to send KYC email:", err.message);
   }
 }
 
 export const StripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
 
-  console.log("✅ Webhook hit at:", new Date().toISOString());
+  console.log("Webhook hit at:", new Date().toISOString());
   console.log("Headers:", req.headers);
   console.log("Signature:", sig);
   console.log("Raw body length:", req.body.length);
@@ -82,7 +82,7 @@ export const StripeWebhook = async (req, res) => {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-    console.log("✅ Webhook event received:", event.type);
+    console.log("Webhook event received:", event.type);
   } catch (err) {
     console.error("⚠️ Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -152,10 +152,10 @@ export const StripeWebhook = async (req, res) => {
                     description: `Top-up: ${hbAmount} HB ($${(hbAmount / 250).toFixed(2)} USD)`,
                     reference: paymentData.paymentIntentId,
                   });
-                  console.log(`✅ [StripeWebhook] HyperBucks credited: ${hbAmount} HB to user ${topupUserId}`);
+                  console.log(`[StripeWebhook] HyperBucks credited: ${hbAmount} HB to user ${topupUserId}`);
                 }
               } catch (hbErr) {
-                console.error("❌ [StripeWebhook] HyperBucks credit failed:", hbErr.message);
+                console.error(" [StripeWebhook] HyperBucks credit failed:", hbErr.message);
               }
             }
             break;
@@ -163,7 +163,7 @@ export const StripeWebhook = async (req, res) => {
 
           // Handle NFT Purchase if metadata exists
           const { parentId, subCollectionId, buyerWallet, priceETH } = dataObject.metadata || {};
-          
+
           if (subCollectionId && subCollectionId !== "undefined") {
             console.log("🚀 [StripeWebhook] SubCollection metadata found, finalising purchase...");
             try {
@@ -176,7 +176,7 @@ export const StripeWebhook = async (req, res) => {
                 paymentProvider: "stripe",
                 paymentIntentId: paymentData.paymentIntentId
               });
-              console.log("✅ [StripeWebhook] NFT Purchase finalized:", JSON.stringify(result, null, 2));
+              console.log("[StripeWebhook] NFT Purchase finalized:", JSON.stringify(result, null, 2));
 
               // Update payment record with tokenId if available
               if (result && result.tokenId) {
@@ -188,11 +188,11 @@ export const StripeWebhook = async (req, res) => {
             } catch (nftErr) {
               // Payment already recorded as succeeded — mark NFT transfer as pending
               // so support can retry manually. Do NOT return 500 (would cause Stripe to retry payment).
-              console.error("❌ [StripeWebhook] NFT transfer failed after payment:", nftErr.message);
+              console.error(" [StripeWebhook] NFT transfer failed after payment:", nftErr.message);
               await Payment.findOneAndUpdate(
                 { paymentIntentId: paymentData.paymentIntentId },
                 { nftTransferFailed: true, nftTransferError: nftErr.message }
-              ).catch(() => {});
+              ).catch(() => { });
             }
           }
         } else {
@@ -241,13 +241,13 @@ export const StripeWebhook = async (req, res) => {
               "kyc.verifiedAt": new Date(),
               "kyc.failReason": null,
             }, { new: false });
-            console.log(`✅ [StripeWebhook] KYC verified for user ${kycUserId}`);
+            console.log(`[StripeWebhook] KYC verified for user ${kycUserId}`);
             if (kycUser?.Email || kycUser?.email) {
               await sendKycEmail(kycUser.Email || kycUser.email, "verified", null);
             }
           }
         } catch (kycErr) {
-          console.error("❌ [StripeWebhook] KYC verified update failed:", kycErr.message);
+          console.error(" [StripeWebhook] KYC verified update failed:", kycErr.message);
         }
         break;
 
@@ -267,7 +267,7 @@ export const StripeWebhook = async (req, res) => {
             }
           }
         } catch (kycErr) {
-          console.error("❌ [StripeWebhook] KYC failed update failed:", kycErr.message);
+          console.error(" [StripeWebhook] KYC failed update failed:", kycErr.message);
         }
         break;
 
@@ -276,7 +276,7 @@ export const StripeWebhook = async (req, res) => {
         return res.json({ received: true });
     }
 
-    console.log("✅ Webhook event received:", event.type);
+    console.log("Webhook event received:", event.type);
 
     res.json({ received: true });
   } catch (err) {

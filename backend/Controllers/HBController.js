@@ -266,13 +266,13 @@ export async function cashoutHB(req, res) {
     // Create pending ledger entry
     const ledgerEntry = await HBLedger.create({
       userId,
-      type:          "cashout",
-      amount:        -amount,
-      balanceAfter:  user.hyperBucks,
-      description:   `HB cashout via ${method.toUpperCase()}`,
+      type: "cashout",
+      amount: -amount,
+      balanceAfter: user.hyperBucks,
+      description: `HB cashout via ${method.toUpperCase()}`,
       cashoutMethod: method,
       cashoutStatus: "pending",
-      cashoutUSD:    usdAmount,
+      cashoutUSD: usdAmount,
     });
 
     let cashoutResult = { status: "pending", detail: null };
@@ -280,15 +280,15 @@ export async function cashoutHB(req, res) {
     // ── USDC: on-chain transfer ──────────────────────────────────────────────
     if (method === "usdc") {
       try {
-        const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+        const rpcUrl = process.env.BASE_RPC_URL || "https://mainnet.base.org";
         const privateKey = process.env.PRIVATE_KEY;
-        const usdcAddr   = process.env.BASE_USDC_ADDRESS;
+        const usdcAddr = process.env.BASE_USDC_ADDRESS;
 
         if (!privateKey || !usdcAddr) throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not configured");
 
-        const provider    = new ethers.JsonRpcProvider(rpcUrl);
-        const signer      = new ethers.Wallet(privateKey, provider);
-        const usdc        = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
+        const provider = new ethers.JsonRpcProvider(rpcUrl);
+        const signer = new ethers.Wallet(privateKey, provider);
+        const usdc = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
         const amountUnits = ethers.parseUnits(usdAmount.toFixed(6), 6);
 
         const balance = await usdc.balanceOf(await signer.getAddress());
@@ -307,9 +307,9 @@ export async function cashoutHB(req, res) {
         });
 
         cashoutResult = { status: "completed", txHash: tx.hash };
-        console.log(`✅ [HB Cashout] USDC sent: $${usdAmount} → ${walletAddress} | tx: ${tx.hash}`);
+        console.log(`[HB Cashout] USDC sent: $${usdAmount} → ${walletAddress} | tx: ${tx.hash}`);
       } catch (usdcErr) {
-        console.error("❌ [HB Cashout] USDC on-chain transfer failed:", usdcErr.message);
+        console.error(" [HB Cashout] USDC on-chain transfer failed:", usdcErr.message);
         await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
           cashoutStatus: "failed",
           cashoutTxHash: `error: ${usdcErr.message}`,
@@ -330,14 +330,14 @@ export async function cashoutHB(req, res) {
         const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
         const stripePayout = await stripe.payouts.create({
-          amount:                Math.round(usdAmount * 100), // cents
-          currency:              "usd",
-          statement_descriptor:  "HYPERTEK HB",
+          amount: Math.round(usdAmount * 100), // cents
+          currency: "usd",
+          statement_descriptor: "HYPERTEK HB",
           metadata: {
-            userId:      String(userId),
-            hbAmount:    String(amount),
-            ledgerId:    String(ledgerEntry._id),
-            userBank:    user.bankDetails?.bankName || "",
+            userId: String(userId),
+            hbAmount: String(amount),
+            ledgerId: String(ledgerEntry._id),
+            userBank: user.bankDetails?.bankName || "",
             userAccount: user.bankDetails?.accountHolderName || "",
           },
         });
@@ -349,7 +349,7 @@ export async function cashoutHB(req, res) {
         });
 
         cashoutResult = { status: "processing", stripePayoutId };
-        console.log(`✅ [HB Cashout] Stripe payout created: ${stripePayout.id} — $${usdAmount}`);
+        console.log(`[HB Cashout] Stripe payout created: ${stripePayout.id} — $${usdAmount}`);
       } catch (stripeErr) {
         console.warn("⚠️ [HB Cashout] Stripe payout failed:", stripeErr.message);
         // Keep as "pending" — admin processes manually
@@ -361,11 +361,11 @@ export async function cashoutHB(req, res) {
       if (adminEmail) {
         try {
           await transporter.sendMail({
-            from:    process.env.SMTP_USER || process.env.SMTP_EMAIL,
-            to:      adminEmail,
+            from: process.env.SMTP_USER || process.env.SMTP_EMAIL,
+            to: adminEmail,
             subject: `[HyperTek] HB Bank Cashout — $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
             html: `
-              <h2>Hyper Bucks Bank Cashout ${cashoutResult.status === "processing" ? "✅ Stripe Payout Created" : "⏳ Pending Manual Processing"}</h2>
+              <h2>Hyper Bucks Bank Cashout ${cashoutResult.status === "processing" ? "Stripe Payout Created" : "⏳ Pending Manual Processing"}</h2>
               <table border="1" cellpadding="6" cellspacing="0">
                 <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
                 <tr><td><strong>User Email</strong></td><td>${user.Email || user.email || "N/A"}</td></tr>
@@ -395,20 +395,20 @@ export async function cashoutHB(req, res) {
 
     const finalStatus = cashoutResult.status;
     const messageMap = {
-      completed:  `${amount} HB ($${usdAmount}) sent as USDC on-chain successfully.`,
+      completed: `${amount} HB ($${usdAmount}) sent as USDC on-chain successfully.`,
       processing: `${amount} HB ($${usdAmount}) bank payout initiated via Stripe. Admin will process transfer to your account.`,
-      pending:    `${amount} HB ($${usdAmount}) cashout request submitted. Admin will process manually.`,
-      failed:     `Cashout of ${amount} HB failed: ${cashoutResult.error}. Please contact support — your HB may not have been deducted.`,
+      pending: `${amount} HB ($${usdAmount}) cashout request submitted. Admin will process manually.`,
+      failed: `Cashout of ${amount} HB failed: ${cashoutResult.error}. Please contact support — your HB may not have been deducted.`,
     };
 
     return res.status(200).json({
       success: finalStatus !== "failed",
       ledgerEntry,
       usdAmount,
-      newBalance:     user.hyperBucks,
-      cashoutStatus:  finalStatus,
-      cashoutTxHash:  cashoutResult.txHash || cashoutResult.stripePayoutId || null,
-      message:        messageMap[finalStatus] || "Cashout submitted.",
+      newBalance: user.hyperBucks,
+      cashoutStatus: finalStatus,
+      cashoutTxHash: cashoutResult.txHash || cashoutResult.stripePayoutId || null,
+      message: messageMap[finalStatus] || "Cashout submitted.",
     });
   } catch (error) {
     console.error("cashoutHB error:", error);

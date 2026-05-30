@@ -110,7 +110,7 @@ contract Marketplace is ReentrancyGuard {
         emit ListingCancelled(msg.sender, nftAddress, tokenId);
     }
     
-    // ✅ NEW: Handle first sale payments BEFORE minting is completed on backend
+    // NEW: Handle first sale payments BEFORE minting is completed on backend
     function depositFirstSalePayment(address creator, uint256 amount) external nonReentrant {
         require(amount > 0, "Amount must be greater than 0");
         require(creator != address(0), "Invalid creator address");
@@ -160,7 +160,7 @@ contract Marketplace is ReentrancyGuard {
             sellerAmount = price - creatorAmount - platformAmount;
         }
 
-        // ✅ All amounts held in contract escrow — claim via withdraw functions
+        // All amounts held in contract escrow — claim via withdraw functions
         if (creatorAmount > 0) creatorBalance[creator] += creatorAmount;
         if (platformAmount > 0) platformBalance += platformAmount;
         if (sellerAmount > 0) sellerBalance[seller] += sellerAmount;

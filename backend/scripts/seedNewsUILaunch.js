@@ -26,20 +26,20 @@ One universe. Three games. Unlimited potential. The future of gaming starts here
 
 async function seed() {
   await mongoose.connect(process.env.MONGODB_URL);
-  console.log("✅ Connected to MongoDB");
+  console.log("Connected to MongoDB");
 
   const exists = await News.findOne({ heading: ARTICLE.heading });
   if (exists) {
     console.log("ℹ️  Article already exists, skipping.");
   } else {
     await News.create(ARTICLE);
-    console.log("✅ News article inserted successfully.");
+    console.log("News article inserted successfully.");
   }
 
   await mongoose.disconnect();
 }
 
 seed().catch((err) => {
-  console.error("❌ Seed failed:", err.message);
+  console.error(" Seed failed:", err.message);
   process.exit(1);
 });

@@ -25,25 +25,25 @@ const ERC20_ABI = [
 ];
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, "../Config/.env") });
 
 // ── Payout model ──────────────────────────────────────────────────────────────
 const royaltyPayoutSchema = new mongoose.Schema(
   {
     subCollectionId: String,
-    parentId:        String,
-    saleRecordId:    String,
-    creatorWallet:   String,
-    amount:          { type: Number, required: true },
-    currency:        { type: String, default: "USDC" },
+    parentId: String,
+    saleRecordId: String,
+    creatorWallet: String,
+    amount: { type: Number, required: true },
+    currency: { type: String, default: "USDC" },
     // "crypto" = send USDC to wallet | "bank" = manual Wise transfer
-    paymentType:     { type: String, enum: ["crypto", "bank"], default: "crypto" },
+    paymentType: { type: String, enum: ["crypto", "bank"], default: "crypto" },
     // "artist_royalty" = 4% to creator | "buyback_fund" = 5% to buyback wallet | "company_fee" = platform's share
-    payoutType:      { type: String, enum: ["artist_royalty", "buyback_fund", "company_fee"], default: "artist_royalty" },
-    status:          { type: String, enum: ["pending", "dispatched", "failed"], default: "pending" },
-    txHash:          String,
-    note:            String,
+    payoutType: { type: String, enum: ["artist_royalty", "buyback_fund", "company_fee"], default: "artist_royalty" },
+    status: { type: String, enum: ["pending", "dispatched", "failed"], default: "pending" },
+    txHash: String,
+    note: String,
   },
   { timestamps: true },
 );
@@ -54,11 +54,11 @@ export const RoyaltyPayout =
 
 // ── SMTP transporter ──────────────────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  host:   process.env.SMTP_HOST,
-  port:   parseInt(process.env.SMTP_PORT || "465"),
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || "465"),
   secure: true,
   auth: {
-    user: process.env.SMTP_USER  || process.env.SMTP_EMAIL,
+    user: process.env.SMTP_USER || process.env.SMTP_EMAIL,
     pass: process.env.SMTP_PASS,
   },
 });
@@ -66,8 +66,8 @@ const transporter = nodemailer.createTransport({
 async function notifyAdmin(payout) {
   try {
     await transporter.sendMail({
-      from:    `"HyperTek" <${process.env.SMTP_EMAIL}>`,
-      to:      process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL,
+      from: `"HyperTek" <${process.env.SMTP_EMAIL}>`,
+      to: process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL,
       subject: `[HyperTek] Royalty Payout Pending — ${payout.amount} USDC`,
       html: `
         <h2>Royalty Payout Queued</h2>
@@ -116,11 +116,11 @@ export async function dispatchRoyalty({
     parentId,
     saleRecordId,
     creatorWallet,
-    amount:      parseFloat(amount.toFixed(6)),
-    currency:    "USDC",
+    amount: parseFloat(amount.toFixed(6)),
+    currency: "USDC",
     paymentType,
     payoutType,
-    status:      "pending",
+    status: "pending",
     note,
   });
 
@@ -145,17 +145,17 @@ export async function dispatchRoyalty({
  */
 export async function dispatchRoyaltyOnChain(payout) {
   try {
-    const rpcUrl     = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+    const rpcUrl = process.env.BASE_RPC_URL || "https://mainnet.base.org";
     const privateKey = process.env.PRIVATE_KEY;
-    const usdcAddr   = process.env.BASE_USDC_ADDRESS;
+    const usdcAddr = process.env.BASE_USDC_ADDRESS;
 
     if (!privateKey || !usdcAddr) {
       throw new Error("PRIVATE_KEY or BASE_USDC_ADDRESS not set in env");
     }
 
-    const provider   = new ethers.JsonRpcProvider(rpcUrl);
-    const signer     = new ethers.Wallet(privateKey, provider);
-    const usdc       = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const signer = new ethers.Wallet(privateKey, provider);
+    const usdc = new ethers.Contract(usdcAddr, ERC20_ABI, signer);
 
     const amountUnits = ethers.parseUnits(payout.amount.toFixed(6), 6);
 
@@ -175,10 +175,10 @@ export async function dispatchRoyaltyOnChain(payout) {
       { new: true }
     );
 
-    console.log(`✅ [RoyaltyService] USDC dispatched: ${payout.amount} USDC → ${payout.creatorWallet} | tx: ${tx.hash}`);
+    console.log(`[RoyaltyService] USDC dispatched: ${payout.amount} USDC → ${payout.creatorWallet} | tx: ${tx.hash}`);
     return updated;
   } catch (dispatchErr) {
-    console.error("❌ [RoyaltyService] On-chain dispatch failed:", dispatchErr.message);
+    console.error(" [RoyaltyService] On-chain dispatch failed:", dispatchErr.message);
     const updated = await RoyaltyPayout.findByIdAndUpdate(
       payout._id,
       { status: "failed", note: `Dispatch failed: ${dispatchErr.message}` },

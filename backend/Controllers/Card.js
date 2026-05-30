@@ -13,7 +13,7 @@ export const PayWithCard = async (req, res) => {
   console.log("Received payment body:", req.body);
 
   try {
-    const { userId, userInfo, gameDetails, paymentDetails, provider,productId } = req.body;
+    const { userId, userInfo, gameDetails, paymentDetails, provider, productId } = req.body;
 
     // Validate required fields
     if (!userId || !gameDetails || !paymentDetails) {
@@ -66,7 +66,7 @@ export const PayWithCard = async (req, res) => {
 // =======================
 export const SaveCardData = async (req, res) => {
   const sig = req.headers["stripe-signature"];
-  console.log("your signatatue ris :",sig);
+  console.log("your signatatue ris :", sig);
   let event;
 
   try {
@@ -76,7 +76,7 @@ export const SaveCardData = async (req, res) => {
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error("❌ Webhook signature verification failed:", err.message);
+    console.error(" Webhook signature verification failed:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
@@ -111,7 +111,7 @@ export const SaveCardData = async (req, res) => {
 
       const payment = new Payment(paymentDataDoc);
       await payment.save();
-      console.log("✅ [CardWebhook] Payment stored in DB:", payment._id, "itemType:", payment.itemType);
+      console.log("[CardWebhook] Payment stored in DB:", payment._id, "itemType:", payment.itemType);
 
       // Handle NFT Purchase if metadata exists (parentId is now optional as we can find it by subCollectionId)
       const { parentId, subCollectionId, buyerWallet, priceETH } = paymentIntent.metadata || {};
@@ -126,15 +126,15 @@ export const SaveCardData = async (req, res) => {
             paymentProvider: "stripe",
             paymentIntentId: paymentIntent.id
           });
-          console.log("✅ [SaveCardData] NFT Purchase finalized:", JSON.stringify(result, null, 2));
-          
+          console.log("[SaveCardData] NFT Purchase finalized:", JSON.stringify(result, null, 2));
+
           // Optionally update the payment record with the confirmed tokenId if it was just minted
           if (result && result.tokenId) {
             payment.tokenId = result.tokenId;
             await payment.save();
           }
         } catch (nftErr) {
-          console.error("❌ Failed to finalize NFT Purchase in Card Webhook:", nftErr.message);
+          console.error(" Failed to finalize NFT Purchase in Card Webhook:", nftErr.message);
         }
       }
 

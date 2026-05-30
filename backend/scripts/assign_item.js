@@ -15,7 +15,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
@@ -23,14 +23,14 @@ dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true }
 import NFTSystem from "../Models/NFTSystem.js";
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────
-const BUYER_WALLET  = "0x839f4465dab13fa73e6fbee4c4135a86926c9484"; // zaaa
+const BUYER_WALLET = "0x839f4465dab13fa73e6fbee4c4135a86926c9484"; // zaaa
 const ASSIGN_SUB_ID = "69c80c5f2821bc4ae696d94a"; // planet 1 — GEFFA collection
-const PRICE_PAID    = 0.001; // price zaaa paid
-const DRY_RUN       = false;
+const PRICE_PAID = 0.001; // price zaaa paid
+const DRY_RUN = false;
 // ───────────────────────────────────────────────────────────────────────────
 
 await mongoose.connect(process.env.MONGODB_URL);
-console.log("✅ Connected to MongoDB\n");
+console.log("Connected to MongoDB\n");
 
 if (!ASSIGN_SUB_ID) {
   // List all sub-collections that are listed (available for purchase) with owner undefined/"admin"
@@ -57,7 +57,7 @@ if (!ASSIGN_SUB_ID) {
 // Assign the item
 const parent = await NFTSystem.findOne({ "subCollections._id": ASSIGN_SUB_ID });
 if (!parent) {
-  console.error(`❌ Sub-collection ${ASSIGN_SUB_ID} not found`);
+  console.error(` Sub-collection ${ASSIGN_SUB_ID} not found`);
   process.exit(1);
 }
 
@@ -67,22 +67,22 @@ console.log(`  current owner : ${sub.owner ?? "undefined"}`);
 console.log(`  listed        : ${sub.listed}`);
 
 if (!DRY_RUN) {
-  sub.owner       = BUYER_WALLET.toLowerCase();
-  sub.listed      = false;
-  sub.priceETH    = 0;
+  sub.owner = BUYER_WALLET.toLowerCase();
+  sub.listed = false;
+  sub.priceETH = 0;
   sub.isFirstSale = false;
   sub.salesHistory = sub.salesHistory || [];
   sub.salesHistory.push({
-    buyer:    BUYER_WALLET.toLowerCase(),
-    seller:   sub.owner || "admin",
+    buyer: BUYER_WALLET.toLowerCase(),
+    seller: sub.owner || "admin",
     priceETH: PRICE_PAID,
-    txHash:   "manual-recovery",
+    txHash: "manual-recovery",
     isFirstSale: true,
     createdAt: new Date(),
   });
   parent.markModified("subCollections");
   await parent.save();
-  console.log(`\n✅ DONE — "${sub.name}" is now owned by ${BUYER_WALLET.toLowerCase()}`);
+  console.log(`\nDONE — "${sub.name}" is now owned by ${BUYER_WALLET.toLowerCase()}`);
   console.log("   Restart backend then check zaaa's Collectibles tab.");
 } else {
   console.log("\n[DRY RUN] No changes made.");

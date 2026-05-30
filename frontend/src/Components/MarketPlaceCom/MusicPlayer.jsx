@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { Music, Volume2, VolumeX, X, ChevronDown } from "lucide-react";
 
@@ -48,6 +49,7 @@ function savePrefs(data) {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3" }) {
+  const { t } = useTranslation();
   const prefs = loadPrefs();
 
   const [open, setOpen]         = useState(false);
@@ -127,7 +129,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
 
   // ── Status label for collapsed button ───────────────────────────────────────
   const statusLabel = () => {
-    if (source === "ambient") return playing ? "Playing" : "Sound";
+    if (source === "ambient") return playing ? t("musicPlayer.playing", "Playing") : t("musicPlayer.sound", "Sound");
     return SOURCE_LABELS[source];
   };
 
@@ -183,7 +185,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
             >
               <div className="flex items-center gap-2">
                 <Music className="w-4 h-4 text-blue-400" />
-                <span className="text-white text-xs font-semibold tracking-wide">Music Player</span>
+                <span className="text-white text-xs font-semibold tracking-wide">{t("musicPlayer.title", "Music Player")}</span>
               </div>
               <button onClick={() => setOpen(false)} className="text-white/30 hover:text-white/70 transition-colors">
                 <X className="w-4 h-4" />
@@ -215,7 +217,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
               {source === "ambient" && (
                 <div className="flex flex-col gap-3 pt-1">
                   <p className="text-white/35 text-[10px] leading-relaxed">
-                    Built-in ambient soundtrack for the marketplace. Plays on loop.
+                    {t("musicPlayer.ambientDesc", "Built-in ambient soundtrack for the marketplace. Plays on loop.")}
                   </p>
                   <button
                     onClick={toggleAmbient}
@@ -227,7 +229,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                     }}
                   >
                     {playing ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-                    {playing ? "Pause Ambient" : "Play Ambient"}
+                    {playing ? t("musicPlayer.pauseAmbient", "Pause Ambient") : t("musicPlayer.playAmbient", "Play Ambient")}
                   </button>
                   {/* Volume slider */}
                   <div className="flex items-center gap-2">
@@ -257,7 +259,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                   {!spotifyEmbed ? (
                     <>
                       <p className="text-white/35 text-[10px] leading-relaxed">
-                        Paste any Spotify track, playlist, or album link.
+                        {t("musicPlayer.spotifyDesc", "Paste any Spotify track, playlist, or album link.")}
                       </p>
                       <form onSubmit={handleUrlSubmit} className="flex flex-col gap-2">
                         <input
@@ -281,7 +283,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                             color: "rgba(30,215,96,0.9)",
                           }}
                         >
-                          Load Spotify
+                          {t("musicPlayer.loadSpotify", "Load Spotify")}
                         </button>
                       </form>
                     </>
@@ -300,7 +302,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                         onClick={clearEmbed}
                         className="text-[10px] text-white/30 hover:text-white/60 transition-colors text-right"
                       >
-                        Change link
+                        {t("musicPlayer.changeLink", "Change link")}
                       </button>
                     </div>
                   )}
@@ -313,7 +315,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                   {!soundcloudEmbed ? (
                     <>
                       <p className="text-white/35 text-[10px] leading-relaxed">
-                        Paste any SoundCloud track or playlist link.
+                        {t("musicPlayer.soundcloudDesc", "Paste any SoundCloud track or playlist link.")}
                       </p>
                       <form onSubmit={handleUrlSubmit} className="flex flex-col gap-2">
                         <input
@@ -337,7 +339,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                             color: "rgba(255,140,80,0.9)",
                           }}
                         >
-                          Load SoundCloud
+                          {t("musicPlayer.loadSoundCloud", "Load SoundCloud")}
                         </button>
                       </form>
                     </>
@@ -355,7 +357,7 @@ export default function MusicPlayer({ audioSrc = "/audio/marketplace_ambient.mp3
                         onClick={clearEmbed}
                         className="text-[10px] text-white/30 hover:text-white/60 transition-colors text-right"
                       >
-                        Change link
+                        {t("musicPlayer.changeLink", "Change link")}
                       </button>
                     </div>
                   )}

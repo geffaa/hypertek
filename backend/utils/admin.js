@@ -17,7 +17,7 @@ const ensureAdminExists = async () => {
     });
 
     if (adminExists) {
-      console.log("✅ Admin already exists");
+      console.log("Admin already exists");
       return;
     }
     const hashedPassword = await bcrypt.hash(adminPassword, 10);
@@ -31,9 +31,9 @@ const ensureAdminExists = async () => {
 
     await admin.save({ validateModifiedOnly: true });
 
-    console.log("✅ Admin Created Successfully");
+    console.log("Admin Created Successfully");
   } catch (error) {
-    console.error("❌ Error creating admin:", error.message);
+    console.error(" Error creating admin:", error.message);
   }
 };
 

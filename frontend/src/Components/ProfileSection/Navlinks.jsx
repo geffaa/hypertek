@@ -1,6 +1,7 @@
 // src/Components/ProfileSection/Navlinks.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../Config";
 import { useSelector } from "react-redux";
 
@@ -36,6 +37,33 @@ const DISPLAY_NAMES = {
   "land/bases":                       "Land and Bases",
 };
 
+// Map English tab key → i18n key
+const TAB_I18N = {
+  "My Collectibles": "profile.tabs.myCollectibles",
+  "Activities":      "profile.tabs.activities",
+  "Listings":        "profile.tabs.listings",
+  "Trade":           "profile.tabs.trade",
+  "Auction":         "profile.tabs.auction",
+  "Questing":        "profile.tabs.questing",
+  "Bounty":          "profile.tabs.bounty",
+};
+
+// Map DB category slug → i18n key
+const CAT_I18N = {
+  "skins":                           "profile.categories.skins",
+  "military badges":                 "profile.categories.militaryBadges",
+  "military badges and collectables":"profile.categories.militaryBadges",
+  "specialists":                     "profile.categories.specialists",
+  "weapons":                         "profile.categories.weapons",
+  "body armour":                     "profile.categories.bodyArmour",
+  "spaceships":                      "profile.categories.spaceships",
+  "racing vehicles":                 "profile.categories.racingVehicles",
+  "artwork":                         "profile.categories.artwork",
+  "land and bases":                  "profile.categories.landAndBases",
+  "land/bases":                      "profile.categories.landAndBases",
+  "general":                         "profile.categories.general",
+};
+
 function NavLinks({
   activeTab,
   onTabChange,
@@ -43,6 +71,7 @@ function NavLinks({
   onCategoryChange,
   onCategoriesLoaded,
 }) {
+  const { t } = useTranslation();
   const { token } = useSelector((state) => state.auth);
   const [globalCategories, setGlobalCategories] = useState([]);
   const [connectedWallet, setConnectedWallet] = useState(null);
@@ -108,9 +137,12 @@ function NavLinks({
     fetchUserCategories();
   }, [connectedWallet, token]);
 
-  const cap = (str) =>
-    DISPLAY_NAMES[str?.toLowerCase()] ||
-    (str ? str.charAt(0).toUpperCase() + str.slice(1) : "Collection");
+  const cap = (str) => {
+    const key = CAT_I18N[str?.toLowerCase()];
+    if (key) return t(key, DISPLAY_NAMES[str?.toLowerCase()] || str);
+    return DISPLAY_NAMES[str?.toLowerCase()] ||
+      (str ? str.charAt(0).toUpperCase() + str.slice(1) : t("profile.categories.general", "Collection"));
+  };
 
   // ── Merged + sorted category list (deduplicated by display name) ──────────
   const categoryTabs = useMemo(() => {
@@ -160,7 +192,7 @@ function NavLinks({
                     : "1px solid transparent",
                 }}
               >
-                {tab}
+                {t(TAB_I18N[tab], tab)}
               </button>
             </li>
           );
@@ -168,7 +200,7 @@ function NavLinks({
       </ul>
 
       {/* ── Level 2: Category sub-filter (My Collectibles only) ─────────── */}
-      {activeTab === "My Collectibles" && (
+      {activeTab === "My Collectibles" && ( // internal key stays English
         <ul
           className="flex overflow-x-auto gap-1 pb-1 scrollbar-hide"
           style={{ scrollbarWidth: "none" }}
@@ -186,7 +218,7 @@ function NavLinks({
                 fontWeight: !activeCategory ? 600 : 400,
               }}
             >
-              All
+              {t("profile.categories.all", "All")}
             </button>
           </li>
 

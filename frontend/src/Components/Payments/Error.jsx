@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BackHome from "../../assets/images/backhome.png";
 
 function Error() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center text-center min-h-screen bg-[#0A0A0A] px-6">
       {/* Red Cross Icon */}
@@ -25,31 +26,26 @@ function Error() {
 
       {/* Error Message */}
       <h3 className="text-white text-base sm:text-lg md:text-xl font-medium mb-6 leading-tight">
-        Your request was not <br className="hidden sm:block" /> successful
+        {t("paymentError.message", "Your request was not successful")}
       </h3>
 
-      {/* Go Home Button */}
-    <div className="flex flex-col items-center justify-center">
-  {/* Go Home Button */}
-  <Link
-    to="/payment"
-    className="flex items-center justify-center gap-2 bg-transparent hover:bg-gray-800 px-5 py-2 rounded-lg transition duration-200 w-fit"
-  >
-    <img
-      src={BackHome}
-      alt="Back Home"
-      className="w-5 h-4 sm:w-6 sm:h-5"
-    />
-    <span className="font-inter font-medium text-white text-lg sm:text-xl">
-      Go Home
-    </span>
-  </Link>
+      <div className="flex flex-col items-center justify-center">
+        <Link
+          to="/payment"
+          className="flex items-center justify-center gap-2 bg-transparent hover:bg-gray-800 px-5 py-2 rounded-lg transition duration-200 w-fit"
+        >
+          <img
+            src={BackHome}
+            alt="Back Home"
+            className="w-5 h-4 sm:w-6 sm:h-5"
+          />
+          <span className="font-inter font-medium text-white text-lg sm:text-xl">
+            {t("paymentError.goHome", "Go Home")}
+          </span>
+        </Link>
 
-  {/* Divider Line */}
-  <div className=" w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
-</div>
-
-
+        <div className="w-[calc(100%-2rem)] max-w-[180px] h-[1px] bg-gray-400"></div>
+      </div>
     </div>
   );
 }

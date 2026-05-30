@@ -3,11 +3,11 @@
 _Audit date: 2026-03-20_
 _Last updated: 2026-03-20_
 _Scope: Full frontend (frontend/ + admin/) codebase vs Don's Brief requirements_
-_Legend: ❌ Critical (broken/missing) · ⚠️ Partial (present but incomplete) · ✅ Fixed_
+_Legend:  Critical (broken/missing) · ⚠️ Partial (present but incomplete) · Fixed_
 
 ---
 
-## ✅ FIXED THIS SESSION
+## FIXED THIS SESSION
 
 | # | Issue | Fix Applied |
 |---|---|---|
@@ -44,17 +44,17 @@ _All issues resolved. No remaining open items._
 
 | # | Issue | File(s) | Priority | Status |
 |---|---|---|---|---|
-| 01 | CollectionOnSale hardcoded mock | `CollectionOnSale.jsx` | High | ✅ Fixed |
-| 02 | Transactions hardcoded mock | `Transaction.jsx` + new backend endpoint | High | ✅ Fixed |
-| 03 | AddUserCollection no submit | `AddUserCollection.jsx` | High | ✅ Fixed |
-| 04 | Marketplace click → wrong page | `LineLayout.jsx` | High | ✅ Fixed |
-| 05 | Admin buyback approval missing | `BuybackApproval.jsx` + backend | Medium | ✅ Fixed |
-| 06 | HB balance not in Navbar | `Navbar.jsx` | Medium | ✅ Fixed |
-| 07 | User sidebar missing nav items | `Sidebar.jsx` | Medium | ✅ Fixed |
-| 08 | Footer broken links | `Footer.jsx` | Low | ✅ N/A — routes exist |
-| 09 | Stripe not in main buy flow | `Buy1.jsx` | Medium | ✅ Fixed |
-| 10 | Private key in welcome email | `User.js` + `emailTemplates.js` | Medium-High | ✅ Fixed |
-| 11 | Duplicate editNfts.jsx | `editNfts.jsx` | Low | ✅ Deleted |
+| 01 | CollectionOnSale hardcoded mock | `CollectionOnSale.jsx` | High | Fixed |
+| 02 | Transactions hardcoded mock | `Transaction.jsx` + new backend endpoint | High | Fixed |
+| 03 | AddUserCollection no submit | `AddUserCollection.jsx` | High | Fixed |
+| 04 | Marketplace click → wrong page | `LineLayout.jsx` | High | Fixed |
+| 05 | Admin buyback approval missing | `BuybackApproval.jsx` + backend | Medium | Fixed |
+| 06 | HB balance not in Navbar | `Navbar.jsx` | Medium | Fixed |
+| 07 | User sidebar missing nav items | `Sidebar.jsx` | Medium | Fixed |
+| 08 | Footer broken links | `Footer.jsx` | Low | N/A — routes exist |
+| 09 | Stripe not in main buy flow | `Buy1.jsx` | Medium | Fixed |
+| 10 | Private key in welcome email | `User.js` + `emailTemplates.js` | Medium-High | Fixed |
+| 11 | Duplicate editNfts.jsx | `editNfts.jsx` | Low | Deleted |
 
 ---
 

@@ -6,8 +6,8 @@ describe("NFTSystem Contract", function () {
 
   beforeEach(async function () {
     const NFTSystemFactory = await ethers.getContractFactory("MyNFT");
-    nftSystem = await NFTSystemFactory.deploy(); // ✅ deploy contract
-    await nftSystem.waitForDeployment();         // ✅ wait until deployed
+    nftSystem = await NFTSystemFactory.deploy(); // deploy contract
+    await nftSystem.waitForDeployment();         // wait until deployed
   });
 
   it("Should deploy successfully", async function () {

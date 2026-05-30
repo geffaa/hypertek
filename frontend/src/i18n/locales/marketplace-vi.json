@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Thị Trường",
     "searchPlaceholder": "Tìm kiếm...",
-
     "tabs": {
-      "overview":  "Tổng Quan",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "Thị Trường",
-      "auctions":  "Đấu Giá",
-      "trades":    "Giao Dịch",
-      "quests":    "Nhiệm Vụ",
-      "hire":      "Thuê Mướn",
-      "bounty":    "Tiền Thưởng"
+      "overview": "Tổng Quan",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "Thị Trường",
+      "auctions": "Đấu Giá",
+      "trades": "Giao Dịch",
+      "quests": "Nhiệm Vụ",
+      "hire": "Thuê Mướn",
+      "bounty": "Tiền Thưởng"
     },
-
     "banner": {
       "defaultHeading": "Một Kỷ Nguyên Mới Bắt Đầu Trong Hyper Tek",
-      "defaultDesc": "Đây là khởi đầu của một vũ trụ sống động, nơi mọi quyết định định hình hành trình.",
+      "defaultDesc": "Đó là sự khởi đầu của một vũ trụ sống động, nơi mọi quyết định đều định hình cuộc hành trình. Cho dù bạn đang chạy đua với tốc độ ánh sáng, củng cố liên minh trong Vương quốc Overlord hay khám phá bí mật trong HyperQuest, đây là cơ hội để bạn để lại dấu ấn trong câu chuyện.",
       "stats": {
-        "totalItems":  "Tổng Số Mục",
-        "totalBuys":   "Tổng Số Mua",
-        "listed":      "Đã Đăng",
+        "totalItems": "Tổng Số Mục",
+        "totalBuys": "Tổng Số Mua",
+        "listed": "Đã Đăng",
         "collections": "Bộ Sưu Tập"
       },
-      "soundOn":  "Bật Âm Thanh",
+      "soundOn": "Bật Âm Thanh",
       "soundOff": "Tắt Âm Thanh"
     },
-
     "bottomBar": {
-      "learnLabel":     "Tìm hiểu về NFA / NFC",
+      "learnLabel": "Tìm hiểu về NFA / NFC",
       "educationPanel": "Bảng Giáo Dục HyperTek",
-      "footerNote":     "Bảng này dùng để tham khảo nhanh. Ghé thăm tab NFA / NFC 101 để xem nội dung giáo dục đầy đủ.",
+      "footerNote": "Bảng này dùng để tham khảo nhanh. Ghé thăm tab NFA / NFC 101 để xem nội dung giáo dục đầy đủ.",
       "facts": [
-        { "label": "NFA",        "desc": "Tài sản độc quyền của Hypertek. Phần thưởng trong game cao nhất. Giá trị mua lại tối thiểu được đảm bảo tăng theo mỗi lần bán." },
-        { "label": "NFC",        "desc": "Được tạo bởi Hypertek hoặc người chơi được cấp phép. Bao gồm phần thưởng trong game. Mua lại tối thiểu được đảm bảo." },
-        { "label": "NFT",        "desc": "Vật phẩm sưu tập do người chơi tạo ra. Không có phần thưởng trong game. Không có đảm bảo mua lại. Có thể giao dịch trên thị trường." },
-        { "label": "Hoa Hồng",   "desc": "Phí nền tảng 20% trên tất cả các giao dịch. Người bán nhận 80%. Tiền bản quyền nghệ sĩ 4% khi bán lại." },
-        { "label": "Tăng Trưởng Mua Lại", "desc": "+5% giá mỗi lần bán lại được cộng vào giá trị mua lại tối thiểu của tài sản. Chỉ tăng, không bao giờ giảm." },
-        { "label": "Ví Lưu Ký",  "desc": "HyperTek tự động tạo ví tiền điện tử cho bạn khi đăng ký." }
+        {
+          "label": "NFA",
+          "desc": "Tài sản độc quyền của Hypertek. Phần thưởng trong game cao nhất. Giá trị mua lại tối thiểu được đảm bảo tăng theo mỗi lần bán."
+        },
+        {
+          "label": "NFC",
+          "desc": "Được tạo bởi Hypertek hoặc người chơi được cấp phép. Bao gồm phần thưởng trong game. Mua lại tối thiểu được đảm bảo."
+        },
+        {
+          "label": "NFT",
+          "desc": "Vật phẩm sưu tập do người chơi tạo ra. Không có phần thưởng trong game. Không có đảm bảo mua lại. Có thể giao dịch trên thị trường."
+        },
+        {
+          "label": "Hoa Hồng",
+          "desc": "Phí nền tảng 20% trên tất cả các giao dịch. Người bán nhận 80%. Tiền bản quyền nghệ sĩ 4% khi bán lại."
+        },
+        {
+          "label": "Tăng Trưởng Mua Lại",
+          "desc": "+5% giá mỗi lần bán lại được cộng vào giá trị mua lại tối thiểu của tài sản. Chỉ tăng, không bao giờ giảm."
+        },
+        {
+          "label": "Ví Lưu Ký",
+          "desc": "HyperTek tự động tạo ví tiền điện tử cho bạn khi đăng ký."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Tổng Quan",
+      "heading": "Tổng Quan",
       "subtitle": "Chào mừng đến Thị Trường HyperTek. Chọn một tính năng để tìm hiểu thêm — rồi bắt đầu ngay.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Mới với tài sản Web3? Bắt đầu tại đây",
           "details": [
             "NFA (Tài Sản Không Thể Thay Thế) là các mục do Hypertek phát hành với giá mua lại được nền tảng đảm bảo.",
@@ -56,7 +70,7 @@
           "cta": "Học Những Điều Cơ Bản"
         },
         {
-          "label":   "Thị Trường",
+          "label": "Thị Trường",
           "tagline": "Mua & bán tài sản trong game ngay lập tức",
           "details": [
             "Duyệt qua danh mục rộng lớn của NFA, NFC và NFT — giao diện, vũ khí, chuyên gia, tàu vũ trụ và nhiều hơn nữa.",
@@ -66,7 +80,7 @@
           "cta": "Duyệt Thị Trường"
         },
         {
-          "label":   "Đấu Giá",
+          "label": "Đấu Giá",
           "tagline": "Cạnh tranh để có các mục phiên bản giới hạn độc quyền",
           "details": [
             "Đặt giá thầu cho các tài sản hiếm chỉ có thể mua qua đấu giá có thời hạn.",
@@ -76,7 +90,7 @@
           "cta": "Xem Đấu Giá"
         },
         {
-          "label":   "Giao Dịch",
+          "label": "Giao Dịch",
           "tagline": "Trao đổi tài sản ngang hàng, không có trung gian",
           "details": [
             "Đề xuất hoặc chấp nhận giao dịch tài sản trực tiếp với người chơi khác — hoàn toàn on-chain.",
@@ -86,7 +100,7 @@
           "cta": "Duyệt Giao Dịch"
         },
         {
-          "label":   "Nhiệm Vụ",
+          "label": "Nhiệm Vụ",
           "tagline": "Hoàn thành nhiệm vụ, kiếm phần thưởng độc quyền",
           "details": [
             "Đảm nhận nhiệm vụ để kiếm phần thưởng độc quyền và tài sản trong game hiếm.",
@@ -96,7 +110,7 @@
           "cta": "Khám Phá Nhiệm Vụ"
         },
         {
-          "label":   "Thuê Mướn",
+          "label": "Thuê Mướn",
           "tagline": "Mượn tài sản hoặc kiếm tiền từ tài sản của bạn",
           "details": [
             "Thuê các chuyên gia hoặc thiết bị mạnh mẽ cho một nhiệm vụ duy nhất mà không cần mua.",
@@ -106,7 +120,7 @@
           "cta": "Duyệt Thuê Mướn"
         },
         {
-          "label":   "Tiền Thưởng",
+          "label": "Tiền Thưởng",
           "tagline": "Săn mục tiêu, nhận thưởng, đứng đầu bảng xếp hạng",
           "details": [
             "Chấp nhận tiền thưởng do người chơi khác hoặc hệ thống đăng để kiếm phần thưởng tiền điện tử.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "Chung",
+      "heading": "Chung",
       "subtitle": "Duyệt NFA, NFC và NFT có sẵn để mua ngay lập tức — giao diện, vũ khí, chuyên gia, tàu vũ trụ và nhiều hơn nữa.",
       "filterAll": "Tất Cả",
       "samplePreviewTitle": "Xem Trước Thị Trường Mẫu",
       "samplePreviewDesc": "Các mục bên dưới là xem trước mẫu trình bày các loại tài sản kỹ thuật số sẽ có sẵn trên thị trường HyperTek. Các mục thực tế với tác phẩm nghệ thuật độc đáo và quyền sở hữu được xác minh blockchain sẽ có sẵn khi ra mắt.",
       "noItems": "Chưa có mục nào. Hãy kiểm tra lại sau.",
       "categories": {
-        "skins":           "Giao Diện",
-        "militaryBadges":  "Huy Hiệu Quân Sự",
-        "specialists":     "Chuyên Gia",
-        "weapons":         "Vũ Khí",
-        "bodyArmour":      "Áo Giáp Thân",
-        "spaceships":      "Tàu Vũ Trụ",
-        "racingVehicles":  "Phương Tiện",
-        "artwork":         "Tác Phẩm Nghệ Thuật",
-        "landAndBases":    "Đất & Căn Cứ",
-        "general":         "Chung"
-      }
+        "skins": "Giao Diện",
+        "militaryBadges": "Huy Hiệu Quân Sự",
+        "specialists": "Chuyên Gia",
+        "weapons": "Vũ Khí",
+        "bodyArmour": "Áo Giáp Thân",
+        "spaceships": "Tàu Vũ Trụ",
+        "racingVehicles": "Phương Tiện",
+        "artwork": "Tác Phẩm Nghệ Thuật",
+        "landAndBases": "Đất & Căn Cứ",
+        "general": "Chung"
+      },
+      "search": "Tìm kiếm...",
+      "filter": "Lọc",
+      "showAll": "Hiển thị tất cả",
+      "filterSort": "Lọc & sắp xếp",
+      "sortBy": "Sắp xếp theo",
+      "sort": {
+        "default": "Mặc định",
+        "priceAsc": "Giá: Thấp đến cao",
+        "priceDesc": "Giá: Cao đến thấp",
+        "nameAsc": "Tên: A đến Z",
+        "nameDesc": "Tên: Z đến A"
+      },
+      "priceRange": "Phạm vi giá (USDC)",
+      "min": "Tối thiểu",
+      "max": "Tối đa",
+      "apply": "Áp dụng",
+      "clearAll": "Xóa tất cả bộ lọc",
+      "noResults": "Không tìm thấy kết quả nào",
+      "dummyContent": "Nội dung giả",
+      "preview": "Xem trước",
+      "buyNow": "Mua ngay",
+      "viewDetails": "Xem chi tiết"
     },
-
     "nfa101": {
       "sectionLabel": "Giáo Dục",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "Mới với NFT và Web3? Khám phá các bài viết của chúng tôi để hiểu tài sản blockchain, ví, bảo mật và hệ sinh thái HyperTek.",
-      "minRead":      "phút đọc",
-      "filterAll":    "Tất Cả"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "Mới với NFT và Web3? Khám phá các bài viết của chúng tôi để hiểu tài sản blockchain, ví, bảo mật và hệ sinh thái HyperTek.",
+      "minRead": "phút đọc",
+      "filterAll": "Tất Cả"
     },
-
     "auctions": {
-      "heading":        "Đấu Giá",
-      "listings":       "niêm yết",
-      "newAuction":     "Đấu Giá Mới",
-      "noAuctions":     "Không có cuộc đấu giá {{filter}}",
-      "createFirst":    "Tạo cuộc đấu giá đầu tiên",
-      "endingSoon":     "SẮP KẾT THÚC",
-      "viewDetails":    "Xem Chi Tiết",
+      "heading": "Đấu Giá",
+      "listings": "niêm yết",
+      "newAuction": "Đấu Giá Mới",
+      "noAuctions": "Không có cuộc đấu giá {{filter}}",
+      "createFirst": "Tạo cuộc đấu giá đầu tiên",
+      "endingSoon": "SẮP KẾT THÚC",
+      "viewDetails": "Xem Chi Tiết",
       "rules": {
-        "durations":    "Thời hạn: 1 ngày · 3 ngày · 7 ngày",
+        "durations": "Thời hạn: 1 ngày · 3 ngày · 7 ngày",
         "minIncrement": "Tăng tối thiểu: 5%",
-        "freeToList":   "Đăng miễn phí",
-        "commission":   "Hoa hồng: 20% khi bán"
-      },
-      "preview": {
-        "title":   "Xem Trước Tính Năng Trong Game",
-        "desc":    "Hệ thống Đấu Giá sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
-      },
-      "card": {
-        "currentBid": "Giá thầu hiện tại",
-        "endsIn":     "Kết thúc sau",
-        "placeBid":   "Đặt Giá Thầu",
-        "buyNow":     "Mua Ngay",
-        "bids":       "lần đấu giá",
-        "ended":      "ĐÃ KẾT THÚC"
-      },
-      "detail": {
-        "currentBid":  "Giá thầu hiện tại",
-        "start":       "Bắt đầu",
-        "endsIn":      "Kết thúc sau",
-        "description": "Mô Tả",
-        "recentBids":  "Giá Thầu Gần Đây",
-        "anonymous":   "Ẩn Danh",
-        "placeBid":    "Đặt Giá Thầu",
-        "buyNow":      "Mua Ngay",
-        "buyNowLabel": "Mua Ngay",
-        "bids":        "lần đấu giá"
-      },
-      "bidModal": {
-        "title":          "Đặt Giá Thầu",
-        "currentBid":     "Giá thầu hiện tại",
-        "minimumBid":     "Giá thầu tối thiểu",
-        "yourBid":        "Giá thầu của bạn (USDC)",
-        "minIncrement":   "Tăng tối thiểu 5% · Tối thiểu tiếp theo sau giá thầu của bạn: {{next}} USDC",
-        "reviewBid":      "Xem Lại Giá Thầu",
-        "disclaimer":     "Giá thầu thắng có tính ràng buộc · Hoa hồng nền tảng 20%",
-        "confirmTitle":   "Xác Nhận Giá Thầu",
-        "item":           "Mục",
-        "yourBidLabel":   "Giá thầu của bạn",
-        "youPay":         "Nếu bạn thắng, bạn trả",
-        "outbidNotice":   "Bạn sẽ được thông báo ngay nếu ai đó vượt giá. Đấu giá tự động đóng khi hết giờ.",
-        "back":           "Quay Lại",
-        "confirm":        "Xác Nhận — {{amount}} USDC",
-        "placing":        "Đang Đặt…",
-        "successTitle":   "Đã Đặt Giá Thầu!",
-        "highestBidder":  "Bạn đang dẫn đầu",
-        "outbidWarning":  "Bạn sẽ nhận được thông báo nếu ai đó vượt giá.",
-        "done":           "Xong",
-        "endsIn":         "Kết thúc sau"
-      },
-      "instantBuyModal": {
-        "title":         "Mua Ngay — Tức Thì",
-        "buyNowPrice":   "Giá mua ngay",
-        "currentBids":   "Giá thầu hiện tại",
-        "notice":        "Mua ngay kết thúc cuộc đấu giá ngay lập tức. Mục được chuyển vào ví của bạn và tất cả người đấu giá khác được hoàn tiền.",
-        "cancel":        "Hủy",
-        "processing":    "Đang Xử Lý…",
-        "successTitle":  "Đã Mua Được Mục!",
-        "auctionClosed": "Đấu giá đã đóng · Đã bắt đầu chuyển",
-        "item":          "Mục",
-        "paid":          "Đã Thanh Toán",
-        "status":        "Trạng Thái",
-        "transferred":   "Đã chuyển vào ví",
-        "walletNote":    "Mục sẽ xuất hiện trong tab Bộ Sưu Tập Của Tôi.",
-        "viewCollect":   "Xem Bộ Sưu Tập Của Tôi"
-      },
-      "createModal": {
-        "title":          "Tạo Đấu Giá",
-        "selectItem":     "Chọn Mục",
-        "connectWallet":  "Kết nối ví để duyệt các mục của bạn",
-        "loadingItems":   "Đang Tải…",
-        "noItems":        "Không tìm thấy mục nào được sở hữu",
-        "pricingDuration":"Giá & Thời Hạn",
-        "startPrice":     "Giá Khởi Điểm (USDC) *",
-        "reservePrice":   "Giá Dự Trữ (USDC)",
-        "instantBuyPrice":"Giá Mua Ngay (USDC)",
-        "optional":       "Tùy chọn",
-        "leaveBlank":     "Để trống để vô hiệu hóa",
-        "duration":       "Thời Hạn",
-        "dur1Day":        "1 Ngày",
-        "dur3Days":       "3 Ngày",
-        "dur7Days":       "7 Ngày",
-        "freeToList":     "Đăng miễn phí · Hoa hồng 20% khi bán",
-        "creating":       "Đang Tạo…",
-        "submit":         "Tạo Đấu Giá"
-      },
-      "pagination": {
-        "prev":  "Trước",
-        "next":  "Tiếp",
-        "page":  "Trang {{page}} / {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "Giao Dịch",
-      "listings":   "niêm yết",
-      "postTrade":  "Đăng Giao Dịch",
-      "noTrades":   "Không có giao dịch {{filter}}",
-      "viewDetails":"Xem Chi Tiết",
-      "trade":      "giao dịch",
-      "yours":      "của bạn",
-      "offering":   "Đang cung cấp",
-      "wanting":    "Muốn nhận",
-      "makeOffer":  "Đặt đề nghị",
-      "by":         "bởi",
-      "acceptTrade":"Chấp Nhận Giao Dịch",
-      "cancelTrade":"Hủy Giao Dịch",
-      "rules": {
-        "expiry":    "Niêm yết hết hạn sau 30 ngày",
-        "fee":       "Phí nền tảng áp dụng cho cả hai bên",
-        "noNFA":     "NFA không thể giao dịch — chỉ bán"
-      },
-      "acceptModal": {
-        "title":          "Đề Xuất Giao Dịch",
-        "postedBy":       "Đăng bởi",
-        "exchangeDetails":"Chi Tiết Trao Đổi",
-        "theyOffer":      "Họ cung cấp",
-        "theyWant":       "Họ muốn",
-        "feeNotice":      "Phí nền tảng áp dụng cho cả hai bên",
-        "acceptBtn":      "Chấp Nhận Giao Dịch Này",
-        "confirmTitle":   "Xác Nhận Giao Dịch",
-        "trade":          "Giao Dịch",
-        "postedByLabel":  "Đăng bởi",
-        "terms":          "Bằng cách chấp nhận, bạn đồng ý với các điều khoản trao đổi. Người đăng sẽ được thông báo và phải xác nhận trước khi chuyển mục.",
-        "back":           "Quay Lại",
-        "sending":        "Đang Gửi…",
-        "confirm":        "Xác Nhận",
-        "successTitle":   "Đề Xuất Đã Gửi!",
-        "notified":       "đã được thông báo",
-        "successNote":    "Người đăng giao dịch sẽ xem xét đề xuất của bạn và sắp xếp việc trao đổi. Kiểm tra thông báo của bạn để xem phản hồi của họ.",
-        "expiry":         "⏱ Đề xuất hết hạn sau 30 ngày nếu không được xác nhận.",
-        "close":          "Đóng"
-      },
-      "createModal": {
-        "title":          "Đăng Giao Dịch",
-        "yourItem":       "Mục Của Bạn",
-        "itemNamePlaceholder": "Tên mục *",
-        "loadingItems":   "Đang tải các mục của bạn…",
-        "connectWallet":  "Kết nối ví để chọn từ các mục của bạn",
-        "pickFromItems":  "Hoặc chọn từ các mục của bạn (tự điền tên):",
-        "imageOptional":  "Hình ảnh (tùy chọn)",
-        "whatYouWant":    "Những Gì Bạn Muốn",
-        "openOffer":      "Đề nghị mở — để người khác đề xuất",
-        "anyCategory":    "Bất kỳ danh mục nào",
-        "notesLabel":     "Ghi chú (tùy chọn)",
-        "notesPlaceholder":"Điều khoản giao dịch, điều kiện, v.v.",
-        "disclaimer":     "Cả hai bên trả phí nền tảng · Hết hạn sau 30 ngày · NFA không thể giao dịch",
-        "posting":        "Đang Đăng…",
-        "submit":         "Đăng Giao Dịch"
-      },
-      "pagination": {
-        "prev":  "Trước",
-        "next":  "Tiếp",
-        "page":  "Trang {{page}} / {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Bảng Nhiệm Vụ",
-      "quests":        "nhiệm vụ",
-      "noQuests":      "Không có nhiệm vụ {{filter}}",
-      "inGameFeature": "Tính Năng Trong Game",
-      "inGameDesc":    "Nhiệm vụ được tự động tạo ra khi người bán chọn hoa hồng giảm. Người chơi có thể hoàn thành tối đa 5 nhiệm vụ mỗi ngày. Kho hoa hồng được chia giữa giảm giá cho người mua, phần thưởng cho người chơi và nền tảng.",
-      "earnFromQuests":"Muốn kiếm tiền từ nhiệm vụ? Chơi trò chơi →",
-      "moneyQuests":   "Nhiệm Vụ Tiền (kho 11%)",
-      "resourceQuests":"Nhiệm Vụ Tài Nguyên (kho 20%)",
-      "footerNote1":   "# Các nhiệm vụ có tải trọng kết hợp sẽ được thanh toán bằng các số tiền trong bảng riêng.",
-      "footerNote2":   "# Dữ liệu hành tinh sẽ đồng bộ khi các trò chơi ra mắt.",
-      "inGame":        "Trong game",
-      "open":          "Mở",
-      "table": {
-        "questingNo":    "Số Nhiệm Vụ",
-        "pickupPlanet":  "Hành Tinh Nhận",
-        "dropOffPlanet": "Hành Tinh Giao",
-        "itemGoods":     "Mục / Hàng Hóa",
-        "commSplit":     "Chia Hoa Hồng",
-        "questingTime":  "Thời Gian Nhiệm Vụ",
-        "assignedTo":    "Được Giao Cho"
-      },
-      "comingSoon": {
-        "title":   "Sắp Ra Mắt",
-        "desc":    "Tính năng nhiệm vụ trong game hiện đang được phát triển. Hãy chú ý — bạn sẽ có thể kiếm phần thưởng trực tiếp từ trò chơi.",
-        "gotIt":   "Đã Hiểu"
-      },
-      "pagination": {
-        "prev":  "Trước",
-        "next":  "Tiếp",
-        "page":  "Trang {{page}} / {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "Thuê Mướn",
-      "listings":         "niêm yết",
-      "listBtn":          "Đăng",
-      "forHireLabel":     "Cho Thuê",
-      "wantingToHire":    "Muốn Thuê",
-      "noListings":       "Không có niêm yết {{filter}}",
-      "lockedTitle":      "Nội dung Gaming HyperTek chỉ để hiển thị.",
-      "lockedDesc":       "Phần này bị khóa cho đến khi các trò chơi được hoàn thiện.",
-      "forHireBadge":     "CHO THUÊ",
-      "wantedBadge":      "MUỐN THUÊ",
-      "price":            "Giá",
-      "maxDuration":      "Thời Hạn Tối Đa",
-      "hireBtn":          "Thuê",
-      "fulfillBtn":       "Thực Hiện Yêu Cầu",
-      "rules": {
-        "durations":   "8 giờ · 1 ngày · 3 ngày · 1 tuần · 1 tháng",
-        "cooldown":    "Thời gian hồi phục: gấp 2 lần thời hạn thuê",
-        "commission":  "Hoa hồng: 20%",
-        "payment":     "Thanh toán bằng Hyper Bucks hoặc Vật Liệu"
+        "freeToList": "Đăng miễn phí",
+        "commission": "Hoa hồng: 20% khi bán"
       },
       "preview": {
         "title": "Xem Trước Tính Năng Trong Game",
-        "desc":  "Hệ thống Thuê Mướn sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
+        "desc": "Hệ thống Đấu Giá sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
       },
-      "hireModal": {
-        "hireTitle":     "Thuê Chuyên Gia",
-        "fulfillTitle":  "Thực Hiện Yêu Cầu Thuê",
-        "forHireBadge":  "CHO THUÊ",
-        "wantedBadge":   "CẦN THUÊ",
-        "price":         "Giá",
-        "duration":      "Thời Hạn",
-        "howHire":       "Cách thuê hoạt động",
-        "howFulfill":    "Cách thực hiện yêu cầu hoạt động",
-        "proceedHire":   "Tiến Hành Thuê",
-        "offerFulfill":  "Đề Nghị Thực Hiện",
-        "commission":    "Hoa hồng nền tảng 20% · Thời gian hồi phục áp dụng sau khi trả lại",
-        "confirmHire":   "Xác Nhận Thuê",
-        "confirmOffer":  "Xác Nhận Đề Nghị",
-        "specialist":    "Chuyên Gia",
-        "payment":       "Thanh Toán",
-        "yourOffer":     "Đề nghị của bạn",
-        "durationLabel": "Thời Hạn",
-        "commLabel":     "Hoa Hồng",
-        "back":          "Quay Lại",
-        "processing":    "Đang Xử Lý…",
-        "sendOffer":     "Gửi Đề Nghị",
-        "deployedTitle": "Đã Triển Khai!",
-        "offerSentTitle":"Đề Nghị Đã Gửi!",
-        "availableFor":  "Có sẵn trong",
-        "paid":          "Đã Thanh Toán",
-        "returnNote":    "Trả lại trước khi kết thúc thời hạn để tránh hình phạt tự động. Thời gian hồi phục {{hours}} giờ áp dụng sau khi trả lại.",
-        "close":         "Đóng"
+      "card": {
+        "currentBid": "Giá thầu hiện tại",
+        "endsIn": "Kết thúc sau",
+        "placeBid": "Đặt Giá Thầu",
+        "buyNow": "Mua Ngay",
+        "bids": "lần đấu giá",
+        "ended": "ĐÃ KẾT THÚC"
+      },
+      "detail": {
+        "currentBid": "Giá thầu hiện tại",
+        "start": "Bắt đầu",
+        "endsIn": "Kết thúc sau",
+        "description": "Mô Tả",
+        "recentBids": "Giá Thầu Gần Đây",
+        "anonymous": "Ẩn Danh",
+        "placeBid": "Đặt Giá Thầu",
+        "buyNow": "Mua Ngay",
+        "buyNowLabel": "Mua Ngay",
+        "bids": "lần đấu giá"
+      },
+      "bidModal": {
+        "title": "Đặt Giá Thầu",
+        "currentBid": "Giá thầu hiện tại",
+        "minimumBid": "Giá thầu tối thiểu",
+        "yourBid": "Giá thầu của bạn (USDC)",
+        "minIncrement": "Tăng tối thiểu 5% · Tối thiểu tiếp theo sau giá thầu của bạn: {{next}} USDC",
+        "reviewBid": "Xem Lại Giá Thầu",
+        "disclaimer": "Giá thầu thắng có tính ràng buộc · Hoa hồng nền tảng 20%",
+        "confirmTitle": "Xác Nhận Giá Thầu",
+        "item": "Mục",
+        "yourBidLabel": "Giá thầu của bạn",
+        "youPay": "Nếu bạn thắng, bạn trả",
+        "outbidNotice": "Bạn sẽ được thông báo ngay nếu ai đó vượt giá. Đấu giá tự động đóng khi hết giờ.",
+        "back": "Quay Lại",
+        "confirm": "Xác Nhận — {{amount}} USDC",
+        "placing": "Đang Đặt…",
+        "successTitle": "Đã Đặt Giá Thầu!",
+        "highestBidder": "Bạn đang dẫn đầu",
+        "outbidWarning": "Bạn sẽ nhận được thông báo nếu ai đó vượt giá.",
+        "done": "Xong",
+        "endsIn": "Kết thúc sau"
+      },
+      "instantBuyModal": {
+        "title": "Mua Ngay — Tức Thì",
+        "buyNowPrice": "Giá mua ngay",
+        "currentBids": "Giá thầu hiện tại",
+        "notice": "Mua ngay kết thúc cuộc đấu giá ngay lập tức. Mục được chuyển vào ví của bạn và tất cả người đấu giá khác được hoàn tiền.",
+        "cancel": "Hủy",
+        "processing": "Đang Xử Lý…",
+        "successTitle": "Đã Mua Được Mục!",
+        "auctionClosed": "Đấu giá đã đóng · Đã bắt đầu chuyển",
+        "item": "Mục",
+        "paid": "Đã Thanh Toán",
+        "status": "Trạng Thái",
+        "transferred": "Đã chuyển vào ví",
+        "walletNote": "Mục sẽ xuất hiện trong tab Bộ Sưu Tập Của Tôi.",
+        "viewCollect": "Xem Bộ Sưu Tập Của Tôi"
       },
       "createModal": {
-        "listTitle":         "Đăng Cho Thuê",
-        "postTitle":         "Đăng Muốn Thuê",
-        "forHireBtn":        "Cho Thuê",
-        "wantingBtn":        "Muốn Thuê",
-        "itemNameHire":      "Tên chuyên gia / mục *",
-        "itemNameWant":      "Những gì bạn muốn thuê *",
-        "descPlaceholder":   "Mô tả",
-        "categoryPlaceholder":"Danh mục (tùy chọn)",
-        "paymentType":       "Loại Thanh Toán",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "Vật Liệu",
-        "amountLabel":       "Số Tiền (Hyper Bucks)",
-        "afterCommission":   "Bạn nhận {{amount}} HB sau 20% hoa hồng",
-        "maxDuration":       "Thời Hạn Tối Đa",
-        "disclaimer":        "Hoa hồng 20% · Thời gian hồi phục = 2 lần thời hạn thuê sau khi trả lại",
-        "listing":           "Đang Đăng…",
-        "submit":            "Tạo Niêm Yết"
+        "title": "Tạo Đấu Giá",
+        "selectItem": "Chọn Mục",
+        "connectWallet": "Kết nối ví để duyệt các mục của bạn",
+        "loadingItems": "Đang Tải…",
+        "noItems": "Không tìm thấy mục nào được sở hữu",
+        "pricingDuration": "Giá & Thời Hạn",
+        "startPrice": "Giá Khởi Điểm (USDC) *",
+        "reservePrice": "Giá Dự Trữ (USDC)",
+        "instantBuyPrice": "Giá Mua Ngay (USDC)",
+        "optional": "Tùy chọn",
+        "leaveBlank": "Để trống để vô hiệu hóa",
+        "duration": "Thời Hạn",
+        "dur1Day": "1 Ngày",
+        "dur3Days": "3 Ngày",
+        "dur7Days": "7 Ngày",
+        "freeToList": "Đăng miễn phí · Hoa hồng 20% khi bán",
+        "creating": "Đang Tạo…",
+        "submit": "Tạo Đấu Giá"
       },
       "pagination": {
-        "prev":  "Trước",
-        "next":  "Tiếp",
-        "page":  "Trang {{page}} / {{pages}}"
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {{page}} / {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "Giao Dịch",
+      "listings": "niêm yết",
+      "postTrade": "Đăng Giao Dịch",
+      "noTrades": "Không có giao dịch {{filter}}",
+      "viewDetails": "Xem Chi Tiết",
+      "trade": "giao dịch",
+      "yours": "của bạn",
+      "offering": "Đang cung cấp",
+      "wanting": "Muốn nhận",
+      "makeOffer": "Đặt đề nghị",
+      "by": "bởi",
+      "acceptTrade": "Chấp Nhận Giao Dịch",
+      "cancelTrade": "Hủy Giao Dịch",
+      "rules": {
+        "expiry": "Niêm yết hết hạn sau 30 ngày",
+        "fee": "Phí nền tảng áp dụng cho cả hai bên",
+        "noNFA": "NFA không thể giao dịch — chỉ bán"
+      },
+      "acceptModal": {
+        "title": "Đề Xuất Giao Dịch",
+        "postedBy": "Đăng bởi",
+        "exchangeDetails": "Chi Tiết Trao Đổi",
+        "theyOffer": "Họ cung cấp",
+        "theyWant": "Họ muốn",
+        "feeNotice": "Phí nền tảng áp dụng cho cả hai bên",
+        "acceptBtn": "Chấp Nhận Giao Dịch Này",
+        "confirmTitle": "Xác Nhận Giao Dịch",
+        "trade": "Giao Dịch",
+        "postedByLabel": "Đăng bởi",
+        "terms": "Bằng cách chấp nhận, bạn đồng ý với các điều khoản trao đổi. Người đăng sẽ được thông báo và phải xác nhận trước khi chuyển mục.",
+        "back": "Quay Lại",
+        "sending": "Đang Gửi…",
+        "confirm": "Xác Nhận",
+        "successTitle": "Đề Xuất Đã Gửi!",
+        "notified": "đã được thông báo",
+        "successNote": "Người đăng giao dịch sẽ xem xét đề xuất của bạn và sắp xếp việc trao đổi. Kiểm tra thông báo của bạn để xem phản hồi của họ.",
+        "expiry": "⏱ Đề xuất hết hạn sau 30 ngày nếu không được xác nhận.",
+        "close": "Đóng"
+      },
+      "createModal": {
+        "title": "Đăng Giao Dịch",
+        "yourItem": "Mục Của Bạn",
+        "itemNamePlaceholder": "Tên mục *",
+        "loadingItems": "Đang tải các mục của bạn…",
+        "connectWallet": "Kết nối ví để chọn từ các mục của bạn",
+        "pickFromItems": "Hoặc chọn từ các mục của bạn (tự điền tên):",
+        "imageOptional": "Hình ảnh (tùy chọn)",
+        "whatYouWant": "Những Gì Bạn Muốn",
+        "openOffer": "Đề nghị mở — để người khác đề xuất",
+        "anyCategory": "Bất kỳ danh mục nào",
+        "notesLabel": "Ghi chú (tùy chọn)",
+        "notesPlaceholder": "Điều khoản giao dịch, điều kiện, v.v.",
+        "disclaimer": "Cả hai bên trả phí nền tảng · Hết hạn sau 30 ngày · NFA không thể giao dịch",
+        "posting": "Đang Đăng…",
+        "submit": "Đăng Giao Dịch"
+      },
+      "pagination": {
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {{page}} / {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "Bảng Nhiệm Vụ",
+      "quests": "nhiệm vụ",
+      "noQuests": "Không có nhiệm vụ {{filter}}",
+      "inGameFeature": "Tính Năng Trong Game",
+      "inGameDesc": "Nhiệm vụ được tự động tạo ra khi người bán chọn hoa hồng giảm. Người chơi có thể hoàn thành tối đa 5 nhiệm vụ mỗi ngày. Kho hoa hồng được chia giữa giảm giá cho người mua, phần thưởng cho người chơi và nền tảng.",
+      "earnFromQuests": "Muốn kiếm tiền từ nhiệm vụ? Chơi trò chơi →",
+      "moneyQuests": "Nhiệm Vụ Tiền (kho 11%)",
+      "resourceQuests": "Nhiệm Vụ Tài Nguyên (kho 20%)",
+      "footerNote1": "# Các nhiệm vụ có tải trọng kết hợp sẽ được thanh toán bằng các số tiền trong bảng riêng.",
+      "footerNote2": "# Dữ liệu hành tinh sẽ đồng bộ khi các trò chơi ra mắt.",
+      "inGame": "Trong game",
+      "open": "Mở",
+      "table": {
+        "questingNo": "Số Nhiệm Vụ",
+        "pickupPlanet": "Hành Tinh Nhận",
+        "dropOffPlanet": "Hành Tinh Giao",
+        "itemGoods": "Mục / Hàng Hóa",
+        "commSplit": "Chia Hoa Hồng",
+        "questingTime": "Thời Gian Nhiệm Vụ",
+        "assignedTo": "Được Giao Cho"
+      },
+      "comingSoon": {
+        "title": "Sắp Ra Mắt",
+        "desc": "Tính năng nhiệm vụ trong game hiện đang được phát triển. Hãy chú ý — bạn sẽ có thể kiếm phần thưởng trực tiếp từ trò chơi.",
+        "gotIt": "Đã Hiểu"
+      },
+      "pagination": {
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {{page}} / {{pages}}"
+      },
+      "buyer": "Người mua",
+      "player": "Người chơi",
+      "platform": "Nền tảng",
+      "status": {
+        "open": "Mở",
+        "accepted": "Chấp nhận",
+        "completed": "Đã hoàn thành",
+        "cancelled": "Đã hủy"
+      },
+      "type": {
+        "money": "Tiền",
+        "resources": "Tài nguyên"
+      }
+    },
+    "hire": {
+      "heading": "Thuê Mướn",
+      "listings": "niêm yết",
+      "listBtn": "Đăng",
+      "forHireLabel": "Cho Thuê",
+      "wantingToHire": "Muốn Thuê",
+      "noListings": "Không có niêm yết {{filter}}",
+      "lockedTitle": "Nội dung Gaming HyperTek chỉ để hiển thị.",
+      "lockedDesc": "Phần này bị khóa cho đến khi các trò chơi được hoàn thiện.",
+      "forHireBadge": "CHO THUÊ",
+      "wantedBadge": "MUỐN THUÊ",
+      "price": "Giá",
+      "maxDuration": "Thời Hạn Tối Đa",
+      "hireBtn": "Thuê",
+      "fulfillBtn": "Thực Hiện Yêu Cầu",
+      "rules": {
+        "durations": "8 giờ · 1 ngày · 3 ngày · 1 tuần · 1 tháng",
+        "cooldown": "Thời gian hồi phục: gấp 2 lần thời hạn thuê",
+        "commission": "Hoa hồng: 20%",
+        "payment": "Thanh toán bằng Hyper Bucks hoặc Vật Liệu"
+      },
+      "preview": {
+        "title": "Xem Trước Tính Năng Trong Game",
+        "desc": "Hệ thống Thuê Mướn sẽ hoàn toàn hoạt động trong game khi ra mắt. Các mục hiển thị ở đây là mẫu để trình bày cho nhà đầu tư/người dùng."
+      },
+      "hireModal": {
+        "hireTitle": "Thuê Chuyên Gia",
+        "fulfillTitle": "Thực Hiện Yêu Cầu Thuê",
+        "forHireBadge": "CHO THUÊ",
+        "wantedBadge": "CẦN THUÊ",
+        "price": "Giá",
+        "duration": "Thời Hạn",
+        "howHire": "Cách thuê hoạt động",
+        "howFulfill": "Cách thực hiện yêu cầu hoạt động",
+        "proceedHire": "Tiến Hành Thuê",
+        "offerFulfill": "Đề Nghị Thực Hiện",
+        "commission": "Hoa hồng nền tảng 20% · Thời gian hồi phục áp dụng sau khi trả lại",
+        "confirmHire": "Xác Nhận Thuê",
+        "confirmOffer": "Xác Nhận Đề Nghị",
+        "specialist": "Chuyên Gia",
+        "payment": "Thanh Toán",
+        "yourOffer": "Đề nghị của bạn",
+        "durationLabel": "Thời Hạn",
+        "commLabel": "Hoa Hồng",
+        "back": "Quay Lại",
+        "processing": "Đang Xử Lý…",
+        "sendOffer": "Gửi Đề Nghị",
+        "deployedTitle": "Đã Triển Khai!",
+        "offerSentTitle": "Đề Nghị Đã Gửi!",
+        "availableFor": "Có sẵn trong",
+        "paid": "Đã Thanh Toán",
+        "returnNote": "Trả lại trước khi kết thúc thời hạn để tránh hình phạt tự động. Thời gian hồi phục {{hours}} giờ áp dụng sau khi trả lại.",
+        "close": "Đóng"
+      },
+      "createModal": {
+        "listTitle": "Đăng Cho Thuê",
+        "postTitle": "Đăng Muốn Thuê",
+        "forHireBtn": "Cho Thuê",
+        "wantingBtn": "Muốn Thuê",
+        "itemNameHire": "Tên chuyên gia / mục *",
+        "itemNameWant": "Những gì bạn muốn thuê *",
+        "descPlaceholder": "Mô tả",
+        "categoryPlaceholder": "Danh mục (tùy chọn)",
+        "paymentType": "Loại Thanh Toán",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Vật Liệu",
+        "amountLabel": "Số Tiền (Hyper Bucks)",
+        "afterCommission": "Bạn nhận {{amount}} HB sau 20% hoa hồng",
+        "maxDuration": "Thời Hạn Tối Đa",
+        "disclaimer": "Hoa hồng 20% · Thời gian hồi phục = 2 lần thời hạn thuê sau khi trả lại",
+        "listing": "Đang Đăng…",
+        "submit": "Tạo Niêm Yết"
+      },
+      "pagination": {
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {{page}} / {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "Bảng Tiền Thưởng",
-      "contracts":     "hợp đồng",
-      "contractsPlural":"hợp đồng",
-      "noContracts":   "Không có hợp đồng {{filter}}",
-      "noContractsNote":"Tiền thưởng được đăng bởi người chơi và hệ thống game",
-      "expiresIn":     "Hết hạn sau {{days}} ngày",
+      "heading": "Bảng Tiền Thưởng",
+      "contracts": "hợp đồng",
+      "contractsPlural": "hợp đồng",
+      "noContracts": "Không có hợp đồng {{filter}}",
+      "noContractsNote": "Tiền thưởng được đăng bởi người chơi và hệ thống game",
+      "expiresIn": "Hết hạn sau {{days}} ngày",
       "inGameNotice": {
         "title": "Tính Năng Trong Game — Chỉ Xem",
-        "desc":  "Tiền thưởng được tạo bởi người chơi và hệ thống game. Chấp nhận và hoàn thành tiền thưởng chỉ xảy ra trong game. Bảng này được hiển thị để minh bạch và khuyến khích người chơi mới tham gia."
+        "desc": "Tiền thưởng được tạo bởi người chơi và hệ thống game. Chấp nhận và hoàn thành tiền thưởng chỉ xảy ra trong game. Bảng này được hiển thị để minh bạch và khuyến khích người chơi mới tham gia."
       },
       "rules": {
-        "battle":     "Trận chiến được giải quyết tự động trong game",
+        "battle": "Trận chiến được giải quyết tự động trong game",
         "commission": "Hoa hồng nền tảng 20% trên phần thưởng",
-        "expiry":     "Hợp đồng hết hạn sau 30 ngày"
+        "expiry": "Hợp đồng hết hạn sau 30 ngày"
       },
       "table": {
-        "bountyNo":   "Số Tiền Thưởng",
-        "target":     "Mục Tiêu (Đã Đặt Lên)",
-        "reward":     "Phần Thưởng",
-        "postedBy":   "Đăng Bởi",
-        "claimedBy":  "Nhận Bởi",
-        "status":     "Trạng Thái",
-        "netHB":      "{{amount}} HB ròng"
+        "bountyNo": "Số Tiền Thưởng",
+        "target": "Mục Tiêu (Đã Đặt Lên)",
+        "reward": "Phần Thưởng",
+        "postedBy": "Đăng Bởi",
+        "claimedBy": "Nhận Bởi",
+        "status": "Trạng Thái",
+        "netHB": "{{amount}} HB ròng"
       },
       "pagination": {
-        "prev":  "Trước",
-        "next":  "Tiếp",
-        "page":  "Trang {{page}} / {{pages}}"
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang {{page}} / {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "Trước",
-      "next":           "Tiếp",
-      "pageOf":         "Trang {{page}} / {{pages}}",
-      "back":           "Quay Lại",
-      "close":          "Đóng",
-      "cancel":         "Hủy",
-      "loading":        "Đang Tải…",
-      "connectWallet":  "Kết nối ví của bạn trước",
-      "loginFirst":     "Đăng nhập trước"
+      "prev": "Trước",
+      "next": "Tiếp",
+      "pageOf": "Trang {{page}} / {{pages}}",
+      "back": "Quay Lại",
+      "close": "Đóng",
+      "cancel": "Hủy",
+      "loading": "Đang Tải…",
+      "connectWallet": "Kết nối ví của bạn trước",
+      "loginFirst": "Đăng nhập trước"
     }
+  },
+  "musicPlayer": {
+    "title": "Trình phát nhạc",
+    "playing": "Đang phát",
+    "sound": "Âm thanh",
+    "ambientDesc": "Nhạc nền xung quanh tích hợp sẵn dành cho thị trường. Chơi trên vòng lặp.",
+    "playAmbient": "Phát Ambient",
+    "pauseAmbient": "Tạm dừng Ambient",
+    "spotifyDesc": "Dán bất kỳ bản nhạc, danh sách phát hoặc liên kết album nào trên Spotify.",
+    "loadSpotify": "Tải Spotify",
+    "soundcloudDesc": "Dán bất kỳ liên kết danh sách phát hoặc bản nhạc SoundCloud nào.",
+    "loadSoundCloud": "Tải SoundCloud",
+    "changeLink": "Thay đổi liên kết"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Thanh toán bằng Thẻ",
+      "amount": "Số tiền:",
+      "cancel": "Hủy",
+      "processing": "Đang xử lý...",
+      "pay": "Thanh toán"
+    },
+    "nav": {
+      "backToMarketplace": "Quay lại Marketplace",
+      "backToCollections": "Quay lại Bộ sưu tập",
+      "offers": "Ưu đãi",
+      "marketplace": "Thị trường",
+      "auction": "Đấu giá",
+      "trade": "Giao dịch",
+      "detail": "{{type}} Chi tiết",
+      "buy": "Mua {{type}}"
+    },
+    "marketplace": {
+      "listed": "Được liệt kê",
+      "youOwn": "Bạn sở hữu cái này",
+      "notMinted": "Không đúc yet",
+      "ownedBy": "Được sở hữu bởi",
+      "platform": "Platform",
+      "noDesc": "Không có mô tả nào được cung cấp cho mặt hàng này.",
+      "price": "Giá",
+      "minBuyback": "Đảm bảo mua lại tối thiểu",
+      "reservePrice": "Giá dự trữ",
+      "buybackNote": "Tài sản này không thể được bán dưới giá trị mua lại tối thiểu của nó.",
+      "networkNote": "USDC trên cơ sở · ETH cơ sở cần thiết cho gas (chỉ thanh toán bằng ví)",
+      "buyWithCard": "Mua bằng thẻ",
+      "makeOffer": "Đưa ra ưu đãi",
+      "processing": "Đang xử lý...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "Mua ngay",
+      "listNow": "Danh sách ngay",
+      "yourListed": "{{type}} của bạn (Đã liệt kê)",
+      "notAvailable": "Không có sẵn"
+    },
+    "fundModal": {
+      "title": "Không đủ USDC",
+      "youNeed": "Bạn cần",
+      "butHave": "nhưng ví của bạn chỉ có",
+      "desc2": "Nạp tiền vào ví của bạn ngay lập tức bằng thẻ tín dụng hoặc thẻ ghi nợ qua Transak, sau đó quay lại để hoàn tất giao dịch mua.",
+      "fundBtn": "Nạp tiền vào ví bằng thẻ (Transak)",
+      "cancel": "Hủy"
+    },
+    "gasModal": {
+      "title": "ETH Cần thiết cho Gas",
+      "mainnetNote": "Bạn đang sử dụng Base Mainnet. Mua một lượng nhỏ ETH (≈ $1–2) trên Coinbase hoặc bắc cầu từ Ethereum qua bridge.base.org.",
+      "testnetNote": "Bạn đang sử dụng Base Sepolia Testnet. Nhận ETH thử nghiệm miễn phí từ một vòi.",
+      "faucetBtn": "Nhận Testnet ETH (Vòi)",
+      "bridgeBtn": "Cầu nối ETH đến Base",
+      "close": "Đóng"
+    },
+    "confirmModal1": {
+      "title": "Xác nhận hành động",
+      "listPrice": "Giá niêm yết",
+      "platformFee": "Phí nền tảng (10%)",
+      "total": "Total",
+      "cancel": "Hủy",
+      "continue": "Tiếp tục"
+    },
+    "confirmModal2": {
+      "setPrice": "Đặt giá niêm yết của bạn (USDC)",
+      "willList": "✓ Sẽ niêm yết ở mức {{price}} USDC",
+      "price": "Giá",
+      "cancel": "Hủy",
+      "processing": "Đang xử lý...",
+      "confirm": "Xác nhận"
+    },
+    "offers": {
+      "noOffers": "Chưa có ưu đãi nào",
+      "offer": "ưu đãi",
+      "offers": "ưu đãi",
+      "noOffersTitle": "Không có ưu đãi nào ngay bây giờ",
+      "noOffersDesc": "Hãy là người đầu tiên thực hiện ưu đãi ưu đãi",
+      "colPrice": "Giá",
+      "colStatus": "Trạng thái",
+      "colFrom": "Từ",
+      "colExpires": "Hết hạn",
+      "colAction": "Hành động",
+      "accept": "Chấp nhận",
+      "reject": "Từ chối",
+      "cancel": "Hủy",
+      "expired": "Đã hết hạn",
+      "completePurchase": "Hoàn thành Mua"
+    },
+    "auction": {
+      "loading": "Đang tải dữ liệu đấu giá…",
+      "active": "Đấu giá đang hoạt động",
+      "startPrice": "Giá khởi điểm",
+      "currentBid": "Giá thầu hiện tại",
+      "noBids": "Chưa có giá thầu",
+      "instantBuy": "Mua tức thì",
+      "reservePrice": "Giá đặt trước",
+      "bidHistory": "Lịch sử giá thầu",
+      "minBid": "Phút giá thầu:",
+      "bidding": "Đấu giá…",
+      "placeBid": "Đặt giá thầu",
+      "connectWallet": "Kết nối ví của bạn để đặt giá thầu",
+      "ownerNote": "Sản phẩm của bạn được liệt kê trong cuộc đấu giá. Giá thầu sẽ xuất hiện ở đây khi chúng đến.",
+      "noAuction": "Không có phiên đấu giá đang diễn ra cho mặt hàng này",
+      "ownerSetup": "Đi tới Bộ sưu tập của bạn và nhấp vào Danh sách để thiết lập một cuộc đấu giá.",
+      "notAvailable": "Mặt hàng này hiện không có phiên đấu giá mở."
+    },
+    "trade": {
+      "loading": "Đang tải danh sách giao dịch…",
+      "active": "danh sách giao dịch đang hoạt động",
+      "actives": "giao dịch đang hoạt động danh sách",
+      "offering": "Offering",
+      "wants": "Wants",
+      "openOffer": "Mở ưu đãi",
+      "by": "By",
+      "proposeTrade": "Đề xuất giao dịch →",
+      "noTrades": "Không có danh sách giao dịch đang hoạt động",
+      "ownerSetup": "Đi tới Bộ sưu tập của bạn và nhấp vào Danh sách để thiết lập giao dịch.",
+      "notAvailable": "Chủ sở hữu không có danh sách giao dịch mở nào cho việc này item."
+    },
+    "successModal": {
+      "title": "Mua hàng thành công!",
+      "desc": "{{name}} đã được mua. NFT của bạn sẽ sớm được chuyển vào ví của bạn.",
+      "note": "Việc chuyển khoản được xử lý tự động thông qua hệ thống của chúng tôi.",
+      "viewProfile": "Xem trong Hồ sơ của tôi",
+      "continueShopping": "Tiếp tục mua sắm"
+    },
+    "transferFailed": {
+      "title": "Đã nhận được khoản thanh toán - Đang chờ chuyển khoản",
+      "desc": "Thanh toán của bạn đã thành công nhưng quá trình chuyển NFT gặp phải sự cố. Tiền của bạn được an toàn — nhóm của chúng tôi sẽ hoàn tất chuyển khoản theo cách thủ công.",
+      "viewProfile": "Xem hồ sơ của tôi",
+      "dismiss": "Bỏ qua"
+    },
+    "priceHistory": {
+      "title": "Lịch sử giá",
+      "subtitle": "Giá bán lịch sử cho sản phẩm này NFT",
+      "loading": "Đang tải...",
+      "noSales": "Chưa ghi nhận doanh số nào",
+      "noSalesNote": "Lịch sử giá xuất hiện sau lần bán đầu tiên"
+    }
+  },
+  "makeOffer": {
+    "back": "Trở lại",
+    "floor": "Tầng",
+    "title": "Đưa ra một đề nghị",
+    "yourOffer": "Ưu đãi của bạn (USDC)",
+    "expiresIn": "Ưu đãi sẽ hết hạn vào",
+    "youPay": "Bạn thanh toán",
+    "submitting": "Đang gửi...",
+    "submit": "Gửi ưu đãi",
+    "terms": "Bằng cách gửi ưu đãi này, bạn đồng ý với các Điều khoản của Hyper Tek Dịch vụ.",
+    "expiry": {
+      "6h": "6 giờ",
+      "12h": "12 giờ",
+      "1d": "1 ngày",
+      "3d": "3 ngày",
+      "7d": "7 ngày",
+      "1mo": "1 tháng"
+    },
+    "success": {
+      "title": "Ưu đãi đã được gửi!",
+      "desc": "Ưu đãi {{price}} USDC của bạn với giá {{name}} đã được gửi đến owner.",
+      "expires": "Hết hạn sau {{duration}}",
+      "backToNft": "Quay lại NFT",
+      "goToMarketplace": "Đi tới Marketplace"
+    },
+    "error": {
+      "loginRequired": "Vui lòng đăng nhập để đưa ra ưu đãi",
+      "submitFailed": "Không thể gửi ưu đãi. Vui lòng thử lại."
+    }
+  },
+  "paymentError": {
+    "message": "Yêu cầu của bạn không thành công",
+    "goHome": "Trở về nhà"
   }
 }

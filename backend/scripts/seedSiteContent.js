@@ -276,10 +276,10 @@ const SECTIONS = [
         sectionLabel: "About Page — Top Section",
         pageGroup: "about",
         fields: [
-            { key: "heading",    label: "Page Heading", type: "text",     value: "About Us" },
-            { key: "subtitle",   label: "Subtitle",     type: "textarea", value: "The year is 2117. Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\n\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
-            { key: "bg_image",   label: "Background Image (about_bg.jpg)", type: "image", value: "" },
-            { key: "char_image", label: "Character Image (char.png)",       type: "image", value: "" },
+            { key: "heading", label: "Page Heading", type: "text", value: "About Us" },
+            { key: "subtitle", label: "Subtitle", type: "textarea", value: "The year is 2117. Humanity didn't conquer the stars — it fractured into them. After Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\n\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
+            { key: "bg_image", label: "Background Image (about_bg.jpg)", type: "image", value: "" },
+            { key: "char_image", label: "Character Image (char.png)", type: "image", value: "" },
         ],
     },
     {
@@ -287,12 +287,12 @@ const SECTIONS = [
         sectionLabel: "About Page — Our Story",
         pageGroup: "about",
         fields: [
-            { key: "story_image",  label: "Story 1 — Image", type: "image",    value: "" },
-            { key: "body",         label: "Story 1 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
-            { key: "story2_image", label: "Story 2 — Image", type: "image",    value: "" },
-            { key: "story2_body",  label: "Story 2 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
-            { key: "story3_image", label: "Story 3 — Image", type: "image",    value: "" },
-            { key: "story3_body",  label: "Story 3 — Text",  type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story_image", label: "Story 1 — Image", type: "image", value: "" },
+            { key: "body", label: "Story 1 — Text", type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story2_image", label: "Story 2 — Image", type: "image", value: "" },
+            { key: "story2_body", label: "Story 2 — Text", type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story3_image", label: "Story 3 — Image", type: "image", value: "" },
+            { key: "story3_body", label: "Story 3 — Text", type: "textarea", value: "Humanity didn't conquer the stars — it fractured into them.\nAfter Earth's collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
         ],
     },
     {
@@ -386,7 +386,7 @@ async function seed() {
             process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/hypertek";
         console.log("🔗 Connecting to:", mongoUrl.replace(/\/\/.*@/, "//***:***@"));
         await mongoose.connect(mongoUrl);
-        console.log("✅ Connected to MongoDB");
+        console.log("Connected to MongoDB");
 
         let created = 0;
         let updated = 0;
@@ -411,7 +411,7 @@ async function seed() {
                 }
             } else {
                 await SiteContent.create(section);
-                console.log(`✅ Created "${section.sectionKey}"`);
+                console.log(`Created "${section.sectionKey}"`);
                 created++;
             }
         }
@@ -420,7 +420,7 @@ async function seed() {
         await mongoose.disconnect();
         process.exit(0);
     } catch (err) {
-        console.error("❌ Seed error:", err);
+        console.error(" Seed error:", err);
         process.exit(1);
     }
 }

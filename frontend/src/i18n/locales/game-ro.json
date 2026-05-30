@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Bun venit la",
+    "back": "Înapoi",
+    "racing": {
+      "label": "CURSE",
+      "heading": "Hyper Racing",
+      "subtitle": "Cea mai intensă experiență de curse cu vehicule zburătoare din galaxie,\nunde priceperea plătește și se fac campioni.",
+      "intro": [
+        "Hyper Racing este un joc de curse competitiv de mare octanism, care se desfășoară în lumi extraterestre, în care jucătorii construiesc, modernizează și pilotează vehicule de curse zburătoare complet personalizabile prin unele dintre cele mai periculoase circuite din galaxie. De la formațiuni de rocă plutitoare și tuburi de lavă vulcanică până la pustii și trecători de munte, fiecare cursă este un test de pregătire, reflexe și strategie.",
+        "Dar Hyper Racing este mai mult decât un simplu joc; este o platformă competitivă în care recompense reale sunt pe linie. Performanții de top pot intra în evenimente și turnee clasate cu fonduri de premii în bani reale. Cu cât concurezi mai bine, cu atât câștigi mai mult. Indiferent dacă urmărești gloria clasamentului sau construiești un imperiu al curselor, tot ceea ce faci în Hyper Racing te duce mai departe.",
+        "Îmbunătățiți-vă vehiculele de curse de la nas la coadă. Recrutați-vă și creșteți-vă echipajul de groapă. Angajează un manager de boxă care se potrivește cu filozofia ta de curse. Apoi du-ți abilitățile dincolo de pistă, garajul tău de curse funcționează ca hangarul navei tale spațiale personale, iar fiecare abilitate pe care o dezvolți este implicată în lupta spațială în Hyper Quest și Overlord of the 7 Realms."
+      ],
+      "introClose": "Citește mai departe pentru a descoperi cum funcționează jocul, ce poți câștiga și cum cariera ta de curse alimentează un întreg univers de progresie.",
+      "calloutLine1": "Cursa pentru a câștiga. Câștigă pentru a face upgrade.",
+      "calloutLine2": "Faceți upgrade la Dominate.",
+      "howItWorksTitle": "Cum funcționează Hyper Racing",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Alege-ți vehiculul",
+          "body": "Fiecare cursă începe în garajul tău. Alegeți dintr-o listă în creștere de vehicule de curse zburătoare, fiecare cu caracteristici de manevrabilitate unice și potențial de actualizare. Dezbrăcați o carcasă pentru o viteză vertiginoasă în linie dreaptă sau blindați-o pentru a supraviețui celor mai brutale condiții. Propulsoare, stabilizatoare, scuturi, sisteme de răcire, aripioare aerodinamice, arborele de upgrade este adânc și fiecare modificare schimbă modul în care se comportă ambarcațiunea pe pistă."
+        },
+        {
+          "num": "02",
+          "title": "Construiește-ți echipa",
+          "body": "Cursa este un sport de echipă. Recrutați specialiști în echipajul de boxă care aduc bonusuri unice, realimentare mai rapidă, diagnosticare în timp real, reparații de urgență la mijlocul cursei și modificări de performanță între ture. Fiecare membru al echipajului crește cu experiență, stivuind abilități puternice pe lângă upgrade-urile vehiculului tău. Apoi angajați un manager de boxă care să coordoneze operațiunile, să apeleze strategia de cursă și să deblocheze creșterile de performanță la nivelul întregii echipe care se adaugă pe un sezon întreg."
+        },
+        {
+          "num": "03",
+          "title": "Cursa peste lumi",
+          "body": "Circuitele acoperă planete extraterestre cu terenuri extrem de diferite și pericole atmosferice. Treceți prin formațiuni stâncoase plutitoare în stilul Avatar, înfilați tuburile de lavă vulcanică cu o viteză vertiginoasă, străbate câmpiile deșertice nesfârșite și sculptați prin lanțuri muntoase perfide. Ploaie acide, atmosfere radioactive, gravitație în schimbare și vânturi turbulente, nicio cursă nu necesită aceeași configurație. Reglarea vehiculului pentru a se potrivi fiecărui mediu este locul în care strategia se întâlnește cu abilitățile."
+        },
+        {
+          "num": "04",
+          "title": "Urcă pe ranguri",
+          "body": "Victoria câștigă puncte de lider, deblochează noi circuite în lumi îndepărtate și deschide ușa către competiții de nivel superior. Cu cât mergi mai adânc, cu atât adversarii sunt mai feroce și miza este mai mare. Dovediți-vă pe fiecare planetă și urcați în clasamentul global."
+        }
+      ],
+      "rewardsTitle": "Câștigă mare; Recompensele care contează!",
+      "rewards": [
+        {
+          "title": "Recompense în joc",
+          "body": "Fiecare cursă pe care o termini plătește. Câștigă, iar recompensele se înmulțesc. Victoriile în cursă deblochează componente premium pentru vehicule, materiale de upgrade rare, jetoane exclusive de recrutare a echipajului și credite pentru a vă finanța următoarea construcție. Vinde vehicule îmbunătățite pentru profit, reinvestește în mașini noi și urmărește-ți cum imperiul de curse crește cu fiecare podium."
+        },
+        {
+          "title": "Evenimente cu numerar real",
+          "body": "Hyper Racing duce competiția la nivelul următor cu evenimente și turnee clasate în care bani reali sunt în joc. Intră în competiții bazate pe abilități, dovedește-ți abilitățile împotriva celor mai buni piloți din galaxie și pleacă cu plăți în numerar reale. Cu cât plasezi mai sus, cu atât fondul de premii este mai mare. De la provocări cu clasare săptămânală până la evenimente sezoniere ale campionatului, există întotdeauna oportunități pentru cei mai buni performanțe de a-și transforma abilitățile de curse în câștiguri reale."
+        },
+        {
+          "title": "Cum funcționează evenimentele cu premii",
+          "body": "Jucătorii se califică prin joc clasat, îndeplinind pragurile de performanță care acordă intrarea la turnee cu premii în bani. Evenimentele sunt structurate în jurul unui matchmaking corect, asigurându-se că fiecare concurent se confruntă cu adversari cu abilități similare. Taxele de intrare sunt transparente, fondurile de premiere sunt afișate clar înainte de a vă angaja, iar plățile sunt procesate rapid după încheierea fiecărui eveniment. Este competitiv, este corect, iar recompensele sunt reale."
+        },
+        {
+          "title": "Progresia dincolo de pistă",
+          "body": "Recompensele obținute prin curse se alimentează direct în progresia dvs. mai largă. Îmbunătățiți-vă vehiculele de curse, întăriți-vă echipajul de groapă și canalizați câștigurile pentru a vă moderniza nava spațială principală. Garajul tău de curse este hangarul acelei nave, așa că fiecare îmbunătățire a operațiunii tale de curse alimentează și nava pe care o zbori între lumi și în lupta spațială în Hyper Quest și Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Două mașini, o misiune... Actualizați totul",
+      "upgrades": [
+        {
+          "title": "Upgrade-uri pentru vehicule de curse",
+          "body": "Vehiculul dumneavoastră de curse este o mașină complet modulară. Fiecare componentă poate fi schimbată, reglată și îmbunătățită: carcase, propulsoare, scuturi, carcase exterioare, motoare, stabilizatoare, sisteme de răcire și suprafețe aerodinamice. Compozitele ușoare oferă viteză brută; Armura rezistentă vă ține în viață în condiții atmosferice brutale. Calea de upgrade este profundă, iar alegerile pe care le faci îți definesc identitatea de curse. Cumpără vehicule noi, transformă-le în candidați la campionat, concurează-le către victorie și vinde-le cu profit când ești gata pentru următoarea provocare."
+        },
+        {
+          "title": "Actualizări principale ale navelor spațiale",
+          "body": "Garajul dumneavoastră de curse nu este doar un atelier; este hangarul navei tale personale. Aceleași resurse, credite și materiale pe care le câștigați pe pistă pot fi investite în modernizarea navei principale. Motoare mai bune pentru călătoriile interplanetare, sisteme de arme mai puternice pentru luptă spațială, navigație îmbunătățită pentru descoperirea de noi lumi de curse și carcase întărite pentru a supraviețui confruntărilor ostile în timpul tranzitului. Nava ta este baza ta de origine, transportul tău și nava ta de luptă, iar cursele o fac mai puternică."
+        },
+        {
+          "title": "Bucla de upgrade",
+          "body": "Cursa pentru a câștiga. Câștigă pentru a face upgrade. Faceți upgrade pentru a câștiga curse mai mari cu recompense mai mari. Distribuiți acele recompense atât în ​​vehiculele dvs. de curse, cât și în nava voastră spațială. Cu cât nava este mai bună, cu atât călătoriți mai departe și circuitele devin mai periculoase și mai profitabile. Este o buclă de progresie care recompensează dedicarea și abilitățile la fiecare nivel."
+        },
+        {
+          "title": "Impact între jocuri",
+          "body": "Fiecare abilitate de pilot pe care o dezvoltați pe pistă și fiecare upgrade pe care o instalați pe nava voastră spațială este transportată direct în Hyper Quest și Overlord of the 7 Realms. Un univers, mai multe jocuri, progresie fără întreruperi. Ceea ce construiești în Hyper Racing alimentează orice altceva."
+        }
+      ],
+      "faqTitle": "Hyper Racing — Întrebări frecvente",
+      "faq": [
+        {
+          "q": "Ce este Hyper Racing?",
+          "a": "Un joc de curse cu vehicule zburătoare de mare intensitate, plasat în lumi extraterestre. Construiește, modernizează și concurează cu vehicule complet personalizabile prin circuite științifico-fantastice periculoase, în timp ce concurează pentru recompense în joc și premii în bani reali."
+        },
+        {
+          "q": "Îmi pot actualiza vehiculul de curse?",
+          "a": "Fiecare componentă poate fi actualizată: carcase, propulsoare, scuturi, carcase exterioare, motoare, stabilizatoare, sisteme de răcire și suprafețe aerodinamice. Fiecare upgrade schimbă modul în care vehiculul dumneavoastră se descurcă pe diferite piste și condiții."
+        },
+        {
+          "q": "Ce face echipajul gropii?",
+          "a": "Membrii echipajului gropii oferă bonusuri unice: realimentare mai rapidă, diagnosticare carenă, reparații de urgență și ajustări de performanță între ture. Ele cresc la nivel în timp, deblocând abilități mai puternice care se strâng cu îmbunătățiri ale vehiculului."
+        },
+        {
+          "q": "Cum funcționează managerul de groapă?",
+          "a": "Managerul gropii coordonează operațiunile echipajului, apelează strategia de cursă și deblochează creșteri de performanță la nivelul întregii echipe. Managerii defensivi vă protejează vehiculul în condiții grele; managerii agresivi imping fiecare sistem pentru viteza maxima."
+        },
+        {
+          "q": "Pot câștiga bani reali?",
+          "a": "Da. Evenimentele și turneele clasificate includ fonduri de premii în bani reale. Califică-te prin jocul clasat, concurează împotriva adversarilor la fel de calificați și câștigă plăți reale în funcție de poziția ta finală. Provocările săptămânale și campionatele sezoniere rulează continuu."
+        },
+        {
+          "q": "Cum funcționează recompensele de cursă?",
+          "a": "Fiecare cursă plătește credite, materiale de upgrade și jetoane de echipaj. Victoriile îți înmulțesc câștigurile. Cumpărați vehicule, transformați-le în mașini de curse, câștigați curse și vindeți-le cu profit pentru a finanța îmbunătățiri suplimentare și îmbunătățiri ale navelor spațiale."
+        },
+        {
+          "q": "Pot să-mi fac și nava spațială principală?",
+          "a": "Absolut. Garajul tău de curse este hangarul navei tale spațiale. Câștigurile din cursă finanțează îmbunătățiri ale motoarelor, armelor, navigației și întăririi corpului navei principale, stimulând călătoriile interplanetare și lupta spațială."
+        },
+        {
+          "q": "Progresul duce la alte jocuri?",
+          "a": "Fiecare abilitate de pilot și upgrade de navă spațială se transferă direct în Hyper Quest și Overlord of the 7 Realms. Un univers, mai multe jocuri, progresie fără întreruperi. Ceea ce construiești în Hyper Racing alimentează orice altceva."
+        },
+        {
+          "q": "Ce medii de curse există?",
+          "a": "Circuitele acoperă formațiuni de rocă plutitoare, tuburi de lavă, câmpii deșertice și lanțuri muntoase din lumi extraterestre. Pericolele atmosferice includ ploi acide, atmosfere radioactive, gravitație variabilă și vânturi turbulente. Fiecare circuit necesită configurații diferite ale vehiculului."
+        }
+      ]
+    },
+    "quest": {
+      "label": "QUEST",
+      "heading": "Hyper Quest",
+      "subtitle": "Galaxia ta. Regulile tale. Averea ta.",
+      "intro": [
+        "Hyper Quest este o aventură spațială în lume deschisă în care îți comandi propria ta navă spațială complet upgradabilă, Quest Racer, printr-o galaxie vastă și periculoasă. Ți-ai părăsit civilizația de acasă cu ani în urmă în căutare de putere, bogăție și faimă. Acum, întregul univers este locul tău de joacă, iar fiecare misiune pe care o finalizezi te aduce mai aproape de dominația galactică.",
+        "Dar Hyper Quest nu este doar un joc. Este o platformă competitivă în care banii reali sunt în joc. Finalizează misiuni, învinge provocări și pleacă cu bani reali în buzunar și/sau recompense. De la misiuni rapide care durează minute până la expediții epice de mai multe zile, fiecare misiune dă roade. Cu cât provocarea este mai grea, cu atât recompensa este mai mare.",
+        "Îmbunătățiți-vă nava spațială de la carenă la cabina de pilotaj. Înarmați-l cu sisteme de arme devastatoare. Recrutați specialiști care stivuiesc bonusuri puternice pe performanța și nivelul de putere al navei dvs. Mine de asteroizi, transportă mărfuri periculoase, vânează comori ascunse, răpește ținte de mare valoare sau devii un pistol angajat. Modul în care conduci universul este în totalitate alegerea ta.",
+        "Tot ceea ce construiești în Hyper Quest se alimentează direct în Hyper Racing și Overlord of the 7 Realms. Un univers, progresie fără întreruperi, potențial nelimitat. Citește mai departe pentru a descoperi cum funcționează misiunile, ce poți câștiga și cum tu și nava ta spațială devii cea mai de temut navă din galaxie."
+      ],
+      "calloutLine1": "Căutare pentru a câștiga. Câștigă pentru a face upgrade.",
+      "calloutLine2": "Upgrade la Conquer.",
+      "howItWorksTitle": "Cum funcționează Hyper Quest",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Acceptați misiuni de la Consiliul de misiune",
+          "body": "Tabloul de misiuni din joc este poarta ta spre aventură. Răsfoiți misiunile disponibile, de la curse rapide de marfă care durează doar câteva minute până la expediții epice de mai multe zile în adâncime în spațiu neexplorat. Fiecare misiune vine cu obiective clare, evaluări de pericol și niveluri de recompensă. Alege misiunile care se potrivesc stilului tău de joc, fie că este vorba de transportul de mărfuri periculoase, de vânătoare de comori ascunse, de minerit în câmpuri de asteroizi sau de a merge sub acoperire pentru a recupera artefacte pierdute."
+        },
+        {
+          "num": "02",
+          "title": "Explorează Galaxia",
+          "body": "Călătorește prin portaluri către planete îndepărtate, fiecare cu medii unice, materiale valoroase și noi circuite de curse. Urmărește hărți galactice pentru a cartografia regiuni neexplorate și pentru a câștiga drepturi de denumire pentru planetele pe care le descoperi mai întâi. Mine de resurse din câmpurile de asteroizi, salvează părți din relicve antice și nave abandonate și adună indicii care duc la averi ascunse împrăștiate peste stele."
+        },
+        {
+          "num": "03",
+          "title": "Construiește-ți imperiul din interiorul navei tale",
+          "body": "Your Quest Racer este mai mult decât transport. Cultivați alimente în golfuri hidroponice, rafinați materialele extrase de pe planete îndepărtate și construiți armate din laboratoarele voastre de clonare. Îmbunătățește-ți trupele și armele lor, apără-te împotriva piraților și gestionează o bază mobilă autosusținută, care devine mai puternică cu fiecare misiune pe care o îndeplinești."
+        },
+        {
+          "num": "04",
+          "title": "Joacă în felul tău",
+          "body": "Nu există o singură cale către dominație. Deveniți un vânător de recompense de temut, un contrabandist viclean, un maestru miner sau un explorator legendar. Răpiți ținte de mare valoare, deveniți un pistol angajat sau creați alianțe pentru a controla sectoare întregi. Galaxia se înclină la voința ta și fiecare decizie îți modelează reputația și averea."
+        }
+      ],
+      "rewardsTitle": "Recompense Quest; Fii plătit pentru a juca!",
+      "rewards": [
+        {
+          "title": "Recompense în joc",
+          "body": "Fiecare misiune pe care o finalizați plătește. Creditele, materialele de upgrade, componentele rare, jetoanele de recrutare specializate și articolele exclusive curg în inventarul tău cu fiecare misiune reușită. Cu cât căutarea este mai grea, cu atât transportul este mai bogat. Descoperiți materiale rare pe planete îndepărtate, salvați piese de mare valoare din relicve antice și stocați resurse care vă alimentează ascensiunea către supremația galactică."
+        },
+        {
+          "title": "Plăți reale în numerar",
+          "body": "Hyper Quest duce jocurile dincolo de divertisment. Anumite misiuni și provocări clasificate oferă plăți reale în numerar. Finalizează misiuni de nivel înalt, domina evenimentele clasamentului și participă la campionate sezoniere de misiuni în care bani reali sunt în joc. Cu cât devii mai priceput și mai îndrăzneț, cu atât plățile sunt mai mari. De la recompense săptămânale de misiuni până la turnee sezoniere epice, există întotdeauna oportunități de a vă transforma aventurile galactice în câștiguri reale."
+        },
+        {
+          "title": "Cum funcționează plățile Quest",
+          "body": "Jucătorii se califică pentru misiuni cu recompense în numerar, construindu-și reputația și îndeplinind pragurile de performanță. Dificultatea misiunii, durata și nivelul de pericol determină fondul de premii. Plățile sunt transparente, afișate clar înainte de a accepta orice misiune și procesate rapid după finalizare. Indiferent dacă efectuați un transport de marfă de zece minute sau o expediție în spațiul adânc de o săptămână, recompensele se potrivesc cu riscul."
+        },
+        {
+          "title": "Progresie care dă înainte",
+          "body": "Recompensele Quest se alimentează direct în upgrade-urile navei, sistemele de arme și recrutarea de specialiști. Fiecare plată te face mai puternic, ceea ce deblochează misiuni mai dificile cu recompense și mai mari. Câștigurile sunt transmise și în Hyper Racing și Overlord of the 7 Realms, creând o buclă de progresie care recompensează dedicarea în întregul ecosistem Hyper Tek."
+        }
+      ],
+      "upgradesTitle": "Îmbunătățiți-vă nava, înarmați-vă arsenalul, recrutați-vă echipajul",
+      "upgrades": [
+        {
+          "title": "Upgrade-uri pentru nave spațiale",
+          "body": "Quest Racer-ul dumneavoastră este complet modular de la compartimentul motor până la cockpit. Actualizați carcasa pentru durabilitate maximă, întăriți carcasa exterioară pentru a rezista în medii ostile, creșteți generatoarele de scuturi pentru supraviețuirea luptei și revizuiți sistemele de alimentare pentru performanțe de vârf. Motoare mai bune înseamnă călătorii interplanetare mai rapide. Sistemele de navigație mai puternice dezvăluie rute ascunse și lumi neexplorate. Fiecare upgrade transformă nava ta într-o navă mai puternică, mai de temut."
+        },
+        {
+          "title": "Sisteme de arme",
+          "body": "Galaxia este periculoasă și trebuie să fii mai periculoasă. Îmbunătățiți-vă și perfecționați-vă sistemele de arme pentru a vă proteja împotriva piraților, a jucătorilor rivali și a forțelor ostile. Alegeți între configurațiile defensive care vă țin în viață în cele mai grave situații sau încărcările ofensive concepute pentru a provoca daune maxime. Matricele laser, bateriile de rachete, tunurile cu plasmă și armele experimentale cu energie sunt toate disponibile pe măsură ce progresați prin arborele de upgrade."
+        },
+        {
+          "title": "Recrutați specialiști",
+          "body": "Specialiștii schimbă jocul. Fiecare aduce abilități unice care adaugă bonusuri puternice performanței generale și nivelului de putere al navei tale. Specialiștii în navigație dezvăluie căi ascunse și reduc timpul de călătorie. Specialiștii în luptă sporesc precizia armelor și producția daunelor. Specialiștii în inginerie măresc integritatea carenei și viteza de reparare. Specialiștii în știință îmbunătățesc extracția resurselor și rafinarea materialelor. Stivuiți mai mulți specialiști pentru a crea combinații devastatoare care vă multiplică eficiența navei."
+        },
+        {
+          "title": "Bucla de putere",
+          "body": "Caută să câștigi. Câștigă pentru a face upgrade. Faceți upgrade pentru a cuceri misiuni mai dificile cu recompense mai mari. Recrutați specialiști pentru a amplifica fiecare sistem de pe nava dvs. Cu cât devii mai puternic, cu atât galaxia se deschide mai mult și norocul care te așteaptă este mai mare. Upgrade-urile navelor și bonusurile de specialitate sunt, de asemenea, direct în lupta spațială în timpul tranzitului Hyper Racing și a luptelor prin Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest — Întrebări frecvente",
+      "faq": [
+        {
+          "q": "Ce este Hyper Quest?",
+          "a": "O aventură spațială în lume deschisă în care comandați o navă spațială complet upgradabilă într-o galaxie vastă. Finalizează misiuni, explorează lumi extraterestre, îmbunătățește-ți nava, recrutează specialiști și câștigă recompense reale în bani alături de bogățiile din joc."
+        },
+        {
+          "q": "Cum funcționează misiunile?",
+          "a": "Acceptați misiuni de pe panoul de misiuni din joc. Misiunile variază de la curse rapide de marfă care durează doar câteva minute până la expediții epice de mai multe zile în adâncul spațiului neexplorat. Fiecare misiune are obiective clare, evaluări de pericol și niveluri de recompensă afișate înainte de a accepta."
+        },
+        {
+          "q": "Pot câștiga bani reali?",
+          "a": "Da. Anumite misiuni, provocări clasificate și campionate sezoniere oferă plăți reale în numerar. Construiți-vă reputația, atingeți pragurile de performanță și calificați-vă pentru misiuni de recompensă în numerar din ce în ce mai profitabile. Recompensele săptămânale și turneele sezoniere rulează continuu."
+        },
+        {
+          "q": "Ce recompense în joc pot câștiga?",
+          "a": "Fiecare misiune finalizată plătește credite, materiale de upgrade, componente rare, jetoane de recrutare specializate și articole exclusive. Cu cât misiunea este mai grea și mai lungă, cu atât recompensele sunt mai bogate. Descoperiți materiale rare pe planete îndepărtate și salvați piese de mare valoare din relicve antice."
+        },
+        {
+          "q": "Îmi pot face upgrade nava spațială?",
+          "a": "Fiecare sistem poate fi actualizat: carcasă, carcasă exterioară, generatoare de scuturi, sisteme de alimentare, motoare, cockpit și navigație. Motoarele mai bune înseamnă călătorii mai rapide, carcase mai puternice supraviețuiesc întâmpinărilor ostile, iar navigația îmbunătățită dezvăluie rute ascunse și lumi neexplorate."
+        },
+        {
+          "q": "Ce arme sunt disponibile?",
+          "a": "Actualizați și perfecționați sistemele de arme, inclusiv matrice laser, baterii de rachete, tunuri cu plasmă și arme cu energie experimentală. Alegeți configurații defensive pentru supraviețuire sau încărcări ofensive pentru daune maxime împotriva piraților, rivalilor și forțelor ostile."
+        },
+        {
+          "q": "Cum lucrează specialiștii?",
+          "a": "Recrutați specialiști cu abilități unice care adaugă bonusuri puternice performanței și nivelului de putere a navei dvs. Specialiștii în navigație dezvăluie căi ascunse, specialiștii în luptă sporesc daunele armelor, specialiștii în inginerie măresc integritatea carenei, iar specialiștii în știință îmbunătățesc extragerea resurselor. Stivuiți mai mulți specialiști pentru combinații devastatoare."
+        },
+        {
+          "q": "Ce tipuri de misiuni sunt disponibile?",
+          "a": "Transport de mărfuri, minerit de asteroizi, vânătoare de comori, vânătoare de recompense, recuperare de artefacte, operațiuni sub acoperire, explorare planetară, apărare piraților, misiuni de salvare și multe altele. Misiunile variază de la alergări rapide de zece minute la expediții de mai multe zile în spațiul adânc."
+        },
+        {
+          "q": "Pot descoperi noi planete?",
+          "a": "Da. Urmăriți hărți galactice în regiuni neexplorate și descoperiți lumi noi. Primii descoperitori câștigă drepturi de denumire pentru planetele pe care le găsesc. Lumile noi oferă materiale, medii și circuite de curse unice pe care niciun alt jucător nu le-a mai accesat până acum."
+        },
+        {
+          "q": "Ce pot face în interiorul navei mele?",
+          "a": "Your Quest Racer este o bază mobilă. Cultivați hrana în golfuri hidroponice, rafinați materialele extrase de pe planete îndepărtate, construiți și antrenați armate în laboratoarele de clonare, îmbunătățiți armele și apărarea și gestionați o operațiune auto-susținută care devine mai puternică cu fiecare misiune."
+        },
+        {
+          "q": "Cum funcționează harta galactică?",
+          "a": "Harta galactică vă ghidează explorarea prin univers. Actualizați-vă harta pentru a dezvălui noi sectoare, locații de portal și zone de misiuni ascunse. Pe măsură ce explorați mai departe, harta se extinde, deblocând regiuni din spațiu din ce în ce mai periculoase și pline de satisfacții."
+        },
+        {
+          "q": "Progresul meu se duce la alte jocuri?",
+          "a": "Tot ceea ce construiești în Hyper Quest se alimentează direct în Hyper Racing și Overlord of the 7 Realms. Actualizările navelor, bonusurile de specialitate, abilitățile de luptă și resursele se transferă fără probleme. Un univers, mai multe jocuri, progresie nelimitată."
+        },
+        {
+          "q": "Pot juca ca un răufăcător?",
+          "a": "Absolut. Mergeți sub acoperire, răpiți ținte de mare valoare, deveniți un pistol angajat, introduceți mărfuri periculoase de contrabandă sau atacați alți jucători. Nu există o singură cale către dominație. Modul în care conduci galaxia este în întregime alegerea ta și fiecare decizie îți modelează reputația."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "DOMNUL",
+      "heading": "Stăpânul celor 7 Tărâmuri",
+      "subtitle": "Crash-terra. Reconstrui. Cuceri. Deveniți Overlord.",
+      "intro": [
+        "Overlord of the 7 Realms este un joc de strategie de luptă cu trei niveluri, spre deosebire de orice altceva în jocuri. Te-ai aventurat printr-un portal într-un univers paralel și te-ai prăbușit pe o planetă extraterestră ostilă. Nava ta este distrusă, sistemele tale eșuează și creaturile planetei se apropie deja. Supraviețuirea este doar începutul. Dominanța este scopul.",
+        "Reconstruiește-ți nava de la epavă în sus. Clonează și antrenează armate în laboratoarele tale de la bord. Îmblanziți fauna sălbatică a planetei pentru a crea o cavalerie călare devastatoare. Apoi luați lupta în trei dimensiuni de luptă: luptă sol la sol împotriva monștrilor și jucătorilor rivali, atacuri sol-spațiu asupra țintelor orbitale sau terestre și război spațiu-spațiu la bordul masivului Battle Ring care orbitează planeta.",
+        "Acesta nu este doar un alt joc de strategie. Overlord oferă interacțiune VR în timp real, recompense reale în bani pentru finalizarea evenimentelor și misiunilor zilnice și invaziile din două săptămâni ale înfricoșatorilor Hammerong, cea mai puternică specie extraterestră existentă. La fiecare două săptămâni, ei sosesc pentru a dezbraca planeta și, la fiecare două săptămâni, jucătorii curajoși îi pot provoca pentru bonusuri masive și recompense legendare.",
+        "Îmbunătățiți-vă nava spațială, înarmați-o cu arme devastatoare, recrutați specialiști care vă amplifică nivelul de putere și creați alianțe pentru a controla regiuni întregi. Tot ceea ce construiești se conectează direct la Hyper Racing și Hyper Quest prin ecosistemul comun Hyper Tek. Un univers, trei jocuri, război nelimitat. Citiți mai departe pentru a descoperi cum funcționează sistemul de luptă și de ce Overlord schimbă totul."
+      ],
+      "calloutLine1": "Supraviețuirea este doar începutul.",
+      "calloutLine2": "Dominanța este Scopul.",
+      "howItWorksTitle": "Sistemul de luptă cu trei niveluri; Trei dimensiuni ale războiului",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Luptă sol la sol",
+          "body": "Suprafața planetei este o zonă de război. Desfășoară armatele tale clonate împotriva creaturilor extraterestre ostile, a fiarelor monstruoase și a jucătorilor rivali care luptă pentru teritoriu și resurse. Îmblanziți și antrenați fauna sălbatică a planetei pentru a crea unități de cavalerie călare care să ofere forțelor voastre terestre un avantaj devastator. Războiul la sol este crud, tactic și necruțător. Fiecare bătălie pe care o câștigi câștigă resurse, teritoriu și reputație."
+        },
+        {
+          "num": "02",
+          "title": "Atacurile sol-spațiu",
+          "body": "Aici Overlord adaugă o dimensiune pe care niciun alt joc nu o oferă, sau aproape niciun alt joc. Creați grupuri de trupe specializate concepute pentru a lansa atacuri între suprafața planetei și Inelul de luptă orbital. Loviți navele staționate în spațiu din poziția dvs. la sol sau coordonați atacuri combinate care lovesc inamicii de sus și de jos simultan. Acest strat de luptă vertical transformă strategia standard într-un meci de șah multidimensional în care poziționarea atât pe sol, cât și pe spațiu determină victoria."
+        },
+        {
+          "num": "03",
+          "title": "Războiul spațiu-la-spațiu",
+          "body": "Portați nava pe orbită și aterizați pe Inelul de luptă, o structură orbitală masivă care înconjoară planeta. De aici, vânează nave neprotejate și ținte vulnerabile. Teleportați trupele prin spațiu și direct în navele inamice pentru a provoca daune interne maxime folosind atacuri de îmbarcare special dezvoltate. Recompensele de luptă spațială sunt printre cele mai mari din joc, iar controlul teritoriului orbital vă oferă un avantaj strategic pe care niciun jucător de la sol nu îl poate egala."
+        },
+        {
+          "num": "04",
+          "title": "De ce Tri-Level schimbă totul",
+          "body": "Majoritatea jocurilor de strategie funcționează pe un singur plan. Overlord operează pe trei. Capacitatea de a ataca de la sol la sol, de la sol în spațiu și spațiu în spațiu creează un câmp de luptă cu o adâncime tactică de neegalat. Îndemânarea este totul. Numai forța brută nu te va face Overlord. Stăpânirea strategică pe toate cele trei niveluri este ceea ce separă dominantul de cel învins."
+        }
+      ],
+      "extraSection": {
+        "title": "Inelul de luptă și interacțiunea VR",
+        "items": [
+          {
+            "title": "Aterizare pe Inelul de luptă",
+            "body": "Inelul de luptă este o structură orbitală colosală care înconjoară sistemul planetei. Când îți porți nava în spațiu, te poți andoca pe Inelul de luptă pentru a obține un avantaj strategic masiv. Din această poziție ridicată, puteți căuta nave neprotejate, puteți lansa grupuri de îmbarcare în nave rivale și puteți coordona atacuri devastatoare asupra țintelor terestre de dedesubt. Aterizarea pe Battle Ring deschide o dimensiune complet nouă a gameplay-ului pe care majoritatea jocurilor de strategie pur și simplu nu o oferă, oferind lui Overlord un avantaj tactic față de orice altceva de pe piață."
+          },
+          {
+            "title": "În interiorul inelului de luptă",
+            "body": "Inelul de luptă nu este doar o platformă de andocare. Dacă poți afla cum să-i spargi interiorul, în interior te așteaptă misiuni ascunse, bonusuri suplimentare și recompense exclusive. Interiorul inelului este un labirint de coridoare, camere și tehnologie străveche. Efectuează misiuni și misiuni de vânătoare în cadrul inelului însuși, descoperind secrete pe care niciun jucător de suprafață nu le va accesa vreodată. Inelul de luptă îi răsplătește pe cei îndrăzneți, vicleni și necruțători."
+          },
+          {
+            "title": "Interacțiune VR în timp real",
+            "body": "La fel ca toată gama de jocuri Hyper Tek, Overlord of the 7 Realms acceptă interacțiunea VR completă în timp real. Intră în nava ta, mergi pe coridoarele Inelului de luptă, conduce-ți trupele în luptă la sol și experimentează războiul spațial din cabina navei tale. VR îl transformă pe Overlord dintr-un joc de strategie într-o experiență de luptă complet captivantă. Comandă-ți forțele, explorează terenuri extraterestre și luptă cu un nivel de prezență și intensitate pe care jocurile pe ecran plat nu le pot reproduce."
+          },
+          {
+            "title": "Avantajul față de alte jocuri",
+            "body": "Niciun alt joc nu combină războiul pe trei niveluri, o stație de luptă orbitală explorabilă, VR în timp real și bani reali și/sau recompense în joc într-o singură experiență. Numai Inelul de luptă adaugă o dimensiune de joc pe care concurenții nu o pot egala. Când combini asta cu lupta la sol, războiul spațial, imersiunea VR și ecosistemul Hyper Tek interconectat, Overlord se află într-o categorie proprie."
+          }
+        ]
+      },
+      "upgradesTitle": "Reconstruiți, Rearmați, Recrutați; Power Up for War",
+      "upgrades": [
+        {
+          "title": "Upgrade-uri pentru nave spațiale",
+          "body": "Nava ta prăbușită este locul unde începe totul. Reconstruiți-l sistem cu sistem, de la compartimentul motor până la puntea de comandă. Fiecare componentă este complet upgradabilă: armarea carenei, integritatea structurală, compoziția carcasei exterioare, generatoare de scuturi, sisteme de alimentare și matrice de navigație. În Overlord, nu construiești pentru viteză, ci pentru luptă. O navă de război complet modernizată este baza oricărei campanii de succes, iar cu cât investiți mai adânc, cu atât vasul dvs. devine mai formidabil."
+        },
+        {
+          "title": "Sisteme de arme și niveluri tehnice",
+          "body": "Îmbunătățiți-vă și perfecționați-vă armele, abilitățile și nivelurile de tehnologie pentru a domina toate cele trei niveluri de luptă. Artilerie terestră pentru războiul planetar, baterii anti-orbitale pentru atacuri sol-spațiu și matrice de arme montate pe navă pentru luptă spațiu-spațiu. Fiecare sistem de arme poate fi rafinat pentru roluri tactice specifice. Indiferent dacă sunteți specializat în bombardamente la distanță lungă, acțiuni de îmbarcare la scurtă vreme sau contramăsuri defensive, echipamentul dvs. de arme vă definește identitatea de luptă."
+        },
+        {
+          "title": "Recrutați specialiști",
+          "body": "Specialiștii sunt multiplicatorii de forță care separă jucătorii buni de Overlords. Obține specialiști unici care aduc bonusuri puternice performanței generale și nivelului de putere a navei tale. Specialiștii tactici îmbunătățesc eficiența desfășurării trupelor, specialiștii în inginerie accelerează reparațiile și upgrade-urile navelor, specialiștii în arme măresc producția de daune în toate sistemele, iar specialiștii în informații dezvăluie pozițiile și punctele slabe ale inamicului. Adunați mai mulți specialiști pentru a crea sinergii devastatoare care amplifică fiecare aspect al operațiunii dumneavoastră."
+        },
+        {
+          "title": "Construiește-ți armatele",
+          "body": "Clonează trupele în laboratoarele de clonare de la bordul navei tale, apoi îmbunătățește-le și perfecționează-le și armele până când sunt gata de luptă. Dar trupele singure nu sunt suficiente. Îmblanzisește și antrenează creaturile sălbatice ale planetei pentru a crea cavalerie călare, o forță care nu poate fi clonată sau fabricată și care trebuie câștigată prin îndemânare și răbdare. Compoziția armatei tale pe sol, aer și spațiu este ceea ce determină dominația ta."
+        }
+      ],
+      "rewardsTitle": "Hammerong-urile, recompensele și ecosistemul Hyper Tek",
+      "rewards": [
+        {
+          "title": "Hammerongs: cea mai puternică specie existentă",
+          "body": "La fiecare două săptămâni, câmpurile de forță ale arenei centrale scad și sosesc Hammerong-ii. Sunt cele mai puternice specii extraterestre din univers, înarmate cu tehnologie avansată mult peste tot ce dețin jucătorii. Ei vin să dezbrace resursele planetei și apără arena cu o forță deplină și copleșitoare. Atacarea Hammerong-ilor este cea mai periculoasă provocare din Overlord, dar cei care reușesc sunt răsplătiți cu bonusuri uriașe, pradă legendară, materiale de upgrade rare și recompense exclusive care nu pot fi obținute în alt mod. Invazia Hammerong din două săptămâni este testul suprem al puterii tale."
+        },
+        {
+          "title": "Evenimente zilnice, misiuni și recompense de luptă",
+          "body": "Overlord oferă recompense în mod constant. Finalizați sarcinile zilnice pentru a câștiga credite, materiale de upgrade și bonusuri de progres. Intră în evenimente speciale pentru recompense premium. Desfășoară misiuni pe suprafața planetei și în cadrul Inelului de luptă pentru pradă exclusivă. Câștigă bătălii împotriva monștrilor, creaturilor extraterestre și jucătorilor rivali pentru a stoca resurse. Explorează suprafața pentru a descoperi artefacte și comori ascunse. Structura recompenselor este concepută astfel încât fiecare acțiune pe care o întreprindeți să vă apropie de a deveni Supremul suprem al serverului."
+        },
+        {
+          "title": "Conectat la ecosistemul Hyper Tek",
+          "body": "Stăpânul celor 7 Tărâmuri nu există izolat. Este complet integrat în universul Hyper Tek alături de Hyper Racing și Hyper Quest. Resursele câștigate în Overlord pot fi folosite în toate cele trei jocuri. Actualizările navelor, bonusurile de specialitate, abilitățile de luptă și materialele curg fără probleme între titluri. Abilitățile de curse dobândite în Hyper Racing îți îmbunătățesc abilitățile de pilot în lupta spațială Overlord. Materialele adunate în Hyper Quest alimentează upgrade-urile tale pe planetă. Piața Hyper Tek conectează totul, creând o economie unificată în care progresul într-un singur joc ajută la avansarea în toate trei."
+        },
+        {
+          "title": "Un univers, trei jocuri, putere nelimitată",
+          "body": "Jucătorii care interacționează în toate cele trei jocuri Hyper Tek își construiesc puterea mai rapid, accesează recompense exclusive pentru diferite jocuri și domină printr-o gamă largă de abilități și resurse pe care jucătorii cu un singur joc nu le pot egala. Ecosistemul interconectat este avantajul competitiv suprem."
+        }
+      ],
+      "faqTitle": "Stăpânul celor 7 tărâmuri — Întrebări frecvente",
+      "faq": [
+        {
+          "q": "Ce este Overlord of the 7 Realms?",
+          "a": "Un joc de strategie de luptă pe trei niveluri în care aterizezi prăbușit pe o planetă extraterestră, îți reconstruiești nava, clonezi armate și lupți în trei dimensiuni: sol-sol, sol-spațiu și spațiu-spațiu. Prezintă interacțiune VR, recompense în numerar reale și invazii Hammerong din două săptămâni."
+        },
+        {
+          "q": "Ce este sistemul de luptă cu trei niveluri?",
+          "a": "Lupta se desfășoară pe trei niveluri: sol la sol împotriva monștrilor și a jucătorilor rivali, atacuri sol-spațiu care vizează nave orbitale și război spațiu-spațiu pe Inelul de luptă. Această abordare multidimensională creează o adâncime tactică pe care niciun joc de strategie cu un singur plan nu poate egala."
+        },
+        {
+          "q": "Ce este inelul de luptă?",
+          "a": "O structură orbitală masivă care înconjoară planeta. Aterizează-ți nava pe ea pentru a vâna ținte neprotejate, a lansa grupuri de îmbarcare în navele inamice și pentru a accesa misiuni ascunse în interiorul acesteia. Controlul inelului de luptă vă oferă un avantaj strategic față de jucătorii de la sol."
+        },
+        {
+          "q": "Îmi pot face upgrade nava spațială?",
+          "a": "Fiecare sistem poate fi actualizat de la compartimentul motor la puntea de comandă: carenă, structură, carcasă exterioară, generatoare de scuturi, sisteme de alimentare și navigație. În Overlord construiești pentru luptă, nu viteză. O navă de război complet modernizată este baza fiecărei campanii."
+        },
+        {
+          "q": "Cum lucrează specialiștii?",
+          "a": "Recrutați specialiști unici care adaugă bonusuri puternice performanței și nivelului de putere al navei dvs. Specialiștii în tactică, inginerie, arme și informații sporesc fiecare sisteme diferite. Stivuiți mai mulți specialiști pentru sinergii devastatoare la toate nivelurile de luptă."
+        },
+        {
+          "q": "Cine sunt Hammerong-ii?",
+          "a": "Cea mai puternică specie extraterestră existentă. La fiecare două săptămâni ajung în arena centrală pentru a dezbraca resursele planetei, apărate de forță copleșitoare și tehnologie avansată. Atacul lor este extrem de periculos, dar îi recompensează pe jucători cu bonusuri uriașe și pradă legendară."
+        },
+        {
+          "q": "Ce recompense pot câștiga?",
+          "a": "Sarcinile zilnice, misiunile, bătăliile și evenimentele plătesc credite, materiale de upgrade și bonusuri de progres. Evenimentele speciale și invaziile Hammerong oferă recompense premium și exclusive. Provocările cu dificultate mai mare și competițiile clasate generează plăți mai mari, inclusiv bani reali."
+        },
+        {
+          "q": "Overlord acceptă VR?",
+          "a": "Da. Interacțiunea VR în timp real vă permite să vă plimbați pe coridoarele navei, să explorați interiorul Inelului de luptă, să conduceți trupele în luptă terestră și să vă pilotați nava în războiul spațial. VR-ul transformă Overlord dintr-o strategie într-o experiență complet captivantă pe câmpul de luptă."
+        },
+        {
+          "q": "Cum îmi construiesc armata?",
+          "a": "Clonează trupele în laboratoarele de la bordul navei tale, apoi îmbunătățește-le și perfecționează-le și armele lor. Pentru cavalerie călare, trebuie să îmblânzești și să antrenezi creaturile sălbatice ale planetei, deoarece animalele nu pot fi clonate. Compoziția armatei pe sol, aer și spațiu vă determină dominația."
+        },
+        {
+          "q": "Pot să mă alătur unei alianțe?",
+          "a": "Da. Mergeți singur sau alăturați-vă unei alianțe care vă crește puterea și vă ajută să creșteți. Alianțele oferă resurse partajate, atacuri coordonate și apărare colectivă. Finalizați sarcinile zilnice pentru a vă îmbunătăți atât nava, cât și activele comune ale alianței."
+        },
+        {
+          "q": "Este Overlord legat de alte jocuri Hyper Tek?",
+          "a": "Complet integrat. Resursele, upgrade-urile navelor, bonusurile de specialitate și abilitățile de luptă curg între Overlord, Hyper Racing și Hyper Quest. Abilitățile de curse vă îmbunătățesc lupta în spațiu, materialele Quest vă alimentează upgrade-urile, iar piața Hyper Tek conectează întreaga economie."
+        },
+        {
+          "q": "Ce arme sunt disponibile?",
+          "a": "Artilerie la sol, baterii anti-orbitale, matrice de arme montate pe navă și echipamente specializate de acțiune de îmbarcare. Fiecare sistem poate fi rafinat pentru roluri tactice specifice, inclusiv bombardament la distanță lungă, luptă în apropiere și contramăsuri defensive."
+        },
+        {
+          "q": "Pot explora suprafața planetei?",
+          "a": "Da. Planeta este bogată în recompense ascunse, artefacte, resurse și animale sălbatice periculoase de îmblânzit. Explorează suprafața pentru a găsi comori, lupta cu creaturi extraterestre și monștri și descoperi avantaje strategice care întăresc campania ta pentru dominația Overlord."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "IEȘIRE",
     "spaceRing": "OVERLORD · INELUL SPAȚIAL",
@@ -324,91 +720,268 @@
       "detail": "Detaliu"
     },
     "rooms": {
-      "storeroom":     { "title": "Depozit",                        "desc": "Hub central de stocare pentru materii prime și resurse recoltate. Gestionează distribuția stocurilor între operațiunile miniere și de rafinare." },
-      "mining_fs":     { "title": "Minerit BD Prova",               "desc": "Compartiment minier tribord față. Dotat cu matrice de extracție profundă pentru colectarea mineralelor și minereurilor în spațiu deschis." },
-      "mining_fp":     { "title": "Minerit BS Prova",               "desc": "Compartiment minier babord față. Dublează unitatea tribord, dublând capacitatea de extracție în câmpurile bogate în resurse." },
-      "process_ref":   { "title": "Rafinărie de procesare",         "desc": "Convertește minereul brut și mineralele în aliaje rafinate. Esențial pentru sinteza combustibilului și materialele de îmbunătățire a navei." },
-      "mining_rs":     { "title": "Minerit BD Pupa",                "desc": "Unitate minieră tribord spate. Unghiată la −45° pentru baleiaje laterale de câmp în timpul recoltării lente de asteroizi." },
-      "mining_rp":     { "title": "Minerit BS Pupa",                "desc": "Unitate minieră babord spate. Lucrează în tandem cu compartimentul BD pentru a maximiza randamentul de extracție din câmpul din spate." },
-      "fuel_ref":      { "title": "Rafinărie de combustibil",       "desc": "Procesează aliajele rafinate în combustibil de propulsie. Alimentează motorul principal și rezervele de propulsoare de urgență." },
-      "workshop":      { "title": "Atelier",                        "desc": "Centru de întreținere și fabricație a navei. Gestionează reparațiile componentelor, fabricarea pieselor și modernizarea echipamentelor." },
-      "racing":        { "title": "Hangar de curse",                "desc": "Compartiment dedicat dronelor de curse și ambarcațiunilor ușoare. Suportă implementarea modului RACING și operațiunile pit-stop." },
-      "brig":          { "title": "Arest",                          "desc": "Celulă de detenție securizată pentru prizonieri și marfă valoroasă. Pereții întăriți previn accesul neautorizat sau evadarea." },
-      "armory_ss":     { "title": "Armurărie BD",                   "desc": "Dulap de arme tribord. Stochează și întreține arme mici, echipament de protecție al echipajului și sisteme de apărare personală." },
-      "armory_ps":     { "title": "Armurărie BS",                   "desc": "Dulap de arme babord. Oglindește armurăria BD, oferind acces echilibrat la echipament de ambele părți ale navei." },
-      "main_weapon":   { "title": "Armă principală grea",           "desc": "Emplasament principal de armă grea. Adăpostește cele mai puternice sisteme ofensive ale navei pentru angajamente de luptă la scară largă." },
-      "fwd_shield":    { "title": "Generator scut prova",           "desc": "Generează o barieră de energie protectivă de-a lungul provei navei. Prima linie de apărare împotriva proiectilelor și atacurilor energetice." },
-      "fighter_fss":   { "title": "Hangar luptători BDF",           "desc": "Compartiment tribord față cu aparate de luptă compacte. Permite desfășurarea rapidă a luptătorilor de escortă în misiuni de luptă și patrulare." },
-      "fighter_fps":   { "title": "Hangar luptători BSF",           "desc": "Compartiment babord față. Operează în tandem cu compartimentul BDF pentru lansări coordonate ale escadrilei de luptători." },
-      "fighter_rss":   { "title": "Hangar luptători BDR",           "desc": "Compartiment pupa tribord. Suportă operațiunile de ariergardă și interceptarea urmăririi." },
-      "fighter_rps":   { "title": "Hangar luptători BSR",           "desc": "Compartiment pupa babord. Asigură acoperire simetrică spate pentru desfășurarea completă defensivă a luptătorilor." },
-      "barracks_ss":   { "title": "Cazarmă BD",                     "desc": "Cazarmă tribord pentru personal de luptă. Găzduiește soldați, piloți și echipe de securitate cu paturi supraetajate și dulapuri de echipament." },
-      "barracks_ps":   { "title": "Cazarmă BS",                     "desc": "Cazarmă babord. Același plan cu cazarma BD, asigurând distribuția egală a echipajului și mobilizarea rapidă din ambele părți." },
-      "stables_ss":    { "title": "Grajduri BD",                    "desc": "Compartiment tribord pentru active biologice. Adăpostește montări extraterestre și creaturi bio-inginerate utilizate în operațiunile de suprafață planetară." },
-      "stable_ps":     { "title": "Grajduri BS",                    "desc": "Compartiment babord pentru active biologice. Oglindește grajdurile BD pentru o sarcină echilibrată a creaturilor și distribuție simetrică a greutății." },
-      "transporter":   { "title": "Compartiment de transport",      "desc": "Sistem de transport al personalului și mărfii asistat cuantic. Permite teleportare rapidă pe raze scurte pe suprafețele planetare sau nave din apropiere." },
-      "security":      { "title": "Post de securitate",             "desc": "Hub de supraveghere și răspuns la amenințări la nivelul întregii nave. Monitorizează toate punțile și coordonează protocoalele de securitate interne." },
-      "weapons_ss":    { "title": "Sisteme de arme BD",             "desc": "Consolă de gestionare a armelor tribord. Controlează matricele de țintire, secvențele de tragere și logistica munițiilor pentru armamentul tribord." },
-      "weapons_ps":    { "title": "Sisteme de arme BS",             "desc": "Consolă de gestionare a armelor babord. Oferă control independent complet al tuturor platformelor de arme babord." },
-      "power_plant":   { "title": "Centrală electrică",             "desc": "Unitate centrală de generare a energiei. Asigură putere stabilă tuturor sistemelor navei prin tehnologia de contenție circulară a plasmei." },
-      "power_sys":     { "title": "Sisteme de alimentare",          "desc": "Hub de distribuție și reglare a puterii. Gestionează echilibrarea sarcinii între arme, scuturi, motoare și sistemele de susținere a vieții." },
-      "energy_dist":   { "title": "Distribuție energie",            "desc": "Nod secundar de rutare a energiei. Asigură furnizarea constantă de energie sistemelor din mijlocul și secțiunea din spate a navei." },
-      "main_engine":   { "title": "Motorul principal al navei",     "desc": "Sistemul primar de propulsie care alimentează toate călătoriile sub viteza luminii. Generează empingere prin jeturi de plasmă catalizate cu antimaterie." },
-      "navigation":    { "title": "Navigație",                      "desc": "Stație centrală de navigație și control al timonei. Gestionează trasarea cursului, astrocartografia și urmărirea pozițională în timp real." },
-      "flight_deck":   { "title": "Punte de zbor",                  "desc": "Stația principală de pilotaj. Controlează toate operațiunile de zbor, inclusiv decolarea, aterizarea, manevrele orbitale și acțiunile de evitare de urgență." },
-      "weapons_off":   { "title": "Ofițer arme",                    "desc": "Post tactic de comandă a armelor. Coordonează focul ofensiv și defensiv sub comanda directă a Ofițerului cu Arme." },
-      "comms_off":     { "title": "Ofițer comunicații",             "desc": "Hub de comunicații și interceptare semnale. Gestionează toate comunicările inter-navă, de alianță și planetare, inclusiv canalele criptate." },
-      "capt_quarters": { "title": "Cabina căpitanului",             "desc": "Cabina privată a ofițerului comandant al navei. Conține terminale de date securizate și facilități private de informare." },
-      "kitchen":       { "title": "Bucătărie",                      "desc": "Facilitate de nutriție și preparare a hranei pentru echipaj. Procesează resursele alimentare stocate și sintetizează suplimente nutriționale pentru voiaje lungi." },
-      "mess_hall":     { "title": "Cantină",                        "desc": "Spațiu comunal de servire a mesei și recreere. Servește ca hub al moralului echipajului în perioadele de repaus dintre operațiunile de luptă și resurse." },
-      "hydro_1":       { "title": "Celulă hidroponică 1",           "desc": "Unitate automată de producere a alimentelor proaspete și plantelor medicinale. Reduce dependența de proviziile stocate pentru misiunile extinse." },
-      "hydro_2":       { "title": "Celulă hidroponică 2",           "desc": "Celulă hidroponică secundară care extinde varietatea și randamentul culturilor. Susține nutriția echipajului și producția de mărfuri comerciale." },
-      "hydro_3":       { "title": "Celulă hidroponică 3",           "desc": "Unitate terțiară specializată în culturi de bază cu randament ridicat. Asigură aportul caloric de bază pentru echipaje numeroase." },
-      "hydro_4":       { "title": "Celulă hidroponică 4",           "desc": "Celulă de cercetare medicală și botanică. Cultivă specii rare utilizate în tratamentul medical și sinteza alchimică." },
-      "hydro_5":       { "title": "Celulă hidroponică 5",           "desc": "Compartiment de cultivare a plantelor exotice. Produce bunuri de lux și floră rară pentru comercializare pe piață." },
-      "hydro_6":       { "title": "Celulă hidroponică 6",           "desc": "Celulă experimentală de creștere accelerată. Testează noi soiuri de culturi dezvoltate prin programe de modificare genetică." },
-      "shield_main":   { "title": "Generator scut principal",       "desc": "Generator de scut multidirecțional primar. Proiectează o barieră de energie în jurul întregii carene în situații de luptă." },
-      "power_relay1":  { "title": "Releu de alimentare 1",          "desc": "Joncțiune releu de alimentare punte superioară. Direcționează energia de la centrala electrică spre armele din față și matricele de scuturi." },
-      "power_relay2":  { "title": "Releu de alimentare 2",          "desc": "Joncțiune releu de alimentare punte inferioară. Distribuie puterea gondolelor motoarelor și sistemelor defensive din spate." },
-      "hidden_st1":    { "title": "Depozit ascuns 1",               "desc": "Seif de înaltă securitate ascuns. Stochează marfă clasificată, artefacte valoroase și contrabandă departe de scanările standard de inventar." },
-      "hidden_st2":    { "title": "Depozit ascuns 2",               "desc": "Seif ascuns secundar. Spațiu securizat suplimentar pentru obiecte critice ale misiunii care necesită discreție maximă." },
-      "cargo_1":       { "title": "Cală de marfă 1",                "desc": "Cală principală de marfă în vrac. Proiectată pentru transportul de resurse în volum mare, inclusiv minereuri, metale rafinate și mărfuri comerciale." },
-      "cargo_2":       { "title": "Cală de marfă 2",                "desc": "Cală secundară optimizată pentru sarcini fragile sau sensibile la temperatură. Condiții de depozitare cu climat controlat." },
-      "cargo_3":       { "title": "Cală de marfă 3",                "desc": "Cală terțiară. Aspectul configurabil suportă sarcini mixte, inclusiv vehicule, containere și echipamente supradimensionate." },
-      "war_council":   { "title": "Consiliul de război",            "desc": "Camera strategică de comandă. Masa de informare a ofițerilor superiori unde sunt coordonate planurile de bătălie, strategiile de alianță și obiectivele campaniei." },
-      "academy":       { "title": "Academie",                       "desc": "Facilitate de pregătire și educație a echipajului. Permite avansarea abilităților, deblocarea specializărilor și programele de dezvoltare a ofițerilor." },
-      "science_lab":   { "title": "Laborator de știință",           "desc": "Centru de cercetare și dezvoltare. Realizează experimente în știința materialelor, teoria propulsiei și analiza tehnologiei extraterestre." },
-      "dna_lab":       { "title": "Laborator ADN",                  "desc": "Facilitate de cercetare genetică. Dezvoltă îmbunătățiri biologice pentru echipaj, creează noi variante de specii și cercetează mostre de ADN extraterestru." },
-      "cryostasis":    { "title": "Criostază",                      "desc": "Sistem de suspendare pentru voiaje de lungă durată. Pune echipajul în stare de hibernare criogenică pentru a conserva resursele pe parcursul călătoriilor de ani în spațiul profund." },
-      "dna_chambers":  { "title": "Camere ADN",                     "desc": "Compartimente de modificare genetică. Aplică îmbunătățiri ADN cercetate direct membrilor echipajului și unităților biologice." },
-      "weapons_relay": { "title": "Releu de alimentare arme",       "desc": "Nod dedicat de gestionare a puterii pentru sistemele de arme grele. Asigură alimentare stabilă cu energie pe durata angajamentelor de luptă susținute." },
-      "comms_tower":   { "title": "Turn de comunicații",            "desc": "Matrice de comunicații pe distanțe mari în spațiul profund. Permite transmisii la nivelul întregii flote, transmisii interstellare și coordonarea alianței pe distanțe vaste." }
+      "storeroom": {
+        "title": "Depozit",
+        "desc": "Hub central de stocare pentru materii prime și resurse recoltate. Gestionează distribuția stocurilor între operațiunile miniere și de rafinare."
+      },
+      "mining_fs": {
+        "title": "Minerit BD Prova",
+        "desc": "Compartiment minier tribord față. Dotat cu matrice de extracție profundă pentru colectarea mineralelor și minereurilor în spațiu deschis."
+      },
+      "mining_fp": {
+        "title": "Minerit BS Prova",
+        "desc": "Compartiment minier babord față. Dublează unitatea tribord, dublând capacitatea de extracție în câmpurile bogate în resurse."
+      },
+      "process_ref": {
+        "title": "Rafinărie de procesare",
+        "desc": "Convertește minereul brut și mineralele în aliaje rafinate. Esențial pentru sinteza combustibilului și materialele de îmbunătățire a navei."
+      },
+      "mining_rs": {
+        "title": "Minerit BD Pupa",
+        "desc": "Unitate minieră tribord spate. Unghiată la −45° pentru baleiaje laterale de câmp în timpul recoltării lente de asteroizi."
+      },
+      "mining_rp": {
+        "title": "Minerit BS Pupa",
+        "desc": "Unitate minieră babord spate. Lucrează în tandem cu compartimentul BD pentru a maximiza randamentul de extracție din câmpul din spate."
+      },
+      "fuel_ref": {
+        "title": "Rafinărie de combustibil",
+        "desc": "Procesează aliajele rafinate în combustibil de propulsie. Alimentează motorul principal și rezervele de propulsoare de urgență."
+      },
+      "workshop": {
+        "title": "Atelier",
+        "desc": "Centru de întreținere și fabricație a navei. Gestionează reparațiile componentelor, fabricarea pieselor și modernizarea echipamentelor."
+      },
+      "racing": {
+        "title": "Hangar de curse",
+        "desc": "Compartiment dedicat dronelor de curse și ambarcațiunilor ușoare. Suportă implementarea modului RACING și operațiunile pit-stop."
+      },
+      "brig": {
+        "title": "Arest",
+        "desc": "Celulă de detenție securizată pentru prizonieri și marfă valoroasă. Pereții întăriți previn accesul neautorizat sau evadarea."
+      },
+      "armory_ss": {
+        "title": "Armurărie BD",
+        "desc": "Dulap de arme tribord. Stochează și întreține arme mici, echipament de protecție al echipajului și sisteme de apărare personală."
+      },
+      "armory_ps": {
+        "title": "Armurărie BS",
+        "desc": "Dulap de arme babord. Oglindește armurăria BD, oferind acces echilibrat la echipament de ambele părți ale navei."
+      },
+      "main_weapon": {
+        "title": "Armă principală grea",
+        "desc": "Emplasament principal de armă grea. Adăpostește cele mai puternice sisteme ofensive ale navei pentru angajamente de luptă la scară largă."
+      },
+      "fwd_shield": {
+        "title": "Generator scut prova",
+        "desc": "Generează o barieră de energie protectivă de-a lungul provei navei. Prima linie de apărare împotriva proiectilelor și atacurilor energetice."
+      },
+      "fighter_fss": {
+        "title": "Hangar luptători BDF",
+        "desc": "Compartiment tribord față cu aparate de luptă compacte. Permite desfășurarea rapidă a luptătorilor de escortă în misiuni de luptă și patrulare."
+      },
+      "fighter_fps": {
+        "title": "Hangar luptători BSF",
+        "desc": "Compartiment babord față. Operează în tandem cu compartimentul BDF pentru lansări coordonate ale escadrilei de luptători."
+      },
+      "fighter_rss": {
+        "title": "Hangar luptători BDR",
+        "desc": "Compartiment pupa tribord. Suportă operațiunile de ariergardă și interceptarea urmăririi."
+      },
+      "fighter_rps": {
+        "title": "Hangar luptători BSR",
+        "desc": "Compartiment pupa babord. Asigură acoperire simetrică spate pentru desfășurarea completă defensivă a luptătorilor."
+      },
+      "barracks_ss": {
+        "title": "Cazarmă BD",
+        "desc": "Cazarmă tribord pentru personal de luptă. Găzduiește soldați, piloți și echipe de securitate cu paturi supraetajate și dulapuri de echipament."
+      },
+      "barracks_ps": {
+        "title": "Cazarmă BS",
+        "desc": "Cazarmă babord. Același plan cu cazarma BD, asigurând distribuția egală a echipajului și mobilizarea rapidă din ambele părți."
+      },
+      "stables_ss": {
+        "title": "Grajduri BD",
+        "desc": "Compartiment tribord pentru active biologice. Adăpostește montări extraterestre și creaturi bio-inginerate utilizate în operațiunile de suprafață planetară."
+      },
+      "stable_ps": {
+        "title": "Grajduri BS",
+        "desc": "Compartiment babord pentru active biologice. Oglindește grajdurile BD pentru o sarcină echilibrată a creaturilor și distribuție simetrică a greutății."
+      },
+      "transporter": {
+        "title": "Compartiment de transport",
+        "desc": "Sistem de transport al personalului și mărfii asistat cuantic. Permite teleportare rapidă pe raze scurte pe suprafețele planetare sau nave din apropiere."
+      },
+      "security": {
+        "title": "Post de securitate",
+        "desc": "Hub de supraveghere și răspuns la amenințări la nivelul întregii nave. Monitorizează toate punțile și coordonează protocoalele de securitate interne."
+      },
+      "weapons_ss": {
+        "title": "Sisteme de arme BD",
+        "desc": "Consolă de gestionare a armelor tribord. Controlează matricele de țintire, secvențele de tragere și logistica munițiilor pentru armamentul tribord."
+      },
+      "weapons_ps": {
+        "title": "Sisteme de arme BS",
+        "desc": "Consolă de gestionare a armelor babord. Oferă control independent complet al tuturor platformelor de arme babord."
+      },
+      "power_plant": {
+        "title": "Centrală electrică",
+        "desc": "Unitate centrală de generare a energiei. Asigură putere stabilă tuturor sistemelor navei prin tehnologia de contenție circulară a plasmei."
+      },
+      "power_sys": {
+        "title": "Sisteme de alimentare",
+        "desc": "Hub de distribuție și reglare a puterii. Gestionează echilibrarea sarcinii între arme, scuturi, motoare și sistemele de susținere a vieții."
+      },
+      "energy_dist": {
+        "title": "Distribuție energie",
+        "desc": "Nod secundar de rutare a energiei. Asigură furnizarea constantă de energie sistemelor din mijlocul și secțiunea din spate a navei."
+      },
+      "main_engine": {
+        "title": "Motorul principal al navei",
+        "desc": "Sistemul primar de propulsie care alimentează toate călătoriile sub viteza luminii. Generează empingere prin jeturi de plasmă catalizate cu antimaterie."
+      },
+      "navigation": {
+        "title": "Navigație",
+        "desc": "Stație centrală de navigație și control al timonei. Gestionează trasarea cursului, astrocartografia și urmărirea pozițională în timp real."
+      },
+      "flight_deck": {
+        "title": "Punte de zbor",
+        "desc": "Stația principală de pilotaj. Controlează toate operațiunile de zbor, inclusiv decolarea, aterizarea, manevrele orbitale și acțiunile de evitare de urgență."
+      },
+      "weapons_off": {
+        "title": "Ofițer arme",
+        "desc": "Post tactic de comandă a armelor. Coordonează focul ofensiv și defensiv sub comanda directă a Ofițerului cu Arme."
+      },
+      "comms_off": {
+        "title": "Ofițer comunicații",
+        "desc": "Hub de comunicații și interceptare semnale. Gestionează toate comunicările inter-navă, de alianță și planetare, inclusiv canalele criptate."
+      },
+      "capt_quarters": {
+        "title": "Cabina căpitanului",
+        "desc": "Cabina privată a ofițerului comandant al navei. Conține terminale de date securizate și facilități private de informare."
+      },
+      "kitchen": {
+        "title": "Bucătărie",
+        "desc": "Facilitate de nutriție și preparare a hranei pentru echipaj. Procesează resursele alimentare stocate și sintetizează suplimente nutriționale pentru voiaje lungi."
+      },
+      "mess_hall": {
+        "title": "Cantină",
+        "desc": "Spațiu comunal de servire a mesei și recreere. Servește ca hub al moralului echipajului în perioadele de repaus dintre operațiunile de luptă și resurse."
+      },
+      "hydro_1": {
+        "title": "Celulă hidroponică 1",
+        "desc": "Unitate automată de producere a alimentelor proaspete și plantelor medicinale. Reduce dependența de proviziile stocate pentru misiunile extinse."
+      },
+      "hydro_2": {
+        "title": "Celulă hidroponică 2",
+        "desc": "Celulă hidroponică secundară care extinde varietatea și randamentul culturilor. Susține nutriția echipajului și producția de mărfuri comerciale."
+      },
+      "hydro_3": {
+        "title": "Celulă hidroponică 3",
+        "desc": "Unitate terțiară specializată în culturi de bază cu randament ridicat. Asigură aportul caloric de bază pentru echipaje numeroase."
+      },
+      "hydro_4": {
+        "title": "Celulă hidroponică 4",
+        "desc": "Celulă de cercetare medicală și botanică. Cultivă specii rare utilizate în tratamentul medical și sinteza alchimică."
+      },
+      "hydro_5": {
+        "title": "Celulă hidroponică 5",
+        "desc": "Compartiment de cultivare a plantelor exotice. Produce bunuri de lux și floră rară pentru comercializare pe piață."
+      },
+      "hydro_6": {
+        "title": "Celulă hidroponică 6",
+        "desc": "Celulă experimentală de creștere accelerată. Testează noi soiuri de culturi dezvoltate prin programe de modificare genetică."
+      },
+      "shield_main": {
+        "title": "Generator scut principal",
+        "desc": "Generator de scut multidirecțional primar. Proiectează o barieră de energie în jurul întregii carene în situații de luptă."
+      },
+      "power_relay1": {
+        "title": "Releu de alimentare 1",
+        "desc": "Joncțiune releu de alimentare punte superioară. Direcționează energia de la centrala electrică spre armele din față și matricele de scuturi."
+      },
+      "power_relay2": {
+        "title": "Releu de alimentare 2",
+        "desc": "Joncțiune releu de alimentare punte inferioară. Distribuie puterea gondolelor motoarelor și sistemelor defensive din spate."
+      },
+      "hidden_st1": {
+        "title": "Depozit ascuns 1",
+        "desc": "Seif de înaltă securitate ascuns. Stochează marfă clasificată, artefacte valoroase și contrabandă departe de scanările standard de inventar."
+      },
+      "hidden_st2": {
+        "title": "Depozit ascuns 2",
+        "desc": "Seif ascuns secundar. Spațiu securizat suplimentar pentru obiecte critice ale misiunii care necesită discreție maximă."
+      },
+      "cargo_1": {
+        "title": "Cală de marfă 1",
+        "desc": "Cală principală de marfă în vrac. Proiectată pentru transportul de resurse în volum mare, inclusiv minereuri, metale rafinate și mărfuri comerciale."
+      },
+      "cargo_2": {
+        "title": "Cală de marfă 2",
+        "desc": "Cală secundară optimizată pentru sarcini fragile sau sensibile la temperatură. Condiții de depozitare cu climat controlat."
+      },
+      "cargo_3": {
+        "title": "Cală de marfă 3",
+        "desc": "Cală terțiară. Aspectul configurabil suportă sarcini mixte, inclusiv vehicule, containere și echipamente supradimensionate."
+      },
+      "war_council": {
+        "title": "Consiliul de război",
+        "desc": "Camera strategică de comandă. Masa de informare a ofițerilor superiori unde sunt coordonate planurile de bătălie, strategiile de alianță și obiectivele campaniei."
+      },
+      "academy": {
+        "title": "Academie",
+        "desc": "Facilitate de pregătire și educație a echipajului. Permite avansarea abilităților, deblocarea specializărilor și programele de dezvoltare a ofițerilor."
+      },
+      "science_lab": {
+        "title": "Laborator de știință",
+        "desc": "Centru de cercetare și dezvoltare. Realizează experimente în știința materialelor, teoria propulsiei și analiza tehnologiei extraterestre."
+      },
+      "dna_lab": {
+        "title": "Laborator ADN",
+        "desc": "Facilitate de cercetare genetică. Dezvoltă îmbunătățiri biologice pentru echipaj, creează noi variante de specii și cercetează mostre de ADN extraterestru."
+      },
+      "cryostasis": {
+        "title": "Criostază",
+        "desc": "Sistem de suspendare pentru voiaje de lungă durată. Pune echipajul în stare de hibernare criogenică pentru a conserva resursele pe parcursul călătoriilor de ani în spațiul profund."
+      },
+      "dna_chambers": {
+        "title": "Camere ADN",
+        "desc": "Compartimente de modificare genetică. Aplică îmbunătățiri ADN cercetate direct membrilor echipajului și unităților biologice."
+      },
+      "weapons_relay": {
+        "title": "Releu de alimentare arme",
+        "desc": "Nod dedicat de gestionare a puterii pentru sistemele de arme grele. Asigură alimentare stabilă cu energie pe durata angajamentelor de luptă susținute."
+      },
+      "comms_tower": {
+        "title": "Turn de comunicații",
+        "desc": "Matrice de comunicații pe distanțe mari în spațiul profund. Permite transmisii la nivelul întregii flote, transmisii interstellare și coordonarea alianței pe distanțe vaste."
+      }
     },
     "guns": {
-      "far_left_bar":      "Tunul principal de provă",
-      "fore_port_bay":     "Baterie tribord față",
-      "fore_stbd_bay":     "Baterie babord față",
-      "pd_gun_1":          "Celulă apărare tribord cabină pilot 1",
-      "pd_gun_2":          "Celulă apărare tribord cabină pilot 2",
-      "pd_gun_3":          "Celulă apărare tribord cabină pilot 3",
-      "pd_gun_4":          "Celulă apărare tribord cabină pilot 4",
-      "pd_gun_5":          "Celulă apărare tribord cabină pilot 5",
-      "pd_gun_6":          "Celulă apărare tribord cabină pilot 6",
-      "vert_oval_upper":   "Celulă apărare centrală inferioară cabină pilot",
-      "vert_oval_lower":   "Celulă apărare centrală superioară cabină pilot",
-      "center_front_gun":  "Matrice tunuri puntea superioară provă",
-      "pd_gun_7":          "Celulă apărare babord cabină pilot 1",
-      "pd_gun_8":          "Celulă apărare babord cabină pilot 2",
-      "pd_gun_9":          "Celulă apărare babord cabină pilot 3",
-      "pd_gun_10":         "Celulă apărare babord cabină pilot 4",
-      "pd_gun_11":         "Celulă apărare babord cabină pilot 5",
-      "pd_gun_12":         "Celulă apărare babord cabină pilot 6",
+      "far_left_bar": "Tunul principal de provă",
+      "fore_port_bay": "Baterie tribord față",
+      "fore_stbd_bay": "Baterie babord față",
+      "pd_gun_1": "Celulă apărare tribord cabină pilot 1",
+      "pd_gun_2": "Celulă apărare tribord cabină pilot 2",
+      "pd_gun_3": "Celulă apărare tribord cabină pilot 3",
+      "pd_gun_4": "Celulă apărare tribord cabină pilot 4",
+      "pd_gun_5": "Celulă apărare tribord cabină pilot 5",
+      "pd_gun_6": "Celulă apărare tribord cabină pilot 6",
+      "vert_oval_upper": "Celulă apărare centrală inferioară cabină pilot",
+      "vert_oval_lower": "Celulă apărare centrală superioară cabină pilot",
+      "center_front_gun": "Matrice tunuri puntea superioară provă",
+      "pd_gun_7": "Celulă apărare babord cabină pilot 1",
+      "pd_gun_8": "Celulă apărare babord cabină pilot 2",
+      "pd_gun_9": "Celulă apărare babord cabină pilot 3",
+      "pd_gun_10": "Celulă apărare babord cabină pilot 4",
+      "pd_gun_11": "Celulă apărare babord cabină pilot 5",
+      "pd_gun_12": "Celulă apărare babord cabină pilot 6",
       "upper_flank_array": "Baterie tribord spate",
       "lower_flank_array": "Baterie babord spate",
-      "spine_gun_1":       "Matrice tunuri puntea superioară mijloc",
-      "spine_gun_2":       "Matrice coloană centrală inferioară",
-      "spine_gun_3":       "Matrice coloană centrală pupa",
-      "mid_rail_gun":      "Fortăreață turn central",
+      "spine_gun_1": "Matrice tunuri puntea superioară mijloc",
+      "spine_gun_2": "Matrice coloană centrală inferioară",
+      "spine_gun_3": "Matrice coloană centrală pupa",
+      "mid_rail_gun": "Fortăreață turn central",
       "upper_nacelle_bay": "Matrice aripă tribord",
       "lower_nacelle_bay": "Matrice aripă babord"
     },
@@ -476,6 +1049,76 @@
           "notes": "Driadele sunt o specie fascinantă și unică, caracterizată prin natura lor hibridă ce combină trăsături ale copacilor și ființelor extraterestre. Au o minte de tip coșniță, care le permite să comunice fără întrerupere. Pot simți sănătatea mediului înconjurător, făcându-le gardieni excepționali ai naturii. Dieta lor este în principal pe bază de plante. Driadele sunt cunoscute pentru comportamentul lor jucăuș și poznaș. Loialitatea față de una alta și față de patria lor este nezdruncinată și vor apăra cu ferocitate comunitatea când sunt amenințate. Din punct de vedere spiritual, Driadele cred profund în viața de după moarte împletită cu ciclurile naturii, venerând elementele naturale și corpurile cerești."
         }
       }
-    }
+    },
+    "back": "← ÎNAPOI",
+    "viewArrow": "VIZUALIZARE →",
+    "selectCategory": "SELECTEAZĂ CATEGORIE",
+    "comingSoon": "ÎN CURÂND",
+    "specialistProfileDesc": "Profilul specialistului — statistici complete disponibile la lansarea jocului.",
+    "alliance": {
+      "rank": {
+        "leader": "Lider",
+        "coleader": "Co-Lider",
+        "officer": "Ofițer",
+        "member": "Membru"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Absent"
+      },
+      "manage": {
+        "editInfo": "Editează informații alianță",
+        "editInfoDesc": "Schimbă nume, etichetă și descriere",
+        "joinRequests": "Gestionează cereri de aderare",
+        "joinRequestsDesc": "Revizuiește și acceptă noi membri",
+        "donationGoals": "Stabilește obiective de donare",
+        "donationGoalsDesc": "Configurează obiective săptămânale de donare",
+        "warSettings": "Setări război alianță",
+        "warSettingsDesc": "Configurează regulile de participare la război",
+        "kickMembers": "Dă afară membri",
+        "kickMembersDesc": "Elimină membrii inactivi sau care încalcă regulile"
+      },
+      "allianceMail": {
+        "warResults": "Rezultate război alianță",
+        "strategyPlan": "Plan nou de strategie",
+        "donationSummary": "Rezumat donații săptămânale",
+        "meeting1800": "Întâlnire la 18:00",
+        "levelUp": "Alianța a avansat în nivel!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Bun venit la HyperTek!",
+      "maintenance": "Notificare întreținere server",
+      "allianceWar": "Anunț război alianță",
+      "galacticCup": "Înregistrare Cupa Galactică",
+      "baseAttacked": "Baza ta a fost atacată!",
+      "loginReward": "Recompensă zilnică de conectare gata",
+      "refiningEvent": "Evenimentul Maestru rafinare începe",
+      "meeting1800": "Întâlnire la 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Traducere automată ACTIVATĂ — Mesajele sunt livrate în limba fiecărui destinatar",
+      "autoTranslateOff": "Traducere automată DEZACTIVATĂ"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Cine participă la războiul alianței diseară?",
+      "ggLastRace": "GG la ultima cursă, viteză grozavă",
+      "tradingPlasma": "Schimb bare de plasmă cu cărți tehnice",
+      "needHelpAsteroid": "Am nevoie de ajutor la misiunea asteroid",
+      "allianceRecruiting": "Alianța noastră recrutează, trimite-mi DM",
+      "donationGoalsPlasma": "Obiective donare: bare de plasmă necesare!",
+      "warStarts2Hours": "Războiul începe în 2 ore, pregătiți-vă",
+      "handleMedicalSupport": "Mă ocup de suportul medical",
+      "wts50Engines": "VÂND: 50 motoare, trimite PM",
+      "wtbAntiGravity": "CUMPĂR: Module anti-gravitație x10",
+      "sellingRareSkins": "Vând skin-uri rare, verificați profilul"
+    },
+    "devicePairing": "ASOCIERE DISPOZITIV",
+    "deviceOffline": "OFFLINE",
+    "pairing": "ASOCIERE...",
+    "unavailableNow": "INDISPONIBIL ACUM",
+    "pairDevice": "ASOCIAZĂ DISPOZITIV",
+    "vrInteractionMode": "Modul Interacțiune VR · În Curând"
   }
 }

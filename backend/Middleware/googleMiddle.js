@@ -12,7 +12,7 @@ function authMiddleware(requiredRoles = null) {
     console.log("  - Admin ID:", adminId || "None");
 
     if (!token) {
-      console.log("❌ No token provided");
+      console.log(" No token provided");
       return res.status(401).json({ message: "Access Denied: No token" });
     }
 
@@ -21,7 +21,7 @@ function authMiddleware(requiredRoles = null) {
       let verified;
       try {
         verified = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("✅ JWT verified successfully");
+        console.log("JWT verified successfully");
       } catch (jwtErr) {
         // Fallback: try base64 decode for temporary tokens
         try {
@@ -67,14 +67,14 @@ function authMiddleware(requiredRoles = null) {
         ...verified
       };
 
-      console.log("✅ User set:", {
+      console.log("User set:", {
         id: req.user.id,
         role: req.user.role
       });
 
       // No role restriction → allow
       if (!requiredRoles) {
-        console.log("✅ No role restriction - access granted");
+        console.log("No role restriction - access granted");
         return next();
       }
 
@@ -86,7 +86,7 @@ function authMiddleware(requiredRoles = null) {
       console.log("🔐 Role check:", req.user.role, "in", allowedRoles);
 
       if (!allowedRoles.includes(req.user.role)) {
-        console.log("❌ Role not authorized");
+        console.log(" Role not authorized");
         return res.status(403).json({
           message: "Access Denied: Unauthorized role",
           yourRole: userRole,
@@ -94,10 +94,10 @@ function authMiddleware(requiredRoles = null) {
         });
       }
 
-      console.log("✅ Role authorized - access granted");
+      console.log("Role authorized - access granted");
       next();
     } catch (err) {
-      console.log("❌ Auth Error:", err.message);
+      console.log(" Auth Error:", err.message);
       return res.status(401).json({
         message: "Invalid or expired token",
         error: err.message

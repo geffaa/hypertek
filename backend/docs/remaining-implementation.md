@@ -6,15 +6,15 @@ This document tracks remaining engineering work that is either partially impleme
 
 ---
 
-## ✅ COMPLETED THIS SESSION
+## COMPLETED THIS SESSION
 
 | Item | Status | Notes |
 |---|---|---|
-| Auto royalty USDC on-chain dispatch | ✅ Done | `RoyaltyService.js` — uses `PRIVATE_KEY` backend wallet + `BASE_USDC_ADDRESS` |
-| HB cashout USDC (on-chain) | ✅ Done | `HBController.cashoutHB` — transfers USDC from backend wallet to user wallet |
-| HB cashout bank (Stripe payout) | ✅ Done | Attempts `stripe.payouts.create()` + detailed admin email; admin processes manually |
-| Materials/HB trade split | ✅ Done | `TradeModel` + `TradeController.completeTrade` — routes HB between users |
-| Mobile layout fixes | ✅ Done | Withdraw HB cashout rows now `flex-col sm:flex-row`; `walletAddress` passed for USDC cashout |
+| Auto royalty USDC on-chain dispatch | Done | `RoyaltyService.js` — uses `PRIVATE_KEY` backend wallet + `BASE_USDC_ADDRESS` |
+| HB cashout USDC (on-chain) | Done | `HBController.cashoutHB` — transfers USDC from backend wallet to user wallet |
+| HB cashout bank (Stripe payout) | Done | Attempts `stripe.payouts.create()` + detailed admin email; admin processes manually |
+| Materials/HB trade split | Done | `TradeModel` + `TradeController.completeTrade` — routes HB between users |
+| Mobile layout fixes | Done | Withdraw HB cashout rows now `flex-col sm:flex-row`; `walletAddress` passed for USDC cashout |
 
 ---
 
@@ -188,7 +188,7 @@ All required variables for production operation:
 
 ```bash
 # Config/.env (backend) — check these are set correctly
-BASE_USDC_ADDRESS=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913  ✅ added
+BASE_USDC_ADDRESS=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913  added
 PRIVATE_KEY=0x...        # backend deployer wallet — must hold USDC for dispatches
 STRIPE_SECRET_KEY=sk_live_51TAuP2H...    ✅
 ADMIN_EMAIL=...          ✅
@@ -204,9 +204,9 @@ SMTP_HOST/PORT/USER/PASS ✅
 
 | Test File | Tests | Status |
 |---|---|---|
-| `backend/test/commission.test.js` | 21 | ✅ All passing |
-| `backend/test/hb.test.js` | 35 | ✅ All passing |
-| `backend/test/Market.test.js` | 1 | ✅ Deployment smoke test |
+| `backend/test/commission.test.js` | 21 | All passing |
+| `backend/test/hb.test.js` | 35 | All passing |
+| `backend/test/Market.test.js` | 1 | Deployment smoke test |
 | Trade HB settlement | 0 | ⚠️ Missing — add to hb.test.js |
 | Royalty dispatch (mocked) | 0 | ⚠️ Missing |
 

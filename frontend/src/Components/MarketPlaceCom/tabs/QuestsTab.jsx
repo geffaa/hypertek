@@ -91,6 +91,7 @@ const STATUS_FILTERS = ["open", "accepted", "completed"];
 
 // ── Quest type badge ──────────────────────────────────────────────────────────
 function QuestTypeBadge({ questType }) {
+  const { t } = useTranslation();
   if (!questType) return null;
   const isResources = questType === "resources";
   return (
@@ -103,7 +104,7 @@ function QuestTypeBadge({ questType }) {
       }}
     >
       {isResources ? <Package className="w-2.5 h-2.5" /> : <Zap className="w-2.5 h-2.5" />}
-      {isResources ? "Resources" : "Money"}
+      {isResources ? t("marketplace.quests.type.resources", "Resources") : t("marketplace.quests.type.money", "Money")}
     </span>
   );
 }
@@ -131,6 +132,7 @@ function WaitTierBadge({ waitHours, buyerSavePercent }) {
 
 // ── Commission split tooltip content ─────────────────────────────────────────
 function SplitInfo({ q }) {
+  const { t } = useTranslation();
   if (!q.questType || !q.waitHours) {
     return (
       <span className="text-amber-300/80 text-xs font-semibold">
@@ -140,7 +142,7 @@ function SplitInfo({ q }) {
   }
 
   const tiers = QUEST_TIERS[q.questType] || [];
-  const tier = tiers.find((t) => t.waitHours === q.waitHours) || {};
+  const tier = tiers.find((ti) => ti.waitHours === q.waitHours) || {};
   const player = q.playerSharePercent ?? tier.playerSharePercent;
   const platform = q.platformSharePercent ?? tier.platformSharePercent;
   const buyerSave = q.buyerSavePercent ?? tier.buyerSavePercent;
@@ -155,11 +157,11 @@ function SplitInfo({ q }) {
       </div>
       {player != null && (
         <div className="text-[9px] text-white/30 leading-tight">
-          <span className="text-green-400/60">Buyer −{buyerSave}%</span>
+          <span className="text-green-400/60">{t("marketplace.quests.buyer", "Buyer")} −{buyerSave}%</span>
           {" · "}
-          <span className="text-amber-300/50">Player +{player}%</span>
+          <span className="text-amber-300/50">{t("marketplace.quests.player", "Player")} +{player}%</span>
           {" · "}
-          <span className="text-white/30">Platform +{platform}%</span>
+          <span className="text-white/30">{t("marketplace.quests.platform", "Platform")} +{platform}%</span>
         </div>
       )}
     </div>
@@ -243,7 +245,7 @@ export default function QuestsTab() {
               style={statusFilter === f
                 ? { background: "rgba(180,120,0,0.6)", border: "1px solid rgba(200,140,0,0.4)", color: "#fff" }
                 : { background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)" }}>
-              {f}
+              {t(`marketplace.quests.status.${f}`, f)}
             </button>
           ))}
         </div>
@@ -289,9 +291,9 @@ export default function QuestsTab() {
                   <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
                     <span className="text-white/50">{tier.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{tier.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{tier.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{tier.platformSharePercent}%</span>
+                    <span className="text-red-400">{t("marketplace.quests.buyer", "Buyer")} −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">{t("marketplace.quests.player", "Player")} +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">{t("marketplace.quests.platform", "Platform")} +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -308,9 +310,9 @@ export default function QuestsTab() {
                   <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
                     <span className="text-white/50">{tier.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{tier.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{tier.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{tier.platformSharePercent}%</span>
+                    <span className="text-red-400">{t("marketplace.quests.buyer", "Buyer")} −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">{t("marketplace.quests.player", "Player")} +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">{t("marketplace.quests.platform", "Platform")} +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -380,7 +382,7 @@ export default function QuestsTab() {
                       className={`text-[9px] font-semibold capitalize ${colors.text}`}
                       style={{ background: colors.bg, border: `1px solid ${colors.border}`, borderRadius: 3, padding: "1px 4px", display: "inline-block" }}
                     >
-                      {q.status}
+                      {t(`marketplace.quests.status.${q.status}`, q.status)}
                     </span>
                     <WaitTierBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
                   </div>

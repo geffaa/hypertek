@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Velkommen til",
+    "back": "Tilbage",
+    "racing": {
+      "label": "RACING",
+      "heading": "Hyper Racing",
+      "subtitle": "Galaksens mest intense flyvende køretøjsraceroplevelse,\nhvor dygtighed betaler sig, og mestre bliver gjort.",
+      "intro": [
+        "Hyper Racing er et højoktan konkurrencedygtigt racerspil, der foregår på tværs af fremmede verdener, hvor spillere bygger, opgraderer og piloterer fuldt tilpassede flyvende racerkøretøjer gennem nogle af de farligste kredsløb i galaksen. Fra flydende klippeformationer og vulkanske lavarør til øde ørkener og bjergpas er hvert løb en test af forberedelse, reflekser og strategi.",
+        "Men Hyper Racing er mere end bare et spil; det er en konkurrencedygtig platform, hvor reelle belønninger er på spil. Topspillere kan deltage i rangerede begivenheder og turneringer med rigtige pengepræmiepuljer. Jo bedre du kører, jo mere tjener du. Uanset om du jagter leaderboard-herlighed eller bygger et racerimperium, bevæger alt, hvad du gør i Hyper Racing dig fremad.",
+        "Opgrader dine racerkøretøjer fra næse til hale. Rekrutter og opgrader dit pitbesætning. Hyr en pit manager, der matcher din racerfilosofi. Tag derefter dine færdigheder ud over banen, din racergarage fungerer også som hangar for dit personlige rumskib, og enhver evne, du udvikler, overføres til rumkampe på tværs af Hyper Quest og Overlord of the 7 Realms."
+      ],
+      "introClose": "Læs videre for at opdage, hvordan spillet fungerer, hvad du kan vinde, og hvordan din racerkarriere giver næring til et helt univers af progression.",
+      "calloutLine1": "Race for at tjene. Tjen for at opgradere.",
+      "calloutLine2": "Opgrader til Dominate.",
+      "howItWorksTitle": "Sådan fungerer Hyper Racing",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Vælg dit køretøj",
+          "body": "Hvert løb begynder i din garage. Vælg fra en voksende liste af flyvende racerkøretøjer, hver med unikke håndteringsegenskaber og opgraderingspotentiale. Strip et skrog ned for blæsende lige hastighed, eller panser det for at overleve de mest brutale forhold. Thrustere, stabilisatorer, skjolde, kølesystemer, aerodynamiske finner, opgraderingstræet løber dybt, og hver modifikation ændrer, hvordan dit fartøj opfører sig på banen."
+        },
+        {
+          "num": "02",
+          "title": "Byg dit team",
+          "body": "Racing er en holdsport. Rekrutter pit-besætningsspecialister, der bringer unikke bonusser, hurtigere tankning, realtidsdiagnostik, nødreparationer af skrog midt i løbet og justeringer af ydeevne mellem omgange. Hvert besætningsmedlem stiger i niveau med erfaring og stabler kraftfulde evner oven på dine køretøjsopgraderinger. Så hyr en pit-manager til at koordinere driften, kalde racestrategi og låse op for team-dækkende præstationsboost, der forstærker over en hel sæson."
+        },
+        {
+          "num": "03",
+          "title": "Race på tværs af verdener",
+          "body": "Kredsløb spænder over fremmede planeter med vildt forskelligt terræn og atmosfæriske farer. Vævn dig gennem flydende klippeformationer i Avatar-stil, træv vulkanske lavarør i en rasende hastighed, riv hen over endeløse ørkensletter, og skær gennem forræderiske bjergkæder. Sur regn, radioaktive atmosfærer, skiftende tyngdekraft og turbulente vinde, ingen racer kræver det samme setup. At justere dit køretøj til at matche hvert miljø er, hvor strategi møder dygtighed."
+        },
+        {
+          "num": "04",
+          "title": "Klatre op i graderne",
+          "body": "Sejr optjener lederpoint, låser op for nye kredsløb i fjerne verdener og åbner døren til konkurrencer på højere niveau. Jo dybere du går, jo hårdere er modstanderne og jo større indsats. Bevis dig selv på tværs af alle planeter, og stig dig gennem de globale ranglister."
+        }
+      ],
+      "rewardsTitle": "Vind stort; Belønninger, der betyder noget!",
+      "rewards": [
+        {
+          "title": "Belønninger i spillet",
+          "body": "Hvert løb, du afslutter, udbetales. Vind, og belønningen bliver mangedoblet. Løbssejre låser op for førsteklasses køretøjskomponenter, sjældne opgraderingsmaterialer, eksklusive rekrutteringspoletter og kreditter til at finansiere dit næste byggeri. Sælg opgraderede køretøjer for profit, geninvester i nye maskiner, og se dit racerimperium vokse med hver podieafslutning."
+        },
+        {
+          "title": "Rigtige kontantbegivenheder",
+          "body": "Hyper Racing tager konkurrencen til næste niveau med rangerede begivenheder og turneringer, hvor rigtige penge er på spil. Deltag i færdighedsbaserede konkurrencer, bevis dine evner mod de bedste piloter i galaksen, og gå væk med rigtige pengeudbetalinger. Jo højere du placerer, jo større er præmiepuljen. Fra ugentlige rangerede udfordringer til sæsonbestemte mesterskabsbegivenheder er der altid muligheder for topspillere til at omsætte deres racerfærdigheder til reel indtjening."
+        },
+        {
+          "title": "Sådan fungerer præmiebegivenheder",
+          "body": "Spillere kvalificerer sig gennem rangeret spil og opfylder præstationstærskler, der giver adgang til pengepræmieturneringer. Begivenheder er struktureret omkring fair matchmaking, hvilket sikrer, at alle deltagere møder modstandere med lignende færdigheder. Tilmeldingsgebyrer er gennemsigtige, præmiepuljer vises tydeligt, før du forpligter dig, og udbetalinger behandles hurtigt efter hver begivenhed er afsluttet. Det er konkurrencedygtigt, det er fair, og belønningen er reel."
+        },
+        {
+          "title": "Progression Beyond the Track",
+          "body": "Belønninger optjent gennem racing foder direkte ind i din bredere progression. Opgrader dine racerkøretøjer, styrk dit pitbesætning, og tragt gevinster til at opgradere dit vigtigste rumskib. Din racergarage er hangarbugten på det skib, så enhver forbedring af din kapsejladsdrift styrker også fartøjet, du flyver mellem verdener og ind i rumkampe på tværs af Hyper Quest og Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "To maskiner, én mission... Opgrader alt",
+      "upgrades": [
+        {
+          "title": "Opgraderinger til racerbiler",
+          "body": "Dit racerkøretøj er en fuldt modulær maskine. Hver komponent kan udskiftes, tunes og opgraderes: skrog, thrustere, skjolde, ydre skaller, motorer, stabilisatorer, kølesystemer og aerodynamiske overflader. Letvægtskompositter leverer rå hastighed; kraftig rustning holder dig i live gennem brutale atmosfæriske forhold. Opgraderingsvejen er dyb, og de valg, du træffer, definerer din raceridentitet. Køb nye køretøjer, byg dem til mesterskabsudfordrer, ræs dem til sejr, og sælg dem med fortjeneste, når du er klar til den næste udfordring."
+        },
+        {
+          "title": "Vigtigste rumskibsopgraderinger",
+          "body": "Din racergarage er ikke bare et værksted; det er hangarbugten til dit personlige rumskib. De samme ressourcer, kreditter og materialer, som du tjener på banen, kan investeres i at opgradere dit hovedfartøj. Bedre motorer til interplanetariske rejser, stærkere våbensystemer til rumkamp, ​​forbedret navigation til at opdage nye racerverdener og forstærkede skrog til at overleve fjendtlige møder under transit. Dit rumskib er din hjemmebase, din transport og dit slagskib, og kapsejlads gør det stærkere."
+        },
+        {
+          "title": "Opgraderingsløkken",
+          "body": "Race for at tjene. Tjen for at opgradere. Opgrader for at vinde større løb med større belønninger. Træk disse belønninger ind i både dine racerkøretøjer og dit rumskib. Jo bedre dit skib er, jo længere rejser du, og jo mere farlige og lukrative bliver kredsløbene. Det er en progressionsløkke, der belønner dedikation og dygtighed på alle niveauer."
+        },
+        {
+          "title": "Indvirkning på tværs af spil",
+          "body": "Hver pilotfærdighed, du udvikler på banen, og hver opgradering, du installerer på dit rumskib, overføres direkte til Hyper Quest og Overlord of the 7 Realms. Ét univers, flere spil, problemfri progression. Det, du bygger i Hyper Racing, driver alt andet."
+        }
+      ],
+      "faqTitle": "Hyper Racing — ofte stillede spørgsmål",
+      "faq": [
+        {
+          "q": "Hvad er Hyper Racing?",
+          "a": "Et flyvende racerspil med høj intensitet på tværs af fremmede verdener. Byg, opgrader og ræs helt tilpasselige køretøjer gennem farlige sci-fi-kredsløb, mens du konkurrerer om præmier i spillet og rigtige pengepræmier."
+        },
+        {
+          "q": "Kan jeg opgradere mit racerkøretøj?",
+          "a": "Hver komponent kan opgraderes: skrog, thrustere, skjolde, ydre skaller, motorer, stabilisatorer, kølesystemer og aerodynamiske overflader. Hver opgradering ændrer, hvordan dit køretøj håndterer forskellige spor og forhold."
+        },
+        {
+          "q": "Hvad laver pitbesætningen?",
+          "a": "Pit-besætningsmedlemmer giver unikke bonusser: hurtigere tankning, skrogdiagnostik, nødreparationer og ydelsesjusteringer mellem omgange. De stiger over tid og låser op for stærkere evner, der stables med køretøjsopgraderinger."
+        },
+        {
+          "q": "Hvordan fungerer pit manageren?",
+          "a": "Pitmanageren koordinerer besætningens operationer, kalder løbsstrategi og låser op for team-dækkende præstationsløft. Defensive ledere beskytter dit køretøj under barske forhold; aggressive ledere presser ethvert system for maksimal hastighed."
+        },
+        {
+          "q": "Kan jeg vinde rigtige penge?",
+          "a": "Ja. Rangerede begivenheder og turneringer byder på rigtige pengepræmiepuljer. Kvalificer dig gennem rangeret spil, konkurrer mod lignende dygtige modstandere, og tjen rigtige udbetalinger baseret på din slutposition. Ugentlige udfordringer og sæsonmæssige mesterskaber kører kontinuerligt."
+        },
+        {
+          "q": "Hvordan fungerer løbsbelønninger?",
+          "a": "Hvert løb udbetaler kreditter, opgraderingsmaterialer og besætningspoletter. Sejre mangedobler din indtjening. Køb køretøjer, opgrader dem til racermaskiner, vind løb, og sælg dem med fortjeneste for at finansiere yderligere forbedringer og rumskibsopgraderinger."
+        },
+        {
+          "q": "Kan jeg også opgradere mit primære rumskib?",
+          "a": "Absolut. Din racergarage er hangarbugten på dit rumskib. Race-gevinstfondens opgraderinger til motorer, våben, navigation og skrogforstærkning på dit hovedfartøj, hvilket styrker interplanetariske rejser og rumkampe."
+        },
+        {
+          "q": "Går fremskridt til andre spil?",
+          "a": "Hver pilotfærdighed og rumskibsopgradering overføres direkte til Hyper Quest og Overlord of the 7 Realms. Ét univers, flere spil, problemfri progression. Det, du bygger i Hyper Racing, driver alt andet."
+        },
+        {
+          "q": "Hvilke racermiljøer er der?",
+          "a": "Kredsløb spænder over flydende klippeformationer, lavarør, ørkensletter og bjergkæder på tværs af fremmede verdener. Atmosfæriske farer omfatter sur regn, radioaktive atmosfærer, variabel tyngdekraft og turbulente vinde. Hvert kredsløb kræver forskellige køretøjsopsætninger."
+        }
+      ]
+    },
+    "quest": {
+      "label": "SØGGEN",
+      "heading": "Hyper Quest",
+      "subtitle": "Din galakse. Dine regler. Din formue.",
+      "intro": [
+        "Hyper Quest er et rumeventyr i åben verden, hvor du kommanderer dit eget fuldt opgraderbare rumskib, Quest Racer, på tværs af en enorm og farlig galakse. Du forlod dit hjem civilisation for år siden på jagt efter magt, rigdom og berømmelse. Nu er hele universet din legeplads, og hver opgave, du gennemfører, bringer dig tættere på galaktisk dominans.",
+        "Men Hyper Quest er ikke bare et spil. Det er en konkurrencedygtig platform, hvor rigtige penge er på spil. Gennemfør quests, overvind udfordringer, og gå derfra med rigtige penge på lommen og/eller belønninger. Fra hurtige missioner, der tager minutter, til episke flerdages ekspeditioner, hver mission betaler sig. Jo sværere udfordringen er, jo større belønning.",
+        "Opgrader dit rumskib fra skrog til cockpit. Bevæbn den med ødelæggende våbensystemer. Rekrutter specialister, der stabler kraftfulde bonusser på dit skibs ydeevne og kraftniveau. Mine asteroider, slæb farlig last, jagt skjulte skatte, kidnap værdifulde mål, eller bliv en lejet pistol. Hvordan du styrer universet er helt dit valg.",
+        "Alt, hvad du bygger i Hyper Quest, strømmer direkte ind i Hyper Racing og Overlord of the 7 Realms. Ét univers, problemfri progression, ubegrænset potentiale. Læs videre for at opdage, hvordan questing fungerer, hvad du kan tjene, og hvordan du og dit rumskib bliver det mest frygtede fartøj i galaksen."
+      ],
+      "calloutLine1": "Quest to Earn. Tjen for at opgradere.",
+      "calloutLine2": "Opgrader til Conquer.",
+      "howItWorksTitle": "Sådan fungerer Hyper Quest",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Accepter opgaver fra Mission Board",
+          "body": "Spillebrættet er din gateway til eventyr. Gennemse tilgængelige missioner lige fra hurtige fragtkørsler, der tager kun få minutter, til episke flerdages ekspeditioner dybt ind i ukendt rum. Hver quest kommer med klare mål, farevurderinger og belønningsniveauer. Vælg de missioner, der matcher din spillestil, uanset om det er at slæbe farlig last, jage skjulte skatte, udvinde asteroidefelter eller gå undercover for at genvinde tabte artefakter."
+        },
+        {
+          "num": "02",
+          "title": "Udforsk galaksen",
+          "body": "Rejs gennem portaler til fjerne planeter, hver med unikke miljøer, værdifulde materialer og nye racerkredsløb. Følg galaktiske kort for at kortlægge uudforskede områder og få navnerettigheder til planeter, du opdager først. Mine ressourcer fra asteroidefelter, bjærg dele fra gamle relikvier og forladte skibe, og saml spor, der fører til skjulte formuer spredt ud over stjernerne."
+        },
+        {
+          "num": "03",
+          "title": "Byg dit imperium inde fra dit skib",
+          "body": "Din Quest Racer er mere end transport. Dyrk mad i hydroponiske bugter, forfin materialer udvundet fra fjerne planeter, og byg hære inde fra dine kloningslaboratorier. Forfin dine tropper og deres våben, forsvar dig selv mod pirater, og administrer en selvbærende mobil base, der bliver stærkere for hver mission, du fuldfører."
+        },
+        {
+          "num": "04",
+          "title": "Spil på din måde",
+          "body": "Der er ingen enkelt vej til dominans. Bliv en frygtet dusørjæger, en snedig smugler, en mesterminearbejder eller en legendarisk opdagelsesrejsende. Kidnap værdifulde mål, bliv en lejet pistol, eller skab alliancer for at kontrollere hele sektorer. Galaksen bøjer sig efter din vilje, og hver beslutning former dit omdømme og din formue."
+        }
+      ],
+      "rewardsTitle": "Quest-belønninger; Få betalt for at spille!",
+      "rewards": [
+        {
+          "title": "Belønninger i spillet",
+          "body": "Hver quest, du fuldfører, udbetales. Kreditter, opgraderingsmaterialer, sjældne komponenter, specialistrekrutteringstokens og eksklusive genstande flyder ind i dit lager med hver succesfuld mission. Jo sværere søgen er, jo rigere er træk. Oplev sjældne materialer på fjerne planeter, bjærg dele af høj værdi fra gamle relikvier, og opbevar ressourcer, der giver næring til din fremgang til galaktisk overherredømme."
+        },
+        {
+          "title": "Rigtige kontantbetalinger",
+          "body": "Hyper Quest tager spil ud over underholdning. Visse quests og rangerede udfordringer tilbyder rigtige kontante udbetalinger. Gennemfør high-tier missioner, dominer leaderboard-begivenheder, og deltag i sæsonbestemte quest-mesterskaber, hvor rigtige penge er på spil. Jo dygtigere og dristigere du bliver, jo større bliver udbetalingerne. Fra ugentlige quest-premier til episke sæsonbetonede turneringer, er der altid muligheder for at omdanne dine galaktiske eventyr til reel indtjening."
+        },
+        {
+          "title": "Sådan fungerer Quest-udbetalinger",
+          "body": "Spillere kvalificerer sig til pengebelønningsopgaver ved at opbygge deres omdømme og opfylde præstationstærsklerne. Quest sværhedsgrad, varighed og fareniveau bestemmer præmiepuljen. Udbetalinger er gennemsigtige, tydeligt vist, før du accepterer en mission, og behandles hurtigt efter afslutning. Uanset om du kører en ti minutters fragttransport eller en ugelang ekspedition i dybt rum, matcher belønningen risikoen."
+        },
+        {
+          "title": "Fremskridt, der betaler sig",
+          "body": "Quest-belønninger indgår direkte i dine skibsopgraderinger, våbensystemer og specialistrekruttering. Hver udbetaling gør dig stærkere, hvilket låser op for sværere quests med endnu større belønninger. Indtjening overføres også til Hyper Racing og Overlord of the 7 Realms, hvilket skaber en progressionsløkke, der belønner dedikation på tværs af hele Hyper Tek-økosystemet."
+        }
+      ],
+      "upgradesTitle": "Opgrader dit skib, bevæbn dit arsenal, rekrutter dit mandskab",
+      "upgrades": [
+        {
+          "title": "Rumskibsopgraderinger",
+          "body": "Din Quest Racer er fuldt modulopbygget fra motorrum til cockpit. Opgrader skroget for maksimal holdbarhed, forstærk den ydre skal til at modstå fjendtlige miljøer, boost skjoldgeneratorer til kampoverlevelse, og overhal kraftsystemer for at opnå maksimal ydeevne. Bedre motorer betyder hurtigere interplanetarisk rejse. Stærkere navigationssystemer afslører skjulte ruter og ukendte verdener. Hver opgradering forvandler dit skib til et mere kraftfuldt, mere frygtet fartøj."
+        },
+        {
+          "title": "våbensystemer",
+          "body": "Galaksen er farlig, og du skal være mere farlig. Opgrader og forfin dine våbensystemer for at beskytte dig selv mod pirater, rivaliserende spillere og fjendtlige styrker. Vælg mellem defensive konfigurationer, der holder dig i live i de værste situationer eller offensive loadouts designet til at påføre maksimal skade. Laser-arrays, missilbatterier, plasmakanoner og eksperimentelle energivåben er alle tilgængelige, mens du går gennem opgraderingstræet."
+        },
+        {
+          "title": "Rekrutér specialister",
+          "body": "Specialister er game-changers. Hver af dem bringer unikke færdigheder, der tilføjer kraftfulde bonusser til dit skibs overordnede ydeevne og kraftniveau. Navigationsspecialister afslører skjulte stier og reducerer rejsetiden. Kampspecialister øger våbennøjagtigheden og skader output. Ingeniørspecialister øger skrogets integritet og reparationshastighed. Videnskabsspecialister forbedrer ressourceudvinding og materialeforfining. Stable flere specialister for at skabe ødelæggende kombinationer, der multiplicerer dit skibs effektivitet."
+        },
+        {
+          "title": "Power Loop",
+          "body": "Quest for at tjene. Tjen for at opgradere. Opgrader for at erobre sværere quests med større belønninger. Rekrutér specialister til at forstærke alle systemer på dit skib. Jo stærkere du bliver, jo mere af galaksen åbner sig, og jo større formue venter der. Skibsopgraderinger og specialistbonusser fører også direkte ind i rumkampe under Hyper Racing-transit og kampe på tværs af Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest — ofte stillede spørgsmål",
+      "faq": [
+        {
+          "q": "Hvad er Hyper Quest?",
+          "a": "Et rumeventyr i åben verden, hvor du kommanderer et fuldt opgraderbart rumskib på tværs af en stor galakse. Gennemfør quests, udforsk fremmede verdener, opgrader dit skib, rekrutter specialister og tjen rigtige pengebelønninger sammen med rigdomme i spillet."
+        },
+        {
+          "q": "Hvordan fungerer quests?",
+          "a": "Accepter missioner fra søgebrættet i spillet. Quests spænder fra hurtige fragtkørsler, der tager kun få minutter, til episke flerdages ekspeditioner dybt ind i ukendt rum. Hver quest har klare mål, farevurderinger og belønningsniveauer, der vises, før du accepterer."
+        },
+        {
+          "q": "Kan jeg tjene rigtige penge?",
+          "a": "Ja. Visse quests, rangerede udfordringer og sæsonbestemte mesterskaber tilbyder rigtige kontante udbetalinger. Opbyg dit omdømme, opfyld præstationstærskler, og kvalificere dig til stadig mere lukrative kontantbelønningsmissioner. Ugentlige dusører og sæsonbestemte turneringer kører kontinuerligt."
+        },
+        {
+          "q": "Hvilke belønninger i spillet kan jeg tjene?",
+          "a": "Hver fuldført opgave udbetaler kreditter, opgraderingsmaterialer, sjældne komponenter, specialistrekrutteringstokens og eksklusive genstande. Jo hårdere og længere søgen, jo rigere belønninger. Oplev sjældne materialer på fjerne planeter, og red dele af høj værdi fra gamle relikvier."
+        },
+        {
+          "q": "Kan jeg opgradere mit rumskib?",
+          "a": "Hvert system kan opgraderes: skrog, ydre skal, skjoldgeneratorer, kraftsystemer, motorer, cockpit og navigation. Bedre motorer betyder hurtigere rejse, stærkere skrog overlever fjendtlige møder, og opgraderet navigation afslører skjulte ruter og ukendte verdener."
+        },
+        {
+          "q": "Hvilke våben er tilgængelige?",
+          "a": "Opgrader og forfin våbensystemer inklusive laserarrays, missilbatterier, plasmakanoner og eksperimentelle energivåben. Vælg defensive konfigurationer for overlevelse eller offensive loadouts for maksimal skade mod pirater, rivaler og fjendtlige styrker."
+        },
+        {
+          "q": "Hvordan arbejder specialister?",
+          "a": "Rekrutter specialister med unikke færdigheder, der tilføjer kraftfulde bonusser til dit skibs ydeevne og kraftniveau. Navigationsspecialister afslører skjulte stier, kampspecialister øger våbenskader, ingeniørspecialister øger skrogets integritet, og videnskabsspecialister forbedrer ressourceudvindingen. Stable flere specialister til ødelæggende kombinationer."
+        },
+        {
+          "q": "Hvilke typer quests er tilgængelige?",
+          "a": "Fragttransport, asteroide-minedrift, skattejagt, dusørjagt, genvinding af artefakter, undercover-operationer, planetarisk udforskning, piratforsvar, bjærgningsmissioner og mere. Quests spænder fra hurtige ti minutters løbeture til flere dages dybe rumekspeditioner."
+        },
+        {
+          "q": "Kan jeg opdage nye planeter?",
+          "a": "Ja. Følg galaktiske kort ind i ukendte områder og opdag nye verdener. De første opdagere får navnerettigheder til de planeter, de finder. Nye verdener tilbyder unikke materialer, miljøer og racerbaner, som ingen andre spillere har haft adgang til før."
+        },
+        {
+          "q": "Hvad kan jeg gøre inde i mit skib?",
+          "a": "Din Quest Racer er en mobil base. Dyrk mad i hydroponiske bugter, forfin materialer udvundet fra fjerne planeter, byg og træne hære i kloningslaboratorier, opgrader våben og forsvar, og administrer en selvopretholdende operation, der bliver mere kraftfuld for hver mission."
+        },
+        {
+          "q": "Hvordan fungerer det galaktiske kort?",
+          "a": "Det galaktiske kort guider din udforskning på tværs af universet. Opgrader dit kort for at afsløre nye sektorer, portalplaceringer og skjulte missionszoner. Efterhånden som du udforsker yderligere, udvides kortet og låser op for stadigt farligere og givende områder af rummet."
+        },
+        {
+          "q": "Går mine fremskridt videre til andre spil?",
+          "a": "Alt, hvad du bygger i Hyper Quest, strømmer direkte ind i Hyper Racing og Overlord of the 7 Realms. Skibsopgraderinger, specialistbonusser, kampfærdigheder og ressourcer overføres alle problemfrit. Et univers, flere spil, ubegrænset progression."
+        },
+        {
+          "q": "Kan jeg spille som skurk?",
+          "a": "Absolut. Gå undercover, kidnap værdifulde mål, bliv en lejet pistol, smugler farlig last, eller raid andre spillere. Der er ingen enkelt vej til dominans. Hvordan du styrer galaksen er helt dit valg, og hver beslutning former dit omdømme."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "OVERLORD",
+      "heading": "Herre over de 7 riger",
+      "subtitle": "Crash-land. Genopbygge. Erobre. Bliv Overlord.",
+      "intro": [
+        "Overlord of the 7 Realms er et kampstrategispil på tre niveauer, der er ulig noget andet inden for spil. Du vovede dig gennem en portal ind i et parallelt univers og styrtede ned på en fjendtlig fremmed planet. Dit skib er ødelagt, dine systemer svigter, og planetens skabninger nærmer sig allerede. Overlevelse er kun begyndelsen. Dominans er målet.",
+        "Genopbyg dit skib fra vraget og op. Klon og træne hære i dine laboratorier ombord. Tæm planetens dyreliv for at skabe ødelæggende bereden kavaleri. Tag derefter kampen på tværs af tre kampdimensioner: jord-til-jord-kamp mod monstre og rivaliserende spillere, jord-til-rum-angreb på orbitale eller jordmål og rum-til-rum-krigsførelse ombord på den massive Battle Ring, der kredser om planeten.",
+        "Dette er ikke bare endnu et strategispil. Overlord byder på VR-interaktion i realtid, rigtige kontante belønninger for at gennemføre daglige begivenheder og quests og hver fjortende dag invasioner af de frygtindgydende Hammerongs, den mest magtfulde fremmede art, der findes. Hver fjortende dag ankommer de for at udvinde planeten, og hver fjortende dag kan modige spillere udfordre dem til massive bonusser og legendariske belønninger.",
+        "Opgrader dit rumskib, bevæbn det med ødelæggende våben, rekrutter specialister, der forstærker dit magtniveau, og smed alliancer for at kontrollere hele regioner. Alt, hvad du bygger, forbindes direkte med Hyper Racing og Hyper Quest gennem det delte Hyper Tek-økosystem. Et univers, tre spil, ubegrænset krigsførelse. Læs videre for at finde ud af, hvordan kampsystemet fungerer, og hvorfor Overlord ændrer alt."
+      ],
+      "calloutLine1": "Overlevelse er kun begyndelsen.",
+      "calloutLine2": "Dominans er målet.",
+      "howItWorksTitle": "Tri-Level Battle System; Tre dimensioner af krig",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Jord-til-jord kamp",
+          "body": "Planetens overflade er en krigszone. Indsæt dine klonede hære mod fjendtlige fremmede væsner, monstrøse bæster og rivaliserende spillere, der kæmper om territorium og ressourcer. Tæm og træne planetens dyreliv for at skabe monterede kavalerienheder, der giver dine jordstyrker en ødelæggende kant. Jordkrigsførelse er rå, taktisk og ubarmhjertig. Hver kamp, ​​du vinder, tjener ressourcer, territorium og omdømme."
+        },
+        {
+          "num": "02",
+          "title": "Jord-til-rum-angreb",
+          "body": "Det er her Overlord tilføjer en dimension, som ingen, eller næsten ingen, andre spil tilbyder. Opret specialiserede troppegrupper designet til at iværksætte angreb mellem planetens overflade og den orbitale Battle Ring. Slå mod skibe, der er stationeret i rummet fra din jordposition, eller koordiner kombinerede angreb, der rammer fjender fra oven og nedefra samtidigt. Dette lodrette kamplag forvandler standardstrategi til en multidimensionel skakkamp, ​​hvor placering på tværs af både jorden og rummet bestemmer sejren."
+        },
+        {
+          "num": "03",
+          "title": "Rum-til-rum-krigsførelse",
+          "body": "Port dit skib i kredsløb, og land på Battle Ring, en massiv orbital struktur, der kredser om planeten. Herfra gå på jagt efter uafskærmede skibe og sårbare mål. Teleporter tropper gennem rummet og direkte ind i fjendtlige fartøjer for at påføre maksimal intern skade ved hjælp af specialudviklede boardingangreb. Rumkampbelønninger er blandt de højeste i spillet, og at kontrollere orbitalt territorium giver dig en strategisk fordel, som ingen spillere på jorden kan matche."
+        },
+        {
+          "num": "04",
+          "title": "Hvorfor Tri-Level ændrer alt",
+          "body": "De fleste strategispil fungerer på et enkelt plan. Overlord opererer på tre. Evnen til at angribe fra jord til jord, jord til rum og rum til rum skaber en slagmark med uovertruffen taktisk dybde. Færdighed er alt. Brud magt alene vil ikke gøre dig til Overlord. Strategisk beherskelse på tværs af alle tre niveauer er det, der adskiller den dominerende fra den besejrede."
+        }
+      ],
+      "extraSection": {
+        "title": "Battle Ring og VR Interaction",
+        "items": [
+          {
+            "title": "Lander på Battle Ring",
+            "body": "Battle Ring er en kolossal orbital struktur, der kredser om planetens system. Når du porterer dit skib ud i rummet, kan du lægge til kaj på Battle Ring for at opnå en enorm strategisk fordel. Fra denne høje position kan du gå på jagt efter uafskærmede skibe, sende boardingpartier ind i rivaliserende fartøjer og koordinere ødelæggende angreb på jordmål nedenfor. Landing on the Battle Ring åbner en helt ny dimension af gameplay, som de fleste strategispil simpelthen ikke tilbyder, hvilket giver Overlord en taktisk fordel i forhold til alt andet på markedet."
+          },
+          {
+            "title": "Inde i Battle Ring",
+            "body": "Battle Ring er ikke kun en dockingplatform. Hvis du kan finde ud af, hvordan du kan bryde dens indre, venter skjulte quests, ekstra bonusser og eksklusive belønninger indeni. Ringens indre er en labyrint af korridorer, kamre og gammel teknologi. Udfør quests og jagtmissioner i selve ringen, og opdag hemmeligheder, som ingen overfladebundet spiller nogensinde vil få adgang til. Kampringen belønner de dristige, de udspekulerede og de ubarmhjertige."
+          },
+          {
+            "title": "Real-time VR-interaktion",
+            "body": "Som alle Hyper Tek-serien af spil understøtter Overlord of the 7 Realms fuld VR-interaktion i realtid. Træd ind i dit skib, gå gennem kampringens korridorer, led dine tropper ind i kamp på jorden, og oplev rumkrigsførelse fra dit fartøjs cockpit. VR forvandler Overlord fra et strategispil til en fuldstændig fordybende slagmarksoplevelse. Styr dine styrker, udforsk fremmed terræn, og deltag i kamp med et niveau af tilstedeværelse og intensitet, som fladskærmsspil ikke kan kopiere."
+          },
+          {
+            "title": "Fordelen i forhold til andre spil",
+            "body": "Intet andet spil kombinerer krigsførelse på tre niveauer, en udforskbar orbital kampstation, VR i realtid og rigtige penge og/eller belønninger i spillet i en enkelt oplevelse. Battle Ring alene tilføjer en gameplay-dimension, som konkurrenterne ikke kan matche. Når du kombinerer det med jordkamp, ​​rumkrigsførelse, VR-fordybelse og det indbyrdes forbundne Hyper Tek-økosystem, står Overlord i en kategori for sig."
+          }
+        ]
+      },
+      "upgradesTitle": "Genopbygge, genopruste, rekruttere; Power Up for War",
+      "upgrades": [
+        {
+          "title": "Rumskibsopgraderinger",
+          "body": "Dit styrtede skib er der, hvor det hele begynder. Genopbyg det system for system, fra motorrummet til kommandodækket. Hver komponent kan opgraderes fuldt ud: skrogforstærkning, strukturel integritet, ydre skalsammensætning, skjoldgeneratorer, strømsystemer og navigationssystemer. I Overlord bygger du ikke for fart, men for kamp. Et fuldt opgraderet krigsskib er grundlaget for enhver succesfuld kampagne, og jo dybere du investerer, jo mere formidabelt bliver dit fartøj."
+        },
+        {
+          "title": "Våbensystemer og tekniske niveauer",
+          "body": "Opgrader og forfin dine våben, færdigheder og tekniske niveauer for at dominere på tværs af alle tre kampniveauer. Jordbaseret artilleri til planetarisk krigsførelse, anti-orbital-batterier til jord-til-rum-angreb og skibsmonterede våbenarrays til rum-til-rum-kamp. Hvert våbensystem kan raffineres til specifikke taktiske roller. Uanset om du er specialiseret i langdistancebombardement, boardinghandlinger på nært hold eller defensive modforanstaltninger, definerer dine våbenladninger din kampidentitet."
+        },
+        {
+          "title": "Rekrutér specialister",
+          "body": "Specialister er kraftmultiplikatorerne, der adskiller gode spillere fra Overlords. Få unikke specialister, der bringer kraftfulde bonusser til dit skibs overordnede ydeevne og kraftniveau. Taktiske specialister forbedrer troppeindsættelseseffektiviteten, ingeniørspecialister fremskynder skibsreparationer og -opgraderinger, våbenspecialister øger skadeproduktionen på tværs af alle systemer, og efterretningsspecialister afslører fjendens positioner og svagheder. Stable flere specialister for at skabe ødelæggende synergier, der forstærker alle aspekter af din drift."
+        },
+        {
+          "title": "Byg dine hære",
+          "body": "Klon tropper i dit skibs indbyggede kloningslaboratorier, opgrader og forfin dem og deres våben, indtil de er kampklare. Men tropper alene er ikke nok. Tæm og træn planetens vilde væsner til at skabe monteret bæstkavaleri, en styrke, der ikke kan klones eller fremstilles, og som skal tjenes gennem dygtighed og tålmodighed. Din hærsammensætning på tværs af jord, luft og rum er det, der bestemmer din dominans."
+        }
+      ],
+      "rewardsTitle": "Hammerongs, Rewards og Hyper Tek Ecosystem",
+      "rewards": [
+        {
+          "title": "Hammerongerne: Den mest magtfulde art, der findes",
+          "body": "Hver anden uge falder centerarenas styrkefelter, og Hammerongs ankommer. De er den stærkeste fremmede art i universet, bevæbnet med avanceret teknologi langt ud over noget, spillere besidder. De kommer for at udvinde planetens ressourcer, og de forsvarer arenaen med fuld, overvældende kraft. At angribe Hammerongs er den farligste udfordring i Overlord, men dem, der lykkes, bliver belønnet med enorme bonusser, legendarisk bytte, sjældne opgraderingsmaterialer og eksklusive belønninger, der ikke kan opnås på anden måde. Den hver fjortende dag Hammerong-invasion er den ultimative test af din magt."
+        },
+        {
+          "title": "Daglige begivenheder, quests og kampbelønninger",
+          "body": "Overlord giver konstant belønninger. Udfør daglige opgaver for at optjene kreditter, opgradere materialer og progressionsbonusser. Deltag i særlige begivenheder for premium-belønninger. Udfør quests på tværs af planetens overflade og i Battle Ring for eksklusivt bytte. Vind kampe mod monstre, fremmede væsner og rivaliserende spillere for at samle ressourcer. Udforsk overfladen for at opdage skjulte artefakter og skatte. Belønningsstrukturen er designet, så hver handling, du foretager, flytter dig tættere på at blive serverens ultimative Overlord."
+        },
+        {
+          "title": "Forbundet til Hyper Tek Ecosystem",
+          "body": "Overlord of the 7 Realms eksisterer ikke isoleret. Den er fuldt integreret i Hyper Tek-universet sammen med Hyper Racing og Hyper Quest. Ressourcer optjent i Overlord kan bruges på tværs af alle tre spil. Skibsopgraderinger, specialistbonusser, kampfærdigheder og materialer flyder problemfrit mellem titlerne. Racerevner opnået i Hyper Racing forbedrer dine pilotfærdigheder i Overlord-rumkamp. Materialer samlet i Hyper Quest giver næring til dine opgraderinger på planeten. Hyper Tek-markedspladsen forbinder alt og skaber en samlet økonomi, hvor fremskridt i ét spil styrker fremskridt i alle tre."
+        },
+        {
+          "title": "Et univers, tre spil, ubegrænset kraft",
+          "body": "Spillere, der engagerer sig på tværs af alle tre Hyper Tek-spil, opbygger kraft hurtigere, får adgang til eksklusive belønninger på tværs af spil og dominerer gennem en bredde af færdigheder og ressourcer, som enkeltspilsspillere ikke kan matche. Det indbyrdes forbundne økosystem er den ultimative konkurrencefordel."
+        }
+      ],
+      "faqTitle": "Overlord of the 7 Realms - Ofte stillede spørgsmål",
+      "faq": [
+        {
+          "q": "Hvad er Overlord of the 7 Realms?",
+          "a": "Et kampstrategispil på tre niveauer, hvor du styrtlander på en fremmed planet, genopbygger dit skib, kloner hære og kæmper på tværs af tre dimensioner: jord-til-jord, jord-til-rum og rum-til-rum. Indeholder VR-interaktion, rigtige kontante belønninger og hver fjortende dag Hammerong-invasioner."
+        },
+        {
+          "q": "Hvad er tri-level kampsystemet?",
+          "a": "Kamp fungerer på tværs af tre niveauer: jord-til-jord mod monstre og rivaliserende spillere, jord-til-rum-angreb rettet mod orbitale skibe og rum-til-rum-krigsførelse på Battle Ring. Denne multi-dimensionelle tilgang skaber taktisk dybde, som intet enkeltplans strategispil kan matche."
+        },
+        {
+          "q": "Hvad er Battle Ring?",
+          "a": "En massiv orbital struktur, der kredser om planeten. Land dit skib på det for at jage uafskærmede mål, starte boardingpartier ind i fjendtlige fartøjer og få adgang til skjulte quests inde i dets indre. At kontrollere Battle Ring giver dig en strategisk fordel i forhold til spillere, der kun er på jorden."
+        },
+        {
+          "q": "Kan jeg opgradere mit rumskib?",
+          "a": "Hvert system kan opgraderes fra motorrum til kommandodæk: skrog, struktur, ydre skal, skjoldgeneratorer, strømsystemer og navigation. I Overlord bygger du til kamp, ​​ikke fart. Et fuldt opgraderet krigsskib er grundlaget for hver kampagne."
+        },
+        {
+          "q": "Hvordan arbejder specialister?",
+          "a": "Rekrutter unikke specialister, der tilføjer kraftfulde bonusser til dit skibs ydeevne og kraftniveau. Taktiske, ingeniør-, våben- og efterretningsspecialister booster hver især forskellige systemer. Stable flere specialister for ødelæggende synergier på tværs af alle kampniveauer."
+        },
+        {
+          "q": "Hvem er Hammerongs?",
+          "a": "Den mest magtfulde fremmede art, der findes. Hver fjortende dag ankommer de til den midterste arena for at udvinde planetens ressourcer, forsvaret af overvældende kraft og avanceret teknologi. At angribe dem er ekstremt farligt, men belønner spillere med enorme bonusser og legendarisk bytte."
+        },
+        {
+          "q": "Hvilke belønninger kan jeg tjene?",
+          "a": "Daglige opgaver, quests, kampe og begivenheder udbetaler alle kreditter, opgraderingsmaterialer og progressionsbonusser. Særlige begivenheder og Hammerong-invasioner tilbyder premium og eksklusive belønninger. Udfordringer med højere sværhedsgrad og rangerede konkurrencer giver større udbetalinger inklusive rigtige kontanter."
+        },
+        {
+          "q": "Understøtter Overlord VR?",
+          "a": "Ja. Fuld VR-interaktion i realtid giver dig mulighed for at gå gennem dit skibs korridorer, udforske Battle Ring-interiøret, føre tropper ind i kamp på jorden og styre dit fartøj i rumkrigsførelse. VR forvandler Overlord fra strategi til en fuldstændig fordybende slagmarksoplevelse."
+        },
+        {
+          "q": "Hvordan bygger jeg min hær?",
+          "a": "Klon tropper i dit skibs laboratorier ombord, opgrader og forfin dem og deres våben. For ridende kavaleri skal du tæmme og træne planetens vilde væsner, da dyr ikke kan klones. Hærens sammensætning på tværs af jorden, luften og rummet bestemmer din dominans."
+        },
+        {
+          "q": "Kan jeg tilslutte mig en alliance?",
+          "a": "Ja. Gå alene, eller deltag i en alliance, der øger din magt og hjælper dig med at vokse. Alliancer tilbyder delte ressourcer, koordinerede angreb og kollektivt forsvar. Gennemfør daglige opgaver for at opgradere både dit skib og alliancens delte aktiver."
+        },
+        {
+          "q": "Er Overlord knyttet til andre Hyper Tek-spil?",
+          "a": "Fuldt integreret. Ressourcer, skibsopgraderinger, specialistbonusser og kampfærdigheder flyder mellem Overlord, Hyper Racing og Hyper Quest. Racing-evner forbedrer din rumkamp, ​​Quest-materialer giver næring til dine opgraderinger, og Hyper Tek-markedspladsen forbinder hele økonomien."
+        },
+        {
+          "q": "Hvilke våben er tilgængelige?",
+          "a": "Jordbaseret artilleri, anti-orbital-batterier, skibsmonterede våbenarrays og specialiseret boarding-aktionsudstyr. Hvert system kan raffineres til specifikke taktiske roller, herunder langdistancebombardement, tætte kampe og defensive modforanstaltninger."
+        },
+        {
+          "q": "Kan jeg udforske planetens overflade?",
+          "a": "Ja. Planeten er rig på skjulte belønninger, artefakter, ressourcer og farligt dyreliv at tæmme. Udforsk overfladen for at finde skatte, bekæmp fremmede væsner og monstre, og opdag strategiske fordele, der styrker din kampagne for Overlord-dominans."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "AFSLUT",
     "spaceRing": "OVERLORD · RUMRING",
@@ -324,91 +720,268 @@
       "detail": "Detalje"
     },
     "rooms": {
-      "storeroom":     { "title": "Lagerrum",                "desc": "Centralt lagernav for råmaterialer og høstede ressourcer. Administrerer inventarfordeling på tværs af mine- og raffineringsoperationer." },
-      "mining_fs":     { "title": "Mine FS",                 "desc": "Fremre styrbords minebay. Udstyret med dybkerne-udvindingsanlæg til mineral- og malmindsamling i åben rums." },
-      "mining_fp":     { "title": "Mine FP",                 "desc": "Fremre bagbords minebay. Spejler styrbordenheden og fordobler udvindingskapaciteten under ressourcerige feltoperationer." },
-      "process_ref":   { "title": "Procesraffinaderi",       "desc": "Konverterer rå malm og mineraler til raffinerede legeringer. Kritisk for brændstofssyntese og skibsopgraderingsmaterialer." },
-      "mining_rs":     { "title": "Mine RS",                 "desc": "Bagre styrbords minebay. Vinklet ved -45° for laterale feltafsøgninger under langsom-drift asteroidhøstning." },
-      "mining_rp":     { "title": "Mine RP",                 "desc": "Bagre bagbords minebay. Arbejder i tandem med RS-bay for at maksimere bagre feltressourceudvindingsudbytte." },
-      "fuel_ref":      { "title": "Brændstofraffinaderi",    "desc": "Behandler raffinerede legeringer til fremdrivningsklassificeret brændstof. Forsyner hovedmotoren og nødthrusterreserverne." },
-      "workshop":      { "title": "Værksted",                "desc": "Skibsvedligeholdelse og fabrikationscenter. Håndterer komponentreparationer, delproduktion og udstyrsopgraderinger." },
-      "racing":        { "title": "Racinghangar",            "desc": "Dedikeret bay med racingdroner og lette fartøjer. Understøtter Racing-spiltilstandsimplementering og depotoperationer." },
-      "brig":          { "title": "Arrest",                  "desc": "Sikkert opbevaringsrum for fanger og værdifuld last. Forstærkede vægge forhindrer uautoriseret adgang eller flugt." },
-      "armory_ss":     { "title": "Våbenlager SS",           "desc": "Styrbordssidernes våbenskab. Lagrer og vedligeholder håndvåben, besætningsbeskyttelsesudstyr og personlige forsvarssystemer." },
-      "armory_ps":     { "title": "Våbenlager PS",           "desc": "Bagbordssidernes våbenskab. Spejler SS-våbenlageret og giver afbalanceret udstyrsadgang på begge sider af fartøjet." },
-      "main_weapon":   { "title": "Hovedvåben Tungt",        "desc": "Primær tung våbenplacering. Huser skibets kraftigste offensive systemer til storskalakampsituationer." },
-      "fwd_shield":    { "title": "Fremre Skjoldgenerator",  "desc": "Genererer en beskyttende energibarriere på tværs af skibets stævn. Første forsvarslinje mod indkommende projektiler og energiangreb." },
-      "fighter_fss":   { "title": "Jagerbay FSS",            "desc": "Fremre styrbords bay med kompakte jagerfartøjer. Muliggør hurtig indsættelse af eskortejagere under kamp- og patruljeoppdrag." },
-      "fighter_fps":   { "title": "Jagerbay FPS",            "desc": "Fremre bagbords jagerbay. Opererer i tandem med FSS-bay for koordinerede jagerskvadronopsendelser." },
-      "fighter_rss":   { "title": "Jagerbay RSS",            "desc": "Bagre styrbords nacelle-jagerbay. Understøtter bagtropsoperationer og forfølgelsesindfangningsscenarier." },
-      "fighter_rps":   { "title": "Jagerbay RPS",            "desc": "Bagre bagbords nacelle-jagerbay. Giver symmetrisk bagdækning til fuld defensiv jageriindsættelse." },
-      "barracks_ss":   { "title": "Barakker SS",             "desc": "Styrbords besætningskvarter til kampersonale. Huser soldater, piloter og sikkerhedsteams med køjsystemer og udstyrsklapper." },
-      "barracks_ps":   { "title": "Barakker PS",             "desc": "Bagbords besætningskvarter. Identisk layout som SS-barakkerne for at sikre lige besætningsfordeling og hurtig mobilisering fra begge sider." },
-      "stables_ss":    { "title": "Stalde SS",               "desc": "Styrbords biologisk anlægsbay. Huser fremmed ridedyr og bioteknisk udviklede væsener brugt i planetoverfladeoperationer." },
-      "stable_ps":     { "title": "Stald PS",                "desc": "Bagbords biologisk anlægsbay. Spejler SS-staldene for afbalanceret dyrebelastning og symmetrisk vægtfordeling." },
-      "transporter":   { "title": "Transportbay",            "desc": "Kvanteassisteret personale- og lasttransportsystem. Muliggør hurtig kortdistanceteleportation til planetoverflader eller nærliggende fartøjer." },
-      "security":      { "title": "Sikkerhedsstation",       "desc": "Skibsomfattende overvågnings- og trusselsresponsnav. Overvåger alle dæk og koordinerer interne sikkerhedsprotokoller." },
-      "weapons_ss":    { "title": "Våbensystemer SS",        "desc": "Styrbords våbenhåndteringskonsol. Styrer målretning, affyringssekvenser og ammunitionslogistik for styrbordsvåben." },
-      "weapons_ps":    { "title": "Våbensystemer PS",        "desc": "Bagbords våbenhåndteringskonsol. Giver fuld uafhængig kontrol af alle bagbords våbenplatforme." },
-      "power_plant":   { "title": "Kraftværk",               "desc": "Kerneenergigeneringsenhed. Leverer stabil kraftproduktion til alle skibssystemer via cirkulær plasmaindeslutningsteknologi." },
-      "power_sys":     { "title": "Kraftsystemer",           "desc": "Kraftdistributions- og reguleringsnav. Administrerer lastbalancering mellem våben, skjolde, motorer og livsstøttesystemer." },
-      "energy_dist":   { "title": "Energidistribution",      "desc": "Sekundær energirutingsnode. Sikrer konsekvent kraftlevering til midtskibs og agtersektionssystemer under høj-efterspørgselsforhold." },
-      "main_engine":   { "title": "Skibets Hovedmotor",      "desc": "Primært fremdriftssystem der driver al sublyshastighed. Genererer fremdrift via antimaterie-katalyserede plasmajet." },
-      "navigation":    { "title": "Navigation",              "desc": "Central navigations- og rorplads-station. Administrerer kursplotning, astrokartografi og realtidspositionssporing." },
-      "flight_deck":   { "title": "Flyverdæk",               "desc": "Hoved pilotsstation. Styrer alle flyoperationer inklusive afgang, landing, orbitale manøvrer og nødundvigelseshandlinger." },
-      "weapons_off":   { "title": "Våbenofficer",            "desc": "Taktisk våbenkommandopost. Koordinerer offensivt og defensivt våbenskud under direkte kommando af Våbenofficeren." },
-      "comms_off":     { "title": "Kommunikationsofficer",   "desc": "Kommunikations- og signalopfangningsnav. Håndterer al inter-skib, alliance og planetær kommunikation inklusive krypterede kanaler." },
-      "capt_quarters": { "title": "Kaptajnens Kahyt",        "desc": "Private kvarter for skibets kommanderende officer. Indeholder sikre dataterminaler og private briefingsfaciliteter." },
-      "kitchen":       { "title": "Køkken",                  "desc": "Besætningens ernærings- og madlavningsfacilitet. Behandler lagrede madressourcer og syntetiserer næringssupplementer til langdistancerejser." },
-      "mess_hall":     { "title": "Spisesal",                "desc": "Fælles spise- og rekreationsrum. Fungerer som besætningsmoralnav i nedetid mellem kamp- og ressourceoperationer." },
-      "hydro_1":       { "title": "Hydroponikscelle 1",      "desc": "Automatiseret dyrkningsenhed der producerer frisk mad og medicinske planter. Reducerer afhængighed af lagrede forsyninger til udvidede missioner." },
-      "hydro_2":       { "title": "Hydroponikscelle 2",      "desc": "Sekundær hydroponikscelle der udvider afgrødevariation og udbytte. Understøtter besætningsernæring og handelsvareproduktion." },
-      "hydro_3":       { "title": "Hydroponikscelle 3",      "desc": "Tertiær dyrkningsenhed specialiseret i høj-udbytning basale afgrøder. Giver grundlæggende kalorieforsyning til store besætningskompletter." },
-      "hydro_4":       { "title": "Hydroponikscelle 4",      "desc": "Medicinsk og botanisk forskningscelle. Dyrker sjældne arter brugt i medicinsk behandling og alkemisk syntese." },
-      "hydro_5":       { "title": "Hydroponikscelle 5",      "desc": "Eksotisk plantedyrkningsbay. Producerer luksusvarer og sjælden flora til handel på markedspladsen." },
-      "hydro_6":       { "title": "Hydroponikscelle 6",      "desc": "Høj-vækst eksperimentel celle. Tester nye afgrødestammer udviklet gennem genetiske modifikationsprogrammer." },
-      "shield_main":   { "title": "Skjoldgenerator Hoved",   "desc": "Primær multidirektionel skjoldgenerator. Projicerer en energibarriere rundt om hele skroget under kampsituationer." },
-      "power_relay1":  { "title": "Kraftrelæ 1",             "desc": "Øverste dæks kraftrelækobling. Leder energi fra kraftværket til fremre våben og skjoldanlæg." },
-      "power_relay2":  { "title": "Kraftrelæ 2",             "desc": "Nederste dæks kraftrelækobling. Distribuerer kraft til motorsider og bagre defensive systemer." },
-      "hidden_st1":    { "title": "Skjult Lagring 1",        "desc": "Skjult høj-sikkerhedshvelv. Lagrer klassificeret last, værdifulde artefakter og smuglergods væk fra standard inventarscanninger." },
-      "hidden_st2":    { "title": "Skjult Lagring 2",        "desc": "Sekundært skjult hvelv. Yderligere sikkert rum til missionskritiske genstande der kræver maksimal diskretion." },
-      "cargo_1":       { "title": "Lastrum 1",               "desc": "Primært bulk-lastrum. Designet til storvolumen ressourcetransport inklusive malm, raffinerede metaller og handelsvarer." },
-      "cargo_2":       { "title": "Lastrum 2",               "desc": "Sekundært lastrum optimeret til skrøbelige eller temperaturfølsomme laster. Klimakontrollerede lagringsforhold." },
-      "cargo_3":       { "title": "Lastrum 3",               "desc": "Tertiært lastrum. Konfigurerbart layout understøtter blandede laster inklusive køretøjer, containere og oversized udstyr." },
-      "war_council":   { "title": "Krigsråd",                "desc": "Strategisk kommandokammer. Senior officersbriefingsbord hvor kampplaner, alliancestrategier og kampagnemål koordineres." },
-      "academy":       { "title": "Akademi",                 "desc": "Besætningsoptræning og uddannelsesfacilitet. Muliggør færdighedsfremgang, specialiseringsoplåsninger og officersudviklingsprogrammer." },
-      "science_lab":   { "title": "Videnskabslaboratorium",  "desc": "Forsknings- og udviklingscentral. Gennemfører eksperimenter inden for materialvidenskab, fremdriftsteori og fremmed teknologianalyse." },
-      "dna_lab":       { "title": "DNA-laboratorium",        "desc": "Genetisk forskningsfacilitet. Udvikler biologiske forbedringer til besætning, skaber nye artsvarianter og forsker i fremmed DNA-prøver." },
-      "cryostasis":    { "title": "Kryostase",               "desc": "Langdistancerejse suspensionssystem. Placerer besætning i kryogen stase for at bevare ressourcer under flerårige dybrumnsrejser." },
-      "dna_chambers":  { "title": "DNA-kamre",               "desc": "Genetiske modifikationsbays. Anvender forsket DNA-forbedringer direkte på besætningsmedlemmer og biologiske enheder." },
-      "weapons_relay": { "title": "Våbenkraftrelæ",          "desc": "Dedikeret krafthåndteringsnode til tunge våbensystemer. Sikrer stabil energiforsyning under vedvarende kampoperationer." },
-      "comms_tower":   { "title": "Kommunikationstårn",      "desc": "Langdistance dybrums-kommunikationsanlæg. Muliggør flådeomfattende udsendelser, interstellære overførsler og alliancekoordinering over store afstande." }
+      "storeroom": {
+        "title": "Lagerrum",
+        "desc": "Centralt lagernav for råmaterialer og høstede ressourcer. Administrerer inventarfordeling på tværs af mine- og raffineringsoperationer."
+      },
+      "mining_fs": {
+        "title": "Mine FS",
+        "desc": "Fremre styrbords minebay. Udstyret med dybkerne-udvindingsanlæg til mineral- og malmindsamling i åben rums."
+      },
+      "mining_fp": {
+        "title": "Mine FP",
+        "desc": "Fremre bagbords minebay. Spejler styrbordenheden og fordobler udvindingskapaciteten under ressourcerige feltoperationer."
+      },
+      "process_ref": {
+        "title": "Procesraffinaderi",
+        "desc": "Konverterer rå malm og mineraler til raffinerede legeringer. Kritisk for brændstofssyntese og skibsopgraderingsmaterialer."
+      },
+      "mining_rs": {
+        "title": "Mine RS",
+        "desc": "Bagre styrbords minebay. Vinklet ved -45° for laterale feltafsøgninger under langsom-drift asteroidhøstning."
+      },
+      "mining_rp": {
+        "title": "Mine RP",
+        "desc": "Bagre bagbords minebay. Arbejder i tandem med RS-bay for at maksimere bagre feltressourceudvindingsudbytte."
+      },
+      "fuel_ref": {
+        "title": "Brændstofraffinaderi",
+        "desc": "Behandler raffinerede legeringer til fremdrivningsklassificeret brændstof. Forsyner hovedmotoren og nødthrusterreserverne."
+      },
+      "workshop": {
+        "title": "Værksted",
+        "desc": "Skibsvedligeholdelse og fabrikationscenter. Håndterer komponentreparationer, delproduktion og udstyrsopgraderinger."
+      },
+      "racing": {
+        "title": "Racinghangar",
+        "desc": "Dedikeret bay med racingdroner og lette fartøjer. Understøtter Racing-spiltilstandsimplementering og depotoperationer."
+      },
+      "brig": {
+        "title": "Arrest",
+        "desc": "Sikkert opbevaringsrum for fanger og værdifuld last. Forstærkede vægge forhindrer uautoriseret adgang eller flugt."
+      },
+      "armory_ss": {
+        "title": "Våbenlager SS",
+        "desc": "Styrbordssidernes våbenskab. Lagrer og vedligeholder håndvåben, besætningsbeskyttelsesudstyr og personlige forsvarssystemer."
+      },
+      "armory_ps": {
+        "title": "Våbenlager PS",
+        "desc": "Bagbordssidernes våbenskab. Spejler SS-våbenlageret og giver afbalanceret udstyrsadgang på begge sider af fartøjet."
+      },
+      "main_weapon": {
+        "title": "Hovedvåben Tungt",
+        "desc": "Primær tung våbenplacering. Huser skibets kraftigste offensive systemer til storskalakampsituationer."
+      },
+      "fwd_shield": {
+        "title": "Fremre Skjoldgenerator",
+        "desc": "Genererer en beskyttende energibarriere på tværs af skibets stævn. Første forsvarslinje mod indkommende projektiler og energiangreb."
+      },
+      "fighter_fss": {
+        "title": "Jagerbay FSS",
+        "desc": "Fremre styrbords bay med kompakte jagerfartøjer. Muliggør hurtig indsættelse af eskortejagere under kamp- og patruljeoppdrag."
+      },
+      "fighter_fps": {
+        "title": "Jagerbay FPS",
+        "desc": "Fremre bagbords jagerbay. Opererer i tandem med FSS-bay for koordinerede jagerskvadronopsendelser."
+      },
+      "fighter_rss": {
+        "title": "Jagerbay RSS",
+        "desc": "Bagre styrbords nacelle-jagerbay. Understøtter bagtropsoperationer og forfølgelsesindfangningsscenarier."
+      },
+      "fighter_rps": {
+        "title": "Jagerbay RPS",
+        "desc": "Bagre bagbords nacelle-jagerbay. Giver symmetrisk bagdækning til fuld defensiv jageriindsættelse."
+      },
+      "barracks_ss": {
+        "title": "Barakker SS",
+        "desc": "Styrbords besætningskvarter til kampersonale. Huser soldater, piloter og sikkerhedsteams med køjsystemer og udstyrsklapper."
+      },
+      "barracks_ps": {
+        "title": "Barakker PS",
+        "desc": "Bagbords besætningskvarter. Identisk layout som SS-barakkerne for at sikre lige besætningsfordeling og hurtig mobilisering fra begge sider."
+      },
+      "stables_ss": {
+        "title": "Stalde SS",
+        "desc": "Styrbords biologisk anlægsbay. Huser fremmed ridedyr og bioteknisk udviklede væsener brugt i planetoverfladeoperationer."
+      },
+      "stable_ps": {
+        "title": "Stald PS",
+        "desc": "Bagbords biologisk anlægsbay. Spejler SS-staldene for afbalanceret dyrebelastning og symmetrisk vægtfordeling."
+      },
+      "transporter": {
+        "title": "Transportbay",
+        "desc": "Kvanteassisteret personale- og lasttransportsystem. Muliggør hurtig kortdistanceteleportation til planetoverflader eller nærliggende fartøjer."
+      },
+      "security": {
+        "title": "Sikkerhedsstation",
+        "desc": "Skibsomfattende overvågnings- og trusselsresponsnav. Overvåger alle dæk og koordinerer interne sikkerhedsprotokoller."
+      },
+      "weapons_ss": {
+        "title": "Våbensystemer SS",
+        "desc": "Styrbords våbenhåndteringskonsol. Styrer målretning, affyringssekvenser og ammunitionslogistik for styrbordsvåben."
+      },
+      "weapons_ps": {
+        "title": "Våbensystemer PS",
+        "desc": "Bagbords våbenhåndteringskonsol. Giver fuld uafhængig kontrol af alle bagbords våbenplatforme."
+      },
+      "power_plant": {
+        "title": "Kraftværk",
+        "desc": "Kerneenergigeneringsenhed. Leverer stabil kraftproduktion til alle skibssystemer via cirkulær plasmaindeslutningsteknologi."
+      },
+      "power_sys": {
+        "title": "Kraftsystemer",
+        "desc": "Kraftdistributions- og reguleringsnav. Administrerer lastbalancering mellem våben, skjolde, motorer og livsstøttesystemer."
+      },
+      "energy_dist": {
+        "title": "Energidistribution",
+        "desc": "Sekundær energirutingsnode. Sikrer konsekvent kraftlevering til midtskibs og agtersektionssystemer under høj-efterspørgselsforhold."
+      },
+      "main_engine": {
+        "title": "Skibets Hovedmotor",
+        "desc": "Primært fremdriftssystem der driver al sublyshastighed. Genererer fremdrift via antimaterie-katalyserede plasmajet."
+      },
+      "navigation": {
+        "title": "Navigation",
+        "desc": "Central navigations- og rorplads-station. Administrerer kursplotning, astrokartografi og realtidspositionssporing."
+      },
+      "flight_deck": {
+        "title": "Flyverdæk",
+        "desc": "Hoved pilotsstation. Styrer alle flyoperationer inklusive afgang, landing, orbitale manøvrer og nødundvigelseshandlinger."
+      },
+      "weapons_off": {
+        "title": "Våbenofficer",
+        "desc": "Taktisk våbenkommandopost. Koordinerer offensivt og defensivt våbenskud under direkte kommando af Våbenofficeren."
+      },
+      "comms_off": {
+        "title": "Kommunikationsofficer",
+        "desc": "Kommunikations- og signalopfangningsnav. Håndterer al inter-skib, alliance og planetær kommunikation inklusive krypterede kanaler."
+      },
+      "capt_quarters": {
+        "title": "Kaptajnens Kahyt",
+        "desc": "Private kvarter for skibets kommanderende officer. Indeholder sikre dataterminaler og private briefingsfaciliteter."
+      },
+      "kitchen": {
+        "title": "Køkken",
+        "desc": "Besætningens ernærings- og madlavningsfacilitet. Behandler lagrede madressourcer og syntetiserer næringssupplementer til langdistancerejser."
+      },
+      "mess_hall": {
+        "title": "Spisesal",
+        "desc": "Fælles spise- og rekreationsrum. Fungerer som besætningsmoralnav i nedetid mellem kamp- og ressourceoperationer."
+      },
+      "hydro_1": {
+        "title": "Hydroponikscelle 1",
+        "desc": "Automatiseret dyrkningsenhed der producerer frisk mad og medicinske planter. Reducerer afhængighed af lagrede forsyninger til udvidede missioner."
+      },
+      "hydro_2": {
+        "title": "Hydroponikscelle 2",
+        "desc": "Sekundær hydroponikscelle der udvider afgrødevariation og udbytte. Understøtter besætningsernæring og handelsvareproduktion."
+      },
+      "hydro_3": {
+        "title": "Hydroponikscelle 3",
+        "desc": "Tertiær dyrkningsenhed specialiseret i høj-udbytning basale afgrøder. Giver grundlæggende kalorieforsyning til store besætningskompletter."
+      },
+      "hydro_4": {
+        "title": "Hydroponikscelle 4",
+        "desc": "Medicinsk og botanisk forskningscelle. Dyrker sjældne arter brugt i medicinsk behandling og alkemisk syntese."
+      },
+      "hydro_5": {
+        "title": "Hydroponikscelle 5",
+        "desc": "Eksotisk plantedyrkningsbay. Producerer luksusvarer og sjælden flora til handel på markedspladsen."
+      },
+      "hydro_6": {
+        "title": "Hydroponikscelle 6",
+        "desc": "Høj-vækst eksperimentel celle. Tester nye afgrødestammer udviklet gennem genetiske modifikationsprogrammer."
+      },
+      "shield_main": {
+        "title": "Skjoldgenerator Hoved",
+        "desc": "Primær multidirektionel skjoldgenerator. Projicerer en energibarriere rundt om hele skroget under kampsituationer."
+      },
+      "power_relay1": {
+        "title": "Kraftrelæ 1",
+        "desc": "Øverste dæks kraftrelækobling. Leder energi fra kraftværket til fremre våben og skjoldanlæg."
+      },
+      "power_relay2": {
+        "title": "Kraftrelæ 2",
+        "desc": "Nederste dæks kraftrelækobling. Distribuerer kraft til motorsider og bagre defensive systemer."
+      },
+      "hidden_st1": {
+        "title": "Skjult Lagring 1",
+        "desc": "Skjult høj-sikkerhedshvelv. Lagrer klassificeret last, værdifulde artefakter og smuglergods væk fra standard inventarscanninger."
+      },
+      "hidden_st2": {
+        "title": "Skjult Lagring 2",
+        "desc": "Sekundært skjult hvelv. Yderligere sikkert rum til missionskritiske genstande der kræver maksimal diskretion."
+      },
+      "cargo_1": {
+        "title": "Lastrum 1",
+        "desc": "Primært bulk-lastrum. Designet til storvolumen ressourcetransport inklusive malm, raffinerede metaller og handelsvarer."
+      },
+      "cargo_2": {
+        "title": "Lastrum 2",
+        "desc": "Sekundært lastrum optimeret til skrøbelige eller temperaturfølsomme laster. Klimakontrollerede lagringsforhold."
+      },
+      "cargo_3": {
+        "title": "Lastrum 3",
+        "desc": "Tertiært lastrum. Konfigurerbart layout understøtter blandede laster inklusive køretøjer, containere og oversized udstyr."
+      },
+      "war_council": {
+        "title": "Krigsråd",
+        "desc": "Strategisk kommandokammer. Senior officersbriefingsbord hvor kampplaner, alliancestrategier og kampagnemål koordineres."
+      },
+      "academy": {
+        "title": "Akademi",
+        "desc": "Besætningsoptræning og uddannelsesfacilitet. Muliggør færdighedsfremgang, specialiseringsoplåsninger og officersudviklingsprogrammer."
+      },
+      "science_lab": {
+        "title": "Videnskabslaboratorium",
+        "desc": "Forsknings- og udviklingscentral. Gennemfører eksperimenter inden for materialvidenskab, fremdriftsteori og fremmed teknologianalyse."
+      },
+      "dna_lab": {
+        "title": "DNA-laboratorium",
+        "desc": "Genetisk forskningsfacilitet. Udvikler biologiske forbedringer til besætning, skaber nye artsvarianter og forsker i fremmed DNA-prøver."
+      },
+      "cryostasis": {
+        "title": "Kryostase",
+        "desc": "Langdistancerejse suspensionssystem. Placerer besætning i kryogen stase for at bevare ressourcer under flerårige dybrumnsrejser."
+      },
+      "dna_chambers": {
+        "title": "DNA-kamre",
+        "desc": "Genetiske modifikationsbays. Anvender forsket DNA-forbedringer direkte på besætningsmedlemmer og biologiske enheder."
+      },
+      "weapons_relay": {
+        "title": "Våbenkraftrelæ",
+        "desc": "Dedikeret krafthåndteringsnode til tunge våbensystemer. Sikrer stabil energiforsyning under vedvarende kampoperationer."
+      },
+      "comms_tower": {
+        "title": "Kommunikationstårn",
+        "desc": "Langdistance dybrums-kommunikationsanlæg. Muliggør flådeomfattende udsendelser, interstellære overførsler og alliancekoordinering over store afstande."
+      }
     },
     "guns": {
-      "far_left_bar":      "Fremre Hoved Kanon",
-      "fore_port_bay":     "Styrbords Kanonbatteri Fremre",
-      "fore_stbd_bay":     "Bagbords Kanonbatteri Fremre",
-      "pd_gun_1":          "Cockpit Styrbords Forsvarscelle 1",
-      "pd_gun_2":          "Cockpit Styrbords Forsvarscelle 2",
-      "pd_gun_3":          "Cockpit Styrbords Forsvarscelle 3",
-      "pd_gun_4":          "Cockpit Styrbords Forsvarscelle 4",
-      "pd_gun_5":          "Cockpit Styrbords Forsvarscelle 5",
-      "pd_gun_6":          "Cockpit Styrbords Forsvarscelle 6",
-      "vert_oval_upper":   "Cockpit Center Forsvarscelle Nedre",
-      "vert_oval_lower":   "Cockpit Center Forsvarscelle Øvre",
-      "center_front_gun":  "Fremre Øverste Dæk Kanonmatrix",
-      "pd_gun_7":          "Cockpit Bagbords Forsvarscelle 1",
-      "pd_gun_8":          "Cockpit Bagbords Forsvarscelle 2",
-      "pd_gun_9":          "Cockpit Bagbords Forsvarscelle 3",
-      "pd_gun_10":         "Cockpit Bagbords Forsvarscelle 4",
-      "pd_gun_11":         "Cockpit Bagbords Forsvarscelle 5",
-      "pd_gun_12":         "Cockpit Bagbords Forsvarscelle 6",
+      "far_left_bar": "Fremre Hoved Kanon",
+      "fore_port_bay": "Styrbords Kanonbatteri Fremre",
+      "fore_stbd_bay": "Bagbords Kanonbatteri Fremre",
+      "pd_gun_1": "Cockpit Styrbords Forsvarscelle 1",
+      "pd_gun_2": "Cockpit Styrbords Forsvarscelle 2",
+      "pd_gun_3": "Cockpit Styrbords Forsvarscelle 3",
+      "pd_gun_4": "Cockpit Styrbords Forsvarscelle 4",
+      "pd_gun_5": "Cockpit Styrbords Forsvarscelle 5",
+      "pd_gun_6": "Cockpit Styrbords Forsvarscelle 6",
+      "vert_oval_upper": "Cockpit Center Forsvarscelle Nedre",
+      "vert_oval_lower": "Cockpit Center Forsvarscelle Øvre",
+      "center_front_gun": "Fremre Øverste Dæk Kanonmatrix",
+      "pd_gun_7": "Cockpit Bagbords Forsvarscelle 1",
+      "pd_gun_8": "Cockpit Bagbords Forsvarscelle 2",
+      "pd_gun_9": "Cockpit Bagbords Forsvarscelle 3",
+      "pd_gun_10": "Cockpit Bagbords Forsvarscelle 4",
+      "pd_gun_11": "Cockpit Bagbords Forsvarscelle 5",
+      "pd_gun_12": "Cockpit Bagbords Forsvarscelle 6",
       "upper_flank_array": "Styrbords Kanonbatteri Bagre",
       "lower_flank_array": "Bagbords Kanonbatteri Bagre",
-      "spine_gun_1":       "Midtre Øverste Dæk Kanonmatrix",
-      "spine_gun_2":       "Nedre Central Rygradsmatrix",
-      "spine_gun_3":       "Bagre Central Rygradsmatrix",
-      "mid_rail_gun":      "Central Tårn Befæstning",
+      "spine_gun_1": "Midtre Øverste Dæk Kanonmatrix",
+      "spine_gun_2": "Nedre Central Rygradsmatrix",
+      "spine_gun_3": "Bagre Central Rygradsmatrix",
+      "mid_rail_gun": "Central Tårn Befæstning",
       "upper_nacelle_bay": "Styrbords Vingematrix",
       "lower_nacelle_bay": "Bagbords Vingematrix"
     },
@@ -476,6 +1049,76 @@
           "notes": "Dryaderne er en fascinerende og unik art, kjendetegnet af deres hybridnatur, der kombinerer træk fra træer og fremmede væsener. Denne distinctive fysiologi giver dem mulighed for at trives i diverse miljøer og ligner ofte floraen rundt om dem. De har en bisværmlignende tanke, der sætter dem i stand til at kommunikere ubesværet med hinanden. Denne kollektive bevidsthed fremmer en dyb fornemmelse af enhed og samarbejde og lader dem operere som en sammenhængende gruppe, mens de opretholder en intrikat forbindelse til naturen, og de kan mærke sundheden af deres omgivelser, hvilket gør dem til enestående vogtere af naturen. Kosten er primært plantebaseret og består af blade, frugter og andet botanisk materiale. Dog supplerer de af og til kosten med små mængder kød, som de anskaffer med stor omsorg og respekt for det liv de tager. Ud over deres fysiske egenskaber er Dryaderne kendte for deres legesyge og sjove adfærd. De engagerer sig ofte i legende drillerier eller spil, der afspejler deres glædesfulde ånd. Loyaliteten til hinanden og til hjemlandet er urokkelig, og de vil voldsomt beskytte deres samfund og territorium, når de trues. Åndeligt har Dryaderne en dyb tro på et efterliv, der er sammenvævet med naturens cyklusser. De ærer naturelementerne (Jord, Luft, Ild og Vand) som guddommelige kræfter, og de tilbeder også himmellegemer som solen og stjernerne, som de opfatter som vejledende lys i deres eksistens. Denne dybe forbindelse til både naturen og kosmos former deres kultur, ritualer og overordnede livsmåde."
         }
       }
-    }
+    },
+    "back": "← TILBAGE",
+    "viewArrow": "SE →",
+    "selectCategory": "VÆLG KATEGORI",
+    "comingSoon": "KOMMER SNART",
+    "specialistProfileDesc": "Specialistprofil — fulde stats og evner tilgængelige ved spillets lancering.",
+    "alliance": {
+      "rank": {
+        "leader": "Leder",
+        "coleader": "Co-leder",
+        "officer": "Officer",
+        "member": "Medlem"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Væk"
+      },
+      "manage": {
+        "editInfo": "Rediger allianceinfo",
+        "editInfoDesc": "Skift navn, tag og beskrivelse",
+        "joinRequests": "Administrer tilmeldingsanmodninger",
+        "joinRequestsDesc": "Gennemgå og accepter nye medlemmer",
+        "donationGoals": "Indstil donationsmål",
+        "donationGoalsDesc": "Konfigurer ugentlige donationsmål",
+        "warSettings": "Alliancekrigindstillinger",
+        "warSettingsDesc": "Konfigurer krigsdeltagelsesregler",
+        "kickMembers": "Fjern medlemmer",
+        "kickMembersDesc": "Fjern inaktive eller regelbrydende medlemmer"
+      },
+      "allianceMail": {
+        "warResults": "Alliancekrigresultater",
+        "strategyPlan": "Ny strategiplan",
+        "donationSummary": "Ugentlig donationsoversigt",
+        "meeting1800": "Møde kl. 18:00",
+        "levelUp": "Alliancen steg i niveau!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Velkommen til HyperTek!",
+      "maintenance": "Servervedligeholdelsesmeddelelse",
+      "allianceWar": "Alliancekrigmeddelelse",
+      "galacticCup": "Registrering til Galactic Cup",
+      "baseAttacked": "Din base blev angrebet!",
+      "loginReward": "Daglig login-belønning klar",
+      "refiningEvent": "Raffineringsmester-begivenhed starter",
+      "meeting1800": "Møde kl. 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Automatisk oversættelse TIL — Beskeder leveres på hver modtagers sprog",
+      "autoTranslateOff": "Automatisk oversættelse FRA"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Hvem er med til alliancekrig i aften?",
+      "ggLastRace": "GG i det sidste løb, fantastisk hastighed",
+      "tradingPlasma": "Bytter plasmastaве mod teknikbøger",
+      "needHelpAsteroid": "Har brug for hjælp til asteroidemissionen",
+      "allianceRecruiting": "Vores alliance rekrutterer, send DM",
+      "donationGoalsPlasma": "Donationsmål: plasmastaave er nødvendige!",
+      "warStarts2Hours": "Krig begynder om 2 timer, forbered jer",
+      "handleMedicalSupport": "Jeg tager mig af medicinsk support",
+      "wts50Engines": "SÆLGER: 50 motorer, send PM",
+      "wtbAntiGravity": "KØBER: Anti-tyngdekraftmoduler x10",
+      "sellingRareSkins": "Sælger sjældne skins, tjek profil"
+    },
+    "devicePairing": "ENHEDSPARRING",
+    "deviceOffline": "OFFLINE",
+    "pairing": "PARRING...",
+    "unavailableNow": "IKKE TILGÆNGELIG LIGE NU",
+    "pairDevice": "PAR ENHED",
+    "vrInteractionMode": "VR-interaktionstilstand · Kommer snart"
   }
 }

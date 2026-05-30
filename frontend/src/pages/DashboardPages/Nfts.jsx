@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
@@ -23,10 +24,11 @@ const ALL_CATEGORIES = [
 
 // Step indicator dots for the multi-step listing modal
 function ListingSteps({ step }) {
+  const { t } = useTranslation();
   const steps = [
-    { key: "marketplace", label: "Marketplace" },
-    { key: "auction",     label: "Auction"     },
-    { key: "trade",       label: "Trade"        },
+    { key: "marketplace", label: t("dashboard.collections.steps.marketplace", "Marketplace") },
+    { key: "auction",     label: t("dashboard.collections.steps.auction", "Auction")         },
+    { key: "trade",       label: t("dashboard.collections.steps.trade", "Trade")              },
   ];
   const currentIndex =
     step === "marketplace"                               ? 0 :
@@ -47,6 +49,7 @@ function ListingSteps({ step }) {
 }
 
 function NFTs() {
+  const { t } = useTranslation();
   const gridRef = useRef(null);
   const user  = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token) || localStorage.getItem("token");
@@ -392,27 +395,27 @@ function NFTs() {
       {/* Header */}
       <div className="flex flex-col w-full gap-4 px-4 md:px-12 z-10">
         <div className="flex items-center justify-between">
-          <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">My Collections</h1>
+          <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.collections.title", "My Collections")}</h1>
           <Link to="/dashboard/add-user-collection">
             <button
               className="flex items-center gap-1.5 px-4 h-9 rounded-lg text-white text-sm font-semibold whitespace-nowrap transition-all"
               style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
             >
-              + Create NFT/NFC
+              {t("dashboard.collections.createBtn", "+ Create NFT/NFC")}
             </button>
           </Link>
         </div>
 
         <div className="rounded-md flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 max-w-xs">
           <FiSearch size={14} className="text-white/40 flex-shrink-0" />
-          <input type="text" placeholder="Search items..." value={search} onChange={(e) => setSearch(e.target.value)}
+          <input type="text" placeholder={t("dashboard.collections.searchPlaceholder", "Search items...")} value={search} onChange={(e) => setSearch(e.target.value)}
             className="bg-transparent text-white px-2 py-1 rounded w-full placeholder-gray-300 outline-none text-sm" />
         </div>
 
         <div className="flex flex-wrap gap-2">
           <button onClick={() => setCategoryFilter("all")}
             className={`px-3 h-7 rounded-full text-xs font-medium transition-all border ${categoryFilter === "all" ? "bg-white/15 border-white/30 text-white" : "bg-transparent border-white/10 text-white/40 hover:border-white/20 hover:text-white/60"}`}>
-            All ({allItems.length})
+            {t("dashboard.collections.allFilter", "All")} ({allItems.length})
           </button>
           {ALL_CATEGORIES.slice(1).map((cat) => {
             const count = categoryCounts[cat] || 0;
@@ -430,27 +433,27 @@ function NFTs() {
       {/* Grid */}
       <div className="px-4 md:px-12 mt-6">
         {loading ? (
-          <p className="text-white/50 text-sm">Loading items...</p>
+          <p className="text-white/50 text-sm">{t("dashboard.collections.loading", "Loading items...")}</p>
         ) : !wallet ? (
-          <p className="text-white/50 text-sm">Connect your wallet to see your items.</p>
+          <p className="text-white/50 text-sm">{t("dashboard.collections.connectWallet", "Connect your wallet to see your items.")}</p>
         ) : allItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
             <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
               <FiPackage size={28} className="text-white/20" />
             </div>
             <div className="text-center">
-              <p className="text-white/50 text-sm">Your storage is empty.</p>
-              <p className="text-white/30 text-xs mt-1">Create your first NFT/NFC to get started.</p>
+              <p className="text-white/50 text-sm">{t("dashboard.collections.emptyTitle", "Your storage is empty.")}</p>
+              <p className="text-white/30 text-xs mt-1">{t("dashboard.collections.emptySubtitle", "Create your first NFT/NFC to get started.")}</p>
             </div>
             <Link to="/dashboard/add-user-collection">
               <button className="flex items-center gap-2 px-5 h-9 rounded-lg text-white text-sm font-semibold transition-all"
                 style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                + Create NFT/NFC
+                {t("dashboard.collections.createBtn", "+ Create NFT/NFC")}
               </button>
             </Link>
           </div>
         ) : filtered.length === 0 ? (
-          <p className="text-white/50 text-sm">No items match your search.</p>
+          <p className="text-white/50 text-sm">{t("dashboard.collections.noMatch", "No items match your search.")}</p>
         ) : (
           <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {filtered.map((item) => {
@@ -504,7 +507,7 @@ function NFTs() {
                   </div>
 
                   <div className="px-3 pt-2 pb-1 flex-1 flex flex-col gap-0.5">
-                    <p className="text-white text-xs font-medium truncate">{item.name || "Unnamed"}</p>
+                    <p className="text-white text-xs font-medium truncate">{item.name || t("dashboard.collections.unnamed", "Unnamed")}</p>
                     {item.category && (
                       <span className="self-start px-1.5 py-0.5 rounded text-[9px] font-semibold capitalize mt-0.5"
                         style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }}>
@@ -521,20 +524,20 @@ function NFTs() {
                       <button onClick={() => openListModal(item)}
                         className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-blue-300 hover:text-white transition-all justify-center"
                         style={{ background: "rgba(0,42,168,0.25)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                        <FiTag size={10} /> List
+                        <FiTag size={10} /> {t("dashboard.collections.listBtn", "List")}
                       </button>
                     ) : (
                       <button onClick={() => setUnlistItem(item)}
                         className="flex items-center gap-1 flex-1 h-6 rounded-md text-[10px] font-semibold text-red-300/80 hover:text-red-200 transition-all justify-center"
                         style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
-                        <FiX size={10} /> Unlist
+                        <FiX size={10} /> {t("dashboard.collections.unlistBtn", "Unlist")}
                       </button>
                     )}
-                    <button onClick={() => openEditModal(item)} data-tooltip={item.listed ? "Cancel listing to edit" : "Edit"}
+                    <button onClick={() => openEditModal(item)} data-tooltip={item.listed ? t("dashboard.collections.cancelListingEdit", "Cancel listing to edit") : t("dashboard.collections.editTooltip", "Edit")}
                       className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${item.listed ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-white hover:bg-white/5"}`}>
                       <FiEdit2 size={11} />
                     </button>
-                    <button onClick={() => openDeleteModal(item)} data-tooltip={item.listed ? "Cancel listing to delete" : isOnChain ? "On-chain, cannot delete" : "Delete"}
+                    <button onClick={() => openDeleteModal(item)} data-tooltip={item.listed ? t("dashboard.collections.cancelListingDelete", "Cancel listing to delete") : isOnChain ? t("dashboard.collections.onChainDelete", "On-chain, cannot delete") : t("dashboard.collections.deleteTooltip", "Delete")}
                       className={`w-6 h-6 flex items-center justify-center rounded-md transition-all ${(item.listed || isOnChain) ? "text-white/15 cursor-not-allowed" : "text-white/40 hover:text-red-400 hover:bg-red-400/5"}`}>
                       <FiTrash2 size={11} />
                     </button>
@@ -559,8 +562,8 @@ function NFTs() {
               <>
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-white font-semibold text-base">List on Marketplace</h2>
-                    <p className="text-white/40 text-xs mt-0.5">No gas fee now — minted on-chain when someone buys.</p>
+                    <h2 className="text-white font-semibold text-base">{t("dashboard.collections.listModal.title", "List on Marketplace")}</h2>
+                    <p className="text-white/40 text-xs mt-0.5">{t("dashboard.collections.listModal.noGas", "No gas fee now — minted on-chain when someone buys.")}</p>
                   </div>
                   <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors mt-0.5"><FiX size={18} /></button>
                 </div>
@@ -575,7 +578,7 @@ function NFTs() {
                 </div>
 
                 <div>
-                  <label className="text-white/70 text-sm font-medium mb-1.5 block">Listing Price (USDC) <span className="text-red-400">*</span></label>
+                  <label className="text-white/70 text-sm font-medium mb-1.5 block">{t("dashboard.collections.listModal.priceLabel", "Listing Price (USDC)")} <span className="text-red-400">*</span></label>
                   <div className="flex h-11 rounded-lg bg-white/5 border border-white/10 focus-within:border-blue-500 transition-all overflow-hidden">
                     <input type="number" placeholder="0.00" min="0" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)}
                       className="flex-1 bg-transparent px-3 text-white text-sm outline-none placeholder-white/30" autoFocus />
@@ -589,12 +592,12 @@ function NFTs() {
                 <div className="flex gap-3">
                   <button onClick={closeListing}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    Cancel
+                    {t("dashboard.collections.listModal.cancel", "Cancel")}
                   </button>
                   <button onClick={handleList} disabled={listingLoading}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                     style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                    {listingLoading ? "Listing..." : "List Now →"}
+                    {listingLoading ? t("dashboard.collections.listModal.listing", "Listing...") : t("dashboard.collections.listModal.listNow", "List Now →")}
                   </button>
                 </div>
               </>
@@ -605,29 +608,29 @@ function NFTs() {
               <>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
-                  <span className="text-green-300 text-sm font-medium">Listed on Marketplace!</span>
+                  <span className="text-green-300 text-sm font-medium">{t("dashboard.collections.auctionPrompt.listedSuccess", "Listed on Marketplace!")}</span>
                 </div>
 
                 <div className="rounded-xl p-4 flex flex-col gap-2"
                   style={{ background: "rgba(251,191,36,0.06)", border: "1px solid rgba(251,191,36,0.2)" }}>
                   <div className="flex items-center gap-2 mb-1">
                     <Gavel className="w-4 h-4 text-amber-400" />
-                    <span className="text-amber-300 font-semibold text-sm">Also list on Auction?</span>
+                    <span className="text-amber-300 font-semibold text-sm">{t("dashboard.collections.auctionPrompt.title", "Also list on Auction?")}</span>
                   </div>
                   <p className="text-white/40 text-xs leading-relaxed">
-                    Auction listings let buyers bid competitively. You set a start price and duration.
+                    {t("dashboard.collections.auctionPrompt.desc", "Auction listings let buyers bid competitively. You set a start price and duration.")}
                   </p>
                 </div>
 
                 <div className="flex gap-3">
                   <button onClick={() => setListStep("trade_prompt")}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    No, skip
+                    {t("dashboard.collections.auctionPrompt.skip", "No, skip")}
                   </button>
                   <button onClick={() => setListStep("auction_form")}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
                     style={{ background: "rgba(251,191,36,0.2)", border: "1px solid rgba(251,191,36,0.4)" }}>
-                    Yes, set up →
+                    {t("dashboard.collections.auctionPrompt.setup", "Yes, set up →")}
                   </button>
                 </div>
               </>
@@ -639,7 +642,7 @@ function NFTs() {
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
                     <Gavel className="w-4 h-4 text-amber-400" />
-                    <h2 className="text-white font-semibold text-base">Set Up Auction</h2>
+                    <h2 className="text-white font-semibold text-base">{t("dashboard.collections.auctionForm.title", "Set Up Auction")}</h2>
                   </div>
                   <button onClick={() => setListStep("trade_prompt")} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
                 </div>
@@ -652,13 +655,13 @@ function NFTs() {
 
                 <div className="flex flex-col gap-3">
                   <div>
-                    <label className="text-white/60 text-xs font-medium mb-1 block">Start Price (USDC) <span className="text-red-400">*</span></label>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">{t("dashboard.collections.auctionForm.startPrice", "Start Price (USDC)")} <span className="text-red-400">*</span></label>
                     <input type="number" placeholder="e.g. 50" min="0" value={auctionForm.startPrice}
                       onChange={(e) => setAuctionForm(f => ({ ...f, startPrice: e.target.value }))}
                       className={inputCls} style={inputStyle} autoFocus />
                   </div>
                   <div>
-                    <label className="text-white/60 text-xs font-medium mb-1 block">Duration</label>
+                    <label className="text-white/60 text-xs font-medium mb-1 block">{t("dashboard.collections.auctionForm.duration", "Duration")}</label>
                     <div className="relative">
                       {/* Backdrop — closes dropdown on outside click */}
                       {durationOpen && (
@@ -671,8 +674,8 @@ function NFTs() {
                         style={inputStyle}
                       >
                         <span>
-                          {auctionForm.durationHours === "24" ? "24 hours" :
-                           auctionForm.durationHours === "72" ? "3 days" : "7 days"}
+                          {auctionForm.durationHours === "24" ? t("dashboard.collections.auctionForm.hours24", "24 hours") :
+                           auctionForm.durationHours === "72" ? t("dashboard.collections.auctionForm.days3", "3 days") : t("dashboard.collections.auctionForm.days7", "7 days")}
                         </span>
                         <ChevronDown size={14} className={`text-white/40 transition-transform duration-200 ${durationOpen ? "rotate-180" : ""}`} />
                       </button>
@@ -680,9 +683,9 @@ function NFTs() {
                         <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 overflow-hidden rounded-lg"
                           style={{ background: "#13142a", border: "1px solid rgba(255,255,255,0.15)", boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }}>
                           {[
-                            { value: "24",  label: "24 hours" },
-                            { value: "72",  label: "3 days"   },
-                            { value: "168", label: "7 days"   },
+                            { value: "24",  label: t("dashboard.collections.auctionForm.hours24", "24 hours") },
+                            { value: "72",  label: t("dashboard.collections.auctionForm.days3", "3 days")   },
+                            { value: "168", label: t("dashboard.collections.auctionForm.days7", "7 days")   },
                           ].map((opt, i, arr) => (
                             <button
                               key={opt.value}
@@ -704,8 +707,8 @@ function NFTs() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-white/60 text-xs font-medium mb-1 block">Instant Buy Price (USDC) <span className="text-white/25">optional</span></label>
-                    <input type="number" placeholder="Allows immediate purchase" min="0" value={auctionForm.instantBuyPrice}
+                    <label className="text-white/60 text-xs font-medium mb-1 block">{t("dashboard.collections.auctionForm.instantBuy", "Instant Buy Price (USDC)")} <span className="text-white/25">{t("dashboard.collections.auctionForm.optional", "optional")}</span></label>
+                    <input type="number" placeholder={t("dashboard.collections.auctionForm.instantBuyPlaceholder", "Allows immediate purchase")} min="0" value={auctionForm.instantBuyPrice}
                       onChange={(e) => setAuctionForm(f => ({ ...f, instantBuyPrice: e.target.value }))}
                       className={inputCls} style={inputStyle} />
                   </div>
@@ -714,12 +717,12 @@ function NFTs() {
                 <div className="flex gap-3">
                   <button onClick={() => setListStep("trade_prompt")}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
-                    Skip
+                    {t("dashboard.collections.auctionForm.skip", "Skip")}
                   </button>
                   <button onClick={handleCreateAuction} disabled={auctionLoading}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                     style={{ background: "rgba(251,191,36,0.25)", border: "1px solid rgba(251,191,36,0.45)" }}>
-                    {auctionLoading ? "Creating..." : "Create Auction →"}
+                    {auctionLoading ? t("dashboard.collections.auctionForm.creating", "Creating...") : t("dashboard.collections.auctionForm.create", "Create Auction →")}
                   </button>
                 </div>
               </>
@@ -732,8 +735,8 @@ function NFTs() {
                   <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
                   <span className="text-green-300 text-sm font-medium">
                     {listingItem && allItems.find(i => i._id === listingItem._id)?.onAuction
-                      ? "Listed on Marketplace & Auction!"
-                      : "Listed on Marketplace!"}
+                      ? t("dashboard.collections.tradePrompt.listedBoth", "Listed on Marketplace & Auction!")
+                      : t("dashboard.collections.tradePrompt.listedMarket", "Listed on Marketplace!")}
                   </span>
                 </div>
 
@@ -741,22 +744,22 @@ function NFTs() {
                   style={{ background: "rgba(0,80,255,0.07)", border: "1px solid rgba(0,80,255,0.2)" }}>
                   <div className="flex items-center gap-2 mb-1">
                     <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-                    <span className="text-blue-300 font-semibold text-sm">Also list for Trading?</span>
+                    <span className="text-blue-300 font-semibold text-sm">{t("dashboard.collections.tradePrompt.title", "Also list for Trading?")}</span>
                   </div>
                   <p className="text-white/40 text-xs leading-relaxed">
-                    Trade listings let other players propose item-for-item exchanges with you.
+                    {t("dashboard.collections.tradePrompt.desc", "Trade listings let other players propose item-for-item exchanges with you.")}
                   </p>
                 </div>
 
                 <div className="flex gap-3">
                   <button onClick={closeListing}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition-all text-sm">
-                    No, done
+                    {t("dashboard.collections.tradePrompt.skip", "No, done")}
                   </button>
                   <button onClick={() => setListStep("trade_form")}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold transition-all"
                     style={{ background: "rgba(0,80,255,0.25)", border: "1px solid rgba(0,80,255,0.4)" }}>
-                    Yes, set up →
+                    {t("dashboard.collections.tradePrompt.setup", "Yes, set up →")}
                   </button>
                 </div>
               </>
@@ -768,7 +771,7 @@ function NFTs() {
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
                     <ArrowRightLeft className="w-4 h-4 text-blue-400" />
-                    <h2 className="text-white font-semibold text-base">Set Up Trade</h2>
+                    <h2 className="text-white font-semibold text-base">{t("dashboard.collections.tradeForm.title", "Set Up Trade")}</h2>
                   </div>
                   <button onClick={closeListing} className="text-white/40 hover:text-white transition-colors"><FiX size={16} /></button>
                 </div>
@@ -789,21 +792,21 @@ function NFTs() {
                       className={`w-8 h-4 rounded-full transition-all relative ${tradeForm.openOffer ? "bg-blue-600" : "bg-white/15"}`}>
                       <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${tradeForm.openOffer ? "left-4.5 left-[18px]" : "left-0.5"}`} />
                     </div>
-                    <span className="text-white/60 text-xs">Open offer — let anyone propose what they'll give</span>
+                    <span className="text-white/60 text-xs">{t("dashboard.collections.tradeForm.openOffer", "Open offer — let anyone propose what they'll give")}</span>
                   </label>
 
                   {!tradeForm.openOffer && (
                     <div>
-                      <label className="text-white/60 text-xs font-medium mb-1 block">What do you want in return? <span className="text-red-400">*</span></label>
-                      <input type="text" placeholder="e.g. Rare Weapon Skin, Land Plot #42..." value={tradeForm.reqItem}
+                      <label className="text-white/60 text-xs font-medium mb-1 block">{t("dashboard.collections.tradeForm.wantReturn", "What do you want in return?")} <span className="text-red-400">*</span></label>
+                      <input type="text" placeholder={t("dashboard.collections.tradeForm.reqPlaceholder", "e.g. Rare Weapon Skin, Land Plot #42...")} value={tradeForm.reqItem}
                         onChange={(e) => setTradeForm(f => ({ ...f, reqItem: e.target.value }))}
                         className={inputCls} style={inputStyle} autoFocus />
                     </div>
                   )}
 
                   <div>
-                    <label className="text-white/60 text-xs font-medium mb-1 block">Description <span className="text-white/25">optional</span></label>
-                    <textarea rows={2} placeholder="Add any details about your trade..." value={tradeForm.description}
+                    <label className="text-white/60 text-xs font-medium mb-1 block">{t("dashboard.collections.tradeForm.description", "Description")} <span className="text-white/25">{t("dashboard.collections.auctionForm.optional", "optional")}</span></label>
+                    <textarea rows={2} placeholder={t("dashboard.collections.tradeForm.descPlaceholder", "Add any details about your trade...")} value={tradeForm.description}
                       onChange={(e) => setTradeForm(f => ({ ...f, description: e.target.value }))}
                       className={`${inputCls} resize-none`} style={inputStyle} />
                   </div>
@@ -812,12 +815,12 @@ function NFTs() {
                 <div className="flex gap-3">
                   <button onClick={closeListing}
                     className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
-                    Skip
+                    {t("dashboard.collections.tradeForm.skip", "Skip")}
                   </button>
                   <button onClick={handleCreateTrade} disabled={tradeLoading}
                     className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                     style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                    {tradeLoading ? "Creating..." : "Post Trade →"}
+                    {tradeLoading ? t("dashboard.collections.tradeForm.creating", "Creating...") : t("dashboard.collections.tradeForm.post", "Post Trade →")}
                   </button>
                 </div>
               </>
@@ -833,7 +836,7 @@ function NFTs() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0d0d1a] p-6 flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between">
-              <h2 className="text-white font-semibold text-base">Edit Item</h2>
+              <h2 className="text-white font-semibold text-base">{t("dashboard.collections.editModal.title", "Edit Item")}</h2>
               <button onClick={() => setEditItem(null)} className="text-white/40 hover:text-white transition-colors"><FiX size={18} /></button>
             </div>
 
@@ -848,14 +851,14 @@ function NFTs() {
                   <img src={editPreview} alt="preview" className="w-full max-h-[200px] object-contain block" />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                     <FiUploadCloud size={18} className="text-white" />
-                    <span className="text-white text-xs">Change image</span>
+                    <span className="text-white text-xs">{t("dashboard.collections.editModal.changeImage", "Change image")}</span>
                   </div>
                 </>
               ) : (
                 <div className="h-32 flex items-center justify-center">
                   <div className="flex flex-col items-center gap-1 text-white/30">
                     <FiUploadCloud size={20} />
-                    <span className="text-xs">Click to change image</span>
+                    <span className="text-xs">{t("dashboard.collections.editModal.clickImage", "Click to change image")}</span>
                   </div>
                 </div>
               )}
@@ -864,19 +867,19 @@ function NFTs() {
             </div>
 
             <div>
-              <label className="text-white/70 text-sm font-medium mb-1.5 block">Item Name <span className="text-red-400">*</span></label>
+              <label className="text-white/70 text-sm font-medium mb-1.5 block">{t("dashboard.collections.editModal.itemName", "Item Name")} <span className="text-red-400">*</span></label>
               <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)}
                 className="w-full h-10 px-3 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 transition-all text-sm" />
             </div>
 
             <div>
-              <label className="text-white/70 text-sm font-medium mb-1.5 block">Description</label>
+              <label className="text-white/70 text-sm font-medium mb-1.5 block">{t("dashboard.collections.editModal.description", "Description")}</label>
               <textarea value={editDesc} onChange={(e) => setEditDesc(e.target.value)} rows={2}
                 className="w-full px-3 py-2 rounded-lg bg-white/5 text-white border border-white/10 focus:outline-none focus:border-blue-500 transition-all text-sm resize-none placeholder-white/30" />
             </div>
 
             <div>
-              <label className="text-white/70 text-sm font-medium mb-1.5 block">Category</label>
+              <label className="text-white/70 text-sm font-medium mb-1.5 block">{t("dashboard.collections.editModal.category", "Category")}</label>
               <select
                 value={editCategory}
                 onChange={(e) => setEditCategory(e.target.value)}
@@ -888,19 +891,19 @@ function NFTs() {
                 ))}
               </select>
               {editCategory !== editItem?.category && (
-                <p className="text-yellow-400/60 text-[11px] mt-1">Item will be moved to the new category storage box.</p>
+                <p className="text-yellow-400/60 text-[11px] mt-1">{t("dashboard.collections.editModal.categoryWarning", "Item will be moved to the new category storage box.")}</p>
               )}
             </div>
 
             <div className="flex gap-3">
               <button onClick={() => setEditItem(null)}
                 className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
-                Cancel
+                {t("dashboard.collections.editModal.cancel", "Cancel")}
               </button>
               <button onClick={handleEdit} disabled={editLoading}
                 className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                 style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}>
-                {editLoading ? "Saving..." : "Save Changes"}
+                {editLoading ? t("dashboard.collections.editModal.saving", "Saving...") : t("dashboard.collections.editModal.saveChanges", "Save Changes")}
               </button>
             </div>
           </div>
@@ -917,8 +920,8 @@ function NFTs() {
                   <FiAlertTriangle size={18} className="text-red-400" />
                 </div>
                 <div>
-                  <h2 className="text-white font-semibold text-base">Delete Item</h2>
-                  <p className="text-white/40 text-xs mt-0.5">This action cannot be undone.</p>
+                  <h2 className="text-white font-semibold text-base">{t("dashboard.collections.deleteModal.title", "Delete Item")}</h2>
+                  <p className="text-white/40 text-xs mt-0.5">{t("dashboard.collections.deleteModal.subtitle", "This action cannot be undone.")}</p>
                 </div>
               </div>
               <button onClick={() => setDeleteItem(null)} className="text-white/40 hover:text-white transition-colors"><FiX size={18} /></button>
@@ -929,24 +932,24 @@ function NFTs() {
                 className="w-12 h-12 rounded-lg object-cover" onError={(e) => { e.target.src = Collectionimage; }} />
               <div>
                 <p className="text-white text-sm font-medium">{deleteItem.name}</p>
-                <p className="text-white/40 text-xs capitalize">{deleteItem.category} · stored off-chain</p>
+                <p className="text-white/40 text-xs capitalize">{deleteItem.category} · {t("dashboard.collections.deleteModal.storedOffChain", "stored off-chain")}</p>
               </div>
             </div>
 
             <p className="text-white/50 text-sm">
-              Are you sure you want to delete <span className="text-white font-medium">"{deleteItem.name}"</span>?
-              This item has not been minted — it will be permanently removed from storage.
+              {t("dashboard.collections.deleteModal.confirm", "Are you sure you want to delete")} <span className="text-white font-medium">"{deleteItem.name}"</span>?{" "}
+              {t("dashboard.collections.deleteModal.notMinted", "This item has not been minted — it will be permanently removed from storage.")}
             </p>
 
             <div className="flex gap-3">
               <button onClick={() => setDeleteItem(null)}
                 className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
-                Cancel
+                {t("dashboard.collections.deleteModal.cancel", "Cancel")}
               </button>
               <button onClick={handleDelete} disabled={deleteLoading}
                 className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                 style={{ background: "rgba(239,68,68,0.8)", border: "1px solid rgba(239,68,68,0.4)" }}>
-                {deleteLoading ? "Deleting..." : "Delete Item"}
+                {deleteLoading ? t("dashboard.collections.deleteModal.deleting", "Deleting...") : t("dashboard.collections.deleteModal.delete", "Delete Item")}
               </button>
             </div>
           </div>
@@ -963,8 +966,8 @@ function NFTs() {
                   <FiAlertTriangle size={18} className="text-orange-400" />
                 </div>
                 <div>
-                  <h2 className="text-white font-semibold text-base">Unlist Item</h2>
-                  <p className="text-white/40 text-xs mt-0.5">This will remove all active listings.</p>
+                  <h2 className="text-white font-semibold text-base">{t("dashboard.collections.unlistModal.title", "Unlist Item")}</h2>
+                  <p className="text-white/40 text-xs mt-0.5">{t("dashboard.collections.unlistModal.subtitle", "This will remove all active listings.")}</p>
                 </div>
               </div>
               <button onClick={() => setUnlistItem(null)} className="text-white/40 hover:text-white transition-colors"><FiX size={18} /></button>
@@ -980,23 +983,23 @@ function NFTs() {
             </div>
 
             <div className="rounded-xl bg-orange-500/5 border border-orange-500/20 p-3 flex flex-col gap-1.5">
-              <p className="text-orange-300 text-xs font-semibold uppercase tracking-wide">What will be cancelled</p>
+              <p className="text-orange-300 text-xs font-semibold uppercase tracking-wide">{t("dashboard.collections.unlistModal.whatCancelled", "What will be cancelled")}</p>
               <ul className="text-white/60 text-sm space-y-1 mt-1">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Marketplace listing</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Any active auction for this item</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />Any open trade offers for this item</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />{t("dashboard.collections.unlistModal.marketplace", "Marketplace listing")}</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />{t("dashboard.collections.unlistModal.auction", "Any active auction for this item")}</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />{t("dashboard.collections.unlistModal.trades", "Any open trade offers for this item")}</li>
               </ul>
             </div>
 
             <div className="flex gap-3">
               <button onClick={() => setUnlistItem(null)}
                 className="flex-1 h-10 rounded-lg border border-white/10 text-white/50 hover:text-white transition-all text-sm">
-                Cancel
+                {t("dashboard.collections.unlistModal.cancel", "Cancel")}
               </button>
               <button onClick={handleConfirmUnlist} disabled={unlistLoading}
                 className="flex-1 h-10 rounded-lg text-white text-sm font-semibold disabled:opacity-50 transition-all"
                 style={{ background: "rgba(234,88,12,0.8)", border: "1px solid rgba(234,88,12,0.4)" }}>
-                {unlistLoading ? "Unlisting..." : "Unlist All"}
+                {unlistLoading ? t("dashboard.collections.unlistModal.unlisting", "Unlisting...") : t("dashboard.collections.unlistModal.unlistAll", "Unlist All")}
               </button>
             </div>
           </div>

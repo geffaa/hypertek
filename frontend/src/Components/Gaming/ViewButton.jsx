@@ -210,10 +210,10 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
             }}>
               {/* Header */}
               <div style={{ padding: "9px 14px", borderBottom: "1px solid rgba(0,212,255,0.15)", background: "rgba(0,212,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.15em", color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.7)" }}>DEVICE PAIRING</span>
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 10, fontWeight: "bold", letterSpacing: "0.15em", color: "#00D4FF", textShadow: "0 0 8px rgba(0,212,255,0.7)" }}>{t("hud.devicePairing", "DEVICE PAIRING")}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                   <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#f87171", boxShadow: "0 0 6px rgba(248,113,113,0.8)" }} />
-                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "#f87171", letterSpacing: "0.08em", textShadow: "0 0 6px rgba(248,113,113,0.7)" }}>OFFLINE</span>
+                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "#f87171", letterSpacing: "0.08em", textShadow: "0 0 6px rgba(248,113,113,0.7)" }}>{t("hud.deviceOffline", "OFFLINE")}</span>
                 </div>
               </div>
               {/* Single pair button */}
@@ -235,15 +235,15 @@ export default function ViewButton({ activeGame, raceView, onRaceViewToggle, que
                     transition: "all 0.2s",
                   }}
                 >
-                  {vrPairing ? "PAIRING..." : vrPairDone ? "UNAVAILABLE RIGHT NOW" : "PAIR DEVICE"}
+                  {vrPairing ? t("hud.pairing", "PAIRING...") : vrPairDone ? t("hud.unavailableNow", "UNAVAILABLE RIGHT NOW") : t("hud.pairDevice", "PAIR DEVICE")}
                 </button>
                 {vrPairDone && (
-                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "rgba(255,255,255,0.95)", letterSpacing: "0.08em" }}>Coming Soon</span>
+                  <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "rgba(255,255,255,0.95)", letterSpacing: "0.08em" }}>{t("hud.comingSoon", "Coming Soon")}</span>
                 )}
               </div>
               {/* Footer */}
               <div style={{ padding: "7px 14px", borderTop: "1px solid rgba(0,212,255,0.15)", background: "rgba(0,0,0,0.3)", textAlign: "center" }}>
-                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "#00D4FF", letterSpacing: "0.08em", textShadow: "0 0 6px rgba(0,212,255,0.6)" }}>VR Interaction MODE · Coming Soon</span>
+                <span style={{ fontFamily: "Orbitron,sans-serif", fontSize: 8, color: "#00D4FF", letterSpacing: "0.08em", textShadow: "0 0 6px rgba(0,212,255,0.6)" }}>{t("hud.vrInteractionMode", "VR Interaction MODE · Coming Soon")}</span>
               </div>
             </div>
           )}

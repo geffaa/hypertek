@@ -11,15 +11,15 @@ const __dirname = path.dirname(__filename);
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("📍 Deploying MockUSDC with account:", deployer.address);
-  
+
   let currentNonce = await ethers.provider.getTransactionCount(deployer.address, "pending");
 
   const MockUSDC = await ethers.getContractFactory("MockUSDC");
   const usdc = await MockUSDC.deploy({ nonce: currentNonce });
   await usdc.waitForDeployment();
   const address = await usdc.getAddress();
-  
-  console.log("✅ MockUSDC deployed to:", address);
+
+  console.log("MockUSDC deployed to:", address);
 
   // Update .env file with new USDC address
   const envPath = path.join(__dirname, "../.env");
@@ -36,7 +36,7 @@ async function main() {
 
   updateEnv("BASE_USDC_ADDRESS", address);
   fs.writeFileSync(envPath, envContent);
-  console.log("✅ .env file updated with BASE_USDC_ADDRESS");
+  console.log(".env file updated with BASE_USDC_ADDRESS");
 }
 
 main().catch(console.error);

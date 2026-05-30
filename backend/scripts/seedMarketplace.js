@@ -18,13 +18,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
 
 import NFTSystem from "../Models/NFTSystem.js";
-import Nft101    from "../Models/Nft101.js";
+import Nft101 from "../Models/Nft101.js";
 
 // ─── Category definitions ─────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -33,11 +33,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "SKIN",
     items: [
-      { name: "Desert Storm Skin",     symbol: "DSS",  priceETH: 45,  description: "Camouflage desert warfare skin for elite soldiers." },
-      { name: "Arctic Ghost Skin",     symbol: "AGS",  priceETH: 60,  description: "Icy blue stealth skin for cold-climate operations." },
-      { name: "Shadow Ops Skin",       symbol: "SOS",  priceETH: 80,  description: "Jet black covert operations skin with night-vision accents." },
-      { name: "Urban Assault Skin",    symbol: "UAS",  priceETH: 55,  description: "City warfare skin with tactical grey patterning." },
-      { name: "Jungle Predator Skin",  symbol: "JPS",  priceETH: 70,  description: "Dense jungle camouflage skin for rainforest missions." },
+      { name: "Desert Storm Skin", symbol: "DSS", priceETH: 45, description: "Camouflage desert warfare skin for elite soldiers." },
+      { name: "Arctic Ghost Skin", symbol: "AGS", priceETH: 60, description: "Icy blue stealth skin for cold-climate operations." },
+      { name: "Shadow Ops Skin", symbol: "SOS", priceETH: 80, description: "Jet black covert operations skin with night-vision accents." },
+      { name: "Urban Assault Skin", symbol: "UAS", priceETH: 55, description: "City warfare skin with tactical grey patterning." },
+      { name: "Jungle Predator Skin", symbol: "JPS", priceETH: 70, description: "Dense jungle camouflage skin for rainforest missions." },
     ],
   },
   {
@@ -45,11 +45,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "WPNS",
     items: [
-      { name: "Hyper Assault Rifle",   symbol: "HAR",  priceETH: 120, description: "High-powered assault rifle with hyper-tech optics." },
-      { name: "Plasma Pistol Mk2",     symbol: "PPM2", priceETH: 85,  description: "Compact plasma pistol with dual-fire mode." },
-      { name: "Rail Sniper X90",       symbol: "RSX",  priceETH: 200, description: "Long-range rail gun sniper with electro-targeting." },
-      { name: "Frag Launcher Pro",     symbol: "FLP",  priceETH: 150, description: "Grenade launcher with proximity detonation system." },
-      { name: "Ion Blade Elite",       symbol: "IBE",  priceETH: 95,  description: "Electrified combat blade for close-quarters warfare." },
+      { name: "Hyper Assault Rifle", symbol: "HAR", priceETH: 120, description: "High-powered assault rifle with hyper-tech optics." },
+      { name: "Plasma Pistol Mk2", symbol: "PPM2", priceETH: 85, description: "Compact plasma pistol with dual-fire mode." },
+      { name: "Rail Sniper X90", symbol: "RSX", priceETH: 200, description: "Long-range rail gun sniper with electro-targeting." },
+      { name: "Frag Launcher Pro", symbol: "FLP", priceETH: 150, description: "Grenade launcher with proximity detonation system." },
+      { name: "Ion Blade Elite", symbol: "IBE", priceETH: 95, description: "Electrified combat blade for close-quarters warfare." },
     ],
   },
   {
@@ -57,11 +57,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "MBAC",
     items: [
-      { name: "Commander's Cross",     symbol: "CC",   priceETH: 300, description: "Rare commander's cross awarded for battlefield leadership." },
-      { name: "Purple Valor Medal",    symbol: "PVM",  priceETH: 250, description: "Medal of valor for exceptional bravery under fire." },
-      { name: "HyperTek Coin 2025",    symbol: "HTC",  priceETH: 180, description: "Limited edition collectible coin for season 2025." },
-      { name: "Iron Shield Badge",     symbol: "ISB",  priceETH: 140, description: "Badge denoting mastery of defensive tactics." },
-      { name: "Star of Honour",        symbol: "SOH",  priceETH: 500, description: "The highest honour awarded in the HyperTek universe." },
+      { name: "Commander's Cross", symbol: "CC", priceETH: 300, description: "Rare commander's cross awarded for battlefield leadership." },
+      { name: "Purple Valor Medal", symbol: "PVM", priceETH: 250, description: "Medal of valor for exceptional bravery under fire." },
+      { name: "HyperTek Coin 2025", symbol: "HTC", priceETH: 180, description: "Limited edition collectible coin for season 2025." },
+      { name: "Iron Shield Badge", symbol: "ISB", priceETH: 140, description: "Badge denoting mastery of defensive tactics." },
+      { name: "Star of Honour", symbol: "SOH", priceETH: 500, description: "The highest honour awarded in the HyperTek universe." },
     ],
   },
   {
@@ -69,11 +69,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "BARM",
     items: [
-      { name: "Nano-Mesh Vest",        symbol: "NMV",  priceETH: 110, description: "Lightweight nano-fibre vest with ballistic resistance." },
-      { name: "Exo-Skeleton Mk3",      symbol: "ESK3", priceETH: 350, description: "Full exoskeleton suit with powered joints." },
-      { name: "Carbon Plate Armour",   symbol: "CPA",  priceETH: 220, description: "Hard carbon plates for heavy assault operations." },
-      { name: "Stealth Composite Vest",symbol: "SCV",  priceETH: 175, description: "Radar-absorbing composite armour vest." },
-      { name: "Titan Full Plate",      symbol: "TFP",  priceETH: 480, description: "Maximum protection titanium alloy full body armour." },
+      { name: "Nano-Mesh Vest", symbol: "NMV", priceETH: 110, description: "Lightweight nano-fibre vest with ballistic resistance." },
+      { name: "Exo-Skeleton Mk3", symbol: "ESK3", priceETH: 350, description: "Full exoskeleton suit with powered joints." },
+      { name: "Carbon Plate Armour", symbol: "CPA", priceETH: 220, description: "Hard carbon plates for heavy assault operations." },
+      { name: "Stealth Composite Vest", symbol: "SCV", priceETH: 175, description: "Radar-absorbing composite armour vest." },
+      { name: "Titan Full Plate", symbol: "TFP", priceETH: 480, description: "Maximum protection titanium alloy full body armour." },
     ],
   },
   {
@@ -81,11 +81,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "SPEC",
     items: [
-      { name: "Ghost Recon Operator",  symbol: "GRO",  priceETH: 400, description: "Elite recon specialist with ghost cloak ability." },
-      { name: "Cyber Medic",          symbol: "CME",  priceETH: 280, description: "Field medic with advanced cybernetic healing tools." },
-      { name: "Bomb Disposal Expert",  symbol: "BDE",  priceETH: 320, description: "Specialist trained to neutralise any explosive device." },
-      { name: "AI Drone Handler",      symbol: "ADH",  priceETH: 360, description: "Controls a squad of tactical AI combat drones." },
-      { name: "Sniper Ace",           symbol: "SAC",  priceETH: 450, description: "Long-range marksman with zero-wind precision targeting." },
+      { name: "Ghost Recon Operator", symbol: "GRO", priceETH: 400, description: "Elite recon specialist with ghost cloak ability." },
+      { name: "Cyber Medic", symbol: "CME", priceETH: 280, description: "Field medic with advanced cybernetic healing tools." },
+      { name: "Bomb Disposal Expert", symbol: "BDE", priceETH: 320, description: "Specialist trained to neutralise any explosive device." },
+      { name: "AI Drone Handler", symbol: "ADH", priceETH: 360, description: "Controls a squad of tactical AI combat drones." },
+      { name: "Sniper Ace", symbol: "SAC", priceETH: 450, description: "Long-range marksman with zero-wind precision targeting." },
     ],
   },
   {
@@ -93,11 +93,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "SSHP",
     items: [
-      { name: "Viper Fighter Mk1",     symbol: "VFM1", priceETH: 600, description: "Fast single-pilot fighter with twin plasma cannons." },
-      { name: "Nexus Cruiser",         symbol: "NCR",  priceETH: 1200,description: "Mid-range cruiser with advanced shield systems." },
-      { name: "Hyper Drive Engine",    symbol: "HDE",  priceETH: 250, description: "Replacement engine part providing 40% speed boost." },
-      { name: "Phantom Stealth Ship",  symbol: "PSS",  priceETH: 900, description: "Radar-invisible stealth spacecraft for covert ops." },
-      { name: "Ion Thruster Pack",     symbol: "ITP",  priceETH: 180, description: "Upgradeable ion thruster set for any ship class." },
+      { name: "Viper Fighter Mk1", symbol: "VFM1", priceETH: 600, description: "Fast single-pilot fighter with twin plasma cannons." },
+      { name: "Nexus Cruiser", symbol: "NCR", priceETH: 1200, description: "Mid-range cruiser with advanced shield systems." },
+      { name: "Hyper Drive Engine", symbol: "HDE", priceETH: 250, description: "Replacement engine part providing 40% speed boost." },
+      { name: "Phantom Stealth Ship", symbol: "PSS", priceETH: 900, description: "Radar-invisible stealth spacecraft for covert ops." },
+      { name: "Ion Thruster Pack", symbol: "ITP", priceETH: 180, description: "Upgradeable ion thruster set for any ship class." },
     ],
   },
   {
@@ -105,11 +105,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "RVEH",
     items: [
-      { name: "HyperBike GT",         symbol: "HBGT", priceETH: 550, description: "Ultra-fast racing bike built for gravity tracks." },
-      { name: "Turbo Hovercar X",      symbol: "THX",  priceETH: 780, description: "Anti-gravity hovercar with turbo boost module." },
-      { name: "Mag-Wheel Upgrade Kit", symbol: "MWU",  priceETH: 120, description: "Magnetic wheel set for improved cornering speed." },
-      { name: "Neon Dragster 5000",    symbol: "ND5K", priceETH: 650, description: "Straight-line speed demon with neon drive system." },
-      { name: "Combat Trike",          symbol: "CTR",  priceETH: 430, description: "Three-wheeled combat racer with front-mounted cannon." },
+      { name: "HyperBike GT", symbol: "HBGT", priceETH: 550, description: "Ultra-fast racing bike built for gravity tracks." },
+      { name: "Turbo Hovercar X", symbol: "THX", priceETH: 780, description: "Anti-gravity hovercar with turbo boost module." },
+      { name: "Mag-Wheel Upgrade Kit", symbol: "MWU", priceETH: 120, description: "Magnetic wheel set for improved cornering speed." },
+      { name: "Neon Dragster 5000", symbol: "ND5K", priceETH: 650, description: "Straight-line speed demon with neon drive system." },
+      { name: "Combat Trike", symbol: "CTR", priceETH: 430, description: "Three-wheeled combat racer with front-mounted cannon." },
     ],
   },
   {
@@ -117,11 +117,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "ART",
     items: [
-      { name: "Genesis Warrior Portrait",    symbol: "GWP",  priceETH: 800,  description: "Original digital oil portrait of the first HyperTek warrior." },
-      { name: "Neon City Skyline",           symbol: "NCS",  priceETH: 600,  description: "Vibrant neon cityscape from the HyperTek universe." },
-      { name: "Cosmic Battle Scene",         symbol: "CBS",  priceETH: 1500, description: "Epic deep-space battle, hand-painted in 8K resolution." },
-      { name: "Hyper Soldier Sketch",        symbol: "HSS",  priceETH: 400,  description: "Concept sketch of the iconic HyperTek soldier." },
-      { name: "Abstract Data Stream",        symbol: "ADS",  priceETH: 350,  description: "Generative art piece representing blockchain data flow." },
+      { name: "Genesis Warrior Portrait", symbol: "GWP", priceETH: 800, description: "Original digital oil portrait of the first HyperTek warrior." },
+      { name: "Neon City Skyline", symbol: "NCS", priceETH: 600, description: "Vibrant neon cityscape from the HyperTek universe." },
+      { name: "Cosmic Battle Scene", symbol: "CBS", priceETH: 1500, description: "Epic deep-space battle, hand-painted in 8K resolution." },
+      { name: "Hyper Soldier Sketch", symbol: "HSS", priceETH: 400, description: "Concept sketch of the iconic HyperTek soldier." },
+      { name: "Abstract Data Stream", symbol: "ADS", priceETH: 350, description: "Generative art piece representing blockchain data flow." },
     ],
   },
   {
@@ -129,11 +129,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "LAND",
     items: [
-      { name: "Desert Outpost Alpha",        symbol: "DOA",  priceETH: 2000, description: "Strategic desert base with resource extraction facilities." },
-      { name: "Arctic Station Omega",        symbol: "ASO",  priceETH: 3500, description: "Fortified arctic base in the polar zone." },
-      { name: "City Block 47",              symbol: "CB47", priceETH: 1800, description: "Prime urban land block in the central HyperTek city." },
-      { name: "Mountain Fortress",          symbol: "MFT",  priceETH: 4200, description: "Defensible mountain stronghold with 360-degree visibility." },
-      { name: "Ocean Platform Delta",       symbol: "OPD",  priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
+      { name: "Desert Outpost Alpha", symbol: "DOA", priceETH: 2000, description: "Strategic desert base with resource extraction facilities." },
+      { name: "Arctic Station Omega", symbol: "ASO", priceETH: 3500, description: "Fortified arctic base in the polar zone." },
+      { name: "City Block 47", symbol: "CB47", priceETH: 1800, description: "Prime urban land block in the central HyperTek city." },
+      { name: "Mountain Fortress", symbol: "MFT", priceETH: 4200, description: "Defensible mountain stronghold with 360-degree visibility." },
+      { name: "Ocean Platform Delta", symbol: "OPD", priceETH: 2800, description: "Off-shore naval platform for maritime operations." },
     ],
   },
   {
@@ -141,11 +141,11 @@ const CATEGORIES = [
     chain: "Ethereum",
     symbol: "GEN",
     items: [
-      { name: "HyperTek Starter Pack",  symbol: "HSP",  priceETH: 50,  description: "A bundle of miscellaneous items to kick-start your journey." },
-      { name: "Collector's Badge",      symbol: "CLB",  priceETH: 30,  description: "Rare collectible badge for dedicated community members." },
-      { name: "Mystery Crate",          symbol: "MYC",  priceETH: 75,  description: "Contains a random rare item from the HyperTek universe." },
-      { name: "Season Pass Token",      symbol: "SPT",  priceETH: 120, description: "Grants access to exclusive season events and rewards." },
-      { name: "Community Tribute",      symbol: "CMT",  priceETH: 25,  description: "A commemorative token for early HyperTek community supporters." },
+      { name: "HyperTek Starter Pack", symbol: "HSP", priceETH: 50, description: "A bundle of miscellaneous items to kick-start your journey." },
+      { name: "Collector's Badge", symbol: "CLB", priceETH: 30, description: "Rare collectible badge for dedicated community members." },
+      { name: "Mystery Crate", symbol: "MYC", priceETH: 75, description: "Contains a random rare item from the HyperTek universe." },
+      { name: "Season Pass Token", symbol: "SPT", priceETH: 120, description: "Grants access to exclusive season events and rewards." },
+      { name: "Community Tribute", symbol: "CMT", priceETH: 25, description: "A commemorative token for early HyperTek community supporters." },
     ],
   },
 ];
@@ -469,12 +469,12 @@ const NFT_101_DATA = [
 async function seed() {
   // ── Safety guard: never run on production ──
   if (process.env.NODE_ENV === "production") {
-    console.error("❌ ABORT: seedMarketplace.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    console.error(" ABORT: seedMarketplace.js must NOT run in production. Set NODE_ENV=development to proceed.");
     process.exit(1);
   }
 
   await mongoose.connect(process.env.MONGODB_URL);
-  console.log("✅ Connected to MongoDB");
+  console.log("Connected to MongoDB");
 
   // ── Fresh-seed NFT collections: remove all isDummy seed data, re-insert clean ──
   const removed = await NFTSystem.deleteMany({ isDummy: true });
@@ -485,10 +485,10 @@ async function seed() {
   for (const cat of CATEGORIES) {
     const parent = await NFTSystem.create({
       collection: {
-        name:   cat.name,
+        name: cat.name,
         symbol: cat.symbol,
-        chain:  cat.chain,
-        image:  "",
+        chain: cat.chain,
+        image: "",
         royaltyPercent: 5,
         supply: cat.items.length,
         creator: "admin",
@@ -497,17 +497,17 @@ async function seed() {
       isDummy: true,
       status: "active",
       subCollections: cat.items.map((item, i) => ({
-        name:        item.name,
-        symbol:      item.symbol,
+        name: item.name,
+        symbol: item.symbol,
         description: item.description,
-        priceETH:    item.priceETH,
-        listed:      true,
+        priceETH: item.priceETH,
+        listed: true,
         isFirstSale: true,
-        tokenId:     i + 1,
+        tokenId: i + 1,
       })),
     });
 
-    console.log(`✅ Created: ${cat.name}  (${parent.subCollections.length} items)`);
+    console.log(`Created: ${cat.name}  (${parent.subCollections.length} items)`);
     createdParents++;
   }
 
@@ -521,10 +521,10 @@ async function seed() {
   console.log("─────────────────────────────────────────────────────────\n");
 
   await mongoose.disconnect();
-  console.log("✅ Done. Database disconnected.");
+  console.log("Done. Database disconnected.");
 }
 
 seed().catch((err) => {
-  console.error("❌ Seed failed:", err);
+  console.error(" Seed failed:", err);
   process.exit(1);
 });

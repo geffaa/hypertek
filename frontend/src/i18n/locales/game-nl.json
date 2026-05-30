@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Welkom bij",
+    "back": "Terug",
+    "racing": {
+      "label": "RACEN",
+      "heading": "Hyperracen",
+      "subtitle": "De meest intense race-ervaring met vliegende voertuigen in de Melkweg,\nwaar vaardigheid loont en kampioenen worden gemaakt.",
+      "intro": [
+        "Hyper Racing is een competitief racespel met een hoog octaangehalte dat zich afspeelt in buitenaardse werelden, waarin spelers volledig aanpasbare vliegende racevoertuigen bouwen, upgraden en besturen door enkele van de gevaarlijkste circuits in de Melkweg. Van drijvende rotsformaties en vulkanische lavabuizen tot woestijnwoestijnen en bergpassen: elke race is een test van voorbereiding, reflexen en strategie.",
+        "Maar Hyper Racing is meer dan alleen een spel; het is een competitief platform waar echte beloningen op het spel staan. Toppresteerders kunnen deelnemen aan gerangschikte evenementen en toernooien met echte geldprijzen. Hoe beter je racet, hoe meer je verdient. Of je nu op jacht bent naar glorie op het klassement of een race-imperium opbouwt, alles wat je doet in Hyper Racing brengt je vooruit.",
+        "Upgrade je racevoertuigen van neus tot staart. Rekruteer en verbeter je pitcrew. Huur een pitmanager in die past bij jouw racefilosofie. Breng je vaardigheden vervolgens verder dan het circuit, je racegarage fungeert tevens als de hangar van je persoonlijke ruimteschip, en elke vaardigheid die je ontwikkelt, wordt meegenomen in ruimtegevechten in Hyper Quest en Overlord of the 7 Realms."
+      ],
+      "introClose": "Lees verder om te ontdekken hoe het spel werkt, wat je kunt winnen en hoe jouw racecarrière een heel universum van vooruitgang stimuleert.",
+      "calloutLine1": "Race om te verdienen. Verdien om te upgraden.",
+      "calloutLine2": "Upgrade naar Domineren.",
+      "howItWorksTitle": "Hoe hyperracen werkt",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Kies uw voertuig",
+          "body": "Elke race begint in uw garage. Kies uit een groeiend aantal vliegende racevoertuigen, elk met unieke rijeigenschappen en upgradepotentieel. Strip een romp voor zinderende snelheid in rechte lijn of bepantser hem om de meest meedogenloze omstandigheden te overleven. Boegschroeven, stabilisatoren, schilden, koelsystemen, aerodynamische vinnen, de upgradeboom gaat diep en elke aanpassing verandert hoe je vaartuig zich op de baan gedraagt."
+        },
+        {
+          "num": "02",
+          "title": "Bouw je team",
+          "body": "Racen is een teamsport. Rekruteer pitcrewspecialisten die unieke bonussen, sneller tanken, realtime diagnostiek, noodreparaties aan de romp halverwege de race en prestatieverbeteringen tussen de rondes bieden. Elk bemanningslid stijgt met ervaring en stapelt krachtige vaardigheden bovenop je voertuigupgrades. Huur vervolgens een pitmanager in om de operaties te coördineren, de racestrategie aan te roepen en teambrede prestatieverbeteringen te ontgrendelen die gedurende een volledig seizoen toenemen."
+        },
+        {
+          "num": "03",
+          "title": "Race door werelden",
+          "body": "Circuits omvatten buitenaardse planeten met enorm verschillende terrein- en atmosferische gevaren. Baan je een weg door drijvende rotsformaties in Avatar-stijl, voer met razend tempo vulkanische lavabuizen, scheur over eindeloze woestijnvlaktes en kerf door verraderlijke bergketens. Zure regen, radioactieve atmosferen, veranderende zwaartekracht en turbulente wind: geen twee rassen vereisen dezelfde opstelling. Door je voertuig af te stemmen op elke omgeving, komen strategie en vaardigheid samen."
+        },
+        {
+          "num": "04",
+          "title": "Beklim de rangen",
+          "body": "Overwinning levert leiderspunten op, ontgrendelt nieuwe circuits op verre werelden en opent de deur naar competities op een hoger niveau. Hoe dieper je gaat, hoe heviger de tegenstanders en hoe groter de inzet. Bewijs jezelf op elke planeet en stijg op de mondiale ranglijst."
+        }
+      ],
+      "rewardsTitle": "Win veel; Beloningen die ertoe doen!",
+      "rewards": [
+        {
+          "title": "In-game beloningen",
+          "body": "Elke race die je voltooit, wordt uitbetaald. Win, en de beloningen vermenigvuldigen. Raceoverwinningen ontgrendelen premium voertuigcomponenten, zeldzame upgradematerialen, exclusieve rekruteringstokens voor bemanningsleden en credits om je volgende build te financieren. Verkoop geüpgradede voertuigen met winst, investeer opnieuw in nieuwe machines en zie hoe je race-imperium groeit met elke podiumplaats."
+        },
+        {
+          "title": "Echte geldevenementen",
+          "body": "Hyper Racing tilt de concurrentie naar een hoger niveau met gerangschikte evenementen en toernooien waarbij echt geld op het spel staat. Doe mee aan op vaardigheden gebaseerde competities, bewijs je vaardigheden tegen de beste piloten in de Melkweg en loop weg met echte contante uitbetalingen. Hoe hoger je plaatst, hoe groter de prijzenpot. Van wekelijkse uitdagingen tot seizoenskampioenschappen, er zijn altijd mogelijkheden voor toppresteerders om hun racevaardigheden om te zetten in echte inkomsten."
+        },
+        {
+          "title": "Hoe prijsevenementen werken",
+          "body": "Spelers kwalificeren zich via gerangschikt spel en voldoen aan prestatiedrempels die toegang geven tot toernooien met geldprijzen. Evenementen zijn gestructureerd rond eerlijke matchmaking, zodat elke deelnemer tegenstanders met vergelijkbare vaardigheden tegenkomt. De toegangsprijzen zijn transparant, de prijzenpot wordt duidelijk weergegeven voordat je je vastlegt, en uitbetalingen worden snel verwerkt nadat elk evenement is afgelopen. Het is competitief, het is eerlijk en de beloningen zijn reëel."
+        },
+        {
+          "title": "Vooruitgang voorbij het circuit",
+          "body": "Beloningen die je via racen verdient, worden rechtstreeks in je bredere voortgang opgenomen. Upgrade je racevoertuigen, versterk je pitcrew en sluis je winst naar het upgraden van je hoofdruimteschip. Je racegarage is de hangar van dat schip, dus elke verbetering aan je race-operatie geeft ook een boost aan het schip waarmee je tussen werelden vliegt en ruimtegevechten voert over Hyper Quest en Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Twee machines, één missie... Upgrade alles",
+      "upgrades": [
+        {
+          "title": "Upgrades van racevoertuigen",
+          "body": "Je racevoertuig is een volledig modulaire machine. Elk onderdeel kan worden verwisseld, afgesteld en geüpgraded: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische oppervlakken. Lichtgewicht composieten leveren pure snelheid; zwaar pantser houdt je in leven onder barre atmosferische omstandigheden. Het upgradepad is diep en de keuzes die je maakt bepalen je race-identiteit. Koop nieuwe voertuigen, bouw ze om tot kampioenskandidaten, race ze naar de overwinning en verkoop ze met winst als je klaar bent voor de volgende uitdaging."
+        },
+        {
+          "title": "Belangrijkste upgrades van ruimteschepen",
+          "body": "Uw racegarage is niet zomaar een werkplaats; het is de hangarbaai van je persoonlijke ruimteschip. Dezelfde grondstoffen, credits en materialen die je op de baan verdient, kunnen worden geïnvesteerd in het upgraden van je hoofdschip. Betere motoren voor interplanetaire reizen, sterkere wapensystemen voor ruimtegevechten, verbeterde navigatie voor het ontdekken van nieuwe racewerelden en versterkte rompen om vijandige ontmoetingen tijdens het transport te overleven. Je ruimteschip is je thuisbasis, je transportmiddel en je slagschip, en racen maakt het sterker."
+        },
+        {
+          "title": "De upgradelus",
+          "body": "Race om te verdienen. Verdien om te upgraden. Upgrade om grotere races met grotere beloningen te winnen. Leid die beloningen naar zowel je racevoertuigen als je ruimteschip. Hoe beter je schip, hoe verder je reist en hoe gevaarlijker en lucratiever de circuits worden. Het is een progressielus die toewijding en vaardigheid op elk niveau beloont."
+        },
+        {
+          "title": "Cross-game-impact",
+          "body": "Elke pilootvaardigheid die je op het circuit ontwikkelt en elke upgrade die je op je ruimteschip installeert, wordt rechtstreeks doorgevoerd in Hyper Quest en Overlord of the 7 Realms. Eén universum, meerdere games, naadloze progressie. Wat je in Hyper Racing bouwt, drijft al het andere aan."
+        }
+      ],
+      "faqTitle": "Hyperracen - Veelgestelde vragen",
+      "faq": [
+        {
+          "q": "Wat is hyperracen?",
+          "a": "Een superintensief racespel voor vliegende voertuigen dat zich afspeelt in buitenaardse werelden. Bouw, upgrade en race volledig aanpasbare voertuigen door gevaarlijke sciencefictioncircuits terwijl je strijdt om in-game beloningen en echte geldprijzen."
+        },
+        {
+          "q": "Kan ik mijn racevoertuig upgraden?",
+          "a": "Elk onderdeel kan worden geüpgraded: rompen, stuwraketten, schilden, buitenschalen, motoren, stabilisatoren, koelsystemen en aerodynamische oppervlakken. Elke upgrade verandert de manier waarop uw voertuig met verschillende circuits en omstandigheden omgaat."
+        },
+        {
+          "q": "Wat doet de pitcrew?",
+          "a": "Pitcrewleden bieden unieke bonussen: sneller tanken, rompdiagnostiek, noodreparaties en prestatieverbeteringen tussen de ronden door. Ze stijgen in de loop van de tijd, waardoor sterkere vaardigheden worden ontgrendeld die kunnen worden gecombineerd met voertuigupgrades."
+        },
+        {
+          "q": "Hoe werkt de pitmanager?",
+          "a": "De pitmanager coördineert de operaties van de bemanning, roept de racestrategie op en ontgrendelt prestatieverbeteringen voor het hele team. Defensieve managers beschermen uw voertuig onder zware omstandigheden; agressieve managers pushen elk systeem voor maximale snelheid."
+        },
+        {
+          "q": "Kan ik echt geld winnen?",
+          "a": "Ja. Gerangschikte evenementen en toernooien bevatten prijzenpotten met echte geldprijzen. Kwalificeer je via gerangschikt spel, neem het op tegen tegenstanders met vergelijkbare vaardigheden en verdien echte uitbetalingen op basis van je eindpositie. Er zijn doorlopend wekelijkse uitdagingen en seizoenskampioenschappen."
+        },
+        {
+          "q": "Hoe werken racebeloningen?",
+          "a": "Bij elke race worden credits, upgradematerialen en bemanningsfiches uitbetaald. Overwinningen vermenigvuldigen uw inkomsten. Koop voertuigen, upgrade ze tot racemachines, win races en verkoop ze met winst om verdere verbeteringen en upgrades van ruimteschepen te financieren."
+        },
+        {
+          "q": "Kan ik mijn hoofdruimteschip ook upgraden?",
+          "a": "Absoluut. Je racegarage is de hangar van je ruimteschip. Racewinsten financieren upgrades van motoren, wapens, navigatie en rompversterking op uw hoofdschip, waardoor interplanetaire reizen en ruimtegevechten mogelijk worden gemaakt."
+        },
+        {
+          "q": "Is de voortgang ook van toepassing op andere games?",
+          "a": "Elke upgrade van de vaardigheden van een piloot en ruimteschip wordt rechtstreeks overgedragen naar Hyper Quest en Overlord of the 7 Realms. Eén universum, meerdere games, naadloze progressie. Wat je in Hyper Racing bouwt, drijft al het andere aan."
+        },
+        {
+          "q": "Welke raceomgevingen zijn er?",
+          "a": "Circuits omvatten drijvende rotsformaties, lavabuizen, woestijnvlaktes en bergketens in buitenaardse werelden. Atmosferische gevaren zijn onder meer zure regen, radioactieve atmosferen, variabele zwaartekracht en turbulente wind. Elk circuit vereist verschillende voertuigopstellingen."
+        }
+      ]
+    },
+    "quest": {
+      "label": "ZOEKTOCHT",
+      "heading": "Hyper zoektocht",
+      "subtitle": "Jouw sterrenstelsel. Jouw regels. Jouw fortuin.",
+      "intro": [
+        "Hyper Quest is een ruimteavontuur in een open wereld waarin je het bevel voert over je eigen, volledig uitbreidbare ruimteschip, de Quest Racer, door een uitgestrekt en gevaarlijk sterrenstelsel. Je hebt jaren geleden je thuisbeschaving verlaten op zoek naar macht, rijkdom en roem. Nu is het hele universum jouw speeltuin, en elke zoektocht die je voltooit, brengt je dichter bij galactische dominantie.",
+        "Maar Hyper Quest is niet zomaar een spel. Het is een concurrerend platform waar echt geld op het spel staat. Voltooi missies, overwin uitdagingen en loop weg met echt geld op zak en/of beloningen. Van snelle missies die minuten duren tot epische meerdaagse expedities: elke zoektocht loont. Hoe moeilijker de uitdaging, hoe groter de beloning.",
+        "Upgrade je ruimteschip van romp naar cockpit. Bewapen het met verwoestende wapensystemen. Rekruteer specialisten die krachtige bonussen op de prestaties en het krachtniveau van uw schip stapelen. Mijn asteroïden, vervoer gevaarlijke lading, jaag op verborgen schatten, ontvoer waardevolle doelen of word een ingehuurd wapen. Hoe jij het universum regeert, is geheel jouw keuze.",
+        "Alles wat je in Hyper Quest bouwt, wordt rechtstreeks in Hyper Racing en Overlord of the 7 Realms ingevoerd. Eén universum, naadloze progressie, onbeperkt potentieel. Lees verder en ontdek hoe speurtochten werken, wat je kunt verdienen en hoe jij en je ruimteschip het meest gevreesde schip in de Melkweg worden."
+      ],
+      "calloutLine1": "Zoektocht om te verdienen. Verdien om te upgraden.",
+      "calloutLine2": "Upgrade naar Veroveren.",
+      "howItWorksTitle": "Hoe Hyper Quest werkt",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Accepteer missies van het missiebord",
+          "body": "Het in-game zoekbord is jouw toegangspoort tot avontuur. Blader door beschikbare missies, variërend van snelle vrachtvluchten die slechts enkele minuten duren tot epische meerdaagse expedities diep in de onbekende ruimte. Elke zoektocht wordt geleverd met duidelijke doelstellingen, gevarenbeoordelingen en beloningsniveaus. Kies de missies die bij jouw speelstijl passen, of het nu gaat om het vervoeren van gevaarlijke ladingen, het jagen op verborgen schatten, het delven van asteroïdenvelden of het undercover gaan om verloren artefacten terug te vinden."
+        },
+        {
+          "num": "02",
+          "title": "Verken de Melkweg",
+          "body": "Reis door portalen naar verre planeten, elk met unieke omgevingen, waardevolle materialen en nieuwe racecircuits. Volg galactische kaarten om onontdekte gebieden in kaart te brengen en naamgevingsrechten te verdienen voor planeten die je als eerste ontdekt. Mijngrondstoffen uit asteroïdevelden, reddingsonderdelen van oude relikwieën en verlaten schepen, en verzamel aanwijzingen die leiden naar verborgen fortuinen verspreid over de sterren."
+        },
+        {
+          "num": "03",
+          "title": "Bouw je imperium op vanuit je schip",
+          "body": "Je Quest Racer is meer dan alleen transport. Verbouw voedsel in hydrocultuurbaaien, verfijn materialen die afkomstig zijn van verre planeten en bouw legers vanuit je kloonlaboratoria. Verfijn je troepen en hun wapens, verdedig jezelf tegen piraten en beheer een zichzelf onderhoudende mobiele basis die krachtiger wordt met elke missie die je voltooit."
+        },
+        {
+          "num": "04",
+          "title": "Speel op jouw manier",
+          "body": "Er is niet één pad naar dominantie. Word een gevreesde premiejager, een sluwe smokkelaar, een meestermijnwerker of een legendarische ontdekkingsreiziger. Ontvoer waardevolle doelen, word een ingehuurd wapen of smeed allianties om hele sectoren te controleren. De Melkweg buigt zich naar jouw wil, en elke beslissing vormt jouw reputatie en jouw fortuin."
+        }
+      ],
+      "rewardsTitle": "Quest-beloningen; Krijg betaald om te spelen!",
+      "rewards": [
+        {
+          "title": "In-game beloningen",
+          "body": "Elke missie die je voltooit, betaalt zich uit. Credits, upgradematerialen, zeldzame componenten, gespecialiseerde rekruteringstokens en exclusieve items stromen bij elke succesvolle missie naar je inventaris. Hoe moeilijker de zoektocht, hoe rijker de buit. Ontdek zeldzame materialen op verre planeten, red waardevolle onderdelen uit eeuwenoude relikwieën en verzamel hulpbronnen die jouw groei naar galactische suprematie voeden."
+        },
+        {
+          "title": "Echte contante betalingen",
+          "body": "Hyper Quest tilt gamen verder dan alleen entertainment. Bepaalde speurtochten en gerangschikte uitdagingen bieden echte contante uitbetalingen. Voltooi missies van hoog niveau, domineer klassementsevenementen en neem deel aan seizoenskampioenschappen waarbij echt geld op het spel staat. Hoe vaardiger en gedurfder je wordt, hoe groter de uitbetalingen. Van wekelijkse beloningen voor missies tot epische seizoenstoernooien, er zijn altijd mogelijkheden om je galactische avonturen om te zetten in echte inkomsten."
+        },
+        {
+          "title": "Hoe Quest-uitbetalingen werken",
+          "body": "Spelers komen in aanmerking voor speurtochten met geldbeloningen door hun reputatie op te bouwen en prestatiedrempels te behalen. De moeilijkheidsgraad, duur en gevaarniveau van de zoektocht bepalen de prijzenpot. Uitbetalingen zijn transparant, worden duidelijk weergegeven voordat je een missie accepteert en worden na voltooiing snel verwerkt. Of u nu een vrachtvlucht van tien minuten uitvoert of een diepe ruimteexpeditie van een week uitvoert, de beloningen komen overeen met het risico."
+        },
+        {
+          "title": "Vooruitgang die zich terugbetaalt",
+          "body": "Quest-beloningen worden rechtstreeks meegenomen in je scheepsupgrades, wapensystemen en rekrutering van specialisten. Elke uitbetaling maakt je sterker, waardoor moeilijkere missies met nog grotere beloningen worden ontgrendeld. De inkomsten worden ook overgedragen naar Hyper Racing en Overlord of the 7 Realms, waardoor een progressielus ontstaat die toewijding in het hele Hyper Tek-ecosysteem beloont."
+        }
+      ],
+      "upgradesTitle": "Upgrade je schip, bewapen je arsenaal, rekruteer je bemanning",
+      "upgrades": [
+        {
+          "title": "Upgrades van ruimteschepen",
+          "body": "Je Quest Racer is volledig modulair, van motorruimte tot cockpit. Upgrade de romp voor maximale duurzaamheid, versterk de buitenschil om vijandige omgevingen te weerstaan, boost schildgeneratoren voor overlevingskansen in gevechten en revisie energiesystemen voor topprestaties. Betere motoren betekenen sneller interplanetair reizen. Sterkere navigatiesystemen onthullen verborgen routes en onbekende werelden. Elke upgrade verandert je schip in een krachtiger en gevreesder schip."
+        },
+        {
+          "title": "Wapensystemen",
+          "body": "De Melkweg is gevaarlijk, en jij moet nog gevaarlijker zijn. Upgrade en verfijn je wapensystemen om jezelf te beschermen tegen piraten, rivaliserende spelers en vijandige krachten. Kies tussen defensieve configuraties die je in de ergste situaties in leven houden of offensieve uitrustingen die zijn ontworpen om maximale schade aan te richten. Laserarrays, raketbatterijen, plasmakanonnen en experimentele energiewapens zijn allemaal beschikbaar naarmate je verder komt in de upgradeboom."
+        },
+        {
+          "title": "Specialisten rekruteren",
+          "body": "Specialisten zijn gamechangers. Ze brengen allemaal unieke vaardigheden met zich mee die krachtige bonussen toevoegen aan de algehele prestaties en het krachtniveau van je schip. Navigatiespecialisten onthullen verborgen paden en verkorten de reistijd. Gevechtsspecialisten vergroten de wapennauwkeurigheid en de schade-output. Technische specialisten verhogen de integriteit van de romp en de reparatiesnelheid. Wetenschapsspecialisten verbeteren de winning van hulpbronnen en materiaalverfijning. Stapel meerdere specialisten op elkaar om verwoestende combinaties te creëren die de effectiviteit van uw schip vergroten."
+        },
+        {
+          "title": "De Powerloop",
+          "body": "Zoektocht om te verdienen. Verdien om te upgraden. Upgrade om moeilijkere missies met grotere beloningen te overwinnen. Rekruteer specialisten om elk systeem op uw schip te versterken. Hoe sterker je wordt, hoe meer van de Melkweg zich opent en hoe groter het fortuin dat je te wachten staat. Schipupgrades en specialistische bonussen zijn ook rechtstreeks van toepassing op ruimtegevechten tijdens Hyper Racing-transit en gevechten in Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest – Veelgestelde vragen",
+      "faq": [
+        {
+          "q": "Wat is HyperQuest?",
+          "a": "Een ruimteavontuur in een open wereld waarin je het bevel voert over een volledig uitbreidbaar ruimteschip door een uitgestrekt sterrenstelsel. Voltooi missies, verken buitenaardse werelden, upgrade je schip, rekruteer specialisten en verdien echte geldbeloningen naast in-game rijkdom."
+        },
+        {
+          "q": "Hoe werken speurtochten?",
+          "a": "Accepteer missies van het in-game missiebord. Quests variëren van snelle vrachtvluchten die slechts enkele minuten duren tot epische meerdaagse expedities diep in onbekende ruimte. Elke zoektocht heeft duidelijke doelstellingen, gevarenbeoordelingen en beloningsniveaus die worden weergegeven voordat je deze accepteert."
+        },
+        {
+          "q": "Kan ik echt geld verdienen?",
+          "a": "Ja. Bepaalde speurtochten, gerangschikte uitdagingen en seizoenskampioenschappen bieden echte contante uitbetalingen. Bouw uw reputatie op, voldoe aan prestatiedrempels en kwalificeer u voor steeds lucratievere missies met geldbeloningen. Wekelijkse premies en seizoenstoernooien worden doorlopend gehouden."
+        },
+        {
+          "q": "Welke in-game beloningen kan ik verdienen?",
+          "a": "Voor elke voltooide zoektocht worden credits, upgradematerialen, zeldzame componenten, gespecialiseerde rekruteringstokens en exclusieve items uitbetaald. Hoe moeilijker en langer de zoektocht, hoe rijker de beloningen. Ontdek zeldzame materialen op verre planeten en red waardevolle onderdelen uit oude relikwieën."
+        },
+        {
+          "q": "Kan ik mijn ruimteschip upgraden?",
+          "a": "Elk systeem kan worden geüpgraded: romp, buitenschaal, schildgeneratoren, voedingssystemen, motoren, cockpit en navigatie. Betere motoren betekenen sneller reizen, sterkere rompen overleven vijandige ontmoetingen en verbeterde navigatie onthult verborgen routes en onbekende werelden."
+        },
+        {
+          "q": "Welke wapens zijn beschikbaar?",
+          "a": "Upgrade en verfijn wapensystemen, waaronder laserarrays, raketbatterijen, plasmakanonnen en experimentele energiewapens. Kies defensieve configuraties om te overleven of offensieve uitrustingen voor maximale schade tegen piraten, rivalen en vijandige troepen."
+        },
+        {
+          "q": "Hoe werken specialisten?",
+          "a": "Rekruteer specialisten met unieke vaardigheden die krachtige bonussen toevoegen aan de prestaties en het krachtniveau van uw schip. Navigatiespecialisten onthullen verborgen paden, gevechtsspecialisten vergroten wapenschade, technische specialisten vergroten de rompintegriteit en wetenschapsspecialisten verbeteren de winning van hulpbronnen. Stapel meerdere specialisten op elkaar voor verwoestende combinaties."
+        },
+        {
+          "q": "Welke soorten speurtochten zijn beschikbaar?",
+          "a": "Vrachtvervoer, asteroïdemijnbouw, schattenjacht, premiejacht, artefactherstel, undercoveroperaties, planetaire verkenning, piratenverdediging, bergingsmissies en meer. Quests variëren van snelle runs van tien minuten tot meerdaagse expedities in de ruimte."
+        },
+        {
+          "q": "Kan ik nieuwe planeten ontdekken?",
+          "a": "Ja. Volg galactische kaarten naar onbekende gebieden en ontdek nieuwe werelden. De eerste ontdekkers verdienen naamgevingsrechten voor de planeten die ze vinden. Nieuwe werelden bieden unieke materialen, omgevingen en racecircuits waar geen enkele andere speler eerder toegang toe heeft gehad."
+        },
+        {
+          "q": "Wat kan ik in mijn schip doen?",
+          "a": "Je Quest Racer is een mobiele basis. Verbouw voedsel in hydrocultuurbaaien, verfijn materialen afkomstig van verre planeten, bouw en train legers in kloonlaboratoria, upgrade wapens en verdedigingswerken en beheer een zichzelf onderhoudende operatie die met elke missie krachtiger wordt."
+        },
+        {
+          "q": "Hoe werkt de galactische kaart?",
+          "a": "De galactische kaart begeleidt je verkenning door het universum. Upgrade je kaart om nieuwe sectoren, portallocaties en verborgen zoektochtzones te onthullen. Naarmate je verder verkent, wordt de kaart groter, waardoor steeds gevaarlijkere en lonendere gebieden in de ruimte worden ontgrendeld."
+        },
+        {
+          "q": "Geldt mijn voortgang ook voor andere games?",
+          "a": "Alles wat je in Hyper Quest bouwt, wordt rechtstreeks in Hyper Racing en Overlord of the 7 Realms ingevoerd. Scheepsupgrades, specialistische bonussen, gevechtsvaardigheden en grondstoffen worden allemaal naadloos overgedragen. Eén universum, meerdere games, onbeperkte voortgang."
+        },
+        {
+          "q": "Kan ik als slechterik spelen?",
+          "a": "Absoluut. Ga undercover, ontvoer waardevolle doelwitten, word een ingehuurd wapen, smokkel gevaarlijke lading of overval andere spelers. Er is niet één pad naar dominantie. Hoe jij de Melkweg bestuurt, is volledig jouw keuze, en elke beslissing bepaalt jouw reputatie."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "OVERHEER",
+      "heading": "Opperheer van de 7 rijken",
+      "subtitle": "Crash-land. Herbouwen. Veroveren. Word de Overlord.",
+      "intro": [
+        "Overlord of the 7 Realms is een gevechtsstrategiespel met drie niveaus, anders dan al het andere in gaming. Je waagde je door een portaal naar een parallel universum en maakte een noodlanding op een vijandige buitenaardse planeet. Je schip is vergaan, je systemen falen en de wezens van de planeet komen al dichterbij. Overleven is nog maar het begin. Dominantie is het doel.",
+        "Herbouw je schip vanaf het wrak. Kloon en train legers in de laboratoria aan boord. Tem de wilde dieren op de planeet om verwoestende bereden cavalerie te creëren. Voer het gevecht vervolgens uit in drie gevechtsdimensies: grond-tot-grond-gevechten tegen monsters en rivaliserende spelers, grond-tot-ruimte-aanvallen op orbitale of gronddoelen, en ruimte-tot-ruimte-oorlogvoering aan boord van de enorme Battle Ring die in een baan om de planeet draait.",
+        "Dit is niet zomaar een strategiespel. Overlord biedt real-time VR-interactie, echte geldbeloningen voor het voltooien van dagelijkse evenementen en speurtochten, en tweewekelijkse invasies door de angstaanjagende Hammerongs, de krachtigste buitenaardse soort die er bestaat. Elke veertien dagen arriveren ze om de planeet te ontmijnen, en elke veertien dagen kunnen dappere spelers hen uitdagen voor enorme bonussen en legendarische beloningen.",
+        "Upgrade je ruimteschip, bewapen het met verwoestende wapens, rekruteer specialisten die je machtsniveau vergroten en smeed allianties om hele regio's te controleren. Alles wat je bouwt, maakt rechtstreeks verbinding met Hyper Racing en Hyper Quest via het gedeelde Hyper Tek-ecosysteem. Eén universum, drie games, onbeperkte oorlogsvoering. Lees verder om te ontdekken hoe het vechtsysteem werkt en waarom Overlord alles verandert."
+      ],
+      "calloutLine1": "Overleven is nog maar het begin.",
+      "calloutLine2": "Dominantie is het doel.",
+      "howItWorksTitle": "Het gevechtssysteem op drie niveaus; Drie dimensies van oorlog",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Grond-tot-grond-gevechten",
+          "body": "Het oppervlak van de planeet is een oorlogsgebied. Zet je gekloonde legers in tegen vijandige buitenaardse wezens, monsterlijke beesten en rivaliserende spelers die vechten om territorium en grondstoffen. Tem en train de wilde dieren op de planeet om bereden cavalerie-eenheden te creëren die je grondtroepen een verwoestende voorsprong geven. Grondoorlog is rauw, tactisch en meedogenloos. Met elk gevecht dat je wint, verdien je grondstoffen, territorium en reputatie."
+        },
+        {
+          "num": "02",
+          "title": "Grond-naar-ruimte-aanvallen",
+          "body": "Dit is waar Overlord een dimensie toevoegt die geen, of bijna geen, andere game biedt. Creëer gespecialiseerde troepengroepen die zijn ontworpen om aanvallen uit te voeren tussen het oppervlak van de planeet en de orbitale Battle Ring. Val vanaf je grondpositie aan op schepen die in de ruimte zijn gestationeerd of coördineer gecombineerde aanvallen waarbij vijanden tegelijkertijd van boven en van onderen worden getroffen. Deze verticale gevechtslaag transformeert de standaardstrategie in een multidimensionale schaakwedstrijd waarbij positionering over zowel de grond als de ruimte de overwinning bepaalt."
+        },
+        {
+          "num": "03",
+          "title": "Ruimte-tot-ruimteoorlog",
+          "body": "Breng je schip in een baan om de aarde en land op de Battle Ring, een enorme orbitale structuur die de planeet omcirkelt. Vanaf hier kun je op jacht naar onbeschermde schepen en kwetsbare doelen. Teleporteer troepen door de ruimte en rechtstreeks naar vijandelijke schepen om maximale interne schade toe te brengen met behulp van speciaal ontwikkelde boarding-aanvallen. De beloningen voor ruimtegevechten behoren tot de hoogste in het spel, en het beheersen van orbitaal gebied geeft je een strategisch voordeel dat geen enkele speler op de grond kan evenaren."
+        },
+        {
+          "num": "04",
+          "title": "Waarom Tri-Level alles verandert",
+          "body": "De meeste strategiespellen opereren op één vlak. Overlord opereert op drie. Het vermogen om aan te vallen van grond tot grond, van grond tot ruimte en van ruimte tot ruimte creëert een slagveld met een ongeëvenaarde tactische diepgang. Vaardigheid is alles. Brute kracht alleen maakt je niet tot Overlord. Strategisch meesterschap op alle drie de niveaus is wat de dominante van de verslagene scheidt."
+        }
+      ],
+      "extraSection": {
+        "title": "De Battle Ring en VR-interactie",
+        "items": [
+          {
+            "title": "Landing op de gevechtsring",
+            "body": "De Battle Ring is een kolossale orbitale structuur die het systeem van de planeet omcirkelt. Wanneer je je schip de ruimte in brengt, kun je aanmeren op de Battle Ring om een ​​enorm strategisch voordeel te behalen. Vanuit deze verhoogde positie kun je op jacht gaan naar niet-afgeschermde schepen, boardinggezelschappen op rivaliserende schepen lanceren en verwoestende aanvallen op gronddoelen hieronder coördineren. Door op de Battle Ring te landen, wordt een geheel nieuwe dimensie van gameplay geopend die de meeste strategiespellen simpelweg niet bieden, waardoor Overlord een tactische voorsprong krijgt op al het andere op de markt."
+          },
+          {
+            "title": "Binnen de gevechtsring",
+            "body": "De Battle Ring is niet alleen een dockingplatform. Als je weet hoe je het interieur kunt doorbreken, wachten er verborgen missies, extra bonussen en exclusieve beloningen binnenin. Het interieur van de ring is een labyrint van gangen, kamers en eeuwenoude technologie. Voer speurtochten en jachtmissies uit binnen de ring zelf en ontdek geheimen waar geen enkele speler aan de oppervlakte ooit toegang toe zal krijgen. De Battle Ring beloont de stoutmoedigen, de sluwe en de meedogenloze."
+          },
+          {
+            "title": "Realtime VR-interactie",
+            "body": "Zoals alle games uit het Hyper Tek-assortiment ondersteunt Overlord of the 7 Realms volledige VR-interactie in realtime. Stap in je schip, loop door de gangen van de Battle Ring, leid je troepen naar grondgevechten en ervaar ruimteoorlogen vanuit de cockpit van je schip. VR transformeert Overlord van een strategiespel in een volledig meeslepende slagveldervaring. Voer het bevel over je strijdkrachten, verken buitenaards terrein en ga de strijd aan met een niveau van aanwezigheid en intensiteit dat bij flatscreen-gaming niet kan worden nagebootst."
+          },
+          {
+            "title": "Het voordeel ten opzichte van andere spellen",
+            "body": "Geen enkele andere game combineert oorlogsvoering op drie niveaus, een verkenbare orbitale gevechtsbasis, realtime VR en echt geld en/of in-game beloningen in één enkele ervaring. Alleen al de Battle Ring voegt een gameplay-dimensie toe die concurrenten niet kunnen evenaren. Wanneer je dat combineert met grondgevechten, ruimteoorlogvoering, VR-onderdompeling en het onderling verbonden Hyper Tek-ecosysteem, staat Overlord in een categorie apart."
+          }
+        ]
+      },
+      "upgradesTitle": "Herbouwen, herbewapenen, rekruteren; Power-up voor oorlog",
+      "upgrades": [
+        {
+          "title": "Upgrades van ruimteschepen",
+          "body": "Je gecrashte schip is waar het allemaal begint. Bouw het systeem voor systeem opnieuw op, van de motorruimte tot het commandodek. Elk onderdeel is volledig uitbreidbaar: rompversterking, structurele integriteit, samenstelling van de buitenschil, schildgeneratoren, voedingssystemen en navigatie-arrays. In Overlord bouw je niet voor snelheid, maar voor de strijd. Een volledig geüpgraded oorlogsschip vormt de basis van elke succesvolle campagne, en hoe dieper je investeert, hoe formidabeler je schip wordt."
+        },
+        {
+          "title": "Wapensystemen en technische niveaus",
+          "body": "Upgrade en verfijn je wapens, vaardigheden en technologieniveaus om te domineren op alle drie de gevechtsniveaus. Grondartillerie voor planetaire oorlogsvoering, anti-orbitale batterijen voor grond-naar-ruimte-aanvallen en op schepen gemonteerde wapenarrays voor ruimte-naar-ruimte-gevechten. Elk wapensysteem kan worden verfijnd voor specifieke tactische rollen. Of je nu gespecialiseerd bent in langeafstandsbombardementen, instapacties van dichtbij of defensieve tegenmaatregelen, je wapenuitrusting bepaalt je gevechtsidentiteit."
+        },
+        {
+          "title": "Specialisten rekruteren",
+          "body": "Specialisten zijn de krachtvermenigvuldigers die goede spelers van Overlords scheiden. Schaf unieke specialisten aan die krachtige bonussen toevoegen aan de algehele prestaties en het vermogensniveau van uw schip. Tactische specialisten verbeteren de efficiëntie van de troepeninzet, technische specialisten versnellen scheepsreparaties en -upgrades, wapenspecialisten vergroten de schade aan alle systemen en inlichtingenspecialisten onthullen vijandelijke posities en zwakheden. Combineer meerdere specialisten om verwoestende synergieën te creëren die elk aspect van uw operatie versterken."
+        },
+        {
+          "title": "Bouw je legers",
+          "body": "Kloon troepen in de kloonlaboratoria aan boord van je schip, upgrade en verfijn ze en hun wapens totdat ze gevechtsklaar zijn. Maar troepen alleen zijn niet genoeg. Tem en train de wilde wezens van de planeet om bereden cavalerie te creëren, een strijdmacht die niet kan worden gekloond of vervaardigd en die moet worden verdiend door vaardigheid en geduld. De samenstelling van je leger op de grond, in de lucht en in de ruimte bepaalt je dominantie."
+        }
+      ],
+      "rewardsTitle": "De Hammerongs, beloningen en het Hyper Tek-ecosysteem",
+      "rewards": [
+        {
+          "title": "De Hammerongs: de krachtigste soort die er bestaat",
+          "body": "Elke twee weken vallen de krachtvelden van de centrale arena weg en arriveren de Hammerongs. Ze zijn de sterkste buitenaardse soort in het universum, gewapend met geavanceerde technologie die veel verder gaat dan alles wat spelers bezitten. Ze komen om de hulpbronnen van de planeet te ontginnen, en ze verdedigen de arena met volledige, overweldigende kracht. Het aanvallen van de Hammerongs is de gevaarlijkste uitdaging in Overlord, maar degenen die slagen worden beloond met enorme bonussen, legendarische buit, zeldzame upgradematerialen en exclusieve beloningen die op geen enkele andere manier kunnen worden verkregen. De tweewekelijkse Hammerong-invasie is de ultieme test van je kracht."
+        },
+        {
+          "title": "Dagelijkse evenementen, speurtochten en gevechtsbeloningen",
+          "body": "Overlord levert voortdurend beloningen op. Voltooi dagelijkse taken om credits te verdienen, materialen te upgraden en voortgangsbonussen. Doe mee aan speciale evenementen voor premiumbeloningen. Voer missies uit over het hele planeetoppervlak en binnen de Battle Ring voor exclusieve buit. Win gevechten tegen monsters, buitenaardse wezens en rivaliserende spelers om grondstoffen te verzamelen. Verken het oppervlak om verborgen artefacten en schatten te ontdekken. De beloningsstructuur is zo ontworpen dat elke actie die je onderneemt je dichter bij de ultieme Overlord van de server brengt."
+        },
+        {
+          "title": "Verbonden met het Hyper Tek-ecosysteem",
+          "body": "Overlord of the 7 Realms bestaat niet op zichzelf. Het is volledig geïntegreerd in het Hyper Tek-universum naast Hyper Racing en Hyper Quest. Grondstoffen verdiend in Overlord kunnen in alle drie de games worden gebruikt. Scheepsupgrades, specialistische bonussen, gevechtsvaardigheden en materialen vloeien naadloos tussen titels door. Racevaardigheden die je hebt opgedaan in Hyper Racing verbeteren je pilootvaardigheden in Overlord-ruimtegevechten. Materialen verzameld in Hyper Quest voeden je upgrades op de planeet. De Hyper Tek-marktplaats verbindt alles en creëert een verenigde economie waarin vooruitgang in één game de vooruitgang in alle drie de games stimuleert."
+        },
+        {
+          "title": "Eén universum, drie games, onbeperkte kracht",
+          "body": "Spelers die alle drie de Hyper Tek-games spelen, bouwen sneller kracht op, krijgen toegang tot exclusieve cross-game beloningen en domineren met een breed scala aan vaardigheden en middelen die spelers in één game niet kunnen evenaren. Het onderling verbonden ecosysteem is het ultieme concurrentievoordeel."
+        }
+      ],
+      "faqTitle": "Overlord van de 7 Rijken – Veelgestelde vragen",
+      "faq": [
+        {
+          "q": "Wat is Overlord van de 7 Rijken?",
+          "a": "Een gevechtsstrategiespel met drie niveaus waarin je een noodlanding maakt op een buitenaardse planeet, je schip herbouwt, legers kloont en in drie dimensies vecht: van grond tot grond, van grond tot ruimte en van ruimte tot ruimte. Bevat VR-interactie, echte geldbeloningen en tweewekelijkse Hammerong-invasies."
+        },
+        {
+          "q": "Wat is het gevechtssysteem op drie niveaus?",
+          "a": "Gevechten vinden plaats op drie niveaus: grond-tot-grond tegen monsters en rivaliserende spelers, grond-tot-ruimte-aanvallen gericht op orbitale schepen en ruimte-tot-ruimte-oorlogsvoering op de Battle Ring. Deze multidimensionale aanpak creëert tactische diepgang die geen enkel strategiespel op één vlak kan evenaren."
+        },
+        {
+          "q": "Wat is de gevechtsring?",
+          "a": "Een enorme orbitale structuur die de planeet omcirkelt. Laat je schip erop landen om op niet-afgeschermde doelen te jagen, boardinggezelschappen op vijandelijke schepen te lanceren en toegang te krijgen tot verborgen missies in het binnenland. Het besturen van de Battle Ring geeft je een strategisch voordeel ten opzichte van spelers die alleen op de grond spelen."
+        },
+        {
+          "q": "Kan ik mijn ruimteschip upgraden?",
+          "a": "Elk systeem kan worden opgewaardeerd van motorruimte tot commandodek: romp, structuur, buitenschaal, schildgeneratoren, voedingssystemen en navigatie. In Overlord bouw je voor de strijd, niet voor snelheid. Een volledig geüpgraded oorlogsschip vormt de basis van elke campagne."
+        },
+        {
+          "q": "Hoe werken specialisten?",
+          "a": "Rekruteer unieke specialisten die krachtige bonussen toevoegen aan de prestaties en het krachtniveau van uw schip. Tactische, technische, wapen- en inlichtingenspecialisten versterken elk verschillende systemen. Stapel meerdere specialisten op elkaar voor verwoestende synergieën op alle gevechtsniveaus."
+        },
+        {
+          "q": "Wie zijn de Hammerongs?",
+          "a": "De krachtigste buitenaardse soort die er bestaat. Elke veertien dagen arriveren ze in de centrale arena om de hulpbronnen van de planeet te ontginnen, verdedigd door overweldigende kracht en geavanceerde technologie. Ze aanvallen is extreem gevaarlijk, maar beloont spelers met enorme bonussen en legendarische buit."
+        },
+        {
+          "q": "Welke beloningen kan ik verdienen?",
+          "a": "Dagelijkse taken, speurtochten, gevechten en evenementen betalen allemaal credits, upgradematerialen en voortgangsbonussen uit. Speciale evenementen en Hammerong-invasies bieden premium en exclusieve beloningen. Uitdagingen met een hogere moeilijkheidsgraad en gerangschikte competities leveren grotere uitbetalingen op, inclusief echt geld."
+        },
+        {
+          "q": "Ondersteunt Overlord VR?",
+          "a": "Ja. Met volledige realtime VR-interactie kun je door de gangen van je schip lopen, het interieur van de Battle Ring verkennen, troepen naar grondgevechten leiden en je schip besturen in ruimteoorlogvoering. VR transformeert Overlord van strategie naar een volledig meeslepende slagveldervaring."
+        },
+        {
+          "q": "Hoe bouw ik mijn leger?",
+          "a": "Kloon troepen in de laboratoria aan boord van je schip, upgrade en verfijn ze en hun wapens. Voor bereden cavalerie moet je de wilde wezens van de planeet temmen en trainen, aangezien dieren niet kunnen worden gekloond. De samenstelling van het leger op de grond, in de lucht en in de ruimte bepaalt je dominantie."
+        },
+        {
+          "q": "Kan ik lid worden van een alliantie?",
+          "a": "Ja. Doe het alleen of sluit je aan bij een alliantie die je macht vergroot en je helpt groeien. Allianties bieden gedeelde middelen, gecoördineerde aanvallen en collectieve verdediging. Voltooi dagelijkse taken om zowel je schip als de gedeelde bezittingen van de alliantie te upgraden."
+        },
+        {
+          "q": "Is Overlord gekoppeld aan andere Hyper Tek-games?",
+          "a": "Volledig geïntegreerd. Grondstoffen, scheepsupgrades, specialistische bonussen en gevechtsvaardigheden stromen tussen Overlord, Hyper Racing en Hyper Quest. Racevaardigheden verbeteren je ruimtegevechten, Quest-materialen voeden je upgrades en de Hyper Tek-marktplaats verbindt de hele economie."
+        },
+        {
+          "q": "Welke wapens zijn beschikbaar?",
+          "a": "Grondartillerie, anti-orbitale batterijen, op schepen gemonteerde wapenarrays en gespecialiseerde instapapparatuur. Elk systeem kan worden verfijnd voor specifieke tactische rollen, waaronder langeafstandsbombardementen, gevechten van dichtbij en defensieve tegenmaatregelen."
+        },
+        {
+          "q": "Kan ik het oppervlak van de planeet verkennen?",
+          "a": "Ja. De planeet is rijk aan verborgen beloningen, artefacten, hulpbronnen en gevaarlijke wilde dieren om te temmen. Verken het oppervlak om schatten te vinden, vecht tegen buitenaardse wezens en monsters en ontdek strategische voordelen die je campagne voor Overlord-dominantie versterken."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "AFSLUITEN",
     "spaceRing": "OVERLORD · RUIMTERING",
@@ -324,91 +720,268 @@
       "detail": "Detail"
     },
     "rooms": {
-      "storeroom":     { "title": "Opslagruimte",            "desc": "Centraal opslagknooppunt voor grondstoffen en geoogste middelen. Beheert inventarisdistributie over mijn- en raffinaderij-operaties." },
-      "mining_fs":     { "title": "Mijnbouw FS",             "desc": "Voorste stuurboord mijnbay. Uitgerust met diepkern-extractie-arrays voor mineraal- en ertsverzameling in open ruimte." },
-      "mining_fp":     { "title": "Mijnbouw FP",             "desc": "Voorste bakboord mijnbay. Spiegelt de stuurboordeenheid en verdubbelt de extractiecapaciteit tijdens grondstofrijke veldoperaties." },
-      "process_ref":   { "title": "Procesraffinaderij",      "desc": "Converteert ruw erts en mineralen naar geraffineerde legeringen. Kritisch voor brandstofssynthese en schipupgradematerialen." },
-      "mining_rs":     { "title": "Mijnbouw RS",             "desc": "Achterste stuurboord mijnbay. Gehoekt op -45° voor laterale veldsweeps tijdens langzame-drift asteroïdoogst." },
-      "mining_rp":     { "title": "Mijnbouw RP",             "desc": "Achterste bakboord mijnbay. Werkt samen met RS-bay om de achterste veldmiddelen-extractieopbrengst te maximaliseren." },
-      "fuel_ref":      { "title": "Brandstofraffinaderij",   "desc": "Verwerkt geraffineerde legeringen tot aandrijvingsklasse brandstof. Levert de hoofdmotor en nood-stuwrakettreserves." },
-      "workshop":      { "title": "Werkplaats",              "desc": "Schipsonderhoud en fabricagecentrum. Verwerkt componentreparaties, onderdelenproductie en uitrustingsupgrades." },
-      "racing":        { "title": "Racinghangar",            "desc": "Toegewijde bay met racingdrones en lichte vaartuigen. Ondersteunt Racing-spelmodusinzet en depotoperaties." },
-      "brig":          { "title": "Gevangenis",              "desc": "Beveiligde opbergcel voor gevangenen en waardevolle lading. Versterkte wanden voorkomen ongeautoriseerde toegang of ontsnapping." },
-      "armory_ss":     { "title": "Wapenarsenaal SS",        "desc": "Stuurboordzijde wapenlocker. Slaat op en onderhoudt handwapens, bemanningsbeschermingsuitrusting en persoonlijke verdedigingssystemen." },
-      "armory_ps":     { "title": "Wapenarsenaal PS",        "desc": "Bakboordzijde wapenlocker. Spiegelt het SS-arsenaal en biedt uitgebalanceerde uitrustingstoegang aan beide zijden van het vaartuig." },
-      "main_weapon":   { "title": "Hoofdwapen Zwaar",        "desc": "Primaire zware wapenplaatsing. Huisvest de krachtigste offensieve systemen van het schip voor grootschalige gevechtssituaties." },
-      "fwd_shield":    { "title": "Voorste Schildgenerator", "desc": "Genereert een beschermende energiebarrière aan de boeg van het schip. Eerste verdedigingslinie tegen inkomende projectielen en energie-aanvallen." },
-      "fighter_fss":   { "title": "Jachtbay FSS",            "desc": "Voorste stuurboord bay met compacte jachtvaartuigen. Maakt snelle inzet van escortejagers mogelijk tijdens gevechts- en patrouillemissies." },
-      "fighter_fps":   { "title": "Jachtbay FPS",            "desc": "Voorste bakboord jachtbay. Werkt samen met FSS-bay voor gecoördineerde jachtsquadronlanceringen." },
-      "fighter_rss":   { "title": "Jachtbay RSS",            "desc": "Achterste stuurboord nacelle-jachtbay. Ondersteunt achterhoedeoperaties en achtervolging-onderscheppingsscenario's." },
-      "fighter_rps":   { "title": "Jachtbay RPS",            "desc": "Achterste bakboord nacelle-jachtbay. Biedt symmetrische achterdekking voor volledige defensieve jachterinzet." },
-      "barracks_ss":   { "title": "Kazerne SS",              "desc": "Stuurboord bemanningskwartier voor gevechtspersoneel. Huisvest soldaten, piloten en beveiligingsteams met kooiensystemen en uitrustingskluisjes." },
-      "barracks_ps":   { "title": "Kazerne PS",              "desc": "Bakboord bemanningskwartier. Identieke indeling als SS-kazerne om gelijke bemanningsdistributie en snelle mobilisatie van beide zijden te garanderen." },
-      "stables_ss":    { "title": "Stal SS",                 "desc": "Stuurboord biologisch vermogensbay. Huisvest buitenaardse rijdieren en biotechnologisch ontwikkelde wezens voor planetaire oppervlakteoperaties." },
-      "stable_ps":     { "title": "Stal PS",                 "desc": "Bakboord biologisch vermogensbay. Spiegelt de SS-stallen voor evenwichtige wezensbelasting en symmetrische gewichtsverdeling." },
-      "transporter":   { "title": "Transportbay",            "desc": "Kwantum-ondersteund personeel- en ladingstransportsysteem. Maakt snelle korte-afstand teleportatie naar planetaire oppervlakken of nabijgelegen vaartuigen mogelijk." },
-      "security":      { "title": "Beveiligingsstation",     "desc": "Scheepsbrede bewakings- en dreigingsrespons-hub. Bewaakt alle dekken en coördineert interne beveiligingsprotocollen." },
-      "weapons_ss":    { "title": "Wapensystemen SS",        "desc": "Stuurboord wapenbeheerconsole. Bestuurt doelaanwijzing, vuursequenties en munitielogistiek voor stuurbordwapens." },
-      "weapons_ps":    { "title": "Wapensystemen PS",        "desc": "Bakboord wapenbeheerconsole. Biedt volledige onafhankelijke controle van alle bakboordwapenplatforms." },
-      "power_plant":   { "title": "Energiecentrale",         "desc": "Kern energieopwekkingseenheid. Levert stabiele vermogensoutput aan alle schipssystemen via circulaire plasma-insluitingstechnologie." },
-      "power_sys":     { "title": "Stroomsystemen",          "desc": "Stroomdistributie- en regelingshub. Beheert lastbalancering tussen wapens, schilden, motoren en levenondersteunende systemen." },
-      "energy_dist":   { "title": "Energiedistributie",      "desc": "Secundaire energieroutingnode. Zorgt voor consistente stroomlevering aan midscheeps en achterstevensystemen onder hoge vraagomstandigheden." },
-      "main_engine":   { "title": "Hoofdmotor van het Schip","desc": "Primair aandrijfsysteem dat alle sublichtreizen aandrijft. Genereert stuwkracht via door antimaterie gekatalyseerde plasmastralen." },
-      "navigation":    { "title": "Navigatie",               "desc": "Centrale navigatie- en roercontrolestation. Beheert koersuitzetten, astrokartografie en real-time positievolging." },
-      "flight_deck":   { "title": "Vliegdek",                "desc": "Hoofd pilotenstation. Bestuurt alle vluchtoperaties inclusief opstijgen, landen, orbitale manoeuvres en noodontwijkende acties." },
-      "weapons_off":   { "title": "Wapenofficier",           "desc": "Tactische wapencommandopost. Coördineert offensief en defensief wapenvuur onder direct bevel van de Wapenofficier." },
-      "comms_off":     { "title": "Communicatieofficier",    "desc": "Communicatie- en signaalonderscheppingshub. Verwerkt alle inter-schip, alliantie en planetaire communicaties inclusief versleutelde kanalen." },
-      "capt_quarters": { "title": "Kapiteinskwartier",       "desc": "Privékwartier voor de commanderende officier van het schip. Bevat beveiligde dataterminals en privébriefingsfaciliteiten." },
-      "kitchen":       { "title": "Keuken",                  "desc": "Bemanningsvoeding en voedselbereiding faciliteit. Verwerkt opgeslagen voedselvoorraden en synthetiseert voedingssupplementen voor langeafstandsreizen." },
-      "mess_hall":     { "title": "Eetzaal",                 "desc": "Gemeenschappelijke eet- en recreatieruimte. Fungeert als bemanningsmoraal-hub tijdens vrije tijd tussen gevechts- en middelenoperaties." },
-      "hydro_1":       { "title": "Hydroponiccel 1",         "desc": "Geautomatiseerde teelteenheid die vers voedsel en medicinale planten produceert. Vermindert afhankelijkheid van opgeslagen voorraden voor verlengde missies." },
-      "hydro_2":       { "title": "Hydroponiccel 2",         "desc": "Secundaire hydroponiccel die gewasvariant en opbrengst uitbreidt. Ondersteunt bemanningsvoeding en handelsgrondstofproductie." },
-      "hydro_3":       { "title": "Hydroponiccel 3",         "desc": "Tertiaire teelteenheid gespecialiseerd in hoog-opbrengst basisgewassen. Biedt basale calorieaanvoer voor grote bemanningscomplementen." },
-      "hydro_4":       { "title": "Hydroponiccel 4",         "desc": "Medische en botanische onderzoekscel. Kweekt zeldzame soorten gebruikt in medische behandeling en alchemische synthese." },
-      "hydro_5":       { "title": "Hydroponiccel 5",         "desc": "Exotische plantenkweekbay. Produceert luxegoederen en zeldzame flora voor handel op de marktplaats." },
-      "hydro_6":       { "title": "Hydroponiccel 6",         "desc": "Hoog-groei experimentele cel. Test nieuwe gewasrassen ontwikkeld via genetische modificatieprogramma's." },
-      "shield_main":   { "title": "Schildgenerator Hoofd",   "desc": "Primaire multidirectionele schildgenerator. Projecteert een energiebarrière rondom de gehele romp tijdens gevechtssituaties." },
-      "power_relay1":  { "title": "Stroomrelais 1",          "desc": "Bovendek stroomrelais-koppeling. Leidt energie van de energiecentrale naar voorste wapens en schildarrays." },
-      "power_relay2":  { "title": "Stroomrelais 2",          "desc": "Onderdek stroomrelais-koppeling. Distribueert vermogen naar motorpods en achterste defensieve systemen." },
-      "hidden_st1":    { "title": "Verborgen Opslag 1",      "desc": "Verborgen hoog-beveiligde kluis. Slaat geclassificeerde lading, waardevolle artefacten en smokkelwaar op buiten standaardinventarisscans." },
-      "hidden_st2":    { "title": "Verborgen Opslag 2",      "desc": "Secundaire verborgen kluis. Extra beveiligde ruimte voor missionkritieke items die maximale discretie vereisen." },
-      "cargo_1":       { "title": "Vrachtruimte 1",          "desc": "Primaire bulk vrachtruimte. Ontworpen voor grootvolume middelen transport inclusief erts, geraffineerde metalen en handelsgoederen." },
-      "cargo_2":       { "title": "Vrachtruimte 2",          "desc": "Secundaire vrachtruimte geoptimaliseerd voor fragiele of temperatuurgevoelige ladingen. Klimaatgecontroleerde opslagomstandigheden." },
-      "cargo_3":       { "title": "Vrachtruimte 3",          "desc": "Tertiaire vrachtruimte. Configureerbare indeling ondersteunt gemengde ladingen inclusief voertuigen, containers en oversized uitrusting." },
-      "war_council":   { "title": "Oorlogsraad",             "desc": "Strategische commandokamer. Senioroffficierenbriefingtafel waar gevechtplannen, alliantiestrategieën en campagnedoelstellingen worden gecoördineerd." },
-      "academy":       { "title": "Academie",                "desc": "Bemanning training en onderwijsfaciliteit. Maakt vaardigheidsavancering, specialisatie-ontgrendelingen en officiersotnwikkelingsprogramma's mogelijk." },
-      "science_lab":   { "title": "Wetenschapslaboratorium", "desc": "Onderzoeks- en ontwikkelingscentrum. Voert experimenten uit op het gebied van materiaalwetenschappen, aandrijvingstheorie en buitenaardse technologieanalyse." },
-      "dna_lab":       { "title": "DNA-laboratorium",        "desc": "Genetisch onderzoeksfaciliteit. Ontwikkelt biologische verbeteringen voor bemanning, creëert nieuwe soortsvarianten en onderzoekt buitenaardse DNA-monsters." },
-      "cryostasis":    { "title": "Cryostase",               "desc": "Lange-afstandsreis suspensiesysteem. Plaatst bemanning in cryogene stase om middelen te bewaren tijdens meerjaarlijkse diepe-ruimtereizen." },
-      "dna_chambers":  { "title": "DNA-kamers",              "desc": "Genetische modificatiebays. Past onderzochte DNA-verbeteringen rechtstreeks toe op bemanningsleden en biologische eenheden." },
-      "weapons_relay": { "title": "Wapenstroomrelais",       "desc": "Toegewijd vermogensbeheer-knooppunt voor zware wapensystemen. Zorgt voor stabiele energieaanvoer tijdens langdurige gevechtssituaties." },
-      "comms_tower":   { "title": "Communicatietoren",       "desc": "Lange-afstand diepe-ruimte communicatiearray. Maakt vlootbrede uitzendingen, interstellaire transmissies en alliantiecoördinatie over grote afstanden mogelijk." }
+      "storeroom": {
+        "title": "Opslagruimte",
+        "desc": "Centraal opslagknooppunt voor grondstoffen en geoogste middelen. Beheert inventarisdistributie over mijn- en raffinaderij-operaties."
+      },
+      "mining_fs": {
+        "title": "Mijnbouw FS",
+        "desc": "Voorste stuurboord mijnbay. Uitgerust met diepkern-extractie-arrays voor mineraal- en ertsverzameling in open ruimte."
+      },
+      "mining_fp": {
+        "title": "Mijnbouw FP",
+        "desc": "Voorste bakboord mijnbay. Spiegelt de stuurboordeenheid en verdubbelt de extractiecapaciteit tijdens grondstofrijke veldoperaties."
+      },
+      "process_ref": {
+        "title": "Procesraffinaderij",
+        "desc": "Converteert ruw erts en mineralen naar geraffineerde legeringen. Kritisch voor brandstofssynthese en schipupgradematerialen."
+      },
+      "mining_rs": {
+        "title": "Mijnbouw RS",
+        "desc": "Achterste stuurboord mijnbay. Gehoekt op -45° voor laterale veldsweeps tijdens langzame-drift asteroïdoogst."
+      },
+      "mining_rp": {
+        "title": "Mijnbouw RP",
+        "desc": "Achterste bakboord mijnbay. Werkt samen met RS-bay om de achterste veldmiddelen-extractieopbrengst te maximaliseren."
+      },
+      "fuel_ref": {
+        "title": "Brandstofraffinaderij",
+        "desc": "Verwerkt geraffineerde legeringen tot aandrijvingsklasse brandstof. Levert de hoofdmotor en nood-stuwrakettreserves."
+      },
+      "workshop": {
+        "title": "Werkplaats",
+        "desc": "Schipsonderhoud en fabricagecentrum. Verwerkt componentreparaties, onderdelenproductie en uitrustingsupgrades."
+      },
+      "racing": {
+        "title": "Racinghangar",
+        "desc": "Toegewijde bay met racingdrones en lichte vaartuigen. Ondersteunt Racing-spelmodusinzet en depotoperaties."
+      },
+      "brig": {
+        "title": "Gevangenis",
+        "desc": "Beveiligde opbergcel voor gevangenen en waardevolle lading. Versterkte wanden voorkomen ongeautoriseerde toegang of ontsnapping."
+      },
+      "armory_ss": {
+        "title": "Wapenarsenaal SS",
+        "desc": "Stuurboordzijde wapenlocker. Slaat op en onderhoudt handwapens, bemanningsbeschermingsuitrusting en persoonlijke verdedigingssystemen."
+      },
+      "armory_ps": {
+        "title": "Wapenarsenaal PS",
+        "desc": "Bakboordzijde wapenlocker. Spiegelt het SS-arsenaal en biedt uitgebalanceerde uitrustingstoegang aan beide zijden van het vaartuig."
+      },
+      "main_weapon": {
+        "title": "Hoofdwapen Zwaar",
+        "desc": "Primaire zware wapenplaatsing. Huisvest de krachtigste offensieve systemen van het schip voor grootschalige gevechtssituaties."
+      },
+      "fwd_shield": {
+        "title": "Voorste Schildgenerator",
+        "desc": "Genereert een beschermende energiebarrière aan de boeg van het schip. Eerste verdedigingslinie tegen inkomende projectielen en energie-aanvallen."
+      },
+      "fighter_fss": {
+        "title": "Jachtbay FSS",
+        "desc": "Voorste stuurboord bay met compacte jachtvaartuigen. Maakt snelle inzet van escortejagers mogelijk tijdens gevechts- en patrouillemissies."
+      },
+      "fighter_fps": {
+        "title": "Jachtbay FPS",
+        "desc": "Voorste bakboord jachtbay. Werkt samen met FSS-bay voor gecoördineerde jachtsquadronlanceringen."
+      },
+      "fighter_rss": {
+        "title": "Jachtbay RSS",
+        "desc": "Achterste stuurboord nacelle-jachtbay. Ondersteunt achterhoedeoperaties en achtervolging-onderscheppingsscenario's."
+      },
+      "fighter_rps": {
+        "title": "Jachtbay RPS",
+        "desc": "Achterste bakboord nacelle-jachtbay. Biedt symmetrische achterdekking voor volledige defensieve jachterinzet."
+      },
+      "barracks_ss": {
+        "title": "Kazerne SS",
+        "desc": "Stuurboord bemanningskwartier voor gevechtspersoneel. Huisvest soldaten, piloten en beveiligingsteams met kooiensystemen en uitrustingskluisjes."
+      },
+      "barracks_ps": {
+        "title": "Kazerne PS",
+        "desc": "Bakboord bemanningskwartier. Identieke indeling als SS-kazerne om gelijke bemanningsdistributie en snelle mobilisatie van beide zijden te garanderen."
+      },
+      "stables_ss": {
+        "title": "Stal SS",
+        "desc": "Stuurboord biologisch vermogensbay. Huisvest buitenaardse rijdieren en biotechnologisch ontwikkelde wezens voor planetaire oppervlakteoperaties."
+      },
+      "stable_ps": {
+        "title": "Stal PS",
+        "desc": "Bakboord biologisch vermogensbay. Spiegelt de SS-stallen voor evenwichtige wezensbelasting en symmetrische gewichtsverdeling."
+      },
+      "transporter": {
+        "title": "Transportbay",
+        "desc": "Kwantum-ondersteund personeel- en ladingstransportsysteem. Maakt snelle korte-afstand teleportatie naar planetaire oppervlakken of nabijgelegen vaartuigen mogelijk."
+      },
+      "security": {
+        "title": "Beveiligingsstation",
+        "desc": "Scheepsbrede bewakings- en dreigingsrespons-hub. Bewaakt alle dekken en coördineert interne beveiligingsprotocollen."
+      },
+      "weapons_ss": {
+        "title": "Wapensystemen SS",
+        "desc": "Stuurboord wapenbeheerconsole. Bestuurt doelaanwijzing, vuursequenties en munitielogistiek voor stuurbordwapens."
+      },
+      "weapons_ps": {
+        "title": "Wapensystemen PS",
+        "desc": "Bakboord wapenbeheerconsole. Biedt volledige onafhankelijke controle van alle bakboordwapenplatforms."
+      },
+      "power_plant": {
+        "title": "Energiecentrale",
+        "desc": "Kern energieopwekkingseenheid. Levert stabiele vermogensoutput aan alle schipssystemen via circulaire plasma-insluitingstechnologie."
+      },
+      "power_sys": {
+        "title": "Stroomsystemen",
+        "desc": "Stroomdistributie- en regelingshub. Beheert lastbalancering tussen wapens, schilden, motoren en levenondersteunende systemen."
+      },
+      "energy_dist": {
+        "title": "Energiedistributie",
+        "desc": "Secundaire energieroutingnode. Zorgt voor consistente stroomlevering aan midscheeps en achterstevensystemen onder hoge vraagomstandigheden."
+      },
+      "main_engine": {
+        "title": "Hoofdmotor van het Schip",
+        "desc": "Primair aandrijfsysteem dat alle sublichtreizen aandrijft. Genereert stuwkracht via door antimaterie gekatalyseerde plasmastralen."
+      },
+      "navigation": {
+        "title": "Navigatie",
+        "desc": "Centrale navigatie- en roercontrolestation. Beheert koersuitzetten, astrokartografie en real-time positievolging."
+      },
+      "flight_deck": {
+        "title": "Vliegdek",
+        "desc": "Hoofd pilotenstation. Bestuurt alle vluchtoperaties inclusief opstijgen, landen, orbitale manoeuvres en noodontwijkende acties."
+      },
+      "weapons_off": {
+        "title": "Wapenofficier",
+        "desc": "Tactische wapencommandopost. Coördineert offensief en defensief wapenvuur onder direct bevel van de Wapenofficier."
+      },
+      "comms_off": {
+        "title": "Communicatieofficier",
+        "desc": "Communicatie- en signaalonderscheppingshub. Verwerkt alle inter-schip, alliantie en planetaire communicaties inclusief versleutelde kanalen."
+      },
+      "capt_quarters": {
+        "title": "Kapiteinskwartier",
+        "desc": "Privékwartier voor de commanderende officier van het schip. Bevat beveiligde dataterminals en privébriefingsfaciliteiten."
+      },
+      "kitchen": {
+        "title": "Keuken",
+        "desc": "Bemanningsvoeding en voedselbereiding faciliteit. Verwerkt opgeslagen voedselvoorraden en synthetiseert voedingssupplementen voor langeafstandsreizen."
+      },
+      "mess_hall": {
+        "title": "Eetzaal",
+        "desc": "Gemeenschappelijke eet- en recreatieruimte. Fungeert als bemanningsmoraal-hub tijdens vrije tijd tussen gevechts- en middelenoperaties."
+      },
+      "hydro_1": {
+        "title": "Hydroponiccel 1",
+        "desc": "Geautomatiseerde teelteenheid die vers voedsel en medicinale planten produceert. Vermindert afhankelijkheid van opgeslagen voorraden voor verlengde missies."
+      },
+      "hydro_2": {
+        "title": "Hydroponiccel 2",
+        "desc": "Secundaire hydroponiccel die gewasvariant en opbrengst uitbreidt. Ondersteunt bemanningsvoeding en handelsgrondstofproductie."
+      },
+      "hydro_3": {
+        "title": "Hydroponiccel 3",
+        "desc": "Tertiaire teelteenheid gespecialiseerd in hoog-opbrengst basisgewassen. Biedt basale calorieaanvoer voor grote bemanningscomplementen."
+      },
+      "hydro_4": {
+        "title": "Hydroponiccel 4",
+        "desc": "Medische en botanische onderzoekscel. Kweekt zeldzame soorten gebruikt in medische behandeling en alchemische synthese."
+      },
+      "hydro_5": {
+        "title": "Hydroponiccel 5",
+        "desc": "Exotische plantenkweekbay. Produceert luxegoederen en zeldzame flora voor handel op de marktplaats."
+      },
+      "hydro_6": {
+        "title": "Hydroponiccel 6",
+        "desc": "Hoog-groei experimentele cel. Test nieuwe gewasrassen ontwikkeld via genetische modificatieprogramma's."
+      },
+      "shield_main": {
+        "title": "Schildgenerator Hoofd",
+        "desc": "Primaire multidirectionele schildgenerator. Projecteert een energiebarrière rondom de gehele romp tijdens gevechtssituaties."
+      },
+      "power_relay1": {
+        "title": "Stroomrelais 1",
+        "desc": "Bovendek stroomrelais-koppeling. Leidt energie van de energiecentrale naar voorste wapens en schildarrays."
+      },
+      "power_relay2": {
+        "title": "Stroomrelais 2",
+        "desc": "Onderdek stroomrelais-koppeling. Distribueert vermogen naar motorpods en achterste defensieve systemen."
+      },
+      "hidden_st1": {
+        "title": "Verborgen Opslag 1",
+        "desc": "Verborgen hoog-beveiligde kluis. Slaat geclassificeerde lading, waardevolle artefacten en smokkelwaar op buiten standaardinventarisscans."
+      },
+      "hidden_st2": {
+        "title": "Verborgen Opslag 2",
+        "desc": "Secundaire verborgen kluis. Extra beveiligde ruimte voor missionkritieke items die maximale discretie vereisen."
+      },
+      "cargo_1": {
+        "title": "Vrachtruimte 1",
+        "desc": "Primaire bulk vrachtruimte. Ontworpen voor grootvolume middelen transport inclusief erts, geraffineerde metalen en handelsgoederen."
+      },
+      "cargo_2": {
+        "title": "Vrachtruimte 2",
+        "desc": "Secundaire vrachtruimte geoptimaliseerd voor fragiele of temperatuurgevoelige ladingen. Klimaatgecontroleerde opslagomstandigheden."
+      },
+      "cargo_3": {
+        "title": "Vrachtruimte 3",
+        "desc": "Tertiaire vrachtruimte. Configureerbare indeling ondersteunt gemengde ladingen inclusief voertuigen, containers en oversized uitrusting."
+      },
+      "war_council": {
+        "title": "Oorlogsraad",
+        "desc": "Strategische commandokamer. Senioroffficierenbriefingtafel waar gevechtplannen, alliantiestrategieën en campagnedoelstellingen worden gecoördineerd."
+      },
+      "academy": {
+        "title": "Academie",
+        "desc": "Bemanning training en onderwijsfaciliteit. Maakt vaardigheidsavancering, specialisatie-ontgrendelingen en officiersotnwikkelingsprogramma's mogelijk."
+      },
+      "science_lab": {
+        "title": "Wetenschapslaboratorium",
+        "desc": "Onderzoeks- en ontwikkelingscentrum. Voert experimenten uit op het gebied van materiaalwetenschappen, aandrijvingstheorie en buitenaardse technologieanalyse."
+      },
+      "dna_lab": {
+        "title": "DNA-laboratorium",
+        "desc": "Genetisch onderzoeksfaciliteit. Ontwikkelt biologische verbeteringen voor bemanning, creëert nieuwe soortsvarianten en onderzoekt buitenaardse DNA-monsters."
+      },
+      "cryostasis": {
+        "title": "Cryostase",
+        "desc": "Lange-afstandsreis suspensiesysteem. Plaatst bemanning in cryogene stase om middelen te bewaren tijdens meerjaarlijkse diepe-ruimtereizen."
+      },
+      "dna_chambers": {
+        "title": "DNA-kamers",
+        "desc": "Genetische modificatiebays. Past onderzochte DNA-verbeteringen rechtstreeks toe op bemanningsleden en biologische eenheden."
+      },
+      "weapons_relay": {
+        "title": "Wapenstroomrelais",
+        "desc": "Toegewijd vermogensbeheer-knooppunt voor zware wapensystemen. Zorgt voor stabiele energieaanvoer tijdens langdurige gevechtssituaties."
+      },
+      "comms_tower": {
+        "title": "Communicatietoren",
+        "desc": "Lange-afstand diepe-ruimte communicatiearray. Maakt vlootbrede uitzendingen, interstellaire transmissies en alliantiecoördinatie over grote afstanden mogelijk."
+      }
     },
     "guns": {
-      "far_left_bar":      "Voorste Hoofd Kanon",
-      "fore_port_bay":     "Stuurboord Kannonnenbank Voorste",
-      "fore_stbd_bay":     "Bakboord Kannonnenbank Voorste",
-      "pd_gun_1":          "Cockpit Stuurboord Verdedigingscel 1",
-      "pd_gun_2":          "Cockpit Stuurboord Verdedigingscel 2",
-      "pd_gun_3":          "Cockpit Stuurboord Verdedigingscel 3",
-      "pd_gun_4":          "Cockpit Stuurboord Verdedigingscel 4",
-      "pd_gun_5":          "Cockpit Stuurboord Verdedigingscel 5",
-      "pd_gun_6":          "Cockpit Stuurboord Verdedigingscel 6",
-      "vert_oval_upper":   "Cockpit Center Verdedigingscel Onder",
-      "vert_oval_lower":   "Cockpit Center Verdedigingscel Boven",
-      "center_front_gun":  "Voorste Bovendek Wapenarray",
-      "pd_gun_7":          "Cockpit Bakboord Verdedigingscel 1",
-      "pd_gun_8":          "Cockpit Bakboord Verdedigingscel 2",
-      "pd_gun_9":          "Cockpit Bakboord Verdedigingscel 3",
-      "pd_gun_10":         "Cockpit Bakboord Verdedigingscel 4",
-      "pd_gun_11":         "Cockpit Bakboord Verdedigingscel 5",
-      "pd_gun_12":         "Cockpit Bakboord Verdedigingscel 6",
+      "far_left_bar": "Voorste Hoofd Kanon",
+      "fore_port_bay": "Stuurboord Kannonnenbank Voorste",
+      "fore_stbd_bay": "Bakboord Kannonnenbank Voorste",
+      "pd_gun_1": "Cockpit Stuurboord Verdedigingscel 1",
+      "pd_gun_2": "Cockpit Stuurboord Verdedigingscel 2",
+      "pd_gun_3": "Cockpit Stuurboord Verdedigingscel 3",
+      "pd_gun_4": "Cockpit Stuurboord Verdedigingscel 4",
+      "pd_gun_5": "Cockpit Stuurboord Verdedigingscel 5",
+      "pd_gun_6": "Cockpit Stuurboord Verdedigingscel 6",
+      "vert_oval_upper": "Cockpit Center Verdedigingscel Onder",
+      "vert_oval_lower": "Cockpit Center Verdedigingscel Boven",
+      "center_front_gun": "Voorste Bovendek Wapenarray",
+      "pd_gun_7": "Cockpit Bakboord Verdedigingscel 1",
+      "pd_gun_8": "Cockpit Bakboord Verdedigingscel 2",
+      "pd_gun_9": "Cockpit Bakboord Verdedigingscel 3",
+      "pd_gun_10": "Cockpit Bakboord Verdedigingscel 4",
+      "pd_gun_11": "Cockpit Bakboord Verdedigingscel 5",
+      "pd_gun_12": "Cockpit Bakboord Verdedigingscel 6",
       "upper_flank_array": "Stuurboord Kannonnenbank Achterste",
       "lower_flank_array": "Bakboord Kannonnenbank Achterste",
-      "spine_gun_1":       "Midden Bovendek Wapenarray",
-      "spine_gun_2":       "Onder Centrale Wervelkolomarray",
-      "spine_gun_3":       "Achterste Centrale Wervelkolomarray",
-      "mid_rail_gun":      "Centrale Toren Verschansing",
+      "spine_gun_1": "Midden Bovendek Wapenarray",
+      "spine_gun_2": "Onder Centrale Wervelkolomarray",
+      "spine_gun_3": "Achterste Centrale Wervelkolomarray",
+      "mid_rail_gun": "Centrale Toren Verschansing",
       "upper_nacelle_bay": "Stuurboord Vleugel-array",
       "lower_nacelle_bay": "Bakboord Vleugel-array"
     },
@@ -476,6 +1049,76 @@
           "notes": "De Dryaden zijn een fascinerende en unieke soort, gekenmerkt door hun hybride aard die eigenschappen van bomen en buitenaardse wezens combineert. Deze onderscheidende fysiologie stelt hen in staat te gedijen in diverse omgevingen en vaak op de flora om hen heen te lijken. Ze hebben een zwermachtige geest waarmee ze naadloos met elkaar kunnen communiceren. Dit collectieve bewustzijn bevordert een diepgaand gevoel van eenheid en samenwerking en stelt hen in staat als een coherente groep te opereren terwijl ze een ingewikkelde verbinding met de natuur onderhouden, en ze kunnen de gezondheid van hun omgeving voelen, waardoor ze uitzonderlijke hoedsters van de natuur zijn. Hun dieet is voornamelijk plantaardig en bestaat uit bladeren, vruchten en ander botanisch materiaal. Echter, ze vullen hun dieet af en toe aan met kleine hoeveelheden vlees, dat ze verkrijgen met grote zorg en respect voor het leven dat ze nemen. Naast hun fysieke eigenschappen staan de Dryaden bekend om hun speelse en guitige gedrag. Ze nemen vaak deel aan luchtige grappen of spelen, wat hun vrolijke geest weerspiegelt. Hun loyaliteit aan elkaar en aan hun thuisland is onwankelbaar en ze zullen fel hun gemeenschap en territorium beschermen wanneer bedreigd. Spiritueel hebben de Dryaden een diep geloof in een hiernamaals dat verweven is met de cycli van de natuur. Ze eren de natuurelementen (Aarde, Lucht, Vuur en Water) als goddelijke krachten en aanbidden ook hemelse lichamen zoals de zon en sterren, die ze beschouwen als leidende lichten in hun bestaan. Deze diepe verbinding met zowel de natuur als de kosmos vormt hun cultuur, rituelen en algehele levenswijze."
         }
       }
-    }
+    },
+    "back": "← TERUG",
+    "viewArrow": "BEKIJK →",
+    "selectCategory": "CATEGORIE KIEZEN",
+    "comingSoon": "BINNENKORT",
+    "specialistProfileDesc": "Specialistenprofiel — volledige stats en vaardigheden beschikbaar bij de lancering.",
+    "alliance": {
+      "rank": {
+        "leader": "Leider",
+        "coleader": "Co-leider",
+        "officer": "Officier",
+        "member": "Lid"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Afwezig"
+      },
+      "manage": {
+        "editInfo": "Alliantie-info bewerken",
+        "editInfoDesc": "Naam, tag en beschrijving wijzigen",
+        "joinRequests": "Verzoeken beheren",
+        "joinRequestsDesc": "Nieuwe leden beoordelen en accepteren",
+        "donationGoals": "Donatiedoelen instellen",
+        "donationGoalsDesc": "Wekelijkse donatiedoelen configureren",
+        "warSettings": "Oorlogsinstellingen",
+        "warSettingsDesc": "Oorlogsdeelnameregels configureren",
+        "kickMembers": "Leden verwijderen",
+        "kickMembersDesc": "Inactieve of regelovertredende leden verwijderen"
+      },
+      "allianceMail": {
+        "warResults": "Alliantieoorlogresultaten",
+        "strategyPlan": "Nieuw strategieplan",
+        "donationSummary": "Wekelijkse donatiesamenvatting",
+        "meeting1800": "Vergadering om 18:00",
+        "levelUp": "Alliantie gestegen!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Welkom bij HyperTek!",
+      "maintenance": "Melding serveronderhoud",
+      "allianceWar": "Aankondiging alliantieoorlog",
+      "galacticCup": "Registratie Galactic Cup",
+      "baseAttacked": "Uw basis werd aangevallen!",
+      "loginReward": "Dagelijkse inlogbeloning klaar",
+      "refiningEvent": "Verfijningsmeester-evenement begint",
+      "meeting1800": "Vergadering om 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Automatische vertaling AAN — Berichten geleverd in de taal van elke ontvanger",
+      "autoTranslateOff": "Automatische vertaling UIT"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Wie doet er mee aan de alliantieoorlog vanavond?",
+      "ggLastRace": "GG bij de laatste race, geweldige snelheid",
+      "tradingPlasma": "Ruil plasmastaaf voor techboeken",
+      "needHelpAsteroid": "Hulp nodig bij de asteroïdemissie",
+      "allianceRecruiting": "Onze alliantie recruteert, stuur me een bericht",
+      "donationGoalsPlasma": "Donatiedoelen: plasmastaaf nodig!",
+      "warStarts2Hours": "Oorlog begint over 2 uur, bereid je voor",
+      "handleMedicalSupport": "Ik neem de medische ondersteuning op me",
+      "wts50Engines": "TE KOOP: 50 motoren, stuur PB",
+      "wtbAntiGravity": "GEZOCHT: Anti-zwaartekrachtmodules x10",
+      "sellingRareSkins": "Verkoop zeldzame skins, bekijk profiel"
+    },
+    "devicePairing": "APPARAATKOPPELING",
+    "deviceOffline": "OFFLINE",
+    "pairing": "KOPPELEN...",
+    "unavailableNow": "MOMENTEEL NIET BESCHIKBAAR",
+    "pairDevice": "APPARAAT KOPPELEN",
+    "vrInteractionMode": "VR-interactiemodus · Binnenkort"
   }
 }

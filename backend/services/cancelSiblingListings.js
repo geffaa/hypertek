@@ -10,8 +10,8 @@
  */
 
 import MarketListing from "../Models/MarketListingModel.js";
-import Auction       from "../Models/AuctionModel.js";
-import Trade         from "../Models/TradeModel.js";
+import Auction from "../Models/AuctionModel.js";
+import Trade from "../Models/TradeModel.js";
 
 /**
  * @param {string} subCollectionId   The _id of the subCollection that was sold/deleted
@@ -64,6 +64,6 @@ export async function cancelSiblingListings(subCollectionId, { skipAuctionId, it
     }
   } catch (err) {
     // Non-blocking — log but do not re-throw
-    console.error("❌ [cancelSiblingListings] error:", err.message);
+    console.error(" [cancelSiblingListings] error:", err.message);
   }
 }

@@ -26,7 +26,7 @@ Three interconnected games built by Hyper Tek:
 
 - **Location:** Gaming section of the main website — route `/gaming`
 - **Previous state:** A short video plays saying "games aren't ready yet"
-- **Current state:** ✅ Full interactive UI installed and live at `/gaming`
+- **Current state:** Full interactive UI installed and live at `/gaming`
 - **Entry point:** "Games" button on site landing page → UI opens full screen (Navbar/Footer hidden)
 
 ---
@@ -37,41 +37,41 @@ Three interconnected games built by Hyper Tek:
 
 | Element | Detail | Status |
 |---|---|---|
-| Profile Avatar | Top-left, circular, sci-fi warrior helmet SVG (placeholder) | ✅ Built — swap with real photo when available |
-| RESOURCES button | Gray metallic button | ✅ Built |
-| E-CRYSTALS | Metallic button + GiCrystalBall icon + value 3.4M | ✅ Built (hardcoded) |
-| GOLD | Metallic button + GiGoldBar icon + value 1.3B | ✅ Built (hardcoded) |
-| DIAMONDS | Metallic button + GiDiamonds icon + value 613K | ✅ Built (hardcoded) |
-| H-BUCKS | Metallic button + GiBanknote icon + value 688K | ✅ Built (hardcoded) |
-| MARKETPLACE | Metallic button → navigates to `/market-place` | ✅ Built + wired |
-| WALLET | Metallic button → navigates to `/dashboard/withdraw` | ✅ Built + wired |
-| LOG OUT | Circle button top-right → clears token + navigates to `/` | ✅ Built + wired |
+| Profile Avatar | Top-left, circular, sci-fi warrior helmet SVG (placeholder) | Built — swap with real photo when available |
+| RESOURCES button | Gray metallic button | Built |
+| E-CRYSTALS | Metallic button + GiCrystalBall icon + value 3.4M | Built (hardcoded) |
+| GOLD | Metallic button + GiGoldBar icon + value 1.3B | Built (hardcoded) |
+| DIAMONDS | Metallic button + GiDiamonds icon + value 613K | Built (hardcoded) |
+| H-BUCKS | Metallic button + GiBanknote icon + value 688K | Built (hardcoded) |
+| MARKETPLACE | Metallic button → navigates to `/market-place` | Built + wired |
+| WALLET | Metallic button → navigates to `/dashboard/withdraw` | Built + wired |
+| LOG OUT | Circle button top-right → clears token + navigates to `/` | Built + wired |
 
 ### Left Side
 
 | Element | Detail | Status |
 |---|---|---|
-| MAP | Yellow-bordered button with wireframe mini-map SVG (outline, not solid). Shows zones (Racing/Quest/Overlord), connecting lines, blinking player dot. Click → opens World Map overlay | ✅ Built + functional |
-| FRIEND LIST | Vertical tab far-left edge. Click → opens Friends panel | ✅ Built + functional |
+| MAP | Yellow-bordered button with wireframe mini-map SVG (outline, not solid). Shows zones (Racing/Quest/Overlord), connecting lines, blinking player dot. Click → opens World Map overlay | Built + functional |
+| FRIEND LIST | Vertical tab far-left edge. Click → opens Friends panel | Built + functional |
 
 ### Right Side (stacked vertically)
 
 | Element | Detail | Status |
 |---|---|---|
-| EVENTS | Opens modal: list of active/upcoming events with countdown | ✅ Built + functional |
-| ITEMS | Opens modal: grid of items with rarity (Legendary/Epic/Rare/Common) | ✅ Built + functional |
-| SETTINGS | Opens modal: sound/music/graphics sliders + notification toggles | ✅ Built + functional |
-| ALLIANCE | Opens modal: Alliance info (IRON WOLVES) + member list with online status | ✅ Built + functional |
-| MAIL | Opens modal: inbox with unread/read state, click to read | ✅ Built + functional |
+| EVENTS | Opens modal: list of active/upcoming events with countdown | Built + functional |
+| ITEMS | Opens modal: grid of items with rarity (Legendary/Epic/Rare/Common) | Built + functional |
+| SETTINGS | Opens modal: sound/music/graphics sliders + notification toggles | Built + functional |
+| ALLIANCE | Opens modal: Alliance info (IRON WOLVES) + member list with online status | Built + functional |
+| MAIL | Opens modal: inbox with unread/read state, click to read | Built + functional |
 
 ### Bottom Bar
 
 | Element | Detail | Status |
 |---|---|---|
-| RACING | Green button → activates Racing panel + scene | ✅ Built + functional |
-| QUEST | Blue button → activates Quest panel + scene | ✅ Built + functional |
-| OVERLORD | Red button → activates Overlord panel + scene | ✅ Built + functional |
-| VIEW | Oval button (GiDragonHead icon) + "VIEW" text. Click → cycles view modes: OVERVIEW → FIRST PERSON → 3RD PERSON → BIRD'S EYE | ✅ Built + functional |
+| RACING | Green button → activates Racing panel + scene | Built + functional |
+| QUEST | Blue button → activates Quest panel + scene | Built + functional |
+| OVERLORD | Red button → activates Overlord panel + scene | Built + functional |
+| VIEW | Oval button (GiDragonHead icon) + "VIEW" text. Click → cycles view modes: OVERVIEW → FIRST PERSON → 3RD PERSON → BIRD'S EYE | Built + functional |
 
 ---
 
@@ -91,7 +91,7 @@ Three interconnected games built by Hyper Tek:
 | Center | TWO | Animated jungle scene (CSS) | Hyper Quest preview video |
 | Right | THREE | Animated star field + spaceships (CSS) | Overlord preview video |
 
-### Animation States — ✅ All implemented
+### Animation States — All implemented
 
 1. **Idle (all three equal)** — three panels balanced, animations loop
 2. **Racing selected** — left panel expands (clip-path transition 0.65s), Racing scene loads

@@ -7,8 +7,10 @@ function MarketplaceBanner({ stats = [], titleOverride, descOverride, playing = 
   const { t } = useTranslation();
   const { data: cms } = useSiteContent("marketplace_banner");
 
-  const heading = titleOverride || cms.heading     || t("marketplace.banner.defaultHeading");
-  const desc    = descOverride  || cms.description || t("marketplace.banner.defaultDesc");
+  const tHeading = t("marketplace.banner.defaultHeading", "");
+  const tDesc    = t("marketplace.banner.defaultDesc", "");
+  const heading  = titleOverride || (tHeading || cms.heading)     || "A New Era Dawns in Hyper Tek";
+  const desc     = descOverride  || (tDesc    || cms.description) || "";
 
   let bgImage = "/marketplace_banner.png";
   if (cms.background_image) {

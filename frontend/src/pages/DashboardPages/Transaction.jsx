@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import SearchImage from "../../assets/search.png";
 import { BACKEND_BASE_URL } from "../../Config";
 
-const TABS = [
-  { key: "all",      label: "All" },
-  { key: "sell",     label: "Sales History" },
-  { key: "buy",      label: "Purchases" },
-];
-
 function Transactions() {
+  const { t } = useTranslation();
+
+  const TABS = [
+    { key: "all",  label: t("dashboard.transactions.tabAll","All") },
+    { key: "sell", label: t("dashboard.transactions.tabSales","Sales History") },
+    { key: "buy",  label: t("dashboard.transactions.tabPurchases","Purchases") },
+  ];
   const { user, token } = useSelector((state) => state.auth);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading]           = useState(true);
@@ -64,7 +66,7 @@ function Transactions() {
       {/* Header */}
       <div className="w-full z-10 relative mb-6">
         <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white mb-4">
-          Transaction History
+          {t("dashboard.transactions.title","Transaction History")}
         </h1>
 
         {/* Tabs */}
@@ -99,7 +101,7 @@ function Transactions() {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by item, tx hash, wallet..."
+            placeholder={t("dashboard.transactions.searchPlaceholder","Search by item, tx hash, wallet...")}
             className="w-full bg-transparent border-none outline-none text-white font-inter font-medium text-[14px]"
           />
         </div>
@@ -108,18 +110,18 @@ function Transactions() {
       {/* List */}
       <div className="space-y-4 z-10 relative">
         {loading ? (
-          <p className="text-white/50 text-sm text-center py-12">Loading transactions...</p>
+          <p className="text-white/50 text-sm text-center py-12">{t("dashboard.transactions.loading","Loading transactions...")}</p>
         ) : !wallet ? (
-          <p className="text-white/50 text-sm text-center py-12">Connect your wallet to see your transaction history.</p>
+          <p className="text-white/50 text-sm text-center py-12">{t("dashboard.transactions.connectWallet","Connect your wallet to see your transaction history.")}</p>
         ) : filtered.length === 0 ? (
           <p className="text-white/50 text-sm text-center py-12">
             {searchTerm
-              ? `No transactions found matching "${searchTerm}"`
+              ? `${t("dashboard.transactions.noMatchFound","No transactions found matching")} "${searchTerm}"`
               : activeTab === "sell"
-              ? "No sales yet. Items you sell will appear here."
+              ? t("dashboard.transactions.noSales","No sales yet. Items you sell will appear here.")
               : activeTab === "buy"
-              ? "No purchases yet."
-              : "No transactions yet."}
+              ? t("dashboard.transactions.noPurchases","No purchases yet.")
+              : t("dashboard.transactions.noTransactions","No transactions yet.")}
           </p>
         ) : (
           filtered.map((tx, i) => (
@@ -134,7 +136,7 @@ function Transactions() {
                   style={{ width: "48px", height: "49px", background: tx.type === "buy" ? "#1a3a1a" : "#2a1a2a" }}
                 >
                   <p className="text-sm font-bold" style={{ color: tx.type === "buy" ? "#4ade80" : "#c084fc" }}>
-                    {tx.type === "buy" ? "BUY" : "SELL"}
+                    {tx.type === "buy" ? t("dashboard.transactions.typeBuy","BUY") : t("dashboard.transactions.typeSell","SELL")}
                   </p>
                 </div>
                 <div className="flex flex-col gap-1">
@@ -160,19 +162,19 @@ function Transactions() {
                 <p className="font-inter font-normal text-[12px] text-white/40 m-0 truncate">{tx.collectionName}</p>
                 {tx.type === "sell" && tx.buyer && (
                   <p className="font-inter font-normal text-[11px] text-white/30 m-0 truncate">
-                    Buyer: {shortWallet(tx.buyer)}
+                    {t("dashboard.transactions.buyer","Buyer:")} {shortWallet(tx.buyer)}
                   </p>
                 )}
                 {tx.type === "buy" && tx.seller && (
                   <p className="font-inter font-normal text-[11px] text-white/30 m-0 truncate">
-                    Seller: {shortWallet(tx.seller)}
+                    {t("dashboard.transactions.seller","Seller:")} {shortWallet(tx.seller)}
                   </p>
                 )}
               </div>
 
               {/* Right — price */}
               <div className="w-full md:w-auto flex justify-between md:block">
-                <span className="md:hidden text-white/50 text-[14px]">Amount:</span>
+                <span className="md:hidden text-white/50 text-[14px]">{t("dashboard.transactions.amount","Amount:")}</span>
                 <p className="font-inter font-normal text-[14px] text-white/70 m-0">
                   {tx.priceETH != null ? `${tx.priceETH} USDC` : "—"}
                 </p>

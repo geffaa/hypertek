@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Markedsplads",
     "searchPlaceholder": "Soeg...",
-
     "tabs": {
-      "overview":  "Oversigt",
-      "nfa101":    "NFA'er / NFC'er / NFT'er",
-      "general":   "Markedspladsen",
-      "auctions":  "Auktioner",
-      "trades":    "Handler",
-      "quests":    "Quests",
-      "hire":      "Til Leje",
-      "bounty":    "Dusørdoption"
+      "overview": "Oversigt",
+      "nfa101": "NFA'er / NFC'er / NFT'er",
+      "general": "Markedspladsen",
+      "auctions": "Auktioner",
+      "trades": "Handler",
+      "quests": "Quests",
+      "hire": "Til Leje",
+      "bounty": "Dusørdoption"
     },
-
     "banner": {
       "defaultHeading": "En Ny Aera Bryder Frem i Hyper Tek",
-      "defaultDesc": "Det er begyndelsen paa et levende, pustende univers, hvor enhver beslutning former rejsen.",
+      "defaultDesc": "Det er starten på et levende, åndende univers, hvor enhver beslutning former rejsen. Uanset om du kører med let hastighed, danner alliancer i Overlord Realm eller afslører hemmeligheder i HyperQuest, er dette din chance for at sætte dit præg på historien.",
       "stats": {
-        "totalItems":  "Samlet Antal Genstande",
-        "totalBuys":   "Samlet Antal Køb",
-        "listed":      "Listede",
+        "totalItems": "Samlet Antal Genstande",
+        "totalBuys": "Samlet Antal Køb",
+        "listed": "Listede",
         "collections": "Samlinger"
       },
-      "soundOn":  "Lyd Til",
+      "soundOn": "Lyd Til",
       "soundOff": "Lyd Fra"
     },
-
     "bottomBar": {
-      "learnLabel":     "Lær om NFA'er / NFC'er",
+      "learnLabel": "Lær om NFA'er / NFC'er",
       "educationPanel": "HyperTek Uddannelsespanel",
-      "footerNote":     "Dette panel er til hurtig reference. Besøg fanen NFA'er / NFC'er 101 for fuldt uddannelsesindhold.",
+      "footerNote": "Dette panel er til hurtig reference. Besøg fanen NFA'er / NFC'er 101 for fuldt uddannelsesindhold.",
       "facts": [
-        { "label": "NFA",        "desc": "Udelukkende Hypertek-aktiv. Højeste spilinterne bonusser. Garanteret minimum tilbagekøbsvaerdi, der vokser ved hvert salg." },
-        { "label": "NFC",        "desc": "Skabt af Hypertek eller licenserede spillere. Spilinterne bonusser inkluderet. Minimum tilbagekøb garanteret." },
-        { "label": "NFT",        "desc": "Spillerskabt samlerobjekt. Ingen spilinterne bonusser. Ingen tilbagekøbsgaranti. Kan handles paa markedspladsen." },
-        { "label": "Kommission", "desc": "20% platformgebyr paa alle salg. Saelger modtager 80%. Kunstnerroyalty 4% ved videresalg." },
-        { "label": "Tilbagekøbsvækst", "desc": "+5% af hvert videresalgspris tilføjes aktivets minimum tilbagekøbsvaerdi. Den vokser kun." },
-        { "label": "Depotpung", "desc": "HyperTek opretter automatisk en kryptopung til dig ved tilmelding." }
+        {
+          "label": "NFA",
+          "desc": "Udelukkende Hypertek-aktiv. Højeste spilinterne bonusser. Garanteret minimum tilbagekøbsvaerdi, der vokser ved hvert salg."
+        },
+        {
+          "label": "NFC",
+          "desc": "Skabt af Hypertek eller licenserede spillere. Spilinterne bonusser inkluderet. Minimum tilbagekøb garanteret."
+        },
+        {
+          "label": "NFT",
+          "desc": "Spillerskabt samlerobjekt. Ingen spilinterne bonusser. Ingen tilbagekøbsgaranti. Kan handles paa markedspladsen."
+        },
+        {
+          "label": "Kommission",
+          "desc": "20% platformgebyr paa alle salg. Saelger modtager 80%. Kunstnerroyalty 4% ved videresalg."
+        },
+        {
+          "label": "Tilbagekøbsvækst",
+          "desc": "+5% af hvert videresalgspris tilføjes aktivets minimum tilbagekøbsvaerdi. Den vokser kun."
+        },
+        {
+          "label": "Depotpung",
+          "desc": "HyperTek opretter automatisk en kryptopung til dig ved tilmelding."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Oversigt",
+      "heading": "Oversigt",
       "subtitle": "Velkommen til HyperTek Markedspladsen. Vaelg en funktion for at laere mere — og hop direkte ind.",
       "features": [
         {
-          "label":   "NFA'er / NFC'er / NFT'er",
+          "label": "NFA'er / NFC'er / NFT'er",
           "tagline": "Ny til Web3-aktiver? Start her",
           "details": [
             "NFA'er (Non-Fungible Assets) er Hypertek-udstedte genstande med en platform-garanteret tilbagekøbspris.",
@@ -56,7 +70,7 @@
           "cta": "Laer det Grundlaeggende"
         },
         {
-          "label":   "Markedspladsen",
+          "label": "Markedspladsen",
           "tagline": "Køb og saelg spilinterne aktiver øjeblikkeligt",
           "details": [
             "Gennemse et bredt katalog af NFA'er, NFC'er og NFT'er — skins, vaaben, specialister, rumskibe og mere.",
@@ -66,7 +80,7 @@
           "cta": "Gennemse Markedspladsen"
         },
         {
-          "label":   "Auktioner",
+          "label": "Auktioner",
           "tagline": "Konkurrér om eksklusive limited-edition genstande",
           "details": [
             "Byd paa sjældne aktiver, der kun er tilgaengelige via tidsbegnaesede auktioner.",
@@ -76,7 +90,7 @@
           "cta": "Se Auktioner"
         },
         {
-          "label":   "Handler",
+          "label": "Handler",
           "tagline": "Byt aktiver peer-to-peer, ingen mellemmand",
           "details": [
             "Foreslaag eller acceptér direkte aktivhandler med andre spillere — fuldt on-chain.",
@@ -86,7 +100,7 @@
           "cta": "Gennemse Handler"
         },
         {
-          "label":   "Quests",
+          "label": "Quests",
           "tagline": "Gennemfør missioner, tjen eksklusive belønninger",
           "details": [
             "Tag paa quests for at tjene eksklusive belønninger og sjeldne spilinterne aktiver.",
@@ -96,7 +110,7 @@
           "cta": "Udforsk Quests"
         },
         {
-          "label":   "Til Leje",
+          "label": "Til Leje",
           "tagline": "Laen aktiver eller tjen fra dine egne",
           "details": [
             "Lej magtfulde specialister eller udstyr til en enkelt mission uden at købe.",
@@ -106,7 +120,7 @@
           "cta": "Gennemse Til Leje"
         },
         {
-          "label":   "Dusørdoption",
+          "label": "Dusørdoption",
           "tagline": "Jagt maal, gør krav paa belønninger, topper ranglisten",
           "details": [
             "Acceptér dusører opslaaet af andre spillere eller systemet for at tjene kryptorealiserede belønninger.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "Generelt",
+      "heading": "Generelt",
       "subtitle": "Gennemse NFA'er, NFC'er og NFT'er tilgaengelige til øjeblikkelig køb — skins, vaaben, specialister, rumskibe og mere.",
       "filterAll": "Alle",
       "samplePreviewTitle": "Eksempel paa Markedspladsforhåndsvisning",
       "samplePreviewDesc": "Genstandene nedenfor er eksempel forhåndsvisninger, der viser typerne af digitale aktiver, som vil vaere tilgaengelige paa HyperTek markedspladsen. Faktiske genstande med unikt kunstvaerk og blockchain-verificeret ejerskab vil vaere tilgaengelige ved lancering.",
       "noItems": "Ingen genstande tilgaengelige endnu. Kom tilbage snart.",
       "categories": {
-        "skins":           "Skins",
-        "militaryBadges":  "Militærmaerker",
-        "specialists":     "Specialister",
-        "weapons":         "Vaaben",
-        "bodyArmour":      "Kropsrustning",
-        "spaceships":      "Rumskibe",
-        "racingVehicles":  "Køretøjer",
-        "artwork":         "Kunstvaerker",
-        "landAndBases":    "Land og Baser",
-        "general":         "Generelt"
-      }
+        "skins": "Skins",
+        "militaryBadges": "Militærmaerker",
+        "specialists": "Specialister",
+        "weapons": "Vaaben",
+        "bodyArmour": "Kropsrustning",
+        "spaceships": "Rumskibe",
+        "racingVehicles": "Køretøjer",
+        "artwork": "Kunstvaerker",
+        "landAndBases": "Land og Baser",
+        "general": "Generelt"
+      },
+      "search": "Søge...",
+      "filter": "Filter",
+      "showAll": "Vis alle",
+      "filterSort": "Filtrer og sorter",
+      "sortBy": "Sorter efter",
+      "sort": {
+        "default": "Misligholdelse",
+        "priceAsc": "Pris: Lav til høj",
+        "priceDesc": "Pris: Høj til lav",
+        "nameAsc": "Navn: A til Z",
+        "nameDesc": "Navn: Z til A"
+      },
+      "priceRange": "Prisinterval (USDC)",
+      "min": "Min",
+      "max": "Maks",
+      "apply": "Anvende",
+      "clearAll": "Ryd alle filtre",
+      "noResults": "Ingen resultater fundet",
+      "dummyContent": "Dummy indhold",
+      "preview": "Forhåndsvisning",
+      "buyNow": "Køb nu",
+      "viewDetails": "Se detaljer"
     },
-
     "nfa101": {
       "sectionLabel": "Uddannelse",
-      "heading":      "NFA'er / NFC'er / NFT'er 101",
-      "subtitle":     "Ny til NFT'er og Web3? Udforsk vores artikler for at forstaae blockchain-aktiver, punge, sikkerhed og HyperTek-økosystemet.",
-      "minRead":      "min laesning",
-      "filterAll":    "Alle"
+      "heading": "NFA'er / NFC'er / NFT'er 101",
+      "subtitle": "Ny til NFT'er og Web3? Udforsk vores artikler for at forstaae blockchain-aktiver, punge, sikkerhed og HyperTek-økosystemet.",
+      "minRead": "min laesning",
+      "filterAll": "Alle"
     },
-
     "auctions": {
-      "heading":        "Auktioner",
-      "listings":       "listninger",
-      "newAuction":     "Ny Auktion",
-      "noAuctions":     "Ingen {{filter}} auktioner",
-      "createFirst":    "Opret den første auktion",
-      "endingSoon":     "SLUTTER SNART",
-      "viewDetails":    "Se Detaljer",
+      "heading": "Auktioner",
+      "listings": "listninger",
+      "newAuction": "Ny Auktion",
+      "noAuctions": "Ingen {{filter}} auktioner",
+      "createFirst": "Opret den første auktion",
+      "endingSoon": "SLUTTER SNART",
+      "viewDetails": "Se Detaljer",
       "rules": {
-        "durations":    "Varighed: 1d · 3d · 7d",
+        "durations": "Varighed: 1d · 3d · 7d",
         "minIncrement": "Min. stigning: 5%",
-        "freeToList":   "Gratis at liste",
-        "commission":   "Kommission: 20% ved salg"
-      },
-      "preview": {
-        "title":   "Spilfunktionsforhåndsvisning",
-        "desc":    "Auktionssystemet vil vaere fuldt aktivt i spillet ved lancering. Genstande vist her er seeded eksempler til investor-/brugervisning."
-      },
-      "card": {
-        "currentBid": "Nuvaerende bud",
-        "endsIn":     "Slutter om",
-        "placeBid":   "Afgiv Bud",
-        "buyNow":     "Køb Nu",
-        "bids":       "bud",
-        "ended":      "AFSLUTTET"
-      },
-      "detail": {
-        "currentBid":  "Nuvaerende bud",
-        "start":       "Start",
-        "endsIn":      "Slutter om",
-        "description": "Beskrivelse",
-        "recentBids":  "Seneste Bud",
-        "anonymous":   "Anonym",
-        "placeBid":    "Afgiv Bud",
-        "buyNow":      "Køb Nu",
-        "buyNowLabel": "Køb Nu",
-        "bids":        "bud"
-      },
-      "bidModal": {
-        "title":          "Afgiv et Bud",
-        "currentBid":     "Nuvaerende bud",
-        "minimumBid":     "Minimumsbud",
-        "yourBid":        "Dit bud (USDC)",
-        "minIncrement":   "Min. stigning 5% · Naeste minimum efter dit bud: {{next}} USDC",
-        "reviewBid":      "Gennemse Bud",
-        "disclaimer":     "Vindende bud er bindende · 20% platformkommission",
-        "confirmTitle":   "Bekraeft Bud",
-        "item":           "Genstand",
-        "yourBidLabel":   "Dit bud",
-        "youPay":         "Hvis du vinder, betaler du",
-        "outbidNotice":   "Du vil straks blive underrettet, hvis nogen overbyder dig. Auktionen lukkes automatisk, naarr timeren udloeber.",
-        "back":           "Tilbage",
-        "confirm":        "Bekraeft — {{amount}} USDC",
-        "placing":        "Afgiver...",
-        "successTitle":   "Bud Afgivet!",
-        "highestBidder":  "Du er den højestbydende",
-        "outbidWarning":  "Du vil modtage en besked, hvis du overbydes.",
-        "done":           "Faerdig",
-        "endsIn":         "Slutter om"
-      },
-      "instantBuyModal": {
-        "title":         "Køb Nu — Øjeblikkeligt",
-        "buyNowPrice":   "Køb nu-pris",
-        "currentBids":   "Nuvaerende bud",
-        "notice":        "At købe nu afslutter auktionen øjeblikkeligt. Genstanden overføres til din pung og alle andre budgivere faar refunderet.",
-        "cancel":        "Annuller",
-        "processing":    "Behandler...",
-        "successTitle":  "Genstand Sikret!",
-        "auctionClosed": "Auktion lukket · Overførsel igangsat",
-        "item":          "Genstand",
-        "paid":          "Betalt",
-        "status":        "Status",
-        "transferred":   "Overført til pung",
-        "walletNote":    "Genstand vil vises i din Fane Mine Samlinger.",
-        "viewCollect":   "Se Mine Samlinger"
-      },
-      "createModal": {
-        "title":          "Opret Auktion",
-        "selectItem":     "Vaelg Genstand",
-        "connectWallet":  "Tilslut pung for at gennemse dine genstande",
-        "loadingItems":   "Indlaeser...",
-        "noItems":        "Ingen ejede genstande fundet",
-        "pricingDuration":"Prissaetning og Varighed",
-        "startPrice":     "Startpris (USDC) *",
-        "reservePrice":   "Reservepris (USDC)",
-        "instantBuyPrice":"Øjeblikkelig Købspris (USDC)",
-        "optional":       "Valgfrit",
-        "leaveBlank":     "Lad vaere tom for at deaktivere",
-        "duration":       "Varighed",
-        "dur1Day":        "1 Dag",
-        "dur3Days":       "3 Dage",
-        "dur7Days":       "7 Dage",
-        "freeToList":     "Gratis at liste · 20% kommission ved salg",
-        "creating":       "Opretter...",
-        "submit":         "Opret Auktion"
-      },
-      "pagination": {
-        "prev":  "Forrige",
-        "next":  "Naeste",
-        "page":  "Side {{page}} af {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "Handler",
-      "listings":   "listninger",
-      "postTrade":  "Opslaa Handel",
-      "noTrades":   "Ingen {{filter}} handler",
-      "viewDetails":"Se Detaljer",
-      "trade":      "handel",
-      "yours":      "din",
-      "offering":   "Tilbyder",
-      "wanting":    "Ønsker",
-      "makeOffer":  "Afgiv et tilbud",
-      "by":         "af",
-      "acceptTrade":"Acceptér Handel",
-      "cancelTrade":"Annuller Handel",
-      "rules": {
-        "expiry":    "Listninger udløber om 30 dage",
-        "fee":       "Platformgebyr gaelder for begge parter",
-        "noNFA":     "NFA'er kan ikke handles — kun saelges"
-      },
-      "acceptModal": {
-        "title":          "Handelsforslag",
-        "postedBy":       "Opslaaet af",
-        "exchangeDetails":"Udvekslingsdetaljer",
-        "theyOffer":      "De tilbyder",
-        "theyWant":       "De ønsker",
-        "feeNotice":      "Platformgebyr gaelder for begge parter",
-        "acceptBtn":      "Acceptér Denne Handel",
-        "confirmTitle":   "Bekraeft Handel",
-        "trade":          "Handel",
-        "postedByLabel":  "Opslaaet af",
-        "terms":          "Ved at acceptere accepterer du udvekslingsbetingelserne. Opretteren vil blive underrettet og skal bekraefte, inden genstande overføres.",
-        "back":           "Tilbage",
-        "sending":        "Sender...",
-        "confirm":        "Bekraeft",
-        "successTitle":   "Forslag Sendt!",
-        "notified":       "er blevet underrettet",
-        "successNote":    "Handelsopretter vil gennemse dit forslag og arrangere udvekslingen. Tjek dine notifikationer for deres svar.",
-        "expiry":         "Forslag udloeber om 30 dage, hvis de ikke bekraeftes.",
-        "close":          "Luk"
-      },
-      "createModal": {
-        "title":          "Opslaa en Handel",
-        "yourItem":       "Din Genstand",
-        "itemNamePlaceholder": "Genstandsnavn *",
-        "loadingItems":   "Indlaeser dine genstande...",
-        "connectWallet":  "Tilslut pung for at vaelge fra dine genstande",
-        "pickFromItems":  "Eller vaelg fra dine genstande (udfylder navn automatisk):",
-        "imageOptional":  "Billede (valgfrit)",
-        "whatYouWant":    "Hvad Du Ønsker",
-        "openOffer":      "Aabent tilbud — lad andre foreslaa",
-        "anyCategory":    "Enhver kategori",
-        "notesLabel":     "Noter (valgfrit)",
-        "notesPlaceholder":"Handelsbetingelser, tilstand osv.",
-        "disclaimer":     "Begge parter betaler platformgebyr · Udloeber om 30 dage · NFA'er kan ikke handles",
-        "posting":        "Opslaar...",
-        "submit":         "Opslaa Handel"
-      },
-      "pagination": {
-        "prev":  "Forrige",
-        "next":  "Naeste",
-        "page":  "Side {{page}} af {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Quest-opslagstavle",
-      "quests":        "quests",
-      "noQuests":      "Ingen {{filter}} quests",
-      "inGameFeature": "Spilfunktion",
-      "inGameDesc":    "Quests genereres automatisk, naarr saelgere vaelger en reduceret kommission. Spillere kan gennemføre op til 5 quests om dagen. Kommissionspuljen deles mellem køberrabatten, spillerbelønningen og platformen.",
-      "earnFromQuests":"Vil du tjene fra quests? Spil spillet →",
-      "moneyQuests":   "Pengequests (11% pulje)",
-      "resourceQuests":"Ressourcequests (20% pulje)",
-      "footerNote1":   "# Quests med kombinerede nyttelaster vil blive udbetalt med de separate tabelbeløb.",
-      "footerNote2":   "# Planetdata synkroniseres, naarr spillene gaar live.",
-      "inGame":        "I spillet",
-      "open":          "Aaben",
-      "table": {
-        "questingNo":    "Quest Nr.",
-        "pickupPlanet":  "Afhentningsplanet",
-        "dropOffPlanet": "Afleveringsplanet",
-        "itemGoods":     "Genstand / Varer",
-        "commSplit":     "Kommissionsopdeling",
-        "questingTime":  "Quest-tid",
-        "assignedTo":    "Tildelt Til"
-      },
-      "comingSoon": {
-        "title":   "Kommer Snart",
-        "desc":    "Quest-funktionen i spillet er i øjeblikket under udvikling. Følg med — du vil vaere i stand til at tjene belønninger direkte fra spillet.",
-        "gotIt":   "Forstaaet"
-      },
-      "pagination": {
-        "prev":  "Forrige",
-        "next":  "Naeste",
-        "page":  "Side {{page}} af {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "Til Leje",
-      "listings":         "listninger",
-      "listBtn":          "List",
-      "forHireLabel":     "Til Leje",
-      "wantingToHire":    "Ønsker at Leje",
-      "noListings":       "Ingen {{filter}} listninger",
-      "lockedTitle":      "HyperTek Gaming-indhold kun til visningsformaal.",
-      "lockedDesc":       "Dette afsnit er laast, indtil spillene er faerdiggjort.",
-      "forHireBadge":     "TIL LEJE",
-      "wantedBadge":      "ØNSKER AT LEJE",
-      "price":            "Pris",
-      "maxDuration":      "Maks. Varighed",
-      "hireBtn":          "Lej",
-      "fulfillBtn":       "Opfyld Anmodning",
-      "rules": {
-        "durations":   "8t · 1d · 3d · 1u · 1mn",
-        "cooldown":    "Afkøling: 2× lejevarighed",
-        "commission":  "Kommission: 20%",
-        "payment":     "Betal i Hyper Bucks eller Materialer"
+        "freeToList": "Gratis at liste",
+        "commission": "Kommission: 20% ved salg"
       },
       "preview": {
         "title": "Spilfunktionsforhåndsvisning",
-        "desc":  "Til-Leje-systemet vil vaere fuldt aktivt i spillet ved lancering. Genstande vist her er seeded eksempler til investor-/brugervisning."
+        "desc": "Auktionssystemet vil vaere fuldt aktivt i spillet ved lancering. Genstande vist her er seeded eksempler til investor-/brugervisning."
       },
-      "hireModal": {
-        "hireTitle":     "Lej Specialist",
-        "fulfillTitle":  "Opfyld Lejeanmodning",
-        "forHireBadge":  "TIL LEJE",
-        "wantedBadge":   "ØNSKET",
-        "price":         "Pris",
-        "duration":      "Varighed",
-        "howHire":       "Saaledes fungerer leje",
-        "howFulfill":    "Saaledes fungerer opfyldelse af en anmodning",
-        "proceedHire":   "Fortsaet til Leje",
-        "offerFulfill":  "Tilbyd at Opfylde",
-        "commission":    "20% platformkommission · Afkøling gaelder efter returnering",
-        "confirmHire":   "Bekraeft Leje",
-        "confirmOffer":  "Bekraeft Tilbud",
-        "specialist":    "Specialist",
-        "payment":       "Betaling",
-        "yourOffer":     "Dit tilbud",
-        "durationLabel": "Varighed",
-        "commLabel":     "Kommission",
-        "back":          "Tilbage",
-        "processing":    "Behandler...",
-        "sendOffer":     "Send Tilbud",
-        "deployedTitle": "Udrullet!",
-        "offerSentTitle":"Tilbud Sendt!",
-        "availableFor":  "Tilgaengelig i",
-        "paid":          "Betalt",
-        "returnNote":    "Returner inden perioden udloeber for at undgaa automatisk bøde. Afkøling paa {{hours}}t gaelder efter returnering.",
-        "close":         "Luk"
+      "card": {
+        "currentBid": "Nuvaerende bud",
+        "endsIn": "Slutter om",
+        "placeBid": "Afgiv Bud",
+        "buyNow": "Køb Nu",
+        "bids": "bud",
+        "ended": "AFSLUTTET"
+      },
+      "detail": {
+        "currentBid": "Nuvaerende bud",
+        "start": "Start",
+        "endsIn": "Slutter om",
+        "description": "Beskrivelse",
+        "recentBids": "Seneste Bud",
+        "anonymous": "Anonym",
+        "placeBid": "Afgiv Bud",
+        "buyNow": "Køb Nu",
+        "buyNowLabel": "Køb Nu",
+        "bids": "bud"
+      },
+      "bidModal": {
+        "title": "Afgiv et Bud",
+        "currentBid": "Nuvaerende bud",
+        "minimumBid": "Minimumsbud",
+        "yourBid": "Dit bud (USDC)",
+        "minIncrement": "Min. stigning 5% · Naeste minimum efter dit bud: {{next}} USDC",
+        "reviewBid": "Gennemse Bud",
+        "disclaimer": "Vindende bud er bindende · 20% platformkommission",
+        "confirmTitle": "Bekraeft Bud",
+        "item": "Genstand",
+        "yourBidLabel": "Dit bud",
+        "youPay": "Hvis du vinder, betaler du",
+        "outbidNotice": "Du vil straks blive underrettet, hvis nogen overbyder dig. Auktionen lukkes automatisk, naarr timeren udloeber.",
+        "back": "Tilbage",
+        "confirm": "Bekraeft — {{amount}} USDC",
+        "placing": "Afgiver...",
+        "successTitle": "Bud Afgivet!",
+        "highestBidder": "Du er den højestbydende",
+        "outbidWarning": "Du vil modtage en besked, hvis du overbydes.",
+        "done": "Faerdig",
+        "endsIn": "Slutter om"
+      },
+      "instantBuyModal": {
+        "title": "Køb Nu — Øjeblikkeligt",
+        "buyNowPrice": "Køb nu-pris",
+        "currentBids": "Nuvaerende bud",
+        "notice": "At købe nu afslutter auktionen øjeblikkeligt. Genstanden overføres til din pung og alle andre budgivere faar refunderet.",
+        "cancel": "Annuller",
+        "processing": "Behandler...",
+        "successTitle": "Genstand Sikret!",
+        "auctionClosed": "Auktion lukket · Overførsel igangsat",
+        "item": "Genstand",
+        "paid": "Betalt",
+        "status": "Status",
+        "transferred": "Overført til pung",
+        "walletNote": "Genstand vil vises i din Fane Mine Samlinger.",
+        "viewCollect": "Se Mine Samlinger"
       },
       "createModal": {
-        "listTitle":         "List Til Leje",
-        "postTitle":         "Opslaa Ønsker at Leje",
-        "forHireBtn":        "Til Leje",
-        "wantingBtn":        "Ønsker at Leje",
-        "itemNameHire":      "Specialist / genstandsnavn *",
-        "itemNameWant":      "Hvad du ønsker at leje *",
-        "descPlaceholder":   "Beskrivelse",
-        "categoryPlaceholder":"Kategori (valgfrit)",
-        "paymentType":       "Betalingstype",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "Materialer",
-        "amountLabel":       "Beløb (Hyper Bucks)",
-        "afterCommission":   "Du modtager {{amount}} HB efter 20% kommission",
-        "maxDuration":       "Maks. Varighed",
-        "disclaimer":        "20% kommission · Afkøling = 2× lejevarighed efter returnering",
-        "listing":           "Lister...",
-        "submit":            "Opret Listning"
+        "title": "Opret Auktion",
+        "selectItem": "Vaelg Genstand",
+        "connectWallet": "Tilslut pung for at gennemse dine genstande",
+        "loadingItems": "Indlaeser...",
+        "noItems": "Ingen ejede genstande fundet",
+        "pricingDuration": "Prissaetning og Varighed",
+        "startPrice": "Startpris (USDC) *",
+        "reservePrice": "Reservepris (USDC)",
+        "instantBuyPrice": "Øjeblikkelig Købspris (USDC)",
+        "optional": "Valgfrit",
+        "leaveBlank": "Lad vaere tom for at deaktivere",
+        "duration": "Varighed",
+        "dur1Day": "1 Dag",
+        "dur3Days": "3 Dage",
+        "dur7Days": "7 Dage",
+        "freeToList": "Gratis at liste · 20% kommission ved salg",
+        "creating": "Opretter...",
+        "submit": "Opret Auktion"
       },
       "pagination": {
-        "prev":  "Forrige",
-        "next":  "Naeste",
-        "page":  "Side {{page}} af {{pages}}"
+        "prev": "Forrige",
+        "next": "Naeste",
+        "page": "Side {{page}} af {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "Handler",
+      "listings": "listninger",
+      "postTrade": "Opslaa Handel",
+      "noTrades": "Ingen {{filter}} handler",
+      "viewDetails": "Se Detaljer",
+      "trade": "handel",
+      "yours": "din",
+      "offering": "Tilbyder",
+      "wanting": "Ønsker",
+      "makeOffer": "Afgiv et tilbud",
+      "by": "af",
+      "acceptTrade": "Acceptér Handel",
+      "cancelTrade": "Annuller Handel",
+      "rules": {
+        "expiry": "Listninger udløber om 30 dage",
+        "fee": "Platformgebyr gaelder for begge parter",
+        "noNFA": "NFA'er kan ikke handles — kun saelges"
+      },
+      "acceptModal": {
+        "title": "Handelsforslag",
+        "postedBy": "Opslaaet af",
+        "exchangeDetails": "Udvekslingsdetaljer",
+        "theyOffer": "De tilbyder",
+        "theyWant": "De ønsker",
+        "feeNotice": "Platformgebyr gaelder for begge parter",
+        "acceptBtn": "Acceptér Denne Handel",
+        "confirmTitle": "Bekraeft Handel",
+        "trade": "Handel",
+        "postedByLabel": "Opslaaet af",
+        "terms": "Ved at acceptere accepterer du udvekslingsbetingelserne. Opretteren vil blive underrettet og skal bekraefte, inden genstande overføres.",
+        "back": "Tilbage",
+        "sending": "Sender...",
+        "confirm": "Bekraeft",
+        "successTitle": "Forslag Sendt!",
+        "notified": "er blevet underrettet",
+        "successNote": "Handelsopretter vil gennemse dit forslag og arrangere udvekslingen. Tjek dine notifikationer for deres svar.",
+        "expiry": "Forslag udloeber om 30 dage, hvis de ikke bekraeftes.",
+        "close": "Luk"
+      },
+      "createModal": {
+        "title": "Opslaa en Handel",
+        "yourItem": "Din Genstand",
+        "itemNamePlaceholder": "Genstandsnavn *",
+        "loadingItems": "Indlaeser dine genstande...",
+        "connectWallet": "Tilslut pung for at vaelge fra dine genstande",
+        "pickFromItems": "Eller vaelg fra dine genstande (udfylder navn automatisk):",
+        "imageOptional": "Billede (valgfrit)",
+        "whatYouWant": "Hvad Du Ønsker",
+        "openOffer": "Aabent tilbud — lad andre foreslaa",
+        "anyCategory": "Enhver kategori",
+        "notesLabel": "Noter (valgfrit)",
+        "notesPlaceholder": "Handelsbetingelser, tilstand osv.",
+        "disclaimer": "Begge parter betaler platformgebyr · Udloeber om 30 dage · NFA'er kan ikke handles",
+        "posting": "Opslaar...",
+        "submit": "Opslaa Handel"
+      },
+      "pagination": {
+        "prev": "Forrige",
+        "next": "Naeste",
+        "page": "Side {{page}} af {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "Quest-opslagstavle",
+      "quests": "quests",
+      "noQuests": "Ingen {{filter}} quests",
+      "inGameFeature": "Spilfunktion",
+      "inGameDesc": "Quests genereres automatisk, naarr saelgere vaelger en reduceret kommission. Spillere kan gennemføre op til 5 quests om dagen. Kommissionspuljen deles mellem køberrabatten, spillerbelønningen og platformen.",
+      "earnFromQuests": "Vil du tjene fra quests? Spil spillet →",
+      "moneyQuests": "Pengequests (11% pulje)",
+      "resourceQuests": "Ressourcequests (20% pulje)",
+      "footerNote1": "# Quests med kombinerede nyttelaster vil blive udbetalt med de separate tabelbeløb.",
+      "footerNote2": "# Planetdata synkroniseres, naarr spillene gaar live.",
+      "inGame": "I spillet",
+      "open": "Aaben",
+      "table": {
+        "questingNo": "Quest Nr.",
+        "pickupPlanet": "Afhentningsplanet",
+        "dropOffPlanet": "Afleveringsplanet",
+        "itemGoods": "Genstand / Varer",
+        "commSplit": "Kommissionsopdeling",
+        "questingTime": "Quest-tid",
+        "assignedTo": "Tildelt Til"
+      },
+      "comingSoon": {
+        "title": "Kommer Snart",
+        "desc": "Quest-funktionen i spillet er i øjeblikket under udvikling. Følg med — du vil vaere i stand til at tjene belønninger direkte fra spillet.",
+        "gotIt": "Forstaaet"
+      },
+      "pagination": {
+        "prev": "Forrige",
+        "next": "Naeste",
+        "page": "Side {{page}} af {{pages}}"
+      },
+      "buyer": "Køber",
+      "player": "Spiller",
+      "platform": "Platform",
+      "status": {
+        "open": "Åben",
+        "accepted": "Accepteret",
+        "completed": "Fuldført",
+        "cancelled": "Annulleret"
+      },
+      "type": {
+        "money": "Penge",
+        "resources": "Ressourcer"
+      }
+    },
+    "hire": {
+      "heading": "Til Leje",
+      "listings": "listninger",
+      "listBtn": "List",
+      "forHireLabel": "Til Leje",
+      "wantingToHire": "Ønsker at Leje",
+      "noListings": "Ingen {{filter}} listninger",
+      "lockedTitle": "HyperTek Gaming-indhold kun til visningsformaal.",
+      "lockedDesc": "Dette afsnit er laast, indtil spillene er faerdiggjort.",
+      "forHireBadge": "TIL LEJE",
+      "wantedBadge": "ØNSKER AT LEJE",
+      "price": "Pris",
+      "maxDuration": "Maks. Varighed",
+      "hireBtn": "Lej",
+      "fulfillBtn": "Opfyld Anmodning",
+      "rules": {
+        "durations": "8t · 1d · 3d · 1u · 1mn",
+        "cooldown": "Afkøling: 2× lejevarighed",
+        "commission": "Kommission: 20%",
+        "payment": "Betal i Hyper Bucks eller Materialer"
+      },
+      "preview": {
+        "title": "Spilfunktionsforhåndsvisning",
+        "desc": "Til-Leje-systemet vil vaere fuldt aktivt i spillet ved lancering. Genstande vist her er seeded eksempler til investor-/brugervisning."
+      },
+      "hireModal": {
+        "hireTitle": "Lej Specialist",
+        "fulfillTitle": "Opfyld Lejeanmodning",
+        "forHireBadge": "TIL LEJE",
+        "wantedBadge": "ØNSKET",
+        "price": "Pris",
+        "duration": "Varighed",
+        "howHire": "Saaledes fungerer leje",
+        "howFulfill": "Saaledes fungerer opfyldelse af en anmodning",
+        "proceedHire": "Fortsaet til Leje",
+        "offerFulfill": "Tilbyd at Opfylde",
+        "commission": "20% platformkommission · Afkøling gaelder efter returnering",
+        "confirmHire": "Bekraeft Leje",
+        "confirmOffer": "Bekraeft Tilbud",
+        "specialist": "Specialist",
+        "payment": "Betaling",
+        "yourOffer": "Dit tilbud",
+        "durationLabel": "Varighed",
+        "commLabel": "Kommission",
+        "back": "Tilbage",
+        "processing": "Behandler...",
+        "sendOffer": "Send Tilbud",
+        "deployedTitle": "Udrullet!",
+        "offerSentTitle": "Tilbud Sendt!",
+        "availableFor": "Tilgaengelig i",
+        "paid": "Betalt",
+        "returnNote": "Returner inden perioden udloeber for at undgaa automatisk bøde. Afkøling paa {{hours}}t gaelder efter returnering.",
+        "close": "Luk"
+      },
+      "createModal": {
+        "listTitle": "List Til Leje",
+        "postTitle": "Opslaa Ønsker at Leje",
+        "forHireBtn": "Til Leje",
+        "wantingBtn": "Ønsker at Leje",
+        "itemNameHire": "Specialist / genstandsnavn *",
+        "itemNameWant": "Hvad du ønsker at leje *",
+        "descPlaceholder": "Beskrivelse",
+        "categoryPlaceholder": "Kategori (valgfrit)",
+        "paymentType": "Betalingstype",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materialer",
+        "amountLabel": "Beløb (Hyper Bucks)",
+        "afterCommission": "Du modtager {{amount}} HB efter 20% kommission",
+        "maxDuration": "Maks. Varighed",
+        "disclaimer": "20% kommission · Afkøling = 2× lejevarighed efter returnering",
+        "listing": "Lister...",
+        "submit": "Opret Listning"
+      },
+      "pagination": {
+        "prev": "Forrige",
+        "next": "Naeste",
+        "page": "Side {{page}} af {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "Dusøropslagstavle",
-      "contracts":     "kontrakt",
-      "contractsPlural":"kontrakter",
-      "noContracts":   "Ingen {{filter}} kontrakter",
-      "noContractsNote":"Dusører opslaaes af spiilspillere og spilsystemet",
-      "expiresIn":     "Udloeber om {{days}}d",
+      "heading": "Dusøropslagstavle",
+      "contracts": "kontrakt",
+      "contractsPlural": "kontrakter",
+      "noContracts": "Ingen {{filter}} kontrakter",
+      "noContractsNote": "Dusører opslaaes af spiilspillere og spilsystemet",
+      "expiresIn": "Udloeber om {{days}}d",
       "inGameNotice": {
         "title": "Spilfunktion — Kun Visning",
-        "desc":  "Dusører oprettes af spiilspillere og spilsystemet. Acceptering og gennemførelse af dusører sker kun i spillet. Dette board vises for gennemsigtighed og for at tilskynde nye spillere til at deltage."
+        "desc": "Dusører oprettes af spiilspillere og spilsystemet. Acceptering og gennemførelse af dusører sker kun i spillet. Dette board vises for gennemsigtighed og for at tilskynde nye spillere til at deltage."
       },
       "rules": {
-        "battle":     "Kamp løses automatisk i spillet",
+        "battle": "Kamp løses automatisk i spillet",
         "commission": "20% platformkommission paa belønning",
-        "expiry":     "Kontrakter udloeber om 30 dage"
+        "expiry": "Kontrakter udloeber om 30 dage"
       },
       "table": {
-        "bountyNo":   "Dusør Nr.",
-        "target":     "Maal (Ramt Paa)",
-        "reward":     "Belønning",
-        "postedBy":   "Opslaaet Af",
-        "claimedBy":  "Gjort Krav Paa Af",
-        "status":     "Status",
-        "netHB":      "{{amount}} HB netto"
+        "bountyNo": "Dusør Nr.",
+        "target": "Maal (Ramt Paa)",
+        "reward": "Belønning",
+        "postedBy": "Opslaaet Af",
+        "claimedBy": "Gjort Krav Paa Af",
+        "status": "Status",
+        "netHB": "{{amount}} HB netto"
       },
       "pagination": {
-        "prev":  "Forrige",
-        "next":  "Naeste",
-        "page":  "Side {{page}} af {{pages}}"
+        "prev": "Forrige",
+        "next": "Naeste",
+        "page": "Side {{page}} af {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "Forrige",
-      "next":           "Naeste",
-      "pageOf":         "Side {{page}} af {{pages}}",
-      "back":           "Tilbage",
-      "close":          "Luk",
-      "cancel":         "Annuller",
-      "loading":        "Indlaeser...",
-      "connectWallet":  "Tilslut din pung først",
-      "loginFirst":     "Log ind først"
+      "prev": "Forrige",
+      "next": "Naeste",
+      "pageOf": "Side {{page}} af {{pages}}",
+      "back": "Tilbage",
+      "close": "Luk",
+      "cancel": "Annuller",
+      "loading": "Indlaeser...",
+      "connectWallet": "Tilslut din pung først",
+      "loginFirst": "Log ind først"
     }
+  },
+  "musicPlayer": {
+    "title": "Musikafspiller",
+    "playing": "Afspilning",
+    "sound": "Lyd",
+    "ambientDesc": "Indbygget ambient soundtrack til markedspladsen. Spiller på loop.",
+    "playAmbient": "Play Ambient",
+    "pauseAmbient": "Pause Ambient",
+    "spotifyDesc": "Indsæt ethvert Spotify-nummer, afspilningsliste eller albumlink.",
+    "loadSpotify": "Indlæs Spotify",
+    "soundcloudDesc": "Indsæt et hvilket som helst SoundCloud-spor eller afspilningslistelink.",
+    "loadSoundCloud": "Indlæs SoundCloud",
+    "changeLink": "Skift link"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Betal med kort",
+      "amount": "Beløb:",
+      "cancel": "Ophæve",
+      "processing": "Forarbejdning...",
+      "pay": "Betale"
+    },
+    "nav": {
+      "backToMarketplace": "Tilbage til Marketplace",
+      "backToCollections": "Tilbage til Samlinger",
+      "offers": "Tilbud",
+      "marketplace": "Markedsplads",
+      "auction": "Auktion",
+      "trade": "Handle",
+      "detail": "{{type}} Detaljer",
+      "buy": "Køb {{type}}"
+    },
+    "marketplace": {
+      "listed": "Opført",
+      "youOwn": "Du ejer denne",
+      "notMinted": "Ikke præget endnu",
+      "ownedBy": "Ejes af",
+      "platform": "Platform",
+      "noDesc": "Ingen beskrivelse angivet for denne vare.",
+      "price": "Pris",
+      "minBuyback": "Min tilbagekøbsgaranti",
+      "reservePrice": "Reservepris",
+      "buybackNote": "Dette aktiv kan ikke sælges under dets mindste tilbagekøbsværdi.",
+      "networkNote": "USDC på basis · Base ETH påkrævet for gas (kun wallet-betalinger)",
+      "buyWithCard": "Køb med kort",
+      "makeOffer": "Giv et bud",
+      "processing": "Behandler...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "Køb nu",
+      "listNow": "Skriv nu",
+      "yourListed": "Din {{type}} (opført)",
+      "notAvailable": "Ikke tilgængelig"
+    },
+    "fundModal": {
+      "title": "Utilstrækkelig USDC",
+      "youNeed": "Du har brug for",
+      "butHave": "men din pung har kun",
+      "desc2": "Finansier din tegnebog med det samme med et kredit- eller betalingskort via Transak, og vend derefter tilbage for at gennemføre købet.",
+      "fundBtn": "Fund Wallet med kort (Transak)",
+      "cancel": "Ophæve"
+    },
+    "gasModal": {
+      "title": "ETH påkrævet for gas",
+      "mainnetNote": "Du er på Base Mainnet. Køb en lille mængde ETH (≈ $1–2) på Coinbase eller bridge fra Ethereum via bridge.base.org.",
+      "testnetNote": "Du er på Base Sepolia Testnet. Få gratis test ETH fra en vandhane.",
+      "faucetBtn": "Få Testnet ETH (hane)",
+      "bridgeBtn": "Bro ETH til base",
+      "close": "Tæt"
+    },
+    "confirmModal1": {
+      "title": "Bekræft handling",
+      "listPrice": "Listepris",
+      "platformFee": "Platformgebyr (10 %)",
+      "total": "Total",
+      "cancel": "Ophæve",
+      "continue": "Fortsætte"
+    },
+    "confirmModal2": {
+      "setPrice": "Indstil din noteringspris (USDC)",
+      "willList": "✓ Listes på {{price}} USDC",
+      "price": "Pris",
+      "cancel": "Ophæve",
+      "processing": "Forarbejdning...",
+      "confirm": "Bekræfte"
+    },
+    "offers": {
+      "noOffers": "Ingen tilbud endnu",
+      "offer": "tilbud",
+      "offers": "tilbud",
+      "noOffersTitle": "Ingen tilbud lige nu",
+      "noOffersDesc": "Vær den første til at give et tilbud",
+      "colPrice": "Pris",
+      "colStatus": "Status",
+      "colFrom": "Fra",
+      "colExpires": "Udløber",
+      "colAction": "Handling",
+      "accept": "Acceptere",
+      "reject": "Afvise",
+      "cancel": "Ophæve",
+      "expired": "Udløbet",
+      "completePurchase": "Komplet køb"
+    },
+    "auction": {
+      "loading": "Indlæser auktionsdata...",
+      "active": "Aktiv auktion",
+      "startPrice": "Startpris",
+      "currentBid": "Aktuelt bud",
+      "noBids": "Ingen bud endnu",
+      "instantBuy": "Øjeblikkeligt køb",
+      "reservePrice": "Reservepris",
+      "bidHistory": "Budhistorik",
+      "minBid": "Minimum bud:",
+      "bidding": "Byder...",
+      "placeBid": "Afgiv bud",
+      "connectWallet": "Tilslut din tegnebog for at afgive et bud",
+      "ownerNote": "Din vare er opført på auktion. Bud vises her, efterhånden som de kommer ind.",
+      "noAuction": "Ingen aktiv auktion for denne vare",
+      "ownerSetup": "Gå til dine samlinger, og klik på Liste for at oprette en auktion.",
+      "notAvailable": "Denne vare har ingen åben auktion i øjeblikket."
+    },
+    "trade": {
+      "loading": "Indlæser handelsfortegnelser...",
+      "active": "aktiv handelsnotering",
+      "actives": "aktive handelslister",
+      "offering": "Tilbud",
+      "wants": "Ønsker",
+      "openOffer": "Åbent tilbud",
+      "by": "Ved",
+      "proposeTrade": "Foreslå handel →",
+      "noTrades": "Ingen aktive handelsfortegnelser",
+      "ownerSetup": "Gå til dine samlinger og klik på Liste for at oprette en handel.",
+      "notAvailable": "Ejeren har ingen åbne handelslister for denne vare."
+    },
+    "successModal": {
+      "title": "Købet lykkedes!",
+      "desc": "{{name}} er blevet købt. Din NFT vil snart blive overført til din tegnebog.",
+      "note": "Overførsel behandles automatisk via vores system.",
+      "viewProfile": "Se i min profil",
+      "continueShopping": "Fortsæt med at handle"
+    },
+    "transferFailed": {
+      "title": "Betaling modtaget — Overførsel afventer",
+      "desc": "Din betaling blev gennemført, men der opstod et problem med NFT-overførslen. Dine penge er sikre - vores team vil fuldføre overførslen manuelt.",
+      "viewProfile": "Se min profil",
+      "dismiss": "Afskedige"
+    },
+    "priceHistory": {
+      "title": "Prishistorik",
+      "subtitle": "Historiske udsalgspriser NFT",
+      "loading": "Indlæser...",
+      "noSales": "Ingen salg registreret endnu",
+      "noSalesNote": "Prishistorik vises efter det første salg"
+    }
+  },
+  "makeOffer": {
+    "back": "Tilbage",
+    "floor": "Etage",
+    "title": "Giv et tilbud",
+    "yourOffer": "Dit tilbud (USDC)",
+    "expiresIn": "Tilbuddet udløber om",
+    "youPay": "Du betaler",
+    "submitting": "Indsender...",
+    "submit": "Indsend tilbud",
+    "terms": "Ved at indsende dette tilbud accepterer du Hyper Teks Servicevilkår.",
+    "expiry": {
+      "6h": "6 timer",
+      "12h": "12 timer",
+      "1d": "1 dag",
+      "3d": "3 dage",
+      "7d": "7 dage",
+      "1mo": "1 måned"
+    },
+    "success": {
+      "title": "Tilbud indsendt!",
+      "desc": "Dit tilbud på {{price}} USDC for {{name}} er blevet sendt til ejeren.",
+      "expires": "Udløber om {{duration}}",
+      "backToNft": "Tilbage til NFT",
+      "goToMarketplace": "Gå til Marketplace"
+    },
+    "error": {
+      "loginRequired": "Log venligst ind for at give et tilbud",
+      "submitFailed": "Kunne ikke afgive tilbud. Prøv venligst igen."
+    }
+  },
+  "paymentError": {
+    "message": "Din anmodning lykkedes ikke",
+    "goHome": "Gå hjem"
   }
 }

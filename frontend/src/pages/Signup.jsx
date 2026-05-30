@@ -6,13 +6,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
-import { ethers } from "ethers";
 import { BACKEND_BASE_URL } from "../Config";
 import FullScreenLoader from "../Components/Common/Spinner";
 import AuthLayout from "../Components/Common/AuthLayout";
 import { useTranslation } from "react-i18next";
-
-import symbol from "../assets/images/login/Symbol.svg.png";
 
 function Signup() {
   const dispatch = useDispatch();
@@ -93,34 +90,6 @@ function Signup() {
       setLoading(false);
     }
   };
-
-  // MetaMask
-  const handleMetaMask = async () => {
-    setLoading(true);
-    try {
-      if (!window.ethereum) { toast.error("MetaMask is not installed!"); return; }
-      try { await window.ethereum.request({ method: "wallet_revokePermissions", params: [{ eth_accounts: {} }] }); } catch {}
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      const address = accounts[0];
-      const message = `Login to MyApp - ${Date.now()}`;
-      setTimeout(() => toast.info("Check for MetaMask popup!", { duration: 10000 }), 1000);
-      const signature = await Promise.race([
-        window.ethereum.request({ method: "personal_sign", params: [ethers.hexlify(ethers.toUtf8Bytes(message)), address] }),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Signature timeout")), 20000)),
-      ]);
-      const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/user/MetaMask`, { address: address.toLowerCase(), signature, message }, { headers: { "Content-Type": "application/json" } });
-      dispatch(loginSuccess({ user: res.data.user, token: res.data.token, isLoggedInUser: true }));
-      localStorage.setItem("token", res.data.token);
-      toast.success("MetaMask Signup successful!");
-      navigate("/profile");
-    } catch (err) {
-      if (err.code === 4001) toast.error("Signature cancelled.");
-      else toast.error(err.response?.data?.message || err.message || "MetaMask error occurred.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
 
   return (
     <AuthLayout>
@@ -295,34 +264,6 @@ function Signup() {
         </Link>
       </p>
 
-      {/* Divider */}
-      <div className="flex items-center gap-3 my-6">
-        <div className="flex-1 h-px bg-white/10" />
-        <span className="text-white/40 text-xs">{t("auth.orContinueWith")}</span>
-        <div className="flex-1 h-px bg-white/10" />
-      </div>
-
-      {/* OAuth buttons */}
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          onClick={handleMetaMask}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all"
-          data-tooltip="MetaMask"
-        >
-          <img src={symbol} alt="MetaMask" className="w-5 h-5" />
-        </button>
-        {/* Google & Discord — coming soon
-        <button type="button" onClick={() => loginWithGoogle()} title="Google"
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
-          <img src={google} alt="Google" className="w-5 h-5" />
-        </button>
-        <button type="button" onClick={() => (window.location.href = discordAuthUrl)} title="Discord"
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 transition-all">
-          <img src={discard} alt="Discord" className="w-5 h-5" />
-        </button>
-        */}
-      </div>
     </AuthLayout>
   );
 }

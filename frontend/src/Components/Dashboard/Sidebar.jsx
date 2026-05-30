@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FiX, FiFileText, FiZap, FiPlusSquare, FiMessageSquare, FiPlusCircle } from "react-icons/fi";
 
 import Logo from "../../assets/logo-t-white.png";
@@ -10,6 +11,7 @@ import SupportImage from "../../assets/images/Sidebar/support.png";
 import LogoutImage from "../../assets/images/Sidebar/logout.png";
 
 const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState("");
 
@@ -67,13 +69,13 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 to="/Profile"
                 className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/90 transition-colors"
               >
-                ← Back to My Profile
+                {t("dashboard.sidebar.backToProfile","← Back to My Profile")}
               </Link>
               <Link
                 to="/"
                 className="flex items-center gap-1.5 text-xs text-white/50 hover:text-white/90 transition-colors"
               >
-                ← Back to Website
+                {t("dashboard.sidebar.backToWebsite","← Back to Website")}
               </Link>
             </div>
             <button
@@ -102,7 +104,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                     <img src={CreateCollection1} alt="" className="w-[9.17px] h-[9.17px] absolute top-[30%] left-[70%] transform -translate-x-1/2 -translate-y-1/2" />
                   </div>
                   <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-                    Create NFT/NFC
+                    {t("dashboard.sidebar.createNFT","Create NFT/NFC")}
                   </h1>
                 </div>
                 <FiPlusSquare className="text-white/40 w-3 h-3 flex-shrink-0" />
@@ -121,7 +123,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
                 <div className="flex items-center">
                   <img src={CollectionImage} alt="" className="w-[22px] h-[22px]" />
                   <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-                    My Collections
+                    {t("dashboard.sidebar.myCollections","My Collections")}
                   </h1>
                 </div>
               </li>
@@ -136,7 +138,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiFileText className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  Transactions
+                  {t("dashboard.sidebar.transactions","Transactions")}
                 </h1>
               </li>
             </Link>
@@ -150,24 +152,10 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiMessageSquare className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  Offers
+                  {t("dashboard.sidebar.offers","Offers")}
                 </h1>
               </li>
             </Link>
-
-            {/* My Listings — hidden, page kept for reference */}
-            {/* <Link to="/dashboard/collection-on-sale" className="w-full max-w-[222px]">
-              <li
-                className={`flex items-center px-3 mt-3 cursor-pointer rounded-md ${selectedItem === "listings" ? "bg-[#002AA8]" : "hover:bg-white/5"}`}
-                style={{ width: "100%", height: "42px" }}
-                onClick={() => handleItemClick("listings")}
-              >
-                <FiTag className="text-white w-[20px] h-[20px] flex-shrink-0" />
-                <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  My Listings
-                </h1>
-              </li>
-            </Link> */}
 
             {/* HyperBucks */}
             <Link to="/dashboard/topup" className="w-full max-w-[222px]">
@@ -178,7 +166,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiZap className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  HyperBucks
+                  {t("dashboard.sidebar.hyperBucks","HyperBucks")}
                 </h1>
               </li>
             </Link>
@@ -192,7 +180,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <FiPlusCircle className="text-white w-[20px] h-[20px] flex-shrink-0" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px" }}>
-                  Earnings
+                  {t("dashboard.sidebar.earnings","Earnings")}
                 </h1>
               </li>
             </Link>
@@ -206,7 +194,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
               >
                 <img src={SupportImage} alt="" className="w-[22px] h-[22px]" />
                 <h1 className="text-white font-bold ml-3" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-                  Support
+                  {t("dashboard.sidebar.support","Support")}
                 </h1>
               </li>
             </Link>
@@ -221,7 +209,7 @@ const Sidebar = ({ isOpen, onClose, onLogoutClick }) => {
           <div className="flex items-center">
             <img src={LogoutImage} alt="" className="w-[22px] h-[22px]" />
             <h1 className="text-white font-bold ml-1" style={{ fontFamily: "Inter, sans-serif", fontWeight: 700, fontSize: "14px", lineHeight: "17px" }}>
-              Sign Out
+              {t("dashboard.sidebar.signOut","Sign Out")}
             </h1>
           </div>
         </button>

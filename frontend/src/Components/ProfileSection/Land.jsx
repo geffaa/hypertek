@@ -92,7 +92,7 @@ function Land() {
           const subOwner = subNft.owner?.toLowerCase();
           const walletLower = connectedWallet?.toLowerCase();
 
-          // ✅ Must belong to current wallet AND not listed
+          // Must belong to current wallet AND not listed
           return subOwner === walletLower && !subNft.listed;
         });
 
@@ -123,7 +123,7 @@ function Land() {
       }
     });
 
-    console.log("✅ Characters NFTs extracted:", extracted.length);
+    console.log("Characters NFTs extracted:", extracted.length);
     return extracted;
   };
   /* ================= PROFILE ================= */
@@ -213,13 +213,13 @@ function Land() {
       console.log("📦 NFTs Array:", res.data?.nfts);
 
       if (res.data?.success) {
-        console.log("✅ Success! Setting marketData with:", res.data.nfts);
+        console.log("Success! Setting marketData with:", res.data.nfts);
         setMarketData(res.data.nfts);
       } else {
         console.log("⚠️ Response success is false");
       }
     } catch (err) {
-      console.error("❌ Error fetching NFTs:", err);
+      console.error(" Error fetching NFTs:", err);
       console.error("Error details:", err.response?.data);
       toast.error("Failed to load NFTs");
     } finally {
@@ -327,7 +327,7 @@ function Land() {
         return null;
       }
     } catch (err) {
-      console.error("❌ Mint error:", err.response?.data || err);
+      console.error(" Mint error:", err.response?.data || err);
       return null;
     }
   };
@@ -475,7 +475,7 @@ function Land() {
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      toast.success(`✅ Listed! Token #${tokenId} @ ${selectedItem?.priceETH || 0.5} USDC`, {
+      toast.success(`Listed! Token #${tokenId} @ ${selectedItem?.priceETH || 0.5} USDC`, {
         id: toastId,
         duration: 5000,
       });
@@ -491,7 +491,7 @@ function Land() {
 
       setShowListModal(false);
     } catch (err) {
-      console.error("❌ Listing error:", err);
+      console.error(" Listing error:", err);
       let msg = "Listing failed";
       if (err.message?.includes("insufficient funds"))
         msg = "⛽ Add Immutable ETH";
@@ -530,7 +530,7 @@ function Land() {
 
           {/* ================= NAV ================= */}
           <div className="mt-6 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-            <NavLinks onSelectCategory={() => {}} selectedCategory="" />
+            <NavLinks onSelectCategory={() => { }} selectedCategory="" />
           </div>
 
           {/* ================= NFT CARDS ================= */}

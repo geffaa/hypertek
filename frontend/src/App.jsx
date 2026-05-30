@@ -124,7 +124,7 @@ function AppWrapper() {
 
   if (loading) return <Loading />;
 
-  // ✅ Routes where Navbar & Footer should be hidden
+  // Routes where Navbar & Footer should be hidden
   const hideLayoutRoutes = [
     "/waitlist",
     "/join-waitlist",

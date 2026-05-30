@@ -16,7 +16,7 @@ async function uploadToCloudinary(filePath) {
     });
     return result.secure_url;
   } finally {
-    fs.unlink(filePath, () => {});
+    fs.unlink(filePath, () => { });
   }
 }
 
@@ -33,17 +33,17 @@ function deleteFromCloudinary(imageUrl) {
     const startIndex = afterUpload[0]?.match(/^v\d+$/) ? 1 : 0;
     const publicIdWithExt = afterUpload.slice(startIndex).join("/");
     const publicId = publicIdWithExt.replace(/\.[^/.]+$/, "");
-    getCloudinary().uploader.destroy(publicId, () => {});
-  } catch (_) {}
+    getCloudinary().uploader.destroy(publicId, () => { });
+  } catch (_) { }
 }
 
-// ✅ CREATE NEWS
+// CREATE NEWS
 export const createNews = async (req, res) => {
   try {
     const { heading, description } = req.body;
 
     if (!heading || !description || !req.file) {
-      if (req.file) fs.unlink(req.file.path, () => {});
+      if (req.file) fs.unlink(req.file.path, () => { });
       return res.status(400).json({
         success: false,
         message: "Heading, description & image are required",
@@ -79,7 +79,7 @@ export const createNews = async (req, res) => {
   }
 };
 
-// ✅ GET ONLY ACTIVE NEWS (FOR WEBSITE)
+// GET ONLY ACTIVE NEWS (FOR WEBSITE)
 export const getAllNews = async (req, res) => {
   try {
     const news = await News.find({ status: "active" }).sort({ createdAt: -1 });
@@ -89,7 +89,7 @@ export const getAllNews = async (req, res) => {
   }
 };
 
-// ✅ GET ALL NEWS (ALL STATUS) - FOR ADMIN OR FULL LIST
+// GET ALL NEWS (ALL STATUS) - FOR ADMIN OR FULL LIST
 export const getAllNewsAdminOrAll = async (req, res) => {
   try {
     const news = await News.find().sort({ createdAt: -1 });
@@ -100,7 +100,7 @@ export const getAllNewsAdminOrAll = async (req, res) => {
   }
 };
 
-// ✅ GET ALL NEWS (FOR ADMIN PANEL)
+// GET ALL NEWS (FOR ADMIN PANEL)
 export const getAllNewsForAdmin = async (req, res) => {
   try {
     const news = await News.find().sort({ createdAt: -1 });
@@ -110,14 +110,14 @@ export const getAllNewsForAdmin = async (req, res) => {
   }
 };
 
-// ✅ UPDATE NEWS CONTENT (EDIT)
+// UPDATE NEWS CONTENT (EDIT)
 export const editNews = async (req, res) => {
   try {
     const { heading, description } = req.body;
     const news = await News.findById(req.params.id);
 
     if (!news) {
-      if (req.file) fs.unlink(req.file.path, () => {});
+      if (req.file) fs.unlink(req.file.path, () => { });
       return res.status(404).json({ success: false, message: "News not found" });
     }
 
@@ -152,12 +152,12 @@ export const editNews = async (req, res) => {
     });
   } catch (error) {
     console.error("Edit News Error:", error?.message || error);
-    if (req.file?.path) fs.unlink(req.file.path, () => {});
+    if (req.file?.path) fs.unlink(req.file.path, () => { });
     res.status(500).json({ success: false, message: error?.message || "Server error" });
   }
 };
 
-// ✅ UPDATE STATUS (ACTIVE / INACTIVE)
+// UPDATE STATUS (ACTIVE / INACTIVE)
 export const updateNewsStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -177,7 +177,7 @@ export const updateNewsStatus = async (req, res) => {
   }
 };
 
-// ✅ DELETE NEWS
+// DELETE NEWS
 export const deleteNews = async (req, res) => {
   try {
     const news = await News.findById(req.params.id);

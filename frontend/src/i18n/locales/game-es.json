@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Bienvenido a",
+    "back": "Atrás",
+    "racing": {
+      "label": "CARRERAS",
+      "heading": "Hiper carreras",
+      "subtitle": "La experiencia de carreras de vehículos voladores más intensa de la galaxia,\ndonde la habilidad vale la pena y se hacen campeones.",
+      "intro": [
+        "Hyper Racing es un juego de carreras competitivo de alto octanaje ambientado en mundos alienígenas, donde los jugadores construyen, mejoran y pilotean vehículos de carreras voladores totalmente personalizables a través de algunos de los circuitos más peligrosos de la galaxia. Desde formaciones rocosas flotantes y tubos de lava volcánica hasta desiertos y pasos de montaña, cada carrera es una prueba de preparación, reflejos y estrategia.",
+        "Pero Hyper Racing es más que un simple juego; Es una plataforma competitiva donde están en juego recompensas reales. Los mejores jugadores pueden participar en eventos y torneos clasificados con premios en efectivo reales. Cuanto mejor compitas, más ganarás. Ya sea que estés persiguiendo la gloria en la clasificación o construyendo un imperio de carreras, todo lo que hagas en Hyper Racing te hará avanzar.",
+        "Mejora tus vehículos de carreras desde el morro hasta la cola. Recluta y sube de nivel a tu equipo de boxes. Contrata a un jefe de boxes que coincida con tu filosofía de carrera. Luego lleva tus habilidades más allá de la pista, tu garaje de carreras también funciona como el hangar de tu nave espacial personal, y cada habilidad que desarrolles se trasladará al combate espacial en Hyper Quest y Overlord of the 7 Realms."
+      ],
+      "introClose": "Sigue leyendo para descubrir cómo funciona el juego, qué puedes ganar y cómo tu carrera como piloto impulsa todo un universo de progresión.",
+      "calloutLine1": "Carrera para ganar. Gane para actualizar.",
+      "calloutLine2": "Mejora para dominar.",
+      "howItWorksTitle": "Cómo funciona Hyper Racing",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Elige tu vehículo",
+          "body": "Cada carrera comienza en tu garaje. Elija entre una lista cada vez mayor de vehículos de carreras voladoras, cada uno con características de manejo únicas y potencial de mejora. Desmonta el casco para alcanzar una velocidad vertiginosa en línea recta o blindalo para sobrevivir a las condiciones más brutales. Propulsores, estabilizadores, escudos, sistemas de refrigeración, aletas aerodinámicas, el árbol de mejoras es profundo y cada modificación cambia el comportamiento de tu nave en la pista."
+        },
+        {
+          "num": "02",
+          "title": "Construye tu equipo",
+          "body": "Las carreras son un deporte de equipo. Reclute especialistas en equipos de boxes que brinden bonificaciones únicas, reabastecimiento de combustible más rápido, diagnósticos en tiempo real, reparaciones de emergencia del casco a mitad de carrera y ajustes de rendimiento entre vueltas. Cada miembro de la tripulación sube de nivel con experiencia, acumulando poderosas habilidades además de las mejoras de tu vehículo. Luego, contrate a un gerente de boxes para coordinar las operaciones, definir la estrategia de carrera y desbloquear mejoras en el rendimiento de todo el equipo que se combinan durante una temporada completa."
+        },
+        {
+          "num": "03",
+          "title": "Carrera a través de mundos",
+          "body": "Los circuitos abarcan planetas alienígenas con terrenos y peligros atmosféricos tremendamente diferentes. Atraviesa formaciones rocosas flotantes al estilo Avatar, atraviesa tubos de lava volcánica a una velocidad vertiginosa, recorre interminables llanuras desérticas y excava a través de traicioneras cadenas montañosas. Lluvia ácida, atmósferas radiactivas, gravedad cambiante y vientos turbulentos: no hay dos carreras que exijan la misma configuración. Ajustar tu vehículo para adaptarlo a cada entorno es donde la estrategia se une a la habilidad."
+        },
+        {
+          "num": "04",
+          "title": "Subir de rango",
+          "body": "La victoria otorga puntos de líder, desbloquea nuevos circuitos en mundos distantes y abre la puerta a competencias de nivel superior. Cuanto más profundices, más feroces serán los oponentes y mayores serán los riesgos. Ponte a prueba en todos los planetas y asciende en las clasificaciones globales."
+        }
+      ],
+      "rewardsTitle": "Gana en grande; ¡Recompensas que importan!",
+      "rewards": [
+        {
+          "title": "Recompensas en el juego",
+          "body": "Cada carrera que termines te recompensará. Gana y las recompensas se multiplican. Las victorias en las carreras desbloquean componentes premium de vehículos, materiales de mejora poco comunes, fichas exclusivas de reclutamiento de tripulación y créditos para financiar tu próxima construcción. Vende vehículos mejorados para obtener ganancias, reinvierte en máquinas nuevas y observa cómo crece tu imperio de carreras con cada podio."
+        },
+        {
+          "title": "Eventos en efectivo real",
+          "body": "Hyper Racing lleva la competencia al siguiente nivel con eventos clasificados y torneos donde hay dinero real en juego. Participa en competiciones basadas en habilidades, demuestra tu habilidad contra los mejores pilotos de la galaxia y consigue pagos en efectivo reales. Cuanto más alto ocupes, mayor será el premio acumulado. Desde desafíos clasificados semanales hasta eventos de campeonato de temporada, siempre hay oportunidades para que los mejores jugadores conviertan sus habilidades de carrera en ganancias reales."
+        },
+        {
+          "title": "Cómo funcionan los eventos de premios",
+          "body": "Los jugadores se clasifican a través del juego clasificado, alcanzando los umbrales de rendimiento que otorgan entrada a torneos con premios en efectivo. Los eventos se estructuran en torno a un emparejamiento justo, lo que garantiza que cada competidor se enfrente a oponentes de habilidades similares. Las tarifas de inscripción son transparentes, los premios acumulados se muestran claramente antes de comprometerse y los pagos se procesan rápidamente una vez que concluye cada evento. Es competitivo, justo y las recompensas son reales."
+        },
+        {
+          "title": "Progresión más allá de la pista",
+          "body": "Las recompensas obtenidas a través de las carreras se incorporan directamente a tu progresión más amplia. Mejora tus vehículos de carrera, fortalece tu equipo de boxes y canaliza las ganancias para mejorar tu nave espacial principal. Tu garaje de carreras es el hangar de esa nave, por lo que cada mejora en tu operación de carreras también potencia la nave con la que vuelas entre mundos y al combate espacial en Hyper Quest y Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Dos máquinas, una misión... Actualízalo todo",
+      "upgrades": [
+        {
+          "title": "Mejoras de vehículos de carreras",
+          "body": "Su vehículo de carreras es una máquina totalmente modular. Todos los componentes se pueden intercambiar, ajustar y actualizar: cascos, propulsores, escudos, carcasas exteriores, motores, estabilizadores, sistemas de refrigeración y superficies aerodinámicas. Los compuestos livianos brindan velocidad bruta; La armadura resistente te mantiene con vida en condiciones atmosféricas brutales. El camino de actualización es profundo y las decisiones que tomes definen tu identidad de carrera. Compra vehículos nuevos, conviértelos en contendientes al campeonato, compite con ellos hasta la victoria y véndelos para obtener ganancias cuando estés listo para el próximo desafío."
+        },
+        {
+          "title": "Principales mejoras de la nave espacial",
+          "body": "Tu garaje de carreras no es sólo un taller; es el hangar de tu nave espacial personal. Los mismos recursos, créditos y materiales que ganes en la pista puedes invertirlos en mejorar tu embarcación principal. Mejores motores para viajes interplanetarios, sistemas de armas más potentes para el combate espacial, navegación mejorada para descubrir nuevos mundos de carreras y cascos reforzados para sobrevivir a encuentros hostiles durante el tránsito. Tu nave espacial es tu base de operaciones, tu transporte y tu acorazado, y las carreras lo hacen más fuerte."
+        },
+        {
+          "title": "El ciclo de actualización",
+          "body": "Corre para ganar. Gana para actualizar. Actualízate para ganar carreras más importantes con mayores recompensas. Canaliza esas recompensas tanto en tus vehículos de carreras como en tu nave espacial. Cuanto mejor sea tu barco, más lejos viajarás y más peligrosos y lucrativos se volverán los circuitos. Es un ciclo de progresión que recompensa la dedicación y la habilidad en todos los niveles."
+        },
+        {
+          "title": "Impacto entre juegos",
+          "body": "Cada habilidad de piloto que desarrolles en la pista y cada mejora que instales en tu nave espacial se trasladará directamente a Hyper Quest y Overlord of the 7 Realms. Un universo, múltiples juegos, progresión perfecta. Lo que construyes en Hyper Racing impulsa todo lo demás."
+        }
+      ],
+      "faqTitle": "Hiper carreras: preguntas frecuentes",
+      "faq": [
+        {
+          "q": "¿Qué es Hyper Racing?",
+          "a": "Un juego de carreras de vehículos voladores de alta intensidad ambientado en mundos alienígenas. Construye, mejora y compite con vehículos totalmente personalizables a través de peligrosos circuitos de ciencia ficción mientras compites por recompensas en el juego y premios en efectivo reales."
+        },
+        {
+          "q": "¿Puedo mejorar mi vehículo de carreras?",
+          "a": "Todos los componentes se pueden actualizar: cascos, propulsores, escudos, carcasas exteriores, motores, estabilizadores, sistemas de refrigeración y superficies aerodinámicas. Cada actualización cambia la forma en que su vehículo maneja diferentes pistas y condiciones."
+        },
+        {
+          "q": "¿Qué hace el equipo de boxes?",
+          "a": "Los miembros del equipo de boxes ofrecen bonificaciones únicas: reabastecimiento de combustible más rápido, diagnósticos del casco, reparaciones de emergencia y ajustes de rendimiento entre vueltas. Suben de nivel con el tiempo, desbloqueando habilidades más fuertes que se acumulan con mejoras de vehículos."
+        },
+        {
+          "q": "¿Cómo trabaja el jefe de boxes?",
+          "a": "El director de boxes coordina las operaciones del equipo, define la estrategia de carrera y desbloquea mejoras en el rendimiento de todo el equipo. Los administradores defensivos protegen su vehículo en condiciones difíciles; Los gerentes agresivos presionan todos los sistemas para lograr la máxima velocidad."
+        },
+        {
+          "q": "¿Puedo ganar dinero real?",
+          "a": "Sí. Los eventos y torneos clasificados cuentan con premios en efectivo reales. Clasifica a través del juego clasificado, compite contra oponentes con habilidades similares y gana pagos reales según tu posición final. Los desafíos semanales y los campeonatos de temporada se ejecutan continuamente."
+        },
+        {
+          "q": "¿Cómo funcionan las recompensas de carrera?",
+          "a": "Cada carrera paga créditos, materiales de mejora y fichas de tripulación. Las victorias multiplican tus ganancias. Compre vehículos, actualícelos para convertirlos en máquinas de carreras, gane carreras y véndalos para obtener ganancias para financiar más mejoras y mejoras de las naves espaciales."
+        },
+        {
+          "q": "¿Puedo actualizar mi nave espacial principal también?",
+          "a": "Absolutamente. Tu garaje de carreras es el hangar de tu nave espacial. Las ganancias de las carreras financian mejoras en los motores, las armas, la navegación y el refuerzo del casco de tu nave principal, lo que potencia los viajes interplanetarios y el combate espacial."
+        },
+        {
+          "q": "¿El progreso se traslada a otros juegos?",
+          "a": "Cada habilidad del piloto y mejora de la nave espacial se transfiere directamente a Hyper Quest y Overlord of the 7 Realms. Un universo, múltiples juegos, progresión perfecta. Lo que construyes en Hyper Racing impulsa todo lo demás."
+        },
+        {
+          "q": "¿Qué entornos de carreras hay?",
+          "a": "Los circuitos abarcan formaciones rocosas flotantes, tubos de lava, llanuras desérticas y cadenas montañosas a través de mundos alienígenas. Los peligros atmosféricos incluyen lluvia ácida, atmósferas radiactivas, gravedad variable y vientos turbulentos. Cada circuito exige diferentes configuraciones de vehículos."
+        }
+      ]
+    },
+    "quest": {
+      "label": "MISIÓN",
+      "heading": "Hiperbúsqueda",
+      "subtitle": "Tu galaxia. Tus reglas. Tu fortuna.",
+      "intro": [
+        "Hyper Quest es una aventura espacial de mundo abierto en la que comandas tu propia nave espacial totalmente actualizable, el Quest Racer, a través de una galaxia vasta y peligrosa. Dejaste tu civilización natal hace años en busca de poder, riqueza y fama. Ahora el universo entero es tu patio de recreo y cada misión que completes te acercará al dominio galáctico.",
+        "Pero Hyper Quest no es sólo un juego. Es una plataforma competitiva donde hay dinero real en juego. Completa misiones, conquista desafíos y sal con dinero real en tu bolsillo o recompensas. Desde misiones rápidas que duran unos minutos hasta expediciones épicas de varios días, cada misión vale la pena. Cuanto más difícil sea el desafío, mayor será la recompensa.",
+        "Mejora tu nave espacial desde el casco hasta la cabina. Ármelo con devastadores sistemas de armas. Recluta especialistas que acumulan poderosas bonificaciones en el rendimiento y el nivel de potencia de tu nave. Extrae asteroides, transporta cargas peligrosas, busca tesoros escondidos, secuestra objetivos de alto valor o conviértete en un asesino a sueldo. La forma en que gobiernas el universo es totalmente tu elección.",
+        "Todo lo que construyes en Hyper Quest alimenta directamente a Hyper Racing y Overlord of the 7 Realms. Un universo, progresión perfecta, potencial ilimitado. Continúe leyendo para descubrir cómo funcionan las misiones, qué puede ganar y cómo usted y su nave espacial se convierten en la nave más temida de la galaxia."
+      ],
+      "calloutLine1": "Búsqueda para ganar. Gane para actualizar.",
+      "calloutLine2": "Actualízate para conquistar.",
+      "howItWorksTitle": "Cómo funciona Hyper Quest",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Aceptar misiones del tablero de misiones",
+          "body": "El tablero de misiones del juego es tu puerta de entrada a la aventura. Explore las misiones disponibles que van desde rápidos recorridos de carga que duran solo unos minutos hasta expediciones épicas de varios días a las profundidades del espacio inexplorado. Cada misión viene con objetivos claros, índices de peligro y niveles de recompensa. Elige las misiones que se adapten a tu estilo de juego, ya sea transportar carga peligrosa, buscar tesoros escondidos, minar campos de asteroides o trabajar de incógnito para recuperar artefactos perdidos."
+        },
+        {
+          "num": "02",
+          "title": "Explora la galaxia",
+          "body": "Viaja a través de portales a planetas distantes, cada uno con entornos únicos, materiales valiosos y nuevos circuitos de carreras. Sigue mapas galácticos para trazar regiones inexploradas y gana derechos de nombres para los planetas que descubras primero. Extrae recursos de campos de asteroides, recupera piezas de reliquias antiguas y barcos abandonados y reúne pistas que te conducirán a fortunas ocultas esparcidas por las estrellas."
+        },
+        {
+          "num": "03",
+          "title": "Construye tu imperio desde dentro de tu barco",
+          "body": "Tu Quest Racer es más que un transporte. Cultiva alimentos en bahías hidropónicas, refina materiales extraídos de planetas distantes y construye ejércitos desde tus laboratorios de clonación. Refina tus tropas y sus armas, defiéndete de los piratas y administra una base móvil autosuficiente que se vuelve más poderosa con cada misión que completas."
+        },
+        {
+          "num": "04",
+          "title": "Juega a tu manera",
+          "body": "No existe un camino único hacia el dominio. Conviértete en un temido cazarrecompensas, un astuto contrabandista, un maestro minero o un explorador legendario. Secuestra objetivos de alto valor, conviértete en un pistolero a sueldo o forja alianzas para controlar sectores enteros. La galaxia se somete a tu voluntad y cada decisión da forma a tu reputación y tu fortuna."
+        }
+      ],
+      "rewardsTitle": "Recompensas de misiones; ¡Recibe dinero por jugar!",
+      "rewards": [
+        {
+          "title": "Recompensas en el juego",
+          "body": "Cada misión que completes te recompensará. Créditos, materiales de mejora, componentes raros, fichas de reclutamiento de especialistas y artículos exclusivos fluyen hacia tu inventario con cada misión exitosa. Cuanto más difícil sea la búsqueda, más rico será el botín. Descubra materiales raros en planetas distantes, recupere piezas de alto valor de reliquias antiguas y almacene recursos que impulsen su ascenso a la supremacía galáctica."
+        },
+        {
+          "title": "Pagos en efectivo reales",
+          "body": "Hyper Quest lleva los juegos más allá del entretenimiento. Ciertas misiones y desafíos clasificados ofrecen pagos en efectivo reales. Completa misiones de alto nivel, domina eventos de clasificación y participa en campeonatos de misiones de temporada donde hay dinero real en juego. Cuanto más hábil y atrevido seas, mayores serán los pagos. Desde recompensas de misiones semanales hasta torneos épicos de temporada, siempre hay oportunidades para convertir tus aventuras galácticas en ganancias reales."
+        },
+        {
+          "title": "Cómo funcionan los pagos de misiones",
+          "body": "Los jugadores califican para misiones con recompensas en efectivo al construir su reputación y alcanzar los umbrales de desempeño. La dificultad, la duración y el nivel de peligro de la misión determinan el premio acumulado. Los pagos son transparentes, se muestran claramente antes de aceptar cualquier misión y se procesan rápidamente al finalizar. Ya sea que esté realizando un transporte de carga de diez minutos o una expedición al espacio profundo de una semana de duración, las recompensas están a la altura del riesgo."
+        },
+        {
+          "title": "Progresión que rinde frutos",
+          "body": "Las recompensas de las misiones se incorporan directamente a las mejoras de tu nave, a los sistemas de armas y al reclutamiento de especialistas. Cada pago te hace más fuerte, lo que desbloquea misiones más difíciles con recompensas aún mayores. Las ganancias también se trasladan a Hyper Racing y Overlord of the 7 Realms, creando un ciclo de progresión que recompensa la dedicación en todo el ecosistema Hyper Tek."
+        }
+      ],
+      "upgradesTitle": "Mejora tu barco, arma tu arsenal, recluta a tu tripulación",
+      "upgrades": [
+        {
+          "title": "Actualizaciones de naves espaciales",
+          "body": "Su Quest Racer es completamente modular desde el compartimiento del motor hasta la cabina. Actualice el casco para obtener la máxima durabilidad, refuerce la capa exterior para resistir entornos hostiles, impulse los generadores de escudos para la supervivencia en combate y revise los sistemas de energía para obtener el máximo rendimiento. Mejores motores significan viajes interplanetarios más rápidos. Los sistemas de navegación más potentes revelan rutas ocultas y mundos inexplorados. Cada mejora transforma tu nave en una nave más poderosa y más temida."
+        },
+        {
+          "title": "Sistemas de armas",
+          "body": "La galaxia es peligrosa y tú debes ser más peligroso. Mejora y perfecciona tus sistemas de armas para protegerte contra piratas, jugadores rivales y fuerzas hostiles. Elige entre configuraciones defensivas que te mantendrán con vida en las peores situaciones o equipamientos ofensivos diseñados para infligir el máximo daño. Matrices láser, baterías de misiles, cañones de plasma y armas de energía experimentales estarán disponibles a medida que avances en el árbol de mejoras."
+        },
+        {
+          "title": "Especialistas en reclutamiento",
+          "body": "Los especialistas son revolucionarios. Cada uno aporta habilidades únicas que añaden poderosas bonificaciones al rendimiento general y al nivel de potencia de tu nave. Los especialistas en navegación revelan caminos ocultos y reducen el tiempo de viaje. Los especialistas en combate aumentan la precisión de las armas y la producción de daño. Los especialistas en ingeniería aumentan la integridad del casco y la velocidad de reparación. Los especialistas científicos mejoran la extracción de recursos y el refinamiento de materiales. Apila varios especialistas para crear combinaciones devastadoras que multipliquen la efectividad de tu nave."
+        },
+        {
+          "title": "El circuito de energía",
+          "body": "Búsqueda para ganar. Gana para actualizar. Mejora para conquistar misiones más difíciles con mayores recompensas. Recluta especialistas para amplificar todos los sistemas de tu nave. Cuanto más fuerte te vuelves, más se abre la galaxia y mayor es la fortuna que te espera. Las mejoras de barcos y las bonificaciones de especialistas también se trasladan directamente al combate espacial durante el tránsito de Hyper Racing y las batallas en Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest: preguntas frecuentes",
+      "faq": [
+        {
+          "q": "¿Qué es Hyper Quest?",
+          "a": "Una aventura espacial de mundo abierto en la que comandas una nave espacial totalmente actualizable a través de una vasta galaxia. Completa misiones, explora mundos alienígenas, mejora tu nave, recluta especialistas y gana recompensas en efectivo reales junto con las riquezas del juego."
+        },
+        {
+          "q": "¿Cómo funcionan las misiones?",
+          "a": "Acepta misiones del tablero de misiones del juego. Las misiones van desde rápidos viajes de carga que duran sólo unos minutos hasta expediciones épicas de varios días a las profundidades del espacio inexplorado. Cada misión tiene objetivos claros, índices de peligro y niveles de recompensa que se muestran antes de aceptar."
+        },
+        {
+          "q": "¿Puedo ganar dinero real?",
+          "a": "Sí. Ciertas misiones, desafíos clasificados y campeonatos de temporada ofrecen pagos en efectivo reales. Construya su reputación, alcance los umbrales de rendimiento y califique para misiones cada vez más lucrativas con recompensas en efectivo. Las recompensas semanales y los torneos de temporada se realizan continuamente."
+        },
+        {
+          "q": "¿Qué recompensas del juego puedo ganar?",
+          "a": "Cada misión completada otorga créditos, materiales de mejora, componentes raros, fichas de reclutamiento de especialistas y artículos exclusivos. Cuanto más dura y larga sea la misión, mayores serán las recompensas. Descubra materiales raros en planetas distantes y recupere piezas de alto valor de reliquias antiguas."
+        },
+        {
+          "q": "¿Puedo mejorar mi nave espacial?",
+          "a": "Todos los sistemas son actualizables: casco, capa exterior, generadores de escudos, sistemas de energía, motores, cabina y navegación. Mejores motores significan viajes más rápidos, cascos más fuertes sobreviven a encuentros hostiles y la navegación mejorada revela rutas ocultas y mundos inexplorados."
+        },
+        {
+          "q": "¿Qué armas hay disponibles?",
+          "a": "Actualice y perfeccione los sistemas de armas, incluidos conjuntos de láseres, baterías de misiles, cañones de plasma y armas de energía experimentales. Elija configuraciones defensivas para sobrevivir o equipamientos ofensivos para causar el máximo daño contra piratas, rivales y fuerzas hostiles."
+        },
+        {
+          "q": "¿Cómo trabajan los especialistas?",
+          "a": "Recluta especialistas con habilidades únicas que añaden potentes bonificaciones al rendimiento y al nivel de potencia de tu nave. Los especialistas en navegación revelan caminos ocultos, los especialistas en combate aumentan el daño de las armas, los especialistas en ingeniería aumentan la integridad del casco y los especialistas científicos mejoran la extracción de recursos. Apila múltiples especialistas para obtener combinaciones devastadoras."
+        },
+        {
+          "q": "¿Qué tipos de misiones están disponibles?",
+          "a": "Transporte de carga, minería de asteroides, búsqueda de tesoros, caza de recompensas, recuperación de artefactos, operaciones encubiertas, exploración planetaria, defensa pirata, misiones de salvamento y más. Las misiones van desde carreras rápidas de diez minutos hasta expediciones al espacio profundo de varios días."
+        },
+        {
+          "q": "¿Puedo descubrir nuevos planetas?",
+          "a": "Sí. Sigue mapas galácticos hacia regiones inexploradas y descubre nuevos mundos. Los primeros descubridores obtienen derechos sobre los nombres de los planetas que encuentran. Los nuevos mundos ofrecen materiales, entornos y circuitos de carreras únicos a los que ningún otro jugador ha accedido antes."
+        },
+        {
+          "q": "¿Qué puedo hacer dentro de mi nave?",
+          "a": "Tu Quest Racer es una base móvil. Cultiva alimentos en bahías hidropónicas, refina materiales extraídos de planetas distantes, construye y entrena ejércitos en laboratorios de clonación, mejora armas y defensas y gestiona una operación autosostenible que se vuelve más poderosa con cada misión."
+        },
+        {
+          "q": "¿Cómo funciona el mapa galáctico?",
+          "a": "El mapa galáctico guía tu exploración por el universo. Mejora tu mapa para revelar nuevos sectores, ubicaciones de portales y zonas de misiones ocultas. A medida que exploras más, el mapa se expande, desbloqueando regiones del espacio cada vez más peligrosas y gratificantes."
+        },
+        {
+          "q": "¿Mi progreso se traslada a otros juegos?",
+          "a": "Todo lo que construyes en Hyper Quest alimenta directamente a Hyper Racing y Overlord of the 7 Realms. Las mejoras de barcos, las bonificaciones de especialistas, las habilidades de combate y los recursos se transfieren sin problemas. Un universo, múltiples juegos, progresión ilimitada."
+        },
+        {
+          "q": "¿Puedo jugar como villano?",
+          "a": "Absolutamente. Ve de incógnito, secuestra objetivos de alto valor, conviértete en un pistolero a sueldo, contrabandea cargamentos peligrosos o ataca a otros jugadores. No existe un camino único hacia el dominio. Cómo gobiernas la galaxia es enteramente tu elección, y cada decisión da forma a tu reputación."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "SEÑOR SUPERIOR",
+      "heading": "Señor Supremo de los 7 Reinos",
+      "subtitle": "Aterrizaje forzoso. Reconstruir. Conquistar. Conviértete en el Señor Supremo.",
+      "intro": [
+        "Overlord of the 7 Realms es un juego de estrategia de batalla de tres niveles como ningún otro juego. Te aventuraste a través de un portal hacia un universo paralelo y te estrellaste en un planeta alienígena hostil. Tu nave está destrozada, tus sistemas están fallando y las criaturas del planeta ya se están acercando. La supervivencia es solo el comienzo. El dominio es el objetivo.",
+        "Reconstruye tu barco desde los restos. Clona y entrena ejércitos en tus laboratorios a bordo. Domina la vida silvestre del planeta para crear una devastadora caballería montada. Luego, lleva la lucha a través de tres dimensiones de batalla: combate tierra a tierra contra monstruos y jugadores rivales, asaltos tierra-espacio a objetivos terrestres o orbitales y guerra espacio-espacio a bordo del enorme Battle Ring que orbita el planeta.",
+        "Este no es sólo otro juego de estrategia. Overlord presenta interacción de realidad virtual en tiempo real, recompensas en efectivo reales por completar eventos y misiones diarias e invasiones quincenales de los temibles Hammerongs, la especie alienígena más poderosa que existe. Cada quince días, llegan para explotar el planeta, y cada quincena, jugadores valientes pueden desafiarlos para obtener enormes bonificaciones y recompensas legendarias.",
+        "Mejora tu nave espacial, ermela con armas devastadoras, recluta especialistas que amplifiquen tu nivel de poder y forja alianzas para controlar regiones enteras. Todo lo que construyes se conecta directamente a Hyper Racing y Hyper Quest a través del ecosistema compartido de Hyper Tek. Un universo, tres juegos, guerra ilimitada. Sigue leyendo para descubrir cómo funciona el sistema de batalla y por qué Overlord lo cambia todo."
+      ],
+      "calloutLine1": "La supervivencia es sólo el comienzo.",
+      "calloutLine2": "El dominio es el objetivo.",
+      "howItWorksTitle": "El sistema de batalla de tres niveles; Tres dimensiones de la guerra",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Combate tierra a tierra",
+          "body": "La superficie del planeta es una zona de guerra. Despliega tus ejércitos clonados contra criaturas alienígenas hostiles, bestias monstruosas y jugadores rivales que luchan por territorio y recursos. Domina y entrena la vida salvaje del planeta para crear unidades de caballería montada que den a tus fuerzas terrestres una ventaja devastadora. La guerra terrestre es cruda, táctica e implacable. Cada batalla que ganes gana recursos, territorio y reputación."
+        },
+        {
+          "num": "02",
+          "title": "Asaltos tierra-espacio",
+          "body": "Aquí es donde Overlord añade una dimensión que ningún otro juego, o casi ninguno, ofrece. Crea grupos de tropas especializados diseñados para lanzar ataques entre la superficie del planeta y el Anillo de Batalla orbital. Ataca a naves estacionadas en el espacio desde tu posición en tierra o coordina asaltos combinados que golpeen a los enemigos desde arriba y desde abajo simultáneamente. Esta capa de batalla vertical transforma la estrategia estándar en una partida de ajedrez multidimensional donde la posición tanto en el terreno como en el espacio determina la victoria."
+        },
+        {
+          "num": "03",
+          "title": "Guerra espacio-espacio",
+          "body": "Lleva tu nave a la órbita y aterriza en el Battle Ring, una enorme estructura orbital que rodea el planeta. Desde aquí, busca barcos sin blindaje y objetivos vulnerables. Teletransporta tropas a través del espacio y directamente a las naves enemigas para infligir el máximo daño interno mediante ataques de abordaje especialmente desarrollados. Las recompensas del combate espacial se encuentran entre las más altas del juego, y controlar el territorio orbital te brinda una ventaja estratégica que ningún jugador terrestre puede igualar."
+        },
+        {
+          "num": "04",
+          "title": "Por qué Tri-Level lo cambia todo",
+          "body": "La mayoría de los juegos de estrategia operan en un solo plano. Overlord opera en tres. La capacidad de atacar de tierra a tierra, de tierra a espacio y de espacio a espacio crea un campo de batalla con una profundidad táctica inigualable. La habilidad lo es todo. La fuerza bruta por sí sola no te convertirá en el Señor Supremo. El dominio estratégico en los tres niveles es lo que separa a los dominantes de los derrotados."
+        }
+      ],
+      "extraSection": {
+        "title": "El anillo de batalla y la interacción con la realidad virtual",
+        "items": [
+          {
+            "title": "Aterrizando en el ring de batalla",
+            "body": "El Anillo de Batalla es una estructura orbital colosal que rodea el sistema del planeta. Cuando transportas tu nave al espacio, puedes atracar en el Battle Ring para obtener una enorme ventaja estratégica. Desde esta posición elevada, puedes buscar barcos sin blindaje, lanzar grupos de abordaje contra barcos rivales y coordinar ataques devastadores contra objetivos terrestres que se encuentran debajo. Aterrizar en Battle Ring abre una dimensión de juego completamente nueva que la mayoría de los juegos de estrategia simplemente no ofrecen, lo que le da a Overlord una ventaja táctica sobre cualquier otra cosa en el mercado."
+          },
+          {
+            "title": "Dentro del ring de batalla",
+            "body": "El Battle Ring no es sólo una plataforma de atraque. Si puedes descubrir cómo penetrar su interior, en su interior te esperan misiones ocultas, bonificaciones adicionales y recompensas exclusivas. El interior del anillo es un laberinto de pasillos, cámaras y tecnología antigua. Lleva a cabo misiones y misiones de caza dentro del propio anillo, descubriendo secretos a los que ningún jugador en la superficie accederá jamás. El Battle Ring recompensa a los audaces, los astutos y los implacables."
+          },
+          {
+            "title": "Interacción de realidad virtual en tiempo real",
+            "body": "Como toda la gama de juegos Hyper Tek, Overlord of the 7 Realms admite una interacción completa de realidad virtual en tiempo real. Entra en tu nave, camina por los pasillos del Battle Ring, dirige a tus tropas al combate terrestre y experimenta la guerra espacial desde la cabina de tu nave. La realidad virtual transforma Overlord de un juego de estrategia a una experiencia de campo de batalla totalmente inmersiva. Dirige tus fuerzas, explora terrenos alienígenas y participa en combates con un nivel de presencia e intensidad que los juegos de pantalla plana no pueden replicar."
+          },
+          {
+            "title": "La ventaja sobre otros juegos",
+            "body": "Ningún otro juego combina guerra de tres niveles, una estación de batalla orbital explorable, realidad virtual en tiempo real y dinero real o recompensas dentro del juego en una sola experiencia. El Battle Ring por sí solo añade una dimensión de juego que los competidores no pueden igualar. Cuando combinas eso con el combate terrestre, la guerra espacial, la inmersión en realidad virtual y el ecosistema interconectado Hyper Tek, Overlord se ubica en una categoría propia."
+          }
+        ]
+      },
+      "upgradesTitle": "Reconstruir, rearmar, reclutar; Prepárate para la guerra",
+      "upgrades": [
+        {
+          "title": "Actualizaciones de naves espaciales",
+          "body": "Tu barco estrellado es donde todo comienza. Reconstrúyalo sistema por sistema, desde el compartimento del motor hasta la plataforma de mando. Cada componente es totalmente actualizable: refuerzo del casco, integridad estructural, composición de la capa exterior, generadores de escudos, sistemas de energía y sistemas de navegación. En Overlord, no construyes para la velocidad sino para la batalla. Un buque de guerra completamente mejorado es la base de toda campaña exitosa y cuanto más inviertas, más formidable se volverá tu barco."
+        },
+        {
+          "title": "Sistemas de armas y niveles tecnológicos",
+          "body": "Mejora y perfecciona tus armas, habilidades y niveles tecnológicos para dominar los tres niveles de batalla. Artillería terrestre para guerra planetaria, baterías antiorbitales para asaltos tierra-espacio y conjuntos de armas montadas en barcos para combates espacio-espacio. Cada sistema de armas se puede perfeccionar para funciones tácticas específicas. Ya sea que te especialices en bombardeos de largo alcance, acciones de abordaje a corta distancia o contramedidas defensivas, tu equipamiento de armas define tu identidad de combate."
+        },
+        {
+          "title": "Especialistas en reclutamiento",
+          "body": "Los especialistas son los multiplicadores de fuerza que separan a los buenos jugadores de los Overlords. Adquiere especialistas únicos que aportan poderosas bonificaciones al rendimiento general y al nivel de potencia de tu nave. Los especialistas tácticos mejoran la eficiencia del despliegue de tropas, los especialistas en ingeniería aceleran las reparaciones y mejoras de los barcos, los especialistas en armas aumentan la producción de daño en todos los sistemas y los especialistas en inteligencia revelan las posiciones y debilidades del enemigo. Agrupe a varios especialistas para crear sinergias devastadoras que amplifiquen cada aspecto de su operación."
+        },
+        {
+          "title": "Construye tus ejércitos",
+          "body": "Clona tropas dentro de los laboratorios de clonación a bordo de tu nave, luego actualízalas y refínalas junto con sus armas hasta que estén listas para la batalla. Pero las tropas por sí solas no son suficientes. Domina y entrena a las criaturas salvajes del planeta para crear caballería de bestias montadas, una fuerza que no se puede clonar ni fabricar y que se debe ganar con habilidad y paciencia. La composición de tu ejército en tierra, aire y espacio es lo que determina tu dominio."
+        }
+      ],
+      "rewardsTitle": "Los Hammerongs, las recompensas y el ecosistema Hyper Tek",
+      "rewards": [
+        {
+          "title": "Los Hammerongs: la especie más poderosa que existe",
+          "body": "Cada dos semanas, los campos de fuerza de la arena central caen y llegan los Hammerongs. Son las especies alienígenas más fuertes del universo, armadas con tecnología avanzada mucho más allá de lo que poseen los jugadores. Vienen a explotar los recursos del planeta y defienden la arena con una fuerza total y abrumadora. Atacar a los Hammerongs es el desafío más peligroso de Overlord, pero aquellos que lo logran son recompensados ​​con enormes bonificaciones, botines legendarios, materiales de mejora raros y recompensas exclusivas que no se pueden obtener de ninguna otra manera. La invasión quincenal de Hammerong es la prueba definitiva de tu poder."
+        },
+        {
+          "title": "Eventos diarios, misiones y recompensas de batalla",
+          "body": "Overlord ofrece recompensas constantemente. Complete tareas diarias para ganar créditos, actualizar materiales y bonificaciones de progresión. Ingrese a eventos especiales para obtener recompensas premium. Lleva a cabo misiones por la superficie del planeta y dentro del Anillo de batalla para obtener un botín exclusivo. Gana batallas contra monstruos, criaturas alienígenas y jugadores rivales para acumular recursos. Explora la superficie para descubrir artefactos y tesoros ocultos. La estructura de recompensas está diseñada para que cada acción que realices te acerque a convertirte en el Señor Supremo del servidor."
+        },
+        {
+          "title": "Conectado al ecosistema Hyper Tek",
+          "body": "Overlord of the 7 Realms no existe de forma aislada. Está completamente integrado en el universo Hyper Tek junto con Hyper Racing y Hyper Quest. Los recursos obtenidos en Overlord se pueden utilizar en los tres juegos. Las mejoras de barcos, las bonificaciones de especialistas, las habilidades de combate y los materiales fluyen a la perfección entre los títulos. Las habilidades de carrera obtenidas en Hyper Racing mejoran tus habilidades de piloto en el combate espacial de Overlord. Los materiales reunidos en Hyper Quest impulsan tus mejoras en el planeta. El mercado de Hyper Tek conecta todo, creando una economía unificada donde el progreso en un juego impulsa el avance en los tres."
+        },
+        {
+          "title": "Un universo, tres juegos, poder ilimitado",
+          "body": "Los jugadores que participan en los tres juegos de Hyper Tek desarrollan poder más rápido, acceden a recompensas exclusivas entre juegos y dominan a través de una variedad de habilidades y recursos que los jugadores de un solo juego no pueden igualar. El ecosistema interconectado es la máxima ventaja competitiva."
+        }
+      ],
+      "faqTitle": "Señor Supremo de los 7 Reinos — Preguntas frecuentes",
+      "faq": [
+        {
+          "q": "¿Qué es Overlord of the 7 Realms?",
+          "a": "Un juego de estrategia de batalla de tres niveles en el que aterrizas en un planeta alienígena, reconstruyes tu nave, clonas ejércitos y luchas en tres dimensiones: tierra-tierra, tierra-espacio y espacio-espacio. Incluye interacción de realidad virtual, recompensas en efectivo real e invasiones quincenales de Hammerong."
+        },
+        {
+          "q": "¿Qué es el sistema de batalla de tres niveles?",
+          "a": "El combate se desarrolla en tres niveles: tierra a tierra contra monstruos y jugadores rivales, asaltos tierra-espacio dirigidos a naves orbitales y guerra espacio-espacio en el Battle Ring. Este enfoque multidimensional crea una profundidad táctica que ningún juego de estrategia de un solo plano puede igualar."
+        },
+        {
+          "q": "¿Qué es el Anillo de Batalla?",
+          "a": "Una enorme estructura orbital que rodea el planeta. Aterriza tu nave en él para cazar objetivos sin blindaje, lanzar grupos de abordaje contra naves enemigas y acceder a misiones ocultas dentro de su interior. Controlar el Battle Ring te brinda una ventaja estratégica sobre los jugadores terrestres."
+        },
+        {
+          "q": "¿Puedo mejorar mi nave espacial?",
+          "a": "Todos los sistemas se pueden actualizar desde el compartimento del motor hasta la cubierta de mando: casco, estructura, capa exterior, generadores de escudos, sistemas de energía y navegación. En Overlord construyes para la batalla, no para la velocidad. Un buque de guerra completamente mejorado es la base de cada campaña."
+        },
+        {
+          "q": "¿Cómo trabajan los especialistas?",
+          "a": "Recluta especialistas únicos que agreguen poderosas bonificaciones al rendimiento y al nivel de potencia de tu nave. Los especialistas en táctica, ingeniería, armas e inteligencia impulsan cada uno diferentes sistemas. Apila múltiples especialistas para obtener sinergias devastadoras en todos los niveles de batalla."
+        },
+        {
+          "q": "¿Quiénes son los Hammerong?",
+          "a": "La especie alienígena más poderosa que existe. Cada quince días llegan a la arena central para explotar los recursos del planeta, defendidos por una fuerza abrumadora y tecnología avanzada. Atacarlos es extremadamente peligroso, pero recompensa a los jugadores con enormes bonificaciones y botines legendarios."
+        },
+        {
+          "q": "¿Qué recompensas puedo ganar?",
+          "a": "Las tareas diarias, misiones, batallas y eventos pagan créditos, materiales de mejora y bonificaciones de progresión. Los eventos especiales y las invasiones de Hammerong ofrecen recompensas premium y exclusivas. Los desafíos de mayor dificultad y las competiciones clasificadas generan mayores pagos, incluido dinero real."
+        },
+        {
+          "q": "¿Overlord es compatible con la realidad virtual?",
+          "a": "Sí. La interacción de realidad virtual en tiempo real te permite recorrer los pasillos de tu nave, explorar el interior del Battle Ring, liderar tropas al combate terrestre y pilotar tu nave en la guerra espacial. La realidad virtual transforma Overlord de una estrategia a una experiencia de campo de batalla totalmente inmersiva."
+        },
+        {
+          "q": "¿Cómo construyo mi ejército?",
+          "a": "Clona tropas en los laboratorios a bordo de tu nave, luego actualízalas y refínalas a ellas y a sus armas. Para la caballería montada, debes domesticar y entrenar a las criaturas salvajes del planeta, ya que los animales no pueden ser clonados. La composición del ejército en tierra, aire y espacio determina tu dominio."
+        },
+        {
+          "q": "¿Puedo unirme a una alianza?",
+          "a": "Sí. Hazlo solo o únete a una alianza que aumente tu poder y te ayude a crecer. Las alianzas ofrecen recursos compartidos, ataques coordinados y defensa colectiva. Completa tareas diarias para mejorar tanto tu nave como los activos compartidos de la alianza."
+        },
+        {
+          "q": "¿Overlord está vinculado a otros juegos de Hyper Tek?",
+          "a": "Totalmente integrado. Los recursos, las mejoras de barcos, las bonificaciones de especialistas y las habilidades de combate fluyen entre Overlord, Hyper Racing e Hyper Quest. Las habilidades de carrera mejoran tu combate espacial, los materiales de Quest impulsan tus mejoras y el mercado Hyper Tek conecta toda la economía."
+        },
+        {
+          "q": "¿Qué armas hay disponibles?",
+          "a": "Artillería terrestre, baterías antiorbitales, conjuntos de armas montadas en barcos y equipos especializados de acción de abordaje. Cada sistema se puede perfeccionar para funciones tácticas específicas, incluido el bombardeo de largo alcance, el combate cuerpo a cuerpo y las contramedidas defensivas."
+        },
+        {
+          "q": "¿Puedo explorar la superficie del planeta?",
+          "a": "Sí. El planeta es rico en recompensas ocultas, artefactos, recursos y vida salvaje peligrosa que domesticar. Explora la superficie para encontrar tesoros, luchar contra criaturas y monstruos alienígenas y descubrir ventajas estratégicas que fortalecen tu campaña por el dominio de Overlord."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "SALIR",
     "spaceRing": "OVERLORD · ANILLO ESPACIAL",
@@ -324,91 +720,268 @@
       "detail": "Detalle"
     },
     "rooms": {
-      "storeroom":     { "title": "Almacén",                    "desc": "Centro de almacenamiento central para materias primas y recursos recolectados. Gestiona la distribución de inventario entre las operaciones mineras y de refinería." },
-      "mining_fs":     { "title": "Mining FS",                  "desc": "Bahía de minería de estribor delantera. Equipada con matrices de extracción de núcleo profundo para la recolección de minerales y mena en el espacio abierto." },
-      "mining_fp":     { "title": "Mining FP",                  "desc": "Bahía de minería de babor delantera. Refleja la unidad de estribor, duplicando la capacidad de extracción durante operaciones en campos ricos en recursos." },
-      "process_ref":   { "title": "Refinería de Proceso",       "desc": "Convierte mena bruta y minerales en aleaciones refinadas. Crítica para la síntesis de combustible y los materiales de mejora de la nave." },
-      "mining_rs":     { "title": "Mining RS",                  "desc": "Unidad de minería de estribor trasera. Inclinada a -45° para barridos de campo laterales durante la cosecha de asteroides a deriva lenta." },
-      "mining_rp":     { "title": "Mining RP",                  "desc": "Unidad de minería de babor trasera. Trabaja en conjunto con la bahía RS para maximizar el rendimiento de extracción de recursos en el campo trasero." },
-      "fuel_ref":      { "title": "Refinería de Combustible",   "desc": "Procesa aleaciones refinadas en combustible de grado propulsión. Abastece el motor principal y las reservas de propulsores de emergencia." },
-      "workshop":      { "title": "Taller",                     "desc": "Centro de mantenimiento y fabricación de la nave. Maneja reparaciones de componentes, fabricación de piezas y mejoras de equipamiento." },
-      "racing":        { "title": "Hangar de Carreras",         "desc": "Bahía dedicada que alberga drones de carrera y aeronaves ligeras. Soporta el despliegue en modo de juego de carreras y las operaciones de parada en boxes." },
-      "brig":          { "title": "Calabozo",                   "desc": "Celda de contención segura para prisioneros y carga valiosa. Las paredes reforzadas impiden el acceso no autorizado o la fuga." },
-      "armory_ss":     { "title": "Armory SS",                  "desc": "Armería del lado de estribor. Almacena y mantiene armas cortas, equipamiento de protección de la tripulación y sistemas de defensa personal." },
-      "armory_ps":     { "title": "Armory PS",                  "desc": "Armería del lado de babor. Refleja la armería SS proporcionando acceso equilibrado al equipamiento en ambos lados de la nave." },
-      "main_weapon":   { "title": "Arma Principal Pesada",      "desc": "Emplazamiento de arma pesada primaria. Alberga los sistemas ofensivos más poderosos de la nave para compromisos de combate a gran escala." },
-      "fwd_shield":    { "title": "Generador de Escudo Delantero", "desc": "Genera una barrera de energía protectora en la proa de la nave. Primera línea de defensa contra proyectiles entrantes y ataques de energía." },
-      "fighter_fss":   { "title": "Bahía de Cazas FSS",         "desc": "Bahía de estribor delantera que alberga cazas compactos. Permite el despliegue rápido de cazas de escolta durante misiones de combate y patrulla." },
-      "fighter_fps":   { "title": "Bahía de Cazas FPS",         "desc": "Bahía de cazas de babor delantera. Opera en conjunto con la bahía FSS para lanzamientos coordinados de escuadrones de cazas." },
-      "fighter_rss":   { "title": "Bahía de Cazas RSS",         "desc": "Bahía de cazas de la góndola de estribor trasera. Apoya operaciones de retaguardia y escenarios de interceptación en persecución." },
-      "fighter_rps":   { "title": "Bahía de Cazas RPS",         "desc": "Bahía de cazas de la góndola de babor trasera. Proporciona cobertura trasera simétrica para el despliegue defensivo completo de cazas." },
-      "barracks_ss":   { "title": "Barracks SS",                "desc": "Cuarteles de tripulación de estribor para personal de combate. Alberga soldados, pilotos y equipos de seguridad con sistemas de literas y taquillas de equipamiento." },
-      "barracks_ps":   { "title": "Barracks PS",                "desc": "Cuarteles de tripulación de babor. Distribución idéntica a los barracones SS asegurando una distribución uniforme de la tripulación y rápida movilización desde ambos lados." },
-      "stables_ss":    { "title": "Stables SS",                 "desc": "Bahía de activos biológicos de estribor. Alberga monturas alienígenas y criaturas bio-ingeniadas usadas en operaciones en la superficie planetaria." },
-      "stable_ps":     { "title": "Stable PS",                  "desc": "Bahía de activos biológicos de babor. Refleja los establos SS para una carga equilibrada de criaturas y distribución de peso simétrica." },
-      "transporter":   { "title": "Bahía de Teletransporte",    "desc": "Sistema de transporte de personal y carga asistido cuánticamente. Permite la teletransportación rápida de corto alcance a superficies planetarias o naves cercanas." },
-      "security":      { "title": "Estación de Seguridad",      "desc": "Centro de vigilancia y respuesta a amenazas de toda la nave. Monitoriza todos los puentes y coordina los protocolos de seguridad internos." },
-      "weapons_ss":    { "title": "Weapons Systems SS",         "desc": "Consola de gestión de armas de estribor. Controla matrices de puntería, secuencias de disparo y logística de munición para los armamentos de estribor." },
-      "weapons_ps":    { "title": "Weapons Systems PS",         "desc": "Consola de gestión de armas de babor. Proporciona control independiente completo de todas las plataformas de armas del lado de babor." },
-      "power_plant":   { "title": "Planta de Energía",          "desc": "Unidad central de generación de energía. Proporciona una salida de potencia estable a todos los sistemas de la nave mediante tecnología de confinamiento de plasma circular." },
-      "power_sys":     { "title": "Sistemas de Alimentación",   "desc": "Centro de distribución y regulación de alimentación. Gestiona el equilibrio de carga entre armas, escudos, motores y sistemas de soporte vital." },
-      "energy_dist":   { "title": "Distribución de Energía",    "desc": "Nodo de enrutamiento de energía secundario. Asegura un suministro de energía constante a los sistemas de la sección media y trasera de la nave bajo condiciones de alta demanda." },
-      "main_engine":   { "title": "Motor Principal",            "desc": "Sistema de propulsión principal que alimenta todos los viajes sub-lumínicos. Genera empuje mediante chorros de plasma catalizado por antimateria." },
-      "navigation":    { "title": "Navegación",                 "desc": "Estación central de navegación y control del timón. Gestiona la planificación de curso, la astrocartografía y el seguimiento posicional en tiempo real." },
-      "flight_deck":   { "title": "Puente de Vuelo",            "desc": "Estación de pilotaje principal. Controla todas las operaciones de vuelo incluyendo despegue, aterrizaje, maniobras orbitales y acciones evasivas de emergencia." },
-      "weapons_off":   { "title": "Oficial de Armas",           "desc": "Puesto de mando táctico de armas. Coordina el fuego ofensivo y defensivo bajo el mando directo del Oficial de Armas." },
-      "comms_off":     { "title": "Oficial de Comunicaciones",  "desc": "Centro de comunicación e interceptación de señales. Gestiona todas las comunicaciones entre naves, de alianza y planetarias incluyendo canales cifrados." },
-      "capt_quarters": { "title": "Camarote del Capitán",       "desc": "Alojamiento privado del oficial al mando de la nave. Contiene terminales de datos seguros e instalaciones de briefing privadas." },
-      "kitchen":       { "title": "Cocina",                     "desc": "Instalación de nutrición y preparación de alimentos para la tripulación. Procesa los recursos alimentarios almacenados y sintetiza suplementos nutricionales para los viajes de larga distancia." },
-      "mess_hall":     { "title": "Comedor",                    "desc": "Espacio comunitario de comedor y recreo. Sirve como centro de moral de la tripulación durante el tiempo libre entre operaciones de combate y recursos." },
-      "hydro_1":       { "title": "Celda Hidropónica 1",        "desc": "Unidad de cultivo automatizada que produce alimentos frescos y plantas medicinales. Reduce la dependencia de las provisiones almacenadas para las misiones prolongadas." },
-      "hydro_2":       { "title": "Celda Hidropónica 2",        "desc": "Celda hidropónica secundaria que amplía la variedad y el rendimiento de los cultivos. Apoya la nutrición de la tripulación y la producción de productos comerciales." },
-      "hydro_3":       { "title": "Celda Hidropónica 3",        "desc": "Unidad de cultivo terciaria especializada en cultivos básicos de alto rendimiento. Proporciona el suministro calórico básico para grandes tripulaciones." },
-      "hydro_4":       { "title": "Celda Hidropónica 4",        "desc": "Celda de investigación medicinal y botánica. Cultiva especies raras utilizadas en tratamientos médicos y síntesis alquímica." },
-      "hydro_5":       { "title": "Celda Hidropónica 5",        "desc": "Bahía de cultivo de plantas exóticas. Produce bienes de lujo y flora rara para el comercio en el mercado." },
-      "hydro_6":       { "title": "Celda Hidropónica 6",        "desc": "Celda experimental de alto crecimiento. Prueba nuevas variedades de cultivos desarrolladas mediante programas de modificación genética." },
-      "shield_main":   { "title": "Generador de Escudo Principal", "desc": "Generador de escudo multi-direccional primario. Proyecta una barrera de energía alrededor del casco completo durante situaciones de combate." },
-      "power_relay1":  { "title": "Relé de Alimentación 1",     "desc": "Nodo de relé de alimentación del puente superior. Enruta la energía de la planta de energía hacia las armas delanteras y las matrices de escudos." },
-      "power_relay2":  { "title": "Relé de Alimentación 2",     "desc": "Nodo de relé de alimentación del puente inferior. Distribuye energía a las góndolas del motor y a los sistemas defensivos traseros." },
-      "hidden_st1":    { "title": "Almacenamiento Oculto 1",    "desc": "Bóveda de alta seguridad oculta. Almacena carga clasificada, artefactos valiosos y contrabando fuera de los escaneos de inventario estándar." },
-      "hidden_st2":    { "title": "Almacenamiento Oculto 2",    "desc": "Bóveda oculta secundaria. Espacio seguro adicional para artículos críticos para la misión que requieren la máxima discreción." },
-      "cargo_1":       { "title": "Bodega de Carga 1",          "desc": "Bahía principal de carga a granel. Diseñada para el transporte de recursos de gran volumen incluyendo minerales, metales refinados y mercancías comerciales." },
-      "cargo_2":       { "title": "Bodega de Carga 2",          "desc": "Bodega de carga secundaria optimizada para cargas frágiles o sensibles a la temperatura. Condiciones de almacenamiento con temperatura controlada." },
-      "cargo_3":       { "title": "Bodega de Carga 3",          "desc": "Bodega de carga terciaria. La distribución configurable admite cargas mixtas incluyendo vehículos, contenedores y equipamiento sobredimensionado." },
-      "war_council":   { "title": "Consejo de Guerra",          "desc": "Cámara de mando estratégico. Mesa de briefing de oficiales superiores donde se coordinan planes de batalla, estrategias de alianza y objetivos de campaña." },
-      "academy":       { "title": "Academia",                   "desc": "Instalación de formación y educación de la tripulación. Permite el avance de habilidades, desbloqueos de especialización y programas de desarrollo de oficiales." },
-      "science_lab":   { "title": "Laboratorio Científico",     "desc": "Centro de investigación y desarrollo. Realiza experimentos en ciencia de materiales, teoría de propulsión y análisis de tecnología alienígena." },
-      "dna_lab":       { "title": "Laboratorio de ADN",         "desc": "Instalación de investigación genética. Desarrolla mejoras biológicas para la tripulación, crea nuevas variantes de especies e investiga muestras de ADN alienígena." },
-      "cryostasis":    { "title": "Crióstasis",                 "desc": "Sistema de suspensión para viajes de largo alcance. Coloca a la tripulación en estasis criogénica para preservar recursos durante viajes de espacio profundo de varios años." },
-      "dna_chambers":  { "title": "Cámaras de ADN",             "desc": "Bahías de modificación genética. Aplica mejoras de ADN investigadas directamente a los miembros de la tripulación y unidades biológicas." },
-      "weapons_relay": { "title": "Relé de Energía de Armas",   "desc": "Nodo de gestión de energía dedicado a sistemas de armas pesadas. Asegura un suministro de energía estable durante los compromisos de combate sostenidos." },
-      "comms_tower":   { "title": "Torre de Comunicaciones",    "desc": "Matriz de comunicaciones de espacio profundo de largo alcance. Permite transmisiones a escala de flota, transmisiones interestelares y coordinación de alianzas a grandes distancias." }
+      "storeroom": {
+        "title": "Almacén",
+        "desc": "Centro de almacenamiento central para materias primas y recursos recolectados. Gestiona la distribución de inventario entre las operaciones mineras y de refinería."
+      },
+      "mining_fs": {
+        "title": "Mining FS",
+        "desc": "Bahía de minería de estribor delantera. Equipada con matrices de extracción de núcleo profundo para la recolección de minerales y mena en el espacio abierto."
+      },
+      "mining_fp": {
+        "title": "Mining FP",
+        "desc": "Bahía de minería de babor delantera. Refleja la unidad de estribor, duplicando la capacidad de extracción durante operaciones en campos ricos en recursos."
+      },
+      "process_ref": {
+        "title": "Refinería de Proceso",
+        "desc": "Convierte mena bruta y minerales en aleaciones refinadas. Crítica para la síntesis de combustible y los materiales de mejora de la nave."
+      },
+      "mining_rs": {
+        "title": "Mining RS",
+        "desc": "Unidad de minería de estribor trasera. Inclinada a -45° para barridos de campo laterales durante la cosecha de asteroides a deriva lenta."
+      },
+      "mining_rp": {
+        "title": "Mining RP",
+        "desc": "Unidad de minería de babor trasera. Trabaja en conjunto con la bahía RS para maximizar el rendimiento de extracción de recursos en el campo trasero."
+      },
+      "fuel_ref": {
+        "title": "Refinería de Combustible",
+        "desc": "Procesa aleaciones refinadas en combustible de grado propulsión. Abastece el motor principal y las reservas de propulsores de emergencia."
+      },
+      "workshop": {
+        "title": "Taller",
+        "desc": "Centro de mantenimiento y fabricación de la nave. Maneja reparaciones de componentes, fabricación de piezas y mejoras de equipamiento."
+      },
+      "racing": {
+        "title": "Hangar de Carreras",
+        "desc": "Bahía dedicada que alberga drones de carrera y aeronaves ligeras. Soporta el despliegue en modo de juego de carreras y las operaciones de parada en boxes."
+      },
+      "brig": {
+        "title": "Calabozo",
+        "desc": "Celda de contención segura para prisioneros y carga valiosa. Las paredes reforzadas impiden el acceso no autorizado o la fuga."
+      },
+      "armory_ss": {
+        "title": "Armory SS",
+        "desc": "Armería del lado de estribor. Almacena y mantiene armas cortas, equipamiento de protección de la tripulación y sistemas de defensa personal."
+      },
+      "armory_ps": {
+        "title": "Armory PS",
+        "desc": "Armería del lado de babor. Refleja la armería SS proporcionando acceso equilibrado al equipamiento en ambos lados de la nave."
+      },
+      "main_weapon": {
+        "title": "Arma Principal Pesada",
+        "desc": "Emplazamiento de arma pesada primaria. Alberga los sistemas ofensivos más poderosos de la nave para compromisos de combate a gran escala."
+      },
+      "fwd_shield": {
+        "title": "Generador de Escudo Delantero",
+        "desc": "Genera una barrera de energía protectora en la proa de la nave. Primera línea de defensa contra proyectiles entrantes y ataques de energía."
+      },
+      "fighter_fss": {
+        "title": "Bahía de Cazas FSS",
+        "desc": "Bahía de estribor delantera que alberga cazas compactos. Permite el despliegue rápido de cazas de escolta durante misiones de combate y patrulla."
+      },
+      "fighter_fps": {
+        "title": "Bahía de Cazas FPS",
+        "desc": "Bahía de cazas de babor delantera. Opera en conjunto con la bahía FSS para lanzamientos coordinados de escuadrones de cazas."
+      },
+      "fighter_rss": {
+        "title": "Bahía de Cazas RSS",
+        "desc": "Bahía de cazas de la góndola de estribor trasera. Apoya operaciones de retaguardia y escenarios de interceptación en persecución."
+      },
+      "fighter_rps": {
+        "title": "Bahía de Cazas RPS",
+        "desc": "Bahía de cazas de la góndola de babor trasera. Proporciona cobertura trasera simétrica para el despliegue defensivo completo de cazas."
+      },
+      "barracks_ss": {
+        "title": "Barracks SS",
+        "desc": "Cuarteles de tripulación de estribor para personal de combate. Alberga soldados, pilotos y equipos de seguridad con sistemas de literas y taquillas de equipamiento."
+      },
+      "barracks_ps": {
+        "title": "Barracks PS",
+        "desc": "Cuarteles de tripulación de babor. Distribución idéntica a los barracones SS asegurando una distribución uniforme de la tripulación y rápida movilización desde ambos lados."
+      },
+      "stables_ss": {
+        "title": "Stables SS",
+        "desc": "Bahía de activos biológicos de estribor. Alberga monturas alienígenas y criaturas bio-ingeniadas usadas en operaciones en la superficie planetaria."
+      },
+      "stable_ps": {
+        "title": "Stable PS",
+        "desc": "Bahía de activos biológicos de babor. Refleja los establos SS para una carga equilibrada de criaturas y distribución de peso simétrica."
+      },
+      "transporter": {
+        "title": "Bahía de Teletransporte",
+        "desc": "Sistema de transporte de personal y carga asistido cuánticamente. Permite la teletransportación rápida de corto alcance a superficies planetarias o naves cercanas."
+      },
+      "security": {
+        "title": "Estación de Seguridad",
+        "desc": "Centro de vigilancia y respuesta a amenazas de toda la nave. Monitoriza todos los puentes y coordina los protocolos de seguridad internos."
+      },
+      "weapons_ss": {
+        "title": "Weapons Systems SS",
+        "desc": "Consola de gestión de armas de estribor. Controla matrices de puntería, secuencias de disparo y logística de munición para los armamentos de estribor."
+      },
+      "weapons_ps": {
+        "title": "Weapons Systems PS",
+        "desc": "Consola de gestión de armas de babor. Proporciona control independiente completo de todas las plataformas de armas del lado de babor."
+      },
+      "power_plant": {
+        "title": "Planta de Energía",
+        "desc": "Unidad central de generación de energía. Proporciona una salida de potencia estable a todos los sistemas de la nave mediante tecnología de confinamiento de plasma circular."
+      },
+      "power_sys": {
+        "title": "Sistemas de Alimentación",
+        "desc": "Centro de distribución y regulación de alimentación. Gestiona el equilibrio de carga entre armas, escudos, motores y sistemas de soporte vital."
+      },
+      "energy_dist": {
+        "title": "Distribución de Energía",
+        "desc": "Nodo de enrutamiento de energía secundario. Asegura un suministro de energía constante a los sistemas de la sección media y trasera de la nave bajo condiciones de alta demanda."
+      },
+      "main_engine": {
+        "title": "Motor Principal",
+        "desc": "Sistema de propulsión principal que alimenta todos los viajes sub-lumínicos. Genera empuje mediante chorros de plasma catalizado por antimateria."
+      },
+      "navigation": {
+        "title": "Navegación",
+        "desc": "Estación central de navegación y control del timón. Gestiona la planificación de curso, la astrocartografía y el seguimiento posicional en tiempo real."
+      },
+      "flight_deck": {
+        "title": "Puente de Vuelo",
+        "desc": "Estación de pilotaje principal. Controla todas las operaciones de vuelo incluyendo despegue, aterrizaje, maniobras orbitales y acciones evasivas de emergencia."
+      },
+      "weapons_off": {
+        "title": "Oficial de Armas",
+        "desc": "Puesto de mando táctico de armas. Coordina el fuego ofensivo y defensivo bajo el mando directo del Oficial de Armas."
+      },
+      "comms_off": {
+        "title": "Oficial de Comunicaciones",
+        "desc": "Centro de comunicación e interceptación de señales. Gestiona todas las comunicaciones entre naves, de alianza y planetarias incluyendo canales cifrados."
+      },
+      "capt_quarters": {
+        "title": "Camarote del Capitán",
+        "desc": "Alojamiento privado del oficial al mando de la nave. Contiene terminales de datos seguros e instalaciones de briefing privadas."
+      },
+      "kitchen": {
+        "title": "Cocina",
+        "desc": "Instalación de nutrición y preparación de alimentos para la tripulación. Procesa los recursos alimentarios almacenados y sintetiza suplementos nutricionales para los viajes de larga distancia."
+      },
+      "mess_hall": {
+        "title": "Comedor",
+        "desc": "Espacio comunitario de comedor y recreo. Sirve como centro de moral de la tripulación durante el tiempo libre entre operaciones de combate y recursos."
+      },
+      "hydro_1": {
+        "title": "Celda Hidropónica 1",
+        "desc": "Unidad de cultivo automatizada que produce alimentos frescos y plantas medicinales. Reduce la dependencia de las provisiones almacenadas para las misiones prolongadas."
+      },
+      "hydro_2": {
+        "title": "Celda Hidropónica 2",
+        "desc": "Celda hidropónica secundaria que amplía la variedad y el rendimiento de los cultivos. Apoya la nutrición de la tripulación y la producción de productos comerciales."
+      },
+      "hydro_3": {
+        "title": "Celda Hidropónica 3",
+        "desc": "Unidad de cultivo terciaria especializada en cultivos básicos de alto rendimiento. Proporciona el suministro calórico básico para grandes tripulaciones."
+      },
+      "hydro_4": {
+        "title": "Celda Hidropónica 4",
+        "desc": "Celda de investigación medicinal y botánica. Cultiva especies raras utilizadas en tratamientos médicos y síntesis alquímica."
+      },
+      "hydro_5": {
+        "title": "Celda Hidropónica 5",
+        "desc": "Bahía de cultivo de plantas exóticas. Produce bienes de lujo y flora rara para el comercio en el mercado."
+      },
+      "hydro_6": {
+        "title": "Celda Hidropónica 6",
+        "desc": "Celda experimental de alto crecimiento. Prueba nuevas variedades de cultivos desarrolladas mediante programas de modificación genética."
+      },
+      "shield_main": {
+        "title": "Generador de Escudo Principal",
+        "desc": "Generador de escudo multi-direccional primario. Proyecta una barrera de energía alrededor del casco completo durante situaciones de combate."
+      },
+      "power_relay1": {
+        "title": "Relé de Alimentación 1",
+        "desc": "Nodo de relé de alimentación del puente superior. Enruta la energía de la planta de energía hacia las armas delanteras y las matrices de escudos."
+      },
+      "power_relay2": {
+        "title": "Relé de Alimentación 2",
+        "desc": "Nodo de relé de alimentación del puente inferior. Distribuye energía a las góndolas del motor y a los sistemas defensivos traseros."
+      },
+      "hidden_st1": {
+        "title": "Almacenamiento Oculto 1",
+        "desc": "Bóveda de alta seguridad oculta. Almacena carga clasificada, artefactos valiosos y contrabando fuera de los escaneos de inventario estándar."
+      },
+      "hidden_st2": {
+        "title": "Almacenamiento Oculto 2",
+        "desc": "Bóveda oculta secundaria. Espacio seguro adicional para artículos críticos para la misión que requieren la máxima discreción."
+      },
+      "cargo_1": {
+        "title": "Bodega de Carga 1",
+        "desc": "Bahía principal de carga a granel. Diseñada para el transporte de recursos de gran volumen incluyendo minerales, metales refinados y mercancías comerciales."
+      },
+      "cargo_2": {
+        "title": "Bodega de Carga 2",
+        "desc": "Bodega de carga secundaria optimizada para cargas frágiles o sensibles a la temperatura. Condiciones de almacenamiento con temperatura controlada."
+      },
+      "cargo_3": {
+        "title": "Bodega de Carga 3",
+        "desc": "Bodega de carga terciaria. La distribución configurable admite cargas mixtas incluyendo vehículos, contenedores y equipamiento sobredimensionado."
+      },
+      "war_council": {
+        "title": "Consejo de Guerra",
+        "desc": "Cámara de mando estratégico. Mesa de briefing de oficiales superiores donde se coordinan planes de batalla, estrategias de alianza y objetivos de campaña."
+      },
+      "academy": {
+        "title": "Academia",
+        "desc": "Instalación de formación y educación de la tripulación. Permite el avance de habilidades, desbloqueos de especialización y programas de desarrollo de oficiales."
+      },
+      "science_lab": {
+        "title": "Laboratorio Científico",
+        "desc": "Centro de investigación y desarrollo. Realiza experimentos en ciencia de materiales, teoría de propulsión y análisis de tecnología alienígena."
+      },
+      "dna_lab": {
+        "title": "Laboratorio de ADN",
+        "desc": "Instalación de investigación genética. Desarrolla mejoras biológicas para la tripulación, crea nuevas variantes de especies e investiga muestras de ADN alienígena."
+      },
+      "cryostasis": {
+        "title": "Crióstasis",
+        "desc": "Sistema de suspensión para viajes de largo alcance. Coloca a la tripulación en estasis criogénica para preservar recursos durante viajes de espacio profundo de varios años."
+      },
+      "dna_chambers": {
+        "title": "Cámaras de ADN",
+        "desc": "Bahías de modificación genética. Aplica mejoras de ADN investigadas directamente a los miembros de la tripulación y unidades biológicas."
+      },
+      "weapons_relay": {
+        "title": "Relé de Energía de Armas",
+        "desc": "Nodo de gestión de energía dedicado a sistemas de armas pesadas. Asegura un suministro de energía estable durante los compromisos de combate sostenidos."
+      },
+      "comms_tower": {
+        "title": "Torre de Comunicaciones",
+        "desc": "Matriz de comunicaciones de espacio profundo de largo alcance. Permite transmisiones a escala de flota, transmisiones interestelares y coordinación de alianzas a grandes distancias."
+      }
     },
     "guns": {
-      "far_left_bar":      "Cañón Principal Frontal",
-      "fore_port_bay":     "Batería de Cañones de Estribor Delantera",
-      "fore_stbd_bay":     "Batería de Cañones de Babor Delantera",
-      "pd_gun_1":          "Cabina Celda de Defensa de Estribor 1",
-      "pd_gun_2":          "Cabina Celda de Defensa de Estribor 2",
-      "pd_gun_3":          "Cabina Celda de Defensa de Estribor 3",
-      "pd_gun_4":          "Cabina Celda de Defensa de Estribor 4",
-      "pd_gun_5":          "Cabina Celda de Defensa de Estribor 5",
-      "pd_gun_6":          "Cabina Celda de Defensa de Estribor 6",
-      "vert_oval_upper":   "Cabina Celda de Defensa Central Inferior",
-      "vert_oval_lower":   "Cabina Celda de Defensa Central Superior",
-      "center_front_gun":  "Batería de Cañones de Cubierta Superior Delantera",
-      "pd_gun_7":          "Cabina Celda de Defensa de Babor 1",
-      "pd_gun_8":          "Cabina Celda de Defensa de Babor 2",
-      "pd_gun_9":          "Cabina Celda de Defensa de Babor 3",
-      "pd_gun_10":         "Cabina Celda de Defensa de Babor 4",
-      "pd_gun_11":         "Cabina Celda de Defensa de Babor 5",
-      "pd_gun_12":         "Cabina Celda de Defensa de Babor 6",
+      "far_left_bar": "Cañón Principal Frontal",
+      "fore_port_bay": "Batería de Cañones de Estribor Delantera",
+      "fore_stbd_bay": "Batería de Cañones de Babor Delantera",
+      "pd_gun_1": "Cabina Celda de Defensa de Estribor 1",
+      "pd_gun_2": "Cabina Celda de Defensa de Estribor 2",
+      "pd_gun_3": "Cabina Celda de Defensa de Estribor 3",
+      "pd_gun_4": "Cabina Celda de Defensa de Estribor 4",
+      "pd_gun_5": "Cabina Celda de Defensa de Estribor 5",
+      "pd_gun_6": "Cabina Celda de Defensa de Estribor 6",
+      "vert_oval_upper": "Cabina Celda de Defensa Central Inferior",
+      "vert_oval_lower": "Cabina Celda de Defensa Central Superior",
+      "center_front_gun": "Batería de Cañones de Cubierta Superior Delantera",
+      "pd_gun_7": "Cabina Celda de Defensa de Babor 1",
+      "pd_gun_8": "Cabina Celda de Defensa de Babor 2",
+      "pd_gun_9": "Cabina Celda de Defensa de Babor 3",
+      "pd_gun_10": "Cabina Celda de Defensa de Babor 4",
+      "pd_gun_11": "Cabina Celda de Defensa de Babor 5",
+      "pd_gun_12": "Cabina Celda de Defensa de Babor 6",
       "upper_flank_array": "Batería de Cañones de Estribor Trasera",
       "lower_flank_array": "Batería de Cañones de Babor Trasera",
-      "spine_gun_1":       "Batería de Cañones de Cubierta Superior Central",
-      "spine_gun_2":       "Batería de Columna Central Inferior",
-      "spine_gun_3":       "Batería de Columna Central Trasera",
-      "mid_rail_gun":      "Baluarte de Torre Central",
+      "spine_gun_1": "Batería de Cañones de Cubierta Superior Central",
+      "spine_gun_2": "Batería de Columna Central Inferior",
+      "spine_gun_3": "Batería de Columna Central Trasera",
+      "mid_rail_gun": "Baluarte de Torre Central",
       "upper_nacelle_bay": "Batería de Ala de Estribor",
       "lower_nacelle_bay": "Batería de Ala de Babor"
     },
@@ -476,6 +1049,76 @@
           "notes": "Los Dryads son una especie fascinante y única, caracterizada por su naturaleza híbrida que combina rasgos de árboles y seres alienígenas. Esta fisiología distintiva les permite prosperar en entornos diversos, a menudo asemejándose a la flora que los rodea. Tienen una mente similar a una colmena, que les permite comunicarse sin problemas entre sí. Esta conciencia colectiva fomenta un profundo sentido de unidad y cooperación, permitiéndoles operar como un grupo cohesivo mientras mantienen una conexión intrincada con el mundo natural, y pueden sentir la salud de su entorno, convirtiéndolos en guardianes excepcionales de la naturaleza. Su dieta es principalmente de origen vegetal, consistiendo en hojas, frutas y otros materiales botánicos. Sin embargo, ocasionalmente complementan su dieta con pequeñas cantidades de carne. Además de sus atributos físicos, los Dryads son conocidos por su comportamiento juguetón y travieso. A menudo participan en bromas ligeras o juegos, reflejando su espíritu alegre. Su lealtad entre ellos y hacia su patria es inquebrantable, y protegerán ferozmente su comunidad y territorio cuando sean amenazados. Espiritualmente, los Dryads creen profundamente en una vida después de la muerte entrelazada con los ciclos de la naturaleza. Reverencian los elementos naturales (Tierra, Aire, Fuego y Agua) como fuerzas divinas, y también adoran cuerpos celestes como el sol y las estrellas."
         }
       }
-    }
+    },
+    "back": "← ATRÁS",
+    "viewArrow": "VER →",
+    "selectCategory": "SELECCIONAR CATEGORÍA",
+    "comingSoon": "PRÓXIMAMENTE",
+    "specialistProfileDesc": "Perfil del especialista — estadísticas completas y habilidades disponibles al lanzamiento.",
+    "alliance": {
+      "rank": {
+        "leader": "Líder",
+        "coleader": "Co-Líder",
+        "officer": "Oficial",
+        "member": "Miembro"
+      },
+      "status": {
+        "online": "En línea",
+        "offline": "Desconectado",
+        "away": "Ausente"
+      },
+      "manage": {
+        "editInfo": "Editar información de alianza",
+        "editInfoDesc": "Cambiar nombre, etiqueta y descripción",
+        "joinRequests": "Gestionar solicitudes de ingreso",
+        "joinRequestsDesc": "Revisar y aceptar nuevos miembros",
+        "donationGoals": "Establecer metas de donación",
+        "donationGoalsDesc": "Configurar metas semanales de donación",
+        "warSettings": "Configuración de guerra de alianza",
+        "warSettingsDesc": "Configurar reglas de participación en guerra",
+        "kickMembers": "Expulsar miembros",
+        "kickMembersDesc": "Eliminar miembros inactivos o que incumplen reglas"
+      },
+      "allianceMail": {
+        "warResults": "Resultados de la guerra de alianza",
+        "strategyPlan": "Nuevo plan de estrategia",
+        "donationSummary": "Resumen de donaciones semanales",
+        "meeting1800": "Reunión a las 18:00",
+        "levelUp": "¡Alianza subió de nivel!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "¡Bienvenido a HyperTek!",
+      "maintenance": "Aviso de mantenimiento del servidor",
+      "allianceWar": "Anuncio de guerra de alianza",
+      "galacticCup": "Registro de Copa Galáctica",
+      "baseAttacked": "¡Tu base fue atacada!",
+      "loginReward": "Recompensa de inicio de sesión diaria lista",
+      "refiningEvent": "Comienza el evento Maestro de refinamiento",
+      "meeting1800": "Reunión a las 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Traducción automática ACTIVADA — Mensajes entregados en el idioma de cada destinatario",
+      "autoTranslateOff": "Traducción automática DESACTIVADA"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "¿Alguien para la guerra de alianza esta noche?",
+      "ggLastRace": "GG en la última carrera, gran velocidad",
+      "tradingPlasma": "Intercambio barras de plasma por libros de tecnología",
+      "needHelpAsteroid": "Necesito ayuda con la misión asteroide",
+      "allianceRecruiting": "Nuestra alianza está reclutando, escríbeme",
+      "donationGoalsPlasma": "Metas de donación: ¡se necesitan barras de plasma!",
+      "warStarts2Hours": "La guerra empieza en 2 horas, prepárense",
+      "handleMedicalSupport": "Yo me encargo del apoyo médico",
+      "wts50Engines": "VENDO: 50 motores, MP me",
+      "wtbAntiGravity": "COMPRO: módulos antigravedad x10",
+      "sellingRareSkins": "Vendiendo skins raras, ver perfil"
+    },
+    "devicePairing": "EMPAREJAMIENTO DE DISPOSITIVO",
+    "deviceOffline": "FUERA DE LÍNEA",
+    "pairing": "EMPAREJANDO...",
+    "unavailableNow": "NO DISPONIBLE AHORA MISMO",
+    "pairDevice": "EMPAREJAR DISPOSITIVO",
+    "vrInteractionMode": "MODO Interacción VR · Próximamente"
   }
 }

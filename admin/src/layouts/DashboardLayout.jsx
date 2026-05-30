@@ -21,7 +21,7 @@ const DashboardLayout = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
 
-  // ✅ When redirected from frontend with ?token=...,
+  // When redirected from frontend with ?token=...,
   //    capture it once and persist in this (admin) origin.
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);

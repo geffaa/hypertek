@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_PUBLISHABLE_KEY, BACKEND_BASE_URL } from '../../Config';
@@ -22,6 +23,7 @@ const HB_PACKAGES = [
 ];
 
 function CheckoutForm({ hbAmount, usdAmount, onBack }) {
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -61,7 +63,7 @@ function CheckoutForm({ hbAmount, usdAmount, onBack }) {
           <FiArrowLeft size={18} />
         </button>
         <div>
-          <p className="text-white/50 text-xs">Paying</p>
+          <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.topup.paying", "Paying")}</p>
           <p className="text-white font-bold text-base">
             ${usdAmount} USD
             <span className="text-[#002AA8] text-sm font-normal ml-2">= {hbAmount.toLocaleString()} HB</span>
@@ -78,7 +80,7 @@ function CheckoutForm({ hbAmount, usdAmount, onBack }) {
             loading ? 'bg-gray-600 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700'
           }`}
         >
-          {loading ? 'Processing...' : `Pay $${usdAmount} USD`}
+          {loading ? t("dashboard.hyperbucks.topup.processing", "Processing...") : `${t("dashboard.hyperbucks.topup.pay", "Pay")} $${usdAmount} USD`}
         </button>
       </form>
     </div>
@@ -86,6 +88,7 @@ function CheckoutForm({ hbAmount, usdAmount, onBack }) {
 }
 
 export default function HyperBucks() {
+  const { t } = useTranslation();
   const { token: authToken } = useSelector((state) => state.auth);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -303,25 +306,25 @@ export default function HyperBucks() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#111] border border-white/10 rounded-2xl p-10 text-center max-w-sm w-full shadow-2xl">
             <FiCheckCircle className="text-green-400 mx-auto mb-4" size={52} />
-            <h2 className="text-white text-2xl font-bold mb-2">Top-Up Successful!</h2>
+            <h2 className="text-white text-2xl font-bold mb-2">{t("dashboard.hyperbucks.success.title", "Top-Up Successful!")}</h2>
             {successHB > 0 && (
               <p className="text-white/60 mb-1">
-                <span className="text-white font-semibold">{successHB.toLocaleString()} HB</span> added to your account.
+                <span className="text-white font-semibold">{successHB.toLocaleString()} HB</span> {t("dashboard.hyperbucks.success.added", "added to your account.")}
               </p>
             )}
-            <p className="text-white/40 text-sm mb-7">Your balance will reflect shortly.</p>
+            <p className="text-white/40 text-sm mb-7">{t("dashboard.hyperbucks.success.reflectSoon", "Your balance will reflect shortly.")}</p>
             <div className="flex gap-3 justify-center">
               <button
                 onClick={() => setShowSuccessModal(false)}
                 className="px-5 py-2.5 rounded-xl border border-white/20 text-white/70 hover:text-white text-sm transition-colors"
               >
-                Top Up Again
+                {t("dashboard.hyperbucks.success.topUpAgain", "Top Up Again")}
               </button>
               <button
                 onClick={() => navigate('/dashboard')}
                 className="px-5 py-2.5 rounded-xl bg-[#002AA8] hover:bg-blue-700 text-white font-semibold text-sm transition-colors"
               >
-                Go to Dashboard
+                {t("dashboard.hyperbucks.success.goDashboard", "Go to Dashboard")}
               </button>
             </div>
           </div>
@@ -329,8 +332,8 @@ export default function HyperBucks() {
       )}
       {/* Header */}
       <div className="mb-6">
-        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">HyperBucks</h1>
-        <p className="text-white/50 text-sm mt-1">250 HB = $1 USD · fixed rate</p>
+        <h1 className="font-inter font-semibold text-[22px] md:text-[25px] text-white">{t("dashboard.hyperbucks.title", "HyperBucks")}</h1>
+        <p className="text-white/50 text-sm mt-1">{t("dashboard.hyperbucks.subtitle", "250 HB = $1 USD · fixed rate")}</p>
       </div>
 
       {/* Balance Card */}
@@ -340,7 +343,7 @@ export default function HyperBucks() {
             <FiZap className="text-blue-300" size={18} />
           </div>
           <div>
-            <p className="text-white/50 text-xs">Current Balance</p>
+            <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.currentBalance", "Current Balance")}</p>
             <p className="text-white font-bold text-lg">
               {hbNum != null ? hbNum.toLocaleString() : '—'} HB
             </p>
@@ -358,7 +361,7 @@ export default function HyperBucks() {
           }`}
         >
           <FiTrendingUp size={14} />
-          Top Up
+          {t("dashboard.hyperbucks.tabTopUp", "Top Up")}
           {activeTab === 'topup' && (
             <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-[#002AA8] rounded-t-full" />
           )}
@@ -370,7 +373,7 @@ export default function HyperBucks() {
           }`}
         >
           <FiArrowDownCircle size={14} />
-          Cashout
+          {t("dashboard.hyperbucks.tabCashout", "Cashout")}
           {activeTab === 'cashout' && (
             <div className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-[#002AA8] rounded-t-full" />
           )}
@@ -385,7 +388,7 @@ export default function HyperBucks() {
               <div className="flex flex-col lg:flex-row gap-6 items-start">
                 {/* Left — amount input + proceed */}
                 <div className="w-full lg:flex-1">
-                  <label className="text-white/50 text-xs mb-2 block">Amount (USD)</label>
+                  <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.topup.amountLabel", "Amount (USD)")}</label>
                   <div className="relative mb-3">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg font-light">$</span>
                     <input
@@ -402,7 +405,7 @@ export default function HyperBucks() {
                   <div className="h-6 mb-5">
                     {activeHB > 0 && (
                       <p className="text-blue-300 text-sm font-semibold">
-                        = {activeHB.toLocaleString()} HyperBucks
+                        = {activeHB.toLocaleString()} {t("dashboard.hyperbucks.topup.hyperBucks", "HyperBucks")}
                       </p>
                     )}
                   </div>
@@ -417,20 +420,20 @@ export default function HyperBucks() {
                     }`}
                   >
                     {loadingIntent
-                      ? 'Preparing...'
+                      ? t("dashboard.hyperbucks.topup.preparing", "Preparing...")
                       : activeHB >= 250
-                      ? `Proceed to Payment — $${activeUSD} USD`
-                      : 'Enter an amount to continue'}
+                      ? `${t("dashboard.hyperbucks.topup.proceed", "Proceed to Payment")} — $${activeUSD} USD`
+                      : t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
                   </button>
 
                   <p className="text-white/25 text-xs text-center mt-3">
-                    Secured by Stripe · 250 HB = $1 USD · min $1
+                    {t("dashboard.hyperbucks.topup.secured", "Secured by Stripe · 250 HB = $1 USD · min $1")}
                   </p>
                 </div>
 
                 {/* Right — package shortcuts */}
                 <div className="w-full lg:w-[340px] flex-shrink-0">
-                  <p className="text-white/50 text-xs mb-3">Quick Select</p>
+                  <p className="text-white/50 text-xs mb-3">{t("dashboard.hyperbucks.topup.quickSelect", "Quick Select")}</p>
                   <div className="grid grid-cols-2 gap-2">
                     {HB_PACKAGES.map((pkg) => {
                       const isActive = activePackageHb === pkg.hb;
@@ -497,7 +500,7 @@ export default function HyperBucks() {
                   >
                     <FiArrowLeft size={16} />
                   </button>
-                  <p className="text-white/60 text-sm">Complete identity verification to continue</p>
+                  <p className="text-white/60 text-sm">{t("dashboard.hyperbucks.cashout.kycNote", "Complete identity verification to continue")}</p>
                 </div>
                 <KYCVerification
                   onVerified={() => {
@@ -514,22 +517,22 @@ export default function HyperBucks() {
                     <FiArrowLeft size={16} />
                   </button>
                   <div>
-                    <p className="text-white font-semibold text-sm">Enter verification code</p>
+                    <p className="text-white font-semibold text-sm">{t("dashboard.hyperbucks.otp.title", "Enter verification code")}</p>
                     <p className="text-white/40 text-xs mt-0.5">
-                      A 6-digit code was sent to your email · expires in 5 minutes
+                      {t("dashboard.hyperbucks.otp.subtitle", "A 6-digit code was sent to your email · expires in 5 minutes")}
                     </p>
                   </div>
                 </div>
 
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-4">
                   <div className="mb-2 text-white/50 text-xs">
-                    Cashing out <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
+                    {t("dashboard.hyperbucks.otp.cashingOut", "Cashing out")} <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
                     {' '}≈ <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
-                    {' '}via <span className="text-white font-semibold capitalize">{hbCashoutMethod === 'usdc' ? 'USDC Wallet' : 'Bank Account'}</span>
+                    {' '}via <span className="text-white font-semibold capitalize">{hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.otp.usdcWallet", "USDC Wallet") : t("dashboard.hyperbucks.otp.bankAccount", "Bank Account")}</span>
                   </div>
                 </div>
 
-                <label className="text-white/50 text-xs mb-2 block">OTP Code</label>
+                <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.otp.label", "OTP Code")}</label>
                 <input
                   type="text"
                   inputMode="numeric"
@@ -549,7 +552,7 @@ export default function HyperBucks() {
                       : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {hbProcessing ? 'Processing...' : 'Confirm Cashout'}
+                  {hbProcessing ? t("dashboard.hyperbucks.otp.processing", "Processing...") : t("dashboard.hyperbucks.otp.confirm", "Confirm Cashout")}
                 </button>
 
                 <button
@@ -557,20 +560,20 @@ export default function HyperBucks() {
                   disabled={sendingOtp}
                   className="w-full text-xs text-white/30 hover:text-white/60 transition-colors py-2"
                 >
-                  {sendingOtp ? 'Sending...' : 'Resend code'}
+                  {sendingOtp ? t("dashboard.hyperbucks.otp.sending", "Sending...") : t("dashboard.hyperbucks.otp.resend", "Resend code")}
                 </button>
               </div>
             ) : (
             <div className="flex flex-col lg:flex-row gap-6 items-start">
               {/* Left — amount + button */}
               <div className="w-full lg:flex-1">
-                <label className="text-white/50 text-xs mb-2 block">Amount (HB)</label>
+                <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.cashout.amountLabel", "Amount (HB)")}</label>
                 <div className="relative mb-3">
                   <input
                     type="number"
                     value={hbCashoutAmount}
                     onChange={(e) => setHbCashoutAmount(e.target.value)}
-                    placeholder={hbCashoutMethod === 'usdc' ? 'Min 250 HB' : 'Min 2500 HB'}
+                    placeholder={hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.cashout.minUsdc", "Min 250 HB") : t("dashboard.hyperbucks.cashout.minBank", "Min 2500 HB")}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#002AA8] transition-colors pr-28"
                   />
                   {hbCashoutAmount && Number(hbCashoutAmount) > 0 && (
@@ -587,7 +590,7 @@ export default function HyperBucks() {
                     </p>
                   )}
                   {hbCashoutMethod === 'usdc' && !activeAddress && (
-                    <p className="text-yellow-400 text-xs">No wallet connected</p>
+                    <p className="text-yellow-400 text-xs">{t("dashboard.hyperbucks.cashout.noWallet", "No wallet connected")}</p>
                   )}
                 </div>
 
@@ -600,13 +603,13 @@ export default function HyperBucks() {
                       : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {sendingOtp ? 'Sending OTP...' : hbCashoutMethod === 'usdc' ? 'Cashout to USDC Wallet' : 'Cashout to Bank Account'}
+                  {sendingOtp ? t("dashboard.hyperbucks.cashout.sendingOtp", "Sending OTP...") : hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.cashout.toUsdc", "Cashout to USDC Wallet") : t("dashboard.hyperbucks.cashout.toBank", "Cashout to Bank Account")}
                 </button>
               </div>
 
               {/* Right — method selector + info */}
               <div className="w-full lg:w-[340px] flex-shrink-0">
-                <p className="text-white/50 text-xs mb-3">Receive via</p>
+                <p className="text-white/50 text-xs mb-3">{t("dashboard.hyperbucks.cashout.receiveVia", "Receive via")}</p>
                 <div className="flex flex-col gap-2 mb-4">
                   <button
                     onClick={() => setHbCashoutMethod('usdc')}
@@ -616,8 +619,8 @@ export default function HyperBucks() {
                         : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
                     }`}
                   >
-                    USDC Wallet
-                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">Min 250 HB · ~$0.01 gas</span>
+                    {t("dashboard.hyperbucks.cashout.usdcWallet", "USDC Wallet")}
+                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">{t("dashboard.hyperbucks.cashout.usdcMin", "Min 250 HB · ~$0.01 gas")}</span>
                   </button>
                   <button
                     onClick={() => setHbCashoutMethod('bank')}
@@ -627,13 +630,13 @@ export default function HyperBucks() {
                         : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
                     }`}
                   >
-                    Bank Account
-                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">Min 2500 HB ($10) · bank details required</span>
+                    {t("dashboard.hyperbucks.cashout.bankAccount", "Bank Account")}
+                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">{t("dashboard.hyperbucks.cashout.bankMin", "Min 2500 HB ($10) · bank details required")}</span>
                   </button>
                 </div>
                 {hbCashoutMethod === 'bank' && (
                   <p className="text-xs text-white/30">
-                    <a href="/dashboard/edit-profile" className="text-[#002AA8] hover:underline">Add bank details in Profile →</a>
+                    <a href="/dashboard/edit-profile" className="text-[#002AA8] hover:underline">{t("dashboard.hyperbucks.cashout.addBank", "Add bank details in Profile →")}</a>
                   </p>
                 )}
               </div>
@@ -646,24 +649,24 @@ export default function HyperBucks() {
 
       {/* HB Transaction History */}
       <div className="mt-10 w-full">
-        <h3 className="text-white font-semibold text-base mb-4">Transaction History</h3>
+        <h3 className="text-white font-semibold text-base mb-4">{t("dashboard.hyperbucks.history.title", "Transaction History")}</h3>
         <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left min-w-[480px]">
               <thead className="bg-white/5 text-xs uppercase text-white/40">
                 <tr>
-                  <th className="px-4 py-3">Type</th>
-                  <th className="px-4 py-3">Amount</th>
-                  <th className="px-4 py-3">Balance After</th>
-                  <th className="px-4 py-3">Date</th>
-                  <th className="px-4 py-3">Note</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.type", "Type")}</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.amount", "Amount")}</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.balanceAfter", "Balance After")}</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.date", "Date")}</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.note", "Note")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {hbHistoryLoading ? (
-                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">Loading...</td></tr>
+                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.loading", "Loading...")}</td></tr>
                 ) : hbHistory.length === 0 ? (
-                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">No transactions yet.</td></tr>
+                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.empty", "No transactions yet.")}</td></tr>
                 ) : (
                   hbHistory.map((tx) => (
                     <tr key={tx._id} className="hover:bg-white/5 transition-colors">

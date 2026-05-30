@@ -61,6 +61,26 @@ function CategoryMarketplace() {
     "general",
   ];
 
+  const CAT_I18N = {
+    "skins":           "skins",
+    "military badges": "militaryBadges",
+    "specialists":     "specialists",
+    "weapons":         "weapons",
+    "body armour":     "bodyArmour",
+    "spaceships":      "spaceships",
+    "racing vehicles": "racingVehicles",
+    "artwork":         "artwork",
+    "land and bases":  "landAndBases",
+    "general":         "general",
+  };
+
+  const catLabel = (cat) => {
+    const key = CAT_I18N[cat];
+    return key
+      ? t(`marketplace.general.categories.${key}`)
+      : cat.charAt(0).toUpperCase() + cat.slice(1);
+  };
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -328,7 +348,7 @@ function CategoryMarketplace() {
                         : "text-white/70 hover:text-white hover:bg-white/10 border border-white/10"
                     }`}
                   >
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    {catLabel(cat)}
                   </button>
                 );
               })}

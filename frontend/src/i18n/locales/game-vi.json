@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Chào mừng đến với",
+    "back": "Quay lại",
+    "racing": {
+      "label": "ĐUA XE",
+      "heading": "siêu đua",
+      "subtitle": "Trải nghiệm đua xe bay khốc liệt nhất thiên hà,\nnơi kỹ năng được trả giá và các nhà vô địch được tạo ra.",
+      "intro": [
+        "Hyper Racing là một trò chơi đua xe cạnh tranh có chỉ số octan cao lấy bối cảnh trên các thế giới xa lạ, nơi người chơi chế tạo, nâng cấp và điều khiển các phương tiện đua bay có thể tùy chỉnh hoàn toàn thông qua một số vòng đua nguy hiểm nhất trong thiên hà. Từ các khối đá nổi và ống dung nham núi lửa đến vùng đất hoang sa mạc và đường đèo, mỗi cuộc đua là một bài kiểm tra về sự chuẩn bị, phản xạ và chiến lược.",
+        "Nhưng Hyper Racing không chỉ là một trò chơi; đó là một nền tảng cạnh tranh nơi có những phần thưởng thực sự. Những người biểu diễn hàng đầu có thể tham gia các sự kiện và giải đấu được xếp hạng với tổng giải thưởng tiền mặt thực sự. Bạn càng đua tốt, bạn càng kiếm được nhiều tiền. Cho dù bạn đang theo đuổi vinh quang trên bảng xếp hạng hay xây dựng một đế chế đua xe, mọi thứ bạn làm trong Hyper Racing đều giúp bạn tiến về phía trước.",
+        "Nâng cấp xe đua của bạn từ mũi đến đuôi. Tuyển dụng và nâng cấp đội ngũ hầm hố của bạn. Thuê một người quản lý đường đua phù hợp với triết lý đua xe của bạn. Sau đó, hãy đưa các kỹ năng của bạn ra ngoài đường đua, nhà để xe đua của bạn sẽ đóng vai trò là nhà chứa tàu vũ trụ cá nhân của bạn và mọi khả năng bạn phát triển sẽ được đưa vào cuộc chiến ngoài không gian trên Hyper Quest và Overlord of the 7 Realms."
+      ],
+      "introClose": "Hãy đọc tiếp để khám phá cách trò chơi hoạt động, bạn có thể giành được những gì và sự nghiệp đua xe của bạn thúc đẩy toàn bộ vũ trụ phát triển như thế nào.",
+      "calloutLine1": "Cuộc đua để kiếm tiền. Kiếm tiền để nâng cấp.",
+      "calloutLine2": "Nâng cấp để thống trị.",
+      "howItWorksTitle": "Hyper Racing hoạt động như thế nào",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Chọn phương tiện của bạn",
+          "body": "Mọi cuộc đua đều bắt đầu trong gara của bạn. Chọn từ danh sách các phương tiện đua bay ngày càng tăng, mỗi phương tiện có đặc điểm xử lý độc đáo và tiềm năng nâng cấp. Lột bỏ thân tàu để tăng tốc độ trên đường thẳng hoặc bọc thép để tồn tại trong những điều kiện khắc nghiệt nhất. Bộ đẩy, bộ ổn định, tấm chắn, hệ thống làm mát, vây khí động học, cây nâng cấp chạy sâu và mọi sửa đổi đều thay đổi cách hoạt động của tàu của bạn trên đường đua."
+        },
+        {
+          "num": "02",
+          "title": "Xây dựng nhóm của bạn",
+          "body": "Đua xe là môn thể thao đồng đội. Tuyển dụng các chuyên gia của đội đua pit, những người mang lại những phần thưởng độc đáo, tiếp nhiên liệu nhanh hơn, chẩn đoán thời gian thực, sửa chữa thân tàu khẩn cấp giữa cuộc đua và điều chỉnh hiệu suất giữa các vòng đua. Mỗi thành viên phi hành đoàn sẽ thăng cấp theo kinh nghiệm, tích hợp các khả năng mạnh mẽ cùng với các nâng cấp xe của bạn. Sau đó, thuê một người quản lý đường đua để điều phối các hoạt động, đưa ra chiến lược cuộc đua và mở khóa các biện pháp nâng cao hiệu suất của toàn đội trong cả mùa giải."
+        },
+        {
+          "num": "03",
+          "title": "Cuộc đua xuyên thế giới",
+          "body": "Các mạch điện trải dài khắp các hành tinh ngoài hành tinh với những mối nguy hiểm về địa hình và khí quyển cực kỳ khác nhau. Len lỏi qua các khối đá nổi theo phong cách Avatar, luồn qua các ống dung nham núi lửa với tốc độ chóng mặt, băng qua những đồng bằng sa mạc vô tận và băng qua những dãy núi nguy hiểm. Mưa axit, bầu không khí phóng xạ, trọng lực thay đổi và gió hỗn loạn, không có hai chủng tộc nào yêu cầu thiết lập giống nhau. Điều chỉnh phương tiện của bạn để phù hợp với từng môi trường là nơi chiến lược đáp ứng được kỹ năng."
+        },
+        {
+          "num": "04",
+          "title": "Leo lên thứ hạng",
+          "body": "Chiến thắng kiếm được điểm dẫn đầu, mở khóa các mạch mới trên thế giới xa xôi và mở ra cơ hội cho các cuộc thi cấp cao hơn. Càng đi sâu, đối thủ càng hung hãn và tiền cược càng lớn. Chứng tỏ bản thân trên mọi hành tinh và vươn lên thông qua bảng xếp hạng toàn cầu."
+        }
+      ],
+      "rewardsTitle": "Thắng lớn; Phần thưởng quan trọng!",
+      "rewards": [
+        {
+          "title": "Phần thưởng trong trò chơi",
+          "body": "Mỗi cuộc đua bạn hoàn thành đều được trả tiền. Giành chiến thắng và phần thưởng sẽ nhân lên. Chiến thắng trong cuộc đua sẽ mở khóa các bộ phận xe cao cấp, vật liệu nâng cấp quý hiếm, mã thông báo tuyển dụng phi hành đoàn độc quyền và các khoản tín dụng để tài trợ cho công trình tiếp theo của bạn. Bán những chiếc xe đã nâng cấp để kiếm lợi nhuận, tái đầu tư vào máy móc mới và xem đế chế đua xe của bạn phát triển sau mỗi lần lên bục vinh quang."
+        },
+        {
+          "title": "Sự kiện tiền thật",
+          "body": "Hyper Racing đưa sự cạnh tranh lên một tầm cao mới với các sự kiện và giải đấu được xếp hạng trong đó tiền thật được đưa vào. Tham gia các cuộc thi dựa trên kỹ năng, chứng minh khả năng của bạn trước những phi công giỏi nhất trong thiên hà và giành chiến thắng với khoản thanh toán bằng tiền thật. Vị trí của bạn càng cao thì giải thưởng càng lớn. Từ các thử thách xếp hạng hàng tuần cho đến các sự kiện vô địch theo mùa, luôn có cơ hội cho những người có thành tích cao nhất biến kỹ năng đua xe của họ thành thu nhập thực sự."
+        },
+        {
+          "title": "Sự kiện giải thưởng hoạt động như thế nào",
+          "body": "Người chơi đủ điều kiện thông qua chơi xếp hạng, đáp ứng ngưỡng thành tích để được tham gia các giải đấu có giải thưởng bằng tiền mặt. Các sự kiện được tổ chức xoay quanh việc mai mối công bằng, đảm bảo mọi đối thủ đều phải đối mặt với những đối thủ có kỹ năng tương tự. Phí tham gia minh bạch, tổng giải thưởng được hiển thị rõ ràng trước khi bạn cam kết và các khoản thanh toán được xử lý nhanh chóng sau khi mỗi sự kiện kết thúc. Nó mang tính cạnh tranh, công bằng và phần thưởng là có thật."
+        },
+        {
+          "title": "Sự tiến bộ vượt xa đường đua",
+          "body": "Phần thưởng kiếm được thông qua việc đua xe sẽ được đưa trực tiếp vào quá trình phát triển rộng hơn của bạn. Nâng cấp các phương tiện đua của bạn, tăng cường sức mạnh cho đội đua của bạn và chuyển tiền thắng vào việc nâng cấp tàu vũ trụ chính của bạn. Nhà để xe đua của bạn là nhà chứa máy bay của con tàu đó, vì vậy mọi cải tiến đối với hoạt động đua xe của bạn cũng sẽ tăng sức mạnh cho con tàu bạn bay giữa các thế giới và tham gia cuộc chiến ngoài không gian trên Hyper Quest và Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Hai cỗ máy, một nhiệm vụ... Nâng cấp mọi thứ",
+      "upgrades": [
+        {
+          "title": "Nâng cấp xe đua",
+          "body": "Xe đua của bạn là một cỗ máy mô-đun hoàn chỉnh. Mọi bộ phận đều có thể được hoán đổi, điều chỉnh và nâng cấp: thân tàu, bộ đẩy, tấm chắn, vỏ ngoài, động cơ, bộ ổn định, hệ thống làm mát và bề mặt khí động học. Vật liệu tổng hợp nhẹ mang lại tốc độ thô; áo giáp hạng nặng giúp bạn sống sót trong điều kiện khí quyển khắc nghiệt. Con đường nâng cấp sâu sắc và những lựa chọn bạn đưa ra sẽ xác định danh tính đua xe của bạn. Mua xe mới, chế tạo chúng thành ứng cử viên vô địch, chạy đua để giành chiến thắng và bán chúng để kiếm lời khi bạn sẵn sàng cho thử thách tiếp theo."
+        },
+        {
+          "title": "Nâng cấp tàu vũ trụ chính",
+          "body": "Nhà để xe đua của bạn không chỉ là một xưởng; đó là nhà chứa máy bay của tàu vũ trụ cá nhân của bạn. Các tài nguyên, tín dụng và vật liệu tương tự bạn kiếm được trên đường đua có thể được đầu tư vào việc nâng cấp tàu chính của bạn. Động cơ tốt hơn để du hành liên hành tinh, hệ thống vũ khí mạnh hơn để chiến đấu trong không gian, điều hướng được cải thiện để khám phá thế giới đua xe mới và thân tàu được gia cố để sống sót trong các cuộc chạm trán thù địch trong quá trình di chuyển. Tàu vũ trụ của bạn là căn cứ, phương tiện di chuyển và tàu chiến của bạn, và cuộc đua làm cho nó mạnh mẽ hơn."
+        },
+        {
+          "title": "Vòng nâng cấp",
+          "body": "Chạy đua để kiếm tiền. Kiếm tiền để nâng cấp. Nâng cấp để giành chiến thắng trong cuộc đua lớn hơn với phần thưởng lớn hơn. Chuyển những phần thưởng đó vào cả phương tiện đua và tàu vũ trụ của bạn. Con tàu của bạn càng tốt thì bạn càng đi xa và các mạch càng trở nên nguy hiểm và sinh lợi. Đó là một vòng lặp tiến triển nhằm khen thưởng sự cống hiến và kỹ năng ở mọi cấp độ."
+        },
+        {
+          "title": "Tác động xuyên trò chơi",
+          "body": "Mọi kỹ năng phi công bạn phát triển trên đường đua và mọi nâng cấp bạn cài đặt trên tàu vũ trụ của mình đều mang trực tiếp đến Hyper Quest và Overlord of the 7 Realms. Một vũ trụ, nhiều trò chơi, tiến triển liền mạch. Những gì bạn xây dựng trong Hyper Racing sẽ hỗ trợ mọi thứ khác."
+        }
+      ],
+      "faqTitle": "Hyper Racing - Câu hỏi thường gặp",
+      "faq": [
+        {
+          "q": "Hyper Racing là gì?",
+          "a": "Một trò chơi đua xe bay cường độ cao lấy bối cảnh trên các thế giới ngoài hành tinh. Xây dựng, nâng cấp và đua các phương tiện có thể tùy chỉnh hoàn toàn thông qua các vòng đua khoa học viễn tưởng nguy hiểm trong khi cạnh tranh để giành phần thưởng trong trò chơi và giải thưởng tiền mặt thực sự."
+        },
+        {
+          "q": "Tôi có thể nâng cấp xe đua của mình không?",
+          "a": "Mọi thành phần đều có thể nâng cấp: thân tàu, bộ đẩy, tấm chắn, vỏ ngoài, động cơ, bộ ổn định, hệ thống làm mát và bề mặt khí động học. Mỗi lần nâng cấp sẽ thay đổi cách xe của bạn xử lý các đường đua và điều kiện khác nhau."
+        },
+        {
+          "q": "Đội thợ mỏ làm gì?",
+          "a": "Các thành viên phi hành đoàn cung cấp những phần thưởng độc đáo: tiếp nhiên liệu nhanh hơn, chẩn đoán thân tàu, sửa chữa khẩn cấp và điều chỉnh hiệu suất giữa các vòng đua. Họ thăng cấp theo thời gian, mở khóa những khả năng mạnh mẽ hơn cùng với việc nâng cấp xe."
+        },
+        {
+          "q": "Người quản lý hố làm việc như thế nào?",
+          "a": "Người quản lý đường đua điều phối các hoạt động của đội, đưa ra chiến lược cuộc đua và mở khóa các biện pháp tăng hiệu suất cho toàn đội. Người quản lý phòng thủ bảo vệ xe của bạn trong điều kiện khắc nghiệt; các nhà quản lý tích cực thúc đẩy mọi hệ thống đạt tốc độ tối đa."
+        },
+        {
+          "q": "Tôi có thể thắng tiền thật không?",
+          "a": "Vâng. Các sự kiện và giải đấu được xếp hạng có tổng giải thưởng bằng tiền thật. Đủ điều kiện thông qua chơi xếp hạng, cạnh tranh với các đối thủ có kỹ năng tương tự và kiếm được các khoản thanh toán thực sự dựa trên vị trí kết thúc của bạn. Thử thách hàng tuần và giải vô địch theo mùa diễn ra liên tục."
+        },
+        {
+          "q": "Phần thưởng cuộc đua hoạt động như thế nào?",
+          "a": "Mỗi cuộc đua đều trả các khoản tín dụng, vật liệu nâng cấp và mã thông báo của phi hành đoàn. Chiến thắng nhân lên thu nhập của bạn. Mua phương tiện, nâng cấp chúng thành cỗ máy đua, giành chiến thắng trong cuộc đua và bán chúng để kiếm lời để tài trợ cho những cải tiến tiếp theo và nâng cấp tàu vũ trụ."
+        },
+        {
+          "q": "Tôi có thể nâng cấp tàu vũ trụ chính của mình không?",
+          "a": "Chắc chắn rồi. Nhà để xe đua của bạn là nhà chứa máy bay cho tàu vũ trụ của bạn. Quỹ chiến thắng trong cuộc đua sẽ nâng cấp động cơ, vũ khí, điều hướng và gia cố thân tàu trên tàu chính của bạn, tăng sức mạnh cho chuyến du hành liên hành tinh và chiến đấu trong không gian."
+        },
+        {
+          "q": "Sự tiến bộ có mang đến các trò chơi khác không?",
+          "a": "Mọi kỹ năng phi công và nâng cấp tàu vũ trụ đều chuyển trực tiếp vào Hyper Quest và Overlord of the 7 Realms. Một vũ trụ, nhiều trò chơi, tiến triển liền mạch. Những gì bạn xây dựng trong Hyper Racing sẽ hỗ trợ mọi thứ khác."
+        },
+        {
+          "q": "Có những môi trường đua xe nào?",
+          "a": "Các mạch trải dài trên các khối đá nổi, ống dung nham, đồng bằng sa mạc và dãy núi trên khắp thế giới xa lạ. Các mối nguy hiểm trong khí quyển bao gồm mưa axit, khí quyển phóng xạ, trọng lực thay đổi và gió hỗn loạn. Mỗi vòng đua yêu cầu thiết lập phương tiện khác nhau."
+        }
+      ]
+    },
+    "quest": {
+      "label": "CÂU HỎI",
+      "heading": "siêu nhiệm vụ",
+      "subtitle": "Thiên hà của bạn. Quy tắc của bạn. Vận may của bạn.",
+      "intro": [
+        "Hyper Quest là một cuộc phiêu lưu ngoài không gian thế giới mở, nơi bạn chỉ huy con tàu vũ trụ có thể nâng cấp hoàn toàn của riêng mình, Quest Racer, băng qua một thiên hà rộng lớn và nguy hiểm. Bạn đã rời bỏ nền văn minh quê nhà của mình nhiều năm trước để tìm kiếm quyền lực, sự giàu có và danh tiếng. Giờ đây toàn bộ vũ trụ là sân chơi của bạn và mỗi nhiệm vụ bạn hoàn thành sẽ đưa bạn đến gần hơn với sự thống trị của thiên hà.",
+        "Nhưng Hyper Quest không chỉ là một trò chơi. Đây là một nền tảng cạnh tranh nơi tiền thật đang được sử dụng. Hoàn thành các nhiệm vụ, chinh phục thử thách và ra về với số tiền thật trong túi và/hoặc phần thưởng của bạn. Từ những nhiệm vụ nhanh chóng chỉ mất vài phút cho đến những chuyến thám hiểm hoành tráng kéo dài nhiều ngày, mọi nhiệm vụ đều thành công. Thử thách càng khó thì phần thưởng càng lớn.",
+        "Nâng cấp tàu vũ trụ của bạn từ thân tàu đến buồng lái. Trang bị cho nó hệ thống vũ khí tàn khốc. Tuyển dụng các chuyên gia có khả năng tích lũy các phần thưởng mạnh mẽ dựa trên hiệu suất và cấp độ sức mạnh của tàu của bạn. Khai thác các tiểu hành tinh, vận chuyển hàng hóa nguy hiểm, săn tìm kho báu ẩn giấu, bắt cóc các mục tiêu có giá trị cao hoặc trở thành tay súng đánh thuê. Cách bạn cai trị vũ trụ hoàn toàn là sự lựa chọn của bạn.",
+        "Mọi thứ bạn xây dựng trong Hyper Quest đều được nạp trực tiếp vào Hyper Racing và Overlord of the 7 Realms. Một vũ trụ, sự phát triển liền mạch, tiềm năng không giới hạn. Đọc tiếp để khám phá cách hoạt động của nhiệm vụ, những gì bạn có thể kiếm được cũng như cách bạn và tàu vũ trụ của bạn trở thành con tàu đáng sợ nhất trong thiên hà."
+      ],
+      "calloutLine1": "Nhiệm vụ để kiếm tiền. Kiếm tiền để nâng cấp.",
+      "calloutLine2": "Nâng cấp để chinh phục.",
+      "howItWorksTitle": "Hyper Quest hoạt động như thế nào",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Chấp nhận nhiệm vụ từ Ban nhiệm vụ",
+          "body": "Bảng nhiệm vụ trong trò chơi là cánh cổng dẫn bạn đến cuộc phiêu lưu. Duyệt qua các nhiệm vụ có sẵn, từ vận chuyển hàng hóa nhanh chóng chỉ mất vài phút cho đến những chuyến thám hiểm hoành tráng kéo dài nhiều ngày vào sâu trong không gian chưa được khám phá. Mỗi nhiệm vụ đều có mục tiêu rõ ràng, xếp hạng nguy hiểm và cấp độ phần thưởng. Chọn các nhiệm vụ phù hợp với phong cách chơi của bạn, cho dù đó là vận chuyển hàng hóa nguy hiểm, săn tìm kho báu ẩn giấu, khai thác các mỏ tiểu hành tinh hay hoạt động bí mật để thu hồi các đồ tạo tác bị mất."
+        },
+        {
+          "num": "02",
+          "title": "Khám phá thiên hà",
+          "body": "Du hành qua các cổng đến các hành tinh xa xôi, mỗi hành tinh có môi trường độc đáo, vật liệu quý giá và các đường đua mới. Theo dõi bản đồ thiên hà để lập biểu đồ cho các khu vực chưa được khám phá và giành quyền đặt tên cho các hành tinh mà bạn khám phá đầu tiên. Khai thác tài nguyên từ các cánh đồng tiểu hành tinh, trục vớt các bộ phận từ di tích cổ và những con tàu bị bỏ hoang, đồng thời thu thập manh mối dẫn đến vận may ẩn giấu rải rác trên các vì sao."
+        },
+        {
+          "num": "03",
+          "title": "Xây dựng đế chế của bạn từ bên trong con tàu của bạn",
+          "body": "Quest Racer của bạn không chỉ là phương tiện di chuyển. Trồng thực phẩm trong các vịnh thủy canh, tinh chế nguyên liệu khai thác từ các hành tinh xa xôi và xây dựng quân đội từ trong phòng thí nghiệm nhân bản của bạn. Tinh chỉnh quân đội và vũ khí của họ, tự vệ trước bọn cướp biển và quản lý một căn cứ di động tự duy trì, ngày càng mạnh mẽ hơn sau mỗi nhiệm vụ bạn hoàn thành."
+        },
+        {
+          "num": "04",
+          "title": "Chơi theo cách của bạn",
+          "body": "Không có con đường duy nhất để thống trị. Trở thành một thợ săn tiền thưởng đáng sợ, một kẻ buôn lậu xảo quyệt, một thợ mỏ bậc thầy hoặc một nhà thám hiểm huyền thoại. Bắt cóc các mục tiêu có giá trị cao, trở thành tay súng đánh thuê hoặc thành lập liên minh để kiểm soát toàn bộ khu vực. Thiên hà uốn cong theo ý muốn của bạn và mọi quyết định đều định hình danh tiếng và vận may của bạn."
+        }
+      ],
+      "rewardsTitle": "Phần thưởng nhiệm vụ; Được trả tiền để chơi!",
+      "rewards": [
+        {
+          "title": "Phần thưởng trong trò chơi",
+          "body": "Mỗi nhiệm vụ bạn hoàn thành đều được trả tiền. Tín dụng, vật liệu nâng cấp, thành phần quý hiếm, mã thông báo tuyển dụng chuyên gia và vật phẩm độc quyền sẽ chảy vào kho của bạn sau mỗi nhiệm vụ thành công. Nhiệm vụ càng khó thì chiến lợi phẩm càng phong phú. Khám phá những vật liệu quý hiếm trên các hành tinh xa xôi, trục vớt những bộ phận có giá trị cao từ các di tích cổ xưa và dự trữ tài nguyên giúp bạn vươn lên vị trí thống trị thiên hà."
+        },
+        {
+          "title": "Thanh toán bằng tiền thật",
+          "body": "Hyper Quest đưa việc chơi game vượt ra ngoài phạm vi giải trí. Một số nhiệm vụ và thử thách xếp hạng nhất định cung cấp các khoản thanh toán bằng tiền thật. Hoàn thành các nhiệm vụ cấp cao, thống trị các sự kiện trên bảng xếp hạng và tham gia các giải vô địch nhiệm vụ theo mùa với tiền thật. Bạn càng trở nên lành nghề và táo bạo thì số tiền thưởng càng lớn. Từ tiền thưởng nhiệm vụ hàng tuần cho đến các giải đấu hoành tráng theo mùa, luôn có cơ hội biến cuộc phiêu lưu thiên hà của bạn thành thu nhập thực sự."
+        },
+        {
+          "title": "Cách thức thanh toán nhiệm vụ hoạt động",
+          "body": "Người chơi đủ điều kiện nhận các nhiệm vụ thưởng tiền mặt bằng cách xây dựng danh tiếng của mình và đáp ứng các ngưỡng hiệu suất. Độ khó, thời gian và mức độ nguy hiểm của nhiệm vụ sẽ quyết định tổng giải thưởng. Các khoản thanh toán minh bạch, hiển thị rõ ràng trước khi bạn chấp nhận bất kỳ nhiệm vụ nào và được xử lý nhanh chóng sau khi hoàn thành. Cho dù bạn đang thực hiện chuyến vận chuyển hàng hóa kéo dài 10 phút hay chuyến thám hiểm không gian sâu kéo dài một tuần, phần thưởng đều phù hợp với rủi ro."
+        },
+        {
+          "title": "Sự tiến bộ được đền đáp xứng đáng",
+          "body": "Phần thưởng nhiệm vụ được cấp trực tiếp vào việc nâng cấp tàu, hệ thống vũ khí và tuyển dụng chuyên gia của bạn. Mỗi khoản thanh toán đều giúp bạn mạnh mẽ hơn, từ đó mở khóa các nhiệm vụ khó hơn với phần thưởng thậm chí còn lớn hơn. Thu nhập cũng được chuyển sang Hyper Racing và Overlord of the 7 Realms, tạo ra một vòng lặp tiến triển khen thưởng cho sự cống hiến trên toàn bộ hệ sinh thái Hyper Tek."
+        }
+      ],
+      "upgradesTitle": "Nâng cấp tàu của bạn, trang bị cho kho vũ khí của bạn, tuyển dụng thủy thủ đoàn của bạn",
+      "upgrades": [
+        {
+          "title": "Nâng cấp tàu vũ trụ",
+          "body": "Quest Racer của bạn hoàn toàn theo mô-đun từ khoang động cơ đến buồng lái. Nâng cấp thân tàu để có độ bền tối đa, gia cố lớp vỏ bên ngoài để chống chọi với môi trường khắc nghiệt, tăng cường máy tạo lá chắn để có khả năng sống sót trong chiến đấu và đại tu hệ thống điện để đạt hiệu suất cao nhất. Động cơ tốt hơn có nghĩa là du hành liên hành tinh nhanh hơn. Hệ thống định vị mạnh mẽ hơn tiết lộ các tuyến đường ẩn và thế giới chưa được khám phá. Mỗi lần nâng cấp sẽ biến con tàu của bạn thành một con tàu mạnh mẽ hơn, đáng sợ hơn."
+        },
+        {
+          "title": "Hệ thống vũ khí",
+          "body": "Thiên hà rất nguy hiểm và bạn cần phải nguy hiểm hơn. Nâng cấp và tinh chỉnh hệ thống vũ khí của bạn để bảo vệ bạn trước cướp biển, người chơi đối thủ và các thế lực thù địch. Chọn giữa các cấu hình phòng thủ giúp bạn sống sót trong những tình huống xấu nhất hoặc các đợt tấn công được thiết kế để gây sát thương tối đa. Mảng laser, pin tên lửa, pháo plasma và vũ khí năng lượng thử nghiệm đều có sẵn khi bạn tiến hành qua cây nâng cấp."
+        },
+        {
+          "title": "Tuyển dụng chuyên gia",
+          "body": "Các chuyên gia là những người thay đổi cuộc chơi. Mỗi người đều mang đến những kỹ năng riêng biệt giúp tăng thêm phần thưởng mạnh mẽ cho hiệu suất và mức sức mạnh tổng thể của con tàu của bạn. Các chuyên gia điều hướng tiết lộ những con đường ẩn và giảm thời gian di chuyển. Các chuyên gia chiến đấu tăng cường độ chính xác của vũ khí và lượng sát thương. Các chuyên gia kỹ thuật tăng cường tính toàn vẹn của thân tàu và tốc độ sửa chữa. Các chuyên gia khoa học cải thiện việc khai thác tài nguyên và sàng lọc vật liệu. Xếp chồng nhiều chuyên gia để tạo ra sự kết hợp tàn khốc giúp nhân lên hiệu quả của con tàu của bạn."
+        },
+        {
+          "title": "Vòng điện",
+          "body": "Nhiệm vụ để kiếm được. Kiếm tiền để nâng cấp. Nâng cấp để chinh phục những nhiệm vụ khó hơn với phần thưởng lớn hơn. Tuyển dụng các chuyên gia để khuếch đại mọi hệ thống trên tàu của bạn. Bạn càng trở nên mạnh mẽ thì thiên hà càng mở ra nhiều và vận may đang chờ đợi càng lớn. Các nâng cấp về tàu và phần thưởng chuyên môn cũng được áp dụng trực tiếp vào cuộc chiến ngoài không gian trong quá trình di chuyển của Hyper Racing và các trận chiến trên Overlord of 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest - Câu hỏi thường gặp",
+      "faq": [
+        {
+          "q": "HyperQuest là gì?",
+          "a": "Một cuộc phiêu lưu không gian thế giới mở, nơi bạn chỉ huy một con tàu vũ trụ có thể nâng cấp hoàn toàn trên một thiên hà rộng lớn. Hoàn thành các nhiệm vụ, khám phá thế giới ngoài hành tinh, nâng cấp tàu của bạn, tuyển dụng chuyên gia và kiếm phần thưởng bằng tiền thật cùng với sự giàu có trong trò chơi."
+        },
+        {
+          "q": "Nhiệm vụ hoạt động như thế nào?",
+          "a": "Nhận nhiệm vụ từ bảng nhiệm vụ trong trò chơi. Các nhiệm vụ bao gồm từ việc vận chuyển hàng hóa nhanh chóng chỉ mất vài phút cho đến những cuộc thám hiểm hoành tráng kéo dài nhiều ngày vào sâu trong không gian chưa được khám phá. Mỗi nhiệm vụ đều có mục tiêu rõ ràng, xếp hạng nguy hiểm và cấp độ phần thưởng được hiển thị trước khi bạn chấp nhận."
+        },
+        {
+          "q": "Tôi có thể kiếm được tiền thật không?",
+          "a": "Vâng. Một số nhiệm vụ, thử thách xếp hạng và chức vô địch theo mùa nhất định cung cấp các khoản thanh toán bằng tiền thật. Xây dựng danh tiếng của bạn, đáp ứng các ngưỡng hiệu suất và đủ điều kiện nhận các nhiệm vụ thưởng tiền mặt ngày càng sinh lợi. Tiền thưởng hàng tuần và các giải đấu theo mùa diễn ra liên tục."
+        },
+        {
+          "q": "Tôi có thể kiếm được phần thưởng gì trong trò chơi?",
+          "a": "Mỗi nhiệm vụ hoàn thành sẽ trả các khoản tín dụng, vật liệu nâng cấp, thành phần quý hiếm, mã thông báo tuyển dụng chuyên gia và vật phẩm độc quyền. Nhiệm vụ càng khó và càng dài thì phần thưởng càng phong phú. Khám phá những vật liệu quý hiếm trên các hành tinh xa xôi và thu thập những bộ phận có giá trị cao từ các di tích cổ xưa."
+        },
+        {
+          "q": "Tôi có thể nâng cấp tàu vũ trụ của mình không?",
+          "a": "Mọi hệ thống đều có thể nâng cấp: thân tàu, vỏ ngoài, máy tạo lá chắn, hệ thống điện, động cơ, buồng lái và điều hướng. Động cơ tốt hơn có nghĩa là di chuyển nhanh hơn, thân tàu mạnh mẽ hơn có thể tồn tại trong các cuộc chạm trán thù địch và khả năng điều hướng được nâng cấp sẽ tiết lộ các tuyến đường ẩn và thế giới chưa được khám phá."
+        },
+        {
+          "q": "Những loại vũ khí có sẵn?",
+          "a": "Nâng cấp và cải tiến hệ thống vũ khí bao gồm mảng laser, pin tên lửa, pháo plasma và vũ khí năng lượng thử nghiệm. Chọn cấu hình phòng thủ để sinh tồn hoặc tấn công để gây sát thương tối đa trước cướp biển, đối thủ và các thế lực thù địch."
+        },
+        {
+          "q": "Các chuyên gia làm việc như thế nào?",
+          "a": "Tuyển dụng các chuyên gia có kỹ năng độc đáo để tăng thêm phần thưởng mạnh mẽ cho hiệu suất và cấp độ sức mạnh của tàu của bạn. Các chuyên gia điều hướng tiết lộ những con đường ẩn giấu, các chuyên gia chiến đấu tăng cường sát thương vũ khí, các chuyên gia kỹ thuật tăng cường tính toàn vẹn của thân tàu và các chuyên gia khoa học cải thiện việc khai thác tài nguyên. Xếp chồng nhiều chuyên gia để tạo ra sự kết hợp tàn khốc."
+        },
+        {
+          "q": "Những loại nhiệm vụ có sẵn?",
+          "a": "Vận chuyển hàng hóa, khai thác tiểu hành tinh, săn tìm kho báu, săn tiền thưởng, thu hồi đồ tạo tác, hoạt động bí mật, khám phá hành tinh, phòng thủ cướp biển, nhiệm vụ trục vớt, v.v. Các nhiệm vụ bao gồm từ những cuộc chạy nhanh trong 10 phút cho đến những chuyến thám hiểm không gian sâu kéo dài nhiều ngày."
+        },
+        {
+          "q": "Tôi có thể khám phá các hành tinh mới không?",
+          "a": "Vâng. Theo dõi bản đồ thiên hà tới các khu vực chưa được khám phá và khám phá thế giới mới. Những người khám phá đầu tiên giành được quyền đặt tên cho các hành tinh mà họ tìm thấy. Thế giới mới cung cấp các vật liệu, môi trường và đường đua độc đáo mà trước đây chưa có người chơi nào truy cập được."
+        },
+        {
+          "q": "Tôi có thể làm gì bên trong con tàu của mình?",
+          "a": "Quest Racer của bạn là một căn cứ di động. Trồng thực phẩm trong các vịnh thủy canh, tinh chế vật liệu khai thác từ các hành tinh xa xôi, xây dựng và huấn luyện quân đội trong phòng thí nghiệm nhân bản, nâng cấp vũ khí và khả năng phòng thủ, đồng thời quản lý hoạt động tự duy trì ngày càng mạnh mẽ hơn sau mỗi nhiệm vụ."
+        },
+        {
+          "q": "Bản đồ thiên hà hoạt động như thế nào?",
+          "a": "Bản đồ thiên hà hướng dẫn bạn khám phá vũ trụ. Nâng cấp bản đồ của bạn để khám phá các khu vực mới, vị trí cổng thông tin và khu vực nhiệm vụ ẩn. Khi bạn khám phá sâu hơn, bản đồ sẽ mở rộng, mở khóa các vùng không gian ngày càng nguy hiểm và bổ ích."
+        },
+        {
+          "q": "Sự tiến bộ của tôi có ảnh hưởng đến các trò chơi khác không?",
+          "a": "Mọi thứ bạn xây dựng trong Hyper Quest đều được nạp trực tiếp vào Hyper Racing và Overlord of the 7 Realms. Nâng cấp tàu, tiền thưởng chuyên môn, kỹ năng chiến đấu và tài nguyên đều được chuyển giao liền mạch. Một vũ trụ, nhiều trò chơi, tiến triển không giới hạn."
+        },
+        {
+          "q": "Tôi có thể đóng vai phản diện được không?",
+          "a": "Chắc chắn rồi. Hoạt động bí mật, bắt cóc các mục tiêu có giá trị cao, trở thành tay súng đánh thuê, buôn lậu hàng hóa nguy hiểm hoặc đột kích người chơi khác. Không có con đường duy nhất để thống trị. Cách bạn cai trị thiên hà hoàn toàn là sự lựa chọn của bạn và mọi quyết định đều định hình danh tiếng của bạn."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "CHỦ",
+      "heading": "Chúa tể của 7 cõi",
+      "subtitle": "Vùng đất sụp đổ. Xây dựng lại. Chinh phục. Trở thành Chúa tể.",
+      "intro": [
+        "Overlord of the 7 Realms là một trò chơi chiến lược chiến đấu ba cấp độ không giống bất kỳ trò chơi nào khác trong trò chơi. Bạn mạo hiểm đi qua một cánh cổng vào một vũ trụ song song và hạ cánh xuống một hành tinh xa lạ thù địch. Con tàu của bạn bị đắm, hệ thống của bạn không hoạt động và các sinh vật trên hành tinh đang dần tiến đến gần. Sự sống còn chỉ là sự khởi đầu. Sự thống trị là mục tiêu.",
+        "Xây dựng lại con tàu của bạn từ đống đổ nát. Sao chép và huấn luyện quân đội trong phòng thí nghiệm trên tàu của bạn. Chế ngự động vật hoang dã trên hành tinh để tạo ra kỵ binh có sức tàn phá. Sau đó, tham gia cuộc chiến trên ba chiều chiến đấu: chiến đấu trên mặt đất chống lại quái vật và người chơi đối thủ, tấn công từ mặt đất vào không gian vào các mục tiêu trên quỹ đạo hoặc mặt đất và chiến tranh từ không gian đến không gian trên Battle Ring khổng lồ quay quanh hành tinh.",
+        "Đây không chỉ là một trò chơi chiến lược khác. Overlord có tính năng tương tác VR thời gian thực, phần thưởng bằng tiền thật khi hoàn thành các sự kiện và nhiệm vụ hàng ngày cũng như các cuộc xâm lược hai tuần một lần của Hammerongs đáng sợ, loài ngoài hành tinh mạnh nhất còn tồn tại. Hai tuần một lần, họ đến để khai thác hành tinh và cứ hai tuần một lần, những người chơi dũng cảm có thể thách đấu họ để nhận những phần thưởng khổng lồ và phần thưởng huyền thoại.",
+        "Nâng cấp tàu vũ trụ của bạn, trang bị vũ khí hủy diệt, tuyển dụng các chuyên gia để nâng cao cấp độ sức mạnh của bạn và tạo dựng các liên minh để kiểm soát toàn bộ khu vực. Mọi thứ bạn xây dựng đều kết nối trực tiếp với Hyper Racing và Hyper Quest thông qua hệ sinh thái Hyper Tek được chia sẻ. Một vũ trụ, ba trò chơi, chiến tranh không giới hạn. Hãy đọc tiếp để khám phá cách hoạt động của hệ thống chiến đấu và lý do Overlord thay đổi mọi thứ."
+      ],
+      "calloutLine1": "Sự sống còn chỉ là sự khởi đầu.",
+      "calloutLine2": "Sự thống trị là Mục tiêu.",
+      "howItWorksTitle": "Hệ thống chiến đấu ba cấp độ; Ba chiều của chiến tranh",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Chiến đấu mặt đất",
+          "body": "Bề mặt hành tinh là một vùng chiến sự. Triển khai đội quân nhân bản của bạn chống lại các sinh vật ngoài hành tinh thù địch, quái thú khổng lồ và những người chơi đối thủ chiến đấu để giành lãnh thổ và tài nguyên. Chế ngự và huấn luyện động vật hoang dã trên hành tinh để tạo ra các đơn vị kỵ binh được trang bị sẵn mang lại cho lực lượng mặt đất của bạn một lợi thế tàn khốc. Chiến tranh trên bộ là thô sơ, mang tính chiến thuật và không ngừng nghỉ. Mỗi trận chiến bạn thắng sẽ kiếm được tài nguyên, lãnh thổ và danh tiếng."
+        },
+        {
+          "num": "02",
+          "title": "Các cuộc tấn công từ mặt đất đến không gian",
+          "body": "Đây là lúc Overlord bổ sung thêm một khía cạnh mà các trò chơi khác không có hoặc gần như không có. Tạo các nhóm quân chuyên biệt được thiết kế để phát động các cuộc tấn công giữa bề mặt hành tinh và Battle Ring trên quỹ đạo. Tấn công các tàu đóng trong không gian từ vị trí mặt đất của bạn hoặc phối hợp các cuộc tấn công kết hợp tấn công kẻ thù từ trên và dưới cùng một lúc. Lớp chiến đấu theo chiều dọc này biến chiến lược tiêu chuẩn thành một trận đấu cờ vua đa chiều, trong đó vị trí trên cả mặt đất và không gian quyết định chiến thắng."
+        },
+        {
+          "num": "03",
+          "title": "Chiến tranh không gian-không gian",
+          "body": "Đưa tàu của bạn vào quỹ đạo và hạ cánh trên Battle Ring, một cấu trúc quỹ đạo khổng lồ quay quanh hành tinh. Từ đây, hãy săn lùng những con tàu không được che chắn và những mục tiêu dễ bị tổn thương. Dịch chuyển quân xuyên không gian và trực tiếp vào tàu địch để gây sát thương nội bộ tối đa bằng các đòn tấn công lên tàu được phát triển đặc biệt. Phần thưởng chiến đấu ngoài không gian nằm trong số những phần thưởng cao nhất trong trò chơi và việc kiểm soát lãnh thổ quỹ đạo mang lại cho bạn lợi thế chiến lược mà không người chơi chỉ trên mặt đất nào có thể sánh được."
+        },
+        {
+          "num": "04",
+          "title": "Tại sao Tri-Level thay đổi mọi thứ",
+          "body": "Hầu hết các trò chơi chiến lược đều hoạt động trên một mặt phẳng duy nhất. Overlord hoạt động trên ba. Khả năng tấn công từ mặt đất tới mặt đất, mặt đất đến không gian và từ không gian đến không gian tạo nên một chiến trường có chiều sâu chiến thuật không gì sánh bằng. Kỹ năng là tất cả. Chỉ dùng sức mạnh vũ phu sẽ không khiến bạn trở thành Overlord. Khả năng làm chủ chiến lược ở cả ba cấp độ là điểm khác biệt giữa kẻ thống trị và kẻ bị đánh bại."
+        }
+      ],
+      "extraSection": {
+        "title": "Tương tác Battle Ring và VR",
+        "items": [
+          {
+            "title": "Hạ cánh trên Battle Ring",
+            "body": "Battle Ring là một cấu trúc quỹ đạo khổng lồ bao quanh hệ thống hành tinh. Khi đưa con tàu của mình vào không gian, bạn có thể cập bến Battle Ring để đạt được lợi thế chiến lược to lớn. Từ vị trí trên cao này, bạn có thể săn lùng những con tàu không được che chắn, tung nhóm lên tàu đối thủ và phối hợp tấn công tàn khốc vào các mục tiêu trên mặt đất bên dưới. Hạ cánh trên Battle Ring mở ra một chiều hướng chơi trò chơi hoàn toàn mới mà hầu hết các trò chơi chiến lược không cung cấp, mang lại cho Overlord lợi thế chiến thuật so với bất kỳ trò chơi nào khác trên thị trường."
+          },
+          {
+            "title": "Bên trong nhẫn chiến đấu",
+            "body": "Battle Ring không chỉ là một bệ lắp ghép. Nếu bạn có thể tìm ra cách xâm nhập vào bên trong nó, các nhiệm vụ ẩn, phần thưởng bổ sung và phần thưởng độc quyền đang chờ đợi bên trong. Bên trong chiếc nhẫn là một mê cung gồm các hành lang, căn phòng và công nghệ cổ xưa. Thực hiện các nhiệm vụ và nhiệm vụ săn bắn ngay trong võ đài, khám phá những bí mật mà không người chơi nào trên bề mặt có thể tiếp cận được. Battle Ring trao thưởng cho những kẻ táo bạo, xảo quyệt và không ngừng nghỉ."
+          },
+          {
+            "title": "Tương tác VR thời gian thực",
+            "body": "Giống như tất cả các dòng game Hyper Tek, Overlord of the 7 Realms hỗ trợ tương tác VR đầy đủ trong thời gian thực. Bước vào bên trong con tàu của bạn, đi dọc các hành lang của Battle Ring, dẫn quân vào trận chiến trên mặt đất và trải nghiệm chiến tranh ngoài không gian từ buồng lái tàu của bạn. VR biến Overlord từ một trò chơi chiến lược thành một trải nghiệm chiến trường hoàn toàn nhập vai. Chỉ huy lực lượng của bạn, khám phá địa hình ngoài hành tinh và tham gia chiến đấu với mức độ hiện diện và cường độ mà trò chơi màn hình phẳng không thể tái tạo được."
+          },
+          {
+            "title": "Lợi thế so với các trò chơi khác",
+            "body": "Không có trò chơi nào khác kết hợp chiến tranh ba cấp độ, trạm chiến đấu quỹ đạo có thể khám phá, VR thời gian thực và tiền thật và phần thưởng trong trò chơi trong một trải nghiệm duy nhất. Chỉ riêng Battle Ring đã bổ sung thêm một khía cạnh lối chơi mà các đối thủ không thể sánh được. Khi bạn kết hợp điều đó với chiến đấu trên mặt đất, chiến tranh ngoài không gian, trải nghiệm VR và hệ sinh thái Hyper Tek được kết nối với nhau, Overlord sẽ đứng trong một danh mục riêng."
+          }
+        ]
+      },
+      "upgradesTitle": "Xây dựng lại, tái vũ trang, tuyển dụng; Tăng sức mạnh cho chiến tranh",
+      "upgrades": [
+        {
+          "title": "Nâng cấp tàu vũ trụ",
+          "body": "Con tàu gặp nạn của bạn là nơi mọi chuyện bắt đầu. Xây dựng lại từng hệ thống, từ khoang máy đến sàn chỉ huy. Mọi thành phần đều có thể nâng cấp hoàn toàn: gia cố thân tàu, tính toàn vẹn của cấu trúc, thành phần vỏ bên ngoài, bộ tạo lá chắn, hệ thống điện và mảng điều hướng. Trong Overlord, bạn xây dựng không phải vì tốc độ mà để chiến đấu. Một tàu chiến được nâng cấp hoàn toàn là nền tảng của mọi chiến dịch thành công và bạn càng đầu tư sâu thì tàu của bạn càng trở nên đáng gờm hơn."
+        },
+        {
+          "title": "Hệ thống vũ khí và cấp độ công nghệ",
+          "body": "Nâng cấp và tinh chỉnh vũ khí, kỹ năng và trình độ công nghệ của bạn để thống trị cả ba cấp độ chiến đấu. Pháo binh trên mặt đất dành cho chiến tranh hành tinh, pin chống quỹ đạo để tấn công từ mặt đất đến không gian và dàn vũ khí gắn trên tàu để chiến đấu từ không gian đến không gian. Mỗi hệ thống vũ khí có thể được tinh chỉnh cho các vai trò chiến thuật cụ thể. Cho dù bạn chuyên về bắn phá tầm xa, hành động áp sát hay các biện pháp phòng thủ đối phó, việc trang bị vũ khí sẽ xác định danh tính chiến đấu của bạn."
+        },
+        {
+          "title": "Tuyển dụng chuyên gia",
+          "body": "Các chuyên gia là nhân tố phân chia những người chơi giỏi khỏi Overlord. Có được những chuyên gia độc đáo, những người mang lại những phần thưởng mạnh mẽ cho hiệu suất và mức sức mạnh tổng thể của con tàu của bạn. Các chuyên gia chiến thuật cải thiện hiệu quả triển khai quân đội, các chuyên gia kỹ thuật đẩy nhanh việc sửa chữa và nâng cấp tàu, các chuyên gia vũ khí tăng lượng sát thương trên tất cả các hệ thống và các chuyên gia tình báo tiết lộ vị trí và điểm yếu của kẻ thù. Xếp chồng nhiều chuyên gia để tạo ra sức mạnh tổng hợp mạnh mẽ giúp khuếch đại mọi khía cạnh hoạt động của bạn."
+        },
+        {
+          "title": "Xây dựng quân đội của bạn",
+          "body": "Sao chép quân đội trong phòng thí nghiệm nhân bản trên tàu của bạn, sau đó nâng cấp và tinh chỉnh chúng cũng như vũ khí của chúng cho đến khi chúng sẵn sàng chiến đấu. Nhưng chỉ quân đội thôi thì chưa đủ. Thuần hóa và huấn luyện các sinh vật hoang dã trên hành tinh để tạo ra kỵ binh quái thú cưỡi ngựa, một lực lượng không thể nhân bản hay chế tạo và phải kiếm được thông qua kỹ năng và sự kiên nhẫn. Thành phần quân đội của bạn trên mặt đất, trên không và không gian là yếu tố quyết định sự thống trị của bạn."
+        }
+      ],
+      "rewardsTitle": "Hammerongs, Phần thưởng và Hệ sinh thái Hyper Tek",
+      "rewards": [
+        {
+          "title": "The Hammerongs: Loài mạnh nhất còn tồn tại",
+          "body": "Cứ hai tuần một lần, trường lực của đấu trường trung tâm giảm xuống và các Hammerong đến. Chúng là loài ngoài hành tinh mạnh nhất trong vũ trụ, được trang bị công nghệ tiên tiến vượt xa mọi thứ mà người chơi sở hữu. Họ đến để khai thác tài nguyên của hành tinh và bảo vệ đấu trường với lực lượng đầy đủ, áp đảo. Tấn công Hammerongs là thử thách nguy hiểm nhất trong Overlord, nhưng những người thành công sẽ được thưởng những phần thưởng khổng lồ, chiến lợi phẩm huyền thoại, vật liệu nâng cấp quý hiếm và những phần thưởng độc quyền không thể có được bằng bất kỳ cách nào khác. Cuộc xâm lược Hammerong hai tuần một lần là bài kiểm tra cuối cùng về sức mạnh của bạn."
+        },
+        {
+          "title": "Sự kiện hàng ngày, nhiệm vụ và phần thưởng chiến đấu",
+          "body": "Overlord trao thưởng liên tục. Hoàn thành nhiệm vụ hàng ngày để kiếm tín dụng, nâng cấp vật liệu và tiền thưởng tiến triển. Tham gia các sự kiện đặc biệt để nhận phần thưởng cao cấp. Thực hiện các nhiệm vụ trên khắp bề mặt hành tinh và trong Battle Ring để nhận chiến lợi phẩm độc quyền. Chiến thắng các trận chiến chống lại quái vật, sinh vật ngoài hành tinh và người chơi đối thủ để dự trữ tài nguyên. Khám phá bề mặt để khám phá những đồ tạo tác và kho báu ẩn giấu. Cấu trúc phần thưởng được thiết kế sao cho mọi hành động bạn thực hiện sẽ đưa bạn đến gần hơn việc trở thành Chúa tể cuối cùng của máy chủ."
+        },
+        {
+          "title": "Đã kết nối với Hệ sinh thái Hyper Tek",
+          "body": "Chúa tể của 7 cõi không tồn tại một cách biệt lập. Nó được tích hợp hoàn toàn vào vũ trụ Hyper Tek cùng với Hyper Racing và Hyper Quest. Tài nguyên kiếm được trong Overlord có thể được sử dụng cho cả ba trò chơi. Nâng cấp tàu, tiền thưởng chuyên môn, kỹ năng chiến đấu và nguyên liệu được chuyển đổi liền mạch giữa các tựa game. Khả năng đua xe đạt được trong Hyper Racing sẽ cải thiện kỹ năng phi công của bạn trong trận chiến ngoài không gian Overlord. Vật liệu thu thập được trong Hyper Quest sẽ thúc đẩy quá trình nâng cấp của bạn trên hành tinh. Thị trường Hyper Tek kết nối mọi thứ, tạo ra một nền kinh tế thống nhất trong đó sự tiến bộ trong một trò chơi sẽ thúc đẩy sự tiến bộ của cả ba trò chơi."
+        },
+        {
+          "title": "Một vũ trụ, ba trò chơi, sức mạnh vô hạn",
+          "body": "Những người chơi tham gia vào cả ba trò chơi Hyper Tek sẽ xây dựng sức mạnh nhanh hơn, nhận được các phần thưởng độc quyền của nhiều trò chơi và thống trị nhờ vô số kỹ năng và tài nguyên mà những người chơi một trò chơi không thể sánh được. Hệ sinh thái kết nối với nhau là lợi thế cạnh tranh cuối cùng."
+        }
+      ],
+      "faqTitle": "Chúa tể của 7 cõi - Câu hỏi thường gặp",
+      "faq": [
+        {
+          "q": "Chúa tể của 7 cõi là gì?",
+          "a": "Trò chơi chiến lược chiến đấu ba cấp độ trong đó bạn hạ cánh xuống một hành tinh xa lạ, xây dựng lại con tàu của mình, nhân bản quân đội và chiến đấu trên ba chiều: mặt đất đối đất, mặt đất đối không và không gian đối không. Có tính năng tương tác VR, phần thưởng bằng tiền thật và các cuộc xâm lược Hammerong hai tuần một lần."
+        },
+        {
+          "q": "Hệ thống chiến đấu ba cấp là gì?",
+          "a": "Chiến đấu diễn ra theo ba cấp độ: mặt đất chống lại quái vật và người chơi đối thủ, các cuộc tấn công từ mặt đất đến không gian nhắm vào các tàu quỹ đạo và chiến tranh từ không gian đến không gian trên Battle Ring. Cách tiếp cận đa chiều này tạo ra chiều sâu chiến thuật mà không một trò chơi chiến lược một mặt phẳng nào có thể sánh được."
+        },
+        {
+          "q": "Nhẫn chiến đấu là gì?",
+          "a": "Một cấu trúc quỹ đạo khổng lồ quay quanh hành tinh. Đưa tàu của bạn lên đó để săn các mục tiêu không được che chắn, đưa nhóm lên tàu của đối phương và truy cập các nhiệm vụ ẩn bên trong tàu. Việc kiểm soát Battle Ring mang lại cho bạn lợi thế chiến lược so với những người chơi chỉ ở trên mặt đất."
+        },
+        {
+          "q": "Tôi có thể nâng cấp tàu vũ trụ của mình không?",
+          "a": "Mọi hệ thống đều có thể nâng cấp từ khoang động cơ lên boong chỉ huy: thân tàu, cấu trúc, lớp vỏ bên ngoài, bộ tạo tấm chắn, hệ thống điện và hệ thống dẫn đường. Trong Overlord, bạn xây dựng để chiến đấu chứ không phải tốc độ. Một tàu chiến được nâng cấp hoàn toàn là nền tảng của mọi chiến dịch."
+        },
+        {
+          "q": "Các chuyên gia làm việc như thế nào?",
+          "a": "Tuyển dụng những chuyên gia độc đáo, những người bổ sung thêm những phần thưởng mạnh mẽ cho hiệu suất và cấp độ sức mạnh của con tàu của bạn. Mỗi chuyên gia về chiến thuật, kỹ thuật, vũ khí và tình báo đều thúc đẩy các hệ thống khác nhau. Xếp chồng nhiều chuyên gia để có sức mạnh tổng hợp tàn khốc ở mọi cấp độ chiến đấu."
+        },
+        {
+          "q": "Người Hammerong là ai?",
+          "a": "Loài ngoài hành tinh mạnh nhất còn tồn tại. Hai tuần một lần, họ đến đấu trường trung tâm để khai thác tài nguyên của hành tinh, được bảo vệ bởi lực lượng áp đảo và công nghệ tiên tiến. Tấn công chúng là cực kỳ nguy hiểm nhưng mang lại cho người chơi những phần thưởng khổng lồ và chiến lợi phẩm huyền thoại."
+        },
+        {
+          "q": "Tôi có thể kiếm được phần thưởng gì?",
+          "a": "Các nhiệm vụ, nhiệm vụ, trận chiến và sự kiện hàng ngày đều trả các khoản tín dụng, vật liệu nâng cấp và tiền thưởng tiến triển. Các sự kiện đặc biệt và cuộc xâm lược của Hammerong mang đến những phần thưởng cao cấp và độc quyền. Những thử thách có độ khó cao hơn và các cuộc thi xếp hạng mang lại khoản thanh toán lớn hơn bao gồm cả tiền thật."
+        },
+        {
+          "q": "Overlord có hỗ trợ VR không?",
+          "a": "Vâng. Tương tác VR toàn thời gian thực cho phép bạn đi dọc hành lang của con tàu, khám phá nội thất Battle Ring, dẫn quân tham gia chiến đấu trên mặt đất và điều khiển tàu của bạn trong chiến tranh ngoài không gian. VR biến Overlord từ chiến lược thành trải nghiệm chiến trường hoàn toàn nhập vai."
+        },
+        {
+          "q": "Làm thế nào để xây dựng quân đội của tôi?",
+          "a": "Sao chép quân đội trong phòng thí nghiệm trên tàu của bạn, sau đó nâng cấp và tinh chỉnh chúng cũng như vũ khí của chúng. Đối với kỵ binh gắn kết, bạn phải thuần hóa và huấn luyện các sinh vật hoang dã trên hành tinh, vì động vật không thể được nhân bản. Thành phần quân đội trên mặt đất, trên không và không gian quyết định sự thống trị của bạn."
+        },
+        {
+          "q": "Tôi có thể tham gia một liên minh không?",
+          "a": "Vâng. Đi một mình hoặc tham gia một liên minh giúp tăng sức mạnh và giúp bạn phát triển. Các liên minh cung cấp các nguồn lực chung, các cuộc tấn công phối hợp và phòng thủ tập thể. Hoàn thành nhiệm vụ hàng ngày để nâng cấp cả tàu của bạn và tài sản chung của liên minh."
+        },
+        {
+          "q": "Overlord có được liên kết với các trò chơi Hyper Tek khác không?",
+          "a": "Tích hợp đầy đủ. Tài nguyên, nâng cấp tàu, tiền thưởng chuyên môn và kỹ năng chiến đấu luân chuyển giữa Overlord, Hyper Racing và Hyper Quest. Khả năng đua xe cải thiện khả năng chiến đấu ngoài không gian của bạn, vật liệu Nhiệm vụ thúc đẩy quá trình nâng cấp của bạn và thị trường Hyper Tek kết nối toàn bộ nền kinh tế."
+        },
+        {
+          "q": "Những loại vũ khí có sẵn?",
+          "a": "Pháo binh trên mặt đất, pin chống quỹ đạo, dàn vũ khí gắn trên tàu và thiết bị hành động chuyên dụng trên tàu. Mỗi hệ thống có thể được tinh chỉnh cho các vai trò chiến thuật cụ thể bao gồm bắn phá tầm xa, cận chiến và các biện pháp phòng thủ đối phó."
+        },
+        {
+          "q": "Tôi có thể khám phá bề mặt hành tinh không?",
+          "a": "Vâng. Hành tinh này rất phong phú với những phần thưởng, đồ tạo tác, tài nguyên ẩn giấu và động vật hoang dã nguy hiểm cần thuần hóa. Khám phá bề mặt để tìm kho báu, chiến đấu với các sinh vật và quái vật ngoài hành tinh, đồng thời khám phá những lợi thế chiến lược giúp củng cố chiến dịch thống trị Overlord của bạn."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "THOÁT",
     "spaceRing": "OVERLORD · VÒNG KHÔNG GIAN",
@@ -324,91 +720,268 @@
       "detail": "Chi Tiết"
     },
     "rooms": {
-      "storeroom":     { "title": "Kho",                    "desc": "Trung tâm lưu trữ nguyên liệu thô và tài nguyên thu hoạch. Quản lý phân phối hàng tồn kho qua các hoạt động khai thác và lọc." },
-      "mining_fs":     { "title": "Khai Thác FS",           "desc": "Khoang khai thác mũi mạn phải. Được trang bị mảng khai thác lõi sâu để thu thập khoáng vật và quặng trong không gian mở." },
-      "mining_fp":     { "title": "Khai Thác FP",           "desc": "Khoang khai thác mũi mạn trái. Phản chiếu đơn vị mạn phải, tăng gấp đôi năng lực khai thác trong các hoạt động vùng giàu tài nguyên." },
-      "process_ref":   { "title": "Lò Lọc Xử Lý",          "desc": "Chuyển đổi quặng và khoáng vật thô thành hợp kim tinh chế. Quan trọng cho tổng hợp nhiên liệu và vật liệu nâng cấp tàu." },
-      "mining_rs":     { "title": "Khai Thác RS",           "desc": "Đơn vị khai thác đuôi mạn phải. Góc -45° để quét vùng ngang trong khi thu hoạch tiểu hành tinh trôi chậm." },
-      "mining_rp":     { "title": "Khai Thác RP",           "desc": "Đơn vị khai thác đuôi mạn trái. Phối hợp với khoang RS để tối đa hóa sản lượng khai thác tài nguyên vùng đuôi." },
-      "fuel_ref":      { "title": "Lò Lọc Nhiên Liệu",     "desc": "Xử lý hợp kim tinh chế thành nhiên liệu cấp đẩy. Cung cấp cho động cơ chính và kho dự trữ thiết bị đẩy khẩn cấp." },
-      "workshop":      { "title": "Xưởng",                  "desc": "Trung tâm bảo trì và chế tạo tàu. Xử lý sửa chữa linh kiện, sản xuất bộ phận và nâng cấp thiết bị." },
-      "racing":        { "title": "Nhà Ga Đua",             "desc": "Khoang chuyên dụng chứa máy bay không người lái đua và tàu nhỏ. Hỗ trợ triển khai chế độ game RACING và hoạt động pit-stop." },
-      "brig":          { "title": "Phòng Giam",             "desc": "Buồng giam giữ tù nhân và hàng hóa có giá trị. Tường gia cố ngăn truy cập hoặc thoát trái phép." },
-      "armory_ss":     { "title": "Kho Vũ Khí SS",          "desc": "Tủ vũ khí mạn phải. Lưu trữ và bảo trì vũ khí nhỏ, thiết bị bảo vệ thủy thủ và hệ thống phòng thủ cá nhân." },
-      "armory_ps":     { "title": "Kho Vũ Khí PS",          "desc": "Tủ vũ khí mạn trái. Phản chiếu kho SS cung cấp quyền truy cập trang bị cân bằng cho cả hai bên tàu." },
-      "main_weapon":   { "title": "Vũ Khí Chính Hạng Nặng", "desc": "Vị trí vũ khí hạng nặng chính. Chứa hệ thống tấn công mạnh nhất của tàu cho các trận chiến quy mô lớn." },
-      "fwd_shield":    { "title": "Máy Phát Khiên Trước",   "desc": "Tạo ra rào cản năng lượng bảo vệ qua mũi tàu. Phòng thủ đầu tiên chống lại đạn và tấn công năng lượng." },
-      "fighter_fss":   { "title": "Khoang Tiêm Kích FSS",   "desc": "Khoang mũi mạn phải chứa máy bay tiêm kích nhỏ gọn. Cho phép triển khai nhanh máy bay hộ tống trong các nhiệm vụ chiến đấu và tuần tra." },
-      "fighter_fps":   { "title": "Khoang Tiêm Kích FPS",   "desc": "Khoang tiêm kích mũi mạn trái. Hoạt động phối hợp với khoang FSS để phóng phi đội tiêm kích phối hợp." },
-      "fighter_rss":   { "title": "Khoang Tiêm Kích RSS",   "desc": "Khoang tiêm kích nacelle đuôi mạn phải. Hỗ trợ hoạt động bảo vệ hậu vệ và tình huống đánh chặn truy đuổi." },
-      "fighter_rps":   { "title": "Khoang Tiêm Kích RPS",   "desc": "Khoang tiêm kích nacelle đuôi mạn trái. Cung cấp vùng phủ đuôi đối xứng cho triển khai tiêm kích phòng thủ hoàn toàn." },
-      "barracks_ss":   { "title": "Doanh Trại SS",           "desc": "Khu nghỉ thủy thủ mạn phải cho nhân sự chiến đấu. Chứa binh lính, phi công và đội bảo vệ với hệ thống giường và tủ đồ." },
-      "barracks_ps":   { "title": "Doanh Trại PS",           "desc": "Khu nghỉ thủy thủ mạn trái. Bố cục giống doanh trại SS đảm bảo phân phối thủy thủ đều nhau và huy động nhanh từ cả hai bên." },
-      "stables_ss":    { "title": "Chuồng Ngựa SS",          "desc": "Khoang tài sản sinh học mạn phải. Chứa vật cưỡi ngoài hành tinh và sinh vật kỹ thuật sinh học dùng trong hoạt động bề mặt hành tinh." },
-      "stable_ps":     { "title": "Chuồng Ngựa PS",          "desc": "Khoang tài sản sinh học mạn trái. Phản chiếu chuồng SS để tải sinh vật cân bằng và phân phối trọng lượng đối xứng." },
-      "transporter":   { "title": "Khoang Vận Chuyển",       "desc": "Hệ thống vận chuyển nhân sự và hàng hóa hỗ trợ lượng tử. Cho phép dịch chuyển tức thời tầm ngắn đến bề mặt hành tinh hoặc tàu gần đó." },
-      "security":      { "title": "Trạm An Ninh",            "desc": "Trung tâm giám sát toàn tàu và phản ứng với mối đe dọa. Giám sát tất cả các boong và phối hợp các giao thức bảo mật nội bộ." },
-      "weapons_ss":    { "title": "Hệ Thống Vũ Khí SS",      "desc": "Bảng điều khiển quản lý vũ khí mạn phải. Kiểm soát mảng nhắm mục tiêu, trình tự bắn và hậu cần đạn cho vũ khí mạn phải." },
-      "weapons_ps":    { "title": "Hệ Thống Vũ Khí PS",      "desc": "Bảng điều khiển quản lý vũ khí mạn trái. Cung cấp kiểm soát độc lập đầy đủ của tất cả nền tảng vũ khí bên trái." },
-      "power_plant":   { "title": "Nhà Máy Điện",            "desc": "Đơn vị tạo năng lượng lõi. Cung cấp đầu ra điện ổn định cho tất cả hệ thống tàu thông qua công nghệ giam cầm plasma vòng tròn." },
-      "power_sys":     { "title": "Hệ Thống Điện",           "desc": "Trung tâm phân phối và điều tiết điện. Quản lý cân bằng tải giữa vũ khí, khiên, động cơ và hệ thống hỗ trợ sự sống." },
-      "energy_dist":   { "title": "Phân Phối Năng Lượng",    "desc": "Nút định tuyến năng lượng phụ. Đảm bảo cung cấp điện nhất quán cho hệ thống giữa tàu và phần đuôi trong điều kiện nhu cầu cao." },
-      "main_engine":   { "title": "Động Cơ Chính Của Tàu",   "desc": "Hệ thống đẩy chính cung cấp năng lượng cho mọi di chuyển dưới tốc độ ánh sáng. Tạo lực đẩy thông qua các tia plasma được xúc tác phản vật chất." },
-      "navigation":    { "title": "Dẫn Đường",               "desc": "Trạm dẫn đường và kiểm soát bánh lái trung tâm. Quản lý lập kế hoạch lộ trình, bản đồ thiên văn và theo dõi vị trí thời gian thực." },
-      "flight_deck":   { "title": "Boong Bay",               "desc": "Trạm lái chính. Kiểm soát tất cả hoạt động bay bao gồm cất cánh, hạ cánh, cơ động quỹ đạo và hành động né tránh khẩn cấp." },
-      "weapons_off":   { "title": "Sĩ Quan Vũ Khí",          "desc": "Vị trí chỉ huy vũ khí chiến thuật. Phối hợp bắn vũ khí tấn công và phòng thủ dưới sự chỉ huy trực tiếp của Sĩ Quan Vũ Khí." },
-      "comms_off":     { "title": "Sĩ Quan Liên Lạc",        "desc": "Trung tâm liên lạc và đánh chặn tín hiệu. Xử lý tất cả liên lạc liên tàu, liên minh và hành tinh bao gồm các kênh mã hóa." },
-      "capt_quarters": { "title": "Phòng Thuyền Trưởng",     "desc": "Phòng riêng của sĩ quan chỉ huy tàu. Có các thiết bị đầu cuối dữ liệu an toàn và cơ sở họp mật riêng tư." },
-      "kitchen":       { "title": "Bếp",                     "desc": "Cơ sở dinh dưỡng và chuẩn bị thức ăn của thủy thủ. Xử lý tài nguyên thức ăn được lưu trữ và tổng hợp các chất bổ sung dinh dưỡng cho các chuyến đi dài." },
-      "mess_hall":     { "title": "Phòng Ăn Tập Thể",        "desc": "Không gian ăn uống và giải trí chung. Phục vụ như trung tâm tinh thần thủy thủ trong thời gian nghỉ giữa các hoạt động chiến đấu và tài nguyên." },
-      "hydro_1":       { "title": "Phòng Thủy Canh 1",       "desc": "Đơn vị trồng tự động sản xuất thực phẩm tươi và cây thuốc. Giảm sự phụ thuộc vào dự phòng được lưu trữ cho các nhiệm vụ kéo dài." },
-      "hydro_2":       { "title": "Phòng Thủy Canh 2",       "desc": "Phòng thủy canh phụ mở rộng sự đa dạng và sản lượng cây trồng. Hỗ trợ dinh dưỡng thủy thủ và sản xuất hàng hóa thương mại." },
-      "hydro_3":       { "title": "Phòng Thủy Canh 3",       "desc": "Đơn vị trồng thứ ba chuyên về cây lương thực chủ lực năng suất cao. Cung cấp nguồn calo cơ bản cho đội thủy thủ đông đảo." },
-      "hydro_4":       { "title": "Phòng Thủy Canh 4",       "desc": "Phòng nghiên cứu y học và thực vật. Trồng các loài hiếm dùng trong điều trị y tế và tổng hợp hóa học." },
-      "hydro_5":       { "title": "Phòng Thủy Canh 5",       "desc": "Khoang trồng cây ngoại lai. Sản xuất hàng hóa xa xỉ và thực vật hiếm để giao dịch trên chợ." },
-      "hydro_6":       { "title": "Phòng Thủy Canh 6",       "desc": "Phòng thí nghiệm tăng trưởng cao thực nghiệm. Thử nghiệm các giống cây trồng mới được phát triển qua các chương trình biến đổi gen." },
-      "shield_main":   { "title": "Máy Phát Khiên Chính",    "desc": "Máy phát khiên đa hướng chính. Chiếu rào cản năng lượng xung quanh toàn bộ vỏ tàu trong các tình huống chiến đấu." },
-      "power_relay1":  { "title": "Rơ-le Điện 1",            "desc": "Điểm nối rơ-le điện boong trên. Định tuyến năng lượng từ nhà máy điện đến vũ khí trước và mảng khiên." },
-      "power_relay2":  { "title": "Rơ-le Điện 2",            "desc": "Điểm nối rơ-le điện boong dưới. Phân phối điện đến nacelle động cơ và hệ thống phòng thủ đuôi." },
-      "hidden_st1":    { "title": "Kho Bí Mật 1",            "desc": "Hầm bảo mật cao ẩn. Lưu trữ hàng hóa bí mật, đồ tạo tác có giá trị và hàng lậu tránh khỏi các lần quét hàng tồn kho tiêu chuẩn." },
-      "hidden_st2":    { "title": "Kho Bí Mật 2",            "desc": "Hầm ẩn thứ hai. Không gian an toàn bổ sung cho các vật phẩm quan trọng nhiệm vụ đòi hỏi bảo mật tối đa." },
-      "cargo_1":       { "title": "Khoang Hàng 1",           "desc": "Khoang hàng hóa khổng lồ chính. Được thiết kế để vận chuyển tài nguyên khối lượng lớn bao gồm quặng, kim loại tinh chế và hàng hóa thương mại." },
-      "cargo_2":       { "title": "Khoang Hàng 2",           "desc": "Khoang hàng phụ được tối ưu hóa cho hàng hóa mỏng manh hoặc nhạy cảm với nhiệt độ. Điều kiện lưu trữ kiểm soát khí hậu." },
-      "cargo_3":       { "title": "Khoang Hàng 3",           "desc": "Khoang hàng thứ ba. Bố cục cấu hình được hỗ trợ tải hỗn hợp bao gồm phương tiện, container và thiết bị cỡ lớn." },
-      "war_council":   { "title": "Hội Đồng Chiến Tranh",    "desc": "Phòng chỉ huy chiến lược. Bàn họp sĩ quan cao cấp nơi kế hoạch chiến đấu, chiến lược liên minh và mục tiêu chiến dịch được phối hợp." },
-      "academy":       { "title": "Học Viện",                "desc": "Cơ sở đào tạo và giáo dục thủy thủ. Cho phép nâng cao kỹ năng, mở khóa chuyên môn và chương trình phát triển sĩ quan." },
-      "science_lab":   { "title": "Phòng Thí Nghiệm Khoa Học", "desc": "Trung tâm nghiên cứu và phát triển. Tiến hành các thí nghiệm về khoa học vật liệu, lý thuyết đẩy và phân tích công nghệ ngoài hành tinh." },
-      "dna_lab":       { "title": "Phòng Thí Nghiệm DNA",    "desc": "Cơ sở nghiên cứu di truyền. Phát triển cải tiến sinh học cho thủy thủ, tạo các biến thể loài mới và nghiên cứu mẫu DNA ngoài hành tinh." },
-      "cryostasis":    { "title": "Đình Chỉ Đông Lạnh",      "desc": "Hệ thống đình chỉ hành trình tầm xa. Đặt thủy thủ vào trạng thái đông lạnh để bảo tồn tài nguyên trong các hành trình không gian sâu nhiều năm." },
-      "dna_chambers":  { "title": "Phòng DNA",               "desc": "Khoang biến đổi gen. Áp dụng trực tiếp các cải tiến DNA đã nghiên cứu cho các thành viên thủy thủ và đơn vị sinh học." },
-      "weapons_relay": { "title": "Rơ-le Điện Vũ Khí",       "desc": "Nút quản lý điện chuyên dụng cho hệ thống vũ khí hạng nặng. Đảm bảo cung cấp năng lượng ổn định trong các cuộc giao chiến kéo dài." },
-      "comms_tower":   { "title": "Tháp Liên Lạc",           "desc": "Mảng liên lạc không gian sâu tầm xa. Cho phép phát sóng toàn hạm đội, truyền liên sao và phối hợp liên minh qua khoảng cách rộng lớn." }
+      "storeroom": {
+        "title": "Kho",
+        "desc": "Trung tâm lưu trữ nguyên liệu thô và tài nguyên thu hoạch. Quản lý phân phối hàng tồn kho qua các hoạt động khai thác và lọc."
+      },
+      "mining_fs": {
+        "title": "Khai Thác FS",
+        "desc": "Khoang khai thác mũi mạn phải. Được trang bị mảng khai thác lõi sâu để thu thập khoáng vật và quặng trong không gian mở."
+      },
+      "mining_fp": {
+        "title": "Khai Thác FP",
+        "desc": "Khoang khai thác mũi mạn trái. Phản chiếu đơn vị mạn phải, tăng gấp đôi năng lực khai thác trong các hoạt động vùng giàu tài nguyên."
+      },
+      "process_ref": {
+        "title": "Lò Lọc Xử Lý",
+        "desc": "Chuyển đổi quặng và khoáng vật thô thành hợp kim tinh chế. Quan trọng cho tổng hợp nhiên liệu và vật liệu nâng cấp tàu."
+      },
+      "mining_rs": {
+        "title": "Khai Thác RS",
+        "desc": "Đơn vị khai thác đuôi mạn phải. Góc -45° để quét vùng ngang trong khi thu hoạch tiểu hành tinh trôi chậm."
+      },
+      "mining_rp": {
+        "title": "Khai Thác RP",
+        "desc": "Đơn vị khai thác đuôi mạn trái. Phối hợp với khoang RS để tối đa hóa sản lượng khai thác tài nguyên vùng đuôi."
+      },
+      "fuel_ref": {
+        "title": "Lò Lọc Nhiên Liệu",
+        "desc": "Xử lý hợp kim tinh chế thành nhiên liệu cấp đẩy. Cung cấp cho động cơ chính và kho dự trữ thiết bị đẩy khẩn cấp."
+      },
+      "workshop": {
+        "title": "Xưởng",
+        "desc": "Trung tâm bảo trì và chế tạo tàu. Xử lý sửa chữa linh kiện, sản xuất bộ phận và nâng cấp thiết bị."
+      },
+      "racing": {
+        "title": "Nhà Ga Đua",
+        "desc": "Khoang chuyên dụng chứa máy bay không người lái đua và tàu nhỏ. Hỗ trợ triển khai chế độ game RACING và hoạt động pit-stop."
+      },
+      "brig": {
+        "title": "Phòng Giam",
+        "desc": "Buồng giam giữ tù nhân và hàng hóa có giá trị. Tường gia cố ngăn truy cập hoặc thoát trái phép."
+      },
+      "armory_ss": {
+        "title": "Kho Vũ Khí SS",
+        "desc": "Tủ vũ khí mạn phải. Lưu trữ và bảo trì vũ khí nhỏ, thiết bị bảo vệ thủy thủ và hệ thống phòng thủ cá nhân."
+      },
+      "armory_ps": {
+        "title": "Kho Vũ Khí PS",
+        "desc": "Tủ vũ khí mạn trái. Phản chiếu kho SS cung cấp quyền truy cập trang bị cân bằng cho cả hai bên tàu."
+      },
+      "main_weapon": {
+        "title": "Vũ Khí Chính Hạng Nặng",
+        "desc": "Vị trí vũ khí hạng nặng chính. Chứa hệ thống tấn công mạnh nhất của tàu cho các trận chiến quy mô lớn."
+      },
+      "fwd_shield": {
+        "title": "Máy Phát Khiên Trước",
+        "desc": "Tạo ra rào cản năng lượng bảo vệ qua mũi tàu. Phòng thủ đầu tiên chống lại đạn và tấn công năng lượng."
+      },
+      "fighter_fss": {
+        "title": "Khoang Tiêm Kích FSS",
+        "desc": "Khoang mũi mạn phải chứa máy bay tiêm kích nhỏ gọn. Cho phép triển khai nhanh máy bay hộ tống trong các nhiệm vụ chiến đấu và tuần tra."
+      },
+      "fighter_fps": {
+        "title": "Khoang Tiêm Kích FPS",
+        "desc": "Khoang tiêm kích mũi mạn trái. Hoạt động phối hợp với khoang FSS để phóng phi đội tiêm kích phối hợp."
+      },
+      "fighter_rss": {
+        "title": "Khoang Tiêm Kích RSS",
+        "desc": "Khoang tiêm kích nacelle đuôi mạn phải. Hỗ trợ hoạt động bảo vệ hậu vệ và tình huống đánh chặn truy đuổi."
+      },
+      "fighter_rps": {
+        "title": "Khoang Tiêm Kích RPS",
+        "desc": "Khoang tiêm kích nacelle đuôi mạn trái. Cung cấp vùng phủ đuôi đối xứng cho triển khai tiêm kích phòng thủ hoàn toàn."
+      },
+      "barracks_ss": {
+        "title": "Doanh Trại SS",
+        "desc": "Khu nghỉ thủy thủ mạn phải cho nhân sự chiến đấu. Chứa binh lính, phi công và đội bảo vệ với hệ thống giường và tủ đồ."
+      },
+      "barracks_ps": {
+        "title": "Doanh Trại PS",
+        "desc": "Khu nghỉ thủy thủ mạn trái. Bố cục giống doanh trại SS đảm bảo phân phối thủy thủ đều nhau và huy động nhanh từ cả hai bên."
+      },
+      "stables_ss": {
+        "title": "Chuồng Ngựa SS",
+        "desc": "Khoang tài sản sinh học mạn phải. Chứa vật cưỡi ngoài hành tinh và sinh vật kỹ thuật sinh học dùng trong hoạt động bề mặt hành tinh."
+      },
+      "stable_ps": {
+        "title": "Chuồng Ngựa PS",
+        "desc": "Khoang tài sản sinh học mạn trái. Phản chiếu chuồng SS để tải sinh vật cân bằng và phân phối trọng lượng đối xứng."
+      },
+      "transporter": {
+        "title": "Khoang Vận Chuyển",
+        "desc": "Hệ thống vận chuyển nhân sự và hàng hóa hỗ trợ lượng tử. Cho phép dịch chuyển tức thời tầm ngắn đến bề mặt hành tinh hoặc tàu gần đó."
+      },
+      "security": {
+        "title": "Trạm An Ninh",
+        "desc": "Trung tâm giám sát toàn tàu và phản ứng với mối đe dọa. Giám sát tất cả các boong và phối hợp các giao thức bảo mật nội bộ."
+      },
+      "weapons_ss": {
+        "title": "Hệ Thống Vũ Khí SS",
+        "desc": "Bảng điều khiển quản lý vũ khí mạn phải. Kiểm soát mảng nhắm mục tiêu, trình tự bắn và hậu cần đạn cho vũ khí mạn phải."
+      },
+      "weapons_ps": {
+        "title": "Hệ Thống Vũ Khí PS",
+        "desc": "Bảng điều khiển quản lý vũ khí mạn trái. Cung cấp kiểm soát độc lập đầy đủ của tất cả nền tảng vũ khí bên trái."
+      },
+      "power_plant": {
+        "title": "Nhà Máy Điện",
+        "desc": "Đơn vị tạo năng lượng lõi. Cung cấp đầu ra điện ổn định cho tất cả hệ thống tàu thông qua công nghệ giam cầm plasma vòng tròn."
+      },
+      "power_sys": {
+        "title": "Hệ Thống Điện",
+        "desc": "Trung tâm phân phối và điều tiết điện. Quản lý cân bằng tải giữa vũ khí, khiên, động cơ và hệ thống hỗ trợ sự sống."
+      },
+      "energy_dist": {
+        "title": "Phân Phối Năng Lượng",
+        "desc": "Nút định tuyến năng lượng phụ. Đảm bảo cung cấp điện nhất quán cho hệ thống giữa tàu và phần đuôi trong điều kiện nhu cầu cao."
+      },
+      "main_engine": {
+        "title": "Động Cơ Chính Của Tàu",
+        "desc": "Hệ thống đẩy chính cung cấp năng lượng cho mọi di chuyển dưới tốc độ ánh sáng. Tạo lực đẩy thông qua các tia plasma được xúc tác phản vật chất."
+      },
+      "navigation": {
+        "title": "Dẫn Đường",
+        "desc": "Trạm dẫn đường và kiểm soát bánh lái trung tâm. Quản lý lập kế hoạch lộ trình, bản đồ thiên văn và theo dõi vị trí thời gian thực."
+      },
+      "flight_deck": {
+        "title": "Boong Bay",
+        "desc": "Trạm lái chính. Kiểm soát tất cả hoạt động bay bao gồm cất cánh, hạ cánh, cơ động quỹ đạo và hành động né tránh khẩn cấp."
+      },
+      "weapons_off": {
+        "title": "Sĩ Quan Vũ Khí",
+        "desc": "Vị trí chỉ huy vũ khí chiến thuật. Phối hợp bắn vũ khí tấn công và phòng thủ dưới sự chỉ huy trực tiếp của Sĩ Quan Vũ Khí."
+      },
+      "comms_off": {
+        "title": "Sĩ Quan Liên Lạc",
+        "desc": "Trung tâm liên lạc và đánh chặn tín hiệu. Xử lý tất cả liên lạc liên tàu, liên minh và hành tinh bao gồm các kênh mã hóa."
+      },
+      "capt_quarters": {
+        "title": "Phòng Thuyền Trưởng",
+        "desc": "Phòng riêng của sĩ quan chỉ huy tàu. Có các thiết bị đầu cuối dữ liệu an toàn và cơ sở họp mật riêng tư."
+      },
+      "kitchen": {
+        "title": "Bếp",
+        "desc": "Cơ sở dinh dưỡng và chuẩn bị thức ăn của thủy thủ. Xử lý tài nguyên thức ăn được lưu trữ và tổng hợp các chất bổ sung dinh dưỡng cho các chuyến đi dài."
+      },
+      "mess_hall": {
+        "title": "Phòng Ăn Tập Thể",
+        "desc": "Không gian ăn uống và giải trí chung. Phục vụ như trung tâm tinh thần thủy thủ trong thời gian nghỉ giữa các hoạt động chiến đấu và tài nguyên."
+      },
+      "hydro_1": {
+        "title": "Phòng Thủy Canh 1",
+        "desc": "Đơn vị trồng tự động sản xuất thực phẩm tươi và cây thuốc. Giảm sự phụ thuộc vào dự phòng được lưu trữ cho các nhiệm vụ kéo dài."
+      },
+      "hydro_2": {
+        "title": "Phòng Thủy Canh 2",
+        "desc": "Phòng thủy canh phụ mở rộng sự đa dạng và sản lượng cây trồng. Hỗ trợ dinh dưỡng thủy thủ và sản xuất hàng hóa thương mại."
+      },
+      "hydro_3": {
+        "title": "Phòng Thủy Canh 3",
+        "desc": "Đơn vị trồng thứ ba chuyên về cây lương thực chủ lực năng suất cao. Cung cấp nguồn calo cơ bản cho đội thủy thủ đông đảo."
+      },
+      "hydro_4": {
+        "title": "Phòng Thủy Canh 4",
+        "desc": "Phòng nghiên cứu y học và thực vật. Trồng các loài hiếm dùng trong điều trị y tế và tổng hợp hóa học."
+      },
+      "hydro_5": {
+        "title": "Phòng Thủy Canh 5",
+        "desc": "Khoang trồng cây ngoại lai. Sản xuất hàng hóa xa xỉ và thực vật hiếm để giao dịch trên chợ."
+      },
+      "hydro_6": {
+        "title": "Phòng Thủy Canh 6",
+        "desc": "Phòng thí nghiệm tăng trưởng cao thực nghiệm. Thử nghiệm các giống cây trồng mới được phát triển qua các chương trình biến đổi gen."
+      },
+      "shield_main": {
+        "title": "Máy Phát Khiên Chính",
+        "desc": "Máy phát khiên đa hướng chính. Chiếu rào cản năng lượng xung quanh toàn bộ vỏ tàu trong các tình huống chiến đấu."
+      },
+      "power_relay1": {
+        "title": "Rơ-le Điện 1",
+        "desc": "Điểm nối rơ-le điện boong trên. Định tuyến năng lượng từ nhà máy điện đến vũ khí trước và mảng khiên."
+      },
+      "power_relay2": {
+        "title": "Rơ-le Điện 2",
+        "desc": "Điểm nối rơ-le điện boong dưới. Phân phối điện đến nacelle động cơ và hệ thống phòng thủ đuôi."
+      },
+      "hidden_st1": {
+        "title": "Kho Bí Mật 1",
+        "desc": "Hầm bảo mật cao ẩn. Lưu trữ hàng hóa bí mật, đồ tạo tác có giá trị và hàng lậu tránh khỏi các lần quét hàng tồn kho tiêu chuẩn."
+      },
+      "hidden_st2": {
+        "title": "Kho Bí Mật 2",
+        "desc": "Hầm ẩn thứ hai. Không gian an toàn bổ sung cho các vật phẩm quan trọng nhiệm vụ đòi hỏi bảo mật tối đa."
+      },
+      "cargo_1": {
+        "title": "Khoang Hàng 1",
+        "desc": "Khoang hàng hóa khổng lồ chính. Được thiết kế để vận chuyển tài nguyên khối lượng lớn bao gồm quặng, kim loại tinh chế và hàng hóa thương mại."
+      },
+      "cargo_2": {
+        "title": "Khoang Hàng 2",
+        "desc": "Khoang hàng phụ được tối ưu hóa cho hàng hóa mỏng manh hoặc nhạy cảm với nhiệt độ. Điều kiện lưu trữ kiểm soát khí hậu."
+      },
+      "cargo_3": {
+        "title": "Khoang Hàng 3",
+        "desc": "Khoang hàng thứ ba. Bố cục cấu hình được hỗ trợ tải hỗn hợp bao gồm phương tiện, container và thiết bị cỡ lớn."
+      },
+      "war_council": {
+        "title": "Hội Đồng Chiến Tranh",
+        "desc": "Phòng chỉ huy chiến lược. Bàn họp sĩ quan cao cấp nơi kế hoạch chiến đấu, chiến lược liên minh và mục tiêu chiến dịch được phối hợp."
+      },
+      "academy": {
+        "title": "Học Viện",
+        "desc": "Cơ sở đào tạo và giáo dục thủy thủ. Cho phép nâng cao kỹ năng, mở khóa chuyên môn và chương trình phát triển sĩ quan."
+      },
+      "science_lab": {
+        "title": "Phòng Thí Nghiệm Khoa Học",
+        "desc": "Trung tâm nghiên cứu và phát triển. Tiến hành các thí nghiệm về khoa học vật liệu, lý thuyết đẩy và phân tích công nghệ ngoài hành tinh."
+      },
+      "dna_lab": {
+        "title": "Phòng Thí Nghiệm DNA",
+        "desc": "Cơ sở nghiên cứu di truyền. Phát triển cải tiến sinh học cho thủy thủ, tạo các biến thể loài mới và nghiên cứu mẫu DNA ngoài hành tinh."
+      },
+      "cryostasis": {
+        "title": "Đình Chỉ Đông Lạnh",
+        "desc": "Hệ thống đình chỉ hành trình tầm xa. Đặt thủy thủ vào trạng thái đông lạnh để bảo tồn tài nguyên trong các hành trình không gian sâu nhiều năm."
+      },
+      "dna_chambers": {
+        "title": "Phòng DNA",
+        "desc": "Khoang biến đổi gen. Áp dụng trực tiếp các cải tiến DNA đã nghiên cứu cho các thành viên thủy thủ và đơn vị sinh học."
+      },
+      "weapons_relay": {
+        "title": "Rơ-le Điện Vũ Khí",
+        "desc": "Nút quản lý điện chuyên dụng cho hệ thống vũ khí hạng nặng. Đảm bảo cung cấp năng lượng ổn định trong các cuộc giao chiến kéo dài."
+      },
+      "comms_tower": {
+        "title": "Tháp Liên Lạc",
+        "desc": "Mảng liên lạc không gian sâu tầm xa. Cho phép phát sóng toàn hạm đội, truyền liên sao và phối hợp liên minh qua khoảng cách rộng lớn."
+      }
     },
     "guns": {
-      "far_left_bar":      "Pháo Chính Trước",
-      "fore_port_bay":     "Cụm Pháo Mạn Phải Phía Trước",
-      "fore_stbd_bay":     "Cụm Pháo Mạn Trái Phía Trước",
-      "pd_gun_1":          "Ô Phòng Thủ Buồng Lái Mạn Phải 1",
-      "pd_gun_2":          "Ô Phòng Thủ Buồng Lái Mạn Phải 2",
-      "pd_gun_3":          "Ô Phòng Thủ Buồng Lái Mạn Phải 3",
-      "pd_gun_4":          "Ô Phòng Thủ Buồng Lái Mạn Phải 4",
-      "pd_gun_5":          "Ô Phòng Thủ Buồng Lái Mạn Phải 5",
-      "pd_gun_6":          "Ô Phòng Thủ Buồng Lái Mạn Phải 6",
-      "vert_oval_upper":   "Ô Phòng Thủ Giữa Buồng Lái Dưới",
-      "vert_oval_lower":   "Ô Phòng Thủ Giữa Buồng Lái Trên",
-      "center_front_gun":  "Mảng Pháo Boong Trên Phía Trước",
-      "pd_gun_7":          "Ô Phòng Thủ Buồng Lái Mạn Trái 1",
-      "pd_gun_8":          "Ô Phòng Thủ Buồng Lái Mạn Trái 2",
-      "pd_gun_9":          "Ô Phòng Thủ Buồng Lái Mạn Trái 3",
-      "pd_gun_10":         "Ô Phòng Thủ Buồng Lái Mạn Trái 4",
-      "pd_gun_11":         "Ô Phòng Thủ Buồng Lái Mạn Trái 5",
-      "pd_gun_12":         "Ô Phòng Thủ Buồng Lái Mạn Trái 6",
+      "far_left_bar": "Pháo Chính Trước",
+      "fore_port_bay": "Cụm Pháo Mạn Phải Phía Trước",
+      "fore_stbd_bay": "Cụm Pháo Mạn Trái Phía Trước",
+      "pd_gun_1": "Ô Phòng Thủ Buồng Lái Mạn Phải 1",
+      "pd_gun_2": "Ô Phòng Thủ Buồng Lái Mạn Phải 2",
+      "pd_gun_3": "Ô Phòng Thủ Buồng Lái Mạn Phải 3",
+      "pd_gun_4": "Ô Phòng Thủ Buồng Lái Mạn Phải 4",
+      "pd_gun_5": "Ô Phòng Thủ Buồng Lái Mạn Phải 5",
+      "pd_gun_6": "Ô Phòng Thủ Buồng Lái Mạn Phải 6",
+      "vert_oval_upper": "Ô Phòng Thủ Giữa Buồng Lái Dưới",
+      "vert_oval_lower": "Ô Phòng Thủ Giữa Buồng Lái Trên",
+      "center_front_gun": "Mảng Pháo Boong Trên Phía Trước",
+      "pd_gun_7": "Ô Phòng Thủ Buồng Lái Mạn Trái 1",
+      "pd_gun_8": "Ô Phòng Thủ Buồng Lái Mạn Trái 2",
+      "pd_gun_9": "Ô Phòng Thủ Buồng Lái Mạn Trái 3",
+      "pd_gun_10": "Ô Phòng Thủ Buồng Lái Mạn Trái 4",
+      "pd_gun_11": "Ô Phòng Thủ Buồng Lái Mạn Trái 5",
+      "pd_gun_12": "Ô Phòng Thủ Buồng Lái Mạn Trái 6",
       "upper_flank_array": "Cụm Pháo Mạn Phải Phía Sau",
       "lower_flank_array": "Cụm Pháo Mạn Trái Phía Sau",
-      "spine_gun_1":       "Mảng Pháo Boong Trên Giữa",
-      "spine_gun_2":       "Mảng Cột Sống Trung Tâm Dưới",
-      "spine_gun_3":       "Mảng Cột Sống Trung Tâm Sau",
-      "mid_rail_gun":      "Tháp Pháo Trung Tâm",
+      "spine_gun_1": "Mảng Pháo Boong Trên Giữa",
+      "spine_gun_2": "Mảng Cột Sống Trung Tâm Dưới",
+      "spine_gun_3": "Mảng Cột Sống Trung Tâm Sau",
+      "mid_rail_gun": "Tháp Pháo Trung Tâm",
       "upper_nacelle_bay": "Mảng Cánh Mạn Phải",
       "lower_nacelle_bay": "Mảng Cánh Mạn Trái"
     },
@@ -476,6 +1049,76 @@
           "notes": "Dryads là một loài hấp dẫn và độc đáo, được đặc trưng bởi bản chất lai kết hợp các đặc điểm của cây và sinh vật ngoài hành tinh. Sinh lý học đặc biệt này cho phép chúng phát triển mạnh trong các môi trường đa dạng. Chúng có tâm trí giống bầy đàn, cho phép chúng giao tiếp liền mạch với nhau. Chế độ ăn của chúng chủ yếu là thực vật, bao gồm lá, trái cây và các vật liệu thực vật khác. Dryads còn nổi tiếng với hành vi vui tươi và tinh nghịch. Về mặt tâm linh, Dryads có niềm tin sâu sắc vào kiếp sau gắn liền với các chu kỳ của tự nhiên. Họ tôn kính các yếu tố tự nhiên (Đất, Không khí, Lửa và Nước) là những lực thần thánh, và cũng thờ phụng các thiên thể như mặt trời và các ngôi sao."
         }
       }
-    }
+    },
+    "back": "← QUAY LẠI",
+    "viewArrow": "XEM →",
+    "selectCategory": "CHỌN DANH MỤC",
+    "comingSoon": "SẮP RA MẮT",
+    "specialistProfileDesc": "Hồ sơ chuyên gia — thống kê đầy đủ sẽ có khi game ra mắt.",
+    "alliance": {
+      "rank": {
+        "leader": "Lãnh đạo",
+        "coleader": "Đồng Lãnh đạo",
+        "officer": "Sĩ quan",
+        "member": "Thành viên"
+      },
+      "status": {
+        "online": "Trực tuyến",
+        "offline": "Ngoại tuyến",
+        "away": "Vắng mặt"
+      },
+      "manage": {
+        "editInfo": "Chỉnh sửa thông tin liên minh",
+        "editInfoDesc": "Thay đổi tên, thẻ và mô tả",
+        "joinRequests": "Quản lý yêu cầu tham gia",
+        "joinRequestsDesc": "Xem xét và chấp nhận thành viên mới",
+        "donationGoals": "Đặt mục tiêu quyên góp",
+        "donationGoalsDesc": "Cấu hình mục tiêu quyên góp hàng tuần",
+        "warSettings": "Cài đặt chiến tranh liên minh",
+        "warSettingsDesc": "Cấu hình quy tắc tham gia chiến tranh",
+        "kickMembers": "Đuổi thành viên",
+        "kickMembersDesc": "Xóa thành viên không hoạt động hoặc vi phạm quy tắc"
+      },
+      "allianceMail": {
+        "warResults": "Kết quả chiến tranh liên minh",
+        "strategyPlan": "Kế hoạch chiến lược mới",
+        "donationSummary": "Tóm tắt quyên góp hàng tuần",
+        "meeting1800": "Cuộc họp lúc 18:00",
+        "levelUp": "Liên minh lên cấp!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Chào mừng đến HyperTek!",
+      "maintenance": "Thông báo bảo trì máy chủ",
+      "allianceWar": "Thông báo chiến tranh liên minh",
+      "galacticCup": "Đăng ký Cúp Thiên hà",
+      "baseAttacked": "Căn cứ của bạn bị tấn công!",
+      "loginReward": "Phần thưởng đăng nhập hàng ngày đã sẵn sàng",
+      "refiningEvent": "Sự kiện Bậc thầy tinh chế bắt đầu",
+      "meeting1800": "Cuộc họp lúc 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Tự động dịch BẬT — Tin nhắn được gửi bằng ngôn ngữ của mỗi người nhận",
+      "autoTranslateOff": "Tự động dịch TẮT"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Ai tham gia chiến tranh liên minh tối nay?",
+      "ggLastRace": "GG ở cuộc đua vừa rồi, tốc độ tuyệt vời",
+      "tradingPlasma": "Trao đổi thanh plasma lấy sách công nghệ",
+      "needHelpAsteroid": "Cần giúp đỡ nhiệm vụ tiểu hành tinh",
+      "allianceRecruiting": "Liên minh chúng tôi đang tuyển, nhắn DM cho tôi",
+      "donationGoalsPlasma": "Mục tiêu quyên góp: cần thanh plasma!",
+      "warStarts2Hours": "Chiến tranh bắt đầu sau 2 giờ, chuẩn bị",
+      "handleMedicalSupport": "Tôi sẽ lo hỗ trợ y tế",
+      "wts50Engines": "BÁN: 50 động cơ, nhắn PM",
+      "wtbAntiGravity": "MUA: Module chống trọng lực x10",
+      "sellingRareSkins": "Bán skin hiếm, xem hồ sơ"
+    },
+    "devicePairing": "GHÉP NỐI THIẾT BỊ",
+    "deviceOffline": "NGOẠI TUYẾN",
+    "pairing": "ĐANG GHÉP NỐI...",
+    "unavailableNow": "HIỆN KHÔNG KHẢ DỤNG",
+    "pairDevice": "GHÉP NỐI THIẾT BỊ",
+    "vrInteractionMode": "Chế độ Tương tác VR · Sắp ra mắt"
   }
 }

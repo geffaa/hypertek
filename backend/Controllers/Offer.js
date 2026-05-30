@@ -2,7 +2,7 @@ import { Offer } from "../Models/Offer.js";
 import User from "../Models/User.js";
 import nodemailer from "nodemailer";
 
-// ✅ Setup Nodemailer Transporter
+// Setup Nodemailer Transporter
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT),
@@ -14,11 +14,11 @@ const transporter = nodemailer.createTransport({
 });
 
 transporter.verify(function (error, success) {
-  if (error) console.error("❌ Email transporter error:", error);
-  else console.log("✅ Email service is ready");
+  if (error) console.error(" Email transporter error:", error);
+  else console.log("Email service is ready");
 });
 
-// ✅ Helper function to send emails
+// Helper function to send emails
 const sendEmail = async (to, subject, html) => {
   try {
     await transporter.sendMail({
@@ -28,12 +28,12 @@ const sendEmail = async (to, subject, html) => {
       html,
     });
   } catch (err) {
-    console.error("❌ Email send error:", err.message);
+    console.error(" Email send error:", err.message);
   }
 };
 
 // ============================================================
-// ✅ CREATE OFFER + EMAILS
+// CREATE OFFER + EMAILS
 // ============================================================
 const createOffer = async (req, res) => {
   try {
@@ -74,17 +74,17 @@ const createOffer = async (req, res) => {
 
     // If seller email wasn't provided, look it up by wallet address
     let resolvedOwnerEmail = ownerEmail || "";
-    let resolvedOwnerName  = ownerName  || "Platform";
+    let resolvedOwnerName = ownerName || "Platform";
     if (!resolvedOwnerEmail && ownerId && ownerId !== "platform") {
       const ownerUser = await User.findOne({
         $or: [
           { MetaMaskAddress: ownerId.toLowerCase() },
-          { WalletAddress:   ownerId.toLowerCase() },
+          { WalletAddress: ownerId.toLowerCase() },
         ],
       }).select("Email FullName");
       if (ownerUser) {
         resolvedOwnerEmail = ownerUser.Email || "";
-        resolvedOwnerName  = ownerUser.FullName || resolvedOwnerName;
+        resolvedOwnerName = ownerUser.FullName || resolvedOwnerName;
       }
     }
 
@@ -107,7 +107,7 @@ const createOffer = async (req, res) => {
 
     await offer.save();
 
-    // ✅ Email for Owner
+    // Email for Owner
     const ownerEmailHtml = `
       <div style="font-family: Arial, sans-serif; background:#f8f9fa; padding:40px;">
         <div style="background:white; padding:25px; border-radius:10px;">
@@ -126,11 +126,11 @@ const createOffer = async (req, res) => {
       </div>
     `;
 
-    // ✅ Email for User
+    // Email for User
     const userEmailHtml = `
       <div style="font-family: Arial, sans-serif; background:#f8f9fa; padding:40px;">
         <div style="background:white; padding:25px; border-radius:10px;">
-          <h2>✅ Offer Created Successfully!</h2>
+          <h2>Offer Created Successfully!</h2>
           <p>Dear ${userName},</p>
           <p>Your offer for <b>${gameTitle}</b> has been sent to ${resolvedOwnerName}.</p>
           <table style="margin-top:15px;">
@@ -145,7 +145,7 @@ const createOffer = async (req, res) => {
     `;
 
     if (resolvedOwnerEmail) await sendEmail(resolvedOwnerEmail, `🎮 New Offer for ${gameTitle}`, ownerEmailHtml);
-    await sendEmail(userEmail, `✅ Offer Created for ${gameTitle}`, userEmailHtml);
+    await sendEmail(userEmail, `Offer Created for ${gameTitle}`, userEmailHtml);
 
     res.status(201).json({
       success: true,
@@ -153,7 +153,7 @@ const createOffer = async (req, res) => {
       offer,
     });
   } catch (error) {
-    console.error("❌ Error creating offer:", error);
+    console.error(" Error creating offer:", error);
     res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -163,7 +163,7 @@ const createOffer = async (req, res) => {
 };
 
 // ============================================================
-// ✅ UPDATE REQUEST STATUS + EMAILS
+// UPDATE REQUEST STATUS + EMAILS
 // ============================================================
 const updateRequestStatus = async (req, res) => {
   try {
@@ -195,13 +195,13 @@ const updateRequestStatus = async (req, res) => {
 
     await offer.save();
 
-    // ✅ Notify both parties — customised per status
+    // Notify both parties — customised per status
     let buyerSubject, buyerHtml, ownerSubject, ownerHtml;
     const year = new Date().getFullYear();
 
     if (status === "accepted") {
       const deadlineStr = offer.acceptDeadlineAt.toUTCString();
-      buyerSubject = `✅ Your Offer Was Accepted — Complete Purchase for ${offer.gameTitle}`;
+      buyerSubject = `Your Offer Was Accepted — Complete Purchase for ${offer.gameTitle}`;
       buyerHtml = `
         <div style="font-family:Arial,sans-serif;background:#f0f4ff;padding:40px;">
           <div style="background:white;padding:28px;border-radius:12px;max-width:520px;">
@@ -237,11 +237,11 @@ const updateRequestStatus = async (req, res) => {
           </div>
         </div>`;
     } else if (status === "rejected") {
-      buyerSubject = `❌ Your Offer Was Declined — ${offer.gameTitle}`;
+      buyerSubject = ` Your Offer Was Declined — ${offer.gameTitle}`;
       buyerHtml = `
         <div style="font-family:Arial,sans-serif;background:#f8f9fa;padding:40px;">
           <div style="background:white;padding:25px;border-radius:10px;">
-            <h2>❌ Offer Declined</h2>
+            <h2> Offer Declined</h2>
             <p>Hi ${offer.userName}, your offer of <b>${offer.offerPrice} USDC</b> for <b>${offer.gameTitle}</b> was declined.</p>
             <p>You can make a new offer at a different price.</p>
             <p style="font-size:12px;color:#777;">© ${year} Hyper-Tek Games</p>
@@ -269,8 +269,8 @@ const updateRequestStatus = async (req, res) => {
         </div>`;
     }
 
-    if (offer.userEmail)  await sendEmail(offer.userEmail,  buyerSubject,  buyerHtml);
-    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, ownerSubject,  ownerHtml);
+    if (offer.userEmail) await sendEmail(offer.userEmail, buyerSubject, buyerHtml);
+    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, ownerSubject, ownerHtml);
 
     res.status(200).json({
       success: true,
@@ -288,7 +288,7 @@ const updateRequestStatus = async (req, res) => {
 };
 
 // ============================================================
-// ✅ UPDATE PAYMENT STATUS + EMAILS
+// UPDATE PAYMENT STATUS + EMAILS
 // ============================================================
 const updatePaymentStatus = async (req, res) => {
   try {
@@ -313,7 +313,7 @@ const updatePaymentStatus = async (req, res) => {
     offer.paymentStatus = status;
     await offer.save();
 
-    // ✅ Notify both parties
+    // Notify both parties
     const subject = `💰 Payment Status Updated: ${offer.gameTitle}`;
     const messageHtml = `
       <div style="font-family: Arial; background:#f8f9fa; padding:40px;">
@@ -345,7 +345,7 @@ const updatePaymentStatus = async (req, res) => {
 };
 
 // ============================================================
-// ✅ MARK OFFER COMPLETED (called by Stripe webhook after payment)
+// MARK OFFER COMPLETED (called by Stripe webhook after payment)
 // ============================================================
 export const markOfferCompleted = async (offerId) => {
   try {
@@ -387,15 +387,15 @@ export const markOfferCompleted = async (offerId) => {
         </div>
       </div>`;
 
-    if (offer.userEmail)  await sendEmail(offer.userEmail,  `🎉 Purchase Complete — ${offer.gameTitle}`, buyerHtml);
-    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, `💰 Sale Complete — ${offer.gameTitle}`,    sellerHtml);
+    if (offer.userEmail) await sendEmail(offer.userEmail, `🎉 Purchase Complete — ${offer.gameTitle}`, buyerHtml);
+    if (offer.ownerEmail) await sendEmail(offer.ownerEmail, `💰 Sale Complete — ${offer.gameTitle}`, sellerHtml);
   } catch (err) {
-    console.error("❌ markOfferCompleted error:", err.message);
+    console.error(" markOfferCompleted error:", err.message);
   }
 };
 
 // ============================================================
-// ✅ FETCH CONTROLLERS (No email needed)
+// FETCH CONTROLLERS (No email needed)
 // ============================================================
 const getAllOffers = async (req, res) => {
   try {
@@ -449,7 +449,7 @@ const getOffersByUserId = async (req, res) => {
 };
 
 // ============================================================
-// ✅ EXPORT
+// EXPORT
 // ============================================================
 export {
   createOffer,

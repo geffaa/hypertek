@@ -18,7 +18,7 @@ const authSlice = createSlice({
     loginSuccess: (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      state.isLoggedInUser = true; // ✅ consistent
+      state.isLoggedInUser = true; // consistent
 
       // Save to localStorage
       localStorage.setItem(
@@ -29,7 +29,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      state.isLoggedInUser = false; // ✅ consistent
+      state.isLoggedInUser = false; // consistent
 
       // Remove from localStorage
       localStorage.removeItem("auth");

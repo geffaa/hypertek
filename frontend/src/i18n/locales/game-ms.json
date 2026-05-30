@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Selamat datang ke",
+    "back": "belakang",
+    "racing": {
+      "label": "BERLUMBA",
+      "heading": "Perlumbaan Hyper",
+      "subtitle": "Pengalaman perlumbaan kenderaan terbang yang paling sengit di galaksi,\ndi mana kemahiran membayar, dan juara dibuat.",
+      "intro": [
+        "Hyper Racing ialah permainan perlumbaan kompetitif beroktan tinggi yang ditetapkan merentasi dunia asing, di mana pemain membina, menaik taraf dan merintis kenderaan perlumbaan terbang yang boleh disesuaikan sepenuhnya melalui beberapa litar paling berbahaya di galaksi. Daripada formasi batu terapung dan tiub lava gunung berapi ke padang pasir dan laluan gunung, setiap perlumbaan adalah ujian persediaan, refleks dan strategi.",
+        "Tetapi Hyper Racing adalah lebih daripada sekadar permainan; ia adalah platform yang kompetitif di mana ganjaran sebenar tersedia. Pemain berprestasi tinggi boleh menyertai acara dan kejohanan berperingkat dengan kumpulan hadiah wang tunai sebenar. Lebih baik anda berlumba, lebih banyak pendapatan anda. Sama ada anda mengejar kejayaan papan pendahulu atau membina empayar perlumbaan, semua yang anda lakukan dalam Hyper Racing menggerakkan anda ke hadapan.",
+        "Naik taraf kenderaan perlumbaan anda dari hidung ke ekor. Rekrut dan tingkatkan krew pit anda. Upah pengurus pit yang sepadan dengan falsafah perlumbaan anda. Kemudian bawa kemahiran anda di luar trek, garaj perlumbaan anda berfungsi sebagai hangar kapal angkasa peribadi anda, dan setiap keupayaan yang anda kembangkan membawa ke dalam pertempuran angkasa merentasi Hyper Quest dan Overlord of the 7 Realms."
+      ],
+      "introClose": "Teruskan membaca untuk mengetahui cara permainan ini berfungsi, perkara yang boleh anda menangi dan cara kerjaya perlumbaan anda menyemarakkan seluruh alam kemajuan.",
+      "calloutLine1": "Berlumba untuk Mendapat. Perolehi untuk Meningkatkan.",
+      "calloutLine2": "Tingkatkan kepada Mendominasi.",
+      "howItWorksTitle": "Bagaimana Hyper Racing Berfungsi",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Pilih Kenderaan Anda",
+          "body": "Setiap perlumbaan bermula di garaj anda. Pilih daripada senarai kenderaan lumba terbang yang semakin meningkat, masing-masing dengan ciri pengendalian yang unik dan potensi peningkatan. Tanggalkan badan kapal ke bawah untuk melepuh kelajuan garis lurus atau perisai ia untuk bertahan dalam keadaan yang paling kejam. Pendorong, penstabil, perisai, sistem penyejukan, sirip aerodinamik, pokok naik taraf berjalan dalam, dan setiap pengubahsuaian mengubah cara kraf anda berkelakuan di trek."
+        },
+        {
+          "num": "02",
+          "title": "Bina Pasukan Anda",
+          "body": "Lumba adalah sukan berpasukan. Rekrut pakar krew pit yang membawa bonus unik, pengisian minyak yang lebih pantas, diagnostik masa nyata, pembaikan badan kapal kecemasan pertengahan perlumbaan dan tweak prestasi antara pusingan. Setiap ahli krew naik tahap dengan pengalaman, menyusun kebolehan hebat di atas peningkatan kenderaan anda. Kemudian ambil pengurus pit untuk menyelaraskan operasi, memanggil strategi perlumbaan dan membuka kunci prestasi seluruh pasukan meningkatkan kompaun itu sepanjang musim penuh."
+        },
+        {
+          "num": "03",
+          "title": "Perlumbaan Merentasi Dunia",
+          "body": "Litar merentangi planet asing dengan rupa bumi yang sangat berbeza dan bahaya atmosfera. Tenun melalui formasi batu terapung gaya Avatar, tiub lava gunung berapi berbenang pada kelajuan yang sangat pantas, koyak merentasi dataran gurun yang tidak berkesudahan, dan mengukir melalui banjaran gunung yang berbahaya. Hujan asid, atmosfera radioaktif, graviti beralih, dan angin bergelora, tiada dua kaum menuntut persediaan yang sama. Menala kenderaan anda agar sepadan dengan setiap persekitaran adalah tempat strategi memenuhi kemahiran."
+        },
+        {
+          "num": "04",
+          "title": "Naik Pangkat",
+          "body": "Kemenangan memperoleh mata pendahulu, membuka kunci litar baharu di dunia yang jauh dan membuka pintu kepada pertandingan peringkat lebih tinggi. Semakin dalam anda pergi, semakin sengit lawan dan semakin besar taruhannya. Buktikan diri anda merentasi setiap planet dan naik melalui kedudukan global."
+        }
+      ],
+      "rewardsTitle": "Menang Besar; Ganjaran Yang Penting!",
+      "rewards": [
+        {
+          "title": "Ganjaran Dalam Permainan",
+          "body": "Setiap perlumbaan yang anda habiskan berbaloi. Menang, dan ganjarannya berlipat ganda. Kemenangan perlumbaan membuka kunci komponen kenderaan premium, bahan naik taraf yang jarang berlaku, token pengambilan kru eksklusif dan kredit untuk membiayai binaan anda yang seterusnya. Jual kenderaan yang dinaik taraf untuk keuntungan, melabur semula dalam mesin baharu dan saksikan empayar perlumbaan anda berkembang dengan setiap penamat podium."
+        },
+        {
+          "title": "Acara Tunai Sebenar",
+          "body": "Hyper Racing membawa persaingan ke peringkat seterusnya dengan acara dan kejohanan berperingkat yang memerlukan wang sebenar. Sertai pertandingan berasaskan kemahiran, buktikan keupayaan anda menentang juruterbang terbaik di galaksi, dan pergi dengan pembayaran tunai sebenar. Lebih tinggi anda meletakkan, lebih besar kumpulan hadiah. Daripada cabaran peringkat mingguan kepada acara kejohanan bermusim, sentiasa ada peluang untuk pemain berprestasi tinggi untuk menukar kemahiran perlumbaan mereka kepada pendapatan sebenar."
+        },
+        {
+          "title": "Bagaimana Acara Hadiah Berfungsi",
+          "body": "Pemain layak melalui permainan berperingkat, memenuhi ambang prestasi yang memberikan penyertaan ke kejohanan hadiah wang tunai. Acara distrukturkan di sekitar perjodohan yang adil, memastikan setiap pesaing menghadapi lawan yang mempunyai kemahiran yang sama. Yuran penyertaan adalah telus, kumpulan hadiah dipaparkan dengan jelas sebelum anda membuat komitmen, dan pembayaran diproses dengan cepat selepas setiap acara berakhir. Ia berdaya saing, adil, dan ganjarannya adalah nyata."
+        },
+        {
+          "title": "Kemajuan Melangkaui Trek",
+          "body": "Ganjaran yang diperoleh melalui suapan perlumbaan terus ke perkembangan anda yang lebih luas. Tingkatkan kenderaan perlumbaan anda, kuatkan krew pit anda dan corong kemenangan untuk menaik taraf kapal angkasa utama anda. Garaj perlumbaan anda ialah teluk hangar kapal itu, jadi setiap penambahbaikan pada operasi perlumbaan anda juga menguatkan kapal yang anda terbang antara dunia dan ke pertempuran angkasa merentasi Hyper Quest dan Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Dua Mesin, Satu Misi... Naik taraf Semuanya",
+      "upgrades": [
+        {
+          "title": "Naik Taraf Kenderaan Lumba",
+          "body": "Kenderaan perlumbaan anda ialah mesin modular sepenuhnya. Setiap komponen boleh ditukar, ditala dan dinaik taraf: badan kapal, penujah, perisai, cengkerang luar, enjin, penstabil, sistem penyejukan dan permukaan aerodinamik. Komposit ringan memberikan kelajuan mentah; perisai tugas berat memastikan anda terus hidup melalui keadaan atmosfera yang kejam. Laluan naik taraf adalah mendalam, dan pilihan yang anda buat menentukan identiti perlumbaan anda. Beli kenderaan baharu, bina mereka sebagai pesaing kejuaraan, lumba mereka untuk menang, dan jual dengan untung apabila anda bersedia untuk cabaran seterusnya."
+        },
+        {
+          "title": "Peningkatan Kapal Angkasa Utama",
+          "body": "Garaj perlumbaan anda bukan sekadar bengkel; ia adalah teluk hangar kapal angkasa peribadi anda. Sumber, kredit dan bahan yang sama yang anda peroleh di landasan boleh dilaburkan untuk meningkatkan kapal utama anda. Enjin yang lebih baik untuk perjalanan antara planet, sistem senjata yang lebih kuat untuk pertempuran angkasa lepas, navigasi yang lebih baik untuk menemui dunia perlumbaan baharu dan badan kapal yang diperkukuh untuk bertahan daripada pertempuran bermusuhan semasa transit. Kapal angkasa anda ialah pangkalan anda, pengangkutan anda, dan kapal perang anda, dan perlumbaan menjadikannya lebih kuat."
+        },
+        {
+          "title": "Gelung Naik Taraf",
+          "body": "Berlumba-lumba untuk mendapatkan. Dapatkan untuk menaik taraf. Naik taraf untuk memenangi perlumbaan yang lebih besar dengan ganjaran yang lebih besar. Salurkan ganjaran tersebut ke dalam kedua-dua kenderaan lumba anda dan kapal angkasa anda. Semakin baik kapal anda, semakin jauh anda mengembara dan semakin berbahaya dan menguntungkan litar tersebut. Ia adalah gelung kemajuan yang memberi ganjaran kepada dedikasi dan kemahiran di setiap peringkat."
+        },
+        {
+          "title": "Kesan Merentas Permainan",
+          "body": "Setiap kemahiran perintis yang anda kembangkan di trek dan setiap peningkatan yang anda pasang pada kapal angkasa anda dibawa terus ke Hyper Quest dan Overlord of the 7 Realms. Satu alam semesta, pelbagai permainan, perkembangan yang lancar. Apa yang anda bina dalam Hyper Racing menguasai segala-galanya."
+        }
+      ],
+      "faqTitle": "Hyper Racing — Soalan Lazim",
+      "faq": [
+        {
+          "q": "Apakah Hyper Racing?",
+          "a": "Permainan perlumbaan kenderaan terbang intensiti tinggi yang ditetapkan merentasi dunia asing. Bina, naik taraf dan lumba kenderaan yang boleh disesuaikan sepenuhnya melalui litar sci-fi berbahaya sambil bersaing untuk ganjaran dalam permainan dan hadiah wang tunai sebenar."
+        },
+        {
+          "q": "Bolehkah saya menaik taraf kenderaan perlumbaan saya?",
+          "a": "Setiap komponen boleh dinaik taraf: badan kapal, penujah, perisai, cengkerang luar, enjin, penstabil, sistem penyejukan dan permukaan aerodinamik. Setiap peningkatan mengubah cara kenderaan anda mengendalikan trek dan keadaan yang berbeza."
+        },
+        {
+          "q": "Apakah yang dilakukan oleh kru pit?",
+          "a": "Ahli krew pit memberikan bonus unik: pengisian bahan api yang lebih pantas, diagnostik badan kapal, pembaikan kecemasan dan tweak prestasi antara pusingan. Mereka naik tahap dari semasa ke semasa, membuka kunci kebolehan yang lebih kuat yang bertindan dengan peningkatan kenderaan."
+        },
+        {
+          "q": "Bagaimanakah pengurus pit berfungsi?",
+          "a": "Pengurus pit menyelaraskan operasi anak kapal, memanggil strategi perlumbaan dan membuka kunci peningkatan prestasi seluruh pasukan. Pengurus pertahanan melindungi kenderaan anda dalam keadaan yang teruk; pengurus yang agresif mendorong setiap sistem untuk kelajuan maksimum."
+        },
+        {
+          "q": "Bolehkah saya memenangi wang sebenar?",
+          "a": "ya. Acara dan kejohanan berperingkat menampilkan kumpulan hadiah wang tunai sebenar. Layak melalui permainan berperingkat, bersaing dengan lawan yang sama mahir, dan dapatkan bayaran sebenar berdasarkan kedudukan penamat anda. Cabaran mingguan dan kejohanan bermusim berjalan secara berterusan."
+        },
+        {
+          "q": "Bagaimanakah ganjaran perlumbaan berfungsi?",
+          "a": "Setiap perlumbaan membayar kredit, bahan naik taraf dan token anak kapal. Kemenangan melipatgandakan pendapatan anda. Beli kenderaan, naik tarafnya kepada mesin perlumbaan, menangi perlumbaan dan jual dengan untung untuk membiayai peningkatan dan naik taraf kapal angkasa."
+        },
+        {
+          "q": "Bolehkah saya menaik taraf kapal angkasa utama saya juga?",
+          "a": "betul-betul. Garaj perlumbaan anda ialah teluk hangar kapal angkasa anda. Peningkatan dana kemenangan perlumbaan kepada enjin, senjata, navigasi dan tetulang badan kapal pada kapal utama anda, memperkasakan perjalanan antara planet dan pertempuran angkasa lepas."
+        },
+        {
+          "q": "Adakah kemajuan dibawa ke permainan lain?",
+          "a": "Setiap kemahiran juruterbang dan naik taraf kapal angkasa dipindahkan terus ke Hyper Quest dan Overlord of the 7 Realms. Satu alam semesta, pelbagai permainan, perkembangan yang lancar. Apa yang anda bina dalam Hyper Racing menguasai segala-galanya."
+        },
+        {
+          "q": "Apakah persekitaran perlumbaan yang ada?",
+          "a": "Litar merangkumi formasi batu terapung, tiub lava, dataran gurun dan banjaran gunung merentasi dunia asing. Bahaya atmosfera termasuk hujan asid, atmosfera radioaktif, graviti berubah-ubah, dan angin bergelora. Setiap litar memerlukan persediaan kenderaan yang berbeza."
+        }
+      ]
+    },
+    "quest": {
+      "label": "SOALAN",
+      "heading": "Pencarian Hiper",
+      "subtitle": "galaksi anda. Peraturan anda. rezeki awak.",
+      "intro": [
+        "Hyper Quest ialah pengembaraan ruang dunia terbuka di mana anda memerintah kapal angkasa anda sendiri yang boleh dinaik taraf sepenuhnya, Quest Racer, merentasi galaksi yang luas dan berbahaya. Anda meninggalkan tamadun rumah anda bertahun-tahun yang lalu untuk mencari kuasa, kekayaan dan kemasyhuran. Kini seluruh alam semesta adalah taman permainan anda, dan setiap pencarian yang anda selesaikan membawa anda lebih dekat kepada penguasaan galaksi.",
+        "Tetapi Hyper Quest bukan sekadar permainan. Ia adalah platform yang kompetitif di mana wang tunai sebenar tersedia. Selesaikan pencarian, takluki cabaran dan pergi dengan wang sebenar di dalam poket dan atau ganjaran anda. Daripada misi pantas yang mengambil masa beberapa minit hingga ekspedisi berbilang hari yang epik, setiap pencarian membuahkan hasil. Lebih sukar cabaran, lebih besar ganjarannya.",
+        "Tingkatkan kapal angkasa anda dari badan kapal ke kokpit. Bekali ia dengan sistem senjata yang memusnahkan. Rekrut pakar yang menyusun bonus hebat pada prestasi kapal anda dan tahap kuasa. Melombong asteroid, mengangkut kargo berbahaya, memburu khazanah tersembunyi, menculik sasaran bernilai tinggi, atau menjadi senjata upahan. Bagaimana anda memerintah alam semesta adalah pilihan anda sepenuhnya.",
+        "Semua yang anda bina dalam Hyper Quest disuap terus ke Hyper Racing dan Overlord of the 7 Realms. Satu alam semesta, perkembangan yang lancar, potensi tanpa had. Teruskan membaca untuk mengetahui cara pencarian berfungsi, apa yang anda boleh peroleh dan bagaimana anda dan kapal angkasa anda menjadi kapal yang paling digeruni di galaksi."
+      ],
+      "calloutLine1": "Pencarian untuk Mendapat. Perolehi untuk Meningkatkan.",
+      "calloutLine2": "Naik taraf untuk Menakluk.",
+      "howItWorksTitle": "Bagaimana Hyper Quest Berfungsi",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Terima Pencarian Daripada Lembaga Misi",
+          "body": "Papan pencarian dalam permainan ialah pintu masuk anda ke pengembaraan. Semak imbas misi yang tersedia mulai daripada larian kargo pantas yang mengambil masa hanya beberapa minit hingga ekspedisi berbilang hari epik jauh ke dalam angkasa yang belum dipetakan. Setiap pencarian disertakan dengan objektif yang jelas, penilaian bahaya dan peringkat ganjaran. Pilih misi yang sepadan dengan gaya permainan anda, sama ada mengangkut kargo berbahaya, memburu khazanah tersembunyi, melombong medan asteroid atau menyamar untuk mendapatkan semula artifak yang hilang."
+        },
+        {
+          "num": "02",
+          "title": "Terokai Galaxy",
+          "body": "Perjalanan melalui portal ke planet yang jauh, masing-masing dengan persekitaran yang unik, bahan berharga dan litar perlumbaan baharu. Ikuti peta galaksi untuk mencarta kawasan yang belum diterokai dan dapatkan hak penamaan untuk planet yang anda temui dahulu. Tambang sumber daripada medan asteroid, selamatkan bahagian daripada peninggalan purba dan kapal terbiar, dan kumpulkan petunjuk yang membawa kepada kekayaan tersembunyi yang bertaburan di seluruh bintang."
+        },
+        {
+          "num": "03",
+          "title": "Bina Empayar Anda Dari Dalam Kapal Anda",
+          "body": "Pelumba Pencarian anda lebih daripada pengangkutan. Tanam makanan di teluk hidroponik, menapis bahan yang dilombong dari planet jauh, dan bina tentera dari dalam makmal pengklonan anda. Perhalusi tentera anda dan senjata mereka, pertahankan diri anda daripada lanun, dan uruskan pangkalan mudah alih berdikari yang bertambah hebat dengan setiap misi yang anda selesaikan."
+        },
+        {
+          "num": "04",
+          "title": "Main Cara Anda",
+          "body": "Tiada jalan tunggal untuk menguasai. Jadilah pemburu hadiah yang digeruni, penyeludup yang licik, pelombong utama atau penjelajah legenda. Culik sasaran bernilai tinggi, jadi senjata upahan atau jalin pakatan untuk mengawal seluruh sektor. Galaksi membongkok mengikut kehendak anda, dan setiap keputusan membentuk reputasi dan kekayaan anda."
+        }
+      ],
+      "rewardsTitle": "Ganjaran Pencarian; Dapatkan Bayaran untuk Bermain!",
+      "rewards": [
+        {
+          "title": "Ganjaran Dalam Permainan",
+          "body": "Setiap pencarian yang anda selesaikan berbaloi. Kredit, bahan naik taraf, komponen jarang berlaku, token pengambilan pakar dan item eksklusif mengalir ke dalam inventori anda dengan setiap misi yang berjaya. Semakin sukar pencarian, semakin kaya hasil tangkapan. Temui bahan-bahan yang jarang ditemui di planet yang jauh, selamatkan bahagian bernilai tinggi daripada peninggalan purba dan sumber simpanan yang mendorong peningkatan anda kepada ketuanan galaksi."
+        },
+        {
+          "title": "Pembayaran Tunai Sebenar",
+          "body": "Hyper Quest mengambil permainan melebihi hiburan. Pencarian dan cabaran peringkat tertentu menawarkan pembayaran tunai sebenar. Selesaikan misi peringkat tinggi, kuasai acara papan pendahulu dan sertai kejohanan pencarian bermusim yang memerlukan wang sebenar. Semakin mahir dan berani anda, semakin besar pembayarannya. Daripada hadiah pencarian mingguan hingga kejohanan bermusim yang epik, sentiasa ada peluang untuk menukar pengembaraan galaksi anda kepada pendapatan sebenar."
+        },
+        {
+          "title": "Cara Pembayaran Pencarian Berfungsi",
+          "body": "Pemain layak untuk pencarian ganjaran tunai dengan membina reputasi mereka dan memenuhi ambang prestasi. Kesukaran pencarian, tempoh dan tahap bahaya menentukan kumpulan hadiah. Pembayaran adalah telus, dipaparkan dengan jelas sebelum anda menerima sebarang misi dan diproses dengan cepat setelah selesai. Sama ada anda menjalankan pengangkutan kargo selama sepuluh minit atau ekspedisi dalam angkasa lepas selama seminggu, ganjaran sepadan dengan risiko."
+        },
+        {
+          "title": "Kemajuan Yang Membayar Ke Hadapan",
+          "body": "Ganjaran pencarian suapan terus ke dalam peningkatan kapal anda, sistem senjata dan pengambilan pakar. Setiap pembayaran menjadikan anda lebih kuat, yang membuka kunci pencarian yang lebih sukar dengan ganjaran yang lebih besar. Pendapatan juga dibawa ke dalam Hyper Racing dan Overlord of the 7 Realms, mewujudkan gelung kemajuan yang memberi ganjaran kepada dedikasi merentas keseluruhan ekosistem Hyper Tek."
+        }
+      ],
+      "upgradesTitle": "Naik taraf Kapal Anda, Lengkapi Arsenal Anda, Rekrut Anak Kapal Anda",
+      "upgrades": [
+        {
+          "title": "Peningkatan Kapal Angkasa",
+          "body": "Quest Racer anda adalah modular sepenuhnya dari ruang enjin ke kokpit. Naik taraf badan kapal untuk ketahanan maksimum, perkukuh cangkerang luar untuk menahan persekitaran yang bermusuhan, tingkatkan penjana perisai untuk kemandirian pertempuran, dan baik pulih sistem kuasa untuk prestasi puncak. Enjin yang lebih baik bermakna perjalanan antara planet yang lebih pantas. Sistem navigasi yang lebih kukuh mendedahkan laluan tersembunyi dan dunia yang belum dipetakan. Setiap peningkatan mengubah kapal anda menjadi kapal yang lebih berkuasa dan lebih digeruni."
+        },
+        {
+          "title": "Sistem Senjata",
+          "body": "Galaksi itu berbahaya, dan anda perlu menjadi lebih berbahaya. Tingkatkan dan perhalusi sistem senjata anda untuk melindungi diri anda daripada lanun, pemain saingan dan pasukan musuh. Pilih antara konfigurasi pertahanan yang memastikan anda terus hidup dalam situasi paling teruk atau pemuatan menyinggung yang direka untuk menyebabkan kerosakan maksimum. Tatasusunan laser, bateri peluru berpandu, meriam plasma dan senjata tenaga percubaan semuanya tersedia semasa anda maju melalui pokok naik taraf."
+        },
+        {
+          "title": "Rekrut Pakar",
+          "body": "Pakar adalah pengubah permainan. Setiap satu membawa kemahiran unik yang menambah bonus hebat kepada prestasi keseluruhan kapal anda dan tahap kuasa. Pakar navigasi mendedahkan laluan tersembunyi dan mengurangkan masa perjalanan. Pakar tempur meningkatkan ketepatan senjata dan output kerosakan. Pakar kejuruteraan meningkatkan integriti badan kapal dan kelajuan pembaikan. Pakar sains menambah baik pengekstrakan sumber dan penghalusan bahan. Susun berbilang pakar untuk mencipta kombinasi dahsyat yang menggandakan keberkesanan kapal anda."
+        },
+        {
+          "title": "Gelung Kuasa",
+          "body": "Usaha untuk mendapatkan. Dapatkan untuk menaik taraf. Tingkatkan untuk menakluki pencarian yang lebih sukar dengan ganjaran yang lebih besar. Rekrut pakar untuk menguatkan setiap sistem pada kapal anda. Semakin kuat anda, semakin banyak galaksi terbuka, dan semakin besar rezeki yang menanti. Peningkatan kapal dan bonus pakar juga dibawa terus ke dalam pertempuran angkasa semasa transit Hyper Racing dan pertempuran di seluruh Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest — Soalan Lazim",
+      "faq": [
+        {
+          "q": "Apakah Hyper Quest?",
+          "a": "Pengembaraan ruang dunia terbuka di mana anda memerintah kapal angkasa yang boleh dinaik taraf sepenuhnya merentasi galaksi yang luas. Selesaikan pencarian, terokai dunia asing, tingkatkan kapal anda, rekrut pakar dan dapatkan ganjaran tunai sebenar bersama kekayaan dalam permainan."
+        },
+        {
+          "q": "Bagaimanakah pencarian berfungsi?",
+          "a": "Terima misi daripada papan pencarian dalam permainan. Pencarian terdiri daripada larian kargo pantas yang mengambil masa hanya beberapa minit hingga ekspedisi berbilang hari epik jauh ke dalam angkasa yang belum dipetakan. Setiap pencarian mempunyai objektif yang jelas, penilaian bahaya dan peringkat ganjaran yang dipaparkan sebelum anda menerimanya."
+        },
+        {
+          "q": "Bolehkah saya memperoleh wang tunai sebenar?",
+          "a": "ya. Pencarian tertentu, cabaran peringkat dan kejohanan bermusim menawarkan pembayaran tunai sebenar. Bina reputasi anda, penuhi ambang prestasi dan layak untuk misi ganjaran tunai yang semakin lumayan. Hadiah mingguan dan kejohanan bermusim berjalan secara berterusan."
+        },
+        {
+          "q": "Apakah ganjaran dalam permainan yang boleh saya perolehi?",
+          "a": "Setiap pencarian yang telah selesai membayar kredit, bahan naik taraf, komponen jarang berlaku, token pengambilan pakar dan item eksklusif. Semakin sukar dan panjang pencarian, semakin kaya ganjarannya. Temui bahan yang jarang ditemui di planet yang jauh dan selamatkan bahagian bernilai tinggi daripada peninggalan purba."
+        },
+        {
+          "q": "Bolehkah saya menaik taraf kapal angkasa saya?",
+          "a": "Setiap sistem boleh dinaik taraf: badan kapal, kulit luar, penjana perisai, sistem kuasa, enjin, kokpit dan navigasi. Enjin yang lebih baik bermakna perjalanan yang lebih pantas, badan kapal yang lebih kuat bertahan daripada pertemuan yang bermusuhan, dan navigasi yang dinaik taraf mendedahkan laluan tersembunyi dan dunia yang belum dipetakan."
+        },
+        {
+          "q": "Apakah senjata yang ada?",
+          "a": "Tingkatkan dan perhalusi sistem senjata termasuk tatasusunan laser, bateri peluru berpandu, meriam plasma dan senjata tenaga eksperimen. Pilih konfigurasi pertahanan untuk kelangsungan hidup atau pemuatan serangan untuk kerosakan maksimum terhadap lanun, saingan dan pasukan musuh."
+        },
+        {
+          "q": "Bagaimanakah pakar bekerja?",
+          "a": "Rekrut pakar dengan kemahiran unik yang menambah bonus hebat pada prestasi kapal anda dan tahap kuasa. Pakar navigasi mendedahkan laluan tersembunyi, pakar pertempuran meningkatkan kerosakan senjata, pakar kejuruteraan meningkatkan integriti badan kapal dan pakar sains meningkatkan pengekstrakan sumber. Susun berbilang pakar untuk kombinasi yang dahsyat."
+        },
+        {
+          "q": "Apakah jenis pencarian yang tersedia?",
+          "a": "Pengangkutan kargo, perlombongan asteroid, pemburuan harta karun, pemburuan hadiah, pemulihan artifak, operasi penyamaran, penerokaan planet, pertahanan lanun, misi menyelamat dan banyak lagi. Pencarian terdiri daripada larian pantas sepuluh minit hingga ekspedisi dalam angkasa lepas berbilang hari."
+        },
+        {
+          "q": "Bolehkah saya menemui planet baharu?",
+          "a": "ya. Ikuti peta galaksi ke kawasan yang belum dipetakan dan temui dunia baharu. Penemu pertama mendapat hak penamaan untuk planet yang mereka temui. Dunia baharu menawarkan bahan unik, persekitaran dan litar perlumbaan yang belum pernah diakses oleh pemain lain sebelum ini."
+        },
+        {
+          "q": "Apa yang boleh saya lakukan di dalam kapal saya?",
+          "a": "Quest Racer anda ialah pangkalan mudah alih. Tanam makanan di teluk hidroponik, menapis bahan yang dilombong dari planet yang jauh, bina dan latih tentera dalam makmal pengklonan, tingkatkan senjata dan pertahanan serta uruskan operasi mampan diri yang semakin berkuasa dengan setiap misi."
+        },
+        {
+          "q": "Bagaimanakah peta galaksi berfungsi?",
+          "a": "Peta galaksi memandu penerokaan anda merentasi alam semesta. Tingkatkan peta anda untuk mendedahkan sektor baharu, lokasi portal dan zon pencarian tersembunyi. Semasa anda meneroka lebih jauh, peta mengembang, membuka kunci kawasan ruang angkasa yang semakin berbahaya dan bermanfaat."
+        },
+        {
+          "q": "Adakah kemajuan saya dibawa ke permainan lain?",
+          "a": "Semua yang anda bina dalam Hyper Quest disuap terus ke Hyper Racing dan Overlord of the 7 Realms. Peningkatan kapal, bonus pakar, kemahiran tempur dan sumber semuanya dipindahkan dengan lancar. Satu alam semesta, pelbagai permainan, perkembangan tanpa had."
+        },
+        {
+          "q": "Bolehkah saya bermain sebagai penjahat?",
+          "a": "betul-betul. Pergi menyamar, culik sasaran bernilai tinggi, jadi pistol upahan, seludup kargo berbahaya atau serbu pemain lain. Tiada jalan tunggal untuk menguasai. Cara anda memerintah galaksi adalah pilihan anda sepenuhnya, dan setiap keputusan membentuk reputasi anda."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "TUAN",
+      "heading": "Penguasa 7 Alam",
+      "subtitle": "Tanah ranap. Bina semula. Takluk. Menjadi Tuan.",
+      "intro": [
+        "Overlord of the 7 Realms ialah permainan strategi pertempuran tiga peringkat tidak seperti permainan lain dalam permainan. Anda meneroka melalui portal ke alam semesta selari dan terhempas di planet asing yang bermusuhan. Kapal anda rosak, sistem anda gagal, dan makhluk planet ini sudah semakin hampir. Kemandirian hanyalah permulaan. Penguasaan adalah matlamat.",
+        "Bina semula kapal anda dari bangkai kapal. Klon dan latih tentera dalam makmal atas kapal anda. Jinak hidupan liar di planet ini untuk mencipta pasukan berkuda berkuda yang dahsyat. Kemudian bertarung merentasi tiga dimensi pertempuran: pertempuran darat ke darat menentang raksasa dan pemain saingan, serangan darat ke angkasa lepas ke atas sasaran orbit atau darat, dan peperangan angkasa ke angkasa di atas Cincin Pertempuran besar-besaran yang mengorbit planet ini.",
+        "Ini bukan sekadar permainan strategi lain. Overlord menampilkan interaksi VR masa nyata, ganjaran wang tunai sebenar untuk menyelesaikan acara harian dan pencarian, dan pencerobohan dua minggu sekali oleh Hammerong yang menakutkan, spesies asing paling berkuasa yang ada. Setiap dua minggu, mereka tiba untuk menanggalkan planet ini, dan setiap dua minggu, pemain yang berani boleh mencabar mereka untuk mendapatkan bonus besar dan ganjaran legenda.",
+        "Tingkatkan kapal angkasa anda, lengkapinya dengan senjata yang memusnahkan, rekrut pakar yang menguatkan tahap kuasa anda dan jalin pakatan untuk mengawal seluruh wilayah. Semua yang anda bina bersambung terus ke Hyper Racing dan Hyper Quest melalui ekosistem Hyper Tek yang dikongsi. Satu alam semesta, tiga permainan, peperangan tanpa had. Teruskan membaca untuk mengetahui cara sistem pertempuran berfungsi dan sebab Overlord mengubah segala-galanya."
+      ],
+      "calloutLine1": "Kelangsungan Hidup hanyalah Permulaan.",
+      "calloutLine2": "Penguasaan adalah Matlamat.",
+      "howItWorksTitle": "Sistem Pertempuran Tiga Peringkat; Tiga Dimensi Perang",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Pertempuran Darat ke Darat",
+          "body": "Permukaan planet adalah zon perang. Kerahkan tentera klon anda menentang makhluk asing yang bermusuhan, binatang buas dan pemain saingan yang berjuang untuk wilayah dan sumber. Jinak dan latih hidupan liar di planet ini untuk mencipta unit berkuda yang dipasang yang memberikan kekuatan darat anda kelebihan yang menghancurkan. Peperangan darat adalah mentah, taktikal, dan tanpa henti. Setiap pertempuran yang anda menangi memperoleh sumber, wilayah dan reputasi."
+        },
+        {
+          "num": "02",
+          "title": "Serangan Darat ke Angkasa",
+          "body": "Di sinilah Overlord menambah dimensi yang tidak, atau hampir tidak, tawaran permainan lain. Buat kumpulan pasukan khusus yang direka untuk melancarkan serangan antara permukaan planet dan Cincin Pertempuran orbit. Serang kapal yang ditempatkan di angkasa dari kedudukan darat anda atau selaraskan serangan gabungan yang mengenai musuh dari atas dan bawah secara serentak. Lapisan pertempuran menegak ini mengubah strategi standard menjadi perlawanan catur berbilang dimensi di mana kedudukan merentasi tanah dan angkasa menentukan kemenangan."
+        },
+        {
+          "num": "03",
+          "title": "Peperangan Angkasa-ke-Angkasa",
+          "body": "Port kapal anda ke orbit dan mendarat di Battle Ring, struktur orbit besar yang mengelilingi planet ini. Dari sini, cari kapal yang tidak dilindungi dan sasaran yang terdedah. Teleport tentera melalui ruang angkasa dan terus ke dalam kapal musuh untuk menyebabkan kerosakan dalaman maksimum menggunakan serangan menaiki pesawat yang dibangunkan khas. Ganjaran pertempuran angkasa adalah antara yang tertinggi dalam permainan, dan mengawal wilayah orbit memberi anda kelebihan strategik yang tidak dapat dipadankan oleh pemain darat sahaja."
+        },
+        {
+          "num": "04",
+          "title": "Mengapa Tahap Tiga Mengubah Segala-galanya",
+          "body": "Kebanyakan permainan strategi beroperasi pada satu satah. Overlord beroperasi pada tiga. Keupayaan untuk menyerang dari tanah ke tanah, tanah ke angkasa, dan ruang ke angkasa mencipta medan perang dengan kedalaman taktikal yang tiada tandingan. Kemahiran adalah segala-galanya. Kuasa kejam sahaja tidak akan menjadikan anda Tuan Besar. Penguasaan strategik merentas ketiga-tiga peringkat inilah yang membezakan yang dominan daripada yang kalah."
+        }
+      ],
+      "extraSection": {
+        "title": "The Battle Ring dan Interaksi VR",
+        "items": [
+          {
+            "title": "Mendarat di Gelanggang Pertempuran",
+            "body": "Cincin Pertempuran ialah struktur orbital besar yang mengelilingi sistem planet. Apabila anda mengalihkan kapal anda ke angkasa lepas, anda boleh berlabuh di Battle Ring untuk mendapatkan kelebihan strategik yang besar. Dari kedudukan tinggi ini, anda boleh memburu kapal yang tidak dilindungi, melancarkan parti menaiki kapal ke dalam kapal saingan dan menyelaraskan serangan dahsyat ke atas sasaran darat di bawah. Mendarat di Battle Ring membuka dimensi permainan yang sama sekali baru yang kebanyakan permainan strategi tidak ditawarkan, memberikan Overlord kelebihan taktikal berbanding apa-apa lagi di pasaran."
+          },
+          {
+            "title": "Di dalam Battle Ring",
+            "body": "The Battle Ring bukan sekadar platform dok. Jika anda boleh mencari cara untuk melanggar bahagian dalamannya, pencarian tersembunyi, bonus tambahan dan ganjaran eksklusif menanti di dalamnya. Bahagian dalam cincin adalah labirin koridor, ruang, dan teknologi purba. Menjalankan pencarian dan misi memburu di dalam gelanggang itu sendiri, menemui rahsia yang tidak boleh diakses oleh pemain permukaan. Cincin Pertempuran memberi ganjaran kepada mereka yang berani, licik, dan tidak henti-henti."
+          },
+          {
+            "title": "Interaksi VR Masa Nyata",
+            "body": "Seperti semua rangkaian permainan Hyper Tek, Overlord of the 7 Realms menyokong interaksi VR penuh dalam masa nyata. Melangkah ke dalam kapal anda, berjalan di koridor Lingkaran Pertempuran, pimpin pasukan anda ke dalam pertempuran darat, dan alami peperangan angkasa lepas dari kokpit kapal anda. VR mengubah Overlord daripada permainan strategi kepada pengalaman medan perang yang mengasyikkan sepenuhnya. Perintahkan pasukan anda, terokai rupa bumi asing dan terlibat dalam pertempuran dengan tahap kehadiran dan keamatan yang tidak dapat ditiru oleh permainan skrin rata."
+          },
+          {
+            "title": "Kelebihan Berbanding Permainan Lain",
+            "body": "Tiada permainan lain yang menggabungkan peperangan tiga peringkat, stesen pertempuran orbit yang boleh diterokai, VR masa nyata dan wang tunai sebenar dan atau ganjaran dalam permainan dalam satu pengalaman. Battle Ring sahaja menambah dimensi permainan yang tidak dapat dipadankan oleh pesaing. Apabila anda menggabungkannya dengan pertempuran darat, peperangan angkasa lepas, rendaman VR dan ekosistem Hyper Tek yang saling berkaitan, Overlord berdiri dalam kategori tersendiri."
+          }
+        ]
+      },
+      "upgradesTitle": "Bina Semula, Senjata Semula, Rekrut; Kuasa untuk Perang",
+      "upgrades": [
+        {
+          "title": "Peningkatan Kapal Angkasa",
+          "body": "Kapal anda yang terhempas adalah tempat ia bermula. Bina semula sistem mengikut sistem, dari ruang enjin ke dek arahan. Setiap komponen boleh dinaik taraf sepenuhnya: tetulang badan kapal, integriti struktur, komposisi cangkang luar, penjana perisai, sistem kuasa dan tatasusunan navigasi. Dalam Overlord, anda membina bukan untuk kelajuan tetapi untuk pertempuran. Kapal perang yang dinaik taraf sepenuhnya adalah asas kepada setiap kempen yang berjaya, dan semakin mendalam anda melabur, semakin menggerunkan kapal anda."
+        },
+        {
+          "title": "Sistem Senjata dan Tahap Teknologi",
+          "body": "Tingkatkan dan perhalusi senjata, kemahiran dan tahap teknologi anda untuk menguasai ketiga-tiga peringkat pertempuran. Artileri berasaskan darat untuk peperangan planet, bateri anti-orbit untuk serangan darat ke angkasa, dan susunan senjata yang dipasang di kapal untuk pertempuran angkasa ke angkasa. Setiap sistem senjata boleh diperhalusi untuk peranan taktikal tertentu. Sama ada anda pakar dalam pengeboman jarak jauh, tindakan menaiki jarak dekat atau tindakan balas pertahanan, pemuatan senjata anda mentakrifkan identiti tempur anda."
+        },
+        {
+          "title": "Rekrut Pakar",
+          "body": "Pakar ialah pengganda kuasa yang memisahkan pemain yang baik daripada Tuan Besar. Dapatkan pakar unik yang membawa bonus hebat kepada prestasi keseluruhan kapal anda dan tahap kuasa. Pakar taktikal meningkatkan kecekapan penggunaan tentera, pakar kejuruteraan mempercepatkan pembaikan dan naik taraf kapal, pakar senjata meningkatkan output kerosakan merentas semua sistem dan pakar perisikan mendedahkan kedudukan dan kelemahan musuh. Susun berbilang pakar untuk mencipta sinergi yang dahsyat yang menguatkan setiap aspek operasi anda."
+        },
+        {
+          "title": "Bina Tentera Anda",
+          "body": "Klon tentera dalam makmal pengklonan atas kapal anda, kemudian tingkatkan dan perhalusi mereka serta senjata mereka sehingga mereka bersedia untuk berperang. Tetapi tentera sahaja tidak mencukupi. Jinak dan latih makhluk liar di planet ini untuk mencipta pasukan berkuda binatang berkuda, satu kuasa yang tidak boleh diklon atau dihasilkan dan mesti diperoleh melalui kemahiran dan kesabaran. Komposisi tentera anda merentasi darat, udara dan angkasa adalah yang menentukan penguasaan anda."
+        }
+      ],
+      "rewardsTitle": "The Hammerongs, Rewards dan Ekosistem Hyper Tek",
+      "rewards": [
+        {
+          "title": "The Hammerongs: Spesies Paling Berkuasa dalam Wujud",
+          "body": "Setiap dua minggu, medan kuasa arena tengah jatuh, dan Hammerong tiba. Mereka adalah spesies makhluk asing terkuat di alam semesta, dipersenjatai dengan teknologi canggih jauh melebihi apa yang dimiliki oleh pemain. Mereka datang untuk melucutkan sumber-sumber planet ini, dan mereka mempertahankan arena dengan kekuatan penuh dan luar biasa. Menyerang Hammerongs ialah cabaran paling berbahaya dalam Overlord, tetapi mereka yang berjaya diberi ganjaran dengan bonus besar, rampasan legenda, bahan naik taraf yang jarang berlaku dan ganjaran eksklusif yang tidak boleh diperoleh dengan cara lain. Pencerobohan Hammerong dua minggu sekali ialah ujian muktamad kuasa anda."
+        },
+        {
+          "title": "Peristiwa Harian, Pencarian dan Ganjaran Pertempuran",
+          "body": "Tuanku memberikan ganjaran secara berterusan. Selesaikan tugas harian untuk memperoleh kredit, bahan naik taraf dan bonus kemajuan. Masukkan acara khas untuk ganjaran premium. Menjalankan pencarian di seluruh permukaan planet dan dalam Battle Ring untuk rampasan eksklusif. Menangi pertempuran menentang raksasa, makhluk asing dan pemain saingan untuk menyimpan sumber. Terokai permukaan untuk menemui artifak dan khazanah tersembunyi. Struktur ganjaran direka bentuk supaya setiap tindakan yang anda ambil mendekatkan anda untuk menjadi Tuan Besar pelayan."
+        },
+        {
+          "title": "Disambungkan kepada Ekosistem Hyper Tek",
+          "body": "Penguasa 7 Alam tidak wujud secara berasingan. Ia disepadukan sepenuhnya ke dalam alam semesta Hyper Tek bersama Hyper Racing dan Hyper Quest. Sumber yang diperoleh dalam Overlord boleh digunakan merentas ketiga-tiga permainan. Peningkatan kapal, bonus pakar, kemahiran tempur dan bahan mengalir dengan lancar antara tajuk. Kebolehan perlumbaan yang diperoleh dalam Hyper Racing meningkatkan kemahiran juruterbang anda dalam pertempuran angkasa Overlord. Bahan yang dikumpulkan dalam Hyper Quest memacu peningkatan anda di planet ini. Pasaran Hyper Tek menghubungkan segala-galanya, mewujudkan ekonomi bersatu di mana kemajuan dalam satu permainan menguatkan kemajuan dalam ketiga-tiganya."
+        },
+        {
+          "title": "Satu Alam Semesta, Tiga Permainan, Kuasa Tanpa Had",
+          "body": "Pemain yang melibatkan diri dalam ketiga-tiga permainan Hyper Tek membina kuasa dengan lebih pantas, mengakses ganjaran silang permainan eksklusif dan menguasai melalui keluasan kemahiran dan sumber yang tidak dapat dipadankan oleh pemain permainan tunggal. Ekosistem yang saling berkaitan adalah kelebihan daya saing muktamad."
+        }
+      ],
+      "faqTitle": "Penguasa 7 Alam — Soalan Lazim",
+      "faq": [
+        {
+          "q": "Apakah Overlord of the 7 Realms?",
+          "a": "Permainan strategi pertempuran tiga peringkat di mana anda mendarat di planet asing, membina semula kapal anda, mengklon tentera dan bertarung merentasi tiga dimensi: darat ke darat, darat ke angkasa dan ruang ke angkasa. Menampilkan interaksi VR, ganjaran tunai sebenar dan pencerobohan Hammerong setiap dua minggu."
+        },
+        {
+          "q": "Apakah sistem pertempuran tiga peringkat?",
+          "a": "Pertempuran beroperasi merentasi tiga peringkat: darat-ke-darat menentang raksasa dan pemain saingan, serangan darat-ke-angkasa yang menyasarkan kapal orbit dan peperangan angkasa ke angkasa di Lingkaran Pertempuran. Pendekatan berbilang dimensi ini mencipta kedalaman taktikal yang tidak dapat dipadankan oleh permainan strategi satu satah."
+        },
+        {
+          "q": "Apakah Cincin Pertempuran?",
+          "a": "Struktur orbit yang besar mengelilingi planet ini. Mendaratkan kapal anda di atasnya untuk memburu sasaran yang tidak dilindungi, melancarkan parti menaiki kapal ke dalam kapal musuh, dan mengakses pencarian tersembunyi di dalam kawasan pedalamannya. Mengawal Battle Ring memberi anda kelebihan strategik berbanding pemain darat sahaja."
+        },
+        {
+          "q": "Bolehkah saya menaik taraf kapal angkasa saya?",
+          "a": "Setiap sistem boleh dinaik taraf daripada ruang enjin ke dek perintah: badan kapal, struktur, cangkerang luar, penjana perisai, sistem kuasa dan navigasi. Dalam Overlord anda membina untuk pertempuran, bukan kelajuan. Kapal perang yang dinaik taraf sepenuhnya adalah asas bagi setiap kempen."
+        },
+        {
+          "q": "Bagaimanakah pakar bekerja?",
+          "a": "Rekrut pakar unik yang menambah bonus hebat pada prestasi kapal anda dan tahap kuasa. Pakar taktikal, kejuruteraan, senjata dan perisikan masing-masing meningkatkan sistem yang berbeza. Susun berbilang pakar untuk sinergi yang memusnahkan di semua peringkat pertempuran."
+        },
+        {
+          "q": "Siapakah Hammerongs?",
+          "a": "Spesies asing paling berkuasa yang wujud. Setiap dua minggu mereka tiba di arena tengah untuk menanggalkan sumber-sumber planet, dipertahankan oleh kuasa yang luar biasa dan teknologi canggih. Menyerang mereka amat berbahaya tetapi memberi ganjaran kepada pemain dengan bonus besar dan rampasan legenda."
+        },
+        {
+          "q": "Apakah ganjaran yang boleh saya perolehi?",
+          "a": "Tugas harian, pencarian, pertempuran dan acara semuanya membayar kredit, bahan naik taraf dan bonus kemajuan. Acara khas dan pencerobohan Hammerong menawarkan ganjaran premium dan eksklusif. Cabaran kesukaran yang lebih tinggi dan pertandingan berperingkat menghasilkan pembayaran yang lebih besar termasuk wang tunai sebenar."
+        },
+        {
+          "q": "Adakah Overlord menyokong VR?",
+          "a": "ya. Interaksi VR masa nyata penuh membolehkan anda berjalan di koridor kapal anda, meneroka bahagian dalam Battle Ring, memimpin tentera ke pertempuran darat dan memandu kapal anda dalam peperangan angkasa lepas. VR mengubah Overlord daripada strategi kepada pengalaman medan perang yang mengasyikkan sepenuhnya."
+        },
+        {
+          "q": "Bagaimana saya membina tentera saya?",
+          "a": "Klon tentera di makmal atas kapal anda, kemudian tingkatkan dan perhalusi mereka serta senjata mereka. Untuk pasukan berkuda berkuda, anda mesti menjinakkan dan melatih makhluk liar planet ini, kerana haiwan tidak boleh diklon. Komposisi tentera merentasi darat, udara dan angkasa menentukan penguasaan anda."
+        },
+        {
+          "q": "Bolehkah saya menyertai pakatan?",
+          "a": "ya. Pergi sendiri atau sertai pakatan yang meningkatkan kuasa anda dan membantu anda berkembang. Perikatan menawarkan sumber yang dikongsi, serangan terkoordinasi dan pertahanan kolektif. Selesaikan tugas harian untuk meningkatkan kedua-dua kapal anda dan aset kongsi pakatan."
+        },
+        {
+          "q": "Adakah Overlord dikaitkan dengan permainan Hyper Tek yang lain?",
+          "a": "bersepadu sepenuhnya. Sumber, peningkatan kapal, bonus pakar dan aliran kemahiran tempur antara Overlord, Hyper Racing dan Hyper Quest. Kebolehan perlumbaan meningkatkan pertempuran ruang angkasa anda, bahan Quest menyemarakkan peningkatan anda, dan pasaran Hyper Tek menghubungkan seluruh ekonomi."
+        },
+        {
+          "q": "Apakah senjata yang ada?",
+          "a": "Artileri berasaskan darat, bateri anti-orbital, susunan senjata yang dipasang di kapal, dan peralatan tindakan menaiki kapal khusus. Setiap sistem boleh diperhalusi untuk peranan taktikal tertentu termasuk pengeboman jarak jauh, pertempuran jarak dekat dan tindakan balas pertahanan."
+        },
+        {
+          "q": "Bolehkah saya meneroka permukaan planet?",
+          "a": "ya. Planet ini kaya dengan ganjaran tersembunyi, artifak, sumber dan hidupan liar berbahaya untuk dijinakkan. Terokai permukaan untuk mencari khazanah, bertarung dengan makhluk asing dan raksasa, dan temui kelebihan strategik yang mengukuhkan kempen anda untuk penguasaan Overlord."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "KELUAR",
     "spaceRing": "OVERLORD · SPACE RING",
@@ -324,91 +720,268 @@
       "detail": "Butiran"
     },
     "rooms": {
-      "storeroom":     { "title": "Bilik Simpanan",             "desc": "Hab storan pusat untuk bahan mentah dan sumber yang dituai. Mengurus pengagihan inventori merentasi operasi perlombongan dan penapisan." },
-      "mining_fs":     { "title": "Mining FS",                  "desc": "Teluk perlombongan hadapan starboard. Dilengkapi dengan tatasusunan pengekstrakan teras dalam untuk pengumpulan mineral dan bijih di angkasa terbuka." },
-      "mining_fp":     { "title": "Mining FP",                  "desc": "Teluk perlombongan hadapan port. Mencerminkan unit starboard, menggandakan kapasiti pengekstrakan semasa operasi medan yang kaya dengan sumber." },
-      "process_ref":   { "title": "Penapisan Proses",           "desc": "Menukar bijih mentah dan mineral kepada aloi bertapis. Kritikal untuk sintesis bahan api dan bahan naik taraf kapal." },
-      "mining_rs":     { "title": "Mining RS",                  "desc": "Unit perlombongan starboard belakang. Berserong pada -45 darjah untuk sapuan medan sisi semasa penuaian asteroid hanyut perlahan." },
-      "mining_rp":     { "title": "Mining RP",                  "desc": "Unit perlombongan port belakang. Bekerja seiring dengan teluk RS untuk memaksimumkan hasil pengekstrakan sumber medan belakang." },
-      "fuel_ref":      { "title": "Penapisan Bahan Api",        "desc": "Memproses aloi bertapis menjadi bahan api gred pendorongan. Membekalkan enjin utama dan simpanan penolak kecemasan." },
-      "workshop":      { "title": "Bengkel",                    "desc": "Pusat penyelenggaraan dan fabrikasi kapal. Mengendalikan pembaikan komponen, pembuatan bahagian, dan naik taraf peralatan." },
-      "racing":        { "title": "Hangar RACING",              "desc": "Teluk khusus yang menempatkan dron perlumbaan dan kraf ringan. Menyokong penggunaan mod permainan RACING dan operasi pit-stop." },
-      "brig":          { "title": "Sel Tahanan",                "desc": "Sel penahanan selamat untuk banduan dan kargo berharga. Dinding diperkukuh menghalang akses atau pelarian tanpa kebenaran." },
-      "armory_ss":     { "title": "Armori SS",                  "desc": "Loker senjata sisi starboard. Menyimpan dan menyelenggara senjata ringan, peralatan perlindungan krew dan sistem pertahanan peribadi." },
-      "armory_ps":     { "title": "Armori PS",                  "desc": "Loker senjata sisi port. Mencerminkan armori SS memberikan akses muatan seimbang merentasi kedua-dua sisi kapal." },
-      "main_weapon":   { "title": "Senjata Berat Utama",        "desc": "Penempatan senjata berat utama. Menempatkan sistem serangan paling berkuasa kapal untuk pertempuran berskala besar." },
-      "fwd_shield":    { "title": "Penjana Perisai Hadapan",    "desc": "Menjana penghalang tenaga pelindung merentasi haluan kapal. Barisan pertahanan pertama menentang peluru dan serangan tenaga masuk." },
-      "fighter_fss":   { "title": "Teluk Pejuang FSS",          "desc": "Teluk starboard hadapan yang menempatkan kraf pejuang padat. Membolehkan penggunaan pantas pejuang pengiring semasa misi tempur dan rondaan." },
-      "fighter_fps":   { "title": "Teluk Pejuang FPS",          "desc": "Teluk pejuang port hadapan. Beroperasi seiring dengan teluk FSS untuk pelancaran skuadron pejuang yang diselaraskan." },
-      "fighter_rss":   { "title": "Teluk Pejuang RSS",          "desc": "Teluk pejuang nacele starboard belakang. Menyokong operasi pengawal belakang dan senario pintasan pengejaran." },
-      "fighter_rps":   { "title": "Teluk Pejuang RPS",          "desc": "Teluk pejuang nacele port belakang. Menyediakan liputan belakang simetri untuk penggunaan pejuang pertahanan penuh." },
-      "barracks_ss":   { "title": "Barak SS",                   "desc": "Kuarters krew starboard untuk kakitangan tempur. Menempatkan askar, juruterbang dan pasukan keselamatan dengan sistem katil dan loker peralatan." },
-      "barracks_ps":   { "title": "Barak PS",                   "desc": "Kuarters krew port. Susun atur sama dengan barak SS memastikan pengagihan krew yang sama rata dan mobilisasi pantas dari mana-mana sisi." },
-      "stables_ss":    { "title": "Kandang SS",                 "desc": "Teluk aset biologi starboard. Menempatkan tunggangan alien dan makhluk bio-kejuruteraan yang digunakan dalam operasi permukaan planet." },
-      "stable_ps":     { "title": "Kandang PS",                 "desc": "Teluk aset biologi port. Mencerminkan kandang SS untuk pengagihan beban makhluk yang seimbang dan pengagihan berat simetri." },
-      "transporter":   { "title": "Teluk Pengangkut",           "desc": "Sistem pengangkutan kakitangan dan kargo berbantuan kuantum. Membolehkan teleportasi jarak pendek pantas ke permukaan planet atau kapal berdekatan." },
-      "security":      { "title": "Stesen Keselamatan",         "desc": "Hab pengawasan seluruh kapal dan tindak balas ancaman. Memantau semua dek dan menyelaraskan protokol keselamatan dalaman." },
-      "weapons_ss":    { "title": "Sistem Senjata SS",          "desc": "Konsol pengurusan senjata starboard. Mengawal tatasusunan penyasaran, urutan penembakan dan logistik peluru untuk kelengkapan starboard." },
-      "weapons_ps":    { "title": "Sistem Senjata PS",          "desc": "Konsol pengurusan senjata port. Menyediakan kawalan bebas penuh semua platform senjata sisi port." },
-      "power_plant":   { "title": "Loji Janakuasa",             "desc": "Unit penjanaan tenaga teras. Menyediakan output kuasa stabil kepada semua sistem kapal melalui teknologi penahanan plasma bulat." },
-      "power_sys":     { "title": "Sistem Kuasa",               "desc": "Hab pengagihan dan pengaturan kuasa. Mengurus pengimbangan beban antara senjata, perisai, enjin dan sistem sokongan hayat." },
-      "energy_dist":   { "title": "Pengedaran Tenaga",          "desc": "Nod penghalaan tenaga sekunder. Memastikan penghantaran kuasa yang konsisten kepada sistem pertengahan dan bahagian belakang kapal dalam keadaan permintaan tinggi." },
-      "main_engine":   { "title": "Enjin Utama Kapal",          "desc": "Sistem pendorongan utama yang menggerakkan semua perjalanan sub-cahaya. Menjana daya tolak melalui jet plasma bermangkin antijirim." },
-      "navigation":    { "title": "Navigasi",                   "desc": "Stesen kawalan navigasi dan helm pusat. Mengurus plot laluan, astrokartografi dan penjejakan kedudukan masa nyata." },
-      "flight_deck":   { "title": "Dek Penerbangan",            "desc": "Stesen menerbang utama. Mengawal semua operasi penerbangan termasuk berlepas, mendarat, manuver orbit dan tindakan mengelak kecemasan." },
-      "weapons_off":   { "title": "Pegawai Senjata",            "desc": "Pos komando senjata taktikal. Menyelaraskan tembakan senjata serangan dan pertahanan di bawah komando langsung Pegawai Senjata." },
-      "comms_off":     { "title": "Pegawai Komunikasi",         "desc": "Hab komunikasi dan pintasan isyarat. Mengendalikan semua komunikasi antara kapal, perikatan dan planet termasuk saluran berenkripsi." },
-      "capt_quarters": { "title": "Bilik Kapten",               "desc": "Kuarters peribadi pegawai pemerintah kapal. Mengandungi terminal data selamat dan kemudahan taklimat peribadi." },
-      "kitchen":       { "title": "Dapur",                      "desc": "Kemudahan pemakanan dan penyediaan makanan krew. Memproses sumber makanan tersimpan dan mensintesis suplemen pemakanan untuk pelayaran jarak jauh." },
-      "mess_hall":     { "title": "Dewan Makan",                "desc": "Ruang makan bersama dan rekreasi. Berfungsi sebagai hab moral krew semasa masa lapang antara operasi tempur dan sumber." },
-      "hydro_1":       { "title": "Sel Hidroponik 1",           "desc": "Unit penanaman automatik menghasilkan makanan segar dan tumbuhan perubatan. Mengurangkan kebergantungan pada peruntukan tersimpan untuk misi berpanjangan." },
-      "hydro_2":       { "title": "Sel Hidroponik 2",           "desc": "Sel hidroponik sekunder yang mengembangkan kepelbagaian dan hasil tanaman. Menyokong pemakanan krew dan pengeluaran komoditi perdagangan." },
-      "hydro_3":       { "title": "Sel Hidroponik 3",           "desc": "Unit penanaman tertier yang pakar dalam tanaman ruji hasil tinggi. Menyediakan bekalan kalori asas untuk komplemen krew yang besar." },
-      "hydro_4":       { "title": "Sel Hidroponik 4",           "desc": "Sel penyelidikan perubatan dan botanikal. Menanam spesies langka yang digunakan dalam rawatan perubatan dan sintesis alkimia." },
-      "hydro_5":       { "title": "Sel Hidroponik 5",           "desc": "Teluk penanaman tumbuhan eksotik. Menghasilkan barang mewah dan flora langka untuk perdagangan di pasaran." },
-      "hydro_6":       { "title": "Sel Hidroponik 6",           "desc": "Sel percubaan pertumbuhan tinggi. Menguji strain tanaman baru yang dibangunkan melalui program pengubahsuaian genetik." },
-      "shield_main":   { "title": "Penjana Perisai Utama",      "desc": "Penjana perisai pelbagai arah utama. Memproyeksikan penghalang tenaga di sekeliling keseluruhan lambung semasa situasi tempur." },
-      "power_relay1":  { "title": "Geganti Kuasa 1",            "desc": "Simpang geganti kuasa dek atas. Menghalakan tenaga dari loji janakuasa ke senjata hadapan dan tatasusunan perisai." },
-      "power_relay2":  { "title": "Geganti Kuasa 2",            "desc": "Simpang geganti kuasa dek bawah. Mengagihkan kuasa ke nacele enjin dan sistem pertahanan belakang." },
-      "hidden_st1":    { "title": "Simpanan Tersembunyi 1",     "desc": "Peti besi keselamatan tinggi yang disorok. Menyimpan kargo terperingkat, artifak berharga dan barang larangan jauh dari imbasan inventori standard." },
-      "hidden_st2":    { "title": "Simpanan Tersembunyi 2",     "desc": "Peti besi yang disorok sekunder. Ruang selamat tambahan untuk item kritikal misi yang memerlukan budi bicara maksimum." },
-      "cargo_1":       { "title": "Ruang Kargo 1",              "desc": "Teluk kargo pukal utama. Direka untuk pengangkutan sumber bervolum besar termasuk bijih, logam bertapis dan barangan perdagangan." },
-      "cargo_2":       { "title": "Ruang Kargo 2",              "desc": "Teluk kargo sekunder yang dioptimumkan untuk muatan rapuh atau sensitif suhu. Keadaan penyimpanan terkawal iklim." },
-      "cargo_3":       { "title": "Ruang Kargo 3",              "desc": "Teluk kargo tertier. Susun atur boleh dikonfigurasi menyokong muatan campuran termasuk kenderaan, bekas dan peralatan bersaiz besar." },
-      "war_council":   { "title": "Majlis Perang",              "desc": "Bilik komando strategik. Meja taklimat pegawai kanan di mana pelan pertempuran, strategi perikatan dan objektif kempen diselaraskan." },
-      "academy":       { "title": "Akademi",                    "desc": "Kemudahan latihan dan pendidikan krew. Membolehkan kemajuan kemahiran, buka kunci pengkhususan dan program pembangunan pegawai." },
-      "science_lab":   { "title": "Makmal Sains",               "desc": "Pusat penyelidikan dan pembangunan. Menjalankan eksperimen dalam sains bahan, teori pendorongan dan analisis teknologi alien." },
-      "dna_lab":       { "title": "Makmal DNA",                 "desc": "Kemudahan penyelidikan genetik. Membangunkan peningkatan biologi untuk krew, mewujudkan varian spesies baru dan menyelidik sampel DNA alien." },
-      "cryostasis":    { "title": "Kriostatik",                 "desc": "Sistem penggantungan pelayaran jarak jauh. Menempatkan krew dalam stasis kriogenik untuk memelihara sumber semasa perjalanan angkasa dalam berbilang tahun." },
-      "dna_chambers":  { "title": "Bilik DNA",                  "desc": "Teluk pengubahsuaian genetik. Menggunakan peningkatan DNA yang diselidik secara langsung kepada ahli krew dan unit biologi." },
-      "weapons_relay": { "title": "Geganti Kuasa Senjata",      "desc": "Nod pengurusan kuasa khusus untuk sistem senjata berat. Memastikan bekalan tenaga stabil semasa pertempuran yang berterusan." },
-      "comms_tower":   { "title": "Menara Komunikasi",          "desc": "Tatasusunan komunikasi angkasa dalam jarak jauh. Membolehkan siaran seluruh armada, penghantaran interstellar dan penyelarasan perikatan merentasi jarak yang jauh." }
+      "storeroom": {
+        "title": "Bilik Simpanan",
+        "desc": "Hab storan pusat untuk bahan mentah dan sumber yang dituai. Mengurus pengagihan inventori merentasi operasi perlombongan dan penapisan."
+      },
+      "mining_fs": {
+        "title": "Mining FS",
+        "desc": "Teluk perlombongan hadapan starboard. Dilengkapi dengan tatasusunan pengekstrakan teras dalam untuk pengumpulan mineral dan bijih di angkasa terbuka."
+      },
+      "mining_fp": {
+        "title": "Mining FP",
+        "desc": "Teluk perlombongan hadapan port. Mencerminkan unit starboard, menggandakan kapasiti pengekstrakan semasa operasi medan yang kaya dengan sumber."
+      },
+      "process_ref": {
+        "title": "Penapisan Proses",
+        "desc": "Menukar bijih mentah dan mineral kepada aloi bertapis. Kritikal untuk sintesis bahan api dan bahan naik taraf kapal."
+      },
+      "mining_rs": {
+        "title": "Mining RS",
+        "desc": "Unit perlombongan starboard belakang. Berserong pada -45 darjah untuk sapuan medan sisi semasa penuaian asteroid hanyut perlahan."
+      },
+      "mining_rp": {
+        "title": "Mining RP",
+        "desc": "Unit perlombongan port belakang. Bekerja seiring dengan teluk RS untuk memaksimumkan hasil pengekstrakan sumber medan belakang."
+      },
+      "fuel_ref": {
+        "title": "Penapisan Bahan Api",
+        "desc": "Memproses aloi bertapis menjadi bahan api gred pendorongan. Membekalkan enjin utama dan simpanan penolak kecemasan."
+      },
+      "workshop": {
+        "title": "Bengkel",
+        "desc": "Pusat penyelenggaraan dan fabrikasi kapal. Mengendalikan pembaikan komponen, pembuatan bahagian, dan naik taraf peralatan."
+      },
+      "racing": {
+        "title": "Hangar RACING",
+        "desc": "Teluk khusus yang menempatkan dron perlumbaan dan kraf ringan. Menyokong penggunaan mod permainan RACING dan operasi pit-stop."
+      },
+      "brig": {
+        "title": "Sel Tahanan",
+        "desc": "Sel penahanan selamat untuk banduan dan kargo berharga. Dinding diperkukuh menghalang akses atau pelarian tanpa kebenaran."
+      },
+      "armory_ss": {
+        "title": "Armori SS",
+        "desc": "Loker senjata sisi starboard. Menyimpan dan menyelenggara senjata ringan, peralatan perlindungan krew dan sistem pertahanan peribadi."
+      },
+      "armory_ps": {
+        "title": "Armori PS",
+        "desc": "Loker senjata sisi port. Mencerminkan armori SS memberikan akses muatan seimbang merentasi kedua-dua sisi kapal."
+      },
+      "main_weapon": {
+        "title": "Senjata Berat Utama",
+        "desc": "Penempatan senjata berat utama. Menempatkan sistem serangan paling berkuasa kapal untuk pertempuran berskala besar."
+      },
+      "fwd_shield": {
+        "title": "Penjana Perisai Hadapan",
+        "desc": "Menjana penghalang tenaga pelindung merentasi haluan kapal. Barisan pertahanan pertama menentang peluru dan serangan tenaga masuk."
+      },
+      "fighter_fss": {
+        "title": "Teluk Pejuang FSS",
+        "desc": "Teluk starboard hadapan yang menempatkan kraf pejuang padat. Membolehkan penggunaan pantas pejuang pengiring semasa misi tempur dan rondaan."
+      },
+      "fighter_fps": {
+        "title": "Teluk Pejuang FPS",
+        "desc": "Teluk pejuang port hadapan. Beroperasi seiring dengan teluk FSS untuk pelancaran skuadron pejuang yang diselaraskan."
+      },
+      "fighter_rss": {
+        "title": "Teluk Pejuang RSS",
+        "desc": "Teluk pejuang nacele starboard belakang. Menyokong operasi pengawal belakang dan senario pintasan pengejaran."
+      },
+      "fighter_rps": {
+        "title": "Teluk Pejuang RPS",
+        "desc": "Teluk pejuang nacele port belakang. Menyediakan liputan belakang simetri untuk penggunaan pejuang pertahanan penuh."
+      },
+      "barracks_ss": {
+        "title": "Barak SS",
+        "desc": "Kuarters krew starboard untuk kakitangan tempur. Menempatkan askar, juruterbang dan pasukan keselamatan dengan sistem katil dan loker peralatan."
+      },
+      "barracks_ps": {
+        "title": "Barak PS",
+        "desc": "Kuarters krew port. Susun atur sama dengan barak SS memastikan pengagihan krew yang sama rata dan mobilisasi pantas dari mana-mana sisi."
+      },
+      "stables_ss": {
+        "title": "Kandang SS",
+        "desc": "Teluk aset biologi starboard. Menempatkan tunggangan alien dan makhluk bio-kejuruteraan yang digunakan dalam operasi permukaan planet."
+      },
+      "stable_ps": {
+        "title": "Kandang PS",
+        "desc": "Teluk aset biologi port. Mencerminkan kandang SS untuk pengagihan beban makhluk yang seimbang dan pengagihan berat simetri."
+      },
+      "transporter": {
+        "title": "Teluk Pengangkut",
+        "desc": "Sistem pengangkutan kakitangan dan kargo berbantuan kuantum. Membolehkan teleportasi jarak pendek pantas ke permukaan planet atau kapal berdekatan."
+      },
+      "security": {
+        "title": "Stesen Keselamatan",
+        "desc": "Hab pengawasan seluruh kapal dan tindak balas ancaman. Memantau semua dek dan menyelaraskan protokol keselamatan dalaman."
+      },
+      "weapons_ss": {
+        "title": "Sistem Senjata SS",
+        "desc": "Konsol pengurusan senjata starboard. Mengawal tatasusunan penyasaran, urutan penembakan dan logistik peluru untuk kelengkapan starboard."
+      },
+      "weapons_ps": {
+        "title": "Sistem Senjata PS",
+        "desc": "Konsol pengurusan senjata port. Menyediakan kawalan bebas penuh semua platform senjata sisi port."
+      },
+      "power_plant": {
+        "title": "Loji Janakuasa",
+        "desc": "Unit penjanaan tenaga teras. Menyediakan output kuasa stabil kepada semua sistem kapal melalui teknologi penahanan plasma bulat."
+      },
+      "power_sys": {
+        "title": "Sistem Kuasa",
+        "desc": "Hab pengagihan dan pengaturan kuasa. Mengurus pengimbangan beban antara senjata, perisai, enjin dan sistem sokongan hayat."
+      },
+      "energy_dist": {
+        "title": "Pengedaran Tenaga",
+        "desc": "Nod penghalaan tenaga sekunder. Memastikan penghantaran kuasa yang konsisten kepada sistem pertengahan dan bahagian belakang kapal dalam keadaan permintaan tinggi."
+      },
+      "main_engine": {
+        "title": "Enjin Utama Kapal",
+        "desc": "Sistem pendorongan utama yang menggerakkan semua perjalanan sub-cahaya. Menjana daya tolak melalui jet plasma bermangkin antijirim."
+      },
+      "navigation": {
+        "title": "Navigasi",
+        "desc": "Stesen kawalan navigasi dan helm pusat. Mengurus plot laluan, astrokartografi dan penjejakan kedudukan masa nyata."
+      },
+      "flight_deck": {
+        "title": "Dek Penerbangan",
+        "desc": "Stesen menerbang utama. Mengawal semua operasi penerbangan termasuk berlepas, mendarat, manuver orbit dan tindakan mengelak kecemasan."
+      },
+      "weapons_off": {
+        "title": "Pegawai Senjata",
+        "desc": "Pos komando senjata taktikal. Menyelaraskan tembakan senjata serangan dan pertahanan di bawah komando langsung Pegawai Senjata."
+      },
+      "comms_off": {
+        "title": "Pegawai Komunikasi",
+        "desc": "Hab komunikasi dan pintasan isyarat. Mengendalikan semua komunikasi antara kapal, perikatan dan planet termasuk saluran berenkripsi."
+      },
+      "capt_quarters": {
+        "title": "Bilik Kapten",
+        "desc": "Kuarters peribadi pegawai pemerintah kapal. Mengandungi terminal data selamat dan kemudahan taklimat peribadi."
+      },
+      "kitchen": {
+        "title": "Dapur",
+        "desc": "Kemudahan pemakanan dan penyediaan makanan krew. Memproses sumber makanan tersimpan dan mensintesis suplemen pemakanan untuk pelayaran jarak jauh."
+      },
+      "mess_hall": {
+        "title": "Dewan Makan",
+        "desc": "Ruang makan bersama dan rekreasi. Berfungsi sebagai hab moral krew semasa masa lapang antara operasi tempur dan sumber."
+      },
+      "hydro_1": {
+        "title": "Sel Hidroponik 1",
+        "desc": "Unit penanaman automatik menghasilkan makanan segar dan tumbuhan perubatan. Mengurangkan kebergantungan pada peruntukan tersimpan untuk misi berpanjangan."
+      },
+      "hydro_2": {
+        "title": "Sel Hidroponik 2",
+        "desc": "Sel hidroponik sekunder yang mengembangkan kepelbagaian dan hasil tanaman. Menyokong pemakanan krew dan pengeluaran komoditi perdagangan."
+      },
+      "hydro_3": {
+        "title": "Sel Hidroponik 3",
+        "desc": "Unit penanaman tertier yang pakar dalam tanaman ruji hasil tinggi. Menyediakan bekalan kalori asas untuk komplemen krew yang besar."
+      },
+      "hydro_4": {
+        "title": "Sel Hidroponik 4",
+        "desc": "Sel penyelidikan perubatan dan botanikal. Menanam spesies langka yang digunakan dalam rawatan perubatan dan sintesis alkimia."
+      },
+      "hydro_5": {
+        "title": "Sel Hidroponik 5",
+        "desc": "Teluk penanaman tumbuhan eksotik. Menghasilkan barang mewah dan flora langka untuk perdagangan di pasaran."
+      },
+      "hydro_6": {
+        "title": "Sel Hidroponik 6",
+        "desc": "Sel percubaan pertumbuhan tinggi. Menguji strain tanaman baru yang dibangunkan melalui program pengubahsuaian genetik."
+      },
+      "shield_main": {
+        "title": "Penjana Perisai Utama",
+        "desc": "Penjana perisai pelbagai arah utama. Memproyeksikan penghalang tenaga di sekeliling keseluruhan lambung semasa situasi tempur."
+      },
+      "power_relay1": {
+        "title": "Geganti Kuasa 1",
+        "desc": "Simpang geganti kuasa dek atas. Menghalakan tenaga dari loji janakuasa ke senjata hadapan dan tatasusunan perisai."
+      },
+      "power_relay2": {
+        "title": "Geganti Kuasa 2",
+        "desc": "Simpang geganti kuasa dek bawah. Mengagihkan kuasa ke nacele enjin dan sistem pertahanan belakang."
+      },
+      "hidden_st1": {
+        "title": "Simpanan Tersembunyi 1",
+        "desc": "Peti besi keselamatan tinggi yang disorok. Menyimpan kargo terperingkat, artifak berharga dan barang larangan jauh dari imbasan inventori standard."
+      },
+      "hidden_st2": {
+        "title": "Simpanan Tersembunyi 2",
+        "desc": "Peti besi yang disorok sekunder. Ruang selamat tambahan untuk item kritikal misi yang memerlukan budi bicara maksimum."
+      },
+      "cargo_1": {
+        "title": "Ruang Kargo 1",
+        "desc": "Teluk kargo pukal utama. Direka untuk pengangkutan sumber bervolum besar termasuk bijih, logam bertapis dan barangan perdagangan."
+      },
+      "cargo_2": {
+        "title": "Ruang Kargo 2",
+        "desc": "Teluk kargo sekunder yang dioptimumkan untuk muatan rapuh atau sensitif suhu. Keadaan penyimpanan terkawal iklim."
+      },
+      "cargo_3": {
+        "title": "Ruang Kargo 3",
+        "desc": "Teluk kargo tertier. Susun atur boleh dikonfigurasi menyokong muatan campuran termasuk kenderaan, bekas dan peralatan bersaiz besar."
+      },
+      "war_council": {
+        "title": "Majlis Perang",
+        "desc": "Bilik komando strategik. Meja taklimat pegawai kanan di mana pelan pertempuran, strategi perikatan dan objektif kempen diselaraskan."
+      },
+      "academy": {
+        "title": "Akademi",
+        "desc": "Kemudahan latihan dan pendidikan krew. Membolehkan kemajuan kemahiran, buka kunci pengkhususan dan program pembangunan pegawai."
+      },
+      "science_lab": {
+        "title": "Makmal Sains",
+        "desc": "Pusat penyelidikan dan pembangunan. Menjalankan eksperimen dalam sains bahan, teori pendorongan dan analisis teknologi alien."
+      },
+      "dna_lab": {
+        "title": "Makmal DNA",
+        "desc": "Kemudahan penyelidikan genetik. Membangunkan peningkatan biologi untuk krew, mewujudkan varian spesies baru dan menyelidik sampel DNA alien."
+      },
+      "cryostasis": {
+        "title": "Kriostatik",
+        "desc": "Sistem penggantungan pelayaran jarak jauh. Menempatkan krew dalam stasis kriogenik untuk memelihara sumber semasa perjalanan angkasa dalam berbilang tahun."
+      },
+      "dna_chambers": {
+        "title": "Bilik DNA",
+        "desc": "Teluk pengubahsuaian genetik. Menggunakan peningkatan DNA yang diselidik secara langsung kepada ahli krew dan unit biologi."
+      },
+      "weapons_relay": {
+        "title": "Geganti Kuasa Senjata",
+        "desc": "Nod pengurusan kuasa khusus untuk sistem senjata berat. Memastikan bekalan tenaga stabil semasa pertempuran yang berterusan."
+      },
+      "comms_tower": {
+        "title": "Menara Komunikasi",
+        "desc": "Tatasusunan komunikasi angkasa dalam jarak jauh. Membolehkan siaran seluruh armada, penghantaran interstellar dan penyelarasan perikatan merentasi jarak yang jauh."
+      }
     },
     "guns": {
-      "far_left_bar":      "Front Main Canon",
-      "fore_port_bay":     "Starboard Gun Bank Forward",
-      "fore_stbd_bay":     "Port Gun Bank Forward",
-      "pd_gun_1":          "Cockpit Starboard Defence Cell 1",
-      "pd_gun_2":          "Cockpit Starboard Defence Cell 2",
-      "pd_gun_3":          "Cockpit Starboard Defence Cell 3",
-      "pd_gun_4":          "Cockpit Starboard Defence Cell 4",
-      "pd_gun_5":          "Cockpit Starboard Defence Cell 5",
-      "pd_gun_6":          "Cockpit Starboard Defence Cell 6",
-      "vert_oval_upper":   "Cockpit Center Defence Cell Lower",
-      "vert_oval_lower":   "Cockpit Center Defence Cell Upper",
-      "center_front_gun":  "Forward Upperdeck Gun Array",
-      "pd_gun_7":          "Cockpit Port Defence Cell 1",
-      "pd_gun_8":          "Cockpit Port Defence Cell 2",
-      "pd_gun_9":          "Cockpit Port Defence Cell 3",
-      "pd_gun_10":         "Cockpit Port Defence Cell 4",
-      "pd_gun_11":         "Cockpit Port Defence Cell 5",
-      "pd_gun_12":         "Cockpit Port Defence Cell 6",
+      "far_left_bar": "Front Main Canon",
+      "fore_port_bay": "Starboard Gun Bank Forward",
+      "fore_stbd_bay": "Port Gun Bank Forward",
+      "pd_gun_1": "Cockpit Starboard Defence Cell 1",
+      "pd_gun_2": "Cockpit Starboard Defence Cell 2",
+      "pd_gun_3": "Cockpit Starboard Defence Cell 3",
+      "pd_gun_4": "Cockpit Starboard Defence Cell 4",
+      "pd_gun_5": "Cockpit Starboard Defence Cell 5",
+      "pd_gun_6": "Cockpit Starboard Defence Cell 6",
+      "vert_oval_upper": "Cockpit Center Defence Cell Lower",
+      "vert_oval_lower": "Cockpit Center Defence Cell Upper",
+      "center_front_gun": "Forward Upperdeck Gun Array",
+      "pd_gun_7": "Cockpit Port Defence Cell 1",
+      "pd_gun_8": "Cockpit Port Defence Cell 2",
+      "pd_gun_9": "Cockpit Port Defence Cell 3",
+      "pd_gun_10": "Cockpit Port Defence Cell 4",
+      "pd_gun_11": "Cockpit Port Defence Cell 5",
+      "pd_gun_12": "Cockpit Port Defence Cell 6",
       "upper_flank_array": "Starboard Gun Bank Rear",
       "lower_flank_array": "Port Gun Bank Rear",
-      "spine_gun_1":       "Mid Upperdeck Gun Array",
-      "spine_gun_2":       "Lower Central Spine Array",
-      "spine_gun_3":       "Rear Central Spine Array",
-      "mid_rail_gun":      "Central Tower Embankment",
+      "spine_gun_1": "Mid Upperdeck Gun Array",
+      "spine_gun_2": "Lower Central Spine Array",
+      "spine_gun_3": "Rear Central Spine Array",
+      "mid_rail_gun": "Central Tower Embankment",
       "upper_nacelle_bay": "Starboard Wing Array",
       "lower_nacelle_bay": "Port Wing Array"
     },
@@ -476,6 +1049,76 @@
           "notes": "Dryads adalah spesies yang menakjubkan dan unik, dicirikan oleh sifat hibrid mereka yang menggabungkan ciri-ciri pokok dan makhluk alien. Fisiologi yang berbeza ini membolehkan mereka berkembang dalam pelbagai persekitaran, sering menyerupai flora di sekeliling mereka. Mereka mempunyai minda seperti sarang, yang membolehkan mereka berkomunikasi dengan lancar antara satu sama lain. Kesedaran kolektif ini memupuk rasa perpaduan dan kerjasama yang mendalam, membolehkan mereka beroperasi sebagai kumpulan yang bersatu padu sambil mengekalkan hubungan yang rumit dengan alam semula jadi, dan mereka dapat merasakan kesihatan persekitaran mereka, menjadikan mereka penjaga alam semula jadi yang luar biasa. Diet mereka terutamanya berasaskan tumbuhan, terdiri daripada daun, buah-buahan, dan bahan botanikal lain. Walau bagaimanapun, mereka kadangkala melengkapkan diet mereka dengan kuantiti kecil daging, yang mereka peroleh dengan penuh perhatian dan rasa hormat terhadap nyawa yang mereka ambil. Selain atribut fizikal mereka, Dryads terkenal dengan tingkah laku ceria dan nakal mereka. Mereka sering terlibat dalam jenaka atau permainan ringan hati, mencerminkan semangat gembira mereka. Kesetiaan mereka antara satu sama lain dan tanah air mereka tidak berubah, dan mereka akan melindungi komuniti dan wilayah mereka dengan keras apabila terancam. Secara rohani, Dryads mempunyai kepercayaan yang mendalam tentang akhirat yang saling berkait dengan kitaran alam semula jadi. Mereka menghormati unsur-unsur semula jadi (Bumi, Udara, Api, dan Air) sebagai kuasa ilahi, dan mereka juga menyembah benda-benda cakerawala seperti matahari dan bintang, yang mereka anggap sebagai cahaya pemandu dalam kewujudan mereka. Hubungan mendalam dengan alam semula jadi dan kosmos ini membentuk budaya, ritual, dan cara hidup keseluruhan mereka."
         }
       }
-    }
+    },
+    "back": "← KEMBALI",
+    "viewArrow": "LIHAT →",
+    "selectCategory": "PILIH KATEGORI",
+    "comingSoon": "AKAN DATANG",
+    "specialistProfileDesc": "Profil pakar — statistik penuh akan tersedia apabila permainan dilancarkan.",
+    "alliance": {
+      "rank": {
+        "leader": "Pemimpin",
+        "coleader": "Timbalan Pemimpin",
+        "officer": "Pegawai",
+        "member": "Ahli"
+      },
+      "status": {
+        "online": "Dalam talian",
+        "offline": "Luar talian",
+        "away": "Pergi"
+      },
+      "manage": {
+        "editInfo": "Edit Maklumat Pakatan",
+        "editInfoDesc": "Tukar nama, teg & keterangan",
+        "joinRequests": "Urus Permintaan Sertai",
+        "joinRequestsDesc": "Semak dan terima ahli baru",
+        "donationGoals": "Tetapkan Sasaran Derma",
+        "donationGoalsDesc": "Konfigurasi sasaran derma mingguan",
+        "warSettings": "Tetapan Perang Pakatan",
+        "warSettingsDesc": "Konfigurasi peraturan penyertaan perang",
+        "kickMembers": "Buang Ahli",
+        "kickMembersDesc": "Buang ahli yang tidak aktif atau melanggar peraturan"
+      },
+      "allianceMail": {
+        "warResults": "Keputusan Perang Pakatan",
+        "strategyPlan": "Pelan Strategi Baru",
+        "donationSummary": "Ringkasan Derma Mingguan",
+        "meeting1800": "Mesyuarat pada 18:00",
+        "levelUp": "Pakatan Naik Tahap!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Selamat Datang ke HyperTek!",
+      "maintenance": "Notis Penyelenggaraan Pelayan",
+      "allianceWar": "Pengumuman Perang Pakatan",
+      "galacticCup": "Pendaftaran Piala Galaksi",
+      "baseAttacked": "Pangkalan anda diserang!",
+      "loginReward": "Ganjaran Log Masuk Harian Sedia",
+      "refiningEvent": "Acara Master Penapisan Bermula",
+      "meeting1800": "Mesyuarat pada 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Terjemahan automatik AKTIF — Mesej dihantar dalam bahasa setiap penerima",
+      "autoTranslateOff": "Terjemahan automatik TIDAK AKTIF"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Siapa nak join perang pakatan malam ni?",
+      "ggLastRace": "GG dalam perlumbaan terakhir, kelajuan hebat",
+      "tradingPlasma": "Tukar batang plasma dengan buku teknologi",
+      "needHelpAsteroid": "Perlukan bantuan misi asteroid",
+      "allianceRecruiting": "Pakatan kami merekrut, DM saya",
+      "donationGoalsPlasma": "Sasaran derma: batang plasma diperlukan!",
+      "warStarts2Hours": "Perang bermula dalam 2 jam, bersedia",
+      "handleMedicalSupport": "Saya akan uruskan sokongan perubatan",
+      "wts50Engines": "JUAL: 50 enjin, PM saya",
+      "wtbAntiGravity": "BELI: Modul anti-graviti x10",
+      "sellingRareSkins": "Jual skin nadir, semak profil"
+    },
+    "devicePairing": "PEMADANAN PERANTI",
+    "deviceOffline": "LUAR TALIAN",
+    "pairing": "MEMADANKAN...",
+    "unavailableNow": "TIDAK TERSEDIA SEKARANG",
+    "pairDevice": "PADANKAN PERANTI",
+    "vrInteractionMode": "MOD Interaksi VR · Akan Datang"
   }
 }

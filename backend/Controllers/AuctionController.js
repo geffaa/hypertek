@@ -8,7 +8,7 @@ const CAT_ALIAS_AUCTION = {
   "vehicles": "racing vehicles",
   "land/bases": "land and bases",
 };
-const VALID_CATS_AUCTION = ["skins","military badges","specialists","weapons","body armour","spaceships","racing vehicles","artwork","land and bases","general"];
+const VALID_CATS_AUCTION = ["skins", "military badges", "specialists", "weapons", "body armour", "spaceships", "racing vehicles", "artwork", "land and bases", "general"];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -19,7 +19,7 @@ async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
     skipAuctionId: auction._id,
     itemName: auction.title || auction.itemName,
     ownerWallet: auction.sellerWallet,
-  }).catch(() => {});
+  }).catch(() => { });
 
   if (!auction.nftSystemId || !auction.subCollectionId) return;
   try {
@@ -30,23 +30,23 @@ async function syncNFTAfterAuctionSale(auction, winningPrice, buyerWallet) {
 
     const sellerWallet = sub.owner;
 
-    sub.listed    = false;
-    sub.priceETH  = winningPrice;
-    sub.owner     = buyerWallet.toLowerCase();
+    sub.listed = false;
+    sub.priceETH = winningPrice;
+    sub.owner = buyerWallet.toLowerCase();
     sub.isFirstSale = false;
     sub.salesHistory.push({
-      buyer:          buyerWallet.toLowerCase(),
-      seller:         sellerWallet,
-      priceETH:       winningPrice,
-      isFirstSale:    sub.isFirstSale,
-      createdAt:      new Date(),
+      buyer: buyerWallet.toLowerCase(),
+      seller: sellerWallet,
+      priceETH: winningPrice,
+      isFirstSale: sub.isFirstSale,
+      createdAt: new Date(),
     });
 
     parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
     parent.markModified("subCollections");
     await parent.save();
   } catch (err) {
-    console.error("❌ syncNFTAfterAuctionSale error:", err.message);
+    console.error(" syncNFTAfterAuctionSale error:", err.message);
   }
 }
 

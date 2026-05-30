@@ -64,7 +64,7 @@ const ProtectedRoute = () => {
     );
   }
 
-  // ❌ Not logged in → redirect to frontend login
+  //  Not logged in → redirect to frontend login
   if (!isLoggedIn) {
     toast.error("Please login to access this page");
     const frontendUrl = import.meta.env.VITE_FRONTEND_URL || "http://localhost:5173";
@@ -96,7 +96,7 @@ const ProtectedRoute = () => {
     );
   }
 
-  // ✅ Authenticated
+  // Authenticated
   return <Outlet />;
 };
 

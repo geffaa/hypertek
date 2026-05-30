@@ -25,7 +25,7 @@ async function main() {
   const myNFT = await MyNFT.deploy({ nonce: currentNonce });
   await myNFT.waitForDeployment();
   const myNFTAddress = await myNFT.getAddress();
-  console.log("✅ MyNFT deployed to:", myNFTAddress);
+  console.log("MyNFT deployed to:", myNFTAddress);
 
   // ========================================
   // 2. Deploy Marketplace Contract
@@ -37,16 +37,16 @@ async function main() {
   const marketplace = await Marketplace.deploy(PLATFORM_WALLET, usdcAddress, { nonce: currentNonce }); // Platform wallet, USDC address
   await marketplace.waitForDeployment();
   const marketplaceAddress = await marketplace.getAddress();
-  console.log("✅ Marketplace deployed to:", marketplaceAddress);
+  console.log("Marketplace deployed to:", marketplaceAddress);
 
   // ========================================
-  // 3. ✅ CRITICAL: Authorize Marketplace in MyNFT
+  // 3. CRITICAL: Authorize Marketplace in MyNFT
   // ========================================
   console.log("\n🔐 Authorizing Marketplace to mark sales...");
   currentNonce++;
   const authTx = await myNFT.setMarketplaceAuthorization(marketplaceAddress, true, { nonce: currentNonce });
   await authTx.wait();
-  console.log("✅ Marketplace authorized successfully!");
+  console.log("Marketplace authorized successfully!");
 
   // Verify authorization
   const isAuthorized = await myNFT.isMarketplaceAuthorized(marketplaceAddress);
@@ -93,7 +93,7 @@ async function main() {
     path.join(abisDir, "Marketplace.json"),
     JSON.stringify(marketplaceArtifact.interface.formatJson(), null, 2)
   );
-  console.log("✅ ABIs saved to:", abisDir);
+  console.log("ABIs saved to:", abisDir);
 
   // ========================================
   // 6. Update .env file
@@ -117,7 +117,7 @@ async function main() {
   updateEnv("PLATFORM_WALLET_ADDRESS", PLATFORM_WALLET);
 
   fs.writeFileSync(envPath, envContent);
-  console.log("✅ .env file updated");
+  console.log(".env file updated");
 
   // ========================================
   // 7. Summary
@@ -129,7 +129,7 @@ async function main() {
   console.log("   MyNFT:       ", myNFTAddress);
   console.log("   Marketplace: ", marketplaceAddress);
   console.log("\n🔐 Authorization:");
-  console.log("   Marketplace is authorized:", isAuthorized ? "✅ YES" : "❌ NO");
+  console.log("   Marketplace is authorized:", isAuthorized ? "YES" : " NO");
   console.log("\n💼 Platform Wallet:", PLATFORM_WALLET);
   console.log("\n📝 Next Steps:");
   console.log("   1. Update your frontend with these addresses");
@@ -141,6 +141,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error("❌ Deployment failed:", error);
+    console.error(" Deployment failed:", error);
     process.exit(1);
   });

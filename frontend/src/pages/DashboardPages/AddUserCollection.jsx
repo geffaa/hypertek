@@ -6,9 +6,11 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEmailWallet } from "../../hooks/useEmailWallet";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FiUploadCloud, FiImage, FiArrowLeft, FiLink } from "react-icons/fi";
 import ImageCropModal from "../../Components/ImageCropModal";
+
 
 const CATEGORIES = [
   "skins", "military badges", "specialists", "weapons",
@@ -22,6 +24,7 @@ const inputClass =
 const labelClass = "text-white/70 text-sm font-medium mb-1.5 block";
 
 function CreateNFT() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
   const { address: wagmiAddress } = useAccount();
@@ -119,8 +122,8 @@ function CreateNFT() {
           <FiArrowLeft size={18} />
         </button>
         <div>
-          <h1 className="text-white font-semibold text-xl">Create NFT/NFC</h1>
-          <p className="text-white/40 text-xs mt-0.5">Item is saved in storage — list it on the marketplace when ready.</p>
+          <h1 className="text-white font-semibold text-xl">{t("dashboard.createNFT.title", "Create NFT/NFC")}</h1>
+          <p className="text-white/40 text-xs mt-0.5">{t("dashboard.createNFT.subtitle", "Item is saved in storage — list it on the marketplace when ready.")}</p>
         </div>
       </div>
 
@@ -128,7 +131,7 @@ function CreateNFT() {
 
         {/* LEFT — Image Upload */}
         <div className="lg:w-[280px] flex-shrink-0">
-          <p className={labelClass}>Item Image <span className="text-red-400">*</span></p>
+          <p className={labelClass}>{t("dashboard.createNFT.itemImage", "Item Image")} <span className="text-red-400">*</span></p>
           <div
             className={`relative w-full aspect-square rounded-xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center overflow-hidden group
               ${dragOver ? "border-blue-500 bg-blue-500/10" : imagePreview ? "border-white/20" : "border-white/10 hover:border-white/25 bg-white/3 hover:bg-white/5"}`}
@@ -142,7 +145,7 @@ function CreateNFT() {
                 <img src={imagePreview} alt="Preview" className="w-full h-full object-contain" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                   <FiUploadCloud size={24} className="text-white" />
-                  <span className="text-white text-xs font-medium">Change Image</span>
+                  <span className="text-white text-xs font-medium">{t("dashboard.createNFT.changeImage", "Change Image")}</span>
                 </div>
               </>
             ) : (
@@ -151,10 +154,10 @@ function CreateNFT() {
                   <FiImage size={20} className="text-white/40" />
                 </div>
                 <div>
-                  <p className="text-white/60 text-sm font-medium">Drop image here</p>
-                  <p className="text-white/30 text-xs mt-1">or click to browse</p>
+                  <p className="text-white/60 text-sm font-medium">{t("dashboard.createNFT.dropImage", "Drop image here")}</p>
+                  <p className="text-white/30 text-xs mt-1">{t("dashboard.createNFT.clickBrowse", "or click to browse")}</p>
                 </div>
-                <p className="text-white/20 text-[11px]">PNG, JPG, WebP · max 10MB</p>
+                <p className="text-white/20 text-[11px]">{t("dashboard.createNFT.maxSize", "PNG, JPG, WebP · max 10MB")}</p>
               </div>
             )}
             <input
@@ -175,10 +178,10 @@ function CreateNFT() {
 
           {/* Name */}
           <div>
-            <label className={labelClass}>Item Name <span className="text-red-400">*</span></label>
+            <label className={labelClass}>{t("dashboard.createNFT.itemName", "Item Name")} <span className="text-red-400">*</span></label>
             <input
               type="text"
-              placeholder="e.g. Dragon Sword #001"
+              placeholder={t("dashboard.createNFT.namePlaceholder", "e.g. Dragon Sword #001")}
               value={name}
               onChange={(e) => setName(e.target.value)}
               className={inputClass}
@@ -187,9 +190,9 @@ function CreateNFT() {
 
           {/* Description */}
           <div>
-            <label className={labelClass}>Item Description</label>
+            <label className={labelClass}>{t("dashboard.createNFT.itemDescription", "Item Description")}</label>
             <textarea
-              placeholder="Describe your item..."
+              placeholder={t("dashboard.createNFT.descPlaceholder", "Describe your item...")}
               value={description}
               onChange={(e) => setDesc(e.target.value)}
               rows={3}
@@ -199,7 +202,7 @@ function CreateNFT() {
 
           {/* Category */}
           <div>
-            <label className={labelClass}>Storage Box (Category) <span className="text-red-400">*</span></label>
+            <label className={labelClass}>{t("dashboard.createNFT.storageBox", "Storage Box (Category)")} <span className="text-red-400">*</span></label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -211,14 +214,14 @@ function CreateNFT() {
               ))}
             </select>
             <p className="text-white/25 text-[11px] mt-1">
-              Item is placed into this storage box until listed on the marketplace.
+              {t("dashboard.createNFT.storageBoxHint", "Item is placed into this storage box until listed on the marketplace.")}
             </p>
           </div>
 
 
           {/* Asset Type */}
           <div>
-            <label className={labelClass}>Asset Type</label>
+            <label className={labelClass}>{t("dashboard.createNFT.assetType", "Asset Type")}</label>
             <div className="flex gap-2">
               <button
                 type="button"
@@ -239,25 +242,25 @@ function CreateNFT() {
               >
                 NFC
                 <span className="absolute -top-2 -right-1 text-[9px] px-1.5 py-0.5 rounded bg-yellow-600/70 text-yellow-200 font-semibold">
-                  Soon
+                  {t("dashboard.createNFT.nfcSoon", "Soon")}
                 </span>
               </button>
             </div>
             <p className="text-white/25 text-[11px] mt-1.5">
-              NFC creation requires a license — coming in a future update.
+              {t("dashboard.createNFT.nfcHint", "NFC creation requires a license — coming in a future update.")}
             </p>
           </div>
 
           {/* Blockchain info */}
           <div>
-            <label className={labelClass}>Blockchain</label>
+            <label className={labelClass}>{t("dashboard.createNFT.blockchain", "Blockchain")}</label>
             <div className="w-full h-10 px-3 rounded-lg bg-white/3 border border-white/8 flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
                 <circle cx="55.5" cy="55.5" r="55.5" fill="#0052FF"/>
                 <path d="M55.494 85.816C72.3 85.816 85.97 72.147 85.97 55.341c0-16.806-13.67-30.475-30.476-30.475-15.764 0-28.714 11.98-30.285 27.334h40.04v6.282H25.21c1.571 15.354 14.521 27.334 30.285 27.334z" fill="white"/>
               </svg>
               <span className="text-white/60 text-sm font-medium">Base</span>
-              <span className="ml-auto text-white/25 text-xs">Payments in USDC · Minted on listing</span>
+              <span className="ml-auto text-white/25 text-xs">{t("dashboard.createNFT.blockchainNote", "Payments in USDC · Minted on listing")}</span>
             </div>
           </div>
 
@@ -267,13 +270,13 @@ function CreateNFT() {
             style={{ background: "rgba(0,42,168,0.12)", border: "1px solid rgba(0,80,255,0.2)" }}
           >
             <p className="text-white/70 text-xs font-semibold mb-1.5 flex items-center gap-1.5">
-              <span>ℹ</span> How listing works
+              <span>ℹ</span> {t("dashboard.createNFT.howListingTitle", "How listing works")}
             </p>
             <ul className="text-white/45 text-[11px] space-y-1 leading-relaxed">
-              <li>• Save your item to storage first — no gas / fees required.</li>
-              <li>• Then list it on the <span className="text-white/65 font-medium">Marketplace</span> (fixed price).</li>
-              <li>• Once listed on the <span className="text-white/65 font-medium">Marketplace</span>, open it for <span className="text-white/65 font-medium">Auction</span> (timed bidding with reserve), or offer it in <span className="text-white/65 font-medium">Trade</span>.</li>
-              <li>• All three channels can be active at the same time — the first sale cancels the rest.</li>
+              <li>• {t("dashboard.createNFT.howListing1", "Save your item to storage first — no gas / fees required.")}</li>
+              <li>• {t("dashboard.createNFT.howListing2", "Then list it on the Marketplace (fixed price).")}</li>
+              <li>• {t("dashboard.createNFT.howListing3", "Once listed on the Marketplace, open it for Auction (timed bidding with reserve), or offer it in Trade.")}</li>
+              <li>• {t("dashboard.createNFT.howListing4", "All three channels can be active at the same time — the first sale cancels the rest.")}</li>
             </ul>
           </div>
 
@@ -285,14 +288,14 @@ function CreateNFT() {
             >
               <FiLink size={14} className="text-yellow-400 flex-shrink-0" />
               <p className="text-yellow-300/80 text-xs flex-1">
-                Connect your wallet to save items to storage.
+                {t("dashboard.createNFT.connectWalletNote", "Connect your wallet to save items to storage.")}
               </p>
               <button
                 onClick={() => openConnectModal?.()}
                 className="px-3 h-7 rounded-lg text-xs font-semibold text-white flex-shrink-0 transition-all hover:brightness-110"
                 style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.4)" }}
               >
-                Connect Wallet
+                {t("dashboard.createNFT.connectWallet", "Connect Wallet")}
               </button>
             </div>
           )}
@@ -304,7 +307,7 @@ function CreateNFT() {
               className="flex items-center gap-2 px-5 h-10 rounded-lg border border-white/10 text-white/60 hover:text-white hover:border-white/20 hover:bg-white/5 transition-all text-sm font-medium"
             >
               <FiArrowLeft size={14} />
-              Cancel
+              {t("dashboard.createNFT.cancel", "Cancel")}
             </button>
             <button
               onClick={handleSubmit}
@@ -318,12 +321,12 @@ function CreateNFT() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                   </svg>
-                  Saving...
+                  {t("dashboard.createNFT.saving", "Saving...")}
                 </>
               ) : !walletConnected ? (
-                <><FiLink size={14} /> Connect Wallet</>
+                <><FiLink size={14} /> {t("dashboard.createNFT.connectWallet", "Connect Wallet")}</>
               ) : (
-                "Save to Storage →"
+                t("dashboard.createNFT.saveToStorage", "Save to Storage →")
               )}
             </button>
           </div>

@@ -44,13 +44,13 @@ Route.put("/edit/:userId", upload.single("Avatar"), EditUser);
 Route.delete("/delete/:userId", DeleteUser);
 // :pencil2: Edit user profile (update info or upload avatar)
 Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
-// ✅ Get wallet address only (no private key, no password needed)
+// Get wallet address only (no private key, no password needed)
 Route.get("/user/wallet-address", auth, GetWalletAddress);
-// ✅ Export private key — requires password in body
+// Export private key — requires password in body
 Route.post("/user/export-wallet", auth, ExportWallet);
-// ✅ Get all users (admin only)
+// Get all users (admin only)
 Route.get("/users", GetAllUsers);
-// ✅ Toggle user active/inactive status (admin only)
+// Toggle user active/inactive status (admin only)
 Route.patch("/user/status/:userId", ToggleUserStatus);
 
 Route.get("/admin/:adminId", GetAdminByAdminId);

@@ -63,7 +63,7 @@ contract Marketplace is ReentrancyGuard {
         string role
     );
     
-    // ✅ Emitted when a minter pays the mint price directly to the creator's escrow
+    // Emitted when a minter pays the mint price directly to the creator's escrow
     event FirstSaleDeposited(
         address indexed buyer,
         address indexed creator,
@@ -77,7 +77,7 @@ contract Marketplace is ReentrancyGuard {
         usdc = IERC20(_usdcAddress);
     }
 
-    // ✅ NEW: Called when someone mints an NFT — they pay the mint price directly.
+    // NEW: Called when someone mints an NFT — they pay the mint price directly.
     // 100% of the payment goes into creatorBalance[creator] in escrow.
     // No listing required. The minter/buyer calls this right after mint.
     function depositFirstSalePayment(address creator, uint256 amount) external nonReentrant {
@@ -126,7 +126,7 @@ contract Marketplace is ReentrancyGuard {
         emit ListingCancelled(msg.sender, nftAddress, tokenId);
     }
 
-    // ✅ Admin emergency cancel
+    // Admin emergency cancel
     function emergencyCancelListing(address nftAddress, uint256 tokenId) external {
         require(msg.sender == platformWallet, "Only platform wallet");
         Listing storage listing = listings[nftAddress][tokenId];
@@ -172,7 +172,7 @@ contract Marketplace is ReentrancyGuard {
             sellerAmount = price - creatorAmount - platformAmount;
         }
 
-        // ✅ All amounts held in contract escrow — claim via withdraw functions
+        // All amounts held in contract escrow — claim via withdraw functions
         if (creatorAmount > 0) creatorBalance[creator] += creatorAmount;
         if (platformAmount > 0) platformBalance += platformAmount;
         if (sellerAmount > 0) sellerBalance[seller] += sellerAmount;

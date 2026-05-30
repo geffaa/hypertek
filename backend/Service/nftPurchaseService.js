@@ -17,7 +17,7 @@ export async function finalizeNFAPurchase({
   buyerWallet,
   priceETH, // Price in human-readable decimal (e.g., 0.01)
   txHash,   // Frontend provides this for USDC, backend provides this for Stripe? 
-            // Actually Stripe doesn't have a blockchain tx hash yet if we mint here.
+  // Actually Stripe doesn't have a blockchain tx hash yet if we mint here.
   paymentProvider, // 'crypto' or 'stripe'
   paymentIntentId // For stripe tracking
 }) {
@@ -33,7 +33,7 @@ export async function finalizeNFAPurchase({
 
   // Clean up metadata
   const isInvalid = (val) => !val || val === "undefined" || val === "not_set" || val === "null" || val === "";
-  
+
   const cleanParentId = isInvalid(parentId) ? null : parentId;
   const cleanSubId = isInvalid(subCollectionId) ? null : subCollectionId;
   const cleanBuyer = isInvalid(buyerWallet) ? null : buyerWallet;
@@ -57,18 +57,18 @@ export async function finalizeNFAPurchase({
   }
 
   if (!parent) {
-    console.error(`❌ [finalizeNFAPurchase] Parent collection NOT FOUND for subCollectionId: ${cleanSubId}`);
+    console.error(` [finalizeNFAPurchase] Parent collection NOT FOUND for subCollectionId: ${cleanSubId}`);
     throw new Error("Parent collection not found");
   }
 
   console.log(`🔍 [finalizeNFAPurchase] Found parent: ${parent._id}. Looking for sub-collection: ${cleanSubId}`);
   const subCollection = parent.subCollections.id(cleanSubId);
   if (!subCollection) {
-    console.error(`❌ [finalizeNFAPurchase] Sub-collection NOT FOUND in parent: ${parent._id}`);
+    console.error(` [finalizeNFAPurchase] Sub-collection NOT FOUND in parent: ${parent._id}`);
     throw new Error("Sub-collection not found");
   }
 
-  console.log("✅ [finalizeNFAPurchase] Found parent and sub-collection.");
+  console.log("[finalizeNFAPurchase] Found parent and sub-collection.");
 
   // 2. Mint if not already minted
   let tokenId = subCollection.tokenId;
@@ -78,17 +78,17 @@ export async function finalizeNFAPurchase({
     console.log("🎨 Minting NFT for purchase...");
     const chainId = 8453; // Base Mainnet
     const { nftContract, wallet: backendWalletObj, provider } = getBlockchain(chainId);
-    
+
     const backendWallet = await backendWalletObj.getAddress();
     const balance = await provider.getBalance(backendWallet);
     if (balance === 0n) throw new Error("Backend wallet has no ETH for gas");
 
     const tokenURI = `ipfs://auto-${Date.now()}`;
     const royaltyBps = 500;
-    
+
     // Fetch latest nonce
     const currentNonce = await provider.getTransactionCount(backendWallet, "latest");
-    
+
     // Mint — contract signature: mint(address creator, string tokenURI, uint16 royaltyBps)
     const creatorAddress = creatorWallet && creatorWallet !== "admin" ? creatorWallet : backendWallet;
     const tx = await nftContract.mint(creatorAddress, tokenURI, royaltyBps, { nonce: currentNonce });
@@ -141,7 +141,7 @@ export async function finalizeNFAPurchase({
       const chainId = 84532; // Base Sepolia Testnet
       const { nftContract, wallet: backendWalletObj } = getBlockchain(chainId);
       const backendWallet = await backendWalletObj.getAddress();
-      
+
       const transferTx = await nftContract.transferFrom(backendWallet, buyerWallet, tokenId);
       await transferTx.wait();
       receiptHash = transferTx.hash;
@@ -171,7 +171,7 @@ export async function finalizeNFAPurchase({
 
   // 3. Record Sale in Database
   const seller = (subCollection.owner && subCollection.owner.toLowerCase() !== "admin")
-    ? subCollection.owner 
+    ? subCollection.owner
     : (process.env.PLATFORM_WALLET_ADDRESS || "admin");
 
   const cleanPrice = parseFloat(String(priceETH || subCollection.priceETH || 0));
@@ -185,7 +185,7 @@ export async function finalizeNFAPurchase({
   // Hypertek first sale = admin created AND this is the first sale
   // Player first sale   = user created AND this is the first sale
   const isHypertekFirstSale = isFirstSale && isHypertekCreator;
-  const isPlayerFirstSale   = isFirstSale && !isHypertekCreator;
+  const isPlayerFirstSale = isFirstSale && !isHypertekCreator;
 
   // Enforce reserve price: block purchases below minimumBuybackUSD for NFA and NFC
   if ((isNFA || assetType === "NFC") && subCollection.minimumBuybackUSD > 0 && cleanPrice < subCollection.minimumBuybackUSD) {
@@ -209,39 +209,39 @@ export async function finalizeNFAPurchase({
    * NFT — owner resell (2nd+):   80% seller | 4% artist | 5% → +minBB | 11% Hypertek
    */
 
-  let royaltyPaid    = 0;
-  let platformFee    = 0;
-  let buybackAmount  = 0;  // amount added to minBB or banked
-  let companyAmount  = 0;
+  let royaltyPaid = 0;
+  let platformFee = 0;
+  let buybackAmount = 0;  // amount added to minBB or banked
+  let companyAmount = 0;
   let sellerReceived = 0;
 
   if (isHypertekFirstSale) {
     // Hypertek is both seller and platform — bank preset minBB from seller portion
     // Commission: 4% artist + 16% Hypertek = 20%
-    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
-    companyAmount  = parseFloat((cleanPrice * 0.16).toFixed(6));
-    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    royaltyPaid = parseFloat((cleanPrice * 0.04).toFixed(6));
+    companyAmount = parseFloat((cleanPrice * 0.16).toFixed(6));
+    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
     // Hypertek as seller gets the remaining 80%; minBB is already preset/banked by admin
     sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    buybackAmount  = 0; // preset minBB — no auto-increment on first sale
+    buybackAmount = 0; // preset minBB — no auto-increment on first sale
     console.log(`💼 [Commission] Hypertek first sale (${assetType}): 4% artist + 16% company. MinBB preset.`);
 
   } else if (isPlayerFirstSale) {
     // Player first sale: 80% to creator, 10% banked as initial minBB, 10% Hypertek
     sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    royaltyPaid    = 0; // Creator IS the seller — no separate artist fee
-    buybackAmount  = parseFloat((cleanPrice * 0.10).toFixed(6)); // initial minBB seed
-    companyAmount  = parseFloat((cleanPrice * 0.10).toFixed(6));
-    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    royaltyPaid = 0; // Creator IS the seller — no separate artist fee
+    buybackAmount = parseFloat((cleanPrice * 0.10).toFixed(6)); // initial minBB seed
+    companyAmount = parseFloat((cleanPrice * 0.10).toFixed(6));
+    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
     console.log(`🎮 [Commission] Player first sale (${assetType}): 80% creator + 10% minBB + 10% company.`);
 
   } else {
     // Owner resell (2nd+ sale) — applies to NFA, NFC, NFT equally
     sellerReceived = parseFloat((cleanPrice * 0.80).toFixed(6));
-    royaltyPaid    = parseFloat((cleanPrice * 0.04).toFixed(6));
-    buybackAmount  = parseFloat((cleanPrice * 0.05).toFixed(6)); // added to minBB
-    companyAmount  = parseFloat((cleanPrice * 0.11).toFixed(6));
-    platformFee    = parseFloat((cleanPrice * 0.20).toFixed(6));
+    royaltyPaid = parseFloat((cleanPrice * 0.04).toFixed(6));
+    buybackAmount = parseFloat((cleanPrice * 0.05).toFixed(6)); // added to minBB
+    companyAmount = parseFloat((cleanPrice * 0.11).toFixed(6));
+    platformFee = parseFloat((cleanPrice * 0.20).toFixed(6));
     console.log(`🔄 [Commission] Owner resell (${assetType}): 80% seller + 4% artist + 5% minBB + 11% company.`);
   }
 
@@ -267,7 +267,7 @@ export async function finalizeNFAPurchase({
 
   if (!subCollection.salesHistory) subCollection.salesHistory = [];
   subCollection.salesHistory.push(saleRecord);
-  
+
   subCollection.owner = buyerWallet.toLowerCase();
   subCollection.seller = null; // Clear listing info
   subCollection.buyer = null;
@@ -276,37 +276,37 @@ export async function finalizeNFAPurchase({
   subCollection.isFirstSale = false;
 
   parent.collection.salesCount = (parent.collection.salesCount || 0) + 1;
-  
+
   console.log("💾 [finalizeNFAPurchase] Saving parent document...");
   parent.markModified('subCollections');
   await parent.save();
 
-  console.log(`✅ [finalizeNFAPurchase] COMPLETED! Token #${tokenId} owner is now ${buyerWallet}`);
+  console.log(`[finalizeNFAPurchase] COMPLETED! Token #${tokenId} owner is now ${buyerWallet}`);
 
   // Write to Activity log (non-blocking)
   Activity.create({
-    name:     subCollection.name || parent.name || "NFT",
-    image:    subCollection.image || null,
-    type:     "Sale",
-    buyer:    buyerWallet.toLowerCase(),
-    seller:   seller.toLowerCase(),
-    price:    cleanPrice,
-    time:     new Date(),
+    name: subCollection.name || parent.name || "NFT",
+    image: subCollection.image || null,
+    type: "Sale",
+    buyer: buyerWallet.toLowerCase(),
+    seller: seller.toLowerCase(),
+    price: cleanPrice,
+    time: new Date(),
     itemType: assetType,
-    itemId:   parent._id,
+    itemId: parent._id,
   }).catch(err => console.warn("⚠️ [Activity] create error:", err.message));
 
   // Dispatch creator/artist royalty (4%) — async, non-blocking
   if (royaltyPaid > 0 && creatorWallet && creatorWallet !== "admin") {
     dispatchRoyalty({
       subCollectionId: cleanSubId,
-      parentId:        cleanParentId,
+      parentId: cleanParentId,
       creatorWallet,
-      amount:          royaltyPaid,
-      saleRecordId:    receiptHash || paymentIntentId,
-      paymentType:     royaltyPaymentType,
-      payoutType:      "artist_royalty",
-      note:            `${assetType} artist royalty 4%`,
+      amount: royaltyPaid,
+      saleRecordId: receiptHash || paymentIntentId,
+      paymentType: royaltyPaymentType,
+      payoutType: "artist_royalty",
+      note: `${assetType} artist royalty 4%`,
     }).catch(err => console.warn("⚠️ [RoyaltyService] royalty dispatch error:", err.message));
   }
 
@@ -317,12 +317,12 @@ export async function finalizeNFAPurchase({
       const bbPct = isPlayerFirstSale ? '10%' : '5%';
       dispatchRoyalty({
         subCollectionId: cleanSubId,
-        parentId:        cleanParentId,
-        creatorWallet:   buybackWallet,
-        amount:          buybackAmount,
-        saleRecordId:    receiptHash || paymentIntentId,
-        payoutType:      "buyback_fund",
-        note:            `${assetType} buyback fund ${bbPct}`,
+        parentId: cleanParentId,
+        creatorWallet: buybackWallet,
+        amount: buybackAmount,
+        saleRecordId: receiptHash || paymentIntentId,
+        payoutType: "buyback_fund",
+        note: `${assetType} buyback fund ${bbPct}`,
       }).catch(err => console.warn("⚠️ [BuybackService] dispatch error:", err.message));
       console.log(`🏦 [Buyback] Dispatching $${buybackAmount} USDC → ${buybackWallet}`);
     } else {
@@ -337,12 +337,12 @@ export async function finalizeNFAPurchase({
       const feeLabel = isHypertekFirstSale ? '16%' : isPlayerFirstSale ? '10%' : '11%';
       dispatchRoyalty({
         subCollectionId: cleanSubId,
-        parentId:        cleanParentId,
-        creatorWallet:   platformWallet,
-        amount:          companyAmount,
-        saleRecordId:    receiptHash || paymentIntentId,
-        payoutType:      "company_fee",
-        note:            `${assetType} company fee ${feeLabel}`,
+        parentId: cleanParentId,
+        creatorWallet: platformWallet,
+        amount: companyAmount,
+        saleRecordId: receiptHash || paymentIntentId,
+        payoutType: "company_fee",
+        note: `${assetType} company fee ${feeLabel}`,
       }).catch(err => console.warn("⚠️ [PlatformFee] dispatch error:", err.message));
       console.log(`🏢 [Platform] Dispatching $${companyAmount} USDC → ${platformWallet}`);
     } else {
@@ -354,8 +354,8 @@ export async function finalizeNFAPurchase({
   cancelSiblingListings(cleanSubId, {
     itemName: subCollection.name,
     ownerWallet: seller,
-  }).catch(() => {});
+  }).catch(() => { });
 
-  console.log("✅ NFA Purchase Finalized for Token #", tokenId);
+  console.log("NFA Purchase Finalized for Token #", tokenId);
   return { success: true, tokenId, subCollection };
 }

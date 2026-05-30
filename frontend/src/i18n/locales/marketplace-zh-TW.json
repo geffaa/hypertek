@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "市集",
     "searchPlaceholder": "搜尋...",
-
     "tabs": {
-      "overview":  "概覽",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "市集",
-      "auctions":  "拍賣",
-      "trades":    "交易",
-      "quests":    "任務",
-      "hire":      "招募",
-      "bounty":    "賞金"
+      "overview": "概覽",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "市集",
+      "auctions": "拍賣",
+      "trades": "交易",
+      "quests": "任務",
+      "hire": "招募",
+      "bounty": "賞金"
     },
-
     "banner": {
       "defaultHeading": "Hyper Tek 的新時代黎明",
-      "defaultDesc": "這是一個活躍、有生命的宇宙的開始，每一個決定都塑造旅程。",
+      "defaultDesc": "這是一個生機勃勃的宇宙的開始，每個決定都會塑造旅程。無論您是在光速競速、在霸主領域結盟，還是在《超級任務》中揭開秘密，這都是您在故事中留下印記的機會。",
       "stats": {
-        "totalItems":  "總物品數",
-        "totalBuys":   "總購買數",
-        "listed":      "已上架",
+        "totalItems": "總物品數",
+        "totalBuys": "總購買數",
+        "listed": "已上架",
         "collections": "收藏"
       },
-      "soundOn":  "開啟聲音",
+      "soundOn": "開啟聲音",
       "soundOff": "關閉聲音"
     },
-
     "bottomBar": {
-      "learnLabel":     "了解 NFA / NFC",
+      "learnLabel": "了解 NFA / NFC",
       "educationPanel": "HyperTek 教育面板",
-      "footerNote":     "此面板供快速參考。訪問 NFA / NFC 101 頁簽以獲取完整教育內容。",
+      "footerNote": "此面板供快速參考。訪問 NFA / NFC 101 頁簽以獲取完整教育內容。",
       "facts": [
-        { "label": "NFA",        "desc": "僅 Hypertek 資產。最高遊戲內獎勵。隨每次銷售增長的保障最低回購價值。" },
-        { "label": "NFC",        "desc": "由 Hypertek 或授權玩家創建。包含遊戲內獎勵。保障最低回購價。" },
-        { "label": "NFT",        "desc": "玩家創作的收藏品。無遊戲內獎勵。無回購保障。可在市集交易。" },
-        { "label": "佣金",       "desc": "所有銷售收取 20% 平台費用。賣方獲得 80%。藝術家在二手銷售中獲得 4% 版稅。" },
-        { "label": "回購增長",   "desc": "每次二手售價的 +5% 計入資產的最低回購價值。只會增長，永不減少。" },
-        { "label": "託管錢包",   "desc": "HyperTek 在您註冊時自動為您創建加密錢包。" }
+        {
+          "label": "NFA",
+          "desc": "僅 Hypertek 資產。最高遊戲內獎勵。隨每次銷售增長的保障最低回購價值。"
+        },
+        {
+          "label": "NFC",
+          "desc": "由 Hypertek 或授權玩家創建。包含遊戲內獎勵。保障最低回購價。"
+        },
+        {
+          "label": "NFT",
+          "desc": "玩家創作的收藏品。無遊戲內獎勵。無回購保障。可在市集交易。"
+        },
+        {
+          "label": "佣金",
+          "desc": "所有銷售收取 20% 平台費用。賣方獲得 80%。藝術家在二手銷售中獲得 4% 版稅。"
+        },
+        {
+          "label": "回購增長",
+          "desc": "每次二手售價的 +5% 計入資產的最低回購價值。只會增長，永不減少。"
+        },
+        {
+          "label": "託管錢包",
+          "desc": "HyperTek 在您註冊時自動為您創建加密錢包。"
+        }
       ]
     },
-
     "overview": {
-      "heading":  "概覽",
+      "heading": "概覽",
       "subtitle": "歡迎來到 HyperTek 市集。選擇一個功能了解更多——然後直接開始。",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Web3 資產新手？從這裡開始",
           "details": [
             "NFA（非同質化資產）是 Hypertek 發行的物品，具有平台保障的回購價格。",
@@ -56,7 +70,7 @@
           "cta": "學習基礎知識"
         },
         {
-          "label":   "市集",
+          "label": "市集",
           "tagline": "即時購買和出售遊戲內資產",
           "details": [
             "瀏覽 NFA、NFC 和 NFT 的廣泛目錄——皮膚、武器、專家、太空船等等。",
@@ -66,7 +80,7 @@
           "cta": "瀏覽市集"
         },
         {
-          "label":   "拍賣",
+          "label": "拍賣",
           "tagline": "競爭獨家限量版物品",
           "details": [
             "競標只能透過限時拍賣獲得的稀有資產。",
@@ -76,7 +90,7 @@
           "cta": "查看拍賣"
         },
         {
-          "label":   "交易",
+          "label": "交易",
           "tagline": "點對點交換資產，無中間商",
           "details": [
             "與其他玩家提議或接受直接資產交易——完全在鏈上。",
@@ -86,7 +100,7 @@
           "cta": "瀏覽交易"
         },
         {
-          "label":   "任務",
+          "label": "任務",
           "tagline": "完成任務，獲得獨家獎勵",
           "details": [
             "接受任務以獲得獨家獎勵和稀有遊戲內資產。",
@@ -96,7 +110,7 @@
           "cta": "探索任務"
         },
         {
-          "label":   "招募",
+          "label": "招募",
           "tagline": "借用資產或從您的資產中獲益",
           "details": [
             "為單次任務租用強大的專家或裝備，無需直接購買。",
@@ -106,7 +120,7 @@
           "cta": "瀏覽招募"
         },
         {
-          "label":   "賞金",
+          "label": "賞金",
           "tagline": "追蹤目標，索取獎勵，登上排行榜",
           "details": [
             "接受其他玩家或系統發布的賞金任務以賺取加密獎勵。",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "一般",
+      "heading": "一般",
       "subtitle": "瀏覽可立即購買的 NFA、NFC 和 NFT——皮膚、武器、專家、太空船等等。",
       "filterAll": "全部",
       "samplePreviewTitle": "市集樣本預覽",
       "samplePreviewDesc": "以下物品是樣本預覽，展示了將在 HyperTek 市集上提供的數位資產類型。具有獨特藝術品和區塊鏈驗證所有權的實際物品將在發佈時提供。",
       "noItems": "目前沒有可用物品，請稍後再查看。",
       "categories": {
-        "skins":           "皮膚",
-        "militaryBadges":  "軍事徽章",
-        "specialists":     "專家",
-        "weapons":         "武器",
-        "bodyArmour":      "身體護甲",
-        "spaceships":      "太空船",
-        "racingVehicles":  "載具",
-        "artwork":         "藝術品",
-        "landAndBases":    "土地與基地",
-        "general":         "一般"
-      }
+        "skins": "皮膚",
+        "militaryBadges": "軍事徽章",
+        "specialists": "專家",
+        "weapons": "武器",
+        "bodyArmour": "身體護甲",
+        "spaceships": "太空船",
+        "racingVehicles": "載具",
+        "artwork": "藝術品",
+        "landAndBases": "土地與基地",
+        "general": "一般"
+      },
+      "search": "搜尋...",
+      "filter": "篩選",
+      "showAll": "顯示全部",
+      "filterSort": "過濾和排序",
+      "sortBy": "排序方式",
+      "sort": {
+        "default": "預設",
+        "priceAsc": "價格：從低到高",
+        "priceDesc": "價格：從高到低",
+        "nameAsc": "名稱：A到Z",
+        "nameDesc": "名稱：Z到A"
+      },
+      "priceRange": "價格範圍（USDC）",
+      "min": "最小",
+      "max": "最大限度",
+      "apply": "申請",
+      "clearAll": "清除所有過濾器",
+      "noResults": "沒有找到結果",
+      "dummyContent": "虛擬內容",
+      "preview": "預覽",
+      "buyNow": "立即購買",
+      "viewDetails": "看詳情"
     },
-
     "nfa101": {
       "sectionLabel": "教育",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "NFT 和 Web3 新手？探索我們的文章以了解區塊鏈資產、錢包、安全性和 HyperTek 生態系統。",
-      "minRead":      "分鐘閱讀",
-      "filterAll":    "全部"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "NFT 和 Web3 新手？探索我們的文章以了解區塊鏈資產、錢包、安全性和 HyperTek 生態系統。",
+      "minRead": "分鐘閱讀",
+      "filterAll": "全部"
     },
-
     "auctions": {
-      "heading":        "拍賣",
-      "listings":       "個上架",
-      "newAuction":     "新增拍賣",
-      "noAuctions":     "沒有 {{filter}} 拍賣",
-      "createFirst":    "創建第一個拍賣",
-      "endingSoon":     "即將結束",
-      "viewDetails":    "查看詳情",
+      "heading": "拍賣",
+      "listings": "個上架",
+      "newAuction": "新增拍賣",
+      "noAuctions": "沒有 {{filter}} 拍賣",
+      "createFirst": "創建第一個拍賣",
+      "endingSoon": "即將結束",
+      "viewDetails": "查看詳情",
       "rules": {
-        "durations":    "時間：1天 · 3天 · 7天",
+        "durations": "時間：1天 · 3天 · 7天",
         "minIncrement": "最低加價：5%",
-        "freeToList":   "免費上架",
-        "commission":   "佣金：成交時收取 20%"
-      },
-      "preview": {
-        "title":   "遊戲內功能預覽",
-        "desc":    "拍賣系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
-      },
-      "card": {
-        "currentBid": "當前出價",
-        "endsIn":     "結束於",
-        "placeBid":   "出價",
-        "buyNow":     "立即購買",
-        "bids":       "個出價",
-        "ended":      "已結束"
-      },
-      "detail": {
-        "currentBid":  "當前出價",
-        "start":       "開始",
-        "endsIn":      "結束於",
-        "description": "描述",
-        "recentBids":  "最近出價",
-        "anonymous":   "匿名",
-        "placeBid":    "出價",
-        "buyNow":      "立即購買",
-        "buyNowLabel": "立即購買",
-        "bids":        "個出價"
-      },
-      "bidModal": {
-        "title":          "出價",
-        "currentBid":     "當前出價",
-        "minimumBid":     "最低出價",
-        "yourBid":        "您的出價（USDC）",
-        "minIncrement":   "最低加價 5% · 您出價後的下一個最低出價：{{next}} USDC",
-        "reviewBid":      "審查出價",
-        "disclaimer":     "得標出價具有約束力 · 20% 平台佣金",
-        "confirmTitle":   "確認出價",
-        "item":           "物品",
-        "yourBidLabel":   "您的出價",
-        "youPay":         "如果您得標，您需支付",
-        "outbidNotice":   "如果有人超越您的出價，您將立即收到通知。計時結束時拍賣自動關閉。",
-        "back":           "返回",
-        "confirm":        "確認——{{amount}} USDC",
-        "placing":        "出價中…",
-        "successTitle":   "出價成功！",
-        "highestBidder":  "您是最高出價者",
-        "outbidWarning":  "如果您被超越出價，您將收到通知。",
-        "done":           "完成",
-        "endsIn":         "結束於"
-      },
-      "instantBuyModal": {
-        "title":         "立即購買——即時",
-        "buyNowPrice":   "立即購買價格",
-        "currentBids":   "當前出價",
-        "notice":        "立即購買會立即結束拍賣。物品轉移到您的錢包，所有其他出價者將獲得退款。",
-        "cancel":        "取消",
-        "processing":    "處理中…",
-        "successTitle":  "物品已獲得！",
-        "auctionClosed": "拍賣已關閉 · 轉移已啟動",
-        "item":          "物品",
-        "paid":          "已支付",
-        "status":        "狀態",
-        "transferred":   "已轉移到錢包",
-        "walletNote":    "物品將出現在您的我的收藏頁簽中。",
-        "viewCollect":   "查看我的收藏"
-      },
-      "createModal": {
-        "title":          "創建拍賣",
-        "selectItem":     "選擇物品",
-        "connectWallet":  "連接錢包以瀏覽您的物品",
-        "loadingItems":   "載入中…",
-        "noItems":        "未找到擁有的物品",
-        "pricingDuration":"定價與時間",
-        "startPrice":     "起始價格（USDC）*",
-        "reservePrice":   "保留價格（USDC）",
-        "instantBuyPrice":"立即購買價格（USDC）",
-        "optional":       "可選",
-        "leaveBlank":     "留空以停用",
-        "duration":       "時間",
-        "dur1Day":        "1 天",
-        "dur3Days":       "3 天",
-        "dur7Days":       "7 天",
-        "freeToList":     "免費上架 · 成交時收取 20% 佣金",
-        "creating":       "創建中…",
-        "submit":         "創建拍賣"
-      },
-      "pagination": {
-        "prev":  "上一頁",
-        "next":  "下一頁",
-        "page":  "第 {{page}} 頁，共 {{pages}} 頁"
-      }
-    },
-
-    "trades": {
-      "heading":    "交易",
-      "listings":   "個上架",
-      "postTrade":  "發布交易",
-      "noTrades":   "沒有 {{filter}} 交易",
-      "viewDetails":"查看詳情",
-      "trade":      "交易",
-      "yours":      "您的",
-      "offering":   "提供",
-      "wanting":    "想要",
-      "makeOffer":  "提出報價",
-      "by":         "由",
-      "acceptTrade":"接受交易",
-      "cancelTrade":"取消交易",
-      "rules": {
-        "expiry":    "上架 30 天後過期",
-        "fee":       "平台費用適用於雙方",
-        "noNFA":     "NFA 不能交易——只能出售"
-      },
-      "acceptModal": {
-        "title":          "交易提案",
-        "postedBy":       "發布者",
-        "exchangeDetails":"交換詳情",
-        "theyOffer":      "他們提供",
-        "theyWant":       "他們想要",
-        "feeNotice":      "平台費用適用於雙方",
-        "acceptBtn":      "接受此交易",
-        "confirmTitle":   "確認交易",
-        "trade":          "交易",
-        "postedByLabel":  "發布者",
-        "terms":          "接受即表示您同意交換條款。發布者將收到通知，必須確認後才能轉移物品。",
-        "back":           "返回",
-        "sending":        "發送中…",
-        "confirm":        "確認",
-        "successTitle":   "提案已發送！",
-        "notified":       "已收到通知",
-        "successNote":    "交易發布者將審查您的提案並安排交換。查看您的通知以獲取回應。",
-        "expiry":         "提案在 30 天內未確認將過期。",
-        "close":          "關閉"
-      },
-      "createModal": {
-        "title":          "發布交易",
-        "yourItem":       "您的物品",
-        "itemNamePlaceholder": "物品名稱 *",
-        "loadingItems":   "載入您的物品中…",
-        "connectWallet":  "連接錢包以從您的物品中選擇",
-        "pickFromItems":  "或從您的物品中選擇（自動填入名稱）：",
-        "imageOptional":  "圖片（可選）",
-        "whatYouWant":    "您想要什麼",
-        "openOffer":      "開放報價——讓其他人提案",
-        "anyCategory":    "任何類別",
-        "notesLabel":     "備注（可選）",
-        "notesPlaceholder":"交易條款、狀況等。",
-        "disclaimer":     "雙方支付平台費用 · 30 天後過期 · NFA 不能交易",
-        "posting":        "發布中…",
-        "submit":         "發布交易"
-      },
-      "pagination": {
-        "prev":  "上一頁",
-        "next":  "下一頁",
-        "page":  "第 {{page}} 頁，共 {{pages}} 頁"
-      }
-    },
-
-    "quests": {
-      "heading":       "任務看板",
-      "quests":        "個任務",
-      "noQuests":      "沒有 {{filter}} 任務",
-      "inGameFeature": "遊戲內功能",
-      "inGameDesc":    "當賣方選擇降低佣金時，任務會自動生成。玩家每天最多可完成 5 個任務。佣金池在買方折扣、玩家獎勵和平台之間分配。",
-      "earnFromQuests":"想從任務中賺取收益？玩遊戲 →",
-      "moneyQuests":   "金錢任務（11% 池）",
-      "resourceQuests":"資源任務（20% 池）",
-      "footerNote1":   "# 有合併酬載的任務將使用單獨的表格金額支付。",
-      "footerNote2":   "# 遊戲上線後，星球數據將同步。",
-      "inGame":        "遊戲內",
-      "open":          "開放",
-      "table": {
-        "questingNo":    "任務編號",
-        "pickupPlanet":  "取貨星球",
-        "dropOffPlanet": "送達星球",
-        "itemGoods":     "物品/貨物",
-        "commSplit":     "佣金分配",
-        "questingTime":  "任務時間",
-        "assignedTo":    "分配給"
-      },
-      "comingSoon": {
-        "title":   "即將推出",
-        "desc":    "遊戲內任務功能目前正在開發中。敬請期待——您將能夠直接從遊戲中賺取獎勵。",
-        "gotIt":   "明白了"
-      },
-      "pagination": {
-        "prev":  "上一頁",
-        "next":  "下一頁",
-        "page":  "第 {{page}} 頁，共 {{pages}} 頁"
-      }
-    },
-
-    "hire": {
-      "heading":          "招募",
-      "listings":         "個上架",
-      "listBtn":          "上架",
-      "forHireLabel":     "待招募",
-      "wantingToHire":    "希望招募",
-      "noListings":       "沒有 {{filter}} 上架",
-      "lockedTitle":      "HyperTek 遊戲內容僅供展示。",
-      "lockedDesc":       "此部分在遊戲最終確定之前處於鎖定狀態。",
-      "forHireBadge":     "待招募",
-      "wantedBadge":      "希望招募",
-      "price":            "價格",
-      "maxDuration":      "最長時間",
-      "hireBtn":          "招募",
-      "fulfillBtn":       "履行請求",
-      "rules": {
-        "durations":   "8小時 · 1天 · 3天 · 1週 · 1個月",
-        "cooldown":    "冷卻時間：租用時間的 2 倍",
-        "commission":  "佣金：20%",
-        "payment":     "使用 Hyper Bucks 或材料支付"
+        "freeToList": "免費上架",
+        "commission": "佣金：成交時收取 20%"
       },
       "preview": {
         "title": "遊戲內功能預覽",
-        "desc":  "招募系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
+        "desc": "拍賣系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
       },
-      "hireModal": {
-        "hireTitle":     "招募專家",
-        "fulfillTitle":  "履行招募請求",
-        "forHireBadge":  "待招募",
-        "wantedBadge":   "徵求",
-        "price":         "價格",
-        "duration":      "時間",
-        "howHire":       "招募運作方式",
-        "howFulfill":    "履行請求運作方式",
-        "proceedHire":   "繼續招募",
-        "offerFulfill":  "提出履行報價",
-        "commission":    "20% 平台佣金 · 歸還後適用冷卻時間",
-        "confirmHire":   "確認招募",
-        "confirmOffer":  "確認報價",
-        "specialist":    "專家",
-        "payment":       "付款",
-        "yourOffer":     "您的報價",
-        "durationLabel": "時間",
-        "commLabel":     "佣金",
-        "back":          "返回",
-        "processing":    "處理中…",
-        "sendOffer":     "發送報價",
-        "deployedTitle": "已部署！",
-        "offerSentTitle":"報價已發送！",
-        "availableFor":  "可用於",
-        "paid":          "已支付",
-        "returnNote":    "在期限結束前歸還以避免自動處罰。歸還後適用 {{hours}} 小時冷卻時間。",
-        "close":         "關閉"
+      "card": {
+        "currentBid": "當前出價",
+        "endsIn": "結束於",
+        "placeBid": "出價",
+        "buyNow": "立即購買",
+        "bids": "個出價",
+        "ended": "已結束"
+      },
+      "detail": {
+        "currentBid": "當前出價",
+        "start": "開始",
+        "endsIn": "結束於",
+        "description": "描述",
+        "recentBids": "最近出價",
+        "anonymous": "匿名",
+        "placeBid": "出價",
+        "buyNow": "立即購買",
+        "buyNowLabel": "立即購買",
+        "bids": "個出價"
+      },
+      "bidModal": {
+        "title": "出價",
+        "currentBid": "當前出價",
+        "minimumBid": "最低出價",
+        "yourBid": "您的出價（USDC）",
+        "minIncrement": "最低加價 5% · 您出價後的下一個最低出價：{{next}} USDC",
+        "reviewBid": "審查出價",
+        "disclaimer": "得標出價具有約束力 · 20% 平台佣金",
+        "confirmTitle": "確認出價",
+        "item": "物品",
+        "yourBidLabel": "您的出價",
+        "youPay": "如果您得標，您需支付",
+        "outbidNotice": "如果有人超越您的出價，您將立即收到通知。計時結束時拍賣自動關閉。",
+        "back": "返回",
+        "confirm": "確認——{{amount}} USDC",
+        "placing": "出價中…",
+        "successTitle": "出價成功！",
+        "highestBidder": "您是最高出價者",
+        "outbidWarning": "如果您被超越出價，您將收到通知。",
+        "done": "完成",
+        "endsIn": "結束於"
+      },
+      "instantBuyModal": {
+        "title": "立即購買——即時",
+        "buyNowPrice": "立即購買價格",
+        "currentBids": "當前出價",
+        "notice": "立即購買會立即結束拍賣。物品轉移到您的錢包，所有其他出價者將獲得退款。",
+        "cancel": "取消",
+        "processing": "處理中…",
+        "successTitle": "物品已獲得！",
+        "auctionClosed": "拍賣已關閉 · 轉移已啟動",
+        "item": "物品",
+        "paid": "已支付",
+        "status": "狀態",
+        "transferred": "已轉移到錢包",
+        "walletNote": "物品將出現在您的我的收藏頁簽中。",
+        "viewCollect": "查看我的收藏"
       },
       "createModal": {
-        "listTitle":         "上架招募",
-        "postTitle":         "發布希望招募",
-        "forHireBtn":        "待招募",
-        "wantingBtn":        "希望招募",
-        "itemNameHire":      "專家/物品名稱 *",
-        "itemNameWant":      "您想招募的內容 *",
-        "descPlaceholder":   "描述",
-        "categoryPlaceholder":"類別（可選）",
-        "paymentType":       "付款類型",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "材料",
-        "amountLabel":       "金額（Hyper Bucks）",
-        "afterCommission":   "扣除 20% 佣金後，您獲得 {{amount}} HB",
-        "maxDuration":       "最長時間",
-        "disclaimer":        "20% 佣金 · 冷卻時間 = 歸還後租用時間的 2 倍",
-        "listing":           "上架中…",
-        "submit":            "創建上架"
+        "title": "創建拍賣",
+        "selectItem": "選擇物品",
+        "connectWallet": "連接錢包以瀏覽您的物品",
+        "loadingItems": "載入中…",
+        "noItems": "未找到擁有的物品",
+        "pricingDuration": "定價與時間",
+        "startPrice": "起始價格（USDC）*",
+        "reservePrice": "保留價格（USDC）",
+        "instantBuyPrice": "立即購買價格（USDC）",
+        "optional": "可選",
+        "leaveBlank": "留空以停用",
+        "duration": "時間",
+        "dur1Day": "1 天",
+        "dur3Days": "3 天",
+        "dur7Days": "7 天",
+        "freeToList": "免費上架 · 成交時收取 20% 佣金",
+        "creating": "創建中…",
+        "submit": "創建拍賣"
       },
       "pagination": {
-        "prev":  "上一頁",
-        "next":  "下一頁",
-        "page":  "第 {{page}} 頁，共 {{pages}} 頁"
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {{page}} 頁，共 {{pages}} 頁"
       }
     },
-
+    "trades": {
+      "heading": "交易",
+      "listings": "個上架",
+      "postTrade": "發布交易",
+      "noTrades": "沒有 {{filter}} 交易",
+      "viewDetails": "查看詳情",
+      "trade": "交易",
+      "yours": "您的",
+      "offering": "提供",
+      "wanting": "想要",
+      "makeOffer": "提出報價",
+      "by": "由",
+      "acceptTrade": "接受交易",
+      "cancelTrade": "取消交易",
+      "rules": {
+        "expiry": "上架 30 天後過期",
+        "fee": "平台費用適用於雙方",
+        "noNFA": "NFA 不能交易——只能出售"
+      },
+      "acceptModal": {
+        "title": "交易提案",
+        "postedBy": "發布者",
+        "exchangeDetails": "交換詳情",
+        "theyOffer": "他們提供",
+        "theyWant": "他們想要",
+        "feeNotice": "平台費用適用於雙方",
+        "acceptBtn": "接受此交易",
+        "confirmTitle": "確認交易",
+        "trade": "交易",
+        "postedByLabel": "發布者",
+        "terms": "接受即表示您同意交換條款。發布者將收到通知，必須確認後才能轉移物品。",
+        "back": "返回",
+        "sending": "發送中…",
+        "confirm": "確認",
+        "successTitle": "提案已發送！",
+        "notified": "已收到通知",
+        "successNote": "交易發布者將審查您的提案並安排交換。查看您的通知以獲取回應。",
+        "expiry": "提案在 30 天內未確認將過期。",
+        "close": "關閉"
+      },
+      "createModal": {
+        "title": "發布交易",
+        "yourItem": "您的物品",
+        "itemNamePlaceholder": "物品名稱 *",
+        "loadingItems": "載入您的物品中…",
+        "connectWallet": "連接錢包以從您的物品中選擇",
+        "pickFromItems": "或從您的物品中選擇（自動填入名稱）：",
+        "imageOptional": "圖片（可選）",
+        "whatYouWant": "您想要什麼",
+        "openOffer": "開放報價——讓其他人提案",
+        "anyCategory": "任何類別",
+        "notesLabel": "備注（可選）",
+        "notesPlaceholder": "交易條款、狀況等。",
+        "disclaimer": "雙方支付平台費用 · 30 天後過期 · NFA 不能交易",
+        "posting": "發布中…",
+        "submit": "發布交易"
+      },
+      "pagination": {
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {{page}} 頁，共 {{pages}} 頁"
+      }
+    },
+    "quests": {
+      "heading": "任務看板",
+      "quests": "個任務",
+      "noQuests": "沒有 {{filter}} 任務",
+      "inGameFeature": "遊戲內功能",
+      "inGameDesc": "當賣方選擇降低佣金時，任務會自動生成。玩家每天最多可完成 5 個任務。佣金池在買方折扣、玩家獎勵和平台之間分配。",
+      "earnFromQuests": "想從任務中賺取收益？玩遊戲 →",
+      "moneyQuests": "金錢任務（11% 池）",
+      "resourceQuests": "資源任務（20% 池）",
+      "footerNote1": "# 有合併酬載的任務將使用單獨的表格金額支付。",
+      "footerNote2": "# 遊戲上線後，星球數據將同步。",
+      "inGame": "遊戲內",
+      "open": "開放",
+      "table": {
+        "questingNo": "任務編號",
+        "pickupPlanet": "取貨星球",
+        "dropOffPlanet": "送達星球",
+        "itemGoods": "物品/貨物",
+        "commSplit": "佣金分配",
+        "questingTime": "任務時間",
+        "assignedTo": "分配給"
+      },
+      "comingSoon": {
+        "title": "即將推出",
+        "desc": "遊戲內任務功能目前正在開發中。敬請期待——您將能夠直接從遊戲中賺取獎勵。",
+        "gotIt": "明白了"
+      },
+      "pagination": {
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {{page}} 頁，共 {{pages}} 頁"
+      },
+      "buyer": "買家",
+      "player": "玩家",
+      "platform": "平台",
+      "status": {
+        "open": "開啟",
+        "accepted": "已接受",
+        "completed": "已完成",
+        "cancelled": "已取消"
+      },
+      "type": {
+        "money": "金錢",
+        "resources": "資源"
+      }
+    },
+    "hire": {
+      "heading": "招募",
+      "listings": "個上架",
+      "listBtn": "上架",
+      "forHireLabel": "待招募",
+      "wantingToHire": "希望招募",
+      "noListings": "沒有 {{filter}} 上架",
+      "lockedTitle": "HyperTek 遊戲內容僅供展示。",
+      "lockedDesc": "此部分在遊戲最終確定之前處於鎖定狀態。",
+      "forHireBadge": "待招募",
+      "wantedBadge": "希望招募",
+      "price": "價格",
+      "maxDuration": "最長時間",
+      "hireBtn": "招募",
+      "fulfillBtn": "履行請求",
+      "rules": {
+        "durations": "8小時 · 1天 · 3天 · 1週 · 1個月",
+        "cooldown": "冷卻時間：租用時間的 2 倍",
+        "commission": "佣金：20%",
+        "payment": "使用 Hyper Bucks 或材料支付"
+      },
+      "preview": {
+        "title": "遊戲內功能預覽",
+        "desc": "招募系統將在遊戲發佈時完全上線。此處顯示的物品是供投資者/用戶展示的種子樣本。"
+      },
+      "hireModal": {
+        "hireTitle": "招募專家",
+        "fulfillTitle": "履行招募請求",
+        "forHireBadge": "待招募",
+        "wantedBadge": "徵求",
+        "price": "價格",
+        "duration": "時間",
+        "howHire": "招募運作方式",
+        "howFulfill": "履行請求運作方式",
+        "proceedHire": "繼續招募",
+        "offerFulfill": "提出履行報價",
+        "commission": "20% 平台佣金 · 歸還後適用冷卻時間",
+        "confirmHire": "確認招募",
+        "confirmOffer": "確認報價",
+        "specialist": "專家",
+        "payment": "付款",
+        "yourOffer": "您的報價",
+        "durationLabel": "時間",
+        "commLabel": "佣金",
+        "back": "返回",
+        "processing": "處理中…",
+        "sendOffer": "發送報價",
+        "deployedTitle": "已部署！",
+        "offerSentTitle": "報價已發送！",
+        "availableFor": "可用於",
+        "paid": "已支付",
+        "returnNote": "在期限結束前歸還以避免自動處罰。歸還後適用 {{hours}} 小時冷卻時間。",
+        "close": "關閉"
+      },
+      "createModal": {
+        "listTitle": "上架招募",
+        "postTitle": "發布希望招募",
+        "forHireBtn": "待招募",
+        "wantingBtn": "希望招募",
+        "itemNameHire": "專家/物品名稱 *",
+        "itemNameWant": "您想招募的內容 *",
+        "descPlaceholder": "描述",
+        "categoryPlaceholder": "類別（可選）",
+        "paymentType": "付款類型",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "材料",
+        "amountLabel": "金額（Hyper Bucks）",
+        "afterCommission": "扣除 20% 佣金後，您獲得 {{amount}} HB",
+        "maxDuration": "最長時間",
+        "disclaimer": "20% 佣金 · 冷卻時間 = 歸還後租用時間的 2 倍",
+        "listing": "上架中…",
+        "submit": "創建上架"
+      },
+      "pagination": {
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {{page}} 頁，共 {{pages}} 頁"
+      }
+    },
     "bounty": {
-      "heading":       "賞金看板",
-      "contracts":     "個合約",
-      "contractsPlural":"個合約",
-      "noContracts":   "沒有 {{filter}} 合約",
-      "noContractsNote":"賞金由遊戲玩家和遊戲系統發布",
-      "expiresIn":     "{{days}} 天後過期",
+      "heading": "賞金看板",
+      "contracts": "個合約",
+      "contractsPlural": "個合約",
+      "noContracts": "沒有 {{filter}} 合約",
+      "noContractsNote": "賞金由遊戲玩家和遊戲系統發布",
+      "expiresIn": "{{days}} 天後過期",
       "inGameNotice": {
         "title": "遊戲內功能——僅供查看",
-        "desc":  "賞金由遊戲玩家和遊戲系統創建。接受和完成賞金只能在遊戲內進行。此看板展示以提高透明度並鼓勵新玩家加入。"
+        "desc": "賞金由遊戲玩家和遊戲系統創建。接受和完成賞金只能在遊戲內進行。此看板展示以提高透明度並鼓勵新玩家加入。"
       },
       "rules": {
-        "battle":     "戰鬥在遊戲內自動解決",
+        "battle": "戰鬥在遊戲內自動解決",
         "commission": "獎勵收取 20% 平台佣金",
-        "expiry":     "合約 30 天後過期"
+        "expiry": "合約 30 天後過期"
       },
       "table": {
-        "bountyNo":   "賞金編號",
-        "target":     "目標（攻擊對象）",
-        "reward":     "獎勵",
-        "postedBy":   "發布者",
-        "claimedBy":  "索取者",
-        "status":     "狀態",
-        "netHB":      "{{amount}} HB 淨額"
+        "bountyNo": "賞金編號",
+        "target": "目標（攻擊對象）",
+        "reward": "獎勵",
+        "postedBy": "發布者",
+        "claimedBy": "索取者",
+        "status": "狀態",
+        "netHB": "{{amount}} HB 淨額"
       },
       "pagination": {
-        "prev":  "上一頁",
-        "next":  "下一頁",
-        "page":  "第 {{page}} 頁，共 {{pages}} 頁"
+        "prev": "上一頁",
+        "next": "下一頁",
+        "page": "第 {{page}} 頁，共 {{pages}} 頁"
       }
     },
-
     "common": {
-      "prev":           "上一頁",
-      "next":           "下一頁",
-      "pageOf":         "第 {{page}} 頁，共 {{pages}} 頁",
-      "back":           "返回",
-      "close":          "關閉",
-      "cancel":         "取消",
-      "loading":        "載入中…",
-      "connectWallet":  "請先連接您的錢包",
-      "loginFirst":     "請先登入"
+      "prev": "上一頁",
+      "next": "下一頁",
+      "pageOf": "第 {{page}} 頁，共 {{pages}} 頁",
+      "back": "返回",
+      "close": "關閉",
+      "cancel": "取消",
+      "loading": "載入中…",
+      "connectWallet": "請先連接您的錢包",
+      "loginFirst": "請先登入"
     }
+  },
+  "musicPlayer": {
+    "title": "音樂播放器",
+    "playing": "播放",
+    "sound": "聲音",
+    "ambientDesc": "適合市場的內建環境音軌。循環播放。",
+    "playAmbient": "播放 Ambient",
+    "pauseAmbient": "暫停 Ambient",
+    "spotifyDesc": "貼上任何 Spotify 曲目、播放清單或專輯連結。",
+    "loadSpotify": "載入 Spotify",
+    "soundcloudDesc": "貼上任何 SoundCloud 曲目或播放清單連結。",
+    "loadSoundCloud": "載入 SoundCloud",
+    "changeLink": "更改鏈接"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "用卡片支付",
+      "amount": "數量：",
+      "cancel": "取消",
+      "processing": "加工...",
+      "pay": "支付"
+    },
+    "nav": {
+      "backToMarketplace": "返回市場",
+      "backToCollections": "返回收藏",
+      "offers": "優惠",
+      "marketplace": "市場",
+      "auction": "拍賣",
+      "trade": "貿易",
+      "detail": "{{type}} 詳細信息",
+      "buy": "購買 {{type}}"
+    },
+    "marketplace": {
+      "listed": "上市",
+      "youOwn": "你擁有這個",
+      "notMinted": "尚未鑄造",
+      "ownedBy": "擁有者",
+      "platform": "平台",
+      "noDesc": "沒有提供該項目的描述。",
+      "price": "價格",
+      "minBuyback": "最低迴購保證",
+      "reservePrice": "保留價",
+      "buybackNote": "該資產不能以低於其最低迴購價值的價格出售。",
+      "networkNote": "USDC on Base · Gas 所需的 Base ETH（僅限錢包支付）",
+      "buyWithCard": "用卡片購買",
+      "makeOffer": "提出報價",
+      "processing": "加工...",
+      "connectWallet": "連接錢包",
+      "buyNow": "立即購買",
+      "listNow": "立即列出",
+      "yourListed": "您的 {{type}}（已列出）",
+      "notAvailable": "無法使用"
+    },
+    "fundModal": {
+      "title": "USDC不足",
+      "youNeed": "你需要",
+      "butHave": "但你的錢包裡只有",
+      "desc2": "透過 Transak 使用信用卡或金融卡立即為您的錢包充值，然後返回完成購買。",
+      "fundBtn": "帶卡資金錢包（Transak）",
+      "cancel": "取消"
+    },
+    "gasModal": {
+      "title": "Gas 所需的 ETH",
+      "mainnetNote": "您位於 Base Mainnet 上。在 Coinbase 或通过bridge.base.org 从以太坊购买少量 ETH（约 1-2 美元）。",
+      "testnetNote": "您正在使用 Base Sepolia 測試網。從水龍頭獲取免費測試 ETH。",
+      "faucetBtn": "取得測試網 ETH（水龍頭）",
+      "bridgeBtn": "將 ETH 橋接至 Base",
+      "close": "關閉"
+    },
+    "confirmModal1": {
+      "title": "確認操作",
+      "listPrice": "標價",
+      "platformFee": "平台費（10%）",
+      "total": "全部的",
+      "cancel": "取消",
+      "continue": "繼續"
+    },
+    "confirmModal2": {
+      "setPrice": "設定您的掛牌價格 (USDC)",
+      "willList": "✓ 將在 {{price}} USDC 上市",
+      "price": "價格",
+      "cancel": "取消",
+      "processing": "加工...",
+      "confirm": "確認"
+    },
+    "offers": {
+      "noOffers": "還沒有優惠",
+      "offer": "提供",
+      "offers": "優惠",
+      "noOffersTitle": "目前沒有優惠",
+      "noOffersDesc": "成為第一個報價的人",
+      "colPrice": "價格",
+      "colStatus": "地位",
+      "colFrom": "從",
+      "colExpires": "過期",
+      "colAction": "行動",
+      "accept": "接受",
+      "reject": "拒絕",
+      "cancel": "取消",
+      "expired": "已到期",
+      "completePurchase": "完成購買"
+    },
+    "auction": {
+      "loading": "正在加載拍賣數據...",
+      "active": "活躍拍賣",
+      "startPrice": "起拍價",
+      "currentBid": "目前出價",
+      "noBids": "還沒出價",
+      "instantBuy": "即時購買",
+      "reservePrice": "保留價",
+      "bidHistory": "投標歷史",
+      "minBid": "最低出價：",
+      "bidding": "投標…",
+      "placeBid": "出價",
+      "connectWallet": "連接您的錢包進行出價",
+      "ownerNote": "您的物品已在拍賣中列出。出價一出現就會出現在此。",
+      "noAuction": "該商品沒有活躍拍賣",
+      "ownerSetup": "前往您的收藏並點擊清單以設定拍賣。",
+      "notAvailable": "該物品目前沒有公開拍賣。"
+    },
+    "trade": {
+      "loading": "正在加載貿易清單...",
+      "active": "活躍的交易列表",
+      "actives": "活躍的交易列表",
+      "offering": "奉獻",
+      "wants": "想要",
+      "openOffer": "公開報價",
+      "by": "經過",
+      "proposeTrade": "提議貿易 →",
+      "noTrades": "沒有活躍的交易清單",
+      "ownerSetup": "前往您的收藏並點擊列表以設定交易。",
+      "notAvailable": "所有者沒有該商品的公開交易清單。"
+    },
+    "successModal": {
+      "title": "購買成功！",
+      "desc": "{{name}} 已購買。您的 NFT 很快就會轉移到您的錢包中。",
+      "note": "轉帳是透過我們的系統自動處理的。",
+      "viewProfile": "在我的個人資料中查看",
+      "continueShopping": "繼續購物"
+    },
+    "transferFailed": {
+      "title": "已收到付款 — 轉帳處理中",
+      "desc": "您的付款已成功，但 NFT 轉帳遇到問題。您的資金是安全的—我們的團隊將手動完成轉帳。",
+      "viewProfile": "查看我的個人資料",
+      "dismiss": "解僱"
+    },
+    "priceHistory": {
+      "title": "價格歷史",
+      "subtitle": "該 NFT 的歷史銷售價格",
+      "loading": "載入中...",
+      "noSales": "尚未記錄銷售情況",
+      "noSalesNote": "價格歷史記錄在首次銷售後出現"
+    }
+  },
+  "makeOffer": {
+    "back": "後退",
+    "floor": "地面",
+    "title": "提出報價",
+    "yourOffer": "您的報價（USDC）",
+    "expiresIn": "優惠到期時間",
+    "youPay": "你付錢",
+    "submitting": "正在提交...",
+    "submit": "提交報價",
+    "terms": "提交此報價即表示您同意 Hyper Tek 的服務條款。",
+    "expiry": {
+      "6h": "6小時",
+      "12h": "12小時",
+      "1d": "1 天",
+      "3d": "3天",
+      "7d": "7天",
+      "1mo": "1個月"
+    },
+    "success": {
+      "title": "報價已提交！",
+      "desc": "您對 {{name}} 的 {{price}} USDC 報價已發送給所有者。",
+      "expires": "於 {{duration}} 到期",
+      "backToNft": "回到 NFT",
+      "goToMarketplace": "前往市場"
+    },
+    "error": {
+      "loginRequired": "請登入後出價",
+      "submitFailed": "未能提交報價。請再試一次。"
+    }
+  },
+  "paymentError": {
+    "message": "您的請求未成功",
+    "goHome": "回家"
   }
 }

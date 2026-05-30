@@ -9,7 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
@@ -19,7 +19,7 @@ import NFTSystem from "../Models/NFTSystem.js";
 const WALLET = "0x839f4465dab13fa73e6fbee4c4135a86926c9484";
 
 await mongoose.connect(process.env.MONGODB_URL);
-console.log("✅ Connected to MongoDB\n");
+console.log("Connected to MongoDB\n");
 console.log(`🔍 Searching for all documents with sub-collections owned by:\n   ${WALLET}\n`);
 
 // 1. Find ALL docs that have ANY sub with owner = wallet (no isParentCollection filter)
@@ -30,7 +30,7 @@ const docs = await NFTSystem.find({
 console.log(`Found ${docs.length} parent document(s) containing subs owned by this wallet\n`);
 
 if (docs.length === 0) {
-  console.log("❌ No documents found — the owner field may not match. Searching loosely...");
+  console.log(" No documents found — the owner field may not match. Searching loosely...");
 
   // Try case-insensitive search
   const docsAny = await NFTSystem.find({
@@ -72,7 +72,7 @@ for (const doc of docs) {
   const listedSubs = doc.subCollections.filter(
     s => s.owner && s.owner.toLowerCase() === WALLET.toLowerCase() && s.listed === true
   );
-  console.log(`\n   → Would appear in My Listings: ${listedSubs.length > 0 ? "✅ YES" : "❌ NO (listed=false or owner mismatch)"}`);
+  console.log(`\n   → Would appear in My Listings: ${listedSubs.length > 0 ? "YES" : " NO (listed=false or owner mismatch)"}`);
 }
 
 // 2. Check if the query with $elemMatch would find it
@@ -82,12 +82,12 @@ const elemMatchResult = await NFTSystem.find({
 });
 console.log(`\n📊 $elemMatch query result: ${elemMatchResult.length} document(s) found`);
 if (elemMatchResult.length > 0) {
-  console.log("✅ Query returns results — check CollectionOnSale wallet/token in frontend");
+  console.log("Query returns results — check CollectionOnSale wallet/token in frontend");
 } else {
-  console.log("❌ Query returns 0 — listed is still false in DB");
+  console.log(" Query returns 0 — listed is still false in DB");
   console.log("   → createSubCollectionListing may not have saved correctly");
   console.log("   → Restart backend and try listing again");
 }
 
 await mongoose.disconnect();
-console.log("\n✅ Done.");
+console.log("\nDone.");

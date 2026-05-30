@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "마켓플레이스",
     "searchPlaceholder": "검색...",
-
     "tabs": {
-      "overview":  "개요",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "마켓플레이스",
-      "auctions":  "경매",
-      "trades":    "거래",
-      "quests":    "퀘스트",
-      "hire":      "고용",
-      "bounty":    "현상금"
+      "overview": "개요",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "마켓플레이스",
+      "auctions": "경매",
+      "trades": "거래",
+      "quests": "퀘스트",
+      "hire": "고용",
+      "bounty": "현상금"
     },
-
     "banner": {
       "defaultHeading": "Hyper Tek의 새로운 시대가 열립니다",
-      "defaultDesc": "모든 결정이 여정을 만들어가는 살아 숨쉬는 우주의 시작입니다.",
+      "defaultDesc": "모든 결정이 여정을 형성하는 살아 숨쉬는 우주의 시작입니다. 빛의 속도로 경주하든, Overlord Realm에서 동맹을 맺든, HyperQuest에서 비밀을 밝히든, 이것이 스토리에 당신의 흔적을 남길 수 있는 기회입니다.",
       "stats": {
-        "totalItems":  "총 아이템",
-        "totalBuys":   "총 구매",
-        "listed":      "등록됨",
+        "totalItems": "총 아이템",
+        "totalBuys": "총 구매",
+        "listed": "등록됨",
         "collections": "컬렉션"
       },
-      "soundOn":  "소리 켜기",
+      "soundOn": "소리 켜기",
       "soundOff": "소리 끄기"
     },
-
     "bottomBar": {
-      "learnLabel":     "NFA / NFC 알아보기",
+      "learnLabel": "NFA / NFC 알아보기",
       "educationPanel": "HyperTek 교육 패널",
-      "footerNote":     "이 패널은 빠른 참조용입니다. 전체 교육 콘텐츠는 NFA / NFC 101 탭을 방문하세요.",
+      "footerNote": "이 패널은 빠른 참조용입니다. 전체 교육 콘텐츠는 NFA / NFC 101 탭을 방문하세요.",
       "facts": [
-        { "label": "NFA",       "desc": "Hypertek 전용 자산. 최고의 게임 내 보너스. 모든 판매마다 증가하는 최소 환매 가치 보장." },
-        { "label": "NFC",       "desc": "Hypertek 또는 라이선스 플레이어가 제작. 게임 내 보너스 포함. 최소 환매 보장." },
-        { "label": "NFT",       "desc": "플레이어가 제작한 수집품. 게임 내 보너스 없음. 환매 보장 없음. 마켓플레이스에서 거래 가능." },
-        { "label": "수수료",    "desc": "모든 판매에 20% 플랫폼 수수료. 판매자는 80% 수령. 재판매 시 작가 로열티 4%." },
-        { "label": "환매 성장", "desc": "각 재판매 가격의 +5%가 자산의 최소 환매 가치에 추가됩니다. 항상 증가합니다." },
-        { "label": "커스터디 지갑", "desc": "HyperTek이 가입 시 자동으로 암호화폐 지갑을 생성합니다." }
+        {
+          "label": "NFA",
+          "desc": "Hypertek 전용 자산. 최고의 게임 내 보너스. 모든 판매마다 증가하는 최소 환매 가치 보장."
+        },
+        {
+          "label": "NFC",
+          "desc": "Hypertek 또는 라이선스 플레이어가 제작. 게임 내 보너스 포함. 최소 환매 보장."
+        },
+        {
+          "label": "NFT",
+          "desc": "플레이어가 제작한 수집품. 게임 내 보너스 없음. 환매 보장 없음. 마켓플레이스에서 거래 가능."
+        },
+        {
+          "label": "수수료",
+          "desc": "모든 판매에 20% 플랫폼 수수료. 판매자는 80% 수령. 재판매 시 작가 로열티 4%."
+        },
+        {
+          "label": "환매 성장",
+          "desc": "각 재판매 가격의 +5%가 자산의 최소 환매 가치에 추가됩니다. 항상 증가합니다."
+        },
+        {
+          "label": "커스터디 지갑",
+          "desc": "HyperTek이 가입 시 자동으로 암호화폐 지갑을 생성합니다."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "개요",
+      "heading": "개요",
       "subtitle": "HyperTek 마켓플레이스에 오신 것을 환영합니다. 기능을 선택하여 자세히 알아보세요 — 그런 다음 바로 시작하세요.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Web3 자산이 처음이신가요? 여기서 시작하세요",
           "details": [
             "NFA(Non-Fungible Asset)는 플랫폼 보장 환매 가격이 있는 Hypertek 발행 아이템입니다.",
@@ -56,7 +70,7 @@
           "cta": "기초 배우기"
         },
         {
-          "label":   "마켓플레이스",
+          "label": "마켓플레이스",
           "tagline": "게임 내 자산을 즉시 사고팔기",
           "details": [
             "NFA, NFC, NFT의 광범위한 카탈로그 탐색 — 스킨, 무기, 전문가, 우주선 등.",
@@ -66,7 +80,7 @@
           "cta": "마켓플레이스 탐색"
         },
         {
-          "label":   "경매",
+          "label": "경매",
           "tagline": "독점 한정판 아이템 경쟁",
           "details": [
             "시간 제한 경매를 통해서만 구할 수 있는 희귀 자산에 입찰하세요.",
@@ -76,7 +90,7 @@
           "cta": "경매 보기"
         },
         {
-          "label":   "거래",
+          "label": "거래",
           "tagline": "중간 없이 P2P 자산 교환",
           "details": [
             "다른 플레이어와 직접 자산 거래를 제안하거나 수락하세요 — 완전 온체인.",
@@ -86,7 +100,7 @@
           "cta": "거래 탐색"
         },
         {
-          "label":   "퀘스트",
+          "label": "퀘스트",
           "tagline": "미션 완료, 독점 보상 획득",
           "details": [
             "퀘스트를 수행하여 독점 보상과 희귀 게임 내 자산을 획득하세요.",
@@ -96,7 +110,7 @@
           "cta": "퀘스트 탐색"
         },
         {
-          "label":   "고용",
+          "label": "고용",
           "tagline": "자산을 빌리거나 내 자산으로 수익 창출",
           "details": [
             "전체 구매 없이 단일 미션을 위해 강력한 전문가나 장비를 렌트하세요.",
@@ -106,7 +120,7 @@
           "cta": "고용 탐색"
         },
         {
-          "label":   "현상금",
+          "label": "현상금",
           "tagline": "타겟 추적, 보상 획득, 리더보드 등극",
           "details": [
             "다른 플레이어나 시스템이 게시한 현상금을 수락하여 암호화폐 보상을 얻으세요.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "종합",
+      "heading": "종합",
       "subtitle": "즉시 구매 가능한 NFA, NFC, NFT를 탐색하세요 — 스킨, 무기, 전문가, 우주선 등.",
       "filterAll": "전체",
       "samplePreviewTitle": "마켓플레이스 샘플 미리보기",
       "samplePreviewDesc": "아래 아이템들은 HyperTek 마켓플레이스에서 제공될 디지털 자산 유형을 보여주는 샘플 미리보기입니다. 고유한 아트워크와 블록체인 검증 소유권이 있는 실제 아이템은 출시 시 제공됩니다.",
       "noItems": "아직 사용 가능한 아이템이 없습니다. 나중에 다시 확인하세요.",
       "categories": {
-        "skins":           "스킨",
-        "militaryBadges":  "군사 배지",
-        "specialists":     "전문가",
-        "weapons":         "무기",
-        "bodyArmour":      "방어구",
-        "spaceships":      "우주선",
-        "racingVehicles":  "차량",
-        "artwork":         "아트워크",
-        "landAndBases":    "토지 & 기지",
-        "general":         "종합"
-      }
+        "skins": "스킨",
+        "militaryBadges": "군사 배지",
+        "specialists": "전문가",
+        "weapons": "무기",
+        "bodyArmour": "방어구",
+        "spaceships": "우주선",
+        "racingVehicles": "차량",
+        "artwork": "아트워크",
+        "landAndBases": "토지 & 기지",
+        "general": "종합"
+      },
+      "search": "검색...",
+      "filter": "필터",
+      "showAll": "모두 표시",
+      "filterSort": "필터 및 정렬",
+      "sortBy": "정렬 기준",
+      "sort": {
+        "default": "기본값",
+        "priceAsc": "가격: 낮음순",
+        "priceDesc": "가격: 높음순",
+        "nameAsc": "이름: A~Z",
+        "nameDesc": "이름: Z ~ A"
+      },
+      "priceRange": "가격 범위(USDC)",
+      "min": "최소",
+      "max": "최대",
+      "apply": "적용",
+      "clearAll": "모든 필터 지우기",
+      "noResults": "결과 없음",
+      "dummyContent": "더미 콘텐츠",
+      "preview": "미리보기",
+      "buyNow": "지금 구매",
+      "viewDetails": "세부정보 보기"
     },
-
     "nfa101": {
       "sectionLabel": "교육",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "NFT와 Web3가 처음이신가요? 블록체인 자산, 지갑, 보안 및 HyperTek 생태계를 이해하는 기사를 탐색하세요.",
-      "minRead":      "분 읽기",
-      "filterAll":    "전체"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "NFT와 Web3가 처음이신가요? 블록체인 자산, 지갑, 보안 및 HyperTek 생태계를 이해하는 기사를 탐색하세요.",
+      "minRead": "분 읽기",
+      "filterAll": "전체"
     },
-
     "auctions": {
-      "heading":        "경매",
-      "listings":       "개 등록",
-      "newAuction":     "새 경매",
-      "noAuctions":     "{{filter}} 경매 없음",
-      "createFirst":    "첫 번째 경매 만들기",
-      "endingSoon":     "곧 종료",
-      "viewDetails":    "자세히 보기",
+      "heading": "경매",
+      "listings": "개 등록",
+      "newAuction": "새 경매",
+      "noAuctions": "{{filter}} 경매 없음",
+      "createFirst": "첫 번째 경매 만들기",
+      "endingSoon": "곧 종료",
+      "viewDetails": "자세히 보기",
       "rules": {
-        "durations":    "기간: 1일 · 3일 · 7일",
+        "durations": "기간: 1일 · 3일 · 7일",
         "minIncrement": "최소 증가액: 5%",
-        "freeToList":   "무료 등록",
-        "commission":   "수수료: 판매 시 20%"
-      },
-      "preview": {
-        "title":   "게임 내 기능 미리보기",
-        "desc":    "경매 시스템은 게임 출시 시 완전히 활성화됩니다. 여기에 표시된 아이템은 투자자/사용자 쇼케이스를 위한 샘플입니다."
-      },
-      "card": {
-        "currentBid": "현재 입찰가",
-        "endsIn":     "남은 시간",
-        "placeBid":   "입찰",
-        "buyNow":     "즉시 구매",
-        "bids":       "입찰",
-        "ended":      "종료됨"
-      },
-      "detail": {
-        "currentBid":  "현재 입찰가",
-        "start":       "시작",
-        "endsIn":      "남은 시간",
-        "description": "설명",
-        "recentBids":  "최근 입찰",
-        "anonymous":   "익명",
-        "placeBid":    "입찰",
-        "buyNow":      "즉시 구매",
-        "buyNowLabel": "즉시 구매",
-        "bids":        "입찰"
-      },
-      "bidModal": {
-        "title":          "입찰",
-        "currentBid":     "현재 입찰가",
-        "minimumBid":     "최소 입찰가",
-        "yourBid":        "내 입찰가 (USDC)",
-        "minIncrement":   "최소 증가액 5% · 내 입찰 후 다음 최소가: {{next}} USDC",
-        "reviewBid":      "입찰 확인",
-        "disclaimer":     "낙찰 입찰은 구속력 있음 · 20% 플랫폼 수수료",
-        "confirmTitle":   "입찰 확인",
-        "item":           "아이템",
-        "yourBidLabel":   "내 입찰가",
-        "youPay":         "낙찰 시 지불액",
-        "outbidNotice":   "누군가 더 높은 입찰을 하면 즉시 알림을 받습니다. 타이머가 만료되면 경매가 자동으로 종료됩니다.",
-        "back":           "뒤로",
-        "confirm":        "확인 — {{amount}} USDC",
-        "placing":        "입찰 중…",
-        "successTitle":   "입찰 완료!",
-        "highestBidder":  "최고 입찰자입니다",
-        "outbidWarning":  "더 높은 입찰이 있으면 알림을 받습니다.",
-        "done":           "완료",
-        "endsIn":         "남은 시간"
-      },
-      "instantBuyModal": {
-        "title":         "즉시 구매 — 인스턴트",
-        "buyNowPrice":   "즉시 구매 가격",
-        "currentBids":   "현재 입찰 수",
-        "notice":        "즉시 구매는 경매를 즉시 종료합니다. 아이템이 지갑으로 이전되고 다른 모든 입찰자는 환불됩니다.",
-        "cancel":        "취소",
-        "processing":    "처리 중…",
-        "successTitle":  "아이템 획득!",
-        "auctionClosed": "경매 종료 · 이전 시작됨",
-        "item":          "아이템",
-        "paid":          "지불됨",
-        "status":        "상태",
-        "transferred":   "지갑으로 이전됨",
-        "walletNote":    "아이템은 내 컬렉션 탭에 나타납니다.",
-        "viewCollect":   "내 컬렉션 보기"
-      },
-      "createModal": {
-        "title":          "경매 만들기",
-        "selectItem":     "아이템 선택",
-        "connectWallet":  "아이템을 탐색하려면 지갑을 연결하세요",
-        "loadingItems":   "로딩 중…",
-        "noItems":        "소유한 아이템 없음",
-        "pricingDuration":"가격 및 기간",
-        "startPrice":     "시작가 (USDC) *",
-        "reservePrice":   "예약가 (USDC)",
-        "instantBuyPrice":"즉시 구매가 (USDC)",
-        "optional":       "선택사항",
-        "leaveBlank":     "비활성화하려면 비워두세요",
-        "duration":       "기간",
-        "dur1Day":        "1일",
-        "dur3Days":       "3일",
-        "dur7Days":       "7일",
-        "freeToList":     "무료 등록 · 판매 시 20% 수수료",
-        "creating":       "생성 중…",
-        "submit":         "경매 만들기"
-      },
-      "pagination": {
-        "prev":  "이전",
-        "next":  "다음",
-        "page":  "{{page}} / {{pages}} 페이지"
-      }
-    },
-
-    "trades": {
-      "heading":    "거래",
-      "listings":   "개 등록",
-      "postTrade":  "거래 게시",
-      "noTrades":   "{{filter}} 거래 없음",
-      "viewDetails":"자세히 보기",
-      "trade":      "거래",
-      "yours":      "내 것",
-      "offering":   "제공",
-      "wanting":    "원함",
-      "makeOffer":  "제안하기",
-      "by":         "by",
-      "acceptTrade":"거래 수락",
-      "cancelTrade":"거래 취소",
-      "rules": {
-        "expiry":    "등록은 30일 후 만료",
-        "fee":       "플랫폼 수수료는 양측 모두에게 적용",
-        "noNFA":     "NFA는 거래 불가 — 판매만 가능"
-      },
-      "acceptModal": {
-        "title":          "거래 제안",
-        "postedBy":       "게시자",
-        "exchangeDetails":"거래 세부사항",
-        "theyOffer":      "그들이 제공하는 것",
-        "theyWant":       "그들이 원하는 것",
-        "feeNotice":      "플랫폼 수수료는 양측 모두에게 적용",
-        "acceptBtn":      "이 거래 수락",
-        "confirmTitle":   "거래 확인",
-        "trade":          "거래",
-        "postedByLabel":  "게시자",
-        "terms":          "수락함으로써 교환 조건에 동의합니다. 게시자는 알림을 받고 아이템 이전 전 확인해야 합니다.",
-        "back":           "뒤로",
-        "sending":        "전송 중…",
-        "confirm":        "확인",
-        "successTitle":   "제안 전송됨!",
-        "notified":       "에게 알림이 전송됨",
-        "successNote":    "거래 게시자가 제안을 검토하고 교환을 조율할 것입니다. 알림에서 응답을 확인하세요.",
-        "expiry":         "⏱ 제안은 확인되지 않으면 30일 후 만료됩니다.",
-        "close":          "닫기"
-      },
-      "createModal": {
-        "title":               "거래 게시",
-        "yourItem":            "내 아이템",
-        "itemNamePlaceholder": "아이템 이름 *",
-        "loadingItems":        "아이템 로딩 중…",
-        "connectWallet":       "아이템을 선택하려면 지갑을 연결하세요",
-        "pickFromItems":       "또는 내 아이템에서 선택 (이름 자동 입력):",
-        "imageOptional":       "이미지 (선택사항)",
-        "whatYouWant":         "원하는 것",
-        "openOffer":           "공개 제안 — 다른 사람이 제안하도록",
-        "anyCategory":         "모든 카테고리",
-        "notesLabel":          "메모 (선택사항)",
-        "notesPlaceholder":    "거래 조건, 상태 등.",
-        "disclaimer":          "양측 모두 플랫폼 수수료 지불 · 30일 후 만료 · NFA 거래 불가",
-        "posting":             "게시 중…",
-        "submit":              "거래 게시"
-      },
-      "pagination": {
-        "prev":  "이전",
-        "next":  "다음",
-        "page":  "{{page}} / {{pages}} 페이지"
-      }
-    },
-
-    "quests": {
-      "heading":       "퀘스트 보드",
-      "quests":        "개 퀘스트",
-      "noQuests":      "{{filter}} 퀘스트 없음",
-      "inGameFeature": "게임 내 기능",
-      "inGameDesc":    "판매자가 수수료 절감을 선택할 때 퀘스트가 자동 생성됩니다. 플레이어는 하루에 최대 5개의 퀘스트를 완료할 수 있습니다. 수수료 풀은 구매자 할인, 플레이어 보상, 플랫폼 간에 분배됩니다.",
-      "earnFromQuests":"퀘스트에서 수익을 얻고 싶으신가요? 게임하기 →",
-      "moneyQuests":   "머니 퀘스트 (11% 풀)",
-      "resourceQuests":"리소스 퀘스트 (20% 풀)",
-      "footerNote1":   "# 복합 페이로드가 있는 퀘스트는 별도 테이블 금액으로 지급됩니다.",
-      "footerNote2":   "# 게임이 출시되면 행성 데이터가 동기화됩니다.",
-      "inGame":        "게임 내",
-      "open":          "공개",
-      "table": {
-        "questingNo":    "퀘스트 번호",
-        "pickupPlanet":  "픽업 행성",
-        "dropOffPlanet": "배달 행성",
-        "itemGoods":     "아이템/화물",
-        "commSplit":     "수수료 분배",
-        "questingTime":  "퀘스트 시간",
-        "assignedTo":    "배정됨"
-      },
-      "comingSoon": {
-        "title":   "곧 출시",
-        "desc":    "게임 내 퀘스트 기능은 현재 개발 중입니다. 계속 지켜봐 주세요 — 게임에서 직접 보상을 얻을 수 있게 됩니다.",
-        "gotIt":   "알겠습니다"
-      },
-      "pagination": {
-        "prev":  "이전",
-        "next":  "다음",
-        "page":  "{{page}} / {{pages}} 페이지"
-      }
-    },
-
-    "hire": {
-      "heading":          "고용",
-      "listings":         "개 등록",
-      "listBtn":          "등록",
-      "forHireLabel":     "고용 가능",
-      "wantingToHire":    "고용 원함",
-      "noListings":       "{{filter}} 등록 없음",
-      "lockedTitle":      "HyperTek 게임 콘텐츠는 표시 목적으로만 제공됩니다.",
-      "lockedDesc":       "이 섹션은 게임이 최종 확정될 때까지 잠겨 있습니다.",
-      "forHireBadge":     "고용 가능",
-      "wantedBadge":      "고용 원함",
-      "price":            "가격",
-      "maxDuration":      "최대 기간",
-      "hireBtn":          "고용",
-      "fulfillBtn":       "요청 이행",
-      "rules": {
-        "durations":   "8시간 · 1일 · 3일 · 1주 · 1개월",
-        "cooldown":    "쿨다운: 대여 기간의 2배",
-        "commission":  "수수료: 20%",
-        "payment":     "Hyper Bucks 또는 재료로 지불"
+        "freeToList": "무료 등록",
+        "commission": "수수료: 판매 시 20%"
       },
       "preview": {
         "title": "게임 내 기능 미리보기",
-        "desc":  "고용 시스템은 게임 출시 시 완전히 활성화됩니다. 여기에 표시된 아이템은 투자자/사용자 쇼케이스를 위한 샘플입니다."
+        "desc": "경매 시스템은 게임 출시 시 완전히 활성화됩니다. 여기에 표시된 아이템은 투자자/사용자 쇼케이스를 위한 샘플입니다."
       },
-      "hireModal": {
-        "hireTitle":     "전문가 고용",
-        "fulfillTitle":  "고용 요청 이행",
-        "forHireBadge":  "고용 가능",
-        "wantedBadge":   "모집 중",
-        "price":         "가격",
-        "duration":      "기간",
-        "howHire":       "고용 방법",
-        "howFulfill":    "요청 이행 방법",
-        "proceedHire":   "고용 진행",
-        "offerFulfill":  "이행 제안",
-        "commission":    "20% 플랫폼 수수료 · 반납 후 쿨다운 적용",
-        "confirmHire":   "고용 확인",
-        "confirmOffer":  "제안 확인",
-        "specialist":    "전문가",
-        "payment":       "지불",
-        "yourOffer":     "내 제안",
-        "durationLabel": "기간",
-        "commLabel":     "수수료",
-        "back":          "뒤로",
-        "processing":    "처리 중…",
-        "sendOffer":     "제안 보내기",
-        "deployedTitle": "배치됨!",
-        "offerSentTitle":"제안 전송됨!",
-        "availableFor":  "사용 가능 기간",
-        "paid":          "지불됨",
-        "returnNote":    "자동 패널티를 피하려면 기간이 끝나기 전에 반납하세요. 반납 후 {{hours}}h 쿨다운이 적용됩니다.",
-        "close":         "닫기"
+      "card": {
+        "currentBid": "현재 입찰가",
+        "endsIn": "남은 시간",
+        "placeBid": "입찰",
+        "buyNow": "즉시 구매",
+        "bids": "입찰",
+        "ended": "종료됨"
+      },
+      "detail": {
+        "currentBid": "현재 입찰가",
+        "start": "시작",
+        "endsIn": "남은 시간",
+        "description": "설명",
+        "recentBids": "최근 입찰",
+        "anonymous": "익명",
+        "placeBid": "입찰",
+        "buyNow": "즉시 구매",
+        "buyNowLabel": "즉시 구매",
+        "bids": "입찰"
+      },
+      "bidModal": {
+        "title": "입찰",
+        "currentBid": "현재 입찰가",
+        "minimumBid": "최소 입찰가",
+        "yourBid": "내 입찰가 (USDC)",
+        "minIncrement": "최소 증가액 5% · 내 입찰 후 다음 최소가: {{next}} USDC",
+        "reviewBid": "입찰 확인",
+        "disclaimer": "낙찰 입찰은 구속력 있음 · 20% 플랫폼 수수료",
+        "confirmTitle": "입찰 확인",
+        "item": "아이템",
+        "yourBidLabel": "내 입찰가",
+        "youPay": "낙찰 시 지불액",
+        "outbidNotice": "누군가 더 높은 입찰을 하면 즉시 알림을 받습니다. 타이머가 만료되면 경매가 자동으로 종료됩니다.",
+        "back": "뒤로",
+        "confirm": "확인 — {{amount}} USDC",
+        "placing": "입찰 중…",
+        "successTitle": "입찰 완료!",
+        "highestBidder": "최고 입찰자입니다",
+        "outbidWarning": "더 높은 입찰이 있으면 알림을 받습니다.",
+        "done": "완료",
+        "endsIn": "남은 시간"
+      },
+      "instantBuyModal": {
+        "title": "즉시 구매 — 인스턴트",
+        "buyNowPrice": "즉시 구매 가격",
+        "currentBids": "현재 입찰 수",
+        "notice": "즉시 구매는 경매를 즉시 종료합니다. 아이템이 지갑으로 이전되고 다른 모든 입찰자는 환불됩니다.",
+        "cancel": "취소",
+        "processing": "처리 중…",
+        "successTitle": "아이템 획득!",
+        "auctionClosed": "경매 종료 · 이전 시작됨",
+        "item": "아이템",
+        "paid": "지불됨",
+        "status": "상태",
+        "transferred": "지갑으로 이전됨",
+        "walletNote": "아이템은 내 컬렉션 탭에 나타납니다.",
+        "viewCollect": "내 컬렉션 보기"
       },
       "createModal": {
-        "listTitle":          "고용 등록",
-        "postTitle":          "고용 원함 게시",
-        "forHireBtn":         "고용 가능",
-        "wantingBtn":         "고용 원함",
-        "itemNameHire":       "전문가/아이템 이름 *",
-        "itemNameWant":       "고용하고 싶은 것 *",
-        "descPlaceholder":    "설명",
-        "categoryPlaceholder":"카테고리 (선택사항)",
-        "paymentType":        "결제 유형",
-        "hyperBucks":         "Hyper Bucks",
-        "materials":          "재료",
-        "amountLabel":        "금액 (Hyper Bucks)",
-        "afterCommission":    "20% 수수료 후 {{amount}} HB 수령",
-        "maxDuration":        "최대 기간",
-        "disclaimer":         "20% 수수료 · 쿨다운 = 반납 후 대여 기간의 2배",
-        "listing":            "등록 중…",
-        "submit":             "등록 만들기"
+        "title": "경매 만들기",
+        "selectItem": "아이템 선택",
+        "connectWallet": "아이템을 탐색하려면 지갑을 연결하세요",
+        "loadingItems": "로딩 중…",
+        "noItems": "소유한 아이템 없음",
+        "pricingDuration": "가격 및 기간",
+        "startPrice": "시작가 (USDC) *",
+        "reservePrice": "예약가 (USDC)",
+        "instantBuyPrice": "즉시 구매가 (USDC)",
+        "optional": "선택사항",
+        "leaveBlank": "비활성화하려면 비워두세요",
+        "duration": "기간",
+        "dur1Day": "1일",
+        "dur3Days": "3일",
+        "dur7Days": "7일",
+        "freeToList": "무료 등록 · 판매 시 20% 수수료",
+        "creating": "생성 중…",
+        "submit": "경매 만들기"
       },
       "pagination": {
-        "prev":  "이전",
-        "next":  "다음",
-        "page":  "{{page}} / {{pages}} 페이지"
+        "prev": "이전",
+        "next": "다음",
+        "page": "{{page}} / {{pages}} 페이지"
       }
     },
-
+    "trades": {
+      "heading": "거래",
+      "listings": "개 등록",
+      "postTrade": "거래 게시",
+      "noTrades": "{{filter}} 거래 없음",
+      "viewDetails": "자세히 보기",
+      "trade": "거래",
+      "yours": "내 것",
+      "offering": "제공",
+      "wanting": "원함",
+      "makeOffer": "제안하기",
+      "by": "by",
+      "acceptTrade": "거래 수락",
+      "cancelTrade": "거래 취소",
+      "rules": {
+        "expiry": "등록은 30일 후 만료",
+        "fee": "플랫폼 수수료는 양측 모두에게 적용",
+        "noNFA": "NFA는 거래 불가 — 판매만 가능"
+      },
+      "acceptModal": {
+        "title": "거래 제안",
+        "postedBy": "게시자",
+        "exchangeDetails": "거래 세부사항",
+        "theyOffer": "그들이 제공하는 것",
+        "theyWant": "그들이 원하는 것",
+        "feeNotice": "플랫폼 수수료는 양측 모두에게 적용",
+        "acceptBtn": "이 거래 수락",
+        "confirmTitle": "거래 확인",
+        "trade": "거래",
+        "postedByLabel": "게시자",
+        "terms": "수락함으로써 교환 조건에 동의합니다. 게시자는 알림을 받고 아이템 이전 전 확인해야 합니다.",
+        "back": "뒤로",
+        "sending": "전송 중…",
+        "confirm": "확인",
+        "successTitle": "제안 전송됨!",
+        "notified": "에게 알림이 전송됨",
+        "successNote": "거래 게시자가 제안을 검토하고 교환을 조율할 것입니다. 알림에서 응답을 확인하세요.",
+        "expiry": "⏱ 제안은 확인되지 않으면 30일 후 만료됩니다.",
+        "close": "닫기"
+      },
+      "createModal": {
+        "title": "거래 게시",
+        "yourItem": "내 아이템",
+        "itemNamePlaceholder": "아이템 이름 *",
+        "loadingItems": "아이템 로딩 중…",
+        "connectWallet": "아이템을 선택하려면 지갑을 연결하세요",
+        "pickFromItems": "또는 내 아이템에서 선택 (이름 자동 입력):",
+        "imageOptional": "이미지 (선택사항)",
+        "whatYouWant": "원하는 것",
+        "openOffer": "공개 제안 — 다른 사람이 제안하도록",
+        "anyCategory": "모든 카테고리",
+        "notesLabel": "메모 (선택사항)",
+        "notesPlaceholder": "거래 조건, 상태 등.",
+        "disclaimer": "양측 모두 플랫폼 수수료 지불 · 30일 후 만료 · NFA 거래 불가",
+        "posting": "게시 중…",
+        "submit": "거래 게시"
+      },
+      "pagination": {
+        "prev": "이전",
+        "next": "다음",
+        "page": "{{page}} / {{pages}} 페이지"
+      }
+    },
+    "quests": {
+      "heading": "퀘스트 보드",
+      "quests": "개 퀘스트",
+      "noQuests": "{{filter}} 퀘스트 없음",
+      "inGameFeature": "게임 내 기능",
+      "inGameDesc": "판매자가 수수료 절감을 선택할 때 퀘스트가 자동 생성됩니다. 플레이어는 하루에 최대 5개의 퀘스트를 완료할 수 있습니다. 수수료 풀은 구매자 할인, 플레이어 보상, 플랫폼 간에 분배됩니다.",
+      "earnFromQuests": "퀘스트에서 수익을 얻고 싶으신가요? 게임하기 →",
+      "moneyQuests": "머니 퀘스트 (11% 풀)",
+      "resourceQuests": "리소스 퀘스트 (20% 풀)",
+      "footerNote1": "# 복합 페이로드가 있는 퀘스트는 별도 테이블 금액으로 지급됩니다.",
+      "footerNote2": "# 게임이 출시되면 행성 데이터가 동기화됩니다.",
+      "inGame": "게임 내",
+      "open": "공개",
+      "table": {
+        "questingNo": "퀘스트 번호",
+        "pickupPlanet": "픽업 행성",
+        "dropOffPlanet": "배달 행성",
+        "itemGoods": "아이템/화물",
+        "commSplit": "수수료 분배",
+        "questingTime": "퀘스트 시간",
+        "assignedTo": "배정됨"
+      },
+      "comingSoon": {
+        "title": "곧 출시",
+        "desc": "게임 내 퀘스트 기능은 현재 개발 중입니다. 계속 지켜봐 주세요 — 게임에서 직접 보상을 얻을 수 있게 됩니다.",
+        "gotIt": "알겠습니다"
+      },
+      "pagination": {
+        "prev": "이전",
+        "next": "다음",
+        "page": "{{page}} / {{pages}} 페이지"
+      },
+      "buyer": "구매자",
+      "player": "Player",
+      "platform": "Platform",
+      "status": {
+        "open": "Open",
+        "accepted": "Accepted",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "type": {
+        "money": "Money",
+        "resources": "리소스"
+      }
+    },
+    "hire": {
+      "heading": "고용",
+      "listings": "개 등록",
+      "listBtn": "등록",
+      "forHireLabel": "고용 가능",
+      "wantingToHire": "고용 원함",
+      "noListings": "{{filter}} 등록 없음",
+      "lockedTitle": "HyperTek 게임 콘텐츠는 표시 목적으로만 제공됩니다.",
+      "lockedDesc": "이 섹션은 게임이 최종 확정될 때까지 잠겨 있습니다.",
+      "forHireBadge": "고용 가능",
+      "wantedBadge": "고용 원함",
+      "price": "가격",
+      "maxDuration": "최대 기간",
+      "hireBtn": "고용",
+      "fulfillBtn": "요청 이행",
+      "rules": {
+        "durations": "8시간 · 1일 · 3일 · 1주 · 1개월",
+        "cooldown": "쿨다운: 대여 기간의 2배",
+        "commission": "수수료: 20%",
+        "payment": "Hyper Bucks 또는 재료로 지불"
+      },
+      "preview": {
+        "title": "게임 내 기능 미리보기",
+        "desc": "고용 시스템은 게임 출시 시 완전히 활성화됩니다. 여기에 표시된 아이템은 투자자/사용자 쇼케이스를 위한 샘플입니다."
+      },
+      "hireModal": {
+        "hireTitle": "전문가 고용",
+        "fulfillTitle": "고용 요청 이행",
+        "forHireBadge": "고용 가능",
+        "wantedBadge": "모집 중",
+        "price": "가격",
+        "duration": "기간",
+        "howHire": "고용 방법",
+        "howFulfill": "요청 이행 방법",
+        "proceedHire": "고용 진행",
+        "offerFulfill": "이행 제안",
+        "commission": "20% 플랫폼 수수료 · 반납 후 쿨다운 적용",
+        "confirmHire": "고용 확인",
+        "confirmOffer": "제안 확인",
+        "specialist": "전문가",
+        "payment": "지불",
+        "yourOffer": "내 제안",
+        "durationLabel": "기간",
+        "commLabel": "수수료",
+        "back": "뒤로",
+        "processing": "처리 중…",
+        "sendOffer": "제안 보내기",
+        "deployedTitle": "배치됨!",
+        "offerSentTitle": "제안 전송됨!",
+        "availableFor": "사용 가능 기간",
+        "paid": "지불됨",
+        "returnNote": "자동 패널티를 피하려면 기간이 끝나기 전에 반납하세요. 반납 후 {{hours}}h 쿨다운이 적용됩니다.",
+        "close": "닫기"
+      },
+      "createModal": {
+        "listTitle": "고용 등록",
+        "postTitle": "고용 원함 게시",
+        "forHireBtn": "고용 가능",
+        "wantingBtn": "고용 원함",
+        "itemNameHire": "전문가/아이템 이름 *",
+        "itemNameWant": "고용하고 싶은 것 *",
+        "descPlaceholder": "설명",
+        "categoryPlaceholder": "카테고리 (선택사항)",
+        "paymentType": "결제 유형",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "재료",
+        "amountLabel": "금액 (Hyper Bucks)",
+        "afterCommission": "20% 수수료 후 {{amount}} HB 수령",
+        "maxDuration": "최대 기간",
+        "disclaimer": "20% 수수료 · 쿨다운 = 반납 후 대여 기간의 2배",
+        "listing": "등록 중…",
+        "submit": "등록 만들기"
+      },
+      "pagination": {
+        "prev": "이전",
+        "next": "다음",
+        "page": "{{page}} / {{pages}} 페이지"
+      }
+    },
     "bounty": {
-      "heading":        "현상금 보드",
-      "contracts":      "개 계약",
-      "contractsPlural":"개 계약",
-      "noContracts":    "{{filter}} 계약 없음",
-      "noContractsNote":"현상금은 게임 플레이어와 게임 시스템에 의해 게시됩니다",
-      "expiresIn":      "{{days}}일 후 만료",
+      "heading": "현상금 보드",
+      "contracts": "개 계약",
+      "contractsPlural": "개 계약",
+      "noContracts": "{{filter}} 계약 없음",
+      "noContractsNote": "현상금은 게임 플레이어와 게임 시스템에 의해 게시됩니다",
+      "expiresIn": "{{days}}일 후 만료",
       "inGameNotice": {
         "title": "게임 내 기능 — 보기 전용",
-        "desc":  "현상금은 게임 플레이어와 게임 시스템에 의해 생성됩니다. 현상금 수락 및 완료는 게임 내에서만 가능합니다. 이 보드는 투명성과 신규 플레이어 참여 장려를 위해 표시됩니다."
+        "desc": "현상금은 게임 플레이어와 게임 시스템에 의해 생성됩니다. 현상금 수락 및 완료는 게임 내에서만 가능합니다. 이 보드는 투명성과 신규 플레이어 참여 장려를 위해 표시됩니다."
       },
       "rules": {
-        "battle":     "전투는 게임 내에서 자동으로 해결됨",
+        "battle": "전투는 게임 내에서 자동으로 해결됨",
         "commission": "보상에 20% 플랫폼 수수료",
-        "expiry":     "계약은 30일 후 만료"
+        "expiry": "계약은 30일 후 만료"
       },
       "table": {
-        "bountyNo":   "현상금 번호",
-        "target":     "타겟 (공격 대상)",
-        "reward":     "보상",
-        "postedBy":   "게시자",
-        "claimedBy":  "수령자",
-        "status":     "상태",
-        "netHB":      "{{amount}} HB 순액"
+        "bountyNo": "현상금 번호",
+        "target": "타겟 (공격 대상)",
+        "reward": "보상",
+        "postedBy": "게시자",
+        "claimedBy": "수령자",
+        "status": "상태",
+        "netHB": "{{amount}} HB 순액"
       },
       "pagination": {
-        "prev":  "이전",
-        "next":  "다음",
-        "page":  "{{page}} / {{pages}} 페이지"
+        "prev": "이전",
+        "next": "다음",
+        "page": "{{page}} / {{pages}} 페이지"
       }
     },
-
     "common": {
-      "prev":          "이전",
-      "next":          "다음",
-      "pageOf":        "{{page}} / {{pages}} 페이지",
-      "back":          "뒤로",
-      "close":         "닫기",
-      "cancel":        "취소",
-      "loading":       "로딩 중…",
+      "prev": "이전",
+      "next": "다음",
+      "pageOf": "{{page}} / {{pages}} 페이지",
+      "back": "뒤로",
+      "close": "닫기",
+      "cancel": "취소",
+      "loading": "로딩 중…",
       "connectWallet": "먼저 지갑을 연결하세요",
-      "loginFirst":    "먼저 로그인하세요"
+      "loginFirst": "먼저 로그인하세요"
     }
+  },
+  "musicPlayer": {
+    "title": "음악 플레이어",
+    "playing": "재생",
+    "sound": "사운드",
+    "ambientDesc": "시장용 주변 사운드트랙이 내장되어 있습니다. 반복 재생됩니다.",
+    "playAmbient": "앰비언트 재생",
+    "pauseAmbient": "앰비언트 일시 중지",
+    "spotifyDesc": "Spotify 트랙, 재생 목록 또는 앨범 링크를 붙여넣습니다.",
+    "loadSpotify": "Spotify 로드",
+    "soundcloudDesc": "SoundCloud 트랙이나 재생 목록 링크를 붙여넣습니다.",
+    "loadSoundCloud": "SoundCloud 로드",
+    "changeLink": "링크 변경"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "카드로 결제",
+      "amount": "금액:",
+      "cancel": "취소",
+      "processing": "처리 중...",
+      "pay": "결제"
+    },
+    "nav": {
+      "backToMarketplace": "마켓플레이스로 돌아가기",
+      "backToCollections": "돌아가기 컬렉션",
+      "offers": "제안",
+      "marketplace": "마켓플레이스",
+      "auction": "경매",
+      "trade": "거래",
+      "detail": "{{type}} 세부정보",
+      "buy": "구매 {{type}}"
+    },
+    "marketplace": {
+      "listed": "등록됨",
+      "youOwn": "이것을 소유함",
+      "notMinted": "발행되지 않음 아직",
+      "ownedBy": "소유자",
+      "platform": "Platform",
+      "noDesc": "이 항목에 대한 설명이 제공되지 않았습니다.",
+      "price": "가격",
+      "minBuyback": "최소 환매 보장",
+      "reservePrice": "예약 가격",
+      "buybackNote": "이 자산은 최소 환매 가치 이하로 판매될 수 없습니다.",
+      "networkNote": "USDC on Base · 가스에 필요한 기본 ETH(지갑 결제만 해당)",
+      "buyWithCard": "카드로 구매",
+      "makeOffer": "제안하기",
+      "processing": "처리 중...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "지금 구매",
+      "listNow": "지금 목록",
+      "yourListed": "귀하의 {{type}}(등록됨)",
+      "notAvailable": "사용할 수 없음"
+    },
+    "fundModal": {
+      "title": "USDC가 충분하지 않음",
+      "youNeed": "필요",
+      "butHave": "하지만 지갑에는",
+      "desc2": "Transak을 통해 신용카드나 직불카드로 즉시 지갑에 자금을 조달한 다음 다시 돌아와서 결제를 완료하세요. 구매.",
+      "fundBtn": "카드로 지갑 충전(Transak)",
+      "cancel": "취소"
+    },
+    "gasModal": {
+      "title": "가스에 필요한 ETH",
+      "mainnetNote": "기본 메인넷에 있습니다. Bridge.base.org를 통해 Coinbase에서 소량의 ETH(1-2달러)를 구매하거나 Ethereum에서 브리지를 구매하세요.",
+      "testnetNote": "귀하는 Base Sepolia Testnet에 있습니다. 수도꼭지에서 무료 테스트 ETH를 받으세요.",
+      "faucetBtn": "테스트넷 ETH(수도꼭지) 받기",
+      "bridgeBtn": "ETH를 베이스로 연결",
+      "close": "닫기"
+    },
+    "confirmModal1": {
+      "title": "조치 확인",
+      "listPrice": "정가",
+      "platformFee": "플랫폼 수수료 (10%)",
+      "total": "총액",
+      "cancel": "취소",
+      "continue": "계속"
+    },
+    "confirmModal2": {
+      "setPrice": "등록 가격 설정(USDC)",
+      "willList": "✓ {{price}}에 등록됩니다 USDC",
+      "price": "Price",
+      "cancel": "Cancel",
+      "processing": "처리 중...",
+      "confirm": "확인"
+    },
+    "offers": {
+      "noOffers": "아직 제안 없음",
+      "offer": "offer",
+      "offers": "offers",
+      "noOffersTitle": "지금 제안 없음",
+      "noOffersDesc": "가장 먼저 제안",
+      "colPrice": "가격",
+      "colStatus": "상태",
+      "colFrom": "From",
+      "colExpires": "Expires",
+      "colAction": "Action",
+      "accept": "Accept",
+      "reject": "Reject",
+      "cancel": "Cancel",
+      "expired": "Expired",
+      "completePurchase": "Complete 구매"
+    },
+    "auction": {
+      "loading": "경매 데이터 로드 중…",
+      "active": "활성 경매",
+      "startPrice": "시작 가격",
+      "currentBid": "현재 입찰",
+      "noBids": "아직 입찰이 없음",
+      "instantBuy": "즉시 구매",
+      "reservePrice": "예약 가격",
+      "bidHistory": "입찰 내역",
+      "minBid": "Min 입찰:",
+      "bidding": "입찰…",
+      "placeBid": "입찰하기",
+      "connectWallet": "지갑을 연결하여 입찰하기",
+      "ownerNote": "귀하의 품목이 경매에 나와 있습니다. 입찰이 들어오면 여기에 표시됩니다.",
+      "noAuction": "이 항목에 대한 활성 경매가 없습니다",
+      "ownerSetup": "경매를 설정하려면 컬렉션으로 이동하고 목록을 클릭하세요.",
+      "notAvailable": "이 항목은 현재 공개 경매가 없습니다."
+    },
+    "trade": {
+      "loading": "거래 목록 로드 중…",
+      "active": "활성 거래 목록",
+      "actives": "활성 거래 목록",
+      "offering": "Offering",
+      "wants": "Wants",
+      "openOffer": "공개 제안",
+      "by": "By",
+      "proposeTrade": "거래 제안 →",
+      "noTrades": "활성 거래 목록 없음",
+      "ownerSetup": "거래를 설정하려면 컬렉션으로 이동하여 목록을 클릭하세요.",
+      "notAvailable": "소유자는 이에 대한 공개 거래 목록이 없습니다. item."
+    },
+    "successModal": {
+      "title": "구매 성공!",
+      "desc": "{{name}}을(를) 구매했습니다. NFT가 곧 지갑으로 이체됩니다.",
+      "note": "이체는 당사 시스템을 통해 자동으로 처리됩니다.",
+      "viewProfile": "내 프로필에서 보기",
+      "continueShopping": "계속 쇼핑"
+    },
+    "transferFailed": {
+      "title": "결제 완료 — 이체 보류 중",
+      "desc": "결제는 성공적이었지만 NFT 이체에 문제가 발생했습니다. 귀하의 자금은 안전합니다. 저희 팀이 수동으로 이체를 완료할 것입니다.",
+      "viewProfile": "내 프로필 보기",
+      "dismiss": "삭제"
+    },
+    "priceHistory": {
+      "title": "가격 내역",
+      "subtitle": "이 제품의 과거 판매 가격 NFT",
+      "loading": "로드 중...",
+      "noSales": "아직 판매 기록이 없습니다",
+      "noSalesNote": "첫 번째 판매 후 가격 내역이 표시됩니다."
+    }
+  },
+  "makeOffer": {
+    "back": "뒤로",
+    "floor": "Floor",
+    "title": "제안하기",
+    "yourOffer": "제안(USDC)",
+    "expiresIn": "제안 만료일",
+    "youPay": "결제",
+    "submitting": "제출 중...",
+    "submit": "제안 제출",
+    "terms": "이 제의를 제출함으로써 귀하는 Hyper Tek의 다음 조건에 동의하게 됩니다. 서비스.",
+    "expiry": {
+      "6h": "6시간",
+      "12h": "12시간",
+      "1d": "1일",
+      "3d": "3일",
+      "7d": "7일",
+      "1mo": "1개월"
+    },
+    "success": {
+      "title": "제안이 제출되었습니다!",
+      "desc": "귀하의 {{name}}에 대한 {{price}} USDC 제안이 다음으로 전송되었습니다. owner.",
+      "expires": "만료일:{{duration}}",
+      "backToNft": "NFT로 돌아가기",
+      "goToMarketplace": "마켓플레이스로 이동"
+    },
+    "error": {
+      "loginRequired": "제안을 하려면 로그인하세요",
+      "submitFailed": "제안을 제출하지 못했습니다. 다시 시도해 주세요."
+    }
+  },
+  "paymentError": {
+    "message": "요청이 실패했습니다",
+    "goHome": "홈으로 이동"
   }
 }

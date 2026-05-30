@@ -19,13 +19,13 @@ export const socketHandler = (io) => {
         id: adminId,
         role: role.toLowerCase()
       };
-      console.log("✅ Socket authenticated with admin credentials");
+      console.log("Socket authenticated with admin credentials");
       return next();
     }
 
     // Fallback to JWT token validation
     if (!token) {
-      console.error("❌ No token or admin credentials provided");
+      console.error(" No token or admin credentials provided");
       return next(new Error("No token or admin credentials"));
     }
 
@@ -36,7 +36,7 @@ export const socketHandler = (io) => {
         id: decoded._id || decoded.id,
         role: (decoded.role || decoded.Role || decoded.userRole || "user").toLowerCase()
       };
-      console.log("✅ Socket authenticated with JWT");
+      console.log("Socket authenticated with JWT");
       next();
     } catch (err) {
       // Try base64 decode (temporary token)
@@ -49,14 +49,14 @@ export const socketHandler = (io) => {
         console.log("⚠️ Socket authenticated with temporary token");
         next();
       } catch (decodeErr) {
-        console.error("❌ Invalid token:", err.message);
+        console.error(" Invalid token:", err.message);
         next(new Error("Invalid token"));
       }
     }
   });
 
   io.on("connection", (socket) => {
-    console.log(`✅ Connected: ${socket.user.id} (${socket.user.role})`);
+    console.log(`Connected: ${socket.user.id} (${socket.user.role})`);
 
     /**
      * JOIN ROOM
@@ -76,7 +76,7 @@ export const socketHandler = (io) => {
 
         if (socket.user.role === "admin") {
           if (!userId) {
-            console.error("❌ Admin join room: userId missing");
+            console.error(" Admin join room: userId missing");
             return;
           }
 
@@ -100,7 +100,7 @@ export const socketHandler = (io) => {
 
         if (socket.user.role === "user") {
           if (!adminId) {
-            console.error("❌ User join room: adminId missing");
+            console.error(" User join room: adminId missing");
             return;
           }
 
@@ -128,7 +128,7 @@ export const socketHandler = (io) => {
           console.log(`🟢 ${socket.user.role} joined room: ${room._id}`);
         }
       } catch (err) {
-        console.error("❌ joinRoom error:", err);
+        console.error(" joinRoom error:", err);
         socket.emit("error", { message: "Failed to join room" });
       }
     });
@@ -146,24 +146,24 @@ export const socketHandler = (io) => {
         });
 
         if (!roomId || !message) {
-          console.error("❌ Missing roomId or message");
+          console.error(" Missing roomId or message");
           return;
         }
 
         const room = await ChatRoom.findById(roomId);
         if (!room) {
-          console.error("❌ Room not found:", roomId);
+          console.error(" Room not found:", roomId);
           return;
         }
 
         // 🔐 Security check
-        const isAdmin = socket.user.role === "admin" && 
-                       room.adminId.toString() === socket.user.id;
-        const isUser = socket.user.role === "user" && 
-                      room.userId.toString() === socket.user.id;
+        const isAdmin = socket.user.role === "admin" &&
+          room.adminId.toString() === socket.user.id;
+        const isUser = socket.user.role === "user" &&
+          room.userId.toString() === socket.user.id;
 
         if (!isAdmin && !isUser) {
-          console.error("❌ Access denied:", {
+          console.error(" Access denied:", {
             userRole: socket.user.role,
             userId: socket.user.id,
             roomAdminId: room.adminId,
@@ -180,13 +180,13 @@ export const socketHandler = (io) => {
           message
         });
 
-        console.log("✅ Message saved:", newMsg._id);
+        console.log("Message saved:", newMsg._id);
 
         // Broadcast to room
         io.to(roomId).emit("receiveMessage", newMsg);
         console.log("📨 Message broadcasted to room:", roomId);
       } catch (err) {
-        console.error("❌ sendMessage error:", err);
+        console.error(" sendMessage error:", err);
         socket.emit("error", { message: "Failed to send message" });
       }
     });

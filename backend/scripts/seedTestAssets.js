@@ -103,7 +103,7 @@ async function seed() {
       subCollections,
     });
 
-    console.log(`✅ Created "${col.name}" — ${col.items.length} items @ $${col.price} USDC each`);
+    console.log(`Created "${col.name}" — ${col.items.length} items @ $${col.price} USDC each`);
     created += col.items.length;
   }
 
@@ -114,13 +114,13 @@ async function seed() {
 
 async function main() {
   if (!MONGO_URI) {
-    console.error("❌ MONGODB_URL not found in Config/.env");
+    console.error(" MONGODB_URL not found in Config/.env");
     process.exit(1);
   }
 
   // ── Safety guard: never run on production ──
   if (process.env.NODE_ENV === "production") {
-    console.error("❌ ABORT: seedTestAssets.js must NOT run in production. Set NODE_ENV=development to proceed.");
+    console.error(" ABORT: seedTestAssets.js must NOT run in production. Set NODE_ENV=development to proceed.");
     process.exit(1);
   }
 
@@ -138,7 +138,7 @@ async function main() {
   }
 
   await mongoose.disconnect();
-  console.log("✅ Done.");
+  console.log("Done.");
 }
 
 main().catch((err) => {

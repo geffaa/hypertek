@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Swords, Clock, Zap, Package, ShieldCheck } from "lucide-react";
 import { BACKEND_BASE_URL } from "../../Config";
 
@@ -16,7 +17,6 @@ const QUEST_TIERS = {
 };
 
 const MAX_DAILY = 5;
-
 
 const STATUS_COLORS = {
   open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
@@ -71,18 +71,17 @@ function WaitBadge({ waitHours, buyerSavePercent }) {
   );
 }
 
-// ── Daily limit progress bar ──────────────────────────────────────────────────
-function DailyLimitBar({ acceptedToday, remaining, limitReached }) {
+function DailyLimitBar({ acceptedToday, remaining, limitReached, t }) {
   const pct = Math.round((acceptedToday / MAX_DAILY) * 100);
   return (
     <div className="flex items-center gap-3">
       <ShieldCheck className={`w-4 h-4 shrink-0 ${limitReached ? "text-red-400" : "text-green-400"}`} />
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-[10px] text-white/50 font-semibold">Daily Quest Slots</span>
+          <span className="text-[10px] text-white/50 font-semibold">{t("profile.questing.dailySlots", "Daily Quest Slots")}</span>
           <span className={`text-[10px] font-bold ${limitReached ? "text-red-400" : "text-green-400"}`}>
-            {acceptedToday}/{MAX_DAILY} used
-            {limitReached && <span className="ml-1 text-red-400/70">(limit reached)</span>}
+            {acceptedToday}/{MAX_DAILY} {t("profile.questing.used", "used")}
+            {limitReached && <span className="ml-1 text-red-400/70">({t("profile.questing.limitReached", "limit reached")})</span>}
           </span>
         </div>
         <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
@@ -98,8 +97,8 @@ function DailyLimitBar({ acceptedToday, remaining, limitReached }) {
         </div>
         <p className="text-[9px] text-white/25 mt-0.5">
           {limitReached
-            ? "Resets at midnight UTC"
-            : `${remaining} slot${remaining !== 1 ? "s" : ""} remaining today`}
+            ? t("profile.questing.resetsAt", "Resets at midnight UTC")
+            : t("profile.questing.slotsRemaining", "{{count}} slots remaining today", { count: remaining })}
         </p>
       </div>
     </div>
@@ -108,6 +107,7 @@ function DailyLimitBar({ acceptedToday, remaining, limitReached }) {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 export default function ProfileQuestingTab({ wallet, token }) {
+  const { t } = useTranslation();
   const [quests, setQuests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
@@ -147,11 +147,17 @@ export default function ProfileQuestingTab({ wallet, token }) {
   const filtered =
     filter === "all" ? quests : quests.filter((q) => q.role === filter);
 
+  const FILTERS = [
+    { key: "all",      label: t("profile.questing.filterAll",      "All")      },
+    { key: "posted",   label: t("profile.questing.filterPosted",   "Posted")   },
+    { key: "accepted", label: t("profile.questing.filterAccepted", "Accepted") },
+  ];
+
   if (!wallet) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
         <Swords className="w-10 h-10 opacity-20" />
-        <p className="text-sm">Connect your wallet to view quest history</p>
+        <p className="text-sm">{t("profile.questing.connectWallet", "Connect your wallet to view quest history")}</p>
       </div>
     );
   }
@@ -162,22 +168,22 @@ export default function ProfileQuestingTab({ wallet, token }) {
       <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
         <div className="flex items-center gap-2">
           <Swords className="w-4 h-4 text-amber-400" />
-          <h3 className="text-white font-semibold text-base">Quest History</h3>
-          <span className="text-white/30 text-xs">{filtered.length} record{filtered.length !== 1 ? "s" : ""}</span>
+          <h3 className="text-white font-semibold text-base">{t("profile.questing.title", "Quest History")}</h3>
+          <span className="text-white/30 text-xs">{filtered.length} {t("profile.activities.records", "records")}</span>
         </div>
         <div className="flex gap-1">
-          {["all", "posted", "accepted"].map((f) => (
+          {FILTERS.map((f) => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className="px-3 py-1 rounded-lg text-xs capitalize transition-colors"
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className="px-3 py-1 rounded-lg text-xs transition-colors"
               style={
-                filter === f
+                filter === f.key
                   ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.4)", color: "#fff" }
                   : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
               }
             >
-              {f}
+              {f.label}
             </button>
           ))}
         </div>
@@ -195,16 +201,16 @@ export default function ProfileQuestingTab({ wallet, token }) {
             <div>
               <div className="flex items-center gap-2 mb-2.5">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span className="text-amber-300 text-xs font-semibold">Money Quests (11% pool)</span>
+                <span className="text-amber-300 text-xs font-semibold">{t("profile.questing.moneyQuestsTitle", "Money Quests (11% pool)")}</span>
               </div>
               <div className="space-y-1.5">
-                {QUEST_TIERS.money.map((t) => (
-                  <div key={t.waitHours} className="grid text-[10px]"
+                {QUEST_TIERS.money.map((tier) => (
+                  <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
-                    <span className="text-white/50">{t.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                    <span className="text-white/50">{tier.waitHours}h</span>
+                    <span className="text-red-400">{t("profile.questing.buyerLabel","Buyer")} −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">{t("profile.questing.playerLabel","Player")} +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">{t("profile.questing.platformLabel","Platform")} +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -214,16 +220,16 @@ export default function ProfileQuestingTab({ wallet, token }) {
             <div className="pl-4">
               <div className="flex items-center gap-2 mb-2.5">
                 <Package className="w-3.5 h-3.5 text-green-400" />
-                <span className="text-green-300 text-xs font-semibold">Resource Quests (20% pool)</span>
+                <span className="text-green-300 text-xs font-semibold">{t("profile.questing.resourceQuestsTitle", "Resource Quests (20% pool)")}</span>
               </div>
               <div className="space-y-1.5">
-                {QUEST_TIERS.resources.map((t) => (
-                  <div key={t.waitHours} className="grid text-[10px]"
+                {QUEST_TIERS.resources.map((tier) => (
+                  <div key={tier.waitHours} className="grid text-[10px]"
                     style={{ gridTemplateColumns: "2.2rem 5.5rem 6rem 6rem" }}>
-                    <span className="text-white/50">{t.waitHours}h</span>
-                    <span className="text-red-400">Buyer −{t.buyerSavePercent}%</span>
-                    <span className="text-amber-300">Player +{t.playerSharePercent}%</span>
-                    <span className="text-white/60">Platform +{t.platformSharePercent}%</span>
+                    <span className="text-white/50">{tier.waitHours}h</span>
+                    <span className="text-red-400">{t("profile.questing.buyerLabel","Buyer")} −{tier.buyerSavePercent}%</span>
+                    <span className="text-amber-300">{t("profile.questing.playerLabel","Player")} +{tier.playerSharePercent}%</span>
+                    <span className="text-white/60">{t("profile.questing.platformLabel","Platform")} +{tier.platformSharePercent}%</span>
                   </div>
                 ))}
               </div>
@@ -232,8 +238,8 @@ export default function ProfileQuestingTab({ wallet, token }) {
           </div>
           {/* Footer note */}
           <div className="mt-3 pt-2.5 border-t border-white/8 flex flex-wrap gap-x-8 gap-y-1">
-            <p className="text-white/45 text-[9px]"># Quests with combined payloads will be paid out using the separate table amounts.</p>
-            <p className="text-white/45 text-[9px]"># Planet data will sync when the games go live.</p>
+            <p className="text-white/45 text-[9px]"># {t("profile.questing.notePayouts", "Quests with combined payloads will be paid out using the separate table amounts.")}</p>
+            <p className="text-white/45 text-[9px]"># {t("profile.questing.notePlanet", "Planet data will sync when the games go live.")}</p>
           </div>
         </div>
 
@@ -245,13 +251,14 @@ export default function ProfileQuestingTab({ wallet, token }) {
               acceptedToday={dailyStats.acceptedToday}
               remaining={dailyStats.remaining}
               limitReached={dailyStats.limitReached}
+              t={t}
             />
           ) : (
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-white/40 shrink-0" />
               <div>
-                <p className="text-white/60 text-[10px] font-semibold">Daily Quest Slots</p>
-                <p className="text-white/40 text-[10px] mt-0.5">5 slots per day · resets midnight UTC</p>
+                <p className="text-white/60 text-[10px] font-semibold">{t("profile.questing.dailySlots", "Daily Quest Slots")}</p>
+                <p className="text-white/40 text-[10px] mt-0.5">{t("profile.questing.slotsPerDay", "5 slots per day · resets midnight UTC")}</p>
               </div>
             </div>
           )}
@@ -270,8 +277,8 @@ export default function ProfileQuestingTab({ wallet, token }) {
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-white/25 gap-3">
           <Swords className="w-8 h-8 opacity-20" />
-          <p className="text-sm">No quest history yet</p>
-          <p className="text-xs text-white/15">Complete quests in-game to see them here</p>
+          <p className="text-sm">{t("profile.questing.noHistory", "No quest history yet")}</p>
+          <p className="text-xs text-white/15">{t("profile.questing.noHistoryHint", "Complete quests in-game to see them here")}</p>
         </div>
       ) : (
         /* ── Table ── */
@@ -282,8 +289,13 @@ export default function ProfileQuestingTab({ wallet, token }) {
               className="grid min-w-[760px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.8fr 1.5fr 1fr 1.1fr" }}
             >
-              <span>Quest No</span><span>Pickup Planet</span><span>Drop Off Planet</span>
-              <span>Item / Goods</span><span>Split</span><span>Time Active</span><span>Assigned To</span>
+              <span>{t("profile.questing.colQuestNo","Quest No")}</span>
+              <span>{t("profile.questing.colPickupPlanet","Pickup Planet")}</span>
+              <span>{t("profile.questing.colDropOffPlanet","Drop Off Planet")}</span>
+              <span>{t("profile.questing.colItemGoods","Item / Goods")}</span>
+              <span>{t("profile.questing.colSplit","Split")}</span>
+              <span>{t("profile.questing.colTimeActive","Time Active")}</span>
+              <span>{t("profile.questing.colAssignedTo","Assigned To")}</span>
             </div>
           </div>
 
@@ -319,12 +331,12 @@ export default function ProfileQuestingTab({ wallet, token }) {
 
                 {/* Pickup Planet */}
                 <span className="text-white/55 text-xs">
-                  {q.pickupPlanet || <span className="italic text-white/35">In-game</span>}
+                  {q.pickupPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}
                 </span>
 
                 {/* Drop Off Planet */}
                 <span className="text-white/55 text-xs">
-                  {q.dropOffPlanet || <span className="italic text-white/35">In-game</span>}
+                  {q.dropOffPlanet || <span className="italic text-white/35">{t("profile.questing.inGame","In-game")}</span>}
                 </span>
 
                 {/* Item / Goods */}
@@ -340,14 +352,14 @@ export default function ProfileQuestingTab({ wallet, token }) {
                   <WaitBadge waitHours={q.waitHours} buyerSavePercent={q.buyerSavePercent} />
                   {q.playerSharePercent != null && (
                     <div className="text-[9px] leading-tight">
-                      <span className="text-amber-300">Player +{q.playerSharePercent}%</span>
+                      <span className="text-amber-300">{t("profile.questing.playerLabel","Player")} +{q.playerSharePercent}%</span>
                       {" · "}
-                      <span className="text-white/50">Plat +{q.platformSharePercent}%</span>
+                      <span className="text-white/50">{t("profile.questing.platLabel","Plat")} +{q.platformSharePercent}%</span>
                     </div>
                   )}
                   {q.playerEarnsAmount != null && (
                     <span className="text-[9px] text-amber-300">
-                      Earned: {q.playerEarnsAmount} HB
+                      {t("profile.questing.earned","Earned")}: {q.playerEarnsAmount} HB
                     </span>
                   )}
                 </div>
@@ -360,7 +372,7 @@ export default function ProfileQuestingTab({ wallet, token }) {
                 {/* Assigned To */}
                 <span className="text-white/50 text-xs font-mono">
                   {q.status === "open" ? (
-                    <span className="text-green-400/60">Open</span>
+                    <span className="text-green-400/60">{t("profile.questing.statusOpen","Open")}</span>
                   ) : (
                     acceptedName
                   )}

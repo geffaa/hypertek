@@ -21,7 +21,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
@@ -30,16 +30,16 @@ import NFTSystem from "../Models/NFTSystem.js";
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const TARGET_WALLET = ""; // e.g. "0xabc..." — leave blank to match all wallets
-const DRY_RUN       = false; // set true to preview without writing
+const DRY_RUN = false; // set true to preview without writing
 // ─────────────────────────────────────────────────────────────────────────────
 
 await mongoose.connect(process.env.MONGODB_URL);
-console.log("✅ Connected to MongoDB\n");
+console.log("Connected to MongoDB\n");
 
 const parents = await NFTSystem.find({ isParentCollection: true });
 
 let nextFakeTokenId = 1000; // start from 1000 to avoid conflicts
-let totalUpdated    = 0;
+let totalUpdated = 0;
 
 for (const parent of parents) {
   let parentDirty = false;
@@ -72,12 +72,12 @@ for (const parent of parents) {
     console.log(`   price    : ${sub.priceETH || 1} USDC`);
 
     if (!DRY_RUN) {
-      sub.listed      = true;
-      sub.tokenId     = fakeTokenId;
-      sub.tokenURI    = sub.tokenURI || `ipfs://fake-uri-${fakeTokenId}`;
-      sub.priceETH    = sub.priceETH || 1;
+      sub.listed = true;
+      sub.tokenId = fakeTokenId;
+      sub.tokenURI = sub.tokenURI || `ipfs://fake-uri-${fakeTokenId}`;
+      sub.priceETH = sub.priceETH || 1;
       sub.isFirstSale = false;
-      parentDirty     = true;
+      parentDirty = true;
       totalUpdated++;
     }
   }
@@ -88,5 +88,5 @@ for (const parent of parents) {
   }
 }
 
-console.log(`\n✅ Done. ${DRY_RUN ? "[DRY RUN] " : ""}Updated ${totalUpdated} sub-collection(s).`);
+console.log(`\nDone. ${DRY_RUN ? "[DRY RUN] " : ""}Updated ${totalUpdated} sub-collection(s).`);
 await mongoose.disconnect();

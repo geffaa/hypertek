@@ -11,7 +11,7 @@ function WalletConnect() {
 
   const navigate = useNavigate();
 
-  // ❌ Close & redirect
+  //  Close & redirect
   const closeAndGoToNfa = () => {
     setIsVisible(false);
     setIsSecondModalView(false);

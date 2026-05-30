@@ -2,86 +2,702 @@
   "marketplace": {
     "sectionLabel": "Marktplaats",
     "searchPlaceholder": "Zoeken...",
-    "tabs": { "overview": "Overzicht", "nfa101": "NFAs / NFCs / NFTs", "general": "De Marktplaats", "auctions": "Veilingen", "trades": "Ruilhandel", "quests": "Quests", "hire": "Te Huur", "bounty": "Premies" },
+    "tabs": {
+      "overview": "Overzicht",
+      "nfa101": "NFAs / NFCs / NFTs",
+      "general": "De Marktplaats",
+      "auctions": "Veilingen",
+      "trades": "Ruilhandel",
+      "quests": "Quests",
+      "hire": "Te Huur",
+      "bounty": "Premies"
+    },
     "banner": {
       "defaultHeading": "Een Nieuw Tijdperk Breekt aan in Hyper Tek",
-      "defaultDesc": "Het is het begin van een levend, ademend universum waar elke beslissing de reis bepaalt.",
-      "stats": { "totalItems": "Totaal Items", "totalBuys": "Totaal Aankopen", "listed": "Genoteerd", "collections": "Collecties" },
-      "soundOn": "Geluid Aan", "soundOff": "Geluid Uit"
+      "defaultDesc": "Het is het begin van een levend, ademend universum waarin elke beslissing de reis bepaalt. Of je nu met lichte snelheid racet, allianties smeedt in de Overlord Realm of geheimen blootlegt in HyperQuest: dit is je kans om je stempel op het verhaal te drukken.",
+      "stats": {
+        "totalItems": "Totaal Items",
+        "totalBuys": "Totaal Aankopen",
+        "listed": "Genoteerd",
+        "collections": "Collecties"
+      },
+      "soundOn": "Geluid Aan",
+      "soundOff": "Geluid Uit"
     },
     "bottomBar": {
       "learnLabel": "Leer over NFAs / NFCs",
       "educationPanel": "HyperTek Educatief Paneel",
       "footerNote": "Dit paneel is voor snelle referentie. Bezoek het tabblad NFAs / NFCs 101 voor volledige educatieve inhoud.",
       "facts": [
-        { "label": "NFA", "desc": "Exclusief Hypertek-bezit. Hoogste bonussen in het spel. Gegarandeerde minimale terugkoopwaarde die groeit met elke verkoop." },
-        { "label": "NFC", "desc": "Gemaakt door Hypertek of gelicentieerde spelers. Bonussen in het spel inbegrepen. Minimale terugkoop gegarandeerd." },
-        { "label": "NFT", "desc": "Door spelers gemaakt verzamelobject. Geen bonussen in het spel. Geen terugkoopgarantie. Verhandelbaar op de marktplaats." },
-        { "label": "Commissie", "desc": "20% platformkosten op alle verkopen. Verkoper ontvangt 80%. Kunstenaarsroyalty 4% op doorverkopen." },
-        { "label": "Terugkoopgroei", "desc": "+5% van elke doorverkoopprijs wordt toegevoegd aan de minimale terugkoopwaarde van het bezit." },
-        { "label": "Bewaarwallet", "desc": "HyperTek maakt automatisch een cryptowallet voor je aan bij aanmelding." }
+        {
+          "label": "NFA",
+          "desc": "Exclusief Hypertek-bezit. Hoogste bonussen in het spel. Gegarandeerde minimale terugkoopwaarde die groeit met elke verkoop."
+        },
+        {
+          "label": "NFC",
+          "desc": "Gemaakt door Hypertek of gelicentieerde spelers. Bonussen in het spel inbegrepen. Minimale terugkoop gegarandeerd."
+        },
+        {
+          "label": "NFT",
+          "desc": "Door spelers gemaakt verzamelobject. Geen bonussen in het spel. Geen terugkoopgarantie. Verhandelbaar op de marktplaats."
+        },
+        {
+          "label": "Commissie",
+          "desc": "20% platformkosten op alle verkopen. Verkoper ontvangt 80%. Kunstenaarsroyalty 4% op doorverkopen."
+        },
+        {
+          "label": "Terugkoopgroei",
+          "desc": "+5% van elke doorverkoopprijs wordt toegevoegd aan de minimale terugkoopwaarde van het bezit."
+        },
+        {
+          "label": "Bewaarwallet",
+          "desc": "HyperTek maakt automatisch een cryptowallet voor je aan bij aanmelding."
+        }
       ]
     },
     "overview": {
-      "heading": "Overzicht", "subtitle": "Welkom bij de HyperTek Marktplaats. Selecteer een functie om meer te leren.",
+      "heading": "Overzicht",
+      "subtitle": "Welkom bij de HyperTek Marktplaats. Selecteer een functie om meer te leren.",
       "features": [
-        { "label": "NFAs / NFCs / NFTs", "tagline": "Nieuw in Web3-bezittingen? Begin hier", "details": ["NFAs zijn door Hypertek uitgegeven items met een gegarandeerde terugkoopprijs.", "NFCs zijn gelicentieerde spelersitems met bonussen in het spel.", "NFTs zijn door gebruikers gemaakte verzamelobjecten."], "cta": "Leer de Basis" },
-        { "label": "De Marktplaats", "tagline": "Koop en verkoop spelassets direct", "details": ["Blader door een uitgebreide catalogus van NFAs, NFCs en NFTs.", "Filter op categorie, zeldzaamheid of prijsbereik.", "Aanbiedingen worden on-chain vervuld voor directe eigendomsoverdrachten."], "cta": "Verken de Marktplaats" },
-        { "label": "Veilingen", "tagline": "Strijdt om exclusieve beperkte editie items", "details": ["Bied op zeldzame bezittingen die alleen beschikbaar zijn via tijdelijke veilingen.", "Een live aftelling toont precies hoeveel tijd er nog over is.", "Overtrof anderen om legendarische items te bemachtigen."], "cta": "Bekijk Veilingen" },
-        { "label": "Ruilhandel", "tagline": "Ruil bezittingen peer-to-peer, geen tussenpersoon", "details": ["Stel directe ruilhandel voor met andere spelers of accepteer ze — volledig on-chain.", "Stel zelf de voorwaarden in.", "Blader door open ruilaanbiedingen of post je eigen."], "cta": "Verken Ruilhandel" },
-        { "label": "Quests", "tagline": "Voltooi missies, verdien exclusieve beloningen", "details": ["Neem quests aan om exclusieve beloningen te verdienen.", "Elke quest heeft unieke doelstellingen.", "Bouw je collectie strategisch op."], "cta": "Verken Quests" },
-        { "label": "Te Huur", "tagline": "Leen bezittingen of verdien met de jouwe", "details": ["Huur krachtige specialisten of uitrusting voor één missie.", "Noteer je eigen inactieve bezittingen voor verhuur.", "Flexibele duur — per uur, per dag of per missie."], "cta": "Bekijk Te Huur" },
-        { "label": "Premies", "tagline": "Jaag op doelen, claim beloningen", "details": ["Accepteer premies geplaatst door andere spelers of het systeem.", "Klim de premie-ranglijst op.", "Post je eigen premies om bekwame spelers te werven."], "cta": "Bekijk Premies" }
+        {
+          "label": "NFAs / NFCs / NFTs",
+          "tagline": "Nieuw in Web3-bezittingen? Begin hier",
+          "details": [
+            "NFAs zijn door Hypertek uitgegeven items met een gegarandeerde terugkoopprijs.",
+            "NFCs zijn gelicentieerde spelersitems met bonussen in het spel.",
+            "NFTs zijn door gebruikers gemaakte verzamelobjecten."
+          ],
+          "cta": "Leer de Basis"
+        },
+        {
+          "label": "De Marktplaats",
+          "tagline": "Koop en verkoop spelassets direct",
+          "details": [
+            "Blader door een uitgebreide catalogus van NFAs, NFCs en NFTs.",
+            "Filter op categorie, zeldzaamheid of prijsbereik.",
+            "Aanbiedingen worden on-chain vervuld voor directe eigendomsoverdrachten."
+          ],
+          "cta": "Verken de Marktplaats"
+        },
+        {
+          "label": "Veilingen",
+          "tagline": "Strijdt om exclusieve beperkte editie items",
+          "details": [
+            "Bied op zeldzame bezittingen die alleen beschikbaar zijn via tijdelijke veilingen.",
+            "Een live aftelling toont precies hoeveel tijd er nog over is.",
+            "Overtrof anderen om legendarische items te bemachtigen."
+          ],
+          "cta": "Bekijk Veilingen"
+        },
+        {
+          "label": "Ruilhandel",
+          "tagline": "Ruil bezittingen peer-to-peer, geen tussenpersoon",
+          "details": [
+            "Stel directe ruilhandel voor met andere spelers of accepteer ze — volledig on-chain.",
+            "Stel zelf de voorwaarden in.",
+            "Blader door open ruilaanbiedingen of post je eigen."
+          ],
+          "cta": "Verken Ruilhandel"
+        },
+        {
+          "label": "Quests",
+          "tagline": "Voltooi missies, verdien exclusieve beloningen",
+          "details": [
+            "Neem quests aan om exclusieve beloningen te verdienen.",
+            "Elke quest heeft unieke doelstellingen.",
+            "Bouw je collectie strategisch op."
+          ],
+          "cta": "Verken Quests"
+        },
+        {
+          "label": "Te Huur",
+          "tagline": "Leen bezittingen of verdien met de jouwe",
+          "details": [
+            "Huur krachtige specialisten of uitrusting voor één missie.",
+            "Noteer je eigen inactieve bezittingen voor verhuur.",
+            "Flexibele duur — per uur, per dag of per missie."
+          ],
+          "cta": "Bekijk Te Huur"
+        },
+        {
+          "label": "Premies",
+          "tagline": "Jaag op doelen, claim beloningen",
+          "details": [
+            "Accepteer premies geplaatst door andere spelers of het systeem.",
+            "Klim de premie-ranglijst op.",
+            "Post je eigen premies om bekwame spelers te werven."
+          ],
+          "cta": "Bekijk Premies"
+        }
       ]
     },
     "general": {
-      "heading": "Algemeen", "subtitle": "Blader door NFAs, NFCs en NFTs beschikbaar voor directe aankoop.",
+      "heading": "Algemeen",
+      "subtitle": "Blader door NFAs, NFCs en NFTs beschikbaar voor directe aankoop.",
       "filterAll": "Alles",
       "samplePreviewTitle": "Voorbeeld Marktplaats Preview",
       "samplePreviewDesc": "De onderstaande items zijn voorbeeldpreviews die de typen digitale bezittingen tonen die beschikbaar zullen zijn.",
       "noItems": "Nog geen items beschikbaar. Kom binnenkort terug.",
-      "categories": { "skins": "Skins", "militaryBadges": "Militaire Insignes", "specialists": "Specialisten", "weapons": "Wapens", "bodyArmour": "Lichaamspantser", "spaceships": "Ruimteschepen", "racingVehicles": "Voertuigen", "artwork": "Kunstwerk", "landAndBases": "Land & Bases", "general": "Algemeen" }
+      "categories": {
+        "skins": "Skins",
+        "militaryBadges": "Militaire Insignes",
+        "specialists": "Specialisten",
+        "weapons": "Wapens",
+        "bodyArmour": "Lichaamspantser",
+        "spaceships": "Ruimteschepen",
+        "racingVehicles": "Voertuigen",
+        "artwork": "Kunstwerk",
+        "landAndBases": "Land & Bases",
+        "general": "Algemeen"
+      },
+      "search": "Zoeken...",
+      "filter": "Filter",
+      "showAll": "Alles tonen",
+      "filterSort": "Filteren en sorteren",
+      "sortBy": "Sorteren op",
+      "sort": {
+        "default": "Standaard",
+        "priceAsc": "Prijs: laag naar hoog",
+        "priceDesc": "Prijs: hoog naar laag",
+        "nameAsc": "Naam: A tot Z",
+        "nameDesc": "Naam: Z tot A"
+      },
+      "priceRange": "Prijsklasse (USDC)",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Toepassen",
+      "clearAll": "Wis alle filters",
+      "noResults": "Geen resultaten gevonden",
+      "dummyContent": "Dummy-inhoud",
+      "preview": "Voorbeeld",
+      "buyNow": "Nu kopen",
+      "viewDetails": "Details bekijken"
     },
-    "nfa101": { "sectionLabel": "Onderwijs", "heading": "NFAs / NFCs / NFTs 101", "subtitle": "Nieuw in NFTs en Web3? Verken onze artikelen.", "minRead": "min lezen", "filterAll": "Alles" },
+    "nfa101": {
+      "sectionLabel": "Onderwijs",
+      "heading": "NFAs / NFCs / NFTs 101",
+      "subtitle": "Nieuw in NFTs en Web3? Verken onze artikelen.",
+      "minRead": "min lezen",
+      "filterAll": "Alles"
+    },
     "auctions": {
-      "heading": "Veilingen", "listings": "aanbiedingen", "newAuction": "Nieuwe Veiling", "noAuctions": "Geen {{filter}} veilingen", "createFirst": "Maak de eerste veiling", "endingSoon": "EINDIGT BINNENKORT", "viewDetails": "Bekijk Details",
-      "rules": { "durations": "Duur: 1d · 3d · 7d", "minIncrement": "Min. verhoging: 5%", "freeToList": "Gratis noteren", "commission": "Commissie: 20% bij verkoop" },
-      "preview": { "title": "In-game Functiepreview", "desc": "Het veilingsysteem zal volledig actief zijn in het spel bij de lancering." },
-      "card": { "currentBid": "Huidig bod", "endsIn": "Eindigt over", "placeBid": "Bod Plaatsen", "buyNow": "Nu Kopen", "bids": "bod(den)", "ended": "BEËINDIGD" },
-      "detail": { "currentBid": "Huidig bod", "start": "Start", "endsIn": "Eindigt over", "description": "Beschrijving", "recentBids": "Recente Biedingen", "anonymous": "Anoniem", "placeBid": "Bod Plaatsen", "buyNow": "Nu Kopen", "buyNowLabel": "Nu Kopen", "bids": "bod(den)" },
-      "bidModal": { "title": "Bod Plaatsen", "currentBid": "Huidig bod", "minimumBid": "Minimumbod", "yourBid": "Jouw bod (USDC)", "minIncrement": "Min. verhoging 5% · Volgend minimum na jouw bod: {{next}} USDC", "reviewBid": "Bod Bekijken", "disclaimer": "Winnend bod is bindend · 20% platformcommissie", "confirmTitle": "Bod Bevestigen", "item": "Item", "yourBidLabel": "Jouw bod", "youPay": "Als je wint, betaal je", "outbidNotice": "Je wordt direct op de hoogte gesteld als iemand je bod overtreft.", "back": "Terug", "confirm": "Bevestigen — {{amount}} USDC", "placing": "Plaatsen…", "successTitle": "Bod Geplaatst!", "highestBidder": "Jij bent de hoogste bieder", "outbidWarning": "Je ontvangt een melding als je wordt overboden.", "done": "Klaar", "endsIn": "Eindigt over" },
-      "instantBuyModal": { "title": "Nu Kopen — Direct", "buyNowPrice": "Nu kopen prijs", "currentBids": "Huidige biedingen", "notice": "Nu kopen sluit de veiling direct.", "cancel": "Annuleren", "processing": "Verwerken…", "successTitle": "Item Veiliggesteld!", "auctionClosed": "Veiling gesloten · Overdracht gestart", "item": "Item", "paid": "Betaald", "status": "Status", "transferred": "Overgedragen naar wallet", "walletNote": "Item verschijnt in je tabblad Mijn Collecties.", "viewCollect": "Bekijk Mijn Collecties" },
-      "createModal": { "title": "Veiling Aanmaken", "selectItem": "Item Selecteren", "connectWallet": "Verbind wallet om je items te bekijken", "loadingItems": "Laden…", "noItems": "Geen eigendom gevonden", "pricingDuration": "Prijsstelling & Duur", "startPrice": "Startprijs (USDC) *", "reservePrice": "Reserveprijs (USDC)", "instantBuyPrice": "Direct Koopprijs (USDC)", "optional": "Optioneel", "leaveBlank": "Leeg laten om uit te schakelen", "duration": "Duur", "dur1Day": "1 Dag", "dur3Days": "3 Dagen", "dur7Days": "7 Dagen", "freeToList": "Gratis noteren · 20% commissie bij verkoop", "creating": "Aanmaken…", "submit": "Veiling Aanmaken" },
-      "pagination": { "prev": "Vorig", "next": "Volgende", "page": "Pagina {{page}} van {{pages}}" }
+      "heading": "Veilingen",
+      "listings": "aanbiedingen",
+      "newAuction": "Nieuwe Veiling",
+      "noAuctions": "Geen {{filter}} veilingen",
+      "createFirst": "Maak de eerste veiling",
+      "endingSoon": "EINDIGT BINNENKORT",
+      "viewDetails": "Bekijk Details",
+      "rules": {
+        "durations": "Duur: 1d · 3d · 7d",
+        "minIncrement": "Min. verhoging: 5%",
+        "freeToList": "Gratis noteren",
+        "commission": "Commissie: 20% bij verkoop"
+      },
+      "preview": {
+        "title": "In-game Functiepreview",
+        "desc": "Het veilingsysteem zal volledig actief zijn in het spel bij de lancering."
+      },
+      "card": {
+        "currentBid": "Huidig bod",
+        "endsIn": "Eindigt over",
+        "placeBid": "Bod Plaatsen",
+        "buyNow": "Nu Kopen",
+        "bids": "bod(den)",
+        "ended": "BEËINDIGD"
+      },
+      "detail": {
+        "currentBid": "Huidig bod",
+        "start": "Start",
+        "endsIn": "Eindigt over",
+        "description": "Beschrijving",
+        "recentBids": "Recente Biedingen",
+        "anonymous": "Anoniem",
+        "placeBid": "Bod Plaatsen",
+        "buyNow": "Nu Kopen",
+        "buyNowLabel": "Nu Kopen",
+        "bids": "bod(den)"
+      },
+      "bidModal": {
+        "title": "Bod Plaatsen",
+        "currentBid": "Huidig bod",
+        "minimumBid": "Minimumbod",
+        "yourBid": "Jouw bod (USDC)",
+        "minIncrement": "Min. verhoging 5% · Volgend minimum na jouw bod: {{next}} USDC",
+        "reviewBid": "Bod Bekijken",
+        "disclaimer": "Winnend bod is bindend · 20% platformcommissie",
+        "confirmTitle": "Bod Bevestigen",
+        "item": "Item",
+        "yourBidLabel": "Jouw bod",
+        "youPay": "Als je wint, betaal je",
+        "outbidNotice": "Je wordt direct op de hoogte gesteld als iemand je bod overtreft.",
+        "back": "Terug",
+        "confirm": "Bevestigen — {{amount}} USDC",
+        "placing": "Plaatsen…",
+        "successTitle": "Bod Geplaatst!",
+        "highestBidder": "Jij bent de hoogste bieder",
+        "outbidWarning": "Je ontvangt een melding als je wordt overboden.",
+        "done": "Klaar",
+        "endsIn": "Eindigt over"
+      },
+      "instantBuyModal": {
+        "title": "Nu Kopen — Direct",
+        "buyNowPrice": "Nu kopen prijs",
+        "currentBids": "Huidige biedingen",
+        "notice": "Nu kopen sluit de veiling direct.",
+        "cancel": "Annuleren",
+        "processing": "Verwerken…",
+        "successTitle": "Item Veiliggesteld!",
+        "auctionClosed": "Veiling gesloten · Overdracht gestart",
+        "item": "Item",
+        "paid": "Betaald",
+        "status": "Status",
+        "transferred": "Overgedragen naar wallet",
+        "walletNote": "Item verschijnt in je tabblad Mijn Collecties.",
+        "viewCollect": "Bekijk Mijn Collecties"
+      },
+      "createModal": {
+        "title": "Veiling Aanmaken",
+        "selectItem": "Item Selecteren",
+        "connectWallet": "Verbind wallet om je items te bekijken",
+        "loadingItems": "Laden…",
+        "noItems": "Geen eigendom gevonden",
+        "pricingDuration": "Prijsstelling & Duur",
+        "startPrice": "Startprijs (USDC) *",
+        "reservePrice": "Reserveprijs (USDC)",
+        "instantBuyPrice": "Direct Koopprijs (USDC)",
+        "optional": "Optioneel",
+        "leaveBlank": "Leeg laten om uit te schakelen",
+        "duration": "Duur",
+        "dur1Day": "1 Dag",
+        "dur3Days": "3 Dagen",
+        "dur7Days": "7 Dagen",
+        "freeToList": "Gratis noteren · 20% commissie bij verkoop",
+        "creating": "Aanmaken…",
+        "submit": "Veiling Aanmaken"
+      },
+      "pagination": {
+        "prev": "Vorig",
+        "next": "Volgende",
+        "page": "Pagina {{page}} van {{pages}}"
+      }
     },
     "trades": {
-      "heading": "Ruilhandel", "listings": "aanbiedingen", "postTrade": "Handel Plaatsen", "noTrades": "Geen {{filter}} ruilhandels", "viewDetails": "Bekijk Details", "trade": "handel", "yours": "jouwe", "offering": "Aanbieden", "wanting": "Willen", "makeOffer": "Bod doen", "by": "door", "acceptTrade": "Handel Accepteren", "cancelTrade": "Handel Annuleren",
-      "rules": { "expiry": "Aanbiedingen verlopen na 30 dagen", "fee": "Platformkosten gelden voor beide partijen", "noNFA": "NFAs kunnen niet worden geruild — alleen verkopen" },
-      "acceptModal": { "title": "Ruilvoorstel", "postedBy": "Geplaatst door", "exchangeDetails": "Ruildetails", "theyOffer": "Zij bieden", "theyWant": "Zij willen", "feeNotice": "Platformkosten gelden voor beide partijen", "acceptBtn": "Deze Handel Accepteren", "confirmTitle": "Handel Bevestigen", "trade": "Handel", "postedByLabel": "Geplaatst door", "terms": "Door te accepteren ga je akkoord met de ruilvoorwaarden.", "back": "Terug", "sending": "Verzenden…", "confirm": "Bevestigen", "successTitle": "Voorstel Verzonden!", "notified": "is op de hoogte gesteld", "successNote": "De handelplaatser beoordeelt jouw voorstel.", "expiry": "⏱ Voorstellen verlopen na 30 dagen als ze niet zijn bevestigd.", "close": "Sluiten" },
-      "createModal": { "title": "Handel Plaatsen", "yourItem": "Jouw Item", "itemNamePlaceholder": "Itemnaam *", "loadingItems": "Jouw items laden…", "connectWallet": "Verbind wallet om te selecteren", "pickFromItems": "Of kies uit jouw items:", "imageOptional": "Afbeelding (optioneel)", "whatYouWant": "Wat Jij Wilt", "openOffer": "Open aanbod — laat anderen voorstellen", "anyCategory": "Elke categorie", "notesLabel": "Notities (optioneel)", "notesPlaceholder": "Ruilvoorwaarden, conditie, enz.", "disclaimer": "Beide partijen betalen platformkosten · Verloopt na 30 dagen · NFAs kunnen niet worden geruild", "posting": "Plaatsen…", "submit": "Handel Plaatsen" },
-      "pagination": { "prev": "Vorig", "next": "Volgende", "page": "Pagina {{page}} van {{pages}}" }
+      "heading": "Ruilhandel",
+      "listings": "aanbiedingen",
+      "postTrade": "Handel Plaatsen",
+      "noTrades": "Geen {{filter}} ruilhandels",
+      "viewDetails": "Bekijk Details",
+      "trade": "handel",
+      "yours": "jouwe",
+      "offering": "Aanbieden",
+      "wanting": "Willen",
+      "makeOffer": "Bod doen",
+      "by": "door",
+      "acceptTrade": "Handel Accepteren",
+      "cancelTrade": "Handel Annuleren",
+      "rules": {
+        "expiry": "Aanbiedingen verlopen na 30 dagen",
+        "fee": "Platformkosten gelden voor beide partijen",
+        "noNFA": "NFAs kunnen niet worden geruild — alleen verkopen"
+      },
+      "acceptModal": {
+        "title": "Ruilvoorstel",
+        "postedBy": "Geplaatst door",
+        "exchangeDetails": "Ruildetails",
+        "theyOffer": "Zij bieden",
+        "theyWant": "Zij willen",
+        "feeNotice": "Platformkosten gelden voor beide partijen",
+        "acceptBtn": "Deze Handel Accepteren",
+        "confirmTitle": "Handel Bevestigen",
+        "trade": "Handel",
+        "postedByLabel": "Geplaatst door",
+        "terms": "Door te accepteren ga je akkoord met de ruilvoorwaarden.",
+        "back": "Terug",
+        "sending": "Verzenden…",
+        "confirm": "Bevestigen",
+        "successTitle": "Voorstel Verzonden!",
+        "notified": "is op de hoogte gesteld",
+        "successNote": "De handelplaatser beoordeelt jouw voorstel.",
+        "expiry": "⏱ Voorstellen verlopen na 30 dagen als ze niet zijn bevestigd.",
+        "close": "Sluiten"
+      },
+      "createModal": {
+        "title": "Handel Plaatsen",
+        "yourItem": "Jouw Item",
+        "itemNamePlaceholder": "Itemnaam *",
+        "loadingItems": "Jouw items laden…",
+        "connectWallet": "Verbind wallet om te selecteren",
+        "pickFromItems": "Of kies uit jouw items:",
+        "imageOptional": "Afbeelding (optioneel)",
+        "whatYouWant": "Wat Jij Wilt",
+        "openOffer": "Open aanbod — laat anderen voorstellen",
+        "anyCategory": "Elke categorie",
+        "notesLabel": "Notities (optioneel)",
+        "notesPlaceholder": "Ruilvoorwaarden, conditie, enz.",
+        "disclaimer": "Beide partijen betalen platformkosten · Verloopt na 30 dagen · NFAs kunnen niet worden geruild",
+        "posting": "Plaatsen…",
+        "submit": "Handel Plaatsen"
+      },
+      "pagination": {
+        "prev": "Vorig",
+        "next": "Volgende",
+        "page": "Pagina {{page}} van {{pages}}"
+      }
     },
     "quests": {
-      "heading": "Questbord", "quests": "quests", "noQuests": "Geen {{filter}} quests", "inGameFeature": "In-game Functie", "inGameDesc": "Quests worden automatisch gegenereerd wanneer verkopers kiezen voor een verlaagde commissie. Spelers kunnen tot 5 quests per dag voltooien.", "earnFromQuests": "Wil je verdienen met quests? Speel het spel →", "moneyQuests": "Geldquests (pool 11%)", "resourceQuests": "Resourcequests (pool 20%)", "footerNote1": "# Quests met gecombineerde ladingen worden uitbetaald met de afzonderlijke tabelbedragen.", "footerNote2": "# Planeetgegevens worden gesynchroniseerd wanneer de spellen live gaan.", "inGame": "In-game", "open": "Open",
-      "table": { "questingNo": "Quest Nr.", "pickupPlanet": "Ophaalplaneet", "dropOffPlanet": "Afleverplaneet", "itemGoods": "Item / Goederen", "commSplit": "Commissieverdeling", "questingTime": "Questtijd", "assignedTo": "Toegewezen Aan" },
-      "comingSoon": { "title": "Binnenkort", "desc": "De in-game questfunctie is momenteel in ontwikkeling.", "gotIt": "Begrepen" },
-      "pagination": { "prev": "Vorig", "next": "Volgende", "page": "Pagina {{page}} van {{pages}}" }
+      "heading": "Questbord",
+      "quests": "quests",
+      "noQuests": "Geen {{filter}} quests",
+      "inGameFeature": "In-game Functie",
+      "inGameDesc": "Quests worden automatisch gegenereerd wanneer verkopers kiezen voor een verlaagde commissie. Spelers kunnen tot 5 quests per dag voltooien.",
+      "earnFromQuests": "Wil je verdienen met quests? Speel het spel →",
+      "moneyQuests": "Geldquests (pool 11%)",
+      "resourceQuests": "Resourcequests (pool 20%)",
+      "footerNote1": "# Quests met gecombineerde ladingen worden uitbetaald met de afzonderlijke tabelbedragen.",
+      "footerNote2": "# Planeetgegevens worden gesynchroniseerd wanneer de spellen live gaan.",
+      "inGame": "In-game",
+      "open": "Open",
+      "table": {
+        "questingNo": "Quest Nr.",
+        "pickupPlanet": "Ophaalplaneet",
+        "dropOffPlanet": "Afleverplaneet",
+        "itemGoods": "Item / Goederen",
+        "commSplit": "Commissieverdeling",
+        "questingTime": "Questtijd",
+        "assignedTo": "Toegewezen Aan"
+      },
+      "comingSoon": {
+        "title": "Binnenkort",
+        "desc": "De in-game questfunctie is momenteel in ontwikkeling.",
+        "gotIt": "Begrepen"
+      },
+      "pagination": {
+        "prev": "Vorig",
+        "next": "Volgende",
+        "page": "Pagina {{page}} van {{pages}}"
+      },
+      "buyer": "Koper",
+      "player": "Speler",
+      "platform": "Platform",
+      "status": {
+        "open": "Open",
+        "accepted": "Geaccepteerd",
+        "completed": "Voltooid",
+        "cancelled": "Geannuleerd"
+      },
+      "type": {
+        "money": "Geld",
+        "resources": "Bronnen"
+      }
     },
     "hire": {
-      "heading": "Te Huur", "listings": "aanbiedingen", "listBtn": "Noteren", "forHireLabel": "Te Huur", "wantingToHire": "Wil Huren", "noListings": "Geen {{filter}} aanbiedingen", "lockedTitle": "HyperTek Gaming-inhoud alleen voor weergavedoeleinden.", "lockedDesc": "Dit gedeelte is vergrendeld totdat spellen zijn afgerond.", "forHireBadge": "TE HUUR", "wantedBadge": "GEZOCHT", "price": "Prijs", "maxDuration": "Max. Duur", "hireBtn": "Huren", "fulfillBtn": "Verzoek Vervullen",
-      "rules": { "durations": "8u · 1d · 3d · 1w · 1m", "cooldown": "Cooldown: 2× huurduur", "commission": "Commissie: 20%", "payment": "Betalen in Hyper Bucks of Materialen" },
-      "preview": { "title": "In-game Functiepreview", "desc": "Het Te Huur-systeem zal volledig actief zijn in het spel bij de lancering." },
-      "hireModal": { "hireTitle": "Specialist Huren", "fulfillTitle": "Huurverzoek Vervullen", "forHireBadge": "TE HUUR", "wantedBadge": "GEZOCHT", "price": "Prijs", "duration": "Duur", "howHire": "Hoe huren werkt", "howFulfill": "Hoe een verzoek vervullen werkt", "proceedHire": "Doorgaan met Huren", "offerFulfill": "Aanbieden te Vervullen", "commission": "20% platformcommissie · Cooldown geldt na terugkeer", "confirmHire": "Huur Bevestigen", "confirmOffer": "Aanbod Bevestigen", "specialist": "Specialist", "payment": "Betaling", "yourOffer": "Jouw aanbod", "durationLabel": "Duur", "commLabel": "Commissie", "back": "Terug", "processing": "Verwerken…", "sendOffer": "Aanbod Verzenden", "deployedTitle": "Ingezet!", "offerSentTitle": "Aanbod Verzonden!", "availableFor": "Beschikbaar voor", "paid": "Betaald", "returnNote": "Terugkeren voor het einde van de periode om automatische straf te vermijden. Cooldown van {{hours}}u geldt na terugkeer.", "close": "Sluiten" },
-      "createModal": { "listTitle": "Te Huur Noteren", "postTitle": "Wil Huren Plaatsen", "forHireBtn": "Te Huur", "wantingBtn": "Wil Huren", "itemNameHire": "Specialist / itemnaam *", "itemNameWant": "Wat je wil huren *", "descPlaceholder": "Beschrijving", "categoryPlaceholder": "Categorie (optioneel)", "paymentType": "Betalingstype", "hyperBucks": "Hyper Bucks", "materials": "Materialen", "amountLabel": "Bedrag (Hyper Bucks)", "afterCommission": "Je ontvangt {{amount}} HB na 20% commissie", "maxDuration": "Max. Duur", "disclaimer": "20% commissie · Cooldown = 2× huurduur na terugkeer", "listing": "Noteren…", "submit": "Aanbieding Aanmaken" },
-      "pagination": { "prev": "Vorig", "next": "Volgende", "page": "Pagina {{page}} van {{pages}}" }
+      "heading": "Te Huur",
+      "listings": "aanbiedingen",
+      "listBtn": "Noteren",
+      "forHireLabel": "Te Huur",
+      "wantingToHire": "Wil Huren",
+      "noListings": "Geen {{filter}} aanbiedingen",
+      "lockedTitle": "HyperTek Gaming-inhoud alleen voor weergavedoeleinden.",
+      "lockedDesc": "Dit gedeelte is vergrendeld totdat spellen zijn afgerond.",
+      "forHireBadge": "TE HUUR",
+      "wantedBadge": "GEZOCHT",
+      "price": "Prijs",
+      "maxDuration": "Max. Duur",
+      "hireBtn": "Huren",
+      "fulfillBtn": "Verzoek Vervullen",
+      "rules": {
+        "durations": "8u · 1d · 3d · 1w · 1m",
+        "cooldown": "Cooldown: 2× huurduur",
+        "commission": "Commissie: 20%",
+        "payment": "Betalen in Hyper Bucks of Materialen"
+      },
+      "preview": {
+        "title": "In-game Functiepreview",
+        "desc": "Het Te Huur-systeem zal volledig actief zijn in het spel bij de lancering."
+      },
+      "hireModal": {
+        "hireTitle": "Specialist Huren",
+        "fulfillTitle": "Huurverzoek Vervullen",
+        "forHireBadge": "TE HUUR",
+        "wantedBadge": "GEZOCHT",
+        "price": "Prijs",
+        "duration": "Duur",
+        "howHire": "Hoe huren werkt",
+        "howFulfill": "Hoe een verzoek vervullen werkt",
+        "proceedHire": "Doorgaan met Huren",
+        "offerFulfill": "Aanbieden te Vervullen",
+        "commission": "20% platformcommissie · Cooldown geldt na terugkeer",
+        "confirmHire": "Huur Bevestigen",
+        "confirmOffer": "Aanbod Bevestigen",
+        "specialist": "Specialist",
+        "payment": "Betaling",
+        "yourOffer": "Jouw aanbod",
+        "durationLabel": "Duur",
+        "commLabel": "Commissie",
+        "back": "Terug",
+        "processing": "Verwerken…",
+        "sendOffer": "Aanbod Verzenden",
+        "deployedTitle": "Ingezet!",
+        "offerSentTitle": "Aanbod Verzonden!",
+        "availableFor": "Beschikbaar voor",
+        "paid": "Betaald",
+        "returnNote": "Terugkeren voor het einde van de periode om automatische straf te vermijden. Cooldown van {{hours}}u geldt na terugkeer.",
+        "close": "Sluiten"
+      },
+      "createModal": {
+        "listTitle": "Te Huur Noteren",
+        "postTitle": "Wil Huren Plaatsen",
+        "forHireBtn": "Te Huur",
+        "wantingBtn": "Wil Huren",
+        "itemNameHire": "Specialist / itemnaam *",
+        "itemNameWant": "Wat je wil huren *",
+        "descPlaceholder": "Beschrijving",
+        "categoryPlaceholder": "Categorie (optioneel)",
+        "paymentType": "Betalingstype",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materialen",
+        "amountLabel": "Bedrag (Hyper Bucks)",
+        "afterCommission": "Je ontvangt {{amount}} HB na 20% commissie",
+        "maxDuration": "Max. Duur",
+        "disclaimer": "20% commissie · Cooldown = 2× huurduur na terugkeer",
+        "listing": "Noteren…",
+        "submit": "Aanbieding Aanmaken"
+      },
+      "pagination": {
+        "prev": "Vorig",
+        "next": "Volgende",
+        "page": "Pagina {{page}} van {{pages}}"
+      }
     },
     "bounty": {
-      "heading": "Premiebord", "contracts": "contract", "contractsPlural": "contracten", "noContracts": "Geen {{filter}} contracten", "noContractsNote": "Premies worden geplaatst door spelers en het spelsysteem", "expiresIn": "Verloopt over {{days}}d",
-      "inGameNotice": { "title": "In-game Functie — Alleen Bekijken", "desc": "Premies worden aangemaakt door spelers en het spelsysteem. Het accepteren en voltooien van premies vindt alleen in het spel plaats." },
-      "rules": { "battle": "Gevecht wordt automatisch in het spel opgelost", "commission": "20% platformcommissie op beloning", "expiry": "Contracten verlopen na 30 dagen" },
-      "table": { "bountyNo": "Premie Nr.", "target": "Doelwit", "reward": "Beloning", "postedBy": "Geplaatst Door", "claimedBy": "Geclaimd Door", "status": "Status", "netHB": "{{amount}} HB netto" },
-      "pagination": { "prev": "Vorig", "next": "Volgende", "page": "Pagina {{page}} van {{pages}}" }
+      "heading": "Premiebord",
+      "contracts": "contract",
+      "contractsPlural": "contracten",
+      "noContracts": "Geen {{filter}} contracten",
+      "noContractsNote": "Premies worden geplaatst door spelers en het spelsysteem",
+      "expiresIn": "Verloopt over {{days}}d",
+      "inGameNotice": {
+        "title": "In-game Functie — Alleen Bekijken",
+        "desc": "Premies worden aangemaakt door spelers en het spelsysteem. Het accepteren en voltooien van premies vindt alleen in het spel plaats."
+      },
+      "rules": {
+        "battle": "Gevecht wordt automatisch in het spel opgelost",
+        "commission": "20% platformcommissie op beloning",
+        "expiry": "Contracten verlopen na 30 dagen"
+      },
+      "table": {
+        "bountyNo": "Premie Nr.",
+        "target": "Doelwit",
+        "reward": "Beloning",
+        "postedBy": "Geplaatst Door",
+        "claimedBy": "Geclaimd Door",
+        "status": "Status",
+        "netHB": "{{amount}} HB netto"
+      },
+      "pagination": {
+        "prev": "Vorig",
+        "next": "Volgende",
+        "page": "Pagina {{page}} van {{pages}}"
+      }
     },
-    "common": { "prev": "Vorig", "next": "Volgende", "pageOf": "Pagina {{page}} van {{pages}}", "back": "Terug", "close": "Sluiten", "cancel": "Annuleren", "loading": "Laden…", "connectWallet": "Verbind eerst je wallet", "loginFirst": "Log eerst in" }
+    "common": {
+      "prev": "Vorig",
+      "next": "Volgende",
+      "pageOf": "Pagina {{page}} van {{pages}}",
+      "back": "Terug",
+      "close": "Sluiten",
+      "cancel": "Annuleren",
+      "loading": "Laden…",
+      "connectWallet": "Verbind eerst je wallet",
+      "loginFirst": "Log eerst in"
+    }
+  },
+  "musicPlayer": {
+    "title": "Muziekspeler",
+    "playing": "Afspelen",
+    "sound": "Geluid",
+    "ambientDesc": "Ingebouwde ambient soundtrack voor de markt. Speelt op lus.",
+    "playAmbient": "Ambient afspelen",
+    "pauseAmbient": "Ambient pauzeren",
+    "spotifyDesc": "Plak een Spotify-track, afspeellijst of albumlink.",
+    "loadSpotify": "Spotify laden",
+    "soundcloudDesc": "Plak een SoundCloud-track of afspeellijstlink.",
+    "loadSoundCloud": "SoundCloud laden",
+    "changeLink": "Link wijzigen"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Betaal met kaart",
+      "amount": "Hoeveelheid:",
+      "cancel": "Annuleren",
+      "processing": "Verwerken...",
+      "pay": "Betalen"
+    },
+    "nav": {
+      "backToMarketplace": "Terug naar Marktplaats",
+      "backToCollections": "Terug naar Collecties",
+      "offers": "Aanbiedingen",
+      "marketplace": "Marktplaats",
+      "auction": "Veiling",
+      "trade": "Handel",
+      "detail": "{{type}} Details",
+      "buy": "Koop {{type}}"
+    },
+    "marketplace": {
+      "listed": "Vermeld",
+      "youOwn": "Jij bezit dit",
+      "notMinted": "Nog niet geslagen",
+      "ownedBy": "Eigendom van",
+      "platform": "Platform",
+      "noDesc": "Er is geen beschrijving gegeven voor dit artikel.",
+      "price": "Prijs",
+      "minBuyback": "Minimale terugkoopgarantie",
+      "reservePrice": "Reserveprijs",
+      "buybackNote": "Dit actief kan niet onder de minimale terugkoopwaarde worden verkocht.",
+      "networkNote": "USDC op basis · Basis-ETH vereist voor gas (alleen portemonnee-betalingen)",
+      "buyWithCard": "Koop met kaart",
+      "makeOffer": "Doe een bod",
+      "processing": "Bezig met verwerken...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "Koop nu",
+      "listNow": "Maak nu een lijst",
+      "yourListed": "Uw {{type}} (vermeld)",
+      "notAvailable": "Niet beschikbaar"
+    },
+    "fundModal": {
+      "title": "Onvoldoende USDC",
+      "youNeed": "Je hebt nodig",
+      "butHave": "maar uw portemonnee heeft dat alleen",
+      "desc2": "Stort direct geld in uw portemonnee met een creditcard of betaalkaart via Transak en kom vervolgens terug om de aankoop te voltooien.",
+      "fundBtn": "Fondsportemonnee met kaart (Transak)",
+      "cancel": "Annuleren"
+    },
+    "gasModal": {
+      "title": "ETH vereist voor gas",
+      "mainnetNote": "Je bevindt je op Basis Mainnet. Koop een kleine hoeveelheid ETH (≈ $1-2) op Coinbase of bridge van Ethereum via bridge.base.org.",
+      "testnetNote": "U bevindt zich op Base Sepolia Testnet. Ontvang een gratis test-ETH uit een kraan.",
+      "faucetBtn": "Ontvang Testnet ETH (kraan)",
+      "bridgeBtn": "Overbrug ETH naar basis",
+      "close": "Dichtbij"
+    },
+    "confirmModal1": {
+      "title": "Bevestig actie",
+      "listPrice": "Catalogusprijs",
+      "platformFee": "Platformkosten (10%)",
+      "total": "Totaal",
+      "cancel": "Annuleren",
+      "continue": "Doorgaan"
+    },
+    "confirmModal2": {
+      "setPrice": "Stel uw aanbiedingsprijs in (USDC)",
+      "willList": "✓ Wordt vermeld op {{price}} USDC",
+      "price": "Prijs",
+      "cancel": "Annuleren",
+      "processing": "Verwerken...",
+      "confirm": "Bevestigen"
+    },
+    "offers": {
+      "noOffers": "Nog geen aanbiedingen",
+      "offer": "aanbod",
+      "offers": "aanbiedingen",
+      "noOffersTitle": "Er zijn momenteel geen aanbiedingen",
+      "noOffersDesc": "Wees de eerste die een bod uitbrengt",
+      "colPrice": "Prijs",
+      "colStatus": "Status",
+      "colFrom": "Van",
+      "colExpires": "Verloopt",
+      "colAction": "Actie",
+      "accept": "Accepteren",
+      "reject": "Afwijzen",
+      "cancel": "Annuleren",
+      "expired": "Verlopen",
+      "completePurchase": "Volledige aankoop"
+    },
+    "auction": {
+      "loading": "Veilinggegevens laden…",
+      "active": "Actieve veiling",
+      "startPrice": "Beginprijs",
+      "currentBid": "Huidig ​​bod",
+      "noBids": "Nog geen biedingen",
+      "instantBuy": "Direct kopen",
+      "reservePrice": "Reserveprijs",
+      "bidHistory": "Biedgeschiedenis",
+      "minBid": "Minimaal bod:",
+      "bidding": "Bieden…",
+      "placeBid": "Plaats een bod",
+      "connectWallet": "Verbind uw portemonnee om een ​​bod uit te brengen",
+      "ownerNote": "Uw item wordt op de veiling vermeld. Biedingen verschijnen hier zodra ze binnenkomen.",
+      "noAuction": "Geen actieve veiling voor dit item",
+      "ownerSetup": "Ga naar je collecties en klik op Lijst om een ​​veiling op te zetten.",
+      "notAvailable": "Dit item heeft momenteel geen open veiling."
+    },
+    "trade": {
+      "loading": "Handelsvermeldingen laden...",
+      "active": "actieve handelslijst",
+      "actives": "actieve handelslijsten",
+      "offering": "Aanbieden",
+      "wants": "Wil",
+      "openOffer": "Open aanbieding",
+      "by": "Door",
+      "proposeTrade": "Handel voorstellen →",
+      "noTrades": "Geen actieve handelsvermeldingen",
+      "ownerSetup": "Ga naar je collecties en klik op Lijst om een ​​ruil in te stellen.",
+      "notAvailable": "De eigenaar heeft geen openstaande handelsaanbiedingen voor dit item."
+    },
+    "successModal": {
+      "title": "Aankoop succesvol!",
+      "desc": "{{name}} is gekocht. Uw NFT wordt binnenkort naar uw portemonnee overgezet.",
+      "note": "De overdracht wordt automatisch verwerkt via ons systeem.",
+      "viewProfile": "Bekijk in Mijn profiel",
+      "continueShopping": "Ga door met winkelen"
+    },
+    "transferFailed": {
+      "title": "Betaling ontvangen - Overboeking in behandeling",
+      "desc": "Uw betaling is gelukt, maar er is een probleem opgetreden bij de NFT-overboeking. Uw geld is veilig: ons team zal de overboeking handmatig voltooien.",
+      "viewProfile": "Bekijk mijn profiel",
+      "dismiss": "Afwijzen"
+    },
+    "priceHistory": {
+      "title": "Prijsgeschiedenis",
+      "subtitle": "Historische verkoopprijzen hiervoor NFT",
+      "loading": "Bezig met laden...",
+      "noSales": "Nog geen verkopen geregistreerd",
+      "noSalesNote": "Prijsgeschiedenis verschijnt na de eerste verkoop"
+    }
+  },
+  "makeOffer": {
+    "back": "Terug",
+    "floor": "Vloer",
+    "title": "Maak een bod",
+    "yourOffer": "Uw bod (USDC)",
+    "expiresIn": "Aanbieding verloopt over",
+    "youPay": "U betaalt",
+    "submitting": "Indienen...",
+    "submit": "Aanbod indienen",
+    "terms": "Door dit aanbod in te dienen, gaat u akkoord met de voorwaarden van Hyper Tek Service.",
+    "expiry": {
+      "6h": "6 uur",
+      "12h": "12 uur",
+      "1d": "1 dag",
+      "3d": "3 dagen",
+      "7d": "7 dagen",
+      "1mo": "1 maand"
+    },
+    "success": {
+      "title": "Aanbieding ingediend!",
+      "desc": "Uw aanbod van {{price}} USDC voor {{name}} is verzonden naar de eigenaar.",
+      "expires": "Verloopt over {{duration}}",
+      "backToNft": "Terug naar NFT",
+      "goToMarketplace": "Ga naar Marktplaats"
+    },
+    "error": {
+      "loginRequired": "Log in om een bod uit te brengen",
+      "submitFailed": "Kan geen bod indienen. Probeer het opnieuw."
+    }
+  },
+  "paymentError": {
+    "message": "Uw verzoek is niet gelukt",
+    "goHome": "Ga naar huis"
   }
 }

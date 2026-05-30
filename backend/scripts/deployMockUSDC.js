@@ -10,15 +10,15 @@ async function main() {
   await usdc.waitForDeployment();
   const address = await usdc.getAddress();
 
-  console.log("✅ MockUSDC Deployed at:", address);
+  console.log("MockUSDC Deployed at:", address);
 
   // Mint to the user's wallet
   const TARGET = "0x985fe3400ff5b035440489e61561bab22a025b6f";
   console.log(`Minting 20,000 USDC to ${TARGET}...`);
   const tx = await usdc.mint(TARGET, ethers.parseUnits("20000", 6));
   await tx.wait();
-  
-  console.log("✅ Minted to target wallet!");
+
+  console.log("Minted to target wallet!");
 }
 
 main().catch(console.error);

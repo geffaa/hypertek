@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Hoş geldiniz",
+    "back": "Geri",
+    "racing": {
+      "label": "YARIŞ",
+      "heading": "Hiper Yarış",
+      "subtitle": "Galaksinin en yoğun uçan araç yarışı deneyimi,\nbecerinin karşılığını aldığı ve şampiyonların yaratıldığı yer.",
+      "intro": [
+        "Hyper Racing, oyuncuların galaksideki en tehlikeli devrelerden bazılarında tamamen özelleştirilebilir uçan yarış araçlarını inşa ettiği, yükselttiği ve pilotluk yaptığı, yabancı dünyalarda geçen yüksek oktanlı, rekabetçi bir yarış oyunudur. Yüzen kaya oluşumlarından volkanik lav tüplerine, çöl arazilerinden dağ geçitlerine kadar her yarış bir hazırlık, refleks ve strateji sınavıdır.",
+        "Ancak Hyper Racing bir oyundan daha fazlasıdır; gerçek ödüllerin söz konusu olduğu rekabetçi bir platformdur. En iyi performans gösterenler, gerçek nakit ödül havuzlu sıralamalı etkinliklere ve turnuvalara katılabilir. Ne kadar iyi yarışırsan o kadar çok kazanırsın. İster liderlik sıralamasında zafer peşinde olun ister bir yarış imparatorluğu kuruyor olun, Hyper Racing'de yaptığınız her şey sizi ileriye taşır.",
+        "Yarış araçlarınızı burundan kuyruğa kadar yükseltin. Pit ekibinizi işe alın ve seviyelerini yükseltin. Yarış felsefenize uygun bir pit yöneticisini işe alın. Ardından becerilerinizi pistin ötesine taşıyın, yarış garajınız kişisel uzay geminizin hangarı olarak ikiye katlanır ve geliştirdiğiniz her yetenek, Hyper Quest ve Overlord of the 7 Realms'daki uzay savaşlarına taşınır."
+      ],
+      "introClose": "Oyunun nasıl çalıştığını, neler kazanabileceğinizi ve yarış kariyerinizin tüm ilerleme evrenini nasıl beslediğini keşfetmek için okumaya devam edin.",
+      "calloutLine1": "Kazanmak için Yarışın. Yükseltmek için kazanın.",
+      "calloutLine2": "Hakim olmak için yükseltin.",
+      "howItWorksTitle": "Hiper Yarış Nasıl Çalışır?",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Aracınızı Seçin",
+          "body": "Her yarış garajınızda başlar. Her biri benzersiz yol tutuş özelliklerine ve yükseltme potansiyeline sahip, büyüyen uçan yarış araçları listesinden seçim yapın. Düz hatlarda olağanüstü hız için gövdeyi soyun veya en acımasız koşullarda hayatta kalabilmek için zırhla donatın. İticiler, stabilizatörler, kalkanlar, soğutma sistemleri, aerodinamik kanatçıklar, yükseltme ağacı derinlere uzanır ve her değişiklik, aracınızın pistteki davranışını değiştirir."
+        },
+        {
+          "num": "02",
+          "title": "Ekibinizi Oluşturun",
+          "body": "Yarış bir takım sporudur. Benzersiz bonuslar, daha hızlı yakıt ikmali, gerçek zamanlı teşhis, yarış ortasında acil gövde onarımları ve tur arası performans ayarlamaları sağlayan pit ekibi uzmanlarını işe alın. Her mürettebat üyesi deneyimle seviye atlar ve araç yükseltmelerinizin yanı sıra güçlü yetenekler de biriktirir. Daha sonra operasyonları koordine etmek, yarış stratejisini belirlemek ve tüm sezon boyunca takım çapında performans artışlarının kilidini açmak için bir pit yöneticisi kiralayın."
+        },
+        {
+          "num": "03",
+          "title": "Dünyalar Arasında Yarış",
+          "body": "Devreler, son derece farklı arazi ve atmosferik tehlikelere sahip yabancı gezegenleri kapsıyor. Avatar tarzı yüzen kaya oluşumları boyunca ilerleyin, volkanik lav tüplerini son derece hızlı bir şekilde geçirin, sonsuz çöl ovalarını aşın ve zorlu dağ sıralarını aşın. Asit yağmuru, radyoaktif atmosferler, değişen yer çekimi ve çalkantılı rüzgarlar; iki yarış aynı düzeni gerektirmez. Aracınızı her ortama uyacak şekilde ayarlamak, stratejinin beceriyle buluştuğu yerdir."
+        },
+        {
+          "num": "04",
+          "title": "Sıralamalarda Tırman",
+          "body": "Zafer, lider puanları kazandırır, uzak dünyalarda yeni devrelerin kilidini açar ve daha yüksek seviyeli yarışmaların kapısını açar. Ne kadar derine inerseniz, rakipler o kadar şiddetli olur ve riskler de o kadar büyük olur. Kendinizi her gezegende kanıtlayın ve küresel sıralamada yükselin."
+        }
+      ],
+      "rewardsTitle": "Büyük Kazanın; Önemli Olan Ödüller!",
+      "rewards": [
+        {
+          "title": "Oyun İçi Ödüller",
+          "body": "Bitirdiğiniz her yarış karşılığını verir. Kazanın ve ödüller çoğalsın. Yarış zaferleri premium araç bileşenlerinin, nadir yükseltme malzemelerinin, özel mürettebat işe alım jetonlarının ve bir sonraki inşanızı finanse edecek kredilerin kilidini açar. Kâr elde etmek için yükseltilmiş araçlar satın, yeni makinelere yeniden yatırım yapın ve yarış imparatorluğunuzun her podyum bitişinde büyümesini izleyin."
+        },
+        {
+          "title": "Gerçek Nakit Etkinlikleri",
+          "body": "Hyper Racing, gerçek paranın söz konusu olduğu sıralamalı etkinlikler ve turnuvalarla rekabeti bir sonraki seviyeye taşıyor. Beceriye dayalı yarışmalara katılın, galaksideki en iyi pilotlara karşı yeteneğinizi kanıtlayın ve gerçek nakit ödemelerle oradan uzaklaşın. Ne kadar yükseğe çıkarsanız ödül havuzu da o kadar büyük olur. Haftalık sıralamalı mücadelelerden sezonluk şampiyona etkinliklerine kadar, en iyi performans gösterenlerin yarış becerilerini gerçek kazanca dönüştürme fırsatları her zaman vardır."
+        },
+        {
+          "title": "Ödül Etkinlikleri Nasıl İşler?",
+          "body": "Oyuncular, nakit ödüllü turnuvalara giriş hakkı sağlayan performans eşiklerini karşılayan dereceli oyun yoluyla hak kazanırlar. Etkinlikler adil eşleştirme etrafında yapılandırılmıştır ve her yarışmacının benzer becerilere sahip rakiplerle karşılaşmasını sağlar. Giriş ücretleri şeffaftır, ödül havuzları taahhütte bulunmadan önce açıkça görüntülenir ve ödemeler her etkinlik tamamlandıktan sonra hızlı bir şekilde işleme koyulur. Rekabetçidir, adildir ve ödüller gerçektir."
+        },
+        {
+          "title": "Pist Ötesinde İlerleme",
+          "body": "Yarış yoluyla kazanılan ödüller doğrudan daha geniş ilerlemenizi besler. Yarış araçlarınızı yükseltin, pit ekibinizi güçlendirin ve kazançlarınızı ana uzay geminizi geliştirmeye aktarın. Yarış garajınız o geminin hangar alanıdır, dolayısıyla yarış operasyonunuzdaki her gelişme aynı zamanda dünyalar arasında uçtuğunuz gemiye güç verir ve Hyper Quest ve Overlord of the 7 Realms boyunca uzay savaşına girer."
+        }
+      ],
+      "upgradesTitle": "İki Makine, Bir Görev... Her Şeyi Yükseltin",
+      "upgrades": [
+        {
+          "title": "Yarış Aracı Yükseltmeleri",
+          "body": "Yarış aracınız tamamen modüler bir makinedir. Her bileşen değiştirilebilir, ayarlanabilir ve yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Hafif kompozitler ham hız sağlar; ağır hizmet zırhı zorlu atmosfer koşullarında hayatta kalmanızı sağlar. Yükseltme yolu derindir ve yaptığınız seçimler yarış kimliğinizi tanımlar. Yeni araçlar satın alın, onları şampiyona yarışmacılarına dönüştürün, zafere kadar yarışın ve bir sonraki mücadeleye hazır olduğunuzda kârla satın."
+        },
+        {
+          "title": "Ana Uzay Gemisi Yükseltmeleri",
+          "body": "Yarış garajınız yalnızca bir atölye değildir; kişisel uzay geminizin hangar bölmesidir. Pistte kazandığınız kaynakların, kredilerin ve malzemelerin aynıları ana geminizi geliştirmek için kullanılabilir. Gezegenler arası seyahat için daha iyi motorlar, uzay savaşı için daha güçlü silah sistemleri, yeni yarış dünyalarını keşfetmek için gelişmiş navigasyon ve geçiş sırasında düşmanca karşılaşmalardan kurtulmak için güçlendirilmiş gövdeler. Uzay geminiz ana üssünüz, ulaşım aracınız ve savaş geminizdir ve yarışmak onu daha da güçlendirir."
+        },
+        {
+          "title": "Yükseltme Döngüsü",
+          "body": "Kazanmak için yarışın. Yükseltmek için kazanın. Daha büyük ödüllerle daha büyük yarışları kazanmak için yükseltin. Bu ödülleri hem yarış araçlarınıza hem de uzay geminize aktarın. Geminiz ne kadar iyi olursa, o kadar uzağa gidersiniz ve turlar o kadar tehlikeli ve kazançlı hale gelir. Her seviyede adanmışlığı ve beceriyi ödüllendiren bir ilerleme döngüsüdür."
+        },
+        {
+          "title": "Oyunlar Arası Etki",
+          "body": "Pistte geliştirdiğiniz her pilot becerisi ve uzay geminize yüklediğiniz her yükseltme, doğrudan Hyper Quest ve Overlord of the 7 Realms'e aktarılır. Tek evren, birden fazla oyun, kesintisiz ilerleme. Hyper Racing'de oluşturduğunuz şey diğer her şeye güç verir."
+        }
+      ],
+      "faqTitle": "Hiper Yarış — Sıkça Sorulan Sorular",
+      "faq": [
+        {
+          "q": "Hiper Yarış Nedir?",
+          "a": "Yabancı dünyalarda geçen yüksek yoğunluklu bir uçan araç yarışı oyunu. Oyun içi ödüller ve gerçek para ödülleri için yarışırken tehlikeli bilim kurgu devrelerinde tamamen özelleştirilebilir araçlar oluşturun, yükseltin ve yarışın."
+        },
+        {
+          "q": "Yarış aracımı yükseltebilir miyim?",
+          "a": "Her bileşen yükseltilebilir: gövdeler, iticiler, kalkanlar, dış kabuklar, motorlar, dengeleyiciler, soğutma sistemleri ve aerodinamik yüzeyler. Her yükseltme, aracınızın farklı parkurları ve koşulları nasıl idare ettiğini değiştirir."
+        },
+        {
+          "q": "Pit ekibi ne yapar?",
+          "a": "Pit mürettebatı üyeleri benzersiz bonuslar sağlar: daha hızlı yakıt ikmali, gövde teşhisi, acil onarımlar ve turlar arasında performans ayarlamaları. Zamanla seviye atlayarak araç yükseltmeleriyle birlikte daha güçlü yeteneklerin kilidini açarlar."
+        },
+        {
+          "q": "Pit yöneticisi nasıl çalışır?",
+          "a": "Pit yöneticisi mürettebat operasyonlarını koordine eder, yarış stratejisini belirler ve takım çapındaki performans artışlarının kilidini açar. Savunma yöneticileri aracınızı zorlu koşullarda korur; Agresif yöneticiler her sistemi maksimum hıza zorlar."
+        },
+        {
+          "q": "Gerçek para kazanabilir miyim?",
+          "a": "Evet. Sıralamalı etkinlikler ve turnuvalarda gerçek nakit ödül havuzları bulunur. Sıralamalı oyunla kalifiye olun, benzer becerilere sahip rakiplere karşı yarışın ve bitiş pozisyonunuza göre gerçek ödemeler kazanın. Haftalık mücadeleler ve sezonluk şampiyonalar sürekli olarak devam ediyor."
+        },
+        {
+          "q": "Yarış ödülleri nasıl çalışır?",
+          "a": "Her yarışta kredi, yükseltme malzemeleri ve mürettebat jetonları ödenir. Zaferler kazancınızı katlar. Araçlar satın alın, onları yarış makinelerine dönüştürün, yarışları kazanın ve daha fazla geliştirme ve uzay gemisi yükseltmelerine fon sağlamak için bunları kârla satabilirsiniz."
+        },
+        {
+          "q": "Ana uzay gemimi de yükseltebilir miyim?",
+          "a": "Kesinlikle. Yarış garajınız uzay geminizin hangar alanıdır. Yarış kazançları, ana geminizdeki motorlara, silahlara, navigasyona ve gövde takviyesine yönelik yükseltmeleri finanse ederek gezegenler arası seyahati ve uzay savaşını güçlendirir."
+        },
+        {
+          "q": "İlerleme diğer oyunlara da yansıyor mu?",
+          "a": "Her pilot becerisi ve uzay gemisi yükseltmesi doğrudan Hyper Quest'e ve Overlord of the 7 Realms'a aktarılır. Tek evren, birden fazla oyun, kesintisiz ilerleme. Hyper Racing'de oluşturduğunuz şey diğer her şeye güç verir."
+        },
+        {
+          "q": "Hangi yarış ortamları var?",
+          "a": "Devreler, yabancı dünyalardaki yüzen kaya oluşumlarını, lav tüplerini, çöl ovalarını ve dağ sıralarını kapsıyor. Atmosferik tehlikeler arasında asit yağmuru, radyoaktif atmosferler, değişken yerçekimi ve türbülanslı rüzgarlar bulunur. Her devre farklı araç ayarları gerektirir."
+        }
+      ]
+    },
+    "quest": {
+      "label": "GÖREV",
+      "heading": "Hiper Görev",
+      "subtitle": "Senin galaksin. Sizin kurallarınız. Senin şansın.",
+      "intro": [
+        "Hyper Quest, geniş ve tehlikeli bir galakside tamamen yükseltilebilir kendi uzay geminiz Quest Racer'ı komuta ettiğiniz bir açık dünya uzay macerasıdır. Yıllar önce güç, zenginlik ve şöhret arayışı içinde ev uygarlığınızı terk ettiniz. Artık tüm evren sizin oyun alanınız ve tamamladığınız her görev sizi galaktik hakimiyete daha da yaklaştırıyor.",
+        "Ancak Hyper Quest sadece bir oyun değil. Gerçek paranın tehlikede olduğu rekabetçi bir platformdur. Görevleri tamamlayın, zorlukların üstesinden gelin ve cebinizde gerçek para ve/veya ödüllerle oradan uzaklaşın. Dakikalar süren hızlı görevlerden çok gün süren destansı keşif seferlerine kadar her görev karşılığını verir. Mücadele ne kadar zorsa, ödül de o kadar büyük olur.",
+        "Uzay geminizi gövdeden kokpite yükseltin. Onu yıkıcı silah sistemleriyle donatın. Geminizin performansına ve güç seviyesine güçlü bonuslar yükleyen uzmanları işe alın. Asteroitleri kazın, tehlikeli kargoları taşıyın, gizli hazineleri avlayın, yüksek değerli hedefleri kaçırın veya kiralık silah olun. Evreni nasıl yöneteceğiniz tamamen sizin seçiminizdir.",
+        "Hyper Quest'te oluşturduğunuz her şey doğrudan Hyper Racing'e ve 7 Diyarın Overlord'una beslenir. Tek evren, kesintisiz ilerleme, sınırsız potansiyel. Araştırmanın nasıl çalıştığını, neler kazanabileceğinizi ve sizin ve uzay geminizin nasıl galaksideki en korkulan gemi haline geldiğinizi keşfetmek için okumaya devam edin."
+      ],
+      "calloutLine1": "Kazanma Arayışı. Yükseltmek için kazanın.",
+      "calloutLine2": "Conquer'a yükseltin.",
+      "howItWorksTitle": "Hyper Quest Nasıl Çalışır?",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Görev Kurulundan Görevleri Kabul Edin",
+          "body": "Oyun içi görev tahtası maceraya açılan kapınızdır. Sadece birkaç dakika süren hızlı kargo seferlerinden, keşfedilmemiş uzayın derinliklerine doğru çok günlük destansı keşif gezilerine kadar uzanan mevcut görevlere göz atın. Her görev net hedefler, tehlike derecelendirmeleri ve ödül kademeleriyle birlikte gelir. Tehlikeli kargo taşımak, gizli hazineleri avlamak, asteroit alanlarında madencilik yapmak veya kayıp eserleri kurtarmak için gizli göreve gitmek gibi oyun tarzınıza uygun görevleri seçin."
+        },
+        {
+          "num": "02",
+          "title": "Galaksiyi keşfedin",
+          "body": "Her biri benzersiz ortamlara, değerli malzemelere ve yeni yarış devrelerine sahip uzak gezegenlere portallar aracılığıyla seyahat edin. Keşfedilmemiş bölgelerin haritasını çıkarmak için galaktik haritaları takip edin ve ilk keşfedeceğiniz gezegenlerin isimlendirme haklarını kazanın. Asteroit alanlarından kaynak çıkarın, antik kalıntılardan ve terk edilmiş gemilerden parçalar kurtarın ve yıldızlara dağılmış gizli servetlere yol açan ipuçları toplayın."
+        },
+        {
+          "num": "03",
+          "title": "İmparatorluğunuzu Geminizin İçinden İnşa Edin",
+          "body": "Quest Racer'ınız ulaşımdan daha fazlasıdır. Hidroponik koylarda yiyecek yetiştirin, uzak gezegenlerden çıkarılan malzemeleri arıtın ve klonlama laboratuvarlarınızdan ordular inşa edin. Birliklerinizi ve silahlarını geliştirin, kendinizi korsanlara karşı savunun ve tamamladığınız her görevle daha da güçlenen, kendi kendini idame ettiren bir mobil üssü yönetin."
+        },
+        {
+          "num": "04",
+          "title": "Dilediğiniz Gibi Oynayın",
+          "body": "Hakimiyete giden tek bir yol yoktur. Korkulan bir ödül avcısı, kurnaz bir kaçakçı, usta bir madenci veya efsanevi bir kaşif olun. Yüksek değerli hedefleri kaçırın, kiralık silah olun veya tüm sektörleri kontrol etmek için ittifaklar kurun. Galaksi sizin isteğinize göre şekilleniyor ve her karar itibarınızı ve servetinizi şekillendiriyor."
+        }
+      ],
+      "rewardsTitle": "Görev Ödülleri; Oynamak İçin Para Kazanın!",
+      "rewards": [
+        {
+          "title": "Oyun İçi Ödüller",
+          "body": "Tamamladığınız her görev karşılığını verir. Krediler, yükseltme malzemeleri, nadir bileşenler, uzman işe alım jetonları ve özel öğeler, her başarılı görevle birlikte envanterinize akar. Görev ne kadar zorsa, yolculuk da o kadar zengin olur. Uzak gezegenlerdeki nadir malzemeleri keşfedin, antik kalıntılardan yüksek değerli parçaları kurtarın ve galaktik üstünlüğe yükselişinizi hızlandıracak kaynakları stoklayın."
+        },
+        {
+          "title": "Gerçek Nakit Ödemeler",
+          "body": "Hyper Quest, oyunu eğlencenin ötesine taşıyor. Belirli görevler ve dereceli zorluklar gerçek nakit ödemeler sunar. Yüksek seviyeli görevleri tamamlayın, skor tablosu etkinliklerine hakim olun ve gerçek paranın söz konusu olduğu sezonluk görev şampiyonalarına katılın. Ne kadar yetenekli ve cesur olursanız, ödemeler de o kadar büyük olur. Haftalık görev ödüllerinden destansı sezonluk turnuvalara kadar galaktik maceralarınızı gerçek kazançlara dönüştürme fırsatları her zaman vardır."
+        },
+        {
+          "title": "Görev Ödemeleri Nasıl Çalışır?",
+          "body": "Oyuncular itibarlarını geliştirerek ve performans eşiklerini karşılayarak nakit ödül görevlerine hak kazanırlar. Görevin zorluğu, süresi ve tehlike seviyesi ödül havuzunu belirler. Ödemeler şeffaftır, herhangi bir görevi kabul etmeden önce açıkça görüntülenir ve tamamlandığında hızlı bir şekilde işlenir. İster on dakikalık bir kargo taşımacılığı yapıyor olun ister bir hafta süren bir derin uzay gezisi gerçekleştiriyor olun, ödüller riskle eşleşir."
+        },
+        {
+          "title": "İleriye Dönük Kazanç Sağlayan İlerleme",
+          "body": "Görev ödülleri doğrudan gemi yükseltmelerinize, silah sistemlerinize ve uzman alımınıza beslenir. Her ödeme sizi daha güçlü kılar, bu da daha büyük ödüllerle daha zorlu görevlerin kilidini açar. Kazançlar aynı zamanda Hyper Racing ve Overlord of the 7 Realms'a da aktarılarak tüm Hyper Tek ekosistemindeki bağlılığı ödüllendiren bir ilerleme döngüsü yaratıyor."
+        }
+      ],
+      "upgradesTitle": "Geminizi Yükseltin, Cephaneliğinizi Silahlandırın, Mürettebatınızı İşe Alın",
+      "upgrades": [
+        {
+          "title": "Uzay Gemisi Yükseltmeleri",
+          "body": "Quest Racer'ınız motor bölmesinden kokpite kadar tamamen modülerdir. Maksimum dayanıklılık için gövdeyi yükseltin, düşman ortamlarına dayanacak şekilde dış kabuğu güçlendirin, savaşta hayatta kalabilmek için kalkan jeneratörlerini güçlendirin ve en yüksek performans için güç sistemlerini elden geçirin. Daha iyi motorlar, gezegenler arası seyahatin daha hızlı olması anlamına gelir. Daha güçlü navigasyon sistemleri gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarır. Her yükseltme, geminizi daha güçlü, daha korkulan bir gemiye dönüştürür."
+        },
+        {
+          "title": "Silah Sistemleri",
+          "body": "Galaksi tehlikelidir ve sizin daha tehlikeli olmanız gerekir. Kendinizi korsanlara, rakip oyunculara ve düşman güçlerine karşı korumak için silah sistemlerinizi yükseltin ve iyileştirin. Sizi en kötü durumlarda hayatta tutan savunma konfigürasyonları veya maksimum hasar verecek şekilde tasarlanmış saldırı teçhizatları arasında seçim yapın. Yükseltme ağacında ilerledikçe lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahlarının tümü mevcut olacak."
+        },
+        {
+          "title": "İşe Alma Uzmanları",
+          "body": "Uzmanlar oyunun kurallarını değiştiren kişilerdir. Her biri, geminizin genel performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz beceriler getirir. Navigasyon uzmanları gizli yolları ortaya çıkarır ve seyahat süresini azaltır. Savaş uzmanları silahın doğruluğunu ve hasar çıktısını artırır. Mühendislik uzmanları gövde bütünlüğünü ve onarım hızını artırır. Bilim uzmanları kaynak çıkarımını ve malzeme iyileştirmeyi geliştiriyor. Geminizin etkinliğini katlayacak yıkıcı kombinasyonlar oluşturmak için birden fazla uzmanı bir araya getirin."
+        },
+        {
+          "title": "Güç Döngüsü",
+          "body": "Kazanma arayışı. Yükseltmek için kazanın. Daha büyük ödüllerle daha zorlu görevlerin üstesinden gelmek için yükseltin. Geminizdeki her sistemi güçlendirmek için uzmanları işe alın. Ne kadar güçlenirseniz galaksi o kadar geniş bir alana açılır ve sizi bekleyen servet de o kadar büyük olur. Gemi yükseltmeleri ve uzmanlık bonusları, Hyper Racing geçişi sırasında doğrudan uzay savaşına ve 7 Diyarın Overlord'unda yapılan savaşlara da aktarılıyor."
+        }
+      ],
+      "faqTitle": "Hyper Quest — Sıkça Sorulan Sorular",
+      "faq": [
+        {
+          "q": "Hyper Quest nedir?",
+          "a": "Geniş bir galakside tamamen yükseltilebilir bir uzay gemisini komuta ettiğiniz açık dünya uzay macerası. Görevleri tamamlayın, yabancı dünyaları keşfedin, geminizi yükseltin, uzmanları işe alın ve oyun içi zenginliklerin yanı sıra gerçek nakit ödüller kazanın."
+        },
+        {
+          "q": "Görevler nasıl çalışır?",
+          "a": "Oyun içi görev panosundaki görevleri kabul edin. Görevler, yalnızca birkaç dakika süren hızlı kargo seferlerinden, keşfedilmemiş uzayın derinliklerine uzanan çok günlük destansı keşif gezilerine kadar çeşitlilik gösterir. Her görevin açık hedefleri, tehlike dereceleri ve ödül aşamaları siz kabul etmeden önce görüntülenir."
+        },
+        {
+          "q": "Gerçek para kazanabilir miyim?",
+          "a": "Evet. Belirli görevler, sıralamalı mücadeleler ve sezonluk şampiyonalar gerçek nakit ödemeler sunar. İtibarınızı artırın, performans eşiklerini karşılayın ve giderek daha kazançlı olan nakit ödüllü görevlere hak kazanın. Haftalık ödüller ve sezonluk turnuvalar sürekli olarak yürütülür."
+        },
+        {
+          "q": "Hangi oyun içi ödülleri kazanabilirim?",
+          "a": "Tamamlanan her görev, kredi, yükseltme malzemeleri, nadir bileşenler, uzman yetiştirme jetonları ve özel öğeler öder. Görev ne kadar zor ve uzun olursa ödüller de o kadar zengin olur. Uzak gezegenlerdeki nadir malzemeleri keşfedin ve antik kalıntılardan yüksek değerli parçaları kurtarın."
+        },
+        {
+          "q": "Uzay gemimi yükseltebilir miyim?",
+          "a": "Her sistem yükseltilebilir: gövde, dış kabuk, kalkan jeneratörleri, güç sistemleri, motorlar, kokpit ve navigasyon. Daha iyi motorlar daha hızlı seyahat anlamına gelir, daha güçlü gövdeler düşmanca karşılaşmalardan sağ çıkar ve gelişmiş navigasyon, gizli rotaları ve keşfedilmemiş dünyaları ortaya çıkarır."
+        },
+        {
+          "q": "Hangi silahlar mevcut?",
+          "a": "Lazer dizileri, füze bataryaları, plazma topları ve deneysel enerji silahları dahil olmak üzere silah sistemlerini yükseltin ve iyileştirin. Korsanlara, rakiplere ve düşman güçlerine karşı maksimum hasar için hayatta kalmak için savunma konfigürasyonlarını veya saldırı teçhizatlarını seçin."
+        },
+        {
+          "q": "Uzmanlar nasıl çalışır?",
+          "a": "Geminizin performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz becerilere sahip uzmanları işe alın. Navigasyon uzmanları gizli yolları açığa çıkarıyor, savaş uzmanları silah hasarını artırıyor, mühendislik uzmanları gövde bütünlüğünü artırıyor ve bilim uzmanları kaynak çıkarımını geliştiriyor. Yıkıcı kombinasyonlar için birden fazla uzmanı bir araya getirin."
+        },
+        {
+          "q": "Ne tür görevler mevcut?",
+          "a": "Kargo taşımacılığı, asteroit madenciliği, hazine avcılığı, ödül avcılığı, eser kurtarma, gizli operasyonlar, gezegen keşifleri, korsan savunması, kurtarma görevleri ve daha fazlası. Görevler, on dakikalık hızlı koşulardan çok günlük derin uzay gezilerine kadar çeşitlilik gösterir."
+        },
+        {
+          "q": "Yeni gezegenler keşfedebilir miyim?",
+          "a": "Evet. Bilinmeyen bölgelere doğru galaktik haritaları takip edin ve yeni dünyaları keşfedin. İlk keşfedenler buldukları gezegenlere isim verme hakkı kazanırlar. Yeni dünyalar, daha önce hiçbir oyuncunun erişmediği benzersiz malzemeler, ortamlar ve yarış pistleri sunuyor."
+        },
+        {
+          "q": "Gemimin içinde ne yapabilirim?",
+          "a": "Quest Racer'ınız mobil bir tabandır. Hidroponik koylarda yiyecek yetiştirin, uzak gezegenlerden çıkarılan malzemeleri iyileştirin, klonlama laboratuvarlarında ordular inşa edip eğitin, silahları ve savunmaları yükseltin ve her görevde daha da güçlenen, kendi kendini idame ettiren bir operasyonu yönetin."
+        },
+        {
+          "q": "Galaktik harita nasıl çalışır?",
+          "a": "Galaktik harita evrendeki keşiflerinize rehberlik eder. Yeni sektörleri, portal konumlarını ve gizli görev bölgelerini ortaya çıkarmak için haritanızı yükseltin. Siz daha fazlasını keşfettikçe harita genişleyerek uzayın giderek daha tehlikeli ve ödüllendirici bölgelerinin kilidini açar."
+        },
+        {
+          "q": "İlerlemem diğer oyunlara da yansıyor mu?",
+          "a": "Hyper Quest'te oluşturduğunuz her şey doğrudan Hyper Racing'e ve 7 Diyarın Overlord'una beslenir. Gemi yükseltmeleri, uzmanlık bonusları, savaş becerileri ve kaynakların tümü sorunsuz bir şekilde aktarılır. Tek evren, birden fazla oyun, sınırsız ilerleme."
+        },
+        {
+          "q": "Kötü adam olarak oynayabilir miyim?",
+          "a": "Kesinlikle. Gizli göreve gidin, yüksek değerli hedefleri kaçırın, kiralık silah olun, tehlikeli kargo kaçakçılığı yapın veya diğer oyunculara baskın yapın. Hakimiyete giden tek bir yol yoktur. Galaksiyi nasıl yöneteceğiniz tamamen sizin seçiminizdir ve her karar itibarınızı şekillendirir."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "derebeyi",
+      "heading": "7 Diyarın Efendisi",
+      "subtitle": "Çarpışma arazisi. Yeniden inşa et. Fethetmek. Derebeyi ol.",
+      "intro": [
+        "Overlord of the 7 Realms, oyun dünyasındaki hiçbir şeye benzemeyen üç seviyeli bir savaş strateji oyunudur. Paralel bir evrene giden bir portaldan geçme cesaretini gösterdiniz ve düşmanca bir uzaylı gezegene zorunlu iniş yaptınız. Geminiz mahvoldu, sistemleriniz çöküyor ve gezegenin yaratıkları zaten yaklaşıyor. Hayatta kalmak sadece bir başlangıç. Hakimiyet amaçtır.",
+        "Geminizi enkazdan yeniden inşa edin. Orduları yerleşik laboratuvarlarınızda klonlayın ve eğitin. Yıkıcı atlı süvariler oluşturmak için gezegenin vahşi yaşamını evcilleştirin. Ardından savaşı üç savaş boyutuna taşıyın: canavarlara ve rakip oyunculara karşı yerden yere mücadele, yörünge veya yer hedeflerine yönelik yerden uzaya saldırılar ve gezegenin yörüngesinde dönen devasa Battle Ring'de uzaydan uzaya savaş.",
+        "Bu sadece başka bir strateji oyunu değil. Overlord, gerçek zamanlı VR etkileşimi, günlük etkinliklerin ve görevlerin tamamlanması karşılığında gerçek para ödülleri ve var olan en güçlü uzaylı türü olan korkunç Hammerong'ların iki haftada bir istilasını içerir. Her iki haftada bir gezegende maden ocağı açmak için gelirler ve her iki haftada bir cesur oyuncular devasa bonuslar ve efsanevi ödüller için onlara meydan okuyabilir.",
+        "Uzay geminizi yükseltin, onu yıkıcı silahlarla donatın, güç seviyenizi yükseltecek uzmanları işe alın ve tüm bölgeleri kontrol etmek için ittifaklar kurun. Oluşturduğunuz her şey, paylaşılan Hyper Tek ekosistemi aracılığıyla doğrudan Hyper Racing ve Hyper Quest'e bağlanır. Tek evren, üç oyun, sınırsız savaş. Savaş sisteminin nasıl çalıştığını ve Overlord'un neden her şeyi değiştirdiğini keşfetmek için okumaya devam edin."
+      ],
+      "calloutLine1": "Hayatta Kalmak Sadece Başlangıçtır.",
+      "calloutLine2": "Hakimiyet Hedeftir.",
+      "howItWorksTitle": "Üç Seviyeli Savaş Sistemi; Savaşın Üç Boyutu",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Karadan Karaya Savaş",
+          "body": "Gezegenin yüzeyi bir savaş bölgesidir. Klonlanmış ordularınızı düşman uzaylı yaratıklara, korkunç canavarlara ve bölge ve kaynaklar için savaşan rakip oyunculara karşı konuşlandırın. Kara kuvvetlerinize yıkıcı bir üstünlük sağlayan atlı süvari birimleri oluşturmak için gezegenin vahşi yaşamını evcilleştirin ve eğitin. Kara savaşı ham, taktiksel ve acımasızdır. Kazandığınız her savaş kaynak, bölge ve itibar kazandırır."
+        },
+        {
+          "num": "02",
+          "title": "Yerden Uzaya Saldırılar",
+          "body": "Overlord'un başka hiçbir oyunun sunmadığı veya neredeyse hiç sunmadığı bir boyutu eklediği yer burasıdır. Gezegenin yüzeyi ile yörüngedeki Savaş Yüzüğü arasında saldırılar başlatmak için tasarlanmış özel birlik grupları oluşturun. Uzayda bulunan gemilere yer konumunuzdan saldırın veya düşmanları aynı anda yukarıdan ve aşağıdan vuran birleşik saldırıları koordine edin. Bu dikey savaş katmanı, standart stratejiyi hem zeminde hem de uzayda konumlandırmanın zaferi belirlediği çok boyutlu bir satranç maçına dönüştürür."
+        },
+        {
+          "num": "03",
+          "title": "Uzaydan Uzaya Savaş",
+          "body": "Geminizi yörüngeye taşıyın ve gezegeni çevreleyen devasa bir yörünge yapısı olan Battle Ring'e inin. Buradan korumasız gemileri ve savunmasız hedefleri avlayın. Özel olarak geliştirilmiş biniş saldırılarını kullanarak maksimum dahili hasar vermek için birliklerinizi uzaydan doğrudan düşman gemilerine ışınlayın. Uzay savaşı ödülleri oyundaki en yüksek ödüller arasındadır ve yörünge bölgesini kontrol etmek size yalnızca karada oynayan hiçbir oyuncunun eşleşemeyeceği stratejik bir avantaj sağlar."
+        },
+        {
+          "num": "04",
+          "title": "Neden Üç Seviye Her Şeyi Değiştiriyor?",
+          "body": "Çoğu strateji oyunu tek bir düzlemde çalışır. Overlord üçte çalışıyor. Yerden yere, yerden uzaya ve uzaydan uzaya saldırı yeteneği, eşsiz taktiksel derinliğe sahip bir savaş alanı yaratır. Beceri her şeydir. Tek başına kaba kuvvet seni Derebeyi yapmaz. Her üç seviyedeki stratejik ustalık, baskın olanı mağlup olandan ayıran şeydir."
+        }
+      ],
+      "extraSection": {
+        "title": "Savaş Yüzüğü ve VR Etkileşimi",
+        "items": [
+          {
+            "title": "Savaş Yüzüğüne İniş",
+            "body": "Savaş Yüzüğü, gezegenin sistemini çevreleyen devasa bir yörünge yapısıdır. Geminizi uzaya taşıdığınızda, büyük bir stratejik avantaj elde etmek için Battle Ring'e yanaşabilirsiniz. Bu yüksek konumdan, korumasız gemileri avlayabilir, rakip gemilere binme ekipleri gönderebilir ve aşağıdaki yer hedeflerine yönelik yıkıcı saldırıları koordine edebilirsiniz. Battle Ring'e iniş, çoğu strateji oyununun sunmadığı tamamen yeni bir oyun boyutu açar ve Overlord'a piyasadaki diğer oyunlara karşı taktiksel bir üstünlük sağlar."
+          },
+          {
+            "title": "Savaş Yüzüğü'nün İçinde",
+            "body": "Battle Ring sadece bir yerleştirme platformu değil. İçine nasıl gireceğinizi çözebilirseniz içeride gizli görevler, ekstra bonuslar ve özel ödüller sizi bekliyor. Yüzüğün içi koridorlardan, odalardan ve antik teknolojiden oluşan bir labirenttir. Halkanın içinde görevler gerçekleştirin ve avlanma görevlerini gerçekleştirin, yüzeye çıkan hiçbir oyuncunun asla erişemeyeceği sırları keşfedin. Savaş Yüzüğü cesurları, kurnazları ve acımasızları ödüllendirir."
+          },
+          {
+            "title": "Gerçek Zamanlı VR Etkileşimi",
+            "body": "Tüm Hyper Tek oyun serisi gibi Overlord of the 7 Realms de gerçek zamanlı olarak tam VR etkileşimini destekler. Geminize adım atın, Battle Ring'in koridorlarında yürüyün, birliklerinizi kara savaşına yönlendirin ve geminizin kokpitinden uzay savaşını deneyimleyin. VR, Overlord'u bir strateji oyunundan tamamen sürükleyici bir savaş alanı deneyimine dönüştürüyor. Kuvvetlerinize komuta edin, uzaylı bölgelerini keşfedin ve düz ekran oyunların taklit edemeyeceği düzeyde bir varlık ve yoğunlukla savaşa katılın."
+          },
+          {
+            "title": "Diğer Oyunlara Göre Avantajı",
+            "body": "Başka hiçbir oyun üç seviyeli savaşı, keşfedilebilir bir yörünge savaş istasyonunu, gerçek zamanlı VR'yi ve gerçek parayı ve/veya oyun içi ödülleri tek bir deneyimde birleştirmez. Battle Ring tek başına rakiplerin eşleşemeyeceği bir oyun boyutu katıyor. Bunu kara savaşı, uzay savaşı, VR deneyimi ve birbirine bağlı Hyper Tek ekosistemi ile birleştirdiğinizde Overlord başlı başına bir kategoride duruyor."
+          }
+        ]
+      },
+      "upgradesTitle": "Yeniden İnşa Et, Yeniden Silahlandır, Üye Al; Savaş için Güçlendirme",
+      "upgrades": [
+        {
+          "title": "Uzay Gemisi Yükseltmeleri",
+          "body": "Kaza yapan geminiz her şeyin başladığı yerdir. Motor bölmesinden komuta güvertesine kadar sistem sistem yeniden oluşturun. Her bileşen tamamen yükseltilebilir: gövde takviyesi, yapısal bütünlük, dış kabuk bileşimi, kalkan jeneratörleri, güç sistemleri ve navigasyon dizileri. Overlord'da hız için değil savaş için inşa edersiniz. Tamamen yükseltilmiş bir savaş gemisi her başarılı harekatın temelidir ve ne kadar derin yatırım yaparsanız geminiz o kadar zorlu hale gelir."
+        },
+        {
+          "title": "Silah Sistemleri ve Teknoloji Seviyeleri",
+          "body": "Üç savaş seviyesinin tamamında üstünlük sağlamak için silahlarınızı, becerilerinizi ve teknoloji seviyelerinizi yükseltin ve geliştirin. Gezegensel savaş için karaya konuşlu toplar, yerden uzaya saldırılar için anti-yörünge bataryaları ve uzaydan uzaya savaşlar için gemiye monteli silah dizileri. Her silah sistemi belirli taktiksel roller için geliştirilebilir. İster uzun menzilli bombardımanda, ister yakın mesafeden biniş eylemlerinde, ister savunma karşı önlemlerinde uzmanlaşın, silah teçhizatınız savaş kimliğinizi tanımlar."
+        },
+        {
+          "title": "İşe Alma Uzmanları",
+          "body": "Uzmanlar, iyi oyuncuları Overlord'lardan ayıran güç çarpanlarıdır. Geminizin genel performansına ve güç seviyesine güçlü bonuslar kazandıracak benzersiz uzmanlar edinin. Taktik uzmanlar birliklerin konuşlandırılması verimliliğini artırır, mühendislik uzmanları gemi onarımlarını ve yükseltmelerini hızlandırır, silah uzmanları tüm sistemlerdeki hasar çıktısını artırır ve istihbarat uzmanları düşman konumlarını ve zayıf noktalarını ortaya çıkarır. Operasyonunuzun her yönünü güçlendirecek yıkıcı sinerjiler yaratmak için birden fazla uzmanı bir araya getirin."
+        },
+        {
+          "title": "Ordularınızı Oluşturun",
+          "body": "Geminizin yerleşik klonlama laboratuvarlarında birlikleri klonlayın, ardından savaşa hazır olana kadar onları ve silahlarını yükseltin ve iyileştirin. Ancak tek başına asker yeterli değildir. Klonlanamayan veya üretilemeyen ve beceri ve sabırla kazanılması gereken bir güç olan binekli canavar süvarilerini yaratmak için gezegenin vahşi yaratıklarını evcilleştirin ve eğitin. Hakimiyetinizi belirleyen şey karadaki, havadaki ve uzaydaki ordu kompozisyonunuzdur."
+        }
+      ],
+      "rewardsTitle": "Hammerong'lar, Ödüller ve Hyper Tek Ekosistemi",
+      "rewards": [
+        {
+          "title": "Hammeronglar: Var Olan En Güçlü Türler",
+          "body": "Her iki haftada bir, merkez arenanın güç alanları düşüyor ve Hammerong'lar geliyor. Onlar, oyuncuların sahip olduğu her şeyin çok ötesinde ileri teknolojiyle donatılmış, evrendeki en güçlü uzaylı türleridir. Gezegenin kaynaklarını çıkarmaya geliyorlar ve arenayı tam ve ezici bir güçle savunuyorlar. Hammerong'lara saldırmak Overlord'daki en tehlikeli mücadeledir, ancak başarılı olanlar devasa bonuslar, efsanevi ganimetler, nadir yükseltme malzemeleri ve başka hiçbir şekilde elde edilemeyecek özel ödüllerle ödüllendirilir. İki haftada bir yapılan Hammerong istilası, gücünüzün nihai sınavıdır."
+        },
+        {
+          "title": "Günlük Etkinlikler, Görevler ve Savaş Ödülleri",
+          "body": "Overlord sürekli olarak ödüller verir. Kredi, yükseltme malzemeleri ve ilerleme bonusları kazanmak için günlük görevleri tamamlayın. Premium ödüller için özel etkinliklere katılın. Özel ganimetler için gezegenin yüzeyinde ve Savaş Yüzüğü'nde görevler gerçekleştirin. Kaynakları depolamak için canavarlara, uzaylı yaratıklara ve rakip oyunculara karşı savaşlar kazanın. Gizli eserleri ve hazineleri keşfetmek için yüzeyi keşfedin. Ödül yapısı, yaptığınız her eylemin sizi sunucunun nihai Overlord'u olmaya yaklaştıracağı şekilde tasarlanmıştır."
+        },
+        {
+          "title": "Hyper Tek Ekosistemine Bağlı",
+          "body": "7 Diyarın Derebeyi tek başına mevcut değildir. Hyper Racing ve Hyper Quest ile birlikte Hyper Tek evrenine tamamen entegre edilmiştir. Overlord'da kazanılan kaynaklar üç oyunda da kullanılabilir. Gemi yükseltmeleri, uzmanlık bonusları, savaş becerileri ve materyaller, oyunlar arasında sorunsuz bir şekilde akıyor. Hyper Racing'de kazanılan yarış yetenekleri, Overlord uzay savaşındaki pilot becerilerinizi geliştirir. Hyper Quest'te toplanan materyaller gezegendeki yükseltmelerinizi besler. Hyper Tek pazarı her şeyi birbirine bağlayarak tek bir oyundaki ilerlemenin üç oyunda da ilerlemeyi güçlendirdiği birleşik bir ekonomi yaratır."
+        },
+        {
+          "title": "Tek Evren, Üç Oyun, Sınırsız Güç",
+          "body": "Üç Hyper Tek oyununun tamamına katılan oyuncular daha hızlı güç kazanır, özel oyunlar arası ödüllere erişir ve tek oyun oyuncularının karşılayamayacağı çok çeşitli beceri ve kaynaklara hakim olur. Birbirine bağlı ekosistem nihai rekabet avantajıdır."
+        }
+      ],
+      "faqTitle": "7 Diyarın Efendisi — Sıkça Sorulan Sorular",
+      "faq": [
+        {
+          "q": "7 Diyarın Derebeyi nedir?",
+          "a": "Yabancı bir gezegene çarparak iniş yaptığınız, geminizi yeniden inşa ettiğiniz, ordularınızı klonladığınız ve yerden yere, yerden uzaya ve uzaydan uzaya olmak üzere üç boyutta savaştığınız üç seviyeli bir savaş strateji oyunu. VR etkileşimi, gerçek nakit ödüller ve iki haftada bir yapılan Hammerong istilalarını içerir."
+        },
+        {
+          "q": "Üç seviyeli savaş sistemi nedir?",
+          "a": "Savaş üç seviyede gerçekleşir: canavarlara ve rakip oyunculara karşı yerden yere, yörünge gemilerini hedef alan yerden uzaya saldırılar ve Battle Ring'de uzaydan uzaya savaş. Bu çok boyutlu yaklaşım, hiçbir tek düzlemli strateji oyununun eşleşemeyeceği taktiksel derinlik yaratır."
+        },
+        {
+          "q": "Savaş Yüzüğü nedir?",
+          "a": "Gezegeni çevreleyen devasa bir yörünge yapısı. Kalkansız hedefleri avlamak, düşman gemilerine binmek için ekipler göndermek ve içindeki gizli görevlere erişmek için geminizi gemiye indirin. Battle Ring'i kontrol etmek size yalnızca karadaki oyunculara göre stratejik bir avantaj sağlar."
+        },
+        {
+          "q": "Uzay gemimi yükseltebilir miyim?",
+          "a": "Motor bölmesinden komuta güvertesine kadar her sistem yükseltilebilir: gövde, yapı, dış kabuk, kalkan jeneratörleri, güç sistemleri ve navigasyon. Overlord'da hız için değil savaş için inşa edersiniz. Tamamen yükseltilmiş bir savaş gemisi her harekatın temelidir."
+        },
+        {
+          "q": "Uzmanlar nasıl çalışır?",
+          "a": "Geminizin performansına ve güç seviyesine güçlü bonuslar ekleyen benzersiz uzmanları işe alın. Taktik, mühendislik, silah ve istihbarat uzmanlarının her biri farklı sistemleri güçlendirir. Tüm savaş seviyelerinde yıkıcı sinerjiler için birden fazla uzmanı bir araya getirin."
+        },
+        {
+          "q": "Hammerong'lar kimlerdir?",
+          "a": "Var olan en güçlü uzaylı türü. Her iki haftada bir, gezegenin ezici güç ve ileri teknolojiyle korunan kaynaklarını çıkarmak için merkez arenaya geliyorlar. Onlara saldırmak son derece tehlikelidir ancak oyuncuları büyük bonuslar ve efsanevi ganimetlerle ödüllendirir."
+        },
+        {
+          "q": "Hangi ödülleri kazanabilirim?",
+          "a": "Günlük görevler, görevler, savaşlar ve etkinliklerin tümü kredi, yükseltme malzemeleri ve ilerleme bonusları öder. Özel etkinlikler ve Hammerong istilaları premium ve özel ödüller sunar. Daha yüksek zorluktaki mücadeleler ve sıralamalı yarışmalar, gerçek para da dahil olmak üzere daha fazla kazanç sağlar."
+        },
+        {
+          "q": "Overlord VR'yi destekliyor mu?",
+          "a": "Evet. Tam gerçek zamanlı VR etkileşimi, geminizin koridorlarında yürümenize, Battle Ring'in içini keşfetmenize, birliklerinizi kara savaşına yönlendirmenize ve uzay savaşında geminize pilotluk etmenize olanak tanır. VR, Overlord'u stratejiden tamamen sürükleyici bir savaş alanı deneyimine dönüştürüyor."
+        },
+        {
+          "q": "Ordumu nasıl kurarım?",
+          "a": "Geminizin yerleşik laboratuvarlarında birlikleri klonlayın, ardından onları ve silahlarını yükseltin ve iyileştirin. Atlı süvariler için, hayvanlar klonlanamayacağından gezegenin vahşi yaratıklarını evcilleştirmeli ve eğitmelisiniz. Kara, hava ve uzaydaki ordu kompozisyonu hakimiyetinizi belirler."
+        },
+        {
+          "q": "Bir ittifaka katılabilir miyim?",
+          "a": "Evet. Tek başına ilerleyin veya gücünüzü artıran ve büyümenize yardımcı olan bir ittifaka katılın. İttifaklar paylaşılan kaynaklar, koordineli saldırılar ve toplu savunma sunar. Hem geminizi hem de ittifakın ortak varlıklarını yükseltmek için günlük görevleri tamamlayın."
+        },
+        {
+          "q": "Overlord diğer Hyper Tek oyunlarıyla bağlantılı mı?",
+          "a": "Tamamen entegre. Overlord, Hyper Racing ve Hyper Quest arasında kaynaklar, gemi yükseltmeleri, uzmanlık bonusları ve savaş becerileri akışı. Yarış yetenekleri uzay savaşınızı geliştirir, Görev malzemeleri yükseltmelerinizi artırır ve Hyper Tek pazarı tüm ekonomiyi birbirine bağlar."
+        },
+        {
+          "q": "Hangi silahlar mevcut?",
+          "a": "Kara konuşlu toplar, yörünge karşıtı bataryalar, gemiye monteli silah dizileri ve özel biniş ekipmanı. Her sistem, uzun menzilli bombardıman, yakın mesafe muharebesi ve savunma karşı önlemleri dahil olmak üzere belirli taktiksel roller için geliştirilebilir."
+        },
+        {
+          "q": "Gezegenin yüzeyini keşfedebilir miyim?",
+          "a": "Evet. Gezegen gizli ödüller, eserler, kaynaklar ve evcilleştirilmesi gereken tehlikeli yaban hayatı açısından zengindir. Hazineleri bulmak için yüzeyi keşfedin, uzaylı yaratıklar ve canavarlarla savaşın ve Overlord hakimiyeti kampanyanızı güçlendirecek stratejik avantajları keşfedin."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "ÇIKIŞ",
     "spaceRing": "OVERLORD · UZAY HALKASI",
@@ -324,91 +720,268 @@
       "detail": "Detay"
     },
     "rooms": {
-      "storeroom":     { "title": "Depo",                         "desc": "Ham maddeler ve hasat edilen kaynaklar için merkezi depolama merkezi. Madencilik ve rafineri operasyonları arasında envanter dağıtımını yönetir." },
-      "mining_fs":     { "title": "Madencilik FS",                 "desc": "İleri sancak madencilik körfezi. Açık uzayda mineral ve cevher toplamak için derin çekirdek çıkarma dizileriyle donatılmış." },
-      "mining_fp":     { "title": "Madencilik FP",                 "desc": "İleri iskele madencilik körfezi. Sancak birimini yansıtır, kaynak açısından zengin saha operasyonları sırasında çıkarma kapasitesini ikiye katlar." },
-      "process_ref":   { "title": "İşleme Rafinerisi",             "desc": "Ham cevher ve mineralleri rafine alaşımlara dönüştürür. Yakıt sentezi ve gemi yükseltme malzemeleri için kritik." },
-      "mining_rs":     { "title": "Madencilik RS",                 "desc": "Arka sancak madencilik birimi. Yavaş kayma asteroid hasadı sırasında yanal saha süpürmeleri için -45° açıyla yerleştirilmiş." },
-      "mining_rp":     { "title": "Madencilik RP",                 "desc": "Arka iskele madencilik birimi. Arka alan kaynak çıkarma verimini maksimize etmek için RS körfeziyle uyum içinde çalışır." },
-      "fuel_ref":      { "title": "Yakıt Rafinerisi",              "desc": "Rafine alaşımları itme kalitesinde yakıta işler. Ana motoru ve acil durum itici rezervlerini besler." },
-      "workshop":      { "title": "Atölye",                        "desc": "Gemi bakım ve üretim merkezi. Bileşen onarımları, parça üretimi ve ekipman yükseltmelerini yönetir." },
-      "racing":        { "title": "Yarış Hangarı",                 "desc": "Yarış insansız hava araçları ve hafif araçları barındıran özel körfez. RACING oyun modu konuşlanmasını ve pit-stop operasyonlarını destekler." },
-      "brig":          { "title": "Hücre",                         "desc": "Mahkumlar ve değerli kargo için güvenli tutma hücresi. Pekiştirilmiş duvarlar yetkisiz erişimi veya kaçışı engeller." },
-      "armory_ss":     { "title": "Cephanelik SS",                 "desc": "Sancak tarafı silah dolabı. Hafif silahları, mürettebat koruma ekipmanlarını ve kişisel savunma sistemlerini depolar ve bakar." },
-      "armory_ps":     { "title": "Cephanelik PS",                 "desc": "İskele tarafı silah dolabı. SS cephaneliğini yansıtarak geminin her iki tarafında dengeli teçhizat erişimi sağlar." },
-      "main_weapon":   { "title": "Ana Ağır Silah",                "desc": "Birincil ağır silah yerleşimi. Büyük ölçekli muharebe angajmanları için geminin en güçlü saldırı sistemlerini barındırır." },
-      "fwd_shield":    { "title": "İleri Kalkan Üreteci",          "desc": "Geminin baş tarafında koruyucu bir enerji bariyeri oluşturur. Gelen mermilere ve enerji saldırılarına karşı ilk savunma hattı." },
-      "fighter_fss":   { "title": "Savaşçı Körfezi FSS",           "desc": "Kompakt savaş uçağı barındıran ileri sancak körfezi. Muharebe ve devriye görevleri sırasında eskort savaşçılarının hızla konuşlandırılmasını sağlar." },
-      "fighter_fps":   { "title": "Savaşçı Körfezi FPS",           "desc": "İleri iskele savaşçı körfezi. Koordineli savaşçı filo fırlatmaları için FSS körfeziyle uyum içinde çalışır." },
-      "fighter_rss":   { "title": "Savaşçı Körfezi RSS",           "desc": "Arka sancak nacelle savaşçı körfezi. Artçı operasyonları ve takip müdahale senaryolarını destekler." },
-      "fighter_rps":   { "title": "Savaşçı Körfezi RPS",           "desc": "Arka iskele nacelle savaşçı körfezi. Tam savunma savaşçısı konuşlandırması için simetrik arka kapsam sağlar." },
-      "barracks_ss":   { "title": "Kışla SS",                      "desc": "Muharebe personeli için sancak mürettebat odaları. Ranza sistemleri ve ekipman dolaplarıyla askerleri, pilotları ve güvenlik ekiplerini barındırır." },
-      "barracks_ps":   { "title": "Kışla PS",                      "desc": "İskele mürettebat odaları. SS kışlasıyla aynı düzen, eşit mürettebat dağılımı ve her iki taraftan hızlı seferberlik sağlar." },
-      "stables_ss":    { "title": "Ahır SS",                       "desc": "Sancak biyolojik varlık körfezi. Gezegensel yüzey operasyonlarında kullanılan yabancı binek hayvanlarını ve biyomühendislik yaratıklarını barındırır." },
-      "stable_ps":     { "title": "Ahır PS",                       "desc": "İskele biyolojik varlık körfezi. Dengeli yaratık yükü ve simetrik ağırlık dağılımı için SS ahırlarını yansıtır." },
-      "transporter":   { "title": "Taşıyıcı Körfezi",              "desc": "Kuantum destekli personel ve kargo taşıma sistemi. Gezegensel yüzeylere veya yakındaki gemilere hızlı kısa menzilli ışınlamayı sağlar." },
-      "security":      { "title": "Güvenlik İstasyonu",            "desc": "Gemi çapında gözetleme ve tehdit müdahale merkezi. Tüm güverteleri izler ve dahili güvenlik protokollerini koordine eder." },
-      "weapons_ss":    { "title": "Silah Sistemleri SS",           "desc": "Sancak silah yönetim konsolu. Sancak silahları için hedefleme dizilerini, ateşleme sıralarını ve cephane lojistiğini kontrol eder." },
-      "weapons_ps":    { "title": "Silah Sistemleri PS",           "desc": "İskele silah yönetim konsolu. Tüm iskele tarafı silah platformlarının tam bağımsız kontrolünü sağlar." },
-      "power_plant":   { "title": "Güç Santrali",                  "desc": "Çekirdek enerji üretim birimi. Dairesel plazma muhafaza teknolojisi aracılığıyla tüm gemi sistemlerine kararlı güç çıkışı sağlar." },
-      "power_sys":     { "title": "Güç Sistemleri",                "desc": "Güç dağıtım ve düzenleme merkezi. Silahlar, kalkanlar, motorlar ve hayat destek sistemleri arasındaki yük dengelemesini yönetir." },
-      "energy_dist":   { "title": "Enerji Dağıtımı",               "desc": "İkincil enerji yönlendirme düğümü. Yüksek talep koşullarında gemi ortası ve arka bölüm sistemlerine tutarlı güç iletimi sağlar." },
-      "main_engine":   { "title": "Ana Gemi Motoru",               "desc": "Tüm ışık altı seyahati besleyen birincil itme sistemi. Antimateryalle katalize edilmiş plazma jetleri aracılığıyla itme gücü üretir." },
-      "navigation":    { "title": "Navigasyon",                    "desc": "Merkezi navigasyon ve dümen kontrol istasyonu. Rota çizimi, astrokartografi ve gerçek zamanlı konum takibini yönetir." },
-      "flight_deck":   { "title": "Uçuş Güvertesi",                "desc": "Ana pilotaj istasyonu. Kalkış, iniş, yörünge manevraları ve acil kaçınma eylemleri dahil tüm uçuş operasyonlarını kontrol eder." },
-      "weapons_off":   { "title": "Silah Subayı",                  "desc": "Taktik silah komuta noktası. Silah Subayının doğrudan komutası altında saldırı ve savunma ateşini koordine eder." },
-      "comms_off":     { "title": "İletişim Subayı",               "desc": "İletişim ve sinyal müdahale merkezi. Şifreli kanallar dahil tüm gemi içi, ittifak ve gezegensel iletişimleri yönetir." },
-      "capt_quarters": { "title": "Kaptan Kamarası",               "desc": "Geminin komuta subayı için özel kamara. Güvenli veri terminalleri ve özel brifing tesisleri içerir." },
-      "kitchen":       { "title": "Mutfak",                        "desc": "Mürettebat beslenmesi ve yemek hazırlama tesisi. Depolanan gıda kaynaklarını işler ve uzun süreli seyahatler için besin takviyeleri sentezler." },
-      "mess_hall":     { "title": "Yemekhane",                     "desc": "Ortak yemek ve eğlence alanı. Muharebe ve kaynak operasyonları arasındaki boş zaman dilimlerinde mürettebat moral merkezi olarak hizmet eder." },
-      "hydro_1":       { "title": "Hidroponik Hücre 1",            "desc": "Taze gıda ve tıbbi bitkiler üreten otomatik yetiştirme birimi. Uzun süreli görevler için depolanan provizyonlara bağımlılığı azaltır." },
-      "hydro_2":       { "title": "Hidroponik Hücre 2",            "desc": "Ürün çeşitliliğini ve verimini genişleten ikincil hidroponik hücre. Mürettebat beslenimini ve ticaret emtia üretimini destekler." },
-      "hydro_3":       { "title": "Hidroponik Hücre 3",            "desc": "Yüksek verimli temel ürünlere özelleşmiş üçüncül yetiştirme birimi. Büyük mürettebat kadroları için temel kalori arzı sağlar." },
-      "hydro_4":       { "title": "Hidroponik Hücre 4",            "desc": "Tıbbi ve botanik araştırma hücresi. Tıbbi tedavi ve simyasal sentezde kullanılan nadir türler yetiştirir." },
-      "hydro_5":       { "title": "Hidroponik Hücre 5",            "desc": "Egzotik bitki yetiştirme körfezi. Pazar yerinde ticaret için lüks mallar ve nadir bitki örtüsü üretir." },
-      "hydro_6":       { "title": "Hidroponik Hücre 6",            "desc": "Yüksek büyüme deneysel hücre. Genetik modifikasyon programları aracılığıyla geliştirilen yeni ürün çeşitlerini test eder." },
-      "shield_main":   { "title": "Ana Kalkan Üreteci",            "desc": "Birincil çok yönlü kalkan üreteci. Muharebe durumlarında tüm gövde etrafında bir enerji bariyeri yansıtır." },
-      "power_relay1":  { "title": "Güç Aktarıcısı 1",              "desc": "Üst güverte güç aktarıcı kavşağı. Güç santralinden ileri silah ve kalkan dizilerine enerji iletir." },
-      "power_relay2":  { "title": "Güç Aktarıcısı 2",              "desc": "Alt güverte güç aktarıcı kavşağı. Motor nacellelarına ve arka savunma sistemlerine güç dağıtır." },
-      "hidden_st1":    { "title": "Gizli Depolama 1",              "desc": "Gizlenmiş yüksek güvenlikli kasa. Standart envanter taramalarından uzak, sınıflandırılmış kargoyu, değerli eserleri ve kaçakçılık mallarını depolar." },
-      "hidden_st2":    { "title": "Gizli Depolama 2",              "desc": "İkincil gizlenmiş kasa. Maksimum gizlilik gerektiren görev kritik öğeler için ek güvenli alan." },
-      "cargo_1":       { "title": "Kargo Ambarı 1",                "desc": "Birincil toplu kargo körfezi. Cevherler, rafine metaller ve ticaret malları dahil büyük hacimli kaynak taşımacılığı için tasarlanmış." },
-      "cargo_2":       { "title": "Kargo Ambarı 2",                "desc": "Kırılgan veya ısıya duyarlı yükler için optimize edilmiş ikincil kargo körfezi. İklim kontrollü depolama koşulları." },
-      "cargo_3":       { "title": "Kargo Ambarı 3",                "desc": "Üçüncül kargo körfezi. Yapılandırılabilir düzen; araçlar, konteynerler ve büyük boy ekipmanlar dahil karışık yükleri destekler." },
-      "war_council":   { "title": "Savaş Konseyi",                 "desc": "Stratejik komuta odası. Muharebe planları, ittifak stratejileri ve kampanya hedeflerinin koordine edildiği kıdemli subay brifing masası." },
-      "academy":       { "title": "Akademi",                       "desc": "Mürettebat eğitim ve öğretim tesisi. Beceri geliştirme, uzmanlık kilidini açma ve subay geliştirme programlarını mümkün kılar." },
-      "science_lab":   { "title": "Bilim Laboratuvarı",            "desc": "Araştırma ve geliştirme merkezi. Malzeme bilimi, itme teorisi ve yabancı teknoloji analizinde deneyler yürütür." },
-      "dna_lab":       { "title": "DNA Laboratuvarı",              "desc": "Genetik araştırma tesisi. Mürettebat için biyolojik geliştirmeler geliştirir, yeni tür varyantları oluşturur ve yabancı DNA örneklerini araştırır." },
-      "cryostasis":    { "title": "Kriyostaz",                     "desc": "Uzun menzilli yolculuk askıya alma sistemi. Çok yıllık derin uzay yolculukları sırasında kaynakları korumak için mürettebatı kriyojenik uyku moduna alır." },
-      "dna_chambers":  { "title": "DNA Odaları",                   "desc": "Genetik modifikasyon körfezleri. Araştırılmış DNA geliştirmelerini doğrudan mürettebat üyelerine ve biyolojik birimlere uygular." },
-      "weapons_relay": { "title": "Silah Güç Aktarıcısı",          "desc": "Ağır silah sistemleri için özel güç yönetim düğümü. Sürdürülen muharebe angajmanları sırasında kararlı enerji arzı sağlar." },
-      "comms_tower":   { "title": "İletişim Kulesi",               "desc": "Uzun menzilli derin uzay iletişim dizisi. Geniş mesafelerde filo çapında yayınları, yıldızlararası iletileri ve ittifak koordinasyonunu mümkün kılar." }
+      "storeroom": {
+        "title": "Depo",
+        "desc": "Ham maddeler ve hasat edilen kaynaklar için merkezi depolama merkezi. Madencilik ve rafineri operasyonları arasında envanter dağıtımını yönetir."
+      },
+      "mining_fs": {
+        "title": "Madencilik FS",
+        "desc": "İleri sancak madencilik körfezi. Açık uzayda mineral ve cevher toplamak için derin çekirdek çıkarma dizileriyle donatılmış."
+      },
+      "mining_fp": {
+        "title": "Madencilik FP",
+        "desc": "İleri iskele madencilik körfezi. Sancak birimini yansıtır, kaynak açısından zengin saha operasyonları sırasında çıkarma kapasitesini ikiye katlar."
+      },
+      "process_ref": {
+        "title": "İşleme Rafinerisi",
+        "desc": "Ham cevher ve mineralleri rafine alaşımlara dönüştürür. Yakıt sentezi ve gemi yükseltme malzemeleri için kritik."
+      },
+      "mining_rs": {
+        "title": "Madencilik RS",
+        "desc": "Arka sancak madencilik birimi. Yavaş kayma asteroid hasadı sırasında yanal saha süpürmeleri için -45° açıyla yerleştirilmiş."
+      },
+      "mining_rp": {
+        "title": "Madencilik RP",
+        "desc": "Arka iskele madencilik birimi. Arka alan kaynak çıkarma verimini maksimize etmek için RS körfeziyle uyum içinde çalışır."
+      },
+      "fuel_ref": {
+        "title": "Yakıt Rafinerisi",
+        "desc": "Rafine alaşımları itme kalitesinde yakıta işler. Ana motoru ve acil durum itici rezervlerini besler."
+      },
+      "workshop": {
+        "title": "Atölye",
+        "desc": "Gemi bakım ve üretim merkezi. Bileşen onarımları, parça üretimi ve ekipman yükseltmelerini yönetir."
+      },
+      "racing": {
+        "title": "Yarış Hangarı",
+        "desc": "Yarış insansız hava araçları ve hafif araçları barındıran özel körfez. RACING oyun modu konuşlanmasını ve pit-stop operasyonlarını destekler."
+      },
+      "brig": {
+        "title": "Hücre",
+        "desc": "Mahkumlar ve değerli kargo için güvenli tutma hücresi. Pekiştirilmiş duvarlar yetkisiz erişimi veya kaçışı engeller."
+      },
+      "armory_ss": {
+        "title": "Cephanelik SS",
+        "desc": "Sancak tarafı silah dolabı. Hafif silahları, mürettebat koruma ekipmanlarını ve kişisel savunma sistemlerini depolar ve bakar."
+      },
+      "armory_ps": {
+        "title": "Cephanelik PS",
+        "desc": "İskele tarafı silah dolabı. SS cephaneliğini yansıtarak geminin her iki tarafında dengeli teçhizat erişimi sağlar."
+      },
+      "main_weapon": {
+        "title": "Ana Ağır Silah",
+        "desc": "Birincil ağır silah yerleşimi. Büyük ölçekli muharebe angajmanları için geminin en güçlü saldırı sistemlerini barındırır."
+      },
+      "fwd_shield": {
+        "title": "İleri Kalkan Üreteci",
+        "desc": "Geminin baş tarafında koruyucu bir enerji bariyeri oluşturur. Gelen mermilere ve enerji saldırılarına karşı ilk savunma hattı."
+      },
+      "fighter_fss": {
+        "title": "Savaşçı Körfezi FSS",
+        "desc": "Kompakt savaş uçağı barındıran ileri sancak körfezi. Muharebe ve devriye görevleri sırasında eskort savaşçılarının hızla konuşlandırılmasını sağlar."
+      },
+      "fighter_fps": {
+        "title": "Savaşçı Körfezi FPS",
+        "desc": "İleri iskele savaşçı körfezi. Koordineli savaşçı filo fırlatmaları için FSS körfeziyle uyum içinde çalışır."
+      },
+      "fighter_rss": {
+        "title": "Savaşçı Körfezi RSS",
+        "desc": "Arka sancak nacelle savaşçı körfezi. Artçı operasyonları ve takip müdahale senaryolarını destekler."
+      },
+      "fighter_rps": {
+        "title": "Savaşçı Körfezi RPS",
+        "desc": "Arka iskele nacelle savaşçı körfezi. Tam savunma savaşçısı konuşlandırması için simetrik arka kapsam sağlar."
+      },
+      "barracks_ss": {
+        "title": "Kışla SS",
+        "desc": "Muharebe personeli için sancak mürettebat odaları. Ranza sistemleri ve ekipman dolaplarıyla askerleri, pilotları ve güvenlik ekiplerini barındırır."
+      },
+      "barracks_ps": {
+        "title": "Kışla PS",
+        "desc": "İskele mürettebat odaları. SS kışlasıyla aynı düzen, eşit mürettebat dağılımı ve her iki taraftan hızlı seferberlik sağlar."
+      },
+      "stables_ss": {
+        "title": "Ahır SS",
+        "desc": "Sancak biyolojik varlık körfezi. Gezegensel yüzey operasyonlarında kullanılan yabancı binek hayvanlarını ve biyomühendislik yaratıklarını barındırır."
+      },
+      "stable_ps": {
+        "title": "Ahır PS",
+        "desc": "İskele biyolojik varlık körfezi. Dengeli yaratık yükü ve simetrik ağırlık dağılımı için SS ahırlarını yansıtır."
+      },
+      "transporter": {
+        "title": "Taşıyıcı Körfezi",
+        "desc": "Kuantum destekli personel ve kargo taşıma sistemi. Gezegensel yüzeylere veya yakındaki gemilere hızlı kısa menzilli ışınlamayı sağlar."
+      },
+      "security": {
+        "title": "Güvenlik İstasyonu",
+        "desc": "Gemi çapında gözetleme ve tehdit müdahale merkezi. Tüm güverteleri izler ve dahili güvenlik protokollerini koordine eder."
+      },
+      "weapons_ss": {
+        "title": "Silah Sistemleri SS",
+        "desc": "Sancak silah yönetim konsolu. Sancak silahları için hedefleme dizilerini, ateşleme sıralarını ve cephane lojistiğini kontrol eder."
+      },
+      "weapons_ps": {
+        "title": "Silah Sistemleri PS",
+        "desc": "İskele silah yönetim konsolu. Tüm iskele tarafı silah platformlarının tam bağımsız kontrolünü sağlar."
+      },
+      "power_plant": {
+        "title": "Güç Santrali",
+        "desc": "Çekirdek enerji üretim birimi. Dairesel plazma muhafaza teknolojisi aracılığıyla tüm gemi sistemlerine kararlı güç çıkışı sağlar."
+      },
+      "power_sys": {
+        "title": "Güç Sistemleri",
+        "desc": "Güç dağıtım ve düzenleme merkezi. Silahlar, kalkanlar, motorlar ve hayat destek sistemleri arasındaki yük dengelemesini yönetir."
+      },
+      "energy_dist": {
+        "title": "Enerji Dağıtımı",
+        "desc": "İkincil enerji yönlendirme düğümü. Yüksek talep koşullarında gemi ortası ve arka bölüm sistemlerine tutarlı güç iletimi sağlar."
+      },
+      "main_engine": {
+        "title": "Ana Gemi Motoru",
+        "desc": "Tüm ışık altı seyahati besleyen birincil itme sistemi. Antimateryalle katalize edilmiş plazma jetleri aracılığıyla itme gücü üretir."
+      },
+      "navigation": {
+        "title": "Navigasyon",
+        "desc": "Merkezi navigasyon ve dümen kontrol istasyonu. Rota çizimi, astrokartografi ve gerçek zamanlı konum takibini yönetir."
+      },
+      "flight_deck": {
+        "title": "Uçuş Güvertesi",
+        "desc": "Ana pilotaj istasyonu. Kalkış, iniş, yörünge manevraları ve acil kaçınma eylemleri dahil tüm uçuş operasyonlarını kontrol eder."
+      },
+      "weapons_off": {
+        "title": "Silah Subayı",
+        "desc": "Taktik silah komuta noktası. Silah Subayının doğrudan komutası altında saldırı ve savunma ateşini koordine eder."
+      },
+      "comms_off": {
+        "title": "İletişim Subayı",
+        "desc": "İletişim ve sinyal müdahale merkezi. Şifreli kanallar dahil tüm gemi içi, ittifak ve gezegensel iletişimleri yönetir."
+      },
+      "capt_quarters": {
+        "title": "Kaptan Kamarası",
+        "desc": "Geminin komuta subayı için özel kamara. Güvenli veri terminalleri ve özel brifing tesisleri içerir."
+      },
+      "kitchen": {
+        "title": "Mutfak",
+        "desc": "Mürettebat beslenmesi ve yemek hazırlama tesisi. Depolanan gıda kaynaklarını işler ve uzun süreli seyahatler için besin takviyeleri sentezler."
+      },
+      "mess_hall": {
+        "title": "Yemekhane",
+        "desc": "Ortak yemek ve eğlence alanı. Muharebe ve kaynak operasyonları arasındaki boş zaman dilimlerinde mürettebat moral merkezi olarak hizmet eder."
+      },
+      "hydro_1": {
+        "title": "Hidroponik Hücre 1",
+        "desc": "Taze gıda ve tıbbi bitkiler üreten otomatik yetiştirme birimi. Uzun süreli görevler için depolanan provizyonlara bağımlılığı azaltır."
+      },
+      "hydro_2": {
+        "title": "Hidroponik Hücre 2",
+        "desc": "Ürün çeşitliliğini ve verimini genişleten ikincil hidroponik hücre. Mürettebat beslenimini ve ticaret emtia üretimini destekler."
+      },
+      "hydro_3": {
+        "title": "Hidroponik Hücre 3",
+        "desc": "Yüksek verimli temel ürünlere özelleşmiş üçüncül yetiştirme birimi. Büyük mürettebat kadroları için temel kalori arzı sağlar."
+      },
+      "hydro_4": {
+        "title": "Hidroponik Hücre 4",
+        "desc": "Tıbbi ve botanik araştırma hücresi. Tıbbi tedavi ve simyasal sentezde kullanılan nadir türler yetiştirir."
+      },
+      "hydro_5": {
+        "title": "Hidroponik Hücre 5",
+        "desc": "Egzotik bitki yetiştirme körfezi. Pazar yerinde ticaret için lüks mallar ve nadir bitki örtüsü üretir."
+      },
+      "hydro_6": {
+        "title": "Hidroponik Hücre 6",
+        "desc": "Yüksek büyüme deneysel hücre. Genetik modifikasyon programları aracılığıyla geliştirilen yeni ürün çeşitlerini test eder."
+      },
+      "shield_main": {
+        "title": "Ana Kalkan Üreteci",
+        "desc": "Birincil çok yönlü kalkan üreteci. Muharebe durumlarında tüm gövde etrafında bir enerji bariyeri yansıtır."
+      },
+      "power_relay1": {
+        "title": "Güç Aktarıcısı 1",
+        "desc": "Üst güverte güç aktarıcı kavşağı. Güç santralinden ileri silah ve kalkan dizilerine enerji iletir."
+      },
+      "power_relay2": {
+        "title": "Güç Aktarıcısı 2",
+        "desc": "Alt güverte güç aktarıcı kavşağı. Motor nacellelarına ve arka savunma sistemlerine güç dağıtır."
+      },
+      "hidden_st1": {
+        "title": "Gizli Depolama 1",
+        "desc": "Gizlenmiş yüksek güvenlikli kasa. Standart envanter taramalarından uzak, sınıflandırılmış kargoyu, değerli eserleri ve kaçakçılık mallarını depolar."
+      },
+      "hidden_st2": {
+        "title": "Gizli Depolama 2",
+        "desc": "İkincil gizlenmiş kasa. Maksimum gizlilik gerektiren görev kritik öğeler için ek güvenli alan."
+      },
+      "cargo_1": {
+        "title": "Kargo Ambarı 1",
+        "desc": "Birincil toplu kargo körfezi. Cevherler, rafine metaller ve ticaret malları dahil büyük hacimli kaynak taşımacılığı için tasarlanmış."
+      },
+      "cargo_2": {
+        "title": "Kargo Ambarı 2",
+        "desc": "Kırılgan veya ısıya duyarlı yükler için optimize edilmiş ikincil kargo körfezi. İklim kontrollü depolama koşulları."
+      },
+      "cargo_3": {
+        "title": "Kargo Ambarı 3",
+        "desc": "Üçüncül kargo körfezi. Yapılandırılabilir düzen; araçlar, konteynerler ve büyük boy ekipmanlar dahil karışık yükleri destekler."
+      },
+      "war_council": {
+        "title": "Savaş Konseyi",
+        "desc": "Stratejik komuta odası. Muharebe planları, ittifak stratejileri ve kampanya hedeflerinin koordine edildiği kıdemli subay brifing masası."
+      },
+      "academy": {
+        "title": "Akademi",
+        "desc": "Mürettebat eğitim ve öğretim tesisi. Beceri geliştirme, uzmanlık kilidini açma ve subay geliştirme programlarını mümkün kılar."
+      },
+      "science_lab": {
+        "title": "Bilim Laboratuvarı",
+        "desc": "Araştırma ve geliştirme merkezi. Malzeme bilimi, itme teorisi ve yabancı teknoloji analizinde deneyler yürütür."
+      },
+      "dna_lab": {
+        "title": "DNA Laboratuvarı",
+        "desc": "Genetik araştırma tesisi. Mürettebat için biyolojik geliştirmeler geliştirir, yeni tür varyantları oluşturur ve yabancı DNA örneklerini araştırır."
+      },
+      "cryostasis": {
+        "title": "Kriyostaz",
+        "desc": "Uzun menzilli yolculuk askıya alma sistemi. Çok yıllık derin uzay yolculukları sırasında kaynakları korumak için mürettebatı kriyojenik uyku moduna alır."
+      },
+      "dna_chambers": {
+        "title": "DNA Odaları",
+        "desc": "Genetik modifikasyon körfezleri. Araştırılmış DNA geliştirmelerini doğrudan mürettebat üyelerine ve biyolojik birimlere uygular."
+      },
+      "weapons_relay": {
+        "title": "Silah Güç Aktarıcısı",
+        "desc": "Ağır silah sistemleri için özel güç yönetim düğümü. Sürdürülen muharebe angajmanları sırasında kararlı enerji arzı sağlar."
+      },
+      "comms_tower": {
+        "title": "İletişim Kulesi",
+        "desc": "Uzun menzilli derin uzay iletişim dizisi. Geniş mesafelerde filo çapında yayınları, yıldızlararası iletileri ve ittifak koordinasyonunu mümkün kılar."
+      }
     },
     "guns": {
-      "far_left_bar":      "Ön Ana Top",
-      "fore_port_bay":     "Sancak Top Bataryası İleri",
-      "fore_stbd_bay":     "İskele Top Bataryası İleri",
-      "pd_gun_1":          "Kokpit Sancak Savunma Hücresi 1",
-      "pd_gun_2":          "Kokpit Sancak Savunma Hücresi 2",
-      "pd_gun_3":          "Kokpit Sancak Savunma Hücresi 3",
-      "pd_gun_4":          "Kokpit Sancak Savunma Hücresi 4",
-      "pd_gun_5":          "Kokpit Sancak Savunma Hücresi 5",
-      "pd_gun_6":          "Kokpit Sancak Savunma Hücresi 6",
-      "vert_oval_upper":   "Kokpit Merkez Savunma Hücresi Alt",
-      "vert_oval_lower":   "Kokpit Merkez Savunma Hücresi Üst",
-      "center_front_gun":  "İleri Üst Güverte Top Dizisi",
-      "pd_gun_7":          "Kokpit İskele Savunma Hücresi 1",
-      "pd_gun_8":          "Kokpit İskele Savunma Hücresi 2",
-      "pd_gun_9":          "Kokpit İskele Savunma Hücresi 3",
-      "pd_gun_10":         "Kokpit İskele Savunma Hücresi 4",
-      "pd_gun_11":         "Kokpit İskele Savunma Hücresi 5",
-      "pd_gun_12":         "Kokpit İskele Savunma Hücresi 6",
+      "far_left_bar": "Ön Ana Top",
+      "fore_port_bay": "Sancak Top Bataryası İleri",
+      "fore_stbd_bay": "İskele Top Bataryası İleri",
+      "pd_gun_1": "Kokpit Sancak Savunma Hücresi 1",
+      "pd_gun_2": "Kokpit Sancak Savunma Hücresi 2",
+      "pd_gun_3": "Kokpit Sancak Savunma Hücresi 3",
+      "pd_gun_4": "Kokpit Sancak Savunma Hücresi 4",
+      "pd_gun_5": "Kokpit Sancak Savunma Hücresi 5",
+      "pd_gun_6": "Kokpit Sancak Savunma Hücresi 6",
+      "vert_oval_upper": "Kokpit Merkez Savunma Hücresi Alt",
+      "vert_oval_lower": "Kokpit Merkez Savunma Hücresi Üst",
+      "center_front_gun": "İleri Üst Güverte Top Dizisi",
+      "pd_gun_7": "Kokpit İskele Savunma Hücresi 1",
+      "pd_gun_8": "Kokpit İskele Savunma Hücresi 2",
+      "pd_gun_9": "Kokpit İskele Savunma Hücresi 3",
+      "pd_gun_10": "Kokpit İskele Savunma Hücresi 4",
+      "pd_gun_11": "Kokpit İskele Savunma Hücresi 5",
+      "pd_gun_12": "Kokpit İskele Savunma Hücresi 6",
       "upper_flank_array": "Sancak Top Bataryası Arka",
       "lower_flank_array": "İskele Top Bataryası Arka",
-      "spine_gun_1":       "Orta Üst Güverte Top Dizisi",
-      "spine_gun_2":       "Alt Merkez Omurga Dizisi",
-      "spine_gun_3":       "Arka Merkez Omurga Dizisi",
-      "mid_rail_gun":      "Merkez Kule Tahkimatı",
+      "spine_gun_1": "Orta Üst Güverte Top Dizisi",
+      "spine_gun_2": "Alt Merkez Omurga Dizisi",
+      "spine_gun_3": "Arka Merkez Omurga Dizisi",
+      "mid_rail_gun": "Merkez Kule Tahkimatı",
       "upper_nacelle_bay": "Sancak Kanat Dizisi",
       "lower_nacelle_bay": "İskele Kanat Dizisi"
     },
@@ -476,6 +1049,76 @@
           "notes": "Dryad'lar, ağaçların ve uzaylı varlıkların özelliklerini birleştiren hibrit doğalarıyla büyüleyici ve benzersiz bir türdür. Bu ayırt edici fizyoloji, onların çeşitli ortamlarda gelişmesine ve sıklıkla çevrelerindeki bitki örtüsüne benzemelerine olanak tanır. Birbirleriyle sorunsuz iletişim kurmalarını sağlayan kovan benzeri bir zihinleri vardır. Bu kolektif bilinç, derin bir birlik ve işbirliği duygusunu teşvik eder. Diyetleri ağırlıklı olarak bitkisel bazlıdır; yapraklar, meyveler ve diğer botanik materyallerden oluşur. Bununla birlikte, zaman zaman büyük özenle temin ettikleri küçük miktarlarda etle diyetlerini tamamlarlar. Fiziksel niteliklerine ek olarak, Dryad'lar oyunbaz ve yaramaz davranışlarıyla bilinir. Birbirlerine ve yurtlarına olan sadakatları sarsılmazdır ve tehdit altında topluluk ve topraklarını şiddetle korurlar. Ruhsal açıdan Dryad'lar, doğanın döngüleriyle iç içe geçmiş bir ahirete derin bir inanç taşır. Doğal unsurları (Toprak, Hava, Ateş ve Su) ilahi güçler olarak saygıyla karşılarlar ve güneş ile yıldızlar gibi gök cisimlerine de taparlar."
         }
       }
-    }
+    },
+    "back": "← GERİ",
+    "viewArrow": "GÖRÜNTÜLE →",
+    "selectCategory": "KATEGORİ SEÇ",
+    "comingSoon": "YAKINDA",
+    "specialistProfileDesc": "Uzman profili — oyun başlatıldığında tam istatistikler ve yetenekler mevcut olacaktır.",
+    "alliance": {
+      "rank": {
+        "leader": "Lider",
+        "coleader": "Yardımcı Lider",
+        "officer": "Subay",
+        "member": "Üye"
+      },
+      "status": {
+        "online": "Çevrimiçi",
+        "offline": "Çevrimdışı",
+        "away": "Uzakta"
+      },
+      "manage": {
+        "editInfo": "İttifak Bilgilerini Düzenle",
+        "editInfoDesc": "Ad, etiket ve açıklamayı değiştir",
+        "joinRequests": "Katılma İsteklerini Yönet",
+        "joinRequestsDesc": "Yeni üyeleri incele ve kabul et",
+        "donationGoals": "Bağış Hedefleri Belirle",
+        "donationGoalsDesc": "Haftalık bağış hedeflerini yapılandır",
+        "warSettings": "İttifak Savaş Ayarları",
+        "warSettingsDesc": "Savaş katılım kurallarını yapılandır",
+        "kickMembers": "Üyeleri At",
+        "kickMembersDesc": "Aktif olmayan veya kural ihlali yapan üyeleri kaldır"
+      },
+      "allianceMail": {
+        "warResults": "İttifak Savaş Sonuçları",
+        "strategyPlan": "Yeni Strateji Planı",
+        "donationSummary": "Haftalık Bağış Özeti",
+        "meeting1800": "18:00'de Toplantı",
+        "levelUp": "İttifak Seviye Atladı!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "HyperTek'e Hoş Geldiniz!",
+      "maintenance": "Sunucu Bakım Bildirimi",
+      "allianceWar": "İttifak Savaş Duyurusu",
+      "galacticCup": "Galaktik Kupa Kaydı",
+      "baseAttacked": "Üssünüz saldırıya uğradı!",
+      "loginReward": "Günlük Giriş Ödülü Hazır",
+      "refiningEvent": "Rafineri Ustası Etkinliği Başlıyor",
+      "meeting1800": "18:00'de Toplantı"
+    },
+    "chat": {
+      "autoTranslateOn": "Otomatik çeviri AÇIK — Mesajlar her alıcının dilinde iletilir",
+      "autoTranslateOff": "Otomatik çeviri KAPALI"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Bu gece ittifak savaşı için kim var?",
+      "ggLastRace": "Son yarışta GG, harika hız",
+      "tradingPlasma": "Plazma çubuklarını teknik kitaplarla takas ediyorum",
+      "needHelpAsteroid": "Asteroid misyonunda yardıma ihtiyacım var",
+      "allianceRecruiting": "İttifakımız üye arıyor, bana DM at",
+      "donationGoalsPlasma": "Bağış hedefleri: plazma çubukları gerekiyor!",
+      "warStarts2Hours": "Savaş 2 saat sonra başlıyor, hazırlanın",
+      "handleMedicalSupport": "Tıbbi desteği ben üstleniyorum",
+      "wts50Engines": "SATILIK: 50 motor, PM at",
+      "wtbAntiGravity": "ALIYORUM: Anti-yerçekimi modülleri x10",
+      "sellingRareSkins": "Nadir skin satıyorum, profile bak"
+    },
+    "devicePairing": "CİHAZ EŞLEŞTİRME",
+    "deviceOffline": "ÇEVRİMDIŞI",
+    "pairing": "EŞLEŞTİRİLİYOR...",
+    "unavailableNow": "ŞU AN KULLANILAMIYOR",
+    "pairDevice": "CİHAZI EŞLEŞTİR",
+    "vrInteractionMode": "VR Etkileşim MODU · Yakında"
   }
 }

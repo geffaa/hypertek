@@ -1,4 +1,400 @@
 {
+  "gamePage": {
+    "welcomeTo": "Maligayang pagdating sa",
+    "back": "Bumalik",
+    "racing": {
+      "label": "KArera",
+      "heading": "Hyper Racing",
+      "subtitle": "Ang pinakamatinding karanasan sa karera ng sasakyang lumilipad sa kalawakan,\nkung saan ang kasanayan ay nagbabayad, at ang mga kampeon ay ginawa.",
+      "intro": [
+        "Ang Hyper Racing ay isang high-octane competitive racing game na itinakda sa mga dayuhan na mundo, kung saan ang mga manlalaro ay bumuo, mag-upgrade, at magpi-pilot ng ganap na nako-customize na mga flying race vehicle sa ilan sa mga pinaka-mapanganib na circuit sa kalawakan. Mula sa mga lumulutang na pormasyon ng bato at mga tubo ng lava ng bulkan hanggang sa mga disyerto at mga daanan ng bundok, bawat karera ay isang pagsubok ng paghahanda, reflexes, at diskarte.",
+        "Ngunit ang Hyper Racing ay higit pa sa isang laro; ito ay isang mapagkumpitensyang platform kung saan ang mga tunay na gantimpala ay nasa linya. Ang mga nangungunang gumaganap ay maaaring pumasok sa mga ranggo na kaganapan at paligsahan na may tunay na cash prize pool. Ang mas mahusay na karera mo, mas malaki ang iyong kinikita. Hinahabol mo man ang leaderboard na kaluwalhatian o pagbuo ng isang racing empire, lahat ng ginagawa mo sa Hyper Racing ay nagpapasulong sa iyo.",
+        "I-upgrade ang iyong mga sasakyan sa karera mula ilong hanggang buntot. I-recruit at i-level up ang iyong pit crew. Mag-hire ng pit manager na tumutugma sa iyong pilosopiya sa karera. Pagkatapos ay dalhin ang iyong mga kasanayan sa kabila ng track, ang iyong garahe sa karera ay magdodoble bilang hangar ng iyong personal na sasakyang pangkalawakan, at bawat kakayahan na iyong binuo ay nagdadala sa labanan sa kalawakan sa Hyper Quest at Overlord of the 7 Realms."
+      ],
+      "introClose": "Magbasa pa upang matuklasan kung paano gumagana ang laro, kung ano ang maaari mong mapanalunan, at kung paano pinapagana ng iyong karera sa karera ang buong uniberso ng pag-unlad.",
+      "calloutLine1": "Race para Kumita. Kumita para Mag-upgrade.",
+      "calloutLine2": "Mag-upgrade sa Dominate.",
+      "howItWorksTitle": "Paano Gumagana ang Hyper Racing",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Piliin ang Iyong Sasakyan",
+          "body": "Ang bawat karera ay nagsisimula sa iyong garahe. Pumili mula sa dumaraming roster ng mga lumilipad na sasakyang pang-karera, bawat isa ay may natatanging katangian sa paghawak at potensyal na mag-upgrade. Hubaran ang isang katawan ng barko pababa para sa blistering straight-line na bilis o baluti ito upang makaligtas sa pinaka-brutal na mga kondisyon. Ang mga thruster, stabilizer, shield, cooling system, aerodynamic fins, ang upgrade tree ay tumatakbo nang malalim, at bawat pagbabago ay nagbabago kung paano kumikilos ang iyong craft sa track."
+        },
+        {
+          "num": "02",
+          "title": "Buuin ang Iyong Koponan",
+          "body": "Ang karera ay isang team sport. Mag-recruit ng mga pit crew specialist na nagdadala ng mga natatanging bonus, mas mabilis na pag-refuel, real-time na diagnostic, emergency na mid-race hull repair, at between-lap performance tweaks. Ang bawat miyembro ng crew ay nag-level up gamit ang karanasan, na naglalagay ng malalakas na kakayahan sa ibabaw ng iyong mga pag-upgrade ng sasakyan. Pagkatapos ay mag-hire ng pit manager para mag-coordinate ng mga operasyon, tumawag sa diskarte sa lahi, at mag-unlock ng mga pagpapalakas ng performance sa buong team na tambalan sa buong season."
+        },
+        {
+          "num": "03",
+          "title": "Lahi sa buong Mundo",
+          "body": "Ang mga circuit ay sumasaklaw sa mga dayuhang planeta na may kakaibang lupain at mga panganib sa atmospera. Maghabi sa pamamagitan ng Avatar-style na mga floating rock formation, sinulid ang volcanic lava tubes sa napakabilis na bilis, mapunit sa walang katapusang mga kapatagan ng disyerto, at mag-ukit sa mga mapanlinlang na hanay ng bundok. Acid rain, radioactive atmospheres, shifting gravity, at magulong hangin, walang dalawang karera ang humihiling ng parehong setup. Ang pag-tune ng iyong sasakyan upang tumugma sa bawat kapaligiran ay kung saan natutugunan ng diskarte ang kasanayan."
+        },
+        {
+          "num": "04",
+          "title": "Umakyat sa Ranggo",
+          "body": "Ang tagumpay ay nakakakuha ng mga puntos ng lider, nagbubukas ng mga bagong circuit sa malalayong mundo, at nagbubukas ng pinto sa mga mas mataas na antas na kumpetisyon. Kung mas malalim ang iyong pagpunta, mas mabangis ang mga kalaban at mas malaki ang pusta. Patunayan ang iyong sarili sa bawat planeta at tumaas sa mga pandaigdigang ranggo."
+        }
+      ],
+      "rewardsTitle": "Manalo ng Malaki; Mga Gantimpala na Mahalaga!",
+      "rewards": [
+        {
+          "title": "Mga In-Game Rewards",
+          "body": "Bawat karera na natapos mo ay nagbabayad. Manalo, at dumarami ang mga gantimpala. Ang mga tagumpay sa karera ay nag-a-unlock ng mga premium na bahagi ng sasakyan, mga bihirang materyales sa pag-upgrade, mga eksklusibong token sa recruitment ng crew, at mga kredito upang pondohan ang iyong susunod na build. Magbenta ng mga na-upgrade na sasakyan para kumita, muling mamuhunan sa mga bagong makina, at panoorin ang paglaki ng iyong racing empire sa bawat podium finish."
+        },
+        {
+          "title": "Mga Kaganapang Tunay na Cash",
+          "body": "Dinadala ng Hyper Racing ang kumpetisyon sa susunod na antas na may mga ranggo na kaganapan at paligsahan kung saan totoong pera ang nasa linya. Sumali sa mga kumpetisyon na nakabatay sa kasanayan, patunayan ang iyong kakayahan laban sa pinakamahusay na mga piloto sa kalawakan, at lumayo nang may mga tunay na cash payout. Kung mas mataas ang lugar mo, mas malaki ang prize pool. Mula sa lingguhang ranggo na mga hamon hanggang sa mga seasonal na kaganapan sa kampeonato, palaging may mga pagkakataon para sa mga nangungunang gumaganap na gawing tunay na kita ang kanilang mga kasanayan sa karera."
+        },
+        {
+          "title": "Paano Gumagana ang Mga Premyo",
+          "body": "Ang mga manlalaro ay kwalipikado sa pamamagitan ng ranggo na paglalaro, na nakakatugon sa mga limitasyon ng pagganap na nagbibigay ng pagpasok sa mga cash-prize na tournament. Ang mga kaganapan ay nakaayos ayon sa patas na paggawa ng mga posporo, na tinitiyak na ang bawat katunggali ay haharap sa mga kalaban na may katulad na kasanayan. Ang mga bayarin sa pagpasok ay transparent, ang mga prize pool ay malinaw na ipinapakita bago ka mag-commit, at ang mga payout ay mabilis na naproseso pagkatapos ng bawat kaganapan. Ito ay mapagkumpitensya, ito ay patas, at ang mga gantimpala ay totoo."
+        },
+        {
+          "title": "Pag-unlad Higit pa sa Track",
+          "body": "Mga reward na nakuha sa pamamagitan ng racing feed nang direkta sa iyong mas malawak na pag-unlad. I-upgrade ang iyong mga race vehicle, palakasin ang iyong pit crew, at funnel ang mga panalo sa pag-upgrade ng iyong pangunahing sasakyang pangalangaang. Ang iyong racing garage ay ang hangar bay ng barkong iyon, kaya bawat pagpapahusay sa iyong operasyon sa karera ay nagpapalakas din sa sasakyang lumilipad ka sa pagitan ng mga mundo at sa labanan sa kalawakan sa kabuuan ng Hyper Quest at Overlord of the 7 Realms."
+        }
+      ],
+      "upgradesTitle": "Dalawang Makina, Isang Misyon... I-upgrade ang Lahat",
+      "upgrades": [
+        {
+          "title": "Mga Upgrade ng Karera ng Sasakyan",
+          "body": "Ang iyong sasakyan sa karera ay isang ganap na modular na makina. Ang bawat bahagi ay maaaring palitan, tune, at i-upgrade: hull, thrusters, shield, outer shell, engine, stabilizer, cooling system, at aerodynamic surface. Ang mga magaan na composite ay naghahatid ng hilaw na bilis; Ang heavy-duty na armor ay nagpapanatili sa iyo na buhay sa pamamagitan ng malupit na mga kondisyon sa atmospera. Ang landas ng pag-upgrade ay malalim, at ang mga pagpipiliang gagawin mo ay tumutukoy sa iyong pagkakakilanlan sa karera. Bumili ng mga bagong sasakyan, itayo ang mga ito sa mga kampeonato na kalaban, takbuhan ang mga ito sa tagumpay, at ibenta ang mga ito nang may tubo kapag handa ka na para sa susunod na hamon."
+        },
+        {
+          "title": "Mga Pangunahing Pag-upgrade ng Spaceship",
+          "body": "Ang iyong garahe ng karera ay hindi lamang isang pagawaan; ito ang hangar bay ng iyong personal na sasakyang pangkalawakan. Ang parehong mga mapagkukunan, kredito, at materyales na iyong kinikita sa track ay maaaring i-invest sa pag-upgrade ng iyong pangunahing sasakyang-dagat. Mas mahuhusay na makina para sa paglalakbay sa pagitan ng mga planeta, mas malalakas na sistema ng mga armas para sa labanan sa kalawakan, pinahusay na nabigasyon para sa pagtuklas ng mga bagong mundo ng karera, at pinatibay na mga katawan ng barko para sa mga nakaligtas sa mga pagalit na engkwentro habang nagbibiyahe. Ang iyong spaceship ay ang iyong home base, ang iyong transportasyon, at ang iyong battleship, at ang karera ay nagpapalakas dito."
+        },
+        {
+          "title": "Ang Upgrade Loop",
+          "body": "Race para kumita. Kumita para mag-upgrade. Mag-upgrade para manalo ng mas malalaking karera na may mas malalaking reward. I-funnel ang mga reward na iyon sa iyong mga racing vehicle at sa iyong spaceship. Kung mas mahusay ang iyong barko, mas malayo ang iyong paglalakbay at mas mapanganib at kumikita ang mga circuit. Isa itong progression loop na nagbibigay gantimpala sa dedikasyon at kasanayan sa bawat antas."
+        },
+        {
+          "title": "Cross-Game Impact",
+          "body": "Bawat pilot skill na iyong nabubuo sa track at bawat upgrade na iyong i-install sa iyong spaceship ay direktang dinadala sa Hyper Quest at Overlord of the 7 Realms. Isang uniberso, maraming laro, tuluy-tuloy na pag-unlad. Ang binuo mo sa Hyper Racing ay nagpapalakas sa lahat ng iba pa."
+        }
+      ],
+      "faqTitle": "Hyper Racing — Mga Madalas Itanong",
+      "faq": [
+        {
+          "q": "Ano ang Hyper Racing?",
+          "a": "Isang high-intensity flying vehicle racing game na itinakda sa mga dayuhan na mundo. Bumuo, mag-upgrade, at makipagkarera sa ganap na nako-customize na mga sasakyan sa pamamagitan ng mga mapanganib na sci-fi circuit habang nakikipagkumpitensya para sa mga in-game na reward at totoong cash na premyo."
+        },
+        {
+          "q": "Maaari ko bang i-upgrade ang aking sasakyan sa karera?",
+          "a": "Ang bawat bahagi ay naa-upgrade: hull, thrusters, shield, outer shell, engine, stabilizer, cooling system, at aerodynamic surface. Binabago ng bawat pag-upgrade kung paano pinangangasiwaan ng iyong sasakyan ang iba't ibang mga track at kundisyon."
+        },
+        {
+          "q": "Ano ang ginagawa ng pit crew?",
+          "a": "Ang mga miyembro ng pit crew ay nagbibigay ng mga natatanging bonus: mas mabilis na pag-refuel, mga diagnostic ng hull, pag-aayos ng emergency, at pag-aayos ng performance sa pagitan ng mga lap. Nag-level up sila sa paglipas ng panahon, na nag-a-unlock ng mas malalakas na kakayahan na sumasama sa mga upgrade ng sasakyan."
+        },
+        {
+          "q": "Paano gumagana ang tagapamahala ng hukay?",
+          "a": "Ang pit manager ay nag-coordinate ng mga operasyon ng crew, tumatawag sa diskarte sa lahi, at nag-a-unlock ng mga pagpapalakas ng performance sa buong koponan. Pinoprotektahan ng mga nagtatanggol na tagapamahala ang iyong sasakyan sa malupit na mga kondisyon; itinutulak ng mga agresibong tagapamahala ang bawat sistema para sa pinakamataas na bilis."
+        },
+        {
+          "q": "Maaari ba akong manalo ng totoong pera?",
+          "a": "Oo. Nagtatampok ang mga ranggo na kaganapan at paligsahan ng mga tunay na cash prize pool. Maging kwalipikado sa pamamagitan ng ranggo na paglalaro, makipagkumpitensya laban sa mga kaparehong may kasanayang kalaban, at makakuha ng mga tunay na payout batay sa iyong posisyon sa pagtatapos. Ang mga lingguhang hamon at pana-panahong kampeonato ay patuloy na tumatakbo."
+        },
+        {
+          "q": "Paano gumagana ang mga gantimpala sa lahi?",
+          "a": "Bawat karera ay nagbabayad ng mga kredito, mga materyales sa pag-upgrade, at mga token ng crew. Ang mga tagumpay ay nagpaparami sa iyong mga kita. Bumili ng mga sasakyan, i-upgrade ang mga ito sa mga racing machine, manalo sa mga karera, at ibenta ang mga ito nang may tubo para pondohan ang mga karagdagang pagpapahusay at pag-upgrade ng spaceship."
+        },
+        {
+          "q": "Maaari ko bang i-upgrade ang aking pangunahing sasakyang pangkalawakan?",
+          "a": "Talagang. Ang iyong garahe ng karera ay ang hangar bay ng iyong sasakyang pangalangaang. Ang mga panalo sa lahi ay nag-upgrade ng pondo sa mga makina, armas, nabigasyon, at pagpapalakas ng katawan ng barko sa iyong pangunahing sasakyang-dagat, na nagpapalakas sa paglalakbay sa pagitan ng planeta at pakikipaglaban sa kalawakan."
+        },
+        {
+          "q": "Ang pag-unlad ba ay dinadala sa iba pang mga laro?",
+          "a": "Ang bawat pilot skill at pag-upgrade ng spaceship ay direktang naglilipat sa Hyper Quest at Overlord of the 7 Realms. Isang uniberso, maraming laro, tuluy-tuloy na pag-unlad. Ang binuo mo sa Hyper Racing ay nagpapalakas sa lahat ng iba pa."
+        },
+        {
+          "q": "Anong mga kapaligiran sa karera ang nariyan?",
+          "a": "Ang mga circuit ay sumasaklaw sa mga lumulutang na rock formation, lava tube, disyerto na kapatagan, at mga hanay ng bundok sa mga dayuhang mundo. Kabilang sa mga panganib sa atmospera ang acid rain, radioactive atmospheres, variable gravity, at magulong hangin. Ang bawat circuit ay nangangailangan ng iba't ibang mga setup ng sasakyan."
+        }
+      ]
+    },
+    "quest": {
+      "label": "QUEST",
+      "heading": "Hyper Quest",
+      "subtitle": "Iyong galaxy. Ang iyong mga patakaran. Ang swerte mo.",
+      "intro": [
+        "Ang Hyper Quest ay isang open-world space adventure kung saan inuutusan mo ang sarili mong ganap na naa-upgrade na spaceship, ang Quest Racer, sa isang malawak at mapanganib na kalawakan. Iniwan mo ang iyong sibilisasyon sa tahanan ilang taon na ang nakalipas sa paghahanap ng kapangyarihan, kayamanan, at katanyagan. Ngayon ang buong uniberso ay ang iyong palaruan, at ang bawat pakikipagsapalaran na iyong nakumpleto ay naglalapit sa iyo sa pangingibabaw ng galactic.",
+        "Ngunit ang Hyper Quest ay hindi lamang isang laro. Ito ay isang mapagkumpitensyang platform kung saan ang totoong pera ay nasa linya. Kumpletuhin ang mga pakikipagsapalaran, talunin ang mga hamon, at lumayo gamit ang totoong pera sa iyong bulsa at o mga premyo. Mula sa mabilis na mga misyon na tumatagal ng ilang minuto hanggang sa epic na maraming araw na ekspedisyon, ang bawat paghahanap ay nagbabayad. Kung mas mahirap ang hamon, mas malaki ang gantimpala.",
+        "I-upgrade ang iyong sasakyang pangalangaang mula sa katawan ng barko patungo sa sabungan. Arm ito ng mga nagwawasak na sistema ng armas. Mag-recruit ng mga espesyalista na nag-stack ng malalakas na bonus sa performance at power level ng iyong barko. Magmina ng mga asteroid, maghakot ng mapanganib na kargamento, manghuli ng mga nakatagong kayamanan, mang-kidnap ng mga target na matataas ang halaga, o maging upahang baril. Kung paano mo pinamunuan ang sansinukob ay ganap mong pipiliin.",
+        "Lahat ng binuo mo sa Hyper Quest ay direktang pinapapasok sa Hyper Racing at Overlord of the 7 Realms. Isang uniberso, tuluy-tuloy na pag-unlad, walang limitasyong potensyal. Magbasa para matuklasan kung paano gumagana ang questing, kung ano ang maaari mong kikitain, at kung paano ikaw at ang iyong spaceship ay naging ang pinakakinatatakutang sasakyang-dagat sa kalawakan."
+      ],
+      "calloutLine1": "Paghangad na Kumita. Kumita para Mag-upgrade.",
+      "calloutLine2": "Mag-upgrade sa Conquer.",
+      "howItWorksTitle": "Paano Gumagana ang Hyper Quest",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Tanggapin ang mga Quest Mula sa Mission Board",
+          "body": "Ang in-game questing board ay ang iyong gateway sa adventure. Mag-browse ng mga available na misyon mula sa mabilis na pagtakbo ng kargamento na tumatagal lamang ng ilang minuto hanggang sa epic na maraming araw na mga ekspedisyon nang malalim sa hindi natukoy na espasyo. Ang bawat pakikipagsapalaran ay may malinaw na layunin, mga rating ng panganib, at mga tier ng reward. Piliin ang mga misyon na tumutugma sa iyong istilo ng paglalaro, ito man ay paghakot ng mapanganib na kargamento, pangangaso ng mga nakatagong kayamanan, pagmimina ng mga asteroid field, o pagtago upang mabawi ang mga nawalang artefact."
+        },
+        {
+          "num": "02",
+          "title": "Galugarin ang Galaxy",
+          "body": "Maglakbay sa mga portal patungo sa malalayong planeta, bawat isa ay may natatanging kapaligiran, mahahalagang materyales, at bagong racing circuit. Sundin ang mga mapa ng galactic upang i-chart ang mga hindi pa na-explore na rehiyon at makakuha ng mga karapatan sa pagbibigay ng pangalan para sa mga planetang una mong natuklasan. Nagmimina ng mga mapagkukunan mula sa mga asteroid field, nagsa-salvage ng mga bahagi mula sa mga sinaunang relic at inabandunang mga barko, at mangalap ng mga pahiwatig na humahantong sa mga nakatagong kapalaran na nakakalat sa mga bituin."
+        },
+        {
+          "num": "03",
+          "title": "Buuin ang Iyong Imperyo Mula sa Iyong Barko",
+          "body": "Ang iyong Quest Racer ay higit pa sa transportasyon. Magtanim ng pagkain sa mga hydroponic bay, pinuhin ang mga materyales na mina mula sa malalayong planeta, at bumuo ng mga hukbo mula sa loob ng iyong mga cloning lab. Pinuhin ang iyong mga tropa at ang kanilang mga sandata, ipagtanggol ang iyong sarili laban sa mga pirata, at pamahalaan ang isang self-sustaining mobile base na nagiging mas malakas sa bawat misyon na nakumpleto mo."
+        },
+        {
+          "num": "04",
+          "title": "I-play ang Iyong Paraan",
+          "body": "Walang iisang daan patungo sa pangingibabaw. Maging isang kinatatakutang bounty hunter, isang tusong smuggler, isang master na minero, o isang maalamat na explorer. Kidnapin ang mga target na may mataas na halaga, maging upahang baril, o gumawa ng mga alyansa para kontrolin ang buong sektor. Ang kalawakan ay yumuko sa iyong kalooban, at bawat desisyon ay humuhubog sa iyong reputasyon at iyong kapalaran."
+        }
+      ],
+      "rewardsTitle": "Mga Gantimpala sa Paghahanap; Mabayaran para Maglaro!",
+      "rewards": [
+        {
+          "title": "Mga In-Game Rewards",
+          "body": "Bawat quest na nakumpleto mo ay nagbabayad. Dumadaloy sa iyong imbentaryo ang mga kredito, mga materyales sa pag-upgrade, mga bihirang bahagi, mga token ng recruitment ng espesyalista, at mga eksklusibong item sa bawat matagumpay na misyon. Kung mas mahirap ang paghahanap, mas mayaman ang paghatak. Tuklasin ang mga bihirang materyales sa malalayong planeta, iligtas ang mga bahaging may mataas na halaga mula sa mga sinaunang relic, at stockpile na mapagkukunan na nagpapasigla sa iyong pagtaas sa galactic supremacy."
+        },
+        {
+          "title": "Mga Tunay na Pagbabayad ng Cash",
+          "body": "Ang Hyper Quest ay tumatagal ng paglalaro nang higit pa sa entertainment. Nag-aalok ang ilang partikular na quest at ranggo na hamon ng tunay na cash payout. Kumpletuhin ang mga high-tier na misyon, dominahin ang mga event sa leaderboard, at lumahok sa mga seasonal quest championship kung saan totoong pera ang nasa linya. Kung magiging mas mahusay at matapang ka, mas malaki ang mga payout. Mula sa lingguhang mga bounty sa paghahanap hanggang sa mga epic na seasonal na torneo, palaging may mga pagkakataong gawing tunay na kita ang iyong mga galactic adventure."
+        },
+        {
+          "title": "Paano Gumagana ang Quest Payouts",
+          "body": "Kwalipikado ang mga manlalaro para sa mga pakikipagsapalaran sa cash-reward sa pamamagitan ng pagbuo ng kanilang reputasyon at pagtugon sa mga limitasyon ng pagganap. Ang kahirapan sa paghahanap, tagal, at antas ng panganib ay tumutukoy sa prize pool. Ang mga pagbabayad ay transparent, malinaw na ipinapakita bago ka tumanggap ng anumang misyon, at mabilis na naproseso pagkatapos makumpleto. Nagpapatakbo ka man ng sampung minutong cargo haul o isang linggong deep-space expedition, ang mga reward ay tumutugma sa panganib."
+        },
+        {
+          "title": "Pag-unlad na Nagbabayad ng Pasulong",
+          "body": "Direktang feed ang mga reward sa paghahanap sa iyong mga pag-upgrade sa barko, mga sistema ng armas, at pagre-recruit ng mga espesyalista. Ang bawat payout ay nagpapalakas sa iyo, na nagbubukas ng mas mahirap na mga quest na may mas malalaking reward. Dinadala din ang mga kita sa Hyper Racing at Overlord of the 7 Realms, na lumilikha ng progression loop na nagbibigay ng reward sa dedikasyon sa buong Hyper Tek ecosystem."
+        }
+      ],
+      "upgradesTitle": "I-upgrade ang Iyong Barko, I-armas ang Iyong Arsenal, I-recruit ang Iyong Crew",
+      "upgrades": [
+        {
+          "title": "Mga Pag-upgrade ng Spaceship",
+          "body": "Ang iyong Quest Racer ay ganap na modular mula sa engine bay hanggang sa sabungan. I-upgrade ang katawan ng barko para sa maximum na tibay, palakasin ang panlabas na shell upang mapaglabanan ang mga masasamang kapaligiran, palakasin ang mga generator ng kalasag para sa kaligtasan ng labanan, at pag-overhaul ng mga sistema ng kuryente para sa pinakamataas na pagganap. Ang mas mahusay na mga makina ay nangangahulugan ng mas mabilis na paglalakbay sa pagitan ng mga planeta. Ang mga mas malakas na sistema ng nabigasyon ay nagpapakita ng mga nakatagong ruta at mga hindi pa natukoy na mundo. Binabago ng bawat pag-upgrade ang iyong barko sa isang mas malakas, mas kinatatakutan na barko."
+        },
+        {
+          "title": "Sistema ng Armas",
+          "body": "Ang kalawakan ay mapanganib, at kailangan mong maging mas mapanganib. I-upgrade at pinuhin ang iyong mga sistema ng armas upang protektahan ang iyong sarili laban sa mga pirata, karibal na manlalaro, at mga kaaway na pwersa. Pumili sa pagitan ng mga defensive na configuration na nagpapanatili sa iyong buhay sa pinakamasamang sitwasyon o mga nakakasakit na loadout na idinisenyo upang magdulot ng maximum na pinsala. Ang mga laser array, mga baterya ng missile, mga kanyon ng plasma, at mga armas na pang-eksperimentong enerhiya ay available lahat habang sumusulong ka sa upgrade tree."
+        },
+        {
+          "title": "Mag-recruit ng mga Espesyalista",
+          "body": "Ang mga espesyalista ay mga game-changer. Ang bawat isa ay nagdudulot ng mga natatanging kasanayan na nagdaragdag ng makapangyarihang mga bonus sa pangkalahatang pagganap at antas ng kapangyarihan ng iyong barko. Ang mga espesyalista sa pag-navigate ay nagbubunyag ng mga nakatagong landas at binabawasan ang oras ng paglalakbay. Pinapalakas ng mga espesyalista sa labanan ang katumpakan ng armas at ang output ng pinsala. Pinapataas ng mga espesyalista sa engineering ang integridad ng katawan ng barko at ang bilis ng pagkumpuni. Pinapabuti ng mga espesyalista sa agham ang pagkuha ng mapagkukunan at pagpipino ng materyal. Mag-stack ng maraming mga espesyalista upang lumikha ng mga mapangwasak na kumbinasyon na nagpaparami sa pagiging epektibo ng iyong barko."
+        },
+        {
+          "title": "Ang Power Loop",
+          "body": "Paghahanap para kumita. Kumita para mag-upgrade. Mag-upgrade para mapagtagumpayan ang mas mahihirap na quest na may mas malaking reward. Mag-recruit ng mga espesyalista upang palakasin ang bawat sistema sa iyong barko. Kung mas lumalakas ka, mas marami ang nagbubukas ng kalawakan, at mas malaki ang naghihintay na kapalaran. Ang mga upgrade ng barko at mga specialist na bonus ay direktang nagdadala din sa labanan sa kalawakan sa panahon ng Hyper Racing transit at mga laban sa Overlord of the 7 Realms."
+        }
+      ],
+      "faqTitle": "Hyper Quest — Mga Madalas Itanong",
+      "faq": [
+        {
+          "q": "Ano ang Hyper Quest?",
+          "a": "Isang open-world space adventure kung saan nag-uutos ka ng ganap na naa-upgrade na spaceship sa isang malawak na kalawakan. Kumpletuhin ang mga pakikipagsapalaran, galugarin ang mga dayuhang mundo, i-upgrade ang iyong barko, mag-recruit ng mga espesyalista, at makakuha ng mga tunay na gantimpala sa pera kasama ng mga in-game na kayamanan."
+        },
+        {
+          "q": "Paano gumagana ang mga quest?",
+          "a": "Tanggapin ang mga misyon mula sa in-game questing board. Ang mga quest ay mula sa mabilis na pagtakbo ng kargamento na tumatagal ng ilang minuto lamang hanggang sa epic na maraming araw na mga ekspedisyon na malalim sa hindi natukoy na espasyo. Ang bawat quest ay may malinaw na layunin, panganib na mga rating, at reward tier na ipinapakita bago mo tanggapin."
+        },
+        {
+          "q": "Maaari ba akong kumita ng totoong pera?",
+          "a": "Oo. Ang ilang partikular na quest, ranggo na hamon, at seasonal championship ay nag-aalok ng tunay na cash payout. Buuin ang iyong reputasyon, matugunan ang mga limitasyon ng pagganap, at maging kwalipikado para sa lalong kumikitang cash-reward na mga misyon. Ang lingguhang mga bounty at pana-panahong mga paligsahan ay patuloy na tumatakbo."
+        },
+        {
+          "q": "Anong mga in-game na reward ang maaari kong makuha?",
+          "a": "Bawat nakumpletong quest ay nagbabayad ng mga credit, mga materyales sa pag-upgrade, mga bihirang bahagi, mga token ng recruitment ng espesyalista, at mga eksklusibong item. Ang mas mahirap at mas mahaba ang paghahanap, mas mayaman ang mga gantimpala. Tumuklas ng mga bihirang materyales sa malalayong planeta at iligtas ang mga bahaging may mataas na halaga mula sa mga sinaunang relic."
+        },
+        {
+          "q": "Maaari ko bang i-upgrade ang aking spaceship?",
+          "a": "Naa-upgrade ang bawat system: hull, outer shell, shield generators, power system, engine, cockpit, at navigation. Nangangahulugan ang mas mahusay na mga makina ng mas mabilis na paglalakbay, ang mas malalakas na mga barko ay nakaligtas sa mga pagalit na engkwentro, at ang na-upgrade na nabigasyon ay nagpapakita ng mga nakatagong ruta at hindi natukoy na mga mundo."
+        },
+        {
+          "q": "Anong mga armas ang magagamit?",
+          "a": "I-upgrade at pinuhin ang mga sistema ng armas kabilang ang mga array ng laser, mga baterya ng missile, mga kanyon ng plasma, at mga armas na pang-eksperimentong enerhiya. Pumili ng mga defensive na configuration para sa kaligtasan ng buhay o mga nakakasakit na loadout para sa maximum na pinsala laban sa mga pirata, karibal, at kaaway na pwersa."
+        },
+        {
+          "q": "Paano gumagana ang mga espesyalista?",
+          "a": "Mag-recruit ng mga specialist na may mga natatanging kasanayan na nagdaragdag ng malalakas na bonus sa performance at power level ng iyong barko. Ang mga espesyalista sa pag-navigate ay nagbubunyag ng mga nakatagong landas, ang mga espesyalista sa pakikipaglaban ay nagpapalakas ng pinsala sa armas, ang mga espesyalista sa engineering ay nagdaragdag ng integridad ng katawan ng barko, at ang mga espesyalista sa agham ay nagpapahusay sa pagkuha ng mga mapagkukunan. Mag-stack ng maraming mga espesyalista para sa mga mapangwasak na kumbinasyon."
+        },
+        {
+          "q": "Anong mga uri ng quest ang available?",
+          "a": "Cargo transport, asteroid mining, treasure hunting, bounty hunting, artefact recovery, undercover na operasyon, planetary exploration, pirate defense, salvage mission, at higit pa. Ang mga quest ay mula sa mabilis na sampung minutong pagtakbo hanggang sa maraming araw na deep-space expedition."
+        },
+        {
+          "q": "Maaari ba akong tumuklas ng mga bagong planeta?",
+          "a": "Oo. Sundin ang mga mapa ng galactic sa mga hindi pa natukoy na rehiyon at tumuklas ng mga bagong mundo. Ang mga unang nakatuklas ay nakakakuha ng mga karapatan sa pagbibigay ng pangalan para sa mga planeta na kanilang nahanap. Nag-aalok ang mga bagong mundo ng mga natatanging materyales, kapaligiran, at mga racing circuit na hindi pa na-access ng ibang manlalaro."
+        },
+        {
+          "q": "Ano ang maaari kong gawin sa loob ng aking barko?",
+          "a": "Ang iyong Quest Racer ay isang mobile base. Magtanim ng pagkain sa mga hydroponic bay, pinuhin ang mga materyales na minana mula sa malalayong planeta, bumuo at magsanay ng mga hukbo sa mga cloning lab, mag-upgrade ng mga armas at depensa, at mamahala ng isang self-sustaining operation na mas lumalakas sa bawat misyon."
+        },
+        {
+          "q": "Paano gumagana ang galactic map?",
+          "a": "Ginagabayan ng galactic map ang iyong paggalugad sa buong uniberso. I-upgrade ang iyong mapa upang ipakita ang mga bagong sektor, lokasyon ng portal, at mga nakatagong quest zone. Habang nag-e-explore ka pa, lumalawak ang mapa, na nag-a-unlock ng lalong mapanganib at kapakipakinabang na mga rehiyon ng espasyo."
+        },
+        {
+          "q": "Dinadala ba ang aking pag-unlad sa iba pang mga laro?",
+          "a": "Lahat ng binuo mo sa Hyper Quest ay direktang pinapapasok sa Hyper Racing at Overlord of the 7 Realms. Ang mga upgrade ng barko, mga bonus ng espesyalista, mga kasanayan sa pakikipaglaban, at mga mapagkukunan ay lahat ay walang putol na inililipat. Isang uniberso, maraming laro, walang limitasyong pag-unlad."
+        },
+        {
+          "q": "Maaari ba akong maglaro bilang isang kontrabida?",
+          "a": "Talagang. Mag-undercover, mang-kidnap ng mga high-value na target, maging upahang baril, magpuslit ng mapanganib na kargamento, o sumalakay sa iba pang manlalaro. Walang iisang daan patungo sa pangingibabaw. Kung paano mo pinamunuan ang kalawakan ay ganap mong pipiliin, at bawat desisyon ay humuhubog sa iyong reputasyon."
+        }
+      ]
+    },
+    "overlord": {
+      "label": "OVERLORD",
+      "heading": "Overlord ng 7 Realms",
+      "subtitle": "Crash-land. Muling itayo. lupigin. Maging ang Panginoon.",
+      "intro": [
+        "Ang Overlord of the 7 Realms ay isang tri-level na battle strategy game na hindi katulad ng anumang bagay sa gaming. Nakipagsapalaran ka sa isang portal patungo sa isang parallel na uniberso at nag-crash-landed sa isang pagalit na dayuhan na planeta. Ang iyong barko ay nawasak, ang iyong mga sistema ay nabigo, at ang mga nilalang ng planeta ay nagsasara na. Ang kaligtasan ay simula pa lamang. Dominasyon ang layunin.",
+        "Muling itayo ang iyong barko mula sa pagkawasak. I-clone at sanayin ang mga hukbo sa iyong mga onboard na lab. Amuin ang wildlife ng planeta upang lumikha ng mapangwasak na naka-mount na kabalyerya. Pagkatapos ay makipaglaban sa tatlong dimensyon ng labanan: ground-to-ground na labanan laban sa mga halimaw at karibal na manlalaro, ground-to-space na mga pag-atake sa orbital o ground target, at space-to-space warfare sakay ng napakalaking Battle Ring na umiikot sa planeta.",
+        "Ito ay hindi lamang isa pang diskarte sa laro. Nagtatampok ang Overlord ng real-time na pakikipag-ugnayan sa VR, mga totoong cash na reward para sa pagkumpleto ng mga pang-araw-araw na kaganapan at pakikipagsapalaran, at dalawang linggong pagsalakay ng mga nakakatakot na Hammerong, ang pinakamakapangyarihang alien species na umiiral. Bawat dalawang linggo, dumarating sila para mag-alis ng minahan sa planeta, at bawat dalawang linggo, maaaring hamunin sila ng matatapang na manlalaro para sa malalaking bonus at maalamat na mga gantimpala.",
+        "I-upgrade ang iyong sasakyang pangkalawakan, hawakan ito ng mapangwasak na mga sandata, mag-recruit ng mga espesyalista na nagpapalakas ng antas ng iyong kapangyarihan, at bumuo ng mga alyansa para kontrolin ang buong rehiyon. Lahat ng iyong binuo ay direktang kumokonekta sa Hyper Racing at Hyper Quest sa pamamagitan ng nakabahaging Hyper Tek ecosystem. Isang uniberso, tatlong laro, walang limitasyong digmaan. Magbasa para matuklasan kung paano gumagana ang sistema ng labanan at kung bakit binabago ng Overlord ang lahat."
+      ],
+      "calloutLine1": "Ang Kaligtasan ay Simula pa lamang.",
+      "calloutLine2": "Ang dominasyon ay ang Layunin.",
+      "howItWorksTitle": "Ang Tri-Level Battle System; Tatlong Dimensyon ng Digmaan",
+      "howItWorks": [
+        {
+          "num": "01",
+          "title": "Ground-to-Ground Combat",
+          "body": "Ang ibabaw ng planeta ay isang warzone. I-deploy ang iyong mga naka-clone na hukbo laban sa mga kaaway na dayuhan na nilalang, halimaw na hayop, at kalabang manlalaro na lumalaban para sa teritoryo at mga mapagkukunan. Amuhin at sanayin ang wildlife ng planeta upang lumikha ng mga naka-mount na cavalry unit na nagbibigay sa iyong ground forces ng mapangwasak na gilid. Ang digmaan sa lupa ay hilaw, taktikal, at walang humpay. Ang bawat labanan na iyong mapanalunan ay nakakakuha ng mga mapagkukunan, teritoryo, at reputasyon."
+        },
+        {
+          "num": "02",
+          "title": "Ground-to-Space Assaults",
+          "body": "Dito nagdaragdag ang Overlord ng dimensyon na hindi, o halos hindi, na inaalok ng iba pang laro. Gumawa ng mga espesyal na grupo ng tropa na idinisenyo upang maglunsad ng mga pag-atake sa pagitan ng ibabaw ng planeta at ng orbital Battle Ring. Hampasin ang mga barkong nakadestino sa kalawakan mula sa iyong posisyon sa lupa o i-coordinate ang mga pinagsamang pag-atake na tumama sa mga kaaway mula sa itaas at ibaba nang sabay-sabay. Binabago ng vertical battle layer na ito ang karaniwang diskarte sa isang multi-dimensional na tugma ng chess kung saan ang pagpoposisyon sa lupa at espasyo ay tumutukoy sa tagumpay."
+        },
+        {
+          "num": "03",
+          "title": "Space-to-Space Warfare",
+          "body": "I-port ang iyong barko sa orbit at dumaong sa Battle Ring, isang napakalaking orbital structure na umiikot sa planeta. Mula rito, humanap ng mga barkong walang kalasag at mga masusugatang target. I-teleport ang mga tropa sa kalawakan at direkta sa mga sasakyang-dagat ng kaaway upang magdulot ng maximum na panloob na pinsala gamit ang mga espesyal na binuo na pag-atake sa pagsakay. Ang mga reward sa space combat ay kabilang sa pinakamataas sa laro, at ang pagkontrol sa orbital na teritoryo ay nagbibigay sa iyo ng isang madiskarteng kalamangan na walang ground-only na manlalaro ang makakapantay."
+        },
+        {
+          "num": "04",
+          "title": "Bakit Binabago ng Tri-Level ang Lahat",
+          "body": "Karamihan sa mga laro ng diskarte ay tumatakbo sa isang eroplano. Ang Overlord ay nagpapatakbo sa tatlo. Ang kakayahang umatake mula sa lupa patungo sa lupa, mula sa lupa hanggang sa kalawakan, at espasyo sa espasyo ay lumilikha ng isang larangan ng digmaan na may walang kaparis na taktikal na lalim. Ang kasanayan ay lahat. Ang brute force lamang ay hindi gagawing Overlord. Ang strategic mastery sa lahat ng tatlong antas ang naghihiwalay sa nangingibabaw sa natalo."
+        }
+      ],
+      "extraSection": {
+        "title": "Ang Battle Ring at VR Interaction",
+        "items": [
+          {
+            "title": "Landing sa Battle Ring",
+            "body": "Ang Battle Ring ay isang napakalaking orbital na istraktura na umiikot sa sistema ng planeta. Kapag inilipat mo ang iyong barko sa kalawakan, maaari kang dumaong sa Battle Ring upang makakuha ng napakalaking strategic na kalamangan. Mula sa mataas na posisyong ito, maaari kang manghuli ng mga barkong walang kalasag, maglunsad ng mga boarding party sa mga kalabang sasakyang-dagat, at mag-coordinate ng mga mapangwasak na pag-atake sa mga target sa lupa sa ibaba. Ang pag-landing sa Battle Ring ay nagbubukas ng isang ganap na bagong dimensyon ng gameplay na halos hindi iniaalok ng karamihan sa mga larong diskarte, na nagbibigay sa Overlord ng taktikal na kalamangan sa anumang bagay sa merkado."
+          },
+          {
+            "title": "Sa loob ng Battle Ring",
+            "body": "Ang Battle Ring ay hindi lamang isang docking platform. Kung magagawa mo kung paano labagin ang loob nito, ang mga nakatagong pakikipagsapalaran, mga karagdagang bonus, at mga eksklusibong gantimpala ay naghihintay sa loob. Ang loob ng singsing ay labyrinth ng mga koridor, silid, at sinaunang teknolohiya. Magsagawa ng mga quest at mga misyon sa pangangaso sa loob mismo ng ring, pagtuklas ng mga lihim na hindi kailanman maa-access ng anumang player na nasa ibabaw. Ginagantimpalaan ng Battle Ring ang matapang, tuso, at walang humpay."
+          },
+          {
+            "title": "Real-Time na Pakikipag-ugnayan sa VR",
+            "body": "Tulad ng lahat ng hanay ng Hyper Tek ng mga laro, sinusuportahan ng Overlord of the 7 Realms ang buong pakikipag-ugnayan sa VR sa real time. Pumasok sa loob ng iyong barko, lakad ang mga corridors ng Battle Ring, pangunahan ang iyong mga tropa sa ground combat, at maranasan ang space warfare mula sa sabungan ng iyong sasakyang-dagat. Binabago ng VR ang Overlord mula sa isang larong diskarte sa isang ganap na nakaka-engganyong karanasan sa larangan ng digmaan. Utosin ang iyong mga puwersa, galugarin ang alien na lupain, at makipaglaban na may antas ng presensya at intensity na hindi maaaring gayahin ng flat-screen na paglalaro."
+          },
+          {
+            "title": "Ang Kalamangan sa Iba Pang Mga Laro",
+            "body": "Walang ibang laro ang nagsasama-sama ng tri-level warfare, isang natutuklasang orbital battle station, real-time na VR, at totoong cash at o in-game na mga reward sa isang karanasan. Ang Battle Ring lang ang nagdadagdag ng dimensyon ng gameplay na hindi matutumbasan ng mga kakumpitensya. Kapag pinagsama mo iyon sa ground combat, space warfare, VR immersion, at ang magkakaugnay na Hyper Tek ecosystem, ang Overlord ay nasa sarili nitong kategorya."
+          }
+        ]
+      },
+      "upgradesTitle": "Muling itayo, Muling sandata, Mangalap; Power Up para sa Digmaan",
+      "upgrades": [
+        {
+          "title": "Mga Pag-upgrade ng Spaceship",
+          "body": "Ang iyong bumagsak na barko ay kung saan nagsisimula ang lahat. Muling itayo ito ng system ayon sa system, mula sa engine bay hanggang sa command deck. Ang bawat component ay ganap na naa-upgrade: hull reinforcement, structural integrity, outer shell composition, shield generators, power system, at navigation arrays. Sa Overlord, bumuo ka hindi para sa bilis kundi para sa labanan. Ang isang ganap na na-upgrade na barkong pandigma ay ang pundasyon ng bawat matagumpay na kampanya, at kapag mas malalim ang iyong pamumuhunan, mas nagiging kakila-kilabot ang iyong sasakyang pandagat."
+        },
+        {
+          "title": "Mga Sistema ng Armas at Mga Antas ng Teknolohiya",
+          "body": "I-upgrade at pinuhin ang iyong mga armas, kasanayan at tech na antas upang mangibabaw sa lahat ng tatlong antas ng labanan. Ground-based na artilerya para sa planetary warfare, mga anti-orbital na baterya para sa ground-to-space assaults, at ship-mounted weapons arrays para sa space-to-space na labanan. Ang bawat sistema ng armas ay maaaring pinuhin para sa mga partikular na pantaktika na tungkulin. Magpakadalubhasa ka man sa pangmatagalang pambobomba, malapitang pag-boarding na aksyon, o pagtatanggol na mga hakbang, tinutukoy ng iyong pag-load ng mga armas ang iyong pagkakakilanlan sa labanan."
+        },
+        {
+          "title": "Mag-recruit ng mga Espesyalista",
+          "body": "Ang mga espesyalista ay ang force multiplier na naghihiwalay sa mahuhusay na manlalaro mula sa Overlords. Kumuha ng mga natatanging espesyalista na nagdadala ng mga mahuhusay na bonus sa pangkalahatang pagganap at antas ng kapangyarihan ng iyong barko. Pinapabuti ng mga taktikal na espesyalista ang kahusayan sa pag-deploy ng tropa, pinapabilis ng mga espesyalista sa engineering ang pag-aayos at pag-upgrade ng barko, pinapataas ng mga espesyalista sa armas ang output ng pinsala sa lahat ng system, at ibinubunyag ng mga espesyalista sa intelligence ang mga posisyon at kahinaan ng kaaway. Mag-stack ng maraming mga espesyalista upang lumikha ng mga mapanirang synergy na nagpapalakas sa bawat aspeto ng iyong operasyon."
+        },
+        {
+          "title": "Buuin ang Iyong Mga Hukbo",
+          "body": "I-clone ang mga tropa sa loob ng onboard cloning lab ng iyong barko, pagkatapos ay i-upgrade at pinuhin sila at ang kanilang mga armas hanggang sa sila ay handa na sa labanan. Ngunit ang tropa lamang ay hindi sapat. Amuhin at sanayin ang mga ligaw na nilalang sa planeta upang lumikha ng naka-mount na beast cavalry, isang puwersa na hindi maaaring i-clone o gawin at dapat makuha sa pamamagitan ng kasanayan at pasensya. Ang komposisyon ng iyong hukbo sa buong lupa, hangin, at kalawakan ang tumutukoy sa iyong pangingibabaw."
+        }
+      ],
+      "rewardsTitle": "Ang Hammerongs, Rewards, at ang Hyper Tek Ecosystem",
+      "rewards": [
+        {
+          "title": "The Hammerongs: Ang Pinakamakapangyarihang Species sa Pag-iral",
+          "body": "Bawat dalawang linggo, bumababa ang mga field ng puwersa ng center arena, at dumating ang mga Hammerong. Sila ang pinakamalakas na alien species sa uniberso, armado ng advanced na teknolohiya na higit pa sa anumang taglay ng mga manlalaro. Dumating sila upang hubaran ang mga mapagkukunan ng planeta, at ipagtanggol nila ang arena nang buong lakas. Ang pag-atake sa mga Hammerong ay ang pinaka-mapanganib na hamon sa Overlord, ngunit ang mga magtagumpay ay gagantimpalaan ng malalaking bonus, maalamat na pagnakawan, mga bihirang materyales sa pag-upgrade, at mga eksklusibong reward na hindi makukuha sa anumang paraan. Ang dalawang linggong pagsalakay ng Hammerong ay ang pinakahuling pagsubok ng iyong kapangyarihan."
+        },
+        {
+          "title": "Mga Pang-araw-araw na Kaganapan, Quest, at Battle Rewards",
+          "body": "Ang Overlord ay patuloy na naghahatid ng mga gantimpala. Kumpletuhin ang mga pang-araw-araw na gawain upang makakuha ng mga kredito, mag-upgrade ng mga materyales, at mga bonus sa pag-unlad. Magpasok ng mga espesyal na kaganapan para sa mga premium na reward. Magsagawa ng mga pakikipagsapalaran sa ibabaw ng planeta at sa loob ng Battle Ring para sa eksklusibong pagnakawan. Manalo ng mga laban laban sa mga halimaw, dayuhan na nilalang, at karibal na mga manlalaro upang mag-imbak ng mga mapagkukunan. Galugarin ang ibabaw upang matuklasan ang mga nakatagong artifact at kayamanan. Ang istraktura ng gantimpala ay idinisenyo upang ang bawat aksyon na iyong gagawin ay maglalapit sa iyo upang maging ang tunay na Panginoon ng server."
+        },
+        {
+          "title": "Nakakonekta sa Hyper Tek Ecosystem",
+          "body": "Ang Overlord of the 7 Realms ay hindi umiiral sa paghihiwalay. Ito ay ganap na isinama sa Hyper Tek universe kasama ng Hyper Racing at Hyper Quest. Ang mga mapagkukunang nakuha sa Overlord ay magagamit sa lahat ng tatlong laro. Ang mga upgrade ng barko, mga bonus ng espesyalista, mga kasanayan sa pakikipaglaban, at mga materyales ay tuluy-tuloy na dumadaloy sa pagitan ng mga titulo. Ang mga kakayahan sa karera na natamo sa Hyper Racing ay nagpapahusay sa iyong mga kasanayan sa piloto sa Overlord space combat. Ang mga materyales na nakalap sa Hyper Quest ay nagpapasigla sa iyong mga pag-upgrade sa planeta. Ang Hyper Tek marketplace ay nag-uugnay sa lahat, na lumilikha ng isang pinag-isang ekonomiya kung saan ang pag-unlad sa isang laro ay nagpapalakas ng pagsulong sa lahat ng tatlo."
+        },
+        {
+          "title": "Isang Uniberso, Tatlong Laro, Walang limitasyong Kapangyarihan",
+          "body": "Ang mga manlalaro na nakikipag-ugnayan sa lahat ng tatlong laro ng Hyper Tek ay mas mabilis na nagkakaroon ng kapangyarihan, nag-a-access ng eksklusibong mga cross-game na reward, at nangingibabaw sa malawak na mga kasanayan at mapagkukunan na hindi maaaring pantayan ng mga single-game na manlalaro. Ang magkakaugnay na ecosystem ay ang sukdulang kalamangan sa kompetisyon."
+        }
+      ],
+      "faqTitle": "Overlord of the 7 Realms — Mga Madalas Itanong",
+      "faq": [
+        {
+          "q": "Ano ang Overlord of the 7 Realms?",
+          "a": "Isang tri-level battle strategy game kung saan ka bumagsak sa isang dayuhan na planeta, muling itayo ang iyong barko, i-clone ang mga hukbo, at lalaban sa tatlong dimensyon: ground-to-ground, ground-to-space, at space-to-space. Nagtatampok ng pakikipag-ugnayan sa VR, mga totoong cash na reward, at dalawang linggong pagsalakay sa Hammerong."
+        },
+        {
+          "q": "Ano ang tri-level battle system?",
+          "a": "Gumagana ang labanan sa tatlong antas: ground-to-ground laban sa mga halimaw at kalabang manlalaro, ground-to-space na pag-atake na nagta-target sa mga orbital na barko, at space-to-space warfare sa Battle Ring. Ang multi-dimensional na diskarte na ito ay lumilikha ng taktikal na lalim na hindi maaaring tumugma sa laro ng diskarte sa isang eroplano."
+        },
+        {
+          "q": "Ano ang Battle Ring?",
+          "a": "Isang napakalaking istraktura ng orbital na umiikot sa planeta. Ilapag ang iyong barko dito para manghuli ng mga walang proteksiyon na target, maglunsad ng mga boarding party sa mga sasakyang-dagat ng kaaway, at ma-access ang mga nakatagong pakikipagsapalaran sa loob nito. Ang pagkontrol sa Battle Ring ay nagbibigay sa iyo ng madiskarteng kalamangan sa mga manlalarong nasa lupa lang."
+        },
+        {
+          "q": "Maaari ko bang i-upgrade ang aking spaceship?",
+          "a": "Ang bawat system ay naa-upgrade mula sa engine bay hanggang sa command deck: hull, structure, outer shell, shield generators, power system, at navigation. Sa Overlord bumuo ka para sa labanan, hindi bilis. Ang isang ganap na na-upgrade na barkong pandigma ay ang pundasyon ng bawat kampanya."
+        },
+        {
+          "q": "Paano gumagana ang mga espesyalista?",
+          "a": "Mag-recruit ng mga natatanging espesyalista na nagdaragdag ng malalakas na bonus sa performance at power level ng iyong barko. Ang mga taktikal, engineering, armas, at mga espesyalista sa paniktik ay nagpapalakas ng iba't ibang sistema. Mag-stack ng maraming mga espesyalista para sa mapanirang synergy sa lahat ng antas ng labanan."
+        },
+        {
+          "q": "Sino ang mga Hammerong?",
+          "a": "Ang pinakamakapangyarihang alien species na umiiral. Bawat dalawang linggo ay dumarating sila sa gitnang arena upang magmina ng mga mapagkukunan ng planeta, na ipinagtanggol ng napakalaking puwersa at advanced na teknolohiya. Ang pag-atake sa kanila ay lubhang mapanganib ngunit ginagantimpalaan ang mga manlalaro ng malalaking bonus at maalamat na pagnakawan."
+        },
+        {
+          "q": "Anong mga reward ang maaari kong makuha?",
+          "a": "Ang mga pang-araw-araw na gawain, pakikipagsapalaran, laban, at mga kaganapan ay nagbabayad lahat ng mga credit, mga materyales sa pag-upgrade, at mga bonus sa pag-unlad. Ang mga espesyal na kaganapan at pagsalakay ng Hammerong ay nag-aalok ng mga premium at eksklusibong reward. Ang mga hamon sa mas mataas na kahirapan at mga ranggo na kumpetisyon ay nagbubunga ng mas malaking mga payout kabilang ang tunay na pera."
+        },
+        {
+          "q": "Sinusuportahan ba ng Overlord ang VR?",
+          "a": "Oo. Ang buong real-time na pakikipag-ugnayan sa VR ay nagbibigay-daan sa iyong maglakad sa mga koridor ng iyong barko, tuklasin ang interior ng Battle Ring, pangunahan ang mga tropa sa ground combat, at i-pilot ang iyong sasakyang-dagat sa space warfare. Binabago ng VR ang Overlord mula sa diskarte sa isang ganap na nakaka-engganyong karanasan sa larangan ng digmaan."
+        },
+        {
+          "q": "Paano ko bubuo ang aking hukbo?",
+          "a": "I-clone ang mga tropa sa mga onboard lab ng iyong barko, pagkatapos ay i-upgrade at pinuhin sila at ang kanilang mga armas. Para sa mounted cavalry, dapat mong paamuin at sanayin ang mga ligaw na nilalang ng planeta, dahil hindi ma-clone ang mga hayop. Ang komposisyon ng hukbo sa buong lupa, hangin, at kalawakan ang tumutukoy sa iyong pangingibabaw."
+        },
+        {
+          "q": "Maaari ba akong sumali sa isang alyansa?",
+          "a": "Oo. Mag-isa o sumali sa isang alyansa na nagpapataas ng iyong kapangyarihan at tumutulong sa iyong lumago. Nag-aalok ang mga alyansa ng nakabahaging mapagkukunan, magkakaugnay na pag-atake, at sama-samang pagtatanggol. Kumpletuhin ang mga pang-araw-araw na gawain para i-upgrade ang iyong barko at ang mga nakabahaging asset ng alyansa."
+        },
+        {
+          "q": "Naka-link ba ang Overlord sa iba pang mga laro ng Hyper Tek?",
+          "a": "Ganap na isinama. Mga mapagkukunan, pag-upgrade ng barko, mga specialist na bonus, at mga kasanayan sa pakikipaglaban sa pagitan ng Overlord, Hyper Racing, at Hyper Quest. Ang mga kakayahan sa karera ay nagpapabuti sa iyong labanan sa espasyo, ang mga materyales ng Quest ay nagpapasigla sa iyong mga pag-upgrade, at ang Hyper Tek marketplace ay nag-uugnay sa buong ekonomiya."
+        },
+        {
+          "q": "Anong mga armas ang magagamit?",
+          "a": "Artilerya na nakabatay sa lupa, mga anti-orbital na baterya, mga array ng armas na naka-mount sa barko, at espesyal na kagamitan sa boarding-action. Ang bawat sistema ay maaaring pinuhin para sa mga partikular na taktikal na tungkulin kabilang ang pangmatagalang pambobomba, malapit na labanan, at mga panlaban na hakbang."
+        },
+        {
+          "q": "Maaari ko bang tuklasin ang ibabaw ng planeta?",
+          "a": "Oo. Ang planeta ay mayaman sa mga nakatagong gantimpala, artifact, mapagkukunan, at mapanganib na wildlife upang paamuin. I-explore ang ibabaw upang makahanap ng mga kayamanan, labanan ang mga dayuhang nilalang at halimaw, at tuklasin ang mga madiskarteng benepisyo na nagpapatibay sa iyong kampanya para sa pangingibabaw na panginoon."
+        }
+      ]
+    }
+  },
   "overlord": {
     "exit": "LUMABAS",
     "spaceRing": "OVERLORD · SPACE RING",
@@ -324,91 +720,268 @@
       "detail": "Detalye"
     },
     "rooms": {
-      "storeroom":     { "title": "Bodega",                    "desc": "Sentral na storage hub para sa mga hilaw na materyales at mga naanihing mapagkukunan. Namamahala ng pamamahagi ng imbentaryo sa mga operasyon ng pagmimina at refinery." },
-      "mining_fs":     { "title": "Mining FS",                 "desc": "Forward starboard mining bay. Nilagyan ng deep-core extraction arrays para sa koleksyon ng mineral at ore sa bukas na kalawakan." },
-      "mining_fp":     { "title": "Mining FP",                 "desc": "Forward port mining bay. Katulad ng starboard unit, dinidoble ang kapasidad ng extraction sa panahon ng mga operasyon sa field na may mayamang mapagkukunan." },
-      "process_ref":   { "title": "Proseso ng Refinery",       "desc": "Nagko-convert ng hilaw na ore at mineral sa mga refined alloy. Kritikal para sa synthesis ng gasolina at mga materyales ng upgrade ng barko." },
-      "mining_rs":     { "title": "Mining RS",                 "desc": "Rear starboard mining unit. Naka-anggulo sa -45° para sa mga lateral field sweep sa panahon ng mabagal na pag-aani ng asteroid." },
-      "mining_rp":     { "title": "Mining RP",                 "desc": "Rear port mining unit. Nagtatrabaho nang magkasabay sa RS bay para ma-maximize ang ani ng pagkuha ng mapagkukunan sa rear-field." },
-      "fuel_ref":      { "title": "Fuel Refinery",             "desc": "Nagpo-proseso ng mga refined alloy sa propulsion-grade na gasolina. Nagbibigay ng supply sa pangunahing engine at mga emergency thruster reserve." },
-      "workshop":      { "title": "Workshop",                  "desc": "Sentro ng pagpapanatili at pagmamanupaktura ng barko. Humahawak sa mga pag-aayos ng bahagi, pagmamanupaktura ng parte, at mga upgrade ng kagamitan." },
-      "racing":        { "title": "Racing Hangar",             "desc": "Nakatuong bay na naglalagay ng mga racing drone at light craft. Sumusuporta sa deployment ng RACING game mode at mga operasyon ng pit-stop." },
-      "brig":          { "title": "Kulungan",                  "desc": "Ligtas na cell ng pagpipigil para sa mga bilanggo at mahalagang kargamento. Mga reinforced na dingding na pumipigil sa hindi awtorisadong access o pagtakas." },
-      "armory_ss":     { "title": "Armory SS",                 "desc": "Starboard-side weapons locker. Nag-iimbak at nagpapanatili ng mga maliit na armas, kagamitan ng proteksyon ng crew at mga sistema ng personal na depensa." },
-      "armory_ps":     { "title": "Armory PS",                 "desc": "Port-side weapons locker. Katulad ng SS armory na nagbibigay ng balanseng access sa loadout sa magkabilang panig ng sasakyan." },
-      "main_weapon":   { "title": "Pangunahing Mabigat na Sandata", "desc": "Pangunahing heavy weapon emplacement. Naglalagay ng pinaka-makapangyarihang mga offensive system ng barko para sa malalaking labanan." },
-      "fwd_shield":    { "title": "Forward Shield Gen",        "desc": "Nagge-generate ng protektibong energy barrier sa kabuuan ng proa ng barko. Unang linya ng depensa laban sa mga papasok na proyektil at energy attack." },
-      "fighter_fss":   { "title": "Fighter Bay FSS",           "desc": "Forward starboard bay na naglalagay ng compact fighter craft. Nagbibigay-daan sa mabilis na deployment ng escort fighter sa panahon ng labanan at patrol na misyon." },
-      "fighter_fps":   { "title": "Fighter Bay FPS",           "desc": "Forward port fighter bay. Nagtatrabaho nang magkasabay sa FSS bay para sa coordinated fighter squadron launches." },
-      "fighter_rss":   { "title": "Fighter Bay RSS",           "desc": "Rear starboard nacelle fighter bay. Sumusuporta sa mga operasyon ng rearguard at mga senaryo ng pursuit interception." },
-      "fighter_rps":   { "title": "Fighter Bay RPS",           "desc": "Rear port nacelle fighter bay. Nagbibigay ng simetriko na rear-coverage para sa buong defensive fighter deployment." },
-      "barracks_ss":   { "title": "Barracks SS",               "desc": "Starboard crew quarters para sa mga combat personnel. Naglalagay ng mga sundalo, piloto at mga security team na may mga bunk system at equipment locker." },
-      "barracks_ps":   { "title": "Barracks PS",               "desc": "Port crew quarters. Katulad ng layout sa SS barracks na tinitiyak ang pantay na pamamahagi ng crew at mabilis na mobilisasyon mula sa alinmang panig." },
-      "stables_ss":    { "title": "Stables SS",                "desc": "Starboard biological asset bay. Naglalagay ng mga alien mount at bio-engineered na nilalang na ginagamit sa mga operasyon sa ibabaw ng planeta." },
-      "stable_ps":     { "title": "Stable PS",                 "desc": "Port biological asset bay. Katulad ng SS stables para sa balanseng karga ng nilalang at simetrikong pamamahagi ng timbang." },
-      "transporter":   { "title": "Transporter Bay",           "desc": "Quantum-assisted na sistema ng transportasyon ng tao at kargamento. Nagbibigay-daan sa mabilis na short-range teleportation sa mga ibabaw ng planeta o kalapit na sasakyan." },
-      "security":      { "title": "Security Station",          "desc": "Ship-wide surveillance at threat response hub. Sinusubaybayan ang lahat ng deck at nag-coordinate ng mga panloob na protocol ng seguridad." },
-      "weapons_ss":    { "title": "Weapons Systems SS",        "desc": "Starboard weapons management console. Kinokontrol ang mga targeting array, firing sequence at logistics ng ammunition para sa mga starboard armament." },
-      "weapons_ps":    { "title": "Weapons Systems PS",        "desc": "Port weapons management console. Nagbibigay ng buong independiyenteng kontrol ng lahat ng port-side weapon platform." },
-      "power_plant":   { "title": "Power Plant",               "desc": "Core energy generation unit. Nagbibigay ng matatag na output ng kuryente sa lahat ng sistema ng barko sa pamamagitan ng circular plasma containment technology." },
-      "power_sys":     { "title": "Power Systems",             "desc": "Hub ng pamamahagi at regulasyon ng kuryente. Namamahala ng load balancing sa pagitan ng mga sandata, shield, engine at mga sistema ng life support." },
-      "energy_dist":   { "title": "Energy Distribution",       "desc": "Secondary energy routing node. Tinitiyak ang consistent na paghahatid ng kuryente sa mid-ship at rear-section system sa ilalim ng mga kondisyon ng mataas na demand." },
-      "main_engine":   { "title": "Pangunahing Engine ng Barko", "desc": "Pangunahing sistema ng propulsion na nagpapatakbo ng lahat ng sub-light na paglalakbay. Nagge-generate ng thrust sa pamamagitan ng antimatter-catalyzed plasma jets." },
-      "navigation":    { "title": "Navigation",                "desc": "Sentral na navigation at helm control station. Namamahala ng course plotting, astrocartography at real-time positional tracking." },
-      "flight_deck":   { "title": "Flight Deck",               "desc": "Pangunahing piloting station. Kinokontrol ang lahat ng flight operation kabilang ang take-off, landing, orbital manoeuvre at mga emergency evasive action." },
-      "weapons_off":   { "title": "Weapons Officer",           "desc": "Tactical weapons command post. Nag-coordinate ng offensive at defensive weapons fire sa ilalim ng direktang command ng Weapons Officer." },
-      "comms_off":     { "title": "Comm's Officer",            "desc": "Hub ng komunikasyon at signal interception. Humahawak ng lahat ng inter-ship, alyansa at planetary na komunikasyon kabilang ang mga naka-encrypt na channel." },
-      "capt_quarters": { "title": "Captain's Quarters",        "desc": "Pribadong quarters para sa commanding officer ng barko. Naglalaman ng mga secure na data terminal at pribadong pasilidad ng briefing." },
-      "kitchen":       { "title": "Kusina",                    "desc": "Pasilidad ng nutrisyon at paghahanda ng pagkain ng crew. Nagpo-proseso ng mga nakaimbak na mapagkukunan ng pagkain at nagsi-synthesize ng mga nutritional supplement para sa matagal na paglalakbay." },
-      "mess_hall":     { "title": "Mess Hall",                 "desc": "Communal na dining at recreation space. Nagsisilbing hub ng moral ng crew sa panahon ng pahinga sa pagitan ng labanan at mga operasyon ng mapagkukunan." },
-      "hydro_1":       { "title": "Hydroponics Cell 1",        "desc": "Automated na yunit ng pagtatanim na gumagawa ng sariwang pagkain at mga halamang gamot. Binabawasan ang pag-asa sa mga nakaimbak na probisyon para sa mahabang misyon." },
-      "hydro_2":       { "title": "Hydroponics Cell 2",        "desc": "Secondary hydroponics cell na nagpapalawak ng iba't ibang pananim at ani. Sumusuporta sa nutrisyon ng crew at produksyon ng trade commodity." },
-      "hydro_3":       { "title": "Hydroponics Cell 3",        "desc": "Tertiary growing unit na espesyalista sa mataas na ani ng staple crop. Nagbibigay ng baseline na caloric supply para sa malalaking crew complement." },
-      "hydro_4":       { "title": "Hydroponics Cell 4",        "desc": "Medikal at botanical research cell. Nagpapalaki ng mga bihirang species na ginagamit sa medikal na paggamot at alchemical synthesis." },
-      "hydro_5":       { "title": "Hydroponics Cell 5",        "desc": "Exotic plant cultivation bay. Gumagawa ng mga luxury goods at bihirang halaman para sa kalakalan sa palengke." },
-      "hydro_6":       { "title": "Hydroponics Cell 6",        "desc": "High-growth experimental cell. Sinusubok ang mga bagong uri ng pananim na binuo sa pamamagitan ng mga programa ng genetic modification." },
-      "shield_main":   { "title": "Shield Gen Main",           "desc": "Pangunahing multi-directional shield generator. Nagpo-project ng energy barrier sa paligid ng buong hull sa panahon ng mga sitwasyon ng labanan." },
-      "power_relay1":  { "title": "Power Relay 1",             "desc": "Upper-deck power relay junction. Nag-route ng enerhiya mula sa power plant patungo sa forward weapons at shield array." },
-      "power_relay2":  { "title": "Power Relay 2",             "desc": "Lower-deck power relay junction. Namamahagi ng kuryente sa mga engine nacelle at rear defensive system." },
-      "hidden_st1":    { "title": "Hidden Storage 1",          "desc": "Nakatago na high-security vault. Nag-iimbak ng mga classified na kargamento, mahalagang artefact at contraband na malayo sa mga standard na inventory scan." },
-      "hidden_st2":    { "title": "Hidden Storage 2",          "desc": "Secondary concealed vault. Karagdagang ligtas na espasyo para sa mga mission-critical na bagay na nangangailangan ng maximum na diskresyon." },
-      "cargo_1":       { "title": "Cargo Hold 1",              "desc": "Pangunahing bulk cargo bay. Dinisenyo para sa malaking-volume na transportasyon ng mapagkukunan kabilang ang mga ore, refined metal at kalakal." },
-      "cargo_2":       { "title": "Cargo Hold 2",              "desc": "Secondary cargo bay na na-optimize para sa mga marupok o sensitibo sa temperatura na karga. Climate-controlled na kondisyon ng storage." },
-      "cargo_3":       { "title": "Cargo Hold 3",              "desc": "Tertiary cargo bay. Ang configurable na layout ay sumusuporta sa mga mixed load kabilang ang mga sasakyan, container at oversized na kagamitan." },
-      "war_council":   { "title": "War Council",               "desc": "Strategic command chamber. Senior officer briefing table kung saan ang mga plano sa labanan, mga estratehiya ng alyansa at mga layunin ng kampanya ay nako-coordinate." },
-      "academy":       { "title": "Akademya",                  "desc": "Pasilidad ng pagsasanay at edukasyon ng crew. Nagbibigay-daan sa advancement ng kasanayan, mga specialisation unlock at mga programa ng pag-unlad ng opisyal." },
-      "science_lab":   { "title": "Science Lab",               "desc": "Sentro ng pananaliksik at pagpapaunlad. Nagsasagawa ng mga eksperimento sa materials science, propulsion theory at pagsusuri ng alien na teknolohiya." },
-      "dna_lab":       { "title": "DNA Lab",                   "desc": "Pasilidad ng genetic research. Nagde-develop ng mga biological enhancement para sa crew, gumagawa ng mga bagong variant ng species at nananaliksik ng mga alien DNA sample." },
-      "cryostasis":    { "title": "Cryostasis",                "desc": "Sistema ng suspensyon para sa matagal na paglalakbay. Inilalagay ang crew sa cryogenic stasis para mapanatili ang mga mapagkukunan sa mga multi-year na deep-space na paglalakbay." },
-      "dna_chambers":  { "title": "DNA Chambers",              "desc": "Mga bay ng genetic modification. Nag-aaplay ng mga researched na DNA enhancement nang direkta sa mga miyembro ng crew at biological unit." },
-      "weapons_relay": { "title": "Weapons Power Relay",       "desc": "Dedicated na node ng power management para sa mga mabigat na sistema ng sandata. Tinitiyak ang matatag na supply ng enerhiya sa panahon ng mga labanan." },
-      "comms_tower":   { "title": "Comm's Tower",              "desc": "Long-range deep-space communications array. Nagbibigay-daan sa mga broadcast ng fleet, interstellar transmission at koordinasyon ng alyansa sa malayo." }
+      "storeroom": {
+        "title": "Bodega",
+        "desc": "Sentral na storage hub para sa mga hilaw na materyales at mga naanihing mapagkukunan. Namamahala ng pamamahagi ng imbentaryo sa mga operasyon ng pagmimina at refinery."
+      },
+      "mining_fs": {
+        "title": "Mining FS",
+        "desc": "Forward starboard mining bay. Nilagyan ng deep-core extraction arrays para sa koleksyon ng mineral at ore sa bukas na kalawakan."
+      },
+      "mining_fp": {
+        "title": "Mining FP",
+        "desc": "Forward port mining bay. Katulad ng starboard unit, dinidoble ang kapasidad ng extraction sa panahon ng mga operasyon sa field na may mayamang mapagkukunan."
+      },
+      "process_ref": {
+        "title": "Proseso ng Refinery",
+        "desc": "Nagko-convert ng hilaw na ore at mineral sa mga refined alloy. Kritikal para sa synthesis ng gasolina at mga materyales ng upgrade ng barko."
+      },
+      "mining_rs": {
+        "title": "Mining RS",
+        "desc": "Rear starboard mining unit. Naka-anggulo sa -45° para sa mga lateral field sweep sa panahon ng mabagal na pag-aani ng asteroid."
+      },
+      "mining_rp": {
+        "title": "Mining RP",
+        "desc": "Rear port mining unit. Nagtatrabaho nang magkasabay sa RS bay para ma-maximize ang ani ng pagkuha ng mapagkukunan sa rear-field."
+      },
+      "fuel_ref": {
+        "title": "Fuel Refinery",
+        "desc": "Nagpo-proseso ng mga refined alloy sa propulsion-grade na gasolina. Nagbibigay ng supply sa pangunahing engine at mga emergency thruster reserve."
+      },
+      "workshop": {
+        "title": "Workshop",
+        "desc": "Sentro ng pagpapanatili at pagmamanupaktura ng barko. Humahawak sa mga pag-aayos ng bahagi, pagmamanupaktura ng parte, at mga upgrade ng kagamitan."
+      },
+      "racing": {
+        "title": "Racing Hangar",
+        "desc": "Nakatuong bay na naglalagay ng mga racing drone at light craft. Sumusuporta sa deployment ng RACING game mode at mga operasyon ng pit-stop."
+      },
+      "brig": {
+        "title": "Kulungan",
+        "desc": "Ligtas na cell ng pagpipigil para sa mga bilanggo at mahalagang kargamento. Mga reinforced na dingding na pumipigil sa hindi awtorisadong access o pagtakas."
+      },
+      "armory_ss": {
+        "title": "Armory SS",
+        "desc": "Starboard-side weapons locker. Nag-iimbak at nagpapanatili ng mga maliit na armas, kagamitan ng proteksyon ng crew at mga sistema ng personal na depensa."
+      },
+      "armory_ps": {
+        "title": "Armory PS",
+        "desc": "Port-side weapons locker. Katulad ng SS armory na nagbibigay ng balanseng access sa loadout sa magkabilang panig ng sasakyan."
+      },
+      "main_weapon": {
+        "title": "Pangunahing Mabigat na Sandata",
+        "desc": "Pangunahing heavy weapon emplacement. Naglalagay ng pinaka-makapangyarihang mga offensive system ng barko para sa malalaking labanan."
+      },
+      "fwd_shield": {
+        "title": "Forward Shield Gen",
+        "desc": "Nagge-generate ng protektibong energy barrier sa kabuuan ng proa ng barko. Unang linya ng depensa laban sa mga papasok na proyektil at energy attack."
+      },
+      "fighter_fss": {
+        "title": "Fighter Bay FSS",
+        "desc": "Forward starboard bay na naglalagay ng compact fighter craft. Nagbibigay-daan sa mabilis na deployment ng escort fighter sa panahon ng labanan at patrol na misyon."
+      },
+      "fighter_fps": {
+        "title": "Fighter Bay FPS",
+        "desc": "Forward port fighter bay. Nagtatrabaho nang magkasabay sa FSS bay para sa coordinated fighter squadron launches."
+      },
+      "fighter_rss": {
+        "title": "Fighter Bay RSS",
+        "desc": "Rear starboard nacelle fighter bay. Sumusuporta sa mga operasyon ng rearguard at mga senaryo ng pursuit interception."
+      },
+      "fighter_rps": {
+        "title": "Fighter Bay RPS",
+        "desc": "Rear port nacelle fighter bay. Nagbibigay ng simetriko na rear-coverage para sa buong defensive fighter deployment."
+      },
+      "barracks_ss": {
+        "title": "Barracks SS",
+        "desc": "Starboard crew quarters para sa mga combat personnel. Naglalagay ng mga sundalo, piloto at mga security team na may mga bunk system at equipment locker."
+      },
+      "barracks_ps": {
+        "title": "Barracks PS",
+        "desc": "Port crew quarters. Katulad ng layout sa SS barracks na tinitiyak ang pantay na pamamahagi ng crew at mabilis na mobilisasyon mula sa alinmang panig."
+      },
+      "stables_ss": {
+        "title": "Stables SS",
+        "desc": "Starboard biological asset bay. Naglalagay ng mga alien mount at bio-engineered na nilalang na ginagamit sa mga operasyon sa ibabaw ng planeta."
+      },
+      "stable_ps": {
+        "title": "Stable PS",
+        "desc": "Port biological asset bay. Katulad ng SS stables para sa balanseng karga ng nilalang at simetrikong pamamahagi ng timbang."
+      },
+      "transporter": {
+        "title": "Transporter Bay",
+        "desc": "Quantum-assisted na sistema ng transportasyon ng tao at kargamento. Nagbibigay-daan sa mabilis na short-range teleportation sa mga ibabaw ng planeta o kalapit na sasakyan."
+      },
+      "security": {
+        "title": "Security Station",
+        "desc": "Ship-wide surveillance at threat response hub. Sinusubaybayan ang lahat ng deck at nag-coordinate ng mga panloob na protocol ng seguridad."
+      },
+      "weapons_ss": {
+        "title": "Weapons Systems SS",
+        "desc": "Starboard weapons management console. Kinokontrol ang mga targeting array, firing sequence at logistics ng ammunition para sa mga starboard armament."
+      },
+      "weapons_ps": {
+        "title": "Weapons Systems PS",
+        "desc": "Port weapons management console. Nagbibigay ng buong independiyenteng kontrol ng lahat ng port-side weapon platform."
+      },
+      "power_plant": {
+        "title": "Power Plant",
+        "desc": "Core energy generation unit. Nagbibigay ng matatag na output ng kuryente sa lahat ng sistema ng barko sa pamamagitan ng circular plasma containment technology."
+      },
+      "power_sys": {
+        "title": "Power Systems",
+        "desc": "Hub ng pamamahagi at regulasyon ng kuryente. Namamahala ng load balancing sa pagitan ng mga sandata, shield, engine at mga sistema ng life support."
+      },
+      "energy_dist": {
+        "title": "Energy Distribution",
+        "desc": "Secondary energy routing node. Tinitiyak ang consistent na paghahatid ng kuryente sa mid-ship at rear-section system sa ilalim ng mga kondisyon ng mataas na demand."
+      },
+      "main_engine": {
+        "title": "Pangunahing Engine ng Barko",
+        "desc": "Pangunahing sistema ng propulsion na nagpapatakbo ng lahat ng sub-light na paglalakbay. Nagge-generate ng thrust sa pamamagitan ng antimatter-catalyzed plasma jets."
+      },
+      "navigation": {
+        "title": "Navigation",
+        "desc": "Sentral na navigation at helm control station. Namamahala ng course plotting, astrocartography at real-time positional tracking."
+      },
+      "flight_deck": {
+        "title": "Flight Deck",
+        "desc": "Pangunahing piloting station. Kinokontrol ang lahat ng flight operation kabilang ang take-off, landing, orbital manoeuvre at mga emergency evasive action."
+      },
+      "weapons_off": {
+        "title": "Weapons Officer",
+        "desc": "Tactical weapons command post. Nag-coordinate ng offensive at defensive weapons fire sa ilalim ng direktang command ng Weapons Officer."
+      },
+      "comms_off": {
+        "title": "Comm's Officer",
+        "desc": "Hub ng komunikasyon at signal interception. Humahawak ng lahat ng inter-ship, alyansa at planetary na komunikasyon kabilang ang mga naka-encrypt na channel."
+      },
+      "capt_quarters": {
+        "title": "Captain's Quarters",
+        "desc": "Pribadong quarters para sa commanding officer ng barko. Naglalaman ng mga secure na data terminal at pribadong pasilidad ng briefing."
+      },
+      "kitchen": {
+        "title": "Kusina",
+        "desc": "Pasilidad ng nutrisyon at paghahanda ng pagkain ng crew. Nagpo-proseso ng mga nakaimbak na mapagkukunan ng pagkain at nagsi-synthesize ng mga nutritional supplement para sa matagal na paglalakbay."
+      },
+      "mess_hall": {
+        "title": "Mess Hall",
+        "desc": "Communal na dining at recreation space. Nagsisilbing hub ng moral ng crew sa panahon ng pahinga sa pagitan ng labanan at mga operasyon ng mapagkukunan."
+      },
+      "hydro_1": {
+        "title": "Hydroponics Cell 1",
+        "desc": "Automated na yunit ng pagtatanim na gumagawa ng sariwang pagkain at mga halamang gamot. Binabawasan ang pag-asa sa mga nakaimbak na probisyon para sa mahabang misyon."
+      },
+      "hydro_2": {
+        "title": "Hydroponics Cell 2",
+        "desc": "Secondary hydroponics cell na nagpapalawak ng iba't ibang pananim at ani. Sumusuporta sa nutrisyon ng crew at produksyon ng trade commodity."
+      },
+      "hydro_3": {
+        "title": "Hydroponics Cell 3",
+        "desc": "Tertiary growing unit na espesyalista sa mataas na ani ng staple crop. Nagbibigay ng baseline na caloric supply para sa malalaking crew complement."
+      },
+      "hydro_4": {
+        "title": "Hydroponics Cell 4",
+        "desc": "Medikal at botanical research cell. Nagpapalaki ng mga bihirang species na ginagamit sa medikal na paggamot at alchemical synthesis."
+      },
+      "hydro_5": {
+        "title": "Hydroponics Cell 5",
+        "desc": "Exotic plant cultivation bay. Gumagawa ng mga luxury goods at bihirang halaman para sa kalakalan sa palengke."
+      },
+      "hydro_6": {
+        "title": "Hydroponics Cell 6",
+        "desc": "High-growth experimental cell. Sinusubok ang mga bagong uri ng pananim na binuo sa pamamagitan ng mga programa ng genetic modification."
+      },
+      "shield_main": {
+        "title": "Shield Gen Main",
+        "desc": "Pangunahing multi-directional shield generator. Nagpo-project ng energy barrier sa paligid ng buong hull sa panahon ng mga sitwasyon ng labanan."
+      },
+      "power_relay1": {
+        "title": "Power Relay 1",
+        "desc": "Upper-deck power relay junction. Nag-route ng enerhiya mula sa power plant patungo sa forward weapons at shield array."
+      },
+      "power_relay2": {
+        "title": "Power Relay 2",
+        "desc": "Lower-deck power relay junction. Namamahagi ng kuryente sa mga engine nacelle at rear defensive system."
+      },
+      "hidden_st1": {
+        "title": "Hidden Storage 1",
+        "desc": "Nakatago na high-security vault. Nag-iimbak ng mga classified na kargamento, mahalagang artefact at contraband na malayo sa mga standard na inventory scan."
+      },
+      "hidden_st2": {
+        "title": "Hidden Storage 2",
+        "desc": "Secondary concealed vault. Karagdagang ligtas na espasyo para sa mga mission-critical na bagay na nangangailangan ng maximum na diskresyon."
+      },
+      "cargo_1": {
+        "title": "Cargo Hold 1",
+        "desc": "Pangunahing bulk cargo bay. Dinisenyo para sa malaking-volume na transportasyon ng mapagkukunan kabilang ang mga ore, refined metal at kalakal."
+      },
+      "cargo_2": {
+        "title": "Cargo Hold 2",
+        "desc": "Secondary cargo bay na na-optimize para sa mga marupok o sensitibo sa temperatura na karga. Climate-controlled na kondisyon ng storage."
+      },
+      "cargo_3": {
+        "title": "Cargo Hold 3",
+        "desc": "Tertiary cargo bay. Ang configurable na layout ay sumusuporta sa mga mixed load kabilang ang mga sasakyan, container at oversized na kagamitan."
+      },
+      "war_council": {
+        "title": "War Council",
+        "desc": "Strategic command chamber. Senior officer briefing table kung saan ang mga plano sa labanan, mga estratehiya ng alyansa at mga layunin ng kampanya ay nako-coordinate."
+      },
+      "academy": {
+        "title": "Akademya",
+        "desc": "Pasilidad ng pagsasanay at edukasyon ng crew. Nagbibigay-daan sa advancement ng kasanayan, mga specialisation unlock at mga programa ng pag-unlad ng opisyal."
+      },
+      "science_lab": {
+        "title": "Science Lab",
+        "desc": "Sentro ng pananaliksik at pagpapaunlad. Nagsasagawa ng mga eksperimento sa materials science, propulsion theory at pagsusuri ng alien na teknolohiya."
+      },
+      "dna_lab": {
+        "title": "DNA Lab",
+        "desc": "Pasilidad ng genetic research. Nagde-develop ng mga biological enhancement para sa crew, gumagawa ng mga bagong variant ng species at nananaliksik ng mga alien DNA sample."
+      },
+      "cryostasis": {
+        "title": "Cryostasis",
+        "desc": "Sistema ng suspensyon para sa matagal na paglalakbay. Inilalagay ang crew sa cryogenic stasis para mapanatili ang mga mapagkukunan sa mga multi-year na deep-space na paglalakbay."
+      },
+      "dna_chambers": {
+        "title": "DNA Chambers",
+        "desc": "Mga bay ng genetic modification. Nag-aaplay ng mga researched na DNA enhancement nang direkta sa mga miyembro ng crew at biological unit."
+      },
+      "weapons_relay": {
+        "title": "Weapons Power Relay",
+        "desc": "Dedicated na node ng power management para sa mga mabigat na sistema ng sandata. Tinitiyak ang matatag na supply ng enerhiya sa panahon ng mga labanan."
+      },
+      "comms_tower": {
+        "title": "Comm's Tower",
+        "desc": "Long-range deep-space communications array. Nagbibigay-daan sa mga broadcast ng fleet, interstellar transmission at koordinasyon ng alyansa sa malayo."
+      }
     },
     "guns": {
-      "far_left_bar":      "Front Main Canon",
-      "fore_port_bay":     "Starboard Gun Bank Forward",
-      "fore_stbd_bay":     "Port Gun Bank Forward",
-      "pd_gun_1":          "Cockpit Starboard Defence Cell 1",
-      "pd_gun_2":          "Cockpit Starboard Defence Cell 2",
-      "pd_gun_3":          "Cockpit Starboard Defence Cell 3",
-      "pd_gun_4":          "Cockpit Starboard Defence Cell 4",
-      "pd_gun_5":          "Cockpit Starboard Defence Cell 5",
-      "pd_gun_6":          "Cockpit Starboard Defence Cell 6",
-      "vert_oval_upper":   "Cockpit Center Defence Cell Lower",
-      "vert_oval_lower":   "Cockpit Center Defence Cell Upper",
-      "center_front_gun":  "Forward Upperdeck Gun Array",
-      "pd_gun_7":          "Cockpit Port Defence Cell 1",
-      "pd_gun_8":          "Cockpit Port Defence Cell 2",
-      "pd_gun_9":          "Cockpit Port Defence Cell 3",
-      "pd_gun_10":         "Cockpit Port Defence Cell 4",
-      "pd_gun_11":         "Cockpit Port Defence Cell 5",
-      "pd_gun_12":         "Cockpit Port Defence Cell 6",
+      "far_left_bar": "Front Main Canon",
+      "fore_port_bay": "Starboard Gun Bank Forward",
+      "fore_stbd_bay": "Port Gun Bank Forward",
+      "pd_gun_1": "Cockpit Starboard Defence Cell 1",
+      "pd_gun_2": "Cockpit Starboard Defence Cell 2",
+      "pd_gun_3": "Cockpit Starboard Defence Cell 3",
+      "pd_gun_4": "Cockpit Starboard Defence Cell 4",
+      "pd_gun_5": "Cockpit Starboard Defence Cell 5",
+      "pd_gun_6": "Cockpit Starboard Defence Cell 6",
+      "vert_oval_upper": "Cockpit Center Defence Cell Lower",
+      "vert_oval_lower": "Cockpit Center Defence Cell Upper",
+      "center_front_gun": "Forward Upperdeck Gun Array",
+      "pd_gun_7": "Cockpit Port Defence Cell 1",
+      "pd_gun_8": "Cockpit Port Defence Cell 2",
+      "pd_gun_9": "Cockpit Port Defence Cell 3",
+      "pd_gun_10": "Cockpit Port Defence Cell 4",
+      "pd_gun_11": "Cockpit Port Defence Cell 5",
+      "pd_gun_12": "Cockpit Port Defence Cell 6",
       "upper_flank_array": "Starboard Gun Bank Rear",
       "lower_flank_array": "Port Gun Bank Rear",
-      "spine_gun_1":       "Mid Upperdeck Gun Array",
-      "spine_gun_2":       "Lower Central Spine Array",
-      "spine_gun_3":       "Rear Central Spine Array",
-      "mid_rail_gun":      "Central Tower Embankment",
+      "spine_gun_1": "Mid Upperdeck Gun Array",
+      "spine_gun_2": "Lower Central Spine Array",
+      "spine_gun_3": "Rear Central Spine Array",
+      "mid_rail_gun": "Central Tower Embankment",
       "upper_nacelle_bay": "Starboard Wing Array",
       "lower_nacelle_bay": "Port Wing Array"
     },
@@ -476,6 +1049,76 @@
           "notes": "Ang Dryads ay isang kahanga-hanga at natatanging species, nailalarawan ng kanilang hybrid na kalikasan na pinagsasama ang mga katangian ng mga puno at alien na nilalang. Ang natatanging pisyolohiyang ito ay nagbibigay-daan sa kanila na umunlad sa iba't ibang kapaligiran, madalas na kahawig ang mga halaman sa paligid nila. Sila ay may isang hive-like na isipan, na nagbibigay-daan sa kanila na makipag-communicate nang maayos sa isa't isa. Ang kolektibong kamalayang ito ay nagtataguyod ng malalim na pagkakaisa at kooperasyon, nagbibigay-daan sa kanila na mag-operate bilang isang magkakasamang grupo habang pinapanatili ang masalimuot na koneksyon sa natural na mundo, at maaari nilang maramdaman ang kalusugan ng kanilang paligid, ginagawa silang pambihirang mga tagapagbantay ng kalikasan. Ang kanilang diyeta ay pangunahing plant-based, binubuo ng mga dahon, prutas, at iba pang botanical na materyales. Gayunpaman, paminsan-minsan nilang dinadagdagan ang kanilang diyeta ng maliit na dami ng karne, na nakuha nila nang may malaking pag-iingat at paggalang sa buhay na kanilang kinukuha. Bukod sa kanilang mga pisikal na katangian, ang Dryads ay kilala sa kanilang masayahin at malikhain na gawi. Madalas silang nakikibahagi sa magaan na mga biro o laro, na sumasalamin sa kanilang masayang diwa. Ang kanilang katapatan sa isa't isa at sa kanilang tinubuang-lupa ay walang palya, at marahas nilang poprotektahan ang kanilang komunidad at teritoryo kapag nagbabanta. Sa espirituwal na aspeto, ang Dryads ay may malalim na paniniwala sa kabilang buhay na magkakaugnay sa mga siklo ng kalikasan. Iginagalang nila ang mga natural na elemento (Lupa, Hangin, Apoy, at Tubig) bilang mga banal na puwersa, at sumasamba rin sila sa mga celestial body tulad ng araw at mga bituin, na itinuturing nila bilang mga guiding light sa kanilang pag-iral. Ang malalim na koneksyong ito sa parehong kalikasan at kosmos ay humuhubog sa kanilang kultura, mga ritwal, at kabuuang pamumuhay."
         }
       }
-    }
+    },
+    "back": "← BUMALIK",
+    "viewArrow": "TINGNAN →",
+    "selectCategory": "PUMILI NG KATEGORYA",
+    "comingSoon": "MALAPIT NA",
+    "specialistProfileDesc": "Profile ng espesyalista — buong stats at kakayahan, makukuha kapag nailabas na ang laro.",
+    "alliance": {
+      "rank": {
+        "leader": "Lider",
+        "coleader": "Co-lider",
+        "officer": "Opisyal",
+        "member": "Miyembro"
+      },
+      "status": {
+        "online": "Online",
+        "offline": "Offline",
+        "away": "Wala"
+      },
+      "manage": {
+        "editInfo": "I-edit ang Impormasyon ng Alyansa",
+        "editInfoDesc": "Baguhin ang pangalan, tag at paglalarawan",
+        "joinRequests": "Pamahalaan ang mga Kahilingang Sumali",
+        "joinRequestsDesc": "Suriin at tanggapin ang mga bagong miyembro",
+        "donationGoals": "Itakda ang mga Layunin sa Donasyon",
+        "donationGoalsDesc": "I-configure ang mga lingguhang layunin sa donasyon",
+        "warSettings": "Mga Setting ng Digmaan ng Alyansa",
+        "warSettingsDesc": "I-configure ang mga patakaran sa pakikilahok sa digmaan",
+        "kickMembers": "Palayasin ang mga Miyembro",
+        "kickMembersDesc": "Alisin ang mga hindi aktibo o lumalabag sa patakaran"
+      },
+      "allianceMail": {
+        "warResults": "Mga Resulta ng Digmaan ng Alyansa",
+        "strategyPlan": "Bagong Plano ng Estratehiya",
+        "donationSummary": "Lingguhang Buod ng Donasyon",
+        "meeting1800": "Pulong sa 18:00",
+        "levelUp": "Nag-level up ang Alyansa!"
+      }
+    },
+    "mailSubjects": {
+      "welcome": "Maligayang pagdating sa HyperTek!",
+      "maintenance": "Abiso sa Pagpapanatili ng Server",
+      "allianceWar": "Anunsyo ng Digmaan ng Alyansa",
+      "galacticCup": "Pagpaparehistro sa Galactic Cup",
+      "baseAttacked": "Ang iyong base ay inatake!",
+      "loginReward": "Handa na ang Araw-araw na Gantimpala sa Pag-login",
+      "refiningEvent": "Nagsisimula ang Kaganapan ng Master ng Pagtataas",
+      "meeting1800": "Pulong sa 18:00"
+    },
+    "chat": {
+      "autoTranslateOn": "Auto-translate BUKAS — Ang mga mensahe ay naihatid sa wika ng bawat tatanggap",
+      "autoTranslateOff": "Auto-translate SARADO"
+    },
+    "chatMessages": {
+      "allianceWarTonight": "Sino ang sasali sa digmaan ng alyansa ngayong gabi?",
+      "ggLastRace": "GG sa huling lahi, kamangha-manghang bilis",
+      "tradingPlasma": "Nagpapalitan ng plasma rods para sa tech books",
+      "needHelpAsteroid": "Kailangan ng tulong sa asteroid mission",
+      "allianceRecruiting": "Ang aming alyansa ay nagre-recruit, DM mo ako",
+      "donationGoalsPlasma": "Mga layunin sa donasyon: kailangan ng plasma rods!",
+      "warStarts2Hours": "Magsisimula ang digmaan sa 2 oras, maghanda",
+      "handleMedicalSupport": "Ako na ang bahala sa medikal na suporta",
+      "wts50Engines": "IBINEBENTA: 50 makina, PM mo ako",
+      "wtbAntiGravity": "BIBILHIN: Anti-gravity modules x10",
+      "sellingRareSkins": "Nagbebenta ng rare skins, tingnan ang profile"
+    },
+    "devicePairing": "PAGPAPARES NG DEVICE",
+    "deviceOffline": "OFFLINE",
+    "pairing": "NAGPAPARES...",
+    "unavailableNow": "HINDI AVAILABLE NGAYON",
+    "pairDevice": "I-PAIR ANG DEVICE",
+    "vrInteractionMode": "VR Interaction MODE · Malapit Na"
   }
 }

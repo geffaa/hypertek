@@ -10,19 +10,19 @@ import uploadTemp from "../Middleware/UploadMulter.js";
 
 const ContentRoute = express.Router();
 
-// ✅ PUBLIC — Get all site content
+// PUBLIC — Get all site content
 ContentRoute.get("/", getAllContent);
 
-// ✅ PUBLIC — Get all sections for a page group (e.g. "home", "about")
+// PUBLIC — Get all sections for a page group (e.g. "home", "about")
 ContentRoute.get("/page/:pageGroup", getSectionsByPage);
 
-// ✅ PUBLIC — Get single section by key
+// PUBLIC — Get single section by key
 ContentRoute.get("/:sectionKey", getSectionByKey);
 
-// ✅ ADMIN — Update section text fields
+// ADMIN — Update section text fields
 ContentRoute.put("/:sectionKey", updateSection);
 
-// ✅ ADMIN — Upload image for a section field
+// ADMIN — Upload image for a section field
 ContentRoute.post(
     "/:sectionKey/upload-image",
     (req, res, next) => {

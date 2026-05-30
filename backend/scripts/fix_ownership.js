@@ -16,7 +16,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.join(__dirname, "..", "Config", ".env") });
 dotenv.config({ path: path.join(__dirname, "..", ".env.local"), override: true });
@@ -25,10 +25,10 @@ import NFTSystem from "../Models/NFTSystem.js";
 import { Payment } from "../Models/Payment.js";
 
 const BUYER_WALLET = "0x839f4465dab13fa73e6fbee4c4135a86926c9484";
-const DRY_RUN      = false; // set true to preview without writing
+const DRY_RUN = false; // set true to preview without writing
 
 await mongoose.connect(process.env.MONGODB_URL);
-console.log("✅ Connected to MongoDB\n");
+console.log("Connected to MongoDB\n");
 
 // 1. Find all successful payments for this buyer
 const payments = await Payment.find({
@@ -69,13 +69,13 @@ for (const payment of payments) {
     : await NFTSystem.findOne({ "subCollections._id": payment.subCollectionId });
 
   if (!parent) {
-    console.log("   ❌ Parent not found");
+    console.log("    Parent not found");
     continue;
   }
 
   const sub = parent.subCollections.id(payment.subCollectionId);
   if (!sub) {
-    console.log("   ❌ Sub-collection not found");
+    console.log("    Sub-collection not found");
     continue;
   }
 
@@ -84,22 +84,22 @@ for (const payment of payments) {
   console.log(`   listed        : ${sub.listed}`);
 
   if (sub.owner?.toLowerCase() === BUYER_WALLET.toLowerCase()) {
-    console.log("   ✅ Already owned by buyer — skipping");
+    console.log("   Already owned by buyer — skipping");
     continue;
   }
 
   if (!DRY_RUN) {
-    sub.owner    = BUYER_WALLET.toLowerCase();
-    sub.listed   = false;
+    sub.owner = BUYER_WALLET.toLowerCase();
+    sub.listed = false;
     sub.priceETH = 0;
     sub.isFirstSale = false;
     parent.markModified("subCollections");
     await parent.save();
-    console.log(`   ✅ FIXED: owner set to ${BUYER_WALLET.toLowerCase()}`);
+    console.log(`   FIXED: owner set to ${BUYER_WALLET.toLowerCase()}`);
   } else {
     console.log(`   [DRY RUN] Would set owner to ${BUYER_WALLET.toLowerCase()}`);
   }
 }
 
 await mongoose.disconnect();
-console.log("\n✅ Done.");
+console.log("\nDone.");

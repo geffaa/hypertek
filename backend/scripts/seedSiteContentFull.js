@@ -52,17 +52,17 @@ const SECTIONS = [
         sectionLabel: "How It Works",
         pageGroup: "home",
         fields: [
-            { key: "section_title",    label: "Section Title",    type: "text",     value: "How It Works" },
+            { key: "section_title", label: "Section Title", type: "text", value: "How It Works" },
             { key: "section_subtitle", label: "Section Subtitle", type: "textarea", value: "Get started in just a few steps and unlock the world of digital collectibles." },
             {
                 key: "steps",
                 label: "Steps",
                 type: "list",
                 value: [
-                    { title: "Connect Wallet",     description: "Securely connect your crypto wallet to start buying, selling, and collecting NFTs." },
+                    { title: "Connect Wallet", description: "Securely connect your crypto wallet to start buying, selling, and collecting NFTs." },
                     { title: "Explore Collections", description: "Browse trending collections and discover rare digital artworks from top creators." },
-                    { title: "Collect & Trade",    description: "Buy your favorite NFTs and showcase or trade them on your profile anytime." },
-                    { title: "Earn & Grow",        description: "Earn by selling your collections or gaining popularity in the NFT space." },
+                    { title: "Collect & Trade", description: "Buy your favorite NFTs and showcase or trade them on your profile anytime." },
+                    { title: "Earn & Grow", description: "Earn by selling your collections or gaining popularity in the NFT space." },
                 ],
             },
         ],
@@ -129,10 +129,10 @@ const SECTIONS = [
         sectionLabel: "About Page — Hero Section",
         pageGroup: "about",
         fields: [
-            { key: "heading",    label: "Heading (e.g. About Us)",     type: "text",     value: "About Us" },
-            { key: "subtitle",   label: "Text bawah judul",            type: "textarea", value: "The year is 2117. Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
-            { key: "bg_image",   label: "Background Image (about_bg)", type: "image",    value: "" },
-            { key: "char_image", label: "Character Image (char.png)",  type: "image",    value: "" },
+            { key: "heading", label: "Heading (e.g. About Us)", type: "text", value: "About Us" },
+            { key: "subtitle", label: "Text bawah judul", type: "textarea", value: "The year is 2117. Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies.\nAt the center of it all lies the Echo Core, a quantum relic now pulsing with riddles, memories, and a call to power. It awakens you — a reborn Overlord, forged by legacy and technology." },
+            { key: "bg_image", label: "Background Image (about_bg)", type: "image", value: "" },
+            { key: "char_image", label: "Character Image (char.png)", type: "image", value: "" },
         ],
     },
 
@@ -142,12 +142,12 @@ const SECTIONS = [
         sectionLabel: "About Page — Our Story",
         pageGroup: "about",
         fields: [
-            { key: "story_image",  label: "Our Story 1 — Gambar", type: "image",    value: "" },
-            { key: "body",         label: "Our Story 1 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
-            { key: "story2_image", label: "Our Story 2 — Gambar", type: "image",    value: "" },
-            { key: "story2_body",  label: "Our Story 2 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
-            { key: "story3_image", label: "Our Story 3 — Gambar", type: "image",    value: "" },
-            { key: "story3_body",  label: "Our Story 3 — Teks",   type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story_image", label: "Our Story 1 — Gambar", type: "image", value: "" },
+            { key: "body", label: "Our Story 1 — Teks", type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story2_image", label: "Our Story 2 — Gambar", type: "image", value: "" },
+            { key: "story2_body", label: "Our Story 2 — Teks", type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
+            { key: "story3_image", label: "Our Story 3 — Gambar", type: "image", value: "" },
+            { key: "story3_body", label: "Our Story 3 — Teks", type: "textarea", value: "Humanity didn’t conquer the stars — it fractured into them.\nAfter Earth’s collapse, survivors launched the Hyper Tek Exodus, scattering AI, enhanced genomes, and prototypes across thousands of seed worlds. Each evolved in isolation forming new species, cultures, and technologies." },
         ],
     },
 
@@ -167,7 +167,7 @@ const SECTIONS = [
 async function seed() {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
-        console.log("✅ Connected to MongoDB\n");
+        console.log("Connected to MongoDB\n");
 
         for (const section of SECTIONS) {
             const result = await SiteContent.findOneAndUpdate(
@@ -175,12 +175,12 @@ async function seed() {
                 { $set: section },
                 { upsert: true, new: true }
             );
-            console.log(`✅ ${section.sectionKey} → ${result.sectionLabel}`);
+            console.log(`${section.sectionKey} → ${result.sectionLabel}`);
         }
 
         console.log(`\n🎉 All ${SECTIONS.length} sections seeded successfully!`);
     } catch (err) {
-        console.error("❌ Seed error:", err.message);
+        console.error(" Seed error:", err.message);
     } finally {
         await mongoose.disconnect();
     }

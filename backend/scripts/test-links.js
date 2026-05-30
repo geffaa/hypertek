@@ -15,14 +15,14 @@ let pending = uniqueLinks.length;
 uniqueLinks.forEach(link => {
   https.get(link, (res) => {
     if (res.statusCode !== 200) {
-      console.log(`❌ BROKEN (${res.statusCode}): ${link}`);
+      console.log(` BROKEN (${res.statusCode}): ${link}`);
     } else {
-      console.log(`✅ OK: ${link}`);
+      console.log(`OK: ${link}`);
     }
     pending--;
     if (pending === 0) process.exit(0);
   }).on('error', (e) => {
-    console.log(`❌ ERROR: ${link} - ${e.message}`);
+    console.log(` ERROR: ${link} - ${e.message}`);
     pending--;
     if (pending === 0) process.exit(0);
   });

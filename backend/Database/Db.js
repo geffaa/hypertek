@@ -9,13 +9,13 @@ const DBConnections = async () => {
 
     const conn = await mongoose.connect(process.env.MONGODB_URL);
 
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
 
-    // ✅ YAHI ADD KARO
+    // YAHI ADD KARO
     await ensureAdminExists();
 
   } catch (error) {
-    console.error("❌ MongoDB Connection Failed:", error.message);
+    console.error(" MongoDB Connection Failed:", error.message);
     process.exit(1);
   }
 };

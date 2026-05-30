@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "שוק",
     "searchPlaceholder": "חיפוש...",
-
     "tabs": {
-      "overview":  "סקירה כללית",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "השוק",
-      "auctions":  "מכירות פומביות",
-      "trades":    "עסקאות",
-      "quests":    "משימות",
-      "hire":      "להשכרה",
-      "bounty":    "פרסים"
+      "overview": "סקירה כללית",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "השוק",
+      "auctions": "מכירות פומביות",
+      "trades": "עסקאות",
+      "quests": "משימות",
+      "hire": "להשכרה",
+      "bounty": "פרסים"
     },
-
     "banner": {
       "defaultHeading": "עידן חדש שוקע ב-Hyper Tek",
-      "defaultDesc": "זוהי תחילתו של יקום חי ונושם שבו כל החלטה מעצבת את המסע.",
+      "defaultDesc": "זו תחילתו של יקום חי ונושם שבו כל החלטה מעצבת את המסע. בין אם אתם דוהרים במהירות קלה, כורתים בריתות בממלכת Overlord, או חושפים סודות ב-HyperQuest, זו ההזדמנות שלכם להשאיר חותם על הסיפור.",
       "stats": {
-        "totalItems":  "סך הפריטים",
-        "totalBuys":   "סך הרכישות",
-        "listed":      "רשום",
+        "totalItems": "סך הפריטים",
+        "totalBuys": "סך הרכישות",
+        "listed": "רשום",
         "collections": "אוספים"
       },
-      "soundOn":  "צליל מופעל",
+      "soundOn": "צליל מופעל",
       "soundOff": "צליל כבוי"
     },
-
     "bottomBar": {
-      "learnLabel":     "למד על NFA / NFC",
+      "learnLabel": "למד על NFA / NFC",
       "educationPanel": "לוח חינוך HyperTek",
-      "footerNote":     "לוח זה מיועד לעיון מהיר. בקר בכרטיסייה NFA / NFC 101 לתוכן חינוכי מלא.",
+      "footerNote": "לוח זה מיועד לעיון מהיר. בקר בכרטיסייה NFA / NFC 101 לתוכן חינוכי מלא.",
       "facts": [
-        { "label": "NFA",        "desc": "נכס בלעדי ל-Hypertek. הבונוסים הגבוהים ביותר במשחק. ערך רכישה חוזרת מינימלי מובטח הגדל עם כל מכירה." },
-        { "label": "NFC",        "desc": "נוצר על ידי Hypertek או שחקנים בעלי רישיון. בונוסים במשחק כלולים. רכישה חוזרת מינימלית מובטחת." },
-        { "label": "NFT",        "desc": "פריט אספנות שנוצר על ידי שחקנים. אין בונוסים במשחק. אין ערבות לרכישה חוזרת. ניתן לסחור בשוק." },
-        { "label": "עמלה", "desc": "דמי פלטפורמה של 20% על כל המכירות. המוכר מקבל 80%. תמלוגי אמן 4% על מכירות חוזרות." },
-        { "label": "צמיחת רכישה חוזרת", "desc": "+5% ממחיר כל מכירה חוזרת מתווסף לערך הרכישה החוזרת המינימלי של הנכס. הוא רק גדל." },
-        { "label": "ארנק שמור", "desc": "HyperTek יוצר עבורך ארנק קריפטו אוטומטית בעת ההרשמה." }
+        {
+          "label": "NFA",
+          "desc": "נכס בלעדי ל-Hypertek. הבונוסים הגבוהים ביותר במשחק. ערך רכישה חוזרת מינימלי מובטח הגדל עם כל מכירה."
+        },
+        {
+          "label": "NFC",
+          "desc": "נוצר על ידי Hypertek או שחקנים בעלי רישיון. בונוסים במשחק כלולים. רכישה חוזרת מינימלית מובטחת."
+        },
+        {
+          "label": "NFT",
+          "desc": "פריט אספנות שנוצר על ידי שחקנים. אין בונוסים במשחק. אין ערבות לרכישה חוזרת. ניתן לסחור בשוק."
+        },
+        {
+          "label": "עמלה",
+          "desc": "דמי פלטפורמה של 20% על כל המכירות. המוכר מקבל 80%. תמלוגי אמן 4% על מכירות חוזרות."
+        },
+        {
+          "label": "צמיחת רכישה חוזרת",
+          "desc": "+5% ממחיר כל מכירה חוזרת מתווסף לערך הרכישה החוזרת המינימלי של הנכס. הוא רק גדל."
+        },
+        {
+          "label": "ארנק שמור",
+          "desc": "HyperTek יוצר עבורך ארנק קריפטו אוטומטית בעת ההרשמה."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "סקירה כללית",
+      "heading": "סקירה כללית",
       "subtitle": "ברוך הבא לשוק HyperTek. בחר תכונה למידע נוסף — ואז קפוץ ישר פנימה.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "חדש בנכסי Web3? התחל כאן",
           "details": [
             "NFA (נכסים בלתי ניתנים להחלפה) הם פריטים שהנפיקה Hypertek עם מחיר רכישה חוזרת מובטח על ידי הפלטפורמה.",
@@ -56,7 +70,7 @@
           "cta": "למד את היסודות"
         },
         {
-          "label":   "השוק",
+          "label": "השוק",
           "tagline": "קנה ומכור נכסי משחק באופן מיידי",
           "details": [
             "עיין בקטלוג רחב של NFA, NFC ו-NFT — עורות, נשק, מומחים, חלליות ועוד.",
@@ -66,7 +80,7 @@
           "cta": "עיין בשוק"
         },
         {
-          "label":   "מכירות פומביות",
+          "label": "מכירות פומביות",
           "tagline": "התחרה על פריטים בלתי שכיחים במהדורה מוגבלת",
           "details": [
             "הצע הצעות על נכסים נדירים הזמינים רק דרך מכירות פומביות מוגבלות בזמן.",
@@ -76,7 +90,7 @@
           "cta": "צפה במכירות פומביות"
         },
         {
-          "label":   "עסקאות",
+          "label": "עסקאות",
           "tagline": "החלף נכסים ישירות בין שחקנים, ללא מתווך",
           "details": [
             "הצע או קבל עסקאות נכסים ישירות עם שחקנים אחרים — הכל ברשת.",
@@ -86,7 +100,7 @@
           "cta": "עיין בעסקאות"
         },
         {
-          "label":   "משימות",
+          "label": "משימות",
           "tagline": "השלם משימות, זכה בפרסים בלעדיים",
           "details": [
             "קח על עצמך משימות כדי לזכות בפרסים בלעדיים ובנכסי משחק נדירים.",
@@ -96,7 +110,7 @@
           "cta": "חקור משימות"
         },
         {
-          "label":   "להשכרה",
+          "label": "להשכרה",
           "tagline": "שאל נכסים או הרוויח מהשלך",
           "details": [
             "שכור מומחים חזקים או ציוד למשימה אחת מבלי לקנות לגמרי.",
@@ -106,7 +120,7 @@
           "cta": "עיין בהשכרות"
         },
         {
-          "label":   "פרסים",
+          "label": "פרסים",
           "tagline": "ציד מטרות, תבע פרסים, עלה בטבלת הניקוד",
           "details": [
             "קבל פרסים שפורסמו על ידי שחקנים אחרים או המערכת כדי לזכות בפרסים בקריפטו.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "כללי",
+      "heading": "כללי",
       "subtitle": "עיין ב-NFA, NFC ו-NFT הזמינים לרכישה מיידית — עורות, נשק, מומחים, חלליות ועוד.",
       "filterAll": "הכל",
       "samplePreviewTitle": "תצוגה מקדימה לדוגמה של השוק",
       "samplePreviewDesc": "הפריטים שלהלן הם תצוגות מקדימה לדוגמה המציגות את סוגי הנכסים הדיגיטליים שיהיו זמינים בשוק HyperTek. פריטים אמיתיים עם יצירות אמנות ייחודיות ובעלות מאומתת בבלוקצ'יין יהיו זמינים בהשקה.",
       "noItems": "אין פריטים זמינים עדיין. בדוק שוב בקרוב.",
       "categories": {
-        "skins":           "עורות",
-        "militaryBadges":  "תגים צבאיים",
-        "specialists":     "מומחים",
-        "weapons":         "נשק",
-        "bodyArmour":      "שריון גוף",
-        "spaceships":      "חלליות",
-        "racingVehicles":  "כלי רכב",
-        "artwork":         "יצירות אמנות",
-        "landAndBases":    "אדמה ובסיסים",
-        "general":         "כללי"
-      }
+        "skins": "עורות",
+        "militaryBadges": "תגים צבאיים",
+        "specialists": "מומחים",
+        "weapons": "נשק",
+        "bodyArmour": "שריון גוף",
+        "spaceships": "חלליות",
+        "racingVehicles": "כלי רכב",
+        "artwork": "יצירות אמנות",
+        "landAndBases": "אדמה ובסיסים",
+        "general": "כללי"
+      },
+      "search": "לְחַפֵּשׂ...",
+      "filter": "לְסַנֵן",
+      "showAll": "הצג הכל",
+      "filterSort": "סינון ומיון",
+      "sortBy": "מיין לפי",
+      "sort": {
+        "default": "בְּרִירַת מֶחדָל",
+        "priceAsc": "מחיר: נמוך עד גבוה",
+        "priceDesc": "מחיר: גבוה עד נמוך",
+        "nameAsc": "שם: א' עד ת'",
+        "nameDesc": "שם: Z עד A"
+      },
+      "priceRange": "טווח מחירים (USDC)",
+      "min": "מינימום",
+      "max": "מקסימום",
+      "apply": "לִפְנוֹת",
+      "clearAll": "נקה את כל המסננים",
+      "noResults": "לא נמצאו תוצאות",
+      "dummyContent": "תוכן דמה",
+      "preview": "תצוגה מקדימה",
+      "buyNow": "קנה עכשיו",
+      "viewDetails": "הצג פרטים"
     },
-
     "nfa101": {
       "sectionLabel": "חינוך",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "חדש ב-NFT ו-Web3? חקור את המאמרים שלנו כדי להבין נכסי בלוקצ'יין, ארנקים, אבטחה ומערכת האקולוגית של HyperTek.",
-      "minRead":      "דקות קריאה",
-      "filterAll":    "הכל"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "חדש ב-NFT ו-Web3? חקור את המאמרים שלנו כדי להבין נכסי בלוקצ'יין, ארנקים, אבטחה ומערכת האקולוגית של HyperTek.",
+      "minRead": "דקות קריאה",
+      "filterAll": "הכל"
     },
-
     "auctions": {
-      "heading":        "מכירות פומביות",
-      "listings":       "רישומים",
-      "newAuction":     "מכירה פומבית חדשה",
-      "noAuctions":     "אין מכירות פומביות {{filter}}",
-      "createFirst":    "צור את המכירה הפומבית הראשונה",
-      "endingSoon":     "מסתיים בקרוב",
-      "viewDetails":    "צפה בפרטים",
+      "heading": "מכירות פומביות",
+      "listings": "רישומים",
+      "newAuction": "מכירה פומבית חדשה",
+      "noAuctions": "אין מכירות פומביות {{filter}}",
+      "createFirst": "צור את המכירה הפומבית הראשונה",
+      "endingSoon": "מסתיים בקרוב",
+      "viewDetails": "צפה בפרטים",
       "rules": {
-        "durations":    "משכי זמן: 1 יום · 3 ימים · 7 ימים",
+        "durations": "משכי זמן: 1 יום · 3 ימים · 7 ימים",
         "minIncrement": "עלייה מינימלית: 5%",
-        "freeToList":   "רישום חינם",
-        "commission":   "עמלה: 20% במכירה"
-      },
-      "preview": {
-        "title":   "תצוגה מקדימה של תכונת המשחק",
-        "desc":    "מערכת המכירות הפומביות תהיה פעילה במלואה במשחק בהשקה. הפריטים המוצגים כאן הם דוגמאות לתצוגת משקיעים/משתמשים."
-      },
-      "card": {
-        "currentBid": "הצעת המחיר הנוכחית",
-        "endsIn":     "מסתיים בעוד",
-        "placeBid":   "הגש הצעת מחיר",
-        "buyNow":     "קנה עכשיו",
-        "bids":       "הצעות",
-        "ended":      "הסתיים"
-      },
-      "detail": {
-        "currentBid":  "הצעת המחיר הנוכחית",
-        "start":       "התחלה",
-        "endsIn":      "מסתיים בעוד",
-        "description": "תיאור",
-        "recentBids":  "הצעות מחיר אחרונות",
-        "anonymous":   "אנונימי",
-        "placeBid":    "הגש הצעת מחיר",
-        "buyNow":      "קנה עכשיו",
-        "buyNowLabel": "קנה עכשיו",
-        "bids":        "הצעות"
-      },
-      "bidModal": {
-        "title":          "הגש הצעת מחיר",
-        "currentBid":     "הצעת המחיר הנוכחית",
-        "minimumBid":     "הצעת מחיר מינימלית",
-        "yourBid":        "הצעת המחיר שלך (USDC)",
-        "minIncrement":   "עלייה מינימלית 5% · המינימום הבא לאחר הצעתך: {{next}} USDC",
-        "reviewBid":      "בדוק הצעת מחיר",
-        "disclaimer":     "הצעת המחיר הזוכה מחייבת · עמלת פלטפורמה של 20%",
-        "confirmTitle":   "אשר הצעת מחיר",
-        "item":           "פריט",
-        "yourBidLabel":   "הצעת המחיר שלך",
-        "youPay":         "אם תנצח, תשלם",
-        "outbidNotice":   "תקבל הודעה מיד אם מישהו מציע יותר ממך. המכירה הפומבית נסגרת אוטומטית כשהטיימר מסתיים.",
-        "back":           "חזור",
-        "confirm":        "אשר — {{amount}} USDC",
-        "placing":        "מגיש…",
-        "successTitle":   "הצעת מחיר הוגשה!",
-        "highestBidder":  "אתה המציע הגבוה ביותר",
-        "outbidWarning":  "תקבל הודעה אם מישהו יציע יותר ממך.",
-        "done":           "סיום",
-        "endsIn":         "מסתיים בעוד"
-      },
-      "instantBuyModal": {
-        "title":         "קנה עכשיו — מיידי",
-        "buyNowPrice":   "מחיר קנייה מיידית",
-        "currentBids":   "הצעות מחיר נוכחיות",
-        "notice":        "קניה עכשיו מסיימת את המכירה הפומבית מיד. הפריט מועבר לארנק שלך וכל המציעים האחרים מקבלים החזר.",
-        "cancel":        "ביטול",
-        "processing":    "מעבד…",
-        "successTitle":  "פריט אובטח!",
-        "auctionClosed": "המכירה הפומבית נסגרה · העברה התחילה",
-        "item":          "פריט",
-        "paid":          "שולם",
-        "status":        "סטטוס",
-        "transferred":   "הועבר לארנק",
-        "walletNote":    "הפריט יופיע בכרטיסיית האוספים שלי.",
-        "viewCollect":   "צפה באוספים שלי"
-      },
-      "createModal": {
-        "title":          "צור מכירה פומבית",
-        "selectItem":     "בחר פריט",
-        "connectWallet":  "חבר ארנק לעיין בפריטים שלך",
-        "loadingItems":   "טוען…",
-        "noItems":        "לא נמצאו פריטים בבעלותך",
-        "pricingDuration":"תמחור ומשך זמן",
-        "startPrice":     "מחיר התחלתי (USDC) *",
-        "reservePrice":   "מחיר שמור (USDC)",
-        "instantBuyPrice":"מחיר קנייה מיידית (USDC)",
-        "optional":       "אופציונלי",
-        "leaveBlank":     "השאר ריק לביטול",
-        "duration":       "משך זמן",
-        "dur1Day":        "יום 1",
-        "dur3Days":       "3 ימים",
-        "dur7Days":       "7 ימים",
-        "freeToList":     "רישום חינם · עמלה של 20% במכירה",
-        "creating":       "יוצר…",
-        "submit":         "צור מכירה פומבית"
-      },
-      "pagination": {
-        "prev":  "הקודם",
-        "next":  "הבא",
-        "page":  "עמוד {{page}} מתוך {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "עסקאות",
-      "listings":   "רישומים",
-      "postTrade":  "פרסם עסקה",
-      "noTrades":   "אין עסקאות {{filter}}",
-      "viewDetails":"צפה בפרטים",
-      "trade":      "עסקה",
-      "yours":      "שלך",
-      "offering":   "מציע",
-      "wanting":    "רוצה",
-      "makeOffer":  "הגש הצעה",
-      "by":         "על ידי",
-      "acceptTrade":"קבל עסקה",
-      "cancelTrade":"בטל עסקה",
-      "rules": {
-        "expiry":    "רישומים פגים לאחר 30 יום",
-        "fee":       "דמי פלטפורמה חלים על שני הצדדים",
-        "noNFA":     "לא ניתן לסחור ב-NFA — מכירה בלבד"
-      },
-      "acceptModal": {
-        "title":          "הצעת עסקה",
-        "postedBy":       "פורסם על ידי",
-        "exchangeDetails":"פרטי החלפה",
-        "theyOffer":      "הם מציעים",
-        "theyWant":       "הם רוצים",
-        "feeNotice":      "דמי פלטפורמה חלים על שני הצדדים",
-        "acceptBtn":      "קבל עסקה זו",
-        "confirmTitle":   "אשר עסקה",
-        "trade":          "עסקה",
-        "postedByLabel":  "פורסם על ידי",
-        "terms":          "בקבלה, אתה מסכים לתנאי ההחלפה. המפרסם יקבל הודעה וחייב לאשר לפני העברת פריטים.",
-        "back":           "חזור",
-        "sending":        "שולח…",
-        "confirm":        "אשר",
-        "successTitle":   "הצעה נשלחה!",
-        "notified":       "קיבל הודעה",
-        "successNote":    "מפרסם העסקה יבדוק את הצעתך ויסדר את ההחלפה. בדוק את ההתראות שלך לתגובתו.",
-        "expiry":         "⏱ הצעות פגות לאחר 30 יום אם לא אושרו.",
-        "close":          "סגור"
-      },
-      "createModal": {
-        "title":          "פרסם עסקה",
-        "yourItem":       "הפריט שלך",
-        "itemNamePlaceholder": "שם פריט *",
-        "loadingItems":   "טוען את הפריטים שלך…",
-        "connectWallet":  "חבר ארנק לבחור מהפריטים שלך",
-        "pickFromItems":  "או בחר מהפריטים שלך (ממלא שם אוטומטית):",
-        "imageOptional":  "תמונה (אופציונלי)",
-        "whatYouWant":    "מה אתה רוצה",
-        "openOffer":      "הצעה פתוחה — תן לאחרים להציע",
-        "anyCategory":    "כל קטגוריה",
-        "notesLabel":     "הערות (אופציונלי)",
-        "notesPlaceholder":"תנאי עסקה, מצב וכו'.",
-        "disclaimer":     "שני הצדדים משלמים דמי פלטפורמה · פג לאחר 30 יום · לא ניתן לסחור ב-NFA",
-        "posting":        "מפרסם…",
-        "submit":         "פרסם עסקה"
-      },
-      "pagination": {
-        "prev":  "הקודם",
-        "next":  "הבא",
-        "page":  "עמוד {{page}} מתוך {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "לוח משימות",
-      "quests":        "משימות",
-      "noQuests":      "אין משימות {{filter}}",
-      "inGameFeature": "תכונת משחק",
-      "inGameDesc":    "משימות נוצרות אוטומטית כאשר מוכרים בוחרים בעמלה מופחתת. שחקנים יכולים להשלים עד 5 משימות ביום. מאגר העמלות מחולק בין הנחת הקונה, תגמול השחקן והפלטפורמה.",
-      "earnFromQuests":"רוצה להרוויח ממשימות? שחק את המשחק →",
-      "moneyQuests":   "משימות כסף (מאגר 11%)",
-      "resourceQuests":"משימות משאבים (מאגר 20%)",
-      "footerNote1":   "# משימות עם עומסים משולבים ישולמו באמצעות סכומי הטבלה הנפרדים.",
-      "footerNote2":   "# נתוני כוכבי לכת יסונכרנו כאשר המשחקים יתחילו לפעול.",
-      "inGame":        "במשחק",
-      "open":          "פתוח",
-      "table": {
-        "questingNo":    "מס' משימה",
-        "pickupPlanet":  "כוכב לכת איסוף",
-        "dropOffPlanet": "כוכב לכת מסירה",
-        "itemGoods":     "פריט / סחורה",
-        "commSplit":     "חלוקת עמלות",
-        "questingTime":  "זמן משימה",
-        "assignedTo":    "מוקצה ל"
-      },
-      "comingSoon": {
-        "title":   "בקרוב",
-        "desc":    "תכונת המשימה במשחק נמצאת כעת בפיתוח. הישאר מעודכן — תוכל להרוויח תגמולים ישירות מהמשחק.",
-        "gotIt":   "הבנתי"
-      },
-      "pagination": {
-        "prev":  "הקודם",
-        "next":  "הבא",
-        "page":  "עמוד {{page}} מתוך {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "להשכרה",
-      "listings":         "רישומים",
-      "listBtn":          "רשום",
-      "forHireLabel":     "להשכרה",
-      "wantingToHire":    "מעוניין לשכור",
-      "noListings":       "אין רישומים {{filter}}",
-      "lockedTitle":      "תוכן HyperTek Gaming לצורכי תצוגה בלבד.",
-      "lockedDesc":       "קטע זה נעול עד שהמשחקים יסתיימו.",
-      "forHireBadge":     "להשכרה",
-      "wantedBadge":      "מחפש לשכור",
-      "price":            "מחיר",
-      "maxDuration":      "משך זמן מקסימלי",
-      "hireBtn":          "שכור",
-      "fulfillBtn":       "מלא בקשה",
-      "rules": {
-        "durations":   "8 שעות · 1 יום · 3 ימים · שבוע · חודש",
-        "cooldown":    "קירור: פי 2 ממשך השכירות",
-        "commission":  "עמלה: 20%",
-        "payment":     "שלם ב-Hyper Bucks או חומרים"
+        "freeToList": "רישום חינם",
+        "commission": "עמלה: 20% במכירה"
       },
       "preview": {
         "title": "תצוגה מקדימה של תכונת המשחק",
-        "desc":  "מערכת ההשכרה תהיה פעילה במלואה במשחק בהשקה. הפריטים המוצגים כאן הם דוגמאות לתצוגת משקיעים/משתמשים."
+        "desc": "מערכת המכירות הפומביות תהיה פעילה במלואה במשחק בהשקה. הפריטים המוצגים כאן הם דוגמאות לתצוגת משקיעים/משתמשים."
       },
-      "hireModal": {
-        "hireTitle":     "שכור מומחה",
-        "fulfillTitle":  "מלא בקשת השכרה",
-        "forHireBadge":  "להשכרה",
-        "wantedBadge":   "מבוקש",
-        "price":         "מחיר",
-        "duration":      "משך זמן",
-        "howHire":       "כיצד עובדת השכרה",
-        "howFulfill":    "כיצד עובד מילוי בקשה",
-        "proceedHire":   "המשך לשכירות",
-        "offerFulfill":  "הצע למלא",
-        "commission":    "עמלת פלטפורמה 20% · קירור חל לאחר החזרה",
-        "confirmHire":   "אשר שכירות",
-        "confirmOffer":  "אשר הצעה",
-        "specialist":    "מומחה",
-        "payment":       "תשלום",
-        "yourOffer":     "הצעתך",
-        "durationLabel": "משך זמן",
-        "commLabel":     "עמלה",
-        "back":          "חזור",
-        "processing":    "מעבד…",
-        "sendOffer":     "שלח הצעה",
-        "deployedTitle": "נשלח!",
-        "offerSentTitle":"הצעה נשלחה!",
-        "availableFor":  "זמין ל",
-        "paid":          "שולם",
-        "returnNote":    "החזר לפני סיום התקופה כדי להימנע מעונש אוטומטי. קירור של {{hours}} שעות חל לאחר החזרה.",
-        "close":         "סגור"
+      "card": {
+        "currentBid": "הצעת המחיר הנוכחית",
+        "endsIn": "מסתיים בעוד",
+        "placeBid": "הגש הצעת מחיר",
+        "buyNow": "קנה עכשיו",
+        "bids": "הצעות",
+        "ended": "הסתיים"
+      },
+      "detail": {
+        "currentBid": "הצעת המחיר הנוכחית",
+        "start": "התחלה",
+        "endsIn": "מסתיים בעוד",
+        "description": "תיאור",
+        "recentBids": "הצעות מחיר אחרונות",
+        "anonymous": "אנונימי",
+        "placeBid": "הגש הצעת מחיר",
+        "buyNow": "קנה עכשיו",
+        "buyNowLabel": "קנה עכשיו",
+        "bids": "הצעות"
+      },
+      "bidModal": {
+        "title": "הגש הצעת מחיר",
+        "currentBid": "הצעת המחיר הנוכחית",
+        "minimumBid": "הצעת מחיר מינימלית",
+        "yourBid": "הצעת המחיר שלך (USDC)",
+        "minIncrement": "עלייה מינימלית 5% · המינימום הבא לאחר הצעתך: {{next}} USDC",
+        "reviewBid": "בדוק הצעת מחיר",
+        "disclaimer": "הצעת המחיר הזוכה מחייבת · עמלת פלטפורמה של 20%",
+        "confirmTitle": "אשר הצעת מחיר",
+        "item": "פריט",
+        "yourBidLabel": "הצעת המחיר שלך",
+        "youPay": "אם תנצח, תשלם",
+        "outbidNotice": "תקבל הודעה מיד אם מישהו מציע יותר ממך. המכירה הפומבית נסגרת אוטומטית כשהטיימר מסתיים.",
+        "back": "חזור",
+        "confirm": "אשר — {{amount}} USDC",
+        "placing": "מגיש…",
+        "successTitle": "הצעת מחיר הוגשה!",
+        "highestBidder": "אתה המציע הגבוה ביותר",
+        "outbidWarning": "תקבל הודעה אם מישהו יציע יותר ממך.",
+        "done": "סיום",
+        "endsIn": "מסתיים בעוד"
+      },
+      "instantBuyModal": {
+        "title": "קנה עכשיו — מיידי",
+        "buyNowPrice": "מחיר קנייה מיידית",
+        "currentBids": "הצעות מחיר נוכחיות",
+        "notice": "קניה עכשיו מסיימת את המכירה הפומבית מיד. הפריט מועבר לארנק שלך וכל המציעים האחרים מקבלים החזר.",
+        "cancel": "ביטול",
+        "processing": "מעבד…",
+        "successTitle": "פריט אובטח!",
+        "auctionClosed": "המכירה הפומבית נסגרה · העברה התחילה",
+        "item": "פריט",
+        "paid": "שולם",
+        "status": "סטטוס",
+        "transferred": "הועבר לארנק",
+        "walletNote": "הפריט יופיע בכרטיסיית האוספים שלי.",
+        "viewCollect": "צפה באוספים שלי"
       },
       "createModal": {
-        "listTitle":         "רשום להשכרה",
-        "postTitle":         "פרסם בקשת שכירות",
-        "forHireBtn":        "להשכרה",
-        "wantingBtn":        "מעוניין לשכור",
-        "itemNameHire":      "שם מומחה / פריט *",
-        "itemNameWant":      "מה ברצונך לשכור *",
-        "descPlaceholder":   "תיאור",
-        "categoryPlaceholder":"קטגוריה (אופציונלי)",
-        "paymentType":       "סוג תשלום",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "חומרים",
-        "amountLabel":       "סכום (Hyper Bucks)",
-        "afterCommission":   "תקבל {{amount}} HB לאחר עמלה של 20%",
-        "maxDuration":       "משך זמן מקסימלי",
-        "disclaimer":        "עמלה 20% · קירור = פי 2 ממשך השכירות לאחר החזרה",
-        "listing":           "מרשים…",
-        "submit":            "צור רישום"
+        "title": "צור מכירה פומבית",
+        "selectItem": "בחר פריט",
+        "connectWallet": "חבר ארנק לעיין בפריטים שלך",
+        "loadingItems": "טוען…",
+        "noItems": "לא נמצאו פריטים בבעלותך",
+        "pricingDuration": "תמחור ומשך זמן",
+        "startPrice": "מחיר התחלתי (USDC) *",
+        "reservePrice": "מחיר שמור (USDC)",
+        "instantBuyPrice": "מחיר קנייה מיידית (USDC)",
+        "optional": "אופציונלי",
+        "leaveBlank": "השאר ריק לביטול",
+        "duration": "משך זמן",
+        "dur1Day": "יום 1",
+        "dur3Days": "3 ימים",
+        "dur7Days": "7 ימים",
+        "freeToList": "רישום חינם · עמלה של 20% במכירה",
+        "creating": "יוצר…",
+        "submit": "צור מכירה פומבית"
       },
       "pagination": {
-        "prev":  "הקודם",
-        "next":  "הבא",
-        "page":  "עמוד {{page}} מתוך {{pages}}"
+        "prev": "הקודם",
+        "next": "הבא",
+        "page": "עמוד {{page}} מתוך {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "עסקאות",
+      "listings": "רישומים",
+      "postTrade": "פרסם עסקה",
+      "noTrades": "אין עסקאות {{filter}}",
+      "viewDetails": "צפה בפרטים",
+      "trade": "עסקה",
+      "yours": "שלך",
+      "offering": "מציע",
+      "wanting": "רוצה",
+      "makeOffer": "הגש הצעה",
+      "by": "על ידי",
+      "acceptTrade": "קבל עסקה",
+      "cancelTrade": "בטל עסקה",
+      "rules": {
+        "expiry": "רישומים פגים לאחר 30 יום",
+        "fee": "דמי פלטפורמה חלים על שני הצדדים",
+        "noNFA": "לא ניתן לסחור ב-NFA — מכירה בלבד"
+      },
+      "acceptModal": {
+        "title": "הצעת עסקה",
+        "postedBy": "פורסם על ידי",
+        "exchangeDetails": "פרטי החלפה",
+        "theyOffer": "הם מציעים",
+        "theyWant": "הם רוצים",
+        "feeNotice": "דמי פלטפורמה חלים על שני הצדדים",
+        "acceptBtn": "קבל עסקה זו",
+        "confirmTitle": "אשר עסקה",
+        "trade": "עסקה",
+        "postedByLabel": "פורסם על ידי",
+        "terms": "בקבלה, אתה מסכים לתנאי ההחלפה. המפרסם יקבל הודעה וחייב לאשר לפני העברת פריטים.",
+        "back": "חזור",
+        "sending": "שולח…",
+        "confirm": "אשר",
+        "successTitle": "הצעה נשלחה!",
+        "notified": "קיבל הודעה",
+        "successNote": "מפרסם העסקה יבדוק את הצעתך ויסדר את ההחלפה. בדוק את ההתראות שלך לתגובתו.",
+        "expiry": "⏱ הצעות פגות לאחר 30 יום אם לא אושרו.",
+        "close": "סגור"
+      },
+      "createModal": {
+        "title": "פרסם עסקה",
+        "yourItem": "הפריט שלך",
+        "itemNamePlaceholder": "שם פריט *",
+        "loadingItems": "טוען את הפריטים שלך…",
+        "connectWallet": "חבר ארנק לבחור מהפריטים שלך",
+        "pickFromItems": "או בחר מהפריטים שלך (ממלא שם אוטומטית):",
+        "imageOptional": "תמונה (אופציונלי)",
+        "whatYouWant": "מה אתה רוצה",
+        "openOffer": "הצעה פתוחה — תן לאחרים להציע",
+        "anyCategory": "כל קטגוריה",
+        "notesLabel": "הערות (אופציונלי)",
+        "notesPlaceholder": "תנאי עסקה, מצב וכו'.",
+        "disclaimer": "שני הצדדים משלמים דמי פלטפורמה · פג לאחר 30 יום · לא ניתן לסחור ב-NFA",
+        "posting": "מפרסם…",
+        "submit": "פרסם עסקה"
+      },
+      "pagination": {
+        "prev": "הקודם",
+        "next": "הבא",
+        "page": "עמוד {{page}} מתוך {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "לוח משימות",
+      "quests": "משימות",
+      "noQuests": "אין משימות {{filter}}",
+      "inGameFeature": "תכונת משחק",
+      "inGameDesc": "משימות נוצרות אוטומטית כאשר מוכרים בוחרים בעמלה מופחתת. שחקנים יכולים להשלים עד 5 משימות ביום. מאגר העמלות מחולק בין הנחת הקונה, תגמול השחקן והפלטפורמה.",
+      "earnFromQuests": "רוצה להרוויח ממשימות? שחק את המשחק →",
+      "moneyQuests": "משימות כסף (מאגר 11%)",
+      "resourceQuests": "משימות משאבים (מאגר 20%)",
+      "footerNote1": "# משימות עם עומסים משולבים ישולמו באמצעות סכומי הטבלה הנפרדים.",
+      "footerNote2": "# נתוני כוכבי לכת יסונכרנו כאשר המשחקים יתחילו לפעול.",
+      "inGame": "במשחק",
+      "open": "פתוח",
+      "table": {
+        "questingNo": "מס' משימה",
+        "pickupPlanet": "כוכב לכת איסוף",
+        "dropOffPlanet": "כוכב לכת מסירה",
+        "itemGoods": "פריט / סחורה",
+        "commSplit": "חלוקת עמלות",
+        "questingTime": "זמן משימה",
+        "assignedTo": "מוקצה ל"
+      },
+      "comingSoon": {
+        "title": "בקרוב",
+        "desc": "תכונת המשימה במשחק נמצאת כעת בפיתוח. הישאר מעודכן — תוכל להרוויח תגמולים ישירות מהמשחק.",
+        "gotIt": "הבנתי"
+      },
+      "pagination": {
+        "prev": "הקודם",
+        "next": "הבא",
+        "page": "עמוד {{page}} מתוך {{pages}}"
+      },
+      "buyer": "קונה",
+      "player": "שחקן",
+      "platform": "פלטפורמה",
+      "status": {
+        "open": "פתוחה",
+        "accepted": "התקבלה",
+        "completed": "הושלמה",
+        "cancelled": "בוטלה"
+      },
+      "type": {
+        "money": "כסף",
+        "resources": "משאבים"
+      }
+    },
+    "hire": {
+      "heading": "להשכרה",
+      "listings": "רישומים",
+      "listBtn": "רשום",
+      "forHireLabel": "להשכרה",
+      "wantingToHire": "מעוניין לשכור",
+      "noListings": "אין רישומים {{filter}}",
+      "lockedTitle": "תוכן HyperTek Gaming לצורכי תצוגה בלבד.",
+      "lockedDesc": "קטע זה נעול עד שהמשחקים יסתיימו.",
+      "forHireBadge": "להשכרה",
+      "wantedBadge": "מחפש לשכור",
+      "price": "מחיר",
+      "maxDuration": "משך זמן מקסימלי",
+      "hireBtn": "שכור",
+      "fulfillBtn": "מלא בקשה",
+      "rules": {
+        "durations": "8 שעות · 1 יום · 3 ימים · שבוע · חודש",
+        "cooldown": "קירור: פי 2 ממשך השכירות",
+        "commission": "עמלה: 20%",
+        "payment": "שלם ב-Hyper Bucks או חומרים"
+      },
+      "preview": {
+        "title": "תצוגה מקדימה של תכונת המשחק",
+        "desc": "מערכת ההשכרה תהיה פעילה במלואה במשחק בהשקה. הפריטים המוצגים כאן הם דוגמאות לתצוגת משקיעים/משתמשים."
+      },
+      "hireModal": {
+        "hireTitle": "שכור מומחה",
+        "fulfillTitle": "מלא בקשת השכרה",
+        "forHireBadge": "להשכרה",
+        "wantedBadge": "מבוקש",
+        "price": "מחיר",
+        "duration": "משך זמן",
+        "howHire": "כיצד עובדת השכרה",
+        "howFulfill": "כיצד עובד מילוי בקשה",
+        "proceedHire": "המשך לשכירות",
+        "offerFulfill": "הצע למלא",
+        "commission": "עמלת פלטפורמה 20% · קירור חל לאחר החזרה",
+        "confirmHire": "אשר שכירות",
+        "confirmOffer": "אשר הצעה",
+        "specialist": "מומחה",
+        "payment": "תשלום",
+        "yourOffer": "הצעתך",
+        "durationLabel": "משך זמן",
+        "commLabel": "עמלה",
+        "back": "חזור",
+        "processing": "מעבד…",
+        "sendOffer": "שלח הצעה",
+        "deployedTitle": "נשלח!",
+        "offerSentTitle": "הצעה נשלחה!",
+        "availableFor": "זמין ל",
+        "paid": "שולם",
+        "returnNote": "החזר לפני סיום התקופה כדי להימנע מעונש אוטומטי. קירור של {{hours}} שעות חל לאחר החזרה.",
+        "close": "סגור"
+      },
+      "createModal": {
+        "listTitle": "רשום להשכרה",
+        "postTitle": "פרסם בקשת שכירות",
+        "forHireBtn": "להשכרה",
+        "wantingBtn": "מעוניין לשכור",
+        "itemNameHire": "שם מומחה / פריט *",
+        "itemNameWant": "מה ברצונך לשכור *",
+        "descPlaceholder": "תיאור",
+        "categoryPlaceholder": "קטגוריה (אופציונלי)",
+        "paymentType": "סוג תשלום",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "חומרים",
+        "amountLabel": "סכום (Hyper Bucks)",
+        "afterCommission": "תקבל {{amount}} HB לאחר עמלה של 20%",
+        "maxDuration": "משך זמן מקסימלי",
+        "disclaimer": "עמלה 20% · קירור = פי 2 ממשך השכירות לאחר החזרה",
+        "listing": "מרשים…",
+        "submit": "צור רישום"
+      },
+      "pagination": {
+        "prev": "הקודם",
+        "next": "הבא",
+        "page": "עמוד {{page}} מתוך {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "לוח פרסים",
-      "contracts":     "חוזה",
-      "contractsPlural":"חוזים",
-      "noContracts":   "אין חוזים {{filter}}",
-      "noContractsNote":"פרסים מפורסמים על ידי שחקני המשחק ומערכת המשחק",
-      "expiresIn":     "פג בעוד {{days}} ימים",
+      "heading": "לוח פרסים",
+      "contracts": "חוזה",
+      "contractsPlural": "חוזים",
+      "noContracts": "אין חוזים {{filter}}",
+      "noContractsNote": "פרסים מפורסמים על ידי שחקני המשחק ומערכת המשחק",
+      "expiresIn": "פג בעוד {{days}} ימים",
       "inGameNotice": {
         "title": "תכונת משחק — צפייה בלבד",
-        "desc":  "פרסים נוצרים על ידי שחקני המשחק ומערכת המשחק. קבלת פרסים והשלמתם מתרחשת במשחק בלבד. לוח זה מוצג לשקיפות ולעידוד שחקנים חדשים להצטרף."
+        "desc": "פרסים נוצרים על ידי שחקני המשחק ומערכת המשחק. קבלת פרסים והשלמתם מתרחשת במשחק בלבד. לוח זה מוצג לשקיפות ולעידוד שחקנים חדשים להצטרף."
       },
       "rules": {
-        "battle":     "קרב נפתר אוטומטית במשחק",
+        "battle": "קרב נפתר אוטומטית במשחק",
         "commission": "עמלת פלטפורמה של 20% על התגמול",
-        "expiry":     "חוזים פגים לאחר 30 יום"
+        "expiry": "חוזים פגים לאחר 30 יום"
       },
       "table": {
-        "bountyNo":   "מס' פרס",
-        "target":     "מטרה (מכה על)",
-        "reward":     "תגמול",
-        "postedBy":   "פורסם על ידי",
-        "claimedBy":  "נתבע על ידי",
-        "status":     "סטטוס",
-        "netHB":      "{{amount}} HB נטו"
+        "bountyNo": "מס' פרס",
+        "target": "מטרה (מכה על)",
+        "reward": "תגמול",
+        "postedBy": "פורסם על ידי",
+        "claimedBy": "נתבע על ידי",
+        "status": "סטטוס",
+        "netHB": "{{amount}} HB נטו"
       },
       "pagination": {
-        "prev":  "הקודם",
-        "next":  "הבא",
-        "page":  "עמוד {{page}} מתוך {{pages}}"
+        "prev": "הקודם",
+        "next": "הבא",
+        "page": "עמוד {{page}} מתוך {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "הקודם",
-      "next":           "הבא",
-      "pageOf":         "עמוד {{page}} מתוך {{pages}}",
-      "back":           "חזור",
-      "close":          "סגור",
-      "cancel":         "ביטול",
-      "loading":        "טוען…",
-      "connectWallet":  "חבר קודם את הארנק שלך",
-      "loginFirst":     "התחבר קודם"
+      "prev": "הקודם",
+      "next": "הבא",
+      "pageOf": "עמוד {{page}} מתוך {{pages}}",
+      "back": "חזור",
+      "close": "סגור",
+      "cancel": "ביטול",
+      "loading": "טוען…",
+      "connectWallet": "חבר קודם את הארנק שלך",
+      "loginFirst": "התחבר קודם"
     }
+  },
+  "musicPlayer": {
+    "title": "נגן מוזיקה",
+    "playing": "מנגן",
+    "sound": "סאונד",
+    "ambientDesc": "פסקול אווירה מובנה עבור השוק. מנגן בלופ.",
+    "playAmbient": "הפעל Ambient",
+    "pauseAmbient": "השהה Ambient",
+    "spotifyDesc": "הדבק כל רצועה, רשימת השמעה או קישור לאלבום Spotify.",
+    "loadSpotify": "טען Spotify",
+    "soundcloudDesc": "הדבק כל רצועה או קישור לרשימת השמעה של SoundCloud.",
+    "loadSoundCloud": "טען את SoundCloud",
+    "changeLink": "שנה קישור"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "שלם עם כרטיס",
+      "amount": "סְכוּם:",
+      "cancel": "לְבַטֵל",
+      "processing": "מעבד...",
+      "pay": "לְשַׁלֵם"
+    },
+    "nav": {
+      "backToMarketplace": "חזרה ל-Marketplace",
+      "backToCollections": "חזרה לאוספים",
+      "offers": "הצעות",
+      "marketplace": "שוק",
+      "auction": "מְכִירָה פּוּמבִּית",
+      "trade": "סַחַר",
+      "detail": "{{type}} פרט",
+      "buy": "קנה {{type}}"
+    },
+    "marketplace": {
+      "listed": "רשום",
+      "youOwn": "אתה הבעלים של זה",
+      "notMinted": "עדיין לא נטבע",
+      "ownedBy": "בבעלות של",
+      "platform": "פּלַטפוֹרמָה",
+      "noDesc": "לא סופק תיאור עבור פריט זה.",
+      "price": "מְחִיר",
+      "minBuyback": "מינימום אחריות קנייה חזרה",
+      "reservePrice": "מחיר מילואים",
+      "buybackNote": "לא ניתן למכור נכס זה מתחת לערך הקנייה חזרה המינימלית שלו.",
+      "networkNote": "USDC על בסיס · בסיס ETH נדרש עבור גז (תשלומי ארנק בלבד)",
+      "buyWithCard": "קנה עם כרטיס",
+      "makeOffer": "תציע הצעה",
+      "processing": "מעבד...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "קנה עכשיו",
+      "listNow": "רשום עכשיו",
+      "yourListed": "{{type}} שלך (רשום)",
+      "notAvailable": "לא זמין"
+    },
+    "fundModal": {
+      "title": "לא מספיק USDC",
+      "youNeed": "אתה צריך",
+      "butHave": "אבל לארנק שלך יש רק",
+      "desc2": "מממן את הארנק שלך באופן מיידי באמצעות כרטיס אשראי או חיוב באמצעות Transak, ולאחר מכן חזור כדי להשלים את הרכישה.",
+      "fundBtn": "ארנק קרן עם כרטיס (Transak)",
+      "cancel": "לְבַטֵל"
+    },
+    "gasModal": {
+      "title": "ETH נדרש עבור גז",
+      "mainnetNote": "אתה ב-Base Mainnet. קנה כמות קטנה של ETH (≈ $1–2) ב-Coinbase או ברידג' מ-Ethereum דרך bridge.base.org.",
+      "testnetNote": "אתה ב-Base Sepolia Testnet. קבל בדיקת ETH בחינם מברז.",
+      "faucetBtn": "קבל את Testnet ETH (ברז)",
+      "bridgeBtn": "גשר ETH לבסיס",
+      "close": "לִסְגוֹר"
+    },
+    "confirmModal1": {
+      "title": "אשר פעולה",
+      "listPrice": "מחיר מחירון",
+      "platformFee": "עמלת פלטפורמה (10%)",
+      "total": "סַך הַכֹּל",
+      "cancel": "לְבַטֵל",
+      "continue": "לְהַמשִׁיך"
+    },
+    "confirmModal2": {
+      "setPrice": "הגדר את מחיר הרישום שלך (USDC)",
+      "willList": "✓ יירשם ב-{{price}} USDC",
+      "price": "מְחִיר",
+      "cancel": "לְבַטֵל",
+      "processing": "מעבד...",
+      "confirm": "לְאַשֵׁר"
+    },
+    "offers": {
+      "noOffers": "אין עדיין הצעות",
+      "offer": "הַצָעָה",
+      "offers": "הצעות",
+      "noOffersTitle": "אין הצעות כרגע",
+      "noOffersDesc": "היה הראשון להציע הצעה",
+      "colPrice": "מְחִיר",
+      "colStatus": "סטָטוּס",
+      "colFrom": "מִן",
+      "colExpires": "פג תוקף",
+      "colAction": "פְּעוּלָה",
+      "accept": "לְקַבֵּל",
+      "reject": "לִדחוֹת",
+      "cancel": "לְבַטֵל",
+      "expired": "פג תוקף",
+      "completePurchase": "רכישה מלאה"
+    },
+    "auction": {
+      "loading": "טוען נתוני מכירה פומבית...",
+      "active": "מכירה פומבית פעילה",
+      "startPrice": "מחיר התחלתי",
+      "currentBid": "הצעת מחיר נוכחית",
+      "noBids": "עדיין אין הצעות",
+      "instantBuy": "קנייה מיידית",
+      "reservePrice": "מחיר מילואים",
+      "bidHistory": "היסטוריית הצעות מחיר",
+      "minBid": "הצעת מחיר מינימלית:",
+      "bidding": "מגיש הצעות...",
+      "placeBid": "הצע הצעה",
+      "connectWallet": "חבר את הארנק שלך כדי להציע הצעה",
+      "ownerNote": "הפריט שלך רשום במכירה פומבית. הצעות יופיעו כאן עם הגשתן.",
+      "noAuction": "אין מכירה פומבית פעילה עבור פריט זה",
+      "ownerSetup": "עבור אל האוספים שלך ולחץ על רשימה כדי להגדיר מכירה פומבית.",
+      "notAvailable": "לפריט זה אין מכרז פתוח כרגע."
+    },
+    "trade": {
+      "loading": "טוען רשימות מסחר...",
+      "active": "רישום סחר פעיל",
+      "actives": "רישומי סחר פעילים",
+      "offering": "הַצָעָה",
+      "wants": "רוצה",
+      "openOffer": "הצעה פתוחה",
+      "by": "עַל יְדֵי",
+      "proposeTrade": "הצעת סחר →",
+      "noTrades": "אין רישומי סחר פעילים",
+      "ownerSetup": "עבור אל האוספים שלך ולחץ על רשימה כדי להגדיר עסקה.",
+      "notAvailable": "לבעלים אין רישומי סחר פתוחים עבור פריט זה."
+    },
+    "successModal": {
+      "title": "הרכישה הצליחה!",
+      "desc": "{{name}} נרכש. ה-NFT שלך יועבר לארנק שלך בקרוב.",
+      "note": "ההעברה מעובדת באופן אוטומטי באמצעות המערכת שלנו.",
+      "viewProfile": "הצג בפרופיל שלי",
+      "continueShopping": "המשך קניות"
+    },
+    "transferFailed": {
+      "title": "תשלום התקבל - העברה בהמתנה",
+      "desc": "התשלום שלך הצליח, אך העברת ה-NFT נתקלה בבעיה. הכספים שלך בטוחים - הצוות שלנו ישלים את ההעברה באופן ידני.",
+      "viewProfile": "הצג את הפרופיל שלי",
+      "dismiss": "לְפַטֵר"
+    },
+    "priceHistory": {
+      "title": "היסטוריית מחירים",
+      "subtitle": "מחירי מכירה היסטורית זו NFT",
+      "loading": "טוען...",
+      "noSales": "עדיין לא נרשמו מכירות",
+      "noSalesNote": "היסטוריית המחירים מופיעה לאחר המכירה הראשונה"
+    }
+  },
+  "makeOffer": {
+    "back": "בְּחֲזָרָה",
+    "floor": "קוֹמָה",
+    "title": "תציע הצעה",
+    "yourOffer": "ההצעה שלך (USDC)",
+    "expiresIn": "המבצע יפוג בעוד",
+    "youPay": "אתה משלם",
+    "submitting": "הַגָשָׁה...",
+    "submit": "שלח הצעה",
+    "terms": "על ידי הגשת הצעה זו, אתה מסכים לתנאי השירות של Hyper Tek.",
+    "expiry": {
+      "6h": "6 שעות",
+      "12h": "12 שעות",
+      "1d": "1 יום",
+      "3d": "3 ימים",
+      "7d": "7 ימים",
+      "1mo": "1 חודש"
+    },
+    "success": {
+      "title": "ההצעה הוגשה!",
+      "desc": "ההצעה שלך בסך {{price}} USDC עבור {{name}} נשלחה לבעלים.",
+      "expires": "יפוג בעוד {{duration}}",
+      "backToNft": "חזרה ל-NFT",
+      "goToMarketplace": "עבור אל Marketplace"
+    },
+    "error": {
+      "loginRequired": "אנא היכנס כדי להציע הצעה",
+      "submitFailed": "הגשת ההצעה נכשלה. אנא נסה שוב."
+    }
+  },
+  "paymentError": {
+    "message": "הבקשה שלך לא הצליחה",
+    "goHome": "לך הביתה"
   }
 }

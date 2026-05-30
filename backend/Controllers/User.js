@@ -129,7 +129,7 @@ const LoginUser = async (req, res) => {
       return res.status(400).json({ message: "No account found with this email address. Please sign up first." });
     }
 
-    // ✅ CHECK IF USER IS ACTIVE
+    // CHECK IF USER IS ACTIVE
     const statusCheck = checkUserStatus(user);
     if (!statusCheck.allowed) {
       return res.status(403).json({
@@ -179,7 +179,7 @@ const ForgotPassword = async (req, res) => {
     const user = await UserModel.findOne({ Email });
     if (!user) return res.status(400).json({ message: "User not found" });
 
-    // ✅ CHECK IF USER IS ACTIVE
+    // CHECK IF USER IS ACTIVE
     const statusCheck = checkUserStatus(user);
     if (!statusCheck.allowed) {
       return res.status(403).json({
@@ -258,7 +258,7 @@ const ResetPassword = async (req, res) => {
     const user = await UserModel.findById(decoded.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // ✅ CHECK IF USER IS ACTIVE
+    // CHECK IF USER IS ACTIVE
     const statusCheck = checkUserStatus(user);
     if (!statusCheck.allowed) {
       return res.status(403).json({
@@ -305,7 +305,7 @@ const GoogleAuth = async (req, res) => {
     let user = await UserModel.findOne({ Email: email });
 
     if (user) {
-      // ✅ CHECK IF USER IS ACTIVE
+      // CHECK IF USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
       if (!statusCheck.allowed) {
         return res.status(403).json({
@@ -325,7 +325,7 @@ const GoogleAuth = async (req, res) => {
         Email: email,
         FullName: name || "",
         GoogleId: googleId,
-        isActive: true, // ✅ New users active by default
+        isActive: true, // New users active by default
         WalletAddress: address,
         EncryptedPrivateKey: encryptedPrivateKey,
       });
@@ -351,7 +351,7 @@ const GoogleAuth = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         picture,
-        Role: user.Role, // ✅ ADD THIS
+        Role: user.Role, // ADD THIS
         isActive: user.isActive,
         WalletAddress: user.WalletAddress
       },
@@ -426,7 +426,7 @@ const DiscordAuth = async (req, res) => {
     if (!user && email) {
       user = await UserModel.findOne({ Email: email.toLowerCase() });
       if (user) {
-        // ✅ CHECK IF USER IS ACTIVE
+        // CHECK IF USER IS ACTIVE
         const statusCheck = checkUserStatus(user);
         if (!statusCheck.allowed) {
           return res.status(403).json({
@@ -454,14 +454,14 @@ const DiscordAuth = async (req, res) => {
         Email: discordEmail,
         FullName: fullName,
         Password: null,
-        isActive: true, // ✅ New users active by default
+        isActive: true, // New users active by default
         WalletAddress: address,
         EncryptedPrivateKey: encryptedPrivateKey,
       });
       await user.save();
       if (email) sendWelcomeEmail(email.toLowerCase(), fullName, address, encryptedPrivateKey);
     } else {
-      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      // CHECK IF EXISTING USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
       if (!statusCheck.allowed) {
         return res.status(403).json({
@@ -491,7 +491,7 @@ const DiscordAuth = async (req, res) => {
         Email: user.Email,
         FullName: user.FullName,
         DiscordId: user.DiscordId,
-        Role: user.Role, // ✅ MUST
+        Role: user.Role, // MUST
         isActive: user.isActive,
         WalletAddress: user.WalletAddress
       },
@@ -524,7 +524,7 @@ const GetAllUsers = async (req, res) => {
 // ------------------ PROFILE ------------------
 const GetProfile = async (req, res) => {
   try {
-    const userId = req.user._id; // ✅ FIX HERE
+    const userId = req.user._id; // FIX HERE
 
     const user = await UserModel.findById(userId).select("-Password");
     // console.log("Fetched user profile:", user);
@@ -561,7 +561,7 @@ const EditProfile = async (req, res) => {
     const user = await UserModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // ✅ CHECK IF USER IS ACTIVE
+    // CHECK IF USER IS ACTIVE
     const statusCheck = checkUserStatus(user);
     if (!statusCheck.allowed) {
       return res.status(403).json({
@@ -647,7 +647,7 @@ const MetaAuth = async (req, res) => {
     if (!user && email) {
       user = await UserModel.findOne({ Email: email.toLowerCase() });
       if (user) {
-        // ✅ CHECK IF USER IS ACTIVE
+        // CHECK IF USER IS ACTIVE
         const statusCheck = checkUserStatus(user);
         if (!statusCheck.allowed) {
           return res.status(403).json({
@@ -667,11 +667,11 @@ const MetaAuth = async (req, res) => {
         Email: email ? email.toLowerCase() : `${facebookId}@facebook.user`,
         FullName: name || "Facebook User",
         Avatar: picture?.data?.url || "",
-        isActive: true, // ✅ New users active by default
+        isActive: true, // New users active by default
       });
       await user.save();
     } else {
-      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      // CHECK IF EXISTING USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
       if (!statusCheck.allowed) {
         return res.status(403).json({
@@ -738,7 +738,7 @@ const MetaMaskAuth = async (req, res) => {
     });
 
     if (user) {
-      // ✅ CHECK IF USER IS ACTIVE
+      // CHECK IF USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
       if (!statusCheck.allowed) {
         return res.status(403).json({
@@ -757,7 +757,7 @@ const MetaMaskAuth = async (req, res) => {
         Avatar: "",
         lastLogin: new Date(),
         loginCount: 1,
-        isActive: true, // ✅ New users active by default
+        isActive: true, // New users active by default
       });
       await user.save();
     }
@@ -878,7 +878,7 @@ const TwitterAuth = async (req, res) => {
       });
       await user.save();
     } else {
-      // ✅ CHECK IF EXISTING USER IS ACTIVE
+      // CHECK IF EXISTING USER IS ACTIVE
       const statusCheck = checkUserStatus(user);
       if (!statusCheck.allowed) {
         return res.status(403).json({
@@ -920,7 +920,7 @@ const TwitterAuth = async (req, res) => {
   }
 };
 
-// ✅ Toggle User Active/Inactive Status (Admin Only)
+// Toggle User Active/Inactive Status (Admin Only)
 const ToggleUserStatus = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -963,7 +963,7 @@ const ToggleUserStatus = async (req, res) => {
   }
 };
 
-// ✅ NEW API: Edit User (Admin Only)
+// NEW API: Edit User (Admin Only)
 const EditUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -1020,7 +1020,7 @@ const EditUser = async (req, res) => {
   }
 };
 
-// ✅ NEW API: Delete User (Admin Only)
+// NEW API: Delete User (Admin Only)
 const DeleteUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -1153,7 +1153,7 @@ export {
   MetaMaskAuth,
   GetAllUsers,
   ToggleUserStatus,
-  EditUser, // ✅ New export
-  DeleteUser, // ✅ New export
+  EditUser, // New export
+  DeleteUser, // New export
   GetAdminByAdminId,
 };

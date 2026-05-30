@@ -43,7 +43,7 @@ export const EmailWalletProvider = ({ children }) => {
                 if (response.data?.WalletAddress && isMounted) {
                     setEmailWalletAddress(response.data.WalletAddress);
                     setEmailWalletError(null);
-                    console.log("✅ Email Wallet Address Loaded:", response.data.WalletAddress);
+                    console.log("Email Wallet Address Loaded:", response.data.WalletAddress);
                 }
             } catch (err) {
                 if (isMounted) {

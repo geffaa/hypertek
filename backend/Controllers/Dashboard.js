@@ -3,7 +3,7 @@ import Activity from "../Models/ActivityModel.js";
 import Marketplace from "../Models/MarketPlace.js";
 import { Offer } from "../Models/Offer.js";
 import LandSchema from "../Models/LandModel.js";
-import { Payment } from "../Models/Payment.js";   
+import { Payment } from "../Models/Payment.js";
 import NFT from "../Models/NFTSystem.js";
 
 
@@ -34,7 +34,7 @@ const GetTotalUsers = async (req, res) => {
       totalUsers,
       month,
       year,
-      users,   // ✅ Ab yahan createdAt bhi aayega
+      users,   // Ab yahan createdAt bhi aayega
     });
   } catch (err) {
     res.status(500).json({
@@ -69,7 +69,7 @@ const getTotalBuyers = async (req, res) => {
       totalBuyers,
       month,
       year,
-      buyers, // ✅ now createdAt included
+      buyers, // now createdAt included
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -102,7 +102,7 @@ const getTotalSellers = async (req, res) => {
       totalSellers,
       month,
       year,
-      sellers, // ✅ now date included
+      sellers, // now date included
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -116,10 +116,10 @@ const getTotalMarketplaceCount = async (req, res) => {
     const { month, year } = req.query;
     const filter = buildMonthFilter(month, year);
 
-    // ✅ Total Count
+    // Total Count
     const totalItems = await NFT.countDocuments(filter);
 
-    // ✅ Full Data with createdAt
+    // Full Data with createdAt
     const marketplaceItems = await NFT.find(filter)
       .select(`
         title
@@ -135,7 +135,7 @@ const getTotalMarketplaceCount = async (req, res) => {
       totalItems,
       month,
       year,
-      marketplaceItems, // ✅ Ab records + createdAt bhi aayega
+      marketplaceItems, // Ab records + createdAt bhi aayega
     });
 
   } catch (error) {
@@ -150,10 +150,10 @@ const getTotalOffers = async (req, res) => {
     const { month, year } = req.query;
     const filter = buildMonthFilter(month, year);
 
-    // ✅ Total Count
+    // Total Count
     const totalOffers = await Offer.countDocuments(filter);
 
-    // ✅ Full Data with createdAt
+    // Full Data with createdAt
     const offers = await Offer.find(filter)
       .select(`
         serialNumber
@@ -176,7 +176,7 @@ const getTotalOffers = async (req, res) => {
       totalOffers,
       month,
       year,
-      offers, // ✅ Ab createdAt bhi return hoga
+      offers, // Ab createdAt bhi return hoga
     });
 
   } catch (error) {
@@ -195,16 +195,16 @@ const getCombinedCounts = async (req, res) => {
     const { month, year } = req.query;
     const filter = buildMonthFilter(month, year);
 
-    // ✅ Total Counts
+    // Total Counts
     const landCount = await LandSchema.countDocuments(filter);
     const marketplaceCount = await NFT.countDocuments(filter);
 
-    // ✅ Full Land Data with createdAt
+    // Full Land Data with createdAt
     const lands = await LandSchema.find(filter)
       .select("title serialNumber price userId createdAt")
       .sort({ createdAt: -1 });
 
-    // ✅ Full Marketplace Data with createdAt
+    // Full Marketplace Data with createdAt
     const marketplaceItems = await NFT.find(filter)
       .select("title serialNumber price userId createdAt")
       .sort({ createdAt: -1 });
@@ -219,8 +219,8 @@ const getCombinedCounts = async (req, res) => {
       month,
       year,
 
-      lands,              // ✅ Land ka full data with date
-      marketplaceItems,  // ✅ Marketplace ka full data with date
+      lands,              // Land ka full data with date
+      marketplaceItems,  // Marketplace ka full data with date
     });
 
   } catch (error) {

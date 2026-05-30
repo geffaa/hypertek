@@ -1,7 +1,9 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -87,10 +89,10 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
 
           {/* Text Content */}
           <h2 className="text-2xl font-bold mb-3 text-white bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Confirm Logout
+            {t("dashboard.logout.title","Confirm Logout")}
           </h2>
           <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-            Are you sure you want to logout from your account?
+            {t("dashboard.logout.message","Are you sure you want to logout from your account?")}
           </p>
 
           {/* Buttons */}
@@ -98,27 +100,27 @@ const LogoutModal = ({ isOpen, onClose, onConfirm }) => {
             <button
               onClick={onClose}
               className="
-                px-8 py-3 bg-gray-600 rounded-xl hover:bg-gray-500 
-                transition-all duration-300 ease-out 
+                px-8 py-3 bg-gray-600 rounded-xl hover:bg-gray-500
+                transition-all duration-300 ease-out
                 transform hover:scale-105 active:scale-95
                 border border-gray-500 font-medium
                 shadow-lg hover:shadow-xl
               "
             >
-              Cancel
+              {t("dashboard.logout.cancel","Cancel")}
             </button>
             <button
               onClick={onConfirm}
               className="
-                px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 
+                px-8 py-3 bg-gradient-to-r from-red-600 to-red-700
                 rounded-xl hover:from-red-500 hover:to-red-600
-                transition-all duration-300 ease-out 
+                transition-all duration-300 ease-out
                 transform hover:scale-105 active:scale-95
                 border border-red-500 font-medium
                 shadow-lg hover:shadow-xl
               "
             >
-              Logout
+              {t("dashboard.logout.confirm","Logout")}
             </button>
           </div>
         </div>

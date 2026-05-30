@@ -42,7 +42,7 @@ export async function handlePostSale(nftId, salePriceUSD) {
       await NFTSystem.findByIdAndUpdate(nftId, {
         $inc: { minimumBuybackUSD: increment },
       });
-      console.log(`✅ NFA ${nftId}: minimumBuybackUSD +${increment.toFixed(2)} (sale ${salePriceUSD})`);
+      console.log(`NFA ${nftId}: minimumBuybackUSD +${increment.toFixed(2)} (sale ${salePriceUSD})`);
     } else {
       // Sale below reserve — flag for buyback
       await NFTSystem.findByIdAndUpdate(nftId, {
@@ -122,17 +122,17 @@ export async function executeBuyback(nftId) {
     { new: true }
   );
 
-  console.log(`✅ NFA ${nftId}: buyback executed, removed from circulation`);
+  console.log(`NFA ${nftId}: buyback executed, removed from circulation`);
 
   // Dispatch payout to current owner from buyback reserve fund
   if (payoutAmount > 0 && ownerWallet && ownerWallet !== "admin") {
     dispatchRoyalty({
       subCollectionId: String(nftId),
-      parentId:        String(nftId),
-      creatorWallet:   ownerWallet,
-      amount:          payoutAmount,
-      saleRecordId:    `buyback_${nftId}`,
-      note:            `NFA buyback payout — HyperTek guarantee ($${payoutAmount.toFixed(2)} USDC)`,
+      parentId: String(nftId),
+      creatorWallet: ownerWallet,
+      amount: payoutAmount,
+      saleRecordId: `buyback_${nftId}`,
+      note: `NFA buyback payout — HyperTek guarantee ($${payoutAmount.toFixed(2)} USDC)`,
     }).catch(err => console.warn("⚠️ [NFAService] buyback payout dispatch error:", err.message));
     console.log(`💸 [Buyback] Dispatching $${payoutAmount.toFixed(2)} USDC → ${ownerWallet}`);
   } else {
@@ -160,9 +160,9 @@ export async function applyCPI(cpiPercent, year) {
   // ── 1. Standalone NFTSystem docs (non-parent) with minimumBuybackUSD ────────
   const standalones = await NFTSystem.find({
     isParentCollection: { $ne: true },
-    zeroed:             { $ne: true },
+    zeroed: { $ne: true },
     removedFromCirculation: { $ne: true },
-    minimumBuybackUSD:  { $gt: 0 },
+    minimumBuybackUSD: { $gt: 0 },
   });
 
   for (const doc of standalones) {
@@ -205,7 +205,7 @@ export async function applyCPI(cpiPercent, year) {
     if (parentModified) await parent.save();
   }
 
-  console.log(`✅ CPI ${cpiPercent}% applied for ${year}: ${updatedCount} updated, ${skippedCount} skipped`);
+  console.log(`CPI ${cpiPercent}% applied for ${year}: ${updatedCount} updated, ${skippedCount} skipped`);
   return { updatedCount, skippedCount };
 }
 

@@ -5,7 +5,7 @@ import "../../App.css";
 const CustomButton5 = ({ text, onClick, disabled }) => {
   return (
     <div
-      onClick={!disabled ? onClick : undefined} // ✅ only clickable if not disabled
+      onClick={!disabled ? onClick : undefined} // only clickable if not disabled
       className={`
         flex items-center 
         scale-[0.85] sm:scale-[0.95] transition-transform duration-300 ease-in-out md:hover:scale-[1] group

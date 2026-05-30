@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { BACKEND_BASE_URL } from "../../Config";
 import { FiSend, FiInbox, FiCheck, FiX, FiClock } from "react-icons/fi";
 
@@ -50,7 +51,7 @@ function Empty({ icon: Icon, message, sub }) {
 }
 
 // ── Sent Tab (buyer) ──────────────────────────────────────────────────────────
-function SentTab({ userId, token, navigate }) {
+function SentTab({ userId, token, navigate, t }) {
   const [offers, setOffers]         = useState([]);
   const [loading, setLoading]       = useState(true);
   const [cancelling, setCancelling] = useState(null);
@@ -106,9 +107,9 @@ function SentTab({ userId, token, navigate }) {
     }
   };
 
-  if (loading) return <div className="text-white/40 text-sm py-16 text-center">Loading...</div>;
+  if (loading) return <div className="text-white/40 text-sm py-16 text-center">{t("dashboard.offers.loading","Loading...")}</div>;
   if (!offers.length) return (
-    <Empty icon={FiSend} message="No sent offers yet" sub="Make an offer on any item in the Marketplace" />
+    <Empty icon={FiSend} message={t("dashboard.offers.noSentOffers","No sent offers yet")} sub={t("dashboard.offers.noSentOffersHint","Make an offer on any item in the Marketplace")} />
   );
 
   return (
@@ -116,7 +117,7 @@ function SentTab({ userId, token, navigate }) {
       <table className="w-full min-w-[860px] text-left">
         <thead>
           <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-            {["Item", "Your Offer", "Floor Price", "Offer Duration", "Status", "Action"].map((h) => (
+            {[t("dashboard.offers.colItem","Item"), t("dashboard.offers.colYourOffer","Your Offer"), t("dashboard.offers.colFloorPrice","Floor Price"), t("dashboard.offers.colOfferDuration","Offer Duration"), t("dashboard.offers.colStatus","Status"), t("dashboard.offers.colAction","Action")].map((h) => (
               <th key={h} className="px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-white/30">{h}</th>
             ))}
           </tr>
@@ -159,7 +160,7 @@ function SentTab({ userId, token, navigate }) {
                       className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-60 hover:brightness-110"
                       style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ade80" }}
                     >
-                      {navigating === offer._id ? "Loading..." : "Complete Purchase →"}
+                      {navigating === offer._id ? t("dashboard.offers.loading","Loading...") : t("dashboard.offers.completePurchase","Complete Purchase →")}
                     </button>
                   ) : canCancel ? (
                     <button
@@ -168,7 +169,7 @@ function SentTab({ userId, token, navigate }) {
                       className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-50 hover:brightness-110"
                       style={{ background: "rgba(239,68,68,0.10)", border: "1px solid rgba(239,68,68,0.25)", color: "#f87171" }}
                     >
-                      {cancelling === offer._id ? "Cancelling..." : "Cancel"}
+                      {cancelling === offer._id ? "..." : t("dashboard.offers.cancel","Cancel")}
                     </button>
                   ) : (
                     <span className="text-white/20 text-xs">—</span>
@@ -184,7 +185,7 @@ function SentTab({ userId, token, navigate }) {
 }
 
 // ── Received Tab (seller) ─────────────────────────────────────────────────────
-function ReceivedTab({ wallet, token }) {
+function ReceivedTab({ wallet, token, t }) {
   const [offers, setOffers]     = useState([]);
   const [loading, setLoading]   = useState(true);
   const [acting, setActing]     = useState(null); // offerId being actioned
@@ -225,11 +226,11 @@ function ReceivedTab({ wallet, token }) {
   };
 
   if (!wallet) return (
-    <Empty icon={FiInbox} message="Connect your wallet to view received offers" />
+    <Empty icon={FiInbox} message={t("dashboard.offers.connectWallet","Connect your wallet to view received offers")} />
   );
-  if (loading) return <div className="text-white/40 text-sm py-16 text-center">Loading...</div>;
+  if (loading) return <div className="text-white/40 text-sm py-16 text-center">{t("dashboard.offers.loading","Loading...")}</div>;
   if (!offers.length) return (
-    <Empty icon={FiInbox} message="No offers received yet" sub="Offers made on your listed items will appear here" />
+    <Empty icon={FiInbox} message={t("dashboard.offers.noReceivedOffers","No offers received yet")} sub={t("dashboard.offers.noReceivedOffersHint","Offers made on your listed items will appear here")} />
   );
 
   return (
@@ -237,7 +238,7 @@ function ReceivedTab({ wallet, token }) {
       <table className="w-full min-w-[860px] text-left">
         <thead>
           <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-            {["Item", "Buyer", "Offer Price", "Floor Price", "Duration", "Status", "Action"].map((h) => (
+            {[t("dashboard.offers.colItem","Item"), t("dashboard.offers.colBuyer","Buyer"), t("dashboard.offers.colOfferPrice","Offer Price"), t("dashboard.offers.colFloorPrice","Floor Price"), t("dashboard.offers.colDuration","Duration"), t("dashboard.offers.colStatus","Status"), t("dashboard.offers.colAction","Action")].map((h) => (
               <th key={h} className="px-4 py-3 text-[11px] font-semibold uppercase tracking-wider text-white/30">{h}</th>
             ))}
           </tr>
@@ -287,7 +288,7 @@ function ReceivedTab({ wallet, token }) {
                         style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ade80" }}
                       >
                         <FiCheck size={11} />
-                        {isActing ? "..." : "Accept"}
+                        {isActing ? "..." : t("dashboard.offers.accept","Accept")}
                       </button>
                       <button
                         onClick={() => handleAction(offer._id, "rejected")}
@@ -296,11 +297,11 @@ function ReceivedTab({ wallet, token }) {
                         style={{ background: "rgba(239,68,68,0.10)", border: "1px solid rgba(239,68,68,0.25)", color: "#f87171" }}
                       >
                         <FiX size={11} />
-                        {isActing ? "..." : "Reject"}
+                        {isActing ? "..." : t("dashboard.offers.reject","Reject")}
                       </button>
                     </div>
                   ) : isAccepted ? (
-                    <span className="text-white/30 text-xs">Awaiting payment</span>
+                    <span className="text-white/30 text-xs">{t("dashboard.offers.awaitingPayment","Awaiting payment")}</span>
                   ) : (
                     <span className="text-white/20 text-xs">—</span>
                   )}
@@ -316,6 +317,7 @@ function ReceivedTab({ wallet, token }) {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 function MyOffers() {
+  const { t } = useTranslation();
   const { user, token } = useSelector((state) => state.auth);
   const { address: wagmiAddress } = useAccount();
   const navigate = useNavigate();
@@ -326,16 +328,16 @@ function MyOffers() {
   const [activeTab, setActiveTab] = useState("sent");
 
   const tabs = [
-    { id: "sent",     label: "Sent",     icon: FiSend,  desc: "Offers I made" },
-    { id: "received", label: "Received", icon: FiInbox, desc: "Offers on my items" },
+    { id: "sent",     label: t("dashboard.offers.tabSent","Sent"),     icon: FiSend,  desc: t("dashboard.offers.tabSentDesc","Offers I made") },
+    { id: "received", label: t("dashboard.offers.tabReceived","Received"), icon: FiInbox, desc: t("dashboard.offers.tabReceivedDesc","Offers on my items") },
   ];
 
   return (
     <div className="w-full flex flex-col relative z-10">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-white font-semibold text-2xl">Offers</h1>
-        <p className="text-white/30 text-sm mt-1">Manage offers you sent and received</p>
+        <h1 className="text-white font-semibold text-2xl">{t("dashboard.offers.title","Offers")}</h1>
+        <p className="text-white/30 text-sm mt-1">{t("dashboard.offers.subtitle","Manage offers you sent and received")}</p>
       </div>
 
       {/* Tabs */}
@@ -365,8 +367,8 @@ function MyOffers() {
       {activeTab === "received" && (
         <div className="mb-5 px-4 py-3 rounded-xl text-xs text-white/35 flex flex-wrap gap-x-6 gap-y-1"
           style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-          <span><FiCheck className="inline mr-1" size={11} />Accepting an offer notifies the buyer by email with a 48-hour payment deadline</span>
-          <span><FiClock className="inline mr-1" size={11} />If buyer doesn't pay in 48h, the offer auto-expires</span>
+          <span><FiCheck className="inline mr-1" size={11} />{t("dashboard.offers.acceptNote","Accepting an offer notifies the buyer by email with a 48-hour payment deadline")}</span>
+          <span><FiClock className="inline mr-1" size={11} />{t("dashboard.offers.autoExpireNote","If buyer doesn't pay in 48h, the offer auto-expires")}</span>
         </div>
       )}
 
@@ -374,9 +376,9 @@ function MyOffers() {
       <div className="rounded-2xl overflow-hidden"
         style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
         {activeTab === "sent" ? (
-          <SentTab userId={userId} token={token} navigate={navigate} />
+          <SentTab userId={userId} token={token} navigate={navigate} t={t} />
         ) : (
-          <ReceivedTab wallet={wallet} token={token} />
+          <ReceivedTab wallet={wallet} token={token} t={t} />
         )}
       </div>
     </div>

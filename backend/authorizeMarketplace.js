@@ -28,19 +28,19 @@ async function main() {
   for (const nftAddress of NFT_ADDRESSES) {
     console.log(`\nChecking NFT Contract: ${nftAddress}`);
     const myNFT = new ethers.Contract(nftAddress, MYNFT_ABI, wallet);
-    
+
     try {
-        const isAuth = await myNFT.isMarketplaceAuthorized(MARKETPLACE_ADDRESS);
-        if (isAuth) {
-            console.log("✅ Already Authorized!");
-        } else {
-            console.log("🔐 Authorizing Marketplace...");
-            const tx = await myNFT.setMarketplaceAuthorization(MARKETPLACE_ADDRESS, true);
-            await tx.wait();
-            console.log(`✅ Authorized! TX: ${tx.hash}`);
-        }
+      const isAuth = await myNFT.isMarketplaceAuthorized(MARKETPLACE_ADDRESS);
+      if (isAuth) {
+        console.log("Already Authorized!");
+      } else {
+        console.log("🔐 Authorizing Marketplace...");
+        const tx = await myNFT.setMarketplaceAuthorization(MARKETPLACE_ADDRESS, true);
+        await tx.wait();
+        console.log(`Authorized! TX: ${tx.hash}`);
+      }
     } catch (e) {
-        console.error("❌ Failed to authorize:", e.message);
+      console.error(" Failed to authorize:", e.message);
     }
   }
 }

@@ -90,7 +90,7 @@ function CheckoutForm({ amount, item, user }) {
       setErrorMessage(error.message);
       toast.error(error.message); // show toast if payment fails
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
-      toast.success(`Payment Successful! ✅ Amount: $${amount}`); // show success toast
+      toast.success(`Payment Successful! Amount: $${amount}`); // show success toast
     }
 
     setLoading(false);
@@ -103,7 +103,7 @@ function CheckoutForm({ amount, item, user }) {
           💳 Secure Payment
         </h2>
 
-        {/* ✅ Show Item Details */}
+        {/* Show Item Details */}
         {item && (
           <div className="mb-6 text-center">
             {item.image && (

@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Marknadsplats",
     "searchPlaceholder": "Sök...",
-
     "tabs": {
-      "overview":  "Översikt",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "Marknadsplatsen",
-      "auctions":  "Auktioner",
-      "trades":    "Byten",
-      "quests":    "Uppdrag",
-      "hire":      "Hyr in",
-      "bounty":    "Dusör"
+      "overview": "Översikt",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "Marknadsplatsen",
+      "auctions": "Auktioner",
+      "trades": "Byten",
+      "quests": "Uppdrag",
+      "hire": "Hyr in",
+      "bounty": "Dusör"
     },
-
     "banner": {
       "defaultHeading": "En ny era gryr i Hyper Tek",
-      "defaultDesc": "Det är början på ett levande, andande universum där varje beslut formar resan.",
+      "defaultDesc": "Det är början på ett levande universum där varje beslut formar resan. Oavsett om du tävlar i lätt hastighet, bildar allianser i Overlord Realm eller avslöjar hemligheter i HyperQuest, är det här din chans att sätta din prägel på historien.",
       "stats": {
-        "totalItems":  "Totalt antal föremål",
-        "totalBuys":   "Totalt antal köp",
-        "listed":      "Listade",
+        "totalItems": "Totalt antal föremål",
+        "totalBuys": "Totalt antal köp",
+        "listed": "Listade",
         "collections": "Samlingar"
       },
-      "soundOn":  "Ljud på",
+      "soundOn": "Ljud på",
       "soundOff": "Ljud av"
     },
-
     "bottomBar": {
-      "learnLabel":     "Lär dig om NFA / NFC",
+      "learnLabel": "Lär dig om NFA / NFC",
       "educationPanel": "HyperTek utbildningspanel",
-      "footerNote":     "Den här panelen är för snabbreferens. Besök fliken NFA / NFC 101 för fullständigt utbildningsinnehåll.",
+      "footerNote": "Den här panelen är för snabbreferens. Besök fliken NFA / NFC 101 för fullständigt utbildningsinnehåll.",
       "facts": [
-        { "label": "NFA",        "desc": "Hypertek-exklusiv tillgång. Högsta spelbonus. Garanterat minsta återköpsvärde som växer vid varje försäljning." },
-        { "label": "NFC",        "desc": "Skapad av Hypertek eller licensierade spelare. Spelbonus inkluderad. Minsta återköp garanterat." },
-        { "label": "NFT",        "desc": "Spelarskapat samlarföremål. Ingen spelbonus. Ingen återköpsgaranti. Handlingsbart på marknadsplatsen." },
-        { "label": "Provision",  "desc": "20% plattformsavgift på alla försäljningar. Säljaren får 80%. Konstnärsroyalty 4% på återförsäljning." },
-        { "label": "Återköpstillväxt", "desc": "+5% av varje återförsäljningspris läggs till tillgångens minsta återköpsvärde. Det växer bara." },
-        { "label": "Förvaltad plånbok", "desc": "HyperTek skapar automatiskt en kryptoplånbok åt dig vid registrering." }
+        {
+          "label": "NFA",
+          "desc": "Hypertek-exklusiv tillgång. Högsta spelbonus. Garanterat minsta återköpsvärde som växer vid varje försäljning."
+        },
+        {
+          "label": "NFC",
+          "desc": "Skapad av Hypertek eller licensierade spelare. Spelbonus inkluderad. Minsta återköp garanterat."
+        },
+        {
+          "label": "NFT",
+          "desc": "Spelarskapat samlarföremål. Ingen spelbonus. Ingen återköpsgaranti. Handlingsbart på marknadsplatsen."
+        },
+        {
+          "label": "Provision",
+          "desc": "20% plattformsavgift på alla försäljningar. Säljaren får 80%. Konstnärsroyalty 4% på återförsäljning."
+        },
+        {
+          "label": "Återköpstillväxt",
+          "desc": "+5% av varje återförsäljningspris läggs till tillgångens minsta återköpsvärde. Det växer bara."
+        },
+        {
+          "label": "Förvaltad plånbok",
+          "desc": "HyperTek skapar automatiskt en kryptoplånbok åt dig vid registrering."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Översikt",
+      "heading": "Översikt",
       "subtitle": "Välkommen till HyperTek-marknadsplatsen. Välj en funktion för att lära dig mer — och hoppa direkt in.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Ny på Web3-tillgångar? Börja här",
           "details": [
             "NFA (Non-Fungible Assets) är Hypertek-utgivna föremål med en plattformsgaranterad återköpspris.",
@@ -56,7 +70,7 @@
           "cta": "Lär dig grunderna"
         },
         {
-          "label":   "Marknadsplatsen",
+          "label": "Marknadsplatsen",
           "tagline": "Köp och sälj speltillgångar direkt",
           "details": [
             "Bläddra igenom ett brett urval av NFA, NFC och NFT — utseenden, vapen, specialister, rymdskepp och mer.",
@@ -66,7 +80,7 @@
           "cta": "Bläddra på marknadsplatsen"
         },
         {
-          "label":   "Auktioner",
+          "label": "Auktioner",
           "tagline": "Tävla om exklusiva limiterade föremål",
           "details": [
             "Bjud på sällsynta tillgångar som bara är tillgängliga via tidsbegränsade auktioner.",
@@ -76,7 +90,7 @@
           "cta": "Visa auktioner"
         },
         {
-          "label":   "Byten",
+          "label": "Byten",
           "tagline": "Byt tillgångar direkt, utan mellanhänder",
           "details": [
             "Föreslå eller acceptera direkta tillgångsbyten med andra spelare — helt på kedjan.",
@@ -86,7 +100,7 @@
           "cta": "Bläddra bland byten"
         },
         {
-          "label":   "Uppdrag",
+          "label": "Uppdrag",
           "tagline": "Slutför uppdrag, tjäna exklusiva belöningar",
           "details": [
             "Ta på dig uppdrag för att tjäna exklusiva belöningar och sällsynta speltillgångar.",
@@ -96,7 +110,7 @@
           "cta": "Utforska uppdrag"
         },
         {
-          "label":   "Hyr in",
+          "label": "Hyr in",
           "tagline": "Låna tillgångar eller tjäna på dina egna",
           "details": [
             "Hyr kraftfulla specialister eller utrustning för ett enda uppdrag utan att köpa direkt.",
@@ -106,7 +120,7 @@
           "cta": "Bläddra i uthyrning"
         },
         {
-          "label":   "Dusör",
+          "label": "Dusör",
           "tagline": "Jaga mål, gör anspråk på belöningar, toppa listan",
           "details": [
             "Acceptera dusörer som publicerats av andra spelare eller systemet för att tjäna kryptobelöningar.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "Allmänt",
+      "heading": "Allmänt",
       "subtitle": "Bläddra bland NFA, NFC och NFT tillgängliga för omedelbart köp — utseenden, vapen, specialister, rymdskepp och mer.",
       "filterAll": "Alla",
       "samplePreviewTitle": "Förhandsgranskning av marknadsplatsen",
       "samplePreviewDesc": "Föremålen nedan är exempelförhandsgranskningar som visar de typer av digitala tillgångar som kommer att finnas tillgängliga på HyperTek-marknadsplatsen. Faktiska föremål med unik konst och blockchain-verifierat ägande kommer att vara tillgängliga vid lansering.",
       "noItems": "Inga föremål tillgängliga ännu. Kom tillbaka snart.",
       "categories": {
-        "skins":           "Utseenden",
-        "militaryBadges":  "Militärmärken",
-        "specialists":     "Specialister",
-        "weapons":         "Vapen",
-        "bodyArmour":      "Kroppsskydd",
-        "spaceships":      "Rymdskepp",
-        "racingVehicles":  "Fordon",
-        "artwork":         "Konstverk",
-        "landAndBases":    "Mark och baser",
-        "general":         "Allmänt"
-      }
+        "skins": "Utseenden",
+        "militaryBadges": "Militärmärken",
+        "specialists": "Specialister",
+        "weapons": "Vapen",
+        "bodyArmour": "Kroppsskydd",
+        "spaceships": "Rymdskepp",
+        "racingVehicles": "Fordon",
+        "artwork": "Konstverk",
+        "landAndBases": "Mark och baser",
+        "general": "Allmänt"
+      },
+      "search": "Söka...",
+      "filter": "Filtrera",
+      "showAll": "Visa alla",
+      "filterSort": "Filtrera och sortera",
+      "sortBy": "Sortera efter",
+      "sort": {
+        "default": "Standard",
+        "priceAsc": "Pris: Lågt till Högt",
+        "priceDesc": "Pris: Högt till Lågt",
+        "nameAsc": "Namn: A till Ö",
+        "nameDesc": "Namn: Z till A"
+      },
+      "priceRange": "Prisintervall (USDC)",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Tillämpas",
+      "clearAll": "Rensa alla filter",
+      "noResults": "Inga resultat hittades",
+      "dummyContent": "Dummy innehåll",
+      "preview": "Förhandsvisning",
+      "buyNow": "Köp nu",
+      "viewDetails": "Visa detaljer"
     },
-
     "nfa101": {
       "sectionLabel": "Utbildning",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "Ny på NFT och Web3? Utforska våra artiklar för att förstå blockchain-tillgångar, plånböcker, säkerhet och HyperTek-ekosystemet.",
-      "minRead":      "min läsning",
-      "filterAll":    "Alla"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "Ny på NFT och Web3? Utforska våra artiklar för att förstå blockchain-tillgångar, plånböcker, säkerhet och HyperTek-ekosystemet.",
+      "minRead": "min läsning",
+      "filterAll": "Alla"
     },
-
     "auctions": {
-      "heading":        "Auktioner",
-      "listings":       "listor",
-      "newAuction":     "Ny auktion",
-      "noAuctions":     "Inga {{filter}}-auktioner",
-      "createFirst":    "Skapa den första auktionen",
-      "endingSoon":     "SLUTAR SNART",
-      "viewDetails":    "Visa detaljer",
+      "heading": "Auktioner",
+      "listings": "listor",
+      "newAuction": "Ny auktion",
+      "noAuctions": "Inga {{filter}}-auktioner",
+      "createFirst": "Skapa den första auktionen",
+      "endingSoon": "SLUTAR SNART",
+      "viewDetails": "Visa detaljer",
       "rules": {
-        "durations":    "Varaktigheter: 1d · 3d · 7d",
+        "durations": "Varaktigheter: 1d · 3d · 7d",
         "minIncrement": "Min ökning: 5%",
-        "freeToList":   "Gratis att lista",
-        "commission":   "Provision: 20% vid försäljning"
-      },
-      "preview": {
-        "title":   "Förhandsgranskning av spelfunktion",
-        "desc":    "Auktionssystemet kommer att vara fullt live i spelet vid lansering. Föremål som visas här är seedade prover för investerare/användare."
-      },
-      "card": {
-        "currentBid": "Aktuellt bud",
-        "endsIn":     "Slutar om",
-        "placeBid":   "Lägg bud",
-        "buyNow":     "Köp nu",
-        "bids":       "bud",
-        "ended":      "AVSLUTAD"
-      },
-      "detail": {
-        "currentBid":  "Aktuellt bud",
-        "start":       "Start",
-        "endsIn":      "Slutar om",
-        "description": "Beskrivning",
-        "recentBids":  "Senaste bud",
-        "anonymous":   "Anonym",
-        "placeBid":    "Lägg bud",
-        "buyNow":      "Köp nu",
-        "buyNowLabel": "Köp nu",
-        "bids":        "bud"
-      },
-      "bidModal": {
-        "title":          "Lägg ett bud",
-        "currentBid":     "Aktuellt bud",
-        "minimumBid":     "Minsta bud",
-        "yourBid":        "Ditt bud (USDC)",
-        "minIncrement":   "Min ökning 5% · Nästa minimum efter ditt bud: {{next}} USDC",
-        "reviewBid":      "Granska bud",
-        "disclaimer":     "Vinnande bud är bindande · 20% plattformsprovision",
-        "confirmTitle":   "Bekräfta bud",
-        "item":           "Föremål",
-        "yourBidLabel":   "Ditt bud",
-        "youPay":         "Om du vinner betalar du",
-        "outbidNotice":   "Du meddelas omedelbart om någon överbjuder dig. Auktionen stängs automatiskt när timern löper ut.",
-        "back":           "Tillbaka",
-        "confirm":        "Bekräfta — {{amount}} USDC",
-        "placing":        "Lägger bud…",
-        "successTitle":   "Bud lagt!",
-        "highestBidder":  "Du är högstbjudande",
-        "outbidWarning":  "Du får ett meddelande om du överbjuds.",
-        "done":           "Klar",
-        "endsIn":         "Slutar om"
-      },
-      "instantBuyModal": {
-        "title":         "Köp nu — Omedelbart",
-        "buyNowPrice":   "Köp nu-pris",
-        "currentBids":   "Aktuella bud",
-        "notice":        "Att köpa nu avslutar auktionen omedelbart. Föremålet överförs till din plånbok och alla andra budgivare återbetalas.",
-        "cancel":        "Avbryt",
-        "processing":    "Behandlar…",
-        "successTitle":  "Föremål säkrat!",
-        "auctionClosed": "Auktion avslutad · Överföring initierad",
-        "item":          "Föremål",
-        "paid":          "Betalt",
-        "status":        "Status",
-        "transferred":   "Överfört till plånbok",
-        "walletNote":    "Föremålet visas på fliken Mina samlingar.",
-        "viewCollect":   "Visa mina samlingar"
-      },
-      "createModal": {
-        "title":          "Skapa auktion",
-        "selectItem":     "Välj föremål",
-        "connectWallet":  "Anslut plånbok för att bläddra bland dina föremål",
-        "loadingItems":   "Laddar…",
-        "noItems":        "Inga ägda föremål hittades",
-        "pricingDuration":"Prissättning och varaktighet",
-        "startPrice":     "Startpris (USDC) *",
-        "reservePrice":   "Reservpris (USDC)",
-        "instantBuyPrice":"Köp nu-pris (USDC)",
-        "optional":       "Valfritt",
-        "leaveBlank":     "Lämna tomt för att inaktivera",
-        "duration":       "Varaktighet",
-        "dur1Day":        "1 dag",
-        "dur3Days":       "3 dagar",
-        "dur7Days":       "7 dagar",
-        "freeToList":     "Gratis att lista · 20% provision vid försäljning",
-        "creating":       "Skapar…",
-        "submit":         "Skapa auktion"
-      },
-      "pagination": {
-        "prev":  "Föregående",
-        "next":  "Nästa",
-        "page":  "Sida {{page}} av {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "Byten",
-      "listings":   "listor",
-      "postTrade":  "Lägg upp byte",
-      "noTrades":   "Inga {{filter}}-byten",
-      "viewDetails":"Visa detaljer",
-      "trade":      "byte",
-      "yours":      "ditt",
-      "offering":   "Erbjuder",
-      "wanting":    "Vill ha",
-      "makeOffer":  "Lämna ett erbjudande",
-      "by":         "av",
-      "acceptTrade":"Acceptera byte",
-      "cancelTrade":"Avbryt byte",
-      "rules": {
-        "expiry":    "Listor löper ut om 30 dagar",
-        "fee":       "Plattformsavgift gäller för båda parter",
-        "noNFA":     "NFA kan inte bytas — sälj endast"
-      },
-      "acceptModal": {
-        "title":          "Bytesförslag",
-        "postedBy":       "Publicerat av",
-        "exchangeDetails":"Bytesdetaljer",
-        "theyOffer":      "De erbjuder",
-        "theyWant":       "De vill ha",
-        "feeNotice":      "Plattformsavgift gäller för båda parter",
-        "acceptBtn":      "Acceptera det här bytet",
-        "confirmTitle":   "Bekräfta byte",
-        "trade":          "Byte",
-        "postedByLabel":  "Publicerat av",
-        "terms":          "Genom att acceptera godkänner du bytesvillkoren. Publiceraren meddelas och måste bekräfta innan föremålen överförs.",
-        "back":           "Tillbaka",
-        "sending":        "Skickar…",
-        "confirm":        "Bekräfta",
-        "successTitle":   "Förslag skickat!",
-        "notified":       "har meddelats",
-        "successNote":    "Bytespubliceraren granskar ditt förslag och ordnar bytet. Kontrollera dina aviseringar för deras svar.",
-        "expiry":         "⏱ Förslag löper ut om 30 dagar om de inte bekräftas.",
-        "close":          "Stäng"
-      },
-      "createModal": {
-        "title":          "Lägg upp ett byte",
-        "yourItem":       "Ditt föremål",
-        "itemNamePlaceholder": "Föremålsnamn *",
-        "loadingItems":   "Laddar dina föremål…",
-        "connectWallet":  "Anslut plånbok för att välja bland dina föremål",
-        "pickFromItems":  "Eller välj från dina föremål (fyller i namn automatiskt):",
-        "imageOptional":  "Bild (valfritt)",
-        "whatYouWant":    "Vad du vill ha",
-        "openOffer":      "Öppet erbjudande — låt andra föreslå",
-        "anyCategory":    "Valfri kategori",
-        "notesLabel":     "Anteckningar (valfritt)",
-        "notesPlaceholder":"Bytesvillkor, skick, etc.",
-        "disclaimer":     "Båda parter betalar en plattformsavgift · Löper ut om 30 dagar · NFA kan inte bytas",
-        "posting":        "Publicerar…",
-        "submit":         "Lägg upp byte"
-      },
-      "pagination": {
-        "prev":  "Föregående",
-        "next":  "Nästa",
-        "page":  "Sida {{page}} av {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Uppdragstavla",
-      "quests":        "uppdrag",
-      "noQuests":      "Inga {{filter}}-uppdrag",
-      "inGameFeature": "Spelfunktion",
-      "inGameDesc":    "Uppdrag genereras automatiskt när säljare väljer reducerad provision. Spelare kan slutföra upp till 5 uppdrag per dag. Provisionspotten delas mellan köparrabatt, spelarbelöning och plattformen.",
-      "earnFromQuests":"Vill du tjäna på uppdrag? Spela spelet →",
-      "moneyQuests":   "Pengauppdrag (11% pool)",
-      "resourceQuests":"Resursuppdrag (20% pool)",
-      "footerNote1":   "# Uppdrag med kombinerade nyttolaster betalas ut med de separata tabellbeloppen.",
-      "footerNote2":   "# Planetdata synkroniseras när spelen går live.",
-      "inGame":        "I spelet",
-      "open":          "Öppen",
-      "table": {
-        "questingNo":    "Uppdragsnr",
-        "pickupPlanet":  "Upphämtningsplanet",
-        "dropOffPlanet": "Avlämningsplanet",
-        "itemGoods":     "Föremål / Varor",
-        "commSplit":     "Provisionsdelning",
-        "questingTime":  "Uppdragstid",
-        "assignedTo":    "Tilldelad"
-      },
-      "comingSoon": {
-        "title":   "Kommer snart",
-        "desc":    "Uppdragsfunktionen i spelet är för närvarande under utveckling. Håll utkik — du kommer att kunna tjäna belöningar direkt från spelet.",
-        "gotIt":   "Förstår"
-      },
-      "pagination": {
-        "prev":  "Föregående",
-        "next":  "Nästa",
-        "page":  "Sida {{page}} av {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "Hyr in",
-      "listings":         "listor",
-      "listBtn":          "Lista",
-      "forHireLabel":     "Uthyrning",
-      "wantingToHire":    "Söker att hyra",
-      "noListings":       "Inga {{filter}}-listor",
-      "lockedTitle":      "HyperTek Gaming-innehåll endast för visning.",
-      "lockedDesc":       "Det här avsnittet är låst tills spelen har slutförts.",
-      "forHireBadge":     "UTHYRNING",
-      "wantedBadge":      "SÖKER ATT HYRA",
-      "price":            "Pris",
-      "maxDuration":      "Max varaktighet",
-      "hireBtn":          "Hyr",
-      "fulfillBtn":       "Uppfyll förfrågan",
-      "rules": {
-        "durations":   "8h · 1d · 3d · 1v · 1mån",
-        "cooldown":    "Nedkylning: 2× hyresvaraktighet",
-        "commission":  "Provision: 20%",
-        "payment":     "Betala med HyperBucks eller material"
+        "freeToList": "Gratis att lista",
+        "commission": "Provision: 20% vid försäljning"
       },
       "preview": {
         "title": "Förhandsgranskning av spelfunktion",
-        "desc":  "Uthyrningssystemet kommer att vara fullt live i spelet vid lansering. Föremål som visas här är seedade prover för investerare/användare."
+        "desc": "Auktionssystemet kommer att vara fullt live i spelet vid lansering. Föremål som visas här är seedade prover för investerare/användare."
       },
-      "hireModal": {
-        "hireTitle":     "Hyr specialist",
-        "fulfillTitle":  "Uppfyll hyresförfrågan",
-        "forHireBadge":  "UTHYRNING",
-        "wantedBadge":   "SÖKES",
-        "price":         "Pris",
-        "duration":      "Varaktighet",
-        "howHire":       "Hur hyra fungerar",
-        "howFulfill":    "Hur uppfyllande av förfrågningar fungerar",
-        "proceedHire":   "Fortsätt till uthyrning",
-        "offerFulfill":  "Erbjud att uppfylla",
-        "commission":    "20% plattformsprovision · Nedkylning gäller efter återlämnande",
-        "confirmHire":   "Bekräfta uthyrning",
-        "confirmOffer":  "Bekräfta erbjudande",
-        "specialist":    "Specialist",
-        "payment":       "Betalning",
-        "yourOffer":     "Ditt erbjudande",
-        "durationLabel": "Varaktighet",
-        "commLabel":     "Provision",
-        "back":          "Tillbaka",
-        "processing":    "Behandlar…",
-        "sendOffer":     "Skicka erbjudande",
-        "deployedTitle": "Driftsatt!",
-        "offerSentTitle":"Erbjudande skickat!",
-        "availableFor":  "Tillgänglig i",
-        "paid":          "Betalt",
-        "returnNote":    "Återlämna innan perioden slutar för att undvika automatisk straffavgift. Nedkylning på {{hours}}h gäller efter återlämnande.",
-        "close":         "Stäng"
+      "card": {
+        "currentBid": "Aktuellt bud",
+        "endsIn": "Slutar om",
+        "placeBid": "Lägg bud",
+        "buyNow": "Köp nu",
+        "bids": "bud",
+        "ended": "AVSLUTAD"
+      },
+      "detail": {
+        "currentBid": "Aktuellt bud",
+        "start": "Start",
+        "endsIn": "Slutar om",
+        "description": "Beskrivning",
+        "recentBids": "Senaste bud",
+        "anonymous": "Anonym",
+        "placeBid": "Lägg bud",
+        "buyNow": "Köp nu",
+        "buyNowLabel": "Köp nu",
+        "bids": "bud"
+      },
+      "bidModal": {
+        "title": "Lägg ett bud",
+        "currentBid": "Aktuellt bud",
+        "minimumBid": "Minsta bud",
+        "yourBid": "Ditt bud (USDC)",
+        "minIncrement": "Min ökning 5% · Nästa minimum efter ditt bud: {{next}} USDC",
+        "reviewBid": "Granska bud",
+        "disclaimer": "Vinnande bud är bindande · 20% plattformsprovision",
+        "confirmTitle": "Bekräfta bud",
+        "item": "Föremål",
+        "yourBidLabel": "Ditt bud",
+        "youPay": "Om du vinner betalar du",
+        "outbidNotice": "Du meddelas omedelbart om någon överbjuder dig. Auktionen stängs automatiskt när timern löper ut.",
+        "back": "Tillbaka",
+        "confirm": "Bekräfta — {{amount}} USDC",
+        "placing": "Lägger bud…",
+        "successTitle": "Bud lagt!",
+        "highestBidder": "Du är högstbjudande",
+        "outbidWarning": "Du får ett meddelande om du överbjuds.",
+        "done": "Klar",
+        "endsIn": "Slutar om"
+      },
+      "instantBuyModal": {
+        "title": "Köp nu — Omedelbart",
+        "buyNowPrice": "Köp nu-pris",
+        "currentBids": "Aktuella bud",
+        "notice": "Att köpa nu avslutar auktionen omedelbart. Föremålet överförs till din plånbok och alla andra budgivare återbetalas.",
+        "cancel": "Avbryt",
+        "processing": "Behandlar…",
+        "successTitle": "Föremål säkrat!",
+        "auctionClosed": "Auktion avslutad · Överföring initierad",
+        "item": "Föremål",
+        "paid": "Betalt",
+        "status": "Status",
+        "transferred": "Överfört till plånbok",
+        "walletNote": "Föremålet visas på fliken Mina samlingar.",
+        "viewCollect": "Visa mina samlingar"
       },
       "createModal": {
-        "listTitle":         "Lista för uthyrning",
-        "postTitle":         "Publicera sökes att hyra",
-        "forHireBtn":        "Uthyrning",
-        "wantingBtn":        "Söker att hyra",
-        "itemNameHire":      "Specialist / föremålsnamn *",
-        "itemNameWant":      "Vad du vill hyra *",
-        "descPlaceholder":   "Beskrivning",
-        "categoryPlaceholder":"Kategori (valfritt)",
-        "paymentType":       "Betalningstyp",
-        "hyperBucks":        "HyperBucks",
-        "materials":         "Material",
-        "amountLabel":       "Belopp (HyperBucks)",
-        "afterCommission":   "Du får {{amount}} HB efter 20% provision",
-        "maxDuration":       "Max varaktighet",
-        "disclaimer":        "20% provision · Nedkylning = 2× hyresvaraktighet efter återlämnande",
-        "listing":           "Listar…",
-        "submit":            "Skapa lista"
+        "title": "Skapa auktion",
+        "selectItem": "Välj föremål",
+        "connectWallet": "Anslut plånbok för att bläddra bland dina föremål",
+        "loadingItems": "Laddar…",
+        "noItems": "Inga ägda föremål hittades",
+        "pricingDuration": "Prissättning och varaktighet",
+        "startPrice": "Startpris (USDC) *",
+        "reservePrice": "Reservpris (USDC)",
+        "instantBuyPrice": "Köp nu-pris (USDC)",
+        "optional": "Valfritt",
+        "leaveBlank": "Lämna tomt för att inaktivera",
+        "duration": "Varaktighet",
+        "dur1Day": "1 dag",
+        "dur3Days": "3 dagar",
+        "dur7Days": "7 dagar",
+        "freeToList": "Gratis att lista · 20% provision vid försäljning",
+        "creating": "Skapar…",
+        "submit": "Skapa auktion"
       },
       "pagination": {
-        "prev":  "Föregående",
-        "next":  "Nästa",
-        "page":  "Sida {{page}} av {{pages}}"
+        "prev": "Föregående",
+        "next": "Nästa",
+        "page": "Sida {{page}} av {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "Byten",
+      "listings": "listor",
+      "postTrade": "Lägg upp byte",
+      "noTrades": "Inga {{filter}}-byten",
+      "viewDetails": "Visa detaljer",
+      "trade": "byte",
+      "yours": "ditt",
+      "offering": "Erbjuder",
+      "wanting": "Vill ha",
+      "makeOffer": "Lämna ett erbjudande",
+      "by": "av",
+      "acceptTrade": "Acceptera byte",
+      "cancelTrade": "Avbryt byte",
+      "rules": {
+        "expiry": "Listor löper ut om 30 dagar",
+        "fee": "Plattformsavgift gäller för båda parter",
+        "noNFA": "NFA kan inte bytas — sälj endast"
+      },
+      "acceptModal": {
+        "title": "Bytesförslag",
+        "postedBy": "Publicerat av",
+        "exchangeDetails": "Bytesdetaljer",
+        "theyOffer": "De erbjuder",
+        "theyWant": "De vill ha",
+        "feeNotice": "Plattformsavgift gäller för båda parter",
+        "acceptBtn": "Acceptera det här bytet",
+        "confirmTitle": "Bekräfta byte",
+        "trade": "Byte",
+        "postedByLabel": "Publicerat av",
+        "terms": "Genom att acceptera godkänner du bytesvillkoren. Publiceraren meddelas och måste bekräfta innan föremålen överförs.",
+        "back": "Tillbaka",
+        "sending": "Skickar…",
+        "confirm": "Bekräfta",
+        "successTitle": "Förslag skickat!",
+        "notified": "har meddelats",
+        "successNote": "Bytespubliceraren granskar ditt förslag och ordnar bytet. Kontrollera dina aviseringar för deras svar.",
+        "expiry": "⏱ Förslag löper ut om 30 dagar om de inte bekräftas.",
+        "close": "Stäng"
+      },
+      "createModal": {
+        "title": "Lägg upp ett byte",
+        "yourItem": "Ditt föremål",
+        "itemNamePlaceholder": "Föremålsnamn *",
+        "loadingItems": "Laddar dina föremål…",
+        "connectWallet": "Anslut plånbok för att välja bland dina föremål",
+        "pickFromItems": "Eller välj från dina föremål (fyller i namn automatiskt):",
+        "imageOptional": "Bild (valfritt)",
+        "whatYouWant": "Vad du vill ha",
+        "openOffer": "Öppet erbjudande — låt andra föreslå",
+        "anyCategory": "Valfri kategori",
+        "notesLabel": "Anteckningar (valfritt)",
+        "notesPlaceholder": "Bytesvillkor, skick, etc.",
+        "disclaimer": "Båda parter betalar en plattformsavgift · Löper ut om 30 dagar · NFA kan inte bytas",
+        "posting": "Publicerar…",
+        "submit": "Lägg upp byte"
+      },
+      "pagination": {
+        "prev": "Föregående",
+        "next": "Nästa",
+        "page": "Sida {{page}} av {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "Uppdragstavla",
+      "quests": "uppdrag",
+      "noQuests": "Inga {{filter}}-uppdrag",
+      "inGameFeature": "Spelfunktion",
+      "inGameDesc": "Uppdrag genereras automatiskt när säljare väljer reducerad provision. Spelare kan slutföra upp till 5 uppdrag per dag. Provisionspotten delas mellan köparrabatt, spelarbelöning och plattformen.",
+      "earnFromQuests": "Vill du tjäna på uppdrag? Spela spelet →",
+      "moneyQuests": "Pengauppdrag (11% pool)",
+      "resourceQuests": "Resursuppdrag (20% pool)",
+      "footerNote1": "# Uppdrag med kombinerade nyttolaster betalas ut med de separata tabellbeloppen.",
+      "footerNote2": "# Planetdata synkroniseras när spelen går live.",
+      "inGame": "I spelet",
+      "open": "Öppen",
+      "table": {
+        "questingNo": "Uppdragsnr",
+        "pickupPlanet": "Upphämtningsplanet",
+        "dropOffPlanet": "Avlämningsplanet",
+        "itemGoods": "Föremål / Varor",
+        "commSplit": "Provisionsdelning",
+        "questingTime": "Uppdragstid",
+        "assignedTo": "Tilldelad"
+      },
+      "comingSoon": {
+        "title": "Kommer snart",
+        "desc": "Uppdragsfunktionen i spelet är för närvarande under utveckling. Håll utkik — du kommer att kunna tjäna belöningar direkt från spelet.",
+        "gotIt": "Förstår"
+      },
+      "pagination": {
+        "prev": "Föregående",
+        "next": "Nästa",
+        "page": "Sida {{page}} av {{pages}}"
+      },
+      "buyer": "Köpare",
+      "player": "Spelare",
+      "platform": "Plattform",
+      "status": {
+        "open": "Öppen",
+        "accepted": "Accepterat",
+        "completed": "Slutfört",
+        "cancelled": "Inställd"
+      },
+      "type": {
+        "money": "Pengar",
+        "resources": "Resurser"
+      }
+    },
+    "hire": {
+      "heading": "Hyr in",
+      "listings": "listor",
+      "listBtn": "Lista",
+      "forHireLabel": "Uthyrning",
+      "wantingToHire": "Söker att hyra",
+      "noListings": "Inga {{filter}}-listor",
+      "lockedTitle": "HyperTek Gaming-innehåll endast för visning.",
+      "lockedDesc": "Det här avsnittet är låst tills spelen har slutförts.",
+      "forHireBadge": "UTHYRNING",
+      "wantedBadge": "SÖKER ATT HYRA",
+      "price": "Pris",
+      "maxDuration": "Max varaktighet",
+      "hireBtn": "Hyr",
+      "fulfillBtn": "Uppfyll förfrågan",
+      "rules": {
+        "durations": "8h · 1d · 3d · 1v · 1mån",
+        "cooldown": "Nedkylning: 2× hyresvaraktighet",
+        "commission": "Provision: 20%",
+        "payment": "Betala med HyperBucks eller material"
+      },
+      "preview": {
+        "title": "Förhandsgranskning av spelfunktion",
+        "desc": "Uthyrningssystemet kommer att vara fullt live i spelet vid lansering. Föremål som visas här är seedade prover för investerare/användare."
+      },
+      "hireModal": {
+        "hireTitle": "Hyr specialist",
+        "fulfillTitle": "Uppfyll hyresförfrågan",
+        "forHireBadge": "UTHYRNING",
+        "wantedBadge": "SÖKES",
+        "price": "Pris",
+        "duration": "Varaktighet",
+        "howHire": "Hur hyra fungerar",
+        "howFulfill": "Hur uppfyllande av förfrågningar fungerar",
+        "proceedHire": "Fortsätt till uthyrning",
+        "offerFulfill": "Erbjud att uppfylla",
+        "commission": "20% plattformsprovision · Nedkylning gäller efter återlämnande",
+        "confirmHire": "Bekräfta uthyrning",
+        "confirmOffer": "Bekräfta erbjudande",
+        "specialist": "Specialist",
+        "payment": "Betalning",
+        "yourOffer": "Ditt erbjudande",
+        "durationLabel": "Varaktighet",
+        "commLabel": "Provision",
+        "back": "Tillbaka",
+        "processing": "Behandlar…",
+        "sendOffer": "Skicka erbjudande",
+        "deployedTitle": "Driftsatt!",
+        "offerSentTitle": "Erbjudande skickat!",
+        "availableFor": "Tillgänglig i",
+        "paid": "Betalt",
+        "returnNote": "Återlämna innan perioden slutar för att undvika automatisk straffavgift. Nedkylning på {{hours}}h gäller efter återlämnande.",
+        "close": "Stäng"
+      },
+      "createModal": {
+        "listTitle": "Lista för uthyrning",
+        "postTitle": "Publicera sökes att hyra",
+        "forHireBtn": "Uthyrning",
+        "wantingBtn": "Söker att hyra",
+        "itemNameHire": "Specialist / föremålsnamn *",
+        "itemNameWant": "Vad du vill hyra *",
+        "descPlaceholder": "Beskrivning",
+        "categoryPlaceholder": "Kategori (valfritt)",
+        "paymentType": "Betalningstyp",
+        "hyperBucks": "HyperBucks",
+        "materials": "Material",
+        "amountLabel": "Belopp (HyperBucks)",
+        "afterCommission": "Du får {{amount}} HB efter 20% provision",
+        "maxDuration": "Max varaktighet",
+        "disclaimer": "20% provision · Nedkylning = 2× hyresvaraktighet efter återlämnande",
+        "listing": "Listar…",
+        "submit": "Skapa lista"
+      },
+      "pagination": {
+        "prev": "Föregående",
+        "next": "Nästa",
+        "page": "Sida {{page}} av {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "Dusörtavla",
-      "contracts":     "kontrakt",
-      "contractsPlural":"kontrakt",
-      "noContracts":   "Inga {{filter}}-kontrakt",
-      "noContractsNote":"Dusörer publiceras av spelare och spelsystemet",
-      "expiresIn":     "Löper ut om {{days}}d",
+      "heading": "Dusörtavla",
+      "contracts": "kontrakt",
+      "contractsPlural": "kontrakt",
+      "noContracts": "Inga {{filter}}-kontrakt",
+      "noContractsNote": "Dusörer publiceras av spelare och spelsystemet",
+      "expiresIn": "Löper ut om {{days}}d",
       "inGameNotice": {
         "title": "Spelfunktion — Visning endast",
-        "desc":  "Dusörer skapas av spelare och spelsystemet. Att acceptera och slutföra dusörer sker endast i spelet. Den här tavlan visas för transparens och för att uppmuntra nya spelare att ansluta sig."
+        "desc": "Dusörer skapas av spelare och spelsystemet. Att acceptera och slutföra dusörer sker endast i spelet. Den här tavlan visas för transparens och för att uppmuntra nya spelare att ansluta sig."
       },
       "rules": {
-        "battle":     "Strid löses automatiskt i spelet",
+        "battle": "Strid löses automatiskt i spelet",
         "commission": "20% plattformsprovision på belöning",
-        "expiry":     "Kontrakt löper ut om 30 dagar"
+        "expiry": "Kontrakt löper ut om 30 dagar"
       },
       "table": {
-        "bountyNo":   "Dusörnr",
-        "target":     "Mål (träff på)",
-        "reward":     "Belöning",
-        "postedBy":   "Publicerat av",
-        "claimedBy":  "Gör anspråk av",
-        "status":     "Status",
-        "netHB":      "{{amount}} HB netto"
+        "bountyNo": "Dusörnr",
+        "target": "Mål (träff på)",
+        "reward": "Belöning",
+        "postedBy": "Publicerat av",
+        "claimedBy": "Gör anspråk av",
+        "status": "Status",
+        "netHB": "{{amount}} HB netto"
       },
       "pagination": {
-        "prev":  "Föregående",
-        "next":  "Nästa",
-        "page":  "Sida {{page}} av {{pages}}"
+        "prev": "Föregående",
+        "next": "Nästa",
+        "page": "Sida {{page}} av {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "Föregående",
-      "next":           "Nästa",
-      "pageOf":         "Sida {{page}} av {{pages}}",
-      "back":           "Tillbaka",
-      "close":          "Stäng",
-      "cancel":         "Avbryt",
-      "loading":        "Laddar…",
-      "connectWallet":  "Anslut din plånbok först",
-      "loginFirst":     "Logga in först"
+      "prev": "Föregående",
+      "next": "Nästa",
+      "pageOf": "Sida {{page}} av {{pages}}",
+      "back": "Tillbaka",
+      "close": "Stäng",
+      "cancel": "Avbryt",
+      "loading": "Laddar…",
+      "connectWallet": "Anslut din plånbok först",
+      "loginFirst": "Logga in först"
     }
+  },
+  "musicPlayer": {
+    "title": "Musikspelare",
+    "playing": "Spelar",
+    "sound": "Ljud",
+    "ambientDesc": "Inbyggt omgivande ljudspår för marknaden. Spelar på loop.",
+    "playAmbient": "Spela Ambient",
+    "pauseAmbient": "Pausa Ambient",
+    "spotifyDesc": "Klistra in ett Spotify-spår, spellista eller albumlänk.",
+    "loadSpotify": "Ladda Spotify",
+    "soundcloudDesc": "Klistra in valfritt SoundCloud-spår eller spellistalänk.",
+    "loadSoundCloud": "Ladda SoundCloud",
+    "changeLink": "Ändra länk"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Betala med kort",
+      "amount": "Belopp:",
+      "cancel": "Avboka",
+      "processing": "Bearbetar...",
+      "pay": "Betala"
+    },
+    "nav": {
+      "backToMarketplace": "Tillbaka till Marketplace",
+      "backToCollections": "Tillbaka till samlingar",
+      "offers": "Erbjudanden",
+      "marketplace": "Marknad",
+      "auction": "Auktion",
+      "trade": "Handel",
+      "detail": "{{type}} Detalj",
+      "buy": "Köp {{type}}"
+    },
+    "marketplace": {
+      "listed": "Angivna",
+      "youOwn": "Du äger detta",
+      "notMinted": "Inte präglad ännu",
+      "ownedBy": "Ägs av",
+      "platform": "Plattform",
+      "noDesc": "Ingen beskrivning har angetts för denna artikel.",
+      "price": "Pris",
+      "minBuyback": "Min återköpsgaranti",
+      "reservePrice": "Reservpris",
+      "buybackNote": "Denna tillgång kan inte säljas under dess lägsta återköpsvärde.",
+      "networkNote": "USDC på bas · Bas ETH krävs för gas (endast plånboksbetalningar)",
+      "buyWithCard": "Köp med kort",
+      "makeOffer": "Lägg ett bud",
+      "processing": "Bearbetar...",
+      "connectWallet": "Connect Wallet",
+      "buyNow": "Köp nu",
+      "listNow": "Lista nu",
+      "yourListed": "Din {{type}} (listad)",
+      "notAvailable": "Inte tillgänglig"
+    },
+    "fundModal": {
+      "title": "Otillräckligt USDC",
+      "youNeed": "Du behöver",
+      "butHave": "men din plånbok har bara",
+      "desc2": "Finansiera din plånbok direkt med ett kredit- eller betalkort via Transak och kom sedan tillbaka för att slutföra köpet.",
+      "fundBtn": "Fondplånbok med kort (Transak)",
+      "cancel": "Avboka"
+    },
+    "gasModal": {
+      "title": "ETH krävs för gas",
+      "mainnetNote": "Du är på Base Mainnet. Köp en liten mängd ETH (≈ $1–2) på Coinbase eller bridge från Ethereum via bridge.base.org.",
+      "testnetNote": "Du är på Base Sepolia Testnet. Få gratis test ETH från en kran.",
+      "faucetBtn": "Skaffa Testnet ETH (kran)",
+      "bridgeBtn": "Överbrygga ETH till basen",
+      "close": "Nära"
+    },
+    "confirmModal1": {
+      "title": "Bekräfta åtgärd",
+      "listPrice": "Listpris",
+      "platformFee": "Plattformsavgift (10 %)",
+      "total": "Total",
+      "cancel": "Avboka",
+      "continue": "Fortsätta"
+    },
+    "confirmModal2": {
+      "setPrice": "Ställ in ditt noteringspris (USDC)",
+      "willList": "✓ Kommer att listas på {{price}} USDC",
+      "price": "Pris",
+      "cancel": "Avboka",
+      "processing": "Bearbetar...",
+      "confirm": "Bekräfta"
+    },
+    "offers": {
+      "noOffers": "Inga erbjudanden ännu",
+      "offer": "erbjuda",
+      "offers": "erbjudanden",
+      "noOffersTitle": "Inga erbjudanden just nu",
+      "noOffersDesc": "Var först med att lägga ett bud",
+      "colPrice": "Pris",
+      "colStatus": "Status",
+      "colFrom": "Från",
+      "colExpires": "Upphör att gälla",
+      "colAction": "Handling",
+      "accept": "Acceptera",
+      "reject": "Avvisa",
+      "cancel": "Avboka",
+      "expired": "Utgått",
+      "completePurchase": "Fullständigt köp"
+    },
+    "auction": {
+      "loading": "Läser in auktionsdata...",
+      "active": "Aktiv auktion",
+      "startPrice": "Startpris",
+      "currentBid": "Aktuellt bud",
+      "noBids": "Inga bud än",
+      "instantBuy": "Köp direkt",
+      "reservePrice": "Reservpris",
+      "bidHistory": "Budhistorik",
+      "minBid": "Minsta bud:",
+      "bidding": "Budgivning…",
+      "placeBid": "Lägg bud",
+      "connectWallet": "Anslut din plånbok för att lägga ett bud",
+      "ownerNote": "Ditt föremål är listat på auktion. Bud kommer att visas här när de kommer in.",
+      "noAuction": "Ingen aktiv auktion för detta föremål",
+      "ownerSetup": "Gå till dina samlingar och klicka på Lista för att skapa en auktion.",
+      "notAvailable": "Denna artikel har ingen öppen auktion för tillfället."
+    },
+    "trade": {
+      "loading": "Läser in handelsannonser...",
+      "active": "aktiv handelsnotering",
+      "actives": "aktiva handelslistor",
+      "offering": "Erbjudande",
+      "wants": "Vill ha",
+      "openOffer": "Öppet erbjudande",
+      "by": "Av",
+      "proposeTrade": "Föreslå handel →",
+      "noTrades": "Inga aktiva handelslistor",
+      "ownerSetup": "Gå till dina samlingar och klicka på Lista för att skapa en handel.",
+      "notAvailable": "Ägaren har inga öppna handelslistor för denna artikel."
+    },
+    "successModal": {
+      "title": "Köpet lyckades!",
+      "desc": "{{name}} har köpts. Din NFT kommer att överföras till din plånbok inom kort.",
+      "note": "Överföring bearbetas automatiskt via vårt system.",
+      "viewProfile": "Visa i min profil",
+      "continueShopping": "Fortsätt handla"
+    },
+    "transferFailed": {
+      "title": "Betalning mottagen — överföring väntar",
+      "desc": "Din betalning lyckades, men NFT-överföringen stötte på ett problem. Dina pengar är säkra – vårt team kommer att slutföra överföringen manuellt.",
+      "viewProfile": "Visa min profil",
+      "dismiss": "Avfärda"
+    },
+    "priceHistory": {
+      "title": "Prishistorik",
+      "subtitle": "Historiska försäljningspriser för denna NFT",
+      "loading": "Laddar...",
+      "noSales": "Ingen försäljning registrerad ännu",
+      "noSalesNote": "Prishistorik visas efter den första försäljningen"
+    }
+  },
+  "makeOffer": {
+    "back": "Tillbaka",
+    "floor": "Golv",
+    "title": "Lägg ett erbjudande",
+    "yourOffer": "Ditt erbjudande (USDC)",
+    "expiresIn": "Erbjudandet löper ut om",
+    "youPay": "Du betalar",
+    "submitting": "Skickar...",
+    "submit": "Lämna erbjudande",
+    "terms": "Genom att skicka detta erbjudande godkänner du Hyper Teks användarvillkor.",
+    "expiry": {
+      "6h": "6 timmar",
+      "12h": "12 timmar",
+      "1d": "1 dag",
+      "3d": "3 dagar",
+      "7d": "7 dagar",
+      "1mo": "1 månad"
+    },
+    "success": {
+      "title": "Erbjudandet inlämnat!",
+      "desc": "Ditt erbjudande om {{price}} USDC för {{name}} har skickats till ägaren.",
+      "expires": "Går ut om {{duration}}",
+      "backToNft": "Tillbaka till NFT",
+      "goToMarketplace": "Gå till Marketplace"
+    },
+    "error": {
+      "loginRequired": "Logga in för att lägga ett erbjudande",
+      "submitFailed": "Det gick inte att lämna erbjudande. Försök igen."
+    }
+  },
+  "paymentError": {
+    "message": "Din begäran lyckades inte",
+    "goHome": "Gå hem"
   }
 }

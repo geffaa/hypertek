@@ -1,6 +1,7 @@
 import { Withdrawal } from "../Models/WithdrawalModel.js";
 import User from "../Models/User.js";
 import nodemailer from "nodemailer";
+import { createNotification } from "../services/notificationService.js";
 
 // ─── Email helper ──────────────────────────────────────────────
 const transporter = nodemailer.createTransport({
@@ -23,7 +24,7 @@ const sendEmail = async (to, subject, html) => {
       html,
     });
   } catch (err) {
-    console.error("❌ Withdrawal email error:", err.message);
+    console.error(" Withdrawal email error:", err.message);
   }
 };
 
@@ -106,8 +107,8 @@ export const updateWithdrawalStatus = async (req, res) => {
     const userEmail = withdrawal.user?.Email;
     const userName = withdrawal.user?.FullName || "User";
     const statusLabels = {
-      completed: "✅ Completed",
-      rejected: "❌ Rejected",
+      completed: "Completed",
+      rejected: " Rejected",
       pending: "⏳ Pending",
     };
     const statusColors = {
@@ -137,6 +138,22 @@ export const updateWithdrawalStatus = async (req, res) => {
           </div>
         </div>
         `
+      );
+    }
+
+    // In-app notification
+    if (withdrawal.user?._id) {
+      const msgMap = {
+        completed: `Your withdrawal of ${withdrawal.amount} has been completed successfully.`,
+        rejected: `Your withdrawal request of ${withdrawal.amount} was rejected. Please contact support.`,
+        pending: `Your withdrawal of ${withdrawal.amount} is pending review.`,
+      };
+      createNotification(
+        withdrawal.user._id,
+        "withdrawal",
+        `Withdrawal ${status.charAt(0).toUpperCase() + status.slice(1)}`,
+        msgMap[status] || `Withdrawal status updated to ${status}.`,
+        { link: "/dashboard/withdraw", meta: { withdrawalId: withdrawal._id, status } }
       );
     }
 

@@ -74,7 +74,7 @@ function NfaLand() {
     console.log("📦 Collection (display):", collection);
 
     if (!collection) {
-      toast.error("❌ No NFT data found");
+      toast.error(" No NFT data found");
       navigate("/buy-land");
       return;
     }
@@ -120,7 +120,7 @@ function NfaLand() {
       if (accounts.length > 0) {
         const wallet = accounts[0].toLowerCase();
         setConnectedWallet(wallet);
-        console.log("✅ Connected wallet:", wallet);
+        console.log("Connected wallet:", wallet);
         console.log("📋 Collection owner from DB:", collection.owner);
 
         // Check BLOCKCHAIN ownership if tokenId exists
@@ -147,7 +147,7 @@ function NfaLand() {
             setIsOwner(ownerMatch);
             console.log("🔍 Is owner (blockchain check):", ownerMatch);
           } catch (err) {
-            console.error("❌ Error checking on-chain owner:", err);
+            console.error(" Error checking on-chain owner:", err);
             if (collection.owner) {
               const ownerMatch = wallet === collection.owner.toLowerCase();
               setIsOwner(ownerMatch);
@@ -173,7 +173,7 @@ function NfaLand() {
         }
       }
     } catch (err) {
-      console.error("❌ Error checking wallet:", err);
+      console.error(" Error checking wallet:", err);
       if (err.code === 4001) {
         console.log("👤 User rejected wallet connection");
       }
@@ -208,7 +208,7 @@ function NfaLand() {
       // Also update local collection state
       collection.listed = listing[2];
     } catch (err) {
-      console.error("❌ Error checking listing:", err);
+      console.error(" Error checking listing:", err);
     }
   };
 
@@ -222,7 +222,7 @@ function NfaLand() {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: BASE_CHAIN_ID_HEX }],
       });
-      toast.success("✅ Switched to Immutable", { id: toastId });
+      toast.success("Switched to Immutable", { id: toastId });
       return true;
     } catch (switchError) {
       if (switchError.code === 4902) {
@@ -244,16 +244,16 @@ function NfaLand() {
               },
             ],
           });
-          toast.success("✅ Base network added", { id: toastId });
+          toast.success("Base network added", { id: toastId });
           return true;
         } catch (addError) {
-          console.error("❌ Failed to add Immutable:", addError);
-          toast.error("❌ Failed to add Immutable network", { id: toastId });
+          console.error(" Failed to add Immutable:", addError);
+          toast.error(" Failed to add Immutable network", { id: toastId });
           return false;
         }
       }
-      console.error("❌ Failed to switch to Immutable:", switchError);
-      toast.error("❌ Failed to switch network", { id: toastId });
+      console.error(" Failed to switch to Immutable:", switchError);
+      toast.error(" Failed to switch network", { id: toastId });
       return false;
     }
   };
@@ -261,7 +261,7 @@ function NfaLand() {
   /* ========================== BACKEND MINT ========================== */
   const mintNFTToWallet = async (buyerWallet) => {
     if (!user?.id || !item._id) {
-      toast.error("❌ Invalid user or item data");
+      toast.error(" Invalid user or item data");
       return null;
     }
 
@@ -289,14 +289,14 @@ function NfaLand() {
       );
 
       if (res.data?.success && res.data?.tokenId) {
-        console.log("✅ Mint successful, Token ID:", res.data.tokenId);
+        console.log("Mint successful, Token ID:", res.data.tokenId);
         return res.data.tokenId;
       } else {
-        console.error("❌ Mint response invalid:", res.data);
+        console.error(" Mint response invalid:", res.data);
         return null;
       }
     } catch (err) {
-      console.error("❌ Mint error:", err.response?.data || err);
+      console.error(" Mint error:", err.response?.data || err);
       return null;
     }
   };
@@ -309,7 +309,7 @@ function NfaLand() {
     try {
       // Check MetaMask
       if (!window.ethereum) {
-        toast.error("❌ MetaMask not installed", { id: toastId });
+        toast.error(" MetaMask not installed", { id: toastId });
         setLoading(false);
         return;
       }
@@ -348,7 +348,7 @@ function NfaLand() {
         tokenId = await mintNFTToWallet(walletAddress);
 
         if (!tokenId) {
-          toast.error("❌ Failed to prepare NFA", { id: toastId });
+          toast.error(" Failed to prepare NFA", { id: toastId });
           setLoading(false);
           return;
         }
@@ -379,7 +379,7 @@ function NfaLand() {
             collection.owner = owner.toLowerCase();
             setOnChainOwner(owner.toLowerCase());
             setIsOwner(true);
-            console.log("✅ Ownership verified");
+            console.log("Ownership verified");
             break;
           } else if (retries > 1) {
             console.log(`⏳ Owner mismatch, retrying... (${retries - 1} left)`);
@@ -387,12 +387,12 @@ function NfaLand() {
             retries--;
             continue;
           } else {
-            toast.error("❌ You don't own this NFA", { id: toastId });
+            toast.error(" You don't own this NFA", { id: toastId });
             setLoading(false);
             return;
           }
         } catch (err) {
-          console.error("❌ Error getting owner:", err);
+          console.error(" Error getting owner:", err);
           if (retries > 1) {
             console.log(
               `⏳ Retrying blockchain check... (${retries - 1} left)`
@@ -400,7 +400,7 @@ function NfaLand() {
             await new Promise((resolve) => setTimeout(resolve, 2000));
             retries--;
           } else {
-            toast.error("❌ NFT not found on blockchain. Please try again.", {
+            toast.error(" NFT not found on blockchain. Please try again.", {
               id: toastId,
             });
             setLoading(false);
@@ -418,13 +418,13 @@ function NfaLand() {
           tokenId
         );
         await approveTx.wait();
-        console.log("✅ Marketplace approved");
+        console.log("Marketplace approved");
       }
 
       // Check if already listed
       const listing = await marketplace.getListing(BASE_NFT_ADDRESS, tokenId);
       if (listing[2]) {
-        toast.success("✅ Already listed!", { id: toastId });
+        toast.success("Already listed!", { id: toastId });
         setListingData({ seller: listing[0], price: listing[1], active: true });
         setLoading(false);
         return;
@@ -440,7 +440,7 @@ function NfaLand() {
         { gasLimit: 300000 }
       );
       await listTx.wait();
-      console.log("✅ Listing created on blockchain");
+      console.log("Listing created on blockchain");
 
       // Record in backend
       toast.loading("💾 Saving listing data...", { id: toastId });
@@ -469,7 +469,7 @@ function NfaLand() {
         }
       );
 
-      console.log("✅ Backend response:", response.data);
+      console.log("Backend response:", response.data);
 
       toast.success(
         `🎉 NFA listed for sale @ ${collection.priceETH || 0.01} USDC!`,
@@ -492,15 +492,15 @@ function NfaLand() {
 
       navigate("/List");
     } catch (err) {
-      console.error("❌ Listing error:", err);
-      console.error("❌ Error response:", err.response?.data);
+      console.error(" Listing error:", err);
+      console.error(" Error response:", err.response?.data);
 
-      let msg = "❌ Listing failed";
+      let msg = " Listing failed";
       if (err.response?.data?.error) {
-        msg = `❌ ${err.response.data.error}`;
+        msg = ` ${err.response.data.error}`;
         msg = "⛽ Insufficient gas. Add Immutable ETH";
       } else if (err.message?.includes("user rejected")) {
-        msg = "❌ Transaction rejected by user";
+        msg = " Transaction rejected by user";
       }
       toast.error(msg, { id: toastId });
     } finally {
@@ -516,14 +516,14 @@ function NfaLand() {
     try {
       // Check MetaMask
       if (!window.ethereum) {
-        toast.error("❌ MetaMask not installed", { id: toastId });
+        toast.error("MetaMask not installed", { id: toastId });
         setLoading(false);
         return;
       }
 
       // Check login
       if (!user?.id) {
-        toast.error("❌ Please login first", { id: toastId });
+        toast.error("Please login first", { id: toastId });
         setLoading(false);
         return;
       }
@@ -552,7 +552,7 @@ function NfaLand() {
       console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error("❌ Your wallet has no ETH for gas", { id: toastId });
+        toast.error(" Your wallet has no ETH for gas", { id: toastId });
         setLoading(false);
         return;
       }
@@ -576,7 +576,7 @@ function NfaLand() {
         const mintedTokenId = await mintNFTToWallet(buyer);
 
         if (!mintedTokenId) {
-          toast.error("❌ Failed to process purchase", { id: toastId });
+          toast.error(" Failed to process purchase", { id: toastId });
           setLoading(false);
           return;
         }
@@ -586,7 +586,7 @@ function NfaLand() {
         collection.owner = buyer.toLowerCase();
         setIsOwner(true);
         setOnChainOwner(buyer.toLowerCase());
-        console.log("✅ NFA prepared, Token ID:", mintedTokenId);
+        console.log("NFA prepared, Token ID:", mintedTokenId);
 
         // Small delay
         toast.loading("⏳ Finalizing purchase...", { id: toastId });
@@ -616,15 +616,15 @@ function NfaLand() {
         currentOwner = currentOwner.toLowerCase();
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
-        console.error("❌ Error checking owner:", err);
-        toast.error("❌ NFT not found on blockchain", { id: toastId });
+        console.error(" Error checking owner:", err);
+        toast.error(" NFT not found on blockchain", { id: toastId });
         setLoading(false);
         return;
       }
 
       // Prevent self-purchase
       if (buyer.toLowerCase() === currentOwner) {
-        toast.error("❌ You already own this NFA!", { id: toastId });
+        toast.error(" You already own this NFA!", { id: toastId });
         setLoading(false);
         return;
       }
@@ -634,7 +634,7 @@ function NfaLand() {
       const listing = await marketplace.getListing(BASE_NFT_ADDRESS, collection.tokenId);
 
       if (!listing[2]) {
-        toast.error("❌ This NFA is not listed for sale", { id: toastId });
+        toast.error(" This NFA is not listed for sale", { id: toastId });
         setLoading(false);
         return;
       }
@@ -645,7 +645,7 @@ function NfaLand() {
       // Check balance
       if (usdcBalance < price) {
         toast.error(
-          `❌ Insufficient USDC\n\nNeed: ${ethers.formatUnits(price, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
+          ` Insufficient USDC\n\nNeed: ${ethers.formatUnits(price, 6)} USDC\nYou have: ${ethers.formatUnits(usdcBalance, 6)} USDC`,
           { id: toastId, duration: 6000 }
         );
         setLoading(false);
@@ -662,10 +662,10 @@ function NfaLand() {
           const usdcWithSigner = usdcContract.connect(signer);
           const approveTx = await usdcWithSigner.approve(BASE_MARKETPLACE_ADDRESS, price);
           await approveTx.wait();
-          console.log("✅ USDC Approved!");
+          console.log("USDC Approved!");
         } catch (approveErr) {
-          console.error("❌ Approval failed:", approveErr);
-          toast.error("❌ USDC Approval failed", { id: toastId });
+          console.error(" Approval failed:", approveErr);
+          toast.error(" USDC Approval failed", { id: toastId });
           setLoading(false);
           return;
         }
@@ -683,7 +683,7 @@ function NfaLand() {
         id: toastId,
       });
       const receipt = await buyTx.wait();
-      console.log("✅ Transaction confirmed:", receipt.hash);
+      console.log("Transaction confirmed:", receipt.hash);
 
       // Record sale in backend
       toast.loading("💾 Recording purchase...", { id: toastId });
@@ -716,7 +716,7 @@ function NfaLand() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        console.log("✅ Sale recorded in backend");
+        console.log("Sale recorded in backend");
       } catch (recordErr) {
         console.error("⚠️ Error recording sale:", recordErr);
         console.error("⚠️ Error response:", recordErr.response?.data);
@@ -732,22 +732,22 @@ function NfaLand() {
       setIsOwner(true);
       setOnChainOwner(buyer.toLowerCase());
       setListingData(null);
-      console.log("✅ Purchase complete!");
+      console.log("Purchase complete!");
 
       const targetCategory = (collection.category || collection.parentCategory || item?.category || item?.parentCategory || "land").toLowerCase().trim();
       navigate("/Profile", { state: { category: targetCategory } });
     } catch (err) {
-      console.error("❌ Purchase error:", err);
-      let msg = "❌ Purchase failed";
+      console.error(" Purchase error:", err);
+      let msg = " Purchase failed";
 
       if (err.message?.includes("insufficient funds")) {
         msg = "⛽ Insufficient ETH for gas fees";
       } else if (err.message?.includes("user rejected") || err.code === 4001 || err.code === "ACTION_REJECTED") {
-        msg = "❌ Transaction rejected by user";
+        msg = " Transaction rejected by user";
       } else if (err.response?.data?.error) {
-        msg = `❌ ${err.response.data.error}`;
+        msg = ` ${err.response.data.error}`;
       } else {
-        msg = `❌ ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
+        msg = ` ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
       }
 
       toast.error(msg, { id: toastId });
@@ -759,7 +759,7 @@ function NfaLand() {
   /* ======================== CARD PAYMENT ======================== */
   const handlePaymentCard = async (productId) => {
     if (!user?.id) {
-      toast.error("❌ Please login first");
+      toast.error(" Please login first");
       return;
     }
 
@@ -772,14 +772,14 @@ function NfaLand() {
       });
 
       if (res.data?.exist === "no") {
-        toast.success("✅ Payment initiated", { id: toastId });
+        toast.success("Payment initiated", { id: toastId });
         navigate("/offer", { state: { item: collection } });
       } else {
-        toast.error("❌ Already purchased", { id: toastId });
+        toast.error(" Already purchased", { id: toastId });
       }
     } catch (err) {
-      console.error("❌ Card payment error:", err);
-      toast.error("❌ Payment failed", { id: toastId });
+      console.error(" Card payment error:", err);
+      toast.error(" Payment failed", { id: toastId });
     }
   };
 
@@ -797,9 +797,9 @@ function NfaLand() {
           try {
             await window.ethereum.request({ method: "eth_requestAccounts" });
             await checkWalletAndOwnership();
-            toast.success("✅ Wallet connected", { id: toastId });
+            toast.success("Wallet connected", { id: toastId });
           } catch (err) {
-            toast.error("❌ Connection failed", { id: toastId });
+            toast.error(" Connection failed", { id: toastId });
           }
         },
       };
@@ -824,13 +824,13 @@ function NfaLand() {
     // If user is owner and listed, show listed status
     if (isOwner && listingData?.active) {
       return {
-        text: "✅ Your NFA (Listed)",
+        text: "Your NFA (Listed)",
         disabled: true,
       };
     }
 
     // Fallback
-    return { text: "❌ Not Available", disabled: true };
+    return { text: " Not Available", disabled: true };
   };
 
   const buttonConfig = getButtonAction();

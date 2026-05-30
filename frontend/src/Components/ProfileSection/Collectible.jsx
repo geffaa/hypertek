@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import ProfileBanner from "./ProfileBanner";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import NavLinks from "../ProfileSection/Navlinks";
@@ -32,6 +33,7 @@ import UserProfileHeader from "./UserProfileHeader";
 
 
 function MarketPlace() {
+  const { t } = useTranslation();
   const { token, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -69,18 +71,18 @@ function MarketPlace() {
 
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const gridRef    = useRef(null);
+  const gridRef = useRef(null);
   const contentRef = useRef(null);
 
   // Tab ↔ URL slug mapping
   const TAB_SLUG = {
     "My Collectibles": "collectibles",
-    "Listings":        "listings",
-    "Activities":      "activities",
-    "Trade":           "trade",
-    "Auction":         "auction",
-    "Questing":        "questing",
-    "Bounty":          "bounty",
+    "Listings": "listings",
+    "Activities": "activities",
+    "Trade": "trade",
+    "Auction": "auction",
+    "Questing": "questing",
+    "Bounty": "bounty",
   };
   const SLUG_TAB = Object.fromEntries(Object.entries(TAB_SLUG).map(([k, v]) => [v, k]));
 
@@ -113,8 +115,8 @@ function MarketPlace() {
   const PAGE_SIZE = 10;
   const ACT_PAGE_SIZE = 10;
   const [activitiesPage, setActivitiesPage] = useState(1);
-  const [tradePage,      setTradePage]      = useState(1);
-  const [auctionPage,    setAuctionPage]    = useState(1);
+  const [tradePage, setTradePage] = useState(1);
+  const [auctionPage, setAuctionPage] = useState(1);
 
   // local flags for venue cross-reference in My Collectibles grid
   const [sessionAuctionIds] = useState(new Set());
@@ -173,7 +175,7 @@ function MarketPlace() {
       }
     });
 
-    console.log(`✅ ${activeCategory} NFTs extracted:`, extracted.length);
+    console.log(`${activeCategory} NFTs extracted:`, extracted.length);
     return extracted;
   };
 
@@ -207,11 +209,11 @@ function MarketPlace() {
       console.log("📡 Backend Response:", res.data);
 
       if (res.data?.success) {
-        console.log("✅ Success! Setting marketData with:", res.data.nfts);
+        console.log("Success! Setting marketData with:", res.data.nfts);
         setMarketData(res.data.nfts);
       }
     } catch (err) {
-      console.error("❌ Error fetching NFTs:", err);
+      console.error(" Error fetching NFTs:", err);
       toast.error("Failed to load NFTs");
     } finally {
       setLoading(false);
@@ -236,7 +238,7 @@ function MarketPlace() {
 
     if (!isConnected) {
       // Not connected - open RainbowKit modal
-      console.log("❌ Not connected - opening RainbowKit modal");
+      console.log(" Not connected - opening RainbowKit modal");
       setPendingItemId(itemId);
       if (openConnectModal) {
         openConnectModal();
@@ -245,7 +247,7 @@ function MarketPlace() {
     }
 
     // Already connected - mark as interacted
-    console.log("✅ Already connected - marking as interacted");
+    console.log("Already connected - marking as interacted");
     setUserHasInteracted((prev) => ({
       ...prev,
       [itemId]: true,
@@ -257,7 +259,7 @@ function MarketPlace() {
   /* ================= WATCH FOR CONNECTION SUCCESS ================= */
   useEffect(() => {
     if (isConnected && pendingItemId) {
-      console.log("✅ Wallet connected! Pending item:", pendingItemId);
+      console.log("Wallet connected! Pending item:", pendingItemId);
 
       // Wallet just connected - mark the pending item as interacted
       setUserHasInteracted((prev) => ({
@@ -350,8 +352,8 @@ function MarketPlace() {
   // ---- Utility helpers ----
   const timeAgo = (dateStr) => {
     const diff = Date.now() - new Date(dateStr).getTime();
-    if (diff < 60000)    return "just now";
-    if (diff < 3600000)  return `${Math.floor(diff / 60000)}m ago`;
+    if (diff < 60000) return "just now";
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
     if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
     return `${Math.floor(diff / 86400000)}d ago`;
   };
@@ -431,7 +433,7 @@ function MarketPlace() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
-                  Edit Profile
+                  {t("profile.editProfile", "Edit Profile")}
                 </Link>
                 <Link
                   to="/dashboard"
@@ -441,7 +443,7 @@ function MarketPlace() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7h18M3 12h18M3 17h18" />
                   </svg>
-                  Dashboard
+                  {t("profile.dashboard", "Dashboard")}
                 </Link>
                 <div
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
@@ -486,142 +488,143 @@ function MarketPlace() {
 
               return (
                 <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-8 2xl:px-10">
-              {gridItems.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
-                  <h2 className="text-lg font-semibold -mt-4">
-                    {isConnected ? "No Items Available" : "Connect Wallet to View Your Items"}
-                  </h2>
-                  <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
-                    <img src={FaceOne} alt="Face One" className="w-34 h-24" />
-                    <img src={FaceTwo} alt="Face Two" className="absolute top-24 w-28 h-10" />
-                  </div>
-                  {!isConnected ? (
-                    <button
-                      onClick={() => openConnectModal && openConnectModal()}
-                      className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition"
-                    >
-                      Connect Wallet
-                    </button>
-                  ) : (
-                    <Link to="/market-place">
-                      <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
-                        Browse Collection
-                      </button>
-                    </Link>
-                  )}
-                </div>
-              ) : (
-                <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
-                  {gridItems.map((item) => {
-                      const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
-                        || sessionAuctionIds.has(item._id);
-                      const onTrade   = offers.some((t) => t.offering === item.name && t.status === "open")
-                        || sessionTradeNames.has(item.name);
-                      const anyVenue  = item.listed || onAuction || onTrade;
-                      return (
-                    <div
-                      key={item._id}
-                      className="group relative rounded-2xl overflow-hidden text-white flex flex-col cursor-pointer"
-                      style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${anyVenue ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.08)"}` }}
-                    >
-                      {/* Image */}
-                      <div className="relative w-full aspect-square overflow-hidden bg-[#0d1632]">
-                        <LazyImage
-                          src={getImageUrl(item.image)}
-                          alt={item.name}
-                          className="w-full h-full transition-transform duration-300 group-hover:scale-105"
-                          imgClassName="object-cover"
-                        />
-                        {item.category && (
-                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/80 capitalize"
-                            style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                            {item.category}
-                          </div>
-                        )}
-                        {/* Venue badges stacked top-right */}
-                        <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
-                          {item.listed && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
-                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
-                              Market
-                            </span>
-                          )}
-                          {onAuction && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
-                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(251,191,36,0.35)" }}>
-                              Auction
-                            </span>
-                          )}
-                          {onTrade && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
-                              style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(59,130,246,0.35)" }}>
-                              Trade
-                            </span>
-                          )}
-                          {!anyVenue && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold text-white/40"
-                              style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.10)" }}>
-                              Unlisted
-                            </span>
-                          )}
-                        </div>
+                  {gridItems.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-20 text-white relative gap-16 -mt-8">
+                      <h2 className="text-lg font-semibold -mt-4">
+                        {isConnected ? t("profile.noItemsAvailable", "No Items Available") : t("profile.connectWalletToView", "Connect Wallet to View Your Items")}
+                      </h2>
+                      <div className="relative w-full flex justify-center items-center gap-4 top-[-10px]">
+                        <img src={FaceOne} alt="Face One" className="w-34 h-24" />
+                        <img src={FaceTwo} alt="Face Two" className="absolute top-24 w-28 h-10" />
                       </div>
-
-                      {/* Info */}
-                      <div className="flex flex-col p-3 gap-0.5 flex-1">
-                        <h3 className="text-sm font-semibold text-white truncate">{item.name || "Unnamed"}</h3>
-                        <p className="text-[11px] text-white/40 truncate flex items-center gap-1">
-                          {item.priceETH ? (
-                            <>
-                              <img src="/usdc-logo.svg" alt="USDC" className="w-3 h-3 inline-block" />
-                              {item.priceETH} USDC
-                            </>
-                          ) : "No price set"}
-                        </p>
-                      </div>
-
-                      {/* CTA */}
-                      <div className="px-3 pb-3 flex flex-col gap-1.5">
-                        {item.listed ? (
-                          <button
-                            onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
-                            className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"
-                            style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)" }}
-                          >
-                            View Listing →
+                      {!isConnected ? (
+                        <button
+                          onClick={() => openConnectModal && openConnectModal()}
+                          className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition"
+                        >
+                          {t("profile.connectWallet", "Connect Wallet")}
+                        </button>
+                      ) : (
+                        <Link to="/market-place">
+                          <button className="bg-[#002AA8] px-6 py-2 rounded-md hover:bg-[#002AA8]-700 transition">
+                            {t("profile.browseCollection", "Browse Collection")}
                           </button>
-                        ) : isConnected ? (
-                          <button
-                            onClick={() => navigate("/dashboard/collections")}
-                            className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"
-                            style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
-                          >
-                            Manage in Dashboard →
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => handleSellNowClick(item._id)}
-                            className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all"
-                            style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)" }}
-                          >
-                            Connect Wallet
-                          </button>
-                        )}
-                        {isConnected && (
-                          <Link
-                            to="/dashboard/collections"
-                            className="w-full h-7 rounded-lg text-white/40 hover:text-white/70 text-[10px] font-medium transition-all flex items-center justify-center gap-1"
-                            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-                          >
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                            Edit / Delete in Dashboard
-                          </Link>
-                        )}
-                      </div>
+                        </Link>
+                      )}
                     </div>
-                  ); })}
-                </div>
-              )}
+                  ) : (
+                    <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
+                      {gridItems.map((item) => {
+                        const onAuction = myAuctions.some((a) => String(a.subCollectionId) === String(item._id) && a.status === "active")
+                          || sessionAuctionIds.has(item._id);
+                        const onTrade = offers.some((t) => t.offering === item.name && t.status === "open")
+                          || sessionTradeNames.has(item.name);
+                        const anyVenue = item.listed || onAuction || onTrade;
+                        return (
+                          <div
+                            key={item._id}
+                            className="group relative rounded-2xl overflow-hidden text-white flex flex-col cursor-pointer"
+                            style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${anyVenue ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.08)"}` }}
+                          >
+                            {/* Image */}
+                            <div className="relative w-full aspect-square overflow-hidden bg-[#0d1632]">
+                              <LazyImage
+                                src={getImageUrl(item.image)}
+                                alt={item.name}
+                                className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+                                imgClassName="object-cover"
+                              />
+                              {item.category && (
+                                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-semibold text-white/80 capitalize"
+                                  style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                                  {item.category}
+                                </div>
+                              )}
+                              {/* Venue badges stacked top-right */}
+                              <div className="absolute top-2 right-2 flex flex-col gap-0.5 items-end">
+                                {item.listed && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-green-300"
+                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(74,222,128,0.35)" }}>
+                                    {t("profile.badgeMarket", "Market")}
+                                  </span>
+                                )}
+                                {onAuction && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-amber-300"
+                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(251,191,36,0.35)" }}>
+                                    {t("profile.badgeAuction", "Auction")}
+                                  </span>
+                                )}
+                                {onTrade && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-bold text-blue-300"
+                                    style={{ background: "rgba(0,0,0,0.60)", backdropFilter: "blur(4px)", border: "1px solid rgba(59,130,246,0.35)" }}>
+                                    {t("profile.badgeTrade", "Trade")}
+                                  </span>
+                                )}
+                                {!anyVenue && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold text-white/40"
+                                    style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.10)" }}>
+                                    {t("profile.badgeUnlisted", "Unlisted")}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Info */}
+                            <div className="flex flex-col p-3 gap-0.5 flex-1">
+                              <h3 className="text-sm font-semibold text-white truncate">{item.name || "Unnamed"}</h3>
+                              <p className="text-[11px] text-white/40 truncate flex items-center gap-1">
+                                {item.priceETH ? (
+                                  <>
+                                    <img src="/usdc-logo.svg" alt="USDC" className="w-3 h-3 inline-block" />
+                                    {item.priceETH} USDC
+                                  </>
+                                ) : t("profile.noPriceSet", "No price set")}
+                              </p>
+                            </div>
+
+                            {/* CTA */}
+                            <div className="px-3 pb-3 flex flex-col gap-1.5">
+                              {item.listed ? (
+                                <button
+                                  onClick={() => navigate("/buy-nfa", { state: { item, parentId: item.parentId } })}
+                                  className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"
+                                  style={{ background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)" }}
+                                >
+                                  {t("profile.viewListing", "View Listing →")}
+                                </button>
+                              ) : isConnected ? (
+                                <button
+                                  onClick={() => navigate("/dashboard/collections")}
+                                  className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all hover:brightness-110"
+                                  style={{ background: "linear-gradient(180deg, #002AA8 0%, #001142 100%)", border: "1px solid rgba(0,80,255,0.3)" }}
+                                >
+                                  {t("profile.manageInDashboard", "Manage in Dashboard →")}
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => handleSellNowClick(item._id)}
+                                  className="w-full h-8 rounded-lg text-white text-xs font-semibold transition-all"
+                                  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)" }}
+                                >
+                                  {t("profile.connectWallet", "Connect Wallet")}
+                                </button>
+                              )}
+                              {isConnected && (
+                                <Link
+                                  to="/dashboard/collections"
+                                  className="w-full h-7 rounded-lg text-white/40 hover:text-white/70 text-[10px] font-medium transition-all flex items-center justify-center gap-1"
+                                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                                >
+                                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                                  {t("profile.editDeleteDashboard", "Edit / Delete in Dashboard")}
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })()}
@@ -636,9 +639,9 @@ function MarketPlace() {
             {/* ---- ACTIVITIES VIEW ---- */}
             {activeTab === "Activities" && (() => {
               const TX_FILTERS = [
-                { key: "all",  label: "All"  },
-                { key: "buy",  label: "Buy"  },
-                { key: "sell", label: "Sold" },
+                { key: "all", label: t("profile.activities.filterAll", "All") },
+                { key: "buy", label: t("profile.activities.filterBuy", "Buy") },
+                { key: "sell", label: t("profile.activities.filterSold", "Sold") },
               ];
               const filtered = txFilter === "all"
                 ? transactions
@@ -661,7 +664,7 @@ function MarketPlace() {
                         {f.label}
                       </button>
                     ))}
-                    <span className="ml-auto text-white/25 text-xs self-center">{filtered.length} record{filtered.length !== 1 ? "s" : ""}</span>
+                    <span className="ml-auto text-white/25 text-xs self-center">{filtered.length} {t("profile.activities.records", "records")}</span>
                   </div>
 
                   {/* Table always renders — body pads to 10-row minimum height */}
@@ -677,7 +680,7 @@ function MarketPlace() {
                         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
                           <div className="grid min-w-[640px] gap-4 px-5 py-5 text-[11px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ gridTemplateColumns: "2fr 1fr 1.5fr 1.5fr 1.5fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                            <span>Item</span><span>Type</span><span>Price</span><span>From</span><span>To</span><span className="text-right">Date</span>
+                            <span>{t("profile.activities.colItem", "Item")}</span><span>{t("profile.activities.colType", "Type")}</span><span>{t("profile.activities.colPrice", "Price")}</span><span>{t("profile.activities.colFrom", "From")}</span><span>{t("profile.activities.colTo", "To")}</span><span className="text-right">{t("profile.activities.colDate", "Date")}</span>
                           </div>
                         </div>
 
@@ -698,7 +701,7 @@ function MarketPlace() {
                           <div className="overflow-x-auto">
                             <div className="flex items-center justify-center text-white/25 min-w-[640px]"
                               style={{ height: ROW_H, borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-                              <p className="text-sm">No transactions yet</p>
+                              <p className="text-sm">{t("profile.activities.noTransactions", "No transactions yet")}</p>
                             </div>
                             {Array.from({ length: MIN_ROWS - 1 }).map((_, i) => (
                               <div key={i} className="min-w-[640px]" style={{ height: ROW_H, borderTop: "1px solid rgba(255,255,255,0.04)" }} />
@@ -711,7 +714,7 @@ function MarketPlace() {
                                 style={{ gridTemplateColumns: "2fr 1fr 1.5fr 1.5fr 1.5fr 1fr", background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
                                 <span className="text-white/85 text-[13px] font-medium truncate">{tx.itemName || "—"}</span>
                                 <span className={`text-xs font-bold ${tx.type === "buy" ? "text-blue-400" : "text-green-400"}`}>
-                                  {tx.type === "buy" ? "Bought" : tx.type === "sell" ? "Sold" : tx.type || "—"}
+                                  {tx.type === "buy" ? t("profile.activities.typeBought", "Bought") : tx.type === "sell" ? t("profile.activities.typeSold", "Sold") : tx.type || "—"}
                                 </span>
                                 <span className="text-white/80 text-[13px] font-semibold">{tx.priceETH ? `${tx.priceETH} USDC` : "—"}</span>
                                 <span className="text-white/45 text-[12px] font-mono truncate" data-tooltip={tx.seller}>{shortAddr(tx.seller)}</span>
@@ -757,13 +760,13 @@ function MarketPlace() {
 
             {/* ---- TRADE VIEW ---- */}
             {activeTab === "Trade" && (() => {
-              const tradeData  = offers;
-              const isLoading  = offersLoading;
+              const tradeData = offers;
+              const isLoading = offersLoading;
               const statusColors = {
-                open:      { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                accepted:  { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                completed: { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+                open: { text: "text-green-400", bg: "rgba(74,222,128,0.10)", border: "rgba(74,222,128,0.25)" },
+                accepted: { text: "text-amber-300", bg: "rgba(251,191,36,0.10)", border: "rgba(251,191,36,0.25)" },
+                completed: { text: "text-blue-400", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.25)" },
+                cancelled: { text: "text-white/25", bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
               };
               const totalPages = Math.ceil(tradeData.length / PAGE_SIZE);
               const paged = tradeData.slice((tradePage - 1) * PAGE_SIZE, tradePage * PAGE_SIZE);
@@ -772,13 +775,13 @@ function MarketPlace() {
                   <div className="flex-1 min-w-0">
                     {!connectedWallet ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                        <p className="text-sm">Connect your wallet to view your trade listings</p>
+                        <p className="text-sm">{t("profile.trade.noWallet", "Connect your wallet to view your trade listings")}</p>
                       </div>
                     ) : isLoading ? (
-                      <div className="text-white/50 text-sm py-16 text-center">Loading your trade listings...</div>
+                      <div className="text-white/50 text-sm py-16 text-center">{t("profile.trade.loading", "Loading your trade listings...")}</div>
                     ) : tradeData.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                        <p className="text-sm">No active trade listings</p>
+                        <p className="text-sm">{t("profile.trade.noListings", "No active trade listings")}</p>
                       </div>
                     ) : (
                       <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
@@ -786,7 +789,7 @@ function MarketPlace() {
                         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
                           <div className="grid min-w-[640px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1.5fr 1fr 0.8fr 0.7fr" }}>
-                            <span>Trade No</span><span>Offering</span><span>Requesting</span><span>Category</span><span>Status</span><span></span>
+                            <span>{t("profile.trade.colTradeNo", "Trade No")}</span><span>{t("profile.trade.colOffering", "Offering")}</span><span>{t("profile.trade.colRequesting", "Requesting")}</span><span>{t("profile.trade.colCategory", "Category")}</span><span>{t("profile.trade.colStatus", "Status")}</span><span></span>
                           </div>
                         </div>
                         {/* Body — natural page scroll */}
@@ -811,7 +814,7 @@ function MarketPlace() {
                                       className="text-[10px] font-semibold px-2 py-1 rounded transition-opacity hover:opacity-80"
                                       style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
                                     >
-                                      Cancel
+                                      {t("profile.trade.cancel", "Cancel")}
                                     </button>
                                   )}
                                 </div>
@@ -845,16 +848,21 @@ function MarketPlace() {
 
             {/* ---- AUCTION VIEW ---- */}
             {activeTab === "Auction" && (() => {
-              const AUCTION_STATUS_FILTERS = ["active", "ended", "sold", "all"];
+              const AUCTION_STATUS_FILTERS = [
+                { key: "active", label: t("profile.auction.filterActive", "Active") },
+                { key: "ended", label: t("profile.auction.filterEnded", "Ended") },
+                { key: "sold", label: t("profile.auction.filterSold", "Sold") },
+                { key: "all", label: t("profile.activities.filterAll", "All") },
+              ];
               const filteredAuctions = auctionStatusFilter === "all"
                 ? myAuctions
                 : myAuctions.filter((a) => a.status === auctionStatusFilter);
-              const isLoading   = auctionsLoading;
+              const isLoading = auctionsLoading;
               const statusColors = {
-                active:    { text: "text-green-400",  bg: "rgba(74,222,128,0.10)",  border: "rgba(74,222,128,0.25)" },
-                ended:     { text: "text-amber-300",  bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.25)" },
-                sold:      { text: "text-blue-400",   bg: "rgba(59,130,246,0.10)",  border: "rgba(59,130,246,0.25)" },
-                cancelled: { text: "text-white/25",   bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
+                active: { text: "text-green-400", bg: "rgba(74,222,128,0.10)", border: "rgba(74,222,128,0.25)" },
+                ended: { text: "text-amber-300", bg: "rgba(251,191,36,0.10)", border: "rgba(251,191,36,0.25)" },
+                sold: { text: "text-blue-400", bg: "rgba(59,130,246,0.10)", border: "rgba(59,130,246,0.25)" },
+                cancelled: { text: "text-white/25", bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.10)" },
               };
               const totalPages = Math.ceil(filteredAuctions.length / PAGE_SIZE);
               const paged = filteredAuctions.slice((auctionPage - 1) * PAGE_SIZE, auctionPage * PAGE_SIZE);
@@ -865,26 +873,26 @@ function MarketPlace() {
                     <div className="flex gap-2 mb-4 flex-wrap">
                       {AUCTION_STATUS_FILTERS.map((f) => (
                         <button
-                          key={f}
-                          onClick={() => { setAuctionStatusFilter(f); setAuctionPage(1); }}
-                          className="px-3 py-1 rounded-full text-xs font-semibold capitalize transition-all"
-                          style={auctionStatusFilter === f
+                          key={f.key}
+                          onClick={() => { setAuctionStatusFilter(f.key); setAuctionPage(1); }}
+                          className="px-3 py-1 rounded-full text-xs font-semibold transition-all"
+                          style={auctionStatusFilter === f.key
                             ? { background: "rgba(0,42,168,0.8)", border: "1px solid rgba(0,80,255,0.5)", color: "#fff" }
                             : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.4)" }
                           }
-                        >{f}</button>
+                        >{f.label}</button>
                       ))}
                     </div>
 
                     {!connectedWallet ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                        <p className="text-sm">Connect your wallet to view your auction listings</p>
+                        <p className="text-sm">{t("profile.auction.noWallet", "Connect your wallet to view your auction listings")}</p>
                       </div>
                     ) : isLoading ? (
-                      <div className="text-white/50 text-sm py-16 text-center">Loading your auctions...</div>
+                      <div className="text-white/50 text-sm py-16 text-center">{t("profile.auction.loading", "Loading your auctions...")}</div>
                     ) : filteredAuctions.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-20 text-white/30 gap-3">
-                        <p className="text-sm">No {auctionStatusFilter === "all" ? "" : auctionStatusFilter + " "}auction listings</p>
+                        <p className="text-sm">{t("profile.auction.noListings", "No auction listings")}</p>
                       </div>
                     ) : (
                       <div style={{ border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, overflow: "clip" }}>
@@ -892,7 +900,7 @@ function MarketPlace() {
                         <div className="overflow-x-auto" style={{ position: "sticky", top: 158, zIndex: 5, background: "rgba(4,8,28,0.98)" }}>
                           <div className="grid min-w-[700px] px-4 py-5 text-[10px] font-semibold uppercase tracking-widest text-white/30"
                             style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", gridTemplateColumns: "1fr 1.5fr 1fr 1fr 1fr 0.8fr 0.7fr" }}>
-                            <span>Auction No</span><span>Item</span><span>Start Price</span><span>Current Bid</span><span>Ends</span><span>Status</span><span></span>
+                            <span>{t("profile.auction.colAuctionNo", "Auction No")}</span><span>{t("profile.auction.colItem", "Item")}</span><span>{t("profile.auction.colStartPrice", "Start Price")}</span><span>{t("profile.auction.colCurrentBid", "Current Bid")}</span><span>{t("profile.auction.colEnds", "Ends")}</span><span>{t("profile.auction.colStatus", "Status")}</span><span></span>
                           </div>
                         </div>
                         {/* Body — natural page scroll */}
@@ -903,7 +911,7 @@ function MarketPlace() {
                             const diff = endDate ? endDate - Date.now() : 0;
                             const timeStr = diff > 0
                               ? (() => { const d = Math.floor(diff / 86400000); const h = Math.floor((diff % 86400000) / 3600000); return d > 0 ? `${d}d ${h}h` : `${h}h`; })()
-                              : "Ended";
+                              : t("profile.auction.ended", "Ended");
                             const canCancel = auction.status === "active" && (!auction.bidHistory || auction.bidHistory.length === 0);
                             return (
                               <div key={auction._id} className="grid min-w-[700px] px-4 py-3 items-center"
@@ -911,7 +919,7 @@ function MarketPlace() {
                                 <span className="text-white/60 text-xs font-mono">#{String(auction._id).slice(-6).toUpperCase()}</span>
                                 <span className="text-white/80 text-xs truncate">{auction.title || auction.itemName || "—"}</span>
                                 <span className="text-white/60 text-xs">{auction.startPrice ? `$${auction.startPrice}` : "—"}</span>
-                                <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : "No bids"}</span>
+                                <span className="text-green-300/80 text-xs font-medium">{auction.currentBid ? `$${auction.currentBid}` : t("profile.auction.noBids", "No bids")}</span>
                                 <span className={`text-xs ${diff > 0 && diff < 86400000 ? "text-red-400" : "text-white/50"}`}>{timeStr}</span>
                                 <span className={`text-[10px] font-semibold capitalize inline-block w-fit ${c.text}`}
                                   style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 4, padding: "2px 7px" }}>{auction.status}</span>
@@ -922,7 +930,7 @@ function MarketPlace() {
                                       className="text-[10px] font-semibold px-2 py-1 rounded transition-opacity hover:opacity-80"
                                       style={{ background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.3)", color: "#f87171" }}
                                     >
-                                      Cancel
+                                      {t("profile.auction.cancel", "Cancel")}
                                     </button>
                                   )}
                                 </div>

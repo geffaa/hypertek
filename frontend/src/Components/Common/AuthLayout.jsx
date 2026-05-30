@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import useSiteContent from "../../hooks/useSiteContent";
 import { getImageUrl } from "../../Config";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -14,6 +15,7 @@ const Logo = "/logo-white.png";
  * Right: form content passed as children
  */
 export default function AuthLayout({ children }) {
+  const { t } = useTranslation();
   const { data: cms } = useSiteContent("auth_panel");
 
   const bgImage = cms.background_image ? getImageUrl(cms.background_image) : bgAuth;
@@ -56,7 +58,7 @@ export default function AuthLayout({ children }) {
             to="/"
             className="text-white/60 hover:text-white text-sm font-medium transition-colors duration-200 flex items-center gap-1.5"
           >
-            ← Back to Home
+            {t("auth.backToHome", "← Back to Home")}
           </Link>
         </div>
 
@@ -115,7 +117,7 @@ export default function AuthLayout({ children }) {
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <Link to="/" className="text-white/60 hover:text-white text-xs transition-colors">
-              ← Home
+              {t("auth.backHome", "← Home")}
             </Link>
           </div>
         </div>

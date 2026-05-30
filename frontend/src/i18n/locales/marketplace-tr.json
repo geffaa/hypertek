@@ -2,51 +2,65 @@
   "marketplace": {
     "sectionLabel": "Pazar Yeri",
     "searchPlaceholder": "Ara...",
-
     "tabs": {
-      "overview":  "Genel Bakış",
-      "nfa101":    "NFA / NFC / NFT",
-      "general":   "Pazar Yeri",
-      "auctions":  "Müzayedeler",
-      "trades":    "Takaslar",
-      "quests":    "Görevler",
-      "hire":      "Kiralık",
-      "bounty":    "Ödül"
+      "overview": "Genel Bakış",
+      "nfa101": "NFA / NFC / NFT",
+      "general": "Pazar Yeri",
+      "auctions": "Müzayedeler",
+      "trades": "Takaslar",
+      "quests": "Görevler",
+      "hire": "Kiralık",
+      "bounty": "Ödül"
     },
-
     "banner": {
       "defaultHeading": "Hyper Tek'te Yeni Bir Çağ Başlıyor",
-      "defaultDesc": "Her kararın yolculuğu şekillendirdiği canlı, nefes alan bir evrenin başlangıcı.",
+      "defaultDesc": "Bu, her kararın yolculuğu şekillendirdiği, yaşayan, nefes alan bir evrenin başlangıcıdır. İster ışık hızında yarışıyor olun, ister Overlord Realm'de ittifaklar kuruyor olun, ister HyperQuest'te sırları ortaya çıkarıyor olun, bu, hikayede iz bırakma şansınızdır.",
       "stats": {
-        "totalItems":  "Toplam Öğe",
-        "totalBuys":   "Toplam Satın Alma",
-        "listed":      "Listelenen",
+        "totalItems": "Toplam Öğe",
+        "totalBuys": "Toplam Satın Alma",
+        "listed": "Listelenen",
         "collections": "Koleksiyonlar"
       },
-      "soundOn":  "Ses Açık",
+      "soundOn": "Ses Açık",
       "soundOff": "Ses Kapalı"
     },
-
     "bottomBar": {
-      "learnLabel":     "NFA / NFC Hakkında Bilgi Edinin",
+      "learnLabel": "NFA / NFC Hakkında Bilgi Edinin",
       "educationPanel": "HyperTek Eğitim Paneli",
-      "footerNote":     "Bu panel hızlı başvuru içindir. Tam eğitim içeriği için NFA / NFC 101 sekmesini ziyaret edin.",
+      "footerNote": "Bu panel hızlı başvuru içindir. Tam eğitim içeriği için NFA / NFC 101 sekmesini ziyaret edin.",
       "facts": [
-        { "label": "NFA",        "desc": "Yalnızca Hypertek varlığı. En yüksek oyun içi bonuslar. Her satışta büyüyen garantili minimum geri alım değeri." },
-        { "label": "NFC",        "desc": "Hypertek veya lisanslı oyuncular tarafından oluşturulmuş. Oyun içi bonuslar dahil. Minimum geri alım garantili." },
-        { "label": "NFT",        "desc": "Oyuncu tarafından oluşturulan koleksiyon. Oyun içi bonus yok. Geri alım garantisi yok. Pazar yerinde takas edilebilir." },
-        { "label": "Komisyon", "desc": "Tüm satışlarda %20 platform ücreti. Satıcı %80 alır. Satışlarda %4 sanatçı telif hakkı." },
-        { "label": "Geri Alım Büyümesi", "desc": "Her yeniden satış fiyatının +%5'i varlığın minimum geri alım değerine eklenir. Yalnızca büyür." },
-        { "label": "Emanet Cüzdan", "desc": "HyperTek kayıt sırasında sizin için otomatik olarak bir kripto cüzdanı oluşturur." }
+        {
+          "label": "NFA",
+          "desc": "Yalnızca Hypertek varlığı. En yüksek oyun içi bonuslar. Her satışta büyüyen garantili minimum geri alım değeri."
+        },
+        {
+          "label": "NFC",
+          "desc": "Hypertek veya lisanslı oyuncular tarafından oluşturulmuş. Oyun içi bonuslar dahil. Minimum geri alım garantili."
+        },
+        {
+          "label": "NFT",
+          "desc": "Oyuncu tarafından oluşturulan koleksiyon. Oyun içi bonus yok. Geri alım garantisi yok. Pazar yerinde takas edilebilir."
+        },
+        {
+          "label": "Komisyon",
+          "desc": "Tüm satışlarda %20 platform ücreti. Satıcı %80 alır. Satışlarda %4 sanatçı telif hakkı."
+        },
+        {
+          "label": "Geri Alım Büyümesi",
+          "desc": "Her yeniden satış fiyatının +%5'i varlığın minimum geri alım değerine eklenir. Yalnızca büyür."
+        },
+        {
+          "label": "Emanet Cüzdan",
+          "desc": "HyperTek kayıt sırasında sizin için otomatik olarak bir kripto cüzdanı oluşturur."
+        }
       ]
     },
-
     "overview": {
-      "heading":  "Genel Bakış",
+      "heading": "Genel Bakış",
       "subtitle": "HyperTek Pazar Yerine hoş geldiniz. Daha fazla bilgi edinmek için bir özellik seçin — ardından hemen başlayın.",
       "features": [
         {
-          "label":   "NFA / NFC / NFT",
+          "label": "NFA / NFC / NFT",
           "tagline": "Web3 varlıklarında yeni misiniz? Buradan başlayın",
           "details": [
             "NFA (Değiştirilemez Varlıklar) platform garantili geri alım fiyatı olan Hypertek tarafından çıkarılan öğelerdir.",
@@ -56,7 +70,7 @@
           "cta": "Temel Bilgileri Öğren"
         },
         {
-          "label":   "Pazar Yeri",
+          "label": "Pazar Yeri",
           "tagline": "Oyun içi varlıkları anında satın alın ve satın",
           "details": [
             "NFA, NFC ve NFT'lerin geniş kataloğuna göz atın — kostümler, silahlar, uzmanlar, uzay gemileri ve daha fazlası.",
@@ -66,7 +80,7 @@
           "cta": "Pazar Yerine Göz At"
         },
         {
-          "label":   "Müzayedeler",
+          "label": "Müzayedeler",
           "tagline": "Özel sınırlı sayıda öğeler için yarışın",
           "details": [
             "Yalnızca süreli müzayedelerle erişilebilen nadir varlıklara teklif verin.",
@@ -76,7 +90,7 @@
           "cta": "Müzayedeleri Görüntüle"
         },
         {
-          "label":   "Takaslar",
+          "label": "Takaslar",
           "tagline": "Aracı olmadan varlıkları eşler arası takas edin",
           "details": [
             "Diğer oyuncularla doğrudan varlık takasları önerin veya kabul edin — tamamen zincir üzerinde.",
@@ -86,7 +100,7 @@
           "cta": "Takasları Görüntüle"
         },
         {
-          "label":   "Görevler",
+          "label": "Görevler",
           "tagline": "Görevleri tamamlayın, özel ödüller kazanın",
           "details": [
             "Özel ödüller ve nadir oyun içi varlıklar kazanmak için görevler üstlenin.",
@@ -96,7 +110,7 @@
           "cta": "Görevleri Keşfet"
         },
         {
-          "label":   "Kiralık",
+          "label": "Kiralık",
           "tagline": "Varlık kiralayın veya kendinizinkinden kazanın",
           "details": [
             "Tamamen satın almadan tek bir görev için güçlü uzmanlar veya ekipman kiralayın.",
@@ -106,7 +120,7 @@
           "cta": "Kiralamaları Görüntüle"
         },
         {
-          "label":   "Ödül",
+          "label": "Ödül",
           "tagline": "Hedefleri avlayın, ödüller talep edin, liderlik tablosuna yükselın",
           "details": [
             "Kripto ödülleri kazanmak için diğer oyuncular veya sistem tarafından yayınlanan ödülleri kabul edin.",
@@ -117,359 +131,573 @@
         }
       ]
     },
-
     "general": {
-      "heading":  "Genel",
+      "heading": "Genel",
       "subtitle": "Anında satın alma için mevcut NFA, NFC ve NFT'lere göz atın — kostümler, silahlar, uzmanlar, uzay gemileri ve daha fazlası.",
       "filterAll": "Tümü",
       "samplePreviewTitle": "Örnek Pazar Yeri Önizlemesi",
       "samplePreviewDesc": "Aşağıdaki öğeler, HyperTek pazar yerinde mevcut olacak dijital varlık türlerini sergileyen örnek önizlemelerdir. Benzersiz sanat eseri ve blockchain doğrulamalı sahiplik içeren gerçek öğeler lansmanda mevcut olacak.",
       "noItems": "Henüz mevcut öğe yok. Yakında tekrar kontrol edin.",
       "categories": {
-        "skins":           "Kostümler",
-        "militaryBadges":  "Askeri Rozetler",
-        "specialists":     "Uzmanlar",
-        "weapons":         "Silahlar",
-        "bodyArmour":      "Vücut Zırhı",
-        "spaceships":      "Uzay Gemileri",
-        "racingVehicles":  "Araçlar",
-        "artwork":         "Sanat Eserleri",
-        "landAndBases":    "Arazi ve Üsler",
-        "general":         "Genel"
-      }
+        "skins": "Kostümler",
+        "militaryBadges": "Askeri Rozetler",
+        "specialists": "Uzmanlar",
+        "weapons": "Silahlar",
+        "bodyArmour": "Vücut Zırhı",
+        "spaceships": "Uzay Gemileri",
+        "racingVehicles": "Araçlar",
+        "artwork": "Sanat Eserleri",
+        "landAndBases": "Arazi ve Üsler",
+        "general": "Genel"
+      },
+      "search": "Ara...",
+      "filter": "Filtrele",
+      "showAll": "Tümünü Göster",
+      "filterSort": "Filtrele ve Sırala",
+      "sortBy": "Sırala",
+      "sort": {
+        "default": "Varsayılan",
+        "priceAsc": "Fiyat: Düşükten Yükseğe",
+        "priceDesc": "Fiyat: Yüksekten Düşüğe",
+        "nameAsc": "Ad: A'dan Z'ye",
+        "nameDesc": "Ad: Z'den A'ya"
+      },
+      "priceRange": "Fiyat Aralığı (USDC)",
+      "min": "Minimum",
+      "max": "Maksimum",
+      "apply": "Uygula",
+      "clearAll": "Tüm Filtreleri Temizle",
+      "noResults": "Sonuç bulunamadı",
+      "dummyContent": "Sahte İçerik",
+      "preview": "Önizleme",
+      "buyNow": "Hemen Satın Al",
+      "viewDetails": "Detayları Görüntüle"
     },
-
     "nfa101": {
       "sectionLabel": "Eğitim",
-      "heading":      "NFA / NFC / NFT 101",
-      "subtitle":     "NFT ve Web3'te yeni misiniz? Blockchain varlıklarını, cüzdanları, güvenliği ve HyperTek ekosistemini anlamak için makalelerimizi keşfedin.",
-      "minRead":      "dk okuma",
-      "filterAll":    "Tümü"
+      "heading": "NFA / NFC / NFT 101",
+      "subtitle": "NFT ve Web3'te yeni misiniz? Blockchain varlıklarını, cüzdanları, güvenliği ve HyperTek ekosistemini anlamak için makalelerimizi keşfedin.",
+      "minRead": "dk okuma",
+      "filterAll": "Tümü"
     },
-
     "auctions": {
-      "heading":        "Müzayedeler",
-      "listings":       "liste",
-      "newAuction":     "Yeni Müzayede",
-      "noAuctions":     "{{filter}} müzayede yok",
-      "createFirst":    "İlk müzayedeyi oluşturun",
-      "endingSoon":     "YAKINDA BİTİYOR",
-      "viewDetails":    "Ayrıntıları Görüntüle",
+      "heading": "Müzayedeler",
+      "listings": "liste",
+      "newAuction": "Yeni Müzayede",
+      "noAuctions": "{{filter}} müzayede yok",
+      "createFirst": "İlk müzayedeyi oluşturun",
+      "endingSoon": "YAKINDA BİTİYOR",
+      "viewDetails": "Ayrıntıları Görüntüle",
       "rules": {
-        "durations":    "Süreler: 1 gün · 3 gün · 7 gün",
+        "durations": "Süreler: 1 gün · 3 gün · 7 gün",
         "minIncrement": "Min artış: %5",
-        "freeToList":   "Listelemek ücretsiz",
-        "commission":   "Komisyon: Satışta %20"
-      },
-      "preview": {
-        "title":   "Oyun İçi Özellik Önizlemesi",
-        "desc":    "Müzayede sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
-      },
-      "card": {
-        "currentBid": "Mevcut teklif",
-        "endsIn":     "Bitiş",
-        "placeBid":   "Teklif Ver",
-        "buyNow":     "Şimdi Al",
-        "bids":       "teklif",
-        "ended":      "BİTTİ"
-      },
-      "detail": {
-        "currentBid":  "Mevcut teklif",
-        "start":       "Başlangıç",
-        "endsIn":      "Bitiş",
-        "description": "Açıklama",
-        "recentBids":  "Son Teklifler",
-        "anonymous":   "Anonim",
-        "placeBid":    "Teklif Ver",
-        "buyNow":      "Şimdi Al",
-        "buyNowLabel": "Şimdi Al",
-        "bids":        "teklif"
-      },
-      "bidModal": {
-        "title":          "Teklif Ver",
-        "currentBid":     "Mevcut teklif",
-        "minimumBid":     "Minimum teklif",
-        "yourBid":        "Teklifiniz (USDC)",
-        "minIncrement":   "Min artış %5 · Teklifinizden sonraki sonraki minimum: {{next}} USDC",
-        "reviewBid":      "Teklifi İncele",
-        "disclaimer":     "Kazanan teklif bağlayıcıdır · %20 platform komisyonu",
-        "confirmTitle":   "Teklifi Onayla",
-        "item":           "Öğe",
-        "yourBidLabel":   "Teklifiniz",
-        "youPay":         "Kazanırsanız ödersiniz",
-        "outbidNotice":   "Biri sizi geçerse hemen bildirim alırsınız. Süre dolduğunda müzayede otomatik kapanır.",
-        "back":           "Geri",
-        "confirm":        "Onayla — {{amount}} USDC",
-        "placing":        "Veriliyor…",
-        "successTitle":   "Teklif Verildi!",
-        "highestBidder":  "En yüksek teklifi siz verdiniz",
-        "outbidWarning":  "Biri sizi geçerse bildirim alacaksınız.",
-        "done":           "Tamam",
-        "endsIn":         "Bitiş"
-      },
-      "instantBuyModal": {
-        "title":         "Şimdi Al — Anında",
-        "buyNowPrice":   "Şimdi al fiyatı",
-        "currentBids":   "Mevcut teklifler",
-        "notice":        "Şimdi almak müzayedeyi hemen bitirir. Öğe cüzdanınıza aktarılır ve diğer tüm teklif verenler iade alır.",
-        "cancel":        "İptal",
-        "processing":    "İşleniyor…",
-        "successTitle":  "Öğe Alındı!",
-        "auctionClosed": "Müzayede kapandı · Transfer başlatıldı",
-        "item":          "Öğe",
-        "paid":          "Ödendi",
-        "status":        "Durum",
-        "transferred":   "Cüzdana aktarıldı",
-        "walletNote":    "Öğe Koleksiyonlarım sekmesinde görünecek.",
-        "viewCollect":   "Koleksiyonlarımı Görüntüle"
-      },
-      "createModal": {
-        "title":          "Müzayede Oluştur",
-        "selectItem":     "Öğe Seç",
-        "connectWallet":  "Öğelerinize göz atmak için cüzdan bağlayın",
-        "loadingItems":   "Yükleniyor…",
-        "noItems":        "Sahip olunan öğe bulunamadı",
-        "pricingDuration":"Fiyatlandırma ve Süre",
-        "startPrice":     "Başlangıç Fiyatı (USDC) *",
-        "reservePrice":   "Rezerv Fiyatı (USDC)",
-        "instantBuyPrice":"Anında Satın Al Fiyatı (USDC)",
-        "optional":       "İsteğe bağlı",
-        "leaveBlank":     "Devre dışı bırakmak için boş bırakın",
-        "duration":       "Süre",
-        "dur1Day":        "1 Gün",
-        "dur3Days":       "3 Gün",
-        "dur7Days":       "7 Gün",
-        "freeToList":     "Listelemek ücretsiz · Satışta %20 komisyon",
-        "creating":       "Oluşturuluyor…",
-        "submit":         "Müzayede Oluştur"
-      },
-      "pagination": {
-        "prev":  "Önceki",
-        "next":  "Sonraki",
-        "page":  "Sayfa {{page}} / {{pages}}"
-      }
-    },
-
-    "trades": {
-      "heading":    "Takaslar",
-      "listings":   "liste",
-      "postTrade":  "Takas Yayınla",
-      "noTrades":   "{{filter}} takas yok",
-      "viewDetails":"Ayrıntıları Görüntüle",
-      "trade":      "takas",
-      "yours":      "sizin",
-      "offering":   "Teklif edilen",
-      "wanting":    "İstenen",
-      "makeOffer":  "Teklif yap",
-      "by":         "tarafından",
-      "acceptTrade":"Takası Kabul Et",
-      "cancelTrade":"Takası İptal Et",
-      "rules": {
-        "expiry":    "Listeler 30 gün içinde sona erer",
-        "fee":       "Platform ücreti her iki tarafa da uygulanır",
-        "noNFA":     "NFA'lar takas edilemez — yalnızca satılabilir"
-      },
-      "acceptModal": {
-        "title":          "Takas Teklifi",
-        "postedBy":       "Yayınlayan",
-        "exchangeDetails":"Takas Ayrıntıları",
-        "theyOffer":      "Onlar teklif ediyor",
-        "theyWant":       "Onlar istiyor",
-        "feeNotice":      "Platform ücreti her iki tarafa da uygulanır",
-        "acceptBtn":      "Bu Takası Kabul Et",
-        "confirmTitle":   "Takası Onayla",
-        "trade":          "Takas",
-        "postedByLabel":  "Yayınlayan",
-        "terms":          "Kabul ederek, değişim koşullarını kabul edersiniz. Yayınlayan bildirilecek ve öğeler aktarılmadan önce onaylaması gerekecek.",
-        "back":           "Geri",
-        "sending":        "Gönderiliyor…",
-        "confirm":        "Onayla",
-        "successTitle":   "Teklif Gönderildi!",
-        "notified":       "bildirildi",
-        "successNote":    "Takas yayıncısı teklifinizi inceleyecek ve değişimi düzenleyecektir. Yanıtı için bildirimlerinizi kontrol edin.",
-        "expiry":         "⏱ Teklifler onaylanmazsa 30 gün içinde sona erer.",
-        "close":          "Kapat"
-      },
-      "createModal": {
-        "title":          "Takas Yayınla",
-        "yourItem":       "Öğeniz",
-        "itemNamePlaceholder": "Öğe adı *",
-        "loadingItems":   "Öğeleriniz yükleniyor…",
-        "connectWallet":  "Öğelerinizden seçmek için cüzdan bağlayın",
-        "pickFromItems":  "Veya öğelerinizden seçin (adı otomatik doldurur):",
-        "imageOptional":  "Görsel (isteğe bağlı)",
-        "whatYouWant":    "Ne İstiyorsunuz",
-        "openOffer":      "Açık teklif — diğerlerinin teklif etmesine izin ver",
-        "anyCategory":    "Herhangi bir kategori",
-        "notesLabel":     "Notlar (isteğe bağlı)",
-        "notesPlaceholder":"Takas koşulları, durum vb.",
-        "disclaimer":     "Her iki taraf platform ücreti öder · 30 gün içinde sona erer · NFA'lar takas edilemez",
-        "posting":        "Yayınlanıyor…",
-        "submit":         "Takas Yayınla"
-      },
-      "pagination": {
-        "prev":  "Önceki",
-        "next":  "Sonraki",
-        "page":  "Sayfa {{page}} / {{pages}}"
-      }
-    },
-
-    "quests": {
-      "heading":       "Görev Panosu",
-      "quests":        "görev",
-      "noQuests":      "{{filter}} görev yok",
-      "inGameFeature": "Oyun İçi Özellik",
-      "inGameDesc":    "Satıcılar indirimli komisyon seçtiğinde görevler otomatik olarak oluşturulur. Oyuncular günde 5'e kadar görev tamamlayabilir. Komisyon havuzu alıcı indirimi, oyuncu ödülü ve platform arasında paylaştırılır.",
-      "earnFromQuests":"Görevlerden kazanmak ister misiniz? Oyunu oynayın →",
-      "moneyQuests":   "Para Görevleri (%11 havuz)",
-      "resourceQuests":"Kaynak Görevleri (%20 havuz)",
-      "footerNote1":   "# Birleşik yüklü görevler ayrı tablo tutarları kullanılarak ödenecek.",
-      "footerNote2":   "# Gezegen verileri oyunlar yayına girdiğinde senkronize edilecek.",
-      "inGame":        "Oyun içi",
-      "open":          "Açık",
-      "table": {
-        "questingNo":    "Görev No",
-        "pickupPlanet":  "Alma Gezegeni",
-        "dropOffPlanet": "Bırakma Gezegeni",
-        "itemGoods":     "Öğe / Mal",
-        "commSplit":     "Komisyon Dağılımı",
-        "questingTime":  "Görev Süresi",
-        "assignedTo":    "Atanan"
-      },
-      "comingSoon": {
-        "title":   "Yakında",
-        "desc":    "Oyun içi görev özelliği şu anda geliştirme aşamasındadır. Takipte kalın — doğrudan oyundan ödüller kazanabileceksiniz.",
-        "gotIt":   "Anladım"
-      },
-      "pagination": {
-        "prev":  "Önceki",
-        "next":  "Sonraki",
-        "page":  "Sayfa {{page}} / {{pages}}"
-      }
-    },
-
-    "hire": {
-      "heading":          "Kiralık",
-      "listings":         "liste",
-      "listBtn":          "Listele",
-      "forHireLabel":     "Kiralık",
-      "wantingToHire":    "Kiralamak İstiyor",
-      "noListings":       "{{filter}} liste yok",
-      "lockedTitle":      "HyperTek Gaming içeriği yalnızca görüntüleme amaçlıdır.",
-      "lockedDesc":       "Bu bölüm oyunlar tamamlanana kadar kilitlidir.",
-      "forHireBadge":     "KİRALIK",
-      "wantedBadge":      "KİRALAMAK İSTİYOR",
-      "price":            "Fiyat",
-      "maxDuration":      "Maks Süre",
-      "hireBtn":          "Kirala",
-      "fulfillBtn":       "Talebi Karşıla",
-      "rules": {
-        "durations":   "8s · 1 gün · 3 gün · 1 hafta · 1 ay",
-        "cooldown":    "Bekleme: 2× kiralama süresi",
-        "commission":  "Komisyon: %20",
-        "payment":     "Hyper Bucks veya Malzeme ile öde"
+        "freeToList": "Listelemek ücretsiz",
+        "commission": "Komisyon: Satışta %20"
       },
       "preview": {
         "title": "Oyun İçi Özellik Önizlemesi",
-        "desc":  "Kiralık sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
+        "desc": "Müzayede sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
       },
-      "hireModal": {
-        "hireTitle":     "Uzman Kirala",
-        "fulfillTitle":  "Kiralama Talebini Karşıla",
-        "forHireBadge":  "KİRALIK",
-        "wantedBadge":   "ARANIYOR",
-        "price":         "Fiyat",
-        "duration":      "Süre",
-        "howHire":       "Kiralama nasıl çalışır",
-        "howFulfill":    "Talep karşılama nasıl çalışır",
-        "proceedHire":   "Kiralamaya Devam Et",
-        "offerFulfill":  "Karşılamayı Teklif Et",
-        "commission":    "%20 platform komisyonu · İadeden sonra bekleme süresi uygulanır",
-        "confirmHire":   "Kiralama Onayla",
-        "confirmOffer":  "Teklifi Onayla",
-        "specialist":    "Uzman",
-        "payment":       "Ödeme",
-        "yourOffer":     "Teklifiniz",
-        "durationLabel": "Süre",
-        "commLabel":     "Komisyon",
-        "back":          "Geri",
-        "processing":    "İşleniyor…",
-        "sendOffer":     "Teklif Gönder",
-        "deployedTitle": "Konuşlandırıldı!",
-        "offerSentTitle":"Teklif Gönderildi!",
-        "availableFor":  "Şunun için mevcut",
-        "paid":          "Ödendi",
-        "returnNote":    "Otomatik cezadan kaçınmak için süre bitmeden iade edin. İadeden sonra {{hours}} saatlik bekleme süresi uygulanır.",
-        "close":         "Kapat"
+      "card": {
+        "currentBid": "Mevcut teklif",
+        "endsIn": "Bitiş",
+        "placeBid": "Teklif Ver",
+        "buyNow": "Şimdi Al",
+        "bids": "teklif",
+        "ended": "BİTTİ"
+      },
+      "detail": {
+        "currentBid": "Mevcut teklif",
+        "start": "Başlangıç",
+        "endsIn": "Bitiş",
+        "description": "Açıklama",
+        "recentBids": "Son Teklifler",
+        "anonymous": "Anonim",
+        "placeBid": "Teklif Ver",
+        "buyNow": "Şimdi Al",
+        "buyNowLabel": "Şimdi Al",
+        "bids": "teklif"
+      },
+      "bidModal": {
+        "title": "Teklif Ver",
+        "currentBid": "Mevcut teklif",
+        "minimumBid": "Minimum teklif",
+        "yourBid": "Teklifiniz (USDC)",
+        "minIncrement": "Min artış %5 · Teklifinizden sonraki sonraki minimum: {{next}} USDC",
+        "reviewBid": "Teklifi İncele",
+        "disclaimer": "Kazanan teklif bağlayıcıdır · %20 platform komisyonu",
+        "confirmTitle": "Teklifi Onayla",
+        "item": "Öğe",
+        "yourBidLabel": "Teklifiniz",
+        "youPay": "Kazanırsanız ödersiniz",
+        "outbidNotice": "Biri sizi geçerse hemen bildirim alırsınız. Süre dolduğunda müzayede otomatik kapanır.",
+        "back": "Geri",
+        "confirm": "Onayla — {{amount}} USDC",
+        "placing": "Veriliyor…",
+        "successTitle": "Teklif Verildi!",
+        "highestBidder": "En yüksek teklifi siz verdiniz",
+        "outbidWarning": "Biri sizi geçerse bildirim alacaksınız.",
+        "done": "Tamam",
+        "endsIn": "Bitiş"
+      },
+      "instantBuyModal": {
+        "title": "Şimdi Al — Anında",
+        "buyNowPrice": "Şimdi al fiyatı",
+        "currentBids": "Mevcut teklifler",
+        "notice": "Şimdi almak müzayedeyi hemen bitirir. Öğe cüzdanınıza aktarılır ve diğer tüm teklif verenler iade alır.",
+        "cancel": "İptal",
+        "processing": "İşleniyor…",
+        "successTitle": "Öğe Alındı!",
+        "auctionClosed": "Müzayede kapandı · Transfer başlatıldı",
+        "item": "Öğe",
+        "paid": "Ödendi",
+        "status": "Durum",
+        "transferred": "Cüzdana aktarıldı",
+        "walletNote": "Öğe Koleksiyonlarım sekmesinde görünecek.",
+        "viewCollect": "Koleksiyonlarımı Görüntüle"
       },
       "createModal": {
-        "listTitle":         "Kiralık Listele",
-        "postTitle":         "Kiralama Talebi Yayınla",
-        "forHireBtn":        "Kiralık",
-        "wantingBtn":        "Kiralamak İstiyor",
-        "itemNameHire":      "Uzman / öğe adı *",
-        "itemNameWant":      "Ne kiralamak istiyorsunuz *",
-        "descPlaceholder":   "Açıklama",
-        "categoryPlaceholder":"Kategori (isteğe bağlı)",
-        "paymentType":       "Ödeme Türü",
-        "hyperBucks":        "Hyper Bucks",
-        "materials":         "Malzemeler",
-        "amountLabel":       "Tutar (Hyper Bucks)",
-        "afterCommission":   "%20 komisyon sonrası {{amount}} HB alırsınız",
-        "maxDuration":       "Maks Süre",
-        "disclaimer":        "%20 komisyon · Bekleme = iadeden sonra 2× kiralama süresi",
-        "listing":           "Listeleniyor…",
-        "submit":            "Liste Oluştur"
+        "title": "Müzayede Oluştur",
+        "selectItem": "Öğe Seç",
+        "connectWallet": "Öğelerinize göz atmak için cüzdan bağlayın",
+        "loadingItems": "Yükleniyor…",
+        "noItems": "Sahip olunan öğe bulunamadı",
+        "pricingDuration": "Fiyatlandırma ve Süre",
+        "startPrice": "Başlangıç Fiyatı (USDC) *",
+        "reservePrice": "Rezerv Fiyatı (USDC)",
+        "instantBuyPrice": "Anında Satın Al Fiyatı (USDC)",
+        "optional": "İsteğe bağlı",
+        "leaveBlank": "Devre dışı bırakmak için boş bırakın",
+        "duration": "Süre",
+        "dur1Day": "1 Gün",
+        "dur3Days": "3 Gün",
+        "dur7Days": "7 Gün",
+        "freeToList": "Listelemek ücretsiz · Satışta %20 komisyon",
+        "creating": "Oluşturuluyor…",
+        "submit": "Müzayede Oluştur"
       },
       "pagination": {
-        "prev":  "Önceki",
-        "next":  "Sonraki",
-        "page":  "Sayfa {{page}} / {{pages}}"
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa {{page}} / {{pages}}"
       }
     },
-
+    "trades": {
+      "heading": "Takaslar",
+      "listings": "liste",
+      "postTrade": "Takas Yayınla",
+      "noTrades": "{{filter}} takas yok",
+      "viewDetails": "Ayrıntıları Görüntüle",
+      "trade": "takas",
+      "yours": "sizin",
+      "offering": "Teklif edilen",
+      "wanting": "İstenen",
+      "makeOffer": "Teklif yap",
+      "by": "tarafından",
+      "acceptTrade": "Takası Kabul Et",
+      "cancelTrade": "Takası İptal Et",
+      "rules": {
+        "expiry": "Listeler 30 gün içinde sona erer",
+        "fee": "Platform ücreti her iki tarafa da uygulanır",
+        "noNFA": "NFA'lar takas edilemez — yalnızca satılabilir"
+      },
+      "acceptModal": {
+        "title": "Takas Teklifi",
+        "postedBy": "Yayınlayan",
+        "exchangeDetails": "Takas Ayrıntıları",
+        "theyOffer": "Onlar teklif ediyor",
+        "theyWant": "Onlar istiyor",
+        "feeNotice": "Platform ücreti her iki tarafa da uygulanır",
+        "acceptBtn": "Bu Takası Kabul Et",
+        "confirmTitle": "Takası Onayla",
+        "trade": "Takas",
+        "postedByLabel": "Yayınlayan",
+        "terms": "Kabul ederek, değişim koşullarını kabul edersiniz. Yayınlayan bildirilecek ve öğeler aktarılmadan önce onaylaması gerekecek.",
+        "back": "Geri",
+        "sending": "Gönderiliyor…",
+        "confirm": "Onayla",
+        "successTitle": "Teklif Gönderildi!",
+        "notified": "bildirildi",
+        "successNote": "Takas yayıncısı teklifinizi inceleyecek ve değişimi düzenleyecektir. Yanıtı için bildirimlerinizi kontrol edin.",
+        "expiry": "⏱ Teklifler onaylanmazsa 30 gün içinde sona erer.",
+        "close": "Kapat"
+      },
+      "createModal": {
+        "title": "Takas Yayınla",
+        "yourItem": "Öğeniz",
+        "itemNamePlaceholder": "Öğe adı *",
+        "loadingItems": "Öğeleriniz yükleniyor…",
+        "connectWallet": "Öğelerinizden seçmek için cüzdan bağlayın",
+        "pickFromItems": "Veya öğelerinizden seçin (adı otomatik doldurur):",
+        "imageOptional": "Görsel (isteğe bağlı)",
+        "whatYouWant": "Ne İstiyorsunuz",
+        "openOffer": "Açık teklif — diğerlerinin teklif etmesine izin ver",
+        "anyCategory": "Herhangi bir kategori",
+        "notesLabel": "Notlar (isteğe bağlı)",
+        "notesPlaceholder": "Takas koşulları, durum vb.",
+        "disclaimer": "Her iki taraf platform ücreti öder · 30 gün içinde sona erer · NFA'lar takas edilemez",
+        "posting": "Yayınlanıyor…",
+        "submit": "Takas Yayınla"
+      },
+      "pagination": {
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa {{page}} / {{pages}}"
+      }
+    },
+    "quests": {
+      "heading": "Görev Panosu",
+      "quests": "görev",
+      "noQuests": "{{filter}} görev yok",
+      "inGameFeature": "Oyun İçi Özellik",
+      "inGameDesc": "Satıcılar indirimli komisyon seçtiğinde görevler otomatik olarak oluşturulur. Oyuncular günde 5'e kadar görev tamamlayabilir. Komisyon havuzu alıcı indirimi, oyuncu ödülü ve platform arasında paylaştırılır.",
+      "earnFromQuests": "Görevlerden kazanmak ister misiniz? Oyunu oynayın →",
+      "moneyQuests": "Para Görevleri (%11 havuz)",
+      "resourceQuests": "Kaynak Görevleri (%20 havuz)",
+      "footerNote1": "# Birleşik yüklü görevler ayrı tablo tutarları kullanılarak ödenecek.",
+      "footerNote2": "# Gezegen verileri oyunlar yayına girdiğinde senkronize edilecek.",
+      "inGame": "Oyun içi",
+      "open": "Açık",
+      "table": {
+        "questingNo": "Görev No",
+        "pickupPlanet": "Alma Gezegeni",
+        "dropOffPlanet": "Bırakma Gezegeni",
+        "itemGoods": "Öğe / Mal",
+        "commSplit": "Komisyon Dağılımı",
+        "questingTime": "Görev Süresi",
+        "assignedTo": "Atanan"
+      },
+      "comingSoon": {
+        "title": "Yakında",
+        "desc": "Oyun içi görev özelliği şu anda geliştirme aşamasındadır. Takipte kalın — doğrudan oyundan ödüller kazanabileceksiniz.",
+        "gotIt": "Anladım"
+      },
+      "pagination": {
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa {{page}} / {{pages}}"
+      },
+      "buyer": "Alıcı",
+      "player": "Oyuncu",
+      "platform": "Platform",
+      "status": {
+        "open": "Açık",
+        "accepted": "Kabul Edildi",
+        "completed": "Tamamlandı",
+        "cancelled": "İptal Edildi"
+      },
+      "type": {
+        "money": "Para",
+        "resources": "Kaynaklar"
+      }
+    },
+    "hire": {
+      "heading": "Kiralık",
+      "listings": "liste",
+      "listBtn": "Listele",
+      "forHireLabel": "Kiralık",
+      "wantingToHire": "Kiralamak İstiyor",
+      "noListings": "{{filter}} liste yok",
+      "lockedTitle": "HyperTek Gaming içeriği yalnızca görüntüleme amaçlıdır.",
+      "lockedDesc": "Bu bölüm oyunlar tamamlanana kadar kilitlidir.",
+      "forHireBadge": "KİRALIK",
+      "wantedBadge": "KİRALAMAK İSTİYOR",
+      "price": "Fiyat",
+      "maxDuration": "Maks Süre",
+      "hireBtn": "Kirala",
+      "fulfillBtn": "Talebi Karşıla",
+      "rules": {
+        "durations": "8s · 1 gün · 3 gün · 1 hafta · 1 ay",
+        "cooldown": "Bekleme: 2× kiralama süresi",
+        "commission": "Komisyon: %20",
+        "payment": "Hyper Bucks veya Malzeme ile öde"
+      },
+      "preview": {
+        "title": "Oyun İçi Özellik Önizlemesi",
+        "desc": "Kiralık sistemi lansmanda oyun içinde tamamen canlı olacak. Burada gösterilen öğeler yatırımcı/kullanıcı vitrini için tohumlanmış örneklerdir."
+      },
+      "hireModal": {
+        "hireTitle": "Uzman Kirala",
+        "fulfillTitle": "Kiralama Talebini Karşıla",
+        "forHireBadge": "KİRALIK",
+        "wantedBadge": "ARANIYOR",
+        "price": "Fiyat",
+        "duration": "Süre",
+        "howHire": "Kiralama nasıl çalışır",
+        "howFulfill": "Talep karşılama nasıl çalışır",
+        "proceedHire": "Kiralamaya Devam Et",
+        "offerFulfill": "Karşılamayı Teklif Et",
+        "commission": "%20 platform komisyonu · İadeden sonra bekleme süresi uygulanır",
+        "confirmHire": "Kiralama Onayla",
+        "confirmOffer": "Teklifi Onayla",
+        "specialist": "Uzman",
+        "payment": "Ödeme",
+        "yourOffer": "Teklifiniz",
+        "durationLabel": "Süre",
+        "commLabel": "Komisyon",
+        "back": "Geri",
+        "processing": "İşleniyor…",
+        "sendOffer": "Teklif Gönder",
+        "deployedTitle": "Konuşlandırıldı!",
+        "offerSentTitle": "Teklif Gönderildi!",
+        "availableFor": "Şunun için mevcut",
+        "paid": "Ödendi",
+        "returnNote": "Otomatik cezadan kaçınmak için süre bitmeden iade edin. İadeden sonra {{hours}} saatlik bekleme süresi uygulanır.",
+        "close": "Kapat"
+      },
+      "createModal": {
+        "listTitle": "Kiralık Listele",
+        "postTitle": "Kiralama Talebi Yayınla",
+        "forHireBtn": "Kiralık",
+        "wantingBtn": "Kiralamak İstiyor",
+        "itemNameHire": "Uzman / öğe adı *",
+        "itemNameWant": "Ne kiralamak istiyorsunuz *",
+        "descPlaceholder": "Açıklama",
+        "categoryPlaceholder": "Kategori (isteğe bağlı)",
+        "paymentType": "Ödeme Türü",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Malzemeler",
+        "amountLabel": "Tutar (Hyper Bucks)",
+        "afterCommission": "%20 komisyon sonrası {{amount}} HB alırsınız",
+        "maxDuration": "Maks Süre",
+        "disclaimer": "%20 komisyon · Bekleme = iadeden sonra 2× kiralama süresi",
+        "listing": "Listeleniyor…",
+        "submit": "Liste Oluştur"
+      },
+      "pagination": {
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa {{page}} / {{pages}}"
+      }
+    },
     "bounty": {
-      "heading":       "Ödül Panosu",
-      "contracts":     "sözleşme",
-      "contractsPlural":"sözleşme",
-      "noContracts":   "{{filter}} sözleşme yok",
-      "noContractsNote":"Ödüller oyun oyuncuları ve oyun sistemi tarafından yayınlanır",
-      "expiresIn":     "{{days}} gün içinde sona erer",
+      "heading": "Ödül Panosu",
+      "contracts": "sözleşme",
+      "contractsPlural": "sözleşme",
+      "noContracts": "{{filter}} sözleşme yok",
+      "noContractsNote": "Ödüller oyun oyuncuları ve oyun sistemi tarafından yayınlanır",
+      "expiresIn": "{{days}} gün içinde sona erer",
       "inGameNotice": {
         "title": "Oyun İçi Özellik — Yalnızca Görüntüleme",
-        "desc":  "Ödüller oyun oyuncuları ve oyun sistemi tarafından oluşturulur. Ödülleri kabul etmek ve tamamlamak yalnızca oyun içinde gerçekleşir. Bu pano şeffaflık için ve yeni oyuncuları katılmaya teşvik etmek için gösterilmektedir."
+        "desc": "Ödüller oyun oyuncuları ve oyun sistemi tarafından oluşturulur. Ödülleri kabul etmek ve tamamlamak yalnızca oyun içinde gerçekleşir. Bu pano şeffaflık için ve yeni oyuncuları katılmaya teşvik etmek için gösterilmektedir."
       },
       "rules": {
-        "battle":     "Savaş oyun içinde otomatik olarak çözülür",
+        "battle": "Savaş oyun içinde otomatik olarak çözülür",
         "commission": "Ödül üzerinde %20 platform komisyonu",
-        "expiry":     "Sözleşmeler 30 gün içinde sona erer"
+        "expiry": "Sözleşmeler 30 gün içinde sona erer"
       },
       "table": {
-        "bountyNo":   "Ödül No",
-        "target":     "Hedef (Vurulacak)",
-        "reward":     "Ödül",
-        "postedBy":   "Yayınlayan",
-        "claimedBy":  "Talep Eden",
-        "status":     "Durum",
-        "netHB":      "{{amount}} HB net"
+        "bountyNo": "Ödül No",
+        "target": "Hedef (Vurulacak)",
+        "reward": "Ödül",
+        "postedBy": "Yayınlayan",
+        "claimedBy": "Talep Eden",
+        "status": "Durum",
+        "netHB": "{{amount}} HB net"
       },
       "pagination": {
-        "prev":  "Önceki",
-        "next":  "Sonraki",
-        "page":  "Sayfa {{page}} / {{pages}}"
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "page": "Sayfa {{page}} / {{pages}}"
       }
     },
-
     "common": {
-      "prev":           "Önceki",
-      "next":           "Sonraki",
-      "pageOf":         "Sayfa {{page}} / {{pages}}",
-      "back":           "Geri",
-      "close":          "Kapat",
-      "cancel":         "İptal",
-      "loading":        "Yükleniyor…",
-      "connectWallet":  "Önce cüzdanınızı bağlayın",
-      "loginFirst":     "Önce giriş yapın"
+      "prev": "Önceki",
+      "next": "Sonraki",
+      "pageOf": "Sayfa {{page}} / {{pages}}",
+      "back": "Geri",
+      "close": "Kapat",
+      "cancel": "İptal",
+      "loading": "Yükleniyor…",
+      "connectWallet": "Önce cüzdanınızı bağlayın",
+      "loginFirst": "Önce giriş yapın"
     }
+  },
+  "musicPlayer": {
+    "title": "Müzik Çalar",
+    "playing": "Çalma",
+    "sound": "Ses",
+    "ambientDesc": "Pazar için yerleşik ortam müziği. Döngüde oynatılır.",
+    "playAmbient": "Ambiyansı Çal",
+    "pauseAmbient": "Ambiyansı Duraklat",
+    "spotifyDesc": "Herhangi bir Spotify parçasını, çalma listesini veya albüm bağlantısını yapıştırın.",
+    "loadSpotify": "Spotify'ı yükleyin",
+    "soundcloudDesc": "Herhangi bir SoundCloud parçasını veya çalma listesi bağlantısını yapıştırın.",
+    "loadSoundCloud": "SoundCloud'u yükleyin",
+    "changeLink": "Bağlantıyı değiştir"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Kartla Öde",
+      "amount": "Tutar:",
+      "cancel": "İptal",
+      "processing": "İşleniyor...",
+      "pay": "Ödeme"
+    },
+    "nav": {
+      "backToMarketplace": "Marketplace'e Geri Dön",
+      "backToCollections": "Geri Dön Koleksiyonlar",
+      "offers": "Teklifler",
+      "marketplace": "Pazar Yeri",
+      "auction": "Açık Artırma",
+      "trade": "Ticaret",
+      "detail": "{{type}} Detay",
+      "buy": "Satın Al {{type}}"
+    },
+    "marketplace": {
+      "listed": "Listelendi",
+      "youOwn": "Buna Sahipsiniz",
+      "notMinted": "Basılmadı henüz",
+      "ownedBy": "Sahip olduğu",
+      "platform": "Platform",
+      "noDesc": "Bu ürün için açıklama sağlanmadı.",
+      "price": "Fiyat",
+      "minBuyback": "Minimum Geri Alım Garantisi",
+      "reservePrice": "Rezerv Fiyatı",
+      "buybackNote": "Bu varlık minimum geri satın alma değerinin altında satılamaz.",
+      "networkNote": "Temelde USDC · Temel ETH gaz için gereklidir (yalnızca cüzdan ödemeleri)",
+      "buyWithCard": "Kartla Satın Al",
+      "makeOffer": "Teklif Yap",
+      "processing": "İşleniyor...",
+      "connectWallet": "Cüzdanı Bağlayın",
+      "buyNow": "Hemen Satın Al",
+      "listNow": "Şimdi Listele",
+      "yourListed": "{{type}}'niz (Listelendi)",
+      "notAvailable": "Mevcut Değil"
+    },
+    "fundModal": {
+      "title": "Yetersiz USDC",
+      "youNeed": "İhtiyacınız var",
+      "butHave": "ancak cüzdanınızda yalnızca",
+      "desc2": "Cüzdanınıza Transak aracılığıyla kredi veya banka kartıyla anında para yatırın, ardından geri gelerek işlemi tamamlayın satın alın.",
+      "fundBtn": "Kartla Fon Cüzdanı (Transak)",
+      "cancel": "İptal"
+    },
+    "gasModal": {
+      "title": "Gaz için ETH Gerekli",
+      "mainnetNote": "Bas Mainnet'tesiniz. Coinbase'den az miktarda ETH (≈ 1–2 $) veya Bridge.base.org aracılığıyla Ethereum'dan köprü satın alın.",
+      "testnetNote": "Base Sepolia Testnet'tesiniz. Musluktan ücretsiz test ETH alın.",
+      "faucetBtn": "Testnet ETH Alın (Musluk)",
+      "bridgeBtn": "ETH'den Üsse Köprü",
+      "close": "Kapat"
+    },
+    "confirmModal1": {
+      "title": "İşlemi Onayla",
+      "listPrice": "Liste Fiyatı",
+      "platformFee": "Platform Ücreti (%10)",
+      "total": "Toplam",
+      "cancel": "İptal",
+      "continue": "Devam"
+    },
+    "confirmModal2": {
+      "setPrice": "Listeleme Fiyatınızı Belirleyin (USDC)",
+      "willList": "✓ {{price}} adresinde listelenecek USDC",
+      "price": "Fiyat",
+      "cancel": "İptal",
+      "processing": "İşleniyor...",
+      "confirm": "Onayla"
+    },
+    "offers": {
+      "noOffers": "Henüz teklif yok",
+      "offer": "teklif",
+      "offers": "teklifler",
+      "noOffersTitle": "Şu anda teklif yok",
+      "noOffersDesc": "İlk teklif veren siz olun teklif",
+      "colPrice": "Fiyat",
+      "colStatus": "Durum",
+      "colFrom": "Başlangıç",
+      "colExpires": "Sona eriyor",
+      "colAction": "İşlem",
+      "accept": "Kabul et",
+      "reject": "Reddet",
+      "cancel": "İptal",
+      "expired": "Süresi doldu",
+      "completePurchase": "Tamamlandı Satın Al"
+    },
+    "auction": {
+      "loading": "Açık artırma verileri yükleniyor…",
+      "active": "Aktif Açık Artırma",
+      "startPrice": "Başlangıç Fiyatı",
+      "currentBid": "Geçerli Teklif",
+      "noBids": "Henüz teklif yok",
+      "instantBuy": "Anında Alım",
+      "reservePrice": "Rezerv Fiyatı",
+      "bidHistory": "Teklif Geçmişi",
+      "minBid": "Min teklif:",
+      "bidding": "Teklif Verme…",
+      "placeBid": "Teklif Ver",
+      "connectWallet": "Teklif vermek için cüzdanınızı bağlayın",
+      "ownerNote": "Öğeniz açık artırmada listelenir. Teklifler geldikçe burada görünecek.",
+      "noAuction": "Bu ürün için aktif açık artırma yok",
+      "ownerSetup": "Koleksiyonlarınıza gidin ve açık artırma oluşturmak için Liste'ye tıklayın.",
+      "notAvailable": "Bu öğenin şu anda açık artırması yok."
+    },
+    "trade": {
+      "loading": "Ticari listeler yükleniyor…",
+      "active": "aktif ticari liste",
+      "actives": "aktif ticaret listelemeler",
+      "offering": "Teklif",
+      "wants": "İsteniyor",
+      "openOffer": "Açık teklif",
+      "by": "Tarafından",
+      "proposeTrade": "Ticaret Teklif Et →",
+      "noTrades": "Aktif ticari listeleme yok",
+      "ownerSetup": "Koleksiyonlarınıza gidin ve bir takas ayarlamak için Liste'ye tıklayın.",
+      "notAvailable": "Sahibin bunun için açık ticari ilanı yok item."
+    },
+    "successModal": {
+      "title": "Satın Alma Başarılı!",
+      "desc": "{{name}} satın alındı. NFT'niz kısa sürede cüzdanınıza aktarılacaktır.",
+      "note": "Transfer sistemimiz aracılığıyla otomatik olarak gerçekleştirilir.",
+      "viewProfile": "Profilimde Görüntüle",
+      "continueShopping": "Alışverişe Devam Et"
+    },
+    "transferFailed": {
+      "title": "Ödeme Alındı ​​— Transfer Bekleniyor",
+      "desc": "Ödemeniz başarılı oldu ancak NFT transferi bir sorunla karşılaştı. Paranız güvende — ekibimiz transferi manuel olarak tamamlayacak.",
+      "viewProfile": "Profilimi Görüntüle",
+      "dismiss": "Kapat"
+    },
+    "priceHistory": {
+      "title": "Fiyat Geçmişi",
+      "subtitle": "Bunun için geçmiş satış fiyatları NFT",
+      "loading": "Yükleniyor...",
+      "noSales": "Henüz kaydedilen satış yok",
+      "noSalesNote": "Fiyat geçmişi ilk satıştan sonra görünüyor"
+    }
+  },
+  "makeOffer": {
+    "back": "Geri",
+    "floor": "Kat",
+    "title": "Teklif Yap",
+    "yourOffer": "Teklifiniz (USDC)",
+    "expiresIn": "Teklifin Süresi Bitiyor",
+    "youPay": "Ödeyeceksiniz",
+    "submitting": "Gönderiliyor...",
+    "submit": "Teklif Gönder",
+    "terms": "Bu teklifi göndererek, Hyper Tek'in şunları kabul etmiş olursunuz: Hizmet Şartları.",
+    "expiry": {
+      "6h": "6 Saat",
+      "12h": "12 Saat",
+      "1d": "1 Gün",
+      "3d": "3 Gün",
+      "7d": "7 Gün",
+      "1mo": "1 Ay"
+    },
+    "success": {
+      "title": "Teklif Gönderildi!",
+      "desc": "{{name}} için {{price}} USDC teklifiniz şu adrese gönderildi: sahibi.",
+      "expires": "Son tarihi {{duration}}",
+      "backToNft": "NFT'ye geri dön",
+      "goToMarketplace": "Pazaryerine git"
+    },
+    "error": {
+      "loginRequired": "Teklif yapmak için lütfen giriş yapın",
+      "submitFailed": "Teklif gönderilemedi. Lütfen tekrar deneyin."
+    }
+  },
+  "paymentError": {
+    "message": "İsteğiniz başarılı olmadı",
+    "goHome": "Ana Sayfaya Git"
   }
 }

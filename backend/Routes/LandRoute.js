@@ -9,11 +9,11 @@ import {
 
 const Landrouter = express.Router();
 
-// ✅ Static routes first
+// Static routes first
 Landrouter.post("/Land", createItem);
 Landrouter.get("/getLand", getItems);
 
-// ✅ Dynamic routes last
+// Dynamic routes last
 Landrouter.get("/:id", getItemById);
 Landrouter.put("/:id", updateItem);
 Landrouter.delete("/:id", deleteItem);

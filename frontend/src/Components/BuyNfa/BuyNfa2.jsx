@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Chart as ChartJS,
   Title,
@@ -17,6 +18,7 @@ import { BACKEND_BASE_URL } from "../../Config.js";
 ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale, Filler);
 
 function PriceHistory({ subId }) {
+  const { t } = useTranslation();
   const [history, setHistory] = useState([]);
   const [loading, setLoading]  = useState(true);
   const [noData, setNoData]    = useState(false);
@@ -108,8 +110,8 @@ function PriceHistory({ subId }) {
   return (
     <div className="mt-8 w-full">
       <div className="mb-3">
-        <h2 className="text-white font-semibold text-base">Price History</h2>
-        <p className="text-white/30 text-xs mt-0.5">Historical sale prices for this NFT</p>
+        <h2 className="text-white font-semibold text-base">{t("buyNfa.priceHistory.title", "Price History")}</h2>
+        <p className="text-white/30 text-xs mt-0.5">{t("buyNfa.priceHistory.subtitle", "Historical sale prices for this NFT")}</p>
       </div>
 
       <div
@@ -117,11 +119,11 @@ function PriceHistory({ subId }) {
         style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
       >
         {loading ? (
-          <div className="h-48 flex items-center justify-center text-white/30 text-sm">Loading...</div>
+          <div className="h-48 flex items-center justify-center text-white/30 text-sm">{t("buyNfa.priceHistory.loading", "Loading...")}</div>
         ) : noData || history.length === 0 ? (
           <div className="h-48 flex flex-col items-center justify-center gap-2">
-            <p className="text-white/30 text-sm">No sales recorded yet</p>
-            <p className="text-white/20 text-xs">Price history appears after the first sale</p>
+            <p className="text-white/30 text-sm">{t("buyNfa.priceHistory.noSales", "No sales recorded yet")}</p>
+            <p className="text-white/20 text-xs">{t("buyNfa.priceHistory.noSalesNote", "Price history appears after the first sale")}</p>
           </div>
         ) : (
           <div className="h-56">

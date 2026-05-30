@@ -2,35 +2,48 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 
+// countryCode = ISO 3166-1 alpha-2 used by flagcdn.com
 const LANGUAGES = [
-  { code: "en",    label: "EN",    full: "English",          flag: "🇺🇸" },
-  { code: "fr",    label: "FR",    full: "Français",         flag: "🇫🇷" },
-  { code: "it",    label: "IT",    full: "Italiano",         flag: "🇮🇹" },
-  { code: "de",    label: "DE",    full: "Deutsch",          flag: "🇩🇪" },
-  { code: "es",    label: "ES",    full: "Español",          flag: "🇪🇸" },
-  { code: "ru",    label: "RU",    full: "Русский",          flag: "🇷🇺" },
-  { code: "ko",    label: "KO",    full: "한국어",            flag: "🇰🇷" },
-  { code: "ja",    label: "JA",    full: "日本語",            flag: "🇯🇵" },
-  { code: "pt",    label: "PT",    full: "Português",        flag: "🇧🇷" },
-  { code: "ar",    label: "AR",    full: "العربية",          flag: "🇸🇦" },
-  { code: "ms",    label: "MS",    full: "Melayu",           flag: "🇲🇾" },
-  { code: "no",    label: "NO",    full: "Norsk",            flag: "🇳🇴" },
-  { code: "nl",    label: "NL",    full: "Nederlands",       flag: "🇳🇱" },
-  { code: "th",    label: "TH",    full: "ไทย",              flag: "🇹🇭" },
-  { code: "tr",    label: "TR",    full: "Türkçe",           flag: "🇹🇷" },
-  { code: "vi",    label: "VI",    full: "Việt",             flag: "🇻🇳" },
-  { code: "id",    label: "ID",    full: "Indonesia",        flag: "🇮🇩" },
-  { code: "zh",    label: "ZH",    full: "简体中文",          flag: "🇨🇳" },
-  { code: "sv",    label: "SV",    full: "Svenska",          flag: "🇸🇪" },
-  { code: "he",    label: "HE",    full: "עברית",            flag: "🇮🇱" },
-  { code: "da",    label: "DA",    full: "Dansk",            flag: "🇩🇰" },
-  { code: "ro",    label: "RO",    full: "Română",           flag: "🇷🇴" },
-  { code: "fil",   label: "FIL",   full: "Filipino",         flag: "🇵🇭" },
-  { code: "zh-TW", label: "ZHT",   full: "繁體中文",          flag: "🇹🇼" },
-  { code: "hi",    label: "HI",    full: "हिंदी",             flag: "🇮🇳" },
-  { code: "pl",    label: "PL",    full: "Polski",           flag: "🇵🇱" },
-  { code: "el",    label: "EL",    full: "Ελληνικά",         flag: "🇬🇷" },
+  { code: "en-GB", label: "EN",    full: "English (UK)",      countryCode: "gb" },
+  { code: "en-US", label: "EN",    full: "English (US)",      countryCode: "us" },
+  { code: "fr",    label: "FR",    full: "Français",         countryCode: "fr" },
+  { code: "it",    label: "IT",    full: "Italiano",         countryCode: "it" },
+  { code: "de",    label: "DE",    full: "Deutsch",          countryCode: "de" },
+  { code: "es",    label: "ES",    full: "Español",          countryCode: "es" },
+  { code: "ru",    label: "RU",    full: "Русский",          countryCode: "ru" },
+  { code: "ko",    label: "KO",    full: "한국어",            countryCode: "kr" },
+  { code: "ja",    label: "JA",    full: "日本語",            countryCode: "jp" },
+  { code: "pt",    label: "PT",    full: "Português",        countryCode: "br" },
+  { code: "ar",    label: "AR",    full: "العربية",          countryCode: "sa" },
+  { code: "ms",    label: "MS",    full: "Melayu",           countryCode: "my" },
+  { code: "no",    label: "NO",    full: "Norsk",            countryCode: "no" },
+  { code: "nl",    label: "NL",    full: "Nederlands",       countryCode: "nl" },
+  { code: "th",    label: "TH",    full: "ไทย",              countryCode: "th" },
+  { code: "tr",    label: "TR",    full: "Türkçe",           countryCode: "tr" },
+  { code: "vi",    label: "VI",    full: "Việt",             countryCode: "vn" },
+  { code: "id",    label: "ID",    full: "Indonesia",        countryCode: "id" },
+  { code: "zh",    label: "ZH",    full: "简体中文",          countryCode: "cn" },
+  { code: "sv",    label: "SV",    full: "Svenska",          countryCode: "se" },
+  { code: "he",    label: "HE",    full: "עברית",            countryCode: "il" },
+  { code: "da",    label: "DA",    full: "Dansk",            countryCode: "dk" },
+  { code: "ro",    label: "RO",    full: "Română",           countryCode: "ro" },
+  { code: "fil",   label: "FIL",   full: "Filipino",         countryCode: "ph" },
+  { code: "zh-TW", label: "ZHT",   full: "繁體中文",          countryCode: "tw" },
+  { code: "hi",    label: "HI",    full: "हिंदी",             countryCode: "in" },
+  { code: "pl",    label: "PL",    full: "Polski",           countryCode: "pl" },
+  { code: "el",    label: "EL",    full: "Ελληνικά",         countryCode: "gr" },
 ];
+
+const FlagImg = ({ countryCode, size = 20 }) => (
+  <img
+    src={`https://flagcdn.com/w${size}/${countryCode}.png`}
+    srcSet={`https://flagcdn.com/w${size * 2}/${countryCode}.png 2x`}
+    width={size}
+    height={Math.round(size * 0.75)}
+    alt=""
+    style={{ objectFit: "cover", borderRadius: 2, display: "block", flexShrink: 0 }}
+  />
+);
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -39,7 +52,7 @@ export default function LanguageSwitcher() {
 
   const current =
     LANGUAGES.find((l) => l.code === i18n.language) ||
-    LANGUAGES.find((l) => i18n.language?.startsWith(l.code)) ||
+    (i18n.language?.startsWith("en") ? LANGUAGES[0] : undefined) ||
     LANGUAGES[0];
 
   useEffect(() => {
@@ -65,7 +78,7 @@ export default function LanguageSwitcher() {
           border: "1px solid rgba(255,255,255,0.12)",
         }}
       >
-        <span>{current.flag}</span>
+        <FlagImg countryCode={current.countryCode} size={20} />
         <span className="hidden sm:block">{current.label}</span>
         <ChevronDown
           className={`w-3.5 h-3.5 text-white/50 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -105,7 +118,7 @@ export default function LanguageSwitcher() {
                   e.currentTarget.style.background = "transparent";
               }}
             >
-              <span className="text-base">{lang.flag}</span>
+              <FlagImg countryCode={lang.countryCode} size={20} />
               <span className="text-sm font-medium">{lang.full}</span>
             </button>
           ))}

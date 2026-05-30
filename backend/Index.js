@@ -40,6 +40,7 @@ import ArtistRouter from "./Routes/ArtistRoute.js";
 import BuybackRouter from "./Routes/BuybackRoute.js";
 import MarketListingRouter from "./Routes/MarketListingRoute.js";
 import chatbotRouter from "./Routes/chatbot.js";
+import NotificationRouter from "./Routes/NotificationRoute.js";
 import { socketHandler } from "./socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -55,7 +56,7 @@ const app = express();
 // ✨ Create HTTP server for Socket.IO
 const server = http.createServer(app);
 
-// ✅ FIXED: Changed https to http for localhost
+// FIXED: Changed https to http for localhost
 const io = new Server(server, {
   cors: {
     origin: [
@@ -81,7 +82,7 @@ socketHandler(io);
 // Middleware
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ CORS Configuration
+// CORS Configuration
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -100,7 +101,7 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        console.log("❌ CORS blocked origin:", origin);
+        console.log(" CORS blocked origin:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -113,7 +114,7 @@ app.use(
   try {
     await DBConnections();
   } catch (error) {
-    console.error("❌ Database connection error:", error);
+    console.error(" Database connection error:", error);
   }
 })();
 
@@ -168,6 +169,7 @@ app.use("/api/v1/kyc", KYCRouter);
 app.use("/api/v1/buyback", BuybackRouter);
 app.use("/api/v1/listings", MarketListingRouter);
 app.use("/api/v1/chatbot", chatbotRouter);
+app.use("/api/v1/notifications", NotificationRouter);
 
 // Health check
 app.get("/health", (req, res) => {

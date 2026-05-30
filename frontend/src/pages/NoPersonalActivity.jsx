@@ -5,8 +5,10 @@ import { FiSearch } from "react-icons/fi";
 import noActivity1 from "../assets/images/NoPersonalActivity/noActivity1.png";
 import noActivity2 from "../assets/images/NoPersonalActivity/noActivity2.png";
 import GlowingOrb from "../Components/Common/BgColoring";
+import { useTranslation } from "react-i18next";
 
 function NoPersonalActivity() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="min-h-screen bg-transparent px-4 sm:px-6 relative z-10 lg:px-8">
@@ -24,20 +26,16 @@ function NoPersonalActivity() {
             w-full lg:w-[902px] max-w-[90%] lg:max-w-none"
             >
               <h1
-                className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px] 
+                className="font-inter font-semibold text-2xl md:text-3xl lg:text-[35px]
               leading-tight text-white mb-2 lg:mb-0"
               >
-                A New Era Dawns in Hyper Tek
+                {t("marketplace.banner.defaultHeading", "A New Era Dawns in Hyper Tek")}
               </h1>
               <p
-                className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px] 
+                className="font-inter hidden md:block font-medium text-sm md:text-base lg:text-[18px]
   leading-relaxed text-white"
               >
-                It's the start of a living, breathing universe where every
-                decision shapes the journey. Whether you're racing at light
-                speed, forging alliances in the Overlord Realm, or uncovering
-                secrets in HyperQuest, this is your chance to leave your mark on
-                the story.
+                {t("marketplace.banner.defaultDesc", "It's the start of a living, breathing universe where every decision shapes the journey. Whether you're racing at light speed, forging alliances in the Overlord Realm, or uncovering secrets in HyperQuest, this is your chance to leave your mark on the story.")}
               </p>
             </div>
 

@@ -2,86 +2,702 @@
   "marketplace": {
     "sectionLabel": "Piață",
     "searchPlaceholder": "Caută...",
-    "tabs": { "overview": "Prezentare generală", "nfa101": "NFAs / NFCs / NFTs", "general": "Piața", "auctions": "Licitații", "trades": "Schimburi", "quests": "Misiuni", "hire": "De închiriat", "bounty": "Recompense" },
+    "tabs": {
+      "overview": "Prezentare generală",
+      "nfa101": "NFAs / NFCs / NFTs",
+      "general": "Piața",
+      "auctions": "Licitații",
+      "trades": "Schimburi",
+      "quests": "Misiuni",
+      "hire": "De închiriat",
+      "bounty": "Recompense"
+    },
     "banner": {
       "defaultHeading": "O Nouă Eră se Naște în Hyper Tek",
-      "defaultDesc": "Este începutul unui univers viu și respirant unde fiecare decizie modelează călătoria.",
-      "stats": { "totalItems": "Total Articole", "totalBuys": "Total Cumpărări", "listed": "Listate", "collections": "Colecții" },
-      "soundOn": "Sunet Activat", "soundOff": "Sunet Dezactivat"
+      "defaultDesc": "Este începutul unui univers viu, care respira, în care fiecare decizie modelează călătoria. Indiferent dacă concurezi cu viteza luminii, faci alianțe în Tărâmul Overlord sau descoperi secrete în HyperQuest, aceasta este șansa ta de a-ți lăsa amprenta asupra poveștii.",
+      "stats": {
+        "totalItems": "Total Articole",
+        "totalBuys": "Total Cumpărări",
+        "listed": "Listate",
+        "collections": "Colecții"
+      },
+      "soundOn": "Sunet Activat",
+      "soundOff": "Sunet Dezactivat"
     },
     "bottomBar": {
       "learnLabel": "Învață despre NFAs / NFCs",
       "educationPanel": "Panoul Educațional HyperTek",
       "footerNote": "Acest panou este pentru referință rapidă. Vizitați fila NFAs / NFCs 101 pentru conținut educațional complet.",
       "facts": [
-        { "label": "NFA", "desc": "Activ exclusiv Hypertek. Cele mai mari bonusuri în joc. Valoare minimă garantată de răscumpărare care crește cu fiecare vânzare." },
-        { "label": "NFC", "desc": "Creat de Hypertek sau jucători licențiați. Bonusuri în joc incluse. Răscumpărare minimă garantată." },
-        { "label": "NFT", "desc": "Colecționar creat de jucători. Fără bonusuri în joc. Fără garanție de răscumpărare. Comercializabil pe piață." },
-        { "label": "Comision", "desc": "Taxă platformă 20% la toate vânzările. Vânzătorul primește 80%. Royalty artist 4% la revânzări." },
-        { "label": "Creștere Răscumpărare", "desc": "+5% din fiecare preț de revânzare se adaugă la valoarea minimă de răscumpărare a activului." },
-        { "label": "Portofel Custodial", "desc": "HyperTek creează automat un portofel cripto pentru tine la înregistrare." }
+        {
+          "label": "NFA",
+          "desc": "Activ exclusiv Hypertek. Cele mai mari bonusuri în joc. Valoare minimă garantată de răscumpărare care crește cu fiecare vânzare."
+        },
+        {
+          "label": "NFC",
+          "desc": "Creat de Hypertek sau jucători licențiați. Bonusuri în joc incluse. Răscumpărare minimă garantată."
+        },
+        {
+          "label": "NFT",
+          "desc": "Colecționar creat de jucători. Fără bonusuri în joc. Fără garanție de răscumpărare. Comercializabil pe piață."
+        },
+        {
+          "label": "Comision",
+          "desc": "Taxă platformă 20% la toate vânzările. Vânzătorul primește 80%. Royalty artist 4% la revânzări."
+        },
+        {
+          "label": "Creștere Răscumpărare",
+          "desc": "+5% din fiecare preț de revânzare se adaugă la valoarea minimă de răscumpărare a activului."
+        },
+        {
+          "label": "Portofel Custodial",
+          "desc": "HyperTek creează automat un portofel cripto pentru tine la înregistrare."
+        }
       ]
     },
     "overview": {
-      "heading": "Prezentare Generală", "subtitle": "Bine ați venit la Piața HyperTek. Selectați o funcție pentru a afla mai multe.",
+      "heading": "Prezentare Generală",
+      "subtitle": "Bine ați venit la Piața HyperTek. Selectați o funcție pentru a afla mai multe.",
       "features": [
-        { "label": "NFAs / NFCs / NFTs", "tagline": "Nou în activele Web3? Începe aici", "details": ["NFAs sunt articole emise de Hypertek cu preț garantat de răscumpărare.", "NFCs sunt articole de jucători licențiați cu bonusuri în joc.", "NFTs sunt colecționare create de utilizatori."], "cta": "Învață Bazele" },
-        { "label": "Piața", "tagline": "Cumpără și vinde active de joc instant", "details": ["Răsfoiți un catalog larg de NFAs, NFCs și NFTs.", "Filtrați după categorie, raritate sau interval de prețuri.", "Listele sunt îndeplinite pe lanț pentru transferuri instant."], "cta": "Explorați Piața" },
-        { "label": "Licitații", "tagline": "Concurați pentru articole exclusive", "details": ["Licitați pentru active rare disponibile numai prin licitații limitate în timp.", "Un cronometru live arată exact cât timp a mai rămas.", "Depășiți-i pe alții pentru a asigura articole legendare."], "cta": "Vezi Licitații" },
-        { "label": "Schimburi", "tagline": "Schimbați active peer-to-peer, fără intermediar", "details": ["Propuneți sau acceptați schimburi directe de active cu alți jucători.", "Stabiliți singur termenii.", "Răsfoiți oferte deschise sau publicați-vă propria ofertă."], "cta": "Explorați Schimburi" },
-        { "label": "Misiuni", "tagline": "Completați misiuni, câștigați recompense exclusive", "details": ["Preluați misiuni pentru a câștiga recompense exclusive.", "Fiecare misiune are obiective unice.", "Construiți-vă colecția strategic."], "cta": "Explorați Misiuni" },
-        { "label": "De închiriat", "tagline": "Împrumutați active sau câștigați din ale voastre", "details": ["Închiriați specialiști puternici pentru o singură misiune.", "Listați propriile active inactive pentru închiriere.", "Durate flexibile — orar, zilnic sau per misiune."], "cta": "Vezi De închiriat" },
-        { "label": "Recompense", "tagline": "Vânați ținte, revendicați recompense", "details": ["Acceptați recompense postate de alți jucători sau sistem.", "Urcați în clasamentul de recompense.", "Postați propriile recompense pentru a recruta jucători."], "cta": "Vezi Recompense" }
+        {
+          "label": "NFAs / NFCs / NFTs",
+          "tagline": "Nou în activele Web3? Începe aici",
+          "details": [
+            "NFAs sunt articole emise de Hypertek cu preț garantat de răscumpărare.",
+            "NFCs sunt articole de jucători licențiați cu bonusuri în joc.",
+            "NFTs sunt colecționare create de utilizatori."
+          ],
+          "cta": "Învață Bazele"
+        },
+        {
+          "label": "Piața",
+          "tagline": "Cumpără și vinde active de joc instant",
+          "details": [
+            "Răsfoiți un catalog larg de NFAs, NFCs și NFTs.",
+            "Filtrați după categorie, raritate sau interval de prețuri.",
+            "Listele sunt îndeplinite pe lanț pentru transferuri instant."
+          ],
+          "cta": "Explorați Piața"
+        },
+        {
+          "label": "Licitații",
+          "tagline": "Concurați pentru articole exclusive",
+          "details": [
+            "Licitați pentru active rare disponibile numai prin licitații limitate în timp.",
+            "Un cronometru live arată exact cât timp a mai rămas.",
+            "Depășiți-i pe alții pentru a asigura articole legendare."
+          ],
+          "cta": "Vezi Licitații"
+        },
+        {
+          "label": "Schimburi",
+          "tagline": "Schimbați active peer-to-peer, fără intermediar",
+          "details": [
+            "Propuneți sau acceptați schimburi directe de active cu alți jucători.",
+            "Stabiliți singur termenii.",
+            "Răsfoiți oferte deschise sau publicați-vă propria ofertă."
+          ],
+          "cta": "Explorați Schimburi"
+        },
+        {
+          "label": "Misiuni",
+          "tagline": "Completați misiuni, câștigați recompense exclusive",
+          "details": [
+            "Preluați misiuni pentru a câștiga recompense exclusive.",
+            "Fiecare misiune are obiective unice.",
+            "Construiți-vă colecția strategic."
+          ],
+          "cta": "Explorați Misiuni"
+        },
+        {
+          "label": "De închiriat",
+          "tagline": "Împrumutați active sau câștigați din ale voastre",
+          "details": [
+            "Închiriați specialiști puternici pentru o singură misiune.",
+            "Listați propriile active inactive pentru închiriere.",
+            "Durate flexibile — orar, zilnic sau per misiune."
+          ],
+          "cta": "Vezi De închiriat"
+        },
+        {
+          "label": "Recompense",
+          "tagline": "Vânați ținte, revendicați recompense",
+          "details": [
+            "Acceptați recompense postate de alți jucători sau sistem.",
+            "Urcați în clasamentul de recompense.",
+            "Postați propriile recompense pentru a recruta jucători."
+          ],
+          "cta": "Vezi Recompense"
+        }
       ]
     },
     "general": {
-      "heading": "General", "subtitle": "Răsfoi NFAs, NFCs și NFTs disponibile pentru cumpărare imediată.",
+      "heading": "General",
+      "subtitle": "Răsfoi NFAs, NFCs și NFTs disponibile pentru cumpărare imediată.",
       "filterAll": "Toate",
       "samplePreviewTitle": "Previzualizare Eșantion Piață",
       "samplePreviewDesc": "Articolele de mai jos sunt previzualizări eșantion care prezintă tipurile de active digitale care vor fi disponibile.",
       "noItems": "Nu există articole disponibile încă. Reveniți curând.",
-      "categories": { "skins": "Skin-uri", "militaryBadges": "Insigne Militare", "specialists": "Specialiști", "weapons": "Arme", "bodyArmour": "Armură Corporală", "spaceships": "Nave Spațiale", "racingVehicles": "Vehicule", "artwork": "Artă", "landAndBases": "Teren și Baze", "general": "General" }
+      "categories": {
+        "skins": "Skin-uri",
+        "militaryBadges": "Insigne Militare",
+        "specialists": "Specialiști",
+        "weapons": "Arme",
+        "bodyArmour": "Armură Corporală",
+        "spaceships": "Nave Spațiale",
+        "racingVehicles": "Vehicule",
+        "artwork": "Artă",
+        "landAndBases": "Teren și Baze",
+        "general": "General"
+      },
+      "search": "Căutare...",
+      "filter": "Filtra",
+      "showAll": "Arată toate",
+      "filterSort": "Filtrați și sortați",
+      "sortBy": "Filtrează după",
+      "sort": {
+        "default": "Implicit",
+        "priceAsc": "Preț: mic spre mare",
+        "priceDesc": "Preț: de la mare la mic",
+        "nameAsc": "Nume: de la A la Z",
+        "nameDesc": "Nume: de la Z la A"
+      },
+      "priceRange": "Interval de preț (USDC)",
+      "min": "Min",
+      "max": "Max",
+      "apply": "Aplicați",
+      "clearAll": "Ștergeți toate filtrele",
+      "noResults": "Nu s-au găsit rezultate",
+      "dummyContent": "Conținut fals",
+      "preview": "Previzualizare",
+      "buyNow": "Cumpărați acum",
+      "viewDetails": "Vezi detalii"
     },
-    "nfa101": { "sectionLabel": "Educație", "heading": "NFAs / NFCs / NFTs 101", "subtitle": "Nou în NFT-uri și Web3? Explorați articolele noastre.", "minRead": "min citire", "filterAll": "Toate" },
+    "nfa101": {
+      "sectionLabel": "Educație",
+      "heading": "NFAs / NFCs / NFTs 101",
+      "subtitle": "Nou în NFT-uri și Web3? Explorați articolele noastre.",
+      "minRead": "min citire",
+      "filterAll": "Toate"
+    },
     "auctions": {
-      "heading": "Licitații", "listings": "listări", "newAuction": "Licitație Nouă", "noAuctions": "Nicio licitație {{filter}}", "createFirst": "Creați prima licitație", "endingSoon": "SE TERMINĂ CURÂND", "viewDetails": "Vezi Detalii",
-      "rules": { "durations": "Durate: 1z · 3z · 7z", "minIncrement": "Creștere minimă: 5%", "freeToList": "Listare gratuită", "commission": "Comision: 20% la vânzare" },
-      "preview": { "title": "Previzualizare Funcție În Joc", "desc": "Sistemul de licitații va fi complet activ în joc la lansare." },
-      "card": { "currentBid": "Ofertă curentă", "endsIn": "Se termină în", "placeBid": "Plasați Ofertă", "buyNow": "Cumpărați Acum", "bids": "ofertă(e)", "ended": "ÎNCHEIAT" },
-      "detail": { "currentBid": "Ofertă curentă", "start": "Start", "endsIn": "Se termină în", "description": "Descriere", "recentBids": "Oferte Recente", "anonymous": "Anonim", "placeBid": "Plasați Ofertă", "buyNow": "Cumpărați Acum", "buyNowLabel": "Cumpărați Acum", "bids": "ofertă(e)" },
-      "bidModal": { "title": "Plasați o Ofertă", "currentBid": "Ofertă curentă", "minimumBid": "Ofertă minimă", "yourBid": "Oferta dvs. (USDC)", "minIncrement": "Creștere minimă 5% · Minimul următor după oferta dvs.: {{next}} USDC", "reviewBid": "Revizuiți Oferta", "disclaimer": "Oferta câștigătoare este obligatorie · 20% comision platformă", "confirmTitle": "Confirmați Oferta", "item": "Articol", "yourBidLabel": "Oferta dvs.", "youPay": "Dacă câștigați, plătiți", "outbidNotice": "Veți fi notificat imediat dacă cineva vă depășește oferta.", "back": "Înapoi", "confirm": "Confirmați — {{amount}} USDC", "placing": "Se plasează…", "successTitle": "Ofertă Plasată!", "highestBidder": "Ești cel mai mare ofertant", "outbidWarning": "Vei primi o notificare dacă ești depășit.", "done": "Gata", "endsIn": "Se termină în" },
-      "instantBuyModal": { "title": "Cumpărați Acum — Instant", "buyNowPrice": "Prețul de cumpărare acum", "currentBids": "Oferte curente", "notice": "Cumpărarea acum închide licitația imediat.", "cancel": "Anulați", "processing": "Se procesează…", "successTitle": "Articol Asigurat!", "auctionClosed": "Licitație închisă · Transfer inițiat", "item": "Articol", "paid": "Plătit", "status": "Status", "transferred": "Transferat în portofel", "walletNote": "Articolul va apărea în fila Colecțiile Mele.", "viewCollect": "Vedeți Colecțiile Mele" },
-      "createModal": { "title": "Creați Licitație", "selectItem": "Selectați Articol", "connectWallet": "Conectați portofelul pentru a naviga articolele dvs.", "loadingItems": "Se încarcă…", "noItems": "Nu s-au găsit articole deținute", "pricingDuration": "Prețuri și Durată", "startPrice": "Preț de Start (USDC) *", "reservePrice": "Preț de Rezervă (USDC)", "instantBuyPrice": "Preț Cumpărare Instant (USDC)", "optional": "Opțional", "leaveBlank": "Lăsați gol pentru dezactivare", "duration": "Durată", "dur1Day": "1 Zi", "dur3Days": "3 Zile", "dur7Days": "7 Zile", "freeToList": "Listare gratuită · 20% comision la vânzare", "creating": "Se creează…", "submit": "Creați Licitație" },
-      "pagination": { "prev": "Prev", "next": "Următor", "page": "Pagina {{page}} din {{pages}}" }
+      "heading": "Licitații",
+      "listings": "listări",
+      "newAuction": "Licitație Nouă",
+      "noAuctions": "Nicio licitație {{filter}}",
+      "createFirst": "Creați prima licitație",
+      "endingSoon": "SE TERMINĂ CURÂND",
+      "viewDetails": "Vezi Detalii",
+      "rules": {
+        "durations": "Durate: 1z · 3z · 7z",
+        "minIncrement": "Creștere minimă: 5%",
+        "freeToList": "Listare gratuită",
+        "commission": "Comision: 20% la vânzare"
+      },
+      "preview": {
+        "title": "Previzualizare Funcție În Joc",
+        "desc": "Sistemul de licitații va fi complet activ în joc la lansare."
+      },
+      "card": {
+        "currentBid": "Ofertă curentă",
+        "endsIn": "Se termină în",
+        "placeBid": "Plasați Ofertă",
+        "buyNow": "Cumpărați Acum",
+        "bids": "ofertă(e)",
+        "ended": "ÎNCHEIAT"
+      },
+      "detail": {
+        "currentBid": "Ofertă curentă",
+        "start": "Start",
+        "endsIn": "Se termină în",
+        "description": "Descriere",
+        "recentBids": "Oferte Recente",
+        "anonymous": "Anonim",
+        "placeBid": "Plasați Ofertă",
+        "buyNow": "Cumpărați Acum",
+        "buyNowLabel": "Cumpărați Acum",
+        "bids": "ofertă(e)"
+      },
+      "bidModal": {
+        "title": "Plasați o Ofertă",
+        "currentBid": "Ofertă curentă",
+        "minimumBid": "Ofertă minimă",
+        "yourBid": "Oferta dvs. (USDC)",
+        "minIncrement": "Creștere minimă 5% · Minimul următor după oferta dvs.: {{next}} USDC",
+        "reviewBid": "Revizuiți Oferta",
+        "disclaimer": "Oferta câștigătoare este obligatorie · 20% comision platformă",
+        "confirmTitle": "Confirmați Oferta",
+        "item": "Articol",
+        "yourBidLabel": "Oferta dvs.",
+        "youPay": "Dacă câștigați, plătiți",
+        "outbidNotice": "Veți fi notificat imediat dacă cineva vă depășește oferta.",
+        "back": "Înapoi",
+        "confirm": "Confirmați — {{amount}} USDC",
+        "placing": "Se plasează…",
+        "successTitle": "Ofertă Plasată!",
+        "highestBidder": "Ești cel mai mare ofertant",
+        "outbidWarning": "Vei primi o notificare dacă ești depășit.",
+        "done": "Gata",
+        "endsIn": "Se termină în"
+      },
+      "instantBuyModal": {
+        "title": "Cumpărați Acum — Instant",
+        "buyNowPrice": "Prețul de cumpărare acum",
+        "currentBids": "Oferte curente",
+        "notice": "Cumpărarea acum închide licitația imediat.",
+        "cancel": "Anulați",
+        "processing": "Se procesează…",
+        "successTitle": "Articol Asigurat!",
+        "auctionClosed": "Licitație închisă · Transfer inițiat",
+        "item": "Articol",
+        "paid": "Plătit",
+        "status": "Status",
+        "transferred": "Transferat în portofel",
+        "walletNote": "Articolul va apărea în fila Colecțiile Mele.",
+        "viewCollect": "Vedeți Colecțiile Mele"
+      },
+      "createModal": {
+        "title": "Creați Licitație",
+        "selectItem": "Selectați Articol",
+        "connectWallet": "Conectați portofelul pentru a naviga articolele dvs.",
+        "loadingItems": "Se încarcă…",
+        "noItems": "Nu s-au găsit articole deținute",
+        "pricingDuration": "Prețuri și Durată",
+        "startPrice": "Preț de Start (USDC) *",
+        "reservePrice": "Preț de Rezervă (USDC)",
+        "instantBuyPrice": "Preț Cumpărare Instant (USDC)",
+        "optional": "Opțional",
+        "leaveBlank": "Lăsați gol pentru dezactivare",
+        "duration": "Durată",
+        "dur1Day": "1 Zi",
+        "dur3Days": "3 Zile",
+        "dur7Days": "7 Zile",
+        "freeToList": "Listare gratuită · 20% comision la vânzare",
+        "creating": "Se creează…",
+        "submit": "Creați Licitație"
+      },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Următor",
+        "page": "Pagina {{page}} din {{pages}}"
+      }
     },
     "trades": {
-      "heading": "Schimburi", "listings": "listări", "postTrade": "Postați Schimb", "noTrades": "Niciun schimb {{filter}}", "viewDetails": "Vezi Detalii", "trade": "schimb", "yours": "al tău", "offering": "Oferind", "wanting": "Dorind", "makeOffer": "Faceți o ofertă", "by": "de", "acceptTrade": "Acceptați Schimb", "cancelTrade": "Anulați Schimb",
-      "rules": { "expiry": "Listările expiră în 30 de zile", "fee": "Taxa de platformă se aplică ambelor părți", "noNFA": "NFAs nu pot fi schimbate — doar vândute" },
-      "acceptModal": { "title": "Propunere de Schimb", "postedBy": "Postat de", "exchangeDetails": "Detalii Schimb", "theyOffer": "Ei oferă", "theyWant": "Ei doresc", "feeNotice": "Taxa de platformă se aplică ambelor părți", "acceptBtn": "Acceptați Acest Schimb", "confirmTitle": "Confirmați Schimbul", "trade": "Schimb", "postedByLabel": "Postat de", "terms": "Prin acceptare, ești de acord cu termenii de schimb.", "back": "Înapoi", "sending": "Se trimite…", "confirm": "Confirmați", "successTitle": "Propunere Trimisă!", "notified": "a fost notificat", "successNote": "Cel care a postat schimbul vă va revizui propunerea.", "expiry": "⏱ Propunerile expiră în 30 de zile dacă nu sunt confirmate.", "close": "Închide" },
-      "createModal": { "title": "Postați un Schimb", "yourItem": "Articolul Dvs.", "itemNamePlaceholder": "Numele articolului *", "loadingItems": "Se încarcă articolele dvs.…", "connectWallet": "Conectați portofelul pentru selectare", "pickFromItems": "Sau alegeți din articolele dvs.:", "imageOptional": "Imagine (opțional)", "whatYouWant": "Ce Doriți", "openOffer": "Ofertă deschisă — lăsați alții să propună", "anyCategory": "Orice categorie", "notesLabel": "Note (opțional)", "notesPlaceholder": "Termeni schimb, condiție, etc.", "disclaimer": "Ambele părți plătesc taxă · Expiră în 30 de zile · NFAs nu pot fi schimbate", "posting": "Se postează…", "submit": "Postați Schimb" },
-      "pagination": { "prev": "Prev", "next": "Următor", "page": "Pagina {{page}} din {{pages}}" }
+      "heading": "Schimburi",
+      "listings": "listări",
+      "postTrade": "Postați Schimb",
+      "noTrades": "Niciun schimb {{filter}}",
+      "viewDetails": "Vezi Detalii",
+      "trade": "schimb",
+      "yours": "al tău",
+      "offering": "Oferind",
+      "wanting": "Dorind",
+      "makeOffer": "Faceți o ofertă",
+      "by": "de",
+      "acceptTrade": "Acceptați Schimb",
+      "cancelTrade": "Anulați Schimb",
+      "rules": {
+        "expiry": "Listările expiră în 30 de zile",
+        "fee": "Taxa de platformă se aplică ambelor părți",
+        "noNFA": "NFAs nu pot fi schimbate — doar vândute"
+      },
+      "acceptModal": {
+        "title": "Propunere de Schimb",
+        "postedBy": "Postat de",
+        "exchangeDetails": "Detalii Schimb",
+        "theyOffer": "Ei oferă",
+        "theyWant": "Ei doresc",
+        "feeNotice": "Taxa de platformă se aplică ambelor părți",
+        "acceptBtn": "Acceptați Acest Schimb",
+        "confirmTitle": "Confirmați Schimbul",
+        "trade": "Schimb",
+        "postedByLabel": "Postat de",
+        "terms": "Prin acceptare, ești de acord cu termenii de schimb.",
+        "back": "Înapoi",
+        "sending": "Se trimite…",
+        "confirm": "Confirmați",
+        "successTitle": "Propunere Trimisă!",
+        "notified": "a fost notificat",
+        "successNote": "Cel care a postat schimbul vă va revizui propunerea.",
+        "expiry": "⏱ Propunerile expiră în 30 de zile dacă nu sunt confirmate.",
+        "close": "Închide"
+      },
+      "createModal": {
+        "title": "Postați un Schimb",
+        "yourItem": "Articolul Dvs.",
+        "itemNamePlaceholder": "Numele articolului *",
+        "loadingItems": "Se încarcă articolele dvs.…",
+        "connectWallet": "Conectați portofelul pentru selectare",
+        "pickFromItems": "Sau alegeți din articolele dvs.:",
+        "imageOptional": "Imagine (opțional)",
+        "whatYouWant": "Ce Doriți",
+        "openOffer": "Ofertă deschisă — lăsați alții să propună",
+        "anyCategory": "Orice categorie",
+        "notesLabel": "Note (opțional)",
+        "notesPlaceholder": "Termeni schimb, condiție, etc.",
+        "disclaimer": "Ambele părți plătesc taxă · Expiră în 30 de zile · NFAs nu pot fi schimbate",
+        "posting": "Se postează…",
+        "submit": "Postați Schimb"
+      },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Următor",
+        "page": "Pagina {{page}} din {{pages}}"
+      }
     },
     "quests": {
-      "heading": "Tabloul de Misiuni", "quests": "misiuni", "noQuests": "Nicio misiune {{filter}}", "inGameFeature": "Funcție În Joc", "inGameDesc": "Misiunile sunt generate automat când vânzătorii aleg un comision redus. Jucătorii pot finaliza până la 5 misiuni pe zi.", "earnFromQuests": "Vrei să câștigi din misiuni? Joacă →", "moneyQuests": "Misiuni Bani (pool 11%)", "resourceQuests": "Misiuni Resurse (pool 20%)", "footerNote1": "# Misiunile cu sarcini combinate vor fi plătite folosind sumele tabelului separat.", "footerNote2": "# Datele planetare se vor sincroniza când jocurile vor fi live.", "inGame": "În joc", "open": "Deschis",
-      "table": { "questingNo": "Nr. Misiune", "pickupPlanet": "Planeta de Preluare", "dropOffPlanet": "Planeta de Livrare", "itemGoods": "Articol / Bunuri", "commSplit": "Împărțire Comision", "questingTime": "Timp Misiune", "assignedTo": "Atribuit La" },
-      "comingSoon": { "title": "În Curând", "desc": "Funcția de misiuni în joc este în prezent în dezvoltare.", "gotIt": "Am înțeles" },
-      "pagination": { "prev": "Prev", "next": "Următor", "page": "Pagina {{page}} din {{pages}}" }
+      "heading": "Tabloul de Misiuni",
+      "quests": "misiuni",
+      "noQuests": "Nicio misiune {{filter}}",
+      "inGameFeature": "Funcție În Joc",
+      "inGameDesc": "Misiunile sunt generate automat când vânzătorii aleg un comision redus. Jucătorii pot finaliza până la 5 misiuni pe zi.",
+      "earnFromQuests": "Vrei să câștigi din misiuni? Joacă →",
+      "moneyQuests": "Misiuni Bani (pool 11%)",
+      "resourceQuests": "Misiuni Resurse (pool 20%)",
+      "footerNote1": "# Misiunile cu sarcini combinate vor fi plătite folosind sumele tabelului separat.",
+      "footerNote2": "# Datele planetare se vor sincroniza când jocurile vor fi live.",
+      "inGame": "În joc",
+      "open": "Deschis",
+      "table": {
+        "questingNo": "Nr. Misiune",
+        "pickupPlanet": "Planeta de Preluare",
+        "dropOffPlanet": "Planeta de Livrare",
+        "itemGoods": "Articol / Bunuri",
+        "commSplit": "Împărțire Comision",
+        "questingTime": "Timp Misiune",
+        "assignedTo": "Atribuit La"
+      },
+      "comingSoon": {
+        "title": "În Curând",
+        "desc": "Funcția de misiuni în joc este în prezent în dezvoltare.",
+        "gotIt": "Am înțeles"
+      },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Următor",
+        "page": "Pagina {{page}} din {{pages}}"
+      },
+      "buyer": "Cumpărător",
+      "player": "Player",
+      "platform": "Platform",
+      "status": {
+        "open": "Deschis",
+        "accepted": "Acceptat",
+        "completed": "Finalizat",
+        "cancelled": "Anulat"
+      },
+      "type": {
+        "money": "Bani",
+        "resources": "Resurse"
+      }
     },
     "hire": {
-      "heading": "De închiriat", "listings": "listări", "listBtn": "Listare", "forHireLabel": "De Închiriat", "wantingToHire": "Doresc să Angajeze", "noListings": "Nicio listare {{filter}}", "lockedTitle": "Conținut HyperTek Gaming doar pentru afișare.", "lockedDesc": "Această secțiune este blocată până când jocurile sunt finalizate.", "forHireBadge": "DE ÎNCHIRIAT", "wantedBadge": "DORIT", "price": "Preț", "maxDuration": "Durată Maximă", "hireBtn": "Angajați", "fulfillBtn": "Îndepliniți Cererea",
-      "rules": { "durations": "8h · 1z · 3z · 1s · 1l", "cooldown": "Cooldown: 2× durata închirierii", "commission": "Comision: 20%", "payment": "Plată în Hyper Bucks sau Materiale" },
-      "preview": { "title": "Previzualizare Funcție În Joc", "desc": "Sistemul De Închiriat va fi complet activ în joc la lansare." },
-      "hireModal": { "hireTitle": "Angajați Specialist", "fulfillTitle": "Îndepliniți Cererea de Angajare", "forHireBadge": "DE ÎNCHIRIAT", "wantedBadge": "DORIT", "price": "Preț", "duration": "Durată", "howHire": "Cum funcționează angajarea", "howFulfill": "Cum funcționează îndeplinirea unei cereri", "proceedHire": "Continuați la Angajare", "offerFulfill": "Oferiți să Îndepliniți", "commission": "20% comision platformă · Cooldown se aplică după returnare", "confirmHire": "Confirmați Angajarea", "confirmOffer": "Confirmați Oferta", "specialist": "Specialist", "payment": "Plată", "yourOffer": "Oferta dvs.", "durationLabel": "Durată", "commLabel": "Comision", "back": "Înapoi", "processing": "Se procesează…", "sendOffer": "Trimiteți Oferta", "deployedTitle": "Desfășurat!", "offerSentTitle": "Ofertă Trimisă!", "availableFor": "Disponibil pentru", "paid": "Plătit", "returnNote": "Returnați înainte de expirarea perioadei. Cooldown de {{hours}}h se aplică după returnare.", "close": "Închide" },
-      "createModal": { "listTitle": "Listare De Închiriat", "postTitle": "Postați Dorință de Angajare", "forHireBtn": "De Închiriat", "wantingBtn": "Doresc să Angajeze", "itemNameHire": "Specialist / numele articolului *", "itemNameWant": "Ce doriți să angajați *", "descPlaceholder": "Descriere", "categoryPlaceholder": "Categorie (opțional)", "paymentType": "Tip Plată", "hyperBucks": "Hyper Bucks", "materials": "Materiale", "amountLabel": "Sumă (Hyper Bucks)", "afterCommission": "Primiți {{amount}} HB după 20% comision", "maxDuration": "Durată Maximă", "disclaimer": "20% comision · Cooldown = 2× durata închirierii după returnare", "listing": "Se listează…", "submit": "Creați Listare" },
-      "pagination": { "prev": "Prev", "next": "Următor", "page": "Pagina {{page}} din {{pages}}" }
+      "heading": "De închiriat",
+      "listings": "listări",
+      "listBtn": "Listare",
+      "forHireLabel": "De Închiriat",
+      "wantingToHire": "Doresc să Angajeze",
+      "noListings": "Nicio listare {{filter}}",
+      "lockedTitle": "Conținut HyperTek Gaming doar pentru afișare.",
+      "lockedDesc": "Această secțiune este blocată până când jocurile sunt finalizate.",
+      "forHireBadge": "DE ÎNCHIRIAT",
+      "wantedBadge": "DORIT",
+      "price": "Preț",
+      "maxDuration": "Durată Maximă",
+      "hireBtn": "Angajați",
+      "fulfillBtn": "Îndepliniți Cererea",
+      "rules": {
+        "durations": "8h · 1z · 3z · 1s · 1l",
+        "cooldown": "Cooldown: 2× durata închirierii",
+        "commission": "Comision: 20%",
+        "payment": "Plată în Hyper Bucks sau Materiale"
+      },
+      "preview": {
+        "title": "Previzualizare Funcție În Joc",
+        "desc": "Sistemul De Închiriat va fi complet activ în joc la lansare."
+      },
+      "hireModal": {
+        "hireTitle": "Angajați Specialist",
+        "fulfillTitle": "Îndepliniți Cererea de Angajare",
+        "forHireBadge": "DE ÎNCHIRIAT",
+        "wantedBadge": "DORIT",
+        "price": "Preț",
+        "duration": "Durată",
+        "howHire": "Cum funcționează angajarea",
+        "howFulfill": "Cum funcționează îndeplinirea unei cereri",
+        "proceedHire": "Continuați la Angajare",
+        "offerFulfill": "Oferiți să Îndepliniți",
+        "commission": "20% comision platformă · Cooldown se aplică după returnare",
+        "confirmHire": "Confirmați Angajarea",
+        "confirmOffer": "Confirmați Oferta",
+        "specialist": "Specialist",
+        "payment": "Plată",
+        "yourOffer": "Oferta dvs.",
+        "durationLabel": "Durată",
+        "commLabel": "Comision",
+        "back": "Înapoi",
+        "processing": "Se procesează…",
+        "sendOffer": "Trimiteți Oferta",
+        "deployedTitle": "Desfășurat!",
+        "offerSentTitle": "Ofertă Trimisă!",
+        "availableFor": "Disponibil pentru",
+        "paid": "Plătit",
+        "returnNote": "Returnați înainte de expirarea perioadei. Cooldown de {{hours}}h se aplică după returnare.",
+        "close": "Închide"
+      },
+      "createModal": {
+        "listTitle": "Listare De Închiriat",
+        "postTitle": "Postați Dorință de Angajare",
+        "forHireBtn": "De Închiriat",
+        "wantingBtn": "Doresc să Angajeze",
+        "itemNameHire": "Specialist / numele articolului *",
+        "itemNameWant": "Ce doriți să angajați *",
+        "descPlaceholder": "Descriere",
+        "categoryPlaceholder": "Categorie (opțional)",
+        "paymentType": "Tip Plată",
+        "hyperBucks": "Hyper Bucks",
+        "materials": "Materiale",
+        "amountLabel": "Sumă (Hyper Bucks)",
+        "afterCommission": "Primiți {{amount}} HB după 20% comision",
+        "maxDuration": "Durată Maximă",
+        "disclaimer": "20% comision · Cooldown = 2× durata închirierii după returnare",
+        "listing": "Se listează…",
+        "submit": "Creați Listare"
+      },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Următor",
+        "page": "Pagina {{page}} din {{pages}}"
+      }
     },
     "bounty": {
-      "heading": "Tabloul de Recompense", "contracts": "contract", "contractsPlural": "contracte", "noContracts": "Niciun contract {{filter}}", "noContractsNote": "Recompensele sunt postate de jucătorii jocului și sistemul de joc", "expiresIn": "Expiră în {{days}}z",
-      "inGameNotice": { "title": "Funcție În Joc — Doar Vizualizare", "desc": "Recompensele sunt create de jucătorii jocului și sistemul de joc. Acceptarea și finalizarea recompenselor se întâmplă numai în joc." },
-      "rules": { "battle": "Lupta este rezolvată automat în joc", "commission": "20% comision platformă pe recompensă", "expiry": "Contractele expiră în 30 de zile" },
-      "table": { "bountyNo": "Nr. Recompensă", "target": "Țintă", "reward": "Recompensă", "postedBy": "Postat De", "claimedBy": "Revendicat De", "status": "Status", "netHB": "{{amount}} HB net" },
-      "pagination": { "prev": "Prev", "next": "Următor", "page": "Pagina {{page}} din {{pages}}" }
+      "heading": "Tabloul de Recompense",
+      "contracts": "contract",
+      "contractsPlural": "contracte",
+      "noContracts": "Niciun contract {{filter}}",
+      "noContractsNote": "Recompensele sunt postate de jucătorii jocului și sistemul de joc",
+      "expiresIn": "Expiră în {{days}}z",
+      "inGameNotice": {
+        "title": "Funcție În Joc — Doar Vizualizare",
+        "desc": "Recompensele sunt create de jucătorii jocului și sistemul de joc. Acceptarea și finalizarea recompenselor se întâmplă numai în joc."
+      },
+      "rules": {
+        "battle": "Lupta este rezolvată automat în joc",
+        "commission": "20% comision platformă pe recompensă",
+        "expiry": "Contractele expiră în 30 de zile"
+      },
+      "table": {
+        "bountyNo": "Nr. Recompensă",
+        "target": "Țintă",
+        "reward": "Recompensă",
+        "postedBy": "Postat De",
+        "claimedBy": "Revendicat De",
+        "status": "Status",
+        "netHB": "{{amount}} HB net"
+      },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Următor",
+        "page": "Pagina {{page}} din {{pages}}"
+      }
     },
-    "common": { "prev": "Anterior", "next": "Următor", "pageOf": "Pagina {{page}} din {{pages}}", "back": "Înapoi", "close": "Închide", "cancel": "Anulați", "loading": "Se încarcă…", "connectWallet": "Conectați mai întâi portofelul", "loginFirst": "Autentificați-vă mai întâi" }
+    "common": {
+      "prev": "Anterior",
+      "next": "Următor",
+      "pageOf": "Pagina {{page}} din {{pages}}",
+      "back": "Înapoi",
+      "close": "Închide",
+      "cancel": "Anulați",
+      "loading": "Se încarcă…",
+      "connectWallet": "Conectați mai întâi portofelul",
+      "loginFirst": "Autentificați-vă mai întâi"
+    }
+  },
+  "musicPlayer": {
+    "title": "Player muzical",
+    "playing": "Redare",
+    "sound": "Sunet",
+    "ambientDesc": "Coloana sonoră ambientală încorporată pentru piață. Se joacă în buclă.",
+    "playAmbient": "Redare Ambient",
+    "pauseAmbient": "Pauză Ambient",
+    "spotifyDesc": "Lipiți orice melodie Spotify, listă de redare sau link de album.",
+    "loadSpotify": "Încărcați Spotify",
+    "soundcloudDesc": "Lipiți orice melodie SoundCloud sau link pentru lista de redare.",
+    "loadSoundCloud": "Încărcați SoundCloud",
+    "changeLink": "Schimbați legătura"
+  },
+  "buyNfa": {
+    "stripe": {
+      "title": "Plătiți cu cardul",
+      "amount": "Cantitate:",
+      "cancel": "Anula",
+      "processing": "Prelucrare...",
+      "pay": "Plată"
+    },
+    "nav": {
+      "backToMarketplace": "Înapoi la Piață",
+      "backToCollections": "Înapoi la colecții",
+      "offers": "Oferte",
+      "marketplace": "Piața",
+      "auction": "Licitaţie",
+      "trade": "Comerț",
+      "detail": "{{type}} Detaliu",
+      "buy": "Cumpărați {{type}}"
+    },
+    "marketplace": {
+      "listed": "Listată",
+      "youOwn": "Tu deții asta",
+      "notMinted": "Nu este încă batut",
+      "ownedBy": "Deținut de",
+      "platform": "Platformă",
+      "noDesc": "Nu este furnizată nicio descriere pentru acest articol.",
+      "price": "Preţ",
+      "minBuyback": "Garanție minimă de răscumpărare",
+      "reservePrice": "Preț de rezervă",
+      "buybackNote": "Acest activ nu poate fi vândut sub valoarea minimă de răscumpărare.",
+      "networkNote": "USDC pe bază · ETH de bază necesar pentru gaz (numai plăți cu portofel)",
+      "buyWithCard": "Cumpărați cu card",
+      "makeOffer": "Faceți oferta",
+      "processing": "Se procesează...",
+      "connectWallet": "Conectează portofel",
+      "buyNow": "Cumpără acum",
+      "listNow": "Listați acum",
+      "yourListed": "{{type}} dvs. (Listat)",
+      "notAvailable": "Nu este disponibil"
+    },
+    "fundModal": {
+      "title": "USDC insuficient",
+      "youNeed": "Ai nevoie",
+      "butHave": "dar portofelul tău are doar",
+      "desc2": "Finanțați-vă portofelul instantaneu cu un card de credit sau de debit prin Transak, apoi reveniți pentru a finaliza achiziția.",
+      "fundBtn": "Portofel de fonduri cu card (Transak)",
+      "cancel": "Anula"
+    },
+    "gasModal": {
+      "title": "ETH necesar pentru gaz",
+      "mainnetNote": "Ești pe Base Mainnet. Cumpărați o cantitate mică de ETH (≈ 1–2 USD) pe Coinbase sau bridge de la Ethereum prin bridge.base.org.",
+      "testnetNote": "Ești pe Base Sepolia Testnet. Obțineți gratuit testul ETH de la un robinet.",
+      "faucetBtn": "Obțineți Testnet ETH (Faucet)",
+      "bridgeBtn": "Bridge ETH la bază",
+      "close": "Aproape"
+    },
+    "confirmModal1": {
+      "title": "Confirmați acțiunea",
+      "listPrice": "Preț de listă",
+      "platformFee": "Taxa de platformă (10%)",
+      "total": "Total",
+      "cancel": "Anula",
+      "continue": "Continua"
+    },
+    "confirmModal2": {
+      "setPrice": "Setați prețul de listare (USDC)",
+      "willList": "✓ Se va lista la {{price}} USDC",
+      "price": "Preţ",
+      "cancel": "Anula",
+      "processing": "Prelucrare...",
+      "confirm": "Confirma"
+    },
+    "offers": {
+      "noOffers": "Nicio ofertă încă",
+      "offer": "oferi",
+      "offers": "oferte",
+      "noOffersTitle": "Nicio ofertă acum",
+      "noOffersDesc": "Fii primul care face o ofertă",
+      "colPrice": "Preţ",
+      "colStatus": "Stare",
+      "colFrom": "Din",
+      "colExpires": "Expiră",
+      "colAction": "Acţiune",
+      "accept": "Accepta",
+      "reject": "Respinge",
+      "cancel": "Anula",
+      "expired": "Expirat",
+      "completePurchase": "Achiziție finalizată"
+    },
+    "auction": {
+      "loading": "Se încarcă datele licitației...",
+      "active": "Licitație activă",
+      "startPrice": "Prețul de pornire",
+      "currentBid": "Oferta curentă",
+      "noBids": "Încă nu există oferte",
+      "instantBuy": "Cumpărare instantanee",
+      "reservePrice": "Preț de rezervă",
+      "bidHistory": "Istoricul ofertelor",
+      "minBid": "Oferta minima:",
+      "bidding": "Licitare…",
+      "placeBid": "Plasați oferta",
+      "connectWallet": "Conectați-vă portofelul pentru a plasa o ofertă",
+      "ownerNote": "Articolul dvs. este listat la licitație. Ofertele vor apărea aici pe măsură ce intră.",
+      "noAuction": "Nicio licitație activă pentru acest articol",
+      "ownerSetup": "Accesați Colecțiile dvs. și faceți clic pe Listă pentru a configura o licitație.",
+      "notAvailable": "Acest articol nu are licitație deschisă momentan."
+    },
+    "trade": {
+      "loading": "Se încarcă listele comerciale...",
+      "active": "lista comercială activă",
+      "actives": "liste comerciale active",
+      "offering": "Ofertă",
+      "wants": "Vrea",
+      "openOffer": "Oferta deschisa",
+      "by": "De",
+      "proposeTrade": "Propune Comerț →",
+      "noTrades": "Nu există liste comerciale active",
+      "ownerSetup": "Accesați Colecțiile dvs. și faceți clic pe Listă pentru a configura o tranzacție.",
+      "notAvailable": "Proprietarul nu are liste comerciale deschise pentru acest articol."
+    },
+    "successModal": {
+      "title": "Achiziție reușită!",
+      "desc": "{{name}} a fost achiziționat. NFT va fi transferat în portofel în curând.",
+      "note": "Transferul este procesat automat prin sistemul nostru.",
+      "viewProfile": "Vizualizați în Profilul meu",
+      "continueShopping": "Continuați cumpărăturile"
+    },
+    "transferFailed": {
+      "title": "Plată primită — Transfer în așteptare",
+      "desc": "Plata dvs. a avut succes, dar transferul NFT a întâmpinat o problemă. Fondurile dumneavoastră sunt în siguranță — echipa noastră va finaliza transferul manual.",
+      "viewProfile": "Vizualizați profilul meu",
+      "dismiss": "Respingeți"
+    },
+    "priceHistory": {
+      "title": "Istoricul prețurilor",
+      "subtitle": "Prețurile de vânzare istorice pentru aceasta NFT",
+      "loading": "Se încarcă...",
+      "noSales": "Încă nu au fost înregistrate vânzări",
+      "noSalesNote": "Istoricul prețurilor apare după prima vânzare"
+    }
+  },
+  "makeOffer": {
+    "back": "Spate",
+    "floor": "Podea",
+    "title": "Faceți o ofertă",
+    "yourOffer": "Oferta dvs. (USDC)",
+    "expiresIn": "Oferta expiră în",
+    "youPay": "Plătiți",
+    "submitting": "Se trimite...",
+    "submit": "Trimite oferta",
+    "terms": "Prin trimiterea acestei oferte, sunteți de acord cu Termenii și condițiile Hyper Tek.",
+    "expiry": {
+      "6h": "6 ore",
+      "12h": "12 ore",
+      "1d": "1 zi",
+      "3d": "3 zile",
+      "7d": "7 zile",
+      "1mo": "1 lună"
+    },
+    "success": {
+      "title": "Oferta trimisă!",
+      "desc": "Oferta dvs. de {{price}} USDC pentru {{name}} a fost trimisă proprietarului.",
+      "expires": "Expiră în {{duration}}",
+      "backToNft": "Înapoi la NFT",
+      "goToMarketplace": "Accesați Marketplace"
+    },
+    "error": {
+      "loginRequired": "Vă rugăm să vă conectați pentru a face o ofertă",
+      "submitFailed": "Nu s-a putut trimite oferta. Vă rugăm să încercați din nou."
+    }
+  },
+  "paymentError": {
+    "message": "Solicitarea dvs. nu a avut succes",
+    "goHome": "Du-te acasă"
   }
 }

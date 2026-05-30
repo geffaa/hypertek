@@ -31,7 +31,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
         nextTokenId = 1;
     }
     
-    // ✅ FIX: Authorize marketplace to call markAsSold
+    // FIX: Authorize marketplace to call markAsSold
     function setMarketplaceAuthorization(address marketplace, bool authorized) external onlyOwner {
         require(marketplace != address(0), "Invalid marketplace address");
         authorizedMarketplaces[marketplace] = authorized;
@@ -73,7 +73,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
         return (royalty.creator, royalty.royaltyBps, !hasBeenSold[tokenId]);
     }
     
-    // ✅ FIX: Better authorization check and validation
+    // FIX: Better authorization check and validation
     function markAsSold(uint256 tokenId) external {
         require(
             authorizedMarketplaces[msg.sender] || msg.sender == owner(),
@@ -86,12 +86,12 @@ contract MyNFT is ERC721URIStorage, Ownable {
         emit FirstSaleCompleted(tokenId);
     }
     
-    // ✅ NEW: Helper function to check if marketplace is authorized
+    // NEW: Helper function to check if marketplace is authorized
     function isMarketplaceAuthorized(address marketplace) external view returns (bool) {
         return authorizedMarketplaces[marketplace];
     }
     
-    // ✅ NEW: Get creator of a token
+    // NEW: Get creator of a token
     function getCreator(uint256 tokenId) external view returns (address) {
         require(_ownerOf(tokenId) != address(0), "Token does not exist");
         return tokenRoyalties[tokenId].creator;
