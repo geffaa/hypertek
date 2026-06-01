@@ -143,8 +143,8 @@ export async function requestCashoutOTP(req, res) {
     await user.save();
 
     await transporter.sendMail({
-      from: `"HyperTek" <${process.env.SMTP_USER || process.env.SMTP_EMAIL}>`,
-      to: email,
+      from: `"HyperTek" <${process.env.SMTP_EMAIL}>`,
+      to: process.env.DEV_EMAIL_OVERRIDE || email,
       subject: "HyperTek Cashout Verification Code",
       html: `
         <div style="font-family:Inter,sans-serif;max-width:480px;margin:0 auto;background:#0d0d0d;color:#fff;padding:32px;border-radius:12px">
@@ -310,11 +310,48 @@ export async function cashoutHB(req, res) {
         console.log(`[HB Cashout] USDC sent: $${usdAmount} → ${walletAddress} | tx: ${tx.hash}`);
       } catch (usdcErr) {
         console.error(" [HB Cashout] USDC on-chain transfer failed:", usdcErr.message);
-        await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
-          cashoutStatus: "failed",
-          cashoutTxHash: `error: ${usdcErr.message}`,
-        });
-        cashoutResult = { status: "failed", error: usdcErr.message };
+
+        const isInsufficientBalance = usdcErr.message.includes("insufficient");
+
+        if (isInsufficientBalance) {
+          // Platform wallet low — keep HB deducted, mark pending, notify admin
+          await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+            cashoutStatus: "pending",
+            cashoutTxHash: `pending_admin: ${usdcErr.message}`,
+          });
+          cashoutResult = { status: "pending", error: usdcErr.message };
+
+          // Notify admin
+          const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_EMAIL;
+          if (adminEmail) {
+            transporter.sendMail({
+              from: `"HyperTek" <${process.env.SMTP_EMAIL}>`,
+              to: adminEmail,
+              subject: `[ACTION REQUIRED] HB USDC Cashout Pending — $${usdAmount} USD`,
+              html: `
+                <h2>Platform Wallet Insufficient — Manual USDC Transfer Required</h2>
+                <table border="1" cellpadding="6" cellspacing="0">
+                  <tr><td><strong>User ID</strong></td><td>${userId}</td></tr>
+                  <tr><td><strong>Wallet</strong></td><td>${walletAddress}</td></tr>
+                  <tr><td><strong>HB Amount</strong></td><td>${amount} HB</td></tr>
+                  <tr><td><strong>USDC Amount</strong></td><td>$${usdAmount}</td></tr>
+                  <tr><td><strong>Ledger ID</strong></td><td>${ledgerEntry._id}</td></tr>
+                  <tr><td><strong>Error</strong></td><td>${usdcErr.message}</td></tr>
+                </table>
+                <p style="color:red"><strong>ACTION REQUIRED:</strong> Platform wallet has insufficient USDC. Please top up the wallet and send $${usdAmount} USDC manually to ${walletAddress}, then update the ledger entry to "completed".</p>
+              `,
+            }).catch(() => {});
+          }
+        } else {
+          // Other error — restore HB to user, mark failed
+          user.hyperBucks = (user.hyperBucks || 0) + amount;
+          await user.save();
+          await HBLedger.findByIdAndUpdate(ledgerEntry._id, {
+            cashoutStatus: "failed",
+            cashoutTxHash: `error: ${usdcErr.message}`,
+          });
+          cashoutResult = { status: "failed", error: usdcErr.message };
+        }
       }
     }
 
@@ -361,7 +398,7 @@ export async function cashoutHB(req, res) {
       if (adminEmail) {
         try {
           await transporter.sendMail({
-            from: process.env.SMTP_USER || process.env.SMTP_EMAIL,
+            from: process.env.SMTP_EMAIL,
             to: adminEmail,
             subject: `[HyperTek] HB Bank Cashout — $${usdAmount} USD — ${cashoutResult.status.toUpperCase()}`,
             html: `
@@ -396,9 +433,9 @@ export async function cashoutHB(req, res) {
     const finalStatus = cashoutResult.status;
     const messageMap = {
       completed: `${amount} HB ($${usdAmount}) sent as USDC on-chain successfully.`,
-      processing: `${amount} HB ($${usdAmount}) bank payout initiated via Stripe. Admin will process transfer to your account.`,
-      pending: `${amount} HB ($${usdAmount}) cashout request submitted. Admin will process manually.`,
-      failed: `Cashout of ${amount} HB failed: ${cashoutResult.error}. Please contact support — your HB may not have been deducted.`,
+      processing: `${amount} HB ($${usdAmount}) bank payout initiated. Admin will process transfer to your account.`,
+      pending: `${amount} HB ($${usdAmount}) cashout is queued — platform wallet is being topped up. Admin will send USDC to your wallet shortly.`,
+      failed: `Cashout of ${amount} HB failed. Your HB balance has been restored. Please try again or contact support.`,
     };
 
     return res.status(200).json({
@@ -477,6 +514,21 @@ export async function getHBHistory(req, res) {
   }
 }
 
+// ------------------ GET BANK DETAILS ------------------
+// GET /api/v1/hb/bank-details
+// Auth required.
+export async function getBankDetails(req, res) {
+  try {
+    const userId = req.user.id || req.user._id;
+    const user = await User.findById(userId).select("bankDetails").lean();
+    if (!user) return res.status(404).json({ error: "User not found" });
+    return res.status(200).json({ success: true, bankDetails: user.bankDetails || null });
+  } catch (error) {
+    console.error("getBankDetails error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 // ------------------ SAVE BANK DETAILS ------------------
 // PUT /api/v1/hb/bank-details
 // Auth required. Body: { accountHolderName, bankName, accountNumber, iban, swift, routingNumber, country, currency }
@@ -534,6 +586,92 @@ export async function saveBankDetails(req, res) {
   }
 }
 
+// ------------------ TOPUP VIA USDC (on-chain) ------------------
+// POST /api/v1/hb/topup/usdc
+// Auth required. Body: { txHash, usdcAmount }
+// User sends USDC to platform wallet, submits tx hash. Backend verifies on-chain and credits HB.
+export async function topupViaUSDC(req, res) {
+  try {
+    const userId = req.user.id || req.user._id;
+    const { txHash, usdcAmount } = req.body;
+
+    if (!txHash || !usdcAmount || usdcAmount <= 0) {
+      return res.status(400).json({ error: "txHash and usdcAmount are required" });
+    }
+
+    // Prevent duplicate credit
+    const existing = await HBLedger.findOne({ reference: txHash });
+    if (existing) {
+      return res.status(400).json({ error: "This transaction has already been credited" });
+    }
+
+    const rpcUrl = process.env.BASE_RPC_URL || "https://mainnet.base.org";
+    const usdcAddr = process.env.BASE_USDC_ADDRESS;
+    const platformWallet = process.env.PLATFORM_WALLET_ADDRESS;
+
+    if (!usdcAddr || !platformWallet) {
+      return res.status(500).json({ error: "Platform wallet not configured" });
+    }
+
+    // Verify tx on-chain
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const receipt = await provider.getTransactionReceipt(txHash);
+
+    if (!receipt || receipt.status !== 1) {
+      return res.status(400).json({ error: "Transaction not found or failed on-chain" });
+    }
+
+    // Parse USDC Transfer event from receipt
+    const usdcInterface = new ethers.Interface([
+      "event Transfer(address indexed from, address indexed to, uint256 value)",
+    ]);
+
+    let verifiedAmount = 0;
+    for (const log of receipt.logs) {
+      if (log.address.toLowerCase() !== usdcAddr.toLowerCase()) continue;
+      try {
+        const parsed = usdcInterface.parseLog(log);
+        if (parsed.name === "Transfer" && parsed.args.to.toLowerCase() === platformWallet.toLowerCase()) {
+          verifiedAmount = parseFloat(ethers.formatUnits(parsed.args.value, 6));
+          break;
+        }
+      } catch {}
+    }
+
+    if (verifiedAmount <= 0) {
+      return res.status(400).json({ error: "No USDC transfer to platform wallet found in this transaction" });
+    }
+
+    if (Math.abs(verifiedAmount - usdcAmount) > 0.01) {
+      return res.status(400).json({
+        error: `Amount mismatch. On-chain: $${verifiedAmount} USDC, claimed: $${usdcAmount} USDC`,
+      });
+    }
+
+    const hbAmount = Math.floor(verifiedAmount * HB_TO_USD);
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    user.hyperBucks = (user.hyperBucks || 0) + hbAmount;
+    await user.save();
+
+    const ledgerEntry = await HBLedger.create({
+      userId,
+      type: "earn",
+      amount: hbAmount,
+      balanceAfter: user.hyperBucks,
+      description: `USDC Top-up: $${verifiedAmount} USDC → ${hbAmount} HB`,
+      reference: txHash,
+    });
+
+    console.log(`[USDC TopUp] ${hbAmount} HB credited to ${userId} | tx: ${txHash}`);
+    return res.status(200).json({ success: true, hbAmount, newBalance: user.hyperBucks, ledgerEntry });
+  } catch (error) {
+    console.error("topupViaUSDC error:", error);
+    return res.status(500).json({ error: error.message });
+  }
+}
+
 // ------------------ CREATE HB TOP-UP PAYMENT INTENT ------------------
 // POST /api/v1/hb/topup/intent
 // Body: { hbAmount } — must be multiple of 250, minimum 250
@@ -553,7 +691,7 @@ export async function createHBTopupIntent(req, res) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: stripeAmountCents,
       currency: "usd",
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ["card"],
       metadata: {
         userId,
         itemType: "hyperbucks",

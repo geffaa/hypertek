@@ -45,6 +45,57 @@ function EditProfile() {
   const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
   const [pkPassword, setPkPassword] = useState("");
 
+  // Bank details
+  const [bankDetails, setBankDetails] = useState({
+    accountHolderName: "",
+    bankName: "",
+    accountNumber: "",
+    iban: "",
+    swift: "",
+    routingNumber: "",
+    country: "",
+    currency: "USD",
+  });
+  const [savingBank, setSavingBank] = useState(false);
+  const [bankSaved, setBankSaved] = useState(false);
+
+  useEffect(() => {
+    if (!token) return;
+    fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (data?.bankDetails) {
+          setBankDetails((prev) => ({ ...prev, ...data.bankDetails }));
+        }
+      })
+      .catch(() => {});
+  }, [token]);
+
+  const handleSaveBankDetails = async () => {
+    if (!bankDetails.accountHolderName || !bankDetails.bankName || !bankDetails.accountNumber) {
+      toast.error("Account holder name, bank name, and account number are required");
+      return;
+    }
+    setSavingBank(true);
+    try {
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/bank-details`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify(bankDetails),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || "Failed to save bank details"); return; }
+      toast.success("Bank details saved successfully");
+      setBankSaved(true);
+    } catch (err) {
+      toast.error(err.message || "Something went wrong");
+    } finally {
+      setSavingBank(false);
+    }
+  };
+
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (!selected) return;
@@ -457,13 +508,54 @@ function EditProfile() {
               </div>
             </div>
 
+            {/* Bank Details */}
+            <div className="w-full max-w-md flex flex-col gap-4 mt-6">
+              <div>
+                <label className="block text-white text-[20px] md:text-[25px] font-medium mb-1">
+                  Bank Details
+                </label>
+                <p className="text-white/40 text-sm mb-4">Required for HyperBucks bank cashout. Pending admin verification.</p>
+              </div>
+
+              {[
+                { label: "Account Holder Name *", key: "accountHolderName", placeholder: "Full name as on bank account" },
+                { label: "Bank Name *", key: "bankName", placeholder: "e.g. Chase, BCA, HSBC" },
+                { label: "Account Number *", key: "accountNumber", placeholder: "Your account number" },
+                { label: "IBAN", key: "iban", placeholder: "For EU/international banks" },
+                { label: "SWIFT / BIC", key: "swift", placeholder: "e.g. BOFAUS3N" },
+                { label: "Routing Number", key: "routingNumber", placeholder: "For US banks" },
+                { label: "Country", key: "country", placeholder: "e.g. United States, Indonesia" },
+                { label: "Currency", key: "currency", placeholder: "e.g. USD, IDR, EUR" },
+              ].map(({ label, key, placeholder }) => (
+                <div key={key}>
+                  <label className="block text-white/60 text-sm mb-1">{label}</label>
+                  <input
+                    type="text"
+                    value={bankDetails[key]}
+                    onChange={(e) => setBankDetails((prev) => ({ ...prev, [key]: e.target.value }))}
+                    placeholder={placeholder}
+                    className="w-full bg-transparent border border-white rounded-lg px-3 py-2 text-sm text-white hover:border-blue-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+                  />
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={handleSaveBankDetails}
+                disabled={savingBank}
+                className="w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer bg-[#002AA8] hover:bg-[#001f7a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {savingBank ? "Saving..." : bankSaved ? "Saved ✓" : "Save Bank Details"}
+              </button>
+            </div>
+
             <div className="flex justify-center w-full my-12 md:my-16">
               <div className="w-full max-w-md">
                 <button
                   type="submit"
                   className="mx-auto block bg-[#002AA8] hover:bg-[#001f7a] transition-colors w-full sm:w-[190px] h-[42px] rounded-md font-medium text-white border-none cursor-pointer"
                 >
-                  Save
+                  Save Profile
                 </button>
               </div>
             </div>

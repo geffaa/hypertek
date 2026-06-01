@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../Config";
+import HBCoinIcon from "./HBCoinIcon";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
@@ -354,11 +355,11 @@ export default function Navbar() {
 
                 {/* HB Balance */}
                 {hbBalance !== null && (
-                  <Link to="/dashboard/withdraw"
+                  <Link to="/dashboard/topup"
                     className="flex items-center gap-1.5 px-3 h-10 rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity"
                     style={{ background: "rgba(0,42,168,0.6)", border: "1px solid rgba(0,80,255,0.35)" }}
                     data-tooltip="HyperBucks — click to withdraw">
-                    <span style={{ color: "#facc15" }}>⚡</span>
+                    <HBCoinIcon size={22} />
                     <span>{Number(hbBalance).toLocaleString()} HB</span>
                   </Link>
                 )}

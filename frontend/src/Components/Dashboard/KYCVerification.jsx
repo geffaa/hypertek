@@ -35,15 +35,15 @@ const STATUS_CONFIG = {
   },
 };
 
-export default function KYCVerification({ onVerified }) {
+export default function KYCVerification({ onVerified, initialStatus = null }) {
   const { token: authToken } = useSelector((state) => state.auth);
-  const [kycStatus, setKycStatus] = useState('not_started');
-  const [loading, setLoading] = useState(true);
+  const [kycStatus, setKycStatus] = useState(initialStatus || 'not_started');
+  const [loading, setLoading] = useState(initialStatus === null);
   const [starting, setStarting] = useState(false);
   const [checking, setChecking] = useState(false);
 
   useEffect(() => {
-    fetchStatus();
+    if (initialStatus === null) fetchStatus();
   }, []);
 
   // Auto-poll every 8 seconds while pending

@@ -7,9 +7,11 @@ import { useSelector } from 'react-redux';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { FiZap, FiCheckCircle, FiArrowLeft, FiTrendingUp, FiArrowDownCircle } from 'react-icons/fi';
-import { useAccount } from 'wagmi';
+import { CreditCard, Wallet } from 'lucide-react';
+import { useAccount, useWalletClient, usePublicClient } from 'wagmi';
 import { useEmailWallet } from '../../hooks/useEmailWallet';
 import KYCVerification from '../../Components/Dashboard/KYCVerification';
+import HBCoinIcon from '../../Components/Common/HBCoinIcon';
 
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
@@ -93,9 +95,14 @@ export default function HyperBucks() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { address: wagmiAddress, isConnected: isWagmiConnected } = useAccount();
-  const { emailWalletAddress, isEmailWalletConnected } = useEmailWallet();
+  const { address: wagmiAddress } = useAccount();
+  const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient();
+  const { emailWalletAddress, emailWalletClient } = useEmailWallet();
   const activeAddress = wagmiAddress || emailWalletAddress;
+  const activeWalletClient = walletClient || emailWalletClient;
+  // True only when a wallet capable of signing txs is connected (MetaMask / WalletConnect or email wallet with PK loaded)
+  const hasSigningWallet = !!(walletClient || emailWalletClient);
 
   const [activeTab, setActiveTab] = useState('topup');
 
@@ -108,9 +115,13 @@ export default function HyperBucks() {
   const [hbCashoutAmount, setHbCashoutAmount] = useState('');
   const [hbCashoutMethod, setHbCashoutMethod] = useState('usdc');
   const [hbProcessing, setHbProcessing] = useState(false);
-  const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'otp'
+  const [cashoutStep, setCashoutStep] = useState('form'); // 'form' | 'confirm' | 'otp'
   const [otpCode, setOtpCode] = useState('');
   const [sendingOtp, setSendingOtp] = useState(false);
+
+  // USDC top-up states
+  const [usdcTopupStep, setUsdcTopupStep] = useState('idle'); // 'idle' | 'approving' | 'sending' | 'verifying' | 'done'
+  const [topupMethod, setTopupMethod] = useState(null); // null | 'card' | 'usdc'
 
   // KYC gate — only shown when user tries to cashout without being verified
   const [kycStatus, setKycStatus] = useState(null); // null = not fetched
@@ -221,21 +232,72 @@ export default function HyperBucks() {
   };
 
   // ── Cashout ───────────────────────────────────────────────────────
-  // Step 1 — validate inputs then send OTP to email
+  // USDC top-up — direct wallet transfer, fully automated
+  const handleUSDCTopup = async () => {
+    if (!activeUSD || activeUSD < 1) { toast.error('Enter an amount first'); return; }
+    if (!activeWalletClient) { toast.error('Connect a wallet first'); return; }
+
+    const usdcAddr = import.meta.env.VITE_USDC_ADDRESS;
+    const platformWallet = import.meta.env.VITE_PLATFORM_WALLET;
+    if (!usdcAddr || !platformWallet) { toast.error('Platform wallet not configured'); return; }
+
+    try {
+      // Step 1 — send USDC from user wallet to platform wallet
+      setUsdcTopupStep('sending');
+      const amountUnits = BigInt(Math.round(activeUSD * 1_000_000)); // USDC = 6 decimals
+
+      const txHash = await activeWalletClient.writeContract({
+        address: usdcAddr,
+        abi: [{ name: 'transfer', type: 'function', stateMutability: 'nonpayable', inputs: [{ name: 'to', type: 'address' }, { name: 'amount', type: 'uint256' }], outputs: [{ name: '', type: 'bool' }] }],
+        functionName: 'transfer',
+        args: [platformWallet, amountUnits],
+        account: activeWalletClient.account || activeAddress,
+      });
+
+      toast.loading('Waiting for transaction confirmation...', { id: 'usdc-topup' });
+
+      // Step 2 — wait for confirmation
+      setUsdcTopupStep('verifying');
+      await publicClient.waitForTransactionReceipt({ hash: txHash });
+
+      // Step 3 — notify backend to credit HB
+      const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/topup/usdc`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+        body: JSON.stringify({ txHash, usdcAmount: activeUSD }),
+      });
+      const data = await res.json();
+      if (!res.ok) { toast.error(data.error || 'Verification failed', { id: 'usdc-topup' }); setUsdcTopupStep('idle'); return; }
+
+      toast.success(`${data.hbAmount.toLocaleString()} HB credited!`, { id: 'usdc-topup' });
+      setUsdcTopupStep('done');
+      setCustomUsd('');
+      setTopupMethod(null);
+      fetchBalance();
+      fetchHistory();
+    } catch (err) {
+      toast.dismiss('usdc-topup');
+      if (err.message?.includes('rejected') || err.message?.includes('denied')) {
+        toast.error('Transaction cancelled');
+      } else {
+        toast.error('Failed: ' + err.message);
+      }
+      setUsdcTopupStep('idle');
+    }
+  };
+
+  // Step 1 — validate inputs then show confirmation modal
   const handleRequestOTP = async () => {
     const hbAmount = parseInt(hbCashoutAmount, 10);
-    const method = hbCashoutMethod;
-
     if (!hbAmount || hbAmount <= 0) { toast.error('Please enter a valid HB amount'); return; }
     if (kycStatus !== 'verified') { setKycGateOpen(true); return; }
+    if (hbAmount < 250) { toast.error('Minimum USDC cashout is 250 HB ($1)'); return; }
+    if (!activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
+    setCashoutStep('confirm');
+  };
 
-    const minHb = method === 'bank' ? 2500 : 250;
-    if (hbAmount < minHb) {
-      toast.error(method === 'bank' ? 'Minimum bank cashout is 2500 HB ($10)' : 'Minimum USDC cashout is 250 HB ($1)');
-      return;
-    }
-    if (method === 'usdc' && !activeAddress) { toast.error('Connect a wallet to receive USDC'); return; }
-
+  // Step 2 — confirmed, send OTP
+  const handleConfirmAndSendOTP = async () => {
     setSendingOtp(true);
     try {
       const res = await fetch(`${BACKEND_BASE_URL}/api/v1/hb/cashout/otp`, {
@@ -266,14 +328,25 @@ export default function HyperBucks() {
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
         body: JSON.stringify({
           amount: parseInt(hbCashoutAmount, 10),
-          method: hbCashoutMethod,
+          method: 'usdc',
           otp: otpCode,
-          ...(hbCashoutMethod === 'usdc' ? { walletAddress: activeAddress } : {}),
+          walletAddress: activeAddress,
         }),
       });
       const data = await res.json();
       if (!res.ok) { toast.error(data.error || 'Cashout failed', { id: toastId }); return; }
-      toast.success(`${parseInt(hbCashoutAmount, 10).toLocaleString()} HB cashout submitted!`, { id: toastId });
+
+      // Show status-specific toast
+      if (data.cashoutStatus === 'completed') {
+        toast.success(data.message || 'USDC sent successfully!', { id: toastId, duration: 6000 });
+      } else if (data.cashoutStatus === 'pending') {
+        toast(data.message || 'Cashout queued — admin will process shortly.', {
+          id: toastId, icon: '⏳', duration: 8000,
+          style: { background: '#1a1a2e', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.3)' },
+        });
+      } else {
+        toast.success(data.message || 'Cashout submitted.', { id: toastId });
+      }
       setHbCashoutAmount('');
       setOtpCode('');
       setCashoutStep('form');
@@ -340,7 +413,7 @@ export default function HyperBucks() {
       <div className="bg-[#002AA8]/20 border border-[#002AA8]/40 rounded-2xl p-4 mb-6 flex items-center justify-between w-full">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-[#002AA8]/40 flex items-center justify-center">
-            <FiZap className="text-blue-300" size={18} />
+            <HBCoinIcon size={48} />
           </div>
           <div>
             <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.currentBalance", "Current Balance")}</p>
@@ -355,7 +428,7 @@ export default function HyperBucks() {
       {/* Tabs */}
       <div className="flex items-center gap-1 border-b border-white/10 mb-6">
         <button
-          onClick={() => { setActiveTab('topup'); setClientSecret(''); }}
+          onClick={() => { setActiveTab('topup'); setClientSecret(''); setTopupMethod(null); setUsdcTopupStep('idle'); }}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors relative whitespace-nowrap ${
             activeTab === 'topup' ? 'text-white' : 'text-white/40 hover:text-white/70'
           }`}
@@ -410,25 +483,89 @@ export default function HyperBucks() {
                     )}
                   </div>
 
-                  <button
-                    onClick={handleProceed}
-                    disabled={!activeHB || activeHB < 250 || loadingIntent}
-                    className={`w-full py-4 rounded-2xl font-bold text-base text-white transition-all ${
-                      activeHB >= 250 && !loadingIntent
-                        ? 'bg-[#002AA8] hover:bg-blue-700'
-                        : 'bg-white/10 cursor-not-allowed text-white/40'
-                    }`}
-                  >
-                    {loadingIntent
-                      ? t("dashboard.hyperbucks.topup.preparing", "Preparing...")
-                      : activeHB >= 250
-                      ? `${t("dashboard.hyperbucks.topup.proceed", "Proceed to Payment")} — $${activeUSD} USD`
-                      : t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
-                  </button>
+                  {/* Payment method selector */}
+                  <div className="flex gap-3 mb-4">
+                    {[
+                      { key: 'card', label: 'Credit / Debit Card', sub: 'Visa, Mastercard, etc.', Icon: CreditCard },
+                      { key: 'usdc', label: 'USDC via Wallet', sub: 'Base network · no extra fee', Icon: Wallet },
+                    ].map(({ key, label, sub, Icon }) => (
+                      <button
+                        key={key}
+                        onClick={() => { setTopupMethod(key); setUsdcTopupStep('idle'); }}
+                        className={`flex-1 rounded-2xl p-3 text-left border transition-all ${
+                          topupMethod === key
+                            ? 'bg-[#002AA8]/30 border-[#002AA8] text-white'
+                            : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
+                        }`}
+                      >
+                        <Icon size={20} strokeWidth={1.5} className={topupMethod === key ? 'text-blue-400' : 'text-white/40'} />
+                        <p className="text-sm font-semibold mt-1">{label}</p>
+                        <p className="text-[10px] text-white/30 mt-0.5">{sub}</p>
+                      </button>
+                    ))}
+                  </div>
 
-                  <p className="text-white/25 text-xs text-center mt-3">
-                    {t("dashboard.hyperbucks.topup.secured", "Secured by Stripe · 250 HB = $1 USD · min $1")}
-                  </p>
+                  {/* Single action button */}
+                  {topupMethod === 'card' && (
+                    <button
+                      onClick={handleProceed}
+                      disabled={!activeHB || activeHB < 250 || loadingIntent}
+                      className={`w-full py-4 rounded-2xl font-bold text-base text-white transition-all ${
+                        activeHB >= 250 && !loadingIntent ? 'bg-[#002AA8] hover:bg-blue-700' : 'bg-white/10 cursor-not-allowed text-white/40'
+                      }`}
+                    >
+                      {loadingIntent ? t("dashboard.hyperbucks.topup.preparing", "Preparing...") : activeHB >= 250 ? `Continue — $${activeUSD} USD` : t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
+                    </button>
+                  )}
+
+                  {topupMethod === 'usdc' && (
+                    <div className="space-y-3">
+                      {!activeAddress ? (
+                        <p className="text-yellow-400 text-sm text-center py-2">{t("dashboard.hyperbucks.cashout.noWallet", "Connect a wallet to continue")}</p>
+                      ) : !hasSigningWallet ? (
+                        <>
+                          <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white/40 flex justify-between">
+                            <span>{t("dashboard.hyperbucks.usdcTopup.from", "From")}</span>
+                            <span className="font-mono text-white/60">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
+                          </div>
+                          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3 text-center">
+                            <p className="text-yellow-300 text-sm font-semibold mb-1">External wallet required</p>
+                            <p className="text-yellow-300/60 text-xs">Your HyperTek account wallet cannot sign on-chain transactions directly. Connect MetaMask or WalletConnect to use USDC top-up.</p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white/40 flex justify-between">
+                            <span>{t("dashboard.hyperbucks.usdcTopup.from", "From")}</span>
+                            <span className="font-mono text-white/60">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
+                          </div>
+                          <button
+                            onClick={handleUSDCTopup}
+                            disabled={!activeHB || activeHB < 250 || ['sending', 'verifying'].includes(usdcTopupStep)}
+                            className={`w-full py-4 rounded-2xl font-bold text-base text-white transition-all ${
+                              activeHB >= 250 && !['sending', 'verifying'].includes(usdcTopupStep)
+                                ? 'bg-[#002AA8] hover:bg-blue-700'
+                                : 'bg-white/10 cursor-not-allowed text-white/40'
+                            }`}
+                          >
+                            {usdcTopupStep === 'sending' ? 'Confirm in wallet...' :
+                             usdcTopupStep === 'verifying' ? 'Verifying on-chain...' :
+                             activeHB >= 250 ? `Pay ${activeUSD} USDC → ${activeHB.toLocaleString()} HB` :
+                             t("dashboard.hyperbucks.topup.enterAmount", "Enter an amount to continue")}
+                          </button>
+                          {usdcTopupStep === 'done' && (
+                            <div className="flex items-center gap-2 text-green-400 text-sm justify-center">
+                              <FiCheckCircle size={16} /> HyperBucks credited successfully!
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
+
+                  {!topupMethod && (
+                    <p className="text-white/25 text-xs text-center mt-1">{t("dashboard.hyperbucks.topup.rate", "250 HB = $1 USD · min $1")}</p>
+                  )}
                 </div>
 
                 {/* Right — package shortcuts */}
@@ -503,6 +640,7 @@ export default function HyperBucks() {
                   <p className="text-white/60 text-sm">{t("dashboard.hyperbucks.cashout.kycNote", "Complete identity verification to continue")}</p>
                 </div>
                 <KYCVerification
+                  initialStatus={kycStatus}
                   onVerified={() => {
                     setKycStatus('verified');
                     setKycGateOpen(false);
@@ -528,7 +666,7 @@ export default function HyperBucks() {
                   <div className="mb-2 text-white/50 text-xs">
                     {t("dashboard.hyperbucks.otp.cashingOut", "Cashing out")} <span className="text-white font-semibold">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
                     {' '}≈ <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
-                    {' '}via <span className="text-white font-semibold capitalize">{hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.otp.usdcWallet", "USDC Wallet") : t("dashboard.hyperbucks.otp.bankAccount", "Bank Account")}</span>
+                    {' '}via <span className="text-white font-semibold">{t("dashboard.hyperbucks.otp.bankAccount", "Bank Transfer")}</span>
                   </div>
                 </div>
 
@@ -563,9 +701,57 @@ export default function HyperBucks() {
                   {sendingOtp ? t("dashboard.hyperbucks.otp.sending", "Sending...") : t("dashboard.hyperbucks.otp.resend", "Resend code")}
                 </button>
               </div>
+            ) : cashoutStep === 'confirm' ? (
+              /* Confirmation Modal Step */
+              <div className="w-full max-w-md mx-auto">
+                <div className="flex items-center gap-3 mb-6">
+                  <button onClick={() => setCashoutStep('form')} className="text-white/40 hover:text-white transition-colors">
+                    <FiArrowLeft size={16} />
+                  </button>
+                  <p className="text-white font-semibold text-sm">{t("dashboard.hyperbucks.confirm.title", "Confirm Cashout")}</p>
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-4 space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.amount", "Amount")}</span>
+                    <span className="text-white font-bold text-lg">{parseInt(hbCashoutAmount, 10).toLocaleString()} HB</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.usdEquiv", "USD Equivalent")}</span>
+                    <span className="text-white font-semibold">${(parseInt(hbCashoutAmount, 10) / 250).toFixed(2)} USD</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.method", "Method")}</span>
+                    <span className="text-white font-semibold">USDC on Base</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.wallet", "To Wallet")}</span>
+                    <span className="text-white font-mono text-sm">{activeAddress?.slice(0, 6)}...{activeAddress?.slice(-4)}</span>
+                  </div>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/50 text-sm">{t("dashboard.hyperbucks.confirm.fee", "Gas Fee")}</span>
+                      <span className="text-white/70 font-semibold">~$0.01 (paid by platform)</span>
+                    </div>
+                  </div>
+                  <div className="bg-[#002AA8]/10 border border-[#002AA8]/30 rounded-xl p-3">
+                    <p className="text-white/50 text-xs">{t("dashboard.hyperbucks.confirm.processingNote", "USDC will be sent to your wallet on Base network. If platform wallet is low, admin will process within 24h.")}</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleConfirmAndSendOTP}
+                  disabled={sendingOtp}
+                  className={`w-full py-4 rounded-2xl font-bold text-base transition-all ${
+                    sendingOtp ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'
+                  }`}
+                >
+                  {sendingOtp ? t("dashboard.hyperbucks.cashout.sendingOtp", "Sending OTP...") : t("dashboard.hyperbucks.confirm.confirmSendOtp", "Confirm & Send OTP")}
+                </button>
+              </div>
             ) : (
+            /* Form Step */
             <div className="flex flex-col lg:flex-row gap-6 items-start">
-              {/* Left — amount + button */}
               <div className="w-full lg:flex-1">
                 <label className="text-white/50 text-xs mb-2 block">{t("dashboard.hyperbucks.cashout.amountLabel", "Amount (HB)")}</label>
                 <div className="relative mb-3">
@@ -573,7 +759,7 @@ export default function HyperBucks() {
                     type="number"
                     value={hbCashoutAmount}
                     onChange={(e) => setHbCashoutAmount(e.target.value)}
-                    placeholder={hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.cashout.minUsdc", "Min 250 HB") : t("dashboard.hyperbucks.cashout.minBank", "Min 2500 HB")}
+                    placeholder={t("dashboard.hyperbucks.cashout.minUsdc", "Min 250 HB")}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#002AA8] transition-colors pr-28"
                   />
                   {hbCashoutAmount && Number(hbCashoutAmount) > 0 && (
@@ -583,62 +769,33 @@ export default function HyperBucks() {
                   )}
                 </div>
 
-                <div className="h-6 mb-5">
-                  {hbCashoutMethod === 'usdc' && activeAddress && (
-                    <p className="text-white/30 text-xs">
-                      To: <span className="font-mono text-white/50">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
-                    </p>
-                  )}
-                  {hbCashoutMethod === 'usdc' && !activeAddress && (
-                    <p className="text-yellow-400 text-xs">{t("dashboard.hyperbucks.cashout.noWallet", "No wallet connected")}</p>
-                  )}
-                </div>
+                {activeAddress ? (
+                  <p className="text-white/30 text-xs mb-5">
+                    {t("dashboard.hyperbucks.cashout.toWallet", "To:")} <span className="font-mono text-white/50">{activeAddress.slice(0, 6)}...{activeAddress.slice(-4)}</span>
+                  </p>
+                ) : (
+                  <p className="text-yellow-400 text-xs mb-5">{t("dashboard.hyperbucks.cashout.noWallet", "Connect a wallet to receive USDC")}</p>
+                )}
 
                 <button
                   onClick={handleRequestOTP}
                   disabled={sendingOtp}
                   className={`w-full py-4 rounded-2xl font-bold text-base transition-all ${
-                    sendingOtp
-                      ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                      : 'bg-[#002AA8] hover:bg-blue-700 text-white'
+                    sendingOtp ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-[#002AA8] hover:bg-blue-700 text-white'
                   }`}
                 >
-                  {sendingOtp ? t("dashboard.hyperbucks.cashout.sendingOtp", "Sending OTP...") : hbCashoutMethod === 'usdc' ? t("dashboard.hyperbucks.cashout.toUsdc", "Cashout to USDC Wallet") : t("dashboard.hyperbucks.cashout.toBank", "Cashout to Bank Account")}
+                  {t("dashboard.hyperbucks.cashout.toUsdc", "Cashout to USDC Wallet")}
                 </button>
               </div>
 
-              {/* Right — method selector + info */}
-              <div className="w-full lg:w-[340px] flex-shrink-0">
-                <p className="text-white/50 text-xs mb-3">{t("dashboard.hyperbucks.cashout.receiveVia", "Receive via")}</p>
-                <div className="flex flex-col gap-2 mb-4">
-                  <button
-                    onClick={() => setHbCashoutMethod('usdc')}
-                    className={`w-full py-3 px-4 rounded-xl border text-sm font-semibold text-left transition-colors ${
-                      hbCashoutMethod === 'usdc'
-                        ? 'bg-[#002AA8]/30 border-[#002AA8] text-white'
-                        : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
-                    }`}
-                  >
-                    {t("dashboard.hyperbucks.cashout.usdcWallet", "USDC Wallet")}
-                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">{t("dashboard.hyperbucks.cashout.usdcMin", "Min 250 HB · ~$0.01 gas")}</span>
-                  </button>
-                  <button
-                    onClick={() => setHbCashoutMethod('bank')}
-                    className={`w-full py-3 px-4 rounded-xl border text-sm font-semibold text-left transition-colors ${
-                      hbCashoutMethod === 'bank'
-                        ? 'bg-[#002AA8]/30 border-[#002AA8] text-white'
-                        : 'bg-white/5 border-white/10 text-white/50 hover:border-white/30'
-                    }`}
-                  >
-                    {t("dashboard.hyperbucks.cashout.bankAccount", "Bank Account")}
-                    <span className="block text-[10px] font-normal text-white/30 mt-0.5">{t("dashboard.hyperbucks.cashout.bankMin", "Min 2500 HB ($10) · bank details required")}</span>
-                  </button>
+              <div className="w-full lg:w-[280px] flex-shrink-0 bg-white/5 border border-white/10 rounded-2xl p-4">
+                <p className="text-white font-semibold text-sm mb-2">{t("dashboard.hyperbucks.cashout.usdcWallet", "USDC Wallet")}</p>
+                <p className="text-white/40 text-xs mb-1">{t("dashboard.hyperbucks.cashout.usdcMin", "Min 250 HB ($1)")}</p>
+                <p className="text-white/40 text-xs mb-1">~$0.01 gas fee (Base network)</p>
+                <p className="text-white/40 text-xs">Instant transfer on-chain</p>
+                <div className="mt-3 pt-3 border-t border-white/10">
+                  <p className="text-white/30 text-xs">If platform wallet is low, admin will process manually within 24h.</p>
                 </div>
-                {hbCashoutMethod === 'bank' && (
-                  <p className="text-xs text-white/30">
-                    <a href="/dashboard/edit-profile" className="text-[#002AA8] hover:underline">{t("dashboard.hyperbucks.cashout.addBank", "Add bank details in Profile →")}</a>
-                  </p>
-                )}
               </div>
             </div>
             )}
@@ -652,23 +809,29 @@ export default function HyperBucks() {
         <h3 className="text-white font-semibold text-base mb-4">{t("dashboard.hyperbucks.history.title", "Transaction History")}</h3>
         <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left min-w-[480px]">
+            <table className="w-full text-left min-w-[600px]">
               <thead className="bg-white/5 text-xs uppercase text-white/40">
                 <tr>
                   <th className="px-4 py-3">{t("dashboard.hyperbucks.history.type", "Type")}</th>
                   <th className="px-4 py-3">{t("dashboard.hyperbucks.history.amount", "Amount")}</th>
                   <th className="px-4 py-3">{t("dashboard.hyperbucks.history.balanceAfter", "Balance After")}</th>
+                  <th className="px-4 py-3">{t("dashboard.hyperbucks.history.status", "Status")}</th>
                   <th className="px-4 py-3">{t("dashboard.hyperbucks.history.date", "Date")}</th>
                   <th className="px-4 py-3">{t("dashboard.hyperbucks.history.note", "Note")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {hbHistoryLoading ? (
-                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.loading", "Loading...")}</td></tr>
+                  <tr><td colSpan="6" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.loading", "Loading...")}</td></tr>
                 ) : hbHistory.length === 0 ? (
-                  <tr><td colSpan="5" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.empty", "No transactions yet.")}</td></tr>
+                  <tr><td colSpan="6" className="px-4 py-8 text-center text-white/40 text-sm">{t("dashboard.hyperbucks.history.empty", "No transactions yet.")}</td></tr>
                 ) : (
-                  hbHistory.map((tx) => (
+                  hbHistory.map((tx) => {
+                    const basescanBase = Number(import.meta.env.VITE_CHAIN_ID) === 84532
+                      ? 'https://sepolia.basescan.org/tx/'
+                      : 'https://basescan.org/tx/';
+                    const hasTxHash = tx.cashoutTxHash && tx.cashoutTxHash.startsWith('0x');
+                    return (
                     <tr key={tx._id} className="hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
@@ -685,6 +848,43 @@ export default function HyperBucks() {
                         {tx.amount > 0 ? '+' : ''}{tx.amount}
                       </td>
                       <td className="px-4 py-3 font-mono text-white/50 text-sm">{tx.balanceAfter}</td>
+                      <td className="px-4 py-3">
+                        {tx.type === 'cashout' ? (
+                          <div className="flex flex-col gap-1">
+                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium w-fit ${
+                              tx.cashoutStatus === 'completed'  ? 'bg-green-500/15 text-green-400' :
+                              tx.cashoutStatus === 'failed'     ? 'bg-red-500/15 text-red-400' :
+                              tx.cashoutStatus === 'processing' ? 'bg-blue-500/15 text-blue-400' :
+                                                                  'bg-yellow-500/15 text-yellow-400'
+                            }`}>
+                              {tx.cashoutStatus === 'completed'  ? '✓ Sent' :
+                               tx.cashoutStatus === 'failed'     ? '✕ Failed' :
+                               tx.cashoutStatus === 'processing' ? '⟳ Processing' :
+                                                                   '⏳ Pending'}
+                            </span>
+                            {hasTxHash && (
+                              <a href={`${basescanBase}${tx.cashoutTxHash}`} target="_blank" rel="noopener noreferrer"
+                                className="text-[10px] text-blue-400 hover:text-blue-300 underline font-mono">
+                                {tx.cashoutTxHash.slice(0, 6)}...{tx.cashoutTxHash.slice(-4)} ↗
+                              </a>
+                            )}
+                          </div>
+                        ) : tx.type === 'earn' ? (
+                          <div className="flex flex-col gap-1">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium w-fit bg-green-500/15 text-green-400">
+                              ✓ Confirmed
+                            </span>
+                            {tx.reference?.startsWith('0x') && (
+                              <a href={`${basescanBase}${tx.reference}`} target="_blank" rel="noopener noreferrer"
+                                className="text-[10px] text-blue-400 hover:text-blue-300 underline font-mono">
+                                {tx.reference.slice(0, 6)}...{tx.reference.slice(-4)} ↗
+                              </a>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-white/20 text-xs">—</span>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-xs text-white/40">
                         {new Date(tx.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
                       </td>
@@ -692,7 +892,7 @@ export default function HyperBucks() {
                         {tx.description || '—'}
                       </td>
                     </tr>
-                  ))
+                  );})
                 )}
               </tbody>
             </table>

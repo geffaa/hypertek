@@ -1,5 +1,6 @@
 import { FiMenu } from "react-icons/fi";
 import { ChevronDown, LayoutGrid, Gamepad2, Store, Bell } from "lucide-react";
+import HBCoinIcon from "../Common/HBCoinIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import logoutImage from "../../assets/images/login/logout.png";
@@ -97,19 +98,22 @@ const Header = ({ onMenuClick }) => {
         {/* HB Balance Pill */}
         {hbBalance !== null && (
           <button
-            onClick={() => navigate("/dashboard/withdraw")}
-            className="flex flex-col items-center justify-center rounded-lg px-3 py-1 transition-all duration-200 hover:scale-105 flex-shrink-0"
+            onClick={() => navigate("/dashboard/topup")}
+            className="flex items-center gap-2 rounded-lg px-3 py-1.5 transition-all duration-200 hover:scale-105 flex-shrink-0"
             style={{
               background: "linear-gradient(135deg,rgba(234,179,8,0.18),rgba(249,115,22,0.18))",
               border: "1px solid rgba(234,179,8,0.35)",
             }}
           >
-            <span className="text-yellow-300 text-xs font-bold leading-tight whitespace-nowrap">
-              ⚡ {hbBalance.hyperBucks} HB
-            </span>
-            <span className="text-yellow-500/70 text-[10px] leading-tight">
-              ${hbBalance.usdEquivalent} USD
-            </span>
+            <HBCoinIcon size={32} />
+            <div className="flex flex-col items-start">
+              <span className="text-yellow-300 text-xs font-bold leading-tight whitespace-nowrap">
+                {hbBalance.hyperBucks} HB
+              </span>
+              <span className="text-yellow-500/70 text-[10px] leading-tight">
+                ${hbBalance.usdEquivalent} USD
+              </span>
+            </div>
           </button>
         )}
 

@@ -7,7 +7,9 @@ import {
   getHBBalance,
   getHBHistory,
   saveBankDetails,
+  getBankDetails,
   createHBTopupIntent,
+  topupViaUSDC,
 } from "../Controllers/HBController.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 
@@ -19,7 +21,9 @@ router.post("/cashout/otp", authMiddleware(), requestCashoutOTP);
 router.post("/cashout", authMiddleware(), cashoutHB);
 router.get("/balance", authMiddleware(), getHBBalance);
 router.get("/history", authMiddleware(), getHBHistory);
+router.get("/bank-details", authMiddleware(), getBankDetails);
 router.put("/bank-details", authMiddleware(), saveBankDetails);
 router.post("/topup/intent", authMiddleware(), createHBTopupIntent);
+router.post("/topup/usdc", authMiddleware(), topupViaUSDC);
 
 export default router;
