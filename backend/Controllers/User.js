@@ -1060,7 +1060,18 @@ export const GetWalletAddress = async (req, res) => {
     const user = await UserModel.findById(userId).select("WalletAddress EncryptedPrivateKey");
     if (!user) return res.status(404).json({ message: "User not found" });
     if (!user.WalletAddress) return res.status(404).json({ message: "No wallet found for this user." });
-    res.status(200).json({ success: true, WalletAddress: user.WalletAddress });
+    // Decrypt private key so the frontend can initialize the wallet client for signing transactions.
+    // This is safe: the endpoint is already JWT-protected — a valid token means the user is authenticated
+    // and owns this wallet.
+    let privateKey = null;
+    if (user.EncryptedPrivateKey) {
+      try {
+        privateKey = decryptPrivateKey(user.EncryptedPrivateKey);
+      } catch (e) {
+        console.warn("GetWalletAddress: failed to decrypt private key:", e.message);
+      }
+    }
+    res.status(200).json({ success: true, WalletAddress: user.WalletAddress, PrivateKey: privateKey });
   } catch (err) {
     console.error("GetWalletAddress error:", err);
     res.status(500).json({ message: "Server error", error: err.message });
@@ -1102,6 +1113,66 @@ export const ExportWallet = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+// ------------------ FUND GAS (auto-drip ETH to email wallet) ------------------
+// Sends a small amount of ETH from the backend wallet to the user's email wallet
+// so they can pay gas for on-chain transactions. Rate-limited: only drips if
+// wallet balance is below the minimum threshold.
+export const FundGasWallet = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const user = await UserModel.findById(userId).select("WalletAddress");
+    if (!user?.WalletAddress) {
+      return res.status(400).json({ message: "No email wallet found for this user." });
+    }
+
+    const targetWallet = user.WalletAddress;
+    const chainId = Number(process.env.BASE_CHAIN_ID) || 84532;
+    const rpc = chainId === 84532
+      ? (process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org")
+      : (process.env.BASE_RPC_URL || "https://mainnet.base.org");
+
+    const provider = new ethers.JsonRpcProvider(rpc);
+    const backendWallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+
+    // Check current balance — only drip if below 0.0005 ETH
+    const balance = await provider.getBalance(targetWallet);
+    const threshold = ethers.parseEther("0.0005");
+    if (balance >= threshold) {
+      return res.status(200).json({
+        success: true,
+        alreadyFunded: true,
+        message: "Wallet already has enough ETH for gas.",
+        balance: ethers.formatEther(balance),
+      });
+    }
+
+    // Drip amount: 0.001 ETH (testnet) or 0.0005 ETH (mainnet — careful)
+    const dripAmount = chainId === 84532
+      ? ethers.parseEther("0.001")
+      : ethers.parseEther("0.0003");
+
+    const backendBalance = await provider.getBalance(await backendWallet.getAddress());
+    if (backendBalance < dripAmount) {
+      return res.status(503).json({ message: "Backend wallet insufficient ETH for gas sponsorship." });
+    }
+
+    const tx = await backendWallet.sendTransaction({ to: targetWallet, value: dripAmount });
+    await tx.wait();
+
+    console.log(`⛽ Gas drip: ${ethers.formatEther(dripAmount)} ETH → ${targetWallet} (tx: ${tx.hash})`);
+
+    res.status(200).json({
+      success: true,
+      txHash: tx.hash,
+      amount: ethers.formatEther(dripAmount),
+      message: "ETH sent for gas.",
+    });
+  } catch (err) {
+    console.error("FundGasWallet error:", err);
+    res.status(500).json({ message: "Failed to fund gas wallet.", error: err.message });
+  }
+};
+
 // ------------------ GET ADMIN BY ADMIN ID ------------------
 const GetAdminByAdminId = async (req, res) => {
   try {

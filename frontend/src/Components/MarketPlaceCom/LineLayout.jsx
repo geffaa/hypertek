@@ -134,7 +134,7 @@ function LineCard({ item }) {
             textTransform: "uppercase",
           }}>
             {isDummy
-              ? t("marketplace.general.preview", "Preview")
+              ? t("marketplace.general.dummyNotForSale", "Preview Only")
               : price != null
                 ? t("marketplace.general.buyNow", "Buy Now")
                 : t("marketplace.general.viewDetails", "View Details")}

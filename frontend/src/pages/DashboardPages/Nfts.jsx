@@ -55,7 +55,12 @@ function NFTs() {
   const token = useSelector((state) => state.auth.token) || localStorage.getItem("token");
   const { address: wagmiAddress } = useAccount();
   const { emailWalletAddress } = useEmailWallet();
-  const wallet = wagmiAddress?.toLowerCase() || emailWalletAddress?.toLowerCase() || user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
+  const userWallet = user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
+  // Only use wagmiAddress if it matches the logged-in user's stored wallet (prevents cross-user leak when MetaMask stays connected)
+  const resolvedWagmi = wagmiAddress?.toLowerCase();
+  const wallet = (resolvedWagmi && userWallet && resolvedWagmi === userWallet)
+    ? resolvedWagmi
+    : emailWalletAddress?.toLowerCase() || userWallet || "";
 
   const [allItems, setAllItems]             = useState([]);
   const [loading, setLoading]               = useState(true);

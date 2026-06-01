@@ -16,7 +16,11 @@ function CollectionOnSale() {
 
   const { address: wagmiAddress } = useAccount();
   const { emailWalletAddress } = useEmailWallet();
-  const wallet = wagmiAddress?.toLowerCase() || emailWalletAddress?.toLowerCase() || user?.WalletAddress || user?.MetaMaskAddress || "";
+  const userWallet = user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
+  const resolvedWagmi = wagmiAddress?.toLowerCase();
+  const wallet = (resolvedWagmi && userWallet && resolvedWagmi === userWallet)
+    ? resolvedWagmi
+    : emailWalletAddress?.toLowerCase() || userWallet || "";
 
   const fetchListings = async () => {
     if (!wallet) { setLoading(false); return; }

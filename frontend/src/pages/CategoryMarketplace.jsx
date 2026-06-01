@@ -149,39 +149,22 @@ function CategoryMarketplace() {
 
         for (const parent of parents) {
           try {
+            const mapSub = (sub) => ({
+              ...sub,
+              parentId: parent._id,
+              parentCategory: CAT_ALIAS_REDIRECT[(parent.category || category)?.toLowerCase().trim()] || (parent.category || category),
+              parentName: parent.collection?.name || "",
+              isDummy: parent.isDummy === true,
+            });
+
             if (parent.subCollections && parent.subCollections.length) {
-              const mapped = parent.subCollections.map((sub) => ({
-                ...sub,
-                parentId: parent._id,
-                parentCategory: CAT_ALIAS_REDIRECT[(parent.category || category)?.toLowerCase().trim()] || (parent.category || category),
-                parentName: parent.collection?.name || "",
-                collection: {
-                  name: sub.name,
-                  image: sub.image,
-                  chain: sub.chain || parent.collection?.chain,
-                  Type: sub.Type,
-                },
-              }));
-              allSubs.push(...mapped);
+              allSubs.push(...parent.subCollections.map(mapSub));
             } else {
               const subRes = await axios.get(
                 `${BACKEND_BASE_URL}/api/v1/nft/parent-collection/${parent._id}/sub-collections`
               );
-
               if (subRes.data.success && subRes.data.subCollections) {
-                const mapped = subRes.data.subCollections.map((sub) => ({
-                  ...sub,
-                  parentId: parent._id,
-                  parentCategory: CAT_ALIAS_REDIRECT[(parent.category || category)?.toLowerCase().trim()] || (parent.category || category),
-                  parentName: parent.collection?.name || "",
-                  collection: {
-                    name: sub.name,
-                    image: sub.image,
-                    chain: sub.chain || parent.collection?.chain,
-                    Type: sub.Type,
-                  },
-                }));
-                allSubs.push(...mapped);
+                allSubs.push(...subRes.data.subCollections.map(mapSub));
               }
             }
           } catch (err) {
@@ -379,11 +362,8 @@ function CategoryMarketplace() {
             {filteredItems && filteredItems.length > 0 ? (
               filteredItems.map((item) => {
                 const isDummy = item.isDummy === true;
-                // Fallback items have item.image (public path); real items have item.collection?.image (backend path)
-                const imgSrc = isDummy
-                  ? item.image
-                  : getImageUrl(item.collection?.image);
-                const displayName = item.collection?.name || item.name || "Unnamed";
+                const imgSrc = item.image ? (isDummy ? item.image : getImageUrl(item.image)) : overview1;
+                const displayName = item.name || "Unnamed";
                 return (
                   <div
                     key={item._id}
@@ -439,7 +419,7 @@ function CategoryMarketplace() {
                         onClick={(e) => { e.stopPropagation(); navigate("/buy-nfa", { state: { item, parentId: item.parentId } }); }}
                         className="mt-3 w-full px-4 py-2 bg-[#002AA8] hover:bg-[#003BD4] text-white font-semibold text-xs rounded-lg transition-all duration-300 border border-white/20"
                       >
-                        {isDummy ? t("collections.preview") : t("collections.buyNow")}
+                        {isDummy ? t("collections.preview", "Preview") : t("collections.buyNow")}
                       </button>
                     </div>
                   </div>

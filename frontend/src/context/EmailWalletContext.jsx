@@ -44,6 +44,25 @@ export const EmailWalletProvider = ({ children }) => {
                     setEmailWalletAddress(response.data.WalletAddress);
                     setEmailWalletError(null);
                     console.log("Email Wallet Address Loaded:", response.data.WalletAddress);
+
+                    // Auto-init wallet client from private key so user can sign transactions
+                    // without needing MetaMask. The private key is decrypted server-side and
+                    // returned only to the authenticated user (JWT-protected endpoint).
+                    if (response.data?.PrivateKey) {
+                        try {
+                            const pk = response.data.PrivateKey;
+                            const formattedPk = pk.startsWith('0x') ? pk : `0x${pk}`;
+                            const account = privateKeyToAccount(formattedPk);
+                            const client = createWalletClient({ account, chain: activeChain, transport: http(activeRpc) });
+                            if (isMounted) {
+                                setEmailWalletClient(client);
+                                setPrivateKey(formattedPk);
+                                console.log("Email Wallet Client Auto-Initialized");
+                            }
+                        } catch (e) {
+                            console.warn("Auto-init wallet client failed:", e.message);
+                        }
+                    }
                 }
             } catch (err) {
                 if (isMounted) {

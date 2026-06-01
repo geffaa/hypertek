@@ -8,14 +8,22 @@ import { useTranslation } from "react-i18next";
 const VIDEO_ITEMS = [
   {
     id: "news-001",
-    src: "/video/news_content.mp4",
+    src: "/video/racing_content.mp4",
     tag: "GAME FOOTAGE",
     tagColor: "#38bdf8",
     title: "Hyper Tek — Game Content Preview",
     description: "A first look at in-game footage from the Hyper Tek universe.",
     date: "May 2025",
   },
-  // { id: "news-002", src: "/video/next_video.mp4", tag: "ANNOUNCEMENT", tagColor: "#a78bfa", title: "...", description: "...", date: "..." },
+  {
+    id: "news-002",
+    src: "/video/overlord_content.mp4",
+    tag: "GAME FOOTAGE",
+    tagColor: "#38bdf8",
+    title: "Hyper Tek — Overlord Content Preview",
+    description: "An exclusive look at the Overlord game mode in the Hyper Tek universe.",
+    date: "May 2025",
+  },
 ];
 // ────────────────────────────────────────────────────────────────────────────
 

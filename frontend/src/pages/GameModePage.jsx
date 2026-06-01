@@ -11,6 +11,7 @@ const MODES_STATIC = {
     accentDim: "rgba(34,197,94,0.12)",
     glow: "rgba(34,197,94,0.3)",
     panelImg: "/racing3.png",
+    videoSrc: "/video/racing_content.mp4",
   },
   quest: {
     rich: true,
@@ -26,6 +27,7 @@ const MODES_STATIC = {
     accentDim: "rgba(248,113,113,0.12)",
     glow: "rgba(248,113,113,0.25)",
     panelImg: "/overlord4.png",
+    videoSrc: "/video/overlord_content.mp4",
   },
 };
 
@@ -37,6 +39,29 @@ const fadeUp = {
     transition: { duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
   }),
 };
+
+/* ─── Inline video section ────────────────────────────────── */
+function VideoSection({ src, accent }) {
+  return (
+    <section className="w-full max-w-[1080px] mx-auto px-6 md:px-12 pb-24">
+      <motion.div
+        variants={fadeUp} custom={0} initial="hidden"
+        whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+        className="relative rounded-xl overflow-hidden"
+        style={{ border: `1px solid ${accent}44`, boxShadow: `0 0 32px ${accent}18` }}
+      >
+        <div className="absolute top-0 inset-x-0 h-[2px] z-10" style={{ background: accent }} />
+        <video
+          src={src}
+          controls
+          playsInline
+          preload="metadata"
+          style={{ width: "100%", display: "block", background: "#000", maxHeight: "540px" }}
+        />
+      </motion.div>
+    </section>
+  );
+}
 
 /* ─── FAQ accordion item ──────────────────────────────────── */
 function FaqItem({ item, accent, accentDim, index }) {
@@ -135,6 +160,11 @@ function DetailPage({ data }) {
           )}
         </div>
       </section>
+
+      {/* ═══ VIDEO PREVIEW (if available for this mode) ══════════ */}
+      {data.videoSrc && (
+        <VideoSection src={data.videoSrc} accent={accent} accentDim={accentDim} />
+      )}
 
       {/* ═══ SECTION 2 — How It Works ═══════════════════════════ */}
       <section

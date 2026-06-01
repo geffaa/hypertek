@@ -16,6 +16,7 @@ import {
   GetAdminByAdminId,
   ExportWallet,
   GetWalletAddress,
+  FundGasWallet,
 } from "../Controllers/User.js";
 import { authMiddleware } from "../Middleware/googleMiddle.js";
 import { auth } from "../Middleware/userAuth.js";
@@ -48,6 +49,8 @@ Route.put("/profile", auth, upload.single("Avatar"), EditProfile);
 Route.get("/user/wallet-address", auth, GetWalletAddress);
 // Export private key — requires password in body
 Route.post("/user/export-wallet", auth, ExportWallet);
+// Auto-drip ETH for gas to email wallet (JWT only, rate-limited by balance threshold)
+Route.post("/user/fund-gas", auth, FundGasWallet);
 // Get all users (admin only)
 Route.get("/users", GetAllUsers);
 // Toggle user active/inactive status (admin only)

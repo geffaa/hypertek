@@ -28,7 +28,7 @@ import { BACKEND_BASE_URL, getImageUrl } from "../../Config";
 import { openTransakOnRamp } from "../../utils/transakUtils";
 import { FiEye, FiEdit2, FiCopy } from "react-icons/fi";
 import { useTokenBalance } from "../../hooks/useTokenBalance";
-import { Wallet, Copy } from "lucide-react";
+import { Wallet, Copy, CreditCard } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PriceHistory from "./BuyNfa2";
 
@@ -68,27 +68,34 @@ function StripeNFTCheckoutForm({ amount, onSuccess, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
-      <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-bold text-white">💳 {t("buyNfa.stripe.title", "Pay with Card")}</h3>
-          <button onClick={onClose} className="text-white/50 hover:text-white text-xl">×</button>
-        </div>
-        <p className="text-sm text-white/50 mb-4">{t("buyNfa.stripe.amount", "Amount:")} <span className="text-white font-semibold">${amount} USD</span></p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <PaymentElement />
-          {error && <p className="text-red-400 text-xs">{error}</p>}
-          <div className="flex gap-3 mt-2">
-            <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm transition-colors">
-              {t("buyNfa.stripe.cancel", "Cancel")}
-            </button>
-            <button type="submit" disabled={!stripe || loading}
-              className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#0038d4] disabled:opacity-50 text-white font-semibold text-sm transition-colors">
-              {loading ? t("buyNfa.stripe.processing", "Processing...") : `${t("buyNfa.stripe.pay", "Pay")} $${amount}`}
-            </button>
+    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm px-3 pb-3 sm:pb-0">
+      <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl flex flex-col max-h-[92vh]">
+        {/* sticky header */}
+        <div className="flex justify-between items-center px-5 pt-5 pb-3 flex-shrink-0">
+          <div>
+            <h3 className="text-base font-bold text-white">{t("buyNfa.stripe.title", "Pay with Card")}</h3>
+            <p className="text-xs text-white/40 mt-0.5">{t("buyNfa.stripe.amount", "Amount:")} <span className="text-white font-semibold">${amount} USD</span></p>
           </div>
-        </form>
+          <button onClick={onClose} className="text-white/40 hover:text-white text-xl leading-none">×</button>
+        </div>
+        {/* scrollable body */}
+        <div className="overflow-y-auto flex-1 px-5 pb-2">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <PaymentElement options={{ layout: "tabs", wallets: { link: "never" } }} />
+            {error && <p className="text-red-400 text-xs">{error}</p>}
+          </form>
+        </div>
+        {/* sticky footer */}
+        <div className="flex gap-3 px-5 pb-5 pt-3 flex-shrink-0 border-t border-white/[0.06]">
+          <button type="button" onClick={onClose}
+            className="flex-1 py-2.5 rounded-lg border border-white/20 text-white/70 hover:text-white text-sm transition-colors">
+            {t("buyNfa.stripe.cancel", "Cancel")}
+          </button>
+          <button onClick={handleSubmit} disabled={!stripe || loading}
+            className="flex-1 py-2.5 rounded-lg bg-[#002AA8] hover:bg-[#0038d4] disabled:opacity-50 text-white font-semibold text-sm transition-colors">
+            {loading ? t("buyNfa.stripe.processing", "Processing...") : `${t("buyNfa.stripe.pay", "Pay")} $${amount}`}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -160,9 +167,16 @@ function Buy1() {
   } = useEmailWallet();
 
   // Unified Address & Client Priority: standard Wagmi > local Email Wallet
-  const activeAddress = connectedWallet || emailWalletAddress;
-  const isAnyConnected = isConnected || isEmailWalletConnected;
-  const activeWalletClient = walletClient || emailWalletClient;
+  // Only trust wagmiAddress if it matches the logged-in user's stored wallet (prevents
+  // cross-user leak when MetaMask stays connected with a different user's account).
+  const userStoredWallet = user?.WalletAddress?.toLowerCase() || user?.MetaMaskAddress?.toLowerCase() || "";
+  const resolvedWagmi = connectedWallet?.toLowerCase();
+  const safeWagmiAddress = (resolvedWagmi && userStoredWallet && resolvedWagmi === userStoredWallet)
+    ? connectedWallet
+    : undefined;
+  const activeAddress = safeWagmiAddress || emailWalletAddress;
+  const isAnyConnected = !!safeWagmiAddress || isEmailWalletConnected;
+  const activeWalletClient = (safeWagmiAddress ? walletClient : null) || emailWalletClient;
 
   // For card payments: always prefer email wallet so NFT lands in profile-visible address
   // If user only has MetaMask (no email wallet), fall back to activeAddress
@@ -183,6 +197,7 @@ function Buy1() {
   const [walletCopied, setWalletCopied] = useState(false);
   const [fundModal, setFundModal] = useState(null); // { needed, have, priceUsdc }
   const [stripeModal, setStripeModal] = useState(null); // { clientSecret, amount }
+  const [showPayModal, setShowPayModal] = useState(false);
   const [gasModal, setGasModal] = useState(false); // true when no ETH for gas
 
   // ── Auction tab data ──
@@ -481,12 +496,12 @@ function Buy1() {
         toast.success(`Switched to ${targetChainName}`, { id: toastId });
         return true;
       } else {
-        toast.error(" Network switch not supported by wallet", { id: toastId });
+        toast.error(" Network switch not supported by wallet", { id: toastId, duration: 6000 });
         return false;
       }
     } catch (error) {
       console.error(" Failed to switch network:", error);
-      toast.error(` Please switch to ${targetChainName} manually`, { id: toastId });
+      toast.error(` Please switch to ${targetChainName} manually`, { id: toastId, duration: 6000 });
       return false;
     }
   };
@@ -560,16 +575,18 @@ function Buy1() {
         return;
       }
       if (!publicClient) {
-        toast.error(" Network client not ready", { id: toastId });
+        toast.error(" Network client not ready", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
 
-      // Ensure we're on the correct network
-      const networkOk = await ensureCorrectNetwork();
-      if (!networkOk) {
-        setLoading(false);
-        return;
+      if (!emailWalletAddress || safeWagmiAddress) {
+        const networkOk = await ensureCorrectNetwork();
+        if (!networkOk) {
+          toast.dismiss(toastId);
+          setLoading(false);
+          return;
+        }
       }
 
       const walletAddress = activeAddress;
@@ -643,7 +660,7 @@ function Buy1() {
             continue;
           } else {
             // ... existing failure logic
-            toast.error(" Ownership mismatch after retries", { id: toastId });
+            toast.error(" Ownership mismatch after retries", { id: toastId, duration: 6000 });
             setLoading(false);
             return;
           }
@@ -666,12 +683,28 @@ function Buy1() {
       }
 
       // Check ETH balance for gas before any on-chain writes
-      const ethBal = await publicClient.getBalance({ address: walletAddress });
+      let ethBal = await publicClient.getBalance({ address: walletAddress });
       if (ethBal === 0n) {
-        toast.dismiss(toastId);
-        setGasModal(true);
-        setLoading(false);
-        return;
+        if (emailWalletAddress && !safeWagmiAddress) {
+          toast.loading("⛽ Menyiapkan gas untuk transaksi...", { id: toastId });
+          try {
+            await axios.post(
+              `${BACKEND_BASE_URL}/api/v1/user/fund-gas`,
+              {},
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            await new Promise((r) => setTimeout(r, 4000));
+            ethBal = await publicClient.getBalance({ address: walletAddress });
+          } catch {
+            // drip failed — fall through to gasModal
+          }
+        }
+        if (ethBal === 0n) {
+          toast.dismiss(toastId);
+          setGasModal(true);
+          setLoading(false);
+          return;
+        }
       }
 
       // Check approval (Use setApprovalForAll for Marketplace)
@@ -701,9 +734,9 @@ function Buy1() {
           console.error(" Approval failed:", approveError);
           // Special handling for user rejection
           if (approveError.message.includes("User rejected")) {
-            toast.error(" Approval rejected by user", { id: toastId });
+            toast.error(" Approval rejected by user", { id: toastId, duration: 6000 });
           } else {
-            toast.error(" Approval transaction failed", { id: toastId });
+            toast.error(" Approval transaction failed", { id: toastId, duration: 6000 });
           }
           setLoading(false);
           return;
@@ -818,34 +851,55 @@ function Buy1() {
 
     try {
       if (!activeWalletClient || !publicClient) {
-        toast.error("Wallet not connected properly", { id: toastId });
+        toast.error("Wallet belum siap. Coba refresh halaman atau login ulang.", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
 
       if (!user?.id) {
-        toast.error("Please login first", { id: toastId });
+        toast.error("Please login first", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
 
-      // Ensure we're on the correct network
-      const networkOk = await ensureCorrectNetwork();
-      if (!networkOk) {
-        setLoading(false);
-        return;
+      if (!emailWalletAddress || safeWagmiAddress) {
+        const networkOk = await ensureCorrectNetwork();
+        if (!networkOk) {
+          toast.dismiss(toastId);
+          setLoading(false);
+          return;
+        }
       }
 
       const buyer = activeAddress;
       console.log("👛 Buyer wallet:", buyer);
 
-      const balance = await publicClient.getBalance({ address: buyer });
+      let balance = await publicClient.getBalance({ address: buyer });
       console.log("💰 Native ETH Balance:", ethers.formatEther(balance), "ETH");
 
       if (balance === 0n) {
-        toast.error(' Your wallet has no ETH for gas fees.', { id: toastId, duration: 8000 });
-        setLoading(false);
-        return;
+        // Email wallet — request backend to auto-drip ETH for gas
+        if (emailWalletAddress && !safeWagmiAddress) {
+          toast.loading("⛽ Menyiapkan gas untuk transaksi...", { id: toastId });
+          try {
+            await axios.post(
+              `${BACKEND_BASE_URL}/api/v1/user/fund-gas`,
+              {},
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            // Wait briefly for tx to confirm, then re-check
+            await new Promise((r) => setTimeout(r, 4000));
+            balance = await publicClient.getBalance({ address: buyer });
+          } catch {
+            // drip failed — fall through to gasModal
+          }
+        }
+        if (balance === 0n) {
+          toast.dismiss(toastId);
+          setLoading(false);
+          setGasModal(true);
+          return;
+        }
       }
 
       const usdcContractOptions = {
@@ -1008,13 +1062,13 @@ function Buy1() {
         console.log("⛓️ Current NFT owner:", currentOwner);
       } catch (err) {
         console.error(" Error checking owner:", err);
-        toast.error(" NFT not found on blockchain", { id: toastId });
+        toast.error(" NFT not found on blockchain", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
 
       if (buyer.toLowerCase() === currentOwner) {
-        toast.error(" You already own this NFA!", { id: toastId });
+        toast.error(" You already own this NFA!", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
@@ -1033,7 +1087,7 @@ function Buy1() {
       });
 
       if (!listing[2]) {
-        toast.error(" This NFA is not listed for sale", { id: toastId });
+        toast.error(" This NFA is not listed for sale", { id: toastId, duration: 6000 });
         setLoading(false);
         return;
       }
@@ -1074,7 +1128,7 @@ function Buy1() {
           console.log("USDC Approved!");
         } catch (approveErr) {
           console.error(" Approval failed:", approveErr);
-          toast.error(" USDC Approval failed", { id: toastId });
+          toast.error(" USDC Approval failed", { id: toastId, duration: 6000 });
           setLoading(false);
           return;
         }
@@ -1151,7 +1205,7 @@ function Buy1() {
         msg = ` ${err.shortMessage || err.message?.substring(0, 100) || "Unknown Error"}`;
       }
 
-      toast.error(msg, { id: toastId });
+      toast.error(msg, { id: toastId, duration: 6000 });
     } finally {
       setLoading(false);
     }
@@ -1168,7 +1222,7 @@ function Buy1() {
 
     const priceUsdc = parseFloat(collection.priceETH || 0.01);
     const amountCents = Math.max(50, Math.round(priceUsdc * 100)); // Stripe minimum = $0.50 = 50 cents
-    const toastId = toast.loading("💳 Preparing card payment...");
+    const toastId = toast.loading("Preparing card payment...");
 
     try {
       const res = await axios.post(`${BACKEND_BASE_URL}/api/v1/payment/create-payment-intent`, {
@@ -1198,7 +1252,7 @@ function Buy1() {
         toast.error(" Could not initiate card payment");
       }
     } catch (err) {
-      toast.error(" Card payment setup failed", { id: toastId });
+      toast.error(" Card payment setup failed", { id: toastId, duration: 6000 });
     }
   };
 
@@ -1210,22 +1264,28 @@ function Buy1() {
       onChainOwner === PLATFORM_WALLET_ADDRESS.toLowerCase()) ||
     (collection.owner &&
       collection.owner.toLowerCase() ===
-      PLATFORM_WALLET_ADDRESS.toLowerCase());
+      PLATFORM_WALLET_ADDRESS.toLowerCase()) ||
+    // Unminted items with a price are first-sale platform items — always purchasable
+    (!collection.tokenId && collection.priceETH > 0);
 
   const getButtonAction = () => {
     if (loading) return { text: `⏳ ${t("buyNfa.marketplace.processing", "Processing...")}`, disabled: true };
 
+    if (collection.isDummy) {
+      return { text: t("buyNfa.marketplace.dummyNotForSale", "Sample Preview — Not Available for Purchase"), disabled: true };
+    }
+
     if (!isAnyConnected) {
       return {
         text: `🔌 ${t("buyNfa.marketplace.connectWallet", "Connect Wallet")}`,
-        action: () => setShowWalletModal(true),
+        action: () => { if (openConnectModal) openConnectModal(); },
       };
     }
 
     if (!isOwner && (listingData?.active || isPlatformOwned)) {
       return {
-        text: `🛒 ${t("buyNfa.marketplace.buyNow", "Buy Now")}`,
-        action: handleBuyNFT,
+        text: t("buyNfa.marketplace.buyNow", "Buy Now"),
+        action: () => setShowPayModal(true),
       };
     }
 
@@ -1291,30 +1351,84 @@ function Buy1() {
   return (
     <div className="text-white px-4 sm:px-6 lg:px-12 xl:px-16 pb-8 max-w-6xl mx-auto pt-6 w-full">
 
+      {/* ── Payment Method Picker ── */}
+      {showPayModal && (
+        <div
+          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm px-3 pb-3 sm:pb-0"
+          onClick={() => setShowPayModal(false)}
+        >
+          <div
+            className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-4 w-full max-w-md shadow-2xl max-h-[85vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-0.5">
+              <h3 className="text-sm font-bold text-white">{t("buyNfa.payModal.title", "Choose Payment Method")}</h3>
+              <button onClick={() => setShowPayModal(false)} className="text-white/40 hover:text-white text-lg leading-none">×</button>
+            </div>
+            <p className="text-white/35 text-xs mb-3">{collection?.name} · {collection?.priceETH || 0} USDC</p>
+
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => { setShowPayModal(false); handleBuyNFT(); }}
+                className="flex items-center gap-3 w-full px-3 py-3 rounded-xl bg-white/5 hover:bg-[#002AA8]/60 border border-white/10 hover:border-blue-500/50 transition-all"
+              >
+                <div className="w-8 h-8 rounded-lg bg-[#002AA8] flex items-center justify-center flex-shrink-0">
+                  <Wallet size={15} className="text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="text-white font-semibold text-sm leading-tight">{t("buyNfa.payModal.usdc", "Pay with USDC")}</p>
+                  <p className="text-white/40 text-xs">{t("buyNfa.payModal.usdcNote", "Bayar langsung dari wallet akun kamu")}</p>
+                </div>
+              </button>
+
+              <button
+                onClick={() => { setShowPayModal(false); handlePaymentCard(); }}
+                className="flex items-center gap-3 w-full px-3 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 transition-all"
+              >
+                <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <CreditCard size={15} className="text-white" />
+                </div>
+                <div className="text-left">
+                  <p className="text-white font-semibold text-sm leading-tight">{t("buyNfa.payModal.card", "Pay with Card")}</p>
+                  <p className="text-white/40 text-xs">{t("buyNfa.payModal.cardNote", "Credit / debit · No wallet needed")}</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Insufficient USDC Modal ── */}
       {fundModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="bg-[#0f0f2a] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-2">{t("buyNfa.fundModal.title", "Insufficient USDC")}</h3>
-            <p className="text-sm text-white/50 mb-3">
-              {t("buyNfa.fundModal.youNeed", "You need")} <span className="text-white font-semibold">{fundModal.needed} USDC</span> {t("buyNfa.fundModal.butHave", "but your wallet only has")}{" "}
+            <h3 className="text-lg font-bold text-white mb-2">USDC Tidak Cukup</h3>
+            <p className="text-sm text-white/50 mb-4">
+              Kamu butuh <span className="text-white font-semibold">{fundModal.needed} USDC</span> tapi wallet kamu hanya punya{" "}
               <span className="text-white font-semibold">{fundModal.have} USDC</span>.
             </p>
-            <p className="text-sm text-white/50 mb-6">
-              {t("buyNfa.fundModal.desc2", "Fund your wallet instantly with a credit or debit card via Transak, then come back to complete the purchase.")}
-            </p>
             <div className="flex flex-col gap-3">
+              {/* Primary: pay with card — no USDC needed */}
               <button
-                onClick={() => {
-                  openTransakOnRamp({ walletAddress: activeAddress, fiatAmount: String(Math.ceil(parseFloat(fundModal.priceUsdc) * 1.05)), network: "base" });
-                  setFundModal(null);
-                }}
+                onClick={() => { setFundModal(null); handlePaymentCard(); }}
                 className="w-full bg-[#002AA8] hover:bg-[#003BD4] transition-colors text-white font-semibold py-2.5 rounded-lg text-sm"
               >
-                {t("buyNfa.fundModal.fundBtn", "Fund Wallet with Card (Transak)")}
+                Bayar dengan Card (Tanpa USDC)
               </button>
+              {/* Secondary: top up USDC via Transak (mainnet only) */}
+              {BASE_CHAIN_ID !== 84532 && (
+                <button
+                  onClick={() => {
+                    openTransakOnRamp({ walletAddress: activeAddress, fiatAmount: String(Math.ceil(parseFloat(fundModal.priceUsdc) * 1.05)), network: "base" });
+                    setFundModal(null);
+                  }}
+                  className="w-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-white/70 hover:text-white py-2.5 rounded-lg text-sm"
+                >
+                  Top Up USDC via Transak
+                </button>
+              )}
               <button onClick={() => setFundModal(null)} className="w-full text-white/40 hover:text-white transition text-sm py-2">
-                {t("buyNfa.fundModal.cancel", "Cancel")}
+                Batal
               </button>
             </div>
           </div>
@@ -1367,7 +1481,7 @@ function Buy1() {
 
       {/* ── Stripe Card Payment Modal ── */}
       {stripeModal && stripePromise && (
-        <Elements stripe={stripePromise} options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" } }}>
+        <Elements stripe={stripePromise} options={{ clientSecret: stripeModal.clientSecret, appearance: { theme: "night" }, paymentMethodOrder: ["card"] }}>
           <StripeNFTCheckoutForm
             amount={stripeModal.amount}
             onClose={() => setStripeModal(null)}
@@ -1643,28 +1757,25 @@ function Buy1() {
               {/* Network info */}
               <div className="flex items-center gap-2 text-[11px] text-white/30 -mt-1">
                 <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
-                <span>{t("buyNfa.marketplace.networkNote", "USDC on Base · Base ETH required for gas (wallet payments only)")}</span>
+                <span>{t("buyNfa.marketplace.networkNote", "USDC on Base · Base ETH required for gas (wallet payments)")}</span>
               </div>
 
-              {/* Action buttons */}
-              <div className="flex gap-3">
-                <button
-                  onClick={buttonConfig.action || (() => setIsOpen(true))}
-                  disabled={buttonConfig.disabled || loading}
-                  className="flex-1 px-6 py-2.5 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
-                >
-                  {buttonConfig.text}
-                </button>
-                {!isOwner && (
-                  <button
-                    onClick={handlePaymentCard}
-                    disabled={loading}
-                    className="flex-1 px-6 py-2.5 border border-white/20 hover:border-white/40 hover:bg-white/5 disabled:opacity-50 text-white font-semibold text-sm rounded-lg transition-all duration-300"
-                  >
-                    💳 {t("buyNfa.marketplace.buyWithCard", "Buy With Card")}
-                  </button>
-                )}
-              </div>
+              {/* Action button */}
+              <button
+                onClick={() => {
+                  if (buttonConfig.disabled) return;
+                  if (!isOwner && !buttonConfig.disabled) {
+                    setShowPayModal(true);
+                  } else {
+                    (buttonConfig.action || (() => setIsOpen(true)))();
+                  }
+                }}
+                disabled={buttonConfig.disabled || loading}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[#002AA8] hover:bg-[#003BD4] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-lg transition-all duration-300 border border-white/20"
+              >
+                <Wallet size={15} />
+                {buttonConfig.text}
+              </button>
 
               {/* Make Offer — only for non-owners */}
               {!isOwner && (

@@ -59,7 +59,7 @@ export default function NewsDetail() {
     );
 
   return (
-    <div className="min-h-screen text-white relative" style={{ background: "#060610" }}>
+    <div className="text-white relative" style={{ background: "#060610" }}>
       <GlowingOrb Xaxis={100}  Yaxis={600}  />
       <GlowingOrb Xaxis={1300} Yaxis={1200} />
 

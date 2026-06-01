@@ -26,3 +26,6 @@ admin/.env.local
 node_modules/
 *.DS_Store
 HYPERTEK_INTEGRATION_BRIEF.md
+
+# Large video files
+frontend/public/video/overlord_content.mp4

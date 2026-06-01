@@ -74,6 +74,23 @@ export async function finalizeNFAPurchase({
   let tokenId = subCollection.tokenId;
   let receiptHash = txHash;
 
+  // Resolve artist/creator wallet before minting (used in mint call below)
+  let creatorWallet = "admin";
+  let royaltyPaymentType = "crypto";
+  if (subCollection.artistId) {
+    try {
+      const artist = await Artist.findById(subCollection.artistId).lean();
+      if (artist) {
+        royaltyPaymentType = artist.paymentPreference || "crypto";
+        creatorWallet = royaltyPaymentType === "crypto"
+          ? (artist.walletAddress || "admin")
+          : "admin";
+      }
+    } catch (e) {
+      console.warn("⚠️ Could not fetch artist for creator address:", e.message);
+    }
+  }
+
   if (!tokenId) {
     console.log("🎨 Minting NFT for purchase...");
     const chainId = 8453; // Base Mainnet
@@ -148,22 +165,12 @@ export async function finalizeNFAPurchase({
     }
   }
 
-  // 3. Resolve artist for royalty dispatch
-  let creatorWallet = "admin";
-  let royaltyPaymentType = "crypto";
+  // 3. Finalize creator wallet resolution (apply bank sentinel + fallback)
   if (subCollection.artistId) {
-    try {
-      const artist = await Artist.findById(subCollection.artistId).lean();
-      if (artist) {
-        royaltyPaymentType = artist.paymentPreference || "crypto";
-        creatorWallet = royaltyPaymentType === "crypto"
-          ? (artist.walletAddress || "admin")
-          : "bank"; // bank payouts use a sentinel; RoyaltyService records them as pending
-        console.log(`🎨 [Artist] ${artist.name} — ${royaltyPaymentType} → ${creatorWallet}`);
-      }
-    } catch (err) {
-      console.warn("⚠️ [Artist] lookup failed:", err.message);
+    if (royaltyPaymentType === "bank") {
+      creatorWallet = "bank";
     }
+    console.log(`🎨 [Artist] resolved creator: ${royaltyPaymentType} → ${creatorWallet}`);
   } else {
     // Fallback: legacy royaltyWallet on parent collection
     creatorWallet = parent.collection?.royaltyWallet || parent.collection?.owner || "admin";
