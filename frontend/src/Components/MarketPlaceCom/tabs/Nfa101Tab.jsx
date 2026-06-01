@@ -99,17 +99,19 @@ function ArticleCard({ article, index, onClick, minReadLabel }) {
 
 export default function Nfa101Tab() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading]   = useState(true);
   const [filter, setFilter]     = useState("__all__");
 
   useEffect(() => {
-    axios.get(`${BACKEND_BASE_URL}/api/v1/nft101`)
+    const lang = i18n.language || "en";
+    setLoading(true);
+    axios.get(`${BACKEND_BASE_URL}/api/v1/nft101?lang=${lang}`)
       .then(res => { if (res.data.success) setArticles(res.data.items || []); })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, []);
+  }, [i18n.language]);
 
   const data = articles.length > 0 ? articles : STATIC_ARTICLES;
   const filterAll = t("marketplace.nfa101.filterAll");

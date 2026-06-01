@@ -20,21 +20,22 @@ function categoryStyle(cat) {
 export default function Nft101Article() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imgError, setImgError] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    const lang = i18n.language || "en";
     axios
-      .get(`${BACKEND_BASE_URL}/api/v1/nft101/${id}`)
+      .get(`${BACKEND_BASE_URL}/api/v1/nft101/${id}?lang=${lang}`)
       .then((res) => {
         if (res.data.success) setArticle(res.data.item);
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, i18n.language]);
 
   // Show/hide scroll-to-top button
   useEffect(() => {

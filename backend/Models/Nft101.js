@@ -27,6 +27,19 @@ const nft101Schema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+    translations: {
+      type: Map,
+      of: new mongoose.Schema({
+        title:       { type: String },
+        description: { type: String },
+        contentBlocks: [{
+          type:    { type: String },
+          value:   { type: String },
+          caption: { type: String },
+        }],
+      }, { _id: false }),
+      default: {},
+    },
   },
   { timestamps: true }
 );
