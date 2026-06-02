@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "צפה בסרטון",
+      "title": "סרטון משחק Overlord",
+      "close": "סגור"
+    },
     "exit": "יציאה",
     "spaceRing": "OVERLORD · טבעת החלל",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "צפה בסרטון",
+      "title": "סרטון משחק מירוצים",
+      "close": "סגור"
+    },
     "airspeed": "מהירות אוויר",
     "knots": "קשרים",
     "steer": "היגוי",
@@ -621,6 +631,55 @@
       "weapons": "נשקים",
       "rewards": "פרסים",
       "specialists": "מומחים"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "פריטי משימה",
+        "banners": "דגלים",
+        "medals": "מדליות",
+        "skins": "עיצובים",
+        "antiGravity": "נגד כבידה",
+        "plasmaRods": "מוטות פלזמה",
+        "darkMatter": "חומר אפל",
+        "techBooks": "ספרי טכנולוגיה",
+        "engines": "מנועים",
+        "vehicles": "כלי רכב",
+        "tools": "כלים",
+        "aidPacks": "ערכות עזרה ראשונה"
+      },
+      "weapons": {
+        "blades": "להבים",
+        "guns": "כלי נשק",
+        "mines": "מוקשים",
+        "grenades": "רימונים",
+        "helmet": "קסדה",
+        "suits": "שריון",
+        "gloves": "כפפות",
+        "boots": "מגפיים",
+        "landBases": "בסיסי יבשה",
+        "landTitles": "זכויות קרקע",
+        "shield": "מגן",
+        "ammoPacks": "חבילות תחמושת"
+      },
+      "rewards": {
+        "battleChest": "ארגז קרב",
+        "loginReward": "פרס התחברות",
+        "eventTrophy": "גביע אירוע",
+        "allianceGift": "מתנת ברית",
+        "questToken": "אסימון משימה",
+        "raceMedal": "מדליית מירוץ"
+      }
+    },
+    "specialistCategories": {
+      "offence": "התקפה",
+      "defence": "הגנה",
+      "racing": "מירוצים",
+      "pilot": "טייס",
+      "weapons": "נשק",
+      "engineering": "הנדסה",
+      "science": "מדע",
+      "hospital": "רפואה",
+      "food": "אספקה"
     },
     "allianceTabs": {
       "members": "חברים",

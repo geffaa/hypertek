@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Layers3, Gem, Network, Rocket, CheckCircle2, Zap, Lock } from "lucide-react";
 import { useSiteContentPage } from "../hooks/useSiteContent";
@@ -93,8 +94,9 @@ function CornerAccent({ color = "rgba(56,189,248,0.45)" }) {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
-function About() {
+function About({ isPreview = false }) {
   const navigate = useNavigate();
+  const [showComingSoon, setShowComingSoon] = useState(false);
   const { t } = useTranslation();
   const { sections: cms } = useSiteContentPage("about");
   const top = cms.about_top || {};
@@ -369,7 +371,7 @@ function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.55, delay: i * 0.09 }}
                   viewport={{ once: true }}
-                  onClick={() => navigate(`/game/${gs.mode}`, { state: { backTo: "/about", section: "the-universe" } })}
+                  onClick={() => isPreview ? navigate(`/preview/${gs.mode}`, { state: { backTo: "/preview/about" } }) : navigate(`/game/${gs.mode}`, { state: { backTo: "/about", section: "the-universe" } })}
                 >
                   <div className="h-0.5 w-full" style={{ background: gs.accent }} />
                   <div className="relative h-44 overflow-hidden">
@@ -387,7 +389,7 @@ function About() {
                         {sec03.discover || "Discover"} <ChevronRight className="w-3 h-3" />
                       </div>
                       <button
-                        onClick={(e) => { e.stopPropagation(); navigate("/gaming"); }}
+                        onClick={(e) => { e.stopPropagation(); navigate(isPreview ? "/preview/ui" : "/gaming"); }}
                         className="text-[9px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded transition-all duration-200 hover:brightness-125"
                         style={{
                           fontFamily: "Orbitron,sans-serif",
@@ -677,13 +679,123 @@ function About() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <Link to="/market-place" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={BTN_PRIMARY}>
-              {closing.exploreMarketplace || "Explore Marketplace"}
-            </Link>
-            <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={BTN_SECONDARY}>
-              {closing.viewGames || "View Games"}
-            </Link>
+            {isPreview ? (
+              <button
+                onClick={() => setShowComingSoon(true)}
+                className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125"
+                style={BTN_PRIMARY}
+              >
+                {closing.exploreMarketplace || "Explore Marketplace"}
+              </button>
+            ) : (
+              <Link to="/market-place" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-125" style={BTN_PRIMARY}>
+                {closing.exploreMarketplace || "Explore Marketplace"}
+              </Link>
+            )}
+            {isPreview ? (
+              <button
+                onClick={() => navigate("/preview/ui")}
+                className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110"
+                style={BTN_SECONDARY}
+              >
+                {closing.viewGames || "View Games"}
+              </button>
+            ) : (
+              <Link to="/gaming" className="px-8 py-3 text-[11px] font-bold uppercase transition-all hover:brightness-110" style={BTN_SECONDARY}>
+                {closing.viewGames || "View Games"}
+              </Link>
+            )}
           </div>
+
+          {/* Coming Soon popup */}
+          <AnimatePresence>
+            {showComingSoon && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setShowComingSoon(false)}
+                style={{
+                  position: "fixed", inset: 0, zIndex: 9999,
+                  background: "rgba(0,3,15,0.75)", backdropFilter: "blur(6px)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.88, y: 16 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92, y: 8 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={e => e.stopPropagation()}
+                  style={{
+                    background: "rgba(5,10,28,0.97)",
+                    border: "1px solid rgba(56,189,248,0.3)",
+                    borderTop: "2px solid rgba(56,189,248,0.7)",
+                    borderRadius: 8,
+                    padding: "40px 56px",
+                    display: "flex", flexDirection: "column", alignItems: "center", gap: 16,
+                    boxShadow: "0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(56,189,248,0.08)",
+                    minWidth: 280,
+                  }}
+                >
+                  <div style={{
+                    fontFamily: "Orbitron, sans-serif",
+                    fontSize: "clamp(9px,1vw,11px)",
+                    letterSpacing: "0.5em",
+                    color: "rgba(56,189,248,0.6)",
+                    textTransform: "uppercase",
+                  }}>
+                    MARKETPLACE
+                  </div>
+                  <div style={{
+                    fontFamily: "Goldman, sans-serif",
+                    fontSize: "clamp(22px,3vw,32px)",
+                    fontWeight: "bold",
+                    color: "#fff",
+                    letterSpacing: "0.08em",
+                    textAlign: "center",
+                  }}>
+                    Coming Soon
+                  </div>
+                  <div style={{
+                    fontFamily: "Orbitron, sans-serif",
+                    fontSize: "clamp(9px,0.75vw,11px)",
+                    color: "rgba(255,255,255,0.35)",
+                    letterSpacing: "0.15em",
+                    textAlign: "center",
+                    maxWidth: 220,
+                    lineHeight: 1.7,
+                  }}>
+                    The marketplace is currently under maintenance and will be available at official launch.
+                  </div>
+                  <button
+                    onClick={() => setShowComingSoon(false)}
+                    style={{
+                      marginTop: 8,
+                      padding: "8px 28px",
+                      fontFamily: "Orbitron, sans-serif",
+                      fontSize: "clamp(9px,0.8vw,11px)",
+                      fontWeight: "bold",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      background: "rgba(56,189,248,0.1)",
+                      border: "1px solid rgba(56,189,248,0.4)",
+                      borderTop: "2px solid rgba(56,189,248,0.65)",
+                      color: "rgba(56,189,248,0.9)",
+                      clipPath: "polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)",
+                      cursor: "pointer",
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(56,189,248,0.2)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(56,189,248,0.1)"; }}
+                  >
+                    CLOSE
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="flex items-center gap-4 mt-10 justify-center">
             <div className="flex-1 h-px bg-white/8" />

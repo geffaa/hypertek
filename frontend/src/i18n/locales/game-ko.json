@@ -1,5 +1,10 @@
 {
   "overlord": {
+    "video": {
+      "watchBtn": "동영상 보기",
+      "title": "오버로드 게임플레이 영상",
+      "close": "닫기"
+    },
     "exit": "종료",
     "spaceRing": "OVERLORD · 스페이스 링",
     "actions": {
@@ -122,6 +127,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "동영상 보기",
+      "title": "레이싱 게임플레이 영상",
+      "close": "닫기"
+    },
     "airspeed": "대기속도",
     "knots": "노트",
     "steer": "조향",
@@ -621,6 +631,55 @@
       "weapons": "무기",
       "rewards": "보상",
       "specialists": "전문가"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "퀘스트 아이템",
+        "banners": "배너",
+        "medals": "메달",
+        "skins": "스킨",
+        "antiGravity": "반중력",
+        "plasmaRods": "플라즈마 로드",
+        "darkMatter": "암흑 물질",
+        "techBooks": "기술 서적",
+        "engines": "엔진",
+        "vehicles": "차량",
+        "tools": "도구",
+        "aidPacks": "구급 팩"
+      },
+      "weapons": {
+        "blades": "검",
+        "guns": "총기",
+        "mines": "지뢰",
+        "grenades": "수류탄",
+        "helmet": "헬멧",
+        "suits": "전투복",
+        "gloves": "장갑",
+        "boots": "부츠",
+        "landBases": "지상 기지",
+        "landTitles": "토지 소유권",
+        "shield": "방패",
+        "ammoPacks": "탄약 팩"
+      },
+      "rewards": {
+        "battleChest": "전투 상자",
+        "loginReward": "로그인 보상",
+        "eventTrophy": "이벤트 트로피",
+        "allianceGift": "동맹 선물",
+        "questToken": "퀘스트 토큰",
+        "raceMedal": "레이스 메달"
+      }
+    },
+    "specialistCategories": {
+      "offence": "공격",
+      "defence": "방어",
+      "racing": "레이싱",
+      "pilot": "파일럿",
+      "weapons": "무기",
+      "engineering": "공학",
+      "science": "과학",
+      "hospital": "의료",
+      "food": "식량"
     },
     "allianceTabs": {
       "members": "멤버",

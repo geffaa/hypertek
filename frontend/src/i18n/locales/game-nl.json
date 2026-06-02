@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "VIDEO BEKIJKEN",
+      "title": "OVERLORD GAMEPLAY VIDEO",
+      "close": "SLUITEN"
+    },
     "exit": "AFSLUITEN",
     "spaceRing": "OVERLORD · RUIMTERING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "VIDEO BEKIJKEN",
+      "title": "RACING GAMEPLAY VIDEO",
+      "close": "SLUITEN"
+    },
     "airspeed": "LUCHTSNELHEID",
     "knots": "KNOPEN",
     "steer": "STUUR",
@@ -621,6 +631,55 @@
       "weapons": "Wapens",
       "rewards": "Beloningen",
       "specialists": "Specialisten"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Missieitems",
+        "banners": "Banieren",
+        "medals": "Medailles",
+        "skins": "Uiterlijken",
+        "antiGravity": "Anti-Zwaartekracht",
+        "plasmaRods": "Plasmastaaven",
+        "darkMatter": "Donkere Materie",
+        "techBooks": "Technische Boeken",
+        "engines": "Motoren",
+        "vehicles": "Voertuigen",
+        "tools": "Gereedschap",
+        "aidPacks": "EHBO-paketten"
+      },
+      "weapons": {
+        "blades": "Bladen",
+        "guns": "Vuurwapens",
+        "mines": "Mijnen",
+        "grenades": "Granaten",
+        "helmet": "Helm",
+        "suits": "Uitrustingen",
+        "gloves": "Handschoenen",
+        "boots": "Laarzen",
+        "landBases": "Landbases",
+        "landTitles": "Landtitels",
+        "shield": "Schild",
+        "ammoPacks": "Munitionspaketten"
+      },
+      "rewards": {
+        "battleChest": "Gevechtskoffer",
+        "loginReward": "Inlogbeloning",
+        "eventTrophy": "Eventtrofee",
+        "allianceGift": "Alliantiegeschenk",
+        "questToken": "Missietoken",
+        "raceMedal": "Racemedaille"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Aanval",
+      "defence": "Verdediging",
+      "racing": "Races",
+      "pilot": "Piloot",
+      "weapons": "Wapens",
+      "engineering": "Techniek",
+      "science": "Wetenschap",
+      "hospital": "Medisch",
+      "food": "Voorraden"
     },
     "allianceTabs": {
       "members": "Leden",

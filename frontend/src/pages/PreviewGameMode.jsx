@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.png";
+import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 /* ─── Skeleton shimmer keyframes ──────────────────────── */
 const shimmerCSS = `
@@ -298,7 +299,9 @@ function DetailContent({ data }) {
 export default function PreviewGameMode() {
   const { mode } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
+  const backTo = location.state?.backTo || "/preview";
   const modeKey = mode?.toLowerCase() || "racing";
   const staticData = MODES_STATIC[modeKey] || MODES_STATIC.racing;
   const textData = t(`gamePage.${modeKey}`, { returnObjects: true }) || {};
@@ -318,13 +321,13 @@ export default function PreviewGameMode() {
       {/* Fixed bar with back + mode tag */}
       <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="fixed left-0 right-0 z-40" style={{ top: 0 }}>
         <div style={{ background: `linear-gradient(to right, rgba(6,6,20,0.55), ${data.accentDim} 50%, rgba(6,6,20,0.55))`, backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${data.accent}22`, boxShadow: "0 4px 24px rgba(0,0,0,0.35)" }}>
-          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[14px] flex items-center gap-4">
+          <div className="w-full max-w-[1080px] mx-auto px-6 md:px-12 py-[14px] flex items-center gap-4 justify-between">
             {/* Logo */}
             <img src={logo} alt="Hyper Tek" className="h-8 w-8 mr-2" />
 
-            {/* Back button → goes to /preview */}
+            {/* Back button → smart back based on entry point */}
             <button
-              onClick={() => navigate("/preview")}
+              onClick={() => navigate(backTo)}
               className="flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase transition-all duration-200 group"
               style={{ fontFamily: "Orbitron, sans-serif", color: "rgba(255,255,255,0.9)", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.18)", padding: "6px 14px 6px 10px", clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)" }}
               onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; }}
@@ -339,6 +342,10 @@ export default function PreviewGameMode() {
             {/* Mode tag */}
             <div className="text-[11px] font-bold tracking-[0.3em] uppercase px-4 py-[5px]" style={{ fontFamily: "Orbitron, sans-serif", border: `1px solid ${data.accent}55`, borderTop: `2px solid ${data.accent}`, color: data.accent, background: data.accentDim, clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)", textShadow: `0 0 12px ${data.accent}88` }}>
               {data.label} MODE
+            </div>
+
+            <div className="ml-auto">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>

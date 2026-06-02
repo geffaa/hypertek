@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "СМОТРЕТЬ ВИДЕО",
+      "title": "ВИДЕО ИГРОВОГО ПРОЦЕССА OVERLORD",
+      "close": "ЗАКРЫТЬ"
+    },
     "exit": "ВЫХОД",
     "spaceRing": "OVERLORD · КОСМИЧЕСКОЕ КОЛЬЦО",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "СМОТРЕТЬ ВИДЕО",
+      "title": "ВИДЕО ИГРОВОГО ПРОЦЕССА ГОНОК",
+      "close": "ЗАКРЫТЬ"
+    },
     "airspeed": "ВОЗДУШНАЯ СКОРОСТЬ",
     "knots": "УЗЛЫ",
     "steer": "УПРАВЛЕНИЕ",
@@ -621,6 +631,55 @@
       "weapons": "Оружие",
       "rewards": "Награды",
       "specialists": "Специалисты"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Предметы квеста",
+        "banners": "Знамёна",
+        "medals": "Медали",
+        "skins": "Скины",
+        "antiGravity": "Антигравитация",
+        "plasmaRods": "Плазменные стержни",
+        "darkMatter": "Тёмная материя",
+        "techBooks": "Технические книги",
+        "engines": "Двигатели",
+        "vehicles": "Транспорт",
+        "tools": "Инструменты",
+        "aidPacks": "Аптечки"
+      },
+      "weapons": {
+        "blades": "Клинки",
+        "guns": "Огнестрельное оружие",
+        "mines": "Мины",
+        "grenades": "Гранаты",
+        "helmet": "Шлем",
+        "suits": "Костюмы",
+        "gloves": "Перчатки",
+        "boots": "Ботинки",
+        "landBases": "Наземные базы",
+        "landTitles": "Земельные титулы",
+        "shield": "Щит",
+        "ammoPacks": "Боезапас"
+      },
+      "rewards": {
+        "battleChest": "Боевой сундук",
+        "loginReward": "Награда за вход",
+        "eventTrophy": "Трофей события",
+        "allianceGift": "Подарок альянса",
+        "questToken": "Токен квеста",
+        "raceMedal": "Гоночная медаль"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Нападение",
+      "defence": "Защита",
+      "racing": "Гонки",
+      "pilot": "Пилот",
+      "weapons": "Оружие",
+      "engineering": "Инженерия",
+      "science": "Наука",
+      "hospital": "Медицина",
+      "food": "Продовольствие"
     },
     "allianceTabs": {
       "members": "Участники",

@@ -87,12 +87,30 @@
     "readMore": "Citeste povestea noastra completa",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Univers interconectat", "desc": "3 jocuri — 1 economie si sistem de progresie comune" },
-      { "label": "Proprietate reala", "desc": "NFAs cu rascumparare minima garantata" },
-      { "label": "Joaca pentru a castiga", "desc": "Fiecare actiune contribuie la recompensele tale din lumea reala" },
-      { "label": "Plati de retragere numerar", "desc": "Convertirea monedei/recompenselor din joc in plati numerar" },
-      { "label": "Progresie conectata", "desc": "Progresia jucatorului este conectata in toate suitele de jocuri" },
-      { "label": "Integrare VR/AR", "desc": "Jucatorii VR/AR se pot alatura misiunilor si bataliilor epice in timp real" }
+      {
+        "label": "Univers interconectat",
+        "desc": "3 jocuri — 1 economie si sistem de progresie comune"
+      },
+      {
+        "label": "Proprietate reala",
+        "desc": "NFAs cu rascumparare minima garantata"
+      },
+      {
+        "label": "Joaca pentru a castiga",
+        "desc": "Fiecare actiune contribuie la recompensele tale din lumea reala"
+      },
+      {
+        "label": "Plati de retragere numerar",
+        "desc": "Convertirea monedei/recompenselor din joc in plati numerar"
+      },
+      {
+        "label": "Progresie conectata",
+        "desc": "Progresia jucatorului este conectata in toate suitele de jocuri"
+      },
+      {
+        "label": "Integrare VR/AR",
+        "desc": "Jucatorii VR/AR se pot alatura misiunilor si bataliilor epice in timp real"
+      }
     ]
   },
   "about": {
@@ -131,7 +149,19 @@
         "tagline": "Comanda. Cucereste. Domina.",
         "description": "Esti Overlord-ul — renascut din cenusile unui Pamant sfasiat. Ridica armate, cucereste sisteme stelare si indoaie factiunile rivale vointei tale. Echo Core te-a ales. Dovedeste ca a avut dreptate."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Explorează Universul Nostru",
+      "subtitle": "Trei jocuri interconectate, un univers comun.",
+      "subtitleClick": "Apasă pentru a descoperi lumea care te cheamă.",
+      "exploreMore": "Explorează Mai Mult",
+      "aboutLabel": "Despre Noi",
+      "aboutHeading": "Povestea și Viziunea Noastră",
+      "aboutDesc": "Descoperă echipa, misiunea și foaia de parcurs din spatele Hyper Tek 100.",
+      "uiLabel": "Interfața Jocului",
+      "uiHeading": "Previzualizare UI Interactivă",
+      "uiDesc": "Experimentează tabloul de bord complet al jocului — moduri Racing, Quest și Overlord."
+    }
   },
   "packages": {
     "badge": "CAMPANIE CROWDFUNDING — ETAPA 1",
@@ -152,23 +182,388 @@
     "imageComing": "Imaginea vine in curand",
     "close": "Inchide",
     "items": [
-      { "title": "Recrut", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Recrut\"","Vei primi credite de 35 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Recrut, vei primi o reducere de 10% la achizitiile din joc pentru primele 12 luni"] },
-      { "title": "Cadet Clasa Incepator", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Clasa Incepator\"","Vei primi credite de 90 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Clasa Incepator, vei primi un bonus de crestere a colectarii de resurse cu 10%","Crestere de 5% a vitezei de antrenament","Reducere de 10% la achizitiile din joc pentru primele 12 luni","#Alege sa donezi doar 50 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Clasa Incepator\""] },
-      { "title": "Cadet Clasa 1", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Clasa 1\"","Vei primi credite de 125 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Clasa 1, vei primi un bonus de crestere a colectarii de resurse cu 10%","Crestere de 5% a vitezei de antrenament","5% mai mult premiu","Crestere de 5% a atacului si apararii","Reducere de 10% la achizitiile din joc pentru primele 24 de luni"] },
-      { "title": "Cadet Principal", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal\"","Vei primi credite de 170 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Principal, vei primi un bonus de crestere a colectarii de resurse cu 10%","Crestere de 5% a vitezei de antrenament","5% mai mult premiu","Crestere de 5% a atacului si apararii","Reducere de 10% la achizitiile din joc pentru primele 24 de luni"] },
-      { "title": "Cadet Principal Clasa Speciala", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal Clasa Speciala\"","Vei primi credite de 240 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Principal Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 10%","Crestere de 5% a vitezei de antrenament","5% mai mult premiu","Crestere de 5% a atacului si apararii","Reducere de 15% la achizitiile din joc pentru primele 24 de luni"] },
-      { "title": "Cadet Senior", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal Clasa Speciala\"","Vei primi credite de 390 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Senior, vei primi un bonus de crestere a colectarii de resurse cu 15%","Crestere de 5% a vitezei de antrenament","Crestere de 10% a sanatatii","5% mai mult premiu","Crestere de 5% a atacului si apararii","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Reducere de 10% la achizitiile din joc pentru inca 12 luni","#Alege sa donezi doar 250 $ pentru a sustine misiunea noastra, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Senior Clasa Speciala\""] },
-      { "title": "Cadet Senior Clasa Speciala", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Senior Clasa Speciala\"","Vei primi credite de 440 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Cadet Senior Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 15%","Sansa 1,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Crestere de 10% a vitezei de antrenament","Crestere de 10% a sanatatii","10% mai mult premiu","Crestere de 5% a atacului si apararii","Capacitate de atac 5% mai mare","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Reducere de 10% la achizitiile din joc pentru inca 12 luni"] },
-      { "title": "Cadet de Zbor", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet de Zbor\"","Vei primi credite de 550 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Locotenent de Zbor, vei primi un bonus de crestere a colectarii de resurse cu 15%","Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Crestere de 15% a vitezei de antrenament","Crestere de 15% a sanatatii","10% mai mult premiu","Crestere de 5% a atacului si apararii","Capacitate de atac 5% mai mare","1 pachet mega resurse","1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Reducere de 10% la achizitiile din joc pentru inca 12 luni"] },
-      { "title": "Locotenent de Zbor", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Locotenent de Zbor\"","Vei primi credite de 6800 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Locotenent de Zbor, vei primi un bonus de crestere a colectarii de resurse cu 20%","Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Crestere de 20% a vitezei de antrenament","Crestere de 15% a sanatatii","15% mai mult premiu","Crestere de 8% a atacului si apararii","Capacitate de atac 7% mai mare","Piese bonus pentru curse","1 pachet mega resurse","1 permis port off world","1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Reducere de 10% la achizitiile din joc pentru inca 12 luni","#Alege sa donezi doar 500 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Locotenent de Zbor\""] },
-      { "title": "Locotenent de Zbor Clasa Speciala", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Locotenent de Zbor Clasa Speciala\"","Vei primi credite de 1.050 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Locotenent de Zbor Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 20%","Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 1,0% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 20% a vitezei de antrenament","Crestere de 20% a sanatatii","15% mai mult premiu","Crestere de 10% a atacului si apararii","Capacitate de atac 7% mai mare","Piese bonus pentru curse","1 pachet mega resurse","1 avatar gazda suplimentar","1 permis port off world","1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Reducere de 10% la achizitiile din joc pentru inca 12 luni"] },
-      { "title": "Wingman", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Wingman\"","Vei primi credite de 1.480 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Wingman, vei primi un bonus de crestere a colectarii de resurse cu 25%","Sansa 2,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 1,0% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 25% a vitezei de antrenament","Crestere de 20% a sanatatii","20% mai mult premiu","Crestere de 10% a atacului si apararii","Capacitate de atac 8% mai mare","Piese bonus pentru curse","1 pachet mega resurse","1 pachet mega cristale","1 avatar gazda suplimentar","1 permis port off world","2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Primeste o reducere suplimentara continua de 10% la orice achizitii in joc/jocuri","#Alege sa donezi doar 1.000 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Wingman\""] },
-      { "title": "Wingman Clasa Senior", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Wingman Clasa Senior\"","Vei primi credite de 2.200 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Wingman Clasa Senior, vei primi un bonus de crestere a colectarii de resurse cu 25%","Sansa 3,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 1,5% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 30% a vitezei de antrenament","Crestere de 25% a sanatatii","20% mai mult premiu","Crestere de 15% a atacului si apararii","Capacitate de atac 10% mai mare","1 slot de teleportare suplimentar pentru atac/aparare","Piese bonus pentru curse","1 pachet mega resurse","1 pachet mega cristale","1 avatar gazda suplimentar","1 permis port off world","2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","Reducere de 20% la achizitiile din joc pentru primele 12 luni","Primeste o reducere suplimentara continua de 10% la orice achizitii in joc/jocuri"] },
-      { "title": "Ofiter Tehnic", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Ofiter Tehnic\"","Vei primi credite de 2.900 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Ofiter Tehnic, vei primi un bonus de crestere a colectarii de resurse cu 25%","Sansa 3,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 2,0% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 30% a vitezei de antrenament","Crestere de 25% a sanatatii","25% mai mult premiu","Crestere de 15% a atacului si apararii","Capacitate de atac 10% mai mare","1 slot de teleportare suplimentar pentru atac/aparare","Piese bonus pentru curse","2 pachete mega resurse","1 pachet mega cristale","2 avatare gazda suplimentare","2 permise port off-world","3 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","Reducere de 25% la achizitiile din joc pentru primele 12 luni","Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri","Avatar personalizat modelat dupa donator, aparand in intregul joc","Partajarea veniturilor! Participa la un fond de profit de pana la 2,5% generat din vanzarea pachetelor din joc si a NFAs","Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback","Design exclusiv de Quest racer pentru a fi utilizat in joc","Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"] },
-      { "title": "Specialist de Echipa", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Specialist de Echipa\"","Vei primi credite de 3.300 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Specialist de Echipa, vei primi un bonus de crestere a colectarii de resurse cu 30%","Sansa 5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 2,5% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 30% a vitezei de antrenament","Crestere de 30% a sanatatii","25% mai mult premiu","Crestere de 15% a atacului si apararii","Capacitate de atac 10% mai mare","1 slot de teleportare suplimentar pentru atac/aparare","Piese bonus pentru curse","3 pachete mega resurse","1 pachet mega cristale","2 avatare gazda suplimentare","2 permise port off-world","2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare","Reducere de 25% la achizitiile din joc pentru primele 24 de luni","Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri","Avatar personalizat modelat dupa donator, aparand in intregul joc","Partajarea veniturilor! Participa la un fond de profit de pana la 2,5% generat din vanzarea pachetelor din joc si a NFAs","Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback","Design exclusiv de Quest racer pentru a fi utilizat in joc","Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere","#Alege sa donezi doar 2.500 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Specialist de Echipa\""] },
-      { "title": "Specialist de Echipa Major", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Specialist de Echipa Major\"","Vei primi credite de 6.500 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Specialist de Echipa Major, vei primi un bonus de crestere a colectarii/minarii de resurse cu 35%","Sansa 7% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 3,5% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 35% a vitezei de antrenament","Crestere de 30% a sanatatii","30% mai mult premiu","Crestere de 20% a atacului si apararii","Capacitate de atac 10% mai mare","1 slot de teleportare suplimentar pentru atac/aparare","Piese bonus pentru curse","4 pachete mega resurse","1 pachet mega cristale","2 avatare gazda suplimentare","2 permise port off-world","3 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare","Reducere de 25% la achizitiile din joc pentru primele 24 de luni","Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri","Avatar personalizat modelat dupa donator, aparand in intregul joc","Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs","Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback","Design exclusiv de Quest racer pentru a fi utilizat in joc","Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"] },
-      { "title": "Commandar Elite", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Commandar Elite\"","Vei primi credite de 9.000 USD pentru achizitii in joc","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului discord.","Ca Commander Elite, vei primi un bonus de crestere a colectarii/minarii de resurse cu 35%","Sansa 7,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 4% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 40% a vitezei de antrenament","Crestere de 35% a sanatatii","30% mai mult premiu","Crestere de 20% a atacului si apararii","Capacitate de atac 20% mai mare","2 sloturi de teleportare suplimentare pentru atac/aparare","Piese bonus pentru curse","4 pachete mega resurse","2 pachete mega cristale","2 avatare gazda suplimentare","3 permise port off world","4 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare","Reducere de 30% la achizitiile din joc pentru primele 12 luni","Reducere de 25% la achizitiile din joc pentru urmatoarele 12 luni","Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri","Avatar personalizat modelat dupa donator, aparand in intregul joc","Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs","Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback","Design exclusiv de Quest racer pentru a fi utilizat in joc","Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"] },
-      { "title": "Over Lord", "rewards": ["Numele tau va aparea in creditele finale ale jocului sub titlul \"Over Lord\"","Vei primi credite de 15.000 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)","Vei primi actualizari saptamanale despre joc prin email","Vei putea sa te alături chatului Discord.","Ca Overlord, vei primi un bonus de crestere a colectarii/minarii de resurse cu 40%","Sansa 10% mai mare de a obtine NFAs sau articole rare in primele 12 luni","Sansa 5% mai mare de a obtine NFAs sau articole rare in mod continuu","Crestere de 50% a vitezei de antrenament","Crestere de 40% a sanatatii","40% mai mult premiu","Crestere de 25% a atacului si apararii","Capacitate de atac 25% mai mare","2 sloturi de teleportare suplimentare pentru atac/aparare","Piese bonus pentru curse","6 pachete mega resurse","3 pachete mega cristale","2 avatare gazda suplimentare","4 permise port off-world","4 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare","2 NFAs Specialisti legendari de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 650 $ fiecare","1 NFA Specialist epic de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 1000 $ fiecare","Reducere de 40% la achizitiile din joc pentru primele 12 luni","Reducere de 30% la achizitiile din joc pentru urmatoarele 12 luni","Primeste o reducere suplimentara de 20% la orice achizitii in joc/jocuri atat timp cat esti implicat in joc","Avatar personalizat modelat dupa donator, aparand in intregul joc","Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs","Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback","Design exclusiv de Quest racer pentru a fi utilizat in joc","Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"] }
+      {
+        "title": "Recrut",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Recrut\"",
+          "Vei primi credite de 35 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Recrut, vei primi o reducere de 10% la achizitiile din joc pentru primele 12 luni"
+        ]
+      },
+      {
+        "title": "Cadet Clasa Incepator",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Clasa Incepator\"",
+          "Vei primi credite de 90 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Clasa Incepator, vei primi un bonus de crestere a colectarii de resurse cu 10%",
+          "Crestere de 5% a vitezei de antrenament",
+          "Reducere de 10% la achizitiile din joc pentru primele 12 luni",
+          "#Alege sa donezi doar 50 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Clasa Incepator\""
+        ]
+      },
+      {
+        "title": "Cadet Clasa 1",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Clasa 1\"",
+          "Vei primi credite de 125 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Clasa 1, vei primi un bonus de crestere a colectarii de resurse cu 10%",
+          "Crestere de 5% a vitezei de antrenament",
+          "5% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Reducere de 10% la achizitiile din joc pentru primele 24 de luni"
+        ]
+      },
+      {
+        "title": "Cadet Principal",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal\"",
+          "Vei primi credite de 170 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Principal, vei primi un bonus de crestere a colectarii de resurse cu 10%",
+          "Crestere de 5% a vitezei de antrenament",
+          "5% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Reducere de 10% la achizitiile din joc pentru primele 24 de luni"
+        ]
+      },
+      {
+        "title": "Cadet Principal Clasa Speciala",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal Clasa Speciala\"",
+          "Vei primi credite de 240 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Principal Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 10%",
+          "Crestere de 5% a vitezei de antrenament",
+          "5% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Reducere de 15% la achizitiile din joc pentru primele 24 de luni"
+        ]
+      },
+      {
+        "title": "Cadet Senior",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Principal Clasa Speciala\"",
+          "Vei primi credite de 390 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Senior, vei primi un bonus de crestere a colectarii de resurse cu 15%",
+          "Crestere de 5% a vitezei de antrenament",
+          "Crestere de 10% a sanatatii",
+          "5% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 10% la achizitiile din joc pentru inca 12 luni",
+          "#Alege sa donezi doar 250 $ pentru a sustine misiunea noastra, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Senior Clasa Speciala\""
+        ]
+      },
+      {
+        "title": "Cadet Senior Clasa Speciala",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet Senior Clasa Speciala\"",
+          "Vei primi credite de 440 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Cadet Senior Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 15%",
+          "Sansa 1,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Crestere de 10% a vitezei de antrenament",
+          "Crestere de 10% a sanatatii",
+          "10% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Capacitate de atac 5% mai mare",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 10% la achizitiile din joc pentru inca 12 luni"
+        ]
+      },
+      {
+        "title": "Cadet de Zbor",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Cadet de Zbor\"",
+          "Vei primi credite de 550 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Locotenent de Zbor, vei primi un bonus de crestere a colectarii de resurse cu 15%",
+          "Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Crestere de 15% a vitezei de antrenament",
+          "Crestere de 15% a sanatatii",
+          "10% mai mult premiu",
+          "Crestere de 5% a atacului si apararii",
+          "Capacitate de atac 5% mai mare",
+          "1 pachet mega resurse",
+          "1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 10% la achizitiile din joc pentru inca 12 luni"
+        ]
+      },
+      {
+        "title": "Locotenent de Zbor",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Locotenent de Zbor\"",
+          "Vei primi credite de 6800 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Locotenent de Zbor, vei primi un bonus de crestere a colectarii de resurse cu 20%",
+          "Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Crestere de 20% a vitezei de antrenament",
+          "Crestere de 15% a sanatatii",
+          "15% mai mult premiu",
+          "Crestere de 8% a atacului si apararii",
+          "Capacitate de atac 7% mai mare",
+          "Piese bonus pentru curse",
+          "1 pachet mega resurse",
+          "1 permis port off world",
+          "1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 10% la achizitiile din joc pentru inca 12 luni",
+          "#Alege sa donezi doar 500 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Locotenent de Zbor\""
+        ]
+      },
+      {
+        "title": "Locotenent de Zbor Clasa Speciala",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Locotenent de Zbor Clasa Speciala\"",
+          "Vei primi credite de 1.050 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Locotenent de Zbor Clasa Speciala, vei primi un bonus de crestere a colectarii de resurse cu 20%",
+          "Sansa 1,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 1,0% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 20% a vitezei de antrenament",
+          "Crestere de 20% a sanatatii",
+          "15% mai mult premiu",
+          "Crestere de 10% a atacului si apararii",
+          "Capacitate de atac 7% mai mare",
+          "Piese bonus pentru curse",
+          "1 pachet mega resurse",
+          "1 avatar gazda suplimentar",
+          "1 permis port off world",
+          "1 NFA Specialist superior de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 10% la achizitiile din joc pentru inca 12 luni"
+        ]
+      },
+      {
+        "title": "Wingman",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Wingman\"",
+          "Vei primi credite de 1.480 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Wingman, vei primi un bonus de crestere a colectarii de resurse cu 25%",
+          "Sansa 2,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 1,0% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 25% a vitezei de antrenament",
+          "Crestere de 20% a sanatatii",
+          "20% mai mult premiu",
+          "Crestere de 10% a atacului si apararii",
+          "Capacitate de atac 8% mai mare",
+          "Piese bonus pentru curse",
+          "1 pachet mega resurse",
+          "1 pachet mega cristale",
+          "1 avatar gazda suplimentar",
+          "1 permis port off world",
+          "2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Primeste o reducere suplimentara continua de 10% la orice achizitii in joc/jocuri",
+          "#Alege sa donezi doar 1.000 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Wingman\""
+        ]
+      },
+      {
+        "title": "Wingman Clasa Senior",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Wingman Clasa Senior\"",
+          "Vei primi credite de 2.200 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Wingman Clasa Senior, vei primi un bonus de crestere a colectarii de resurse cu 25%",
+          "Sansa 3,0% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 1,5% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 30% a vitezei de antrenament",
+          "Crestere de 25% a sanatatii",
+          "20% mai mult premiu",
+          "Crestere de 15% a atacului si apararii",
+          "Capacitate de atac 10% mai mare",
+          "1 slot de teleportare suplimentar pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "1 pachet mega resurse",
+          "1 pachet mega cristale",
+          "1 avatar gazda suplimentar",
+          "1 permis port off world",
+          "2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "Reducere de 20% la achizitiile din joc pentru primele 12 luni",
+          "Primeste o reducere suplimentara continua de 10% la orice achizitii in joc/jocuri"
+        ]
+      },
+      {
+        "title": "Ofiter Tehnic",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Ofiter Tehnic\"",
+          "Vei primi credite de 2.900 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Ofiter Tehnic, vei primi un bonus de crestere a colectarii de resurse cu 25%",
+          "Sansa 3,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 2,0% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 30% a vitezei de antrenament",
+          "Crestere de 25% a sanatatii",
+          "25% mai mult premiu",
+          "Crestere de 15% a atacului si apararii",
+          "Capacitate de atac 10% mai mare",
+          "1 slot de teleportare suplimentar pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "2 pachete mega resurse",
+          "1 pachet mega cristale",
+          "2 avatare gazda suplimentare",
+          "2 permise port off-world",
+          "3 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "Reducere de 25% la achizitiile din joc pentru primele 12 luni",
+          "Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri",
+          "Avatar personalizat modelat dupa donator, aparand in intregul joc",
+          "Partajarea veniturilor! Participa la un fond de profit de pana la 2,5% generat din vanzarea pachetelor din joc si a NFAs",
+          "Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback",
+          "Design exclusiv de Quest racer pentru a fi utilizat in joc",
+          "Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"
+        ]
+      },
+      {
+        "title": "Specialist de Echipa",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Specialist de Echipa\"",
+          "Vei primi credite de 3.300 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Specialist de Echipa, vei primi un bonus de crestere a colectarii de resurse cu 30%",
+          "Sansa 5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 2,5% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 30% a vitezei de antrenament",
+          "Crestere de 30% a sanatatii",
+          "25% mai mult premiu",
+          "Crestere de 15% a atacului si apararii",
+          "Capacitate de atac 10% mai mare",
+          "1 slot de teleportare suplimentar pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "3 pachete mega resurse",
+          "1 pachet mega cristale",
+          "2 avatare gazda suplimentare",
+          "2 permise port off-world",
+          "2 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare",
+          "Reducere de 25% la achizitiile din joc pentru primele 24 de luni",
+          "Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri",
+          "Avatar personalizat modelat dupa donator, aparand in intregul joc",
+          "Partajarea veniturilor! Participa la un fond de profit de pana la 2,5% generat din vanzarea pachetelor din joc si a NFAs",
+          "Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback",
+          "Design exclusiv de Quest racer pentru a fi utilizat in joc",
+          "Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere",
+          "#Alege sa donezi doar 2.500 $ pentru a sustine misiunea noastra si, daca doresti, numele tau va aparea in creditele finale ale jocului sub titlul \"Incadrat Onorar Specialist de Echipa\""
+        ]
+      },
+      {
+        "title": "Specialist de Echipa Major",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Specialist de Echipa Major\"",
+          "Vei primi credite de 6.500 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Specialist de Echipa Major, vei primi un bonus de crestere a colectarii/minarii de resurse cu 35%",
+          "Sansa 7% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 3,5% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 35% a vitezei de antrenament",
+          "Crestere de 30% a sanatatii",
+          "30% mai mult premiu",
+          "Crestere de 20% a atacului si apararii",
+          "Capacitate de atac 10% mai mare",
+          "1 slot de teleportare suplimentar pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "4 pachete mega resurse",
+          "1 pachet mega cristale",
+          "2 avatare gazda suplimentare",
+          "2 permise port off-world",
+          "3 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare",
+          "Reducere de 25% la achizitiile din joc pentru primele 24 de luni",
+          "Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri",
+          "Avatar personalizat modelat dupa donator, aparand in intregul joc",
+          "Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs",
+          "Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback",
+          "Design exclusiv de Quest racer pentru a fi utilizat in joc",
+          "Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"
+        ]
+      },
+      {
+        "title": "Commandar Elite",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Commandar Elite\"",
+          "Vei primi credite de 9.000 USD pentru achizitii in joc",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului discord.",
+          "Ca Commander Elite, vei primi un bonus de crestere a colectarii/minarii de resurse cu 35%",
+          "Sansa 7,5% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 4% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 40% a vitezei de antrenament",
+          "Crestere de 35% a sanatatii",
+          "30% mai mult premiu",
+          "Crestere de 20% a atacului si apararii",
+          "Capacitate de atac 20% mai mare",
+          "2 sloturi de teleportare suplimentare pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "4 pachete mega resurse",
+          "2 pachete mega cristale",
+          "2 avatare gazda suplimentare",
+          "3 permise port off world",
+          "4 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "1 NFA Specialist exceptional de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 400 $ fiecare",
+          "Reducere de 30% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 25% la achizitiile din joc pentru urmatoarele 12 luni",
+          "Primeste o reducere suplimentara continua de 20% la orice achizitii in joc/jocuri",
+          "Avatar personalizat modelat dupa donator, aparand in intregul joc",
+          "Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs",
+          "Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback",
+          "Design exclusiv de Quest racer pentru a fi utilizat in joc",
+          "Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"
+        ]
+      },
+      {
+        "title": "Over Lord",
+        "rewards": [
+          "Numele tau va aparea in creditele finale ale jocului sub titlul \"Over Lord\"",
+          "Vei primi credite de 15.000 USD pentru achizitii in joc (nu pot fi transformate in plati numerar)",
+          "Vei primi actualizari saptamanale despre joc prin email",
+          "Vei putea sa te alături chatului Discord.",
+          "Ca Overlord, vei primi un bonus de crestere a colectarii/minarii de resurse cu 40%",
+          "Sansa 10% mai mare de a obtine NFAs sau articole rare in primele 12 luni",
+          "Sansa 5% mai mare de a obtine NFAs sau articole rare in mod continuu",
+          "Crestere de 50% a vitezei de antrenament",
+          "Crestere de 40% a sanatatii",
+          "40% mai mult premiu",
+          "Crestere de 25% a atacului si apararii",
+          "Capacitate de atac 25% mai mare",
+          "2 sloturi de teleportare suplimentare pentru atac/aparare",
+          "Piese bonus pentru curse",
+          "6 pachete mega resurse",
+          "3 pachete mega cristale",
+          "2 avatare gazda suplimentare",
+          "4 permise port off-world",
+          "4 NFAs Specialisti superiori de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 150 $ fiecare",
+          "2 NFAs Specialisti legendari de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 650 $ fiecare",
+          "1 NFA Specialist epic de echipa oferind bonusuri pentru nave si curse, cu o rascumparare minima garantata de 1000 $ fiecare",
+          "Reducere de 40% la achizitiile din joc pentru primele 12 luni",
+          "Reducere de 30% la achizitiile din joc pentru urmatoarele 12 luni",
+          "Primeste o reducere suplimentara de 20% la orice achizitii in joc/jocuri atat timp cat esti implicat in joc",
+          "Avatar personalizat modelat dupa donator, aparand in intregul joc",
+          "Partajarea veniturilor! Participa la un fond de profit de pana la 5% generat din vanzarea pachetelor din joc si a NFAs",
+          "Acces exclusiv la dezvoltator cu actualizari private lunare despre joc, dezvoltare, plus oportunitati de a oferi feedback",
+          "Design exclusiv de Quest racer pentru a fi utilizat in joc",
+          "Card de colectionat in stil baseball al cursei tale exclusive de quest, trimis tie cu o scrisoare de apreciere"
+        ]
+      }
     ]
   }
 }

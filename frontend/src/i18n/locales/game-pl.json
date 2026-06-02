@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "OBEJRZYJ WIDEO",
+      "title": "WIDEO ROZGRYWKI OVERLORD",
+      "close": "ZAMKNIJ"
+    },
     "exit": "WYJŚCIE",
     "spaceRing": "OVERLORD · PIERŚCIEŃ KOSMICZNY",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "OBEJRZYJ WIDEO",
+      "title": "WIDEO ROZGRYWKI WYŚCIGOWEJ",
+      "close": "ZAMKNIJ"
+    },
     "airspeed": "PRĘDKOŚĆ POWIETRZNA",
     "knots": "WĘZŁY",
     "steer": "STEROWANIE",
@@ -621,6 +631,55 @@
       "weapons": "Broń",
       "rewards": "Nagrody",
       "specialists": "Specjaliści"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Przedmioty Misji",
+        "banners": "Sztandary",
+        "medals": "Medale",
+        "skins": "Skórki",
+        "antiGravity": "Antygrawitacja",
+        "plasmaRods": "Pręty Plazmowe",
+        "darkMatter": "Ciemna Materia",
+        "techBooks": "Księgi Techniki",
+        "engines": "Silniki",
+        "vehicles": "Pojazdy",
+        "tools": "Narzędzia",
+        "aidPacks": "Zestawy Pierwszej Pomocy"
+      },
+      "weapons": {
+        "blades": "Ostrza",
+        "guns": "Broń Palna",
+        "mines": "Miny",
+        "grenades": "Granaty",
+        "helmet": "Hełm",
+        "suits": "Zbroje",
+        "gloves": "Rękawice",
+        "boots": "Buty",
+        "landBases": "Bazy Lądowe",
+        "landTitles": "Tytuły Ziemskie",
+        "shield": "Tarcza",
+        "ammoPacks": "Amunicja"
+      },
+      "rewards": {
+        "battleChest": "Skrzynia Bojowa",
+        "loginReward": "Nagroda za Logowanie",
+        "eventTrophy": "Trofeum Eventu",
+        "allianceGift": "Dar Sojuszu",
+        "questToken": "Żeton Misji",
+        "raceMedal": "Medal Wyścigowy"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Atak",
+      "defence": "Obrona",
+      "racing": "Wyścigi",
+      "pilot": "Pilot",
+      "weapons": "Broń",
+      "engineering": "Inżynieria",
+      "science": "Nauka",
+      "hospital": "Medycyna",
+      "food": "Zaopatrzenie"
     },
     "allianceTabs": {
       "members": "Członkowie",

@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "GUARDA IL VIDEO",
+      "title": "VIDEO GAMEPLAY OVERLORD",
+      "close": "CHIUDI"
+    },
     "exit": "ESCI",
     "spaceRing": "OVERLORD · ANELLO SPAZIALE",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "GUARDA IL VIDEO",
+      "title": "VIDEO GAMEPLAY RACING",
+      "close": "CHIUDI"
+    },
     "airspeed": "VELOCITÀ AEREA",
     "knots": "NODI",
     "steer": "STERZA",
@@ -621,6 +631,55 @@
       "weapons": "Armi",
       "rewards": "Ricompense",
       "specialists": "Specialisti"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Oggetti Missione",
+        "banners": "Stendardi",
+        "medals": "Medaglie",
+        "skins": "Skin",
+        "antiGravity": "Antigravità",
+        "plasmaRods": "Barre Plasma",
+        "darkMatter": "Materia Oscura",
+        "techBooks": "Libri Tecnici",
+        "engines": "Motori",
+        "vehicles": "Veicoli",
+        "tools": "Strumenti",
+        "aidPacks": "Kit Pronto Soccorso"
+      },
+      "weapons": {
+        "blades": "Lame",
+        "guns": "Armi da Fuoco",
+        "mines": "Mine",
+        "grenades": "Granate",
+        "helmet": "Elmetto",
+        "suits": "Tute",
+        "gloves": "Guanti",
+        "boots": "Stivali",
+        "landBases": "Basi Terrestri",
+        "landTitles": "Titoli Fondiari",
+        "shield": "Scudo",
+        "ammoPacks": "Pacchi Munizioni"
+      },
+      "rewards": {
+        "battleChest": "Forziere da Battaglia",
+        "loginReward": "Premio di Accesso",
+        "eventTrophy": "Trofeo Evento",
+        "allianceGift": "Dono dell'Alleanza",
+        "questToken": "Gettone Missione",
+        "raceMedal": "Medaglia di Gara"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Attacco",
+      "defence": "Difesa",
+      "racing": "Corsa",
+      "pilot": "Pilota",
+      "weapons": "Armi",
+      "engineering": "Ingegneria",
+      "science": "Scienza",
+      "hospital": "Ospedale",
+      "food": "Rifornimenti"
     },
     "allianceTabs": {
       "members": "Membri",

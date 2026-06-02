@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "觀看影片",
+      "title": "霸主遊戲影片",
+      "close": "關閉"
+    },
     "exit": "退出",
     "spaceRing": "OVERLORD · 太空環",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "觀看影片",
+      "title": "賽車遊戲影片",
+      "close": "關閉"
+    },
     "airspeed": "空速",
     "knots": "節",
     "steer": "轉向",
@@ -621,6 +631,55 @@
       "weapons": "武器",
       "rewards": "獎勵",
       "specialists": "專家"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "任務物品",
+        "banners": "旗幟",
+        "medals": "勛章",
+        "skins": "皮膚",
+        "antiGravity": "反重力",
+        "plasmaRods": "電漿棒",
+        "darkMatter": "暗物質",
+        "techBooks": "科技書籍",
+        "engines": "引擎",
+        "vehicles": "載具",
+        "tools": "工具",
+        "aidPacks": "急救包"
+      },
+      "weapons": {
+        "blades": "刀刃",
+        "guns": "槍械",
+        "mines": "地雷",
+        "grenades": "手榴彈",
+        "helmet": "頭盔",
+        "suits": "戰甲",
+        "gloves": "手套",
+        "boots": "靴子",
+        "landBases": "陸地基地",
+        "landTitles": "土地所有權",
+        "shield": "盾牌",
+        "ammoPacks": "彈藥包"
+      },
+      "rewards": {
+        "battleChest": "戰利箱",
+        "loginReward": "登入獎勵",
+        "eventTrophy": "活動獎杯",
+        "allianceGift": "聯盟禮物",
+        "questToken": "任務代幣",
+        "raceMedal": "賽車勛章"
+      }
+    },
+    "specialistCategories": {
+      "offence": "進攻",
+      "defence": "防守",
+      "racing": "賽車",
+      "pilot": "飛行員",
+      "weapons": "武器",
+      "engineering": "工程",
+      "science": "科學",
+      "hospital": "醫療",
+      "food": "食物"
     },
     "allianceTabs": {
       "members": "成員",

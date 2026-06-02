@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "VER VÍDEO",
+      "title": "VÍDEO DE GAMEPLAY OVERLORD",
+      "close": "CERRAR"
+    },
     "exit": "SALIR",
     "spaceRing": "OVERLORD · ANILLO ESPACIAL",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "VER VÍDEO",
+      "title": "VÍDEO DE GAMEPLAY DE CARRERAS",
+      "close": "CERRAR"
+    },
     "airspeed": "VELOCIDAD AÉREA",
     "knots": "NUDOS",
     "steer": "DIRIGIR",
@@ -621,6 +631,55 @@
       "weapons": "Armas",
       "rewards": "Recompensas",
       "specialists": "Especialistas"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Objetos de Misión",
+        "banners": "Estandartes",
+        "medals": "Medallas",
+        "skins": "Skins",
+        "antiGravity": "Antigravedad",
+        "plasmaRods": "Barras de Plasma",
+        "darkMatter": "Materia Oscura",
+        "techBooks": "Libros Técnicos",
+        "engines": "Motores",
+        "vehicles": "Vehículos",
+        "tools": "Herramientas",
+        "aidPacks": "Botiquines"
+      },
+      "weapons": {
+        "blades": "Hojas",
+        "guns": "Armas de Fuego",
+        "mines": "Minas",
+        "grenades": "Granadas",
+        "helmet": "Casco",
+        "suits": "Trajes",
+        "gloves": "Guantes",
+        "boots": "Botas",
+        "landBases": "Bases Terrestres",
+        "landTitles": "Títulos de Tierra",
+        "shield": "Escudo",
+        "ammoPacks": "Paquetes de Munición"
+      },
+      "rewards": {
+        "battleChest": "Cofre de Batalla",
+        "loginReward": "Recompensa de Inicio",
+        "eventTrophy": "Trofeo de Evento",
+        "allianceGift": "Regalo de Alianza",
+        "questToken": "Token de Misión",
+        "raceMedal": "Medalla de Carrera"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Ataque",
+      "defence": "Defensa",
+      "racing": "Carreras",
+      "pilot": "Piloto",
+      "weapons": "Armas",
+      "engineering": "Ingeniería",
+      "science": "Ciencia",
+      "hospital": "Sanidad",
+      "food": "Suministros"
     },
     "allianceTabs": {
       "members": "Miembros",

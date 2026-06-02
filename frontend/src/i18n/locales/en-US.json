@@ -149,7 +149,19 @@
         "tagline": "Command. Conquer. Rule.",
         "description": "You are the Overlord — reborn from the ashes of a fractured Earth. Raise armies, seize star systems, and bend rival factions to your will. The Echo Core chose you. Prove it was right."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Explore Our Universe",
+      "subtitle": "Three interconnected games, one shared universe.",
+      "subtitleClick": "Click to discover the world that calls to you.",
+      "exploreMore": "Explore More",
+      "aboutLabel": "About Us",
+      "aboutHeading": "Our Story & Vision",
+      "aboutDesc": "Discover the team, mission, and roadmap behind Hyper Tek 100.",
+      "uiLabel": "Game Interface",
+      "uiHeading": "Interactive UI Preview",
+      "uiDesc": "Experience the full game dashboard — Racing, Quest, and Overlord modes."
+    }
   },
   "packages": {
     "badge": "CROWDFUNDING CAMPAIGN — STAGE 1",

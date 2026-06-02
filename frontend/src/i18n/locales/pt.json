@@ -85,12 +85,30 @@
     "readMore": "Ler a História Completa",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Universo Interconectado", "desc": "3 jogos — 1 economia e sistema de progressão compartilhados" },
-      { "label": "Propriedade Real",        "desc": "NFAs com recompra mínima garantida" },
-      { "label": "Jogar para Ganhar",       "desc": "Cada ação contribui para suas recompensas no mundo real" },
-      { "label": "Pagamentos em Dinheiro",  "desc": "Convertendo moeda/recompensas do jogo em pagamentos em dinheiro" },
-      { "label": "Progressão Vinculada",    "desc": "A progressão do jogador é vinculada a todos os jogos" },
-      { "label": "Integração VR/AR",        "desc": "Jogadores VR/AR podem se juntar a missões e batalhas épicas em tempo real" }
+      {
+        "label": "Universo Interconectado",
+        "desc": "3 jogos — 1 economia e sistema de progressão compartilhados"
+      },
+      {
+        "label": "Propriedade Real",
+        "desc": "NFAs com recompra mínima garantida"
+      },
+      {
+        "label": "Jogar para Ganhar",
+        "desc": "Cada ação contribui para suas recompensas no mundo real"
+      },
+      {
+        "label": "Pagamentos em Dinheiro",
+        "desc": "Convertendo moeda/recompensas do jogo em pagamentos em dinheiro"
+      },
+      {
+        "label": "Progressão Vinculada",
+        "desc": "A progressão do jogador é vinculada a todos os jogos"
+      },
+      {
+        "label": "Integração VR/AR",
+        "desc": "Jogadores VR/AR podem se juntar a missões e batalhas épicas em tempo real"
+      }
     ]
   },
   "about": {
@@ -129,7 +147,19 @@
         "tagline": "Comandar. Conquistar. Governar.",
         "description": "Você é o Soberano — renascido das cinzas de uma Terra fragmentada. Erga exércitos, tome sistemas estelares e dobre facções rivais à sua vontade. O Núcleo Eco te escolheu. Prove que foi a escolha certa."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Explore Nosso Universo",
+      "subtitle": "Três jogos interligados, um universo compartilhado.",
+      "subtitleClick": "Clique para descobrir o mundo que chama por você.",
+      "exploreMore": "Explorar Mais",
+      "aboutLabel": "Sobre Nós",
+      "aboutHeading": "Nossa História e Visão",
+      "aboutDesc": "Descubra a equipe, missão e roadmap por trás do Hyper Tek 100.",
+      "uiLabel": "Interface do Jogo",
+      "uiHeading": "Prévia de UI Interativa",
+      "uiDesc": "Experimente o painel completo do jogo — modos Racing, Quest e Overlord."
+    }
   },
   "packages": {
     "badge": "CAMPANHA DE CROWDFUNDING — ESTÁGIO 1",

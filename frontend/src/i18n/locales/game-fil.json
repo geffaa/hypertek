@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "MANOOD NG VIDEO",
+      "title": "VIDEO NG OVERLORD GAMEPLAY",
+      "close": "ISARA"
+    },
     "exit": "LUMABAS",
     "spaceRing": "OVERLORD · SPACE RING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "MANOOD NG VIDEO",
+      "title": "VIDEO NG RACING GAMEPLAY",
+      "close": "ISARA"
+    },
     "airspeed": "BILIS SA HANGIN",
     "knots": "KNOTS",
     "steer": "MANIBELA",
@@ -621,6 +631,55 @@
       "weapons": "Mga Sandata",
       "rewards": "Mga Gantimpala",
       "specialists": "Mga Espesyalista"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Mga Item ng Misyon",
+        "banners": "Mga Banner",
+        "medals": "Mga Medalya",
+        "skins": "Mga Hitsura",
+        "antiGravity": "Anti-Grabidad",
+        "plasmaRods": "Mga Plasma Rod",
+        "darkMatter": "Madilim na Bagay",
+        "techBooks": "Mga Teknikal na Aklat",
+        "engines": "Mga Makina",
+        "vehicles": "Mga Sasakyan",
+        "tools": "Mga Kasangkapan",
+        "aidPacks": "Mga First Aid Pack"
+      },
+      "weapons": {
+        "blades": "Mga Talim",
+        "guns": "Mga Baril",
+        "mines": "Mga Mina",
+        "grenades": "Mga Grenada",
+        "helmet": "Helmet",
+        "suits": "Mga Kasuotan",
+        "gloves": "Mga Guwantes",
+        "boots": "Mga Bota",
+        "landBases": "Mga Base sa Lupa",
+        "landTitles": "Mga Titulo ng Lupa",
+        "shield": "Kalasag",
+        "ammoPacks": "Mga Pakete ng Bala"
+      },
+      "rewards": {
+        "battleChest": "Kahon ng Labanan",
+        "loginReward": "Gantimpala sa Pag-login",
+        "eventTrophy": "Trophy ng Kaganapan",
+        "allianceGift": "Regalo ng Alyansa",
+        "questToken": "Token ng Misyon",
+        "raceMedal": "Medalya ng Karera"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Pag-atake",
+      "defence": "Depensa",
+      "racing": "Karera",
+      "pilot": "Piloto",
+      "weapons": "Sandata",
+      "engineering": "Inhinyeriya",
+      "science": "Agham",
+      "hospital": "Medikal",
+      "food": "Suplay"
     },
     "allianceTabs": {
       "members": "Mga Miyembro",

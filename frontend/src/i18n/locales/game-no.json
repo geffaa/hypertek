@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "SE VIDEO",
+      "title": "OVERLORD GAMEPLAY VIDEO",
+      "close": "LUKK"
+    },
     "exit": "AVSLUTT",
     "spaceRing": "OVERLORD · ROMRING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "SE VIDEO",
+      "title": "RACING GAMEPLAY VIDEO",
+      "close": "LUKK"
+    },
     "airspeed": "LUFTHASTIGHET",
     "knots": "KNOP",
     "steer": "STYR",
@@ -621,6 +631,55 @@
       "weapons": "Våpen",
       "rewards": "Belønninger",
       "specialists": "Spesialister"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Oppdragsobjekter",
+        "banners": "Bannere",
+        "medals": "Medaljer",
+        "skins": "Utseender",
+        "antiGravity": "Antigravitasjon",
+        "plasmaRods": "Plasmastaver",
+        "darkMatter": "Mørkt Stoff",
+        "techBooks": "Tekniske Bøker",
+        "engines": "Motorer",
+        "vehicles": "Kjøretøy",
+        "tools": "Verktøy",
+        "aidPacks": "Hjelpepakker"
+      },
+      "weapons": {
+        "blades": "Blader",
+        "guns": "Skytevåpen",
+        "mines": "Miner",
+        "grenades": "Granater",
+        "helmet": "Hjelm",
+        "suits": "Rustninger",
+        "gloves": "Hansker",
+        "boots": "Støvler",
+        "landBases": "Landbaser",
+        "landTitles": "Landrettigheter",
+        "shield": "Skjold",
+        "ammoPacks": "Ammunisjonspakker"
+      },
+      "rewards": {
+        "battleChest": "Kampkiste",
+        "loginReward": "Innloggingsbelønning",
+        "eventTrophy": "Hendelsestrofé",
+        "allianceGift": "Alliansegave",
+        "questToken": "Oppdragstoken",
+        "raceMedal": "Løpsmedalje"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Angrep",
+      "defence": "Forsvar",
+      "racing": "Løp",
+      "pilot": "Pilot",
+      "weapons": "Våpen",
+      "engineering": "Ingeniørvitenskap",
+      "science": "Vitenskap",
+      "hospital": "Helse",
+      "food": "Forsyninger"
     },
     "allianceTabs": {
       "members": "Medlemmer",

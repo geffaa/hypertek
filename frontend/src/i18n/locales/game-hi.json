@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "वीडियो देखें",
+      "title": "ओवरलॉर्ड गेमप्ले वीडियो",
+      "close": "बंद करें"
+    },
     "exit": "बाहर निकलें",
     "spaceRing": "OVERLORD · अंतरिक्ष रिंग",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "वीडियो देखें",
+      "title": "रेसिंग गेमप्ले वीडियो",
+      "close": "बंद करें"
+    },
     "airspeed": "वायु गति",
     "knots": "नॉट्स",
     "steer": "स्टीयर",
@@ -621,6 +631,55 @@
       "weapons": "हथियार",
       "rewards": "पुरस्कार",
       "specialists": "विशेषज्ञ"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "क्वेस्ट आइटम",
+        "banners": "बैनर",
+        "medals": "पदक",
+        "skins": "स्किन",
+        "antiGravity": "प्रतिगुरुत्व",
+        "plasmaRods": "प्लाज्मा रॉड",
+        "darkMatter": "डार्क मैटर",
+        "techBooks": "तकनीकी पुस्तकें",
+        "engines": "इंजन",
+        "vehicles": "वाहन",
+        "tools": "उपकरण",
+        "aidPacks": "प्राथमिक चिकित्सा किट"
+      },
+      "weapons": {
+        "blades": "ब्लेड",
+        "guns": "बंदूकें",
+        "mines": "बारूदी सुरंगें",
+        "grenades": "ग्रेनेड",
+        "helmet": "हेलमेट",
+        "suits": "सूट",
+        "gloves": "दस्ताने",
+        "boots": "जूते",
+        "landBases": "भूमि अड्डे",
+        "landTitles": "भूमि अधिकार",
+        "shield": "ढाल",
+        "ammoPacks": "गोला-बारूद"
+      },
+      "rewards": {
+        "battleChest": "युद्ध संदूक",
+        "loginReward": "लॉगिन पुरस्कार",
+        "eventTrophy": "इवेंट ट्रॉफी",
+        "allianceGift": "गठबंधन उपहार",
+        "questToken": "क्वेस्ट टोकन",
+        "raceMedal": "रेस पदक"
+      }
+    },
+    "specialistCategories": {
+      "offence": "आक्रमण",
+      "defence": "रक्षा",
+      "racing": "रेसिंग",
+      "pilot": "पायलट",
+      "weapons": "हथियार",
+      "engineering": "इंजीनियरिंग",
+      "science": "विज्ञान",
+      "hospital": "चिकित्सा",
+      "food": "खाद्य आपूर्ति"
     },
     "allianceTabs": {
       "members": "सदस्य",

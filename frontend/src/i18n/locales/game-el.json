@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "ΠΑΡΑΚΟΛΟΥΘΗΣΗ ΒΙΝΤΕΟ",
+      "title": "ΒΙΝΤΕΟ OVERLORD",
+      "close": "ΚΛΕΙΣΙΜΟ"
+    },
     "exit": "ΕΞΟΔΟΣ",
     "spaceRing": "OVERLORD · ΔΙΑΣΤΗΜΙΚΟΣ ΔΑΚΤΥΛΙΟΣ",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "ΠΑΡΑΚΟΛΟΥΘΗΣΗ ΒΙΝΤΕΟ",
+      "title": "ΒΙΝΤΕΟ ΑΓΩΝΑ",
+      "close": "ΚΛΕΙΣΙΜΟ"
+    },
     "airspeed": "ΑΕΡΟΤΑΧΥΤΗΤΑ",
     "knots": "ΚΟΜΒΟΙ",
     "steer": "ΤΙΜΟΝΙ",
@@ -621,6 +631,55 @@
       "weapons": "Όπλα",
       "rewards": "Ανταμοιβές",
       "specialists": "Ειδικοί"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Αντικείμενα Αποστολής",
+        "banners": "Σημαίες",
+        "medals": "Μετάλλια",
+        "skins": "Εμφανίσεις",
+        "antiGravity": "Αντιβαρύτητα",
+        "plasmaRods": "Ράβδοι Πλάσματος",
+        "darkMatter": "Σκοτεινή Ύλη",
+        "techBooks": "Τεχνικά Βιβλία",
+        "engines": "Κινητήρες",
+        "vehicles": "Οχήματα",
+        "tools": "Εργαλεία",
+        "aidPacks": "Κιτ Πρώτων Βοηθειών"
+      },
+      "weapons": {
+        "blades": "Λεπίδες",
+        "guns": "Πυροβόλα Όπλα",
+        "mines": "Νάρκες",
+        "grenades": "Χειροβομβίδες",
+        "helmet": "Κράνος",
+        "suits": "Θωράκιση",
+        "gloves": "Γάντια",
+        "boots": "Μπότες",
+        "landBases": "Χερσαίες Βάσεις",
+        "landTitles": "Τίτλοι Γης",
+        "shield": "Ασπίδα",
+        "ammoPacks": "Πακέτα Πυρομαχικών"
+      },
+      "rewards": {
+        "battleChest": "Κιβώτιο Μάχης",
+        "loginReward": "Ανταμοιβή Σύνδεσης",
+        "eventTrophy": "Τρόπαιο Εκδήλωσης",
+        "allianceGift": "Δώρο Συμμαχίας",
+        "questToken": "Μάρκα Αποστολής",
+        "raceMedal": "Μετάλλιο Αγώνα"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Επίθεση",
+      "defence": "Άμυνα",
+      "racing": "Αγώνες",
+      "pilot": "Πιλότος",
+      "weapons": "Όπλα",
+      "engineering": "Μηχανική",
+      "science": "Επιστήμη",
+      "hospital": "Ιατρείο",
+      "food": "Εφοδιασμός"
     },
     "allianceTabs": {
       "members": "Μέλη",

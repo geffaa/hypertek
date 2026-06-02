@@ -1,5 +1,10 @@
 {
   "overlord": {
+    "video": {
+      "watchBtn": "观看视频",
+      "title": "霸主游戏视频",
+      "close": "关闭"
+    },
     "exit": "退出",
     "spaceRing": "OVERLORD · 太空环",
     "actions": {
@@ -122,6 +127,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "观看视频",
+      "title": "赛车游戏视频",
+      "close": "关闭"
+    },
     "airspeed": "空速",
     "knots": "节",
     "steer": "转向",
@@ -621,6 +631,55 @@
       "weapons": "武器",
       "rewards": "奖励",
       "specialists": "专家"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "任务物品",
+        "banners": "旗帜",
+        "medals": "勋章",
+        "skins": "皮肤",
+        "antiGravity": "反重力",
+        "plasmaRods": "等离子棒",
+        "darkMatter": "暗物质",
+        "techBooks": "科技书籍",
+        "engines": "引擎",
+        "vehicles": "载具",
+        "tools": "工具",
+        "aidPacks": "急救包"
+      },
+      "weapons": {
+        "blades": "刀刃",
+        "guns": "枪械",
+        "mines": "地雷",
+        "grenades": "手榴弹",
+        "helmet": "头盔",
+        "suits": "战甲",
+        "gloves": "手套",
+        "boots": "靴子",
+        "landBases": "陆地基地",
+        "landTitles": "土地所有权",
+        "shield": "盾牌",
+        "ammoPacks": "弹药包"
+      },
+      "rewards": {
+        "battleChest": "战利箱",
+        "loginReward": "登录奖励",
+        "eventTrophy": "活动奖杯",
+        "allianceGift": "联盟礼物",
+        "questToken": "任务代币",
+        "raceMedal": "赛车勋章"
+      }
+    },
+    "specialistCategories": {
+      "offence": "进攻",
+      "defence": "防守",
+      "racing": "赛车",
+      "pilot": "飞行员",
+      "weapons": "武器",
+      "engineering": "工程",
+      "science": "科学",
+      "hospital": "医疗",
+      "food": "食物"
     },
     "allianceTabs": {
       "members": "成员",

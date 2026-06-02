@@ -411,7 +411,7 @@ const NAV_BTN_BASE = {
   transition: "background 0.15s, box-shadow 0.15s, color 0.15s, border-color 0.15s",
 };
 
-export default function TopBar({ activeGame }) {
+export default function TopBar({ activeGame, isPreview = false }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -548,7 +548,7 @@ export default function TopBar({ activeGame }) {
 
   const handleMarketNav = (tab) => {
     setMarketOpen(false);
-    navigate(`/market-place?tab=${tab}`);
+    if (!isPreview) navigate(`/market-place?tab=${tab}`);
   };
 
   const connectMetaMask = async () => {
@@ -1055,8 +1055,9 @@ export default function TopBar({ activeGame }) {
                     fontSize: "clamp(10px,0.85vw,13px)",
                     fontWeight: "bold",
                     letterSpacing: "0.12em",
-                    color: "#ffffff",
+                    color: isPreview ? "rgba(255,255,255,0.35)" : "#ffffff",
                     borderBottom: "1px solid rgba(0,212,255,0.08)",
+                    cursor: isPreview ? "not-allowed" : "pointer",
                   }}
                 >
                   {t(`hud.marketItems.${item.key}`, item.label)}
@@ -1067,14 +1068,15 @@ export default function TopBar({ activeGame }) {
               <div style={{ borderTop: "1px solid rgba(0,212,255,0.25)", margin: "2px 0" }} />
               <div
                 className="market-dropdown-item"
-                onClick={() => { setMarketOpen(false); navigate("/Profile"); }}
+                onClick={() => { setMarketOpen(false); if (!isPreview) navigate("/Profile"); }}
                 style={{
                   padding: "9px 16px",
                   fontFamily: "Orbitron,sans-serif",
                   fontSize: "clamp(10px,0.85vw,13px)",
                   fontWeight: "bold",
                   letterSpacing: "0.12em",
-                  color: "rgba(0,212,255,0.85)",
+                  color: isPreview ? "rgba(0,212,255,0.35)" : "rgba(0,212,255,0.85)",
+                  cursor: isPreview ? "not-allowed" : "pointer",
                 }}
               >
                 {t("hud.marketItems.myProfile", "My Profile")}
@@ -1176,28 +1178,52 @@ export default function TopBar({ activeGame }) {
 
       </div>
 
-      {/* ── LOG OUT button ── */}
-      <button className="logout-btn" style={{
-        position: "absolute",
-        top: isMobile ? "4px" : "2vh",
-        right: isMobile ? "1.5%" : "2.8%",
-        zIndex: 30,
-        width: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
-        height: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
-        borderRadius: "50%",
-        background: "radial-gradient(circle at 38% 32%, rgba(200,40,40,0.9), rgba(70,6,6,0.97))",
-        border: "2px solid rgba(248,113,113,0.65)",
-        color: "#fecaca",
-        fontFamily: "Orbitron,sans-serif",
-        fontSize: "clamp(6px,0.6vw,8px)",
-        fontWeight: "bold",
-        letterSpacing: "0.07em",
-        lineHeight: 1.3,
-        cursor: "pointer",
-        boxShadow: "0 0 16px rgba(248,113,113,0.3), 0 0 1px rgba(248,113,113,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
-        textShadow: "0 0 8px rgba(248,113,113,0.8)",
-        transition: "box-shadow 0.2s, transform 0.2s, border-color 0.2s",
-      }} onClick={handleLogout}>{t("hud.logOut", "LOG OUT")}</button>
+      {/* ── LOG OUT / BACK TO PREVIEW button ── */}
+      {isPreview ? (
+        <button className="logout-btn" style={{
+          position: "absolute",
+          top: isMobile ? "4px" : "2vh",
+          right: isMobile ? "1.5%" : "2.8%",
+          zIndex: 30,
+          width: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
+          height: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
+          borderRadius: "50%",
+          background: "radial-gradient(circle at 38% 32%, rgba(0,60,180,0.9), rgba(0,20,60,0.97))",
+          border: "2px solid rgba(56,189,248,0.65)",
+          color: "#bae6fd",
+          fontFamily: "Orbitron,sans-serif",
+          fontSize: "clamp(5px,0.55vw,7px)",
+          fontWeight: "bold",
+          letterSpacing: "0.07em",
+          lineHeight: 1.3,
+          cursor: "pointer",
+          boxShadow: "0 0 16px rgba(56,189,248,0.3), 0 0 1px rgba(56,189,248,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
+          textShadow: "0 0 8px rgba(56,189,248,0.8)",
+          transition: "box-shadow 0.2s, transform 0.2s, border-color 0.2s",
+        }} onClick={() => navigate("/preview")}>← PREVIEW</button>
+      ) : (
+        <button className="logout-btn" style={{
+          position: "absolute",
+          top: isMobile ? "4px" : "2vh",
+          right: isMobile ? "1.5%" : "2.8%",
+          zIndex: 30,
+          width: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
+          height: isMobile ? "32px" : "clamp(52px,7.5vh,68px)",
+          borderRadius: "50%",
+          background: "radial-gradient(circle at 38% 32%, rgba(200,40,40,0.9), rgba(70,6,6,0.97))",
+          border: "2px solid rgba(248,113,113,0.65)",
+          color: "#fecaca",
+          fontFamily: "Orbitron,sans-serif",
+          fontSize: "clamp(6px,0.6vw,8px)",
+          fontWeight: "bold",
+          letterSpacing: "0.07em",
+          lineHeight: 1.3,
+          cursor: "pointer",
+          boxShadow: "0 0 16px rgba(248,113,113,0.3), 0 0 1px rgba(248,113,113,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
+          textShadow: "0 0 8px rgba(248,113,113,0.8)",
+          transition: "box-shadow 0.2s, transform 0.2s, border-color 0.2s",
+        }} onClick={handleLogout}>{t("hud.logOut", "LOG OUT")}</button>
+      )}
 
       {/* ══════════════════════════════════════════════════════════════
           WALLET MODAL — inline overlay, no navigation

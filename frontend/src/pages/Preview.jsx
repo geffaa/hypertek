@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo1.png";
+import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 /* ─── Skeleton shimmer keyframes (injected once) ──────── */
 const shimmerCSS = `
@@ -280,7 +281,7 @@ export default function Preview() {
 
         {/* ── Top brand bar ───────────────────────────────── */}
         <motion.div
-          className="pb-6 md:pb-8 flex justify-center"
+          className="pb-6 md:pb-8 flex justify-between items-start"
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -309,14 +310,15 @@ export default function Preview() {
                 className="text-[9px] md:text-[10px] tracking-[0.45em] uppercase font-bold"
                 style={{ fontFamily: "Orbitron, sans-serif", color: "#93c5fd" }}
               >
-                Explore Our Universe
+                {t("gaming.preview.exploreUniverse", "Explore Our Universe")}
               </span>
               <p className="text-white/80 text-[13px] md:text-[14px] leading-snug">
-                Three interconnected games, one shared universe.{" "}
-                <span className="text-white/55">Click to discover the world that calls to you.</span>
+                {t("gaming.preview.subtitle", "Three interconnected games, one shared universe.")}{" "}
+                <span className="text-white/55">{t("gaming.preview.subtitleClick", "Click to discover the world that calls to you.")}</span>
               </p>
             </div>
           </div>
+          <LanguageSwitcher />
         </motion.div>
 
         {/* Divider */}
@@ -358,7 +360,7 @@ export default function Preview() {
               className="text-[9px] tracking-[0.5em] uppercase font-bold"
               style={{ fontFamily: "Orbitron, sans-serif", color: "rgba(147,197,253,0.6)" }}
             >
-              Explore More
+              {t("gaming.preview.exploreMore", "Explore More")}
             </span>
             <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(0,80,220,0.4))" }} />
           </div>
@@ -390,14 +392,14 @@ export default function Preview() {
                       className="text-[10px] font-bold uppercase tracking-[0.35em]"
                       style={{ fontFamily: "Orbitron, sans-serif", color: "#38bdf8" }}
                     >
-                      About Us
+                      {t("gaming.preview.aboutLabel", "About Us")}
                     </span>
                   </div>
                   <h3 className="text-white font-bold text-lg md:text-xl leading-tight" style={{ fontFamily: "Goldman, sans-serif" }}>
-                    Our Story & Vision
+                    {t("gaming.preview.aboutHeading", "Our Story & Vision")}
                   </h3>
                   <p className="text-white/50 text-xs mt-1.5 leading-relaxed">
-                    Discover the team, mission, and roadmap behind Hyper Tek 100.
+                    {t("gaming.preview.aboutDesc", "Discover the team, mission, and roadmap behind Hyper Tek 100.")}
                   </p>
                 </div>
                 <div
@@ -434,14 +436,14 @@ export default function Preview() {
                       className="text-[10px] font-bold uppercase tracking-[0.35em]"
                       style={{ fontFamily: "Orbitron, sans-serif", color: "#a78bfa" }}
                     >
-                      Game Interface
+                      {t("gaming.preview.uiLabel", "Game Interface")}
                     </span>
                   </div>
                   <h3 className="text-white font-bold text-lg md:text-xl leading-tight" style={{ fontFamily: "Goldman, sans-serif" }}>
-                    Interactive UI Preview
+                    {t("gaming.preview.uiHeading", "Interactive UI Preview")}
                   </h3>
                   <p className="text-white/50 text-xs mt-1.5 leading-relaxed">
-                    Experience the full game dashboard — Racing, Quest, and Overlord modes.
+                    {t("gaming.preview.uiDesc", "Experience the full game dashboard — Racing, Quest, and Overlord modes.")}
                   </p>
                 </div>
                 <div

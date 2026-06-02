@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "XEM VIDEO",
+      "title": "VIDEO GAMEPLAY OVERLORD",
+      "close": "ĐÓNG"
+    },
     "exit": "THOÁT",
     "spaceRing": "OVERLORD · VÒNG KHÔNG GIAN",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "XEM VIDEO",
+      "title": "VIDEO GAMEPLAY ĐUA XE",
+      "close": "ĐÓNG"
+    },
     "airspeed": "TỐC ĐỘ KHÔNG KHÍ",
     "knots": "HẢI LÝ",
     "steer": "LÁI",
@@ -621,6 +631,55 @@
       "weapons": "Vũ Khí",
       "rewards": "Phần Thưởng",
       "specialists": "Chuyên Gia"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Vật Phẩm Nhiệm Vụ",
+        "banners": "Biểu Ngữ",
+        "medals": "Huy Chương",
+        "skins": "Giao Diện",
+        "antiGravity": "Phản Trọng Lực",
+        "plasmaRods": "Que Plasma",
+        "darkMatter": "Vật Chất Tối",
+        "techBooks": "Sách Kỹ Thuật",
+        "engines": "Động Cơ",
+        "vehicles": "Phương Tiện",
+        "tools": "Công Cụ",
+        "aidPacks": "Gói Cứu Thương"
+      },
+      "weapons": {
+        "blades": "Lưỡi Dao",
+        "guns": "Súng",
+        "mines": "Mìn",
+        "grenades": "Lựu Đạn",
+        "helmet": "Mũ Bảo Hiểm",
+        "suits": "Giáp",
+        "gloves": "Găng Tay",
+        "boots": "Giày",
+        "landBases": "Căn Cứ Mặt Đất",
+        "landTitles": "Quyền Sở Hữu Đất",
+        "shield": "Khiên",
+        "ammoPacks": "Gói Đạn"
+      },
+      "rewards": {
+        "battleChest": "Rương Chiến Đấu",
+        "loginReward": "Phần Thưởng Đăng Nhập",
+        "eventTrophy": "Cúp Sự Kiện",
+        "allianceGift": "Quà Liên Minh",
+        "questToken": "Token Nhiệm Vụ",
+        "raceMedal": "Huy Chương Đua"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Tấn Công",
+      "defence": "Phòng Thủ",
+      "racing": "Đua Xe",
+      "pilot": "Phi Công",
+      "weapons": "Vũ Khí",
+      "engineering": "Kỹ Thuật",
+      "science": "Khoa Học",
+      "hospital": "Y Tế",
+      "food": "Lương Thực"
     },
     "allianceTabs": {
       "members": "Thành Viên",

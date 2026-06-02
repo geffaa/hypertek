@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "TONTON VIDEO",
+      "title": "VIDEO PERMAINAN OVERLORD",
+      "close": "TUTUP"
+    },
     "exit": "KELUAR",
     "spaceRing": "OVERLORD · SPACE RING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "TONTON VIDEO",
+      "title": "VIDEO PERMAINAN LUMBA",
+      "close": "TUTUP"
+    },
     "airspeed": "KELAJUAN UDARA",
     "knots": "KNOT",
     "steer": "STERENG",
@@ -621,6 +631,55 @@
       "weapons": "Senjata",
       "rewards": "Ganjaran",
       "specialists": "Pakar"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Item Misi",
+        "banners": "Sepanduk",
+        "medals": "Pingat",
+        "skins": "Kulit",
+        "antiGravity": "Anti-Graviti",
+        "plasmaRods": "Rod Plasma",
+        "darkMatter": "Jirim Gelap",
+        "techBooks": "Buku Teknikal",
+        "engines": "Enjin",
+        "vehicles": "Kenderaan",
+        "tools": "Peralatan",
+        "aidPacks": "Pek Bantuan"
+      },
+      "weapons": {
+        "blades": "Bilah",
+        "guns": "Senjata Api",
+        "mines": "Ranjau",
+        "grenades": "Bom Tangan",
+        "helmet": "Topi Keledar",
+        "suits": "Perisai",
+        "gloves": "Sarung Tangan",
+        "boots": "But",
+        "landBases": "Pangkalan Darat",
+        "landTitles": "Hak Milik Tanah",
+        "shield": "Perisai",
+        "ammoPacks": "Pek Peluru"
+      },
+      "rewards": {
+        "battleChest": "Peti Pertempuran",
+        "loginReward": "Ganjaran Log Masuk",
+        "eventTrophy": "Trofi Acara",
+        "allianceGift": "Hadiah Perikatan",
+        "questToken": "Token Misi",
+        "raceMedal": "Pingat Lumba"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Serangan",
+      "defence": "Pertahanan",
+      "racing": "Lumba",
+      "pilot": "Juruterbang",
+      "weapons": "Senjata",
+      "engineering": "Kejuruteraan",
+      "science": "Sains",
+      "hospital": "Perubatan",
+      "food": "Bekalan"
     },
     "allianceTabs": {
       "members": "Ahli",

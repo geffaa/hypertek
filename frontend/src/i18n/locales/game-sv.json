@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "SE VIDEO",
+      "title": "OVERLORD GAMEPLAY VIDEO",
+      "close": "STÄNG"
+    },
     "exit": "AVSLUTA",
     "spaceRing": "OVERLORD · RYMDRING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "SE VIDEO",
+      "title": "RACING GAMEPLAY VIDEO",
+      "close": "STÄNG"
+    },
     "airspeed": "LUFTHASTIGHET",
     "knots": "KNOP",
     "steer": "STYR",
@@ -621,6 +631,55 @@
       "weapons": "Vapen",
       "rewards": "Belöningar",
       "specialists": "Specialister"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Uppdragsobjekt",
+        "banners": "Fanor",
+        "medals": "Medaljer",
+        "skins": "Utseenden",
+        "antiGravity": "Antigravitation",
+        "plasmaRods": "Plasmastavar",
+        "darkMatter": "Mörk Materia",
+        "techBooks": "Teknikböcker",
+        "engines": "Motorer",
+        "vehicles": "Fordon",
+        "tools": "Verktyg",
+        "aidPacks": "Hjälppaket"
+      },
+      "weapons": {
+        "blades": "Blad",
+        "guns": "Skjutvapen",
+        "mines": "Minor",
+        "grenades": "Granater",
+        "helmet": "Hjälm",
+        "suits": "Rustningar",
+        "gloves": "Handskar",
+        "boots": "Stövlar",
+        "landBases": "Landbaser",
+        "landTitles": "Markrättigheter",
+        "shield": "Sköld",
+        "ammoPacks": "Ammunitionspaket"
+      },
+      "rewards": {
+        "battleChest": "Stridskista",
+        "loginReward": "Inloggningsbelöning",
+        "eventTrophy": "Eventtrofé",
+        "allianceGift": "Alliansens Gåva",
+        "questToken": "Uppdragstoken",
+        "raceMedal": "Löpningsmedalj"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Anfall",
+      "defence": "Försvar",
+      "racing": "Racing",
+      "pilot": "Pilot",
+      "weapons": "Vapen",
+      "engineering": "Ingenjörsvetenskap",
+      "science": "Vetenskap",
+      "hospital": "Sjukvård",
+      "food": "Förråd"
     },
     "allianceTabs": {
       "members": "Medlemmar",

@@ -1027,6 +1027,7 @@ function GarageView() {
    ══════════════════════════════════════════════════════════════════ */
 function VideoOverlay({ onClose }) {
   const { t } = useTranslation();
+  const [videoLoaded, setVideoLoaded] = useState(false);
   return createPortal(
     <div
       onClick={onClose}
@@ -1084,10 +1085,31 @@ function VideoOverlay({ onClose }) {
           boxShadow: "0 0 80px rgba(0,0,0,0.95), 0 0 40px rgba(34,197,94,0.12)",
           overflow: "hidden",
         }}>
+          {!videoLoaded && (
+            <div style={{
+              position: "absolute", inset: 0, zIndex: 1,
+              background: "linear-gradient(135deg, rgba(5,15,10,0.95) 0%, rgba(10,30,20,0.9) 50%, rgba(5,15,10,0.95) 100%)",
+              backgroundSize: "200% 100%",
+              animation: "raceVideoShimmer 1.6s ease-in-out infinite",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexDirection: "column", gap: 12,
+            }}>
+              <style>{`@keyframes raceVideoShimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }`}</style>
+              <div style={{ width: 40, height: 40, borderRadius: "50%",
+                border: "3px solid rgba(34,197,94,0.2)", borderTopColor: "rgba(34,197,94,0.8)",
+                animation: "raceVideoSpin 0.9s linear infinite",
+              }} />
+              <style>{`@keyframes raceVideoSpin { to { transform: rotate(360deg) } }`}</style>
+              <div style={{ fontFamily: "Orbitron,sans-serif", fontSize: "clamp(8px,0.8vw,11px)",
+                color: "rgba(34,197,94,0.7)", letterSpacing: "0.18em",
+              }}>LOADING VIDEO...</div>
+            </div>
+          )}
           <video
             src="/video/racing_content.mp4"
             autoPlay loop muted playsInline
-            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block" }}
+            onCanPlay={() => setVideoLoaded(true)}
+            style={{ width: "100%", height: "100%", objectFit: "contain", display: "block", opacity: videoLoaded ? 1 : 0 }}
           />
         </div>
       </div>

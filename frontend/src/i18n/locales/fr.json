@@ -87,12 +87,30 @@
     "readMore": "Lire notre histoire complète",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Univers interconnecté",  "desc": "3 jeux — 1 économie et système de progression partagés" },
-      { "label": "Vraie propriété",        "desc": "NFAs avec rachat minimum garanti" },
-      { "label": "Play-to-Earn",           "desc": "Chaque action contribue à vos récompenses réelles" },
-      { "label": "Paiements de retrait",   "desc": "Conversion de la monnaie/récompenses du jeu en paiements de retrait" },
-      { "label": "Progression liée",       "desc": "La progression du joueur est liée à toutes les suites de jeux" },
-      { "label": "Intégration VR/AR",      "desc": "Les joueurs VR/AR peuvent rejoindre des missions et des batailles épiques en temps réel" }
+      {
+        "label": "Univers interconnecté",
+        "desc": "3 jeux — 1 économie et système de progression partagés"
+      },
+      {
+        "label": "Vraie propriété",
+        "desc": "NFAs avec rachat minimum garanti"
+      },
+      {
+        "label": "Play-to-Earn",
+        "desc": "Chaque action contribue à vos récompenses réelles"
+      },
+      {
+        "label": "Paiements de retrait",
+        "desc": "Conversion de la monnaie/récompenses du jeu en paiements de retrait"
+      },
+      {
+        "label": "Progression liée",
+        "desc": "La progression du joueur est liée à toutes les suites de jeux"
+      },
+      {
+        "label": "Intégration VR/AR",
+        "desc": "Les joueurs VR/AR peuvent rejoindre des missions et des batailles épiques en temps réel"
+      }
     ]
   },
   "about": {
@@ -131,7 +149,19 @@
         "tagline": "Commander. Conquérir. Régner.",
         "description": "Vous êtes le Seigneur suprême — renouvelé des cendres d'une Terre fracturée. Levez des armées, saisissez des systèmes stellaires et pliez les factions rivales à votre volonté. L'Echo Core vous a choisi. Prouvez qu'il avait raison."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Explorez Notre Univers",
+      "subtitle": "Trois jeux interconnectés, un univers partagé.",
+      "subtitleClick": "Cliquez pour découvrir le monde qui vous appelle.",
+      "exploreMore": "Explorer Plus",
+      "aboutLabel": "À Propos",
+      "aboutHeading": "Notre Histoire & Vision",
+      "aboutDesc": "Découvrez l'équipe, la mission et la feuille de route derrière Hyper Tek 100.",
+      "uiLabel": "Interface de Jeu",
+      "uiHeading": "Aperçu UI Interactif",
+      "uiDesc": "Découvrez le tableau de bord complet — modes Racing, Quest et Overlord."
+    }
   },
   "packages": {
     "badge": "CAMPAGNE DE FINANCEMENT PARTICIPATIF — ÉTAPE 1",
@@ -152,23 +182,388 @@
     "imageComing": "Image à venir",
     "close": "Fermer",
     "items": [
-      { "title": "Recrue", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Recrue\"","Vous recevrez 35 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Recrue, vous recevrez 10 % de remise sur les achats en jeu pendant les 12 premiers mois"] },
-      { "title": "Élève officier débutant", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier débutant\"","Vous recevrez 90 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier débutant, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources","5 % d'augmentation de la vitesse d'entraînement","10 % de remise sur les achats en jeu pendant les 12 premiers mois","#Choisissez simplement de donner 50 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier honoraire débutant enrôlé\""] },
-      { "title": "Élève officier 1ère classe", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier 1ère classe\"","Vous recevrez 125 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier 1ère classe, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources","5 % d'augmentation de la vitesse d'entraînement","5 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","10 % de remise sur les achats en jeu pendant les 24 premiers mois"] },
-      { "title": "Élève officier principal", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal\"","Vous recevrez 170 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier principal, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources","5 % d'augmentation de la vitesse d'entraînement","5 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","10 % de remise sur les achats en jeu pendant les 24 premiers mois"] },
-      { "title": "Élève officier principal classe spéciale", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal classe spéciale\"","Vous recevrez 240 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier principal classe spéciale, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources","5 % d'augmentation de la vitesse d'entraînement","5 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","15 % de remise sur les achats en jeu pendant les 24 premiers mois"] },
-      { "title": "Élève officier supérieur", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal classe spéciale\"","Vous recevrez 390 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier supérieur, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources","5 % d'augmentation de la vitesse d'entraînement","10 % d'augmentation de la santé","5 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","20 % de remise sur les achats en jeu pendant les 12 premiers mois","10 % de remise sur les achats en jeu pendant 12 mois supplémentaires","#Choisissez simplement de donner 250 $ pour soutenir notre mission, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier supérieur classe spéciale honoraire enrôlé\""] },
-      { "title": "Élève officier supérieur classe spéciale", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier supérieur classe spéciale\"","Vous recevrez 440 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Élève officier supérieur classe spéciale, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources","1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","10 % d'augmentation de la vitesse d'entraînement","10 % d'augmentation de la santé","10 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","5 % de plus grande capacité d'attaque","20 % de remise sur les achats en jeu pendant les 12 premiers mois","10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"] },
-      { "title": "Élève pilote", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève pilote\"","Vous recevrez 550 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Lieutenant navigant, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources","1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","15 % d'augmentation de la vitesse d'entraînement","15 % d'augmentation de la santé","10 % de récompense supplémentaire","5 % d'augmentation de l'attaque et de la défense","5 % de plus grande capacité d'attaque","1 mega-pack de ressources","1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $","20 % de remise sur les achats en jeu pendant les 12 premiers mois","10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"] },
-      { "title": "Lieutenant navigant", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant\"","Vous recevrez 6 800 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Lieutenant navigant, vous recevrez un bonus de 20 % d'augmentation de la collecte de ressources","1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","20 % d'augmentation de la vitesse d'entraînement","15 % d'augmentation de la santé","15 % de récompense supplémentaire","8 % d'augmentation de l'attaque et de la défense","7 % de plus grande capacité d'attaque","Pièces de course bonus","1 mega-pack de ressources","1 laissez-passer de port hors-monde","1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $","20 % de remise sur les achats en jeu pendant les 12 premiers mois","10 % de remise sur les achats en jeu pendant 12 mois supplémentaires","#Choisissez simplement de donner 500 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant honoraire enrôlé\""] },
-      { "title": "Lieutenant navigant classe spéciale", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant classe spéciale\"","Vous recevrez 1 050 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Lieutenant navigant classe spéciale, vous recevrez un bonus de 20 % d'augmentation de la collecte de ressources","1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","20 % d'augmentation de la vitesse d'entraînement","20 % d'augmentation de la santé","15 % de récompense supplémentaire","10 % d'augmentation de l'attaque et de la défense","7 % de plus grande capacité d'attaque","Pièces de course bonus","1 mega-pack de ressources","1 avatar hôte supplémentaire","1 laissez-passer de port hors-monde","1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $","20 % de remise sur les achats en jeu pendant les 12 premiers mois","10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"] },
-      { "title": "Ailier", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier\"","Vous recevrez 1 480 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Ailier, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources","2,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","25 % d'augmentation de la vitesse d'entraînement","20 % d'augmentation de la santé","20 % de récompense supplémentaire","10 % d'augmentation de l'attaque et de la défense","8 % de plus grande capacité d'attaque","Pièces de course bonus","1 mega-pack de ressources","1 mega-pack de cristaux","1 avatar hôte supplémentaire","1 laissez-passer de port hors-monde","2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","20 % de remise sur les achats en jeu pendant les 12 premiers mois","Recevez en continu 10 % de réduction supplémentaire sur tout achat dans le ou les jeux","#Choisissez simplement de donner 1 000 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier honoraire enrôlé\""] },
-      { "title": "Ailier classe supérieure", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier classe supérieure\"","Vous recevrez 2 200 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Ailier classe supérieure, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources","3,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","30 % d'augmentation de la vitesse d'entraînement","25 % d'augmentation de la santé","20 % de récompense supplémentaire","15 % d'augmentation de l'attaque et de la défense","10 % de plus grande capacité d'attaque","1 emplacement de téléportation supplémentaire pour attaquer/défendre","Pièces de course bonus","1 mega-pack de ressources","1 mega-pack de cristaux","1 avatar hôte supplémentaire","1 laissez-passer de port hors-monde","2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","20 % de remise sur les achats en jeu pendant les 12 premiers mois","Recevez en continu 10 % de réduction supplémentaire sur tout achat dans le ou les jeux"] },
-      { "title": "Officier technique", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Officier technique\"","Vous recevrez 2 900 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant qu'Officier technique, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources","3,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","2,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","30 % d'augmentation de la vitesse d'entraînement","25 % d'augmentation de la santé","25 % d'argent supplémentaire","15 % d'augmentation de l'attaque et de la défense","10 % de plus grande capacité d'attaque","1 emplacement de téléportation supplémentaire pour attaquer/défendre","Pièces de course bonus","2 mega-packs de ressources","1 mega-pack de cristaux","2 avatars hôtes supplémentaires","2 laissez-passer de port hors-monde","3 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","25 % de remise sur les achats en jeu pendant les 12 premiers mois","Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux","Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu","Partage de revenus ! Partagez jusqu'à 2,5 % du pool de profits généré par la vente de packages en jeu et de NFAs","Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires","Design de course de quête exclusif à utiliser dans le jeu","Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"] },
-      { "title": "Spécialiste d'équipe", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe\"","Vous recevrez 3 300 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Spécialiste d'équipe, vous recevrez un bonus de 30 % d'augmentation de la collecte de ressources","5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","2,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","30 % d'augmentation de la vitesse d'entraînement","30 % d'augmentation de la santé","25 % d'argent supplémentaire","15 % d'augmentation de l'attaque et de la défense","10 % de plus grande capacité d'attaque","1 emplacement de téléportation supplémentaire pour attaquer/défendre","Pièces de course bonus","3 mega-packs de ressources","1 mega-pack de cristaux","2 avatars hôtes supplémentaires","2 laissez-passer de port hors-monde","2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun","25 % de remise sur les achats en jeu pendant les 24 premiers mois","Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux","Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu","Partage de revenus ! Partagez jusqu'à 2,5 % du pool de profits généré par la vente de packages en jeu et de NFAs","Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires","Design de course de quête exclusif à utiliser dans le jeu","Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement","#Choisissez simplement de donner 2 500 $ pour soutenir notre mission et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe honoraire enrôlé\""] },
-      { "title": "Spécialiste d'équipe majeur", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe majeur\"","Vous recevrez 6 500 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Spécialiste d'équipe majeur, vous recevrez un bonus de 35 % d'augmentation de la collecte/exploitation de ressources","7 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","3,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","35 % d'augmentation de la vitesse d'entraînement","30 % d'augmentation de la santé","30 % d'argent supplémentaire","20 % d'augmentation de l'attaque et de la défense","10 % de plus grande capacité d'attaque","1 emplacement de téléportation supplémentaire pour attaquer/défendre","Pièces de course bonus","4 mega-packs de ressources","1 mega-pack de cristaux","2 avatars hôtes supplémentaires","2 laissez-passer de port hors-monde","3 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun","25 % de remise sur les achats en jeu pendant les 24 premiers mois","Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux","Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu","Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs","Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires","Design de course de quête exclusif à utiliser dans le jeu","Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"] },
-      { "title": "Commandant élite", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Commandant élite\"","Vous recevrez 9 000 $ USD de crédits à utiliser pour les achats en jeu","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Commandant élite, vous recevrez un bonus de 35 % d'augmentation de la collecte/exploitation de ressources","7,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","4 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","40 % d'augmentation de la vitesse d'entraînement","35 % d'augmentation de la santé","30 % de récompense supplémentaire","20 % d'augmentation de l'attaque et de la défense","20 % de plus grande capacité d'attaque","2 emplacements de téléportation supplémentaires pour attaquer/défendre","Pièces de course bonus","4 mega-packs de ressources","2 mega-packs de cristaux","2 avatars hôtes supplémentaires","3 laissez-passer de port hors-monde","4 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun","30 % de remise sur les achats en jeu pendant les 12 premiers mois","25 % de remise sur les achats en jeu pendant les 12 mois suivants","Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux","Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu","Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs","Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires","Design de course de quête exclusif à utiliser dans le jeu","Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"] },
-      { "title": "Seigneur suprême", "rewards": ["Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Seigneur suprême\"","Vous recevrez 15 000 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)","Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail","Vous pourrez rejoindre le chat Discord.","En tant que Seigneur suprême, vous recevrez un bonus de 40 % d'augmentation de la collecte/exploitation de ressources","10 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois","5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu","50 % d'augmentation de la vitesse d'entraînement","40 % d'augmentation de la santé","40 % d'argent supplémentaire","25 % d'augmentation de l'attaque et de la défense","25 % de plus grande capacité d'attaque","2 emplacements de téléportation supplémentaires pour attaquer/défendre","Pièces de course bonus","6 mega-packs de ressources","3 mega-packs de cristaux","2 avatars hôtes supplémentaires","4 laissez-passer de port hors-monde","4 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun","2 NFAs spécialistes d'équipe légendaires offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 650 $ chacun","1 NFA spécialiste d'équipe épique offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 1 000 $ chacun","40 % de remise sur les achats en jeu pendant les 12 premiers mois","30 % de remise sur les achats en jeu pendant les 12 mois suivants","Recevez 20 % de réduction supplémentaire sur tout achat dans le ou les jeux aussi longtemps que vous êtes impliqué dans le jeu","Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu","Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs","Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires","Design de course de quête exclusif à utiliser dans le jeu","Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"] }
+      {
+        "title": "Recrue",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Recrue\"",
+          "Vous recevrez 35 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Recrue, vous recevrez 10 % de remise sur les achats en jeu pendant les 12 premiers mois"
+        ]
+      },
+      {
+        "title": "Élève officier débutant",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier débutant\"",
+          "Vous recevrez 90 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier débutant, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources",
+          "5 % d'augmentation de la vitesse d'entraînement",
+          "10 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "#Choisissez simplement de donner 50 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier honoraire débutant enrôlé\""
+        ]
+      },
+      {
+        "title": "Élève officier 1ère classe",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier 1ère classe\"",
+          "Vous recevrez 125 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier 1ère classe, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources",
+          "5 % d'augmentation de la vitesse d'entraînement",
+          "5 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "10 % de remise sur les achats en jeu pendant les 24 premiers mois"
+        ]
+      },
+      {
+        "title": "Élève officier principal",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal\"",
+          "Vous recevrez 170 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier principal, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources",
+          "5 % d'augmentation de la vitesse d'entraînement",
+          "5 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "10 % de remise sur les achats en jeu pendant les 24 premiers mois"
+        ]
+      },
+      {
+        "title": "Élève officier principal classe spéciale",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal classe spéciale\"",
+          "Vous recevrez 240 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier principal classe spéciale, vous recevrez un bonus de 10 % d'augmentation de la collecte de ressources",
+          "5 % d'augmentation de la vitesse d'entraînement",
+          "5 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "15 % de remise sur les achats en jeu pendant les 24 premiers mois"
+        ]
+      },
+      {
+        "title": "Élève officier supérieur",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier principal classe spéciale\"",
+          "Vous recevrez 390 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier supérieur, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources",
+          "5 % d'augmentation de la vitesse d'entraînement",
+          "10 % d'augmentation de la santé",
+          "5 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "10 % de remise sur les achats en jeu pendant 12 mois supplémentaires",
+          "#Choisissez simplement de donner 250 $ pour soutenir notre mission, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier supérieur classe spéciale honoraire enrôlé\""
+        ]
+      },
+      {
+        "title": "Élève officier supérieur classe spéciale",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève officier supérieur classe spéciale\"",
+          "Vous recevrez 440 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Élève officier supérieur classe spéciale, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources",
+          "1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "10 % d'augmentation de la vitesse d'entraînement",
+          "10 % d'augmentation de la santé",
+          "10 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "5 % de plus grande capacité d'attaque",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"
+        ]
+      },
+      {
+        "title": "Élève pilote",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Élève pilote\"",
+          "Vous recevrez 550 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Lieutenant navigant, vous recevrez un bonus de 15 % d'augmentation de la collecte de ressources",
+          "1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "15 % d'augmentation de la vitesse d'entraînement",
+          "15 % d'augmentation de la santé",
+          "10 % de récompense supplémentaire",
+          "5 % d'augmentation de l'attaque et de la défense",
+          "5 % de plus grande capacité d'attaque",
+          "1 mega-pack de ressources",
+          "1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"
+        ]
+      },
+      {
+        "title": "Lieutenant navigant",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant\"",
+          "Vous recevrez 6 800 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Lieutenant navigant, vous recevrez un bonus de 20 % d'augmentation de la collecte de ressources",
+          "1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "20 % d'augmentation de la vitesse d'entraînement",
+          "15 % d'augmentation de la santé",
+          "15 % de récompense supplémentaire",
+          "8 % d'augmentation de l'attaque et de la défense",
+          "7 % de plus grande capacité d'attaque",
+          "Pièces de course bonus",
+          "1 mega-pack de ressources",
+          "1 laissez-passer de port hors-monde",
+          "1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "10 % de remise sur les achats en jeu pendant 12 mois supplémentaires",
+          "#Choisissez simplement de donner 500 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant honoraire enrôlé\""
+        ]
+      },
+      {
+        "title": "Lieutenant navigant classe spéciale",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Lieutenant navigant classe spéciale\"",
+          "Vous recevrez 1 050 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Lieutenant navigant classe spéciale, vous recevrez un bonus de 20 % d'augmentation de la collecte de ressources",
+          "1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "20 % d'augmentation de la vitesse d'entraînement",
+          "20 % d'augmentation de la santé",
+          "15 % de récompense supplémentaire",
+          "10 % d'augmentation de l'attaque et de la défense",
+          "7 % de plus grande capacité d'attaque",
+          "Pièces de course bonus",
+          "1 mega-pack de ressources",
+          "1 avatar hôte supplémentaire",
+          "1 laissez-passer de port hors-monde",
+          "1 NFA spécialiste d'équipe supérieur offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "10 % de remise sur les achats en jeu pendant 12 mois supplémentaires"
+        ]
+      },
+      {
+        "title": "Ailier",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier\"",
+          "Vous recevrez 1 480 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Ailier, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources",
+          "2,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "1,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "25 % d'augmentation de la vitesse d'entraînement",
+          "20 % d'augmentation de la santé",
+          "20 % de récompense supplémentaire",
+          "10 % d'augmentation de l'attaque et de la défense",
+          "8 % de plus grande capacité d'attaque",
+          "Pièces de course bonus",
+          "1 mega-pack de ressources",
+          "1 mega-pack de cristaux",
+          "1 avatar hôte supplémentaire",
+          "1 laissez-passer de port hors-monde",
+          "2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "Recevez en continu 10 % de réduction supplémentaire sur tout achat dans le ou les jeux",
+          "#Choisissez simplement de donner 1 000 $ pour soutenir notre mission, et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier honoraire enrôlé\""
+        ]
+      },
+      {
+        "title": "Ailier classe supérieure",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Ailier classe supérieure\"",
+          "Vous recevrez 2 200 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Ailier classe supérieure, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources",
+          "3,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "1,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "30 % d'augmentation de la vitesse d'entraînement",
+          "25 % d'augmentation de la santé",
+          "20 % de récompense supplémentaire",
+          "15 % d'augmentation de l'attaque et de la défense",
+          "10 % de plus grande capacité d'attaque",
+          "1 emplacement de téléportation supplémentaire pour attaquer/défendre",
+          "Pièces de course bonus",
+          "1 mega-pack de ressources",
+          "1 mega-pack de cristaux",
+          "1 avatar hôte supplémentaire",
+          "1 laissez-passer de port hors-monde",
+          "2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "20 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "Recevez en continu 10 % de réduction supplémentaire sur tout achat dans le ou les jeux"
+        ]
+      },
+      {
+        "title": "Officier technique",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Officier technique\"",
+          "Vous recevrez 2 900 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant qu'Officier technique, vous recevrez un bonus de 25 % d'augmentation de la collecte de ressources",
+          "3,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "2,0 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "30 % d'augmentation de la vitesse d'entraînement",
+          "25 % d'augmentation de la santé",
+          "25 % d'argent supplémentaire",
+          "15 % d'augmentation de l'attaque et de la défense",
+          "10 % de plus grande capacité d'attaque",
+          "1 emplacement de téléportation supplémentaire pour attaquer/défendre",
+          "Pièces de course bonus",
+          "2 mega-packs de ressources",
+          "1 mega-pack de cristaux",
+          "2 avatars hôtes supplémentaires",
+          "2 laissez-passer de port hors-monde",
+          "3 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "25 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux",
+          "Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu",
+          "Partage de revenus ! Partagez jusqu'à 2,5 % du pool de profits généré par la vente de packages en jeu et de NFAs",
+          "Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires",
+          "Design de course de quête exclusif à utiliser dans le jeu",
+          "Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"
+        ]
+      },
+      {
+        "title": "Spécialiste d'équipe",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe\"",
+          "Vous recevrez 3 300 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Spécialiste d'équipe, vous recevrez un bonus de 30 % d'augmentation de la collecte de ressources",
+          "5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "2,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "30 % d'augmentation de la vitesse d'entraînement",
+          "30 % d'augmentation de la santé",
+          "25 % d'argent supplémentaire",
+          "15 % d'augmentation de l'attaque et de la défense",
+          "10 % de plus grande capacité d'attaque",
+          "1 emplacement de téléportation supplémentaire pour attaquer/défendre",
+          "Pièces de course bonus",
+          "3 mega-packs de ressources",
+          "1 mega-pack de cristaux",
+          "2 avatars hôtes supplémentaires",
+          "2 laissez-passer de port hors-monde",
+          "2 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun",
+          "25 % de remise sur les achats en jeu pendant les 24 premiers mois",
+          "Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux",
+          "Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu",
+          "Partage de revenus ! Partagez jusqu'à 2,5 % du pool de profits généré par la vente de packages en jeu et de NFAs",
+          "Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires",
+          "Design de course de quête exclusif à utiliser dans le jeu",
+          "Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement",
+          "#Choisissez simplement de donner 2 500 $ pour soutenir notre mission et, si vous le souhaitez, votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe honoraire enrôlé\""
+        ]
+      },
+      {
+        "title": "Spécialiste d'équipe majeur",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Spécialiste d'équipe majeur\"",
+          "Vous recevrez 6 500 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Spécialiste d'équipe majeur, vous recevrez un bonus de 35 % d'augmentation de la collecte/exploitation de ressources",
+          "7 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "3,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "35 % d'augmentation de la vitesse d'entraînement",
+          "30 % d'augmentation de la santé",
+          "30 % d'argent supplémentaire",
+          "20 % d'augmentation de l'attaque et de la défense",
+          "10 % de plus grande capacité d'attaque",
+          "1 emplacement de téléportation supplémentaire pour attaquer/défendre",
+          "Pièces de course bonus",
+          "4 mega-packs de ressources",
+          "1 mega-pack de cristaux",
+          "2 avatars hôtes supplémentaires",
+          "2 laissez-passer de port hors-monde",
+          "3 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun",
+          "25 % de remise sur les achats en jeu pendant les 24 premiers mois",
+          "Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux",
+          "Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu",
+          "Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs",
+          "Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires",
+          "Design de course de quête exclusif à utiliser dans le jeu",
+          "Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"
+        ]
+      },
+      {
+        "title": "Commandant élite",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Commandant élite\"",
+          "Vous recevrez 9 000 $ USD de crédits à utiliser pour les achats en jeu",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Commandant élite, vous recevrez un bonus de 35 % d'augmentation de la collecte/exploitation de ressources",
+          "7,5 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "4 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "40 % d'augmentation de la vitesse d'entraînement",
+          "35 % d'augmentation de la santé",
+          "30 % de récompense supplémentaire",
+          "20 % d'augmentation de l'attaque et de la défense",
+          "20 % de plus grande capacité d'attaque",
+          "2 emplacements de téléportation supplémentaires pour attaquer/défendre",
+          "Pièces de course bonus",
+          "4 mega-packs de ressources",
+          "2 mega-packs de cristaux",
+          "2 avatars hôtes supplémentaires",
+          "3 laissez-passer de port hors-monde",
+          "4 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "1 NFA spécialiste d'équipe exceptionnel offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 400 $ chacun",
+          "30 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "25 % de remise sur les achats en jeu pendant les 12 mois suivants",
+          "Recevez en continu 20 % de réduction supplémentaire sur tout achat dans le ou les jeux",
+          "Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu",
+          "Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs",
+          "Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires",
+          "Design de course de quête exclusif à utiliser dans le jeu",
+          "Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"
+        ]
+      },
+      {
+        "title": "Seigneur suprême",
+        "rewards": [
+          "Votre nom apparaîtra dans le générique de fin du jeu sous le titre \"Seigneur suprême\"",
+          "Vous recevrez 15 000 $ USD de crédits à utiliser pour les achats en jeu (ne peuvent pas être convertis en paiements de retrait)",
+          "Vous recevrez des mises à jour hebdomadaires sur le jeu par e-mail",
+          "Vous pourrez rejoindre le chat Discord.",
+          "En tant que Seigneur suprême, vous recevrez un bonus de 40 % d'augmentation de la collecte/exploitation de ressources",
+          "10 % de chance plus élevée d'obtenir des NFAs ou des objets rares pendant les 12 premiers mois",
+          "5 % de chance plus élevée d'obtenir des NFAs ou des objets rares en continu",
+          "50 % d'augmentation de la vitesse d'entraînement",
+          "40 % d'augmentation de la santé",
+          "40 % d'argent supplémentaire",
+          "25 % d'augmentation de l'attaque et de la défense",
+          "25 % de plus grande capacité d'attaque",
+          "2 emplacements de téléportation supplémentaires pour attaquer/défendre",
+          "Pièces de course bonus",
+          "6 mega-packs de ressources",
+          "3 mega-packs de cristaux",
+          "2 avatars hôtes supplémentaires",
+          "4 laissez-passer de port hors-monde",
+          "4 NFAs spécialistes d'équipe supérieurs offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 150 $ chacun",
+          "2 NFAs spécialistes d'équipe légendaires offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 650 $ chacun",
+          "1 NFA spécialiste d'équipe épique offrant des bonus de vaisseau et de course, ainsi qu'un rachat minimum garanti de 1 000 $ chacun",
+          "40 % de remise sur les achats en jeu pendant les 12 premiers mois",
+          "30 % de remise sur les achats en jeu pendant les 12 mois suivants",
+          "Recevez 20 % de réduction supplémentaire sur tout achat dans le ou les jeux aussi longtemps que vous êtes impliqué dans le jeu",
+          "Avatar personnalisé modélisé d'après le donateur, apparaissant dans tout le jeu",
+          "Partage de revenus ! Partagez jusqu'à 5 % du pool de profits généré par la vente de packages en jeu et de NFAs",
+          "Accès exclusif aux développeurs avec des mises à jour privées mensuelles sur le jeu, le développement, plus des opportunités de fournir des commentaires",
+          "Design de course de quête exclusif à utiliser dans le jeu",
+          "Carte de collection style baseball de votre course de quête exclusive, envoyée avec une lettre de remerciement"
+        ]
+      }
     ]
   }
 }

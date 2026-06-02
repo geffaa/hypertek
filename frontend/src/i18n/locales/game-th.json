@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "ดูวิดีโอ",
+      "title": "วิดีโอเกมเพลย์ Overlord",
+      "close": "ปิด"
+    },
     "exit": "ออก",
     "spaceRing": "OVERLORD · วงแหวนอวกาศ",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "ดูวิดีโอ",
+      "title": "วิดีโอเกมเพลย์ Racing",
+      "close": "ปิด"
+    },
     "airspeed": "ความเร็วอากาศ",
     "knots": "นอต",
     "steer": "บังคับทิศทาง",
@@ -621,6 +631,55 @@
       "weapons": "อาวุธ",
       "rewards": "รางวัล",
       "specialists": "ผู้เชี่ยวชาญ"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "ไอเทมภารกิจ",
+        "banners": "ธง",
+        "medals": "เหรียญรางวัล",
+        "skins": "สกิน",
+        "antiGravity": "แรงโน้มถ่วงต้าน",
+        "plasmaRods": "แท่งพลาสมา",
+        "darkMatter": "สสารมืด",
+        "techBooks": "หนังสือเทคโนโลยี",
+        "engines": "เครื่องยนต์",
+        "vehicles": "ยานพาหนะ",
+        "tools": "เครื่องมือ",
+        "aidPacks": "ชุดปฐมพยาบาล"
+      },
+      "weapons": {
+        "blades": "ใบมีด",
+        "guns": "อาวุธปืน",
+        "mines": "กับระเบิด",
+        "grenades": "ระเบิดมือ",
+        "helmet": "หมวกกันน็อค",
+        "suits": "ชุดเกราะ",
+        "gloves": "ถุงมือ",
+        "boots": "รองเท้าบู๊ต",
+        "landBases": "ฐานทัพบก",
+        "landTitles": "กรรมสิทธิ์ที่ดิน",
+        "shield": "โล่",
+        "ammoPacks": "แพ็คกระสุน"
+      },
+      "rewards": {
+        "battleChest": "หีบแห่งการต่อสู้",
+        "loginReward": "รางวัลการเข้าสู่ระบบ",
+        "eventTrophy": "ถ้วยรางวัลอีเวนต์",
+        "allianceGift": "ของขวัญพันธมิตร",
+        "questToken": "โทเคนภารกิจ",
+        "raceMedal": "เหรียญการแข่งขัน"
+      }
+    },
+    "specialistCategories": {
+      "offence": "บุก",
+      "defence": "รับ",
+      "racing": "แข่งรถ",
+      "pilot": "นักบิน",
+      "weapons": "อาวุธ",
+      "engineering": "วิศวกรรม",
+      "science": "วิทยาศาสตร์",
+      "hospital": "การแพทย์",
+      "food": "เสบียง"
     },
     "allianceTabs": {
       "members": "สมาชิก",

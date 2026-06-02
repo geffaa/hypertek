@@ -1,5 +1,10 @@
 {
   "overlord": {
+    "video": {
+      "watchBtn": "動画を見る",
+      "title": "オーバーロードゲームプレイ動画",
+      "close": "閉じる"
+    },
     "exit": "終了",
     "spaceRing": "OVERLORD · スペースリング",
     "actions": {
@@ -122,6 +127,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "動画を見る",
+      "title": "レーシングゲームプレイ動画",
+      "close": "閉じる"
+    },
     "airspeed": "対気速度",
     "knots": "ノット",
     "steer": "ステアリング",
@@ -621,6 +631,55 @@
       "weapons": "武器",
       "rewards": "報酬",
       "specialists": "スペシャリスト"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "クエストアイテム",
+        "banners": "バナー",
+        "medals": "メダル",
+        "skins": "スキン",
+        "antiGravity": "反重力",
+        "plasmaRods": "プラズマロッド",
+        "darkMatter": "ダークマター",
+        "techBooks": "テックブック",
+        "engines": "エンジン",
+        "vehicles": "車両",
+        "tools": "ツール",
+        "aidPacks": "救急パック"
+      },
+      "weapons": {
+        "blades": "ブレード",
+        "guns": "銃器",
+        "mines": "地雷",
+        "grenades": "グレネード",
+        "helmet": "ヘルメット",
+        "suits": "スーツ",
+        "gloves": "グローブ",
+        "boots": "ブーツ",
+        "landBases": "陸上基地",
+        "landTitles": "土地権利",
+        "shield": "シールド",
+        "ammoPacks": "弾薬パック"
+      },
+      "rewards": {
+        "battleChest": "バトルチェスト",
+        "loginReward": "ログイン報酬",
+        "eventTrophy": "イベントトロフィー",
+        "allianceGift": "アライアンスギフト",
+        "questToken": "クエストトークン",
+        "raceMedal": "レースメダル"
+      }
+    },
+    "specialistCategories": {
+      "offence": "攻撃",
+      "defence": "防御",
+      "racing": "レーシング",
+      "pilot": "パイロット",
+      "weapons": "武器",
+      "engineering": "工学",
+      "science": "科学",
+      "hospital": "医療",
+      "food": "食料"
     },
     "allianceTabs": {
       "members": "メンバー",

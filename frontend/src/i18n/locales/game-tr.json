@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "VİDEO İZLE",
+      "title": "OVERLORD OYUN VİDEOSU",
+      "close": "KAPAT"
+    },
     "exit": "ÇIKIŞ",
     "spaceRing": "OVERLORD · UZAY HALKASI",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "VİDEO İZLE",
+      "title": "YARIŞ OYUN VİDEOSU",
+      "close": "KAPAT"
+    },
     "airspeed": "HAVA HIZI",
     "knots": "DÜĞÜM",
     "steer": "DİREKSİYON",
@@ -621,6 +631,55 @@
       "weapons": "Silahlar",
       "rewards": "Ödüller",
       "specialists": "Uzmanlar"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Görev Eşyaları",
+        "banners": "Pankartlar",
+        "medals": "Madalyalar",
+        "skins": "Görünümler",
+        "antiGravity": "Antigravite",
+        "plasmaRods": "Plazma Çubukları",
+        "darkMatter": "Karanlık Madde",
+        "techBooks": "Teknik Kitaplar",
+        "engines": "Motorlar",
+        "vehicles": "Araçlar",
+        "tools": "Aletler",
+        "aidPacks": "Yardım Paketleri"
+      },
+      "weapons": {
+        "blades": "Kılıçlar",
+        "guns": "Ateşli Silahlar",
+        "mines": "Mayınlar",
+        "grenades": "El Bombaları",
+        "helmet": "Kask",
+        "suits": "Zırhlar",
+        "gloves": "Eldivenler",
+        "boots": "Botlar",
+        "landBases": "Kara Üsleri",
+        "landTitles": "Arazi Unvanları",
+        "shield": "Kalkan",
+        "ammoPacks": "Cephane Paketleri"
+      },
+      "rewards": {
+        "battleChest": "Savaş Sandığı",
+        "loginReward": "Giriş Ödülü",
+        "eventTrophy": "Etkinlik Kupası",
+        "allianceGift": "İttifak Hediyesi",
+        "questToken": "Görev Jetonu",
+        "raceMedal": "Yarış Madalyası"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Saldırı",
+      "defence": "Savunma",
+      "racing": "Yarış",
+      "pilot": "Pilot",
+      "weapons": "Silahlar",
+      "engineering": "Mühendislik",
+      "science": "Bilim",
+      "hospital": "Sağlık",
+      "food": "İkmal"
     },
     "allianceTabs": {
       "members": "Üyeler",

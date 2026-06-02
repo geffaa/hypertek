@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "TONTON VIDEO",
+      "title": "VIDEO GAMEPLAY OVERLORD",
+      "close": "TUTUP"
+    },
     "exit": "KELUAR",
     "spaceRing": "OVERLORD · CINCIN LUAR ANGKASA",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "TONTON VIDEO",
+      "title": "VIDEO GAMEPLAY RACING",
+      "close": "TUTUP"
+    },
     "airspeed": "KECEPATAN UDARA",
     "knots": "KNOT",
     "steer": "KEMUDI",
@@ -621,6 +631,55 @@
       "weapons": "Senjata",
       "rewards": "Hadiah",
       "specialists": "Spesialis"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Item Misi",
+        "banners": "Spanduk",
+        "medals": "Medali",
+        "skins": "Skin",
+        "antiGravity": "Anti-Gravitasi",
+        "plasmaRods": "Batang Plasma",
+        "darkMatter": "Materi Gelap",
+        "techBooks": "Buku Teknologi",
+        "engines": "Mesin",
+        "vehicles": "Kendaraan",
+        "tools": "Alat",
+        "aidPacks": "Paket Pertolongan"
+      },
+      "weapons": {
+        "blades": "Bilah",
+        "guns": "Senjata Api",
+        "mines": "Ranjau",
+        "grenades": "Granat",
+        "helmet": "Helm",
+        "suits": "Zirah",
+        "gloves": "Sarung Tangan",
+        "boots": "Sepatu Bot",
+        "landBases": "Markas Darat",
+        "landTitles": "Hak Tanah",
+        "shield": "Perisai",
+        "ammoPacks": "Paket Amunisi"
+      },
+      "rewards": {
+        "battleChest": "Peti Pertempuran",
+        "loginReward": "Hadiah Login",
+        "eventTrophy": "Trofi Acara",
+        "allianceGift": "Hadiah Aliansi",
+        "questToken": "Token Misi",
+        "raceMedal": "Medali Balap"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Serangan",
+      "defence": "Pertahanan",
+      "racing": "Balap",
+      "pilot": "Pilot",
+      "weapons": "Senjata",
+      "engineering": "Teknik",
+      "science": "Sains",
+      "hospital": "Medis",
+      "food": "Perbekalan"
     },
     "allianceTabs": {
       "members": "Anggota",

@@ -87,12 +87,30 @@
     "readMore": "Basahin ang Aming Buong Kwento",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Magkakaugnay na Sansinukob",  "desc": "3 laro — 1 pinagsamang ekonomiya at sistema ng pag-unlad" },
-      { "label": "Tunay na Pagmamay-ari",           "desc": "Mga NFA na may garantisadong minimum na buy-back" },
-      { "label": "Play-to-Earn",             "desc": "Ang bawat aksyon ay nag-aambag sa iyong mga gantimpala sa totoong mundo" },
-      { "label": "Mga Cash-Out na Bayad",        "desc": "Pag-convert ng in-game na pera/gantimpala sa mga cash-out na bayad" },
-      { "label": "Linked na Pag-unlad",       "desc": "Ang pag-unlad ng manlalaro ay naka-link sa lahat ng set ng mga laro" },
-      { "label": "Integrasyon ng VR/AR",        "desc": "Ang mga manlalaro ng VR/AR ay maaaring sumali sa mga misyon at epikong labanan sa real-time" }
+      {
+        "label": "Magkakaugnay na Sansinukob",
+        "desc": "3 laro — 1 pinagsamang ekonomiya at sistema ng pag-unlad"
+      },
+      {
+        "label": "Tunay na Pagmamay-ari",
+        "desc": "Mga NFA na may garantisadong minimum na buy-back"
+      },
+      {
+        "label": "Play-to-Earn",
+        "desc": "Ang bawat aksyon ay nag-aambag sa iyong mga gantimpala sa totoong mundo"
+      },
+      {
+        "label": "Mga Cash-Out na Bayad",
+        "desc": "Pag-convert ng in-game na pera/gantimpala sa mga cash-out na bayad"
+      },
+      {
+        "label": "Linked na Pag-unlad",
+        "desc": "Ang pag-unlad ng manlalaro ay naka-link sa lahat ng set ng mga laro"
+      },
+      {
+        "label": "Integrasyon ng VR/AR",
+        "desc": "Ang mga manlalaro ng VR/AR ay maaaring sumali sa mga misyon at epikong labanan sa real-time"
+      }
     ]
   },
   "about": {
@@ -131,7 +149,19 @@
         "tagline": "Mamuno. Manakop. Maghari.",
         "description": "Ikaw ang Overlord — muling ipinanganak mula sa abo ng isang biyak na Lupa. Magtayo ng mga hukbo, agawin ang mga star system, at pasaklawin ang mga karibal na faction sa iyong kalooban. Pinili ka ng Echo Core. Patunayan na tama ito."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Tuklasin ang Aming Uniberso",
+      "subtitle": "Tatlong magkakaugnay na laro, isang pinagsanib na uniberso.",
+      "subtitleClick": "I-click upang matuklasan ang mundong tumatawag sa iyo.",
+      "exploreMore": "Tuklasin Pa",
+      "aboutLabel": "Tungkol sa Amin",
+      "aboutHeading": "Ang Aming Kwento at Bisyon",
+      "aboutDesc": "Tuklasin ang koponan, misyon, at roadmap sa likod ng Hyper Tek 100.",
+      "uiLabel": "Interface ng Laro",
+      "uiHeading": "Interaktibong UI Preview",
+      "uiDesc": "Maranasan ang buong game dashboard — mga mode na Racing, Quest, at Overlord."
+    }
   },
   "packages": {
     "badge": "KAMPANYA NG CROWDFUNDING — YUGTO 1",
@@ -152,23 +182,388 @@
     "imageComing": "Larawang paparating",
     "close": "Isara",
     "items": [
-      { "title": "Recruit", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Recruit\"","Makakatanggap ka ng $35 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Recruit, makakatanggap ka ng 10% Diskwento sa mga in-game na pagbili para sa unang 12 buwan"] },
-      { "title": "Cadet Rookie Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Cadet Rookie Class\"","Makakatanggap ka ng $90 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Cadet Rookie Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan","5% na Pagtaas sa bilis ng pagsasanay","10% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","#Pumili lang na mag-donate ng $50 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Rookie Class\""] },
-      { "title": "Cadet 1st Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Cadet 1st Class\"","Makakatanggap ka ng $125 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Cadet 1st Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan","5% na Pagtaas sa bilis ng pagsasanay","5% mas maraming prize money","5% na pagtaas sa atake at depensa","10% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"] },
-      { "title": "Leading Cadet", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet\"","Makakatanggap ka ng $170 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Leading Cadet, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan","5% na Pagtaas sa bilis ng pagsasanay","5% mas maraming prize money","5% na pagtaas sa atake at depensa","10% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"] },
-      { "title": "Leading Cadet Special Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet Special Class\"","Makakatanggap ka ng $240 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Leading Cadet Special Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan","5% na Pagtaas sa bilis ng pagsasanay","5% mas maraming prize money","5% na pagtaas sa atake at depensa","15% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"] },
-      { "title": "Senior Cadet", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet Special Class\"","Makakatanggap ka ng $390 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Senior Cadet, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan","5% na Pagtaas sa bilis ng pagsasanay","10% na Pagtaas sa kalusugan","5% mas maraming prize money","5% na pagtaas sa atake at depensa","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan","#Pumili lang na mag-donate ng $250 upang suportahan ang aming misyon, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Senior Special Class\""] },
-      { "title": "Senior Cadet Special Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Senior Cadet Special Class\"","Makakatanggap ka ng $440 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Senior Cadet Special Class, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan","1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","10% na Pagtaas sa bilis ng pagsasanay","10% na Pagtaas sa kalusugan","10% mas maraming prize money","5% na pagtaas sa atake at depensa","5% mas malaking kapasidad ng laki ng atake","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"] },
-      { "title": "Flight Cadet", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Cadet\"","Makakatanggap ka ng $550 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Flight Lieutenant, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan","1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","15% na Pagtaas sa bilis ng pagsasanay","15% na Pagtaas sa kalusugan","10% mas maraming prize money","5% na pagtaas sa atake at depensa","5% mas malaking kapasidad ng laki ng atake","1 mega resource package","1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"] },
-      { "title": "Flight Lieutenant", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Lieutenant\"","Makakatanggap ka ng $6800 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Flight Lieutenant, makakatanggap ka ng bonus na 20% na pagtaas sa pagtitipon ng mga mapagkukunan","1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","20% na Pagtaas sa bilis ng pagsasanay","15% na Pagtaas sa kalusugan","15% mas maraming prize money","8% na pagtaas sa atake at depensa","7% mas malaking kapasidad ng laki ng atake","Mga bonus na racing part","1 mega resource package","1 off world port pass","1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan","#Pumili lang na mag-donate ng $500 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Flight Lieutenant\""] },
-      { "title": "Flight Lieutenant Special Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Lieutenant Special Class\"","Makakatanggap ka ng $1,050 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Flight Lieutenant Special Class, makakatanggap ka ng bonus na 20% na pagtaas sa pagtitipon ng mga mapagkukunan","1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","20% na Pagtaas sa bilis ng pagsasanay","20% na Pagtaas sa kalusugan","15% mas maraming prize money","10% na pagtaas sa atake at depensa","7% mas malaking kapasidad ng laki ng atake","Mga bonus na racing part","1 mega resource package","1 extra host avatar","1 off world port pass","1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"] },
-      { "title": "Wingman", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Wingman\"","Makakatanggap ka ng $1,480 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Wingman, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan","2.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","25% na Pagtaas sa bilis ng pagsasanay","20% na Pagtaas sa kalusugan","20% mas maraming prize money","10% na pagtaas sa atake at depensa","8% mas malaking kapasidad ng laki ng atake","Mga bonus na racing part","1 mega resource package","1 mega crystal package","1 extra host avatar","1 off world port pass","2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","Makatanggap ng karagdagang patuloy na 10% diskwento sa anumang pagbili sa loob ng laro/mga laro","#Pumili lang na mag-donate ng $1,000 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Wingman\""] },
-      { "title": "Wingman Senior Class", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Wingman Senior Class\"","Makakatanggap ka ng $2,200 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Wingman Senior Class, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan","3.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","30% na Pagtaas sa bilis ng pagsasanay","25% na Pagtaas sa kalusugan","20% mas maraming prize money","15% na pagtaas sa atake at depensa","10% mas malaking kapasidad ng laki ng atake","1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","1 mega resource package","1 mega crystal package","1 extra host avatar","1 off world port pass","2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","Makatanggap ng karagdagang patuloy na 10% diskwento sa anumang pagbili sa loob ng laro/mga laro"] },
-      { "title": "Technical Officer", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Technical Officer\"","Makakatanggap ka ng $2,900 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Technical Officer, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan","3.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","2.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","30% na Pagtaas sa bilis ng pagsasanay","25% na Pagtaas sa kalusugan","25% mas maraming prize money","15% na pagtaas sa atake at depensa","10% mas malaking kapasidad ng laki ng atake","1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","2 mega resource package","1 mega crystal package","2 extra host avatar","2 off-world port pass","3 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","25% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro","Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro","Pagbabahagi ng kita! Makibahagi sa hanggang 2.5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA","Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback","Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro","Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"] },
-      { "title": "Team Specialist", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Team Specialist\"","Makakatanggap ka ng $3,300 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Team Specialist, makakatanggap ka ng bonus na 30% na pagtaas sa pagtitipon ng mga mapagkukunan","5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","2.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","30% na Pagtaas sa bilis ng pagsasanay","30% na Pagtaas sa kalusugan","25% mas maraming prize money","15% na pagtaas sa atake at depensa","10% mas malaking kapasidad ng laki ng atake","1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","3 mega resource package","1 mega crystal package","2 extra host avatar","2 off-world port pass","2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa","25% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan","Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro","Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro","Pagbabahagi ng kita! Makibahagi sa hanggang 2.5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA","Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback","Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro","Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga","#Pumili lang na mag-donate ng $2,500 upang suportahan ang aming misyon at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Team Specialist\""] },
-      { "title": "Team Specialist Major", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Team Specialist Major\"","Makakatanggap ka ng $6,500 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Team Specialist Major, makakatanggap ka ng bonus na 35% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan","7% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","3.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","35% na Pagtaas sa bilis ng pagsasanay","30% na Pagtaas sa kalusugan","30% mas maraming prize money","20% na pagtaas sa atake at depensa","10% mas malaking kapasidad ng laki ng atake","1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","4 mega resource package","1 mega crystal package","2 extra host avatar","2 off-world port pass","3 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa","25% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan","Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro","Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro","Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA","Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback","Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro","Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"] },
-      { "title": "Commandar Elite", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Commandar Elite\"","Makakatanggap ka ng $9,000 USD na credit na gagamitin para sa mga in-game na pagbili","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa discord chat.","Bilang isang Commander Elite, makakatanggap ka ng bonus na 35% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan","7.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","4% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","40% na Pagtaas sa bilis ng pagsasanay","35% na Pagtaas sa kalusugan","30% mas maraming prize money","20% na pagtaas sa atake at depensa","20% mas malaking kapasidad ng laki ng atake","2 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","4 mega resource package","2 mega crystal package","2 extra host avatar","3 off world port pass","4 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa","30% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","25% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan","Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro","Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro","Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA","Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback","Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro","Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"] },
-      { "title": "Over Lord", "rewards": ["Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Over Lord\"","Makakatanggap ka ng $15,000 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)","Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email","Maaari kang sumali sa Discord chat.","Bilang isang Overlord, makakatanggap ka ng bonus na 40% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan","10% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan","5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy","50% na Pagtaas sa bilis ng pagsasanay","40% na Pagtaas sa kalusugan","40% mas maraming prize money","25% na pagtaas sa atake at depensa","25% mas malaking kapasidad ng laki ng atake","2 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol","Mga bonus na racing part","6 mega resource package","3 mega crystal package","2 extra host avatar","4 off-world port pass","4 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa","2 NFA legendary team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $650 bawat isa","1 NFA epic team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $1000 bawat isa","40% Diskwento sa mga in-game na pagbili para sa unang 12 buwan","30% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan","Makatanggap ng karagdagang 20% diskwento sa anumang pagbili sa loob ng laro/mga laro habang kasali ka sa laro","Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro","Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA","Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback","Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro","Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"] }
+      {
+        "title": "Recruit",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Recruit\"",
+          "Makakatanggap ka ng $35 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Recruit, makakatanggap ka ng 10% Diskwento sa mga in-game na pagbili para sa unang 12 buwan"
+        ]
+      },
+      {
+        "title": "Cadet Rookie Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Cadet Rookie Class\"",
+          "Makakatanggap ka ng $90 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Cadet Rookie Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% na Pagtaas sa bilis ng pagsasanay",
+          "10% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "#Pumili lang na mag-donate ng $50 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Rookie Class\""
+        ]
+      },
+      {
+        "title": "Cadet 1st Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Cadet 1st Class\"",
+          "Makakatanggap ka ng $125 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Cadet 1st Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% na Pagtaas sa bilis ng pagsasanay",
+          "5% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "10% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"
+        ]
+      },
+      {
+        "title": "Leading Cadet",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet\"",
+          "Makakatanggap ka ng $170 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Leading Cadet, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% na Pagtaas sa bilis ng pagsasanay",
+          "5% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "10% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"
+        ]
+      },
+      {
+        "title": "Leading Cadet Special Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet Special Class\"",
+          "Makakatanggap ka ng $240 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Leading Cadet Special Class, makakatanggap ka ng bonus na 10% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% na Pagtaas sa bilis ng pagsasanay",
+          "5% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "15% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan"
+        ]
+      },
+      {
+        "title": "Senior Cadet",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Leading Cadet Special Class\"",
+          "Makakatanggap ka ng $390 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Senior Cadet, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% na Pagtaas sa bilis ng pagsasanay",
+          "10% na Pagtaas sa kalusugan",
+          "5% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan",
+          "#Pumili lang na mag-donate ng $250 upang suportahan ang aming misyon, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Senior Special Class\""
+        ]
+      },
+      {
+        "title": "Senior Cadet Special Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Senior Cadet Special Class\"",
+          "Makakatanggap ka ng $440 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Senior Cadet Special Class, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "10% na Pagtaas sa bilis ng pagsasanay",
+          "10% na Pagtaas sa kalusugan",
+          "10% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "5% mas malaking kapasidad ng laki ng atake",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"
+        ]
+      },
+      {
+        "title": "Flight Cadet",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Cadet\"",
+          "Makakatanggap ka ng $550 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Flight Lieutenant, makakatanggap ka ng bonus na 15% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "15% na Pagtaas sa bilis ng pagsasanay",
+          "15% na Pagtaas sa kalusugan",
+          "10% mas maraming prize money",
+          "5% na pagtaas sa atake at depensa",
+          "5% mas malaking kapasidad ng laki ng atake",
+          "1 mega resource package",
+          "1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"
+        ]
+      },
+      {
+        "title": "Flight Lieutenant",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Lieutenant\"",
+          "Makakatanggap ka ng $6800 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Flight Lieutenant, makakatanggap ka ng bonus na 20% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "20% na Pagtaas sa bilis ng pagsasanay",
+          "15% na Pagtaas sa kalusugan",
+          "15% mas maraming prize money",
+          "8% na pagtaas sa atake at depensa",
+          "7% mas malaking kapasidad ng laki ng atake",
+          "Mga bonus na racing part",
+          "1 mega resource package",
+          "1 off world port pass",
+          "1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan",
+          "#Pumili lang na mag-donate ng $500 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Flight Lieutenant\""
+        ]
+      },
+      {
+        "title": "Flight Lieutenant Special Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Flight Lieutenant Special Class\"",
+          "Makakatanggap ka ng $1,050 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Flight Lieutenant Special Class, makakatanggap ka ng bonus na 20% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "20% na Pagtaas sa bilis ng pagsasanay",
+          "20% na Pagtaas sa kalusugan",
+          "15% mas maraming prize money",
+          "10% na pagtaas sa atake at depensa",
+          "7% mas malaking kapasidad ng laki ng atake",
+          "Mga bonus na racing part",
+          "1 mega resource package",
+          "1 extra host avatar",
+          "1 off world port pass",
+          "1 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "10% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan"
+        ]
+      },
+      {
+        "title": "Wingman",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Wingman\"",
+          "Makakatanggap ka ng $1,480 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Wingman, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "2.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "1.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "25% na Pagtaas sa bilis ng pagsasanay",
+          "20% na Pagtaas sa kalusugan",
+          "20% mas maraming prize money",
+          "10% na pagtaas sa atake at depensa",
+          "8% mas malaking kapasidad ng laki ng atake",
+          "Mga bonus na racing part",
+          "1 mega resource package",
+          "1 mega crystal package",
+          "1 extra host avatar",
+          "1 off world port pass",
+          "2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "Makatanggap ng karagdagang patuloy na 10% diskwento sa anumang pagbili sa loob ng laro/mga laro",
+          "#Pumili lang na mag-donate ng $1,000 upang suportahan ang aming misyon, at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Wingman\""
+        ]
+      },
+      {
+        "title": "Wingman Senior Class",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Wingman Senior Class\"",
+          "Makakatanggap ka ng $2,200 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Wingman Senior Class, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "3.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "1.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "30% na Pagtaas sa bilis ng pagsasanay",
+          "25% na Pagtaas sa kalusugan",
+          "20% mas maraming prize money",
+          "15% na pagtaas sa atake at depensa",
+          "10% mas malaking kapasidad ng laki ng atake",
+          "1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "1 mega resource package",
+          "1 mega crystal package",
+          "1 extra host avatar",
+          "1 off world port pass",
+          "2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "20% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "Makatanggap ng karagdagang patuloy na 10% diskwento sa anumang pagbili sa loob ng laro/mga laro"
+        ]
+      },
+      {
+        "title": "Technical Officer",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Technical Officer\"",
+          "Makakatanggap ka ng $2,900 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Technical Officer, makakatanggap ka ng bonus na 25% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "3.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "2.0% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "30% na Pagtaas sa bilis ng pagsasanay",
+          "25% na Pagtaas sa kalusugan",
+          "25% mas maraming prize money",
+          "15% na pagtaas sa atake at depensa",
+          "10% mas malaking kapasidad ng laki ng atake",
+          "1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "2 mega resource package",
+          "1 mega crystal package",
+          "2 extra host avatar",
+          "2 off-world port pass",
+          "3 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "25% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro",
+          "Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro",
+          "Pagbabahagi ng kita! Makibahagi sa hanggang 2.5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA",
+          "Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback",
+          "Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro",
+          "Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"
+        ]
+      },
+      {
+        "title": "Team Specialist",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Team Specialist\"",
+          "Makakatanggap ka ng $3,300 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Team Specialist, makakatanggap ka ng bonus na 30% na pagtaas sa pagtitipon ng mga mapagkukunan",
+          "5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "2.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "30% na Pagtaas sa bilis ng pagsasanay",
+          "30% na Pagtaas sa kalusugan",
+          "25% mas maraming prize money",
+          "15% na pagtaas sa atake at depensa",
+          "10% mas malaking kapasidad ng laki ng atake",
+          "1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "3 mega resource package",
+          "1 mega crystal package",
+          "2 extra host avatar",
+          "2 off-world port pass",
+          "2 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa",
+          "25% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan",
+          "Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro",
+          "Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro",
+          "Pagbabahagi ng kita! Makibahagi sa hanggang 2.5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA",
+          "Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback",
+          "Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro",
+          "Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga",
+          "#Pumili lang na mag-donate ng $2,500 upang suportahan ang aming misyon at, kung gusto mo, ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Enlisted Honorary Team Specialist\""
+        ]
+      },
+      {
+        "title": "Team Specialist Major",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Team Specialist Major\"",
+          "Makakatanggap ka ng $6,500 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Team Specialist Major, makakatanggap ka ng bonus na 35% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan",
+          "7% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "3.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "35% na Pagtaas sa bilis ng pagsasanay",
+          "30% na Pagtaas sa kalusugan",
+          "30% mas maraming prize money",
+          "20% na pagtaas sa atake at depensa",
+          "10% mas malaking kapasidad ng laki ng atake",
+          "1 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "4 mega resource package",
+          "1 mega crystal package",
+          "2 extra host avatar",
+          "2 off-world port pass",
+          "3 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa",
+          "25% Diskwento sa mga in-game na pagbili para sa unang 24 na buwan",
+          "Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro",
+          "Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro",
+          "Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA",
+          "Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback",
+          "Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro",
+          "Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"
+        ]
+      },
+      {
+        "title": "Commandar Elite",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Commandar Elite\"",
+          "Makakatanggap ka ng $9,000 USD na credit na gagamitin para sa mga in-game na pagbili",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa discord chat.",
+          "Bilang isang Commander Elite, makakatanggap ka ng bonus na 35% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan",
+          "7.5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "4% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "40% na Pagtaas sa bilis ng pagsasanay",
+          "35% na Pagtaas sa kalusugan",
+          "30% mas maraming prize money",
+          "20% na pagtaas sa atake at depensa",
+          "20% mas malaking kapasidad ng laki ng atake",
+          "2 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "4 mega resource package",
+          "2 mega crystal package",
+          "2 extra host avatar",
+          "3 off world port pass",
+          "4 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "1 NFA exceptional team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $400 bawat isa",
+          "30% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "25% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan",
+          "Makatanggap ng karagdagang patuloy na 20% diskwento sa anumang pagbili sa loob ng laro/mga laro",
+          "Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro",
+          "Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA",
+          "Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback",
+          "Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro",
+          "Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"
+        ]
+      },
+      {
+        "title": "Over Lord",
+        "rewards": [
+          "Ang iyong pangalan ay lilitaw sa mga end credit ng laro sa ilalim ng titulong \"Over Lord\"",
+          "Makakatanggap ka ng $15,000 USD na credit na gagamitin para sa mga in-game na pagbili (hindi maaaring gawing mga cash-out na bayad)",
+          "Makakatanggap ka ng lingguhang mga update sa laro sa pamamagitan ng email",
+          "Maaari kang sumali sa Discord chat.",
+          "Bilang isang Overlord, makakatanggap ka ng bonus na 40% na pagtaas sa pagtitipon/pagmimina ng mga mapagkukunan",
+          "10% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item sa loob ng unang 12 buwan",
+          "5% mas mataas na pagkakataon na makakuha ng NFA o mga bihirang item nang tuloy-tuloy",
+          "50% na Pagtaas sa bilis ng pagsasanay",
+          "40% na Pagtaas sa kalusugan",
+          "40% mas maraming prize money",
+          "25% na pagtaas sa atake at depensa",
+          "25% mas malaking kapasidad ng laki ng atake",
+          "2 karagdagang slot ng teleportasyon para sa pag-atake/pagtatanggol",
+          "Mga bonus na racing part",
+          "6 mega resource package",
+          "3 mega crystal package",
+          "2 extra host avatar",
+          "4 off-world port pass",
+          "4 NFA superior team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $150 bawat isa",
+          "2 NFA legendary team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $650 bawat isa",
+          "1 NFA epic team specialist na nag-aalok ng mga bonus sa barko at karera, pati na rin ang garantisadong minimum na buy-back na $1000 bawat isa",
+          "40% Diskwento sa mga in-game na pagbili para sa unang 12 buwan",
+          "30% Diskwento sa mga in-game na pagbili para sa pangalawang 12 buwan",
+          "Makatanggap ng karagdagang 20% diskwento sa anumang pagbili sa loob ng laro/mga laro habang kasali ka sa laro",
+          "Personalized na Avatar na ginawa ayon sa donor, lilitaw sa buong laro",
+          "Pagbabahagi ng kita! Makibahagi sa hanggang 5% na pool ng kita na nabuo mula sa pagbebenta ng mga in-game na pakete at NFA",
+          "Eksklusibong access ng developer na may buwanang pribadong mga update sa laro, pagbuo, kasama ang mga pagkakataon na magbigay ng feedback",
+          "Eksklusibong disenyo ng Quest racer na gagamitin sa loob ng laro",
+          "Baseball-style collectible card ng iyong eksklusibong quest race, ipapadala sa iyo na may sulat ng pagpapahalaga"
+        ]
+      }
     ]
   }
 }

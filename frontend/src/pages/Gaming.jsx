@@ -12,7 +12,7 @@ import QuestMode      from "../Components/Gaming/QuestMode";
 import OverlordMode   from "../Components/Gaming/OverlordMode";
 import RotatePrompt   from "../Components/Gaming/RotatePrompt";
 
-export default function Gaming() {
+export default function Gaming({ isPreview = false }) {
   const [loading,     setLoading]     = useState(true);
   const [visible,     setVisible]     = useState(false);
   const [activeGame,  setActiveGame]  = useState(null);
@@ -42,7 +42,7 @@ export default function Gaming() {
       transition: "opacity 0.7s ease",
     }}>
       <GameFrame />
-      <TopBar activeGame={activeGame} />
+      <TopBar activeGame={activeGame} isPreview={isPreview} />
       <ProfileButton />
       {!(activeGame === "RACING" && raceView === "GARAGE") && activeGame !== "OVERLORD" && <MiniMap />}
       <ViewButton

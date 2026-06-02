@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "مشاهدة الفيديو",
+      "title": "فيديو طريقة لعب أوفرلورد",
+      "close": "إغلاق"
+    },
     "exit": "خروج",
     "spaceRing": "OVERLORD · حلقة الفضاء",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "مشاهدة الفيديو",
+      "title": "فيديو طريقة لعب السباق",
+      "close": "إغلاق"
+    },
     "airspeed": "سرعة الهواء",
     "knots": "عقدة",
     "steer": "توجيه",
@@ -621,6 +631,55 @@
       "weapons": "الأسلحة",
       "rewards": "المكافآت",
       "specialists": "المتخصصون"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "عناصر المهمة",
+        "banners": "الرايات",
+        "medals": "الميداليات",
+        "skins": "المظاهر",
+        "antiGravity": "مضاد الجاذبية",
+        "plasmaRods": "قضبان البلازما",
+        "darkMatter": "المادة المظلمة",
+        "techBooks": "الكتب التقنية",
+        "engines": "المحركات",
+        "vehicles": "المركبات",
+        "tools": "الأدوات",
+        "aidPacks": "حقائب الإسعاف"
+      },
+      "weapons": {
+        "blades": "الشفرات",
+        "guns": "الأسلحة النارية",
+        "mines": "الألغام",
+        "grenades": "القنابل",
+        "helmet": "الخوذة",
+        "suits": "البدلات",
+        "gloves": "القفازات",
+        "boots": "الأحذية",
+        "landBases": "القواعد البرية",
+        "landTitles": "صكوك الأراضي",
+        "shield": "الدرع",
+        "ammoPacks": "حزم الذخيرة"
+      },
+      "rewards": {
+        "battleChest": "صندوق المعركة",
+        "loginReward": "مكافأة تسجيل الدخول",
+        "eventTrophy": "كأس الحدث",
+        "allianceGift": "هدية التحالف",
+        "questToken": "رمز المهمة",
+        "raceMedal": "ميدالية السباق"
+      }
+    },
+    "specialistCategories": {
+      "offence": "الهجوم",
+      "defence": "الدفاع",
+      "racing": "السباق",
+      "pilot": "الطيار",
+      "weapons": "الأسلحة",
+      "engineering": "الهندسة",
+      "science": "العلوم",
+      "hospital": "المستشفى",
+      "food": "الغذاء"
     },
     "allianceTabs": {
       "members": "الأعضاء",

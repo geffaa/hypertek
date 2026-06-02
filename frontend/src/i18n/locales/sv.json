@@ -87,12 +87,30 @@
     "readMore": "Läs vår hela berättelse",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Sammankopplat universum",   "desc": "3 spel — 1 delad ekonomi och progressionssystem" },
-      { "label": "Äkta ägande",               "desc": "NFA:er med garanterad minimiåterköp" },
-      { "label": "Spela och tjäna",            "desc": "Varje åtgärd bidrar till dina verkliga belöningar" },
-      { "label": "Utbetalningar",              "desc": "Omvandla spelvaluta/belöningar till kontantutbetalningar" },
-      { "label": "Länkad progression",         "desc": "Spelarprogressionen är länkad i alla spelsviter" },
-      { "label": "VR/AR-integration",          "desc": "VR/AR-spelare kan delta i uppdrag och episka slag i realtid" }
+      {
+        "label": "Sammankopplat universum",
+        "desc": "3 spel — 1 delad ekonomi och progressionssystem"
+      },
+      {
+        "label": "Äkta ägande",
+        "desc": "NFA:er med garanterad minimiåterköp"
+      },
+      {
+        "label": "Spela och tjäna",
+        "desc": "Varje åtgärd bidrar till dina verkliga belöningar"
+      },
+      {
+        "label": "Utbetalningar",
+        "desc": "Omvandla spelvaluta/belöningar till kontantutbetalningar"
+      },
+      {
+        "label": "Länkad progression",
+        "desc": "Spelarprogressionen är länkad i alla spelsviter"
+      },
+      {
+        "label": "VR/AR-integration",
+        "desc": "VR/AR-spelare kan delta i uppdrag och episka slag i realtid"
+      }
     ]
   },
   "about": {
@@ -131,7 +149,19 @@
         "tagline": "Befäl. Erövra. Härska.",
         "description": "Du är Overlord — pånyttfödd ur askan av en splittrad jord. Bygg arméer, ta stjärnsystem och tvinga rivaliserande fraktioner under din vilja. Echo Core valde dig. Bevisa att det hade rätt."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Utforska Vårt Universum",
+      "subtitle": "Tre sammankopplade spel, ett delat universum.",
+      "subtitleClick": "Klicka för att upptäcka världen som kallar på dig.",
+      "exploreMore": "Utforska Mer",
+      "aboutLabel": "Om Oss",
+      "aboutHeading": "Vår Historia & Vision",
+      "aboutDesc": "Upptäck teamet, uppdraget och färdplanen bakom Hyper Tek 100.",
+      "uiLabel": "Spelgränssnitt",
+      "uiHeading": "Interaktiv UI-förhandsgranskning",
+      "uiDesc": "Upplev det fullständiga spel-dashboardet — Racing-, Quest- och Overlord-lägen."
+    }
   },
   "packages": {
     "badge": "CROWDFUNDING-KAMPANJ — STEG 1",
@@ -152,23 +182,388 @@
     "imageComing": "Bild kommer snart",
     "close": "Stäng",
     "items": [
-      { "title": "Rekryt", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Rekryt\"","Du kommer att få $35 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som rekryt får du 10% rabatt på köp i spelet under de första 12 månaderna"] },
-      { "title": "Kadettrekryt", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Kadettrekryt\"","Du kommer att få $90 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som kadettrekryt får du en bonus på 10% ökning av resursinhämtning","5% ökning av träningshastighet","10% rabatt på köp i spelet under de första 12 månaderna","#Välj att bara donera $50 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig rekrytlass\""] },
-      { "title": "Kadett 1:a klass", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Kadett 1:a klass\"","Du kommer att få $125 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som kadett 1:a klass får du en bonus på 10% ökning av resursinhämtning","5% ökning av träningshastighet","5% mer prispris","5% ökning av attack och försvar","10% rabatt på köp i spelet under de första 24 månaderna"] },
-      { "title": "Ledande kadett", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett\"","Du kommer att få $170 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som ledande kadett får du en bonus på 10% ökning av resursinhämtning","5% ökning av träningshastighet","5% mer prispris","5% ökning av attack och försvar","10% rabatt på köp i spelet under de första 24 månaderna"] },
-      { "title": "Ledande kadett specialklass", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett specialklass\"","Du kommer att få $240 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som ledande kadett specialklass får du en bonus på 10% ökning av resursinhämtning","5% ökning av träningshastighet","5% mer prispris","5% ökning av attack och försvar","15% rabatt på köp i spelet under de första 24 månaderna"] },
-      { "title": "Senior kadett", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett specialklass\"","Du kommer att få $390 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som senior kadett får du en bonus på 15% ökning av resursinhämtning","5% ökning av träningshastighet","10% ökning av hälsa","5% mer prispris","5% ökning av attack och försvar","20% rabatt på köp i spelet under de första 12 månaderna","10% rabatt på köp i spelet under en andra 12-månadsperiod","#Välj att bara donera $250 för att stödja vårt uppdrag, om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig senior specialklass\""] },
-      { "title": "Senior kadett specialklass", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Senior kadett specialklass\"","Du kommer att få $440 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som senior kadett specialklass får du en bonus på 15% ökning av resursinhämtning","1,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","10% ökning av träningshastighet","10% ökning av hälsa","10% mer prispris","5% ökning av attack och försvar","5% större attackstorlekkap","20% rabatt på köp i spelet under de första 12 månaderna","10% rabatt på köp i spelet under en andra 12-månadsperiod"] },
-      { "title": "Flyg-kadett", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyg-kadett\"","Du kommer att få $550 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som flyglöjtnant får du en bonus på 15% ökning av resursinhämtning","1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","15% ökning av träningshastighet","15% ökning av hälsa","10% mer prispris","5% ökning av attack och försvar","5% större attackstorlekkap","1 mega resurspaket","1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150","20% rabatt på köp i spelet under de första 12 månaderna","10% rabatt på köp i spelet under en andra 12-månadsperiod"] },
-      { "title": "Flyglöjtnant", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyglöjtnant\"","Du kommer att få $6800 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som flyglöjtnant får du en bonus på 20% ökning av resursinhämtning","1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","20% ökning av träningshastighet","15% ökning av hälsa","15% mer prispris","8% ökning av attack och försvar","7% större attackstorlekkap","Bonus racingdelar","1 mega resurspaket","1 port till en utomjordisk hamn","1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150","20% rabatt på köp i spelet under de första 12 månaderna","10% rabatt på köp i spelet under en andra 12-månadsperiod","#Välj att bara donera $500 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig flyglöjtnant\""] },
-      { "title": "Flyglöjtnant specialklass", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyglöjtnant specialklass\"","Du kommer att få $1 050 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som flyglöjtnant specialklass får du en bonus på 20% ökning av resursinhämtning","1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","1,0% högre chans att få NFA:er eller sällsynta föremål löpande","20% ökning av träningshastighet","20% ökning av hälsa","15% mer prispris","10% ökning av attack och försvar","7% större attackstorlekkap","Bonus racingdelar","1 mega resurspaket","1 extra värdavatarer","1 port till en utomjordisk hamn","1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150","20% rabatt på köp i spelet under de första 12 månaderna","10% rabatt på köp i spelet under en andra 12-månadsperiod"] },
-      { "title": "Vingkamrat", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Vingkamrat\"","Du kommer att få $1 480 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som vingkamrat får du en bonus på 25% ökning av resursinhämtning","2,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","1,0% högre chans att få NFA:er eller sällsynta föremål löpande","25% ökning av träningshastighet","20% ökning av hälsa","20% mer prispris","10% ökning av attack och försvar","8% större attackstorlekkap","Bonus racingdelar","1 mega resurspaket","1 mega kristallpaket","1 extra värdavatarer","1 port till en utomjordisk hamn","2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","20% rabatt på köp i spelet under de första 12 månaderna","Få ytterligare löpande 10% rabatt på köp i spelet/spelen","#Välj att bara donera $1 000 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig vingkamrat\""] },
-      { "title": "Senior vingkamrat", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Senior vingkamrat\"","Du kommer att få $2 200 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som senior vingkamrat får du en bonus på 25% ökning av resursinhämtning","3,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","1,5% högre chans att få NFA:er eller sällsynta föremål löpande","30% ökning av träningshastighet","25% ökning av hälsa","20% mer prispris","15% ökning av attack och försvar","10% större attackstorlekkap","1 extra teleporteringsplats för attack/försvar","Bonus racingdelar","1 mega resurspaket","1 mega kristallpaket","1 extra värdavatarer","1 port till en utomjordisk hamn","2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","20% rabatt på köp i spelet under de första 12 månaderna","Få ytterligare löpande 10% rabatt på köp i spelet/spelen"] },
-      { "title": "Teknisk officer", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teknisk officer\"","Du kommer att få $2 900 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som teknisk officer får du en bonus på 25% ökning av resursinhämtning","3,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","2,0% högre chans att få NFA:er eller sällsynta föremål löpande","30% ökning av träningshastighet","25% ökning av hälsa","25% mer prispengar","15% ökning av attack och försvar","10% större attackstorlekkap","1 extra teleporteringsplats för attack/försvar","Bonus racingdelar","2 mega resurspaket","1 mega kristallpaket","2 extra värdavatarer","2 utomjordiska hamninlägg","3 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","25% rabatt på köp i spelet under de första 12 månaderna","Få ytterligare löpande 20% rabatt på köp i spelet/spelen","Personlig avatar modellerad efter donatorn, som visas i hela spelet","Intäktsdelning! Delta i upp till 2,5% vinstpool genererad från försäljning av spelpaket och NFA:er","Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback","Exklusiv Quest-racer design för användning i spelet","Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"] },
-      { "title": "Teamspecialist", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teamspecialist\"","Du kommer att få $3 300 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som teamspecialist får du en bonus på 30% ökning av resursinhämtning","5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","2,5% högre chans att få NFA:er eller sällsynta föremål löpande","30% ökning av träningshastighet","30% ökning av hälsa","25% mer prispengar","15% ökning av attack och försvar","10% större attackstorlekkap","1 extra teleporteringsplats för attack/försvar","Bonus racingdelar","3 mega resurspaket","1 mega kristallpaket","2 extra värdavatarer","2 utomjordiska hamninlägg","2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var","25% rabatt på köp i spelet under de första 24 månaderna","Få ytterligare löpande 20% rabatt på köp i spelet/spelen","Personlig avatar modellerad efter donatorn, som visas i hela spelet","Intäktsdelning! Delta i upp till 2,5% vinstpool genererad från försäljning av spelpaket och NFA:er","Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback","Exklusiv Quest-racer design för användning i spelet","Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev","#Välj att bara donera $2 500 för att stödja vårt uppdrag och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig teamspecialist\""] },
-      { "title": "Teamspecialist major", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teamspecialist major\"","Du kommer att få $6 500 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som teamspecialist major får du en bonus på 35% ökning av resursinhämtning/gruvdrift","7% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","3,5% högre chans att få NFA:er eller sällsynta föremål löpande","35% ökning av träningshastighet","30% ökning av hälsa","30% mer prispengar","20% ökning av attack och försvar","10% större attackstorlekkap","1 extra teleporteringsplats för attack/försvar","Bonus racingdelar","4 mega resurspaket","1 mega kristallpaket","2 extra värdavatarer","2 utomjordiska hamninlägg","3 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var","25% rabatt på köp i spelet under de första 24 månaderna","Få ytterligare löpande 20% rabatt på köp i spelet/spelen","Personlig avatar modellerad efter donatorn, som visas i hela spelet","Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er","Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback","Exklusiv Quest-racer design för användning i spelet","Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"] },
-      { "title": "Commandar Elite", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Commandar Elite\"","Du kommer att få $9 000 USD-krediter att använda för köp i spelet","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som Commander Elite får du en bonus på 35% ökning av resursinhämtning/gruvdrift","7,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","4% högre chans att få NFA:er eller sällsynta föremål löpande","40% ökning av träningshastighet","35% ökning av hälsa","30% mer prispris","20% ökning av attack och försvar","20% större attackstorlekkap","2 extra teleporteringsplatser för attack/försvar","Bonus racingdelar","4 mega resurspaket","2 mega kristallpaket","2 extra värdavatarer","3 utomjordiska hamninlägg","4 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var","30% rabatt på köp i spelet under de första 12 månaderna","25% rabatt på köp i spelet under de andra 12 månaderna","Få ytterligare löpande 20% rabatt på köp i spelet/spelen","Personlig avatar modellerad efter donatorn, som visas i hela spelet","Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er","Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback","Exklusiv Quest-racer design för användning i spelet","Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"] },
-      { "title": "Over Lord", "rewards": ["Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Over Lord\"","Du kommer att få $15 000 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)","Du kommer att få veckovisa uppdateringar om spelet via e-post","Du kommer att kunna gå med i Discord-chatten.","Som Overlord får du en bonus på 40% ökning av resursinhämtning/gruvdrift","10% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna","5% högre chans att få NFA:er eller sällsynta föremål löpande","50% ökning av träningshastighet","40% ökning av hälsa","40% mer prispengar","25% ökning av attack och försvar","25% större attackstorlekkap","2 extra teleporteringsplatser för attack/försvar","Bonus racingdelar","6 mega resurspaket","3 mega kristallpaket","2 extra värdavatarer","4 utomjordiska hamninlägg","4 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var","2 NFA Legendariska teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $650 var","1 NFA Episk teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $1000 var","40% rabatt på köp i spelet under de första 12 månaderna","30% rabatt på köp i spelet under de andra 12 månaderna","Få ytterligare 20% rabatt på köp i spelet/spelen så länge du är involverad i spelet","Personlig avatar modellerad efter donatorn, som visas i hela spelet","Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er","Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback","Exklusiv Quest-racer design för användning i spelet","Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"] }
+      {
+        "title": "Rekryt",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Rekryt\"",
+          "Du kommer att få $35 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som rekryt får du 10% rabatt på köp i spelet under de första 12 månaderna"
+        ]
+      },
+      {
+        "title": "Kadettrekryt",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Kadettrekryt\"",
+          "Du kommer att få $90 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som kadettrekryt får du en bonus på 10% ökning av resursinhämtning",
+          "5% ökning av träningshastighet",
+          "10% rabatt på köp i spelet under de första 12 månaderna",
+          "#Välj att bara donera $50 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig rekrytlass\""
+        ]
+      },
+      {
+        "title": "Kadett 1:a klass",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Kadett 1:a klass\"",
+          "Du kommer att få $125 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som kadett 1:a klass får du en bonus på 10% ökning av resursinhämtning",
+          "5% ökning av träningshastighet",
+          "5% mer prispris",
+          "5% ökning av attack och försvar",
+          "10% rabatt på köp i spelet under de första 24 månaderna"
+        ]
+      },
+      {
+        "title": "Ledande kadett",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett\"",
+          "Du kommer att få $170 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som ledande kadett får du en bonus på 10% ökning av resursinhämtning",
+          "5% ökning av träningshastighet",
+          "5% mer prispris",
+          "5% ökning av attack och försvar",
+          "10% rabatt på köp i spelet under de första 24 månaderna"
+        ]
+      },
+      {
+        "title": "Ledande kadett specialklass",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett specialklass\"",
+          "Du kommer att få $240 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som ledande kadett specialklass får du en bonus på 10% ökning av resursinhämtning",
+          "5% ökning av träningshastighet",
+          "5% mer prispris",
+          "5% ökning av attack och försvar",
+          "15% rabatt på köp i spelet under de första 24 månaderna"
+        ]
+      },
+      {
+        "title": "Senior kadett",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Ledande kadett specialklass\"",
+          "Du kommer att få $390 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som senior kadett får du en bonus på 15% ökning av resursinhämtning",
+          "5% ökning av träningshastighet",
+          "10% ökning av hälsa",
+          "5% mer prispris",
+          "5% ökning av attack och försvar",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "10% rabatt på köp i spelet under en andra 12-månadsperiod",
+          "#Välj att bara donera $250 för att stödja vårt uppdrag, om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig senior specialklass\""
+        ]
+      },
+      {
+        "title": "Senior kadett specialklass",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Senior kadett specialklass\"",
+          "Du kommer att få $440 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som senior kadett specialklass får du en bonus på 15% ökning av resursinhämtning",
+          "1,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "10% ökning av träningshastighet",
+          "10% ökning av hälsa",
+          "10% mer prispris",
+          "5% ökning av attack och försvar",
+          "5% större attackstorlekkap",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "10% rabatt på köp i spelet under en andra 12-månadsperiod"
+        ]
+      },
+      {
+        "title": "Flyg-kadett",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyg-kadett\"",
+          "Du kommer att få $550 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som flyglöjtnant får du en bonus på 15% ökning av resursinhämtning",
+          "1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "15% ökning av träningshastighet",
+          "15% ökning av hälsa",
+          "10% mer prispris",
+          "5% ökning av attack och försvar",
+          "5% större attackstorlekkap",
+          "1 mega resurspaket",
+          "1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "10% rabatt på köp i spelet under en andra 12-månadsperiod"
+        ]
+      },
+      {
+        "title": "Flyglöjtnant",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyglöjtnant\"",
+          "Du kommer att få $6800 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som flyglöjtnant får du en bonus på 20% ökning av resursinhämtning",
+          "1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "20% ökning av träningshastighet",
+          "15% ökning av hälsa",
+          "15% mer prispris",
+          "8% ökning av attack och försvar",
+          "7% större attackstorlekkap",
+          "Bonus racingdelar",
+          "1 mega resurspaket",
+          "1 port till en utomjordisk hamn",
+          "1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "10% rabatt på köp i spelet under en andra 12-månadsperiod",
+          "#Välj att bara donera $500 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig flyglöjtnant\""
+        ]
+      },
+      {
+        "title": "Flyglöjtnant specialklass",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Flyglöjtnant specialklass\"",
+          "Du kommer att få $1 050 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som flyglöjtnant specialklass får du en bonus på 20% ökning av resursinhämtning",
+          "1,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "1,0% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "20% ökning av träningshastighet",
+          "20% ökning av hälsa",
+          "15% mer prispris",
+          "10% ökning av attack och försvar",
+          "7% större attackstorlekkap",
+          "Bonus racingdelar",
+          "1 mega resurspaket",
+          "1 extra värdavatarer",
+          "1 port till en utomjordisk hamn",
+          "1 NFA Överlägsen teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "10% rabatt på köp i spelet under en andra 12-månadsperiod"
+        ]
+      },
+      {
+        "title": "Vingkamrat",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Vingkamrat\"",
+          "Du kommer att få $1 480 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som vingkamrat får du en bonus på 25% ökning av resursinhämtning",
+          "2,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "1,0% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "25% ökning av träningshastighet",
+          "20% ökning av hälsa",
+          "20% mer prispris",
+          "10% ökning av attack och försvar",
+          "8% större attackstorlekkap",
+          "Bonus racingdelar",
+          "1 mega resurspaket",
+          "1 mega kristallpaket",
+          "1 extra värdavatarer",
+          "1 port till en utomjordisk hamn",
+          "2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "Få ytterligare löpande 10% rabatt på köp i spelet/spelen",
+          "#Välj att bara donera $1 000 för att stödja vårt uppdrag, och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig vingkamrat\""
+        ]
+      },
+      {
+        "title": "Senior vingkamrat",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Senior vingkamrat\"",
+          "Du kommer att få $2 200 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som senior vingkamrat får du en bonus på 25% ökning av resursinhämtning",
+          "3,0% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "1,5% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "30% ökning av träningshastighet",
+          "25% ökning av hälsa",
+          "20% mer prispris",
+          "15% ökning av attack och försvar",
+          "10% större attackstorlekkap",
+          "1 extra teleporteringsplats för attack/försvar",
+          "Bonus racingdelar",
+          "1 mega resurspaket",
+          "1 mega kristallpaket",
+          "1 extra värdavatarer",
+          "1 port till en utomjordisk hamn",
+          "2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "20% rabatt på köp i spelet under de första 12 månaderna",
+          "Få ytterligare löpande 10% rabatt på köp i spelet/spelen"
+        ]
+      },
+      {
+        "title": "Teknisk officer",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teknisk officer\"",
+          "Du kommer att få $2 900 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som teknisk officer får du en bonus på 25% ökning av resursinhämtning",
+          "3,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "2,0% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "30% ökning av träningshastighet",
+          "25% ökning av hälsa",
+          "25% mer prispengar",
+          "15% ökning av attack och försvar",
+          "10% större attackstorlekkap",
+          "1 extra teleporteringsplats för attack/försvar",
+          "Bonus racingdelar",
+          "2 mega resurspaket",
+          "1 mega kristallpaket",
+          "2 extra värdavatarer",
+          "2 utomjordiska hamninlägg",
+          "3 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "25% rabatt på köp i spelet under de första 12 månaderna",
+          "Få ytterligare löpande 20% rabatt på köp i spelet/spelen",
+          "Personlig avatar modellerad efter donatorn, som visas i hela spelet",
+          "Intäktsdelning! Delta i upp till 2,5% vinstpool genererad från försäljning av spelpaket och NFA:er",
+          "Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback",
+          "Exklusiv Quest-racer design för användning i spelet",
+          "Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"
+        ]
+      },
+      {
+        "title": "Teamspecialist",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teamspecialist\"",
+          "Du kommer att få $3 300 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som teamspecialist får du en bonus på 30% ökning av resursinhämtning",
+          "5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "2,5% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "30% ökning av träningshastighet",
+          "30% ökning av hälsa",
+          "25% mer prispengar",
+          "15% ökning av attack och försvar",
+          "10% större attackstorlekkap",
+          "1 extra teleporteringsplats för attack/försvar",
+          "Bonus racingdelar",
+          "3 mega resurspaket",
+          "1 mega kristallpaket",
+          "2 extra värdavatarer",
+          "2 utomjordiska hamninlägg",
+          "2 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var",
+          "25% rabatt på köp i spelet under de första 24 månaderna",
+          "Få ytterligare löpande 20% rabatt på köp i spelet/spelen",
+          "Personlig avatar modellerad efter donatorn, som visas i hela spelet",
+          "Intäktsdelning! Delta i upp till 2,5% vinstpool genererad från försäljning av spelpaket och NFA:er",
+          "Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback",
+          "Exklusiv Quest-racer design för användning i spelet",
+          "Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev",
+          "#Välj att bara donera $2 500 för att stödja vårt uppdrag och om du vill, kommer ditt namn att visas i spelens eftertextkrediter under titeln \"Inskriptad hederlig teamspecialist\""
+        ]
+      },
+      {
+        "title": "Teamspecialist major",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Teamspecialist major\"",
+          "Du kommer att få $6 500 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som teamspecialist major får du en bonus på 35% ökning av resursinhämtning/gruvdrift",
+          "7% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "3,5% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "35% ökning av träningshastighet",
+          "30% ökning av hälsa",
+          "30% mer prispengar",
+          "20% ökning av attack och försvar",
+          "10% större attackstorlekkap",
+          "1 extra teleporteringsplats för attack/försvar",
+          "Bonus racingdelar",
+          "4 mega resurspaket",
+          "1 mega kristallpaket",
+          "2 extra värdavatarer",
+          "2 utomjordiska hamninlägg",
+          "3 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var",
+          "25% rabatt på köp i spelet under de första 24 månaderna",
+          "Få ytterligare löpande 20% rabatt på köp i spelet/spelen",
+          "Personlig avatar modellerad efter donatorn, som visas i hela spelet",
+          "Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er",
+          "Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback",
+          "Exklusiv Quest-racer design för användning i spelet",
+          "Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"
+        ]
+      },
+      {
+        "title": "Commandar Elite",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Commandar Elite\"",
+          "Du kommer att få $9 000 USD-krediter att använda för köp i spelet",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som Commander Elite får du en bonus på 35% ökning av resursinhämtning/gruvdrift",
+          "7,5% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "4% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "40% ökning av träningshastighet",
+          "35% ökning av hälsa",
+          "30% mer prispris",
+          "20% ökning av attack och försvar",
+          "20% större attackstorlekkap",
+          "2 extra teleporteringsplatser för attack/försvar",
+          "Bonus racingdelar",
+          "4 mega resurspaket",
+          "2 mega kristallpaket",
+          "2 extra värdavatarer",
+          "3 utomjordiska hamninlägg",
+          "4 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "1 NFA Exceptionell teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $400 var",
+          "30% rabatt på köp i spelet under de första 12 månaderna",
+          "25% rabatt på köp i spelet under de andra 12 månaderna",
+          "Få ytterligare löpande 20% rabatt på köp i spelet/spelen",
+          "Personlig avatar modellerad efter donatorn, som visas i hela spelet",
+          "Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er",
+          "Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback",
+          "Exklusiv Quest-racer design för användning i spelet",
+          "Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"
+        ]
+      },
+      {
+        "title": "Over Lord",
+        "rewards": [
+          "Ditt namn kommer att visas i spelens eftertextkrediter under titeln \"Over Lord\"",
+          "Du kommer att få $15 000 USD-krediter att använda för köp i spelet (kan inte omvandlas till kontantutbetalningar)",
+          "Du kommer att få veckovisa uppdateringar om spelet via e-post",
+          "Du kommer att kunna gå med i Discord-chatten.",
+          "Som Overlord får du en bonus på 40% ökning av resursinhämtning/gruvdrift",
+          "10% högre chans att få NFA:er eller sällsynta föremål under de första 12 månaderna",
+          "5% högre chans att få NFA:er eller sällsynta föremål löpande",
+          "50% ökning av träningshastighet",
+          "40% ökning av hälsa",
+          "40% mer prispengar",
+          "25% ökning av attack och försvar",
+          "25% större attackstorlekkap",
+          "2 extra teleporteringsplatser för attack/försvar",
+          "Bonus racingdelar",
+          "6 mega resurspaket",
+          "3 mega kristallpaket",
+          "2 extra värdavatarer",
+          "4 utomjordiska hamninlägg",
+          "4 NFA Överlägsna teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $150 var",
+          "2 NFA Legendariska teamspecialister som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $650 var",
+          "1 NFA Episk teamspecialist som erbjuder fartygs- och racingbonusar, samt ett garanterat minimalt återköp på $1000 var",
+          "40% rabatt på köp i spelet under de första 12 månaderna",
+          "30% rabatt på köp i spelet under de andra 12 månaderna",
+          "Få ytterligare 20% rabatt på köp i spelet/spelen så länge du är involverad i spelet",
+          "Personlig avatar modellerad efter donatorn, som visas i hela spelet",
+          "Intäktsdelning! Delta i upp till 5% vinstpool genererad från försäljning av spelpaket och NFA:er",
+          "Exklusiv utvecklartillgång med månatliga privata uppdateringar om spelet, utvecklingen, plus möjligheter att ge feedback",
+          "Exklusiv Quest-racer design för användning i spelet",
+          "Basebollstil samlarkort av din exklusiva questracer, skickat till dig med ett uppskattningsbrev"
+        ]
+      }
     ]
   }
 }

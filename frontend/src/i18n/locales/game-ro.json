@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "VIZIONEAZĂ VIDEO",
+      "title": "VIDEO GAMEPLAY OVERLORD",
+      "close": "ÎNCHIDE"
+    },
     "exit": "IEȘIRE",
     "spaceRing": "OVERLORD · INELUL SPAȚIAL",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "VIZIONEAZĂ VIDEO",
+      "title": "VIDEO GAMEPLAY CURSE",
+      "close": "ÎNCHIDE"
+    },
     "airspeed": "VITEZĂ AERIANĂ",
     "knots": "NODURI",
     "steer": "VOLAN",
@@ -621,6 +631,55 @@
       "weapons": "Arme",
       "rewards": "Recompense",
       "specialists": "Specialiști"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Obiecte de Misiune",
+        "banners": "Stindarde",
+        "medals": "Medalii",
+        "skins": "Aspect",
+        "antiGravity": "Anti-Gravitație",
+        "plasmaRods": "Tije de Plasmă",
+        "darkMatter": "Materie Întunecată",
+        "techBooks": "Cărți Tehnice",
+        "engines": "Motoare",
+        "vehicles": "Vehicule",
+        "tools": "Unelte",
+        "aidPacks": "Truse de Prim Ajutor"
+      },
+      "weapons": {
+        "blades": "Lame",
+        "guns": "Arme de Foc",
+        "mines": "Mine",
+        "grenades": "Grenade",
+        "helmet": "Cască",
+        "suits": "Armuri",
+        "gloves": "Mănuși",
+        "boots": "Ghete",
+        "landBases": "Baze Terestre",
+        "landTitles": "Titluri Funciare",
+        "shield": "Scut",
+        "ammoPacks": "Pachete de Muniție"
+      },
+      "rewards": {
+        "battleChest": "Cufăr de Luptă",
+        "loginReward": "Recompensă Autentificare",
+        "eventTrophy": "Trofeu Eveniment",
+        "allianceGift": "Cadou Alianță",
+        "questToken": "Jeton de Misiune",
+        "raceMedal": "Medalie de Cursă"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Atac",
+      "defence": "Apărare",
+      "racing": "Curse",
+      "pilot": "Pilot",
+      "weapons": "Arme",
+      "engineering": "Inginerie",
+      "science": "Știință",
+      "hospital": "Medicină",
+      "food": "Aprovizionare"
     },
     "allianceTabs": {
       "members": "Membri",

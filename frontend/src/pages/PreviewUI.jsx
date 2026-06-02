@@ -9,7 +9,7 @@ export default function PreviewUI() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* Full-screen Gaming interface */}
-      <Gaming />
+      <Gaming isPreview />
 
       {/* Floating back button — top-left, above the Gaming UI */}
       <motion.div

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo1.png";
 import About from "./about";
+import LanguageSwitcher from "../Components/Common/LanguageSwitcher";
 
 export default function PreviewAbout() {
   const navigate = useNavigate();
@@ -57,26 +58,29 @@ export default function PreviewAbout() {
           </span>
         </div>
 
-        {/* Back button */}
-        <button
-          onClick={() => navigate("/preview")}
-          className="flex items-center gap-2 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] transition-all duration-200 hover:brightness-125"
-          style={{
-            background: "rgba(0,0,0,0.4)",
-            border: "1px solid rgba(56,189,248,0.4)",
-            borderTop: "2px solid rgba(56,189,248,0.6)",
-            color: "rgba(56,189,248,0.9)",
-            fontFamily: "Orbitron, sans-serif",
-            clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-          }}
-        >
-          ← Back
-        </button>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          {/* Back button */}
+          <button
+            onClick={() => navigate("/preview")}
+            className="flex items-center gap-2 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] transition-all duration-200 hover:brightness-125"
+            style={{
+              background: "rgba(0,0,0,0.4)",
+              border: "1px solid rgba(56,189,248,0.4)",
+              borderTop: "2px solid rgba(56,189,248,0.6)",
+              color: "rgba(56,189,248,0.9)",
+              fontFamily: "Orbitron, sans-serif",
+              clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+            }}
+          >
+            ← Back
+          </button>
+        </div>
       </motion.nav>
 
       {/* About page content — shifted down to clear the fixed nav bar */}
       <div className="relative z-10" style={{ paddingTop: "52px" }}>
-        <About />
+        <About isPreview />
       </div>
     </div>
   );

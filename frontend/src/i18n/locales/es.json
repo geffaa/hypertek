@@ -87,12 +87,30 @@
     "readMore": "Lee Nuestra Historia Completa",
     "brand": "Hyper Tek 100",
     "highlights": [
-      { "label": "Universo Interconectado",  "desc": "3 juegos — 1 economia y sistema de progresion compartidos" },
-      { "label": "Verdadera Propiedad",           "desc": "NFAs con recompra minima garantizada" },
-      { "label": "Play-to-Earn",             "desc": "Cada accion contribuye a tus recompensas en el mundo real" },
-      { "label": "Pagos de Retiro",        "desc": "Conversion de moneda/recompensas del juego en pagos de retiro" },
-      { "label": "Progresion Vinculada",       "desc": "La progresion del jugador esta vinculada a todos los juegos de la suite" },
-      { "label": "Integracion VR/AR",        "desc": "Los jugadores de VR/AR pueden unirse a misiones y batallas epicas en tiempo real" }
+      {
+        "label": "Universo Interconectado",
+        "desc": "3 juegos — 1 economia y sistema de progresion compartidos"
+      },
+      {
+        "label": "Verdadera Propiedad",
+        "desc": "NFAs con recompra minima garantizada"
+      },
+      {
+        "label": "Play-to-Earn",
+        "desc": "Cada accion contribuye a tus recompensas en el mundo real"
+      },
+      {
+        "label": "Pagos de Retiro",
+        "desc": "Conversion de moneda/recompensas del juego en pagos de retiro"
+      },
+      {
+        "label": "Progresion Vinculada",
+        "desc": "La progresion del jugador esta vinculada a todos los juegos de la suite"
+      },
+      {
+        "label": "Integracion VR/AR",
+        "desc": "Los jugadores de VR/AR pueden unirse a misiones y batallas epicas en tiempo real"
+      }
     ]
   },
   "about": {
@@ -131,7 +149,19 @@
         "tagline": "Manda. Conquista. Gobierna.",
         "description": "Eres el Overlord — renacido de las cenizas de una Tierra fragmentada. Levanta ejercitos, conquista sistemas estelares y dobla las facciones rivales a tu voluntad. El Echo Core te eligio. Demuestra que tuvo razon."
       }
-    ]
+    ],
+    "preview": {
+      "exploreUniverse": "Explora Nuestro Universo",
+      "subtitle": "Tres juegos interconectados, un universo compartido.",
+      "subtitleClick": "Haz clic para descubrir el mundo que te llama.",
+      "exploreMore": "Explorar Más",
+      "aboutLabel": "Sobre Nosotros",
+      "aboutHeading": "Nuestra Historia y Visión",
+      "aboutDesc": "Descubre el equipo, misión y hoja de ruta detrás de Hyper Tek 100.",
+      "uiLabel": "Interfaz del Juego",
+      "uiHeading": "Vista Previa UI Interactiva",
+      "uiDesc": "Experimenta el panel completo del juego — modos Racing, Quest y Overlord."
+    }
   },
   "packages": {
     "badge": "CAMPANA DE CROWDFUNDING — ETAPA 1",
@@ -152,23 +182,388 @@
     "imageComing": "Imagen proximamente",
     "close": "Cerrar",
     "items": [
-      { "title": "Recluta", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Recluta\"","Recibiras $35 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Recluta, recibiras un Descuento del 10% en compras dentro del juego durante los primeros 12 meses"] },
-      { "title": "Clase Cadete Principiante", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Cadete Principiante\"","Recibiras $90 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Clase Cadete Principiante, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos","Aumento del 5% en velocidad de entrenamiento","Descuento del 10% en compras dentro del juego durante los primeros 12 meses","#Elige simplemente donar $50 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Principiante Honorario Alistado\""] },
-      { "title": "Cadete de Primera Clase", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete de Primera Clase\"","Recibiras $125 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Cadete de Primera Clase, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos","Aumento del 5% en velocidad de entrenamiento","5% mas de premio en dinero","Aumento del 5% en ataque y defensa","Descuento del 10% en compras dentro del juego durante los primeros 24 meses"] },
-      { "title": "Cadete Lider", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete Lider\"","Recibiras $170 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Cadete Lider, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos","Aumento del 5% en velocidad de entrenamiento","5% mas de premio en dinero","Aumento del 5% en ataque y defensa","Descuento del 10% en compras dentro del juego durante los primeros 24 meses"] },
-      { "title": "Clase Especial Cadete Lider", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Lider\"","Recibiras $240 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Clase Especial Cadete Lider, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos","Aumento del 5% en velocidad de entrenamiento","5% mas de premio en dinero","Aumento del 5% en ataque y defensa","Descuento del 15% en compras dentro del juego durante los primeros 24 meses"] },
-      { "title": "Cadete Senior", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Lider\"","Recibiras $390 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Cadete Senior, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos","Aumento del 5% en velocidad de entrenamiento","Aumento del 10% en salud","5% mas de premio en dinero","Aumento del 5% en ataque y defensa","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses","#Elige simplemente donar $250 para apoyar nuestra mision, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Senior Especial Honorario Alistado\""] },
-      { "title": "Clase Especial Cadete Senior", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Senior\"","Recibiras $440 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Clase Especial Cadete Senior, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos","1,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","Aumento del 10% en velocidad de entrenamiento","Aumento del 10% en salud","10% mas de premio en dinero","Aumento del 5% en ataque y defensa","5% mayor capacidad de tamano de ataque","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"] },
-      { "title": "Cadete de Vuelo", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete de Vuelo\"","Recibiras $550 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Teniente de Vuelo, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos","1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","Aumento del 15% en velocidad de entrenamiento","Aumento del 15% en salud","10% mas de premio en dinero","Aumento del 5% en ataque y defensa","5% mayor capacidad de tamano de ataque","1 paquete mega recursos","1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"] },
-      { "title": "Teniente de Vuelo", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Teniente de Vuelo\"","Recibiras $6800 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Teniente de Vuelo, recibiras una bonificacion del 20% de aumento en la recoleccion de recursos","1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","Aumento del 20% en velocidad de entrenamiento","Aumento del 15% en salud","15% mas de premio en dinero","Aumento del 8% en ataque y defensa","7% mayor capacidad de tamano de ataque","Piezas de carreras de bonificacion","1 paquete mega recursos","1 pase de puerto fuera del mundo","1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses","#Elige simplemente donar $500 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Teniente de Vuelo Honorario Alistado\""] },
-      { "title": "Clase Especial Teniente de Vuelo", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Teniente de Vuelo\"","Recibiras $1,050 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Clase Especial Teniente de Vuelo, recibiras una bonificacion del 20% de aumento en la recoleccion de recursos","1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","1,0% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 20% en velocidad de entrenamiento","Aumento del 20% en salud","15% mas de premio en dinero","Aumento del 10% en ataque y defensa","7% mayor capacidad de tamano de ataque","Piezas de carreras de bonificacion","1 paquete mega recursos","1 avatar host adicional","1 pase de puerto fuera del mundo","1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"] },
-      { "title": "Escudero", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Escudero\"","Recibiras $1,480 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Escudero, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos","2,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","1,0% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 25% en velocidad de entrenamiento","Aumento del 20% en salud","20% mas de premio en dinero","Aumento del 10% en ataque y defensa","8% mayor capacidad de tamano de ataque","Piezas de carreras de bonificacion","1 paquete mega recursos","1 paquete mega cristales","1 avatar host adicional","1 pase de puerto fuera del mundo","2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Recibe un 10% adicional continuo de descuento en cualquier compra dentro del juego","#Elige simplemente donar $1,000 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Escudero Honorario Alistado\""] },
-      { "title": "Clase Senior Escudero", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Senior Escudero\"","Recibiras $2,200 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Clase Senior Escudero, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos","3,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","1,5% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 30% en velocidad de entrenamiento","Aumento del 25% en salud","20% mas de premio en dinero","Aumento del 15% en ataque y defensa","10% mayor capacidad de tamano de ataque","1 ranura de teletransporte adicional para atacar/defender","Piezas de carreras de bonificacion","1 paquete mega recursos","1 paquete mega cristales","1 avatar host adicional","1 pase de puerto fuera del mundo","2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","Descuento del 20% en compras dentro del juego durante los primeros 12 meses","Recibe un 10% adicional continuo de descuento en cualquier compra dentro del juego"] },
-      { "title": "Oficial Tecnico", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Oficial Tecnico\"","Recibiras $2,900 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Oficial Tecnico, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos","3,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","2,0% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 30% en velocidad de entrenamiento","Aumento del 25% en salud","25% mas de dinero en premios","Aumento del 15% en ataque y defensa","10% mayor capacidad de tamano de ataque","1 ranura de teletransporte adicional para atacar/defender","Piezas de carreras de bonificacion","2 paquetes mega recursos","1 paquete mega cristales","2 avatares host adicionales","2 pases de puerto fuera del mundo","3 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","Descuento del 25% en compras dentro del juego durante los primeros 12 meses","Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego","Avatar personalizado modelado despues del donante, apareciendo en todo el juego","Reparto de ingresos! Participa hasta en el 2,5% del pool de ganancias generado por la venta de paquetes en el juego y NFA","Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion","Diseno exclusivo de piloto Quest para usar dentro del juego","Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"] },
-      { "title": "Especialista del Equipo", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo\"","Recibiras $3,300 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Especialista del Equipo, recibiras una bonificacion del 30% de aumento en la recoleccion de recursos","5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","2,5% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 30% en velocidad de entrenamiento","Aumento del 30% en salud","25% mas de dinero en premios","Aumento del 15% en ataque y defensa","10% mayor capacidad de tamano de ataque","1 ranura de teletransporte adicional para atacar/defender","Piezas de carreras de bonificacion","3 paquetes mega recursos","1 paquete mega cristales","2 avatares host adicionales","2 pases de puerto fuera del mundo","2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno","Descuento del 25% en compras dentro del juego durante los primeros 24 meses","Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego","Avatar personalizado modelado despues del donante, apareciendo en todo el juego","Reparto de ingresos! Participa hasta en el 2,5% del pool de ganancias generado por la venta de paquetes en el juego y NFA","Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion","Diseno exclusivo de piloto Quest para usar dentro del juego","Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento","#Elige simplemente donar $2,500 para apoyar nuestra mision y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo Honorario Alistado\""] },
-      { "title": "Especialista del Equipo Mayor", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo Mayor\"","Recibiras $6,500 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Especialista del Equipo Mayor, recibiras una bonificacion del 35% de aumento en la recoleccion/mineria de recursos","7% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","3,5% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 35% en velocidad de entrenamiento","Aumento del 30% en salud","30% mas de dinero en premios","Aumento del 20% en ataque y defensa","10% mayor capacidad de tamano de ataque","1 ranura de teletransporte adicional para atacar/defender","Piezas de carreras de bonificacion","4 paquetes mega recursos","1 paquete mega cristales","2 avatares host adicionales","2 pases de puerto fuera del mundo","3 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno","Descuento del 25% en compras dentro del juego durante los primeros 24 meses","Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego","Avatar personalizado modelado despues del donante, apareciendo en todo el juego","Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA","Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion","Diseno exclusivo de piloto Quest para usar dentro del juego","Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"] },
-      { "title": "Comandante Elite", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Comandante Elite\"","Recibiras $9,000 USD en creditos para usar en compras dentro del juego","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Comandante Elite, recibiras una bonificacion del 35% de aumento en la recoleccion/mineria de recursos","7,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","4% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 40% en velocidad de entrenamiento","Aumento del 35% en salud","30% mas de premio en dinero","Aumento del 20% en ataque y defensa","20% mayor capacidad de tamano de ataque","2 ranuras de teletransporte adicionales para atacar/defender","Piezas de carreras de bonificacion","4 paquetes mega recursos","2 paquetes mega cristales","2 avatares host adicionales","3 pases de puerto fuera del mundo","4 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno","Descuento del 30% en compras dentro del juego durante los primeros 12 meses","Descuento del 25% en compras dentro del juego durante los segundos 12 meses","Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego","Avatar personalizado modelado despues del donante, apareciendo en todo el juego","Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA","Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion","Diseno exclusivo de piloto Quest para usar dentro del juego","Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"] },
-      { "title": "Over Lord", "rewards": ["Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Over Lord\"","Recibiras $15,000 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)","Recibiras actualizaciones semanales sobre el juego por correo electronico","Podras unirte al chat de Discord.","Como Overlord, recibiras una bonificacion del 40% de aumento en la recoleccion/mineria de recursos","10% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses","5% mayor probabilidad de obtener NFA o articulos raros de forma continua","Aumento del 50% en velocidad de entrenamiento","Aumento del 40% en salud","40% mas de dinero en premios","Aumento del 25% en ataque y defensa","25% mayor capacidad de tamano de ataque","2 ranuras de teletransporte adicionales para atacar/defender","Piezas de carreras de bonificacion","6 paquetes mega recursos","3 paquetes mega cristales","2 avatares host adicionales","4 pases de puerto fuera del mundo","4 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno","2 NFA especialistas de equipo legendarios que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $650 cada uno","1 NFA especialistas de equipo epicos que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $1000 cada uno","Descuento del 40% en compras dentro del juego durante los primeros 12 meses","Descuento del 30% en compras dentro del juego durante los segundos 12 meses","Recibe un 20% adicional de descuento en cualquier compra dentro del juego mientras estes involucrado en el juego","Avatar personalizado modelado despues del donante, apareciendo en todo el juego","Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA","Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion","Diseno exclusivo de piloto Quest para usar dentro del juego","Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"] }
+      {
+        "title": "Recluta",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Recluta\"",
+          "Recibiras $35 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Recluta, recibiras un Descuento del 10% en compras dentro del juego durante los primeros 12 meses"
+        ]
+      },
+      {
+        "title": "Clase Cadete Principiante",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Cadete Principiante\"",
+          "Recibiras $90 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Clase Cadete Principiante, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos",
+          "Aumento del 5% en velocidad de entrenamiento",
+          "Descuento del 10% en compras dentro del juego durante los primeros 12 meses",
+          "#Elige simplemente donar $50 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Principiante Honorario Alistado\""
+        ]
+      },
+      {
+        "title": "Cadete de Primera Clase",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete de Primera Clase\"",
+          "Recibiras $125 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Cadete de Primera Clase, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos",
+          "Aumento del 5% en velocidad de entrenamiento",
+          "5% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "Descuento del 10% en compras dentro del juego durante los primeros 24 meses"
+        ]
+      },
+      {
+        "title": "Cadete Lider",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete Lider\"",
+          "Recibiras $170 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Cadete Lider, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos",
+          "Aumento del 5% en velocidad de entrenamiento",
+          "5% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "Descuento del 10% en compras dentro del juego durante los primeros 24 meses"
+        ]
+      },
+      {
+        "title": "Clase Especial Cadete Lider",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Lider\"",
+          "Recibiras $240 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Clase Especial Cadete Lider, recibiras una bonificacion del 10% de aumento en la recoleccion de recursos",
+          "Aumento del 5% en velocidad de entrenamiento",
+          "5% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "Descuento del 15% en compras dentro del juego durante los primeros 24 meses"
+        ]
+      },
+      {
+        "title": "Cadete Senior",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Lider\"",
+          "Recibiras $390 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Cadete Senior, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos",
+          "Aumento del 5% en velocidad de entrenamiento",
+          "Aumento del 10% en salud",
+          "5% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses",
+          "#Elige simplemente donar $250 para apoyar nuestra mision, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Senior Especial Honorario Alistado\""
+        ]
+      },
+      {
+        "title": "Clase Especial Cadete Senior",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Cadete Senior\"",
+          "Recibiras $440 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Clase Especial Cadete Senior, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos",
+          "1,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "Aumento del 10% en velocidad de entrenamiento",
+          "Aumento del 10% en salud",
+          "10% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "5% mayor capacidad de tamano de ataque",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"
+        ]
+      },
+      {
+        "title": "Cadete de Vuelo",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Cadete de Vuelo\"",
+          "Recibiras $550 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Teniente de Vuelo, recibiras una bonificacion del 15% de aumento en la recoleccion de recursos",
+          "1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "Aumento del 15% en velocidad de entrenamiento",
+          "Aumento del 15% en salud",
+          "10% mas de premio en dinero",
+          "Aumento del 5% en ataque y defensa",
+          "5% mayor capacidad de tamano de ataque",
+          "1 paquete mega recursos",
+          "1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"
+        ]
+      },
+      {
+        "title": "Teniente de Vuelo",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Teniente de Vuelo\"",
+          "Recibiras $6800 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Teniente de Vuelo, recibiras una bonificacion del 20% de aumento en la recoleccion de recursos",
+          "1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "Aumento del 20% en velocidad de entrenamiento",
+          "Aumento del 15% en salud",
+          "15% mas de premio en dinero",
+          "Aumento del 8% en ataque y defensa",
+          "7% mayor capacidad de tamano de ataque",
+          "Piezas de carreras de bonificacion",
+          "1 paquete mega recursos",
+          "1 pase de puerto fuera del mundo",
+          "1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses",
+          "#Elige simplemente donar $500 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Teniente de Vuelo Honorario Alistado\""
+        ]
+      },
+      {
+        "title": "Clase Especial Teniente de Vuelo",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Especial Teniente de Vuelo\"",
+          "Recibiras $1,050 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Clase Especial Teniente de Vuelo, recibiras una bonificacion del 20% de aumento en la recoleccion de recursos",
+          "1,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "1,0% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 20% en velocidad de entrenamiento",
+          "Aumento del 20% en salud",
+          "15% mas de premio en dinero",
+          "Aumento del 10% en ataque y defensa",
+          "7% mayor capacidad de tamano de ataque",
+          "Piezas de carreras de bonificacion",
+          "1 paquete mega recursos",
+          "1 avatar host adicional",
+          "1 pase de puerto fuera del mundo",
+          "1 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 10% en compras dentro del juego durante un segundo periodo de 12 meses"
+        ]
+      },
+      {
+        "title": "Escudero",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Escudero\"",
+          "Recibiras $1,480 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Escudero, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos",
+          "2,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "1,0% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 25% en velocidad de entrenamiento",
+          "Aumento del 20% en salud",
+          "20% mas de premio en dinero",
+          "Aumento del 10% en ataque y defensa",
+          "8% mayor capacidad de tamano de ataque",
+          "Piezas de carreras de bonificacion",
+          "1 paquete mega recursos",
+          "1 paquete mega cristales",
+          "1 avatar host adicional",
+          "1 pase de puerto fuera del mundo",
+          "2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Recibe un 10% adicional continuo de descuento en cualquier compra dentro del juego",
+          "#Elige simplemente donar $1,000 para apoyar nuestra mision, y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Escudero Honorario Alistado\""
+        ]
+      },
+      {
+        "title": "Clase Senior Escudero",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Clase Senior Escudero\"",
+          "Recibiras $2,200 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Clase Senior Escudero, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos",
+          "3,0% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "1,5% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 30% en velocidad de entrenamiento",
+          "Aumento del 25% en salud",
+          "20% mas de premio en dinero",
+          "Aumento del 15% en ataque y defensa",
+          "10% mayor capacidad de tamano de ataque",
+          "1 ranura de teletransporte adicional para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "1 paquete mega recursos",
+          "1 paquete mega cristales",
+          "1 avatar host adicional",
+          "1 pase de puerto fuera del mundo",
+          "2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "Descuento del 20% en compras dentro del juego durante los primeros 12 meses",
+          "Recibe un 10% adicional continuo de descuento en cualquier compra dentro del juego"
+        ]
+      },
+      {
+        "title": "Oficial Tecnico",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Oficial Tecnico\"",
+          "Recibiras $2,900 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Oficial Tecnico, recibiras una bonificacion del 25% de aumento en la recoleccion de recursos",
+          "3,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "2,0% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 30% en velocidad de entrenamiento",
+          "Aumento del 25% en salud",
+          "25% mas de dinero en premios",
+          "Aumento del 15% en ataque y defensa",
+          "10% mayor capacidad de tamano de ataque",
+          "1 ranura de teletransporte adicional para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "2 paquetes mega recursos",
+          "1 paquete mega cristales",
+          "2 avatares host adicionales",
+          "2 pases de puerto fuera del mundo",
+          "3 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "Descuento del 25% en compras dentro del juego durante los primeros 12 meses",
+          "Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego",
+          "Avatar personalizado modelado despues del donante, apareciendo en todo el juego",
+          "Reparto de ingresos! Participa hasta en el 2,5% del pool de ganancias generado por la venta de paquetes en el juego y NFA",
+          "Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion",
+          "Diseno exclusivo de piloto Quest para usar dentro del juego",
+          "Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"
+        ]
+      },
+      {
+        "title": "Especialista del Equipo",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo\"",
+          "Recibiras $3,300 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Especialista del Equipo, recibiras una bonificacion del 30% de aumento en la recoleccion de recursos",
+          "5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "2,5% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 30% en velocidad de entrenamiento",
+          "Aumento del 30% en salud",
+          "25% mas de dinero en premios",
+          "Aumento del 15% en ataque y defensa",
+          "10% mayor capacidad de tamano de ataque",
+          "1 ranura de teletransporte adicional para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "3 paquetes mega recursos",
+          "1 paquete mega cristales",
+          "2 avatares host adicionales",
+          "2 pases de puerto fuera del mundo",
+          "2 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno",
+          "Descuento del 25% en compras dentro del juego durante los primeros 24 meses",
+          "Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego",
+          "Avatar personalizado modelado despues del donante, apareciendo en todo el juego",
+          "Reparto de ingresos! Participa hasta en el 2,5% del pool de ganancias generado por la venta de paquetes en el juego y NFA",
+          "Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion",
+          "Diseno exclusivo de piloto Quest para usar dentro del juego",
+          "Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento",
+          "#Elige simplemente donar $2,500 para apoyar nuestra mision y, si lo deseas, tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo Honorario Alistado\""
+        ]
+      },
+      {
+        "title": "Especialista del Equipo Mayor",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Especialista del Equipo Mayor\"",
+          "Recibiras $6,500 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Especialista del Equipo Mayor, recibiras una bonificacion del 35% de aumento en la recoleccion/mineria de recursos",
+          "7% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "3,5% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 35% en velocidad de entrenamiento",
+          "Aumento del 30% en salud",
+          "30% mas de dinero en premios",
+          "Aumento del 20% en ataque y defensa",
+          "10% mayor capacidad de tamano de ataque",
+          "1 ranura de teletransporte adicional para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "4 paquetes mega recursos",
+          "1 paquete mega cristales",
+          "2 avatares host adicionales",
+          "2 pases de puerto fuera del mundo",
+          "3 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno",
+          "Descuento del 25% en compras dentro del juego durante los primeros 24 meses",
+          "Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego",
+          "Avatar personalizado modelado despues del donante, apareciendo en todo el juego",
+          "Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA",
+          "Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion",
+          "Diseno exclusivo de piloto Quest para usar dentro del juego",
+          "Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"
+        ]
+      },
+      {
+        "title": "Comandante Elite",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Comandante Elite\"",
+          "Recibiras $9,000 USD en creditos para usar en compras dentro del juego",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Comandante Elite, recibiras una bonificacion del 35% de aumento en la recoleccion/mineria de recursos",
+          "7,5% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "4% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 40% en velocidad de entrenamiento",
+          "Aumento del 35% en salud",
+          "30% mas de premio en dinero",
+          "Aumento del 20% en ataque y defensa",
+          "20% mayor capacidad de tamano de ataque",
+          "2 ranuras de teletransporte adicionales para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "4 paquetes mega recursos",
+          "2 paquetes mega cristales",
+          "2 avatares host adicionales",
+          "3 pases de puerto fuera del mundo",
+          "4 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "1 NFA especialistas de equipo excepcionales que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $400 cada uno",
+          "Descuento del 30% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 25% en compras dentro del juego durante los segundos 12 meses",
+          "Recibe un 20% adicional continuo de descuento en cualquier compra dentro del juego",
+          "Avatar personalizado modelado despues del donante, apareciendo en todo el juego",
+          "Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA",
+          "Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion",
+          "Diseno exclusivo de piloto Quest para usar dentro del juego",
+          "Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"
+        ]
+      },
+      {
+        "title": "Over Lord",
+        "rewards": [
+          "Tu nombre aparecera en los creditos finales del juego bajo el titulo \"Over Lord\"",
+          "Recibiras $15,000 USD en creditos para usar en compras dentro del juego (no pueden convertirse en pagos de retiro)",
+          "Recibiras actualizaciones semanales sobre el juego por correo electronico",
+          "Podras unirte al chat de Discord.",
+          "Como Overlord, recibiras una bonificacion del 40% de aumento en la recoleccion/mineria de recursos",
+          "10% mayor probabilidad de obtener NFA o articulos raros durante los primeros 12 meses",
+          "5% mayor probabilidad de obtener NFA o articulos raros de forma continua",
+          "Aumento del 50% en velocidad de entrenamiento",
+          "Aumento del 40% en salud",
+          "40% mas de dinero en premios",
+          "Aumento del 25% en ataque y defensa",
+          "25% mayor capacidad de tamano de ataque",
+          "2 ranuras de teletransporte adicionales para atacar/defender",
+          "Piezas de carreras de bonificacion",
+          "6 paquetes mega recursos",
+          "3 paquetes mega cristales",
+          "2 avatares host adicionales",
+          "4 pases de puerto fuera del mundo",
+          "4 NFA especialistas de equipo superiores que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $150 cada uno",
+          "2 NFA especialistas de equipo legendarios que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $650 cada uno",
+          "1 NFA especialistas de equipo epicos que ofrecen bonificaciones de nave y carrera, con una recompra minima garantizada de $1000 cada uno",
+          "Descuento del 40% en compras dentro del juego durante los primeros 12 meses",
+          "Descuento del 30% en compras dentro del juego durante los segundos 12 meses",
+          "Recibe un 20% adicional de descuento en cualquier compra dentro del juego mientras estes involucrado en el juego",
+          "Avatar personalizado modelado despues del donante, apareciendo en todo el juego",
+          "Reparto de ingresos! Participa hasta en el 5% del pool de ganancias generado por la venta de paquetes en el juego y NFA",
+          "Acceso exclusivo a desarrolladores con actualizaciones privadas mensuales sobre el juego, el desarrollo, mas oportunidades para proporcionar retroalimentacion",
+          "Diseno exclusivo de piloto Quest para usar dentro del juego",
+          "Tarjeta coleccionable estilo beisbol de tu carrera quest exclusiva, enviada a ti con una carta de agradecimiento"
+        ]
+      }
     ]
   }
 }

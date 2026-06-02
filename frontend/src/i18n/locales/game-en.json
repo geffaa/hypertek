@@ -398,6 +398,11 @@
   "overlord": {
     "exit": "EXIT",
     "spaceRing": "OVERLORD · SPACE RING",
+    "video": {
+      "watchBtn": "WATCH VIDEO",
+      "title": "OVERLORD GAMEPLAY VIDEO",
+      "close": "CLOSE"
+    },
     "actions": {
       "fire": "FIRE",
       "zoom": "ZOOM",
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "WATCH VIDEO",
+      "title": "RACING GAMEPLAY VIDEO",
+      "close": "CLOSE"
+    },
     "airspeed": "AIRSPEED",
     "knots": "KNOTS",
     "steer": "STEER",
@@ -621,6 +631,55 @@
       "weapons": "Weapons",
       "rewards": "Rewards",
       "specialists": "Specialists"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Quest Items",
+        "banners": "Banners",
+        "medals": "Medals",
+        "skins": "Skins",
+        "antiGravity": "Anti-Gravity",
+        "plasmaRods": "Plasma Rods",
+        "darkMatter": "Dark Matter",
+        "techBooks": "Tech Books",
+        "engines": "Engines",
+        "vehicles": "Vehicles",
+        "tools": "Tools",
+        "aidPacks": "Aid Packs"
+      },
+      "weapons": {
+        "blades": "Blades",
+        "guns": "Guns",
+        "mines": "Mines",
+        "grenades": "Grenades",
+        "helmet": "Helmet",
+        "suits": "Suits",
+        "gloves": "Gloves",
+        "boots": "Boots",
+        "landBases": "Land Bases",
+        "landTitles": "Land Titles",
+        "shield": "Shield",
+        "ammoPacks": "Ammo Packs"
+      },
+      "rewards": {
+        "battleChest": "Battle Chest",
+        "loginReward": "Login Reward",
+        "eventTrophy": "Event Trophy",
+        "allianceGift": "Alliance Gift",
+        "questToken": "Quest Token",
+        "raceMedal": "Race Medal"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Offence",
+      "defence": "Defence",
+      "racing": "Racing",
+      "pilot": "Pilot",
+      "weapons": "Weapons",
+      "engineering": "Engineering",
+      "science": "Science",
+      "hospital": "Hospital",
+      "food": "Food"
     },
     "allianceTabs": {
       "members": "Members",

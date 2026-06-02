@@ -75,40 +75,40 @@ const ITEM_TABS = ["Inventory", "Weapons", "Rewards", "Specialists"];
 
 const ITEM_DATA = {
   Inventory: [
-    { name: "Quest Items",   qty: 0, color: "#c4b5fd", icon: GiScrollQuill,    locked: true },
-    { name: "Banners",       qty: 0, color: "#fcd34d", icon: GiFlagObjective,  locked: true },
-    { name: "Medals",        qty: 0, color: "#fb923c", icon: GiMedal,          locked: true },
-    { name: "Skins",         qty: 0, color: "#38bdf8", icon: GiBodySwapping,   locked: true },
-    { name: "Anti-Gravity",  qty: 0, color: "#a78bfa", icon: GiVortex,         locked: true },
-    { name: "Plasma Rods",   qty: 0, color: "#f87171", icon: GiPlasmaBolt,     locked: true },
-    { name: "Dark Matter",   qty: 0, color: "#818cf8", icon: GiGalaxy,         locked: true },
-    { name: "Tech Books",    qty: 0, color: "#67e8f9", icon: GiBookAura,       locked: true },
-    { name: "Engines",       qty: 0, color: "#fb923c", icon: GiRocketThruster, locked: true },
-    { name: "Vehicles",      qty: 0, color: "#6ee7b7", icon: GiRaceCar,        locked: true },
-    { name: "Tools",         qty: 0, color: "#94a3b8", icon: GiWrench,         locked: true },
-    { name: "Aid Packs",     qty: 0, color: "#f87171", icon: GiMedicalPack,    locked: true },
+    { name: "Quest Items",   nameKey: "hud.items.inventory.questItems",  qty: 0, color: "#c4b5fd", icon: GiScrollQuill,    locked: true },
+    { name: "Banners",       nameKey: "hud.items.inventory.banners",     qty: 0, color: "#fcd34d", icon: GiFlagObjective,  locked: true },
+    { name: "Medals",        nameKey: "hud.items.inventory.medals",      qty: 0, color: "#fb923c", icon: GiMedal,          locked: true },
+    { name: "Skins",         nameKey: "hud.items.inventory.skins",       qty: 0, color: "#38bdf8", icon: GiBodySwapping,   locked: true },
+    { name: "Anti-Gravity",  nameKey: "hud.items.inventory.antiGravity", qty: 0, color: "#a78bfa", icon: GiVortex,         locked: true },
+    { name: "Plasma Rods",   nameKey: "hud.items.inventory.plasmaRods",  qty: 0, color: "#f87171", icon: GiPlasmaBolt,     locked: true },
+    { name: "Dark Matter",   nameKey: "hud.items.inventory.darkMatter",  qty: 0, color: "#818cf8", icon: GiGalaxy,         locked: true },
+    { name: "Tech Books",    nameKey: "hud.items.inventory.techBooks",   qty: 0, color: "#67e8f9", icon: GiBookAura,       locked: true },
+    { name: "Engines",       nameKey: "hud.items.inventory.engines",     qty: 0, color: "#fb923c", icon: GiRocketThruster, locked: true },
+    { name: "Vehicles",      nameKey: "hud.items.inventory.vehicles",    qty: 0, color: "#6ee7b7", icon: GiRaceCar,        locked: true },
+    { name: "Tools",         nameKey: "hud.items.inventory.tools",       qty: 0, color: "#94a3b8", icon: GiWrench,         locked: true },
+    { name: "Aid Packs",     nameKey: "hud.items.inventory.aidPacks",    qty: 0, color: "#f87171", icon: GiMedicalPack,    locked: true },
   ],
   Weapons: [
-    { name: "Blades",      color: "#38bdf8", icon: GiCrossedSwords,  locked: true },
-    { name: "Guns",        color: "#f87171", icon: GiCrossedPistols, locked: true },
-    { name: "Mines",       color: "#6ee7b7", icon: GiLandMine,       locked: true },
-    { name: "Grenades",    color: "#fb923c", icon: GiGrenade,        locked: true },
-    { name: "Helmet",      color: "#c4b5fd", icon: GiHelmet,         locked: true },
-    { name: "Suits",       color: "#67e8f9", icon: GiSpaceSuit,      locked: true },
-    { name: "Gloves",      color: "#a78bfa", icon: GiGauntlet,       locked: true },
-    { name: "Boots",       color: "#fcd34d", icon: GiBoots,          locked: true },
-    { name: "Land Bases",  color: "#f87171", icon: GiMilitaryFort,   locked: true },
-    { name: "Land Titles", color: "#fcd34d", icon: GiTowerFlag,       locked: true },
-    { name: "Shield",      color: "#38bdf8", icon: GiShield,         locked: true },
-    { name: "Ammo Packs",  color: "#94a3b8", icon: GiAmmoBox,        locked: true },
+    { name: "Blades",      nameKey: "hud.items.weapons.blades",     color: "#38bdf8", icon: GiCrossedSwords,  locked: true },
+    { name: "Guns",        nameKey: "hud.items.weapons.guns",       color: "#f87171", icon: GiCrossedPistols, locked: true },
+    { name: "Mines",       nameKey: "hud.items.weapons.mines",      color: "#6ee7b7", icon: GiLandMine,       locked: true },
+    { name: "Grenades",    nameKey: "hud.items.weapons.grenades",   color: "#fb923c", icon: GiGrenade,        locked: true },
+    { name: "Helmet",      nameKey: "hud.items.weapons.helmet",     color: "#c4b5fd", icon: GiHelmet,         locked: true },
+    { name: "Suits",       nameKey: "hud.items.weapons.suits",      color: "#67e8f9", icon: GiSpaceSuit,      locked: true },
+    { name: "Gloves",      nameKey: "hud.items.weapons.gloves",     color: "#a78bfa", icon: GiGauntlet,       locked: true },
+    { name: "Boots",       nameKey: "hud.items.weapons.boots",      color: "#fcd34d", icon: GiBoots,          locked: true },
+    { name: "Land Bases",  nameKey: "hud.items.weapons.landBases",  color: "#f87171", icon: GiMilitaryFort,   locked: true },
+    { name: "Land Titles", nameKey: "hud.items.weapons.landTitles", color: "#fcd34d", icon: GiTowerFlag,       locked: true },
+    { name: "Shield",      nameKey: "hud.items.weapons.shield",     color: "#38bdf8", icon: GiShield,         locked: true },
+    { name: "Ammo Packs",  nameKey: "hud.items.weapons.ammoPacks",  color: "#94a3b8", icon: GiAmmoBox,        locked: true },
   ],
   Rewards: [
-    { name: "Battle Chest",   qty: 2,  color: "#fcd34d", icon: GiLockedChest,     locked: true },
-    { name: "Login Reward",   qty: 1,  color: "#6ee7b7", icon: GiGiftOfKnowledge, locked: true },
-    { name: "Event Trophy",   qty: 3,  color: "#f87171", icon: GiTrophyCup,        locked: true },
-    { name: "Alliance Gift",  qty: 5,  color: "#38bdf8", icon: GiToken,            locked: true },
-    { name: "Quest Token",    qty: 12, color: "#a78bfa", icon: GiCoinsPile,        locked: true },
-    { name: "Race Medal",     qty: 1,  color: "#fb923c", icon: GiMedal,            locked: true },
+    { name: "Battle Chest",   nameKey: "hud.items.rewards.battleChest",   qty: 2,  color: "#fcd34d", icon: GiLockedChest,     locked: true },
+    { name: "Login Reward",   nameKey: "hud.items.rewards.loginReward",   qty: 1,  color: "#6ee7b7", icon: GiGiftOfKnowledge, locked: true },
+    { name: "Event Trophy",   nameKey: "hud.items.rewards.eventTrophy",   qty: 3,  color: "#f87171", icon: GiTrophyCup,        locked: true },
+    { name: "Alliance Gift",  nameKey: "hud.items.rewards.allianceGift",  qty: 5,  color: "#38bdf8", icon: GiToken,            locked: true },
+    { name: "Quest Token",    nameKey: "hud.items.rewards.questToken",    qty: 12, color: "#a78bfa", icon: GiCoinsPile,        locked: true },
+    { name: "Race Medal",     nameKey: "hud.items.rewards.raceMedal",     qty: 1,  color: "#fb923c", icon: GiMedal,            locked: true },
   ],
 };
 
@@ -416,7 +416,7 @@ function ItemsPanel({ onClose, isMobile, panelRight }) {
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
                   color: item.locked ? "rgba(157,216,240,0.85)" : item.color,
                   textAlign:"center", letterSpacing:"0.05em", lineHeight:1.2,
-                }}>{item.name}</div>
+                }}>{t(item.nameKey, item.name)}</div>
                 {item.locked
                   ? <div style={{ fontSize: isMobile ? 9 : 12, position:"absolute", top:4, right:5 }}>🔒</div>
                   : <div style={{ position:"absolute", top:4, right:5,
@@ -444,7 +444,7 @@ function ItemsPanel({ onClose, isMobile, panelRight }) {
                 {(() => { const Icon = item.icon; return <Icon size={isMobile ? 22 : 30} color={item.color} style={{ filter: `grayscale(0.5) drop-shadow(0 0 4px ${item.color}66)` }} />; })()}
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
                   color:"rgba(157,216,240,0.85)", textAlign:"center", lineHeight:1.2,
-                }}>{item.name}</div>
+                }}>{t(item.nameKey, item.name)}</div>
                 <div style={{ fontSize: isMobile ? 9 : 12, position:"absolute", top:4, right:5 }}>🔒</div>
               </div>
             ))}
@@ -465,7 +465,7 @@ function ItemsPanel({ onClose, isMobile, panelRight }) {
                 {(() => { const Icon = item.icon; return <Icon size={isMobile ? 24 : 32} color={item.color} style={{ filter: `grayscale(0.5) drop-shadow(0 0 4px ${item.color}66)` }} />; })()}
                 <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
                   color:"rgba(157,216,240,0.85)", textAlign:"center", lineHeight:1.2,
-                }}>{item.name}</div>
+                }}>{t(item.nameKey, item.name)}</div>
                 <div style={{ fontSize: isMobile ? 9 : 12, position:"absolute", top:4, right:5 }}>🔒</div>
               </div>
             ))}
@@ -501,7 +501,7 @@ function ItemsPanel({ onClose, isMobile, panelRight }) {
                     <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 7 : 10, fontWeight:"bold",
                       color: locked ? "rgba(157,216,240,0.9)" : color,
                       letterSpacing:"0.06em", textAlign:"center",
-                    }}>{cat.toUpperCase()}</div>
+                    }}>{t(`hud.specialistCategories.${cat.toLowerCase()}`, cat).toUpperCase()}</div>
                     {locked && (
                       <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 6 : 8,
                         color:"rgba(157,216,240,0.75)", letterSpacing:"0.1em",
@@ -524,7 +524,7 @@ function ItemsPanel({ onClose, isMobile, panelRight }) {
             }}>{t("hud.back", "← BACK")}</button>
             <div style={{ fontFamily:"Orbitron,sans-serif", fontSize: isMobile ? 9 : 11, fontWeight:"bold",
               color: CATEGORY_COLOR[specCategory], letterSpacing:"0.12em", marginBottom:8,
-            }}>{specCategory.toUpperCase()}</div>
+            }}>{t(`hud.specialistCategories.${specCategory.toLowerCase()}`, specCategory).toUpperCase()}</div>
             <div style={{ display:"flex", flexDirection:"column", gap: isMobile ? 4 : 6 }}>
               {(SPECIALISTS_BY_CATEGORY[specCategory] || []).map((s, i) => (
                 <div key={i} className="hud-item-cell"

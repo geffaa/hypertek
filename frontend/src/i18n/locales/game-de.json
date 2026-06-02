@@ -396,6 +396,11 @@
     }
   },
   "overlord": {
+    "video": {
+      "watchBtn": "VIDEO ANSEHEN",
+      "title": "OVERLORD GAMEPLAY-VIDEO",
+      "close": "SCHLIESSEN"
+    },
     "exit": "BEENDEN",
     "spaceRing": "OVERLORD · WELTRAUMRING",
     "actions": {
@@ -518,6 +523,11 @@
     }
   },
   "racing": {
+    "video": {
+      "watchBtn": "VIDEO ANSEHEN",
+      "title": "RACING GAMEPLAY-VIDEO",
+      "close": "SCHLIESSEN"
+    },
     "airspeed": "LUFTGESCHWINDIGKEIT",
     "knots": "KNOTEN",
     "steer": "LENKEN",
@@ -621,6 +631,55 @@
       "weapons": "Waffen",
       "rewards": "Belohnungen",
       "specialists": "Spezialisten"
+    },
+    "items": {
+      "inventory": {
+        "questItems": "Quest-Gegenstände",
+        "banners": "Banner",
+        "medals": "Medaillen",
+        "skins": "Skins",
+        "antiGravity": "Antigravitation",
+        "plasmaRods": "Plasmastäbe",
+        "darkMatter": "Dunkle Materie",
+        "techBooks": "Technik-Bücher",
+        "engines": "Triebwerke",
+        "vehicles": "Fahrzeuge",
+        "tools": "Werkzeug",
+        "aidPacks": "Sanitätspakete"
+      },
+      "weapons": {
+        "blades": "Klingen",
+        "guns": "Schusswaffen",
+        "mines": "Minen",
+        "grenades": "Granaten",
+        "helmet": "Helm",
+        "suits": "Rüstungen",
+        "gloves": "Handschuhe",
+        "boots": "Stiefel",
+        "landBases": "Landbasen",
+        "landTitles": "Landtitel",
+        "shield": "Schild",
+        "ammoPacks": "Munitionspakete"
+      },
+      "rewards": {
+        "battleChest": "Kampftruhe",
+        "loginReward": "Login-Belohnung",
+        "eventTrophy": "Event-Trophäe",
+        "allianceGift": "Allianzgeschenk",
+        "questToken": "Quest-Token",
+        "raceMedal": "Rennmedaille"
+      }
+    },
+    "specialistCategories": {
+      "offence": "Angriff",
+      "defence": "Verteidigung",
+      "racing": "Rennen",
+      "pilot": "Pilot",
+      "weapons": "Waffen",
+      "engineering": "Technik",
+      "science": "Wissenschaft",
+      "hospital": "Lazarett",
+      "food": "Versorgung"
     },
     "allianceTabs": {
       "members": "Mitglieder",
